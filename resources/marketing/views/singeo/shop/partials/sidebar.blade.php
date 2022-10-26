@@ -1,4 +1,4 @@
-<div class="side-bar sliding-function px-3 md:px-4 lg:px-4 lg:w-1/3 lg:mt-5">
+<div class="side-bar sliding-function px-3 md:px-4 lg:px-4 lg:w-1/3 lg:mt-5 lg:h-0">
     <div id="order" class="anchor"></div>
     <div class="side-slide md:border md:border-solid md:rounded-md" style="border-color: #CCD3D3;">
         {{--<div class="text-center py-2 py-3 hidden lg:inline" style="position:relative;background:#1e1e1e;">--}}
@@ -31,7 +31,7 @@
             @endif
 
             @if(!$soldOut)
-                @if(empty($bundle) && count($sizes) === 0)
+                @if($category !== 'bundles' && count($sizes) === 0)
                     <a
                         class="online-atc vue-add-to-cart"
                         href="/ecommerce/add-to-cart?redirect=/shop&products[{{ $sku }}]=1"
@@ -72,7 +72,7 @@
                     </a>
                 @endif
 
-                @if($product->productType->name === 'Bundles')
+                @if($category === 'bundles')
                     <a class="online-atc" href="/ecommerce/add-to-cart?redirect=/order&{{ $sku }}"
                             data-base-url="/ecommerce/add-to-cart?redirect=/order&{{ $sku }}">
                         <button class="border-none join"><i class="fas fa-cart-plus"></i> Order Now</button>

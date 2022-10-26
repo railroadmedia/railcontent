@@ -31,7 +31,7 @@
             @endif
 
             @if(!$soldOut)
-                @if(empty($bundle) && count($sizes) === 0)
+                @if($category !== 'bundles' && count($sizes) === 0)
                     <a
                         class="online-atc vue-add-to-cart"
                         href="/ecommerce/add-to-cart?redirect=/shop&products[{{ $sku }}]=1"
@@ -73,7 +73,7 @@
                     </a>
                 @endif
 
-                @if($product->productType->name === 'Bundles')
+                @if($category === 'bundles')
                     <a class="online-atc" href="/ecommerce/add-to-cart?redirect=/order&{{ $product->sku }}"
                             data-base-url="/ecommerce/add-to-cart?redirect=/order&{{ $product->sku }}">
                         <button class="border-none join w-full sm:w-1/2 lg:w-full"><i class="fas fa-cart-plus"></i> Order Now</button>

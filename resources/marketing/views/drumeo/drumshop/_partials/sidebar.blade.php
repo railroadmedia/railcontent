@@ -31,7 +31,7 @@
                 <p class="text-center mx-auto mb-1 text-sm italic md:text-base" style="color:#F71B26;">{!! $specialText  !!}</p>
             @endif
 
-            @if(empty($soldOut))
+            @if(!$soldOut)
                 @if($category !== 'bundles' && count($sizes) === 0)
                     <a
                         class="online-atc vue-add-to-cart"

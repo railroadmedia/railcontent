@@ -16,7 +16,7 @@
 ?>
 
 <div class="side-bar sliding-function lg:px-4 lg:w-1/3 px-3 md:px-4 lg:mt-10">
-    <div class="md:h-0">
+    <div class="lg:h-0">
         <div id="order" class="anchor"></div>
         <div class="side-slide overflow-hidden md:rounded md:border md:border-solid" style="border-color: #CCD3D3;">
             {{--<div class="promo-tab hidden lg:block text-center py-2 px-3" style="position:relative;background:#000 center center/450px;">--}}
@@ -48,7 +48,7 @@
                 @endif
 
                 @if(!$soldOut)
-                    @if(empty($bundle) && count($sizes) === 0)
+                    @if($product->productType->name !== 'Bundles' && count($sizes) === 0)
                         <a
                             class="online-atc vue-add-to-cart"
                             href="/laravel/public/shopping-cart/api/query?go-back-to-shop=true&products[{{ $sku }}]=1"
@@ -109,12 +109,14 @@
                     <a class="text-{{ $theme }} text-xs" href="tel:1-800-439-8921">1-800-439-8921</a> or directly at
                     <a class="text-{{ $theme }} text-xs" href="tel:1-604-855-7605">1-604-855-7605</a>. </p>
             </div>
+
+            @if($guaranteeBadge)
+                <div class="flex justify-center items-center px-5 pb-5 text-center md:pt-2 md:pt-4 md:pb-6 lg:p-5 lg:-mt-1 lg:mx-auto lg:mb-0 border-t-0 lg:border-t" style="border-color: #CCD3D3; border-top-style: solid;">
+                    <img class="w-24 my-0 pr-6" src="https://cdn.musora.com/image/fetch/w_170,q_auto:best/{{ $badge }}">
+                    <p class="text-xs font-bold text-left my-0 text-{{ $theme }}">Your entire order is backed by<br class="lg:hidden" /> our 90-Day Money Back <br class="lg:hidden" /> Guarantee.</p>
+                </div>
+            @endif
         </div>
-        @if($guaranteeBadge)
-            <div class="flex justify-center items-center px-5 pb-5 text-center md:pt-2 md:pt-4 md:pb-6 lg:p-5 lg:-mt-1 lg:mx-auto lg:mb-0 border-t-0 lg:border-t" style="border-color: #CCD3D3; border-top-style: solid;">
-                <img class="w-24 my-0 pr-6" src="https://cdn.musora.com/image/fetch/w_170,q_auto:best/{{ $badge }}">
-                <p class="text-xs font-bold text-left my-0 text-{{ $theme }}">Your entire order is backed by<br class="lg:hidden" /> our 90-Day Money Back <br class="lg:hidden" /> Guarantee.</p>
-            </div>
-        @endif
+
     </div>
 </div>
