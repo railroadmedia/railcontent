@@ -20,25 +20,25 @@ Route::get('{brand}/{category}', [ProductPagesController::class, 'products'])
 
 /*---- CUSTOM PRODUCT PAGE ----*/
 //Drumeo
-Route::get('drumeo/shop/new-drummers', function(){ return view('drumeo.products.full-page-assets.new-drummers'); });
-Route::get('drumeo/shop/rock-drumming-masterclass', function(){ return view('drumeo.products.full-page-assets.rock-drumming-masterclass'); });
-Route::get('drumeo/shop/drum-technique-made-easy', function(){ return view('drumeo.products.full-page-assets.drum-technique-made-easy'); });
-Route::get('drumeo/shop/beyond-beginner-drumming', function(){ return view('drumeo.products.full-page-assets.beyond-beginner-drumming'); });
-Route::get('drumeo/shop/independence-made-easy', function(){ return view('drumeo.products.full-page-assets.independence-made-easy'); });
-Route::get('drumeo/shop/learn-songs-faster', function(){ return view('drumeo.products.full-page-assets.learn-songs-faster'); });
-Route::get('drumeo/shop/better-drum-fills', function(){ return view('drumeo.products.full-page-assets.better-drum-fills'); });
-Route::get('drumeo/shop/electrify-your-drumming', function(){ return view('drumeo.products.full-page-assets.electrify-your-drumming'); });
-Route::get('drumeo/shop/successful-drumming-discount', function(){ return view('drumeo.products.full-page-assets.successful-drumming-discount'); });
-Route::get('drumeo/shop/drumming-system-discount', function(){ return view('drumeo.products.full-page-assets.drumming-system-discount'); });
-Route::get('drumeo/shop/quietkick', function(){ return view('drumeo.products.full-page-assets.quietkick'); });
-Route::get('drumeo/shop/eardrums', function(){ return view('drumeo.products.full-page-assets.eardrums'); });
-Route::get('drumeo/shop/tone-control-kit', function(){ return view('drumeo.products.full-page-assets.tone-control-kit'); });
-Route::get('drumeo/shop/drumsticks', function(){ return view('drumeo.products.full-page-assets.drumsticks'); });
-Route::get('drumeo/shop/practice-pad-full', function(){ return view('drumeo.products.full-page-assets.practice-pad-full'); });
-Route::get('drumeo/shop/quietpad', function(){ return view('drumeo.products.full-page-assets.quietpad'); });
-Route::get('drumeo/shop/the-drummers-toolbox', function(){ return view('drumeo.products.full-page-assets.the-drummers-toolbox'); });
-Route::get('drumeo/shop/beginner-book', function(){ return view('drumeo.products.full-page-assets.beginner-book'); });
-Route::get('drumeo/shop/30-day-drummer', function(){ return view('drumeo.products.full-page-assets.30-day-drummer'); });
+Route::get('drumeo/shop/new-drummers', function(){ return view('drumeo.products.new-drummers'); });
+Route::get('drumeo/shop/rock-drumming-masterclass', function(){ return view('drumeo.products.rock-drumming-masterclass'); });
+Route::get('drumeo/shop/drum-technique-made-easy', function(){ return view('drumeo.products.drum-technique-made-easy'); });
+Route::get('drumeo/shop/beyond-beginner-drumming', function(){ return view('drumeo.products.beyond-beginner-drumming'); });
+Route::get('drumeo/shop/independence-made-easy', function(){ return view('drumeo.products.independence-made-easy'); });
+Route::get('drumeo/shop/learn-songs-faster', function(){ return view('drumeo.products.learn-songs-faster'); });
+Route::get('drumeo/shop/better-drum-fills', function(){ return view('drumeo.products.better-drum-fills'); });
+Route::get('drumeo/shop/electrify-your-drumming', function(){ return view('drumeo.products.electrify-your-drumming'); });
+Route::get('drumeo/shop/successful-drumming-discount', function(){ return view('drumeo.products.successful-drumming-discount'); });
+Route::get('drumeo/shop/drumming-system-discount', function(){ return view('drumeo.products.drumming-system-discount'); });
+Route::get('drumeo/shop/quietkick', function(){ return view('drumeo.products.quietkick'); });
+Route::get('drumeo/shop/eardrums', function(){ return view('drumeo.products.eardrums'); });
+Route::get('drumeo/shop/tone-control-kit', function(){ return view('drumeo.products.tone-control-kit'); });
+Route::get('drumeo/shop/drumsticks', function(){ return view('drumeo.products.drumsticks'); });
+Route::get('drumeo/shop/practice-pad-full', function(){ return view('drumeo.products.practice-pad-full'); });
+Route::get('drumeo/shop/quietpad', function(){ return view('drumeo.products.quietpad'); });
+Route::get('drumeo/shop/the-drummers-toolbox', function(){ return view('drumeo.products.the-drummers-toolbox'); });
+Route::get('drumeo/shop/beginner-book', function(){ return view('drumeo.products.beginner-book'); });
+Route::get('drumeo/shop/30-day-drummer', function(){ return view('drumeo.products.30-day-drummer'); });
 
 //Pianote
 Route::get('pianote/shop/play-beautiful-piano', function(){ return view('pianote.products.play-beautiful-piano'); });

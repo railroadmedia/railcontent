@@ -1,4 +1,4 @@
-@extends('drumeo.products.full-page-assets.comfort-cover-layout')
+@extends('drumeo.products.comfort-cover-layout')
 
 @section('pricing')
     @if(Prices::$comfortCoverFull > Prices::$comfortCoverRegular)

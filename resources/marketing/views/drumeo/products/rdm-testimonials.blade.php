@@ -1,4 +1,4 @@
-@extends('drumeo.products.full-page-assets.rock-drumming-masterclass-testimonials')
+@extends('drumeo.products.rock-drumming-masterclass-testimonials')
 
 @section('details-link')
     /drumshop/rock-drumming-masterclass

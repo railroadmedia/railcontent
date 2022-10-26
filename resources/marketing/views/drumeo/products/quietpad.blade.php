@@ -1,4 +1,4 @@
-@extends('drumeo.products.full-page-assets.quietpad-layout')
+@extends('drumeo.products.quietpad-layout')
 
 @section('button')
     <a href="/laravel/public/shopping-cart/api/query?products[quietpad]=1" class="join blue">Get Yours &raquo;</a>

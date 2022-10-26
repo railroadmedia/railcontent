@@ -1,4 +1,4 @@
-@extends('drumeo.products.full-page-assets.drum-technique-made-easy-testimonials')
+@extends('drumeo.products.drum-technique-made-easy-testimonials')
 
 @section('details-link')
     /drumshop/drum-technique-made-easy

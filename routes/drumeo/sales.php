@@ -30,6 +30,7 @@ Route::domain('{drumeoDomain}')->group(function () {
     Route::get('/kids', function () { return view('drumeo.sales.pages.kids'); });
     Route::get('/song-demo/', function () { return view('drumeo.sales.pages.song-demo'); });
     Route::get('/tom-sawyer/', function () { return view('drumeo.sales.pages.tom-sawyer'); });
+    Route::get('/drumfest', function () { return view('drumeo.sales.pages.drumfest'); });
 
     Route::get('/trial', function () { return view('drumeo.sales.trials.trial'); });
     Route::get('/earthworks', function () { return view('drumeo.sales.trials.earthworks'); });
@@ -104,8 +105,7 @@ Route::domain('{drumeoDomain}')->group(function () {
     );
 
     Route::get('/30-day-drummer-register-endpoint', [SalesController::class, 'registerFor30DayDrummer'] );
-    Route::get('/pro/', function () { return view('drumeo.products.full-page-assets.pro'); });
-    Route::get('/drumfest', function () { return view('drumeo.products.full-page-assets.quebec-drum-festival'); });
+    Route::get('/pro/', function () { return view('drumeo.products.pro'); });
     Route::get('/jared-recommends', function () { return view('drumeo.drumshop.jared-recommends'); });
 
     Route::group(['prefix' => 'drumshop'],
@@ -115,24 +115,24 @@ Route::domain('{drumeoDomain}')->group(function () {
             Route::get('/quietkick', [SalesController::class, 'quietKick'] );
             Route::get('/tone-control-kit', [SalesController::class, 'toneControl'] );
 
-            Route::get('/beginner-book', function () { return view('drumeo.products.full-page-assets.beginner-book'); });
-            Route::get('/better-drum-fills', function () { return view('drumeo.products.full-page-assets.better-drum-fills'); });
-            Route::get('/beyond-beginner-drumming/', function () { return view('drumeo.products.full-page-assets.beyond-beginner-drumming'); });
-            Route::get('/comfort-cover', function () { return view('drumeo.products.full-page-assets.comfort-cover'); });
-            Route::get('/drum-technique-made-easy', function () { return view('drumeo.products.full-page-assets.drum-technique-made-easy'); });
-            Route::get('/drumming-system-discount', function () { return view('drumeo.products.full-page-assets.drumming-system-discount'); });
-            Route::get('/drumsticks', function () { return view('drumeo.products.full-page-assets.drumsticks'); });
-            Route::get('/electrify-your-drumming', function () { return view('drumeo.products.full-page-assets.electrify-your-drumming'); });
-            Route::get('/festival-videos', function () { return view('drumeo.products.full-page-assets.festival-videos'); });
-            Route::get('/independence-made-easy', function () { return view('drumeo.products.full-page-assets.independence-made-easy'); });
-            Route::get('/learn-songs-faster', function () { return view('drumeo.products.full-page-assets.learn-songs-faster'); });
-            Route::get('/new-drummers/', function () { return view('drumeo.products.full-page-assets.new-drummers'); });
-            Route::get('/practice-pad-full', function () { return view('drumeo.products.full-page-assets.practice-pad-full'); });
-            Route::get('/quietpad', function () { return view('drumeo.products.full-page-assets.quietpad'); });
-            Route::get('/rock-drumming-masterclass', function () { return view('drumeo.products.full-page-assets.rock-drumming-masterclass'); });
-            Route::get('/successful-drumming-discount', function () { return view('drumeo.products.full-page-assets.successful-drumming-discount'); });
-            Route::get('/the-drummers-toolbox', function () { return view('drumeo.products.full-page-assets.the-drummers-toolbox'); });
-            Route::get('/tony-royster-jr', function () { return view('drumeo.products.full-page-assets.tony-royster-jr'); });
+            Route::get('/beginner-book', function () { return view('drumeo.products.beginner-book'); });
+            Route::get('/better-drum-fills', function () { return view('drumeo.products.better-drum-fills'); });
+            Route::get('/beyond-beginner-drumming/', function () { return view('drumeo.products.beyond-beginner-drumming'); });
+            Route::get('/comfort-cover', function () { return view('drumeo.products.comfort-cover'); });
+            Route::get('/drum-technique-made-easy', function () { return view('drumeo.products.drum-technique-made-easy'); });
+            Route::get('/drumming-system-discount', function () { return view('drumeo.products.drumming-system-discount'); });
+            Route::get('/drumsticks', function () { return view('drumeo.products.drumsticks'); });
+            Route::get('/electrify-your-drumming', function () { return view('drumeo.products.electrify-your-drumming'); });
+            Route::get('/festival-videos', function () { return view('drumeo.products.festival-videos'); });
+            Route::get('/independence-made-easy', function () { return view('drumeo.products.independence-made-easy'); });
+            Route::get('/learn-songs-faster', function () { return view('drumeo.products.learn-songs-faster'); });
+            Route::get('/new-drummers/', function () { return view('drumeo.products.new-drummers'); });
+            Route::get('/practice-pad-full', function () { return view('drumeo.products.practice-pad-full'); });
+            Route::get('/quietpad', function () { return view('drumeo.products.quietpad'); });
+            Route::get('/rock-drumming-masterclass', function () { return view('drumeo.products.rock-drumming-masterclass'); });
+            Route::get('/successful-drumming-discount', function () { return view('drumeo.products.successful-drumming-discount'); });
+            Route::get('/the-drummers-toolbox', function () { return view('drumeo.products.the-drummers-toolbox'); });
+            Route::get('/tony-royster-jr', function () { return view('drumeo.products.tony-royster-jr'); });
         }
     );
 });

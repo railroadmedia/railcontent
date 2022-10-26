@@ -63,7 +63,7 @@ Route::domain('{drumeoDomain}')->group(function () {
             Route::get('/1-five-technique-myths/', function () { return view('drumeo.lead-gen.dtme.lessons.1'); });
             Route::get('/2-massive-technique-fails/', function () { return view('drumeo.lead-gen.dtme.lessons.2'); });
             Route::get('/3-the-most-important-technique/', function () { return view('drumeo.lead-gen.dtme.lessons.3'); });
-            Route::get('/testimonials/', function () { return view('drumeo.products.full-page-assets.dtme-testimonials'); });
+            Route::get('/testimonials/', function () { return view('drumeo.products.dtme-testimonials'); });
         }
     );
     Route::group(['prefix' => 'faster'],
@@ -247,7 +247,7 @@ Route::domain('{drumeoDomain}')->group(function () {
             Route::get('/most-underrated-drummer', function () { return view('drumeo.lead-gen.rock-drumming-masterclass.lessons.1'); });
             Route::get('/most-important-rock-drum-tips', function () { return view('drumeo.lead-gen.rock-drumming-masterclass.lessons.2'); });
             Route::get('/epic-drum-video', function () { return view('drumeo.lead-gen.rock-drumming-masterclass.lessons.3'); });
-            Route::get('/testimonials/', function () { return view('drumeo.products.full-page-assets.rdm-testimonials'); });
+            Route::get('/testimonials/', function () { return view('drumeo.products.rdm-testimonials'); });
         }
     );
     Route::group(['prefix' => 'subdivision-challenge'],
