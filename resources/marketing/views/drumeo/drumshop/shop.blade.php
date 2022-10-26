@@ -139,11 +139,16 @@
     </style>
 @stop
 
+@section('body-data')
+    x-data="{
+        filter: '{{ $category !== 'drumshop' ? $category : 'all' }}'
+    }"
+@endsection
+
 @section('global-body')
-    @include("drumeo.sales.partials._nav")
-{{--    @include("drumeo.sales.partials._nav", [--}}
-{{--        "cartVersion" => true--}}
-{{--    ])--}}
+    @include("drumeo.sales.partials._nav", [
+        "cartVersion" => true
+    ])
 
     <div class="shipping-delay">
         <div class="delay-bar text-center">
@@ -249,7 +254,7 @@
 
     {{--  LESSONS  --}}
     <div class="white-box">
-        <section class="grid-view category-section" data-category="lessons">
+        <section class="grid-view category-section" data-category="lessons" x-show="filter === 'lessons' || filter === 'all'">
             <ul class="container mx-auto fixed-cards">
                 <li>
                     <h1 class="px-2 md:px-3">
@@ -292,7 +297,7 @@
         </section>
 
         {{--   ACCESSORIES     --}}
-        <section class="grid-view category-section" data-category="accessories">
+        <section class="grid-view category-section" data-category="accessories" x-show="filter === 'accessories' || filter === 'all'">
             <ul class="container mx-auto fixed-cards">
                 <li>
                     <h1 class="px-2 md:px-3">
@@ -320,7 +325,7 @@
         </section>
 
         {{--   HATS     --}}
-        <section class="grid-view category-section" data-category="hats">
+        <section class="grid-view category-section" data-category="hats" x-show="filter === 'clothing' || filter === 'all'">
             <ul class="container mx-auto fixed-cards">
                 <li>
                     <h1 class="px-2 md:px-3">
@@ -350,7 +355,7 @@
         </section>
 
         {{--   SHIRTS     --}}
-        <section class="grid-view category-section" data-category="shirts">
+        <section class="grid-view category-section" data-category="shirts" x-show="filter === 'clothing' || filter === 'all'">
             <ul class="container mx-auto fixed-cards">
                 <li>
                     <h1 class="px-2 md:px-3">
@@ -394,7 +399,7 @@
         </section>
 
         {{--   HOODIES     --}}
-        <section class="grid-view category-section" data-category="hoodies">
+        <section class="grid-view category-section" data-category="hoodies" x-show="filter === 'clothing' || filter === 'all'">
             <ul class="container mx-auto fixed-cards">
                 <li>
                     <h1 class="px-2 md:px-3">
@@ -501,6 +506,7 @@
     <script src="{{ asset('/marketing/js/drumeo/cart-sidebar.js') }}"></script>
     <script src="{{ asset('/marketing/js/drumeo/app.js') }}"></script>
     <script src="{{ asset('/marketing/js/drumeo/drum-shop-filters.js') }}"></script>
+    <script src="{{ mix('marketing/js/app.js') }}"></script>
     <script>
         $(function () {
             $('.scalable-card').click(function (e) {
