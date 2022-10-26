@@ -51,8 +51,8 @@
     @endif
 
     <div id="app">
-        @if(!empty(current_user()))
-            <input id="currentUserId" type="hidden" value="{{ current_user()->getId() }}">
+        @if(!empty(user()))
+            <input id="currentUserId" type="hidden" value="{{ user()->id }}">
         @endif
         @if(session()->has('toast-success-message-data') && is_array(session()->get('toast-success-message-data')))
             @php
@@ -137,10 +137,10 @@
     @include("drumeo.sales.partials._footer")
 
 
-    <script src="{{ _mix('marketing/js/drumeo/manifest.js') }}"></script>
-    <script src="{{ _mix('marketing/js/drumeo/vendor.js') }}"></script>
-    <script src="{{ _mix('marketing/js/drumeo/cart-sidebar.js') }}"></script>
+    <script src="{{ mix('marketing/js/drumeo/manifest.js') }}"></script>
+    <script src="{{ mix('marketing/js/drumeo/vendor.js') }}"></script>
+    <script src="{{ mix('marketing/js/drumeo/cart-sidebar.js') }}"></script>
     <script src="{{ asset('/marketing/js/order-form.js') }}"></script>
-    <script src="{{ _mix('marketing/js/drumeo/app.js') }}"></script>
+    <script src="{{ mix('marketing/js/drumeo/app.js') }}"></script>
     @yield('scripts')
 @stop
