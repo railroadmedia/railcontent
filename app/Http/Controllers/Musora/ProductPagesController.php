@@ -17,23 +17,23 @@ class ProductPagesController extends BaseController
 
         if($brand === 'drumeo' || $brand === 'pianote'){
             $lessons = $products->filter(function($value, $key){
-                return $value->productType->name === 'Lesson';
+                return $value->productType->name === 'Lessons';
             });
 
             $accessories = $products->filter(function($value, $key){
-                return $value->productType->name === 'Accessory';
+                return $value->productType->name === 'Accessories';
             });
 
             $hats = $products->filter(function($value, $key){
-                return $value->productType->name === 'Hat';
+                return $value->productType->name === 'Hats';
             });
 
             $shirts = $products->filter(function($value, $key){
-                return $value->productType->name === 'Shirt';
+                return $value->productType->name === 'Shirts';
             });
 
             $hoodies = $products->filter(function($value, $key){
-                return $value->productType->name === 'Hoodie';
+                return $value->productType->name === 'Hoodies';
             });
 
             return view('musora.product.products',[
