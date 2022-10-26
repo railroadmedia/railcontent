@@ -163,6 +163,36 @@ class Clothing extends Resource
             Flexible::make('Specs')
                 ->addLayout(SpectLayout::class)
                 ->preset(SpecPreset::class),
+            Image::make('Bundle Image', 'bundle_img')
+                ->disk('nova_s3')
+                ->prunable()
+                ->hideFromIndex()
+                ->disableDownload()
+                ->nullable()
+                ->storeAs(function (Request $request){
+                    $brandId = $request->brand;
+                    $brand = '';
+
+                    if($brandId === "1") {
+                        $brand = 'Drumeo';
+                    }
+                    elseif($brandId === "2"){
+                        $brand = 'Pianote';
+                    }
+                    elseif($brandId === "3"){
+                        $brand = 'Guitareo';
+                    }
+                    elseif($brandId === "4"){
+                        $brand = 'Singeo';
+                    }
+
+                    return '/'.$brand.'/bundle-image'.$request->uuid.'-'.$request->file('bundle_img')->getClientOriginalName();
+                })
+                ->preview(function($value){
+                    if(empty($value)) return null;
+
+                    return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
+                }),
             Text::make('Bundle Description', 'bundle_desc')->hideFromIndex(),
         ];
     }

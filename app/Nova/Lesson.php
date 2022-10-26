@@ -76,7 +76,7 @@ class Lesson extends Resource
                         $brand = 'Singeo';
                     }
 
-                    return '/'.$brand.'/'.$request->uuid.'-'.$request->file('meta_img')->getClientOriginalName();
+                    return '/'.$brand.'/meta-Image/'.$request->uuid.'-'.$request->file('meta_img')->getClientOriginalName();
                 })
                 ->preview(function($value){
                     if(empty($value)) return null;
@@ -111,7 +111,7 @@ class Lesson extends Resource
                         $brand = 'Singeo';
                     }
 
-                    return '/'.$brand.'/'.$request->uuid.'-'.$request->file('thumbnail')->getClientOriginalName();
+                    return '/'.$brand.'/thumbnail/'.$request->uuid.'-'.$request->file('thumbnail')->getClientOriginalName();
                 })
                 ->preview(function($value){
                     if(empty($value)) return null;
@@ -142,7 +142,7 @@ class Lesson extends Resource
                         $brand = 'Singeo';
                     }
 
-                    return '/'.$brand.'/'.$request->uuid.'-'.$request->file('thumbnail_logo')->getClientOriginalName();
+                    return '/'.$brand.'/thumbnail-logo'.$request->uuid.'-'.$request->file('thumbnail_logo')->getClientOriginalName();
                 })
                 ->preview(function($value){
                     if(empty($value)) return null;
@@ -177,7 +177,7 @@ class Lesson extends Resource
                         $brand = 'Singeo';
                     }
 
-                    return '/'.$brand.'/'.$request->uuid.'-'.$request->file('page_logo')->getClientOriginalName();
+                    return '/'.$brand.'/page-logo'.$request->uuid.'-'.$request->file('page_logo')->getClientOriginalName();
                 })
                 ->preview(function($value){
                     if(empty($value)) return null;
@@ -216,7 +216,7 @@ class Lesson extends Resource
                         $brand = 'Singeo';
                     }
 
-                    return '/'.$brand.'/'.$request->uuid.'-'.$request->file('product_img')->getClientOriginalName();
+                    return '/'.$brand.'/product-image'.$request->uuid.'-'.$request->file('product_img')->getClientOriginalName();
                 })
                 ->preview(function($value){
                     if(empty($value)) return null;
@@ -240,6 +240,36 @@ class Lesson extends Resource
             Flexible::make('Specs')
                 ->addLayout(SpectLayout::class)
                 ->preset(SpecPreset::class),
+            Image::make('Bundle Image', 'bundle_img')
+                ->disk('nova_s3')
+                ->prunable()
+                ->hideFromIndex()
+                ->disableDownload()
+                ->nullable()
+                ->storeAs(function (Request $request){
+                    $brandId = $request->brand;
+                    $brand = '';
+
+                    if($brandId === "1") {
+                        $brand = 'Drumeo';
+                    }
+                    elseif($brandId === "2"){
+                        $brand = 'Pianote';
+                    }
+                    elseif($brandId === "3"){
+                        $brand = 'Guitareo';
+                    }
+                    elseif($brandId === "4"){
+                        $brand = 'Singeo';
+                    }
+
+                    return '/'.$brand.'/bundle-image'.$request->uuid.'-'.$request->file('bundle_img')->getClientOriginalName();
+                })
+                ->preview(function($value){
+                    if(empty($value)) return null;
+
+                    return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
+                }),
             Text::make('Bundle Description', 'bundle_desc')->hideFromIndex(),
         ];
     }
