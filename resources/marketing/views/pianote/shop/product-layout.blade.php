@@ -34,7 +34,9 @@
 @stop
 
 @section('global-body')
-    @include('pianote.sales.nav')
+    @include('pianote.sales.nav',[
+         "cartVersion" => true
+    ])
 
 {{--    @include('pianote.sales.nav', [--}}
 {{--        "cartVersion" => true--}}
