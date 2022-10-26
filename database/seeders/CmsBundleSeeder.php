@@ -427,8 +427,7 @@ The Simple Songs Bundle will get you there in no time. You’ll get expert teach
                 'product_type_id' => 6,
                 'name' => 'The Unlimited Lessons Bundle',
                 'slug' => 'bundle-unlimited-lessons',
-                'sku' => 'products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[pianote-practice-planner]=1&products[poster-chords]=1&products[poster-scales]=1&products[play-beautiful-piano]=1&products[500-songs-in-5-days]=1&products[piano-riffs-and-fills]=1&products[piano-technique-made-easy]=1&products[destupefy-your-left-hand]=1&products[worship-piano]=1&products[faster-fingers]=1&products[sight-reading-made-simple]=1&locked=true",
-        "fullPrice',
+                'sku' => 'products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[pianote-practice-planner]=1&products[poster-chords]=1&products[poster-scales]=1&products[play-beautiful-piano]=1&products[500-songs-in-5-days]=1&products[piano-riffs-and-fills]=1&products[piano-technique-made-easy]=1&products[destupefy-your-left-hand]=1&products[worship-piano]=1&products[faster-fingers]=1&products[sight-reading-made-simple]=1&locked=true',
                 'meta_desc' => 'UNLIMITED piano lessons you can take anywhere, anytime.',
                 'meta_img' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/vid-thumb21.jpg',
                 'price' => 197,
@@ -506,6 +505,65 @@ The Simple Songs Bundle will get you there in no time. You’ll get expert teach
                 ],
             ],
             [
+                'brand' => 2,
+                'product_type_id' => 6,
+                'name' => 'The Quick Start Bundle',
+                'slug' => 'quick-start-bundle',
+                'sku' => 'products[play-beautiful-piano]=1&products[500-songs-in-5-days]=1&products[piano-riffs-and-fills]=1&products[piano-technique-made-easy]=1&products[worship-piano]=1&products[destupefy-your-left-hand]=1&products[faster-fingers]=1&locked=true',
+                'meta_desc' => 'Get Started On the Piano With No Long-Term Commitment',
+                'meta_img' => 'https://pianote.s3.amazonaws.com/sales/promos/august/beginner-thumb.png',
+                'price' => 622,
+                'discounted_price' => 97,
+                'special_text' => '',
+                'page_logo' => '',
+                'header_text' => 'Get Started On the Piano With No Long-Term Commitment',
+                'video_src' => '',
+                'images' => [
+                    'https://pianote.s3.amazonaws.com/sales/promos/february/quick-start-thumb.jpg'
+                ],
+                'sold_out' => true,
+                'guaranteed' => true,
+                'free_shipping' => false,
+                'products' => [
+                    [
+                        'name' => 'Playing Beautiful Piano',
+                        'free_bonus' => false,
+                        'lifetime_access' => true,
+                    ],
+                    [
+                        'name' => '500 Songs In 5 Days',
+                        'free_bonus' => false,
+                        'lifetime_access' => true,
+                    ],
+                    [
+                        'name' => 'Piano Riffs & Fills',
+                        'free_bonus' => true,
+                        'lifetime_access' => true,
+                    ],
+                    [
+                        'name' => 'Piano Technique Made Easy',
+                        'free_bonus' => false,
+                        'lifetime_access' => true,
+                    ],
+                    [
+                        'name' => 'Worship Piano',
+                        'free_bonus' => true,
+                        'lifetime_access' => true,
+                    ],
+                    [
+                        'name' => 'De-Stupefy Your Left Hand',
+                        'free_bonus' => true,
+                        'lifetime_access' => true,
+                    ],
+
+                    [
+                        'name' => 'Faster Fingers',
+                        'free_bonus' => true,
+                        'lifetime_access' => true,
+                    ],
+                ],
+            ],
+            [
                 'brand' => 3,
                 'product_type_id' => 6,
                 'name' => 'The Buginner Quick-Start Bundle',
@@ -517,7 +575,7 @@ The Simple Songs Bundle will get you there in no time. You’ll get expert teach
                 'discounted_price' => 127,
                 'special_text' => '',
                 'page_logo' => 'https://guitareo.s3.amazonaws.com/sales/promos/black-friday/bundles/beginner/logo-black.png',
-                'header_text' => 'Thinking of becoming a guitarist? Start here.',
+                'header_text' => 'Thinking of becoming a guitarist? <br>Start here.',
                 'video_src' => '//player.vimeo.com/video/649717515',
                 'images' => [
                 ],
@@ -614,7 +672,7 @@ Guitar Technique Made Easy is a 26-week plan for building a technical foundation
                 'price' => 294,
                 'discounted_price' => 49,
                 'special_text' => '',
-                'page_logo' => '',
+                'page_logo' => 'https://guitareo.s3.amazonaws.com/shop/bundles/SummerSongs_logo_stacked.png',
                 'header_text' => 'CRUSH your campfire singalongs this summer. Get comfortable on your acoustic guitar + learn 500 songs!',
                 'video_src' => '',
                 'images' => [
@@ -704,7 +762,7 @@ Make this summer one to remember with the Summer Songs Bundle.',
                 'brand' => 4,
                 'product_type_id' => 6,
                 'name' => 'The Perfect Harmony Bundle',
-                'slug' => 'ultimate-bundle',
+                'slug' => 'harmony-bundle',
                 'sku' => 'products[singeo-annual-recurring-membership]=1&products[the-essential-guide-to-beautiful-harmonies]=1&products[singing-starter-kit]=1&locked=true',
                 'meta_desc' => 'The EASY way to sing in perfect harmony',
                 'meta_img' => 'https://singeo.s3.amazonaws.com/sales/promos/october/harmony_bundle_banner.jpg',
@@ -717,7 +775,8 @@ Make this summer one to remember with the Summer Songs Bundle.',
                 'images' => [
                     'https://singeo.s3.amazonaws.com/sales/promos/october/harmony_bundle_banner.jpg'
                 ],
-                'overview' => "If you dream of singing beautiful harmonies and creating something extraordinary, then you need The Perfect Harmony Bundle.
+                'overview' => "<h2 class=\"text-center font-extrabold text-lg md:text-xl lg:text-2xl mb-6\" style=\"font-weight: 900;\">What's included:</h2><img class='hidden md:inline' src='https://laravel-nova.s3.us-east-2.amazonaws.com/Singeo/product-image/harmony-bundle.png' alt='what is included image' /><img class='md:hidden mb-4' src='https://laravel-nova.s3.us-east-2.amazonaws.com/Singeo/product-image/harmony-bundle-m.png' alt='what is included image' />
+                If you dream of singing beautiful harmonies and creating something extraordinary, then you need The Perfect Harmony Bundle.
 
 Kick your singing journey into gear with the Singer Starter Kit and learn to unleash the full potential of your voice. From warm-up exercise routines to tricks and techniques to help you vocalize with less tension and accurate pitch.
 
@@ -749,68 +808,107 @@ Once you grab The Perfect Harmony Bundle, you’ll never have to worry about hav
                     ],
                 ],
             ],
-//            [
-//                'brand' => 4,
-//                'product_type_id' => 6,
-//                'name' => 'The Beginner Bundle',
-//                'slug' => 'beginner-bundle',
-//                'sku' => 'products[singeo-6-month-recurring-membership]=1&products[singing-starter-kit]=1&locked=true',
-//                'meta_desc' => 'You CAN Sing! And this is the perfect place to start.',
-//                'meta_img' => 'https://singeo.s3.amazonaws.com/sales/promos/november/bundles/beginner-thumb.jpg',
-//                'price' => 158,
-//                'discounted_price' => 127,
-//                'special_text' => '+$31 In Bonuses',
-//                'page_logo' => 'https://singeo.s3.amazonaws.com/sales/promos/november/bundles/beginner-logo.png',
-//                'header_text' => 'Know exactly where to start & get immediate results',
-//                'video_src' => '',
-//                'images' => [
-//                    'https://singeo.s3.amazonaws.com/sales/promos/august/beginner_banner.jpg'
-//                ],
-//                'overview' => 'If you’ve been struggling with the sound or quality of your voice - not seeing a difference despite putting in the work, there’s something you need to know
-//
-//**The problem is NOT YOU.**
-//
-//Because beginner singers all face the same problem…
-//
-//You don’t know what you don’t know!
-//
-//And it’s not your fault. But it can lead to vocal strain and frustration, and ultimately lead you to quit.
-//
-//That’s why having a REAL vocal coach guide your every step is so important. **It’s the best way to guarantee you’re making progress and not just going in circles.**
-//
-//With **The Beginner Bundle**, you can take your first singing lesson in less than 2 minutes from now -- and hear the difference in your voice by the end of it.
-//
-//Maximize results using the Singing Starter Kit. Then use your Member Access to get personal feedback from real vocal coaches who will guide you every step of the way.
-//
-//The Singeo Method will give you all the tools you need to bring your voice to a whole new level and become a proficient, confident singer. Learn to…
-//
-//• Develop your voice
-//• Sound better when you sing
-//• Fine tune your pitch
-//• Do vocal riffs and runs like your favorite artists
-//• Train your ear to tackle harmonies.
-//',
-//                'sold_out' => true,
-//                'guaranteed' => true,
-//                'free_shipping' => false,
-//                'products' => [
-//                    [
-//                        'name' => 'Singeo Membership',
-//                        'free_bonus' => false,
-//                        'lifetime_access' => false,
-//                    ],
-//                    [
-//                        'name' => 'The Singing Starter Kit',
-//                        'free_bonus' => true,
-//                        'lifetime_access' => true,
-//                    ],
-//                    [
-//                        'name' => 'Vowel Practice Poster',
-//                        'free_bonus' => true,
-//                        'lifetime_access' => false,
-//                    ],
-//                ],
-//            ],
+            [
+                'brand' => 4,
+                'product_type_id' => 6,
+                'name' => 'The Beginner Bundle',
+                'slug' => 'beginner-bundle',
+                'sku' => 'products[singeo-annual-recurring-membership]=1&products[singing-starter-kit]=1&products[vowel-sounds-poster]=1&locked=true',
+                'meta_desc' => 'Know exactly where to start & get immediate results',
+                'meta_img' => 'https://singeo.s3.amazonaws.com/sales/promos/august/beginner_bundle.jpg',
+                'price' => 158,
+                'discounted_price' => 127,
+                'special_text' => '+$31 In Bonuses',
+                'page_logo' => 'https://singeo.s3.amazonaws.com/sales/promos/november/bundles/beginner-logo.png',
+                'header_text' => 'Know exactly where to start & get immediate results',
+                'video_src' => '',
+                'images' => [
+                    'https://singeo.s3.amazonaws.com/sales/promos/august/beginner_banner.jpg'
+                ],
+                'overview' => 'If you’ve been struggling with the sound or quality of your voice - not seeing a difference despite putting in the work, there’s something you need to know
+
+**The problem is NOT YOU.**
+
+Because beginner singers all face the same problem…
+
+You don’t know what you don’t know!
+
+And it’s not your fault. But it can lead to vocal strain and frustration, and ultimately lead you to quit.
+
+That’s why having a REAL vocal coach guide your every step is so important. **It’s the best way to guarantee you’re making progress and not just going in circles.**
+
+With **The Beginner Bundle**, you can take your first singing lesson in less than 2 minutes from now -- and hear the difference in your voice by the end of it.
+
+Maximize results using the Singing Starter Kit. Then use your Member Access to get personal feedback from real vocal coaches who will guide you every step of the way.
+
+The Singeo Method will give you all the tools you need to bring your voice to a whole new level and become a proficient, confident singer. Learn to…
+
+• Develop your voice
+• Sound better when you sing
+• Fine tune your pitch
+• Do vocal riffs and runs like your favorite artists
+• Train your ear to tackle harmonies.
+',
+                'sold_out' => true,
+                'guaranteed' => true,
+                'free_shipping' => false,
+                'products' => [
+                    [
+                        'name' => 'Singeo Membership',
+                        'free_bonus' => false,
+                        'lifetime_access' => false,
+                    ],
+                    [
+                        'name' => 'The Singing Starter Kit',
+                        'free_bonus' => true,
+                        'lifetime_access' => true,
+                    ],
+                    [
+                        'name' => 'Vowel Practice Poster',
+                        'free_bonus' => true,
+                        'lifetime_access' => false,
+                    ],
+                ],
+            ],
+            [
+                'brand' => 4,
+                'product_type_id' => 6,
+                'name' => 'The Swag Bundle',
+                'slug' => 'swag-bundle',
+                'sku' => 'products[singeo-annual-recurring-membership]=1&products[vowel-sounds-poster]=1&products[mouth-mug]=1&products[wallflower-tumbler]=1&products[singing-starter-kit]=1&redirect=/order&locked=true',
+                'meta_desc' => 'Sing with confidence AND Style',
+                'meta_img' => 'https://singeo.s3.amazonaws.com/sales/promos/august/swag_bundle.jpg',
+                'price' => 127,
+                'discounted_price' => 0,
+                'special_text' => '',
+                'page_logo' => '',
+                'header_text' => 'Sing with confidence AND Style',
+                'video_src' => '',
+                'images' => [
+                    'https://singeo.s3.amazonaws.com/sales/promos/august/swag_banner.jpg'
+                ],
+                'overview' => '',
+                'sold_out' => true,
+                'guaranteed' => true,
+                'free_shipping' => false,
+                'products' => [
+                    [
+                        'name' => 'Singeo Membership',
+                        'free_bonus' => false,
+                        'lifetime_access' => false,
+                    ],
+                    [
+                        'name' => 'Rockstar Mug',
+                        'free_bonus' => true,
+                        'lifetime_access' => false,
+                    ],
+                    [
+                        'name' => 'Retro T-shirt',
+                        'free_bonus' => true,
+                        'lifetime_access' => false,
+                    ],
+                ],
+            ],
 //            [
 //                'brand' => 2,
 //                'product_type_id' => 6,

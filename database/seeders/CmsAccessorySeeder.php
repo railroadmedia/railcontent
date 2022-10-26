@@ -88,7 +88,8 @@ And so many more!",
                 "sizes" => [
 
                 ],
-                "bundle_desc" => "What good is learning classical piano if you don’t have beautiful music to play? This NEW book is 92 pages full of beautiful pieces by famous classical composers that you can actually play! The perfect companion to The Classical Method, each piece has been hand-selected to be appropriate for your skill level - while still sounding beautiful. Beethoven, Chopin, Bach, they’re all in here.",
+                'bundle_img' => 'https://pianote.s3.amazonaws.com/sales/promos/july/classical_piano_book_list.jpg',
+                'bundle_desc' => 'What good is learning classical piano if you don’t have beautiful music to play? This NEW book is 92 pages full of beautiful pieces by famous classical composers that you can actually play! The perfect companion to The Classical Method, each piece has been hand-selected to be appropriate for your skill level - while still sounding beautiful. Beethoven, Chopin, Bach, they’re all in here.',
             ],
             [
                 "brand" => 1,
@@ -144,6 +145,7 @@ And so many more!",
                 "guaranteed" => false,
                 "lifetime_access" => false,
                 "free_shipping" => false,
+                'bundle_img' => 'https://drumeo-assets.s3.amazonaws.com/promos/july/quietkick_card.jpg',
                 "bundle_desc" => "Improve your kick foot anywhere with the portable & quiet bass drum workout pad. Attaches to any single OR double pedal (pedal not included).",
                 'bundle_free_shipping' => true,
                 "images" => [
@@ -239,6 +241,7 @@ And so many more!",
                 "guaranteed" => false,
                 "lifetime_access" => false,
                 "free_shipping" => false,
+                'bundle_img' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/drumsticks.jpg',
                 "bundle_desc" => "Our new Drumeo 5A Drumsticks by Vater -- made of hickory for strength and durability, featuring up to 2X the moisture content than most manufacturers for longer lasting sticks, and personally hand-rolled by Alan Vater to ensure they’re weighted and tone-matched to perfection.",
                 'bundle_free_shipping' => true,
                 "images" => [
@@ -272,6 +275,7 @@ And so many more!",
                 "guaranteed" => false,
                 "lifetime_access" => false,
                 "free_shipping" => false,
+                'bundle_img' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/p4.jpg',
                 "bundle_desc" => "The P4 Practice Pad is the most versatile practice pad in the world -- with four different playing surfaces to replicate different parts of the drum set. When you’re running rudiments & stickings at the pad, you’re still getting the various feels of your drum set.",
                 'bundle_free_shipping' => true,
                 "images" => [
@@ -305,6 +309,7 @@ And so many more!",
                 "guaranteed" => false,
                 "lifetime_access" => false,
                 "free_shipping" => false,
+                'bundle_img' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/pad.jpg',
                 "bundle_desc" => "Practice anywhere with two full-size playing surfaces. The QuietPad offers a traditional side with realistic snare-like rebound, and a quiet side that’ll allow you to practice late into the night.",
                 'bundle_free_shipping' => true,
                 "images" => [
@@ -369,6 +374,7 @@ And so many more!",
                 "guaranteed" => false,
                 "lifetime_access" => false,
                 "free_shipping" => false,
+                'bundle_img' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/bbdb.jpg',
                 "bundle_desc" => "It’s the perfect companion to your morning coffee. The Best Beginner Drum Book is the simplest guide for beginner drummers to get started on the drums and advance to the next level. You’ll have all your information in one easy-to-reference guide.",
                 'bundle_free_shipping' => true,
                 "images" => [
@@ -630,6 +636,7 @@ Start Mastering your Chords & Scales today.",
                 "sizes" => [
 
                 ],
+                'bundle_img' => 'https://pianote.s3.amazonaws.com/sales/2022/bonus-chords-scales.jpg',
                 "bundle_desc" => "You need chords to play your favorite songs, but learning them all can be a real challenge. The Piano Chords & Scales book is your go-to reference guide so you’ll never get stuck again. See a chord you don’t know? Simply flip to the relevant page in your book and you’ll see all the inversions and alterations you need to play beautifully and confidently. Don’t let scary-looking chords slow your progress.",
             ],
             [
@@ -775,6 +782,7 @@ This is Lisa Witt’s personal practice guide. Written by her, exclusively for p
                     "https://pianote.s3.amazonaws.com/shop/products/practice-planner/pp-blank-week.jpg",
                     "https://pianote.s3.amazonaws.com/shop/products/practice-planner/pp-staff-pages.jpg"
                 ],
+                'bundle_img' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/planner.png',
                 "bundle_desc" => "Practice is the key to getting better. But to really progress it’s so important to practice the right things. Knowing what, when, and how to practice will make the biggest difference in your playing. The Pianote Practice Planner is your written guide to making every practice perfect, so you get the results you deserve. This is Lisa Witt’s personal practice guide. Written by her, exclusively for piano players.",
                 "sizeChart" => "",
                 "sizes" => [
@@ -812,7 +820,7 @@ The new Pianote Practice Planner is your written guide to making every practice 
 
 This is Lisa Witt’s personal practice guide. Written by her, exclusively for piano players.
 
-        <a target=\"_blank\" class=\"text-center\" style=\"display:inline-block\" href=\"https://pianote.s3.amazonaws.com/shop/products/practice-planner/preview.pdf\">
+        <a target=\'_blank\" class=\"text-center\" style=\"display:inline-block\" href=\"https://pianote.s3.amazonaws.com/shop/products/practice-planner/preview.pdf\">
             <strong>Click to see inside &raquo;</strong><br>
             <img class='w-full mt-1' src=\"https://cdn.musora.com/image/fetch/w_850,q_auto:best/https://pianote.s3.amazonaws.com/shop/products/practice-planner/pianote-planner.jpg\" alt='sample image' />
         </a>",
@@ -898,6 +906,7 @@ At 17” x 22” this helpful poster can keep your chording on track. Don’t wa
                 "sizes" => [
 
                 ],
+                'bundle_img' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/poster-chords.jpg',
                 "bundle_desc" => "Chord shapes can be hard to remember, especially when you’re starting out and learning how they work. Luckily we have the Pianote Chords Poster to help you with all those tricky shapes! Get this awesome poster for your practice space and start chording your way through all your favorite songs. If you ever forget your chord shapes, all you have to do is look up!",
             ],
             [
@@ -943,6 +952,7 @@ At 22” x 17” this helpful cheat sheet can be placed anywhere you like to mak
                 "sizes" => [
 
                 ],
+                'bundle_img' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/poster-scales.jpg',
                 "bundle_desc" => "If you ever find yourself forgetting the notes in a scale (like most of us do), the Pianote Scales Poster is here to help! Remember your scales with this easy-to-read poster, designed to help you quickly recall the right notes at the right time, making your scales (or soloing) a piece of cake. With this up on your wall, you’ll never miss a note again.",
             ],
             [
@@ -1126,6 +1136,7 @@ The Guitareo Survival Guide is perfect for adding a little fun while navigating 
                 "lifetime_access" => false,
                 "free_shipping" => false,
                 'bundle_free_shipping' => true,
+                'bundle_img' => 'https://guitareo.s3.amazonaws.com/sales/promos/july/survival_guide.jpg',
                 'bundle_desc' => 'This 37-page book gives you all the essential chords, strumming patterns, scales, and riffs to make your journey playing the guitar as fun and enjoyable as possible.',
                 "images" => [
                     "https://guitareo.s3.amazonaws.com/shop/survival-guide/2021-12-23-Guitareo-Survival-Guide-102-Edit.jpg",
@@ -1199,6 +1210,8 @@ The Guitareo Survival Guide is perfect for adding a little fun while navigating 
                 "sizes" => [
 
                 ],
+                'bundle_img' => 'https://singeo.s3.amazonaws.com/sales/promos/november/mug.jpg',
+                'bundle_desc' => 'Did you know that it takes 4 hours for your vocal cords to hydrate after you have a drink? Keep your voice sounding its very best by hydrating yourself with this super rad mug. Hydration can help you have better vocal control, reach higher notes and have more reliable results.'
             ],
             [
                 "brand" => 4,
@@ -1239,6 +1252,7 @@ The Guitareo Survival Guide is perfect for adding a little fun while navigating 
                 "sizes" => [
 
                 ],
+                'bundle_img' => 'https://singeo.s3.amazonaws.com/sales/promos/november/poster2.png',
                 'bundle_desc' => 'Knowing how to style and pronounce your vowels will have instant effects on your singing. This poster will be your new favorite practice tool - and your ticket to hitting higher notes with ease and confidence.'
             ],
             [
@@ -1581,6 +1595,7 @@ And so many more!",
                 'lifetime_access' => $product['lifetime_access'],
                 'display_order' => $orderNum,
                 'size_chart_id' => null,
+                'bundle_img' => empty($product['bundle_img']) ? null : $product['bundle_img'],
                 'bundle_desc' => empty($product['bundle_desc']) ? null : $product['bundle_desc'],
                 'physical' => true,
                 'bundle_free_shipping' => empty($product['bundle_free_shipping']) ? false : $product['bundle_free_shipping'],

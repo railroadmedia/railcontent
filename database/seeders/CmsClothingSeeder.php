@@ -1776,13 +1776,16 @@ class CmsClothingSeeder extends Seeder
                 "lifetime_access" => false,
                 "free_shipping" => false,
                 'size_case_sensitive' => true,
+                'bundle_free_shipping' => true,
                 "images" => [
                     "https://singeo.s3.amazonaws.com/products/retro-shirt-thumb.png"
                 ],
                 "sizeChart" => 14,
                 "sizes" => [
                     2,3,4,5,6
-                ]
+                ],
+                'bundle_img' => 'https://singeo.s3.amazonaws.com/products/retro-shirt.png',
+                'bundle_desc' => 'Sing with confidence AND style with this super slick Retro T-shirt.'
             ],
             [
                 "brand" => 1,
@@ -2035,6 +2038,9 @@ class CmsClothingSeeder extends Seeder
                 'size_case_sensitive' => empty($product['size_case_sensitive']) ? false : $product['size_case_sensitive'],
                 'physical' => true,
                 'size_chart_id' => empty($product['sizeChart']) ? null : $product['sizeChart'],
+                'bundle_img' => empty($product['bundle_img']) ? null : $product['bundle_img'],
+                'bundle_desc' => empty($product['bundle_desc']) ? null : $product['bundle_desc'],
+                'bundle_free_shipping' => empty($product['bundle_free_shipping']) ? false : $product['bundle_free_shipping'],
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
