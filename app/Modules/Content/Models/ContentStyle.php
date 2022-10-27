@@ -7,13 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property integer $id
  * @property integer $content_id
- * @property string $key
+ * @property string $style
  * @property int $position
- * @property string $value
  */
-class ContentData extends Model
+class ContentStyle extends Model
 {
-    protected $table = 'railcontent_content_data';
+    protected $table = 'railcontent_content_styles';
     public $timestamps = false;
 
     public function content()
