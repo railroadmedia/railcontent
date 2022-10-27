@@ -18,6 +18,8 @@
             :selected-experience="{{ json_encode(user()->onboardingExperience) }}"
         ></onboarding>
     </div>
+
+    @include('partials._railanalytics-brand-tracking-iframe')
 @endsection
 
 @section('layout-scripts')
