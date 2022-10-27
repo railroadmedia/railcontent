@@ -989,5 +989,5 @@
     <script type="text/javascript" src="/marketing/js/modal.js"></script>
     <script type="text/javascript" src="/marketing/js/modal-autoplay.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
-    {!! inspectlet_embed_script() !!}
+    @include('pianote._partials.inspectlet')
 @endsection

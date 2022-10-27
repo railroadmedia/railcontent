@@ -1752,6 +1752,6 @@
 
     @yield('scripts')
 
-{{--    {!! inspectlet_embed_script() !!}--}}
+    @include('pianote._partials.inspectlet')
 @stop
 

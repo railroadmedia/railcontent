@@ -312,5 +312,5 @@
     <script type="text/javascript" src="/marketing/parcel/pianote/nav-footer.js"></script>
     <script type="text/javascript" src="/marketing/js/modal-autoplay-bootstrap.js"></script>
 
-    {!! inspectlet_embed_script() !!}
+    @include('pianote._partials.inspectlet')
 @stop

@@ -616,5 +616,5 @@
     <script src="{{ mix('marketing/js/pianote/app.js') }}"></script>
 
     @include('pianote._partials._promo-countdown')
-    {!! inspectlet_embed_script() !!}
+    @include('pianote._partials.inspectlet')
 @stop
