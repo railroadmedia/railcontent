@@ -3,11 +3,13 @@
 namespace App\Decorators\Forums;
 
 use Railroad\Railcontent\Repositories\ContentRepository;
+use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
 
 class PostUrlsDecorator
 {
-    const HTML_HREF_REGEX_PATTERN = '#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#';
+    const HTML_HREF_REGEX_PATTERN = '#<a[^>]+href=\"(.*?)\"[^>]*>#';
+
     private $contentService;
 
     /**
@@ -39,7 +41,8 @@ class PostUrlsDecorator
             $posts[$index]['content'] = $url;
 
             if (preg_match_all(self::HTML_HREF_REGEX_PATTERN, $post['content'], $matches)) {
-                $urls = $this->getUrls($matches[0]);
+
+                $urls = $this->getUrls($matches[1]);
                 foreach ($urls as $oldUrl => $mwpUrl) {
                     $posts[$index]['content'] = str_replace($oldUrl, $mwpUrl, $posts[$index]['content']);
                 }
@@ -74,7 +77,6 @@ class PostUrlsDecorator
             return $url;
         }
 
-        ContentRepository::$bypassPermissions = true;
 
         if (isset($segments[0]) &&
             ($segments[0] == 'drumshop' ||
@@ -160,6 +162,10 @@ class PostUrlsDecorator
             return $url;
         }
 
+        ContentRepository::$bypassPermissions = true;
+        $availableBrands = ConfigService::$availableBrands;
+        ConfigService::$availableBrands = ['drumeo', 'pianote', 'guitareo', 'singeo'];
+
         if (in_array('forums', $segments)) {
             if ($numberOfSegments > 0) {
                 if (in_array('jump-to-post', $segments)) {
@@ -168,61 +174,63 @@ class PostUrlsDecorator
                     $url = route('forums.jump-to-thread', ['threadId' => $lastSegment]);
                 }
 
+                ConfigService::$availableBrands = $availableBrands;
                 return $url;
             }
 
+            ConfigService::$availableBrands = $availableBrands;
             return $url;
         } elseif (is_numeric($lastSegment)) {
             $content = $this->contentService->getById($lastSegment);
-
+            ConfigService::$availableBrands = $availableBrands;
             return $content['url'] ?? '';
         } elseif (in_array('packs', $segments) && !is_numeric($lastSegment)) {
             $content =
                 $this->contentService->getBySlugAndType($lastSegment, 'pack')
                     ->first();
-
+            ConfigService::$availableBrands = $availableBrands;
             return $content['url'];
         } elseif ($numberOfSegments == 3 && $segments[1] == 'semester-packs') {
             $content =
                 $this->contentService->getBySlugAndType($lastSegment, 'semester-pack')
                     ->first();
-
+            ConfigService::$availableBrands = $availableBrands;
             return $content['url'];
         } elseif ($numberOfSegments == 3 && $segments[1] == 'coaches') {
             $content =
                 $this->contentService->getBySlugAndType($lastSegment, 'instructor')
                     ->first();
-
+            ConfigService::$availableBrands = $availableBrands;
             return $content['url'];
         } elseif ($numberOfSegments == 3 && $segments[1] == 'learning-paths') {
             $content =
                 $this->contentService->getBySlugAndType($lastSegment, 'learning-path')
                     ->first();
-
+            ConfigService::$availableBrands = $availableBrands;
             return $content['url'];
         } elseif ($numberOfSegments == 4 && $segments[1] == 'packs') {
             $content =
                 $this->contentService->getBySlugAndType($lastSegment, 'pack-bundle')
                     ->first();
-
+            ConfigService::$availableBrands = $availableBrands;
             return $content['url'];
         } elseif ($numberOfSegments == 5 && $segments[1] == 'packs') {
             $content =
                 $this->contentService->getBySlugAndType($lastSegment, 'pack-bundle-lesson')
                     ->first();
-
+            ConfigService::$availableBrands = $availableBrands;
             return $content['url'];
         } elseif ($numberOfSegments == 4 && $segments[1] == 'semester-packs') {
             $content =
                 $this->contentService->getBySlugAndType($lastSegment, 'semester-pack-lesson')
                     ->first();
-
+            ConfigService::$availableBrands = $availableBrands;
             return $content['url'];
         } elseif ($numberOfSegments == 4 && $segments[1] == 'learning-paths') {
             $content =
                 $this->contentService->getBySlugAndType($lastSegment, 'learning-path-level')
                     ->first();
-
+            ConfigService::$availableBrands = $availableBrands;
             return $content['url'];
         } elseif ($lastSegment == 'loops') {
             $url = str_replace(
@@ -244,10 +252,10 @@ class PostUrlsDecorator
                 ],
                 $url
             );
-
+            ConfigService::$availableBrands = $availableBrands;
             return $url;
         }
-
+        ConfigService::$availableBrands = $availableBrands;
         return $url;
     }
 
