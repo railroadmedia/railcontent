@@ -1,5 +1,5 @@
 {
-    "/platform/js/app.js": "/platform/js/app.js?id=6d232d8c25c45e762c1d021b50503b2c",
+    "/platform/js/app.js": "/platform/js/app.js?id=6ec26f8a2e873cbe8bbe26e6818f27c8",
     "/platform/js/profile.js": "/platform/js/profile.js?id=c7e869f012d1252699ff65de1e5e0547",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=24098ec7990ff98a565fd1e4693746ed",
     "/platform/js/books.js": "/platform/js/books.js?id=d4fa837307a14d7ee0ce9065b5e5e8e0",
@@ -19,9 +19,11 @@
     "/platform/js/comments-component.js": "/platform/js/comments-component.js?id=503fa8fa6ee41736e20d64af70bbca31",
     "/platform/js/email-form-component.js": "/platform/js/email-form-component.js?id=30c222662e6d3c2a837f8311b829f7c6",
     "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=b6bf52a2a4993b1c89191250b898ca45",
-    "/platform/css/app.css": "/platform/css/app.css?id=381381f8382dd0321bd70aa6420cf4fd",
+    "/platform/css/app.css": "/platform/css/app.css?id=146424947a52b75de5ba6d7b1d2fae79",
     "/platform/js/vendor~onboarding.js": "/platform/js/vendor~onboarding.js?id=37e333d71844e8a0dc325dc686cbd71e",
     "/platform/js/vendor.js": "/platform/js/vendor.js?id=0e9edc629e8b706a58e7c8f25bfbe96e",
-    "/marketing/js/app.js": "/marketing/js/app.js?id=46c9dc84d59c35d3e9fde5e312b24280",
-    "/marketing/css/app.css": "/marketing/css/app.css?id=37604cd4d2bc2e80cc077f471b4c3ec3"
+    "/marketing/js/app.js": "/marketing/js/app.js?id=a3328b39ef71b352655b3b66ff3a0d1a",
+    "/marketing/js/manifest.js": "/marketing/js/manifest.js?id=6693706d2aec4bb8246719dcfd582f26",
+    "/marketing/css/app.css": "/marketing/css/app.css?id=6a6dfa127002d3ec59f5b9a8ef65a81b",
+    "/marketing/js/vendor.js": "/marketing/js/vendor.js?id=840dd60726b2d99e2e3d5f2bdd974803"
 }

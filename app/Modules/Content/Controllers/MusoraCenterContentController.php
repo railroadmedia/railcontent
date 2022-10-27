@@ -27,7 +27,7 @@ class MusoraCenterContentController extends Controller
         if ($content && $content['url']) {
             return redirect($content['url']);
         }
-        Log::debug("showPreview failed: $domain $brand $contentId)");
+        Log::debug("showPreview failed: $domain $brand $contentId");
         abort(404);
     }
 }

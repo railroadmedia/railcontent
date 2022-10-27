@@ -72,14 +72,14 @@
                                      class="side-button prev flex-center tw-rounded-md dark:hover:tw-bg-gray-300/40" 
                                      @click="scrollToPage(currentPage - 1)"
                                 >
-                                    <i class="fas fa-chevron-left dark:tw-text-white"></i>
+                                    <i class="fas fa-chevron-left"></i>
                                 </div>
                                 
                                 <div v-if="currentPage < $_totalPages" 
                                      class="side-button next flex-center tw-rounded-md dark:hover:tw-bg-gray-300/40" 
                                      @click="scrollToPage(currentPage + 1)"
                                 >
-                                    <i class="fas fa-chevron-right dark:tw-text-white"></i>
+                                    <i class="fas fa-chevron-right"></i>
                                 </div>
     
                                 <div v-if="$_totalPages > 1" class="page-buttons">
