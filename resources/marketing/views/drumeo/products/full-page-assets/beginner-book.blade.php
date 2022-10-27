@@ -660,8 +660,8 @@
     </script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
-    <script src="{{ _mix('marketing/js/drumeo/manifest.js') }}"></script>
-    <script src="{{ _mix('marketing/js/drumeo/vendor.js') }}"></script>
-    <script src="{{ _mix('marketing/js/drumeo/cart-sidebar.js') }}"></script>
-    <script src="{{ _mix('marketing/js/drumeo/app.js') }}"></script>
+    <script src="{{ asset('marketing/js/drumeo/manifest.js') }}"></script>
+    <script src="{{ asset('marketing/js/drumeo/vendor.js') }}"></script>
+    <script src="{{ asset('marketing/js/drumeo/cart-sidebar.js') }}"></script>
+    <script src="{{ asset('marketing/js/drumeo/app.js') }}"></script>
 @stop

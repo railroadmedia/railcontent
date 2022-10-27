@@ -137,10 +137,10 @@
     @include("drumeo.sales.partials._footer")
 
 
-    <script src="{{ mix('marketing/js/drumeo/manifest.js') }}"></script>
-    <script src="{{ mix('marketing/js/drumeo/vendor.js') }}"></script>
-    <script src="{{ mix('marketing/js/drumeo/cart-sidebar.js') }}"></script>
+    <script src="{{ asset('marketing/js/drumeo/manifest.js') }}"></script>
+    <script src="{{ asset('marketing/js/drumeo/vendor.js') }}"></script>
+    <script src="{{ asset('marketing/js/drumeo/cart-sidebar.js') }}"></script>
     <script src="{{ asset('/marketing/js/order-form.js') }}"></script>
-    <script src="{{ mix('marketing/js/drumeo/app.js') }}"></script>
+    <script src="{{ asset('marketing/js/drumeo/app.js') }}"></script>
     @yield('scripts')
 @stop
