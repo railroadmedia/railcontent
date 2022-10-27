@@ -17,7 +17,6 @@
 
     {!! \App\Analytics\Tracker::headBottom() !!}
 
-{{--    @include('helpscout::helpscout-tracking-beacon-script', ['email' => !empty(current_user()) ? current_user()->getEmail() : null])--}}
 </head>
 
 <body>
@@ -27,7 +26,7 @@
 @yield('global-body')
 <script type="text/javascript" src="{{ url()->asset('marketing/parcel/pianote/pre-form-submit-facebook-lead.js') }}"></script>
 
-{{--@include('helpscout::helpscout-tracking-beacon-script', ['email' => !empty(current_user()) ? current_user()->getEmail() : null])--}}
+@include('helpscout::helpscout-tracking-beacon-script', ['email' => !is_null(user()) ? user()->getEmail() : null])
 <script type="text/javascript">
     Beacon('on', 'ready', () => {
         document.querySelector('.BeaconFabButtonFrame').style.bottom = "50px";

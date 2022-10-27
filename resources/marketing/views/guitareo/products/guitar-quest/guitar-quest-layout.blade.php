@@ -47,7 +47,7 @@
 
         @yield('scripts')
 
-        @include('helpscout::helpscout-tracking-beacon-script', ['email' => !empty(current_user()) ? current_user()->getEmail() : null])
+        @include('helpscout::helpscout-tracking-beacon-script', ['email' => !is_null(user()) ? user()->getEmail() : null])
         <script type="text/javascript">
             Beacon('on', 'ready', () => {
                 document.querySelector('.BeaconFabButtonFrame').style.bottom ="50px";

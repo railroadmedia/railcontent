@@ -14,8 +14,8 @@
         setTimeout(ldinsp, 500); document.readyState != 'complete' ? (window.attachEvent ? window.attachEvent('onload', ldinsp) : window.addEventListener('load', ldinsp, false)) : ldinsp();
     })();
 
-    if({{!empty(auth()->user())}} === 1){
-        __insp.push(['identify', '{{current_user()->getEmail()}}']);
-        __insp.push(['tagSession', {email: '{{current_user()->getEmail()}}', userid: '{{current_user()->getId()}}'}])
-    }
+    @if(!is_null(user()))
+        __insp.push(['identify', '{{user()->getEmail()}}']);
+        __insp.push(['tagSession', {email: '{{user()->getEmail()}}', userid: '{{user()->getId()}}'}])
+    @endif
 </script>
