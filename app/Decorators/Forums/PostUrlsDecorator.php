@@ -167,7 +167,7 @@ class PostUrlsDecorator
         if (in_array('forums', $segments)) {
             if ($numberOfSegments > 0) {
                 if ($lastSegment == "forums") {
-                    $url = route('forums.show-categories');
+                    $url = config('app.url').'/'.$segments[0].'/forums';
                 } elseif (in_array('jump-to-post', $segments)) {
                     $url = route('forums.jump-to-post', ['postId' => $lastSegment]);
                 } else {
