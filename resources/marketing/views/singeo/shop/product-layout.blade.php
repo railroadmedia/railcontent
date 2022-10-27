@@ -2,7 +2,13 @@
 
 @section('global-head')
     @parent
-    {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation-float.min.css" rel="stylesheet"> --}}
+    <title>{{ $product->name }}</title>
+    <meta property="og:description" content="{{ $product->meta_desc  }}}">
+    <meta property="og:url" content="https://www.singeo.com/{{ Request::path() }}">
+    @if(!empty($product->meta_img))
+        <meta property="og:image" content="@if(str_contains($product->meta_img, 'amazonaws') || str_contains($product->meta_img, 'cloudfront')) {{$product->meta_img}} @else https://laravel-nova.s3.us-east-2.amazonaws.com/{{ $product->meta_img  }}@endif">
+    @endif
+
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/css/singeo/tailwind-helpers.css') }}">
     <link href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}" rel="stylesheet">
