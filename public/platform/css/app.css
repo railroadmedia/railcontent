@@ -23002,10 +23002,6 @@ a:visited{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
 }
-.tw-bg-\[\#232323\]{
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(35 35 35 / var(--tw-bg-opacity)) !important;
-}
 .tw-bg-\[\#d1d1d1\]{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(209 209 209 / var(--tw-bg-opacity)) !important;
@@ -23316,9 +23312,6 @@ a:visited{
 .tw-p-4{
   padding: 1rem !important;
 }
-.tw-p-1{
-  padding: 0.25rem !important;
-}
 .tw-p-\[20px\]{
   padding: 20px !important;
 }
@@ -23348,6 +23341,9 @@ a:visited{
 }
 .tw-p-6{
   padding: 1.5rem !important;
+}
+.tw-p-1{
+  padding: 0.25rem !important;
 }
 .tw-p-1\.5{
   padding: 0.375rem !important;
@@ -23730,14 +23726,14 @@ a:visited{
 .tw-font-bebas-neue{
   font-family: Bebas Neue, cursive !important;
 }
-.tw-font-roboto-condensed{
-  font-family: "Roboto Condensed", Segoe UI, sans-serif !important;
-}
 .tw-font-bison-bold{
   font-family: "Bison Bold", Impact !important;
 }
 .tw-font-primary{
   font-family: "Open Sans", Century Gothic, sans-serif !important;
+}
+.tw-font-roboto-condensed{
+  font-family: "Roboto Condensed", Segoe UI, sans-serif !important;
 }
 .tw-text-xs{
   font-size: 0.75rem !important;
@@ -24548,10 +24544,6 @@ a:visited{
 .tw-dark .dark\:tw-bg-\[\#445F74\]\/10{
   background-color: rgb(68 95 116 / 0.1) !important;
 }
-.tw-dark .dark\:tw-bg-\[\#000C17\]{
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(0 12 23 / var(--tw-bg-opacity)) !important;
-}
 .tw-dark .dark\:tw-bg-\[\#081825\]{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(8 24 37 / var(--tw-bg-opacity)) !important;
@@ -24579,6 +24571,10 @@ a:visited{
 }
 .tw-dark .dark\:tw-bg-\[\#002039B2\]\/70{
   background-color: rgb(0 32 57 / 0.7) !important;
+}
+.tw-dark .dark\:tw-bg-\[\#000C17\]{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(0 12 23 / var(--tw-bg-opacity)) !important;
 }
 .tw-dark .dark\:tw-bg-\[\#445F74\]\/50{
   background-color: rgb(68 95 116 / 0.5) !important;
@@ -25563,9 +25559,6 @@ a:visited{
   .lg\:tw-mb-0{
     margin-bottom: 0px !important;
   }
-  .lg\:tw-mr-12{
-    margin-right: 3rem !important;
-  }
   .lg\:tw-mb-6{
     margin-bottom: 1.5rem !important;
   }
@@ -25583,6 +25576,9 @@ a:visited{
   }
   .lg\:tw-mb-14{
     margin-bottom: 3.5rem !important;
+  }
+  .lg\:tw-mr-12{
+    margin-right: 3rem !important;
   }
   .lg\:tw-ml-4{
     margin-left: 1rem !important;

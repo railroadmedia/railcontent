@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "70ef387df6a868b0fcf7498b7c8f5b24",
+    "content-hash": "56b49247e33b348bf453c5eb2aa79cc4",
     "packages": [
         {
             "name": "aporat/store-receipt-validator",
@@ -176,16 +176,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.240.1",
+            "version": "3.240.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "34c6bf82f337cadf31475c88ca70e8302afc624b"
+                "reference": "2080f747489b2d4ca291dcfb8078db60dbb6c255"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/34c6bf82f337cadf31475c88ca70e8302afc624b",
-                "reference": "34c6bf82f337cadf31475c88ca70e8302afc624b",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/2080f747489b2d4ca291dcfb8078db60dbb6c255",
+                "reference": "2080f747489b2d4ca291dcfb8078db60dbb6c255",
                 "shasum": ""
             },
             "require": {
@@ -264,9 +264,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.240.1"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.240.3"
             },
-            "time": "2022-10-24T19:03:23+00:00"
+            "time": "2022-10-26T18:17:08+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -680,16 +680,16 @@
         },
         {
             "name": "dflydev/dot-access-data",
-            "version": "v3.0.1",
+            "version": "v3.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dflydev/dflydev-dot-access-data.git",
-                "reference": "0992cc19268b259a39e86f296da5f0677841f42c"
+                "reference": "f41715465d65213d644d3141a6a93081be5d3549"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dflydev/dflydev-dot-access-data/zipball/0992cc19268b259a39e86f296da5f0677841f42c",
-                "reference": "0992cc19268b259a39e86f296da5f0677841f42c",
+                "url": "https://api.github.com/repos/dflydev/dflydev-dot-access-data/zipball/f41715465d65213d644d3141a6a93081be5d3549",
+                "reference": "f41715465d65213d644d3141a6a93081be5d3549",
                 "shasum": ""
             },
             "require": {
@@ -700,7 +700,7 @@
                 "phpunit/phpunit": "^7.5 || ^8.5 || ^9.3",
                 "scrutinizer/ocular": "1.6.0",
                 "squizlabs/php_codesniffer": "^3.5",
-                "vimeo/psalm": "^3.14"
+                "vimeo/psalm": "^4.0.0"
             },
             "type": "library",
             "extra": {
@@ -749,9 +749,9 @@
             ],
             "support": {
                 "issues": "https://github.com/dflydev/dflydev-dot-access-data/issues",
-                "source": "https://github.com/dflydev/dflydev-dot-access-data/tree/v3.0.1"
+                "source": "https://github.com/dflydev/dflydev-dot-access-data/tree/v3.0.2"
             },
-            "time": "2021-08-13T13:06:58+00:00"
+            "time": "2022-10-27T11:44:00+00:00"
         },
         {
             "name": "doctrine/annotations",
@@ -2091,16 +2091,16 @@
         },
         {
             "name": "ezimuel/ringphp",
-            "version": "1.2.0",
+            "version": "1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ezimuel/ringphp.git",
-                "reference": "92b8161404ab1ad84059ebed41d9f757e897ce74"
+                "reference": "8d00384f9e5c04713ef8448adf47824265791b50"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ezimuel/ringphp/zipball/92b8161404ab1ad84059ebed41d9f757e897ce74",
-                "reference": "92b8161404ab1ad84059ebed41d9f757e897ce74",
+                "url": "https://api.github.com/repos/ezimuel/ringphp/zipball/8d00384f9e5c04713ef8448adf47824265791b50",
+                "reference": "8d00384f9e5c04713ef8448adf47824265791b50",
                 "shasum": ""
             },
             "require": {
@@ -2142,9 +2142,9 @@
             ],
             "description": "Fork of guzzle/RingPHP (abandoned) to be used with elasticsearch-php",
             "support": {
-                "source": "https://github.com/ezimuel/ringphp/tree/1.2.0"
+                "source": "https://github.com/ezimuel/ringphp/tree/1.2.1"
             },
-            "time": "2021-11-16T11:51:30+00:00"
+            "time": "2022-10-25T12:54:22+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -2882,16 +2882,16 @@
         },
         {
             "name": "google/auth",
-            "version": "v1.23.0",
+            "version": "v1.23.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-auth-library-php.git",
-                "reference": "8da16102d2cd1bdc128d97f323553df465ee7701"
+                "reference": "cb43cb8ccde76ace65ec40130a9e9c2a15ecfe17"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-auth-library-php/zipball/8da16102d2cd1bdc128d97f323553df465ee7701",
-                "reference": "8da16102d2cd1bdc128d97f323553df465ee7701",
+                "url": "https://api.github.com/repos/googleapis/google-auth-library-php/zipball/cb43cb8ccde76ace65ec40130a9e9c2a15ecfe17",
+                "reference": "cb43cb8ccde76ace65ec40130a9e9c2a15ecfe17",
                 "shasum": ""
             },
             "require": {
@@ -2934,9 +2934,9 @@
             "support": {
                 "docs": "https://googleapis.github.io/google-auth-library-php/main/",
                 "issues": "https://github.com/googleapis/google-auth-library-php/issues",
-                "source": "https://github.com/googleapis/google-auth-library-php/tree/v1.23.0"
+                "source": "https://github.com/googleapis/google-auth-library-php/tree/v1.23.1"
             },
-            "time": "2022-09-27T16:27:23+00:00"
+            "time": "2022-10-26T20:30:45+00:00"
         },
         {
             "name": "google/cloud-core",
@@ -3382,16 +3382,16 @@
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "2.4.1",
+            "version": "2.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "69568e4293f4fa993f3b0e51c9723e1e17c41379"
+                "reference": "67c26b443f348a51926030c83481b85718457d3d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/69568e4293f4fa993f3b0e51c9723e1e17c41379",
-                "reference": "69568e4293f4fa993f3b0e51c9723e1e17c41379",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/67c26b443f348a51926030c83481b85718457d3d",
+                "reference": "67c26b443f348a51926030c83481b85718457d3d",
                 "shasum": ""
             },
             "require": {
@@ -3481,7 +3481,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/psr7/issues",
-                "source": "https://github.com/guzzle/psr7/tree/2.4.1"
+                "source": "https://github.com/guzzle/psr7/tree/2.4.3"
             },
             "funding": [
                 {
@@ -3497,7 +3497,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-08-28T14:45:39+00:00"
+            "time": "2022-10-26T14:07:24+00:00"
         },
         {
             "name": "hollodotme/fast-cgi-client",
@@ -4251,16 +4251,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v9.36.4",
+            "version": "v9.37.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "15ce569fd93124e8e2257c24e3ed85b9ef9951d6"
+                "reference": "0c9675abf6d966e834b2ebeca3319f524e07a330"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/15ce569fd93124e8e2257c24e3ed85b9ef9951d6",
-                "reference": "15ce569fd93124e8e2257c24e3ed85b9ef9951d6",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/0c9675abf6d966e834b2ebeca3319f524e07a330",
+                "reference": "0c9675abf6d966e834b2ebeca3319f524e07a330",
                 "shasum": ""
             },
             "require": {
@@ -4433,25 +4433,26 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2022-10-20T16:11:03+00:00"
+            "time": "2022-10-25T15:43:46+00:00"
         },
         {
             "name": "laravel/nova",
-            "version": "4.16.1",
+            "version": "4.17.1",
             "source": {
                 "type": "git",
                 "url": "git@github.com:laravel/nova.git",
-                "reference": "b05c1158ba588ce4ddf9f1f7fc2b450c4c351d48"
+                "reference": "9c5d946dc8fbc4b23f357b9b998e9c434b267a5c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-b05c1158ba588ce4ddf9f1f7fc2b450c4c351d48-zip-a70d8d.zip",
-                "reference": "b05c1158ba588ce4ddf9f1f7fc2b450c4c351d48",
-                "shasum": "8ef51d8d4a62e26241727ec522b5cd18f715ff72"
+                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-9c5d946dc8fbc4b23f357b9b998e9c434b267a5c-zip-a6d619.zip",
+                "reference": "9c5d946dc8fbc4b23f357b9b998e9c434b267a5c",
+                "shasum": "ddd1ac0d284aa7b8843ea18831096240ae2e2f81"
             },
             "require": {
                 "brick/money": "^0.5.0|^0.6.0",
                 "doctrine/dbal": "^2.13.3|^3.1.2",
+                "ext-json": "*",
                 "illuminate/support": "^8.83.4|^9.3.1",
                 "inertiajs/inertia-laravel": "^0.4.5|^0.5.2|^0.6.0",
                 "laravel/ui": "^3.3|^4.0",
@@ -4541,9 +4542,9 @@
                 "laravel"
             ],
             "support": {
-                "source": "https://github.com/laravel/nova/tree/v4.16.1"
+                "source": "https://github.com/laravel/nova/tree/v4.17.1"
             },
-            "time": "2022-10-12T23:08:07+00:00"
+            "time": "2022-10-26T15:11:06+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -4800,17 +4801,85 @@
             "time": "2022-09-09T18:20:35+00:00"
         },
         {
-            "name": "laravel/vapor-core",
-            "version": "v2.24.1",
+            "name": "laravel/vapor-cli",
+            "version": "v1.45.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/laravel/vapor-core.git",
-                "reference": "2fdcfb976cff8a38b2df7a5c15851f3122b6d00b"
+                "url": "https://github.com/laravel/vapor-cli.git",
+                "reference": "ac6be7dde5d574795d9b4dec98ddb5c65b9d9e64"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/vapor-core/zipball/2fdcfb976cff8a38b2df7a5c15851f3122b6d00b",
-                "reference": "2fdcfb976cff8a38b2df7a5c15851f3122b6d00b",
+                "url": "https://api.github.com/repos/laravel/vapor-cli/zipball/ac6be7dde5d574795d9b4dec98ddb5c65b9d9e64",
+                "reference": "ac6be7dde5d574795d9b4dec98ddb5c65b9d9e64",
+                "shasum": ""
+            },
+            "require": {
+                "ext-zip": "*",
+                "guzzlehttp/guzzle": "^6.3|^7.0",
+                "illuminate/container": "^6.0|^7.0|^8.0|^9.0",
+                "illuminate/filesystem": "^6.0|^7.0|^8.0|^9.0",
+                "illuminate/support": "^6.0|^7.0|^8.0|^9.0",
+                "league/flysystem": "^1.0|^3.0",
+                "league/flysystem-aws-s3-v3": "^1.0|^3.0",
+                "php": "^7.2|^8.0",
+                "ramsey/uuid": "^3.8|^4.0",
+                "symfony/console": "^4.2|^5.0|^6.0",
+                "symfony/process": "^4.2|^5.0|^6.0",
+                "symfony/var-dumper": "^4.2|^5.0|^6.0",
+                "symfony/yaml": "^4.2|^5.0|^6.0",
+                "vlucas/phpdotenv": "^3.0|^4.0|^5.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.0|^9.0"
+            },
+            "bin": [
+                "vapor"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laravel\\VaporCli\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                }
+            ],
+            "description": "The Laravel Vapor CLI",
+            "homepage": "https://github.com/laravel/vapor-cli",
+            "keywords": [
+                "laravel",
+                "vapor"
+            ],
+            "support": {
+                "source": "https://github.com/laravel/vapor-cli/tree/v1.45.0"
+            },
+            "time": "2022-10-11T13:45:36+00:00"
+        },
+        {
+            "name": "laravel/vapor-core",
+            "version": "v2.25.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/vapor-core.git",
+                "reference": "45efd886ba196e4acb7a218e78e4eb8183358a48"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/vapor-core/zipball/45efd886ba196e4acb7a218e78e4eb8183358a48",
+                "reference": "45efd886ba196e4acb7a218e78e4eb8183358a48",
                 "shasum": ""
             },
             "require": {
@@ -4866,9 +4935,9 @@
                 "vapor"
             ],
             "support": {
-                "source": "https://github.com/laravel/vapor-core/tree/v2.24.1"
+                "source": "https://github.com/laravel/vapor-core/tree/v2.25.0"
             },
-            "time": "2022-10-21T18:04:09+00:00"
+            "time": "2022-10-25T15:47:34+00:00"
         },
         {
             "name": "laravel/vapor-ui",
@@ -5260,16 +5329,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "3.10.1",
+            "version": "3.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "9857d7208a94fc63c7bf09caf223280e59ac7274"
+                "reference": "b9bd194b016114d6ff6765c09d40c7d427e4e3f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/9857d7208a94fc63c7bf09caf223280e59ac7274",
-                "reference": "9857d7208a94fc63c7bf09caf223280e59ac7274",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/b9bd194b016114d6ff6765c09d40c7d427e4e3f6",
+                "reference": "b9bd194b016114d6ff6765c09d40c7d427e4e3f6",
                 "shasum": ""
             },
             "require": {
@@ -5331,7 +5400,7 @@
             ],
             "support": {
                 "issues": "https://github.com/thephpleague/flysystem/issues",
-                "source": "https://github.com/thephpleague/flysystem/tree/3.10.1"
+                "source": "https://github.com/thephpleague/flysystem/tree/3.10.2"
             },
             "funding": [
                 {
@@ -5347,7 +5416,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-10-21T18:57:47+00:00"
+            "time": "2022-10-25T07:01:47+00:00"
         },
         {
             "name": "league/flysystem-aws-s3-v3",
@@ -6326,56 +6395,6 @@
                 "source": "https://github.com/nikic/PHP-Parser/tree/v4.15.1"
             },
             "time": "2022-09-04T07:30:47+00:00"
-        },
-        {
-            "name": "nova-kit/nova-packages-tool",
-            "version": "v1.5.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nova-kit/nova-packages-tool.git",
-                "reference": "1077c1c7ff011b59396b80a1f5d92251d2aa44d7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nova-kit/nova-packages-tool/zipball/1077c1c7ff011b59396b80a1f5d92251d2aa44d7",
-                "reference": "1077c1c7ff011b59396b80a1f5d92251d2aa44d7",
-                "shasum": ""
-            },
-            "require": {
-                "laravel/nova": ">=4.16.0 <4.17.0",
-                "php": "^7.3 || ^8.0"
-            },
-            "require-dev": {
-                "orchestra/testbench": "^6.24 || ^7.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "NovaKit\\NovaPackagesTool\\LaravelServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "NovaKit\\NovaPackagesTool\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Mior Muhammad Zaki",
-                    "email": "crynobone@gmail.com"
-                }
-            ],
-            "description": "Tool for Laravel Nova Packages Development",
-            "support": {
-                "source": "https://github.com/nova-kit/nova-packages-tool/tree/v1.5.1"
-            },
-            "time": "2022-10-12T23:39:12+00:00"
         },
         {
             "name": "nunomaduro/termwind",
@@ -8009,12 +8028,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "d4fb5be5eddf4fd93640214eb415e65080526e4a"
+                "reference": "222e9b585ad6414284293cd2f0a50c1a86aa26ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/d4fb5be5eddf4fd93640214eb415e65080526e4a",
-                "reference": "d4fb5be5eddf4fd93640214eb415e65080526e4a",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/222e9b585ad6414284293cd2f0a50c1a86aa26ce",
+                "reference": "222e9b585ad6414284293cd2f0a50c1a86aa26ce",
                 "shasum": ""
             },
             "require": {
@@ -8046,7 +8065,7 @@
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
                 "source": "https://github.com/railroadmedia/musora-api/tree/v2.0-railcontent-v2-integration"
             },
-            "time": "2022-10-20T07:37:17+00:00"
+            "time": "2022-10-27T07:30:14+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -8308,16 +8327,16 @@
         },
         {
             "name": "railroad/railforums",
-            "version": "v2.0.12",
+            "version": "v2.0.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railforums.git",
-                "reference": "e986333f95ad3486b25aa84e2b17820e375f972c"
+                "reference": "2db6007083737259a46be9544e8a2cb1dcca378d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railforums/zipball/e986333f95ad3486b25aa84e2b17820e375f972c",
-                "reference": "e986333f95ad3486b25aa84e2b17820e375f972c",
+                "url": "https://api.github.com/repos/railroadmedia/railforums/zipball/2db6007083737259a46be9544e8a2cb1dcca378d",
+                "reference": "2db6007083737259a46be9544e8a2cb1dcca378d",
                 "shasum": ""
             },
             "require": {
@@ -8356,9 +8375,9 @@
             "description": "Laravel forum system using entities",
             "support": {
                 "issues": "https://github.com/railroadmedia/railforums/issues",
-                "source": "https://github.com/railroadmedia/railforums/tree/v2.0.12"
+                "source": "https://github.com/railroadmedia/railforums/tree/v2.0.13"
             },
-            "time": "2022-10-11T12:07:50+00:00"
+            "time": "2022-10-25T13:09:44+00:00"
         },
         {
             "name": "railroad/railnotifications",
@@ -9414,66 +9433,6 @@
             "time": "2022-09-09T19:47:11+00:00"
         },
         {
-            "name": "spatie/commonmark-shiki-highlighter",
-            "version": "2.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/spatie/commonmark-shiki-highlighter.git",
-                "reference": "63263717961350bbfe974b44312fcef9ceb182fa"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/spatie/commonmark-shiki-highlighter/zipball/63263717961350bbfe974b44312fcef9ceb182fa",
-                "reference": "63263717961350bbfe974b44312fcef9ceb182fa",
-                "shasum": ""
-            },
-            "require": {
-                "league/commonmark": "^2.0",
-                "php": "^8.0",
-                "spatie/shiki-php": "^1.1.1",
-                "symfony/process": "^5.3|^6.0"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.19",
-                "phpunit/phpunit": "^9.5",
-                "spatie/phpunit-snapshot-assertions": "^4.2.7",
-                "spatie/ray": "^1.28"
-            },
-            "type": "commonmark-extension",
-            "autoload": {
-                "psr-4": {
-                    "Spatie\\CommonMarkShikiHighlighter\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Freek Van der Herten",
-                    "email": "freek@spatie.be",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Highlight code blocks with league/commonmark and Shiki",
-            "homepage": "https://github.com/spatie/commonmark-shiki-highlighter",
-            "keywords": [
-                "commonmark-shiki-highlighter",
-                "spatie"
-            ],
-            "support": {
-                "source": "https://github.com/spatie/commonmark-shiki-highlighter/tree/2.1.0"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/spatie",
-                    "type": "github"
-                }
-            ],
-            "time": "2022-01-13T10:04:12+00:00"
-        },
-        {
             "name": "spatie/fractalistic",
             "version": "2.9.5",
             "source": {
@@ -9612,81 +9571,6 @@
                 }
             ],
             "time": "2022-04-04T07:53:13+00:00"
-        },
-        {
-            "name": "spatie/laravel-markdown",
-            "version": "2.2.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/spatie/laravel-markdown.git",
-                "reference": "fbc1932b9513f4ee3ec83ac00537d92c188fc3cb"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-markdown/zipball/fbc1932b9513f4ee3ec83ac00537d92c188fc3cb",
-                "reference": "fbc1932b9513f4ee3ec83ac00537d92c188fc3cb",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/cache": "^8.49|^9.0",
-                "illuminate/contracts": "^8.37|^9.0",
-                "illuminate/support": "^8.49|^9.0",
-                "illuminate/view": "^8.49|^9.0",
-                "league/commonmark": "^2.2",
-                "php": "^8.0",
-                "spatie/commonmark-shiki-highlighter": "^2.0",
-                "spatie/laravel-package-tools": "^1.4.3"
-            },
-            "require-dev": {
-                "brianium/paratest": "^6.2",
-                "nunomaduro/collision": "^5.3|^6.0",
-                "orchestra/testbench": "^6.15|^7.0",
-                "phpunit/phpunit": "^9.3",
-                "spatie/laravel-ray": "^1.23",
-                "spatie/phpunit-snapshot-assertions": "^4.2",
-                "vimeo/psalm": "^4.8"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Spatie\\LaravelMarkdown\\MarkdownServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Spatie\\LaravelMarkdown\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Freek Van der Herten",
-                    "email": "freek@spatie.be",
-                    "role": "Developer"
-                }
-            ],
-            "description": "A highly configurable markdown renderer and Blade component for Laravel",
-            "homepage": "https://github.com/spatie/laravel-markdown",
-            "keywords": [
-                "Laravel-Markdown",
-                "laravel",
-                "spatie"
-            ],
-            "support": {
-                "source": "https://github.com/spatie/laravel-markdown/tree/2.2.4"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/spatie",
-                    "type": "github"
-                }
-            ],
-            "time": "2022-05-21T11:53:53+00:00"
         },
         {
             "name": "spatie/laravel-package-tools",
@@ -9890,69 +9774,6 @@
                 }
             ],
             "time": "2022-04-21T12:23:20+00:00"
-        },
-        {
-            "name": "spatie/shiki-php",
-            "version": "1.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/spatie/shiki-php.git",
-                "reference": "34fe61405b405c735c82a9c56feffd3f7c5544ff"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/spatie/shiki-php/zipball/34fe61405b405c735c82a9c56feffd3f7c5544ff",
-                "reference": "34fe61405b405c735c82a9c56feffd3f7c5544ff",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.4|^8.0"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^v3.0",
-                "pestphp/pest": "^1.8",
-                "phpunit/phpunit": "^9.5",
-                "spatie/pest-plugin-snapshots": "^1.1",
-                "spatie/ray": "^1.10"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Spatie\\ShikiPhp\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Rias Van der Veken",
-                    "email": "rias@spatie.be",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Freek Van der Herten",
-                    "email": "freek@spatie.be",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Highlight code using Shiki in PHP",
-            "homepage": "https://github.com/spatie/shiki-php",
-            "keywords": [
-                "shiki",
-                "spatie"
-            ],
-            "support": {
-                "source": "https://github.com/spatie/shiki-php/tree/1.3.0"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/spatie",
-                    "type": "github"
-                }
-            ],
-            "time": "2022-06-01T11:28:41+00:00"
         },
         {
             "name": "stella-maris/clock",
@@ -13240,70 +13061,6 @@
             "time": "2022-09-12T13:28:28+00:00"
         },
         {
-            "name": "venturecraft/revisionable",
-            "version": "1.39.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/VentureCraft/revisionable.git",
-                "reference": "24ef304dfe7fe64362cc815faab0fc80030d0c59"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/VentureCraft/revisionable/zipball/24ef304dfe7fe64362cc815faab0fc80030d0c59",
-                "reference": "24ef304dfe7fe64362cc815faab0fc80030d0c59",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "~4.0|~5.0|~5.1|^6.0|^7.0|^8.0|^9.0",
-                "laravel/framework": "~5.4|^6.0|^7.0|^8.0|^9.0",
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "orchestra/testbench": "~3.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Venturecraft\\Revisionable\\RevisionableServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Venturecraft\\Revisionable": "src/"
-                },
-                "classmap": [
-                    "src/migrations"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Chris Duell",
-                    "email": "me@chrisduell.com"
-                }
-            ],
-            "description": "Keep a revision history for your models without thinking, created as a package for use with Laravel",
-            "homepage": "http://github.com/venturecraft/revisionable",
-            "keywords": [
-                "Audit",
-                "ardent",
-                "history",
-                "laravel",
-                "model",
-                "revision"
-            ],
-            "support": {
-                "issues": "https://github.com/VentureCraft/revisionable/issues",
-                "source": "https://github.com/VentureCraft/revisionable"
-            },
-            "time": "2022-01-20T05:56:12+00:00"
-        },
-        {
             "name": "vimeo/vimeo-api",
             "version": "1.3.0",
             "source": {
@@ -13568,75 +13325,6 @@
                 "source": "https://github.com/webmozarts/assert/tree/1.11.0"
             },
             "time": "2022-06-03T18:03:27+00:00"
-        },
-        {
-            "name": "whitecube/nova-flexible-content",
-            "version": "v1.0.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/whitecube/nova-flexible-content.git",
-                "reference": "e239965c16aef5250d7cd21a4a40b9db39e78466"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/whitecube/nova-flexible-content/zipball/e239965c16aef5250d7cd21a4a40b9db39e78466",
-                "reference": "e239965c16aef5250d7cd21a4a40b9db39e78466",
-                "shasum": ""
-            },
-            "require": {
-                "laravel/framework": "^8.0|^9.0",
-                "laravel/nova": "^4.0",
-                "nova-kit/nova-packages-tool": "^1.3.1",
-                "php": "^7.3|^8.0"
-            },
-            "require-dev": {
-                "laravel/pint": "^1.2",
-                "phpunit/phpunit": "^9.5"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Whitecube\\NovaFlexibleContent\\FieldServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Whitecube\\NovaFlexibleContent\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Toon Van den Bos",
-                    "email": "toon@whitecube.be"
-                }
-            ],
-            "description": "Flexible Content & Repeater Fields for Laravel Nova.",
-            "keywords": [
-                "Flexible",
-                "field",
-                "group",
-                "laravel",
-                "layout",
-                "nova",
-                "repeat"
-            ],
-            "support": {
-                "issues": "https://github.com/whitecube/nova-flexible-content/issues",
-                "source": "https://github.com/whitecube/nova-flexible-content/tree/v1.0.5"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/whitecube",
-                    "type": "github"
-                }
-            ],
-            "time": "2022-10-11T20:52:56+00:00"
         }
     ],
     "packages-dev": [
@@ -14701,16 +14389,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "9.2.17",
+            "version": "9.2.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "aa94dc41e8661fe90c7316849907cba3007b10d8"
+                "reference": "12fddc491826940cf9b7e88ad9664cf51f0f6d0a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/aa94dc41e8661fe90c7316849907cba3007b10d8",
-                "reference": "aa94dc41e8661fe90c7316849907cba3007b10d8",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/12fddc491826940cf9b7e88ad9664cf51f0f6d0a",
+                "reference": "12fddc491826940cf9b7e88ad9664cf51f0f6d0a",
                 "shasum": ""
             },
             "require": {
@@ -14766,7 +14454,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
-                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.17"
+                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.18"
             },
             "funding": [
                 {
@@ -14774,7 +14462,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-08-30T12:24:04+00:00"
+            "time": "2022-10-27T13:35:33+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -16291,16 +15979,16 @@
         },
         {
             "name": "spatie/laravel-ignition",
-            "version": "1.5.2",
+            "version": "1.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-ignition.git",
-                "reference": "f2336fc79d99aab5cf27fa4aebe5e9c9ecf3808a"
+                "reference": "2b79cf6ed40946b64ac6713d7d2da8a9d87f612b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-ignition/zipball/f2336fc79d99aab5cf27fa4aebe5e9c9ecf3808a",
-                "reference": "f2336fc79d99aab5cf27fa4aebe5e9c9ecf3808a",
+                "url": "https://api.github.com/repos/spatie/laravel-ignition/zipball/2b79cf6ed40946b64ac6713d7d2da8a9d87f612b",
+                "reference": "2b79cf6ed40946b64ac6713d7d2da8a9d87f612b",
                 "shasum": ""
             },
             "require": {
@@ -16377,7 +16065,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-10-14T12:24:21+00:00"
+            "time": "2022-10-26T17:39:54+00:00"
         },
         {
             "name": "theseer/tokenizer",
