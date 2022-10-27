@@ -229,7 +229,7 @@
             </div>
         </section>
 
-        @include('drumeo.products.partials._testimonial-pitch', [
+        @include('drumeo.lead-gen.partials._testimonial-pitch', [
             "descriptiveText" => "Rock Drumming Masterclass is a 26-week online course with Todd Sucherman."
         ])
 
@@ -368,7 +368,7 @@
             </div>
         </section>
 
-        @include('drumeo.products.partials._testimonial-pitch', [
+        @include('drumeo.lead-gen.partials._testimonial-pitch', [
         "descriptiveText" => "Rock Drumming Masterclass is a 26-week online course with Todd Sucherman."
         ])
 
@@ -476,7 +476,7 @@
             </div>
         </section>
 
-        @include('drumeo.products.partials._testimonial-pitch', [
+        @include('drumeo.lead-gen.partials._testimonial-pitch', [
         "descriptiveText" => "Rock Drumming Masterclass is a 26-week online course with Todd Sucherman."
         ])
 

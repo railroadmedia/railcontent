@@ -47,7 +47,7 @@
                 Choose a song below:
             </h6>
 
-            @include('drumeo.lead-gen.40-songs.anthems')
+            @include('drumeo.lead-gen.40-songs._songs')
 
         </div>
     </section>

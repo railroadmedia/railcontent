@@ -196,7 +196,7 @@
             </div>
         </section>
 
-        @include('drumeo.products.partials._testimonial-pitch', [
+        @include('drumeo.lead-gen.partials._testimonial-pitch', [
             "descriptiveText" => "Drum Technique Made Easy is a 26-week online course with Bruce Becker.",
             "detailsLink" => "/drumshop/drum-technique-made-easy",
         ])
@@ -295,7 +295,7 @@
             </div>
         </section>
 
-        @include('drumeo.products.partials._testimonial-pitch', [
+        @include('drumeo.lead-gen.partials._testimonial-pitch', [
             "descriptiveText" => "Drum Technique Made Easy is a 26-week online course with Bruce Becker.",
             "detailsLink" => "/drumshop/drum-technique-made-easy",
         ])
@@ -362,7 +362,7 @@
             </div>
         </section>
 
-        @include('drumeo.products.partials._testimonial-pitch', [
+        @include('drumeo.lead-gen.partials._testimonial-pitch', [
             "descriptiveText" => "Drum Technique Made Easy is a 26-week online course with Bruce Becker.",
             "detailsLink" => "/drumshop/drum-technique-made-easy",
         ])
