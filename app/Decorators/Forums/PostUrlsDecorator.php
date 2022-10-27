@@ -54,11 +54,28 @@ class PostUrlsDecorator
         $url
     ) {
         if (empty($segments)) {
+            switch ($url) {
+                case 'www.drumeo.com':
+                    $url = config('app.url').'/drumeo';
+                    break;
+                case 'www.pianote.com':
+                    $url = config('app.url').'/pianote';
+                    break;
+                case 'www.guitareo.com':
+                    $url = config('app.url').'/guitareo';
+                    break;
+                case 'www.singeo.com':
+                    $url = config('app.url').'/singeo';
+                    break;
+                default:
+                    $url = config('app.url').'/'.brand();
+            }
+
             return $url;
         }
 
         ContentRepository::$bypassPermissions = true;
-        $unifiedUrl = '/'.$segments[0].'/';
+
         if (isset($segments[0]) &&
             ($segments[0] == 'drumshop' ||
                 $segments[0] == 'lifetime' ||
@@ -69,7 +86,7 @@ class PostUrlsDecorator
         }
 
         if (!isset($segments[1]) || $segments[1] == null) {
-            return $unifiedUrl;
+            return config('app.url').'/'.$segments[0];
         }
         $lastSegment = last($segments);
         $numberOfSegments = count($segments);
@@ -239,6 +256,7 @@ class PostUrlsDecorator
 
         foreach ($matches as $match) {
             $url = $match;
+
             $initialRequest = \Request::create($url);
 
             if (!in_array($initialRequest->getHttpHost(), [
