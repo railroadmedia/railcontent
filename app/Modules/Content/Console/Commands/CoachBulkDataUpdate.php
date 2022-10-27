@@ -90,6 +90,9 @@ class CoachBulkDataUpdate extends Command
             }
         );
 
+        //Can be removed if this method is used again.
+        $this->fixSpecificData();
+
         $contentService->fillCompiledViewContentDataColumnForContentIds($contentIds);
 
         $this->info('Done.');
@@ -126,5 +129,18 @@ class CoachBulkDataUpdate extends Command
         }
 
         return $data[$name] ?? "";
+    }
+
+
+    private function fixSpecificData()
+    {
+        /** @var Instructor $instructor */
+        $instructor = Instructor::query()
+            ->where('type', '=', 'instructor')
+            ->where('id', '=', 233797)
+            ->first();
+
+        $instructor->setName('BABY BOY DRUMMER');
+        $instructor->save();
     }
 }
