@@ -65,38 +65,6 @@
         ])
     @endif
 
-    {{-- New Method Path? --}}
-    @if( !empty($classicalMethodPack) && $classicalMethodPack['published_on'] < \Carbon\Carbon::now() ) {{-- Check for Branch Path Content --}}
-        <div class="tw-text-white tw-flex tw-bg-[#232323] dark:tw-bg-[#000C17]">
-            <div class="container mv-3 tw-flex tw-items-center tw-flex-col lg:tw-flex-row">
-                <div class="lg:tw-mr-12 tw-flex-col tw-flex tw-items-center lg:tw-items-start">
-                    {{-- Label --}}
-                    <div class="tw-font-roboto-condensed tw-font-bold tw-leading-none tw-w-fit tw-mb-2 tw-text-sm tw-uppercase tw-text-white tw-bg-{{ $brand }} tw-p-1 tw-rounded"
-                        style="width: fit-content;"
-                    >
-                        New Method Path
-                    </div>
-                    {{-- Content --}}
-                    <h3 class="tw-mb-2 tw-font-bold tw-text-2xl">
-                        Classical Piano Method Available Now!
-                    </h3>
-                    <p class="tw-text-base tw-text-center lg:tw-text-left">
-                        If you would like to explore the world of Classical Piano, the Classical Method is an excellent introduction to a range of classical styles, techniques, and theories.
-                    </p>
-                </div>
-                <div class="tw-flex-shrink-0">
-                    {{-- Scroll to Section --}}
-                    <a href="#branch-paths" class="tw-uppercase tw-text-white tw-font-bold tw-text-sm tw-no-underline tw-font-roboto-condensed tw-block tw-mt-4">
-                        Start Learning Now
-                        <svg width="12" height="11" viewBox="0 0 12 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M10.0834 5.83764L6.00008 9.92097L1.91675 5.83764M10.0834 1.17098L6.00008 5.25431L1.91675 1.17097" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-        </div>
-    @endif
-
     {{-- Content Progress --}}
     <div class="tw-w-full fluid tw-bg-{{ $brand }}" >
         @include('partials.bladesora.members.content.content-progress', [
