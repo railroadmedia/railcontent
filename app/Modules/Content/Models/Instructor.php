@@ -5,6 +5,7 @@ namespace App\Modules\Content\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
 
 /**
  * @property Collection $fields
@@ -22,7 +23,8 @@ class Instructor extends Content
         'style' => 'string',
         'focus' => 'string',
         'endorsements' => 'string',
-        'forum_thread_id' => 'string'
+        'forum_thread_id' => 'string',
+        'bands' => 'string'
     ];
 
     public function __construct()
@@ -45,10 +47,27 @@ class Instructor extends Content
 
     private function setField(string $key, $value): void
     {
-        $field = $this->fields->where('key', '=', $key)->first() ??
-            $this->getNewContentField($key);
-        $field->value = $value;
-        $field->save();
+        /** @var ContentField $field */
+        $field = $this->fields->where('key', '=', $key)->first();
+        if (!$value) {
+            if ($field) {
+                Log::debug("Content Field ($this->id) $key $field->value deleted");
+                $field->delete();
+            }
+            return;
+        }
+        if (!$field) {
+            $field = $this->getNewContentField($key);
+            Log::debug("Content Field ($this->id) $key inserted $value");
+            $field->value = $value;
+            $field->save();
+            return;
+        }
+        if ($field->value != $value) {
+            Log::debug("Content Field ($this->id) $key updated from '$field->value' to '$value'");
+            $field->value = $value;
+            $field->save();
+        }
     }
 
     public function setFieldArray(string $key, array $values): void
@@ -56,9 +75,13 @@ class Instructor extends Content
         $fields = $this->fields->where('key', '=', $key)->collect();
         $position = 1;
         foreach ($values as $value) {
+            if (!$value) {
+                continue;
+            }
             $field = $fields->where('value', '=', $value)->first();
             if (!$field) {
                 $field = $this->getNewContentField($key);
+                Log::debug("Content Field ($this->id) $key inserted '$value'");
                 $field->value = $value;
             }
             $field->position = $position;
@@ -69,6 +92,7 @@ class Instructor extends Content
         /** @var ContentField $field */
         foreach ($fields as $field) {
             if (!in_array($field->value, $values)) {
+                Log::debug("Content Field ($this->id) $key $field->value deleted");
                 $field->delete();
             }
         }
@@ -85,14 +109,31 @@ class Instructor extends Content
 
     private function setData(string $key, $value)
     {
-        $field = $this->data->where('key', '=', $key)->first() ??
-            $this->getNewDataField($key);
-        $field->value = $value;
-        $field->save();
+        /** @var ContentData $data */
+        $data = $this->data->where('key', '=', $key)->first();
+        if (!$value) {
+            if ($data) {
+                Log::debug("Content Data ($this->id) $key $data->value deleted");
+                $data->delete();
+            }
+            return;
+        }
+        if (!$data) {
+            $data = $this->getNewContentData($key);
+            Log::debug("Content Data ($this->id) $key inserted $value");
+            $data->value = $value;
+            $data->save();
+            return;
+        }
+        if ($data->value != $value) {
+            Log::debug("Content Data ($this->id) $key updated from '$data->value' to '$value'");
+            $data->value = $value;
+            $data->save();
+        }
     }
 
 
-    public function getNewDataField(string $key): ContentData
+    public function getNewContentData(string $key): ContentData
     {
         $content = new ContentData();
         $content->content_id = $this->id;
@@ -105,30 +146,35 @@ class Instructor extends Content
     {
         $valueAsBool = filter_var($value, FILTER_VALIDATE_BOOLEAN);
         $this->setField('is_coach', $valueAsBool);
+        $this->is_coach = $valueAsBool ? 1 : 0;
     }
 
     public function setIsCoachOfTheMonth($value)
     {
         $valueAsBool = filter_var($value, FILTER_VALIDATE_BOOLEAN);
         $this->setField('is_coach_of_the_month', $valueAsBool);
+        $this->is_coach_of_the_month = $valueAsBool ? 1 : 0;
     }
 
     public function setIsHouseCoach($value)
     {
         $valueAsBool = filter_var($value, FILTER_VALIDATE_BOOLEAN);
         $this->setField('is_house_coach', $valueAsBool);
+        $this->is_house_coach = $valueAsBool ? 1 : 0;
     }
 
     public function setIsActive($value)
     {
         $valueAsBool = filter_var($value, FILTER_VALIDATE_BOOLEAN);
         $this->setField('is_active', $valueAsBool);
+        $this->is_active = $valueAsBool ? 1 : 0;
     }
 
     public function setIsFeatured($value)
     {
         $valueAsBool = filter_var($value, FILTER_VALIDATE_BOOLEAN);
         $this->setField('is_featured', $valueAsBool);
+        $this->is_featured = $valueAsBool ? 1 : 0;
     }
 
     public function setFocusTags($value)
@@ -145,7 +191,7 @@ class Instructor extends Content
 
     public function setCardShortDescription($value)
     {
-        $this->setData('short_description', $value);
+        $this->setData('focus_text', $value);
     }
 
     public function setShortBio($value)
@@ -160,7 +206,8 @@ class Instructor extends Content
 
     public function setBands($value)
     {
-        $this->setField('endorsements', $value);
+        $this->setField('bands', $value);
+        $this->bands = null;
     }
 
 
@@ -176,27 +223,47 @@ class Instructor extends Content
 
     public function setFacebook($value)
     {
-        $this->setData('short_description', $value);
+        $this->setData('link_facebook', $value);
     }
 
     public function setInstagram($value)
     {
-        $this->setData('short_description', $value);
+        $this->setData('link_instagram', $value);
     }
 
     public function setTwitter($value)
     {
-        $this->setData('short_description', $value);
+        $this->setData('link_twitter', $value);
     }
 
     public function setTiktok($value)
     {
-        $this->setData('short_description', $value);
+        $this->setData('link_tiktok', $value);
     }
 
     public function setYouTube($value)
     {
-        $this->setData('short_description', $value);
+        $this->setData('link_youtube', $value);
+    }
+
+    public function setCardImage($value)
+    {
+        $this->setData('coach_card_image', $value);
+    }
+
+    public function setBottomBannerImage($value)
+    {
+        $this->setData('coach_bottom_banner_image', $value);
+    }
+
+    public function setTopBannerImage($value)
+    {
+        $this->setData('coach_top_banner_image', $value);
+    }
+
+    public function setFeaturedImage($value)
+    {
+        $this->setData('coach_featured_image', $value);
     }
 
 }
