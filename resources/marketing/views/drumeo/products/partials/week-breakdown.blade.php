@@ -1,4 +1,4 @@
-<div class="question-dropdown text-left @if(!empty($defaultOpen)) active @endif @if(!empty($customClass)) {!! $customClass !!} @endif @if(empty($weekDescription)) no-drop @endif">
+<div class="question-dropdown text-left flex @if(!empty($defaultOpen)) active @endif @if(!empty($customClass)) {!! $customClass !!} @endif @if(empty($weekDescription)) no-drop @endif">
     <div class="w-full float-left drop-down-wrap">
         <div class="w-1/6 lg:w-1/12 text-center week-number">
             @if(!empty($chapter))<span class="hidden sm:inline"> CHAPTER</span> <strong class="number">{{ $chapter }}</strong> @endif

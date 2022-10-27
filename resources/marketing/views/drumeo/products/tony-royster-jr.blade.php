@@ -144,6 +144,9 @@
             float:left;
             width:15%;
             margin:20px 0 0;
+            color:#fff;
+            font-size:40px;
+            line-height:40px;
         }
 
         .trj-icon-grid-item .text {

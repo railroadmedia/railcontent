@@ -346,8 +346,8 @@ Route::domain('{drumeoDomain}')->group(function () {
         }
     );
 
-    Route::get('/courses/{slug}', function ($slug) {return view('drumeo.lead-gen.courses.' . $slug);});
-    Route::get('/shows/{slug}', function ($slug) {return view('drumeo.lead-gen.shows.' . $slug);});
+    Route::get('/courses/{slug}', function ($root, $slug) { return view('drumeo.lead-gen.courses.' . $slug); });
+    Route::get('/shows/{slug}', function ($root, $slug) { return view('drumeo.lead-gen.shows.' . $slug); });
 
     Route::get('/birthday-gifts/', function () { return view('drumeo.lead-gen.gift-guide.birthday-guide'); });
     Route::get('/christmas-gift-guide/', function () { return view('drumeo.lead-gen.gift-guide.christmas-guide'); });

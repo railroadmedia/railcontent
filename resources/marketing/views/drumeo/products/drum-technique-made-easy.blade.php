@@ -423,7 +423,7 @@
     <section class="bruce-bio">
         <div class="container clearfix lg:mx-auto max-w-6xl">
             <p class="px-3 md:px-4">
-                <span class="first-letter"><img src="https://dpwjbsxqtam5n.cloudfront.net/'drum-technique-made-easy/bold-b.png'"></span> ruce Becker’s story begins in 1977, where he began his drumming studies under the instruction of the legendary Freddie Gruber -- who has often been referred to as the “zen master” of teaching.
+                <span class="first-letter"><img src="https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/bold-b.png"></span> ruce Becker’s story begins in 1977, where he began his drumming studies under the instruction of the legendary Freddie Gruber -- who has often been referred to as the “zen master” of teaching.
                 <br><br> Freddie had a rare insight that was spurred on by his close 40 year friendship with Buddy Rich, and many of the best drummers in the world turned to him to perfect their individual techniques and styles -- including Neil Peart, Steve Smith, and Dave Weckl.
                 <br><br> Bruce not only benefited from Freddie’s instruction for eight years, but he also developed a close personal relationship.
                 <br><br> “I became as close as one could become with him. I became Freddie’s go-to guy, house sitter, and airport runner,” Bruce told Modern Drummer in 2013. “I am the only guy I know of that actually did five clinics with him. There are too many stories to tell.”
