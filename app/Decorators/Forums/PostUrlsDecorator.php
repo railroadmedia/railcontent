@@ -96,9 +96,11 @@ class PostUrlsDecorator
             'routines',
             'courses',
             'songs',
+            'coaches',
             'packs',
             'quick-tips',
             'podcasts',
+            'student-focus',
             'question-and-answer',
             'student-reviews',
             'boot-camps',
@@ -133,6 +135,9 @@ class PostUrlsDecorator
             'rudiments',
             'boot-camps',
             'support',
+            'live',
+            'schedule',
+            'shows'
         ])) {
             $url = str_replace(
                 [
