@@ -10,7 +10,7 @@
                         @php
                             $focusArray;
                             $lastFocus = array_pop($focusArray);
-                            $text = implode(', ', $focusArray) . (count($focusArray) !== 0 ? ' AND ' . $lastFocus : '')
+                            $text = implode(', ', $focusArray) . (count($focusArray) !== 0 ? ' AND ' : '') . $lastFocus
                         @endphp
                         {{ $text }}
                     </div>
