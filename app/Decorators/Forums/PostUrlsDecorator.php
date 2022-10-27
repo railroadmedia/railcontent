@@ -79,6 +79,7 @@ class PostUrlsDecorator
             'routines',
             'courses',
             'songs',
+            'packs',
             'quick-tips',
             'podcasts',
             'question-and-answer',
