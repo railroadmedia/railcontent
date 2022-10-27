@@ -24,7 +24,8 @@ class Instructor extends Content
         'focus' => 'string',
         'endorsements' => 'string',
         'forum_thread_id' => 'string',
-        'bands' => 'string'
+        'bands' => 'string',
+        'name' => 'string'
     ];
 
     public function __construct()
@@ -139,6 +140,12 @@ class Instructor extends Content
         $content->content_id = $this->id;
         $content->key = $key;
         return $content;
+    }
+
+    public function setName($value)
+    {
+        $this->setField('name', $value);
+        $this->name = $value;
     }
 
 
