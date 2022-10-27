@@ -248,7 +248,7 @@ class PostUrlsDecorator
             return $url;
         }
 
-        return $unifiedUrl;
+        return $url;
     }
 
     /**
