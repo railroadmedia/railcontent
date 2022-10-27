@@ -35,7 +35,7 @@ class CoachBulkDataUpdate extends Command
             function ($row) use ($headersRow, $contentService, &$contentIds) {
                 $data = $this->getData($row, $headersRow);
                 $contentId = $this->getValue($data, $headersRow, 'id');
-                $this->info("Updating Instructor $contentId");
+                //$this->info("Updating Instructor $contentId");
 
                 /** @var Instructor $instructor */
                 $instructor = Instructor::query()
@@ -67,7 +67,9 @@ class CoachBulkDataUpdate extends Command
                 );
                 $instructor->setShortBio($this->getValue($data, $headersRow, 'coach_short_bio'));
                 $instructor->setLongBio($this->getValue($data, $headersRow, 'coach_long_bio'));
-                $instructor->setForumThreadId($this->getValue($data, $headersRow, 'forum_thread_id'));
+
+                //ignore all forum thread changes
+                //$instructor->setForumThreadId($this->getValue($data, $headersRow, 'forum_thread_id'));
 
                 $instructor->setBands($this->getValue($data, $headersRow, 'coach_bands'));
                 $instructor->setEndorsements($this->getValue($data, $headersRow, 'coach_endorsements'));
@@ -76,12 +78,14 @@ class CoachBulkDataUpdate extends Command
                 $instructor->setTwitter($this->getValue($data, $headersRow, 'coach_twitter'));
                 $instructor->setTiktok($this->getValue($data, $headersRow, 'coach_tiktok'));
                 $instructor->setYouTube($this->getValue($data, $headersRow, 'coach_youtube'));
+
+                $instructor->save();
                 $contentIds[] = $contentId;
 
 
                 //delete cache associated with the content id
-                CacheHelper::deleteCache('content_'.$contentId);
-                CacheHelper::deleteUserFields(null, 'contents');
+                //CacheHelper::deleteCache('content_'.$contentId);
+                //CacheHelper::deleteUserFields(null, 'contents');
                 event(new ElasticDataShouldUpdate($contentId));
             }
         );
