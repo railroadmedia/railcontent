@@ -9,10 +9,9 @@
     <meta property="og:description" content="You can contact Singeo Support by phone at 604-855-7605 or use the links on this page. We’re always here to help.">
     <meta property="og:url" content="https://www.singeo.com/contact/">
 
-    <link href="/assets/css/tailwind-helpers.css" rel="stylesheet">
-    <link href="/assets/marketing/nav-footer.css" rel="stylesheet">
+    <link href="/marketing/css/singeo/tailwind-helpers.css" rel="stylesheet">
+    <link href="/marketing/parcel/singeo/nav-footer.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="/assets/marketing/nav-footer.css">
 
     <!-- Tailwind -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
