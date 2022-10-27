@@ -176,16 +176,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.240.1",
+            "version": "3.240.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "34c6bf82f337cadf31475c88ca70e8302afc624b"
+                "reference": "2080f747489b2d4ca291dcfb8078db60dbb6c255"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/34c6bf82f337cadf31475c88ca70e8302afc624b",
-                "reference": "34c6bf82f337cadf31475c88ca70e8302afc624b",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/2080f747489b2d4ca291dcfb8078db60dbb6c255",
+                "reference": "2080f747489b2d4ca291dcfb8078db60dbb6c255",
                 "shasum": ""
             },
             "require": {
@@ -264,9 +264,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.240.1"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.240.3"
             },
-            "time": "2022-10-24T19:03:23+00:00"
+            "time": "2022-10-26T18:17:08+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -2091,16 +2091,16 @@
         },
         {
             "name": "ezimuel/ringphp",
-            "version": "1.2.0",
+            "version": "1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ezimuel/ringphp.git",
-                "reference": "92b8161404ab1ad84059ebed41d9f757e897ce74"
+                "reference": "8d00384f9e5c04713ef8448adf47824265791b50"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ezimuel/ringphp/zipball/92b8161404ab1ad84059ebed41d9f757e897ce74",
-                "reference": "92b8161404ab1ad84059ebed41d9f757e897ce74",
+                "url": "https://api.github.com/repos/ezimuel/ringphp/zipball/8d00384f9e5c04713ef8448adf47824265791b50",
+                "reference": "8d00384f9e5c04713ef8448adf47824265791b50",
                 "shasum": ""
             },
             "require": {
@@ -2142,9 +2142,9 @@
             ],
             "description": "Fork of guzzle/RingPHP (abandoned) to be used with elasticsearch-php",
             "support": {
-                "source": "https://github.com/ezimuel/ringphp/tree/1.2.0"
+                "source": "https://github.com/ezimuel/ringphp/tree/1.2.1"
             },
-            "time": "2021-11-16T11:51:30+00:00"
+            "time": "2022-10-25T12:54:22+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -2882,16 +2882,16 @@
         },
         {
             "name": "google/auth",
-            "version": "v1.23.0",
+            "version": "v1.23.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-auth-library-php.git",
-                "reference": "8da16102d2cd1bdc128d97f323553df465ee7701"
+                "reference": "cb43cb8ccde76ace65ec40130a9e9c2a15ecfe17"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-auth-library-php/zipball/8da16102d2cd1bdc128d97f323553df465ee7701",
-                "reference": "8da16102d2cd1bdc128d97f323553df465ee7701",
+                "url": "https://api.github.com/repos/googleapis/google-auth-library-php/zipball/cb43cb8ccde76ace65ec40130a9e9c2a15ecfe17",
+                "reference": "cb43cb8ccde76ace65ec40130a9e9c2a15ecfe17",
                 "shasum": ""
             },
             "require": {
@@ -2934,9 +2934,9 @@
             "support": {
                 "docs": "https://googleapis.github.io/google-auth-library-php/main/",
                 "issues": "https://github.com/googleapis/google-auth-library-php/issues",
-                "source": "https://github.com/googleapis/google-auth-library-php/tree/v1.23.0"
+                "source": "https://github.com/googleapis/google-auth-library-php/tree/v1.23.1"
             },
-            "time": "2022-09-27T16:27:23+00:00"
+            "time": "2022-10-26T20:30:45+00:00"
         },
         {
             "name": "google/cloud-core",
@@ -3382,16 +3382,16 @@
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "2.4.1",
+            "version": "2.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "69568e4293f4fa993f3b0e51c9723e1e17c41379"
+                "reference": "67c26b443f348a51926030c83481b85718457d3d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/69568e4293f4fa993f3b0e51c9723e1e17c41379",
-                "reference": "69568e4293f4fa993f3b0e51c9723e1e17c41379",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/67c26b443f348a51926030c83481b85718457d3d",
+                "reference": "67c26b443f348a51926030c83481b85718457d3d",
                 "shasum": ""
             },
             "require": {
@@ -3481,7 +3481,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/psr7/issues",
-                "source": "https://github.com/guzzle/psr7/tree/2.4.1"
+                "source": "https://github.com/guzzle/psr7/tree/2.4.3"
             },
             "funding": [
                 {
@@ -3497,7 +3497,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-08-28T14:45:39+00:00"
+            "time": "2022-10-26T14:07:24+00:00"
         },
         {
             "name": "hollodotme/fast-cgi-client",
@@ -4251,16 +4251,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v9.36.4",
+            "version": "v9.37.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "15ce569fd93124e8e2257c24e3ed85b9ef9951d6"
+                "reference": "0c9675abf6d966e834b2ebeca3319f524e07a330"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/15ce569fd93124e8e2257c24e3ed85b9ef9951d6",
-                "reference": "15ce569fd93124e8e2257c24e3ed85b9ef9951d6",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/0c9675abf6d966e834b2ebeca3319f524e07a330",
+                "reference": "0c9675abf6d966e834b2ebeca3319f524e07a330",
                 "shasum": ""
             },
             "require": {
@@ -4433,25 +4433,26 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2022-10-20T16:11:03+00:00"
+            "time": "2022-10-25T15:43:46+00:00"
         },
         {
             "name": "laravel/nova",
-            "version": "4.16.1",
+            "version": "4.17.1",
             "source": {
                 "type": "git",
                 "url": "git@github.com:laravel/nova.git",
-                "reference": "b05c1158ba588ce4ddf9f1f7fc2b450c4c351d48"
+                "reference": "9c5d946dc8fbc4b23f357b9b998e9c434b267a5c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-b05c1158ba588ce4ddf9f1f7fc2b450c4c351d48-zip-a70d8d.zip",
-                "reference": "b05c1158ba588ce4ddf9f1f7fc2b450c4c351d48",
-                "shasum": "8ef51d8d4a62e26241727ec522b5cd18f715ff72"
+                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-9c5d946dc8fbc4b23f357b9b998e9c434b267a5c-zip-a6d619.zip",
+                "reference": "9c5d946dc8fbc4b23f357b9b998e9c434b267a5c",
+                "shasum": "ddd1ac0d284aa7b8843ea18831096240ae2e2f81"
             },
             "require": {
                 "brick/money": "^0.5.0|^0.6.0",
                 "doctrine/dbal": "^2.13.3|^3.1.2",
+                "ext-json": "*",
                 "illuminate/support": "^8.83.4|^9.3.1",
                 "inertiajs/inertia-laravel": "^0.4.5|^0.5.2|^0.6.0",
                 "laravel/ui": "^3.3|^4.0",
@@ -4541,9 +4542,9 @@
                 "laravel"
             ],
             "support": {
-                "source": "https://github.com/laravel/nova/tree/v4.16.1"
+                "source": "https://github.com/laravel/nova/tree/v4.17.1"
             },
-            "time": "2022-10-12T23:08:07+00:00"
+            "time": "2022-10-26T15:11:06+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -4869,16 +4870,16 @@
         },
         {
             "name": "laravel/vapor-core",
-            "version": "v2.24.1",
+            "version": "v2.25.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/vapor-core.git",
-                "reference": "2fdcfb976cff8a38b2df7a5c15851f3122b6d00b"
+                "reference": "45efd886ba196e4acb7a218e78e4eb8183358a48"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/vapor-core/zipball/2fdcfb976cff8a38b2df7a5c15851f3122b6d00b",
-                "reference": "2fdcfb976cff8a38b2df7a5c15851f3122b6d00b",
+                "url": "https://api.github.com/repos/laravel/vapor-core/zipball/45efd886ba196e4acb7a218e78e4eb8183358a48",
+                "reference": "45efd886ba196e4acb7a218e78e4eb8183358a48",
                 "shasum": ""
             },
             "require": {
@@ -4934,9 +4935,9 @@
                 "vapor"
             ],
             "support": {
-                "source": "https://github.com/laravel/vapor-core/tree/v2.24.1"
+                "source": "https://github.com/laravel/vapor-core/tree/v2.25.0"
             },
-            "time": "2022-10-21T18:04:09+00:00"
+            "time": "2022-10-25T15:47:34+00:00"
         },
         {
             "name": "laravel/vapor-ui",
@@ -8027,12 +8028,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "d4fb5be5eddf4fd93640214eb415e65080526e4a"
+                "reference": "222e9b585ad6414284293cd2f0a50c1a86aa26ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/d4fb5be5eddf4fd93640214eb415e65080526e4a",
-                "reference": "d4fb5be5eddf4fd93640214eb415e65080526e4a",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/222e9b585ad6414284293cd2f0a50c1a86aa26ce",
+                "reference": "222e9b585ad6414284293cd2f0a50c1a86aa26ce",
                 "shasum": ""
             },
             "require": {
@@ -8064,7 +8065,7 @@
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
                 "source": "https://github.com/railroadmedia/musora-api/tree/v2.0-railcontent-v2-integration"
             },
-            "time": "2022-10-20T07:37:17+00:00"
+            "time": "2022-10-27T07:30:14+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -8326,16 +8327,16 @@
         },
         {
             "name": "railroad/railforums",
-            "version": "v2.0.12",
+            "version": "v2.0.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railforums.git",
-                "reference": "e986333f95ad3486b25aa84e2b17820e375f972c"
+                "reference": "2db6007083737259a46be9544e8a2cb1dcca378d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railforums/zipball/e986333f95ad3486b25aa84e2b17820e375f972c",
-                "reference": "e986333f95ad3486b25aa84e2b17820e375f972c",
+                "url": "https://api.github.com/repos/railroadmedia/railforums/zipball/2db6007083737259a46be9544e8a2cb1dcca378d",
+                "reference": "2db6007083737259a46be9544e8a2cb1dcca378d",
                 "shasum": ""
             },
             "require": {
@@ -8374,9 +8375,9 @@
             "description": "Laravel forum system using entities",
             "support": {
                 "issues": "https://github.com/railroadmedia/railforums/issues",
-                "source": "https://github.com/railroadmedia/railforums/tree/v2.0.12"
+                "source": "https://github.com/railroadmedia/railforums/tree/v2.0.13"
             },
-            "time": "2022-10-11T12:07:50+00:00"
+            "time": "2022-10-25T13:09:44+00:00"
         },
         {
             "name": "railroad/railnotifications",
@@ -15978,16 +15979,16 @@
         },
         {
             "name": "spatie/laravel-ignition",
-            "version": "1.6.0",
+            "version": "1.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-ignition.git",
-                "reference": "c21309ebf6657e0c38083afac8af9baa12885676"
+                "reference": "2b79cf6ed40946b64ac6713d7d2da8a9d87f612b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-ignition/zipball/c21309ebf6657e0c38083afac8af9baa12885676",
-                "reference": "c21309ebf6657e0c38083afac8af9baa12885676",
+                "url": "https://api.github.com/repos/spatie/laravel-ignition/zipball/2b79cf6ed40946b64ac6713d7d2da8a9d87f612b",
+                "reference": "2b79cf6ed40946b64ac6713d7d2da8a9d87f612b",
                 "shasum": ""
             },
             "require": {
@@ -16064,7 +16065,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-10-25T08:38:04+00:00"
+            "time": "2022-10-26T17:39:54+00:00"
         },
         {
             "name": "theseer/tokenizer",
