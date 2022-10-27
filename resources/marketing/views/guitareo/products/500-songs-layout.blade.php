@@ -1,4 +1,4 @@
-@extends('guitareo._partial.global-vue-layout')
+@extends('guitareo._partials.global-vue-layout')
 
 @section('meta')
     <title>500 Songs In 5 Days | Guitareo</title>

@@ -1,4 +1,4 @@
-@extends('guitareo._partial.global-vue-layout')
+@extends('guitareo._partials.global-vue-layout')
 
 @section('meta')
     <title>Lifetime Membership To Guitareo | Guitareo</title>

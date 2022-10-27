@@ -1,4 +1,4 @@
-@extends('guitareo._partial.global-vue-layout')
+@extends('guitareo._partials.global-vue-layout')
 
 <?php \App\Analytics\Tracker::trackGTMEProductImpression(); ?>
 
@@ -24,7 +24,7 @@
             display:none;
         }
     </style>
-    <link href="{{ asset('assets/marketing/gtme-sales.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/guitareo/gtme-sales.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}">
 @stop()
 

@@ -1,4 +1,4 @@
-@extends('guitareo._partial.global-vue-layout')
+@extends('guitareo._partials.global-vue-layout')
 
 <?php \App\Analytics\Tracker::trackProductImpression('AGME-JAN-2019-SEMESTER'); ?>
 
