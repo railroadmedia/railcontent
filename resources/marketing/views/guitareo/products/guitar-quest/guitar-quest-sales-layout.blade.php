@@ -28,7 +28,7 @@
 @section('scripts')
     @parent
     <script src="{{ asset('marketing/parcel/guitareo/svg-polyfil.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <script src="{{ mix('marketing/js/app.js') }}"></script>
     <script src="{{ asset('marketing/parcel/guitareo/nav-footer.js') }}"></script>
     <script src="/marketing/js/jquery.countdown-2.min.js"></script>
     <script>
