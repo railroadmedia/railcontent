@@ -33,7 +33,7 @@
 
         @yield('layout-header')
 
-        <main class="flex-1" @yield('body-data')>
+        <main id="app" class="flex-1" @yield('body-data')>
             @yield('global-layout-body')
         </main>
 
@@ -48,7 +48,8 @@
              x-bind:class="{ 'fixed h-screen w-screen z-30 bg-black bg-opacity-20': showOverlay }"
         ></div>
 
-        <script src="{{ mix('marketing/js/app.js') }}"></script>
+        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+
          @yield('layout-scripts')
         {!! \App\Analytics\Tracker::bodyBottom() !!}
     </body>

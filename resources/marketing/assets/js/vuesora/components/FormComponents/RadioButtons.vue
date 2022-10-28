@@ -24,7 +24,7 @@
         <p class="input-message" id="">
            {{ errorMessage }}
         </p>
-        <p class="text-sm italic text-blue-50 dark:tw-text-[#9EC0DC]" v-show="showSelectMessage">{{ selectMessage }}</p>
+        <p class="text-sm italic text-blue-50 dark:text-[#9EC0DC]" v-show="showSelectMessage">{{ selectMessage }}</p>
     </fieldset>
 </template>
 

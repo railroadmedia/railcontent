@@ -2,6 +2,7 @@
 
 @section('styles')
     @parent
+    
     <title>{{ $product->name }}</title>
     <meta property="og:description" content="{{ $product->meta_desc  }}}">
     <meta property="og:url" content="https://www.guitareo.com/{{ Request::path() }}">

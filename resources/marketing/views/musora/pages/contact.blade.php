@@ -16,7 +16,6 @@
 @section('body-class', 'dark')
 
 @section('layout-body')
-
     <section class="py-24 md:py-40 text-white text-center relative">
         <img 
             src="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/header-about.jpg"
@@ -40,7 +39,7 @@
 
     <section class="bg-[#000c17]">
         <div class="max-w-3xl mx-auto px-4 lg:px-8" id="contactPageApp">
-            <contact-email-form 
+            <contact-email-form-marketing 
                 brand="drumeo"
                 captchakey="6LfwMZ4dAAAAALEGLsEUwAqrJLLnec_sSbl72Oqx"
                 email-subject="Support Request From Musora"
@@ -81,6 +80,13 @@
     @include('musora._partials._lets-chat', [
         'onContact' => true
     ])
+
+    @section('layout-scripts')
+        @parent
+        <script src="{{ mix('platform/js/manifest.js') }}"></script>
+        <script src="{{ mix('platform/js/vendor.js') }}"></script>
+        <script src="{{ mix('platform/js/app.js') }}"></script>
+    @endsection
 
 @stop
 
