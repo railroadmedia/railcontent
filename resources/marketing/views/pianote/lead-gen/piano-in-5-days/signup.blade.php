@@ -195,7 +195,7 @@
             'name' => 'Ed Kirk',
             'location' => 'Florida, USA',
             'next' => 'DebbieReed',
-            'prev' => 'CarmenAlymatiris',
+            'prev' => 'DhivyaSubramanian',
             ],
             [
             'image' => 'https://pianote.s3.amazonaws.com/sales/2022/testimonials/debbiereed.jpg',
