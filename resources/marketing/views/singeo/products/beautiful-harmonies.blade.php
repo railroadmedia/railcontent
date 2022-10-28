@@ -176,7 +176,7 @@
             @foreach($lessons as $key => $lesson)
                 <div
                     x-data = "{ open: false }"
-                    x-on:click="open = !open; console.log(open)"
+                    x-on:click="open = !open;"
                     class="dropdown text-center border border-singeo rounded-md overflow-hidden flex cursor-pointer mb-3 select-none"
                 >
                     <div class="bg-singeo py-5 px-2 sm:px-3 text-white">
@@ -252,7 +252,7 @@
         "code" => "738333190"
     ])
     @include("singeo.sales.partials._footer")
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="{{ mix('marketing/js/app.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
         $(function () {
