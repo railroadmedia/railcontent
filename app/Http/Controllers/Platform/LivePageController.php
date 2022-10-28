@@ -113,7 +113,6 @@ class LivePageController extends BaseController
         ];
 
         ContentRepository::$pullFutureContent = true;
-        ConfigService::$availableBrands = config('brands');
 
         $userRoleAdmin = user()->isAdmin();
         $chatChannelName = config('railchat.drumeo.chat_channel_name');
