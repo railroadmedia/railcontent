@@ -969,22 +969,23 @@
 
 
 
-        window.onscroll = function(){ makeStickybar()};
+        // window.onscroll = function(){ makeStickybar()};
 
-        var navbar = document.getElementsByClassName("promo-banner")[0];
-        var sticky = navbar.offsetTop;
-        var screenSize = window.innerWidth;
-        var offsetValue = screenSize >= 768 ? sticky-88 : sticky-30;
+        // var navbar = document.getElementsByClassName("promo-banner")[0];
+        // var sticky = navbar.offsetTop;
+        // var screenSize = window.innerWidth;
+        // var offsetValue = screenSize >= 768 ? sticky-88 : sticky-30;
+        //
+        // function makeStickybar(){
+        //
+        //     if(window.pageYOffset >= sticky-88){
+        //         navbar.classList.add('fixed');
+        //     }
+        //     else {
+        //         navbar.classList.remove('fixed');
+        //     }
+        // }
 
-        function makeStickybar(){
-
-            if(window.pageYOffset >= sticky-88){
-                navbar.classList.add('fixed');
-            }
-            else {
-                navbar.classList.remove('fixed');
-            }
-        }
     </script>
     <script type="text/javascript" src="/marketing/js/modal.js"></script>
     <script type="text/javascript" src="/marketing/js/modal-autoplay.js"></script>
