@@ -121,7 +121,7 @@
         }
     </style>
 
-    @include('guitareo._partials._favicons')
+    @include('_partials.layout.favicons.guitareo-favicons')
     @include('guitareo._partials._fonts')
 
     {!! \App\Analytics\Tracker::trackPageView() !!}

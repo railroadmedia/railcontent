@@ -15,7 +15,7 @@
         @include('guitareo._partials.includes.google-optimize')
         @include('guitareo._partials.inspectlet')
 
-        @include('guitareo._partials._favicons')
+        @include('_partials.layout.favicons.guitareo-favicons')
         @include('guitareo._partials._fonts')
 
         <!-- tailwind -->

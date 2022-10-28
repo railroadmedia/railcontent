@@ -8,7 +8,7 @@
     <meta property="og:image" content="https://d122ay5chh2hr5.cloudfront.net/sales/2022/og-image.jpg">
     <meta property="og:url" content="https://www.guitareo.com/shop/">
 
-    @include('guitareo._partials._favicons')
+    @include('_partials.layout.favicons.guitareo-favicons')
     @include('guitareo._partials._fonts')
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
