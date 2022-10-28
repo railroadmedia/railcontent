@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use App\Console\Commands\MigrateCoachesToInstructors;
+use App\Console\Commands\MigrateGuitareoUserXP;
 use App\Console\Commands\PopulateNewRolesAndPermissionsTables;
 use App\Console\Commands\PopulateUserBrandLevel;
 use App\Console\Commands\PopulateUserMinutesPracticedPerBrand;
@@ -35,6 +36,7 @@ class Kernel extends ConsoleKernel
         PopulateUserTotalXpPerBrand::class,
         PopulateUserMinutesPracticedPerBrand::class,
         VaporEnvManager::class,
+        MigrateGuitareoUserXP::class
     ];
 
     /**
