@@ -8,7 +8,7 @@ export const testCarousel = [
                 ctaText: "LEARN MORE",
                 description: "A unified learning platform that includes Drumeo, Pianote, Guitareo, and Singeo. You now have an all-access pass to all four platforms at no additional cost. Find out all the details by clicking below!.",
                 ctaUrl: "https://www.musora.com/unified-2022",
-                img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,fit=cover,metadata=none/https://musora-web-platform.s3.amazonaws.com/carousel/musora-launch-header.png",
+                img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,fit=cover,metadata=none/https://musora-web-platform.s3.amazonaws.com/carousel/musora-header-large+new.jpg",
             },
             {
                 topSubtitle: "",
@@ -37,7 +37,7 @@ export const testCarousel = [
                 ctaText: "LEARN MORE",
                 description: "A unified learning platform that includes Drumeo, Pianote, Guitareo, and Singeo. You now have an all-access pass to all four platforms at no additional cost. Find out all the details by clicking below!.",
                 ctaUrl: "https://www.musora.com/unified-2022",
-                img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,fit=cover,metadata=none/https://musora-web-platform.s3.amazonaws.com/carousel/musora-launch-header.png",
+                img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,fit=cover,metadata=none/https://musora-web-platform.s3.amazonaws.com/carousel/musora-header-large+new.jpg",
             },
             {
                 topSubtitle: "Coach of The Month",
@@ -66,7 +66,7 @@ export const testCarousel = [
                 ctaText: "LEARN MORE",
                 description: "A unified learning platform that includes Drumeo, Pianote, Guitareo, and Singeo. You now have an all-access pass to all four platforms at no additional cost. Find out all the details by clicking below!.",
                 ctaUrl: "https://www.musora.com/unified-2022",
-                img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,fit=cover,metadata=none/https://musora-web-platform.s3.amazonaws.com/carousel/musora-launch-header.png",
+                img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,fit=cover,metadata=none/https://musora-web-platform.s3.amazonaws.com/carousel/musora-header-large+new.jpg",
             },
             {
                 topSubtitle: "Coach of The Month",
@@ -87,7 +87,7 @@ export const testCarousel = [
                 ctaText: "LEARN MORE",
                 description: "A unified learning platform that includes Drumeo, Pianote, Guitareo, and Singeo. You now have an all-access pass to all four platforms at no additional cost. Find out all the details by clicking below!.",
                 ctaUrl: "https://www.musora.com/unified-2022",
-                img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,fit=cover,metadata=none/https://musora-web-platform.s3.amazonaws.com/carousel/musora-launch-header.png",
+                img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,fit=cover,metadata=none/https://musora-web-platform.s3.amazonaws.com/carousel/musora-header-large+new.jpg",
             },
             {
                 topSubtitle: "Coach Of The Month",
