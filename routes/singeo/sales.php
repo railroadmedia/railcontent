@@ -25,6 +25,7 @@ Route::domain('{singeoDomain}')->group(function () {
     });
 
     Route::get('/thank-you', function () { return view('singeo.lead-gen.thank-you'); });
+    Route::get('/subscribed', function () { return view('singeo.lead-gen.subscribed'); });
     Route::get('/lets-sing-a-song', function () { return view('singeo.lead-gen.lets-sing-a-song'); });
     Route::get('/welcome-party', function () { return view('singeo.lead-gen.welcome-party'); });
     Route::get('/shop/singing-starter-kit', function () { return view('singeo.products.singing-starter-kit'); });

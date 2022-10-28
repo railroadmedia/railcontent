@@ -8,6 +8,7 @@ Route::domain('{pianoteDomain}')->group(function () {
     Route::get('/thankyou',function () { return view('pianote.lead-gen.thank-you-alt'); } );
     Route::get('/email-confirmation ',function () { return view('pianote.lead-gen.email-confirmation'); } );
     Route::get('/confirming',function () { return view('pianote.lead-gen.confirming'); } );
+    Route::get('/subscribed',function () { return view('pianote.lead-gen.subscribed'); } );
     Route::get('/weekly-email',function () { return view('pianote.lead-gen.weekly-email'); } );
     Route::get('/weeklyemail',function () { return view('pianote.lead-gen.weekly-email-2'); } );
     Route::get('/recitals',function () { return view('pianote.lead-gen.recitals'); } );

@@ -367,6 +367,7 @@ Route::domain('{drumeoDomain}')->group(function () {
     Route::get('/thank-you/', function () { return view('drumeo.lead-gen.pages.thank-you-alt'); });
     Route::get('/30-day-drummer-unsubscribe/', function () { return view('drumeo.lead-gen.pages.30-day-drummer-unsubscribe'); });
     Route::get('/30-day-drummer-subscribe/', function () { return view('drumeo.lead-gen.pages.30-day-drummer-subscribe'); });
+    Route::get('/subscribed/', function () { return view('drumeo.lead-gen.pages.subscribed'); });
     Route::get('/confirming/', function () { return view('drumeo.lead-gen.pages.confirming'); });
     Route::get('/lets-stay-together/', function () { return view('drumeo.lead-gen.pages.lets-stay-together'); });
     Route::get('/welcome-party/', function () { return view('drumeo.lead-gen.pages.welcome-party'); });
