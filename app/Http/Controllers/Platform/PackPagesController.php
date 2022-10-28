@@ -268,7 +268,7 @@ class PackPagesController extends Controller
                 ];
         } else {
             ContentRepository::$availableContentStatues =
-                [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED];
+                [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED, ContentService::STATUS_SCHEDULED];
         }
 
         if (user()->isAMember()) {
