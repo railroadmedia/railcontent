@@ -59,7 +59,7 @@ $brandColors = $colors[$brand];
             <h3 class="tw-mb-6 tw-font-normal tw-text-base">
                 {{ $shortBio }}
             </h3>
-            @if($fullName === 'Students Of Guitareo')
+            @if(implode(' ',$fullName) !== 'Students Of Guitareo')
                 <div class="tw-flex tw-flex-col lg:tw-flex-row tw-items-center xl:tw-items-start tw-flex-wrap xl:tw-flex-nowrap">
                     {{ $actions }}
                 </div>

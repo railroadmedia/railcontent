@@ -17,7 +17,6 @@ const ASSET_URL =
  | file for the application as well as bundling up all the JS files.
  |
  */
-mix.setPublicPath('./public/');
 mix
     .js('resources/platform/assets/js/app.js', 'public/platform/js')
     //JS From Existing Platforms

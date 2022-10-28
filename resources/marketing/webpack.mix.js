@@ -14,7 +14,6 @@ const ASSET_URL =
  | file for the application as well as bundling up all the JS files.
  |
  */
-mix.setPublicPath('./public/');
 mix
     .js('resources/marketing/assets/js/app.js', 'public/marketing/js')
     .vue({ version: 3 })
@@ -22,7 +21,6 @@ mix
     .options({
         postCss: [tailwindcss('./resources/marketing/marketing.tailwind.config.js')],
     })
-    .extract()
     .sourceMaps()
     .version()
     .mergeManifest();
