@@ -1,4 +1,4 @@
-@extends('global-layout')
+@extends('pianote._partials.global-layout')
 
 @section('global-head')
     <title>You are the Explorer | Pianote</title>
@@ -15,14 +15,14 @@
     <link href="{{ asset('/marketing/css/pianote/tailwind-helpers.css') }}" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}">
-    <link href="/assets/marketing/lead-gen-learn-songs.css" rel="stylesheet">
+    <link href="/marketing/parcel/pianote/lead-gen-learn-songs.css" rel="stylesheet">
     <style>
 
     </style>
 @stop
 
 @section('global-body')
-    @include('sales.nav', [
+    @include('pianote.sales.nav', [
         "joinVersion" => true
     ])
 
@@ -35,7 +35,7 @@
                 personality type, please enter your email address. Don’t worry, we won’t <br class="hidden md:inline">
                 share your email with anyone, and you can unsubscribe at any time.
             </p>
-            @include('lead-gen._sign-up-form', [
+            @include('pianote.lead-gen._sign-up-form', [
                 "formName" => 'Personality Quiz Explorer',
                 "formId" => "Pianote - Engagement - Trigger - Personality Quiz Explorer - Web Form",
                 'buttonText' => 'Show my results',
@@ -46,11 +46,11 @@
         </div>
     </section>
 
-    @include('sales.footer')
+    @include('pianote.sales.footer')
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="/assets/marketing/nav-footer.js"></script>
-    <script src="{{ mix('marketing/js/app.js') }}"></script>
+    <script type="text/javascript" src="/marketing/parcel/pianote/nav-footer.js"></script>
+    <script src="{{ asset('marketing/js/app.js') }}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
 @endsection
