@@ -2,6 +2,10 @@
 
 namespace App\Modules\Content\Providers;
 
+use App\Modules\Content\Console\Commands\CoachBulkDataUpdate;
+use App\Modules\Content\Console\Commands\CoachBulkImageUpdate;
+use App\Modules\Content\Models\ContentField;
+use App\Modules\Content\Observers\ContentFieldObserver;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -16,8 +20,14 @@ class ContentServiceProvider extends ServiceProvider
     {
         parent::boot();
 
+        ContentField::observe(ContentFieldObserver::class);
 
-        $this->callAfterResolving(Schedule::class, function (Schedule $schedule){
+        $this->commands([
+            CoachBulkDataUpdate::class,
+            CoachBulkImageUpdate::class,
+        ]);
+
+        $this->callAfterResolving(Schedule::class, function (Schedule $schedule) {
             $schedule->command('CreateVimeoVideoContentRecords', [50])->everyThirtyMinutes();
         });
     }

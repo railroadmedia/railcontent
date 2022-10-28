@@ -301,6 +301,13 @@ app.component('AppContainer', AppContainer)
         )
     ))
 
+    .component('ContactEmailFormMarketing', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "contact-email-form-marketing" */
+            '../../../marketing/assets/js/vuesora/components/ContactEmailForm/ContactEmailForm.vue'
+        )
+    ))
+
     .component('ContactEmailForm', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "contact-email-form" */

@@ -14,6 +14,7 @@ use Railroad\Railchat\Services\RailchatService;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Repositories\ContentRepository;
+use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
 
 class LivePageController extends BaseController
@@ -62,9 +63,9 @@ class LivePageController extends BaseController
     public function chat(Request $request, $domain, $brand)
     {
         $userRoleAdmin = user()->isAdmin();
-        $chatChannelName = config('railchat.' . $brand . '.chat_channel_name');
-        $questionsChannelName = config('railchat.' . $brand . '.questions_channel_name');
-        $embedUrl = config('railchat.' . $brand . '.embed_url');
+        $chatChannelName = config('railchat.drumeo.chat_channel_name');
+        $questionsChannelName = config('railchat.drumeo.questions_channel_name');
+        $embedUrl = config('railchat.drumeo.embed_url');
 
         $userData = [
             'id' => user()->id,
@@ -90,7 +91,7 @@ class LivePageController extends BaseController
         return view(
             'live.embed',
             [
-                'apiKey' => config('railchat.' . $brand . '.get_stream_credentials')['key'],
+                'apiKey' => config('railchat.drumeo.get_stream_credentials')['key'],
                 'token' => $token,
                 'chatChannelName' => $chatChannelName,
                 'questionsChannelName' => $questionsChannelName,
@@ -114,9 +115,9 @@ class LivePageController extends BaseController
         ContentRepository::$pullFutureContent = true;
 
         $userRoleAdmin = user()->isAdmin();
-        $chatChannelName = config('railchat.' . $brand . '.chat_channel_name');
-        $questionsChannelName = config('railchat.' . $brand . '.questions_channel_name');
-        $embedUrl = config('railchat.' . $brand . '.embed_url');
+        $chatChannelName = config('railchat.drumeo.chat_channel_name');
+        $questionsChannelName = config('railchat.drumeo.questions_channel_name');
+        $embedUrl = config('railchat.drumeo.embed_url');
 
         $userData = [
             'id' => user()->id,
