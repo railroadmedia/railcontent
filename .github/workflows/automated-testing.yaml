@@ -3,8 +3,7 @@ name: Automated Testing
 on:
   push:
     branches: [ "fix-test-robwillems" ]
-  pull-request:
-    branches: [ "fix-test-robwillems" ]
+
 env:
   APP_NAME: "Musora Web Platform"
   APP_ENV: local
