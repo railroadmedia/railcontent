@@ -1,4 +1,4 @@
-@extends('global-layout')
+@extends('pianote._partials.global-layout')
 
 @section('global-head')
     @yield('meta')
@@ -6,9 +6,9 @@
     <meta property="fb:app_id" content="1772693566314871"/>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link href="{{ asset('/assets/css/tailwind-helpers.css') }}" rel="stylesheet">
-    <link href="{{ asset('/assets/marketing/nav-footer.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/marketing/lead-gen.css">
+    <link href="{{ asset('/marketing/css/pianote/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="/marketing/parcel/pianote/lead-gen.css">
 
     @yield('head')
 
@@ -271,7 +271,7 @@
             width: 442px;
             padding-right: 38px;
             background-repeat: no-repeat;
-            background-image: url("{{ cdn('redeem/error.png') }}");
+            background-image: url("https://d2vyvo0tyx8ig5.cloudfront.net/redeem/error.png");
             background-position: 454px 16px
         }
 
@@ -279,7 +279,7 @@
             width: 442px;
             padding-right: 38px;
             background-repeat: no-repeat;
-            background-image: url("{{ cdn('redeem/correct.png') }}");
+            background-image: url("https://d2vyvo0tyx8ig5.cloudfront.net/redeem/correct.png");
             background-position: 454px 16px
         }
 
@@ -287,7 +287,7 @@
             width: 442px;
             padding-right: 38px;
             background-repeat: no-repeat;
-            background-image: url("{{ cdn('redeem/loading.gif') }}");
+            background-image: url("https://d2vyvo0tyx8ig5.cloudfront.net/redeem/loading.gif");
             background-position: 460px 18px
         }
 
@@ -355,7 +355,7 @@
 
 @section('global-body')
 
-    @include('sales.nav')
+    @include('pianote.sales.nav')
 
     <div id="content">
         <h1 class="text-center mb-3">Claim A Membership Access Code</h1>
@@ -500,10 +500,9 @@
             your new password will be emailed to you shortly after claiming your card. </p>
     </div>
 
-    @include('sales.footer')
+    @include('pianote.sales.footer')
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="/assets/marketing/nav-footer.js"></script>
+    <script type="text/javascript" src="/marketing/parcel/pianote/nav-footer.js"></script>
 
-    @yield('scripts')
 @stop
