@@ -6,7 +6,7 @@
     <title>Here's a gift | Pianote</title>
     <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/og-image.jpg" style="display: none;">
     @include('pianote._partials._fonts')
-    @include('pianote._partials._favicons')
+    @include('_partials.layout.favicons.pianote-favicons')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
     <link href="{{ asset('/marketing/css/pianote/tailwind-helpers.css') }}" rel="stylesheet">
     <style>
