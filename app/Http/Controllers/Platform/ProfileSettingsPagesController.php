@@ -352,7 +352,7 @@ class ProfileSettingsPagesController extends BaseController
         // -------------------------------------------------------------------------------------------------------------
 
          $urlParamsByBrandForTrial = [
-            'drumeo' => 'products[DLM-Trial]=1,month,1&locked=true',
+            brand() => 'products[DLM-Trial]=1,month,1&locked=true',
             'pianote' => 'products[PIANOTE-MEMBERSHIP-TRIAL]=1&redirect=%2Forder&locked=true',
             'guitareo' => 'products[GUITAREO-7-DAY-TRIAL-ONE-TIME]=1&redirect=%2Forder&locked=true',
             'singeo' => 'products[singeo-monthly-recurring-7-day-trial-membership]=1&redirect=%2Forder&locked=true',
@@ -361,7 +361,7 @@ class ProfileSettingsPagesController extends BaseController
         if($urlParamsByBrandForTrial[$brand]){
             $urlParams = $urlParamsByBrandForTrial[$brand];
             $addToCartUrlTrial = 'https://' . $brand . '.com/ecommerce/add-to-cart?' . $urlParams;
-            if ($brand == 'drumeo') {
+            if ($brand == brand()) {
                 $addToCartUrlTrial = 'https://drumeo.com/laravel/public/shopping-cart/api/query?' . $urlParams;
             }
         } else {
@@ -369,17 +369,17 @@ class ProfileSettingsPagesController extends BaseController
         }
 
 //        $annualSKUsByBrand = [
-//            'drumeo' => 'DLM-1-year',
+//            brand() => 'DLM-1-year',
 //            'pianote' => 'PIANOTE-MEMBERSHIP-1-YEAR',
 //            'guitareo' => 'GUITAREO-1-YEAR-MEMBERSHIP',
 //            'singeo' => 'singeo-annual-recurring-membership',
 //        ];
 
-        $salesPage['drumeo'] = 'https://www.drumeo.com/';
+        $salesPage[brand()] = 'https://www.drumeo.com/';
         $salesPage['pianote'] = 'https://www.pianote.com/';
         $salesPage['guitareo'] = 'https://www.guitareo.com/';
         $salesPage['singeo'] = 'https://www.singeo.com/';
-        $salesPageUrl = $salesPage[$brand] ?? $salesPage['drumeo'];
+        $salesPageUrl = $salesPage[$brand] ?? $salesPage[brand()];
 
         // -------------------------------------------------------------------------------------------------------------
 
@@ -776,7 +776,7 @@ class ProfileSettingsPagesController extends BaseController
         $paymentMethods = $this->paymentMethodRepository->getAllUsersPaymentMethods(
             $user->id,
             $request,
-            'drumeo'
+            brand()
         );
 
         $paymentMethodsJson = ResponseService::paymentMethod(
@@ -849,7 +849,7 @@ class ProfileSettingsPagesController extends BaseController
             }
         }
 
-        $payments = $this->paymentRepository->getAllUsersPayments($user->id, false, 'drumeo');
+        $payments = $this->paymentRepository->getAllUsersPayments($user->id, false, brand());
 
         // sort by date
         usort(
