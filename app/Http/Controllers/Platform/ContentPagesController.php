@@ -205,17 +205,32 @@ class ContentPagesController extends BaseController
             $hasStartedLessons = false;
         }
 
-        return view('content.catalogue', [
-            "listLessons" => $listLessons->toResponseRawJson(),
-            "startedLessons" => $startedListLessons,
-            "hasStartedLessons" => $hasStartedLessons,
-            "lessonType" => $lessonType,
-            "sortOverride" => $sortOverride,
-            "isStudentFocus" => $isStudentFocus,
-            "hasRecentRoutines" => $hasRecentRoutines,
-            "routinesCount" => $routinesCount,
-            "catalogueMeta" => $catalogueMeta,
-        ]);
+
+        if ($contentTypeName == 'songs') {
+            return view('content.songs-catalogue', [
+                "listLessons" => $listLessons->toResponseRawJson(),
+                "startedLessons" => $startedListLessons,
+                "hasStartedLessons" => $hasStartedLessons,
+                "lessonType" => $lessonType,
+                "sortOverride" => $sortOverride,
+                "isStudentFocus" => $isStudentFocus,
+                "hasRecentRoutines" => $hasRecentRoutines,
+                "routinesCount" => $routinesCount,
+                "catalogueMeta" => $catalogueMeta,
+            ]);
+        } else {
+            return view('content.catalogue', [
+                "listLessons" => $listLessons->toResponseRawJson(),
+                "startedLessons" => $startedListLessons,
+                "hasStartedLessons" => $hasStartedLessons,
+                "lessonType" => $lessonType,
+                "sortOverride" => $sortOverride,
+                "isStudentFocus" => $isStudentFocus,
+                "hasRecentRoutines" => $hasRecentRoutines,
+                "routinesCount" => $routinesCount,
+                "catalogueMeta" => $catalogueMeta,
+            ]);
+        }
     }
 
     public function firstLevel(Request $request, $domain, $brand, $primaryPage, $firstSlug, $firstId)

@@ -75,9 +75,6 @@ const props = defineProps({
     }
 });
 
-onBeforeMount(() => {
-    console.log(props)
-});
 </script>
 
 <template>
