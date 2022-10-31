@@ -65,7 +65,7 @@ class MigrateGuitareoUserXP extends Command
                     [
                         'progress_state' => 'completed',
                     ],
-                    'content_completed',
+                    'guitareo_legacy_xp_migration',
                     $row->total_xp,
                     'Awarded per complete content.',
                     'guitareo'
