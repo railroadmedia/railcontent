@@ -1,8 +1,10 @@
-@php
-    if(!empty($sku) && !empty($products[$sku]) && !empty($physical) && $physical){
-        $soldOut = $products[$sku]->isProductSoldOut();
-    }
-@endphp
+{{--@php    --}}
+{{--    $soldOut = false;--}}
+
+{{--    if(!empty($sku) && !empty($productStock[$sku]) && ($category !== 'lessons' && $category !== 'bundles')){--}}
+{{--        $soldOut = $productStock[$sku]->isProductSoldOut();--}}
+{{--    }--}}
+{{--@endphp--}}
 
 <li class="scalable-card {{ !empty($cardType) ? $cardType : '' }} {{ !empty($soldOut) ? 'sold-out' : '' }}" data-price="{{ floatVal($price) }}" data-category="{{ $category }}">
     <div class="flip-card-inner">
