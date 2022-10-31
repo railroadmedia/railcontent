@@ -11,7 +11,7 @@
 
     <base target="_parent">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/tailwind-helpers.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/css/guitareo/tailwind-helpers.css') }}">
     <style>
         body {
             height:100vh;
@@ -121,7 +121,7 @@
         }
     </style>
 
-    @include('guitareo._partials._favicons')
+    @include('_partials.layout.favicons.guitareo-favicons')
     @include('guitareo._partials._fonts')
 
     {!! \App\Analytics\Tracker::trackPageView() !!}

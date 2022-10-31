@@ -15,7 +15,7 @@
         @include('guitareo._partials.includes.google-optimize')
         @include('guitareo._partials.inspectlet')
 
-        @include('guitareo._partials._favicons')
+        @include('_partials.layout.favicons.guitareo-favicons')
         @include('guitareo._partials._fonts')
 
         <!-- tailwind -->
@@ -47,7 +47,7 @@
 
         @yield('scripts')
 
-        @include('helpscout::helpscout-tracking-beacon-script', ['email' => !empty(current_user()) ? current_user()->getEmail() : null])
+        @include('helpscout::helpscout-tracking-beacon-script', ['email' => !is_null(user()) ? user()->getEmail() : null])
         <script type="text/javascript">
             Beacon('on', 'ready', () => {
                 document.querySelector('.BeaconFabButtonFrame').style.bottom ="50px";

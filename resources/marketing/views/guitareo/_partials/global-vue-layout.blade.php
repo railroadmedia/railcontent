@@ -15,7 +15,7 @@
     @include('guitareo._partials.includes.google-optimize')
     @include('guitareo._partials.inspectlet')
 
-    @include('guitareo._partials._favicons')
+    @include('_partials.layout.favicons.guitareo-favicons')
     @include('guitareo._partials._fonts')
 
     @yield('styles')
@@ -42,17 +42,17 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.2.5/polyfill.js"></script>
 
-    <script src="{{ asset('marketing/parce/guitareo/manifest.js') }}"></script>
-    <script src="{{ asset('marketing/parce/guitareo/vendor.js') }}"></script>
-    <script src="{{ asset('marketing/parce/guitareo/cart-sidebar.js') }}"></script>
-    <script src="{{ asset('marketing/parce/guitareo/app.js') }}"></script>
+    <script src="{{ asset('marketing/js/guitareo/manifest.js') }}"></script>
+    <script src="{{ asset('marketing/js/guitareo/vendor.js') }}"></script>
+    <script src="{{ asset('marketing/js/guitareo/cart-sidebar.js') }}"></script>
+    <script src="{{ asset('marketing/js/guitareo/app.js') }}"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 
     @yield('scripts')
 
-    @include('helpscout::helpscout-tracking-beacon-script', ['email' => !empty(current_user()) ? current_user()->getEmail() : null])
+    @include('helpscout::helpscout-tracking-beacon-script', ['email' => !is_null(user()) ? user()->getEmail() : null])
     <script type="text/javascript">
         Beacon('on', 'ready', () => {
             document.querySelector('.BeaconFabButtonFrame').style.bottom ="50px";

@@ -547,6 +547,6 @@
             $(document).foundation();
         });
     </script>
-    <script type="text/javascript" src="/marketing/js/pianote/modal.js"></script>
-    <script type="text/javascript" src="/marketing/js/pianote/modal-autoplay-alt.js"></script>
+    <script type="text/javascript" src="/marketing/js/modal.js"></script>
+    <script type="text/javascript" src="/marketing/js/modal-autoplay.js"></script>
 @endsection

@@ -1,4 +1,4 @@
-@extends('guitareo._partial.global-vue-layout')
+@extends('guitareo._partials.global-vue-layout')
 
 @section('meta')
     @parent
@@ -12,9 +12,9 @@
 
 @section('styles')
     @parent
-    <link href="{{ asset('/marketing/parcel/guitareo/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/guitareo/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation-float.min.css" rel="stylesheet">
-    <link href="{{ asset('marketing/parcel/guitareogs.css') }}" rel="stylesheet">
+    <link href="{{ asset('marketing/parcel/guitareo/gs.css') }}" rel="stylesheet">
     <link href="{{ asset('marketing/parcel/guitareo/nav-footer.css') }}" rel="stylesheet">
     <style>
         .text-yellow {
@@ -25,9 +25,9 @@
 
 @section('scripts')
     @parent
-    <script src="/marketing/parcel/guitareo/modal.js"></script>
+    <script src="/marketing/js/modal.js"></script>
     <script src="{{ asset('marketing/parcel/guitareo/nav-footer.js') }}"></script>
-    <script src="/marketing/parcel/guitareo/jquery.countdown-2.js"></script>
+    <script src="/marketing/js/jquery.countdown-2.min.js"></script>
     <script>
         $(document).ready(function () {
             // Countdown

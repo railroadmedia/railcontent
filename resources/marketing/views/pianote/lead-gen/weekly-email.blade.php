@@ -122,7 +122,7 @@
     </style>
 
     @include('pianote._partials._fonts')
-    @include('pianote._partials._favicons')
+    @include('_partials.layout.favicons.pianote-favicons')
 
     {!! \App\Analytics\Tracker::trackPageView() !!}
 

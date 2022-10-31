@@ -48,7 +48,7 @@
     <meta property="og:url" content="https://www.singeo.com/{{ Request::path() }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
     <link href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/singeo/tailwind-helpers.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/css/singeo/tailwind-helpers.css') }}">
     <link href="{{ asset('/marketing/parcel/singeo/sales-page.css') }}" rel="stylesheet">
 
     <style>
@@ -71,8 +71,8 @@
 
     {{--@include('shop.partials.promo-banner', [--}}
     {{--"name" => "Beautiful Harmonies",--}}
-    {{--"fullPrice" => App\Prices::$beautifulHarmoniesFull,--}}
-    {{--"price" => App\Prices::$beautifulHarmonies,--}}
+    {{--"fullPrice" => SingeoPrices::$beautifulHarmoniesFull,--}}
+    {{--"price" => SingeoPrices::$beautifulHarmonies,--}}
     {{--"noBreadcrumb" => true--}}
     {{--])--}}
     @yield('topbar')
@@ -92,7 +92,7 @@
                 </div>
                 <h3 class="font-extrabold leading-tight mb-2 md:mb-8 text-center md:text-left">Everything you need <br class="md:hidden">to start singing in <br class="md:hidden">perfect harmony now</h3>
                 <div class="md:w-72 lg:w-2/3 text-center">
-                    <a class="join smaller w-full tracking-tighter mb-2" href="/ecommerce/add-to-cart?products[the-essential-guide-to-beautiful-harmonies]=1&redirect=/order">get started for ${{ App\Prices::$beautifulHarmonies }}</a>
+                    <a class="join smaller w-full tracking-tighter mb-2" href="/ecommerce/add-to-cart?products[the-essential-guide-to-beautiful-harmonies]=1&redirect=/order">get started for ${{ SingeoPrices::$beautifulHarmonies }}</a>
                     <p>**90-DAY GUARANTEE**</p>
                 </div>
             </div>
@@ -126,7 +126,7 @@
                     So if you dream of singing beautiful harmonies and creating something extraordinary, then you need The Essential Guide To Beautiful Harmonies.
                 </p>
                 <div class="md:w-80 lg:w-2/3 mb-6 md:mb-0">
-                    <a class="join smaller w-full tracking-tighter mb-2" href="/ecommerce/add-to-cart?products[the-essential-guide-to-beautiful-harmonies]=1&redirect=/order">get started for ${{ App\Prices::$beautifulHarmonies }}</a>
+                    <a class="join smaller w-full tracking-tighter mb-2" href="/ecommerce/add-to-cart?products[the-essential-guide-to-beautiful-harmonies]=1&redirect=/order">get started for ${{ SingeoPrices::$beautifulHarmonies }}</a>
                 </div>
             </div>
             <div class="absolute md:relative left-0 right-0 md:w-2/5 flex justify-center md:block">
@@ -176,7 +176,7 @@
             @foreach($lessons as $key => $lesson)
                 <div
                     x-data = "{ open: false }"
-                    x-on:click="open = !open; console.log(open)"
+                    x-on:click="open = !open;"
                     class="dropdown text-center border border-singeo rounded-md overflow-hidden flex cursor-pointer mb-3 select-none"
                 >
                     <div class="bg-singeo py-5 px-2 sm:px-3 text-white">
@@ -243,7 +243,7 @@
         <h3 class="font-extrabold leading-snug md:leading-normal mb-4">
             Everything you need to <br class="md:hidden">start singing <br class="hidden md:inline">in perfect <br class="md:hidden">harmony now
         </h3>
-        <a class="join smaller w-60 md:w-96 mb-2" href="/ecommerce/add-to-cart?products[the-essential-guide-to-beautiful-harmonies]=1&redirect=/order">Get started for ${{ App\Prices::$beautifulHarmonies }}</a>
+        <a class="join smaller w-60 md:w-96 mb-2" href="/ecommerce/add-to-cart?products[the-essential-guide-to-beautiful-harmonies]=1&redirect=/order">Get started for ${{ SingeoPrices::$beautifulHarmonies }}</a>
         <p style="color:#747474;">**90-DAY GUARANTEE**</p>
     </section>
 
@@ -252,7 +252,7 @@
         "code" => "738333190"
     ])
     @include("singeo.sales.partials._footer")
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="{{ asset('marketing/js/app.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
         $(function () {
@@ -262,6 +262,6 @@
     <script type="text/javascript" src="/marketing/parcel/singeo/nav-footer.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
-    <script type="text/javascript" src="/marketing/parcel/singeo/modal.js"></script>
-    <script type="text/javascript" src="/marketing/parcel/singeo/modal-autoplay.js"></script>
+    <script type="text/javascript" src="/marketing/js/modal.js"></script>
+    <script type="text/javascript" src="/marketing/js/modal-autoplay.js"></script>
 @endsection

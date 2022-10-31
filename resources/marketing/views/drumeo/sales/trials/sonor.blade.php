@@ -27,7 +27,8 @@
     @include("drumeo.sales.partials._nav", [
         "edgeVersion" => true
     ])
-    @if(!empty($errors->all()))
+
+    @if(!empty($errors))
         <div style="padding: 20px;color: #fff;background:#eb4747;text-align: center;text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);">
             <div class="container mx-auto">
                 <p><strong>
@@ -299,6 +300,6 @@
             }
         });
     </script>
-    <script type="text/javascript" src="{{ asset('/marketing/js/drumeo/modal.js') }}"></script>
-    <script src="{{ asset('/marketing/parcel/drumeo/modal-autoplay.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
+    <script src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
 @stop

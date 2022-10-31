@@ -25,16 +25,16 @@ Route::domain('{singeoDomain}')->group(function () {
     });
 
     Route::get('/thank-you', function () { return view('singeo.lead-gen.thank-you'); });
+    Route::get('/subscribed', function () { return view('singeo.lead-gen.subscribed'); });
     Route::get('/lets-sing-a-song', function () { return view('singeo.lead-gen.lets-sing-a-song'); });
     Route::get('/welcome-party', function () { return view('singeo.lead-gen.welcome-party'); });
-    Route::get('/singing-starter-kit', function () { return view('singeo.products.singing-starter-kit'); });
+    Route::get('/shop/singing-starter-kit', function () { return view('singeo.products.singing-starter-kit'); });
     Route::get('/singingstarterkit', function () { return view('singeo.products.singing-starter-kit-alt'); });
     Route::get('/singing-starter-kit-discount', function () { return view('singeo.products.singing-starter-kit-discount'); });
     Route::get('/singing-starter-kit-shyv-discount', function () { return view('singeo.products.singing-starter-kit-shyv-discount'); });
     Route::get('/recitals', function () { return view('singeo.lead-gen.recitals'); });
     Route::get('/giveaway', function () { return view('singeo.lead-gen.giveaway'); });
 
-    Route::get('/lifetime', ['uses' => 'SalesController@lifetime', 'as' => 'sales.lifetime']);
 
     // redirect pages
     Route::get('/beginner-bundle', function(){ return redirect('/shop/beginner-bundle'); });

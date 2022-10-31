@@ -434,7 +434,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
     <script type="text/javascript" src="/marketing/parcel/pianote/nav-footer.js"></script>
-    <script type="text/javascript" src="/marketing/js/pianote/modal-autoplay.js"></script>
+    <script type="text/javascript" src="/marketing/js/modal-autoplay-bootstrap.js"></script>
     <script>
         $(document).ready(function () {
             $('.lazy').Lazy({
@@ -452,5 +452,5 @@
     </script>
 
     @include('pianote._partials._promo-countdown')
-    {!! inspectlet_embed_script() !!}
+    @include('pianote._partials.inspectlet')
 @stop

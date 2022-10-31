@@ -16,8 +16,8 @@
 @stop
 
 @section('global-body')
-    @include('pianote.sales.nav', [
-        "cartVersion" => true
+    @include('pianote.sales.nav',[
+         "cartVersion" => true
     ])
 
     {{--check blog sidebar--}}
@@ -207,7 +207,7 @@
                 <img class="album-banner" src="@yield('albums-url')">
             @endif
             <div class="song-list">
-                @include('products._songs')
+                @include('pianote.products._songs')
             </div>
             <div class="text-center">
                 <a id="uncoverAll" class="join outline white">Show All</a>
@@ -435,7 +435,7 @@
         });
     </script>
     <script type="text/javascript" src="/marketing/parcel/pianote/nav-footer.js"></script>
-    <script type="text/javascript" src="/marketing/js/pianote/modal-autoplay.js"></script>
+    <script type="text/javascript" src="/marketing/js/modal-autoplay-bootstrap.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/1.9.3/countUp.min.js"></script>
     <script>
         $(function() {
@@ -477,13 +477,13 @@
             $(window).trigger('scroll');
         });
     </script>
-    <script src="{{ mix('marketing/js/pianote/manifest.js') }}"></script>
-    <script src="{{ mix('marketing/js/pianote/vendor.js') }}"></script>
-    <script src="{{ mix('marketing/js/pianote/cart-sidebar.js') }}"></script>
-    <script src="{{ mix('marketing/js/pianote/app.js') }}"></script>
+    <script src="{{ asset('marketing/js/pianote/manifest.js') }}"></script>
+    <script src="{{ asset('marketing/js/pianote/vendor.js') }}"></script>
+    <script src="{{ asset('marketing/js/pianote/cart-sidebar.js') }}"></script>
+    <script src="{{ asset('marketing/js/pianote/app.js') }}"></script>
 
     @include('pianote._partials._promo-countdown')
     @yield('scripts')
 
-    {!! inspectlet_embed_script() !!}
+    @include('pianote._partials.inspectlet')
 @stop

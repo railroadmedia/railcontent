@@ -246,7 +246,7 @@
             return Math.round(totalCompleted / totalToComplete * 100);
         }
     </script>
-    <script src="/marketing/parcel/guitareo/modal-autoplay.js"></script>
+    <script src="/marketing/js/modal-autoplay.js"></script>
 @stop
 
 @section('body')

@@ -146,7 +146,7 @@
                             @if(!empty($buttonText)) {!!  $buttonText  !!} @else View Product
                             <i class="fas fa-arrow-right"></i> @endif</a>
                     @endif
-                    <p class="mt-2 text-xs"><em>@if(!empty($physical)) Worldwide shipping. @endif All prices in USD.
+                    <p class="mt-2 text-xs"><em>@if($category !== 'lessons') Worldwide shipping. @endif All prices in USD.
                             <br> <span
                                 style="color:red;"> @if(!empty($specialText)) {!!  $specialText  !!} @endif </span></em>
                     </p>

@@ -68,7 +68,7 @@
                   we’d let you get in on the fun. Scroll down to find your favorites.
             </h6>
 
-            @include('drumeo.lead-gen.40-songs.anthems',[
+            @include('drumeo.lead-gen.40-songs._songs',[
                 "dataOpen" => "signUpModal",
             ])
         </div>
@@ -171,7 +171,7 @@
 
     @include("drumeo.sales.partials._footer")
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/js/drumeo/modal.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script>
         $(document).ready(function () {
             $(document).foundation();
@@ -208,8 +208,8 @@
         });
     </script>
     <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-    <script src="{{ asset('/marketing/assets/js/pre-form-submit-facebook-lead.js') }}"></script>
-    <script src="{{ asset('/marketing/parcel/drumeo/compiled/infusionsoft-tracking.js') }}"></script>
+    <script src="{{ asset('/marketing/js/drumeo/pre-form-submit-facebook-lead.js') }}"></script>
+    <script src="{{ asset('/marketing/js/drumeo/infusionsoft-tracking.js') }}"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
 @stop

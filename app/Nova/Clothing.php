@@ -35,21 +35,21 @@ class Clothing extends Resource
     public static function indexQuery(NovaRequest $request, $query)
     {
         return $query->join('product_types', 'products.product_type_id', '=', 'product_types.id')
-            ->whereIn('product_types.name', ['Hat', 'Shirt', 'Hoodie'])->select('products.*');
+            ->whereIn('product_types.name', ['Hats', 'Shirts', 'Hoodies'])->select('products.*');
     }
 
     public function fields(NovaRequest $request)
     {
-        $types = ProductType::whereIn('name', ['Hat', 'Shirt', 'Hoodie'])->get();
+        $types = ProductType::whereIn('name', ['Hats', 'Shirts', 'Hoodies'])->get();
         $uuid  = Str::uuid();
 
         return [
             ID::make()->sortable(),
             BelongsTo::make('Brand', 'brand', 'App\Nova\Brand')->sortable(),
             Select::make('Product Type', 'product_type_id')->options([
-                $types->where('name', 'Hat')->first()->id => 'Hat',
-                $types->where('name', 'Shirt')->first()->id => 'Shirt',
-                $types->where('name', 'Hoodie')->first()->id => 'Hoodie'
+                $types->where('name', 'Hats')->first()->id => 'Hats',
+                $types->where('name', 'Shirts')->first()->id => 'Shirts',
+                $types->where('name', 'Hoodies')->first()->id => 'Hoodies'
             ])->displayUsingLabels()->sortable(),
             Hidden::make('Uuid')->withMeta(["value" => $uuid]),
             Text::make('Name')->required()->sortable(),
@@ -163,6 +163,36 @@ class Clothing extends Resource
             Flexible::make('Specs')
                 ->addLayout(SpectLayout::class)
                 ->preset(SpecPreset::class),
+            Image::make('Bundle Image', 'bundle_img')
+                ->disk('nova_s3')
+                ->prunable()
+                ->hideFromIndex()
+                ->disableDownload()
+                ->nullable()
+                ->storeAs(function (Request $request){
+                    $brandId = $request->brand;
+                    $brand = '';
+
+                    if($brandId === "1") {
+                        $brand = 'Drumeo';
+                    }
+                    elseif($brandId === "2"){
+                        $brand = 'Pianote';
+                    }
+                    elseif($brandId === "3"){
+                        $brand = 'Guitareo';
+                    }
+                    elseif($brandId === "4"){
+                        $brand = 'Singeo';
+                    }
+
+                    return '/'.$brand.'/bundle-image'.$request->uuid.'-'.$request->file('bundle_img')->getClientOriginalName();
+                })
+                ->preview(function($value){
+                    if(empty($value)) return null;
+
+                    return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
+                }),
             Text::make('Bundle Description', 'bundle_desc')->hideFromIndex(),
         ];
     }

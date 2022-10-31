@@ -121,8 +121,8 @@ class Prices
     public static $sticksRegular = 9.95;
 
     // Tone Control Kit
-    public static $toneControlKitFull = 72;
-    public static $toneControlKitRegular = 72;
+    public static $toneControlKitFull = 79;
+    public static $toneControlKitRegular = 79;
 
     // Comfort Cover
     public static $comfortCoverFull = 149;

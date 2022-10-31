@@ -1,8 +1,6 @@
 @extends('singeo._partials.global-layout')
 
-@section('head-includes')
-    @parent
-
+@section('global-head')
     <title>Singeo Shop</title>
     <meta property="og:title" content="Singeo Shop - Get Lessons, T-Shirts, & More!">
     <meta name="description" content="Singeo.com: Your start-to-finish guide to confident singing">
@@ -10,13 +8,24 @@
     <meta property="og:image" content="https://singeo.s3.amazonaws.com/sales/2022/og-image.jpg"/>
     <meta property="og:url" content="https://www.singeo.com/shop/">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/singeo/tailwind-helpers.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('/marketing/css/singeo/tailwind-helpers.css') }}">
     <link href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}" rel="stylesheet">
 
-    <link href="{{ asset('/assets/marketing/shop.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/singeo/shop.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
+@stop
+
+@section('global-body')
+    @include("singeo.sales.partials._nav", [
+        "cartVersion" => true,
+    ])
 
     <style>
+        img {
+            display: inline-block;
+        }
+
         .shipping-delay .delay-bar {
             background:#e3e3e3;
             padding:10px;
@@ -125,14 +134,17 @@
                 height:calc(100% - 56px);
             }
         }
+
+        .top-banner {
+            background-image: url('https://singeo.s3.amazonaws.com/sales/promos/october/harmony_bundle_shop_banner_m.png');
+        }
+
+        @media (min-width: 768px){
+            .top-banner {
+                background-image: url('https://singeo.s3.amazonaws.com/sales/promos/october/harmony_bundle_shop_banner.jpg');
+            }
+        }
     </style>
-@stop
-
-@section('layout-body')
-    @include("singeo.sales.partials._nav", [
-        "cartVersion" => true,
-    ])
-
     <div class="shipping-delay">
         <div class="delay-bar text-center">
             <div class="container mx-auto">
@@ -175,6 +187,7 @@
             </div>
         </div>
     </header>
+
 
 {{--    @if(Session::has('addedProducts'))--}}
 {{--        <section class="py-6 md:py-10">--}}
@@ -234,148 +247,86 @@
     <div class="white-box">
         {{--<section class="bundles">--}}
             {{--<div class="container mx-auto">--}}
-                {{--<div class="float-left w-full px-2 md:px-3 md:w-1/2 card-wrap">--}}
-                    {{--<a href="/beginner-bundle" class="bundle-card">--}}
-                        {{--<span class="top-left-badge"><i class="fas fa-star"></i> FREE GIFT WORTH $19</span>--}}
-                        {{--<div class="thumb block lg:hidden" style="background-image:url(https://singeo.s3.amazonaws.com/sales/promos/november/bundles/beginner-card.jpg);"></div>--}}
-                        {{--<div class="thumb hidden lg:block" style="background-image:url(https://singeo.s3.amazonaws.com/sales/promos/november/bundles/beginner-card-wide.jpg);"></div>--}}
+                {{--<div class="float-left w-full px-2 md:px-3 md:w-1/3 card-wrap">--}}
+                    {{--<a href="/shop/beginner-bundle" class="bundle-card">--}}
+                        {{--<span class="top-left-badge"><i class="fas fa-star"></i> SAVE 20%</span>--}}
+                        {{--<div class="thumb" style="background-image:url(https://cdn.musora.com/image/fetch/w_670,q_auto:best/https://singeo.s3.amazonaws.com/sales/promos/august/beginner_bundle.jpg);"></div>--}}
                         {{--<div class="float-left w-full px-2 md:px-3">--}}
-                            {{--<p><strong>6 Months of Singing Lessons</strong><br>--}}
-                                {{--<em>6-Month Singeo Membership (Normally $90) <br class="inline md:hidden lg:inline">--}}
-                                    {{--+ Singing Starter Kit</em>--}}
-                                {{--<span class="price"><s class="opacity-30">$109</s> <strong style="color:#ffa360;">${{ SingeoPrices::$singeoMembership6Month }}</strong></span>--}}
+                            {{--<p><strong>1 Year of Singing Lessons</strong><br>--}}
+                                {{--<em>Get everything you need to start improving<br class="hidden lg:inline"> your voice and maximize results NOW<br class="hidden lg:inline">--}}
+                                    {{--Annual membership + Singing Starter Kit<br class="hidden lg:inline"> + Vowel Practice Poster</em>--}}
+                                {{--<span class="price"><s class="opacity-30">$158</s> <strong style="color:#00c0b1;">$127</strong></span>--}}
                             {{--</p>--}}
-                            {{--<span class="join" style="background-color:#ffa360;">See The Deal &raquo;</span>--}}
+                            {{--<span class="join" style="background-color:#00c0b1;">See The Deal &raquo;</span>--}}
                         {{--</div>--}}
                     {{--</a>--}}
                 {{--</div>--}}
-                {{--<div class="float-left w-full px-2 md:px-3 md:w-1/2 card-wrap">--}}
-                    {{--<a href="/love-to-sing-bundle" class="bundle-card">--}}
-                        {{--<span class="top-left-badge"><i class="fas fa-star"></i> 4 FREE GIFTS WORTH $72</span>--}}
-                        {{--<div class="thumb block lg:hidden" style="background-image:url(https://singeo.s3.amazonaws.com/sales/promos/november/bundles/annual-card.jpg);"></div>--}}
-                        {{--<div class="thumb hidden lg:block" style="background-image:url(https://singeo.s3.amazonaws.com/sales/promos/november/bundles/annual-card-wide.jpg);"></div>--}}
+                {{--<div class="float-left w-full px-2 md:px-3 md:w-1/3 card-wrap">--}}
+                    {{--<a href="/shop/swag-bundle" class="bundle-card">--}}
+                        {{--<span class="top-left-badge"><i class="fas fa-star"></i> SAVE 25%</span>--}}
+                        {{--<div class="thumb" style="background-image:url(https://cdn.musora.com/image/fetch/w_670,q_auto:best/https://singeo.s3.amazonaws.com/sales/promos/august/swag_bundle.jpg);"></div>--}}
                         {{--<div class="float-left w-full px-2 md:px-3">--}}
                             {{--<p><strong>1 Year of Singing Lessons</strong><br>--}}
-                                {{--<em>Annual Singeo Membership + <br class="inline md:hidden lg:inline">--}}
-                                    {{--Tumbler + Mug + Poster + Singing Starter Kit </em>--}}
-                                {{--<span class="price"><s class="opacity-30">$199</s> <strong style="color:#ed4277;">${{ SingeoPrices::$singeoMembershipAnnual }}</strong></span>--}}
+                                {{--<em>Get FULL member access<br class="hidden lg:inline"> for a year +--}}
+                                    {{--Rockstar Mug<br class="hidden lg:inline"> + Singeo Retro T-Shirt<br class="hidden lg:inline">&nbsp;</em>--}}
+                                {{--<span class="price"><s class="opacity-30">$168</s> <strong style="color:#ff591b;">$127</strong></span>--}}
                             {{--</p>--}}
-                            {{--<span class="join" style="background-color:#ed4277;">See The Deal &raquo;</span>--}}
+                            {{--<span class="join" style="background-color:#ff591b;">See The Deal &raquo;</span>--}}
                         {{--</div>--}}
                     {{--</a>--}}
                 {{--</div>--}}
 
-                {{--<div class="float-left w-full px-2 md:px-3 md:w-1/2 card-wrap">--}}
-                    {{--<a href="/sing-forever-bundle" class="bundle-card">--}}
-                        {{--<span class="top-left-badge">ONLY <span class="tzcd-med"></span> LEFT</span>--}}
-                        {{--<div class="thumb" style="background-image:url(https://singeo.s3.amazonaws.com/sales/promos/november/bundles/lifetime-card.jpg);"></div>--}}
+                {{--<div class="float-left w-full px-2 md:px-3 md:w-1/3 card-wrap">--}}
+                    {{--<a href="/lifetime" class="bundle-card">--}}
+                        {{--<span class="top-left-badge">ONLY {{ $products['singeo-lifetime-membership-access']->getPublicStockCount() }} SPOTS</span>--}}
+                        {{--<div class="thumb" style="background-image:url(https://cdn.musora.com/image/fetch/w_670,q_auto:best/https://singeo.s3.amazonaws.com/sales/promos/august/lifetime_bundle.jpg);"></div>--}}
                         {{--<div class="float-left w-full px-2 md:px-3">--}}
                             {{--<p><strong>Lifetime of Singing Lessons</strong><br>--}}
-                                {{--<em>Lifetime Singeo Membership + Tumbler <br class="inline md:hidden lg:inline">--}}
-                                    {{--+ Mug + Poster + Singing Starter Kit </em>--}}
-                                {{--<strong class="price"><span style="color:#60458b">${{ SingeoPrices::$bundleLifetime }}</span> --}}{{----}}{{--<sub style="color: #de0031;bottom: 0;">(ONLY {{ $products['singeo-lifetime-membership-access']->getStock() }} SPOTS)</sub>--}}{{----}}{{--</strong>--}}
+                                {{--<em>Have LIFETIME access to our<br class="hidden lg:inline"> member's area + ALL our merch:<br class="hidden lg:inline"> Do-Re-Mi--}}
+                                    {{--tumbler + Rockstar Mug +<br class="hidden lg:inline"> Vowel Practice Poster + Retro T-shirt</em>--}}
+                                {{--<strong class="price"><s class="opacity-30">$397</s> <span style="color:#dc2661">$297</span></strong>--}}
                             {{--</p>--}}
-                            {{--<span class="join" style="background-color:#60458b;color:#fff;">See The Deal &raquo;</span>--}}
+                            {{--<span class="join" style="background-color:#dc2661;color:#fff;">See The Deal &raquo;</span>--}}
                         {{--</div>--}}
                     {{--</a>--}}
                 {{--</div>--}}
             {{--</div>--}}
         {{--</section>--}}
+
         <section class="grid-view category-section" data-category="lessons">
             <ul class="container mx-auto fixed-cards">
-                @include('singeo.shop.partials._shop-card', [
-                "sku" => "singing-starter-kit",
-                "itemURL" => "/singing-starter-kit",
-                "thumbnail" => "https://cdn.musora.com/image/fetch/w_1900,q_auto:best/https://singeo.s3.amazonaws.com/products/singing-starter-kit/header.jpg",
-                "packLogo" => "https://cdn.musora.com/image/fetch/w_980,q_auto:best/https://singeo.s3.amazonaws.com/products/singing-starter-kit/logo.png",
-                "title" => "Singing Starter Kit",
-                "packAuthor" => "Lisa Witt",
-                "cardDescription" => "Everything You Need To Start Singing Now",
-                "fullPrice" => SingeoPrices::$singingStarterKitFull,
-                "price" => SingeoPrices::$singingStarterKit,
-                "popularity" => "99",
-                "category" => "lessons",
-                "redirectUrl" => "/shop",
-                "productJson" => '{"singing-starter-kit": 1}',
-                ])
-                @include('singeo.shop.partials._shop-card', [
-                "sku" => "wallflower-tumbler",
-                "itemURL" => "/shop/tumbler-doremi",
-                "thumbnail" => "https://singeo.s3.amazonaws.com/products/tumbler-doremi2.png",
-                "title" => "Do Re Mi Tumbler",
-                "cardDescription" => "This cozy tumbler will keep you hydrated at home or on the go.",
-                "fullPrice" => SingeoPrices::$tumblerFull,
-                "price" => SingeoPrices::$tumbler,
-                "popularity" => "92",
-                "category" => "lessons",
-                "redirectUrl" => "/shop",
-                "productJson" => '{"wallflower-tumbler": 1}',
-                ])
-                @include('singeo.shop.partials._shop-card', [
-                "sku" => "mouth-mug",
-                "itemURL" => "/shop/mug-rockstar",
-                "thumbnail" => "https://singeo.s3.amazonaws.com/products/mug-rockstar.jpg",
-                "title" => "Rockstar Mug",
-                "cardDescription" => "Keep your vocal cords hydrated with this super rad mug.",
-                "fullPrice" => SingeoPrices::$mugFull,
-                "price" => SingeoPrices::$mug,
-                "popularity" => "91",
-                "category" => "lessons",
-                "redirectUrl" => "/shop",
-                "productJson" => '{"mouth-mug": 1}',
-                ])
-                @include('singeo.shop.partials._shop-card', [
-                "sku" => "vowel-sounds-poster",
-                "itemURL" => "/shop/poster-vowels",
-                "thumbnail" => "https://singeo.s3.amazonaws.com/products/poster-vowel2.png",
-                "title" => "Vowel Practice Poster",
-                "cardDescription" => "Your new favorite practice tool - and your ticket hitting higher notes with ease and confidence.",
-                "fullPrice" => SingeoPrices::$posterFull,
-                "price" => SingeoPrices::$poster,
-                "popularity" => "90",
-                "category" => "lessons",
-                "redirectUrl" => "/shop",
-                "productJson" => '{"vowel-sounds-poster": 1}',
-                ])
-                @include('singeo.shop.partials._shop-card', [
-                    "itemURL" => "/shop/shirt-retro",
-                    "thumbnail" => "https://singeo.s3.amazonaws.com/products/retro-shirt.png",
-                    "title" => "Retro T-shirt",
-                    "cardDescription" => "Sing with confidence AND style with this super slick Singeo Retro T-shirt!",
-                    "fullPrice" => SingeoPrices::$shirtsFull,
-                    "price" => SingeoPrices::$shirts,
-                    "popularity" => "85",
-                    "category" => "shirts",
-                    "physical" => true,
-                    "redirectUrl" => "/shop",
-                    "variations" => [
-                    (object)[
-                         "name" => "Small",
-                         "sku" => "&products[retro-shirt-s]=1",
-                         "productJson" => '{"retro-shirt-s": 1}',
-                    ],
-                    (object)[
-                         "name" => "Medium",
-                         "sku" => "&products[retro-shirt-m]=1",
-                         "productJson" => '{"retro-shirt-m": 1}',
-                    ],
-                    (object)[
-                         "name" => "Large",
-                         "sku" => "&products[retro-shirt-l]=1",
-                         "productJson" => '{"retro-shirt-l": 1}',
-                    ],
-                    (object)[
-                         "name" => "X-Large",
-                         "sku" => "&products[retro-shirt-xl]=1",
-                         "productJson" => '{"retro-shirt-xl": 1}',
-                    ],
-                    (object)[
-                         "name" => "XX-Large",
-                         "sku" => "&products[retro-shirt-xxl]=1",
-                         "productJson" => '{"retro-shirt-xxl": 1}',
-                    ]
-                    ]
-                ])
+                <div class="mx-2 rounded-xl bg-cover bg-top bg-no-repeat mb-16 md:text-right top-banner">
+                    <div class="md:w-2/5 py-6 lg:py-12 inline-block text-center">
+                        <img class="mt-40 sm:mt-0 h-28 md:h-24 lg:h-36 mb-2 lg:mb-4 inline-block" src="https://singeo.s3.amazonaws.com/sales/promos/october/perfect_harmony_white.png" alt="perfect harmony logo">
+                        <p class="text-white px-2 md:pr-1 lg:px-5 mb-2 text-sm">
+                            Singeo Annual Membership + <b>*NEW*</b> The Essential Guide To Beautiful Harmonies <s style="color:#9C70BF;">($27)</s> + Singer Starter Kit <s style="color:#9C70BF;">($19)</s>
+                        </p>
+                        <a class="join smaller md:inline-block hidden" href="/shop/harmony-bundle">Get my free bonuses</a>
+                        <a class="join inline-block md:hidden" href="/shop/harmony-bundle">Get my free bonuses</a>
+                    </div>
+                </div>
+
+                @foreach($products as $product){
+                    @include('singeo.shop.partials._shop-card', [
+                            "sku" => $product->sku,
+                            "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $product->slug ),
+                            "thumbnail" => $product->thumbnail,
+                            "packLogo" => $product->thumbnail_logo,
+                            "badgeText" => $product->badge_text,
+                            "title" => $product->name,
+                            "packAuthor" => $product->instructor_name,
+                            "cardDescription" => $product->short_desc,
+                            "fullPrice" => $product->price,
+                            "price" => $product->discounted_price === '0.00' || empty($product->discounted_price) ? $product->price : $product->discounted_price,
+                            "category" => strtolower($product->productType->name),
+                            "includedEdge" => $product->included_edge,
+                            "sizes" => $product->sizes,
+                            "soldOut" => $product->sold_out,
+                            "size_case_sensitive" => $product->size_case_sensitive,
+                    ])
+                }
+                @endforeach
+
             </ul>
         </section>
 
@@ -383,16 +334,17 @@
 
     @include("singeo.sales.partials._footer")
 
-    <script src="{{ mix('marketing/js/manifest.js') }}"></script>
-    <script src="{{ mix('marketing/js/vendor.js') }}"></script>
-    <script src="{{ mix('marketing/js/cart-sidebar.js') }}"></script>
-    <script src="{{ mix('marketing/js/app.js') }}"></script>
+    <script src="{{ asset('marketing/js/singeo/manifest.js') }}"></script>
+    <script src="{{ asset('marketing/js/singeo/vendor.js') }}"></script>
+    <script src="{{ asset('marketing/js/singeo/cart-sidebar.js') }}"></script>
+    <script src="{{ asset('marketing/js/singeo/app.js') }}"></script>
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.3/moment-timezone-with-data.min.js"></script>
     <script type="text/javascript" src="/marketing/parcel/singeo/nav-footer.js"></script>
-    <script type="text/javascript" src="/marketing/parce/singeo/jquery.countdown-2.js"></script>
+    <script type="text/javascript" src="/marketing/js/jquery.countdown-2.min.js"></script>
     <script>
         $(document).ready(function () {
             $(function () {
@@ -428,7 +380,7 @@
                 });
             });
             // Countdown
-            $('.tzcd-full').countdown('2021/11/30')
+            $('.tzcd-full').countdown('2022/09/01')
                 .on('update.countdown', function (event) {
                     var format = '%-M Minute%!M %-S Second%!S';
                     if (event.offset.totalHours > 0) {
@@ -442,7 +394,7 @@
                 .on('finish.countdown', function (event) {
                     $(this).html('a limited time');
                 });
-            $('.tzcd-med').countdown('2021/11/30')
+            $('.tzcd-med').countdown('2022/09/01')
                 .on('update.countdown', function (event) {
                     var format = '%-M Minute%!M';
                     if (event.offset.totalHours > 0) {
@@ -456,7 +408,7 @@
                 .on('finish.countdown', function (event) {
                     $(this).html('a limited time');
                 });
-            $('.tzcd-small').countdown('2021/11/30')
+            $('.tzcd-small').countdown('2022/09/01')
                 .on('update.countdown', function (event) {
                     var format = '%-MM %-SS';
                     if (event.offset.totalHours > 0) {
@@ -470,7 +422,7 @@
                 .on('finish.countdown', function (event) {
                     $(this).html('a limited time');
                 });
-            $('.tzcd-big').countdown('2021/11/30')
+            $('.tzcd-big').countdown('2022/09/01')
                 .on('update.countdown', function (event) {
                     var format = '' + '<div><h1>%M</h1> <p>min%!M</p></div> ' + '<div><h1>%S</h1> <p>sec%!S</p></div>';
                     if (event.offset.totalHours > 0) {

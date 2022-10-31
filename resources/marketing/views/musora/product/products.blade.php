@@ -86,6 +86,7 @@
                                 "buttonText" => $lesson->sku === 'drumeo' || $lesson->sku === 'pianote' || $lesson->sku === 'singeo' || $lesson->sku === 'guitareo' ? 'see the deal' : null,
                                 "soldOut" => $lesson->sold_out,
                                 "includedEdge" => $lesson->included_edge,
+                                "category" => strtolower($lesson->productType->name),
                             ])
                         }
                         @endforeach
@@ -115,6 +116,7 @@
                                 "physical" => true,
                                 "sizes" => $accessory->sizes,
                                 "soldOut" => $accessory->sold_out,
+                                "category" => strtolower($accessory->productType->name),
                             ])
                         }
                         @endforeach
@@ -151,6 +153,7 @@
                                 "physical" => true,
                                 "sizes" => $hat->sizes,
                                 "soldOut" => $hat->sold_out,
+                                "category" => strtolower($hat->productType->name),
                             ])
                         }
                         @endforeach
@@ -181,6 +184,7 @@
                                 "sizes" => $shirt->sizes,
                                 "soldOut" => $shirt->sold_out,
                                 "size_case_sensitive" => $shirt->size_case_sensitive,
+                                "category" => strtolower($shirt->productType->name),
                             ])
                         }
                         @endforeach
@@ -219,19 +223,20 @@
                             </h5>
                         </li>
                         @foreach($hoodies as $hoodie){
-                        @include('musora.product.partials._drum-shop-card', [
-                            "sku" => $hoodie->sku,
-                            "itemURL" => '/'.$theme.'/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hoodie->slug ),
-                            "thumbnail" => $hoodie->thumbnail,
-                            "badgeText" => $hoodie->badge_text,
-                            "title" => $hoodie->name,
-                            "cardDescription" => $hoodie->short_desc,
-                            "fullPrice" => $hoodie->price,
-                            "price" => $hoodie->discounted_price === '0.00' || empty($hoodie->discounted_price) ? $hoodie->price : $hoodie->discounted_price,
-                            "physical" => true,
-                            "sizes" => $hoodie->sizes,
-                            "soldOut" => $hoodie->sold_out,
-                        ])
+                            @include('musora.product.partials._drum-shop-card', [
+                                "sku" => $hoodie->sku,
+                                "itemURL" => '/'.$theme.'/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hoodie->slug ),
+                                "thumbnail" => $hoodie->thumbnail,
+                                "badgeText" => $hoodie->badge_text,
+                                "title" => $hoodie->name,
+                                "cardDescription" => $hoodie->short_desc,
+                                "fullPrice" => $hoodie->price,
+                                "price" => $hoodie->discounted_price === '0.00' || empty($hoodie->discounted_price) ? $hoodie->price : $hoodie->discounted_price,
+                                "physical" => true,
+                                "sizes" => $hoodie->sizes,
+                                "soldOut" => $hoodie->sold_out,
+                                "category" => strtolower($hoodie->productType->name),
+                            ])
                         }
                         @endforeach
                     </ul>
@@ -251,10 +256,10 @@
                             "cardDescription" => $product->short_desc,
                             "fullPrice" => $product->price,
                             "price" => $product->discounted_price === '0.00' || empty($product->discounted_price) ? $product->price : $product->discounted_price,
-                            "physical" => true,
                             "sizes" => $product->sizes,
                             "soldOut" => $product->sold_out,
                             "size_case_sensitive" => $product->size_case_sensitive,
+                            "category" => strtolower($product->productType->name),
                         ])
                     }
                     @endforeach

@@ -65,6 +65,7 @@ class CmsClothingSeeder extends Seeder
                 "guaranteed" => false,
                 "lifetime_access" => false,
                 "free_shipping" => false,
+                'size_case_sensitive' => true,
                 "images" => [
                     'https://pianote.s3.amazonaws.com/shop/products/2020-merch/2022-08-24-Pianote-Music-Brings-Happiness-RED-105-Edit.jpg',
                     'https://pianote.s3.amazonaws.com/shop/products/2020-merch/2022-08-24-Pianote-Music-Brings-Happiness-RED-112-Edit.jpg',
@@ -140,7 +141,7 @@ class CmsClothingSeeder extends Seeder
                 "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/beanie.jpg",
                 "meta_desc" => "Smooth, slim fit keeps you warm + Drumeo logo keeps you cool.",
                 "meta_img" => "https://s3.amazonaws.com/drumeo-packs/Merch/beanie/1.jpg",
-                "short_desc" => "",
+                "short_desc" => "When it gets cold, you need to keep your ears warm. This all-black beanie features a 4” wide Drumeo logo on the front.",
                 "header_text" => "Drumeo Beanie",
                 "price" => 19,
                 "discounted_price" => "",
@@ -187,7 +188,7 @@ class CmsClothingSeeder extends Seeder
             ],
             [
                 "brand" => 2,
-                "product_type_id" => 3,
+                "product_type_id" => 2,
                 "name" => "Pianote Hat",
                 "slug" => "hat-logo",
                 "sku" => "pianote-hat",
@@ -914,7 +915,7 @@ class CmsClothingSeeder extends Seeder
                 ],
                 "specs" => [
                     [
-                        "title" => "Unisex, Baggy Fit",
+                        "title" => "Sizing",
                         "desc" => "Unisex"
                     ],
                     [
@@ -1241,6 +1242,7 @@ class CmsClothingSeeder extends Seeder
                 "guaranteed" => false,
                 "lifetime_access" => false,
                 "free_shipping" => false,
+                'size_case_sensitive' => true,
                 "images" => [
                     "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/2020-merch/merch-blackred-1.jpg",
                     "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/2020-merch/merch-blackred-2.jpg",
@@ -1774,13 +1776,16 @@ class CmsClothingSeeder extends Seeder
                 "lifetime_access" => false,
                 "free_shipping" => false,
                 'size_case_sensitive' => true,
+                'bundle_free_shipping' => true,
                 "images" => [
                     "https://singeo.s3.amazonaws.com/products/retro-shirt-thumb.png"
                 ],
                 "sizeChart" => 14,
                 "sizes" => [
                     2,3,4,5,6
-                ]
+                ],
+                'bundle_img' => 'https://singeo.s3.amazonaws.com/products/retro-shirt.png',
+                'bundle_desc' => 'Sing with confidence AND style with this super slick Retro T-shirt.'
             ],
             [
                 "brand" => 1,
@@ -2033,6 +2038,9 @@ class CmsClothingSeeder extends Seeder
                 'size_case_sensitive' => empty($product['size_case_sensitive']) ? false : $product['size_case_sensitive'],
                 'physical' => true,
                 'size_chart_id' => empty($product['sizeChart']) ? null : $product['sizeChart'],
+                'bundle_img' => empty($product['bundle_img']) ? null : $product['bundle_img'],
+                'bundle_desc' => empty($product['bundle_desc']) ? null : $product['bundle_desc'],
+                'bundle_free_shipping' => empty($product['bundle_free_shipping']) ? false : $product['bundle_free_shipping'],
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

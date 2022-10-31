@@ -1,4 +1,4 @@
-@extends('guitareo._partial.global-vue-layout')
+@extends('guitareo._partials.global-vue-layout')
 
 <?php \App\Analytics\Tracker::trackGTMEProductImpression(); ?>
 
@@ -12,7 +12,7 @@
 @stop()
 
 @section('styles')
-    <link href="{{ asset('/marketing/parcel/guitareo/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/guitareo/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation-float.min.css" rel="stylesheet">
 
     <style>
@@ -24,15 +24,15 @@
             display:none;
         }
     </style>
-    <link href="{{ asset('assets/marketing/gtme-sales.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/guitareo/gtme-sales.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}">
 @stop()
 
 @section('scripts')
-    <script src="/marketing/parcel/guitareo/modal.js"></script>
-    <script src="{{ asset('marketing/parcel/guitareo/countUp.js') }}"></script>
+    <script src="/marketing/js/modal.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/1.9.3/countUp.min.js"></script>
     <script src="/marketing/parcel/guitareo/nav-footer.js"></script>
-    <script src="/marketing/parcel/guitareo/jquery.countdown-2.js"></script>
+    <script src="/marketing/js/jquery.countdown-2.min.js"></script>
     <script>
         $(document).ready(function () {
             // Countdown

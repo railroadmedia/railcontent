@@ -11,27 +11,18 @@ Route::domain('{drumeoDomain}')->group(function () {
     );
     Route::group(['prefix' => 'coop3rdrumm3r'],
         function () {
-            Route::get('/', function () { return view('drumeo.lead-gen.coop3r.signup'); });
-            Route::get('/lessons', function () { return view('drumeo.lead-gen.coop3r.lesson-grid'); });
-            Route::get('/1-the-drum-set', function () { return view('drumeo.lead-gen.coop3r.lessons.1'); });
-            Route::get('/2-drum-theory', function () { return view('drumeo.lead-gen.coop3r.lessons.2'); });
-            Route::get('/3-practice', function () { return view('drumeo.lead-gen.coop3r.lessons.3'); });
-            Route::get('/4-grooves', function () { return view('drumeo.lead-gen.coop3r.lessons.4'); });
-            Route::get('/5-drum-fills', function () { return view('drumeo.lead-gen.coop3r.lessons.5'); });
-            Route::get('/keep-getting-better', function () { return view('drumeo.lead-gen.coop3r.lessons.get-better'); });
+            Route::get('/', function () { return view('drumeo.lead-gen.coop3rdrumm3r.signup'); });
+            Route::get('/lessons', function () { return view('drumeo.lead-gen.coop3rdrumm3r.lesson-grid'); });
+            Route::get('/1-the-drum-set', function () { return view('drumeo.lead-gen.coop3rdrumm3r.lessons.1'); });
+            Route::get('/2-drum-theory', function () { return view('drumeo.lead-gen.coop3rdrumm3r.lessons.2'); });
+            Route::get('/3-practice', function () { return view('drumeo.lead-gen.coop3rdrumm3r.lessons.3'); });
+            Route::get('/4-grooves', function () { return view('drumeo.lead-gen.coop3rdrumm3r.lessons.4'); });
+            Route::get('/5-drum-fills', function () { return view('drumeo.lead-gen.coop3rdrumm3r.lessons.5'); });
+            Route::get('/keep-getting-better', function () { return view('drumeo.lead-gen.coop3rdrumm3r.lessons.get-better'); });
         }
     );
     Route::get('/destupefying-your-weak-hand', function () { return view('drumeo.lead-gen.destupefy.destupefy'); });
-    Route::group(['prefix' => 'drum-beats'],
-        function () {
-            Route::get('/', function () { return view('drumeo.lead-gen.drum-beats.index'); });
-            Route::get('/1', function () { return view('drumeo.lead-gen.drum-beats.lessons.1'); });
-            Route::get('/2', function () { return view('drumeo.lead-gen.drum-beats.lessons.2'); });
-            Route::get('/3', function () { return view('drumeo.lead-gen.drum-beats.lessons.3'); });
-            Route::get('/4', function () { return view('drumeo.lead-gen.drum-beats.lessons.4'); });
-            Route::get('/5', function () { return view('drumeo.lead-gen.drum-beats.lessons.play-along'); });
-        }
-    );
+
     Route::group(['prefix' => 'drum-fills'],
         function () {
             Route::get('/', function () { return view('drumeo.lead-gen.drum-fills.index'); });
@@ -60,26 +51,26 @@ Route::domain('{drumeoDomain}')->group(function () {
     );
     Route::group(['prefix' => 'drum-technique-made-easy'],
         function () {
-            Route::get('/1-five-technique-myths/', function () { return view('drumeo.lead-gen.dtme.lessons.1'); });
-            Route::get('/2-massive-technique-fails/', function () { return view('drumeo.lead-gen.dtme.lessons.2'); });
-            Route::get('/3-the-most-important-technique/', function () { return view('drumeo.lead-gen.dtme.lessons.3'); });
-            Route::get('/testimonials/', function () { return view('products.full-page-assets.dtme-testimonials'); });
+            Route::get('/1-five-technique-myths/', function () { return view('drumeo.lead-gen.drum-technique-made-easy.lessons.1'); });
+            Route::get('/2-massive-technique-fails/', function () { return view('drumeo.lead-gen.drum-technique-made-easy.lessons.2'); });
+            Route::get('/3-the-most-important-technique/', function () { return view('drumeo.lead-gen.drum-technique-made-easy.lessons.3'); });
+            Route::get('/testimonials/', function () { return view('drumeo.products.drum-technique-made-easy-testimonials'); });
         }
     );
     Route::group(['prefix' => 'faster'],
         function () {
-            Route::get('/', function () { return view('drumeo.lead-gen.fastest-way-to-get-faster.signup'); });
-            Route::get('/lessons/', function () { return view('drumeo.lead-gen.fastest-way-to-get-faster.lesson-grid'); });
-            Route::get('/1', function () { return view('drumeo.lead-gen.fastest-way-to-get-faster.lessons.1'); });
-            Route::get('/2', function () { return view('drumeo.lead-gen.fastest-way-to-get-faster.lessons.2'); });
-            Route::get('/3', function () { return view('drumeo.lead-gen.fastest-way-to-get-faster.lessons.3'); });
-            Route::get('/4', function () { return view('drumeo.lead-gen.fastest-way-to-get-faster.lessons.4'); });
-            Route::get('/5', function () { return view('drumeo.lead-gen.fastest-way-to-get-faster.lessons.5'); });
-            Route::get('/6', function () { return view('drumeo.lead-gen.fastest-way-to-get-faster.lessons.6'); });
-            Route::get('/7', function () { return view('drumeo.lead-gen.fastest-way-to-get-faster.lessons.7'); });
-            Route::get('/8', function () { return view('drumeo.lead-gen.fastest-way-to-get-faster.lessons.8'); });
-            Route::get('/9', function () { return view('drumeo.lead-gen.fastest-way-to-get-faster.lessons.9'); });
-            Route::get('/10', function () { return view('drumeo.lead-gen.fastest-way-to-get-faster.lessons.10'); });
+            Route::get('/', function () { return view('drumeo.lead-gen.faster.signup'); });
+            Route::get('/lessons/', function () { return view('drumeo.lead-gen.faster.lesson-grid'); });
+            Route::get('/1', function () { return view('drumeo.lead-gen.faster.lessons.1'); });
+            Route::get('/2', function () { return view('drumeo.lead-gen.faster.lessons.2'); });
+            Route::get('/3', function () { return view('drumeo.lead-gen.faster.lessons.3'); });
+            Route::get('/4', function () { return view('drumeo.lead-gen.faster.lessons.4'); });
+            Route::get('/5', function () { return view('drumeo.lead-gen.faster.lessons.5'); });
+            Route::get('/6', function () { return view('drumeo.lead-gen.faster.lessons.6'); });
+            Route::get('/7', function () { return view('drumeo.lead-gen.faster.lessons.7'); });
+            Route::get('/8', function () { return view('drumeo.lead-gen.faster.lessons.8'); });
+            Route::get('/9', function () { return view('drumeo.lead-gen.faster.lessons.9'); });
+            Route::get('/10', function () { return view('drumeo.lead-gen.faster.lessons.10'); });
         }
     );
     Route::group(['prefix' => 'gavins-grooves'],
@@ -99,8 +90,8 @@ Route::domain('{drumeoDomain}')->group(function () {
                 });
         }
     );
-    Route::get('/get-faster', function () { return view('drumeo.lead-gen.fastest-way-to-get-faster.signup-alt'); });
-    Route::get('/get-faster-drums', function () { return view('drumeo.lead-gen.fastest-way-to-get-faster.signup-alt'); });
+    Route::get('/get-faster', function () { return view('drumeo.lead-gen.faster.signup-alt'); });
+    Route::get('/get-faster-drums', function () { return view('drumeo.lead-gen.faster.signup-alt'); });
     Route::group(['prefix' => 'getting-started'],
         function () {
             Route::get('/', function () { return view('drumeo.lead-gen.getting-started.signup'); });
@@ -247,7 +238,7 @@ Route::domain('{drumeoDomain}')->group(function () {
             Route::get('/most-underrated-drummer', function () { return view('drumeo.lead-gen.rock-drumming-masterclass.lessons.1'); });
             Route::get('/most-important-rock-drum-tips', function () { return view('drumeo.lead-gen.rock-drumming-masterclass.lessons.2'); });
             Route::get('/epic-drum-video', function () { return view('drumeo.lead-gen.rock-drumming-masterclass.lessons.3'); });
-            Route::get('/testimonials/', function () { return view('products.full-page-assets.rdm-testimonials'); });
+            Route::get('/testimonials/', function () { return view('drumeo.products.rdm-testimonials'); });
         }
     );
     Route::group(['prefix' => 'subdivision-challenge'],
@@ -346,6 +337,37 @@ Route::domain('{drumeoDomain}')->group(function () {
         }
     );
 
+    Route::get('/courses/{slug}', function ($root, $slug) { return view('drumeo.lead-gen.courses.' . $slug); });
+    Route::get('/shows/{slug}', function ($root, $slug) { return view('drumeo.lead-gen.shows.' . $slug); });
+
+    Route::get('/birthday-gifts/', function () { return view('drumeo.lead-gen.gift-guide.birthday-guide'); });
+    Route::get('/christmas-gift-guide/', function () { return view('drumeo.lead-gen.gift-guide.christmas-guide'); });
+    Route::get('/click/', function () { return view('drumeo.lead-gen.pages.click'); });
+    Route::get('/druminar/coming-back-to-the-drums', function () { return view('drumeo.lead-gen.webinar.coming-back-to-the-drums'); });
+    Route::get('/druminar/coming-back-to-the-drums/june-12-live-event', function () { return view('drumeo.lead-gen.webinar.event'); });
+    Route::get('/fathers-day-gifts/', function () { return view('drumeo.lead-gen.gift-guide.fathers-day-guide'); });
+    Route::get('/for-teachers/teach-drums/', function () { return view('drumeo.lead-gen.pages.teach-drums'); });
+    Route::get('/free-drum-lessons/', function () { return view('drumeo.lead-gen.pages.free-drum-lessons'); });
+    Route::get('/free-gift/', function () { return view('drumeo.lead-gen.free-gift.free-gift'); });
+    Route::get('/gift-guide/', function () { return view('drumeo.lead-gen.gift-guide.new-years-guide'); });
+    Route::get('/new-years-gift-guide/', function () { return view('drumeo.lead-gen.gift-guide.new-years-guide'); });
+    Route::get('/quick-drummer-survey/', function () { return view('drumeo.lead-gen.pages.quick-drummer-survey'); });
+    Route::get('/teach-a-beginner/', function () { return view('drumeo.lead-gen.pages.teach-a-beginner'); });
+    Route::get('/teach-a-beginner/lessons/', function () { return view('drumeo.lead-gen.pages.teach-a-beginner-lessons'); });
+    Route::get('/thankyou/', function () { return view('drumeo.lead-gen.pages.thank-you'); });
+    Route::get('/thank-you/', function () { return view('drumeo.lead-gen.pages.thank-you-alt'); });
+    Route::get('/30-day-drummer-unsubscribe/', function () { return view('drumeo.lead-gen.pages.30-day-drummer-unsubscribe'); });
+    Route::get('/30-day-drummer-subscribe/', function () { return view('drumeo.lead-gen.pages.30-day-drummer-subscribe'); });
+    Route::get('/subscribed/', function () { return view('drumeo.lead-gen.pages.subscribed'); });
+    Route::get('/confirming/', function () { return view('drumeo.lead-gen.pages.confirming'); });
+    Route::get('/lets-stay-together/', function () { return view('drumeo.lead-gen.pages.lets-stay-together'); });
+    Route::get('/welcome-party/', function () { return view('drumeo.lead-gen.pages.welcome-party'); });
+    Route::get('/2-million/', function () { return view('drumeo.lead-gen.pages.2-million'); });
+    Route::get('/awards-giveaway/', function () { return view('drumeo.lead-gen.pages.awards-giveaway'); });
+    Route::get('/recitals/', function () { return view('drumeo.lead-gen.pages.recitals'); });
+    Route::get('/lifetime-members-masterclass/', function () { return view('drumeo.lead-gen.pages.lifetime-members-masterclass'); });
+    Route::get('/30-day-drummer-live/', function () { return view('drumeo.lead-gen.pages.30-day-drummer-live'); });
+    Route::get('/awards/', function () { return view('drumeo.lead-gen.pages.awards'); });
     Route::get('/weeklyemail/', function () { return view('drumeo.lead-gen.blog-forms.weeklyemail'); });
     Route::get('/weekly-email/', function () { return view('drumeo.lead-gen.blog-forms.weekly-email'); });
     Route::get('/fwtgf-blog/', function () { return view('drumeo.lead-gen.blog-forms.fwtgf-blog'); });

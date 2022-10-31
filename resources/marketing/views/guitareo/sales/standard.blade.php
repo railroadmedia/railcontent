@@ -52,7 +52,7 @@
                    <img class="h-7 sm:h-8" src="https://cdn.musora.com/image/fetch/w_220,q_auto:best/https://guitareo.s3.amazonaws.com/sales/promos/october/scary_logo.png" alt="play-better-solos">
                </div>
 {{--                --}}{{--<h5 class="leading-none font-bebas inline-block align-middle mx-auto text-2xl mr-2 h-8 py-1.5 px-2 bg-black rounded-md text-white">PLAY BETTER SOLOS</h5>--}}
-               <p class="inline-block align-middle mx-auto text-black leading-none text-base font-bebas">GET SCARY GOOD GUITAR LESSONS <br>+ 3 TRICK-FREE TREATS WORTH $391</p>
+               <p class="inline-block align-middle mx-auto text-black leading-none text-base font-bebas">GET SCARY GOOD GUITAR LESSONS <br>+ 3 TRICK-FREE TREATS WORTH $441</p>
            </div>
        </div>
    </a>

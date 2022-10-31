@@ -25,7 +25,7 @@
             });
         });
     </script>
-    <script src="/marketing/parcel/guitareo/modal-autoplay.js"></script>
+    <script src="/marketing/js/modal-autoplay.js"></script>
 @stop
 
 @section('body')
@@ -58,7 +58,7 @@
             <div class="text-center mt-3 sm:mt-7 clearfix lesson-buttons">
                 <div class="mb-2 sm:mb-0 w-full sm:w-1/4 float-left px-2 md:px-3">
                     @hasSection('previous')
-                        <a class="button outline guitareo block no-underline" href="@yield('previous')">
+                        <a class="button outline-none outline guitareo block no-underline" href="@yield('previous')">
                             <i class="fas fa-chevron-left"></i> Prev
                         </a>
                     @else
@@ -67,14 +67,14 @@
                 </div>
 
                 <div class="mb-2 sm:mb-0 w-full sm:w-2/4 float-left px-2 md:px-3">
-                    <a class="button outline guitareo block no-underline" href="@yield('all-lesson-link')">
+                    <a class="button outline-none outline guitareo block no-underline" href="@yield('all-lesson-link')">
                         All Lessons
                         <i class="fas fa-chevron-up"></i>
                     </a>
                 </div>
                 <div class="w-full sm:w-1/4 float-left px-2 md:px-3 next-lesson-button">
                     @hasSection('next')
-                        <a class="button outline guitareo block no-underline" href="@yield('next')">
+                        <a class="button outline-none outline guitareo block no-underline" href="@yield('next')">
                             @hasSection('next-text')
                                 @yield('next-text')
                             @else

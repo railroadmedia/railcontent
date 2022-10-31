@@ -8,6 +8,7 @@ Route::domain('{guitareoDomain}')->group(function () {
     Route::get('/welcome-party', function () { return view('guitareo.lead-gen.pages.welcome-party'); });
     Route::get('/welcome-party-carlos', function () { return view('guitareo.lead-gen.pages.welcome-party-carlos'); });
     Route::get('/confirming', function () { return view('guitareo.lead-gen.pages.confirming'); });
+    Route::get('/subscribed', function () { return view('guitareo.lead-gen.pages.subscribed'); });
     Route::get('/weekly-email',function () { return view('guitareo.lead-gen.pages.weekly-email'); } );
     Route::get('/weeklyemail',function () { return view('guitareo.lead-gen.pages.weekly-email-2'); } );
     Route::get('/recitals',function () { return view('guitareo.lead-gen.pages.recitals'); } );

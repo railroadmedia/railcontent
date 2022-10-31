@@ -700,7 +700,7 @@
     ])
 
     @foreach ($modalImages as $key => $img)
-        @include('products.partials.image-modal',[
+        @include('pianote.products.partials.image-modal',[
             'id' => "seeInside".$key,
             "image" => $img,
             "imageName" => "seeInside".$key,
@@ -710,8 +710,8 @@
     @include('pianote.sales.footer')
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="/marketing/js/pianote/modal.js"></script>
-    <script type="text/javascript" src="/marketing/parcel/pianote/jquery.countdown-2.min.js"></script>
+    <script type="text/javascript" src="/marketing/js/modal.js"></script>
+    <script type="text/javascript" src="/marketing/js/jquery.countdown-2.min.js"></script>
     <script>
         $(document).ready(function(){
             $(document).foundation();
@@ -778,18 +778,18 @@
                 });
         })
     </script>
-    <script type="text/javascript" src="/marketing/js/pianote/modal-autoplay-alt.js"></script>
+    <script type="text/javascript" src="/marketing/js/modal-autoplay.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
     <script type="text/javascript" src="/marketing/parcel/pianote/nav-footer.js"></script>
-    <script type="text/javascript" src="/marketing/js/pianote/modal-autoplay-alt.js"></script>
+    <script type="text/javascript" src="/marketing/js/modal-autoplay.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
 
-    <script src="{{ mix('marketing/js/pianote/manifest.js') }}"></script>
-    <script src="{{ mix('marketing/js/pianote/vendor.js') }}"></script>
-    <script src="{{ mix('marketing/js/pianote/cart-sidebar.js') }}"></script>
-    <script src="{{ mix('marketing/js/pianote/app.js') }}"></script>
+    <script src="{{ asset('marketing/js/pianote/manifest.js') }}"></script>
+    <script src="{{ asset('marketing/js/pianote/vendor.js') }}"></script>
+    <script src="{{ asset('marketing/js/pianote/cart-sidebar.js') }}"></script>
+    <script src="{{ asset('marketing/js/pianote/app.js') }}"></script>
 
     @include('pianote._partials._promo-countdown')
-    {!! inspectlet_embed_script() !!}
+    @include('pianote._partials.inspectlet')
 @endsection

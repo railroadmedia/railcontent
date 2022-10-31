@@ -109,9 +109,9 @@
 
     @include("guitareo.sales.partials._footer")
 
-    <script src="{{ asset('marketing/parcel/guitareo/manifest.js') }}"></script>
-    <script src="{{ asset('marketing/parcel/guitareo/vendor.js') }}"></script>
-    <script src="{{ asset('marketing/parcel/guitareo/app.js') }}"></script>
+    <script src="{{ asset('marketing/js/guitareo/manifest.js') }}"></script>
+    <script src="{{ asset('marketing/js/guitareo/vendor.js') }}"></script>
+    <script src="{{ asset('marketing/js/guitareo/app.js') }}"></script>
 
 
 @stop

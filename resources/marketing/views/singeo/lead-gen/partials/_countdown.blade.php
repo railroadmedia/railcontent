@@ -1,4 +1,4 @@
-<script type="text/javascript" src="/marketing/parce/singeo/jquery.countdown-2.js"></script>
+<script type="text/javascript" src="/marketing/js/jquery.countdown-2.min.js"></script>
 <script>
     $(function(){
         $('.countdown-full').countdown('{{ $countdownDate }}')

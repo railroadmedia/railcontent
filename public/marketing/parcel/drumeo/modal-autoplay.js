@@ -1,2 +1,0 @@
-$(document).ready((function(){$(".autoplay-video").on("click",(function(){var t=$(this).data("open");$("#"+t).find("[data-lazy-load-url]").each((function(){var t=$(this);$(this).attr("src",t.data("lazy-load-url"))}))})),$(".reveal-overlay").on("click",(function(t){t.target===this&&$(".reset-on-close").attr("src","about:blank")})),$(document).keyup((function(t){27===t.which&&$(".reset-on-close").attr("src","about:blank")}))}));
-//# sourceMappingURL=modal-autoplay.js.map

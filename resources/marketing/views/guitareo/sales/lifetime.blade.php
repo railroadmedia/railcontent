@@ -1,4 +1,4 @@
-@extends('guitareo._partial.global-vue-layout')
+@extends('guitareo._partials.global-vue-layout')
 
 @section('meta')
     <title>Lifetime Membership To Guitareo | Guitareo</title>
@@ -10,10 +10,10 @@
     <meta property="og:image" content="https://d122ay5chh2hr5.cloudfront.net/sales/2022/og-image.jpg" style="display: none;">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link href="{{ asset('/marketing/parcel/guitareo/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/guitareo/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/guitareo/sales-page.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/guitareo/animate.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/animate.css') }}" rel="stylesheet">
 
     <style>
         .lazyload {
@@ -52,7 +52,7 @@
     <script type="text/javascript" src="/marketing/parcel/guitareo/nav-footer.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
-    <script type="text/javascript" src="/marketing/parcel/guitareo/jquery.countdown-2.min.js"></script>
+    <script type="text/javascript" src="/marketing/js/jquery.countdown-2.min.js"></script>
     <script>
         $(document).ready(function () {
             $('.flip-div').click(function (e) {

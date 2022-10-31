@@ -16,7 +16,7 @@
 ?>
 
 <div class="side-bar sliding-function lg:px-4 lg:w-1/3 px-3 md:px-4 lg:mt-10">
-    <div class="md:h-0">
+    <div class="lg:h-0">
         <div id="order" class="anchor"></div>
         <div class="side-slide overflow-hidden md:rounded md:border md:border-solid" style="border-color: #CCD3D3;">
             {{--<div class="promo-tab hidden lg:block text-center py-2 px-3" style="position:relative;background:#000 center center/450px;">--}}
@@ -27,7 +27,7 @@
                     <p class="instructor hidden lg:inline"><em>{{ $instructor }} </em></p>
                 @endif
                 @if(!empty($logo))
-                    <img class="hidden max-h-20 w-full mx-auto mb-4 object-contain lg:block" src="@if(str_contains($logo, 'amazonaws') || str_contains($logo, 'cloudfront')){{$logo}}@else{{'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$logo}}@endif">
+                    <img class="hidden max-h-20 w-full mx-auto mb-4 object-contain lg:block" src="@if(str_contains($logo, 'amazonaws') || str_contains($logo, 'cloudfront')){{$logo}}@else{{'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$logo}}@endif" alt="logo">
                 @endif
 
                 @if(isset($fullPrice) && isset($price) && ($fullPrice - $price) > 0)
@@ -39,7 +39,7 @@
                             <strong class="font-black text-{{ $theme }}">$<span class="chosen-variant-price-float">{{  floatVal(number_format($price, 2))  }}</span></strong>
                         @endif
                     </h1>
-                @elseif(isset($price) && !$soldOut)
+                @elseif(isset($price))
                     <h1 class="text-center text-3xl uppercase md:text-4xl"><strong class="font-black text-{{ $theme }}">Only $<span class="chosen-variant-price-float">{{ floatVal($price) }}</span></strong></h1>
                 @endif
 
@@ -48,7 +48,7 @@
                 @endif
 
                 @if(!$soldOut)
-                    @if(empty($bundle) && count($sizes) === 0)
+                    @if($product->productType->name !== 'Bundles' && count($sizes) === 0)
                         <a
                             class="online-atc vue-add-to-cart"
                             href="/laravel/public/shopping-cart/api/query?go-back-to-shop=true&products[{{ $sku }}]=1"
@@ -66,9 +66,9 @@
                                 <option
                                     class="bg-white @if($size->sold_out) text-gray @else text-black @endif"
                                     @if($size->sold_out) disabled @endif
-                                    value="{{$product->sku . '-' . $size->code}}"
+                                    value="{{$product->sku . '-' . (!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}"
                                     data-price="{{floatVal($product->price) ?? 0}}"
-                                    data-product-json='{"{{$product->sku . '-' . $size->code}}": 1}'
+                                    data-product-json='{"{{$product->sku . '-' . (!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}": 1}'
                                 >{{ $size->name }}</option>
                             @endforeach
                         </select>
@@ -90,9 +90,9 @@
                         </a>
                     @endif
 
-                    @if(!empty($bundle))
-                        <a class="online-atc" href="/laravel/public/shopping-cart/api/query?{{ $sku }}"
-                                data-base-url="/laravel/public/shopping-cart/api/query?{{ $sku }}">
+                    @if($product->productType->name === 'Bundles')
+                        <a class="online-atc" href="/laravel/public/shopping-cart/api/query?{{ $product->sku }}"
+                                data-base-url="/laravel/public/shopping-cart/api/query?{{ $product->sku }}">
                             <button class="join border-none"><i class="fas fa-cart-plus text-2xl mr-1"></i> Order Now</button>
                         </a>
                     @endif
@@ -109,12 +109,14 @@
                     <a class="text-{{ $theme }} text-xs" href="tel:1-800-439-8921">1-800-439-8921</a> or directly at
                     <a class="text-{{ $theme }} text-xs" href="tel:1-604-855-7605">1-604-855-7605</a>. </p>
             </div>
+
+            @if($guaranteeBadge)
+                <div class="flex justify-center items-center px-5 pb-5 text-center md:pt-2 md:pt-4 md:pb-6 lg:p-5 lg:-mt-1 lg:mx-auto lg:mb-0 border-t-0 lg:border-t" style="border-color: #CCD3D3; border-top-style: solid;">
+                    <img class="w-24 my-0 pr-6" src="https://cdn.musora.com/image/fetch/w_170,q_auto:best/{{ $badge }}">
+                    <p class="text-xs font-bold text-left my-0 text-{{ $theme }}">Your entire order is backed by<br class="lg:hidden" /> our 90-Day Money Back <br class="lg:hidden" /> Guarantee.</p>
+                </div>
+            @endif
         </div>
-        @if($guaranteeBadge)
-            <div class="flex justify-center items-center px-5 pb-5 text-center md:pt-2 md:pt-4 md:pb-6 lg:p-5 lg:-mt-1 lg:mx-auto lg:mb-0 border-t-0 lg:border-t" style="border-color: #CCD3D3; border-top-style: solid;">
-                <img class="w-24 my-0 pr-6" src="https://cdn.musora.com/image/fetch/w_170,q_auto:best/{{ $badge }}">
-                <p class="text-xs font-bold text-left my-0 text-{{ $theme }}">Your entire order is backed by<br class="lg:hidden" /> our 90-Day Money Back <br class="lg:hidden" /> Guarantee.</p>
-            </div>
-        @endif
+
     </div>
 </div>

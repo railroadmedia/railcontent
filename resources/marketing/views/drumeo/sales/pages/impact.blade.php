@@ -1060,6 +1060,6 @@
         })
     </script>
 
-    <script type="text/javascript" src="{{ asset('/marketing/js/drumeo/modal.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/modal-autoplay.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
 @stop

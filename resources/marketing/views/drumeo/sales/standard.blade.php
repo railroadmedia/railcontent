@@ -4,6 +4,16 @@
     <title>Drumeo | Reach your drumming goals.</title>
     <meta property="og:title" content="Drumeo | Reach your drumming goals.">
     <meta property="og:url" content="https://www.drumeo.com/">
+    <style>
+        .promo-bg {
+            background-image:url(https://cdn.musora.com/image/fetch/w_700,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/october/promo-bg-m.jpg);
+        }
+        @media (min-width: 640px) {
+            .promo-bg {
+                background-image:url(https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/october/promo-bg.jpg);
+            }
+        }
+    </style>
 @endsection
 
 @section('promo-banner')
@@ -47,26 +57,23 @@
 {{--        </div>--}}
 {{--    </section>--}}
 
-    <section class="py-10 md:py-20 bg-center bg-cover bg-no-repeat" style="background-image:url('https://pianote.s3.amazonaws.com/sales/promos/piano-month/practice_better_promo_bg.png')">
-        <div class="max-w-md md:max-w-5xl mx-auto text-white px-2 lg:px-4">
-            <div class="md:flex md:items-center md:gap-6 mb-10 text-center md:text-left">
-                <div class="md:w-3/5 mb-6 md:mb-0">
-                    <img class="h-24 md:h-28 lg:h-32 mb-4 lazyload" data-src="https://cdn.musora.com/image/fetch/w_450,q_auto:best/https://drumeo-assets.s3.amazonaws.com/sales/2022/better_hands_logo.png" alt="better hands logo">
-                    <p class="mb-2 leading-tight uppercase">
-                        <strong>Develop silky-smooth hands around the kit </strong><br>
-                        <span class="text-coaches">with a free practice pad, sticks, and the all <br class="hidden md:inline">NEW Drumeo Rudiment Poster. </span>
-                    </p>
-                    <p class="text-light-navy">
-                        Rudiments are the ABCs of drumming. <br><br>
-                        And learning your rudiments will help you effortlessly express yourself on the drums. That’s why we’re celebrating the launch of the first-ever Drumeo Rudiment Poster by giving you everything you need to master your rudiments + develop silky-smooth hands on the kit. <br><br>
-                        Click the big button to see everything included in the Better Hands Bundle.
-                    </p>
-                </div>
-                <div class="md:w-2/5">
-                    <img class="h-96 md:h-auto lazyload" data-src="https://cdn.musora.com/image/fetch/w_750,q_auto:best/https://drumeo-assets.s3.amazonaws.com/sales/2022/collage.png" alt="collage">
-                </div>
-            </div>
-            <div class="text-center">
+    <section class="pt-7 pb-52 sm:py-10 lg:py-20 px-4 sm:px-6 text-white bg-center bg-cover bg-no-repeat promo-bg">
+        <div class="max-w-4xl mx-auto">
+            <div class="w-full md:w-9/12 lg:w-7/12 text-center md:text-left">
+                <img class="h-20 md:h-24 lg:h-28 mb-4 lazyload" data-src="https://cdn.musora.com/image/fetch/w_450,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/october/logo2.png" alt="better hands logo">
+                <p class="mb-2 leading-tight uppercase">
+                    <strong>Get a FREE practice pad, drumsticks, Drumeo Rudiments Poster <span class="text-coaches">(NEW)</span>, and more!</strong><br>
+                </p>
+                <p class="text-light-navy leading-tight">Learning your rudiments will help you express yourself effortlessly on the drums. So we’re celebrating the launch of the first-ever Drumeo Rudiment Poster by giving you everything you need to run your rudiments day OR night:</p>
+                <ul class="text-light-navy leading-tight my-3">
+                    <li><i class="fas fa-check text-drumeo"></i> Drumeo QuietPad <strong class="text-coaches">(FREE)</strong></li>
+                    <li><i class="fas fa-check text-drumeo"></i> 5A Drumsticks <strong class="text-coaches">(FREE)</strong></li>
+                    <li><i class="fas fa-check text-drumeo"></i> Drumeo Rudiments Poster<strong class="text-coaches">(NEW)</strong></li>
+                </ul>
+                <p class="text-light-navy leading-tight mb-3">Plus, you’ll get 3 of our most popular packs to boost your better hand speed.
+                    <br><br>
+                    Click below to see everything included in the all NEW Drumeo Rudiments Bundle.
+                </p>
                 <a class="join smaller anchor-slide md:w-52 lg:w-60 blue" href="#customize-anchor">See the deal</a>
             </div>
         </div>

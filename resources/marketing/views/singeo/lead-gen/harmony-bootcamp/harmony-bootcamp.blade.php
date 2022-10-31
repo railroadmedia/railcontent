@@ -365,5 +365,5 @@
     @include('singeo.lead-gen.partials._countdown',[
         "countdownDate" => "2022/10/19"
     ])
-    <script type="text/javascript" src="/marketing/parcel/singeo/modal-autoplay.js"></script>
+    <script type="text/javascript" src="/marketing/js/modal-autoplay.js"></script>
 @stop

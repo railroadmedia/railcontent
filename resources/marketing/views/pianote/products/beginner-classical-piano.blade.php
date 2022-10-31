@@ -536,7 +536,7 @@
         </div>
     </section>
     <section class="text-center pt-10 sm:pt-20 md:pt-0 lg:pt-14">
-        @include('products.partials._header-text',[
+        @include('pianote.products.partials._header-text',[
             'topText' => 'Your 30-day guide to',
             'headerText' => 'Playing Timeless<br>Classical Music…'
         ])
@@ -595,7 +595,7 @@
     </section>
     <section class="text-center md:pt-14 pb-20 lg:pb-40">
         <img class="h-16 lazyload" data-src="https://cdn.musora.com/image/fetch/w_120,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/classical-piano/gift_icon.svg" alt="gift icon">
-        @include('products.partials._header-text',[
+        @include('pianote.products.partials._header-text',[
             'topText' => 'Bonus Pieces',
             'topStyles' => 'mt-3 mb-6'
         ])
@@ -656,7 +656,7 @@
         <div class="py-16 relative" style="background-color:#f5f5f7;">
             <div class="absolute -top-2 sm:-top-8 left-0 right-0 z-10 h-96 bg-cover bg-top lazyload" data-bg="https://pianote.s3.amazonaws.com/lead-gen/classical-piano/pattern.png"></div>
             <div class="container mx-auto max-w-5xl z-30 relative">
-                @include('products.partials._header-text',[
+                @include('pianote.products.partials._header-text',[
                     'topText' => 'Hear what students are <s>saying</s>',
                     'headerText' => ' playing after 30 days'
                 ])
@@ -686,7 +686,7 @@
         <div class="relative">
             <div class="absolute -top-14 left-0 right-0 z-10 h-96 bg-cover bg-top lazyload" data-bg="https://pianote.s3.amazonaws.com/lead-gen/classical-piano/pattern.png"></div>
 
-            @include('products.partials._header-text',[
+            @include('pianote.products.partials._header-text',[
                 'topText' => 'Your clear path to',
                 'headerText' => 'Learning Classical Piano'
             ])
@@ -786,7 +786,7 @@
         </p>
     </section>
     <section class="coach-container text-center pt-14 pb-10 md:pb-0" style="background: #F5F5F7">
-        @include('products.partials._header-text',[
+        @include('pianote.products.partials._header-text',[
             'topText' => 'Meet your friendly',
             'headerText' => 'Classical Piano Teacher'
         ])
@@ -812,7 +812,7 @@
     </section>
     <section class="text-center py-10 md:pt-40 md:pb-20">
         <img class="h-28 mb-4 lazyload" data-src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/classical-piano/guarantee_logo.png" alt="guarantee badge">
-        @include('products.partials._header-text',[
+        @include('pianote.products.partials._header-text',[
             'headerText' => 'The guarantee that lasts<br>longer than the course'
         ])
         <p class="mx-auto max-w-2xl md:max-w-3xl lg:max-w-4xl mb-10 px-4">
@@ -929,7 +929,7 @@
 @section('scripts')
     @parent
 
-    <script type="text/javascript" src="/marketing/parcel/pianote/jquery.countdown-2.min.js"></script>
+    <script type="text/javascript" src="/marketing/js/jquery.countdown-2.min.js"></script>
     <script>
         $(document).ready(function () {
             $(document).foundation();
@@ -969,25 +969,26 @@
 
 
 
-        window.onscroll = function(){ makeStickybar()};
+        // window.onscroll = function(){ makeStickybar()};
 
-        var navbar = document.getElementsByClassName("promo-banner")[0];
-        var sticky = navbar.offsetTop;
-        var screenSize = window.innerWidth;
-        var offsetValue = screenSize >= 768 ? sticky-88 : sticky-30;
+        // var navbar = document.getElementsByClassName("promo-banner")[0];
+        // var sticky = navbar.offsetTop;
+        // var screenSize = window.innerWidth;
+        // var offsetValue = screenSize >= 768 ? sticky-88 : sticky-30;
+        //
+        // function makeStickybar(){
+        //
+        //     if(window.pageYOffset >= sticky-88){
+        //         navbar.classList.add('fixed');
+        //     }
+        //     else {
+        //         navbar.classList.remove('fixed');
+        //     }
+        // }
 
-        function makeStickybar(){
-
-            if(window.pageYOffset >= sticky-88){
-                navbar.classList.add('fixed');
-            }
-            else {
-                navbar.classList.remove('fixed');
-            }
-        }
     </script>
-    <script type="text/javascript" src="/marketing/js/pianote/modal.js"></script>
-    <script type="text/javascript" src="/marketing/js/pianote/modal-autoplay-alt.js"></script>
+    <script type="text/javascript" src="/marketing/js/modal.js"></script>
+    <script type="text/javascript" src="/marketing/js/modal-autoplay.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
-    {!! inspectlet_embed_script() !!}
+    @include('pianote._partials.inspectlet')
 @endsection

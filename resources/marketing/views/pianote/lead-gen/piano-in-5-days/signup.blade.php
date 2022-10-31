@@ -195,7 +195,7 @@
             'name' => 'Ed Kirk',
             'location' => 'Florida, USA',
             'next' => 'DebbieReed',
-            'prev' => 'CarmenAlymatiris',
+            'prev' => 'DhivyaSubramanian',
             ],
             [
             'image' => 'https://pianote.s3.amazonaws.com/sales/2022/testimonials/debbiereed.jpg',
@@ -304,7 +304,7 @@
             });
         });
     </script>
-    <script type="text/javascript" src="/marketing/js/pianote/modal.js"></script>
-    <script type="text/javascript" src="/marketing/js/pianote/modal-autoplay-alt.js"></script>
+    <script type="text/javascript" src="/marketing/js/modal.js"></script>
+    <script type="text/javascript" src="/marketing/js/modal-autoplay.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
 @endsection

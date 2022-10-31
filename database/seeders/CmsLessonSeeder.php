@@ -55,6 +55,7 @@ class CmsLessonSeeder extends Seeder
                 "instructor_img" => null,
                 "studyText" => "",
                 "overview" => "",
+                'bundle_img' => 'https://drumeo-assets.s3.amazonaws.com/promos/drumeo_annual.jpg',
                 "bundle_desc" => "Get better, faster with Drumeo’s award-winning online drum lessons taught by the world’s greatest drummers. You’ll always know what to practice with step-by-step lessons, 3100+ note-for-note song breakdowns, hundreds of drum-less playalongs, and ongoing support & motivation from pro drummers."
             ],
             [
@@ -96,41 +97,6 @@ class CmsLessonSeeder extends Seeder
             [
                 "brand" => 1,
                 "product_type_id" => 1,
-                "name" => "Beyond Beginner Drumming",
-                "slug" => "beyond-beginner-drumming",
-                "sku" => "beyond-beginner-drumming",
-                "thumbnail" => "https://drumeo-assets.s3.amazonaws.com/drum-shop/beyond-beginner-drummer/Title+Card.jpg",
-                "thumbnail_logo" => "https://drumeo-assets.s3.amazonaws.com/drum-shop/beyond-beginner-drummer/BeyondBeginnerDrumming_Logo-white.svg",
-                "meta_desc" => "",
-                "meta_img" => "",
-                "short_desc" => "Make the jump from beginner to intermediate drummer",
-                "header_text" => "",
-                "price" => 127,
-                "discounted_price" => "",
-                "features" => [
-
-                ],
-                "specs" => [
-                ],
-                "visible" => true,
-                "sold_out" => false,
-                "freeBonus" => false,
-                "guaranteed" => true,
-                "lifetime_access" => true,
-                "free_shipping" => false,
-                "included_edge" => true,
-                "thumbnail_logo" => "https://drumeo-assets.s3.amazonaws.com/drum-shop/beyond-beginner-drummer/BeyondBeginnerDrumming_Logo-white.svg",
-                "page_logo" => "",
-                "video" => "",
-                "instructor_name" => "Siros Vaziri",
-                "instructor_desc" => "",
-                "instructor_img" => null,
-                "studyText" => "",
-                "overview" => "",
-            ],
-            [
-                "brand" => 1,
-                "product_type_id" => 1,
                 "name" => "New Drummers Start Here",
                 "slug" => "new-drummers",
                 "sku" => "new-drummers-start-here",
@@ -161,6 +127,7 @@ class CmsLessonSeeder extends Seeder
                 "instructor_img" => "",
                 "studyText" => "",
                 "overview" => "",
+                'bundle_img' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/ndsh.jpg',
                 "bundle_desc" => "Crush your first 90 days on the drums. New Drummers Start Here will help you go from a beginner drummer to playing with REAL music in 90 days or less. By the end of the course, you’ll be ready to enter the intermediate phase of your drumming with confidence.",
             ],
             [
@@ -233,6 +200,7 @@ class CmsLessonSeeder extends Seeder
                 "instructor_img" => "",
                 "studyText" => "",
                 "overview" => "",
+                'bundle_img' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/dtme.jpg',
                 "bundle_desc" => "Technique guru Bruce Becker delivers an intimate 26-week course where you’ll get his proven process for improving your hand technique and foot technique so you can develop more speed and control around the kit -- all while preventing injuries & enjoying the music.",
             ],
             [
@@ -270,6 +238,7 @@ class CmsLessonSeeder extends Seeder
                 "instructor_img" => "",
                 "studyText" => "",
                 "overview" => "",
+                'bundle_img' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/ime.jpg',
                 "bundle_desc" => "Freedom starts here. Jared Falk’s 26-week course was built to unlock all four limbs so you can play more musical grooves, better sounding fills, and finally achieve the musical freedom that allows you to play whatever you want, whenever you want.",
             ],
             [
@@ -307,6 +276,7 @@ class CmsLessonSeeder extends Seeder
                 "instructor_img" => "",
                 "studyText" => "",
                 "overview" => "",
+                'bundle_img' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/lsf.jpg',
                 "bundle_desc" => "A 75-minute masterclass with Jared Falk & Dave Atkinson to help you learn MORE songs in less time -- from active listening that’ll help you hear phrasing and understand song structure, to building effective grooves and fills, and keeping time so your playing always matches the music.",
             ],
             [
@@ -344,7 +314,43 @@ class CmsLessonSeeder extends Seeder
                 "instructor_img" => "",
                 "studyText" => "",
                 "overview" => "",
+                'bundle_img' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/fwtbdf.jpg',
                 "bundle_desc" => "The ultimate crash course to playing more creative and more musical drum fills your audience will love. Rather than memorizing and playing the same fills over and over again, you’ll gain the skills you need to create effective drum fills on the fly and adapt them to any musical setting.",
+            ],
+            [
+                "brand" => 1,
+                "product_type_id" => 1,
+                "name" => "Beyond Beginner Drumming",
+                "slug" => "beyond-beginner-drumming",
+                "sku" => "beyond-beginner-drumming",
+                "thumbnail" => "https://drumeo-assets.s3.amazonaws.com/drum-shop/beyond-beginner-drummer/Title+Card.jpg",
+                "thumbnail_logo" => "https://drumeo-assets.s3.amazonaws.com/drum-shop/beyond-beginner-drummer/BeyondBeginnerDrumming_Logo-white.svg",
+                "meta_desc" => "",
+                "meta_img" => "",
+                "short_desc" => "Make the jump from beginner to intermediate drummer",
+                "header_text" => "",
+                "price" => 127,
+                "discounted_price" => "",
+                "features" => [
+
+                ],
+                "specs" => [
+                ],
+                "visible" => true,
+                "sold_out" => false,
+                "freeBonus" => false,
+                "guaranteed" => true,
+                "lifetime_access" => true,
+                "free_shipping" => false,
+                "included_edge" => true,
+                "thumbnail_logo" => "https://drumeo-assets.s3.amazonaws.com/drum-shop/beyond-beginner-drummer/BeyondBeginnerDrumming_Logo-white.svg",
+                "page_logo" => "",
+                "video" => "",
+                "instructor_name" => "Siros Vaziri",
+                "instructor_desc" => "",
+                "instructor_img" => null,
+                "studyText" => "",
+                "overview" => "",
             ],
             [
                 "brand" => 1,
@@ -436,7 +442,7 @@ class CmsLessonSeeder extends Seeder
                 "specs" => [
 
                 ],
-                "visible" => true,
+                "visible" => false,
                 "sold_out" => false,
                 "freeBonus" => false,
                 "guaranteed" => true,
@@ -450,91 +456,6 @@ class CmsLessonSeeder extends Seeder
                 "instructor_img" => "",
                 "studyText" => "",
                 "overview" => "",
-            ],
-            [
-                "brand" => 1,
-                "product_type_id" => 1,
-                "name" => "Anatomy Of A Drum Solo",
-                "slug" => "anatomy-of-a-drum-solo",
-                "sku" => "AOADS-DIGI",
-                "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/anatomy-of-a-drum-solo.jpg",
-                "meta_desc" => "In-studio footage of Neil Peart discussing, in detail, his approach to soloing.",
-                "meta_img" => "https://s3.amazonaws.com/drumeo-packs/Pack%20Images/Anatomy%20Of%20A%20Drum%20Solo/og-image.jpg",
-                "short_desc" => "Neil Peart breaks down his approach to drum soloing -- with more than three hours of online video to improve your rhythm and improvisation.",
-                "header_text" => "Neil Peart’s Inspiration, Improvisation,& Approach To Soloing",
-                "special_text" => "",
-                "price" => 29.99,
-                "discounted_price" => "",
-                "features" => [
-                    "Overall approach to composing a drum solo.",
-                    "Introduction to the drums and setup that Peart uses.",
-                    "The R30 tour setlist.",
-                    "Introduction to “Element 1” of his drum solo.",
-                    "How he uses the narrative arc in soloing.",
-                    "Incorporating African rhythms into a solo.",
-                    "Rhythmic variations and incorporating them into your playing.",
-                    "Creating mood changes with different voices on the drums.",
-                    "Hand technique and how it’s changed throughout his career.",
-                    "Big band sections of drum solos.",
-                ],
-                "specs" => [
-                    [
-                        "title" => "Publisher",
-                        "desc" => "Hudson Music, 2005"
-                    ],
-                    [
-                        "title" => "Video",
-                        "desc" => "200 minutes"
-                    ],
-                    [
-                        "title" => "Online",
-                        "desc" => "Lifetime access to all content"
-                    ],
-                    [
-                        "title" => "Skill",
-                        "desc" => "Intermediate"
-                    ],
-                ],
-                "visible" => true,
-                "sold_out" => false,
-                "freeBonus" => false,
-                "guaranteed" => true,
-                "lifetime_access" => true,
-                "free_shipping" => false,
-                "thumbnail_logo" => "https://s3.amazonaws.com/drumeo-packs/Pack%20Images/Anatomy%20Of%20A%20Drum%20Solo/logo-white.png",
-                "page_logo" => "https://s3.amazonaws.com/drumeo-packs/Pack%20Images/Anatomy%20Of%20A%20Drum%20Solo/logo-white.png",
-                "video" => "//player.vimeo.com/video/292144959",
-                "instructor_name" => "Neil Peart",
-                "instructor_desc" => "Best known as the drummer and primary lyricist for the rock band Rush, Neil Peart has received numerous awards for his musical performances including Best Rock Drummer, Best Multi-Percussionist, Best All Around Drummer, as well as inductions into the Rock and Roll Hall of Fame and the Modern Drummer Hall of Fame.
-
-Peart is noted for his distinctive in-concert drum solos, characterized by exotic percussion instruments and long, intricate passages in odd time signatures - and his drum solos were featured on every live album released by Rush. “Anatomy of a Drum Solo” gives you an in-depth examination of how he constructs a solo that is musical, rather than indulgent, using his solo from the 2004 R30 30th anniversary tour as an example.",
-                "benefits" => [
-                    [
-                        "icon" => "fa-trophy",
-                        "heading" => "Study With Neil Peart",
-                        "desc" => "World-renowned drummer for Rush. Inducted into the Rock and Roll Hall of Fame in 2013."
-                    ],
-                    [
-                        "icon" => "fa-users",
-                        "heading" => "Drumeo Interactive Edition",
-                        "desc" => "The famous Hudson Music DVD has been reformatted for a world-class digital, interactive experience."
-                    ],
-                ],
-                "overview" => "**“Best Instructional Video”, Modern Drummer Readers Poll (2006)
-                “Best DVD”, DRUM! Magazine Drummie Awards (2007)**
-
-In-studio footage of Neil Peart discussing, in detail, his approach to soloing. Using a solo recorded in 2004 in Frankfurt, Germany, as a framework - Peart talks about each segment of this nine-minute tour de force that is a highlight of each Rush performance.
-
-Also included are:
-
-Two explorations -- completely improved workouts at the drums, each over thirty minutes long; a never-before-released solo recorded in Hamburg, Germany in September, 2004.
-Peart’s Grammy Award-nominated solo from Rush in Rio.
-Two full Rush performances from Frankfurt 2004, shown entirely from the perspective of the drum cameras.
-Interviews with Lorne Wheaton, Peart’s drum tech, and Paul Northfield, Rush co-producer and engineer.
-A previously unreleased solo from the Rush Counterparts tour recorded in 1994 at the Palace of Auburn Hills in Michigan.
-
-You’ll also get online access to Drumeo features like progress tracking, video commenting, and community forums where you can connect with students and teachers from around the world.",
-                "instructor_img" => "https://s3.amazonaws.com/drumeo-packs/Instructors/neil-peart.jpg",
             ],
             [
                 "brand" => 1,
@@ -771,6 +692,7 @@ At the heart of this life-changing, career-extending system is the three-tier �
 Your pathway to playing better, faster, and healthier for a lifetime of pain-free drumming -- Great Hands For A Lifetime will help you unlock your potential and protect your hands for the many years of drumming to come.
 
 All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the notation, speeding up or slowing down the exercises, and creating loops to improve your learning experience. You’ll also get online access to Drumeo features like progress tracking, video commenting, and community forums where you can connect with students and teachers from around the world.",
+                'bundle_img' => 'https://drumeo-assets.s3.amazonaws.com/promos/july/tommy_card.jpg',
                 "bundle_desc" => "Tommy Igoe helps you improve your hand strength, speed, stamina, comfort, and control on the drums in this digital course. You’ll learn a challenging routine that weaves its way through standard rudiments while keeping you in command of drumming’s basic motions.",
             ],
             [
@@ -856,6 +778,91 @@ Petrillo has served as a faculty member at the Drummer’s Collective in New Yor
 This video pack also comes with a 52 page workbook.
 
 All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the notation, speeding up or slowing down the exercises, and creating loops to improve your learning experience. You’ll also get online access to Drumeo features like progress tracking, video commenting, and community forums where you can connect with students and teachers from around the world.",
+            ],
+            [
+                "brand" => 1,
+                "product_type_id" => 1,
+                "name" => "Anatomy Of A Drum Solo",
+                "slug" => "anatomy-of-a-drum-solo",
+                "sku" => "AOADS-DIGI",
+                "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/anatomy-of-a-drum-solo.jpg",
+                "meta_desc" => "In-studio footage of Neil Peart discussing, in detail, his approach to soloing.",
+                "meta_img" => "https://s3.amazonaws.com/drumeo-packs/Pack%20Images/Anatomy%20Of%20A%20Drum%20Solo/og-image.jpg",
+                "short_desc" => "Neil Peart breaks down his approach to drum soloing -- with more than three hours of online video to improve your rhythm and improvisation.",
+                "header_text" => "Neil Peart’s Inspiration, Improvisation,& Approach To Soloing",
+                "special_text" => "",
+                "price" => 29.99,
+                "discounted_price" => "",
+                "features" => [
+                    "Overall approach to composing a drum solo.",
+                    "Introduction to the drums and setup that Peart uses.",
+                    "The R30 tour setlist.",
+                    "Introduction to “Element 1” of his drum solo.",
+                    "How he uses the narrative arc in soloing.",
+                    "Incorporating African rhythms into a solo.",
+                    "Rhythmic variations and incorporating them into your playing.",
+                    "Creating mood changes with different voices on the drums.",
+                    "Hand technique and how it’s changed throughout his career.",
+                    "Big band sections of drum solos.",
+                ],
+                "specs" => [
+                    [
+                        "title" => "Publisher",
+                        "desc" => "Hudson Music, 2005"
+                    ],
+                    [
+                        "title" => "Video",
+                        "desc" => "200 minutes"
+                    ],
+                    [
+                        "title" => "Online",
+                        "desc" => "Lifetime access to all content"
+                    ],
+                    [
+                        "title" => "Skill",
+                        "desc" => "Intermediate"
+                    ],
+                ],
+                "visible" => true,
+                "sold_out" => false,
+                "freeBonus" => false,
+                "guaranteed" => true,
+                "lifetime_access" => true,
+                "free_shipping" => false,
+                "thumbnail_logo" => "https://s3.amazonaws.com/drumeo-packs/Pack%20Images/Anatomy%20Of%20A%20Drum%20Solo/logo-white.png",
+                "page_logo" => "https://s3.amazonaws.com/drumeo-packs/Pack%20Images/Anatomy%20Of%20A%20Drum%20Solo/logo-white.png",
+                "video" => "//player.vimeo.com/video/292144959",
+                "instructor_name" => "Neil Peart",
+                "instructor_desc" => "Best known as the drummer and primary lyricist for the rock band Rush, Neil Peart has received numerous awards for his musical performances including Best Rock Drummer, Best Multi-Percussionist, Best All Around Drummer, as well as inductions into the Rock and Roll Hall of Fame and the Modern Drummer Hall of Fame.
+
+Peart is noted for his distinctive in-concert drum solos, characterized by exotic percussion instruments and long, intricate passages in odd time signatures - and his drum solos were featured on every live album released by Rush. “Anatomy of a Drum Solo” gives you an in-depth examination of how he constructs a solo that is musical, rather than indulgent, using his solo from the 2004 R30 30th anniversary tour as an example.",
+                "benefits" => [
+                    [
+                        "icon" => "fa-trophy",
+                        "heading" => "Study With Neil Peart",
+                        "desc" => "World-renowned drummer for Rush. Inducted into the Rock and Roll Hall of Fame in 2013."
+                    ],
+                    [
+                        "icon" => "fa-users",
+                        "heading" => "Drumeo Interactive Edition",
+                        "desc" => "The famous Hudson Music DVD has been reformatted for a world-class digital, interactive experience."
+                    ],
+                ],
+                "overview" => "**“Best Instructional Video”, Modern Drummer Readers Poll (2006)
+                “Best DVD”, DRUM! Magazine Drummie Awards (2007)**
+
+In-studio footage of Neil Peart discussing, in detail, his approach to soloing. Using a solo recorded in 2004 in Frankfurt, Germany, as a framework - Peart talks about each segment of this nine-minute tour de force that is a highlight of each Rush performance.
+
+Also included are:
+
+Two explorations -- completely improved workouts at the drums, each over thirty minutes long; a never-before-released solo recorded in Hamburg, Germany in September, 2004.
+Peart’s Grammy Award-nominated solo from Rush in Rio.
+Two full Rush performances from Frankfurt 2004, shown entirely from the perspective of the drum cameras.
+Interviews with Lorne Wheaton, Peart’s drum tech, and Paul Northfield, Rush co-producer and engineer.
+A previously unreleased solo from the Rush Counterparts tour recorded in 1994 at the Palace of Auburn Hills in Michigan.
+
+You’ll also get online access to Drumeo features like progress tracking, video commenting, and community forums where you can connect with students and teachers from around the world.",
+                "instructor_img" => "https://s3.amazonaws.com/drumeo-packs/Instructors/neil-peart.jpg",
             ],
             [
                 "brand" => 1,
@@ -1192,6 +1199,7 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                 "instructor_img" => "",
                 "studyText" => "",
                 "overview" => "",
+                'bundle_img' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/piano-technique-made-easy.jpg',
                 "bundle_desc" => "Discover the best online piano lessons experience with Pianote. Your Pianote membership will give you hundreds of expertly designed, step-by-step lessons to guide you along the path to musical freedom. And you don’t need any special cables or software to get started, it works with EVERY piano or keyboard. And you’ll get access to REAL teachers who will be able to answer any questions you have along the way.",
             ],
             [
@@ -1226,6 +1234,7 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                 "studyText" => "",
                 "overview" => "",
                 "display_order" => 0,
+                'bundle_img' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/pianote-6-month.png',
                 "bundle_desc" => "Discover the best online piano lessons experience with Pianote. Your Pianote membership will give you hundreds of expertly designed, step-by-step lessons to guide you along the path to musical freedom. And you don’t need any special cables or software to get started, it works with EVERY piano or keyboard. And you’ll get access to REAL teachers who will be able to answer any questions you have along the way.",
             ],
             [
@@ -1328,6 +1337,7 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                 "instructor_img" => "",
                 "studyText" => "",
                 "overview" => "",
+                'bundle_img' => 'https://pianote.s3.amazonaws.com/products/play-beautiful-piano/cart-image.jpg',
                 "bundle_desc" => "Start playing beautiful piano music from the very first time you touch the keyboard. The Beginner’s Guide To Playing Beautiful Piano is your introduction to the world of stunning melodies and emotional music. Follow along and play beautiful sounds. But you won’t just be copying what you see… You’ll learn WHY certain chords and melodies sound beautiful. So after the course, you can create your own beautiful piano music.",
             ],
             [
@@ -1362,6 +1372,7 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                 "instructor_img" => "",
                 "studyText" => "",
                 "overview" => "",
+                'bundle_img' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/500-songs-in-5-days.jpg',
                 "bundle_desc" => "Learn the skills to play 500 songs in just 5 days. You’ll learn how to build and play chords, chord inversions, as well as fancy riffs and fills to make you sound like a pro. Plus -- you’ll get downloadable chord charts for 500 songs that are yours to keep FOREVER! Perfect for the beginner who wants to play REAL songs as fast as possible, even if you’ve never touched a piano before.",
             ],
             [
@@ -1395,6 +1406,7 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                 "instructor_img" => "",
                 "studyText" => "",
                 "overview" => "",
+                'bundle_img' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/worship-piano.jpg',
                 "bundle_desc" => "Master the skills to play modern worship songs and learn how to be part of a band. You’ll learn how to read worship chord charts, create beautiful background music and how to be part of a worship team. Plus, this pack comes with your own band as a backing track, so YOU can join the band and play piano with other musicians.",
             ],
             [
@@ -1429,6 +1441,7 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                 "instructor_img" => "",
                 "studyText" => "",
                 "overview" => "",
+                'bundle_img' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/piano-technique-made-easy.jpg',
                 "bundle_desc" => "Feeling stuck on the keys? Like you’ve hit a wall you just can’t break through? Chances are your technique is holding you back. Good technique is the FOUNDATION of your piano playing. And without a good foundation -- you’ll never reach the heights you dream of. You’ll get stuck at the same level. Piano Technique Made Easy is your go-to guide to improving your technical skills on the keys, so your songs will be easier to play. Perfect to help you progress through your classical journey with more ease and confidence.",
             ],
             [
@@ -1463,6 +1476,7 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                 "instructor_img" => "",
                 "studyText" => "",
                 "overview" => "",
+                'bundle_img' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/de-stupefy-your-left-hand.jpg',
                 "bundle_desc" => "Your left hand is weaker. And that’s normal. Most piano players struggle with their left hand, and sadly, most just accept it. De-Stupefy Your Left Hand is your 3-step path to a better left hand. First, you’ll learn how to get your left hand to listen to your brain, so it moves when YOU want it to (and not whenever it feels like it). Then, you’ll start playing faster, more accurately, and with more control, as you put your left hand to work. And finally, you’ll discover how to transform your playing with beautiful and musical left-hand accompaniments that would have seemed out of reach at the beginning of the training pack. Yes, your left hand might be weaker… but it doesn’t have to be.",
             ],
             [
@@ -1497,6 +1511,7 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                 "instructor_img" => "",
                 "studyText" => "",
                 "overview" => "",
+                'bundle_img' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/faster-fingers.jpg',
                 "bundle_desc" => "Increase your finger speed, strength, and accuracy with this complete digital training pack. Faster Fingers is your roadmap to success on the piano. You’ll be guided every step of the way with daily practice videos and encouragement, plus you’ll be able to play along with every exercise and record your speed. The metronome doesn’t lie -- you’ll be able to SEE how much faster you’re getting. As a beginner, some of the later exercises may be too difficult, to begin with, but you’ll find immense value in the early exercises, and it will help speed up your learning as well as your fingers."
             ],
             [
@@ -1531,6 +1546,7 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                 "instructor_img" => "",
                 "studyText" => "",
                 "overview" => "",
+                'bundle_img' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/piano-riffs-and-fills.jpg',
                 "bundle_desc" => "Anyone can play a chord -- but what happens in the spaces between the chords distinguishes the great players from the mediocre ones. Fill those spaces with piano riffs that will make you sound professional, polished ... and close to perfect. This course is broken down so even complete beginners can start sounding amazing. You’ll be shown exactly how to play the fills -- note for note.",
             ],
             [
@@ -1565,6 +1581,7 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                 "instructor_img" => "",
                 "studyText" => "",
                 "overview" => "",
+                'bundle_img' => 'https://pianote.s3.amazonaws.com/sales/promos/july/classical_method_card.jpg',
                 "bundle_desc" => "Start playing beautiful classical piano pieces. The Classical Method is the NEW curriculum from Pianote featuring world-class piano player, Victoria Theodore. Victoria has toured with Beyoncé and Stevie Wonder, but classical piano is her passion. In 5 levels, she’ll walk you through the timeless eras of classical music and show you step-by-step how to play beautiful pieces. If you’ve ever dreamed of sitting at the piano playing timeless classics by Beethoven, Chopin, or Bach, this Method is for you.",
             ],
 
@@ -1600,6 +1617,7 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                 "instructor_img" => "",
                 "studyText" => "",
                 "overview" => "",
+                'bundle_img' => 'https://guitareo.s3.amazonaws.com/sales/promos/black-friday/bundles/ultimate/annual.jpg',
                 'bundle_desc' => 'Get inspired, stay motivated, and crush your goals on guitar with a Guitareo Membership. Ayla Tesler-Mabe’s 10-level METHOD curriculum will help you reach all of your goals – plus you’ll have access to guitar courses by Mark Lettieri (Snarky Puppy), Yvette Young (Covet), Dave Weiner (Steve Vai’s Guitarist), and more. Even better – you’ll get access to REAL teachers who will be able to answer any questions you have along the way.',
             ],
             [
@@ -1629,6 +1647,7 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                 "free_shipping" => false,
                 "thumbnail_logo" => "https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/Logo.svg",
                 "page_logo" => "",
+                "included_edge" => true,
                 "video" => "",
                 "instructor_name" => "Sami Ghawi",
                 "instructor_desc" => "",
@@ -1647,6 +1666,7 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                 "meta_desc" => "",
                 "meta_img" => "",
                 "short_desc" => "Learn the most important guitar techniques and reach total guitar freedom.",
+                "included_edge" => true,
                 "header_text" => "",
                 "price" => 197,
                 "discounted_price" => "",
@@ -1669,6 +1689,7 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                 "instructor_img" => "",
                 "studyText" => "",
                 "overview" => "",
+                'bundle_img' => 'https://d122ay5chh2hr5.cloudfront.net/order-form/guitar-technique-made-easy.png',
                 'bundle_desc' => 'Better technique starts here! Guitar Technique Made Easy is the step-by-step process for learning the most important guitar techniques. Whether you want to focus on acoustic or electric guitar, this 26-week course will give you the skills and knowledge to pursue any genre or style of music. Break bad habits, and achieve total freedom on the guitar with Guitar Technique Made Easy.',
             ],
             [
@@ -1681,6 +1702,7 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                 "meta_desc" => "",
                 "meta_img" => "",
                 "short_desc" => "Transform your guitar playing with the ultimate encyclopedia of guitar lessons.",
+                "included_edge" => true,
                 "header_text" => "",
                 "price" => 197,
                 "discounted_price" => "",
@@ -1703,6 +1725,7 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                 "instructor_img" => "",
                 "studyText" => "",
                 "overview" => "",
+                'bundle_img' => 'https://d122ay5chh2hr5.cloudfront.net/order-form/guitar-system.png',
                 'bundle_desc' => 'Transform your guitar playing with the ULTIMATE Encyclopedia of Guitar Lessons. From very beginner to advanced, learn anything you want on the guitar with lessons that have been trusted by thousands of guitarists around the world! Whether you want to learn the basic guitar fundamentals, the ins-and-outs of tone, palm muting, guitar theory, or anything else you could possibly need. The Guitar System has it all!',
             ],
             [
@@ -1715,6 +1738,7 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                 "meta_desc" => "",
                 "meta_img" => "",
                 "short_desc" => "Transform your guitar playing with the ultimate encyclopedia of guitar lessons.",
+                "included_edge" => true,
                 "header_text" => "",
                 "price" => 197,
                 "discounted_price" => "",
@@ -1737,6 +1761,7 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                 "instructor_img" => "",
                 "studyText" => "",
                 "overview" => "",
+                'bundle_img' => 'https://d1923uyy6spedc.cloudfront.net/398-product-thumb--1609436919.jpg',
                 'bundle_desc' => 'Music is a language -- and just like you didn’t start talking by understanding prepositions and nouns, you shouldn’t learn guitar by endlessly studying theory. Instead, let’s just start playing!
 Follow famous YouTuber and musician Rob Scallon as he takes you on a 9 mission journey where you’ll write songs, shoot a music video, make commercial jingles, and rock out ridiculously hard! So skip the boring stuff and start having fun with GuitarQuest!',
             ],
@@ -1750,6 +1775,7 @@ Follow famous YouTuber and musician Rob Scallon as he takes you on a 9 mission j
                 "meta_desc" => "",
                 "meta_img" => "",
                 "short_desc" => "Build a rock-solid foundation and get started on the acoustic guitar the right way.",
+                "included_edge" => true,
                 "header_text" => "",
                 "price" => 197,
                 "discounted_price" => "",
@@ -1772,6 +1798,7 @@ Follow famous YouTuber and musician Rob Scallon as he takes you on a 9 mission j
                 "instructor_img" => "",
                 "studyText" => "",
                 "overview" => "",
+                'bundle_img' => 'https://d122ay5chh2hr5.cloudfront.net/order-form/acoustic-guitar-made-easy.png',
                 'bundle_desc' => 'Get started on the acoustic guitar the right way! With Acoustic Guitar Made Easy, you’ll learn and master the five pillars of the acoustic guitar to build a rock-solid foundation so you can play the songs you love. See your newfound skills in action as you learn to play iconic songs like “Horse With No Name,” “Brown Eyed Girl,” “Let It Be,” “Jambalaya,” and “Take It Easy.” This is your crystal-clear pathway to reaching your guitar goals.',
             ],
             [
@@ -1784,6 +1811,7 @@ Follow famous YouTuber and musician Rob Scallon as he takes you on a 9 mission j
                 "meta_desc" => "",
                 "meta_img" => "",
                 "short_desc" => "Build the skills and knowledge to play 500 songs on the guitar. Comes with downloadable chord charts.",
+                "included_edge" => true,
                 "header_text" => "",
                 "price" => 97,
                 "discounted_price" => "",
@@ -1806,6 +1834,7 @@ Follow famous YouTuber and musician Rob Scallon as he takes you on a 9 mission j
                 "instructor_img" => "",
                 "studyText" => "",
                 "overview" => "",
+                'bundle_img' => 'https://guitareo.s3.amazonaws.com/500-songs/cart-image.png',
                 'bundle_desc' => '500 Songs In 5 Days is designed to give you the skills and knowledge to quickly learn and play 500 songs from a variety of eras and styles. No memorization needed! Get the tips and tricks for playing almost any popular song, along with downloadable chord charts for 500 songs. So you can play the songs you love as much as you’d like, whenever you want.',
             ],
             [
@@ -2883,6 +2912,7 @@ This powerful resource makes it easy to access your lessons anytime from virtual
                 "instructor_img" => "",
                 "studyText" => "",
                 "overview" => "",
+                'bundle_img' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/sight-reading-made-simple.jpg',
                 'bundle_desc' => 'Start reading music in MINUTES with this fantastic digital training pack. Sight-Reading Made Simple breaks down the task or reading music into short FUN lessons, so you can learn the basics in no time. If you’ve ever wanted to read music, or tried before and had a bad experience, this training pack will have you reading notes, rhythm, and time signatures in no time. You’ll get practice exercises to go along with the lessons, PLUS a downloadable glossary of music notes and symbols that you can download, print, and keep at the keyboard. Reading music doesn’t have to be hard. This training pack will show you just how easy it can be.',
             ],
             [
@@ -2917,6 +2947,7 @@ This powerful resource makes it easy to access your lessons anytime from virtual
                 "instructor_img" => null,
                 "studyText" => "",
                 "overview" => "",
+                'bundle_img' => 'https://singeo.s3.amazonaws.com/sales/promos/november/annual-tall.jpg',
                 "bundle_desc" => "For less than the price of two in-person singing lessons, get a FULL YEAR of access to our Singeo Member's Area. You'll have step-by-step lessons to guide you along the way to the singing voice you've always wanted, personal feedback from REAL vocal coaches, on-demand practice and vocal exercise routines, exclusive access to featured courses taught by Grammy Award-winning singers and a forum with thousands of other students on the same journey as you."
             ],
             [
@@ -2945,11 +2976,12 @@ This powerful resource makes it easy to access your lessons anytime from virtual
                 "thumbnail_logo" => "https://singeo.s3.amazonaws.com/products/singing-starter-kit/logo.png",
                 "page_logo" => "",
                 "video" => "",
-                "instructor_name" => "",
+                "instructor_name" => "Lisa Witt",
                 "instructor_desc" => "",
                 "instructor_img" => "",
                 "studyText" => "",
                 "overview" => "",
+                'bundle_img' => 'https://singeo.s3.amazonaws.com/sales/promos/november/singing-starter-kit.jpg',
                 'bundle_desc' => 'Start your singing journey the right way with The Singing Starter Kit. Get rid of all the guesswork and frustration as you follow along with 6 step-by-step lessons to discover your beautiful, unique voice. Use “The Most Important Vocal Exercise” to warm up your voice, and unlock the “Singer’s Secret Weapon” that will instantly make you sound better. Plus, you’ll have support and feedback from real teachers to help you at every turn.',
             ],
             [
@@ -2983,6 +3015,7 @@ This powerful resource makes it easy to access your lessons anytime from virtual
                 "instructor_img" => "",
                 "studyText" => "",
                 "overview" => "",
+                'bundle_img' => 'https://singeo.s3.amazonaws.com/sales/promos/october/Beautiful_harmonies_card.jpg',
                 'bundle_desc' => 'In 8 easy-to-follow video lessons, you’ll learn everything you need to know to elevate any song to a whole new level. You’ll learn the SECRET to finding ANY harmony (high or low), how to make your harmony fit with the melody and the easiest harmony in the world (That also sounds incredible). You can be singing your first harmony 10 minutes from NOW!',
             ],
 //            [
@@ -3125,6 +3158,7 @@ This powerful resource makes it easy to access your lessons anytime from virtual
                             'visible' => $product['visible'],
                             'lifetime_access' => $product['lifetime_access'],
                             'display_order' => empty($product['display_order']) ? $orderNum : $product['display_order'],
+                            'bundle_img' => empty($product['bundle_img']) ? null : $product['bundle_img'],
                             'bundle_desc' => empty($product['bundle_desc']) ? null : $product['bundle_desc'],
                             'created_at' => now(),
                             'updated_at' => now(),

@@ -25,10 +25,10 @@
             $(document).foundation();
         });
     </script>
-    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/modal-autoplay.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
     @yield('scripts')
     <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-    <script src="{{ asset('/marketing/assets/js/pre-form-submit-facebook-lead.js') }}"></script>
+    <script src="{{ asset('/marketing/js/drumeo/pre-form-submit-facebook-lead.js') }}"></script>
 
-    <script src="{{ asset('/marketing/parcel/drumeo/compiled/infusionsoft-tracking.js') }}"></script>
+    <script src="{{ asset('/marketing/js/drumeo/infusionsoft-tracking.js') }}"></script>
 @stop

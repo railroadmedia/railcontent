@@ -27,9 +27,16 @@
 
 @section('scripts')
     @parent
+<<<<<<< HEAD
     <script src="{{ asset('assets/marketing/svg-polyfil.js') }}"></script>
     <script src="{{ asset('assets/marketing/nav-footer.js') }}"></script>
     <script src="/js/jquery.countdown-2.min.js"></script>
+=======
+    <script src="{{ asset('marketing/parcel/guitareo/svg-polyfil.js') }}"></script>
+    <script src="{{ asset('marketing/js/app.js') }}"></script>
+    <script src="{{ asset('marketing/parcel/guitareo/nav-footer.js') }}"></script>
+    <script src="/marketing/js/jquery.countdown-2.min.js"></script>
+>>>>>>> feature-marketing-migration
     <script>
         $(document).ready(function () {
             // Countdown

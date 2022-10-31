@@ -200,14 +200,14 @@
     <div class="reveal large text-center" id="trailer" data-reveal data-reset-on-close="false" style="max-width:440px">
         <iframe class="google-form w-full" src="https://docs.google.com/forms/d/e/1FAIpQLScfFSkurzZdJtpdG_ReoopBLnURr2e0D60OjMST-2GWUsC71A/viewform?embedded=true" height="810" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
     </div>
-    @include("sales.footer")
+    @include("pianote.sales.footer")
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
         $(document).ready(function () {
             $(document).foundation();
         });
     </script>
-    <script type="text/javascript" src="/marketing/js/pianote/modal.js"></script>
+    <script type="text/javascript" src="/marketing/js/modal.js"></script>
     <script type="text/javascript" src="/marketing/parcel/pianote/nav-footer.js"></script>
     <script type="text/javascript" src="https://addevent.com/libs/atc/1.6.1/atc.min.js"></script>
 @stop

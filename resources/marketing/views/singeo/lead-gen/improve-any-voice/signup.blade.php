@@ -11,7 +11,7 @@
     <meta property="og:description" content="Anyone can sing! Singeo is here to show you how in this free mini lesson series.">
     <meta property="og:url" content="https://www.singeo.com/improve-any-voice/">
 
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/singeo/animate.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/css/animate.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/singeo/lead-gen.css') }}">
 
     <style>
@@ -36,7 +36,7 @@
     </style>
 @stop
 @section('scripts')
-    <script type="text/javascript" src="/marketing/parcel/singeo/modal-autoplay.js"></script>
+    <script type="text/javascript" src="/marketing/js/modal-autoplay.js"></script>
 @stop
 
 @section('body')
