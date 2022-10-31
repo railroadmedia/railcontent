@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Currency;
+use Laravel\Nova\Fields\Heading;
 use Laravel\Nova\Fields\Hidden;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Image;
@@ -87,8 +88,9 @@ class Lesson extends Resource
             Text::make('Promo Code', 'promo_code')->hideFromIndex(),
             Currency::make('Price')->required(),
             Currency::make('Discounted Price', 'discounted_price')->hideFromIndex(),
+            Heading::make('Shop Card'),
             Text::make('Badge Text', 'badge_text')->hideFromIndex(),
-            Image::make('Thumbnail')
+            Image::make('Shop Card Thumbnail', 'thumbnail')
                 ->disk('nova_s3')
                 ->prunable()
                 ->hideFromIndex()
@@ -118,8 +120,8 @@ class Lesson extends Resource
 
                     return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
                 }),
-            Text::make('Thumbnail')->hideFromIndex()->hideFromDetail(),
-            Image::make('Thumbnail Logo', 'thumbnail_logo')
+            Text::make('Shop Card Thumbnail', 'thumbnail')->hideFromIndex()->hideFromDetail(),
+            Image::make('Shop Card Logo', 'thumbnail_logo')
                 ->disk('nova_s3')
                 ->prunable()
                 ->hideFromIndex()
@@ -149,9 +151,10 @@ class Lesson extends Resource
 
                     return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
                 }),
-            Text::make('Thumbnail Logo', 'thumbnail_logo')->hideFromIndex()->hideFromDetail(),
-
-            Text::make('Short Description', 'short_desc')->hideFromIndex(),
+            Text::make('Shop Card Logo', 'thumbnail_logo')->hideFromIndex()->hideFromDetail(),
+            Text::make('Shop Card Description', 'short_desc')->hideFromIndex(),
+            Number::make('Display order', 'display_order')->required(),
+            Heading::make('Page'),
             Text::make('Header Text', 'header_text')->hideFromIndex(),
             Text::make('Special Text', 'special_text')->hideFromIndex(),
             Image::make('Page Logo', 'page_logo')
@@ -184,7 +187,7 @@ class Lesson extends Resource
 
                     return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
                 }),
-            Text::make('Page Logo URL', 'page_logo')->hideFromIndex()->hideFromDetail(),
+            Text::make('Page Logo', 'page_logo')->hideFromIndex()->hideFromDetail(),
             Text::make('Video Link', 'video_src')
                 ->hideFromIndex(),
             Markdown::make('Overview')->hideFromIndex(),
@@ -226,20 +229,19 @@ class Lesson extends Resource
             Text::make('Instructor Image', 'product_img')->hideFromIndex()->hideFromDetail(),
             Markdown::make('Instructor Description', 'instructor_desc')
                 ->hideFromIndex(),
-            Boolean::make('Visible')->default(true)->hideFromIndex(),
-            Boolean::make('Sold Out', 'sold_out')->default(false)->hideFromIndex(),
-            Boolean::make('Guarantee Badge', 'guaranteed')->default(false)->hideFromIndex(),
-            Boolean::make('Lifetime Access', 'lifetime_access')->default(false)->hideFromIndex(),
-            Boolean::make('Free Shipping', 'free_shipping')->default(false)->hideFromIndex(),
-            Boolean::make('Included Edge', 'included_edge')->default(false)->hideFromIndex(),
-            Boolean::make('Bundle Free Shipping', 'bundle_free_shipping')->default(false)->hideFromIndex(),
-            Number::make('Display order', 'display_order')->required(),
             Flexible::make('Features/Topics')
                 ->addLayout(FeatureLayout::class)
                 ->preset(FeaturePreset::class),
             Flexible::make('Specs')
                 ->addLayout(SpectLayout::class)
                 ->preset(SpecPreset::class),
+            Boolean::make('Visible')->default(true)->hideFromIndex(),
+            Boolean::make('Sold Out', 'sold_out')->default(false)->hideFromIndex(),
+            Boolean::make('Guarantee Badge', 'guaranteed')->default(false)->hideFromIndex(),
+            Boolean::make('Lifetime Access', 'lifetime_access')->default(false)->hideFromIndex(),
+            Boolean::make('Free Shipping', 'free_shipping')->default(false)->hideFromIndex(),
+            Boolean::make('Included Edge', 'included_edge')->default(false)->hideFromIndex(),
+            Heading::make('Bundle'),
             Image::make('Bundle Image', 'bundle_img')
                 ->disk('nova_s3')
                 ->prunable()
@@ -271,6 +273,7 @@ class Lesson extends Resource
                     return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
                 }),
             Text::make('Bundle Description', 'bundle_desc')->hideFromIndex(),
+            Boolean::make('Bundle Free Shipping', 'bundle_free_shipping')->default(false)->hideFromIndex(),
         ];
     }
 

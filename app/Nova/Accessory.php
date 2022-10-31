@@ -88,7 +88,7 @@ class Accessory extends Resource
             Currency::make('Price')->required(),
             Currency::make('Discounted Price', 'discounted_price')->hideFromIndex(),
             Text::make('Badge Text', 'badge_text')->hideFromIndex(),
-            Image::make('Thumbnail')
+            Image::make('Shop Card Thumbnail', 'thumbnail')
                 ->disk('nova_s3')
                 ->prunable()
                 ->hideFromIndex()
@@ -118,8 +118,8 @@ class Accessory extends Resource
 
                     return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
                 }),
-            Text::make('Thumbnail')->hideFromIndex()->hideFromDetail(),
-            Text::make('Short Description', 'short_desc')->hideFromIndex(),
+            Text::make('Shop Card Thumbnail', 'thumbnail')->hideFromIndex()->hideFromDetail(),
+            Text::make('Shop Card Description', 'short_desc')->hideFromIndex(),
             Text::make('Header Text', 'header_text')->hideFromIndex(),
             Text::make('Special Text', 'special_text')->hideFromIndex(),
             Boolean::make('Visible')->default(true)->hideFromIndex(),
