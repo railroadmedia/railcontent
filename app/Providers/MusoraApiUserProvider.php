@@ -10,6 +10,7 @@ use Modules\UserManagementSystem\Models\FirebaseToken;
 use Railroad\Ecommerce\Entities\Subscription;
 use Railroad\Ecommerce\Repositories\ProductRepository;
 use Railroad\Ecommerce\Repositories\SubscriptionRepository;
+use Railroad\Ecommerce\Services\SubscriptionService;
 use Railroad\MusoraApi\Contracts\UserProviderInterface;
 use Railroad\MusoraApi\Entities\User;
 use Railroad\MusoraApi\Exceptions\MusoraAPIException;
@@ -26,6 +27,7 @@ class MusoraApiUserProvider implements UserProviderInterface
     private CommentService $commentService;
     private PostRepository $postRepository;
     private ContentService $contentService;
+    private SubscriptionService $subscriptionService;
 
     public function __construct(
         SubscriptionRepository $subscriptionRepository,
@@ -33,7 +35,8 @@ class MusoraApiUserProvider implements UserProviderInterface
         CalendarService $calendarService,
         CommentService $commentService,
         PostRepository $postRepository,
-        ContentService $contentService
+        ContentService $contentService,
+        SubscriptionService $subscriptionService
     ) {
         $this->productRepository = $productRepository;
         $this->subscriptionRepository = $subscriptionRepository;
@@ -41,6 +44,7 @@ class MusoraApiUserProvider implements UserProviderInterface
         $this->commentService = $commentService;
         $this->postRepository = $postRepository;
         $this->contentService = $contentService;
+        $this->subscriptionService = $subscriptionService;
     }
 
     public function getCurrentUser()
@@ -274,7 +278,8 @@ class MusoraApiUserProvider implements UserProviderInterface
         $userId = $user['id'];
 
         $this->commentService->markUserCommentsAsDeleted($userId);
-//        $this->postRepository->deleteByUserId($userId);
+        $this->postRepository->deleteByUserId($userId);
+        $this->subscriptionService->cancelUserSubscriptions($userId);
 
         $user->fill([
             'email' => 'musora+deleted_'.Carbon::now()->getTimestamp().'@musora.com',
