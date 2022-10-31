@@ -307,6 +307,16 @@ class ContentPagesController extends BaseController
                     [$primaryPage, $methodContent['slug'], $methodContent['id']]
                 ),
             ];
+
+            if ($firstId == 276693) {
+                $classicalMethodPack = $this->contentService->getById(361886);
+                $classicalMethodPackJson = (new ContentFilterResultsEntity(
+                    ['results' => [$classicalMethodPack], 'total_results' => 1]
+                ))->toResponseRawJson();
+            } else {
+                $classicalMethodPack = null;
+                $classicalMethodPackJson = null;
+            }
         } else {
             // for the situation when $primaryPage == "courses"
             $backButton = [
@@ -344,6 +354,8 @@ class ContentPagesController extends BaseController
             "nextLessonJson" => $nextLessonJson,
             "xpBonus" => $xpBonus,
             'displayItemAsOverview' => $firstLevelContent['type'] === 'learning-path',
+            'classicalMethodPack' => $classicalMethodPack,
+            'classicalMethodPackJson' => $classicalMethodPackJson,
         ]);
     }
 
