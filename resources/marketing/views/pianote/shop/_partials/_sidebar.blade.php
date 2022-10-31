@@ -1,3 +1,11 @@
+{{--@php    --}}
+{{--    $soldOut = false;--}}
+
+{{--    if(!empty($sku) && !empty($productStock[$sku]) && ($category !== 'lessons' && $category !== 'bundles')){--}}
+{{--        $soldOut = $productStock[$sku]->isProductSoldOut();--}}
+{{--    }--}}
+{{--@endphp--}}
+
 <div class="shop-sidebar sliding-function px-3 md:px-4 lg:px-4 lg:w-1/3 lg:mt-5">
     <div class="lg:h-0">
     <div id="order" class="anchor"></div>
@@ -38,7 +46,10 @@
                         @foreach($sizes as $size)
                             <option
                                     @if(isset($size->soldOut) && $size->soldOut) disabled @endif
-                                    value="{{$product->sku}}-{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}" data-product-json='{"{{$product->sku}}-{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}": 1}'
+                            {{-- @if($productStock[$sku.'-'.$size->code]->isProductSoldOut()) disabled @endif --}}
+                                    value="{{$product->sku}}-{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}"
+                                    data-price="{{floatVal($product->price) ?? 0}}"
+                                    data-product-json='{"{{$product->sku}}-{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}": 1}'
                             >
                                 {{ $size->name }}
                             </option>

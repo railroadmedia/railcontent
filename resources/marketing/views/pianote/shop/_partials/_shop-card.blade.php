@@ -1,8 +1,10 @@
-@php
-    if(!empty($sku) && !empty($products[$sku]) && !empty($physical) && $physical){
-        $soldOut = $products[$sku]->isProductSoldOut();
-    }
-@endphp
+{{--@php    --}}
+{{--    $soldOut = false;--}}
+
+{{--    if(!empty($sku) && !empty($productStock[$sku]) && ($category !== 'lessons' && $category !== 'bundles')){--}}
+{{--        $soldOut = $productStock[$sku]->isProductSoldOut();--}}
+{{--    }--}}
+{{--@endphp--}}
 
 <li class="scalable-card {{ !empty($cardType) ? $cardType : '' }} {{ $soldOut ? 'sold-out' : '' }}" data-price="{{ floatval($price) }}" data-category="{{ $category }}"
         {{ !empty($featured) ? 'data-featured-item=yes' : '' }}>
@@ -67,10 +69,12 @@
                                 <option hidden value="">Choose Size</option>
                                 @foreach($sizes as $size)
                                     <option
-                                        @if(!empty($physical) && $physical && $products[$sku.'-'.$variant->sku]->isProductSoldOut()) disabled @endif
-                                        =value="?products[{{$sku}}-{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}]=1" data-product-json='{"{{$sku}}-{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}": 1}'
+                                        @if(isset($size->soldOut) && $size->soldOut) disabled @endif
+                                    {{-- @if($productStock[$sku.'-'.$size->code]->isProductSoldOut()) disabled @endif --}}
+                                        value="?products[{{$sku}}-{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}]=1"
+                                        data-product-json='{"{{$sku}}-{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}": 1}'
                                     >
-                                        {{ $size->name  }}
+                                        {{ $size->name }}
                                     </option>
                                 @endforeach
                             </select>
