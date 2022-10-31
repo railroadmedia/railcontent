@@ -129,7 +129,7 @@
 
 @section('global-body')
     @include('pianote.sales.nav', [
-        "cartVersion" => true
+        "cartVersion" => false
     ])
 {{--    @include('shop.partials._promo-banner')--}}
 
