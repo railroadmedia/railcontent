@@ -506,7 +506,7 @@
     <script src="{{ asset('/marketing/js/drumeo/cart-sidebar.js') }}"></script>
     <script src="{{ asset('/marketing/js/drumeo/app.js') }}"></script>
     <script src="{{ asset('/marketing/js/drumeo/drum-shop-filters.js') }}"></script>
-    <script src="{{ mix('marketing/js/app.js') }}"></script>
+    <script src="{{ asset('marketing/js/app.js') }}"></script>
     <script>
         $(function () {
             $('.scalable-card').click(function (e) {
