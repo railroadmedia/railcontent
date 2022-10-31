@@ -1246,11 +1246,11 @@ span.flatpickr-day.nextMonthDay.selected {
 
 @font-face {
     font-family: "icons";
-    src: url(/fonts/vendor/@musora/icons/dist/icons.eot?d0e5a02dbb14bb13b3242ff0ddcd4d64?#iefix) format("embedded-opentype"),
-url(/fonts/vendor/@musora/icons/dist/icons.woff2?f526a32526aa5557a5d1718bad821b1f) format("woff2"),
-url(/fonts/vendor/@musora/icons/dist/icons.woff?e9dbdf6495b69f06a958b93ffd1cb89a) format("woff"),
-url(/fonts/vendor/@musora/icons/dist/icons.ttf?ad7be61b5aa89d8be2b2f894521c4d99) format("truetype"),
-url(/images/vendor/@musora/icons/dist/icons.svg?6d091a7cf371111e50399e27a3a425d1#icons) format("svg");
+    src: url("./icons.eot?f41b91f2b176bee144da66bd188434cf?#iefix") format("embedded-opentype"),
+url("./icons.woff2?f41b91f2b176bee144da66bd188434cf") format("woff2"),
+url("./icons.woff?f41b91f2b176bee144da66bd188434cf") format("woff"),
+url("./icons.ttf?f41b91f2b176bee144da66bd188434cf") format("truetype"),
+url("./icons.svg?f41b91f2b176bee144da66bd188434cf#icons") format("svg");
 }
 
 i[class^="icon-"], i[class*=" icon-"] {

@@ -20,7 +20,7 @@ environments:
             - 'php artisan event:cache'
             - 'php artisan route:cache'
             - 'php artisan view:cache'
-            - 'rm -rf node_modules && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
+            - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
     pre-production:
         domain: 'pre-production.musora.com'
         scheduler: false
