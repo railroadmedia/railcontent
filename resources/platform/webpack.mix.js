@@ -1,8 +1,6 @@
 const mix = require('laravel-mix');
 const tailwindcss = require('tailwindcss');
-require('laravel-mix-merge-manifest');
-const ASSET_URL =
-  process.env.NODE_ENV === "production" ? (process.env.ASSET_URL || '' ) + "/" : "/";
+const ASSET_URL = process.env.NODE_ENV === "production" ? (process.env.ASSET_URL || '' ) + "/" : "/";
 
 /*
  |--------------------------------------------------------------------------
@@ -17,39 +15,45 @@ const ASSET_URL =
  | file for the application as well as bundling up all the JS files.
  |
  */
-mix.setPublicPath('./public/');
-mix
-    .js('resources/platform/assets/js/app.js', 'public/platform/js')
+
+mix.js('resources/platform/assets/js/app.js', 'public/platform/js')
     //JS From Existing Platforms
     .js('resources/platform/assets/js/profile.js', 'public/platform/js')
     .js('resources/platform/assets/js/lesson-page.js', 'public/platform/js')
     .js('resources/platform/assets/js/books.js', 'public/platform/js')
     .vue({ version: 3 })
-    .sass('resources/platform/assets/css/app.scss', 'public/platform/css')
+    .sass(
+        'resources/platform/assets/css/app.scss',
+        'public/platform/css',
+        {},
+        [tailwindcss('./resources/platform/tailwind.config.js')]
+    )
+    .sass(
+        'resources/marketing/assets/css/app.scss',
+        'public/marketing/css',
+        {},
+        [tailwindcss('./resources/marketing/marketing.tailwind.config.js')]
+    )
     .options({
-        postCss: [tailwindcss('./resources/platform/tailwind.config.js')],
+        processCssUrls: false,
     })
     .extract(['alpinejs', 'fast-glob'], 'vendor~unused.js')
     .extract(['shaka-player', 'screenful', 'mux.js', 'mediaelement', 'mediaelement-plugins'], 'vendor~player.js')
     .extract(['vue-advanced-cropper'], 'vendor~onboarding.js')
     .extract()
     .sourceMaps()
-    .version()
-    .mergeManifest();
+    .version();
 
-if (mix.inProduction()) {
-    const ASSET_URL = process.env.ASSET_URL + "/";
-
-    mix.webpackConfig(webpack => {
-        return {
-            plugins: [
-                new webpack.DefinePlugin({
-                    "process.env.ASSET_PATH": JSON.stringify(ASSET_URL)
-                })
-            ],
-            output: {
-                publicPath: ASSET_URL
-            }
-        };
-    });
-}
+mix.webpackConfig(webpack => {
+    return {
+        // target: ['web', 'es5'],
+        output: {
+            publicPath: ASSET_URL,
+        },
+        plugins: [
+            new webpack.DefinePlugin({
+                "process.env.ASSET_PATH": JSON.stringify(ASSET_URL)
+            })
+        ]
+    };
+});

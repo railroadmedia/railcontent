@@ -776,7 +776,7 @@ class ProfileSettingsPagesController extends BaseController
         $paymentMethods = $this->paymentMethodRepository->getAllUsersPaymentMethods(
             $user->id,
             $request,
-            'drumeo'
+            brand()
         );
 
         $paymentMethodsJson = ResponseService::paymentMethod(
@@ -849,7 +849,7 @@ class ProfileSettingsPagesController extends BaseController
             }
         }
 
-        $payments = $this->paymentRepository->getAllUsersPayments($user->id, false, 'drumeo');
+        $payments = $this->paymentRepository->getAllUsersPayments($user->id, false, brand());
 
         // sort by date
         usort(
