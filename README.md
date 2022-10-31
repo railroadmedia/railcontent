@@ -362,6 +362,33 @@ PHP or lower level logs are in cloudwatch/vapor.
 
 Other environments are being added to papertrial in the near future.
 
+## Local
+
+Run `r logs {container-id}` from within railenvmanager, specifing the php8 apache container.
+
+Get the container id of the apache-php-fpm-8 container by running this (in railenvmanager container):
+
+```
+docker ps | grep 'apache-php-fpm-8'
+```
+
+That'll return something like this:
+
+```
+90b0bd123eb0   railenvironment_docker_apache-php-fpm-8      "/entrypoint /bin/ba…"   7 hours ago    Up 4 hours   9000/tcp, 9100/tcp, 0.0.0.0:8880->80/tcp, :::8880->80/tcp, 0.0.0.0:8222->222/tcp, :::8222->222/tcp, 0.0.0.0:8443->443/tcp, :::8443->443/tcp   railenvironmentdocker_apache-php-fpm-8
+```
+
+Then to view the logs for that that you can run (in railenvmanager container):
+
+```
+r logs 90b0bd123eb0
+```
+
+Or because you don't need the entire id, just enough to differentiate it from other containers, this would probably do:
+
+```
+r logs 90b0
+```
 
 # Image CDN Uploading, Serving, and Formatting 
 
