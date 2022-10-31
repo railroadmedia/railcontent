@@ -230,6 +230,9 @@ class ContentPagesController extends BaseController
         ContentRepository::$availableContentStatues = false;
         ContentRepository::$pullFutureContent = true;
 
+        $classicalMethodPack = null;
+        $classicalMethodPackJson = null;
+
         $firstLevelContent = $this->contentService->getById($firstId);
 
         if (empty($firstLevelContent)) {
