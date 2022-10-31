@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fa4e5d015ed37fa88620174ce08a35a4",
+    "content-hash": "ff75731fb9d289eb214282f7d2a8570a",
     "packages": [
         {
             "name": "aporat/store-receipt-validator",
@@ -8447,7 +8447,7 @@
         },
         {
             "name": "railroad/railtracker",
-            "version": "v4.0.10",
+            "version": "v4.0.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railtracker.git",
@@ -8502,7 +8502,7 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railtracker/issues",
-                "source": "https://github.com/railroadmedia/railtracker/tree/v4.0.10"
+                "source": "https://github.com/railroadmedia/railtracker/tree/v4.0"
             },
             "time": "2022-10-28T08:23:26+00:00"
         },
