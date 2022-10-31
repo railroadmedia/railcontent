@@ -22,16 +22,7 @@ Route::domain('{drumeoDomain}')->group(function () {
         }
     );
     Route::get('/destupefying-your-weak-hand', function () { return view('drumeo.lead-gen.destupefy.destupefy'); });
-    Route::group(['prefix' => 'drum-beats'],
-        function () {
-            Route::get('/', function () { return view('drumeo.lead-gen.drum-beats.index'); });
-            Route::get('/1', function () { return view('drumeo.lead-gen.drum-beats.lessons.1'); });
-            Route::get('/2', function () { return view('drumeo.lead-gen.drum-beats.lessons.2'); });
-            Route::get('/3', function () { return view('drumeo.lead-gen.drum-beats.lessons.3'); });
-            Route::get('/4', function () { return view('drumeo.lead-gen.drum-beats.lessons.4'); });
-            Route::get('/5', function () { return view('drumeo.lead-gen.drum-beats.lessons.play-along'); });
-        }
-    );
+
     Route::group(['prefix' => 'drum-fills'],
         function () {
             Route::get('/', function () { return view('drumeo.lead-gen.drum-fills.index'); });
