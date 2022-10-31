@@ -1,3 +1,7 @@
+@php
+    require_once(resource_path('views/lead-gen/chord-hacks/lessons.php'))
+@endphp
+
 @extends('pianote.lead-gen.chord-hacks.chord-hacks-layout')
 
 @section('meta')
@@ -26,34 +30,7 @@
         </div>
     </div>
 
-    @include('pianote.lead-gen.partials.series1',[
-        "lessons" => [
-            [
-                "boxImage" => 'https://d2vyvo0tyx8ig5.cloudfront.net/chord-hacks/chord-hacking.jpg',
-                "boxAlt" => "chord-hacking",
-            ],
-            [
-                "boxImage" => 'https://d2vyvo0tyx8ig5.cloudfront.net/chord-hacks/inversions.jpg',
-                "boxAlt" => "inversions",
-            ],
-            [
-                "boxImage" => 'https://d2vyvo0tyx8ig5.cloudfront.net/chord-hacks/adding-rhythm.jpg',
-                "boxAlt" => "adding-rhythm",
-            ],
-            [
-                "boxImage" => 'https://d2vyvo0tyx8ig5.cloudfront.net/chord-hacks/two-hands.jpg',
-                "boxAlt" => "two-hands",
-            ],
-            [
-                "boxImage" => 'https://d2vyvo0tyx8ig5.cloudfront.net/chord-hacks/chord-progressions.jpg',
-                "boxAlt" => "chord-progressions",
-            ],
-            [
-                "boxImage" => 'https://d2vyvo0tyx8ig5.cloudfront.net/chord-hacks/popular-songs.jpg',
-                "boxAlt" => "popular-songs",
-            ],
-        ],
-    ])
+    @include('pianote.lead-gen.partials.series1')
 
     @include('pianote.lead-gen.partials.enter-email',[
         "content" => '<div class="medium-body mb-7">Just enter your email below for 6 beginner video lessons!</div>',

@@ -1,3 +1,7 @@
+@php
+    require_once(resource_path('views/lead-gen/getting-started/lessons.php'))
+@endphp
+
 @extends('pianote.lead-gen.getting-started.layout')
 
 @section('meta')
@@ -27,25 +31,7 @@
     </div>
 
     @include('pianote.lead-gen.partials.series1',[
-        "customSize" => "w-full md:w-1/2",
-        "lessons" => [
-            [
-                "boxImage" => 'https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/sit-down-now-what.png',
-                "boxAlt" => "sit-down-now-what",
-            ],
-            [
-                "boxImage" => 'https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/scales.png',
-                "boxAlt" => "scales",
-            ],
-            [
-                "boxImage" => 'https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/minor-scale.png',
-                "boxAlt" => "minor-scale",
-            ],
-            [
-                "boxImage" => 'https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/your-first-song.png',
-                "boxAlt" => "your-first-song",
-            ],
-        ],
+        "customSize" => "w-full md:w-1/2"
     ])
 
     @include('pianote.lead-gen.partials.enter-email',[
