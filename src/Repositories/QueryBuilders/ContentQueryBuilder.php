@@ -641,7 +641,7 @@ class ContentQueryBuilder extends QueryBuilder
         } else {
             $this->orderByRaw(
                 DB::raw(
-                    implode(', ', $orderByColumns).' '.$orderDirection
+                    implode(', ', $orderByColumns).' '.$orderDirection.', '.ConfigService::$tableContent.'.id'.' '.$orderDirection
                 )
             );
         }
