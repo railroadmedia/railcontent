@@ -81,5 +81,9 @@ const __usedVars = [
   'md:tw-bg-drumeo',
   'md:tw-bg-singeo',
   'md:tw-bg-guitareo',
-  'md:tw-bg-pianote'
+  'md:tw-bg-pianote',
+  'tw-bg-pianote/10',
+  'tw-bg-drumeo/10',
+  'tw-bg-guitareo/10',
+  'tw-bg-singeo/10'
 ]
