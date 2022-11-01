@@ -130,7 +130,7 @@ class Clothing extends Resource
             Text::make('Shop Card Description', 'short_desc')->hideFromIndex(),
             Text::make('Header Text', 'header_text')->hideFromIndex(),
             Text::make('Special Text', 'special_text')->hideFromIndex(),
-            Boolean::make('Visible')->default(true)->hideFromIndex(),
+            Boolean::make('Visible On Shop Page')->default(true)->hideFromIndex(),
             Boolean::make('Sold Out', 'sold_out')->default(false)->hideFromIndex(),
             Boolean::make('Guarantee Badge', 'guaranteed')->default(false)->hideFromIndex(),
             Boolean::make('Lifetime Access', 'lifetime_access')->default(false)->hideFromIndex(),
@@ -157,7 +157,7 @@ class Clothing extends Resource
             Flexible::make('Sizes')
                 ->addLayout(SizeLayout::class)
                 ->preset(SizePreset::class),
-            Flexible::make('Features/Topics')
+            Flexible::make('Features')
                 ->addLayout(FeatureLayout::class)
                 ->preset(FeaturePreset::class),
             Flexible::make('Specs')

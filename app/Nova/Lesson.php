@@ -229,13 +229,13 @@ class Lesson extends Resource
             Text::make('Instructor Image', 'product_img')->hideFromIndex()->hideFromDetail(),
             Markdown::make('Instructor Description', 'instructor_desc')
                 ->hideFromIndex(),
-            Flexible::make('Features/Topics')
+            Flexible::make('Topics')
                 ->addLayout(FeatureLayout::class)
                 ->preset(FeaturePreset::class),
             Flexible::make('Specs')
                 ->addLayout(SpectLayout::class)
                 ->preset(SpecPreset::class),
-            Boolean::make('Visible')->default(true)->hideFromIndex(),
+            Boolean::make('Visible On Shop Page')->default(true)->hideFromIndex(),
             Boolean::make('Sold Out', 'sold_out')->default(false)->hideFromIndex(),
             Boolean::make('Guarantee Badge', 'guaranteed')->default(false)->hideFromIndex(),
             Boolean::make('Lifetime Access', 'lifetime_access')->default(false)->hideFromIndex(),
