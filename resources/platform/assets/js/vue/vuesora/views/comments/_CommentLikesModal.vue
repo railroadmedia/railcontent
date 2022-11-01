@@ -24,11 +24,10 @@
                 v-else
                 class="tw-flex tw-flex-col"
             >
-                <h1 class="heading tw-align-middle pa-3">
-                    <i
-                        class="fas fa-thumbs-up tw-rounded tw-text-white tw-mr-1 big likes-icon"
-                        :class="themeBgClass"
-                    ></i>
+                <h1 class="heading tw-flex tw-items-center pa-3">
+                    <div class="tw-flex tw-items-center tw-justify-center tw-rounded tw-text-white tw-mr-2 big likes-icon" :class="themeBgClass">
+                        <musora-icon icon-name="thumb-like-filled" class="tw-w-7 tw-h-7 tw-mb-1" />
+                    </div>
                     {{ totalLikeUsers }} Like{{ totalLikeUsers == 1 ? '' : 's' }}
                 </h1>
 

@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use App\Console\Commands\MigrateCoachesToInstructors;
+use App\Console\Commands\MigrateGuitareoUserXP;
 use App\Console\Commands\PopulateNewRolesAndPermissionsTables;
 use App\Console\Commands\PopulateUserBrandLevel;
 use App\Console\Commands\PopulateUserMinutesPracticedPerBrand;
@@ -12,6 +13,7 @@ use App\Console\Commands\RepairVimeoDurations;
 use App\Console\Commands\RunMWPPhaseOneLaunchMigrations;
 use App\Console\Commands\SeedLiveAndScheduledContent;
 use App\Console\Commands\SeedUserContentData;
+use App\Console\Commands\TestLessonsDescriptionUrls;
 use App\Console\Commands\VaporEnvManager;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -35,6 +37,8 @@ class Kernel extends ConsoleKernel
         PopulateUserTotalXpPerBrand::class,
         PopulateUserMinutesPracticedPerBrand::class,
         VaporEnvManager::class,
+        TestLessonsDescriptionUrls::class,
+        MigrateGuitareoUserXP::class,
     ];
 
     /**

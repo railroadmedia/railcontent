@@ -345,6 +345,14 @@ r mwp artisan VaporEnvManager web-staging-one push
 Environment variables are highly sensitive and need to stay secure. Please do not ever commit these .env files or share
 them. They should be deleted from your machine after updates are pushed.
 
+# How To Update Staging/Vapor Environments Databases From Production Data
+
+Use the r command 'update-databases'. Example:  
+```
+r mwp update-databases
+```
+Then enter the corresponding environment number you want to be updated with production data.
+
 # Emails and Testing Emails
 All non-production environment emails sent by our system go to our mailtrap account and email address be default:
 [https://mailtrap.io/inboxes/1620451/messages](https://mailtrap.io/inboxes/1620451/messages)
@@ -362,6 +370,33 @@ PHP or lower level logs are in cloudwatch/vapor.
 
 Other environments are being added to papertrial in the near future.
 
+## Local
+
+Run `r logs {container-id}` from within railenvmanager, specifing the php8 apache container.
+
+Get the container id of the apache-php-fpm-8 container by running this (in railenvmanager container):
+
+```
+docker ps | grep 'apache-php-fpm-8'
+```
+
+That'll return something like this:
+
+```
+90b0bd123eb0   railenvironment_docker_apache-php-fpm-8      "/entrypoint /bin/ba…"   7 hours ago    Up 4 hours   9000/tcp, 9100/tcp, 0.0.0.0:8880->80/tcp, :::8880->80/tcp, 0.0.0.0:8222->222/tcp, :::8222->222/tcp, 0.0.0.0:8443->443/tcp, :::8443->443/tcp   railenvironmentdocker_apache-php-fpm-8
+```
+
+Then to view the logs for that that you can run (in railenvmanager container):
+
+```
+r logs 90b0bd123eb0
+```
+
+Or because you don't need the entire id, just enough to differentiate it from other containers, this would probably do:
+
+```
+r logs 90b0
+```
 
 # Image CDN Uploading, Serving, and Formatting 
 
