@@ -15,11 +15,11 @@
             <a href="/drumshop" class="join outline-button">Shop</a>
 
             <nav-cart-button
-{{--                cart-data='{{ $cartData }}'--}}
+                cart-data='{{ $cartData }}'
             ></nav-cart-button>
             <cart-sidebar
                 brand="drumeo"
-{{--                cart-data='{{ $cartData }}'--}}
+                cart-data='{{ $cartData }}'
             ></cart-sidebar>
         </div>
     @endif

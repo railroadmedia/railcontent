@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\ViewComposers\MarketingCartSidebarViewComposer;
 use App\ViewComposers\NavigationViewComposer;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\ServiceProvider;
@@ -39,6 +40,16 @@ class AppServiceProvider extends ServiceProvider
         }
 
         view()->composer('*', NavigationViewComposer::class);
+
+        view()->composer(
+            [
+                'drumeo.sales.partials._nav',
+                'pianote.sales.partials._nav',
+                'guitareo.sales.partials._nav',
+                'singeo.sales.partials._nav',
+            ],
+            MarketingCartSidebarViewComposer::class
+        );
 
         //        app()->instance(EcommerceUserProviderInterface::class, app()->make(EcommerceUserProvider::class));
         //        app()->instance(RailforumsUserProviderInterface::class, app()->make(RailforumsUserProvider::class));
