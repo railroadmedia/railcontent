@@ -1,27 +1,27 @@
 <template>
     <div
-        class="cs-message tw-p-3 tw-rounded-md tw-relative tw-top-0"
+        class="cs-message t-p-3 t-rounded-md t-relative t-top-0"
         :class="{'system': message.type == 'system', 'pinned': message.pinned && showPin}"
         @mouseleave="closeMessageMenus()"
         @click.stop="closeMessageMenus()"
         ref="msg"
     >
-        <div class="tw-max-w-full" v-if="message.pinned && showPin">
+        <div class="t-max-w-full" v-if="message.pinned && showPin">
             <div class="cs-pin-container">
                 <a
                     href="#"
                     @click.stop.prevent="unpinMessage()"
-                    class="cs-text-sm cs-text-gray tw-flex tw-flex-row tw-items-center"
-                ><i class="fal fa-thumbtack"></i><span class="tw-ml-1 leading-none">Pinned</span></a>
+                    class="cs-text-sm cs-text-gray t-flex t-flex-row t-items-center"
+                ><i class="fal fa-thumbtack"></i><span class="t-ml-1 leading-none">Pinned</span></a>
             </div>
         </div>
-        <div class="tw-flex tw-flex-col tw-max-w-full" v-if="messageEdit.id != message.id && message.type != 'system'" lang="en">
+        <div class="t-flex t-flex-col t-max-w-full" v-if="messageEdit.id != message.id && message.type != 'system'">
             <chat-user :user="message.user">
                 <template v-slot:footer>
-                    <div v-html="message.text" class="cs-message-text tw-break-words cs-text-sm"></div>
-                    <div class="tw-inline-flex tw-items-center" v-if="$_has_reactions || showUpvote">
+                    <div v-html="message.text" class="cs-message-text t-whitespace-normal cs-text-sm"></div>
+                    <div class="t-inline-flex t-items-center" v-if="$_has_reactions || showUpvote">
                         <div
-                            class="cs-upvote tw-flex tw-flex-row tw-items-center tw-px-3 tw-rounded-full cs-text-xs"
+                            class="cs-upvote t-flex t-flex-row t-items-center t-px-3 t-rounded-full cs-text-xs"
                             :class="$_message_upvote_class"
                             @click.stop.prevent="toggleUpvote()"
                             v-if="showUpvote"
@@ -30,30 +30,30 @@
                             <span class="cs-reaction-count">{{ $_message_upvote }}</span>
                         </div>
                         <div
-                            class="tw-flex tw-flex-row tw-text-gray-500 tw-cursor-pointer"
+                            class="t-flex t-flex-row t-text-gray-500 t-cursor-pointer"
                             v-if="$_has_reactions"
                         >
                             <div
-                                class="tw-flex tw-flex-row tw-place-content-center tw-p-1"
+                                class="t-flex t-flex-row t-place-content-center t-p-1"
                                 v-for="(count, reaction) in $_message_reactions"
                                 :key="`message-reaction-${reaction}`"
                                 @click.stop.prevent="toggleMessageReaction(reaction)"
                                 :title="getReactionUsers(reaction)"
                             >
                                 <span>{{ getReactionEmoji(reaction) }}</span>
-                                <span class="tw-text-xs tw-text-white tw-ml-1" v-if="count > 1">{{ count }}</span>
+                                <span class="t-text-xs t-text-white t-ml-1" v-if="count > 1">{{ count }}</span>
                             </div>
                         </div>
                     </div>
-                    <div v-if="message.reply_count && showThread" class="tw-inline-flex">
+                    <div v-if="message.reply_count && showThread" class="t-inline-flex">
                         <a
-                            class="tw-flex tw-flex-row tw-content-end"
+                            class="t-flex t-flex-row t-content-end"
                             @click.stop.prevent="messageThread()"
                         >
-                            <div class="tw-transform tw--rotate-180">
+                            <div class="t-transform t--rotate-180">
                                 <i class="fal fa-reply"></i>
                             </div>
-                            <span class="tw-ml-1 cs-text-sm">{{ $_reply_count_label }}</span>
+                            <span class="t-ml-1 cs-text-sm">{{ $_reply_count_label }}</span>
                         </a>
                     </div>
                 </template>
@@ -75,16 +75,16 @@
             <div class="cs-message-edit">
                 <textarea
                     v-model="messageEdit.text"
-                    class="cs-text-sm tw-p-2 tw-bg-black tw-text-white tw-resize-none tw-rounded-md tw-border-0"
+                    class="cs-text-sm t-p-2 t-bg-black t-text-white t-resize-none t-rounded-md t-border-0"
                 ></textarea>
-                <div class="tw-flex tw-flex-row tw-justify-end tw-mt-2">
+                <div class="t-flex t-flex-row t-justify-end t-mt-2">
                     <div
-                        class="cs-btn-outline-white tw-cursor-pointer tw-rounded-full tw-leading-none tw-font-bold focus:tw-outline-none focus:tw-shadow-outline tw-uppercase tw-border-2 tw-border-white tw-text-white tw-w-28 tw-flex tw-items-center tw-justify-center tw-mr-2"
+                        class="cs-btn-outline-white t-cursor-pointer t-rounded-full t-leading-none t-font-bold focus:t-outline-none focus:t-shadow-outline t-uppercase t-border-2 t-border-white t-text-white t-w-28 t-flex t-items-center t-justify-center t-mr-2"
                         title="Cancel message edit"
                         @click.stop.prevent="cancelMessageEdit()"
                     >Cancel</div>
                     <div
-                        class="cs-btn-save tw-cursor-pointer tw-cursor-pointer tw-rounded-full tw-leading-none tw-font-bold focus:tw-outline-none focus:tw-shadow-outline tw-uppercase tw-border-2 tw-text-white tw-w-28 tw-flex tw-items-center tw-justify-center"
+                        class="cs-btn-save t-cursor-pointer t-cursor-pointer t-rounded-full t-leading-none t-font-bold focus:t-outline-none focus:t-shadow-outline t-uppercase t-border-2 t-text-white t-w-28 t-flex t-items-center t-justify-center"
                         :class="brand"
                         title="Save message updates"
                         @click.stop.prevent="saveMessageEdit()"
@@ -92,7 +92,7 @@
                 </div>
             </div>
         </div>
-        <div v-if="message.type == 'system'" class="tw-py-2 tw-text-white cs-text-sm">
+        <div v-if="message.type == 'system'" class="t-py-2 t-text-white cs-text-sm">
             {{ message.text }}
         </div>
     </div>
@@ -198,7 +198,7 @@ export default {
         $_message_upvote_class: {
             cache: false,
             get() {
-                return { 'active': this.hasOwnReaction('upvote'), 'tw-cursor-pointer': this.message.user.id != this.userId };
+                return { 'active': this.hasOwnReaction('upvote'), 't-cursor-pointer': this.message.user.id != this.userId };
             },
         },
 
@@ -220,8 +220,8 @@ export default {
     },
     mounted() {
         if (this.message.type != 'system') {
-            this.chatEventBus
-                .on(
+            this.$root
+                .$on(
                     'editMessage',
                     ({ message, pinnedMessage }) => {
                         if (message.id == this.message.id && pinnedMessage == this.showPin) {
@@ -235,8 +235,8 @@ export default {
                     }
                 );
 
-            this.chatEventBus
-                .on(
+            this.$root
+                .$on(
                     'messageOwnReactionUpdate',
                     ({ message }) => {
                         if (message.id == this.message.id) {
@@ -245,19 +245,19 @@ export default {
                     }
                 );
 
-            this.chatEventBus
-                .on(
+            this.$root
+                .$on(
                     'messageMenuToggled',
                     ({ message }) => {
                         if (message.id == this.message.id && this.$refs.msg) {
                             let domRect = this.$refs.msg.getBoundingClientRect();
-                            this.chatEventBus.emit('toggleChatPopup', { message: this.message, domRect });
+                            this.$root.$emit('toggleChatPopup', { message: this.message, domRect });
                         }
                     }
                 );
 
-            this.chatEventBus
-                .on(
+            this.$root
+                .$on(
                     'scrollIntoView',
                     ({ message }) => {
                         if (message.id == this.message.id && this.$refs.msg) {
@@ -277,8 +277,8 @@ export default {
         },
 
         saveMessageEdit() {
-            this.chatEventBus
-                .emit(
+            this.$root
+                .$emit(
                     'updateMessage',
                     {
                         message: this.message,
@@ -297,8 +297,8 @@ export default {
         },
 
         toggleMessageReaction(reaction) {
-            this.chatEventBus
-                .emit(
+            this.$root
+                .$emit(
                     'toggleMessageReaction',
                     {
                         message: this.message,
@@ -309,8 +309,8 @@ export default {
 
         toggleUpvote() {
             if (this.message.user.id != this.userId) {
-                this.chatEventBus
-                    .emit(
+                this.$root
+                    .$emit(
                         'toggleMessageReaction',
                         {
                             message: this.message,
@@ -385,11 +385,11 @@ export default {
         },
 
         messageThread() {
-            this.chatEventBus.emit('messageThread', { message: this.message });
+            this.$root.$emit('messageThread', { message: this.message });
         },
 
         unpinMessage() {
-            this.chatEventBus.emit('unpinMessage', { message: this.message });
+            this.$root.$emit('unpinMessage', { message: this.message });
         },
 
         firstWordLength() {
@@ -397,7 +397,7 @@ export default {
         },
 
         closeMessageMenus() {
-            this.chatEventBus.emit('closeMessageMenus', {});
+            this.$root.$emit('closeMessageMenus', {});
         },
     },
 }

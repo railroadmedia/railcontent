@@ -1,48 +1,48 @@
 <template>
     <div
-        class="cs-container tw-relative tw-h-full tw-w-full tw-max-h-[690px] tw-flex tw-flex-col vuesora-override"
+        class="cs-container t-relative t-h-full t-w-full t-flex t-flex-col vuesora-override"
         :class="brand"
     >
-        <div class="cs-top tw-flex-none">
-            <div class="tw-h-full tw-w-full tw-flex tw-flex-row tw-items-center tw-place-content-between">
-                <div class="tw-h-full tw-ml-4 tw-flex tw-flex-row tw-items-end tw-space-x-4 cs-text-sm">
+        <div class="cs-top t-flex-none">
+            <div class="t-h-full t-w-full t-flex t-flex-row t-items-center t-place-content-between">
+                <div class="t-h-full t-ml-4 t-flex t-flex-row t-items-end t-space-x-4 cs-text-sm">
                     <a
                         href="#"
-                        class="tw-no-underline tw-px-3 tw-border-b-2 tw-h-full tw-flex tw-flex-row tw-items-center"
+                        class="t-no-underline t-px-3 t-border-b-2 t-h-full t-flex t-flex-row t-items-center"
                         :class="getTabClasses('chat')"
                         @click.stop.prevent="setCurrentTab('chat')"
                     >Chat</a>
                     <a
                         href="#"
-                        class="tw-no-underline tw-px-3 tw-border-b-2 tw-h-full tw-flex tw-flex-row tw-items-center"
+                        class="t-no-underline t-px-3 t-border-b-2 t-h-full t-flex t-flex-row t-items-center"
                         :class="getTabClasses('questions')"
                         @click.stop.prevent="setCurrentTab('questions')"
                     >Questions</a>
                 </div>
                 <a
                     href="#"
-                    class="tw-no-underline tw-font-semibold tw-px-4 cs-text-gray tw-border-b-2 tw-border-transparent tw-h-full tw-flex tw-flex-row tw-items-center"
+                    class="t-no-underline t-font-semibold t-px-4 cs-text-gray t-border-b-2 t-border-transparent t-h-full t-flex t-flex-row t-items-center"
                     @click.stop.prevent="toggleChatMenu()"
                 ><i class="fas fa-ellipsis-v"></i></a>
             </div>
-            <div class="tw-relative">
+            <div class="t-relative">
                 <div
-                    class="cs-top-menu cs-text-sm tw-leading-relaxed tw-absolute tw-right-4 tw-py-3 tw-flex tw-flex-col tw-bg-black tw-rounded-lg tw-text-white tw-z-30"
+                    class="cs-top-menu cs-text-sm t-leading-relaxed t-absolute t-right-4 t-py-3 t-flex t-flex-col t-bg-black t-rounded-lg t-text-white t-z-30"
                     v-if="chatMenu"
                 >
-                    <div class="tw-px-3 tw-mb-2 tw-font-semibold tw-cursor-default" v-if="isAdministrator">Moderation</div>
-                    <div class="cs-top-menu-item tw-px-3 tw-mb-1 tw-cursor-pointer" @click.stop.prevent="toggleShowMembers()">Participants</div>
+                    <div class="t-px-3 t-mb-2 t-font-semibold t-cursor-default" v-if="isAdministrator">Moderation</div>
+                    <div class="cs-top-menu-item t-px-3 t-mb-1 t-cursor-pointer" @click.stop.prevent="toggleShowMembers()">Participants</div>
                     <div
-                        class="cs-top-menu-item tw-px-3 tw-mb-1 tw-cursor-pointer"
+                        class="cs-top-menu-item t-px-3 t-mb-1 t-cursor-pointer"
                         @click.stop.prevent="popoutChat()"
                     >Pop Out Chat</div>
                     <div
-                        class="cs-top-menu-item tw-px-3 tw-mb-1 tw-cursor-pointer"
+                        class="cs-top-menu-item t-px-3 t-mb-1 t-cursor-pointer"
                         @click.stop.prevent="toggleShowBannedUsers()"
                         v-if="isAdministrator"
                     >Blocked Students</div>
                     <div
-                        class="cs-top-menu-item tw-px-3 tw-mb-1 tw-cursor-pointer"
+                        class="cs-top-menu-item t-px-3 t-mb-1 t-cursor-pointer"
                         @click.stop.prevent="removeAllQuestions()"
                         v-if="currentTab == 'questions' && isAdministrator"
                     >Clear All Questions</div>
@@ -50,36 +50,33 @@
             </div>
         </div>
 
-        <div class="tw-absolute tw-top-0 tw-right-0 tw-left-0 tw-flex-col tw-z-40"
-             :class="showThread ? 'tw-flex' : 'tw-hidden'">
-            <div class="cs-top tw-flex-none">
-                <div class="tw-h-full tw-w-full tw-flex tw-flex-row tw-place-items-center tw-justify-between">
+        <div class="t-absolute t-top-0 t-right-0 t-left-0 t-flex t-flex-col t-z-40" v-show="showThread">
+            <div class="cs-top t-flex-none">
+                <div class="t-h-full t-w-full t-flex t-flex-row t-place-items-center t-justify-between">
                     <a
                         href="#"
-                        class="tw-ml-3 tw-no-underline tw-text-white"
+                        class="t-ml-3 t-no-underline t-text-white"
                         @click.stop.prevent="hideMessageThread()"
-                    ><i class="fas fa-arrow-left"></i><span class="tw-ml-2">Thread</span><span class="tw-ml-3">{{ $_reply_count_label }}</span></a>
-                    <div class="tw-mr-3"><i class="fal fa-times tw-text-white tw-font-semibold tw-cursor-pointer" @click.stop.prevent="hideMessageThread()"></i></div>
+                    ><i class="fas fa-arrow-left"></i><span class="t-ml-2">Thread</span><span class="t-ml-3">{{ $_reply_count_label }}</span></a>
+                    <div class="t-mr-3"><i class="fal fa-times t-text-white t-font-semibold t-cursor-pointer" @click.stop.prevent="hideMessageThread()"></i></div>
                 </div>
             </div>
         </div>
 
-        <div class="tw-absolute tw-inset-0 tw-flex-col tw-z-40" 
-             :class="showMembers ? 'tw-flex' : 'tw-hidden'"
-        >
-            <div class="cs-top tw-flex-none">
-                <div class="tw-h-full tw-w-full tw-flex tw-flex-row tw-items-center">
+        <div class="t-absolute t-inset-0 t-flex t-flex-col t-z-40" v-show="showMembers">
+            <div class="cs-top t-flex-none">
+                <div class="t-h-full t-w-full t-flex t-flex-row t-items-center">
                     <a
                         href="#"
-                        class="tw-ml-3 tw-no-underline tw-text-white"
+                        class="t-ml-3 t-no-underline t-text-white"
                         @click.stop.prevent="toggleShowMembers()"
-                    ><i class="fas fa-arrow-left"></i><span class="tw-ml-2 cs-text-sm">Participants</span></a>
+                    ><i class="fas fa-arrow-left"></i><span class="t-ml-2 cs-text-sm">Participants</span></a>
                 </div>
             </div>
-            <div class="cs-body tw-flex-grow tw-overflow-y-auto">
-                <div class="cs-members-container tw-mt-1 tw-p-3">
+            <div class="cs-body t-flex-grow t-overflow-y-auto">
+                <div class="cs-members-container t-mt-1 t-p-3">
                     <div
-                        class="tw-py-2"
+                        class="t-py-2"
                         v-for="item in $_watchers"
                         :key="item.id"
                     >
@@ -87,65 +84,63 @@
                     </div>
                 </div>
             </div>
-            <div class="cs-footer tw-flex-none tw-h-8">
-                <div class="tw-h-full tw-flex tw-flex-row tw-items-center tw-px-3">
-                    <span class="cs-text-gray tw-text-xs">{{ $_watcher_count }} Online</span>
+            <div class="cs-footer t-flex-none t-h-8">
+                <div class="t-h-full t-flex t-flex-row t-items-center t-px-3">
+                    <span class="cs-text-gray t-text-xs">{{ $_watcher_count }} Online</span>
                 </div>
             </div>
         </div>
 
-        <div class="tw-absolute tw-inset-0 tw-flex tw-flex-col tw-z-40"
-             :class="showBannedUsers ? 'tw-flex' : 'tw-hidden'"
-        >
-            <div class="cs-top tw-flex-none">
-                <div class="tw-h-full tw-w-full tw-flex tw-flex-row tw-items-center">
+        <div class="t-absolute t-inset-0 t-flex t-flex-col t-z-40" v-show="showBannedUsers">
+            <div class="cs-top t-flex-none">
+                <div class="t-h-full t-w-full t-flex t-flex-row t-items-center">
                     <a
                         href="#"
-                        class="tw-ml-3 tw-no-underline tw-text-white"
+                        class="t-ml-3 t-no-underline t-text-white"
                         @click.stop.prevent="toggleShowBannedUsers()"
-                    ><i class="fas fa-arrow-left"></i><span class="tw-ml-2 cs-text-sm">Blocked Students</span></a>
+                    ><i class="fas fa-arrow-left"></i><span class="t-ml-2 cs-text-sm">Blocked Students</span></a>
                 </div>
             </div>
-            <div class="cs-body tw-flex-grow tw-overflow-y-auto">
-                <div class="tw-mt-1 tw-p-3 cs-text-gray" v-if="fetchingBannedUsers || $_banned_users_count == 0">
+            <div class="cs-body t-flex-grow t-overflow-y-auto">
+                <div class="t-mt-1 t-p-3 cs-text-gray" v-if="fetchingBannedUsers || $_banned_users_count == 0">
                     <span v-if="fetchingBannedUsers">Fetching blocked students information...</span>
                     <span v-if="!fetchingBannedUsers && $_banned_users_count == 0">There are no students blocked from this chat.</span>
                 </div>
-                <div class="cs-members-container tw-mt-1 tw-p-3" v-if="!fetchingBannedUsers && $_banned_users_count > 0">
+                <div class="cs-members-container t-mt-1 t-p-3" v-if="!fetchingBannedUsers && $_banned_users_count > 0">
                     <div
-                        class="tw-py-2"
+                        class="t-py-2"
                         v-for="item in bannedUsers"
                         :key="item.id"
                     >
-                        <div class="cs-user tw-p-3 tw-rounded-md">
+                        <div class="cs-user t-p-3 t-rounded-md">
                             <chat-user :user="item">
-                                <div class="tw-flex-grow tw-text-right">
+                                <div class="t-flex-grow t-text-right">
                                     <a
                                         href="#"
                                         @click.stop.prevent="unblockUser(item)"
                                         class="cs-user-unblock cs-text-sm"
-                                    ><span>Unblock</span><i class="tw-ml-1 fas fa-times-circle"></i></a>
+                                    ><span>Unblock</span><i class="t-ml-1 fas fa-times-circle"></i></a>
                                 </div>
                             </chat-user>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="cs-footer tw-flex-none tw-h-8">
-                <div class="tw-h-full tw-flex tw-flex-row tw-items-center tw-px-3">
-                    <span class="cs-text-gray tw-text-xs">{{ $_watcher_count }} Online</span>
+            <div class="cs-footer t-flex-none t-h-8">
+                <div class="t-h-full t-flex t-flex-row t-items-center t-px-3">
+                    <span class="cs-text-gray t-text-xs">{{ $_watcher_count }} Online</span>
                 </div>
             </div>
         </div>
 
-        <div class="cs-body tw-flex-grow tw-flex tw-flex-col tw-overflow-hidden">
+        <div class="cs-body t-flex-grow t-flex t-flex-col t-overflow-hidden t-relative">
             <div
-                class="cs-messages-container tw-pt-4 tw-overflow-y-scroll tw-z-40"
+                class="cs-messages-container t-pt-4 t-overflow-y-scroll t-z-40"
                 v-if="showThread"
                 ref="threadMessages"
             >
-                <div class="tw-border-b tw-border-gray-600">
-                    <div class="tw-my-4">
+                <div class="t-border-b t-border-gray-600">
+                    <div class="t-my-4">
                         <chat-message
                             :is-administrator="isAdministrator"
                             :message="messageThread"
@@ -157,7 +152,7 @@
                         ></chat-message>
                     </div>
                 </div>
-                <div class="cs-messages-container tw-mt-4">
+                <div class="cs-messages-container t-mt-4">
                     <div
                         v-for="item in $_message_thread_replies"
                         :key="item.id"
@@ -174,7 +169,7 @@
                 </div>
             </div>
             <div
-                class="cs-messages-container cs-fit tw-pt-4 tw-pb-2 tw-z-20"
+                class="cs-messages-container cs-fit t-pt-4 t-pb-2 t-z-20"
                 v-show="$_pinned_messages.length && currentTab == 'chat' && !showThread"
             >
                 <div
@@ -193,17 +188,17 @@
                 </div>
             </div>
             <div
-                class="cs-messages-container tw-px-3 tw-pt-4 tw-overflow-y-scroll"
+                class="cs-messages-container t-px-3 t-pt-4 t-overflow-y-scroll"
                 ref="messages"
                 v-show="currentTab == 'chat' && !showThread"
-                @scroll="messagesScrolled"
+                @scroll="containerScrolled"
             >
                 <div
-                    class="tw-cursor-pointer tw-pb-5 tw-py-3 tw-flex tw-flex-row tw-place-content-center"
+                    class="t-cursor-pointer t-pb-5 t-py-3 t-flex t-flex-row t-place-content-center"
                     @click.stop.prevent="loadMoreMessages"
                     v-if="$_show_load_more_messages"
                 >
-                    <span class="cs-text-sm tw-text-white">Load more messages</span>
+                    <span class="cs-text-sm t-text-white">Load more messages</span>
                 </div>
                 <div
                     v-for="(item, index) in $_messages"
@@ -221,15 +216,16 @@
                     ></chat-message>
                 </div>
                 <div
-                    class="tw-p-3 tw-text-red-400"
+                    class="t-p-3 t-text-red-400"
                     v-for="(message, index) in messageErrors"
                     :key="`error-message-${index}`"
                 >{{ message }}</div>
             </div>
             <div
-                class="cs-messages-container tw-pt-4 tw-overflow-y-scroll"
+                class="cs-messages-container t-pt-4 t-overflow-y-scroll"
                 ref="questions"
                 v-show="currentTab == 'questions' && !showThread"
+                @scroll="containerScrolled"
             >
                 <div
                     v-for="(item, index) in $_questions"
@@ -246,47 +242,57 @@
                     ></chat-message>
                 </div>
                 <div
-                    class="cs-text-gray tw-px-3 tw-py-1 cs-text-sm"
+                    class="cs-text-gray t-px-3 t-py-1 cs-text-sm"
                     v-if="$_questions.length == 0"
                 >There are no questions in this chat</div>
                 <div
-                    class="tw-p-3 tw-text-red-400"
+                    class="t-p-3 t-text-red-400"
                     v-for="(message, index) in questionErrors"
                     :key="`error-question-${index}`"
                 >{{ message }}</div>
+            </div>
+            <div
+                class="t-absolute t-left-0 t-right-0 t-bottom-2 t-flex t-flex-row t-place-content-center"
+                v-if="$_show_scroll"
+            >
+                <div
+                    class="t-flex t-items-center t-place-content-center cs-round-btn cs-bg-brand t-text-white t-rounded-full t-cursor-pointer"
+                    :class="brand"
+                    @click.stop.prevent="scrollDown()"
+                ><i class="fas fa-arrow-down"></i></div>
             </div>
         </div>
 
         <div
             v-if="showDialog"
-            class="cs-dialog-container tw-absolute tw-inset-0 tw-z-50"
+            class="cs-dialog-container t-absolute t-inset-0 t-z-50"
         >
             <div
-                class="tw-w-full tw-h-full tw-relative"
+                class="t-w-full t-h-full t-relative"
             >
-                <div class="cs-dialog-overlay tw-absolute tw-inset-0 tw-opacity-100 tw-z-20" @click.stop.prevent="closeDialog()"></div>
-                <div class="tw-w-full tw-h-full tw-flex tw-flex-col tw-place-content-center tw-place-items-center">
-                    <div class="cs-dialog-window tw-rounded-lg tw-flex-none tw-bg-black tw-z-30 tw-relative">
-                        <div class="tw-absolute tw-top-2 tw-right-3 tw-text-white"><i class="fal fa-times tw-font-semibold tw-cursor-pointer" @click.stop.prevent="closeDialog()"></i></div>
+                <div class="cs-dialog-overlay t-absolute t-inset-0 t-opacity-100 t-z-20" @click.stop.prevent="closeDialog()"></div>
+                <div class="t-w-full t-h-full t-flex t-flex-col t-place-content-center t-place-items-center">
+                    <div class="cs-dialog-window t-rounded-lg t-flex-none t-bg-black t-z-30 t-relative">
+                        <div class="t-absolute t-top-2 t-right-3 t-text-white"><i class="fal fa-times t-font-semibold t-cursor-pointer" @click.stop.prevent="closeDialog()"></i></div>
 
                         <div
-                            class="tw-mt-6 tw-mx-8 cs-text-sm tw-text-center tw-text-white tw-tracking-tight tw-leading-relaxed"
+                            class="t-mt-6 t-mx-8 cs-text-sm t-text-center t-text-white t-tracking-tight t-leading-relaxed"
                             v-if="userDeleteMessages != null"
                         >Are you sure you want to delete all user's messages from the chat?</div>
 
                         <div
-                            class="tw-mt-6 tw-mx-8 cs-text-sm tw-text-center tw-text-white tw-tracking-tight tw-leading-relaxed"
+                            class="t-mt-6 t-mx-8 cs-text-sm t-text-center t-text-white t-tracking-tight t-leading-relaxed"
                             v-if="questionRemove != null"
                         >Are you sure you want to mark this question as answered?</div>
 
                         <div
-                            class="tw-mt-6 tw-mx-6 cs-text-sm tw-text-center tw-text-white tw-tracking-tight tw-leading-relaxed"
-                            :class="{'tw-pb-2': $_short_username}"
+                            class="t-mt-6 t-mx-6 cs-text-sm t-text-center t-text-white t-tracking-tight t-leading-relaxed"
+                            :class="{'t-pb-2': $_short_username}"
                             v-if="userBlock != null"
-                        >Are you sure you want to block <span class="tw-font-bold">{{ userBlock.displayName }}</span> from this chat?</div>
-                        <div class="tw-mt-3 tw-flex tw-flex-row tw-justify-center">
+                        >Are you sure you want to block <span class="t-font-bold">{{ userBlock.displayName }}</span> from this chat?</div>
+                        <div class="t-mt-3 t-flex t-flex-row t-justify-center">
                             <div
-                                class="cs-btn cs-text-sm tw-cursor-pointer tw-cursor-pointer tw-rounded-full tw-leading-none tw-tracking-normal tw-font-bold focus:tw-outline-none focus:tw-shadow-outline tw-uppercase tw-text-white tw-w-28 tw-flex tw-justify-center"
+                                class="cs-btn cs-text-sm t-cursor-pointer t-cursor-pointer t-rounded-full t-leading-none t-tracking-normal t-font-bold focus:t-outline-none focus:t-shadow-outline t-uppercase t-text-white t-w-28 t-flex t-justify-center"
                                 @click.stop.prevent="closeDialog(true)"
                             >confirm</div>
                         </div>
@@ -298,9 +304,9 @@
         <chat-emoji
             :show-window="showEmoji"
         ></chat-emoji>
-        <div class="cs-new-message-container tw-flex-none box-border">
-            <div class="tw-h-full tw-flex tw-flex-col tw-place-content-between tw-py-2 tw-px-4 tw-relative">
-                <div class="cs-new-message-wrapper tw-rounded">
+        <div class="cs-new-message-container t-flex-none box-border">
+            <div class="t-h-full t-flex t-flex-col t-place-content-between t-py-2 t-px-4 t-relative">
+                <div class="cs-new-message-wrapper t-rounded">
                     <textarea
                         v-model="message"
                         placeholder="Say something..."
@@ -309,7 +315,7 @@
                         v-on:keyup.enter="sendMessage()"
                         wrap="off"
                         rows="1"
-                        class="tw-resize-none cs-text-sm tw-bg-black tw-rounded-none"
+                        class="t-resize-none cs-text-sm t-bg-black t-rounded-none"
                         :class="{'cs-typing': message != ''}"
                         ref="newMessage"
                         v-if="currentTab == 'chat'"
@@ -322,15 +328,15 @@
                         v-on:keyup.enter="sendQuestion()"
                         wrap="off"
                         rows="1"
-                        class="tw-resize-none cs-text-sm tw-bg-black tw-rounded-none"
+                        class="t-resize-none cs-text-sm t-bg-black t-rounded-none"
                         :class="{'cs-typing': question != ''}"
                         v-if="currentTab == 'questions'"
                     ></textarea>
                 </div>
-                <div class="cs-new-message-menu tw-absolute tw-text-lg">
+                <div class="cs-new-message-menu t-absolute t-text-lg">
                     <a
                         href="#"
-                        class="cs-text-gray tw-mr-3"
+                        class="cs-text-gray t-mr-3"
                         @click.stop.prevent="toggleShowEmoji()"
                         v-if="currentTab == 'chat'"
                     ><i class="fal fa-smile"></i></a>
@@ -349,7 +355,7 @@
                 </div>
                 <div>
                     <span
-                        class="cs-text-gray tw-text-xs tw-cursor-pointer"
+                        class="cs-text-gray t-text-xs t-cursor-pointer"
                         @click.stop.prevent="toggleShowMembers()"
                     >{{ $_watcher_count }} Online</span>
                 </div>
@@ -365,6 +371,7 @@ import RailchatService from '../../assets/js/services/railchat.js';
 import ChatEmoji from './ChatEmoji.vue';
 import ChatMessage from './ChatMessage.vue';
 import ChatUser from './ChatUser.vue';
+import 'linkifyjs/lib/linkify-string'
 
 export default {
     name: 'Chat',
@@ -417,7 +424,7 @@ export default {
         },
         messagesPageSize: {
             type: Number,
-            default: () => 50,
+            default: () => 20,
         },
         popupWindowSettings: {
             type: String,
@@ -447,6 +454,7 @@ export default {
             userBlock: null,
             userDeleteMessages: null,
             channelWatchers: {},
+            watcherCount: 0,
             fetchingBannedUsers: false,
             bannedUsers: {},
             chatMenu: false,
@@ -458,6 +466,10 @@ export default {
             messagesAutoscroll: false,
             questionsAutoscroll: false,
             messagesPage: 1,
+            showScroll: false,
+            messagesBottom: true,
+            questionsBottom: true,
+            scrollingMessages: false,
         };
     },
     computed: {
@@ -497,12 +509,13 @@ export default {
             get() {
                 let questions = [...this.questions];
 
-                return questions.sort((a, b) => {
-                    let aUpVotes = a?.reaction_counts?.upvote || 0;
-                    let bUpVotes = b?.reaction_counts?.upvote || 0;
+                return questions
+                    .sort((a, b) => {
+                        let aUpVotes = a?.reaction_counts?.upvote || 0;
+                        let bUpVotes = b?.reaction_counts?.upvote || 0;
 
-                    return bUpVotes - aUpVotes;
-                });
+                        return bUpVotes - aUpVotes;
+                    });
             },
         },
         $_questions_count: {
@@ -520,7 +533,7 @@ export default {
         $_watcher_count: {
             cache: false,
             get() {
-                return Object.keys(this.channelWatchers).length;
+                return this.watcherCount;
             },
         },
         $_banned_users_count: {
@@ -558,25 +571,39 @@ export default {
                 return this.userBlock != null && this.userBlock.displayName.length <= 12;
             }
         },
+        $_show_scroll: {
+            cache: false,
+            get() {
+                return this.showScroll;
+            },
+        },
+    },
+    created: function () {
+        window.addEventListener('focus', this.restoreScrollState);
+        window.addEventListener('blur', this.setScrollState);
+    },
+    destroyed: function () {
+        window.removeEventListener('focus', this.restoreScrollState);
+        window.removeEventListener('blur', this.setScrollState);
     },
     mounted() {
         this.setupChat();
 
-        this.chatEventBus.on('updateMessage', this.updateMessage);
-        this.chatEventBus.on('removeMessage', this.removeMessage);
-        this.chatEventBus.on('removeAllMessages', this.removeAllMessages);
-        this.chatEventBus.on('blockUser', this.blockUser);
-        this.chatEventBus.on('toggleMessageReaction', this.toggleMessageReaction);
-        this.chatEventBus.on('messageThread', this.showMessageThread);
-        this.chatEventBus.on('pinMessage', this.pinMessage);
-        this.chatEventBus.on('unpinMessage', this.unpinMessage);
-        this.chatEventBus.on('insertEmoji', this.insertEmoji);
-        this.chatEventBus.on('closeEmojiWindow', this.closeEmojiWindow);
-        this.chatEventBus.on('markAsAnswered', this.markAsAnswered);
-        this.chatEventBus.on('postQuestion', this.postQuestion);
-        this.chatEventBus.on('messageMenuToggled', this.messageMenuToggledHandler);
+        this.$root.$on('updateMessage', this.updateMessage);
+        this.$root.$on('removeMessage', this.removeMessage);
+        this.$root.$on('removeAllMessages', this.removeAllMessages);
+        this.$root.$on('blockUser', this.blockUser);
+        this.$root.$on('toggleMessageReaction', this.toggleMessageReaction);
+        this.$root.$on('messageThread', this.showMessageThread);
+        this.$root.$on('pinMessage', this.pinMessage);
+        this.$root.$on('unpinMessage', this.unpinMessage);
+        this.$root.$on('insertEmoji', this.insertEmoji);
+        this.$root.$on('closeEmojiWindow', this.closeEmojiWindow);
+        this.$root.$on('markAsAnswered', this.markAsAnswered);
+        this.$root.$on('postQuestion', this.postQuestion);
+        this.$root.$on('messageMenuToggled', this.messageMenuToggledHandler);
 
-        // console.log(this.chatEventBus)
+
     },
     watch: {
         $_messages_count: function () {
@@ -594,32 +621,87 @@ export default {
     },
     methods: {
 
+        restoreScrollState() {
+            if (this.currentTab == 'chat') {
+                if (this.messagesBottom) {
+                    this.$nextTick(() => {
+                        this.scrollMessages(true);
+                    });
+                }
+            } else {
+                if (this.questionsBottom) {
+                    this.$nextTick(() => {
+                        this.scrollQuestions(true);
+                    });
+                }
+            }
+        },
+
+        setScrollState() {
+            if (this.currentTab == 'chat') {
+                let container = this.$refs.messages;
+                if (Math.ceil(container.scrollHeight - container.scrollTop) === container.clientHeight) {
+                    this.messagesBottom = true;
+                    this.scrollingMessages = false;
+                } else {
+                    this.messagesBottom = false;
+                }
+            } else {
+                let container = this.$refs.questions;
+                if (Math.ceil(container.scrollHeight - container.scrollTop) === container.clientHeight) {
+                    this.questionsBottom = true;
+                } else {
+                    this.questionsBottom = false;
+                }
+            }
+        },
+
+        scrollDown() {
+            if (this.currentTab == 'chat') {
+                this.scrollMessages(true);
+            } else {
+                this.scrollQuestions(true);
+            }
+        },
+
         popoutChat() {
             this.chatMenu = false;
 
             window.open(this.embedUrl, 'ChatWindow', this.popupWindowSettings);
         },
 
-        messagesScrolled() {
-            let container = this.$refs.messages;
+        containerScrolled() {
+            let container = this.currentTab === 'chat' ? this.$refs.messages : this.$refs.questions;
 
-            if (Math.ceil(container.scrollHeight - container.scrollTop) === container.clientHeight) {
-                this.messagesPage = 1;
+            if (this.currentTab === 'questions') {
+                this.showScroll = false;
+                return;
+            }
+
+            if (Math.ceil(container.scrollHeight - container.scrollTop) <= (container.clientHeight + 5)) {
+                if (this.currentTab === 'chat') {
+                    this.messagesPage = 1;
+                }
+                this.showScroll = false;
+                this.scrollingMessages = false;
+            } else if (!this.scrollingMessages) {
+                this.showScroll = true;
             }
         },
 
         loadMoreMessages() {
-            let firstMessage = this.$_messages[0];
             this.messagesPage++;
-            this.$nextTick(() => {
-                this.chatEventBus.$emit('scrollIntoView', { message: firstMessage });
-            });
+
+            // let firstMessage = this.$_messages[0];
+            // this.$nextTick(() => {
+            //     this.$root.$emit('scrollIntoView', { message: firstMessage });
+            // });
         },
 
         messageMenuToggledHandler({ message, value }) {
 
-            if (message.category == 'message') {
-                if (value == false) {
+            if (message.category === 'message') {
+                if (value === false) {
 
                     this.messagesMenusOpened = false;
 
@@ -631,7 +713,7 @@ export default {
                     this.messagesMenusOpened = true;
                 }
             } else {
-                if (value == false) {
+                if (value === false) {
 
                     this.questionsMenusOpened = false;
 
@@ -648,10 +730,11 @@ export default {
         scrollMessages(force = false) {
             let container = this.$refs.messages;
 
-            if (force || Math.ceil(container.scrollHeight - container.scrollTop) === container.clientHeight) {
+            if (force || Math.ceil(container.scrollHeight - container.scrollTop) <= (container.clientHeight + 100)) {
                 if (this.messagesMenusOpened) {
                     this.messagesAutoscroll = true;
                 } else {
+                    this.scrollingMessages = true;
                     this.messagesAutoscroll = false;
                     this.$nextTick(() => {
                         container.scroll({
@@ -660,13 +743,15 @@ export default {
                         });
                     });
                 }
+            } else {
+                this.scrollingMessages = false;
             }
         },
 
         scrollQuestions(force = false) {
             let container = this.$refs.questions;
 
-            if (force || Math.ceil(container.scrollHeight - container.scrollTop) === container.clientHeight) {
+            if (force || Math.ceil(container.scrollHeight - container.scrollTop) <= (container.clientHeight + 100)) {
                 if (this.questionsMenusOpened) {
                     this.questionsAutoscroll = true;
                 } else {
@@ -684,7 +769,7 @@ export default {
         scrollThreadMessages(force = false) {
             let container = this.$refs.threadMessages;
 
-            if (container && (force || Math.ceil(container.scrollHeight - container.scrollTop) === container.clientHeight)) {
+            if (container && (force || Math.ceil(container.scrollHeight - container.scrollTop) <= (container.clientHeight + 100))) {
                 this.$nextTick(() => {
                     container.scroll({
                         top: container.scrollHeight,
@@ -712,7 +797,7 @@ export default {
         },
 
         sendMessage() {
-            let payload = { text:  this.message.trim() };
+            let payload = { text:  this.stripHtml(this.message).trim() };
 
             this.message = '';
 
@@ -735,7 +820,7 @@ export default {
                 let message = {
                     'id': '',
                     'type': 'regular',
-                    'text': payload.text,
+                    'text': payload.text.linkify({ className: 'chat-message-link', target: '_blank' }),
                     'reply_count': 0,
                     'pinned': false,
                     'user': this.userData,
@@ -760,7 +845,7 @@ export default {
         },
 
         sendQuestion() {
-            let text = this.question.trim();
+            let text = this.stripHtml(this.question).trim();
 
             this.question = '';
 
@@ -778,7 +863,7 @@ export default {
                 let message = {
                     'id': '',
                     'type': 'regular',
-                    'text': text,
+                    'text': text.linkify({ className: 'chat-message-link', target: '_blank' }),
                     'reply_count': 0,
                     'pinned': false,
                     'user': this.userData,
@@ -886,6 +971,7 @@ export default {
                 .then((state) => {
                     this.fetchWatchers();
                     this.fetchPinnedMessages();
+                    this.watcherCount = state.watcher_count;
 
                     this.processMessages(state, this.messages, 'message');
 
@@ -894,14 +980,16 @@ export default {
                     this.messages.push(greeting);
 
                     this.chatChannel
-                        .on('user.watching.start', ({ user }) => {
-                            this.channelWatchers[user.id] = user;
+                        .on('user.watching.start', ({ user, watcher_count }) => {
+                            this.$set(this.channelWatchers, user.id, user);
+                            this.watcherCount = watcher_count;
                         });
 
                     this.chatChannel
-                        .on('user.watching.stop', ({ user }) => {
+                        .on('user.watching.stop', ({ user, watcher_count }) => {
                             if (this.channelWatchers[user.id]) {
-                                delete this.channelWatchers[user.id];
+                                this.$delete(this.channelWatchers, user.id);
+                                this.watcherCount = watcher_count;
                             }
                         });
 
@@ -932,7 +1020,9 @@ export default {
                 .then(({ watchers }) => {
                     if (watchers) {
                         watchers.forEach(user => {
-                            this.channelWatchers[user.id] = user;
+                            if (Math.abs(DateTime.fromISO(user.last_active).diffNow('hours').toObject().hours) < 4) {
+                              this.$set(this.channelWatchers, user.id, user);
+                            }
                         });
                     }
                 });
@@ -948,7 +1038,7 @@ export default {
                 .queryUsers({ banned:true }, {}, { limit, offset:0 })
                 .then(({ users }) => {
                     users.forEach(user => {
-                        this.bannedUsers[user.id] = user;
+                        this.$set(this.bannedUsers, user.id, user);
                     });
                     this.fetchingBannedUsers = false;
                 });
@@ -960,7 +1050,7 @@ export default {
             this.chatChannel
                 .search(
                     { pinned: true },
-                    '',
+                    null,
                     { limit, offset: 0 }
                 )
                 .then(({ results }) => {
@@ -1032,6 +1122,8 @@ export default {
          */
         getMessageCopy(message) {
             let messageCopy = (({ id, type, text, reply_count, pinned }) => ({ id, type, text, reply_count, pinned }))(message);
+
+            messageCopy.text = this.stripHtml(messageCopy.text).linkify({ className: 'chat-message-link', target: '_blank' });
 
             messageCopy.user = this.getUserCopy(message.user);
 
@@ -1246,6 +1338,7 @@ export default {
          * Locates the internal message, main channel message or reply, and calls addMessageReaction
          */
         pushMessageReaction({ message, reaction, collection }) {
+            let scroll = !this.showScroll;
             collection.forEach((storedMessage) => {
                 if (message.parent_id && storedMessage.id == message.parent_id) {
                     storedMessage.replies.forEach((storedReplyMessage) => {
@@ -1272,9 +1365,10 @@ export default {
                 this.$nextTick(() => {
                     this.scrollThreadMessages();
                 });
-            } else if (this.messageThread == null) {
-                this.scrollMessages();
-                this.scrollQuestions();
+            } else if (this.messageThread == null && scroll) {
+                this.$nextTick(() => {
+                    this.scrollMessages(true);
+                });
             }
         },
 
@@ -1287,7 +1381,7 @@ export default {
             storedMessage.reaction_scores = messageRectionScores;
             if (reaction.user.id == this.userId) {
                 storedMessage.own_reactions.push({ type: reaction.type, score: reaction.score });
-                this.chatEventBus.$emit('messageOwnReactionUpdate', { message: storedMessage });
+                this.$root.$emit('messageOwnReactionUpdate', { message: storedMessage });
             }
         },
 
@@ -1355,7 +1449,7 @@ export default {
                                 ownReaction.score = reaction.score;
                             }
                         });
-                        this.chatEventBus.$emit('messageOwnReactionUpdate', { message });
+                        this.$root.$emit('messageOwnReactionUpdate', { message });
                     }
                 }
             });
@@ -1517,9 +1611,16 @@ export default {
             });
 
             if (selectedMessage) {
+                let scroll = !this.showScroll;
                 selectedMessage.reaction_counts[reaction] = (selectedMessage.reaction_counts[reaction] || 0) + 1;
 
                 selectedMessage.own_reactions.push({type: reaction, score: 1});
+
+                if (scroll) {
+                    this.$nextTick(() => {
+                        this.scrollMessages(true);
+                    });
+                }
             }
         },
 
@@ -1643,17 +1744,29 @@ export default {
 
         setCurrentTab(tab) {
             if (tab == 'chat' || tab == 'questions') {
+                this.setScrollState();
+                this.scrollingMessages = true;
                 this.currentTab = tab;
+                this.$nextTick(() => {
+                    this.restoreScrollState();
+                    this.containerScrolled();
+                });
             }
             this.chatMenu = false;
             this.showEmoji = false;
         },
 
         getTabClasses(tab) {
-            let active = ['tw-font-semibold', 'tw-text-white', 'tw-border-white'];
-            let inactive = ['cs-text-gray', 'tw-border-transparent'];
+            let active = ['t-font-semibold', 't-text-white', 't-border-white'];
+            let inactive = ['cs-text-gray', 't-border-transparent'];
 
             return this.currentTab == tab ? active : inactive;
+        },
+
+        stripHtml(html) {
+            return html
+                .replace(/(<([^>]+)>)/gi, '')
+                .replace(/[\u200B-\u200D\uFEFF\u200E\u200F]/g, '');
         },
     },
 }

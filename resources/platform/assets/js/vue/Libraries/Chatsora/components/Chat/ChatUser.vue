@@ -1,23 +1,23 @@
 <template>
-    <div class="tw-flex tw-flex-row">
+    <div class="t-flex t-flex-row">
         <div
-            class="tw-flex-none tw-mr-3 tw-relative tw-overflow-hidden cs-user-avatar"
+            class="t-flex-none t-mr-3 t-relative t-overflow-hidden cs-user-avatar"
             :class="getUserMembershipClass()"
         >
             <a
                 :href="user.profileUrl"
                 target="_blank"
-                class="tw-no-underline"
+                class="t-no-underline"
             >
-                <img :src="user.avatarUrl" class="tw-max-w-full tw-h-auto">
+                <img :src="user.avatarUrl" class="t-max-w-full t-h-auto">
             </a>
         </div>
-        <div class="tw-flex-grow cs-text-sm tw-text-white tw-flex tw-flex-col tw-w-full tw-overflow-hidden">
-            <div class="tw-flex tw-flex-row">
+        <div class="t-flex-grow cs-text-sm t-text-white t-flex t-flex-col">
+            <div class="t-flex t-flex-row">
                 <a
                     :href="user.profileUrl"
                     target="_blank"
-                    class="tw-flex-none tw-no-underline hover:tw-underline tw-text-white tw-font-semibold"
+                    class="t-no-underline hover:t-underline t-text-white t-font-semibold"
                 >{{ user.displayName }}</a>
                 <slot></slot>
             </div>

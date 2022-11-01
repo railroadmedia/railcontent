@@ -1,52 +1,52 @@
 <template>
-    <div class="tw-fixed tw-top-0 tw-right-0 tw-left-0 tw-h-screen" style="z-index: 200;" v-if="message">
+    <div class="t-fixed t-top-0 t-right-0 t-left-0 t-h-screen" style="z-index: 200;" v-if="message">
         <div style="overflow-y: scroll; top: 0; right: 0; height: 100%; position: fixed;"></div>
-        <div class="cs-overlay tw-absolute tw-inset-0 tw-bg-gray-100 tw-bg-opacity-10" @click.stop.prevent="close()"></div>
-        <div class="tw-fixed" v-bind:style="position">
-            <div class="tw-absolute tw-text-base" style="bottom: 12px; right: 10px;">
+        <div class="cs-overlay t-absolute t-inset-0 t-bg-gray-100 t-bg-opacity-10" @click.stop.prevent="close()"></div>
+        <div class="t-fixed" v-bind:style="position">
+            <div class="t-absolute t-text-base" style="bottom: 12px; right: 10px;">
                 <div
-                    class="cs-sub-menu tw-w-44 tw-p-3 tw-flex tw-flex-col tw-bg-black tw-rounded-lg tw-text-white cs-text-sm tw-z-50"
+                    class="cs-sub-menu t-w-44 t-p-3 t-flex t-flex-col t-bg-black t-rounded-lg t-text-white cs-text-sm t-z-50"
                 >
                     <div v-if="message.user.id != userId && !isAdministrator">
-                        <a :href="message.user.profileUrl" target="_blank" class="tw-no-underline tw-text-white">View Dashboard</a>
+                        <a :href="message.user.profileUrl" target="_blank" class="t-no-underline t-text-white">View Profile</a>
                     </div>
                     <div
-                        :class="{'tw-mb-2': isAdministrator}"
+                        :class="{'t-mb-2': isAdministrator}"
                         v-if="message.user.id == userId"
                     >
                         <div
-                            class="tw-mb-1 tw-cursor-pointer"
+                            class="t-mb-1 t-cursor-pointer"
                             @click.stop.prevent="editMessage()"
                         >Edit Message</div>
                         <div
-                            class="tw-mb-1 tw-cursor-pointer"
+                            class="t-mb-1 t-cursor-pointer"
                             @click.stop.prevent="removeMessage()"
                         >Delete</div>
                     </div>
                     <div v-if="isAdministrator">
-                        <div class="tw-mb-2 tw-font-semibold tw-cursor-default">Moderation</div>
+                        <div class="t-mb-2 t-font-semibold t-cursor-default">Moderation</div>
                         <div
-                            class="tw-mb-1 tw-cursor-pointer"
+                            class="t-mb-1 t-cursor-pointer"
                             @click.stop.prevent="pinMessage()"
                             v-if="$_show_pin"
                         >Pin Message</div>
                         <div
-                            class="tw-mb-1 tw-cursor-pointer"
+                            class="t-mb-1 t-cursor-pointer"
                             @click.stop.prevent="unpinMessage()"
                             v-if="$_show_unpin"
                         >Unpin Message</div>
                         <div
-                            class="tw-mb-1 tw-cursor-pointer"
+                            class="t-mb-1 t-cursor-pointer"
                             @click.stop.prevent="removeMessage()"
                             v-if="message.user.id != userId"
                         >Remove Message</div>
                         <div
-                            class="tw-mb-1 tw-cursor-pointer"
+                            class="t-mb-1 t-cursor-pointer"
                             @click.stop.prevent="removeAllMessages()"
                             v-if="message.user.id != userId"
                         >Remove All Messages</div>
                         <div
-                            class="tw-cursor-pointer"
+                            class="t-cursor-pointer"
                             @click.stop.prevent="blockUser()"
                             v-if="message.user.id != userId"
                         >Block Student</div>
@@ -98,14 +98,14 @@ export default {
         },
     },
     mounted() {
-        this.chatEventBus
-            .on(
+        this.$root
+            .$on(
                 'toggleChatPopup',
                 ({ message, domRect }) => {
                     this.position.left = this.roundedPixels(domRect.left + domRect.width);
                     this.position.top = this.roundedPixels(domRect.top);
                     this.message = message;
-                    document.body.classList.add('tw-fixed');
+                    document.body.classList.add('t-fixed');
                 }
             );
     },
@@ -140,7 +140,7 @@ export default {
 
         close() {
             this.message = null;
-            document.body.classList.remove('tw-fixed');
+            document.body.classList.remove('t-fixed');
         },
     }
 }

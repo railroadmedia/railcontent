@@ -1,13 +1,13 @@
 <template>
-    <div class="tw-relative">
+    <div class="t-relative">
         <div
-            class="cs-emoji tw-absolute tw-right-0 tw-bottom-4 tw-rounded-md"
+            class="cs-emoji t-absolute t-right-0 t-bottom-4 t-rounded-md"
             v-if="showWindow"
         >
-            <div class="cs-emoji-tabs tw-flex tw-flex-row tw-items-center tw-justify-between tw-border-b tw-border-gray-800 tw-text-lg">
+            <div class="cs-emoji-tabs t-flex t-flex-row t-items-center t-justify-between t-border-b t-border-gray-800 t-text-lg">
                 <div>
                     <a
-                        class="tw-p-3 tw-cursor-pointer"
+                        class="t-p-3 t-cursor-pointer"
                         :class="{'cs-text-gray': currentTab != category, 'cs-text-blue': currentTab == category}"
                         v-for="(emojiArray, category) in this.emojiData"
                         :key="category"
@@ -15,25 +15,25 @@
                     ><i class="fal" :class="tabIcons[category]"></i></a>
                 </div>
                 <a
-                    class="tw-p-2 cs-text-gray tw-cursor-pointer"
+                    class="t-p-2 cs-text-gray t-cursor-pointer"
                     @click.stop.prevent="closeEmojiWindow()"
                 ><i class="fal fa-backspace"></i></a>
             </div>
-            <div class="tw-p-3">
+            <div class="t-p-3">
                 <textarea
                     v-model="search"
                     placeholder="Search Emojis"
                     wrap="off"
                     rows="1"
-                    class="tw-resize-none tw-whitespace-nowrap tw-overflow-x-auto tw-rounded-full cs-text-sm"
+                    class="t-resize-none t-whitespace-nowrap t-overflow-x-auto t-rounded-full cs-text-sm"
                 ></textarea>
             </div>
-            <div class="tw-px-3 tw-text-white tw-font-semibold">{{ $_current_tab_label }}</div>
-            <div class="tw-py-2 tw-overflow-hidden">
+            <div class="t-px-3 t-text-white t-font-semibold">{{ $_current_tab_label }}</div>
+            <div class="t-py-2 t-overflow-hidden">
                 <div class="cs-emoji-list" ref="simplebar">
-                    <div class="tw-py-3 tw-px-2 tw-grid tw-grid-cols-8 tw-gap-y-3 tw-text-2xl tw-overflow-auto">
+                    <div class="t-py-3 t-px-2 t-grid t-grid-cols-8 t-gap-y-3 t-text-2xl t-overflow-auto">
                         <a
-                            class="tw-text-center tw-cursor-pointer"
+                            class="t-text-center t-cursor-pointer"
                             v-for="item in $_emoji"
                             :key="item.no"
                             @click.stop.prevent="insertEmoji(item)"
@@ -115,12 +115,12 @@ export default {
         },
 
         insertEmoji(emoji) {
-            this.chatEventBus.emit('insertEmoji', emoji);
+            this.$root.$emit('insertEmoji', emoji);
         },
 
         closeEmojiWindow() {
             this.search = '';
-            this.chatEventBus.emit('closeEmojiWindow', { });
+            this.$root.$emit('closeEmojiWindow', { });
         },
     }
 }
