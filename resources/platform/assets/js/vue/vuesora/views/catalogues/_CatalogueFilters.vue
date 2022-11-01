@@ -38,7 +38,7 @@
         ></catalogue-filter>
 
       <div class="sm:tw-pr-0 tw-mb-3 sm:tw-mb-0 ph-1">
-        <div class="tw-flex tw-flex-col tw-mr-2 form-group ">
+        <div class="tw-flex tw-flex-col tw-mr-2 form-group tw-font-open-sans tw-text-[16px]">
           <select
               id="sortInput"
               class="tw-pb-0 tw-text-[#00101D] dark:tw-text-white borderless"
@@ -70,7 +70,7 @@
             </option>
           </select>
 
-          <label for="sortInput" :class="brand"> Sort By: </label>
+          <label for="sortInput" class="tw-font-bebas-neue tw-text-[16px] tw-text-[#9EC0DC]" :class="brand"> FILTER BY: </label>
         </div>
       </div>
     </div>
