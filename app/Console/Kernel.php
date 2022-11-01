@@ -50,6 +50,10 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('ProcessTrackings')->everyMinute();
+
+        //createSearchIndexes has differences between drumeo and
+        //$schedule->command('content:rebuildSearchIndexes')->dailyAt('2:00')->sendOutputTo('/proc/1/fd/1');
+
     }
 
     /**
