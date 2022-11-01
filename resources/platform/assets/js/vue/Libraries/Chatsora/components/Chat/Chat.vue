@@ -1,48 +1,48 @@
 <template>
     <div
-        class="cs-container t-relative t-h-full t-w-full t-flex t-flex-col vuesora-override"
+        class="cs-container tw-relative tw-h-full tw-w-full tw-flex tw-flex-col vuesora-override"
         :class="brand"
     >
-        <div class="cs-top t-flex-none">
-            <div class="t-h-full t-w-full t-flex t-flex-row t-items-center t-place-content-between">
-                <div class="t-h-full t-ml-4 t-flex t-flex-row t-items-end t-space-x-4 cs-text-sm">
+        <div class="cs-top tw-flex-none">
+            <div class="tw-h-full tw-w-full tw-flex tw-flex-row tw-items-center tw-place-content-between">
+                <div class="tw-h-full tw-ml-4 tw-flex tw-flex-row tw-items-end tw-space-x-4 cs-text-sm">
                     <a
                         href="#"
-                        class="t-no-underline t-px-3 t-border-b-2 t-h-full t-flex t-flex-row t-items-center"
+                        class="tw-no-underline tw-px-3 tw-border-b-2 tw-h-full tw-flex tw-flex-row tw-items-center"
                         :class="getTabClasses('chat')"
                         @click.stop.prevent="setCurrentTab('chat')"
                     >Chat</a>
                     <a
                         href="#"
-                        class="t-no-underline t-px-3 t-border-b-2 t-h-full t-flex t-flex-row t-items-center"
+                        class="tw-no-underline tw-px-3 tw-border-b-2 tw-h-full tw-flex tw-flex-row tw-items-center"
                         :class="getTabClasses('questions')"
                         @click.stop.prevent="setCurrentTab('questions')"
                     >Questions</a>
                 </div>
                 <a
                     href="#"
-                    class="t-no-underline t-font-semibold t-px-4 cs-text-gray t-border-b-2 t-border-transparent t-h-full t-flex t-flex-row t-items-center"
+                    class="tw-no-underline tw-font-semibold tw-px-4 cs-text-gray tw-border-b-2 tw-border-transparent tw-h-full tw-flex tw-flex-row tw-items-center"
                     @click.stop.prevent="toggleChatMenu()"
                 ><i class="fas fa-ellipsis-v"></i></a>
             </div>
-            <div class="t-relative">
+            <div class="tw-relative">
                 <div
-                    class="cs-top-menu cs-text-sm t-leading-relaxed t-absolute t-right-4 t-py-3 t-flex t-flex-col t-bg-black t-rounded-lg t-text-white t-z-30"
+                    class="cs-top-menu cs-text-sm tw-leading-relaxed tw-absolute tw-right-4 tw-py-3 tw-flex tw-flex-col tw-bg-black tw-rounded-lg tw-text-white tw-z-30"
                     v-if="chatMenu"
                 >
-                    <div class="t-px-3 t-mb-2 t-font-semibold t-cursor-default" v-if="isAdministrator">Moderation</div>
-                    <div class="cs-top-menu-item t-px-3 t-mb-1 t-cursor-pointer" @click.stop.prevent="toggleShowMembers()">Participants</div>
+                    <div class="tw-px-3 tw-mb-2 tw-font-semibold tw-cursor-default" v-if="isAdministrator">Moderation</div>
+                    <div class="cs-top-menu-item tw-px-3 tw-mb-1 tw-cursor-pointer" @click.stop.prevent="toggleShowMembers()">Participants</div>
                     <div
-                        class="cs-top-menu-item t-px-3 t-mb-1 t-cursor-pointer"
+                        class="cs-top-menu-item tw-px-3 tw-mb-1 tw-cursor-pointer"
                         @click.stop.prevent="popoutChat()"
                     >Pop Out Chat</div>
                     <div
-                        class="cs-top-menu-item t-px-3 t-mb-1 t-cursor-pointer"
+                        class="cs-top-menu-item tw-px-3 tw-mb-1 tw-cursor-pointer"
                         @click.stop.prevent="toggleShowBannedUsers()"
                         v-if="isAdministrator"
                     >Blocked Students</div>
                     <div
-                        class="cs-top-menu-item t-px-3 t-mb-1 t-cursor-pointer"
+                        class="cs-top-menu-item tw-px-3 tw-mb-1 tw-cursor-pointer"
                         @click.stop.prevent="removeAllQuestions()"
                         v-if="currentTab == 'questions' && isAdministrator"
                     >Clear All Questions</div>
@@ -50,33 +50,33 @@
             </div>
         </div>
 
-        <div class="t-absolute t-top-0 t-right-0 t-left-0 t-flex t-flex-col t-z-40" v-show="showThread">
-            <div class="cs-top t-flex-none">
-                <div class="t-h-full t-w-full t-flex t-flex-row t-place-items-center t-justify-between">
+        <div class="tw-absolute tw-top-0 tw-right-0 tw-left-0 tw-flex tw-flex-col tw-z-40" v-show="showThread">
+            <div class="cs-top tw-flex-none">
+                <div class="tw-h-full tw-w-full tw-flex tw-flex-row tw-place-items-center tw-justify-between">
                     <a
                         href="#"
-                        class="t-ml-3 t-no-underline t-text-white"
+                        class="tw-ml-3 tw-no-underline tw-text-white"
                         @click.stop.prevent="hideMessageThread()"
-                    ><i class="fas fa-arrow-left"></i><span class="t-ml-2">Thread</span><span class="t-ml-3">{{ $_reply_count_label }}</span></a>
-                    <div class="t-mr-3"><i class="fal fa-times t-text-white t-font-semibold t-cursor-pointer" @click.stop.prevent="hideMessageThread()"></i></div>
+                    ><i class="fas fa-arrow-left"></i><span class="tw-ml-2">Thread</span><span class="tw-ml-3">{{ $_reply_count_label }}</span></a>
+                    <div class="tw-mr-3"><i class="fal fa-times tw-text-white tw-font-semibold tw-cursor-pointer" @click.stop.prevent="hideMessageThread()"></i></div>
                 </div>
             </div>
         </div>
 
-        <div class="t-absolute t-inset-0 t-flex t-flex-col t-z-40" v-show="showMembers">
-            <div class="cs-top t-flex-none">
-                <div class="t-h-full t-w-full t-flex t-flex-row t-items-center">
+        <div class="tw-absolute tw-inset-0 tw-flex tw-flex-col tw-z-40" v-show="showMembers">
+            <div class="cs-top tw-flex-none">
+                <div class="tw-h-full tw-w-full tw-flex tw-flex-row tw-items-center">
                     <a
                         href="#"
-                        class="t-ml-3 t-no-underline t-text-white"
+                        class="tw-ml-3 tw-no-underline tw-text-white"
                         @click.stop.prevent="toggleShowMembers()"
-                    ><i class="fas fa-arrow-left"></i><span class="t-ml-2 cs-text-sm">Participants</span></a>
+                    ><i class="fas fa-arrow-left"></i><span class="tw-ml-2 cs-text-sm">Participants</span></a>
                 </div>
             </div>
-            <div class="cs-body t-flex-grow t-overflow-y-auto">
-                <div class="cs-members-container t-mt-1 t-p-3">
+            <div class="cs-body tw-flex-grow tw-overflow-y-auto">
+                <div class="cs-members-container tw-mt-1 tw-p-3">
                     <div
-                        class="t-py-2"
+                        class="tw-py-2"
                         v-for="item in $_watchers"
                         :key="item.id"
                     >
@@ -84,63 +84,63 @@
                     </div>
                 </div>
             </div>
-            <div class="cs-footer t-flex-none t-h-8">
-                <div class="t-h-full t-flex t-flex-row t-items-center t-px-3">
-                    <span class="cs-text-gray t-text-xs">{{ $_watcher_count }} Online</span>
+            <div class="cs-footer tw-flex-none tw-h-8">
+                <div class="tw-h-full tw-flex tw-flex-row tw-items-center tw-px-3">
+                    <span class="cs-text-gray tw-text-xs">{{ $_watcher_count }} Online</span>
                 </div>
             </div>
         </div>
 
-        <div class="t-absolute t-inset-0 t-flex t-flex-col t-z-40" v-show="showBannedUsers">
-            <div class="cs-top t-flex-none">
-                <div class="t-h-full t-w-full t-flex t-flex-row t-items-center">
+        <div class="tw-absolute tw-inset-0 tw-flex tw-flex-col tw-z-40" v-show="showBannedUsers">
+            <div class="cs-top tw-flex-none">
+                <div class="tw-h-full tw-w-full tw-flex tw-flex-row tw-items-center">
                     <a
                         href="#"
-                        class="t-ml-3 t-no-underline t-text-white"
+                        class="tw-ml-3 tw-no-underline tw-text-white"
                         @click.stop.prevent="toggleShowBannedUsers()"
-                    ><i class="fas fa-arrow-left"></i><span class="t-ml-2 cs-text-sm">Blocked Students</span></a>
+                    ><i class="fas fa-arrow-left"></i><span class="tw-ml-2 cs-text-sm">Blocked Students</span></a>
                 </div>
             </div>
-            <div class="cs-body t-flex-grow t-overflow-y-auto">
-                <div class="t-mt-1 t-p-3 cs-text-gray" v-if="fetchingBannedUsers || $_banned_users_count == 0">
+            <div class="cs-body tw-flex-grow tw-overflow-y-auto">
+                <div class="tw-mt-1 tw-p-3 cs-text-gray" v-if="fetchingBannedUsers || $_banned_users_count == 0">
                     <span v-if="fetchingBannedUsers">Fetching blocked students information...</span>
                     <span v-if="!fetchingBannedUsers && $_banned_users_count == 0">There are no students blocked from this chat.</span>
                 </div>
-                <div class="cs-members-container t-mt-1 t-p-3" v-if="!fetchingBannedUsers && $_banned_users_count > 0">
+                <div class="cs-members-container tw-mt-1 tw-p-3" v-if="!fetchingBannedUsers && $_banned_users_count > 0">
                     <div
-                        class="t-py-2"
+                        class="tw-py-2"
                         v-for="item in bannedUsers"
                         :key="item.id"
                     >
-                        <div class="cs-user t-p-3 t-rounded-md">
+                        <div class="cs-user tw-p-3 tw-rounded-md">
                             <chat-user :user="item">
-                                <div class="t-flex-grow t-text-right">
+                                <div class="tw-flex-grow tw-text-right">
                                     <a
                                         href="#"
                                         @click.stop.prevent="unblockUser(item)"
                                         class="cs-user-unblock cs-text-sm"
-                                    ><span>Unblock</span><i class="t-ml-1 fas fa-times-circle"></i></a>
+                                    ><span>Unblock</span><i class="tw-ml-1 fas fa-times-circle"></i></a>
                                 </div>
-                            </chat-user>
+                            </chawuser>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="cs-footer t-flex-none t-h-8">
-                <div class="t-h-full t-flex t-flex-row t-items-center t-px-3">
-                    <span class="cs-text-gray t-text-xs">{{ $_watcher_count }} Online</span>
+            <div class="cs-footer tw-flex-none tw-h-8">
+                <div class="tw-h-full tw-flex tw-flex-row tw-items-center tw-px-3">
+                    <span class="cs-text-gray tw-text-xs">{{ $_watcher_count }} Online</span>
                 </div>
             </div>
         </div>
 
-        <div class="cs-body t-flex-grow t-flex t-flex-col t-overflow-hidden t-relative">
+        <div class="cs-body tw-flex-grow tw-flex tw-flex-col tw-overflow-hidden tw-relative">
             <div
-                class="cs-messages-container t-pt-4 t-overflow-y-scroll t-z-40"
+                class="cs-messages-container tw-pt-4 tw-overflow-y-scroll tw-z-40"
                 v-if="showThread"
                 ref="threadMessages"
             >
-                <div class="t-border-b t-border-gray-600">
-                    <div class="t-my-4">
+                <div class="tw-border-b tw-border-gray-600">
+                    <div class="tw-my-4">
                         <chat-message
                             :is-administrator="isAdministrator"
                             :message="messageThread"
@@ -152,7 +152,7 @@
                         ></chat-message>
                     </div>
                 </div>
-                <div class="cs-messages-container t-mt-4">
+                <div class="cs-messages-container tw-mt-4">
                     <div
                         v-for="item in $_message_thread_replies"
                         :key="item.id"
@@ -169,7 +169,7 @@
                 </div>
             </div>
             <div
-                class="cs-messages-container cs-fit t-pt-4 t-pb-2 t-z-20"
+                class="cs-messages-container cs-fit tw-pt-4 tw-pb-2 tw-z-20"
                 v-show="$_pinned_messages.length && currentTab == 'chat' && !showThread"
             >
                 <div
@@ -188,17 +188,17 @@
                 </div>
             </div>
             <div
-                class="cs-messages-container t-px-3 t-pt-4 t-overflow-y-scroll"
+                class="cs-messages-container tw-px-3 tw-pt-4 tw-overflow-y-scroll"
                 ref="messages"
                 v-show="currentTab == 'chat' && !showThread"
                 @scroll="containerScrolled"
             >
                 <div
-                    class="t-cursor-pointer t-pb-5 t-py-3 t-flex t-flex-row t-place-content-center"
+                    class="tw-cursor-pointer tw-pb-5 tw-py-3 tw-flex tw-flex-row tw-place-content-center"
                     @click.stop.prevent="loadMoreMessages"
                     v-if="$_show_load_more_messages"
                 >
-                    <span class="cs-text-sm t-text-white">Load more messages</span>
+                    <span class="cs-text-sm tw-text-white">Load more messages</span>
                 </div>
                 <div
                     v-for="(item, index) in $_messages"
@@ -216,13 +216,13 @@
                     ></chat-message>
                 </div>
                 <div
-                    class="t-p-3 t-text-red-400"
+                    class="tw-p-3 tw-text-red-400"
                     v-for="(message, index) in messageErrors"
                     :key="`error-message-${index}`"
                 >{{ message }}</div>
             </div>
             <div
-                class="cs-messages-container t-pt-4 t-overflow-y-scroll"
+                class="cs-messages-container tw-pt-4 tw-overflow-y-scroll"
                 ref="questions"
                 v-show="currentTab == 'questions' && !showThread"
                 @scroll="containerScrolled"
@@ -242,21 +242,21 @@
                     ></chat-message>
                 </div>
                 <div
-                    class="cs-text-gray t-px-3 t-py-1 cs-text-sm"
+                    class="cs-text-gray tw-px-3 tw-py-1 cs-text-sm"
                     v-if="$_questions.length == 0"
                 >There are no questions in this chat</div>
                 <div
-                    class="t-p-3 t-text-red-400"
+                    class="tw-p-3 tw-text-red-400"
                     v-for="(message, index) in questionErrors"
                     :key="`error-question-${index}`"
                 >{{ message }}</div>
             </div>
             <div
-                class="t-absolute t-left-0 t-right-0 t-bottom-2 t-flex t-flex-row t-place-content-center"
+                class="tw-absolute tw-left-0 tw-right-0 tw-bottom-2 tw-flex tw-flex-row tw-place-content-center"
                 v-if="$_show_scroll"
             >
                 <div
-                    class="t-flex t-items-center t-place-content-center cs-round-btn cs-bg-brand t-text-white t-rounded-full t-cursor-pointer"
+                    class="tw-flex tw-items-center tw-place-content-center cs-round-btn cs-bg-brand tw-text-white tw-rounded-full tw-cursor-pointer"
                     :class="brand"
                     @click.stop.prevent="scrollDown()"
                 ><i class="fas fa-arrow-down"></i></div>
@@ -265,34 +265,34 @@
 
         <div
             v-if="showDialog"
-            class="cs-dialog-container t-absolute t-inset-0 t-z-50"
+            class="cs-dialog-container tw-absolute tw-inset-0 tw-z-50"
         >
             <div
-                class="t-w-full t-h-full t-relative"
+                class="tw-w-full tw-h-full tw-relative"
             >
-                <div class="cs-dialog-overlay t-absolute t-inset-0 t-opacity-100 t-z-20" @click.stop.prevent="closeDialog()"></div>
-                <div class="t-w-full t-h-full t-flex t-flex-col t-place-content-center t-place-items-center">
-                    <div class="cs-dialog-window t-rounded-lg t-flex-none t-bg-black t-z-30 t-relative">
-                        <div class="t-absolute t-top-2 t-right-3 t-text-white"><i class="fal fa-times t-font-semibold t-cursor-pointer" @click.stop.prevent="closeDialog()"></i></div>
+                <div class="cs-dialog-overlay tw-absolute tw-inset-0 tw-opacity-100 tw-z-20" @click.stop.prevent="closeDialog()"></div>
+                <div class="tw-w-full tw-h-full tw-flex tw-flex-col tw-place-content-center tw-place-items-center">
+                    <div class="cs-dialog-window tw-rounded-lg tw-flex-none tw-bg-black tw-z-30 tw-relative">
+                        <div class="tw-absolute tw-top-2 tw-right-3 tw-text-white"><i class="fal fa-times tw-font-semibold tw-cursor-pointer" @click.stop.prevent="closeDialog()"></i></div>
 
                         <div
-                            class="t-mt-6 t-mx-8 cs-text-sm t-text-center t-text-white t-tracking-tight t-leading-relaxed"
+                            class="tw-mt-6 tw-mx-8 cs-text-sm tw-text-center tw-text-white tw-tracking-tight tw-leading-relaxed"
                             v-if="userDeleteMessages != null"
                         >Are you sure you want to delete all user's messages from the chat?</div>
 
                         <div
-                            class="t-mt-6 t-mx-8 cs-text-sm t-text-center t-text-white t-tracking-tight t-leading-relaxed"
+                            class="tw-mt-6 tw-mx-8 cs-text-sm tw-text-center tw-text-white tw-tracking-tight tw-leading-relaxed"
                             v-if="questionRemove != null"
                         >Are you sure you want to mark this question as answered?</div>
 
                         <div
-                            class="t-mt-6 t-mx-6 cs-text-sm t-text-center t-text-white t-tracking-tight t-leading-relaxed"
+                            class="tw-mt-6 tw-mx-6 cs-text-sm tw-text-center tw-text-white tw-tracking-tight tw-leading-relaxed"
                             :class="{'t-pb-2': $_short_username}"
                             v-if="userBlock != null"
-                        >Are you sure you want to block <span class="t-font-bold">{{ userBlock.displayName }}</span> from this chat?</div>
-                        <div class="t-mt-3 t-flex t-flex-row t-justify-center">
+                        >Are you sure you want to block <span class="tw-font-bold">{{ userBlock.displayName }}</span> from this chat?</div>
+                        <div class="tw-mt-3 tw-flex tw-flex-row tw-justify-center">
                             <div
-                                class="cs-btn cs-text-sm t-cursor-pointer t-cursor-pointer t-rounded-full t-leading-none t-tracking-normal t-font-bold focus:t-outline-none focus:t-shadow-outline t-uppercase t-text-white t-w-28 t-flex t-justify-center"
+                                class="cs-btn cs-text-sm tw-cursor-pointer tw-cursor-pointer tw-rounded-full tw-leading-none tw-tracking-normal tw-font-bold focus:t-outline-none focus:t-shadow-outline tw-uppercase tw-text-white tw-w-28 tw-flex tw-justify-center"
                                 @click.stop.prevent="closeDialog(true)"
                             >confirm</div>
                         </div>
@@ -304,9 +304,9 @@
         <chat-emoji
             :show-window="showEmoji"
         ></chat-emoji>
-        <div class="cs-new-message-container t-flex-none box-border">
-            <div class="t-h-full t-flex t-flex-col t-place-content-between t-py-2 t-px-4 t-relative">
-                <div class="cs-new-message-wrapper t-rounded">
+        <div class="cs-new-message-container tw-flex-none box-border">
+            <div class="tw-h-full tw-flex tw-flex-col tw-place-content-between tw-py-2 tw-px-4 tw-relative">
+                <div class="cs-new-message-wrapper tw-rounded">
                     <textarea
                         v-model="message"
                         placeholder="Say something..."
@@ -315,7 +315,7 @@
                         v-on:keyup.enter="sendMessage()"
                         wrap="off"
                         rows="1"
-                        class="t-resize-none cs-text-sm t-bg-black t-rounded-none"
+                        class="tw-resize-none cs-text-sm tw-bg-black tw-rounded-none"
                         :class="{'cs-typing': message != ''}"
                         ref="newMessage"
                         v-if="currentTab == 'chat'"
@@ -328,15 +328,15 @@
                         v-on:keyup.enter="sendQuestion()"
                         wrap="off"
                         rows="1"
-                        class="t-resize-none cs-text-sm t-bg-black t-rounded-none"
+                        class="tw-resize-none cs-text-sm tw-bg-black tw-rounded-none"
                         :class="{'cs-typing': question != ''}"
                         v-if="currentTab == 'questions'"
                     ></textarea>
                 </div>
-                <div class="cs-new-message-menu t-absolute t-text-lg">
+                <div class="cs-new-message-menu tw-absolute tw-text-lg">
                     <a
                         href="#"
-                        class="cs-text-gray t-mr-3"
+                        class="cs-text-gray tw-mr-3"
                         @click.stop.prevent="toggleShowEmoji()"
                         v-if="currentTab == 'chat'"
                     ><i class="fal fa-smile"></i></a>
@@ -355,7 +355,7 @@
                 </div>
                 <div>
                     <span
-                        class="cs-text-gray t-text-xs t-cursor-pointer"
+                        class="cs-text-gray tw-text-xs tw-cursor-pointer"
                         @click.stop.prevent="toggleShowMembers()"
                     >{{ $_watcher_count }} Online</span>
                 </div>

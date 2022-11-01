@@ -1,64 +1,64 @@
 <template>
-    <div class="cs-message-menu t-absolute t-text-base">
+    <div class="cs-message-menu tw-absolute tw-text-base">
         <div class="t-relative">
             <div
-                class="cs-sub-menu t-absolute t-right-0 t-bottom-0 t-w-44 t-py-3 t-flex t-flex-col t-bg-black t-rounded-lg t-text-white cs-text-sm t-z-50"
+                class="cs-sub-menu tw-absolute tw-right-0 tw-bottom-0 tw-w-44 tw-py-3 tw-flex tw-flex-col tw-bg-black tw-rounded-lg tw-text-white cs-text-sm tw-z-50"
                 :class="{'cs-downdown':dropdownMenu}"
                 v-if="messageMenu"
             >
                 <div v-if="message.user.id != userId && !isAdministrator">
-                    <a :href="message.user.profileUrl" target="_blank" class="cs-sub-menu-item t-px-3 t-no-underline t-text-white">View Profile</a>
+                    <a :href="message.user.profileUrl" target="_blank" class="cs-sub-menu-item tw-px-3 tw-no-underline tw-text-white">View Profile</a>
                 </div>
                 <div
-                    :class="{'t-mb-2': isAdministrator}"
+                    :class="{'tw-mb-2': isAdministrator}"
                     v-if="message.user.id == userId"
                 >
                     <div
-                        class="cs-sub-menu-item t-px-3 t-mb-1 t-cursor-pointer"
+                        class="cs-sub-menu-item tw-px-3 tw-mb-1 tw-cursor-pointer"
                         @click.stop.prevent="editMessage()"
                     >Edit Message</div>
                     <div
-                        class="cs-sub-menu-item t-px-3 t-mb-1 t-cursor-pointer"
+                        class="cs-sub-menu-item tw-px-3 tw-mb-1 tw-cursor-pointer"
                         @click.stop.prevent="removeMessage()"
                     >Delete</div>
                 </div>
                 <div v-if="isAdministrator">
-                    <div class="t-px-3 t-mb-2 t-font-semibold t-cursor-default">Moderation</div>
+                    <div class="t-px-3 tw-mb-2 tw-font-semibold tw-cursor-default">Moderation</div>
                     <div
-                        class="cs-sub-menu-item t-px-3 t-mb-1 t-cursor-pointer"
+                        class="cs-sub-menu-item tw-px-3 tw-mb-1 tw-cursor-pointer"
                         @click.stop.prevent="pinMessage()"
                         v-if="$_show_pin"
                     >Pin Message</div>
                     <div
-                        class="cs-sub-menu-item t-px-3 t-mb-1 t-cursor-pointer"
+                        class="cs-sub-menu-item tw-px-3 tw-mb-1 tw-cursor-pointer"
                         @click.stop.prevent="unpinMessage()"
                         v-if="$_show_unpin"
                     >Unpin Message</div>
                     <div
-                        class="cs-sub-menu-item t-px-3 t-mb-1 t-cursor-pointer"
+                        class="cs-sub-menu-item tw-px-3 tw-mb-1 tw-cursor-pointer"
                         @click.stop.prevent="removeMessage()"
                         v-if="message.user.id != userId"
                     >Remove Message</div>
                     <div
-                        class="cs-sub-menu-item t-px-3 t-mb-1 t-cursor-pointer"
+                        class="cs-sub-menu-item tw-px-3 tw-mb-1 tw-cursor-pointer"
                         @click.stop.prevent="removeAllMessages()"
                         v-if="message.user.id != userId"
                     >Remove All Messages</div>
                     <div
-                        class="cs-sub-menu-item t-px-3 t-cursor-pointer"
+                        class="cs-sub-menu-item tw-px-3 tw-cursor-pointer"
                         @click.stop.prevent="blockUser()"
                         v-if="message.user.id != userId"
                     >Block Student</div>
                 </div>
             </div>
             <div
-                class="cs-react-menu t-absolute t-right-0"
+                class="cs-react-menu tw-absolute tw-right-0"
                 :class="{'cs-downdown':dropdownMenu}"
                 v-if="messageReact"
             >
-                <div class="t-flex t-flex-row t-bg-black t-rounded-full t-text-center space-x-1 t-py-2 t-px-3 t-mb-4">
+                <div class="t-flex tw-flex-row tw-bg-black tw-rounded-full tw-text-center space-x-1 tw-py-2 tw-px-3 tw-mb-4">
                     <div
-                        class="t-text-xl t-cursor-pointer t-p-1 t-px-0.5"
+                        class="t-text-xl tw-cursor-pointer tw-p-1 tw-px-0.5"
                         v-for="(emoji, reaction) in messageReactions"
                         :key="`add-reaction-${reaction}`"
                         @click.stop.prevent="reactToMessage(reaction)"
@@ -67,32 +67,32 @@
             </div>
         </div>
         <div
-            class="cs-main-menu t-flex t-flex-row t-rounded-full t-cursor-pointer t-px-1"
+            class="cs-main-menu tw-flex tw-flex-row tw-rounded-full tw-cursor-pointer tw-px-1"
             :class="{ 'cs-menu-opened': messageMenu || messageReact }"
         >
-            <div class="cs-divide-right t-px-2 cs-text-xs t-flex t-flex-row t-items-center t-cursor-default">
+            <div class="cs-divide-right tw-px-2 cs-text-xs tw-flex tw-flex-row tw-items-center tw-cursor-default">
                 <span>{{ $_message_time }}</span>
             </div>
             <div
-                class="cs-divide-right cs-tooltip-container t-px-2 cs-text-sm t-relative"
+                class="cs-divide-right cs-tooltip-container tw-px-2 cs-text-sm tw-relative"
                 @click.stop.prevent="markAsAnswered()"
                 v-if="showUpvote && isAdministrator"
             >
                 <i class="fas fa-check"></i>
-                <div class="cs-tooltip t-absolute t-rounded-md t-px-2 t-py-1 t-text-xs t-text-white t-overflow-hidden t-whitespace-nowrap">Mark as Answered</div>
-                <div class="cs-tooltip-arrow t-absolute t-transform t-rotate-45"></div>
+                <div class="cs-tooltip tw-absolute tw-rounded-md tw-px-2 tw-py-1 tw-text-xs tw-text-white tw-overflow-hidden tw-whitespace-nowrap">Mark as Answered</div>
+                <div class="cs-tooltip-arrow tw-absolute tw-transform tw-rotate-45"></div>
             </div>
             <div
-                class="cs-divide-right cs-tooltip-container t-px-2 cs-text-sm t-relative"
+                class="cs-divide-right cs-tooltip-container tw-px-2 cs-text-sm tw-relative"
                 @click.stop.prevent="toggleMessageReact()"
                 v-if="!showUpvote"
             >
                 <i class="fas fa-smile-plus"></i>
-                <div class="cs-tooltip t-absolute t-rounded-md t-px-2 t-py-1 t-text-xs t-text-white t-overflow-hidden t-whitespace-nowrap">Add Reaction</div>
-                <div class="cs-tooltip-arrow t-absolute t-transform t-rotate-45"></div>
+                <div class="cs-tooltip tw-absolute tw-rounded-md tw-px-2 tw-py-1 tw-text-xs tw-text-white tw-overflow-hidden tw-whitespace-nowrap">Add Reaction</div>
+                <div class="cs-tooltip-arrow tw-absolute tw-transform tw-rotate-45"></div>
             </div>
             <div
-                class="cs-divide-right t-px-2 cs-text-sm"
+                class="cs-divide-right tw-px-2 cs-text-sm"
                 @click.stop.prevent="messageThread()"
                 v-if="showThread"
             ><i class="fal fa-reply-all"></i></div>
