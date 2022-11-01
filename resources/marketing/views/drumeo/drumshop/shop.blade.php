@@ -436,7 +436,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.3/moment-timezone-with-data.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/drumeo/ba-bbq.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/drumeo/misc.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/parce/drumeo/navigation-sales.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="/marketing/js/jquery.countdown-2.min.js"></script>
     <script>
         $(document).ready(function () {
@@ -507,7 +507,9 @@
     <script src="{{ asset('/marketing/js/drumeo/cart-sidebar.js') }}"></script>
     <script src="{{ asset('/marketing/js/drumeo/app.js') }}"></script>
     <script src="{{ asset('/marketing/js/drumeo/drum-shop-filters.js') }}"></script>
-    <script src="{{ asset('marketing/js/app.js') }}"></script>
+    
+    <script src="{{ mix('/platform/js/app.js') }}"></script>
+
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script>
         $(function () {

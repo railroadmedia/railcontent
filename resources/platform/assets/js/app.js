@@ -301,6 +301,14 @@ app.component('AppContainer', AppContainer)
         )
     ))
 
+    .component('CartSidebar', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "cart-sidebar" */
+            './vue/vuesora/components/CartSidebar/CartSidebar.vue'
+        )
+    ))
+
+
     .component('ContactEmailFormMarketing', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "contact-email-form-marketing" */
