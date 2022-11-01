@@ -18,10 +18,7 @@
                 :class="lessonIsLiked ? 'text-white' : 'tw-text-[#3F3F46] dark:tw-text-[#7E9AB1]'"
                 @click="likeLesson"
             >
-                <i
-                    class="fa-thumbs-up mr-1"
-                    :class="lessonIsLiked ? 'fas' : 'fal'"
-                ></i>
+                <musora-icon :icon-name="post.isLiked  ? 'thumb-like-filled' : 'thumb-like'"  class="tw-w-6 tw-h-6 tw-mr-1" />
                 {{ lessonIsLiked ? 'Liked' : 'Like' }}
             </p>
         </div>
