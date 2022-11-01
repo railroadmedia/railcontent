@@ -11,12 +11,28 @@ export const testCarousel = [
                 img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,fit=cover,metadata=none/https://musora-web-platform.s3.amazonaws.com/carousel/musora-header-large+new.jpg",
             },
             {
+                topSubtitle: "Coach of The Month",
+                title: "Todd Sucherman",
+                ctaText: "Visit Todd's Coach Page",
+                description: "Todd is our featured coach of the month. Tune in for brand new content all month featuring Todd's legendary drumming skills.",
+                ctaUrl: "/drumeo/coaches/todd-sucherman/31973",
+                img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,height=430,metadata=none/https://musora-web-platform.s3.amazonaws.com/carousel/Todd-Suchermann-Banner.jpg",
+            },
+            {
                 topSubtitle: "Introducing",
                 title: "The Drum Department",
                 ctaText: "Watch The Latest Episode",
                 description: "The Drum Department is a podcast for drummers, brought to you by drummers! Get the latest info on your favorite drummers, learn about new gear and see what kind of trouble we can get ourselves into each week!",
                 ctaUrl: "/drumeo/live-streams",
                 img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,height=430,fit=cover,metadata=none/https://musora-web-platform.s3.amazonaws.com/carousel/drumeo-drum-department.jpg",
+            },
+            {
+                topSubtitle: "",
+                title: "New Songs Releases",
+                ctaText: "Go To Songs",
+                description: "November 14th - Student Request & Peter Erskine - 21 New Songs<br>November 23rd - Drumeo's Choice - 20 New Songs",
+                ctaUrl: "/drumeo/songs",
+                img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,height=430,fit=cover,metadata=none/https://musora-web-platform.s3.amazonaws.com/carousel/Songs-banner.jpg",
             },
         ]
     },
