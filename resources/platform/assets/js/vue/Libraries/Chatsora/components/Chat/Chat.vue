@@ -447,6 +447,7 @@ export default {
             userBlock: null,
             userDeleteMessages: null,
             channelWatchers: {},
+            watcherCount: 0,
             fetchingBannedUsers: false,
             bannedUsers: {},
             chatMenu: false,
@@ -520,7 +521,7 @@ export default {
         $_watcher_count: {
             cache: false,
             get() {
-                return Object.keys(this.channelWatchers).length;
+                return this.watcherCount;
             },
         },
         $_banned_users_count: {
@@ -886,6 +887,7 @@ export default {
                 .then((state) => {
                     this.fetchWatchers();
                     this.fetchPinnedMessages();
+                    this.watcherCount = state.watcher_count;
 
                     this.processMessages(state, this.messages, 'message');
 
@@ -894,14 +896,16 @@ export default {
                     this.messages.push(greeting);
 
                     this.chatChannel
-                        .on('user.watching.start', ({ user }) => {
-                            this.channelWatchers[user.id] = user;
+                        .on('user.watching.start', ({ user, watcher_count }) => {
+                            this.$set(this.channelWatchers, user.id, user);
+                            this.watcherCount = watcher_count;
                         });
 
                     this.chatChannel
-                        .on('user.watching.stop', ({ user }) => {
+                        .on('user.watching.stop', ({ user, watcher_count }) => {
                             if (this.channelWatchers[user.id]) {
-                                delete this.channelWatchers[user.id];
+                                this.$delete(this.channelWatchers, user.id);
+                                this.watcherCount = watcher_count;
                             }
                         });
 
