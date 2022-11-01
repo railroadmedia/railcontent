@@ -15,6 +15,7 @@
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
 
     <link href="{{ asset('/marketing/parcel/drumeo/drum-shop.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/vuesora.css') }}" rel="stylesheet">
     <style>
         .join.smaller {
             padding: 10px 30px 6px;

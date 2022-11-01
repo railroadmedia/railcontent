@@ -14,6 +14,8 @@
 
     <link href="{{ asset('/marketing/parcel/singeo/shop.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
+
+    <link href="{{ asset('/marketing/css/vuesora.css') }}" rel="stylesheet">
 @stop
 
 @section('global-body')

@@ -16,6 +16,7 @@
     <link href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}" rel="stylesheet">
 
     <link href="{{ asset('/marketing/parcel/guitareo/shop.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/vuesora.css') }}" rel="stylesheet">
     <style>
         .tooltip {
             position: relative;

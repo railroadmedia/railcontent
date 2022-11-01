@@ -14,6 +14,8 @@
     <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/pianote/shop.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Oswald:500" rel="stylesheet">
+    
+    <link href="{{ asset('/marketing/css/vuesora.css') }}" rel="stylesheet">
 
     <style>
         .shipping-delay .delay-bar {
