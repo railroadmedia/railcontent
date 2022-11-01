@@ -51,9 +51,8 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('ProcessTrackings')->everyMinute();
 
-        //createSearchIndexes has differences between drumeo and
+        //this should be enabled once we turn off legacy cron jobs
         //$schedule->command('content:rebuildSearchIndexes')->dailyAt('2:00')->sendOutputTo('/proc/1/fd/1');
-
     }
 
     /**

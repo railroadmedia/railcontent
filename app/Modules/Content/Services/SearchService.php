@@ -73,7 +73,7 @@ class SearchService
                 $searchIndex->content_status = $content['status'];
                 $searchIndex->content_instructors = implode(',', $instructorNames);
                 $searchIndex->content_published_on = $content['published_on'] ?? Carbon::today()->toDateTimeString();
-                $searchIndex->created_at =Carbon::today()->toDateTimeString();
+                $searchIndex->created_at = Carbon::today()->toDateTimeString();
                 $toInsert[] = $searchIndex->toArray();
             }
             DB::table('railcontent_search_indexes_staging')->insert($toInsert);
@@ -86,6 +86,7 @@ class SearchService
         );
         DB::statement('DROP TABLE railcontent_search_indexes_old');
         Log::debug('Finished Rebuilding Search Indexes');
+        usleep(250000); //delay 250 ms to reduce load
     }
 
     /**
