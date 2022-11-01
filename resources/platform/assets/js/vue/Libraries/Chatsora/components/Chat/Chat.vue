@@ -121,7 +121,7 @@
                                         class="cs-user-unblock cs-text-sm"
                                     ><span>Unblock</span><i class="tw-ml-1 fas fa-times-circle"></i></a>
                                 </div>
-                            </chawuser>
+                            </chat-user>
                         </div>
                     </div>
                 </div>
