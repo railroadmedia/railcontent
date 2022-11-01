@@ -13,6 +13,7 @@ use App\Console\Commands\RepairVimeoDurations;
 use App\Console\Commands\RunMWPPhaseOneLaunchMigrations;
 use App\Console\Commands\SeedLiveAndScheduledContent;
 use App\Console\Commands\SeedUserContentData;
+use App\Console\Commands\TestLessonsDescriptionUrls;
 use App\Console\Commands\VaporEnvManager;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -36,7 +37,8 @@ class Kernel extends ConsoleKernel
         PopulateUserTotalXpPerBrand::class,
         PopulateUserMinutesPracticedPerBrand::class,
         VaporEnvManager::class,
-        MigrateGuitareoUserXP::class
+        TestLessonsDescriptionUrls::class,
+        MigrateGuitareoUserXP::class,
     ];
 
     /**
