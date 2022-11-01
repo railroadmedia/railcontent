@@ -5,34 +5,28 @@ namespace App\Modules\Content\Services;
 use App\Modules\Content\Models\Content;
 use App\Modules\Content\Models\SearchIndex;
 use Carbon\Carbon;
-use Eloquent;
-use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Repositories\ContentDatumRepository;
-use Railroad\Railcontent\Repositories\ContentFieldRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
 
 class SearchService
 {
     private ContentRepository $contentRepository;
-    private ContentFieldRepository $fieldRepository;
     private ContentDatumRepository $datumRepository;
 
     public function __construct(
         ContentRepository $contentRepository,
-        ContentFieldRepository $fieldRepository,
         ContentDatumRepository $datumRepository
     ) {
         $this->contentRepository = $contentRepository;
-        $this->fieldRepository = $fieldRepository;
         $this->datumRepository = $datumRepository;
     }
 
-    public function rebuildIndexes()
+    public function rebuildIndexes(): void
     {
         Log::debug('Rebuilding Search Indexes');
         DB::statement('DROP TABLE IF EXISTS railcontent_search_indexes_staging');
@@ -89,10 +83,7 @@ class SearchService
         usleep(250000); //delay 250 ms to reduce load
     }
 
-    /**
-     * @return array
-     */
-    public function getContentTypes(): array
+    private function getContentTypes(): array
     {
         $brands = config('railcontent.available_brands');
         $showTypes = [];
@@ -100,7 +91,7 @@ class SearchService
             $showTypes += config('railcontent.showTypes', [])[$brand] ?? [];
         }
 
-        $types = array_unique(
+        return array_unique(
             array_merge(
                 $showTypes,
                 config('railcontent.topLevelContentTypes', []),
@@ -108,17 +99,6 @@ class SearchService
                 config('railcontent.singularContentTypes', [])
             )
         );
-        return $types;
-    }
-
-    /** Delete old indexes for the brand
-     *
-     * @return mixed
-     */
-    private function deleteOldIndexes()
-    {
-        return $this->query()
-            ->delete();
     }
 
     /** Prepare search indexes based on config settings
@@ -127,7 +107,7 @@ class SearchService
      * @param array $content
      * @return string
      */
-    private function prepareIndexesValues($type, $content)
+    private function prepareIndexesValues($type, $content): string
     {
         $searchIndexValues = ConfigService::$searchIndexValues;
         $configSearchIndexValues = $searchIndexValues[$type];
@@ -180,106 +160,4 @@ class SearchService
         return substr(preg_replace("/[^A-Za-z0-9 ]/", '', implode(' ', array_unique($values))), 0, 245);
     }
 
-    /**
-     * Perform a boolean full text search by term, paginate and order the results by score.
-     * Returns an array with the contents that contain the search criteria
-     *
-     * @param string|null $term
-     * @param int $page
-     * @param int $limit
-     * @param array $contentTypes
-     * @param array $contentStatuses
-     * @param $orderByColumn
-     * @param $orderByDirection
-     * @param null $dateTimeCutoff
-     * @return array
-     * @internal param null $contentType
-     */
-    public function search(
-        $term,
-        $page = 1,
-        $limit = 10,
-        $contentTypes = [],
-        $contentStatuses = [],
-        $orderByColumn = 'score',
-        $orderByDirection = 'desc',
-        $dateTimeCutoff = null,
-        $coachIds = []
-    ) {
-        $query =
-            $this->query()
-                ->selectColumns($term)
-                ->restrictByPermissions()
-                ->restrictBrand()
-                ->restrictByTerm($term)
-                ->order($orderByColumn, $orderByDirection)
-                ->directPaginate($page, $limit);
-
-        if (!empty($contentTypes)) {
-            $query->whereIn(ConfigService::$tableSearchIndexes . ' . content_type', $contentTypes);
-        }
-
-        if (!empty($contentStatuses)) {
-            $query->whereIn('content_status', $contentStatuses);
-        }
-
-        if (!empty($dateCutoff)) {
-            $query->where('content_published_on', ' > ', $dateTimeCutoff);
-        }
-
-        if (!empty($coachIds)) {
-            $query->where(function (Builder $builder) use ($coachIds) {
-                foreach ($coachIds as $coachId) {
-                    return $builder->orwhereRaw(' FIND_IN_SET(' . $coachId . ', content_instructors)');
-                }
-            });
-        }
-
-        $contentRows = $query->getToArray();
-
-        return array_column($contentRows, 'content_id');
-    }
-
-    /** Count all the matches
-     *
-     * @param string|null $term
-     * @param array $contentType
-     * @return int
-     */
-    public function countTotalResults(
-        $term,
-        $contentType = [],
-        $contentStatus = null,
-        $dateTimeCutoff = null,
-        $coachIds = []
-    ) {
-        $query =
-            $this->query()
-                ->selectColumns($term)
-                ->restrictByPermissions()
-                ->restrictByTerm($term)
-                ->restrictBrand();
-
-        if (!empty($contentType)) {
-            $query->whereIn(ConfigService::$tableSearchIndexes . ' . content_type', $contentType);
-        }
-
-        if (!empty($contentStatus)) {
-            $query->where('content_status', $contentStatus);
-        }
-
-        if (!empty($dateCutoff)) {
-            $query->where('content_published_on', ' > ', $dateTimeCutoff);
-        }
-
-        if (!empty($coachIds)) {
-            $query->where(function (Builder $builder) use ($coachIds) {
-                foreach ($coachIds as $coachId) {
-                    return $builder->orwhereRaw(' FIND_IN_SET(' . $coachId . ', content_instructors)');
-                }
-            });
-        }
-
-        return $query->count();
-    }
 }
