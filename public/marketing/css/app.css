@@ -1201,9 +1201,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .invisible {
   visibility: hidden !important;
 }
-.static {
-  position: static !important;
-}
 .fixed {
   position: fixed !important;
 }
