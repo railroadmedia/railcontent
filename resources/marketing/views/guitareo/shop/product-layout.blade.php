@@ -2,13 +2,6 @@
 
 @section('styles')
     @parent
-<<<<<<< HEAD
-
-    <link rel="preload" href="{{ asset('tailwindcss/tailwind.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="{{ asset('tailwindcss/tailwind.css') }}"></noscript>
-    <link href="/laravel/public/css/tailwind-helpers.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('/assets/marketing/nav-footer.css') }}">
-=======
     
     <title>{{ $product->name }}</title>
     <meta property="og:description" content="{{ $product->meta_desc  }}}">
@@ -20,7 +13,6 @@
     <noscript><link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}"></noscript>
     <link href="{{asset('/marketing/css/guitareo/tailwind-helpers.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}">
->>>>>>> feature-marketing-migration
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"/>
     <link href="{{ asset('/marketing/parcel/guitareo/shop-product.css') }}" rel="stylesheet">
 

@@ -660,15 +660,8 @@
     </script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
-<<<<<<< HEAD:resources/marketing/views/drumeo/products/full-page-assets/beginner-book.blade.php
-    <script src="{{ asset('marketing/js/drumeo/manifest.js') }}"></script>
-    <script src="{{ asset('marketing/js/drumeo/vendor.js') }}"></script>
-    <script src="{{ asset('marketing/js/drumeo/cart-sidebar.js') }}"></script>
-    <script src="{{ asset('marketing/js/drumeo/app.js') }}"></script>
-=======
     <script src="{{ asset('/marketing/js/drumeo/manifest.js') }}"></script>
     <script src="{{ asset('/marketing/js/drumeo/vendor.js') }}"></script>
     <script src="{{ asset('/marketing/js/drumeo/cart-sidebar.js') }}"></script>
     <script src="{{ asset('/marketing/js/drumeo/app.js') }}"></script>
->>>>>>> feature-marketing-migration:resources/marketing/views/drumeo/products/beginner-book.blade.php
 @stop

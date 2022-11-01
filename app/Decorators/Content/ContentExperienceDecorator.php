@@ -47,12 +47,10 @@ class ContentExperienceDecorator extends TypeDecoratorBase
                 $pointAmount = $content->fetch('fields.xp', $defaultPointAmount);
 
                 foreach ($content['assignments'] ?? [] as $assignment) {
-                    $pointAmount += $assignment['xp'] ?? 0;
+                    $pointAmount += $assignment->fetch('xp', 0);
                 }
-
                 $contents[$contentIndex]['xp'] = $pointAmount;
-
-                $contents[$contentIndex]['xp_bonus'] = $content->fetch('fields.xp', $defaultPointAmount);
+                $contents[$contentIndex]['xp_bonus'] = $pointAmount;
             }
 
             // units

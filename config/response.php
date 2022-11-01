@@ -66,7 +66,8 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'is_liked_by_current_user',
                 'parent_id',
-                'published_on_in_timezone'
+                'published_on_in_timezone',
+                'bundle_count'
             ],
             'total_lessons',
             'lessons_filter_options',

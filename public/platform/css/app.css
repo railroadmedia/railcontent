@@ -23128,6 +23128,18 @@ a:visited{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(0 201 172 / var(--tw-bg-opacity)) !important;
 }
+.tw-bg-pianote\/10{
+  background-color: rgb(246 26 48 / 0.1) !important;
+}
+.tw-bg-drumeo\/10{
+  background-color: rgb(11 118 219 / 0.1) !important;
+}
+.tw-bg-guitareo\/10{
+  background-color: rgb(0 201 172 / 0.1) !important;
+}
+.tw-bg-singeo\/10{
+  background-color: rgb(131 0 233 / 0.1) !important;
+}
 .tw-bg-transparent{
   background-color: transparent !important;
 }
@@ -23797,9 +23809,6 @@ a:visited{
 .tw-font-primary{
   font-family: "Open Sans", Century Gothic, sans-serif !important;
 }
-.tw-font-roboto-condensed{
-  font-family: "Roboto Condensed", Segoe UI, sans-serif !important;
-}
 .tw-text-xs{
   font-size: 0.75rem !important;
   line-height: 1rem !important;
@@ -23969,6 +23978,9 @@ a:visited{
 }
 .tw-tracking-\[1px\]{
   letter-spacing: 1px !important;
+}
+.tw-tracking-tighter{
+  letter-spacing: -0.05em !important;
 }
 .tw-tracking-tight{
   letter-spacing: -0.025em !important;

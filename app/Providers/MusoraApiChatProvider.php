@@ -53,9 +53,9 @@ class MusoraApiChatProvider implements ChatProviderInterface
         );
 
         return [
-            'apiKey' => config('railchat.get_stream_credentials')['key'] ?? '',
-            'chatChannelName' => config('railchat.chat_channel_name'),
-            'questionsChannelName' => config('railchat.questions_channel_name'),
+            'apiKey' => config('railchat.drumeo.get_stream_credentials')['key'] ?? '',
+            'chatChannelName' => config('railchat.drumeo.chat_channel_name'),
+            'questionsChannelName' => config('railchat.drumeo.questions_channel_name'),
             'token' => $token,
         ];
     }

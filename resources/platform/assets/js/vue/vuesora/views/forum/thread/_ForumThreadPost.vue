@@ -96,10 +96,7 @@
                             :class="post.isLiked ? themeTextClass : 'text-grey-3'"
                             @click="likePost"
                         >
-                        <i
-                            class="fas fa-thumbs-up"
-                            :class="post.isLiked ? 'fas' : 'fal'"
-                        ></i>
+                            <musora-icon :icon-name="post.isLiked  ? 'thumb-like-filled' : 'thumb-like'"  class="tw-w-6 tw-h-6 tw-mb-1" />
                         </p>
                         <p
                             class="tw-text-lg tw-mr-2 tw-uppercase dense tw-cursor-pointer reply-like noselect"

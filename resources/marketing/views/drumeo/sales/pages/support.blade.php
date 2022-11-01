@@ -101,13 +101,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-<<<<<<< HEAD:resources/marketing/views/drumeo/sales/pages/contact.blade.php
-    <script src="{{ asset('marketing/js/drumeo/manifest.js') }}"></script>
-    <script src="{{ asset('marketing/js/drumeo/vendor.js') }}"></script>
-    <script src="{{ asset('marketing/js/drumeo/app.js') }}"></script>
-=======
     <script src="{{ asset('/marketing/js/drumeo/manifest.js') }}"></script>
     <script src="{{ asset('/marketing/js/drumeo/vendor.js') }}"></script>
     <script src="{{ asset('/marketing/js/drumeo/app.js') }}"></script>
->>>>>>> feature-marketing-migration:resources/marketing/views/drumeo/sales/pages/support.blade.php
 @stop

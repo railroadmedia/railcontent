@@ -345,6 +345,14 @@ r mwp artisan VaporEnvManager web-staging-one push
 Environment variables are highly sensitive and need to stay secure. Please do not ever commit these .env files or share
 them. They should be deleted from your machine after updates are pushed.
 
+# How To Update Staging/Vapor Environments Databases From Production Data
+
+Use the r command 'update-databases'. Example:  
+```
+r mwp update-databases
+```
+Then enter the corresponding environment number you want to be updated with production data.
+
 # Emails and Testing Emails
 All non-production environment emails sent by our system go to our mailtrap account and email address be default:
 [https://mailtrap.io/inboxes/1620451/messages](https://mailtrap.io/inboxes/1620451/messages)
