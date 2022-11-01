@@ -303,14 +303,12 @@ return [
             \App\Decorators\Content\NewDecorator::class,
             \App\Decorators\Content\LiveEventDecorator::class,
             \App\Decorators\Content\DefaultDifficultyDecorator::class,
-            \App\Decorators\Content\AssignmentXPDecorator::class,
 
             \App\Decorators\Content\CourseDecorator::class,
             \App\Decorators\Content\CoursePartDecorator::class,
             \App\Decorators\Content\ShowsDecorator::class,
             \App\Decorators\Content\SongsDecorator::class,
             \App\Decorators\Content\PlayAlongDecorator::class,
-            \App\Decorators\Content\StudentFocusDecorator::class,
             \App\Decorators\Content\RudimentDecorator::class,
 
             \App\Decorators\Content\SemesterPackDecorator::class,

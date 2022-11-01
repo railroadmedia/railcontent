@@ -64,8 +64,8 @@ class EventDataSynchronizerUserProvider implements UserProviderInterface
             User::query()
                 ->find($userId);
 
-        if (!empty($user)) {
-            $userBrandXP = user()->brand_total_xp;
+        if (!empty($user) && $user) {
+            $userBrandXP = $user->brand_total_xp;
             $totalXp = 0;
             foreach ($totalXpPerBrands as $brand => $totalXpPerBrand){
                 $userBrandXP[$brand] = $totalXpPerBrand;

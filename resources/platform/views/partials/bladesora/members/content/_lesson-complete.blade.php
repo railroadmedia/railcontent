@@ -15,7 +15,7 @@
                 </p>
 
                 <h2 class="heading text-white text-center uppercase">
-                    You earned {{ $lessonContent->fetch('xp_bonus', 0) }} XP
+                    You earned {{ $lessonContent->fetch('fields.total_xp', $lessonContent->fetch('xp', 0)) }} XP
                 </h2>
             </div>
         </div>
