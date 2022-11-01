@@ -52,7 +52,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('ProcessTrackings')->everyMinute();
 
         //this should be enabled once we turn off legacy cron jobs
-        //$schedule->command('content:rebuildSearchIndexes')->dailyAt('2:00')->sendOutputTo('/proc/1/fd/1');
+        //$schedule->command('content:rebuildSearchIndexes')->dailyAt('2:00');
     }
 
     /**
