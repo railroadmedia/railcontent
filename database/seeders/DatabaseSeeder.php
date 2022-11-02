@@ -13,6 +13,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        $this->call([
+            CmsBrandSeeder::class,
+            CmsProductTypeSeeder::class,
+            CmsSizeSeeder::class,
+            CmsSizeChartSeeder::class,
+            CmsLessonSeeder::class,
+            CmsClothingSeeder::class,
+            CmsAccessorySeeder::class,
+            CmsBundleSeeder::class,
+        ]);
     }
 }
