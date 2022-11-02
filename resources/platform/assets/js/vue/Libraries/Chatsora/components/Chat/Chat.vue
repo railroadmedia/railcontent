@@ -980,7 +980,7 @@ export default {
 
                     this.chatChannel
                         .on('user.watching.start', ({ user, watcher_count }) => {
-                            this.$set(this.channelWatchers, user.id, user);
+                            this.channelWatchers[user.id] = user;
                             this.watcherCount = watcher_count;
                         });
 
@@ -1017,10 +1017,13 @@ export default {
                     watchers: { limit, offset: 0 },
                 })
                 .then(({ watchers }) => {
+
+                    console.log(watchers)
+
                     if (watchers) {
                         watchers.forEach(user => {
                             if (Math.abs(DateTime.fromISO(user.last_active).diffNow('hours').toObject().hours) < 4) {
-                              this.$set(this.channelWatchers, user.id, user);
+                              this.channelWatchers[user.id] = user;
                             }
                         });
                     }
@@ -1037,7 +1040,7 @@ export default {
                 .queryUsers({ banned:true }, {}, { limit, offset:0 })
                 .then(({ users }) => {
                     users.forEach(user => {
-                        this.$set(this.bannedUsers, user.id, user);
+                        this.bannedUsers[user.id] = user;
                     });
                     this.fetchingBannedUsers = false;
                 });
