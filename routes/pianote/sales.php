@@ -31,8 +31,10 @@ Route::domain('{pianoteDomain}')->group(function () {
     Route::get('/affiliate-trial', function () { return view('pianote.sales.trials.trial-selection.affiliates'); });
 
     Route::get('/shop/500-songs', [SalesController::class, 'songs500'] );
+    Route::get('/the-power-of-chords', [SalesController::class, 'PowerOfChords'] );
     Route::get('/shop/the-power-of-chords', [SalesController::class, 'PowerOfChords'] );
     Route::get('/the-power-of-chords-bootcamp', [SalesController::class, 'PowerOfChordsBootcamp'] );
+    Route::get('/the-power-of-chords-giveaway', [SalesController::class, 'PowerOfChordsGiveaway'] );
 
     Route::get('/giveaway', function () { return view('pianote.lead-gen.giveaway'); });
 
