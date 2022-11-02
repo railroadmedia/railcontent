@@ -143,7 +143,7 @@ class SearchService
             }
         }
 
-        if (in_array(' * ', $configSearchIndexValues['data_keys'])) {
+        if (in_array('*', $configSearchIndexValues['data_keys'])) {
             foreach ($content['data'] as $data) {
                 $values[] = $data['value'];
             }
