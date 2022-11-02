@@ -220,8 +220,8 @@ export default {
     },
     mounted() {
         if (this.message.type != 'system') {
-            this.$root
-                .$on(
+            this.chatEventBus
+                .on(
                     'editMessage',
                     ({ message, pinnedMessage }) => {
                         if (message.id == this.message.id && pinnedMessage == this.showPin) {
@@ -235,8 +235,8 @@ export default {
                     }
                 );
 
-            this.$root
-                .$on(
+            this.chatEventBus
+                .on(
                     'messageOwnReactionUpdate',
                     ({ message }) => {
                         if (message.id == this.message.id) {
@@ -245,19 +245,19 @@ export default {
                     }
                 );
 
-            this.$root
-                .$on(
+            this.chatEventBus
+                .on(
                     'messageMenuToggled',
                     ({ message }) => {
                         if (message.id == this.message.id && this.$refs.msg) {
                             let domRect = this.$refs.msg.getBoundingClientRect();
-                            this.$root.$emit('toggleChatPopup', { message: this.message, domRect });
+                            this.chatEventBus.emit('toggleChatPopup', { message: this.message, domRect });
                         }
                     }
                 );
 
-            this.$root
-                .$on(
+            this.chatEventBus
+                .on(
                     'scrollIntoView',
                     ({ message }) => {
                         if (message.id == this.message.id && this.$refs.msg) {
@@ -277,8 +277,8 @@ export default {
         },
 
         saveMessageEdit() {
-            this.$root
-                .$emit(
+            this.chatEventBus.on
+                .emit(
                     'updateMessage',
                     {
                         message: this.message,
@@ -297,8 +297,8 @@ export default {
         },
 
         toggleMessageReaction(reaction) {
-            this.$root
-                .$emit(
+            this.chatEventBus
+                .emit(
                     'toggleMessageReaction',
                     {
                         message: this.message,
@@ -309,8 +309,8 @@ export default {
 
         toggleUpvote() {
             if (this.message.user.id != this.userId) {
-                this.$root
-                    .$emit(
+                this.chatEventBus
+                    .emit(
                         'toggleMessageReaction',
                         {
                             message: this.message,
@@ -385,11 +385,11 @@ export default {
         },
 
         messageThread() {
-            this.$root.$emit('messageThread', { message: this.message });
+            this.chatEventBus.emit('messageThread', { message: this.message });
         },
 
         unpinMessage() {
-            this.$root.$emit('unpinMessage', { message: this.message });
+            this.chatEventBus.emit('unpinMessage', { message: this.message });
         },
 
         firstWordLength() {
@@ -397,7 +397,7 @@ export default {
         },
 
         closeMessageMenus() {
-            this.$root.$emit('closeMessageMenus', {});
+            this.chatEventBus.emit('closeMessageMenus', {});
         },
     },
 }
