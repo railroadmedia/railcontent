@@ -1,6 +1,6 @@
 <template>
     <div
-        class="cs-container tw-relative tw-h-full tw-w-full tw-flex tw-flex-col vuesora-override"
+        class="cs-container tw-relative tw-h-full tw-w-full tw-max-h-[690px] tw-flex tw-flex-col vuesora-override"
         :class="brand"
     >
         <div class="cs-top tw-flex-none">
@@ -50,7 +50,8 @@
             </div>
         </div>
 
-        <div class="tw-absolute tw-top-0 tw-right-0 tw-left-0 tw-flex tw-flex-col tw-z-40" v-show="showThread">
+        <div class="tw-absolute tw-top-0 tw-right-0 tw-left-0 tw-flex-col tw-z-40"
+             :class="showThread ? 'tw-flex' : 'tw-hidden'">
             <div class="cs-top tw-flex-none">
                 <div class="tw-h-full tw-w-full tw-flex tw-flex-row tw-place-items-center tw-justify-between">
                     <a
@@ -63,7 +64,9 @@
             </div>
         </div>
 
-        <div class="tw-absolute tw-inset-0 tw-flex tw-flex-col tw-z-40" v-show="showMembers">
+        <div class="tw-absolute tw-inset-0 tw-flex-col tw-z-40" 
+             :class="showMembers ? 'tw-flex' : 'tw-hidden'"
+        >
             <div class="cs-top tw-flex-none">
                 <div class="tw-h-full tw-w-full tw-flex tw-flex-row tw-items-center">
                     <a
@@ -91,7 +94,9 @@
             </div>
         </div>
 
-        <div class="tw-absolute tw-inset-0 tw-flex tw-flex-col tw-z-40" v-show="showBannedUsers">
+        <div class="tw-absolute tw-inset-0 tw-flex tw-flex-col tw-z-40"
+             :class="showBannedUsers ? 'tw-flex' : 'tw-hidden'"
+        >
             <div class="cs-top tw-flex-none">
                 <div class="tw-h-full tw-w-full tw-flex tw-flex-row tw-items-center">
                     <a
@@ -819,7 +824,7 @@ export default {
                 let message = {
                     'id': '',
                     'type': 'regular',
-                    'text': payload.text.linkify({ className: 'chat-message-link', target: '_blank' }),
+                    'text': payload.text.linkify({ className: 'chat-message-link tw-break-all', target: '_blank' }),
                     'reply_count': 0,
                     'pinned': false,
                     'user': this.userData,
@@ -862,7 +867,7 @@ export default {
                 let message = {
                     'id': '',
                     'type': 'regular',
-                    'text': text.linkify({ className: 'chat-message-link', target: '_blank' }),
+                    'text': text.linkify({ className: 'chat-message-link tw-break-all', target: '_blank' }),
                     'reply_count': 0,
                     'pinned': false,
                     'user': this.userData,
@@ -1052,7 +1057,7 @@ export default {
             this.chatChannel
                 .search(
                     { pinned: true },
-                    null,
+                    '',
                     { limit, offset: 0 }
                 )
                 .then(({ results }) => {
@@ -1125,7 +1130,7 @@ export default {
         getMessageCopy(message) {
             let messageCopy = (({ id, type, text, reply_count, pinned }) => ({ id, type, text, reply_count, pinned }))(message);
 
-            messageCopy.text = this.stripHtml(messageCopy.text).linkify({ className: 'chat-message-link', target: '_blank' });
+            messageCopy.text = this.stripHtml(messageCopy.text).linkify({ className: 'chat-message-link tw-break-all', target: '_blank' });
 
             messageCopy.user = this.getUserCopy(message.user);
 
@@ -1759,7 +1764,7 @@ export default {
         },
 
         getTabClasses(tab) {
-            let active = ['t-font-semibold', 't-text-white', 't-border-white'];
+            let active = ['tw-font-semibold', 'tw-text-white', 'tw-border-white'];
             let inactive = ['cs-text-gray', 't-border-transparent'];
 
             return this.currentTab == tab ? active : inactive;

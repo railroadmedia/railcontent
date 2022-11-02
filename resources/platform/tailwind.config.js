@@ -108,6 +108,9 @@ module.exports = {
             paddingLeft: '40px',
             margin: '10px 0',
           }
+        },
+        '.break-words': {
+          wordBreak: 'break-word',
         }
       })
     })

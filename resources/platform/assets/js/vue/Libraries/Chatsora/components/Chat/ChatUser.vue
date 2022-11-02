@@ -17,7 +17,7 @@
                 <a
                     :href="user.profileUrl"
                     target="_blank"
-                    class="tw-no-underline hover:tw-underline tw-text-white tw-font-semibold"
+                    class="tw-break-all tw-no-underline hover:tw-underline tw-text-white tw-font-semibold"
                 >{{ user.displayName }}</a>
                 <slot></slot>
             </div>
