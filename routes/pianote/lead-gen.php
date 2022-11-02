@@ -3,7 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Pianote\HomePageController;
 
-Route::domain('{pianoteDomain}')->group(function () {
+Route::domain('{pianoteDomain}')
+    ->middleware(['web_public'])
+    ->group(function () {
     Route::get('/thank-you',function () { return view('pianote.lead-gen.thank-you'); } );
     Route::get('/thankyou',function () { return view('pianote.lead-gen.thank-you-alt'); } );
     Route::get('/email-confirmation ',function () { return view('pianote.lead-gen.email-confirmation'); } );

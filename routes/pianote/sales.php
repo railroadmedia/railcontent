@@ -3,7 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Pianote\SalesController;
 
-Route::domain('{pianoteDomain}')->group(function () {
+Route::domain('{pianoteDomain}')
+    ->middleware(['web_public'])
+    ->group(function () {
     Route::get('/', [SalesController::class, 'home']);
 
     Route::get('/about', function () { return view('pianote.sales.pages.about'); });

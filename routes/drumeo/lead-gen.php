@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::domain('{drumeoDomain}')->group(function () {
+Route::domain('{drumeoDomain}')
+    ->middleware(['web_public'])
+    ->group(function () {
     Route::group(['prefix' => '40-songs'],
         function () {
             Route::get('/', function () { return view('drumeo.lead-gen.40-songs.signup'); });

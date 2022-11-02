@@ -3,7 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Singeo\SalesController;
 
-Route::domain('{singeoDomain}')->group(function () {
+Route::domain('{singeoDomain}')
+    ->middleware(['web_public'])
+    ->group(function () {
     Route::get('/', [SalesController::class, 'home']);
     Route::get('/support', function () { return view('singeo.sales.pages.support'); } );
     Route::get('/student-only', function () { return view('singeo.sales.student-only'); } );

@@ -3,7 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Musora\HomePageController;
 
-Route::domain('{musoraDomain}')->group(function () {
-    Route::get('/', [HomePageController::class, 'show']);
-});
+Route::domain('{musoraDomain}')
+    ->middleware(['web_public'])
+    ->group(function () {
+        Route::get('/', [HomePageController::class, 'show']);
+    });
 

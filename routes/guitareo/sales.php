@@ -3,7 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Guitareo\SalesController;
 
-Route::domain('{guitareoDomain}')->group(function () {
+Route::domain('{guitareoDomain}')
+    ->middleware(['web_public'])
+    ->group(function () {
     Route::get('/', [SalesController::class, 'home']);
     Route::get('/survival-kit-instructions', [SalesController::class, 'membership']);
     Route::get('/student-only', [SalesController::class, 'membershipStudents']);

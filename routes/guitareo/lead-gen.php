@@ -3,7 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Guitareo\SalesController;
 
-Route::domain('{guitareoDomain}')->group(function () {
+Route::domain('{guitareoDomain}')
+    ->middleware(['web_public'])
+    ->group(function () {
     Route::get('/thank-you-white', function () { return view('guitareo.lead-gen.pages.thank-you'); });
     Route::get('/welcome-party', function () { return view('guitareo.lead-gen.pages.welcome-party'); });
     Route::get('/welcome-party-carlos', function () { return view('guitareo.lead-gen.pages.welcome-party-carlos'); });

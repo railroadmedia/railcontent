@@ -23,6 +23,7 @@ class SetContentPermissions
      */
     public function handle(Request $request, Closure $next)
     {
+
         if (!empty(user()) && !empty(brand())) {
             ConfigService::$brand = brand();
             ConfigService::$availableBrands = Arr::wrap(brand());
