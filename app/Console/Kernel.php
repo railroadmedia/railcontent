@@ -38,7 +38,7 @@ class Kernel extends ConsoleKernel
         PopulateUserMinutesPracticedPerBrand::class,
         VaporEnvManager::class,
         TestLessonsDescriptionUrls::class,
-        MigrateGuitareoUserXP::class
+        MigrateGuitareoUserXP::class,
     ];
 
     /**
