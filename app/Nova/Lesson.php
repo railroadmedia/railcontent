@@ -87,7 +87,8 @@ class Lesson extends Resource
             Text::make('Meta Image', 'meta_img')->hideFromIndex()->hideFromDetail(),
             Text::make('Promo Code', 'promo_code')->hideFromIndex(),
             Currency::make('Price')->required(),
-            Currency::make('Discounted Price', 'discounted_price')->hideFromIndex(),
+            Currency::make('Discounted Price', 'discounted_price')->hideFromIndex()->help('Leave it blank if it is not on discount.'),
+            Boolean::make('Sold Out', 'sold_out')->default(false)->hideFromIndex(),
             Heading::make('Shop Card'),
             Text::make('Badge Text', 'badge_text')->hideFromIndex(),
             Image::make('Shop Card Thumbnail', 'thumbnail')
@@ -153,7 +154,9 @@ class Lesson extends Resource
                 }),
             Text::make('Shop Card Logo', 'thumbnail_logo')->hideFromIndex()->hideFromDetail(),
             Text::make('Shop Card Description', 'short_desc')->hideFromIndex(),
-            Number::make('Display order', 'display_order')->required(),
+            Boolean::make('Visible On Shop Page')->default(true)->hideFromIndex(),
+            Boolean::make('Included Edge', 'included_edge')->default(false)->hideFromIndex(),
+            Number::make('Display order', 'display_order')->required()->help('Shop cards will be displayed in the order of this.'),
             Heading::make('Page'),
             Text::make('Header Text', 'header_text')->hideFromIndex(),
             Text::make('Special Text', 'special_text')->hideFromIndex(),
@@ -190,10 +193,11 @@ class Lesson extends Resource
             Text::make('Page Logo', 'page_logo')->hideFromIndex()->hideFromDetail(),
             Text::make('Video Link', 'video_src')
                 ->hideFromIndex(),
-            Markdown::make('Overview')->hideFromIndex(),
+            Markdown::make('Overview')->hideFromIndex()->help('If you want to make text bold, wrap with ** **. ex) ** Text ** Text'),
             Flexible::make('Benefits')
                 ->addLayout(BenefitLayout::class)
-                ->preset(BenefitPreset::class),
+                ->preset(BenefitPreset::class)
+                ->help('There has to be 2 benefits.'),
             Text::make('Instructor Name', 'instructor_name')
                 ->hideFromIndex(),
             Image::make('Instructor Image', 'product_img')
@@ -235,12 +239,9 @@ class Lesson extends Resource
             Flexible::make('Specs')
                 ->addLayout(SpectLayout::class)
                 ->preset(SpecPreset::class),
-            Boolean::make('Visible On Shop Page')->default(true)->hideFromIndex(),
-            Boolean::make('Sold Out', 'sold_out')->default(false)->hideFromIndex(),
             Boolean::make('Guarantee Badge', 'guaranteed')->default(false)->hideFromIndex(),
             Boolean::make('Lifetime Access', 'lifetime_access')->default(false)->hideFromIndex(),
             Boolean::make('Free Shipping', 'free_shipping')->default(false)->hideFromIndex(),
-            Boolean::make('Included Edge', 'included_edge')->default(false)->hideFromIndex(),
             Heading::make('Bundle'),
             Image::make('Bundle Image', 'bundle_img')
                 ->disk('nova_s3')
