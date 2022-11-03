@@ -13,6 +13,7 @@ use Railroad\Railcontent\Entities\ContentEntity;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\UserContentProgressService;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ProfilePublicPagesController extends BaseController
 {
@@ -47,6 +48,26 @@ class ProfilePublicPagesController extends BaseController
         }
 
         $userMetrics = $this->getUserMetrics($user);
+        switch (brand()) {
+            case 'drumeo':
+                $methodSlug = 'drumeo-method';
+                break;
+            case 'pianote':
+                $methodSlug = 'pianote-method';
+                break;
+            case 'guitareo':
+                $methodSlug = 'guitareo-method';
+                break;
+            case 'singeo':
+                $methodSlug = 'singeo-method';
+                break;
+            default:
+                throw new NotFoundHttpException();
+        }
+        $methodContent =
+            $this->contentService->getBySlugAndType($methodSlug, 'learning-path')
+                ->first();
+        $userProgressOnMethod = $this->userContentProgressService->getUserProgressOnContent($userId, $methodContent['id']);
 
         // completed/started lessons
         $startedProgressRows = $this->userContentProgressService->getForUserStateContentTypes(
@@ -102,6 +123,8 @@ class ProfilePublicPagesController extends BaseController
                 'userXP' => $userXP,
                 'currentUser' => $currentUser,
                 "isSubscriber" => $isSubscriber,
+                "nextLearningPathLevel" => $user->getMethodLevel(),
+                "nextLearningPathProgressPercent" => $userProgressOnMethod?$userProgressOnMethod['progress_percent']:0
             ]
         );
     }
@@ -114,6 +137,11 @@ class ProfilePublicPagesController extends BaseController
         $userProfileMetrics = $this->userMetricsService->getUserProfileMetrics($user->id);
 
         return [
+            "musora_xp" => [
+                "icon" => "icon-experience-points",
+                "value" => $user->getTotalXp(),
+                "label" => $user->getXpRank(),
+            ],
             "xp" => [
                 "icon" => "icon-experience-points",
                 "value" => $user->getBrandTotalXp(),
@@ -131,7 +159,7 @@ class ProfilePublicPagesController extends BaseController
             ],
             "practiced" => [
                 "icon" => "icon-minutes-practiced",
-                "value" => $userProfileMetrics->getMinutesPracticed(),
+                "value" => $user->getBrandMinutesPracticed(),
                 "label" => "Minutes Practiced",
             ],
         ];

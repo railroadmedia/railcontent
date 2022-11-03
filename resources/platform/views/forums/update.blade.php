@@ -27,7 +27,7 @@
                 class="tw-flex tw-items-center tw-pt-5 tw-w-full">
                 <input type="hidden" name="_method" value="DELETE">
 
-                <button class="tw-btn-primary tw-bg-red-500 tw-w-full sm:tw-w-auto" type="submit">
+                <button class="tw-btn-primary tw-bg-red-500 hover:tw-bg-red-800 tw-w-full sm:tw-w-auto" type="submit">
                     Delete Thread
                 </button>
             </form>

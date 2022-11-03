@@ -2,6 +2,7 @@
 
 namespace Modules\UserManagementSystem\Models;
 
+use App\Modules\Ecommerce\Models\Subscription;
 use App\Modules\Mentor\Models\MentorStudent;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use DateTimeZone;
@@ -208,6 +209,8 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static Builder|User whereSingeoOnboardingSkipSetup($value)
  * @property ?MentorStudent $mentorStudent
  * @property mixed|null $brand_total_xp
+ * @property Collection $subscriptions
+ * @property mixed|null $brand_minutes_practiced
  */
 class User extends Model implements Authenticatable, CanResetPassword, AuthorizableContract
 {
@@ -221,7 +224,8 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     protected $guard_name = 'user-management-system';
     protected $casts = [
         'brand_method_levels' => 'json',
-        'brand_total_xp' => 'json'
+        'brand_total_xp' => 'json',
+        'brand_minutes_practiced' => 'json'
     ];
 
     /**
@@ -270,7 +274,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         'pianote_onboarding_skip_setup',
         'guitareo_onboarding_skip_setup',
         'singeo_onboarding_skip_setup',
-        'total_xp'
+        'use_legacy_video_player',
     ];
 
 
@@ -288,6 +292,11 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     public function mentorStudent(): HasOne
     {
         return $this->hasOne(MentorStudent::class, 'user_id');
+    }
+
+    public function subscriptions(): HasMany
+    {
+        return $this->hasMany(Subscription::class, 'user_id');
     }
 
     /**
@@ -334,6 +343,19 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         return 0;
     }
 
+    /**
+     * @return integer
+     */
+    public function getBrandMinutesPracticed()
+    {
+        $brand = brand();
+
+        if (isset($this->brand_minutes_practiced[$brand])) {
+            return $this->brand_minutes_practiced[$brand];
+        }
+
+        return 0;
+    }
     /**
      * @return Attribute
      */

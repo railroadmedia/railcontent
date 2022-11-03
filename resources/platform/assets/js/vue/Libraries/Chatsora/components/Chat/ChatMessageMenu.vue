@@ -7,7 +7,7 @@
                 v-if="messageMenu"
             >
                 <div v-if="message.user.id != userId && !isAdministrator">
-                    <a :href="message.user.profileUrl" target="_blank" class="cs-sub-menu-item tw-px-3 tw-no-underline tw-text-white">View Profile</a>
+                    <a :href="message.user.profileUrl" target="_blank" class="cs-sub-menu-item tw-px-3 tw-no-underline tw-text-white">View Dashboard</a>
                 </div>
                 <div
                     :class="{'tw-mb-2': isAdministrator}"

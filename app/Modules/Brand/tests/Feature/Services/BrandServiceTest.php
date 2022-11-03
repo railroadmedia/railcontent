@@ -6,10 +6,10 @@ use App\Modules\Brand\Enums\Brand;
 use App\Modules\Brand\Services\BrandService;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
-use Modules\Brand\Tests\BrandTestCase;
 use Modules\UserManagementSystem\Models\User;
+use Tests\TestCase;
 
-class BrandServiceTest extends BrandTestCase
+class BrandServiceTest extends TestCase
 {
     /**
      * @var $brandService BrandService

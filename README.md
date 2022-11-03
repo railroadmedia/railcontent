@@ -267,6 +267,92 @@ To run artisan commands including migrate on any vapor environment use the follo
 'web-staging-one' with whatever environment you wish to run it on:  
 `r vapor command web-staging-one --command="php artisan migrate"`
 
+# How To Update Environment Variables On Vapor Cloud Environments
+
+## Overview & Reasoning
+Laravel vapor uses AWS Lambda. Lambda has a limitation on how many environment variables can be set for a given 
+function/image. You can read about that here: 
+[Vapor Env Docs](https://docs.vapor.build/1.0/projects/environments.html#environment-variables)  
+
+Since 4kb of data is too small to house all our environment variables we also use secrets to serve environment variables
+to our application. [Vapor Secret Docs](https://docs.vapor.build/1.0/projects/environments.html#secrets)  
+
+Secrets are generally meant for key-value pairs but it costs us money per secret stored in AWS. We use special 
+code which allows us to store many env values in a single secret and parse them in our application. Secrets 
+also have a length limitation so we also often need to split our environment variables across multiple secrets. These 
+secrets look exactly like the .env files we use on in our local development environments and follow the same rules.  
+
+Instead of managing all of these environment variables in lambda/vapor and across multiple secrets manually, we built 
+an artisan command line tool to handle it all for us.
+
+If you are curious how we inject the vapor secrets in to our app for usage as environment variables, we use the code 
+from here: [Laravel Vapor Extended Secrets](https://atymic.dev/blog/laravel-vapor-extended-secrets/)  
+
+Instead of forking the original repo, we overwrite the vendor file using composer since its was less overhead. See:  
+
+```php
+"Laravel\\Vapor\\Runtime\\": "app/VaporCoreClassOverrides"
+```
+
+line the root composer.json file. The file we overwrite is: `app/VaporCoreClassOverrides/Secrets.php`  
+
+## How To Use The CLI/Artisan Tool
+
+### Requirements
+You must have the laravelVaporEmail and laravelVaporPassword variables set in your railenvironment 
+credentials/credentials file.
+
+### Command
+```
+VaporEnvManager {environment} {pushOrPull}
+```
+
+### Pulling The Environment Variables
+To edit the environment variables for a given environment, you must pull them to your machine in to a file for easy 
+editing. Example: (all examples use our r tool, you would need to use `php artisan` otherwise):
+
+```
+r mwp artisan VaporEnvManager production pull
+```
+
+This will create a file on your machine under this repository root folder named `.env.full.production`  
+You can then edit this file to change the environment variables. Please always pull the latest environment variables 
+using the pull command before updating and pushing changes.
+
+Once you are done editing and have saved the file, update the environment variables on the cloud server using the 
+push parameter. Example:
+
+```
+r mwp artisan VaporEnvManager production push
+```
+
+Once the command completes, everything is updated in the cloud and you must deploy the environment for the new 
+environments variables to take effect.  
+
+Other examples:
+```
+r mwp artisan VaporEnvManager beta-testing pull
+# edit the .env.full.beta-testing file
+r mwp artisan VaporEnvManager beta-testing push
+```
+```
+r mwp artisan VaporEnvManager web-staging-one pull
+# edit the .env.full.web-staging-one file
+r mwp artisan VaporEnvManager web-staging-one push
+```
+
+**Important Note**  
+Environment variables are highly sensitive and need to stay secure. Please do not ever commit these .env files or share
+them. They should be deleted from your machine after updates are pushed.
+
+# How To Update Staging/Vapor Environments Databases From Production Data
+
+Use the r command 'update-databases'. Example:  
+```
+r mwp update-databases
+```
+Then enter the corresponding environment number you want to be updated with production data.
+
 # Emails and Testing Emails
 All non-production environment emails sent by our system go to our mailtrap account and email address be default:
 [https://mailtrap.io/inboxes/1620451/messages](https://mailtrap.io/inboxes/1620451/messages)
@@ -283,3 +369,85 @@ Production laravel logs are sent to our papertrail account:
 PHP or lower level logs are in cloudwatch/vapor.
 
 Other environments are being added to papertrial in the near future.
+
+## Local
+
+Run `r logs {container-id}` from within railenvmanager, specifing the php8 apache container.
+
+Get the container id of the apache-php-fpm-8 container by running this (in railenvmanager container):
+
+```
+docker ps | grep 'apache-php-fpm-8'
+```
+
+That'll return something like this:
+
+```
+90b0bd123eb0   railenvironment_docker_apache-php-fpm-8      "/entrypoint /bin/ba…"   7 hours ago    Up 4 hours   9000/tcp, 9100/tcp, 0.0.0.0:8880->80/tcp, :::8880->80/tcp, 0.0.0.0:8222->222/tcp, :::8222->222/tcp, 0.0.0.0:8443->443/tcp, :::8443->443/tcp   railenvironmentdocker_apache-php-fpm-8
+```
+
+Then to view the logs for that that you can run (in railenvmanager container):
+
+```
+r logs 90b0bd123eb0
+```
+
+Or because you don't need the entire id, just enough to differentiate it from other containers, this would probably do:
+
+```
+r logs 90b0
+```
+
+# Image CDN Uploading, Serving, and Formatting 
+
+We use the Cloudflare Images service to manage all our images.    
+
+## Uploading New Images
+New images can be uploaded from the cloudflare console at:   
+[https://dash.cloudflare.com/13b43223393c313ed5db36bcc2138a95/images/images](https://dash.cloudflare.com/13b43223393c313ed5db36bcc2138a95/images/images)
+
+Once you upload an image please use the musora.com domain instead of the cloudflare default domain for the source image.  
+
+```
+https://imagedelivery.net/*
+```
+
+Should be changed to:  
+```
+https://musora.com/cdn-cgi/imagedelivery/*
+```
+
+Example:  
+```
+https://imagedelivery.net/0Hon__GSkIjm-B_W77SWCA/e275983d-455d-43af-6c8a-f1e62bda7500/public
+to
+https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/e275983d-455d-43af-6c8a-f1e62bda7500/public
+```
+
+## Serving & Formatting Images
+All images **from any source** must be served through the cloudflare image CDN. You can put any image URL at the end 
+of our CDN url to serve it from our cloudflare CDN.  
+
+[Formatting Options Docs](https://developers.cloudflare.com/images/image-resizing/url-format/)
+
+URL Structure:  
+```
+https://musora.com/cdn-cgi/image/FORMATTING_OPTIONS/FULL_SOURCE_IMAGE_URL
+```
+
+Examples:  
+```
+https://musora.com/cdn-cgi/image/width=100,height=100,quality=85/https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/e275983d-455d-43af-6c8a-f1e62bda7500/public
+```  
+```
+https://musora.com/cdn-cgi/image/width=100,height=100,quality=85/https://s3.amazon.com/my-image.jpeg
+```  
+
+
+# Login As A User
+
+Log in with an authorized account (in incog or another session), 
+then use this URL and swap in the user of the account you wish to log in to:
+```
+https://www.musora.com/user-management-system/login-as-user/USER_ID
+```

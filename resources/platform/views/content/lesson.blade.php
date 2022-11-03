@@ -51,7 +51,7 @@
                                 progress-state="{{ $lessonContent->fetch('progress_state') }}"
                                 content-id="{{ $lessonContent->fetch('id') }}" :use-intersection-observer="true"
                                 theme-color="{{ $brand }}" @play="handleVideoPlay" @pause="handleVideoPause">
-                            </youtube-player>lesson-sidebar
+                            </youtube-player>
                         </div>
                     @else
                         <div id="lessonVideoWrap">
@@ -125,7 +125,7 @@
                         'hasQAVideo' => !empty($lessonContent['qna_video_playback_endpoints']),
                         'isCompleted' => $lessonContent->fetch('completed'),
                         'contentId' => $lessonContent->fetch('id'),
-                        'xpAmount' => $lessonContent->fetch('xp'),
+                        'xpAmount' => $lessonContent->fetch('fields.xp'),
                     ])
 
                     {{-- Ask a Question Input --}}
@@ -159,7 +159,7 @@
                     'contentType' => $lessonContent->fetch('type'),
                     'progress' => $lessonContent->fetch('progress_percent'),
                     'nextLessonUrl' => '',
-                    'xpAmount' => $lessonContent->fetch('xp'),
+                    'xpAmount' => $lessonContent->fetch('fields.total_xp', $lessonContent->fetch('xp', 0)),
                     'showCompleteButton' => true,
                     'contentId' => $lessonContent->fetch('id'),
                     'brand' => '{{ $brand }}',
@@ -175,13 +175,13 @@
                     <div class="container mv-3">
                         <div class="flex flex-column grow">
                             <div class="flex flex-row pv-3">
-                                <h1 class="heading">Resources</h1>
+                                <h1 class="heading dark:tw-text-white">Resources</h1>
                             </div>
                             <div class="flex flex-row">
                                 <div class="flex flex-column">
                                     @foreach ($lessonContent->fetch('*data.sheet_music_image_url.value') as $sheetMusicImageUrl)
                                         <div class="flex flex-row bb-light-1">
-                                            <div class="flex flex-column grow ph pv-3">
+                                            <div class="flex flex-column grow ph pv-3 tw-bg-white">
                                                 <img src="{{ $sheetMusicImageUrl }}" style="width:100%;">
                                             </div>
                                         </div>
@@ -197,7 +197,7 @@
                     <div class="container mv-3">
                         <div class="flex flex-column grow">
                             <div class="flex flex-row pv-3">
-                                <h1 class="heading">Resources</h1>
+                                <h1 class="heading dark:tw-text-white">Resources</h1>
                             </div>
                             <div class="flex flex-row">
                                 @include('partials.content._legacy-pack-resources')
@@ -237,7 +237,7 @@
                                 $content['themeColor'] = brand();
                                 $content['timecode'] = $assignment->fetch('data.timecode', 0);
                                 $content['id'] = $assignment->fetch('id');
-                                $content['xp'] = $assignment->fetch('xp');
+                                $content['xp'] = $assignment->fetch('fields.total_xp');
                                 $content['title'] = $assignment->fetch('fields.title');
                                 $content['soundsliceSlug'] = $assignment->fetch('fields.soundslice_slug');
                                 $content['completed'] = $assignment->fetch('completed');

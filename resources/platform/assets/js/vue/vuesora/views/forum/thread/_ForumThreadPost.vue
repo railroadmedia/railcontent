@@ -77,7 +77,7 @@
 
                             <button
                                 class="tw-btn-primary tw-w-full sm:tw-w-auto"
-                                :class="`tw-bg-${ brand }`"
+                                :class="`tw-bg-${brand} hover:tw-bg-${brand}-600`"
                                 type="submit"
                             >
                                 Save Post
@@ -96,10 +96,7 @@
                             :class="post.isLiked ? themeTextClass : 'text-grey-3'"
                             @click="likePost"
                         >
-                        <i
-                            class="fas fa-thumbs-up"
-                            :class="post.isLiked ? 'fas' : 'fal'"
-                        ></i>
+                            <musora-icon :icon-name="post.isLiked  ? 'thumb-like-filled' : 'thumb-like'"  class="tw-w-6 tw-h-6 tw-mb-1" />
                         </p>
                         <p
                             class="tw-text-lg tw-mr-2 tw-uppercase dense tw-cursor-pointer reply-like noselect"

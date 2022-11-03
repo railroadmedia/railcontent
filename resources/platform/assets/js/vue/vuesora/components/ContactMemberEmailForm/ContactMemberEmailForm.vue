@@ -37,7 +37,7 @@
             <button class="tw-btn-primary tw-self-start tw-mr-auto tw-w-full sm:tw-w-min" 
                     type="submit"
                     :disabled="!formValid"
-                    :class="themeBgClass" 
+                    :class="`tw-bg-${brand} hover:tw-bg-${brand}-600`" 
             >
                 Submit
             </button>

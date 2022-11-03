@@ -14,12 +14,13 @@ environments:
         tmp-storage: 2048
         cli-tmp-storage: 2048
         queue-tmp-storage: 2048
+        cache: musora-production-redis-cache
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'
             - 'php artisan route:cache'
             - 'php artisan view:cache'
-            - 'yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
+            - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
     pre-production:
         domain: 'pre-production.musora.com'
         scheduler: false
@@ -32,12 +33,13 @@ environments:
         tmp-storage: 2048
         cli-tmp-storage: 2048
         queue-tmp-storage: 2048
+        cache: staging-cache
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'
             - 'php artisan route:cache'
             - 'php artisan view:cache'
-            - 'yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
+            - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
     beta-testing:
         domain: 'beta-testing.musora.com'
         warm: 1
@@ -51,12 +53,13 @@ environments:
         tmp-storage: 2048
         cli-tmp-storage: 2048
         queue-tmp-storage: 2048
+        cache: staging-cache
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'
             - 'php artisan route:cache'
             - 'php artisan view:cache'
-            - 'yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
+            - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
     web-staging-one:
         domain: 'web-staging-one.musora.com'
         scheduler: false
@@ -69,12 +72,13 @@ environments:
         tmp-storage: 2048
         cli-tmp-storage: 2048
         queue-tmp-storage: 2048
+        cache: staging-cache
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:clear'
             - 'php artisan route:clear'
             - 'php artisan view:cache'
-            - 'yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
+            - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
     web-staging-two:
         domain: 'web-staging-two.musora.com'
         scheduler: false
@@ -87,12 +91,13 @@ environments:
         tmp-storage: 2048
         cli-tmp-storage: 2048
         queue-tmp-storage: 2048
+        cache: staging-cache
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'
             - 'php artisan route:cache'
             - 'php artisan view:cache'
-            - 'yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
+            - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
     web-staging-three:
         domain: 'web-staging-three.musora.com'
         scheduler: false
@@ -105,12 +110,13 @@ environments:
         tmp-storage: 2048
         cli-tmp-storage: 2048
         queue-tmp-storage: 2048
+        cache: staging-cache
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'
             - 'php artisan route:cache'
             - 'php artisan view:cache'
-            - 'yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
+            - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
     web-staging-four:
         domain: 'web-staging-four.musora.com'
         scheduler: false
@@ -123,12 +129,13 @@ environments:
         tmp-storage: 2048
         cli-tmp-storage: 2048
         queue-tmp-storage: 2048
+        cache: staging-cache
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'
             - 'php artisan route:cache'
             - 'php artisan view:cache'
-            - 'yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
+            - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
     web-staging-five:
         domain: 'web-staging-five.musora.com'
         scheduler: false
@@ -141,12 +148,13 @@ environments:
         tmp-storage: 2048
         cli-tmp-storage: 2048
         queue-tmp-storage: 2048
+        cache: staging-cache
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'
             - 'php artisan route:cache'
             - 'php artisan view:cache'
-            - 'yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
+            - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
     app-staging-one:
         domain: 'app-staging-one.musora.com'
         scheduler: false
@@ -159,12 +167,13 @@ environments:
         tmp-storage: 2048
         cli-tmp-storage: 2048
         queue-tmp-storage: 2048
+        cache: staging-cache
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'
             - 'php artisan route:cache'
             - 'php artisan view:cache'
-            - 'yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
+            - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
     app-staging-two:
         domain: 'app-staging-two.musora.com'
         scheduler: false
@@ -177,12 +186,13 @@ environments:
         tmp-storage: 2048
         cli-tmp-storage: 2048
         queue-tmp-storage: 2048
+        cache: staging-cache
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'
             - 'php artisan route:cache'
             - 'php artisan view:cache'
-            - 'yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
+            - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
     app-staging-three:
         domain: 'app-staging-three.musora.com'
         scheduler: false
@@ -195,9 +205,10 @@ environments:
         tmp-storage: 2048
         cli-tmp-storage: 2048
         queue-tmp-storage: 2048
+        cache: staging-cache
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'
             - 'php artisan route:cache'
             - 'php artisan view:cache'
-            - 'yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
+            - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'

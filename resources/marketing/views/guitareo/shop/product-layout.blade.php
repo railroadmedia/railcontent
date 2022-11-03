@@ -3,8 +3,8 @@
 @section('head-includes')
     @parent
 
-    <link rel="preload" href="{{ mix('tailwindcss/tailwind.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="{{ mix('tailwindcss/tailwind.css') }}"></noscript>
+    <link rel="preload" href="{{ asset('tailwindcss/tailwind.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{{ asset('tailwindcss/tailwind.css') }}"></noscript>
     <link href="/laravel/public/css/tailwind-helpers.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/assets/marketing/nav-footer.css') }}">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"/>

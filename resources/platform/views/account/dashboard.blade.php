@@ -61,27 +61,30 @@ $showCompleteYourAccountButton = !$hasGear || !$hasTopics || !$hasGenres || !$ha
                 </div>
 
                 <!-- Method Progress -->
-                {{-- <div class="tw-flex tw-flex-col lg:tw-flex-row tw-justify-center tw-items-center tw-mb-5 tw-w-full tw-rounded-full tw-min-h-[150px] lg:tw-pr-6 tw-bg-gradient-to-b" :class="bgBottomGradients[brand]">
+                <div class="tw-flex tw-flex-col lg:tw-flex-row tw-justify-center tw-items-center tw-mb-5 tw-w-full tw-rounded-full tw-min-h-[150px] lg:tw-pr-6 tw-bg-gradient-to-b tw-from-{{ $brand }} tw-to-{{ $brand }}-700">
                     <div class="tw-flex tw-items-center tw-justify-center tw-px-8 tw-w-full lg:tw-w-7/12">
-                        <img :src="`https://musora-ui.s3.amazonaws.com/logos/${ brand }-method.svg`" :alt="brand" class="tw-max-w-[200px] lg:tw-max-w-[567px] tw-w-full tw-mb-4 lg:tw-mb-0" />
+                        <img src="https://musora-ui.s3.amazonaws.com/logos/{{ $brand }}-method.svg" alt="brand" class="tw-max-w-[200px] lg:tw-max-w-[567px] tw-w-full tw-mb-4 lg:tw-mb-0" />
                     </div>
                     <div class="tw-flex tw-flex-col tw-items-center tw-justify-center tw-px-10 sm:tw-px-8 tw-w-full lg:tw-w-5/12">
                         <div class="tw-text-center tw-w-full tw-max-w-[287px]">
-                            <h3 class="text-white tw-text-4xl xl:tw-text-[54px] tw-font-bold tw-leading-none tw-mb-2 tw-uppercase">Level {{ nextLearningPathLevel }}</h3>
-                            <!-- progress bar -->
-                            <div class="tw-bg-white tw-relative tw-w-full tw-h-[26px] tw-rounded-full tw-border-white tw-border-[3px]">
-                                <div class="tw-absolute tw-h-full tw-rounded-full tw-top-0 tw-left-0" :class="[bgColor[brand]]" :style="`width: ${nextLearningPathProgressPercent}%;`">
-                                    <span class="tw-absolute tw-top-0 tw-h-full tw-font-bold tw-translate-x-full tw-text-sm tw-right-[-5px]" :class="textColor[brand]">{{nextLearningPathProgressPercent}}%</span>
+                            <h3 class="text-white tw-text-4xl xl:tw-text-[54px] tw-font-bold tw-leading-none tw-mb-2 tw-uppercase">Level {{ $nextLearningPathLevel }}</h3>
+                            <div class="tw-flex">
+                                <!-- progress bar -->
+                                <div class="tw-bg-white tw-relative tw-w-full tw-h-[26px] tw-rounded-full tw-border-white tw-border-[3px]">
+                                    <div class="tw-absolute tw-h-full tw-rounded-full tw-top-0 tw-left-0 tw-bg-{{ $brand }}" style="width: {{ $nextLearningPathProgressPercent }}%;"></div>
                                 </div>
+                                <!-- Progress percentage -->
+                                <span class="tw-font-bold tw-ml-2 tw-text-sm tw-text-white">{{ $nextLearningPathProgressPercent }}%</span>
                             </div>
                         </div>
                     </div>
-                </div> --}}
+                </div>
 
                 {{-- Metrics --}}
                 <div class="tw-grid tw-grid-rows-2 xl:tw-grid-rows-1 tw-gap-3 tw-auto-cols-fr tw-grid-flow-col">
                     @foreach ($userMetrics as $userMetric)
                         @include('partials.bladesora.members.components.user-metric', [
+                            'index' => $loop->index,
                             'themeColor' => $brand,
                             'icon' => $userMetric['icon'],
                             'value' => $userMetric['value'],
@@ -148,12 +151,12 @@ $showCompleteYourAccountButton = !$hasGear || !$hasTopics || !$hasGenres || !$ha
 
                 {{-- Header --}}
                 <div class="tw-flex tw-flex-row tw-w-full tw-items-center tw-mb-8 tw-flex-wrap">
-                    <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl tw-my-2"> 
-                        About {{ $isCurrentUsersProfile ? 'You' : $dashboardUser->display_name }} 
+                    <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl tw-my-2">
+                        About {{ $isCurrentUsersProfile ? 'You' : $dashboardUser->display_name }}
                     </h2>
                     @if ($isCurrentUsersProfile)
                         <a href="{{ url()->route('platform.profile.settings.profile', [brand(), $dashboardUser->id]) }}"
-                           class="tw-btn-secondary tw-mb-0 tw-text-[#00101D] dark:tw-text-[#9EC0DC] tw-text-lg tw-px-8 tw-ml-auto" 
+                           class="tw-btn-secondary tw-mb-0 tw-text-[#00101D] dark:tw-text-[#9EC0DC] tw-text-lg tw-px-8 tw-ml-auto"
                            dusk="edit-user">
                             Edit
                         </a>
@@ -186,10 +189,10 @@ $showCompleteYourAccountButton = !$hasGear || !$hasTopics || !$hasGenres || !$ha
                         </div>
                     </div>
                     {{-- User Gear Details --}}
-                    <gear-carousel 
-                        :gear-info="{{ json_encode($dashboardUser) }}" 
-                        :brand="{{ $brand }}" 
-                        class="tw-flex-grow-0 xl:tw-ml-[36px]" 
+                    <gear-carousel
+                        :gear-info="{{ json_encode($dashboardUser) }}"
+                        brand="{{ $brand }}"
+                        class="tw-flex-grow-0 xl:tw-ml-[36px]"
                     />
                 </div>
 

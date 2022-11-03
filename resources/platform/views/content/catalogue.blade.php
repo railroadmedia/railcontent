@@ -121,9 +121,14 @@
 
             @if($catalogueMeta['name'] == 'Songs' && $brand === 'drumeo')
                 <div class="tw-flex tw-mt-4">
-                    <a href="/drumeo/forums/drumeo-songs/15/november-2022-song-request-voting-thread/13701?sortby_val=published_on" 
-                       class="tw-btn-primary tw-bg-drumeo">
-                        Request A Song 
+                    <a
+                        @if(Carbon\Carbon::create(2022, 11, 15, 11, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+                            href="/drumeo/forums/drumeo-songs/15/december-2022-song-request-voting-thread/13853?sortby_val=published_on"
+                        @else
+                            href="/members/forums/threads/drumeo-songs/15"
+                        @endif
+                       class="tw-btn-primary tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600">
+                        Request A Song
                         <span class="tw-text-4xl tw-ml-1 tw-leading-none tw-mt-0.5">»</span>
                     </a>
                 </div>
@@ -252,7 +257,7 @@
 
             <play-alongs
                 ref="playAlongsVueInstance"
-                content-endpoint="/laravel/public/railcontent/content"
+                content-endpoint="/railcontent/content"
                 theme-color="{{ $brand }}"
                 brand="{{ $brand }}"
                 :pre-loaded-content="{{ $listLessons }}"

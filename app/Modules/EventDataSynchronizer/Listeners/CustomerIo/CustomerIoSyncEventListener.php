@@ -2,14 +2,23 @@
 
 namespace App\Modules\EventDataSynchronizer\Listeners\CustomerIo;
 
+use App\Modules\EventDataSynchronizer\Events\FirstActivityPerDay;
+use App\Modules\EventDataSynchronizer\Events\LiveStreamEventAttended;
+use App\Modules\EventDataSynchronizer\Events\UTMLinks;
+use App\Modules\EventDataSynchronizer\Jobs\CustomerIoCreateEventByUserId;
+use App\Modules\EventDataSynchronizer\Jobs\CustomerIoSyncCustomerByEmail;
 use App\Modules\EventDataSynchronizer\Jobs\CustomerIoSyncMentor;
+use App\Modules\EventDataSynchronizer\Jobs\CustomerIoSyncNewUserByEmail;
+use App\Modules\EventDataSynchronizer\Jobs\CustomerIoSyncUserByUserId;
+use App\Modules\EventDataSynchronizer\Jobs\CustomerIoSyncUserDevice;
+use App\Modules\EventDataSynchronizer\Jobs\CustomerIoTriggerEvent;
 use App\Modules\Mentor\Events\StudentMentorsUpdated;
 use App\Modules\UserManagementSystem\Services\UserService;
 use Carbon\Carbon;
 use Modules\UserManagementSystem\Events\MobileAppLogin;
-use Modules\UserManagementSystem\Models\User;
 use Modules\UserManagementSystem\Events\User\UserCreated;
 use Modules\UserManagementSystem\Events\User\UserUpdated;
+use Modules\UserManagementSystem\Models\User;
 use Railroad\Ecommerce\Entities\Subscription;
 use Railroad\Ecommerce\Entities\User as EcommerceUser;
 use Railroad\Ecommerce\Events\AppSignupFinishedEvent;
@@ -25,15 +34,6 @@ use Railroad\Ecommerce\Events\Subscriptions\SubscriptionUpdated;
 use Railroad\Ecommerce\Events\UserProducts\UserProductCreated;
 use Railroad\Ecommerce\Events\UserProducts\UserProductDeleted;
 use Railroad\Ecommerce\Events\UserProducts\UserProductUpdated;
-use App\Modules\EventDataSynchronizer\Events\FirstActivityPerDay;
-use App\Modules\EventDataSynchronizer\Events\LiveStreamEventAttended;
-use App\Modules\EventDataSynchronizer\Events\UTMLinks;
-use App\Modules\EventDataSynchronizer\Jobs\CustomerIoCreateEventByUserId;
-use App\Modules\EventDataSynchronizer\Jobs\CustomerIoSyncCustomerByEmail;
-use App\Modules\EventDataSynchronizer\Jobs\CustomerIoSyncNewUserByEmail;
-use App\Modules\EventDataSynchronizer\Jobs\CustomerIoSyncUserByUserId;
-use App\Modules\EventDataSynchronizer\Jobs\CustomerIoTriggerEvent;
-use App\Modules\EventDataSynchronizer\Jobs\CustomerIoSyncUserDevice;
 use Railroad\Railcontent\Events\CommentCreated;
 use Railroad\Railcontent\Events\CommentLiked;
 use Railroad\Railcontent\Events\ContentFollow;
@@ -1069,11 +1069,9 @@ class CustomerIoSyncEventListener
                     $emailInvite->getReceiversEmail(),
                     $emailInvite->getBrand(),  //todo: is this param correct? or should we use another one?
                     [
-                        [
-                            $emailInvite->getBrand() . config(
-                                'event-data-synchronizer.customer_io_saasquatch_email_invite_link_attribute_name'
-                            ) => $emailInvite->getReferralLink()
-                        ]
+                        $emailInvite->getBrand() . config(
+                            'event-data-synchronizer.customer_io_saasquatch_email_invite_link_attribute_name'
+                        ) => $emailInvite->getReferralLink()
                     ]
                 ))->delay(
                     Carbon::now()
@@ -1087,6 +1085,20 @@ class CustomerIoSyncEventListener
                     $emailInvite->getReceiversEmail(),
                     null,
                     $emailInvite->getBrand() . config('event-data-synchronizer.customer_io_saasquatch_email_invite_event_name')
+                ))->delay(
+                    Carbon::now()
+                        ->addSeconds(10)
+                )
+            );
+
+            dispatch(
+                (new CustomerIoTriggerEvent(
+                    config('event-data-synchronizer.customer_io_account_to_sync_all_brands'),
+                    $emailInvite->getReceiversEmail(),
+                    null,
+                    config('event-data-synchronizer.customer_io_account_to_sync_all_brands') . config(
+                        'event-data-synchronizer.customer_io_saasquatch_email_invite_event_name'
+                    )
                 ))->delay(
                     Carbon::now()
                         ->addSeconds(10)

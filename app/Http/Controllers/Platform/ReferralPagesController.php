@@ -20,7 +20,6 @@ class ReferralPagesController extends BaseController
         $this->referralService = $referralService;
     }
 
-
     public function inviteAFriend()
     {
         /**

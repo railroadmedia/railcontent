@@ -285,6 +285,7 @@ return [
             \App\Decorators\Content\LearningPathLevelDecorator::class,
             \App\Decorators\Content\ChapterDecorator::class,
             \App\Decorators\Content\LessonAssignmentDecorator::class,
+            \App\Decorators\Content\UnitDecorator::class,
             // this one
             //            \App\Decorators\Content\MultiPartParentDecorator::class, // this one
             \App\Decorators\Content\ContentLikesDecorator::class,
@@ -302,14 +303,12 @@ return [
             \App\Decorators\Content\NewDecorator::class,
             \App\Decorators\Content\LiveEventDecorator::class,
             \App\Decorators\Content\DefaultDifficultyDecorator::class,
-            \App\Decorators\Content\AssignmentXPDecorator::class,
 
             \App\Decorators\Content\CourseDecorator::class,
             \App\Decorators\Content\CoursePartDecorator::class,
             \App\Decorators\Content\ShowsDecorator::class,
             \App\Decorators\Content\SongsDecorator::class,
             \App\Decorators\Content\PlayAlongDecorator::class,
-            \App\Decorators\Content\StudentFocusDecorator::class,
             \App\Decorators\Content\RudimentDecorator::class,
 
             \App\Decorators\Content\SemesterPackDecorator::class,
@@ -425,7 +424,7 @@ return [
                 'name' => 'Rudiments',
                 'icon' => 'icon-drums',
                 'description' => "The 40 drum rudiments are essential for any drummer, no matter the style, genre, or scenario. You can use the videos below to help you learn, practice, and perfect every single one.",
-                'allowableFilters' => ['topic', 'progress'],
+                'allowableFilters' => ['topic', 'progress', 'instrument'],
                 'sortBy' => 'sort',
             ],
             'spotlight' => [
@@ -821,7 +820,7 @@ return [
                 "shortname" => "Lessons",
                 "icon" => "icon-library",
                 "description" => "Miss a live event or just want to watch a particular episode again? This is the place to do it. All of the Guitareo live broadcasts are archived here for you to watch at your leisure. If you have any questions or want to discuss the topics mentioned in the videos you can always post in the forum.",
-                "allowableFilters" => ['difficulty', 'instructor', 'topic', 'progress'],
+                "allowableFilters" => ['difficulty', 'topic', 'progress', 'instructor'],
             ],
             'quick-tips' => [
                 'thumbnailUrl' => 'https://dmmior4id2ysr.cloudfront.net/assets/images/guitareo-header.jpg',
@@ -1331,6 +1330,7 @@ return [
         'published_on' => 'published_on',
         'created_on' => 'created_on',
         'archived_on' => 'archived_on',
+        'instrument' => 'instrument'
     ],
     'content_hierarchy' => [
         'drumeo' => [

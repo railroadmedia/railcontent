@@ -178,6 +178,8 @@ return [
         Railroad\Points\Providers\PointsServiceProvider::class,
         Railroad\Railtracker\Providers\RailtrackerServiceProvider::class,
         \Railroad\Railanalytics\AnalyticsServiceProvider::class,
+        \Railroad\Location\Providers\LocationServiceProvider::class,
+        \Railroad\RemoteStorage\Providers\RemoteStorageServiceProvider::class,
 
         /*
          * Module Service Providers

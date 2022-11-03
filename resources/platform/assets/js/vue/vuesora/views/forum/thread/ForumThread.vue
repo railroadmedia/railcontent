@@ -78,7 +78,7 @@
                         <!-- Follow -->
                         <button
                             class="tw-btn-primary tw-btn-small tw-w-full tw-mr-2 tw-px-4 tw-h-10 tw-mb-0 tw-text-xl" 
-                            :class="[brandBgColor]"
+                            :class="`tw-bg-${brand} hover:tw-bg-${brand}-600`"
                             @click="followPost"
                         >
                             <span>
@@ -89,7 +89,7 @@
                         <!-- Reply -->
                         <button
                             class="tw-btn-primary tw-btn-small tw-w-full tw-px-4 tw-h-10 tw-mb-0 tw-text-xl"
-                            :class="[brandBgColor]"
+                            :class="`tw-bg-${brand} hover:tw-bg-${brand}-600`"
                             @click="scrollToReply"
                         >
                             <span>
@@ -248,7 +248,7 @@
                             
                             <button
                                 class="tw-btn-primary thread-reply-button"
-                                :class="`tw-bg-${ brand }`"
+                                :class="`tw-bg-${brand} hover:tw-bg-${brand}-600`"
                                 type="submit"
                                 :disabled="formDisabled"
                             >
@@ -289,7 +289,7 @@
                                    readonly
                             >
                             <button class="tw-btn-primary tw-px-10" 
-                                    :class="[brandBgColor]"
+                                    :class="`tw-bg-${brand} hover:tw-bg-${brand}-600`"
                                     role="button" 
                                     title="copy link to clipboard"
                                     @click="copyShareLink()">
@@ -416,12 +416,6 @@ export default {
         },
 
         baseProfileRoute() {
-            if (this.brand === 'drumeo') {
-                return '/laravel/public/members/profile/';
-            }
-            if (this.brand === 'guitareo') {
-                return '/members/account/';
-            }
             return '/members/profile/';
         },   
 

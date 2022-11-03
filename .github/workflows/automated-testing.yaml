@@ -2,8 +2,19 @@ name: Automated Testing
 
 on:
   push:
-    branches: [ "fix-test-robwillems" ]
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
 
+env:
+  APP_NAME: "Musora Web Platform"
+  APP_ENV: local
+  APP_KEY: base64:wvzEaUzwx/M/xIlIiZ9p1P6kWmC6cHsIqoQzFhHIWps=
+  APP_DEBUG: false
+  DEBUGBAR_ENABLED: false
+  APP_URL: http://localhost
+  LOG_LEVEL: warning
+  RAILTRACKER_ENABLED: false
 jobs:
   laravel-tests:
 
@@ -16,10 +27,10 @@ jobs:
           tools: composer:v2
           coverage: none
       - uses: actions/checkout@v3
-      - name: Copy .env
-        run: php -r "file_exists('.env') || copy('.env.automated-testing', '.env');"
       - name: Add HTTP basic auth credentials
         run: echo '${{ secrets.COMPOSER_AUTH_JSON }}' > $GITHUB_WORKSPACE/auth.json
+      - name: Create .env
+        run: php -r "file_exists('.env') || file_put_contents('.env', '');"
       - name: Install Dependencies
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
       - name: Generate key

@@ -280,8 +280,20 @@ return [
 
         'stripe' => [
             'drumeo' => [
-                'stripe_api_secret' => env('STRIPE_API_SECRET'),
-                'stripe_publishable_key' => env('STRIPE_PUBLISHABLE_KEY'),
+                'stripe_api_secret' => env('DRUMEO_STRIPE_API_SECRET'),
+                'stripe_publishable_key' => env('DRUMEO_STRIPE_PUBLISHABLE_KEY'),
+            ],
+            'pianote' => [
+                'stripe_api_secret' => env('PIANOTE_STRIPE_API_SECRET'),
+                'stripe_publishable_key' => env('PIANOTE_STRIPE_PUBLISHABLE_KEY'),
+            ],
+            'guitareo' => [
+                'stripe_api_secret' => env('GUITAREO_STRIPE_API_SECRET'),
+                'stripe_publishable_key' => env('GUITAREO_STRIPE_PUBLISHABLE_KEY'),
+            ],
+            'singeo' => [
+                'stripe_api_secret' => env('SINGEO_STRIPE_API_SECRET'),
+                'stripe_publishable_key' => env('SINGEO_STRIPE_PUBLISHABLE_KEY'),
             ],
         ],
 
@@ -493,15 +505,69 @@ return [
                 'invoice_view' => 'ecommerce::order_invoice',
             ],
         ],
+        'pianote' => [
+            'subscription_renewal_invoice' => [
+                'invoice_sender' => 'support@pianote.com',
+                'invoice_sender_name' => 'Pianote',
+                'invoice_address' => 'Pianote 107-31265 Wheel Avenue - Abbotsford BC, Canada',
+                'invoice_email_subject' => 'Pianote Invoice - Thank You!',
+                'invoice_view' => 'ecommerce::subscription_renewal_invoice',
+            ],
+            'order_invoice' => [
+                'invoice_sender' => 'support@pianote.com',
+                'invoice_sender_name' => 'Pianote',
+                'invoice_address' => 'Pianote 107-31265 Wheel Avenue - Abbotsford BC, Canada',
+                'invoice_email_subject' => 'Pianote Invoice - Thank You!',
+                'invoice_view' => 'ecommerce::order_invoice',
+            ],
+        ],
+        'guitareo' => [
+            'subscription_renewal_invoice' => [
+                'invoice_sender' => 'support@guitareo.com',
+                'invoice_sender_name' => 'Guitareo',
+                'invoice_address' => 'Guitareo 107-31265 Wheel Avenue - Abbotsford BC, Canada',
+                'invoice_email_subject' => 'Guitareo Invoice - Thank You!',
+                'invoice_view' => 'ecommerce::subscription_renewal_invoice',
+            ],
+            'order_invoice' => [
+                'invoice_sender' => 'support@guitareo.com',
+                'invoice_sender_name' => 'Guitareo',
+                'invoice_address' => 'Guitareo 107-31265 Wheel Avenue - Abbotsford BC, Canada',
+                'invoice_email_subject' => 'Guitareo Invoice - Thank You!',
+                'invoice_view' => 'ecommerce::order_invoice',
+            ],
+        ],
+        'singeo' => [
+            'subscription_renewal_invoice' => [
+                'invoice_sender' => 'support@singeo.com',
+                'invoice_sender_name' => 'Singeo',
+                'invoice_address' => 'Singeo 107-31265 Wheel Avenue - Abbotsford BC, Canada',
+                'invoice_email_subject' => 'Singeo Invoice - Thank You!',
+                'invoice_view' => 'ecommerce::subscription_renewal_invoice',
+            ],
+            'order_invoice' => [
+                'invoice_sender' => 'support@singeo.com',
+                'invoice_sender_name' => 'Singeo',
+                'invoice_address' => 'Singeo 107-31265 Wheel Avenue - Abbotsford BC, Canada',
+                'invoice_email_subject' => 'Singeo Invoice - Thank You!',
+                'invoice_view' => 'ecommerce::order_invoice',
+            ],
+        ],
     ],
 
     // this is displayed on all invoices to canadian customers
     'canada_gst_hst_number' => [
         'drumeo' => '81428 3149 RT0001',
+        'pianote' => '76853 3879 RT0001',
+        'guitareo' => '82759 8434 RT0001',
+        'singeo' => '76853 3879 RT0001',
     ],
 
     'company_name_on_invoice' => [
         'drumeo' => 'Musora Media Inc',
+        'pianote' => 'Pianote Media Inc.',
+        'guitareo' => 'Guitareo Media Inc.',
+        'singeo' => 'Singeo Media Inc.',
     ],
 
     // constants

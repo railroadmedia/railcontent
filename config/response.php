@@ -7,6 +7,7 @@ return [
             'data.thumbnail_url',
             'data.sheet_music_thumbnail_url',
             'type',
+            'instrument',
             'published_on',
             'status',
             'fields.title',
@@ -65,7 +66,8 @@ return [
                 'fields.video.fields.length_in_seconds',
                 'is_liked_by_current_user',
                 'parent_id',
-                'published_on_in_timezone'
+                'published_on_in_timezone',
+                'bundle_count'
             ],
             'total_lessons',
             'lessons_filter_options',
@@ -150,9 +152,8 @@ return [
 
         'coach-filter' => [
             'id',
-            'fields.name',
+            'name',
             'data.head_shot_picture_url',
-            'type',
         ],
 
         'pack-bundle' => [
@@ -1878,6 +1879,9 @@ return [
             'display_name',
             'profile_picture_url',
             'totalXp',
+            'musoraXP',
+            'has_started_method',
+            'has_completed_method',
             'xpRank',
             'level_rank',
             'isEdge',
@@ -2060,6 +2064,7 @@ return [
             'data.description',
             'data.thumbnail_url',
             'data.sheet_music_thumbnail_url',
+            'instrument',
             'completed',
             'started',
             'progress_percent',

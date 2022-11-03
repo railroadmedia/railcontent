@@ -11,6 +11,7 @@ use App\Maps\ContentTypes;
 use App\Services\LiveStreamEventService;
 use App\Services\PackService;
 use App\Services\UserMetricsService;
+use Railroad\Railcontent\Services\UserContentProgressService;
 use Carbon\Carbon;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Http\Request;
@@ -37,15 +38,17 @@ class HomePageController extends BaseController
     private UserPlaylistsService $userPlaylistsService;
     private PackService $packService;
     private DatabaseManager $databaseManager;
+    private UserContentProgressService $userContentProgressService;
 
     /**
-     * @param  ContentService  $contentService
-     * @param  ContentFollowsService  $contentFollowsService
-     * @param  LiveStreamEventService  $liveStreamEventService
-     * @param  UserMetricsService  $userMetricsService
-     * @param  UserPlaylistsService  $userPlaylistsService
-     * @param  PackService  $packService
-     * @param  DatabaseManager  $databaseManager
+     * @param ContentService $contentService
+     * @param ContentFollowsService $contentFollowsService
+     * @param LiveStreamEventService $liveStreamEventService
+     * @param UserMetricsService $userMetricsService
+     * @param UserPlaylistsService $userPlaylistsService
+     * @param PackService $packService
+     * @param DatabaseManager $databaseManager
+     * @param UserContentProgressService $userContentProgressService
      */
     public function __construct(
         ContentService $contentService,
@@ -54,7 +57,8 @@ class HomePageController extends BaseController
         UserMetricsService $userMetricsService,
         UserPlaylistsService $userPlaylistsService,
         PackService $packService,
-        DatabaseManager $databaseManager
+        DatabaseManager $databaseManager,
+        UserContentProgressService $userContentProgressService
     ) {
         $this->contentService = $contentService;
         $this->contentFollowService = $contentFollowsService;
@@ -63,11 +67,17 @@ class HomePageController extends BaseController
         $this->userPlaylistsService = $userPlaylistsService;
         $this->packService = $packService;
         $this->databaseManager = $databaseManager;
+        $this->userContentProgressService = $userContentProgressService;
     }
 
     public function homeRedirect()
     {
         return redirect()->route('platform.home', ['brand' => brand()]);
+    }
+
+    public function profileRedirect()
+    {
+        return redirect("/".brand()."/profile/".user()->id."/dashboard");
     }
 
     public function home(Request $request, $brand)
@@ -76,6 +86,14 @@ class HomePageController extends BaseController
         ContentRepository::$pullFilterResultsOptionsAndCount = false;
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
         ContentLikesDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
+
+        // singeo packs are under courses
+        if (brand() === 'singeo' && user()->isPackOnlyOwner()) {
+            return redirect()->route(
+                'platform.content-type-catalog',
+                ['brand' => 'singeo', 'contentTypeName' => 'courses']
+            );
+        }
 
         switch (brand()) {
             case 'drumeo':
@@ -142,15 +160,22 @@ class HomePageController extends BaseController
             4
         );
 
-        $subscribedCoaches = $this->contentFollowService->getUserFollowedContent(
-            user()->id,
-            brand(),
-            ['instructor'],
+        $subscribedCoaches = $this->contentService->getFiltered(
             1,
-            6
+            6,
+            '-published_on',
+            ['instructor'],
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+            false,
+            false,
+            false,
+            true
         );
-
-        $packs = $this->getPacks();
 
         // coaches live
         $themeColor = 'drumeo';
@@ -166,34 +191,15 @@ class HomePageController extends BaseController
         $currentEvent = $this->liveStreamEventService->getCurrentOrNextLiveEvent();
         ContentRepository::$pullFilterResultsOptionsAndCount = false;
 
-        $coachOfTheMonth = $this->contentService->getFiltered(
-            1,
-            1,
-            '-published_on',
-            ['instructor'],
-            [],
-            [],
-            ['is_coach_of_the_month,1,boolean,='],
-            [],
-            [],
-            [],
-            false,
-            false,
-            false
-        )
-            ->results();
-
         $collectionForDecoration = new RailcontentCollection();
         $collectionForDecoration = $collectionForDecoration->merge([$methodContent]);
         if (!empty($currentEvent)) {
             $collectionForDecoration = $collectionForDecoration->merge([$currentEvent]);
         }
-        $collectionForDecoration = $collectionForDecoration->merge($coachOfTheMonth);
         $collectionForDecoration = $collectionForDecoration->merge($startedLessons->results());
         $collectionForDecoration = $collectionForDecoration->merge($usersList->results());
         $collectionForDecoration = $collectionForDecoration->merge($upcomingEvents);
         $collectionForDecoration = $collectionForDecoration->merge($newContent->results());
-        $collectionForDecoration = $collectionForDecoration->merge($packs);
         $collectionForDecoration = $collectionForDecoration->merge($followedLessons->results());
         $collectionForDecoration = $collectionForDecoration->merge($subscribedCoaches->results());
 
@@ -222,14 +228,7 @@ class HomePageController extends BaseController
         $hasStartedMethod = $methodContent['started'];
         $hasCompletedMethod = $methodContent['completed'];
 
-        $nextLearningPathLesson = $methodContent['next_lesson'] ?? null;
-        $showNextLearningPathLesson = !$hasCompletedMethod;
-
-        $nextLearningPathLesson =
-            $this->contentService->getNextContentForParentContentForUser($methodContent['id'], user()->id);
-
-        $nextLearningPathLessonUrl = $methodContent['next_lesson']['url'] ?? '';
-        $nextLearningPathLevel = $methodContent['higher_key_progress'] ?? '1.1';
+        $nextLearningPathLevel = user()->getMethodLevel();
         $nextLearningPathProgressPercent = $methodContent['progress_percent'];
 
         $upcomingEventsCount = $upcomingEvents->count();
@@ -270,18 +269,11 @@ class HomePageController extends BaseController
             "hotForumTopics" => $hotForumTopics,
             "newContentJson" => $newContent->toResponseRawJson(),
             "startedContentJson" => $startedLessons->toResponseRawJson(),
-            "startedContentCount" => $startedLessons->totalResults(),
+            "startedContentCount" => count($startedLessons),
             "usersList" => $usersList->toResponseRawJson(),
-            "usersListCount" => $usersList->totalResults(),
             "userMetrics" => $userMetrics,
-            "displayMethod" => !$hasStartedMethod,
-            "userHasInteractedWithDrumeoMethod" => $hasStartedMethod,
-            "nextLearningPathLesson" => $nextLearningPathLesson,
-            "nextLearningPathLessonUrl" => $nextLearningPathLessonUrl,
             "nextLearningPathLevel" => $nextLearningPathLevel,
             "nextLearningPathProgressPercent" => $nextLearningPathProgressPercent,
-            "showNextLearningPathLesson" => $showNextLearningPathLesson,
-            "packs" => $packs,
             'themeColor' => $themeColor,
             'currentDate' => $currentDate,
             'currentEvent' => $currentEvent,
@@ -293,11 +285,10 @@ class HomePageController extends BaseController
             'followedLessons' => $followedLessons->toResponseRawJson(),
             'subscribedCoaches' => $subscribedCoaches,
             'subscribedCoachesJson' => $subscribedCoaches->toResponseRawJson(),
-            "hasSubscribedCoaches" => $subscribedCoaches->totalResults() > 0,
-            "hasfollowedLessons" => $subscribedCoaches->totalResults() > 0 && $followedLessons->totalResults() > 0,
+            "hasSubscribedCoaches" => count($subscribedCoaches->results()) > 0,
+            "hasfollowedLessons" => count($subscribedCoaches->results()) > 0 && count($followedLessons->results()) > 0,
             'upcomingEvents' => $upcomingEvents->toResponseRawJson(),
             'hasUpcomingEvents' => $upcomingEvents->totalResults() > 0,
-            'coachOfTheMonth' => $coachOfTheMonth->first(),
             'hasCompletedMethod' => $hasCompletedMethod,
             'hasStartedMethod' => $hasStartedMethod,
             'hasGear' => $hasGear,
@@ -363,27 +354,15 @@ class HomePageController extends BaseController
         // latest forum posts
         $forumPosts =
             $this->databaseManager->connection(config('railforums.database_connection_name'))
-                ->table('forum_posts')
+                ->table('forum_threads')
                 ->select(['forum_posts.*', 'forum_threads.title'])
-                ->leftJoin('forum_threads', 'forum_threads.id', '=', 'forum_posts.thread_id')
-                ->leftJoin('forum_categories', 'forum_threads.category_id', '=', 'forum_categories.id')
-                ->limit(10)
+                ->join('forum_posts', 'forum_threads.last_post_id', '=', 'forum_posts.id')
+                ->limit(6)
                 ->whereNull('forum_posts.deleted_at')
                 ->whereNull('forum_threads.deleted_at')
-                ->whereNull('forum_categories.deleted_at')
                 ->where('forum_posts.state', 'published')
-                //   ->whereNotIn('forum_posts.author_id', array_values($administrators))
-                ->orderBy('forum_posts.created_at', 'desc')
-                ->get()
-                ->groupBy('thread_id');
-
-        $forumThreadPosts = $forumPosts->splice(0, 3);
-
-        $forumPosts = new Collection();
-
-        foreach ($forumThreadPosts as $threadId => $forumThreadPosts) {
-            $forumPosts[] = $forumThreadPosts[0];
-        }
+                ->orderBy('forum_threads.last_post_id', 'desc')
+                ->get();
 
         $usersIndexed = User::query()->whereIn('id', $forumPosts->pluck('author_id')->toArray())->get()->keyBy('id');
 
@@ -398,7 +377,7 @@ class HomePageController extends BaseController
                     ' ' . $forumPosts[$forumPostIndex]->content . ' '
                 );
 
-                $forumPosts[$forumPostIndex]->user_xp = $user->total_xp;
+                $forumPosts[$forumPostIndex]->user_xp = $user->getBrandTotalXp();
                 $forumPosts[$forumPostIndex]->xp_rank = $user->getXpRank();
             } else {
                 unset($forumPosts[$forumPostIndex]);
@@ -465,7 +444,7 @@ class HomePageController extends BaseController
             ],
             "practiced" => [
                 "icon" => "icon-minutes-practiced",
-                "value" => $userProfileMetrics->getMinutesPracticed(),
+                "value" => user()->getBrandMinutesPracticed(),
                 "label" => "Minutes Practiced",
             ],
         ];
@@ -507,20 +486,13 @@ class HomePageController extends BaseController
     {
         $contentTypes = ContentTypes::inProgressContentTypes();
 
-        $lessons = $this->contentService->getPaginatedByTypesRecentUserProgressState(
-            $this->parseContentTypes($contentTypes),
-            user()->id,
-            'started',
-            6
-        );
+        $startedProgressRows = $this->userContentProgressService->getForUserStateContentTypes(
+            auth()->id(),
+            $contentTypes, 'started',
+                                                                                             'updated_on', 'desc', 6);
+        $lessons = $this->contentService->getByIds(array_column($startedProgressRows, 'content_id'));
 
-        $totalResults = $this->contentService->countByTypesUserProgressState(
-            $this->parseContentTypes($contentTypes),
-            user()->id,
-            'started'
-        );
-
-        return (new ContentFilterResultsEntity(['results' => $lessons, 'total_results' => $totalResults]));
+        return (new ContentFilterResultsEntity(['results' => $lessons]));
     }
 
     /**
@@ -529,27 +501,23 @@ class HomePageController extends BaseController
     public function getUsersList()
     {
         $contentTypes = ContentTypes::inProgressContentTypes();
-
-        $userPrimaryPlaylist = $this->userPlaylistsService->getUserPlaylist(auth()->id(), 'primary-playlist', brand());
-
+        $userPrimaryPlaylist =
+            \Arr::first(
+                $this->userPlaylistsService->getUserPlaylist(
+                    user()->id,
+                    'primary-playlist',
+                    brand()
+                )
+            );
         if (empty($userPrimaryPlaylist)) {
-            return (new ContentFilterResultsEntity(['results' => [], 'total_results' => 0]));
-        }
-        $userPrimaryPlaylistId = $userPrimaryPlaylist[0]['id'];
-        $usersPrimaryList = $this->userPlaylistsService->getUserPlaylistContents(
-            $userPrimaryPlaylistId,
-            $this->parseContentTypes($contentTypes),
-            6
-        );
+                        return (new ContentFilterResultsEntity(['results' => []]));
+                    }
+        $myListId = $userPrimaryPlaylist['id'];
+        ContentRepository::$includedInPlaylistsIds = [$myListId];
+        $results = $this->contentService->getFiltered(1,6,'-published_on', $this->parseContentTypes($contentTypes),[],[],[],[],[],[],false,false,false,false);
+        ContentRepository::$includedInPlaylistsIds = false;
 
-        $usersListTotalResults = $this->userPlaylistsService->countUserPlaylistContents(
-            $userPrimaryPlaylistId,
-            $contentTypes
-        );
-
-        return (new ContentFilterResultsEntity(
-            ['results' => $usersPrimaryList, 'total_results' => $usersListTotalResults]
-        ));
+        return $results;
     }
 
     /**

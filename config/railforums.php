@@ -18,7 +18,7 @@ return array(
     ],
 
     // database
-    'database_connection_name' => 'musora_laravel_mysql_writer_only',
+    'database_connection_name' => env('DB_MUSORA_LARAVEL_MYSQL_WRITER_ONLY','musora_laravel_mysql_writer_only'),
 
     // url
     // NOTE: this gets updated on the fly depending on the brand in the SetLastUsedBrandMiddleware
@@ -104,5 +104,11 @@ return array(
         'guitareo' => 2675,
         'singeo' => 3,
         'pianote' => 1
+    ],
+    'decorators'=> [
+        'posts' => [
+            \App\Decorators\Forums\UserSignatureDecorator::class,
+            \App\Decorators\Forums\PostUrlsDecorator::class
+            ]
     ]
 );
