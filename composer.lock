@@ -176,16 +176,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.240.7",
+            "version": "3.240.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "afad16e102229de8da15f07cc48436955811ef7f"
+                "reference": "72a4381a59f42720b033865d265aa64c3190cc13"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/afad16e102229de8da15f07cc48436955811ef7f",
-                "reference": "afad16e102229de8da15f07cc48436955811ef7f",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/72a4381a59f42720b033865d265aa64c3190cc13",
+                "reference": "72a4381a59f42720b033865d265aa64c3190cc13",
                 "shasum": ""
             },
             "require": {
@@ -264,9 +264,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.240.7"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.240.8"
             },
-            "time": "2022-11-01T18:23:34+00:00"
+            "time": "2022-11-02T18:44:20+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -4438,17 +4438,17 @@
         },
         {
             "name": "laravel/nova",
-            "version": "4.18.1",
+            "version": "4.18.2",
             "source": {
                 "type": "git",
                 "url": "git@github.com:laravel/nova.git",
-                "reference": "918cb24f521454c35f2437414d2e4e9f9169a9cf"
+                "reference": "420bccd59f3eeac969920d09a4e4cd961ad63325"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-918cb24f521454c35f2437414d2e4e9f9169a9cf-zip-cc836a.zip",
-                "reference": "918cb24f521454c35f2437414d2e4e9f9169a9cf",
-                "shasum": "7c7ef6ba39dd0651ec0754cdb264ea41c93cb523"
+                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-420bccd59f3eeac969920d09a4e4cd961ad63325-zip-d3f55b.zip",
+                "reference": "420bccd59f3eeac969920d09a4e4cd961ad63325",
+                "shasum": "be0ca636e0bcf8746247c3f93000925b434c0a1a"
             },
             "require": {
                 "brick/money": "^0.5.0|^0.6.0|^0.7.0",
@@ -4543,9 +4543,9 @@
                 "laravel"
             ],
             "support": {
-                "source": "https://github.com/laravel/nova/tree/v4.18.1"
+                "source": "https://github.com/laravel/nova/tree/v4.18.2"
             },
-            "time": "2022-11-02T16:16:04+00:00"
+            "time": "2022-11-03T01:55:32+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -8029,12 +8029,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "34eac9cb79d8862d835f3d2c37bc55bab123851e"
+                "reference": "8f96b75f35e749bdb2826b18b5f037346fba07e5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/34eac9cb79d8862d835f3d2c37bc55bab123851e",
-                "reference": "34eac9cb79d8862d835f3d2c37bc55bab123851e",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/8f96b75f35e749bdb2826b18b5f037346fba07e5",
+                "reference": "8f96b75f35e749bdb2826b18b5f037346fba07e5",
                 "shasum": ""
             },
             "require": {
@@ -8066,7 +8066,7 @@
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
                 "source": "https://github.com/railroadmedia/musora-api/tree/v2.0-railcontent-v2-integration"
             },
-            "time": "2022-11-02T16:25:55+00:00"
+            "time": "2022-11-03T08:28:39+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -8259,16 +8259,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "v2.0.34",
+            "version": "v2.0.35",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "c6d8a3c7e5de5b03df66d2b762f7ce9d44c2f5b3"
+                "reference": "7293e93c427dcc69338f82ad3c865925292f7627"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/c6d8a3c7e5de5b03df66d2b762f7ce9d44c2f5b3",
-                "reference": "c6d8a3c7e5de5b03df66d2b762f7ce9d44c2f5b3",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/7293e93c427dcc69338f82ad3c865925292f7627",
+                "reference": "7293e93c427dcc69338f82ad3c865925292f7627",
                 "shasum": ""
             },
             "require": {
@@ -8322,9 +8322,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/v2.0.34"
+                "source": "https://github.com/railroadmedia/railcontent/tree/v2.0.35"
             },
-            "time": "2022-11-01T12:12:45+00:00"
+            "time": "2022-11-03T08:25:13+00:00"
         },
         {
             "name": "railroad/railforums",
