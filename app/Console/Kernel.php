@@ -50,9 +50,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('ProcessTrackings')->everyMinute();
-
-        //this should be enabled once we turn off legacy cron jobs
-        //$schedule->command('content:rebuildSearchIndexes')->dailyAt('2:00');
+        $schedule->command('content:rebuildSearchIndexes')->dailyAt('2:00');
     }
 
     /**
