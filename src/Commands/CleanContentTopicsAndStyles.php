@@ -32,23 +32,23 @@ class CleanContentTopicsAndStyles extends Command
         $this->info('Started cleaning content metadata');
 
         $replaceOldValueInto = [
-            'Question & Answer' => 'Q&A',
-            'Peformance' => 'Performance',
-            'Performances' => 'Performance',
-            'Bues' => 'Blues',
-            'Odd-times' => 'Odd time',
-            'rock/pop' => 'Pop/Rock',
-            'Gear Talk' => 'Gear',
-            'Solo' => 'Solos',
-            'Style' => 'Styles',
-            'Funk. Electronic' => 'Funk',
-            'Funk. Odd Time' => 'Funk',
-            'Odd-Time' => 'Odd time',
-            'Pop/Rock,Blues' => 'Pop/Rock',
-            'Pop/Rock/Metal' => 'Pop/Rock',
-            'Pop/Style' => 'Pop/Rock',
-            'R&B Electronic' => 'R&B',
-            'R&B/Soul' => 'R&B',
+//            'Question & Answer' => 'Q&A',
+//            'Peformance' => 'Performance',
+//            'Performances' => 'Performance',
+//            'Bues' => 'Blues',
+            'Odd-Time' => 'Odd Time',
+//            'rock/pop' => 'Pop/Rock',
+//            'Gear Talk' => 'Gear',
+//            'Solo' => 'Solos',
+//            'Style' => 'Styles',
+//            'Funk. Electronic' => 'Funk',
+//            'Funk. Odd Time' => 'Funk',
+//            'Odd-Time' => 'Odd time',
+              'Pop Rock' => 'Pop/Rock',
+//            'Pop/Rock/Metal' => 'Pop/Rock',
+//            'Pop/Style' => 'Pop/Rock',
+//            'R&B Electronic' => 'R&B',
+              'R&B' => 'R&B/Soul',
 
         ];
 
@@ -62,26 +62,43 @@ class CleanContentTopicsAndStyles extends Command
                         '=',
                         ConfigService::$tableContentFields . '.content_id'
                     )
-                    ->whereIn(ConfigService::$tableContentFields . '.key', ['topic', 'style'])
+                    ->whereIn(ConfigService::$tableContentFields . '.key', ['style'])
                     ->where(ConfigService::$tableContentFields . '.value', $key)
+                    ->where(ConfigService::$tableContent . '.brand', 'drumeo')
                     ->update(
                         [
                             ConfigService::$tableContentFields . '.value' => $value,
                         ]
                     );
+
+            $databaseManager->connection(config('railcontent.database_connection_name'))
+                ->table(config('railcontent.table_prefix') . 'content_styles')
+                ->join(
+                    ConfigService::$tableContent,
+                    ConfigService::$tableContent . '.id',
+                    '=',
+                    config('railcontent.table_prefix') . 'content_styles' . '.content_id'
+                )
+                ->where(config('railcontent.table_prefix') . 'content_styles' . '.style', $key)
+                ->where(ConfigService::$tableContent . '.brand', 'drumeo')
+                ->update(
+                    [
+                        config('railcontent.table_prefix') . 'content_styles' . '.style' => $value,
+                    ]
+                );
         }
 
-        $databaseManager->connection(config('railcontent.database_connection_name'))
-            ->table(ConfigService::$tableContentFields)
-            ->where('key', 'topic')
-            ->where('value', '-')
-            ->delete();
+//        $databaseManager->connection(config('railcontent.database_connection_name'))
+//            ->table(ConfigService::$tableContentFields)
+//            ->where('key', 'topic')
+//            ->where('value', '-')
+//            ->delete();
 
-        $databaseManager->connection(config('railcontent.database_connection_name'))
-            ->table(ConfigService::$tableContentFields)
-            ->where('key', 'style')
-            ->where('value', '-')
-            ->delete();
+//        $databaseManager->connection(config('railcontent.database_connection_name'))
+//            ->table(ConfigService::$tableContentFields)
+//            ->where('key', 'style')
+//            ->where('value', '-')
+//            ->delete();
 
         $this->info('Finished cleaning');
     }
