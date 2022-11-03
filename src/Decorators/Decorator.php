@@ -47,6 +47,7 @@ class Decorator
                 $decoratorClassNames = [
                     \Railroad\Railcontent\Decorators\UserProgress\ContentUserProgressDecorator::class,
                     \Railroad\Railcontent\Decorators\Entity\ContentEntityDecorator::class,
+                    \Railroad\Railcontent\Decorators\Entity\AddedToPrimaryPlaylistDecorator::class,
                 ];
             }
 
