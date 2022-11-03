@@ -667,10 +667,12 @@
                 @endif
                 @yield('countdown')
             </h6>
-            <p class="text-center text-gray-400">
-                <a class="text-pianote" href="/"> (OR FREE WITH A PIANOTE MEMBERSHIP)</a><br>
-                ** 90-DAY GUARANTEE **
-            </p>
+            @if($productPrice !== 0)
+                <p class="text-center text-gray-400">
+                    <a class="text-pianote" href="/"> (OR FREE WITH A PIANOTE MEMBERSHIP)</a><br>
+                    ** 90-DAY GUARANTEE **
+                </p>
+            @endif
         </div>
     </section>
     <section class="content-section text-center" style="background: #00101D;">
