@@ -154,7 +154,7 @@ class Lesson extends Resource
                 }),
             Text::make('Shop Card Logo', 'thumbnail_logo')->hideFromIndex()->hideFromDetail(),
             Text::make('Shop Card Description', 'short_desc')->hideFromIndex(),
-            Boolean::make('Visible On Shop Page')->default(true)->hideFromIndex(),
+            Boolean::make('Visible On Shop Page','visible')->default(true)->hideFromIndex(),
             Boolean::make('Included Edge', 'included_edge')->default(false)->hideFromIndex(),
             Number::make('Display order', 'display_order')->required()->help('Shop cards will be displayed in the order of this.'),
             Heading::make('Page'),
