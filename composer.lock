@@ -7968,16 +7968,16 @@
         },
         {
             "name": "railroad/mailora",
-            "version": "3.0.x-dev",
+            "version": "v3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/mailora.git",
-                "reference": "fbeb0cbf50934825fdefcf1180ea57c7dbeadd5e"
+                "reference": "caed8fc4fa68bad574ddf153cddc36cc6aebc328"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/mailora/zipball/fbeb0cbf50934825fdefcf1180ea57c7dbeadd5e",
-                "reference": "fbeb0cbf50934825fdefcf1180ea57c7dbeadd5e",
+                "url": "https://api.github.com/repos/railroadmedia/mailora/zipball/caed8fc4fa68bad574ddf153cddc36cc6aebc328",
+                "reference": "caed8fc4fa68bad574ddf153cddc36cc6aebc328",
                 "shasum": ""
             },
             "require": {
@@ -8019,9 +8019,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/mailora/issues",
-                "source": "https://github.com/railroadmedia/mailora/tree/3.0"
+                "source": "https://github.com/railroadmedia/mailora/tree/v3.0.1"
             },
-            "time": "2022-09-16T13:01:35+00:00"
+            "time": "2022-11-03T10:09:19+00:00"
         },
         {
             "name": "railroad/musora-api",
