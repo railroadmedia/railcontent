@@ -13,7 +13,7 @@ class AddContentStatusToSearchIndexes extends Migration
      */
     public function up()
     {
-        if (config()->get('database.default') != 'testbench' && app()->environment() != 'testing') {
+        if (config()->get('database.default') != 'testbench') {
             Schema::connection(ConfigService::$databaseConnectionName)->table(
                 ConfigService::$tableSearchIndexes,
                 function ($table) {
@@ -21,7 +21,7 @@ class AddContentStatusToSearchIndexes extends Migration
                      * @var $table \Illuminate\Database\Schema\Blueprint
                      */
 
-                    $table->string('content_status', 64)->after('content_type')->index();
+                    $table->string('content_status', 64)->default('')->after('content_type')->index();
                 }
             );
         }

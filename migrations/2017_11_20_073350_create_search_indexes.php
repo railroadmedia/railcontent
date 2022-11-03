@@ -13,7 +13,7 @@ class CreateSearchIndexes extends Migration
      */
     public function up()
     {
-        if (config()->get('database.default') != 'testbench' && app()->environment() != 'testing') {
+        if (config()->get('database.default') != 'testbench') {
             Schema::connection(ConfigService::$databaseConnectionName)->create(
                 ConfigService::$tableSearchIndexes,
                 function ($table) {
@@ -31,19 +31,21 @@ class CreateSearchIndexes extends Migration
                     $table->timestamps();
                 }
             );
-            Schema::connection(ConfigService::$databaseConnectionName)->getConnection()->getPdo()->exec(
-                'ALTER TABLE ' .
-                ConfigService::$tableSearchIndexes .
-                ' ADD FULLTEXT high_full_text(high_value)'
-            );
-            Schema::connection(ConfigService::$databaseConnectionName)->getConnection()->getPdo()->exec(
-                'ALTER TABLE ' .
-                ConfigService::$tableSearchIndexes .
-                ' ADD FULLTEXT medium_full_text(medium_value)'
-            );
-            Schema::connection(ConfigService::$databaseConnectionName)->getConnection()->getPdo()->exec(
-                'ALTER TABLE ' . ConfigService::$tableSearchIndexes . ' ADD FULLTEXT low_full_text(low_value)'
-            );
+            if (app()->environment() != 'testing') {
+                Schema::connection(ConfigService::$databaseConnectionName)->getConnection()->getPdo()->exec(
+                    'ALTER TABLE ' .
+                    ConfigService::$tableSearchIndexes .
+                    ' ADD FULLTEXT high_full_text(high_value)'
+                );
+                Schema::connection(ConfigService::$databaseConnectionName)->getConnection()->getPdo()->exec(
+                    'ALTER TABLE ' .
+                    ConfigService::$tableSearchIndexes .
+                    ' ADD FULLTEXT medium_full_text(medium_value)'
+                );
+                Schema::connection(ConfigService::$databaseConnectionName)->getConnection()->getPdo()->exec(
+                    'ALTER TABLE ' . ConfigService::$tableSearchIndexes . ' ADD FULLTEXT low_full_text(low_value)'
+                );
+            }
         }
     }
 
