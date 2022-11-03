@@ -50,8 +50,10 @@ export default {
 
         formData.append('type', type);
         formData.append('subject', subject);
-        formData.append('sender-name', studentName);
-        formData.append('sender-address', studentEmail);
+        // formData.append('sender-name', studentName);
+        // formData.append('sender-address', studentEmail);
+        formData.append('studentName', studentName);
+        formData.append('studentEmail', studentEmail);
         formData.append('isMember', isMember);
         formData.append('supportOption', supportOption);
         formData.append('message', message);
