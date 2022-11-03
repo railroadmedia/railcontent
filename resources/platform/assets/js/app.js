@@ -308,6 +308,13 @@ app.component('AppContainer', AppContainer)
         )
     ))
 
+    .component('NavCartButton', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "nav-cart-button" */
+            './vue/vuesora/components/NavCartButton/NavCartButton.vue'
+        )
+    ))
+
 
     .component('ContactEmailFormMarketing', defineAsyncComponent(() =>
         import(

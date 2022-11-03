@@ -8,13 +8,14 @@
     <meta property="og:description" content="Get Lessons, T-Shirts, & Much More!">
     <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/og-image.jpg">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
+        
+    <link href="https://fonts.googleapis.com/css?family=Oswald:500" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
-    <link href="{{ asset('/marketing/parcel/pianote/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
+
     <link href="{{ asset('/marketing/parcel/pianote/shop.css') }}" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Oswald:500" rel="stylesheet">
-    
     <link href="{{ asset('/marketing/css/vuesora.css') }}" rel="stylesheet">
 
     <style>
@@ -131,9 +132,8 @@
 
 @section('global-body')
     @include('pianote.sales.nav', [
-        "cartVersion" => false
+        "cartVersion" => true
     ])
-{{--    @include('shop.partials._promo-banner')--}}
 
     <div class="shipping-delay">
         <div class="delay-bar text-center">
@@ -329,16 +329,16 @@
         </section>
     </div>
 
-
     @include('pianote.sales.footer')
-    <script src="{{ asset('marketing/js/pianote/manifest.js') }}"></script>
-    <script src="{{ asset('marketing/js/pianote/vendor.js') }}"></script>
-    <script src="{{ asset('marketing/js/pianote/cart-sidebar.js') }}"></script>
-    <script src="{{ asset('marketing/js/pianote/app.js') }}"></script>
-
+    {{-- JS CDNS --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="/marketing/parcel/pianote/nav-footer.js"></script>
-    <script src="/marketing/parcel/pianote/shop-filters.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.3/moment-timezone-with-data.min.js"></script>
+
+    <script src="{{ asset('/marketing/js/modal.js') }}"></script>
+    <script src="{{asset('/marketing/parcel/pianote/nav-footer.js') }}"></script>
+    <script src="{{ asset('/marketing/js/jquery.countdown-2.min.js') }}"></script>
+
     <script>
         $(function () {
             $('.scalable-card').click(function (e) {
@@ -420,6 +420,14 @@
             });
         });
     </script>
+
+    <script src="{{ asset('/marketing/js/pianote/manifest.js') }}"></script>
+    <script src="{{ asset('/marketing/js/pianote/vendor.js') }}"></script>
+    <script src="{{ asset('/marketing/js/pianote/cart-sidebar.js') }}"></script>
+    <script src="{{ asset('/marketing/js/pianote/app.js') }}"></script>
+    <script src="{{ asset('/marketing/parcel/pianote/shop-filters.js') }}"></script>
+    <script src="{{ mix('/platform/js/app.js') }}"></script> 
+
     @yield('scripts')
 
     @include('pianote.shop._partials._promo-countdown')

@@ -19,6 +19,7 @@
             <nav-cart-button
                 cart-data='{{ $cartData }}'
             ></nav-cart-button>
+
             <cart-sidebar
                 brand="pianote"
                 cart-data='{{ $cartData }}'

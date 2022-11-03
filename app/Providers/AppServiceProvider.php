@@ -44,7 +44,7 @@ class AppServiceProvider extends ServiceProvider
         view()->composer(
             [
                 'drumeo.sales.partials._nav',
-                'pianote.sales.partials._nav',
+                'pianote.sales.nav',
                 'guitareo.sales.partials._nav',
                 'singeo.sales.partials._nav',
             ],

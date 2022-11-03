@@ -1,9 +1,9 @@
 {
-    "/platform/js/app.js": "/platform/js/app.js?id=4a577dd942fa7ec3fad92a0a6af6233b",
+    "/platform/js/app.js": "/platform/js/app.js?id=c3bbd308d7076ff3bdf4564a020a6b82",
     "/platform/js/profile.js": "/platform/js/profile.js?id=c7e869f012d1252699ff65de1e5e0547",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=24098ec7990ff98a565fd1e4693746ed",
     "/platform/js/books.js": "/platform/js/books.js?id=d4fa837307a14d7ee0ce9065b5e5e8e0",
-    "/platform/js/manifest.js": "/platform/js/manifest.js?id=d3db2329dff0abb78c8dc578e416e866",
+    "/platform/js/manifest.js": "/platform/js/manifest.js?id=778b2577fc43bceafc62dae40054483f",
     "/platform/js/piano-backing-tracks.js": "/platform/js/piano-backing-tracks.js?id=7fbf8dfd123a4027cfa05515f7665d82",
     "/platform/js/student-review-form-iframe.js": "/platform/js/student-review-form-iframe.js?id=ffad6cfee18112a8e0bb7e04829f0d02",
     "/platform/js/comments-catalogue-component.js": "/platform/js/comments-catalogue-component.js?id=c1e6517904728ad2d31964a55999958a",
@@ -25,5 +25,6 @@
     "/platform/css/app.css": "/platform/css/app.css?id=f4361ea163cd73414f63e688dbf44a81",
     "/platform/js/vendor~onboarding.js": "/platform/js/vendor~onboarding.js?id=56868ea369faf90d0978a204535ee2e6",
     "/marketing/css/app.css": "/marketing/css/app.css?id=f34b3ec677eb058c4263e5dcb9a0f70a",
-    "/platform/js/vendor.js": "/platform/js/vendor.js?id=2682f51c66ea5c1e7905d5279c3b7397"
+    "/platform/js/vendor.js": "/platform/js/vendor.js?id=2682f51c66ea5c1e7905d5279c3b7397",
+    "/platform/js/nav-cart-button.js": "/platform/js/nav-cart-button.js?id=b5ff3e8a7be95450bd71b89914fa2a16"
 }
