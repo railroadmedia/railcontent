@@ -65,7 +65,7 @@ class SearchService
                 $searchIndex->brand = $content['brand'];
                 $searchIndex->content_type = $content['type'];
                 $searchIndex->content_status = $content['status'];
-                $searchIndex->content_instructors = implode(',', $instructorNames);
+                $searchIndex->content_instructors = substr(implode(',', $instructorNames), 0, 64);
                 $searchIndex->content_published_on = $content['published_on'] ?? Carbon::now()->toDateTimeString();
                 $searchIndex->created_at = Carbon::now()->toDateTimeString();
                 $toInsert[] = $searchIndex->toArray();
@@ -119,7 +119,8 @@ class SearchService
 
         if (in_array('*', $configSearchIndexValues['field_keys'])) {
             foreach ($content['fields'] as $field) {
-                if (!is_array($field['value'])) {
+                $value = is_array($field['value']) ? '' : trim(str_replace('/', '_', $field['value']));
+                if ($value && !in_array($value, $values)) {
                     $values[] = $field['value'];
                 }
             }
