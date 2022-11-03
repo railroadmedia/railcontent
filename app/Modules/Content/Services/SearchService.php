@@ -66,11 +66,12 @@ class SearchService
                 $searchIndex->content_type = $content['type'];
                 $searchIndex->content_status = $content['status'];
                 $searchIndex->content_instructors = implode(',', $instructorNames);
-                $searchIndex->content_published_on = $content['published_on'] ?? Carbon::today()->toDateTimeString();
-                $searchIndex->created_at = Carbon::today()->toDateTimeString();
+                $searchIndex->content_published_on = $content['published_on'] ?? Carbon::now()->toDateTimeString();
+                $searchIndex->created_at = Carbon::now()->toDateTimeString();
                 $toInsert[] = $searchIndex->toArray();
             }
             DB::table('railcontent_search_indexes_staging')->insert($toInsert);
+            usleep(250000); //delay 250 ms to reduce load
         });
 
         DB::statement('OPTIMIZE table railcontent_search_indexes_staging');
@@ -80,7 +81,6 @@ class SearchService
         );
         DB::statement('DROP TABLE railcontent_search_indexes_old');
         Log::debug('Finished Rebuilding Search Indexes');
-        usleep(250000); //delay 250 ms to reduce load
     }
 
     private function getContentTypes(): array
@@ -154,7 +154,7 @@ class SearchService
         }
 
         foreach ($values as $valueIndex => $value) {
-            $values[$valueIndex] = str_replace(' / ', '_', $value);
+            $values[$valueIndex] = str_replace('/', '_', $value);
         }
 
         return substr(preg_replace("/[^A-Za-z0-9 ]/", '', implode(' ', array_unique($values))), 0, 245);
