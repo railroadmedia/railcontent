@@ -59,8 +59,8 @@
                     "How To Play Drums"=> [
                         "url" => "/beat/how-to-play-drums/",
                     ],
-                    "40 Free Songs"=> [
-                        "url" => "/40-songs",
+                    "100 Free Songs"=> [
+                        "url" => "/100-songs",
                     ],
                 ],
             ],
@@ -92,7 +92,7 @@
 @stop
 
 <!-- Global Wrapper -->
-@section('global-layout-body') 
+@section('global-layout-body')
     <!-- Brand Specific Content -->
     @yield('layout-body')
 @stop
