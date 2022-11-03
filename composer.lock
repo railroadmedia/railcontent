@@ -8259,16 +8259,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "v2.0.35",
+            "version": "v2.0.36",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "7293e93c427dcc69338f82ad3c865925292f7627"
+                "reference": "026aa15c1856ebb8fdb54200c235ce2dbd68799b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/7293e93c427dcc69338f82ad3c865925292f7627",
-                "reference": "7293e93c427dcc69338f82ad3c865925292f7627",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/026aa15c1856ebb8fdb54200c235ce2dbd68799b",
+                "reference": "026aa15c1856ebb8fdb54200c235ce2dbd68799b",
                 "shasum": ""
             },
             "require": {
@@ -8322,9 +8322,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/v2.0.35"
+                "source": "https://github.com/railroadmedia/railcontent/tree/v2.0.36"
             },
-            "time": "2022-11-03T08:25:13+00:00"
+            "time": "2022-11-03T10:44:26+00:00"
         },
         {
             "name": "railroad/railforums",
