@@ -11,6 +11,7 @@
     "/platform/js/text-editor-component.js": "/platform/js/text-editor-component.js?id=1ce156b38167cb1b2440d7bbe916e7a6",
     "/platform/js/contact-member-form.js": "/platform/js/contact-member-form.js?id=3326bb483836a74127cc5d790fbc58bb",
     "/platform/js/cart-sidebar.js": "/platform/js/cart-sidebar.js?id=d0b4803e84899aede8bbcf046f397a6d",
+    "/platform/js/nav-cart-button.js": "/platform/js/nav-cart-button.js?id=b5ff3e8a7be95450bd71b89914fa2a16",
     "/platform/js/contact-email-form-marketing.js": "/platform/js/contact-email-form-marketing.js?id=14acf00b8a651996f0d9e79c182746ee",
     "/platform/js/contact-email-form.js": "/platform/js/contact-email-form.js?id=09a6d3c24fba18cbd45317b7dc0e11ce",
     "/platform/js/youtube-player-component.js": "/platform/js/youtube-player-component.js?id=b5d474a024f0422948fbee3748f1c852",
@@ -25,6 +26,5 @@
     "/platform/css/app.css": "/platform/css/app.css?id=f4361ea163cd73414f63e688dbf44a81",
     "/platform/js/vendor~onboarding.js": "/platform/js/vendor~onboarding.js?id=56868ea369faf90d0978a204535ee2e6",
     "/marketing/css/app.css": "/marketing/css/app.css?id=f34b3ec677eb058c4263e5dcb9a0f70a",
-    "/platform/js/vendor.js": "/platform/js/vendor.js?id=2682f51c66ea5c1e7905d5279c3b7397",
-    "/platform/js/nav-cart-button.js": "/platform/js/nav-cart-button.js?id=b5ff3e8a7be95450bd71b89914fa2a16"
+    "/platform/js/vendor.js": "/platform/js/vendor.js?id=2682f51c66ea5c1e7905d5279c3b7397"
 }

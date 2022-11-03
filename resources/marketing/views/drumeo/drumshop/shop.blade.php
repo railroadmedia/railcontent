@@ -10,13 +10,12 @@
 
     @include('drumeo._partials._fonts')
 
-    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
     <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
 
     <link href="{{ asset('/marketing/parcel/drumeo/drum-shop.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/css/vuesora.css') }}" rel="stylesheet">
-
     <style>
         .join.smaller {
             padding: 10px 30px 6px;
@@ -195,6 +194,8 @@
             </div>
         </div>
     </header>
+
+
 
     @if(Session::has('addedProducts'))
         <section class="added-to-cart-background clearfix">
@@ -428,18 +429,15 @@
     </div>
 
     @include("drumeo.sales.partials._footer")
-    {{-- JS CDNS --}}
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.3/moment-timezone-with-data.min.js"></script>
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    
-    <script src="{{ asset('/marketing/js/modal.js') }}"></script>
-    <script src="{{ asset('/marketing/js/drumeo/ba-bbq.js') }}"></script>
-    <script src="{{ asset('/marketing/js/drumeo/misc.js') }}"></script>
-    <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-    <script src="{{ asset('/marketing/js/jquery.countdown-2.min.js') }}"></script>
-    
+    <script type="text/javascript" src="{{ asset('/marketing/js/drumeo/ba-bbq.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/drumeo/misc.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
+    <script type="text/javascript" src="/marketing/js/jquery.countdown-2.min.js"></script>
     <script>
         $(document).ready(function () {
             $(document).foundation();
@@ -502,16 +500,16 @@
                 });
         });
     </script>
-    
     <script src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
+
     <script src="{{ asset('/marketing/js/drumeo/manifest.js') }}"></script>
     <script src="{{ asset('/marketing/js/drumeo/vendor.js') }}"></script>
     <script src="{{ asset('/marketing/js/drumeo/cart-sidebar.js') }}"></script>
     <script src="{{ asset('/marketing/js/drumeo/app.js') }}"></script>
     <script src="{{ asset('/marketing/js/drumeo/drum-shop-filters.js') }}"></script>
-    <script src="{{ mix('/platform/js/app.js') }}"></script> 
+    <script src="{{ mix('/platform/js/app.js') }}"></script>
 
-
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script>
         $(function () {
             $('.scalable-card').click(function (e) {

@@ -176,16 +176,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.240.8",
+            "version": "3.240.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "72a4381a59f42720b033865d265aa64c3190cc13"
+                "reference": "ee0bde83538e5acbb4f84f79a12b651ccb19017b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/72a4381a59f42720b033865d265aa64c3190cc13",
-                "reference": "72a4381a59f42720b033865d265aa64c3190cc13",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/ee0bde83538e5acbb4f84f79a12b651ccb19017b",
+                "reference": "ee0bde83538e5acbb4f84f79a12b651ccb19017b",
                 "shasum": ""
             },
             "require": {
@@ -264,9 +264,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.240.8"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.240.9"
             },
-            "time": "2022-11-02T18:44:20+00:00"
+            "time": "2022-11-03T18:18:02+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -3007,16 +3007,16 @@
         },
         {
             "name": "google/cloud-storage",
-            "version": "v1.28.2",
+            "version": "v1.29.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-storage.git",
-                "reference": "d31de7d4562c5708e8b5f8d0795d579ee7477456"
+                "reference": "7b32f74023e4970159a489bd6ab703210e7c1d35"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-storage/zipball/d31de7d4562c5708e8b5f8d0795d579ee7477456",
-                "reference": "d31de7d4562c5708e8b5f8d0795d579ee7477456",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-storage/zipball/7b32f74023e4970159a489bd6ab703210e7c1d35",
+                "reference": "7b32f74023e4970159a489bd6ab703210e7c1d35",
                 "shasum": ""
             },
             "require": {
@@ -3057,9 +3057,9 @@
             ],
             "description": "Cloud Storage Client for PHP",
             "support": {
-                "source": "https://github.com/googleapis/google-cloud-php-storage/tree/v1.28.2"
+                "source": "https://github.com/googleapis/google-cloud-php-storage/tree/v1.29.0"
             },
-            "time": "2022-11-01T20:21:07+00:00"
+            "time": "2022-11-03T21:58:06+00:00"
         },
         {
             "name": "google/crc32",
@@ -4084,16 +4084,16 @@
         },
         {
             "name": "kreait/firebase-php",
-            "version": "6.9.2",
+            "version": "6.9.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kreait/firebase-php.git",
-                "reference": "e827727e250b37cb1a39e7f7aa9f3cfded6d8ad9"
+                "reference": "7522705cc40693a6dfad15fbd79ae1607a1facc6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kreait/firebase-php/zipball/e827727e250b37cb1a39e7f7aa9f3cfded6d8ad9",
-                "reference": "e827727e250b37cb1a39e7f7aa9f3cfded6d8ad9",
+                "url": "https://api.github.com/repos/kreait/firebase-php/zipball/7522705cc40693a6dfad15fbd79ae1607a1facc6",
+                "reference": "7522705cc40693a6dfad15fbd79ae1607a1facc6",
                 "shasum": ""
             },
             "require": {
@@ -4174,7 +4174,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-10-17T20:42:51+00:00"
+            "time": "2022-11-03T23:01:38+00:00"
         },
         {
             "name": "kreait/firebase-tokens",
@@ -5074,16 +5074,16 @@
         },
         {
             "name": "league/commonmark",
-            "version": "2.3.6",
+            "version": "2.3.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/commonmark.git",
-                "reference": "857afc47ce113454bd629037213378ba3219dd40"
+                "reference": "a36bd2be4f5387c0f3a8792a0d76b7d68865abbf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/857afc47ce113454bd629037213378ba3219dd40",
-                "reference": "857afc47ce113454bd629037213378ba3219dd40",
+                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/a36bd2be4f5387c0f3a8792a0d76b7d68865abbf",
+                "reference": "a36bd2be4f5387c0f3a8792a0d76b7d68865abbf",
                 "shasum": ""
             },
             "require": {
@@ -5176,7 +5176,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-10-30T16:45:38+00:00"
+            "time": "2022-11-03T17:29:46+00:00"
         },
         {
             "name": "league/config",
@@ -7950,16 +7950,16 @@
         },
         {
             "name": "railroad/mailora",
-            "version": "v3.0.1",
+            "version": "v3.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/mailora.git",
-                "reference": "caed8fc4fa68bad574ddf153cddc36cc6aebc328"
+                "reference": "451d7c7efff1fca6bd945f157eaadfceb5affdb0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/mailora/zipball/caed8fc4fa68bad574ddf153cddc36cc6aebc328",
-                "reference": "caed8fc4fa68bad574ddf153cddc36cc6aebc328",
+                "url": "https://api.github.com/repos/railroadmedia/mailora/zipball/451d7c7efff1fca6bd945f157eaadfceb5affdb0",
+                "reference": "451d7c7efff1fca6bd945f157eaadfceb5affdb0",
                 "shasum": ""
             },
             "require": {
@@ -8001,9 +8001,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/mailora/issues",
-                "source": "https://github.com/railroadmedia/mailora/tree/v3.0.1"
+                "source": "https://github.com/railroadmedia/mailora/tree/v3.0.2"
             },
-            "time": "2022-11-03T10:09:19+00:00"
+            "time": "2022-11-03T15:05:17+00:00"
         },
         {
             "name": "railroad/musora-api",
@@ -8241,16 +8241,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "v2.0.36",
+            "version": "2.0.38",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "026aa15c1856ebb8fdb54200c235ce2dbd68799b"
+                "reference": "4af188cb4f4ae0f8d8f5832b410c706b3b429b25"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/026aa15c1856ebb8fdb54200c235ce2dbd68799b",
-                "reference": "026aa15c1856ebb8fdb54200c235ce2dbd68799b",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/4af188cb4f4ae0f8d8f5832b410c706b3b429b25",
+                "reference": "4af188cb4f4ae0f8d8f5832b410c706b3b429b25",
                 "shasum": ""
             },
             "require": {
@@ -8304,9 +8304,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/v2.0.36"
+                "source": "https://github.com/railroadmedia/railcontent/tree/2.0.38"
             },
-            "time": "2022-11-03T10:44:26+00:00"
+            "time": "2022-11-03T22:38:28+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -13873,16 +13873,16 @@
         },
         {
             "name": "composer/pcre",
-            "version": "3.0.0",
+            "version": "3.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/pcre.git",
-                "reference": "e300eb6c535192decd27a85bc72a9290f0d6b3bd"
+                "reference": "4482b6409ca6bfc2af043a5711cd21ac3e7a8dfb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/pcre/zipball/e300eb6c535192decd27a85bc72a9290f0d6b3bd",
-                "reference": "e300eb6c535192decd27a85bc72a9290f0d6b3bd",
+                "url": "https://api.github.com/repos/composer/pcre/zipball/4482b6409ca6bfc2af043a5711cd21ac3e7a8dfb",
+                "reference": "4482b6409ca6bfc2af043a5711cd21ac3e7a8dfb",
                 "shasum": ""
             },
             "require": {
@@ -13924,7 +13924,7 @@
             ],
             "support": {
                 "issues": "https://github.com/composer/pcre/issues",
-                "source": "https://github.com/composer/pcre/tree/3.0.0"
+                "source": "https://github.com/composer/pcre/tree/3.0.2"
             },
             "funding": [
                 {
@@ -13940,7 +13940,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-02-25T20:21:48+00:00"
+            "time": "2022-11-03T20:24:16+00:00"
         },
         {
             "name": "filp/whoops",
