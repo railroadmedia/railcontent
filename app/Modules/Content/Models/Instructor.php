@@ -35,16 +35,6 @@ class Instructor extends Content
         $this->created_on = Carbon::now();
     }
 
-    public function fields()
-    {
-        return $this->hasMany(ContentField::class, 'content_id');
-    }
-
-    public function data()
-    {
-        return $this->hasMany(ContentData::class, 'content_id');
-    }
-
     private function setField(string $key, $value): void
     {
         /** @var ContentField $field */

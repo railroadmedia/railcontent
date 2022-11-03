@@ -339,13 +339,13 @@
                                 <tr>
                                     <td class="content-block">
                                         <?php
-                                        $attachmentCount = 0;
-                                        if(!empty($input['attachment'])){
-                                            $attachmentCount = 1;
-                                        }
-                                        if(!empty($input['attachments'])){
-                                            $attachmentCount = count($input['attachments']);
-                                        }
+                                            $attachmentCount = 0;
+                                            if(!empty($input['attachment']) && $input['attachment'] != "null"){
+                                                $attachmentCount = 1;
+                                            }
+                                            if(!empty($input['attachments'])){
+                                                $attachmentCount = count($input['attachments']);
+                                            }
                                         ?>
                                         Attachment count: {{ $attachmentCount }}
                                     </td>
