@@ -102,8 +102,7 @@ abstract class Command extends CommandBase
         $this->info("Dispatched $nJobs jobs.");
         if ($batch) {
             $this->info("Check batch status: artisan batch:status $batch->id");
-        }
-        else{
+        } else {
             $this->info("No batched status available");
         }
 
@@ -121,5 +120,17 @@ abstract class Command extends CommandBase
         }
 
         return true;
+    }
+
+    public function withExecutionTime(callable $function)
+    {
+        $this->info("Processing $this->name");
+        $timeStart = microtime(true);
+
+        call_user_func($function);
+
+        $diff = microtime(true) - $timeStart;
+        $sec = intval($diff);
+        $this->info("Finished $this->name ($sec s)");
     }
 }
