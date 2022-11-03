@@ -2,6 +2,7 @@
 
 namespace App\Modules\Content\Models;
 
+use App\Modules\Content\Builders\ContentBuilder;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
@@ -77,10 +78,25 @@ use Illuminate\Database\Eloquent\Model;
  * @property Carbon $published_on
  * @property Carbon $created_on
  * @property Carbon $archived_on
+ * @method static ContentBuilder query()
  */
 class Content extends Model
 {
     protected $table = 'railcontent_content';
     public $timestamps = false;
 
+    public function newEloquentBuilder($query): ContentBuilder
+    {
+        return new ContentBuilder($query);
+    }
+
+    public function fields()
+    {
+        return $this->hasMany(ContentField::class, 'content_id');
+    }
+
+    public function data()
+    {
+        return $this->hasMany(ContentData::class, 'content_id');
+    }
 }
