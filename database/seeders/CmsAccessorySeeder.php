@@ -21,6 +21,167 @@ class CmsAccessorySeeder extends Seeder
     {
         $products = [
             [
+                "brand" => 1,
+                "product_type_id" => 2,
+                "name" => "Drumeo EarDRUM In-Ear Monitors",
+                "slug" => "eardrums",
+                "sku" => "drumeo-eardrums",
+                "thumbnail" => "https://drumeo-assets.s3.amazonaws.com/drum-shop/card-thumbs/drumeo-eardrums.jpg",
+                "meta_desc" => "Protect your ears + play your favorite songs.",
+                "meta_img" => "https://drumeo-assets.s3.amazonaws.com/drum-shop/eardrums/Pro_BG2.jpg",
+                "short_desc" => "Feel every kick drum while protecting your ears. Drumeo’s new EarDRUMS are professional-quality in-ear monitors for drummers of all levels.",
+                "header_text" => "",
+                "price" => 149,
+                "discounted_price" => "",
+                "special_text" => "",
+                "features" => [
+                ],
+                "specs" => [
+                ],
+                "visible" => true,
+                "sold_out" => false,
+                "guaranteed" => false,
+                "lifetime_access" => false,
+                "free_shipping" => false,
+                "images" => [
+
+                ],
+                "sizeChart" => "",
+                "sizes" => [
+
+                ]
+            ],
+            [
+                "brand" => 1,
+                "product_type_id" => 2,
+                "name" => "Drumeo Comfort Cover",
+                "slug" => "comfort-cover",
+                "sku" => "comfort-cover",
+                "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/comfort-cover/shop-image.jpg",
+                "meta_desc" => "Upgrade any round drum throne in seconds.",
+                "meta_img" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/comfort-cover/fb-share-image.jpg",
+                "short_desc" => "The Comfort Cover absorbs shock, distributes your weight evenly, and improves your posture behind the drums.",
+                "header_text" => "",
+                "price" => 149,
+                "discounted_price" => '',
+                "special_text" => "",
+                "features" => [
+                ],
+                "specs" => [
+                ],
+                "visible" => true,
+                "sold_out" => false,
+                "guaranteed" => false,
+                "lifetime_access" => false,
+                "free_shipping" => false,
+                "images" => [
+
+                ],
+                "sizeChart" => "",
+                "sizes" => [
+
+                ],
+            ],
+            [
+                "brand" => 1,
+                "product_type_id" => 2,
+                "name" => "Drumeo QuietKick",
+                "slug" => "quietkick",
+                "sku" => "quietkick",
+                "thumbnail" => "https://drumeo-assets.s3.amazonaws.com/drum-shop/card-thumbs/quietkick.jpg",
+                "meta_desc" => "Improve your kick foot anywhere.",
+                "meta_img" => "https://drumeo-assets.s3.amazonaws.com/drum-shop/quietkick/fb-share-image.jpg",
+                "short_desc" => "Improve your kick foot anywhere.",
+                "header_text" => "",
+                "price" => 79,
+                "discounted_price" => "",
+                "special_text" => "",
+                "features" => [
+                ],
+                "specs" => [
+                ],
+                "visible" => true,
+                "sold_out" => true,
+                "guaranteed" => false,
+                "lifetime_access" => false,
+                "free_shipping" => false,
+                'bundle_img' => 'https://drumeo-assets.s3.amazonaws.com/promos/july/quietkick_card.jpg',
+                "bundle_desc" => "Improve your kick foot anywhere with the portable & quiet bass drum workout pad. Attaches to any single OR double pedal (pedal not included).",
+                'bundle_free_shipping' => true,
+                "images" => [
+
+                ],
+                "sizeChart" => "",
+                "sizes" => [
+
+                ]
+            ],
+            [
+                "brand" => 1,
+                "product_type_id" => 2,
+                "name" => "The P4 Practice Pad",
+                "slug" => "practice-pad-full",
+                "sku" => "practicepad",
+                "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/p4.jpg",
+                "meta_desc" => "Four unique playing surfaces. Three levels for movement. The Drumeo P4 Practice Pad by Pat Petrillo was designed to help you develop more skills that will transfer easily to the drum set. Click here to see the difference.",
+                "meta_img" => "https://i.vimeocdn.com/video/601570925-0bd7be34161bdea9c32b201d4225c3e9924bb83c52ff0089ac52112cbd181824-d_1200",
+                "short_desc" => "The most versatile practice pad in the world, featuring four playing surfaces on three different levels for simulating movement around the kit.",
+                "header_text" => "",
+                "price" => 79,
+                "discounted_price" => "",
+                "special_text" => "",
+                "features" => [
+                ],
+                "specs" => [
+                ],
+                "visible" => true,
+                "sold_out" => false,
+                "guaranteed" => false,
+                "lifetime_access" => false,
+                "free_shipping" => false,
+                'bundle_img' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/p4.jpg',
+                "bundle_desc" => "The P4 Practice Pad is the most versatile practice pad in the world -- with four different playing surfaces to replicate different parts of the drum set. When you’re running rudiments & stickings at the pad, you’re still getting the various feels of your drum set.",
+                'bundle_free_shipping' => true,
+                "images" => [
+
+                ],
+                "sizeChart" => "",
+                "sizes" => [
+
+                ]
+            ],
+            [
+                "brand" => 1,
+                "product_type_id" => 2,
+                "name" => "Drumeo Tone Control Kit",
+                "slug" => "tone-control-kit",
+                "sku" => "tone-control-kit",
+                "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/tone-control-kit.jpg",
+                "meta_desc" => "Better drum sounds in seconds.",
+                "meta_img" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/tone-control-kit/og-image.jpg",
+                "short_desc" => "The Drumeo Tone Control Kit helps you balance overtones with four adjustable levels of dampening in one simple system.",
+                "header_text" => "",
+                "price" => 79,
+                "discounted_price" => "",
+                "special_text" => "",
+                "features" => [
+                ],
+                "specs" => [
+                ],
+                "visible" => true,
+                "sold_out" => false,
+                "guaranteed" => false,
+                "lifetime_access" => false,
+                "free_shipping" => false,
+                "images" => [
+
+                ],
+                "sizeChart" => "",
+                "sizes" => [
+
+                ],
+            ],
+            [
                 "brand" => 2,
                 "product_type_id" => 2,
                 "name" => "Classical Piano Pieces",
@@ -94,133 +255,6 @@ And so many more!",
             [
                 "brand" => 1,
                 "product_type_id" => 2,
-                "name" => "Drumeo EarDRUM In-Ear Monitors",
-                "slug" => "eardrums",
-                "sku" => "drumeo-eardrums",
-                "thumbnail" => "https://drumeo-assets.s3.amazonaws.com/drum-shop/card-thumbs/drumeo-eardrums.jpg",
-                "meta_desc" => "Protect your ears + play your favorite songs.",
-                "meta_img" => "https://drumeo-assets.s3.amazonaws.com/drum-shop/eardrums/Pro_BG2.jpg",
-                "short_desc" => "Feel every kick drum while protecting your ears. Drumeo’s new EarDRUMS are professional-quality in-ear monitors for drummers of all levels.",
-                "header_text" => "",
-                "price" => 149,
-                "discounted_price" => "",
-                "special_text" => "",
-                "features" => [
-                ],
-                "specs" => [
-                ],
-                "visible" => true,
-                "sold_out" => false,
-                "guaranteed" => false,
-                "lifetime_access" => false,
-                "free_shipping" => false,
-                "images" => [
-
-                ],
-                "sizeChart" => "",
-                "sizes" => [
-
-                ]
-            ],
-            [
-                "brand" => 1,
-                "product_type_id" => 2,
-                "name" => "Drumeo QuietKick",
-                "slug" => "quietkick",
-                "sku" => "quietkick",
-                "thumbnail" => "https://drumeo-assets.s3.amazonaws.com/drum-shop/card-thumbs/quietkick.jpg",
-                "meta_desc" => "Improve your kick foot anywhere.",
-                "meta_img" => "https://drumeo-assets.s3.amazonaws.com/drum-shop/quietkick/fb-share-image.jpg",
-                "short_desc" => "Improve your kick foot anywhere.",
-                "header_text" => "",
-                "price" => 79,
-                "discounted_price" => "",
-                "special_text" => "",
-                "features" => [
-                ],
-                "specs" => [
-                ],
-                "visible" => true,
-                "sold_out" => false,
-                "guaranteed" => false,
-                "lifetime_access" => false,
-                "free_shipping" => false,
-                'bundle_img' => 'https://drumeo-assets.s3.amazonaws.com/promos/july/quietkick_card.jpg',
-                "bundle_desc" => "Improve your kick foot anywhere with the portable & quiet bass drum workout pad. Attaches to any single OR double pedal (pedal not included).",
-                'bundle_free_shipping' => true,
-                "images" => [
-
-                ],
-                "sizeChart" => "",
-                "sizes" => [
-
-                ]
-            ],
-            [
-                "brand" => 1,
-                "product_type_id" => 2,
-                "name" => "Drumeo Tone Control Kit",
-                "slug" => "tone-control-kit",
-                "sku" => "tone-control-kit",
-                "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/tone-control-kit.jpg",
-                "meta_desc" => "Better drum sounds in seconds.",
-                "meta_img" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/tone-control-kit/og-image.jpg",
-                "short_desc" => "The Drumeo Tone Control Kit helps you balance overtones with four adjustable levels of dampening in one simple system.",
-                "header_text" => "",
-                "price" => 72,
-                "discounted_price" => "",
-                "special_text" => "",
-                "features" => [
-                ],
-                "specs" => [
-                ],
-                "visible" => true,
-                "sold_out" => false,
-                "guaranteed" => false,
-                "lifetime_access" => false,
-                "free_shipping" => false,
-                "images" => [
-
-                ],
-                "sizeChart" => "",
-                "sizes" => [
-
-                ],
-            ],
-            [
-                "brand" => 1,
-                "product_type_id" => 2,
-                "name" => "Drumeo Comfort Cover",
-                "slug" => "comfort-cover",
-                "sku" => "comfort-cover",
-                "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/comfort-cover/shop-image.jpg",
-                "meta_desc" => "Upgrade any round drum throne in seconds.",
-                "meta_img" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/comfort-cover/fb-share-image.jpg",
-                "short_desc" => "The Comfort Cover absorbs shock, distributes your weight evenly, and improves your posture behind the drums.",
-                "header_text" => "",
-                "price" => 149,
-                "discounted_price" => '',
-                "special_text" => "",
-                "features" => [
-                ],
-                "specs" => [
-                ],
-                "visible" => true,
-                "sold_out" => false,
-                "guaranteed" => false,
-                "lifetime_access" => false,
-                "free_shipping" => false,
-                "images" => [
-
-                ],
-                "sizeChart" => "",
-                "sizes" => [
-
-                ],
-            ],
-            [
-                "brand" => 1,
-                "product_type_id" => 2,
                 "name" => "Vater Drumeo 5A Drumsticks",
                 "slug" => "drumsticks",
                 "sku" => "Drumeo-VaterSticks",
@@ -251,40 +285,6 @@ And so many more!",
                 "sizes" => [
 
                 ],
-            ],
-            [
-                "brand" => 1,
-                "product_type_id" => 2,
-                "name" => "The P4 Practice Pad",
-                "slug" => "practice-pad-full",
-                "sku" => "practicepad",
-                "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/p4.jpg",
-                "meta_desc" => "Four unique playing surfaces. Three levels for movement. The Drumeo P4 Practice Pad by Pat Petrillo was designed to help you develop more skills that will transfer easily to the drum set. Click here to see the difference.",
-                "meta_img" => "https://i.vimeocdn.com/video/601570925-0bd7be34161bdea9c32b201d4225c3e9924bb83c52ff0089ac52112cbd181824-d_1200",
-                "short_desc" => "The most versatile practice pad in the world, featuring four playing surfaces on three different levels for simulating movement around the kit.",
-                "header_text" => "",
-                "price" => 79,
-                "discounted_price" => "",
-                "special_text" => "",
-                "features" => [
-                ],
-                "specs" => [
-                ],
-                "visible" => true,
-                "sold_out" => false,
-                "guaranteed" => false,
-                "lifetime_access" => false,
-                "free_shipping" => false,
-                'bundle_img' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/p4.jpg',
-                "bundle_desc" => "The P4 Practice Pad is the most versatile practice pad in the world -- with four different playing surfaces to replicate different parts of the drum set. When you’re running rudiments & stickings at the pad, you’re still getting the various feels of your drum set.",
-                'bundle_free_shipping' => true,
-                "images" => [
-
-                ],
-                "sizeChart" => "",
-                "sizes" => [
-
-                ]
             ],
             [
                 "brand" => 1,
