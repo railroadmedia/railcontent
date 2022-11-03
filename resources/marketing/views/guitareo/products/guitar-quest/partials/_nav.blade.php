@@ -3,7 +3,7 @@
     x-data="{ atElement: 'your_quest' }"
     @scroll.window="atElement = document.querySelector('#your_way').getBoundingClientRect().top <= 70 ? 'your_way' : (document.querySelector('#your_teacher').getBoundingClientRect().top <= 70 ? 'your_teacher': (document.querySelector('#your_skills').getBoundingClientRect().top <= 70 ? 'your_skills' : (document.querySelector('#your_map').getBoundingClientRect().top <= 70 ? 'your_map' : 'your_quest')))">
     <a class="block mr-3 sm:mr-6 md:mr-0 md:flex-shrink-0" href="/guitar-quest" title="Goes to Guitar Quest homepage">
-        <img src="{{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/guitar-quest-logo.png", ["auto" => "format", "w" => 1000]) }}" width="170" alt="Guitar Quest Logo">
+        <img src="https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Fguitar-quest-logo.png?auto=format&ixlib=php-1.2.1&w=1000&s=44e6146b6f2aed70b7a6adb1d18cb50f" width="170" alt="Guitar Quest Logo">
     </a>
     <ul class="flex items-center text-center uppercase m-0 px-3 list-none font-primary font-semibold hidden lg:inline-flex">
         <li class="px-3">

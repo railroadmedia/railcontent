@@ -3,7 +3,7 @@
     <div class="max-w-screen-xl mx-auto px-6 flex relative w-full">
         <!-- Rob Scallon Image -->
         <div class="lg:w-1/3 hidden lg:inline-flex">
-            <img src="{{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/rob-scallon-header.png", ["auto" => "format", "w" => 730]) }}" width="730px" class="absolute max-w-none" style="top: -435px; left: -120px;" alt="Rob Scallon">
+            <img src="https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Frob-scallon-header.png?auto=format&ixlib=php-1.2.1&w=730&s=215679e57ffd47cc7eb98e6ca27e2cbd" width="730px" class="absolute max-w-none" style="top: -435px; left: -120px;" alt="Rob Scallon">
         </div>
         <!-- Content -->
         <div class="w-full lg:w-2/3 z-10">

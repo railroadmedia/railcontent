@@ -36,10 +36,10 @@
 @section('final')
     <!-- Start Here -->
     {{-- Guitar Quest: Start Here --}}
-    <section class="py-24 bg-top bg-cover md:py-48" style="background-image: url({{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/order-background.jpg", ["auto" => "format", "w" => 1500]) }})">
+    <section class="py-24 bg-top bg-cover md:py-48" style="background-image: url('https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Forder-background.jpg?auto=format&ixlib=php-1.2.1&w=1500&s=102f8f89fa2527e02113803a5fa19e3c')">
         <div class="max-w-screen-xl m-auto px-4 md:px-6 flex">
             <div class="w-full m-auto text-white text-center lg:w-10/12">
-                <img src="{{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/guitar-quest-logo.png", ["auto" => "format", "w" => 700]) }}" width="400px" class="m-auto block mb-10">
+                <img src="https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Fguitar-quest-logo.png?auto=format&ixlib=php-1.2.1&w=700&s=5768e9ca4e1a3a4a28966bd8fcad1d61" width="400px" class="m-auto block mb-10">
                 <h2 class="uppercase text-3xl font-bison-bold sm:text-5xl md:text-6xl mb-2">Your Guitar Journey<br class="inline xl:hidden"> Starts Here.</h2>
 
                 <h4 class="text-xl mb-2 md:mb-10 font-primary sm:text-2xl md:text-3xl">
