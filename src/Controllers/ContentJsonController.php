@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Factory as ValidationFactory;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Exceptions\DeleteFailedException;
@@ -184,7 +185,21 @@ class ContentJsonController extends Controller
     public function show($id)
     {
         $content = $this->contentService->getById($id);
-        throw_unless($content, new NotFoundException('No content with id '.$id.' exists.'));
+        if (!$content) {
+            $userId = user()?->id;
+            Log::warning("No content with id $id exists. (userId:$userId)");
+            return reply()->json(
+                null,
+                [
+                    'code' => 404,
+                    'totalResults' => 0,
+                    'errors' => [
+                        'title' => 'Entity not found.',
+                        'detail' => 'No content with id ' . $id . ' exists.',
+                    ],
+                ]
+            );
+        }
 
         //        $rules = $this->contentService->getValidationRules($content);
         //        if($rules === false){
