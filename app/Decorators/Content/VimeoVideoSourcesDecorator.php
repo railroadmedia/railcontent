@@ -79,7 +79,7 @@ class VimeoVideoSourcesDecorator extends ModeDecoratorBase
                                 $this->cache->put(
                                     self::CACHE_KEY_PREFIX . $videoField['value'],
                                     $response,
-                                    30
+                                    3000
                                 );
                             }
 
