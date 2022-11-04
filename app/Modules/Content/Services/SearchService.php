@@ -30,7 +30,15 @@ class SearchService
     {
         Log::debug('Rebuilding Search Indexes');
         DB::statement('DROP TABLE IF EXISTS railcontent_search_indexes_staging');
-        DB::statement('CREATE TABLE railcontent_search_indexes_staging LIKE railcontent_search_indexes');
+        if (app()->environment('testing')) {
+            DB::statement(
+                'CREATE TABLE railcontent_search_indexes_staging AS SELECT * FROM railcontent_search_indexes WHERE 0'
+            );
+        } else {
+            DB::statement('CREATE TABLE railcontent_search_indexes_staging LIKE railcontent_search_indexes');
+        }
+
+        $test = Content::all();
 
         $types = $this->getContentTypes();
         $statuses = ConfigService::$indexableContentStatuses;
@@ -74,11 +82,16 @@ class SearchService
             usleep(250000); //delay 250 ms to reduce load
         });
 
-        DB::statement('OPTIMIZE table railcontent_search_indexes_staging');
-        DB::statement(
-            'RENAME TABLE railcontent_search_indexes TO railcontent_search_indexes_old,
+        if (app()->environment('testing')) {
+            DB::statement('ALTER TABLE railcontent_search_indexes RENAME TO railcontent_search_indexes_old');
+            DB::statement('ALTER TABLE railcontent_search_indexes_staging RENAME TO railcontent_search_indexes');
+        } else {
+            DB::statement('OPTIMIZE table railcontent_search_indexes_staging');
+            DB::statement(
+                'RENAME TABLE railcontent_search_indexes TO railcontent_search_indexes_old,
                                 railcontent_search_indexes_staging to railcontent_search_indexes'
-        );
+            );
+        }
         DB::statement('DROP TABLE railcontent_search_indexes_old');
         Log::debug('Finished Rebuilding Search Indexes');
     }
