@@ -425,7 +425,6 @@
     <script src="{{ asset('/marketing/js/pianote/vendor.js') }}"></script>
     <script src="{{ asset('/marketing/js/pianote/cart-sidebar.js') }}"></script>
     <script src="{{ asset('/marketing/js/pianote/app.js') }}"></script>
-    <script src="{{ asset('/marketing/parcel/pianote/shop-filters.js') }}"></script>
     <script src="{{ mix('/platform/js/app.js') }}"></script> 
 
     @yield('scripts')
