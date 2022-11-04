@@ -2,8 +2,10 @@
 
 namespace App\Modules\Content\Models;
 
+use App\Modules\Content\database\factories\InstructorFactory;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\Log;
 
 /**
@@ -12,6 +14,8 @@ use Illuminate\Support\Facades\Log;
  */
 class Instructor extends Content
 {
+    use HasFactory;
+
     private $fieldTypes = [
         'is_coach' => 'boolean',
         'is_coach_of_the_month' => 'boolean',
@@ -33,6 +37,11 @@ class Instructor extends Content
         $this->type = 'instructor';
         $this->language = 'en-US';
         $this->created_on = Carbon::now();
+    }
+
+    protected static function newFactory(): InstructorFactory
+    {
+        return InstructorFactory::new();
     }
 
     private function setField(string $key, $value): void
