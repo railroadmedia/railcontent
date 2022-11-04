@@ -775,7 +775,7 @@ Make this summer one to remember with the Summer Songs Bundle.',
                 'images' => [
                     'https://singeo.s3.amazonaws.com/sales/promos/october/harmony_bundle_banner.jpg'
                 ],
-                'overview' => "<h2 class=\"text-center font-extrabold text-lg md:text-xl lg:text-2xl mb-6\" style=\"font-weight: 900;\">What's included:</h2><img class='hidden md:inline' src='https://laravel-nova.s3.us-east-2.amazonaws.com/Singeo/product-image/harmony-bundle.png' alt='what is included image' /><img class='md:hidden mb-4' src='https://laravel-nova.s3.us-east-2.amazonaws.com/Singeo/product-image/harmony-bundle-m.png' alt='what is included image' />
+                'overview' => "<h2 class=\"text-center font-extrabold text-lg md:text-xl lg:text-2xl mb-6\" style=\"font-weight: 900;\">What's included:</h2><img class='hidden md:inline mb-4' src='https://laravel-nova.s3.us-east-2.amazonaws.com/Singeo/product-image/harmony-bundle.png' alt='what is included image' /><img class='md:hidden mb-4' src='https://laravel-nova.s3.us-east-2.amazonaws.com/Singeo/product-image/harmony-bundle-m.png' alt='what is included image' />
                 If you dream of singing beautiful harmonies and creating something extraordinary, then you need The Perfect Harmony Bundle.
 
 Kick your singing journey into gear with the Singer Starter Kit and learn to unleash the full potential of your voice. From warm-up exercise routines to tricks and techniques to help you vocalize with less tension and accurate pitch.

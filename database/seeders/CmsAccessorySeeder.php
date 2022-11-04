@@ -182,111 +182,6 @@ class CmsAccessorySeeder extends Seeder
                 ],
             ],
             [
-                "brand" => 2,
-                "product_type_id" => 2,
-                "name" => "Classical Piano Pieces",
-                "slug" => "classical-book",
-                "sku" => "classical-book",
-                "thumbnail" => "https://pianote.s3.amazonaws.com/sales/promos/july/classical_piano_book.png",
-                "badge_text" => "New",
-                "meta_desc" => "Welcome to the world of classical piano music (you can actually play)!",
-                "meta_img" => "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-103.png",
-                "short_desc" => "What good is learning classical piano if you don’t have beautiful music to play?",
-                "header_text" => "Classical Piano Pieces (You Can Actually Play)",
-                "price" => 39,
-                "discounted_price" => "",
-                "special_text" => "",
-                "overview" => "**Classical piano has a reputation.**
-
-Let’s be honest…
-
-Classical piano can seem a little elitist, even snobby. And that’s a shame. Because classical music is so beautiful.
-
-So we’re out to change that reputation.
-
-Welcome to the world of classical piano music (you can actually play)! This book is your gateway to famous composers, stunning piano pieces, and an entirely new and rewarding experience on the piano.
-
-It’s your repertoire of beautiful classical pieces that you can actually play (and that people will want to hear)!
-
-Here are some of our favorites:
-  - Ukrainian Folk Song by Ludwig van Beethoven
-  - Minuet in F Major by Wolfgang Amadeus Mozart
-  - Prelude in C Major by Johann Sebastian Bach
-  - Sonatina in B-flat Major by George Frideric Handel
-  - Waltz in A Minor by Frédéric Chopin
-And so many more!",
-                "features" => [
-                ],
-                "specs" => [
-                    [
-                        "title" => "Size",
-                        "desc" => '11" x 8.5"'
-                    ],
-                    [
-                        "title" => "Weight",
-                        "desc" => "1 lbs"
-                    ],
-                    [
-                        "title" => "Pages",
-                        "desc" => "92 pages"
-                    ],
-                ],
-                "visible" => true,
-                "sold_out" => false,
-                "guaranteed" => false,
-                "lifetime_access" => false,
-                "free_shipping" => false,
-                "images" => [
-                    "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-103.png",
-                    "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-132.png",
-                    "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-146.png",
-                    "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-100.png",
-                    "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-109.png",
-                    "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-111.png",
-                    "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-113.png"
-                ],
-                "sizeChart" => "",
-                "sizes" => [
-
-                ],
-                'bundle_img' => 'https://pianote.s3.amazonaws.com/sales/promos/july/classical_piano_book_list.jpg',
-                'bundle_desc' => 'What good is learning classical piano if you don’t have beautiful music to play? This NEW book is 92 pages full of beautiful pieces by famous classical composers that you can actually play! The perfect companion to The Classical Method, each piece has been hand-selected to be appropriate for your skill level - while still sounding beautiful. Beethoven, Chopin, Bach, they’re all in here.',
-            ],
-            [
-                "brand" => 1,
-                "product_type_id" => 2,
-                "name" => "Vater Drumeo 5A Drumsticks",
-                "slug" => "drumsticks",
-                "sku" => "Drumeo-VaterSticks",
-                "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/vater-sticks/cart-image.jpg",
-                "meta_desc" => "Made with hickory wood and up to 2X the moisture content of most drumstick manufacturers.",
-                "meta_img" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/vater-sticks/og-image.jpg",
-                "short_desc" => "Made with hickory wood and up to 2X the moisture content of most drumstick manufacturers.",
-                "header_text" => "",
-                "price" => 12.95,
-                "discounted_price" => "",
-                "special_text" => "",
-                "features" => [
-                ],
-                "specs" => [
-                ],
-                "visible" => true,
-                "sold_out" => false,
-                "guaranteed" => false,
-                "lifetime_access" => false,
-                "free_shipping" => false,
-                'bundle_img' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/drumsticks.jpg',
-                "bundle_desc" => "Our new Drumeo 5A Drumsticks by Vater -- made of hickory for strength and durability, featuring up to 2X the moisture content than most manufacturers for longer lasting sticks, and personally hand-rolled by Alan Vater to ensure they’re weighted and tone-matched to perfection.",
-                'bundle_free_shipping' => true,
-                "images" => [
-
-                ],
-                "sizeChart" => "",
-                "sizes" => [
-
-                ],
-            ],
-            [
                 "brand" => 1,
                 "product_type_id" => 2,
                 "name" => "Drumeo QuietPad",
@@ -379,6 +274,90 @@ And so many more!",
                 'bundle_free_shipping' => true,
                 "images" => [
 
+                ],
+                "sizeChart" => "",
+                "sizes" => [
+
+                ],
+            ],
+            [
+                "brand" => 1,
+                "product_type_id" => 2,
+                "name" => "Vater Drumeo 5A Drumsticks",
+                "slug" => "drumsticks",
+                "sku" => "Drumeo-VaterSticks",
+                "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/vater-sticks/cart-image.jpg",
+                "meta_desc" => "Made with hickory wood and up to 2X the moisture content of most drumstick manufacturers.",
+                "meta_img" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/vater-sticks/og-image.jpg",
+                "short_desc" => "Made with hickory wood and up to 2X the moisture content of most drumstick manufacturers.",
+                "header_text" => "",
+                "price" => 12.95,
+                "discounted_price" => "",
+                "special_text" => "",
+                "features" => [
+                ],
+                "specs" => [
+                ],
+                "visible" => true,
+                "sold_out" => false,
+                "guaranteed" => false,
+                "lifetime_access" => false,
+                "free_shipping" => false,
+                'bundle_img' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/drumsticks.jpg',
+                "bundle_desc" => "Our new Drumeo 5A Drumsticks by Vater -- made of hickory for strength and durability, featuring up to 2X the moisture content than most manufacturers for longer lasting sticks, and personally hand-rolled by Alan Vater to ensure they’re weighted and tone-matched to perfection.",
+                'bundle_free_shipping' => true,
+                "images" => [
+
+                ],
+                "sizeChart" => "",
+                "sizes" => [
+
+                ],
+            ],
+            [
+                "brand" => 1,
+                "product_type_id" => 2,
+                "name" => "Drummer Towels",
+                "slug" => "drummer-towels",
+                "sku" => "Drumeo-Towel",
+                "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/towel.jpg",
+                "meta_desc" => "Play the drums until you sweat - and then play some more.",
+                "meta_img" => "",
+                "short_desc" => "Play the drums until you sweat - and then play some more. 16” x 25”, navy with a 4” white Drumeo embroidered logo.",
+                "header_text" => "Drummer Towel",
+                "price" => 19,
+                "discounted_price" => "",
+                "special_text" => "",
+                "features" => [
+                    "Subtle and absorbent, this towel is perfect for those long practice sessions or live shows where you’re drumming up a sweat!"
+                ],
+                "specs" => [
+                    [
+                        "title" => "Sizing",
+                        "desc" => "16” x 25”"
+                    ],
+                    [
+                        "title" => "Color",
+                        "desc" => "Navy"
+                    ],
+                    [
+                        "title" => "Fabric",
+                        "desc" => "Terry Cotton Sport Towel"
+                    ],
+                    [
+                        "title" => "Logo",
+                        "desc" => "4” Drumeo logo (blue and white)."
+                    ],
+                ],
+                "visible" => true,
+                "sold_out" => false,
+                "guaranteed" => false,
+                "lifetime_access" => false,
+                "free_shipping" => false,
+                "images" => [
+                    "https://s3.amazonaws.com/drumeo-packs/Merch/towel/1-blue.jpg",
+                    "https://s3.amazonaws.com/drumeo-packs/Merch/towel/2-blue.jpg",
+                    "https://s3.amazonaws.com/drumeo-packs/Merch/towel/3-blue.jpg"
                 ],
                 "sizeChart" => "",
                 "sizes" => [
@@ -514,38 +493,53 @@ And so many more!",
                 ],
             ],
             [
-                "brand" => 1,
+                "brand" => 2,
                 "product_type_id" => 2,
-                "name" => "Drummer Towels",
-                "slug" => "drummer-towels",
-                "sku" => "Drumeo-Towel",
-                "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/towel.jpg",
-                "meta_desc" => "Play the drums until you sweat - and then play some more.",
-                "meta_img" => "",
-                "short_desc" => "Play the drums until you sweat - and then play some more. 16” x 25”, navy with a 4” white Drumeo embroidered logo.",
-                "header_text" => "Drummer Towel",
-                "price" => 19,
+                "name" => "Classical Piano Pieces",
+                "slug" => "classical-book",
+                "sku" => "classical-book",
+                "thumbnail" => "https://pianote.s3.amazonaws.com/sales/promos/july/classical_piano_book.png",
+                "badge_text" => "New",
+                "meta_desc" => "Welcome to the world of classical piano music (you can actually play)!",
+                "meta_img" => "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-103.png",
+                "short_desc" => "What good is learning classical piano if you don’t have beautiful music to play?",
+                "header_text" => "Classical Piano Pieces (You Can Actually Play)",
+                "price" => 39,
                 "discounted_price" => "",
                 "special_text" => "",
+                "overview" => "**Classical piano has a reputation.**
+
+Let’s be honest…
+
+Classical piano can seem a little elitist, even snobby. And that’s a shame. Because classical music is so beautiful.
+
+So we’re out to change that reputation.
+
+Welcome to the world of classical piano music (you can actually play)! This book is your gateway to famous composers, stunning piano pieces, and an entirely new and rewarding experience on the piano.
+
+It’s your repertoire of beautiful classical pieces that you can actually play (and that people will want to hear)!
+
+Here are some of our favorites:
+  - Ukrainian Folk Song by Ludwig van Beethoven
+  - Minuet in F Major by Wolfgang Amadeus Mozart
+  - Prelude in C Major by Johann Sebastian Bach
+  - Sonatina in B-flat Major by George Frideric Handel
+  - Waltz in A Minor by Frédéric Chopin
+And so many more!",
                 "features" => [
-                    "Subtle and absorbent, this towel is perfect for those long practice sessions or live shows where you’re drumming up a sweat!"
                 ],
                 "specs" => [
                     [
-                        "title" => "Sizing",
-                        "desc" => "16” x 25”"
+                        "title" => "Size",
+                        "desc" => '11" x 8.5"'
                     ],
                     [
-                        "title" => "Color",
-                        "desc" => "Navy"
+                        "title" => "Weight",
+                        "desc" => "1 lbs"
                     ],
                     [
-                        "title" => "Fabric",
-                        "desc" => "Terry Cotton Sport Towel"
-                    ],
-                    [
-                        "title" => "Logo",
-                        "desc" => "4” Drumeo logo (blue and white)."
+                        "title" => "Pages",
+                        "desc" => "92 pages"
                     ],
                 ],
                 "visible" => true,
@@ -554,14 +548,20 @@ And so many more!",
                 "lifetime_access" => false,
                 "free_shipping" => false,
                 "images" => [
-                    "https://s3.amazonaws.com/drumeo-packs/Merch/towel/1-blue.jpg",
-                    "https://s3.amazonaws.com/drumeo-packs/Merch/towel/2-blue.jpg",
-                    "https://s3.amazonaws.com/drumeo-packs/Merch/towel/3-blue.jpg"
+                    "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-103.png",
+                    "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-132.png",
+                    "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-146.png",
+                    "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-100.png",
+                    "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-109.png",
+                    "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-111.png",
+                    "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-113.png"
                 ],
                 "sizeChart" => "",
                 "sizes" => [
 
                 ],
+                'bundle_img' => 'https://pianote.s3.amazonaws.com/sales/promos/july/classical_piano_book_list.jpg',
+                'bundle_desc' => 'What good is learning classical piano if you don’t have beautiful music to play? This NEW book is 92 pages full of beautiful pieces by famous classical composers that you can actually play! The perfect companion to The Classical Method, each piece has been hand-selected to be appropriate for your skill level - while still sounding beautiful. Beethoven, Chopin, Bach, they’re all in here.',
             ],
             [
                 "brand" => 2,
