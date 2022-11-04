@@ -82,7 +82,11 @@ abstract class Command extends CommandBase
         $this->info("Dispatching $nJobs jobs.");
         $batch = Bus::batch($jobs)->name(class_basename($this))->dispatch();
         $this->info("Dispatched $nJobs jobs.");
-        $this->info("Check batch status: artisan batch:status $batch->id");
+        if ($batch) {
+            $this->info("Check batch status: artisan batch:status $batch->id");
+        } else {
+            $this->info("No batched status available");
+        }
 
         if (App::environment('local')) { //progress bar not useful when running vapor commands
             $batchId = $batch->id;
@@ -96,5 +100,17 @@ abstract class Command extends CommandBase
         }
 
         return true;
+    }
+
+    public function withExecutionTime(callable $function)
+    {
+        $this->info("Processing $this->name");
+        $timeStart = microtime(true);
+
+        call_user_func($function);
+
+        $diff = microtime(true) - $timeStart;
+        $sec = intval($diff);
+        $this->info("Finished $this->name ($sec s)");
     }
 }

@@ -105,7 +105,7 @@ export default {
                     this.position.left = this.roundedPixels(domRect.left + domRect.width);
                     this.position.top = this.roundedPixels(domRect.top);
                     this.message = message;
-                    document.body.classList.add('tw-fixed');
+                    document.body.classList.add('t-fixed');
                 }
             );
     },
@@ -140,7 +140,7 @@ export default {
 
         close() {
             this.message = null;
-            document.body.classList.remove('tw-fixed');
+            document.body.classList.remove('t-fixed');
         },
     }
 }

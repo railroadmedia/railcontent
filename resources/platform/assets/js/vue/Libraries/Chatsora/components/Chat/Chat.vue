@@ -138,7 +138,7 @@
             </div>
         </div>
 
-        <div class="cs-body tw-flex-grow tw-flex tw-flex-col tw-overflow-hidden">
+        <div class="cs-body tw-flex-grow tw-flex tw-flex-col tw-overflow-hidden tw-relative">
             <div
                 class="cs-messages-container tw-pt-4 tw-overflow-y-scroll tw-z-40"
                 v-if="showThread"
@@ -196,7 +196,7 @@
                 class="cs-messages-container tw-px-3 tw-pt-4 tw-overflow-y-scroll"
                 ref="messages"
                 v-show="currentTab == 'chat' && !showThread"
-                @scroll="messagesScrolled"
+                @scroll="containerScrolled"
             >
                 <div
                     class="tw-cursor-pointer tw-pb-5 tw-py-3 tw-flex tw-flex-row tw-place-content-center"
@@ -230,6 +230,7 @@
                 class="cs-messages-container tw-pt-4 tw-overflow-y-scroll"
                 ref="questions"
                 v-show="currentTab == 'questions' && !showThread"
+                @scroll="containerScrolled"
             >
                 <div
                     v-for="(item, index) in $_questions"
@@ -254,6 +255,16 @@
                     v-for="(message, index) in questionErrors"
                     :key="`error-question-${index}`"
                 >{{ message }}</div>
+            </div>
+            <div
+                class="tw-absolute tw-left-0 tw-right-0 tw-bottom-2 tw-flex tw-flex-row tw-place-content-center"
+                v-if="$_show_scroll"
+            >
+                <div
+                    class="tw-flex tw-items-center tw-place-content-center cs-round-btn cs-bg-brand tw-text-white tw-rounded-full tw-cursor-pointer"
+                    :class="brand"
+                    @click.stop.prevent="scrollDown()"
+                ><i class="fas fa-arrow-down"></i></div>
             </div>
         </div>
 
@@ -281,12 +292,12 @@
 
                         <div
                             class="tw-mt-6 tw-mx-6 cs-text-sm tw-text-center tw-text-white tw-tracking-tight tw-leading-relaxed"
-                            :class="{'tw-pb-2': $_short_username}"
+                            :class="{'t-pb-2': $_short_username}"
                             v-if="userBlock != null"
                         >Are you sure you want to block <span class="tw-font-bold">{{ userBlock.displayName }}</span> from this chat?</div>
                         <div class="tw-mt-3 tw-flex tw-flex-row tw-justify-center">
                             <div
-                                class="cs-btn cs-text-sm tw-cursor-pointer tw-cursor-pointer tw-rounded-full tw-leading-none tw-tracking-normal tw-font-bold focus:tw-outline-none focus:tw-shadow-outline tw-uppercase tw-text-white tw-w-28 tw-flex tw-justify-center"
+                                class="cs-btn cs-text-sm tw-cursor-pointer tw-cursor-pointer tw-rounded-full tw-leading-none tw-tracking-normal tw-font-bold focus:t-outline-none focus:t-shadow-outline tw-uppercase tw-text-white tw-w-28 tw-flex tw-justify-center"
                                 @click.stop.prevent="closeDialog(true)"
                             >confirm</div>
                         </div>
@@ -365,6 +376,7 @@ import RailchatService from '../../assets/js/services/railchat.js';
 import ChatEmoji from './ChatEmoji.vue';
 import ChatMessage from './ChatMessage.vue';
 import ChatUser from './ChatUser.vue';
+import 'linkifyjs/lib/linkify-string'
 
 export default {
     name: 'Chat',
@@ -417,7 +429,7 @@ export default {
         },
         messagesPageSize: {
             type: Number,
-            default: () => 50,
+            default: () => 20,
         },
         popupWindowSettings: {
             type: String,
@@ -459,6 +471,10 @@ export default {
             messagesAutoscroll: false,
             questionsAutoscroll: false,
             messagesPage: 1,
+            showScroll: false,
+            messagesBottom: true,
+            questionsBottom: true,
+            scrollingMessages: false,
         };
     },
     computed: {
@@ -498,12 +514,13 @@ export default {
             get() {
                 let questions = [...this.questions];
 
-                return questions.sort((a, b) => {
-                    let aUpVotes = a?.reaction_counts?.upvote || 0;
-                    let bUpVotes = b?.reaction_counts?.upvote || 0;
+                return questions
+                    .sort((a, b) => {
+                        let aUpVotes = a?.reaction_counts?.upvote || 0;
+                        let bUpVotes = b?.reaction_counts?.upvote || 0;
 
-                    return bUpVotes - aUpVotes;
-                });
+                        return bUpVotes - aUpVotes;
+                    });
             },
         },
         $_questions_count: {
@@ -559,6 +576,20 @@ export default {
                 return this.userBlock != null && this.userBlock.displayName.length <= 12;
             }
         },
+        $_show_scroll: {
+            cache: false,
+            get() {
+                return this.showScroll;
+            },
+        },
+    },
+    created: function () {
+        window.addEventListener('focus', this.restoreScrollState);
+        window.addEventListener('blur', this.setScrollState);
+    },
+    destroyed: function () {
+        window.removeEventListener('focus', this.restoreScrollState);
+        window.removeEventListener('blur', this.setScrollState);
     },
     mounted() {
         this.setupChat();
@@ -577,7 +608,6 @@ export default {
         this.chatEventBus.on('postQuestion', this.postQuestion);
         this.chatEventBus.on('messageMenuToggled', this.messageMenuToggledHandler);
 
-        // console.log(this.chatEventBus)
     },
     watch: {
         $_messages_count: function () {
@@ -595,32 +625,87 @@ export default {
     },
     methods: {
 
+        restoreScrollState() {
+            if (this.currentTab == 'chat') {
+                if (this.messagesBottom) {
+                    this.$nextTick(() => {
+                        this.scrollMessages(true);
+                    });
+                }
+            } else {
+                if (this.questionsBottom) {
+                    this.$nextTick(() => {
+                        this.scrollQuestions(true);
+                    });
+                }
+            }
+        },
+
+        setScrollState() {
+            if (this.currentTab == 'chat') {
+                let container = this.$refs.messages;
+                if (Math.ceil(container.scrollHeight - container.scrollTop) === container.clientHeight) {
+                    this.messagesBottom = true;
+                    this.scrollingMessages = false;
+                } else {
+                    this.messagesBottom = false;
+                }
+            } else {
+                let container = this.$refs.questions;
+                if (Math.ceil(container.scrollHeight - container.scrollTop) === container.clientHeight) {
+                    this.questionsBottom = true;
+                } else {
+                    this.questionsBottom = false;
+                }
+            }
+        },
+
+        scrollDown() {
+            if (this.currentTab == 'chat') {
+                this.scrollMessages(true);
+            } else {
+                this.scrollQuestions(true);
+            }
+        },
+
         popoutChat() {
             this.chatMenu = false;
 
             window.open(this.embedUrl, 'ChatWindow', this.popupWindowSettings);
         },
 
-        messagesScrolled() {
-            let container = this.$refs.messages;
+        containerScrolled() {
+            let container = this.currentTab === 'chat' ? this.$refs.messages : this.$refs.questions;
 
-            if (Math.ceil(container.scrollHeight - container.scrollTop) === container.clientHeight) {
-                this.messagesPage = 1;
+            if (this.currentTab === 'questions') {
+                this.showScroll = false;
+                return;
+            }
+
+            if (Math.ceil(container.scrollHeight - container.scrollTop) <= (container.clientHeight + 5)) {
+                if (this.currentTab === 'chat') {
+                    this.messagesPage = 1;
+                }
+                this.showScroll = false;
+                this.scrollingMessages = false;
+            } else if (!this.scrollingMessages) {
+                this.showScroll = true;
             }
         },
 
         loadMoreMessages() {
-            let firstMessage = this.$_messages[0];
             this.messagesPage++;
-            this.$nextTick(() => {
-                this.chatEventBus.$emit('scrollIntoView', { message: firstMessage });
-            });
+
+            // let firstMessage = this.$_messages[0];
+            // this.$nextTick(() => {
+            //     this.$root.$emit('scrollIntoView', { message: firstMessage });
+            // });
         },
 
         messageMenuToggledHandler({ message, value }) {
 
-            if (message.category == 'message') {
-                if (value == false) {
+            if (message.category === 'message') {
+                if (value === false) {
 
                     this.messagesMenusOpened = false;
 
@@ -632,7 +717,7 @@ export default {
                     this.messagesMenusOpened = true;
                 }
             } else {
-                if (value == false) {
+                if (value === false) {
 
                     this.questionsMenusOpened = false;
 
@@ -649,10 +734,11 @@ export default {
         scrollMessages(force = false) {
             let container = this.$refs.messages;
 
-            if (force || Math.ceil(container.scrollHeight - container.scrollTop) === container.clientHeight) {
+            if (force || Math.ceil(container.scrollHeight - container.scrollTop) <= (container.clientHeight + 100)) {
                 if (this.messagesMenusOpened) {
                     this.messagesAutoscroll = true;
                 } else {
+                    this.scrollingMessages = true;
                     this.messagesAutoscroll = false;
                     this.$nextTick(() => {
                         container.scroll({
@@ -661,13 +747,15 @@ export default {
                         });
                     });
                 }
+            } else {
+                this.scrollingMessages = false;
             }
         },
 
         scrollQuestions(force = false) {
             let container = this.$refs.questions;
 
-            if (force || Math.ceil(container.scrollHeight - container.scrollTop) === container.clientHeight) {
+            if (force || Math.ceil(container.scrollHeight - container.scrollTop) <= (container.clientHeight + 100)) {
                 if (this.questionsMenusOpened) {
                     this.questionsAutoscroll = true;
                 } else {
@@ -685,7 +773,7 @@ export default {
         scrollThreadMessages(force = false) {
             let container = this.$refs.threadMessages;
 
-            if (container && (force || Math.ceil(container.scrollHeight - container.scrollTop) === container.clientHeight)) {
+            if (container && (force || Math.ceil(container.scrollHeight - container.scrollTop) <= (container.clientHeight + 100))) {
                 this.$nextTick(() => {
                     container.scroll({
                         top: container.scrollHeight,
@@ -713,7 +801,7 @@ export default {
         },
 
         sendMessage() {
-            let payload = { text:  this.message.trim() };
+            let payload = { text:  this.stripHtml(this.message).trim() };
 
             this.message = '';
 
@@ -736,7 +824,7 @@ export default {
                 let message = {
                     'id': '',
                     'type': 'regular',
-                    'text': payload.text,
+                    'text': payload.text.linkify({ className: 'chat-message-link tw-break-all', target: '_blank' }),
                     'reply_count': 0,
                     'pinned': false,
                     'user': this.userData,
@@ -761,7 +849,7 @@ export default {
         },
 
         sendQuestion() {
-            let text = this.question.trim();
+            let text = this.stripHtml(this.question).trim();
 
             this.question = '';
 
@@ -779,7 +867,7 @@ export default {
                 let message = {
                     'id': '',
                     'type': 'regular',
-                    'text': text,
+                    'text': text.linkify({ className: 'chat-message-link tw-break-all', target: '_blank' }),
                     'reply_count': 0,
                     'pinned': false,
                     'user': this.userData,
@@ -897,7 +985,7 @@ export default {
 
                     this.chatChannel
                         .on('user.watching.start', ({ user, watcher_count }) => {
-                            this.$set(this.channelWatchers, user.id, user);
+                            this.channelWatchers[user.id] = user;
                             this.watcherCount = watcher_count;
                         });
 
@@ -934,9 +1022,14 @@ export default {
                     watchers: { limit, offset: 0 },
                 })
                 .then(({ watchers }) => {
+
+                    console.log(watchers)
+
                     if (watchers) {
                         watchers.forEach(user => {
-                            this.channelWatchers[user.id] = user;
+                            if (Math.abs(DateTime.fromISO(user.last_active).diffNow('hours').toObject().hours) < 4) {
+                              this.channelWatchers[user.id] = user;
+                            }
                         });
                     }
                 });
@@ -1036,6 +1129,8 @@ export default {
          */
         getMessageCopy(message) {
             let messageCopy = (({ id, type, text, reply_count, pinned }) => ({ id, type, text, reply_count, pinned }))(message);
+
+            messageCopy.text = this.stripHtml(messageCopy.text).linkify({ className: 'chat-message-link tw-break-all', target: '_blank' });
 
             messageCopy.user = this.getUserCopy(message.user);
 
@@ -1250,6 +1345,7 @@ export default {
          * Locates the internal message, main channel message or reply, and calls addMessageReaction
          */
         pushMessageReaction({ message, reaction, collection }) {
+            let scroll = !this.showScroll;
             collection.forEach((storedMessage) => {
                 if (message.parent_id && storedMessage.id == message.parent_id) {
                     storedMessage.replies.forEach((storedReplyMessage) => {
@@ -1276,9 +1372,10 @@ export default {
                 this.$nextTick(() => {
                     this.scrollThreadMessages();
                 });
-            } else if (this.messageThread == null) {
-                this.scrollMessages();
-                this.scrollQuestions();
+            } else if (this.messageThread == null && scroll) {
+                this.$nextTick(() => {
+                    this.scrollMessages(true);
+                });
             }
         },
 
@@ -1291,7 +1388,7 @@ export default {
             storedMessage.reaction_scores = messageRectionScores;
             if (reaction.user.id == this.userId) {
                 storedMessage.own_reactions.push({ type: reaction.type, score: reaction.score });
-                this.chatEventBus.$emit('messageOwnReactionUpdate', { message: storedMessage });
+                this.chatEventBus.emit('messageOwnReactionUpdate', { message: storedMessage });
             }
         },
 
@@ -1359,7 +1456,7 @@ export default {
                                 ownReaction.score = reaction.score;
                             }
                         });
-                        this.chatEventBus.$emit('messageOwnReactionUpdate', { message });
+                        this.chatEventBus.emit('messageOwnReactionUpdate', { message });
                     }
                 }
             });
@@ -1521,9 +1618,16 @@ export default {
             });
 
             if (selectedMessage) {
+                let scroll = !this.showScroll;
                 selectedMessage.reaction_counts[reaction] = (selectedMessage.reaction_counts[reaction] || 0) + 1;
 
                 selectedMessage.own_reactions.push({type: reaction, score: 1});
+
+                if (scroll) {
+                    this.$nextTick(() => {
+                        this.scrollMessages(true);
+                    });
+                }
             }
         },
 
@@ -1647,7 +1751,13 @@ export default {
 
         setCurrentTab(tab) {
             if (tab == 'chat' || tab == 'questions') {
+                this.setScrollState();
+                this.scrollingMessages = true;
                 this.currentTab = tab;
+                this.$nextTick(() => {
+                    this.restoreScrollState();
+                    this.containerScrolled();
+                });
             }
             this.chatMenu = false;
             this.showEmoji = false;
@@ -1655,9 +1765,15 @@ export default {
 
         getTabClasses(tab) {
             let active = ['tw-font-semibold', 'tw-text-white', 'tw-border-white'];
-            let inactive = ['cs-text-gray', 'tw-border-transparent'];
+            let inactive = ['cs-text-gray', 't-border-transparent'];
 
             return this.currentTab == tab ? active : inactive;
+        },
+
+        stripHtml(html) {
+            return html
+                .replace(/(<([^>]+)>)/gi, '')
+                .replace(/[\u200B-\u200D\uFEFF\u200E\u200F]/g, '');
         },
     },
 }
