@@ -51,6 +51,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('ProcessTrackings')->everyMinute();
         $schedule->command('content:rebuildSearchIndexes')->dailyAt('2:00');
+        $schedule->command('forums:rebuildSearchIndexes')->hourly();
     }
 
     /**
