@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
     "/platform/js/app.js": "/platform/js/app.js?id=24b9cb7ba24526c1d24133843b700d78",
+=======
+    "/platform/js/app.js": "/platform/js/app.js?id=35f2a15f1182bcc71c518be6b39bce5e",
+>>>>>>> master
     "/platform/js/profile.js": "/platform/js/profile.js?id=a13ed5f750a89e00edbe84934bd56773",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=9b1b997eda2b5545804b8d7649790e48",
     "/platform/js/books.js": "/platform/js/books.js?id=bd6874db5faa8414cda38fb1fa497d2c",
@@ -13,10 +17,14 @@
     "/platform/js/contact-email-form-marketing.js": "/platform/js/contact-email-form-marketing.js?id=c494f12f121babf27874ee1addb207eb",
     "/platform/js/contact-email-form.js": "/platform/js/contact-email-form.js?id=5c63f038ed8e4186806d0ef7e2c7cc37",
     "/platform/js/youtube-player-component.js": "/platform/js/youtube-player-component.js?id=fa034becc87a52ea151b981f707363b1",
+<<<<<<< HEAD
     "/platform/js/onboarding-component.js": "/platform/js/onboarding-component.js?id=79809daefacf428a42675c2d5cac6cca",
+=======
+    "/platform/js/onboarding-component.js": "/platform/js/onboarding-component.js?id=e9e0fafd6d23cf22ba997fec220732ea",
+>>>>>>> master
     "/platform/js/video-player-component.js": "/platform/js/video-player-component.js?id=f98ba345eddecdb098a81f664c5b1cba",
     "/platform/js/video-media-element-component.js": "/platform/js/video-media-element-component.js?id=be80547daecbd8c8d57d06ffa2862726",
-    "/platform/js/image-cropper-component.js": "/platform/js/image-cropper-component.js?id=1435b648dfa43ef38889583bd03e8adc",
+    "/platform/js/image-cropper-component.js": "/platform/js/image-cropper-component.js?id=83ad512db0ca2fef48e6e8a7df297e7a",
     "/platform/js/comments-component.js": "/platform/js/comments-component.js?id=2f5a3e5395a7cf91f450cb072fd2338d",
     "/platform/js/email-form-component.js": "/platform/js/email-form-component.js?id=49e491a00ddf3dda3c606d7a150398a4",
     "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=ad36d354a9935d195747a0af2bba042a",

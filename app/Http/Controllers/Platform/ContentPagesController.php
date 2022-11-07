@@ -227,7 +227,6 @@ class ContentPagesController extends BaseController
             ContentRepository::$bypassPermissions = true;
         }
 
-        ContentRepository::$availableContentStatues = false;
         ContentRepository::$pullFutureContent = true;
 
         $classicalMethodPack = null;
