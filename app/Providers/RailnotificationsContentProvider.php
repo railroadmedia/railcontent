@@ -28,7 +28,7 @@ private CommentService $commentService;
         ContentRepository::$bypassPermissions = true;
 
         $content = $this->contentService->getById($id);
-        $content['mobile_app_url'] = url()->route('v1.mobile.musora-api.content.show',['id' => $id]);
+        $content['mobile_app_url'] = url()->route('v1.mobile.musora-api.content.show',['id' => $id, 'brand' => $content['brand']]);
         return $content;
     }
 
