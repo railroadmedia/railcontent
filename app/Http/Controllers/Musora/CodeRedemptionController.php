@@ -92,4 +92,9 @@ class CodeRedemptionController extends BaseController
     {
         return view('musora.pages.action-codes.card-redeem-theme', ['newAccount' => true]);
     }
+
+    public function renderExistingAccountRedeemPage()
+    {
+        return view('musora.pages.action-codes.card-redeem-theme', ['newAccount' => false]);
+    }
 }

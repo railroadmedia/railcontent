@@ -21,4 +21,8 @@ Route::domain('{musoraDomain}')
                     [\App\Http\Controllers\Musora\CodeRedemptionController::class, 'hitLikeAGirlSubmission']);
         Route::get('/redeem',
                    [\App\Http\Controllers\Musora\CodeRedemptionController::class, 'renderNewAccountRedeemPage']);
+        Route::get(
+            '/redeem/existing',
+            [\App\Http\Controllers\Musora\CodeRedemptionController::class, 'renderExistingAccountRedeemPage']
+        );
     });
