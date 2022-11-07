@@ -315,7 +315,7 @@
             'image' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/toto-hold-the-line.jpg',
             'artist' => 'Toto',
             'song' => "Hold The Line",
-            'soundslice' => '202321',
+            'soundslice' => 't5bcc',
             'slices' => true,
         ],
         [
@@ -406,7 +406,7 @@
             'image' => 'https://d1923uyy6spedc.cloudfront.net/260343-card-thumbnail-maxres-1592340469.jpg',
             'artist' => 'Coldplay',
             'song' => "Yellow",
-            'soundslice' => '225940',
+            'soundslice' => 'NBLcc',
             'slices' => true,
         ],
         [
@@ -559,7 +559,7 @@
             'image' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/acdc-highway-to-hell.jpg',
             'artist' => 'AC/DC',
             'song' => "Highway To Hell",
-            'soundslice' => '229550',
+            'soundslice' => 'brjcc',
             'slices' => true,
         ],
         [
@@ -605,7 +605,7 @@
             'image' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/michael-jackson-billie-jean.jpg',
             'artist' => 'Michael Jackson',
             'song' => "Billie Jean",
-            'soundslice' => '229618',
+            'soundslice' => 'Qhjcc',
             'slices' => true,
         ],
         [
@@ -714,7 +714,7 @@
         @if(!empty($signup))
             @if(!empty($bonus['signup']))
                 <div class="w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 px-2 md:px-3 mb-7 md:mb-10">
-                    <div class="relative autoplay-video cursor-pointer overflow-hidden rounded-md" data-open="@if(!empty($dataOpen)){{$dataOpen}}@else{{str_replace(".","",(str_replace("/","",(str_replace(" ","",$bonus['artist'])))))}}@endif">
+                    <div class="relative autoplay-video cursor-pointer overflow-hidden rounded-md" data-open="@if(!empty($dataOpen)){{$dataOpen}}@else{{str_replace(".","",(str_replace("/","",(str_replace(" ","",$bonus['artist'])))))}}{{$bonus['soundslice']}}@endif">
                         <i class="absolute top-1/2 left-1/2 fas fa-play play-button" style="margin: -39px;"></i>
                         <div class="aspect-1:1 w-full bg-contain bg-center lazyload" data-bg="https://cdn.musora.com/image/fetch/w_470,q_auto:best/{{ $bonus['image'] }}"></div>
                     </div>
@@ -724,7 +724,7 @@
             @endif
         @else
             <div class="w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 px-2 md:px-3 mb-7 md:mb-10">
-                <div class="relative autoplay-video cursor-pointer overflow-hidden rounded-md" data-open="@if(!empty($dataOpen)){{$dataOpen}}@else{{str_replace(".","",(str_replace("/","",(str_replace(" ","",$bonus['artist'])))))}}@endif">
+                <div class="relative autoplay-video cursor-pointer overflow-hidden rounded-md" data-open="@if(!empty($dataOpen)){{$dataOpen}}@else{{str_replace(".","",(str_replace("/","",(str_replace(" ","",$bonus['artist'])))))}}{{$bonus['soundslice']}}@endif">
                     <i class="absolute top-1/2 left-1/2 fas fa-play play-button" style="margin: -39px;"></i>
                     <div class="aspect-1:1 w-full bg-contain bg-center lazyload" data-bg="https://cdn.musora.com/image/fetch/w_470,q_auto:best/{{ $bonus['image'] }}"></div>
                 </div>
@@ -732,12 +732,12 @@
                 <p class="leading-none">{{ $bonus['song'] }}</p>
             </div>
 
-            <div class="reveal text-center" id="{{ str_replace(".","",(str_replace("/","",(str_replace(" ","",$bonus['artist']))))) }}" data-reveal>
+            <div class="reveal text-center" id="{{ str_replace(".","",(str_replace("/","",(str_replace(" ","",$bonus['artist']))))) }}{{$bonus['soundslice']}}" data-reveal>
                 <div class="w-full relative overflow-hidden" style="padding-bottom: 85vh;">
                     <iframe class="fixed inset-0 h-full w-full absolute reset-on-close" frameborder="0" allowfullscreen="allowfullscreen" src=""
-                        @if(!empty($bonus['slices']))
+                            @if(!empty($bonus['slices']))
                             data-lazy-load-url="https://www.soundslice.com/slices/{{ $bonus['soundslice'] }}/embed/?api=1&amp;scroll_type=2&amp;branding=0"
-                        @else
+                            @else
                             data-lazy-load-url="https://www.soundslice.com/scores/{{ $bonus['soundslice'] }}/embed/?api=1&amp;scroll_type=2&amp;branding=0"
                         @endif ></iframe>
                 </div>
