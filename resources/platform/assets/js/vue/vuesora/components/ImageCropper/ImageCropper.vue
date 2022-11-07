@@ -194,6 +194,7 @@ export default {
                 dictInvalidFileType: 'Invalid File Type.',
                 acceptedFiles: '.jpg,.jpeg,.png,.bmp',
                 maxFilesize: 15,
+                maxThumbnailFilesize: 15,
                 hiddenInputContainer: '.dz-hidden-input',
                 autoProcessQueue: false,
             }),
