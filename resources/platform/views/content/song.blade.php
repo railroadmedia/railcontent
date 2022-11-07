@@ -12,11 +12,14 @@
     <script src="{{ mix('platform/js/lesson-page.js') }}"></script>
 
     <script type="text/javascript">
+    /*
         document.querySelectorAll('.song-play-button').forEach(item => {
             item.addEventListener("click", function () {
                 document.getElementById('open-exercise-button').click();
             });
         })
+
+        */
     </script>
 @endsection
 
@@ -62,7 +65,7 @@
         :user-id="{{ auth()->id() }}"
         user-name="{{ user()->display_name }}"
         user-avatar="{{ user()->profile_picture_url }}"
-        user-xp="{{ user()->total_xp }}"
+        user-x-p="{{ user()->total_xp }}"
         user-access-level="{{ user()->access_level }}"
         :is-admin="{{ json_encode(user()->isAdmin()) }}"
         :resources="{{ json_encode(array_merge($lessonContent['resources'] ?? [], $parent['resources'] ?? [])) }}"

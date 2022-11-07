@@ -132,7 +132,7 @@
                     </div>
                     <div class="flex flex-row grow">
                         <div class="flex flex-column relative">
-                            <iframe id="ssEmbed" :src="'https://www.soundslice.com/' + scoreOrSlice() + '/' + soundsliceSlug + '/embed/?api=1&scroll_type=2&branding=0&top_controls=1&u=' + userId" frameBorder="0" allowfullscreen @load="loading = false"></iframe>
+                            <iframe id="ssEmbed" :src="'https://www.soundslice.com/' + scoreOrSlice() + '/' + soundsliceSlug + '/embed/?api=1&scroll_type=2&branding=0&top_controls=1&u=' + userId + additionalParams()" frameBorder="0" allowfullscreen @load="loading = false"></iframe>
                         </div>
                     </div>
                 </div>
@@ -185,6 +185,10 @@ export default {
         description: {
             type: String,
             default: () => '',
+        },
+        additionalParamConfig: {
+            type: String,
+            default: null,
         },
         pages: {
             type: Array,
@@ -364,6 +368,14 @@ export default {
             }
 
             return 'slices';
+        },
+
+        additionalParams() {
+            if (this.additionalParamConfig) {
+                return this.additionalParamConfig;
+            } else {
+                return '';
+            }
         },
 
         scrollToPage(page) {

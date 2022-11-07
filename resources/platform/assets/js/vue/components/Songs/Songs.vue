@@ -5,6 +5,9 @@ const props = defineProps({
     brand: {
         type: String
     },
+    resources: {
+        type: Array,
+    },
     themeColor: {
         type: String
     },
@@ -26,7 +29,7 @@ const props = defineProps({
     songMeta: {
         type: String,
     },
-    partentTitle: {
+    parentTitle: {
         type: String,
         default: null,
     },
@@ -37,7 +40,7 @@ const props = defineProps({
         type: Array,
     },
     relatedLessons: {
-        type: Array,
+        type: Object,
     },
     isLiked: {
         type: Boolean,
@@ -49,7 +52,7 @@ const props = defineProps({
         type: [Number, String]
     },
     contentId: {
-        type: [Number, String]
+        type: Number
     },
     lockUnowned: {
         type: Boolean,
@@ -58,13 +61,16 @@ const props = defineProps({
     assignments: {
         type: Array,
     },
+    userId: {
+        type: Number,
+    },
     userName: {
         type: String,
     },
     userAvatar: {
         type: String,
     },
-    userXp: {
+    userXP: {
         type: [Number, String],
     },
     userAccessLevel: {
@@ -74,6 +80,9 @@ const props = defineProps({
         type: Boolean,
     }
 });
+onBeforeMount(() => {
+    console.log(props);
+})
 
 </script>
 
@@ -111,28 +120,34 @@ const props = defineProps({
                                 {{ songMeta }}
                             </p>
 
-                            <div class="flex flex-row flex-wrap play-complete-buttons">
+                            <div class="tw-flex tw-flex-col 3xl:tw-flex-row">
                                 <button
-                                    :class="`tw-btn-primary tw-bg-${brand} hover:tw-bg-${brand}-600 tw-mr-3 tw-mb-3 song-play-button`">
+                                    :class="`tw-btn-primary tw-bg-${brand} hover:tw-bg-${brand}-600 tw-mb-3 3xl:tw-mr-3 song-play-button`">
+                                    <i class="fas fa-waveform tw-mr-2 tw-text-base song-play-button"></i>
+                                    PLAY DRUMLESS TRACK
+                                </button>
+
+                                <button
+                                    :class="`tw-btn-primary tw-bg-${brand} hover:tw-bg-${brand}-600 tw-mb-3 3xl:tw-mr-3 song-play-button`">
                                     <i class="fas fa-play tw-mr-2 tw-text-base song-play-button"></i>
-                                    Play
+                                    PLAY FULL TRACK
                                 </button>
 
                                 <button
-                                    :class="`btn tw-mb-3 completeButton collapse-250 ${lessonProgress === 100 ? 'is-complete' : ''}`"
-                                    data-tooltip="Mark Lesson as Complete" :data-content-id="contentId">
-
-                                    <span :class="`incompleted bg-${themeColor} inverted text-${themeColor}`">
-                                        <i class="fas fa-check"></i>
-                                        <span class="ml-1 tw-text-lg">Mark as Complete</span>
+                                    :class="`tw-btn-secondary tw-text-[#00101D] tw-box-border tw-leading-none tw-h-[50px] dark:tw-text-white hover:tw-bg-black/10 dark:hover:tw-bg-white/10 completeButton ${lessonProgress === 100 ? 'is-complete' : ''}`"
+                                    data-tooltip="Mark Lesson as Complete" :data-content-id="contentId"
+                                    @click="markAsComplete"
+                                    >
+                                    <span :class="`incompleted`">
+                                        <i class="fas fa-check tw-mr-2 tw-text-base"></i>
+                                        Mark as Complete
                                     </span>
 
-                                    <span :class="`completed bg-${themeColor} text-white`">
-                                        <i class="fas fa-check"></i>
-                                        <span class="ml-1 tw-text-lg">Completed</span>
+                                    <span :class="`completed`">
+                                        <i class="fas fa-check tw-mr-2 tw-text-base"></i>
+                                        Completed
                                     </span>
                                 </button>
-
                             </div>
 
                             <div class="flex-row content-lesson-action-buttons">
@@ -153,11 +168,11 @@ const props = defineProps({
 
                     <content-catalogue catalogue-type="grid" :theme-color="themeColor" :use-theme-color="true"
                         :lock-unowned="lockUnowned" :pre-loaded-content="relatedLessons" :display-inline="true"
-                        :user-id="userId" />
+                        :user-id="String(userId)" />
                 </div>
 
 
-                <div v-if="assignments.length" style="height: 0px; overflow: hidden;">
+                <div v-if="assignments.length">
                     <div class="flex flex-row pv-3">
                         <h1 class="heading dark:tw-text-white">Assignments</h1>
                     </div>
@@ -167,9 +182,21 @@ const props = defineProps({
                                 <div class="flex flex-column grow">
                                     <ContentAssignment :theme-color="assignment.themeColor"
                                         :brand="assignment.themeColor" :timecode="assignment.timecode"
-                                        :id="assignment.id" :xp="assignment.xp" :title="assignment.title"
-                                        :soundslice-slug="assignment.soundsliceSlug" :completed="assignment.completed"
+                                        :id="assignment.id" :xp="assignment.xp" :title="'Original: ' + assignment.title"
+                                        soundslice-slug="rqN4c" :completed="assignment.completed"
                                         :position="index" :user-id="assignment.userId">
+                                    </ContentAssignment>
+                                    <ContentAssignment :theme-color="assignment.themeColor"
+                                        :brand="assignment.themeColor" :timecode="assignment.timecode"
+                                        :id="assignment.id" :xp="assignment.xp" :title="'Original+Settings: ' + assignment.title"
+                                        soundslice-slug="rqN4c" :completed="assignment.completed"
+                                        :position="index" :user-id="assignment.userId" additional-param-config="&layout=3&show_chords=0&scroll_type=1&recording_idx=2">
+                                    </ContentAssignment>
+                                    <ContentAssignment :theme-color="assignment.themeColor"
+                                        :brand="assignment.themeColor" :timecode="assignment.timecode"
+                                        :id="assignment.id" :xp="assignment.xp" :title="'Removed+Settings: ' + assignment.title"
+                                        soundslice-slug="rqN4c" :completed="assignment.completed"
+                                        :position="index" :user-id="assignment.userId" additional-param-config="&layout=3&show_chords=0&scroll_type=1&recording_idx=1">
                                     </ContentAssignment>
                                 </div>
                             </div>
@@ -195,7 +222,7 @@ const props = defineProps({
 
                 <content-catalogue catalogue-type="grid" :theme-color="themeColor" :use-theme-color="true"
                     :lock-unowned="lockUnowned" :pre-loaded-content="relatedLessons" :display-inline="true"
-                    :user-id="userId" />
+                    :user-id="String(userId)" />
             </div>
 
         </div>
