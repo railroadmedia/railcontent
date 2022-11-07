@@ -19759,6 +19759,7 @@ ul {
 /* gray colors */
 /* reaction colors */
 /* avatar colors */
+/* breakpoints */
 /* text colors */
 .cs-text-gray {
   color: #8C9698;
@@ -21522,6 +21523,9 @@ a:visited{
 }
 .tw-right-4{
   right: 1rem !important;
+}
+.tw-bottom-2{
+  bottom: 0.5rem !important;
 }
 .tw-bottom-4{
   bottom: 1rem !important;
@@ -24655,6 +24659,9 @@ a:visited{
   list-style: revert !important;
   padding-left: 40px !important;
   margin: 10px 0 !important;
+}
+.tw-break-words{
+  word-break: break-word !important;
 }
 /* Tailwind base style overrides */
 .body a:visited, .post-body a:visited {

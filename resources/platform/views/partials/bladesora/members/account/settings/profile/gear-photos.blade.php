@@ -51,5 +51,5 @@
 </div>
 <div class="flex flex-column tw-py-4">
     <p class="tw-text-sm text-grey-3 tw-italic dark:tw-text-[#9EC0DC]">For best results upload photo larger than 1280x720.</p>
-    <p class="tw-text-sm text-grey-3 tw-italic dark:tw-text-[#9EC0DC]">Max file size: <strong>5MB</strong></p>
+    <p class="tw-text-sm text-grey-3 tw-italic dark:tw-text-[#9EC0DC]">Max file size: <strong>15MB</strong></p>
 </div>
