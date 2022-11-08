@@ -51,4 +51,9 @@ class SalesController extends BaseController
     {
         return view('pianote.products.the-power-of-chords-bootcamp');
     }
+
+    public function PowerOfChordsGiveaway()
+    {
+        return view('pianote.products.the-power-of-chords-giveaway');
+    }
 }

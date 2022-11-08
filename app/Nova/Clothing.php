@@ -96,7 +96,7 @@ class Clothing extends Resource
             Currency::make('Price')->required(),
             Currency::make('Discounted Price', 'discounted_price')->hideFromIndex(),
             Text::make('Badge Text', 'badge_text')->hideFromIndex(),
-            Image::make('Thumbnail')
+            Image::make('Shop Card Thumbnail', 'thumbnail')
                 ->disk('nova_s3')
                 ->prunable()
                 ->hideFromIndex()
@@ -126,17 +126,17 @@ class Clothing extends Resource
 
                     return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
                 }),
-            Text::make('Thumbnail')->hideFromIndex()->hideFromDetail(),
-            Text::make('Short Description', 'short_desc')->hideFromIndex(),
+            Text::make('Shop Card Thumbnail', 'thumbnail')->hideFromIndex()->hideFromDetail(),
+            Text::make('Shop Card Description', 'short_desc')->hideFromIndex(),
             Text::make('Header Text', 'header_text')->hideFromIndex(),
             Text::make('Special Text', 'special_text')->hideFromIndex(),
-            Boolean::make('Visible')->default(true)->hideFromIndex(),
+            Boolean::make('Visible On Shop Page','visible')->default(true)->hideFromIndex(),
             Boolean::make('Sold Out', 'sold_out')->default(false)->hideFromIndex(),
             Boolean::make('Guarantee Badge', 'guaranteed')->default(false)->hideFromIndex(),
             Boolean::make('Lifetime Access', 'lifetime_access')->default(false)->hideFromIndex(),
             Boolean::make('Free Shipping', 'free_shipping')->default(false)->hideFromIndex(),
             Boolean::make('Bundle Free Shipping', 'bundle_free_shipping')->default(false)->hideFromIndex(),
-            Boolean::make('Size Case Sensitive', 'size_case_sensitive')->default(false)->hideFromIndex(),
+            Boolean::make('Size Case Sensitive', 'size_case_sensitive')->default(false)->hideFromIndex()->help('Size codes are uppercases by default and will be lowercases if checked'),
             Boolean::make('Physical')->default(true)->hideFromIndex()->hideFromDetail()->hideWhenCreating()->hideWhenUpdating(),
             Number::make('Display order', 'display_order')->required(),
             Flexible::make('Images')
@@ -157,7 +157,7 @@ class Clothing extends Resource
             Flexible::make('Sizes')
                 ->addLayout(SizeLayout::class)
                 ->preset(SizePreset::class),
-            Flexible::make('Features/Topics')
+            Flexible::make('Features')
                 ->addLayout(FeatureLayout::class)
                 ->preset(FeaturePreset::class),
             Flexible::make('Specs')

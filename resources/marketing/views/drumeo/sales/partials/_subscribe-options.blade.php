@@ -13,9 +13,9 @@
         <link href="{{ asset('/marketing/css/animate.css') }}" rel="stylesheet">
     @endsection
 
-    @include("drumeo.sales.partials._subscribe-bonus-list", [
+    @include("drumeo.sales.partials._subscribe-cards", [
         "membersArea" => true
         ])
 @else
-    @include('drumeo.sales.partials._subscribe-bonus-list')
+    @include('drumeo.sales.partials._subscribe-cards')
 @endif

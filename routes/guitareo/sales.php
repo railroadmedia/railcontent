@@ -35,6 +35,7 @@ Route::domain('{guitareoDomain}')
     Route::get('/500-songs-discount', [SalesController::class, 'songs500Discount']);
     Route::get('/shop/acoustic-guitar-made-easy', [SalesController::class, 'acousticGuitarMadeEasy']);
     Route::get('/shop/guitar-quest', [SalesController::class, 'guitarQuest']);
+    Route::get('/guitar-quest', [SalesController::class, 'guitarQuest']);
     Route::get('/guitar-quest-discount', [SalesController::class, 'guitarQuestDiscount']);
     Route::get('/guitar-quest-discount-tricks', [SalesController::class, 'guitarQuestDiscountTricks']);
     Route::get('/guitar-quest/testimonials', [SalesController::class, 'guitarQuestTestimonials']);

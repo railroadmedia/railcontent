@@ -1286,7 +1286,7 @@
                     <div class="instagram py-4 md:py-5 lg:py-6 rounded-xl w-full" style="background: #051124;">
                         <a href="https://instagram.com/drumeoofficial/" target="_blank" aria-label="instagram"> <i class="fab fa-instagram text-3xl md:text-5xl" style="background: linear-gradient(30deg, #FFD521 17%, #F20008 50%, #B900B4 83%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"></i>
                         </a>
-                        <h2 class="font-black leading-none my-2 text-white">927K</h2>
+                        <h2 class="font-black leading-none my-2 text-white">942K</h2>
                         <p class="uppercase leading-none md:tracking-widest" style="color:#E1306C">Followers</p>
                     </div>
                 </div>

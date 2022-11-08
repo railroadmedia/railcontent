@@ -99,7 +99,7 @@
         </div>
     </div>
     @hasSection('lesson-description')
-        <div class="px-3 py-6 sm:py-10 text-white" style="background-color:#00101d;">
+        <div class="px-3 py-6 sm:py-10">
             <div class="container mx-auto clearfix" style="max-width:700px">
                 <div class="text-left lesson-text">
                     @yield('lesson-description')

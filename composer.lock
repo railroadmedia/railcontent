@@ -176,16 +176,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.240.9",
+            "version": "3.240.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "ee0bde83538e5acbb4f84f79a12b651ccb19017b"
+                "reference": "4ab7d004ca11298bf400f3291f144d820fb97cd6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/ee0bde83538e5acbb4f84f79a12b651ccb19017b",
-                "reference": "ee0bde83538e5acbb4f84f79a12b651ccb19017b",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/4ab7d004ca11298bf400f3291f144d820fb97cd6",
+                "reference": "4ab7d004ca11298bf400f3291f144d820fb97cd6",
                 "shasum": ""
             },
             "require": {
@@ -264,9 +264,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.240.9"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.240.11"
             },
-            "time": "2022-11-03T18:18:02+00:00"
+            "time": "2022-11-07T19:23:11+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -319,33 +319,33 @@
         },
         {
             "name": "beste/clock",
-            "version": "2.1.0",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/beste/clock.git",
-                "reference": "201ed087ca0fd9763716335a567f698482fe0e62"
+                "reference": "24b2fc5716cdaf3269c3172d445e2d149f201241"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/beste/clock/zipball/201ed087ca0fd9763716335a567f698482fe0e62",
-                "reference": "201ed087ca0fd9763716335a567f698482fe0e62",
+                "url": "https://api.github.com/repos/beste/clock/zipball/24b2fc5716cdaf3269c3172d445e2d149f201241",
+                "reference": "24b2fc5716cdaf3269c3172d445e2d149f201241",
                 "shasum": ""
             },
             "require": {
-                "php": "~7.4.0 || ~8.0.0 || ~8.1.0",
-                "stella-maris/clock": "^0.1.4"
+                "php": "~8.1.0 || ~8.2.0",
+                "stella-maris/clock": "^0.1.6"
             },
             "provide": {
                 "psr/clock-implementation": "1.0"
             },
             "require-dev": {
-                "phpstan/extension-installer": "^1.1",
-                "phpstan/phpstan": "^1.0",
-                "phpstan/phpstan-phpunit": "^1.0",
-                "phpstan/phpstan-strict-rules": "^1.0",
-                "phpunit/phpunit": "^9.5.10",
-                "psalm/plugin-phpunit": "^0.16.0",
-                "vimeo/psalm": "^4.15"
+                "phpstan/extension-installer": "^1.2",
+                "phpstan/phpstan": "^1.9.1",
+                "phpstan/phpstan-phpunit": "^1.2.2",
+                "phpstan/phpstan-strict-rules": "^1.4.4",
+                "phpunit/phpunit": "^9.5.26",
+                "psalm/plugin-phpunit": "^0.16.1",
+                "vimeo/psalm": "^4.29"
             },
             "type": "library",
             "autoload": {
@@ -375,7 +375,7 @@
             ],
             "support": {
                 "issues": "https://github.com/beste/clock/issues",
-                "source": "https://github.com/beste/clock/tree/2.1.0"
+                "source": "https://github.com/beste/clock/tree/2.2.0"
             },
             "funding": [
                 {
@@ -383,28 +383,28 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-04-24T13:39:46+00:00"
+            "time": "2022-11-04T23:08:15+00:00"
         },
         {
             "name": "beste/json",
-            "version": "1.0.0",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/beste/json.git",
-                "reference": "6b02a023ffb0ca92d612ce4f5a3b4c2bd6e17df3"
+                "reference": "e8088bf55792177c37349db0030a710c05a2a87f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/beste/json/zipball/6b02a023ffb0ca92d612ce4f5a3b4c2bd6e17df3",
-                "reference": "6b02a023ffb0ca92d612ce4f5a3b4c2bd6e17df3",
+                "url": "https://api.github.com/repos/beste/json/zipball/e8088bf55792177c37349db0030a710c05a2a87f",
+                "reference": "e8088bf55792177c37349db0030a710c05a2a87f",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "php": "~7.4.0 || ~8.0.0 || ~8.1.0"
+                "php": "~8.1.0 || ~8.2.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^9.5.13"
+                "phpunit/phpunit": "^9.5.26"
             },
             "type": "library",
             "autoload": {
@@ -423,9 +423,13 @@
                 }
             ],
             "description": "A simple JSON helper to decode and encode JSON",
+            "keywords": [
+                "helper",
+                "json"
+            ],
             "support": {
                 "issues": "https://github.com/beste/json/issues",
-                "source": "https://github.com/beste/json/tree/1.0.0"
+                "source": "https://github.com/beste/json/tree/1.1.0"
             },
             "funding": [
                 {
@@ -433,7 +437,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-02-12T21:24:20+00:00"
+            "time": "2022-11-04T22:59:47+00:00"
         },
         {
             "name": "bordoni/phpass",
@@ -2839,16 +2843,16 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.272.1",
+            "version": "v0.273.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client-services.git",
-                "reference": "436943c42277545c2310fe5852835d7e3628a35a"
+                "reference": "827bbf2b7b20fa97e845122d3d91517e173e959f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/436943c42277545c2310fe5852835d7e3628a35a",
-                "reference": "436943c42277545c2310fe5852835d7e3628a35a",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/827bbf2b7b20fa97e845122d3d91517e173e959f",
+                "reference": "827bbf2b7b20fa97e845122d3d91517e173e959f",
                 "shasum": ""
             },
             "require": {
@@ -2877,9 +2881,9 @@
             ],
             "support": {
                 "issues": "https://github.com/googleapis/google-api-php-client-services/issues",
-                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.272.1"
+                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.273.0"
             },
-            "time": "2022-10-31T01:22:13+00:00"
+            "time": "2022-11-07T01:34:13+00:00"
         },
         {
             "name": "google/auth",
@@ -3609,22 +3613,22 @@
         },
         {
             "name": "inertiajs/inertia-laravel",
-            "version": "v0.6.3",
+            "version": "v0.6.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/inertiajs/inertia-laravel.git",
-                "reference": "540b953ec383364264f9bd633849db16560a4461"
+                "reference": "b00fe8cf741766b41de69978f9e90ee6d1470d36"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/inertiajs/inertia-laravel/zipball/540b953ec383364264f9bd633849db16560a4461",
-                "reference": "540b953ec383364264f9bd633849db16560a4461",
+                "url": "https://api.github.com/repos/inertiajs/inertia-laravel/zipball/b00fe8cf741766b41de69978f9e90ee6d1470d36",
+                "reference": "b00fe8cf741766b41de69978f9e90ee6d1470d36",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "laravel/framework": "^6.0|^7.0|^8.74|^9.0",
-                "php": "^7.2|~8.0.0|~8.1.0"
+                "php": "^7.2|~8.0.0|~8.1.0|~8.2.0"
             },
             "require-dev": {
                 "mockery/mockery": "^1.3.3",
@@ -3666,7 +3670,7 @@
             ],
             "support": {
                 "issues": "https://github.com/inertiajs/inertia-laravel/issues",
-                "source": "https://github.com/inertiajs/inertia-laravel/tree/v0.6.3"
+                "source": "https://github.com/inertiajs/inertia-laravel/tree/v0.6.4"
             },
             "funding": [
                 {
@@ -3674,7 +3678,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-06-27T23:21:15+00:00"
+            "time": "2022-11-08T12:44:02+00:00"
         },
         {
             "name": "intervention/image",
@@ -4252,16 +4256,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v9.38.0",
+            "version": "v9.39.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "abf198e443e06696af3f356b44de67c0fa516107"
+                "reference": "67e674709e1e7db14f304a871481f310822d68c5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/abf198e443e06696af3f356b44de67c0fa516107",
-                "reference": "abf198e443e06696af3f356b44de67c0fa516107",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/67e674709e1e7db14f304a871481f310822d68c5",
+                "reference": "67e674709e1e7db14f304a871481f310822d68c5",
                 "shasum": ""
             },
             "require": {
@@ -4434,7 +4438,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2022-11-01T14:05:55+00:00"
+            "time": "2022-11-08T14:47:39+00:00"
         },
         {
             "name": "laravel/nova",
@@ -5740,16 +5744,16 @@
         },
         {
             "name": "mobiledetect/mobiledetectlib",
-            "version": "2.8.39",
+            "version": "2.8.40",
             "source": {
                 "type": "git",
                 "url": "https://github.com/serbanghita/Mobile-Detect.git",
-                "reference": "0fd6753003fc870f6e229bae869cc1337c99bc45"
+                "reference": "43310fa0db4c6d5f4972c92b1354ae690d555284"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/serbanghita/Mobile-Detect/zipball/0fd6753003fc870f6e229bae869cc1337c99bc45",
-                "reference": "0fd6753003fc870f6e229bae869cc1337c99bc45",
+                "url": "https://api.github.com/repos/serbanghita/Mobile-Detect/zipball/43310fa0db4c6d5f4972c92b1354ae690d555284",
+                "reference": "43310fa0db4c6d5f4972c92b1354ae690d555284",
                 "shasum": ""
             },
             "require": {
@@ -5790,9 +5794,9 @@
             ],
             "support": {
                 "issues": "https://github.com/serbanghita/Mobile-Detect/issues",
-                "source": "https://github.com/serbanghita/Mobile-Detect/tree/2.8.39"
+                "source": "https://github.com/serbanghita/Mobile-Detect/tree/2.8.40"
             },
-            "time": "2022-02-17T19:24:25+00:00"
+            "time": "2022-11-08T16:30:55+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -7617,16 +7621,16 @@
         },
         {
             "name": "psy/psysh",
-            "version": "v0.11.8",
+            "version": "v0.11.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobthecow/psysh.git",
-                "reference": "f455acf3645262ae389b10e9beba0c358aa6994e"
+                "reference": "1acec99d6684a54ff92f8b548a4e41b566963778"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/f455acf3645262ae389b10e9beba0c358aa6994e",
-                "reference": "f455acf3645262ae389b10e9beba0c358aa6994e",
+                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/1acec99d6684a54ff92f8b548a4e41b566963778",
+                "reference": "1acec99d6684a54ff92f8b548a4e41b566963778",
                 "shasum": ""
             },
             "require": {
@@ -7687,9 +7691,9 @@
             ],
             "support": {
                 "issues": "https://github.com/bobthecow/psysh/issues",
-                "source": "https://github.com/bobthecow/psysh/tree/v0.11.8"
+                "source": "https://github.com/bobthecow/psysh/tree/v0.11.9"
             },
-            "time": "2022-07-28T14:25:11+00:00"
+            "time": "2022-11-06T15:29:46+00:00"
         },
         {
             "name": "ql/uri-template",
@@ -7950,16 +7954,16 @@
         },
         {
             "name": "railroad/mailora",
-            "version": "v3.0.2",
+            "version": "v3.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/mailora.git",
-                "reference": "451d7c7efff1fca6bd945f157eaadfceb5affdb0"
+                "reference": "19c64a4e2d4a64fb432274b1e29eee2a51354568"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/mailora/zipball/451d7c7efff1fca6bd945f157eaadfceb5affdb0",
-                "reference": "451d7c7efff1fca6bd945f157eaadfceb5affdb0",
+                "url": "https://api.github.com/repos/railroadmedia/mailora/zipball/19c64a4e2d4a64fb432274b1e29eee2a51354568",
+                "reference": "19c64a4e2d4a64fb432274b1e29eee2a51354568",
                 "shasum": ""
             },
             "require": {
@@ -8001,9 +8005,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/mailora/issues",
-                "source": "https://github.com/railroadmedia/mailora/tree/v3.0.2"
+                "source": "https://github.com/railroadmedia/mailora/tree/v3.0.3"
             },
-            "time": "2022-11-03T15:05:17+00:00"
+            "time": "2022-11-07T14:23:34+00:00"
         },
         {
             "name": "railroad/musora-api",
@@ -8011,12 +8015,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "8f96b75f35e749bdb2826b18b5f037346fba07e5"
+                "reference": "837bd97a06d378b3507b601571b515a44aea99c6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/8f96b75f35e749bdb2826b18b5f037346fba07e5",
-                "reference": "8f96b75f35e749bdb2826b18b5f037346fba07e5",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/837bd97a06d378b3507b601571b515a44aea99c6",
+                "reference": "837bd97a06d378b3507b601571b515a44aea99c6",
                 "shasum": ""
             },
             "require": {
@@ -8048,7 +8052,7 @@
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
                 "source": "https://github.com/railroadmedia/musora-api/tree/v2.0-railcontent-v2-integration"
             },
-            "time": "2022-11-03T08:28:39+00:00"
+            "time": "2022-11-07T09:06:46+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -8158,16 +8162,16 @@
         },
         {
             "name": "railroad/railanalytics",
-            "version": "v3.0.4",
+            "version": "v3.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railanalytics.git",
-                "reference": "ee7714e490280cc339526e9f9e3c0d19fead99a6"
+                "reference": "650fe3fc60f9cc775110b71cab024e5dd9e1d0a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railanalytics/zipball/ee7714e490280cc339526e9f9e3c0d19fead99a6",
-                "reference": "ee7714e490280cc339526e9f9e3c0d19fead99a6",
+                "url": "https://api.github.com/repos/railroadmedia/railanalytics/zipball/650fe3fc60f9cc775110b71cab024e5dd9e1d0a9",
+                "reference": "650fe3fc60f9cc775110b71cab024e5dd9e1d0a9",
                 "shasum": ""
             },
             "require": {
@@ -8194,9 +8198,9 @@
             "description": "Laravel analytics system for using tracking code in your application for google analytics/adwords, facebook pixel, etc.",
             "support": {
                 "issues": "https://github.com/railroadmedia/railanalytics/issues",
-                "source": "https://github.com/railroadmedia/railanalytics/tree/v3.0.4"
+                "source": "https://github.com/railroadmedia/railanalytics/tree/v3.0.5"
             },
-            "time": "2022-10-18T07:23:12+00:00"
+            "time": "2022-11-08T15:09:25+00:00"
         },
         {
             "name": "railroad/railchat",
@@ -8241,16 +8245,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "2.0.38",
+            "version": "2.0.39",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "4af188cb4f4ae0f8d8f5832b410c706b3b429b25"
+                "reference": "8c7b80f8d40673d603d064686e7ba1c3f7734ca5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/4af188cb4f4ae0f8d8f5832b410c706b3b429b25",
-                "reference": "4af188cb4f4ae0f8d8f5832b410c706b3b429b25",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/8c7b80f8d40673d603d064686e7ba1c3f7734ca5",
+                "reference": "8c7b80f8d40673d603d064686e7ba1c3f7734ca5",
                 "shasum": ""
             },
             "require": {
@@ -8304,22 +8308,22 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/2.0.38"
+                "source": "https://github.com/railroadmedia/railcontent/tree/2.0.39"
             },
-            "time": "2022-11-03T22:38:28+00:00"
+            "time": "2022-11-04T16:20:48+00:00"
         },
         {
             "name": "railroad/railforums",
-            "version": "v2.0.13",
+            "version": "2.0.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railforums.git",
-                "reference": "2db6007083737259a46be9544e8a2cb1dcca378d"
+                "reference": "b61aa1365e7d2028a5fded6ca04abd0c3baacdcf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railforums/zipball/2db6007083737259a46be9544e8a2cb1dcca378d",
-                "reference": "2db6007083737259a46be9544e8a2cb1dcca378d",
+                "url": "https://api.github.com/repos/railroadmedia/railforums/zipball/b61aa1365e7d2028a5fded6ca04abd0c3baacdcf",
+                "reference": "b61aa1365e7d2028a5fded6ca04abd0c3baacdcf",
                 "shasum": ""
             },
             "require": {
@@ -8358,22 +8362,22 @@
             "description": "Laravel forum system using entities",
             "support": {
                 "issues": "https://github.com/railroadmedia/railforums/issues",
-                "source": "https://github.com/railroadmedia/railforums/tree/v2.0.13"
+                "source": "https://github.com/railroadmedia/railforums/tree/2.0.14"
             },
-            "time": "2022-10-25T13:09:44+00:00"
+            "time": "2022-11-04T19:00:19+00:00"
         },
         {
             "name": "railroad/railnotifications",
-            "version": "v3.0.6",
+            "version": "v3.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railnotifications.git",
-                "reference": "cc9d394f53f435c356e299d5bedfec89162017ce"
+                "reference": "4cf4b3d2a268f22c00d949688a24ff8456f63b85"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railnotifications/zipball/cc9d394f53f435c356e299d5bedfec89162017ce",
-                "reference": "cc9d394f53f435c356e299d5bedfec89162017ce",
+                "url": "https://api.github.com/repos/railroadmedia/railnotifications/zipball/4cf4b3d2a268f22c00d949688a24ff8456f63b85",
+                "reference": "4cf4b3d2a268f22c00d949688a24ff8456f63b85",
                 "shasum": ""
             },
             "require": {
@@ -8424,9 +8428,9 @@
             "description": "Laravel notification system using entities",
             "support": {
                 "issues": "https://github.com/railroadmedia/railnotifications/issues",
-                "source": "https://github.com/railroadmedia/railnotifications/tree/v3.0.6"
+                "source": "https://github.com/railroadmedia/railnotifications/tree/v3.0.7"
             },
-            "time": "2022-10-13T20:26:27+00:00"
+            "time": "2022-11-07T13:44:11+00:00"
         },
         {
             "name": "railroad/railtracker",
@@ -8916,21 +8920,20 @@
         },
         {
             "name": "ramsey/uuid",
-            "version": "4.5.1",
+            "version": "4.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ramsey/uuid.git",
-                "reference": "a161a26d917604dc6d3aa25100fddf2556e9f35d"
+                "reference": "ad63bc700e7d021039e30ce464eba384c4a1d40f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/uuid/zipball/a161a26d917604dc6d3aa25100fddf2556e9f35d",
-                "reference": "a161a26d917604dc6d3aa25100fddf2556e9f35d",
+                "url": "https://api.github.com/repos/ramsey/uuid/zipball/ad63bc700e7d021039e30ce464eba384c4a1d40f",
+                "reference": "ad63bc700e7d021039e30ce464eba384c4a1d40f",
                 "shasum": ""
             },
             "require": {
                 "brick/math": "^0.8.8 || ^0.9 || ^0.10",
-                "ext-ctype": "*",
                 "ext-json": "*",
                 "php": "^8.0",
                 "ramsey/collection": "^1.0"
@@ -8962,7 +8965,6 @@
             },
             "suggest": {
                 "ext-bcmath": "Enables faster math with arbitrary-precision integers using BCMath.",
-                "ext-ctype": "Enables faster processing of character classification using ctype functions.",
                 "ext-gmp": "Enables faster math with arbitrary-precision integers using GMP.",
                 "ext-uuid": "Enables the use of PeclUuidTimeGenerator and PeclUuidRandomGenerator.",
                 "paragonie/random-lib": "Provides RandomLib for use with the RandomLibAdapter",
@@ -8994,7 +8996,7 @@
             ],
             "support": {
                 "issues": "https://github.com/ramsey/uuid/issues",
-                "source": "https://github.com/ramsey/uuid/tree/4.5.1"
+                "source": "https://github.com/ramsey/uuid/tree/4.6.0"
             },
             "funding": [
                 {
@@ -9006,7 +9008,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-09-16T03:22:46+00:00"
+            "time": "2022-11-05T23:03:38+00:00"
         },
         {
             "name": "rap2hpoutre/fast-excel",

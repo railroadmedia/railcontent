@@ -149,22 +149,22 @@
             <h3 class="text-white font-extrabold leading-normal mb-6">
                 We don’t believe in fine print, so here’s <br class="hidden sm:inline">everything you need to know:
             </h3>
-            <div class="md:grid md:grid-cols-2 md:gap-4 text-left mb-10 md:mb-16">
-                <div class="flex mb-4 md:mb-0" style="color:#D0E2E7;">
+            <div class="flex flex-wrap justify-center text-left mb-10 md:mb-16">
+                <div class="flex w-full sm:w-1/2 px-4 md:px-6 mb-4 md:mb-6" style="color:#D0E2E7;">
                     <i class="fas fa-check pt-1 mr-2" style="color:#D7182B"></i>
                     No purchase necessary and there are no age restrictions.
                 </div>
-                <div class="flex mb-4 md:mb-0" style="color:#D0E2E7;">
+                <div class="flex w-full sm:w-1/2 px-4 md:px-6 mb-4 md:mb-6" style="color:#D0E2E7;">
+                    <i class="fas fa-check pt-1 mr-2" style="color:#D7182B"></i>
+                    No location restrictions. We’ll ship it anywhere in the world.
+                </div>
+                <div class="flex w-full sm:w-1/2 px-4 md:px-6 mb-4 md:mb-6" style="color:#D0E2E7;">
                     <i class="fas fa-check pt-1 mr-2" style="color:#D7182B"></i>
                     No sneaky shipping fees. We’ll take care of it.
                 </div>
-                <div class="flex mb-4 md:mb-0" style="color:#D0E2E7;">
+                <div class="flex w-full sm:w-1/2 px-4 md:px-6" style="color:#D0E2E7;">
                     <i class="fas fa-check pt-1 mr-2" style="color:#D7182B"></i>
-                    Main prize winner must live in USA or Canada.
-                </div>
-                <div class="flex" style="color:#D0E2E7;">
-                    <i class="fas fa-check pt-1 mr-2" style="color:#D7182B"></i>
-                    One email entry per person, but… you’ll get instructions via email on how to get 10 more bonus entries!
+                    One email entry per person.
                 </div>
             </div>
             <div class="inline-block italic text-pianote py-4 px-6" style="background:#111F29;">

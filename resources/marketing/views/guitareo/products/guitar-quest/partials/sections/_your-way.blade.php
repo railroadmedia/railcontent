@@ -1,17 +1,17 @@
 {{-- Guitar Quest: Your Way --}}
-<section id="your_way" class="py-24 bg-top bg-contain bg-no-repeat" style="background-image: url({{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/your-way-background.png") }}); background-color: hsl(222, 100%, 3.92%); ">
+<section id="your_way" class="py-24 bg-top bg-contain bg-no-repeat" style="background-image: url('https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Fyour-way-background.png?ixlib=php-1.2.1&s=1d3ffa44cdd0ec51e5b840ea221057be'); background-color: hsl(222, 100%, 3.92%); ">
     <div class="max-w-screen-xl m-auto px-6 flex flex-col text-white">
         <div class="w-full m-auto text-white md:w-5/6">
             <div class="text-center mb-12 w-3/4 m-auto md:w-full">
-                <img src="{{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/guitar-quest-logo.png", ["auto" => "format", "w" => 200]) }}" width="200px" class="mb-4">
+                <img src="https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Fguitar-quest-logo.png?auto=format&ixlib=php-1.2.1&w=200&s=93e3b2dd7efe96ea0bea1b74fa75ec39" width="200px" class="mb-4">
                 <h2 class="uppercase font-bison-bold mb-6 text-5xl md:text-6xl">
                     <span class="">Play</span>
                     <span class="text-goldenrod underline">Your Way</span>
                 </h2>
                 <p class="font-semibold md:text-lg">Start today with any computer, laptop, tablet, or smartphone.</p>
             </div>
-            <img src="{{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/guitar-quest-spread.png", ["auto" => "format", "w" => 1000]) }}" class="hidden md:block mb-14">
-            <img src="{{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/guitar-quest-spread-mobile.png", ["auto" => "format", "w" => 1000]) }}" class="md:hidden mb-14">
+            <img src="https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Fguitar-quest-spread.png?auto=format&ixlib=php-1.2.1&w=1000&s=df023c19f6e003fc173d05fb6b168670" class="hidden md:block mb-14">
+            <img src="https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Fguitar-quest-spread-mobile.png?auto=format&ixlib=php-1.2.1&w=1000&s=656a315790a71d747084c64a59040b07" class="md:hidden mb-14">
             <div class="mb-12 md:mb-24">
                 <ul class="m-0 grid grid-cols-1 gap-4 list-none md:grid-cols-3">
                     <li class="w-full relative custom-list-style pl-4">
@@ -55,7 +55,7 @@
                     </p>
                 </div>
                 <div class="mx-auto w-7/12 order-first pb-12 md:w-full md:pl-4 lg:pb-0 lg:w-2/6 lg:order-none">
-                    <img src="{{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/guarantee-badge.png", ["auto" => "format", "w" => 250]) }}" width="250px" class="m-auto block">
+                    <img src="https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Fguarantee-badge.png?auto=format&ixlib=php-1.2.1&w=250&s=f3ffa5aa3cfb8a7b3c4b46b7d96dbaee" width="250px" class="m-auto block">
                 </div>
             </div>
         </div>

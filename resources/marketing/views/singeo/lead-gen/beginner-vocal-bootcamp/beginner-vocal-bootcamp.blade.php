@@ -159,6 +159,7 @@
 @endsection
 
 @section('body')
+
     <header class="header text-white text-center px-5 sm:px-6 py-6 md:py-20 lg:py-28 relative bg-no-repeat" style="background-color:#33005c;">
         <div class="mx-auto relative z-10 max-w-md md:max-w-5xl">
             <div class="flex flex-wrap items-center">
@@ -172,11 +173,11 @@
                     </h5>
                     <div class="flex justify-center items-center md:justify-start mb-2 sm:mb-5">
                         <div class="align-middle bg-white text-center rounded-lg inline-block overflow-hidden w-11 mb-2 md:mb-0">
-                            <p class="leading-none tracking-tighter text-xs py-0.5 text-white" style="background-color:#bb3744;"><strong>OCT</strong></p>
-                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">12</strong></p>
+                            <p class="leading-none tracking-tighter text-xs py-0.5 text-white" style="background-color:#bb3744;"><strong>NOV</strong></p>
+                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">10</strong></p>
                         </div>
                         <p class="leading-tight uppercase text-yellow ml-4">
-                            <a target="_blank" href="https://www.google.com/search?q=230pm+PDT" class="font-extrabold"><strong>Wednesday, Oct 12 @ 2:30pm PDT</strong> <i class="fal fa-info-circle"></i></a>
+                            <a target="_blank" href="https://www.google.com/search?q=11am+PDT" class="font-extrabold"><strong>Thursday, Nov 10 @ 11:00am PDT</strong> <i class="fal fa-info-circle"></i></a>
                             <br class="inline sm:hidden"> starts in<br class="hidden sm:inline">
                             <strong><span class="countdown-full hidden md:inline">A LIMITED TIME</span> <span class="countdown-small inline md:hidden">A LIMITED TIME</span></strong>
                         </p>
@@ -339,6 +340,7 @@
         </div>
     </section>
 
+
     <section class="py-20 bg-cover lazyload" style="background-position: 25% 50%;" data-bg="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/beginner-vocal-bootcamp/footer_bg_d.jpg">
         <div class="max-w-2xl lg:max-w-3xl mx-auto text-center text-white px-4">
             <img class="mb-4 w-3/4 sm:w-2/3 lazyload" data-src="https://cdn.musora.com/image/fetch/w_840,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/beginner-vocal-bootcamp/logo.png" alt="logo">
@@ -371,7 +373,7 @@
 @section('scripts')
 
     @include('singeo.lead-gen.partials._countdown',[
-        "countdownDate" => "2022/10/12"
+        "countdownDate" => "2022/11/10 11:00:00"
     ])
     <script type="text/javascript" src="/marketing/js/modal-autoplay.js"></script>
 @stop

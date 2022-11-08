@@ -450,16 +450,16 @@
                     <div class="py-4 md:py-5 lg:py-6 rounded-xl w-full" style="color:#cd201f;background: #051124;">
                         <a href="https://www.youtube.com/user/guitarlessonscom" target="_blank" aria-label="youtube"> <i class="fab fa-youtube text-3xl md:text-4xl"></i>
                         </a>
-                        <h2 class="hidden sm:block count font-black leading-none my-2 md:my-3 text-white" id="youtube-count" data-total-count="965000">0</h2>
-                        <h2 class="count block sm:hidden font-black leading-none my-2 md:my-3 text-white">965K</h2>
+                        <h2 class="hidden sm:block count font-black leading-none my-2 md:my-3 text-white" id="youtube-count" data-total-count="971000">0</h2>
+                        <h2 class="count block sm:hidden font-black leading-none my-2 md:my-3 text-white">971K</h2>
                         <p class="uppercase leading-none md:tracking-widest">Subs<span class="hidden sm:inline-block">cribers</span></p>
                     </div>
                 </div>
                 <div class="w-1/3 px-1 md:px-2 mb-2 md:mb-4">
                     <div class="py-4 md:py-5 lg:py-6 rounded-xl w-full" style="color:#3b5998;background: #051124;">
                         <a href="https://www.facebook.com/guitareoofficial" target="_blank" aria-label="facebook"> <i class="fab fa-facebook-f text-3xl md:text-4xl"></i> </a>
-                        <h2 class="hidden sm:block count font-black leading-none my-2 md:my-3 text-white" id="likes-count" data-total-count="335000">0</h2>
-                        <h2 class="count block sm:hidden font-black leading-none my-2 md:my-3 text-white">335K</h2>
+                        <h2 class="hidden sm:block count font-black leading-none my-2 md:my-3 text-white" id="likes-count" data-total-count="334000">0</h2>
+                        <h2 class="count block sm:hidden font-black leading-none my-2 md:my-3 text-white">334K</h2>
                         <p class="uppercase leading-none md:tracking-widest">Likes</p>
                     </div>
                 </div>

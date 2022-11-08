@@ -56,6 +56,7 @@
         "flatpickr": "^4.6.13",
         "imgix-core-js": "^2.3.2",
         "laravel-vapor": "^0.6.0",
+        "linkifyjs": "^3.0.0-beta.3",
         "lodash": "^4.17.19",
         "luxon": "^3.0.1",
         "mediaelement": "^4.2.8",

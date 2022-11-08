@@ -40,7 +40,7 @@
             <h1>Resources</h1>
             <p><a href="/beat/">The Drumeo Beat</a><br>
                 <a href="/beat/rudiments/">40 Drum Rudiments</a><br>
-                <a href="/40-songs/">40 Free Drum Songs</a><br>
+                <a href="/100-songs/">100 Free Drum Songs</a><br>
                 <a href="/free-playalongs/">9 Free Play-Alongs</a><br>
             <a href="/beat/videos/">Video Drum Lessons</a></p>
         </div>

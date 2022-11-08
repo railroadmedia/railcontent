@@ -2,13 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::domain('{drumeoDomain}')
-    ->middleware(['web_public'])
-    ->group(function () {
-    Route::group(['prefix' => '40-songs'],
+Route::domain('{drumeoDomain}')->group(function () {
+    Route::group(['prefix' => '100-songs'],
         function () {
-            Route::get('/', function () { return view('drumeo.lead-gen.40-songs.signup'); });
-            Route::get('/unlocked', function () { return view('drumeo.lead-gen.40-songs.unlocked'); });
+            Route::get('/', function () { return view('drumeo.lead-gen.100-songs.signup'); });
+            Route::get('/unlocked', function () { return view('drumeo.lead-gen.100-songs.unlocked'); });
         }
     );
     Route::group(['prefix' => 'coop3rdrumm3r'],

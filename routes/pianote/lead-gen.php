@@ -27,7 +27,6 @@ Route::domain('{pianoteDomain}')
     Route::group(['prefix' => 'chord-hacks' ],
         function () {
             Route::get('/', function () { return view('pianote.lead-gen.chord-hacks.signup'); });
-            Route::get('/piano', function () { return view('pianote.lead-gen.chord-hacks.signup-alt'); });
             Route::group(['prefix' => 'lessons' ],
                 function () {
                     Route::get('/', function () { return view('pianote.lead-gen.chord-hacks.lessons.lessons'); });
@@ -102,7 +101,6 @@ Route::domain('{pianoteDomain}')
     Route::get('/my-lessons/how-to-write-a-song',function () { return view('pianote.lead-gen.learn-to-play.pages.write-a-song'); } );
 
     Route::get('/getting-started',function () { return view('pianote.lead-gen.getting-started.pages.signup'); } );
-    Route::get('/getting-started-piano',function () { return view('pianote.lead-gen.getting-started.pages.signup-alt'); } );
     Route::get('/getting-started/lessons',function () { return view('pianote.lead-gen.getting-started.pages.lessons'); } );
     Route::get('/getting-started/lessons/now-what',function () { return view('pianote.lead-gen.getting-started.pages.now-what'); } );
     Route::get('/getting-started/lessons/scales',function () { return view('pianote.lead-gen.getting-started.pages.scales'); } );

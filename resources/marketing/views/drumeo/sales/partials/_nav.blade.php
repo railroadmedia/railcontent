@@ -120,8 +120,8 @@
                 "linkIcon" => ''
             ])
             @include('drumeo.sales.partials._nav-link', [
-                "linkName" => "40 Free Songs",
-                "linkUrl" => "/40-songs",
+                "linkName" => "100 Free Songs",
+                "linkUrl" => "/100-songs",
                 "linkIcon" => ''
             ])
         </div>

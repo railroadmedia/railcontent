@@ -53,6 +53,9 @@
             </div>
         </div>
     </section>
+    <a href="/personality-quiz" class="px-6 py-5 bg-pianote text-white text-center inline-block w-full">
+        <h4><strong>Take the Quiz &raquo;</strong></h4>
+    </a>
 
     @include('pianote.sales.footer')
 

@@ -1,13 +1,13 @@
 @extends('drumeo._partials.layout-template')
 
 @section('global-head')
-    <title>40 Drumming Anthems | Drumeo</title>
-    <meta name="description" content="Get expertly transcribed sheet music for 40 of drumming’s biggest songs (FREE).">
+    <title>100 Drumming Anthems | Drumeo</title>
+    <meta name="description" content="Get expertly transcribed sheet music for 100 of drumming’s biggest songs (FREE).">
     <!-- Social Media -->
     <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/lead-gen/40-songs/og-image.png" style="display: none;">
-    <meta property="og:title" content="40 Drumming Anthems | Drumeo">
-    <meta property="og:description" content="Get expertly transcribed sheet music for 40 of drumming’s biggest songs (FREE).">
-    <meta property="og:url" content="https://www.drumeo.com/40-songs/">
+    <meta property="og:title" content="100 Drumming Anthems | Drumeo">
+    <meta property="og:description" content="Get expertly transcribed sheet music for 100 of drumming’s biggest songs (FREE).">
+    <meta property="og:url" content="https://www.drumeo.com/100-songs/">
 
     @include('drumeo._partials._fonts')
 
@@ -18,12 +18,26 @@
     <link href="{{ asset('/marketing/parcel/drumeo/lead-gen-tw.css') }}" rel="stylesheet">
     <style>
         .lazyload {opacity: 0;}  .lazyloading {opacity: 1;transition: opacity 300ms;}
+        .edge-pitch {top:40px;}
+        @media (min-width: 768px) {  .edge-pitch {top:56px;}  }
+        .text-coaches { color: #fe9f13; }
     </style>
 @stop
 
 @section('global-body')
     @include("drumeo.sales.partials._nav")
 
+    <div class="shim w-full block h-11 sm:h-9" style="background-color:#010a2b;"></div>
+    <a href="/choose-your-trial" class="edge-pitch block text-center w-full whitespace-nowrap z-20 py-2 sm:py-1 fixed mx-auto bg-black text-white">
+        <div class="container mx-auto">
+            <div class="text-center sm:text-left inline-block align-middle hover:opacity-90 transition-opacity duration-300">
+                <h3 class="inline-block align-middle mr-2 leading-none font-bebas text-coaches">100 SONGS</h3>
+                <p class="inline-block align-middle mx-auto text-xs leading-tight"><strong>EXPANDED EDITION</strong>
+                    For a limited time, you can<br>
+                    grab the ultimate drummer’s songs pack, FREE.</p>
+            </div>
+        </div>
+    </a>
     <header class="text-white text-center sm:text-left pt-7 md:pt-20 px-6 pb-7 md:pb-0" style="background: #010a2b url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://drumeo-assets.s3.amazonaws.com/lead-gen/40-songs/header-background.jpg) center bottom/cover;">
         <div class="container mx-auto max-w-5xl">
             <div class="flex flex-wrap justify-center items-end lg:items-center">
@@ -33,16 +47,16 @@
                         <img src="https://cdn.musora.com/image/fetch/w_250,q_auto:best/https://drumeo-assets.s3.amazonaws.com/lead-gen/40-songs/phone-background.png" alt="phone-background">
                     </div>
                     <div class="relative inline-block align-bottom z-0 w-2/3" style="max-width:420px">
-                        <div class="absolute rounded-xl overflow-hidden bg-white bg-cover bg-center" style="top: 1.5%;left: 1.5%;right: 1.5%;bottom: 7%;background-image:url(https://drumeo-assets.s3.amazonaws.com/lead-gen/40-songs/tablet-screen.png);"></div>
+                        <div class="absolute rounded-xl overflow-hidden bg-white bg-cover bg-center" style="top: 1.5%;left: 1.5%;right: 1.5%;bottom: 7%;background-image:url(https://drumeo-assets.s3.amazonaws.com/lead-gen/40-songs/tablet-screen2.png);"></div>
                         <img src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://drumeo-assets.s3.amazonaws.com/lead-gen/40-songs/tablet-background.png" alt="tablet-background">
                     </div>
                 </div>
                 <div class="w-full sm:w-1/2 {{--lg:w-5/12--}} mt-5 sm:mt-0 {{--lg:mt-14--}}">
-                    <h2><strong>40 Drumming Anthems<br> Every. Single. Note.</strong></h2>
-                    <h6 class="mt-2 md:mt-4 lg:mt-6 mb-4 md:mb-7 lg:mb-8 leading-tight">
-                        Enter your email to get note-for-note <br class="inline md:hidden">
-                        sheet music + handy playback tools for <br class="inline md:hidden">
-                        40 of drumming’s biggest songs FREE.
+                    <h1 class="leading-none uppercase font-bebas"><span class="text-coaches">100 Drumming Anthems</span><br> Every. Single. Note.</h1>
+                    <h6 class="mt-2 md:mt-4 mb-4 md:mb-7 lg:mb-8 leading-tight">
+                        Enter your email to get note-for-note <br>
+                        sheet music + handy playback tools for <br>
+                        <s class="opacity-50">40</s> <strong class="text-coaches">100</strong> of drumming’s biggest songs FREE.
                     </h6>
                     <div class="mx-auto sm:mx-0 text-center" style="max-width:470px">
                         @include("drumeo.lead-gen.partials.sign-up-form-tw", [
@@ -57,22 +71,26 @@
         </div>
     </header>
 
-    <section class="text-center text-white relative py-8 md:py-10 lg:py-16 px-4" style="background-color:#000318;">
-        <div class="container mx-auto">
+    <section class="text-center relative py-8 md:py-10 lg:py-16 px-4">
+        <div class="container max-w-6xl mx-auto">
             <h2 class="mb-4 md:mb-5">
                 <strong>All the hits.</strong>
             </h2>
-            <h6 class="leading-normal text-light-navy mb-6 md:mb-12 lg:mb-16">
-                Out of {{ Prices::$songs }}+ songs inside Drumeo (our super-awesome membership<br class="hidden md:inline">
-                 site), these are the 40 songs drummers love to play the most. So we thought<br class="hidden md:inline">
-                  we’d let you get in on the fun. Scroll down to find your favorites.
+            <h6 class="leading-normal mb-6 md:mb-12 lg:mb-16 sm:px-4">
+                Out of {{ Prices::$songs }}+ songs inside Drumeo, these are the <s class="opacity-50">40</s> <strong>100</strong> songs drummers love to play the most– and now <br class="hidden lg:inline">
+                it’s your turn. Scroll down to find your favorites and enter your email to get ALL the songs totally free.
             </h6>
-
-            @include('drumeo.lead-gen.40-songs._songs',[
-                "dataOpen" => "signUpModal",
-            ])
+            <div class="relative">
+                @include('drumeo.lead-gen.100-songs._songs',[
+                    "signup" => true,
+                    "dataOpen" => "signUpModal",
+                ])
+                <div class="h-96 absolute bottom-0 left-0 right-0" style="background:linear-gradient(to bottom, transparent, #fff 90%);"></div>
+            </div>
+            <h4 class="leading-tight"><strong><em>…and more! For a limited time,<br class="hidden sm:inline"> you’ll get 100 SONGS total.</em></strong></h4>
         </div>
     </section>
+    <div class="relative h-5 sm:h-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #000318 calc(50% + 1px));"></div>
     <section class="songs-info text-center text-white relative overflow-hidden py-8 md:py-14 lg:py-24" style="background-color:#000318;">
         <div class="container mx-auto">
             <h2 class="mb-4 md:mb-5">
@@ -135,11 +153,12 @@
     <section class="text-center py-14 md:py-24 lg:py-32 text-white bg-black bg-center bg-cover lazyload" data-bg="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://drumeo-assets.s3.amazonaws.com/lead-gen/40-songs/order-background.jpg">
         <div class="container mx-auto">
             <div class="w-full px-2 md:px-3 text-center">
-                <h1><strong>40 Drumming Anthems<br> Every. Single. Note.</strong></h1>
-                <h4 class="mt-5 lg:mt-6 mb-6 lg:mb-9 leading-normal">
-                    Enter your email to get note-for-note sheet music + handy<br class="hidden md:inline">
-                    playback tools for 40 of drumming’s biggest songs FREE.
-                </h4>
+                <h1 class="leading-none uppercase font-bebas"><span class="text-coaches">100 Drumming Anthems</span><br> Every. Single. Note.</h1>
+                <p class="text-coaches my-2 sm:my-3">EXPANDED EDITION</p>
+                <h5 class="mb-6 lg:mb-9 leading-normal">
+                    <strong>For a LIMITED TIME, you’ll get 100 Drumeo Songs totally FREE.</strong><br>
+                    <em>Enter your email to grab note-for-note sheet music & handy playalong tools.</em>
+                </h5>
                 <div class="mx-auto" style="max-width:700px">
                     @include("drumeo.lead-gen.partials.sign-up-form-tw", [
                             "formId" => "Drumeo - Engagement - Trigger - 40S - Web Form",
@@ -157,7 +176,7 @@
                 <strong>
                     Enter your email to get note-for-note <br class="inline md:hidden">
                     sheet music + handy playback tools for <br class="inline md:hidden">
-                    40 of drumming’s biggest songs FREE.
+                    100 of drumming’s biggest songs FREE.
                 </strong>
             </h4>
             @include("drumeo.lead-gen.partials.sign-up-form-tw", [
@@ -168,7 +187,6 @@
             ])
         </div>
     </div>
-
     @include("drumeo.sales.partials._footer")
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>

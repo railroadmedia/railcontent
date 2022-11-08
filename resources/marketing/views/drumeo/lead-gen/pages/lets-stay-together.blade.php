@@ -126,8 +126,8 @@
         <br><br>
         In the meantime, enjoy these 40 free charts of drumming’s biggest songs!</em>
 </p>
-<a href="/40-songs/unlocked"><img class="w-full max-w-md lg:max-w-lg rounded-xl mx-auto my-5 hover:opacity-90" src="https://drumeo-assets.s3.amazonaws.com/lead-gen/40-songs/40-song-ad.png"></a>
-<a href="/40-songs/unlocked" class="join hover:opacity-90">CLICK HERE &raquo;</a>
+<a href="/100-songs/unlocked"><img class="w-full max-w-md lg:max-w-lg rounded-xl mx-auto my-5 hover:opacity-90" src="https://drumeo-assets.s3.amazonaws.com/lead-gen/40-songs/40-song-ad.png"></a>
+<a href="/100-songs/unlocked" class="join hover:opacity-90">CLICK HERE &raquo;</a>
 <div class="social-media">
     <a href="https://www.youtube.com/freedrumlessons/" target="_blank" class="youtube"><i class="fab fa-youtube"></i></a>
     <a href="https://facebook.com/drumeo/" target="_blank" class="facebook"><i class="fab fa-facebook-f"></i></a>

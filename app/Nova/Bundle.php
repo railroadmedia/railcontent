@@ -122,7 +122,7 @@ class Bundle extends Resource
                 ->preset(ImagePreset::class),
             Markdown::make('Overview')
                 ->hideFromIndex(),
-            Boolean::make('Visible')->default(false)->hideFromIndex(),
+            Boolean::make('Visible On Shop Page')->default(false)->hideFromIndex()->hideFromDetail()->hideWhenCreating()->hideWhenUpdating(),
             Boolean::make('Sold Out', 'sold_out')->default(false)->hideFromIndex(),
             Boolean::make('Guarantee Badge', 'guaranteed')->default(false)->hideFromIndex(),
             Boolean::make('Free Shipping', 'free_shipping')->default(false)->hideFromIndex(),

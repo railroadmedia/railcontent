@@ -4,6 +4,7 @@ namespace App\Modules\Content\Providers;
 
 use App\Modules\Content\Console\Commands\CoachBulkDataUpdate;
 use App\Modules\Content\Console\Commands\CoachBulkImageUpdate;
+use App\Modules\Content\Console\Commands\RebuildSearchIndexes;
 use App\Modules\Content\Models\ContentField;
 use App\Modules\Content\Observers\ContentFieldObserver;
 use Illuminate\Console\Scheduling\Schedule;
@@ -25,6 +26,7 @@ class ContentServiceProvider extends ServiceProvider
         $this->commands([
             CoachBulkDataUpdate::class,
             CoachBulkImageUpdate::class,
+            RebuildSearchIndexes::class
         ]);
 
         $this->callAfterResolving(Schedule::class, function (Schedule $schedule) {

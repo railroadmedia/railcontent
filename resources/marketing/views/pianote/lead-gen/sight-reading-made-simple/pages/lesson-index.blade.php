@@ -17,22 +17,6 @@
         </div>
     </div>
 
-    <div class="container jordan-message mx-auto lg:max-w-6xl flex flex-wrap items-center">
-        <div class="w-full md:w-1/4 lg:w-1/5 text-center px-4">
-            <img class="mx-auto" src="https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/lisa-witt.jpg" alt="lisa-witt">
-        </div>
-        <div class="w-full md:w-3/4 lg:w-4/5 px-4">
-            <div class="medium-heading mt-4 mb-2 lg:mt-6">Start Reading Music On The Piano In Minutes!</div>
-            <p class="small-body">
-                Reading music can be daunting, but it doesn't have to be! In these beginner focused lessons you'll learn how to start reading music in just a few minutes. By the end, you'll be able to pay songs by reading notes on the page.
-            </p>
-        </div>
-        <div class="w-full px-4 mt-3 text-center">
-            <a class="join smaller mb-2 sm:mb-0 sm:mr-4" href="https://d1923uyy6spedc.cloudfront.net/234984-resource-1571407196.pdf">DOWNLOAD NOTE VALUE SHEET</a>
-            <a class="join smaller" href="https://d1923uyy6spedc.cloudfront.net/Symbols%20Glossary%20v2-1656630668.pdf">DOWNLOAD MUSIC SYMBOLS GLOSSARY</a>
-        </div>
-    </div>
-
     @include('pianote.lead-gen.partials.series1',[
         "customSize" => "w-full md:w-1/2",
         "lessons" => [
@@ -67,5 +51,5 @@
         ],
     ])
 
-    @include('pianote.lead-gen.learn-to-play.elements.red-signup')
+    @include('lead-gen.partials._7-day-trial-offer')
 @stop
