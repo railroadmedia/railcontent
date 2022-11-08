@@ -47,6 +47,12 @@
 </template>
 
 <script>
+/* ---------------------------------------------------------------------
+
+                     OLD SOUNDSLICE COMPONENT
+TODO: Remove in RoutinesCatalogue.vue to use the new SoundSlice component
+
+------------------------------------------------------------------------*/
 import ContentService from '../../assets/js/services/content';
 import LoadingAnimation from '../LoadingAnimation/LoadingAnimation';
 import ProgressTracker from '../../assets/js/classes/progress-tracker';
