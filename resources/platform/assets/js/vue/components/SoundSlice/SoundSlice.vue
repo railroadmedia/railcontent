@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, onBeforeUnmount, ref } from 'vue';
+import { onMounted, onBeforeUnmount } from 'vue';
 import LoadingAnimation from '../../vuesora/components/LoadingAnimation/LoadingAnimation.vue';
 
 const props = defineProps({
