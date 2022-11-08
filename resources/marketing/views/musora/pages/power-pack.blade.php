@@ -232,12 +232,8 @@
     </style>
 @endsection
 
-@section('body-data')
-    x-data = '{
-    modal: false,
-    trailer: false,
-    }'
-@endsection
+@section('body-class', 'dark')
+
 <!-- Main -->
 @section('layout-body')
     @foreach ($errors->all() as $error)

@@ -20,9 +20,19 @@ Route::domain('{musoraDomain}')
         Route::post('hlag-submit',
                     [\App\Http\Controllers\Musora\CodeRedemptionController::class, 'hitLikeAGirlSubmission']);
         Route::get('/redeem',
-                   [\App\Http\Controllers\Musora\CodeRedemptionController::class, 'renderNewAccountRedeemPage']);
+                   [\App\Http\Controllers\Musora\CodeRedemptionController::class, 'renderNewAccountRedeemPage']
+    );
         Route::get(
             '/redeem/existing',
             [\App\Http\Controllers\Musora\CodeRedemptionController::class, 'renderExistingAccountRedeemPage']
         );
+        Route::get('/roland',
+                   [\App\Http\Controllers\Musora\CodeRedemptionController::class, 'roland']
+        );
+        Route::get('/sonor',
+                   [\App\Http\Controllers\Musora\CodeRedemptionController::class, 'sonor']);
+        Route::post(
+            '/access-codes/redeem',
+            Railroad\Ecommerce\Controllers\AccessCodeController::class . '@claim'
+        )->name('access-codes.form-claim');
     });

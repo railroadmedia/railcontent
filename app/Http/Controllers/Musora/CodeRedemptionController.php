@@ -90,11 +90,23 @@ class CodeRedemptionController extends BaseController
 
     public function renderNewAccountRedeemPage(    )
     {
-        return view('musora.pages.action-codes.card-redeem-theme', ['newAccount' => true]);
+        return view('musora.pages.access-code-redeem.access-code-redeem-page', ['newAccount' => true]);
     }
 
     public function renderExistingAccountRedeemPage()
     {
-        return view('musora.pages.action-codes.card-redeem-theme', ['newAccount' => false]);
+        return view('musora.pages.access-code-redeem.access-code-redeem-page', ['newAccount' => false]);
     }
+
+    public function roland()
+    {
+        return view('pianote.sales.roland');
+    }
+
+    public function sonor()
+    {
+        return view('musora.pages.sonor');
+    }
+
+
 }
