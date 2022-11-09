@@ -15,7 +15,7 @@
 
 <!-- Main -->
 @section('layout-body')
-    <div class="promo-banner text-white py-1 mt-10 md:mt-14 lg:mt-0" style="background:linear-gradient(75.93deg, #00C9AC 0%, #0B76DB 32.62%, #8300E9 65.25%, #F61A30 92.11%)">
+    <div class="promo-banner text-white py-1 mt-10 md:mt-14 lg:mt-0 hidden md:block" style="background:linear-gradient(75.93deg, #00C9AC 0%, #0B76DB 32.62%, #8300E9 65.25%, #F61A30 92.11%)">
         <div class="container mx-auto relative z-10">
             <div class="text text-center flex justify-center items-center">
                 <img class="logo h-11" src="https://musora-center.s3.amazonaws.com/recitals/MusoraWinterRecital-logo.png">
@@ -51,10 +51,7 @@
     <section class="py-5 md:py-10 lg:py-16" style="background:linear-gradient(74.85deg, rgba(0, 201, 172, 0.1) 0%, rgba(11, 118, 219, 0.1) 32.1%, rgba(131, 0, 233, 0.1) 64.2%, rgba(246, 26, 48, 0.1) 90.64%);">
         <div class="container mx-auto max-w-3xl">
             <div id="form" class="anchor"></div>
-            <iframe class="google-form w-full" src="https://docs.google.com/forms/d/e/1FAIpQLSe1OVOvfpYBC16bvflk_bB8rCv1GQ42DjgmyF73woI1RqnO0Q/viewform?embedded=true" height="2177" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
-            <div class="max-w-2xl mx-auto px-5 md:px-3 mt-5">
-                <a class="btn-primary w-full mx-auto bg-musora border-none" href="/members">Submit now</a>
-            </div>
+            <iframe class="google-form w-full" src="https://docs.google.com/forms/d/e/1FAIpQLSe1OVOvfpYBC16bvflk_bB8rCv1GQ42DjgmyF73woI1RqnO0Q/viewform?embedded=true" height="1110" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
         </div>
     </section>
 @stop
