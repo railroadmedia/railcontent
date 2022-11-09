@@ -99,18 +99,18 @@ Route::domain('{guitareoDomain}')->group(function () {
 
     Route::group(['prefix' => 'chords-for-hit-songs' ],
         function () {
-            Route::get('/', function () { return view('lead-gen.chords-for-hit-songs.signup'); });
-            Route::get('/thank-you', function () { return view('lead-gen.chords-for-hit-songs.thank-you'); });
-            Route::get('/lessons', function () { return view('lead-gen.chords-for-hit-songs.lessons'); });
+            Route::get('/', function () { return view('guitareo.lead-gen.chords-for-hit-songs.signup'); });
+            Route::get('/thank-you', function () { return view('guitareo.lead-gen.chords-for-hit-songs.thank-you'); });
+            Route::get('/lessons', function () { return view('guitareo.lead-gen.chords-for-hit-songs.lessons'); });
             Route::group(['prefix' => 'lessons' ],
                 function () {
-                    Route::get('/', function () { return view('lead-gen.chords-for-hit-songs.lessons'); });
-                    Route::get('/1', function () { return view('lead-gen.chords-for-hit-songs.lessons.1'); });
-                    Route::get('/2', function () { return view('lead-gen.chords-for-hit-songs.lessons.2'); });
-                    Route::get('/3', function () { return view('lead-gen.chords-for-hit-songs.lessons.3'); });
-                    Route::get('/4', function () { return view('lead-gen.chords-for-hit-songs.lessons.4'); });
-                    Route::get('/5', function () { return view('lead-gen.chords-for-hit-songs.lessons.5'); });
-                    Route::get('/6', function () { return view('lead-gen.chords-for-hit-songs.lessons.6'); });
+                    Route::get('/', function () { return view('guitareo.lead-gen.chords-for-hit-songs.lessons'); });
+                    Route::get('/1', function () { return view('guitareo.lead-gen.chords-for-hit-songs.lessons.1'); });
+                    Route::get('/2', function () { return view('guitareo.lead-gen.chords-for-hit-songs.lessons.2'); });
+                    Route::get('/3', function () { return view('guitareo.lead-gen.chords-for-hit-songs.lessons.3'); });
+                    Route::get('/4', function () { return view('guitareo.lead-gen.chords-for-hit-songs.lessons.4'); });
+                    Route::get('/5', function () { return view('guitareo.lead-gen.chords-for-hit-songs.lessons.5'); });
+                    Route::get('/6', function () { return view('guitareo.lead-gen.chords-for-hit-songs.lessons.6'); });
                 });
     });
 
