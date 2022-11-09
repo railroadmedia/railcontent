@@ -25,7 +25,13 @@ class ExpiredMemberRedirect
             }
 
             if (empty($this->membership_expiration_date) && $user->isPackOwner()) {
-                return redirect()->route('platform.packs');
+                if (brand() === 'singeo') {
+                    if (!str_starts_with($request->path(), 'singeo/courses')) {
+                        return redirect()->route('platform.content-type-catalog', ['courses']);
+                    }
+                } else {
+                    return redirect()->route('platform.packs');
+                }
             }
         }
 
