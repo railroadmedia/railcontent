@@ -1,4 +1,4 @@
-@extends('lead-gen.partials._lesson-page-layout')
+@extends('guitareo.lead-gen.partials._lesson-page-layout')
 
 @section('title', 'Guitar Chords for Hit Songs')
 

@@ -1,4 +1,4 @@
-@extends('lead-gen.lead-gen-layout-tw')
+@extends('guitareo.lead-gen.lead-gen-layout-tw')
 
 @section('meta')
     @parent
@@ -11,8 +11,7 @@
     <meta property="og:title" content="Play Your First Song On The Guitar | Guitar Chords for Hit Songs">
     <meta property="og:url" content="https://www.guitareo.com/chords-for-hit-songs/thank-you">
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/marketing/song-in-an-hour.css">
+    <link rel="stylesheet" href="/marketing/parcel/guitareo/song-in-an-hour.css">
     <style>
         .hero-header:after {
             content:none;

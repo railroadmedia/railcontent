@@ -33,7 +33,7 @@
     ];
 @endphp
 
-@extends('lead-gen.lead-gen-layout-tw')
+@extends('guitareo.lead-gen.lead-gen-layout-tw')
 
 @section('meta')
     <title>Guitar Chords for Hit Songs | Guitareo</title>
@@ -46,9 +46,8 @@
 
     @parent
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-    <link rel="preload" href="/assets/marketing/song-in-an-hour.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/assets/marketing/song-in-an-hour.css"></noscript>
+    <link rel="preload" href="/marketing/parcel/guitareo/song-in-an-hour.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/marketing/parcel/guitareo/song-in-an-hour.css"></noscript>
     <style>
         i.fa-check {
             color: #00C9AC;
@@ -61,7 +60,7 @@
             background-position-x: center;
             background-position-y: 0px;
         }
-        
+
         header img {
             margin-bottom: 500px;
         }
@@ -93,13 +92,13 @@
 @endsection
 
 @section('body')
-    <header class="pt-3 pb-6 md:py-20 bg-no-repeat"> 
+    <header class="pt-3 pb-6 md:py-20 bg-no-repeat">
         <div class="max-w-md md:max-w-5xl mx-auto md:flex px-4">
             <div class="md:w-1/2 text-center md:text-left">
                 <img class="h-24 md:h-40 md:mb-8 md:pl-3 inline-block lazyload" data-src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/chords-for-hit-songs/logo.png" alt="logo">
                 <h6 class="font-extrabold text-white mb-6 pl-2 md:pl-3">Sign-up for your free online lessons today!</h6>
                 <div class="md:max-w-md lg:max-w-auto lg:w-3/4">
-                    @include('lead-gen.partials._sign-up-form-tw', [
+                    @include('guitareo.lead-gen.partials._sign-up-form-tw', [
                         "formId" => "Guitareo - Engagement - Trigger - Guitar Chords for Hit Songs - Web Form",
                         "formName" => 'Guitar Chords for Hit Songs',
                         "redirectURL" => "/chords-for-hit-songs/thank-you",
@@ -174,9 +173,9 @@
                     <p class="leading-relaxed"><i class="fas fa-check mr-2 text-xl" aria-hidden="true"></i>Free chord chart diagram.</p>
                     <p class="mb-4 leading-relaxed"><i class="fas fa-check mr-2 text-xl" aria-hidden="true"></i>Yours to keep forever.</p>
                 </div>
-                
+
                 <div class="md:max-w-md lg:max-w-auto lg:w-3/4">
-                    @include('lead-gen.partials._sign-up-form-tw', [
+                    @include('guitareo.lead-gen.partials._sign-up-form-tw', [
                         "formId" => "Guitareo - Engagement - Trigger - Guitar Chords for Hit Songs - Web Form",
                         "formName" => 'Guitar Chords for Hit Songs',
                         "redirectURL" => "/chords-for-hit-songs/thank-you",
