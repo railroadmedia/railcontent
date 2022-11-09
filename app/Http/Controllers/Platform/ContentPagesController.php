@@ -679,9 +679,9 @@ class ContentPagesController extends BaseController
             ContentRepository::$availableContentStatues = [ContentService::STATUS_PUBLISHED];
         }
 
+        ModeDecoratorBase::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
+
         if (($contentToRenderAsLesson['type'] == 'learning-path-lesson')) {
-            ModeDecoratorBase::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
-            AppModeDecoratorBase::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
             $parentChildren = $this->contentService->getByParentId($contentToRenderAsLessonParent['id']);
             $learningPath = \Arr::last($contentToRenderAsLesson->getParentContentData());
             $nextPrevLessons = $this->methodService->getNextAndPreviousLessons(
@@ -690,8 +690,6 @@ class ContentPagesController extends BaseController
             );
             $nextChild = $nextPrevLessons->getNextLesson();
             $previousChild = $nextPrevLessons->getPreviousLesson();
-            ModeDecoratorBase::$decorationMode = DecoratorInterface::DECORATION_MODE_MAXIMUM;
-            AppModeDecoratorBase::$decorationMode = DecoratorInterface::DECORATION_MODE_MAXIMUM;
         } elseif (!empty($contentToRenderAsLessonParent)) {
             $parentChildren = $this->contentService->getByParentId($contentToRenderAsLessonParent['id']);
 
@@ -1292,6 +1290,8 @@ class ContentPagesController extends BaseController
         $domain,
         $contentId
     ) {
+        ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
+
         $nextContent = $this->contentService->getNextContentForParentContentForUser($contentId, user()->id);
 
         if (empty($nextContent)) {
