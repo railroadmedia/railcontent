@@ -2,8 +2,9 @@
 
 namespace App\Modules\Notifications\Console\Commands;
 
+use App\Console\Commands\Infrastructure\Command;
 use Carbon\Carbon;
-use Illuminate\Console\Command;
+use Log;
 use Railroad\Railnotifications\Services\NotificationBroadcastService;
 use Railroad\Railnotifications\Services\NotificationService;
 
@@ -16,28 +17,34 @@ class DailySummaryNotifications extends Command
         NotificationService $notificationService,
         NotificationBroadcastService $notificationBroadcastService
     ): bool {
-        $dateCutoff = Carbon::now()->subDay()->toDateTimeString();
-        $recipientIds = $notificationService->getAllRecipientIdsWithUnreadNotifications(
-            $dateCutoff
-        );
+        $this->withExecutionTime(function () use ($notificationService, $notificationBroadcastService) {
+            $dateCutoff = Carbon::now()->subDay()->toDateTimeString();
+            $recipientIds = $notificationService->getAllRecipientIdsWithUnreadNotifications(
+                $dateCutoff
+            );
 
-        foreach ($recipientIds as $recipientId) {
-            if ($recipientId['id']) {
-                // send aggregated broadcast
-                $notificationBroadcastService->broadcastUnreadAggregated(
-                    $recipientId['id'],
-                    'email',
-                    $dateCutoff
-                );
+            $count = count($recipientIds);
+            $this->info("$count notification recipients to process");
 
-                $notificationBroadcastService->broadcastUnreadAggregated(
-                    $recipientId['id'],
-                    'fcm',
-                    $dateCutoff
-                );
-                usleep(250000); //delay 250 ms to reduce load
+            foreach ($recipientIds as $recipientId) {
+                if ($recipientId['id']) {
+                    // send aggregated broadcast
+                    $notificationBroadcastService->broadcastUnreadAggregated(
+                        $recipientId['id'],
+                        'email',
+                        $dateCutoff
+                    );
+
+                    $notificationBroadcastService->broadcastUnreadAggregated(
+                        $recipientId['id'],
+                        'fcm',
+                        $dateCutoff
+                    );
+                    usleep(250000); //delay 250 ms to reduce load
+                }
             }
-        }
+        });
+
 
         return true;
     }
