@@ -52,6 +52,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('ProcessTrackings')->everyMinute();
         $schedule->command('content:rebuildSearchIndexes')->dailyAt('2:00');
         $schedule->command('forums:rebuildSearchIndexes')->hourly();
+        //todo: This can only be enabled once pianote commands are disabled, otherwise we will get duplicate emails
+        //$schedule->command('notifications:dailySummary')->dailyAt('12:00');
     }
 
     /**
