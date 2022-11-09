@@ -39,9 +39,9 @@
 @section('global-body')
     @include("drumeo.sales.partials._nav")
 
-{{--    @include("drumeo.sales.partials._nav", [--}}
-{{--        "cartVersion" => true--}}
-{{--    ])--}}
+    @include("drumeo.sales.partials._nav", [
+        "cartVersion" => true
+    ])
 
     @yield('banner')
 

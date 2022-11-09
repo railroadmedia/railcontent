@@ -273,6 +273,13 @@ app.component('AppContainer', AppContainer)
         )
     ))
 
+    .component('OrderForm', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "order-form" */
+            './vue/vuesora/views/order-form/OrderForm.vue'
+        )
+    ))
+
     .component('ForumThreadsTable', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "forum-thread-component" */

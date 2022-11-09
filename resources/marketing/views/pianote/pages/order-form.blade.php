@@ -1,4 +1,4 @@
-@extends('drumeo._partials.layout-template')
+@extends('pianote._partials.layout-template')
 
 @section('global-head')
     @yield('meta')
@@ -12,16 +12,16 @@
         <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/sales/2022/og-image.jpg" style="display: none;">
     @endif
 
-    @include('drumeo._partials._fonts')
+    @include('pianote._partials._fonts')
     <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
 
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
     <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind.css') }}" />
     <link rel="stylesheet" href="{{ asset('/marketing/css/app.css') }}" />
-    <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/pianote/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/pianote/sales-2020.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/pianote/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/css/vuesora.css') }}" rel="stylesheet">
     {{--<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">--}}
 @stop
@@ -29,20 +29,20 @@
 @section('global-body')
     @if(!empty($trialVersion))
         @if(!empty($joinUrl))
-            @include("drumeo.sales.partials._nav", [
+            @include("pianote.sales.partials._nav", [
                 "edgeVersion" => true,
                 "trialVersion" => true,
                 "joinUrl" => $joinUrl
             ])
         @else
-            @include("drumeo.sales.partials._nav", [
+            @include("pianote.sales.partials._nav", [
                 "edgeVersion" => true,
                 "trialVersion" => true,
                 "scrollToJoin" => true,
             ])
         @endif
     @else
-        @include("drumeo.sales.partials._nav", [
+        @include("pianote.sales.partials._nav", [
             "edgeVersion" => true,
             "scrollToJoin" => true,
             "homepage" => true
@@ -62,8 +62,8 @@
         @endif
         <div class="container order-form mv-3">
             <order-form
-                theme-color="drumeo"
-                brand="drumeo"
+                theme-color="pianote"
+                brand="pianote"
                 :cart="{{ json_encode($cart) }}"
                 :billing-address="{{ json_encode($billingAddress) }}"
                 :shipping-address="{{ json_encode($shippingAddress) }}"
@@ -96,7 +96,7 @@
                             We're always here to help
                         </p>
                         <p class="x-tiny text-white">
-                            <a target="_blank" class="text-white" href="https://help.drumeo.com/">See our FAQs & answers</a>, or<br>
+                            <a target="_blank" class="text-white" href="https://help.pianote.com/">See our FAQs & answers</a>, or<br>
                             <a target="_blank" class="text-white" href="/contact">click here to contact us directly</a>.
                         </p>
                     </div>
@@ -133,15 +133,14 @@
             </div>
         </div>
     </div>
-    @include("drumeo.sales.partials._footer")
+    @include("pianote.sales.partials._footer")
 
-
-    <script src="{{ asset('/marketing/js/drumeo/manifest.js') }}"></script>
-    <script src="{{ asset('/marketing/js/drumeo/vendor.js') }}"></script>
-    <script src="{{ asset('/marketing/js/drumeo/cart-sidebar.js') }}"></script>
+    <script src="{{ asset('/marketing/js/pianote/manifest.js') }}"></script>
+    <script src="{{ asset('/marketing/js/pianote/vendor.js') }}"></script>
+    <script src="{{ asset('/marketing/js/pianote/cart-sidebar.js') }}"></script>
     <script src="{{ asset('/marketing/js/order-form.js') }}"></script>
-    <script src="{{ asset('/marketing/js/drumeo/app.js') }}"></script>
+    <script src="{{ asset('/marketing/js/pianote/app.js') }}"></script>
     <script src="{{ mix('/platform/js/app.js') }}"></script>
-
+    
     @yield('scripts')
 @stop
