@@ -53,6 +53,22 @@ class BFUpdates extends Seeder
         Product::where('brand_id', 1)->where('product_type_id', 5)->update(['discounted_price' => 39]);
         Product::where('brand_id', 1)->where('product_type_id', 3)->update(['discounted_price' => 15]);
 
+        //PIANOTE UPDATES
+        Product::where('brand_id', 2)->where('name', 'De-Stupefy Your Left Hand')->update(['discounted_price' => 29]);
+        Product::where('brand_id', 2)->where('name', 'Piano Riffs & Fills')->update(['discounted_price' => 29]);
+        Product::where('brand_id', 2)->where('name', '500 Songs In 5 Days')->update(['discounted_price' => 29]);
+        Product::where('brand_id', 2)->where('name', 'Faster Fingers')->update(['discounted_price' => 29]);
+        Product::where('brand_id', 2)->where('name', 'Piano Technique Made Easy')->update(['discounted_price' => 19]);
+        Product::where('brand_id', 2)->where('name', 'The Power Of Chords')->update(['discounted_price' => 29]);
+        Product::where('brand_id', 2)->where('name', 'Improvisation & Musical Freedom')->update(['discounted_price' => 19]);
+        Product::where('brand_id', 2)->where('name', 'Classical Piano')->update(['discounted_price' => 19]);
+        Product::where('brand_id', 2)->where('name', 'Playing Beautiful Piano')->update(['discounted_price' => 4]);
+        Product::where('brand_id', 2)->where('name', 'Scales Poster')->update(['discounted_price' => 5]);
+        Product::where('brand_id', 2)->where('name', 'Chords Poster')->update(['discounted_price' => 5]);
+        Product::where('brand_id', 2)->where('name', 'Pianote Practice Planner')->update(['discounted_price' => 19]);
+        Product::where('brand_id', 2)->where('name', 'Piano Chords & Scales')->update(['discounted_price' => 19]);
+        Product::where('brand_id', 2)->where('name', 'Piano Chords & Scales')->update(['discounted_price' => 19]);
+
         //GUITAREO UPDATES
         Product::where('brand_id', 3)->where('name', 'GuitarQuest')->update(['discounted_price' => 97]);
         Product::where('brand_id', 3)->where('name', '500 Songs In 5 Days')->update(['discounted_price' => 29]);
