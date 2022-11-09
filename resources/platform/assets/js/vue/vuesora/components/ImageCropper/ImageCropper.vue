@@ -24,7 +24,7 @@
                 </a>
 
                 <p class="tiny font-italic text-grey-3 mt-2">
-                    Max file size: <strong>15MB</strong>
+                    Max file size: <strong>5MB</strong>
                 </p>
             </div>
         </div>
@@ -193,7 +193,7 @@ export default {
                 dictFileTooBig: 'Maximum file size exceeded.',
                 dictInvalidFileType: 'Invalid File Type.',
                 acceptedFiles: '.jpg,.jpeg,.png,.bmp',
-                maxFilesize: 15,
+                maxFilesize: 5,
                 hiddenInputContainer: '.dz-hidden-input',
                 autoProcessQueue: false,
             }),
@@ -321,6 +321,7 @@ export default {
 
         cropImage() {
             const canvasOutput = this.cropperInstance.getCroppedCanvas(this.imageDimensions);
+            console.log('typeof canvasoutput',typeof canvasOutput)
 
             canvasOutput.toBlob((blob) => {
                 this.imageBlob = blob;
@@ -333,6 +334,8 @@ export default {
             const formData = new FormData();
             const newFileName = `${this.userId}_${Date.now()}.png`;
 
+            console.log('typeof imageblob', typeof this.imageBlob)
+
             formData.append('file', this.imageBlob, newFileName);
             formData.append('target', newFileName);
             formData.append('_method', this.sendMethod);
@@ -340,41 +343,53 @@ export default {
 
             this.loading = true;
 
-            Vapor.store(formData.get('file'), {
-                visibility: 'public-read',
-                progress: progress => {
-                    // console.log(Math.round(progress * 100));
-                }
-            }).then(response => {
-                axios.post('/user-management-system/picture/upload-from-s3-front-end', {
-                    uuid: response.uuid,
-                    s3_bucket_path: response.key,
-                    bucket: response.bucket,
-                    fieldKey: this.fieldKey
-                }).then((resolved) => {
+            UserService.remoteResourceUpload(this.uploadEndpoint, formData)
+                .then((resolved) => {
                     if (resolved) {
-                        this.loading = false;
 
                         let remoteStorageUrl = null;
                         
                         if (this.fieldKey == 'profile_picture_url'){
-                            remoteStorageUrl = resolved.data.profile_picture_url
+                            remoteStorageUrl = resolved.profile_picture_url
                         } else if (this.fieldKey == 'drums_gear_photo') {
-                            remoteStorageUrl = resolved.data.drums_gear_photo
+                            remoteStorageUrl = resolved.drums_gear_photo
                         } else if (this.fieldKey == 'piano_gear_photo') {
-                            remoteStorageUrl = resolved.data.piano_gear_photo
+                            remoteStorageUrl = resolved.piano_gear_photo
                         } else if (this.fieldKey == 'guitar_gear_photo') {
-                            remoteStorageUrl = resolved.data.guitar_gear_photo
+                            remoteStorageUrl = resolved.guitar_gear_photo
                         } else if (this.fieldKey == 'singing_gear_photo') {
-                            remoteStorageUrl = resolved.data.singing_gear_photo
+                            remoteStorageUrl = resolved.singing_gear_photo
                         }
+
                         this.$emit('image-uploaded', {
                             image_url: remoteStorageUrl,
                             cropper: this,
                         });
+
+                        // this.setImageAsAvatar(remoteStorageUrl);
                     }
                 });
-            });
+
+            // NOTE: we may need this in the future, leave for now
+            // Vapor.store(formData.get('file'), {
+            //     visibility: 'public-read',
+            //     progress: progress => {
+            //         // console.log(Math.round(progress * 100));
+            //     }
+            // }).then(response => {
+            //     axios.post('/user-management-system/profile-picture/upload', {
+            //         uuid: response.uuid,
+            //         s3_bucket_path: response.key,
+            //         bucket: response.bucket,
+            //     }).then((resolved) => {
+            //         console.log(resolved);
+            //
+            //         if (resolved) {
+            //             this.loading = false;
+            //             location.reload();
+            //         }
+            //     });
+            // });
         },
 
         resetCropper() {

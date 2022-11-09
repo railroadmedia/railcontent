@@ -176,16 +176,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.240.10",
+            "version": "3.241.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "84b8229fc25cf787876047b6a73b202209853e79"
+                "reference": "9a08ac83249a2e6d07c624802cbf961f7269a691"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/84b8229fc25cf787876047b6a73b202209853e79",
-                "reference": "84b8229fc25cf787876047b6a73b202209853e79",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/9a08ac83249a2e6d07c624802cbf961f7269a691",
+                "reference": "9a08ac83249a2e6d07c624802cbf961f7269a691",
                 "shasum": ""
             },
             "require": {
@@ -264,9 +264,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.240.10"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.241.0"
             },
-            "time": "2022-11-04T19:25:00+00:00"
+            "time": "2022-11-08T19:16:53+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -3613,22 +3613,22 @@
         },
         {
             "name": "inertiajs/inertia-laravel",
-            "version": "v0.6.3",
+            "version": "v0.6.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/inertiajs/inertia-laravel.git",
-                "reference": "540b953ec383364264f9bd633849db16560a4461"
+                "reference": "b00fe8cf741766b41de69978f9e90ee6d1470d36"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/inertiajs/inertia-laravel/zipball/540b953ec383364264f9bd633849db16560a4461",
-                "reference": "540b953ec383364264f9bd633849db16560a4461",
+                "url": "https://api.github.com/repos/inertiajs/inertia-laravel/zipball/b00fe8cf741766b41de69978f9e90ee6d1470d36",
+                "reference": "b00fe8cf741766b41de69978f9e90ee6d1470d36",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "laravel/framework": "^6.0|^7.0|^8.74|^9.0",
-                "php": "^7.2|~8.0.0|~8.1.0"
+                "php": "^7.2|~8.0.0|~8.1.0|~8.2.0"
             },
             "require-dev": {
                 "mockery/mockery": "^1.3.3",
@@ -3670,7 +3670,7 @@
             ],
             "support": {
                 "issues": "https://github.com/inertiajs/inertia-laravel/issues",
-                "source": "https://github.com/inertiajs/inertia-laravel/tree/v0.6.3"
+                "source": "https://github.com/inertiajs/inertia-laravel/tree/v0.6.4"
             },
             "funding": [
                 {
@@ -3678,7 +3678,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-06-27T23:21:15+00:00"
+            "time": "2022-11-08T12:44:02+00:00"
         },
         {
             "name": "intervention/image",
@@ -4256,16 +4256,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v9.38.0",
+            "version": "v9.39.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "abf198e443e06696af3f356b44de67c0fa516107"
+                "reference": "67e674709e1e7db14f304a871481f310822d68c5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/abf198e443e06696af3f356b44de67c0fa516107",
-                "reference": "abf198e443e06696af3f356b44de67c0fa516107",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/67e674709e1e7db14f304a871481f310822d68c5",
+                "reference": "67e674709e1e7db14f304a871481f310822d68c5",
                 "shasum": ""
             },
             "require": {
@@ -4438,7 +4438,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2022-11-01T14:05:55+00:00"
+            "time": "2022-11-08T14:47:39+00:00"
         },
         {
             "name": "laravel/nova",
@@ -5812,16 +5812,16 @@
         },
         {
             "name": "mobiledetect/mobiledetectlib",
-            "version": "2.8.39",
+            "version": "2.8.41",
             "source": {
                 "type": "git",
                 "url": "https://github.com/serbanghita/Mobile-Detect.git",
-                "reference": "0fd6753003fc870f6e229bae869cc1337c99bc45"
+                "reference": "fc9cccd4d3706d5a7537b562b59cc18f9e4c0cb1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/serbanghita/Mobile-Detect/zipball/0fd6753003fc870f6e229bae869cc1337c99bc45",
-                "reference": "0fd6753003fc870f6e229bae869cc1337c99bc45",
+                "url": "https://api.github.com/repos/serbanghita/Mobile-Detect/zipball/fc9cccd4d3706d5a7537b562b59cc18f9e4c0cb1",
+                "reference": "fc9cccd4d3706d5a7537b562b59cc18f9e4c0cb1",
                 "shasum": ""
             },
             "require": {
@@ -5862,9 +5862,9 @@
             ],
             "support": {
                 "issues": "https://github.com/serbanghita/Mobile-Detect/issues",
-                "source": "https://github.com/serbanghita/Mobile-Detect/tree/2.8.39"
+                "source": "https://github.com/serbanghita/Mobile-Detect/tree/2.8.41"
             },
-            "time": "2022-02-17T19:24:25+00:00"
+            "time": "2022-11-08T18:31:26+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -7972,16 +7972,16 @@
         },
         {
             "name": "railroad/mailora",
-            "version": "v3.0.2",
+            "version": "v3.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/mailora.git",
-                "reference": "451d7c7efff1fca6bd945f157eaadfceb5affdb0"
+                "reference": "19c64a4e2d4a64fb432274b1e29eee2a51354568"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/mailora/zipball/451d7c7efff1fca6bd945f157eaadfceb5affdb0",
-                "reference": "451d7c7efff1fca6bd945f157eaadfceb5affdb0",
+                "url": "https://api.github.com/repos/railroadmedia/mailora/zipball/19c64a4e2d4a64fb432274b1e29eee2a51354568",
+                "reference": "19c64a4e2d4a64fb432274b1e29eee2a51354568",
                 "shasum": ""
             },
             "require": {
@@ -8023,9 +8023,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/mailora/issues",
-                "source": "https://github.com/railroadmedia/mailora/tree/v3.0.2"
+                "source": "https://github.com/railroadmedia/mailora/tree/v3.0.3"
             },
-            "time": "2022-11-03T15:05:17+00:00"
+            "time": "2022-11-07T14:23:34+00:00"
         },
         {
             "name": "railroad/musora-api",
@@ -8180,16 +8180,16 @@
         },
         {
             "name": "railroad/railanalytics",
-            "version": "v3.0.4",
+            "version": "v3.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railanalytics.git",
-                "reference": "ee7714e490280cc339526e9f9e3c0d19fead99a6"
+                "reference": "650fe3fc60f9cc775110b71cab024e5dd9e1d0a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railanalytics/zipball/ee7714e490280cc339526e9f9e3c0d19fead99a6",
-                "reference": "ee7714e490280cc339526e9f9e3c0d19fead99a6",
+                "url": "https://api.github.com/repos/railroadmedia/railanalytics/zipball/650fe3fc60f9cc775110b71cab024e5dd9e1d0a9",
+                "reference": "650fe3fc60f9cc775110b71cab024e5dd9e1d0a9",
                 "shasum": ""
             },
             "require": {
@@ -8216,9 +8216,9 @@
             "description": "Laravel analytics system for using tracking code in your application for google analytics/adwords, facebook pixel, etc.",
             "support": {
                 "issues": "https://github.com/railroadmedia/railanalytics/issues",
-                "source": "https://github.com/railroadmedia/railanalytics/tree/v3.0.4"
+                "source": "https://github.com/railroadmedia/railanalytics/tree/v3.0.5"
             },
-            "time": "2022-10-18T07:23:12+00:00"
+            "time": "2022-11-08T15:09:25+00:00"
         },
         {
             "name": "railroad/railchat",
@@ -8263,16 +8263,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "2.0.39",
+            "version": "v2.0.40",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "8c7b80f8d40673d603d064686e7ba1c3f7734ca5"
+                "reference": "7f4450681c0da0a2f35a7277212de21669c90100"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/8c7b80f8d40673d603d064686e7ba1c3f7734ca5",
-                "reference": "8c7b80f8d40673d603d064686e7ba1c3f7734ca5",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/7f4450681c0da0a2f35a7277212de21669c90100",
+                "reference": "7f4450681c0da0a2f35a7277212de21669c90100",
                 "shasum": ""
             },
             "require": {
@@ -8326,9 +8326,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/2.0.39"
+                "source": "https://github.com/railroadmedia/railcontent/tree/v2.0.40"
             },
-            "time": "2022-11-04T16:20:48+00:00"
+            "time": "2022-11-09T13:09:43+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -8386,16 +8386,16 @@
         },
         {
             "name": "railroad/railnotifications",
-            "version": "v3.0.7",
+            "version": "3.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railnotifications.git",
-                "reference": "4cf4b3d2a268f22c00d949688a24ff8456f63b85"
+                "reference": "dedba4d8a78ee42e647d3ef7b65122bbcece9580"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railnotifications/zipball/4cf4b3d2a268f22c00d949688a24ff8456f63b85",
-                "reference": "4cf4b3d2a268f22c00d949688a24ff8456f63b85",
+                "url": "https://api.github.com/repos/railroadmedia/railnotifications/zipball/dedba4d8a78ee42e647d3ef7b65122bbcece9580",
+                "reference": "dedba4d8a78ee42e647d3ef7b65122bbcece9580",
                 "shasum": ""
             },
             "require": {
@@ -8446,9 +8446,9 @@
             "description": "Laravel notification system using entities",
             "support": {
                 "issues": "https://github.com/railroadmedia/railnotifications/issues",
-                "source": "https://github.com/railroadmedia/railnotifications/tree/v3.0.7"
+                "source": "https://github.com/railroadmedia/railnotifications/tree/3.0.8"
             },
-            "time": "2022-11-07T13:44:11+00:00"
+            "time": "2022-11-09T00:05:12+00:00"
         },
         {
             "name": "railroad/railtracker",

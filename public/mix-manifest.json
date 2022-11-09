@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
     "/platform/js/app.js": "/platform/js/app.js?id=1fa1a29f8dbab2f6045cc39128d649b8",
+=======
+    "/platform/js/app.js": "/platform/js/app.js?id=4803995ef763d688bfe2dc0b8de6d3c4",
+>>>>>>> master
     "/platform/js/profile.js": "/platform/js/profile.js?id=a13ed5f750a89e00edbe84934bd56773",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=9b1b997eda2b5545804b8d7649790e48",
     "/platform/js/books.js": "/platform/js/books.js?id=bd6874db5faa8414cda38fb1fa497d2c",
@@ -13,14 +17,22 @@
     "/platform/js/contact-email-form-marketing.js": "/platform/js/contact-email-form-marketing.js?id=c494f12f121babf27874ee1addb207eb",
     "/platform/js/contact-email-form.js": "/platform/js/contact-email-form.js?id=5c63f038ed8e4186806d0ef7e2c7cc37",
     "/platform/js/youtube-player-component.js": "/platform/js/youtube-player-component.js?id=fa034becc87a52ea151b981f707363b1",
+<<<<<<< HEAD
     "/platform/js/onboarding-component.js": "/platform/js/onboarding-component.js?id=a9523a27815a4b62199884078327539f",
+=======
+    "/platform/js/onboarding-component.js": "/platform/js/onboarding-component.js?id=57805d5feb4f98feea5073b404edddef",
+>>>>>>> master
     "/platform/js/video-player-component.js": "/platform/js/video-player-component.js?id=f98ba345eddecdb098a81f664c5b1cba",
     "/platform/js/video-media-element-component.js": "/platform/js/video-media-element-component.js?id=be80547daecbd8c8d57d06ffa2862726",
-    "/platform/js/image-cropper-component.js": "/platform/js/image-cropper-component.js?id=83ad512db0ca2fef48e6e8a7df297e7a",
+    "/platform/js/image-cropper-component.js": "/platform/js/image-cropper-component.js?id=1435b648dfa43ef38889583bd03e8adc",
     "/platform/js/comments-component.js": "/platform/js/comments-component.js?id=2f5a3e5395a7cf91f450cb072fd2338d",
     "/platform/js/email-form-component.js": "/platform/js/email-form-component.js?id=49e491a00ddf3dda3c606d7a150398a4",
     "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=ad36d354a9935d195747a0af2bba042a",
+<<<<<<< HEAD
     "/platform/css/app.css": "/platform/css/app.css?id=c0703e5872405d7a602b6b5294fd729a",
+=======
+    "/platform/css/app.css": "/platform/css/app.css?id=c78e6e6cac67605afc54fd7ca7d3ef14",
+>>>>>>> master
     "/platform/js/vendor~onboarding.js": "/platform/js/vendor~onboarding.js?id=d75e6bba48ce3a663656177aa3293852",
     "/marketing/css/app.css": "/marketing/css/app.css?id=f336dcb6d59bd65a68614551bec19352",
     "/platform/js/vendor.js": "/platform/js/vendor.js?id=0ea96033315cf8c83aad123c175695e5"
