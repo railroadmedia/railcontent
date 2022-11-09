@@ -8386,16 +8386,16 @@
         },
         {
             "name": "railroad/railnotifications",
-            "version": "3.0.9",
+            "version": "3.0.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railnotifications.git",
-                "reference": "93e7c82853af4038897b456af2cd96f09dbecfc2"
+                "reference": "942b54f3f93d1c820a087548653cdd2116994e83"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railnotifications/zipball/93e7c82853af4038897b456af2cd96f09dbecfc2",
-                "reference": "93e7c82853af4038897b456af2cd96f09dbecfc2",
+                "url": "https://api.github.com/repos/railroadmedia/railnotifications/zipball/942b54f3f93d1c820a087548653cdd2116994e83",
+                "reference": "942b54f3f93d1c820a087548653cdd2116994e83",
                 "shasum": ""
             },
             "require": {
@@ -8446,9 +8446,9 @@
             "description": "Laravel notification system using entities",
             "support": {
                 "issues": "https://github.com/railroadmedia/railnotifications/issues",
-                "source": "https://github.com/railroadmedia/railnotifications/tree/3.0.9"
+                "source": "https://github.com/railroadmedia/railnotifications/tree/3.0.10"
             },
-            "time": "2022-11-09T18:29:44+00:00"
+            "time": "2022-11-09T18:55:30+00:00"
         },
         {
             "name": "railroad/railtracker",
