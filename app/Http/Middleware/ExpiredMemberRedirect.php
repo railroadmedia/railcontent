@@ -23,6 +23,10 @@ class ExpiredMemberRedirect
                 (empty($this->membership_expiration_date) && !$user->isPackOwner() && !$user->isAMember())) {
                 return redirect()->route('platform.membership-expired');
             }
+
+            if (empty($this->membership_expiration_date) && $user->isPackOwner()) {
+                return redirect()->route('platform.packs');
+            }
         }
 
         return $next($request);
