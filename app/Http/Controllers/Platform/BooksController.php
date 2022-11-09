@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Platform;
 
 use Illuminate\Http\Request;
+use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
+use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Mailora\Services\MailService;
 use Railroad\Ecommerce\Repositories\ProductRepository;
 use Illuminate\Routing\Controller;
-
 
 class BooksController extends Controller
 {
@@ -58,7 +59,7 @@ class BooksController extends Controller
         ]);
     }
 
-    public function chapter($domain, $brand,$chapterNumber)
+    public function chapter($domain, $brand, $chapterNumber)
     {
         $thisChapter = $this->getChapterData($chapterNumber);
 
@@ -74,8 +75,11 @@ class BooksController extends Controller
 
     public function askQuestion(Request $request)
     {
-        $emailSubject = '[Foundations Book Resource Area] Question on - "'
-             . $request->get('level') . '" - from: ' . $request->get('email');
+        $emailSubject =
+            '[Foundations Book Resource Area] Question on - "'.
+            $request->get('level').
+            '" - from: '.
+            $request->get('email');
 
         $input = [
             "type" => "layouts/inline/alert",
@@ -88,15 +92,15 @@ class BooksController extends Controller
             "alert" => $emailSubject,
         ];
 
-        try{
+        try {
             $this->mailService->sendSecure($input);
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             error_log($e);
         }
 
         return back()->with([
-            'emailSuccess' => true
-        ]);
+                                'emailSuccess' => true,
+                            ]);
     }
 
     private function getChapterData($chapterNumber)
@@ -118,7 +122,7 @@ class BooksController extends Controller
                     ],
                     [
                         "title" => "Getting Started on the Piano Lesson 2",
-                        "external_link" => '/getting-started/lessons/scales'
+                        "external_link" => '/getting-started/lessons/scales',
                     ],
                     [
                         "title" => "Proper Hand Posture at the Piano",
@@ -133,8 +137,8 @@ class BooksController extends Controller
                     [
                         "title" => "How to Play Piano Scales Hands Together",
                         "youtube_id" => "gfEeGlHsjaY",
-                        "content_id" => "218415"
-                    ]
+                        "content_id" => "218415",
+                    ],
                 ],
                 "backing_track_title" => 'Chill Walk',
                 "backing_tracks" => 'https://d2vyvo0tyx8ig5.cloudfront.net/books/foundations/mp3s/Unit+01.zip',
@@ -450,7 +454,7 @@ class BooksController extends Controller
 
         $thisChapter = $chapterData[$chapterNumber] ?? null;
 
-        if(empty($thisChapter)){
+        if (empty($thisChapter)) {
             abort(404);
         }
 
@@ -463,4 +467,135 @@ class BooksController extends Controller
 
         return $foundations['units'][$levelNumber - 1]['lessons'] ?? abort(404);
     }
+
+    public function bestBeginner(Request $request)
+    {
+        $isDigital = strpos($request->getPathInfo(), 'digital') !== false;
+
+        $user = user();
+
+        $hasAccess = $user && ($user->isAMember() || $user->isPackOnlyOwner());
+
+        $chapters = [
+            [
+                "thumbnail" => 'https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/chapter-1.jpg',
+                "chapterTitle" => "Getting Started",
+                "title" => "Getting Started On Drums ",
+                "description" => "In this course, you’ll be able to see exactly how Jared sets up his drum-set.
+                If you’re having trouble setting up your drum-set, you can use this course as a reference!",
+                "contentLink" => url()->route('platform.content.first-level', [
+                    'brand' => 'drumeo',
+                    'courses',
+                    'getting-started-on-drums',
+                    '20977',
+                ]),
+            ],
+            [
+                "thumbnail" => 'https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/chapter-2.jpg',
+                "chapterTitle" => "Practicing",
+                "title" => "How To Practice Effectively",
+                "description" => "This course is all about effective practicing. Stephen Taylor will walk you through
+                his approach to practicing and discuss topics like scheduling, warming up, creative triggers, and much
+                more. You can also download a PDF version of a “Practice Routine Generator” at the bottom of this page!",
+                "contentLink" => url()->route('platform.content.first-level', [
+                    'brand' => 'drumeo',
+                    'courses',
+                    'how-to-practice-effectively',
+                    '27406',
+                ]),
+            ],
+            [
+                "thumbnail" => 'https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/chapter-3.jpg',
+                "chapterTitle" => "Learning Grips",
+                "title" => "How To Hold Your Drumsticks",
+                "description" => "Bruce Becker is a master of drum-set technique. If you want to learn more about any
+                of the grips discussed in Chapter 3, you can check out this course with Bruce Becker!",
+                "contentLink" => url()->route('platform.content.first-level', [
+                    'brand' => 'drumeo',
+                    'courses',
+                    'how-to-hold-your-drumsticks',
+                    '27764',
+                ]),
+            ],
+            [
+                "thumbnail" => 'https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/chapter-4.jpg',
+                "chapterTitle" => "Learning Notation",
+                "title" => "Note Value Courses",
+                "description" => "Here you’ll find a number of different courses that will dive deeper into note values
+                and music theory. You can also download a PDF version of the notation legend at the bottom of this page!",
+                "contentLink" => url()->route('platform.content-type-catalog', [
+                        "contentTypeName" => "courses",
+                        'brand' => 'drumeo',
+                    ]).'?required_fields[]=topic%2CTheory',
+            ],
+            [
+                "thumbnail" => 'https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/chapter-5.jpg',
+                "chapterTitle" => "Learning Rudiments",
+                "title" => "All 40 Rudiments",
+                "description" => "In Chapter 5, you were introduced to five essential rudiments. If you’re looking to
+                develop even more drum-set vocabulary, you can learn 35 other drum rudiments here!",
+                "contentLink" => "https://www.drumeo.com/beat/rudiments/",
+            ],
+            [
+                "thumbnail" => 'https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/chapter-7.jpg',
+                "chapterTitle" => "Applying Techniques",
+                "title" => "Developing Dynamics",
+                "description" => "In this course, Dave Atkinson will explain how he incorporates the techniques
+                explained in Chapter 7 into a musical context!",
+                "contentLink" => url()->route('platform.content.first-level', [
+                    'brand' => 'drumeo',
+                    'courses',
+                    'developing-dynamics',
+                    '21290',
+                ]),
+            ],
+            [
+                "thumbnail" => 'https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/chapter-9.jpg',
+                "chapterTitle" => "Learning Musical Styles",
+                "title" => "Drumless Play-Along Tracks",
+                "description" => "Here you’ll find play-along tracks that go with each style of music you’ve learned in
+                this chapter. Once you’ve completed Chapter 10, go back and practice the drum beats from Chapter 9
+                along with their corresponding play-along track!",
+                                "contentLink" => url()->route('books.best-beginner-drum-book.play-alongs'),
+
+            ],
+            [
+                "thumbnail" => 'https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/chapter-10.jpg',
+                "chapterTitle" => "Playing To Music",
+                "title" => "Drumless Play-Along Tracks",
+                "description" => "Here you’ll find all of the resources for Chapter 10. You can turn the drums or
+                click on and off. You can also download a PDF version of a “Cheat Sheet” at the bottom of this page!",
+                                "contentLink" => url()->route('books.best-beginner-drum-book.play-alongs'),
+
+            ],
+        ];
+
+        return view('books.best-beginner-drum-book.index', [
+            "hasAccess" => $hasAccess,
+            "chapters" => $chapters,
+            "isDigital" => $isDigital,
+            "user" => $user,
+        ]);
+    }
+        public function bestBeginnerPlayAlongs(){
+            ContentRepository::$bypassPermissions = true;
+
+            $user = user();
+
+            $hasAccess = $user && ($user->isAMember() || $user->isPackOnlyOwner());
+
+            $idsToPull = ['28360', '20657', '23989', '23625', '8431', '24431', '14295', '11689', '23024', '24580'];
+
+            $listLessons = new ContentFilterResultsEntity(['results' => $this->contentService->getByIds($idsToPull)]);
+            $listLessons['total_results'] = 10;
+
+            return view(
+                'books.best-beginner-drum-book.play-alongs',
+                [
+                    "hasAccess" => $hasAccess,
+                    "listLessons" => $listLessons->toResponseRawJson(),
+                ]
+            );
+    }
+
 }

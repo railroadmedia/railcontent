@@ -35,4 +35,18 @@ Route::domain('{musoraDomain}')
             '/access-codes/redeem',
             Railroad\Ecommerce\Controllers\AccessCodeController::class . '@claim'
         )->name('access-codes.form-claim');
+        Route::get(
+            '/bestbook',
+            [
+                'as' => 'books.best-beginner-drum-book',
+                'uses' => \App\Http\Controllers\Platform\BooksController::class . '@bestBeginner'
+            ]
+        );
+        Route::get(
+            '/bestbook/play-alongs',
+            [
+                'as' => 'books.best-beginner-drum-book.play-alongs',
+                'uses' => \App\Http\Controllers\Platform\BooksController::class . '@bestBeginnerPlayAlongs'
+            ]
+        );
     });
