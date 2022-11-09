@@ -51,7 +51,7 @@
     <section class="py-5 md:py-10 lg:py-16" style="background:linear-gradient(74.85deg, rgba(0, 201, 172, 0.1) 0%, rgba(11, 118, 219, 0.1) 32.1%, rgba(131, 0, 233, 0.1) 64.2%, rgba(246, 26, 48, 0.1) 90.64%);">
         <div class="container mx-auto max-w-3xl">
             <div id="form" class="anchor"></div>
-            <iframe class="google-form w-full" src="https://docs.google.com/forms/d/e/1FAIpQLScRKA6Dwt57208VCZr6h1nr2zOvvVoPawVt5sRQ7BZISEGzrw/viewform?embedded=true" height="2177" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+            <iframe class="google-form w-full" src="https://docs.google.com/forms/d/e/1FAIpQLSe1OVOvfpYBC16bvflk_bB8rCv1GQ42DjgmyF73woI1RqnO0Q/viewform?embedded=true" height="2177" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
             <div class="max-w-2xl mx-auto px-5 md:px-3 mt-5">
                 <a class="btn-primary w-full mx-auto bg-musora border-none" href="/members">Submit now</a>
             </div>
