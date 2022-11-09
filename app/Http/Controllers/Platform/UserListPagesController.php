@@ -6,6 +6,7 @@ use App\Http\Controllers\BaseController;
 use App\Maps\ContentTypes;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\UserContentProgressRepository;
@@ -55,6 +56,7 @@ class UserListPagesController extends BaseController
         if (empty($request->get('type'))) {
             $contentTypes[] = 'course-part';
         }
+        ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
 
         $usersPrimaryPlaylist = $this->userPlaylistsService->getUserPlaylist(auth()->id(), 'primary-playlist', brand());
 

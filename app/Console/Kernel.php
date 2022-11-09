@@ -50,6 +50,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('ProcessTrackings')->everyMinute();
+        $schedule->command('content:rebuildSearchIndexes')->dailyAt('2:00');
+        $schedule->command('forums:rebuildSearchIndexes')->hourly();
     }
 
     /**

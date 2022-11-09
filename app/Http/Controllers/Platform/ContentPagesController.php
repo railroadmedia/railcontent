@@ -227,7 +227,6 @@ class ContentPagesController extends BaseController
             ContentRepository::$bypassPermissions = true;
         }
 
-        ContentRepository::$availableContentStatues = false;
         ContentRepository::$pullFutureContent = true;
 
         $classicalMethodPack = null;
@@ -679,6 +678,8 @@ class ContentPagesController extends BaseController
         if ($contentToRenderAsLesson['status'] == ContentService::STATUS_PUBLISHED) {
             ContentRepository::$availableContentStatues = [ContentService::STATUS_PUBLISHED];
         }
+
+        ModeDecoratorBase::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
 
         if (($contentToRenderAsLesson['type'] == 'learning-path-lesson')) {
             $parentChildren = $this->contentService->getByParentId($contentToRenderAsLessonParent['id']);
@@ -1289,6 +1290,8 @@ class ContentPagesController extends BaseController
         $domain,
         $contentId
     ) {
+        ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
+
         $nextContent = $this->contentService->getNextContentForParentContentForUser($contentId, user()->id);
 
         if (empty($nextContent)) {
