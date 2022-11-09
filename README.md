@@ -389,13 +389,13 @@ That'll return something like this:
 Then to view the logs for that that you can run (in railenvmanager container):
 
 ```
-r logs 90b0bd123eb0
+docker logs 90b0bd123eb0
 ```
 
 Or because you don't need the entire id, just enough to differentiate it from other containers, this would probably do:
 
 ```
-r logs 90b0
+docker logs 90b0
 ```
 
 # Image CDN Uploading, Serving, and Formatting 
