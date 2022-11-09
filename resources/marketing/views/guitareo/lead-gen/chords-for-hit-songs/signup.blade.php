@@ -38,8 +38,8 @@
 @section('meta')
     <title>Guitar Chords for Hit Songs | Guitareo</title>
     <meta property="og:title" content="Guitar Chords for Hit Songs | Guitareo">
-    <meta name="description" content=""/>
-    <meta property="og:description" content="">
+    <meta name="description" content="Gain the skills to play guitar chords used in thousands of hit songs with Ayla Tesler-Mabe."/>
+    <meta property="og:description" content="Gain the skills to play guitar chords used in thousands of hit songs with Ayla Tesler-Mabe.">
 
     <meta property="og:image" content="https://guitareo.s3.amazonaws.com/lead-gen/chords-for-hit-songs/fb-share-image.jpg">
     <meta property="og:url" content="https://www.guitareo.com/chords-for-hit-songs/">
@@ -115,20 +115,20 @@
     <section class="py-12 md:py-20" style="background:#FAFAFA;">
         <div class="max-w-md md:max-w-5xl px-4 mx-auto">
             <h4 class="font-extrabold text-center leading-normal mb-2">
-                Master four essential guitar chords <br>
+                Master four chords on the guitar <br>
                 with play-along style lessons.
             </h4>
-            <p class="text-center mb-6">Unlock the possibilities of playing thousands of songs.</p>
+            <p class="text-center mb-6">Unlock your potential to play thousands of popular songs.</p>
             <div class="md:flex md:flex-wrap md:items-center mb-10">
                 <div class="md:w-1/2 md:pr-10 mb-6 md:mb-0">
                     <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_700,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/chords-for-hit-songs/collage.png" alt="collage image">
                 </div>
                 <div class="md:w-1/2 rounded-xl border py-6 px-4 md:pl-10" style="border-color:#E0E0E0;">
-                    <p class="font-bold md:text-center mb-4">You’ll begin to hear the difference with:</p>
-                    <div class="lg:w-3/5 mx-auto">
-                        <h6 class="mb-4"><i class="fas fa-check mr-3 text-xl" aria-hidden="true"></i>Smoother chord changes.</h6>
-                        <h6 class="mb-4"><i class="fas fa-check mr-3 text-xl" aria-hidden="true"></i>Cleaner sounds on guitar.</h6>
-                        <h6><i class="fas fa-check mr-2 text-xl" aria-hidden="true"></i>Enhanced muscle memory.</h6>
+                    <p class="font-bold md:text-center mb-4">Gain 3 essential guitar skills to play songs:</p>
+                    <div class="lg:w-3/4 mx-auto">
+                        <h6 class="mb-4"><i class="fas fa-check mr-3 text-xl" aria-hidden="true"></i>Smoother chord changes</h6>
+                        <h6 class="mb-4"><i class="fas fa-check mr-3 text-xl" aria-hidden="true"></i>Cleaner sounding notes</h6>
+                        <h6><i class="fas fa-check mr-2 text-xl" aria-hidden="true"></i>Better finger muscle memory.</h6>
                     </div>
                 </div>
             </div>
@@ -143,7 +143,7 @@
 
     <section class="py-12 md:py-20">
         <div class="max-w-md md:max-w-5xl px-4 mx-auto text-center">
-            <p class="mb-2">Guided play-along lessons with Ayla Tesler-Mabe.</p>
+            <p class="mb-2">Gain 5 FREE guided lessons with Ayla Tesler-Mabe | Play along on your guitar anywhere, anytime</p>
             <h4 class="font-extrabold leading-normal mb-10">
                 With your play-along lessons, you’ll unlock <br>
                 how to play thousands of hit songs like:
@@ -168,7 +168,7 @@
             <div class="md:w-1/2">
                 <div class="md:pl-3 text-white text-center md:text-left">
                     <img class="h-32 mb-8 inline-block lazyload" data-src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/chords-for-hit-songs/logo.png" alt="logo">
-                    <p class="font-bold italic mb-2">Start to make your chords sound amazing:</p>
+                    <p class="font-bold italic mb-2">Start to sound amazing with 4 guitar chords and <br class="hidden lg:inline">3 essential skills to play hit songs</p>
                     <p class="leading-relaxed"><i class="fas fa-check mr-2 text-xl" aria-hidden="true"></i>Guided play-along lessons.</p>
                     <p class="leading-relaxed"><i class="fas fa-check mr-2 text-xl" aria-hidden="true"></i>Free chord chart diagram.</p>
                     <p class="mb-4 leading-relaxed"><i class="fas fa-check mr-2 text-xl" aria-hidden="true"></i>Yours to keep forever.</p>
