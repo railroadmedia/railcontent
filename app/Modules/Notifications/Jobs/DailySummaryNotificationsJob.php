@@ -37,7 +37,7 @@ class DailySummaryNotificationsJob extends BatchQueryJob
     {
         /** @var NotificationService $notificationService */
         $notificationService = App::make(NotificationService::class);
-        return $notificationService->getRecipientIdsWithUnreadNotifications($this->startDate);
+        return $notificationService->getRecipientIdsWithUnreadNotificationsQuery($this->startDate);
     }
 
     function handleAllItems($items): bool

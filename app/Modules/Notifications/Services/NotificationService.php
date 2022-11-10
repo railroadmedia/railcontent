@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Collection;
 class NotificationService
 {
 
-    public function getRecipientIdsWithUnreadNotifications(Carbon $startDate): Builder
+    public function getRecipientIdsWithUnreadNotificationsQuery(Carbon $startDate): Builder
     {
         return Notification::query()
             ->distinct('recipient_id')
