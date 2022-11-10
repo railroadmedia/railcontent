@@ -4,6 +4,7 @@ namespace App\Modules\Notifications\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Modules\UserManagementSystem\Models\User;
 
 /**
  * @property integer $id
@@ -24,5 +25,10 @@ use Illuminate\Database\Eloquent\Model;
 class Notification extends Model
 {
     protected $table = 'notifications';
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'recipient_id');
+    }
 
 }

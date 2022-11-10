@@ -5,10 +5,10 @@ namespace App\Modules\Notifications\Jobs;
 use App;
 use App\Console\Commands\Infrastructure\BatchQueryJob;
 use App\Modules\Notifications\Models\Notification;
+use App\Modules\Notifications\Services\BroadcastService;
+use App\Modules\Notifications\Services\NotificationService;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
-use Log;
-use Railroad\Railnotifications\Services\NotificationBroadcastService;
 
 class DailySummaryNotificationsJob extends BatchQueryJob
 {
@@ -35,33 +35,40 @@ class DailySummaryNotificationsJob extends BatchQueryJob
 
     function getQuery(): Builder
     {
-        return Notification::query()
-            ->distinct('recipient_id')
-            ->select('recipient_id')
-            ->where('created_at', '>=', $this->startDate)
-            ->whereNull('read_on');
+        /** @var NotificationService $notificationService */
+        $notificationService = App::make(NotificationService::class);
+        return $notificationService->getRecipientIdsWithUnreadNotifications($this->startDate);
     }
 
-    /**
-     * @param Notification $item
-     */
+    function handleAllItems($items): bool
+    {
+        $recipientIds = $items->pluck('recipient_id')->all();
+        /** @var BroadcastService $broadcastService */
+        $broadcastService = App::make(BroadcastService::class);
+        /** @var NotificationService $notificationService */
+        $notificationService = App::make(NotificationService::class);
+
+        $allNotifications = $notificationService->getUnreadNotifications($recipientIds, $this->startDate);
+
+        $grouped = $allNotifications->groupBy(function (Notification $item) {
+            return $item->recipient_id;
+        });
+
+        foreach ($grouped as $recipient_id => $notifications) {
+            $broadcastService->broadcastUnreadAggregated(
+                $notifications,
+                'email',
+            );
+            $broadcastService->broadcastUnreadAggregated(
+                $notifications,
+                'fcm',
+            );
+        }
+
+        return true;
+    }
+
     function handleItem($item): void
     {
-        Log::info("Processing user $item->recipient_id");
-        /** @var NotificationBroadcastService $notificationBroadcastService */
-        $notificationBroadcastService = App::make(NotificationBroadcastService::class);
-
-        $notificationBroadcastService->broadcastUnreadAggregated(
-            $item->recipient_id,
-            'email',
-            $this->startDate
-        );
-
-        $notificationBroadcastService->broadcastUnreadAggregated(
-            $item->recipient_id,
-            'fcm',
-            $this->startDate
-        );
-        usleep(250000); //delay 250 ms to reduce load
     }
 }
