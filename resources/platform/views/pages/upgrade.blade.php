@@ -5,35 +5,14 @@
 @endsection
 
 @section('content')
-
-    <header id="pageHeader"
-            class="fluid tw-py-8 tw-relative tw-bg-cover tw-bg-top tw-bg-no-repeat tw-bg-black"
-            style="background-image:url('https://musora.com/cdn-cgi/image/quality=100/https://musora-web-platform.s3.amazonaws.com/headers/{{ $brand }}-header.jpg');">
-        <div class="tw-container tw-mx-auto tw-text-center">
-            <h1 class="heading tw-text-white tw-mb-2">
-                <a href="javascript:history.back()" class="tw-no-underline">
-                    <i class="fas fa-arrow-circle-left text-grey-3"></i>
-                </a>
-                Upgrade Your Account
-            </h1>
-            <p class="body tw-text-white">
-                The page you are trying to access requires a Musora Membership.
-            </p>
-            <p class="body tw-text-white tw-mb-2">
-                <a href="/#orderNow"
-                class="tw-font-bold tw-text-white">
-                    Upgrade your account
-                </a>
-                or read below to find out what you get with Musora.
-            </p>
-            <div class="tw-flex-center">
-                <a href="/#orderNow"
-                class="btn tw-bg-drumeo tw-text-white collapse-250">
-                    Get a Musora Membership
-                </a>
-            </div>
-        </div>
-    </header>
-
+    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
+        <static-header
+            title="Restart Your membership"
+            cta-text="Restart Your membership"
+            description="Click here to restart your membership and gain access to the Drumeo, Pianote, Guitareo, and Singeo communities!"
+            cta-url="{{ get_legacy_brand_base_url()  }}"
+            img="https://musora.com/cdn-cgi/image/width=720/https://cdn.musora.com/image/fetch/c_fill,w_1920,h_1080,q_auto:good/https://d1923uyy6spedc.cloudfront.net/coaches-2022/pianote/Lisa-Witt-Pianote-ACTION.jpg"
+        />
+    </div>
 @endsection
 

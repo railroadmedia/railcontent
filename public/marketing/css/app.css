@@ -1645,12 +1645,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .w-12 {
   width: 3rem !important;
 }
-.w-64 {
-  width: 16rem !important;
-}
-.w-14 {
-  width: 3.5rem !important;
-}
 .w-44 {
   width: 11rem !important;
 }
@@ -1668,6 +1662,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .w-16 {
   width: 4rem !important;
+}
+.w-14 {
+  width: 3.5rem !important;
 }
 .w-28 {
   width: 7rem !important;
@@ -2566,14 +2563,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 .pt-14 {
   padding-top: 3.5rem !important;
 }
-.pb-7 {
-  padding-bottom: 1.75rem !important;
-}
 .pb-20 {
   padding-bottom: 5rem !important;
 }
 .pl-6 {
   padding-left: 1.5rem !important;
+}
+.pb-7 {
+  padding-bottom: 1.75rem !important;
 }
 .pt-64 {
   padding-top: 16rem !important;
@@ -3766,10 +3763,6 @@ img {
     margin-top: 1.5rem !important;
     margin-bottom: 1.5rem !important;
   }
-  .md\:my-4 {
-    margin-top: 1rem !important;
-    margin-bottom: 1rem !important;
-  }
   .md\:my-8 {
     margin-top: 2rem !important;
     margin-bottom: 2rem !important;
@@ -3777,6 +3770,10 @@ img {
   .md\:my-7 {
     margin-top: 1.75rem !important;
     margin-bottom: 1.75rem !important;
+  }
+  .md\:my-4 {
+    margin-top: 1rem !important;
+    margin-bottom: 1rem !important;
   }
   .md\:-my-7 {
     margin-top: -1.75rem !important;
@@ -3875,12 +3872,6 @@ img {
   .md\:ml-7 {
     margin-left: 1.75rem !important;
   }
-  .md\:mt-48 {
-    margin-top: 12rem !important;
-  }
-  .md\:mt-2 {
-    margin-top: 0.5rem !important;
-  }
   .md\:mt-56 {
     margin-top: 14rem !important;
   }
@@ -3910,6 +3901,9 @@ img {
   }
   .md\:mr-5 {
     margin-right: 1.25rem !important;
+  }
+  .md\:mt-2 {
+    margin-top: 0.5rem !important;
   }
   .md\:mr-0 {
     margin-right: 0px !important;
@@ -4045,9 +4039,6 @@ img {
   }
   .md\:w-1\/4 {
     width: 25% !important;
-  }
-  .md\:w-80 {
-    width: 20rem !important;
   }
   .md\:w-4\/12 {
     width: 33.333333% !important;
@@ -4406,9 +4397,6 @@ img {
   .md\:pr-10 {
     padding-right: 2.5rem !important;
   }
-  .md\:pr-6 {
-    padding-right: 1.5rem !important;
-  }
   .md\:pr-3 {
     padding-right: 0.75rem !important;
   }
@@ -4501,12 +4489,12 @@ img {
     font-size: 1rem !important;
     line-height: 1.5rem !important;
   }
-  .md\:text-lg {
-    font-size: 1.125rem !important;
-    line-height: 1.75rem !important;
-  }
   .md\:text-xl {
     font-size: 1.25rem !important;
+    line-height: 1.75rem !important;
+  }
+  .md\:text-lg {
+    font-size: 1.125rem !important;
     line-height: 1.75rem !important;
   }
   .md\:text-8xl {
@@ -4655,15 +4643,6 @@ img {
   .lg\:mb-6 {
     margin-bottom: 1.5rem !important;
   }
-  .lg\:mt-60 {
-    margin-top: 15rem !important;
-  }
-  .lg\:mt-12 {
-    margin-top: 3rem !important;
-  }
-  .lg\:mt-6 {
-    margin-top: 1.5rem !important;
-  }
   .lg\:mt-2 {
     margin-top: 0.5rem !important;
   }
@@ -4708,6 +4687,9 @@ img {
   }
   .lg\:-mt-1 {
     margin-top: -0.25rem !important;
+  }
+  .lg\:mt-6 {
+    margin-top: 1.5rem !important;
   }
   .lg\:mb-9 {
     margin-bottom: 2.25rem !important;
@@ -4825,9 +4807,6 @@ img {
   }
   .lg\:w-auto {
     width: auto !important;
-  }
-  .lg\:w-96 {
-    width: 24rem !important;
   }
   .lg\:w-5\/12 {
     width: 41.666667% !important;
@@ -5007,10 +4986,6 @@ img {
     padding-left: 2rem !important;
     padding-right: 2rem !important;
   }
-  .lg\:py-10 {
-    padding-top: 2.5rem !important;
-    padding-bottom: 2.5rem !important;
-  }
   .lg\:px-14 {
     padding-left: 3.5rem !important;
     padding-right: 3.5rem !important;
@@ -5066,9 +5041,6 @@ img {
   }
   .lg\:pt-0 {
     padding-top: 0px !important;
-  }
-  .lg\:pt-5 {
-    padding-top: 1.25rem !important;
   }
   .lg\:pr-8 {
     padding-right: 2rem !important;
