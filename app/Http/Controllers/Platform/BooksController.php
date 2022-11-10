@@ -556,7 +556,7 @@ class BooksController extends Controller
                 "description" => "Here you’ll find play-along tracks that go with each style of music you’ve learned in
                 this chapter. Once you’ve completed Chapter 10, go back and practice the drum beats from Chapter 9
                 along with their corresponding play-along track!",
-                                "contentLink" => url()->route('books.best-beginner-drum-book.play-alongs'),
+                "contentLink" => url()->route('books.best-beginner-drum-book.play-alongs'),
 
             ],
             [
@@ -565,7 +565,7 @@ class BooksController extends Controller
                 "title" => "Drumless Play-Along Tracks",
                 "description" => "Here you’ll find all of the resources for Chapter 10. You can turn the drums or
                 click on and off. You can also download a PDF version of a “Cheat Sheet” at the bottom of this page!",
-                                "contentLink" => url()->route('books.best-beginner-drum-book.play-alongs'),
+                "contentLink" => url()->route('books.best-beginner-drum-book.play-alongs'),
 
             ],
         ];
@@ -577,25 +577,23 @@ class BooksController extends Controller
             "user" => $user,
         ]);
     }
-        public function bestBeginnerPlayAlongs(){
-            ContentRepository::$bypassPermissions = true;
 
-            $user = user();
+    public function bestBeginnerPlayAlongs()
+    {
+        ContentRepository::$bypassPermissions = true;
 
-            $hasAccess = $user && ($user->isAMember() || $user->isPackOnlyOwner());
+        $user = user();
 
-            $idsToPull = ['28360', '20657', '23989', '23625', '8431', '24431', '14295', '11689', '23024', '24580'];
+        $hasAccess = $user && ($user->isAMember() || $user->isPackOnlyOwner());
 
-            $listLessons = new ContentFilterResultsEntity(['results' => $this->contentService->getByIds($idsToPull)]);
-            $listLessons['total_results'] = 10;
+        $idsToPull = ['28360', '20657', '23989', '23625', '8431', '24431', '14295', '11689', '23024', '24580'];
 
-            return view(
-                'books.best-beginner-drum-book.play-alongs',
-                [
-                    "hasAccess" => $hasAccess,
-                    "listLessons" => $listLessons->toResponseRawJson(),
-                ]
-            );
+        $listLessons = new ContentFilterResultsEntity(['results' => $this->contentService->getByIds($idsToPull)]);
+        $listLessons['total_results'] = 10;
+
+        return view('books.best-beginner-drum-book.play-alongs', [
+                                                                   "hasAccess" => $hasAccess,
+                                                                   "listLessons" => $listLessons->toResponseRawJson(),
+                                                               ]);
     }
-
 }

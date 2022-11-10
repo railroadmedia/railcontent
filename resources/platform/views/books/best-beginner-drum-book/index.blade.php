@@ -22,7 +22,7 @@
     </style>
 @endsection
 
-@section('scripts')
+@section('layout-scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             var changeFormButtons = document.querySelectorAll('.change-form');
@@ -62,17 +62,17 @@
                         they go great with The Best Beginner Drum Book material.
                         @if($isDigital)
                             @if(!empty($user))
-                                @if(!App\Services\User\UserAccessService::isEdge($user->getId()) && App\Services\User\UserAccessService::isPackOwner($user->getId()))
+                                @if(!$user->isAMember() && $user->isPackOnlyOwner())
                                     <br><br>
                                     As a Best Beginner Drum Book owner, you're entitled to a free 7-day Drumeo
                                     Edge Trial Membership so that you can access all of the resources on this page.
                                     Click the Learn More button to get started.
                                 @endif
 
-                                @if(!App\Services\User\UserAccessService::isPackOwner($user->getId()) && $user->edgeExpired())
+                                @if(!$user->isPackOnlyOwner() && $user->isAnExpiredMember())
                                     <br><br>
                                     To access all of the resources on this page
-                                    <a href="{{ url()->route('members-area.profile.account.primary-payment-method') }}"
+                                    <a href="{{ url()->route('platform.profile.settings.payments',['brand' => 'drumeo','userId' => $user->id]) }}"
                                        class="font-italic">
                                         renew your Drumeo Membership.
                                     </a>
@@ -98,7 +98,7 @@
 
                     <div class="flex flex-row flex-wrap align-v-center">
                         @if($isDigital)
-                            @if(empty($user) || !App\Services\User\UserAccessService::isEdge($user->getId()))
+                            @if(empty($user) || !$user->isAMember())
                                 <a href="/bestbook-trial"
                                    class="btn collapse-250 mr-1 mb-1 bg-success text-white">
                                     Learn More
@@ -162,23 +162,6 @@
                     <p class="tiny text-black mb-1">
                         Or login with an existing account below.
                     </p>
-{{--                    @if($isDigital)--}}
-{{--                        $redirect ={{url()->route('user_management_system.login.cookie') }}?redirect_to={{url()->route('books.best-beginner-drum-book-digital') }};--}}
-{{--                    @else--}}
-{{--                        $redirect ={{url()->route('user_management_system.login.cookie') }}?redirect_to={{url()->route('books.best-beginner-drum-book') }};--}}
-{{--                    @endif--}}
-{{--                    <login-form--}}
-{{--                        brand="drumeo"--}}
-{{--                        loginurl="{{ url()->route('user_management_system.login.cookie', (['redirect_to' => url()->route('books.best-beginner-drum-book')])) }}"--}}
-{{--                        reseturl="{{ url()->route('user_management_system.password.send-reset-email', (!empty($redirect) ? ['redirect_to' => $redirect] : [])) }}"--}}
-{{--                        joinurl="{{url('/#orderNow')}}"--}}
-{{--                        :errors="{{json_encode($errors->all())}}"--}}
-{{--                        hassessionstatus="{{session()->has('status')}}"--}}
-{{--                        sessionstatus="{{ session()->get('status') }}"--}}
-{{--                        :usecsrftoken="!!({{$useCsrfToken ?? true}})"--}}
-{{--                    >--}}
-{{--                        <template v-slot:csrf>{{ csrf_field() }}</template>--}}
-{{--                    </login-form>--}}
                     <form method="POST"
                             @if($isDigital)
                                 action="{{url()->route('user_management_system.login.cookie') }}?redirect_to={{url()->route('books.best-beginner-drum-book-digital') }}"
@@ -394,30 +377,30 @@
                 ])
             @endforeach
             <div class="flex flex-row flex-wrap bt-grey-1-1 pa-1">
-{{--                <div class="flex flex-column xs-12 sm-4 pa-1">--}}
-{{--                    <a href="{{ cdn('books/best-beginner-drum-book/drumeo-practice-routine-generator.pdf') }}"--}}
-{{--                       class="bg-drumeo corners-3 text-white pa no-decoration"--}}
-{{--                       target="_blank" download>--}}
-{{--                        <p class="body font-bold uppercase dense">Practice Routine Generator</p>--}}
-{{--                        <p class="tiny font-italic uppercase dense">PDF Download</p>--}}
-{{--                    </a>--}}
-{{--                </div>--}}
-{{--                <div class="flex flex-column xs-12 sm-4 pa-1">--}}
-{{--                    <a href="{{ cdn('books/best-beginner-drum-book/drumeo-notation-legend.pdf') }}"--}}
-{{--                       class="bg-drumeo corners-3 text-white pa no-decoration"--}}
-{{--                       target="_blank" download>--}}
-{{--                        <p class="body font-bold uppercase dense">Drumeo Notation Legend</p>--}}
-{{--                        <p class="tiny font-italic uppercase dense">PDF Download</p>--}}
-{{--                    </a>--}}
-{{--                </div>--}}
-{{--                <div class="flex flex-column xs-12 sm-4 pa-1">--}}
-{{--                    <a href="{{ cdn('books/best-beginner-drum-book/drumeo-cheat-sheet.pdf') }}"--}}
-{{--                       class="bg-drumeo corners-3 text-white pa no-decoration"--}}
-{{--                       target="_blank" download>--}}
-{{--                        <p class="body font-bold uppercase dense">Drumeo Cheat Sheet</p>--}}
-{{--                        <p class="tiny font-italic uppercase dense">PDF Download</p>--}}
-{{--                    </a>--}}
-{{--                </div>--}}
+                <div class="flex flex-column xs-12 sm-4 pa-1">
+                    <a href="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/drumeo-practice-routine-generator.pdf"
+                       class="bg-drumeo corners-3 text-white pa no-decoration"
+                       target="_blank" download>
+                        <p class="body font-bold uppercase dense">Practice Routine Generator</p>
+                        <p class="tiny font-italic uppercase dense">PDF Download</p>
+                    </a>
+                </div>
+                <div class="flex flex-column xs-12 sm-4 pa-1">
+                    <a href="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/drumeo-notation-legend.pdf"
+                       class="bg-drumeo corners-3 text-white pa no-decoration"
+                       target="_blank" download>
+                        <p class="body font-bold uppercase dense">Drumeo Notation Legend</p>
+                        <p class="tiny font-italic uppercase dense">PDF Download</p>
+                    </a>
+                </div>
+                <div class="flex flex-column xs-12 sm-4 pa-1">
+                    <a href="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/drumeo-cheat-sheet.pdf"
+                       class="bg-drumeo corners-3 text-white pa no-decoration"
+                       target="_blank" download>
+                        <p class="body font-bold uppercase dense">Drumeo Cheat Sheet</p>
+                        <p class="tiny font-italic uppercase dense">PDF Download</p>
+                    </a>
+                </div>
             </div>
         </div>
     </div>

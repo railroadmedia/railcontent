@@ -49,4 +49,13 @@ Route::domain('{musoraDomain}')
                 'uses' => \App\Http\Controllers\Platform\BooksController::class . '@bestBeginnerPlayAlongs'
             ]
         );
+
+        Route::get(
+            '/bestbook-digital',
+            [
+                'as' => 'books.best-beginner-drum-book-digital',
+                'uses' => \App\Http\Controllers\Platform\BooksController::class . '@bestBeginner'
+            ]
+        );
+        Route::get('/bestbook-trial', function () { return view('sales.trials.trial-book'); });
     });
