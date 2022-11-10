@@ -147,7 +147,7 @@
 @stop
 
 @section('global-body')
-    @include('pianote.sales.nav')
+    @include('pianote._partials._nav')
     <section class="text-center text-white pb-5 md:pb-10 px-3 md:px-4" style="background:linear-gradient(to bottom, #030a14 50%, #44151d);">
         <div class="container mx-auto max-w-5xl">
             <a href="https://youtu.be/yRdOLuLz2I0" target="_blank"><img class="inline-block h-44 md:h-72 lg:h-96" src="https://pianote.s3.amazonaws.com/lead-gen/one-mil.png"></a>
@@ -200,7 +200,7 @@
     <div class="reveal large text-center" id="trailer" data-reveal data-reset-on-close="false" style="max-width:440px">
         <iframe class="google-form w-full" src="https://docs.google.com/forms/d/e/1FAIpQLScfFSkurzZdJtpdG_ReoopBLnURr2e0D60OjMST-2GWUsC71A/viewform?embedded=true" height="810" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
     </div>
-    @include("pianote.sales.footer")
+    @include("pianote._partials._footer")
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
         $(document).ready(function () {

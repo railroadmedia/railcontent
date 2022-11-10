@@ -128,7 +128,7 @@
 @stop()
 
 @section('global-body')
-    @include('pianote.sales.nav', [
+    @include('pianote._partials._nav', [
         "cartVersion" => true
     ])
 {{--    @include('shop.partials._promo-banner')--}}
@@ -328,7 +328,7 @@
     </div>
 
 
-    @include('pianote.sales.footer')
+    @include('pianote._partials._footer')
     <script src="{{ asset('marketing/js/pianote/manifest.js') }}"></script>
     <script src="{{ asset('marketing/js/pianote/vendor.js') }}"></script>
     <script src="{{ asset('marketing/js/pianote/cart-sidebar.js') }}"></script>

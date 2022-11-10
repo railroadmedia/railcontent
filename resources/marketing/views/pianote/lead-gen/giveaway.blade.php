@@ -40,7 +40,7 @@
 @endsection
 
 @section('global-body')
-    @include('pianote.sales.nav')
+    @include('pianote._partials._nav')
 
     <header class="py-12 sm:py-20 bg-no-repeat" style="background-color:#00101D;">
         <div class="container mx-auto max-w-4xl">
@@ -56,7 +56,7 @@
                             <br>
                             <strong class="text-pianote uppercase">ONLY <span class="tzcd-full">A LIMITED TIME</span> LEFT</strong>
                         </p>
-                        @include('pianote.lead-gen._sign-up-form', [
+                        @include('pianote._partials._sign-up-form', [
                             "formId" => 'Pianote - Engagement - Trigger - FP30 Giveaway - Web Form',
                             "formName" => 'FP30 Giveaway',
                             'buttonText' => 'I WANT TO WIN!',
@@ -195,7 +195,7 @@
         <div class="mx-auto max-w-md md:max-w-2xl">
             <img class="h-32 sm:h-36 md:h-44 lg:h-52 lazyload" data-src="https://cdn.musora.com/image/fetch/w_650,q_auto:best/https://pianote.s3.amazonaws.com/giveaways/logo.png" alt="title image">
             <h6 class="my-4 sm:my-6 uppercase text-pianote"><strong>ONLY <span class="tzcd-full">A LIMITED TIME</span> LEFT</strong></h6>
-            @include("pianote.lead-gen._sign-up-form", [
+            @include("pianote._partials._sign-up-form", [
                     "formId" => 'Pianote - Engagement - Trigger - FP30 Giveaway - Web Form',
                     "formName" => 'FP30 Giveaway',
                 "buttonText" => "I WANT TO WIN!",
@@ -209,7 +209,7 @@
         "name" => "trailer",
         "vimeoId" => "767456067",
     ])
-    @include('pianote.sales.footer')
+    @include('pianote._partials._footer')
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="/marketing/parcel/pianote/nav-footer.js"></script>

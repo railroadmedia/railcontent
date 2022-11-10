@@ -8,7 +8,7 @@
             {!! $content !!}
         @endif
         <div class="mx-auto" style="max-width:700px">
-            @include('pianote.lead-gen._sign-up-form', [
+            @include('pianote._partials._sign-up-form', [
                 "redirect" => true,
                 "formId" => $formId,
                 "formName" => $formName,

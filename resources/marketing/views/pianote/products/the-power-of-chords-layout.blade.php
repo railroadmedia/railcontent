@@ -330,7 +330,7 @@
 @endsection
 
 @section('global-body')
-    @include('pianote.sales.nav', [
+    @include('pianote._partials._nav', [
         "cartVersion" => true
     ])
 
@@ -709,7 +709,7 @@
         ])
     @endforeach
 
-    @include('pianote.sales.footer')
+    @include('pianote._partials._footer')
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="/marketing/js/modal.js"></script>

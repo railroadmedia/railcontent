@@ -202,7 +202,7 @@
                     </h6>
                 </div>
                 <div class="md:pr-20">
-                    @include("pianote.lead-gen._sign-up-form", [
+                    @include("pianote._partials._sign-up-form", [
                     "formId" => "Pianote - Engagement - Trigger - Chord Hacks - Web Form",
                     "formName" => 'Chord Hacks',
                         "buttonText" => "Get started for free",
@@ -515,7 +515,7 @@
                     Enter your email below for your 6 free lessons.
                 </p>
                 <div class="max-w-md md:max-w-auto lg:w-96 mx-auto md:mx-0">
-                    @include("pianote.lead-gen._sign-up-form", [
+                    @include("pianote._partials._sign-up-form", [
                     "formId" => "Pianote - Engagement - Trigger - Chord Hacks - Web Form",
                     "formName" => 'Chord Hacks',
                         "buttonText" => "Get started for free",

@@ -205,7 +205,7 @@
                     </h6>
                 </div>
                 <div class="md:pr-20">
-                    @include("pianote.lead-gen._sign-up-form", [
+                    @include("pianote._partials._sign-up-form", [
                     "formId" => "Pianote - Engagement - Trigger - GSOTP - Web Form",
                     "formName" => 'Getting Started On The Piano',
                         "buttonText" => "Get started for free",
@@ -505,7 +505,7 @@
                     <i class="fas fa-check sm:mr-2 text-xl" style="color:#FF0000;"></i> 100% free -- lifetime access!<br>
                 </p>
                 <div class="max-w-md md:max-w-auto lg:w-96 mx-auto md:mx-0">
-                    @include("pianote.lead-gen._sign-up-form", [
+                    @include("pianote._partials._sign-up-form", [
                     "formId" => "Pianote - Engagement - Trigger - GSOTP - Web Form",
                     "formName" => 'Getting Started On The Piano',
                         "buttonText" => "Get started for free",

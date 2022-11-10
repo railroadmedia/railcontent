@@ -316,7 +316,7 @@
                                 LIVE support from a professional teacher</em>
                         </p>
                     </div>
-                    {{--@include('pianote.lead-gen._sign-up-form', [--}}
+                    {{--@include('pianote._partials._sign-up-form', [--}}
                             {{--"formId" => 'Pianote - Engagement - Trigger - Complete Beginners Bootcamp - Web Form',--}}
                             {{--"formName" => 'Piano For Complete Beginners Bootcamp',--}}
                             {{--"buttonText" => "Save my spot!",--}}
@@ -459,7 +459,7 @@
                 with LIVE support from a professional teacher
             </p>
 
-            {{--@include('pianote.lead-gen._sign-up-form', [--}}
+            {{--@include('pianote._partials._sign-up-form', [--}}
                 {{--"formId" => 'Pianote - Engagement - Trigger - Complete Beginners Bootcamp - Web Form',--}}
                 {{--"formName" => 'Piano For Complete Beginners Bootcamp',--}}
                 {{--"buttonText" => "Save my spot!",--}}

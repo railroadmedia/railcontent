@@ -19,7 +19,7 @@
 @stop
 
 @section('global-body')
-    @include('pianote.sales.nav', [
+    @include('pianote._partials._nav', [
         "joinVersion" => true
     ])
     <div class="hero-header px-4 py-12 md:py-20 lg:py-32 bg-black bg-center bg-cover" style="background-image:url(https://d2vyvo0tyx8ig5.cloudfront.net/sales/customize-bg.jpg);">
