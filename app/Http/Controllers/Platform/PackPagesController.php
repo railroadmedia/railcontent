@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Platform;
 
 use App\Collections\PackCollection;
 use App\Decorators\Content\VimeoVideoSourcesDecorator;
+use App\Decorators\Content\LessonAssignmentDecorator;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\View\View;
+use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentHierarchyService;
@@ -39,16 +41,20 @@ class PackPagesController extends Controller
      */
     private $vimeoVideoSourcesDecorator;
 
+    private LessonAssignmentDecorator $lessonAssignmentDecorator;
+
     public function __construct(
         ContentService $contentService,
         UserContentProgressService $userContentProgressService,
         ContentHierarchyService $contentHierarchyService,
-        VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator
+        VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator,
+        LessonAssignmentDecorator $lessonAssignmentDecorator
     ) {
         $this->contentService = $contentService;
         $this->userContentProgressService = $userContentProgressService;
         $this->contentHierarchyService = $contentHierarchyService;
         $this->vimeoVideoSourcesDecorator = $vimeoVideoSourcesDecorator;
+        $this->lessonAssignmentDecorator = $lessonAssignmentDecorator;
     }
 
     /**
@@ -275,6 +281,7 @@ class PackPagesController extends Controller
             ContentRepository::$bypassPermissions = true;
         }
 
+        ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
         $pack =
             $this->contentService->getBySlugAndType($packSlug, 'pack')
                 ->first();
@@ -321,6 +328,12 @@ class PackPagesController extends Controller
             if ($parentChild['id'] == $lessonContent['id']) {
                 $matched = true;
             }
+        }
+
+        if (empty($lesson['assignments'] ?? [])) {
+            LessonAssignmentDecorator::$decorationMode = LessonAssignmentDecorator::DECORATION_MODE_MAXIMUM;
+            $this->lessonAssignmentDecorator->decorate(new Collection([$lesson]))
+                ->first();
         }
 
         $lessonAssignments = $lesson['assignments'] ?? [];
