@@ -12,6 +12,12 @@ use Illuminate\Support\Facades\Log;
 abstract class Command extends CommandBase
 {
 
+    public function info($string, $verbosity = null)
+    {
+        Log::info($string); //also write info statements to log
+        $this->line($string, 'info', $verbosity);
+    }
+
     public function withProgressBarChunked(Builder $query, callable $function, $chunks = 1000, $timeout = 600): bool
     {
         $timeStart = microtime(true);
