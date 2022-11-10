@@ -176,16 +176,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.241.0",
+            "version": "3.241.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "9a08ac83249a2e6d07c624802cbf961f7269a691"
+                "reference": "124ec1258f667e99f2fc3288f3e59fd4903a22d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/9a08ac83249a2e6d07c624802cbf961f7269a691",
-                "reference": "9a08ac83249a2e6d07c624802cbf961f7269a691",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/124ec1258f667e99f2fc3288f3e59fd4903a22d3",
+                "reference": "124ec1258f667e99f2fc3288f3e59fd4903a22d3",
                 "shasum": ""
             },
             "require": {
@@ -264,9 +264,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.241.0"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.241.1"
             },
-            "time": "2022-11-08T19:16:53+00:00"
+            "time": "2022-11-09T19:31:43+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -8386,16 +8386,16 @@
         },
         {
             "name": "railroad/railnotifications",
-            "version": "3.0.9",
+            "version": "3.0.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railnotifications.git",
-                "reference": "93e7c82853af4038897b456af2cd96f09dbecfc2"
+                "reference": "942b54f3f93d1c820a087548653cdd2116994e83"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railnotifications/zipball/93e7c82853af4038897b456af2cd96f09dbecfc2",
-                "reference": "93e7c82853af4038897b456af2cd96f09dbecfc2",
+                "url": "https://api.github.com/repos/railroadmedia/railnotifications/zipball/942b54f3f93d1c820a087548653cdd2116994e83",
+                "reference": "942b54f3f93d1c820a087548653cdd2116994e83",
                 "shasum": ""
             },
             "require": {
@@ -8446,9 +8446,9 @@
             "description": "Laravel notification system using entities",
             "support": {
                 "issues": "https://github.com/railroadmedia/railnotifications/issues",
-                "source": "https://github.com/railroadmedia/railnotifications/tree/3.0.9"
+                "source": "https://github.com/railroadmedia/railnotifications/tree/3.0.10"
             },
-            "time": "2022-11-09T18:29:44+00:00"
+            "time": "2022-11-09T18:55:30+00:00"
         },
         {
             "name": "railroad/railtracker",
@@ -16132,5 +16132,5 @@
         "ext-curl": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.2.0"
 }

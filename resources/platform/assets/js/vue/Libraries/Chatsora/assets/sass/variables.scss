@@ -18,3 +18,64 @@ $lifetimeColor: #07B3FF; // light blue
 $coachColor: #FAA300; // yellow
 $guitareoColor: #00C9AC;
 $pianoteColor: #F61A30;
+
+/* breakpoints */
+// vuesora
+$small: 40rem; // 640px
+$medium: 64rem; // 1024px
+$large: 72.5rem; // 1240px
+$xLarge: 97.5rem; // 1560px
+
+// specs
+$desktopXl: 1920px;
+$desktop: 1366px;
+$tablet: 768px;
+$mobile: 360px;
+
+@mixin small {
+  @media screen and (min-width: #{$small}) {
+    @content;
+  }
+}
+
+@mixin medium {
+  @media screen and (min-width: #{$medium}) {
+    @content;
+  }
+}
+
+@mixin large {
+  @media screen and (min-width: #{$large}) {
+    @content;
+  }
+}
+
+@mixin xLarge {
+  @media screen and (min-width: #{$xLarge}) {
+    @content;
+  }
+}
+
+@mixin desktopXl {
+  @media screen and (min-width: #{$desktopXl}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media screen and (min-width: #{$desktop}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media screen and (min-width: #{$tablet}) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media screen and (min-width: #{$mobile}) {
+    @content;
+  }
+}

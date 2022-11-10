@@ -13,7 +13,7 @@ class NavigationService
         if (empty($user)) {
             return [];
         }
-        
+
         if ($user->isPackOnlyOwner() || !$user->isAMember() || $user->isAnExpiredMember()) {
             return [
                 [ // section
@@ -30,8 +30,8 @@ class NavigationService
                 ],
                 [ // section
                     [
-                        'name' => 'Packs',
-                        'path' => '/'.brand().'/packs',
+                        'name' => brand() === 'singeo' ? 'Courses' : 'Packs',
+                        'path' => brand() === 'singeo' ? '/'.brand().'/courses' : '/'.brand().'/packs',
                         'icon' => 'box',
                     ],
                 ],
