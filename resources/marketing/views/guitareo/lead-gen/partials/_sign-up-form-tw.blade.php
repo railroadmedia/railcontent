@@ -15,14 +15,14 @@
     @endif
 
     <div class="infusion-field w-full px-2 md:px-3 float-left {{ (!empty($stacked) && $stacked) ? '' : 'md:w-7/12 md:text-left' }}">
-        <input id="inf_form_xid" class="w-full" name="email" type="email" placeholder="Email Address..." required/>
+        <input class="w-full" name="email" type="email" placeholder="Email Address..." required/>
     </div>
     <div class="infusion-submit w-full px-2 md:px-3 float-left {{ (!empty($stacked) && $stacked) ? '' : 'md:w-5/12' }}">
         @if(!empty($submitArrows))
             <img class="form-arrow arrow-left" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/arrow-right-white.png">
             <img class="form-arrow arrow-right" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/arrow-left-white.png">
         @endif
-        <button class="submit hover:opacity-100 @if(!empty($outline)) outline @endif" type="submit" style="background:@if(!empty($submitButtonColor)) {{ $submitButtonColor }} @else #00c9ac @endif; color:white; opacity:0.93;">
+        <button class="submit hover:opacity-100 @if(!empty($outline)) outline @endif" type="submit" style="background:@if(!empty($submitButtonColor)) {{ $submitButtonColor }} @else #00c9ac @endif ; color: @if(!empty($buttonTextColor)) {{$buttonTextColor}} @else white @endif ; opacity:0.93;">
             <span class="pre-add">@if(!empty($buttonText)) {!!  $buttonText  !!} @else Get Started @endif <i class="fad fa-paper-plane"></i></span>
             <span class="pending hidden">Sending <i class="fad fa-spinner-third fa-spin"></i></span>
             <span class="success hidden">Sent <i class="fad fa-thumbs-up"></i></span>
@@ -46,7 +46,7 @@
     @endif
 </form>
 <br>
-<div class="disclaimer opacity-70 mx-auto inline-block">
+<div class="disclaimer opacity-70 mx-auto inline-block" @if(!empty($disclaimerColor)) style="color: {{$disclaimerColor}};" @endif>
     <i class="fal fa-info-circle float-left leading-none"></i>
     <span class="mx-auto text-left float-left leading-tight">By signing up you’ll also receive our ongoing free lessons and special offers. Don’t worry, we value your privacy and you can unsubscribe at any time.</span>
 </div>
@@ -64,4 +64,4 @@
         <a href="https://www.instagram.com/guitareoofficial/" target="_blank" class="instagram"><i class="fab fa-instagram"></i></a>
     </div>
 </div>
-@include("lead-gen.partials.impact-email-sign-up-tracker")
+@include("guitareo.lead-gen.partials.impact-email-sign-up-tracker")

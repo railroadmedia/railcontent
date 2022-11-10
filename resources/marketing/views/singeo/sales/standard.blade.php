@@ -1,5 +1,5 @@
 @extends('singeo.sales.standard-layout', [
-"openVersion" => true
+    "openVersion" => true
 ])
 
 @section('global-head')
@@ -9,52 +9,72 @@
     @parent
 @endsection
 
-@section('head-optimize')
-    @include('partials.google-optimize')
-@stop
+@section('top-promo-bar') @endsection
 
 @section('promo-banner')
-    <div id="promo" class="anchor"></div>
-    <section class="text-white text-center relative z-10 overflow-hidden px-4 md:px-3 lg:px-5 md:px-8 py-8 md:py-14 bg-cover bg-center" style="background:radial-gradient(#022040, #01050f 80%);">
-        <div class="container mx-auto relative z-10 max-w-6xl">
-            <h1 class="font-bebas leading-none mb-1 text-5xl md:text-6xl">FIND <span class="text-coaches">(AND LOVE)</span><br class="inline md:hidden"> YOUR TRUE VOICE</h1>
-            <p class="leading-normal mb-3 md:mb-5 uppercase"><strong>With International Singing<br class="inline sm:hidden"> Superstar - Sheléa<br>
-                    <span class="text-coaches">SAVE {{ round(100 - (100 * (\App\Prices::$singeoMembershipAnnual / \App\Prices::$singeoMembershipAnnualFull))) }}% ON AN ANNUAL MEMBERSHIP<br class="inline md:hidden"> + GET A FREE VOWEL POSTER</span></strong></p>
-            <p class="leading-relaxed text-light-navy mb-5 max-w-2xl">Sheléa has performed on the world’s biggest stages. From NFL Stadiums to the Grammy Museum, and even the White House. Her voice has been compared to Whitney Houston, and it’s guaranteed to move you.
-                <br><br>
-                And this month she’ll help you find (and love) your true voice. Join Sheléa exclusively inside the Singeo Members Area and learn the secrets to finding, trusting, protecting, and ultimately LOVING your voice.
-                <br><br>
-                Get inspired and learn practical tips from a world-class singer.</p>
+{{--    <div id="promo" class="anchor"></div>--}}
+{{--    <section class="text-white text-center relative z-10 overflow-hidden px-4 md:px-3 lg:px-5 md:px-8 py-8 md:py-14 bg-cover bg-center lazyload" data-bg="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://singeo.s3.amazonaws.com/sales/promos/september/promo_bg.jpg" style="background-color:#0b0b0b;" --}}{{--style="background:radial-gradient(#022040, #01050f 80%);"--}}{{-->--}}
+{{--        <div class="container mx-auto relative z-10 max-w-4xl">--}}
+{{--            <img class="h-16 sm:h-20 md:h-24 lg:h-36 mb-6 md:mb-10" src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/https://singeo.s3.amazonaws.com/sales/promos/september/promo_logo.png" alt="singeo turning one image">--}}
+{{--            --}}{{--<h1 class="font-bebas leading-none mb-1 text-5xl md:text-6xl">YOU CAN SING - <br class="inline md:hidden"> <span class="text-coaches">HERE'S HOW!</span></h1>--}}
+{{--            <h5 class="leading-normal mb-3 md:mb-5"><strong>Raise your hand if you’re ready <br> for $30 OFF your annual membership.</strong>--}}
+{{--                <br><span class="uppercase text-coaches">ONLY <span class="tzcd-full hidden sm:inline">A LIMITED TIME</span> <span class="tzcd-small inline sm:hidden">A LIMITED TIME</span> LEFT!</span>--}}
+{{--            </h5>--}}
 
 
-            <div class="max-w-lg lg:max-w-2xl mx-auto relative">
-                <div class="aspect-16:9 w-full relative rounded-xl overflow-hidden">
-                    <iframe class="absolute w-full h-full" src="https://www.youtube.com/embed/GEZQZ3pxpAE?rel=0&showinfo=0" frameborder="0" allowfullscreen allow="autoplay"></iframe>
-                </div>
-                <img style="transform: translate(-100%, -50%);" class="absolute hidden sm:inline top-1/2 -left-4 w-40 lg:w-64 lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://singeo.s3.amazonaws.com/sales/promos/march/left_spread.png">
-                <img style="transform: translate(100%, -50%);" class="absolute hidden sm:inline top-1/2 -right-4 w-40 lg:w-64 lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://singeo.s3.amazonaws.com/sales/promos/march/right_spread.png">
-            </div>
-            <a class="anchor-slide join smaller coaches mt-5" href="#customize-anchor">SEE THE DEAL</a>
-        </div>
-    </section>
+{{--            <div class="flex flex-wrap items-start justify-center mx-auto my-5 sm:my-10">--}}
+{{--                <div class="flex flex-wrap items-start flex-image mx-auto w-full md:w-4/12 lg:w-4/12 md:order-1 mb-5 md:mb-0 justify-center">--}}
+{{--                    <img class="h-72 md:h-auto" src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/https://singeo.s3.amazonaws.com/sales/promos/september/promo_collage.png">--}}
+{{--                </div>--}}
+{{--                <div class="text-left md:pr-3 lg:pr-8 w-full md:w-8/12 lg:w-8/12">--}}
+{{--                    <p class="mx-auto">It’s that time of the year again!--}}
+{{--                        <br><br>--}}
+{{--                        The relaxed days of summer are great, but going back to school (or work) always comes with an air of excitement. So many people to see and so many things to do.--}}
+{{--                        <br><br>--}}
+{{--                        That’s until a couple of weeks after when your day-to-day becomes extremely busy, and your passions (and singing) fall down the sidelines.--}}
+{{--                        <br><br>--}}
+{{--                        Luckily, it doesn’t have to be like that anymore. Singeo has your back with structured step-by-step lessons and timed vocal exercise routines that fit even in the busiest schedule. Plus, you can get all the personal feedback and support you need to guarantee you’re making progress.--}}
+{{--                        <br><br>--}}
+{{--                        This year you’re going back to school with Singeo and loving every second of it! Become a Singeo Member for <strong>ONLY <s>${{ SingeoPrices::$singeoMembershipAnnualFull }}</s> ${{ SingeoPrices::$singeoMembershipAnnual }}</strong>.--}}
+{{--                        <br><br>--}}
+{{--                        Get straight A’s on your singing and achieve the beautiful voice you’ve always wanted.--}}
+{{--                    </p>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+
+
+{{--            --}}{{--<div class="max-w-lg lg:max-w-2xl mx-auto relative my-3 md:my-5">--}}
+{{--                --}}{{--<div class="aspect-16:9 w-full relative rounded-xl overflow-hidden">--}}
+{{--                    --}}{{--<iframe class="absolute w-full h-full" src="//player.vimeo.com/video/658674279" frameborder="0" allowfullscreen allow="autoplay" title="find your true voice with shelea"></iframe>--}}
+{{--                --}}{{--</div>--}}
+{{--                --}}{{--<img style="transform: translate(-100%, -50%);" class="absolute hidden sm:inline top-1/2 -left-4 w-40 lg:w-64 lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://singeo.s3.amazonaws.com/sales/promos/march/left_spread.png" alt="left-spread">--}}
+{{--                --}}{{--<img style="transform: translate(100%, -50%);" class="absolute hidden sm:inline top-1/2 -right-4 w-40 lg:w-64 lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://singeo.s3.amazonaws.com/sales/promos/march/right_spread.png" alt="right-spread">--}}
+{{--            --}}{{--</div>--}}
+{{--            <a class="anchor-slide join smaller coaches mt-5" href="#customize-anchor">START MY SINGING LESSONS &raquo;</a>--}}
+{{--        </div>--}}
+{{--    </section>--}}
 @endsection
 
 @section('sticky-bar')
-
-    <div class="h-10 relative w-full block" style="background:linear-gradient(to bottom, #7fddf7, #afade2);"></div>
-    <a href="#customize-anchor" style="background:linear-gradient(to bottom, #7fddf7, #afade2);"
-            class="promo-banner anchor-slide block text-center w-full transition-opacity duration-300 overflow-hidden whitespace-nowrap text-white bg-cover bg-center shadow-md py-1 hover:text-gray-100 z-0 mx-auto -mt-10 text-xs">
-        <div class="container mx-auto relative">
-            <div class="inline-block align-middle text-center">
-                {{--<img class="inline-block align-middle mr-2 h-8" src="https://drumeo-assets.s3.amazonaws.com/promos/september/logo.svg">--}}
-                <h5 class="font-bebas inline-block align-middle mx-auto text-2xl leading-none mr-1.5 h-8 py-1.5 px-2 bg-black rounded-md">FIND YOUR TRUE VOICE WITH SHELÉA</h5>
-                <p class="inline-block align-middle mx-auto font-bebas text-sm leading-none sm:text-lg sm:leading-none text-black text-left">
-                    <span class="uppercase">SAVE {{ round(100 - (100 * (\App\Prices::$singeoMembershipAnnual / \App\Prices::$singeoMembershipAnnualFull))) }}% ON YOUR<br> MEMBERSHIP</span></p>
-            </div>
-        </div>
-    </a>
+{{--    <div class="h-10 relative w-full block" style="background-color:#000;background-image:url('https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://singeo.s3.amazonaws.com/sales/promos/september/promo_bg.jpg'); background-size:cover;"></div>--}}
+{{--    <a--}}
+{{--        href="#customize-anchor"--}}
+{{--        class="promo-banner anchor-slide block text-center w-full transition-opacity duration-300 overflow-hidden whitespace-nowrap text-white bg-cover bg-center shadow-md py-1 hover:text-gray-100 z-0 mx-auto -mt-10 text-xs"--}}
+{{--        style="background-color:#000;background-image:url('https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://singeo.s3.amazonaws.com/sales/promos/september/promo_bg.jpg'); background-size:cover;"--}}
+{{--    >--}}
+{{--        <div class="container mx-auto relative">--}}
+{{--            <div class="inline-block align-middle text-center">--}}
+{{--                <img class="inline-block align-middle mr-2 h-6 sm:h-8 mt-2" src="https://cdn.musora.com/image/fetch/w_260,q_auto:best/https://singeo.s3.amazonaws.com/sales/promos/september/order_sticky_logo.png">--}}
+{{--                 --}}{{--<h5 class="font-bebas inline-block align-middle mx-auto text-2xl leading-none mr-1.5 h-8 py-1.5 px-2 bg-black rounded-md">FIND YOUR TRUE VOICE WITH SHELÉA</h5> --}}
+{{--                <p class="inline-block align-middle mx-auto font-bebas text-sm leading-none sm:text-base sm:leading-none text-left uppercase">--}}
+{{--                    Get a full year of singing <br>--}}
+{{--                    lessons for just $97.--}}
+{{--                </p>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </a>--}}
 @endsection
 
 @section('final')
-    @include("singeo.sales.partials._subscribe-options")
+     @include("singeo.sales.partials._subscribe-options")
 @endsection

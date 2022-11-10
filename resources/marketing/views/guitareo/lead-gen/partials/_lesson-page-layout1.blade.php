@@ -54,12 +54,12 @@
                 @yield('assets')
                 <div class="mb-10"></div>
             @endif
-            
+
             @isset($PDF)
                 <div class="px-3 md:px-4">
                     <a target="_blank" href="{{ $PDF }}" class="download-button big w-full"><i class="fas fa-download"></i> Download PDF</a>
                 </div>
-                <br><br>                        
+                <br><br>
             @endisset
 
             <div class="text-left">

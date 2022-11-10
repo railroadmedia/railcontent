@@ -1,4 +1,12 @@
-<li class="scalable-card {{ !empty($cardType) ? $cardType : '' }} {{ !empty($soldOut) ? 'sold-out' : '' }}" data-price="{{ $price }}" data-category="{{ $category }}" data-popularity="{{ $popularity }}">
+{{--@php    --}}
+{{--    $soldOut = false;--}}
+
+{{--    if(!empty($sku) && !empty($productStock[$sku]) && ($category !== 'lessons' && $category !== 'bundles')){--}}
+{{--        $soldOut = $productStock[$sku]->isProductSoldOut();--}}
+{{--    }--}}
+{{--@endphp--}}
+
+<li class="scalable-card {{ !empty($cardType) ? $cardType : '' }} {{ $soldOut ? 'sold-out' : '' }}" data-price="{{ $price }}" data-category="{{ $category }}">
     <div class="flip-card-inner">
         <div class="flip-card-front card-inside">
             <section class="drum-shop">
@@ -14,7 +22,7 @@
                     @endif
                     @if(!empty($packLogo))
                         <div class="logo">
-                            <img src="{{ $packLogo }}">
+                            <img src="{{ $packLogo }}" alt="{{ $title }} logo">
                         </div>
                     @endif
                     <i class="fas fa-arrow-right hover-icon"></i>
@@ -30,18 +38,18 @@
                         <p><s>WAS ${{ $fullPrice }}</s>
                             <strong> NOW
                                 @if(number_format($price, 2) == intval($price))
-                                    ${{  $price  }}
+                                    ${{  floatval($price)  }}
                                 @else
-                                    ${{  number_format($price, 2)  }}
+                                    ${{  floatval(number_format($price, 2))  }}
                                 @endif
                             </strong></p>
                     @else
-                        <p><strong>${{  $price  }}</strong></p>
+                        <p><strong>${{  floatval($price)  }}</strong></p>
                     @endif
                 </div>
             </section>
         </div>
-        @if(empty($isBundle))
+        @if($category !== 'bundles')
             <div class="flip-card-back">
                 <div class="card-center">
                     <h6>{!! $title !!}</h6>
@@ -56,26 +64,30 @@
                     @elseif (round(100 - (100 * ($price / $fullPrice))) > 1)
                         <p class="price"><s>${{ $fullPrice }}</s> <strong>
                                 @if(number_format($price, 2) == intval($price))
-                                    ${{  $price  }}
+                                    ${{  floatval($price)  }}
                                 @else
-                                    ${{  number_format($price, 2)  }}
+                                    ${{  floatval(number_format($price, 2))  }}
                                 @endif
                             </strong></p>
                     @else
-                        <p class="price"><strong> ${{  $price  }}</strong></p>
+                        <p class="price"><strong> ${{  floatval($price)  }}</strong></p>
                     @endif
                     @if(!empty($includedEdge))
                         <p class="description" style="top: -13px;position: relative;margin: 0;"><em class="text-red">Or free with Guitareo</em></p>
                     @endif
-                    @if(empty($soldOut))
-                        @if(!empty($variations))
+                    @if(!$soldOut)
+                        @if(!empty($sizes) && count($sizes) > 0)
                             <select class="pack-pick" title="Shirt Size" required>
                                 <option hidden value="">Choose Size</option>
-                                @foreach($variations as $variant)
+                                @foreach($sizes as $size)
                                     <option
-                                        @if(isset($variant->soldOut) && $variant->soldOut) disabled @endif value="{{$variant->sku}}"
-                                        @if(isset($variant->productJson) && $variant->productJson) data-product-json='{{$variant->productJson}}' @endif
-                                    >{{ $variant->name }}</option>
+                                        @if(isset($size->soldOut) && $size->soldOut) disabled @endif
+                                        {{-- @if($productStock[$sku.'-'.$size->code]->isProductSoldOut()) disabled @endif --}}
+                                        value="&products[{{$sku}}-{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}]=1"
+                                        data-product-json='{ "{{$sku}}-{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}": 1 }'
+                                    >
+                                        {{ $size->name }}
+                                    </option>
                                 @endforeach
                             </select>
 
@@ -93,7 +105,7 @@
                                 </button>
                             </a>
                         @endif
-                        @if(!empty($sku))
+                        @if(!empty($sku) && count($sizes) === 0)
                             <a
                                 class="online-atc vue-add-to-cart"
                                 href="/ecommerce/add-to-cart?redirect=/shop&products[{{ $sku }}]=1&redirect={{ $redirectUrl ?? '/shop' }}"
@@ -123,7 +135,7 @@
                             @if(!empty($buttonText)) {!!  $buttonText  !!} @else View Product
                             <i class="fas fa-arrow-right"></i> @endif</a>
                     @endif
-                    <p class="disclaimer"><em>@if(!empty($physical)) Worldwide shipping. @endif All prices in USD. <br> <span style="color:red;"> @if(!empty($specialText)) {!!  $specialText  !!} @endif </span></em></p>
+                    <p class="disclaimer"><em>@if($category !== 'lessons') Worldwide shipping. @endif All prices in USD. <br> <span style="color:red;"> @if(!empty($specialText)) {!!  $specialText  !!} @endif </span></em></p>
                 </div>
             </div>
         @endif

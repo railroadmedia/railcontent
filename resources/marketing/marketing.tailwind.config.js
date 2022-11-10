@@ -13,7 +13,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: stylesoraTheme.fontFamily,
-      fontSize: stylesoraTheme.fontSize, 
+      fontSize: stylesoraTheme.fontSize,
       colors: {
         drumeo: stylesoraTheme.colors.drumeo,
         pianote: stylesoraTheme.colors.pianote,
@@ -67,93 +67,9 @@ module.exports = {
           background: 'linear-gradient(20deg,#03c8ac, #0976db, #9a01ee, #f61a30)',
           margin: '-2px',
         },
-        'h1 strong, h2 strong, h3 strong, h4 strong, h5 strong, h6 strong': {
-          fontWeight: 900
-        },
-        'h1':{
-          fontSize: '24px',
-          '@media (min-width: 768px)': {
-            fontSize: '36px',
-          },
-          '@media (min-width: 1024px)': {
-            fontSize: '48px',
-          },
-        },
-        'h2':{
-          fontSize: '20px',
-          '@media (min-width: 768px)': {
-            fontSize: '30px',
-          },
-          '@media (min-width: 1024px)': {
-            fontSize: '36px',
-          },
-        },
-        'h3':{
-          fontSize: '18px',
-          '@media (min-width: 768px)': {
-            fontSize: '24px',
-          },
-          '@media (min-width: 1024px)': {
-            fontSize: '30px',
-          },
-        },
-        'h4':{
-          fontSize: '16px',
-          '@media (min-width: 768px)': {
-            fontSize: '20px',
-          },
-          '@media (min-width: 1024px)': {
-            fontSize: '24px',
-          },
-        },
-        'h5':{
-          fontSize: '15px',
-          '@media (min-width: 768px)': {
-            fontSize: '18px',
-          },
-          '@media (min-width: 1024px)': {
-            fontSize: '20px',
-          },
-        },
-        'h6':{
-          fontSize: '15px',
-          '@media (min-width: 768px)': {
-            fontSize: '16px',
-          },
-          '@media (min-width: 1024px)': {
-            fontSize: '18px',
-          },
-        },
-        'p':{
-          lineHeight: '1.6em',
-          fontSize: '15px',
-          '@media (min-width: 768px)': {
-            fontSize: '16px',
-          },
-        },
         'img': {
           display: 'inline-block'
         },
-        '.join':{
-          borderRadius: '50px',
-          font: '600 20px/1em "Open Sans", sans-serif',
-          padding: '17px 7%',
-          color: 'white',
-          position: 'relative',
-          textTransform: 'uppercase',
-          display: 'inline-block',
-          '@media (min-width: 768px)': {
-            fontSize: '28px'
-          }
-        },
-        '.join.smaller':{
-          fontSize: '13px',
-          padding: '7px 25px',
-          '@media (min-width: 768px)': {
-            fontSize: '14px',
-            padding: '13px 30px'
-          },
-        }
       })
     }),
 

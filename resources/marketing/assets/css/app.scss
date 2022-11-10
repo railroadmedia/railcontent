@@ -1,7 +1,182 @@
-// Vuesora
-// @import '../js/vuesora/assets/sass/app.scss';
-
 /* Tailwind CSS */
+
+.border-drumeo {
+    border-color: #0b76db;
+}
+
+.border-pianote {
+    border-color: #f61a30;
+}
+
+.border-singeo {
+    border-color: #8300e9;
+}
+
+.border-guitareo {
+    border-color: #00c9ac;
+}
+
+.border-navy-600 {
+    border-color:#204261;
+}
+
+.font-roboto {
+    font-family: "Roboto Condensed", sans-serif;
+}
+
+.font-bebas {
+    font-family:"Bebas Neue", sans-serif;
+}
+
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.text-navy-600 {
+    color:#204261;
+}
+
+.text-shadow-1 {
+    text-shadow:0 0 4px rgba(0, 0, 0, 0.7);
+}
+
+.text-shadow-2 {
+    text-shadow:0 0 8px rgba(0, 0, 0, 0.7);
+}
+
+.text-shadow-3 {
+    text-shadow:0 0 12px rgba(0, 0, 0, 0.7);
+}
+
+.text-shadow-4 {
+    text-shadow:0 0 16px rgba(0, 0, 0, 0.7);
+}
+
+/*spacing*/
+.aspect-1\:1 {
+    padding-bottom:100%;
+}
+.aspect-16\:9 {
+    padding-bottom:56.25%;
+}
+
+.translate--1\/2 {
+    transform: translate(-50%, -50%);
+}
+
+h1 strong, h2 strong, h3 strong, h4 strong, h5 strong, h6 strong{
+    fontWeight: 900;
+}
+
+h1 sup, h2 sup, h3 sup, h4 sup, h5 sup, h6 sup, li sup, p sup {
+    font-size:50%;
+    top:-.75em
+}
+
+h1 {
+    font-sizeize: 24px;
+
+    @media (min-width: 768px) {
+        font-sizeize: 36px;
+    }
+
+    @media (min-width: 1024px){
+        font-size: 48px;
+    }
+}
+
+h2 {
+    font-size: 20px;
+
+    @media (min-width: 768px){
+        font-size: 30px;
+    }
+
+    @media (min-width: 1024px){
+        font-size: 36px;
+    }
+}
+
+h3 {
+    font-size: 18px;
+    @media (min-width: 768px) {
+        font-size: 24px;
+    }
+
+    @media (min-width: 1024px){
+        font-size: 30px;
+    }
+}
+
+h4 {
+        font-size: 16px;
+    @media (min-width: 768px){
+        font-size: 20px;
+    }
+
+    @media (min-width: 1024px){
+        font-size: 24px;
+    }
+}
+
+h5 {
+    font-size: 15px;
+
+    @media (min-width: 768px){
+        font-size: 18px;
+    }
+
+    @media (min-width: 1024px){
+        font-size: 20px;
+    }
+}
+
+h6 {
+    font-size: 15px;
+
+    @media (min-width: 768px){
+        font-size: 16px;
+    }
+
+    @media (min-width: 1024px){
+        font-size: 18px;
+    }
+}
+li, p {
+    line-height: 1.6em;
+    font-size: 15px;
+
+    @media (min-width: 768px){
+        font-size: 16px;
+    }
+}
+
+.join {
+    border-radius: 50px;
+    font: 600 20px/1em Open Sans, sans-serif;
+    padding: 17px 7%;
+    color: white;
+    position: relative;
+    text-transform: uppercase;
+    display: inline-block;
+    @media (min-width: 768px) {
+        font-size: 28px;
+    }
+
+    .smaller {
+        font-size: 13px;
+        padding: 7px 25px;
+        @media (min-width: 768px) {
+            font-size: 14px;
+            padding: 13px 30px
+        }
+    }
+}
+
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

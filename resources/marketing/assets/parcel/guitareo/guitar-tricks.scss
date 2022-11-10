@@ -1,0 +1,496 @@
+@import "_variables";
+
+h1 {
+  font-size: 23px;
+  line-height: 1.2em;
+  margin: 0 auto;
+  @include tablet {
+    font-size: 35px;
+  }
+  @include desktop {
+    font-size: 48px;
+  }
+
+  strong {
+    font-weight: 900;
+  }
+
+  sup {
+    font-size: 50%;
+    top: -0.75em;
+  }
+
+  &.permanent {
+    font-size: 35px;
+    @include tablet {
+      font-size: 55px;
+    }
+    @include desktop {
+      font-size: 70px;
+    }
+  }
+}
+
+h2 {
+  font-size: 20px;
+  line-height: 1.2em;
+  margin: 0 auto;
+  @include tablet {
+    font-size: 27px;
+  }
+  @include desktop {
+    font-size: 35px;
+  }
+
+  strong {
+    font-weight: 900;
+  }
+}
+
+h3 {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1em;
+  margin: 0 auto;
+  @include tablet {
+    font-size: 18px;
+  }
+  @include desktop {
+    font-size: 22px;
+  }
+}
+
+h4 {
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1em;
+  margin: 0 auto;
+  @include tablet {
+    font-size: 16px;
+  }
+  @include desktop {
+    font-size: 17px;
+  }
+}
+
+p {
+  font-size: 13px;
+  line-height: 1.7em;
+  margin: 0 auto;
+  @include tablet {
+    font-size: 14px;
+  }
+  @include desktop {
+    font-size: 15px;
+  }
+}
+
+.text-yellow {
+  color: #ffd700;
+}
+
+.infusion-form {
+  max-width: 600px;
+  @include desktop {
+    max-width: 700px;
+  }
+}
+
+.your-mission {
+  .step {
+    .pic-wrap {
+      max-width: 160px;
+      @include tablet {
+        max-width: 180px;
+      }
+      @include desktop {
+        max-width: 210px;
+      }
+    }
+  }
+}
+
+.meet-rob {
+  background: #000 url(https://guitareo.s3.amazonaws.com/lead-gen/guitar-tricks/teacher-background-mobile.jpg) center top/420px no-repeat;
+  color: #fff;
+  padding: 40px 20px 20px;
+  @include tablet {
+    background-image: url(https://guitareo.s3.amazonaws.com/lead-gen/guitar-tricks/teacher-background.jpg);
+    padding: 50px 20px;
+    background-size: 1300px;
+  }
+  @include desktop {
+    padding: 70px 20px;
+    background-size: 1550px;
+  }
+
+  .content-wrap {
+    width: 100%;
+    max-width: 390px;
+    @include desktop {
+      max-width: 600px;
+    }
+  }
+
+  .rob-text {
+    width: 100%;
+    max-width: 210px;
+    @include tablet {
+      max-width: 520px;
+    }
+  }
+
+  h4 {
+    line-height: 1.5em;
+    @include tablet {
+      line-height: 1.7em;
+    }
+  }
+
+  .thumbs {
+    margin: 15px auto 0;
+
+    .columns {
+      padding: 0 15px;
+      @include tablet {
+        padding: 0 5px;
+      }
+    }
+
+    .thumb-wrap {
+      cursor: pointer;
+      transition: all .3s;
+      outline: none;
+
+      &:hover {
+        filter: brightness(1.1);
+      }
+    }
+
+    img {
+      border: 2px solid #fff;
+      border-radius: 7px;
+      width: 100%;
+      max-width: 190px;
+    }
+
+    p {
+      line-height: 1.1em;
+      margin: 7px auto 20px;
+      @include tablet {
+        margin: 7px auto 0;
+      }
+
+      em {
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+.reveal-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2147483002;
+  display: none;
+  overflow-y: auto;
+  background-color: rgba(0, 0, 0, 0.8);
+
+  &:after {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-family: "Font Awesome 5 Pro";
+    font-weight: 900;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    content: "\f00d";
+    color: #fff;
+    z-index: 1;
+    opacity: 0.8;
+    position: absolute;
+    margin: 0;
+    line-height: 1em;
+    text-align: center;
+    display: inline-block;
+    outline: none;
+    top: 0;
+    right: 0;
+    font-size: 35px;
+    width: 35px;
+    @include tablet {
+      top: 7px;
+      right: 7px;
+      font-size: 50px;
+      width: 50px;
+    }
+  }
+
+  .reveal {
+    z-index: 1006;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    display: none;
+    background-color: #fefefe;
+    position: relative;
+    top: 100px;
+    margin-right: auto;
+    margin-left: auto;
+    overflow-y: auto;
+    width: 90%;
+    max-width: 75rem;
+    height: inherit;
+    min-height: 0;
+    outline: none;
+    padding: 0;
+    border: none;
+    border-radius: 7px;
+    @include tablet {
+      right: auto;
+      left: auto;
+      margin: 0 auto;
+    }
+
+    .flex-video {
+      margin: 0 auto;
+    }
+
+    p {
+      margin: 5px auto;
+    }
+
+    .join {
+      margin: 10px auto;
+    }
+
+    &.annual-pitch {
+      max-width: 740px;
+      padding: 15px 20px;
+      @include tablet {
+        padding: 15px 30px;
+      }
+      @include desktop {
+        padding: 15px 50px;
+      }
+
+      h3 {
+        line-height: 1.3em;
+      }
+
+      .flex-video {
+        margin: 20px auto;
+        border-radius: 7px;
+      }
+
+      .join {
+        margin: 0 auto;
+        @include tablet {
+          width: 75%;
+        }
+      }
+
+      p {
+        font-size: 13px;
+      }
+    }
+
+    &.level-wrap,
+    &.coach-wrap {
+      user-select: none;
+      border-radius: 10px;
+      text-align: center;
+      overflow: visible;
+      position: relative;
+      max-width: 310px;
+      @include tablet {
+        max-width: 450px;
+      }
+
+      .top-image {
+        position: relative;
+        background: #333 center top/cover no-repeat;
+        border-radius: 10px 10px 0 0;
+
+        .top-icon {
+          position: absolute;
+          top: 15px;
+          left: 15px;
+          z-index: 1;
+
+          img {
+            height: 10px;
+            margin-right: 5px;
+
+            &.icon {
+              height: 18px;
+            }
+          }
+        }
+
+        .centered-wrap {
+          position: relative;
+          z-index: 2;
+          color: #fff;
+
+          img {
+            width: 175px;
+          }
+        }
+      }
+
+      .bottom-details {
+        padding: 15px;
+        @include tablet {
+          padding: 20px;
+        }
+
+        strong {
+          font-weight: 900;
+        }
+
+        p {
+          margin: 0 auto 3px;
+          @include tablet {
+            margin: 7px auto;
+          }
+
+          &.text-blue,
+          &.text-coaches {
+            text-transform: uppercase;
+          }
+        }
+
+        .social-bubbles {
+          margin: 0 auto 5px;
+          @include tablet {
+            margin: 0 auto 10px;
+          }
+
+          .bubble {
+            display: inline-block;
+            padding: 0 5px;
+            @include tablet {
+              padding: 0 10px;
+            }
+
+            p {
+              font: 400 10px/1.2em $opensans;
+              margin: 0 auto;
+              text-transform: uppercase;
+
+              i {
+                font-size: 12px;
+                @include tablet {
+                  font-size: 13px;
+                }
+
+              }
+
+              strong {
+                line-height: 1.2em;
+                color: #000;
+                font-size: 13px;
+                @include tablet {
+                  font-size: 14px;
+                }
+              }
+            }
+
+            &.facebook {
+              color: $facebook;
+            }
+
+            &.youtube {
+              color: $youtube;
+            }
+
+            &.instagram {
+              color: $instagram;
+            }
+
+            &.spotify {
+              color: #1db954;
+            }
+
+            &.grammy {
+              color: #b69859;
+            }
+          }
+
+        }
+
+        .bio {
+          margin: 0 auto;
+          text-align: left;
+          line-height: 1.3em;
+          @include tablet {
+            line-height: 1.5em;
+          }
+        }
+      }
+
+      .next-prev {
+        position: absolute;
+        top: 50%;
+        color: #fff;
+        cursor: pointer;
+        font-size: 50px;
+        padding: 10px;
+        @include tablet {
+          font-size: 70px;
+          padding: 10px 20px;
+        }
+
+        &.fa-angle-left {
+          left: -37px;
+          @include tablet {
+            left: -70px;
+          }
+
+        }
+
+        &.fa-angle-right {
+          right: -37px;
+          @include tablet {
+            right: -70px;
+          }
+        }
+      }
+    }
+
+    &.level-wrap .top-image {
+      padding: 50px 0;
+      @include tablet {
+        padding: 70px 0;
+      }
+
+      &:after {
+        content: '';
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border-radius: 7px;
+        overflow: hidden;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 30%, transparentize($drumeoBlue, 0.4) 100%);
+      }
+    }
+
+    &.coach-wrap .top-image {
+      padding-bottom: 50%;
+      @include tablet {
+        padding-bottom: 62%;
+      }
+    }
+  }
+}
+
+.reveal-overlay .reveal {
+  padding: 0;
+  max-width: 1080px;
+}

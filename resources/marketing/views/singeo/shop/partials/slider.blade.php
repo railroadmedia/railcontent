@@ -4,7 +4,7 @@
             <div class="clearfix">
                 <div class="w-full">
                     @if(!empty($headerText))
-                        <div class="text-xl md:text-3xl lg:text-4xl leading-none">{!! $headerText !!}</div>
+                        <div class="text-xl md:text-3xl lg:text-4xl leading-none font-bold">{!! $headerText !!}</div>
                     @endif
                     @if(!empty($specialText))
                         {!! $specialText !!}
@@ -21,20 +21,19 @@
                     </div>
                 @endif
                 @if (!empty($images))
-                    @foreach ($images as $image)
-                        <div style="display: none;">
-                            <img class="w-full" src="{{ $image }}">
-                        </div>
+                    @foreach ($images as $key => $image)
+                            <div @if(count($images) > 1)style="display: none;"@endif>
+                                <img class="w-full" src="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/@if(str_contains($image->path, 'amazonaws') || str_contains($image->path, 'cloudfront') || str_contains($image->path, 'vimeocdn')){{$image->path}}@else{{'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$image->path}}@endif" alt="image {{ $key+1 }}">
+                            </div>
                     @endforeach
                 @endif
             </div>
-            <div class="slider-nav mx-auto w-full @if(!empty($noSlider)) hidden @endif">
+            <div class="slider-nav mx-auto w-full @if(count($images) <= 1) hidden @endif">
                 @if(!empty($images))
-                    @if(!empty($videoSrc))
-                        <div style="display: none;"><img class="w-full" src="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/{{ $videoThumb  }}"></div>
-                    @endif
-                    @foreach ($images as $image)
-                        <div style="display: none;"><img class="w-full" src="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/{{ $image }}"></div>
+                    @foreach ($images as $key => $image)
+                        <div @if(count($images) > 1)style="display: none;"@endif>
+                            <img class="w-full" src="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/@if(str_contains($image->path, 'amazonaws') || str_contains($image->path, 'cloudfront') || str_contains($image->path, 'vimeocdn')){{$image->path}}@else{{'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$image->path}}@endif" alt="image {{ $key+1 }}">
+                        </div>
                     @endforeach
                 @endif
             </div>

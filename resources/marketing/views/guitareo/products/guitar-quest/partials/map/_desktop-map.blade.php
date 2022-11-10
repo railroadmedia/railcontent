@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:serif="http://www.serif.com/" width="100%" height="100%" viewBox="0 0 1287 1125" version="1.1" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
     <defs>
         <pattern id="levelOneImage" x="0" y="0" patternUnits="userSpaceOnUse" height="1" width="1">
-            <image x="0" y="0" xlinkx-bind:href="{{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-1.png", ["auto" => "format", "w" => 150]) }}"></image>
+            <image x="0" y="0" xlinkx-bind:href="https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Flevel-1.png?auto=format&ixlib=php-1.2.1&w=150&s=fa2accd21554e90a0e1291f114d6ade0"></image>
         </pattern>
     </defs>
     <g transform="matrix(1,0,0,1,-4607.46,-4263.31)">
@@ -2255,7 +2255,7 @@
                 <path d="M860.756,5492.39C865.488,5492.28 870.641,5491.62 876.062,5490.53C877.415,5490.26 878.292,5488.94 878.019,5487.59C877.747,5486.23 876.428,5485.36 875.075,5485.63C869.961,5486.66 865.102,5487.28 860.638,5487.39C859.259,5487.42 858.165,5488.57 858.198,5489.95C858.23,5491.33 859.377,5492.42 860.756,5492.39ZM830.629,5485.93C835.308,5487.87 840.12,5489.55 845.266,5490.73C846.612,5491.03 847.953,5490.19 848.259,5488.84C848.566,5487.5 847.722,5486.16 846.377,5485.85C841.512,5484.74 836.966,5483.14 832.542,5481.31C831.268,5480.78 829.804,5481.39 829.276,5482.66C828.748,5483.94 829.354,5485.4 830.629,5485.93ZM890.822,5486.74C895.538,5485.3 900.345,5483.63 905.159,5481.81C906.449,5481.32 907.099,5479.88 906.611,5478.59C906.122,5477.3 904.677,5476.64 903.387,5477.13C898.678,5478.92 893.974,5480.55 889.36,5481.96C888.04,5482.36 887.297,5483.76 887.7,5485.08C888.103,5486.4 889.502,5487.14 890.822,5486.74ZM803.299,5473.76C808.02,5475.55 812.48,5477.6 816.871,5479.67C818.12,5480.26 819.61,5479.72 820.198,5478.47C820.786,5477.22 820.249,5475.73 819.001,5475.14C814.494,5473.02 809.915,5470.92 805.07,5469.09C803.78,5468.6 802.335,5469.25 801.847,5470.54C801.358,5471.83 802.009,5473.27 803.299,5473.76ZM1187.07,5476.67C1191.64,5477.1 1196.74,5477.28 1202.3,5477.25C1203.67,5477.25 1204.79,5476.12 1204.78,5474.74C1204.78,5473.36 1203.65,5472.25 1202.27,5472.25C1196.9,5472.28 1191.96,5472.1 1187.53,5471.69C1186.16,5471.56 1184.94,5472.57 1184.81,5473.95C1184.68,5475.32 1185.69,5476.54 1187.07,5476.67ZM1217.42,5476.74C1222.22,5476.46 1227.25,5476.07 1232.46,5475.58C1233.84,5475.45 1234.85,5474.23 1234.72,5472.85C1234.59,5471.48 1233.37,5470.47 1231.99,5470.6C1226.84,5471.08 1221.87,5471.47 1217.13,5471.75C1215.75,5471.83 1214.7,5473.01 1214.78,5474.39C1214.86,5475.77 1216.04,5476.82 1217.42,5476.74ZM919.158,5476.09C923.831,5474.05 928.428,5471.92 932.868,5469.76C934.108,5469.15 934.625,5467.65 934.021,5466.41C933.417,5465.17 931.919,5464.66 930.679,5465.26C926.3,5467.39 921.766,5469.5 917.157,5471.51C915.893,5472.06 915.314,5473.53 915.866,5474.8C916.418,5476.06 917.893,5476.64 919.158,5476.09ZM1247.44,5473.97C1252.3,5473.39 1257.29,5472.74 1262.36,5472.04C1263.73,5471.85 1264.68,5470.59 1264.49,5469.22C1264.3,5467.85 1263.04,5466.9 1261.67,5467.09C1256.63,5467.79 1251.68,5468.43 1246.85,5469.01C1245.48,5469.17 1244.5,5470.41 1244.66,5471.78C1244.82,5473.15 1246.07,5474.13 1247.44,5473.97ZM1157.57,5467.97C1162.18,5470.33 1167,5472.26 1171.86,5473.75C1173.18,5474.16 1174.58,5473.41 1174.99,5472.1C1175.39,5470.78 1174.65,5469.38 1173.33,5468.97C1168.74,5467.56 1164.19,5465.74 1159.85,5463.52C1158.62,5462.89 1157.11,5463.38 1156.48,5464.61C1155.86,5465.84 1156.34,5467.34 1157.57,5467.97ZM1277.24,5469.86C1282.13,5469.11 1287.09,5468.31 1292.08,5467.48C1293.44,5467.26 1294.36,5465.97 1294.13,5464.61C1293.91,5463.24 1292.62,5462.32 1291.26,5462.55C1286.29,5463.38 1281.36,5464.17 1276.48,5464.92C1275.11,5465.13 1274.18,5466.41 1274.39,5467.77C1274.6,5469.13 1275.88,5470.07 1277.24,5469.86ZM775.259,5464.92C782.077,5465.98 785.472,5467.02 789.258,5468.47C790.547,5468.96 791.993,5468.31 792.486,5467.02C792.978,5465.73 792.331,5464.29 791.042,5463.8C786.98,5462.24 783.342,5461.12 776.028,5459.98C774.664,5459.77 773.385,5460.7 773.173,5462.07C772.961,5463.43 773.895,5464.71 775.259,5464.92ZM1306.89,5464.94C1311.81,5464.07 1316.74,5463.17 1321.67,5462.26C1323.03,5462.01 1323.92,5460.7 1323.67,5459.35C1323.42,5457.99 1322.11,5457.09 1320.76,5457.34C1315.84,5458.26 1310.92,5459.15 1306.02,5460.02C1304.66,5460.26 1303.75,5461.55 1303.99,5462.91C1304.23,5464.27 1305.53,5465.18 1306.89,5464.94ZM946.309,5462.88C951.088,5460.32 955.52,5457.8 959.468,5455.45C960.653,5454.74 961.041,5453.21 960.334,5452.02C959.627,5450.84 958.091,5450.45 956.906,5451.16C953.018,5453.48 948.652,5455.95 943.945,5458.48C942.729,5459.13 942.272,5460.65 942.924,5461.86C943.577,5463.08 945.094,5463.53 946.309,5462.88ZM1133.56,5448.61C1136.74,5452.71 1140.45,5456.39 1144.54,5459.64C1145.62,5460.49 1147.19,5460.31 1148.05,5459.23C1148.91,5458.15 1148.73,5456.58 1147.65,5455.72C1143.87,5452.72 1140.44,5449.33 1137.51,5445.55C1136.66,5444.45 1135.09,5444.26 1134,5445.1C1132.91,5445.95 1132.71,5447.52 1133.56,5448.61ZM1336.42,5459.47C1341.37,5458.51 1346.29,5457.55 1351.16,5456.57C1352.51,5456.3 1353.39,5454.99 1353.12,5453.63C1352.85,5452.28 1351.53,5451.4 1350.18,5451.67C1345.32,5452.64 1340.41,5453.6 1335.48,5454.56C1334.12,5454.82 1333.23,5456.13 1333.5,5457.48C1333.76,5458.84 1335.07,5459.73 1336.42,5459.47ZM1365.87,5453.6C1370.86,5452.58 1375.77,5451.56 1380.57,5450.55C1381.92,5450.27 1382.79,5448.94 1382.51,5447.6C1382.22,5446.24 1380.9,5445.38 1379.55,5445.66C1374.75,5446.66 1369.85,5447.68 1364.87,5448.7C1363.52,5448.98 1362.65,5450.3 1362.92,5451.65C1363.2,5453 1364.52,5453.88 1365.87,5453.6ZM1395.26,5447.45C1400.31,5446.38 1405.21,5445.33 1409.93,5444.31C1411.28,5444.02 1412.14,5442.69 1411.85,5441.34C1411.56,5439.99 1410.23,5439.13 1408.88,5439.42C1404.17,5440.44 1399.27,5441.49 1394.22,5442.56C1392.87,5442.85 1392,5444.18 1392.29,5445.53C1392.58,5446.88 1393.91,5447.74 1395.26,5447.45ZM972.155,5446.75C975.948,5443.56 979.572,5439.91 983.075,5435.96C983.991,5434.93 983.897,5433.35 982.865,5432.43C981.833,5431.52 980.251,5431.61 979.335,5432.64C975.998,5436.4 972.55,5439.89 968.937,5442.92C967.881,5443.81 967.745,5445.39 968.633,5446.45C969.521,5447.5 971.099,5447.64 972.155,5446.75ZM1424.59,5441.15C1429.84,5440.02 1434.74,5438.96 1439.25,5437.99C1440.6,5437.7 1441.46,5436.38 1441.18,5435.03C1440.89,5433.68 1439.56,5432.82 1438.21,5433.1C1433.7,5434.07 1428.79,5435.13 1423.54,5436.26C1422.19,5436.55 1421.33,5437.88 1421.62,5439.23C1421.91,5440.58 1423.25,5441.44 1424.59,5441.15ZM1120.07,5421.16C1121.93,5425.85 1123.64,5430.58 1125.7,5435.18C1126.27,5436.44 1127.75,5437 1129.01,5436.44C1130.27,5435.87 1130.83,5434.39 1130.27,5433.13C1128.23,5428.6 1126.55,5423.94 1124.72,5419.32C1124.21,5418.04 1122.76,5417.41 1121.47,5417.91C1120.19,5418.42 1119.56,5419.88 1120.07,5421.16ZM1453.91,5434.92C1455.54,5434.59 1457.07,5434.29 1458.48,5434.02C1459.83,5433.75 1460.72,5432.44 1460.45,5431.09C1460.19,5429.73 1458.88,5428.85 1457.53,5429.11C1456.1,5429.38 1454.56,5429.69 1452.91,5430.02C1451.56,5430.3 1450.69,5431.62 1450.96,5432.97C1451.24,5434.32 1452.56,5435.2 1453.91,5434.92ZM992.667,5424.19C995.69,5420.22 998.654,5416.14 1001.6,5412.06C1002.41,5410.95 1002.16,5409.38 1001.04,5408.57C999.92,5407.77 998.356,5408.02 997.548,5409.14C994.627,5413.18 991.688,5417.23 988.69,5421.16C987.853,5422.26 988.065,5423.83 989.163,5424.66C990.26,5425.5 991.83,5425.29 992.667,5424.19ZM1105.21,5396.32C1108.61,5400.14 1111.54,5404.09 1113.85,5407.97C1114.56,5409.15 1116.1,5409.54 1117.28,5408.84C1118.47,5408.13 1118.86,5406.59 1118.15,5405.41C1115.69,5401.28 1112.57,5397.07 1108.95,5393C1108.03,5391.97 1106.45,5391.87 1105.42,5392.79C1104.38,5393.71 1104.29,5395.29 1105.21,5396.32ZM1010.43,5400C1013.48,5395.94 1016.55,5392.04 1019.7,5388.44C1020.61,5387.4 1020.5,5385.82 1019.46,5384.91C1018.42,5384.01 1016.84,5384.11 1015.93,5385.15C1012.71,5388.84 1009.56,5392.84 1006.43,5396.99C1005.6,5398.09 1005.83,5399.66 1006.93,5400.49C1008.03,5401.32 1009.6,5401.1 1010.43,5400ZM1082.79,5377.73C1086.95,5380.2 1090.96,5383.07 1094.7,5386.17C1095.76,5387.06 1097.34,5386.91 1098.22,5385.85C1099.1,5384.79 1098.95,5383.21 1097.89,5382.33C1093.95,5379.06 1089.73,5376.04 1085.35,5373.43C1084.16,5372.73 1082.63,5373.12 1081.92,5374.3C1081.22,5375.49 1081.61,5377.02 1082.79,5377.73ZM1030.05,5378.17C1033.88,5375 1037.88,5372.45 1042.12,5370.79C1043.4,5370.28 1044.03,5368.83 1043.53,5367.55C1043.02,5366.26 1041.57,5365.63 1040.29,5366.13C1035.58,5367.98 1031.12,5370.79 1026.86,5374.32C1025.8,5375.2 1025.65,5376.77 1026.53,5377.84C1027.41,5378.9 1028.98,5379.05 1030.05,5378.17ZM1055.78,5368.64C1060.38,5368.86 1065.07,5369.88 1069.71,5371.52C1071.01,5371.98 1072.44,5371.29 1072.9,5369.99C1073.36,5368.69 1072.67,5367.26 1071.37,5366.8C1066.25,5365 1061.08,5363.89 1056.02,5363.64C1054.64,5363.58 1053.47,5364.64 1053.41,5366.02C1053.34,5367.4 1054.4,5368.57 1055.78,5368.64Z" style="fill:rgb(255,181,0);"/>
             </g>
         </g>
-        
+
         <g transform="matrix(1,0,0,0.8478,4290.58,4208)">
             <g transform="matrix(1,0,0,1.17952,153.628,-5249.99)">
                 <circle cx="545.266" cy="4683.94" r="39.734" fill="#FFB500" stroke="#FFB500">
@@ -2265,19 +2265,19 @@
                 </circle>
                 <foreignObject class="node" x="510.266" y="4647.50" width="71" height="71">
                     <div id="desktop-level-1"
-                        x-cloak 
+                        x-cloak
                         x-show="levelMap === false"
                         x-on:click.prevent="levelModalOpen = 1"
-                        class="map-badge" 
-                        style="background-image: url({{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-1.png", ["auto" => "format", "w" => 150]) }})">
-                    </div> 
-                    <template x-if="levelMap === true"> 
+                        class="map-badge"
+                        style="background-image: url('https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Flevel-1.png?auto=format&ixlib=php-1.2.1&w=150&s=fa2accd21554e90a0e1291f114d6ade0')">
+                    </div>
+                    <template x-if="levelMap === true">
                         <a  x-bind:href="levelOneHref"
-                            class="soft-block map-badge" 
+                            class="soft-block map-badge"
                             x-bind:class="{ 'completed-badge': levelOneStatus === 'completed' }"
-                            style="background-image: url({{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-1.png", ["auto" => "format", "w" => 150]) }})"    
-                        ></a> 
-                    </template>              
+                            style="background-image: url('https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Flevel-1.png?auto=format&ixlib=php-1.2.1&w=150&s=fa2accd21554e90a0e1291f114d6ade0')"
+                        ></a>
+                    </template>
                 </foreignObject>
             </g>
         </g>
@@ -2294,20 +2294,20 @@
                     <animate attributeType="CSS" attributeName="opacity" begin="0s" dur="1.5s" repeatCount="indefinite" from="1" to="0"></animate>
                 </circle>
                 <foreignObject class="node" x="510.266" y="4647.50" width="71" height="71">
-                    <div id="desktop-level-2" 
+                    <div id="desktop-level-2"
                         x-cloak
                         x-show="levelMap === false"
                         x-on:click.prevent="levelModalOpen = 2"
-                        class="map-badge" 
-                        style="background-image: url({{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-2.png", ["auto" => "format", "w" => 150]) }})">
+                        class="map-badge"
+                        style="background-image: url('https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Flevel-2.png?auto=format&ixlib=php-1.2.1&w=150&s=2c970953619d408c9fbd61a61ee9bd39')">
                     </div>
-                    <template x-if="levelMap === true">  
+                    <template x-if="levelMap === true">
                         <a  x-bind:href="levelTwoHref"
-                            class="soft-block map-badge" 
+                            class="soft-block map-badge"
                             x-bind:class="{ 'completed-badge': levelTwoStatus === 'completed' }"
-                            style="background-image: url({{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-2.png", ["auto" => "format", "w" => 150]) }})"
-                        ></a> 
-                    </template>              
+                            style="background-image: url('https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Flevel-2.png?auto=format&ixlib=php-1.2.1&w=150&s=2c970953619d408c9fbd61a61ee9bd39')"
+                        ></a>
+                    </template>
                 </foreignObject>
             </g>
         </g>
@@ -2325,19 +2325,19 @@
                 </circle>
                 <foreignObject class="node" x="510.266" y="4647.50" width="71" height="71">
                     <div id="desktop-level-3"
-                        x-cloak 
+                        x-cloak
                         x-show="levelMap === false"
                         x-on:click.prevent="levelModalOpen = 3"
-                        class="map-badge" 
-                        style="background-image: url({{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-3.png", ["auto" => "format", "w" => 150]) }})">
-                    </div>  
+                        class="map-badge"
+                        style="background-image: url('https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Flevel-3.png?auto=format&ixlib=php-1.2.1&w=150&s=5bbfc3ae7a623a3e63352e4c3372c7c9')">
+                    </div>
                     <template x-if="levelMap === true">
                         <a  x-bind:href="levelThreeHref"
-                            class="soft-block map-badge" 
+                            class="soft-block map-badge"
                             x-bind:class="{ 'completed-badge': levelThreeStatus === 'completed' }"
-                            style="background-image: url({{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-3.png", ["auto" => "format", "w" => 150]) }})"    
+                            style="background-image: url('https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Flevel-3.png?auto=format&ixlib=php-1.2.1&w=150&s=5bbfc3ae7a623a3e63352e4c3372c7c9')"
                         ></a>
-                    </template>                 
+                    </template>
                 </foreignObject>
             </g>
         </g>
@@ -2357,17 +2357,17 @@
                     <div id="desktop-level-4"
                         x-cloak
                         x-show="levelMap === false"
-                        x-on:click.prevent="levelModalOpen = 4" 
-                        class="map-badge" 
-                        style="background-image: url({{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-4.png", ["auto" => "format", "w" => 150]) }})">
-                    </div> 
+                        x-on:click.prevent="levelModalOpen = 4"
+                        class="map-badge"
+                        style="background-image: url('https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Flevel-4.png?auto=format&ixlib=php-1.2.1&w=150&s=712e33f8f1a23c4b5da909ac1c82052d')">
+                    </div>
                     <template x-if="levelMap === true">
                         <a  x-bind:href="levelFourHref"
-                            class="soft-block map-badge" 
+                            class="soft-block map-badge"
                             x-bind:class="{ 'completed-badge': levelFourStatus === 'completed' }"
-                            style="background-image: url({{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-4.png", ["auto" => "format", "w" => 150]) }})"    
-                        ></a>  
-                    </template>                
+                            style="background-image: url('https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Flevel-4.png?auto=format&ixlib=php-1.2.1&w=150&s=712e33f8f1a23c4b5da909ac1c82052d')"
+                        ></a>
+                    </template>
                 </foreignObject>
             </g>
         </g>
@@ -2387,17 +2387,17 @@
                     <div id="desktop-level-5"
                         x-cloak
                         x-show="levelMap === false"
-                        x-on:click.prevent="levelModalOpen = 5" 
-                        class="map-badge" 
-                        style="background-image: url({{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-5.png", ["auto" => "format", "w" => 150]) }})">
+                        x-on:click.prevent="levelModalOpen = 5"
+                        class="map-badge"
+                        style="background-image: url('https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Flevel-5.png?auto=format&ixlib=php-1.2.1&w=150&s=344fd6041c3047e406350d423617cf94')">
                     </div>
                     <template x-if="levelMap === true">
                         <a x-bind:href="levelFiveHref"
-                            class="soft-block map-badge" 
+                            class="soft-block map-badge"
                             x-bind:class="{ 'completed-badge': levelFiveStatus === 'completed' }"
-                            style="background-image: url({{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-5.png", ["auto" => "format", "w" => 150]) }})"    
-                        ></a>    
-                    </template>               
+                            style="background-image: url('https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Flevel-5.png?auto=format&ixlib=php-1.2.1&w=150&s=344fd6041c3047e406350d423617cf94')"
+                        ></a>
+                    </template>
                 </foreignObject>
             </g>
         </g>
@@ -2425,19 +2425,19 @@
                 </circle>
                 <foreignObject class="node" x="510.266" y="4647.50" width="71" height="71">
                     <div id="desktop-level-6"
-                        x-cloak 
+                        x-cloak
                         x-show="levelMap === false"
                         x-on:click.prevent="levelModalOpen = 6"
-                        class="map-badge" 
-                        style="background-image: url({{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-6.png", ["auto" => "format", "w" => 150]) }})">
-                    </div>  
+                        class="map-badge"
+                        style="background-image: url('https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Flevel-6.png?auto=format&ixlib=php-1.2.1&w=150&s=e1df924a10719f68bc48f67e1e8ca582')">
+                    </div>
                     <template x-if="levelMap === true">
                         <a  x-bind:href="levelSixHref"
-                            class="soft-block map-badge" 
+                            class="soft-block map-badge"
                             x-bind:class="{ 'completed-badge': levelSixStatus === 'completed' }"
-                            style="background-image: url({{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-6.png", ["auto" => "format", "w" => 150]) }})"
-                        ></a>   
-                    </template>              
+                            style="background-image: url('https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Flevel-6.png?auto=format&ixlib=php-1.2.1&w=150&s=e1df924a10719f68bc48f67e1e8ca582')"
+                        ></a>
+                    </template>
                 </foreignObject>
             </g>
         </g>
@@ -2456,18 +2456,18 @@
                 <foreignObject class="node" x="510.266" y="4647.50" width="71" height="71">
                     <div id="desktop-level-7"
                         x-cloak
-                        x-show="levelMap === false" 
+                        x-show="levelMap === false"
                         x-on:click.prevent="levelModalOpen = 7"
-                        class="map-badge" 
-                        style="background-image: url({{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-7.png", ["auto" => "format", "w" => 150]) }})">
-                    </div>  
-                    <template x-if="levelMap === true"> 
+                        class="map-badge"
+                        style="background-image: url('https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Flevel-7.png?auto=format&ixlib=php-1.2.1&w=150&s=da9c5588c4a03c39a7e6024ce0505d43')">
+                    </div>
+                    <template x-if="levelMap === true">
                         <a  x-bind:href="levelSevenHref"
-                            class="soft-block map-badge" 
+                            class="soft-block map-badge"
                             x-bind:class="{ 'completed-badge': levelSevenStatus === 'completed' }"
-                            style="background-image: url({{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-7.png", ["auto" => "format", "w" => 150]) }})"
+                            style="background-image: url('https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Flevel-7.png?auto=format&ixlib=php-1.2.1&w=150&s=da9c5588c4a03c39a7e6024ce0505d43')"
                         ></a>
-                    </template>                
+                    </template>
                 </foreignObject>
             </g>
         </g>
@@ -2486,18 +2486,18 @@
                 <foreignObject class="node" x="510.266" y="4647.50" width="71" height="71">
                     <div id="desktop-level-8"
                         x-cloak
-                        x-show="levelMap === false" 
+                        x-show="levelMap === false"
                         x-on:click.prevent="levelModalOpen = 8"
-                        class="map-badge" 
-                        style="background-image: url({{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-8.png", ["auto" => "format", "w" => 150]) }})">
-                    </div>  
+                        class="map-badge"
+                        style="background-image: url('https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Flevel-8.png?auto=format&ixlib=php-1.2.1&w=150&s=6ba8ca3f90a0f4d4e7f831eb4ae3630c')">
+                    </div>
                     <template x-if="levelMap === true">
                         <a  x-bind:href="levelEightHref"
-                            class="soft-block map-badge" 
-                            x-bind:class="{ 'completed-badge': levelEightStatus === 'completed' }"   
-                            style="background-image: url({{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-8.png", ["auto" => "format", "w" => 150]) }})"
-                        ></a> 
-                    </template>                
+                            class="soft-block map-badge"
+                            x-bind:class="{ 'completed-badge': levelEightStatus === 'completed' }"
+                            style="background-image: url('https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Flevel-8.png?auto=format&ixlib=php-1.2.1&w=150&s=6ba8ca3f90a0f4d4e7f831eb4ae3630c')"
+                        ></a>
+                    </template>
                 </foreignObject>
             </g>
         </g>
@@ -2516,18 +2516,18 @@
                 <foreignObject class="node" x="510.266" y="4647.50" width="71" height="71">
                     <div id="desktop-level-9"
                         x-cloak
-                        x-show="levelMap === false" 
+                        x-show="levelMap === false"
                         x-on:click.prevent="levelModalOpen = 9"
-                        class="map-badge" 
-                        style="background-image: url({{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-9.png", ["auto" => "format", "w" => 150]) }})">
-                    </div> 
+                        class="map-badge"
+                        style="background-image: url('https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Flevel-9.png?auto=format&ixlib=php-1.2.1&w=150&s=95465dc8f87ec0f06398fc783a5e6a37')">
+                    </div>
                     <template x-if="levelMap === true">
                         <a  x-bind:href="levelNineHref"
-                            class="soft-block map-badge" 
+                            class="soft-block map-badge"
                             x-bind:class="{ 'completed-badge': levelNineStatus === 'completed' }"
-                            style="background-image: url({{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-9.png", ["auto" => "format", "w" => 150]) }})"
-                        ></a>  
-                    </template>                
+                            style="background-image: url('https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Flevel-9.png?auto=format&ixlib=php-1.2.1&w=150&s=95465dc8f87ec0f06398fc783a5e6a37')"
+                        ></a>
+                    </template>
                 </foreignObject>
             </g>
         </g>
