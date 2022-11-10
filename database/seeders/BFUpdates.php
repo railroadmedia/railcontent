@@ -69,6 +69,110 @@ class BFUpdates extends Seeder
         Product::where('brand_id', 2)->where('name', 'Piano Chords & Scales')->update(['discounted_price' => 19]);
         Product::where('brand_id', 2)->where('name', 'Piano Chords & Scales')->update(['discounted_price' => 19]);
 
+        Product::where('brand_id', 2)->where('product_type_id', 4)->update(['discounted_price' => 19]);
+        Product::where('brand_id', 2)->where('product_type_id', 5)->update(['discounted_price' => 29]);
+        Product::where('brand_id', 2)->where('name', 'Sketchy Mug')->update(['discounted_price' => 9]);
+
+        Product::where('brand_id', 2)->where('name', 'The Unlimited Lessons Bundle')->update(['overview' => 'The Unlimited Lessons Bundle gives you just that - unlimited piano lessons. Watch as many as you like, as often as you like.
+
+Learn your favorite songs in the comfort of your own home, whenever you want. Impress your family and friends with your piano playing - for a tiny fraction of the cost of private lessons.
+
+And get support and feedback from real teachers who will help you every step of the way.
+
+This bundle is for new members only. You’ll pay just $129 for your first year (recurring price will be $240/year).']);
+        $product_id = Product::where('brand_id', 2)->where('name', 'The Unlimited Lessons Bundle')->first()->id;
+        Bundle::where('bundle_id', $product_id)->delete();
+
+        $bundles = [
+              [
+                  'name' => 'Pianote Membership',
+                  'free_bonus' => false,
+                  'lifetime_access' => false,
+              ],
+            [
+                'name' => 'Piano Chords & Scales',
+                'free_bonus' => true,
+                'lifetime_access' => false,
+            ],
+            [
+                'name' => 'Pianote Practice Planner',
+                'free_bonus' => true,
+                'lifetime_access' => false,
+            ],
+            [
+                'name' => 'Classical Piano Pieces',
+                'free_bonus' => true,
+                'lifetime_access' => false,
+            ],
+            [
+                'name' => 'Chords Poster',
+                'free_bonus' => true,
+                'lifetime_access' => false,
+            ],
+            [
+                'name' => 'Scales Poster',
+                'free_bonus' => true,
+                'lifetime_access' => false,
+            ],
+            [
+                'name' => 'The Power of Chords',
+                'free_bonus' => true,
+                'lifetime_access' => true,
+            ],
+            [
+                'name' => '',
+                'free_bonus' => true,
+                'lifetime_access' => true,
+            ],
+            [
+                'name' => 'Improvisation & Musical Freedom',
+                'free_bonus' => true,
+                'lifetime_access' => true,
+            ],
+            [
+                'name' => 'Playing Beautiful Piano',
+                'free_bonus' => true,
+                'lifetime_access' => true,
+            ],
+            [
+                'name' => 'Piano Riffs & Fills',
+                'free_bonus' => true,
+                'lifetime_access' => true,
+            ],
+            [
+                'name' => 'Piano Technique Made Easy',
+                'free_bonus' => true,
+                'lifetime_access' => true,
+            ],
+            [
+                'name' => 'De-Stupefy Your Left Hand',
+                'free_bonus' => true,
+                'lifetime_access' => true,
+            ],
+            [
+                'name' => 'Worship Piano',
+                'free_bonus' => true,
+                'lifetime_access' => true,
+            ],
+            [
+                'name' => 'Faster Fingers',
+                'free_bonus' => true,
+                'lifetime_access' => true,
+            ],
+        ];
+
+        foreach($bundles as $key => $bundle){
+            $product_id = Product::where('name', '=', $bundle['name'])->where('brand_id', '=', 2)->first()->id;
+
+            Bundle::create([
+                'bundle_id' => $product_id,
+                'product_id' => $product_id,
+                'free_bonus' => $bundle['free_bonus'],
+                'lifetime_access' => $bundle['lifetime_access'],
+                'order_number' => $key
+            ]);
+        }
+
         //GUITAREO UPDATES
         Product::where('brand_id', 3)->where('name', 'GuitarQuest')->update(['discounted_price' => 97]);
         Product::where('brand_id', 3)->where('name', '500 Songs In 5 Days')->update(['discounted_price' => 29]);
