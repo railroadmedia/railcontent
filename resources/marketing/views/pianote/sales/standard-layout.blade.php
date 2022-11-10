@@ -164,7 +164,7 @@
                     [
                     'image' => 'https://pianote.s3.amazonaws.com/sales/2022/coaches/summer-swee-singh2.jpg',
                     'modalImage' => 'https://pianote.s3.amazonaws.com/sales/2022/coaches/summer-swee-singh2.jpg',
-                    'date' => 'This Month',
+                    'date' => 'Available Now',
                     'name' => 'Summer<br> Swee-Singh',
                     'subtitle' => 'Creating The Perfect<br> Piano Arrangement',
                     'smallInfo' => 'Learn how to create your own beautiful arrangements on the piano from the skilled Summer Swee-Singh.',

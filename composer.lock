@@ -176,16 +176,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.240.11",
+            "version": "3.241.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "4ab7d004ca11298bf400f3291f144d820fb97cd6"
+                "reference": "124ec1258f667e99f2fc3288f3e59fd4903a22d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/4ab7d004ca11298bf400f3291f144d820fb97cd6",
-                "reference": "4ab7d004ca11298bf400f3291f144d820fb97cd6",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/124ec1258f667e99f2fc3288f3e59fd4903a22d3",
+                "reference": "124ec1258f667e99f2fc3288f3e59fd4903a22d3",
                 "shasum": ""
             },
             "require": {
@@ -264,9 +264,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.240.11"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.241.1"
             },
-            "time": "2022-11-07T19:23:11+00:00"
+            "time": "2022-11-09T19:31:43+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -5744,16 +5744,16 @@
         },
         {
             "name": "mobiledetect/mobiledetectlib",
-            "version": "2.8.40",
+            "version": "2.8.41",
             "source": {
                 "type": "git",
                 "url": "https://github.com/serbanghita/Mobile-Detect.git",
-                "reference": "43310fa0db4c6d5f4972c92b1354ae690d555284"
+                "reference": "fc9cccd4d3706d5a7537b562b59cc18f9e4c0cb1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/serbanghita/Mobile-Detect/zipball/43310fa0db4c6d5f4972c92b1354ae690d555284",
-                "reference": "43310fa0db4c6d5f4972c92b1354ae690d555284",
+                "url": "https://api.github.com/repos/serbanghita/Mobile-Detect/zipball/fc9cccd4d3706d5a7537b562b59cc18f9e4c0cb1",
+                "reference": "fc9cccd4d3706d5a7537b562b59cc18f9e4c0cb1",
                 "shasum": ""
             },
             "require": {
@@ -5794,9 +5794,9 @@
             ],
             "support": {
                 "issues": "https://github.com/serbanghita/Mobile-Detect/issues",
-                "source": "https://github.com/serbanghita/Mobile-Detect/tree/2.8.40"
+                "source": "https://github.com/serbanghita/Mobile-Detect/tree/2.8.41"
             },
-            "time": "2022-11-08T16:30:55+00:00"
+            "time": "2022-11-08T18:31:26+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -6030,16 +6030,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "2.62.1",
+            "version": "2.63.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "01bc4cdefe98ef58d1f9cb31bdbbddddf2a88f7a"
+                "reference": "ad35dd71a6a212b98e4b87e97389b6fa85f0e347"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/01bc4cdefe98ef58d1f9cb31bdbbddddf2a88f7a",
-                "reference": "01bc4cdefe98ef58d1f9cb31bdbbddddf2a88f7a",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/ad35dd71a6a212b98e4b87e97389b6fa85f0e347",
+                "reference": "ad35dd71a6a212b98e4b87e97389b6fa85f0e347",
                 "shasum": ""
             },
             "require": {
@@ -6128,7 +6128,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-09-02T07:48:13+00:00"
+            "time": "2022-10-30T18:34:28+00:00"
         },
         {
             "name": "nette/schema",
@@ -8245,16 +8245,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "2.0.39",
+            "version": "v2.0.40",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "8c7b80f8d40673d603d064686e7ba1c3f7734ca5"
+                "reference": "7f4450681c0da0a2f35a7277212de21669c90100"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/8c7b80f8d40673d603d064686e7ba1c3f7734ca5",
-                "reference": "8c7b80f8d40673d603d064686e7ba1c3f7734ca5",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/7f4450681c0da0a2f35a7277212de21669c90100",
+                "reference": "7f4450681c0da0a2f35a7277212de21669c90100",
                 "shasum": ""
             },
             "require": {
@@ -8308,9 +8308,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/2.0.39"
+                "source": "https://github.com/railroadmedia/railcontent/tree/v2.0.40"
             },
-            "time": "2022-11-04T16:20:48+00:00"
+            "time": "2022-11-09T13:09:43+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -8368,16 +8368,16 @@
         },
         {
             "name": "railroad/railnotifications",
-            "version": "v3.0.7",
+            "version": "3.0.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railnotifications.git",
-                "reference": "4cf4b3d2a268f22c00d949688a24ff8456f63b85"
+                "reference": "f4bf437730578cfc7925832d9a3e15f39a7d201b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railnotifications/zipball/4cf4b3d2a268f22c00d949688a24ff8456f63b85",
-                "reference": "4cf4b3d2a268f22c00d949688a24ff8456f63b85",
+                "url": "https://api.github.com/repos/railroadmedia/railnotifications/zipball/f4bf437730578cfc7925832d9a3e15f39a7d201b",
+                "reference": "f4bf437730578cfc7925832d9a3e15f39a7d201b",
                 "shasum": ""
             },
             "require": {
@@ -8428,9 +8428,9 @@
             "description": "Laravel notification system using entities",
             "support": {
                 "issues": "https://github.com/railroadmedia/railnotifications/issues",
-                "source": "https://github.com/railroadmedia/railnotifications/tree/v3.0.7"
+                "source": "https://github.com/railroadmedia/railnotifications/tree/3.0.11"
             },
-            "time": "2022-11-07T13:44:11+00:00"
+            "time": "2022-11-09T23:07:53+00:00"
         },
         {
             "name": "railroad/railtracker",

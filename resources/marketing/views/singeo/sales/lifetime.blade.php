@@ -51,7 +51,7 @@
         <div class="container mx-auto">
             <h1><strong>Get a LIFETIME Singeo Membership<br> + ALL our Merch for FREE</strong></h1>
             <div class="w-full mx-auto my-10 px-3" style="max-width:920px;">
-                <img class="w-full rounded-xl" src="https://cdn.musora.com/image/fetch/w_670,q_auto:best/https://singeo.s3.amazonaws.com/sales/promos/august/lifetime_banner.jpg">
+                <img class="w-full rounded-xl" src="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://singeo.s3.amazonaws.com/sales/promos/august/lifetime_banner.jpg">
                 {{--<div class="aspect-16:9 w-full relative rounded-xl">--}}
                     {{--<iframe class="absolute w-full h-full reset-on-close" src="//player.vimeo.com/video/649113636" frameborder="0" allowfullscreen allow="autoplay"></iframe>--}}
                 {{--</div>--}}
@@ -61,9 +61,8 @@
                 {{--<strong class="text-promo">Extended for Cyber Monday</strong><br>--}}
                 Lifetime Membership For <s class="opacity-50">$379</s> ${{ SingeoPrices::$bundleLifetime }}
             </h3>
-            <a href="#customize-anchor"
-                    class="join promo anchor-slide methodcta my-4">BECOME A LIFETIME MEMBER &raquo;</a>
-            {{--<a class="join sold-out methodcta my-4">SOLD OUT</a>--}}
+{{--            <a href="#customize-anchor" class="join promo anchor-slide methodcta my-4">BECOME A LIFETIME MEMBER &raquo;</a>--}}
+            <a class="join sold-out methodcta my-4">SOLD OUT</a>
             <p>(Or choose a payment plan on the next page.)</p>
 
             <h6 class="leading-relaxed px-3 mt-10 text-left" style="width: 100%;max-width: 600px;">
@@ -193,22 +192,22 @@
                         <i class="fal fa-chevron-down animated delay-1s infinite pulse"></i>
                         <i class="fal fa-chevron-down animated delay-2s infinite pulse"></i>
                     </div>
-                    {{--<a class="join sold-out methodcta my-4">SOLD OUT</a>--}}
-                    <div class="w-full max-w-sm mx-auto">
-                    <select class="bundle-pick uppercase border-2 border-solid rounded-full font-bold text-xl w-full h-auto py-2 pl-7 pr-5 mb-3 bg-white md:py-2 lg:py-4" title="Shirt Size" required="" style="border-color: #717D80; color: #717D80; font-family: Roboto Condensed, sans-serif;">
-                        <option hidden="" value=""> Choose Shirt Size </option>
-                        <option value="retro-shirt-s" data-price="29" data-product-json="{&quot;retro-shirt-s&quot;: 1}">Small</option>
-                        <option value="retro-shirt-m" data-price="29" data-product-json="{&quot;retro-shirt-m&quot;: 1}">Medium</option>
-                        <option value="retro-shirt-l" data-price="29" data-product-json="{&quot;retro-shirt-l&quot;: 1}">Large</option>
-                        <option value="retro-shirt-xl" data-price="29" data-product-json="{&quot;retro-shirt-xl&quot;: 1}">X-Large</option>
-                        <option value="retro-shirt-xxl" data-price="29" data-product-json="{&quot;retro-shirt-xxl&quot;: 1}">XX-Large</option>
-                    </select>
-                    <a class=" online-atc merch vue-add-to-cart selected-pack2" href="#" data-base-url="/ecommerce/add-to-cart?redirect=/order&products[singeo-lifetime-membership-access]=1&products[vowel-sounds-poster]=1&products[wallflower-tumbler]=1&products[mouth-mug]=1&locked=true">
-                        <button class="tw-border-none join w-full">
-                            <i class="fas fa-cart-plus" aria-hidden="true"></i> Order Now
-                        </button>
-                    </a>
-                    </div>
+                    <a class="join sold-out methodcta my-4">SOLD OUT</a>
+{{--                    <div class="w-full max-w-sm mx-auto">--}}
+{{--                    <select class="bundle-pick uppercase border-2 border-solid rounded-full font-bold text-xl w-full h-auto py-2 pl-7 pr-5 mb-3 bg-white md:py-2 lg:py-4" title="Shirt Size" required="" style="border-color: #717D80; color: #717D80; font-family: Roboto Condensed, sans-serif;">--}}
+{{--                        <option hidden="" value=""> Choose Shirt Size </option>--}}
+{{--                        <option value="retro-shirt-s" data-price="29" data-product-json="{&quot;retro-shirt-s&quot;: 1}">Small</option>--}}
+{{--                        <option value="retro-shirt-m" data-price="29" data-product-json="{&quot;retro-shirt-m&quot;: 1}">Medium</option>--}}
+{{--                        <option value="retro-shirt-l" data-price="29" data-product-json="{&quot;retro-shirt-l&quot;: 1}">Large</option>--}}
+{{--                        <option value="retro-shirt-xl" data-price="29" data-product-json="{&quot;retro-shirt-xl&quot;: 1}">X-Large</option>--}}
+{{--                        <option value="retro-shirt-xxl" data-price="29" data-product-json="{&quot;retro-shirt-xxl&quot;: 1}">XX-Large</option>--}}
+{{--                    </select>--}}
+{{--                    <a class=" online-atc merch vue-add-to-cart selected-pack2" href="#" data-base-url="/ecommerce/add-to-cart?redirect=/order&products[singeo-lifetime-membership-access]=1&products[vowel-sounds-poster]=1&products[wallflower-tumbler]=1&products[mouth-mug]=1&locked=true">--}}
+{{--                        <button class="tw-border-none join w-full">--}}
+{{--                            <i class="fas fa-cart-plus" aria-hidden="true"></i> Order Now--}}
+{{--                        </button>--}}
+{{--                    </a>--}}
+{{--                    </div>--}}
                     {{--<a class="join promo methodcta"--}}
                             {{--href="/ecommerce/add-to-cart?products[singeo-lifetime-membership-access]=1&products[vowel-sounds-poster]=1&products[mouth-mug]=1&products[wallflower-tumbler]=1&products[singing-starter-kit]=1&redirect=/order&locked=true"--}}
                     {{-->Get Started &raquo;</a>--}}
