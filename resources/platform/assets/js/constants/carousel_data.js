@@ -28,7 +28,7 @@ export const testCarousel = [
             },
             {
                 topSubtitle: "",
-                title: "New Songs Releases",
+                title: "New Song Releases",
                 ctaText: "Go To Songs",
                 description: "November 14th - Student Request - 21 New Songs<br>November 23rd - Drumeo's Choice - 20 New Songs",
                 ctaUrl: "/drumeo/songs",
