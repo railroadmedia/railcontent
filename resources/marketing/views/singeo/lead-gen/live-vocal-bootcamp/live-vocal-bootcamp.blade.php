@@ -172,7 +172,7 @@
                     <h6 class="leading-tight mb-4">
                         Connect with your breath so you can reduce tension, improve vocal control and have a healthier, happier voice.
                     </h6>
-                    @include("singeo.lead-gen.partials._sign-up-form-cio", [
+                    @include("singeo._partials._sign-up-form", [
                         "formId" => 'Singeo - Engagement - Trigger - Breath Bootcamp - Web Form',
                         "formName" => 'Breath Bootcamp',
                         "buttonText" => "Save my spot!",
@@ -348,7 +348,7 @@
             <p class="mb-4">
                 Start singing the RIGHT way with a LIVE 90-minute singing lesson from a vocal coach.
             </p>
-            @include("singeo.lead-gen.partials._sign-up-form-cio", [
+            @include("singeo._partials._sign-up-form", [
                 "formId" => 'Singeo - Engagement - Trigger - Breath Bootcamp - Web Form',
                 "formName" => 'Breath Bootcamp',
                 "buttonText" => "Save my spot!",

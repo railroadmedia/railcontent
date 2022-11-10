@@ -60,7 +60,7 @@
                     <img class="h-24 md:h-36" src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/stop-hating-your-voice/logo.png">
                     <h5 class="leading-tight mt-2 mb-2">Learn to love your voice<br> <strong>in 3 easy lessons!</strong></h5>
                     <p class="mb-3 md:mb-3 leading-normal text-navy">Do you cringe when you hear your voice on a recording? Do you love singing but don’t like your voice? You’re not alone. But there’s good news. The voice you think you have now is NOTHING like the potential lurking inside you. Simply enter your email below to get 3 free vocal lessons that will teach you to stop hating your voice...</p>
-                    @include("singeo.lead-gen.partials._sign-up-form-cio", [
+                    @include("singeo._partials._sign-up-form", [
                     "formId" => "Singeo - Engagement - Trigger - Stop Hating Your Voice - Web Form",
                     "formName" => 'Stop Hating Your Voice',
                     "buttonText" => "Send My Lessons",
@@ -172,7 +172,7 @@
             <h4 class="leading-tight my-5">Learn to love your voice <strong>in 3 easy lessons!</strong></h4>
             <p class="mb-3 md:mb-5 leading-tight">Enter your email below to get 3 free vocal lessons that will teach you to stop hating your voice...</p>
             <div class="w-full mx-auto max-w-lg lg:max-w-3xl">
-                @include("singeo.lead-gen.partials._sign-up-form-cio", [
+                @include("singeo._partials._sign-up-form", [
                     "formId" => "Singeo - Engagement - Trigger - Stop Hating Your Voice - Web Form",
                     "formName" => 'Stop Hating Your Voice',
                     "buttonText" => "Send My Lessons",
