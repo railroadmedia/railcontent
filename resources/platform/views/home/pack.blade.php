@@ -23,14 +23,26 @@
             @endcomponent
         @endif
 
-        {{-- Packs Section --}}
-        @component('partials.bladesora.members.components.home._packs-section', [
-            'brand' => brand(),
-            'packsUrl' => '/'.$brand.'/packs',
-            'hasPacks' => !empty($packs),
-            'packs' => $packs,
-            ])
-        @endcomponent
+        @if (!empty($courses))
+            @include(
+                'partials.bladesora.members.components.home._courses-section',
+                [
+                    'brand' => brand(),
+                    'contentEndpoint' => '/railcontent/content',
+                    'courseContentJson' => $courses,
+                    'allCoursesUrl' => '/'.$brand.'/courses',
+                ]
+            )
+        @else
+            {{-- Packs Section --}}
+            @component('partials.bladesora.members.components.home._packs-section', [
+                'brand' => brand(),
+                'packsUrl' => '/'.$brand.'/packs',
+                'hasPacks' => !empty($packs),
+                'packs' => $packs,
+                ])
+            @endcomponent
+        @endif
 
         {{-- Popular Conversations --}}
         @if(count($hotForumTopics) > 0)
@@ -42,14 +54,14 @@
             @endcomponent
         @endif
 
-{{--        --}}{{-- My Stats --}}
-{{--        <stats-section--}}
-{{--            brand="{{ $brand }}"--}}
-{{--            account-url="{{ user()->getDashboardUrl() }}"--}}
-{{--            :next-learning-path-progress-percent="{{ $nextLearningPathProgressPercent ?? 0 }}"--}}
-{{--            next-learning-path-level="{{ $nextLearningPathLevel ?? '1.1' }}"--}}
-{{--            :userMetrics="{{ json_encode($userMetrics) }}"--}}
-{{--        ></stats-section>--}}
+        {{--        --}}{{-- My Stats --}}
+        {{--        <stats-section--}}
+        {{--            brand="{{ $brand }}"--}}
+        {{--            account-url="{{ user()->getDashboardUrl() }}"--}}
+        {{--            :next-learning-path-progress-percent="{{ $nextLearningPathProgressPercent ?? 0 }}"--}}
+        {{--            next-learning-path-level="{{ $nextLearningPathLevel ?? '1.1' }}"--}}
+        {{--            :userMetrics="{{ json_encode($userMetrics) }}"--}}
+        {{--        ></stats-section>--}}
 
     </div>
 
