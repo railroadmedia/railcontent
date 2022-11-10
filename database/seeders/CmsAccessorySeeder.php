@@ -493,6 +493,41 @@ class CmsAccessorySeeder extends Seeder
                 ],
             ],
             [
+                "brand" => 1,
+                "product_type_id" => 2,
+                "name" => "Drumeo Rudiments Poster",
+                "slug" => "",
+                "sku" => "rudiments-poster",
+                "thumbnail" => "",
+                "meta_desc" => "",
+                "meta_img" => "",
+                "short_desc" => "",
+                "header_text" => "",
+                "price" => 7,
+                "discounted_price" => "",
+                "special_text" => "",
+                "features" => [
+
+                ],
+                "specs" => [
+
+                ],
+                "visible" => false,
+                "sold_out" => false,
+                "guaranteed" => false,
+                "lifetime_access" => false,
+                "free_shipping" => false,
+                "images" => [
+                ],
+                "sizeChart" => "",
+                "sizes" => [
+
+                ],
+                'bundle_img' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/rudiments_poster.jpg',
+                "bundle_desc" => "Learn the ABC’s of drumming with Drumeo’s first-ever rudiment poster. This is your easy-to-reference guide for all your singles, doubles, flams, and more. You’ll see clear notation for every rudiment so you can develop silky-smooth hands on the kit.",
+                'bundle_free_shipping' => false,
+            ],
+            [
                 "brand" => 2,
                 "product_type_id" => 2,
                 "name" => "Classical Piano Pieces",
