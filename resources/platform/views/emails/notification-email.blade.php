@@ -132,7 +132,7 @@
         <tr style="border-bottom:1px solid #d1d1d1;text-align:center;">
             <td colspan="2">
                 <a style="white-space:nowrap;display:inline-block;"
-                   href="{{ url()->route('platform.profile.settings.notifications-redirect') }}">
+                   href="{{ url()->route('platform.notifications-redirect') }}">
                     {{ count($notificationRows) - 10 }}
                     More Notifications
                 </a>

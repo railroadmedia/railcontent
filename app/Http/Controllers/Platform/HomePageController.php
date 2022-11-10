@@ -82,6 +82,11 @@ class HomePageController extends BaseController
 
     public function notificationsRedirect()
     {
+        return redirect("/".brand()."/notifications");
+    }
+
+    public function notificationSettingsRedirect()
+    {
         return redirect("/".brand()."/profile/".user()->id."/settings/notifications");
     }
 
