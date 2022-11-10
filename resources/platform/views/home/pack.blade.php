@@ -6,9 +6,20 @@
 
 @section('content')
 
-    <div class="tw-container tw-mx-auto tw-pt-[58px] tw-px-4 md:tw-px-8 dark:tw-text-white">
+    <div class="tw-container tw-mx-auto tw-pt-[32px] tw-px-4 md:tw-px-8 dark:tw-text-white">
 
         {{-- Add Header Slide "Welcome Username" --}}
+        @if(empty(user()->membership_expiration_date) && user()->isPackOwner())
+        <div class="tw-w-full tw-pb-[36px]">
+            <static-header
+                title="JOIN THE COMMUNITY"
+                cta-text="UPGRADE YOUR MEMBERSHIP"
+                description="Click here to upgrade your membership and gain access to the Drumeo, Pianote, Guitareo, and Singeo communities!"
+                cta-url="{{ get_legacy_brand_base_url() . '/shop'  }}"
+                img="https://musora.com/cdn-cgi/image/width=720/https://cdn.musora.com/image/fetch/c_fill,w_1920,h_1080,q_auto:good/https://musora-web-platform.s3.amazonaws.com/carousel/pre-launch-header-image-jpg.jpg"
+            ></static-header>
+        </div>
+        @endif
 
         {{-- Continue Section --}}
         @if($startedContentCount > 0)
