@@ -67,7 +67,7 @@ class ProfilePublicPagesController extends BaseController
         $methodContent =
             $this->contentService->getBySlugAndType($methodSlug, 'learning-path')
                 ->first();
-        $userProgressOnMethod = $this->userContentProgressService->getUserProgressOnContent($userId, $methodContent['id']);
+        $userProgressOnMethod = $methodContent ? $this->userContentProgressService->getUserProgressOnContent($userId, $methodContent['id']) : null;
 
         // completed/started lessons
         $startedProgressRows = $this->userContentProgressService->getForUserStateContentTypes(
