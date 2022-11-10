@@ -1,7 +1,7 @@
-<form id="@if(!empty($formId)) {{ str_replace('-', '', (str_replace(' ', '', $formId))) }} @else ajaxForm @endif"
-      accept-charset="UTF-8" action="{{ url()->route('customer-io.submit-email-form') }}"
-      class="ajax-form clearfix infusion-form facebook-track-lead mx-auto" method="POST"
-      onsubmit="emailSignUpConversionTrackerForImpactProvider()">
+<form id="@if(!empty($formId)) {{ str_replace('-', '', (str_replace(' ', '', $formId))) }} @else ajaxForm @endif" accept-charset="UTF-8"
+    action="{{ url()->route('customer-io.submit-email-form') }}"
+    class="@if(empty($redirectURL)) ajax-form @endif clearfix infusion-form facebook-track-lead mx-auto" method="POST"
+    onsubmit="emailSignUpConversionTrackerForImpactProvider()">
 
     @if(!empty($formName))
         {!! \Railroad\LeadTracker\Services\LeadTrackerService::getRequestTrackingInputsHtmlFromRequest(
@@ -50,6 +50,18 @@
     <span>By signing up you’ll also receive our ongoing free lessons and special offers. Don’t worry, we value your privacy and you can unsubscribe at any time.</span>
 </div>
 
-@include('guitareo.lead-gen.partials.thank-you-alt')
+<div class="thank-you-box">
+    <p><strong><i class="fas fa-check"></i> Success!</strong></p>
+    <h2>@if(!empty($headline)) {{ $headline }} @else Check your email @endif</h2>
+    <p><em>@if(!empty($body)) {{ $body }} @else You should receive an email from team@guitareo.com within 10 minutes.
+            If you don’t, then check your spam folder or re-enter your email address again. @endif
+        </em>
+    </p>
+    <div class="social-media">
+        <a href="https://www.youtube.com/user/guitarlessonscom" target="_blank" class="youtube"><i class="fab fa-youtube"></i></a>
+        <a href="https://www.facebook.com/guitareoofficial" target="_blank" class="facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/guitareoofficial/" target="_blank" class="instagram"><i class="fab fa-instagram"></i></a>
+    </div>
+</div>
 
 @include("guitareo.lead-gen.partials.impact-email-sign-up-tracker")
