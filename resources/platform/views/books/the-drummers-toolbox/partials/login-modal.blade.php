@@ -32,7 +32,7 @@
 
                     <div class="flex flex-column mb-1">
                         @include('partials.bladesora.members.inputs.text-input', [
-                            "brand" => "pianote",
+                            "brand" => "drumeo",
                             "type" => "text",
                             "inputId" => "loginEmail",
                             "inputName" => "email",
@@ -44,7 +44,7 @@
 
                     <div class="flex flex-column mb-1">
                         @include('partials.bladesora.members.inputs.text-input', [
-                            "brand" => "pianote",
+                            "brand" => "drumeo",
                             "type" => "password",
                             "inputId" => "loginPassword",
                             "inputName" => "password",

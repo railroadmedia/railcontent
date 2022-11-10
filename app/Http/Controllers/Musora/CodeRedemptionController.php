@@ -21,7 +21,7 @@ class CodeRedemptionController extends BaseController
 
     public function powerPack()
     {
-        return view('musora.pages.power-pack');
+        return view('drumeo.sales.trials.power-pack');
     }
 
     public function hitLikeAGirlSubmission(Request $request)
@@ -105,7 +105,7 @@ class CodeRedemptionController extends BaseController
 
     public function sonor()
     {
-        return view('musora.pages.sonor');
+        return view('drumeo.sales.trials.sonor');
     }
 
 

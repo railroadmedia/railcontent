@@ -349,7 +349,8 @@
                         </div>
                         <br><br>
                     @else
-                        <form accept-charset="UTF-8" action="/laravel/public/hlag-submit" id="inf_form" class="clearfix infusion-form" method="POST">
+                        <form accept-charset="UTF-8" action="/hlag-submit" id="inf_form" class="clearfix infusion-form" method="POST">
+                            <input type="hidden" name="_token" class="sort-input" value="{{ csrf_token() }}" />
                             <input name="inf_form_xid" type="hidden" value=""/>
                             <input name="inf_form_name" type="hidden" value=""/>
                             <div class="infusion-field columns medium-6">

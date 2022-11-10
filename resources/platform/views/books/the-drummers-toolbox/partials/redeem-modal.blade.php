@@ -25,10 +25,10 @@
                     {{ csrf_field() }}
 
                     <input type="hidden" name="credentials_type" value="new">
-                    <input type="hidden" name="redirect" value="/bestbook">
+                    <input type="hidden" name="redirect" value="/drummers-toolbox">
 
-                    <input type="hidden" name="book-title" value="Best Beginner Drum Book">
-                    <input type="hidden" name="context" value="best-book">
+                    <input type="hidden" name="book-title" value="The Drummer's Toolbox">
+                    <input type="hidden" name="context" value="drummers-toolbox">
 
                     <div class="flex flex-column mb-1">
                         @include('partials.bladesora.members.inputs.text-input', [
@@ -99,10 +99,9 @@
                     {{ method_field('POST') }}
                     {{ csrf_field() }}
                     <input type="hidden" name="credentials_type" value="existing">
-                    <input type="hidden" name="redirect" value="/bestbook">
+                    <input type="hidden" name="redirect" value="/drummers-toolbox">
 
-                    <input type="hidden" name="book-title" value="Best Beginner Drum Book">
-                    <input type="hidden" name="context" value="best-book">
+                    <input type="hidden" name="book-title" value="The Drummer's Toolbox">
 
                     <div class="flex flex-column mb-1">
                         @include('partials.bladesora.members.inputs.text-input', [

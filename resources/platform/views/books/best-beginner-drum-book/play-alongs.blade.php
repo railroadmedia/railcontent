@@ -1,10 +1,11 @@
-@extends('partials.layout', [
-    "pageTitle" => "The Best Beginner Drum Book - Play Alongs",
-])
+@extends('partials.layout')
+
+@section('meta')
+    <title>The Best Beginner Drum Book - Play Alongs | Musora</title>
+@endsection
 
 @section('styles')
     <style>
-
         @if(empty(auth()->user()))
             #nav .menu {
                 background-color:#0b76db!important;

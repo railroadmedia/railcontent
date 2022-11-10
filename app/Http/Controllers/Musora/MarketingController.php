@@ -46,4 +46,14 @@ class MarketingController extends BaseController
     {
         return view('musora.pages.unified-2022');
     }
+
+    public function bestBookTrial()
+    {
+        return view('drumeo.sales.trials.bestbook-trial');
+    }
+
+    public function chooseTrial()
+    {
+        return view('drumeo.sales.trials.trial-selection.choose-your-trial');
+    }
 }
