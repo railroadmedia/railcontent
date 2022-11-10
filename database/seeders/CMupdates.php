@@ -28,8 +28,8 @@ class CMUpdates extends Seeder
                 'sku' => '',
                 'meta_desc' => '',
                 'meta_img' => '',
-                'price' => ,
-                'discounted_price' => ,
+                'price' => 240,
+                'discounted_price' => 200,
                 'special_text' => '',
                 'page_logo' => '',
                 'header_text' => 'For the drummer who wants it all. (Includes 15 bonus lesson packs)',
@@ -129,7 +129,82 @@ It’s all designed to help you have your best year on the drums yet. Scroll dow
                     ],
                 ],
             ],
+            //PIANOTE
+            [
+                'brand' => 2,
+                'product_type_id' => 6,
+                'name' => 'The Whole 9 Yards Cyber BUNDLE',
+                'slug' => '',
+                'sku' => '',
+                'meta_desc' => '',
+                'meta_img' => '',
+                'price' => 97,
+                'discounted_price' => 0,
+                'special_text' => '',
+                'page_logo' => '',
+                'header_text' => 'For the drummer who wants it all. (Includes 15 bonus lesson packs)',
+                'video_src' => '',
+                'images' => [
+                ],
+                'overview' => 'The Whole 9 Yards
+Idiom, informal;
+**Everything you can possibly want**
 
+All the courses, none of the commitment. The Whole 9 Yards Cyber Bundle is your complete guide to learning the piano without a membership.
+
+Pay once and get lifetime access to 9 courses. You’ll learn how to play beautiful chords, classical piano, amazing improvisation, boost your speed, and more.
+',
+                'sold_out' => false,
+                'guaranteed' => false,
+                'free_shipping' => false,
+                'products' => [
+                    [
+                        'name' => 'Drumeo Membership',
+                        'free_bonus' => false,
+                        'lifetime_access' => true,
+                    ],
+                    [
+                        'name' => '',
+                        'free_bonus' => false,
+                        'lifetime_access' => true,
+                    ],
+                    [
+                        'name' => 'Improvisation & Musical Freedom',
+                        'free_bonus' => false,
+                        'lifetime_access' => true,
+                    ],
+                    [
+                        'name' => 'Playing Beautiful Piano',
+                        'free_bonus' => false,
+                        'lifetime_access' => true,
+                    ],
+                    [
+                        'name' => 'Piano Riffs & Fills',
+                        'free_bonus' => false,
+                        'lifetime_access' => true,
+                    ],
+                    [
+                        'name' => 'Piano Technique Made Easy',
+                        'free_bonus' => false,
+                        'lifetime_access' => true,
+                    ],
+                    [
+                        'name' => 'De-Stupefy Your Left Hand',
+                        'free_bonus' => false,
+                        'lifetime_access' => true,
+                    ],
+                    [
+                        'name' => 'Worship Piano',
+                        'free_bonus' => false,
+                        'lifetime_access' => true,
+                    ],
+                    [
+                        'name' => 'Faster Fingers',
+                        'free_bonus' => false,
+                        'lifetime_access' => true,
+                    ],
+                ],
+            ],
             //GUITAREO
             [
                 'brand' => 3,
@@ -139,8 +214,8 @@ It’s all designed to help you have your best year on the drums yet. Scroll dow
                 'sku' => '',
                 'meta_desc' => '',
                 'meta_img' => '',
-                'price' => ,
-                'discounted_price' => ,
+                'price' => 735,
+                'discounted_price' => 97,
                 'special_text' => '',
                 'page_logo' => '',
                 'header_text' => 'Build and play songs you love on the guitar.',

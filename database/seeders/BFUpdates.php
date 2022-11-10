@@ -18,6 +18,7 @@ class BFUpdates extends Seeder
     public function run()
     {
         //DRUMEO UPDATES
+        Product::where('brand_id', 1)->where('name', 'Drumeo Membership')->update(['discounted_price' => 200]);
         Product::where('brand_id', 1)->where('name', 'Rock Drumming Masterclass')->update(['discounted_price' => 79]);
         Product::where('brand_id', 1)->where('name', 'Drum Technique Made Easy')->update(['discounted_price' => 79]);
         Product::where('brand_id', 1)->where('name', 'Independence Made Easy')->update(['discounted_price' => 79]);
@@ -54,6 +55,7 @@ class BFUpdates extends Seeder
         Product::where('brand_id', 1)->where('product_type_id', 3)->update(['discounted_price' => 15]);
 
         //PIANOTE UPDATES
+        Product::where('brand_id', 1)->where('name', 'Pianote Membership')->update(['discounted_price' => 129]);
         Product::where('brand_id', 2)->where('name', 'De-Stupefy Your Left Hand')->update(['discounted_price' => 29]);
         Product::where('brand_id', 2)->where('name', 'Piano Riffs & Fills')->update(['discounted_price' => 29]);
         Product::where('brand_id', 2)->where('name', '500 Songs In 5 Days')->update(['discounted_price' => 29]);
@@ -173,7 +175,51 @@ This bundle is for new members only. You’ll pay just $129 for your first year 
             ]);
         }
 
+        $product_id = Product::where('brand_id', 2)->where('name', 'The Book Bundle')->first()->id;
+        Bundle::where('bundle_id', $product_id)->delete();
+
+        $bundles = [
+            [
+                'name' => 'Piano Chords & Scales',
+                'free_bonus' => false,
+                'lifetime_access' => false,
+            ],
+            [
+                'name' => 'Classical Piano Pieces',
+                'free_bonus' => false,
+                'lifetime_access' => false,
+            ],
+            [
+                'name' => 'Pianote Practice Planner',
+                'free_bonus' => false,
+                'lifetime_access' => false,
+            ],
+            [
+                'name' => 'Chords Poster',
+                'free_bonus' => false,
+                'lifetime_access' => false,
+            ],
+            [
+                'name' => 'Scales Poster',
+                'free_bonus' => false,
+                'lifetime_access' => false,
+            ],
+        ];
+
+        foreach($bundles as $key => $bundle){
+            $product_id = Product::where('name', '=', $bundle['name'])->where('brand_id', '=', 2)->first()->id;
+
+            Bundle::create([
+                'bundle_id' => $product_id,
+                'product_id' => $product_id,
+                'free_bonus' => $bundle['free_bonus'],
+                'lifetime_access' => $bundle['lifetime_access'],
+                'order_number' => $key
+            ]);
+        }
+
         //GUITAREO UPDATES
+        Product::where('brand_id', 1)->where('name', 'Guitareo Membership')->update(['discounted_price' => 97]);
         Product::where('brand_id', 3)->where('name', 'GuitarQuest')->update(['discounted_price' => 97]);
         Product::where('brand_id', 3)->where('name', '500 Songs In 5 Days')->update(['discounted_price' => 29]);
         Product::where('brand_id', 3)->where('name', 'Acoustic Guitar Made Easy')->update(['discounted_price' => 49]);
@@ -191,8 +237,8 @@ This bundle is for new members only. You’ll pay just $129 for your first year 
                 'sku' => '',
                 'meta_desc' => 'Improve your drumming anywhere & anytime.',
                 'meta_img' => '',
-                'price' => ,
-                'discounted_price' => ,
+                'price' => 240,
+                'discounted_price' => 200,
                 'special_text' => '',
                 'page_logo' => '',
                 'header_text' => 'Improve your drumming anywhere & anytime. (+ get 12 FREE bonuses)',
@@ -228,6 +274,11 @@ Scroll down to see everything included in the Ultimate Lessons Bundle and get re
                     ],
                     [
                         'name' => 'Vater Drumeo 5A Drumsticks',
+                        'free_bonus' => true,
+                        'lifetime_access' => false,
+                    ],
+                    [
+                        'name' => 'Drumeo Rudiments Poster',
                         'free_bonus' => true,
                         'lifetime_access' => false,
                     ],
@@ -281,8 +332,8 @@ Scroll down to see everything included in the Ultimate Lessons Bundle and get re
                 'sku' => '',
                 'meta_desc' => '',
                 'meta_img' => '',
-                'price' => ,
-                'discounted_price' => ,
+                'price' => 98.95,
+                'discounted_price' => 49,
                 'special_text' => '',
                 'page_logo' => '',
                 'header_text' => 'Improve your rudiments & stickings on the fly. (SAVE 50%)',
@@ -310,7 +361,7 @@ You’ll have everything you need to improve your hands around the drums.
                         'lifetime_access' => false,
                     ],
                     [
-                        'name' => 'Drumeo QuietPad',
+                        'name' => 'Drumeo Rudiments Poster',
                         'free_bonus' => false,
                         'lifetime_access' => false,
                     ],
@@ -324,8 +375,8 @@ You’ll have everything you need to improve your hands around the drums.
                 'sku' => '',
                 'meta_desc' => '',
                 'meta_img' => '',
-                'price' => ,
-                'discounted_price' => ,
+                'price' => 240,
+                'discounted_price' => 0,
                 'special_text' => '',
                 'page_logo' => '',
                 'header_text' => 'The perfect gift for any drummer. (Unlimited drum lessons + free bonuses!)',
@@ -364,17 +415,18 @@ The Perfect Gift Bundle comes ready to wrap and put under the tree -- loaded wit
                     ],
                 ],
             ],
+
             //GUITAREO
             [
                 'brand' => 3,
                 'product_type_id' => 6,
-                'name' => 'The Perfect Gift Bundle',
+                'name' => 'The Sound Better Bundle',
                 'slug' => 'sound-better-bundle',
                 'sku' => '',
                 'meta_desc' => '',
                 'meta_img' => '',
-                'price' => ,
-                'discounted_price' => ,
+                'price' => 127,
+                'discounted_price' => 0,
                 'special_text' => '',
                 'page_logo' => '',
                 'header_text' => 'Get ALL the lessons and gear essentials to start sounding better on the guitar.',
