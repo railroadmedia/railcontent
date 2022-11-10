@@ -11,6 +11,12 @@
 
     <meta property="og:url" content="https://www.musora.com/{{ Request::path() }}">
     <meta property="og:image" content="https://musora-center.s3.amazonaws.com/recitals/fb-share-image.png">
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
 @endsection
 
 <!-- Main -->
@@ -27,7 +33,7 @@
     </div>
     <section class="text-center text-white py-5 md:py-10 lg:py-16 px-5 md:px-7" style="background:#00101d ;">
         <div class="container mx-auto max-w-5xl">
-            <img class="h-24 sm:h-32 lg:h-40 mb-3" src="https://musora-center.s3.amazonaws.com/recitals/MusoraWinterRecital-logo.png">
+            <img class="h-24 sm:h-32 lg:h-40 mb-3 mt-10 md:mt-10" src="https://musora-center.s3.amazonaws.com/recitals/MusoraWinterRecital-logo.png" alt="recital logo">
             <h3 class="leading-tight"><strong>Be a part of the first ever <br>Musora Winter Recital!</strong></h3>
             <a class="btn-primary anchor-slide mt-5 mb-10 md:mt-7 md:mb-20 bg-musora border-none" href="#form">Submit Now &raquo;</a>
             <div class="flex flex-wrap items-center justify-center mx-auto max-w-4xl">
