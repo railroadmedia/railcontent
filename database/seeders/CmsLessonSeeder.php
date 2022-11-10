@@ -1240,7 +1240,7 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
             [
                 "brand" => 2,
                 "product_type_id" => 1,
-                "name" => "The Power Of Chords",
+                "name" => "The Power of Chords",
                 "slug" => "the-power-of-chords",
                 "sku" => "the-power-of-chords",
                 "thumbnail" => "https:/pianote.s3.amazonaws.com/products/the-power-of-chords/header_thumb.png",
