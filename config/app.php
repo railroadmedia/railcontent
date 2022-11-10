@@ -191,6 +191,7 @@ return [
         App\Modules\HelpScout\Providers\HelpScoutServiceProvider::class,
         App\Modules\CustomerIO\Providers\CustomerIoServiceProvider::class,
         App\Modules\Content\Providers\ContentServiceProvider::class,
+        App\Modules\Notifications\Providers\NotificationServiceProvider::class,
 
         /*
          * Application Service Providers...

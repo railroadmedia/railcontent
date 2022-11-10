@@ -80,6 +80,16 @@ class HomePageController extends BaseController
         return redirect("/".brand()."/profile/".user()->id."/dashboard");
     }
 
+    public function notificationsRedirect()
+    {
+        return redirect("/".brand()."/notifications");
+    }
+
+    public function notificationSettingsRedirect()
+    {
+        return redirect("/".brand()."/profile/".user()->id."/settings/notifications");
+    }
+
     public function home(Request $request, $brand)
     {
         Decorator::$typeDecoratorsEnabled = false;
