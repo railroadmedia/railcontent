@@ -34,7 +34,7 @@
             @endcomponent
         @endif
 
-        @if (!empty($courses))
+        @if (!empty($courses) && brand() == 'singeo')
             @include(
                 'partials.bladesora.members.components.home._courses-section',
                 [
