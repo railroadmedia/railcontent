@@ -1,6 +1,13 @@
-@extends('partials.layout', [
-    "pageTitle" => "The Drummer's Toolbox - " . $chapterData['title'],
-])
+<?php
+$layout = 'books.layout';
+if(!empty($user)){
+    $layout = 'partials.layout';
+} ?>
+
+@extends($layout)
+{{--@extends('partials.layout', [--}}
+{{--    "pageTitle" => "The Drummer's Toolbox - " . $chapterData['title'],--}}
+{{--])--}}
 
 @section('meta')
     <meta name="author" content="Brandon Toews">
@@ -8,17 +15,6 @@
 
     <meta property="og:description" content="{{ $chapterData['description'] }}">
     <meta property="og:title" content="The Drummer's Toolbox - {{ $chapterData['title'] }}">
-@endsection
-
-@section('styles')
-    <style>
-
-        @if(empty(auth()->user()))
-            #nav .menu {
-                background-color:#0b76db!important;
-            }
-        @endif
-    </style>
 @endsection
 
 @section('inject-components')
@@ -194,14 +190,14 @@
 
             <div class="flex flex-row">
                 <div class="flex flex-column grow">
-                    <?php //dd($relatedLessons); ?>
-                    @foreach($relatedLessons as $relatedLesson)
-                        @include('books.the-drummers-toolbox.partials.related-content', ['relatedLesson' => [
+                      @foreach($relatedLessons as $relatedLesson)
+                        @include('books.partials.related-content', ['relatedLesson' => [
                             "thumbnail" => $relatedLesson['data']->fetch('data.thumbnail_url',''),
                             "title" => $relatedLesson['data']->fetch('fields.title',''),
                             "youtube_id" => $relatedLesson['youtube_id'] ?? null,
                             "members_url" => $relatedLesson['data']->fetch('url',''),
-                            "content_id" => $relatedLesson['data']->fetch('id')
+                            "content_id" => $relatedLesson['data']->fetch('id'),
+                            "brand" => "drumeo"
                             ]
                         ])
                     @endforeach
@@ -213,7 +209,7 @@
             <div class="flex flex-row ph-1 pv-3">
                 <h1 class="heading">Play-Alongs</h1>
             </div>
-
+            <?php //dd($playAlongs); ?>
             <div class="flex flex-row">
                 <play-alongs
                         content-endpoint="railcontent/content"

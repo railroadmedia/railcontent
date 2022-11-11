@@ -1,4 +1,10 @@
-@extends('partials.layout')
+<?php
+$layout = 'books.layout';
+if(!empty($user)){
+    $layout = 'partials.layout';
+} ?>
+
+@extends($layout)
 
 @section('meta')
     <title>The Drummer's Toolbox | Musora</title>

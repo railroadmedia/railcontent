@@ -1,17 +1,13 @@
-@extends('partials.layout')
+<?php
+$layout = 'books.layout';
+if(!empty($user)){
+    $layout = 'partials.layout';
+} ?>
+
+@extends($layout)
 
 @section('meta')
     <title>The Best Beginner Drum Book - Play Alongs | Musora</title>
-@endsection
-
-@section('styles')
-    <style>
-        @if(empty(auth()->user()))
-            #nav .menu {
-                background-color:#0b76db!important;
-            }
-        @endif
-    </style>
 @endsection
 
 @section('content')
