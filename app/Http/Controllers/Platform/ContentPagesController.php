@@ -229,6 +229,13 @@ class ContentPagesController extends BaseController
 
         ContentRepository::$pullFutureContent = true;
 
+        ContentRepository::$availableContentStatues =
+            [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED];
+
+        if (user()->isAdmin()) {
+            array_push(ContentRepository::$availableContentStatues, ContentService::STATUS_SCHEDULED);
+            array_push(ContentRepository::$availableContentStatues, ContentService::STATUS_DRAFT);
+        }
         $classicalMethodPack = null;
         $classicalMethodPackJson = null;
 
@@ -650,9 +657,11 @@ class ContentPagesController extends BaseController
             $contentToRenderAsLessonParent = $thirdContent;
         }
 
-        if ((empty($contentToRenderAsLesson['published_on']) ||
-                Carbon::parse($contentToRenderAsLesson['published_on']) > Carbon::now() ||
-                $contentToRenderAsLesson['status'] != 'published') && !(user()->isAdmin())) {
+        if ((
+              empty($contentToRenderAsLesson['published_on']) ||
+              Carbon::parse($contentToRenderAsLesson['published_on']) > Carbon::now() ||
+              !in_array($contentToRenderAsLesson['status'],[ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED]))
+            && !(user()->isAdmin())) {
             throw new NotFoundHttpException();
         }
 
