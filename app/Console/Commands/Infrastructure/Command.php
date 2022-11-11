@@ -12,6 +12,12 @@ use Illuminate\Support\Facades\Log;
 abstract class Command extends CommandBase
 {
 
+    public function info($string, $verbosity = null)
+    {
+        Log::info($string); //also write info statements to log
+        $this->line($string, 'info', $verbosity);
+    }
+
     public function withProgressBarChunked(Builder $query, callable $function, $chunks = 1000, $timeout = 600): bool
     {
         $timeStart = microtime(true);
@@ -64,7 +70,7 @@ abstract class Command extends CommandBase
         $timeStart = microtime(true);
         $job = call_user_func($getJob, 0, 0);
         $count = $job->getQuery()->count();
-        $this->info("Processing query...");
+        $this->info("Processing $this->name query...");
         $this->info("$count records found.");
 
         $skip = 0;
@@ -88,15 +94,21 @@ abstract class Command extends CommandBase
             $this->info("No batched status available");
         }
 
-        if (App::environment('local')) { //progress bar not useful when running vapor commands
-            $batchId = $batch->id;
-            while (!$batch->finished()) {
-                $batch = Bus::findBatch($batchId);
-                $completedJobs = $batch->totalJobs - $batch->pendingJobs;
-                Log::info("Processed $completedJobs/$batch->totalJobs {$batch->progress()}%");
-                usleep(500000);
+        if (App::environment('local') && env(
+                'QUEUE_CONNECTION'
+            ) == 'sync') { //progress bar not useful when running vapor commands
+            if($batch) {
+                $batchId = $batch->id;
+                while (!$batch->finished()) {
+                    $batch = Bus::findBatch($batchId);
+                    $completedJobs = $batch->totalJobs - $batch->pendingJobs;
+                    Log::info("Processed $completedJobs/$batch->totalJobs {$batch->progress()}%");
+                    usleep(500000);
+                }
             }
-            Log::info("Processing Completed");
+            $diff = microtime(true) - $timeStart;
+            $sec = intval($diff);
+            $this->info("Finished $this->name ($sec s)");
         }
 
         return true;
@@ -105,6 +117,8 @@ abstract class Command extends CommandBase
     public function withExecutionTime(callable $function)
     {
         $this->info("Processing $this->name");
+        Log::info("Processing $this->name");
+
         $timeStart = microtime(true);
 
         call_user_func($function);
@@ -112,5 +126,6 @@ abstract class Command extends CommandBase
         $diff = microtime(true) - $timeStart;
         $sec = intval($diff);
         $this->info("Finished $this->name ($sec s)");
+        Log::info("Finished $this->name ($sec s)");
     }
 }
