@@ -138,7 +138,6 @@
     <script src="{{ asset('/marketing/js/pianote/manifest.js') }}"></script>
     <script src="{{ asset('/marketing/js/pianote/vendor.js') }}"></script>
     <script src="{{ asset('/marketing/js/pianote/cart-sidebar.js') }}"></script>
-    <script src="{{ asset('/marketing/js/order-form.js') }}"></script>
     <script src="{{ asset('/marketing/js/pianote/app.js') }}"></script>
     <script src="{{ mix('/platform/js/app.js') }}"></script>
     

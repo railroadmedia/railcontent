@@ -138,7 +138,6 @@
     <script src="{{ asset('/marketing/js/guitareo/manifest.js') }}"></script>
     <script src="{{ asset('/marketing/js/guitareo/vendor.js') }}"></script>
     <script src="{{ asset('/marketing/js/guitareo/cart-sidebar.js') }}"></script>
-    <script src="{{ asset('/marketing/js/order-form.js') }}"></script>
     <script src="{{ asset('/marketing/js/guitareo/app.js') }}"></script>
     <script src="{{ mix('/platform/js/app.js') }}"></script>
     @yield('scripts')

@@ -28,9 +28,9 @@ export const testCarousel = [
             },
             {
                 topSubtitle: "",
-                title: "New Songs Releases",
+                title: "New Song Releases",
                 ctaText: "Go To Songs",
-                description: "November 14th - Student Request & Peter Erskine - 21 New Songs<br>November 23rd - Drumeo's Choice - 20 New Songs",
+                description: "November 14th - Student Request - 21 New Songs<br>November 23rd - Drumeo's Choice - 20 New Songs",
                 ctaUrl: "/drumeo/songs",
                 img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,height=430,fit=cover,metadata=none/https://musora-web-platform.s3.amazonaws.com/carousel/Songs-banner.jpg",
             },

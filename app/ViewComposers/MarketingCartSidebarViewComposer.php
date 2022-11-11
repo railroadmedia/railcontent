@@ -36,6 +36,6 @@ class MarketingCartSidebarViewComposer
             ->respond()
             ->getContent();
 
-        $view->with(['cartData' => $cartJson, 'cartVersion' => true]);
+        $view->with(['cartData' => $cartJson, ]);
     }
 }
