@@ -40,6 +40,11 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('platform.profile-redirect');
 
+        // this automatically redirects to the users notification settings
+        Route::get('/members/profile/settings/notifications', [HomePageController::class, 'notificationsRedirect'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.notifications-redirect');
+
         /*
         * Onboarding
         */

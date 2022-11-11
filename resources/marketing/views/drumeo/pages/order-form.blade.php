@@ -134,9 +134,9 @@
         </div>
     </div>
     @include("drumeo.sales.partials._footer")
-
-    @yield('scripts')
     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script src="{{ asset('/marketing/js/drumeo/manifest.js') }}"></script>
     <script src="{{ asset('/marketing/js/drumeo/vendor.js') }}"></script>
     <script src="{{ asset('/marketing/js/drumeo/cart-sidebar.js') }}"></script>
