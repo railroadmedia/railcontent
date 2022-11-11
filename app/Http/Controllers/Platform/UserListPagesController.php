@@ -178,6 +178,7 @@ class UserListPagesController extends BaseController
         } else {
             $contentTypes = ContentTypes::userListContentTypes();
         }
+        ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
 
         $noResultsMessage =
             'You haven\'t completed any lessons of that type yet, once you complete a lesson of this type it will show up here for you to access later.';
