@@ -1,4 +1,4 @@
-@extends('pianote._partials.layout-template')
+@extends('pianote._partials.global-layout')
 
 @section('global-head')
     @yield('meta')
@@ -21,33 +21,15 @@
     <link rel="stylesheet" href="{{ asset('/marketing/css/app.css') }}" />
     <link href="{{ asset('/marketing/css/pianote/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/pianote/sales-2020.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/pianote/navigation-sales.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/css/vuesora.css') }}" rel="stylesheet">
     {{--<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">--}}
 @stop
 
 @section('global-body')
-    @if(!empty($trialVersion))
-        @if(!empty($joinUrl))
-            @include("pianote.sales.partials._nav", [
-                "edgeVersion" => true,
-                "trialVersion" => true,
-                "joinUrl" => $joinUrl
-            ])
-        @else
-            @include("pianote.sales.partials._nav", [
-                "edgeVersion" => true,
-                "trialVersion" => true,
-                "scrollToJoin" => true,
-            ])
-        @endif
-    @else
-        @include("pianote.sales.partials._nav", [
-            "edgeVersion" => true,
-            "scrollToJoin" => true,
-            "homepage" => true
-        ])
-    @endif
+    @include("pianote.sales.nav", [
+        "homepage" => false
+    ])
 
     <div id="app">
         @if(!empty(user()))
@@ -133,7 +115,7 @@
             </div>
         </div>
     </div>
-    @include("pianote.sales.partials._footer")
+    @include("pianote.sales.footer")
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{ asset('/marketing/parcel/pianote/nav-footer.js') }}"></script>
