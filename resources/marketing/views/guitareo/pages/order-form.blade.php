@@ -1,7 +1,6 @@
-@extends('guitareo._partials.layout-template')
+@extends('guitareo._partials.global-layout')
 
-@section('global-head')
-    @yield('meta')
+@section('meta')
 
     <meta name="description" content="Learn the drums faster with organized video lessons, legendary teachers, and better practice tools. 90-Day Guarantee.">
     <meta property="og:description" content="Learn the drums faster with organized video lessons, legendary teachers, and better practice tools. 90-Day Guarantee.">
@@ -15,38 +14,20 @@
     @include('guitareo._partials._fonts')
     <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
 
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
     <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind.css') }}" />
     <link rel="stylesheet" href="{{ asset('/marketing/css/app.css') }}" />
     <link href="{{ asset('/marketing/css/guitareo/tailwind-helpers.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/guitareo/sales-2020.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/guitareo/navigation-sales.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/css/vuesora.css') }}" rel="stylesheet">
     {{--<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">--}}
 @stop
 
-@section('global-body')
-    @if(!empty($trialVersion))
-        @if(!empty($joinUrl))
-            @include("guitareo.sales.partials._nav", [
-                "edgeVersion" => true,
-                "trialVersion" => true,
-                "joinUrl" => $joinUrl
-            ])
-        @else
-            @include("guitareo.sales.partials._nav", [
-                "edgeVersion" => true,
-                "trialVersion" => true,
-                "scrollToJoin" => true,
-            ])
-        @endif
-    @else
-        @include("guitareo.sales.partials._nav", [
-            "edgeVersion" => true,
-            "scrollToJoin" => true,
-            "homepage" => true
-        ])
-    @endif
+@section('content')
+    @include("guitareo.sales.partials._nav", [
+        "homepage" => false
+    ])
 
     <div id="app">
         @if(!empty(user()))
