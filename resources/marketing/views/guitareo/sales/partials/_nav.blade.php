@@ -10,6 +10,11 @@
         <span></span>
     </div>
 
+    @if(!empty($checkoutVersion))
+        <div class="button-wrap">
+            <a href="/shop" class="join outline-button">Shop</a>
+        </div>
+    @endif
     @if(!empty($cartVersion))
         <div class="button-wrap" id="app">
             <a href="/shop" class="join outline-button">Shop</a>

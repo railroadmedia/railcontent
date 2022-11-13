@@ -26,7 +26,7 @@
 
 @section('content')
     @include("guitareo.sales.partials._nav", [
-        "homepage" => false
+        "checkoutVersion" => true
     ])
 
     <div id="app">

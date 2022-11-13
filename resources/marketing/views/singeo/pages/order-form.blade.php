@@ -1,4 +1,4 @@
-@extends('singeo._partials.layout-template')
+@extends('singeo._partials.global-layout')
 
 @section('global-head')
     @yield('meta')
@@ -12,41 +12,21 @@
         <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/sales/2022/og-image.jpg" style="display: none;">
     @endif
 
-    @include('singeo._partials._fonts')
     <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
     <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind.css') }}" />
     <link rel="stylesheet" href="{{ asset('/marketing/css/app.css') }}" />
     <link href="{{ asset('/marketing/css/singeo/tailwind-helpers.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/singeo/sales-2020.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/singeo/navigation-sales.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/css/vuesora.css') }}" rel="stylesheet">
     {{--<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">--}}
 @stop
 
 @section('global-body')
-    @if(!empty($trialVersion))
-        @if(!empty($joinUrl))
-            @include("singeo.sales.partials._nav", [
-                "edgeVersion" => true,
-                "trialVersion" => true,
-                "joinUrl" => $joinUrl
-            ])
-        @else
-            @include("singeo.sales.partials._nav", [
-                "edgeVersion" => true,
-                "trialVersion" => true,
-                "scrollToJoin" => true,
-            ])
-        @endif
-    @else
-        @include("singeo.sales.partials._nav", [
-            "edgeVersion" => true,
-            "scrollToJoin" => true,
-            "homepage" => true
-        ])
-    @endif
+    @include("singeo.sales.partials._nav", [
+        "checkoutVersion" => true
+    ])
 
     <div id="app">
         @if(!empty(user()))
@@ -132,11 +112,10 @@
             </div>
         </div>
     </div>
-
     @include("singeo.sales.partials._footer")
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/parcel/singeo/nav-footer.js') }}"></script>
+    <script src="{{ asset('/marketing/parcel/singeo/nav-footer.js') }}"></script>
     <script src="{{ mix('/platform/js/manifest.js') }}"></script>
     <script src="{{ mix('/platform/js/vendor.js') }}"></script>
     <script src="{{ mix('/platform/js/app.js') }}"></script>

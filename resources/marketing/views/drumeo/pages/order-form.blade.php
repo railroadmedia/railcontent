@@ -15,39 +15,19 @@
     @include('drumeo._partials._fonts')
     <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
 
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
     <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind.css') }}" />
     <link rel="stylesheet" href="{{ asset('/marketing/css/app.css') }}" />
     <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/css/vuesora.css') }}" rel="stylesheet">
-    {{--<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">--}}
+    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet"> -->
 @stop
 
 @section('global-body')
-    @if(!empty($trialVersion))
-        @if(!empty($joinUrl))
-            @include("drumeo.sales.partials._nav", [
-                "edgeVersion" => true,
-                "trialVersion" => true,
-                "joinUrl" => $joinUrl
-            ])
-        @else
-            @include("drumeo.sales.partials._nav", [
-                "edgeVersion" => true,
-                "trialVersion" => true,
-                "scrollToJoin" => true,
-            ])
-        @endif
-    @else
-        @include("drumeo.sales.partials._nav", [
-            "edgeVersion" => true,
-            "scrollToJoin" => true,
-            "homepage" => true
-        ])
-    @endif
+    @include("drumeo.sales.partials._nav", [
+        "checkoutVersion" => true,
+    ])
 
     <div id="app">
         @if(!empty(user()))

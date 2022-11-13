@@ -19,8 +19,8 @@
 @stop
 
 @section('global-body')
-    @include("singeo.sales.partials._nav", [
-        "cartVersion" => true,
+    @include("singeo.sales.partials.nav", [
+        "checkoutVersion" => true
     ])
 
     <style>

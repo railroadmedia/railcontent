@@ -2,8 +2,6 @@ require('./bootstrap');
 
 import { createApp, defineAsyncComponent } from 'vue';
 
-console.log('update')
-
 //Libraries
 import axios from 'axios'
 import VueAxios from 'vue-axios'
