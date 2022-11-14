@@ -7,13 +7,15 @@ use Railroad\Railcontent\Support\Collection;
 
 class ContentExperienceDecorator extends TypeDecoratorBase
 {
+    public static $skip = false;
+
     /**
      * @param Collection $contents
      * @return Collection
      */
     public function decorate(Collection $contents)
     {
-        if (self::$decorationMode !== self::DECORATION_MODE_MAXIMUM) {
+        if (self::$decorationMode !== self::DECORATION_MODE_MAXIMUM || self::$skip) {
             return $contents;
         }
 
