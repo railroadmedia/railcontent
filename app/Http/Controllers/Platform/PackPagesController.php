@@ -5,11 +5,14 @@ namespace App\Http\Controllers\Platform;
 use App\Collections\PackCollection;
 use App\Decorators\Content\VimeoVideoSourcesDecorator;
 use App\Decorators\Content\LessonAssignmentDecorator;
+use App\Decorators\ContentLikesDecorator;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\View\View;
+use Railroad\Railcontent\Decorators\Decorator;
+use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Repositories\ContentRepository;
@@ -70,7 +73,8 @@ class PackPagesController extends Controller
         }
 
         $packs = (new PackCollection(
-            $this->contentService->getFiltered(1, -1, '-published_on', ['pack', 'semester-pack'])['results']
+            $this->contentService->getFiltered(1, -1, '-published_on', ['pack', 'semester-pack'],
+            [],[],[],[],[],[],false,false, false)['results']
         ))->sortByUserActivity(user()->id);
 
         if (user()->isALifetimeMember() && brand() == 'drumeo') {
@@ -103,6 +107,10 @@ class PackPagesController extends Controller
             ContentRepository::$bypassPermissions = true;
         }
 
+        Decorator::$typeDecoratorsEnabled = false;
+        ContentRepository::$pullFilterResultsOptionsAndCount = false;
+        ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
+
         $pack = $this->contentService->getById($packId);
 
         if (empty($pack)) {
@@ -116,6 +124,14 @@ class PackPagesController extends Controller
         if (empty($thisPackBundle)) {
             return new NotFoundHttpException();
         }
+
+        $collectionForDecoration = new Collection();
+        $collectionForDecoration = $collectionForDecoration->merge([$pack]);
+        $collectionForDecoration = $collectionForDecoration->merge($packBundles);
+
+        Decorator::$typeDecoratorsEnabled = true;
+        $collectionForDecoration = $collectionForDecoration->filter();
+        $collectionForDecoration = Decorator::decorate($collectionForDecoration, 'content');
 
         if (count($packBundles) == 1) {
             return redirect()->route(
@@ -173,6 +189,10 @@ class PackPagesController extends Controller
             ContentRepository::$bypassPermissions = true;
         }
 
+        Decorator::$typeDecoratorsEnabled = false;
+        ContentRepository::$pullFilterResultsOptionsAndCount = false;
+        ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
+
         $pack = $this->contentService->getById($packId);
 
         if (empty($pack)) {
@@ -180,8 +200,6 @@ class PackPagesController extends Controller
         }
 
         $packBundles = $this->contentService->getByParentId($pack['id']);
-
-        $totalLessonCount = 0;
 
         foreach ($packBundles as $packBundle) {
             if ($packBundle['id'] == $packBundleId) {
@@ -195,10 +213,20 @@ class PackPagesController extends Controller
 
         $lessons = $this->contentService->getByParentId($thisPackBundle['id']);
 
+        $collectionForDecoration = new Collection();
+        $collectionForDecoration = $collectionForDecoration->merge([$pack]);
+        $collectionForDecoration = $collectionForDecoration->merge([$thisPackBundle]);
+        $collectionForDecoration = $collectionForDecoration->merge($lessons);
+
+        Decorator::$typeDecoratorsEnabled = true;
+        $collectionForDecoration = $collectionForDecoration->filter();
+
+        $collectionForDecoration = Decorator::decorate($collectionForDecoration, 'content');
+
         $childContent = new ContentFilterResultsEntity(['results' => $lessons]);
 
         $infoData = [
-            "lessons" => $thisPackBundle['lesson_count'],
+            "lessons" => $thisPackBundle['child_count'],
             "xp" => $thisPackBundle->fetch('total_xp'),
         ];
 
@@ -214,7 +242,7 @@ class PackPagesController extends Controller
         $songsPdfs = null;
         $songsPdfsType = 'song-pdf';
 
-        if ($packSlug == '500-songs-in-5-days') {
+        if ($packSlug == '500-songs-in-5-days' && brand() == 'guitareo') {
 
             $songsPdfs = $this->contentService->getFiltered(
                 $request->get('page', 1),
@@ -282,6 +310,7 @@ class PackPagesController extends Controller
         }
 
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
+
         $pack =
             $this->contentService->getBySlugAndType($packSlug, 'pack')
                 ->first();
@@ -576,6 +605,10 @@ class PackPagesController extends Controller
             ContentRepository::$bypassPermissions = true;
         }
 
+        Decorator::$typeDecoratorsEnabled = false;
+        ContentRepository::$pullFilterResultsOptionsAndCount = false;
+        ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
+
         $pack =
             $this->contentService->getBySlugAndType($packSlug, 'semester-pack')
                 ->first();
@@ -595,6 +628,15 @@ class PackPagesController extends Controller
         if (empty($lesson)) {
             throw new NotFoundHttpException();
         }
+
+        $collectionForDecoration = new Collection();
+        $collectionForDecoration = $collectionForDecoration->merge([$pack]);
+        $collectionForDecoration = $collectionForDecoration->merge($parentChildren);
+
+        Decorator::$typeDecoratorsEnabled = true;
+        $collectionForDecoration = $collectionForDecoration->filter();
+
+        $collectionForDecoration = Decorator::decorate($collectionForDecoration, 'content');
 
         $nextChild = $parentChildren->getMatchOffset($lesson, 1);
         $previousChild = $parentChildren->getMatchOffset($lesson, -1);
