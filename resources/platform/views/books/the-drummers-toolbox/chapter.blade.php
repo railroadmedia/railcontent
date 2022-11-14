@@ -5,9 +5,6 @@ if(!empty($user)){
 } ?>
 
 @extends($layout)
-{{--@extends('partials.layout', [--}}
-{{--    "pageTitle" => "The Drummer's Toolbox - " . $chapterData['title'],--}}
-{{--])--}}
 
 @section('meta')
     <meta name="author" content="Brandon Toews">
@@ -17,55 +14,9 @@ if(!empty($user)){
     <meta property="og:title" content="The Drummer's Toolbox - {{ $chapterData['title'] }}">
 @endsection
 
-@section('inject-components')
-{{--    <script src="{{ _mix('js/play-alongs.js') }}"></script>--}}
-@endsection
-
-@section('layout-scripts')
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var changeFormButtons = document.querySelectorAll('.change-form');
-            var redemptionForms = document.querySelectorAll('.redemption-form');
-            const youtubeLessonModal = document.getElementById('youtubeLessonModal');
-            const youtubeLessonIframe = document.getElementById('youtubeLessonIframe');
-
-            Array.from(changeFormButtons).forEach(button => {
-                button.addEventListener('click', toggleForms);
-            });
-
-            function toggleForms(event) {
-                var thisButton = event.target;
-                var formToToggleTo = document.getElementById(thisButton.dataset['form']);
-
-                Array.from(redemptionForms).forEach(form => {
-                    form.classList.add('hide');
-                });
-
-                Array.from(changeFormButtons).forEach(button => {
-                    button.classList.remove('active', 'font-bold');
-                });
-
-                thisButton.classList.add('active', 'font-bold');
-                formToToggleTo.classList.remove('hide');
-            }
-
-            youtubeLessonModal.addEventListener('modalOpen', (event) => {
-                const buttonClicked = event.detail.trigger;
-                const youtubeId = buttonClicked.dataset['youtubeId'];
-
-                youtubeLessonIframe.src = `https://www.youtube.com/embed/${youtubeId}`;
-            });
-
-            window.addEventListener('modalClose', () => {
-                youtubeLessonIframe.src = '';
-            });
-        });
-    </script>
-@endsection
-
 @section('content')
     <header id="bestBookHeader" class="container fluid bb-grey-1-1 pb-5 pt-2 shadow">
-        <div class="container">
+        
             <div class="flex flex-row">
                 <a
                     href="{{ url()->route(
@@ -155,7 +106,6 @@ if(!empty($user)){
                     </div>
                 </div>
             </div>
-        </div>
     </header>
 
     @include('books.the-drummers-toolbox.partials.login-modal', [
@@ -182,8 +132,8 @@ if(!empty($user)){
         </div>
     </div>
 
-    <div class="container mv-3">
-        <div class="flex flex-column bg-white corners-3 shadow mb-3">
+    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
+        <div class="tw-w-full flex flex-column bg-white corners-3 shadow mb-3">
             <div class="flex flex-row ph-1 pv-3">
                 <h1 class="heading">Related Lessons</h1>
             </div>
@@ -205,22 +155,25 @@ if(!empty($user)){
             </div>
         </div>
 
-        <div class="flex flex-column bg-white corners-3 shadow mb-3">
+        <div class="tw-w-full flex flex-column bg-white corners-3 shadow mb-3">
             <div class="flex flex-row ph-1 pv-3">
                 <h1 class="heading">Play-Alongs</h1>
             </div>
             <?php //dd($playAlongs); ?>
-            <div class="flex flex-row">
+            
+            <div class="tw-w-full flex flex-row"> 
                 <play-alongs
-                        content-endpoint="railcontent/content"
-                        theme-color="drumeo"
-                        :pre-loaded-content="{{ $playAlongs }}"
-                        user-id="{{ auth()->id() }}"
-                        :show-filters="false"
-                        :show-pagination="false"
-                        :use-url-params="false"
-                        :show-user-actions="false"
-                        :track-progress="false"
+                    content-endpoint="/railcontent/content"
+                    theme-color="drumeo"
+                    brand="drumeo"
+                    :pre-loaded-content="{{ $playAlongs }}"
+                    user-id="{{ auth()->id() }}"
+                    :no-sidebar="true"
+                    :show-filters="false"
+                    :show-pagination="false"
+                    :use-url-params="false"
+                    :show-user-actions="false"
+                    :track-progress="false"
                 ></play-alongs>
             </div>
         </div>
@@ -336,5 +289,47 @@ if(!empty($user)){
             </div>
         </div>
     @endif
+@endsection
+
+@section('inject-components')
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var changeFormButtons = document.querySelectorAll('.change-form');
+            var redemptionForms = document.querySelectorAll('.redemption-form');
+            const youtubeLessonModal = document.getElementById('youtubeLessonModal');
+            const youtubeLessonIframe = document.getElementById('youtubeLessonIframe');
+
+            Array.from(changeFormButtons).forEach(button => {
+                button.addEventListener('click', toggleForms);
+            });
+
+            function toggleForms(event) {
+                var thisButton = event.target;
+                var formToToggleTo = document.getElementById(thisButton.dataset['form']);
+
+                Array.from(redemptionForms).forEach(form => {
+                    form.classList.add('hide');
+                });
+
+                Array.from(changeFormButtons).forEach(button => {
+                    button.classList.remove('active', 'font-bold');
+                });
+
+                thisButton.classList.add('active', 'font-bold');
+                formToToggleTo.classList.remove('hide');
+            }
+
+            youtubeLessonModal.addEventListener('modalOpen', (event) => {
+                const buttonClicked = event.detail.trigger;
+                const youtubeId = buttonClicked.dataset['youtubeId'];
+
+                youtubeLessonIframe.src = `https://www.youtube.com/embed/${youtubeId}`;
+            });
+
+            window.addEventListener('modalClose', () => {
+                youtubeLessonIframe.src = '';
+            });
+        });
+    </script>
 @endsection
 

@@ -12,13 +12,13 @@ if(!empty($user)){
 
 @section('content')
     <header id="bestBookHeader" class="container fluid bb-grey-1-1 pv-5 shadow">
-        <div class="container">
+        <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
             <div class="flex flex-row align-v-center flex-wrap">
                 <div class="flex flex-column ph xs-12 sm-8 mb-2">
-                    <h1 class="heading mb-1 text-white">
+                    <h1 class="heading mb-1 text-white tw-flex tw-items-center">
                         <a href="javascript:history.back()"
-                           class="no-decoration">
-                            <i class="fas fa-arrow-circle-left text-light"></i>
+                           class="no-decoration tw-flex tw-items-center tw-mr-1">
+                            <i class="fas fa-arrow-circle-left text-light tw-text-2xl"></i>
                         </a>
                         Play-Alongs
                     </h1>
@@ -38,9 +38,10 @@ if(!empty($user)){
         </div>
     </header>
 
-    <div class="container mv-3">
+    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white tw-my-3">
         <div class="flex flex-column">
-            <div class="flex flex-row nmh-1">
+            <div class="flex flex-row">
+
                 <play-alongs
                     ref="playAlongsVueInstance"
                     content-endpoint="/railcontent/content"
@@ -48,6 +49,7 @@ if(!empty($user)){
                     brand="drumeo"
                     :pre-loaded-content="{{ $listLessons }}"
                     user-id="{{ auth()->id() }}"
+                    :no-sidebar="true"
                     :show-filters="false"
                     :show-pagination="false"
                     :use-url-params="false"

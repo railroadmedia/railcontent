@@ -17912,10 +17912,10 @@ body.play-alongs-player-open #content-container {
   touch-action: manipulation;
 }
 @media (min-width: 1024px) {
-  #playAlongsPlayer {
+  #playAlongsPlayer.with-sidebar {
     left: 256px;
   }
-  body.sidebar-collapsed #playAlongsPlayer {
+  body.sidebar-collapsed #playAlongsPlayer.with-sidebar {
     left: 68px;
   }
 }
