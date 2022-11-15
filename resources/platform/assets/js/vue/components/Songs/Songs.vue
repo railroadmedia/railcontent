@@ -1,6 +1,16 @@
 <script setup>
-import { ref, onBeforeMount } from 'vue';
+
+/*
+TODO:
+
+Mark as complete
+
+*/
+import { ref } from 'vue';
 import ContentLessonActionButtons from '../../vuesora/components/VideoResources/ContentLessonActionButtons.vue';
+import SoundSlice from "../SoundSlice/SoundSlice.vue"
+import SoundSliceControls from "../SoundSlice/SoundSliceControls.vue";
+
 const props = defineProps({
     brand: {
         type: String
@@ -80,9 +90,29 @@ const props = defineProps({
         type: Boolean,
     }
 });
-onBeforeMount(() => {
-    console.log(props);
-})
+
+const soundsliceObject = ref(props.assignments.length ? props.assignments[0] : {});
+
+const openSoundslice = ref(null);
+
+const loading = ref(true);
+
+const openInstrumentless = () => {
+    openSoundslice.value = 'instrumentless';
+};
+
+const openFull = () => {
+    openSoundslice.value = 'full';
+};
+
+const handleCloseSoundslice = () => {
+    openSoundslice.value = null;
+    loading.value = true;
+};
+
+const handleOnLoad = () => {
+    loading.value = false;
+};
 
 </script>
 
@@ -96,7 +126,7 @@ onBeforeMount(() => {
                     <span class="tw-font-bebas-neue tw-uppercase tw-text-xl">Back</span>
                 </a>
                 <div class="tw-flex tw-flex-col sm:tw-flex-row tw-py-4 song-content-container">
-                    <div class="tw-flex tw-flex-col song-play-button song-album-cover sm:tw-mr-6 tw-mb-6 sm:tw-mb-0">
+                    <div class="tw-flex tw-flex-col song-album-cover sm:tw-mr-6 tw-mb-6 sm:tw-mb-0">
                         <div
                             class="tw-aspect-square sm:tw-max-w-[338px] tw-min-w-[175px] 2xl:tw-w-screen corners-10 flex-center flex-column shadow-md tw-bg-[#d1d1d1] dark:tw-bg-[#081825">
                             <img :src="thumbnailUrl" alt="Album Art" class="corners-10 tw-transition-opacity tw-w-full"
@@ -122,28 +152,32 @@ onBeforeMount(() => {
 
                             <div class="tw-flex tw-flex-col 3xl:tw-flex-row">
                                 <button
-                                    :class="`tw-btn-primary tw-bg-${brand} hover:tw-bg-${brand}-600 tw-mb-3 3xl:tw-mr-3 song-play-button`">
-                                    <i class="fas fa-waveform tw-mr-2 tw-text-base song-play-button"></i>
+                                    @click="openInstrumentless"
+                                    :class="`tw-btn-primary tw-bg-${brand} hover:tw-bg-${brand}-600 tw-mb-3 3xl:tw-mr-3`">
+                                    <svg class="tw-mr-2 tw-text-base " width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1.47852 8.15625C0.94349 8.15625 0.509766 8.58997 0.509766 9.125V14.875C0.509766 15.41 0.94349 15.8438 1.47852 15.8438C2.01354 15.8438 2.44727 15.41 2.44727 14.875V9.125C2.44727 8.58997 2.01354 8.15625 1.47852 8.15625ZM5.79102 3.48438C5.25599 3.48438 4.82227 3.9181 4.82227 4.45312V19.5469C4.82227 20.0819 5.25599 20.5156 5.79102 20.5156C6.32604 20.5156 6.75977 20.0819 6.75977 19.5469V4.45312C6.75977 3.9181 6.32604 3.48438 5.79102 3.48438ZM10.1035 0.25C9.56849 0.25 9.13477 0.683724 9.13477 1.21875V22.7812C9.13477 23.3163 9.56849 23.75 10.1035 23.75C10.6385 23.75 11.0723 23.3163 11.0723 22.7812V1.21875C11.0723 0.683724 10.6385 0.25 10.1035 0.25ZM14.416 5.64062C13.881 5.64062 13.4473 6.07435 13.4473 6.60938V17.3906C13.4473 17.9256 13.881 18.3594 14.416 18.3594C14.951 18.3594 15.3848 17.9256 15.3848 17.3906V6.60938C15.3848 6.07435 14.951 5.64062 14.416 5.64062ZM18.7285 2.04688C18.1935 2.04688 17.7598 2.4806 17.7598 3.01562V20.9844C17.7598 21.5194 18.1935 21.9531 18.7285 21.9531C19.2635 21.9531 19.6973 21.5194 19.6973 20.9844V3.01562C19.6973 2.4806 19.2635 2.04688 18.7285 2.04688ZM23.041 8.875C22.506 8.875 22.0723 9.30872 22.0723 9.84375V14.1562C22.0723 14.6913 22.506 15.125 23.041 15.125C23.576 15.125 24.0098 14.6913 24.0098 14.1562V9.84375C24.0098 9.30872 23.576 8.875 23.041 8.875Z" fill="white" stroke="white" stroke-width="0.5"/>
+                                    </svg>
+
                                     PLAY DRUMLESS TRACK
                                 </button>
 
                                 <button
-                                    :class="`tw-btn-primary tw-bg-${brand} hover:tw-bg-${brand}-600 tw-mb-3 3xl:tw-mr-3 song-play-button`">
-                                    <i class="fas fa-play tw-mr-2 tw-text-base song-play-button"></i>
+                                    @click="openFull"
+                                    :class="`tw-btn-primary tw-bg-${brand} hover:tw-bg-${brand}-600 tw-mb-3 3xl:tw-mr-3`">
+                                    <i class="fas fa-play tw-mr-2 tw-text-base"></i>
                                     PLAY FULL TRACK
                                 </button>
 
                                 <button
-                                    :class="`tw-btn-secondary tw-text-[#00101D] tw-box-border tw-leading-none tw-h-[50px] dark:tw-text-white hover:tw-bg-black/10 dark:hover:tw-bg-white/10 completeButton ${lessonProgress === 100 ? 'is-complete' : ''}`"
+                                    :class="`tw-h-[50px] completeButton ${lessonProgress === '100' ? `is-complete tw-bg-${themeColor} tw-text-white dark:tw-bg-${themeColor} dark:tw-text-white tw-btn-primary` : 'tw-text-[#00101D] tw-box-border tw-leading-none tw-btn-secondary dark:tw-text-white hover:tw-bg-black/10 dark:hover:tw-bg-white/10'}`"
                                     data-tooltip="Mark Lesson as Complete" :data-content-id="contentId"
-                                    @click="markAsComplete"
                                     >
-                                    <span :class="`incompleted`">
+                                    <span v-if="lessonProgress !== '100'" class="incomplete">
                                         <i class="fas fa-check tw-mr-2 tw-text-base"></i>
                                         Mark as Complete
                                     </span>
 
-                                    <span :class="`completed`">
+                                    <span v-if="lessonProgress === '100'" class="complete">
                                         <i class="fas fa-check tw-mr-2 tw-text-base"></i>
                                         Completed
                                     </span>
@@ -171,39 +205,29 @@ onBeforeMount(() => {
                         :user-id="String(userId)" />
                 </div>
 
+                <transition name="show-from-bottom">
+                    <div v-if="openSoundslice === 'instrumentless'" id="practiceOverlay" class="bg-white">
+                        <SoundSlice :loading="loading" :user-id="userId" :theme-color="themeColor" additional-params="&layout=3&show_chords=0&scroll_type=1&recording_idx=1"
+                            :soundslice-slug="soundsliceObject.soundsliceSlug" @onLoad="handleOnLoad" @onPlay="handlePlay"
+                            @onPause="handlePause">
+                            <template v-slot:soundsliceControls>
+                                <SoundSliceControls :title="`${songTitle} (Instrumentless)`" :disable-next="true" :disable-prev="true" @onClose="handleCloseSoundslice" />
+                            </template>
+                        </SoundSlice>
+                    </div>
+                </transition>
 
-                <div v-if="assignments.length">
-                    <div class="flex flex-row pv-3">
-                        <h1 class="heading dark:tw-text-white">Assignments</h1>
+                <transition name="show-from-bottom">
+                    <div v-if="openSoundslice === 'full'" id="practiceOverlay" class="bg-white">
+                        <SoundSlice :loading="loading" :user-id="userId" :theme-color="themeColor" additional-params="&layout=3&show_chords=0&scroll_type=1&recording_idx=2"
+                            :soundslice-slug="soundsliceObject.soundsliceSlug" @onLoad="handleOnLoad" @onPlay="handlePlay"
+                            @onPause="handlePause">
+                            <template v-slot:soundsliceControls>
+                                <SoundSliceControls :title="`${songTitle} (Full)`" :disable-next="true" :disable-prev="true" @onClose="handleCloseSoundslice" />
+                            </template>
+                        </SoundSlice>
                     </div>
-                    <div class="flex flex-row">
-                        <div class="flex flex-column">
-                            <div v-for="(assignment, index) in assignments" :key="assignment.id" class="flex flex-row">
-                                <div class="flex flex-column grow">
-                                    <ContentAssignment :theme-color="assignment.themeColor"
-                                        :brand="assignment.themeColor" :timecode="assignment.timecode"
-                                        :id="assignment.id" :xp="assignment.xp" :title="'Original: ' + assignment.title"
-                                        soundslice-slug="rqN4c" :completed="assignment.completed"
-                                        :position="index" :user-id="assignment.userId">
-                                    </ContentAssignment>
-                                    <ContentAssignment :theme-color="assignment.themeColor"
-                                        :brand="assignment.themeColor" :timecode="assignment.timecode"
-                                        :id="assignment.id" :xp="assignment.xp" :title="'Original+Settings: ' + assignment.title"
-                                        soundslice-slug="rqN4c" :completed="assignment.completed"
-                                        :position="index" :user-id="assignment.userId" additional-param-config="&layout=3&show_chords=0&scroll_type=1&recording_idx=2">
-                                    </ContentAssignment>
-                                    <ContentAssignment :theme-color="assignment.themeColor"
-                                        :brand="assignment.themeColor" :timecode="assignment.timecode"
-                                        :id="assignment.id" :xp="assignment.xp" :title="'Removed+Settings: ' + assignment.title"
-                                        soundslice-slug="rqN4c" :completed="assignment.completed"
-                                        :position="index" :user-id="assignment.userId" additional-param-config="&layout=3&show_chords=0&scroll_type=1&recording_idx=1">
-                                    </ContentAssignment>
-                                </div>
-                            </div>
-                            <slot name="completionBonus"></slot>
-                        </div>
-                    </div>
-                </div>
+                </transition>
 
                 <div class="flex flex-row song-comments-container">
                     <comments :brand="brand" :theme-color="themeColor" :content-id="contentId" :user-id="userId"
@@ -224,7 +248,6 @@ onBeforeMount(() => {
                     :lock-unowned="lockUnowned" :pre-loaded-content="relatedLessons" :display-inline="true"
                     :user-id="String(userId)" />
             </div>
-
         </div>
     </div>
 </template>

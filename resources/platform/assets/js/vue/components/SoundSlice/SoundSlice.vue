@@ -19,6 +19,10 @@ const props = defineProps({
         type: [Number, String],
         default: () => 0,
     },
+    loading: {
+        type: Boolean,
+        default: false,
+    }
 });
 
 const emit = defineEmits(['', '', '', '', '', '', '', '',]);

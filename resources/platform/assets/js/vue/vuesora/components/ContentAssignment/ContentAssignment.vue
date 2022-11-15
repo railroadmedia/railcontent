@@ -102,7 +102,7 @@
         <transition name="show-from-bottom">
             <div v-if="open" id="practiceOverlay" class="bg-white">
                 <SoundSlice :user-id="userId" :theme-color="themeColor" :additional-params="additionalParams"
-                    :soundslice-slug="soundsliceSlug" @onLoad="loading = false" @onPlay="handlePlay"
+                    :soundslice-slug="soundsliceSlug" :loading="loading" @onLoad="loading = false" @onPlay="handlePlay"
                     @onPause="handlePause">
                     <template v-slot:soundsliceControls>
                         <SoundSliceControls :title="title" :disable-next="disableNext" :disable-prev="disablePrev"
@@ -120,7 +120,6 @@ import ContentService from '../../assets/js/services/content';
 import Utils from '../../assets/js/classes/utils';
 import Toasts from '../../assets/js/classes/toasts';
 import ProgressTracker from '../../assets/js/classes/progress-tracker';
-import LoadingAnimation from '../LoadingAnimation/LoadingAnimation';
 import Intercom from "../../assets/js/services/intercom"
 import Helpscout from "../../assets/js/services/helpscout"
 import { bgColor, textColor } from "../../../../constants/brands";
@@ -130,7 +129,6 @@ import SoundSliceControls from '../../../components/SoundSlice/SoundSliceControl
 export default {
     name: 'ContentAssignment',
     components: {
-        "loading-animation": LoadingAnimation,
         SoundSlice,
         SoundSliceControls,
     },

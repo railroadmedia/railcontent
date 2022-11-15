@@ -10,17 +10,6 @@
 
 @section('inject-components')
     <script src="{{ mix('platform/js/lesson-page.js') }}"></script>
-
-    <script type="text/javascript">
-    /*
-        document.querySelectorAll('.song-play-button').forEach(item => {
-            item.addEventListener("click", function () {
-                document.getElementById('open-exercise-button').click();
-            });
-        })
-
-        */
-    </script>
 @endsection
 
 @section('content')
