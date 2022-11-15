@@ -14,7 +14,7 @@
                 title="JOIN THE COMMUNITY"
                 cta-text="UPGRADE YOUR MEMBERSHIP"
                 description="Click here to upgrade your membership and gain access to the Drumeo, Pianote, Guitareo, and Singeo communities!"
-                cta-url="{{ get_legacy_brand_base_url() . '/shop'  }}"
+                cta-url="{{ get_legacy_brand_base_url() . '/#customize-anchor'  }}"
                 img="https://musora.com/cdn-cgi/image/width=720/https://cdn.musora.com/image/fetch/c_fill,w_1920,h_1080,q_auto:good/https://musora-web-platform.s3.amazonaws.com/carousel/pre-launch-header-image-jpg.jpg"
             ></static-header>
         </div>
