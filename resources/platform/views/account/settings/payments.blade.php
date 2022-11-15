@@ -13,11 +13,11 @@
             <div class="tw-flex tw-flex-row pa-3 tw-pb-0 tw-flex-auto">
                 <h1 class="tw-text-2xl tw-tw-font-bold tw-text-[#00101D] dark:tw-text-white">Payment Details</h1>
             </div>
-            
+
             <payment-methods
                     theme-color="drumeo"
                     :payment-methods="{{ $paymentMethodsJson }}"
-                    brand="drumeo"
+                    brand="{{ $brand }}"
                     stripe-publishable-key="{{ $stripePublishableKey }}"
                     :countries="{{ $countries }}"
                     :provinces="{{ $provinces }}"

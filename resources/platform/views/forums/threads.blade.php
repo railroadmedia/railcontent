@@ -83,6 +83,7 @@
                             :pinned-threads="{{ json_encode($pinnedThreads) }}"
                             :threads="{{ json_encode($threads) }}"
                             :thread-count="{{ $threadCount }}"
+                            search-json-results-endpoint-url="{{ url()->route('forums.get-search-results-json') }}"
                         />
                     </div>
                 <!-- <p class="font-bold">{{ json_encode($threads) }}</p> -->
