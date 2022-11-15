@@ -223,6 +223,17 @@ Route::domain('{musoraDomain}')
                     ->whereIn('brand', all_brands())
                     ->whereIn('primaryPage', ['method'])
                     ->name('platform.content.fourth-level');
+
+                /*
+                 * Referral Pages
+                 */
+                Route::domain('{musoraDomain}')
+                    ->middleware([AuthIfTokenExist::class, 'web_authenticated'])
+                    ->group(function () {
+                        Route::get('/{brand}/referral/invite-a-friend', [ReferralPagesController::class, 'inviteAFriend'])
+                            ->whereIn('brand', all_brands())
+                            ->name('platform.invite-a-friend');
+                    });
             });
 
         // anyone even without pack or a membership can access these
@@ -596,17 +607,6 @@ Route::domain('{musoraDomain}')
         Route::get('/{brand}/contact', [SupportController::class, 'contact'])
             ->whereIn('brand', all_brands())
             ->name('platform.contact');
-    });
-
-/*
- * Referral Pages
- */
-Route::domain('{musoraDomain}')
-    ->middleware([AuthIfTokenExist::class, 'web_authenticated'])
-    ->group(function () {
-        Route::get('/{brand}/referral/invite-a-friend', [ReferralPagesController::class, 'inviteAFriend'])
-            ->whereIn('brand', all_brands())
-            ->name('platform.invite-a-friend');
     });
 
 Route::get(
