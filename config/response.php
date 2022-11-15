@@ -249,7 +249,8 @@ return [
                 'coach_profile_image',
                 'current_user_is_subscribed',
             ],
-            'thumbnail'
+            'thumbnail',
+            'resources'
         ],
         'pack-bundle2' => [
             'id',
@@ -397,6 +398,7 @@ return [
                 'coach_profile_image',
                 'current_user_is_subscribed',
             ],
+            'resources'
         ],
 
         'course' => [
@@ -1140,6 +1142,7 @@ return [
                 'coach_profile_image',
                 'current_user_is_subscribed',
             ],
+            'resources'
         ],
 
         'semester-pack' => [
@@ -1192,6 +1195,7 @@ return [
                 'coach_profile_image',
                 'current_user_is_subscribed',
             ],
+            'resources'
         ],
 
         'semester-pack-lesson' => [
@@ -1288,6 +1292,7 @@ return [
                 'coach_profile_image',
                 'current_user_is_subscribed',
             ],
+            'resources'
         ],
 
         'assignment' => [
