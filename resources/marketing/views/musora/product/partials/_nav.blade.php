@@ -17,10 +17,12 @@
 
             <nav-cart-button
 {{--                cart-data='{{ $cartData }}'--}}
+                checkout-url='{{ get_legacy_brand_base_url("musora") }}/order/musora'
             ></nav-cart-button>
             <cart-sidebar
                 brand="drumeo"
 {{--                cart-data='{{ $cartData }}'--}}
+                checkout-url='{{ get_legacy_brand_base_url("musora") }}/order/musora'
             ></cart-sidebar>
         </div>
     @endif
@@ -62,7 +64,7 @@
         @include('musora.product.partials._nav-link', [
             "linkName" => "Contact",
             "linkIcon" => "fas fa-phone",
-            "linkUrl" => "/contact/"
+            "linkUrl" => get_legacy_brand_base_url("musora").'/contact'
         ])
         @include('musora.product.partials._nav-link', [
             "linkName" => "Drumeo",

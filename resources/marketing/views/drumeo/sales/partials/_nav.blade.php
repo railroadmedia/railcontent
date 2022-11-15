@@ -21,10 +21,12 @@
 
             <nav-cart-button
                 cart-data='{{ $cartData }}'
+                checkout-url='{{ get_legacy_brand_base_url("musora") }}/order/drumeo'
             ></nav-cart-button>
             <cart-sidebar
                 brand="drumeo"
                 cart-data='{{ $cartData }}'
+                checkout-url='{{ get_legacy_brand_base_url("musora") }}/order/drumeo'
             ></cart-sidebar>
         </div>
     @endif
@@ -66,7 +68,7 @@
         @include('drumeo.sales.partials._nav-link', [
             "linkName" => "Contact",
             "linkIcon" => "fas fa-phone",
-            "linkUrl" => "/contact/"
+            "linkUrl" => get_legacy_brand_base_url("musora").'/contact'
         ])
         @include('drumeo.sales.partials._nav-link', [
             "linkName" => "Drumeo",

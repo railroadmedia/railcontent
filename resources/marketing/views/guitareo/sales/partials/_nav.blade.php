@@ -21,10 +21,12 @@
 
             <nav-cart-button
                     cart-data='{{ $cartData }}'
+                    checkout-url='{{ get_legacy_brand_base_url("musora") }}/order/guitareo'
             ></nav-cart-button>
             <cart-sidebar
                     brand="guitareo"
                     cart-data='{{ $cartData }}'
+                    checkout-url='{{ get_legacy_brand_base_url("musora") }}/order/guitareo'
             ></cart-sidebar>
         </div>
     @endif
@@ -52,7 +54,7 @@
         @include('guitareo.sales.partials._nav-link', [
             "linkName" => "Contact",
             "linkIcon" => "fas fa-phone",
-            "linkUrl" => "/contact"
+            "linkUrl" => get_legacy_brand_base_url("musora").'/contact'
         ])
 
         @include('guitareo.sales.partials._nav-link', [

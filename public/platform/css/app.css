@@ -1247,10 +1247,10 @@ span.flatpickr-day.nextMonthDay.selected {
 @font-face {
     font-family: "icons";
     src: url("./icons.eot?f41b91f2b176bee144da66bd188434cf?#iefix") format("embedded-opentype"),
-          url("./icons.woff2?f41b91f2b176bee144da66bd188434cf") format("woff2"),
-          url("./icons.woff?f41b91f2b176bee144da66bd188434cf") format("woff"),
-          url("./icons.ttf?f41b91f2b176bee144da66bd188434cf") format("truetype"),
-          url("./icons.svg?f41b91f2b176bee144da66bd188434cf#icons") format("svg");
+url("./icons.woff2?f41b91f2b176bee144da66bd188434cf") format("woff2"),
+url("./icons.woff?f41b91f2b176bee144da66bd188434cf") format("woff"),
+url("./icons.ttf?f41b91f2b176bee144da66bd188434cf") format("truetype"),
+url("./icons.svg?f41b91f2b176bee144da66bd188434cf#icons") format("svg");
 }
 
 i[class^="icon-"], i[class*=" icon-"] {

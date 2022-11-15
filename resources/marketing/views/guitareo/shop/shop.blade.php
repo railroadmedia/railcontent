@@ -75,6 +75,9 @@
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
     <script src="/marketing/js/jquery.countdown-2.min.js"></script>
+    {{-- Platform --}}
+    <script src="{{ mix('/platform/js/manifest.js') }}"></script>
+    <script src="{{ mix('/platform/js/vendor.js') }}"></script>    
     <script src="{{ mix('/platform/js/app.js') }}"></script>
     <script>
         $(document).ready(function () {
@@ -209,7 +212,7 @@
                             Cart Subtotal({{ Session::get('cartNumberOfItems') }}):
                             <strong>${{ number_format(Session::get('cartSubTotal'), 2, '.', ',') }}</strong>
                         </p>
-                        <a href="/order" class="join smaller"><i class="fas fa-cart-plus"></i> Proceed to Checkout</a>
+                        <a href="{{ get_legacy_brand_base_url("musora") }}/order/{{ $brand }}" class="join smaller"><i class="fas fa-cart-plus"></i> Proceed to Checkout</a>
                     </div>
                 </div>
             </div>

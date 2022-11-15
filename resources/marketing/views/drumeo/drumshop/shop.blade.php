@@ -217,7 +217,7 @@
                         Cart Subtotal({{ Session::get('cartNumberOfItems') }}):
                         <strong>${{ number_format(Session::get('cartSubTotal'), 2, '.', ',') }}</strong>
                     </h5>
-                    <a href="/order" class="join"><i class="fas fa-cart-plus"></i> Proceed to Checkout</a>
+                    <a href="{{ get_legacy_brand_base_url("musora") }}/order/{{ $brand }}" class="join"><i class="fas fa-cart-plus"></i> Proceed to Checkout</a>
                 </div>
             </div>
         </section>
@@ -504,9 +504,11 @@
 
     <script src="{{ asset('/marketing/js/drumeo/manifest.js') }}"></script>
     <script src="{{ asset('/marketing/js/drumeo/vendor.js') }}"></script>
-    <script src="{{ asset('/marketing/js/drumeo/cart-sidebar.js') }}"></script>
     <script src="{{ asset('/marketing/js/drumeo/app.js') }}"></script>
     <script src="{{ asset('/marketing/js/drumeo/drum-shop-filters.js') }}"></script>
+    {{-- Platform --}}
+    <script src="{{ mix('/platform/js/manifest.js') }}"></script>
+    <script src="{{ mix('/platform/js/vendor.js') }}"></script>
     <script src="{{ mix('/platform/js/app.js') }}"></script>
 
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>

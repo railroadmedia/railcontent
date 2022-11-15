@@ -77,7 +77,7 @@
                         </p>
                         <p class="x-tiny text-white">
                             <a target="_blank" class="text-white" href="https://help.drumeo.com/">See our FAQs & answers</a>, or<br>
-                            <a target="_blank" class="text-white" href="/contact">click here to contact us directly</a>.
+                            <a target="_blank" class="text-white" href="{{ get_legacy_brand_base_url("musora") }}/contact">click here to contact us directly</a>.
                         </p>
                     </div>
 

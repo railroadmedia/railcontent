@@ -199,7 +199,7 @@
                         Cart Subtotal({{ Session::get('cartNumberOfItems') }}):
                         <strong>${{ Session::get('cartSubTotal') }}</strong>
                     </h5>
-                    <a href="/order" class="checkout-button"><i class="fas fa-cart-plus"></i> Checkout</a>
+                    <a href="{{ get_legacy_brand_base_url("musora") }}/order/{{ $brand }}" class="checkout-button"><i class="fas fa-cart-plus"></i> Checkout</a>
                 </div>
             </div>
         </section>
@@ -423,8 +423,10 @@
 
     <script src="{{ asset('/marketing/js/pianote/manifest.js') }}"></script>
     <script src="{{ asset('/marketing/js/pianote/vendor.js') }}"></script>
-    <script src="{{ asset('/marketing/js/pianote/cart-sidebar.js') }}"></script>
     <script src="{{ asset('/marketing/js/pianote/app.js') }}"></script>
+    {{-- Platform --}}
+    <script src="{{ mix('/platform/js/manifest.js') }}"></script>
+    <script src="{{ mix('/platform/js/vendor.js') }}"></script>
     <script src="{{ mix('/platform/js/app.js') }}"></script> 
 
     @yield('scripts')

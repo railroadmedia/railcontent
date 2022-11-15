@@ -22,11 +22,13 @@
             <a href="/shop" class="join outline-button">Shop</a>
 
             <nav-cart-button
-                    cart-data='{{ $cartData }}'
+                cart-data='{{ $cartData }}'
+                checkout-url='{{ get_legacy_brand_base_url("musora") }}/order/singeo'
             ></nav-cart-button>
             <cart-sidebar
-                    brand="singeo"
-                    cart-data='{{ $cartData }}'
+                brand="singeo"
+                cart-data='{{ $cartData }}'
+                checkout-url='{{ get_legacy_brand_base_url("musora") }}/order/singeo'
             ></cart-sidebar>
         </div>
     @endif
@@ -53,7 +55,7 @@
         @include('singeo.sales.partials._nav-link', [
             "linkName" => "Contact",
             "linkIcon" => "fas fa-phone",
-            "linkUrl" => "/contact"
+            "linkUrl" => get_legacy_brand_base_url("musora").'/contact'
         ])
         @include('singeo.sales.partials._nav-link', [
             "linkName" => "Singeo",

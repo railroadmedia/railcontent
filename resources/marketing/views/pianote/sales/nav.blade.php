@@ -23,11 +23,13 @@
 
             <nav-cart-button
                 cart-data='{{ $cartData }}'
+                checkout-url='{{ get_legacy_brand_base_url("musora") }}/order/pianote'
             ></nav-cart-button>
 
             <cart-sidebar
                 brand="pianote"
                 cart-data='{{ $cartData }}'
+                checkout-url='{{ get_legacy_brand_base_url("musora") }}/order/pianote'
             ></cart-sidebar>
         </div>
     @endif
@@ -63,7 +65,7 @@
         @include('pianote.sales.partials._nav-link', [
             "linkName" => "Contact",
             "linkIcon" => "fas fa-phone",
-            "linkUrl" => "/contact/"
+            "linkUrl" => get_legacy_brand_base_url("musora").'/contact'
         ])
         @include('pianote.sales.partials._nav-link', [
             "linkName" => "Pianote",

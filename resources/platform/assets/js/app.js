@@ -55,7 +55,7 @@ import ContentLessonActionButtons from './vue/vuesora/components/VideoResources/
 //Chatsora
 import mitt from 'mitt'; //Temporary Event Bus library for Chatsora code (need full refactor for vue 3)
 import Chatsora from './vue/Libraries/Chatsora/components/index';
-const chatEventBus = mitt();
+const eventBus = mitt();
 
 
 // laravel vapor library for file uploading to S3 directly
@@ -216,7 +216,7 @@ const app = createApp({
 // in order to use provide/inject this will be default in vue v3.3
 app.config.unwrapInjectedRef = true;
 //Temporary Emitter for Chatsora
-app.config.globalProperties.chatEventBus = chatEventBus;
+app.config.globalProperties.eventBus = eventBus;
 
 //Register Global Components
 

@@ -19,8 +19,8 @@
 @stop
 
 @section('global-body')
-    @include("singeo.sales.partials.nav", [
-        "checkoutVersion" => true
+    @include("singeo.sales.partials._nav", [
+        "cartVersion" => true,
     ])
 
     <style>
@@ -214,7 +214,7 @@
 {{--                            Cart Subtotal({{ Session::get('cartNumberOfItems') }}):--}}
 {{--                            <strong>${{ number_format(Session::get('cartSubTotal'), 2, '.', ',') }}</strong>--}}
 {{--                        </p>--}}
-{{--                        <a href="/order" class="join smaller"><i class="fas fa-cart-plus"></i> Proceed to Checkout</a>--}}
+{{--                        <a href="{{ get_legacy_brand_base_url("musora") }}/order/{{ $brand }}" class="join smaller"><i class="fas fa-cart-plus"></i> Proceed to Checkout</a>--}}
 {{--                    </div>--}}
 {{--                </div>--}}
 {{--            </div>--}}
@@ -461,7 +461,9 @@
 
     <script src="{{ asset('marketing/js/singeo/manifest.js') }}"></script>
     <script src="{{ asset('marketing/js/singeo/vendor.js') }}"></script>
-    <script src="{{ asset('marketing/js/singeo/cart-sidebar.js') }}"></script>
     <script src="{{ asset('/marketing/js/singeo/app.js') }}"></script>
+    {{-- Platform --}}
+    <script src="{{ mix('/platform/js/manifest.js') }}"></script>
+    <script src="{{ mix('/platform/js/vendor.js') }}"></script>
     <script src="{{ mix('/platform/js/app.js') }}"></script>
 @stop

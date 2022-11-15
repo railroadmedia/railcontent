@@ -1,6 +1,6 @@
 <template>
     <a
-        href="/order"
+        :href="checkoutUrl"
         class="join outline-button cart-button"
         @click.stop.prevent="handleClick"
     >
@@ -16,6 +16,9 @@ export default {
         cartData: {
             item: String,
         },
+        checkoutUrl: {
+            type: String,
+        }
     },
     data() {
         return {
@@ -27,14 +30,14 @@ export default {
 
         this.updateCartData(cartData);
 
-        this.$root.$on('updateCartData', this.updateCartData);
+        this.eventBus.on('updateCartData', this.updateCartData);        
     },
     methods: {
         updateCartData(cartData) {
             this.cartItems = cartData.meta.cart.items;
         },
         handleClick() {
-            this.$root.$emit('openCartSidebar', {});
+            this.eventBus.emit('openCartSidebar', {});
         },
     },
 }

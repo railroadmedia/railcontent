@@ -82,7 +82,7 @@
                 </div>
             </div>
             <div class="checkout">
-                <a href="/order" :class="brand"><i class="fas fa-lock"></i>checkout</a>
+                <a :href="checkoutUrl" :class="brand"><i class="fas fa-lock"></i>checkout</a>
             </div>
             <div v-if="!locked" class="recommended-title">
                 <div>customers also liked</div>
@@ -125,6 +125,9 @@ export default {
         cartData: {
             item: String,
         },
+        checkoutUrl: {
+            type: String
+        }
     },
     data() {
         return {
@@ -143,7 +146,7 @@ export default {
     mounted() {
         this.buildInitialCartData();
 
-        this.$root.$on('openCartSidebar', this.openCartSidebar);
+        this.eventBus.on('openCartSidebar', this.openCartSidebar);
 
         this.simpleBar = new SimpleBar(this.$refs.simplebar, {autoHide: false});
         this.loading = false;
@@ -309,7 +312,7 @@ export default {
 
         handleCartUpdate(response) {
             response.data ? this.updateCartData(response.data) : '';
-            this.$root.$emit('updateCartData', response.data);
+            this.eventBus.emit('updateCartData', response.data);
 
             this.loading = false;
 

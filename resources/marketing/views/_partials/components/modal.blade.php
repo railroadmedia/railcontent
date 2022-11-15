@@ -6,7 +6,7 @@
     role="dialog"
     aria-modal="true"
     x-id="['modal-title']"
-    :aria-labelledby="$id('modal-title')"
+    :aria-labelledby="['modal-title']"
     class="fixed inset-0 z-10 overflow-y-auto"
 >
     <!-- Overlay -->
