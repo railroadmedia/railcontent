@@ -203,7 +203,7 @@
                         <i class="fas fa-check" style="color:#eb4ef7"></i> No location restrictions.<br class="inline sm:hidden"> &nbsp; <i class="fas fa-check" style="color:#eb4ef7"></i> No sneaky shipping fees.
                             <br><br>
                             <strong>The winner will be announced<br class="inline sm:hidden"> on October the 10th!</strong></p>
-                    @include("singeo.lead-gen.partials._sign-up-form-cio", [
+                    @include("singeo._partials._sign-up-form", [
                     "formId" => "Singeo - Engagement - Trigger - Eikon Giveaway - Web Form",
                     "formName" => 'Eikon Giveaway',
                         "buttonText" => "I WANT TO WIN!",
@@ -348,7 +348,7 @@
     <section class="text-center text-white py-8 md:py-16 lg:py-28 px-5 md:px-7 bg-center bg-cover lazyload" data-bg="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/giveaway/eikon/footer_giveaway.jpg">
         <div class="container mx-auto max-w-2xl">
             <img class="h-32 sm:h-36 md:h-44 lg:h-52 lazyload mb-4 sm:mb-6" data-src="https://cdn.musora.com/image/fetch/w_650,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/giveaway/eikon/logo_giveaway.png" alt="title image">
-            @include("singeo.lead-gen.partials._sign-up-form-cio", [
+            @include("singeo._partials._sign-up-form", [
                 "formId" => "Singeo - Engagement - Trigger - Eikon Giveaway - Web Form",
                 "formName" => 'Eikon Giveaway',
                 "buttonText" => "I WANT TO WIN!",

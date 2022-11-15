@@ -15,7 +15,7 @@
                     <h4 class="my-3 sm:my-5 leading-normal">Start learning how to play the piano <br><strong>in just 5 days!</strong></h4>
                     <h5 class="leading-normal text-navy" style="color: #A4AFC7"> Step by step lessons will build your basic skills and even teach you your very first song.</h5>
                     <p class="mt-4 sm:mt-5 lg:mt-10 mb-2">Enter your email below for your free lessons.</p>
-                    @include('pianote.lead-gen._sign-up-form', [
+                    @include('pianote._partials._sign-up-form', [
                         "redirect" => true,
                         "formId" => "Pianote - Engagement - Trigger - Piano In 5 Days - Web Form",
                         "formName" => 'Piano In 5 Days',
@@ -262,7 +262,7 @@
                 <h5 class="mt-5 lg:mt-4 mb-6 lg:mb-8 leading-normal" style="color:#D0E2E7;">Start your piano journey today.<br>
                 <strong>Enter your email below for your free course.</strong></h5>
                 <div class="mx-auto" style="max-width:700px">
-                    @include('pianote.lead-gen._sign-up-form', [
+                    @include('pianote._partials._sign-up-form', [
                         "redirect" => true,
                         "formId" => "Pianote - Engagement - Trigger - Piano In 5 Days - Web Form",
                         "formName" => 'Piano In 5 Days',

@@ -176,16 +176,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.243.1",
+            "version": "3.243.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "b9c6d89bc9900910e73890803462dd24bcd994a4"
+                "reference": "c4ac1ff8f40f11fcf0d8e58b3d13838a44a8a582"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/b9c6d89bc9900910e73890803462dd24bcd994a4",
-                "reference": "b9c6d89bc9900910e73890803462dd24bcd994a4",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/c4ac1ff8f40f11fcf0d8e58b3d13838a44a8a582",
+                "reference": "c4ac1ff8f40f11fcf0d8e58b3d13838a44a8a582",
                 "shasum": ""
             },
             "require": {
@@ -264,9 +264,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.243.1"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.243.2"
             },
-            "time": "2022-11-14T23:37:20+00:00"
+            "time": "2022-11-15T13:14:49+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -4256,16 +4256,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v9.39.0",
+            "version": "v9.40.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "67e674709e1e7db14f304a871481f310822d68c5"
+                "reference": "650e728cabf63b4bfd6c45b421ec7bc7a916b0bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/67e674709e1e7db14f304a871481f310822d68c5",
-                "reference": "67e674709e1e7db14f304a871481f310822d68c5",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/650e728cabf63b4bfd6c45b421ec7bc7a916b0bf",
+                "reference": "650e728cabf63b4bfd6c45b421ec7bc7a916b0bf",
                 "shasum": ""
             },
             "require": {
@@ -4438,21 +4438,21 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2022-11-08T14:47:39+00:00"
+            "time": "2022-11-15T14:20:05+00:00"
         },
         {
             "name": "laravel/nova",
-            "version": "4.18.2",
+            "version": "4.19.0",
             "source": {
                 "type": "git",
                 "url": "git@github.com:laravel/nova.git",
-                "reference": "420bccd59f3eeac969920d09a4e4cd961ad63325"
+                "reference": "56de69c170f2f2497d8a51f19e84898663339e04"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-420bccd59f3eeac969920d09a4e4cd961ad63325-zip-d3f55b.zip",
-                "reference": "420bccd59f3eeac969920d09a4e4cd961ad63325",
-                "shasum": "be0ca636e0bcf8746247c3f93000925b434c0a1a"
+                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-56de69c170f2f2497d8a51f19e84898663339e04-zip-147264.zip",
+                "reference": "56de69c170f2f2497d8a51f19e84898663339e04",
+                "shasum": "155f94d95488b485bca748d96e02aa3a4a228864"
             },
             "require": {
                 "brick/money": "^0.5.0|^0.6.0|^0.7.0",
@@ -4547,9 +4547,9 @@
                 "laravel"
             ],
             "support": {
-                "source": "https://github.com/laravel/nova/tree/v4.18.2"
+                "source": "https://github.com/laravel/nova/tree/v4.19.0"
             },
-            "time": "2022-11-03T01:55:32+00:00"
+            "time": "2022-11-15T14:30:32+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -6334,56 +6334,6 @@
             "time": "2022-11-12T15:38:23+00:00"
         },
         {
-            "name": "nova-kit/nova-packages-tool",
-            "version": "v1.5.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nova-kit/nova-packages-tool.git",
-                "reference": "d47365c11d6324d1d3c46014267e0e431b4417fa"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nova-kit/nova-packages-tool/zipball/d47365c11d6324d1d3c46014267e0e431b4417fa",
-                "reference": "d47365c11d6324d1d3c46014267e0e431b4417fa",
-                "shasum": ""
-            },
-            "require": {
-                "laravel/nova": ">=4.16.0 <4.19.0",
-                "php": "^7.3 || ^8.0"
-            },
-            "require-dev": {
-                "orchestra/testbench": "^6.24 || ^7.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "NovaKit\\NovaPackagesTool\\LaravelServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "NovaKit\\NovaPackagesTool\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Mior Muhammad Zaki",
-                    "email": "crynobone@gmail.com"
-                }
-            ],
-            "description": "Tool for Laravel Nova Packages Development",
-            "support": {
-                "source": "https://github.com/nova-kit/nova-packages-tool/tree/v1.5.4"
-            },
-            "time": "2022-11-02T22:19:00+00:00"
-        },
-        {
             "name": "nunomaduro/termwind",
             "version": "v1.14.2",
             "source": {
@@ -8015,12 +7965,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "e41e31ed4cdf0a01d820ca77a12868546ef47443"
+                "reference": "e9c72e280aac25a04e8516275f74a884038d1bde"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/e41e31ed4cdf0a01d820ca77a12868546ef47443",
-                "reference": "e41e31ed4cdf0a01d820ca77a12868546ef47443",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/e9c72e280aac25a04e8516275f74a884038d1bde",
+                "reference": "e9c72e280aac25a04e8516275f74a884038d1bde",
                 "shasum": ""
             },
             "require": {
@@ -8052,7 +8002,7 @@
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
                 "source": "https://github.com/railroadmedia/musora-api/tree/v2.0-railcontent-v2-integration"
             },
-            "time": "2022-11-11T14:26:04+00:00"
+            "time": "2022-11-15T10:15:59+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -9694,16 +9644,16 @@
         },
         {
             "name": "spatie/laravel-package-tools",
-            "version": "1.13.6",
+            "version": "1.13.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-package-tools.git",
-                "reference": "c377cc7223655c2278c148c1685b8b5a78af5c65"
+                "reference": "4af8e608184471b5568af6265ebb0ca0025c131a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-package-tools/zipball/c377cc7223655c2278c148c1685b8b5a78af5c65",
-                "reference": "c377cc7223655c2278c148c1685b8b5a78af5c65",
+                "url": "https://api.github.com/repos/spatie/laravel-package-tools/zipball/4af8e608184471b5568af6265ebb0ca0025c131a",
+                "reference": "4af8e608184471b5568af6265ebb0ca0025c131a",
                 "shasum": ""
             },
             "require": {
@@ -9713,8 +9663,9 @@
             "require-dev": {
                 "mockery/mockery": "^1.5",
                 "orchestra/testbench": "^7.7",
+                "pestphp/pest": "^1.22",
                 "phpunit/phpunit": "^9.5.24",
-                "spatie/test-time": "^1.3"
+                "spatie/pest-plugin-test-time": "^1.1"
             },
             "type": "library",
             "autoload": {
@@ -9741,7 +9692,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-package-tools/issues",
-                "source": "https://github.com/spatie/laravel-package-tools/tree/1.13.6"
+                "source": "https://github.com/spatie/laravel-package-tools/tree/1.13.7"
             },
             "funding": [
                 {
@@ -9749,7 +9700,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-10-11T06:37:42+00:00"
+            "time": "2022-11-15T09:10:09+00:00"
         },
         {
             "name": "spatie/laravel-permission",
@@ -13574,26 +13525,24 @@
         },
         {
             "name": "whitecube/nova-flexible-content",
-            "version": "v1.0.5",
+            "version": "v1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/whitecube/nova-flexible-content.git",
-                "reference": "e239965c16aef5250d7cd21a4a40b9db39e78466"
+                "reference": "3128959da0c48556d752e018ff26cc3a9a145d9f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/whitecube/nova-flexible-content/zipball/e239965c16aef5250d7cd21a4a40b9db39e78466",
-                "reference": "e239965c16aef5250d7cd21a4a40b9db39e78466",
+                "url": "https://api.github.com/repos/whitecube/nova-flexible-content/zipball/3128959da0c48556d752e018ff26cc3a9a145d9f",
+                "reference": "3128959da0c48556d752e018ff26cc3a9a145d9f",
                 "shasum": ""
             },
             "require": {
                 "laravel/framework": "^8.0|^9.0",
                 "laravel/nova": "^4.0",
-                "nova-kit/nova-packages-tool": "^1.3.1",
                 "php": "^7.3|^8.0"
             },
             "require-dev": {
-                "laravel/pint": "^1.2",
                 "phpunit/phpunit": "^9.5"
             },
             "type": "library",
@@ -13631,7 +13580,7 @@
             ],
             "support": {
                 "issues": "https://github.com/whitecube/nova-flexible-content/issues",
-                "source": "https://github.com/whitecube/nova-flexible-content/tree/v1.0.5"
+                "source": "https://github.com/whitecube/nova-flexible-content/tree/v1.0.2"
             },
             "funding": [
                 {
@@ -13639,7 +13588,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-10-11T20:52:56+00:00"
+            "time": "2022-09-02T13:51:24+00:00"
         }
     ],
     "packages-dev": [

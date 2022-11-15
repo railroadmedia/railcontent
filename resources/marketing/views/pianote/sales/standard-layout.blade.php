@@ -23,13 +23,13 @@
 
 @section('global-body')
     @if(empty($rolandVersion))
-        @include('pianote.sales.nav', [
+        @include('pianote._partials._nav', [
         "joinVersion" => true,
         "scrollToJoin" => true,
         "homepageVersion" => true,
         ])
     @else
-        @include('pianote.sales.nav')
+        @include('pianote._partials._nav')
     @endif
 
     @yield('top-promo-bar')
@@ -164,7 +164,7 @@
                     [
                     'image' => 'https://pianote.s3.amazonaws.com/sales/2022/coaches/summer-swee-singh2.jpg',
                     'modalImage' => 'https://pianote.s3.amazonaws.com/sales/2022/coaches/summer-swee-singh2.jpg',
-                    'date' => 'This Month',
+                    'date' => 'Available Now',
                     'name' => 'Summer<br> Swee-Singh',
                     'subtitle' => 'Creating The Perfect<br> Piano Arrangement',
                     'smallInfo' => 'Learn how to create your own beautiful arrangements on the piano from the skilled Summer Swee-Singh.',
@@ -1677,7 +1677,7 @@
         </div>
     @endforeach
 
-    @include('pianote.sales.footer')
+    @include('pianote._partials._footer')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="/marketing/parcel/pianote/nav-footer.js?v={{ filemtime(__FILE__) }}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/1.9.3/countUp.min.js"></script>

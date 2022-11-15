@@ -182,7 +182,7 @@
                         Learn how to sing beautiful harmonies with <br>this FREE singing lesson from a vocal coach.
                     </h6>
                     <div class="md:max-w-sm lg:max-w-full">
-                        @include("singeo.lead-gen.partials._sign-up-form-cio", [
+                        @include("singeo._partials._sign-up-form", [
                             "formId" => 'Singeo - Engagement - Trigger - Harmony Bootcamp - Web Form',
                             "formName" => 'Harmony Bootcamp',
                             "buttonText" => "Save my spot!",
@@ -345,7 +345,7 @@
                 <span class="countdown-full hidden sm:inline">A LIMITED TIME</span> <span class="countdown-small inline sm:hidden">A LIMITED TIME</span>
                 LEFT!
             </h5>
-            @include("singeo.lead-gen.partials._sign-up-form-cio", [
+            @include("singeo._partials._sign-up-form", [
                 "formId" => 'Singeo - Engagement - Trigger - Harmony Bootcamp - Web Form',
                 "formName" => 'Harmony Bootcamp',
                 "buttonText" => "Save my spot!",

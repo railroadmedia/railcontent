@@ -122,7 +122,7 @@ class Prices
 
     // Tone Control Kit
     public static $toneControlKitFull = 79;
-    public static $toneControlKitRegular = 79;
+    public static $toneControlKitRegular = 63;
 
     // Comfort Cover
     public static $comfortCoverFull = 149;

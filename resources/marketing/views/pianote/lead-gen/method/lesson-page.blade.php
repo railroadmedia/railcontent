@@ -38,7 +38,7 @@
 @stop
 
 @section('global-body')
-    @include('pianote.sales.nav')
+    @include('pianote._partials._nav')
 
     <div id="fb-root"></div>
     <script>(function (d, s, id) {
@@ -143,7 +143,7 @@
         </div>
     </section>
 
-    @include('pianote.sales.footer')
+    @include('pianote._partials._footer')
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="/marketing/js/jquery.countdown-2.min.js"></script>

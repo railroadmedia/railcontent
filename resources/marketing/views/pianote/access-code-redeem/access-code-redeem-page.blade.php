@@ -355,7 +355,7 @@
 
 @section('global-body')
 
-    @include('pianote.sales.nav')
+    @include('pianote._partials._nav')
 
     <div id="content">
         <h1 class="text-center mb-3">Claim A Membership Access Code</h1>
@@ -500,7 +500,7 @@
             your new password will be emailed to you shortly after claiming your card. </p>
     </div>
 
-    @include('pianote.sales.footer')
+    @include('pianote._partials._footer')
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="/marketing/parcel/pianote/nav-footer.js"></script>

@@ -1729,15 +1729,9 @@
     mini-svg-data-uri "^1.2.3"
 
 "@tailwindcss/line-clamp@^0.4.0":
-<<<<<<< HEAD
-  version "0.4.2"
-  resolved "https://registry.yarnpkg.com/@tailwindcss/line-clamp/-/line-clamp-0.4.2.tgz#f353c5a8ab2c939c6267ac5b907f012e5ee130f9"
-  integrity sha512-HFzAQuqYCjyy/SX9sLGB1lroPzmcnWv1FHkIpmypte10hptf4oPUfucryMKovZh2u0uiS9U5Ty3GghWfEJGwVw==
-=======
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/@tailwindcss/line-clamp/-/line-clamp-0.4.0.tgz#03353e31e77636b785f2336e8c978502cec1de81"
   integrity sha512-HQZo6gfx1D0+DU3nWlNLD5iA6Ef4JAXh0LeD8lOGrJwEDBwwJNKQza6WoXhhY1uQrxOuU8ROxV7CqiQV4CoiLw==
->>>>>>> feature-marketing-migration
 
 "@tailwindcss/typography@^0.5.2":
   version "0.5.2"
@@ -5042,11 +5036,7 @@ lodash.uniq@^4.5.0:
   resolved "https://registry.npmjs.org/lodash.uniq/-/lodash.uniq-4.5.0.tgz"
   integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
 
-<<<<<<< HEAD
 lodash@^4.17.14, lodash@^4.17.19, lodash@^4.17.21:
-=======
-lodash@^4.17.19, lodash@^4.17.21:
->>>>>>> feature-marketing-migration
   version "4.17.21"
   resolved "https://registry.npmjs.org/lodash/-/lodash-4.17.21.tgz"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
@@ -5129,17 +5119,6 @@ mediaelement@^5.0.1:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/mediaelement/-/mediaelement-5.1.0.tgz#6f3b83d59c353d475ade76f272d5f009a1390493"
   integrity sha512-xi/GUUpCEHBYyZGdhv77LGP8gXMtZ2PXY/wD9cM0/X5sV6749roa0wbJ+CVxhwL8Hp8pNe8J5hSQhE5YnWPvww==
-<<<<<<< HEAD
-=======
-  dependencies:
-    global "^4.3.1"
-    svg4everybody "^2.1.9"
-
-memfs@^3.4.3:
-  version "3.4.7"
-  resolved "https://registry.yarnpkg.com/memfs/-/memfs-3.4.7.tgz#e5252ad2242a724f938cb937e3c4f7ceb1f70e5a"
-  integrity sha512-ygaiUSNalBX85388uskeCyhSAoOSgzBbtVCr9jA2RROssFL9Q19/ZXFqS+2Th2sr1ewNIWgFdLzLC3Yl1Zv+lw==
->>>>>>> feature-marketing-migration
   dependencies:
     global "^4.3.1"
     svg4everybody "^2.1.9"
@@ -5801,18 +5780,6 @@ postcss-discard-overridden@^5.1.0:
   resolved "https://registry.npmjs.org/postcss-discard-overridden/-/postcss-discard-overridden-5.1.0.tgz"
   integrity sha512-21nOL7RqWR1kasIVdKs8HNqQJhFxLsyRfAnUDm4Fe4t4mCWL9OJiHvlHPjcd8zc5Myu89b/7wZDnOSjFgeWRtw==
 
-<<<<<<< HEAD
-=======
-postcss-import@^14.1.0:
-  version "14.1.0"
-  resolved "https://registry.yarnpkg.com/postcss-import/-/postcss-import-14.1.0.tgz#a7333ffe32f0b8795303ee9e40215dac922781f0"
-  integrity sha512-flwI+Vgm4SElObFVPpTIT7SU7R3qk2L7PyduMcokiaVKuWv9d/U+Gm/QAd8NDLuykTWTkcrjOeD2Pp1rMeBTGw==
-  dependencies:
-    postcss-value-parser "^4.0.0"
-    read-cache "^1.0.0"
-    resolve "^1.1.7"
-
->>>>>>> feature-marketing-migration
 postcss-import@^15.0.0:
   version "15.0.0"
   resolved "https://registry.yarnpkg.com/postcss-import/-/postcss-import-15.0.0.tgz#0b66c25fdd9c0d19576e63c803cf39e4bad08822"
@@ -6398,8 +6365,7 @@ resolve-url-loader@^4.0.0:
     postcss "^7.0.35"
     source-map "0.6.1"
 
-<<<<<<< HEAD
-resolve@^1.1.7:
+resolve@^1.1.7, resolve@^1.14.2, resolve@^1.9.0:
   version "1.22.1"
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.22.1.tgz#27cb2ebb53f91abb49470a928bba7558066ac177"
   integrity sha512-nBpuuYuY5jFsli/JIs1oldw6fOQCBioohqWZg/2hiaOybXOft4lonv85uDOKXdf8rhyK159cxU5cDcK/NKk8zw==
@@ -6408,16 +6374,10 @@ resolve@^1.1.7:
     path-parse "^1.0.7"
     supports-preserve-symlinks-flag "^1.0.0"
 
-resolve@^1.14.2, resolve@^1.22.0, resolve@^1.9.0:
+resolve@^1.22.0:
   version "1.22.0"
   resolved "https://registry.npmjs.org/resolve/-/resolve-1.22.0.tgz"
   integrity sha512-Hhtrw0nLeSrFQ7phPp4OOcVjLPIeMnRlr5mcnVuMe7M/7eBn98A3hmFRLoFo3DLZkivSYwhRUJTyPyWAk56WLw==
-=======
-resolve@^1.1.7, resolve@^1.14.2, resolve@^1.22.1, resolve@^1.9.0:
-  version "1.22.1"
-  resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.22.1.tgz#27cb2ebb53f91abb49470a928bba7558066ac177"
-  integrity sha512-nBpuuYuY5jFsli/JIs1oldw6fOQCBioohqWZg/2hiaOybXOft4lonv85uDOKXdf8rhyK159cxU5cDcK/NKk8zw==
->>>>>>> feature-marketing-migration
   dependencies:
     is-core-module "^2.8.1"
     path-parse "^1.0.7"

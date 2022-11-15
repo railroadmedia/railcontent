@@ -176,11 +176,123 @@
             opacity: 1;
         }
 
+        .beat-navigation {
+            background:#000c17;
+            text-align:center;
+            border:1px solid #111c26;
+            border-width:1px 0;
+            font-size:0;
+            position:sticky;
+            top:0;
+            transition:top .4s;
+            z-index:100
+        }
+
+        .beat-navigation.scrollUp {
+            top:40px
+        }
+
+        @media (min-width:768px) {
+            .beat-navigation.scrollUp {
+                top:56px
+            }
+        }
+
+        .beat-navigation .nav-item {
+            text-align:center;
+            color:#FFF;
+            position:relative;
+            width:auto;
+            display:inline-block;
+            vertical-align:middle;
+            font:700 0px/1em "Open Sans", sans-serif;
+            transition:all .3s;
+            padding:12px 13px;
+            max-height:40px;
+            opacity:0.7
+        }
+
+        @media (min-width:768px) {
+            .beat-navigation .nav-item {
+                font-size:11px;
+                padding:13px 14px;
+                max-height:52px
+            }
+        }
+
+        @media (min-width:1024px) {
+            .beat-navigation .nav-item {
+                padding:13px 30px
+            }
+        }
+
+        @media (min-width:768px) {
+            .beat-navigation .nav-item:hover {
+                background:#001931;
+                opacity:0.8
+            }
+        }
+
+        .beat-navigation .nav-item.active, .beat-navigation .nav-item.active:hover {
+            opacity:1
+        }
+
+        .beat-navigation .nav-item img {
+            height:16px
+        }
+
+        @media (min-width:768px) {
+            .beat-navigation .nav-item img {
+                height:29px
+            }
+        }
+
+        .beat-navigation .nav-item i {
+            color:#f61a30;
+            font-size:16px;
+            line-height:16px;
+            display:block
+        }
+
+        @media (min-width:768px) {
+            .beat-navigation .nav-item i {
+                font-size:15px;
+                line-height:15px;
+                margin:0 auto 3px
+            }
+        }
     </style>
 @endsection
 
 
 @section('page-body')
+    <div class="beat-navigation">
+        <div class="row">
+            <a href="/blog/" class="nav-item active">
+                <img alt="The Note" src="https://pianote.s3.amazonaws.com/blog/the-note-logo.svg">
+            </a>
+            <a href="/start-here" class="nav-item">
+                <i class="fas fa-location-dot" aria-hidden="true"></i> START HERE</a>
+            <a href="https://www.pianote.com/blog/chording/" class="nav-item chording
+        ">
+                <i class="icon-chords"></i> CHORDING</a>
+            <a href="https://www.pianote.com/blog/song-tutorials/" class="nav-item song-tutorials
+        ">
+                <i class="fas fa-music" aria-hidden="true"></i> SONG TUTORIALS</a>
+            <a href="https://www.pianote.com/blog/technique/" class="nav-item technique
+        ">
+                <i class="fas fa-hand-paper" aria-hidden="true"></i> TECHNIQUE</a>
+            <a href="https://www.pianote.com/blog/theory/" class="nav-item theory
+        ">
+                <i class="fas fa-list-music" aria-hidden="true"></i> THEORY</a>
+            <a href="https://www.pianote.com/blog/vlog/" class="nav-item vlog
+        ">
+                <i class="fas fa-webcam" aria-hidden="true"></i> VLOG</a>
+            <a href="https://www.pianote.com/blog/articles/" class="nav-item articles
+        ">
+                <i class="fas fa-comment-alt-edit" aria-hidden="true"></i> ARTICLES</a>
+        </div>
+    </div>
     <header class="text-center sm:text-left relative bg-cover px-6 md:px-10 pt-72 pb-8 md:py-36 lg:py-40 bg-cover bg-right sm:bg-left lazyload" style="background-color:#00101D;" data-bg="https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/start-here/header2.jpg">
         <div class="relative z-10 max-w-md md:max-w-5xl mx-auto">
             <h2 class="text-white font-extrabold">
@@ -317,7 +429,7 @@
                     Go from absolute beginner to playing<br class="hidden sm:inline-block">
                     your first song in four easy lessons!
                 </div>
-                @include('pianote.lead-gen._sign-up-form', [
+                @include('pianote._partials._sign-up-form', [
                     "formId" => 'Pianote - Engagement - Trigger - GSOTP - Web Form',
                     "formName" => 'Getting Started On The Piano',
                 ])
@@ -548,7 +660,7 @@
                 Subscribe to The Note for free lessons, song tutorials, interviews, interesting <br class="hidden sm:inline">
                 articles, and more delivered to your inbox every week. Unsubscribe anytime.
             </p>
-            @include('pianote.lead-gen._sign-up-form', [
+            @include('pianote._partials._sign-up-form', [
                     "formId" => 'Pianote - Engagement - Trigger - Website Signup - Web Form',
                     "formName" => 'Pianote General',
                 'buttonText'=> 'Subscribe to the note',

@@ -26,7 +26,7 @@
 @stop
 
 @section('global-body')
-    @include('pianote.sales.nav', [
+    @include('pianote._partials._nav', [
         "joinVersion" => true
     ])
 
@@ -58,7 +58,7 @@
         <h4><strong>Take the Quiz &raquo;</strong></h4>
     </a>
 
-    @include('pianote.sales.footer')
+    @include('pianote._partials._footer')
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="/marketing/parcel/pianote/nav-footer.js"></script>

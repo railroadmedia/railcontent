@@ -438,6 +438,11 @@ The Simple Songs Bundle will get you there in no time. You’ll get expert teach
                 'video_src' => 'https://player.vimeo.com/external/647937515.hd.mp4?s=982ac3c2ab74a80cf1f24a727c4df5c88fda859a&profile_id=174',
                 'images' => [
                 ],
+                'overview' => 'The Unlimited Lessons Bundle gives you just that - unlimited piano lessons. Watch as many as you like, as often as you like.
+
+Learn your favorite songs in the comfort of your own home, whenever you want. Impress your family and friends with your piano playing - for a tiny fraction of the cost of private lessons.
+
+And get support and feedback from real teachers who will help you every step of the way.',
                 'sold_out' => true,
                 'guaranteed' => true,
                 'free_shipping' => false,

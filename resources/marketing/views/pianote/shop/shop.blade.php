@@ -131,7 +131,7 @@
 @stop()
 
 @section('global-body')
-    @include('pianote.sales.nav', [
+    @include('pianote._partials._nav', [
         "cartVersion" => true
     ])
 
@@ -329,8 +329,13 @@
         </section>
     </div>
 
-    @include('pianote.sales.footer')
-    {{-- JS CDNS --}}
+
+    @include('pianote._partials._footer')
+    <script src="{{ asset('marketing/js/pianote/manifest.js') }}"></script>
+    <script src="{{ asset('marketing/js/pianote/vendor.js') }}"></script>
+    <script src="{{ asset('marketing/js/pianote/cart-sidebar.js') }}"></script>
+    <script src="{{ asset('marketing/js/pianote/app.js') }}"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.3/moment-timezone-with-data.min.js"></script>

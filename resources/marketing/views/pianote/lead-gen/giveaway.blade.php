@@ -1,11 +1,11 @@
 @extends('pianote._partials.global-layout')
 
 @section('global-head')
-    <title>Win A Roland Digital Piano | Pianote</title>
-    <meta property="og:title" content="Win A Roland Digital Piano | Pianote">
+    <title>Win a Roland FP-30X Digital Piano | Pianote</title>
+    <meta property="og:title" content="Win a Roland FP-30X Digital Piano | Pianote">
 
-    <meta name="description" content="Simply enter your email address before October 10 to secure your chance to win.">
-    <meta property="og:description" content="Simply enter your email address before October 10 to secure your chance to win.">
+    <meta name="description" content="Want a free piano? Simply enter your email address before November 21st to secure your chance to win.">
+    <meta property="og:description" content="Want a free piano? Simply enter your email address before November 21st to secure your chance to win.">
 
     <meta property="og:image" content="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://pianote.s3.amazonaws.com/giveaways/roland-share.jpg" style="display: none;">
     <meta property="og:url" content="https://www.pianote.com/giveaway">
@@ -40,7 +40,7 @@
 @endsection
 
 @section('global-body')
-    @include('pianote.sales.nav')
+    @include('pianote._partials._nav')
 
     <header class="py-12 sm:py-20 bg-no-repeat" style="background-color:#00101D;">
         <div class="container mx-auto max-w-4xl">
@@ -52,17 +52,17 @@
                     <img class="h-36 md:h-40 lg:h-44 mb-2 lazyload" data-src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://pianote.s3.amazonaws.com/giveaways/logo.png" alt="logo">
                     <div class="md:max-w-md">
                         <p class="mb-4" style="color:#D0E2E7;">
-                            Want a free piano? Simply enter your email address before <span class="text-white font-extrabold">October 10</span> to secure your chance to win.
+                            Want a free piano? Simply enter your email address before <span class="text-white font-extrabold">November 21st</span> to secure your chance to win. No purchase necessary. No age restrictions. No location restrictions.
                             <br>
                             <strong class="text-pianote uppercase">ONLY <span class="tzcd-full">A LIMITED TIME</span> LEFT</strong>
                         </p>
-{{--                        @include('pianote.lead-gen._sign-up-form', [--}}
-{{--                            "formId" => 'Pianote - Engagement - Trigger - Giveaway - Web Form',--}}
-{{--                            "formName" => 'Giveaway Form',--}}
-{{--                            'buttonText' => 'I WANT TO WIN!',--}}
-{{--                            'stacked' => true,--}}
-{{--                            'disclaimerColor' => '#B3B3B9'--}}
-{{--                        ])--}}
+                        @include('pianote._partials._sign-up-form', [
+                            "formId" => 'Pianote - Engagement - Trigger - FP30 Giveaway - Web Form',
+                            "formName" => 'FP30 Giveaway',
+                            'buttonText' => 'I WANT TO WIN!',
+                            'stacked' => true,
+                            'disclaimerColor' => '#B3B3B9'
+                        ])
                     </div>
                 </div>
             </div>
@@ -71,46 +71,52 @@
 
     <section class="px-4 md:px-6 py-12 md:py-20">
         <div class="max-w-md md:max-w-4xl mx-auto">
-            <div class="md:flex md:items-center mb-6 md:mb-20">
-                <div class="md:w-7/12 md:pr-7">
-                    <h4 class="font-extrabold mb-4 md:mb-8 leading-normal" style="color:#2A2F34;">
-                        Immersive sound. <br>
-                        Incredible performance. <br>
-                        Authentic feel.
+            <div class="md:flex md:flex-wrap md:items-center mb-6 md:mb-20">
+                <div class="w-full mb-4 md:mb-8 text-center">
+                    <h4 class="font-extrabold leading-normal" style="color:#2A2F34;">
+                        Compact size. Premium Performance.
                     </h4>
-                    <img class="lazyload md:hidden rounded-xl mb-6" data-src="https://pianote.s3.amazonaws.com/giveaways/intro-m.jpg" alt="intro image">
+                    <p><em>Go beyond the basics with this beautiful at-home digital piano. With authentic <br class="hidden lg:inline-block">
+                            touch sensitivity, the FP-30X offers big performance in a little package.</em></p>
+
+                </div>
+                <div class="md:w-7/12 md:pr-7">
+                    <img class="lazyload md:hidden rounded-xl mb-6" data-src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/https://pianote.s3.amazonaws.com/giveaways/november/intro-m.jpg" alt="intro image">
                     <p>
-                        The Roland FP-10 is the perfect piano for at-home use. Whether you’re practicing alone, or giving a concert in the living room. <br><br>
-                        When inspiration strikes, take a seat at the latest model in Roland’s renowned FP piano series; the entry-level FP-10. <br><br>
-                        This digital piano is always ready to play, with a reassuringly authentic feel from the 88-note PHA-4 Standard keyboard, joined by Roland’s evocative SuperNATURAL piano tones through onboard speakers or headphones. <br><br>
-                        With its portable, space-saving design, the FP-10 is the ideal instrument for home use. The Roland FP-10 retails for $599.99. But it can be yours for FREE.
+                        This is not your beginner piano.
+                        <br><br>
+                        The beautiful Roland FP-30X delivers exceptional performance and easily outshines other instruments in its class. Roland’s unrivaled sound and feel deliver an authentic piano experience for maximum expression, providing a solid foundation for proper learning and the detailed articulation and response that experienced players demand.
+                        <br><br>
+                        The advanced SuperNATURAL Piano engine combined with the premium touch of the Ivory Feel keys found in high-end home pianos will have you coming back to the piano again and again, always with a smile.
+                        <br><br>
+                        And all this performance comes wrapped in a compact case that will fit any living situation while being light enough to move easily when needed.
+                        <br><br>
+                        The Roland FP-30X retails for $899.99. But it can be yours for FREE.
                     </p>
                 </div>
                 <div class="w-5/12 justify-center pl-8">
-                    <img class="rounded-xl lazyload hidden md:inline-block" data-src="https://cdn.musora.com/image/fetch/w_450,q_auto:best/https://pianote.s3.amazonaws.com/giveaways/intro.jpg" alt="intro image">
+                    <img class="rounded-xl lazyload hidden md:inline-block" data-src="https://cdn.musora.com/image/fetch/w_450,q_auto:best/https://pianote.s3.amazonaws.com/giveaways/november/intro.jpg" alt="intro image">
                 </div>
             </div>
 
             <picture>
-                <source media="(min-width:768px)" srcset="https://pianote.s3.amazonaws.com/giveaways/gallery_feature.jpg">
-                <img class="rounded-xl mb-6 lazyload" data-src="https://pianote.s3.amazonaws.com/giveaways/gallery-feature-m.jpg" alt="gallery feature">
+                <source media="(min-width:768px)" srcset="https://pianote.s3.amazonaws.com/giveaways/november/gallery-feature.jpg">
+                <img class="rounded-xl mb-6 lazyload" data-src="https://pianote.s3.amazonaws.com/giveaways/november/gallery-feature.jpg" alt="gallery feature">
             </picture>
 
-            <img class="rounded-xl mb-10 shadow-md lazyload" data-src="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/https://pianote.s3.amazonaws.com/giveaways/gallery.jpg" alt="gallery">
+            <img class="hidden md:inline-block rounded-xl mb-10 shadow-md lazyload" data-src="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/https://pianote.s3.amazonaws.com/giveaways/november/gallery.jpg" alt="gallery">
 
             <div class="md:hidden">
-                <img class="rounded-xl shadow-md mb-4" src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://pianote.s3.amazonaws.com/giveaways/gallery-01-m.jpg" alt="gallery 1">
-                <img class="rounded-xl shadow-md mb-4" src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://pianote.s3.amazonaws.com/giveaways/gallery-02-m.jpg" alt="gallery 2">
-                <img class="rounded-xl shadow-md mb-4" src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://pianote.s3.amazonaws.com/giveaways/gallery-03-m.jpg" alt="gallery 3">
-                <img class="rounded-xl shadow-md mb-8" src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://pianote.s3.amazonaws.com/giveaways/gallery-04-m.jpg" alt="gallery 4">
+                <img class="rounded-xl shadow-md mb-4" src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://pianote.s3.amazonaws.com/giveaways/november/gallery-01-m.jpg" alt="gallery 1">
+                <img class="rounded-xl shadow-md mb-4" src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://pianote.s3.amazonaws.com/giveaways/november/gallery-02-m.jpg" alt="gallery 2">
+                <img class="rounded-xl shadow-md mb-4" src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://pianote.s3.amazonaws.com/giveaways/november/gallery-03-m.jpg" alt="gallery 3">
+                <img class="rounded-xl shadow-md mb-8" src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://pianote.s3.amazonaws.com/giveaways/november/gallery-04-m.jpg" alt="gallery 4">
             </div>
 
             <div class="rounded-xl py-6 md:py-10 shadow-md px-8" style="background: #FFF6F6;">
-                <div class="max-w-lg mx-auto md:flex md:items-center text-center md:text-left">
-                    <img class="h-12 lg:ml-7 md:mr-6 lazyload mb-3 md:mb-0" data-src="https://cdn.musora.com/image/fetch/w_80,q_auto:best/https://pianote.s3.amazonaws.com/giveaways/roland_logo.svg" alt="roland logo">
-                    <p class="font-bold md:leading-tight">
-                        This free Roland FP-10 digital piano has been generously donated by our partners at Roland.
-                    </p>
+                <div class="justify-center mx-auto md:flex md:items-center text-center md:text-left">
+                    <img class="mb-2 sm:mb-0 h-10 sm:h-14 lazyload" data-src="https://cdn.musora.com/image/fetch/w_160,q_auto:best/https://pianote.s3.amazonaws.com/giveaways/roland_logo.svg">
+                    <p class="w-full sm:w-auto leading-tight pl-3 sm:pl-5 m-0"><strong>This free Roland FP-30X digital piano has been<br> generously donated by our partners at Roland.</strong></p>
                 </div>
             </div>
         </div>
@@ -168,7 +174,7 @@
                 </div>
             </div>
             <div class="inline-block italic text-pianote py-4 px-6" style="background:#111F29;">
-                The winner will be announced during a LIVE event on October 10th!
+                The winner will be announced during a LIVE event on November 22nd!
             </div>
         </div>
     </section>
@@ -189,21 +195,21 @@
         <div class="mx-auto max-w-md md:max-w-2xl">
             <img class="h-32 sm:h-36 md:h-44 lg:h-52 lazyload" data-src="https://cdn.musora.com/image/fetch/w_650,q_auto:best/https://pianote.s3.amazonaws.com/giveaways/logo.png" alt="title image">
             <h6 class="my-4 sm:my-6 uppercase text-pianote"><strong>ONLY <span class="tzcd-full">A LIMITED TIME</span> LEFT</strong></h6>
-{{--            @include("pianote.lead-gen._sign-up-form", [--}}
-{{--                    "formId" => 'Pianote - Engagement - Trigger - Giveaway - Web Form',--}}
-{{--                    "formName" => 'Giveaway Form',--}}
-{{--                "buttonText" => "I WANT TO WIN!",--}}
-{{--                "oneLineLg" => true,--}}
-{{--                'disclaimerColor' => '#B3B3B9'--}}
-{{--            ])--}}
-            </div>
+            @include("pianote._partials._sign-up-form", [
+                    "formId" => 'Pianote - Engagement - Trigger - FP30 Giveaway - Web Form',
+                    "formName" => 'FP30 Giveaway',
+                "buttonText" => "I WANT TO WIN!",
+                "oneLineLg" => true,
+                'disclaimerColor' => '#B3B3B9'
+            ])
+        </div>
     </section>
 
     @include('pianote.lead-gen.partials.video-player',[
         "name" => "trailer",
-        "vimeoId" => "754475403",
+        "vimeoId" => "767456067",
     ])
-    @include('pianote.sales.footer')
+    @include('pianote._partials._footer')
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="/marketing/parcel/pianote/nav-footer.js"></script>
@@ -219,7 +225,7 @@
     <script type="text/javascript" src="/marketing/js/jquery.countdown-2.min.js"></script>
     <script>
         $(document).ready(function () {
-            $('.tzcd-full').countdown('2022/10/10')
+            $('.tzcd-full').countdown('2022/11/21')
                 .on('update.countdown', function (event) {
                     var format = '%-M Minute%!M %-S Second%!S';
                     if (event.offset.totalHours > 0) {
@@ -233,7 +239,7 @@
                 .on('finish.countdown', function (event) {
                     $(this).html('a limited time');
                 });
-            $('.tzcd-small').countdown('2022/10/10')
+            $('.tzcd-small').countdown('2022/11/21')
                 .on('update.countdown', function (event) {
                     var format = '%-MM %-SS';
                     if (event.offset.totalHours > 0) {

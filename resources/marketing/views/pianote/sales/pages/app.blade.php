@@ -17,7 +17,7 @@
 @stop
 
 @section('global-body')
-    @include('pianote.sales.nav')
+    @include('pianote._partials._nav')
 
     <section class="trailer-section text-center">
         <div class="container mx-auto">
@@ -94,7 +94,7 @@
     </section>
 
 
-    @include('pianote.sales.footer')
+    @include('pianote._partials._footer')
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/js/foundation.min.js"></script>

@@ -185,7 +185,7 @@
                     <h6 class="leading-tight mb-4">
                         Start singing the RIGHT way with a LIVE singing lesson from a vocal coach.
                     </h6>
-                    @include("singeo.lead-gen.partials._sign-up-form-cio", [
+                    @include("singeo._partials._sign-up-form", [
                         "formId" => 'Singeo - Engagement - Trigger - Vocal Bootcamp - Web Form',
                         "formName" => 'Vocal Bootcamp',
                         "buttonText" => "Save my spot!",
@@ -355,7 +355,7 @@
             <p class="mb-4">
                 Start singing the RIGHT way with a LIVE 60-minute singing lesson from a vocal coach.
             </p>
-            @include("singeo.lead-gen.partials._sign-up-form-cio", [
+            @include("singeo._partials._sign-up-form", [
                 "formId" => 'Singeo - Engagement - Trigger - Vocal Bootcamp - Web Form',
                 "formName" => 'Vocal Bootcamp',
                 "buttonText" => "Save my spot!",

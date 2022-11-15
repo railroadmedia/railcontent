@@ -432,10 +432,13 @@
         <div class="container mx-auto max-w-6xl">
             <h2 class="leading-tight max-w-3xl"><em>“... for people who want to learn how to play guitar, and fast.”</em></h2>
             <h6 class="mt-5 mb-10 md:mb-20"><em>- American Songwriter</em></h6>
+            <h2 class="leading-tight max-w-3xl"><em>“If you're a beginner and want a simple place to get started, the Guitareo Method is a great place to land.”</em></h2>
+            <h6 class="mt-5 mb-10 md:mb-20"><em>- Guitar Chalk</em></h6>
             <div class="mx-auto w-full opacity-80">
                 <p class="text-sm mb-3"><em>As seen in:</em></p>
                 <img class="inline-block h-7 md:h-9 mr-3 md:mr-8 lazyload" data-src="https://cdn.musora.com/image/fetch/w_230,q_auto:best/https://guitareo.s3.amazonaws.com/sales/2021/partner-guitar-world.png" alt="guitar-world">
                 <img class="inline-block h-14 md:h-16 lazyload" data-src="https://cdn.musora.com/image/fetch/w_130,q_auto:best/https://guitareo.s3.amazonaws.com/sales/2021/partner-guiness-world-records.png" alt="guitar-world-records">
+                <img class="inline-block h-14 md:h-16 ml-3 md:ml-8 lazyload" data-src="https://cdn.musora.com/image/fetch/w_130,q_auto:best/https://guitareo.s3.amazonaws.com/sales/2021/partner-guitar-chalk.png" alt="guitar-world-records">
                 <img class="inline-block h-10 md:h-14 ml-3 md:ml-8 lazyload" data-src="https://cdn.musora.com/image/fetch/w_270,q_auto:best/https://guitareo.s3.amazonaws.com/sales/2021/partner-american-songwriter.png" alt="american-songwriter">
             </div>
         </div>

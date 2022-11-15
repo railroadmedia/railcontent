@@ -126,44 +126,6 @@
     </style>
 @stop()
 
-@section('inject-components')
-    @parent
-
-    <script src="{{ asset('marketing/parcel/pianote/order-form.js') }}"></script>
-    <script>
-        document.addEventListener('click', function (event) {
-            if (!event.target.closest('.shipping-trigger')) return;
-
-            document.querySelector('.shipping-info').classList.add("active");
-            document.querySelector('.delay-overlay').classList.add("active");
-
-        }, false);
-        document.addEventListener('click', function (event) {
-            if (!event.target.closest('.timing-trigger')) return;
-
-            document.querySelector('.timing-info').classList.add("active");
-            document.querySelector('.delay-overlay').classList.add("active");
-
-        }, false);
-        document.addEventListener('click', function (event) {
-            if (!event.target.closest('.close-modal')) return;
-
-            document.querySelector('.shipping-info').classList.remove("active");
-            document.querySelector('.timing-info').classList.remove("active");
-            document.querySelector('.delay-overlay').classList.remove("active");
-
-        }, false);
-        document.addEventListener('click', function (event) {
-            if (!event.target.closest('.delay-overlay')) return;
-
-            document.querySelector('.shipping-info').classList.remove("active");
-            document.querySelector('.timing-info').classList.remove("active");
-            document.querySelector('.delay-overlay').classList.remove("active");
-
-        }, false);
-    </script>
-@endsection
-
 @section('content')
     <header id="nav" class="bg-black-1 flex flex-row" style="background-color:#00162a;position: relative;padding: 7px 10px;">
         <a href="/" class="logo flex flex-column align-center ph-1" style="max-width:144px;">
@@ -286,3 +248,44 @@
         </div>
     </div>
 @stop
+
+@section('inject-components')
+    @parent
+
+    <script src="{{ mix('/platform/js/manifest.js') }}"></script>
+    <script src="{{ mix('/platform/js/vendor.js') }}"></script>
+    <script src="{{ mix('/platform/js/app.js') }}"></script>
+
+    <script>
+        document.addEventListener('click', function (event) {
+            if (!event.target.closest('.shipping-trigger')) return;
+
+            document.querySelector('.shipping-info').classList.add("active");
+            document.querySelector('.delay-overlay').classList.add("active");
+
+        }, false);
+        document.addEventListener('click', function (event) {
+            if (!event.target.closest('.timing-trigger')) return;
+
+            document.querySelector('.timing-info').classList.add("active");
+            document.querySelector('.delay-overlay').classList.add("active");
+
+        }, false);
+        document.addEventListener('click', function (event) {
+            if (!event.target.closest('.close-modal')) return;
+
+            document.querySelector('.shipping-info').classList.remove("active");
+            document.querySelector('.timing-info').classList.remove("active");
+            document.querySelector('.delay-overlay').classList.remove("active");
+
+        }, false);
+        document.addEventListener('click', function (event) {
+            if (!event.target.closest('.delay-overlay')) return;
+
+            document.querySelector('.shipping-info').classList.remove("active");
+            document.querySelector('.timing-info').classList.remove("active");
+            document.querySelector('.delay-overlay').classList.remove("active");
+
+        }, false);
+    </script>
+@endsection

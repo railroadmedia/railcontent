@@ -22,7 +22,7 @@
 @stop
 
 @section('global-body')
-    @include('pianote.sales.nav', [
+    @include('pianote._partials._nav', [
         "joinVersion" => true
     ])
 
@@ -35,7 +35,7 @@
                 personality type, please enter your email address. Don’t worry, we won’t <br class="hidden md:inline">
                 share your email with anyone, and you can unsubscribe at any time.
             </p>
-            @include('pianote.lead-gen._sign-up-form', [
+            @include('pianote._partials._sign-up-form', [
                 "formName" => 'Personality Quiz Academic',
                 "formId" => "Pianote - Engagement - Trigger - Personality Quiz Academic - Web Form",
                 'buttonText' => 'Show my results',
@@ -46,7 +46,7 @@
         </div>
     </section>
 
-    @include('pianote.sales.footer')
+    @include('pianote._partials._footer')
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="/marketing/parcel/pianote/nav-footer.js"></script>

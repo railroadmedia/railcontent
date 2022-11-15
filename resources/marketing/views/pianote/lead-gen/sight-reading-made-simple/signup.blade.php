@@ -295,7 +295,7 @@
                 We’ll email you the access link within 5 minutes.
             </div>
             <div class="max-w-lg px-4 mx-auto">
-                @include('pianote.lead-gen._sign-up-form', [
+                @include('pianote._partials._sign-up-form', [
                     "redirect" => true,
                     "stacked" => true,
                     "formId" => "Pianote - Engagement - Trigger - Sight Reading - Web Form",
@@ -305,7 +305,7 @@
         </div>
     </section>
 
-    @include('pianote.sales.footer')
+    @include('pianote._partials._footer')
 
     @include('pianote.lead-gen.partials.video-player',[
         "name" => "trailer",

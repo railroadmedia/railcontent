@@ -1,6 +1,7 @@
 <form id="@if(!empty($formId)) {{ str_replace('-', '', (str_replace(' ', '', $formId))) }} @else ajaxForm @endif" accept-charset="UTF-8"
-      action="{{ url()->route('customer-io.submit-email-form') }}" class="ajax-form clearfix infusion-form facebook-track-lead mx-auto"
-      method="POST" onsubmit="emailSignUpConversionTrackerForImpactProvider()">
+    action="{{ url()->route('customer-io.submit-email-form') }}"
+    class="@if(empty($redirectURL)) ajax-form @endif clearfix infusion-form facebook-track-lead mx-auto" method="POST"
+    onsubmit="emailSignUpConversionTrackerForImpactProvider()">
 
     @if(!empty($formName))
         {!! \Railroad\LeadTracker\Services\LeadTrackerService::getRequestTrackingInputsHtmlFromRequest(

@@ -128,7 +128,7 @@
             {{ old('credentials_type') == 'existing' ? 'active' : '' }}"
                 data-form="existingAccountForm">Add to My Account</p>
 
-        <div id="newAccountForm" class="redemption-form {{ old('credentials_type') == 'new' || old('credentials_type') != 'existing' ? '' : 'hide' }}">
+        <div id="newAccountForm" class="redemption-form {{ old('credentials_type') == 'new' || old('credentials_type') != 'existing' ? '' : 'hidden' }}">
             <div>
                 <p class="mb-1">
                     Fill out the form below to start your 30-Day Drumeo Membership.
@@ -195,7 +195,7 @@
             </div>
         </div>
 
-        <div id="existingAccountForm" class="redemption-form {{ old('credentials_type') == 'existing' ? '' : 'hide' }}">
+        <div id="existingAccountForm" class="redemption-form {{ old('credentials_type') == 'existing' ? '' : 'hidden' }}">
                     <div>
                         <p class="mb-1">
                             Fill out the form below to add 30 days to your Drumeo Membership.
