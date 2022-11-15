@@ -17,7 +17,7 @@
             ],
             "Contact" => [
                 "iconClass" => "fas fa-phone",
-                "url" => '/contact',
+                "url" => get_legacy_brand_base_url("musora").'/contact',
             ],
             "Careers" => [
                 "iconClass" => "fas fa-users",
@@ -40,22 +40,22 @@
             "Drumeo" => [
                 "iconClass" => "fas fa-external-link",
                 "themeClass" => "text-musora",
-                "url" => 'drumeo.com'
+                "url" => get_legacy_brand_base_url("drumeo")
             ],
             "Pianote" => [
                 "iconClass" => "fas fa-external-link",
                 "themeClass" => "text-musora",
-                "url" => 'pianote.com'
+                "url" => get_legacy_brand_base_url("pianote")
             ],
             "Guitareo" => [
                 "iconClass" => "fas fa-external-link",
                 "themeClass" => "text-musora",
-                "url" => 'guitareo.com'
+                "url" => get_legacy_brand_base_url("guitareo")
             ],
             "Singeo" => [
                 "iconClass" => "fas fa-external-link",
                 "themeClass" => "text-musora",
-                "url" => 'singeo.com'
+                "url" => get_legacy_brand_base_url("singeo")
             ]
         ]
     ])
