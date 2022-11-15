@@ -47,7 +47,7 @@
         @include('sales.partials._nav-link', [
             "linkName" => "Contact",
             "linkIcon" => "fas fa-phone",
-            "linkUrl" => "/contact"
+            "linkUrl" => get_legacy_brand_base_url("musora").'/contact'
         ])
         @include('sales.partials._nav-link', [
             "linkName" => "Singeo",
