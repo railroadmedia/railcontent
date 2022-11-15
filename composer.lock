@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ff75731fb9d289eb214282f7d2a8570a",
+    "content-hash": "3cac84af0735871cefa3f233a8c9ac7a",
     "packages": [
         {
             "name": "aporat/store-receipt-validator",
@@ -176,16 +176,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.243.1",
+            "version": "3.243.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "b9c6d89bc9900910e73890803462dd24bcd994a4"
+                "reference": "c4ac1ff8f40f11fcf0d8e58b3d13838a44a8a582"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/b9c6d89bc9900910e73890803462dd24bcd994a4",
-                "reference": "b9c6d89bc9900910e73890803462dd24bcd994a4",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/c4ac1ff8f40f11fcf0d8e58b3d13838a44a8a582",
+                "reference": "c4ac1ff8f40f11fcf0d8e58b3d13838a44a8a582",
                 "shasum": ""
             },
             "require": {
@@ -264,9 +264,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.243.1"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.243.2"
             },
-            "time": "2022-11-14T23:37:20+00:00"
+            "time": "2022-11-15T13:14:49+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -4256,16 +4256,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v9.39.0",
+            "version": "v9.40.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "67e674709e1e7db14f304a871481f310822d68c5"
+                "reference": "650e728cabf63b4bfd6c45b421ec7bc7a916b0bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/67e674709e1e7db14f304a871481f310822d68c5",
-                "reference": "67e674709e1e7db14f304a871481f310822d68c5",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/650e728cabf63b4bfd6c45b421ec7bc7a916b0bf",
+                "reference": "650e728cabf63b4bfd6c45b421ec7bc7a916b0bf",
                 "shasum": ""
             },
             "require": {
@@ -4438,21 +4438,21 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2022-11-08T14:47:39+00:00"
+            "time": "2022-11-15T14:20:05+00:00"
         },
         {
             "name": "laravel/nova",
-            "version": "4.18.2",
+            "version": "4.19.0",
             "source": {
                 "type": "git",
                 "url": "git@github.com:laravel/nova.git",
-                "reference": "420bccd59f3eeac969920d09a4e4cd961ad63325"
+                "reference": "56de69c170f2f2497d8a51f19e84898663339e04"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-420bccd59f3eeac969920d09a4e4cd961ad63325-zip-d3f55b.zip",
-                "reference": "420bccd59f3eeac969920d09a4e4cd961ad63325",
-                "shasum": "be0ca636e0bcf8746247c3f93000925b434c0a1a"
+                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-56de69c170f2f2497d8a51f19e84898663339e04-zip-147264.zip",
+                "reference": "56de69c170f2f2497d8a51f19e84898663339e04",
+                "shasum": "155f94d95488b485bca748d96e02aa3a4a228864"
             },
             "require": {
                 "brick/money": "^0.5.0|^0.6.0|^0.7.0",
@@ -4547,9 +4547,9 @@
                 "laravel"
             ],
             "support": {
-                "source": "https://github.com/laravel/nova/tree/v4.18.2"
+                "source": "https://github.com/laravel/nova/tree/v4.19.0"
             },
-            "time": "2022-11-03T01:55:32+00:00"
+            "time": "2022-11-15T14:30:32+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -7878,16 +7878,16 @@
         },
         {
             "name": "railroad/ecommerce",
-            "version": "v5.0.22",
+            "version": "dev-support-old-app-purchases",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "08cbfde6719962e94a93c6636ab411f9f5b2a11a"
+                "reference": "63271bf62bb04e76fc718471dee97d2ab441f540"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/08cbfde6719962e94a93c6636ab411f9f5b2a11a",
-                "reference": "08cbfde6719962e94a93c6636ab411f9f5b2a11a",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/63271bf62bb04e76fc718471dee97d2ab441f540",
+                "reference": "63271bf62bb04e76fc718471dee97d2ab441f540",
                 "shasum": ""
             },
             "require": {
@@ -7924,9 +7924,9 @@
             "description": "Ecommerce system",
             "support": {
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
-                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.22"
+                "source": "https://github.com/railroadmedia/ecommerce/tree/support-old-app-purchases"
             },
-            "time": "2022-10-31T14:38:27+00:00"
+            "time": "2022-11-15T14:40:25+00:00"
         },
         {
             "name": "railroad/location",
@@ -16123,16 +16123,16 @@
     ],
     "aliases": [
         {
-            "package": "railroad/railtracker",
-            "version": "4.0.9999999.9999999-dev",
-            "alias": "4.0.7",
-            "alias_normalized": "4.0.7.0"
+            "package": "railroad/ecommerce",
+            "version": "dev-support-old-app-purchases",
+            "alias": "v5.0.22",
+            "alias_normalized": "5.0.22.0"
         }
     ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "railroad/musora-api": 20,
-        "railroad/railtracker": 20
+        "railroad/ecommerce": 20,
+        "railroad/musora-api": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

@@ -300,12 +300,26 @@ return [
         'apple_store_kit' => [
             'endpoint' => env('APPLE_VERIFY_RECEIPT_ENDPOINT', 'https://sandbox.itunes.apple.com'),
             'shared_secret' => '7e598c622c0a46f49c79c2272bcc2c25',
+            'drumeo' => [
+                'shared_secret' => 'b1ab16b41296400bbf10431d72386f5f',
+            ],
+            'pianote' => [
+                'shared_secret' => 'f936d4368cd04421a10385c1baa75a10',
+            ]
         ],
 
         'google_play_store' => [
             'credentials' =>  __DIR__ . '/../google-play-api.json',
             'application_name' => 'com.musoraapp',
             'scope' => ['https://www.googleapis.com/auth/androidpublisher'],
+            'drumeo' => [
+                'credentials' =>  __DIR__ . '/../google-play-drumeo-api.json',
+                'application_name' => 'com.drumeo',
+            ],
+            'pianote' => [
+                'credentials' =>  __DIR__ . '/../google-play-pianote-api.json',
+                'application_name' => 'com.pianote',
+            ]
         ],
     ],
 
