@@ -25,7 +25,7 @@
             ],
             "Contact" => [
                 "iconClass" => "fas fa-phone",
-                "url" => '/contact',
+                "url" => get_legacy_brand_base_url("musora").'/contact',
             ],
             "Drumeo" => [
                 "iconClass" => "icon-courses",
@@ -158,19 +158,19 @@
                 "links" => [
                     [
                         "name" => "Musora",
-                        "url" => "/",
+                        "url" => get_legacy_brand_base_url("musora")
                     ],
                     [
                         "name" => "Guitareo",
-                        "url" => "/",
+                        "url" => get_legacy_brand_base_url("guitareo")
                     ],
                     [
                         "name" => "Pianote",
-                        "url" => "/",
+                        "url" => get_legacy_brand_base_url("pianote")
                     ],
                     [
                         "name" => "Singeo",
-                        "url" => "/",
+                        "url" => get_legacy_brand_base_url("singeo")
                     ],
                     [
                         "name" => "Drumeo Kids",

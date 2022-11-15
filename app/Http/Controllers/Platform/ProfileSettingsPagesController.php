@@ -880,6 +880,7 @@ class ProfileSettingsPagesController extends BaseController
                 // todo: remove from here and vuesora because now obsolete
                 'displayOverridePrice' => $displayOverridePrice ?? false,
                 // todo: remove from here and vuesora because now obsolete
+                'brand' => brand()
             ]
         );
     }

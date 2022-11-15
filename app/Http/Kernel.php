@@ -4,6 +4,7 @@ namespace App\Http;
 
 use App\Http\Middleware\DynamicWebOrAppMiddlewareGroupsAuthenticated;
 use App\Http\Middleware\DynamicWebOrAppMiddlewareGroupsPublic;
+use App\Http\Middleware\ExpiredMemberRedirect;
 use App\Http\Middleware\RedirectIfMobileRequest;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 use Railroad\MusoraApi\Middleware\BrandMiddleware;
@@ -63,6 +64,10 @@ class Kernel extends HttpKernel
             \Railroad\Railtracker\Middleware\RailtrackerMiddleware::class,
             \App\Http\Middleware\SetContentPermissions::class,
             RedirectIfMobileRequest::class,
+        ],
+
+        'web_member_only' => [
+            ExpiredMemberRedirect::class,
         ],
 
         'api_public' => [
