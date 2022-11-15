@@ -10,7 +10,7 @@ if(!empty($user)){
     <title>The Best Beginner Drum Book | Musora</title>
 @endsection
 
-@section('layout-scripts')
+@section('inject-components')
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             var changeFormButtons = document.querySelectorAll('.change-form');

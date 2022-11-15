@@ -47,7 +47,7 @@
                 @if(!empty($relatedLesson['content_id']))
                     @if($hasAccess)
                         <a
-                            href="{{ url()->route('platform.content.jump-to-content-id', [$relatedLesson['content_id']]) }}"
+                            href="{{ url()->route('platform.content.jump-to-content-id', [$relatedLesson['content_id'], 'brand'=>$relatedLesson['brand']]) }}"
                             class="btn short text-{{$relatedLesson['brand']}} flat bg-{{$relatedLesson['brand']}}"
                             target="_blank"
                         >

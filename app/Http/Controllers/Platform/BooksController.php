@@ -57,6 +57,7 @@ class BooksController extends Controller
         return view('books.foundations.index', [
             "hasAccess" => !empty(user()),
             "chapterThumbs" => $chapterThumbs,
+            "user" => user(),
         ]);
     }
 
@@ -71,6 +72,8 @@ class BooksController extends Controller
             "chapterNumber" => $chapterNumber,
             "thisChapter" => $thisChapter,
             "foundationsLessons" => $foundationsLessons,
+            "user" => user(),
+            "brand" => "pianote"
         ]);
     }
 
@@ -120,12 +123,12 @@ class BooksController extends Controller
                     ],
                     [
                         "title" => "Getting Started on the Piano Lesson 1",
-                        "external_link" => '/getting-started/lessons/now-what',
+                        "external_link" => 'https://www.pianote.com/getting-started/lessons/now-what',
                         "brand" => "pianote",
                     ],
                     [
                         "title" => "Getting Started on the Piano Lesson 2",
-                        "external_link" => '/getting-started/lessons/scales',
+                        "external_link" => 'https://www.pianote.com/getting-started/lessons/scales',
                         "brand" => "pianote",
                     ],
                     [
@@ -197,7 +200,7 @@ class BooksController extends Controller
                 "related_lessons" => [
                     [
                         "title" => "Getting Started On The Piano Lesson 3",
-                        "external_link" => '/getting-started/lessons/minor-scale',
+                        "external_link" => 'https://www.pianote.com/getting-started/lessons/minor-scale',
                         "brand" => "pianote",
                     ],
                     [
@@ -264,37 +267,37 @@ class BooksController extends Controller
                 "related_lessons" => [
                     [
                         "title" => "Chord Hacks - Intro To Chord Hacking",
-                        "external_link" => '/chord-hacks/lessons/chord-hacking',
+                        "external_link" => 'https://www.pianote.com/chord-hacks/lessons/chord-hacking',
                         "youtube_id" => "PpV1nffIPFc",
                         "brand" => "pianote",
                     ],
                     [
                         "title" => "Chord Hacks - Inversions Basics",
-                        "external_link" => '/chord-hacks/lessons/inversions',
+                        "external_link" => 'https://www.pianote.com/chord-hacks/lessons/inversions',
                         "youtube_id" => "l5BYWY6ZJJs",
                         "brand" => "pianote",
                     ],
                     [
                         "title" => "Chord Hacks - Left Hand Magic",
-                        "external_link" => '/chord-hacks/lessons/adding-rhythm',
+                        "external_link" => 'https://www.pianote.com/chord-hacks/lessons/adding-rhythm',
                         "youtube_id" => "pQnDDgA73tc",
                         "brand" => "pianote",
                     ],
                     [
                         "title" => "Chord Hacks - Putting It Together",
-                        "external_link" => '/chord-hacks/lessons/two-hands',
+                        "external_link" => 'https://www.pianote.com/chord-hacks/lessons/two-hands',
                         "youtube_id" => "A_dwTWUjAs0",
                         "brand" => "pianote",
                     ],
                     [
                         "title" => "Chord Hacks -  Making It Fancy",
-                        "external_link" => '/chord-hacks/lessons/chord-progressions',
+                        "external_link" => 'https://www.pianote.com/chord-hacks/lessons/chord-progressions',
                         "youtube_id" => "FxWWLCxcQ-g",
                         "brand" => "pianote",
                     ],
                     [
                         "title" => "Chord Hacks - Pave The Way",
-                        "external_link" => '/chord-hacks/lessons/popular-songs',
+                        "external_link" => 'https://www.pianote.com/chord-hacks/lessons/popular-songs',
                         "youtube_id" => "AK8bJwqZFHg",
                         "brand" => "pianote",
                     ],
@@ -516,9 +519,11 @@ class BooksController extends Controller
 
     private function getFoundationsLessons($levelNumber)
     {
+        ContentRepository::$bypassPermissions = true;
+
         $foundations = $this->contentService->getById('215952');
 
-        return $foundations['units'][$levelNumber - 1]['lessons'] ?? abort(404);
+        return $foundations['units'][$levelNumber - 1]['lessons'] ?? [];
     }
 
     public function bestBeginner(Request $request)
@@ -609,8 +614,7 @@ class BooksController extends Controller
                 "description" => "Here you’ll find play-along tracks that go with each style of music you’ve learned in
                 this chapter. Once you’ve completed Chapter 10, go back and practice the drum beats from Chapter 9
                 along with their corresponding play-along track!",
-                "contentLink" => url()->route('books.best-beginner-drum-book.play-alongs'),
-
+                "contentLink" => url()->route('books.best-beginner-drum-book.play-alongs', ['brand' => 'drumeo']),
             ],
             [
                 "thumbnail" => 'https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/chapter-10.jpg',
@@ -618,7 +622,7 @@ class BooksController extends Controller
                 "title" => "Drumless Play-Along Tracks",
                 "description" => "Here you’ll find all of the resources for Chapter 10. You can turn the drums or
                 click on and off. You can also download a PDF version of a “Cheat Sheet” at the bottom of this page!",
-                "contentLink" => url()->route('books.best-beginner-drum-book.play-alongs'),
+                "contentLink" => url()->route('books.best-beginner-drum-book.play-alongs', ['brand' => 'drumeo']),
 
             ],
         ];
@@ -729,7 +733,7 @@ class BooksController extends Controller
                                                       ]);
     }
 
-    public function drummersToolboxChapter($domain, $chapterNumber, Request $request)
+    public function drummersToolboxChapter($domain, $brand,  $chapterNumber, Request $request)
     {
         ContentRepository::$bypassPermissions = true;
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;

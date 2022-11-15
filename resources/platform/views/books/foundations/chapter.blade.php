@@ -1,4 +1,10 @@
-@extends('partials.layout')
+<?php
+$layout = 'books.layout';
+if(!empty($user)){
+    $layout = 'partials.layout';
+} ?>
+
+@extends($layout)
 
 @section('meta')
     <title>Pianote Foundations | Musora</title>
@@ -22,7 +28,7 @@
                 <div class="flex flex-row align-center pv-3">
                     <a
                         @if($chapterNumber > 1)
-                        href="{{ url()->route('platform.books.resources.chapter',[$chapterNumber - 1]) }}"
+                        href="{{ url()->route('platform.books.resources.chapter',[$chapterNumber - 1, 'brand' => 'pianote']) }}"
                         @endif
                         class="btn short collapse-square rounded mr-2 bg-white text-white inverted
                         {{ $chapterNumber > 1 ? '' : 'disabled' }}"
@@ -34,7 +40,7 @@
                     </p>
                     <a
                         @if($chapterNumber < 10)
-                        href="{{ url()->route('platform.books.resources.chapter', [$chapterNumber + 1]) }}"
+                        href="{{ url()->route('platform.books.resources.chapter', [$chapterNumber + 1,  'brand' => 'pianote']) }}"
                         @endif
                         class="btn short collapse-square rounded ml-2 bg-white text-white inverted
                         {{ $chapterNumber < 10 ? '' : 'disabled' }}"
@@ -70,7 +76,9 @@
         @endslot
     @endcomponent
 
-    @include('books.partials.login-modal')
+    @include('books.partials.login-modal', ['redirectUrl' => url()->route('platform.books.resources',[
+    'brand'=>'pianote'
+])])
 
     @include('books.partials.ask-question-modal', [
         "level" => 'Level ' . $chapterNumber . ': ' . $thisChapter['title']
@@ -100,7 +108,7 @@
             <div class="flex flex-row">
                 <div class="flex flex-column grow bb-grey-1-1 tw-border-[#445F74] mb-3">
                     @foreach($thisChapter['related_lessons'] as $relatedLesson)
-                        @include('books.partials.related-content', [$relatedLesson])
+                        @include('books.partials.related-content', [$relatedLesson, 'brand'=>'pianote'])
                     @endforeach
                 </div>
             </div>
@@ -131,7 +139,7 @@
             <div class="flex flex-row">
                 <a
                     href="{{ $thisChapter['backing_tracks'] }}"
-                    class="tw-btn-primary tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600"
+                    class="tw-btn-primary tw-bg-pianote hover:tw-bg-pianote-600"
                     download
                     target="_blank"
                 >
@@ -143,6 +151,6 @@
     @endif
 @endsection
 
-@section('layout-scripts')
+@section('inject-components')
     <script src="{{ mix('platform/js/books.js') }}"></script>
 @endsection
