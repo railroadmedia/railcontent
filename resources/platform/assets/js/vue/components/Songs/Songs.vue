@@ -6,10 +6,13 @@ TODO:
 Mark as complete
 
 */
-import { ref } from 'vue';
+import { ref, onMounted, onBeforeUnmount } from 'vue';
 import ContentLessonActionButtons from '../../vuesora/components/VideoResources/ContentLessonActionButtons.vue';
 import SoundSlice from "../SoundSlice/SoundSlice.vue"
 import SoundSliceControls from "../SoundSlice/SoundSliceControls.vue";
+import ContentService from "../../vuesora/assets/js/services/content";
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner.vue';
+import { ArrowSmLeftIcon } from '@heroicons/vue/solid';
 
 const props = defineProps({
     brand: {
@@ -92,10 +95,10 @@ const props = defineProps({
 });
 
 const soundsliceObject = ref(props.assignments.length ? props.assignments[0] : {});
-
 const openSoundslice = ref(null);
-
 const loading = ref(true);
+const lessonProgressRef = ref(props.lessonProgress);
+const apiCallInProgress = ref(false);
 
 const openInstrumentless = () => {
     openSoundslice.value = 'instrumentless';
@@ -114,15 +117,61 @@ const handleOnLoad = () => {
     loading.value = false;
 };
 
+const markSongAsComplete = () => {
+    if (lessonProgressRef.value === '100') {
+        window.showconfirmationmodal({
+            title: 'Hold your horses… This will reset all of your progress, are you sure about this?',
+            callbacks: {
+                submit: () => {
+                    apiCallInProgress.value = true;
+                    ContentService.resetContentProgress(props.contentId)
+                        .then((resolved) => {
+                            if (resolved) {
+                                window.shownotification({
+                                    icon: 'check',
+                                    text: `Removed! Your progress has been reset.`
+                                })
+                                lessonProgressRef.value = null;
+                            }
+                        }).catch(() => {
+                            window.shownotification({
+                                icon: 'error',
+                                text: 'Woops! Something wrong happened, please try again later.'
+                            })
+                        }).finally(() => {
+                            apiCallInProgress.value = false;
+                        });
+                },
+            },
+        });
+    } else {
+        apiCallInProgress.value = true;
+        ContentService.markContentAsComplete(props.contentId).then(() => {
+            window.shownotification({
+                icon: 'check',
+                text: `You completed this song!`
+            })
+            lessonProgressRef.value = '100';
+        }).catch(() => {
+            window.shownotification({
+                icon: 'error',
+                text: 'Woops! Something wrong happened, please try again later.'
+            })
+        }).finally(() => {
+            apiCallInProgress.value = false;
+        });
+    }
+};
+
 </script>
 
 <template>
     <div class="tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8 mv-3">
         <div id="lessonInfo" class="tw-flex xl:tw-flex-row tw-flex-col align-v-top ">
             <div class="tw-flex tw-flex-col tw-pr-0 xl:tw-pr-8 tw-grow tw-w-full">
-                <a href="{{ backUrl ? backUrl : null }}"
+                <a :href="backUrl ? backUrl : null"
                     class="tw-no-underline tw-transition tw-inline-flex tw-text-[#00101D] dark:tw-text-white tw-items-center tw-w-fit">
-                    <i class="fas fa-arrow-circle-left tw-text-4xl tw-mr-2" aria-hidden="true"></i>
+                    <ArrowSmLeftIcon class="tw-w-[16px] tw-h-[16px] tw-inline tw-pr-[8px]" />
                     <span class="tw-font-bebas-neue tw-uppercase tw-text-xl">Back</span>
                 </a>
                 <div class="tw-flex tw-flex-col sm:tw-flex-row tw-py-4 song-content-container">
@@ -151,34 +200,38 @@ const handleOnLoad = () => {
                             </p>
 
                             <div class="tw-flex tw-flex-col 3xl:tw-flex-row">
-                                <button
-                                    @click="openInstrumentless"
+                                <button @click="openInstrumentless"
                                     :class="`tw-btn-primary tw-bg-${brand} hover:tw-bg-${brand}-600 tw-mb-3 3xl:tw-mr-3`">
-                                    <svg class="tw-mr-2 tw-text-base " width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M1.47852 8.15625C0.94349 8.15625 0.509766 8.58997 0.509766 9.125V14.875C0.509766 15.41 0.94349 15.8438 1.47852 15.8438C2.01354 15.8438 2.44727 15.41 2.44727 14.875V9.125C2.44727 8.58997 2.01354 8.15625 1.47852 8.15625ZM5.79102 3.48438C5.25599 3.48438 4.82227 3.9181 4.82227 4.45312V19.5469C4.82227 20.0819 5.25599 20.5156 5.79102 20.5156C6.32604 20.5156 6.75977 20.0819 6.75977 19.5469V4.45312C6.75977 3.9181 6.32604 3.48438 5.79102 3.48438ZM10.1035 0.25C9.56849 0.25 9.13477 0.683724 9.13477 1.21875V22.7812C9.13477 23.3163 9.56849 23.75 10.1035 23.75C10.6385 23.75 11.0723 23.3163 11.0723 22.7812V1.21875C11.0723 0.683724 10.6385 0.25 10.1035 0.25ZM14.416 5.64062C13.881 5.64062 13.4473 6.07435 13.4473 6.60938V17.3906C13.4473 17.9256 13.881 18.3594 14.416 18.3594C14.951 18.3594 15.3848 17.9256 15.3848 17.3906V6.60938C15.3848 6.07435 14.951 5.64062 14.416 5.64062ZM18.7285 2.04688C18.1935 2.04688 17.7598 2.4806 17.7598 3.01562V20.9844C17.7598 21.5194 18.1935 21.9531 18.7285 21.9531C19.2635 21.9531 19.6973 21.5194 19.6973 20.9844V3.01562C19.6973 2.4806 19.2635 2.04688 18.7285 2.04688ZM23.041 8.875C22.506 8.875 22.0723 9.30872 22.0723 9.84375V14.1562C22.0723 14.6913 22.506 15.125 23.041 15.125C23.576 15.125 24.0098 14.6913 24.0098 14.1562V9.84375C24.0098 9.30872 23.576 8.875 23.041 8.875Z" fill="white" stroke="white" stroke-width="0.5"/>
+                                    <svg class="tw-mr-2 tw-text-base " width="25" height="24" viewBox="0 0 25 24"
+                                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M1.47852 8.15625C0.94349 8.15625 0.509766 8.58997 0.509766 9.125V14.875C0.509766 15.41 0.94349 15.8438 1.47852 15.8438C2.01354 15.8438 2.44727 15.41 2.44727 14.875V9.125C2.44727 8.58997 2.01354 8.15625 1.47852 8.15625ZM5.79102 3.48438C5.25599 3.48438 4.82227 3.9181 4.82227 4.45312V19.5469C4.82227 20.0819 5.25599 20.5156 5.79102 20.5156C6.32604 20.5156 6.75977 20.0819 6.75977 19.5469V4.45312C6.75977 3.9181 6.32604 3.48438 5.79102 3.48438ZM10.1035 0.25C9.56849 0.25 9.13477 0.683724 9.13477 1.21875V22.7812C9.13477 23.3163 9.56849 23.75 10.1035 23.75C10.6385 23.75 11.0723 23.3163 11.0723 22.7812V1.21875C11.0723 0.683724 10.6385 0.25 10.1035 0.25ZM14.416 5.64062C13.881 5.64062 13.4473 6.07435 13.4473 6.60938V17.3906C13.4473 17.9256 13.881 18.3594 14.416 18.3594C14.951 18.3594 15.3848 17.9256 15.3848 17.3906V6.60938C15.3848 6.07435 14.951 5.64062 14.416 5.64062ZM18.7285 2.04688C18.1935 2.04688 17.7598 2.4806 17.7598 3.01562V20.9844C17.7598 21.5194 18.1935 21.9531 18.7285 21.9531C19.2635 21.9531 19.6973 21.5194 19.6973 20.9844V3.01562C19.6973 2.4806 19.2635 2.04688 18.7285 2.04688ZM23.041 8.875C22.506 8.875 22.0723 9.30872 22.0723 9.84375V14.1562C22.0723 14.6913 22.506 15.125 23.041 15.125C23.576 15.125 24.0098 14.6913 24.0098 14.1562V9.84375C24.0098 9.30872 23.576 8.875 23.041 8.875Z"
+                                            fill="white" stroke="white" stroke-width="0.5" />
                                     </svg>
 
                                     PLAY DRUMLESS TRACK
                                 </button>
 
-                                <button
-                                    @click="openFull"
+                                <button @click="openFull"
                                     :class="`tw-btn-primary tw-bg-${brand} hover:tw-bg-${brand}-600 tw-mb-3 3xl:tw-mr-3`">
                                     <i class="fas fa-play tw-mr-2 tw-text-base"></i>
                                     PLAY FULL TRACK
                                 </button>
 
                                 <button
-                                    :class="`tw-h-[50px] completeButton ${lessonProgress === '100' ? `is-complete tw-bg-${themeColor} tw-text-white dark:tw-bg-${themeColor} dark:tw-text-white tw-btn-primary` : 'tw-text-[#00101D] tw-box-border tw-leading-none tw-btn-secondary dark:tw-text-white hover:tw-bg-black/10 dark:hover:tw-bg-white/10'}`"
+                                    :class="`tw-h-[50px] ${lessonProgressRef === '100' ? `tw-bg-${themeColor} tw-text-white dark:tw-bg-${themeColor} dark:tw-text-white tw-btn-primary` : 'tw-text-[#00101D] tw-box-border tw-leading-none tw-btn-secondary dark:tw-text-white hover:tw-bg-black/10 dark:hover:tw-bg-white/10'}`"
                                     data-tooltip="Mark Lesson as Complete" :data-content-id="contentId"
-                                    >
-                                    <span v-if="lessonProgress !== '100'" class="incomplete">
-                                        <i class="fas fa-check tw-mr-2 tw-text-base"></i>
+                                    @click="markSongAsComplete">
+                                    <span :class="apiCallInProgress ? 'tw-text-white/60' : ''"
+                                        v-if="lessonProgressRef !== '100'">
+                                        <i v-if="!apiCallInProgress" class="fas fa-check tw-mr-2 tw-text-base"></i>
+                                        <LoadingSpinner class="tw-inline" v-if="apiCallInProgress" />
                                         Mark as Complete
                                     </span>
 
-                                    <span v-if="lessonProgress === '100'" class="complete">
-                                        <i class="fas fa-check tw-mr-2 tw-text-base"></i>
+                                    <span v-if="lessonProgressRef === '100'">
+                                        <i v-if="!apiCallInProgress" class="fas fa-check tw-mr-2 tw-text-base"></i>
+                                        <LoadingSpinner class="tw-inline" v-if="apiCallInProgress" />
                                         Completed
                                     </span>
                                 </button>
@@ -207,11 +260,13 @@ const handleOnLoad = () => {
 
                 <transition name="show-from-bottom">
                     <div v-if="openSoundslice === 'instrumentless'" id="practiceOverlay" class="bg-white">
-                        <SoundSlice :loading="loading" :user-id="userId" :theme-color="themeColor" additional-params="&layout=3&show_chords=0&scroll_type=1&recording_idx=1"
-                            :soundslice-slug="soundsliceObject.soundsliceSlug" @onLoad="handleOnLoad" @onPlay="handlePlay"
-                            @onPause="handlePause">
+                        <SoundSlice :loading="loading" :user-id="userId" :theme-color="themeColor"
+                            additional-params="&layout=3&show_chords=0&scroll_type=1&recording_idx=1"
+                            :soundslice-slug="soundsliceObject.soundsliceSlug" @onLoad="handleOnLoad"
+                            @onPlay="handlePlay" @onPause="handlePause">
                             <template v-slot:soundsliceControls>
-                                <SoundSliceControls :title="`${songTitle} (Instrumentless)`" :disable-next="true" :disable-prev="true" @onClose="handleCloseSoundslice" />
+                                <SoundSliceControls :title="`${songTitle} (Instrumentless)`" :disable-next="true"
+                                    :disable-prev="true" @onClose="handleCloseSoundslice" />
                             </template>
                         </SoundSlice>
                     </div>
@@ -219,11 +274,13 @@ const handleOnLoad = () => {
 
                 <transition name="show-from-bottom">
                     <div v-if="openSoundslice === 'full'" id="practiceOverlay" class="bg-white">
-                        <SoundSlice :loading="loading" :user-id="userId" :theme-color="themeColor" additional-params="&layout=3&show_chords=0&scroll_type=1&recording_idx=2"
-                            :soundslice-slug="soundsliceObject.soundsliceSlug" @onLoad="handleOnLoad" @onPlay="handlePlay"
-                            @onPause="handlePause">
+                        <SoundSlice :loading="loading" :user-id="userId" :theme-color="themeColor"
+                            additional-params="&layout=3&show_chords=0&scroll_type=1&recording_idx=2"
+                            :soundslice-slug="soundsliceObject.soundsliceSlug" @onLoad="handleOnLoad"
+                            @onPlay="handlePlay" @onPause="handlePause">
                             <template v-slot:soundsliceControls>
-                                <SoundSliceControls :title="`${songTitle} (Full)`" :disable-next="true" :disable-prev="true" @onClose="handleCloseSoundslice" />
+                                <SoundSliceControls :title="`${songTitle} (Full)`" :disable-next="true"
+                                    :disable-prev="true" @onClose="handleCloseSoundslice" />
                             </template>
                         </SoundSlice>
                     </div>
@@ -231,9 +288,8 @@ const handleOnLoad = () => {
 
                 <div class="flex flex-row song-comments-container">
                     <comments :brand="brand" :theme-color="themeColor" :content-id="contentId" :user-id="userId"
-                        :user-name="userName" :user-avatar="userAvatar"
-                        :user-xp="userXP" :user-access-level="userAccessLevel"
-                        :is-admin="isAdmin"></comments>
+                        :user-name="userName" :user-avatar="userAvatar" :user-xp="userXP"
+                        :user-access-level="userAccessLevel" :is-admin="isAdmin"></comments>
                 </div>
             </div>
 

@@ -173,6 +173,11 @@ const onResize = (e) => {
   }
 }
 
+const handleSubmit = () => {
+  confirmation.callbacks.submit();
+  confirmation.reset();
+};
+
 onMounted(() => {
   //Check if Mobile on Resize
   window.addEventListener("resize", onResize);
@@ -196,7 +201,7 @@ onUnmounted(() => {
       :title="confirmation.title"
       :subtitle="confirmation.subtitle"
       @onCancel="handleCloseConfirmationModal"
-      @onSubmit="confirmation.callbacks.submit"
+      @onSubmit="handleSubmit"
     />
 
     <Navbar :forceSidebarHidden="forceSidebarHidden" :brand="brand" :has-notifications="hasNotifications"
