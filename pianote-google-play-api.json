@@ -1,0 +1,12 @@
+{
+    "type": "service_account",
+    "project_id": "pianote-app",
+    "private_key_id": "d1cb4433a9278bede0f0e6dc9bf8cdd7b3cc0a1a",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDLvFU3Kw0Z1U+j\nBtocoNTv7raxL0dUJprpeWeDHermxELoq8ewnLqZEy1SkKRE5mfDi3kKZb9YkLhA\nzPSoL1myBYGO4Q/cvG2XUC4j8l4dHV+O76V/b/UjlXAvqSDqi6Vqq6qjrWlN2CW+\nVwevzvIy9BHyemOj/odchIQiIPwuit2mfiOKcIrCNHZhJxszvREFz3QXxulwbcUr\n1Ll0nalGKR0z3dpifqXARfRwoHBMH0XjbfrdtzxCLGiL5J9eVs4EJbG0FXqj34a6\nzgZBTlNpAZOq/jsgALEUvibcavuRQfnPRUv5O8Wz5SwKwk01ZUfaHqjy5fu96HCA\nLV0GaenNAgMBAAECggEAKXPM+c/QV1J7pM2q2JrPoG63LKdUMba2G61YJokSh3fk\nri7vTwugeq84cD1eMueXMqXgz4ECtNwjJQoeeE7EBvDQWrgHkG+lM518edNhGzbj\n/7LaPyrSG3aXEBdvC1G06xZ4/lr020IQceEGvxpR1JSsxyNoPRB3TZdnxALmlHhO\n5Bewg8l+b/Xt3pZT/T7DiWBLT7KT/6TUcI2T6U7esigHOB0/g6HLwKgOdmXLhN+L\nPxJrN26IsN0Frp1EXjegdFLGt264wC5lnhxAM23PDc4+kxQy4cahBk5fowAa5Ip6\n1J7qhR4YLTfNdre5xPWGsTGh4qWKEhw5RQ9CmVajUQKBgQD3Z2H2Beu/olOwg2MW\nJ5tUvQswAYBBUTRLLMBANvkC1WLWiCHYNTGWaTNMhuOGQsaRk2ZrChnGUoOOHip5\nGbda7bMkkeEpdTIcAz0zARy3UAPA0yWwAozi05o0kg5NDLFJ6ev6E9ZiCdiwIMYo\nORHZNIs9pXYU06A7ppVxZDqz3QKBgQDS0IdnuURVmcXjb80tD5K1ok7JH9p80x6T\n3TQdG8fokKjCrpYGuEFOyHf/qBymZ+sBbnYI+5Yzg/hYMRbOtT4OYI4DpdnUiWmO\n5ZZlfQs3r7NA4QSBHO8M9qCjXzZDLNqJi2rkwrJxPwHFwax16gTjM9nd/+jUkCra\nnZPqGvfmsQKBgQD3MUOOtoHDemRWJCC3vSEVPMFV2NoV6RXv2qnIP2Tz8NMNeP0f\n8p42I6yO1OO2fTe7smQNpQz1u/IX6IoVb51k68UnT96CNse3d4EJWh4gBoGJgy7P\nuuybokMcLaa+U2U8bc5KktGMKTxpVoXHIKZ1uGs7T/w4eO5LS3lbz4JbvQKBgEOW\nLUMYx4q2ERZ4mowOyRdIYP/kIXURbmUzbujCJlYuQpyfwmOHIRDz/lzNddn3yQUd\nd+QrXJ1Jew4zNr+wpaOQWxdaTbrxDxGME6qX60fAIbT0LzCBqTY7v4aBGPFyaOHd\n+7g5n2HlNFlFXVg0XbrFvdyJlgjH66VJDcnpOX8RAoGBAJfxATiryn8YpBewK+pC\nNcNad+BFzdW3JsI3t482WXpSTczU+C8rQYMVtCvKux3kWxQ1t83Nsp1x2gvR6d7M\nmdjFHhcLyyjy+Vys6DN+nACU+GI4hWhLVS97u/LozFAEfTNKnZoWOAlGseufddo7\nZJSNyyvpcazWSeivXsIGjNLQ\n-----END PRIVATE KEY-----\n",
+    "client_email": "pianote-pubsub@pianote-app.iam.gserviceaccount.com",
+    "client_id": "109102173147133877055",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/pianote-pubsub%40pianote-app.iam.gserviceaccount.com"
+}
