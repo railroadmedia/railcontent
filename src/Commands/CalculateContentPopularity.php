@@ -74,6 +74,7 @@ class CalculateContentPopularity extends Command
 
     public function updatePopularity(string $startDate, DatabaseManager $databaseManager): void
     {
+        $this->info("Update Content Popularity");
         // we divide by days published ago so weight newer content higher, can update the divide value to adjust how
         // much to weight newer content
         $sql = <<<'EOT'
@@ -114,6 +115,7 @@ class CalculateContentPopularity extends Command
         ElasticService $elasticService,
         \Illuminate\Database\Connection $dbConnection
     ): int {
+        $this->info("Update Elastic Search Popularity");
         $client = $elasticService->getClient();
         if (!$client->indices()
             ->exists(['index' => 'content'])) {
