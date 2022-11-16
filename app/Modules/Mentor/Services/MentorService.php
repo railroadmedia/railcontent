@@ -185,11 +185,16 @@ class MentorService
         return $mentorStudents;
     }
 
-    public function reassignRandomStudents(int $mentorUserId, int $nStudents): void
+    public function reassignRandomStudents(int $mentorUserId, int $nStudents, int $toMentorUserId = 0): void
     {
         $mentor = $this->getMentorOrNull($mentorUserId);
         if (!$mentor) {
-            throw new Exception('Mentor does not exist');
+            throw new Exception("Mentor $mentorUserId does not exist");
+        }
+
+        $toMentor = $this->getMentorOrNull($toMentorUserId);
+        if (!$mentor) {
+            throw new Exception("Mentor $toMentorUserId does not exist");
         }
         $mentorStudents = MentorStudent::query()
             ->with('user')
@@ -208,7 +213,7 @@ class MentorService
             ->inRandomOrder()
             ->take($nStudents)
             ->get();
-        $this->bulkReassignMentors($mentorStudents, $mentorUserId);
+        $this->bulkReassignMentors($mentorStudents, $mentorUserId, $toMentor);
         $this->recalculateMentorTotals($mentor);
     }
 
@@ -281,13 +286,16 @@ class MentorService
         $mentor->save();
     }
 
-    private function bulkReassignMentors(Collection $mentorStudents, int $ignoreMentorUserID): void
-    {
+    private function bulkReassignMentors(
+        Collection $mentorStudents,
+        int $ignoreMentorUserID,
+        ?Mentor $toMentor = null
+    ): void {
         $mentors = [];
         foreach ($mentorStudents as $mentorStudent) {
             /* @var MentorStudent $mentorStudent */
             if ($mentorStudent->isActive()) {
-                $newMentor = $this->chooseNewMentor($mentorStudent, $ignoreMentorUserID);
+                $newMentor = $toMentor ?? $this->chooseNewMentor($mentorStudent, $ignoreMentorUserID);
                 if ($newMentor == null) {
                     throw new Exception("Unable to reassign User to Mentor $mentorStudent->user_id");
                 }
