@@ -30,9 +30,9 @@
             @update:inputValue="formData.message = $event" id="support-description" placeholder="Add message here..." />
 
         <div class="flex flex-col-reverse sm:flex-row full">
-            <div class="my-4 inline-flex mx-auto sm:mx-0 sm:my-0 sm:w-1/2" v-if="!apiCallPending">
+            <div class="my-4 inline-flex mx-auto sm:mx-0 sm:my-0 sm:w-1/2">
                 <!-- Recaptcha -->
-                <recaptcha :siteKey="captchakey" @update:verified="formVerified = $event" />
+                <recaptcha :key="apiCallPending ? 'pending-recaptcha' : 'ready-recaptcha'" :siteKey="captchakey" @update:verified="formVerified = $event" />
             </div>
             <div class="sm:w-72 sm:ml-auto">
                 <!-- File Upload Button -->
