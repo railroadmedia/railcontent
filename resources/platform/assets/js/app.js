@@ -21,7 +21,6 @@ import LoginForm from './vue/components/LoginForm/LoginForm.vue';
 import ResetPassForm from './vue/components/ResetPassForm/ResetPassForm.vue';
 import MusoraIcon from './vue/components/MusoraIcons/MusoraIcon.vue'
 import GearCarousel from './vue/components/GearCarousel/GearCarousel.vue';
-import SongsContainer from './vue/components/Songs/Songs.vue'
 
 //Vuesora Assets
 import Forms from './vue/vuesora/assets/js/classes/forms';
@@ -246,10 +245,10 @@ app.component('AppContainer', AppContainer)
     .component('ContentAssignment', ContentAssignment)
     .component('AddEventModal', AddEventModal)
 
-    .component('SongsContainer', defineAsyncComponent(() =>
+    .component('Song', defineAsyncComponent(() =>
         import(
-            /* webpackChunkName: "songs-container" */
-            `./vue/components/Songs/Songs.vue`
+            /* webpackChunkName: "song" */
+            `./vue/components/Songs/Song.vue`
         )
     ))
 

@@ -21849,6 +21849,9 @@ a:visited{
 .tw-mt-\[58px\]{
   margin-top: 58px !important;
 }
+.tw-mr-\[8px\]{
+  margin-right: 8px !important;
+}
 .tw-mr-12{
   margin-right: 3rem !important;
 }
@@ -23770,9 +23773,6 @@ a:visited{
 }
 .tw-pr-0{
   padding-right: 0px !important;
-}
-.tw-pr-\[8px\]{
-  padding-right: 8px !important;
 }
 .tw-pl-2{
   padding-left: 0.5rem !important;

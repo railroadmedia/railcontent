@@ -35,7 +35,7 @@
         }
     @endphp
 
-    <songs-container
+    <songs
         theme-color="{{ $themeColor }}"
         brand="{{ $brand }}"
         back-url="{{ url()->route('platform.content-type-catalog', ["contentTypeName" => 'songs']) }}"
@@ -71,7 +71,7 @@
                 "themeColor" => 'drumeo'
             ])
         </template>
-    </songs-container>
+    </songs>
 
     @include('partials.bladesora.members.content._lesson-complete', [
         "themeColor" => $themeColor,
