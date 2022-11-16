@@ -9,11 +9,12 @@ class NavigationService
      */
     public static function getSidebarSections()
     {
-        if (empty(user())) {
+        $user = user();
+        if (empty($user)) {
             return [];
         }
 
-        if (user()->isPackOnlyOwner()) {
+        if ($user->isPackOnlyOwner() || !$user->isAMember() || $user->isAnExpiredMember()) {
             return [
                 [ // section
                     [
@@ -29,8 +30,8 @@ class NavigationService
                 ],
                 [ // section
                     [
-                        'name' => 'Packs',
-                        'path' => '/'.brand().'/packs',
+                        'name' => brand() === 'singeo' ? 'Courses' : 'Packs',
+                        'path' => brand() === 'singeo' ? '/'.brand().'/courses' : '/'.brand().'/packs',
                         'icon' => 'box',
                     ],
                 ],
