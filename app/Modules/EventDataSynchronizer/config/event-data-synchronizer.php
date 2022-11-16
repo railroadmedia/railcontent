@@ -305,6 +305,7 @@ return [
         'drumeo_edge_30_days_access' => 'Drumeo Edge',
         'drumeo_access_30-days' => 'Drumeo Edge',
         'drumeo_edge_1_year_access' => 'Drumeo Edge',
+        'drumeo_access_90-days' => 'Drumeo Edge',
 
         'learn-songs-faster-pack' => 'Learn Songs Faster',
         'independence-made-easy-pack' => 'Independence Made Easy - Pack',
@@ -370,6 +371,7 @@ return [
         'drumeo_edge_30_days_access',
         'drumeo_access_30-days',
         'drumeo_edge_1_year_access',
+        'drumeo_access_90-days',
         'DLM-Trial-30-Day',
     ],
     'singeo_membership_product_skus' => [
