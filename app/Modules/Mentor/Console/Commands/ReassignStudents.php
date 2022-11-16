@@ -7,7 +7,7 @@ use Illuminate\Console\Command;
 
 class ReassignStudents extends Command
 {
-    protected $signature = 'mentors:reassignRandom {mentorUserId} {nStudents} {toMentorUserId=0}';
+    protected $signature = 'mentors:reassignRandom {mentorUserId} {nStudents} {toMentorUserId=0} {allStudents=0}';
     protected $description = 'Unassign n random students from the mentor provided. If you wish to reassign them to specific mentors adjust the max student capacities appropriately beforehand';
 
     public function handle(MentorService $mentorService)
@@ -15,7 +15,8 @@ class ReassignStudents extends Command
         $mentorUserId = $this->argument('mentorUserId');
         $nStudents = $this->argument('nStudents');
         $toMentorUserId = $this->argument('toMentorUserId');
+        $allStudents = $this->argument('allStudents');
         $this->info("Reassigning $nStudents random students from mentor $mentorUserId");
-        $mentorService->reassignRandomStudents($mentorUserId, $nStudents, $toMentorUserId);
+        $mentorService->reassignRandomStudents($mentorUserId, $nStudents, $toMentorUserId, $allStudents);
     }
 }

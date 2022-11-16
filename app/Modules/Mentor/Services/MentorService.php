@@ -185,8 +185,12 @@ class MentorService
         return $mentorStudents;
     }
 
-    public function reassignRandomStudents(int $mentorUserId, int $nStudents, int $toMentorUserId = 0): void
-    {
+    public function reassignRandomStudents(
+        int $mentorUserId,
+        int $nStudents,
+        int $toMentorUserId = 0,
+        bool $allStudents = false
+    ): void {
         $mentor = $this->getMentorOrNull($mentorUserId);
         if (!$mentor) {
             throw new Exception("Mentor $mentorUserId does not exist");
@@ -196,20 +200,23 @@ class MentorService
         if (!$mentor) {
             throw new Exception("Mentor $toMentorUserId does not exist");
         }
-        $mentorStudents = MentorStudent::query()
+        $query = MentorStudent::query()
             ->with('user')
             ->join(
                 'usora_users',
                 'usora_users.id',
                 '=',
                 'mentor_students.user_id'
-            )->where('mentor_user_id', '=', $mentorUserId)
-            ->where(
+            )->where('mentor_user_id', '=', $mentorUserId);
+        if (!$allStudents) {
+            $query = $query->
+            where(
                 'usora_users.membership_expiration_date',
                 '>',
                 Carbon::now()->addDays(-config('mentor.active_after_membership_expired_days'))
-            )
-            ->select('mentor_students.*')
+            );
+        }
+        $mentorStudents = $query->select('mentor_students.*')
             ->inRandomOrder()
             ->take($nStudents)
             ->get();
@@ -289,7 +296,7 @@ class MentorService
     private function bulkReassignMentors(
         Collection $mentorStudents,
         int $ignoreMentorUserID,
-        ?Mentor $toMentor = null
+        ?Mentor $toMentor = null,
     ): void {
         $mentors = [];
         foreach ($mentorStudents as $mentorStudent) {
