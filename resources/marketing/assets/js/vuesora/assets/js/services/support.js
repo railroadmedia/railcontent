@@ -69,7 +69,5 @@ export default {
                 'Content-Type': 'multipart/form-data'}
             }
         )
-            .then(response => response.data)
-            .catch(ErrorHandler);
     },
 };
