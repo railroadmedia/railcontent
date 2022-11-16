@@ -13,11 +13,10 @@ class SyncMentorsWithCustomerIO extends Command
 
     public function handle()
     {
-        $this->info("Unify Subscriptions...");
-        $success = $this->runChainQuery(function (int $skip, int $take) {
+        $this->info("Sync mentor students with customerIO");
+        $this->runChainQuery(function (int $skip, int $take) {
             return new SyncMentorsWithCustomerIOJob($skip, $take);
         }, chunks: 500);
-        return $success;
     }
 
 
