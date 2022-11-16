@@ -16448,6 +16448,11 @@ content-catalogue, transition {
     padding-bottom: 50%;
   }
 }
+@media screen and (max-width: 767px) {
+  .gq-large-thumb {
+    display: none;
+  }
+}
 /**
 * Make a horizontal gradient with 2 colors
 *
@@ -16910,7 +16915,7 @@ content-catalogue, transition {
 }
 
 .sheet-music-col {
-  flex: 0 0 250px;
+  flex: 0 0 200px;
 }
 
 .login-col {
@@ -22920,6 +22925,9 @@ a:visited{
 .tw-border-t{
   border-top-width: 1px !important;
 }
+.tw-border-b-\[3px\]{
+  border-bottom-width: 3px !important;
+}
 .tw-border-t-\[1px\]{
   border-top-width: 1px !important;
 }
@@ -24777,6 +24785,9 @@ a:visited{
 .tw-dark .dark\:tw-opacity-20{
   opacity: 0.2 !important;
 }
+.tw-dark .dark\:tw-opacity-\[\.85\]{
+  opacity: .85 !important;
+}
 .tw-dark .dark\:tw-invert{
   --tw-invert: invert(100%) !important;
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow) !important;
@@ -25326,9 +25337,6 @@ a:visited{
   .md\:tw-h-60{
     height: 15rem !important;
   }
-  .md\:tw-h-\[276px\]{
-    height: 276px !important;
-  }
   .md\:tw-h-full{
     height: 100% !important;
   }
@@ -25623,10 +25631,6 @@ a:visited{
     font-size: 1rem !important;
     line-height: 1.5rem !important;
   }
-  .md\:tw-text-xl{
-    font-size: 1.25rem !important;
-    line-height: 1.75rem !important;
-  }
   .md\:tw-text-\[16px\]{
     font-size: 16px !important;
   }
@@ -25644,6 +25648,10 @@ a:visited{
   .md\:tw-text-sm{
     font-size: 0.875rem !important;
     line-height: 1.25rem !important;
+  }
+  .md\:tw-text-xl{
+    font-size: 1.25rem !important;
+    line-height: 1.75rem !important;
   }
   .md\:tw-leading-none{
     line-height: 1 !important;
@@ -25921,9 +25929,6 @@ a:visited{
   .lg\:tw-pr-6{
     padding-right: 1.5rem !important;
   }
-  .lg\:tw-pb-0{
-    padding-bottom: 0px !important;
-  }
   .lg\:tw-pt-0{
     padding-top: 0px !important;
   }
@@ -26088,10 +26093,6 @@ a:visited{
   .xl\:tw-text-xl{
     font-size: 1.25rem !important;
     line-height: 1.75rem !important;
-  }
-  .xl\:tw-text-4xl{
-    font-size: 2.25rem !important;
-    line-height: 2.5rem !important;
   }
   .xl\:tw-text-\[30px\]{
     font-size: 30px !important;
