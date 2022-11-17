@@ -23,10 +23,11 @@
         "laravel/sanctum": "^2.15",
         "laravel/tinker": "^2.7",
         "laravel/vapor-cli": "^1.45",
+
         "laravel/vapor-core": "^2.22",
         "laravel/vapor-ui": "^1.5",
         "league/flysystem-aws-s3-v3": "^3.0",
-        "railroad/ecommerce": "dev-support-old-app-purchases as v5.0.22",
+        "railroad/ecommerce": "dev-support-old-app-purchases as v5.0.23",
         "railroad/location": "3.0.*",
         "railroad/mailora": "^3.0",
         "railroad/musora-api": "dev-v2.0-railcontent-v2-integration",
