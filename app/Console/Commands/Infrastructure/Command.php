@@ -85,6 +85,11 @@ abstract class Command extends CommandBase
             $jobs[] = $job;
         }
         $nJobs = count($jobs);
+        if ($nJobs == 0) {
+            $this->info("No jobs to dispatch.");
+            $this->info("Finished $this->name");
+            return true;
+        }
         $this->info("Dispatching $nJobs jobs.");
         $batch = Bus::batch($jobs)->name(class_basename($this))->dispatch();
         $this->info("Dispatched $nJobs jobs.");
@@ -97,7 +102,7 @@ abstract class Command extends CommandBase
         if (App::environment('local') && env(
                 'QUEUE_CONNECTION'
             ) == 'sync') { //progress bar not useful when running vapor commands
-            if($batch) {
+            if ($batch) {
                 $batchId = $batch->id;
                 while (!$batch->finished()) {
                     $batch = Bus::findBatch($batchId);

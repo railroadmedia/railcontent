@@ -20,7 +20,7 @@ This repository is designed to run on PHP 8.0, MySQL 8.0, and Apache/PHP-FPM.
         ```
     - compile frontend assets
         ```
-        cd /app/musora-web-platform && nvm use 16 && yarn && yarn platform-production && yarn marketing-production
+        cd /app/musora-web-platform && nvm use 16 && yarn && yarn platform-production && yarn marketing-production && yarn pp && echo "gotem"
         ```
 - [https://devplatform.musora.com:8443](https://devplatform.musora.com:8443) should now load and the app and automated testing should work
 

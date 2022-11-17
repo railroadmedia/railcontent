@@ -24,6 +24,7 @@ class NotificationDecorator
                     'https://www.guitareo.com',
                     'www.guitareo.com',
                     'https://www.pianote.com//jump-to-comment',
+                    'https://www.musora.com//jump-to-comment',
                     '//jump-to-comment'
                 ],
                 [
@@ -37,6 +38,7 @@ class NotificationDecorator
                     $domain.'/'.$brand.'/jump-to-comment',
                     $domain,
                     $domain,
+                    $domain.'/'.$brand.'/jump-to-comment',
                     $domain.'/'.$brand.'/jump-to-comment',
                     $domain.'/'.$brand.'/jump-to-comment',
                 ],
