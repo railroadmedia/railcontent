@@ -616,6 +616,7 @@ return [
             'drumeo_access_30-days',
             'DLM-Trial-30-Day',
             'drumeo_edge_1_year_access',
+            'drumeo_access_90-days',
         ],
     ],
 
@@ -640,6 +641,7 @@ return [
         'drumeo_access_30-days',
         'DLM-Trial-30-Day',
         'drumeo_edge_1_year_access',
+        'drumeo_access_90-days',
     ],
 
     'code_redeem_product_sku_swap' => [
