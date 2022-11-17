@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Modules\CustomerIO\Services\CustomerIoService;
 use App\Services\CalendarService;
 use Carbon\Carbon;
 use Modules\UserManagementSystem\Events\MobileAppLogin;
@@ -27,6 +28,7 @@ class MusoraApiUserProvider implements UserProviderInterface
     private CommentService $commentService;
     private PostRepository $postRepository;
     private ContentService $contentService;
+    private CustomerIoService $customerIoService;
     private SubscriptionService $subscriptionService;
 
     public function __construct(
@@ -36,6 +38,7 @@ class MusoraApiUserProvider implements UserProviderInterface
         CommentService $commentService,
         PostRepository $postRepository,
         ContentService $contentService,
+        CustomerIoService $customerIoService,
         SubscriptionService $subscriptionService
     ) {
         $this->productRepository = $productRepository;
@@ -44,6 +47,7 @@ class MusoraApiUserProvider implements UserProviderInterface
         $this->commentService = $commentService;
         $this->postRepository = $postRepository;
         $this->contentService = $contentService;
+        $this->customerIoService = $customerIoService;
         $this->subscriptionService = $subscriptionService;
     }
 
@@ -129,7 +133,10 @@ class MusoraApiUserProvider implements UserProviderInterface
             $hasCompletedMethod = $methodContent['completed'];
         }
 
-        return [
+        $customerIoData = $this->customerIoService->getCustomerByUserId(config('event-data-synchronizer.customer_io_account_to_sync_all_brands'),
+                                                                        $user->id);
+
+        return array_merge([
             'id' => $user->id,
             'email' => $user->email,
             'permission_level' => $user->permission_level,
@@ -142,7 +149,7 @@ class MusoraApiUserProvider implements UserProviderInterface
             'level_rank' => $user->getMethodLevel(),
             'has_started_method' => $hasStartedMethod ?? false,
             'has_completed_method' => $hasCompletedMethod ?? false,
-        ];
+        ], $customerIoData->getExternalAttributes());
     }
 
     public function getCurrentUserExperienceData()
