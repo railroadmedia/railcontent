@@ -64,6 +64,11 @@ class RailnotificationsForumProvider implements RailforumProviderInterface
         return $post;
     }
 
+    public function getPostLikeCount(int $postId) : int
+    {
+        return $this->postLikeRepository->countPostLikes($postId);
+    }
+
     /**
      * @param int $threadId
      * @return array|\Railroad\Resora\Entities\Entity|null

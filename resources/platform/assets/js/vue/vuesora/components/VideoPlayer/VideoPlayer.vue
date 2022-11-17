@@ -438,8 +438,10 @@ function fullscreen() {
     if (Screenfull.enabled) {
         Screenfull.toggle(container.value);
     } else {
-        // Otherwise we just take the video element and make it fullscreen
-        mediaElement.value.requestFullscreen();
+        /* copied */
+        const video= mediaElement.value;
+        const rfs = video.requestFullscreen || video.webkitRequestFullScreen || video.mozRequestFullScreen || video.msRequestFullscreen;
+        rfs.call(video);
     }
 }
 
