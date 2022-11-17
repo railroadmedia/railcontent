@@ -115,7 +115,7 @@ class CalculateContentPopularity extends Command
         ElasticService $elasticService,
         \Illuminate\Database\Connection $dbConnection
     ): int {
-        $this->info("Update Elastic Search Popularity");
+        $this->info("Update Elastic Search Popularity (disabled)");
         $client = $elasticService->getClient();
         if (!$client->indices()
             ->exists(['index' => 'content'])) {
@@ -134,28 +134,28 @@ class CalculateContentPopularity extends Command
                         continue;
                     }
                     $rowsUpdated++;
-                    $contentID = $row->id;
-
-                    $updateRequest = [
-                        'index' => 'content',
-                        'refresh' => true,
-                        'body' => [
-                            'query' => [
-                                'term' => [
-                                    'content_id' => "$contentID",
-                                ],
-                            ],
-                            'script' => [
-                                "lang" => "painless",
-                                'inline' => 'ctx._source.popularity = params.value',
-                                'params' => [
-                                    'value' => $row->popularity,
-                                ],
-                            ],
-                        ],
-                    ];
-
-                    $client->updateByQuery($updateRequest);
+//                    $contentID = $row->id;
+//
+//                    $updateRequest = [
+//                        'index' => 'content',
+//                        'refresh' => true,
+//                        'body' => [
+//                            'query' => [
+//                                'term' => [
+//                                    'content_id' => "$contentID",
+//                                ],
+//                            ],
+//                            'script' => [
+//                                "lang" => "painless",
+//                                'inline' => 'ctx._source.popularity = params.value',
+//                                'params' => [
+//                                    'value' => $row->popularity,
+//                                ],
+//                            ],
+//                        ],
+//                    ];
+//
+//                    $client->updateByQuery($updateRequest);
                 }
             });
         return $rowsUpdated;
