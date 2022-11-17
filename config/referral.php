@@ -40,7 +40,12 @@ return [
     ],
 
     // once claimed, this product is assigned to the claiming user for the amount of days
-    'referral_program_product_sku' => 'drumeo_access_30-days',
+    'referral_program_product_sku' => [
+        'drumeo' => 'drumeo_access_30-days',
+        'pianote' => 'pianote_access_30-days',
+        'guitareo' => 'guitareo_access_30-days',
+        'singeo' => 'singeo_access_30-days',
+    ],
     'referral_program_product_free_days' => 30,
 
     // google reCaptcha, use this in form validation
