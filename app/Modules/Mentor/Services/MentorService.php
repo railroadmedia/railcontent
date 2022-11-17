@@ -164,7 +164,8 @@ class MentorService
         if (!$this->mentors) {
             $this->mentors = Mentor::all();
         }
-        $mentors = $this->mentors->where(fn(Mentor $t) => Str::contains($t->supported_brands, $brand));
+        $mentors = $this->mentors->where(fn(Mentor $t) => Str::contains($t->supported_brands, $brand))
+            ->where('active_student_max_count', '>', '0');
         return $mentors;
     }
 
