@@ -131,6 +131,13 @@ class MusoraApiUserProvider implements UserProviderInterface
 
         $customerIoData = $this->customerIoService->getCustomerByUserId(config('event-data-synchronizer.customer_io_account_to_sync_all_brands'),
                                                                         $user->id);
+        $extraData = [];
+        if (!empty($externalAttributes = $customerIoData->getExternalAttributes())) {
+            $extraData = [
+                'cio_id' => $externalAttributes['cio_id'],
+                'customer_io_id' => $externalAttributes['id'],
+            ];
+        }
 
         return array_merge([
             'id' => $user->id,
@@ -145,7 +152,7 @@ class MusoraApiUserProvider implements UserProviderInterface
             'level_rank' => $user->getMethodLevel(),
             'has_started_method' => $hasStartedMethod ?? false,
             'has_completed_method' => $hasCompletedMethod ?? false,
-        ], $customerIoData->getExternalAttributes());
+        ], $extraData);
     }
 
     public function getCurrentUserExperienceData()
