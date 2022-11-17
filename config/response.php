@@ -1897,6 +1897,7 @@ return [
             'isGoogleAppSubscriber',
             'permission_level',
             'helpscout_beacon_id',
+            'cio_id'
         ],
 
         'quick-tips' => [
