@@ -45,6 +45,7 @@ class AppServiceProvider extends ServiceProvider
             [
                 'drumeo.sales.partials._nav',
                 'pianote.sales.nav',
+                'pianote._partials._nav',
                 'guitareo.sales.partials._nav',
                 'singeo.sales.partials._nav',
             ],
