@@ -439,7 +439,7 @@ const fullscreen = () => {
         Screenfull.toggle(container.value);
     } else {
         /* copied */
-        const video = document.getElementById('video-element-id');
+        const video = document.getElementById('video-component-id');
         const rfs = video.requestFullscreen || video.webkitEnterFullScreen || video.webkitRequestFullScreen || video.mozRequestFullScreen || video.msRequestFullscreen;
         rfs.call(video);
     }
