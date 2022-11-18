@@ -439,10 +439,8 @@ const fullscreen = () => {
         Screenfull.toggle(container.value);
     } else {
         /* copied */
-        const video= player.value;
-        console.log('video', video);
-        const rfs = video.requestFullscreen || video.webkitRequestFullScreen || video.mozRequestFullScreen || video.msRequestFullscreen;
-        console.log('rfs', rfs);
+        const video = document.getElementById('video-element-id');
+        const rfs = video.requestFullscreen || video.webkitEnterFullScreen || video.webkitRequestFullScreen || video.mozRequestFullScreen || video.msRequestFullscreen;
         rfs.call(video);
     }
 }
