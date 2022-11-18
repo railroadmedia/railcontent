@@ -435,11 +435,11 @@ const fullscreen = () => {
     isTransitioning.value = false;
 
     // If we have access to the requestFullscreen API then use that
-    if (false && Screenfull.enabled) {
+    if (Screenfull.enabled) {
         Screenfull.toggle(container.value);
     } else {
         /* copied */
-        const video= mediaElement.value;
+        const video= player.value;
         console.log('video', video);
         const rfs = video.requestFullscreen || video.webkitRequestFullScreen || video.mozRequestFullScreen || video.msRequestFullscreen;
         console.log('rfs', rfs);
