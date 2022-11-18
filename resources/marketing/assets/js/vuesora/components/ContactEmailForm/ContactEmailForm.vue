@@ -1,130 +1,79 @@
 <template>
-    <form class="flex flex-col py-4"
-          novalidate="true"
-          @submit.prevent="submitForm"
-    >
+    <form class="flex flex-col py-4" novalidate="true" @submit.prevent="submitForm">
         <!-- Name -->
-        <text-input
-            name="name"
-            :required="true"
-            :invalid="!formValid && !textFieldValid"
-            :inputValue="formData.name"
-            @update:textFieldValid="textFieldValid = $event"
-            @update:inputValue="formData.name = $event"
-            id="customer-name"
-            placeholder="Enter your name..."
-        />
+        <text-input name="name" :required="true" :invalid="!formValid && !textFieldValid" :inputValue="formData.name"
+            @update:textFieldValid="textFieldValid = $event" @update:inputValue="formData.name = $event"
+            id="customer-name" placeholder="Enter your name..." />
 
-        <radio-buttons
-            name="Do you have a membership with us?"
-            groupName="membership"
-            :required="true"
-            :invalid="!formValid && !radioFieldsValid"
-            :buttonsList="buttonsList"
-            @update:radioFieldsValid="radioFieldsValid = $event"
-            @updateValue="updateMembershipStatus($event)"
-            :showSelectMessage="formData.isMember === true"
-            errorMessage="Please select an option."
-            selectMessage="If your account is under a different email address than noted below, please provide it in your description."
-        />
+        <radio-buttons name="Do you have a membership with us?" groupName="membership" :required="true"
+            :invalid="!formValid && !radioFieldsValid" :buttonsList="buttonsList"
+            @update:radioFieldsValid="radioFieldsValid = $event" @updateValue="updateMembershipStatus($event)"
+            :showSelectMessage="formData.isMember === true" errorMessage="Please select an option."
+            selectMessage="If your account is under a different email address than noted below, please provide it in your description." />
 
         <!-- Email -->
-        <email-input
-            name="Email Address"
-            :required="true"
-            :invalid="!formValid && !emailFieldValid"
-            :inputValue="formData.email"
-            @update:emailFieldValid="emailFieldValid = $event"
-            @update:inputValue="formData.email = $event"
-            id="customer-email"
-            placeholder="Enter your email address..."
-        />
+        <email-input name="Email Address" :required="true" :invalid="!formValid && !emailFieldValid"
+            :inputValue="formData.email" @update:emailFieldValid="emailFieldValid = $event"
+            @update:inputValue="formData.email = $event" id="customer-email"
+            placeholder="Enter your email address..." />
 
         <!-- Help Dropdown -->
-        <multilevel-dropdown
-            label="What can we help you with?"
-            name="support-options"
-            id="support-listbox"
-            :theme="brand"
-            :required="true"
-            :invalid="!formValid && !selectFieldValid"
-            :selectedValue="formData.supportOption"
-            :listData="optionsData"
-            @updateValue="updateSupportOption($event)"
+        <multilevel-dropdown label="What can we help you with?" name="support-options" id="support-listbox"
+            :theme="brand" :required="true" :invalid="!formValid && !selectFieldValid"
+            :selectedValue="formData.supportOption" :listData="optionsData" @updateValue="updateSupportOption($event)"
             placeholder="Please select the option that is closest to your request..."
-            errorMessage="Please select an option that is closest to your request."
-        />
+            errorMessage="Please select an option that is closest to your request." />
 
         <!-- Description -->
-        <textarea-input
-            name="description"
-            :required="true"
-            :invalid="!formValid && !messageFieldValid"
-            :resize="false"
-            :rows="4"
-            :inputValue="formData.message"
-            @update:messageFieldValid="messageFieldValid = $event"
-            @update:inputValue="formData.message = $event"
-            id="support-description"
-            placeholder="Add message here..."
-        />
+        <textarea-input name="description" :required="true" :invalid="!formValid && !messageFieldValid" :resize="false"
+            :rows="4" :inputValue="formData.message" @update:messageFieldValid="messageFieldValid = $event"
+            @update:inputValue="formData.message = $event" id="support-description" placeholder="Add message here..." />
 
         <div class="flex flex-col-reverse sm:flex-row full">
             <div class="my-4 inline-flex mx-auto sm:mx-0 sm:my-0 sm:w-1/2">
                 <!-- Recaptcha -->
-                <recaptcha :siteKey="captchakey"
-                           @update:verified="formVerified = $event"
-                />
+                <recaptcha :key="apiCallPending ? 'pending-recaptcha' : 'ready-recaptcha'" :siteKey="captchakey" @update:verified="formVerified = $event" />
             </div>
             <div class="sm:w-72 sm:ml-auto">
                 <!-- File Upload Button -->
-                <file-input
-    
-                    name="attach file"
-                    id="support-file"
-                    :required="false"
-                    :disabled="false"
-                    :multiple="false"
-                    accept="video/*,image/*"
-                    :files="formData.attachments"
-                    message="For security reasons, we only accept image and video files."
-                    :megabiteLimit="100"
-                    @attachFile="attachFile($event)"
-                    @removeFile="removeFile($event)"
-                    @clearFiles="clearFiles()"
-                />
+                <file-input name="attach file" id="support-file" :required="false" :disabled="false" :multiple="false"
+                    accept="video/*,image/*" :files="formData.attachments"
+                    message="For security reasons, we only accept image and video files." :megabiteLimit="100"
+                    @attachFile="attachFile($event)" @removeFile="removeFile($event)" @clearFiles="clearFiles()" />
             </div>
 
         </div>
 
         <!-- SUBMIT BUTTON -->
-        <button class="btn-primary self-start mr-auto w-full sm:w-min"
-                type="submit"
-                :disabled="!formValid || !formVerified"
-                :class="`bg-${brand} hover:bg-${brand}-600`"
-        >
-                Submit
+        <button class="btn-primary self-start mr-auto w-full sm:w-min" type="submit"
+            :disabled="!formValid || !formVerified || apiCallPending" :class="`bg-${brand} hover:bg-${brand}-600`">
+            Submit
         </button>
 
         <!-- Response Message -->
         <div class="flex z-150 fixed rounded-lg left-8 p-6 text-base shadow-lg mr-8 transition-all duration-200 ease-in-out"
-             :class="[responseMessageVisible ? 'bottom-8': '-bottom-52', formSuccessful ? 'bg-green-50 text-green-600' : 'bg-red-50 text-red-600']"
-        >
-            <svg v-if="formSuccessful" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500 mr-4" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+            :class="[responseMessageVisible ? 'bottom-8' : '-bottom-52', formSuccessful ? 'bg-green-50 text-green-600' : 'bg-red-50 text-red-600']">
+            <svg v-if="formSuccessful" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500 mr-4"
+                viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd" />
             </svg>
-            <svg v-else xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-500 mr-4" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+            <svg v-else xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-500 mr-4" viewBox="0 0 20 20"
+                fill="currentColor">
+                <path fill-rule="evenodd"
+                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                    clip-rule="evenodd" />
             </svg>
             <div v-if="formSuccessful">
                 <p class="font-bold mb-3">Your message was successfully sent!</p>
                 <p class="mb-2">Your message has been submitted to the support team and will be reviewed shortly</p>
-                <p class="font-bold mb-2 cursor-pointer" @click="responseMessageVisible = false">Dismiss</p>
+                <p class="font-bold mb-2 cursor-pointer" @click="handleResponseMessage">Dismiss</p>
             </div>
             <div v-else>
                 <p class="font-bold mb-3">Your message was not sent</p>
-                <p class="mb-2">We could not submit your message to the support team due to a servor error. </p>
-                <p class="font-bold mb-2 cursor-pointer" @click="responseMessageVisible = false">Dismiss</p>
+                <p class="mb-2">We could not submit your message to the support team due to a server error. </p>
+                <p class="font-bold mb-2 cursor-pointer" @click="handleResponseMessage">Dismiss</p>
             </div>
         </div>
     </form>
@@ -145,13 +94,13 @@ export default {
     name: 'ContactEmailForm',
 
     components: {
-        'text-input': TextInput,
-        'email-input': EmailInput,
-        'radio-buttons': RadioButtons,
-        'textarea-input': TextareaInput,
-        'file-input': FileInput,
-        'multilevel-dropdown': MultiLevelDropdown,
-        'recaptcha': Recaptcha,
+        "text-input": TextInput,
+        "email-input": EmailInput,
+        "radio-buttons": RadioButtons,
+        "textarea-input": TextareaInput,
+        "file-input": FileInput,
+        "multilevel-dropdown": MultiLevelDropdown,
+        "recaptcha": Recaptcha,
     },
 
     props: {
@@ -207,6 +156,7 @@ export default {
 
     data() {
         return {
+            apiCallPending: false,
             formValid: true, //set true by default
             formVerified: false,
             emailFieldValid: false,
@@ -394,15 +344,15 @@ export default {
         },
 
         formState() {
-            if(this.messageFieldValid && this.selectFieldValid && this.textFieldValid && this.emailFieldValid && this.radioFieldsValid) return true;
+            if (this.messageFieldValid && this.selectFieldValid && this.textFieldValid && this.emailFieldValid && this.radioFieldsValid) return true;
         },
 
         themeBgClass() {
-            return 'bg-'+this.brand;
+            return 'bg-' + this.brand;
         },
 
         themeTextClass() {
-            return 'text-'+this.brand;
+            return 'text-' + this.brand;
         },
 
         callToAction() {
@@ -417,6 +367,12 @@ export default {
         },
     },
     methods: {
+        handleResponseMessage() {
+            this.responseMessageVisible = false;
+            this.setTimeout(() => {
+                window.location.reload();
+            }, 100);
+        },
         updateSupportOption(val) {
             this.formData.supportOption = val;
         },
@@ -444,7 +400,7 @@ export default {
             //Check Form First
             this.formValid = this.formState;
 
-            if(!this.formValid) {
+            if (!this.formValid) {
                 return
             }
 
@@ -456,13 +412,13 @@ export default {
             let attachment;
             let membership;
             //convert file(s) to image blobs
-            if(this.formData.attachments[0]) {
+            if (this.formData.attachments[0]) {
                 attachment = this.formData.attachments[0];
             } else {
                 attachment = null;
             }
             //is Member?
-            if(this.formData.isMember === true) {
+            if (this.formData.isMember === true) {
                 membership = "Is currently a member"
             } else {
                 membership = "Is not a member"
@@ -472,7 +428,10 @@ export default {
                 this.eventBus.emit(this.eventName, { text });
             }
 
-          SupportService.sendEmail({
+
+            this.apiCallPending = true;
+
+            SupportService.sendEmail({
                 type: this.emailType,
                 subject: this.emailSubject,
                 studentName: name,
@@ -488,57 +447,54 @@ export default {
                 endpoint: this.emailEndpoint,
             })
                 .then((resolved) => {
-                    if (resolved) {
                         this.formSuccessful = true;
                         this.responseMessageVisible = true;
-
-                        this.closeResponseMessage();
-
                         this.$emit('formSuccess');
                         window.closeAllModals();
-
-                        //reset option
-                        this.formData = {
-                            name: '',
-                            email: '',
-                            isMember: null,
-                            supportOption: '',
-                            message: '',
-                            attachments: [],
-                        }
-                    } else {
-                        this.formSuccessful = false;
-                        this.responseMessageVisible = true;
-
-                        this.closeResponseMessage()
-                    }
                 })
+                .catch(() => {
+                    this.formSuccessful = false;
+                    this.responseMessageVisible = true;
+                }).finally(() => {
+                    this.formData = {
+                        name: '',
+                        email: '',
+                        isMember: null,
+                        supportOption: '',
+                        message: '',
+                        attachments: [],
+                    }
+
+                    this.apiCallPending = false;
+                    this.formVerified = false;
+                    this.closeResponseMessage();
+                });
         },
     },
 
     watch: {
-        textFieldValid: function(valid) {
-            if(this.formState) {
+        textFieldValid: function (valid) {
+            if (this.formState) {
                 this.formValid = true;
             }
         },
-        radioFieldsValid: function(valid) {
-            if(this.formState) {
+        radioFieldsValid: function (valid) {
+            if (this.formState) {
                 this.formValid = true;
             }
         },
-        emailFieldValid: function(valid) {
-            if(this.formState) {
+        emailFieldValid: function (valid) {
+            if (this.formState) {
                 this.formValid = true;
             }
         },
-        selectFieldValid: function(valid) {
-            if(this.formState) {
+        selectFieldValid: function (valid) {
+            if (this.formState) {
                 this.formValid = true;
             }
         },
-        messageFieldValid: function(valid) {
-            if(this.formState) {
+        messageFieldValid: function (valid) {
+            if (this.formState) {
                 this.formValid = true;
             }
         },

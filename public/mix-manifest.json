@@ -1,5 +1,5 @@
 {
-    "/platform/js/app.js": "/platform/js/app.js?id=bf47eeb48f1b4442ab57284a839b4eac",
+    "/platform/js/app.js": "/platform/js/app.js?id=16ef0d90f517e892a0af2aaf52a408cd",
     "/platform/js/profile.js": "/platform/js/profile.js?id=a13ed5f750a89e00edbe84934bd56773",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=9b1b997eda2b5545804b8d7649790e48",
     "/platform/js/books.js": "/platform/js/books.js?id=bd6874db5faa8414cda38fb1fa497d2c",
@@ -13,11 +13,11 @@
     "/platform/js/contact-member-form.js": "/platform/js/contact-member-form.js?id=d340487f0b9bc3c2ebc3748dac8c1dad",
     "/platform/js/cart-sidebar.js": "/platform/js/cart-sidebar.js?id=cdb64670112504b2e3b2bdf80252f6ca",
     "/platform/js/nav-cart-button.js": "/platform/js/nav-cart-button.js?id=ced4503b5a8b2bfd7a6c42e76a649334",
-    "/platform/js/contact-email-form-marketing.js": "/platform/js/contact-email-form-marketing.js?id=e56e28d411e7226b5636f43c2f094096",
+    "/platform/js/contact-email-form-marketing.js": "/platform/js/contact-email-form-marketing.js?id=2ffc323971e9d67fe85ab4c0f7e823d5",
     "/platform/js/contact-email-form.js": "/platform/js/contact-email-form.js?id=8c42a7f79169d75d784b0afc1471daba",
     "/platform/js/youtube-player-component.js": "/platform/js/youtube-player-component.js?id=fa034becc87a52ea151b981f707363b1",
     "/platform/js/onboarding-component.js": "/platform/js/onboarding-component.js?id=6e04aaad2ba4d46299e60c4fc7d8bbda",
-    "/platform/js/video-player-component.js": "/platform/js/video-player-component.js?id=a7e84d0957c96a2917412f1041ca78ad",
+    "/platform/js/video-player-component.js": "/platform/js/video-player-component.js?id=8c2a73e8b4e4ce0cede158e2c6770bcb",
     "/platform/js/video-media-element-component.js": "/platform/js/video-media-element-component.js?id=316ae4561a831312b3fe669d0bb920d9",
     "/platform/js/image-cropper-component.js": "/platform/js/image-cropper-component.js?id=1435b648dfa43ef38889583bd03e8adc",
     "/platform/js/comments-component.js": "/platform/js/comments-component.js?id=cc2b754b532420b660f3aa93cbf5aa15",
@@ -27,5 +27,5 @@
     "/platform/css/app.css": "/platform/css/app.css?id=c3d0a665e80640ffd767074368a93d2d",
     "/platform/js/vendor~onboarding.js": "/platform/js/vendor~onboarding.js?id=95b61f73a67fc65546a81e742dda8905",
     "/marketing/css/app.css": "/marketing/css/app.css?id=4ca7a1237b44dc9f7de1caa56e0ca0c5",
-    "/platform/js/vendor.js": "/platform/js/vendor.js?id=66c43e06cdadc7d3c7d3e778af004959"
+    "/platform/js/vendor.js": "/platform/js/vendor.js?id=3a16f2efd9e5eb6776c5474fb867a4a8"
 }
