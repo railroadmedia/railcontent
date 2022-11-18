@@ -1,6 +1,6 @@
 <!-- Composition API -->
 <script setup>
-import { ref, onMounted, onBeforeUnmount, computed, onUpdated, defineExpose } from 'vue';
+import { ref, onMounted, onBeforeUnmount, computed, onUpdated } from 'vue';
 import shaka from 'shaka-player';
 import Utils from '../../assets/js/helper-functions/utils.js';
 import Screenfull from 'screenfull';
@@ -431,16 +431,18 @@ function seek(time) {
     mediaElement.value.currentTime = seekTime;
 }
 
-function fullscreen() {
+const fullscreen = () => {
     isTransitioning.value = false;
 
     // If we have access to the requestFullscreen API then use that
-    if (Screenfull.enabled) {
+    if (false && Screenfull.enabled) {
         Screenfull.toggle(container.value);
     } else {
         /* copied */
         const video= mediaElement.value;
+        console.log('video', video);
         const rfs = video.requestFullscreen || video.webkitRequestFullScreen || video.mozRequestFullScreen || video.msRequestFullscreen;
+        console.log('rfs', rfs);
         rfs.call(video);
     }
 }
