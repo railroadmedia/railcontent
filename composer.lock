@@ -7882,12 +7882,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "8453409b17f25501ee26fc1587a28ad9c30a1884"
+                "reference": "2388f8d58bebf8398d1f0ccccefccf70f042821d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/8453409b17f25501ee26fc1587a28ad9c30a1884",
-                "reference": "8453409b17f25501ee26fc1587a28ad9c30a1884",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/2388f8d58bebf8398d1f0ccccefccf70f042821d",
+                "reference": "2388f8d58bebf8398d1f0ccccefccf70f042821d",
                 "shasum": ""
             },
             "require": {
@@ -7926,7 +7926,7 @@
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
                 "source": "https://github.com/railroadmedia/ecommerce/tree/support-old-app-purchases"
             },
-            "time": "2022-11-17T11:51:28+00:00"
+            "time": "2022-11-21T14:02:10+00:00"
         },
         {
             "name": "railroad/location",
