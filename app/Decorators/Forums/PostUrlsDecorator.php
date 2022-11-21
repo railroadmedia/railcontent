@@ -2,6 +2,7 @@
 
 namespace App\Decorators\Forums;
 
+use Carbon\Carbon;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
@@ -24,6 +25,9 @@ class PostUrlsDecorator
     {
         foreach ($posts as $index => $post) {
             $posts[$index]['url'] = route('forums.jump-to-post',['brand' => config('railnotifications.brand'), 'postId' => $post['id']]);
+            $posts[$index]['created_at_diff'] = Carbon::parse($posts[$index]['created_at'])
+                ->diffForHumans();
+
             $url = str_replace(
                 [
                     '"/members/forums',
