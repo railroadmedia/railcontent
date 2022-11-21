@@ -80,6 +80,11 @@ class HomePageController extends BaseController
         return redirect("/".brand()."/profile/".user()->id."/dashboard");
     }
 
+    public function paymentSettingsRedirect()
+    {
+        return redirect("/".brand()."/profile/".user()->id."/settings/payments");
+    }
+
     public function notificationsRedirect()
     {
         return redirect("/".brand()."/notifications");
