@@ -23,6 +23,7 @@ class PostUrlsDecorator
     public function decorate($posts)
     {
         foreach ($posts as $index => $post) {
+            $posts[$index]['url'] = route('forums.jump-to-post',['brand' => config('railnotifications.brand'), 'postId' => $post['id']]);
             $url = str_replace(
                 [
                     '"/members/forums',

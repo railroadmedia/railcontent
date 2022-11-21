@@ -26,7 +26,8 @@ class NotificationDecorator
                     'https://www.pianote.com//jump-to-comment',
                     'https://www.musora.com//jump-to-comment',
                     '//jump-to-comment',
-                    '//forums/jump-to-post'
+                    '//forums/jump-to-post',
+                    'https://www.pianote.comhttps://www.musora.com/pianote',
                 ],
                 [
                     $domain,
@@ -43,6 +44,7 @@ class NotificationDecorator
                     $domain.'/'.$brand.'/jump-to-comment',
                     $domain.'/'.$brand.'/jump-to-comment',
                     $domain.'/'.$brand.'/forums/jump-to-post',
+                    $domain.'/'.$brand
                 ],
                 $notification->getContentUrl()
             );
