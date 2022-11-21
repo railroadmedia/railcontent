@@ -4438,29 +4438,21 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-==== BASE ====
-            "time": "2022-11-08T14:47:39+00:00"
-==== BASE ====
+            "time": "2022-11-15T16:13:22+00:00"
         },
         {
             "name": "laravel/nova",
-==== BASE ====
-            "version": "4.18.2",
-==== BASE ====
+            "version": "4.19.2",
             "source": {
                 "type": "git",
                 "url": "git@github.com:laravel/nova.git",
-==== BASE ====
-                "reference": "420bccd59f3eeac969920d09a4e4cd961ad63325"
-==== BASE ====
+                "reference": "5cc034c9e4c2090b25a5bf2c39d83f9f5dc6306d"
             },
             "dist": {
                 "type": "zip",
-==== BASE ====
-                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-420bccd59f3eeac969920d09a4e4cd961ad63325-zip-d3f55b.zip",
-                "reference": "420bccd59f3eeac969920d09a4e4cd961ad63325",
-                "shasum": "be0ca636e0bcf8746247c3f93000925b434c0a1a"
-==== BASE ====
+                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-5cc034c9e4c2090b25a5bf2c39d83f9f5dc6306d-zip-7ed031.zip",
+                "reference": "5cc034c9e4c2090b25a5bf2c39d83f9f5dc6306d",
+                "shasum": "36fa0c3f73615bbaedc44357bb0d1d291d8e6f1d"
             },
             "require": {
                 "brick/money": "^0.5.0|^0.6.0|^0.7.0",
@@ -7890,12 +7882,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "63271bf62bb04e76fc718471dee97d2ab441f540"
+                "reference": "2388f8d58bebf8398d1f0ccccefccf70f042821d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/63271bf62bb04e76fc718471dee97d2ab441f540",
-                "reference": "63271bf62bb04e76fc718471dee97d2ab441f540",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/2388f8d58bebf8398d1f0ccccefccf70f042821d",
+                "reference": "2388f8d58bebf8398d1f0ccccefccf70f042821d",
                 "shasum": ""
             },
             "require": {
@@ -7934,7 +7926,7 @@
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
                 "source": "https://github.com/railroadmedia/ecommerce/tree/support-old-app-purchases"
             },
-            "time": "2022-11-15T14:40:25+00:00"
+            "time": "2022-11-21T14:02:10+00:00"
         },
         {
             "name": "railroad/location",
