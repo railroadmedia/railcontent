@@ -226,6 +226,15 @@ This bundle is for new members only. You’ll pay just $129 for your first year 
         Product::where('brand_id', 3)->where('name', 'Guitar Technique Made Easy')->update(['discounted_price' => 49]);
         Product::where('brand_id', 3)->where('name', 'The Guitar System')->update(['discounted_price' => 49]);
 
+        //SINGEO UPDATES
+        Product::where('brand_id', 1)->where('name', 'Singeo Membership')->update(['discounted_price' => 87]);
+        Product::where('brand_id', 1)->where('name', 'The Singing Starter Kit')->update(['discounted_price' => 12]);
+        Product::where('brand_id', 1)->where('name', 'The Essential Guide to Beautiful Harmonies')->update(['discounted_price' => 19]);
+        Product::where('brand_id', 1)->where('name', 'Do Re Mi Tumbler')->update(['discounted_price' => 19]);
+        Product::where('brand_id', 1)->where('name', 'Rockstar Mug')->update(['discounted_price' => 9]);
+        Product::where('brand_id', 1)->where('name', 'Vowel Practice Poster')->update(['discounted_price' => 9]);
+        Product::where('brand_id', 1)->where('name', 'Retro T-shirt')->update(['discounted_price' => 19]);
+
         //BUNDLE UPDATES
         $bundles = [
             //DRUMEO
