@@ -1,6 +1,7 @@
 <template>
     <a
         :href="checkoutUrl"
+        v-if="cartItems.length"
         class="join outline-button cart-button"
         @click.stop.prevent="handleClick"
     >
@@ -13,8 +14,11 @@
 export default {
     name: 'NavCartButton',
     props: {
-        cartData: {
-            item: String,
+        // cartData: {
+        //     item: String,
+        // },
+        cartDataUrl: {
+            type: String,
         },
         checkoutUrl: {
             type: String,
@@ -22,13 +26,27 @@ export default {
     },
     data() {
         return {
-            cartItems: null,
+            //Initial Cart Data
+            cartData: {
+                "meta": {
+                    "cart": {
+                        "items": [],
+                    }
+                }
+            },
+            cartItems: [],
         }
     },
+    beforeMount() {
+        //Fetch Cart Data
+        axios.get(this.cartDataUrl)
+            .then(response => {
+                this.cartData = response.data;
+            }
+        )
+    },
     mounted() {
-        let cartData = JSON.parse(this.cartData);
-
-        this.updateCartData(cartData);
+        this.updateCartData(this.cartData);
 
         this.eventBus.on('updateCartData', this.updateCartData);        
     },
@@ -36,6 +54,7 @@ export default {
         updateCartData(cartData) {
             this.cartItems = cartData.meta.cart.items;
         },
+
         handleClick() {
             this.eventBus.emit('openCartSidebar', {});
         },

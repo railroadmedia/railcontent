@@ -122,8 +122,11 @@ export default {
             type: String,
             default: () => 'drumeo',
         },
-        cartData: {
-            item: String,
+        // cartData: {
+        //     item: String,
+        // },
+        cartDataUrl: {
+            type: String,
         },
         checkoutUrl: {
             type: String
@@ -134,6 +137,13 @@ export default {
             active: false,
             locked: false,
             cartItems: null,
+            cartData: {
+                "meta": {
+                    "cart": {
+                        "items": [],
+                    }
+                }
+            },
             bonusItems: null,
             cartTotals: null,
             recommendedProducts: null,
@@ -142,6 +152,14 @@ export default {
             loading: false,
             scrollTop: false,
         };
+    },
+    beforeMount() {
+        //Fetch Cart Data
+        axios.get(this.cartDataUrl)
+            .then(response => {
+                this.cartData = response.data;
+            }
+        )
     },
     mounted() {
         this.buildInitialCartData();
@@ -172,9 +190,8 @@ export default {
     },
     methods: {
         buildInitialCartData() {
-            const cartData = JSON.parse(this.cartData);
 
-            this.updateCartData(cartData);
+            this.updateCartData(this.cartData);
         },
         openCartSidebar() {
             this.active = true;
@@ -268,7 +285,7 @@ export default {
                 this.scrollTop = true;
 
                 return EcommerceService
-                    .addCartItems(payload)
+                    .addCartItems(this.cartDataUrl, payload)
                     .then(this.handleCartUpdate)
                     .catch(this.handleError);
             }
