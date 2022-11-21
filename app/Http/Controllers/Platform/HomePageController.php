@@ -80,6 +80,11 @@ class HomePageController extends BaseController
         return redirect("/".brand()."/profile/".user()->id."/dashboard");
     }
 
+    public function paymentSettingsRedirect()
+    {
+        return redirect("/".brand()."/profile/".user()->id."/settings/payments");
+    }
+
     public function notificationsRedirect()
     {
         return redirect("/".brand()."/notifications");
@@ -96,14 +101,6 @@ class HomePageController extends BaseController
         ContentRepository::$pullFilterResultsOptionsAndCount = false;
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
         ContentLikesDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
-
-        // singeo packs are under courses
-        if (brand() === 'singeo' && user()->isPackOnlyOwner()) {
-            return redirect()->route(
-                'platform.content-type-catalog',
-                ['brand' => 'singeo', 'contentTypeName' => 'courses']
-            );
-        }
 
         switch (brand()) {
             case 'drumeo':
@@ -337,10 +334,13 @@ class HomePageController extends BaseController
 
         $userNameToDisplay = !empty($member->first_name) ? $member->first_name : $member->display_name;
 
+        $courses = $this->getCoursesContent();
+
         $userMetrics = $this->getUserMetrics();
 
         return view('home.pack', [
             "packs" => $packs,
+            "courses" => $courses,
             "hotForumTopics" => $hotForumTopics,
             "userNameToDisplay" => $userNameToDisplay,
             "userMetrics" => $userMetrics,
@@ -354,6 +354,36 @@ class HomePageController extends BaseController
     private function getPacks()
     {
         return $this->packService->getPacks(user());
+    }
+
+    /**
+     * singeo only
+     * @return ContentFilterResultsEntity
+     */
+    private function getCoursesContent()
+    {
+        ContentRepository::$availableContentStatues = ['published'];
+        ContentRepository::$pullFutureContent = false;
+
+        $content = $this->contentService->getFiltered(
+            1,
+            6,
+            '-published_on',
+            ['course'],
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+            false
+        );
+
+        ContentRepository::$pullFutureContent = true;
+
+        return (new ContentFilterResultsEntity(
+            ['results' => $content['results'], 'total_results' => $content['results']]
+        ))->toResponseRawJson();
     }
 
     /**

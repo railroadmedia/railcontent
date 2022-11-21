@@ -145,6 +145,7 @@ class PackPagesController extends Controller
 
         Decorator::$typeDecoratorsEnabled = true;
         $collectionForDecoration = $collectionForDecoration->filter();
+        ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MAXIMUM;
         $collectionForDecoration = Decorator::decorate($collectionForDecoration, 'content');
 
         if (count($packBundles) == 1) {
@@ -234,7 +235,7 @@ class PackPagesController extends Controller
 
         Decorator::$typeDecoratorsEnabled = true;
         $collectionForDecoration = $collectionForDecoration->filter();
-
+        ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MAXIMUM;
         $collectionForDecoration = Decorator::decorate($collectionForDecoration, 'content');
 
         $childContent = new ContentFilterResultsEntity(['results' => $lessons]);
@@ -383,7 +384,7 @@ class PackPagesController extends Controller
 
         $userAccessLevel = user()->access_level;
 
-        $lesson['resources'] = $lesson['resources'] ?? $pack['resources'] ?? [];
+        $lesson['resources'] = array_merge($lesson['resources'] ?? [], $pack['resources'] ?? []);
 
         return view('content.lesson', [
                                         "parentType" => 'pack',
@@ -629,6 +630,7 @@ class PackPagesController extends Controller
         $collectionForDecoration = $collectionForDecoration->merge($parentChildren);
 
         Decorator::$typeDecoratorsEnabled = true;
+        ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MAXIMUM;
         $collectionForDecoration = $collectionForDecoration->filter();
 
         $collectionForDecoration = Decorator::decorate($collectionForDecoration, 'content');

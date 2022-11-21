@@ -1597,6 +1597,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .w-9 {
   width: 2.25rem !important;
 }
+.w-6 {
+  width: 1.5rem !important;
+}
 .w-80 {
   width: 20rem !important;
 }
@@ -1650,9 +1653,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .w-4 {
   width: 1rem !important;
-}
-.w-6 {
-  width: 1.5rem !important;
 }
 .w-24 {
   width: 6rem !important;
