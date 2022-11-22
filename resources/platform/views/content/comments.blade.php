@@ -13,8 +13,8 @@
                     user-id="{{ user()->id }}"
                     user-name="{{ user()->display_name }}"
                     user-avatar="{{ user()->profile_picture_url }}"
-                    user-xp="123"
-                    user-access-level="team"
+                    user-xp="{{user()->getBrandTotalXp()}}"
+                    user-access-level="{{user()->access_level}}"
                     profile-base-route="/members/profile/"
                     :is-admin="true"></comments-catalogue>
         </div>
