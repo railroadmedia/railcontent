@@ -176,16 +176,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.246.1",
+            "version": "3.247.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "34c2e3d699d08bc8f212d57f0d7a374a7404c653"
+                "reference": "2cd51e75e753dfe1f1677bb0a2e13a9ce70cba26"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/34c2e3d699d08bc8f212d57f0d7a374a7404c653",
-                "reference": "34c2e3d699d08bc8f212d57f0d7a374a7404c653",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/2cd51e75e753dfe1f1677bb0a2e13a9ce70cba26",
+                "reference": "2cd51e75e753dfe1f1677bb0a2e13a9ce70cba26",
                 "shasum": ""
             },
             "require": {
@@ -264,9 +264,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.246.1"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.247.0"
             },
-            "time": "2022-11-19T22:48:18+00:00"
+            "time": "2022-11-21T21:31:13+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -7882,12 +7882,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "2388f8d58bebf8398d1f0ccccefccf70f042821d"
+                "reference": "880cbb67c29c7adbb8a155d3771095fe088aa9a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/2388f8d58bebf8398d1f0ccccefccf70f042821d",
-                "reference": "2388f8d58bebf8398d1f0ccccefccf70f042821d",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/880cbb67c29c7adbb8a155d3771095fe088aa9a7",
+                "reference": "880cbb67c29c7adbb8a155d3771095fe088aa9a7",
                 "shasum": ""
             },
             "require": {
@@ -7926,7 +7926,7 @@
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
                 "source": "https://github.com/railroadmedia/ecommerce/tree/support-old-app-purchases"
             },
-            "time": "2022-11-21T14:02:10+00:00"
+            "time": "2022-11-22T08:25:59+00:00"
         },
         {
             "name": "railroad/location",
