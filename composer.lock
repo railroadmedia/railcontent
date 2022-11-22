@@ -7882,12 +7882,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "a0f3a04f89f33d3846bbd814d609b7866e047926"
+                "reference": "880cbb67c29c7adbb8a155d3771095fe088aa9a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/a0f3a04f89f33d3846bbd814d609b7866e047926",
-                "reference": "a0f3a04f89f33d3846bbd814d609b7866e047926",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/880cbb67c29c7adbb8a155d3771095fe088aa9a7",
+                "reference": "880cbb67c29c7adbb8a155d3771095fe088aa9a7",
                 "shasum": ""
             },
             "require": {
@@ -7926,7 +7926,7 @@
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
                 "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.26"
             },
-            "time": "2022-11-18T23:35:43+00:00"
+            "time": "2022-11-22T08:25:59+00:00"
         },
         {
             "name": "railroad/location",
@@ -8263,16 +8263,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "2.0.43",
+            "version": "2.0.44",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "1853f29aaa5a01178dd4a961741e8634df7054fe"
+                "reference": "3bae7c818fb56c04dbe80c78497c105f09de3bb5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/1853f29aaa5a01178dd4a961741e8634df7054fe",
-                "reference": "1853f29aaa5a01178dd4a961741e8634df7054fe",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/3bae7c818fb56c04dbe80c78497c105f09de3bb5",
+                "reference": "3bae7c818fb56c04dbe80c78497c105f09de3bb5",
                 "shasum": ""
             },
             "require": {
@@ -8326,9 +8326,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/2.0.43"
+                "source": "https://github.com/railroadmedia/railcontent/tree/2.0.44"
             },
-            "time": "2022-11-17T21:47:29+00:00"
+            "time": "2022-11-22T14:57:40+00:00"
         },
         {
             "name": "railroad/railforums",

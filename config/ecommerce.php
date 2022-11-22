@@ -336,10 +336,10 @@ return [
         'apple_store_kit' => [
             'endpoint' => env('APPLE_VERIFY_RECEIPT_ENDPOINT', 'https://sandbox.itunes.apple.com'),
             'shared_secret' => '7e598c622c0a46f49c79c2272bcc2c25',
-            'drumeo' => [
+            'Drumeo' => [
                 'shared_secret' => 'b1ab16b41296400bbf10431d72386f5f',
             ],
-            'pianote' => [
+            'Pianote' => [
                 'shared_secret' => 'f936d4368cd04421a10385c1baa75a10',
             ]
         ],
@@ -348,12 +348,12 @@ return [
             'credentials' =>  __DIR__ . '/../google-play-api.json',
             'application_name' => 'com.musoraapp',
             'scope' => ['https://www.googleapis.com/auth/androidpublisher'],
-            'drumeo' => [
-                'credentials' =>  __DIR__ . '/../google-play-drumeo-api.json',
+            'Drumeo' => [
+                'credentials' =>  __DIR__ . '/../drumeo-google-play-api.json',
                 'application_name' => 'com.drumeo',
             ],
-            'pianote' => [
-                'credentials' =>  __DIR__ . '/../google-play-pianote-api.json',
+            'Pianote' => [
+                'credentials' =>  __DIR__ . '/../pianote-google-play-api.json',
                 'application_name' => 'com.pianote',
             ]
         ],
@@ -368,6 +368,19 @@ return [
         //2021 products
         'drumeo_app_1_year_2021' => 'DLM-1-year',
         'drumeo_app_1_month_2021' => 'DLM-1-month',
+
+        'pianote_app_1_year_membership' => 'PIANOTE-MEMBERSHIP-1-YEAR',
+        'pianote_app_1_month_membership' => 'PIANOTE-MEMBERSHIP-1-MONTH',
+
+        //2021 products
+        'pianote_app_1_year_membership_2021' => 'PIANOTE-MEMBERSHIP-1-YEAR',
+        'pianote_app_1_month_membership_2021' => 'PIANOTE-MEMBERSHIP-1-MONTH',
+
+        // todo - update stage/local env products apple id => local product sku
+        'test' => 'PIANOTE-MEMBERSHIP-1-YEAR',
+        'test_6month' => 'PIANOTE-MEMBERSHIP-1-MONTH',
+        'test.pianote' => 'PIANOTE-MEMBERSHIP-1-MONTH',
+
 
         'anatomy_of_a_drum_solo' => 'AOADS-DIGI',
         'beyond_the_chops' => 'BTC-DIGI',
@@ -429,6 +442,20 @@ return [
         '2' => 'DLM-1-year',
         '4' => 'DLM-1-month',
         'pack_1' => 'CC-DIGI',
+
+        // todo - update production products play store id => local product sku
+        'pianote_app_1_year_member' => 'PIANOTE-MEMBERSHIP-1-YEAR',
+        'pianote_app_1_month_member' => 'PIANOTE-MEMBERSHIP-1-MONTH',
+
+        //2021 products
+        'pianote_app_1_year_2021' => 'PIANOTE-MEMBERSHIP-1-YEAR',
+        'pianote_app_1_month_2021' => 'PIANOTE-MEMBERSHIP-1-MONTH',
+
+        // todo - update stage/local env products play store id => local product sku
+        '2' => 'PIANOTE-MEMBERSHIP-1-YEAR',
+        '4' => 'PIANOTE-MEMBERSHIP-1-MONTH',
+        'test' => 'PIANOTE-MEMBERSHIP-1-MONTH',
+        'test.pianote' => 'PIANOTE-MEMBERSHIP-1-YEAR',
 
         //Musora app
         'musora_monthly_subscription' => 'DLM-1-month',

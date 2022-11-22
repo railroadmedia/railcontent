@@ -574,7 +574,7 @@ export default {
             }
 
             CommentService.getComments({
-                brand: 'drumeo',
+                brand: this.brand,
                 limit: 100,
                 sort: this.sortParam,
                 content_type: types,
