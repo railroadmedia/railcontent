@@ -1551,4 +1551,9 @@ class ContentPagesController extends BaseController
         }
         return null;
     }
+
+    public function comments()
+    {
+        return view('content.comments');
+    }
 }
