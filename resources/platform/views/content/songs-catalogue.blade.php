@@ -7,7 +7,7 @@
 @section('styles')
     <style>
         /* TODO: Componentize ContentCatalogue and use slots to avoid using so many conditionals, for now let's hide the type filter */ 
-        .songs-catalogue-container .form-group #typeFilter {
+        .songs-catalogue-container .form-group #typeFilterContainer {
             display: none;
         }
     </style>
