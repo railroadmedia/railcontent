@@ -36,6 +36,7 @@
     @endphp
 
     <song
+        back-url="{{ url()->previous() }}"
         theme-color="{{ $themeColor }}"
         brand="{{ $brand }}"
         back-url="{{ url()->route('platform.content-type-catalog', ["contentTypeName" => 'songs']) }}"
