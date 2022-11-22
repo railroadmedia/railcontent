@@ -4,23 +4,11 @@
     <title>{{ ucfirst($brand) }} {{ ucfirst($catalogueMeta['name']) }} | Musora</title>
 @endsection
 
-@section('layout-styles')
+@section('styles')
     <style>
-        .search-button-col {
-            -webkit-box-tw-flex: 0;
-            -ms-tw-flex: 0 0 50px;
-            tw-flex: 0 0 50px;
-            max-width: 50px;
-            min-width: 50px;
-        }
-
-        button.btn.page-button {
-            margin: 0 3px;
-        }
-
-        button.btn.page-button>span {
-            border-width: 1px;
-            font-weight: 500;
+        /* TODO: Componentize ContentCatalogue and use slots to avoid using so many conditionals, for now let's hide the type filter */ 
+        .songs-catalogue-container .form-group #typeFilter {
+            display: none;
         }
     </style>
 @endsection
@@ -38,7 +26,7 @@
                     </h1>
                     <p class="tw-text-white tw-text-[18px] tw-mb-4 tw-max-w-4xl tw-pr-12 tw-text-base tw-uppercase tw-font-open-sans tw-font-bold">
                         <!-- TODO: GET THIS INFO FROM BACKEND -->
-                        813 ARTISTS | 23,327 SONGS
+                        813 ARTISTS | 23,327 SONGS test
                     </p>
                 </div>
                 <div class="tw-flex tw-flex-row">
@@ -127,10 +115,10 @@
         </div>
     </div>
 
-    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-[10px] dark:tw-text-white">
+    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-[10px] dark:tw-text-white songs-catalogue-container">
         <transition appear name="fade">
             <content-catalogue dusk="content-catalogue" brand="{{ $brand }}" theme-color="{{ $brand }}"
-                user-id="{{ auth()->id() }}"
+                user-id="{{ auth()->id() }}" :search-bar="true"
                 subscription-calendar-id="{{ config('addevent.' . $brand)['uniquekeys']['brand-overview'] ?? null }}"
                 catalogue-name="Songs" :filterable-values="{{ json_encode($catalogueMeta['allowableFilters']) }}"
                 content-endpoint="{{ $endpointOverride ?? '/railcontent/content' }}" :use-theme-color="true"
