@@ -245,6 +245,13 @@ app.component('AppContainer', AppContainer)
     .component('ContentAssignment', ContentAssignment)
     .component('AddEventModal', AddEventModal)
 
+    .component('Song', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "song" */
+            `./vue/components/Songs/Song.vue`
+        )
+    ))
+
     .component('PianoBackingTracks', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "piano-backing-tracks" */
