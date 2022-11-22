@@ -349,11 +349,11 @@ return [
             'application_name' => 'com.musoraapp',
             'scope' => ['https://www.googleapis.com/auth/androidpublisher'],
             'Drumeo' => [
-                'credentials' =>  __DIR__ . '/../google-play-drumeo-api.json',
+                'credentials' =>  __DIR__ . '/../drumeo-google-play-api.json',
                 'application_name' => 'com.drumeo',
             ],
             'Pianote' => [
-                'credentials' =>  __DIR__ . '/../google-play-pianote-api.json',
+                'credentials' =>  __DIR__ . '/../pianote-google-play-api.json',
                 'application_name' => 'com.pianote',
             ]
         ],
