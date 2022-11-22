@@ -22494,6 +22494,9 @@ a:visited{
 .tw-max-w-full{
   max-width: 100% !important;
 }
+.tw-max-w-\[455px\]{
+  max-width: 455px !important;
+}
 .tw-flex-1{
   flex: 1 1 0% !important;
 }
