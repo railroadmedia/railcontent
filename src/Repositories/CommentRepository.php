@@ -158,6 +158,7 @@ class CommentRepository extends RepositoryBase
                     ->restrictByAssignedUserId()
                     ->selectCommentLikeCounts()
                     ->orderByRaw('replied_on ' . ($this->orderDirection))
+                    ->groupBy(['child_comment.created_on', 'child_comment.id'])
                     ->directPaginate($this->page, 25);
 
             $rows = $query->get()->toArray();
