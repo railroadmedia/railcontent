@@ -896,4 +896,6 @@ return [
 
     // exchangerate-api.com
     'exchange_rate_api_token' => '89916546525703af0b7e1f9a',
+
+    'annual_product_skus' => ['DLM-1-year', 'PIANOTE-MEMBERSHIP-1-YEAR', 'GUITAREO-1-YEAR-MEMBERSHIP', 'singeo-annual-recurring-membership']
 ];

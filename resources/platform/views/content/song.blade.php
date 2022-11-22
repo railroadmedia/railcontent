@@ -27,10 +27,10 @@
 
             <div class="tw-flex tw-flex-col tw-pr-0 xl:tw-pr-8 tw-grow tw-w-full">
                 {{-- Back Button --}}
-                <a href="{{ url()->route('platform.content-type-catalog', ["contentTypeName" => 'songs']) }}" 
+                <a href="{{ url()->previous() }}" 
                    class="tw-no-underline tw-transition tw-inline-flex tw-text-[#00101D] dark:tw-text-white tw-items-center tw-w-fit">
-                   <i class="fas fa-arrow-circle-left tw-text-4xl tw-mr-2" aria-hidden="true"></i>
-                   <span class="tw-font-bebas-neue tw-uppercase tw-text-xl">Back</span>
+                    <i class="fas fa-arrow-circle-left tw-text-4xl tw-mr-2" aria-hidden="true"></i>
+                    <span class="tw-font-bebas-neue tw-uppercase tw-text-xl">Back</span>
                 </a>
                 {{-- Song Container --}}
                 <div class="tw-flex tw-flex-col sm:tw-flex-row tw-py-4 song-content-container">
