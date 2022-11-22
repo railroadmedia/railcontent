@@ -127,8 +127,8 @@
                         @else
                             href="/members/forums/threads/drumeo-songs/15"
                         @endif
-                       class="tw-btn-primary tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600">
-                        Request A Song
+                        class="tw-btn-primary tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600">
+                            Request A Song
                         <span class="tw-text-4xl tw-ml-1 tw-leading-none tw-mt-0.5">»</span>
                     </a>
                 </div>
