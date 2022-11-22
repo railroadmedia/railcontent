@@ -123,7 +123,7 @@ const markSongAsComplete = () => {
             title: 'Hold your horses… This will reset all of your progress, are you sure about this?',
             callbacks: {
                 submit: () => {
-                    apiCallInProgress.value = true;
+                    lessonProgressRef.value = null;
                     ContentService.resetContentProgress(props.contentId)
                         .then((resolved) => {
                             if (resolved) {
@@ -134,18 +134,17 @@ const markSongAsComplete = () => {
                                 lessonProgressRef.value = null;
                             }
                         }).catch(() => {
+                            lessonProgressRef.value = '100';
                             window.shownotification({
                                 icon: 'error',
                                 text: 'Woops! Something wrong happened, please try again later.'
                             })
-                        }).finally(() => {
-                            apiCallInProgress.value = false;
                         });
                 },
             },
         });
     } else {
-        apiCallInProgress.value = true;
+        lessonProgressRef.value = '100';
         ContentService.markContentAsComplete(props.contentId).then(() => {
             window.shownotification({
                 icon: 'check',
@@ -153,13 +152,12 @@ const markSongAsComplete = () => {
             })
             lessonProgressRef.value = '100';
         }).catch(() => {
+            lessonProgressRef.value = null;
             window.shownotification({
                 icon: 'error',
                 text: 'Woops! Something wrong happened, please try again later.'
             })
-        }).finally(() => {
-            apiCallInProgress.value = false;
-        });
+        })
     }
 };
 
@@ -200,7 +198,7 @@ const markSongAsComplete = () => {
                             </p>
 
                             <div class="tw-flex tw-flex-col 3xl:tw-flex-row">
-                                <button @click="openInstrumentless"
+                                <button style="padding: 0 24px;" @click="openInstrumentless"
                                     :class="`tw-btn-primary tw-bg-${brand} hover:tw-bg-${brand}-600 tw-mb-3 3xl:tw-mr-3`">
                                     <svg class="tw-mr-2 tw-text-base " width="25" height="24" viewBox="0 0 25 24"
                                         fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -212,26 +210,24 @@ const markSongAsComplete = () => {
                                     PLAY DRUMLESS TRACK
                                 </button>
 
-                                <button @click="openFull"
+                                <button style="padding: 0 24px;" @click="openFull"
                                     :class="`tw-btn-primary tw-bg-${brand} hover:tw-bg-${brand}-600 tw-mb-3 3xl:tw-mr-3`">
                                     <i class="fas fa-play tw-mr-2 tw-text-base"></i>
                                     PLAY FULL TRACK
                                 </button>
 
-                                <button
+                                <button style="padding: 0 24px;"
                                     :class="`tw-h-[50px] ${lessonProgressRef === '100' ? `tw-bg-${themeColor} tw-text-white dark:tw-bg-${themeColor} dark:tw-text-white tw-btn-primary` : 'tw-text-[#00101D] tw-box-border tw-leading-none tw-btn-secondary dark:tw-text-white hover:tw-bg-black/10 dark:hover:tw-bg-white/10'}`"
                                     data-tooltip="Mark Lesson as Complete" :data-content-id="contentId"
                                     @click="markSongAsComplete">
-                                    <span :class="apiCallInProgress ? 'tw-text-white/60' : ''"
+                                    <span
                                         v-if="lessonProgressRef !== '100'">
-                                        <i v-if="!apiCallInProgress" class="fas fa-check tw-mr-2 tw-text-base"></i>
-                                        <LoadingSpinner class="tw-inline" v-if="apiCallInProgress" />
+                                        <i class="fas fa-check tw-mr-2 tw-text-base"></i>
                                         Mark as Complete
                                     </span>
 
                                     <span v-if="lessonProgressRef === '100'">
-                                        <i v-if="!apiCallInProgress" class="fas fa-check tw-mr-2 tw-text-base"></i>
-                                        <LoadingSpinner class="tw-inline" v-if="apiCallInProgress" />
+                                        <i class="fas fa-check tw-mr-2 tw-text-base"></i>
                                         Completed
                                     </span>
                                 </button>

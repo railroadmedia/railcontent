@@ -16144,9 +16144,9 @@ a {
   visibility: visible;
 }
 .catalogue-card .thumbnail-col {
-  flex: 0 0 175px;
-  max-width: 175px;
-  min-width: 175px;
+  flex: 0 0 125px;
+  max-width: 125px;
+  min-width: 125px;
 }
 @media screen and (min-width: 40rem) {
   .catalogue-card .thumbnail-col {
@@ -16157,9 +16157,9 @@ a {
 }
 @media screen and (min-width: 64rem) {
   .catalogue-card .thumbnail-col {
-    flex: 0 0 175px;
-    max-width: 175px;
-    min-width: 175px;
+    flex: 0 0 125px;
+    max-width: 125px;
+    min-width: 125px;
   }
 }
 .catalogue-card h1, .catalogue-card h4 {
@@ -22494,9 +22494,6 @@ a:visited{
 .tw-max-w-full{
   max-width: 100% !important;
 }
-.tw-max-w-\[455px\]{
-  max-width: 455px !important;
-}
 .tw-flex-1{
   flex: 1 1 0% !important;
 }
@@ -23622,6 +23619,10 @@ a:visited{
 .tw-px-\[3px\]{
   padding-left: 3px !important;
   padding-right: 3px !important;
+}
+.tw-px-\[24px\]{
+  padding-left: 24px !important;
+  padding-right: 24px !important;
 }
 .tw-px-5{
   padding-left: 1.25rem !important;
