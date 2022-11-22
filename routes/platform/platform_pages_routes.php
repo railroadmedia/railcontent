@@ -252,6 +252,11 @@ Route::domain('{musoraDomain}')
             ->name('platform.profile-redirect');
 
         // this automatically redirects to the users notification settings
+        Route::get('/members/profile/settings/payments', [HomePageController::class, 'paymentSettingsRedirect'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.payment-redirect');
+
+        // this automatically redirects to the users notification settings
         Route::get('/members/profile/settings/notifications', [HomePageController::class, 'notificationSettingsRedirect'])
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.notifications-redirect');

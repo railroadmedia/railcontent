@@ -14,6 +14,7 @@ class CommentUserDecorator extends ModeDecoratorBase
         $userIds = [];
 
         foreach ($comments as $commentIndex => $comment) {
+            $comment['url'] = route('platform.jump-to-comment',['brand' => config('railcontent.brand'), 'contentId' => $comment['content_id'],'commentId' => $comment['id']]);
             $comment['created_on_diff'] =
                 Carbon::parse($comment['created_on'])
                     ->diffForHumans();
