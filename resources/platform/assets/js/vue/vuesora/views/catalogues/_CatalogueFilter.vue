@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-column ph-1 catalogue-filter" 
-         :class="`${filterName}FilterContainer`+{'short-filter-container': shortFilterContainer, 'tw-w-full md:tw-w-1/4': isCoachesGrid}"
+         :class="{'short-filter-container': shortFilterContainer, 'tw-w-full md:tw-w-1/4': isCoachesGrid, [`${filterName}FilterContainer`]: true}"
     >
         <div class="form-group">
             <select
