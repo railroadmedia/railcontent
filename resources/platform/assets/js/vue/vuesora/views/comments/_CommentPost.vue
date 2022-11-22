@@ -105,7 +105,7 @@
                             dusk="like-button"
                             @click="likeComment"
                         >
-                            <ThumbUpIconOutline class="tw-h-[22px] tw-w-[22px]" />
+                            <musora-icon :icon-name="comment.is_liked  ? 'thumb-like-filled' : 'thumb-like'"  class="tw-w-6 tw-h-6" />
                             <span class="hide-xs-only tw-font-bebas-neue tw-text-[16px]">
                                 &nbsp;{{ comment.like_count }}
                             </span>
@@ -251,7 +251,6 @@ import MusoraIcon from '../../../components/MusoraIcons/MusoraIcon.vue'
 import Utils from '../../assets/js/classes/utils';
 import ThemeClasses from '../../mixins/ThemeClasses';
 import { TrashIcon, ThumbUpIcon } from "@heroicons/vue/solid";
-import { ThumbUpIcon as ThumbUpIconOutline } from "@heroicons/vue/outline";
 
 export default {
     name: 'CommentPost',
@@ -260,7 +259,6 @@ export default {
         'comment-reply': CommentReply,
         TrashIcon,
         ThumbUpIcon,
-        ThumbUpIconOutline,
         MusoraIcon,
     },
     mixins: [ThemeClasses],

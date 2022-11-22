@@ -25,7 +25,9 @@ class NotificationDecorator
                     'www.guitareo.com',
                     'https://www.pianote.com//jump-to-comment',
                     'https://www.musora.com//jump-to-comment',
-                    '//jump-to-comment'
+                    '//jump-to-comment',
+                    '//forums/jump-to-post',
+                    'https://www.pianote.comhttps://www.musora.com/pianote',
                 ],
                 [
                     $domain,
@@ -41,11 +43,25 @@ class NotificationDecorator
                     $domain.'/'.$brand.'/jump-to-comment',
                     $domain.'/'.$brand.'/jump-to-comment',
                     $domain.'/'.$brand.'/jump-to-comment',
+                    $domain.'/'.$brand.'/forums/jump-to-post',
+                    $domain.'/'.$brand
                 ],
                 $notification->getContentUrl()
             );
 
-            if (str_starts_with($url, '/drumeo/jump-to-comment'))
+            if ((str_starts_with($url, '/drumeo/jump-to-comment')) || (str_starts_with($url, '/drumeo/forums')))
+            {
+                $url = $domain.$url;
+            }
+            if ((str_starts_with($url, '/pianote/jump-to-comment'))  || (str_starts_with($url, '/pianote/forums')))
+            {
+                $url = $domain.$url;
+            }
+            if ((str_starts_with($url, '/singeo/jump-to-comment'))  || (str_starts_with($url, '/singeo/forums')))
+            {
+                $url = $domain.$url;
+            }
+            if ((str_starts_with($url, '/guitareo/jump-to-comment'))  || (str_starts_with($url, '/guitareo/forums')))
             {
                 $url = $domain.$url;
             }

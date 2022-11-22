@@ -127,7 +127,7 @@
       </div>
 
       <p
-        v-if="brand !== 'guitareo' && !isCoach"
+        v-if="!isCoach"
         class="tw-text-base font-compressed tw-uppercase text-truncate tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]"
         :class="[
           overview ? 'dense' : 'font-compressed',
