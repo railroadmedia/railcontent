@@ -268,9 +268,8 @@ class ContentPagesController extends BaseController
         }
 
         $childrenContent = $firstLevelContent['units'] ??
-            $this->contentService->getByParentIdWhereTypeIn(
-                $firstLevelContent['id'],
-                [ContentTypeHierarchyMap::$map[$firstLevelContent['type']]]
+            $this->contentService->getByParentId(
+                $firstLevelContent['id']
             );
 
         $childrenContentResultsEntity = new ContentFilterResultsEntity(['results' => $childrenContent]);
