@@ -99,12 +99,12 @@ export default {
     </section>
 
     <!-- Playlists Section -->
-    <!-- <playlists-section
+    <playlists-section
       :isSidebarCollapsed="isSidebarCollapsed"
       :playlist="playlist"
-      :pathName="pathName"
+      :isActivePath="activePath(`/${brand}/lists/my-list`)"
       :brand="brand"
-    ></playlists-section> -->
+    ></playlists-section>
 
   </SidebarContainer>
 </template>

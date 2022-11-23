@@ -127,7 +127,7 @@ export default {
 
         <OptionElement :href="`/${ brand }/lists/my-list`">
           <musora-icon icon-name="playlist" class="tw-w-[20px] tw-mr-2"/>
-          My List
+          Playlists
         </OptionElement>
         <OptionElement @onOptionClick="() => handleReviewOpen(true)">
           <musora-icon icon-name="board-complete" class="tw-w-[20px] tw-mr-2"/>

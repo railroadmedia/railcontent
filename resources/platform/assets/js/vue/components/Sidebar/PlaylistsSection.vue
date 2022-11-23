@@ -10,7 +10,7 @@
             isSidebarCollapsed: Boolean,
             playlist: Array,
             brand: String,
-            pathName: String
+            isActivePath: Boolean
         },
         setup(props) {
             return {
@@ -22,14 +22,14 @@
 </script>
 <template>
     <section>
-        <div class="tw-h-[42px] tw-flex tw-items-center tw-w-full" :class="[pathName === '/members/profile' ? ` ${textColor[brand]}` : '']">
+        <div class="tw-h-[42px] tw-flex tw-items-center tw-w-full">
 
-            <a :href=" `/members/profile` " 
+            <a :href=" `/${brand}/lists/my-list` " 
                 :title="[ isSidebarCollapsed ? 'Playlists': '' ]"
                 class="tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-w-full"
-                :class="[pathName === '/members/profile' ? `tw-font-bold ${textColor[brand]} ${borderColor[brand]}` : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white' ]"
+                :class="[isActivePath ? `tw-font-bold ${textColor[brand]} ${borderColor[brand]}` : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white' ]"
             >
-                <musora-icon icon-name="playlist" class="tw-w-[20px] tw-mx-4 tw-mt-1"/>
+                <musora-icon icon-name="playlist" class="tw-w-[24px] tw-mx-4"/>
                 <span class="tw-transition tw-whitespace-nowrap tw-font-bold tw-text-sm tw-uppercase" :class="[isSidebarCollapsed ? 'md:tw-opacity-0' : 'tw-opacity-100']">Playlists</span>
             </a>
                 
