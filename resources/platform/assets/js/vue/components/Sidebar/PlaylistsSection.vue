@@ -45,8 +45,10 @@
 
         <Transition name="fade">
             <div v-if="!isSidebarCollapsed" class="tw-text-sm tw-transition tw-pb-8">
-                <!-- Loop through User Playlist -->
-                <ul v-if="playlist.length > 0"></ul>
+                
+                <ul v-if="playlist.length > 0">
+                    <!-- Loop through User Playlist -->
+                </ul>
                 
                 <div v-else class="tw-mt-8 tw-flex tw-flex-col tw-items-center">
 
