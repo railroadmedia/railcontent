@@ -335,7 +335,7 @@ return [
 
         'apple_store_kit' => [
             'endpoint' => env('APPLE_VERIFY_RECEIPT_ENDPOINT', 'https://sandbox.itunes.apple.com'),
-            'shared_secret' => '7e598c622c0a46f49c79c2272bcc2c25',
+            'shared_secret' => env('APPLE_STORE_KIT_SHARED_SECRET'),
         ],
 
         'google_play_store' => [

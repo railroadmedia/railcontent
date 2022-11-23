@@ -43,7 +43,7 @@
             <a href="https://www.youtube.com/c/singeoofficial" target="_blank" class="social-media youtube"><i class="fab fa-youtube"></i></a>
             <a href="https://www.facebook.com/singeoofficial/" target="_blank" class="social-media facebook"><i class="fab fa-facebook-f"></i></a>
             <a href="https://www.instagram.com/singeoofficial/" target="_blank" class="social-media instagram"><i class="fab fa-instagram"></i></a>
-            <p class="tiny">Musora Media, Inc. © {{ date('Y') }} - &nbsp; <a href="/terms">Terms</a>&nbsp;&nbsp;/&nbsp;&nbsp;<a href="/privacy">Privacy</a>&nbsp;&nbsp;/&nbsp;&nbsp;<a href="https://www.musora.com/jobs">Jobs</a>&nbsp;&nbsp;/&nbsp;&nbsp;<a href="https://www.musora.com/brand">Brand Guide</a></p>
+            <p class="tiny">Musora Media, Inc. © {{ date('Y') }} - &nbsp; <a href="/terms">Terms</a>&nbsp;&nbsp;/&nbsp;&nbsp;<a href="/privacy">Privacy</a>&nbsp;&nbsp;/&nbsp;&nbsp;<a href="https://www.musora.com/careers">Careers</a>&nbsp;&nbsp;/&nbsp;&nbsp;<a href="https://www.musora.com/brand">Brand Guide</a></p>
         </div>
     </div>
 </footer>
