@@ -83,7 +83,7 @@
     </div>
 
     <div
-      v-if="content.length === 0 && noResultsMessage.length > 0"
+      v-if="noResultsMessage.length > 0"
       class="flex flex-row pv-3 align-v-center"
     >
       <div class="flex flex-column icon-col face-icon mr-1">
