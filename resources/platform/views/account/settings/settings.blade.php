@@ -18,6 +18,36 @@
                 {{ csrf_field() }}
 
                 @include('account.settings.partials._brand-notifications-settings', ['allBrands' => $allBrands])
+
+                <div class="tw-flex tw-flex-row tw-flex-auto tw-mt-3 tw-p-3 tw-text-[#00101D] dark:tw-text-white">
+                    <h2 class="tw-font-bold tw-text-lg">
+                        What type of notifications would you like to receive from 
+                        <span class="tw-capitalize">{{ app('request')->input('selected-brand') ? app('request')->input('selected-brand') : $brand }}</span>?
+                    </h2>
+                </div>
+
+                <div class="tw-flex tw-flex-row ph-3 tw-pb-3 tw-mb-6 tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">
+                    <div class="tw-flex tw-flex-col">
+                        <div class="tw-flex tw-flex-row tw-mb-2">
+                            @include('partials.bladesora.members.inputs.toggle-input', [
+                                "inputID" => "sendEmailNotifications",
+                                "inputName" => "send_email",
+                                "inputLabel" => "Send email notifications.",
+                                "checked" => (boolean) ($userNotificationsSettings['send_email'] ?? user()->send_email_notifications)
+                            ])
+                        </div>
+        
+                        <div class="tw-flex tw-flex-row tw-mb-2">
+                            @include('partials.bladesora.members.inputs.toggle-input', [
+                                "inputID" => "sendMobileAppPushNotifications",
+                                "inputName" => "send_in_app_push_notification",
+                                "inputLabel" => "Send mobile push notifications.",
+                                "checked" => (boolean) ($userNotificationsSettings['send_in_app_push_notification'] ?? user()->send_mobile_app_push_notifications)
+                            ])
+                        </div> 
+                    </div>
+                </div> 
+
                 <div class="tw-flex tw-flex-row tw-flex-auto tw-p-3 tw-text-[#00101D] dark:tw-text-white">
                     <h2 class="tw-font-bold tw-text-lg">When would you like to receive email notifications?</h2>
                 </div>
@@ -62,23 +92,6 @@
                                 "inputName" => "notify_on_forum_post_like",
                                 "inputLabel" => "When a member likes my forum posts",
                                 "checked" => (boolean) ($userNotificationsSettings['notify_on_forum_post_like'] ?? user()->notify_on_forum_post_like)
-                            ])
-                        </div>
-                        <div class="tw-flex tw-flex-row tw-mb-2">
-                            @include('partials.bladesora.members.inputs.toggle-input', [
-                                "inputID" => "sendEmailNotifications",
-                                "inputName" => "send_email",
-                                "inputLabel" => "Send email notifications.",
-                                "checked" => (boolean) ($userNotificationsSettings['send_email'] ?? user()->send_email_notifications)
-                            ])
-                        </div>
-
-                        <div class="tw-flex tw-flex-row tw-mb-2">
-                            @include('partials.bladesora.members.inputs.toggle-input', [
-                                "inputID" => "sendMobileAppPushNotifications",
-                                "inputName" => "send_in_app_push_notification",
-                                "inputLabel" => "Send mobile push notifications.",
-                                "checked" => (boolean) ($userNotificationsSettings['send_in_app_push_notification'] ?? user()->send_mobile_app_push_notifications)
                             ])
                         </div>
                     </div>
