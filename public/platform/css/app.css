@@ -15072,10 +15072,10 @@ input[type=text].bg-light.inverted,
   z-index: 1;
 }
 body.tw-dark .radio-input input[type=radio]:checked ~ .toggle {
-  background-color: #445F74;
+  background-color: #002039;
 }
 body.tw-dark .radio-input .toggle {
-  background-color: #c2c2c2;
+  background-color: #223F57;
 }
 
 .toggle-input {
@@ -15144,10 +15144,13 @@ body.tw-dark .radio-input .toggle {
   transition: transform 0.2s ease-in-out;
 }
 body.tw-dark .toggle-input input[type=checkbox]:checked ~ .toggle {
-  background-color: #445F74;
+  background-color: #002039;
 }
 body.tw-dark .toggle-input .toggle {
-  background-color: #c2c2c2;
+  background-color: #223F57;
+}
+body.tw-dark .toggle-input .toggle:after, body.tw-dark .toggle-input .toggle:before {
+  color: #9EC0DC;
 }
 
 textarea {
@@ -21626,6 +21629,10 @@ a:visited{
   margin-top: 1.5rem !important;
   margin-bottom: 1.5rem !important;
 }
+.tw-mx-4{
+  margin-left: 1rem !important;
+  margin-right: 1rem !important;
+}
 .tw-mx-1{
   margin-left: 0.25rem !important;
   margin-right: 0.25rem !important;
@@ -21645,10 +21652,6 @@ a:visited{
 .tw-my-\[7px\]{
   margin-top: 7px !important;
   margin-bottom: 7px !important;
-}
-.tw-mx-4{
-  margin-left: 1rem !important;
-  margin-right: 1rem !important;
 }
 .tw-my-5{
   margin-top: 1.25rem !important;
@@ -22902,14 +22905,14 @@ a:visited{
 .tw-border-4{
   border-width: 4px !important;
 }
-.tw-border-\[2px\]{
-  border-width: 2px !important;
-}
 .tw-border-\[1px\]{
   border-width: 1px !important;
 }
 .tw-border-\[0\.5px\]{
   border-width: 0.5px !important;
+}
+.tw-border-\[2px\]{
+  border-width: 2px !important;
 }
 .tw-border-b{
   border-bottom-width: 1px !important;
