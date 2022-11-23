@@ -94,7 +94,7 @@
         <!-- Join -->
         <section class="flex flex-col text-center mb-12">
             <h2 class="font-bold text-3xl mb-3 md:mb-6">Want to join the team?</h2>
-            <p class="text-base">For current available positions at our company, please visit <a href="https://musora.com/jobs" title="go to help center" class="font-bold no-underline text-singeo">Musora.com/Jobs</a>.</p>
+            <p class="text-base">For current available positions at our company, please visit <a href="https://musora.com/careers" title="go to help center" class="font-bold no-underline text-singeo">Musora.com/Careers</a>.</p>
         </section>
 
     </main>
@@ -103,6 +103,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="/marketing/parcel/singeo/nav-footer.js"></script>
-    <script src="{{ asset('marketing/js/singeo/manifest.js') }}"></script>
-    <script src="{{ asset('marketing/js/singeo/vendor.js') }}"></script>
-    <script src="{{ asset('marketing/js/singeo/app.js') }}"></script>
+    <script src="{{ mix('marketings/js/manifest.js') }}"></script>
+    <script src="{{ mix('marketings/js/vendor.js') }}"></script>
+    <script src="{{ mix('marketing/js/app.js') }}"></script>
+@stop

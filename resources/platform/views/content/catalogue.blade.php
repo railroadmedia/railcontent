@@ -125,7 +125,7 @@
                         @if(Carbon\Carbon::create(2022, 11, 15, 11, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
                             href="/drumeo/forums/drumeo-songs/15/december-2022-song-request-voting-thread/13853?sortby_val=published_on"
                         @else
-                            href="/members/forums/threads/drumeo-songs/15"
+                            href="/drumeo/forums/threads/drumeo-songs/15"
                         @endif
                        class="tw-btn-primary tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600">
                         Request A Song

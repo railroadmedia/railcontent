@@ -77,8 +77,7 @@ class PaymentMethodUpdateController extends Controller
         SubscriptionRepository $subscriptionRepository,
         SubscriptionService $subscriptionService,
         UserProviderInterface $userProvider
-    )
-    {
+    ) {
         $this->currencyService = $currencyService;
         $this->entityManager = $entityManager;
         $this->paymentMethodService = $paymentMethodService;
@@ -148,12 +147,10 @@ class PaymentMethodUpdateController extends Controller
                 event(new PaypalPaymentMethodEvent($paymentMethod->getId()));
             } // paypal
             elseif ($request->get('method_type') == PaymentMethod::TYPE_PAYPAL || !empty($request->get('token'))) {
-
                 // if the paypal token is not set we must first redirect to paypal
                 if (empty($request->get('token'))) {
-
                     $gateway = $request->get('gateway');
-                    $url = route('update-payment-method-paypal-submit');
+                    $url = url()->route(config('ecommerce.paypal.agreement_route'), ['gateway' => $gateway]);
 
                     $checkoutUrl = $this->payPalPaymentGateway->getBillingAgreementExpressCheckoutUrl($gateway, $url);
 
@@ -195,7 +192,6 @@ class PaymentMethodUpdateController extends Controller
                 throw new PaymentFailedException('Payment method not supported.');
             }
         } catch (Throwable $exception) {
-
             $url = $request->get('redirect') ?? strtok(app('url')->previous(), '?');
 
             return response()->json(
@@ -216,9 +212,7 @@ class PaymentMethodUpdateController extends Controller
 
         // if update_active_subscriptions is true, update all active subscriptions to use the new payment method
         if ($updateActiveSubscriptions) {
-
             foreach ($subscriptions as $subscription) {
-
                 if ($subscription->getIsActive()) {
                     $oldSubscription = clone $subscription;
 
@@ -260,7 +254,6 @@ class PaymentMethodUpdateController extends Controller
         if ($request->get('renew_due_subscription') &&
             !empty($subscriptionToBill) &&
             !$subscriptionToBill->getIsActive()) {
-
             // update its payemnt method
             $oldSubscription = clone $subscriptionToBill;
 
@@ -270,7 +263,6 @@ class PaymentMethodUpdateController extends Controller
             try {
                 $this->subscriptionService->renew($subscriptionToBill);
             } catch (Throwable $exception) {
-
                 $url = $request->get('redirect') ?? strtok(app('url')->previous(), '?');
 
                 if ($request->isJson()) {

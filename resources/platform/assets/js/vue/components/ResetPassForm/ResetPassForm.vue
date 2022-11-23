@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import { EyeIcon, EyeOffIcon } from '@heroicons/vue/outline'
 import InputLabel from "../InputLabel/InputLabel.vue";
-import RainbowButton from "../Button/RainbowButton.vue";
+import LoginButton from "../Button/LoginButton.vue";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner.vue";
 
 const props = defineProps({
@@ -106,13 +106,13 @@ const toggleSeePassword = () => {
           </InputLabel>
         </div>
 
-        <RainbowButton :disabled="!confirmPasswordInput.length || isLoading" type="button"
+        <LoginButton :disabled="!confirmPasswordInput.length || isLoading" type="button"
           @on-button-click="handleButtonClick">
           <span class="tw-flex tw-justify-center tw-items-center" v-if="isLoading">
             <LoadingSpinner /> RESETTING...
           </span>
           <span v-if="!isLoading">RESET</span>
-        </RainbowButton>
+        </LoginButton>
         <button id="hidden-submit" type="submit" hidden>Submit</button>
       </form>
     </section>

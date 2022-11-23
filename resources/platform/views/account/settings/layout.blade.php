@@ -96,7 +96,7 @@
     </div>
 
     @if(session()->has('error-message'))
-        <div class="form-success-message tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3">
+        <div class="form-success-message tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3">
             <div class="tw-flex tw-flex-col bg-error tw-shadow corners-10 pa">
                 <p class="body tw-text-white"><strong>{{ session()->get('error-message') }}</strong></p>
             </div>
@@ -104,7 +104,7 @@
     @endif
 
     @if(session()->has('success'))
-        <div class="form-success-message tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3">
+        <div class="form-success-message tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3">
             <div class="tw-flex tw-flex-col tw-bg-{{$brand}} tw-shadow corners-10 pa">
                 <p class="body tw-text-white">Profile successfully updated!</p>
             </div>
@@ -112,7 +112,7 @@
     @endif
 
     @if(session()->has('successes'))
-        <div class="form-success-message tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3">
+        <div class="form-success-message tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3">
             <div class="tw-flex tw-flex-col tw-bg-{{$brand}} tw-shadow corners-10 pa">
                 @foreach(session()->get('successes')->all() as $message)
                     <p class="body tw-text-white">{{ $message }}</p>
@@ -122,7 +122,7 @@
     @endif
 
     @if(session()->has('success-message-unsubscribe'))
-        <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white tw-pt-8 tw-pb-14">
+        <div class="tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white tw-pt-8 tw-pb-14">
             <div class="tw-flex tw-flex-row tw-bg-{{$brand}} tw-text-white tw-shadow corners-10 pa-3">
                 <div class="tw-flex tw-flex-col">
                     <h4 class="title tw-mb-3">Membership Canceled</h4>
@@ -133,7 +133,7 @@
     @endif
 
     @if(session()->has('success-message-unsubscribe-contact'))
-        <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white tw-pt-8 tw-pb-14">
+        <div class="tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white tw-pt-8 tw-pb-14">
             <div class="tw-flex tw-flex-row tw-bg-{{$brand}} tw-text-white tw-shadow corners-10 pa-3">
                 <div class="tw-flex tw-flex-col">
                     <h4 class="title tw-mb-3">Contact Request Sent.</h4>
@@ -143,7 +143,7 @@
         </div>
     @endif
 
-    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-pt-8 tw-pb-14">
+    <div class="tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8 tw-pt-8 tw-pb-14">
         <div class="tw-flex tw-flex-row">
             <div class="tw-flex tw-flex-col grow">
                 <div class="tw-flex tw-flex-row tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">
