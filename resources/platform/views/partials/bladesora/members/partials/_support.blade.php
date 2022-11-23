@@ -46,6 +46,6 @@
 
     <section class="tw-flex tw-flex-col tw-text-center tw-mb-12 tw-text-[#00101D] dark:tw-text-white">
         <h2 class="tw-font-bold tw-text-3xl tw-mb-3 md:tw-mb-6">Want to join the team?</h2>
-        <p class="tw-text-base">For current available positions at our company, please visit <a href="https://musora.com/jobs" title="go to help center" class="tw-font-bold tw-no-underline tw-text-{{ $brand }}">Musora.com/Jobs</a>.</p>
+        <p class="tw-text-base">For current available positions at our company, please visit <a href="/careers" title="go to help center" class="tw-font-bold tw-no-underline tw-text-{{ $brand }}">Musora.com/Careers</a>.</p>
     </section>
 </div>
