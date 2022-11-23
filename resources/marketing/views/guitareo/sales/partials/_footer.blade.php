@@ -43,7 +43,7 @@
             <a rel="noopener" href="https://www.youtube.com/user/guitarlessonscom" target="_blank" class="social-media youtube"><i class="fab fa-youtube"></i></a>
             <a rel="noopener" href="https://www.facebook.com/guitareoofficial" target="_blank" class="social-media facebook"><i class="fab fa-facebook-f"></i></a>
             <a rel="noopener" href="https://www.instagram.com/guitareoofficial/" target="_blank" class="social-media instagram"><i class="fab fa-instagram"></i></a>
-            <p class="tiny">Musora Media, Inc. &copy; {{ date('Y') }} - &nbsp; <a href="/terms">Terms</a>&nbsp;&nbsp;/&nbsp;&nbsp;<a href="/privacy">Privacy</a>&nbsp;&nbsp;/&nbsp;&nbsp;<a rel="noopener" href="https://www.musora.com/jobs">Careers</a>&nbsp;&nbsp;/&nbsp;&nbsp;<a rel="noopener" href="https://www.musora.com/brand">Brand Guide</a></p>
+            <p class="tiny">Musora Media, Inc. &copy; {{ date('Y') }} - &nbsp; <a href="/terms">Terms</a>&nbsp;&nbsp;/&nbsp;&nbsp;<a href="/privacy">Privacy</a>&nbsp;&nbsp;/&nbsp;&nbsp;<a rel="noopener" href="https://www.musora.com/careers">Careers</a>&nbsp;&nbsp;/&nbsp;&nbsp;<a rel="noopener" href="https://www.musora.com/brand">Brand Guide</a></p>
         </div>
     </div>
 </footer>
