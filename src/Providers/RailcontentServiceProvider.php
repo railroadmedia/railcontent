@@ -48,6 +48,7 @@ use Railroad\Railcontent\Events\UserContentProgressSaved;
 use Railroad\Railcontent\Listeners\AssignCommentEventListener;
 use Railroad\Railcontent\Listeners\ContentEventListener;
 use Railroad\Railcontent\Listeners\ContentTotalXPListener;
+use Railroad\Railcontent\Listeners\RailcontentV2DataSyncingEventListener;
 use Railroad\Railcontent\Listeners\SyncElasticsearchListener;
 use Railroad\Railcontent\Listeners\UnassignCommentEventListener;
 use Railroad\Railcontent\Listeners\UserContentProgressEventListener;
@@ -57,13 +58,24 @@ use Railroad\Railcontent\Validators\MultipleColumnExistsValidator;
 class RailcontentServiceProvider extends ServiceProvider
 {
     protected $listen = [
-        ContentCreated::class => [],
-        ContentUpdated::class => [],
-        ContentDeleted::class => [ContentEventListener::class . '@handleDelete'],
-        ContentSoftDeleted::class => [ContentEventListener::class . '@handleSoftDelete'],
+        ContentCreated::class => [
+            RailcontentV2DataSyncingEventListener::class . '@handleContentCreated',
+        ],
+        ContentUpdated::class => [
+            RailcontentV2DataSyncingEventListener::class . '@handleContentUpdated',
+        ],
+        ContentDeleted::class => [
+            ContentEventListener::class . '@handleDelete',
+            RailcontentV2DataSyncingEventListener::class . '@handleContentDeleted',
+        ],
+        ContentSoftDeleted::class => [
+            ContentEventListener::class . '@handleSoftDelete',
+            RailcontentV2DataSyncingEventListener::class . '@handleContentSoftDeleted',
+        ],
         ContentFieldCreated::class => [
             // VersionContentEventListener::class . '@handleFieldCreated',
             ContentTotalXPListener::class . '@handleFieldCreated',
+            RailcontentV2DataSyncingEventListener::class . '@handleContentFieldCreated',
 
             // todo: some functions are missing so this is commented our for now.
 //            SyncElasticsearchListener::class . '@handleSync',
@@ -71,19 +83,30 @@ class RailcontentServiceProvider extends ServiceProvider
         ContentFieldUpdated::class => [
             // VersionContentEventListener::class . '@handleFieldUpdated',
             ContentTotalXPListener::class . '@handleFieldUpdated',
+            RailcontentV2DataSyncingEventListener::class . '@handleContentFieldUpdated',
         ],
         ContentFieldDeleted::class => [
             // VersionContentEventListener::class . '@handleFieldDeleted',
             ContentTotalXPListener::class . '@handleFieldDeleted',
+            RailcontentV2DataSyncingEventListener::class . '@handleContentFieldDeleted',
         ],
-        ContentDatumCreated::class => [],
-        ContentDatumUpdated::class => [],
-        ContentDatumDeleted::class => [],
+        ContentDatumCreated::class => [
+            RailcontentV2DataSyncingEventListener::class . '@handleContentDatumCreated',
+        ],
+        ContentDatumUpdated::class => [
+            RailcontentV2DataSyncingEventListener::class . '@handleContentDatumUpdated',
+        ],
+        ContentDatumDeleted::class => [
+            RailcontentV2DataSyncingEventListener::class . '@handleContentDatumDeleted',
+        ],
         CommentCreated::class => [AssignCommentEventListener::class . '@handle'],
         CommentDeleted::class => [UnassignCommentEventListener::class . '@handle'],
         UserContentProgressSaved::class => [UserContentProgressEventListener::class . '@handle'],
-        HierarchyUpdated::class => [ContentTotalXPListener::class . '@handleHierarchyUpdated'],
-        ElasticDataShouldUpdate::class => [SyncElasticsearchListener::class.'@handleSync']
+        HierarchyUpdated::class => [
+            ContentTotalXPListener::class . '@handleHierarchyUpdated',
+            RailcontentV2DataSyncingEventListener::class . '@handleHierarchyUpdated',
+        ],
+        ElasticDataShouldUpdate::class => [SyncElasticsearchListener::class . '@handleSync']
     ];
 
     /**
