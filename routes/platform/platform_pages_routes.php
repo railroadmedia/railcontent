@@ -92,6 +92,7 @@ Route::domain('{musoraDomain}')
                         'sonor-drums',
                         'rudiments',
                         'boot-camps',
+                        'song-tutorials'
                     ])
                     ->name('platform.content-type-catalog');
 
@@ -196,6 +197,7 @@ Route::domain('{musoraDomain}')
                             'archives',
                             'recording',
                             'play-alongs',
+                            'song-tutorials',
                         ]
                     )
                     ->name('platform.content.first-level');
@@ -205,7 +207,7 @@ Route::domain('{musoraDomain}')
                     [ContentPagesController::class, 'secondLevel']
                 )
                     ->whereIn('brand', all_brands())
-                    ->whereIn('primaryPage', ['method', 'coaches', 'courses', 'songs', 'play-alongs'])
+                    ->whereIn('primaryPage', ['method', 'coaches', 'courses', 'songs', 'play-alongs','song-tutorials'])
                     ->name('platform.content.second-level');
 
                 Route::get(

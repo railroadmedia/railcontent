@@ -4,6 +4,7 @@ namespace App\Console;
 
 use App\Console\Commands\MigrateCoachesToInstructors;
 use App\Console\Commands\MigrateGuitareoUserXP;
+use App\Console\Commands\MigratePianoteSongTutorial;
 use App\Console\Commands\PopulateNewRolesAndPermissionsTables;
 use App\Console\Commands\PopulateUserBrandLevel;
 use App\Console\Commands\PopulateUserMinutesPracticedPerBrand;
@@ -40,7 +41,8 @@ class Kernel extends ConsoleKernel
         VaporEnvManager::class,
         TestLessonsDescriptionUrls::class,
         MigrateGuitareoUserXP::class,
-        RepairUserProductsFromReferral::class
+        RepairUserProductsFromReferral::class,
+        MigratePianoteSongTutorial::class,
     ];
 
     /**
