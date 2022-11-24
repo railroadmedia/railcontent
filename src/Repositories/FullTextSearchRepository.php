@@ -12,6 +12,7 @@ use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Repositories\QueryBuilders\ContentQueryBuilder;
 use Railroad\Railcontent\Repositories\QueryBuilders\FullTextSearchQueryBuilder;
 use Railroad\Railcontent\Services\ConfigService;
+use Railroad\Railcontent\Services\ContentService;
 
 class FullTextSearchRepository extends RepositoryBase
 {
@@ -263,6 +264,12 @@ class FullTextSearchRepository extends RepositoryBase
 
         if (!empty($dateCutoff)) {
             $query->where('content_published_on', '>', $dateTimeCutoff);
+        }
+
+        if (!in_array(ContentService::STATUS_DRAFT, $contentStatuses)
+            && !in_array(ContentService::STATUS_SCHEDULED, $contentStatuses)
+            && !in_array(ContentService::STATUS_ARCHIVED, $contentStatuses)) {
+            $query->where('content_published_on', '<=', Carbon::now());
         }
 
         if (!empty($coachIds)) {
