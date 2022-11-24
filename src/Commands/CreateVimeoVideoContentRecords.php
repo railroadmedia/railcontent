@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Commands;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
+use Illuminate\Support\Facades\Log;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
@@ -13,7 +14,7 @@ use Vimeo\Vimeo;
 
 class CreateVimeoVideoContentRecords extends Command
 {
-    protected $signature = 'CreateVimeoVideoContentRecords {totalNumberToProcess?}';
+    protected $signature = 'content:CreateVimeoVideoContentRecords {totalNumberToProcess?}';
     protected $description = 'Content from external resources.';
 
     private $lib;
@@ -26,11 +27,20 @@ class CreateVimeoVideoContentRecords extends Command
     private $totalNumberOfPagesToProcess;
     private $numberOnLastPage;
 
+    public function info($string, $verbosity = null)
+    {
+        Log::info($string); //also write info statements to log
+        $this->line($string, 'info', $verbosity);
+    }
+
     public function handle(
         ContentService $contentService,
         ContentRepository $contentRepository,
         DatabaseManager $databaseManager
     ) {
+        $this->info("Processing $this->name");
+        $timeStart = microtime(true);
+
         $this->numberOnLastPage = null;
         $this->total = null;
         $this->totalNumberToProcess = null;
@@ -212,7 +222,9 @@ class CreateVimeoVideoContentRecords extends Command
             }
         } while ($this->amountProcessed < $this->totalNumberToProcess);
 
-        $this->info('CreateVimeoVideoContentRecords complete.');
+        $diff = microtime(true) - $timeStart;
+        $sec = intval($diff);
+        $this->info("Finished $this->name ($sec s)");
     }
 
     private function getVideos()
