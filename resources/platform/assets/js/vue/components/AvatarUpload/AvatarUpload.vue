@@ -26,7 +26,7 @@ const props = defineProps({
     type: String,
     default: null,
   },
-  userName : {
+  userName: {
     type: String,
     default: null
   },
@@ -35,8 +35,6 @@ const props = defineProps({
     default: null
   }
 });
-
-const emit = defineEmits(['onError'])
 
 const imgUrlRef = ref(props.imgUrl);
 
@@ -62,40 +60,27 @@ function handleUploadDone(imgUrl) {
 }
 
 function handleUploadError() {
-  emit('onError');
+  console.log('handle upload error')
+  window.shownotification({
+    icon: 'error',
+    text: 'There was an error uploading this image, please try again later.'
+  });
   showUploadForm.value = false;
 }
 </script>
 
 <template>
   <div class="">
-    <InfoModal
-      v-if="showUploadForm"
-      modalId="upload-modal"
-      @onClose="openUploadForm"
-      :title="title[uploadStep]"
-    >
-      <ImageDropzone
-        v-if="uploadStep === 'dropzone'"
-        @onImageSelected="handleImage"
-      />
-      <ImageCropper
-        v-if="uploadStep === 'crop'"
-        @onCrop="handleCrop"
-        :selectedImage="selectedImage"
-      />
-      <ImageUploadProgress
-        v-if="uploadStep === 'upload'"
-        :image="croppedImage"
-        :userId="userId"
-        @onUploadDone="handleUploadDone"
-        @onUploadError="handleUploadError"
-      />
+    <InfoModal v-if="showUploadForm" modalId="upload-modal" @onClose="openUploadForm" :title="title[uploadStep]">
+      <ImageDropzone v-if="uploadStep === 'dropzone'" @onImageSelected="handleImage" />
+      <ImageCropper v-if="uploadStep === 'crop'" @onCrop="handleCrop" :selectedImage="selectedImage" />
+      <ImageUploadProgress v-if="uploadStep === 'upload'" :image="croppedImage" :userId="userId"
+        @onUploadDone="handleUploadDone" @onUploadError="handleUploadError" />
     </InfoModal>
 
-    <button v-on:click="openUploadForm" class="hover:tw-underline tw-flex tw-flex-col tw-justify-center tw-items-center tw-w-full">
-      <div
-        class="
+    <button v-on:click="openUploadForm"
+      class="hover:tw-underline tw-flex tw-flex-col tw-justify-center tw-items-center tw-w-full">
+      <div class="
           tw-relative
           tw-flex
           tw-h-[100px]
@@ -112,21 +97,18 @@ function handleUploadError() {
           hover:tw-border-white
           tw-border-2
           tw-color-[#344858]
-        "
-        :style="{ ...imgUrlRef ? { backgroundImage: `url(${imgUrlRef})`, backgroundSize: 'cover' } : {} }"
-      >
+        " :style="{ ...imgUrlRef ? { backgroundImage: `url(${imgUrlRef})`, backgroundSize: 'cover' } : {} }">
         <UserIcon v-if="!imgUrlRef" />
-        <div
-          class="
+        <div class="
             tw-absolute
             tw-z-0
             tw-h-[120px]
             tw-w-[120px]
             tw-rounded-full
-          "
-        ></div>
+          "></div>
       </div>
-      <div class="tw-text-center tw-text-white tw-font-bebas-neue tw-uppercase tw-mt-[7px]" style="text-decoration: inherit;">
+      <div class="tw-text-center tw-text-white tw-font-bebas-neue tw-uppercase tw-mt-[7px]"
+        style="text-decoration: inherit;">
         {{ imgUrlRef ? 'UPDATE PROFILE PICTURE' : 'UPLOAD PHOTO' }}
       </div>
     </button>
