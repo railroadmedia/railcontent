@@ -30,7 +30,7 @@
                 </div>
                 <div class="tw-flex tw-flex-col tw-w-full tw-items-center text-grey-3 dark:tw-text-[#9EC0DC] lg:tw-pr-[100px]">
                     <p class="tiny">For best results upload a square photo.</p>
-                    <p class="tiny tw-italic">Max file size: <strong>5MB</strong></p>
+                    <p class="tiny tw-italic">Max file size: <strong>15MB</strong></p>
                 </div>
             </div>
         </div>
