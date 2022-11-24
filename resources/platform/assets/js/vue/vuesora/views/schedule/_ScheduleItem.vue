@@ -13,11 +13,12 @@
                         class="thumb-img corners-10 widescreen text-center"
                         :style="`background-image: url( ${ item.original_thumbnail_url } )`"
                     >
-                        <div class="tw-absolute tw-top-0 tw-w-full tw-h-full tw-left-0 tw-bg-black/70 tw-flex tw-flex-col tw-items-center tw-justify-center">
+                        <div class="tw-absolute tw-top-0 tw-w-full tw-h-full tw-left-0 tw-bg-black/80 tw-flex tw-flex-col tw-items-center tw-justify-center">
                             <p class="tw-text-xs text-white font-bold">
-                                {{ day }}
+                                {{ day }},
+                                <span class="tw-capitalize">{{ month }}</span> <span class="">{{ dayNumber }}/{{ yearNumber }}</span>
                             </p>
-                            <p class="tw-text-xs  text-white">
+                            <p class="tw-text-xs text-white">
                                 {{ time }}
                             </p>
                         </div>
@@ -111,11 +112,19 @@ export default {
         },
 
         month() {
-            return DateTime.fromSQL(this.formatted_time).toFormat('LLL').toLowerCase();
+            return DateTime.fromSQL(this.formatted_time).toFormat('LLL');
         },
 
         day() {
-            return DateTime.fromSQL(this.formatted_time).toFormat('ccc d');
+            return DateTime.fromSQL(this.formatted_time).toFormat('ccc');
+        },
+
+        dayNumber() {
+            return DateTime.fromSQL(this.formatted_time).toFormat('d');
+        },
+
+        yearNumber() {
+            return DateTime.fromSQL(this.formatted_time).toFormat('yy');
         },
 
         time() {
