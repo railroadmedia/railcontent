@@ -5,38 +5,42 @@ namespace App\Http\Controllers\Platform;
 use App;
 use App\Http\Controllers\BaseController;
 use App\Modules\Crux\ProductAccessMap;
-use App\Services\User\UserAccessService;
+use App\Modules\CustomerIO\Services\CustomerIoService;
 use Carbon\Carbon;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
+use Doctrine\ORM\ORMException;
 use Exception;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\MessageBag;
 use Illuminate\Support\Facades\Mail;
-use Railroad\Crux\Services\NavigationSpecificsDeterminationService;
 use Railroad\Ecommerce\Contracts\UserProviderInterface;
 use Railroad\Ecommerce\Entities\MembershipAction;
 use Railroad\Ecommerce\Entities\Payment;
-use Railroad\Ecommerce\Entities\Product;
 use App\Modules\Ecommerce\Models\Product as ProductModel;
 use Railroad\Ecommerce\Entities\Subscription;
 use Railroad\Ecommerce\Entities\Traits\NotableEntity;
 use Railroad\Ecommerce\Entities\User;
 use Railroad\Ecommerce\Events\Subscriptions\SubscriptionUpdated;
+use Railroad\Ecommerce\Events\UserProducts\UserProductUpdated;
+use Railroad\Ecommerce\Exceptions\Cart\ProductNotActiveException;
+use Railroad\Ecommerce\Exceptions\Cart\ProductNotFoundException;
 use Railroad\Ecommerce\Managers\EcommerceEntityManager;
+use Railroad\Ecommerce\Repositories\MembershipActionRepository;
 use Railroad\Ecommerce\Repositories\PaymentMethodRepository;
 use Railroad\Ecommerce\Repositories\PaymentRepository;
+use Railroad\Ecommerce\Repositories\ProductRepository;
 use Railroad\Ecommerce\Repositories\SubscriptionRepository;
 use Railroad\Ecommerce\Services\CartService;
 use Railroad\Ecommerce\Services\InvoiceService;
 use Railroad\Ecommerce\Services\ResponseService;
-use Railroad\Ecommerce\Services\SubscriptionService;
 use Railroad\Ecommerce\Services\UserProductService;
 use Railroad\Ecommerce\Transformers\SubscriptionTransformer;
 use Railroad\Location\Services\CountryListService;
 use Railroad\Mailora\Mail\General;
-use Railroad\Mailora\Services\MailService;
-use Railroad\Railcontent\Services\UserPermissionsService;
 use Railroad\Railforums\Repositories\UserSignaturesRepository;
 use Railroad\Railnotifications\Services\NotificationSettingsService;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -56,50 +60,49 @@ class ProfileSettingsPagesController extends BaseController
         'other' => 'Other',
     ];
 
+    const TRIAL_MEMBERSHIP_PRODUCT_IDS = [
+        126, // Drumeo
+        283,
+        400,
+        401,
+        266,
+        273,
+        318, // Pianote
+        319,
+        403,
+        402,
+        23, // Guitareo
+        429,
+        430,
+        431,
+        413, // Singeo
+        414,
+        423,
+        424,
+    ];
+
+    const SWITCH_TO_MONTHLY_PRICE = 19;
+
     public static $generalSuccessMessageToUser = 'Your account has been updated.';
 
     public static $generalErrorMessageToUser = 'We\'re sorry, but there\'s been an error. Please reload the page and try ' .
     'again. If that doesn\'t work email or use the chat at the bottom right of your screen to get things sorted out ' .
     'right away.';
 
-    /**
-     * @var NotificationSettingsService
-     */
-    private $notificationSettingsService;
-    /**
-     * @var UserPermissionsService
-     */
-    private $userPermissionsService;
-    /**
-     * @var UserProductService
-     */
-    private $userProductService;
-    /**
-     * @var SubscriptionService
-     */
-    private $subscriptionService;
-    /**
-     * @var SubscriptionRepository
-     */
-    private $subscriptionRepository;
-    /**
-     * @var UserProviderInterface
-     */
-    private $userProvider;
-    /**
-     * @var MailService
-     */
-    private $mailService;
-
+    private NotificationSettingsService $notificationSettingsService;
+    private UserSignaturesRepository $userSignaturesRepository;
+    private UserProductService $userProductService;
+    private SubscriptionRepository $subscriptionRepository;
+    private UserProviderInterface $userProvider;
     private CartService $cartService;
     private PaymentRepository $paymentRepository;
     private SubscriptionTransformer $subscriptionTransformer;
     private InvoiceService $invoiceService;
     private PaymentMethodRepository $paymentMethodRepository;
-    /**
-     * @var EcommerceEntityManager
-     */
-    private $ecommerceEntityManager;
+    private EcommerceEntityManager $ecommerceEntityManager;
+    private MembershipActionRepository $membershipActionRepository;
+    private CustomerIoService $customerIoService;
+    private ProductRepository $productRepository;
 
     /**
      * @param NotificationSettingsService $notificationSettingsService
@@ -107,35 +110,44 @@ class ProfileSettingsPagesController extends BaseController
     public function __construct(
         NotificationSettingsService $notificationSettingsService,
         UserSignaturesRepository $userSignaturesRepository,
-        UserPermissionsService $userPermissionsService,
         UserProductService $userProductService,
-        SubscriptionService $subscriptionService,
         SubscriptionRepository $subscriptionRepository,
         UserProviderInterface $userProvider,
-        MailService $mailService,
         CartService $cartService,
         PaymentRepository $paymentRepository,
         SubscriptionTransformer $subscriptionTransformer,
         InvoiceService $invoiceService,
         PaymentMethodRepository $paymentMethodRepository,
-        EcommerceEntityManager $ecommerceEntityManager
+        EcommerceEntityManager $ecommerceEntityManager,
+        MembershipActionRepository $membershipActionRepository,
+        CustomerIoService $customerIoService,
+        ProductRepository $productRepository
     ) {
         $this->notificationSettingsService = $notificationSettingsService;
         $this->userSignaturesRepository = $userSignaturesRepository;
-        $this->userPermissionsService = $userPermissionsService;
         $this->userProductService = $userProductService;
-        $this->subscriptionService = $subscriptionService;
         $this->subscriptionRepository = $subscriptionRepository;
         $this->userProvider = $userProvider;
-        $this->mailService = $mailService;
         $this->cartService = $cartService;
         $this->paymentRepository = $paymentRepository;
         $this->subscriptionTransformer = $subscriptionTransformer;
         $this->invoiceService = $invoiceService;
         $this->paymentMethodRepository = $paymentMethodRepository;
         $this->ecommerceEntityManager = $ecommerceEntityManager;
+        $this->membershipActionRepository = $membershipActionRepository;
+        $this->customerIoService = $customerIoService;
+        $this->productRepository = $productRepository;
     }
 
+    // ------------------------------------------ "top-level" public methods -------------------------------------------
+
+    /**
+     * @param Request $request
+     * @param $domain
+     * @param $brand
+     * @param $userId
+     * @return Application|Factory|View
+     */
     public function profile(Request $request, $domain, $brand, $userId)
     {
         $userSignature = $this->userSignaturesRepository->getUserSignature();
@@ -146,6 +158,13 @@ class ProfileSettingsPagesController extends BaseController
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param $domain
+     * @param $brand
+     * @param $userId
+     * @return Application|Factory|View
+     */
     public function loginCredentials(Request $request, $domain, $brand, $userId)
     {
         $userSignature = $this->userSignaturesRepository->getUserSignature();
@@ -157,6 +176,14 @@ class ProfileSettingsPagesController extends BaseController
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param $domain
+     * @param $brand
+     * @param $userId
+     * @return Application|Factory|View
+     * @throws NonUniqueResultException
+     */
     public function notifications(Request $request, $domain, $brand, $userId)
     {
         $userSignature = [];
@@ -175,600 +202,13 @@ class ProfileSettingsPagesController extends BaseController
         ]);
     }
 
-    public function account(Request $request, $domain, $brand, $userId = null)
-    {
-        if (!$userId) {
-            $userId = auth()->id();
-        }
-
-        if ($userId != auth()->id()) {
-            // todo: redirect to version of this page for auth()->id()
-        }
-
-        $userId = auth()->id();
-        $ecommerceUser = $this->userProvider->getCurrentUser();
-
-        $now = Carbon::now();
-        $hasHadMembership = false;
-        $userProductsDigitalAccessTypeSpecific = [];
-        $activeAllContentAccessExpiryDate = null;
-        $pausedSubscriptionStartDate = null;
-        $accessIsFromAppPurchase = false;
-        $isLifetime = false;
-
-        $trialUrl = ''; // todo
-
-
-        // ---------------------------- determine all owned digital non-membership products ----------------------------
-
-        $userProducts = $this->userProductService->getAllUsersProducts($userId);
-
-        foreach ($userProducts as $userProduct) {
-            if ($userProduct->getProduct()->getDigitalAccessType() == 'specific content access') {
-                $userProductsDigitalAccessTypeSpecific[] = $userProduct;
-            }
-            $expired = $userProduct->getExpirationDate() ? $userProduct->getExpirationDate()->lt($now) : null;
-
-            $isAllContentAccessProduct = $userProduct->getProduct()->getDigitalAccessType() == 'all content access';
-            if ($isAllContentAccessProduct) {
-                $paused = $userProduct->getStartDate() && $userProduct->getStartDate()->gt($now);
-                if (!$expired) {
-                    if ($paused) {
-                        $pausedSubscriptionStartDate = $userProduct->getStartDate();
-                    } else {
-                        $activeAllContentAccessExpiryDate = $userProduct->getExpirationDate();
-                    }
-                }
-                $hasHadMembership = true;
-            }
-        }
-
-        // --------------------------------------- get the active subscription -----------------------------------------
-
-        $activeSubscription = $this->subscriptionRepository->getUserActiveSubscription($ecommerceUser)[0] ?? null;
-
-        if (!$activeSubscription) {
-            if ($activeAllContentAccessExpiryDate > Carbon::now()) {
-                $membershipWithoutSubscription = true;
-            }
-        }
-
-
-        // ---------------------------------- have they had a membership previously? ----------------------------------
-
-        $subscriptions = $this->subscriptionRepository->getSubscriptionsForUsers([$userId]);
-
-        foreach ($subscriptions as $subscription) {
-            $isCorrectType = $subscription->getType() == 'subscription';
-
-            $subscriptionProductId = $subscription->getProduct()->getId();
-            $productsGrantingAllContentAccessIdsOnly = ProductAccessMap::productsGrantingAllContentAccessIdsOnly();
-
-            if ($isCorrectType && in_array($subscriptionProductId, $productsGrantingAllContentAccessIdsOnly)) {
-                $hasHadMembership = true;
-                $membershipSubscriptions[] = $subscription;
-            }
-        }
-
-
-        // --------------------------------------------- is lifetime member --------------------------------------------
-
-        foreach ($userProducts as $userProduct) {
-            if (in_array($userProduct->getProduct()->getId(), [7, 8, 22, 141, 412])) {
-                $isLifetime = true;
-            }
-        }
-
-
-        // --------------------- is their current access remaining from a cancelled subscription? ----------------------
-
-        $noMembershipSubscriptionNowButHadOnePreviously = empty($activeSubscription) && !empty($membershipSubscriptions);
-
-        if ($noMembershipSubscriptionNowButHadOnePreviously && !$isLifetime) {
-            foreach ($subscriptions as $subscription) {           // todo: delete
-                $paidUntil = $subscription->getPaidUntil();       // todo: delete
-                $cancelledOn = $subscription->getCanceledOn();    // todo: delete
-                $sku = $subscription->getProduct()->getSku();     // todo: delete
-                $cancelledSubs1[] = [                             // todo: delete
-                    'subId' => $subscription->getId(),            // todo: delete
-                    'paidUntil' => $paidUntil,                    // todo: delete
-                    'cancelledOn' => $cancelledOn,                // todo: delete
-                    'sku' => $sku,                                // todo: delete
-                ];                                                // todo: delete
-            }                                                     // todo: delete
-
-            usort($subscriptions, function ($x, $y) {
-                /**
-                 * @var $x Subscription
-                 * @var $y Subscription
-                 */
-                if ($x->getPaidUntil() === $y->getPaidUntil()) {
-                    $xCancelledOn = $x->getCanceledOn() ?? null;
-                    $yCancelledOn = $y->getCanceledOn() ?? null;
-                    if ($xCancelledOn === $yCancelledOn) {
-                        return 0;
-                    }
-                    return $xCancelledOn < $yCancelledOn ? -1 : 1;
-                }
-                return $x->getPaidUntil() < $y->getPaidUntil() ? -1 : 1;
-            });
-
-            foreach ($subscriptions as $subscription) {           // todo: delete
-                $paidUntil = $subscription->getPaidUntil();       // todo: delete
-                $cancelledOn = $subscription->getCanceledOn();    // todo: delete
-                $sku = $subscription->getProduct()->getSku();     // todo: delete
-                $cancelledSubs2[] = [                             // todo: delete
-                    'subId' => $subscription->getId(),            // todo: delete
-                    'paidUntil' => $paidUntil,                    // todo: delete
-                    'cancelledOn' => $cancelledOn,                // todo: delete
-                    'sku' => $sku,                                // todo: delete
-                ];
-            }
-
-            $mostRecentSubscription = end($subscriptions);
-            $mostRecentSubscriptionCancelledOn = $mostRecentSubscription->getCanceledOn() ?? null;
-        }
-
-        // ------------------------------------------ access from app purchase -----------------------------------------
-
-        if ($activeSubscription) {
-            // if the student's subscription is administered via a mobile app, we don't offer the same controls and
-            // instead direct them to the Apple's or Google's pages on the matter.
-            if (
-                $activeSubscription->getType() == 'apple_subscription' ||
-                $activeSubscription->getType() == 'google_subscription'
-            ) {
-                $accessIsFromAppPurchase = true;
-            }
-
-            // if the student is an active monthly subscriber we present an offer to upgrade to an annual membership
-            if ($activeSubscription->getType() == 'subscription') {
-                if ($activeSubscription->getIntervalType() == 'month') {
-                    if ($activeSubscription->getIntervalCount() == 1) {
-                        $multiplyFactor = 12;
-                    } elseif ($activeSubscription->getIntervalCount() == 3) {
-                        $multiplyFactor = 4;
-                    } elseif ($activeSubscription->getIntervalCount() == 6) {
-                        $multiplyFactor = 2;
-                    } elseif ($activeSubscription->getIntervalCount() == 2) {
-                        $multiplyFactor = 6;
-                    }
-
-                    if ($multiplyFactor ?? false) {
-                        $offerUpgradeToAnnualPrice = ProductAccessMap::annualSubscriptionPrice();
-                        $currentMonthlySubPricePerYear = $activeSubscription->getTotalPrice() * $multiplyFactor;
-                        $savingsFactor = 1 - ($offerUpgradeToAnnualPrice / $currentMonthlySubPricePerYear);
-                        $savingsPercentageRaw = $savingsFactor * 100;
-
-                        if ($savingsPercentageRaw > self::MINIMUM_SAVINGS_TO_PRESENT_ANNUAL_UPGRADE_OFFER) {
-                            $offerUpgradeToAnnualShowToStudent = true;
-                            $offerUpgradeToAnnualPercentSaved = round($savingsPercentageRaw);
-                        }
-                    }
-                }
-            }
-        }
-
-        // -------------------------------------------------------------------------------------------------------------
-
-         $urlParamsByBrandForTrial = [
-            'drumeo' => 'products[DLM-Trial]=1,month,1&locked=true',
-            'pianote' => 'products[PIANOTE-MEMBERSHIP-TRIAL]=1&redirect=%2Forder&locked=true',
-            'guitareo' => 'products[GUITAREO-7-DAY-TRIAL-ONE-TIME]=1&redirect=%2Forder&locked=true',
-            'singeo' => 'products[singeo-monthly-recurring-7-day-trial-membership]=1&redirect=%2Forder&locked=true',
-        ];
-
-        if($urlParamsByBrandForTrial[$brand]){
-            $urlParams = $urlParamsByBrandForTrial[$brand];
-            $addToCartUrlTrial = 'https://' . $brand . '.com/ecommerce/add-to-cart?' . $urlParams;
-            if ($brand == 'drumeo') {
-                $addToCartUrlTrial = 'https://drumeo.com/laravel/public/shopping-cart/api/query?' . $urlParams;
-            }
-        } else {
-            $addToCartUrlTrial = 'https://musora.com/';
-        }
-
-//        $annualSKUsByBrand = [
-//            'drumeo' => 'DLM-1-year',
-//            'pianote' => 'PIANOTE-MEMBERSHIP-1-YEAR',
-//            'guitareo' => 'GUITAREO-1-YEAR-MEMBERSHIP',
-//            'singeo' => 'singeo-annual-recurring-membership',
-//        ];
-
-        $salesPage['drumeo'] = 'https://www.drumeo.com/';
-        $salesPage['pianote'] = 'https://www.pianote.com/';
-        $salesPage['guitareo'] = 'https://www.guitareo.com/';
-        $salesPage['singeo'] = 'https://www.singeo.com/';
-        $salesPageUrl = $salesPage[$brand] ?? $salesPage['drumeo'];
-
-        // -------------------------------------------------------------------------------------------------------------
-
-        $viewData = [
-            'user' => user(),
-            'sections' => $this->settingSections('account'),
-            'userProductsDigitalAccessTypeSpecific' => $userProductsDigitalAccessTypeSpecific,
-            'activeAllContentAccessExpiryDate' => $activeAllContentAccessExpiryDate,
-            'isLifetime' => $isLifetime,
-            'pausedSubscriptionStartDate' => $pausedSubscriptionStartDate,
-            'accessIsFromAppPurchase' => $accessIsFromAppPurchase,
-            'subscription' => $activeSubscription,
-            'hasHadMembership' => $hasHadMembership,
-            'now' => $now,
-            'addToCartUrlTrial' => $addToCartUrlTrial,
-            'salesPageUrl' => $salesPageUrl,
-            'mostRecentSubscriptionCancelledOn' => $mostRecentSubscriptionCancelledOn ?? null,
-            'offerUpgradeToAnnualShowToStudent' => $offerUpgradeToAnnualShowToStudent ?? false,
-            'offerUpgradeToAnnualPercentSaved' => $offerUpgradeToAnnualPercentSaved ?? null,
-            'membershipWithoutSubscription' => $membershipWithoutSubscription ?? false,
-        ];
-
-        return view(
-            'account.settings.account',
-            $viewData
-        );
-    }
-
     /**
-     * @return void
-     * POST
+     * @param Request $request
+     * @return Application|Factory|View
+     * @throws Throwable
+     * @throws ProductNotActiveException
+     * @throws ProductNotFoundException
      */
-    public function acceptAnnualOffer()
-    {
-        $foo = 'bar';
-    }
-
-    /**
-     * @return void
-     * POST
-     */
-    public function resumePaused()
-    {
-        $foo = 'bar';
-    }
-
-    /**
-     * @return void
-     * GET
-     */
-    public function cancelReasonForm($domain, $brand)
-    {
-        $foo = 'bar';
-
-        return view('account.settings.cancel', ['brand' => $brand, 'domain' => $domain, 'userId' => user()->id]);
-    }
-
-    /**
-     * @return void
-     * POST
-     */
-    public function submitCancelReason(Request $request)
-    {
-        $reason = $request->get('reason');
-        $textReason = $request->get('other-reason-text');
-
-        // get current subscription
-        $ecommerceUser = $this->userProvider->getCurrentUser();
-        $subscription = $this->subscriptionRepository->getUserActiveSubscription($ecommerceUser)[0] ?? null;
-
-        if(!$subscription) {
-            return $this->returnRedirect(false);
-        }
-
-        // determine if the subscription is a trial
-        $trialMembershipProductIds = ProductAccessMap::trialMembershipProductIds();
-        $isTrial = in_array($subscription->getProduct()->getId(), $trialMembershipProductIds);
-
-        /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-         * store in session because we don't yet need it. We'll present the student with an offer, and if they     *
-         * accept that offer then we don't need the cancellation-reason anymore (I least I don't think we're doing *
-         * anything with it, though maybe we should anyway). If they do cancel, then we'll take that               *
-         * stored-in-the-session cancellation-reason and use that when writing the cancellation to the DB.         *
-         * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-        session()->put('cancel-reason', $reason);
-        session()->put('cancel-reason-text', $textReason);
-
-        // TEMPORARY version that immediately cancels instead of offering a retention offer.
-        return $this->cancel($request);
-        // TEMPORARY version that immediately cancels instead of offering a retention offer.
-
-
-        // if they claimed retention(win-back) offer recently don't offer it again, instead go right to cancelling
-        if (ProductAccessMap::hasClaimedRetentionOfferWithin(user()) || $isTrial) {
-            return $this->cancel($request);
-        }
-
-        $isSubscriberMonthly = false;
-        $isSubscriberAnnual = false;
-        $isSubscriberAnnualRenewingSoon = false;
-
-        /* what if the subscription is a 2-month, 3-month, or 6-month subscription? */
-        if ($subscription->getIntervalType() === 'month' && $subscription->getIntervalCount() == 1) {
-
-            $amountSaved = $subscription->getTotalPrice() * 2;
-            $nextPaymentDateWithOffer = Carbon::parse($subscription->getPaidUntil())->addMonths(2);
-
-            return view('account.settings.offer', [
-                'isSubscriberMonthly' => true,
-                'subscriptionPrice' => $subscription->getTotalPrice(),
-                'amountSaved' => $subscription->getTotalPrice() * 2,
-                'nextPaymentDateWithOffer' => $nextPaymentDateWithOffer,
-            ]);
-        }
-
-        if($subscription->getIntervalType() == 'year') {
-
-            $pointBeforeWhichWeConsiderRenewingSoon = Carbon::now()->addMonths(3);
-            $renewingSoon = $subscription->getPaidUntil() <= $pointBeforeWhichWeConsiderRenewingSoon;
-
-            if($renewingSoon) {
-                // $isSubscriberAnnualRenewingSoon = true;
-                // offer
-                    // pause your account
-                    // switch to monthly payments
-
-            } else {
-                // $isSubscriberAnnual = true;
-                // offer
-                    // special renewal offer
-                    // switch to monthly payments
-
-
-            }
-        }
-
-
-        // send to final offer screen depending on use case
-
-
-    }
-
-    public function acceptStudentPlanOffer(Request $request)
-    {
-        dd('\App\Http\Controllers\Platform\ProfileSettingsPagesController::acceptStudentPlanOffer', $request);
-    }
-
-    public function acceptSwitchToMonthly(Request $request)
-    {
-        dd('\App\Http\Controllers\Platform\ProfileSettingsPagesController::acceptSwitchToMonthly', $request);
-    }
-
-    public function acceptGratisAccess(Request $request)
-    {
-        $userId = auth()->id();
-        $ecommerceUser = $this->userProvider->getCurrentUser();
-
-        try {
-            $subscription = $this->subscriptionRepository->getUserActiveSubscription($ecommerceUser)[0] ?? null;
-
-            if(!$subscription) {
-                return $this->returnRedirect(
-                    false,
-                    'Whoops, something went wrong when we tried to extend your membership. Please try again or ' .
-                    'contact our support team.'
-                );
-            }
-
-            $this->updateSubscriptionPaidUntilDate($subscription, 'addMonths', 2);
-        } catch (\Exception $e) {
-            return $this->returnRedirect(
-                false,
-                'Whoops, something went wrong when we tried to extend your membership. Please try again or ' .
-                'contact our support team.'
-            );
-        }
-
-        $oldSubscription = clone $subscription;
-        event(new SubscriptionUpdated($oldSubscription, $subscription));
-
-        // save membership action
-        $membershipAction = new MembershipAction();
-        /** @var $membershipAction MembershipAction|NotableEntity */
-        $membershipAction->setUser($ecommerceUser);
-        $membershipAction->setBrand($subscription->getProduct()->getBrand());
-        $membershipAction->setSubscription($subscription);
-        $membershipAction->setAction('extended for amount of months');
-        $membershipAction->setActionAmount(2);
-        $membershipAction->setNote('membership was extended by 2 months');
-
-        try {
-            $this->ecommerceEntityManager->persist($membershipAction);
-            $this->ecommerceEntityManager->flush();
-        } catch (Exception|Throwable $e) {
-            error_log($e);
-            return $this->returnRedirect(false);
-        }
-
-        $newRenewalDate = $subscription->getPaidUntil()->format('F j, Y');
-
-        if (true) {
-            $routeParams = [];
-            $msg = 'Your trial has successfully been extended two months. Your new renewal date is: ' . $newRenewalDate;
-        }
-
-        return redirect()->route(
-            'platform.profile.settings.account',
-            $routeParams ?? ['open-modal-id' => 'modal-how-can-we-make-next-month-better']
-        )->with([
-            'success-message' => $msg ?? ('Your access has been extended. Your new renewal date is: ' . $newRenewalDate),
-            'renewal-date' => $newRenewalDate
-        ]);
-
-        dd('\App\Http\Controllers\Platform\ProfileSettingsPagesController::acceptGratisAccess');
-    }
-
-    /**
-     * @param bool $success
-     * @param null $msg
-     * @param string $route
-     * @return RedirectResponse
-     */
-    private function returnRedirect($success = true, $msg = null, $route = 'platform.profile.settings.account')
-    {
-        $type = $success ? 'success-message' : 'error-message';
-
-        $msg = $msg ?? ($success ? self::$generalSuccessMessageToUser : self::$generalErrorMessageToUser);
-
-        return redirect()->route($route)->with([$type => $msg]);
-    }
-
-
-    /**
-     * @param $targetProductIds []
-     * @param string $carbonMethodName
-     * @param string|int $carbonMethodParamValue
-     * @return Subscription|boolean
-     */
-    private function updateSubscriptionPaidUntilDate($subscriptionToUpdate, $carbonMethodName, $carbonMethodParamValue)
-    {
-        // you're getting the carbon object that is set as an attribute on the entity, not a copy of the carbon object
-        $paidUntil = $subscriptionToUpdate->getPaidUntil();
-
-        try {
-            /** @var Carbon $extendedPaidUntil */
-            $extendedPaidUntil = $paidUntil->$carbonMethodName($carbonMethodParamValue);
-        } catch (\Exception $e) {
-            error_log($e);
-            return false;
-        }
-
-        try {
-            $oldSubscriptionToUpdate = clone($subscriptionToUpdate);
-
-            /*
-             * NOTE: "copy()" to get new obj else Doctrine won't detect change in Subscription entity (Doctrine doesn't
-             * parse obj details, only evaluates whether object is same object of whole different instance)
-             */
-            $subscriptionToUpdate->setPaidUntil($extendedPaidUntil->copy());
-
-            $this->ecommerceEntityManager->persist($subscriptionToUpdate);
-            $this->ecommerceEntityManager->flush();
-
-            event(new SubscriptionUpdated($oldSubscriptionToUpdate, $subscriptionToUpdate));
-        } catch (Throwable $e) {
-            error_log($e);
-            return false;
-        }
-
-        try {
-            $this->userProductService->updateSubscriptionProducts($subscriptionToUpdate);
-        } catch (Throwable $e) {
-            error_log($e);
-            return false;
-        }
-
-        return $subscriptionToUpdate;
-    }
-
-    public function cancel(Request $request)
-    {
-        $userId = auth()->id();
-        $ecommerceUser = $this->userProvider->getCurrentUser();
-
-        try {
-            $subscription = $this->subscriptionRepository->getUserActiveSubscription($ecommerceUser)[0] ?? null;
-
-            if(!$subscription) {
-                return $this->returnRedirect(
-                    false,
-                    'Whoops, something went wrong when we tried to extend your membership. Please try again or ' .
-                    'contact our support team.'
-                );
-            }
-        } catch (\Exception $e) {
-            return $this->returnRedirect(
-                false,
-                'Whoops, something went wrong when we tried to extend your membership. Please try again or ' .
-                'contact our support team.'
-            );
-        }
-
-        $oldSubscription = clone $subscription;
-
-        $brand = $subscription->getProduct()->getBrand();
-
-        $cancelReason = session($brand . '-cancel-reason');
-        $cancelReasonText = session($brand . '-cancel-reason-text');
-
-        $subscription->setCanceledOn(Carbon::now());
-        $subscription->setIsActive(false);
-        $subscription->setCancellationReason($cancelReason);
-
-        try {
-            $this->ecommerceEntityManager->persist($subscription);
-            $this->ecommerceEntityManager->flush();
-
-            $this->userProductService->updateSubscriptionProducts($subscription);
-        } catch (Exception|Throwable $e) {
-            return $this->returnRedirect(false);
-        }
-
-        event(new SubscriptionUpdated($oldSubscription, $subscription));
-
-        $paidUntilRoundedUp = Carbon::parse($subscription->getPaidUntil()->format('Y-m-d'))->endOfDay();
-
-        $trialMembershipProductIds = [
-            126, 283, 400, 401, 266, 273, // drumeo
-            318, 319, 403, 402, // pianote
-            23, 429, 430, 431, // guitareo
-            413, 414, 423, 424, // singeo
-        ];
-
-        // if trial with no payments made revoke access immediately
-        $isTrial = in_array($subscription->getProduct()->getId(), $trialMembershipProductIds);
-        $noPaymentsMade = count($subscription->getPayments()) == 0;
-        $revokeAccessImmediately = $isTrial && $noPaymentsMade;
-
-        if ($revokeAccessImmediately) {
-            $paidUntilRoundedUp = Carbon::now();
-        }
-
-        $cancellationSuccessMessage = 'Your membership has been cancelled. You will no longer be automatically ' .
-            'billed and your access will end ' . Carbon::parse($paidUntilRoundedUp)->format('l F jS');
-
-        //  todo: send email
-        //      (see \Railroad\Crux\Http\Controllers\ActionController::cancel)
-        //      1. to staff
-        //      2. to student
-
-        // todo: tag in customer.io
-
-        // save membership action
-        $membershipAction = new MembershipAction();
-        /** @var $membershipAction MembershipAction|NotableEntity */
-        $membershipAction->setUser(new User(user()->getId(), user()->getEmail()));
-        $membershipAction->setBrand($brand);
-        $membershipAction->setAction(MembershipAction::ACTION_CANCELLED);
-        $membershipAction->setActionReason($cancelReason);
-        $membershipAction->setSubscription($subscription);
-        $membershipAction->setNote($cancelReasonText);
-
-        try {
-            $this->ecommerceEntityManager->persist($membershipAction);
-            $this->ecommerceEntityManager->flush();
-        } catch (Exception|Throwable $e) {
-            error_log($e);
-            return $this->returnRedirect(false);
-        }
-
-        session()->remove($brand . '-cancel-reason');
-        session()->remove($brand . '-cancel-reason-text');
-
-        // respond
-        return $this->returnRedirect(false, $cancellationSuccessMessage);
-    }
-
-
-    /**
-     * @return void
-     * GET
-     */
-    public function winBack(Request $request)
-    {
-        dd($request);
-
-        return view('account.settings.win-back', []);
-    }
-
     public function payments(Request $request)
     {
         $user = user();
@@ -776,7 +216,7 @@ class ProfileSettingsPagesController extends BaseController
         $paymentMethods = $this->paymentMethodRepository->getAllUsersPaymentMethods(
             $user->id,
             $request,
-            brand()
+            'drumeo'
         );
 
         $paymentMethodsJson = ResponseService::paymentMethod(
@@ -849,7 +289,7 @@ class ProfileSettingsPagesController extends BaseController
             }
         }
 
-        $payments = $this->paymentRepository->getAllUsersPayments($user->id, false, brand());
+        $payments = $this->paymentRepository->getAllUsersPayments($user->id, false, 'drumeo');
 
         // sort by date
         usort(
@@ -880,11 +320,20 @@ class ProfileSettingsPagesController extends BaseController
                 // todo: remove from here and vuesora because now obsolete
                 'displayOverridePrice' => $displayOverridePrice ?? false,
                 // todo: remove from here and vuesora because now obsolete
-                'brand' => brand()
             ]
         );
     }
 
+    /**
+     * @param Request $request
+     * @param $domain
+     * @param $brand
+     * @param $userId
+     * @param $paymentId
+     * @return Factory|View|Application
+     * @throws NoResultException
+     * @throws NonUniqueResultException
+     */
     public function showInvoiceForPayment(Request $request, $domain, $brand, $userId, $paymentId)
     {
         $payment = $this->paymentRepository->find($paymentId);
@@ -928,13 +377,220 @@ class ProfileSettingsPagesController extends BaseController
         throw new NotFoundHttpException();
     }
 
+    /**
+     * @param Request $request
+     * @param $domain
+     * @param $brand
+     * @return Application|Factory|View
+     * @throws ORMException
+     */
+    public function account(Request $request, $domain, $brand)
+    {
+        $userId = auth()->id();
+        $ecommerceUser = $this->userProvider->getCurrentUser();
+
+        $now = Carbon::now();
+        $accessIsFromAppPurchase = false;
+        $isLifetime = false;
+
+        // ---------------------------- determine all owned digital non-membership products ----------------------------
+
+        $subscriptionInfo = $this->subscriptionInfo(user()->getId());
+
+        $userProductsDigitalAccessTypeSpecific = $subscriptionInfo['userProductsDigitalAccessTypeSpecific'];
+        $pausedSubscriptionStartDate = $subscriptionInfo['pausedSubscriptionStartDate'];
+        $activeAllContentAccessExpiryDate = $subscriptionInfo['activeAllContentAccessExpiryDate'];
+        $hasHadMembership = $subscriptionInfo['hasHadMembership'];
+        $userProducts = $subscriptionInfo['userProducts'];
+
+        // --------------------------------------- get the active subscription -----------------------------------------
+
+        $activeSubscription = $this->subscriptionRepository->getUserActiveSubscription($ecommerceUser)[0] ?? null;
+
+        if (!$activeSubscription) {
+            if ($activeAllContentAccessExpiryDate > Carbon::now()) {
+                $membershipWithoutSubscription = true;
+            }
+        } elseif ($activeSubscription->getType() == 'payment plan') {
+            // this shouldn't happen, but when it does at least with this here it won't break things.
+            //  todo: abstract this reduce to redundancy as this is duplicated elsewhere in this class
+            $activeSubscriptions = [];
+            $subscriptionsForUser = $this->subscriptionRepository->getSubscriptionsForUsers([$ecommerceUser->getId()]);
+            foreach ($subscriptionsForUser as $sub) {
+                if ($sub->getIsActive()) {
+                    $activeSubscriptions[] = $sub;
+                }
+            }
+            if (count($activeSubscriptions) === 1) {
+                $activeSubscription = reset($activeSubscriptions);
+                error_log(
+                    'subscriptionRepository->getUserActiveSubscription returned a payment plan rather than a ' .
+                    'subscription for user ' . user()->getId() . '. However all was okay because subscriptionReposit' .
+                    'ory->getSubscriptionsForUsers() returned a sufficient substitute.'
+                );
+            } else {
+                error_log(
+                    'subscriptionRepository->getUserActiveSubscription returned a payment plan rather than a ' .
+                    'subscription for user ' . user()->getId() . '. A hacky fix that calls subscriptionRepository->g' .
+                    'etSubscriptionsForUsers() did not work though because instead of one result it returned ' .
+                    count($activeSubscriptions) . '.'
+                );
+                $this->returnRedirect(
+                    false,
+                    'We\'re sorry, but there\'s been a system error on our end. Please contact Support to expedite ' .
+                    'a solution. (Error code: 4d6c64)'
+                );
+            }
+        }
+
+        // ---------------------------------- have they had a membership previously? ----------------------------------
+
+        $subscriptions = $this->subscriptionRepository->getSubscriptionsForUsers([$userId]);
+
+        foreach ($subscriptions as $subscription) {
+            $isCorrectType = $subscription->getType() == 'subscription';
+
+            $subscriptionProductId = $subscription->getProduct()->getId();
+            $productsGrantingAllContentAccessIdsOnly = ProductAccessMap::productsGrantingAllContentAccessIdsOnly();
+
+            if ($isCorrectType && in_array($subscriptionProductId, $productsGrantingAllContentAccessIdsOnly)) {
+                $hasHadMembership = true;
+                $membershipSubscriptions[] = $subscription;
+            }
+        }
+
+
+        // --------------------------------------------- is lifetime member --------------------------------------------
+
+        foreach ($userProducts as $userProduct) {
+            if (in_array($userProduct->getProduct()->getId(), [7, 8, 22, 141, 412])) {
+                $isLifetime = true;
+            }
+        }
+
+
+        // --------------------- is their current access remaining from a cancelled subscription? ----------------------
+
+        $noMembershipSubscriptionNowButHadOnePreviously = empty($activeSubscription) && !empty($membershipSubscriptions);
+
+        if ($noMembershipSubscriptionNowButHadOnePreviously && !$isLifetime) {
+            usort($subscriptions, function ($x, $y) {
+                /**
+                 * @var $x Subscription
+                 * @var $y Subscription
+                 */
+                if ($x->getPaidUntil() === $y->getPaidUntil()) {
+                    $xCancelledOn = $x->getCanceledOn() ?? null;
+                    $yCancelledOn = $y->getCanceledOn() ?? null;
+                    if ($xCancelledOn === $yCancelledOn) {
+                        return 0;
+                    }
+                    return $xCancelledOn < $yCancelledOn ? -1 : 1;
+                }
+                return $x->getPaidUntil() < $y->getPaidUntil() ? -1 : 1;
+            });
+
+            $mostRecentSubscription = end($subscriptions);
+            $mostRecentSubscriptionCancelledOn = $mostRecentSubscription->getCanceledOn() ?? null;
+        }
+
+        // ------------------------------------------ access from app purchase -----------------------------------------
+
+        if ($activeSubscription) {
+            // if the student's subscription is administered via a mobile app, we don't offer the same controls and
+            // instead direct them to the Apple's or Google's pages on the matter.
+            if (
+                $activeSubscription->getType() == 'apple_subscription' ||
+                $activeSubscription->getType() == 'google_subscription'
+            ) {
+                $accessIsFromAppPurchase = true;
+            }
+
+            // if the student is an active monthly subscriber we present an offer to upgrade to an annual membership
+            if ($activeSubscription->getType() == 'subscription') {
+                if ($activeSubscription->getIntervalType() == 'month') {
+                    if ($activeSubscription->getIntervalCount() == 1) {
+                        $multiplyFactor = 12;
+                    } elseif ($activeSubscription->getIntervalCount() == 3) {
+                        $multiplyFactor = 4;
+                    } elseif ($activeSubscription->getIntervalCount() == 6) {
+                        $multiplyFactor = 2;
+                    } elseif ($activeSubscription->getIntervalCount() == 2) {
+                        $multiplyFactor = 6;
+                    }
+
+                    if ($multiplyFactor ?? false) {
+                        $offerUpgradeToAnnualPrice = ProductAccessMap::annualSubscriptionPrice();
+                        $currentMonthlySubPricePerYear = $activeSubscription->getTotalPrice() * $multiplyFactor;
+                        $savingsFactor = 1 - ($offerUpgradeToAnnualPrice / $currentMonthlySubPricePerYear);
+                        $savingsPercentageRaw = $savingsFactor * 100;
+
+                        if ($savingsPercentageRaw > self::MINIMUM_SAVINGS_TO_PRESENT_ANNUAL_UPGRADE_OFFER) {
+                            $offerUpgradeToAnnualShowToStudent = true;
+                            $offerUpgradeToAnnualPercentSaved = round($savingsPercentageRaw);
+                        }
+                    }
+                }
+            }
+        }
+
+        // -------------------------------------------------------------------------------------------------------------
+
+        $urlParamsByBrandForTrial = [
+            'drumeo' => 'products[DLM-Trial]=1,month,1&locked=true',
+            'pianote' => 'products[PIANOTE-MEMBERSHIP-TRIAL]=1&redirect=%2Forder&locked=true',
+            'guitareo' => 'products[GUITAREO-7-DAY-TRIAL-ONE-TIME]=1&redirect=%2Forder&locked=true',
+            'singeo' => 'products[singeo-monthly-recurring-7-day-trial-membership]=1&redirect=%2Forder&locked=true',
+        ];
+
+        if ($urlParamsByBrandForTrial[$brand]) {
+            $urlParams = $urlParamsByBrandForTrial[$brand];
+            $addToCartUrlTrial = 'https://' . $brand . '.com/ecommerce/add-to-cart?' . $urlParams;
+            if ($brand == 'drumeo') {
+                $addToCartUrlTrial = 'https://drumeo.com/laravel/public/shopping-cart/api/query?' . $urlParams;
+            }
+        } else {
+            $addToCartUrlTrial = 'https://musora.com/';
+        }
+
+        $salesPage['drumeo'] = 'https://www.drumeo.com/';
+        $salesPage['pianote'] = 'https://www.pianote.com/';
+        $salesPage['guitareo'] = 'https://www.guitareo.com/';
+        $salesPage['singeo'] = 'https://www.singeo.com/';
+        $salesPageUrl = $salesPage[$brand] ?? $salesPage['drumeo'];
+
+        // -------------------------------------------------------------------------------------------------------------
+
+        return view(
+            'account.settings.account',
+            [
+                'user' => user(),
+                'sections' => $this->settingSections('account'),
+                'userProductsDigitalAccessTypeSpecific' => $userProductsDigitalAccessTypeSpecific,
+                'activeAllContentAccessExpiryDate' => $activeAllContentAccessExpiryDate,
+                'isLifetime' => $isLifetime,
+                'pausedSubscriptionStartDate' => $pausedSubscriptionStartDate,
+                'accessIsFromAppPurchase' => $accessIsFromAppPurchase,
+                'subscription' => $activeSubscription,
+                'hasHadMembership' => $hasHadMembership,
+                'now' => $now,
+                'addToCartUrlTrial' => $addToCartUrlTrial,
+                'salesPageUrl' => $salesPageUrl,
+                'mostRecentSubscriptionCancelledOn' => $mostRecentSubscriptionCancelledOn ?? null,
+                'offerUpgradeToAnnualShowToStudent' => $offerUpgradeToAnnualShowToStudent ?? false,
+                'offerUpgradeToAnnualPercentSaved' => $offerUpgradeToAnnualPercentSaved ?? null,
+                'membershipWithoutSubscription' => $membershipWithoutSubscription ?? false,
+            ]
+        );
+    }
+
+    // -------------------------- private method used by each "top-level" public method above --------------------------
 
     /**
-     * @param $section
-     * @return array[]
-     * @note public so can be used by \Railroad\Crux\Http\Controllers\AccountDetailsController
+     * @param string $section
+     * @return array|array[]
      */
-    public function settingSections($section = 'profile')
+    private function settingSections(string $section = 'profile')
     {
         try {
             return [
@@ -969,43 +625,925 @@ class ProfileSettingsPagesController extends BaseController
                     'active' => $section === 'account',
                 ],
             ];
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             error_log($exception);
             return [];
         }
     }
 
+    // ----------------------------------- public methods supporting cancellation-ui -----------------------------------
+
+    /**
+     * @param $domain
+     * @param $brand
+     * @return Application|Factory|View
+     */
+    public function cancelReasonForm($domain, $brand)
+    {
+        return view('account.settings.cancel', ['brand' => $brand, 'domain' => $domain, 'userId' => user()->id]);
+    }
+
+    /**
+     * @return RedirectResponse
+     * @throws ORMException
+     * @throws Throwable
+     */
+    public function resumePaused()
+    {
+        // determine if paused
+
+        $subscriptionInfo = $this->subscriptionInfo(user()->getId());
+
+        $pausedSubscriptionStartDate = $subscriptionInfo['pausedSubscriptionStartDate'];
+        $allContentAccessProduct = $subscriptionInfo['allContentAccessProduct'];
+
+        // if not pause return to account-details (use returnRedirect(false)) method
+
+        if (!$pausedSubscriptionStartDate || !$allContentAccessProduct) {
+            return $this->returnRedirect(false);
+        }
+
+        try {
+            // get the relevant membership-action
+
+            // note that by default the results we're searching through are ordered by created_at desc thus we're
+            // getting the most recent of type MembershipAction::ACTION_PAUSE_FOR_AMOUNT_OF_DAYS
+
+            $membershipActions = $this->membershipActionRepository->getAllUsersMembershipActions(user()->getId());
+
+            $action = false;
+
+            foreach ($membershipActions as $actionCandidate) {
+                if ($actionCandidate->getAction() == MembershipAction::ACTION_PAUSE_FOR_AMOUNT_OF_DAYS) {
+                    $action = $actionCandidate;
+                    break;
+                }
+            }
+
+            if (!$action) {
+                throw new Exception ('No MembershipAction of required type found for user ' . user()->getId());
+            }
+
+            // get the subscription and user-product
+
+            $subscription = $action->getSubscription();
+            $subscriptionBeforeChanges = clone($subscription);
+
+            $userProduct = $allContentAccessProduct;
+            $oldUserProduct = clone($userProduct);
+
+            // if not pause return to account-details (use returnRedirect(false)) method
+
+            // check that product from subscription from action is same product as membershipUserProduct
+            if ($subscription->getProduct()->getId() != $userProduct->getProduct()->getId()) {
+                throw new Exception (
+                    'Product in paused subscription does not match membershipUserProduct (user ' . user()->getId() . ')'
+                );
+            }
+
+            // calculate the length of time between start date and paid_until date
+
+            $dateStart = Carbon::parse($userProduct->getStartDate());
+            $datePaidUntil = Carbon::parse($subscription->getPaidUntil());
+
+            if (Carbon::now()->gt($dateStart)) {
+                throw new Exception(
+                    'startDate for paused userProduct (' . $userProduct->getId() .
+                    ')is in past but resume was called on it. This should not be possible.'
+                );
+            }
+
+            $hoursToAdd = $dateStart->diffInHours($datePaidUntil) + 1; // adding an extra hour as a kind of rounding-up
+
+            // update subscription and user-product
+
+
+            $dateNewPaidUntil = Carbon::now()->addHours($hoursToAdd);
+            $subscription->setPaidUntil($dateNewPaidUntil);
+
+            $this->ecommerceEntityManager->persist($subscription);
+            $this->ecommerceEntityManager->flush();
+
+            event(new SubscriptionUpdated($subscriptionBeforeChanges, $subscription));
+            $this->userProductService->updateSubscriptionProducts($subscription);
+
+            $userProduct->setStartDate(null);
+
+            $this->ecommerceEntityManager->persist($userProduct);
+            $this->ecommerceEntityManager->flush();
+
+            event(new UserProductUpdated($userProduct, $oldUserProduct));
+
+            // create a MembershipAction
+            $membershipAction = new MembershipAction();
+            /** @var $membershipAction MembershipAction|NotableEntity */
+            $membershipAction->setUser(new User(user()->getId(), user()->getEmail()));
+            $membershipAction->setBrand(config('ecommerce.brand'));
+            $membershipAction->setAction(MembershipAction::ACTION_RESUME_PAUSED_MEMBERSHIP);
+            $membershipAction->setActionReason('user action on access-details page');
+            $membershipAction->setSubscription($subscription);
+            $this->ecommerceEntityManager->persist($membershipAction);
+            $this->ecommerceEntityManager->flush();
+        } catch (Exception $exception) {
+            error_log($exception);
+            return $this->returnRedirect(false);
+        }
+
+        return $this->returnRedirect(
+            true,
+            'You should now have full access again. If you have any issues please let us know right away so we ' .
+            'can help you get back to playing!'
+        );
+    }
+
+    /**
+     * @param Request $request
+     * @return Application|Factory|View|RedirectResponse
+     */
+    public function submitCancelReason(Request $request)
+    {
+        $cancelReasonKey = $request->get('reason');
+        $additionalFeedback = $request->get('additional-feedback');
+
+        // get current subscription
+        $ecommerceUser = $this->userProvider->getCurrentUser();
+        $subscription = $this->subscriptionRepository->getUserActiveSubscription($ecommerceUser)[0] ?? null;
+
+        if (!$subscription) {
+            return $this->returnRedirect(false);
+        }
+
+        // determine if the subscription is a trial
+        $isTrial = false;
+        if ($subscription->getProduct()) {
+            $isTrial = in_array($subscription->getProduct()->getId(), self::TRIAL_MEMBERSHIP_PRODUCT_IDS);
+        } else {
+            error_log(
+                'User ' . user()->id . ' has a subscription (id ' . $subscription->getId() .
+                ') without an attached product (in \App\Http\Controllers\Platform\ProfileSettingsPagesController::su' .
+                ' bmitCancelReason).'
+            );
+        }
+
+        /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+         * store in session because we don't yet need it. We'll present the student with an offer, and if they     *
+         * accept that offer then we don't need the cancellation-reason anymore (I least I don't think we're doing *
+         * anything with it, though maybe we should anyway). If they do cancel, then we'll take that               *
+         * stored-in-the-session cancellation-reason and use that when writing the cancellation to the DB.         *
+         * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+        session()->put('cancel-reason-key', $cancelReasonKey);
+        session()->put('additional-feedback', $additionalFeedback);
+
+        // TEMPORARY version that immediately cancels instead of offering a retention offer.
+        //return $this->cancel($request);
+        // TEMPORARY version that immediately cancels instead of offering a retention offer.
+
+
+        // if they claimed retention(win-back) offer recently don't offer it again, instead go right to cancelling
+        if (ProductAccessMap::hasClaimedRetentionOfferWithin(user()) || $isTrial) {
+            return $this->cancel($request);
+        }
+
+        if ($subscription->getIntervalType() === 'month') {
+            if ($subscription->getIntervalCount() == 1) {
+                $subscriptionPrice = $subscription->getTotalPrice();
+                $amountSaved = $subscriptionPrice * 2;
+                $nextPaymentDateWithOffer = Carbon::parse($subscription->getPaidUntil())->addMonths(2);
+
+                return view('account.settings.offer-monthly', [
+                    'subscriptionPrice' => $subscriptionPrice,
+                    'amountSaved' => $amountSaved,
+                    'nextPaymentDateWithOffer' => $nextPaymentDateWithOffer,
+                ]);
+            } else {
+                /*
+                 * bimonthly, triannual and biannual (interval counts 2, 3, and 6 respectively) are very rare. Thus we
+                 * haven't (yet) built handling for how the offers would have to be modified. So just go straight to
+                 * cancellation.
+                 */
+                return $this->cancel($request);
+            }
+        }
+
+        if ($subscription->getIntervalType() == 'year') {
+            $pointBeforeWhichWeConsiderRenewingSoon = Carbon::now()->addMonths(3);
+            $renewingSoon = $subscription->getPaidUntil() <= $pointBeforeWhichWeConsiderRenewingSoon;
+
+            $subscriptionExpiryDate = $subscription->getPaidUntil();
+
+            if ($renewingSoon) {
+                return view('account.settings.offer-annual-renewing-soon', [
+                    'switchToMonthlyPrice' => self::SWITCH_TO_MONTHLY_PRICE,
+                    'subscriptionExpiryDate' => $subscriptionExpiryDate,
+                    'subscriptionPrice' => $subscription->getTotalPrice(),
+                    //'amountSaved' => $subscription->getTotalPrice() * 2,
+                    //'nextPaymentDateWithOffer' => $nextPaymentDateWithOffer,,
+                ]);
+            } else {
+                return view('account.settings.offer-annual', [
+                    'switchToMonthlyPrice' => self::SWITCH_TO_MONTHLY_PRICE,
+                    'subscriptionExpiryDate' => $subscriptionExpiryDate,
+                    //'subscriptionPrice' => $subscription->getTotalPrice(),
+                    //'amountSaved' => $subscription->getTotalPrice() * 2,
+                    //'nextPaymentDateWithOffer' => $nextPaymentDateWithOffer,
+                ]);
+            }
+        }
+
+        error_log(
+            'submitCancelReason was called but none of the possible cases matched (isSubscriberMonthly, isSubscriberAnnual, isSubscriberAnnualRenewingSoon)'
+        );
+
+        return $this->returnRedirect(false);
+    }
+
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function acceptPauseOffer(Request $request)
+    {
+        $pauseLengthDays = (int)$request->get('pause-length');
+
+        if ($pauseLengthDays < 30 || $pauseLengthDays > 90) {
+            error_log(
+                '\App\Http\Controllers\Platform\ProfileSettingsPagesController::acceptPauseOffer ' .
+                'called with "$pauseLengthDays" value of ' . $pauseLengthDays
+            );
+            return $this->returnRedirect(false);
+        }
+
+        $ecommerceUser = $this->userProvider->getCurrentUser();
+
+        try {
+            $subscription = $this->subscriptionRepository->getUserActiveSubscription($ecommerceUser)[0] ?? null;
+
+            if (!$subscription) {
+                return $this->returnRedirect(
+                    false,
+                    'Whoops, something went wrong when we tried to extend your membership. Please try again or ' .
+                    'contact our support team.'
+                );
+            }
+        } catch (Exception $e) {
+            return $this->returnRedirect(
+                false,
+                'Whoops, something went wrong when we tried to extend your membership. Please try again or ' .
+                'contact our support team.'
+            );
+        }
+
+        $oldSubscription = clone $subscription;
+
+        $subscription->setPaidUntil($subscription->getPaidUntil()->copy()->addDays($pauseLengthDays));
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        try {
+            $this->ecommerceEntityManager->persist($subscription);
+            $this->ecommerceEntityManager->flush();
+        } catch (ORMException $e) {
+            error_log($e);
+            return $this->returnRedirect(false);
+        }
+
+        // update the user product start date which restricts access until that date
+        try {
+            $userProduct = $this->userProductService->getUserProduct(
+                new User(user()->getId(), user()->getEmail()),
+                $subscription->getProduct()
+            );
+        } catch (Throwable $e) {
+            error_log($e);
+            return $this->returnRedirect(false);
+        }
+
+        $oldUserProduct = clone $userProduct;
+
+        $userProduct->setStartDate(Carbon::now()->addDays($pauseLengthDays));
+        $userProduct->setExpirationDate(
+            $subscription->getPaidUntil()->addDays(
+                config('ecommerce.days_before_access_revoked_after_expiry', 3)
+            )
+        );
+
+        try {
+            $this->ecommerceEntityManager->persist($userProduct);
+            $this->ecommerceEntityManager->flush();
+        } catch (ORMException $e) {
+            error_log($e);
+            return $this->returnRedirect(false);
+        }
+
+        event(new UserProductUpdated($userProduct, $oldUserProduct));
+        event(new SubscriptionUpdated($oldSubscription, $subscription));
+
+        // save membership action
+        /** @var $membershipAction MembershipAction|NotableEntity */
+        $membershipAction = new MembershipAction();
+        $membershipAction->setUser(new User(user()->getId(), user()->getEmail()));
+        $membershipAction->setBrand(config('ecommerce.brand'));
+        $membershipAction->setAction(MembershipAction::ACTION_PAUSE_FOR_AMOUNT_OF_DAYS);
+        $membershipAction->setActionAmount($pauseLengthDays);
+        $membershipAction->setSubscription($subscription);
+        $membershipAction->setNote('membership was paused for ' . $pauseLengthDays . ' days');
+
+        try {
+            $this->ecommerceEntityManager->persist($membershipAction);
+            $this->ecommerceEntityManager->flush();
+        } catch (ORMException $e) {
+            error_log($e);
+            return $this->returnRedirect(false);
+        }
+
+        return $this->returnRedirect(
+            true,
+            'Your membership has been paused for ' .
+            $pauseLengthDays .
+            ' days. Your access will automatically return on ' .
+            $userProduct->getStartDate()->format('F jS, Y') . '.'
+        );
+    }
+
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function acceptStudentPlanOffer(Request $request)
+    {
+        try {
+            $this->customerIoService->createOrUpdateCustomerByUserId(
+                user()->getId(),
+                'musora',
+                user()->getEmail(),
+                ['musora_retention_student_plan' => 'true'],
+                user()->created_at->timestamp
+            );
+        } catch (Exception|Throwable $exception) {
+            error_log($exception);
+
+            return $this->returnRedirect(false);
+        }
+
+        return $this->returnRedirect(true, 'An instructor be in touch soon!');
+    }
+
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     * @throws Throwable
+     */
+    public function acceptSwitchToMonthly(Request $request)
+    {
+        // get subscription
+        $ecommerceUser = $this->userProvider->getCurrentUser();
+
+        try {
+            $oldSubscription = $this->subscriptionRepository->getUserActiveSubscription($ecommerceUser)[0] ?? null;
+
+            if (!$oldSubscription) {
+                return $this->returnRedirect(
+                    false,
+                    'Whoops, something went wrong when we tried to extend your membership. Please try again or ' .
+                    'contact our support team.'
+                );
+            }
+        } catch (Exception $e) {
+            return $this->returnRedirect(
+                false,
+                'Whoops, something went wrong when we tried to update your membership. Please try again or ' .
+                'contact our support team.'
+            );
+        }
+
+        $cyclesStillDue = false;
+        $cyclesDue = $oldSubscription->getTotalCyclesDue();
+        if (!is_null($cyclesDue)) {
+            $cyclesPaid = $oldSubscription->getTotalCyclesPaid();
+            $dueLessThanPaid = $cyclesDue < $cyclesPaid;
+            if ($dueLessThanPaid) {
+                error_log(
+                    'switch-to-monthly retention offer presented to (and accepted by) student with more ' .
+                    'cycles due on subscription than paid'
+                );
+                return $this->returnRedirect(false);
+            }
+        }
+
+        try {
+            $brand = $oldSubscription->getBrand();
+            $newSubscription = new Subscription();
+            $map = [
+                'pianote' => 5,   # sku: 'PIANOTE-MEMBERSHIP-1-MONTH',          name: 'Pianote Membership - Monthly'
+                'drumeo' => 124,  # sku: 'DLM-1-month',                         name: 'Drumeo Membership - Monthly'
+                'guitareo' => 17, # sku: 'GUITAREO-1-MONTH-MEMBERSHIP',         name: 'Guitareo Monthly Membership'
+                'singeo' => 409,  # sku: 'singeo-monthly-recurring-membership', name: 'Singeo Membership - Monthly'
+            ];
+
+            $oldSubscription->setCanceledOn(Carbon::now());
+            $oldSubscription->setIsActive(false);
+            $oldSubscription->setCancellationReason(
+                'changed to monthly subscription as retention-offer during cancellation'
+            );
+
+            $this->ecommerceEntityManager->persist($oldSubscription);
+
+            $idOfProductToUse = $map[$brand];
+            $productForNew = $this->productRepository->find($idOfProductToUse);
+
+            $newSubscription->setProduct($productForNew);
+            $newSubscription->setBrand($brand);
+            $newSubscription->setType($oldSubscription->getType());
+            $newSubscription->setIsActive(true);
+            $newSubscription->setStopped(false);
+            $newSubscription->setStartDate(Carbon::now());
+            $newSubscription->setPaidUntil($oldSubscription->getPaidUntil());
+            $newSubscription->setPaidUntil($oldSubscription->getPaidUntil());
+            $newSubscription->setCanceledOn(null);
+            $newSubscription->setCurrency($oldSubscription->getCurrency());
+            $newSubscription->setIntervalType('month');
+            $newSubscription->setIntervalCount(1);
+
+            $newSubscription->setTotalCyclesDue(null);
+            $newSubscription->setTotalCyclesPaid(0);
+            $newSubscription->setRenewalAttempt(0);
+            $newSubscription->setPaymentMethod($oldSubscription->getPaymentMethod());
+            $newSubscription->setUser($oldSubscription->getUser());
+            $newSubscription->setCustomer($oldSubscription->getCustomer());
+
+            $newPrice = self::SWITCH_TO_MONTHLY_PRICE;
+
+            $order = $oldSubscription->getOrder();
+
+            if (!$order) {
+                // this may be because previous subscription was replaced but the order_id wasn't copied from there to
+                // what was then the new one. One clue to this is that the user will have a cancelled subscription and
+                // the cancellation-reason will be "replaced with new subscription while accepting retention offer"
+
+                $subscriptionsForUsers = $this->subscriptionRepository->getSubscriptionsForUsers([user()->id]);
+
+                foreach ($subscriptionsForUsers as $sub) {
+                    $notActive = !$sub->getIsActive();
+                    $hasCancelledOnDate = !empty($sub->getCanceledOn());
+                    $reasonMatch = $sub->getCancellationReason() ===
+                        'replaced with new subscription while accepting retention offer';
+
+                    if ($notActive && $hasCancelledOnDate && $reasonMatch) {
+                        $order = $sub->getOrder();
+                    }
+                }
+            }
+
+            if ($order) {
+                $orderTaxesDue = $order->getTaxesDue();
+                if ($orderTaxesDue > 0) {
+                    $orderTotalDue = $order->getTotalDue();
+                    $orderProductDue = $orderTotalDue - $orderTaxesDue;
+                    $orderTaxFactor = $orderTaxesDue / $orderProductDue;
+
+                    // USE JUST ONE OF THE TWO BELOW:
+                    // --------- OPTION 1 ---------
+//                $newSubscriptionTaxAmount = $orderTaxFactor * $newPrice;
+//                $newSubscription->setTax($newSubscriptionTaxAmount);
+//                $newPrice = $newPrice + $newSubscriptionTaxAmount;
+                    // --------- OPTION 2 ---------
+                    $newPrice = $newPrice * ($orderTaxFactor + 1);
+                }
+            } else {
+                error_log(
+                    'user ' . user()->id . ' processed in \App\Http\Controllers\Platform\ProfileSettingsPagesC' .
+                    'ontroller::acceptSwitchToMonthly but did not have order attached to replaced subscription (id ' .
+                    $oldSubscription->getId() . ')'
+                );
+            }
+
+            $newSubscription->setTotalPrice($newPrice);
+
+            $this->ecommerceEntityManager->persist($newSubscription);
+
+            $this->userProductService->updateSubscriptionProducts($oldSubscription);
+            $this->userProductService->updateSubscriptionProducts($newSubscription);
+
+            event(new SubscriptionUpdated($oldSubscription, $oldSubscription));
+
+            $membershipAction = new MembershipAction();
+            /** @var $membershipAction MembershipAction|NotableEntity */
+            $membershipAction->setUser($ecommerceUser);
+            $membershipAction->setBrand($newSubscription->getProduct()->getBrand());
+            $membershipAction->setSubscription($newSubscription);
+            $membershipAction->setAction(MembershipAction::ACTION_SWITCH_BILLING_INTERVAL_TO_MONTHLY);
+            $membershipAction->setActionAmount(null);
+            $membershipAction->setNote('');
+
+            $this->ecommerceEntityManager->persist($membershipAction);
+
+            $this->ecommerceEntityManager->flush();
+        } catch (Exception $e) {
+            return $this->returnRedirect(
+                false,
+                'Whoops, something went wrong when we tried to update your membership. Please try again or ' .
+                'contact our support team.'
+            );
+        }
+
+        return $this->returnRedirect(
+            true,
+            'Your membership has been switched to a monthly membership. Your next payment is will be ' .
+            $newSubscription->getPaidUntil()->format('F j, Y') . '.'
+        );
+    }
+
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function acceptGratisAccess(Request $request)
+    {
+        $ecommerceUser = $this->userProvider->getCurrentUser();
+
+        try {
+            $subscription = $this->subscriptionRepository->getUserActiveSubscription($ecommerceUser)[0] ?? null;
+
+            if (!$subscription) {
+                return $this->returnRedirect(
+                    false,
+                    'Whoops, something went wrong when we tried to extend your membership. Please try again or ' .
+                    'contact our support team.'
+                );
+            }
+
+            $this->updateSubscriptionPaidUntilDate($subscription, 'addMonths', 2);
+        } catch (Exception $e) {
+            return $this->returnRedirect(
+                false,
+                'Whoops, something went wrong when we tried to extend your membership. Please try again or ' .
+                'contact our support team.'
+            );
+        }
+
+        $oldSubscription = clone $subscription;
+        event(new SubscriptionUpdated($oldSubscription, $subscription));
+
+        // save membership action
+        $membershipAction = new MembershipAction();
+        /** @var $membershipAction MembershipAction|NotableEntity */
+        $membershipAction->setUser($ecommerceUser);
+        $membershipAction->setBrand($subscription->getProduct()->getBrand());
+        $membershipAction->setSubscription($subscription);
+        $membershipAction->setAction('extended for amount of months');
+        $membershipAction->setActionAmount(2);
+        $membershipAction->setNote('membership was extended by 2 months');
+
+        try {
+            $this->ecommerceEntityManager->persist($membershipAction);
+            $this->ecommerceEntityManager->flush();
+        } catch (Exception|Throwable $e) {
+            error_log($e);
+            return $this->returnRedirect(false);
+        }
+
+        $newRenewalDate = $subscription->getPaidUntil()->format('F j, Y');
+
+        if (true) {
+            $routeParams = [];
+            $msg = 'Your access has successfully been extended two months. Your new renewal date is: ' . $newRenewalDate;
+        }
+
+        return redirect()->route(
+            'platform.profile.settings.account',
+            $routeParams ?? ['open-modal-id' => 'modal-how-can-we-make-next-month-better']
+        )->with([
+            'success-message' => $msg ?? ('Your access has been extended. Your new renewal date is: ' . $newRenewalDate),
+            'renewal-date' => $newRenewalDate
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function declineOfferProceedWithCancel(Request $request)
+    {
+        return $this->cancel($request);
+    }
+
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     */
     public function sendHelpEmail(Request $request)
     {
-        //Mail::to($recipient)
-
-        $input = [];
-
         try {
             $helpIssue = $request->get('help-issue');
             $helpIssueText = self::HOW_CAN_WE_HELP_OPTIONS[$helpIssue] ?? null;
             $textInput = $request->get('text-input');
 
+            $input = [
+                'studentId' => user()->id,
+                'studentEmail' => user()->email,
+                'helpIssue' => $helpIssue, // ex: "direction"
+                'helpIssueText' => $helpIssueText, // ex: "I need more direction"
+                'textInput' => $textInput,
+            ];
+
             $mailable = new General($input, 'emails.agnostic');
-
-
-            $debug_userFromAuth = auth();
-            $debug_userFromUserProvider = $this->userProvider->getCurrentUser();
-
-            if (App::environment() !== 'production') {
-                $recipientEmailAddress = 'jonathan+email_safety_in_mwp_profilesettingspagecontroller@musora.com';
-            }
-
-            $mailable->to($recipientEmailAddress ?? 'support@musora.com');
+            $mailable->to('support@musora.com');
             $mailable->from('system@musora.com', 'Musora System');
             $mailable->replyTo(user()->email);
-
             $mailable->subject('Request for help making most of membership from ' . user()->email);
 
             Mail::send($mailable);
-            $success = true;
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             error_log($exception);
+            return $this->returnRedirect(false, self::$generalErrorMessageToUser);
         }
+
+        return $this->returnRedirect(true, 'Your message was successfully sent to our team.');
+    }
+
+    public function cancellationConfirmation(Request $request)
+    {
+        return view('account.settings.cancellation-confirmation');
+    }
+
+    // ---------------------------------- private methods supporting cancellation-ui -----------------------------------
+
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    private function cancel(Request $request)
+    {
+        try {
+            // ---------------------------------------------------------------------------------------------------------
+            // foundational information --------------------------------------------------------------------------------
+            // ---------------------------------------------------------------------------------------------------------
+
+            $ecommerceUser = $this->userProvider->getCurrentUser();
+            $subscription = $this->subscriptionRepository->getUserActiveSubscription($ecommerceUser)[0] ?? null;
+
+            if (!$subscription) {
+                return $this->returnRedirect(
+                    false,
+                    'Whoops, something went wrong when we tried to extend your membership. Please try again or ' .
+                    'contact our support team.'
+                );
+            }
+
+            $cancelReason = session('cancel-reason-key');
+            $additionalFeedback = session('additional-feedback');
+
+            // ---------------------------------------------------------------------------------------------------------
+            // changes to subscription ---------------------------------------------------------------------------------
+            // ---------------------------------------------------------------------------------------------------------
+
+            $oldSubscription = clone $subscription;
+
+            $subscription->setCanceledOn(Carbon::now());
+            $subscription->setIsActive(false);
+            $subscription->setCancellationReason($cancelReason);
+
+            $this->ecommerceEntityManager->persist($subscription);
+            $this->ecommerceEntityManager->flush();
+
+            $this->userProductService->updateSubscriptionProducts($subscription);
+
+            event(new SubscriptionUpdated($oldSubscription, $subscription));
+
+            $subInfo = $this->subscriptionInfo(user()->getId());
+            $contentAccessExpiryDate = $subInfo['activeAllContentAccessExpiryDate'] ?? null;
+
+            // ---------------------------------------------------------------------------------------------------------
+            // if trial with no payments made revoke access immediately ------------------------------------------------
+            // ---------------------------------------------------------------------------------------------------------
+
+            // this shouldn't happen, but when it does at least with this here it won't break things.
+            //  todo: abstract this reduce to redundancy as this is duplicated elsewhere in this class
+            if ($subscription->getType() == 'payment plan') {
+                $activeSubscriptions = [];
+                $subscriptionsForUser = $this->subscriptionRepository->getSubscriptionsForUsers(
+                    [$ecommerceUser->getId()]
+                );
+                foreach ($subscriptionsForUser as $sub) {
+                    if ($sub->getIsActive()) {
+                        $activeSubscriptions[] = $sub;
+                    }
+                }
+                if (count($activeSubscriptions) === 1) {
+                    $subscription = reset($activeSubscriptions);
+                    error_log(
+                        'subscriptionRepository->getUserActiveSubscription returned a payment plan rather than a ' .
+                        'subscription for user ' . user()->getId(
+                        ) . '. However all was okay because subscriptionReposit' .
+                        'ory->getSubscriptionsForUsers() returned a sufficient substitute.'
+                    );
+                } else {
+                    error_log(
+                        'subscriptionRepository->getUserActiveSubscription returned a payment plan rather than a ' .
+                        'subscription for user ' . user()->getId(
+                        ) . '. A hacky fix that calls subscriptionRepository->g' .
+                        'etSubscriptionsForUsers() did not work though because instead of one result it returned ' .
+                        count($activeSubscriptions) . '.'
+                    );
+                    $this->returnRedirect(
+                        false,
+                        'We\'re sorry, but there\'s been a system error on our end. Please contact Support to expedite ' .
+                        'a solution. (Error code: 4d6c64-2)'
+                    );
+                }
+            }
+
+            $isTrial = false;
+            if ($subscription->getProduct()) {
+                $isTrial = in_array($subscription->getProduct()->getId(), self::TRIAL_MEMBERSHIP_PRODUCT_IDS);
+            } else {
+                error_log(
+                    'User ' . user()->id . ' has a subscription (id ' . $subscription->getId() .
+                    ') without an attached product (in \App\Http\Controllers\Platform\ProfileSettingsPagesController::su' .
+                    ' bmitCancelReason).'
+                );
+            }
+
+            $noPaymentsMade = count($subscription->getPayments()) == 0;
+
+            $revokeAccessImmediately = $isTrial && $noPaymentsMade;
+
+            if ($revokeAccessImmediately) {
+                $contentAccessExpiryDate = Carbon::now();
+            } // not currently used but kept for posterity and safety in case of future changes
+
+            // todo: re-add this and pass it to the cancellation-confirmed page
+//            $cancellationSuccessMessage = 'Your membership has been cancelled. You will no longer be automatically ' .
+//                'billed and your access will end ' . Carbon::parse($contentAccessExpiryDate)->format('l F jS');
+//
+//            if ($revokeAccessImmediately) {
+//                $cancellationSuccessMessage = 'Your membership has been cancelled. You will no longer be automatically billed.';
+//            }
+
+            // ---------------------------------------------------------------------------------------------------------
+            // email to student ----------------------------------------------------------------------------------------
+            // ---------------------------------------------------------------------------------------------------------
+
+            $mailToStudent = new App\Mail\Agnostic();
+            $mailToStudent->to(user()->email);
+            $mailToStudent->from('system@musora.com');
+            $mailToStudent->replyTo('team@musora.com');
+            $mailToStudent->subject('[Important] Your cancellation request has been received.');
+            $mailToStudent->view('emails.cancellation-notice-to-student');
+            //$mailToStudent->with([]);
+            Mail::send($mailToStudent);
+
+            // ---------------------------------------------------------------------------------------------------------
+            // email to staff ------------------------------------------------------------------------------------------
+            // ---------------------------------------------------------------------------------------------------------
+
+            $mailToStaff = new App\Mail\Agnostic();
+            $mailToStaff->to('support+cancellations@musora.com');
+            $mailToStaff->from('system@musora.com');
+            //$mailToStaff->replyTo('team@musora.com');
+            $mailToStaff->subject('Cancellation notice: ' . user()->getEmail());
+            $mailToStaff->view('emails.cancellation-notice-to-staff');
+            $mailToStaff->with([
+                'userEmail' => user()->getEmail(),
+                'userId' => user()->getId(),
+                'cancellationReasonKey' => $cancelReason,
+                'additionalFeedback' => $additionalFeedback,
+            ]);
+            Mail::send($mailToStaff);
+
+            // ---------------------------------------------------------------------------------------------------------
+            // save membership action ----------------------------------------------------------------------------------
+            // ---------------------------------------------------------------------------------------------------------
+
+            $membershipAction = new MembershipAction();
+            /** @var $membershipAction MembershipAction|NotableEntity */
+            $membershipAction->setUser(new User(user()->getId(), user()->getEmail()));
+            $membershipAction->setBrand($subscription->getBrand());
+            $membershipAction->setAction(MembershipAction::ACTION_CANCELLED);
+            $membershipAction->setActionReason($cancelReason);
+            $membershipAction->setSubscription($subscription);
+            $membershipAction->setNote('additional feedback: "' . $additionalFeedback . '"');
+
+            $this->ecommerceEntityManager->persist($membershipAction);
+            $this->ecommerceEntityManager->flush();
+        } catch (Exception|Throwable $e) {
+            error_log($e);
+            return $this->returnRedirect(false);
+        }
+
+        session()->remove('cancel-reason-key');
+        session()->remove('additional-feedback');
+
+        return redirect()->route('platform.profile.settings.cancellation-confirmed');
+    }
+
+    /**
+     * @param $userId
+     * @return array
+     * @throws ORMException
+     */
+    private function subscriptionInfo($userId)
+    {
+        $userProducts = $this->userProductService->getAllUsersProducts($userId);
+
+        foreach ($userProducts as $userProduct) {
+            if ($userProduct->getProduct()->getDigitalAccessType() == 'specific content access') {
+                $userProductsDigitalAccessTypeSpecific[] = $userProduct;
+            }
+            $expired = $userProduct->getExpirationDate() ? $userProduct->getExpirationDate()->lt(Carbon::now()) : null;
+
+            $isAllContentAccessProduct = $userProduct->getProduct()->getDigitalAccessType() == 'all content access';
+            if ($isAllContentAccessProduct) {
+                $allContentAccessProduct = $userProduct;
+                $paused = $userProduct->getStartDate() && $userProduct->getStartDate()->gt(Carbon::now());
+                if (!$expired) {
+                    if ($paused) {
+                        $pausedSubscriptionStartDate = $userProduct->getStartDate();
+                    } else {
+                        $activeAllContentAccessExpiryDate = $userProduct->getExpirationDate();
+                    }
+                }
+                $hasHadMembership = true;
+            }
+        }
+
+        return [
+            'userProductsDigitalAccessTypeSpecific' => $userProductsDigitalAccessTypeSpecific ?? [],
+            'pausedSubscriptionStartDate' => $pausedSubscriptionStartDate ?? null,
+            'activeAllContentAccessExpiryDate' => $activeAllContentAccessExpiryDate ?? null,
+            'hasHadMembership' => $hasHadMembership ?? false,
+            'userProducts' => $userProducts,
+            'allContentAccessProduct' => $allContentAccessProduct ?? null
+        ];
+    }
+
+    /**
+     * @param bool $success
+     * @param null $msg
+     * @param string $route
+     * @return RedirectResponse
+     */
+    private function returnRedirect(
+        bool $success = true,
+        $msg = null,
+        string $route = 'platform.profile.settings.account'
+    ) {
+        $type = $success ? 'success-message' : 'error-message';
+
+        $msg = $msg ?? ($success ? self::$generalSuccessMessageToUser : self::$generalErrorMessageToUser);
+
+        return redirect()->route($route)->with([$type => $msg]);
+    }
+
+    /**
+     * @param $subscriptionToUpdate
+     * @param string $carbonMethodName
+     * @param string|int $carbonMethodParamValue
+     * @return Subscription|boolean
+     */
+    private function updateSubscriptionPaidUntilDate(
+        $subscriptionToUpdate,
+        string $carbonMethodName,
+        $carbonMethodParamValue
+    ) {
+        // you're getting the carbon object that is set as an attribute on the entity, not a copy of the carbon object
+        $paidUntil = $subscriptionToUpdate->getPaidUntil();
+
+        try {
+            /** @var Carbon $extendedPaidUntil */
+            $extendedPaidUntil = $paidUntil->$carbonMethodName($carbonMethodParamValue);
+        } catch (Exception $e) {
+            error_log($e);
+            return false;
+        }
+
+        try {
+            $oldSubscriptionToUpdate = clone($subscriptionToUpdate);
+
+            /*
+             * NOTE: "copy()" to get new obj else Doctrine won't detect change in Subscription entity (Doctrine doesn't
+             * parse obj details, only evaluates whether object is same object of whole different instance)
+             */
+            $subscriptionToUpdate->setPaidUntil($extendedPaidUntil->copy());
+
+            $this->ecommerceEntityManager->persist($subscriptionToUpdate);
+            $this->ecommerceEntityManager->flush();
+
+            event(new SubscriptionUpdated($oldSubscriptionToUpdate, $subscriptionToUpdate));
+        } catch (Throwable $e) {
+            error_log($e);
+            return false;
+        }
+
+        try {
+            $this->userProductService->updateSubscriptionProducts($subscriptionToUpdate);
+        } catch (Throwable $e) {
+            error_log($e);
+            return false;
+        }
+
+        return $subscriptionToUpdate;
     }
 }
