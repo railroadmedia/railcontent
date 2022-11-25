@@ -1204,20 +1204,14 @@ class ProfileSettingsPagesController extends BaseController
             return $this->returnRedirect(false);
         }
 
-        $newRenewalDate = $subscription->getPaidUntil()->format('F j, Y');
+        $newRenewalDate = $subscription->getPaidUntil()->format('F jS, Y');
 
         if (true) {
-            $routeParams = [];
-            $msg = 'Your access has successfully been extended two months. Your new renewal date is: ' . $newRenewalDate;
+            return $this->returnRedirect(
+                true, 'Your access has been extended. Your new renewal date is ' . $newRenewalDate
+            );
         }
-
-        return redirect()->route(
-            'platform.profile.settings.account',
-            $routeParams ?? ['open-modal-id' => 'modal-how-can-we-make-next-month-better']
-        )->with([
-            'success-message' => $msg ?? ('Your access has been extended. Your new renewal date is: ' . $newRenewalDate),
-            'renewal-date' => $newRenewalDate
-        ]);
+        return $this->returnRedirect(false);
     }
 
     /**
@@ -1487,14 +1481,15 @@ class ProfileSettingsPagesController extends BaseController
      */
     private function returnRedirect(
         bool $success = true,
-        $msg = null,
-        string $route = 'platform.profile.settings.account'
+        string $msg = null,
+        string $route = 'platform.profile.settings.account',
+        array $routeParams = []
     ) {
-        $type = $success ? 'success-message' : 'error-message';
-
-        $msg = $msg ?? ($success ? self::$generalSuccessMessageToUser : self::$generalErrorMessageToUser);
-
-        return redirect()->route($route)->with([$type => $msg]);
+        if ($success) {
+            $msg = Collect([$msg ?? self::$generalSuccessMessageToUser]);
+            return redirect()->route($route, $routeParams)->with(['successes' => $msg]);
+        }
+        return redirect()->route($route, $routeParams)->with(['error-message' => ($msg ?? self::$generalErrorMessageToUser)]);
     }
 
     /**
