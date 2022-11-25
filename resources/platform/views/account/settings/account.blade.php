@@ -297,7 +297,7 @@
                         </p>
 
                         {{-- Call To Action Buttons --}}
-                        <div class="body tw-mt-6">
+                        <div class="body tw-mt-4">
                             @if($accessIsFromAppPurchase)
                                 <div class="tw-flex tw-flex-col">
                                     <p class="tw-mb-2">To edit your membership please use the following guides:</p>
@@ -311,7 +311,7 @@
 
                             @elseif($pausedSubscriptionStartDate)
                                 <form method="post"
-                                    {{-- action="{{  }}" --}} > {{-- todo: action for this --}}
+                                     action="{{ url()->route('platform.profile.settings.resume-paused') }}"  >
 
                                     {{ csrf_field() }}
 
@@ -329,31 +329,35 @@
                                     Start Free Trial
                                 </a>
 
-                            @elseif(!$subscription)
-                                {{-- apparently same as if($mostRecentSubscriptionCancelledOn && $activeAllContentAccessExpiryDate) --}}
+                            @elseif(!$subscription) {{-- apparently same as if($mostRecentSubscriptionCancelledOn && $activeAllContentAccessExpiryDate) --}}
+
+                                <p class="tw-text-[#00101D] dark:tw-text-white">This link will take you to reorder on <a href="https://www.{{ $brand }}.com">www.{{
+                                    $brand }}.com</a>. Any purchased access will be added to your existing
+                                    time.</p>
+                                <p class="tw-text-[#00101D] dark:tw-text-white tw-mb-6">If you’d prefer, you can <a href="/{{ $brand }}/support">click here</a> to contact Support
+                                    to restart your membership.</p>
+
                                 <a class="tw-btn-primary tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600 visited:tw-text-white" href="{{ get_legacy_brand_base_url() . '/' }}">
                                     RENEW YOUR MEMBERSHIP
                                 </a>
 
                             @elseif($offerUpgradeToAnnualShowToStudent)
 
-{{-- todo: add back in when upgrading is working --}}
+                                <div>
+                                    <button
+                                        class="tw-btn-primary tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600 tw-my-3 mu-modal-open"
+                                        id="modal-upgrade"
+                                    >
+                                        Upgrade Membership
+                                    </button>
+                                </div>
+                                <p class="tw-text-xs tw-italic tw-mt-1 tw-mb-3 tw-text-[#00101D] dark:tw-text-white tw-tracking-wide">Save with an annual plan</p>
 
-{{--                                <div>--}}
-{{--                                    <button--}}
-{{--                                        class="tw-btn-priamry tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600 tw-my-3 mu-modal-open"--}}
-{{--                                        id="modal-upgrade"--}}
-{{--                                    >--}}
-{{--                                        Upgrade Membership To Annual--}}
-{{--                                    </button>--}}
-{{--                                </div>--}}
-{{--                                <p class="tw-text-xs tw-italic tw-my-1">Save with an annual plan</p>--}}
-                            
                                 <div>
                                     @include('account.settings.partials.cancellation.cancel-btn')
                                 </div>
 
-                            @else
+                            @elseif(!$isLifetime)
                                 <div>
                                     @include('account.settings.partials.cancellation.cancel-btn')
                                 </div>
@@ -433,41 +437,57 @@
         @component('account.settings.partials._modal', ['modalId' => 'modal-upgrade'])
             @slot('contentSlot')
                 <div>
-                    @if( !empty($offerUpgradeToAnnualPercentSaved) )
-                        <h1>Save {{ $offerUpgradeToAnnualPercentSaved }}% with an annual plan.</h1>
-                    @else
-                        <h1>Save with an annual plan.</h1>
-                    @endif
-
-                    <div>
-                        <h2>YOUR PLAN</h2>
-
-                        @if($subscription->getIntervalCount() == 1)
-                            <p>${{ $subscription->getTotalPrice() }} per month</p>
-                            <p>= ${{ $subscription->getTotalPrice() * 12 }} per year</p>
-                        @else
-                            <p>${{ $subscription->getTotalPrice() }} every {{ $intervalCountAsWord }} months</p>
-                            <p>= ${{ $subscription->getTotalPrice() * $annualPriceMultiplicationFactor }} per year</p>
-                        @endif
-
-                        <button class="mu-modal-close tw-cursor-pointer">KEEP THIS PLAN</button>
-                    </div>
-
-                    <div>
-                        <h2>ANNUAL PLAN</h2>
+                    <h1 class="tw-text-center tw-font-bold tw-mb-8 tw-text-2xl tw-font-black">
                         @if( !empty($offerUpgradeToAnnualPercentSaved) )
-                            <p>Save {{ $offerUpgradeToAnnualPercentSaved }}%</p>
-                            <p>+ get limited time bonuses</p>
+                            Save {{ $offerUpgradeToAnnualPercentSaved }}% with an annual plan.
                         @else
-                            <p>Get limited time bonuses</p>
+                            Save with an annual plan.
                         @endif
-                        <a href="{{ $salesPageUrl }}">
-                            <button>SEE OFFER</button>
-                        </a>
+                    </h1>
+
+                    <div class="tw-grid tw-grid-cols-1 sm:tw-grid-cols-2 tw-gap-4 tw-mb-8">
+                        
+                        {{-- Upgrade Card: Keep Plan --}}
+                        <div class="tw-p-6 tw-rounded-lg tw-border-2 tw-text-center tw-bg-[#e5e7eb]">
+                            <h2 class="tw-font-black tw-leading-none tw-mb-4 tw-text-4xl">YOUR<br>PLAN</h2>
+
+                            <div class="tw-mb-8">
+                                @if($subscription->getIntervalCount() == 1)
+                                    <p>${{ $subscription->getTotalPrice() }} per month</p>
+                                    <p>= ${{ $subscription->getTotalPrice() * 12 }} per year</p>
+                                @else
+                                    <p>${{ $subscription->getTotalPrice() }} every {{ $intervalCountAsWord }} months</p>
+                                    <p>= ${{ $subscription->getTotalPrice() * $annualPriceMultiplicationFactor }} per year</p>
+                                @endif
+                            </div>
+
+                            <button class="tw-btn-primary tw-bg-black mu-modal-close tw-w-full tw-px-8">KEEP THIS PLAN</button>
+                        </div>
+
+                        {{-- Upgrade Card: See Offer --}}
+                        <div class="tw-p-6 tw-rounded-lg tw-border-2 tw-text-center tw-border-{{ $brand }}">
+                            <h2 class="tw-font-black tw-leading-none tw-mb-4 tw-text-4xl">ANNUAL<br>PLAN</h2>
+
+                            <div class="tw-mb-8">
+                                @if( !empty($offerUpgradeToAnnualPercentSaved) )
+                                    <p>Save {{ $offerUpgradeToAnnualPercentSaved }}%</p>
+                                    <p>+ get limited time bonuses</p>
+                                @else
+                                    <p>Get limited time bonuses</p>
+                                @endif
+                            </div>
+
+                            <a class="tw-btn-primary tw-bg-{{ $brand }} tw-w-full tw-px-8" href="{{ $salesPageUrl }}">
+                                SEE OFFER
+                            </a>
+                        </div>
+
                     </div>
 
-                    <p>By completing the checkout process on the next page, your monthly billing will be stopped and
-                        replaced by an annual billing plan at the posted rate.</p>
+                    <p class="tw-text-sm tw-text-center">
+                        By completing the checkout process on the next page, your monthly billing will be stopped and
+                        replaced by an annual billing plan at the posted rate.
+                    </p>
                 </div>
             @endslot
         @endcomponent
@@ -486,7 +506,7 @@
                 <h1 class="heading tw-text-center">How can we help?</h1>
 
                 <div class="tw-text-left">
-                    <p class="body tw-mt-6">
+                    <p class="body tw-mt-4">
                         Select any of the issues you’d like help with:
                     </p>
                     {{--<div class="tw-ml-3">--}}

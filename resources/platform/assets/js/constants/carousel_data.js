@@ -3,6 +3,14 @@ export const testCarousel = [
         brand: 'drumeo',
         slides: [
             {
+                topSubtitle: null,
+                title: "MEMBER BLACK FRIDAY DEALS",
+                ctaText: "DRUM SHOP",
+                description: "For a limited time, you can save up to 40% on Drumeo accessories and merch. Our entire Drum Shop is on sale with the best deals of the year - so if you’ve been waiting to buy, now's the time.",
+                ctaUrl: "https://www.drumeo.com/drumshop/",
+                img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,fit=cover,metadata=none/https://musora-web-platform.s3.amazonaws.com/members/Black+Friday-01.jpg",
+            },
+            {
                 topSubtitle: "It's All Yours",
                 title: "INTRODUCING MUSORA",
                 ctaText: "LEARN MORE",
@@ -40,6 +48,14 @@ export const testCarousel = [
         brand: 'pianote',
         slides: [
             {
+                topSubtitle: null,
+                title: "MEMBER BLACK FRIDAY DEALS",
+                ctaText: "PIANOTE SHOP",
+                description: "For a limited time, you can save up to 82% on Pianote accessories and merch. Our entire shop is on sale with the best deals of the year - so if you’ve been waiting to buy, now's the time.",
+                ctaUrl: "https://www.pianote.com/shop",
+                img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,fit=cover,metadata=none/https://musora-web-platform.s3.amazonaws.com/members/Black+Friday-02.jpg",
+            },
+            {
                 topSubtitle: "It's All Yours",
                 title: "INTRODUCING MUSORA",
                 ctaText: "LEARN MORE",
@@ -69,6 +85,14 @@ export const testCarousel = [
         brand: 'guitareo',
         slides: [
             {
+                topSubtitle: null,
+                title: "MEMBER BLACK FRIDAY DEALS",
+                ctaText: "GUITAREO SHOP",
+                description: "For a limited time, you can save up to 74% on Guitareo accessories and merch. Our entire shop is on sale with the best deals of the year - so if you’ve been waiting to buy, now's the time.",
+                ctaUrl: "https://www.guitareo.com/shop",
+                img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,fit=cover,metadata=none/https://musora-web-platform.s3.amazonaws.com/members/Black+Friday-03.jpg",
+            },
+            {
                 topSubtitle: "It's All Yours",
                 title: "INTRODUCING MUSORA",
                 ctaText: "LEARN MORE",
@@ -89,6 +113,14 @@ export const testCarousel = [
     {
         brand: 'singeo',
         slides: [
+            {
+                topSubtitle: null,
+                title: "MEMBER BLACK FRIDAY DEALS",
+                ctaText: "SINGEO SHOP",
+                description: "For a limited time, you can save up to 74% on Singeo accessories and merch. Our entire shop is on sale with the best deals of the year - so if you’ve been waiting to buy, now's the time.",
+                ctaUrl: "https://www.singeo.com/shop",
+                img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,fit=cover,metadata=none/https://musora-web-platform.s3.amazonaws.com/members/Black+Friday-04.jpg",
+            },
             {
                 topSubtitle: "It's All Yours",
                 title: "INTRODUCING MUSORA",
