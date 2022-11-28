@@ -31,6 +31,7 @@ class ContentQueryBuilder extends QueryBuilder
                 ConfigService::$tableContent . '.archived_on as archived_on',
                 ConfigService::$tableContent . '.popularity as popularity',
                 ConfigService::$tableContent . '.instrument as instrument',
+                ConfigService::$tableContent . '.instrumentless as instrumentless',
             ]
         );
 
