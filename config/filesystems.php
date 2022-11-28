@@ -66,6 +66,7 @@ return [
             'endpoint' => null,
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
             'visibility' => 'public',
+        ],
         's3' => [
             'driver' => 's3',
             'key' => env('MWP_AWS_S3_ACCESS_KEY_ID'),
