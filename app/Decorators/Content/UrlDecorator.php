@@ -27,6 +27,10 @@ class UrlDecorator extends ModeDecoratorBase
             $contentTypeToURLSlugMap = array_flip(PrimaryURLSlugToContentTypeMap::$map);
             $contentParentData = $content->getParentContentData();
 
+            if(count($contentParentData) == 1 && $contentParentData[0]->type == 'edge-pack'){
+                $contentParentData = [];
+            }
+
             if ($content['type'] == 'coach-stream') {
                 $contents[$contentIndex]['url'] = url()->route('platform.coach.first-level', [
                     'brand' => $content['brand'],
