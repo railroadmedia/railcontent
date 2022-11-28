@@ -19,6 +19,11 @@ class AddInstrumentlessToContentTable extends Migration
                     ->after('instrument')
                     ->nullable();
             });
+
+        DB::connection(config('railcontent.database_connection_name'))
+            ->table(config('railcontent.table_prefix') . 'content')
+            ->where('type', 'song')
+            ->update(['instrumentless' => false]);
     }
 
 
