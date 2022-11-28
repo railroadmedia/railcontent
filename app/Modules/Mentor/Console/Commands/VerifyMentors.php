@@ -15,8 +15,11 @@ class VerifyMentors extends Command
     protected $signature = 'mentors:verify {userId=0}';
     protected $description = 'Ensures all active students have mentors and recalculates mentor totals';
 
-    public function handle(UserService $userService, MentorService $mentorService): bool
+    public function handle(UserService $userService, MentorService $mentorService)
     {
+        $this->info("Processing $this->name");
+        $timeStart = microtime(true);
+
         $userId = $this->argument('userId');
         if (!$userId) {
             $this->EnsureActiveUsersHaveMentors($mentorService);
@@ -28,7 +31,9 @@ class VerifyMentors extends Command
                 $mentorService->ensureMentorState($user);
             }
         }
-        return true;
+        $diff = microtime(true) - $timeStart;
+        $sec = intval($diff);
+        $this->info("Finished $this->name ($sec s)");
     }
 
     public function EnsureActiveUsersHaveMentors(MentorService $mentorService): void

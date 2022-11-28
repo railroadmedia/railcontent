@@ -146,6 +146,7 @@ return [
         ContentService::STATUS_PUBLISHED,
         ContentService::STATUS_SCHEDULED,
         ContentService::STATUS_ARCHIVED,
+        ContentService::STATUS_DRAFT,
     ],
 
     'search_index_values' => [

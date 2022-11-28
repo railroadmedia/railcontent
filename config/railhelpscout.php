@@ -12,9 +12,9 @@ return [
 
     'helpscout_tracking_beacon_id' =>
         [
-            'drumeo' => env('HELPSCOUT_TRACKING_BEACON_ID_DRUMEO', '9f119028-29b4-4fcd-8b9d-03c86f3d2521'),
-            'pianote' => env('HELPSCOUT_TRACKING_BEACON_ID_PIANOTE', '9f119028-29b4-4fcd-8b9d-03c86f3d2521'),
-            'guitareo' => env('HELPSCOUT_TRACKING_BEACON_ID_GUITAREO', '9f119028-29b4-4fcd-8b9d-03c86f3d2521'),
-            'singeo' => env('HELPSCOUT_TRACKING_BEACON_ID_SINGEO', '9f119028-29b4-4fcd-8b9d-03c86f3d2521'),
+            'drumeo' => env('DRUMEO_HELPSCOUT_TRACKING_BEACON_ID', '9f119028-29b4-4fcd-8b9d-03c86f3d2521'),
+            'pianote' => env('PIANOTE_HELPSCOUT_TRACKING_BEACON_ID', '9f119028-29b4-4fcd-8b9d-03c86f3d2521'),
+            'guitareo' => env('GUITAREO_HELPSCOUT_TRACKING_BEACON_ID', '9f119028-29b4-4fcd-8b9d-03c86f3d2521'),
+            'singeo' => env('SINGEO_HELPSCOUT_TRACKING_BEACON_ID', '9f119028-29b4-4fcd-8b9d-03c86f3d2521'),
         ]
 ];

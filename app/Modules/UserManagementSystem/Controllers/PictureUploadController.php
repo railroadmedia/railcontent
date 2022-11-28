@@ -20,6 +20,7 @@ class PictureUploadController extends Controller
 
     public function uploadPhoto(Request $request)
     {
+        $request->validate(['fieldKey' => 'in:profile_picture_url,piano_gear_photo,guitar_gear_photo,drums_gear_photo,singing_gear_photo']);
 
         $image = $this->imageManager->make($request->file('file'));
 
@@ -44,13 +45,13 @@ class PictureUploadController extends Controller
         return response()->json(['error' => 'Failed to upload avatar.'], 400);
     }
 
-
-
     // Since image uploads are pushed straight to S3 from our front end, we only need to copy the file out of the bucket
     // tmp folder to the location and filename we want.
     // See: https://docs.vapor.build/1.0/resources/storage.html#file-uploads
     public function uploadPhotoFromS3FrontEnd(Request $request)
     {
+        $request->validate(['fieldKey' => 'in:profile_picture_url,piano_gear_photo,guitar_gear_photo,drums_gear_photo,singing_gear_photo']);
+
         $target = $request->get('fieldKey') . "/" .
             'user-profile-picture-'.time().'-'.user()->id.'.jpg';
 

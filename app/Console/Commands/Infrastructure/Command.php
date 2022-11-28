@@ -140,7 +140,6 @@ abstract class Command extends CommandBase
     public function withExecutionTime(callable $function)
     {
         $this->info("Processing $this->name");
-        Log::info("Processing $this->name");
 
         $timeStart = microtime(true);
 
@@ -149,6 +148,5 @@ abstract class Command extends CommandBase
         $diff = microtime(true) - $timeStart;
         $sec = intval($diff);
         $this->info("Finished $this->name ($sec s)");
-        Log::info("Finished $this->name ($sec s)");
     }
 }

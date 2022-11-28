@@ -19,13 +19,13 @@ if (!function_exists('current_user_has_recent_order')) {
 }
 
 if (!function_exists('get_legacy_brand_base_url')) {
-    function get_legacy_brand_base_url($brand = null) {
+    function get_legacy_brand_base_url($brand = null, $withPort = true) {
         if (empty($brand)) {
             $brand = brand();
         }
 
         if (App::environment() == 'local' || App::environment() == 'development') {
-            return 'https://dev.' . $brand . '.com:8443';
+            return 'https://dev.' . $brand . '.com' . ($withPort ? '8443' : '');
         } elseif (App::environment() == 'beta-testing' || str_contains(App::environment(), 'staging')) {
             return 'https://staging.' . $brand . '.com';
         }
