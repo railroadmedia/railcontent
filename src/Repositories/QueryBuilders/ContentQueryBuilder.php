@@ -37,6 +37,7 @@ class ContentQueryBuilder extends QueryBuilder
                              ConfigService::$tableContent . '.popularity',
                              ConfigService::$tableContent . '.title',
                              ConfigService::$tableContent . '.sort',
+                             ConfigService::$tableContent . '.instrumentless as instrumentless',
                          ]);
 
         if ($orderBy && $orderBy == 'content_likes') {

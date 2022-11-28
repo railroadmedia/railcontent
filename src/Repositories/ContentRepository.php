@@ -1146,6 +1146,7 @@ class ContentRepository extends RepositoryBase
             $contents[$contentRow['id']]['language'] = $contentRow['language'];
             $contents[$contentRow['id']]['brand'] = $contentRow['brand'];
             $contents[$contentRow['id']]['total_xp'] = $contentRow['total_xp'];
+            $contents[$contentRow['id']]['instrumentless'] = $contentRow['instrumentless'];
             $contents[$contentRow['id']]['published_on'] = $contentRow['published_on'];
             $contents[$contentRow['id']]['created_on'] = $contentRow['created_on'];
             $contents[$contentRow['id']]['archived_on'] = $contentRow['archived_on'];
