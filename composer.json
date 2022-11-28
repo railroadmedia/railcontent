@@ -30,7 +30,7 @@
         "railroad/ecommerce": "dev-support-old-app-purchases as v5.0.23",
         "railroad/location": "3.0.*",
         "railroad/mailora": "^3.0",
-        "railroad/musora-api": "dev-v2.0-railcontent-v2-integration",
+        "railroad/musora-api": "dev-v2.0-railcontent-v2-integration-banner-updates",
         "railroad/points": "1.0.*",
         "railroad/railanalytics": "v3.0.*",
         "railroad/railchat": "2.0.*",
