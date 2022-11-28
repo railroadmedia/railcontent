@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "56b49247e33b348bf453c5eb2aa79cc4",
+    "content-hash": "e4e538ad2e2ace86b0a304d01c6f6fe7",
     "packages": [
         {
             "name": "aporat/store-receipt-validator",
@@ -8077,16 +8077,16 @@
         },
         {
             "name": "railroad/musora-api",
-            "version": "dev-v2.0-railcontent-v2-integration",
+            "version": "dev-v2.0-railcontent-v2-integration-banner-updates",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "bc5a9779114ba05fe80ba13051213fc32f24554d"
+                "reference": "1b3fedecf61b5ef20988b9dfc2319ceff503dd3a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/bc5a9779114ba05fe80ba13051213fc32f24554d",
-                "reference": "bc5a9779114ba05fe80ba13051213fc32f24554d",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/1b3fedecf61b5ef20988b9dfc2319ceff503dd3a",
+                "reference": "1b3fedecf61b5ef20988b9dfc2319ceff503dd3a",
                 "shasum": ""
             },
             "require": {
@@ -8116,9 +8116,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
-                "source": "https://github.com/railroadmedia/musora-api/tree/v2.0-railcontent-v2-integration"
+                "source": "https://github.com/railroadmedia/musora-api/tree/v2.0-railcontent-v2-integration-banner-updates"
             },
-            "time": "2022-11-28T13:07:43+00:00"
+            "time": "2022-11-28T15:05:07+00:00"
         },
         {
             "name": "railroad/permissions",
