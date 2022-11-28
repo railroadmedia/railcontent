@@ -601,6 +601,183 @@ And so many more!",
             [
                 "brand" => 2,
                 "product_type_id" => 2,
+                "name" => "Pianote Headphones",
+                "slug" => "concert-headphones",
+                "sku" => "pianote-headphones",
+                "thumbnail" => "https://pianote.s3.amazonaws.com/shop/card-thumbs/headphones-cart.jpg",
+                "meta_desc" => "Enhance your playing experience.",
+                "meta_img" => "https://pianote.s3.amazonaws.com/products/concert-headphones/fb-share-image.jpg",
+                "short_desc" => "Enhance your playing experience.",
+                "header_text" => "Piano Chords & Scales The Ultimate Guide",
+                "price" => 189,
+                "discounted_price" => "",
+                "special_text" => "",
+                'overview' => "",
+                "features" => [
+                ],
+                "specs" => [
+
+                ],
+                "visible" => true,
+                "sold_out" => false,
+                "guaranteed" => false,
+                "lifetime_access" => false,
+                "free_shipping" => false,
+                "images" => [
+
+                ],
+                "sizeChart" => "",
+                "sizes" => [
+
+                ],
+                'bundle_img' => '',
+                "bundle_desc" => "",
+            ],
+            [
+                "brand" => 2,
+                "product_type_id" => 2,
+                "name" => "Pianote Christmas Songbook",
+                "slug" => "christmas-book",
+                "sku" => "christmas-song-book",
+                "thumbnail" => "https://pianote.s3.amazonaws.com/products/christmas-book/christmas-book-02.jpg",
+                "meta_desc" => "Play Your Favorite Christmas Songs on the Piano",
+                "meta_img" => "https://pianote.s3.amazonaws.com/products/christmas-book/christmas-digital-spread.jpg",
+                "short_desc" => "Play Your Favorite Christmas Songs on the Piano",
+                "header_text" => "The Pianote Christmas Songbook",
+                "price" => 39,
+                "discounted_price" => "",
+                "special_text" => "",
+                'overview' => "**Chestnuts roasting on an open fire…**
+
+Logs crackling in the fireplace. Snowflakes fluttering against the window.
+
+Beautiful Christmas songs sung around the piano.
+
+Embrace the joy of Christmas with 14 beautiful songs, hand-picked and arranged for solo piano. And yes, “The Christmas Song” is one of them.
+
+Learn these beautiful songs in time for Christmas around the piano with your loved ones.
+
+Here’s the full list:
+
+ - Away in a Manger
+ - Carol of the Bells
+ - Christmas Time is Here
+ - Dance of the Sugarplum Fairy
+ - Frosty the Snowman
+ - God Rest Ye Merry Gentlemen
+ - Joy to the World
+ - O Christmas Tree
+ - O Holy Night
+ - Rudolph the Red-Nosed Reindeer
+ - Silent Night
+ - The Christmas Song
+ - The First Noel
+ - We Wish You a Merry Christmas
+
+Presented in full color and spiral-bound so it always lays flat on your music stand, this book is the perfect way to spread cheer this Christmas.
+
+Your book will typically be shipped out from our fulfillment center within 2-3 business days. While you’re waiting for your physical book to arrive, you can start learning thanks to your BONUS Digital Copy of the book.
+
+You’ll get 10 of the 14 songs delivered to your inbox immediately after completing your purchase. You can download and print them and start learning your favorites while you wait for your book to arrive.",
+                "features" => [
+                ],
+                "specs" => [
+                    'Size' => '11" x 8.5"',
+                    'Weight' => '1 lbs',
+                    'Pages' => '38 pages'
+                ],
+                "visible" => true,
+                "sold_out" => false,
+                "guaranteed" => false,
+                "lifetime_access" => false,
+                "free_shipping" => false,
+                "images" => [
+                    "https://pianote.s3.amazonaws.com/products/christmas-book/christmas-book-01.jpg",
+                    "https://pianote.s3.amazonaws.com/products/christmas-book/christmas-book-02.jpg",
+                    "https://pianote.s3.amazonaws.com/products/christmas-book/christmas-book-04.jpg",
+                    "https://pianote.s3.amazonaws.com/products/christmas-book/christmas-book-03.jpg",
+                ],
+                "sizeChart" => "",
+                "sizes" => [
+
+                ],
+                'bundle_img' => '',
+                "bundle_desc" => "",
+            ],
+            [
+                "brand" => 2,
+                "product_type_id" => 2,
+                "name" => "Classical Piano Pieces",
+                "slug" => "classical-book",
+                "sku" => "classical-book",
+                "thumbnail" => "https://pianote.s3.amazonaws.com/sales/promos/july/classical_piano_book.png",
+                "badge_text" => "New",
+                "meta_desc" => "Welcome to the world of classical piano music (you can actually play)!",
+                "meta_img" => "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-103.png",
+                "short_desc" => "What good is learning classical piano if you don’t have beautiful music to play?",
+                "header_text" => "Classical Piano Pieces (You Can Actually Play)",
+                "price" => 39,
+                "discounted_price" => "",
+                "special_text" => "",
+                "overview" => "**Classical piano has a reputation.**
+
+Let’s be honest…
+
+Classical piano can seem a little elitist, even snobby. And that’s a shame. Because classical music is so beautiful.
+
+So we’re out to change that reputation.
+
+Welcome to the world of classical piano music (you can actually play)! This book is your gateway to famous composers, stunning piano pieces, and an entirely new and rewarding experience on the piano.
+
+It’s your repertoire of beautiful classical pieces that you can actually play (and that people will want to hear)!
+
+Here are some of our favorites:
+  - Ukrainian Folk Song by Ludwig van Beethoven
+  - Minuet in F Major by Wolfgang Amadeus Mozart
+  - Prelude in C Major by Johann Sebastian Bach
+  - Sonatina in B-flat Major by George Frideric Handel
+  - Waltz in A Minor by Frédéric Chopin
+And so many more!",
+                "features" => [
+                ],
+                "specs" => [
+                    [
+                        "title" => "Size",
+                        "desc" => '11" x 8.5"'
+                    ],
+                    [
+                        "title" => "Weight",
+                        "desc" => "1 lbs"
+                    ],
+                    [
+                        "title" => "Pages",
+                        "desc" => "92 pages"
+                    ],
+                ],
+                "visible" => true,
+                "sold_out" => false,
+                "guaranteed" => false,
+                "lifetime_access" => false,
+                "free_shipping" => false,
+                "images" => [
+                    "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-103.png",
+                    "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-132.png",
+                    "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-146.png",
+                    "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-100.png",
+                    "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-109.png",
+                    "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-111.png",
+                    "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-113.png"
+                ],
+                "sizeChart" => "",
+                "sizes" => [
+
+                ],
+                'bundle_img' => 'https://pianote.s3.amazonaws.com/sales/promos/july/classical_piano_book_list.jpg',
+                'bundle_desc' => 'What good is learning classical piano if you don’t have beautiful music to play? This NEW book is 92 pages full of beautiful pieces by famous classical composers that you can actually play! The perfect companion to The Classical Method, each piece has been hand-selected to be appropriate for your skill level - while still sounding beautiful. Beethoven, Chopin, Bach, they’re all in here.',
+            ],
+            [
+                "brand" => 2,
+                "product_type_id" => 2,
                 "name" => "Piano Chords & Scales",
                 "slug" => "chords-scales-book",
                 "sku" => "piano-chords-and-scales-guide",

@@ -1737,6 +1737,106 @@ class CmsClothingSeeder extends Seeder
             ],
             [
                 "brand" => 4,
+                "product_type_id" => 5,
+                "name" => "Do Re Mi Hoodie",
+                "slug" => "doremi-hoodie",
+                "sku" => "doremi-hoodie",
+                "thumbnail" => "https://singeo.s3.amazonaws.com/products/hoodie-shop-sale-page.jpg",
+                "meta_desc" => "This ultra-soft, super warm fleeced hoodie will keep you cozy on those chilly days. This hoodie fits beautifully and creates a flattering look because of the spandex waist. PLUS, it’s fashionable purple will have you singing with much more style and confidence. Oh, and the solfege on the sleeve? It’s not upside down, singers understand. 😜",
+                "meta_img" => "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/funnel-sweatshirt/1.jpg",
+                "short_desc" => "This ultra-soft, super warm fleeced hoodie will keep you cozy on those chilly days. This hoodie fits beautifully and creates a flattering look because of the spandex waist. PLUS, it’s fashionable purple will have you singing with much more style and confidence. Oh, and the solfege on the sleeve? It’s not upside down, singers understand. 😜",
+                "header_text" => "Do Re Mi Singeo Hoodie",
+                "price" => 59,
+                "discounted_price" => "",
+                "special_text" => "",
+                "features" => [
+                    "This ultra-soft, super warm fleeced hoodie will keep you cozy on those chilly days. This hoodie fits beautifully and creates a flattering look because of the spandex waist. PLUS, it’s fashionable purple will have you singing with much more style and confidence. Oh, and the solfege on the sleeve? It’s not upside down, singers understand. 😜"
+                ],
+                "specs" => [
+                    [
+                        "title" => "Sizing",
+                        "desc" => "Unisex"
+                    ],
+                    [
+                        "title" => "Hoodie",
+                        "desc" => "J. America"
+                    ],
+                    [
+                        "title" => "Fabric",
+                        "desc" => "60% Cotton, 40% Polyester Air-Spun Fleece"
+                    ],
+                    [
+                        "title" => "Color",
+                        "desc" => "Lavender"
+                    ],
+                    [
+                        "title" => "Style",
+                        "desc" => "Hooded Sweatshirt With Front Pouch Pocket"
+                    ],
+                ],
+                "visible" => false,
+                "sold_out" => false,
+                "guaranteed" => false,
+                "lifetime_access" => false,
+                "free_shipping" => false,
+                "images" => [
+                    'https://singeo.s3.amazonaws.com/products/hoodie-shop-sale-page.jpg'
+                ],
+                "sizeChart" => 6,
+                "sizes" => [
+                    2,3,4,5,6
+                ]
+            ],
+            [
+                "brand" => 4,
+                "product_type_id" => 4,
+                "name" => "Chorus T-shirt",
+                "slug" => "shirt-chorusz",
+                "sku" => "chorus-shirt",
+                "thumbnail" => "https://singeo.s3.amazonaws.com/products/t-shirt-shop-sale-page.jpg",
+                "meta_desc" => "The Chorus Singeo T-Shirt, as comfortable as it looks.",
+                "meta_img" => "https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/funnel-sweatshirt/1.jpg",
+                "short_desc" => "The Chorus Singeo T-Shirt, as comfortable as it looks.",
+                "header_text" => "Singeo Chorus T-Shirt",
+                "price" => 29,
+                "discounted_price" => "",
+                "special_text" => "",
+                "features" => [
+                    "The Chorus Singeo T-Shirt, as comfortable as it looks."
+                ],
+                "specs" => [
+                    [
+                        "title" => "Sizing",
+                        "desc" => "Unisex"
+                    ],
+                    [
+                        "title" => "Shirt",
+                        "desc" => "Bella + Canvas Short Sleeve Jersey Tee"
+                    ],
+                    [
+                        "title" => "Fabric",
+                        "desc" => "100% Cotton"
+                    ],
+                    [
+                        "title" => "Color",
+                        "desc" => "Lavender"
+                    ],
+                ],
+                "visible" => false,
+                "sold_out" => false,
+                "guaranteed" => false,
+                "lifetime_access" => false,
+                "free_shipping" => false,
+                "images" => [
+                    'https://singeo.s3.amazonaws.com/products/t-shirt-shop-sale-page.jpg'
+                ],
+                "sizeChart" => 14,
+                "sizes" => [
+                    2,3,4,5,6
+                ]
+            ],
+            [
+                "brand" => 4,
                 "product_type_id" => 4,
                 "name" => "Retro T-shirt",
                 "slug" => "shirt-retro",
@@ -1942,6 +2042,7 @@ class CmsClothingSeeder extends Seeder
                     1,2,3,4,5
                 ]
             ],
+
 //            [
 //                "brand" => 2,
 //                "product_type_id" => 4,
