@@ -135,6 +135,8 @@ class ContentPagesController extends BaseController
         if (user()->permission_level === 'administrator') {
             ContentRepository::$availableContentStatues =
                 [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED, ContentService::STATUS_DRAFT];
+        } else {
+            ContentRepository::$availableContentStatues = [ContentService::STATUS_PUBLISHED];
         }
 
         ContentRepository::$pullFutureContent = false;
