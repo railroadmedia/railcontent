@@ -5,10 +5,18 @@ namespace App\Console\Commands\Infrastructure;
 use Illuminate\Console\Command as CommandBase;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Log;
 
 abstract class Command extends CommandBase
 {
+
+    public function info($string, $verbosity = null)
+    {
+        Log::info($string); //also write info statements to log
+        $this->line($string, 'info', $verbosity);
+    }
 
     public function withProgressBarChunked(Builder $query, callable $function, $chunks = 1000, $timeout = 600): bool
     {
@@ -29,7 +37,9 @@ abstract class Command extends CommandBase
             $last = null;
             foreach ($items as $item) {
                 call_user_func($function, $item);
-                if ($bar) $bar->advance();
+                if ($bar) {
+                    $bar->advance();
+                }
                 $last = $item;
                 $sec = intval(microtime(true) - $timeStart);
                 $n += 1;
@@ -40,12 +50,103 @@ abstract class Command extends CommandBase
             }
             if (!$bar) {
                 $message = "$n/$count processed. ";
-                if ($last?->id) $message .= "Last processed id: $last->id";
+                if ($last?->id) {
+                    $message .= "Last processed id: $last->id";
+                }
                 Log::info($message);
             }
         });
 
         $this->info("Processing Completed");
         return $success;
+    }
+
+    /**
+     * Function for chunking queries into a batch of jobs to avoid running into Lambda 15 minute execution limit
+     */
+    public function runBatchQuery(callable $getJob, $chunks = 1000): bool
+    {
+        return $this->runJobsQuery($getJob, false, $chunks);
+    }
+
+    /**
+     * Function for chunking queries into a chain of jobs to avoid running into Lambda 15 minute execution limit
+     */
+    public function runChainQuery(callable $getJob, $chunks = 1000): bool
+    {
+        return $this->runJobsQuery($getJob, true, $chunks);
+    }
+
+    private function runJobsQuery(callable $getJob, bool $isChain, $chunks = 1000,): bool
+    {
+        Artisan::call('queue:prune-batches');
+        $timeStart = microtime(true);
+        $job = call_user_func($getJob, 0, 0);
+        $count = $job->getQuery()->count();
+        $this->info("Processing $this->name query...");
+        $this->info("$count records found.");
+
+        $skip = 0;
+        $take = $chunks;
+        $jobs = [];
+        while ($skip < $count) {
+            if (($skip + $take) > $count) {
+                $take = $count % $take;
+            }
+            $job = call_user_func($getJob, $skip, $take);
+            $skip += $chunks;
+            $jobs[] = $job;
+        }
+        $nJobs = count($jobs);
+        if ($nJobs == 0) {
+            $this->info("No jobs to dispatch.");
+            $this->info("Finished $this->name");
+            return true;
+        }
+        $this->info("Dispatching $nJobs jobs.");
+        $batch = null;
+        if ($isChain) {
+            Bus::chain($jobs)->dispatch();
+        } else {
+            $batch = Bus::batch($jobs)->name(class_basename($this))->dispatch();
+        }
+        $this->info("Dispatched $nJobs jobs.");
+        if ($batch) {
+            $this->info("Check batch status: artisan batch:status $batch->id");
+        } else {
+            $this->info("No batched status available");
+        }
+
+        if (App::environment('local') && env(
+                'QUEUE_CONNECTION'
+            ) == 'sync') { //progress bar not useful when running vapor commands
+            if ($batch) {
+                $batchId = $batch->id;
+                while (!$batch->finished()) {
+                    $batch = Bus::findBatch($batchId);
+                    $completedJobs = $batch->totalJobs - $batch->pendingJobs;
+                    Log::info("Processed $completedJobs/$batch->totalJobs {$batch->progress()}%");
+                    usleep(500000);
+                }
+            }
+            $diff = microtime(true) - $timeStart;
+            $sec = intval($diff);
+            $this->info("Finished $this->name ($sec s)");
+        }
+
+        return true;
+    }
+
+    public function withExecutionTime(callable $function)
+    {
+        $this->info("Processing $this->name");
+
+        $timeStart = microtime(true);
+
+        call_user_func($function);
+
+        $diff = microtime(true) - $timeStart;
+        $sec = intval($diff);
+        $this->info("Finished $this->name ($sec s)");
     }
 }

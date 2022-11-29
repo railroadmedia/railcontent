@@ -9,11 +9,12 @@ class NavigationService
      */
     public static function getSidebarSections()
     {
-        if (empty(user())) {
+        $user = user();
+        if (empty($user)) {
             return [];
         }
 
-        if (user()->isPackOnlyOwner()) {
+        if ($user->isPackOnlyOwner() || !$user->isAMember() || $user->isAnExpiredMember()) {
             return [
                 [ // section
                     [
@@ -21,11 +22,16 @@ class NavigationService
                         'path' => '/'.brand(),
                         'icon' => 'home',
                     ],
+                    [
+                        'name' => 'Shop',
+                        'path' => get_legacy_brand_base_url() . '/shop',
+                        'icon' => 'cart',
+                    ]
                 ],
                 [ // section
                     [
-                        'name' => 'Packs',
-                        'path' => '/'.brand().'/packs',
+                        'name' => brand() === 'singeo' ? 'Courses' : 'Packs',
+                        'path' => brand() === 'singeo' ? '/'.brand().'/courses' : '/'.brand().'/packs',
                         'icon' => 'box',
                     ],
                 ],
@@ -95,6 +101,11 @@ class NavigationService
                         'icon' => 'play-circle',
                     ],
                     [
+                        'name' => brand().' Schedule',
+                        'path' => '/'.brand().'/schedule/',
+                        'icon' => 'calendar',
+                    ],
+                    [
                         'name' => 'Play-Alongs',
                         'path' => '/'.brand().'/play-alongs',
                         'icon' => 'eigth-notes',
@@ -121,6 +132,11 @@ class NavigationService
                         'path' => '/'.brand().'/lists/my-list',
                         'icon' => 'playlist',
                     ],
+                    [
+                        'name' => 'Shop',
+                        'path' => get_legacy_brand_base_url() . '/shop',
+                        'icon' => 'cart',
+                    ]
                 ],
             ];
         } elseif (brand() === 'pianote') {
@@ -174,6 +190,11 @@ class NavigationService
                         'icon' => 'play-circle',
                     ],
                     [
+                        'name' => brand().' Schedule',
+                        'path' => '/'.brand().'/schedule/',
+                        'icon' => 'calendar',
+                    ],
+                    [
                         'name' => 'Podcast',
                         'path' => '/'.brand().'/podcasts',
                         'icon' => 'podcast',
@@ -195,6 +216,11 @@ class NavigationService
                         'path' => '/'.brand().'/lists/my-list',
                         'icon' => 'playlist',
                     ],
+                    [
+                        'name' => 'Shop',
+                        'path' => get_legacy_brand_base_url() . '/shop',
+                        'icon' => 'cart',
+                    ]
                 ],
             ];
         } elseif (brand() === 'guitareo') {
@@ -248,6 +274,11 @@ class NavigationService
                         'icon' => 'play-circle',
                     ],
                     [
+                        'name' => brand().' Schedule',
+                        'path' => '/'.brand().'/schedule/',
+                        'icon' => 'calendar',
+                    ],
+                    [
                         'name' => 'Play-Alongs',
                         'path' => '/'.brand().'/play-alongs',
                         'icon' => 'eigth-notes',
@@ -284,6 +315,11 @@ class NavigationService
                         'path' => '/'.brand().'/lists/my-list',
                         'icon' => 'playlist',
                     ],
+                    [
+                        'name' => 'Shop',
+                        'path' => get_legacy_brand_base_url() . '/shop',
+                        'icon' => 'cart',
+                    ]
                 ],
             ];
         } elseif (brand() === 'singeo') {
@@ -332,6 +368,11 @@ class NavigationService
                         'icon' => 'play-circle',
                     ],
                     [
+                        'name' => brand().' Schedule',
+                        'path' => '/'.brand().'/schedule/',
+                        'icon' => 'calendar',
+                    ],
+                    [
                         'name' => 'Routines',
                         'path' => '/'.brand().'/routines',
                         'icon' => 'routines',
@@ -348,6 +389,11 @@ class NavigationService
                         'path' => '/'.brand().'/lists/my-list',
                         'icon' => 'playlist',
                     ],
+                    [
+                        'name' => 'Shop',
+                        'path' => get_legacy_brand_base_url() . '/shop',
+                        'icon' => 'cart',
+                    ]
                 ],
             ];
         }
@@ -380,7 +426,6 @@ class NavigationService
             'applyForReviewPageUrl' => '/',
             'settingsPageUrl' => '/'.brand().'/profile/'.user()->id.'/settings/profile',
             'supportPageUrl' => '/'.brand().'/support',
-            'shopPageUrl' => 'https://'.brand().'.com/shop',
             'logoutPageUrl' => '/user-management-system/logout/cookie',
         ];
     }

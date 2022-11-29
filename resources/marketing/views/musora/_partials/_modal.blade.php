@@ -6,7 +6,7 @@
     role="dialog"
     aria-modal="true"
     x-id="['modal-title']"
-    :aria-labelledby="$id('modal-title')"
+    :aria-labelledby="['modal-title']"
     class="fixed inset-0 z-10 overflow-y-auto"
     >
     <!-- Overlay -->
@@ -23,7 +23,7 @@
         <div
             x-on:click.stop
             x-trap.noscroll.inert="{{ $name }}"
-            class="relative w-full max-w-[600px] overflow-y-visible"
+            class="relative w-full overflow-y-visible"
         >
             <!-- Content -->
             {!! $content !!}

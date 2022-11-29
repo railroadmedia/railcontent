@@ -41,4 +41,14 @@ class MarketingController extends BaseController
     {
         return view('musora.pages.brand');
     }
+
+    public function unified2022()
+    {
+        return view('musora.pages.unified-2022');
+    }
+
+    public function recitals()
+    {
+        return view('musora.pages.recitals');
+    }
 }

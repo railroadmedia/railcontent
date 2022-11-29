@@ -38,17 +38,17 @@
     @include("singeo.sales.partials._nav", [
         "joinVersion" => true,
     ])
-    
+
     <!-- Header -->
     <header class="py-10 md:py-16 bg-black bg-center bg-cover" style="background-image:url(https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/background-order.jpg);">
         <div class="container mx-auto">
             <h1 class="mx-auto text-center text-white text-2xl md:text-4xl font-bold">
-                <i class="fas fa-phone fa-flip-horizontal text-singeo text-3xl mr-1"></i> 
+                <i class="fas fa-phone fa-flip-horizontal text-singeo text-3xl mr-1"></i>
                 Contact Us
             </h1>
         </div>
     </header>
-    
+
     <main class="flex flex-col max-w-3xl mx-auto px-4">
 
         <!-- Intro -->
@@ -59,10 +59,10 @@
                 <p class="text-base">You may find your response in our <a href="https://help.singeo.com/" class="font-bold no-underline text-singeo" title="go to help center">Help Center here</a>, but if not, fill out the quick form below.</p>
             </div>
         </section>
-        
+
         <!-- Form -->
         <section id="app">
-            <contact-email-form 
+            <contact-email-form
                 brand="singeo"
                 captchakey="6LcSMHgdAAAAAOFqEZob05w0ZZAInbnfqMdMnhNB"
                 email-subject="Support Request From Singeo.com"
@@ -94,20 +94,20 @@
                 </div>
             </div>
         </section>
-        
+
         <!-- Join -->
         <section class="flex flex-col text-center mb-12">
             <h2 class="font-bold text-3xl mb-3 md:mb-6">Want to join the team?</h2>
-            <p class="text-base">For current available positions at our company, please visit <a href="https://musora.com/jobs" title="go to help center" class="font-bold no-underline text-singeo">Musora.com/Jobs</a>.</p>
+            <p class="text-base">For current available positions at our company, please visit <a href="https://musora.com/careers" title="go to help center" class="font-bold no-underline text-singeo">Musora.com/Careers</a>.</p>
         </section>
 
     </main>
 
     @include("singeo.sales.partials._footer")
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="/assets/marketing/nav-footer.js"></script>
-    <script src="{{ mix('assets/members/js/manifest.js') }}"></script>
-    <script src="{{ mix('assets/members/js/vendor.js') }}"></script>
-    <script src="{{ mix('assets/members/js/app.js') }}"></script>
+    <script src="{{ mix('marketings/js/manifest.js') }}"></script>
+    <script src="{{ mix('marketings/js/vendor.js') }}"></script>
+    <script src="{{ mix('marketing/js/app.js') }}"></script>
 @stop

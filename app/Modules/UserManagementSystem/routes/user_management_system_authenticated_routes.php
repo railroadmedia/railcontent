@@ -1,8 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\UserManagementSystem\Controllers\AuthenticationController;
 use Modules\UserManagementSystem\Controllers\EmailChangeController;
 use Modules\UserManagementSystem\Controllers\PasswordController;
+use Modules\UserManagementSystem\Controllers\PictureUploadController;
 use Modules\UserManagementSystem\Controllers\UserController;
 use Modules\UserManagementSystem\Controllers\OnboardingController;
 
@@ -60,13 +62,12 @@ Route::group(
         )
             ->name('user_management_system.email-change.confirm');
 
-
         Route::match(
             ['post', 'put'],
             'picture/upload-from-s3-front-end',
             [
                 'as' => 'user_management_system.picture.upload-from-s3-front-end',
-                'uses' => \Modules\UserManagementSystem\Controllers\PictureUploadController::class . '@uploadPhotoFromS3FrontEnd',
+                'uses' => PictureUploadController::class . '@uploadPhotoFromS3FrontEnd',
             ]
         );
 
@@ -75,13 +76,19 @@ Route::group(
             'picture/upload',
             [
                 'as' => 'user_management_system.picture.upload',
-                'uses' => \Modules\UserManagementSystem\Controllers\PictureUploadController::class . '@uploadPhoto',
+                'uses' => PictureUploadController::class . '@uploadPhoto',
             ]
         );
 
-    	  /*
-          * Onboarding API
-          */
+        Route::get(
+            'login-as-user/{userId}',
+            AuthenticationController::class . '@loginAsUser'
+        )
+            ->name('user_management_system.login-as-user');
+
+        /*
+        * Onboarding API
+        */
         Route::post(
             'onboarding-gears',
             OnboardingController::class . '@gears'

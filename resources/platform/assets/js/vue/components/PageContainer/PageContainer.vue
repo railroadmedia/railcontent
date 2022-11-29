@@ -42,7 +42,14 @@ const props = defineProps({
   forceSidebarHidden: {
     type: Boolean,
     default: false
-  }
+  },
+  adminMessage: {
+    type: String,
+  },
+  canReferNewStudents: {
+      type: Boolean,
+      default: true
+  },
 });
 
 const notification = useNotificationStore();
@@ -81,7 +88,7 @@ const onCollapseSidebar = (val) => {
     } else {
       isSidebarHidden.value = false;
       isSidebarCollapsed.value = !isSidebarCollapsed.value;
-      //Dom manipulation... 
+      //Dom manipulation...
       if (isSidebarCollapsed.value) {
         document.body.classList.add('sidebar-collapsed')
       } else {
@@ -131,7 +138,7 @@ onBeforeMount(() => {
   } else if (localStorage.getItem("isSidebarCollapsed") && !props.forceSidebarHidden) {
     // On desktop load the sidebar collapsed value saved on local storage, if the hidden state is not forced
     isSidebarCollapsed.value = JSON.parse(localStorage.getItem("isSidebarCollapsed"));
-    //Dom manipulation... 
+    //Dom manipulation...
     if (isSidebarCollapsed.value) {
       document.body.classList.add('sidebar-collapsed')
     } else {
@@ -184,7 +191,7 @@ onUnmounted(() => {
 <template>
   <main class="tw-min-h-screen tw-w-screen">
     <sprite-sheet></sprite-sheet>
-    <NotificationToasts :icon="notification.icon" :text="notification.text" :isError="notification.isError" @onClose="handleNotificationClear" />
+    <NotificationToasts :icon="notification.icon" :text="notification.text" :isError="notification.isError" :slideClass="notification.slideClass" @onClose="handleNotificationClear" />
     <ConfirmationModal
       v-if="confirmation.title"
       :brand="brand"
@@ -199,6 +206,7 @@ onUnmounted(() => {
     <Navbar :forceSidebarHidden="forceSidebarHidden" :brand="brand" :has-notifications="hasNotifications"
       :user-name="userName" :userAvatar="userAvatar" :account-url="accountUrl" :isSidebarHidden="isSidebarHidden"
       :isDarkModeSelected="isDarkModeSelected" :isSidebarCollapsed="isSidebarCollapsed"
+      :canReferNewStudents="canReferNewStudents"
       @onCollapseSidebar="onCollapseSidebar" @onColorModeToggle="onColorModeToggle" />
 
     <!-- Page Container -->
@@ -226,6 +234,9 @@ onUnmounted(() => {
           tw-overflow-x-hidden
           tw-scroll-smooth
         " id="content-container">
+        <h2 v-if="adminMessage && adminMessage.length" class="tw-text-[18px] tw-w-full tw-bg-yellow-200 tw-p-[20px] tw-text-center">
+          {{ adminMessage }}
+        </h2>
         <!-- Content -->
         <section class="tw-flex tw-flex-col tw-grow tw-w-full">
           <slot :is-dark-mode="isDarkModeSelected" />

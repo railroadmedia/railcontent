@@ -2,7 +2,7 @@
 import { ref, onBeforeMount } from "vue";
 import { EyeIcon, EyeOffIcon } from '@heroicons/vue/outline'
 import InputLabel from "../InputLabel/InputLabel.vue";
-import RainbowButton from "../Button/RainbowButton.vue";
+import LoginButton from "../Button/LoginButton.vue";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner.vue";
 
 const props = defineProps({
@@ -149,10 +149,11 @@ onBeforeMount(() => {
           </InputLabel>
         </div>
         
-        <RainbowButton :disabled="!passwordInput.length || !emailInput.length || isLoading" type="button" @on-button-click="handleButtonClick">
+        <LoginButton :disabled="!passwordInput.length || !emailInput.length || isLoading" type="button" @on-button-click="handleButtonClick">
           <span class="tw-flex tw-justify-center tw-items-center" v-if="isLoading"><LoadingSpinner /> SIGNING IN</span>
           <span v-if="!isLoading">SIGN IN</span>
-        </RainbowButton>
+        </LoginButton>
+
         <button id="hidden-submit" type="submit" hidden>Submit</button>
         <a
           id="resetToggle"
@@ -200,7 +201,7 @@ onBeforeMount(() => {
             @onChange="handleEmailChange"
           />
         </div>
-        <RainbowButton :disabled="!emailInput.length" type="submit" label="GET NEW PASSWORD" />
+        <LoginButton :disabled="!emailInput.length" type="submit" label="GET NEW PASSWORD" />
       </form>
 
       <a

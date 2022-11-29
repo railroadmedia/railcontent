@@ -308,11 +308,13 @@
                             <table width="100%" cellpadding="0" cellspacing="0">
                                 <tr>
                                     <td class="content-block">
+{{--                                        Name: {{ $input['sender-name'] }}--}}
                                         Name: {{ $input['studentName'] }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="content-block">
+{{--                                        Email: {{ $input['sender-address'] }}--}}
                                         Email: {{ $input['studentEmail'] }}
                                     </td>
                                 </tr>
@@ -337,13 +339,13 @@
                                 <tr>
                                     <td class="content-block">
                                         <?php
-                                        $attachmentCount = 0;
-                                        if(!empty($input['attachment'])){
-                                            $attachmentCount = 1;
-                                        }
-                                        if(!empty($input['attachments'])){
-                                            $attachmentCount = count($input['attachments']);
-                                        }
+                                            $attachmentCount = 0;
+                                            if(!empty($input['attachment']) && $input['attachment'] != "null"){
+                                                $attachmentCount = 1;
+                                            }
+                                            if(!empty($input['attachments'])){
+                                                $attachmentCount = count($input['attachments']);
+                                            }
                                         ?>
                                         Attachment count: {{ $attachmentCount }}
                                     </td>

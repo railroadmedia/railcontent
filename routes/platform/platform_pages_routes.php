@@ -2,36 +2,269 @@
 
 use App\Http\Controllers\Platform\CoachPagesController;
 use App\Http\Controllers\Platform\ContentPagesController;
+use App\Http\Controllers\Platform\ExpiredMemberController;
 use App\Http\Controllers\Platform\ForumPagesController;
 use App\Http\Controllers\Platform\HomePageController;
+use App\Http\Controllers\Platform\LegacyResourcesController;
 use App\Http\Controllers\Platform\LivePageController;
 use App\Http\Controllers\Platform\MailController;
 use App\Http\Controllers\Platform\NotificationPagesController;
 use App\Http\Controllers\Platform\PackPagesController;
+use App\Http\Controllers\Platform\PaymentMethodUpdateController;
 use App\Http\Controllers\Platform\ProfilePublicPagesController;
 use App\Http\Controllers\Platform\ProfileSettingsPagesController;
 use App\Http\Controllers\Platform\ReferralPagesController;
 use App\Http\Controllers\Platform\SupportController;
 use App\Http\Controllers\Platform\UserListPagesController;
-use App\Http\Controllers\Platform\LegacyResourcesController;
-use Modules\UserManagementSystem\Middleware\AuthIfTokenExist;
 use App\Modules\Brand\Enums\Brand;
+use App\Modules\Content\Controllers\MusoraCenterContentController;
 use Illuminate\Support\Facades\Route;
+use Modules\UserManagementSystem\Middleware\AuthIfTokenExist;
 
 Route::domain('{musoraDomain}')
     ->middleware(['web_authenticated'])
     ->group(function () {
-        /*
-         * Home Page
-         */
-        Route::get('/{brand}', [HomePageController::class, 'home'])
-            ->whereIn('brand', all_brands())
-            ->name('platform.home');
+        Route::domain('{musoraDomain}')
+            ->middleware(['web_member_only'])
+            ->group(function () {
+                /*
+                 * Home Page
+                 */
+                Route::get('/{brand}', [HomePageController::class, 'home'])
+                    ->whereIn('brand', all_brands())
+                    ->name('platform.home');
 
+                /*
+                 * Primary Content Pages
+                 */
+                Route::get('/{brand}/coaches', [CoachPagesController::class, 'coaches'])
+                    ->whereIn('brand', all_brands())
+                    ->name('platform.coaches');
+
+                Route::get('/{brand}/lessons/all', [ContentPagesController::class, 'newLessonsPage'])
+                    ->whereIn('brand', all_brands())
+                    ->name('platform.new-lessons');
+
+                Route::get('/{brand}/lessons/subscribed', [ContentPagesController::class, 'subscribedContent'])
+                    ->whereIn('brand', all_brands())
+                    ->name('platform.subscribed-lessons');
+
+
+                Route::get('/{brand}/{contentTypeName}', [ContentPagesController::class, 'contentTypeCatalog'])
+                    ->whereIn('brand', all_brands())
+                    ->whereIn('contentTypeName', [
+                        'lessons', // guitareo one-off page
+                        'routines', // singeo one-off page
+                        'courses',
+                        'songs',
+                        'quick-tips',
+                        'podcasts',
+                        'question-and-answer',
+                        'student-reviews',
+                        'boot-camps',
+                        'chords-and-scales',
+                        'bootcamps',
+                        'chords-scales',
+                        'library',
+                        'recording',
+                        'play-alongs',
+                        'archives',
+                        'spotlight',
+                        'the-history-of-electronic-drums',
+                        'backstage-secrets',
+                        'student-collaborations',
+                        'live-streams',
+                        'solos',
+                        'boot-amps',
+                        'gear-guides',
+                        'performances',
+                        'in-rhythm',
+                        'challenges',
+                        'on-the-road',
+                        'diy-drum-experiments',
+                        'rhythmic-adventures-of-captain-carson',
+                        'study-the-greats',
+                        'rhythms-from-another-planet',
+                        'tama-drums',
+                        'paiste-cymbals',
+                        'behind-the-scenes',
+                        'exploring-beats',
+                        'sonor-drums',
+                        'rudiments',
+                        'boot-camps',
+                    ])
+                    ->name('platform.content-type-catalog');
+
+                Route::get('/{brand}/shows', [ContentPagesController::class, 'shows'])
+                    ->whereIn('brand', ['drumeo'])
+                    ->name('platform.shows');
+
+                Route::get('/{brand}/student-focus', [ContentPagesController::class, 'studentFocus'])
+                    ->whereIn('brand', all_brands())
+                    ->name('platform.student-focus');
+
+                Route::get('/{brand}/play-alongs', [ContentPagesController::class, 'playAlongs'])
+                    ->whereIn('brand', [Brand::Drumeo->value, Brand::Guitareo->value])
+                    ->name('platform.play-alongs');
+
+                Route::get('/{brand}/podcast', [ContentPagesController::class, 'podcast'])
+                    ->whereIn('brand', [Brand::Drumeo->value, Brand::Pianote->value])
+                    ->name('platform.podcast');
+
+                Route::get('/{brand}/boot-camps', [ContentPagesController::class, 'bootCamps'])
+                    ->whereIn('brand', [Brand::Drumeo->value, Brand::Pianote->value])
+                    ->name('platform.boot-camps');
+
+                Route::get('/{brand}/chords-and-scales', [ContentPagesController::class, 'chordsAndScales'])
+                    ->whereIn('brand', [Brand::Pianote->value])
+                    ->name('platform.chords-and-scales');
+
+                Route::get('/{brand}/archives', [ContentPagesController::class, 'archives'])
+                    ->whereIn('brand', [Brand::Drumeo->value, Brand::Guitareo->value])
+                    ->name('platform.archives');
+
+                Route::get('/{brand}/schedule', [ContentPagesController::class, 'schedule'])
+                    ->whereIn('brand', all_brands())
+                    ->name('platform.schedule');
+
+                /*
+                 * Specific Sub-Content Hierarchy Pages
+                 */
+                Route::get(
+                    '/{brand}/coaches/{firstContentSlug}/{firstContentId}',
+                    [CoachPagesController::class, 'show']
+                )
+                    ->whereIn('brand', all_brands())
+                    ->name('platform.content.coach.show');
+
+                /*
+                 * Live & Schedule
+                 */
+                Route::get('/{brand}/live', [LivePageController::class, 'live'])
+                    ->whereIn('brand', all_brands())
+                    ->name('platform.live');
+
+                Route::get('/{brand}/live-chat', [LivePageController::class, 'chat'])
+                    ->whereIn('brand', all_brands())
+                    ->name('platform.live-chat');
+
+                /*
+                 * Catch-All Sub-Content Hierarchy Pages / Video Lesson Pages
+                 */
+                Route::get(
+                    '/{brand}/{primaryPage}/{firstContentSlug}/{firstContentId}',
+                    [ContentPagesController::class, 'firstLevel']
+                )
+                    ->whereIn('brand', all_brands())
+                    ->whereIn(
+                        'primaryPage',
+                        [
+                            'method',
+                            'coaches',
+                            'songs',
+                            'courses',
+                            'quick-tips',
+                            'rudiments',
+                            'bootcamps',
+                            'chords-scales',
+                            'podcasts',
+                            'question-and-answer',
+                            'spotlight',
+                            'the-history-of-electronic-drums',
+                            'backstage-secrets',
+                            'student-collaborations',
+                            'live-streams',
+                            'podcasts',
+                            'solos',
+                            'boot-camps',
+                            'gear-guides',
+                            'performances',
+                            'in-rhythm',
+                            'challenges',
+                            'on-the-road',
+                            'diy-drum-experiments',
+                            'rhythmic-adventures-of-captain-carson',
+                            'study-the-greats',
+                            'rhythms-from-another-planet',
+                            'tama-drums',
+                            'paiste-cymbals',
+                            'behind-the-scenes',
+                            'exploring-beats',
+                            'sonor-drums',
+                            'student-reviews',
+                            'student-focus',
+                            'archives',
+                            'recording',
+                            'play-alongs',
+                        ]
+                    )
+                    ->name('platform.content.first-level');
+
+                Route::get(
+                    '/{brand}/{primaryPage}/{firstContentSlug}/{firstContentId}/{secondContentSlug}/{secondContentId}',
+                    [ContentPagesController::class, 'secondLevel']
+                )
+                    ->whereIn('brand', all_brands())
+                    ->whereIn('primaryPage', ['method', 'coaches', 'courses', 'songs', 'play-alongs'])
+                    ->name('platform.content.second-level');
+
+                Route::get(
+                    '/{brand}/{primaryPage}/{firstContentSlug}/{firstContentId}/{secondContentSlug}/{secondContentId}/{thirdContentSlug}/{thirdContentId}',
+                    [ContentPagesController::class, 'thirdLevel']
+                )
+                    ->whereIn('brand', all_brands())
+                    ->whereIn('primaryPage', ['method'])
+                    ->name('platform.content.third-level');
+
+                Route::get(
+                    '/{brand}/{primaryPage}/{firstContentSlug}/{firstContentId}/{secondContentSlug}/{secondContentId}/{thirdContentSlug}/{thirdContentId}/{fourthContentSlug}/{fourthContentId}',
+                    [ContentPagesController::class, 'fourthLevel']
+                )
+                    ->whereIn('brand', all_brands())
+                    ->whereIn('primaryPage', ['method'])
+                    ->name('platform.content.fourth-level');
+
+                /*
+                 * Referral Pages
+                 */
+                Route::domain('{musoraDomain}')
+                    ->middleware([AuthIfTokenExist::class, 'web_authenticated'])
+                    ->group(function () {
+                        Route::get('/{brand}/referral/invite-a-friend', [ReferralPagesController::class, 'inviteAFriend'])
+                            ->whereIn('brand', all_brands())
+                            ->name('platform.invite-a-friend');
+                    });
+            });
+
+        // anyone even without pack or a membership can access these
+
+        /*
+         * Redirect Helpers
+         */
         // this automatically redirects to the users last used brand
         Route::get('/members', [HomePageController::class, 'homeRedirect'])
             ->whereIn('brand', all_brands())
             ->name('platform.home-redirect');
+
+        // this automatically redirects to the users profile dashboard
+        Route::get('/members/profile', [HomePageController::class, 'profileRedirect'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile-redirect');
+
+        // this automatically redirects to the users notification settings
+        Route::get('/members/profile/settings/payments', [HomePageController::class, 'paymentSettingsRedirect'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.payment-redirect');
+
+        // this automatically redirects to the users notification settings
+        Route::get('/members/profile/settings/notifications', [HomePageController::class, 'notificationSettingsRedirect'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.notifications-redirect');
+
+        // this automatically redirects to the users notifications
+        Route::get('/members/notifications', [HomePageController::class, 'notificationsRedirect'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.notifications-redirect');
 
         /*
         * Onboarding
@@ -40,6 +273,12 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('platform.onboarding');
 
+        /*
+         * Expired Members
+         */
+        Route::get('/membership-expired', [ExpiredMemberController::class, 'showExpiredMemberPage'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.membership-expired');
 
         /*
          * Primary Content Pages
@@ -48,112 +287,9 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', ['drumeo', 'pianote', 'guitareo'])
             ->name('platform.packs');
 
-        Route::get('/{brand}/coaches', [CoachPagesController::class, 'coaches'])
-            ->whereIn('brand', all_brands())
-            ->name('platform.coaches');
-
-        Route::get('/{brand}/lessons/all', [ContentPagesController::class, 'newLessonsPage'])
-            ->whereIn('brand', all_brands())
-            ->name('platform.new-lessons');
-
-        Route::get('/{brand}/lessons/subscribed', [ContentPagesController::class, 'subscribedContent'])
-            ->whereIn('brand', all_brands())
-            ->name('platform.subscribed-lessons');
-
-        Route::get('/{brand}/jump-to-comment/{contentId}/{commentId}', [ContentPagesController::class, 'jumpToContentComment'])
-            ->whereIn('brand', all_brands())
-            ->name('platform.jump-to-comment');
-
-        Route::get('/{brand}/{contentTypeName}', [ContentPagesController::class, 'contentTypeCatalog'])
-            ->whereIn('brand', all_brands())
-            ->whereIn('contentTypeName', [
-                'lessons', // guitareo one-off page
-                'routines', // singeo one-off page
-                'courses',
-                'songs',
-                'quick-tips',
-                'podcasts',
-                'question-and-answer',
-                'student-reviews',
-                'boot-camps',
-                'chords-and-scales',
-                'bootcamps',
-                'chords-scales',
-                'library',
-                'recording',
-                'play-alongs',
-                'archives',
-                'spotlight',
-                'the-history-of-electronic-drums',
-                'backstage-secrets',
-                'student-collaborations',
-                'live-streams',
-                'solos',
-                'boot-amps',
-                'gear-guides',
-                'performances',
-                'in-rhythm',
-                'challenges',
-                'on-the-road',
-                'diy-drum-experiments',
-                'rhythmic-adventures-of-captain-carson',
-                'study-the-greats',
-                'rhythms-from-another-planet',
-                'tama-drums',
-                'paiste-cymbals',
-                'behind-the-scenes',
-                'exploring-beats',
-                'sonor-drums',
-                'rudiments',
-                'boot-camps',
-            ])
-            ->name('platform.content-type-catalog');
-
-        Route::get('/{brand}/shows', [ContentPagesController::class, 'shows'])
-            ->whereIn('brand', ['drumeo'])
-            ->name('platform.shows');
-
-        Route::get('/{brand}/student-focus', [ContentPagesController::class, 'studentFocus'])
-            ->whereIn('brand', all_brands())
-            ->name('platform.student-focus');
-
-        Route::get('/{brand}/play-alongs', [ContentPagesController::class, 'playAlongs'])
-            ->whereIn('brand', [Brand::Drumeo->value, Brand::Guitareo->value])
-            ->name('platform.play-alongs');
-
-        Route::get('/{brand}/podcast', [ContentPagesController::class, 'podcast'])
-            ->whereIn('brand', [Brand::Drumeo->value, Brand::Pianote->value])
-            ->name('platform.podcast');
-
-        Route::get('/{brand}/boot-camps', [ContentPagesController::class, 'bootCamps'])
-            ->whereIn('brand', [Brand::Drumeo->value, Brand::Pianote->value])
-            ->name('platform.boot-camps');
-
-        Route::get('/{brand}/chords-and-scales', [ContentPagesController::class, 'chordsAndScales'])
-            ->whereIn('brand', [Brand::Pianote->value])
-            ->name('platform.chords-and-scales');
-
-        Route::get('/{brand}/archives', [ContentPagesController::class, 'archives'])
-            ->whereIn('brand', [Brand::Drumeo->value, Brand::Guitareo->value])
-            ->name('platform.archives');
-
-        Route::get('/{brand}/schedule', [ContentPagesController::class, 'schedule'])
-            ->whereIn('brand', all_brands())
-            ->name('platform.schedule');
-
         Route::get('/{brand}/search', [ContentPagesController::class, 'search'])
             ->whereIn('brand', all_brands())
             ->name('platform.search');
-
-        /*
-         * Specific Sub-Content Hierarchy Pages
-         */
-        Route::get(
-            '/{brand}/coaches/{firstContentSlug}/{firstContentId}',
-            [CoachPagesController::class, 'show']
-        )
-            ->whereIn('brand', all_brands())
-            ->name('platform.content.coach.show');
 
         /*
          * Packs Sub-Content Hierarchy Pages
@@ -180,7 +316,10 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('platform.semester-packs.first-level');
 
-        Route::get('/{brand}/semester-packs/{packSlug}/{packId}/{packLessonSlug}/{packLessonId}', [PackPagesController::class, 'semesterPackLesson'])
+        Route::get(
+            '/{brand}/semester-packs/{packSlug}/{packId}/{packLessonSlug}/{packLessonId}',
+            [PackPagesController::class, 'semesterPackLesson']
+        )
             ->whereIn('brand', all_brands())
             ->name('platform.semester-packs.lesson');
 
@@ -188,83 +327,14 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('platform.coach.first-level');
 
+        Route::get(
+            '/{brand}/content/{contentId}',
+            [MusoraCenterContentController::class, 'showPreview']
+        );
+
         /*
-         * Catch-All Sub-Content Hierarchy Pages / Video Lesson Pages
+         * Jump-to redirects
          */
-        Route::get(
-            '/{brand}/{primaryPage}/{firstContentSlug}/{firstContentId}',
-            [ContentPagesController::class, 'firstLevel']
-        )
-            ->whereIn('brand', all_brands())
-            ->whereIn(
-                'primaryPage',
-                [
-                    'packs',
-                    'method',
-                    'coaches',
-                    'songs',
-                    'courses',
-                    'quick-tips',
-                    'rudiments',
-                    'bootcamps',
-                    'chords-scales',
-                    'podcasts',
-                    'question-and-answer',
-                    'spotlight',
-                    'the-history-of-electronic-drums',
-                    'backstage-secrets',
-                    'student-collaborations',
-                    'live-streams',
-                    'podcasts',
-                    'solos',
-                    'boot-camps',
-                    'gear-guides',
-                    'performances',
-                    'in-rhythm',
-                    'challenges',
-                    'on-the-road',
-                    'diy-drum-experiments',
-                    'rhythmic-adventures-of-captain-carson',
-                    'study-the-greats',
-                    'rhythms-from-another-planet',
-                    'tama-drums',
-                    'paiste-cymbals',
-                    'behind-the-scenes',
-                    'exploring-beats',
-                    'sonor-drums',
-                    'student-reviews',
-                    'student-focus',
-                    'archives',
-                    'recording',
-                    'play-alongs',
-                ]
-            )
-            ->name('platform.content.first-level');
-
-        Route::get(
-            '/{brand}/{primaryPage}/{firstContentSlug}/{firstContentId}/{secondContentSlug}/{secondContentId}',
-            [ContentPagesController::class, 'secondLevel']
-        )
-            ->whereIn('brand', all_brands())
-            ->whereIn('primaryPage', ['packs', 'method', 'coaches', 'courses','songs', 'play-alongs'])
-            ->name('platform.content.second-level');
-
-        Route::get(
-            '/{brand}/{primaryPage}/{firstContentSlug}/{firstContentId}/{secondContentSlug}/{secondContentId}/{thirdContentSlug}/{thirdContentId}',
-            [ContentPagesController::class, 'thirdLevel']
-        )
-            ->whereIn('brand', all_brands())
-            ->whereIn('primaryPage', ['packs', 'method'])
-            ->name('platform.content.third-level');
-
-        Route::get(
-            '/{brand}/{primaryPage}/{firstContentSlug}/{firstContentId}/{secondContentSlug}/{secondContentId}/{thirdContentSlug}/{thirdContentId}/{fourthContentSlug}/{fourthContentId}',
-            [ContentPagesController::class, 'fourthLevel']
-        )
-            ->whereIn('brand', all_brands())
-            ->whereIn('primaryPage', ['method'])
-            ->name('platform.content.fourth-level');
-
         Route::get(
             '/jump-to-content-id/{contentId}',
             [ContentPagesController::class, 'jumpToContentId']
@@ -277,16 +347,12 @@ Route::domain('{musoraDomain}')
         )
             ->name('platform.content.jump-to-continue-content');
 
-        /*
-         * Live & Schedule
-         */
-        Route::get('/{brand}/live', [LivePageController::class, 'live'])
+        Route::get(
+            '/{brand}/jump-to-comment/{contentId}/{commentId}',
+            [ContentPagesController::class, 'jumpToContentComment']
+        )
             ->whereIn('brand', all_brands())
-            ->name('platform.live');
-
-        Route::get('/{brand}/live-chat', [LivePageController::class, 'chat'])
-            ->whereIn('brand', all_brands())
-            ->name('platform.live-chat');
+            ->name('platform.jump-to-comment');
 
         /*
          * Users Lists Pages
@@ -336,11 +402,201 @@ Route::domain('{musoraDomain}')
             ->name('platform.profile.settings.notifications');
 
         Route::get(
-            '/{brand}/profile/{userId}/settings/membership',
-            [ProfileSettingsPagesController::class, 'membership']
+            '/{brand}/profile/{userId}/settings/account',
+            [ProfileSettingsPagesController::class, 'account']
         )
             ->whereIn('brand', all_brands())
-            ->name('platform.profile.settings.membership');
+            ->name('platform.profile.settings.account.id');
+
+        Route::get(
+            '/{brand}/profile/settings/account',
+            [ProfileSettingsPagesController::class, 'account']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.account');
+
+        Route::put(
+            '/update-payment-method',
+            [PaymentMethodUpdateController::class, 'submitUpdateForm']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.update-payment-method');
+
+        Route::get(
+            '/{brand}/profile/settings/cancellation-confirmed',
+            [ProfileSettingsPagesController::class, 'cancellationConfirmation']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.cancellation-confirmed');
+
+        // ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+        // ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
+
+        /*
+         * Cancellation-related
+         */
+
+        // POST resume-paused
+        Route::post(
+            '/{brand}/profile/settings/account/resume-paused',
+            [ProfileSettingsPagesController::class, 'resumePaused']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.resume-paused');
+
+        // POST submit-cancel-reason
+        Route::post(
+            '/{brand}/profile/settings/account/submit-cancel-reason',
+            [ProfileSettingsPagesController::class, 'submitCancelReason']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.submit-cancel-reason');
+
+        // POST accept student-plan offer
+        Route::post(
+            '/{brand}/profile/settings/account/student-plan-offer',
+            [ProfileSettingsPagesController::class, 'acceptStudentPlanOffer']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.student-plan-offer');
+
+        // POST accept switch-to-monthly offer
+        Route::post(
+            '/{brand}/profile/settings/account/switch-to-monthly',
+            [ProfileSettingsPagesController::class, 'acceptSwitchToMonthly']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.switch-to-monthly');
+
+        // POST accept student-plan offer
+        Route::post(
+            '/{brand}/profile/settings/account/gratis-access',
+            [ProfileSettingsPagesController::class, 'acceptGratisAccess']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.gratis-access');
+
+        // POST accept student-plan offer
+        Route::post(
+            '/{brand}/profile/settings/account/accept-pause-offer',
+            [ProfileSettingsPagesController::class, 'acceptPauseOffer']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.accept-pause-offer');
+
+        Route::post(
+            '/{brand}/profile/settings/account/send-help-email',
+            [ProfileSettingsPagesController::class, 'sendHelpEmail']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.send-help-email');
+
+        Route::post(
+            '/{brand}/profile/settings/account/decline-offer-proceed-with-cancel',
+            [ProfileSettingsPagesController::class, 'declineOfferProceedWithCancel']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.decline-offer-proceed-with-cancel');
+
+
+        // GET cancel-reason-form
+        Route::get(
+            '/{brand}/profile/settings/account/cancel',
+            [ProfileSettingsPagesController::class, 'cancelReasonForm']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.cancel');
+
+
+        // email preview routes (a la https://laravel.com/docs/9.x/mail#previewing-mailables-in-the-browser)
+        Route::get('/mailable-preview-to-student', function () {
+            $mailable = new App\Mail\Agnostic();
+            $mailable->to(user()->email);
+            $mailable->from('system@musora.com');
+            $mailable->replyTo('team@musora.com');
+            $mailable->subject('[Important] Your cancellation request has been received.');
+            $mailable->view('emails.cancellation-notice-to-student');
+
+            return $mailable;
+        });
+
+//        // email preview routes (a la https://laravel.com/docs/9.x/mail#previewing-mailables-in-the-browser)
+        Route::get('/mailable-preview-how-can-we-help', function () {
+            $mailable = new App\Mail\Agnostic();
+            $mailable->to(user()->email);
+            $mailable->from('system@musora.com');
+            $mailable->replyTo('team@musora.com');
+            $mailable->subject('[Important] Your cancellation request has been received.');
+            $mailable->view('emails.how-can-we-help');
+
+            $helpIssueText = 'I need more direction';
+            $textInput = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras urna felis, tincidunt eu ' .
+                'tincidunt vitae, tempor sed metus. Ut ut augue vitae nisi fermentum condimentum. Donec sagittis ' .
+                'tincidunt ipsum, consectetur posuere neque rhoncus eget. Maecenas vel nibh dui. Etiam vel quam ' .
+                'lectus. In sagittis lacinia purus, a rhoncus magna vulputate nec. ';
+
+            $mailable->with([
+                'studentId' => user()->id,
+                'studentEmail' => user()->email,
+                'helpIssueText' => $helpIssueText, // ex: "I need more direction"
+                'textInput' => $textInput,
+            ]);
+
+            return $mailable;
+        });
+
+        Route::get('/mailable-preview-to-staff', function () {
+
+            $cancellationReasonOptions = config('cancellation.reason-map');
+            $optionsCount = count($cancellationReasonOptions) - 1;
+            $cancellationReasonOptionsKeys = array_keys($cancellationReasonOptions);
+            $cancellationReasonOptionsValues = array_values($cancellationReasonOptions);
+            $selection = rand(0,$optionsCount);
+
+            $cancellationReasonOptionsKey = $cancellationReasonOptionsKeys[$selection];
+            $cancellationReasonOptionsValue = $cancellationReasonOptionsValues[$selection];
+            $cancellationReasonDetailsLoremIpsumOptions = [
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas finibus ' .
+                'condimentum tortor.',
+                'In sit amet metus commodo, laoreet felis a, molestie est. Integer euismod nibh ' .
+                'ac risus semper pulvinar. Nunc bibendum quis sapien a pretium. Aenean tincidunt sed velit non ' .
+                'pharetra.',
+                'Vivamus ornare ac lorem eget malesuada. Nam efficitur iaculis arcu, at porta odio commodo ' .
+                'nec. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nulla facilisi. Vestibulum id ' .
+                'luctus dolor. Etiam non elit consequat, mollis odio et, euismod diam. Aenean ac eros a velit ornare ' .
+                'sollicitudin et in urna. Cras nec sodales odio, nec condimentum nisl. Fusce urna leo, tristique ' .
+                'placerat molestie vel, laoreet vel nisi.',
+            ];
+
+            $mailable = new App\Mail\Agnostic();
+            $mailable->to('support+cancellations@musora.com');
+            $mailable->from('system@musora.com');
+            $mailable->subject('Cancellation notice: ' . user()->getEmail());
+            $mailable->view('emails.cancellation-notice-to-staff');
+            $mailable->with([
+                'userEmail' => user()->getEmail(),
+                'userId' => user()->getId(),
+                'cancellationReasonKey' => $cancellationReasonOptionsKey,
+                'cancellationReasonValue' => $cancellationReasonOptionsValue,
+                'cancellationReasonDetails' => rand(0,1) ? $cancellationReasonDetailsLoremIpsumOptions[rand(0,2)] : '',
+            ]);
+
+            return $mailable;
+        });
+
+
+
+
+        // - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -
+        // (end of cancellation-related)
+        // - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -
+
+        Route::get(
+            '/{brand}/profile/{userId}/settings/payment-invoice/{id}',
+            [ProfileSettingsPagesController::class, 'showInvoiceForPayment']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.payment-invoice');
 
         /*
          * Notifications Pages
@@ -442,7 +698,10 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', ['pianote'])
             ->name('platform.books.resources');
 
-        Route::get('/{brand}/resources/level-{chapterNumber}', [\App\Http\Controllers\Platform\BooksController::class, 'chapter'])
+        Route::get(
+            '/{brand}/resources/level-{chapterNumber}',
+            [\App\Http\Controllers\Platform\BooksController::class, 'chapter']
+        )
             ->whereIn('brand', ['pianote'])
             ->name('platform.books.resources.chapter');
 
@@ -452,16 +711,8 @@ Route::domain('{musoraDomain}')
             ->name('platform.contact');
     });
 
-/*
- * Referral Pages
- */
-Route::domain('{musoraDomain}')
-    ->middleware([AuthIfTokenExist::class, 'web_authenticated'])
-    ->group(function () {
-        Route::get('/{brand}/referral/invite-a-friend', [ReferralPagesController::class, 'inviteAFriend'])
-            ->whereIn('brand', all_brands())
-            ->name('platform.invite-a-friend');
-    });
-
-Route::get('/apple-app-site-association', [\App\Http\Controllers\Misc\ManifestFilesController::class, 'appleAssociationFile'])
+Route::get(
+    '/apple-app-site-association',
+    [\App\Http\Controllers\Misc\ManifestFilesController::class, 'appleAssociationFile']
+)
     ->name('platform.apple-association-file');

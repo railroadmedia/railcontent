@@ -15,7 +15,7 @@
                 ><i class="fal fa-thumbtack"></i><span class="tw-ml-1 leading-none">Pinned</span></a>
             </div>
         </div>
-        <div class="tw-flex tw-flex-col tw-max-w-full" v-if="messageEdit.id != message.id && message.type != 'system'" lang="en">
+        <div class="tw-flex tw-flex-col tw-max-w-full" v-if="messageEdit.id != message.id && message.type != 'system'">
             <chat-user :user="message.user">
                 <template v-slot:footer>
                     <div v-html="message.text" class="cs-message-text tw-break-words cs-text-sm"></div>
@@ -198,7 +198,7 @@ export default {
         $_message_upvote_class: {
             cache: false,
             get() {
-                return { 'active': this.hasOwnReaction('upvote'), 'tw-cursor-pointer': this.message.user.id != this.userId };
+                return { 'active': this.hasOwnReaction('upvote'), 't-cursor-pointer': this.message.user.id != this.userId };
             },
         },
 
@@ -277,7 +277,7 @@ export default {
         },
 
         saveMessageEdit() {
-            this.chatEventBus
+            this.chatEventBus.on
                 .emit(
                     'updateMessage',
                     {

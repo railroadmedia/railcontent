@@ -1,7 +1,38 @@
 <?php
 
 use App\Services\LiveStreamEventService;
+use Illuminate\Support\Facades\DB;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
+
+if (!function_exists('current_user_has_recent_order')) {
+    function current_user_has_recent_order() {
+        if (user()) {
+            return DB::connection(config('ecommerce.database_connection_name'))
+                ->table('ecommerce_orders')
+                ->where('user_id', user()->id)
+                ->where('created_at', '>', \Carbon\Carbon::now()->subMinute()->toDateTimeString())
+                ->exists();
+        }
+
+        return false;
+    }
+}
+
+if (!function_exists('get_legacy_brand_base_url')) {
+    function get_legacy_brand_base_url($brand = null, $withPort = true) {
+        if (empty($brand)) {
+            $brand = brand();
+        }
+
+        if (App::environment() == 'local' || App::environment() == 'development') {
+            return 'https://dev.' . $brand . '.com' . ($withPort ? '8443' : '');
+        } elseif (App::environment() == 'beta-testing' || str_contains(App::environment(), 'staging')) {
+            return 'https://staging.' . $brand . '.com';
+        }
+
+        return 'https://www.' . $brand . '.com';
+    }
+}
 
 if (!function_exists('cf_img')) {
     /**

@@ -10,7 +10,6 @@
     <script type="text/javascript">
         document.querySelectorAll('.song-play-button').forEach(item => {
             item.addEventListener("click", function () {
-                console.log('test');
                 document.getElementById('open-exercise-button').click();
             });
         })
@@ -28,10 +27,10 @@
 
             <div class="tw-flex tw-flex-col tw-pr-0 xl:tw-pr-8 tw-grow tw-w-full">
                 {{-- Back Button --}}
-                <a href="{{ url()->route('platform.content-type-catalog', ["contentTypeName" => 'songs']) }}" 
+                <a href="{{ url()->previous() }}" 
                    class="tw-no-underline tw-transition tw-inline-flex tw-text-[#00101D] dark:tw-text-white tw-items-center tw-w-fit">
-                   <i class="fas fa-arrow-circle-left tw-text-4xl tw-mr-2" aria-hidden="true"></i>
-                   <span class="tw-font-bebas-neue tw-uppercase tw-text-xl">Back</span>
+                    <i class="fas fa-arrow-circle-left tw-text-4xl tw-mr-2" aria-hidden="true"></i>
+                    <span class="tw-font-bebas-neue tw-uppercase tw-text-xl">Back</span>
                 </a>
                 {{-- Song Container --}}
                 <div class="tw-flex tw-flex-col sm:tw-flex-row tw-py-4 song-content-container">
@@ -65,7 +64,7 @@
                             </p>
 
                             <div class="flex flex-row flex-wrap play-complete-buttons">
-                                <button class="tw-btn-primary tw-bg-{{ $brand }} tw-mr-3 tw-mb-3 song-play-button">
+                                <button class="tw-btn-primary tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600 tw-mr-3 tw-mb-3 song-play-button">
                                     <i class="fas fa-play tw-mr-2 tw-text-base song-play-button"></i>
                                     Play
                                 </button>
@@ -129,7 +128,7 @@
                 @if(!empty($lessonContent->fetch('*assignments', [])))
                     <div style="height: 0px; overflow: hidden;">
                         <div class="flex flex-row pv-3">
-                            <h1 class="heading">Assignments</h1>
+                            <h1 class="heading dark:tw-text-white">Assignments</h1>
                         </div>
                         <div class="flex flex-row">
                             <div class="flex flex-column">

@@ -62,6 +62,10 @@ export const bgImgCard = {
 
 // do not delete this is needed for tailwind to generate what is needed, just add here any code generated style
 const __usedVars = [
+  'hover:tw-bg-drumeo-600',
+  'hover:tw-bg-pianote-600',
+  'hover:tw-bg-guitareo-600',
+  'hover:tw-bg-singeo-600',
   'hover:tw-border-drumeo',
   'hover:tw-border-pianote',
   'hover:tw-border-singeo',
@@ -77,5 +81,9 @@ const __usedVars = [
   'md:tw-bg-drumeo',
   'md:tw-bg-singeo',
   'md:tw-bg-guitareo',
-  'md:tw-bg-pianote'
+  'md:tw-bg-pianote',
+  'tw-bg-pianote/10',
+  'tw-bg-drumeo/10',
+  'tw-bg-guitareo/10',
+  'tw-bg-singeo/10'
 ]

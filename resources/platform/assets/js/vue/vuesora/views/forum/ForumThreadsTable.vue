@@ -9,7 +9,7 @@
                 <div class="tw-flex">
                     <a class="tw-no-underline tw-mr-6"
                         :href="currentUrl"
-                        :class="[!isFollowedSection ? 'tw-text-[#00101D] dark:tw-text-white tw-border-0 tw-border-solid tw-border-b-2' : 'dark:tw-text-[#445F74] tw-text-[#A1A1A9]', brandBorderColor ]"
+                        :class="[!isFollowedSection ? 'tw-text-[#00101D] dark:tw-text-white' : 'dark:tw-text-[#445F74] tw-text-[#A1A1A9]' ]"
                     >
                         <h3 class="tw-text-3xl tw-font-bold tw-cursor-pointer">
                             All Threads
@@ -17,7 +17,7 @@
                     </a>
                     <a class="tw-no-underline"
                         :href=" currentUrl + '?followed=true' "
-                        :class="[isFollowedSection ? 'tw-text-[#00101D] dark:tw-text-white tw-border-0 tw-border-solid tw-border-b-2' : 'dark:tw-text-[#445F74] tw-text-[#A1A1A9]', brandBorderColor, {'hide': searching}]"
+                        :class="[isFollowedSection ? 'tw-text-[#00101D] dark:tw-text-white' : 'dark:tw-text-[#445F74] tw-text-[#A1A1A9]', {'hide': searching}]"
                     >
                         <h3 class="tw-text-3xl tw-font-bold tw-cursor-pointer">
                             Followed
@@ -106,7 +106,7 @@
                         <div class="tw-flex tw-flex-col">
                             <button
                                 class="tw-btn-primary tw-px-4 sm:tw-px-5 lg:tw-px-12"
-                                :class="[brandBGColor]"
+                                :class="`tw-bg-${brand} hover:tw-bg-${brand}-600`"
                                 @click="$refs.searchInput.blur()"
                             >
                                 <i class="fas fa-search sm:tw-mr-1 tw-text-sm"></i>

@@ -52,7 +52,6 @@ class MentorService
 
     public function assignMentorByBrand(int $userId, string $brand): bool
     {
-        //Log::info("Assigning Mentor to User $userId");
         $mentor = $this->chooseMentor($brand);
         if (!$mentor) {
             Log::error("Unable to assign Mentor to User $userId");
@@ -72,6 +71,7 @@ class MentorService
         $mentorStudent->save();
         $mentor->save();
         event(StudentMentorsUpdated::newWithMentorStudent($mentorStudent));
+        Log::info("Assigned Mentor $mentor->user_id to User $userId");
         return true;
     }
 
@@ -88,7 +88,9 @@ class MentorService
 
     public function ensureMentorState(User $user): EnsureMentorResult
     {
-        if ($this->disableAssigningOnLaunch) return EnsureMentorResult::NoChange;
+        if ($this->disableAssigningOnLaunch) {
+            return EnsureMentorResult::NoChange;
+        }
 
         $active = $user->isActiveStudent();
         $mentorStudent = $user->mentorStudent;
@@ -164,7 +166,8 @@ class MentorService
         if (!$this->mentors) {
             $this->mentors = Mentor::all();
         }
-        $mentors = $this->mentors->where(fn(Mentor $t) => Str::contains($t->supported_brands, $brand));
+        $mentors = $this->mentors->where(fn(Mentor $t) => Str::contains($t->supported_brands, $brand))
+            ->where('active_student_max_count', '>', '0');
         return $mentors;
     }
 
@@ -181,6 +184,45 @@ class MentorService
         $this->bulkReassignMentors($mentorStudents, $mentorUserId);
         $mentor->delete();
         return $mentorStudents;
+    }
+
+    public function reassignRandomStudents(
+        int $mentorUserId,
+        int $nStudents,
+        int $toMentorUserId = 0,
+        bool $allStudents = false
+    ): void {
+        $mentor = $this->getMentorOrNull($mentorUserId);
+        if (!$mentor) {
+            throw new Exception("Mentor $mentorUserId does not exist");
+        }
+
+        $toMentor = $this->getMentorOrNull($toMentorUserId);
+        if (!$mentor) {
+            throw new Exception("Mentor $toMentorUserId does not exist");
+        }
+        $query = MentorStudent::query()
+            ->with('user')
+            ->join(
+                'usora_users',
+                'usora_users.id',
+                '=',
+                'mentor_students.user_id'
+            )->where('mentor_user_id', '=', $mentorUserId);
+        if (!$allStudents) {
+            $query = $query->
+            where(
+                'usora_users.membership_expiration_date',
+                '>',
+                Carbon::now()->addDays(-config('mentor.active_after_membership_expired_days'))
+            );
+        }
+        $mentorStudents = $query->select('mentor_students.*')
+            ->inRandomOrder()
+            ->take($nStudents)
+            ->get();
+        $this->bulkReassignMentors($mentorStudents, $mentorUserId, $toMentor);
+        $this->recalculateMentorTotals($mentor);
     }
 
     public function resetCachedMentors()
@@ -252,15 +294,18 @@ class MentorService
         $mentor->save();
     }
 
-    private function bulkReassignMentors(Collection $mentorStudents, int $ignoreMentorUserID): void
-    {
+    private function bulkReassignMentors(
+        Collection $mentorStudents,
+        int $ignoreMentorUserID,
+        ?Mentor $toMentor = null,
+    ): void {
         $mentors = [];
         foreach ($mentorStudents as $mentorStudent) {
             /* @var MentorStudent $mentorStudent */
             if ($mentorStudent->isActive()) {
-                $newMentor = $this->chooseNewMentor($mentorStudent, $ignoreMentorUserID);
+                $newMentor = $toMentor ?? $this->chooseNewMentor($mentorStudent, $ignoreMentorUserID);
                 if ($newMentor == null) {
-                    throw new Exception("Unable to reassign Mentor to User $mentorStudent->user_id");
+                    throw new Exception("Unable to reassign User to Mentor $mentorStudent->user_id");
                 }
                 $mentorStudent->mentor_user_id = $newMentor->user_id;
                 if (!array_key_exists($newMentor->user_id, $mentors)) {

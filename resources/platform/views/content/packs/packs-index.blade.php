@@ -11,8 +11,8 @@
         @slot('content')
             <div class="tw-flex tw-flex-col tw-pr-1">
                 <div class="tw-inline-flex tw-w-full tw-flex-col tw-pr-4">
-                    <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">
-                        <i class="icon-packs tw-text-{{ $brand }} tw-mr-3 tw-text-3xl"></i>
+                    <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">        
+                        <musora-icon icon-name="box-filled" class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                         <span class="tw-text-32 tw-font-bold">Packs</span>
                     </h1>
                     <p class="tw-text-white tw-max-w-4xl tw-pr-12 tw-text-base">
@@ -33,7 +33,6 @@
 
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-my-3">
         <div class="tw-flex tw-flex-col">
-            
             <div class="tw-flex tw-flex-row tw-pt-4">
                 <h1 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl dark:tw-text-white">Your Training Packs</h1>
             </div>

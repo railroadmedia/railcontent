@@ -383,10 +383,10 @@
 
     @include("singeo.sales.partials._footer")
 
-    <script src="{{ mix('assets/members/js/manifest.js') }}"></script>
-    <script src="{{ mix('assets/members/js/vendor.js') }}"></script>
-    <script src="{{ mix('assets/members/js/cart-sidebar.js') }}"></script>
-    <script src="{{ mix('assets/members/js/app.js') }}"></script>
+    <script src="{{ mix('marketing/js/manifest.js') }}"></script>
+    <script src="{{ mix('marketing/js/vendor.js') }}"></script>
+    <script src="{{ mix('marketing/js/cart-sidebar.js') }}"></script>
+    <script src="{{ mix('marketing/js/app.js') }}"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>

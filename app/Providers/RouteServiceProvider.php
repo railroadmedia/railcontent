@@ -57,6 +57,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->routes(function () {
             Route::group([], base_path('routes/routes.php')); // not actually needed
             Route::group([], base_path('routes/misc/manifest_files_routes.php'));
+            Route::group([], base_path('routes/misc/mobile_app_store_api_keys_json_routes.php'));
             Route::group([], base_path('routes/platform/platform_pages_routes.php'));
 
             Route::group([], base_path('routes/musora/marketing/homepage.php'));

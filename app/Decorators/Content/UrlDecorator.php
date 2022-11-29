@@ -27,6 +27,10 @@ class UrlDecorator extends ModeDecoratorBase
             $contentTypeToURLSlugMap = array_flip(PrimaryURLSlugToContentTypeMap::$map);
             $contentParentData = $content->getParentContentData();
 
+            if(count($contentParentData) == 1 && $contentParentData[0]->type == 'edge-pack'){
+                $contentParentData = [];
+            }
+
             if ($content['type'] == 'coach-stream') {
                 $contents[$contentIndex]['url'] = url()->route('platform.coach.first-level', [
                     'brand' => $content['brand'],
@@ -39,8 +43,14 @@ class UrlDecorator extends ModeDecoratorBase
             }
 
             //TODO: Should be deleted when the hierarchy with the draft learning-path: advanced-lead-guitar is deleted
-            if (brand() == 'guitareo' && $content['type'] == 'play-along') {
+            if ((brand() == 'guitareo' && $content['type'] == 'play-along') ||
+                ($content['type'] == 'course') ||
+                (($content['type'] ==  'song') && (brand() == 'guitareo' ))) {
+
                 $contentParentData = [];
+            }
+            if(($content['type'] == 'course-part') && count($contentParentData) > 1){
+                $contentParentData = array_slice($contentParentData, 0, 1);
             }
 
             // first-level types
@@ -54,7 +64,8 @@ class UrlDecorator extends ModeDecoratorBase
             }
 
             // second-level types
-            if (count($contentParentData) == 1 && !empty($contentTypeToURLSlugMap[$contentParentData[0]->type])) {
+            if (count($contentParentData) == 1 && !empty($contentTypeToURLSlugMap[$contentParentData[0]->type]))
+            {
                 $contents[$contentIndex]['url'] = url()->route('platform.content.second-level', [
                     'brand' => $content['brand'],
                     $contentTypeToURLSlugMap[$contentParentData[0]->type],

@@ -44,6 +44,7 @@ return [
     'autoload_all_routes' => true,
     'route_middleware_public_groups' => ['web_or_api_public'],
     'route_middleware_logged_in_groups' => ['web_or_api_authenticated'],
+    'route_middleware_mobile_app_receipt_validation_groups' => ['api_public'],
 
     // post purchase redirect
     'post_purchase_redirect_digital_items' => '/members',
@@ -260,33 +261,81 @@ return [
     'payment_gateways' => [
         'paypal' => [
             'drumeo' => [
-                'paypal_api_username' => env('PAYPAL_API_USERNAME'),
-                'paypal_api_password' => env('PAYPAL_API_PASSWORD'),
-                'paypal_api_signature' => env('PAYPAL_API_SIGNATURE'),
-                'paypal_api_currency_code' => env('PAYPAL_API_CURRENCY_CODE'),
-                'paypal_api_version' => env('PAYPAL_API_VERSION'),
-                'paypal_api_nvp_curl_url' => env('PAYPAL_API_NVP_CURL_URL'),
+                'paypal_api_username' => env('DRUMEO_PAYPAL_API_USERNAME'),
+                'paypal_api_password' => env('DRUMEO_PAYPAL_API_PASSWORD'),
+                'paypal_api_signature' => env('DRUMEO_PAYPAL_API_SIGNATURE'),
+                'paypal_api_currency_code' => env('DRUMEO_PAYPAL_API_CURRENCY_CODE'),
+                'paypal_api_version' => env('DRUMEO_PAYPAL_API_VERSION'),
+                'paypal_api_nvp_curl_url' => env('DRUMEO_PAYPAL_API_NVP_CURL_URL'),
                 'paypal_api_checkout_return_route' => 'order-form.submit-paypal',
-                'paypal_api_checkout_redirect_url' => env('PAYPAL_API_CHECKOUT_REDIRECT_URL'),
-                'paypal_api_checkout_return_url' => env(
-                    'PAYPAL_API_CHECKOUT_RETURN_URL',
-                    'http://www.drumeo.com/order'
-                ),
-                'paypal_api_checkout_cancel_url' => env('PAYPAL_API_CHECKOUT_CANCEL_URL'),
+                'paypal_api_checkout_redirect_url' => env('DRUMEO_PAYPAL_API_CHECKOUT_REDIRECT_URL'),
+                'paypal_api_checkout_return_url' => env('DRUMEO_PAYPAL_API_CHECKOUT_RETURN_URL'),
+                'paypal_api_checkout_cancel_url' => env('DRUMEO_PAYPAL_API_CHECKOUT_CANCEL_URL'),
+                'paypal_api_test_billing_agreement_id' => '',
+            ],
+            'pianote' => [
+                'paypal_api_username' => env('PIANOTE_PAYPAL_API_USERNAME'),
+                'paypal_api_password' => env('PIANOTE_PAYPAL_API_PASSWORD'),
+                'paypal_api_signature' => env('PIANOTE_PAYPAL_API_SIGNATURE'),
+                'paypal_api_currency_code' => env('PIANOTE_PAYPAL_API_CURRENCY_CODE'),
+                'paypal_api_version' => env('PIANOTE_PAYPAL_API_VERSION'),
+                'paypal_api_nvp_curl_url' => env('PIANOTE_PAYPAL_API_NVP_CURL_URL'),
+                'paypal_api_checkout_return_route' => 'order-form.submit-paypal',
+                'paypal_api_checkout_redirect_url' => env('PIANOTE_PAYPAL_API_CHECKOUT_REDIRECT_URL'),
+                'paypal_api_checkout_return_url' => env('PIANOTE_PAYPAL_API_CHECKOUT_RETURN_URL'),
+                'paypal_api_checkout_cancel_url' => env('PIANOTE_PAYPAL_API_CHECKOUT_CANCEL_URL'),
+                'paypal_api_test_billing_agreement_id' => '',
+            ],
+            'guitareo' => [
+                'paypal_api_username' => env('GUITAREO_PAYPAL_API_USERNAME'),
+                'paypal_api_password' => env('GUITAREO_PAYPAL_API_PASSWORD'),
+                'paypal_api_signature' => env('GUITAREO_PAYPAL_API_SIGNATURE'),
+                'paypal_api_currency_code' => env('GUITAREO_PAYPAL_API_CURRENCY_CODE'),
+                'paypal_api_version' => env('GUITAREO_PAYPAL_API_VERSION'),
+                'paypal_api_nvp_curl_url' => env('GUITAREO_PAYPAL_API_NVP_CURL_URL'),
+                'paypal_api_checkout_return_route' => 'order-form.submit-paypal',
+                'paypal_api_checkout_redirect_url' => env('GUITAREO_PAYPAL_API_CHECKOUT_REDIRECT_URL'),
+                'paypal_api_checkout_return_url' => env('GUITAREO_PAYPAL_API_CHECKOUT_RETURN_URL'),
+                'paypal_api_checkout_cancel_url' => env('GUITAREO_PAYPAL_API_CHECKOUT_CANCEL_URL'),
+                'paypal_api_test_billing_agreement_id' => '',
+            ],
+            'singeo' => [
+                'paypal_api_username' => env('SINGEO_PAYPAL_API_USERNAME'),
+                'paypal_api_password' => env('SINGEO_PAYPAL_API_PASSWORD'),
+                'paypal_api_signature' => env('SINGEO_PAYPAL_API_SIGNATURE'),
+                'paypal_api_currency_code' => env('SINGEO_PAYPAL_API_CURRENCY_CODE'),
+                'paypal_api_version' => env('SINGEO_PAYPAL_API_VERSION'),
+                'paypal_api_nvp_curl_url' => env('SINGEO_PAYPAL_API_NVP_CURL_URL'),
+                'paypal_api_checkout_return_route' => 'order-form.submit-paypal',
+                'paypal_api_checkout_redirect_url' => env('SINGEO_PAYPAL_API_CHECKOUT_REDIRECT_URL'),
+                'paypal_api_checkout_return_url' => env('SINGEO_PAYPAL_API_CHECKOUT_RETURN_URL'),
+                'paypal_api_checkout_cancel_url' => env('SINGEO_PAYPAL_API_CHECKOUT_CANCEL_URL'),
                 'paypal_api_test_billing_agreement_id' => '',
             ],
         ],
 
         'stripe' => [
             'drumeo' => [
-                'stripe_api_secret' => env('STRIPE_API_SECRET'),
-                'stripe_publishable_key' => env('STRIPE_PUBLISHABLE_KEY'),
+                'stripe_api_secret' => env('DRUMEO_STRIPE_API_SECRET'),
+                'stripe_publishable_key' => env('DRUMEO_STRIPE_PUBLISHABLE_KEY'),
+            ],
+            'pianote' => [
+                'stripe_api_secret' => env('PIANOTE_STRIPE_API_SECRET'),
+                'stripe_publishable_key' => env('PIANOTE_STRIPE_PUBLISHABLE_KEY'),
+            ],
+            'guitareo' => [
+                'stripe_api_secret' => env('GUITAREO_STRIPE_API_SECRET'),
+                'stripe_publishable_key' => env('GUITAREO_STRIPE_PUBLISHABLE_KEY'),
+            ],
+            'singeo' => [
+                'stripe_api_secret' => env('SINGEO_STRIPE_API_SECRET'),
+                'stripe_publishable_key' => env('SINGEO_STRIPE_PUBLISHABLE_KEY'),
             ],
         ],
 
         'apple_store_kit' => [
             'endpoint' => env('APPLE_VERIFY_RECEIPT_ENDPOINT', 'https://sandbox.itunes.apple.com'),
-            'shared_secret' => '7e598c622c0a46f49c79c2272bcc2c25',
+            'shared_secret' => env('APPLE_STORE_KIT_SHARED_SECRET'),
         ],
 
         'google_play_store' => [
@@ -375,7 +424,7 @@ return [
     // paypal
     'paypal' => [
         'agreement_route' => 'payment-method.paypal.agreement',
-        'agreement_fulfilled_path' => '/members',
+        'agreement_fulfilled_path' => '/members/profile/settings/payments',
     ],
 
     // membership subscription duplicate syncing
@@ -492,15 +541,69 @@ return [
                 'invoice_view' => 'ecommerce::order_invoice',
             ],
         ],
+        'pianote' => [
+            'subscription_renewal_invoice' => [
+                'invoice_sender' => 'support@pianote.com',
+                'invoice_sender_name' => 'Pianote',
+                'invoice_address' => 'Pianote 107-31265 Wheel Avenue - Abbotsford BC, Canada',
+                'invoice_email_subject' => 'Pianote Invoice - Thank You!',
+                'invoice_view' => 'ecommerce::subscription_renewal_invoice',
+            ],
+            'order_invoice' => [
+                'invoice_sender' => 'support@pianote.com',
+                'invoice_sender_name' => 'Pianote',
+                'invoice_address' => 'Pianote 107-31265 Wheel Avenue - Abbotsford BC, Canada',
+                'invoice_email_subject' => 'Pianote Invoice - Thank You!',
+                'invoice_view' => 'ecommerce::order_invoice',
+            ],
+        ],
+        'guitareo' => [
+            'subscription_renewal_invoice' => [
+                'invoice_sender' => 'support@guitareo.com',
+                'invoice_sender_name' => 'Guitareo',
+                'invoice_address' => 'Guitareo 107-31265 Wheel Avenue - Abbotsford BC, Canada',
+                'invoice_email_subject' => 'Guitareo Invoice - Thank You!',
+                'invoice_view' => 'ecommerce::subscription_renewal_invoice',
+            ],
+            'order_invoice' => [
+                'invoice_sender' => 'support@guitareo.com',
+                'invoice_sender_name' => 'Guitareo',
+                'invoice_address' => 'Guitareo 107-31265 Wheel Avenue - Abbotsford BC, Canada',
+                'invoice_email_subject' => 'Guitareo Invoice - Thank You!',
+                'invoice_view' => 'ecommerce::order_invoice',
+            ],
+        ],
+        'singeo' => [
+            'subscription_renewal_invoice' => [
+                'invoice_sender' => 'support@singeo.com',
+                'invoice_sender_name' => 'Singeo',
+                'invoice_address' => 'Singeo 107-31265 Wheel Avenue - Abbotsford BC, Canada',
+                'invoice_email_subject' => 'Singeo Invoice - Thank You!',
+                'invoice_view' => 'ecommerce::subscription_renewal_invoice',
+            ],
+            'order_invoice' => [
+                'invoice_sender' => 'support@singeo.com',
+                'invoice_sender_name' => 'Singeo',
+                'invoice_address' => 'Singeo 107-31265 Wheel Avenue - Abbotsford BC, Canada',
+                'invoice_email_subject' => 'Singeo Invoice - Thank You!',
+                'invoice_view' => 'ecommerce::order_invoice',
+            ],
+        ],
     ],
 
     // this is displayed on all invoices to canadian customers
     'canada_gst_hst_number' => [
         'drumeo' => '81428 3149 RT0001',
+        'pianote' => '76853 3879 RT0001',
+        'guitareo' => '82759 8434 RT0001',
+        'singeo' => '76853 3879 RT0001',
     ],
 
     'company_name_on_invoice' => [
         'drumeo' => 'Musora Media Inc',
+        'pianote' => 'Pianote Media Inc.',
+        'guitareo' => 'Guitareo Media Inc.',
+        'singeo' => 'Singeo Media Inc.',
     ],
 
     // constants
@@ -549,6 +652,7 @@ return [
             'drumeo_access_30-days',
             'DLM-Trial-30-Day',
             'drumeo_edge_1_year_access',
+            'drumeo_access_90-days',
         ],
     ],
 
@@ -573,6 +677,7 @@ return [
         'drumeo_access_30-days',
         'DLM-Trial-30-Day',
         'drumeo_edge_1_year_access',
+        'drumeo_access_90-days',
     ],
 
     'code_redeem_product_sku_swap' => [
@@ -750,4 +855,6 @@ return [
 
     // exchangerate-api.com
     'exchange_rate_api_token' => '89916546525703af0b7e1f9a',
+
+    'annual_product_skus' => ['DLM-1-year', 'PIANOTE-MEMBERSHIP-1-YEAR', 'GUITAREO-1-YEAR-MEMBERSHIP', 'singeo-annual-recurring-membership']
 ];

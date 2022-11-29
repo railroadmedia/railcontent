@@ -119,6 +119,7 @@ export default {
                 type: 'Type',
                 key: 'Key',
                 key_pitch_type: 'Type',
+                instrument: 'Instrument'
             };
 
             return this.filtersLabels[this.filterName] || labelMap[this.filterName];

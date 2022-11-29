@@ -25,7 +25,7 @@
             ],
             "Contact" => [
                 "iconClass" => "fas fa-phone",
-                "url" => '/contact',
+                "url" => get_legacy_brand_base_url("musora").'/contact',
             ],
             "Singeo" => [
                 "iconClass" => "icon-courses",

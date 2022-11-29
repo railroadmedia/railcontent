@@ -11,7 +11,7 @@ import { saveExperience } from "../services"
 const experienceDescriptionMap = {
   pianote: {
     0: 'Start from the beginning. No experience required!',
-    1: 'For beginners who are familiar with the layout of the keyboard, have good piano posture, and can play chords and scales in at least 2 key signatures.',
+    1: 'For beginners who are familiar with the layout of the keyboard, have good posture, and can play chords and scales in at least 2 key signatures.',
     2: 'For intermediate players who are comfortable playing a few songs and have some hand independence and dexterity.',
     3: 'For advanced players who are comfortable playing many songs in multiple styles from start to finish and are looking to improve specific skills.',
   },
@@ -78,8 +78,7 @@ function goBack() {
         tw-justify-between
         xl:tw-justify-center
       ">
-      <StepHeader title="What experience level best describes you?" subtitle="Now it’s time to choose your experience level. You can change your
-            experience level at anytime in your profile." @onGoBack="goBack" />
+      <StepHeader title="What experience level best describes you?" subtitle="Now it’s time to choose your experience level. You can update your experience level in your profile at any time." @onGoBack="goBack" />
       <SquaresContainer>
         <SquaredCard type="green" :active="info.experience[brand] === 0" defaultBorderColor="tw-border-[#7E9AB1]"
           @onSelect="() => onExperienceSelection(0)">

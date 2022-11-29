@@ -3,22 +3,20 @@ export const testCarousel = [
         brand: 'drumeo',
         slides: [
             {
-                topSubtitle: "YOU HAVE EARLY ACCESS",
+                topSubtitle: "It's All Yours",
                 title: "INTRODUCING MUSORA",
-                ctaText: "DEVELOPER'S UPDATE",
-                description:
-                    "A unified learning platform that includes Drumeo, Pianote, Guitareo, and Singeo. It’s an all-access pass to all four platforms at no additional cost.\n" +
-                    "Beta testing lasts for a limited time, click below to learn more.",
-                ctaUrl: "/drumeo/forums/drumeo-website-feedback/6/musora-early-access/13736",
-                img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,height=430,fit=cover,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/pre-launch-header-image-jpg.jpg",
+                ctaText: "LEARN MORE",
+                description: "A unified learning platform that includes Drumeo, Pianote, Guitareo, and Singeo. You now have an all-access pass to all four platforms at no additional cost. Find out all the details by clicking below!",
+                ctaUrl: "https://www.musora.com/unified-2022",
+                img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,fit=cover,metadata=none/https://musora-web-platform.s3.amazonaws.com/carousel/musora-header-large+new.jpg",
             },
             {
-                topSubtitle: "Coach of the Month",
-                title: "Steve Smith",
-                ctaText: "Visit Steve's Coach Page",
-                description: "Steve Smith is perhaps best known to most people as the former drummer for Journey. However, Steve is a jazz drummer at heart. He’s the bandleader of Vital Information, and has been a sideman for artists such as Jean-Luc Ponty, Steps Ahead, Dweezil Zappa, Bryan Adams, and Savage Garden, among many others.",
-                ctaUrl: "/drumeo/coaches/steve-smith/253573",
-                img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,height=430,fit=cover,metadata=none/https://musora-web-platform.s3.amazonaws.com/carousel/drumeo-steve-smith.jpg",
+                topSubtitle: "Coach of The Month",
+                title: "Todd Sucherman",
+                ctaText: "Visit Todd's Coach Page",
+                description: "Todd is our featured coach of the month. Tune in for brand new content all month featuring Todd's legendary drumming skills.",
+                ctaUrl: "/drumeo/coaches/todd-sucherman/31973",
+                img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,height=430,metadata=none/https://musora-web-platform.s3.amazonaws.com/carousel/Todd-Suchermann-Banner.jpg",
             },
             {
                 topSubtitle: "Introducing",
@@ -28,58 +26,62 @@ export const testCarousel = [
                 ctaUrl: "/drumeo/live-streams",
                 img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,height=430,fit=cover,metadata=none/https://musora-web-platform.s3.amazonaws.com/carousel/drumeo-drum-department.jpg",
             },
+            {
+                topSubtitle: "",
+                title: "New Song Releases",
+                ctaText: "Go To Songs",
+                description: "November 14th - Student Request - 21 New Songs<br>November 23rd - Drumeo's Choice - 20 New Songs",
+                ctaUrl: "/drumeo/songs",
+                img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,height=430,fit=cover,metadata=none/https://musora-web-platform.s3.amazonaws.com/carousel/Songs-banner.jpg",
+            },
         ]
     },
     {
         brand: 'pianote',
         slides: [
             {
-                topSubtitle: "YOU HAVE EARLY ACCESS",
+                topSubtitle: "It's All Yours",
                 title: "INTRODUCING MUSORA",
-                ctaText: "DEVELOPER'S UPDATE",
-                description:
-                    "A unified learning platform that includes Drumeo, Pianote, Guitareo, and Singeo. It’s an all-access pass to all four platforms at no additional cost.\n" +
-                    "Beta testing lasts for a limited time, click below to learn more.",
-                ctaUrl: "/pianote/forums/platform-update-feedback-discussion/5/musora-early-access/3889?sortby_val=-published_on",
-                img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,height=430,fit=cover,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/pre-launch-header-image-jpg.jpg",
+                ctaText: "LEARN MORE",
+                description: "A unified learning platform that includes Drumeo, Pianote, Guitareo, and Singeo. You now have an all-access pass to all four platforms at no additional cost. Find out all the details by clicking below!",
+                ctaUrl: "https://www.musora.com/unified-2022",
+                img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,fit=cover,metadata=none/https://musora-web-platform.s3.amazonaws.com/carousel/musora-header-large+new.jpg",
             },
             {
                 topSubtitle: "Coach of The Month",
                 title: "Summer Swee-singh",
                 ctaText: "Visit Summer's Coach Page",
                 description: "Summer Swee-Singh is a composer, music arranger, pianist, keyboardist, string contractor, music director, backing vocalist, and music educator.",
-                ctaUrl: "/pianote/coaches/summer-swee-singh",
+                ctaUrl: "/pianote/coaches/summer-swee-singh/369384",
                 img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,height=430,metadata=none/https://musora-web-platform.s3.amazonaws.com/carousel/pianote-COTM-summer-swee-singh.jpg",
             },
             {
                 topSubtitle: "",
-                title: "Pianote Weekly",
+                title: "The Piano Bench",
                 ctaText: "Check out the schedule here",
                 description: "Join us for this incredibly fun live event where you will be inspired, have your questions answered, and stay up to date on what’s happening inside the Pianote Community!",
                 ctaUrl: "pianote/schedule",
                 img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,height=430,metadata=none/https://musora-web-platform.s3.amazonaws.com/carousel/2022-06-29-Lisa-Kevin-Boogie-Woogie-101-107.jpg",
-            }, 
+            },
         ]
     },
     {
         brand: 'guitareo',
         slides: [
             {
-                topSubtitle: "YOU HAVE EARLY ACCESS",
+                topSubtitle: "It's All Yours",
                 title: "INTRODUCING MUSORA",
-                ctaText: "DEVELOPER'S UPDATE",
-                description:
-                    "A unified learning platform that includes Drumeo, Pianote, Guitareo, and Singeo. It’s an all-access pass to all four platforms at no additional cost.\n" +
-                    "Beta testing lasts for a limited time, click below to learn more.",
-                ctaUrl: "/guitareo/forums/website-update-and-feedback-discussion/6/musora-early-access/2674?sortby_val=-published_on",
-                img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,height=430,fit=cover,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/pre-launch-header-image-jpg.jpg",
+                ctaText: "LEARN MORE",
+                description: "A unified learning platform that includes Drumeo, Pianote, Guitareo, and Singeo. You now have an all-access pass to all four platforms at no additional cost. Find out all the details by clicking below!",
+                ctaUrl: "https://www.musora.com/unified-2022",
+                img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,fit=cover,metadata=none/https://musora-web-platform.s3.amazonaws.com/carousel/musora-header-large+new.jpg",
             },
             {
                 topSubtitle: "Coach of The Month",
                 title: "Dean Lamb",
                 ctaText: "Visit Dean's Coach Page",
                 description: 'Dean is a Canadian born guitarist, best know for his work in the Extreme Technical Death Metal band Archspire. He is also a content creator on YouTube, doing instructional guitar related content.',
-                ctaUrl: "/guitareo/coaches/dean-lamb",
+                ctaUrl: "/guitareo/coaches/dean-lamb/354026",
                 img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,height=430,metadata=none/https://musora-web-platform.s3.amazonaws.com/carousel/guitareo-COTM-dean-lamb.jpg",
             },
         ]
@@ -88,31 +90,29 @@ export const testCarousel = [
         brand: 'singeo',
         slides: [
             {
-                topSubtitle: "YOU HAVE EARLY ACCESS",
+                topSubtitle: "It's All Yours",
                 title: "INTRODUCING MUSORA",
-                ctaText: "DEVELOPER'S UPDATE",
-                description:
-                    "A unified learning platform that includes Drumeo, Pianote, Guitareo, and Singeo. It’s an all-access pass to all four platforms at no additional cost.\n" +
-                    "Beta testing lasts for a limited time, click below to learn more.",
-                ctaUrl: "/singeo/forums/platform-update-feedback-discussion/5/musora-early-access/484?sortby_val=-published_on",
-                img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,height=430,fit=cover,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/pre-launch-header-image-jpg.jpg",
+                ctaText: "LEARN MORE",
+                description: "A unified learning platform that includes Drumeo, Pianote, Guitareo, and Singeo. You now have an all-access pass to all four platforms at no additional cost. Find out all the details by clicking below!",
+                ctaUrl: "https://www.musora.com/unified-2022",
+                img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,fit=cover,metadata=none/https://musora-web-platform.s3.amazonaws.com/carousel/musora-header-large+new.jpg",
             },
             {
                 topSubtitle: "Coach Of The Month",
-                title: "Chris Johnson",
-                ctaText: "Visit Chris's Coach Page",
-                description: "Chris Johnson is a passionate, experienced, and internationally recognized vocal coach. He’s worked with a wide variety of voices and genres and is committed to helping vocalists reach new heights in their vocal ability. He’s also the founder of the free iTunes podcast The Naked Vocalist.",
-                ctaUrl: "/singeo/coaches/chris-johnson",
-                img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,height=430,metadata=none/https://musora-web-platform.s3.amazonaws.com/carousel/2022-04-26-COACH-Chris-Johnson-QT-146+1.jpg",
-            },  
+                title: "Hailey Benedict",
+                ctaText: "Visit Hailey's Coach Page",
+                description: "Hailey Benedict is a Canadian country singer and songwriter and a five-time North America Country Music Association International Youth winner. She’s opened for several internationally recognized artists like Jason Aldean, Blue Rodeo, Lindsay Ell, and Doc Walker.",
+                ctaUrl: "/singeo/coaches/hailey-benedict/373871",
+                img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,height=430,metadata=none/https://d1923uyy6spedc.cloudfront.net/CoachCardPack-Hailey_Coach-Featured-Top-Bottom-Banner-1667243203.jpg",
+            },
             {
                 topSubtitle: "",
-                title: "Singeo Weekly",
+                title: "The Stage",
                 ctaText: "Check out the schedule here",
                 description: "Join us for this incredibly fun live event where you will be inspired, have your questions answered, and stay up to date on what’s happening inside the Singeo Community!",
                 ctaUrl: "/singeo/schedule",
                 img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,height=430,metadata=none/https://musora-web-platform.s3.amazonaws.com/carousel/2022-05-04-Singeo-Julia-Lisa-100.jpg",
-            },  
+            },
         ]
     }
 ]

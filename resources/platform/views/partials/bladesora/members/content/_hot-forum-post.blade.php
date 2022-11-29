@@ -1,16 +1,27 @@
-<div class="tw-flex tw-flex-col tw-w-full sm:tw-w-1/2 lg:tw-w-1/3 tw-rounded pa-2 hover:tw-shadow-lg">
+<div class="tw-flex tw-transition-colors tw-flex-col tw-w-full sm:tw-w-1/2 lg:tw-w-1/3 tw-rounded-md pa-2 hover:tw-shadow-lg dark:hover:tw-bg-[#081825] tw-border tw-border-transparent dark:hover:tw-border-[#223F57]">
     <a href="{{ $url }}" class="tw-flex tw-flex-row tw-no-underline">
-        <div class="tw-flex tw-flex-col tw-text-[#00101D] dark:tw-text-white hot-forum-avatar-col">
+        <div class="tw-flex tw-flex-col tw-text-[#00101D] dark:tw-text-white hot-forum-avatar-col"
+        >
             {{-- Avatar Thumbnail --}}
-            <div class="tw-rounded-full bg-grey-2 dark:tw-bg-[#081825] tw-mb-1">
-                <img src="{{ $avatar }}"
-                     alt="{{ $author }} Avatar"
-                     loading="lazy"
-                     class="tw-rounded-full"
-                >
+            <div class="user-avatar tw-rounded-full bg-grey-2 dark:tw-bg-[#081825] tw-mb-1.5
+                        {{ in_array($author_access_level, ['coach', 'edge', 'lifetime', 'team', 'guitar', 'piano']) ? 'subscriber' : '' }}
+                        {{ $brand }}
+                        {{ $author_access_level }}
+               "
+            >
+                <div class="tw-no-underline tw-block tw-h-full tw-w-full">
+                    <img class="tw-rounded-full" 
+                         src="{{ $avatar }}"
+                         alt="{{ $author }} Avatar"
+                         loading="lazy"
+                         class="tw-rounded-full"
+                    />
+                </div>
             </div>
+            
+
             {{-- Rank Data --}}
-            <p class="tw-text-sm tw-uppercase tw-text-center dense font-compressed">
+            <p class="tw-text-sm tw-uppercase tw-text-center dense font-compressed tw-leading-[1.2]">
                 {{ $rank }}
             </p>
             <p
@@ -30,7 +41,7 @@
                 by
                 <strong class="tw-text-{{ $brand }}">{{ $author }}</strong>
             </h6>
-            <p class="tw-text-xs dark:tw-text-white tw-text-[#00101D] tw-break-words">
+            <p class="tw-text-xs dark:tw-text-white tw-text-[#00101D]" style="overflow-wrap: anywhere;">
                 {!! str_replace('&nbsp;', '', $post) !!}...
                 <span class="tw-font-bold dark:tw-text-white tw-text-[#00101D] tw-ml-1 tw-underline">See Post &raquo;</span>
             </p>

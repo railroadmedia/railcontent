@@ -26,14 +26,14 @@
                 </div>
                 <div class="flex flex-column enable-filters mr-1 tw-h-[50px]">
                     <button class="tw-btn-circle tw-h-[50px] tw-w-[50px] tw-mb-0"
-                        :class="isShuffle ? `tw-btn-primary ${brandBgColor} tw-text-white dark:tw-bg-white dark:tw-text-[#000C17]` : `tw-btn-secondary dark:tw-text-white ${brandTextColor}`"
+                        :class="isShuffle ? `tw-btn-primary tw-bg-${brand} hover:tw-bg-${brand}-600 tw-text-white dark:tw-bg-white dark:tw-text-[#000C17]` : `tw-btn-secondary dark:tw-text-white ${brandTextColor}`"
                         title="Toggle Shuffle" @click="toggleShuffle">
                         <i class="fas fa-random"></i>
                     </button>
                 </div>
                 <div class="flex flex-column enable-filters tw-h-[50px]">
                     <button class="tw-btn-circle tw-mr-1 tw-mb-0 tw-h-[50px]"
-                            :class="displayFilters ? `tw-w-[50px] tw-h-[50px] tw-btn-primary tw-text-white dark:tw-bg-white dark:tw-text-[#000C17] tw-mb-0 ${brandBgColor}` : `tw-btn-secondary dark:tw-text-white tw-mb-0 ${brandTextColor}`"
+                            :class="displayFilters ? `tw-w-[50px] tw-h-[50px] tw-btn-primary tw-text-white dark:tw-bg-white dark:tw-text-[#000C17] tw-mb-0 tw-bg-${brand} hover:tw-bg-${brand}-600` : `tw-btn-secondary dark:tw-text-white tw-mb-0 ${brandTextColor}`"
                             title="Toggle Filters" 
                             @click="displayFilters = !displayFilters"
                     >
@@ -257,7 +257,7 @@ export default {
                 required_fields: this.parseRequiredFields(),
                 page: this.page,
                 limit: this.limit,
-                required_parent_ids: this.showFavoritesOnly ? [this.userPlaylistId] : undefined,
+                only_from_my_list: this.showFavoritesOnly,
                 required_user_states: this.showCompletedOnly ? ['completed'] : undefined,
                 sort: this.sort,
             };
@@ -325,6 +325,7 @@ export default {
                 included_types: ['play-along'],
                 statuses: ['published'],
                 include_future: 0,
+                only_from_my_list: this.showFavoritesOnly
             })
                 .then((response) => {
                     if (response) {
@@ -476,8 +477,8 @@ export default {
                 });
             }
 
-            if (urlParams.required_parent_ids != null
-                && urlParams.required_parent_ids.indexOf(this.userPlaylistId) !== -1) {
+            if (urlParams.only_from_my_list != null
+                && urlParams.only_from_my_list == 1) {
                 this.showFavoritesOnly = true;
             }
 

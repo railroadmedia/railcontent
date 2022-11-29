@@ -15,5 +15,7 @@ Route::domain('{musoraDomain}')
         Route::get('careers', [MarketingController::class, 'careers']);
         Route::get('ambassador', [MarketingController::class, 'ambassador']);
         Route::get('brand', [MarketingController::class, 'brand']);
+        Route::get('unified-2022', [MarketingController::class, 'unified2022']);
         Route::get('referral-join', [ReferralJoinController::class, 'join']);
+        Route::get('recitals', [MarketingController::class, 'recitals']);
     });

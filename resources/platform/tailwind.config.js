@@ -66,9 +66,6 @@ module.exports = {
     //New Utilities
     plugin(function({ addUtilities }) {
       addUtilities({
-        '.body a:visited': {
-          color: 'rgb(11, 118, 219)',
-        },
         '.text-musora': {
           background: 'linear-gradient(20deg, #03c8ac, #0976db, #9a01ee, #f61a30)',
           '-webkit-background-clip': 'text',
@@ -103,7 +100,7 @@ module.exports = {
         },
         '.font-bebas-neue': {
           fontWeight: '400 !important', //force font weight
-          letterSpacing: '1px !important',
+          letterSpacing: '1px',
         },
         '.forum-post': {
           'ul, ol': {
@@ -111,6 +108,9 @@ module.exports = {
             paddingLeft: '40px',
             margin: '10px 0',
           }
+        },
+        '.break-words': {
+          wordBreak: 'break-word',
         }
       })
     })

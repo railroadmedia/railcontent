@@ -29,13 +29,13 @@
                 >
                 {{-- todo: re-add if requested --}}
                 @if($brand==="drumeo" || $brand==="pianote")
-                    <a data-open-modal="surveyModal" class="tw-btn-primary tw-bg-{{ $brand }}">
+                    <a data-open-modal="surveyModal" class="tw-btn-primary tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600">
                         WHERE TO BEGIN &nbsp; <i class="fas fa-question-circle tw-text-base"></i> 
                     </a>
                 @endif
 
                 {{-- Preview Modal --}}
-                <div id="previewModal" class="modal">
+                <div id="previewModal" class="modal vimeo-embedded-player">
                     <div class="flex flex-column corners-10">
                         @if($brand !== 'drumeo')
                             @php

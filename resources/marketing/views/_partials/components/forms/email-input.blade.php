@@ -1,34 +1,47 @@
-<div class="input-field"
-        x-bind:disabled="disabled"
->
-    <label x-bind:for="id" class="label text-[#00101D] dark:text-white">
-        <span x-if="required" class="text-red-500">*</span>
-        {{ name }}
+<div class="input-field">
+    <label for="{{$id}}" class="label {{ $darkMode ? 'text-white' : 'text-[#00101D]' }}">
+        <span class="text-red-500 @if(empty($required)) hidden @endif">*</span>
+        {{ $label }}
     </label>
     <div class="input-wrapper">
-        <input  type="email" 
-                x-bind:id="id"
-                x-bind:placeholder="placeholder"
-                class="focus:border-drumeo dark:bg-[#00101D] dark:text-white dark:placeholder:text-[#9EC0DC] dark:border-[#445F74]"
-                x-bind:aria-required="required"
-                x-bind:aria-invalid="invalid"
-                x-model="valueInterface"
-                aria-describedby=""
+        <input  
+            type="email" 
+            name="email"
+            id="{{$id}}"
+            placeholder="{{$placeholder}}"
+            x-bind:class="invalids.email.isInvalid ? 'border-[#EF4444] bg-[#FEF2F2]' : 'focus:border-drumeo dark:bg-[#00101D] dark:text-white dark:placeholder:text-[#9EC0DC] dark:border-[#445F74]'"
+            @if(!empty($required)) aria-required="required" @endif
+            x-model="formData.email"
+            aria-describedby=""
+            x-on:input.change="
+                if(invalids.email.isInvalid) invalids.email.isInvalid = false;
+                if(hasValidated && !$event.target.value) invalids.email.isInvalid = true;
+            "
         >
         <div class="input-icon">
             <!-- Heroicon name: solid/exclamation-circle -->
-            <svg xmlns="http://www.w3.org/2000/svg" class="invalid-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                class="invalid-icon" 
+                x-bind:class="invalids.{{$name}}.isInvalid && 'block text-[#EF4444]'"
+                viewBox="0 0 20 20" 
+                fill="currentColor" 
+                aria-hidden="true"
+            >
                 <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
             </svg>
         </div>
-        <p class="input-message" id="">{{ errorMessage }}</p>
+
+        <!-- Error Message -->
+        <p class="input-message text-[#EF4444]" x-bind:class="invalids.email.isInvalid ? 'block' : 'hidden'" x-text="invalids.email.errorMessage">
+        </p>
     </div>
 </div>
 
 
 
 
-
+{{-- 
 <script>
 export default {
     name: 'EmailInput',
@@ -108,4 +121,4 @@ export default {
         }
     },
 }
-</script>
+</script> --}}

@@ -3,6 +3,7 @@
 namespace Modules\UserManagementSystem\Controllers;
 
 use Carbon\Carbon;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -12,9 +13,11 @@ use Illuminate\Validation\ValidationException;
 use Modules\UserManagementSystem\Events\MobileAppLogin;
 use Modules\UserManagementSystem\Events\UserEvent;
 use Modules\UserManagementSystem\Models\User;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class AuthenticationController extends Controller
 {
+    use AuthorizesRequests;
     use ValidatesRequests;
 
     /**
@@ -37,7 +40,7 @@ class AuthenticationController extends Controller
             return redirect()
                 ->to(
                     config('user_management_system.login_page_path') .
-                    ($request->has('redirect') ? ('?redirect_to=' . $request->get('redirect')) : '')
+                    ($request->has('redirect_to') ? ('?redirect_to=' . $request->get('redirect_to')) : '')
                 )
                 ->withErrors($exception->errors());
         }
@@ -61,13 +64,13 @@ class AuthenticationController extends Controller
 
             event(new UserEvent($user->id, 'authenticated'));
 
-            return redirect()->to($request->has('redirect') ? $request->get('redirect') : '/' . brand());
+            return redirect()->away($request->has('redirect_to') ? $request->get('redirect_to') : '/' . brand());
         }
 
         return redirect()
             ->to(
                 config('user_management_system.login_page_path') .
-                ($request->has('redirect') ? ('?redirect_to=' . $request->get('redirect')) : '')
+                ($request->has('redirect_to') ? ('?redirect_to=' . $request->get('redirect_to')) : '')
             )
             ->withErrors(
                 ['invalid-credentials' => 'Wrong password or email. Try again or click Forgot password to reset it.']
@@ -79,50 +82,43 @@ class AuthenticationController extends Controller
      */
     public function loginGeneratedKey(Request $request)
     {
-        $remember = false;
+        // auth logic is not inside middleware AuthenticateViaKeyIfAvailable
 
-        if (config('user_management_system.force_remember', false) == true ||
-            (boolean)$request->get('remember', false) == true) {
-            $remember = true;
-        }
-
-        $request->attributes->set('remember', $remember);
-
-        $userId = $request->get('user_id', '');
-        $key = $request->get('key', '');
-
-        $user = User::query()->findOrFail($userId);
-        $passedCheck = false;
-        $i = 0;
-
-        // key expires after 12 hours
-        while ($i < 12) {
-            $hash = md5($user->id . $user->password . Carbon::now()->startOfHour()->subHours($i)->toDateTimeString());
-
-            if ($hash === $key) {
-                $passedCheck = true;
-                break;
-            }
-
-            $i++;
-        }
-
-        if ($passedCheck) {
-            auth()->login($user, $remember);
-
-            event(new UserEvent($user->id, 'authenticated'));
-
-            return redirect()->to($request->has('redirect') ? $request->get('redirect') : '/' . brand());
+        if (!empty(user())) {
+            return redirect()->to($request->has('redirect_to') ? $request->get('redirect_to') : '/' . brand());
         }
 
         return redirect()
             ->to(
                 config('user_management_system.login_page_path') .
-                ($request->has('redirect') ? ('?redirect_to=' . $request->get('redirect')) : '')
+                ($request->has('redirect_to') ? ('?redirect_to=' . $request->get('redirect_to')) : '')
             )
             ->withErrors(
                 ['invalid-credentials' => 'Wrong password or email. Try again or click Forgot password to reset it.']
             );
+    }
+
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function checkForAuthThenRedirectBackWithAuthKey(Request $request)
+    {
+        $redirectToUrl = strtok($request->get('redirect_to'), '?');
+
+        if (empty($redirectToUrl)) {
+            throw new NotFoundHttpException();
+        }
+
+        if (!empty(user())) {
+            $urlWithAuthKey = $redirectToUrl .
+                '?user_id=' . user()->id .
+                '&auth_key=' . generate_musora_cross_platform_login_key(user()->id, user()->password);
+
+            return redirect()->away($urlWithAuthKey);
+        }
+
+        return redirect()->away($redirectToUrl);
     }
 
     /**
@@ -195,7 +191,7 @@ class AuthenticationController extends Controller
             auth()->logout();
         }
 
-        return $request->has('redirect') ? redirect()->away($request->get('redirect')) :
+        return $request->has('redirect_to') ? redirect()->away($request->get('redirect_to')) :
             redirect()->to(config('usora.login_page_path'));
     }
 
@@ -218,5 +214,24 @@ class AuthenticationController extends Controller
                 'message' => 'Successfully logged out',
             ]
         );
+    }
+
+    /**
+     * @param Request $request
+     * @param $userId
+     * @return RedirectResponse
+     */
+    public function loginAsUser(Request $request, $userId)
+    {
+        $this->authorize('login_as_users');
+
+        if (!empty(user()) && user()->isAdmin()) {
+            auth()->logout();
+            auth()->loginUsingId($userId);
+
+            return redirect()->to('/members');
+        }
+
+        throw new NotFoundHttpException();
     }
 }

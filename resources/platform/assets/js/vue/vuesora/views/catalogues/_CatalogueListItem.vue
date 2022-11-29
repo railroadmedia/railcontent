@@ -120,17 +120,17 @@
 
       <!-- Is New -->
       <div v-if="isBranchPath" 
-           class="tw-font-roboto-condensed tw-font-bold tw-leading-none tw-w-fit tw-mb-2 tw-text-sm tw-uppercase tw-text-white tw-bg-pianote tw-p-1 tw-rounded"
+           class="tw-font-bebas-neue tw-tracking-tighter tw-leading-none tw-w-fit tw-mb-2 tw-text-sm tw-uppercase tw-text-white tw-bg-pianote tw-p-1 tw-rounded"
            style="width: fit-content;"
       >
            New Method Path
       </div>
 
       <p
-        v-if="brand !== 'guitareo' && !isCoach"
-        class="tw-text-xs font-compressed tw-uppercase text-truncate tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]"
+        v-if="!isCoach"
+        class="tw-text-base font-compressed tw-uppercase text-truncate tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]"
         :class="[
-          overview ? 'dense font-bold' : 'font-compressed',
+          overview ? 'dense' : 'font-compressed',
         ]"
       >
         {{ mappedData.color_title }}
@@ -330,6 +330,10 @@ export default {
   name: "CatalogueListItem",
   mixins: [Mixin, ThemeClasses],
   props: {
+    brand: {
+      type: String,
+      default: () => 'drumeo',
+    },
     isCoach: {
       type: Boolean,
       default: () => false,
@@ -358,6 +362,13 @@ export default {
         "start-learning-path":
           this.contentTypeOverride === "learning-path-part",
       };
+    },
+
+    branchPathBG() {
+      return `tw-bg-${ this.brand }/10`;
+    },
+    branchPathText() {
+      return `tw-text-${ this.brand }`;
     },
 
     showStudentReviewThumbsAsAvatar() {

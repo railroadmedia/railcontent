@@ -43,11 +43,10 @@ class UserMetricsService
         }
 
         $userProfileMetricsVO = new UserProfileMetrics(
-//            UserPointsService::fetchPoints($userId), // todo: fix after points integration
             0,
             0,
             $this->getTotalCommentLikes($userId),
-            $this->getTotalMinutesPracticed($userId),
+            0,
             $this->getTotalForumLikes($userId),
         );
 
@@ -149,7 +148,9 @@ class UserMetricsService
         return $this->databaseManager->connection(config('railcontent.database_connection_name'))
             ->table('railcontent_comments')
             ->join('railcontent_comment_likes', 'railcontent_comment_likes.comment_id', '=', 'railcontent_comments.id')
+            ->join('railcontent_content','railcontent_comments.content_id', '=', 'railcontent_content.id' )
             ->where('railcontent_comments.user_id', '=', $userId)
+            ->where('railcontent_content.brand','=', brand())
             ->count();
     }
 
@@ -158,19 +159,24 @@ class UserMetricsService
      *
      * @return integer
      */
-    private function getTotalMinutesPracticed($userId)
+    public function getTotalMinutesPracticed($userId, $assignmentTypeIds=[])
     {
+        if(empty($assignmentTypeIds)) {
+            $assignmentTypeIds =
+                $this->databaseManager->connection(config('railtracker.database_connection_name'))
+                    ->table('railtracker_media_playback_types')
+                    ->where('type', 'assignment')
+                    ->get('id');
+            $assignmentTypeIds =
+                $assignmentTypeIds->pluck('id')
+                    ->toArray();
+        }
+
         return round(
-            ((integer)$this->databaseManager->connection()
+            ((integer)$this->databaseManager->connection(config('railtracker.database_connection_name'))
                 ->table('railtracker_media_playback_sessions')
-                ->join(
-                    'railtracker_media_playback_types',
-                    'railtracker_media_playback_types.id',
-                    '=',
-                    'railtracker_media_playback_sessions.type_id'
-                )
                 ->where('user_id', $userId)
-                ->where('type', 'assignment')
+                ->whereIn('type_id', $assignmentTypeIds)
                 ->sum('seconds_played')) / 60,
             0
         );

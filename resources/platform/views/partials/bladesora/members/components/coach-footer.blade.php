@@ -4,18 +4,15 @@
             <div class="tw-flex tw-flex-col-reverse lg:tw-flex-row">
                 <div class="tw-flex-grow lg:tw-pr-6">
                     <h1 class="tw-text-4xl tw-mb-2 tw-uppercase tw-font-normal">
-                        {{ $firstName }} <span class="tw-font-bold">{{ $lastName }}</span>
+                        {{ $firstName }} <span class="tw-font-bold">{{ $lastName }}</span> <span class="tw-font-bold">{{ $nameThree }}</span>
                     </h1>
                     <div class="tw-uppercase tw-font-semibold tw-mb-6" style="color: #7E9AB1;">
                         @php
                             $focusArray;
                             $lastFocus = array_pop($focusArray);
+                            $text = implode(', ', $focusArray) . (count($focusArray) !== 0 ? ' AND ' : '') . $lastFocus
                         @endphp
-                        {{ implode(', ', $focusArray) }}
-                        @if (count($focusArray) !== 0)
-                            <span>AND</span>
-                        @endif
-                        <span>{{ $lastFocus }}</span>
+                        {{ $text }}
                     </div>
                     <h2 class="tw-mb-10 tw-text-base tw-font-normal tw-max-w-4xl">
                         {!! $shortBio !!}
@@ -29,9 +26,9 @@
                         <!-- Badge -->
                         <div
                             class="tw-bg-yellow-500 tw-absolute tw-w-full tw-h-6 tw-left-0 tw-bottom-0 tw-z-10 tw-flex tw-items-center tw-justify-center">
-                            <musora-icon 
+                            <musora-icon
                                 icon-name="whistle-filled"
-                                height="20" 
+                                height="20"
                                 class="tw-text-white tw-w-[20px] tw-leading-none"
                             ></musora-icon>
                         </div>

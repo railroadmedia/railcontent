@@ -13,6 +13,8 @@ class NavigationViewComposer
      */
     private $notificationService;
 
+    private static $viewDataCache;
+
     /**
      * SidebarComposer constructor.
      */
@@ -29,12 +31,18 @@ class NavigationViewComposer
      */
     public function compose(View $view)
     {
+        if (!empty(self::$viewDataCache)) {
+            return self::$viewDataCache;
+        }
+
         $unread = (user())?$this->notificationService->getUnreadCount(user()->id, brand()):0;
 
-        $view->with([
+        self::$viewDataCache = [
             'sidebarNavigationSectionsJson' => NavigationService::getSidebarSectionsJson(),
             'userNavigationDropdownLinksJson' => NavigationService::getUserDropDownLinksJson(),
             "hasUnreadNotifications" => $unread > 0,
-        ]);
+        ];
+
+        $view->with(self::$viewDataCache);
     }
 }
