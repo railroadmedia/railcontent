@@ -172,7 +172,7 @@
                             class="bg-white rounded"
                             :class="metronome ? 'text-grey-5' : 'inverted text-white'"
                         >
-                            <i class="icon-metronome"></i>
+                            <musora-icon icon-name="metronome" class="tw-w-[20px]"></musora-icon>
                         </span>
                     </button>
 
