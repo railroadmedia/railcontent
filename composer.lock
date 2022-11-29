@@ -4256,16 +4256,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v9.41.0",
+            "version": "v9.42.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "cc902ce61b4ca08ca7449664cfab2fa96a1d1e28"
+                "reference": "0bb828f0b8d1b320cac0b71874807ea2f334ea89"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/cc902ce61b4ca08ca7449664cfab2fa96a1d1e28",
-                "reference": "cc902ce61b4ca08ca7449664cfab2fa96a1d1e28",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/0bb828f0b8d1b320cac0b71874807ea2f334ea89",
+                "reference": "0bb828f0b8d1b320cac0b71874807ea2f334ea89",
                 "shasum": ""
             },
             "require": {
@@ -4438,21 +4438,21 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2022-11-22T15:10:46+00:00"
+            "time": "2022-11-29T15:18:16+00:00"
         },
         {
             "name": "laravel/nova",
-            "version": "4.19.3",
+            "version": "4.19.4",
             "source": {
                 "type": "git",
                 "url": "git@github.com:laravel/nova.git",
-                "reference": "def7913a20fc2a7f6e21f014ef588df33d9a1399"
+                "reference": "962deed1c3df3740620be19646c8acd69430e66d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-def7913a20fc2a7f6e21f014ef588df33d9a1399-zip-916983.zip",
-                "reference": "def7913a20fc2a7f6e21f014ef588df33d9a1399",
-                "shasum": "44d0880a227808ed85c135a86192291b2e3e08a6"
+                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-962deed1c3df3740620be19646c8acd69430e66d-zip-804f62.zip",
+                "reference": "962deed1c3df3740620be19646c8acd69430e66d",
+                "shasum": "51ac67d601f0f11213b23a9a8f5df425ae48f122"
             },
             "require": {
                 "brick/money": "^0.5.0|^0.6.0|^0.7.0",
@@ -4547,9 +4547,9 @@
                 "laravel"
             ],
             "support": {
-                "source": "https://github.com/laravel/nova/tree/v4.19.3"
+                "source": "https://github.com/laravel/nova/tree/v4.19.4"
             },
-            "time": "2022-11-22T20:32:22+00:00"
+            "time": "2022-11-29T15:30:53+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -4807,16 +4807,16 @@
         },
         {
             "name": "laravel/vapor-cli",
-            "version": "v1.49.0",
+            "version": "v1.50.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/vapor-cli.git",
-                "reference": "6e91cde113aee78e4b225594ebe5d8cf01b43a5e"
+                "reference": "5a28bc8ebcfdd2f12c2cc79e1061e7bb665e2af1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/vapor-cli/zipball/6e91cde113aee78e4b225594ebe5d8cf01b43a5e",
-                "reference": "6e91cde113aee78e4b225594ebe5d8cf01b43a5e",
+                "url": "https://api.github.com/repos/laravel/vapor-cli/zipball/5a28bc8ebcfdd2f12c2cc79e1061e7bb665e2af1",
+                "reference": "5a28bc8ebcfdd2f12c2cc79e1061e7bb665e2af1",
                 "shasum": ""
             },
             "require": {
@@ -4869,22 +4869,22 @@
                 "vapor"
             ],
             "support": {
-                "source": "https://github.com/laravel/vapor-cli/tree/v1.49.0"
+                "source": "https://github.com/laravel/vapor-cli/tree/v1.50.0"
             },
-            "time": "2022-11-23T15:18:31+00:00"
+            "time": "2022-11-28T14:42:27+00:00"
         },
         {
             "name": "laravel/vapor-core",
-            "version": "v2.25.0",
+            "version": "v2.26.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/vapor-core.git",
-                "reference": "45efd886ba196e4acb7a218e78e4eb8183358a48"
+                "reference": "887890d8d6846a9d67f63bede4c9f996d44b8156"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/vapor-core/zipball/45efd886ba196e4acb7a218e78e4eb8183358a48",
-                "reference": "45efd886ba196e4acb7a218e78e4eb8183358a48",
+                "url": "https://api.github.com/repos/laravel/vapor-core/zipball/887890d8d6846a9d67f63bede4c9f996d44b8156",
+                "reference": "887890d8d6846a9d67f63bede4c9f996d44b8156",
                 "shasum": ""
             },
             "require": {
@@ -4940,9 +4940,9 @@
                 "vapor"
             ],
             "support": {
-                "source": "https://github.com/laravel/vapor-core/tree/v2.25.0"
+                "source": "https://github.com/laravel/vapor-core/tree/v2.26.0"
             },
-            "time": "2022-10-25T15:47:34+00:00"
+            "time": "2022-11-28T14:36:39+00:00"
         },
         {
             "name": "laravel/vapor-ui",
@@ -8081,12 +8081,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "cdf843fea1ff554db7cc18fab0db488d163495a9"
+                "reference": "a351e156be0e6026dd4e7608788a3cbd9fbf7f5b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/cdf843fea1ff554db7cc18fab0db488d163495a9",
-                "reference": "cdf843fea1ff554db7cc18fab0db488d163495a9",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/a351e156be0e6026dd4e7608788a3cbd9fbf7f5b",
+                "reference": "a351e156be0e6026dd4e7608788a3cbd9fbf7f5b",
                 "shasum": ""
             },
             "require": {
@@ -8118,7 +8118,7 @@
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
                 "source": "https://github.com/railroadmedia/musora-api/tree/v2.0-railcontent-v2-integration"
             },
-            "time": "2022-11-29T08:29:47+00:00"
+            "time": "2022-11-29T17:00:44+00:00"
         },
         {
             "name": "railroad/permissions",
