@@ -1,6 +1,7 @@
 <!-- Playlists -->
 <script setup>
 //Icons
+import { ref } from 'vue'
 import MusoraIcon from '../MusoraIcons/MusoraIcon.vue'
 import { textColor, borderColor } from '../../../constants/brands.js'
 
@@ -10,11 +11,17 @@ const props = defineProps({
     brand: String,
     isActivePath: Boolean
 });
+
+const formattedPlaylists = ref(props.playlists.map(({ id, ...rest}) =>
+    ({
+        ...rest,
+        url: `/${props.brand}/playlist/${id}`
+    })
+));
 </script>
 <template>
     <section>
         <div class="tw-h-[42px] tw-flex tw-items-center tw-w-full">
-
             <a :href="`/${brand}/lists/my-list`" :title="[isSidebarCollapsed ? 'Playlists' : '']"
                 class="tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-w-full"
                 :class="[isActivePath ? `tw-font-bold ${textColor[brand]} ${borderColor[brand]}` : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white']">
@@ -34,18 +41,20 @@ const props = defineProps({
 
         <Transition name="fade">
             <div v-if="!isSidebarCollapsed" class="tw-text-sm tw-transition tw-pb-8">
-                <ul class="tw-p-[25px] tw-pt-[12px] tw-font-open-sans tw-text-white tw-text-[14px]" v-if="playlists.length > 0">
+                <ul class="tw-p-[25px] tw-pt-[12px] tw-font-open-sans tw-text-white tw-text-[14px]"
+                    v-if="formattedPlaylists.length > 0">
                     <!-- Loop through User Playlists -->
-                    <li class="tw-truncate tw-pb-[21px]" v-for="(playlist, index) in playlists" :key="playlist.id+'-playlist-li'">
-                        {{ playlist.title }}
+                    <li class="tw-truncate tw-pb-[21px]" v-for="(playlist, index) in formattedPlaylists"
+                        :key="playlist.id + '-playlist-li'">
+                        <a href="" class="tw-no-underline tw-text-inherit">{{ playlist.title }}</a>
                     </li>
-                    <li class="tw-text-[#9EC0DC] tw-pt-[4px]" v-if="playlists.length > 5">See all</li>
+                    <li class="tw-text-[#9EC0DC] tw-pt-[4px]" v-if="formattedPlaylists.length > 5">See all</li>
                 </ul>
 
                 <div v-else class="tw-mt-8 tw-flex tw-flex-col tw-items-center">
                     <div
                         class="tw-h-[50px] tw-w-[50px] tw-flex tw-items-center tw-justify-center tw-rounded-full tw-mb-2 tw-bg-[#3f3f46]/20 dark:tw-bg-[#445F74]/50 tw-text-[#111827] dark:tw-text-[#9EC0DC]">
-                        <musora-icon icon-name="playlist" class="tw-w-[] tw-mx-4 tw-mt-1" />
+                        <musora-icon icon-name="playlist" class="tw-mx-4 tw-mt-1" />
                     </div>
 
                     <span class="tw-font-bold tw-text-[#00101D] dark:tw-text-white tw-whitespace-nowrap">No Playlist
