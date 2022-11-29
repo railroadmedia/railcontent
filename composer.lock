@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3cac84af0735871cefa3f233a8c9ac7a",
+    "content-hash": "56b49247e33b348bf453c5eb2aa79cc4",
     "packages": [
         {
             "name": "aporat/store-receipt-validator",
@@ -7926,16 +7926,16 @@
         },
         {
             "name": "railroad/ecommerce",
-            "version": "v5.0.31",
+            "version": "v5.0.33",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "4edfc1a865b28e1638dbfc4cd019415469abf07d"
+                "reference": "efb1b53a16a09fb37f820bd72cd7f2dd95ceeec5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/4edfc1a865b28e1638dbfc4cd019415469abf07d",
-                "reference": "4edfc1a865b28e1638dbfc4cd019415469abf07d",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/efb1b53a16a09fb37f820bd72cd7f2dd95ceeec5",
+                "reference": "efb1b53a16a09fb37f820bd72cd7f2dd95ceeec5",
                 "shasum": ""
             },
             "require": {
@@ -7972,9 +7972,9 @@
             "description": "Ecommerce system",
             "support": {
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
-                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.31"
+                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.33"
             },
-            "time": "2022-11-28T20:06:09+00:00"
+            "time": "2022-11-29T17:44:18+00:00"
         },
         {
             "name": "railroad/location",
@@ -16169,17 +16169,9 @@
             "time": "2021-07-28T10:34:58+00:00"
         }
     ],
-    "aliases": [
-        {
-            "package": "railroad/ecommerce",
-            "version": "dev-support-old-app-purchases",
-            "alias": "v5.0.22",
-            "alias_normalized": "5.0.22.0"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "railroad/ecommerce": 20,
         "railroad/musora-api": 20
     },
     "prefer-stable": true,
