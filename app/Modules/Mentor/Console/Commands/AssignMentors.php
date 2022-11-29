@@ -15,8 +15,11 @@ class AssignMentors extends Command
     protected $signature = 'mentors:assign';
     protected $description = 'Checks new users and assigns mentors if required';
 
-    public function handle(MentorService $mentorService): bool
+    public function handle(MentorService $mentorService)
     {
+        $this->info("Processing $this->name");
+        $timeStart = microtime(true);
+
         $this->info("Ensure Active Users have Mentors");
         $query = User::query()->with('mentorStudent')->with('mentorStudent.mentor')->where(
             'created_at',
@@ -32,7 +35,10 @@ class AssignMentors extends Command
             }
         });
         $this->info("$n student mentors assigned.");
-        return true;
+
+        $diff = microtime(true) - $timeStart;
+        $sec = intval($diff);
+        $this->info("Finished $this->name ($sec s)");
     }
 
 }

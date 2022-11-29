@@ -335,7 +335,7 @@ return [
 
         'apple_store_kit' => [
             'endpoint' => env('APPLE_VERIFY_RECEIPT_ENDPOINT', 'https://sandbox.itunes.apple.com'),
-            'shared_secret' => '7e598c622c0a46f49c79c2272bcc2c25',
+            'shared_secret' => env('APPLE_STORE_KIT_SHARED_SECRET'),
             'Drumeo' => [
                 'shared_secret' => 'b1ab16b41296400bbf10431d72386f5f',
             ],
@@ -896,4 +896,6 @@ return [
 
     // exchangerate-api.com
     'exchange_rate_api_token' => '89916546525703af0b7e1f9a',
+
+    'annual_product_skus' => ['DLM-1-year', 'PIANOTE-MEMBERSHIP-1-YEAR', 'GUITAREO-1-YEAR-MEMBERSHIP', 'singeo-annual-recurring-membership']
 ];

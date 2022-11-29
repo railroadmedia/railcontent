@@ -135,6 +135,8 @@ class ContentPagesController extends BaseController
         if (user()->permission_level === 'administrator') {
             ContentRepository::$availableContentStatues =
                 [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED, ContentService::STATUS_DRAFT];
+        } else {
+            ContentRepository::$availableContentStatues = [ContentService::STATUS_PUBLISHED];
         }
 
         ContentRepository::$pullFutureContent = false;
@@ -268,9 +270,8 @@ class ContentPagesController extends BaseController
         }
 
         $childrenContent = $firstLevelContent['units'] ??
-            $this->contentService->getByParentIdWhereTypeIn(
-                $firstLevelContent['id'],
-                [ContentTypeHierarchyMap::$map[$firstLevelContent['type']]]
+            $this->contentService->getByParentId(
+                $firstLevelContent['id']
             );
 
         $childrenContentResultsEntity = new ContentFilterResultsEntity(['results' => $childrenContent]);

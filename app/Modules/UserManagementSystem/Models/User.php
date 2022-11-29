@@ -429,7 +429,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
      */
     public function getDashboardUrl()
     {
-        return url()->route('platform.profile.dashboard', [$this->id]);
+        return url()->route('platform.profile.dashboard', [$this->id, 'brand' => $this->last_used_brand]);
     }
 
     /**
@@ -771,5 +771,20 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         return !$this->isAdmin()
             && !empty($this->membership_expiration_date)
             && $this->membership_expiration_date >= Carbon::now()->addDays(-config('mentor.active_after_membership_expired_days'));
+    }
+
+    /**
+     * @return bool
+     */
+    public function isNotLifetimeOrAnnualMember()
+    {
+        $annualSubscription = false;
+        foreach ($this->subscriptions as $subscription) {
+            $annualSubscription = in_array($subscription->product->sku, config('ecommerce.annual_product_skus'));
+            if ($annualSubscription) {
+                break;
+            }
+        }
+        return (!$annualSubscription && !$this->is_lifetime_member && $this->isAMember());
     }
 }
