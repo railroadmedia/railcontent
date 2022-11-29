@@ -1435,6 +1435,7 @@ return [
             'semester-pack' => 'lessons',
             'song' => 'lessons',
             'unit' => 'lessons',
+            'song-tutorial' => 'lessons',
             'song-tutorial-children' => 'lessons',
         ],
         'guitareo' => [
