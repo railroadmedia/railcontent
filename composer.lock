@@ -7926,16 +7926,16 @@
         },
         {
             "name": "railroad/ecommerce",
-            "version": "v5.0.33",
+            "version": "v5.0.34",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "efb1b53a16a09fb37f820bd72cd7f2dd95ceeec5"
+                "reference": "859a168d4239a71152e138a065fbdfade2d3fee9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/efb1b53a16a09fb37f820bd72cd7f2dd95ceeec5",
-                "reference": "efb1b53a16a09fb37f820bd72cd7f2dd95ceeec5",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/859a168d4239a71152e138a065fbdfade2d3fee9",
+                "reference": "859a168d4239a71152e138a065fbdfade2d3fee9",
                 "shasum": ""
             },
             "require": {
@@ -7972,9 +7972,9 @@
             "description": "Ecommerce system",
             "support": {
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
-                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.33"
+                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.34"
             },
-            "time": "2022-11-29T17:44:18+00:00"
+            "time": "2022-11-29T22:37:50+00:00"
         },
         {
             "name": "railroad/location",
@@ -16181,5 +16181,5 @@
         "ext-curl": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
