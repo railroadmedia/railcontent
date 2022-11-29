@@ -429,7 +429,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
      */
     public function getDashboardUrl()
     {
-        return url()->route('platform.profile.dashboard', [$this->id]);
+        return url()->route('platform.profile.dashboard', [$this->id, 'brand' => $this->last_used_brand]);
     }
 
     /**

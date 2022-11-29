@@ -70,13 +70,6 @@ class MentorServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
         $this->loadRoutesFrom(__DIR__ . '/../routes/routes.php');
-
-        $this->callAfterResolving(Schedule::class, function (Schedule $schedule) {
-            $schedule->command('mentors:verify')->daily();
-
-            //temporary measure to assign mentors until ecommerce is integrated with MWP
-            $schedule->command('mentors:assign')->hourly();
-        });
     }
 
     /**

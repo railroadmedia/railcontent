@@ -64,8 +64,10 @@ onMounted(() => {
       if (resolved) {
         emit('onUploadDone', resolved.data.profile_picture_url);
       }
+    }).catch(() => {
+      emit('onUploadError');
     });
-  }).catch((e) => {
+  }).catch(() => {
     emit('onUploadError');
   });
 });
