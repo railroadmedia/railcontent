@@ -50,6 +50,10 @@ const props = defineProps({
       type: Boolean,
       default: true
   },
+  playlists: {
+    type: Array,
+    default: [],
+  }
 });
 
 const notification = useNotificationStore();
@@ -219,7 +223,7 @@ onUnmounted(() => {
       <!-- Sidebar -->
       <Sidebar :brand="brand" :isLive="isLive" :isSidebarCollapsed="isSidebarCollapsed"
         :isSidebarHidden="isSidebarHidden" @onCollapseSidebar="onCollapseSidebar"
-        :forceSidebarHidden="forceSidebarHidden" />
+        :forceSidebarHidden="forceSidebarHidden" :playlists="playlists" />
 
       <!-- Content Container -->
       <main class="

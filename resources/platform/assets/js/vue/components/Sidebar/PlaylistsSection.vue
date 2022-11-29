@@ -34,13 +34,15 @@ const props = defineProps({
 
         <Transition name="fade">
             <div v-if="!isSidebarCollapsed" class="tw-text-sm tw-transition tw-pb-8">
-
-                <ul v-if="playlists.length > 0">
+                <ul class="tw-p-[25px] tw-pt-[12px] tw-font-open-sans tw-text-white tw-text-[14px]" v-if="playlists.length > 0">
                     <!-- Loop through User Playlists -->
+                    <li class="tw-truncate tw-pb-[21px]" v-for="(playlist, index) in playlists" :key="playlist.id+'-playlist-li'">
+                        {{ playlist.title }}
+                    </li>
+                    <li class="tw-text-[#9EC0DC] tw-pt-[4px]" v-if="playlists.length > 5">See all</li>
                 </ul>
 
                 <div v-else class="tw-mt-8 tw-flex tw-flex-col tw-items-center">
-
                     <div
                         class="tw-h-[50px] tw-w-[50px] tw-flex tw-items-center tw-justify-center tw-rounded-full tw-mb-2 tw-bg-[#3f3f46]/20 dark:tw-bg-[#445F74]/50 tw-text-[#111827] dark:tw-text-[#9EC0DC]">
                         <musora-icon icon-name="playlist" class="tw-w-[] tw-mx-4 tw-mt-1" />

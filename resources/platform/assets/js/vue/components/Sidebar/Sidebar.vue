@@ -1,10 +1,12 @@
 <script>
-import SidebarContainer from './SidebarContainer.vue'
-import { textColor, borderColor } from '../../../constants/brands.js'
-import PlaylistsSection from './PlaylistsSection.vue'
+import SidebarContainer from './SidebarContainer.vue';
+import { textColor, borderColor } from '../../../constants/brands.js';
+import PlaylistsSection from './PlaylistsSection.vue';
+import { onBeforeMount } from 'vue';
+import { usePlaylistsStore } from '../../../stores/playlists';
 //Icons
-import MusoraIcon from '../MusoraIcons/MusoraIcon.vue'
-import SearchInput from './SearchInput.vue'
+import MusoraIcon from '../MusoraIcons/MusoraIcon.vue';
+import SearchInput from './SearchInput.vue';
 
 export default {
   name: 'Sidebar',
@@ -22,7 +24,7 @@ export default {
       type: Boolean,
       default: false
     },
-    playlist: {
+    playlists: {
       type: Array,
       default: []
     },
@@ -55,8 +57,6 @@ export default {
       if (windowPathArray[3] === '500-songs-in-5-days' && pathArray[3] === '500-songs-in-5-days') {
         return true;
       }
-
-
     }
   },
 }
@@ -101,7 +101,7 @@ export default {
     <!-- Playlists Section -->
     <playlists-section
       :isSidebarCollapsed="isSidebarCollapsed"
-      :playlist="playlist"
+      :playlists="playlists"
       :isActivePath="activePath(`/${brand}/lists/my-list`)"
       :brand="brand"
     ></playlists-section>
