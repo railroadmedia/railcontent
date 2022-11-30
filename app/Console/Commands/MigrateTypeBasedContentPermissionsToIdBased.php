@@ -155,7 +155,7 @@ class MigrateTypeBasedContentPermissionsToIdBased extends Command
             228534 => [77, 51],
             233940 => [52, 55],
             233612 => [52, 55],
-            217320 => [52, 46],
+            217320 => [46],
             224874 => [52, 49],
             213054 => [1, 36],
             25812 => [1, 2],
@@ -170,8 +170,8 @@ class MigrateTypeBasedContentPermissionsToIdBased extends Command
             25822 => [1, 13],
             25818 => [1, 9],
             25813 => [1, 6],
-            190255 => [1, 29],
-            223166 => [1, 48],
+            190255 => [29],
+            223166 => [48],
             248762 => [1, 61],
             25819 => [1, 11],
             265300 => [1, 67],
@@ -186,15 +186,15 @@ class MigrateTypeBasedContentPermissionsToIdBased extends Command
             213165 => [1, 42],
             280599 => [52, 71],
             237579 => [52, 57],
-            190312 => [52, 30],
-            208488 => [52, 32],
+            190312 => [30],
+            208488 => [32],
             214542 => [52, 45],
             213652 => [1, 41],
             354975 => [77, 84],
             213580 => [1, 40],
-            28436 => [1, 27],
-            30223 => [1, 28],
-            208663 => [1, 31],
+            28436 => [27],
+            30223 => [28],
+            208663 => [31],
             234577 => [1, 53],
             25816 => [1, 7],
             25817 => [1, 8],
@@ -209,8 +209,8 @@ class MigrateTypeBasedContentPermissionsToIdBased extends Command
             251493 => [77, 63],
             361886 => [77, 87],
             366444 => [52, 83],
-            217074 => [1, 47],
-            227748 => [1, 50],
+            217074 => [47],
+            227748 => [50],
             249140 => [1, 62],
             25821 => [1, 10],
             234982 => [77, 54],
@@ -232,6 +232,22 @@ class MigrateTypeBasedContentPermissionsToIdBased extends Command
             ->get();
 
         foreach ($packContentRows as $packContentRow) {
+            $connection->table('railcontent_content_permissions')
+                ->where('content_id', $packContentRow->id)
+                ->delete();
+
+            foreach ($packPermissionsMap[$packContentRow->id] ?? [] as $packPermissionId) {
+                $this->info('Adding permission ' . $packPermissionId . ' to content id ' . $packContentRow->id);
+
+                $connection->table('railcontent_content_permissions')
+                    ->insert([
+                        'content_id' => $packContentRow->id,
+                        'content_type' => null,
+                        'permission_id' => $packPermissionId,
+                        'brand' => $packContentRow->brand,
+                    ]);
+            }
+
             $packBundleHierarchyChildIds = $connection->table('railcontent_content_hierarchy')
                 ->where('parent_id', $packContentRow->id)
                 ->get()
