@@ -1,8 +1,8 @@
 @include($theme.'._partials.holiday-logo',[
-    'styles' => 'h-8 md:h-10 lg:h-12'
+    'styles' => 'h-14 sm:h-16 lg:h-20'
 ])
 <h1><strong>{{ strtoupper($theme) }} SHOP</strong></h1>
-<p>{!! $text !!}</p>
+<h5>{!! $text !!}</h5>
 {{--<div class="rounded-xl px-6 py-2 inline-flex flex-wrap mx-auto mt-5 justify-center items-center" style="background-color:#181515;">--}}
 {{--    <p class="leading-none m-0"><strong>DEALS END IN:</strong></p>--}}
 {{--    <div class="h-12 mx-5 bg-promo" style="width:2px;"></div>--}}

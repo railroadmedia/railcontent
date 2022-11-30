@@ -2,7 +2,7 @@
     <div class="container mx-auto relative z-30 max-w-lg">
         <a href="@if($theme === 'drumeo') /drumshop @else /shop @endif">
             @include($theme.'._partials.holiday-logo', [
-                'styles' => 'h-10 lg:h-12 mx-auto'
+                'styles' => 'h-14 sm:h-16 lg:h-20 mx-auto'
             ])
         </a>
         <p class="leading-tight mt-3 uppercase mb-7"><strong class="text-promo">{!! $text !!}</strong></p>
