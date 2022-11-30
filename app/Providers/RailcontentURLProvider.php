@@ -32,7 +32,6 @@ class RailcontentURLProvider implements RailcontentURLProviderInterface
          */
         $urlDecorator = app(UrlDecorator::class);
 
-        ContentRepository::$bypassPermissions = true;
         ContentRepository::$pullFutureContent = true;
 
         if (empty($contentEntity)) {
