@@ -72,7 +72,7 @@ class Bundle extends Resource
                         $brand = 'Singeo';
                     }
 
-                    return '/'.$brand.'/'.$request->uuid.'-'.$request->file('meta_img')->getClientOriginalName();
+                    return '/'.$brand.'/bundles/'.$request->uuid.'-'.$request->file('meta_img')->getClientOriginalName();
                 })
                 ->preview(function($value){
                     if(empty($value)) return null;
@@ -105,7 +105,7 @@ class Bundle extends Resource
                         $brand = 'Singeo';
                     }
 
-                    return '/'.$brand.'/'.$request->uuid.'-'.$request->file('page_logo')->getClientOriginalName();
+                    return '/'.$brand.'/bundles/'.$request->uuid.'-'.$request->file('page_logo')->getClientOriginalName();
                 })
                 ->preview(function($value){
                     if(empty($value)) return null;
@@ -120,13 +120,43 @@ class Bundle extends Resource
             Flexible::make('Images')
                 ->addLayout(ImageLayout::class)
                 ->preset(ImagePreset::class),
+            Image::make('Spread Image', 'spread_img')
+                ->disk('nova_s3')
+                ->prunable()
+                ->hideFromIndex()
+                ->disableDownload()
+                ->nullable()
+                ->storeAs(function (Request $request){
+                    $brandId = $request->brand;
+                    $brand = '';
+
+                    if($brandId === "1") {
+                        $brand = 'Drumeo';
+                    }
+                    elseif($brandId === "2"){
+                        $brand = 'Pianote';
+                    }
+                    elseif($brandId === "3"){
+                        $brand = 'Guitareo';
+                    }
+                    elseif($brandId === "4"){
+                        $brand = 'Singeo';
+                    }
+
+                    return '/'.$brand.'/bundles/'.$request->uuid.'-'.$request->file('page_logo')->getClientOriginalName();
+                })
+                ->preview(function($value){
+                    if(empty($value)) return null;
+
+                    return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
+                }),
             Markdown::make('Overview')
                 ->hideFromIndex(),
             Boolean::make('Visible On Shop Page')->default(false)->hideFromIndex()->hideFromDetail()->hideWhenCreating()->hideWhenUpdating(),
             Boolean::make('Sold Out', 'sold_out')->default(false)->hideFromIndex(),
             Boolean::make('Guarantee Badge', 'guaranteed')->default(false)->hideFromIndex(),
             Boolean::make('Free Shipping', 'free_shipping')->default(false)->hideFromIndex(),
-            Flexible::make('Products')
+            Flexible::make('Bonuses')
                 ->addLayout(BundleLayout::class)
                 ->preset(BundlePreset::class),
         ];
