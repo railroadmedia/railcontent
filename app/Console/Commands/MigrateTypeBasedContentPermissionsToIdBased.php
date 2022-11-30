@@ -200,7 +200,7 @@ class MigrateTypeBasedContentPermissionsToIdBased extends Command
             25817 => [1, 8],
             248276 => [1, 60],
             250063 => [1, 60],
-            353337 => [1, 78],
+            353337 => [78],
             25811 => [1, 18],
             212924 => [1, 35],
             25820 => [1, 12],
