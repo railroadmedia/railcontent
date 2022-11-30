@@ -12,7 +12,7 @@ class ShopController extends BaseController
     {
         $products = Product::whereHas('brand', fn($query) => $query->where('name', 'guitareo'))->where('visible', '=', 1)->where('product_type_id', '!=', 6)->orderBy('display_order')->get();
 
-        return view('guitareo.shop.shop', [ 'products' => $products ]);
+        return view('guitareo.shop.shop', [ 'products' => $products, 'theme' => 'guitareo' ]);
     }
 
     public function product($root, $slug)
