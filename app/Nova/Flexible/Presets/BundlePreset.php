@@ -16,7 +16,7 @@ class BundlePreset extends Preset
     public function handle(Flexible $field)
     {
         $field->resolver(BundleResolver::class);
-        $field->button('Add a product');
+        $field->button('Add a bonus');
         // You can call all available methods on the Flexible field.
         // $field->addLayout(...)
         // $field->button(...)
