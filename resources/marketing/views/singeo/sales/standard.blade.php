@@ -10,9 +10,9 @@
 @endsection
 
 @section('top-promo-bar')
-{{--    @include('_partials.layout.holiday.homepage-top-banner',[--}}
-{{--        'text' => 'GET 10 FREE<br class="inline md:hidden"> BONUSES WORTH $1228.94'--}}
-{{--    ])--}}
+    @include('_partials.layout.holiday.homepage-top-banner',[
+        'text' => 'GET 10 FREE<br class="inline md:hidden"> BONUSES WORTH $1228.94'
+    ])
 @endsection
 
 @section('promo-banner')
@@ -60,9 +60,9 @@
 @endsection
 
 @section('sticky-bar')
-{{--    @include('_partials.layout.holiday.homepage-sticky-bar', [--}}
-{{--        'text' => 'GET 10 FREE BONUSES <br> WORTH $1228.94'--}}
-{{--    ])--}}
+    @include('_partials.layout.holiday.homepage-sticky-bar', [
+        'text' => 'GET 5 FREE BONUSES <br> WORTH $538'
+    ])
 
 {{--    <div class="h-10 relative w-full block" style="background-color:#000;background-image:url('https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://singeo.s3.amazonaws.com/sales/promos/september/promo_bg.jpg'); background-size:cover;"></div>--}}
 {{--    <a--}}

@@ -93,9 +93,9 @@
 @endsection
 
 @section('top-promo-bar')
-{{--    @include('_partials.layout.holiday.homepage-top-banner',[--}}
-{{--        'text' => 'GET 10 FREE<br class="inline md:hidden"> BONUSES WORTH $1228.94'--}}
-{{--    ])--}}
+    @include('_partials.layout.holiday.homepage-top-banner',[
+        'text' => 'GET 6 FREE BONUSES WORTH $924'
+    ])
 @endsection
 
 @section('promo-banner')
@@ -159,9 +159,9 @@
 @endsection
 
 @section('sticky-bar')
-{{--    @include('_partials.layout.holiday.homepage-sticky-bar', [--}}
-{{--        'text' => 'GET 10 FREE BONUSES <br> WORTH $1228.94'--}}
-{{--    ])--}}
+    @include('_partials.layout.holiday.homepage-sticky-bar', [
+        'text' => 'GET 6 FREE BONUSES <br> WORTH $924'
+    ])
 
 {{--   <div class="h-10 relative w-full block"></div>--}}
 {{--   <a href="#customize-anchor" --}}{{--style="background-image:url(https://cdn.musora.com/image/fetch/w_1000,q_auto:best/https://guitareo.s3.amazonaws.com/sales/promos/september/sticky_bar.jpg)"--}}

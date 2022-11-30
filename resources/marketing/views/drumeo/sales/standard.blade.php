@@ -7,9 +7,9 @@
 @endsection
 
 @section('promo-banner-alt')
-{{--    @include('_partials.layout.holiday.homepage-top-banner',[--}}
-{{--        'text' => 'GET 10 FREE<br class="inline md:hidden"> BONUSES WORTH $1228.94'--}}
-{{--    ])--}}
+    @include('_partials.layout.holiday.homepage-top-banner',[
+        'text' => 'GET 5 FREE BONUSES WORTH $538'
+    ])
 @endsection
 
 @section('promo-banner')
@@ -77,9 +77,9 @@
 @endsection
 
 @section('sticky-bar')
-{{--    @include('_partials.layout.holiday.homepage-sticky-bar', [--}}
-{{--        'text' => 'GET 10 FREE BONUSES <br> WORTH $1228.94'--}}
-{{--    ])--}}
+    @include('_partials.layout.holiday.homepage-sticky-bar', [
+        'text' => 'GET 10 FREE BONUSES <br> WORTH $1228.94'
+    ])
 
     {{--<div class="h-10 relative w-full block" style="background:linear-gradient(to bottom, #022040, #01050f);"></div>--}}
     {{--<a href="#customize-anchor" style="background:linear-gradient(to bottom, #022040, #01050f);"--}}

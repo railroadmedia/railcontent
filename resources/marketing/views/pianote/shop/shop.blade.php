@@ -153,11 +153,11 @@
     <header class="shop-header" style="background-image:url(https://pianote.s3.amazonaws.com/shop/header-background.jpg);">
         <div class="container mx-auto clearfix">
             <div class="float-left px-2 md:px-3 w-full">
-{{--                @include('_partials.layout.holiday.shop-page-banner',[--}}
-{{--                    'text' => 'Save up to <span class="text-promo">83%</span> on lessons,<br class="inline md:hidden"> accessories, and merch.'--}}
-{{--                ])--}}
-                <img class="logo" src="https://pianote.s3.amazonaws.com/shop/pianote-shop-logo.png" alt="pianote logo">
-                <h3 style="margin-top: 20px;">GET LESSONS, MERCH, <br class="inline md:hidden"> GEAR & MORE!</h3>
+                @include('_partials.layout.holiday.shop-page-banner',[
+                    'text' => 'Save up to 83% on lessons,<br class="inline md:hidden"> accessories, and merch.'
+                ])
+{{--                <img class="logo" src="https://pianote.s3.amazonaws.com/shop/pianote-shop-logo.png" alt="pianote logo">--}}
+{{--                <h3 style="margin-top: 20px;">GET LESSONS, MERCH, <br class="inline md:hidden"> GEAR & MORE!</h3>--}}
             </div>
         </div>
     </header>

@@ -198,12 +198,12 @@
     <header class="drum-shop-header" style="background-image:url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/header-background.jpg);">
         <div class="container mx-auto">
             <div class="px-2 md:px-3">
-{{--                @include('_partials.layout.holiday.shop-page-banner',[--}}
-{{--                    'text' => 'Save up to <span class="text-promo">74%</span> on lessons, accessories, and merch.'--}}
-{{--                ])--}}
-                <img class="h-6 md:h-9" src="https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="drumeo logo">
-                <h1><strong>DRUM SHOP</strong></h1>
-                <p>GET LESSONS, MERCH, GEAR, & MUCH MORE</p>
+                @include('_partials.layout.holiday.shop-page-banner',[
+                    'text' => 'Save up to 81% on lessons,<br class="inline md:hidden"> accessories, and merch.'
+                ])
+{{--                <img class="h-6 md:h-9" src="https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="drumeo logo">--}}
+{{--                <h1><strong>DRUM SHOP</strong></h1>--}}
+{{--                <p>GET LESSONS, MERCH, GEAR, & MUCH MORE</p>--}}
             </div>
         </div>
     </header>
