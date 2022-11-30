@@ -9,7 +9,7 @@ class SalesController extends BaseController
 {
     public function home()
     {
-        return view('pianote.sales.standard');
+        return view('pianote.sales.standard', [ 'theme' => 'pianote' ]);
     }
 
     public function jesusMolina()

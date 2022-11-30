@@ -244,7 +244,7 @@ class SalesController extends BaseController
         $products = $this->productRepository->all();
         $products = array_combine(array_entity_column($products, 'getSku'), $products);
 
-        return view('drumeo.sales.standard', ['products' => $products]);
+        return view('drumeo.sales.standard', ['products' => $products, 'theme' => 'drumeo']);
     }
     public function salesStudents()
     {

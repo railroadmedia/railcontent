@@ -9,6 +9,6 @@ class SalesController extends BaseController
 {
     public function home()
     {
-        return view('singeo.sales.standard');
+        return view('singeo.sales.standard', [ 'theme' => 'singeo' ]);
     }
 }

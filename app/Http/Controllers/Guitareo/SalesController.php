@@ -9,7 +9,7 @@ class SalesController extends BaseController
 {
     public function home()
     {
-        return view('guitareo.sales.standard');
+        return view('guitareo.sales.standard', [ 'theme' => 'guitareo' ]);
     }
 
     public function membership()
