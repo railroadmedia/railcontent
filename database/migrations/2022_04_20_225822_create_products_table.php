@@ -32,6 +32,7 @@ return new class extends Migration
             $table->string('page_logo')->nullable();
             $table->decimal('price',8,2);
             $table->decimal('discounted_price',8,2)->nullable();
+            $table->string('spread_img')->nullable();
             $table->longText('overview')->nullable();
             $table->string('study_text')->nullable();
             $table->string('video_src')->nullable();
