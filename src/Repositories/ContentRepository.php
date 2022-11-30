@@ -2327,7 +2327,9 @@ class ContentRepository extends RepositoryBase
             $filterOptionsArray[$filterOption] = [];
         }
 
+        // todo: this needs to be made much more efficient
         $contentRows = $contentQueryBuilder->get();
+        
         foreach ($contentRows as $contentRowIndex => $contentRow) {
             $contentRowCompiledColumnValues = json_decode($contentRow['compiled_view_data'] ?? '', true);
             foreach ($filterOptionsArray as $filterOptionName => $filterOptionValue) {
