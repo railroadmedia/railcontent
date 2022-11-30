@@ -52,6 +52,15 @@ module.exports = {
         '.bg-musora': {
           background: 'linear-gradient(20deg,#03c8ac, #0976db, #9a01ee, #f61a30)',
         },
+        // '.bg-promo': {
+        //     backgroundColor: '#ab000d',
+        // },
+        // '.text-promo': {
+        //     color: '#ab000d',
+        // },
+        // '.border-promo': {
+        //     borderColor: '#ab000d',
+        // },
         '.font-bebas': {
           fontFamily: '"Bebas Neue", sans-serif'
         },

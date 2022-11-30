@@ -46,6 +46,11 @@
         ])
     @endif
 
+    @yield('promo-banner-alt')
+
+    <div class="sticky-trigger block"></div>
+    @yield('sticky-bar')
+
     <header class="header text-white relative overflow-hidden z-10" style="background-color:#011434;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center md:text-left">
             <div class="container mx-auto max-w-6xl">
@@ -67,7 +72,6 @@
         <video class="object-cover w-full h-full relative z-0" poster="https://i.vimeocdn.com/video/1246906562-a88c36cebb94874513441385c9c4d9b65b02c8537aae511ff4a872e1c5cad6ec-d_720" src="https://dpwjbsxqtam5n.cloudfront.net/sales/header-compress.mp4" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
     </header>
 
-    @yield('sticky-bar')
 
     <section class="px-2 lg:px-4 py-10 md:py-14 md:py-20 text-white text-center overflow-hidden" style="background:linear-gradient(to bottom, #01050f 60%, #021124);">
         <div class="container mx-auto max-w-6xl">
@@ -145,7 +149,6 @@
 
     <div id="promo" class="anchor"></div>
     @yield('promo-banner')
-    <div class="sticky-trigger block"></div>
 
     {{--<section class="content-section text-center px-4 lg:px-5" style="background:linear-gradient(to bottom, #01050f 60%, #021124);">--}}
         {{--<div class="container mx-auto max-w-6xl">--}}

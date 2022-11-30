@@ -34,6 +34,9 @@
 
     @yield('top-promo-bar')
 
+    <div class="sticky-trigger block"></div>
+    @yield('sticky-bar')
+
     @hasSection('header')
         @yield('header')
     @else
@@ -67,9 +70,6 @@
             </div>
         </header>
     @endif
-
-    @yield('sticky-bar')
-    <div class="sticky-trigger block"></div>
 
     <section class="px-2 lg:px-4 py-10 md:py-14 md:py-20 text-white text-center overflow-hidden" style="background:linear-gradient(to bottom, #01050f 60%, #021124);">
         <div class="container mx-auto max-w-6xl">

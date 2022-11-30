@@ -75,6 +75,11 @@
                     ])
                 @endif
 
+                    @if($product->productType->name === 'Bundles')
+                        <h3 class="text-center mb-4"><strong>What's included:</strong></h3>
+                        <img src="@if(str_contains($product->spread_img, 'amazonaws') || str_contains($product->spread_img, 'cloudfront')) {{$product->spread_img}} @else https://laravel-nova.s3.us-east-2.amazonaws.com/{{ $product->spread_img  }}@endif" alt="bundle spread image" />
+                    @endif
+
                 @if(!empty($product->overview))
                     @include('musora.product.partials.overview',[
                         "overview" => $product->overview,

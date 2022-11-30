@@ -92,6 +92,12 @@
     @parent
 @endsection
 
+@section('top-promo-bar')
+{{--    @include('_partials.layout.holiday.homepage-top-banner',[--}}
+{{--        'text' => 'GET 10 FREE<br class="inline md:hidden"> BONUSES WORTH $1228.94'--}}
+{{--    ])--}}
+@endsection
+
 @section('promo-banner')
     <section class="py-10 md:py-20 px-2 lg:px-4 text-white text-center bg-center bg-cover bg-no-repeat" style="background-color:#03242b;background-image:url('https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/footer.jpg')">
         <div class="max-w-2xl mx-auto">
@@ -153,6 +159,10 @@
 @endsection
 
 @section('sticky-bar')
+{{--    @include('_partials.layout.holiday.homepage-sticky-bar', [--}}
+{{--        'text' => 'GET 10 FREE BONUSES <br> WORTH $1228.94'--}}
+{{--    ])--}}
+
 {{--   <div class="h-10 relative w-full block"></div>--}}
 {{--   <a href="#customize-anchor" --}}{{--style="background-image:url(https://cdn.musora.com/image/fetch/w_1000,q_auto:best/https://guitareo.s3.amazonaws.com/sales/promos/september/sticky_bar.jpg)"--}}
 {{--           class="anchor-slide promo-banner block text-center w-full transition-opacity duration-300 overflow-hidden whitespace-nowrap bg-cover bg-center shadow-md z-0 mx-auto -mt-10 text-xs">--}}

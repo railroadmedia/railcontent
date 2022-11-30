@@ -1,3 +1,32 @@
+@php
+    $bundles = [
+        [
+            'slug' => '/drumshop/bundle-ultimate-lessons',
+            'badgeText' => 'FREE QUIETPAD & DRUMSTICKS',
+            'img' => 'https://drumeo-assets.s3.amazonaws.com/promos/november/ultimate-lessons-shop-2.jpg',
+            'title' => 'Drumeo Membership<br> + 10 Bonuses',
+            'desc' => 'Drumeo Annual Membership<br class="inline md:hidden lg:inline"> + Practice Pad + Sticks + 8 Training Packs',
+            'price' => 1468.94,
+            'discountedPrice' => Prices::$drumeoEdgeAnnual,
+            'priceColor' => 'linear-gradient(to bottom, #04afec, #213472)',
+            'buttonColor' => 'linear-gradient(to bottom, #04afec, #213472)',
+            'visible' => 1,
+        ],
+        [
+            'slug' => '/drumshop/bundle-perfect-gift',
+            'badgeText' => 'FREE P4 & DRUMSTICKS',
+            'img' => 'https://drumeo-assets.s3.amazonaws.com/promos/november/perfect-gift-fb-share-image.jpg',
+            'title' => 'Drumeo Access Card<br> + 2 Bonuses',
+            'desc' => 'Drumeo Access Card<br class="inline md:hidden lg:inline"> + Practice Pad + Sticks',
+            'price' => 331.95,
+            'discountedPrice' => Prices::$drumeoEdgeAnnual,
+            'priceColor' => 'linear-gradient(to bottom, #01fdc0, #289077)',
+            'buttonColor' => 'linear-gradient(to bottom, #01fdc0, #289077)',
+            'visible' => 1,
+        ],
+    ];
+@endphp
+
 @extends('drumeo._partials.layout-template')
 
 @section('global-head')
@@ -154,33 +183,14 @@
     <div class="shipping-delay">
         <div class="delay-bar text-center">
             <div class="container mx-auto">
-                <p><a class="shipping-trigger"><i class="fas fa-truck"></i> <strong>FREE SHIPPING OVER $100</strong></a> &nbsp; &nbsp;
-                    <a class="timing-trigger"><i class="fas fa-clock"></i> <strong>SHIPPING TIMELINES & SAFETY</strong></a></p>
+                <p><a class="shipping-trigger"><i class="fas fa-truck"></i> <strong>FREE SHIPPING OVER $100</strong></a></p>
             </div>
         </div>
-
         <div class="delay-overlay">
             <div class="info-wrap shipping-info" >
                 <i class="fas fa-times close-modal"></i>
                 <h3><strong>Free Shipping Over $100</strong></h3>
                 <p>Spend over $100 and you'll unlock free worldwide shipping on any order.</p>
-            </div>
-            <div class="info-wrap timing-info" >
-                <i class="fas fa-times close-modal"></i>
-                <h3><strong>Shipping Timelines & Safety</strong></h3>
-                <p>In these unprecedented and challenging times, we are doing our best to support drummers with online lessons and practice tools while staying committed to the safety and wellbeing of our team: encouraging staff to work from home and practice social distancing.
-                    <br><br>
-                    Right now there are two ways the COVID-19 crisis might impact your Drumeo order:</p>
-                <ul>
-                    <li><strong>Shipping Delays:</strong> There are shipping delays worldwide and shipping challenges in some countries. During checkout for any physical goods, if your location is experiencing a shipping suspension due to COVID-19, we’ve added red text to notify you of this impact. However, even if you don’t see this warning, we cannot ensure typical shipping timelines due to delays that are outside of our control.</li>
-                    <li><strong>Support Requests:</strong> With more drummers staying at home, there are more people practicing than ever before. And we’re SO excited about this! However, this also means we’re getting more requests for personalized lesson plans, student reviews, technology questions, and transactional questions. We’re continuing to help you the best we can, but please be patient if you experience any delays. (Our typical response time is within less than one hour during business hours.)</li>
-                </ul>
-                <p style="margin-bottom: 0;">We thank you for your patience and understanding. We wouldn’t exist without you, our students, and we’re so thankful for your continued support.
-                    <br><br>
-                    To Your Drumming Success,
-                    <br>
-                    - Jared Falk<br><br>
-                    <strong>Have questions?</strong> <a target="_blank" class="text-drumeo" href="https://help.drumeo.com/"><u>Click here for our FAQs and answers.</u></a></p>
             </div>
         </div>
     </div>
@@ -188,7 +198,10 @@
     <header class="drum-shop-header" style="background-image:url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/header-background.jpg);">
         <div class="container mx-auto">
             <div class="px-2 md:px-3">
-                <img class="h-6 md:h-9" src="https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png">
+{{--                @include('_partials.layout.holiday.shop-page-banner',[--}}
+{{--                    'text' => 'Save up to <span class="text-promo">74%</span> on lessons, accessories, and merch.'--}}
+{{--                ])--}}
+                <img class="h-6 md:h-9" src="https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="drumeo logo">
                 <h1><strong>DRUM SHOP</strong></h1>
                 <p>GET LESSONS, MERCH, GEAR, & MUCH MORE</p>
             </div>
@@ -255,6 +268,8 @@
 
     {{--  LESSONS  --}}
     <div class="white-box">
+        @include('_partials.layout.holiday.bundle-cards')
+
         <section class="grid-view category-section" data-category="lessons" x-show="filter === 'lessons' || filter === 'all'">
             <ul class="container mx-auto fixed-cards">
                 <li>

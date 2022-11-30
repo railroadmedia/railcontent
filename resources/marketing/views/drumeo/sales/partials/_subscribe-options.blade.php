@@ -1,4 +1,8 @@
 <div id="customize-anchor" class="anchor anchor-slide"></div>
+{{--@include('drumeo.sales.partials._subscribe-bonus-list-alt')--}}
+{{--@include('_partials.layout.holiday.homepage-bottom-banner',[--}}
+{{--    'text' => '<strong class="text-promo">Save up to 81%</strong> on lessons,<br class="inline md:hidden"> accessories, and merch.'--}}
+{{--])--}}
 
 @if(!empty($membersArea))
     @section('styles')

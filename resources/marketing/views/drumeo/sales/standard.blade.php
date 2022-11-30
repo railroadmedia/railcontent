@@ -6,6 +6,12 @@
     <meta property="og:url" content="https://www.drumeo.com/">
 @endsection
 
+@section('promo-banner-alt')
+{{--    @include('_partials.layout.holiday.homepage-top-banner',[--}}
+{{--        'text' => 'GET 10 FREE<br class="inline md:hidden"> BONUSES WORTH $1228.94'--}}
+{{--    ])--}}
+@endsection
+
 @section('promo-banner')
 {{--    <section class="text-white text-center relative z-10 overflow-hidden px-4 md:px-3 lg:px-5 md:px-8 py-8 md:py-14 bg-cover bg-top lazyload" style="background-color:#040811;" data-bg="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/september/bg.jpg" --}}{{--style="background:radial-gradient(#022040, #01050f 80%);"--}}{{-->--}}
 {{--        <div class="container mx-auto relative z-10 max-w-4xl">--}}
@@ -71,6 +77,9 @@
 @endsection
 
 @section('sticky-bar')
+{{--    @include('_partials.layout.holiday.homepage-sticky-bar', [--}}
+{{--        'text' => 'GET 10 FREE BONUSES <br> WORTH $1228.94'--}}
+{{--    ])--}}
 
     {{--<div class="h-10 relative w-full block" style="background:linear-gradient(to bottom, #022040, #01050f);"></div>--}}
     {{--<a href="#customize-anchor" style="background:linear-gradient(to bottom, #022040, #01050f);"--}}

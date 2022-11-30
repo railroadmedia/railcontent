@@ -9,6 +9,12 @@
     {{ App\Analytics\Tracker::trackProductDetailsImpression('PIANOTE-MEMBERSHIP-1-YEAR') }}
 @endsection
 
+@section('top-promo-bar')
+{{--    @include('_partials.layout.holiday.homepage-top-banner',[--}}
+{{--        'text' => 'GET 10 FREE<br class="inline md:hidden"> BONUSES WORTH $1228.94'--}}
+{{--    ])--}}
+@endsection
+
 @section('promo-banner')
 {{--    <section class="bg-center bg-cover bg-no-repeat pt-12 md:pt-20" style="background-image: url('https://pianote.s3.amazonaws.com/sales/promos/piano-month/practice_better_promo_bg.png');">--}}
 {{--        <div class="container max-w-md md:max-w-3xl lg:max-w-4xl mx-auto text-white px-6 lg:px-0">--}}
@@ -44,6 +50,10 @@
 @endsection
 
 @section('sticky-bar')
+{{--    @include('_partials.layout.holiday.homepage-sticky-bar', [--}}
+{{--        'text' => 'GET 10 FREE BONUSES <br> WORTH $1228.94'--}}
+{{--    ])--}}
+
 {{--   <div class="h-10 w-full block" style="background:linear-gradient(140deg, #fff, #fd5257);"></div>--}}
 {{--   <a href="#orderNow" style="background:linear-gradient(140deg, #fff, #fd5257);"--}}
 {{--       class="promo-banner anchor-slide block text-center w-full transition-opacity duration-300 overflow-hidden whitespace-nowrap--}}{{--text-white--}}{{----}}{{-- bg-cover bg-center shadow-md py-1 --}}{{----}}{{--hover:text-gray-100--}}{{--z-0 mx-auto -mt-10 text-xs py-2">--}}

@@ -10,9 +10,8 @@
     <div class="lg:h-0">
     <div id="order" class="anchor"></div>
     <div class="side-slide md:border md:border-solid md:rounded-md" style="border-color: #CCD3D3;">
-        {{--<div class="promo-tab hidden hidden lg:block lg:block text-center text-center py-2 px-3 py-2 px-3" style="position:relative;background: linear-gradient(to bottom, #dfeef2, #f9e4d3);">--}}
-            {{--<img class="w-auto max-h-12 max-h-12" src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/july/pianote-summer-sale-dark.png">--}}
-        {{--</div>--}}
+{{--        @include('_partials.layout.holiday.shop-sidebar-banner')--}}
+
         <div class="pt-2 px-5 pb-6 text-center md:py-6 md:px-4">
             @if(!empty($instructor))
                 <p class="text-center text-sm uppercase mx-auto mb-1 hidden lg:inline"><em>{{ $instructor }}</em></p>

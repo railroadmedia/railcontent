@@ -602,6 +602,9 @@
 
     @yield('top-promo-bar')
 
+    <div class="sticky-trigger block"></div>
+    @yield('sticky-bar')
+
     <header class="header text-white relative overflow-hidden" style="background-color:#1a0239;">
         <div class="transform -translate-y-1/2 top-3/4 md:top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center md:text-left">
             <div class="container mx-auto max-w-6xl">
@@ -626,9 +629,6 @@
             <div class="top-0 left-0 absolute w-full h-full z-10 block md:hidden" style="background: linear-gradient(to bottom, transparent 35%, #1a0239);"></div>
         </div>
     </header>
-
-    @yield('sticky-bar')
-    <div class="sticky-trigger block"></div>
 
     <section class="px-2 lg:px-4 py-10 md:py-14 md:py-20 text-white text-center overflow-hidden" style="background:linear-gradient(to bottom, #01050f 60%, #021124);">
         <div class="container mx-auto max-w-6xl">

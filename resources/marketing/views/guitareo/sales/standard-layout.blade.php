@@ -81,6 +81,9 @@
 
     @yield('top-promo-bar')
 
+    <div class="sticky-trigger block"></div>
+    @yield('sticky-bar')
+
     <header class="header text-white relative overflow-hidden" style="background-color:#032829;">
         <div class="transform -translate-y-1/2 top-3/4 md:top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center md:text-left">
             <div class="container mx-auto max-w-6xl">
@@ -109,7 +112,7 @@
         </div>
     </header>
 
-    @yield('sticky-bar')
+
 
     <section class="px-2 lg:px-4 py-10 md:py-14 md:py-20 text-white text-center overflow-hidden" style="background:linear-gradient(to bottom, #01050f 60%, #021124);">
         <div class="container mx-auto max-w-6xl">
@@ -172,7 +175,7 @@
 
     <div id="promo" class="anchor"></div>
     @yield('promo-banner')
-    <div class="sticky-trigger block"></div>
+
     @php
         $coaches = [
             [

@@ -10,9 +10,7 @@
     <div class="lg:h-0">
     <div id="order" class="anchor"></div>
     <div class="side-slide overflow-hidden md:rounded md:border md:border-solid" style="border-color: #CCD3D3;">
-        {{--<div class="promo-tab hidden lg:block text-center py-2 px-3" style="position:relative;background:#ddf7ff center center/450px;">--}}
-            {{--<img class="w-auto max-h-12" src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/july/drumeo-summer-sale-dark.png">--}}
-        {{--</div>--}}
+{{--        @include('_partials.layout.holiday.shop-sidebar-banner')--}}
 
         <div class="buy-section active px-5 pt-2 pb-6 text-center lg:py-6">
             @if(!empty($instructor))

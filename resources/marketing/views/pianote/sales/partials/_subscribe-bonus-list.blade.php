@@ -1,5 +1,9 @@
 @php $annualLink = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[pianote-practice-planner]=1&products[100-days-of-practice-poster]=1&products[poster-chords]=1&products[poster-scales]=1&products[the-power-of-chords]=1&products[faster-fingers]=1&locked=true&redirect=/order' @endphp
 
+{{--@include('_partials.layout.holiday.homepage-bottom-banner',[--}}
+{{--    'text' => '<strong class="text-promo">Save up to 81%</strong> on lessons,<br class="inline md:hidden"> accessories, and merch.'--}}
+{{--])--}}
+
 <section class="content-section text-center customize relative z-50 overflow-hidden" style="background: linear-gradient(to bottom, #01050f 40%, #021022); padding: 0 !important;">
     <div class="bg-black text-center pt-12 md:pt-16 pb-2">
         <img class="h-10 md:h-16 mx-auto" src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://pianote.s3.amazonaws.com/logo/pianote-logo-red.png">

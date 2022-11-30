@@ -183,6 +183,9 @@
     <header class="drum-shop-header" style="background-color:#080e1e;background-image:url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://singeo.s3.amazonaws.com/products/shop-header.jpg);">
         <div class="container mx-auto">
             <div class="px-2 md:px-3">
+{{--                @include('_partials.layout.holiday.shop-page-banner',[--}}
+{{--                    'text' => 'Save up to <span class="text-promo">83%</span> on lessons,<br class="inline md:hidden"> accessories, and merch.'--}}
+{{--                ])--}}
                 <img class="logo" src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png">
                 <h1><strong>SHOP</strong></h1>
                 <p>GET LESSONS, MERCH, GEAR, & MUCH MORE</p>
@@ -333,7 +336,7 @@
     <script src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/singeo/nav-footer.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/jquery.countdown-2.min.js') }}"></script>
-    
+
     <script>
         $(document).ready(function () {
             $(function () {

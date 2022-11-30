@@ -1,6 +1,6 @@
 @php $annualLink = '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&locked=true&redirect=/order' @endphp
 {{--&products[piano-chords-and-scales-guide]=1&products[100-days-of-practice-poster]=1&products[poster-chords]=1&products[poster-scales]=1&products[pianote-practice-planner]=1--}}
-
+<div id="customize-anchor" class="anchor"></div>
 <section class="content-section text-center customize relative z-50 overflow-hidden" style="background: linear-gradient(to bottom, #01050f 40%, #02152a);">
     <div class="container mx-auto">
         <img class="h-10 md:h-16 mx-auto" src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://pianote.s3.amazonaws.com/logo/pianote-logo-red.png">

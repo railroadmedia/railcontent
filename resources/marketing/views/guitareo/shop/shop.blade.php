@@ -77,7 +77,7 @@
     <script src="/marketing/js/jquery.countdown-2.min.js"></script>
     {{-- Platform --}}
     <script src="{{ mix('/platform/js/manifest.js') }}"></script>
-    <script src="{{ mix('/platform/js/vendor.js') }}"></script>    
+    <script src="{{ mix('/platform/js/vendor.js') }}"></script>
     <script src="{{ mix('/platform/js/app.js') }}"></script>
     <script>
         $(document).ready(function () {
@@ -182,9 +182,12 @@
     <header class="drum-shop-header" style="background-color:#080e1e;background-image:url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://guitareo.s3.amazonaws.com/sales/promos/black-friday/shop-bg.jpg);">
         <div class="container mx-auto">
             <div class="px-2 md:px-3">
+{{--                @include('_partials.layout.holiday.shop-page-banner',[--}}
+{{--                    'text' => 'Save up to <span class="text-promo">83%</span> on lessons,<br class="inline md:hidden"> accessories, and merch.'--}}
+{{--                ])--}}
                 <img class="logo" src="https://guitareo.s3.amazonaws.com/sales/guitareo-logo-green.png">
                 <h1><strong>SHOP</strong></h1>
-                {{--<p>GET LESSONS, MERCH, GEAR, & MUCH MORE</p>--}}
+{{--                <p>GET LESSONS, MERCH, GEAR, & MUCH MORE</p>--}}
             </div>
         </div>
     </header>

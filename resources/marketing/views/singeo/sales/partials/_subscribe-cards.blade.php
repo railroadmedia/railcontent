@@ -1,5 +1,9 @@
 @php $annualLink = '/ecommerce/add-to-cart?products[singeo-annual-recurring-membership]=1&locked=true&redirect=/order' @endphp
 
+{{--@include('_partials.layout.holiday.homepage-bottom-banner',[--}}
+{{--    'text' => '<strong class="text-promo">Save up to 81%</strong> on lessons,<br class="inline md:hidden"> accessories, and merch.'--}}
+{{--])--}}
+
 <section class="content-section text-center customize relative z-50 overflow-hidden" style="background: #01050f;">
     <div class="container mx-auto relative z-50">
         <div class="horizontal-bonuses mx-auto max-w-xs sm:max-w-md md:max-w-xl lg:max-w-4xl" style="font-size: 0;">
