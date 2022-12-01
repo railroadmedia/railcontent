@@ -60,6 +60,7 @@ class ContentRepository extends RepositoryBase
 
     public static $getFutureContentOnly = false;
     public static $getFollowedContentOnly = false;
+    public static $getFutureSchdeduledContentOnly = false;
 
     private $page;
     private $limit;
@@ -1192,7 +1193,8 @@ class ContentRepository extends RepositoryBase
         array $slugHierarchy,
         array $requiredParentIds,
         $getFutureContentOnly = false,
-        $getFollowedContentOnly = false
+        $getFollowedContentOnly = false,
+        $getFutureSchdeduledContentOnly = false
     ) {
         $this->page = $page;
         $this->limit = $limit;
@@ -1204,6 +1206,8 @@ class ContentRepository extends RepositoryBase
 
         self::$getFutureContentOnly = $getFutureContentOnly;
         self::$getFollowedContentOnly = $getFollowedContentOnly;
+        self::$getFutureSchdeduledContentOnly = $getFutureSchdeduledContentOnly;
+        //todo: add here also!
 
         // reset all the filters for the new query
         $this->requiredFields = [];
@@ -1240,6 +1244,10 @@ class ContentRepository extends RepositoryBase
                 Carbon::now()
                     ->toDateTimeString()
             );
+        }
+
+        if (self::$getFutureSchdeduledContentOnly) {
+            $subQuery->where();
         }
 
         if (self::$getFollowedContentOnly) {

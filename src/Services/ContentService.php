@@ -894,7 +894,8 @@ class ContentService
         $pullFilterFields = true,
         $getFutureContentOnly = false,
         $pullPagination = true,
-        $getFollowedContentOnly = false
+        $getFollowedContentOnly = false,
+        $getFutureSchdeduledContentOnly = false
     ) {
         $results = null;
         if ($limit == 'null') {
@@ -917,10 +918,12 @@ class ContentService
                 implode(' ', array_values($requiredUserStates) ?? ''),
                 implode(' ', array_values($includedUserStates) ?? ''),
                 ContentRepository::$bypassPermissions,
-                $getFollowedContentOnly
+                $getFollowedContentOnly,
             );
 
         $cache = CacheHelper::getCachedResultsForKey($hash);
+
+        $cache = null; //todo: to be deleted
 
         if ($cache) {
             $results = new ContentFilterResultsEntity($cache);
@@ -936,7 +939,8 @@ class ContentService
                 $slugHierarchy,
                 $requiredParentIds,
                 $getFutureContentOnly,
-                $getFollowedContentOnly
+                $getFollowedContentOnly,
+                $getFutureSchdeduledContentOnly
             );
 
             foreach ($requiredFields as $requiredField) {

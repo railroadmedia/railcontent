@@ -9,6 +9,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
+use Railroad\Railcontent\Services\ContentService;
 
 class ContentQueryBuilder extends QueryBuilder
 {
@@ -189,7 +190,22 @@ class ContentQueryBuilder extends QueryBuilder
     public function restrictStatuses()
     {
         if (is_array(ContentRepository::$availableContentStatues)) {
-            $this->whereIn(ConfigService::$tableContent.'.status', ContentRepository::$availableContentStatues);
+            if (in_array(ContentService::STATUS_SCHEDULED, ContentRepository::$availableContentStatues)) {
+//die("mircea-debug2");
+                $this->where(function (Builder $builder) {
+//                    $now =  Carbon::now()->toDateTimeString();
+
+                    return $builder->whereIn('status', ['published'])
+                    ->orWhere(function (Builder $builder) {
+                        return $builder->where('status', 'scheduled')
+                            ->orWhere('published_on', '>', Carbon::now()->toDateTimeString());
+                    });
+                });
+            } else {
+//            var_dump("mircea-debug1");
+//            dd(ContentRepository::$availableContentStatues);
+            $this->whereIn(ConfigService::$tableContent . '.status', ContentRepository::$availableContentStatues);
+             }
         }
 
         return $this;
