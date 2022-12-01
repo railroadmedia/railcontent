@@ -1209,7 +1209,7 @@ class ContentService
                                                    'status' => $status ?? self::STATUS_DRAFT,
                                                    'language' => $language ?? ConfigService::$defaultLanguage,
                                                    'brand' => $brand ?? ConfigService::$brand,
-                                                   'instrumentless' => ($type === 'song') ? false : null,
+//                                                   'instrumentless' => ($type === 'song') ? false : null,
                                                    'total_xp' => $this->getDefaultXP($type, 0),
                                                    'user_id' => $userId,
                                                    'published_on' => $publishedOn,
