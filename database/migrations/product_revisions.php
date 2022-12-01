@@ -13,7 +13,7 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('product_revisions', function (Blueprint $table) {
+        Schema::create('revisions', function (Blueprint $table) {
             $table->id();
             $table->string('key');
             $table->integer('revisionable_id');
