@@ -7,7 +7,6 @@ Route::domain('{guitareoDomain}')
     ->middleware(['web_public'])
     ->group(function () {
     Route::get('/', [SalesController::class, 'home']);
-    Route::get('/survival-kit-instructions', [SalesController::class, 'membership']);
     Route::get('/student-only', [SalesController::class, 'membershipStudents']);
     Route::get('/trial', [SalesController::class, 'trial']);
     Route::get('/trial-month', [SalesController::class, 'trial30']);
@@ -30,6 +29,9 @@ Route::domain('{guitareoDomain}')
     Route::get('/welcome/2', function () { return view('guitareo.sales.pages.welcome-2'); });
     Route::get('/welcome/3', function () { return view('guitareo.sales.pages.welcome-3'); });
     Route::get('/ayla-recommends', function () { return view('guitareo.shop.ayla-recommends'); });
+
+    Route::get('/survival-kit', function () { return view('shop.pages.survival-kit'); });
+    Route::get('/survival-kit-instructions', function () { return view('shop.pages.survival-kit-tutorial'); });
 
     Route::get('/shop/500-songs', [SalesController::class, 'songs500']);
     Route::get('/500-songs-discount', [SalesController::class, 'songs500Discount']);

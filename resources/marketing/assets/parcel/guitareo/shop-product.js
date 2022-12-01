@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(window).on("load", function (){
     // Setup Slick slider
     $('.slider-for').slick({
         slidesToShow: 1,
@@ -24,7 +24,7 @@ $(document).ready(function(){
     });
 
     if($('#videoPlayer').length) {
-        $('.slider-for').on('afterChange', function () {
+        $('.slider-for').on('afterChange', function (event, slick, currentSlide, nextSlide) {
             var iframe = $('#videoPlayer')
             var src = $('#videoSrc').get(0).innerText
             if(iframe.attr('src')){
@@ -40,21 +40,21 @@ $(document).ready(function(){
     var originalLink = '/ecommerce/add-to-cart?redirect=/order';
 
     $('select').prop('selectedIndex', 0);
-    $('.pack-pick').change(function () {
-        var orderButton = $(this).parent().find('.selected-pack');
-        var selectedOption = $(this).find('option:selected');
+    $(".pack-pick").change(function () {
+        var orderButton = $(this).parent().find(".selected-pack");
+        var selectedOption = $(this).find("option:selected");
         $(this).removeClass('error');
         orderButton.addClass('active');
         orderButton.attr('href', originalLink);
-        orderButton.attr('href', orderButton.attr('href') + '&products[' + selectedOption.val() + ']=1');
+        orderButton.attr('href', orderButton.attr('href') + '&products[' + selectedOption.val() + ']=1' + '&redirect=/shop');
         orderButton.attr('data-product-json', selectedOption.attr('data-product-json'));
     });
 
-    $('.selected-pack').on('click', function (ev) {
+    $(".selected-pack").on('click', function (ev) {
         if (!$(this).hasClass('active')) {
             ev.preventDefault();
             ev.stopPropagation();
-            var selecter = $(this).parent().find('.pack-pick');
+            var selecter = $(this).parent().find(".pack-pick");
             selecter.addClass('error');
         }
     });
@@ -72,13 +72,13 @@ $(document).ready(function(){
         return false;
     }
 
-    var bodyWidth = window.innerWidth;
+    var bodyWidth = $(window).width();
     var slidingElm = $('.sliding-function .side-slide');
     var menuHeight = $('.top-bar').height();
     var topFixedSidebarBuffer = 15;
 
     $(window).resize(function () {
-        bodyWidth = window.innerWidth;
+        bodyWidth = $(window).width();
         $(slidingElm).removeClass('fixedSlider');
     });
 

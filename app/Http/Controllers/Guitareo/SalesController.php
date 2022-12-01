@@ -46,6 +46,11 @@ class SalesController extends BaseController
         return view('guitareo.products.acoustic-guitar-made-easy');
     }
 
+    public function lifetime()
+    {
+        return view('guitareo.sales.lifetime');
+    }
+
     public function guitarQuest()
     {
         return view('guitareo.products.guitar-quest.guitar-quest');

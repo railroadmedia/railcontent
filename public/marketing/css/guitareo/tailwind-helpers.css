@@ -1,3 +1,12 @@
+.bg-promo {
+    background-color:#df0032;
+}
+.text-promo {
+    color:#df0032;
+}
+.border-promo {
+    border-color:#df0032;
+}
 /*spacing*/
 .tw-aspect-1\:1,
 .aspect-1\:1 {

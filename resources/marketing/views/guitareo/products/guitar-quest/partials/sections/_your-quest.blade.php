@@ -16,8 +16,6 @@
                 <div class="text-white text-center my-4">
                     <p class="uppercase font-primary text-sm sm:text-base mb-4 leading-relaxed mx-auto">
                         <strong>{!! $dueDateText !!}
-                        <br>
-                            ONLY <span class="tzcd-small inline md:hidden">A LIMITED TIME</span> <span class="tzcd-full hidden md:inline">A LIMITED TIME</span> LEFT!</strong>
                     </p>
                 </div>
             @endif
