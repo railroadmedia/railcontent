@@ -71,7 +71,7 @@
                         </button>
                     </a>
                 @endif
-                @if($category === 'bundles')
+                @if($bundle)
                     <a class="online-atc" href="/ecommerce/add-to-cart?redirect=%2Forder&{{ $sku }}"
                             data-base-url="/ecommerce/add-to-cart?redirect=%2Forder&{{ $sku }}">
                         <button class="join green text-xl leading-none uppercase text-white w-full py-4 px-2 rounded-full border-0 mx-auto my-2 md:py-5 md:py-2 md:my-4 md:mx-auto hover:opacity-90"><i class="fas fa-cart-plus text-2xl mr-1"></i> Order Now</button>
