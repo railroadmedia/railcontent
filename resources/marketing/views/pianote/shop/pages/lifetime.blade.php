@@ -1,4 +1,4 @@
-@extends('shop.shop-page-layout')
+@extends('pianote.shop.shop-page-layout')
 
 @section('meta')
     @parent
@@ -279,26 +279,26 @@
 @endphp
 
 @section('nav')
-    @include('shop.partials._shop-nav', [
+    @include('pianote.shop._partials._shop-nav', [
         "name" => "The Lifetime Bundle",
     ])
 @endsection
 
 @section('top')
-    @include('shop.partials._slider', [
+    @include('pianote.shop._partials._slider', [
         "headerText" => "<strong>Lock in a lifetime of piano lessons!</strong>",
-        "videoUrl" => "//player.vimeo.com/video/774401520",
+        "videoSrc" => "//player.vimeo.com/video/774401520",
         "defaultCover" => "https://pianote.s3.amazonaws.com/sales/promos/november/unlimited-lessons-thumb.jpg",
         "noSlider" => true,
     ])
 
-    @include('shop.partials._sidebar', [
-        "bundle" => true,
+    @include('pianote.shop._partials._sidebar', [
+            "bundle" => true,
             "logo" => "https://drumeo-assets.s3.amazonaws.com/promos/november/lifetime-bundle-white.png",
             "invert" => true,
             "sku" => "products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[pianote-headphones]=1&products[piano-chords-and-scales-guide]=1&products[pianote-practice-planner]=1&products[christmas-song-book]=1&products[christmas-song-book-digital]=1&products[poster-chords]=1&products[poster-scales]=1&products[the-power-of-chords]=1&products[classical-piano]=1&products[jesus-molina-improvisation-and-musical-freedom-pack]=1&products[play-beautiful-piano]=1&products[piano-riffs-and-fills]=1&products[piano-technique-made-easy]=1&products[destupefy-your-left-hand]=1&products[worship-piano]=1&products[faster-fingers]=1&redirect=/order&locked=true",
-            "fullPrice" => App\Prices::$pianoteMembershipLifetimeFull,
-            "price" => App\Prices::$pianoteMembershipLifetime,
+            "fullPrice" => PianotePrices::$pianoteMembershipLifetimeFull,
+            "price" => PianotePrices::$pianoteMembershipLifetime,
             "specialText" => "+$1050 in FREE Bonuses",
             "soldOut" => true,
     ])
@@ -306,7 +306,7 @@
 
 
 @section('bottom')
-    <h3 class="tw-text-center" style="margin-bottom: 15px;"><strong>What's included:</strong></h3>
+    <h3 class="text-center" style="margin-bottom: 15px;"><strong>What's included:</strong></h3>
 {{--    <img src="https://pianote.s3.amazonaws.com/sales/promos/november/lifetime-bundle-spread.png">--}}
 {{--    <br><br>--}}
     <p>Two, maybe three times per year you get the chance to become a Pianote Lifetime Member.
@@ -316,12 +316,12 @@
         It’s not for everyone, but if you know the piano will be part of your life for the next 5 years (at least), then it makes so much sense. And when you get your Lifetime Membership, we’ll send you some amazing bonuses, including our <strong>NEW Pianote Concert Series over-ear headphones.</strong>
         <br><br>
         Payment plans are available, and you’ll have 90 days to try it risk-free.</p>
-    <hr class="tw-my-5">
+    <hr class="my-5">
 
     <p>
     <strong>Say hello to your free bonuses:</strong><br>
     <em style="opacity: 0.5;">All digital bonuses are added to your account instantly with your membership to Pianote and they’re yours forever!</em> </p>
 
-    @include('shop.partials._bonuses')
-    <a href="#order" class="anchor-slide join lg:tw-hidden">Jump To Top <i class="fas fa-angle-up"></i></a>
+    @include('pianote.shop._partials._bonuses')
+    <a href="#order" class="anchor-slide join lg:hidden">Jump To Top <i class="fas fa-angle-up"></i></a>
 @endsection
