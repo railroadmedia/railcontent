@@ -1,7 +1,7 @@
 <!-- Playlists -->
 <script setup>
 //Icons
-import { ref } from 'vue'
+import { computed } from 'vue'
 import MusoraIcon from '../MusoraIcons/MusoraIcon.vue'
 import { textColor, borderColor } from '../../../constants/brands.js'
 
@@ -13,11 +13,9 @@ const props = defineProps({
     userId: String,
 });
 
-const emit = defineEmits('onCreatePlaylist');
-
 // Format Playlist to add Url and filter it on mount
-const formattedPlaylists = ref(
-    props.playlists.map(
+const formattedPlaylists = computed(() => {
+    return props.playlists.map(
         ({ id, ...playlist }, index) => {
             if (index < 5) {
                 return ({
@@ -29,11 +27,10 @@ const formattedPlaylists = ref(
             }
         }
     ).filter(n => n)
-);
+});
 
 const handleCreatePlaylist = () => {
-    console.log('internal create')
-    emit('onCreatePlaylist');
+    window.openplaylistmodal({ modalType: 'create' });
 };
 </script>
 <template>
@@ -48,8 +45,7 @@ const handleCreatePlaylist = () => {
             </a>
 
             <!-- Create Playlist -->
-            <button
-                @click="handleCreatePlaylist"
+            <button @click="handleCreatePlaylist"
                 class="tw-inline-flex tw-items-center tw-flex-shrink-0 tw-justify-center tw-transition tw-h-full tw-w-[42px] tw-text-[#00101D] dark:tw-text-white dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
                 :class="[isSidebarCollapsed ? 'md:tw-opacity-0' : 'tw-opacity-100']" title="Create Playlist">
                 <musora-icon icon-name="plus" class="tw-w-[20px]" />
@@ -62,14 +58,16 @@ const handleCreatePlaylist = () => {
                 <ul class="tw-font-open-sans tw-text-[#00101D] dark:tw-text-white tw-text-[14px] tw-overflow-hidden"
                     v-if="formattedPlaylists.length > 0">
                     <!-- Loop through User Playlists -->
-                    <li class="tw-w-full tw-flex tw-flex-wrap tw-overflow-hidden" v-for="({ url, id, title }) in formattedPlaylists"
-                        :key="id + '-playlist-li'">
-                        <a :href="url" class="tw-flex tw-flex-wrap tw-px-[25px] tw-w-full tw-no-underline tw-text-inherit tw-py-[12px] dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]">
+                    <li class="tw-w-full tw-flex tw-flex-wrap tw-overflow-hidden"
+                        v-for="({ url, id, title }) in formattedPlaylists" :key="id + '-playlist-li'">
+                        <a :href="url"
+                            class="tw-flex tw-flex-wrap tw-px-[25px] tw-w-full tw-no-underline tw-text-inherit tw-py-[12px] dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]">
                             <span class="tw-min-w-0 tw-truncate">{{ title }}</span>
                         </a>
                     </li>
                     <li class="tw-flex tw-w-full tw-pt-[4px]" v-if="playlists.length > 5">
-                        <a class="hover:tw-underline tw-px-[25px] tw-py-[12px] tw-flex tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-[14px]" :href="`/playlists/all/${userId}`">See all</a>
+                        <a class="hover:tw-underline tw-px-[25px] tw-py-[12px] tw-flex tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-[14px]"
+                            :href="`/playlists/all/${userId}`">See all</a>
                     </li>
                 </ul>
 

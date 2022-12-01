@@ -4,7 +4,9 @@ export const usePlaylistsStore = defineStore({
   id: 'Playlists',
   state: () => ({
     playlists: [], // [{ id: '', title: '', isPinned: false}]
-    modalOpen: null,
+    modalOpen: {
+      modalType: null,
+    },
   }),
 
   actions: {
@@ -13,9 +15,15 @@ export const usePlaylistsStore = defineStore({
         playlists,
       });
     },
-    openModal({ modalType }) {
+    openModal(modalOpen) {
       this.$patch({
-        modalOpen: modalType,
+        modalOpen,
+      });
+    },
+    modalReset() {
+      console.log('reset called');
+      this.$patch({
+        modalType: null,
       });
     }
   },

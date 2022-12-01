@@ -1,5 +1,6 @@
 <script setup>
 import { ref, provide, onBeforeMount, onMounted, onUnmounted, onUpdated } from "vue";
+import { storeToRefs  } from 'pinia';
 import { useNotificationStore } from '../../../stores/notification';
 import { useConfirmationStore } from '../../../stores/confirmation';
 import { usePlaylistsStore } from '../../../stores/playlists';
@@ -11,6 +12,7 @@ import Footer from "../Footer/Footer.vue";
 // import { useRouter, useRoute } from "vue-router";
 import SpriteSheet from "../MusoraIcons/SpriteSheet.vue";
 import { setEndpointPrefix } from "../../utils"
+import PlaylistsModal from "../Playlists/PlaylistsModal.vue";
 
 const props = defineProps({
   brand: {
@@ -60,10 +62,12 @@ const props = defineProps({
 const notification = useNotificationStore();
 const confirmation = useConfirmationStore();
 const playlistsStore = usePlaylistsStore();
+const { modalOpen: playlistModalProps } = storeToRefs(playlistsStore);
 
 const isSidebarCollapsed = ref(false);
 const isSidebarHidden = ref(false);
 const isDarkModeSelected = ref(false);
+const isPlaylistModalOpen = ref(false);
 
 provide('isDarkModeSelected', isDarkModeSelected);
 provide('userAvatar', props.userAvatar);
@@ -165,6 +169,12 @@ onBeforeMount(() => {
     confirmation.update(n);
   };
 
+  // Attach pinia playlist modal to window
+  window.openplaylistmodal = (modalOpen) => {
+    playlistsStore.openModal(modalOpen);
+    isPlaylistModalOpen.value = true;
+  };
+
   // Initialize playlists pinia store
   playlistsStore.update({ playlists: props.playlists });
 });
@@ -176,7 +186,12 @@ const handleCloseConfirmationModal = () => {
 
 const handleNotificationClear = () => {
   notification.clear();
-};;
+};
+
+const handleClosePlaylistModal = () => {
+  playlistsStore.modalReset();
+  isPlaylistModalOpen.value = false;
+};
 
 const onResize = (e) => {
   const smallBreakpoint = window.matchMedia("(max-width: 1023px)");
@@ -195,6 +210,9 @@ onUnmounted(() => {
   window.removeEventListener("resize", onResize);
 })
 
+onUpdated(() => {
+  console.log(playlistsStore.modalOpen)
+});
 </script>
 
 <template>
@@ -211,6 +229,7 @@ onUnmounted(() => {
       @onCancel="handleCloseConfirmationModal"
       @onSubmit="confirmation.callbacks.submit"
     />
+    <PlaylistsModal @onClosePlaylistsModal="handleClosePlaylistModal" key="playlists-modal-key" v-if="isPlaylistModalOpen" :modalProps="playlistModalProps"></PlaylistsModal>
 
     <Navbar :forceSidebarHidden="forceSidebarHidden" :brand="brand" :has-notifications="hasNotifications"
       :user-name="userName" :userAvatar="userAvatar" :account-url="accountUrl" :isSidebarHidden="isSidebarHidden"

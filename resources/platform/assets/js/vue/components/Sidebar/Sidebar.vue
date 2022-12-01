@@ -30,6 +30,10 @@ const props = defineProps({
   forceSidebarHidden: {
     type: Boolean,
     default: false,
+  },
+  userId: {
+    type: String,
+    default: null
   }
 });
 
@@ -50,10 +54,6 @@ const activePath = (path) => {
     return true;
   }
 }
-
-const handleCreatePlaylist = () => {
-  console.log('HANDLE CREATE PLAYLIST');
-};
 </script>
 
 <template>
@@ -90,7 +90,7 @@ const handleCreatePlaylist = () => {
     </section>
 
     <!-- Playlists Section -->
-    <playlists-section @onCreatePlaylist="handleCreatePlaylist" :isSidebarCollapsed="isSidebarCollapsed" :playlists="playlists"
+    <playlists-section :isSidebarCollapsed="isSidebarCollapsed" :playlists="playlists"
       :isActivePath="activePath(`/${brand}/lists/my-list`)" :brand="brand" :userId="userId"></playlists-section>
 
   </SidebarContainer>
