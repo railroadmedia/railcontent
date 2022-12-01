@@ -178,8 +178,6 @@
                         </div>
                         <p class="leading-tight uppercase text-yellow ml-4">
                             <a target="_blank" href="https://www.google.com/search?q=11am+PDT" class="font-extrabold"><strong>Thursday, Nov 10 @ 11:00am PDT</strong> <i class="fal fa-info-circle"></i></a>
-                            <br class="inline sm:hidden"> starts in<br class="hidden sm:inline">
-                            <strong><span class="countdown-full hidden md:inline">A LIMITED TIME</span> <span class="countdown-small inline md:hidden">A LIMITED TIME</span></strong>
                         </p>
                     </div>
                     <h6 class="leading-tight mb-4">
@@ -347,11 +345,6 @@
             <h5 class="mb-2">
                 <strong class="font-extrabold">Get free LIVE vocal training</strong> with Lisa Witt
             </h5>
-            <h5 class="uppercase text-yellow font-extrabold time-counter mb-8 leading-tight md:leading-tight">
-                ONLY
-                <span class="countdown-full hidden sm:inline">A LIMITED TIME</span> <span class="countdown-small inline sm:hidden">A LIMITED TIME</span>
-                LEFT!
-            </h5>
             <p class="mb-4">
                 Start singing the RIGHT way with a LIVE 60-minute singing lesson from a vocal coach.
             </p>
@@ -372,8 +365,5 @@
 
 @section('scripts')
 
-    @include('singeo.lead-gen.partials._countdown',[
-        "countdownDate" => "2022/11/10 11:00:00"
-    ])
     <script type="text/javascript" src="/marketing/js/modal-autoplay.js"></script>
 @stop

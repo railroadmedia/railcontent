@@ -164,7 +164,6 @@
             <div class="flex flex-wrap items-center">
                 <div class="w-full md:w-2/3 lg:w-1/2 md:text-left mt-40 md:mt-0">
                     <img class="h-28 sm:h-36 lg:h-40 lazyload" data-src="https://cdn.musora.com/image/fetch/w_840,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/harmony-bootcamp/logo.png" alt="logo">
-                    <div class="md:hidden countdown-full text-yellow font-extrabold mt-4"></div>
                     <h5 class="mt-2 md:mt-5 sub-header mb-5">
                         <strong class="font-extrabold">Free 60-minute LIVE vocal training</strong> <br class="sm:hidden">with Lisa Witt
                     </h5>
@@ -175,7 +174,6 @@
                         </div>
                         <p class="leading-tight uppercase text-yellow mx-0">
                             <a target="_blank" href="https://www.google.com/search?q=230pm+PDT" class="font-extrabold"><strong>October, Wednesday <br class="sm:hidden">the 19th.  2:30pm PDT</strong> <i class="fal fa-info-circle"></i></a>
-                            <br><span class="hidden md:inline">- starts in <strong class="countdown-full hidden md:inline">A LIMITED TIME</strong></span>
                         </p>
                     </div>
                     <h6 class="leading-tight mb-4">
@@ -340,11 +338,6 @@
             <h5 class="mb-2">
                 <strong class="font-extrabold">Get free LIVE vocal training</strong> with Lisa Witt
             </h5>
-            <h5 class="uppercase text-yellow font-extrabold time-counter mb-8 leading-tight md:leading-tight">
-                ONLY
-                <span class="countdown-full hidden sm:inline">A LIMITED TIME</span> <span class="countdown-small inline sm:hidden">A LIMITED TIME</span>
-                LEFT!
-            </h5>
             @include("singeo._partials._sign-up-form", [
                 "formId" => 'Singeo - Engagement - Trigger - Harmony Bootcamp - Web Form',
                 "formName" => 'Harmony Bootcamp',
@@ -362,8 +355,5 @@
 
 @section('scripts')
 
-    @include('singeo.lead-gen.partials._countdown',[
-        "countdownDate" => "2022/10/19"
-    ])
     <script type="text/javascript" src="/marketing/js/modal-autoplay.js"></script>
 @stop

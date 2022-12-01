@@ -12,11 +12,11 @@
             <section class="drum-shop">
                 <div class="top-image @if(!empty($packLogo)) with-logo @endif" style="background-image:url(https://cdn.musora.com/image/fetch/w_600,q_auto:best/{{ $thumbnail }});">
                     @if (!empty($badgeText))
-                        <span class="top-left-badge">
+                        <span class="top-left-badge text-white bg-promo">
                             {!! $badgeText !!}
                         </span>
                     @elseif (round(100 - (100 * ($price / $fullPrice))) > 1)
-                        <span class="top-left-badge">
+                        <span class="top-left-badge text-white bg-promo">
                             Save {{ round(100 - (100 * ($price / $fullPrice))) }}%
                         </span>
                     @endif
@@ -60,9 +60,9 @@
                         <p class="description">{!! $cardDescription  !!}</p>
                     @endif
                     @if(!empty($specialPrice))
-                        <p><strong>{{  $specialPrice  }}</strong><br><br></p>
+                        <p><strong class="text-promo">{{  $specialPrice  }}</strong><br><br></p>
                     @elseif (round(100 - (100 * ($price / $fullPrice))) > 1)
-                        <p class="price"><s>${{ $fullPrice }}</s> <strong>
+                        <p class="price"><s>${{ $fullPrice }}</s> <strong class="text-promo">
                                 @if(number_format($price, 2) == intval($price))
                                     ${{  floatval($price)  }}
                                 @else
@@ -70,7 +70,7 @@
                                 @endif
                             </strong></p>
                     @else
-                        <p class="price"><strong> ${{  floatval($price)  }}</strong></p>
+                        <p class="price"><strong class="text-promo"> ${{  floatval($price)  }}</strong></p>
                     @endif
                     @if(!empty($includedEdge))
                         <p class="description" style="top: -13px;position: relative;margin: 0;"><em class="text-red">Or free with Guitareo</em></p>

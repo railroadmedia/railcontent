@@ -1,3 +1,13 @@
+.bg-promo {
+    background-color:#df0032 !important;
+}
+.text-promo {
+    color:#df0032 !important;
+}
+.border-promo {
+    border-color:#df0032 !important;
+}
+
 .clearfix::after {
     content:"";
     display:table;

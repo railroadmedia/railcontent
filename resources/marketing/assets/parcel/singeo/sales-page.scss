@@ -91,11 +91,11 @@ img {
 }
 
 .text-promo {
-  color: $singeoPurple;
+  color: $promoColor;
 }
 
 .bg-promo {
-  background-color: $singeoPurple;
+  background-color: $promoColor;
 }
 
 .bg-songs {
@@ -181,13 +181,11 @@ img {
   }
 
   &.promo {
-    background: $singeoPurple;
-    //color: #000;
+    background: $promoColor;
 
     &:hover,
     &:focus {
-      background: lighten($singeoPurple, 10%);
-      //color: #000;
+      background: lighten($promoColor, 10%);
     }
   }
 
@@ -252,12 +250,12 @@ img {
     }
 
     &.promo {
-      border-color: $singeoPurple;
-      color: $singeoPurple;
+      border-color: $promoColor;
+      color: $promoColor;
 
       &:hover,
       &:focus {
-        background: $singeoPurple;
+        background: $promoColor;
         color: #fff;
       }
     }
@@ -315,34 +313,6 @@ img {
     @include desktop {
       background-position: 10% 0;
       background-size: 1800px;
-    }
-  }
-  .tzcd-big {
-    text-transform: uppercase;
-    display: inline-block;
-    vertical-align: middle;
-
-    div {
-      float: left;
-      padding: 0 20px 0 0;
-      text-align: center;
-
-      &:last-child {
-        padding-right: 0;
-      }
-
-      h1 {
-        margin: 0 auto;
-        font-size: 27px;
-        font-weight: 800;
-        font-family: $opensans;
-      }
-
-      p {
-        font: 700 13px/1em $opensans;
-        color: #c2a0dd;
-        margin: 0 auto;
-      }
     }
   }
 }
@@ -1300,35 +1270,6 @@ img {
       &.hidden {
         @include tablet {
           display: none;
-        }
-      }
-    }
-
-    .tzcd-big {
-      text-transform: uppercase;
-      display: inline-block;
-      vertical-align: middle;
-
-      div {
-        float: left;
-        padding: 0 20px 0 0;
-        text-align: center;
-
-        &:last-child {
-          padding-right: 0;
-        }
-
-        h1 {
-          margin: 0 auto;
-          font-size: 27px;
-          font-weight: 800;
-          font-family: $opensans;
-        }
-
-        p {
-          font: 700 13px/1em $opensans;
-          color: $singeoPurple;
-          margin: 0 auto;
         }
       }
     }

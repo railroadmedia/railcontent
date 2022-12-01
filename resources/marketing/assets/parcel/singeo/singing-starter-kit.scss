@@ -436,32 +436,6 @@ header {
   }
 
 
-  .tzcd-fb {
-    text-transform: uppercase;
-    display: inline-block;
-    vertical-align: middle;
-
-    div {
-      float: left;
-      padding: 0 15px 0 0;
-      text-align: center;
-
-      &:last-child {
-        padding-right: 0;
-      }
-
-      h1 {
-        font: 900 27px/1em $opensans;
-        color: #000;
-        margin: 0 auto;
-      }
-
-      p {
-        font: 700 13px/1em $opensans;
-        margin: 0 auto;
-      }
-    }
-  }
 }
 
 .artist-promo-banner-shim {

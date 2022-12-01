@@ -215,17 +215,6 @@
         <div class="absolute z-0 inset-0 inline sm:hidden" style="background:linear-gradient(to bottom, transparent 25%, #302465 66%);"></div>
     </header>
 
-    {{--<div class="h-10 relative w-full block" style="background:linear-gradient(to bottom, #8300e9, #7200cf);"></div>--}}
-    {{--<div style="background:linear-gradient(to bottom, #8300e9, #7200cf);"--}}
-            {{--class="promo-banner block text-center w-full transition-opacity duration-300 overflow-hidden whitespace-nowrap text-white bg-cover bg-center shadow-md py-2.5 -mt-10 hover:text-gray-100 z-0 mx-auto text-xs">--}}
-        {{--<div class="container mx-auto relative">--}}
-            {{--<div class="inline-block align-middle text-center">--}}
-                {{--<p class="inline-block align-middle mx-auto font-bebas text-lg leading-none sm:text-xl sm:leading-none text-white text-left">--}}
-                    {{--ONLY <span class="tzcd-full">A LIMITED TIME</span> LEFT!--}}
-                {{--</p>--}}
-            {{--</div>--}}
-        {{--</div>--}}
-    {{--</div>--}}
     <div class="sticky-trigger block"></div>
     <section class="text-center py-8 md:py-10 lg:py-20 px-5 md:px-4 bg-white">
         <div class="container mx-auto max-w-4xl">
@@ -432,21 +421,6 @@
                     stickyBar.addClass('fixed');
                 }
             });
-
-            $('.tzcd-full').countdown('2022/06/11')
-                .on('update.countdown', function (event) {
-                    var format = '%-M Minute%!M %-S Second%!S';
-                    if (event.offset.totalHours > 0) {
-                        format = '%-H Hour%!H ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '%-D Day%!D ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('a limited time');
-                });
         });
     </script>
     <script type="text/javascript" src="/marketing/parcel/singeo/nav-footer.js"></script>

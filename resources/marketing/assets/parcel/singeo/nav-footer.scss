@@ -102,6 +102,15 @@ a {
       background: lighten(#777, 10%);
     }
   }
+    &.promo {
+        border-color: $promoColor;
+        //color: #000;
+        &:hover {
+            background:lighten($promoColor, 10%) ;
+            //color: #000;
+        }
+    }
+
 }
 
 .top-bar {
@@ -247,6 +256,14 @@ a {
           color: #020815;
         }
 
+          &.promo {
+              border-color: $promoColor;
+              color: $promoColor;
+              &:hover {
+                  background: $promoColor;
+                  color: #020815;
+              }
+          }
       }
 
       &.cart-button {

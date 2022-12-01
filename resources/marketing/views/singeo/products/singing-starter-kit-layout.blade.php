@@ -239,8 +239,6 @@
     <section class="text-center text-white py-16 md:py-20 lg:py-24 bg-cover bg-left md:bg-center lazyload" style="background-color:#210436;" data-bg="https://singeo.s3.amazonaws.com/products/singing-starter-kit/final-bg.jpg">
         <div class="container mx-auto">
             <img class="h-20 md:h-32 lg:h-40" src="https://cdn.musora.com/image/fetch/w_980,q_auto:best/https://singeo.s3.amazonaws.com/products/singing-starter-kit/logo.png"><br>
-            {{--<h4 class="mt-3 mt-4 leading-tight">Get the Singing Starter Kit + BONUS 30-Day<br class="inline lg:hidden"> All-Access Singeo Membership!!--}}
-                {{--<br><strong class="uppercase text-yellow-500">ONLY <span class="tzcd-full">A LIMITED TIME</span> LEFT!</strong></h4>--}}
             <h4 class="mt-2 mt-3 leading-normal">Everything You Need To Start Singing Now</h4>
             <a class="join my-2 md:my-3" href="@yield('order-link')">START SINGING FOR
                 @if($productPrice < SingeoPrices::$singingStarterKitFull)
@@ -341,51 +339,4 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
     <script type="text/javascript" src="/marketing/js/modal.js"></script>
     <script type="text/javascript" src="/marketing/js/modal-autoplay.js"></script>
-    <script type="text/javascript" src="/marketing/js/jquery.countdown-2.min.js"></script>
-    <script>
-        $(function() {
-            $('.tzcd-full').countdown('2022/02/11')
-                .on('update.countdown', function (event) {
-                    var format = '%-M Minute%!M %-S Second%!S';
-                    if (event.offset.totalHours > 0) {
-                        format = '%-H Hour%!H ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '%-D Day%!D ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('a limited time');
-                });
-            $('.tzcd-small').countdown('2022/02/11')
-                .on('update.countdown', function (event) {
-                    var format = '%-MM %-SS';
-                    if (event.offset.totalHours > 0) {
-                        format = '%-HH ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '%-DD ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('a limited time');
-                });
-            $('.tzcd-big').countdown('2022/02/11')
-                .on('update.countdown', function (event) {
-                    var format = '' + '<div><h1>%M</h1> <p>min%!M</p></div> ' + '<div><h1>%S</h1> <p>sec%!S</p></div>';
-                    if (event.offset.totalHours > 0) {
-                        format = '' + '<div><h1>%H</h1> <p>hr%!H</p></div> ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '' + '<div><h1>%D</h1> <p>day%!D</p></div> ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('<div><h1>LIMITED</h1> <p>TIME LEFT</p></div>');
-                });
-        });
-    </script>
 @stop

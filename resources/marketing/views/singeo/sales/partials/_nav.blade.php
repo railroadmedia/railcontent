@@ -14,12 +14,12 @@
 
     @if(!empty($checkoutVersion))
         <div class="button-wrap">
-            <a href="/shop" class="join outline-button">Shop</a>
+            <a href="/shop" class="join promo outline-button">Shop</a>
         </div>
     @endif
     @if(!empty($cartVersion))
         <div class="button-wrap" id="app">
-            <a href="/shop" class="join outline-button">Shop</a>
+            <a href="/shop" class="join promo outline-button">Shop</a>
 
             <nav-cart-button
                 {{-- cart-data='{{ $cartData }}' --}}
@@ -43,7 +43,7 @@
             <a class="@if(!empty($scrollToJoin)) anchor-slide @endif"  href="/#coaches" >Coaches</a>
         </div>
         <div class="button-wrap">
-            <a href="/shop" class="join outline-button">Shop</a>
+            <a href="/shop" class="join promo outline-button">Shop</a>
             <a href="#customize-anchor" class="join anchor-slide">Join Singeo</a>
         </div>
     @endif
@@ -67,7 +67,7 @@
             "linkUrl" => "/",
         ])
         @include('singeo.sales.partials._nav-link', [
-            "linkName" => "Shop",
+            "linkName" => "Holiday Deals",
             "linkIcon" => "fas fa-tag",
             "linkUrl" => '/shop',
         ])

@@ -1,41 +1,68 @@
-@php $annualLink = '/ecommerce/add-to-cart?products[singeo-annual-recurring-membership]=1&products[singing-starter-kit]=1&products[vowel-sounds-poster]=1&locked=true&redirect=/order' @endphp
+@php $annualLink = '/ecommerce/add-to-cart?products[singeo-annual-recurring-membership]=1&products[singing-starter-kit]=1&products[the-essential-guide-to-beautiful-harmonies]=1&products[vowel-sounds-poster]=1&bonuses[PIANOTE-MEMBERSHIP-1-YEAR]=1&bonuses[GUITAREO-1-YEAR-MEMBERSHIP]=1&locked=true&redirect=/order' @endphp
 
+<div style="background:linear-gradient(to bottom, #02010f, #010522);">
 <section class="content-section text-center customize relative z-50 overflow-hidden" style="background-color:#000;">
     <div class="container mx-auto relative z-50">
-        <img class="h-16 sm:h-16 lg:h-20 mb-5 md:mb-7" src="https://cdn.musora.com/image/fetch/w_550,q_auto:best/https://singeo.s3.amazonaws.com/sales/promos/august/singeo_summer_light.png" alt="singeo turning one image">
-        {{--<h1 class="font-bebas leading-none mb-1 text-5xl md:text-6xl">YOU CAN SING - <br class="inline md:hidden"> <span class="text-coaches">HERE'S HOW!</span></h1>--}}
-        <h4 class="leading-tight"><strong>Join Singeo for just <span class="text-singeo">${{ SingeoPrices::$singeoMembershipAnnual }}</span> and get 2 FREE BONUSES</strong></h4>
-        <h6 class="leading-normal my-3 md:my-5 uppercase text-coaches">ONLY available until August 30th<br>
-        <strong><span class="tzcd-full">A LIMITED TIME</span> LEFT</strong></h6>
-        <img class="h-48 sm:h-72 lg:h-80 lazyload" data-src="https://singeo.s3.amazonaws.com/sales/promos/august/homepage_chart.png">
-        <h6 class="leading-normal my-5 md:my-7 uppercase text-coaches"><strong>PLUS, 2 FREE BONUSES</strong></h6>
+        <img class="h-36 sm:h-72 lg:h-96" src="https://singeo.s3.amazonaws.com/sales/promos/august/homepage_chart.png" alt="singeo annual membership">
+        <h3 class="leading-tight my-3">
+            <strong>
+                Join Singeo for just ${{  round(SingeoPrices::$singeoMembershipAnnual / 12, 2) }}/month</strong> <br class="hidden sm:inline">
+            <strong class="text-promo">PLUS</strong> get 5 free bonuses worth $538.
+        </h3>
+        <a href="{{ $annualLink }}" class="join promo my-3 md:my-4 w-full max-w-xs md:max-w-lg lg:max-w-xl">GET Started &raquo;</a>
+        <p class="leading-tight text-sm"><em>Billed at ${{ SingeoPrices::$singeoMembershipAnnual }} per year.<br class="inline sm:hidden">  Cancel anytime. 90-day guarantee.</em></p>
+        <h4 class="leading-tight my-6 sm:my-8">
+            <strong>5 FREE BONUSES.</strong> <em>ONLY<br class="inline sm:hidden"> AVAILABLE UNTIL DECEMBER 26</em></h4>
 
 
         <div class="horizontal-bonuses mx-auto max-w-xs sm:max-w-md md:max-w-xl lg:max-w-4xl mb-5 sm:mb-7" style="font-size: 0;">
             @php
                 $bonuses = [
                     [
-                    'image' => 'https://singeo.s3.amazonaws.com/sales/promos/november/singing-starter-kit.jpg',
-                    'title' => 'Singing<br> Starter Kit',
-                    'description' => 'The “must-know” singing basics that every singer needs to keep their voice strong and healthy.',
-                    'price' => SingeoPrices::$singingStarterKitFull,
-                    'online-ship' => "Lifetime Access"
+                        'image' => 'https://singeo.s3.amazonaws.com/sales/promos/november/singing-starter-kit.jpg',
+                        'title' => 'Singing<br> Starter Kit',
+                        'description' => 'Get everything you need to start singing now. In just 7 hands-on lessons, you’ll overcome the challenges most beginner singers face and will instantly sound better.',
+                        'price' => SingeoPrices::$singingStarterKitFull,
+                        'online-ship' => "Lifetime Access"
                     ],
                     [
-                    'image' => 'https://singeo.s3.amazonaws.com/sales/promos/november/poster2.png',
-                    'title' => 'Vowel Practice<br> Poster',
-                    'badge' => 'Vowel Practice Poster',
-                    'description' => 'Your new favorite practice tool - and your ticket hitting higher notes with ease and confidence.',
-                    'price' => SingeoPrices::$posterFull,
-                    'online-ship' => "Free Shipping",
+                        'image' => 'https://singeo.s3.amazonaws.com/sales/promos/october/Beautiful_harmonies_card.jpg',
+                        'title' => 'Harmony',
+                        'description' => 'In just 8, short, sing-a-long lessons, you’ll learn how to elevate any vocal performance with incredible harmonies. Even if you’re a total beginner, you’ll be singing your first harmony within the first 10 minutes of this course.',
+                        'price' => SingeoPrices::$beautifulHarmoniesFull,
+                        'online-ship' => "Lifetime Access"
+                    ],
+                    [
+                        'image' => 'https://singeo.s3.amazonaws.com/sales/promos/november/poster2.png',
+                        'title' => 'Vowel Practice<br> Poster',
+                        'badge' => 'Vowel Practice Poster',
+                        'description' => 'Your new favorite practice tool - and your ticket hitting higher notes with ease and confidence.',
+                        'price' => SingeoPrices::$posterFull,
+                        'online-ship' => "Free Shipping",
+                    ],
+                    [
+                        'image' => 'https://singeo.s3.amazonaws.com/sales/lifetime/1-year-of-guitar-card.jpg',
+                        'title' => '1 Year of Guitareo Lessons',
+                        'badge' => '1 Year of Guitareo Lessons',
+                        'description' => '1 year of online video-based guitar lessons and personal support.',
+                        'price' => 240,
+                        'online-ship' => "Online Access",
+                    ],
+                    [
+                        'image' => 'https://singeo.s3.amazonaws.com/sales/lifetime/1-year-of-piano-card.jpg',
+                        'title' => '1 Year of Pianote Lessons',
+                        'badge' => '1 Year of Pianote Lessons',
+                        'description' => '1 year of online video-based piano lessons and personal support.',
+                        'price' => 240,
+                        'online-ship' => "Online Access",
                     ],
                 ]
             @endphp
-            @foreach($bonuses as $bonus)
+            @foreach($bonuses as $key => $bonus)
                 <div class="bonus-wrap relative inline-block align-top mx-auto mb-3 md:mb-4 px-2 md:px-3 lg:px-2 w-1/2 sm:w-1/3 lg:w-1/5">
                     <div class="flip-div @if(!empty($bonus['class'])) {{ $bonus['class'] }} @endif">
                         <div class="flip-inner">
-                            <div class="front @if(!empty($bonus['shipping'])) {{ $bonus['shipping'] }} @endif">
+                            <div class="front border-promo @if(!empty($bonus['shipping'])) {{ $bonus['shipping'] }} @endif">
                                 <div class="hover-icon"><i class="fas fa-arrow-right"></i><br>DETAILS</div>
                                 <div class="image-wrap" style="background-image:url(https://cdn.musora.com/image/fetch/w_460,q_auto:best/{{ $bonus['image'] }});"></div>
                             </div>
@@ -47,18 +74,19 @@
                         </div>
                     </div>
                     <p class="uppercase">
-                        <strong class="font-black leading-tight inline-block mt-2 mb-1">{!!  $bonus['title']  !!}</strong><br>
-                        <span class="text-promo" style="text-transform:uppercase; display:inline-block;"><s>${{ $bonus['price'] }}</s> <strong>FREE</strong></span><br>
+                        <span class="text-promo inline-block" ><strong><s style="color:#5F5F5F;">${{ $bonus['price'] }}</s> FREE</strong></span><br>
                         {{ $bonus['online-ship'] }}
                     </p>
                 </div>
+                @if($key === 2)<br class="hidden sm:inline">@endif
             @endforeach
         </div>
-        <a class="join promo memcta" href="{{ $annualLink }}">START MY SINGING LESSONS NOW</a>
-        <br><br>
-        <a class="memcta monthly-alt" href="/ecommerce/add-to-cart?products[singeo-monthly-recurring-membership]=1&redirect=/order&locked=true" dusk="order-monthly"><p><u><em>Or start a monthly membership for <br class="inline sm:hidden">${{ SingeoPrices::$singeoMembershipMonthly }}/month. (no bonuses)</em></u></p></a>
+        <a class="join promo my-3 md:my-4 w-full max-w-xs md:max-w-lg lg:max-w-xl" href="{{ $annualLink }}">GET Started &raquo;</a>
+        <br>
+        <a class="memcta monthly-alt text-light-navy" href="/ecommerce/add-to-cart?products[singeo-monthly-recurring-membership]=1&redirect=/order&locked=true" dusk="order-monthly"><p><u><em>Or start a monthly membership for <br class="inline sm:hidden">${{ App\Prices::$singeoMembershipMonthly }}/month. (no bonuses)</em></u></p></a>
     </div>
 </section>
+</div>
 
 <section class="content-section text-center" style="background: #0c1429;">
     <div class="container mx-auto relative z-50">

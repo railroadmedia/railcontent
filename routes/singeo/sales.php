@@ -36,6 +36,7 @@ Route::domain('{singeoDomain}')
     Route::get('/singing-starter-kit-shyv-discount', function () { return view('singeo.products.singing-starter-kit-shyv-discount'); });
     Route::get('/recitals', function () { return view('singeo.lead-gen.recitals'); });
     Route::get('/giveaway', function () { return view('singeo.lead-gen.giveaway'); });
+        Route::get('/ultimate-giveaway', function () { return view('lead-gen.ultimate-giveaway'); });
 
 
     // redirect pages

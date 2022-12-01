@@ -1,5 +1,6 @@
 @extends('singeo.sales.standard-layout', [
-    "openVersion" => true
+    "openVersion" => true,
+    "bfButton" => true
 ])
 
 @section('global-head')
@@ -10,77 +11,79 @@
 @endsection
 
 @section('top-promo-bar')
-    @include('_partials.layout.holiday.homepage-top-banner',[
-        'text' => 'GET 10 FREE<br class="inline md:hidden"> BONUSES WORTH $1228.94'
-    ])
-@endsection
+    <section class="big-promo-banner bg-black text-white text-center relative z-10 overflow-hidden px-5 md:px-3 lg:px-5 md:px-8 py-5 md:py-14 bg-cover bg-center">
+        <div class="container mx-auto relative z-30 max-w-lg">
+            <a href="/shop"><img class="h-14 sm:h-16 lg:h-20 mx-auto" src="https://singeo.s3.amazonaws.com/sales/promos/november/holiday-singeo.png" alt="singeo black friday logo"></a>
+            <p class="leading-tight my-3 uppercase"><strong class="">GET 5 FREE<br class="inline md:hidden"> BONUSES WORTH $538</strong></p>
+            {{--            <div class="mt-6 mb-7 rounded-xl px-3 sm:px-6 py-1 inline-flex flex-wrap mx-auto justify-center items-center" style="background-color:#181515;">--}}
+            {{--                <p class="leading-none m-0"><strong>DEALS END IN:</strong></p>--}}
+            {{--                <div class="h-12 mx-3 sm:mx-5 bg-promo" style="width:2px;"></div>--}}
+            {{--                <div class="tzcd-big">--}}
+            {{--                    <div class="inline-block">--}}
+            {{--                        <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>--}}
+            {{--                        <p class="leading-none uppercase font-extrabold text-xs text-promo">days</p>--}}
+            {{--                    </div>--}}
+            {{--                    <div class="inline-block mx-2">--}}
+            {{--                        <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>--}}
+            {{--                        <p class="leading-none uppercase font-extrabold text-xs text-promo">hrs</p>--}}
+            {{--                    </div>--}}
+            {{--                    <div class="inline-block mr-2">--}}
+            {{--                        <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>--}}
+            {{--                        <p class="leading-none uppercase font-extrabold text-xs text-promo">mins</p>--}}
+            {{--                    </div>--}}
+            {{--                    <div class="inline-block">--}}
+            {{--                        <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>--}}
+            {{--                        <p class="leading-none uppercase font-extrabold text-xs text-promo">secs</p>--}}
+            {{--                    </div>--}}
+            {{--                </div>--}}
+            {{--            </div>--}}
+            {{-- This is for when a student is on the order form with an offer in their cart they are not eligible for.
+                We redirect them back here and show them this error message. --}}
+            @if(session()->has('error'))
+                <p class="leading-tight mt-1 mb-5 uppercase text-xl"><strong class="text-promo">{{ session()->get('error') }}</strong></p>
+            @endif
+            <div class="flex flex-wrap items-start justify-center mx-auto max-w-xs md:max-w-none">
+                <a class="w-full md:w-1/2 join smaller outline md:order-2" href="/shop">SHOP ALL DEALS &raquo;</a>
 
-@section('promo-banner')
-{{--    <div id="promo" class="anchor"></div>--}}
-{{--    <section class="text-white text-center relative z-10 overflow-hidden px-4 md:px-3 lg:px-5 md:px-8 py-8 md:py-14 bg-cover bg-center lazyload" data-bg="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://singeo.s3.amazonaws.com/sales/promos/september/promo_bg.jpg" style="background-color:#0b0b0b;" --}}{{--style="background:radial-gradient(#022040, #01050f 80%);"--}}{{-->--}}
-{{--        <div class="container mx-auto relative z-10 max-w-4xl">--}}
-{{--            <img class="h-16 sm:h-20 md:h-24 lg:h-36 mb-6 md:mb-10" src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/https://singeo.s3.amazonaws.com/sales/promos/september/promo_logo.png" alt="singeo turning one image">--}}
-{{--            --}}{{--<h1 class="font-bebas leading-none mb-1 text-5xl md:text-6xl">YOU CAN SING - <br class="inline md:hidden"> <span class="text-coaches">HERE'S HOW!</span></h1>--}}
-{{--            <h5 class="leading-normal mb-3 md:mb-5"><strong>Raise your hand if you’re ready <br> for $30 OFF your annual membership.</strong>--}}
-{{--                <br><span class="uppercase text-coaches">ONLY <span class="tzcd-full hidden sm:inline">A LIMITED TIME</span> <span class="tzcd-small inline sm:hidden">A LIMITED TIME</span> LEFT!</span>--}}
-{{--            </h5>--}}
-
-
-{{--            <div class="flex flex-wrap items-start justify-center mx-auto my-5 sm:my-10">--}}
-{{--                <div class="flex flex-wrap items-start flex-image mx-auto w-full md:w-4/12 lg:w-4/12 md:order-1 mb-5 md:mb-0 justify-center">--}}
-{{--                    <img class="h-72 md:h-auto" src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/https://singeo.s3.amazonaws.com/sales/promos/september/promo_collage.png">--}}
-{{--                </div>--}}
-{{--                <div class="text-left md:pr-3 lg:pr-8 w-full md:w-8/12 lg:w-8/12">--}}
-{{--                    <p class="mx-auto">It’s that time of the year again!--}}
-{{--                        <br><br>--}}
-{{--                        The relaxed days of summer are great, but going back to school (or work) always comes with an air of excitement. So many people to see and so many things to do.--}}
-{{--                        <br><br>--}}
-{{--                        That’s until a couple of weeks after when your day-to-day becomes extremely busy, and your passions (and singing) fall down the sidelines.--}}
-{{--                        <br><br>--}}
-{{--                        Luckily, it doesn’t have to be like that anymore. Singeo has your back with structured step-by-step lessons and timed vocal exercise routines that fit even in the busiest schedule. Plus, you can get all the personal feedback and support you need to guarantee you’re making progress.--}}
-{{--                        <br><br>--}}
-{{--                        This year you’re going back to school with Singeo and loving every second of it! Become a Singeo Member for <strong>ONLY <s>${{ SingeoPrices::$singeoMembershipAnnualFull }}</s> ${{ SingeoPrices::$singeoMembershipAnnual }}</strong>.--}}
-{{--                        <br><br>--}}
-{{--                        Get straight A’s on your singing and achieve the beautiful voice you’ve always wanted.--}}
-{{--                    </p>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-
-
-{{--            --}}{{--<div class="max-w-lg lg:max-w-2xl mx-auto relative my-3 md:my-5">--}}
-{{--                --}}{{--<div class="aspect-16:9 w-full relative rounded-xl overflow-hidden">--}}
-{{--                    --}}{{--<iframe class="absolute w-full h-full" src="//player.vimeo.com/video/658674279" frameborder="0" allowfullscreen allow="autoplay" title="find your true voice with shelea"></iframe>--}}
-{{--                --}}{{--</div>--}}
-{{--                --}}{{--<img style="transform: translate(-100%, -50%);" class="absolute hidden sm:inline top-1/2 -left-4 w-40 lg:w-64 lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://singeo.s3.amazonaws.com/sales/promos/march/left_spread.png" alt="left-spread">--}}
-{{--                --}}{{--<img style="transform: translate(100%, -50%);" class="absolute hidden sm:inline top-1/2 -right-4 w-40 lg:w-64 lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://singeo.s3.amazonaws.com/sales/promos/march/right_spread.png" alt="right-spread">--}}
-{{--            --}}{{--</div>--}}
-{{--            <a class="anchor-slide join smaller coaches mt-5" href="#customize-anchor">START MY SINGING LESSONS &raquo;</a>--}}
-{{--        </div>--}}
-{{--    </section>--}}
+                <div class="w-full md:w-1/2 md:pr-2 mt-3 md:mt-0 relative">
+                    <a class="w-full join white smaller anchor-slide" href="#customize-anchor">JOIN SINGEO &raquo;</a>
+                </div>
+            </div>
+        </div>
+        <div class="inset-0 absolute bg-center bg-cover z-0" style="background: #000 url(https://drumeo-assets.s3.amazonaws.com/promos/christmas/snow-dark.gif) center center/250px;box-shadow: 0 0 100px inset #000;"></div>
+    </section>
 @endsection
 
 @section('sticky-bar')
-    @include('_partials.layout.holiday.homepage-sticky-bar', [
-        'text' => 'GET 5 FREE BONUSES <br> WORTH $538'
-    ])
-
-{{--    <div class="h-10 relative w-full block" style="background-color:#000;background-image:url('https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://singeo.s3.amazonaws.com/sales/promos/september/promo_bg.jpg'); background-size:cover;"></div>--}}
-{{--    <a--}}
-{{--        href="#customize-anchor"--}}
-{{--        class="promo-banner anchor-slide block text-center w-full transition-opacity duration-300 overflow-hidden whitespace-nowrap text-white bg-cover bg-center shadow-md py-1 hover:text-gray-100 z-0 mx-auto -mt-10 text-xs"--}}
-{{--        style="background-color:#000;background-image:url('https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://singeo.s3.amazonaws.com/sales/promos/september/promo_bg.jpg'); background-size:cover;"--}}
-{{--    >--}}
-{{--        <div class="container mx-auto relative">--}}
-{{--            <div class="inline-block align-middle text-center">--}}
-{{--                <img class="inline-block align-middle mr-2 h-6 sm:h-8 mt-2" src="https://cdn.musora.com/image/fetch/w_260,q_auto:best/https://singeo.s3.amazonaws.com/sales/promos/september/order_sticky_logo.png">--}}
-{{--                 --}}{{--<h5 class="font-bebas inline-block align-middle mx-auto text-2xl leading-none mr-1.5 h-8 py-1.5 px-2 bg-black rounded-md">FIND YOUR TRUE VOICE WITH SHELÉA</h5> --}}
-{{--                <p class="inline-block align-middle mx-auto font-bebas text-sm leading-none sm:text-base sm:leading-none text-left uppercase">--}}
-{{--                    Get a full year of singing <br>--}}
-{{--                    lessons for just $97.--}}
-{{--                </p>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </a>--}}
+    <a href="#customize-anchor" style="background: #000 url(https://drumeo-assets.s3.amazonaws.com/promos/christmas/snow-dark.gif) center center/250px;box-shadow: 0 0 10px inset #000;"
+        class="anchor-slide promo-banner block text-center w-full transition-opacity duration-300 overflow-hidden whitespace-nowrap bg-cover bg-center shadow-md py-1 z-0 mx-auto -mt-10 text-xs">
+        <div class="container mx-auto relative">
+            <div class="inline-block align-middle text-center">
+                <img class="inline-block align-middle mr-2 h-8"
+                    src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://singeo.s3.amazonaws.com/sales/promos/november/holiday-singeo.png">
+                <p class="inline-block align-middle mx-auto font-bebas text-white text-sm leading-none sm:text-lg sm:leading-none text-left">
+                    <span class="uppercase">GET 5 FREE BONUSES <br> WORTH $538</span></p>
+                {{--            <div class="tzcd-smaller text-white align-middle inline-block">--}}
+                {{--                <div class="inline-block">--}}
+                {{--                    <h2 class="font-extrabold leading-none text-lg">00</h2>--}}
+                {{--                    <p class="leading-none uppercase font-extrabold text-xs text-promo">days</p>--}}
+                {{--                </div>--}}
+                {{--                <div class="inline-block mx-2">--}}
+                {{--                    <h2 class="font-extrabold leading-none text-lg">00</h2>--}}
+                {{--                    <p class="leading-none uppercase font-extrabold text-xs text-promo">hrs</p>--}}
+                {{--                </div>--}}
+                {{--                <div class="inline-block mr-2">--}}
+                {{--                    <h2 class="font-extrabold leading-none text-lg">00</h2>--}}
+                {{--                    <p class="leading-none uppercase font-extrabold text-xs text-promo">mins</p>--}}
+                {{--                </div>--}}
+                {{--                <div class="inline-block">--}}
+                {{--                    <h2 class="font-extrabold leading-none text-lg">00</h2>--}}
+                {{--                    <p class="leading-none uppercase font-extrabold text-xs text-promo">secs</p>--}}
+                {{--                </div>--}}
+                {{--            </div>--}}
+            </div>
+        </div>
+    </a>
 @endsection
 
 @section('final')

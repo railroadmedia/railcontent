@@ -105,12 +105,12 @@ img {
 }
 
 .join.smaller {
-  padding: 7px 12px;
-  font-size: 13px;
-  @include tablet {
-    font-size: 14px;
-    padding: 13px 30px;
-  }
+    padding: 10px 30px 6px;
+    font-size: 16px;
+    @include tablet {
+        font-size: 18px;
+        padding: 12px 30px 10px;
+    }
 }
 
 .reveal-overlay {
@@ -473,42 +473,6 @@ img {
     }
   }
 
-
-  .tzcd-big {
-    text-transform: uppercase;
-    display: inline-block;
-    vertical-align: middle;
-    margin: 0 auto;
-
-    div {
-      float: left;
-      text-align: center;
-      padding: 0 15px 0 0;
-      @include tablet {
-        padding: 0 25px 0 0;
-      }
-
-      &:last-child {
-        padding-right: 0;
-      }
-
-      h1 {
-        color: #fff;
-        margin: 0 auto;
-        font: 900 28px/1em $opensans;
-        @include tablet {
-          font-size: 32px;
-        }
-      }
-
-      p {
-        font: 800 10px/1em $opensans;
-        color: $singeoPurple;
-        margin: 0 auto;
-      }
-    }
-  }
-
   .vid-thumb {
     position: relative;
     margin: 10px auto 0;
@@ -565,8 +529,6 @@ img {
 .catalogue-filters {
   text-align: center;
   margin: 0 auto;
-  width: 100%;
-  max-width: 1400px;
   padding: 0 0 5px;
   @include tablet {
     padding: 40px 20px 5px;
@@ -577,11 +539,9 @@ img {
 
   .container {
     @include tablet {
-      max-width: 720px;
       padding: 0 7px;
     }
     @include desktop {
-      max-width: 1360px;
       padding: 0;
     }
   }
@@ -692,13 +652,6 @@ img {
   margin: 0 auto 20px;
   text-align: center;
 
-  .container {
-    max-width: 720px;
-    @include desktop {
-      max-width: 1360px;
-    }
-  }
-
   .card-wrap {
     padding: 0 7px;
     @include desktop {
@@ -711,10 +664,6 @@ img {
     border-radius: 0 0 5px 0;
     top: 0;
     left: 0;
-    //background: $singeoPurple;
-    //color: #fff;
-    background: #ffac00;
-    color: #000;
     font: 700 11px/1em $robotocondensed;
     text-transform: uppercase;
     //border: 1px solid #ddd;
@@ -933,15 +882,12 @@ img {
     font-size: 0;
     text-align: center;
     margin: 0 auto 15px;
-    max-width: 320px;
     @include tablet {
       margin: 0 auto 25px;
       text-align: left;
-      max-width: 720px;
     }
     @include desktop {
       margin: 0 auto 40px;
-      max-width: 1360px;
     }
 
     h1 {
@@ -965,10 +911,6 @@ img {
           margin-right: 8px;
           max-width: 250px;
           font-size: 34px;
-        }
-
-        &.promo {
-          color: #155E4D;
         }
 
         i {
@@ -1010,7 +952,6 @@ img {
       position: relative;
       padding-left: 7px;
       padding-right: 7px;
-      max-width: 320px;
       width: 100%;
       margin: 0 auto 15px;
       text-align: left;
@@ -1018,7 +959,6 @@ img {
       perspective: 1000px;
       height: 340px;
       @include tablet {
-        max-width: 360px;
         width: 50%;
         height: 395px;
       }
@@ -1091,10 +1031,6 @@ img {
               border-radius: 0 0 5px 0;
               top: 0;
               left: 0;
-              //background: $singeoPurple;
-              //color: #fff;
-              background: #ffac00;
-              color: #000;
               font: 700 11px/1em $robotocondensed;
               text-transform: uppercase;
               //border: 1px solid #ddd;
@@ -1167,7 +1103,6 @@ img {
               }
 
               strong {
-                color: $singeoPurple;
                 display: inline-block;
                 margin: 5px auto 0;
               }

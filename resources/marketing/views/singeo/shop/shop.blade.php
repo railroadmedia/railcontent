@@ -146,12 +146,28 @@
                 background-image: url('https://singeo.s3.amazonaws.com/sales/promos/october/harmony_bundle_shop_banner.jpg');
             }
         }
+        .linear-purple {
+            background: linear-gradient(180deg, #8300E9 0%, #03017C 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .linear-rainbow {
+            background: linear-gradient(75.93deg, #00C9AC 0%, #0B76DB 32.62%, #8300E9 65.25%, #F61A30 92.11%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        @media (min-width:1080px) {
+            .margin-per {
+                padding:80px 6%;
+            }
+        }
     </style>
     <div class="shipping-delay">
         <div class="delay-bar text-center">
             <div class="container mx-auto">
                 <p><a class="shipping-trigger"><i class="fas fa-truck"></i> <strong>FREE SHIPPING OVER $100</strong></a> &nbsp; &nbsp;
-                    <a class="timing-trigger"><i class="fas fa-clock"></i> <strong>SHIPPING TIMELINES & SAFETY</strong></a></p>
             </div>
         </div>
 
@@ -161,34 +177,37 @@
                 <h3><strong>Free Shipping Over $100</strong></h3>
                 <p>Spend over $100 and you'll unlock free worldwide shipping on any order.</p>
             </div>
-            <div class="info-wrap timing-info" >
-                <i class="fas fa-times close-modal"></i>
-                <h3><strong>Shipping Timelines & Safety</strong></h3>
-                <p>In these unprecedented and challenging times, we are doing our best to support vocalists with online lessons and practice tools while staying committed to the safety and wellbeing of our team: encouraging staff to work from home and practice social distancing.
-                    <br><br>
-                    Right now there are two ways the COVID-19 crisis might impact your Singeo order:</p>
-                <ul>
-                    <li><strong>Shipping Delays:</strong> There are shipping delays worldwide and shipping challenges in some countries. During checkout for any physical goods, if your location is experiencing a shipping suspension due to COVID-19, we’ve added red text to notify you of this impact. However, even if you don’t see this warning, we cannot ensure typical shipping timelines due to delays that are outside of our control.</li>
-                    <li><strong>Support Requests:</strong> With more vocalists staying at home, there are more people practicing than ever before. And we’re SO excited about this! However, this also means we’re getting more requests for personalized lesson plans, student reviews, technology questions, and transactional questions. We’re continuing to help you the best we can, but please be patient if you experience any delays. (Our typical response time is within less than one hour during business hours.)</li>
-                </ul>
-                <p style="margin-bottom: 0;">We thank you for your patience and understanding. We wouldn’t exist without you, our students, and we’re so thankful for your continued support.
-                    <br><br>
-                    Have Fun Singing,
-                    <br>
-                    - Lisa Witt<br><br>
-                    <strong>Have questions?</strong> <a target="_blank" class="text-singeo" href="https://help.singeo.com/"><u>Click here for our FAQs and answers.</u></a></p>
-            </div>
         </div>
     </div>
     <header class="drum-shop-header" style="background-color:#080e1e;background-image:url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://singeo.s3.amazonaws.com/products/shop-header.jpg);">
-        <div class="container mx-auto">
+        <div class="container mx-auto relative z-10">
             <div class="px-2 md:px-3">
-                @include('_partials.layout.holiday.shop-page-banner',[
-                    'text' => 'Save up to 74% on lessons, accessories, and merch.'
-                ])
-{{--                <img class="logo" src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png">--}}
-{{--                <h1><strong>SHOP</strong></h1>--}}
-{{--                <p>GET LESSONS, MERCH, GEAR, & MUCH MORE</p>--}}
+                <img class="h-14 sm:h-16 lg:h-20" src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://singeo.s3.amazonaws.com/sales/promos/november/holiday-singeo.png" alt="singeo black friday logo">
+                {{-- <img class="logo" src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png" alt="singeo logo"> --}}
+                <h1><strong>SINGEO SHOP</strong></h1>
+                <p>Save up to <span class="">74%</span> on lessons, accessories, and merch.</p>
+                {{--                <div class="rounded-xl px-6 py-2 inline-flex flex-wrap mx-auto mt-5 justify-center items-center" style="background-color:#181515;">--}}
+                {{--                    <p class="leading-none m-0"><strong>DEALS END IN:</strong></p>--}}
+                {{--                    <div class="h-12 mx-5 bg-promo" style="width:2px;"></div>--}}
+                {{--                    <div class="tzcd-big">--}}
+                {{--                        <div class="inline-block">--}}
+                {{--                            <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>--}}
+                {{--                            <p class="leading-none uppercase font-extrabold text-xs text-promo">days</p>--}}
+                {{--                        </div>--}}
+                {{--                        <div class="inline-block mx-2">--}}
+                {{--                            <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>--}}
+                {{--                            <p class="leading-none uppercase font-extrabold text-xs text-promo">hrs</p>--}}
+                {{--                        </div>--}}
+                {{--                        <div class="inline-block mr-2">--}}
+                {{--                            <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>--}}
+                {{--                            <p class="leading-none uppercase font-extrabold text-xs text-promo">mins</p>--}}
+                {{--                        </div>--}}
+                {{--                        <div class="inline-block">--}}
+                {{--                            <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>--}}
+                {{--                            <p class="leading-none uppercase font-extrabold text-xs text-promo">secs</p>--}}
+                {{--                        </div>--}}
+                {{--                    </div>--}}
+                {{--                </div>--}}
             </div>
         </div>
     </header>
@@ -250,53 +269,50 @@
         </div>
     @endif
     <div class="white-box">
-        {{--<section class="bundles">--}}
-            {{--<div class="container mx-auto">--}}
-                {{--<div class="float-left w-full px-2 md:px-3 md:w-1/3 card-wrap">--}}
-                    {{--<a href="/shop/beginner-bundle" class="bundle-card">--}}
-                        {{--<span class="top-left-badge"><i class="fas fa-star"></i> SAVE 20%</span>--}}
-                        {{--<div class="thumb" style="background-image:url(https://cdn.musora.com/image/fetch/w_670,q_auto:best/https://singeo.s3.amazonaws.com/sales/promos/august/beginner_bundle.jpg);"></div>--}}
-                        {{--<div class="float-left w-full px-2 md:px-3">--}}
-                            {{--<p><strong>1 Year of Singing Lessons</strong><br>--}}
-                                {{--<em>Get everything you need to start improving<br class="hidden lg:inline"> your voice and maximize results NOW<br class="hidden lg:inline">--}}
-                                    {{--Annual membership + Singing Starter Kit<br class="hidden lg:inline"> + Vowel Practice Poster</em>--}}
-                                {{--<span class="price"><s class="opacity-30">$158</s> <strong style="color:#00c0b1;">$127</strong></span>--}}
-                            {{--</p>--}}
-                            {{--<span class="join" style="background-color:#00c0b1;">See The Deal &raquo;</span>--}}
-                        {{--</div>--}}
-                    {{--</a>--}}
-                {{--</div>--}}
-                {{--<div class="float-left w-full px-2 md:px-3 md:w-1/3 card-wrap">--}}
-                    {{--<a href="/shop/swag-bundle" class="bundle-card">--}}
-                        {{--<span class="top-left-badge"><i class="fas fa-star"></i> SAVE 25%</span>--}}
-                        {{--<div class="thumb" style="background-image:url(https://cdn.musora.com/image/fetch/w_670,q_auto:best/https://singeo.s3.amazonaws.com/sales/promos/august/swag_bundle.jpg);"></div>--}}
-                        {{--<div class="float-left w-full px-2 md:px-3">--}}
-                            {{--<p><strong>1 Year of Singing Lessons</strong><br>--}}
-                                {{--<em>Get FULL member access<br class="hidden lg:inline"> for a year +--}}
-                                    {{--Rockstar Mug<br class="hidden lg:inline"> + Singeo Retro T-Shirt<br class="hidden lg:inline">&nbsp;</em>--}}
-                                {{--<span class="price"><s class="opacity-30">$168</s> <strong style="color:#ff591b;">$127</strong></span>--}}
-                            {{--</p>--}}
-                            {{--<span class="join" style="background-color:#ff591b;">See The Deal &raquo;</span>--}}
-                        {{--</div>--}}
-                    {{--</a>--}}
-                {{--</div>--}}
+        <section class="bundles">
+            <div class="container mx-auto fixed-cards">
+                <div class="float-left w-full px-2 md:px-3 md:w-1/2 card-wrap">
+                    <a href="/shop/bundle-unlimited" class="bundle-card">
+                        <span class="top-left-badge text-white bg-promo"><i class="fas fa-star"></i> $538 IN FREE BONUSES</span>
+                        <div class="bg-center bg-cover pb-40 sm:pb-56 xl:pb-64" style="background-image:url(https://cdn.musora.com/image/fetch/w_1000,q_auto:best/https://singeo.s3.amazonaws.com/sales/promos/black-friday/unlimited-lessons.png);"></div>
+                        <div class="float-left w-full px-2 md:px-3">
+                            <p><strong>Singeo Membership + 5 Bonuses</strong><br>
+                                <em>Singeo Annual Membership<br class="hidden lg:inline"> + Starter Kit + Practice Poster + Guitar/Piano Lessons & More!</em>
+                                <span class="price"><s class="opacity-30">$778</s> <strong class="linear-purple">${{ SingeoPrices::$singeoMembershipAnnual }}</strong></span>
+                            </p>
+                            <span class="join" style="background:linear-gradient(180deg, #8300E9 0%, #03017C 100%);">See The Deal &raquo;</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="float-left w-full px-2 md:px-3 md:w-1/2 card-wrap">
+                    <a href="/singing-starter-kit" class="flex flex-row text-white rounded-xl mb-5 overflow-hidden relative block w-full sm:text-left px-5 lg:px-10 py-10 sm:py-10 lg:py-28">
+                        <div class="relative z-10 inline-block w-full sm:w-auto text-center mx-0">
+                            <img class="h-20 md:h-16 lg:h-28" src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://singeo.s3.amazonaws.com/products/singing-starter-kit/logo.png" alt="essential bundle logo"><br>
+                            <p class="leading-tight mt-2 mb-2 lg:mb-3 lg:mt-5 text-sm">
+                                Everything you need to <b>start singing now.</b>
+                            </p>
+                            <div class="join white smaller w-full" style="background:#D46A7D;color:white;">only <s style="color:#C4C4C4;">${{ App\Prices::$singingStarterKitFull }}</s> ${{ App\Prices::$singingStarterKit }} &raquo;</div><br>
+                        </div>
+                        <div class="hidden sm:block absolute inset-0 z-0 bg-cover" style="background-position:60% 0;background-color:#0d1d3f;background-image:url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://singeo.s3.amazonaws.com/sales/promos/black-friday/singing-starter-kit-banner.jpg);"></div>
+                        <div class="block sm:hidden absolute inset-0 z-0" style="background-color:#293239;"></div>
+                    </a>
+                </div>
 
-                {{--<div class="float-left w-full px-2 md:px-3 md:w-1/3 card-wrap">--}}
-                    {{--<a href="/lifetime" class="bundle-card">--}}
-                        {{--<span class="top-left-badge">ONLY {{ $products['singeo-lifetime-membership-access']->getPublicStockCount() }} SPOTS</span>--}}
-                        {{--<div class="thumb" style="background-image:url(https://cdn.musora.com/image/fetch/w_670,q_auto:best/https://singeo.s3.amazonaws.com/sales/promos/august/lifetime_bundle.jpg);"></div>--}}
-                        {{--<div class="float-left w-full px-2 md:px-3">--}}
-                            {{--<p><strong>Lifetime of Singing Lessons</strong><br>--}}
-                                {{--<em>Have LIFETIME access to our<br class="hidden lg:inline"> member's area + ALL our merch:<br class="hidden lg:inline"> Do-Re-Mi--}}
-                                    {{--tumbler + Rockstar Mug +<br class="hidden lg:inline"> Vowel Practice Poster + Retro T-shirt</em>--}}
-                                {{--<strong class="price"><s class="opacity-30">$397</s> <span style="color:#dc2661">$297</span></strong>--}}
-                            {{--</p>--}}
-                            {{--<span class="join" style="background-color:#dc2661;color:#fff;">See The Deal &raquo;</span>--}}
-                        {{--</div>--}}
-                    {{--</a>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-        {{--</section>--}}
+                <div class="float-left w-full px-2 md:px-3 card-wrap">
+                    <a href="/beautiful-harmonies" class="flex flex-row-reverse text-white rounded-xl mb-5 overflow-hidden relative block w-full sm:text-left px-5 lg:px-12 py-10 sm:py-7 lg:py-20 margin-per">
+                        <div class="relative z-10 inline-block w-full sm:w-auto text-center mx-0">
+                            <img class="h-20 md:h-16 lg:h-28" src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://singeo.s3.amazonaws.com/sales/promos/black-friday/essential-logo.png" alt="essential bundle logo"><br>
+                            <p class="leading-tight mt-4 mb-2 lg:mb-3 lg:mt-5 text-sm">
+                                Take your singing skills to the <b>next level.</b>
+                            </p>
+                            <div class="join white smaller w-full" style="background:white;color:#2B384D;">only <s style="color:#C4C4C4;">${{ App\Prices::$beautifulHarmoniesFull }}</s> ${{ App\Prices::$beautifulHarmonies }} &raquo;</div><br>
+                        </div>
+                        <div class="hidden sm:block absolute inset-0 z-0 bg-cover bg-center" style="background-color:#0d1d3f;background-image:url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://singeo.s3.amazonaws.com/sales/promos/black-friday/beautiful-harmonies-banner.jpg);"></div>
+                        <div class="block sm:hidden absolute inset-0 z-0" style="background-color:#293239;"></div>
+                    </a>
+                </div>
+            </div>
+        </section>
 
         <section class="grid-view category-section" data-category="lessons">
             <ul class="container mx-auto fixed-cards">
@@ -335,7 +351,6 @@
 
     <script src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/singeo/nav-footer.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/js/jquery.countdown-2.min.js') }}"></script>
 
     <script>
         $(document).ready(function () {
@@ -371,70 +386,13 @@
                     }
                 });
             });
-            // Countdown
-            $('.tzcd-full').countdown('2022/09/01')
-                .on('update.countdown', function (event) {
-                    var format = '%-M Minute%!M %-S Second%!S';
-                    if (event.offset.totalHours > 0) {
-                        format = '%-H Hour%!H ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '%-D Day%!D ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('a limited time');
-                });
-            $('.tzcd-med').countdown('2022/09/01')
-                .on('update.countdown', function (event) {
-                    var format = '%-M Minute%!M';
-                    if (event.offset.totalHours > 0) {
-                        format = '%-H Hour%!H ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '%-D Day%!D ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('a limited time');
-                });
-            $('.tzcd-small').countdown('2022/09/01')
-                .on('update.countdown', function (event) {
-                    var format = '%-MM %-SS';
-                    if (event.offset.totalHours > 0) {
-                        format = '%-HH ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '%-DD ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('a limited time');
-                });
-            $('.tzcd-big').countdown('2022/09/01')
-                .on('update.countdown', function (event) {
-                    var format = '' + '<div><h1>%M</h1> <p>min%!M</p></div> ' + '<div><h1>%S</h1> <p>sec%!S</p></div>';
-                    if (event.offset.totalHours > 0) {
-                        format = '' + '<div><h1>%H</h1> <p>hr%!H</p></div> ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '' + '<div><h1>%D</h1> <p>day%!D</p></div> ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('<div><h1>LIMITED</h1> <p>TIME LEFT</p></div>');
-                });
+
 
             $('.delay-overlay').click(function (e) {
                 e.stopPropagation();
 
                 $('.delay-overlay').removeClass('active');
                 $('.shipping-info').removeClass('active');
-                $('.timing-info').removeClass('active');
             });
 
             $(".shipping-delay .shipping-trigger").on('click', function () {
@@ -442,21 +400,14 @@
                 $('.shipping-info').addClass('active');
             });
 
-            $(".shipping-delay .timing-trigger").on('click', function () {
-                $('.delay-overlay').addClass('active');
-                $('.timing-info').addClass('active');
-            });
-
             $(".shipping-delay .close-modal").on('click', function () {
                 $('.delay-overlay').removeClass('active');
                 $('.shipping-info').removeClass('active');
-                $('.timing-info').removeClass('active');
             });
             $(document).keyup(function(e) {
                 if (e.which === 27) {
                     $('.delay-overlay').removeClass('active');
                     $('.shipping-info').removeClass('active');
-                    $('.timing-info').removeClass('active');
                 }
             });
         });

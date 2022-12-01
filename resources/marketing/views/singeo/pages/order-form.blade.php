@@ -130,17 +130,9 @@
 
         }, false);
         document.addEventListener('click', function (event) {
-            if (!event.target.closest('.timing-trigger')) return;
-
-            document.querySelector('.timing-info').classList.add("active");
-            document.querySelector('.delay-overlay').classList.add("active");
-
-        }, false);
-        document.addEventListener('click', function (event) {
             if (!event.target.closest('.close-modal')) return;
 
             document.querySelector('.shipping-info').classList.remove("active");
-            document.querySelector('.timing-info').classList.remove("active");
             document.querySelector('.delay-overlay').classList.remove("active");
 
         }, false);
@@ -148,7 +140,6 @@
             if (!event.target.closest('.delay-overlay')) return;
 
             document.querySelector('.shipping-info').classList.remove("active");
-            document.querySelector('.timing-info').classList.remove("active");
             document.querySelector('.delay-overlay').classList.remove("active");
 
         }, false);

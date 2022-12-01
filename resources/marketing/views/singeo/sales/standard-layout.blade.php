@@ -27,7 +27,7 @@
           'name' => 'Chris   <br> Johnson',
           'subtitle' => 'Balancing Technique<br> And Artistry',
           'smallInfo' => 'Chris is known for helping singers to strike the perfect balance between technique and artistry. ',
-          'info' => 'Chris Johnson is a vocal coach known for developing areas of the voice that may not have been usable, or releasing any tension or discomfort that has crept in over time. Helping singers to strike the perfect balance between technique and artistry is an art unto itself. And Chris has mastered that art and will be sharing his secrets with Singeo members in July!',
+          'info' => 'Chris Johnson is a vocal coach known for developing areas of the voice that may not have been usable, or releasing any tension or discomfort that has crept in over time. Helping singers to strike the perfect balance between technique and artistry is an art unto itself. And Chris has mastered that art and will be sharing his secrets with Singeo members!',
           'modal' => 'johnson',
           'prev' => 'ziegler',
           'next' => 'lindsay',
@@ -84,7 +84,7 @@
       'info' => 'Darcy has worked in various areas of the music industry for over 30 years, but first and foremost, Darcy is a singer and educator who has made the study of voice a focal point since 2005. He is also our resident rockstar having shared gold record success performing with Juno award-winning recording artists, Prism.',
       'modal' => 'darcy',
       'prev' => 'shelea',
-      'next' => 'johnson',
+      'next' => 'benedict',
       'trending' => true,
       'trailer' => true
       ],
@@ -97,7 +97,7 @@
       'smallInfo' => 'Her viral videos have made her one of the most followed Canadian country artists on TikTok. ',
       'info' => 'Hailey Benedict is a mutil-award winning singer/songwriter who has celebrated national radio success, shared a stage with Keith Urban, has millions of views on social media... and is only 19 years old.  Hailey is excited to share her formula for growing an engaged online audience.',
       'modal' => 'benedict',
-      'prev' => 'johnson',
+      'prev' => 'darcy',
       'next' => false,
       'trending' => true
       ],
@@ -220,7 +220,7 @@
       "level" => "10",
       "title" => "Into The Spotlight, Onto The Stage",
       "description" => "You are now a singer!! This is very exciting! You have worked so hard to get here… now what? Where can singing take you?  Singing doesn’t always have to be a performance, so don’t be intimidated by the thought of stepping onto a stage. There are many different ways you can use your new, confident singing voice.  Ways you may never have even imagined.<br><br>In this level we’ll explore some potential paths you can take with singing, opening up your mind to the possibilities and inspiring you to continue to keep singing a part of your daily life.  It doesn’t stop here!  We hope that you will  check out some of our course packs that focus on some specific topics in singing to expand your knowledge and give you more tools to develop your unique sound!",
-      "meta" => "Aug."
+      "meta" => "Coming Soon!"
       ]
   ];
 
@@ -325,6 +325,14 @@
       [
       'modal' => 'sheleaTrailer',
       'vimeo' => 'https://www.youtube.com/embed/GEZQZ3pxpAE?rel=0&showinfo=0&autoplay=1',
+      ],
+      [
+      'modal' => 'bfTrailer',
+      'vimeo' => '//player.vimeo.com/video/774002156?autoplay=1',
+      ],
+      [
+      'modal' => 'cmTrailer',
+      'vimeo' => '//player.vimeo.com/video/774002364?autoplay=1',
       ],
   ];
 
@@ -621,6 +629,15 @@
                         href="#customize-anchor" class="join blue smaller anchor-slide w-1/2 md:w-1/3 lg:w-1/4 anchor-slide"
                         @endif
                 >Get Started</a>
+                @if(!empty($bfButton))
+                    <a
+                        @if(Carbon\Carbon::create(2022, 11, 28, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+                            data-open="bfTrailer"
+                        @else
+                            data-open="cmTrailer"
+                        @endif
+                        class="join outline promo smaller autoplay-video w-2/3 md:w-auto mt-3 md:mt-0"><i class="fas fa-play"></i> Holiday Deals</a>
+                @endif
             </div>
         </div>
         <div class="header-image relative mx-auto w-full h-full relative z-0 bg-no-repeat" style="max-width: 1536px;background-image:url(https://cdn.musora.com/image/fetch/w_2500,q_auto:best/q_auto:best/https://singeo.s3.amazonaws.com/sales/2022/header-bg-3.jpg);">
@@ -674,9 +691,9 @@
                     href="#customize-anchor" class="join smaller blue anchor-slide mt-9 md:mt-12 mb-2 lg:w-1/3"
                     @endif
             >Get The Singeo Advantage</a>
-            @if(empty($trialVersion))
-                <p class="text-light-navy text-sm"><em>Just ${{ number_format(SingeoPrices::$singeoMembershipAnnual / 12, 2) }} per month, 90-day guarantee.</em></p>
-            @endif
+{{--            @if(empty($trialVersion))--}}
+{{--                <p class="text-light-navy text-sm"><em>Just ${{ number_format(SingeoPrices::$singeoMembershipAnnual / 12, 2) }} per month, 90-day guarantee.</em></p>--}}
+{{--            @endif--}}
 
             <div class="slick mx-auto max-w-xs md:max-w-xl lg:max-w-4xl my-9 md:mb-0 h-44 sm:h-24 lg:h-20">
                 <div class="px-3 md:px-6">
@@ -1140,13 +1157,12 @@
                     @else
                         <td class="rounded-b-xl">
                             @if(empty($trialVersion))
-                                <strong>
-                                    {{-- ${{ number_format(SingeoPrices::$singeoMembershipAnnual / 12, 2) }} --}}
-                                    7.92
-                                </strong>
-                                    /mo
-                                    <br>
-                                <em>Billed annually</em><br><br>
+                                @if(number_format(SingeoPrices::$singeoMembershipAnnual, 2) == intval(SingeoPrices::$singeoMembershipAnnual))
+                                    <strong>${{  round(SingeoPrices::$singeoMembershipAnnual / 12, 2) }}</strong>/mo<br>
+                                @else
+                                    <strong>${{  number_format(SingeoPrices::$singeoMembershipAnnual / 12, 2)  }}</strong>/mo<br>
+                                @endif
+                                <em>Billed annually at ${{  SingeoPrices::$singeoMembershipAnnual }}</em><br><br>
                                 Unlimited lessons & support.
                             @else
                                 <strong>Free Trial</strong><br>&nbsp;
@@ -1336,72 +1352,9 @@
     <script type="text/javascript" src="/marketing/parcel/singeo/sales-page.js"></script>
     <script type="text/javascript" src="/marketing/js/modal.js"></script>
     <script type="text/javascript" src="/marketing/js/modal-autoplay.js"></script>
-    <script type="text/javascript" src="/marketing/js/jquery.countdown-2.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
     <script type="text/javascript" src="/marketing/js/sliding-anchor.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('.tzcd-full').countdown('2022/10/01')
-                .on('update.countdown', function (event) {
-                    var format = '%-M Minute%!M %-S Second%!S';
-                    if (event.offset.totalHours > 0) {
-                        format = '%-H Hour%!H ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '%-D Day%!D ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('a limited time');
-                });
-            $('.tzcd-days').countdown('2022/10/01')
-                .on('update.countdown', function (event) {
-                    var format = '';
-
-                    if (event.offset.totalDays > 0) {
-                        format = '%-D Day%!D ' + format;
-                    } else if (event.offset.totalHours > 0) {
-                        format = '%-H Hour%!H ' + format;
-                    } else if (event.offset.totalHours <= 0) {
-                        format = '%-M Minute%!M %-S Second%!S' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('limited time');
-                });
-            $('.tzcd-small').countdown('2022/10/01')
-                .on('update.countdown', function (event) {
-                    var format = '%-MM %-SS';
-                    if (event.offset.totalHours > 0) {
-                        format = '%-HH ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '%-DD ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('a limited time');
-                });
-            $('.tzcd-big').countdown('2022/10/01')
-                .on('update.countdown', function (event) {
-                    var format = '' + '<div><h1>%M</h1> <p>min%!M</p></div> ' + '<div><h1>%S</h1> <p>sec%!S</p></div>';
-                    if (event.offset.totalHours > 0) {
-                        format = '' + '<div><h1>%H</h1> <p>hr%!H</p></div> ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '' + '<div><h1>%D</h1> <p>day%!D</p></div> ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('<div><h1>LIMITED</h1> <p>TIME LEFT</p></div>');
-                });
-        });
-    </script>
 
     @yield('additional-scripts')
 @endsection
