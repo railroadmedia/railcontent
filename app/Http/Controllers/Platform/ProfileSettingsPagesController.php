@@ -216,7 +216,7 @@ class ProfileSettingsPagesController extends BaseController
         $paymentMethods = $this->paymentMethodRepository->getAllUsersPaymentMethods(
             $user->id,
             $request,
-            'drumeo'
+            brand()
         );
 
         $paymentMethodsJson = ResponseService::paymentMethod(
