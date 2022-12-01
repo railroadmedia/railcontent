@@ -114,6 +114,7 @@ class Bundle extends Resource
                 }),
             Text::make('Page Logo', 'page_logo')->hideFromIndex()->hideFromDetail(),
             Text::make('Header Text', 'header_text')->hideFromIndex(),
+            Text::make('Subheader Text', 'subheader_text')->hideFromIndex(),
             Text::make('Special Text', 'special_text')->hideFromIndex(),
             Text::make('Video Link', 'video_src')
                 ->hideFromIndex(),
