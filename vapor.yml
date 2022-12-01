@@ -4,7 +4,15 @@ environments:
     production:
         domain:
             - 'musora.com'
+            - 'drumeo.com'
+            - 'pianote.com'
+            - 'guitareo.com'
+            - 'singeo.com'
             - 'production.musora.com'
+            - 'production.drumeo.com'
+            - 'production.pianote.com'
+            - 'production.guitareo.com'
+            - 'production.singeo.com'
         runtime: docker
         gateway-version: 2
         memory: 1728
@@ -22,7 +30,12 @@ environments:
             - 'php artisan view:cache'
             - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
     pre-production:
-        domain: 'pre-production.musora.com'
+        domain:
+            - 'pre-production.musora.com'
+            - 'pre-production.drumeo.com'
+            - 'pre-production.pianote.com'
+            - 'pre-production.guitareo.com'
+            - 'pre-production.singeo.com'
         scheduler: false
         runtime: docker
         gateway-version: 2
@@ -66,7 +79,12 @@ environments:
             - 'php artisan view:cache'
             - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
     web-staging-one:
-        domain: 'web-staging-one.musora.com'
+        domain:
+          - 'web-staging-one.musora.com'
+          - 'web-staging-one.drumeo.com'
+          - 'web-staging-one.pianote.com'
+          - 'web-staging-one.guitareo.com'
+          - 'web-staging-one.singeo.com'
         scheduler: false
         runtime: docker
         gateway-version: 2
@@ -85,7 +103,12 @@ environments:
             - 'php artisan view:cache'
             - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
     web-staging-two:
-        domain: 'web-staging-two.musora.com'
+        domain:
+          - 'web-staging-two.musora.com'
+          - 'web-staging-two.drumeo.com'
+          - 'web-staging-two.pianote.com'
+          - 'web-staging-two.guitareo.com'
+          - 'web-staging-two.singeo.com'
         scheduler: false
         runtime: docker
         gateway-version: 2
@@ -104,7 +127,12 @@ environments:
             - 'php artisan view:cache'
             - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
     web-staging-three:
-        domain: 'web-staging-three.musora.com'
+        domain:
+          - 'web-staging-three.musora.com'
+          - 'web-staging-three.drumeo.com'
+          - 'web-staging-three.pianote.com'
+          - 'web-staging-three.guitareo.com'
+          - 'web-staging-three.singeo.com'
         scheduler: false
         runtime: docker
         gateway-version: 2
@@ -123,7 +151,12 @@ environments:
             - 'php artisan view:cache'
             - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
     web-staging-four:
-        domain: 'web-staging-four.musora.com'
+        domain:
+          - 'web-staging-four.musora.com'
+          - 'web-staging-four.drumeo.com'
+          - 'web-staging-four.pianote.com'
+          - 'web-staging-four.guitareo.com'
+          - 'web-staging-four.singeo.com'
         scheduler: false
         runtime: docker
         gateway-version: 2
@@ -142,7 +175,12 @@ environments:
             - 'php artisan view:cache'
             - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
     web-staging-five:
-        domain: 'web-staging-five.musora.com'
+        domain:
+          - 'web-staging-five.musora.com'
+          - 'web-staging-five.drumeo.com'
+          - 'web-staging-five.pianote.com'
+          - 'web-staging-five.guitareo.com'
+          - 'web-staging-five.singeo.com'
         scheduler: false
         runtime: docker
         gateway-version: 2
@@ -161,7 +199,12 @@ environments:
             - 'php artisan view:cache'
             - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
     app-staging-one:
-        domain: 'app-staging-one.musora.com'
+        domain:
+          - 'app-staging-one.musora.com'
+          - 'app-staging-one.drumeo.com'
+          - 'app-staging-one.pianote.com'
+          - 'app-staging-one.guitareo.com'
+          - 'app-staging-one.singeo.com'
         scheduler: false
         runtime: docker
         gateway-version: 2
@@ -180,7 +223,12 @@ environments:
             - 'php artisan view:cache'
             - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
     app-staging-two:
-        domain: 'app-staging-two.musora.com'
+        domain:
+          - 'app-staging-two.musora.com'
+          - 'app-staging-two.drumeo.com'
+          - 'app-staging-two.pianote.com'
+          - 'app-staging-two.guitareo.com'
+          - 'app-staging-two.singeo.com'
         scheduler: false
         runtime: docker
         gateway-version: 2
@@ -199,7 +247,12 @@ environments:
             - 'php artisan view:cache'
             - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
     app-staging-three:
-        domain: 'app-staging-three.musora.com'
+        domain:
+          - 'app-staging-three.musora.com'
+          - 'app-staging-three.drumeo.com'
+          - 'app-staging-three.pianote.com'
+          - 'app-staging-three.guitareo.com'
+          - 'app-staging-three.singeo.com'
         scheduler: false
         runtime: docker
         gateway-version: 2
