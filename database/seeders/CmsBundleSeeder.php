@@ -108,12 +108,134 @@ class CmsBundleSeeder extends Seeder
                         'lifetime_access' => false,
                     ],
                     [
+                        'name' => 'The P4 Practice Pad',
+                        'free_bonus' => true,
+                        'lifetime_access' => false,
+                    ],
+                    [
+                        'name' => 'Vater Drumeo 5A Drumsticks',
+                        'free_bonus' => true,
+                        'lifetime_access' => false,
+                    ],
+                ],
+            ],
+            [
+                'brand' => 1,
+                'product_type_id' => 6,
+                'name' => 'The Perfect Gift Bundle',
+                'slug' => 'bundle-perfect-gift',
+                'sku' => 'products[PASS-12]=1&products[practicepad]=1&products[Drumeo-VaterSticks]=1&locked=true',
+                'meta_desc' => 'Need the perfect gift idea for YOU or a drummer you know?',
+                'meta_img' => 'https://drumeo-assets.s3.amazonaws.com/promos/november/perfect-gift-fb-share-image.jpg',
+                'price' => 240,
+                'discounted_price' => 0,
+                'special_text' => '+$91.95 In Bonuses',
+                'page_logo' => 'https://drumeo-assets.s3.amazonaws.com/promos/november/perfect-gift-bundle-black.png',
+                'header_text' => 'The perfect gift for any drummer. (Unlimited drum lessons + free bonuses!)',
+                'video_src' => '//player.vimeo.com/video/774004079',
+                'images' => [
+                ],
+                'sold_out' => false,
+                'guaranteed' => true,
+                'free_shipping' => true,
+                'products' => [
+                    [
+                        'name' => 'Drumeo Membership',
+                        'free_bonus' => false,
+                        'lifetime_access' => false,
+                    ],
+                    [
                         'name' => 'Drumeo QuietPad',
                         'free_bonus' => true,
                         'lifetime_access' => false,
                     ],
                     [
-                        'name' => 'Drumeo QuietKick',
+                        'name' => 'Vater Drumeo 5A Drumsticks',
+                        'free_bonus' => true,
+                        'lifetime_access' => false,
+                    ],
+                ],
+            ],
+            [
+                'brand' => 1,
+                'product_type_id' => 6,
+                'name' => 'The Practice Anywhere Bundle',
+                'slug' => 'bundle-practice-anywhere',
+                'sku' => 'products[practicepad]=1&products[Drumeo-VaterSticks]=1&products[rudiments-poster]=1',
+                'meta_desc' => 'Improve your rudiments & stickings on the fly.',
+                'meta_img' => 'https://i.vimeocdn.com/video/1554531059-c7c5e2ba1eeadebdb604459ef6527d5afb6ea8c91d057880342efca2f90df414-d_1200.jpg',
+                'price' => 98.95,
+                'discounted_price' => 79,
+                'special_text' => '',
+                'page_logo' => 'https://drumeo-assets.s3.amazonaws.com/promos/november/practice-anywhere-bundle-black.png',
+                'header_text' => 'Improve your rudiments & stickings on the fly.',
+                'video_src' => '//player.vimeo.com/video/773981652',
+                'spread' => 'https://drumeo-assets.s3.amazonaws.com/promos/november/practice-anywhere-spread.png',
+                'overview' => 'Run your rudiments anytime day or night & develop silky-smooth hands on the kit.
+
+The Practice Anywhere Bundle includes the P4 Practice Pad – the only practice pad that simulates the feels of a REAL drum set – fresh drumsticks, and the all NEW Drumeo Rudiments poster.
+
+You’ll have everything you need to improve your hands around the drums.',
+                'images' => [
+                ],
+                'sold_out' => false,
+                'guaranteed' => true,
+                'free_shipping' => true,
+                'products' => [
+                    [
+                        'name' => 'Drumeo Membership',
+                        'free_bonus' => false,
+                        'lifetime_access' => false,
+                    ],
+                    [
+                        'name' => 'Drumeo QuietPad',
+                        'free_bonus' => true,
+                        'lifetime_access' => false,
+                    ],
+                    [
+                        'name' => 'Vater Drumeo 5A Drumsticks',
+                        'free_bonus' => true,
+                        'lifetime_access' => false,
+                    ],
+                ],
+            ],
+            [
+                'brand' => 1,
+                'product_type_id' => 6,
+                'name' => 'The Ultimate Lessons Bundle',
+                'slug' => 'bundle-ultimate-lessons',
+                'sku' => 'products[DLM]=1,year,1&amp;products[quietpad]=1&amp;products[Drumeo-VaterSticks]=1&amp;products[drum-technique-made-easy-pack]=1&amp;products[four-weeks-to-better-drum-fills]=1&amp;products[GHFAL-DIGI]=1&amp;products[SD-DIGI]=1&amp;products[rock-drumming-masterclass-pack]=1&amp;products[independence-made-easy-pack]=1&amp;products[electrify-your-drumming]=1&amp;products[learn-songs-faster-pack]=1&amp;locked=true" data-base-url="/laravel/public/shopping-cart/api/query?products[DLM]=1,year,1&amp;products[quietpad]=1&amp;products[Drumeo-VaterSticks]=1&amp;products[drum-technique-made-easy-pack]=1&amp;products[four-weeks-to-better-drum-fills]=1&amp;products[GHFAL-DIGI]=1&amp;products[SD-DIGI]=1&amp;products[rock-drumming-masterclass-pack]=1&amp;products[independence-made-easy-pack]=1&amp;products[electrify-your-drumming]=1&amp;products[learn-songs-faster-pack]=1&amp;locked=true',
+                'meta_desc' => 'The Biggest Drumeo Discount EVER + 10 Free Bonuses',
+                'meta_img' => 'https://drumeo-assets.s3.amazonaws.com/promos/november/ultimate-lessons-fb-share-image.jpg',
+                'price' => 1468.94,
+                'discounted_price' => 240,
+                'special_text' => '',
+                'page_logo' => 'https://drumeo-assets.s3.amazonaws.com/promos/november/ultimate-lessons-bundle-black.png',
+                'header_text' => 'The Biggest Drumeo Discount EVER + 10 Free Bonuses',
+                'video_src' => '//player.vimeo.com/video/772644649',
+                'spread' => 'https://drumeo-assets.s3.amazonaws.com/promos/november/ultimate-bundle-spread.png',
+                'overview' => 'The Ultimate Lessons Bundle is your chance to get unlimited drum lessons for a year at **the lowest price ever.**
+
+You’ll get $1228.94 in FREE bonuses (including an ultra-quiet practice pad & drumsticks).
+
+That breaks down to just $20/month to learn the drums with legendary instructors, access 5,000+ note-for-note breakdowns of famous drumming songs, and get personalized support every step of the way.
+
+If you’ve always wanted to learn the drums, are getting BACK into drumming, or are ready to take your playing to the next level, this is the bundle for YOU.
+
+Scroll down to see everything included with the Ultimate Lessons Bundle.',
+                'images' => [
+                ],
+                'sold_out' => false,
+                'guaranteed' => true,
+                'free_shipping' => false,
+                'products' => [
+                    [
+                        'name' => 'Drumeo Membership',
+                        'free_bonus' => false,
+                        'lifetime_access' => false,
+                    ],
+                    [
+                        'name' => 'Drumeo QuietPad',
                         'free_bonus' => true,
                         'lifetime_access' => false,
                     ],
@@ -125,62 +247,40 @@ class CmsBundleSeeder extends Seeder
                     [
                         'name' => 'Drum Technique Made Easy',
                         'free_bonus' => true,
-                        'lifetime_access' => false,
+                        'lifetime_access' => true,
                     ],
                     [
                         'name' => 'Four Weeks To Better Drum Fills',
                         'free_bonus' => true,
-                        'lifetime_access' => false,
+                        'lifetime_access' => true,
                     ],
                     [
                         'name' => 'Great Hands For A Lifetime',
                         'free_bonus' => true,
-                        'lifetime_access' => false,
-                    ],
-                ],
-            ],
-            [
-                'brand' => 2,
-                'product_type_id' => 6,
-                'name' => 'The Beginner Bundle',
-                'slug' => 'bundle-beginner',
-                'sku' => 'products[PIANOTE-MEMBERSHIP-6-MONTH]=1&products[play-beautiful-piano]=1&products[500-songs-in-5-days]=1&products[piano-riffs-and-fills]=1&locked=true',
-                'meta_desc' => 'The PERFECT bundle to get started on the piano.',
-                'meta_img' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/beginner/vid-thumb21.jpg',
-                'price' => 97,
-                'discounted_price' => 0,
-                'special_text' => '+$205 In Bonuses',
-                'page_logo' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/beginner/logo2020.png',
-                'header_text' => 'The PERFECT bundle to get started on the piano.',
-                'video_src' => 'https://player.vimeo.com/external/647936834.hd.mp4?s=b9075b44c7e72d4fc687568b8dcc32a667347511&profile_id=174',
-                'images' => [
-                ],
-                'overview' => 'Start learning piano the right way without the long-term commitment.
-
-This beginner bundle has everything you need to begin your journey on the piano. Learn the songs you love from our HUGE song tutorial library, complete with downloadable backing tracks and sheet music.
-
-Scroll down to see everything that’s included - and start learning today!',
-                'sold_out' => true,
-                'guaranteed' => true,
-                'free_shipping' => false,
-                'products' => [
-                    [
-                        'name' => '6-Month Pianote Membership',
-                        'free_bonus' => false,
-                        'lifetime_access' => false,
+                        'lifetime_access' => true,
                     ],
                     [
-                        'name' => 'Playing Beautiful Piano',
+                        'name' => 'Rock Drumming Masterclass',
                         'free_bonus' => true,
                         'lifetime_access' => true,
                     ],
                     [
-                        'name' => '500 Songs In 5 Days',
+                        'name' => 'Independence Made Easy',
                         'free_bonus' => true,
                         'lifetime_access' => true,
                     ],
                     [
-                        'name' => 'Piano Riffs & Fills',
+                        'name' => 'Electrify Your Drumming',
+                        'free_bonus' => true,
+                        'lifetime_access' => true,
+                    ],
+                    [
+                        'name' => 'Successful Drumming',
+                        'free_bonus' => true,
+                        'lifetime_access' => true,
+                    ],
+                    [
+                        'name' => 'Learn Songs Faster',
                         'free_bonus' => true,
                         'lifetime_access' => true,
                     ],
@@ -191,11 +291,11 @@ Scroll down to see everything that’s included - and start learning today!',
                 'product_type_id' => 6,
                 'name' => 'The Book Bundle',
                 'slug' => 'book-bundle',
-                'sku' => 'products[classical-book]=1&products[pianote-practice-planner]=1&products[piano-chords-and-scales-guide]=1&locked=true',
+                'sku' => 'products[piano-chords-and-scales-guide]=1&products[pianote-practice-planner]=1&products[christmas-song-book]=1&products[christmas-song-book-digital]=1&products[poster-chords]=1&products[poster-scales]=1&redirect=/order&locked=true',
                 'meta_desc' => 'Only the BEST piano books from Pianote.',
-                'meta_img' => 'https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/july/book_banner.png',
-                'price' => 117,
-                'discounted_price' => 67,
+                'meta_img' => 'https://pianote.s3.amazonaws.com/sales/promos/november/just-the-books-fb-share-image.jpg',
+                'price' => 145,
+                'discounted_price' => 59,
                 'special_text' => '',
                 'page_logo' => 'https://pianote.s3.amazonaws.com/sales/promos/july/book_black.png',
                 'header_text' => 'Only the BEST piano books from Pianote.',
@@ -203,16 +303,21 @@ Scroll down to see everything that’s included - and start learning today!',
                 'images' => [
                     'https://pianote.s3.amazonaws.com/sales/promos/july/book_banner.png'
                 ],
-                'overview' => 'Build your musical knowledge (and library) with 3 beautiful books from Pianote. This bundle will give you a beautiful repertoire of classical piano pieces, as well as a handy chord and scale reference guide so you never get stuck, PLUS the tool to plan and perfect your practice time so you see serious progress.
+                'overview' => 'Build your musical knowledge (and library) with 3 beautiful books, 1 digital book, and 2 posters from Pianote. This bundle will give you 10 classical Christmas Carols, an encyclopedia of all the important chords and scales, PLUS the tool to plan and perfect your practice time so you see serious progress.
 
-Save BIG on these books by bundling them together.
+And you’ll get 2 big color posters to hang in your practice space for easy and quick reference to learn your piano chords and scales..
 ',
-                'sold_out' => true,
+                'sold_out' => false,
                 'guaranteed' => true,
                 'free_shipping' => false,
                 'products' => [
                     [
-                        'name' => 'Classical Piano Pieces',
+                        'name' => 'Pianote Christmas Songbook',
+                        'free_bonus' => false,
+                        'lifetime_access' => false,
+                    ],
+                    [
+                        'name' => 'Pianote Digital Christmas Songbook',
                         'free_bonus' => false,
                         'lifetime_access' => false,
                     ],
@@ -223,348 +328,74 @@ Save BIG on these books by bundling them together.
                     ],
                     [
                         'name' => 'Piano Chords & Scales',
-                        'free_bonus' => false,
-                        'lifetime_access' => false,
-                    ],
-                ],
-            ],
-            [
-                'brand' => 2,
-                'product_type_id' => 6,
-                'name' => 'The Classical Bundle',
-                'slug' => 'classical-bundle',
-                'sku' => 'products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[piano-technique-made-easy]=1&products[pianote-practice-planner]=1&products[classical-book]=1&locked=true&redirect=/order',
-                'meta_desc' => 'The FUN way to learn beautiful classical piano.',
-                'meta_img' => 'https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/july/classical_banner.png',
-                'price' => 197,
-                'discounted_price' => 0,
-                'special_text' => 'Bonuses worth $198',
-                'page_logo' => 'https://pianote.s3.amazonaws.com/sales/promos/july/classical_black.png',
-                'header_text' => 'The FUN way to learn beautiful classical piano.',
-                'video_src' => '',
-                'images' => [
-                    'https://pianote.s3.amazonaws.com/sales/promos/july/classical_banner.png',
-                ],
-                'overview' => 'Chopin, Beethoven, Mozart.
-
-Classical piano is timeless and beautiful. We’ve just launched a brand-new curriculum from world-class touring pianist Victoria Theodore. It’s yours with The Classical Bundle, along with 3 fantastic bonuses.
-
-Learn classical pieces you can actually play with our NEW 92-page music book. It’s just one of your free bonuses. Scroll down to see them all.',
-                'sold_out' => true,
-                'guaranteed' => true,
-                'free_shipping' => false,
-                'products' => [
-                    [
-                        'name' => 'Pianote Membership',
-                        'free_bonus' => false,
-                        'lifetime_access' => false,
-                    ],
-                    [
-                        'name' => 'Classical piano',
-                        'free_bonus' => true,
-                        'lifetime_access' => false,
-                    ],
-                    [
-                        'name' => 'Piano Technique Made Easy',
-                        'free_bonus' => true,
-                        'lifetime_access' => true,
-                    ],
-                    [
-                        'name' => 'Classical Piano Pieces',
-                        'free_bonus' => true,
-                        'lifetime_access' => true,
-                    ],
-                    [
-                        'name' => 'Pianote Practice Planner',
-                        'free_bonus' => true,
-                        'lifetime_access' => true,
-                    ],
-                ],
-            ],
-            [
-                'brand' => 2,
-                'product_type_id' => 6,
-                'name' => 'The Digital Training Bundle',
-                'slug' => 'bundle-digital-training',
-                'sku' => 'products%5B500-songs-in-5-days%5D=1&products%5Bpiano-riffs-and-fills%5D=1&products%5Bworship-piano%5D=1&locked=true',
-                'meta_desc' => 'Grab 3 Pianote digital training packs for one low price.',
-                'meta_img' => 'https://i.vimeocdn.com/video/962210152-9648f81a987b76a00b76f0dda8dcaaefcd3e38c5f5f8efb534782d07db39c63d-d_1280',
-                'price' => 297,
-                'discounted_price' => 0,
-                'special_text' => '',
-                'page_logo' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/may/digital-bundle-logo.png',
-                'header_text' => 'Three Awesome Training Packs. One Low Price. Introducing... The Digital Bundle.',
-                'video_src' => 'https://player.vimeo.com/external/460721075.hd.mp4?s=ed782250e3acc9b9994106e22b4b52c1a371149c&profile_id=174',
-                'images' => [
-                ],
-                'overview' => 'Grab 3 Pianote digital training packs for one low price. Learn hundreds of songs with 500 Songs in 5 Days, play beautiful riffs, fills, and licks with Piano Riffs & Fills, and play piano at church with Worship Piano. With this bundle, you’ll get LIFETIME access to all three.',
-                'sold_out' => true,
-                'guaranteed' => false,
-                'free_shipping' => false,
-                'products' => [
-                    [
-                        'name' => '500 Songs In 5 Days',
-                        'free_bonus' => false,
-                        'lifetime_access' => true,
-                    ],
-                    [
-                        'name' => 'Piano Riffs & Fills',
-                        'free_bonus' => false,
-                        'lifetime_access' => true,
-                    ],
-                    [
-                        'name' => 'Worship Piano',
-                        'free_bonus' => false,
-                        'lifetime_access' => true,
-                    ],
-                ],
-            ],
-            [
-                'brand' => 2,
-                'product_type_id' => 6,
-                'name' => 'The Essential Songs Bundle',
-                'slug' => 'bundle-essential-songs',
-                'sku' => 'products[piano-technique-made-easy]=1&products[destupefy-your-left-hand]=1&products[500-songs-in-5-days]=1&products[piano-riffs-and-fills]=1&products[worship-piano]=1&products[faster-fingers]=1&products[sight-reading-made-simple]=1&locked=true',
-                'meta_desc' => 'EVERYTHING you need to start playing songs beautifully.',
-                'meta_img' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/essential-songs/thumbnail2020.png',
-                'price' => 634,
-                'discounted_price' => 97,
-                'special_text' => '',
-                'page_logo' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/essential-songs/logo2020.png',
-                'header_text' => 'EVERYTHING you need to start playing songs beautifully.',
-                'video_src' => 'https://player.vimeo.com/external/484633541.hd.mp4?s=5079bbd76593613805099057731216c295fed57b&profile_id=174',
-                'images' => [
-                ],
-                'sold_out' => true,
-                'guaranteed' => true,
-                'free_shipping' => false,
-                'products' => [
-                    [
-                        'name' => 'Piano Technique Made Easy',
-                        'free_bonus' => false,
-                        'lifetime_access' => true,
-                    ],
-                    [
-                        'name' => 'De-Stupefy Your Left Hand',
-                        'free_bonus' => false,
-                        'lifetime_access' => true,
-                    ],
-                    [
-                        'name' => '500 Songs In 5 Days',
-                        'free_bonus' => false,
-                        'lifetime_access' => true,
-                    ],
-                    [
-                        'name' => 'Piano Riffs & Fills',
-                        'free_bonus' => true,
-                        'lifetime_access' => true,
-                    ],
-                    [
-                        'name' => 'Worship Piano',
-                        'free_bonus' => false,
-                        'lifetime_access' => true,
-                    ],
-                    [
-                        'name' => 'Faster Fingers',
-                        'free_bonus' => false,
-                        'lifetime_access' => true,
-                    ],
-                    [
-                        'name' => 'Sight Reading Made Simple',
-                        'free_bonus' => false,
-                        'lifetime_access' => true,
-                    ],
-                ],
-            ],
-            [
-                'brand' => 2,
-                'product_type_id' => 6,
-                'name' => 'The Simply Songs Bundle',
-                'slug' => 'songs-bundle',
-                'sku' => 'products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[500-songs-in-5-days]=1&products[piano-riffs-and-fills]=1&products[piano-chords-and-scales-guide]=1&locked=true',
-                'meta_desc' => 'Because you just want to play your favorite songs.',
-                'meta_img' => 'https://pianote.s3.amazonaws.com/sales/promos/july/simply_songs_banner.png',
-                'price' => 197,
-                'discounted_price' => 0,
-                'special_text' => 'bonuses worth $237',
-                'page_logo' => 'https://pianote.s3.amazonaws.com/sales/promos/july/simply_songs_black.png',
-                'header_text' => 'Because you just want to play your favorite songs.',
-                'video_src' => '',
-                'overview' => 'It’s Saturday night. Your friends are over, and you just want to sit at the piano and belt out the classics while having a fantastic time. You don’t need to know how to read music or understand the finer points of piano theory -- you just want to have FUN!
-
-The Simple Songs Bundle will get you there in no time. You’ll get expert teaching from your Pianote Membership, PLUS 3 bonuses to shortcut your progress so you can start playing real songs right away.',
-                'images' => [
-                    'https://pianote.s3.amazonaws.com/sales/promos/july/simply_songs_banner.png'
-                ],
-                'sold_out' => true,
-                'guaranteed' => true,
-                'free_shipping' => false,
-                'products' => [
-                    [
-                        'name' => 'Pianote Membership',
-                        'free_bonus' => false,
-                        'lifetime_access' => false,
-                    ],
-                    [
-                        'name' => '500 Songs In 5 Days',
-                        'free_bonus' => true,
-                        'lifetime_access' => true,
-                    ],
-                    [
-                        'name' => 'Piano Riffs & Fills',
-                        'free_bonus' => true,
-                        'lifetime_access' => true,
-                    ],
-                    [
-                        'name' => 'Piano Chords & Scales',
-                        'free_bonus' => true,
-                        'lifetime_access' => true,
-                    ],
-                ],
-            ],
-            [
-                'brand' => 2,
-                'product_type_id' => 6,
-                'name' => 'The Unlimited Lessons Bundle',
-                'slug' => 'bundle-unlimited-lessons',
-                'sku' => 'products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[pianote-practice-planner]=1&products[poster-chords]=1&products[poster-scales]=1&products[play-beautiful-piano]=1&products[500-songs-in-5-days]=1&products[piano-riffs-and-fills]=1&products[piano-technique-made-easy]=1&products[destupefy-your-left-hand]=1&products[worship-piano]=1&products[faster-fingers]=1&products[sight-reading-made-simple]=1&locked=true',
-                'meta_desc' => 'UNLIMITED piano lessons you can take anywhere, anytime.',
-                'meta_img' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/vid-thumb21.jpg',
-                'price' => 197,
-                'discounted_price' => 0,
-                'special_text' => '+$698 In Bonuses',
-                'page_logo' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/logo2020.png',
-                'header_text' => 'UNLIMITED piano lessons you can take anywhere, anytime.',
-                'video_src' => 'https://player.vimeo.com/external/647937515.hd.mp4?s=982ac3c2ab74a80cf1f24a727c4df5c88fda859a&profile_id=174',
-                'images' => [
-                ],
-                'overview' => 'The Unlimited Lessons Bundle gives you just that - unlimited piano lessons. Watch as many as you like, as often as you like.
-
-Learn your favorite songs in the comfort of your own home, whenever you want. Impress your family and friends with your piano playing - for a tiny fraction of the cost of private lessons.
-
-And get support and feedback from real teachers who will help you every step of the way.',
-                'sold_out' => true,
-                'guaranteed' => true,
-                'free_shipping' => false,
-                'products' => [
-                    [
-                        'name' => 'Pianote Membership',
                         'free_bonus' => false,
                         'lifetime_access' => false,
                     ],
                     [
                         'name' => 'Chords Poster',
-                        'free_bonus' => true,
-                        'lifetime_access' => true,
+                        'free_bonus' => false,
+                        'lifetime_access' => false,
                     ],
                     [
                         'name' => 'Scales Poster',
-                        'free_bonus' => true,
-                        'lifetime_access' => true,
-                    ],
-                    [
-                        'name' => 'Pianote Practice Planner',
-                        'free_bonus' => true,
-                        'lifetime_access' => true,
-                    ],
-                    [
-                        'name' => 'Piano Technique Made Easy',
-                        'free_bonus' => true,
-                        'lifetime_access' => true,
-                    ],
-                    [
-                        'name' => 'Playing Beautiful Piano',
-                        'free_bonus' => true,
-                        'lifetime_access' => true,
-                    ],
-                    [
-                        'name' => '500 Songs In 5 Days',
-                        'free_bonus' => true,
-                        'lifetime_access' => true,
-                    ],
-                    [
-                        'name' => 'Piano Riffs & Fills',
-                        'free_bonus' => true,
-                        'lifetime_access' => true,
-                    ],
-                    [
-                        'name' => 'De-Stupefy Your Left Hand',
-                        'free_bonus' => true,
-                        'lifetime_access' => true,
-                    ],
-                    [
-                        'name' => 'Worship Piano',
-                        'free_bonus' => true,
-                        'lifetime_access' => true,
-                    ],
-                    [
-                        'name' => 'Faster Fingers',
-                        'free_bonus' => true,
-                        'lifetime_access' => true,
-                    ],
-                    [
-                        'name' => 'Sight Reading Made Simple',
-                        'free_bonus' => true,
-                        'lifetime_access' => true,
+                        'free_bonus' => false,
+                        'lifetime_access' => false,
                     ],
                 ],
             ],
             [
                 'brand' => 2,
                 'product_type_id' => 6,
-                'name' => 'The Quick Start Bundle',
-                'slug' => 'quick-start-bundle',
-                'sku' => 'products[play-beautiful-piano]=1&products[500-songs-in-5-days]=1&products[piano-riffs-and-fills]=1&products[piano-technique-made-easy]=1&products[worship-piano]=1&products[destupefy-your-left-hand]=1&products[faster-fingers]=1&locked=true',
-                'meta_desc' => 'Get Started On the Piano With No Long-Term Commitment',
-                'meta_img' => 'https://pianote.s3.amazonaws.com/sales/promos/august/beginner-thumb.png',
-                'price' => 622,
-                'discounted_price' => 97,
+                'name' => 'Ultimate Upgrade',
+                'slug' => 'ultimate-upgrade',
+                'sku' => 'products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[piano-chords-and-scales-guide]=1&products[100-days-of-practice-poster]=1&products[poster-chords]=1&products[poster-scales]=1&products[pianote-practice-planner]=1&locked=true&redirect=/order&promo-code=ult-upgrade',
+                'meta_desc' => 'Lock in your progress! Get this exclusive offer when you continue your membership today.',
+                'meta_img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/og-image.jpg',
+                'price' => 302,
+                'discounted_price' => 167,
                 'special_text' => '',
                 'page_logo' => '',
-                'header_text' => 'Get Started On the Piano With No Long-Term Commitment',
-                'video_src' => '',
+                'header_text' => 'Lock in your progress! Get this exclusive offer when you continue your membership today.',
+                'video_src' => '//player.vimeo.com/video/668814962',
                 'images' => [
-                    'https://pianote.s3.amazonaws.com/sales/promos/february/quick-start-thumb.jpg'
+
                 ],
-                'sold_out' => true,
+                'overview' => 'You’ve come so far, and now you can lock in a super-low rate for a year of lessons with Pianote. So to help you stick around, we want to give you a discount and 5 amazing bonuses worth $105 when you decide to continue your journey with us.
+
+**Continue your membership today and get…**',
+                'sold_out' => false,
                 'guaranteed' => true,
                 'free_shipping' => false,
                 'products' => [
                     [
-                        'name' => 'Playing Beautiful Piano',
+                        'name' => 'Pianote Membership',
                         'free_bonus' => false,
-                        'lifetime_access' => true,
+                        'lifetime_access' => false,
                     ],
                     [
-                        'name' => '500 Songs In 5 Days',
-                        'free_bonus' => false,
-                        'lifetime_access' => true,
-                    ],
-                    [
-                        'name' => 'Piano Riffs & Fills',
+                        'name' => 'Piano Chords & Scales',
                         'free_bonus' => true,
-                        'lifetime_access' => true,
+                        'lifetime_access' => false,
                     ],
                     [
-                        'name' => 'Piano Technique Made Easy',
-                        'free_bonus' => false,
-                        'lifetime_access' => true,
-                    ],
-                    [
-                        'name' => 'Worship Piano',
+                        'name' => 'Pianote Practice Planner',
                         'free_bonus' => true,
-                        'lifetime_access' => true,
+                        'lifetime_access' => false,
                     ],
                     [
-                        'name' => 'De-Stupefy Your Left Hand',
+                        'name' => 'Chords Poster',
                         'free_bonus' => true,
-                        'lifetime_access' => true,
+                        'lifetime_access' => false,
                     ],
-
                     [
-                        'name' => 'Faster Fingers',
+                        'name' => 'Scales Poster',
                         'free_bonus' => true,
-                        'lifetime_access' => true,
+                        'lifetime_access' => false,
+                    ],
+                    [
+                        'name' => '100 Days of Practice Poster',
+                        'free_bonus' => true,
+                        'lifetime_access' => false,
                     ],
                 ],
             ],
@@ -961,7 +792,8 @@ The Singeo Method will give you all the tools you need to bring your voice to a 
                 'sold_out' => $product['sold_out'],
                 'guaranteed' => $product['guaranteed'],
                 'free_shipping' => $product['free_shipping'],
-                'overview' => empty($product['overview']) ? false : $product['overview'],
+                'overview' => empty($product['overview']) ? null : $product['overview'],
+                'spread_img' => empty($product['spread']) ? null : $product['spread'],
             ]);
 
             foreach($product['images'] as $key => $image){

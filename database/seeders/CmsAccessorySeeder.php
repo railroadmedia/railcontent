@@ -486,41 +486,6 @@ class CmsAccessorySeeder extends Seeder
             ],
         ],
         [
-            "brand" => 1,
-            "product_type_id" => 2,
-            "name" => "Drumeo Rudiments Poster",
-            "slug" => "",
-            "sku" => "rudiments-poster",
-            "thumbnail" => "",
-            "meta_desc" => "",
-            "meta_img" => "",
-            "short_desc" => "",
-            "header_text" => "",
-            "price" => 7,
-            "discounted_price" => "",
-            "special_text" => "",
-            "features" => [
-
-            ],
-            "specs" => [
-
-            ],
-            "visible" => false,
-            "sold_out" => false,
-            "guaranteed" => false,
-            "lifetime_access" => false,
-            "free_shipping" => false,
-            "images" => [
-            ],
-            "sizeChart" => "",
-            "sizes" => [
-
-            ],
-            'bundle_img' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/rudiments_poster.jpg',
-            "bundle_desc" => "Learn the ABC’s of drumming with Drumeo’s first-ever rudiment poster. This is your easy-to-reference guide for all your singles, doubles, flams, and more. You’ll see clear notation for every rudiment so you can develop silky-smooth hands on the kit.",
-            'bundle_free_shipping' => false,
-        ],
-        [
             "brand" => 2,
             "product_type_id" => 2,
             "name" => "Pianote Headphones",
@@ -552,8 +517,8 @@ class CmsAccessorySeeder extends Seeder
             "sizes" => [
 
             ],
-            'bundle_img' => '',
-            "bundle_desc" => "",
+            'bundle_img' => 'https://pianote.s3.amazonaws.com/shop/card-thumbs/headphones-cart.jpg',
+            "bundle_desc" => "These beautiful hi-end headphones are by piano players for piano players. Lightweight with comfortable ear padding for extended playing sessions and unrivalled sound definitition and bass response. Your playing has never sounded so good.",
         ],
         [
             "brand" => 2,
@@ -581,20 +546,20 @@ Learn these beautiful songs in time for Christmas around the piano with your lov
 
 Here’s the full list:
 
- - Away in a Manger
- - Carol of the Bells
- - Christmas Time is Here
- - Dance of the Sugarplum Fairy
- - Frosty the Snowman
- - God Rest Ye Merry Gentlemen
- - Joy to the World
- - O Christmas Tree
- - O Holy Night
- - Rudolph the Red-Nosed Reindeer
- - Silent Night
- - The Christmas Song
- - The First Noel
- - We Wish You a Merry Christmas
+   • Away in a Manger
+   • Carol of the Bells
+   • Christmas Time is Here
+   • Dance of the Sugarplum Fairy
+   • Frosty the Snowman
+   • God Rest Ye Merry Gentlemen
+   • Joy to the World
+   • O Christmas Tree
+   • O Holy Night
+   • Rudolph the Red-Nosed Reindeer
+   • Silent Night
+   • The Christmas Song
+   • The First Noel
+   • We Wish You a Merry Christmas
 
 Presented in full color and spiral-bound so it always lays flat on your music stand, this book is the perfect way to spread cheer this Christmas.
 
@@ -632,8 +597,150 @@ You’ll get 10 of the 14 songs delivered to your inbox immediately after comple
             "sizes" => [
 
             ],
-            'bundle_img' => '',
-            "bundle_desc" => "",
+            'bundle_img' => 'https://pianote.s3.amazonaws.com/sales/promos/november/bonuses/christmas-book.jpg',
+            "bundle_desc" => "Play the most beautiful Christmas Carols with the Pianote Christmas Songbook. You’ll get 14 stunning songs hand-picked and arranged for solo piano. Spiral-bound so it lays perfectly flat on your piano, these songs will bring joy to anyone who plays them.",
+            'bundle_free_shipping' => true,
+        ],
+        [
+            "brand" => 2,
+            "product_type_id" => 2,
+            "name" => "Member Pianote Christmas Songbook",
+            "slug" => "christmas-book-members",
+            "sku" => "christmas-song-book",
+            "thumbnail" => "https://pianote.s3.amazonaws.com/products/christmas-book/christmas-book-02.jpg",
+            "meta_desc" => "Play Your Favorite Christmas Songs on the Piano",
+            "meta_img" => "https://pianote.s3.amazonaws.com/products/christmas-book/christmas-digital-spread.jpg",
+            "short_desc" => "Play Your Favorite Christmas Songs on the Piano",
+            "header_text" => "The Pianote Christmas Songbook",
+            "price" => 39,
+            "discounted_price" => "",
+            "special_text" => "",
+            'overview' => "**Chestnuts roasting on an open fire…**
+
+Logs crackling in the fireplace. Snowflakes fluttering against the window.
+
+Beautiful Christmas songs sung around the piano.
+
+Embrace the joy of Christmas with 14 beautiful songs, hand-picked and arranged for solo piano. And yes, “The Christmas Song” is one of them.
+
+Learn these beautiful songs in time for Christmas around the piano with your loved ones.
+
+Here’s the full list:
+
+   • Away in a Manger
+   • Carol of the Bells
+   • Christmas Time is Here
+   • Dance of the Sugarplum Fairy
+   • Frosty the Snowman
+   • God Rest Ye Merry Gentlemen
+   • Joy to the World
+   • O Christmas Tree
+   • O Holy Night
+   • Rudolph the Red-Nosed Reindeer
+   • Silent Night
+   • The Christmas Song
+   • The First Noel
+   • We Wish You a Merry Christmas
+
+Presented in full color and spiral-bound so it always lays flat on your music stand, this book is the perfect way to spread cheer this Christmas.
+
+Your book will typically be shipped out from our fulfillment center within 2-3 business days. While you’re waiting for your physical book to arrive, you can start learning thanks to your BONUS Digital Copy of the book.
+
+You’ll get 10 of the 14 songs delivered to your inbox immediately after completing your purchase. You can download and print them and start learning your favorites while you wait for your book to arrive.",
+            "features" => [
+            ],
+            "specs" => [
+                [
+                    "title" => "Size",
+                    "desc" => '11" x 8.5"'
+                ],
+                [
+                    "title" => "Weight",
+                    "desc" => "1 lbs"
+                ],
+                [
+                    "title" => "Pages",
+                    "desc" => "38 pages"
+                ],
+            ],
+            "visible" => true,
+            "sold_out" => false,
+            "guaranteed" => false,
+            "lifetime_access" => false,
+            "free_shipping" => false,
+            "images" => [
+                "https://pianote.s3.amazonaws.com/products/christmas-book/christmas-book-01.jpg",
+                "https://pianote.s3.amazonaws.com/products/christmas-book/christmas-book-02.jpg",
+                "https://pianote.s3.amazonaws.com/products/christmas-book/christmas-book-04.jpg",
+                "https://pianote.s3.amazonaws.com/products/christmas-book/christmas-book-03.jpg",
+            ],
+            "sizeChart" => "",
+            "sizes" => [
+
+            ],
+            'bundle_img' => 'https://pianote.s3.amazonaws.com/sales/promos/november/bonuses/christmas-book.jpg',
+            "bundle_desc" => "Play the most beautiful Christmas Carols with the Pianote Christmas Songbook. You’ll get 14 stunning songs hand-picked and arranged for solo piano. Spiral-bound so it lays perfectly flat on your piano, these songs will bring joy to anyone who plays them.",
+            'bundle_free_shipping' => true,
+        ],
+        [
+            "brand" => 2,
+            "product_type_id" => 2,
+            "name" => "Pianote Digital Christmas Songbook",
+            "slug" => "christmas-book-digital",
+            "sku" => "christmas-song-book-digital",
+            "thumbnail" => "",
+            "meta_desc" => "Play Your Favorite Christmas Songs on the Piano",
+            "meta_img" => "https://pianote.s3.amazonaws.com/products/christmas-book/christmas-digital-spread.jpg",
+            "short_desc" => "",
+            "header_text" => "The Pianote Digital Christmas Songbook",
+            'subheader_text' => 'Play Your Favorite Christmas Songs on the Piano',
+            "price" => 10,
+            "discounted_price" => "",
+            "special_text" => "Just $1 per song.",
+            'overview' => "**Logs crackling in the fireplace…**
+
+Snowflakes fluttering against the window. Beautiful Christmas songs sung around the piano.
+
+Embrace the joy of Christmas with 10 beautiful songs, hand-picked and arranged for solo piano.
+
+Learn these beautiful songs in time for Christmas around the piano with your loved ones.
+
+Here’s the full list:
+
+    • Away in a Manger
+    • Carol of the Bells
+    • Dance of the Sugarplum Fairy
+    • God Rest Ye Merry Gentlemen
+    • Joy to the World
+    • O Christmas Tree
+    • O Holy Night
+    • Silent Night
+    • The First Noel
+    • We Wish You a Merry Christmas
+
+And because it’s a digital copy, you’ll have instant access to all the songs. No need to wait for shipping (let alone pay for it). Download the book the second you buy it.",
+            "features" => [
+            ],
+            "specs" => [
+                [
+                    "title" => "Pages",
+                    "desc" => "25 pages"
+                ],
+            ],
+            "visible" => false,
+            "sold_out" => false,
+            "guaranteed" => false,
+            "lifetime_access" => false,
+            "free_shipping" => false,
+            "images" => [
+                "https://pianote.s3.amazonaws.com/products/christmas-book/christmas-digital-spread.jpg",
+            ],
+            "sizeChart" => "",
+            "sizes" => [
+
+            ],
+            'bundle_img' => 'https://pianote.s3.amazonaws.com/sales/promos/november/bonuses/christmas-songbook-card.jpg',
+            "bundle_desc" => "Embrace the joy of the Holiday Season with this digital version of our Christmas Songbook. You’ll get 10 beautiful Christmas Carols arranged for solo piano that you can download, print, and play at home. Perfect for beginners and early intermediate players, these songs will make this Christmas season one to remember.",
         ],
         [
             "brand" => 2,
@@ -663,11 +770,82 @@ Welcome to the world of classical piano music (you can actually play)! This book
 It’s your repertoire of beautiful classical pieces that you can actually play (and that people will want to hear)!
 
 Here are some of our favorites:
-  - Ukrainian Folk Song by Ludwig van Beethoven
-  - Minuet in F Major by Wolfgang Amadeus Mozart
-  - Prelude in C Major by Johann Sebastian Bach
-  - Sonatina in B-flat Major by George Frideric Handel
-  - Waltz in A Minor by Frédéric Chopin
+  • Ukrainian Folk Song by Ludwig van Beethoven
+  • Minuet in F Major by Wolfgang Amadeus Mozart
+  • Prelude in C Major by Johann Sebastian Bach
+  • Sonatina in B-flat Major by George Frideric Handel
+  • Waltz in A Minor by Frédéric Chopin
+And so many more!",
+            "features" => [
+            ],
+            "specs" => [
+                [
+                    "title" => "Size",
+                    "desc" => '11" x 8.5"'
+                ],
+                [
+                    "title" => "Weight",
+                    "desc" => "1 lbs"
+                ],
+                [
+                    "title" => "Pages",
+                    "desc" => "92 pages"
+                ],
+            ],
+            "visible" => true,
+            "sold_out" => false,
+            "guaranteed" => false,
+            "lifetime_access" => false,
+            "free_shipping" => false,
+            "images" => [
+                "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-103.png",
+                "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-132.png",
+                "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-146.png",
+                "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-100.png",
+                "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-109.png",
+                "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-111.png",
+                "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-113.png"
+            ],
+            "sizeChart" => "",
+            "sizes" => [
+
+            ],
+            'bundle_img' => 'https://pianote.s3.amazonaws.com/sales/promos/july/classical_piano_book_list.jpg',
+            'bundle_desc' => 'What good is learning classical piano if you don’t have beautiful music to play? This NEW book is 92 pages full of beautiful pieces by famous classical composers that you can actually play! The perfect companion to The Classical Method, each piece has been hand-selected to be appropriate for your skill level - while still sounding beautiful. Beethoven, Chopin, Bach, they’re all in here.',
+        ],
+        [
+            "brand" => 2,
+            "product_type_id" => 2,
+            "name" => "Member Classical Piano Pieces",
+            "slug" => "classical-book-discount",
+            "sku" => "products[classical-book]=1&promo-code=member",
+            "thumbnail" => "https://pianote.s3.amazonaws.com/sales/promos/july/classical_piano_book.png",
+            "badge_text" => "New",
+            "meta_desc" => "Welcome to the world of classical piano music (you can actually play)!",
+            "meta_img" => "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-103.png",
+            "short_desc" => "What good is learning classical piano if you don’t have beautiful music to play?",
+            "header_text" => "Classical Piano Pieces (You Can Actually Play)",
+            "price" => 39,
+            "discounted_price" => "",
+            "special_text" => "",
+            "overview" => "**Classical piano has a reputation.**
+
+Let’s be honest…
+
+Classical piano can seem a little elitist, even snobby. And that’s a shame. Because classical music is so beautiful.
+
+So we’re out to change that reputation.
+
+Welcome to the world of classical piano music (you can actually play)! This book is your gateway to famous composers, stunning piano pieces, and an entirely new and rewarding experience on the piano.
+
+It’s your repertoire of beautiful classical pieces that you can actually play (and that people will want to hear)!
+
+Here are some of our favorites:
+  • Ukrainian Folk Song by Ludwig van Beethoven
+  • Minuet in F Major by Wolfgang Amadeus Mozart
+  • Prelude in C Major by Johann Sebastian Bach
+  • Sonatina in B-flat Major by George Frideric Handel
+  • Waltz in A Minor by Frédéric Chopin
 And so many more!",
             "features" => [
             ],
@@ -781,13 +959,14 @@ Start Mastering your Chords & Scales today.",
             ],
             'bundle_img' => 'https://pianote.s3.amazonaws.com/sales/2022/bonus-chords-scales.jpg',
             "bundle_desc" => "You need chords to play your favorite songs, but learning them all can be a real challenge. The Piano Chords & Scales book is your go-to reference guide so you’ll never get stuck again. See a chord you don’t know? Simply flip to the relevant page in your book and you’ll see all the inversions and alterations you need to play beautifully and confidently. Don’t let scary-looking chords slow your progress.",
+            'bundle_free_shipping' => true,
         ],
         [
             "brand" => 2,
             "product_type_id" => 2,
             "name" => "Member Piano Chords & Scales",
             "slug" => "chords-scales-book-members",
-            "sku" => "piano-chords-and-scales-guide",
+            "sku" => "products[piano-chords-and-scales-guide]=1&promo-code=member",
             "promo_code" => "member",
             "thumbnail" => "https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-106-Edit.jpg",
             "meta_desc" => "Master every single chord and scale with this comprehensive guide.",
@@ -927,6 +1106,44 @@ This is Lisa Witt’s personal practice guide. Written by her, exclusively for p
             ],
             'bundle_img' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/planner.png',
             "bundle_desc" => "Practice is the key to getting better. But to really progress it’s so important to practice the right things. Knowing what, when, and how to practice will make the biggest difference in your playing. The Pianote Practice Planner is your written guide to making every practice perfect, so you get the results you deserve. This is Lisa Witt’s personal practice guide. Written by her, exclusively for piano players.",
+            'bundle_free_shipping' => true,
+            "sizeChart" => "",
+            "sizes" => [
+
+            ]
+        ],
+        [
+            "brand" => 2,
+            "product_type_id" => 2,
+            "name" => "100 Days of Practice Poster",
+            "slug" => "",
+            "sku" => "",
+            "thumbnail" => "",
+            "meta_desc" => "",
+            "meta_img" => "",
+            "short_desc" => "",
+            "header_text" => "",
+            "price" => 9,
+            "discounted_price" => "",
+            "page_logo" => "",
+            "special_text" => "",
+            "video" => "",
+            "overview" => "",
+            "product_img" => "",
+            "features" => [
+            ],
+            "specs" => [
+            ],
+            "visible" => false,
+            "sold_out" => false,
+            "guaranteed" => false,
+            "lifetime_access" => false,
+            "free_shipping" => false,
+            "images" => [
+            ],
+            'bundle_img' => 'https://pianote.s3.amazonaws.com/sales/2022/bonus-100days.jpg',
+            "bundle_desc" => "Challenge yourself to 100 days of practice with this motivational poster.",
+            'bundle_free_shipping' => true,
             "sizeChart" => "",
             "sizes" => [
 
@@ -1051,6 +1268,7 @@ At 17” x 22” this helpful poster can keep your chording on track. Don’t wa
             ],
             'bundle_img' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/poster-chords.jpg',
             "bundle_desc" => "Chord shapes can be hard to remember, especially when you’re starting out and learning how they work. Luckily we have the Pianote Chords Poster to help you with all those tricky shapes! Get this awesome poster for your practice space and start chording your way through all your favorite songs. If you ever forget your chord shapes, all you have to do is look up!",
+            'bundle_free_shipping' => true,
         ],
         [
             "brand" => 2,
@@ -1097,6 +1315,7 @@ At 22” x 17” this helpful cheat sheet can be placed anywhere you like to mak
             ],
             'bundle_img' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/poster-scales.jpg',
             "bundle_desc" => "If you ever find yourself forgetting the notes in a scale (like most of us do), the Pianote Scales Poster is here to help! Remember your scales with this easy-to-read poster, designed to help you quickly recall the right notes at the right time, making your scales (or soloing) a piece of cake. With this up on your wall, you’ll never miss a note again.",
+            'bundle_free_shipping' => true,
         ],
         [
             "brand" => 2,
@@ -1207,7 +1426,7 @@ At 22” x 17” this helpful cheat sheet can be placed anywhere you like to mak
                 ],
             ],
             "visible" => true,
-            "sold_out" => true,
+            "sold_out" => false,
             "guaranteed" => false,
             "lifetime_access" => false,
             "free_shipping" => false,
@@ -1219,6 +1438,75 @@ At 22” x 17” this helpful cheat sheet can be placed anywhere you like to mak
             "sizes" => [
 
             ]
+        ],
+        [
+            "brand" => 3,
+            "product_type_id" => 2,
+            "name" => "Guitarist's Survival Kit",
+            "slug" => "survival-kit",
+            "sku" => "guitarists-survival-kit",
+            "thumbnail" => "https://guitareo.s3.amazonaws.com/sales/promos/november/survival-kit-shop.jpg",
+            "meta_desc" => "Get the gear essentials to start sounding better on the guitar.",
+            "meta_img" => "https://guitareo.s3.amazonaws.com/shop/survival-kit/survival-kit-fb-share.jpg",
+            "short_desc" => "Get the gear essentials to start sounding better on the guitar.",
+            "header_text" => "The Guitarist's Survival Kit",
+            "price" => 89,
+            "discounted_price" => "",
+            "special_text" => "",
+            'overview' => "**Get the gear essentials to start
+sounding better on the guitar.**
+
+Whether you’re playing guitar casually at home, a jam session, or show – you’ll come prepared with the Guitarist’s Survival Kit to help you sound (and look) better.
+
+This seven-piece gear kit helps you achieve four main goals:
+
+**1. Stay perfectly in tune:**
+ • Keep your guitar playing tight in a jam session or studio recording with perfectly tuned strings. Clip on a 360-degree wireless tuner on your guitar headstock for easy tuning.
+**2. Get crisp, clean notes:**
+ • Maintain your tone and crisp notes on the guitar with a new set of electric and acoustic strings. You’ll also get a handy string winder to help you with the process.
+**3. Pick on great licks:**
+ • Don’t know what to play? Flip through the Guitareo Survival Guide and master any of the essential chords, scales, and licks. This guide fits nicely into your guitar case – and you can carry it with you to any campfire or jam session – along with your pack of guitar picks to play with.
+**4. Freshen up your look:**
+ • Keep your guitar looking good as new – and slow your guitar’s aging and smell. Wipe off any sweat, oil, dirt sitting underneath your strings with a polishing cloth. (And buff that headstock as much as you’d like.)
+
+**Instructional videos on using this kit:** www.guitareo.com/use-survival-kit
+
+**What's included in your kit**
+ • Nexxus 360 Rechargeable Tuner
+ • Regular Light-Gauge Electric Strings
+ • Light-Gauge Acoustic Strings
+ • String Pro-Winder
+ • Guitareo Survival Guide Book
+ • Pack of 10 Assorted Picks
+ • Microfibre Polishing Cloth",
+            "features" => [
+            ],
+            "specs" => [
+                [
+                    "title" => "Size",
+                    "desc" => '8.5" x 5.5"'
+                ],
+            ],
+            "visible" => true,
+            "sold_out" => false,
+            "guaranteed" => false,
+            "lifetime_access" => false,
+            "free_shipping" => false,
+            'bundle_free_shipping' => true,
+            'bundle_img' => '',
+            'bundle_desc' => '',
+            'video' => '//player.vimeo.com/video/774475043',
+            "images" => [
+                "https://guitareo.s3.amazonaws.com/sales/promos/november/survival-kit-shop-01.jpg",
+                "https://guitareo.s3.amazonaws.com/shop/survival-kit/survival-kit-shop-02.jpg",
+                "https://guitareo.s3.amazonaws.com/shop/survival-kit/survival-kit-shop-03.jpg",
+                "https://guitareo.s3.amazonaws.com/shop/survival-kit/survival-kit-shop-04.jpg",
+                "https://guitareo.s3.amazonaws.com/shop/survival-kit/survival-kit-shop-05.jpg",
+            ],
+            "sizeChart" => "",
+            "sizes" => [
+
+            ],
         ],
         [
             "brand" => 3,
@@ -1293,7 +1581,6 @@ The Guitareo Survival Guide is perfect for adding a little fun while navigating 
 
             ],
         ],
-
         [
             "brand" => 4,
             "product_type_id" => 2,
@@ -1497,76 +1784,6 @@ The Guitareo Survival Guide is perfect for adding a little fun while navigating 
 
             ],
         ],
-        [
-            "brand" => 2,
-            "product_type_id" => 2,
-            "name" => "Discounted Classical Piano Pieces",
-            "slug" => "classical-book-discount",
-            "sku" => "classical-book",
-            "promo_code" => "member",
-            "thumbnail" => "https://pianote.s3.amazonaws.com/sales/promos/july/classical_piano_book.png",
-            "badge_text" => "New",
-            "meta_desc" => "Welcome to the world of classical piano music (you can actually play)!",
-            "meta_img" => "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-103.png",
-            "short_desc" => "What good is learning classical piano if you don’t have beautiful music to play?",
-            "header_text" => "Classical Piano Pieces (You Can Actually Play)",
-            "price" => 39,
-            "discounted_price" => "",
-            "special_text" => "",
-            "overview" => "**Classical piano has a reputation.**
-
-Let’s be honest…
-
-Classical piano can seem a little elitist, even snobby. And that’s a shame. Because classical music is so beautiful.
-
-So we’re out to change that reputation.
-
-Welcome to the world of classical piano music (you can actually play)! This book is your gateway to famous composers, stunning piano pieces, and an entirely new and rewarding experience on the piano.
-
-It’s your repertoire of beautiful classical pieces that you can actually play (and that people will want to hear)!
-
-Here are some of our favorites:
-  - Ukrainian Folk Song by Ludwig van Beethoven
-  - Minuet in F Major by Wolfgang Amadeus Mozart
-  - Prelude in C Major by Johann Sebastian Bach
-  - Sonatina in B-flat Major by George Frideric Handel
-  - Waltz in A Minor by Frédéric Chopin
-And so many more!",
-            "features" => [
-            ],
-            "specs" => [
-                [
-                    "title" => "Size",
-                    "desc" => '11" x 8.5"'
-                ],
-                [
-                    "title" => "Weight",
-                    "desc" => "1 lbs"
-                ],
-                [
-                    "title" => "Pages",
-                    "desc" => "92 pages"
-                ],
-            ],
-            "visible" => false,
-            "sold_out" => false,
-            "guaranteed" => false,
-            "lifetime_access" => false,
-            "free_shipping" => false,
-            "images" => [
-                "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-103.png",
-                "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-132.png",
-                "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-146.png",
-                "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-100.png",
-                "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-109.png",
-                "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-111.png",
-                "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-113.png"
-            ],
-            "sizeChart" => "",
-            "sizes" => [
-
-            ],
-        ],
 //            [
 //                "brand" => 1,
 //                "product_type_id" => 2,
@@ -1732,6 +1949,7 @@ And so many more!",
                 'badge_text' => empty($product['badge_text']) ? null : $product['badge_text'],
                 'video_src' => empty($product['video']) ? null : $product['video'],
                 'header_text' => $product['header_text'],
+                'subheader_text' => empty($product['subheader_text']) ? null : $product['subheader_text'],
                 'short_desc' => $product['short_desc'],
                 'meta_desc' => $product['meta_desc'],
                 'meta_img' => $product['meta_img'],
