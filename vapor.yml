@@ -41,7 +41,12 @@ environments:
             - 'php artisan view:cache'
             - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
     beta-testing:
-        domain: 'beta-testing.musora.com'
+        domain:
+            - 'beta-testing.musora.com'
+            - 'beta-testing.drumeo.com'
+            - 'beta-testing.pianote.com'
+            - 'beta-testing.guitareo.com'
+            - 'beta-testing.singeo.com'
         warm: 1
         scheduler: false
         runtime: docker

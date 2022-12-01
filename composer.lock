@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e4e538ad2e2ace86b0a304d01c6f6fe7",
+    "content-hash": "2e5aa552237ce630791bc10203f2fdb4",
     "packages": [
         {
             "name": "aporat/store-receipt-validator",
@@ -176,16 +176,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.251.0",
+            "version": "3.252.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "ff9cc2d44675ebb74a5506b68e55c86b122fdf2f"
+                "reference": "2093beca5380b737fecfdd064cfa97179e4b7c00"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/ff9cc2d44675ebb74a5506b68e55c86b122fdf2f",
-                "reference": "ff9cc2d44675ebb74a5506b68e55c86b122fdf2f",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/2093beca5380b737fecfdd064cfa97179e4b7c00",
+                "reference": "2093beca5380b737fecfdd064cfa97179e4b7c00",
                 "shasum": ""
             },
             "require": {
@@ -264,9 +264,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.251.0"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.252.0"
             },
-            "time": "2022-11-30T19:19:28+00:00"
+            "time": "2022-12-01T19:18:22+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -7926,16 +7926,16 @@
         },
         {
             "name": "railroad/ecommerce",
-            "version": "v5.0.35",
+            "version": "dev-support-old-app-purchases",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "b6733e50f390ff2ccd5d8fefaae3acd83618fde1"
+                "reference": "2c76099a5f86d98a0940cf7f2606c3b2e16ef3c7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/b6733e50f390ff2ccd5d8fefaae3acd83618fde1",
-                "reference": "b6733e50f390ff2ccd5d8fefaae3acd83618fde1",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/2c76099a5f86d98a0940cf7f2606c3b2e16ef3c7",
+                "reference": "2c76099a5f86d98a0940cf7f2606c3b2e16ef3c7",
                 "shasum": ""
             },
             "require": {
@@ -7972,9 +7972,9 @@
             "description": "Ecommerce system",
             "support": {
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
-                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.35"
+                "source": "https://github.com/railroadmedia/ecommerce/tree/support-old-app-purchases"
             },
-            "time": "2022-11-30T00:36:08+00:00"
+            "time": "2022-11-29T15:33:15+00:00"
         },
         {
             "name": "railroad/location",
@@ -8081,12 +8081,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "a55c86df6c14b2f776c3c857bb14013c545941ee"
+                "reference": "1b3fedecf61b5ef20988b9dfc2319ceff503dd3a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/a55c86df6c14b2f776c3c857bb14013c545941ee",
-                "reference": "a55c86df6c14b2f776c3c857bb14013c545941ee",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/1b3fedecf61b5ef20988b9dfc2319ceff503dd3a",
+                "reference": "1b3fedecf61b5ef20988b9dfc2319ceff503dd3a",
                 "shasum": ""
             },
             "require": {
@@ -8118,7 +8118,7 @@
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
                 "source": "https://github.com/railroadmedia/musora-api/tree/v2.0-railcontent-v2-integration-banner-updates"
             },
-            "time": "2022-11-30T17:58:11+00:00"
+            "time": "2022-11-28T15:05:07+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -8311,16 +8311,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "2.0.50",
+            "version": "2.0.52",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "b5c1afa0194335d43d36192181315cab210e7ce3"
+                "reference": "1c1fd5ecde90e43d89ad46a847a3fd17fcc71e12"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/b5c1afa0194335d43d36192181315cab210e7ce3",
-                "reference": "b5c1afa0194335d43d36192181315cab210e7ce3",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/1c1fd5ecde90e43d89ad46a847a3fd17fcc71e12",
+                "reference": "1c1fd5ecde90e43d89ad46a847a3fd17fcc71e12",
                 "shasum": ""
             },
             "require": {
@@ -8374,9 +8374,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/2.0.50"
+                "source": "https://github.com/railroadmedia/railcontent/tree/2.0.52"
             },
-            "time": "2022-11-30T19:19:51+00:00"
+            "time": "2022-12-01T12:22:41+00:00"
         },
         {
             "name": "railroad/railforums",
