@@ -129,6 +129,7 @@ class Clothing extends Resource
             Text::make('Shop Card Thumbnail', 'thumbnail')->hideFromIndex()->hideFromDetail(),
             Text::make('Shop Card Description', 'short_desc')->hideFromIndex(),
             Text::make('Header Text', 'header_text')->hideFromIndex(),
+            Text::make('Subheader Text', 'subheader_text')->hideFromIndex(),
             Text::make('Special Text', 'special_text')->hideFromIndex(),
             Boolean::make('Visible On Shop Page','visible')->default(true)->hideFromIndex(),
             Boolean::make('Sold Out', 'sold_out')->default(false)->hideFromIndex(),

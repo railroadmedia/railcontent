@@ -159,6 +159,7 @@ class Lesson extends Resource
             Number::make('Display order', 'display_order')->required()->help('Shop cards will be displayed in the order of this.'),
             Heading::make('Page'),
             Text::make('Header Text', 'header_text')->hideFromIndex(),
+            Text::make('Subheader Text', 'subheader_text')->hideFromIndex(),
             Text::make('Special Text', 'special_text')->hideFromIndex(),
             Image::make('Page Logo', 'page_logo')
                 ->disk('nova_s3')
