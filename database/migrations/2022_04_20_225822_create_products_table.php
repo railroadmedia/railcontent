@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('thumbnail')->nullable();
             $table->string('badge_text')->nullable();
             $table->string('header_text')->nullable();
+            $table->string('subheader_text')->nullable();
             $table->string('short_desc')->nullable();
             $table->string('meta_desc')->nullable();
             $table->string('meta_img')->nullable();
