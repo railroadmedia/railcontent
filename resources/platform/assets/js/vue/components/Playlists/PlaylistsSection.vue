@@ -51,15 +51,17 @@ const formattedPlaylists = ref(
 
         <Transition name="fade">
             <div v-if="!isSidebarCollapsed" class="tw-text-sm tw-transition tw-pb-8">
-                <ul class="tw-p-[25px] tw-font-open-sans tw-text-[#00101D] dark:tw-text-white tw-text-[14px]"
+                <ul class="tw-font-open-sans tw-text-[#00101D] dark:tw-text-white tw-text-[14px] tw-overflow-hidden"
                     v-if="formattedPlaylists.length > 0">
                     <!-- Loop through User Playlists -->
-                    <li class="tw-truncate tw-py-[12px]" v-for="({ url, id, title }, index) in formattedPlaylists"
+                    <li class="tw-w-full tw-flex tw-flex-wrap tw-overflow-hidden" v-for="({ url, id, title }) in formattedPlaylists"
                         :key="id + '-playlist-li'">
-                        <a :href="url" class="tw-no-underline tw-text-inherit tw-py-[12px] dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]">{{ title }}</a>
+                        <a :href="url" class="tw-flex tw-flex-wrap tw-px-[25px] tw-w-full tw-no-underline tw-text-inherit tw-py-[12px] dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]">
+                            <span class="tw-min-w-0 tw-truncate">{{ title }}</span>
+                        </a>
                     </li>
-                    <li class="tw-text-[#9EC0DC] tw-pt-[4px]" v-if="playlists.length > 5">
-                        <a :href="`playlists/all/${userId}`">See all</a>
+                    <li class="tw-flex tw-w-full tw-pt-[4px]" v-if="playlists.length > 5">
+                        <a class="hover:tw-underline tw-px-[25px] tw-py-[12px] tw-flex tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-[14px]" :href="`/playlists/all/${userId}`">See all</a>
                     </li>
                 </ul>
 

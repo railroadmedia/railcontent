@@ -2,7 +2,7 @@
 import { defineProps, defineEmits, inject } from 'vue';
 import SidebarContainer from './SidebarContainer.vue';
 import { textColor, borderColor } from '../../../constants/brands.js';
-import PlaylistsSection from './PlaylistsSection.vue';
+import PlaylistsSection from '../Playlists/PlaylistsSection.vue';
 //Icons
 import MusoraIcon from '../MusoraIcons/MusoraIcon.vue';
 import SearchInput from './SearchInput.vue';
