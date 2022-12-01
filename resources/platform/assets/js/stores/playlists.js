@@ -3,8 +3,7 @@ import { defineStore } from 'pinia'
 export const usePlaylistsStore = defineStore({
   id: 'Playlists',
   state: () => ({
-    // [{ id: '', title: '', isPinned: false}]
-    playlists: [],
+    playlists: [], // [{ id: '', title: '', isPinned: false}]
     modalOpen: null,
   }),
 

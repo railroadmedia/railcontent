@@ -55,6 +55,26 @@
                         'title' => 'Interesting playlist',
                         'isPinned' => false
                     ],
+                    [
+                        'id' => '4',
+                        'title' => 'Interesting playlist',
+                        'isPinned' => false
+                    ],
+                    [
+                        'id' => '5',
+                        'title' => 'Interesting playlist',
+                        'isPinned' => false
+                    ],
+                    [
+                        'id' => '6',
+                        'title' => 'Interesting playlist',
+                        'isPinned' => false
+                    ],
+                    [
+                        'id' => '7',
+                        'title' => 'Interesting playlist',
+                        'isPinned' => false
+                    ],
                 ];
             @endphp
             <app-container

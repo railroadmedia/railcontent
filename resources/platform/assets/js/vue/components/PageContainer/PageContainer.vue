@@ -2,6 +2,7 @@
 import { ref, provide, onBeforeMount, onMounted, onUnmounted, onUpdated } from "vue";
 import { useNotificationStore } from '../../../stores/notification';
 import { useConfirmationStore } from '../../../stores/confirmation';
+import { usePlaylistsStore } from '../../../stores/playlists';
 import NotificationToasts from '../../vuesora/components/NotificationToasts/NotificationToasts.vue';
 import Navbar from "../Navbar/Navbar.vue";
 import ConfirmationModal from "../Modal/ConfirmationModal.vue";
@@ -58,6 +59,7 @@ const props = defineProps({
 
 const notification = useNotificationStore();
 const confirmation = useConfirmationStore();
+const playlistsStore = usePlaylistsStore();
 
 const isSidebarCollapsed = ref(false);
 const isSidebarHidden = ref(false);
@@ -158,11 +160,14 @@ onBeforeMount(() => {
     notification.push(n);
   };
 
-// Attach confirmation update to window
-window.showconfirmationmodal = (n) => {
-  confirmation.update(n);
-};
-})
+  // Attach confirmation update to window
+  window.showconfirmationmodal = (n) => {
+    confirmation.update(n);
+  };
+
+  // Initialize playlists pinia store
+  playlistsStore.update({ playlists: props.playlists });
+});
 
 const handleCloseConfirmationModal = () => {
   confirmation.callbacks.cancel();
@@ -223,7 +228,7 @@ onUnmounted(() => {
       <!-- Sidebar -->
       <Sidebar :brand="brand" :isLive="isLive" :isSidebarCollapsed="isSidebarCollapsed"
         :isSidebarHidden="isSidebarHidden" @onCollapseSidebar="onCollapseSidebar"
-        :forceSidebarHidden="forceSidebarHidden" :playlists="playlists" />
+        :forceSidebarHidden="forceSidebarHidden" :playlists="playlistsStore.playlists" :user-id="userId" />
 
       <!-- Content Container -->
       <main class="

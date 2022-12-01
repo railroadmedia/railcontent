@@ -9,15 +9,25 @@ const props = defineProps({
     isSidebarCollapsed: Boolean,
     playlists: Array,
     brand: String,
-    isActivePath: Boolean
+    isActivePath: Boolean,
+    userId: String,
 });
 
-const formattedPlaylists = ref(props.playlists.map(({ id, ...rest}) =>
-    ({
-        ...rest,
-        url: `/${props.brand}/playlist/${id}`
-    })
-));
+// Format Playlist to add Url and filter it on mount
+const formattedPlaylists = ref(
+    props.playlists.map(
+        ({ id, ...playlist }, index) => {
+            if (index < 5) {
+                return ({
+                    ...playlist,
+                    url: `/${props.brand}/playlist/${id}`
+                })
+            } else {
+                return null;
+            }
+        }
+    ).filter(n => n)
+);
 </script>
 <template>
     <section>
@@ -41,14 +51,16 @@ const formattedPlaylists = ref(props.playlists.map(({ id, ...rest}) =>
 
         <Transition name="fade">
             <div v-if="!isSidebarCollapsed" class="tw-text-sm tw-transition tw-pb-8">
-                <ul class="tw-p-[25px] tw-pt-[12px] tw-font-open-sans tw-text-white tw-text-[14px]"
+                <ul class="tw-p-[25px] tw-font-open-sans tw-text-[#00101D] dark:tw-text-white tw-text-[14px]"
                     v-if="formattedPlaylists.length > 0">
                     <!-- Loop through User Playlists -->
-                    <li class="tw-truncate tw-pb-[21px]" v-for="(playlist, index) in formattedPlaylists"
-                        :key="playlist.id + '-playlist-li'">
-                        <a href="" class="tw-no-underline tw-text-inherit">{{ playlist.title }}</a>
+                    <li class="tw-truncate tw-py-[12px]" v-for="({ url, id, title }, index) in formattedPlaylists"
+                        :key="id + '-playlist-li'">
+                        <a :href="url" class="tw-no-underline tw-text-inherit tw-py-[12px] dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]">{{ title }}</a>
                     </li>
-                    <li class="tw-text-[#9EC0DC] tw-pt-[4px]" v-if="formattedPlaylists.length > 5">See all</li>
+                    <li class="tw-text-[#9EC0DC] tw-pt-[4px]" v-if="playlists.length > 5">
+                        <a :href="`playlists/all/${userId}`">See all</a>
+                    </li>
                 </ul>
 
                 <div v-else class="tw-mt-8 tw-flex tw-flex-col tw-items-center">
@@ -60,7 +72,7 @@ const formattedPlaylists = ref(props.playlists.map(({ id, ...rest}) =>
                     <span class="tw-font-bold tw-text-[#00101D] dark:tw-text-white tw-whitespace-nowrap">No Playlist
                         yet</span>
                     <a class="tw-text-sm tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-whitespace-nowrap hover:tw-underline"
-                        href="">Create a playlist now</a>
+                        :href="`/playlists/create`">Create a playlist now</a>
                 </div>
             </div>
         </Transition>
