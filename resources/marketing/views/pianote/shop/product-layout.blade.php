@@ -51,6 +51,7 @@
         <div class="lg:flex">
             @include('pianote.shop._partials._slider',[
                 "headerText" => $product->header_text,
+                "specialText" => $product->subheader_text,
                 "videoSrc" => $product->video_src,
                 "images" => $product->images,
             ])
@@ -67,6 +68,7 @@
                 "freeShipping" => $product->free_shipping,
                 "size_case_sensitive" => $product->size_case_sensitive,
                 "category" => strtolower($product->productType->name),
+                'bundle' => $product->productType->name === 'Bundles' || str_contains($product->sku, 'member') ? true : false,
             ])
         </div>
 

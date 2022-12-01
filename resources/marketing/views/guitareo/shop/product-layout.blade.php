@@ -2,7 +2,7 @@
 
 @section('styles')
     @parent
-    
+
     <title>{{ $product->name }}</title>
     <meta property="og:description" content="{{ $product->meta_desc  }}}">
     <meta property="og:url" content="https://www.guitareo.com/{{ Request::path() }}">
@@ -105,6 +105,7 @@
         <div class="lg:flex">
             @include('guitareo.shop._partials.slider',[
                 "headerText" => $product->header_text,
+                "specialText" => $product->subheader_text,
                 "videoSrc" => $product->video_src,
                 "images" => $product->images,
             ])

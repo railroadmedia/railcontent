@@ -47,6 +47,7 @@
         <div class="lg:flex">
             @include('singeo.shop.partials.slider', [
                 "headerText" => $product->header_text,
+                "specialText" => $product->subheader_text,
                 "videoSrc" => $product->video_src,
                 "images" => $product->images,
             ])
