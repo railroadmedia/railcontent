@@ -26,7 +26,7 @@
                     @endforeach
                 @endif
             </div>
-            <div class="slider-nav mx-auto w-full @if(count($images) <= 1) hidden @endif">
+            <div class="slider-nav mx-auto w-full @if(!empty($images) && count($images) <= 1) hidden @endif">
                 @if(!empty($images))
                     @foreach ($images as $key => $image)
                         <div style="display: none;"><img class="w-full" src="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/@if(str_contains($image->path, 'amazonaws') || str_contains($image->path, 'cloudfront') || str_contains($image->path, 'vimeocdn')){{$image->path}}@else{{'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$image->path}}@endif" alt="slide image {{$key+1}}"></div>
