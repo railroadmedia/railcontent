@@ -1,8 +1,6 @@
-@include('shop.partials._promo-banner')
-
-<div class="tw-container tw-max-w-6xl tw-mx-auto">
-    <div class="tw-uppercase tw-text-xs tw-leading-tight tw-my-5 tw-px-3 md:tw-px-4 md:tw-mt-5 md:tw-mb-2 lg:tw-mb-0">
-        <p><a class="tw-text-black hover:tw-underline" href="/shop/">SHOP</a> &nbsp;/&nbsp;
+<div class="container max-w-6xl mx-auto">
+    <div class="uppercase text-xs leading-tight my-5 px-3 md:px-4 md:mt-5 md:mb-2 lg:mb-0">
+        <p><a class="text-black hover:underline" href="/shop/">SHOP</a> &nbsp;/&nbsp;
         {{--@if(!empty($videos))--}}
             {{--<a href="/lessons/">VIDEO LESSONS</a> &nbsp;/&nbsp;--}}
         {{--@elseif(!empty($clothing))--}}

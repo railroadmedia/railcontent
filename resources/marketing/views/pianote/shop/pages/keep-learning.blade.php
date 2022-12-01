@@ -1,4 +1,4 @@
-@extends('shop.shop-page-layout')
+@extends('pianote.shop.shop-page-layout')
 
 @section('meta')
     @parent
@@ -43,40 +43,33 @@
     ];
 @endphp
 
-@section('nav')
-    @include('shop.partials._shop-nav', [
-        "name" => "Upgrade",
-        "fullPrice" => 920,
-        "price" => 197,
-        "lessons" => true,
-    ])
-@endsection
-
 @section('top')
-    @include('shop.partials._slider', [
+    @include('pianote.shop._partials._slider', [
         "headerText" => "<strong>Lock in your progress! Get this exclusive offer when you continue your membership today.</strong>",
-        "slideImages" => [ "https://pianote.s3.amazonaws.com/shop/products/practice-planner/planner-thumb.jpg" ],
+        "images" => array(
+            (object)['path' => "https://pianote.s3.amazonaws.com/shop/products/practice-planner/planner-thumb.jpg"]
+        ),
         "noSlider" => true,
     ])
 
-    <div class="shop-sidebar sliding-function tw-px-3 md:tw-px-4 lg:tw-px-4 lg:tw-w-1/3 lg:tw-mt-5">
+    <div class="shop-sidebar sliding-function px-3 md:px-4 lg:px-4 lg:w-1/3 lg:mt-5">
         <div id="order" class="anchor"></div>
-        <div class="side-slide md:tw-border md:tw-border-solid md:tw-rounded-md" style="width: 360px; border-color: #CCD3D3;">
-            <div class="tw-text-center md:tw-py-6 md:tw-px-4">
-                <p class="tw-text-center tw-font-bold tw-text-sm tw-leading-none tw-mb-1 md:tw-text-base" style="color:#10D05F;">Save {{ round(100 - (100 * (177 / 236))) }}%</p>
-                <h1 class="tw-text-center tw-text-4xl tw-no-leading tw-uppercase md:tw-text-3xl" style="color:#8C9698;"><s>$236</s> <strong class="text-pianote">$177</strong></h1>
+        <div class="side-slide md:border md:border-solid md:rounded-md" style="width: 360px; border-color: #CCD3D3;">
+            <div class="text-center md:py-6 md:px-4">
+                <p class="text-center font-bold text-sm leading-none mb-1 md:text-base" style="color:#10D05F;">Save {{ round(100 - (100 * (177 / 236))) }}%</p>
+                <h1 class="text-center text-4xl no-leading uppercase md:text-3xl" style="color:#8C9698;"><s>$236</s> <strong class="text-pianote">$177</strong></h1>
                 <a class="online-atc" href="/ecommerce/add-to-cart?redirect=%2Forder&amp;products[PIANOTE-MEMBERSHIP-1-YEAR]=1&amp;products[pianote-practice-planner]=1&amp;redirect=%2Forder&amp;locked=true&promo-code=roland">
-                    <button class="bg-pianote tw-font-bold tw-text-xl tw-leading-none tw-uppercase tw-text-white tw-w-full tw-py-4 tw-px-2 tw-rounded-full tw-border-0 tw-mx-auto tw-my-2 md:tw-py-5 md:tw-py-2 md:tw-my-4 md:tw-mx-auto hover:tw-opacity-90" style="font-family: Roboto Condensed, san-serif;">Get The Deal &raquo;</button>
+                    <button class="bg-pianote font-bold text-xl leading-none uppercase text-white w-full py-4 px-2 rounded-full border-0 mx-auto my-2 md:py-5 md:py-2 md:my-4 md:mx-auto hover:opacity-90" style="font-family: Roboto Condensed, san-serif;">Get The Deal &raquo;</button>
                 </a>
-                <a class="text-pianote" href="/ecommerce/add-to-cart?products%5BPIANOTE-MEMBERSHIP-1-MONTH%5D=1&redirect=%2Forder&locked=true"><em>Or choose a monthly membership for ${{ App\Prices::$pianoteMembershipMonthlyRegular }}/month (no bonuses)</em></a>
+                <a class="text-pianote" href="/ecommerce/add-to-cart?products%5BPIANOTE-MEMBERSHIP-1-MONTH%5D=1&redirect=%2Forder&locked=true"><em>Or choose a monthly membership for ${{ PianotePrices::$pianoteMembershipMonthlyRegular }}/month (no bonuses)</em></a>
                 <br><br>
-                <p class="tw-text-black tw-italic tw-text-xs tw-leading-normal tw-text-center tw-mx-auto">You can also order by phone toll-free at<br class="hidden-xs">
+                <p class="text-black italic text-xs leading-normal text-center mx-auto">You can also order by phone toll-free at<br class="hidden-xs">
                     <a class="text-pianote" href="tel:1-800-439-8921">1-800-439-8921</a> or directly at
                     <a class="text-pianote" href="tel:1-604-855-7605">1-604-855-7605</a>. </p>
             </div>
-            <div class="tw-flex tw-justify-center tw-items-center tw-px-5 tw-pb-5 tw-text-center md:tw-pt-2 md:tw-pt-4 md:tw-pb-6 lg:tw-p-5 lg:tw--mt-1 lg:tw-mx-auto lg:tw-mb-0 tw-border-t-0 lg:tw-border-t" style="border-color: #CCD3D3; border-top-style: solid;">
-                <img class="tw-w-36 tw-my-0 tw-pr-6" src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/90-day.png">
-                <p class="tw-text-xs tw-font-bold tw-text-left tw-my-0 text-pianote">Your entire order is backed by<br class="lg:tw-hidden" /> our 90-Day Money Back <br class="lg:tw-hidden" /> Guarantee.</p>
+            <div class="flex justify-center items-center px-5 pb-5 text-center md:pt-2 md:pt-4 md:pb-6 lg:p-5 lg:-mt-1 lg:mx-auto lg:mb-0 border-t-0 lg:border-t" style="border-color: #CCD3D3; border-top-style: solid;">
+                <img class="w-36 my-0 pr-6" src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/90-day.png">
+                <p class="text-xs font-bold text-left my-0 text-pianote">Your entire order is backed by<br class="lg:hidden" /> our 90-Day Money Back <br class="lg:hidden" /> Guarantee.</p>
             </div>
         </div>
     </div>
@@ -98,9 +91,9 @@
         {{--<img src="https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/sight-reading-made-simple.jpg">--}}
     {{--</div>--}}
     {{--<hr>--}}
-    <hr class="tw-my-5">
+    <hr class="my-5">
 
-    @include('shop.partials._bonuses')
+    @include('pianote.shop._partials._bonuses')
     {{--<div class="bonus-pic">--}}
         {{--<div class="image-wrap shipping">--}}
             {{--<img src="https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/foundations.jpg">--}}
