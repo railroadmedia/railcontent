@@ -13,6 +13,8 @@ const props = defineProps({
     userId: String,
 });
 
+const emit = defineEmits('onCreatePlaylist');
+
 // Format Playlist to add Url and filter it on mount
 const formattedPlaylists = ref(
     props.playlists.map(
@@ -28,6 +30,11 @@ const formattedPlaylists = ref(
         }
     ).filter(n => n)
 );
+
+const handleCreatePlaylist = () => {
+    console.log('internal create')
+    emit('onCreatePlaylist');
+};
 </script>
 <template>
     <section>
@@ -40,8 +47,9 @@ const formattedPlaylists = ref(
                     :class="[isSidebarCollapsed ? 'md:tw-opacity-0' : 'tw-opacity-100']">Playlists</span>
             </a>
 
-            <!-- Add Playlist -->
+            <!-- Create Playlist -->
             <button
+                @click="handleCreatePlaylist"
                 class="tw-inline-flex tw-items-center tw-flex-shrink-0 tw-justify-center tw-transition tw-h-full tw-w-[42px] tw-text-[#00101D] dark:tw-text-white dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
                 :class="[isSidebarCollapsed ? 'md:tw-opacity-0' : 'tw-opacity-100']" title="Create Playlist">
                 <musora-icon icon-name="plus" class="tw-w-[20px]" />

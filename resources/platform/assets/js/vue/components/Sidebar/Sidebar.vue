@@ -50,6 +50,10 @@ const activePath = (path) => {
     return true;
   }
 }
+
+const handleCreatePlaylist = () => {
+  console.log('HANDLE CREATE PLAYLIST');
+};
 </script>
 
 <template>
@@ -86,7 +90,7 @@ const activePath = (path) => {
     </section>
 
     <!-- Playlists Section -->
-    <playlists-section :isSidebarCollapsed="isSidebarCollapsed" :playlists="playlists"
+    <playlists-section @onCreatePlaylist="handleCreatePlaylist" :isSidebarCollapsed="isSidebarCollapsed" :playlists="playlists"
       :isActivePath="activePath(`/${brand}/lists/my-list`)" :brand="brand" :userId="userId"></playlists-section>
 
   </SidebarContainer>
