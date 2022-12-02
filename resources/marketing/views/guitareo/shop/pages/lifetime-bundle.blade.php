@@ -1,4 +1,4 @@
-@extends('shop.product-layout')
+@extends('guitareo.shop.shop-page-layout')
 
 @section('styles')
     @parent
@@ -83,9 +83,9 @@
         ],
         [
             'name' => '(NEW) The Guitarist’s Survival Kit',
-            'price' => 'Normally $' . \App\Prices::$survivalKitFull,
+            'price' => 'Normally $' . GuitareoPrices::$survivalKitFull,
             'priceColor' => 'black',
-            'fullPrice' => \App\Prices::$survivalKitFull,
+            'fullPrice' => GuitareoPrices::$survivalKitFull,
             'discountedPrice' => 0,
             'desc' => "Be prepared for any musical jam with the guitar gear essentials. Inside this kit, you'll discover every component your guitar needs to stay in tune, sound crisp and clean, and look refreshed. The kit also comes with the Survival Guide, so you can carry the essential chords, scales, and licks in your guitar case.",
             'freeBonus' => true,
@@ -96,7 +96,7 @@
         ],
         [
             'name' => 'GuitarQuest',
-            'price' => 'Normally $' . \App\Prices::$guitarQuestFull,
+            'price' => 'Normally $' . GuitareoPrices::$guitarQuestFull,
             'priceColor' => 'black',
             'fullPrice' => 0,
             'discountedPrice' => 0,
@@ -109,7 +109,7 @@
         ],
         [
             'name' => 'The Guitar System',
-            'price' => 'Normally $' . \App\Prices::$guitarSystemFull,
+            'price' => 'Normally $' . GuitareoPrices::$guitarSystemFull,
             'priceColor' => 'black',
             'fullPrice' => 0,
             'discountedPrice' => 0,
@@ -122,7 +122,7 @@
         ],
         [
             'name' => 'Guitar Technique Made Easy',
-            'price' => 'Normally $' . \App\Prices::$GTMEFull,
+            'price' => 'Normally $' . GuitareoPrices::$GTMEFull,
             'priceColor' => 'black',
             'fullPrice' => 0,
             'discountedPrice' => 0,
@@ -135,7 +135,7 @@
         ],
         [
             'name' => 'Acoustic Guitar Made Easy',
-            'price' => 'Normally $' . \App\Prices::$AGMEFull,
+            'price' => 'Normally $' . GuitareoPrices::$AGMEFull,
             'priceColor' => 'black',
             'fullPrice' => 0,
             'discountedPrice' => 0,
@@ -148,7 +148,7 @@
         ],
         [
             'name' => 'Rhythm & Groove',
-            'price' => 'Normally $' . \App\Prices::$rhythmAndGrooveFull,
+            'price' => 'Normally $' . GuitareoPrices::$rhythmAndGrooveFull,
             'priceColor' => 'black',
             'fullPrice' => 0,
             'discountedPrice' => 0,
@@ -162,40 +162,32 @@
     ];
 @endphp
 
-@section('banner')
-    @include('shop.elements.promo-banner', [
-                "name" => "The Lifetime Bundle",
-                "fullPrice" => 1200,
-                "price" => 1200,
-                "noBreadcrumb" => true,
-                'specialText' => 'Get a lifetime of music lessons'
-            ])
-@endsection
-
 @section('top')
-    @include('shop.elements.slider', [
-        "headerText" => '<strong>Become a lifelong learner of music.</strong><br><h3 class="tw-leading-tight text-gradient tw-uppercase tw-mb-2"><strong>ONLY <s class="opacity-60">100</s> '.$products['GUITAREO-LIFETIME-MEMBERSHIP']->getPublicStockCount().' SPOTS</strong><br></h3>',
+    @include('guitareo.shop._partials.slider', [
+        "headerText" => '<strong>Become a lifelong learner of music.</strong><br><h3 class="leading-tight text-gradient uppercase mb-2"><strong>ONLY <s class="opacity-60">100</s>  SPOTS</strong><br></h3>',
         "videoSrc" => "//player.vimeo.com/video/774475100",
         "videoThumb" => "https://guitareo.s3.amazonaws.com/sales/promos/black-friday/sound-better-thumb.jpg",
     ])
 
-     @include('shop.elements.sidebar', [
+     @include('guitareo.shop._partials.sidebar', [
         "bundle" => true,
         "soldOut" => true,
         "logo" => "https://guitareo.s3.amazonaws.com/shop/bundles/lifetime_logo_black.png",
         "sku" => "products[GUITAREO-LIFETIME-MEMBERSHIP]=1&products[guitarists-survival-kit]=1&products[guitar-quest]=1&products[rhythm-and-groove]=1&products[GUITAR-SYSTEM]=1&products[AGME-JAN-2019-SEMESTER]=1&products[GTME-OCT-2018-SEMESTER]=1&redirect=/order&locked=true",
         "fullPrice" => 1200,
         "price" => 1200,
+        'freeShipping' => false,
+        'guaranteeBadge' => true
     ])
 @endsection
-        
+
 @section('bottom')
     <div class="shop-accordion">
         <div class="accordion" id="instructorAccordion">
             <div class="accordion-content bundle">
-        <div class="tw-flex tw-flex-wrap tw-my-7 lg:tw-my-0 lg:tw-mb-7">
-            <h4 class="tw-font-extrabold tw-text-center tw-text-xl md:tw-text-2xl tw-w-full tw-mb-4 tw-mt-0">What's included:</h4>
-            <img class="tw-w-full" src="https://guitareo.s3.amazonaws.com/sales/promos/november/lifetime-bundle-spread.png" alt="bundle spread">
+        <div class="flex flex-wrap my-7 lg:my-0 lg:mb-7">
+            <h4 class="font-extrabold text-center text-xl md:text-2xl w-full mb-4 mt-0">What's included:</h4>
+            <img class="w-full" src="https://guitareo.s3.amazonaws.com/sales/promos/november/lifetime-bundle-spread.png" alt="bundle spread">
             <p>
                 <i>“My goal is to be one with the music. I just dedicate my whole life to this art.” - Jimi Hendrix </i><br><br>
 
@@ -217,10 +209,9 @@
             </p>
         </div>
 
-        @include('shop.elements.bonuses')
+        @include('guitareo.shop._partials.bonuses')
             </div>
         </div>
     </div>
 @endsection
 
-     

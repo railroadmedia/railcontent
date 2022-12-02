@@ -1,11 +1,11 @@
-<hr class="tw-my-5">
-<h4 class="tw-text-lg md:tw-text-xl tw-font-bold tw-mt-0 tw-mb-0">Say hello to your free bonuses</h4>
-<p class="tw-mb-10 italic tw-mt-0" style="color:#8D9299;">All digital lessons are added to your account instantly.</p>
+<hr class="my-5">
+<h4 class="text-lg md:text-xl font-bold mt-0 mb-0">Say hello to your free bonuses</h4>
+<p class="mb-10 italic mt-0" style="color:#8D9299;">All digital lessons are added to your account instantly.</p>
 
 @foreach ($bonuses as $bonus)
-    <div class="bonus-pic tw-mb-7 md:tw-flex md:tw-items-center">
-        <div class="image-wrap tw-overflow-hidden tw-mb-4 md:tw-mb-0 tw-mx-auto md:tw-mr-5">
-            <img class="tw-w-full tw-h-full tw-rounded-xl" src="https://cdn.musora.com/image/fetch/w_220,q_auto:best/{{ $bonus['img'] }}" alt="{{ $bonus['name'] }} thumb">
+    <div class="bonus-pic mb-7 md:flex md:items-center">
+        <div class="image-wrap overflow-hidden mb-4 md:mb-0 mx-auto md:mr-5">
+            <img class="w-full h-full rounded-xl" src="https://cdn.musora.com/image/fetch/w_220,q_auto:best/{{ $bonus['img'] }}" alt="{{ $bonus['name'] }} thumb">
         </div>
         <div>
             <strong>{{ $bonus['name'] }} -
@@ -21,24 +21,22 @@
                 @endif
 
                 @if($bonus['freeBonus'])
-                    <span class="tw-text-guitareo">*FREE BONUS*</span>
+                    <span class="text-guitareo">*FREE BONUS*</span>
                 @endif
 
                 @if($bonus['lifetimeAccess'])
                     <span style="color:#E69500;">LIFETIME ACCESS</span>
                 @endif
 
-
                 @if($bonus['freeShipping'])
                     <span style="color:#E69500;">FREE SHIPPING</span>
                 @endif
 
                 @if(!empty($bonus['included']) && $bonus['included'])
-                    <span class="tw-text-guitareo">*INCLUDED*</span>
+                    <span class="text-guitareo">*INCLUDED*</span>
                 @endif
             </strong><br>
             {!! $bonus['desc'] !!}
         </div>
     </div>
 @endforeach
-
