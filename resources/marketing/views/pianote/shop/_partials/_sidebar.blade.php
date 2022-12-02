@@ -28,7 +28,11 @@
             @if(!empty($specialText))
                 <p class="text-center text-sm leading-none mb-1 md:text-base text-pianote italic">{!! $specialText  !!}</p>
             @endif
-            @if(!$soldOut)
+            @if(!empty($soldOut) && $soldOut)
+                <button class="join sold-out text-xl leading-none uppercase text-white w-full py-4 px-2 rounded-full border-0 mx-auto my-2 md:py-5 md:py-2 md:my-4 md:mx-auto hover:opacity-90" {{--style="background: #777;"--}}>
+                    Sold Out
+                </button>
+            @else
                 @if($category !== 'bundles' && count($sizes) === 0)
                     <a
                         class="online-atc vue-add-to-cart"
@@ -44,11 +48,11 @@
                         <option hidden value="">Choose Size</option>
                         @foreach($sizes as $size)
                             <option
-                                    @if(isset($size->soldOut) && $size->soldOut) disabled @endif
+                                @if(isset($size->soldOut) && $size->soldOut) disabled @endif
                             {{-- @if($productStock[$sku.'-'.$size->code]->isProductSoldOut()) disabled @endif --}}
-                                    value="{{$product->sku}}-{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}"
-                                    data-price="{{floatVal($product->price) ?? 0}}"
-                                    data-product-json='{"{{$product->sku}}-{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}": 1}'
+                            value="{{$product->sku}}-{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}"
+                                data-price="{{floatVal($product->price) ?? 0}}"
+                                data-product-json='{"{{$product->sku}}-{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}": 1}'
                             >
                                 {{ $size->name }}
                             </option>
@@ -56,15 +60,15 @@
                     </select>
 
                     <a
-                            class="online-atc merch vue-add-to-cart selected-pack"
-                            href="#"
-                            @if(!empty($promoCode))
-                            data-base-url="/ecommerce/add-to-cart?redirect=%2Fshop&promo-code={{$promoCode}}"
-                            data-promocode="{{ $promoCode }}"
-                            @else
-                            data-base-url="/ecommerce/add-to-cart?redirect=%2Fshop"
-                            @endif
-                            @if(!empty($lockedCart)) data-locked-cart="{{ $lockedCart }}" @endif
+                        class="online-atc merch vue-add-to-cart selected-pack"
+                        href="#"
+                        @if(!empty($promoCode))
+                        data-base-url="/ecommerce/add-to-cart?redirect=%2Fshop&promo-code={{$promoCode}}"
+                        data-promocode="{{ $promoCode }}"
+                        @else
+                        data-base-url="/ecommerce/add-to-cart?redirect=%2Fshop"
+                        @endif
+                        @if(!empty($lockedCart)) data-locked-cart="{{ $lockedCart }}" @endif
                     >
                         <button class="join text-xl leading-none uppercase text-white w-full py-4 px-2 rounded-full border-0 mx-auto my-2 md:py-5 md:py-2 md:my-4 md:mx-auto hover:opacity-90">
                             <i class="fas fa-cart-plus text-2xl mr-1"></i> Add To Cart
@@ -73,14 +77,10 @@
                 @endif
                 @if($bundle)
                     <a class="online-atc" href="/ecommerce/add-to-cart?redirect=%2Forder&{{ $sku }}"
-                            data-base-url="/ecommerce/add-to-cart?redirect=%2Forder&{{ $sku }}">
+                       data-base-url="/ecommerce/add-to-cart?redirect=%2Forder&{{ $sku }}">
                         <button class="join green text-xl leading-none uppercase text-white w-full py-4 px-2 rounded-full border-0 mx-auto my-2 md:py-5 md:py-2 md:my-4 md:mx-auto hover:opacity-90"><i class="fas fa-cart-plus text-2xl mr-1"></i> Order Now</button>
                     </a>
                 @endif
-            @else
-                <button class="join sold-out text-xl leading-none uppercase text-white w-full py-4 px-2 rounded-full border-0 mx-auto my-2 md:py-5 md:py-2 md:my-4 md:mx-auto hover:opacity-90" {{--style="background: #777;"--}}>
-                    Sold Out
-                </button>
             @endif
             @if(!empty($shippingdelay))
                 <p class="mt-0 text-xs">{!! $shippingdelay !!}</p>
