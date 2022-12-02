@@ -77,17 +77,38 @@ class AddMissingQuietPadsForBFOrders2022 extends Command
                 $user = $connection->table('usora_users')
                     ->find($order->user_id);
 
+                // insert order item row and shipping fulfillment row
+                // order item
+                $orderItemId = $connection->table('ecommerce_order_items')
+                    ->insertGetId([
+                        'order_id' => $order->id,
+                        'product_id' => 278,
+                        'quantity' => 1,
+                        'weight' => 4.10,
+                        'initial_price' => 35,
+                        'total_discounted' => 35,
+                        'final_price' => 0,
+                        'created_at' => $order->created_at,
+                        'updated_at' => $order->updated_at,
+                    ]);
+
+                // order item fulfillment
+                $connection->table('ecommerce_order_item_fulfillment')
+                    ->insert([
+                        'order_id' => $order->id,
+                        'order_item_id' => $orderItemId,
+                        'status' => 'pending',
+                        'company' => null,
+                        'tracking_number' => null,
+                        'fulfilled_on' => null,
+                        'note' => 'Generated automatically as a fix for the drumeo 2022 black friday orders missing a quiet pad.',
+                        'created_at' => $order->created_at,
+                        'updated_at' => $order->updated_at,
+                    ]);
+
                 $rowDataForPadlessOrders[] = [$user->email, $allOrdersItem->order_id];
             }
         }
-
-        $fp = fopen('missing_pad_orders_bf_2022.csv', 'w');
-
-        foreach ($rowDataForPadlessOrders as $fields) {
-            fputcsv($fp, $fields);
-        }
-
-        fclose($fp);
 
         return true;
     }
