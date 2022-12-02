@@ -7,6 +7,7 @@ on:
 jobs:
   deploy-web-staging-four:
     runs-on: ubuntu-latest
+    timeout: 1000
     if: github.ref == 'refs/heads/web-staging-four'
     steps:
       - name: Checkout code
