@@ -14,7 +14,6 @@
                 @endif
 
                 <span @if($bonus['priceColor'] == 'orange') style="color:#E69500;" @endif>{!! $bonus['price'] !!}</span>
-
                 <br @if(!$bonus['lineBreak']) class="tw-hidden" @endif>
 
                 @if (!empty($bonus['discountedPrice']))
@@ -29,6 +28,7 @@
                     <span style="color:#E69500;">LIFETIME ACCESS</span>
                 @endif
 
+
                 @if($bonus['freeShipping'])
                     <span style="color:#E69500;">FREE SHIPPING</span>
                 @endif
@@ -41,3 +41,4 @@
         </div>
     </div>
 @endforeach
+
