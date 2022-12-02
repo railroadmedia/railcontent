@@ -252,6 +252,13 @@ app.component('AppContainer', AppContainer)
         )
     ))
 
+    .component('SongRequest', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "song-request" */
+            `./vue/components/Songs/SongRequest.vue`
+        )
+    ))
+
     .component('PianoBackingTracks', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "piano-backing-tracks" */

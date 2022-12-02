@@ -63,11 +63,8 @@ onUnmounted(() => {
           tw-pb-[42px]
           tw-flex
           tw-flex-col
-          tw-border-[#223F57]
-          tw-border-[1px]
-          tw-bg-[#081825]
         "
-        :class="selfContained ? `tw-bg-transparent tw-border-0 ${classOverride}` : classOverride"
+        :class="classOverride ? classOverride : 'tw-border-[#223F57] tw-border-[1px] tw-bg-white dark:tw-bg-[#081825]'"
       >
         <div
           class="
@@ -77,10 +74,11 @@ onUnmounted(() => {
             tw-text-white
             tw-mb-[24px]
             tw-px-[40px]
+            tw-relative
           "
         >
-          <h3>{{ title }}</h3>
-          <button @click="onClose" class="tw-self-end">
+          <h3 class="tw-text-center tw-w-full tw-text-black dark:tw-text-white">{{ title }}</h3>
+          <button @click="onClose" class="tw-absolute tw-right-[24px] tw-top-0">
             <XIcon class="tw-text-[#E5E5E5] tw-h-[30px] tw-w-[30px]" />
           </button>
         </div>

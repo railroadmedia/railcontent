@@ -1,9 +1,9 @@
 {
-    "/platform/js/app.js": "/platform/js/app.js?id=397f2472ebd60f74427ccfa64f783ce5",
+    "/platform/js/app.js": "/platform/js/app.js?id=754cf11a4d0996e55e1e6bad403ecd9d",
     "/platform/js/profile.js": "/platform/js/profile.js?id=c7e869f012d1252699ff65de1e5e0547",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=24098ec7990ff98a565fd1e4693746ed",
     "/platform/js/books.js": "/platform/js/books.js?id=d4fa837307a14d7ee0ce9065b5e5e8e0",
-    "/platform/js/manifest.js": "/platform/js/manifest.js?id=75f5c5501923423e9e0f89a59dcb3663",
+    "/platform/js/manifest.js": "/platform/js/manifest.js?id=fa3f785e2082b292b2d2a6807f46de75",
     "/platform/js/song.js": "/platform/js/song.js?id=8616d487a354c2b6996c6fcb9f864144",
     "/platform/js/piano-backing-tracks.js": "/platform/js/piano-backing-tracks.js?id=7fbf8dfd123a4027cfa05515f7665d82",
     "/platform/js/student-review-form-iframe.js": "/platform/js/student-review-form-iframe.js?id=ffad6cfee18112a8e0bb7e04829f0d02",
@@ -21,8 +21,9 @@
     "/platform/js/comments-component.js": "/platform/js/comments-component.js?id=9834ded5764da76e660671d59b136a39",
     "/platform/js/email-form-component.js": "/platform/js/email-form-component.js?id=30c222662e6d3c2a837f8311b829f7c6",
     "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=baa63b59a97d479cbba506095c5a0b76",
-    "/platform/css/app.css": "/platform/css/app.css?id=06de99716de4b2a7ffa6d486237c7e8d",
+    "/platform/css/app.css": "/platform/css/app.css?id=ea613b3278ae35bca3ed3efd3aa0a069",
     "/platform/js/vendor~onboarding.js": "/platform/js/vendor~onboarding.js?id=2fe324477737000918331b15a0aa89ec",
     "/marketing/css/app.css": "/marketing/css/app.css?id=2ff3f98ee868b56117b26333bd4969f7",
-    "/platform/js/vendor.js": "/platform/js/vendor.js?id=8470bd0ac3b709473a42f62d3c5ef0d8"
+    "/platform/js/vendor.js": "/platform/js/vendor.js?id=8470bd0ac3b709473a42f62d3c5ef0d8",
+    "/platform/js/song-request.js": "/platform/js/song-request.js?id=40b8bb5b0f4e6434f4fb3a06a412f675"
 }
