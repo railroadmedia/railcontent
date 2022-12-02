@@ -29,7 +29,6 @@
                         {{--Get {{ round(100 - (100 * (GuitareoPrices::$guitarQuestRegular / GuitareoPrices::$guitarQuestFull))) }}% off until Sunday, August 28th at midnight.--}}
                         {{--SAVE {{ round(100 - (100 * (GuitareoPrices::$guitarQuestRegular / GuitareoPrices::$guitarQuestFull))) }}% + BONUS 1-YEAR GUITAREO  <br>--}}
                         {{--MEMBERSHIP FOR EXTRA LESSONS & SUPPORT--}}
-                        {{--<br><strong class="text-goldenrod">ONLY <span class="tzcd-small inline md:hidden">A LIMITED TIME</span> <span class="tzcd-full hidden md:inline">A LIMITED TIME</span> LEFT!</strong>--}}
                     {{--</h2>--}}
                     {{--<a title="Go To Order Page" href="{{ $orderLink }}" class="bg-goldenrod-gradient transition duration-500 linear px-8 py-3 w-auto inline-block uppercase text-black font-roboto-condensed-bold rounded-full text-center text-xl mb-5">--}}
                         {{--GET STARTED »--}}

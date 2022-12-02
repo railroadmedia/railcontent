@@ -102,7 +102,7 @@
         <!-- Join -->
         <section class="flex flex-col text-center mb-12">
             <h2 class="font-bold text-3xl mb-3 md:mb-6">Want to join the team?</h2>
-            <p class="text-base">For current available positions at our company, please visit <a href="https://musora.com/jobs" title="go to help center" class="font-bold no-underline text-guitareo">Musora.com/Jobs</a>.</p>
+            <p class="text-base">For current available positions at our company, please visit <a href="https://musora.com/careers" title="go to help center" class="font-bold no-underline text-guitareo">Musora.com/Careers</a>.</p>
         </section>
 
     </main>

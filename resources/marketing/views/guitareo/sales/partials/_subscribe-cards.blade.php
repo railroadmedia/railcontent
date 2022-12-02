@@ -5,7 +5,6 @@
         <h2 class="leading-tight mb-3 md:mb-6 px-3"><strong>Learn what YOU want, get inspired, and <br class="hidden md:inline"> stay motivated with personal support.</strong></h2>
         <h6 class="text-navy">
             <span class="text-coaches uppercase"> for only ${{ number_format((GuitareoPrices::$guitareoMembershipAnnual / 12), 2, '.', ',') }} a month</span>
-            {{--<br><span class="text-coaches uppercase">ONLY <span class="tzcd-full hidden sm:inline">A LIMITED TIME</span> <span class="tzcd-small inline sm:hidden">A LIMITED TIME</span> LEFT!</span><br>--}}
 
             {{--<br><em>(Cancel anytime, 90-Day Money Back Guarantee)</em>--}}
         </h6>
@@ -77,7 +76,6 @@
         {{--<br><br>--}}
         {{--<a class="join methodcta" href="{{ URL::Route('shopping-cart.to-cart.api') }}?products[DLM]=1,year,1&products[Drumeo-Sticks]=1&locked=true">Click Here To Get Started &raquo;</a><br>--}}
         {{--<a class="methodcta monthly-alt" href="/ecommerce/add-to-cart?products[GUITAREO-1-MONTH-MEMBERSHIP]=1&redirect=/order"><p><u><em>Or click here to start a monthly membership for <br class="inline md:hidden">${{ GuitareoPrices::$guitareoMembershipMonthly }}/month.</em></u></p></a>--}}
-        {{--<p class="mb-4 md:mb-6"><span class="uppercase text-promo">ONLY <span class="inline md:hidden tzcd-small">A LIMITED TIME</span> <span class="hidden md:inline tzcd-full">A LIMITED TIME</span> LEFT!</span></p>--}}
     </div>
 </section>
 

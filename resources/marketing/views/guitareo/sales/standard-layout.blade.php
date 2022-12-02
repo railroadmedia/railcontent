@@ -91,9 +91,9 @@
                 <h6 class="leading-normal text-light-navy text-shadow-4 mt-3 md:mt-5 mb-5 md:mb-7 max-w-sm md:max-w-none">Get lessons from world-class guitarists and GRAMMY <br class="hidden md:inline">winners to help you learn faster, get better, and have <br class="hidden md:inline">more fun on the guitar.</h6>
                 <a
                     @hasSection('start-button')
-                    href="@yield('start-button')" class="join blue smaller w-3/4 md:w-1/3 lg:w-1/4"
+                        href="@yield('start-button')" class="join blue smaller w-2/3 md:w-auto"
                     @else
-                    href="#customize-anchor" class="join blue smaller anchor-slide w-3/4 md:w-1/3 lg:w-1/4 anchor-slide"
+                        href="#customize-anchor" class="join blue smaller anchor-slide w-2/3 md:w-auto anchor-slide"
                     @endif
                 >
                     @if(empty($trialVersion))
@@ -102,6 +102,9 @@
                         Start your free trial
                     @endif
                 </a>
+                @if(!empty($bfButton))
+                    <a data-open="trailer" class="join outline promo smaller autoplay-video w-2/3 md:w-auto mt-3 md:mt-0"><i class="fas fa-play"></i> Holiday Deals</a>
+                @endif
             </div>
         </div>
 
@@ -161,15 +164,15 @@
                     @endif
             >Get The Guitareo Advantage</a>
 
-            <p class="text-light-navy text-sm">
-                <em>
-                        @if(empty($trialVersion))
-                            Just ${{ number_format(GuitareoPrices::$guitareoMembershipAnnual / 12, 2) }} per month, 90-day guarantee.
-                        @else
-                            Try it for free now
-                        @endif
-                </em>
-            </p>
+{{--            <p class="text-light-navy text-sm">--}}
+{{--                <em>--}}
+{{--                        @if(empty($trialVersion))--}}
+{{--                            Just ${{ number_format(GuitareoPrices::$guitareoMembershipAnnual / 12, 2) }} per month, 90-day guarantee.--}}
+{{--                        @else--}}
+{{--                            Try it for free now--}}
+{{--                        @endif--}}
+{{--                </em>--}}
+{{--            </p>--}}
         </div>
     </section>
 
@@ -435,13 +438,10 @@
         <div class="container mx-auto max-w-6xl">
             <h2 class="leading-tight max-w-3xl"><em>“... for people who want to learn how to play guitar, and fast.”</em></h2>
             <h6 class="mt-5 mb-10 md:mb-20"><em>- American Songwriter</em></h6>
-            <h2 class="leading-tight max-w-3xl"><em>“If you're a beginner and want a simple place to get started, the Guitareo Method is a great place to land.”</em></h2>
-            <h6 class="mt-5 mb-10 md:mb-20"><em>- Guitar Chalk</em></h6>
             <div class="mx-auto w-full opacity-80">
                 <p class="text-sm mb-3"><em>As seen in:</em></p>
                 <img class="inline-block h-7 md:h-9 mr-3 md:mr-8 lazyload" data-src="https://cdn.musora.com/image/fetch/w_230,q_auto:best/https://guitareo.s3.amazonaws.com/sales/2021/partner-guitar-world.png" alt="guitar-world">
                 <img class="inline-block h-14 md:h-16 lazyload" data-src="https://cdn.musora.com/image/fetch/w_130,q_auto:best/https://guitareo.s3.amazonaws.com/sales/2021/partner-guiness-world-records.png" alt="guitar-world-records">
-                <img class="inline-block h-14 md:h-16 ml-3 md:ml-8 lazyload" data-src="https://cdn.musora.com/image/fetch/w_130,q_auto:best/https://guitareo.s3.amazonaws.com/sales/2021/partner-guitar-chalk.png" alt="guitar-world-records">
                 <img class="inline-block h-10 md:h-14 ml-3 md:ml-8 lazyload" data-src="https://cdn.musora.com/image/fetch/w_270,q_auto:best/https://guitareo.s3.amazonaws.com/sales/2021/partner-american-songwriter.png" alt="american-songwriter">
             </div>
         </div>
@@ -1294,14 +1294,15 @@
                     @else
                         <td class="rounded-b-xl">
                             @if(empty($trialVersion))
-                                <strong>${{ number_format(GuitareoPrices::$guitareoMembershipAnnual/ 12, 2) }}</strong>/mo<br>
-                                <em>Billed annually</em><br><br>
+                                @if(number_format(\App\Prices::$guitareoMembershipAnnual, 2) == intval(\App\Prices::$guitareoMembershipAnnual))
+                                    <strong>${{  round(\App\Prices::$guitareoMembershipAnnual / 12, 2) }}</strong>/mo<br>
+                                @else
+                                    <strong>${{  number_format(\App\Prices::$guitareoMembershipAnnual / 12, 2)  }}</strong>/mo<br>
+                                @endif
+                                <em>Billed annually at ${{  \App\Prices::$guitareoMembershipAnnual }}</em><br><br>
                                 Unlimited lessons & support.
                             @else
-                                <div class="text-xs md:text-base lg:text-xl mb-2 md:mb-4"><b>Try it free for 7 days,</b> then</div>
-                                <strong>${{ number_format(GuitareoPrices::$guitareoMembershipAnnual/ 12, 2) }}</strong>/mo<br>
-                                <em>Billed annually</em><br><br>
-                                Unlimited lessons & support.
+                                <strong>Free Trial</strong><br>&nbsp;
                             @endif
                         </td>
                     @endif
@@ -1339,9 +1340,9 @@
         </div>
     </section>
 
-    <div class="unstick-trigger block"></div>
     <div id="customize-anchor" class="anchor"></div>
     @yield('final')
+    <div class="unstick-trigger block"></div>
 
 
     @foreach($coaches as $coach)
@@ -1411,6 +1412,10 @@
             [
             'modal' => 'ghawiTrailer',
             'vimeo' => '702222064',
+            ],
+            [
+            'modal' => 'trailer',
+            'vimeo' => '774475126',
             ],
          ]
     @endphp

@@ -127,14 +127,13 @@
                         <div class="join blue">Start My Free Trial &raquo;</div>
                         <p class="text-navy" style="margin: 5px auto -26px;">
                             <em>
-                                {{-- Save
+                                Save
                                 @hasSection('extra-savings-amount')
                                     @yield('extra-savings-amount')
                                 @else
                                     $53
                                 @endif
-                                per year vs. monthly. --}}
-                                Billed as $127 per year
+                                per year vs. monthly.
                             </em>
                         </p>
                     </a>

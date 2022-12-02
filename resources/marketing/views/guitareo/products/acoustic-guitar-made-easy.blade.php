@@ -13,6 +13,7 @@
 @section('styles')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation-float.min.css" rel="stylesheet">
     <link href="{{ asset('marketing/parcel/guitareo/agme-sales.css') }}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}">
 @stop()
 
@@ -112,8 +113,7 @@
                     @else
                         <strong><u>ONLY ${{ GuitareoPrices::$AGMERegular }}</u></strong>
                     @endif
-                    <br> <strong>** 90-DAY GUARANTEE **</strong>
-                    {{--<br><span style="color:#f6bd52;">Only <strong class="tzcd-med">A Limited Time</strong> Left!</span>--}}</p>
+                    <br> <strong>** 90-DAY GUARANTEE **</strong></p>
 
             </div>
             <div class="reveal large trailer" id="trailer" data-reveal data-reset-on-close="true">

@@ -181,7 +181,6 @@
                             <p class="leading-tight mx-0 text-guitareo text-left inline-block">
                                 <a target="_blank" href="https://www.google.com/search?q=11am+PDT" class="no-underline uppercase"><strong class="font-extrabold">Wednesday, Oct. 12 @ 11am PT</strong></a><br class="inline-block md:hidden">
                                 <br>SIGN UP FOR NOTICE ON THE NEXT EVENT
-                                {{--                                - STARTS IN <br class="hidden md:inline-block"> <strong class="uppercase tzcd-full hidden md:inline"></strong> <strong class="uppercase tzcd-small inline md:hidden"></strong>--}}
                             </p>
                         </div>
 {{--                        <p class="italic text-sm mb-2 md:mb-6">--}}
@@ -355,8 +354,6 @@
                 <strong class="font-bold">Free 60-minute beginner guitar lesson</strong> <br class="inline md:hidden"> with Ayla Tesler-Mabe and Kent Shores
                 <br>
                  <strong class="text-yellow uppercase md:mt-2 mb-6">SIGN UP FOR NOTICE ON THE NEXT EVENT</strong>
-{{--                <strong class="text-guitareo uppercase hidden md:block md:mt-2 mb-6">ONLY <span class="tzcd-full">A LIMITED TIME</span> LEFT!</strong>--}}
-{{--                <strong class="text-guitareo uppercase block md:hidden mt-2 mb-6">ONLY <span class="tzcd-small">A LIMITED TIME</span> LEFT!</strong>--}}
             </h6>
 
             @include('guitareo.lead-gen.partials._sign-up-form-tw', [

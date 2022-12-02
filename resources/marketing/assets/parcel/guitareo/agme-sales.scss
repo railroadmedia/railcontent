@@ -282,33 +282,6 @@ footer .row {
     }
   }
 
-  .tzcd-big {
-    text-transform: uppercase;
-    display: inline-block;
-    vertical-align: middle;
-
-    div {
-      float: left;
-      padding: 0 20px 0 0;
-      text-align: center;
-
-      &:last-child {
-        padding-right: 0;
-      }
-
-      h1 {
-        margin: 0 auto;
-        font-size: 27px;
-      }
-
-      p {
-        font: 700 13px/1em $opensans;
-        color: $altGuitareoGreen;
-        margin: 0 auto;
-      }
-    }
-  }
-
   .join {
     background: $promoColor;
     font-size: 18px;
@@ -1739,38 +1712,6 @@ body.is-reveal-open {
         font-size: 18px;
       }
 
-    }
-
-    .tzcd-big {
-      text-transform: uppercase;
-      display: inline-block;
-      vertical-align: middle;
-
-      div {
-        float: left;
-        padding: 0 15px 0 0;
-        text-align: center;
-
-        &:last-child {
-          padding-right: 0;
-        }
-
-        h1 {
-          color: #fff;
-          margin: 0 auto;
-          font: 900 28px/1em $opensans;
-          @include tablet {
-            font-size: 34px;
-          }
-        }
-
-        p {
-          font: 700 13px/1em $opensans;
-          color: #00BC75;
-          margin: 0 auto;
-          padding: 0;
-        }
-      }
     }
   }
 

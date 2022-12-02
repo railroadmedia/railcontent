@@ -81,7 +81,6 @@
                 <strong>500 Songs On The Guitar</strong> In 5 Days</h2>
             <a class="join" href="@yield('order-link')" @yield('product-json')>Get Started &raquo;</a>
             <p class="breakdown">
-                {{--<strong class="yellow" style="text-transform:uppercase;">ONLY <span class="tzcd-full">A LIMITED TIME</span> LEFT!</strong><br>--}}
                 @if(GuitareoPrices::$songs500Full > $productPrice)
                     <s>NORMALLY ${{ GuitareoPrices::$songs500Full }}.</s> &nbsp;<strong class="text-guitareo"><u>ONLY ${{ $productPrice }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * ($productPrice / GuitareoPrices::$songs500Full))) }}%)
                 @else
@@ -312,7 +311,6 @@
 
             <a href="@yield('order-link')" class="join tracking-normal my-2 md:my-4" @yield('product-json')>Get Started &raquo;</a>
             <p class="breakdown">
-                {{--<strong class="yellow" style="text-transform:uppercase;">ONLY <span class="tzcd-full">A LIMITED TIME</span> LEFT!</strong><br>--}}
                 @if(GuitareoPrices::$songs500Full > $productPrice)
                     <s>NORMALLY ${{ GuitareoPrices::$songs500Full }}.</s> &nbsp;<strong class="text-guitareo"><u>ONLY ${{ $productPrice }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * ($productPrice / GuitareoPrices::$songs500Full))) }}%)
                 @else

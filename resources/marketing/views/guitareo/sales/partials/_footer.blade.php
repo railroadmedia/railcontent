@@ -35,7 +35,7 @@
                 <input name="success_redirect" type="hidden" value="/thank-you-white">
             </form>
             <div class="thank-you-box">
-                <p><em>You should receive an email from team@pianote.com within 10 minutes.</em></p>
+                <p><em>You should receive an email from team@guitareo.com within 10 minutes.</em></p>
             </div>
         </div>
         <div class="footer-link-wrap">

@@ -222,6 +222,14 @@ body {
 
       }
 
+        &.promo {
+            border-color: $promoColor;
+            color: $promoColor;
+            &:hover {
+                background: $promoColor;
+                color: #020815;
+            }
+        }
       &.cart-button {
         position: relative;
 

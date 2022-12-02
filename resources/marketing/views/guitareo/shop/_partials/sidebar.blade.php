@@ -16,7 +16,7 @@
                 <p class="text-center text-sm uppercase mx-auto mb-1 hidden lg:block"><em>{{ $instructor }}</em></p>
             @endif
             @if(!empty($logo))
-                    <img class="hidden max-h-20 w-full mx-auto mb-4 object-contain lg:block" src="@if(str_contains($logo, 'amazonaws') || str_contains($logo, 'cloudfront')){{$logo}}@else{{'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$logo}}@endif" alt="logo">
+                    <img class="@if(!empty($logoStyles)) {{ $logoStyles }} @endif hidden max-h-20 w-full mx-auto mb-4 object-contain lg:block" src="@if(str_contains($logo, 'amazonaws') || str_contains($logo, 'cloudfront')){{$logo}}@else{{'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$logo}}@endif" alt="logo">
             @endif
 
             @if(isset($fullPrice) && isset($price) && ($fullPrice - $price) > 0)
@@ -29,7 +29,7 @@
                     @endif
                 </div>
             @elseif(isset($price))
-                <div class="text-center leading-none text-3xl uppercase md:text-4xl"><strong class="text-guitareo">Only $<span class="chosen-variant-price-float">{{ floatVal($price) }}</span></strong></div>
+                <div class="text-center leading-none text-3xl uppercase md:text-4xl"><strong class="text-guitareo">$<span class="chosen-variant-price-float">{{ floatVal($price) }}</span></strong></div>
             @endif
 
             @if(!empty($specialText))

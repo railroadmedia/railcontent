@@ -14,6 +14,7 @@
 @section('styles')
     <link href="{{ asset('/marketing/css/guitareo/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation-float.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
 
     <style>
         body {
@@ -133,7 +134,6 @@
                     @endif
 
                         <br><a href="/" class="text-guitareo">(OR FREE WITH A GUITAREO MEMBERSHIP)</a>
-                    {{--<br><strong style="color: #f6bd52;">ONLY <span class="tzcd-med">A LIMITED TIME</span> LEFT</strong>--}}
                     <br> <strong>** 90-DAY GUARANTEE **</strong>
                 </p>
             </div>
@@ -160,12 +160,6 @@
                             {{--Your guitar deserves to be played freely and effectively, and especially during its own dedicated month!--}}
                             {{--<br></p>--}}
 
-                        {{--<div class="tzcd-big">--}}
-                            {{--<div><h1>00</h1> <p>days</p></div>--}}
-                            {{--<div><h1>00</h1> <p>hrs</p></div>--}}
-                            {{--<div><h1>00</h1> <p>mins</p></div>--}}
-                            {{--<div><h1>00</h1> <p>secs</p></div>--}}
-                        {{--</div>--}}
                         {{--<div class="join">Get Started &raquo;</div>--}}
                     {{--</div>--}}
                 {{--</a>--}}
@@ -707,7 +701,6 @@
                     @endif
 
                     <br><a href="/" class="text-guitareo">(OR FREE WITH A GUITAREO MEMBERSHIP)</a>
-                    {{--<br><strong style="color: #f6bd52;">ONLY <span class="tzcd-med">A LIMITED TIME</span> LEFT</strong>--}}
                     <br> <strong>** 90-DAY GUARANTEE **</strong>
                 </h6>
             </div>

@@ -172,8 +172,6 @@
                         <p class="leading-tight mt-2 md:mt-5 mb-2 md:mb-8">
                             <strong class="font-extrabold">Free 60-minute beginner guitar lesson</strong> <br class="lg:hidden">with Ayla Tesler-Mabe
                             <br><strong class="text-yellow uppercase md:mt-2 mb-6">SIGN UP FOR NOTICE ON THE NEXT EVENT</strong>
-                            {{--<strong class="text-yellow uppercase hidden md:block md:mt-2">ONLY <span class="tzcd-full">A LIMITED TIME</span> LEFT!</strong>--}}
-                            {{--<strong class="text-yellow uppercase block md:hidden mt-2">ONLY <span class="tzcd-small">A LIMITED TIME</span> LEFT!</strong>--}}
                         </p>
                         {{--<div class="flex justify-center items-center md:justify-start mb-2 md:mb-6">--}}
                             {{--<div class="align-middle bg-white text-center rounded-lg inline-block overflow-hidden w-11">--}}
@@ -339,8 +337,6 @@
             <h6 class="my-2 leading-normal">
                 <strong class="font-extrabold">Free 60-minute beginner guitar lesson</strong> <br class="inline md:hidden"> with Ayla Tesler-Mabe
                 <br><strong class="text-yellow uppercase md:mt-2 mb-6">SIGN UP FOR NOTICE ON THE NEXT EVENT</strong>
-                {{--<strong class="text-yellow uppercase hidden md:block md:mt-2 mb-6">ONLY <span class="tzcd-full">A LIMITED TIME</span> LEFT!</strong>--}}
-                {{--<strong class="text-yellow uppercase block md:hidden mt-2 mb-6">ONLY <span class="tzcd-small">A LIMITED TIME</span> LEFT!</strong>--}}
             </h6>
 
             @include('guitareo.lead-gen.partials._sign-up-form-tw', [

@@ -439,7 +439,7 @@ img {
     text-transform: uppercase;
     font-size: 54px;
     @include tablet {
-      font-size: 100px;
+      font-size: 90px;
     }
   }
 
@@ -468,42 +468,6 @@ img {
       }
       @include desktop {
         padding: 14px 30px;
-      }
-    }
-  }
-
-
-  .tzcd-big {
-    text-transform: uppercase;
-    display: inline-block;
-    vertical-align: middle;
-    margin: 0 auto;
-
-    div {
-      float: left;
-      text-align: center;
-      padding: 0 15px 0 0;
-      @include tablet {
-        padding: 0 25px 0 0;
-      }
-
-      &:last-child {
-        padding-right: 0;
-      }
-
-      h1 {
-        color: #ddf7ff;
-        margin: 0 auto;
-        font: 900 28px/1em $opensans;
-        @include tablet {
-          font-size: 32px;
-        }
-      }
-
-      p {
-        font: 800 10px/1em $opensans;
-        color: #ffac00;
-        margin: 0 auto;
       }
     }
   }
@@ -564,8 +528,6 @@ img {
 .catalogue-filters {
   text-align: center;
   margin: 0 auto;
-  width: 100%;
-  max-width: 1400px;
   padding: 0 0 5px;
   @include tablet {
     padding: 40px 20px 5px;
@@ -793,11 +755,9 @@ img {
 
   .top-left-badge {
     position: absolute;
-    border-radius: 0 0 5px 0;
+    border-radius: 0 0 10px 0;
     top: 0;
     left: 0;
-    background: #ffac00;
-    color: #000;
     font: 700 11px/1em $robotocondensed;
     text-transform: uppercase;
     //border: 1px solid #ddd;
@@ -810,7 +770,7 @@ img {
 
 
   .bundle-card {
-    border-radius: 5px;
+    border-radius: 10px;
     overflow: hidden;
     position: relative;
     margin: 0 auto 20px;
@@ -845,20 +805,11 @@ img {
       opacity: 0.8;
     }
 
-    .thumb {
-      background: #fff center center/cover;
-      padding-bottom: 80%;
-      @include desktop {
-        padding-bottom: 40%;
-        background-size: contain;
-      }
-    }
-
     .float-left {
       text-align: center;
-      padding: 15px;
-      @include desktop {
-        padding: 20px;
+        padding: 20px 15px;
+        @include desktop {
+            padding: 30px 20px;
       }
 
       p {
@@ -908,7 +859,7 @@ img {
   .banner-product {
     background: #000 url(https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/ads/lsf-mobile.jpg) center center/cover no-repeat;
     position: relative;
-    border-radius: 5px;
+    border-radius: 10px;
     color: #FFF;
     text-align: center;
     padding: 25px 10px;
@@ -1036,7 +987,7 @@ img {
       }
 
       .heading-icon {
-        color: $drumeoBlue;
+        color: $guitareoGreen;
         display: inline-block;
         max-width: 170px;
         font-size: 24px;
@@ -1045,10 +996,6 @@ img {
           margin-right: 8px;
           max-width: 250px;
           font-size: 34px;
-        }
-
-        &.promo {
-          color: #155E4D;
         }
 
         i {
@@ -1170,8 +1117,6 @@ img {
               border-radius: 0 0 5px 0;
               top: 0;
               left: 0;
-              background: $guitareoGreen;
-              color: #000;
               font: 700 11px/1em $robotocondensed;
               text-transform: uppercase;
               //border: 1px solid #ddd;
@@ -1244,7 +1189,6 @@ img {
               }
 
               strong {
-                color: $guitareoGreen;
                 display: inline-block;
                 margin: 5px auto 0;
               }

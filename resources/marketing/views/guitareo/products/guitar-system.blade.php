@@ -14,6 +14,7 @@
     @parent
     <link href="{{ asset('/marketing/css/guitareo/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation-float.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link href="{{ asset('marketing/parcel/guitareo/gs.css') }}" rel="stylesheet">
     <link href="{{ asset('marketing/parcel/guitareo/nav-footer.css') }}" rel="stylesheet">
     <style>
@@ -106,12 +107,6 @@
                             {{--<br><br>--}}
                             {{--<u>Just click here to get started</u> -- and join in the celebration by playing and creating the music you love.--}}
                             {{--<br></p>--}}
-                        {{--<div class="tzcd-big">--}}
-                        {{--<div><h1>00</h1> <p>days</p></div>--}}
-                        {{--<div><h1>00</h1> <p>hrs</p></div>--}}
-                        {{--<div><h1>00</h1> <p>mins</p></div>--}}
-                        {{--<div><h1>00</h1> <p>secs</p></div>--}}
-                        {{--</div>--}}
                         {{--<div class="join">Get Started &raquo;</div>--}}
                     {{--</div>--}}
                 {{--</a>--}}
@@ -434,7 +429,7 @@
     <section class="final text-center">
         <div class="row">
             {{--<img class="logo edge" src="https://guitareo.s3.amazonaws.com/sales/promos/cyber-monday/logo.png"><br>--}}
-            <img class="logo" src="https://guitareo.s3.amazonaws.com/tripwire/gs-logo.png">
+            <img class="logo mx-auto" src="https://guitareo.s3.amazonaws.com/tripwire/gs-logo.png">
             <h2>The Ultimate Encyclopedia <br>Of Guitar Lessons</h2>
             <a href="{{ url()->route('shopping-cart.add-to-cart',
                 ['products' => ['GUITAR-SYSTEM' => 1], 'redirect' => '/order']) }}" class="join" data-product-json='{"GUITAR-SYSTEM": 1}'>Get Started &raquo;</a>

@@ -182,12 +182,10 @@ img {
 
   &.promo {
     background: $promoColor;
-    //color: #000;
 
     &:hover,
     &:focus {
       background: lighten($promoColor, 10%);
-      //color: #000;
     }
   }
 
@@ -1248,35 +1246,6 @@ img {
       &.hidden {
         @include tablet {
           display: none;
-        }
-      }
-    }
-
-    .tzcd-big {
-      text-transform: uppercase;
-      display: inline-block;
-      vertical-align: middle;
-
-      div {
-        float: left;
-        padding: 0 20px 0 0;
-        text-align: center;
-
-        &:last-child {
-          padding-right: 0;
-        }
-
-        h1 {
-          margin: 0 auto;
-          font-size: 27px;
-          font-weight: 800;
-          font-family: $opensans;
-        }
-
-        p {
-          font: 700 13px/1em $opensans;
-          color: $promoColor;
-          margin: 0 auto;
         }
       }
     }

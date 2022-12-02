@@ -1,6 +1,6 @@
 @extends('guitareo.sales.standard-layout', [
 "openVersion" => true,
-"trialVersion" => true,
+    "bfButton" => true
 ])
 
 @section('meta')
@@ -93,97 +93,93 @@
 @endsection
 
 @section('top-promo-bar')
-    @include('_partials.layout.holiday.homepage-top-banner',[
-        'text' => 'GET 6 FREE BONUSES WORTH $924'
-    ])
-@endsection
+    <section class="big-promo-banner bg-black text-white text-center relative z-10 overflow-hidden px-5 md:px-3 lg:px-5 md:px-8 py-5 md:py-14 bg-cover bg-center">
+        <div class="container mx-auto relative z-30 max-w-lg">
+            <a href="/shop"><img class="h-14 sm:h-16 lg:h-20 mx-auto" src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://guitareo.s3.amazonaws.com/sales/promos/november/holiday-guitar.png" alt="guitareo black friday logo"></a>
+            <p class="leading-tight my-3 uppercase"><strong class="">GET 6 FREE<br class="inline md:hidden"> BONUSES WORTH $924</strong></p>
+            {{--            <div class="mt-6 mb-7 rounded-xl px-3 sm:px-6 py-1 inline-flex flex-wrap mx-auto justify-center items-center" style="background-color:#181515;">--}}
+            {{--                <p class="leading-none m-0"><strong>DEALS END IN:</strong></p>--}}
+            {{--                <div class="h-12 mx-3 sm:mx-5 bg-promo" style="width:2px;"></div>--}}
+            {{--                <div class="tzcd-big">--}}
+            {{--                    <div class="inline-block">--}}
+            {{--                        <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>--}}
+            {{--                        <p class="leading-none uppercase font-extrabold text-xs text-promo">days</p>--}}
+            {{--                    </div>--}}
+            {{--                    <div class="inline-block mx-2">--}}
+            {{--                        <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>--}}
+            {{--                        <p class="leading-none uppercase font-extrabold text-xs text-promo">hrs</p>--}}
+            {{--                    </div>--}}
+            {{--                    <div class="inline-block mr-2">--}}
+            {{--                        <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>--}}
+            {{--                        <p class="leading-none uppercase font-extrabold text-xs text-promo">mins</p>--}}
+            {{--                    </div>--}}
+            {{--                    <div class="inline-block">--}}
+            {{--                        <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>--}}
+            {{--                        <p class="leading-none uppercase font-extrabold text-xs text-promo">secs</p>--}}
+            {{--                    </div>--}}
+            {{--                </div>--}}
+            {{--            </div>--}}
 
-@section('promo-banner')
-    <section class="py-10 md:py-20 px-2 lg:px-4 text-white text-center bg-center bg-cover bg-no-repeat" style="background-color:#03242b;background-image:url('https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/footer.jpg')">
-        <div class="max-w-2xl mx-auto">
-            <h3 class="leading-tight mb-4"><strong>
-                    Get the latest news on<br class="inline sm:hidden">
-                    Black Friday Deals</strong></h3>
-            <form id="GuitareoEngagementTriggerWebsiteSignupWebForm" accept-charset="UTF-8" action="/customer-io/submit-email-form" method="POST"
-                class="promo-section ajax-form clearfix infusion-form facebook-track-lead" onsubmit="emailSignUpConversionTrackerForImpactProvider()">
-                <input type="hidden" name="form_name" value="Blog Signup">
+            {{-- This is for when a student is on the order form with an offer in their cart they are not eligible for.
+                We redirect them back here and show them this error message. --}}
+            @if(session()->has('error'))
+                <p class="leading-tight mt-1 mb-5 uppercase text-xl"><strong class="text-promo">{{ session()->get('error') }}</strong></p>
+            @endif
 
-                <input type="hidden" name="leadtracker_form_name" value="Blog Signup">
-                <div class="flex flex-wrap items-center">
-                    <div class="infusion-field form-group text-center sm:text-left px-2 w-full sm:w-7/12">
-                        <input class="medium-body infusion-field-input-container" id="inf_field_Email" name="email" type="email" placeholder="Email Address..." required="">
-                    </div>
-                    <div class="infusion-submit form-group px-2 w-full sm:w-5/12">
-                        <button class="submit button-red infusion-recaptcha join-form-button " type="submit">
-                            <span class="pre-add"> Sign up <i class="fas fa-paper-plane"></i></span>
-                            <span class="pending hide hidden">Sending <i class="fas fa-spinner-third fa-spin"></i></span>
-                            <span class="success hide hidden">Sent <i class="fas fa-thumbs-up"></i></span>
-                            <span class="fail hide hidden">Try Again <i class="fas fa-exclamation-triangle"></i></span>
-                        </button>
-                    </div>
+            <div class="flex flex-wrap items-start justify-center mx-auto max-w-xs md:max-w-none">
+                <a class="w-full md:w-1/2 join smaller outline md:order-2" href="/shop">SHOP ALL DEALS &raquo;</a>
+
+                <div class="w-full md:w-1/2 md:pr-2 mt-3 md:mt-0 relative">
+                    {{--                    <div class="absolute bottom-0 left-1/2 text-black rounded-full py-0.5 px-2 -my-2.5 -ml-10 select-none bg-promo"><p class="text-xs leading-none select-none"><strong>SAVE {{ round(100 - (100 * (\App\Prices::$guitareoMembershipAnnual / \App\Prices::$guitareoMembershipAnnualFull))) }}%</strong></p></div>--}}
+                    <a class="w-full join white smaller anchor-slide" href="#customize-anchor">JOIN GUITAREO &raquo;</a>
                 </div>
-                <input name="inf_form_xid" type="hidden" value="GuitareoEngagementTriggerWebsiteSignupWebForm">
-                <input name="tag_names_to_add[]" type="hidden" value="Guitareo - Engagement - Trigger - Website Signup - Web Form">
-                <input name="list_ids_to_subscribe_to[]" type="hidden" value="32">
-                <input name="success_redirect" type="hidden" value="/thank-you-white">
-            </form>
-            <div class="thank-you-box promo-section">
-                <p><em>You should receive an email from team@guitareo.com within 10 minutes.</em></p>
             </div>
-            {{--            <div class="md:flex md:items-center md:gap-6 mb-10 text-center md:text-left">--}}
-            {{--                <div class="md:w-3/5 mb-6 md:mb-0">--}}
-            {{--                    <img class="h-16 md:h-20 lg:h-24 mb-4" src="https://cdn.musora.com/image/fetch/w_650,q_auto:best/https://guitareo.s3.amazonaws.com/sales/promos/october/scary_logo_coloured.png" alt="scary good lesson logo">--}}
-            {{--                    <p class="mb-2 leading-tight">--}}
-            {{--                        <b>JOIN GUITAREO + GET 3 TRICK-FREE <br class="md:hidden">TREATS WORTH $441</b>--}}
-            {{--                        <br>--}}
-            {{--                        <span class="tzcd-full text-coaches uppercase hidden md:inline"></span>--}}
-            {{--                        <span class="tzcd-small text-coaches uppercase md:hidden"></span>--}}
-            {{--                    </p>--}}
-            {{--                    <p>--}}
-            {{--                        Don’t let guitar theory haunt you.--}}
-            {{--                        When you join today, you’ll get full access to the Guitareo METHOD – a 10-level curriculum designed to eliminate boring theory lessons AND help you to play music right away. <br><br>--}}
-            {{--                        You will have loads of fun advancing your guitar skills with resources such as play-along tracks and guitar challenges. <br><br>--}}
-            {{--                        Now that’s scary good. <br><br>--}}
-            {{--                        And as a special Halloween treat, you’ll also get LIFETIME access to three of the most popular lesson packs in Guitareo – so you can continue to unlock new guitar skills by playing songs you love.--}}
-            {{--                    </p>--}}
-            {{--                </div>--}}
-            {{--                <div class="md:w-2/5">--}}
-            {{--                    <img class="h-96 md:h-auto" src="https://cdn.musora.com/image/fetch/w_750,q_auto:best/https://guitareo.s3.amazonaws.com/sales/promos/october/collage.png" alt="collage">--}}
-            {{--                </div>--}}
-            {{--            </div>--}}
-            {{--            <div class="text-center">--}}
-            {{--                <a class="join smaller md:w-52 lg:w-60" href="#orderNow" style="color:black;">See the deal</a>--}}
-            {{--            </div>--}}
         </div>
+        <div class="inset-0 absolute bg-center bg-cover z-0" style="background: #000 url(https://drumeo-assets.s3.amazonaws.com/promos/christmas/snow-dark.gif) center center/250px;box-shadow: 0 0 100px inset #000;"></div>
     </section>
+
+
 @endsection
 
 @section('sticky-bar')
-    @include('_partials.layout.holiday.homepage-sticky-bar', [
-        'text' => 'GET 6 FREE BONUSES <br> WORTH $924'
-    ])
+    {{-- <div class="h-10 relative w-full block" style="background:#000 url(https://drumeo-assets.s3.amazonaws.com/promos/november/sticky-bg-cm.jpg) center center/cover;"></div> --}}
+    <a href="#customize-anchor" style="background: #000 url(https://drumeo-assets.s3.amazonaws.com/promos/christmas/snow-dark.gif) center center/250px;box-shadow: 0 0 10px inset #000;"
+        class="anchor-slide promo-banner block text-center w-full transition-opacity duration-300 overflow-hidden whitespace-nowrap bg-cover bg-center shadow-md py-1 z-0 mx-auto -mt-10 text-xs">
+        <div class="container mx-auto relative">
+            <div class="inline-block align-middle text-center">
+                <img class="inline-block align-middle mr-2 h-8"
+                    src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://guitareo.s3.amazonaws.com/sales/promos/november/holiday-guitar.png">
 
-{{--   <div class="h-10 relative w-full block"></div>--}}
-{{--   <a href="#customize-anchor" --}}{{--style="background-image:url(https://cdn.musora.com/image/fetch/w_1000,q_auto:best/https://guitareo.s3.amazonaws.com/sales/promos/september/sticky_bar.jpg)"--}}
-{{--           class="anchor-slide promo-banner block text-center w-full transition-opacity duration-300 overflow-hidden whitespace-nowrap bg-cover bg-center shadow-md z-0 mx-auto -mt-10 text-xs">--}}
-{{--       <div class="relative">--}}
-{{--        <div class="absolute inset-0" style="background:radial-gradient(50.22% 125.94% at 0% 0%, #00C9AC 0%, #E1FFFB 100%); transform:rotate(-180deg)"></div>--}}
-{{--           <div class="inline-block align-middle text-left py-1 relative">--}}
-{{--               <div class="inline-block leading-none font-bebas align-middle mx-auto text-2xl mr-2--}}{{--py-0.5 px-1 bg-black rounded-md--}}{{--text-white">--}}
-{{--                   <img class="h-7 sm:h-8" src="https://cdn.musora.com/image/fetch/w_220,q_auto:best/https://guitareo.s3.amazonaws.com/sales/promos/october/scary_logo.png" alt="play-better-solos">--}}
-{{--               </div>--}}
-{{--                --}}{{----}}{{--<h5 class="leading-none font-bebas inline-block align-middle mx-auto text-2xl mr-2 h-8 py-1.5 px-2 bg-black rounded-md text-white">PLAY BETTER SOLOS</h5>--}}
-{{--               <p class="inline-block align-middle mx-auto text-black leading-none text-base font-bebas">GET SCARY GOOD GUITAR LESSONS <br>+ 3 TRICK-FREE TREATS WORTH $441</p>--}}
-{{--           </div>--}}
-{{--       </div>--}}
-{{--   </a>--}}
+                <p class="inline-block align-middle mx-auto font-bebas text-white text-sm leading-none sm:text-lg sm:leading-none text-left">
+                    <span class="uppercase">GET 6 FREE BONUSES <br> WORTH $924</span></p>
+                {{--                <div class="tzcd-smaller text-white align-middle inline-block">--}}
+                {{--                    <div class="inline-block">--}}
+                {{--                        <h2 class="font-extrabold leading-none text-lg">00</h2>--}}
+                {{--                        <p class="leading-none uppercase font-extrabold text-xs text-promo">days</p>--}}
+                {{--                    </div>--}}
+                {{--                    <div class="inline-block mx-2">--}}
+                {{--                        <h2 class="font-extrabold leading-none text-lg">00</h2>--}}
+                {{--                        <p class="leading-none uppercase font-extrabold text-xs text-promo">hrs</p>--}}
+                {{--                    </div>--}}
+                {{--                    <div class="inline-block mr-2">--}}
+                {{--                        <h2 class="font-extrabold leading-none text-lg">00</h2>--}}
+                {{--                        <p class="leading-none uppercase font-extrabold text-xs text-promo">mins</p>--}}
+                {{--                    </div>--}}
+                {{--                    <div class="inline-block">--}}
+                {{--                        <h2 class="font-extrabold leading-none text-lg">00</h2>--}}
+                {{--                        <p class="leading-none uppercase font-extrabold text-xs text-promo">secs</p>--}}
+                {{--                    </div>--}}
+                {{--                </div>--}}
+            </div>
+        </div>
+    </a>
 @endsection
 
-{{--@section('final')--}}
-{{--    @include("guitareo.sales.partials._subscribe-options")--}}
-{{--@endsection--}}
-
-@section('start-button', '/choose-your-trial/')
 @section('final')
-     @include("guitareo.sales.partials._final-trial", [ "sevenDay" => true, "url" => "/choose-your-trial/" ])
+    @include("sales.partials._subscribe-options")
 @endsection
+
+{{--@section('start-button', '/choose-your-trial/')--}}
+{{--@section('final')--}}
+{{--     @include("guitareo.sales.partials._final-trial", [ "sevenDay" => true, "url" => "/choose-your-trial/" ])--}}
+{{--@endsection--}}
