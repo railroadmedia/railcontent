@@ -124,7 +124,7 @@
                         </a>
                     @endif
                     @if(!empty($itemURL))
-                        <a href="{{ ($itemURL === '/drumshop/drumeo') ? '/' : $itemURL }}" class="join outline" @if(!empty($externalURL)) target="_blank" @endif>
+                        <a href="{{ ($itemURL === '/drumshop/') ? '/' : $itemURL }}" class="join outline" @if(!empty($externalURL)) target="_blank" @endif>
                             @if(!empty($buttonText)) {!!  $buttonText  !!} @else View Product
                             <i class="fas fa-arrow-right"></i> @endif</a>
                     @endif
