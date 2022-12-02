@@ -1507,6 +1507,8 @@ This seven-piece gear kit helps you achieve four main goals:
             "sizes" => [
 
             ],
+            'bundle_img' => 'https://guitareo.s3.amazonaws.com/sales/promos/november/survival-kit-shop.jpg',
+            'bundle_desc' => "Be prepared for any musical jam with the guitar gear essentials. Inside this kit, you'll discover every component your guitar needs to stay in tune, sound crisp and clean, and look refreshed. The kit also comes with the Survival Guide, so you can carry the essential chords, scales, and licks in your guitar case."
         ],
         [
             "brand" => 3,
@@ -1514,6 +1516,79 @@ This seven-piece gear kit helps you achieve four main goals:
             "name" => "Guitareo Survival Guide",
             "slug" => "survival-guide",
             "sku" => "survival-guide",
+            "thumbnail" => "https://guitareo.s3.amazonaws.com/sales/promos/july/survival_guide.jpg",
+            "meta_desc" => "The Guitareo Survival Guide is perfect for adding a little fun while navigating your way through the wild and rewarding world of learning how to play the guitar.",
+            "meta_img" => "https://guitareo.s3.amazonaws.com/shop/survival-guide/2021-12-23-Guitareo-Survival-Guide-102.jpg",
+            "short_desc" => "Guitar Chords Scales And Licks You Can Take Anywhere",
+            "header_text" => "The Guitareo Survival Guide",
+            "price" => 19,
+            "discounted_price" => "",
+            "special_text" => "",
+            'overview' => "Learning to play the guitar takes practice and patience.
+
+But sometimes, you just want to show off a cool lick or get people singing along around the fire… without sitting down and learning an entire lesson.
+
+That’s what makes The Guitareo Survival Guide such a handy tool.
+
+This 37-page book gives you all the essential chords, strumming patterns, scales, and riffs to make your journey playing the guitar as fun and enjoyable as possible.
+
+Set it up in your practice space, jam room, or toss it in your guitar case and take it wherever you go.
+
+Want to play the riffs that sound just like Chuck Berry?
+
+It’s got those.
+
+Want to make your chords sound more like Jimi Hendrix?
+
+You can.
+
+The Guitareo Survival Guide is perfect for adding a little fun while navigating your way through the wild and rewarding world of learning how to play the guitar. Because that’s what it’s all about!",
+            "features" => [
+            ],
+            "specs" => [
+                [
+                    "title" => "Size",
+                    "desc" => '8.5" x 5.5"'
+                ],
+                [
+                    "title" => "Pages",
+                    "desc" => "37 pages total, includes fretboard diagram, chord reference chart, strumming pattern"
+                ],
+                [
+                    "title" => "Page Material",
+                    "desc" => "Pacesetter Silk"
+                ],
+                [
+                    "title" => "Binding",
+                    "desc" => "Black Wire"
+                ],
+            ],
+            "visible" => true,
+            "sold_out" => false,
+            "guaranteed" => false,
+            "lifetime_access" => false,
+            "free_shipping" => false,
+            'bundle_free_shipping' => true,
+            'bundle_img' => 'https://guitareo.s3.amazonaws.com/sales/promos/july/survival_guide.jpg',
+            'bundle_desc' => 'This 37-page book gives you all the essential chords, strumming patterns, scales, and riffs to make your journey playing the guitar as fun and enjoyable as possible.',
+            "images" => [
+                "https://guitareo.s3.amazonaws.com/shop/survival-guide/2021-12-23-Guitareo-Survival-Guide-102-Edit.jpg",
+                "https://guitareo.s3.amazonaws.com/shop/survival-guide/2021-12-23-Guitareo-Survival-Guide-108-Edit.jpg",
+                "https://guitareo.s3.amazonaws.com/shop/survival-guide/2021-12-23-Guitareo-Survival-Guide-104-Edit.jpg",
+                "https://guitareo.s3.amazonaws.com/shop/survival-guide/2021-12-23-Guitareo-Survival-Guide-105-Edit.jpg",
+                "https://guitareo.s3.amazonaws.com/shop/survival-guide/2021-12-23-Guitareo-Survival-Guide-106-Edit.jpg"
+            ],
+            "sizeChart" => "",
+            "sizes" => [
+
+            ],
+        ],
+        [
+            "brand" => 3,
+            "product_type_id" => 2,
+            "name" => "Member Guitareo Survival Guide",
+            "slug" => "survival-guide-members",
+            "sku" => "products[survival-guide]=1&promo-code=members",
             "thumbnail" => "https://guitareo.s3.amazonaws.com/sales/promos/july/survival_guide.jpg",
             "meta_desc" => "The Guitareo Survival Guide is perfect for adding a little fun while navigating your way through the wild and rewarding world of learning how to play the guitar.",
             "meta_img" => "https://guitareo.s3.amazonaws.com/shop/survival-guide/2021-12-23-Guitareo-Survival-Guide-102.jpg",
@@ -1784,6 +1859,52 @@ The Guitareo Survival Guide is perfect for adding a little fun while navigating 
 
             ],
         ],
+        [
+            "brand" => 4,
+            "product_type_id" => 2,
+            "name" => "Eikon Studio Box Three",
+            "slug" => "studio-box",
+            "sku" => "studio-box",
+            "thumbnail" => "",
+            "meta_desc" => "CM14USB microphone equipped with a 96 Khz 24 bit USB audio interface for plug-and-play simplicity.",
+            "meta_img" => "https://singeo.s3.amazonaws.com/sales/promos/november/bundles/2022-11-24-Studio-In-A-Box-Studio-Photos-102.jpg",
+            "short_desc" => "",
+            "header_text" => "Singeo Do-Re-Mi Tumbler",
+            "price" => 399,
+            "discounted_price" => 349,
+            'overview' => 'CM14USB microphone equipped with a 96 Khz 24 bit USB audio interface for plug-and-play simplicity.
+
+Small-diaphragm condenser capsule captures lifelike vocals
+
+Direct Monitoring control with independent Volume available on the microphone
+
+H1000 Professional Hi-End Stereo Headphones
+
+DST60TL Desktop Microphone Stand
+
+APOP65 Nylon screen professional pop filter for studio-quality recordings',
+            "special_text" => "",
+            "features" => [
+
+            ],
+            "specs" => [
+
+            ],
+            "visible" => false,
+            "sold_out" => false,
+            "guaranteed" => false,
+            "lifetime_access" => false,
+            "free_shipping" => true,
+            "images" => [
+                "https://singeo.s3.amazonaws.com/sales/promos/november/bundles/2022-11-24-Studio-In-A-Box-Studio-Photos-102.jpg",
+                "https://singeo.s3.amazonaws.com/sales/promos/november/bundles/2022-11-24-Studio-In-A-Box-Studio-Photos-100.jpg",
+                "https://singeo.s3.amazonaws.com/sales/promos/november/bundles/2022-11-24-Studio-In-A-Box-Studio-Photos-101.jpg",
+            ],
+            "sizeChart" => "",
+            "sizes" => [
+
+            ],
+        ],
 //            [
 //                "brand" => 1,
 //                "product_type_id" => 2,
@@ -1962,7 +2083,6 @@ The Guitareo Survival Guide is perfect for adding a little fun while navigating 
                 'free_shipping' => $product['free_shipping'],
                 'guaranteed' => $product['guaranteed'],
                 'visible' => $product['visible'],
-                'lifetime_access' => $product['lifetime_access'],
                 'display_order' => $orderNum,
                 'size_chart_id' => null,
                 'bundle_img' => empty($product['bundle_img']) ? null : $product['bundle_img'],

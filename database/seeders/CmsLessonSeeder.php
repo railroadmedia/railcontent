@@ -1668,6 +1668,7 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                 "instructor_img" => "",
                 "studyText" => "",
                 "overview" => "",
+                'bundle_img' => 'https://guitareo.s3.amazonaws.com/sales/promos/black-friday/rhythm_groove_cart.jpg',
                 'bundle_desc' => 'Get inspired, stay motivated, and crush your goals on guitar with a Guitareo Membership. Ayla Tesler-Mabe’s 10-level METHOD curriculum will help you reach all of your goals – plus you’ll have access to guitar courses by Mark Lettieri (Snarky Puppy), Yvette Young (Covet), Dave Weiner (Steve Vai’s Guitarist), and more. Even better – you’ll get access to REAL teachers who will be able to answer any questions you have along the way.',
             ],
             [
@@ -3170,7 +3171,6 @@ This powerful resource makes it easy to access your lessons anytime from virtual
                             'included_edge' => empty($product['included_edge']) ? false : $product['included_edge'],
                             'guaranteed' => $product['guaranteed'],
                             'visible' => $product['visible'],
-                            'lifetime_access' => $product['lifetime_access'],
                             'display_order' => empty($product['display_order']) ? $orderNum : $product['display_order'],
                             'bundle_img' => empty($product['bundle_img']) ? null : $product['bundle_img'],
                             'bundle_desc' => empty($product['bundle_desc']) ? null : $product['bundle_desc'],

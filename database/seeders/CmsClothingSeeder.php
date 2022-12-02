@@ -1791,7 +1791,7 @@ class CmsClothingSeeder extends Seeder
                 "brand" => 4,
                 "product_type_id" => 4,
                 "name" => "Chorus T-shirt",
-                "slug" => "shirt-chorusz",
+                "slug" => "shirt-chorus",
                 "sku" => "chorus-shirt",
                 "thumbnail" => "https://singeo.s3.amazonaws.com/products/t-shirt-shop-sale-page.jpg",
                 "meta_desc" => "The Chorus Singeo T-Shirt, as comfortable as it looks.",
@@ -1886,6 +1886,59 @@ class CmsClothingSeeder extends Seeder
                 ],
                 'bundle_img' => 'https://singeo.s3.amazonaws.com/products/retro-shirt.png',
                 'bundle_desc' => 'Sing with confidence AND style with this super slick Retro T-shirt.'
+            ],
+            [
+                "brand" => 4,
+                "product_type_id" => 4,
+                "name" => "Member Retro T-shirt",
+                "slug" => "shirt-retro-discount",
+                "sku" => "retro-shirt",
+                'promo_code' => 'members',
+                "thumbnail" => "https://singeo.s3.amazonaws.com/products/retro-shirt.png",
+                "meta_desc" => "Sing with confidence AND style with this super slick Singeo Retro T-shirt!",
+                "meta_img" => "https://singeo.s3.amazonaws.com/products/retro-shirt.png",
+                "short_desc" => "Sing with confidence AND style with this super slick Singeo Retro T-shirt!",
+                "header_text" => "The Singeo Retro T-shirt",
+                "price" => 29,
+                "discounted_price" => "",
+                "special_text" => "",
+                "features" => [
+                    "Sing with confidence AND style with this super slick Singeo Retro T-shirt!"
+                ],
+                "specs" => [
+                    [
+                        "title" => "Sizing",
+                        "desc" => "Unisex"
+                    ],
+                    [
+                        "title" => "Shirt",
+                        "desc" => "Bella + Canvas Short Sleeve Jersey Tee"
+                    ],
+                    [
+                        "title" => "Fabric",
+                        "desc" => "52% cotton, 48% polyester"
+                    ],
+                    [
+                        "title" => "Color",
+                        "desc" => "Black"
+                    ],
+                ],
+                "visible" => false,
+                "sold_out" => false,
+                "guaranteed" => false,
+                "lifetime_access" => false,
+                "free_shipping" => false,
+                'size_case_sensitive' => true,
+                'bundle_free_shipping' => true,
+                "images" => [
+                    "https://singeo.s3.amazonaws.com/products/retro-shirt-thumb.png"
+                ],
+                "sizeChart" => 14,
+                "sizes" => [
+                    2,3,4,5,6
+                ],
+                'bundle_img' => '',
+                'bundle_desc' => ''
             ],
             [
                 "brand" => 1,
@@ -2134,7 +2187,6 @@ class CmsClothingSeeder extends Seeder
                 'free_shipping' => $product['free_shipping'],
                 'guaranteed' => $product['guaranteed'],
                 'visible' => $product['visible'],
-                'lifetime_access' => $product['lifetime_access'],
                 'display_order' => $orderNum,
                 'size_case_sensitive' => empty($product['size_case_sensitive']) ? false : $product['size_case_sensitive'],
                 'physical' => true,
