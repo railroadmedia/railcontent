@@ -1,52 +1,185 @@
 @extends('guitareo.sales.standard-layout', [
-    "openVersion" => true
+"openVersion" => true,
+    "bfButton" => true
 ])
 
-@section('head-includes')
-    @parent
-
-    <title>Online guitar lessons that care about you. | Guitareo.com</title>
+@section('meta')
+    <title>Learn to play guitar anytime with real teachers. | Guitareo.com</title>
     <meta property="og:url" content="https://www.guitareo.com"/>
-    <meta property="og:title" content="Guitareo.com: Online guitar lessons that care about you."/>
+    <meta property="og:title" content="Guitareo.com: Learn to play guitar anytime with real teachers."/>
+    <style>
+        form.promo-section {
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            margin: 10px auto 0;
+        }
+        form.promo-section input,
+        form.promo-section button {
+            border: none;
+            outline: none;
+            font: 400 16px/45px 'Open Sans', sans-serif;
+            height: 45px;
+            background: #fff;
+            color: #000;
+            border-radius: 100px;
+            width: 100%;
+            text-align: left;
+            padding: 7px 20px;
+            margin: 0 auto 7px;
+        }
+        @media (min-width: 768px) {
+            form.promo-section input,
+            form.promo-section button {
+                margin: 0 auto;
+                font-size:18px;
+            }
+        }
+        form.promo-section input[type="submit"],
+        form.promo-section button[type="submit"],
+        form.promo-section input button,
+        form.promo-section button button {
+            font-family: 'Bebas Neue', sans-serif;
+            background: #00c9ac;
+            text-transform: uppercase;
+            display: inline-block;
+            cursor: pointer;
+            text-align: center;
+            padding: 0;
+            margin: 0;
+            color: #fff;
+            line-height: 31px;
+        }
+        form.promo-section input[type="submit"]:hover,
+        form.promo-section button[type="submit"]:hover,
+        form.promo-section input button:hover,
+        form.promo-section button button:hover {
+            background:#00e3c1;
+        }
+        .promo-section.thank-you-box {
+            width: 100%;
+            max-width: 960px;
+            border-radius: 5px;
+            height: auto;
+            max-height: 0;
+            visibility: hidden;
+            opacity: 0;
+            transition: all 0.4s ease-in;
+            display: block;
+            margin: 0 auto;
+            text-align: center;
+            overflow: hidden;
+            background: transparent;
+        }
+        .promo-section.thank-you-box.active {
+            max-height: 1000px;
+            visibility: visible;
+            opacity: 1;
+            padding: 5px 0 0;
+        }
+        .promo-section.thank-you-box p {
+            font: 400 16px/1.55em 'Open Sans', sans-serif;
+            margin: 0 auto;
+            color: #fff;
+        }
+        @media (min-width: 768px) {
+            .promo-section.thank-you-box p {
+                font-size: 15px;
+            }
+        }
+
+    </style>
+    @parent
 @endsection
 
-@section('promo-banner')
-    <section class="text-white text-center relative z-10 overflow-hidden px-4 md:px-3 lg:px-5 md:px-8 py-8 md:py-14 bg-cover bg-center" style="background:radial-gradient(#022040, #01050f 80%);">
-        <div class="container mx-auto relative z-10 max-w-6xl">
-            <img class="h-16 sm:h-28 lg:h-36 mb-3 md:mb-5" src="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/https://guitareo.s3.amazonaws.com/sales/promos/march/play-better-solos-green.png">
-            {{--<h1 class="font-bebas leading-none mb-1 text-5xl md:text-6xl --}}{{--mb-3 md:mb-5--}}{{--">PLAY  <span class="text-coaches">BETTER SOLOS</span></h1>--}}
-            <p class="leading-tight mb-3 md:mb-5 uppercase"><strong>SAVE 21% ON GUITAREO &<br class="inline sm:hidden"> GET $253 IN FREE BONUSES
-                    {{--<br><span class="text-coaches">ONLY <span class="tzcd-full hidden sm:inline">A LIMITED TIME</span> <span class="tzcd-small inline sm:hidden">A LIMITED TIME</span> LEFT!</span>--}}
-                </strong></p>
-            <p class="leading-relaxed text-light-navy mb-8 max-w-3xl">Stop noodling around with the same old tired licks. Break out of your pentatonic box and learn how to play solos that actually sound good.
-                <br><br>
-                This month you’ll find Your New Sounds For Soloing with a BRAND NEW course launching inside Guitareo. And to celebrate, you’ll save 21% on your membership + get lifetime access to Guitar Technique Made Easy and The Guitar System for FREE.</p>
-            <div class="max-w-lg lg:max-w-2xl mx-auto relative">
-                <div class="aspect-16:9 w-full relative rounded-xl overflow-hidden">
-                    <iframe class="absolute w-full h-full" src="//player.vimeo.com/video/688169456" frameborder="0" allowfullscreen allow="autoplay"></iframe>
+@section('top-promo-bar')
+    <section class="big-promo-banner bg-black text-white text-center relative z-10 overflow-hidden px-5 md:px-3 lg:px-5 md:px-8 py-5 md:py-14 bg-cover bg-center">
+        <div class="container mx-auto relative z-30 max-w-lg">
+            <a href="/shop"><img class="h-14 sm:h-16 lg:h-20 mx-auto" src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://guitareo.s3.amazonaws.com/sales/promos/november/holiday-guitar.png" alt="guitareo black friday logo"></a>
+            <p class="leading-tight my-3 uppercase"><strong class="">GET 6 FREE<br class="inline md:hidden"> BONUSES WORTH $924</strong></p>
+            {{--            <div class="mt-6 mb-7 rounded-xl px-3 sm:px-6 py-1 inline-flex flex-wrap mx-auto justify-center items-center" style="background-color:#181515;">--}}
+            {{--                <p class="leading-none m-0"><strong>DEALS END IN:</strong></p>--}}
+            {{--                <div class="h-12 mx-3 sm:mx-5 bg-promo" style="width:2px;"></div>--}}
+            {{--                <div class="tzcd-big">--}}
+            {{--                    <div class="inline-block">--}}
+            {{--                        <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>--}}
+            {{--                        <p class="leading-none uppercase font-extrabold text-xs text-promo">days</p>--}}
+            {{--                    </div>--}}
+            {{--                    <div class="inline-block mx-2">--}}
+            {{--                        <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>--}}
+            {{--                        <p class="leading-none uppercase font-extrabold text-xs text-promo">hrs</p>--}}
+            {{--                    </div>--}}
+            {{--                    <div class="inline-block mr-2">--}}
+            {{--                        <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>--}}
+            {{--                        <p class="leading-none uppercase font-extrabold text-xs text-promo">mins</p>--}}
+            {{--                    </div>--}}
+            {{--                    <div class="inline-block">--}}
+            {{--                        <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>--}}
+            {{--                        <p class="leading-none uppercase font-extrabold text-xs text-promo">secs</p>--}}
+            {{--                    </div>--}}
+            {{--                </div>--}}
+            {{--            </div>--}}
+
+            {{-- This is for when a student is on the order form with an offer in their cart they are not eligible for.
+                We redirect them back here and show them this error message. --}}
+            @if(session()->has('error'))
+                <p class="leading-tight mt-1 mb-5 uppercase text-xl"><strong class="text-promo">{{ session()->get('error') }}</strong></p>
+            @endif
+
+            <div class="flex flex-wrap items-start justify-center mx-auto max-w-xs md:max-w-none">
+                <a class="w-full md:w-1/2 join smaller outline md:order-2" href="/shop">SHOP ALL DEALS &raquo;</a>
+
+                <div class="w-full md:w-1/2 md:pr-2 mt-3 md:mt-0 relative">
+                    {{--                    <div class="absolute bottom-0 left-1/2 text-black rounded-full py-0.5 px-2 -my-2.5 -ml-10 select-none bg-promo"><p class="text-xs leading-none select-none"><strong>SAVE {{ round(100 - (100 * (\App\Prices::$guitareoMembershipAnnual / \App\Prices::$guitareoMembershipAnnualFull))) }}%</strong></p></div>--}}
+                    <a class="w-full join white smaller anchor-slide" href="#customize-anchor">JOIN GUITAREO &raquo;</a>
                 </div>
-                <img style="transform: translate(100%, -50%);" class="absolute hidden sm:inline top-1/2 -right-4 w-40 lg:w-64 lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://guitareo.s3.amazonaws.com/sales/2022/left-spread-guitareo.png">
-                <img style="transform: translate(-100%, -50%);" class="absolute hidden sm:inline top-1/2 -left-4 w-40 lg:w-64 lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://guitareo.s3.amazonaws.com/sales/2022/right-spread-guitareo.png">
             </div>
         </div>
+        <div class="inset-0 absolute bg-center bg-cover z-0" style="background: #000 url(https://drumeo-assets.s3.amazonaws.com/promos/christmas/snow-dark.gif) center center/250px;box-shadow: 0 0 100px inset #000;"></div>
     </section>
+
+
 @endsection
 
 @section('sticky-bar')
-
-    <div class="h-10 relative w-full block" style="background:linear-gradient(to bottom, #97fabf, #9ddcf7);"></div>
-    <a href="#customize-anchor" style="background:linear-gradient(to bottom, #97fabf, #9ddcf7);"
-            class="promo-banner anchor-slide block text-center w-full transition-opacity duration-300 overflow-hidden whitespace-nowrap bg-cover bg-center shadow-md py-1 z-0 mx-auto -mt-10 text-xs">
+    {{-- <div class="h-10 relative w-full block" style="background:#000 url(https://drumeo-assets.s3.amazonaws.com/promos/november/sticky-bg-cm.jpg) center center/cover;"></div> --}}
+    <a href="#customize-anchor" style="background: #000 url(https://drumeo-assets.s3.amazonaws.com/promos/christmas/snow-dark.gif) center center/250px;box-shadow: 0 0 10px inset #000;"
+        class="anchor-slide promo-banner block text-center w-full transition-opacity duration-300 overflow-hidden whitespace-nowrap bg-cover bg-center shadow-md py-1 z-0 mx-auto -mt-10 text-xs">
         <div class="container mx-auto relative">
-            <div class="inline-block align-middle text-left">
-                <img class="inline-block align-middle mr-2 h-8" src="https://cdn.musora.com/image/fetch/w_220,q_auto:best/https://guitareo.s3.amazonaws.com/sales/promos/march/play-better-solos-black.png">
-                {{--<h5 class="leading-none font-bebas inline-block align-middle mx-auto text-2xl mr-2 h-8 py-1.5 px-2 bg-black rounded-md text-white">PLAY BETTER SOLOS</h5>--}}
-                <p class="inline-block align-middle mx-auto font-bebas  leading-none sm:text-lg sm:leading-none h-8 text-black">Save 21% on Guitareo &<br> Get $254 In FREE BONUSES</p>
+            <div class="inline-block align-middle text-center">
+                <img class="inline-block align-middle mr-2 h-8"
+                    src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://guitareo.s3.amazonaws.com/sales/promos/november/holiday-guitar.png">
+
+                <p class="inline-block align-middle mx-auto font-bebas text-white text-sm leading-none sm:text-lg sm:leading-none text-left">
+                    <span class="uppercase">GET 6 FREE BONUSES <br> WORTH $924</span></p>
+                {{--                <div class="tzcd-smaller text-white align-middle inline-block">--}}
+                {{--                    <div class="inline-block">--}}
+                {{--                        <h2 class="font-extrabold leading-none text-lg">00</h2>--}}
+                {{--                        <p class="leading-none uppercase font-extrabold text-xs text-promo">days</p>--}}
+                {{--                    </div>--}}
+                {{--                    <div class="inline-block mx-2">--}}
+                {{--                        <h2 class="font-extrabold leading-none text-lg">00</h2>--}}
+                {{--                        <p class="leading-none uppercase font-extrabold text-xs text-promo">hrs</p>--}}
+                {{--                    </div>--}}
+                {{--                    <div class="inline-block mr-2">--}}
+                {{--                        <h2 class="font-extrabold leading-none text-lg">00</h2>--}}
+                {{--                        <p class="leading-none uppercase font-extrabold text-xs text-promo">mins</p>--}}
+                {{--                    </div>--}}
+                {{--                    <div class="inline-block">--}}
+                {{--                        <h2 class="font-extrabold leading-none text-lg">00</h2>--}}
+                {{--                        <p class="leading-none uppercase font-extrabold text-xs text-promo">secs</p>--}}
+                {{--                    </div>--}}
+                {{--                </div>--}}
             </div>
         </div>
     </a>
 @endsection
 
 @section('final')
-    @include("guitareo.sales.partials._subscribe-bonus-tiles")
+    @include("sales.partials._subscribe-options")
 @endsection
+
+{{--@section('start-button', '/choose-your-trial/')--}}
+{{--@section('final')--}}
+{{--     @include("guitareo.sales.partials._final-trial", [ "sevenDay" => true, "url" => "/choose-your-trial/" ])--}}
+{{--@endsection--}}

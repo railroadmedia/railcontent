@@ -1,45 +1,24 @@
-@extends('guitareo._partials.layout')
+@extends('guitareo.lead-gen.partials._lesson-page-layout')
 
-@section('head-includes')
-    @parent
+@section('title', 'Getting Started On The Acoustic Guitar')
 
-    <meta name="robots" content="noindex">
-    <title>@yield('title') | Getting Started On The Acoustic Guitar</title>
-    <meta property="og:title" content="@yield('title') | Getting Started On The Acoustic Guitar">
+@section('meta-description', 'Pick up your guitar and start playing today!')
 
-    <meta name="description" content="Pick up your guitar and start playing today!"/>
-    <meta property="og:description" content="Pick up your guitar and start playing today!">
+@section('image', 'https://guitareo.s3.amazonaws.com/lead-gen/free-acoustic-guitar-lessons/og-image.jpg')
 
-    <meta property="og:image" content="https://guitareo.s3.amazonaws.com/lead-gen/free-acoustic-guitar-lessons/og-image.jpg">
-    <meta property="og:url" content="https://www.guitareo.com/free-acoustic-guitar-lessons/">
+@section('url', 'https://www.guitareo.com/free-acoustic-guitar-lessons/')
 
-    <link rel="stylesheet" href="/assets/marketing/song-in-an-hour.css">
-@stop
+@section('lesson-logo')
+    <img class="tw-mx-auto tw-inline-block tw-h-10 sm:tw-h-20" src="https://cdn.musora.com/image/fetch/w_448,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/free-acoustic-guitar-lessons/logo.png" alt="lesson-logo">
+@endsection
 
-@section('layout-scripts')
-    @parent
+@section('all-lesson-link', '/free-acoustic-guitar-lessons/lessons')
 
-    <script type="text/javascript">
-        $(document).ready(function (e) {
-            $(document).foundation();
+@section('lesson-total-number', 6)
 
-            $('.assignment-row .fa-angle-down').click(function() {
-                $(this).parent().parent().toggleClass('active');
-            });
-        });
-    </script>
-    <script src="/assets/js/modal-autoplay.js"></script>
-@stop
-
-@section('layout-body')
-
-    @php
-        $img = '<img class="mx-auto inline-block h-10 sm:h-20" src="https://cdn.musora.com/image/fetch/w_448,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/free-acoustic-guitar-lessons/logo.png">';
-
-        $themeColor = 'guitareo';
-
-        $allLessons = '/free-acoustic-guitar-lessons/lessons';
-    @endphp
-
-    @include('guitareo.lead-gen.partials._lesson-page-layout2')
-@stop
+@section('assets')
+    @include('guitareo.lead-gen.partials._assignment-resources', [
+        "title" => "Course Resources",
+        "zipURL" => "https://guitareo.s3.amazonaws.com/lead-gen/free-acoustic-guitar-lessons/getting-started-on-the-acoustic-guitar.zip"
+    ])
+@endsection

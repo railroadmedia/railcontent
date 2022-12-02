@@ -34,6 +34,18 @@ if (!function_exists('get_legacy_brand_base_url')) {
     }
 }
 
+if (!function_exists('get_musora_brand_base_url')) {
+    function get_musora_brand_base_url() {
+        if (App::environment() == 'local' || App::environment() == 'development') {
+            return 'https://dev.musora.com:8443';
+        } elseif (App::environment() != 'production') {
+            return 'https://' . App::environment() . '.musora.com';
+        }
+
+        return 'https://www.musora.com';
+    }
+}
+
 if (!function_exists('cf_img')) {
     /**
      * Process image and Get a CDN URL using our cloudflare images account.

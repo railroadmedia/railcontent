@@ -6,9 +6,7 @@
     Next Steps
 @stop
 
-@section('video')
-    <iframe class="tw-absolute tw-w-full tw-h-full" src="//player.vimeo.com/video/488587484" frameborder="0" allowfullscreen></iframe>
-@stop
+@section('video', '488587484')
 
 @section('lesson-number', 'Bonus Lesson')
 
@@ -30,7 +28,7 @@
         "assignmentID" => "lesson_8_assignment_1"
     ])
     @include('guitareo.lead-gen.song-in-an-hour._assignment-resources', [
-        "title" => "Join GuitarQuest (<a class='tw-text-blue-500' href='/guitar-quest-discount'>Save 40% when you click this link.</a>)",
+        "title" => "Join GuitarQuest (<a class='text-blue-500' href='/guitar-quest-discount'>Save 40% when you click this link.</a>)",
         "assignmentID" => "lesson_8_assignment_2"
     ])
 @stop

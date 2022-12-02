@@ -1,0 +1,2095 @@
+@import "./_variables";
+
+.no-padding {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  font-family: $opensans;
+}
+
+h1 {
+  font-weight: 700;
+  font-size: 21px;
+  line-height: 1.1em;
+  margin: 0 auto 5px;
+  @include tablet {
+    font-size: 28px;
+  }
+  @include desktop {
+    font-size: 32px;
+  }
+}
+
+h3 {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1em;
+  margin: 0 auto 35px;
+  @include tablet {
+    font-size: 18px;
+    margin: 0 auto 40px;
+  }
+  @include desktop {
+    font-size: 21px;
+    margin: 0 auto 55px;
+  }
+}
+
+body {
+  background: #FFF;
+}
+
+.row.xlarge {
+  max-width: 90.625em;
+}
+
+.join.made-easy {
+  display: inline-block;
+  font: 700 24px/1em $robotocondensed;
+  text-transform: uppercase;
+  background: #00BC75;
+  border-radius: 100px;
+  color: #FFF;
+  padding: 10px 15%;
+  @include tablet {
+    font-size: 28px;
+    padding: 15px 10%;
+  }
+  @include desktop {
+    font-size: 30px;
+  }
+
+  &:hover {
+    background: lighten(#00BC75, 10%);
+    color: #FFF;
+  }
+}
+
+
+.play-button {
+  cursor: pointer;
+  outline: none;
+  transition: opacity .3s;
+  background: rgba(0, 0, 0, 0.6);
+  border: 3px solid #fff;
+  border-radius: 200px;
+  line-height: 1em;
+  font-size: 29px;
+  padding: 18px 22px;
+  @include tablet {
+    font-size: 35px;
+    padding: 22px 27px;
+    border-width: 4px;
+  }
+  @include desktop {
+    font-size: 39px;
+    padding: 25px 30px;
+  }
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.text-red {
+  color: $promoColor;
+}
+
+.hero-header {
+  background: #131416;
+  color: #FFF;
+  text-align: center;
+  padding: 0;
+  @include desktop {
+    padding: 0 20px;
+  }
+
+  .video-wrap {
+    position: relative;
+    z-index: 1;
+    outline: none;
+    padding-bottom: 500px;
+    background: url(https://s3.amazonaws.com/guitareo/gtme/thumbnail3.jpg) center/cover;
+    @include tablet {
+      padding-bottom: 660px;
+    }
+    @include desktop {
+      padding-bottom: 61%;
+      min-height: 690px;
+    }
+
+    .logo {
+      position: absolute;
+      top: 15px;
+      left: 50%;
+      -webkit-transform: translate(-50%, 0);
+      transform: translate(-50%, 0);
+      @include tablet {
+        top: 20px;
+      }
+      @include desktop {
+        top: 3%;
+      }
+
+      p {
+        font: 400 12px/1em $opensans;
+        margin: 0 auto 5px;
+        @include tablet {
+          font-size: 14px;
+        }
+        @include desktop {
+          font-size: 15px;
+        }
+      }
+
+      img {
+        max-width: 250px;
+        @include tablet {
+          max-width: 370px;
+        }
+        @include desktop {
+          max-width: 440px;
+        }
+      }
+    }
+    .play-button {
+      position: absolute;
+      left: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      top: 50%;
+    }
+  }
+
+  .button-wrap {
+    position: relative;
+    z-index: 2;
+    margin: -195px auto 0;
+    @include tablet {
+      margin: -225px auto 0;
+    }
+    @include desktop {
+      margin: -270px auto 0;
+    }
+  }
+
+  p {
+    color: #FFF;
+    line-height: 1.5em;
+    text-shadow: 0 0 7px #000;
+    font-weight: 400;
+    margin: 0 auto 15px;
+    font-size: 16px;
+    @include tablet {
+      font-size: 19px;
+      margin: 0 auto 15px;
+    }
+    @include desktop {
+      font-size: 27px;
+    }
+
+    &.price-info {
+      font-family: $robotocondensed;
+      text-transform: uppercase;
+      margin: 7px auto 0;
+      font-size: 12px;
+      @include tablet {
+        font-size: 14px;
+        margin: 15px auto 0;
+      }
+      @include desktop {
+        font-size: 16px;
+      }
+
+      s {
+        opacity: 0.6;
+      }
+    }
+  }
+
+  .join {
+    width: 100%;
+    max-width: 320px;
+    padding: 15px;
+    font-size: 25px;
+    margin: 0 auto;
+    @include tablet {
+      max-width: 620px;
+      padding: 17px;
+      font-size: 35px;
+    }
+    @include desktop {
+      max-width: 880px;
+      padding: 20px;
+      font-size: 40px;
+    }
+  }
+}
+
+.featured-product {
+  background: #000c17;
+  padding: 0;
+  color: #fff;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  @include tablet {
+    overflow: visible;
+  }
+
+  .row {
+    position: relative;
+    padding: 30px 0;
+    @include tablet {
+      padding: 35px 30px;
+    }
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+    display: inline-block;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 300px;
+    @include tablet {
+      max-width: 100%;
+    }
+  }
+
+  .logo {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    @include tablet {
+      max-width: 350px;
+    }
+    @include desktop {
+      max-width: 420px;
+    }
+  }
+
+  h1 {
+    font: 800 15px/1em $opensans;
+    //color: $promoColor;
+    margin: 10px auto 0;
+    @include tablet {
+      font-size: 22px;
+      margin: 0 auto;
+    }
+    @include desktop {
+      font-size: 27px;
+    }
+  }
+
+
+  p {
+    font: 400 13px/1.6em $opensans;
+    margin: 10px auto 15px;
+    @include tablet {
+      font-size: 14px;
+      max-width: 420px;
+      margin: 15px auto;
+    }
+    @include desktop {
+      font-size: 15px;
+      max-width: 700px;
+      margin: 20px auto;
+    }
+  }
+
+  .join {
+    background: $promoColor;
+    font-size: 18px;
+    vertical-align: middle;
+    padding: 11px 30px;
+    margin: 15px auto 0;
+    @include tablet {
+      margin: 0 0 0 15px;
+    }
+
+    &:hover {
+      background: lighten($promoColor, 10%);
+    }
+  }
+
+  &.logo-text {
+    .row {
+      max-width: 990px;
+    }
+
+    a {
+      @include tablet {
+        text-align: left;
+        display: flex;
+        align-items: center;
+      }
+
+      .logo {
+        margin: 0 auto 10px;
+        width: 120px;
+        max-width: 100%;
+        @include tablet {
+          margin: 0 auto;
+          width: 161px;
+        }
+        @include desktop {
+          width: 257px;
+        }
+      }
+
+      .text {
+        @include tablet {
+          padding-left: 25px;
+          text-align: left;
+        }
+        @include desktop {
+          padding-left: 5%;
+        }
+
+        .text-red {
+          color: $promoColor;
+        }
+
+        p {
+          max-width: 100%;
+        }
+      }
+    }
+  }
+}
+
+.triple-benefits {
+  background: #FFF;
+  padding: 40px 10px;
+  text-align: center;
+  @include tablet {
+    padding: 70px 20px;
+  }
+  @include desktop {
+    padding: 100px 50px;
+  }
+
+  .row {
+    max-width: 980px;
+  }
+
+  h1 {
+    font: 400 21px/1.3em $opensans;
+    margin: 0 auto 35px;
+    @include tablet {
+      font-size: 30px;
+      margin: 0 auto 40px;
+    }
+    @include desktop {
+      font-size: 39px;
+      margin: 0 auto 55px;
+    }
+  }
+
+  .benefit-row {
+    margin: 0 auto 25px;
+    @include tablet {
+      margin: 0 auto 90px;
+    }
+    @include desktop {
+      margin: 0 auto 150px;
+    }
+
+    &:last-child {
+      margin: 0 auto;
+    }
+
+    .arrow-outline {
+      border-radius: 50%;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      position: relative;
+      margin: 0 auto;
+      border: 9px solid #FFF;
+      width: 100%;
+      max-width: 240px;
+      @include tablet {
+        border-width: 18px;
+        max-width: 350px;
+      }
+      @include desktop {
+        max-width: 410px;
+      }
+
+      &:after {
+        content: "";
+        position: absolute;
+        height: 0;
+        width: 0;
+        border: 20px solid #000;
+        border-color: transparent transparent #FFF #FFF;
+        transform-origin: 0 0;
+        box-shadow: -3px 3px 7px 0 rgba(0, 0, 0, 0.1);
+        margin: 3px -8px 0 0;
+        top: 100%;
+        right: 50%;
+        -webkit-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+        @include tablet {
+          margin: -28px -28px 0 0;
+          top: 50%;
+          right: 100%;
+          -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+        }
+      }
+
+      &.right:after {
+        @include tablet {
+          right: -23px;
+          margin: 28px -28px 0 0;
+          -webkit-transform: rotate(-135deg);
+          transform: rotate(-135deg);
+        }
+      }
+
+      img {
+        border-radius: 50%;
+      }
+    }
+
+    .text-wrap {
+      margin: 35px 0 0;
+      padding: 0 25px;
+      @include tablet {
+        margin: 10px 0 0;
+        padding: 0 15px;
+        text-align: left;
+      }
+      @include desktop {
+        margin: 50px 0 0;
+      }
+
+      h1 {
+        font-weight: 700;
+        margin: 0 auto 15px;
+        font-size: 18px;
+        @include tablet {
+          margin: 0 auto 10px;
+          font-size: 20px;
+        }
+        @include desktop {
+          margin: 0 auto 15px;
+          font-size: 24px;
+        }
+      }
+
+      p {
+        font-size: 14px;
+        margin: 0 auto;
+        line-height: 1.6em;
+        @include tablet {
+          font-size: 14px;
+        }
+        @include desktop {
+          font-size: 16px;
+        }
+      }
+
+      ul li {
+        margin: 0 auto 5px;
+        font-size: 15px;
+        font-style: italic;
+        @include tablet {
+          font-size: 15px;
+        }
+        @include desktop {
+          font-size: 17px;
+        }
+
+        i {
+          color: $drumeoBlue;
+        }
+      }
+    }
+  }
+}
+
+.better-technique {
+  border-top: 1px solid #e0e0e0;
+  background: #f2f3f3;
+  color: #000;
+  padding: 40px 0;
+  @include tablet {
+    padding: 60px 0;
+  }
+  @include desktop {
+    padding: 70px 0;
+  }
+
+  .title-text {
+    h1 {
+      font: 700 30px/1em $robotocondensed;
+      margin: 0 auto;
+      text-transform: uppercase;
+      color: $altGuitareoGreen;
+      @include tablet {
+        font-size: 44px;
+      }
+      @include desktop {
+        font-size: 55px;
+      }
+    }
+
+    p {
+      font: 400 13px/1.6em $opensans;
+      margin: 7px auto 25px;
+      @include tablet {
+        font-size: 14px;
+        margin: 7px auto 40px;
+      }
+      @include desktop {
+        font-size: 22px;
+        margin: 10px auto 50px;
+      }
+    }
+  }
+
+  .tile {
+    margin: 0 auto 30px;
+    padding: 0 20px;
+    @include tablet {
+      margin: 0 auto 40px;
+    }
+    @include desktop {
+      margin: 0 auto 50px;
+    }
+
+    &:nth-child(6) {
+      margin-bottom: 0;
+    }
+
+    @include tablet {
+      &:nth-child(5) {
+        margin-bottom: 0;
+      }
+    }
+    @include desktop {
+      &:nth-child(4) {
+        margin-bottom: 0;
+      }
+    }
+
+    .thumb {
+      text-shadow: 0 0 20px #000;
+      position: relative;
+      padding-bottom: 78%;
+      border-radius: 7px;
+      margin: 0 auto 10px;
+      @include tablet {
+        margin: 0 auto 15px;
+      }
+
+      h1 {
+        font: 700 24px/1em $robotocondensed;
+        color: #fff;
+        text-transform: uppercase;
+        position: absolute;
+        bottom: 30px;
+        left: 30px;
+        right: 30px;
+        margin: 0 auto;
+        @include tablet {
+          font-size: 27px;
+          left: 11%;
+          right: 11%;
+        }
+      }
+    }
+
+    p {
+      font: 400 14px/1.6em $opensans;
+      max-width: 270px;
+      margin: 0 auto;
+      width: 100%;
+      @include desktop {
+        font-size: 15px;
+        max-width: 280px;
+      }
+
+    }
+  }
+}
+
+#icon-grid {
+  background: #191B1C;
+  color: #FFF;
+  padding: 40px 0;
+  text-align: center;
+  @include tablet {
+    padding: 60px 0;
+  }
+  @include desktop {
+    padding: 70px 0;
+  }
+
+  .title-text {
+    h1 {
+      font: 700 30px/1em $robotocondensed;
+      margin: 0 auto;
+      text-transform: uppercase;
+      color: $altGuitareoGreen;
+      @include tablet {
+        font-size: 44px;
+      }
+      @include desktop {
+        font-size: 55px;
+      }
+    }
+
+    p {
+      font: 400 13px/1.6em $opensans;
+      margin: 7px auto 25px;
+      @include tablet {
+        font-size: 14px;
+        margin: 7px auto 40px;
+      }
+      @include desktop {
+        font-size: 22px;
+        margin: 10px auto 50px;
+      }
+    }
+  }
+
+  .grid-item {
+    margin: 0 auto 30px;
+    @include tablet {
+      margin: 0 auto 35px;
+    }
+    @include desktop {
+      margin: 0 auto 40px;
+    }
+
+    .icon-wrap {
+      padding: 0;
+
+      i {
+        background: $altGuitareoGreen;
+        border-radius: 50%;
+        text-align: center;
+        margin: 0 auto 10px;
+        width: 60px;
+        height: 60px;
+        line-height: 60px;
+        font-size: 25px;
+        @include tablet {
+          width: 40px;
+          height: 40px;
+          line-height: 40px;
+          margin: 0 auto;
+          font-size: 19px;
+        }
+        @include desktop {
+          font-size: 22px;
+          width: 50px;
+          height: 50px;
+          line-height: 50px;
+        }
+      }
+    }
+
+    .text-wrap {
+      text-align: center;
+      @include tablet {
+        text-align: left;
+      }
+
+      h2 {
+        margin: 0 auto 3px;
+        text-transform: uppercase;
+        font: 700 17px/1em $robotocondensed;
+        @include tablet {
+          font-size: 16px;
+        }
+        @include desktop {
+          font-size: 18px;
+        }
+      }
+
+      p {
+        margin: 0 auto;
+        font: 400 13px/1.6em $opensans;
+        color: #8c9698;
+        width: 100%;
+        max-width: 285px;
+        @include tablet {
+          font-size: 12px;
+          max-width: 100%;
+        }
+        @include desktop {
+          font-size: 13px;
+        }
+      }
+    }
+  }
+
+  .lesson-descriptions {
+    margin: 15px auto 0;
+    position: relative;
+    height: auto;
+    max-height: 500px;
+    overflow: hidden;
+    transition: all 1s;
+    min-height: inherit;
+
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 100px;
+      box-shadow: 0 -50px 50px #191B1C inset;
+      transition: all .3s;
+    }
+
+    &.active {
+      max-height: 4150px;
+      @include tablet {
+        max-height: 3810px;
+      }
+      @include desktop {
+        max-height: 3230px;
+      }
+
+      &:after {
+        height: 0;
+        box-shadow: 0 0 0 #191B1C inset;
+      }
+    }
+
+    .question-dropdown {
+      border-radius: 5px;
+      border: 1px solid #777;
+      margin: 10px auto 0;
+      height: auto;
+      max-height: 62px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all .3s ease-in-out;
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+
+      &.active {
+        max-height: 1000px;
+      }
+
+      .drop-down-wrap {
+        position: relative;
+
+        p {
+          font: 400 13px/1.6em $opensans;
+          margin: 0 auto 15px;
+          @include tablet {
+            font-size: 14px;
+          }
+          @include desktop {
+            font-size: 15px;
+          }
+
+          &.details {
+            font: italic 400 14px/1.2em $opensans;
+            position: absolute;
+            color: #8c9698;
+            top: 50%;
+            right: 0;
+            -webkit-transform: translate(0, -50%);
+            transform: translate(0, -50%);
+            margin: 0 auto;
+          }
+        }
+
+        .week-number {
+          background: $altGuitareoGreen;
+          text-transform: uppercase;
+          font: 400 14px/60px $opensans;
+          height: 100%;
+          position: absolute;
+
+          .number {
+            font-size: 25px;
+            vertical-align: sub;
+          }
+        }
+
+        .question {
+          height: 60px;
+          width: 100%;
+          position: relative;
+
+          h2 {
+            font: 700 14px/1.2em $opensans;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            -webkit-transform: translate(0, -50%);
+            transform: translate(0, -50%);
+            user-select: none;
+            margin: 0 auto;
+            @include tablet {
+              font-size: 15px;
+            }
+            @include desktop {
+              font-size: 18px;
+            }
+          }
+        }
+      }
+
+      .fa-chevron-down {
+        color: #fff;
+        line-height: 60px;
+        transition: all .3s ease-in-out;
+        font-size: 14px;
+        @include tablet {
+          font-size: 30px;
+        }
+
+        &.rotated {
+          transform: rotate(-180deg);
+        }
+      }
+    }
+
+  }
+
+  .join.made-easy.outline {
+    background: transparent;
+    border: 2px solid $altGuitareoGreen;
+    margin: 15px auto 0;
+    color: $altGuitareoGreen;
+    font-size: 18px;
+    padding: 10px 9%;
+    transition: all .3s;
+    height: inherit;
+    visibility: visible;
+
+    &:hover {
+      background: $altGuitareoGreen;
+      color: #fff;
+    }
+
+    &.active {
+      padding: 0;
+      margin: 0;
+      height: 0;
+      visibility: hidden;
+      opacity: 0;
+      overflow: hidden;
+      min-height: inherit;
+    }
+  }
+}
+
+.warning-section {
+  background: #840A16;
+  color: #FFF;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  padding: 30px 0;
+  @include tablet {
+    padding: 50px 15px 60px;
+  }
+  @include desktop {
+    padding: 70px 15px 80px;
+  }
+
+  .bg-icon {
+    position: absolute;
+    -webkit-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+    opacity: 0.3;
+    filter: brightness(0%);
+    z-index: 1;
+    top: 15%;
+    height: 100px;
+    @include tablet {
+      top: 25%;
+      height: 200px;
+    }
+    @include desktop {
+      top: 45%;
+      height: 400px;
+    }
+
+    &.sign {
+      left: -30px;
+      @include tablet {
+        left: -20px;
+      }
+      @include desktop {
+        left: -110px;
+      }
+    }
+
+    &.cal {
+      right: -50px;
+      @include tablet {
+        right: -70px;
+      }
+      @include desktop {
+        right: -230px;
+      }
+    }
+  }
+
+  h1 {
+    position: relative;
+    z-index: 2;
+    font: 700 30px/1em $robotocondensed;
+    text-transform: uppercase;
+    margin: 0 auto;
+    @include tablet {
+      font-size: 44px;
+    }
+    @include desktop {
+      font-size: 55px;
+    }
+  }
+
+  .sticks-x {
+    position: relative;
+    z-index: 2;
+    opacity: 0.3;
+    filter: brightness(0%);
+    margin: 17px auto;
+    @include tablet {
+      margin: 25px auto;
+    }
+    @include desktop {
+      margin: 30px auto;
+    }
+
+    img {
+      width: 80px;
+      @include tablet {
+        width: 100px;
+      }
+      @include tablet {
+        width: 90px;
+      }
+    }
+  }
+
+  p {
+    position: relative;
+    z-index: 2;
+    font: 400 13px/1.7em $opensans;
+    display: inline-block;
+    max-width: inherit;
+    padding: 0 10px;
+    margin: 0 auto;
+    @include tablet {
+      font-size: 15px;
+      max-width: 690px;
+    }
+    @include desktop {
+      font-size: 16px;
+      max-width: 740px;
+    }
+
+    strong {
+      color: #FFDB01;
+    }
+  }
+}
+
+body.is-reveal-open {
+  position: relative;
+}
+
+.reveal-overlay {
+  background-color: rgba(0, 0, 0, 0.9);
+
+  &:after {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-family: "Font Awesome 5 Pro";
+    font-weight: 900;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    content: "\f00d";
+    color: #fff;
+    z-index: 1;
+    opacity: 0.8;
+    position: absolute;
+    margin: 0;
+    line-height: 1em;
+    text-align: center;
+    display: inline-block;
+    outline: none;
+    top: 0;
+    right: 0;
+    font-size: 35px;
+    width: 35px;
+    @include tablet {
+      top: 7px;
+      right: 7px;
+      font-size: 50px;
+      width: 50px;
+    }
+  }
+
+  .reveal {
+
+    height: inherit;
+    min-height: 0;
+    outline: none;
+    padding: 0;
+
+    .flex-video {
+      margin: 0 auto;
+    }
+
+    &.trailer {
+      width: 100%;
+      padding: 15px;
+      margin: 0 auto;
+      max-width: 100%;
+      border: none;
+      text-align: center;
+      background: transparent;
+      @include tablet {
+        width: 80%;
+      }
+
+      .join {
+        width: 100%;
+        margin-top: 10px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+        @include tablet {
+          margin-top: 15px;
+        }
+      }
+    }
+  }
+}
+
+.meet-instructor {
+  background: #000 url("https://s3.amazonaws.com/guitareo/acoustic-guitar-made-easy/sales/meet.jpg") center top/cover;
+  color: #FFF;
+  text-align: center;
+  padding: 190px 0 25px;
+  @include tablet {
+    padding: 300px 0 40px;
+  }
+  @include desktop {
+    padding: 510px 0 70px;
+  }
+
+  h1 {
+    text-transform: uppercase;
+    text-shadow: 0 0 25px #000;
+    font: 400 25px/1em $robotocondensed;
+    z-index: 1;
+    margin: 0;
+    @include tablet {
+      font-size: 36px;
+    }
+    @include desktop {
+      font-size: 54px;
+    }
+  }
+
+  p {
+    font: 400 14px/1em $opensans;
+    margin: 10px auto 0;
+    @include tablet {
+      font-size: 18px;
+    }
+    @include desktop {
+      font-size: 23px;
+
+    }
+  }
+}
+
+.instructor-bio {
+  padding: 30px 15px;
+  @include tablet {
+    padding: 40px 15px 70px;
+  }
+  @include desktop {
+    padding: 50px 0 80px;
+  }
+
+  .row {
+    @include tablet {
+      max-width: 640px;
+    }
+    @include desktop {
+      max-width: 1070px;
+    }
+  }
+
+  p {
+    margin: 0 auto 50px;
+    font: 400 14px/1.6em $opensans;
+    @include tablet {
+      font-size: 13px;
+      -moz-column-count: 2;
+      -webkit-column-count: 2;
+      column-count: 2;
+      -webkit-column-gap: 40px;
+      -moz-column-gap: 40px;
+      column-gap: 40px;
+    }
+    @include desktop {
+      font-size: 14px;
+    }
+  }
+
+  .first-letter {
+    float: left;
+    padding-right: 7px;
+    width: 51px;
+    @include tablet {
+      width: 79px;
+    }
+    @include desktop {
+      width: 73px;
+    }
+  }
+
+  .benefit-row {
+    text-align: center;
+    margin: 0 auto 25px;
+    @include tablet {
+      margin: 0 auto;
+    }
+
+    &:last-child {
+      margin: 0 auto;
+    }
+
+    .arrow-outline {
+      border-radius: 50%;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      position: relative;
+      margin: 0 auto;
+      border: 11px solid #FFF;
+      width: 100%;
+      max-width: 180px;
+      @include tablet {
+        max-width: 190px;
+      }
+      @include desktop {
+        max-width: 240px;
+      }
+
+      &:after {
+        content: "";
+        position: absolute;
+        height: 0;
+        width: 0;
+        border: 20px solid #000;
+        border-color: transparent transparent #FFF #FFF;
+        transform-origin: 0 0;
+        box-shadow: -3px 3px 7px 0 rgba(0, 0, 0, 0.1);
+        margin: 6px -8px 0 0;
+        top: 100%;
+        right: 50%;
+        -webkit-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+        @include tablet {
+          margin: 7px -12px 0 0;
+        }
+      }
+
+      img {
+        border-radius: 50%;
+      }
+    }
+
+    .text-wrap {
+      margin: 35px 0 0;
+      padding: 0 25px;
+      @include tablet {
+        padding: 0 15px;
+      }
+      @include desktop {
+        margin: 40px 0 0;
+      }
+
+      h1 {
+        font: 700 26px/1em $robotocondensed;
+        margin: 0 auto;
+        @include tablet {
+          font-size: 36px;
+        }
+        @include desktop {
+          font-size: 45px;
+        }
+      }
+
+      h2 {
+        text-transform: uppercase;
+        font: 400 15px/1.2em $opensans;
+        margin: 0 auto;
+        color: #000;
+        @include tablet {
+          font-size: 13px;
+        }
+        @include desktop {
+          font-size: 15px;
+        }
+      }
+    }
+  }
+
+}
+
+.drummer-credits {
+  background: #191B1C;
+  color: #FFF;
+  padding: 40px 15px 15px;
+  @include tablet {
+    padding: 70px 20px 30px;
+  }
+  @include desktop {
+    padding: 100px 40px 60px;
+  }
+
+  h1 {
+    font-weight: 400;
+    font-size: 27px;
+    margin: 0 auto 30px;
+    @include tablet {
+      font-size: 32px;
+      margin: 0 auto 70px;
+    }
+    @include desktop {
+      font-size: 46px;
+    }
+  }
+
+  .drummer-testimonial {
+    padding: 0 10px;
+    text-align: center;
+    @include tablet {
+      padding: 0;
+    }
+
+    .float-right {
+      order: 2;
+    }
+
+    .drummer-pic {
+      border-radius: 50%;
+      overflow: hidden;
+      border: 4px solid #FFF;
+      background: #FFF;
+      width: 100%;
+      max-width: 140px;
+      margin: 0 auto 15px;
+      @include tablet {
+        max-width: 160px;
+
+      }
+    }
+
+    h1 {
+      font: 700 16px/1em $opensans;
+      margin: 0 auto 40px;
+      @include tablet {
+        font-size: 17px;
+        margin-bottom: 40px;
+      }
+      @include desktop {
+        font-size: 19px;
+        margin-bottom: 60px;
+      }
+
+      .band {
+        color: $altGuitareoGreen;
+        font: 400 14px/1em $opensans;
+        margin: 0 auto;
+        text-transform: uppercase;
+        display: inline-block;
+        @include desktop {
+          font-size: 15px;
+        }
+      }
+    }
+
+    p {
+      font: 400 14px/1.6em $opensans;
+      margin: 0 auto 15px;
+      color: #fff;
+      @include tablet {
+        margin: 0 auto 20px;
+        text-align: left;
+      }
+      @include desktop {
+        font-size: 15px;
+        max-width: 520px;
+      }
+    }
+  }
+}
+
+.compare-table {
+  background: #FFF;
+  text-align: center;
+  padding: 40px 10px;
+  @include tablet {
+    padding: 70px 10px;
+  }
+  @include desktop {
+    padding: 90px 10px;
+  }
+
+  h1 {
+    font: 700 30px/1em $robotocondensed;
+    text-transform: uppercase;
+    margin: 0 auto 7px;
+    @include tablet {
+      font-size: 42px;
+      margin: 0 auto 10px;
+    }
+    @include desktop {
+      font-size: 50px;
+      margin: 0 auto 15px;
+    }
+  }
+
+  table {
+    border-collapse: separate;
+    border-spacing: 10px 0;
+    margin: 0 auto 45px;
+    padding: 0;
+    @include tablet {
+      padding: 0 15px;
+    }
+    @include desktop {
+      padding: 0 45px;
+    }
+
+    tbody {
+      border: none;
+      color: #99A19E;
+      background: #FFF;
+
+      tr {
+        td {
+          width: 33.33%;
+          border: 1px solid #DFE6E3;
+          border-width: 0 1px;
+          padding: 7px;
+          font: 600 11px/1.2em $robotocondensed;
+          text-transform: uppercase;
+          @include tablet {
+            font-size: 15px;
+          }
+          @include desktop {
+            font-size: 18px;
+          }
+
+          i {
+            font-size: 24px;
+            @include desktop {
+              font-size: 35px;
+            }
+          }
+
+          &:nth-child(2) {
+            border-color: $altGuitareoGreen;
+            color: $altGuitareoGreen;
+
+            i {
+              font-size: 34px;
+              @include desktop {
+                font-size: 50px;
+              }
+            }
+          }
+        }
+
+        &:nth-child(even) {
+          background-color: #f2f5f4;
+
+          &:hover {
+            background-color: #e8ebea;
+          }
+
+          td:nth-child(2) {
+            background-color: #edfaf5;
+          }
+        }
+
+        &:nth-child(odd):hover {
+          background-color: #f7faf9;
+        }
+
+        &:nth-child(1) td {
+          border-width: 1px 1px 0;
+          border-radius: 4px 4px 0 0;
+          padding: 10px 0 15px;
+          @include tablet {
+            font-size: 24px;
+            padding: 20px 10px 30px;
+          }
+          @include desktop {
+            font-size: 30px;
+            padding: 20px 10px 40px;
+          }
+
+          .macbook {
+            width: 70%;
+            margin: 0 auto 5px;
+            @include tablet {
+              width: 175px;
+              margin: 0 auto 15px;
+            }
+            @include desktop {
+              width: 250px;
+              margin: 10px auto 30px;
+            }
+          }
+
+          .blue-logo {
+            width: 80%;
+            @include tablet {
+              width: 200px;
+            }
+            @include desktop {
+              width: 290px;
+            }
+          }
+
+          i {
+            margin: 0 0 5px;
+            font-size: 50px;
+            @include tablet {
+              font-size: 100px;
+              margin: 0 0 10px;
+            }
+            @include desktop {
+              font-size: 145px;
+              margin: 0 0 30px;
+            }
+          }
+
+          &:nth-child(1) {
+            border-width: 0;
+            background: #FFF;
+          }
+        }
+
+        &:nth-child(2) td:nth-child(1) {
+          border-width: 1px 1px 0;
+          border-radius: 4px 4px 0 0;
+        }
+
+        &:last-child td {
+          border-width: 0 1px 1px;
+          border-radius: 0 0 4px 4px;
+
+          &:nth-child(2) {
+            font-weight: 700;
+            line-height: 0.8em;
+            font-size: 17px;
+            padding: 19px 0;
+            @include tablet {
+              font-size: 23px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  p {
+    text-align: left;
+    font: 400 16px/1.4em $opensans;
+    margin: 0 auto;
+    padding: 0 10px;
+    @include tablet {
+      padding: 0 25px;
+      font-size: 18px;
+    }
+    @include desktop {
+      padding: 0 55px;
+    }
+  }
+}
+
+.guarantee {
+  background: #f1f4f3;
+  padding: 20px 10px;
+  @include tablet {
+    padding: 35px 0;
+  }
+
+  h1 {
+    font: 700 23px/1em $robotocondensed;
+    margin: 20px auto 10px;
+    text-transform: uppercase;
+    @include tablet {
+      font-size: 28px;
+      margin: 0 auto 15px;
+    }
+    @include desktop {
+      font-size: 38px;
+      margin: 35px auto 20px;
+    }
+  }
+
+  p {
+    font: 400 15px/1.7em $opensans;
+    margin: 0 auto;
+    @include desktop {
+      font-size: 17px;
+    }
+  }
+
+  img {
+    width: 100%;
+    max-width: 250px;
+    @include tablet {
+      max-width: 290px;
+    }
+    @include tablet {
+      max-width: 100%;
+    }
+  }
+}
+
+.final {
+  background-image: url("https://guitareo.s3.amazonaws.com/gtme/customize-bg.jpg");
+  background-size: cover;
+  background-color: #000;
+  background-position: center top;
+  text-align: center;
+  padding: 50px 10px;
+  color: #FFF;
+  @include tablet {
+    padding: 70px 20px;
+  }
+  @include desktop {
+    padding: 120px 20px;
+  }
+
+  .logo img {
+    width: 100%;
+    image-rendering: -webkit-optimize-contrast;
+    max-width: 350px;
+    @include tablet {
+      max-width: 570px;
+    }
+    @include desktop {
+      max-width: 750px;
+    }
+
+    &.edge {
+      width: 100%;
+      max-width: 150px;
+      margin: 0 auto 10px;
+      @include tablet {
+        max-width: 200px;
+      }
+      @include desktop {
+        max-width: 270px;
+      }
+    }
+  }
+
+  .countdown {
+
+
+    p {
+      font: 400 14px/1.2em $robotocondensed;
+      margin: 15px auto 0;
+      text-transform: uppercase;
+      color: #fff;
+      @include tablet {
+        font-size: 15px;
+        margin: 20px auto 0;
+      }
+      @include desktop {
+        font-size: 18px;
+      }
+
+    }
+  }
+
+  .outline-box {
+    border: 2px dashed $altGuitareoGreen;
+    background: #000;
+    padding: 15px 25px;
+    border-radius: 150px;
+    text-align: center;
+    display: inline-block;
+    margin: 20px auto;
+    @include tablet {
+      padding: 20px;
+      margin: 25px auto;
+      max-width: 670px;
+      text-align: left;
+    }
+    @include desktop {
+      margin: 35px auto;
+      max-width: 850px;
+      padding: 25px;
+    }
+
+    p {
+      font: 400 12px/1.5em $opensans;
+      margin: 0 auto;
+      float: left;
+      color: #999;
+      @include tablet {
+        width: calc(100% - 60px);
+        padding-left: 15px;
+      }
+      @include desktop {
+        font-size: 15px;
+        width: calc(100% - 75px);
+        padding-left: 20px;
+      }
+
+      strong, em {
+        color: #FFDB01;
+        font-size: 12px;
+        line-height: 1.5em;
+        @include tablet {
+          font-size: 15px;
+        }
+        @include desktop {
+          font-size: 19px;
+        }
+      }
+
+      strong {
+        text-transform: uppercase;
+      }
+    }
+
+    i {
+      border-radius: 50%;
+      color: #000;
+      background: #00BC75;
+      font-size: 35px;
+      width: 60px;
+      line-height: 60px;
+      float: left;
+      text-align: center;
+      @include desktop {
+        font-size: 45px;
+        width: 75px;
+        line-height: 75px;
+      }
+    }
+  }
+
+  h1 {
+    font: 500 20px/1.2em $opensans;
+    margin: 20px auto;
+    @include tablet {
+      font-size: 25px;
+      margin: 25px auto;
+    }
+    @include desktop {
+      font-size: 34px;
+      margin: 35px auto;
+    }
+  }
+
+  h2 {
+    font: italic 400 12px/1em $opensans;
+    margin: 0 auto 20px;
+    @include tablet {
+      font-size: 16px;
+      margin: 0 auto 25px;
+    }
+    @include desktop {
+      font-size: 21px;
+      margin: 0 auto 35px;
+    }
+
+    &.yellow {
+      text-transform: uppercase;
+      color: #FDCE02;
+      font-style: normal;
+      margin: 15px auto 0;
+      @include tablet {
+        margin: 20px auto 5px;
+      }
+
+      strong {
+        display: inline-block;
+      }
+    }
+  }
+
+  .join {
+    width: 100%;
+    font-size: 27px;
+    padding: 16px;
+    @include tablet {
+      font-size: 36px;
+      padding: 22px;
+      max-width: 670px;
+    }
+    @include desktop {
+      font-size: 43px;
+      max-width: 850px;
+    }
+  }
+
+  .cards {
+    margin: 20px auto;
+    @include tablet {
+      margin: 25px auto;
+    }
+    @include desktop {
+      margin: 35px auto;
+    }
+
+    i {
+      color: #8C9698;
+      margin: 0 4px;
+      font-size: 36px;
+      @include tablet {
+        font-size: 55px;
+      }
+    }
+  }
+
+  p {
+    font: 400 13px/1em $opensans;
+    color: #FFF;
+    @include tablet {
+      font-size: 15px;
+    }
+
+    &.final-questions {
+      margin: 0 auto;
+    }
+
+    span {
+      margin: 0 auto 7px;
+      text-transform: uppercase;
+      display: block;
+      font-size: 15px;
+      @include tablet {
+        font-size: 17px;
+      }
+    }
+
+    a {
+      color: #CCE6FF;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.questions {
+  background: #fff;
+  text-align: center;
+  padding: 40px 7px;
+  margin: 0 auto -15px;
+  @include tablet {
+    padding: 60px 15px;
+  }
+  @include desktop {
+    padding: 90px 20px;
+  }
+
+  h1.upper {
+    font: 700 22px/1em $robotocondensed;
+    text-transform: uppercase;
+    margin: 0 auto 20px;
+    @include tablet {
+      margin: 0 auto 30px;
+      font-size: 29px;
+    }
+    @include desktop {
+      margin: 0 auto 40px;
+      font-size: 35px;
+    }
+
+  }
+
+  .question-dropdown {
+    background: #FFF;
+    border-radius: 6px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+    height: auto;
+    max-height: 60px;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    transition: all .3s ease-in-out;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+
+    &.active {
+      max-height: 1000px;
+    }
+
+    .question-wrap {
+      position: relative;
+    }
+
+    .question-icon {
+      background: $altGuitareoGreen;
+      text-transform: uppercase;
+      line-height: 60px;
+      height: 100%;
+      position: absolute;
+      color: #fff;
+      font-size: 25px;
+      @include tablet {
+        font-size: 38px;
+      }
+    }
+
+    .fa-chevron-down {
+      color: #000;
+      line-height: 60px;
+      transition: all .3s ease-in-out;
+      font-size: 15px;
+      @include tablet {
+        font-size: 22px;
+      }
+
+      &.rotated {
+        transform: rotate(-180deg);
+      }
+    }
+
+    .question-answer {
+      text-align: left;
+      padding: 0 5px 0 10px;
+
+      .question {
+        height: 60px;
+        width: 100%;
+        position: relative;
+
+        h2 {
+          font: 600 12px/1.2em $opensans;
+          position: absolute;
+          top: 50%;
+          left: 0;
+          -webkit-transform: translate(0, -50%);
+          transform: translate(0, -50%);
+          margin: 0 auto;
+          @include tablet {
+            font-size: 15px;
+          }
+          @include desktop {
+            font-size: 17px;
+          }
+        }
+      }
+
+      p {
+        font: 400 13px/1.6em $opensans;
+        margin: 0 auto 10px;
+        @include tablet {
+          font-size: 15px;
+        }
+        @include desktop {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+
+  .join {
+    font-size: 17px;
+    margin: 5px auto 0;
+    @include tablet {
+      font-size: 19px;
+      margin: 20px auto 0;
+    }
+    @include desktop {
+      font-size: 21px;
+    }
+  }
+}
+
+.prelaunch {
+  background-color: #000;
+  text-align: center;
+  padding: 50px 0 80px;
+  margin: 0 auto -15px;
+  @include tablet {
+    padding: 140px 0 220px;
+  }
+
+  .row {
+    width: 100%;
+    max-width: 720px;
+
+    .columns {
+      padding: 0 20px;
+      @include tablet {
+        padding: 0 40px;
+      }
+
+      p {
+        font: 500 15px/1em $opensans;
+        margin: 35px auto 7px;
+        color: #FFF;
+        @include tablet {
+          font-size: 22px;
+          margin: 45px auto 20px;
+        }
+        @include desktop {
+          font-size: 24px;
+        }
+
+        .tzcd {
+          display: inline-block;
+        }
+
+        &.yellow {
+          font-style: italic;
+          color: #FDCE02;
+          margin: 0 auto;
+          font-size: 14px;
+          @include tablet {
+            font-size: 19px;
+          }
+          @include desktop {
+            font-size: 21px;
+          }
+        }
+
+        &.green {
+          color: #00BC75;
+        }
+      }
+
+      input,
+      button {
+        font: 400 18px/1em $opensans;
+        background: #FFF;
+        display: block;
+        color: #879193;
+        border-radius: 50%;
+        width: 100%;
+        text-align: center;
+        padding: 16px;
+        height: 50px;
+        margin: 25px auto 10px;
+        @include tablet {
+          padding: 23px;
+          height: 80px;
+          font-size: 32px;
+          margin: 55px auto 15px;
+        }
+      }
+
+      button {
+        font: 700 18px/1em $robotocondensed;
+        margin: 0 auto;
+        background: #00BC75;
+        color: #FFF;
+        text-transform: uppercase;
+        border: none;
+        cursor: pointer;
+        @include tablet {
+          font-size: 30px;
+        }
+
+        &:hover {
+          background: lighten(#00BC75, 10%);
+          color: #FFF;
+        }
+      }
+
+    }
+  }
+}
+
+.yellow-banner {
+  background: #FDCE02;
+  padding: 20px 10px;
+  @include tablet {
+    padding: 30px 15px;
+  }
+  @include desktop {
+    padding: 45px 20px;
+  }
+
+  .row {
+    padding: 0 10px;
+    @include tablet {
+      padding: 0 15px;
+    }
+
+    p {
+      font: 400 14px/1.5em $opensans;
+      margin: 0 auto;
+      width: 90%;
+      @include tablet {
+        font-size: 16px;
+      }
+      @include desktop {
+        font-size: 18px;
+      }
+
+      a {
+        color: #000;
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.yellow-tab {
+  background: #FDCE02;
+  text-align: center;
+  position: relative;
+  padding: 10px;
+  @include tablet {
+    padding: 15px;
+  }
+
+  &:after {
+    content: "";
+    position: absolute;
+    height: 0;
+    width: 0;
+    margin: -2px -50px 0 0;
+    top: 100%;
+    right: 50%;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-top: 15px solid #FDCE02;
+    @include desktop {
+      border-top-width: 20px;
+    }
+  }
+
+  p {
+    font: 700 15px/1em $opensans;
+    margin: 0 auto;
+    text-transform: uppercase;
+    @include tablet {
+      font-size: 18px;
+    }
+    @include desktop {
+      font-size: 21px;
+    }
+  }
+}

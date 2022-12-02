@@ -8,33 +8,61 @@
     {{--</div>--}}
 {{--</div>--}}
 <footer class="sales-footer">
-    {{--<div class="container">--}}
-        {{--<div class="footer-link-wrap">--}}
-            {{--<h1>Singeo</h1>--}}
-            {{--<p>--}}
-                {{--<a href="/chorus/">Chorus</a><br>--}}
-                {{--<a href="/guitar-tricks/">2 Simple Guitar Tricks</a><br>--}}
-                {{--<a href="/acoustic-guitar-jumpstart/">Acoustic Jump-Start</a><br>--}}
-                {{--<a href="/starter-kit/">Starter Kit</a><br>--}}
-                {{--<a href="/login">Member Login</a></p>--}}
+    <div class="container">
+        {{--<div class="footer-link-wrap footer-sign-up">--}}
+            {{--<h1>Stay Connected</h1>--}}
+            {{--<p class="show-for-desktop">Join thousands of singers who get free weekly vocal lessons.</p>--}}
+            {{--<p class="hide-for-desktop">Receive free weekly lessons.</p>--}}
+            {{--<form id="SingeoEngagementTriggerWebsiteSignupWebForm" accept-charset="UTF-8" action="/customer-io/submit-email-form" method="POST"--}}
+                    {{--class="ajax-form clearfix infusion-form facebook-track-lead" onsubmit="emailSignUpConversionTrackerForImpactProvider()">--}}
+                {{--<input type="hidden" name="form_name" value="Blog Signup">--}}
+
+                {{--<input type="hidden" name="leadtracker_form_name" value="Singeo General">--}}
+                {{--<div class="infusion-field col-xs-12 form-group text-center medium-text-left col-sm-7">--}}
+                    {{--<input class="medium-body infusion-field-input-container" id="inf_field_Email" name="email" type="email" placeholder="Email Address..." required="">--}}
+                {{--</div>--}}
+                {{--<div class="infusion-submit col-xs-12 form-group col-sm-5">--}}
+                    {{--<button class="submit button-red infusion-recaptcha join-form-button " type="submit">--}}
+                        {{--<span class="pre-add"> Sign up <i class="fas fa-paper-plane"></i></span>--}}
+                        {{--<span class="pending hide hidden">Sending <i class="fas fa-spinner-third fa-spin"></i></span>--}}
+                        {{--<span class="success hide hidden">Sent <i class="fas fa-thumbs-up"></i></span>--}}
+                        {{--<span class="fail hide hidden">Try Again <i class="fas fa-exclamation-triangle"></i></span>--}}
+                    {{--</button>--}}
+                {{--</div>--}}
+                {{--<input name="inf_form_xid" type="hidden" value="SingeoEngagementTriggerWebsiteSignupWebForm">--}}
+                {{--<input name="tag_names_to_add[]" type="hidden" value="Singeo - Engagement - Trigger - Website Signup - Web Form">--}}
+                {{--<input name="list_ids_to_subscribe_to[]" type="hidden" value="33">--}}
+                {{--<input name="success_redirect" type="hidden" value="/thank-you-white">--}}
+            {{--</form>--}}
+            {{--<div class="thank-you-box">--}}
+                {{--<p><em>You should receive an email from team@singeo.com within 10 minutes.</em></p>--}}
+            {{--</div>--}}
         {{--</div>--}}
-        {{--<div class="footer-link-wrap">--}}
-            {{--<h1>More Resources</h1>--}}
-            {{--<p>--}}
-                {{--<a href="https://www.guitarlessons.com/">Guitar Lessons</a><br>--}}
-                {{--<a href="https://www.leadguitarlessons.com">Lead Guitar Lessons</a><br>--}}
-                {{--<a href="https://www.bluesguitarlessons.com">Blues Guitar Lessons</a><br>--}}
-                {{--<a href="https://www.guitarlessonsforbeginners.com">Beginner Guitar Lessons</a><br>--}}
-                {{--<a href="https://howtoplayguitar.com/">How To Play Guitar</a></p>--}}
-        {{--</div>--}}
-        {{--<div class="footer-link-wrap">--}}
-            {{--<h1>Other Sites</h1>--}}
-            {{--<p><a href="https://www.musora.com">Musora</a><br>--}}
-                {{--<a href="https://www.drumeo.com">Drumeo</a><br>--}}
-                {{--<a href="https://www.pianote.com">Pianote</a><br>--}}
-                {{--<a href="https://www.guitareo.com">Guitareo</a></p>--}}
-        {{--</div>--}}
-    {{--</div>--}}
+        <div class="footer-link-wrap">
+            <h1>Resources</h1>
+            <p><a href="/chorus/">The Singeo Chorus</a><br>
+                <a href="/improve-any-voice">4 Vocal Exercises</a><br>
+                <a href="/chorus/how-to-sing/">Your First Vocal Lesson</a><br>
+                <a href="/chorus/7-days-to-a-beautiful-voice/">7 Days To A Beautiful Voice</a><br>
+                <a href="/chorus/vocal-exercises-for-a-healthy-voice/">Your Daily Routine</a></p>
+        </div>
+        <div class="footer-link-wrap">
+            <h1><a href="/shop/">Singeo SHOP</a></h1>
+            <p><a href="/">Singeo Membership</a><br>
+                <a href="/singing-starter-kit">Singing Starter Kit</a><br>
+                <a href="/shop/poster-vowels">Vowel Practice Poster</a><br>
+                <a href="/shop/shirt-retro">Singeo T-Shirt</a><br>
+                <a href="/shop/tumbler-doremi">Do-Ti-La-So Tumbler</a></p>
+        </div>
+        <div class="footer-link-wrap">
+            <h1>Other Sites</h1>
+            <p><a rel="noopener" href="{{ get_legacy_brand_base_url("musora") }}">Musora</a><br>
+                <a rel="noopener" href="{{ get_legacy_brand_base_url("drumeo") }}">Drumeo</a><br>
+                <a rel="noopener" href="{{ get_legacy_brand_base_url("pianote") }}">Pianote</a><br>
+                <a rel="noopener" href="{{ get_legacy_brand_base_url("guitareo") }}">Guitareo</a><br>
+                <a rel="noopener" href="{{ get_legacy_brand_base_url("musora") }}">Recordeo</a></p>
+        </div>
+    </div>
     <div class="footer-bottom" style="padding-top: 0; border-top: 0;">
         <div class="container mx-auto">
             <img class="logo" src="https://cdn.musora.com/image/fetch/w_280,q_auto:best/https://musora-center.s3.amazonaws.com/logos/singeo-logo-white.png" alt="Singeo">

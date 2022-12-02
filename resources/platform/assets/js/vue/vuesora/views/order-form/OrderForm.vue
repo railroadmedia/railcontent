@@ -271,6 +271,10 @@ export default {
             default: () => ({}),
         },
 
+        cartDataUrl: {
+            type: String,
+        },
+
         user: {
             type: Object,
             default: () => null,

@@ -2,12 +2,11 @@
 "trialVersion" => true
 ])
 
-@section('head-includes')
-    @parent
-
+@section('global-head')
     <title>Your start-to-finish guide to confident singing | Singeo.com</title>
     <meta property="og:url" content="https://www.singeo.com/trial"/>
     <meta property="og:title" content="Singeo.com: Your start-to-finish guide to confident singing"/>
+    @parent
 @endsection
 
 @section('final')

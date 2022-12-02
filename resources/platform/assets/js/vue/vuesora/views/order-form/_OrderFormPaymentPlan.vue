@@ -6,7 +6,7 @@
                     <select
                         id="paymentPlans"
                         v-model.lazy="$_numberOfPayments"
-                        class="order-form-input"
+                        class="order-form-input has-input"
                     >
                         <option
                             v-for="item in paymentPlanOptions"

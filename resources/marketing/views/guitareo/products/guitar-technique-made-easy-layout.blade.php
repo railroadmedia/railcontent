@@ -1,17 +1,20 @@
-@extends('guitareo._partials.layout')
+@extends('guitareo._partials.global-vue-layout')
 
 <?php \App\Analytics\Tracker::trackGTMEProductImpression(); ?>
 
-@section('head-includes')
+@section('meta')
     <title>Guitar Technique Made Easy | Guitareo</title>
     <meta name="description" content="Guitar Technique Made Easy is a 26-week online course with Nate Savage.">
 
     <meta property="og:image" content="https://guitareo.s3.amazonaws.com/gtme/og-image.jpg" style="display: none;">
     <meta property="og:description" content="Guitar Technique Made Easy is a 26-week online course with Nate Savage.">
     <meta property="og:url" content="https://www.guitareo.com/guitar-technique-made-easy">
+@stop()
 
-    <link href="{{ asset('/assets/css/tailwind-helpers.css') }}" rel="stylesheet">
+@section('styles')
+    <link href="{{ asset('/marketing/css/guitareo/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation-float.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
 
     <style>
         body {
@@ -22,63 +25,14 @@
             display:none;
         }
     </style>
-
-    <link href="{{ asset('assets/marketing/gtme-sales.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('/assets/marketing/nav-footer.css') }}">
+    <link href="{{ asset('/marketing/parcel/guitareo/gtme-sales.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}">
 @stop()
 
-@section('layout-scripts')
-    <script src="/assets/js/modal.js"></script>
-    <script src="{{ asset('assets/js/countUp.js') }}"></script>
-    <script src="/assets/marketing/nav-footer.js"></script>
-    <script src="/js/jquery.countdown-2.js"></script>
-    <script>
-        $(document).ready(function () {
-            // Countdown
-            $('.tzcd-full').countdown('2021/11/30')
-                .on('update.countdown', function (event) {
-                    var format = '%-M Minute%!M';
-                    if (event.offset.totalHours > 0) {
-                        format = '%-H Hour%!H ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '%-D Day%!D ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('a limited time');
-                });
-            $('.tzcd-small').countdown('2021/11/30')
-                .on('update.countdown', function (event) {
-                    var format = '%-MM %-SS';
-                    if (event.offset.totalHours > 0) {
-                        format = '%-HH ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '%-DD ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('a limited time');
-                });
-            $('.tzcd-big').countdown('2021/11/30')
-                .on('update.countdown', function (event) {
-                    var format = '' + '<div><h1>%M</h1> <p>min%!M</p></div> ' + '<div><h1>%S</h1> <p>sec%!S</p></div>';
-                    if (event.offset.totalHours > 0) {
-                        format = '' + '<div><h1>%H</h1> <p>hr%!H</p></div> ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '' + '<div><h1>%D</h1> <p>day%!D</p></div> ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('<div><h1>LIMITED</h1> <p>TIME LEFT</p></div>');
-                });
-        });
-    </script>
+@section('scripts')
+    <script src="/marketing/js/modal.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/1.9.3/countUp.min.js"></script>
+    <script src="/marketing/parcel/guitareo/nav-footer.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $(document).foundation();
@@ -137,10 +91,10 @@
     @include("guitareo.sales.partials._nav", [
         "cartVersion" => true
     ])
-    @include('shop.elements.promo-banner', [
+    @include('guitareo._partials.promo-banner', [
                 "name" => "Guitar Technique Made Easy",
-                "fullPrice" => App\Prices::$GTMEFull,
-                "price" => App\Prices::$GTMERegular,
+                "fullPrice" => GuitareoPrices::$GTMEFull,
+                "price" => GuitareoPrices::$GTMERegular,
                 "noBreadcrumb" => true
             ])
     @hasSection('topbar')
@@ -172,15 +126,14 @@
                     @hasSection('custom-price')
                         @yield('custom-price')
                     @else
-                        @if(App\Prices::$GTMEFull > App\Prices::$GTMERegular)
-                            <s>NORMALLY ${{ App\Prices::$GTMEFull }}.</s> &nbsp;<strong style="color:#00BC75;"><u>ONLY ${{ App\Prices::$GTMERegular }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (App\Prices::$GTMERegular / App\Prices::$GTMEFull))) }}%)
+                        @if(GuitareoPrices::$GTMEFull > GuitareoPrices::$GTMERegular)
+                            <s>NORMALLY ${{ GuitareoPrices::$GTMEFull }}.</s> &nbsp;<strong style="color:#00BC75;"><u>ONLY ${{ GuitareoPrices::$GTMERegular }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (GuitareoPrices::$GTMERegular / GuitareoPrices::$GTMEFull))) }}%)
                         @else
-                            <strong><u>ONLY ${{ App\Prices::$GTMERegular }}</u></strong>
+                            <strong><u>ONLY ${{ GuitareoPrices::$GTMERegular }}</u></strong>
                         @endif
                     @endif
 
                         <br><a href="/" class="text-guitareo">(OR FREE WITH A GUITAREO MEMBERSHIP)</a>
-                    {{--<br><strong style="color: #f6bd52;">ONLY <span class="tzcd-med">A LIMITED TIME</span> LEFT</strong>--}}
                     <br> <strong>** 90-DAY GUARANTEE **</strong>
                 </p>
             </div>
@@ -202,17 +155,11 @@
                     {{--<div class="text">--}}
                         {{--<p class="text-left" style="max-width:510px">Celebrate Guitar Month right and brush up on your techniques.--}}
                             {{--<br><br>--}}
-                            {{--Guitar Technique Made Easy will improve your existing skills and help you master new ones, for only <s>${{ \App\Prices::$GTMEFull }}</s> ${{ \App\Prices::$GTMERegular }}! (Save {{ round(100 - (100 * (\App\Prices::$GTMERegular / \App\Prices::$GTMEFull))) }}%)--}}
+                            {{--Guitar Technique Made Easy will improve your existing skills and help you master new ones, for only <s>${{ GuitareoPrices::$GTMEFull }}</s> ${{ GuitareoPrices::$GTMERegular }}! (Save {{ round(100 - (100 * (GuitareoPrices::$GTMERegular / GuitareoPrices::$GTMEFull))) }}%)--}}
                             {{--<br><br>--}}
                             {{--Your guitar deserves to be played freely and effectively, and especially during its own dedicated month!--}}
                             {{--<br></p>--}}
 
-                        {{--<div class="tzcd-big">--}}
-                            {{--<div><h1>00</h1> <p>days</p></div>--}}
-                            {{--<div><h1>00</h1> <p>hrs</p></div>--}}
-                            {{--<div><h1>00</h1> <p>mins</p></div>--}}
-                            {{--<div><h1>00</h1> <p>secs</p></div>--}}
-                        {{--</div>--}}
                         {{--<div class="join">Get Started &raquo;</div>--}}
                     {{--</div>--}}
                 {{--</a>--}}
@@ -669,7 +616,7 @@
                         @hasSection('custom-price')
                             @yield('custom-price-2')
                         @else
-                            ${{ number_format((App\Prices::$GTMERegular / 26), 2, '.', ',') }}
+                            ${{ number_format((GuitareoPrices::$GTMERegular / 26), 2, '.', ',') }}
                         @endif
                             /week
                         </td>
@@ -684,7 +631,7 @@
                 @hasSection('custom-price-2')
                     @yield('custom-price-2')
                 @else
-                    ${{ number_format((App\Prices::$GTMERegular / 26), 2, '.', ',') }}
+                    ${{ number_format((GuitareoPrices::$GTMERegular / 26), 2, '.', ',') }}
                 @endif
                  per week.</u>
                 <br><br>
@@ -725,10 +672,10 @@
                 @hasSection('custom-price-3')
                     @yield('custom-price-3')
                 @else
-                    @if(App\Prices::$GTMEFull > App\Prices::$GTMERegular)
-                        <s>Was ${{ App\Prices::$GTMEFull }}.</s> <strong>Only ${{ App\Prices::$GTMERegular }}.</strong>
+                    @if(GuitareoPrices::$GTMEFull > GuitareoPrices::$GTMERegular)
+                        <s>Was ${{ GuitareoPrices::$GTMEFull }}.</s> <strong>Only ${{ GuitareoPrices::$GTMERegular }}.</strong>
                     @else
-                        <strong>Only ${{ App\Prices::$GTMERegular }}.</strong>
+                        <strong>Only ${{ GuitareoPrices::$GTMERegular }}.</strong>
                     @endif
                 @endif
 
@@ -746,15 +693,14 @@
                     @hasSection('custom-price')
                         @yield('custom-price')
                     @else
-                        @if(App\Prices::$GTMEFull > App\Prices::$GTMERegular)
-                            <s>NORMALLY ${{ App\Prices::$GTMEFull }}.</s> &nbsp;<strong style="color:#00BC75;"><u>ONLY ${{ App\Prices::$GTMERegular }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (App\Prices::$GTMERegular / App\Prices::$GTMEFull))) }}%)
+                        @if(GuitareoPrices::$GTMEFull > GuitareoPrices::$GTMERegular)
+                            <s>NORMALLY ${{ GuitareoPrices::$GTMEFull }}.</s> &nbsp;<strong style="color:#00BC75;"><u>ONLY ${{ GuitareoPrices::$GTMERegular }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (GuitareoPrices::$GTMERegular / GuitareoPrices::$GTMEFull))) }}%)
                         @else
-                            <strong><u>ONLY ${{ App\Prices::$GTMERegular }}</u></strong>
+                            <strong><u>ONLY ${{ GuitareoPrices::$GTMERegular }}</u></strong>
                         @endif
                     @endif
 
                     <br><a href="/" class="text-guitareo">(OR FREE WITH A GUITAREO MEMBERSHIP)</a>
-                    {{--<br><strong style="color: #f6bd52;">ONLY <span class="tzcd-med">A LIMITED TIME</span> LEFT</strong>--}}
                     <br> <strong>** 90-DAY GUARANTEE **</strong>
                 </h6>
             </div>

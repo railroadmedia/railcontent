@@ -115,12 +115,12 @@ export default {
         },
 
         insertEmoji(emoji) {
-            this.chatEventBus.emit('insertEmoji', emoji);
+            this.eventBus.emit('insertEmoji', emoji);
         },
 
         closeEmojiWindow() {
             this.search = '';
-            this.chatEventBus.emit('closeEmojiWindow', { });
+            this.eventBus.emit('closeEmojiWindow', { });
         },
     }
 }

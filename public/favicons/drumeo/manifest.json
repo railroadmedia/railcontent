@@ -2,12 +2,12 @@
   "name": "",
   "icons": [
     {
-      "src": "/laravel/public/images/favicon/android-chrome-192x192.png?v=2017",
+      "src": "/favicons/drumeo/android-chrome-192x192.png?v=2017",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/laravel/public/images/favicon/android-chrome-256x256.png?v=2017",
+      "src": "/favicons/drumeo/android-chrome-256x256.png?v=2017",
       "sizes": "256x256",
       "type": "image/png"
     }
