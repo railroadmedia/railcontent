@@ -36,7 +36,11 @@
                 <p class="text-center text-sm leading-none mx-auto mb-1 md:text-base italic" style="color:#F71B26;">{!! $specialText  !!}</p>
             @endif
 
-            @if(!$soldOut)
+            @if(!empty($soldOut) && $soldOut)
+                <button class="border-none join w-full sm:w-1/2 lg:w-full sold-out">
+                    SOLD OUT
+                </button>
+            @else
                 @if($category !== 'bundles' && count($sizes) === 0)
                     <a
                         class="online-atc vue-add-to-cart"
@@ -56,9 +60,9 @@
                                 class="bg-white text-black"
                                 @if(isset($size->soldOut) && $size->soldOut) disabled @endif
                                 {{-- @if($productStock[$sku.'-'.$size->code]->isProductSoldOut()) disabled @endif --}}
-                                value="{{$product->sku . '-' . $size->code}}"
-                                data-price="{{floatVal($product->price) ?? 0}}"
-                                data-product-json='{"{{$product->sku . '-' . $size->code}}": 1}'
+                                value="@if(!empty($sku)){{$sku}}-@endif{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}"
+                                data-price="{{!empty($size->price) ? $size->price : $price}}"
+                                data-product-json='{"@if(!empty($sku)){{$sku}}-@endif{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}": 1}'
                             >
                                 {{ $size->name }}
                             </option>
@@ -84,14 +88,10 @@
 
                 @if($category === 'bundles')
                     <a class="online-atc" href="/ecommerce/add-to-cart?redirect=/order&{{ $product->sku }}"
-                            data-base-url="/ecommerce/add-to-cart?redirect=/order&{{ $product->sku }}">
+                       data-base-url="/ecommerce/add-to-cart?redirect=/order&{{ $product->sku }}">
                         <button class="border-none join w-full sm:w-1/2 lg:w-full"><i class="fas fa-cart-plus"></i> Order Now</button>
                     </a>
                 @endif
-            @else
-                <button class="border-none join w-full sm:w-1/2 lg:w-full sold-out">
-                    SOLD OUT
-                </button>
             @endif
             <p class="italic text-xs leading-normal text-center mx-auto">
                 @if($freeShipping)
