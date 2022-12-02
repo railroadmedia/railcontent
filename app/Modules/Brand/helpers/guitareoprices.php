@@ -41,6 +41,9 @@ class GuitareoPrices
     public static $survivalKitFull = 89;
     public static $survivalKit = 69;
 
+    public static $survivalKitFull = 89;
+    public static $survivalKit = 69;
+
     public static $bundleBeginner = 127;
     public static $bundleSummerSongs = 49;
 
