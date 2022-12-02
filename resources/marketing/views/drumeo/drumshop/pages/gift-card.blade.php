@@ -1,4 +1,4 @@
-@extends('products.product-layout')
+@extends('drumeo.drumshop.shop-page-layout')
 
 @section('meta')
     @parent
@@ -18,44 +18,36 @@
     ?>
 @stop()
 
-@section('banner')
-    @include('products.partials.promo-banner', [
-        "name" => "Drumeo Gift Card",
-        "fullPrice" => Prices::$cardMonth,
-        "price" => Prices::$cardMonth,
-        "videos" => true
-    ])
-@endsection
-
 @section('top')
-    @include('products.partials.slider', [
+    @include('drumeo.drumshop._partials.slider', [
         "headerText" => "<strong>The perfect gift for ANY drummer!</strong>",
         "videoSrc" => "//player.vimeo.com/video/495414119",
         "videoThumb" => "https://s3.amazonaws.com/drumeo-packs/Merch/pass.jpg",
     ])
 
-    @include('products.partials.sidebar', [
+    @include('drumeo.drumshop._partials.sidebar', [
+        'category' => 'lessons',
         "options" => true,
         "optionText" => "Pick Duration",
         "price" => Prices::$cardMonth,
-        "variations" => [
+        "sizes" => [
             (object)[
                 "name" => "30 Days",
                 "fullPrice" => Prices::$cardMonthFull,
                 "price" => Prices::$cardMonth,
-                "sku" => "PASS-1"
+                "code" => "PASS-1"
             ],
             (object)[
                 "name" => "6 Months",
                 "fullPrice" => Prices::$cardSix,
                 "price" => Prices::$cardSix,
-                "sku" => "PASS-6"
+                "code" => "PASS-6"
             ],
             (object)[
                 "name" => "1 Year",
                 "fullPrice" => Prices::$cardYear,
                 "price" => Prices::$cardYear,
-                "sku" => "PASS-12"
+                "code" => "PASS-12"
             ]
         ],
     ])

@@ -1,4 +1,4 @@
-@extends('products.product-layout')
+@extends('drumeo.drumshop.shop-page-layout')
 
 @section('meta')
     @parent
@@ -176,21 +176,15 @@
     ];
 @endphp
 
-@section('banner')
-    @include('products.partials.promo-banner', [
-        "name" => "The Lifetime Bundle",
-    ])
-@endsection
-
 @section('top')
-    @include('products.partials.slider', [
+    @include('drumeo.drumshop._partials.slider', [
         "headerText" => "<strong>Get A Lifetime Drumeo Membership + FREE In-Ear Headphones, An Exclusive Masterclass, And More!</strong>",
         "videoSrc" => "//player.vimeo.com/video/774477396",
         "videoThumb" => "https://drumeo-assets.s3.amazonaws.com/promos/november/practice-anywhere-thumb.jpg",
         "noSlider" => true
     ])
 
-        @include('products.partials.sidebar', [
+        @include('drumeo.drumshop._partials.sidebar', [
             "bundle" => true,
             "logo" => "https://drumeo-assets.s3.amazonaws.com/promos/november/lifetime-bundle-white.png",
             "sku" => "products[DLM-Lifetime]=1&products[drumeo-eardrums]=1&products[Drumeo-VaterSticks]=12&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[learn-songs-faster-pack]=1&products[TLOD-DIGI]=1&products[MAM-DIGI]=1&products[GHFAL-DIGI]=1&products[HGAF-DIGI]=1&products[AOADS-DIGI]=1&products[ICM-DIGI]=1&products[BTC-DIGI]=1&products[CC-DIGI]=1&products[TG-DIGI]=1&locked=true",
@@ -226,7 +220,7 @@
         <em style="opacity: 0.5;">All digital bonuses are added to your account instantly with your membership to Drumeo, and they’re yours forever.</em>
     </p>
     <br>
-    @include('products.partials.bonuses')
-    
+    @include('drumeo.drumshop._partials.bonuses')
+
     <a href="#order" class="anchor-slide join tw-inline lg:tw-hidden">Jump To Top <i class="fas fa-angle-up"></i></a>
 @endsection
