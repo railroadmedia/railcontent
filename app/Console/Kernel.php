@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\AddMissingQuietPadsForBFOrders2022;
 use App\Console\Commands\MigrateCoachesToInstructors;
 use App\Console\Commands\MigrateGuitareoUserXP;
 use App\Console\Commands\MigrateTypeBasedContentPermissionsToIdBased;
@@ -43,6 +44,7 @@ class Kernel extends ConsoleKernel
         MigrateGuitareoUserXP::class,
         RepairUserProductsFromReferral::class,
         MigrateTypeBasedContentPermissionsToIdBased::class,
+        AddMissingQuietPadsForBFOrders2022::class,
     ];
 
     /**
