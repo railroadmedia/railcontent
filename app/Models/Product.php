@@ -84,7 +84,9 @@ class Product extends Model
             $uuid = $model['uuid'];
             unset($model['uuid']);
 
-            $model['slug'] = $model->brand->name.'-'.$model['slug'];
+            if(!empty($model['slug'])){
+                $model['slug'] = $model->brand->name.'-'.$model['slug'];
+            }
 
             if(gettype($model['meta_img']) === 'object'){
                 $model['meta_img'] = $model->brand->name.'/'.$uuid.'-'.$model['meta_img']->getClientOriginalName();
