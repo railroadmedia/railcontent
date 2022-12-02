@@ -6,16 +6,8 @@ use App\Modules\Brand\Enums\Brand;
 
 Route::middleware(['web_public'])
     ->group(function () {
-        Route::get('{brand}/shop', [ProductPagesController::class, 'products'])
-            ->defaults('brand', 'singeo')
-            ->name('marketing.products');
-
-        Route::get('{brand}/shop', [ProductPagesController::class, 'products'])
-            ->defaults('brand', 'guitareo')
-            ->name('marketing.products');
-
         Route::get('{brand}/{category}', [ProductPagesController::class, 'products'])
-            ->whereIn('brand', ['pianote', 'drumeo'])
+            ->whereIn('brand', ['pianote', 'drumeo', 'singeo', 'guitareo'])
             ->whereIn('category', ['shop', 'lessons', 'accessories', 'clothing'])
             ->name('marketing.products');
 
