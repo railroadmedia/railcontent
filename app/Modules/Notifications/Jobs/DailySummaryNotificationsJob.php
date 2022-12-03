@@ -61,7 +61,7 @@ class DailySummaryNotificationsJob extends BatchQueryJob
             /** @var Collection $notifications */
             /** @var User $user */
             $user = $notifications->first()->user;
-            $isDailySummaryEnabled = $user->notifications_summary_frequency_minutes && $user->notifications_summary_frequency_minutes > 0;
+            $isDailySummaryEnabled = $user && $user->notifications_summary_frequency_minutes && $user->notifications_summary_frequency_minutes > 0;
             if (!$isDailySummaryEnabled) {
                 continue;
             }
