@@ -22,6 +22,7 @@ class NotificationService
     public function getUnreadNotifications(array $recipientIds, Carbon $startDate): Collection
     {
         return Notification::query()
+            ->with('user.notificationSettings')
             ->where('created_at', '>=', $startDate)
             ->whereIn('recipient_id', $recipientIds)
             ->whereNull('read_on')
