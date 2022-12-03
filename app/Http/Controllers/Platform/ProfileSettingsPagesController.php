@@ -450,12 +450,18 @@ class ProfileSettingsPagesController extends BaseController
         foreach ($subscriptions as $subscription) {
             $isCorrectType = $subscription->getType() == 'subscription';
 
-            $subscriptionProductId = $subscription->getProduct()->getId();
-            $productsGrantingAllContentAccessIdsOnly = ProductAccessMap::productsGrantingAllContentAccessIdsOnly();
+            $subscriptionProduct = $subscription->getProduct();
 
-            if ($isCorrectType && in_array($subscriptionProductId, $productsGrantingAllContentAccessIdsOnly)) {
-                $hasHadMembership = true;
-                $membershipSubscriptions[] = $subscription;
+            if($subscriptionProduct){
+                $subscriptionProductId = $subscriptionProduct->getId();
+                $productsGrantingAllContentAccessIdsOnly = ProductAccessMap::productsGrantingAllContentAccessIdsOnly();
+
+                if ($isCorrectType && in_array($subscriptionProductId, $productsGrantingAllContentAccessIdsOnly)) {
+                    $hasHadMembership = true;
+                    $membershipSubscriptions[] = $subscription;
+                }
+            } else {
+                error_log ('subscription ' . $subscription->getId() . ' doesn\'t have a product attached');
             }
         }
 
