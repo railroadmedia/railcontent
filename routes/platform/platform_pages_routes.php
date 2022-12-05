@@ -28,6 +28,13 @@ Route::domain('{musoraDomain}')
             ->middleware(['web_member_only'])
             ->group(function () {
                 /*
+                 * Home Page
+                 */
+                Route::get('/{brand}', [HomePageController::class, 'home'])
+                    ->whereIn('brand', all_brands())
+                    ->name('platform.home');
+
+                /*
                  * Primary Content Pages
                  */
                 Route::get('/{brand}/coaches', [CoachPagesController::class, 'coaches'])
@@ -43,7 +50,6 @@ Route::domain('{musoraDomain}')
                     ->name('platform.subscribed-lessons');
 
 
-                // singeo courses are allowed through the membership permissions inside the ExpiredMembershipMiddleware
                 Route::get('/{brand}/{contentTypeName}', [ContentPagesController::class, 'contentTypeCatalog'])
                     ->whereIn('brand', all_brands())
                     ->whereIn('contentTypeName', [
@@ -131,13 +137,6 @@ Route::domain('{musoraDomain}')
                 )
                     ->whereIn('brand', all_brands())
                     ->name('platform.content.coach.show');
-
-                Route::get(
-                    '/{brand}/coaches/{coachSlug}/{contentSlug}/{contentId}',
-                    [CoachPagesController::class, 'stream']
-                )
-                    ->whereIn('brand', all_brands())
-                    ->name('platform.coach.first-level');
 
                 /*
                  * Live & Schedule
@@ -240,12 +239,6 @@ Route::domain('{musoraDomain}')
             });
 
         // anyone even without pack or a membership can access these
-        /*
-         * Home Page
-         */
-        Route::get('/{brand}', [HomePageController::class, 'home'])
-            ->whereIn('brand', all_brands())
-            ->name('platform.home');
 
         /*
          * Redirect Helpers
@@ -331,6 +324,10 @@ Route::domain('{musoraDomain}')
         )
             ->whereIn('brand', all_brands())
             ->name('platform.semester-packs.lesson');
+
+        Route::get('/{brand}/coaches/{coachSlug}/{contentSlug}/{contentId}', [CoachPagesController::class, 'stream'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.coach.first-level');
 
         Route::get(
             '/{brand}/content/{contentId}',
@@ -427,19 +424,19 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.update-payment-method');
 
-        Route::get(
-            '/{brand}/profile/settings/cancellation-confirmed',
-            [ProfileSettingsPagesController::class, 'cancellationConfirmation']
-        )
-            ->whereIn('brand', all_brands())
-            ->name('platform.profile.settings.cancellation-confirmed');
-
         // ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
         // ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
         /*
          * Cancellation-related
          */
+        // POST accept-annual-offer
+        Route::post(
+            '/{brand}/profile/settings/account/accept-annual-offer',
+            [ProfileSettingsPagesController::class, 'acceptAnnualOffer']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.accept-annual-offer');
 
         // POST resume-paused
         Route::post(
@@ -481,27 +478,12 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.gratis-access');
 
-        // POST accept student-plan offer
-        Route::post(
-            '/{brand}/profile/settings/account/accept-pause-offer',
-            [ProfileSettingsPagesController::class, 'acceptPauseOffer']
-        )
-            ->whereIn('brand', all_brands())
-            ->name('platform.profile.settings.accept-pause-offer');
-
         Route::post(
             '/{brand}/profile/settings/account/send-help-email',
             [ProfileSettingsPagesController::class, 'sendHelpEmail']
         )
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.send-help-email');
-
-        Route::post(
-            '/{brand}/profile/settings/account/decline-offer-proceed-with-cancel',
-            [ProfileSettingsPagesController::class, 'declineOfferProceedWithCancel']
-        )
-            ->whereIn('brand', all_brands())
-            ->name('platform.profile.settings.decline-offer-proceed-with-cancel');
 
 
         // GET cancel-reason-form
@@ -512,85 +494,13 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.cancel');
 
-
-        // email preview routes (a la https://laravel.com/docs/9.x/mail#previewing-mailables-in-the-browser)
-        Route::get('/mailable-preview-to-student', function () {
-            $mailable = new App\Mail\Agnostic();
-            $mailable->to(user()->email);
-            $mailable->from('system@musora.com');
-            $mailable->replyTo('team@musora.com');
-            $mailable->subject('[Important] Your cancellation request has been received.');
-            $mailable->view('emails.cancellation-notice-to-student');
-
-            return $mailable;
-        });
-
-//        // email preview routes (a la https://laravel.com/docs/9.x/mail#previewing-mailables-in-the-browser)
-        Route::get('/mailable-preview-how-can-we-help', function () {
-            $mailable = new App\Mail\Agnostic();
-            $mailable->to(user()->email);
-            $mailable->from('system@musora.com');
-            $mailable->replyTo('team@musora.com');
-            $mailable->subject('[Important] Your cancellation request has been received.');
-            $mailable->view('emails.how-can-we-help');
-
-            $helpIssueText = 'I need more direction';
-            $textInput = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras urna felis, tincidunt eu ' .
-                'tincidunt vitae, tempor sed metus. Ut ut augue vitae nisi fermentum condimentum. Donec sagittis ' .
-                'tincidunt ipsum, consectetur posuere neque rhoncus eget. Maecenas vel nibh dui. Etiam vel quam ' .
-                'lectus. In sagittis lacinia purus, a rhoncus magna vulputate nec. ';
-
-            $mailable->with([
-                'studentId' => user()->id,
-                'studentEmail' => user()->email,
-                'helpIssueText' => $helpIssueText, // ex: "I need more direction"
-                'textInput' => $textInput,
-            ]);
-
-            return $mailable;
-        });
-
-        Route::get('/mailable-preview-to-staff', function () {
-
-            $cancellationReasonOptions = config('cancellation.reason-map');
-            $optionsCount = count($cancellationReasonOptions) - 1;
-            $cancellationReasonOptionsKeys = array_keys($cancellationReasonOptions);
-            $cancellationReasonOptionsValues = array_values($cancellationReasonOptions);
-            $selection = rand(0,$optionsCount);
-
-            $cancellationReasonOptionsKey = $cancellationReasonOptionsKeys[$selection];
-            $cancellationReasonOptionsValue = $cancellationReasonOptionsValues[$selection];
-            $cancellationReasonDetailsLoremIpsumOptions = [
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas finibus ' .
-                'condimentum tortor.',
-                'In sit amet metus commodo, laoreet felis a, molestie est. Integer euismod nibh ' .
-                'ac risus semper pulvinar. Nunc bibendum quis sapien a pretium. Aenean tincidunt sed velit non ' .
-                'pharetra.',
-                'Vivamus ornare ac lorem eget malesuada. Nam efficitur iaculis arcu, at porta odio commodo ' .
-                'nec. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nulla facilisi. Vestibulum id ' .
-                'luctus dolor. Etiam non elit consequat, mollis odio et, euismod diam. Aenean ac eros a velit ornare ' .
-                'sollicitudin et in urna. Cras nec sodales odio, nec condimentum nisl. Fusce urna leo, tristique ' .
-                'placerat molestie vel, laoreet vel nisi.',
-            ];
-
-            $mailable = new App\Mail\Agnostic();
-            $mailable->to('support+cancellations@musora.com');
-            $mailable->from('system@musora.com');
-            $mailable->subject('Cancellation notice: ' . user()->getEmail());
-            $mailable->view('emails.cancellation-notice-to-staff');
-            $mailable->with([
-                'userEmail' => user()->getEmail(),
-                'userId' => user()->getId(),
-                'cancellationReasonKey' => $cancellationReasonOptionsKey,
-                'cancellationReasonValue' => $cancellationReasonOptionsValue,
-                'cancellationReasonDetails' => rand(0,1) ? $cancellationReasonDetailsLoremIpsumOptions[rand(0,2)] : '',
-            ]);
-
-            return $mailable;
-        });
-
-
-
+        // GET win-back
+        Route::post(
+            '/{brand}/profile/settings/account/win-back',
+            [ProfileSettingsPagesController::class, 'winBack']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.win-back');
 
         // - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -
         // (end of cancellation-related)
@@ -714,6 +624,13 @@ Route::domain('{musoraDomain}')
         Route::get('/{brand}/contact', [SupportController::class, 'contact'])
             ->whereIn('brand', all_brands())
             ->name('platform.contact');
+
+        Route::post(
+            '/{brand}/songs',
+            [\Railroad\Railcontent\Controllers\RequestedSongsJsonController::class, 'requestSong']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.request-song');
     });
 
 Route::get(
