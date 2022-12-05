@@ -64,7 +64,6 @@ class CreateSongsDecember2022 extends Command
                     'brand' => $row[0],
                     'published_on' => '2022-12-02 00:00:00',
                     'language' => 'en-US',
-                    'xp' => $row[6],
                     'instrumentless' => $row[13]
                 ],
                 [
@@ -119,6 +118,18 @@ class CreateSongsDecember2022 extends Command
                 [
                     'type' => 'integer',
                     'value' => $row[5],
+                ]
+            );
+            $this->updateOrInsertAndGetFirst(
+                'railcontent_content_fields',
+                [
+                    'content_id' => $content->id,
+                    'key' => 'xp',
+                    'position' => 1,
+                ],
+                [
+                    'type' => 'integer',
+                    'value' => $row[6],
                 ]
             );
             foreach (explode(', ', $row[4]) as $styleIndex => $style) {
