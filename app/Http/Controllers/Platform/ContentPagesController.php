@@ -244,7 +244,7 @@ class ContentPagesController extends BaseController
             auth()->id()
         );
 
-        if ($primaryPage == 'songs' && $brand == 'drumeo') {
+        if ($primaryPage == 'songs') {
             return $this->drumeoSongPage($request, $domain, $brand, $primaryPage, $firstSlug, $firstId);
         }
 
