@@ -1,3 +1,32 @@
+@php
+    $bundles = [
+        [
+            'slug' => '/shop/bundle-unlimited-lessons',
+            'badgeText' => '$861 IN FREE BONUSES',
+            'img' => 'https://pianote.s3.amazonaws.com/sales/promos/november/unlimited-lessons-shop-2.jpg',
+            'title' => 'Pianote Membership + 15 Bonuses',
+            'desc' => 'Pianote Annual Membership<br class="hidden-sm hidden-md"> + 4 Books + 2 Posters + 9 Training Packs',
+            'price' => 1101,
+            'discountedPrice' => PianotePrices::$pianoteMembershipAnnualRegular,
+            'priceColor' => 'linear-gradient(to bottom, #e91b3a, #64010f)',
+            'buttonColor' => 'linear-gradient(to bottom, #e91b3a, #64010f)',
+            'visible' => 1,
+        ],
+        [
+            'slug' => '/shop/bundle-9-yards',
+            'badgeText' => 'SAVE 82%',
+            'img' => 'https://pianote.s3.amazonaws.com/sales/promos/november/the-whole-9-yards-header.jpg',
+            'title' => '9 Discounted Courses',
+            'desc' => 'Pay once and get lifetime <br class="hidden-sm hidden-md">access to 9 courses.',
+            'price' => 716,
+            'discountedPrice' => 127,
+            'priceColor' => 'linear-gradient(to bottom, #5aba4e, #139646)',
+            'buttonColor' => 'linear-gradient(to bottom, #5aba4e, #139646)',
+            'visible' => 1,
+        ],
+    ];
+@endphp
+
 @extends('pianote._partials.global-layout')
 
 @section('global-head')
@@ -156,8 +185,8 @@
                 @include('_partials.layout.holiday.shop-page-banner',[
                     'text' => 'Save up to 83% on lessons,<br class="inline md:hidden"> accessories, and merch.'
                 ])
-{{--                <img class="logo" src="https://pianote.s3.amazonaws.com/shop/pianote-shop-logo.png" alt="pianote logo">--}}
-{{--                <h3 style="margin-top: 20px;">GET LESSONS, MERCH, <br class="inline md:hidden"> GEAR & MORE!</h3>--}}
+                {{--                <img class="logo" src="https://pianote.s3.amazonaws.com/shop/pianote-shop-logo.png" alt="pianote logo">--}}
+                {{--                <h3 style="margin-top: 20px;">GET LESSONS, MERCH, <br class="inline md:hidden"> GEAR & MORE!</h3>--}}
             </div>
         </div>
     </header>
@@ -194,9 +223,32 @@
     ])
     <div class="white-box">
 
+        @include('_partials.layout.holiday.bundle-cards')
+
+        <section class="bundles">
+            <div class="container mx-auto">
+                <div class="w-full card-wrap mb-5">
+                    <a href="/shop/book-bundle/" class="w-full {{--py-20 sm:py-28 lg:py-40--}} py-5 lg:py-8 px-4 sm:px-6 lg:px-20 banner-product overflow-hidden bg-cover bg-center sm:bg-right" style="background-color:#ca1176;background-image:url(https://cdn.musora.com/image/fetch/w_2500,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/november/just-the-books-shop-no-classic.jpg);">
+                        <span class="top-left-badge text-white bg-promo z-10"><i class="fas fa-star"></i> SAVE {{ round(100 - (100 * (59 / 145))) }}%</span>
+                        <div class="text-wrap relative z-10">
+                            <img class="h-24 lg:h-32 relative z-10" src="https://cdn.musora.com/image/fetch/w_1600,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/november/just-the-books-bundle-white.png">
+                            <p class="my-2">
+                                Chords & Scales Book + Practice Planner + Christmas<br class="hidden sm:inline">
+                                Songbook + Chords Poster + Scales Poster</p>
+                            <h4 class="inline-block leading-none"><strong>
+                                    <s class="opacity-60">$145</s>&nbsp; ${{ PianotePrices::$bundleBook }}</strong></h4><br>
+                            <span class="join smaller mt-2 lg:mt-3" style="background-color:#000;">See The Deal &raquo;</span>
+                        </div>
+                        {{--                <div class="absolute top-0 left-0 right-0 bottom-0 z-0 hidden md:block" style="background:linear-gradient(to right, rgba(18,139,165,0.4) 25%, #003643);"></div>--}}
+                        <div class="absolute top-0 left-0 right-0 bottom-0 z-0 block md:hidden" style="background:linear-gradient(to bottom, rgba(203,19,117,0.5), #7100a1);"></div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
         {{--    LESSONS    --}}
         <section class="grid-view category-section" data-category="lessons">
-            <ul class="container mx-auto fixed-cards">
+            <ul class="container mx-auto fixed-cards text-center">
                 <li>
                     <h1 class="float-left px-2 md:px-3 w-full">
                         <div class="heading-icon"><i class="fas fa-video"></i></div>
@@ -205,21 +257,21 @@
                 </li>
 
                 @foreach($lessons as $lesson){
-                    @include('pianote.shop._partials._shop-card', [
-                            "sku" => $lesson->sku === 'drumeo' || $lesson->sku === 'pianote' || $lesson->sku === 'singeo' || $lesson->sku === 'guitareo' ? null : $lesson->sku,
-                            "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $lesson->slug ),
-                            "thumbnail" => $lesson->thumbnail,
-                            "packLogo" => $lesson->thumbnail_logo,
-                            "title" => $lesson->name,
-                            "packAuthor" => $lesson->instructor_name,
-                            "cardDescription" => $lesson->short_desc,
-                            "fullPrice" => $lesson->price,
-                            "price" => $lesson->discounted_price === '0.00' || empty($lesson->discounted_price) ? $lesson->price : $lesson->discounted_price,
-                            "category" => strtolower($lesson->productType->name),
-                            "soldOut" => $lesson->sold_out,
-                            "includedMembership" => $lesson->included_edge,
-                            "badgeText" => $lesson->badge_text,
-                    ])
+                @include('pianote.shop._partials._shop-card', [
+                        "sku" => $lesson->sku === 'drumeo' || $lesson->sku === 'pianote' || $lesson->sku === 'singeo' || $lesson->sku === 'guitareo' ? null : $lesson->sku,
+                        "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $lesson->slug ),
+                        "thumbnail" => $lesson->thumbnail,
+                        "packLogo" => $lesson->thumbnail_logo,
+                        "title" => $lesson->name,
+                        "packAuthor" => $lesson->instructor_name,
+                        "cardDescription" => $lesson->short_desc,
+                        "fullPrice" => $lesson->price,
+                        "price" => $lesson->discounted_price === '0.00' || empty($lesson->discounted_price) ? $lesson->price : $lesson->discounted_price,
+                        "category" => strtolower($lesson->productType->name),
+                        "soldOut" => $lesson->sold_out,
+                        "includedMembership" => $lesson->included_edge,
+                        "badgeText" => $lesson->badge_text,
+                ])
                 }
                 @endforeach
             </ul>
@@ -235,19 +287,19 @@
                     </h1>
                 </li>
                 @foreach($accessories as $accessory){
-                    @include('pianote.shop._partials._shop-card', [
-                            "sku" => $accessory->sku,
-                            "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $accessory->slug ),
-                            "thumbnail" => $accessory->thumbnail,
-                            "badgeText" => $accessory->badge_text,
-                            "title" => $accessory->name,
-                            "cardDescription" => $accessory->short_desc,
-                            "fullPrice" => $accessory->price,
-                            "price" => $accessory->discounted_price === '0.00' || empty($accessory->discounted_price) ? $accessory->price : $accessory->discounted_price,
-                            "category" => strtolower($accessory->productType->name),
-                            "soldOut" => $accessory->sold_out,
-                            "size_case_sensitive" => $accessory->size_case_sensitive,
-                    ])
+                @include('pianote.shop._partials._shop-card', [
+                        "sku" => $accessory->sku,
+                        "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $accessory->slug ),
+                        "thumbnail" => $accessory->thumbnail,
+                        "badgeText" => $accessory->badge_text,
+                        "title" => $accessory->name,
+                        "cardDescription" => $accessory->short_desc,
+                        "fullPrice" => $accessory->price,
+                        "price" => $accessory->discounted_price === '0.00' || empty($accessory->discounted_price) ? $accessory->price : $accessory->discounted_price,
+                        "category" => strtolower($accessory->productType->name),
+                        "soldOut" => $accessory->sold_out,
+                        "size_case_sensitive" => $accessory->size_case_sensitive,
+                ])
                 }
                 @endforeach
             </ul>
@@ -263,20 +315,20 @@
                     </h1>
                 </li>
                 @foreach($shirts as $shirt){
-                    @include('pianote.shop._partials._shop-card', [
-                        "sku" => $shirt->sku,
-                        "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $shirt->slug ),
-                        "thumbnail" => $shirt->thumbnail,
-                        "badgeText" => $shirt->badge_text,
-                        "title" => $shirt->name,
-                        "cardDescription" => $shirt->short_desc,
-                        "fullPrice" => $shirt->price,
-                        "price" => $shirt->discounted_price === '0.00' || empty($shirt->discounted_price) ? $shirt->price : $shirt->discounted_price,
-                        "category" => strtolower($shirt->productType->name),
-                        "sizes" => $shirt->sizes,
-                        "soldOut" => $shirt->sold_out,
-                        "size_case_sensitive" => $shirt->size_case_sensitive,
-                    ])
+                @include('pianote.shop._partials._shop-card', [
+                    "sku" => $shirt->sku,
+                    "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $shirt->slug ),
+                    "thumbnail" => $shirt->thumbnail,
+                    "badgeText" => $shirt->badge_text,
+                    "title" => $shirt->name,
+                    "cardDescription" => $shirt->short_desc,
+                    "fullPrice" => $shirt->price,
+                    "price" => $shirt->discounted_price === '0.00' || empty($shirt->discounted_price) ? $shirt->price : $shirt->discounted_price,
+                    "category" => strtolower($shirt->productType->name),
+                    "sizes" => $shirt->sizes,
+                    "soldOut" => $shirt->sold_out,
+                    "size_case_sensitive" => $shirt->size_case_sensitive,
+                ])
                 }
                 @endforeach
             </ul>
@@ -292,20 +344,20 @@
                     </h1>
                 </li>
                 @foreach($hoodies as $hoodie){
-                    @include('pianote.shop._partials._shop-card', [
-                        "sku" => $hoodie->sku,
-                        "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hoodie->slug ),
-                        "thumbnail" => $hoodie->thumbnail,
-                        "badgeText" => $hoodie->badge_text,
-                        "title" => $hoodie->name,
-                        "cardDescription" => $hoodie->short_desc,
-                        "fullPrice" => $hoodie->price,
-                        "price" => $hoodie->discounted_price === '0.00' || empty($hoodie->discounted_price) ? $hoodie->price : $hoodie->discounted_price,
-                        "category" => strtolower($hoodie->productType->name),
-                        "sizes" => $hoodie->sizes,
-                        "soldOut" => $hoodie->sold_out,
-                        "size_case_sensitive" => $hoodie->size_case_sensitive,
-                    ])
+                @include('pianote.shop._partials._shop-card', [
+                    "sku" => $hoodie->sku,
+                    "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hoodie->slug ),
+                    "thumbnail" => $hoodie->thumbnail,
+                    "badgeText" => $hoodie->badge_text,
+                    "title" => $hoodie->name,
+                    "cardDescription" => $hoodie->short_desc,
+                    "fullPrice" => $hoodie->price,
+                    "price" => $hoodie->discounted_price === '0.00' || empty($hoodie->discounted_price) ? $hoodie->price : $hoodie->discounted_price,
+                    "category" => strtolower($hoodie->productType->name),
+                    "sizes" => $hoodie->sizes,
+                    "soldOut" => $hoodie->sold_out,
+                    "size_case_sensitive" => $hoodie->size_case_sensitive,
+                ])
                 }
                 @endforeach
 
@@ -419,3 +471,4 @@
 
     @include('pianote.shop._partials._promo-countdown')
 @stop
+

@@ -6,7 +6,7 @@
 {{--    }--}}
 {{--@endphp--}}
 
-<div class="side-bar sliding-function px-3 md:px-4 lg:px-4 lg:w-1/3 lg:mt-5">
+<div class="side-bar sliding-function px-3 md:px-4 lg:px-4 lg:w-1/3 lg:mt-5 mb-4 lg:mb-0">
     <div class="lg:h-0">
     <div id="order" class="anchor"></div>
     <div class="side-slide overflow-hidden md:rounded border border-solid" style="border-color: #CCD3D3;">
@@ -102,7 +102,7 @@
                 <a class="text-guitareo" href="tel:1-604-855-7605">1-604-855-7605</a>. </p>
         </div>
         @if($guaranteeBadge)
-            <div class="flex justify-center items-center px-5 py-2 text-center md:pt-2 md:pt-4 md:pb-6 lg:p-5 lg:-mt-1 lg:mx-auto lg:mb-0 border-t" style="border-color: #CCD3D3; border-top-style: solid;">
+            <div class="flex justify-center items-center px-5 py-2 text-center md:pt-2 md:pt-4 md:pb-6 lg:p-5 lg:-mt-1 lg:mx-auto border-t" style="border-color: #CCD3D3; border-top-style: solid;">
                 <img class="w-24 my-0 pr-6" src="https://cdn.musora.com/image/fetch/w_220,q_auto:best/https://guitareo.s3.amazonaws.com/sales/2021/guarantee-badge.png">
                 <p class="text-xs font-bold text-left my-0 text-guitareo">Your entire order is backed by<br class="lg:hidden" /> our 90-Day Money Back <br class="lg:hidden" /> Guarantee.</p>
             </div>

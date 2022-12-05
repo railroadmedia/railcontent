@@ -83,7 +83,7 @@
         </div>
         <a class="join promo my-3 md:my-4 w-full max-w-xs md:max-w-lg lg:max-w-xl" href="{{ $annualLink }}">GET Started &raquo;</a>
         <br>
-        <a class="memcta monthly-alt text-light-navy" href="/ecommerce/add-to-cart?products[singeo-monthly-recurring-membership]=1&redirect=/order&locked=true" dusk="order-monthly"><p><u><em>Or start a monthly membership for <br class="inline sm:hidden">${{ App\Prices::$singeoMembershipMonthly }}/month. (no bonuses)</em></u></p></a>
+        <a class="memcta monthly-alt text-light-navy" href="/ecommerce/add-to-cart?products[singeo-monthly-recurring-membership]=1&redirect=/order&locked=true" dusk="order-monthly"><p><u><em>Or start a monthly membership for <br class="inline sm:hidden">${{ SingeoPrices::$singeoMembershipMonthly }}/month. (no bonuses)</em></u></p></a>
     </div>
 </section>
 </div>

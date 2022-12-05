@@ -6,7 +6,7 @@
 {{--    }--}}
 {{--@endphp--}}
 
-<div class="shop-sidebar sliding-function px-3 md:px-4 lg:px-4 lg:w-1/3 lg:mt-5">
+<div class="shop-sidebar sliding-function px-3 md:px-4 lg:px-4 lg:w-1/3 lg:mt-5 mb-4 lg:mb-0">
     <div class="lg:h-0">
     <div id="order" class="anchor"></div>
     <div class="side-slide md:border md:border-solid md:rounded-md" style="border-color: #CCD3D3;">
