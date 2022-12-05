@@ -63,7 +63,6 @@ class CreateSongsDecember2022 extends Command
                     'status' => 'published',
                     'brand' => $row[0],
                     'published_on' => '2022-12-02 00:00:00',
-                    'name'=> "daaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
                     'language' => 'en-US',
                     'xp' => $row[6],
                     'instrumentless' => $row[13]
