@@ -3,11 +3,12 @@ name: musora-web-platform
 environments:
     production:
         domain:
-            - 'musora.com'
-            - 'drumeo.com'
-            - 'pianote.com'
-            - 'guitareo.com'
-            - 'singeo.com'
+# uncomment for marketing migration launch
+#            - 'musora.com'
+#            - 'drumeo.com'
+#            - 'pianote.com'
+#            - 'guitareo.com'
+#            - 'singeo.com'
             - 'production.musora.com'
             - 'production.drumeo.com'
             - 'production.pianote.com'
