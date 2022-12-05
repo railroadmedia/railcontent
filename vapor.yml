@@ -3,8 +3,8 @@ name: musora-web-platform
 environments:
     production:
         domain:
+            - 'musora.com'
 # uncomment for marketing migration launch
-#            - 'musora.com'
 #            - 'drumeo.com'
 #            - 'pianote.com'
 #            - 'guitareo.com'
