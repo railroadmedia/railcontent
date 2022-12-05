@@ -1,16 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=5">
+@extends('musora._partials.layout')
+
+@section('head-includes')
     <title>Access Pass Redeem | Drumeo</title>
     <meta name="description" content="To redeem your access pass enter your code below!">
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/js/foundation.min.js"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(
             function () {
@@ -35,10 +31,8 @@
             }
         );
     </script>
-    @include('musora._partials._favicon')
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation-float.min.css"/>
-    <link href="{{ asset('/assets/members-area/css/gulp/navigation-sales.css') }}" rel="stylesheet">
-    {{-- @include('drumeo._partials._fonts') --}}
     <style>
         .tipsy { font-size: 10px; position: absolute; padding: 5px; z-index: 100000; }
         .tipsy-inner { background-color: #000; color: #FFF; max-width: 200px; padding: 5px 8px 4px 8px; text-align: center; }
@@ -255,75 +249,20 @@
 
         @media only screen and (min-width:64em) {
             #content {
-                padding:80px 25px;
+                padding:50px 25px;
             }
         }
     </style>
-</head>
-<body>
-    @include('_partials.layout.global-header', [
-        "theme_bg" => "bg-musora",
-        "theme_text" => "text-musora",
-        "logo" => "https://musora-ui.s3.amazonaws.com/logos/musora-white.svg",
-        "links" => [
-            "Home" => [
-                "iconClass" => "fas fa-home",
-                "url" => "/",
-            ],
-            "Member Login" => [
-                "iconClass" => "fas fa-sign-in",
-                "url" => "/members",
-            ],
-            "Contact" => [
-                "iconClass" => "fas fa-phone",
-                "url" => get_legacy_brand_base_url("musora").'/contact',
-            ],
-            "Careers" => [
-                "iconClass" => "fas fa-users",
-                "url" => '/careers',
-            ],
-            "About" => [
-                "iconClass" => "fas fa-question",
-                "url" => '/about',
-            ],
-            "Ambassador Program" => [
-                "iconClass" => "fas fa-comment-dollar",
-                "url" => '/ambassador',
-            ],
-            "Brand Guides" => [
-                "iconClass" => "fas fa-pencil-paintbrush",
-                "url" => '/brand',
-            ],
-        ],
-        "external_links" => [
-            "Drumeo" => [
-                "iconClass" => "fas fa-external-link",
-                "themeClass" => "text-musora",
-                "url" => get_legacy_brand_base_url("drumeo")
-            ],
-            "Pianote" => [
-                "iconClass" => "fas fa-external-link",
-                "themeClass" => "text-musora",
-                "url" => get_legacy_brand_base_url("pianote")
-            ],
-            "Guitareo" => [
-                "iconClass" => "fas fa-external-link",
-                "themeClass" => "text-musora",
-                "url" => get_legacy_brand_base_url("guitareo")
-            ],
-            "Singeo" => [
-                "iconClass" => "fas fa-external-link",
-                "themeClass" => "text-musora",
-                "url" => get_legacy_brand_base_url("singeo")
-            ]
-        ]
-    ])
+@endsection
+
+<!-- Main -->
+@section('layout-body')
     <div id="content">
         @yield('title')
-        <div class="flex-video widescreen vimeo">
+        <div class="flex-video widescreen vimeo border-2 rounded-xl overflow-hidden">
             @yield('video')
         </div>
-
+        <p class="redeem-switcher text-left"><i class="fal fa-info-circle"></i> Although the card is for Drumeo, this card will give you full access to Drumeo, Pianote, Guitareo, and Singeo.</p>
         {{-- @if($newAccount)
             @if(empty($noSwitch))
                 <div class="redeem-switcher text-white rounded-xl py-4" style="background:#00060B;">
@@ -353,12 +292,10 @@
             ** If you enter the email of an account that already has an existing valid subscription, your subscription will be extended based on the time associated with your card.
         </p>
         <p class="help-message">
-            ** If you enter a new email address, a Drumeo account will be created for you and your new password will be emailed to you shortly after claiming your card. 
+            ** If you enter a new email address, a Drumeo account will be created for you and your new password will be emailed to you shortly after claiming your card.
         </p>
         <p class="help-message">
             ** Your Access Page may look like it’s only for Drumeo, but this pass will give you access to all four of our communities: Drumeo, Pianote, Guitareo, and Singeo!
         </p>
     </div>
-    @include("musora._partials._footer")
-</body>
-</html>
+@endsection

@@ -61,7 +61,7 @@
                     <div class="text-center pb-5 sm:pb-6 lg:pb-7">
                         <div class="clearfix">
                             <div class="w-full">
-                                <div class="text-xl md:text-3xl lg:text-4xl leading-none font-bold">The perfect gift for ANY musician!</div>
+                                <div class="text-xl md:text-3xl lg:text-4xl leading-none font-black">The perfect gift for ANY musician!</div>
                             </div>
                         </div>
                     </div>
@@ -75,7 +75,7 @@
                     </div>
                 </div>
             </div>
-            <div class="side-bar sliding-function lg:px-4 lg:w-1/3 px-3 md:px-4 mt-2 mb-4 lg:mb-0">
+            <div class="side-bar sliding-function lg:px-4 lg:w-1/3 px-3 md:px-4 md:pt-9 md:mt-2 lg:pt-11 lg:mt-5">
                 <div class="lg:h-0">
                 <div id="order" class="anchor"></div>
                     <div class="side-slide overflow-hidden rounded border border-solid" style="border-color: #CCD3D3;">
@@ -106,14 +106,14 @@
                                 @endif
                                 @if(!empty($lockedCart)) data-locked-cart="{{ $lockedCart }}" @endif
                             >
-                                <button class="join border-none">
+                                <button class="join border-none mt-2 mb-4 w-full" style="background: #000;font: 400 20px/1em 'Bebas Neue', sans-serif !important;">
                                     <i class="fas fa-cart-plus text-2xl mr-1"></i> Add To Cart
                                 </button>
                             </a>
                             <p class="italic text-center mx-auto my-0 text-xs">
                                 You can also order by phone toll-free at<br class="hidden sm:inline">
                                 <a href="tel:1-800-439-8921">1-800-439-8921</a> or directly at
-                                <a href="tel:1-604-855-7605">1-604-855-7605</a>. 
+                                <a href="tel:1-604-855-7605">1-604-855-7605</a>.
                             </p>
                         </div>
                     </div>
