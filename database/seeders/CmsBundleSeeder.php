@@ -400,6 +400,78 @@ And you’ll get 2 big color posters to hang in your practice space for easy and
                 ],
             ],
             [
+                'brand' => 2,
+                'product_type_id' => 6,
+                'name' => 'The Whole 9 Yards Cyber Bundle',
+                'slug' => 'bundle-9-yards',
+                'sku' => 'products[the-power-of-chords]=1&products[classical-piano]=1&products[jesus-molina-improvisation-and-musical-freedom-pack]=1&products[play-beautiful-piano]=1&products[piano-riffs-and-fills]=1&products[piano-technique-made-easy]=1&products[destupefy-your-left-hand]=1&products[worship-piano]=1&products[faster-fingers]=1&locked=true',
+                'meta_desc' => 'Everything You Need. The Whole 9 Yards',
+                'meta_img' => 'https://pianote.s3.amazonaws.com/sales/promos/november/whole-9-yards-fb-share-image.jpg',
+                'price' => 716,
+                'discounted_price' => 127,
+                'special_text' => '',
+                'page_logo' => 'https://pianote.s3.amazonaws.com/sales/promos/november/the-whole-9-yards-bundle-black.png',
+                'header_text' => 'Everything You Need. The Whole 9 Yards',
+                'video_src' => '//player.vimeo.com/video/774401637',
+                'spread' => 'https://pianote.s3.amazonaws.com/sales/promos/november/the-whole-9-yards-spread.png',
+                'images' => [
+
+                ],
+                'overview' => 'All the courses, none of the commitment. The Whole 9 Yards Cyber Bundle is your complete guide to learning the piano without a membership.
+
+Pay once and get lifetime access to 9 courses. You’ll learn how to play beautiful chords, classical piano, amazing improvisation, boost your speed, and more.',
+                'sold_out' => false,
+                'guaranteed' => true,
+                'free_shipping' => false,
+                'products' => [
+                    [
+                        'name' => 'Piano Chords & Scales',
+                        'free_bonus' => false,
+                        'lifetime_access' => true,
+                    ],
+                    [
+                        'name' => 'Classical Piano',
+                        'free_bonus' => false,
+                        'lifetime_access' => true,
+                    ],
+                    [
+                        'name' => 'Improvisation & Musical Freedom',
+                        'free_bonus' => false,
+                        'lifetime_access' => true,
+                    ],
+                    [
+                        'name' => 'Playing Beautiful Piano',
+                        'free_bonus' => false,
+                        'lifetime_access' => true,
+                    ],
+                    [
+                        'name' => 'Piano Riffs & Fills',
+                        'free_bonus' => false,
+                        'lifetime_access' => true,
+                    ],
+                    [
+                        'name' => 'Piano Technique Made Easy',
+                        'free_bonus' => false,
+                        'lifetime_access' => true,
+                    ],
+                    [
+                        'name' => 'De-Stupefy Your Left Hand',
+                        'free_bonus' => false,
+                        'lifetime_access' => true,
+                    ],
+                    [
+                        'name' => 'Worship Piano',
+                        'free_bonus' => false,
+                        'lifetime_access' => true,
+                    ],
+                    [
+                        'name' => 'Faster Fingers',
+                        'free_bonus' => false,
+                        'lifetime_access' => true,
+                    ],
+                ],
+            ],
+            [
                 'brand' => 3,
                 'product_type_id' => 6,
                 'name' => 'The Build A Song Bundle',

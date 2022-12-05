@@ -1647,7 +1647,6 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                 "header_text" => "",
                 "price" => 47,
                 "discounted_price" => 0,
-                'badge_text' => 'new',
                 "features" => [
 
                 ],

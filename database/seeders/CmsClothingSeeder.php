@@ -1774,7 +1774,7 @@ class CmsClothingSeeder extends Seeder
                         "desc" => "Hooded Sweatshirt With Front Pouch Pocket"
                     ],
                 ],
-                "visible" => false,
+                "visible" => true,
                 "sold_out" => false,
                 "guaranteed" => false,
                 "lifetime_access" => false,
@@ -1822,7 +1822,7 @@ class CmsClothingSeeder extends Seeder
                         "desc" => "Lavender"
                     ],
                 ],
-                "visible" => false,
+                "visible" => true,
                 "sold_out" => false,
                 "guaranteed" => false,
                 "lifetime_access" => false,
