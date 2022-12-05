@@ -71,10 +71,6 @@ class PackPagesController extends Controller
     {
         ContentRepository::$pullFutureContent = true;
 
-        if (user()->isAMember()) {
-            ContentRepository::$bypassPermissions = true;
-        }
-
         AddedToPrimaryPlaylistDecorator::$skip = true;
         PackDecorator::$skip = true;
         LessonAssignmentDecorator::$skip = true;
@@ -116,15 +112,11 @@ class PackPagesController extends Controller
     public function packBundles(Request $request, $domain, $brand, $packSlug, $packId)
     {
         ContentRepository::$pullFutureContent = true;
-
-        if (user()->isAMember()) {
-            ContentRepository::$bypassPermissions = true;
-        }
-
+        
         Decorator::$typeDecoratorsEnabled = false;
         ContentRepository::$pullFilterResultsOptionsAndCount = false;
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
-
+        
         $pack = $this->contentService->getById($packId);
 
         if (empty($pack)) {
@@ -199,10 +191,6 @@ class PackPagesController extends Controller
         $packBundleId
     ) {
         ContentRepository::$pullFutureContent = true;
-
-        if (user()->isAMember()) {
-            ContentRepository::$bypassPermissions = true;
-        }
 
         Decorator::$typeDecoratorsEnabled = false;
         ContentRepository::$pullFilterResultsOptionsAndCount = false;
@@ -316,12 +304,8 @@ class PackPagesController extends Controller
                 [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED, ContentService::STATUS_SCHEDULED];
         }
 
-        if (user()->isAMember()) {
-            ContentRepository::$bypassPermissions = true;
-        }
-
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
-
+        
         $pack =
             $this->contentService->getBySlugAndType($packSlug, 'pack')
                 ->first();
@@ -429,10 +413,6 @@ class PackPagesController extends Controller
         } else {
             ContentRepository::$availableContentStatues =
                 [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED];
-        }
-
-        if (user()->isAMember()) {
-            ContentRepository::$bypassPermissions = true;
         }
 
         $pack =
@@ -595,10 +575,6 @@ class PackPagesController extends Controller
         } else {
             ContentRepository::$availableContentStatues =
                 [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED];
-        }
-
-        if (user()->isAMember()) {
-            ContentRepository::$bypassPermissions = true;
         }
 
         Decorator::$typeDecoratorsEnabled = false;
