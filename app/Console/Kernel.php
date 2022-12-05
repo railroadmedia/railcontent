@@ -33,18 +33,12 @@ class Kernel extends ConsoleKernel
         SeedLiveAndScheduledContent::class,
         PopulateNewRolesAndPermissionsTables::class,
         PopulateUserRolesTable::class,
-        RunMWPPhaseOneLaunchMigrations::class,
-        MigrateCoachesToInstructors::class,
         PopulateUserBrandLevel::class,
         RepairVimeoDurations::class,
         PopulateUserTotalXpPerBrand::class,
         PopulateUserMinutesPracticedPerBrand::class,
         VaporEnvManager::class,
         TestLessonsDescriptionUrls::class,
-        MigrateGuitareoUserXP::class,
-        RepairUserProductsFromReferral::class,
-        MigrateTypeBasedContentPermissionsToIdBased::class,
-        AddMissingQuietPadsForBFOrders2022::class,
     ];
 
     /**
