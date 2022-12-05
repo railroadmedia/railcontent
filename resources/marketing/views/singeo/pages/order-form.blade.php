@@ -44,7 +44,7 @@
                 theme-color="singeo"
                 brand="singeo"
                 :cart="{{ json_encode($cart) }}"
-                cart-data-url='{{ get_musora_brand_base_url() }}/ecommerce/json/cart'
+                cart-data-url='{{ get_musora_brand_base_url() }}'
                 :billing-address="{{ json_encode($billingAddress) }}"
                 :shipping-address="{{ json_encode($shippingAddress) }}"
                 :user="{{ json_encode($user) }}"

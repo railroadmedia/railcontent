@@ -155,7 +155,7 @@ export default {
     },
     beforeMount() {
         //Fetch Cart Data
-        axios.get(this.cartDataUrl)
+        axios.get(this.cartDataUrl + '/ecommerce/json/cart')
             .then(response => {
                 this.cartData = response.data;
             }
