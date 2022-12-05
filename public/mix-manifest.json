@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
     "/platform/js/app.js": "/platform/js/app.js?id=754cf11a4d0996e55e1e6bad403ecd9d",
+=======
+    "/platform/js/app.js": "/platform/js/app.js?id=804d39cba6e336b8bf0cf9dbffe17ef3",
+>>>>>>> project-pianote-song-tutorial
     "/platform/js/profile.js": "/platform/js/profile.js?id=c7e869f012d1252699ff65de1e5e0547",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=24098ec7990ff98a565fd1e4693746ed",
     "/platform/js/books.js": "/platform/js/books.js?id=d4fa837307a14d7ee0ce9065b5e5e8e0",
@@ -14,9 +18,10 @@
     "/platform/js/contact-email-form-marketing.js": "/platform/js/contact-email-form-marketing.js?id=109bb788583adbc91ceb161791b41296",
     "/platform/js/contact-email-form.js": "/platform/js/contact-email-form.js?id=09a6d3c24fba18cbd45317b7dc0e11ce",
     "/platform/js/youtube-player-component.js": "/platform/js/youtube-player-component.js?id=b5d474a024f0422948fbee3748f1c852",
-    "/platform/js/onboarding-component.js": "/platform/js/onboarding-component.js?id=34cca85d86abce0afda7577bdf2a72f0",
+    "/platform/js/onboarding-component.js": "/platform/js/onboarding-component.js?id=58d53f40f27afa89fa76c13fea48920e",
     "/platform/js/video-player-component.js": "/platform/js/video-player-component.js?id=42ac626b3aae4f21c97bc717e60bafb2",
     "/platform/js/video-media-element-component.js": "/platform/js/video-media-element-component.js?id=ffbfa58d2ae773a874c5d0a27076917f",
+<<<<<<< HEAD
     "/platform/js/image-cropper-component.js": "/platform/js/image-cropper-component.js?id=62541793dafd0e2bd3476cdcadbaf5d6",
     "/platform/js/comments-component.js": "/platform/js/comments-component.js?id=9834ded5764da76e660671d59b136a39",
     "/platform/js/email-form-component.js": "/platform/js/email-form-component.js?id=30c222662e6d3c2a837f8311b829f7c6",
@@ -26,4 +31,14 @@
     "/marketing/css/app.css": "/marketing/css/app.css?id=2ff3f98ee868b56117b26333bd4969f7",
     "/platform/js/vendor.js": "/platform/js/vendor.js?id=8470bd0ac3b709473a42f62d3c5ef0d8",
     "/platform/js/song-request.js": "/platform/js/song-request.js?id=40b8bb5b0f4e6434f4fb3a06a412f675"
+=======
+    "/platform/js/image-cropper-component.js": "/platform/js/image-cropper-component.js?id=d8e4ffb070f05d53478bd161da77aaef",
+    "/platform/js/comments-component.js": "/platform/js/comments-component.js?id=c97622829315716994dd31cf71602ce6",
+    "/platform/js/email-form-component.js": "/platform/js/email-form-component.js?id=30c222662e6d3c2a837f8311b829f7c6",
+    "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=baa63b59a97d479cbba506095c5a0b76",
+    "/platform/css/app.css": "/platform/css/app.css?id=6758c32b13fa53ce0a970aaddb76d388",
+    "/platform/js/vendor~onboarding.js": "/platform/js/vendor~onboarding.js?id=2fe324477737000918331b15a0aa89ec",
+    "/marketing/css/app.css": "/marketing/css/app.css?id=2ff3f98ee868b56117b26333bd4969f7",
+    "/platform/js/vendor.js": "/platform/js/vendor.js?id=8470bd0ac3b709473a42f62d3c5ef0d8"
+>>>>>>> project-pianote-song-tutorial
 }

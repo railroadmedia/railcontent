@@ -2,8 +2,11 @@
 
 namespace App\Console;
 
+use App\Console\Commands\AddMissingQuietPadsForBFOrders2022;
 use App\Console\Commands\MigrateCoachesToInstructors;
 use App\Console\Commands\MigrateGuitareoUserXP;
+use App\Console\Commands\MigrateTypeBasedContentPermissionsToIdBased;
+use App\Console\Commands\MigratePianoteSongTutorial;
 use App\Console\Commands\PopulateNewRolesAndPermissionsTables;
 use App\Console\Commands\PopulateUserBrandLevel;
 use App\Console\Commands\PopulateUserMinutesPracticedPerBrand;
@@ -40,7 +43,10 @@ class Kernel extends ConsoleKernel
         VaporEnvManager::class,
         TestLessonsDescriptionUrls::class,
         MigrateGuitareoUserXP::class,
-        RepairUserProductsFromReferral::class
+        RepairUserProductsFromReferral::class,
+        MigrateTypeBasedContentPermissionsToIdBased::class,
+        AddMissingQuietPadsForBFOrders2022::class,
+        MigratePianoteSongTutorial::class,
     ];
 
     /**
@@ -52,10 +58,21 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('ProcessTrackings')->everyMinute();
-        $schedule->command('content:rebuildSearchIndexes')->dailyAt('2:00');
+
         $schedule->command('forums:rebuildSearchIndexes')->hourly();
+
         $schedule->command('notifications:dailySummary')->dailyAt('12:00');
+
+        $schedule->command('content:rebuildSearchIndexes')->dailyAt('2:00');
         $schedule->command('content:updatePopularity')->cron('0 */8 * * *'); //every 8 hours
+        $schedule->command('content:CreateVimeoVideoContentRecords', [50])->everyThirtyMinutes();
+        $schedule->command('content:CreateYoutubeVideoContentRecordsViaClientAPI', [1])->cron("0 */6 * * *");
+
+        $schedule->command('ecommerce:renewalDueSubscriptions')->cron("15 */8 * * *"); // every 8 hours
+
+        $schedule->command('mentors:verify')->daily();
+        //temporary measure to assign mentors until ecommerce is integrated with MWP
+        $schedule->command('mentors:assign')->hourly();
     }
 
     /**

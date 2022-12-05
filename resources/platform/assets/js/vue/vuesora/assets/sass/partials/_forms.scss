@@ -286,10 +286,10 @@
   }
   body.tw-dark & {
     input[type="radio"]:checked ~ .toggle {
-      background-color:#445F74;
+      background-color:#002039;
     }
     .toggle {
-      background-color:#c2c2c2;
+      background-color:#223F57;
     }
   }
 }
@@ -371,11 +371,15 @@
   body.tw-dark & {
     input[type="checkbox"] {
       &:checked ~ .toggle {
-        background-color:#445F74;
+        background-color:#002039;
       }
     }
     .toggle {
-      background-color:#c2c2c2;
+      background-color:#223F57;
+      &:after, 
+      &:before {
+        color: #9EC0DC;
+      }
     }
   }
 }

@@ -15076,10 +15076,10 @@ input[type=text].bg-light.inverted,
   z-index: 1;
 }
 body.tw-dark .radio-input input[type=radio]:checked ~ .toggle {
-  background-color: #445F74;
+  background-color: #002039;
 }
 body.tw-dark .radio-input .toggle {
-  background-color: #c2c2c2;
+  background-color: #223F57;
 }
 
 .toggle-input {
@@ -15148,10 +15148,13 @@ body.tw-dark .radio-input .toggle {
   transition: transform 0.2s ease-in-out;
 }
 body.tw-dark .toggle-input input[type=checkbox]:checked ~ .toggle {
-  background-color: #445F74;
+  background-color: #002039;
 }
 body.tw-dark .toggle-input .toggle {
-  background-color: #c2c2c2;
+  background-color: #223F57;
+}
+body.tw-dark .toggle-input .toggle:after, body.tw-dark .toggle-input .toggle:before {
+  color: #9EC0DC;
 }
 
 textarea {
@@ -21622,14 +21625,6 @@ a:visited{
   margin-top: 0.75rem !important;
   margin-bottom: 0.75rem !important;
 }
-.tw-my-1{
-  margin-top: 0.25rem !important;
-  margin-bottom: 0.25rem !important;
-}
-.tw-my-8{
-  margin-top: 2rem !important;
-  margin-bottom: 2rem !important;
-}
 .tw-mx-2{
   margin-left: 0.5rem !important;
   margin-right: 0.5rem !important;
@@ -21641,6 +21636,14 @@ a:visited{
 .tw-my-6{
   margin-top: 1.5rem !important;
   margin-bottom: 1.5rem !important;
+}
+.tw-mx-4{
+  margin-left: 1rem !important;
+  margin-right: 1rem !important;
+}
+.tw-my-8{
+  margin-top: 2rem !important;
+  margin-bottom: 2rem !important;
 }
 .tw-mx-1{
   margin-left: 0.25rem !important;
@@ -21662,9 +21665,9 @@ a:visited{
   margin-top: 7px !important;
   margin-bottom: 7px !important;
 }
-.tw-mx-4{
-  margin-left: 1rem !important;
-  margin-right: 1rem !important;
+.tw-my-1{
+  margin-top: 0.25rem !important;
+  margin-bottom: 0.25rem !important;
 }
 .tw-my-5{
   margin-top: 1.25rem !important;
@@ -21772,14 +21775,20 @@ a:visited{
 .tw-ml-6{
   margin-left: 1.5rem !important;
 }
-.tw-mt-6{
-  margin-top: 1.5rem !important;
-}
 .tw-mt-1{
   margin-top: 0.25rem !important;
 }
+.tw-mt-6{
+  margin-top: 1.5rem !important;
+}
 .tw-mb-\[-2px\]{
   margin-bottom: -2px !important;
+}
+.tw-mb-10{
+  margin-bottom: 2.5rem !important;
+}
+.tw-mb-12{
+  margin-bottom: 3rem !important;
 }
 .tw-mt-24{
   margin-top: 6rem !important;
@@ -21862,6 +21871,7 @@ a:visited{
 .tw-mt-\[58px\]{
   margin-top: 58px !important;
 }
+<<<<<<< HEAD
 .tw-mr-\[8px\]{
   margin-right: 8px !important;
 }
@@ -21874,6 +21884,8 @@ a:visited{
 .tw-mb-10{
   margin-bottom: 2.5rem !important;
 }
+=======
+>>>>>>> project-pianote-song-tutorial
 .tw-mr-0\.5{
   margin-right: 0.125rem !important;
 }
@@ -21888,9 +21900,6 @@ a:visited{
 }
 .tw-mb-1\.5{
   margin-bottom: 0.375rem !important;
-}
-.tw-mb-12{
-  margin-bottom: 3rem !important;
 }
 .tw-ml-\[14px\]{
   margin-left: 14px !important;
@@ -22488,6 +22497,9 @@ a:visited{
 .tw-max-w-screen-md{
   max-width: 768px !important;
 }
+.tw-max-w-\[257px\]{
+  max-width: 257px !important;
+}
 .tw-max-w-\[267px\]{
   max-width: 267px !important;
 }
@@ -22788,6 +22800,9 @@ a:visited{
 .tw-gap-2{
   gap: 0.5rem !important;
 }
+.tw-gap-4{
+  gap: 1rem !important;
+}
 .tw-gap-0{
   gap: 0px !important;
 }
@@ -22796,9 +22811,6 @@ a:visited{
 }
 .tw-gap-6{
   gap: 1.5rem !important;
-}
-.tw-gap-4{
-  gap: 1rem !important;
 }
 .tw-gap-x-4{
   -moz-column-gap: 1rem !important;
@@ -22892,6 +22904,9 @@ a:visited{
 .tw-rounded{
   border-radius: 0.25rem !important;
 }
+.tw-rounded-md{
+  border-radius: 0.375rem !important;
+}
 .tw-rounded-xl{
   border-radius: 0.75rem !important;
 }
@@ -22912,9 +22927,6 @@ a:visited{
 }
 .tw-rounded-\[63px\]{
   border-radius: 63px !important;
-}
-.tw-rounded-md{
-  border-radius: 0.375rem !important;
 }
 .tw-rounded-\[5px\]{
   border-radius: 5px !important;
@@ -22951,17 +22963,19 @@ a:visited{
 .tw-border-4{
   border-width: 4px !important;
 }
-.tw-border-\[2px\]{
-  border-width: 2px !important;
-}
 .tw-border-\[1px\]{
   border-width: 1px !important;
 }
 .tw-border-\[0\.5px\]{
   border-width: 0.5px !important;
 }
+<<<<<<< HEAD
 .tw-border-\[1px\]{
   border-width: 1px !important;
+=======
+.tw-border-\[2px\]{
+  border-width: 2px !important;
+>>>>>>> project-pianote-song-tutorial
 }
 .tw-border-b{
   border-bottom-width: 1px !important;
@@ -23049,13 +23063,13 @@ a:visited{
   --tw-border-opacity: 1 !important;
   border-color: rgb(209 213 219 / var(--tw-border-opacity)) !important;
 }
-.tw-border-black{
-  --tw-border-opacity: 1 !important;
-  border-color: rgb(0 0 0 / var(--tw-border-opacity)) !important;
-}
 .tw-border-\[\#445F74\]{
   --tw-border-opacity: 1 !important;
   border-color: rgb(68 95 116 / var(--tw-border-opacity)) !important;
+}
+.tw-border-black{
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(0 0 0 / var(--tw-border-opacity)) !important;
 }
 .tw-border-\[\#D4D4D8\]{
   --tw-border-opacity: 1 !important;
@@ -23198,6 +23212,14 @@ a:visited{
 }
 .tw-bg-transparent{
   background-color: transparent !important;
+}
+.tw-bg-\[\#e5e7eb\]{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity)) !important;
+}
+.tw-bg-\[\#102230\]{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(16 34 48 / var(--tw-bg-opacity)) !important;
 }
 .tw-bg-black\/40{
   background-color: rgb(0 0 0 / 0.4) !important;
@@ -23344,6 +23366,9 @@ a:visited{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(228 228 231 / var(--tw-bg-opacity)) !important;
 }
+.tw-bg-black\/80{
+  background-color: rgb(0 0 0 / 0.8) !important;
+}
 .tw-bg-gray-100{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity)) !important;
@@ -23473,6 +23498,9 @@ a:visited{
 .tw-p-8{
   padding: 2rem !important;
 }
+.tw-p-6{
+  padding: 1.5rem !important;
+}
 .tw-p-3{
   padding: 0.75rem !important;
 }
@@ -23490,9 +23518,6 @@ a:visited{
 }
 .tw-p-2{
   padding: 0.5rem !important;
-}
-.tw-p-6{
-  padding: 1.5rem !important;
 }
 .tw-p-1{
   padding: 0.25rem !important;
@@ -23557,10 +23582,6 @@ a:visited{
   padding-top: 0.5rem !important;
   padding-bottom: 0.5rem !important;
 }
-.tw-px-12{
-  padding-left: 3rem !important;
-  padding-right: 3rem !important;
-}
 .tw-px-3{
   padding-left: 0.75rem !important;
   padding-right: 0.75rem !important;
@@ -23581,6 +23602,17 @@ a:visited{
   padding-top: 4rem !important;
   padding-bottom: 4rem !important;
 }
+<<<<<<< HEAD
+=======
+.tw-px-12{
+  padding-left: 3rem !important;
+  padding-right: 3rem !important;
+}
+.tw-px-\[16px\]{
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+}
+>>>>>>> project-pianote-song-tutorial
 .tw-py-\[13px\]{
   padding-top: 13px !important;
   padding-bottom: 13px !important;
@@ -23981,8 +24013,8 @@ a:visited{
 .tw-text-\[44px\]{
   font-size: 44px !important;
 }
-.tw-text-\[60px\]{
-  font-size: 60px !important;
+.tw-text-\[50px\]{
+  font-size: 50px !important;
 }
 .tw-text-\[10px\]{
   font-size: 10px !important;
@@ -24007,6 +24039,9 @@ a:visited{
 }
 .tw-font-extrabold{
   font-weight: 800 !important;
+}
+.tw-font-black{
+  font-weight: 900 !important;
 }
 .tw-font-extralight{
   font-weight: 200 !important;
@@ -24070,6 +24105,9 @@ a:visited{
 }
 .tw-leading-\[26px\]{
   line-height: 26px !important;
+}
+.tw-tracking-wide{
+  letter-spacing: 0.025em !important;
 }
 .tw-tracking-widest{
   letter-spacing: 0.1em !important;
@@ -24142,9 +24180,17 @@ a:visited{
   --tw-text-opacity: 1 !important;
   color: rgb(220 38 38 / var(--tw-text-opacity)) !important;
 }
+.tw-text-\[\#000C17\]{
+  --tw-text-opacity: 1 !important;
+  color: rgb(0 12 23 / var(--tw-text-opacity)) !important;
+}
 .tw-text-gray-400{
   --tw-text-opacity: 1 !important;
   color: rgb(156 163 175 / var(--tw-text-opacity)) !important;
+}
+.tw-text-red-500{
+  --tw-text-opacity: 1 !important;
+  color: rgb(239 68 68 / var(--tw-text-opacity)) !important;
 }
 .tw-text-\[\#001017\]{
   --tw-text-opacity: 1 !important;
@@ -24233,10 +24279,6 @@ a:visited{
   --tw-text-opacity: 1 !important;
   color: rgb(25 27 28 / var(--tw-text-opacity)) !important;
 }
-.tw-text-\[\#000C17\]{
-  --tw-text-opacity: 1 !important;
-  color: rgb(0 12 23 / var(--tw-text-opacity)) !important;
-}
 .tw-text-gray-200{
   --tw-text-opacity: 1 !important;
   color: rgb(229 231 235 / var(--tw-text-opacity)) !important;
@@ -24252,10 +24294,6 @@ a:visited{
 .tw-text-green-500{
   --tw-text-opacity: 1 !important;
   color: rgb(34 197 94 / var(--tw-text-opacity)) !important;
-}
-.tw-text-red-500{
-  --tw-text-opacity: 1 !important;
-  color: rgb(239 68 68 / var(--tw-text-opacity)) !important;
 }
 .tw-text-blue-500{
   --tw-text-opacity: 1 !important;
@@ -24600,6 +24638,9 @@ a:visited{
 .hover\:tw-bg-black\/10:hover{
   background-color: rgb(0 0 0 / 0.1) !important;
 }
+.hover\:tw-bg-\[\#445F74\]\/60:hover{
+  background-color: rgb(68 95 116 / 0.6) !important;
+}
 .hover\:tw-bg-\[\#F5F5F6\]:hover{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(245 245 246 / var(--tw-bg-opacity)) !important;
@@ -24704,6 +24745,9 @@ a:visited{
 }
 .tw-group:hover .group-hover\:tw-opacity-100{
   opacity: 1 !important;
+}
+.tw-peer:checked ~ .peer-checked\:tw-bg-\[\#445F74\]\/60{
+  background-color: rgb(68 95 116 / 0.6) !important;
 }
 .tw-dark .dark\:tw-right-0{
   right: 0px !important;
@@ -25133,14 +25177,14 @@ a:visited{
   .sm\:tw-flex-grow{
     flex-grow: 1 !important;
   }
+  .sm\:tw-grid-cols-2{
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
   .sm\:tw-grid-cols-1{
     grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
   }
   .sm\:tw-grid-cols-3{
     grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-  }
-  .sm\:tw-grid-cols-2{
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   }
   .sm\:tw-flex-row{
     flex-direction: row !important;
@@ -25342,9 +25386,6 @@ a:visited{
   .md\:tw-mb-4{
     margin-bottom: 1rem !important;
   }
-  .md\:tw-ml-24{
-    margin-left: 6rem !important;
-  }
   .md\:tw-mr-2{
     margin-right: 0.5rem !important;
   }
@@ -25473,6 +25514,9 @@ a:visited{
   }
   .md\:tw-w-full{
     width: 100% !important;
+  }
+  .md\:tw-w-56{
+    width: 14rem !important;
   }
   .md\:tw-w-5\/6{
     width: 83.333333% !important;
@@ -25943,6 +25987,9 @@ a:visited{
   }
   .lg\:tw-max-w-\[50\%\]{
     max-width: 50% !important;
+  }
+  .lg\:tw-max-w-\[600px\]{
+    max-width: 600px !important;
   }
   .lg\:tw-max-w-xl{
     max-width: 36rem !important;

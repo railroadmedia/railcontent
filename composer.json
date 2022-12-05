@@ -29,7 +29,7 @@
         "railroad/ecommerce": "^5.0",
         "railroad/location": "3.0.*",
         "railroad/mailora": "^3.0",
-        "railroad/musora-api": "dev-v2.0-railcontent-v2-integration",
+        "railroad/musora-api": "dev-project-pianote-song-tutorial",
         "railroad/points": "1.0.*",
         "railroad/railanalytics": "v3.0.*",
         "railroad/railchat": "2.0.*",

@@ -74,6 +74,8 @@
             </app-container>
         </div>
 
+        @include('partials._brand-set-authentication-cookies-iframe')
+
         {{-- Scripts --}}
         <script type="application/javascript">
             window.sidebarNavigationLinks = {!! $sidebarNavigationSectionsJson ?? '' !!};
