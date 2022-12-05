@@ -266,7 +266,7 @@
         "all" => true
     ])
 
-    {{--  LESSONS  --}}
+
     <div class="white-box">
         @include('_partials.layout.holiday.bundle-cards')
         <section class="bundles">
@@ -289,6 +289,9 @@
                 </div>
             </div>
         </section>
+
+        {{--  LESSONS  --}}
+
         <section class="grid-view category-section" data-category="lessons" x-show="filter === 'lessons' || filter === 'all'">
             <ul class="container mx-auto fixed-cards">
                 <li>

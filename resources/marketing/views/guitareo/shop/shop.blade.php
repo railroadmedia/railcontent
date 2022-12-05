@@ -258,9 +258,8 @@
     @endif
     <div class="white-box">
         @include('_partials.layout.holiday.bundle-cards')
-
         <section class="grid-view category-section" data-category="lessons">
-            <ul class="container mx-auto fixed-cards">
+            <ul class="container mx-auto fixed-cards text-center">
                 @foreach($products as $product){
                 @include('guitareo.shop._partials._shop-card', [
                     "sku" => $product->sku,
