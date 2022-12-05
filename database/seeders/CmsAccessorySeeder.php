@@ -1704,7 +1704,7 @@ The Guitareo Survival Guide is perfect for adding a little fun while navigating 
                 ],
             ],
             "visible" => true,
-            "sold_out" => true,
+            "sold_out" => false,
             "guaranteed" => false,
             "lifetime_access" => false,
             "free_shipping" => false,
