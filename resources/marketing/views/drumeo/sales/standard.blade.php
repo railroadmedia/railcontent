@@ -97,5 +97,83 @@
 @endsection
 
 @section('final')
-     @include("drumeo.sales.partials._subscribe-options")
+{{--     @include("drumeo.sales.partials._subscribe-options")--}}
+    @include('_partials.layout.holiday.homepage-bottom-membership',[
+        'logo' => 'https://drumeo-assets.s3.amazonaws.com/promos/november/drumeo-annual-card.jpg',
+        'joinText' => '<strong>Join Drumeo for just $.'.round(Prices::$drumeoEdgeAnnual / 12, 2).'/month</strong> <br class="hidden sm:inline"><strong class="text-promo">PLUS</strong> get 10 free bonuses worth $1228.94.',
+        'annualLink' => '/laravel/public/shopping-cart/api/query?products[DLM]=1,year,1&products[quietpad]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[GHFAL-DIGI]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[learn-songs-faster-pack]=1&locked=true',
+        'bonusNum' => 10,
+        'tileWidth' => 'w-1/2 md:w-1/4 lg:w-1/5',
+        'bonuses' => [
+                    [
+                        'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/pad.jpg',
+                        'title' => 'QuietPad',
+                        'description' => 'Practice anywhere with two full-size playing surfaces.',
+                        'price' => Prices::$quietPadFull,
+                        'shipping' => true,
+                    ],
+                    [
+                        'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/drumsticks.jpg',
+                        'title' => 'Drumeo Drumsticks',
+                        'description' => 'Drumeo 5A Drumsticks by Vater -- made with hickory and extra moisture to last longer.',
+                        'price' => Prices::$sticksFull,
+                        'shipping' => true,
+                    ],
+                    [
+                        'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/sd.jpg',
+                        'title' => 'Successful Drumming',
+                        'description' => 'Jared Falk’s step-by-step curriculum for building a rock-solid foundation on the drums.',
+                        'price' => Prices::$sdOnlineFull,
+                        'online-ship' => "Instant Access"
+                    ],
+                    [
+                        'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/ime.jpg',
+                        'title' => 'Independence Made Easy',
+                        'description' => 'Jared Falk’s 26-week masterclass to unlock your musicality and freedom on the drums.',
+                        'price' => Prices::$imeFull,
+                        'online-ship' => "Instant Access"
+                    ],
+                    [
+                        'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/rdm.jpg',
+                        'title' => 'Rock Drumming Masterclass',
+                        'description' => 'Todd Sucherman’s 26-week masterclass to help you improve your rock drumming.',
+                        'price' => Prices::$rdmFull,
+                        'online-ship' => "Instant Access"
+                    ],
+                    [
+                        'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/dtme.jpg',
+                        'title' => 'Drum Technique Made Easy',
+                        'description' => 'Bruce Becker’s 26-week masterclass to improve your hand & foot technique.',
+                        'price' => Prices::$dtmeFull,
+                    ],
+                    [
+                        'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/eyd.jpg',
+                        'title' => 'Electrify Your Drumming',
+                        'description' => 'Your guide to playing 10 styles of electronic dance music - includes 23 play-alongs!',
+                        'price' => Prices::$eydFull,
+                        'online-ship' => "Instant Access"
+                    ],
+                    [
+                        'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/fwtbdf.jpg',
+                        'title' => 'Better Drum Fills',
+                        'description' => 'The ultimate four-week crash course to playing more creative & musical drum fills.',
+                        'price' => Prices::$bdfFull,
+                        'online-ship' => "Instant Access"
+                    ],
+                    [
+                        'image' => 'https://cdn.musora.com/image/fetch/c_fill,w_300,q_auto:good/https://drumeo-assets.s3.amazonaws.com/promos/july/tommy_card.jpg',
+                        'title' => 'Great Hands For A Lifetime',
+                        'description' => 'Tommy Igoe helps you improve your hand strength, speed, stamina, comfort, and control in the drums in four hours of video lessons.',
+                        'price' => Prices::$ghfalFull,
+                    ],
+                    [
+                        'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/lsf.jpg',
+                        'title' => 'Learn Songs Faster',
+                        'description' => 'This masterclass will give you proven techniques for learning MORE songs in less time.',
+                        'price' => Prices::$learnSongsFasterFull,
+                        'online-ship' => "Instant Access"
+                    ],
+                ],
+        'monthlyLink' => '/laravel/public/shopping-cart/api/query?products[DLM]=1,month,1&locked=true'
+    ])
 @endsection

@@ -130,7 +130,7 @@
                 <a class="w-full md:w-1/2 join smaller outline md:order-2" href="/shop">SHOP ALL DEALS &raquo;</a>
 
                 <div class="w-full md:w-1/2 md:pr-2 mt-3 md:mt-0 relative">
-                    {{--                    <div class="absolute bottom-0 left-1/2 text-black rounded-full py-0.5 px-2 -my-2.5 -ml-10 select-none bg-promo"><p class="text-xs leading-none select-none"><strong>SAVE {{ round(100 - (100 * (\App\Prices::$guitareoMembershipAnnual / \App\Prices::$guitareoMembershipAnnualFull))) }}%</strong></p></div>--}}
+                    {{--                    <div class="absolute bottom-0 left-1/2 text-black rounded-full py-0.5 px-2 -my-2.5 -ml-10 select-none bg-promo"><p class="text-xs leading-none select-none"><strong>SAVE {{ round(100 - (100 * (GuitareoPrices::$guitareoMembershipAnnual / GuitareoPrices::$guitareoMembershipAnnualFull))) }}%</strong></p></div>--}}
                     <a class="w-full join white smaller anchor-slide" href="#customize-anchor">JOIN GUITAREO &raquo;</a>
                 </div>
             </div>
@@ -176,7 +176,59 @@
 @endsection
 
 @section('final')
-    @include("sales.partials._subscribe-options")
+{{--    @include("sales.partials._subscribe-options")--}}
+    @include('_partials.layout.holiday.homepage-bottom-membership',[
+        'logo' => 'https://guitareo.s3.amazonaws.com/sales/promos/black-friday/bundles/ultimate/annual.jpg',
+        'joinText' => '<strong>Join Guitareo for just ${{  round(GuitareoPrices::$guitareoMembershipAnnual / 12, 2) }}/month</strong> <br class="hidden sm:inline"><strong class="text-promo">PLUS</strong> get 6 free bonuses worth $924.',
+        'annualLink' => '/ecommerce/add-to-cart?products[GUITAREO-1-YEAR-MEMBERSHIP]=1&products[guitarists-survival-kit]=1&products[guitar-quest]=1&products[rhythm-and-groove]=1&products[GUITAR-SYSTEM]=1&products[AGME-JAN-2019-SEMESTER]=1&products[GTME-OCT-2018-SEMESTER]=1&redirect=/order&locked=true',
+        'bonusNum' => 6,
+        'tileWidth' => 'w-1/2 sm:w-1/3',
+        'bonuses' => [
+                        [
+                            'image' => 'https://guitareo.s3.amazonaws.com/sales/promos/november/survival-kit-narrow-card-sale-site.jpg',
+                            'title' => 'Survival Kit',
+                            'description' => 'Electric Strings, Acoustic Strings, String Pro-Winder, 10 Assorted Picks, Tuner, Chord & Scales Book, and more!',
+                            'price' => GuitareoPrices::$survivalKitFull,
+                            'online-ship' => "Free Shipping"
+                        ],
+                        [
+                            'image' => 'https://guitareo.s3.amazonaws.com/sales/promos/black-friday/bundles/ultimate/gq.jpg',
+                            'title' => 'GuitarQuest',
+                            'description' => 'Skip the boring stuff and start having fun! Your journey starts here.',
+                            'price' => GuitareoPrices::$guitarQuestFull,
+                            'online-ship' => "Lifetime Access"
+                        ],
+                        [
+                            'image' => 'https://guitareo.s3.amazonaws.com/sales/promos/black-friday/bundles/ultimate/gs.jpg',
+                            'title' => 'The Guitar System',
+                            'description' => 'Transform your guitar playing with the ultimate encyclopedia of guitar lessons.',
+                            'price' => GuitareoPrices::$guitarSystemFull,
+                            'online-ship' => "Lifetime Access"
+                        ],
+                        [
+                            'image' => 'https://guitareo.s3.amazonaws.com/sales/promos/black-friday/bundles/ultimate/gtme.jpg',
+                            'title' => 'Guitar Technique Made Easy',
+                            'description' => 'Learn the most important guitar techniques and reach total guitar freedom.',
+                            'price' => GuitareoPrices::$GTMEFull,
+                            'online-ship' => "Lifetime Access"
+                        ],
+                        [
+                            'image' => 'https://guitareo.s3.amazonaws.com/sales/promos/black-friday/bundles/ultimate/agme.jpg',
+                            'title' => 'Acoustic Guitar Made Easy',
+                            'description' => 'Build a rock-solid foundation and get started on the acoustic guitar the right way.',
+                            'price' => GuitareoPrices::$AGMEFull,
+                            'online-ship' => "Lifetime Access"
+                        ],
+                        [
+                            'image' => 'https://guitareo.s3.amazonaws.com/sales/promos/black-friday/rhythm_groove_cart.jpg',
+                            'title' => 'Rhythm & Groove',
+                            'description' => 'Go beyond simple strumming on the guitar.',
+                            'price' => GuitareoPrices::$rhythmAndGrooveFull,
+                            'online-ship' => "Lifetime Access"
+                        ],
+                    ],
+        'monthlyLink' => '/ecommerce/add-to-cart?products[GUITAREO-1-MONTH-MEMBERSHIP]=1&redirect=/order&locked=true'
+    ])
 @endsection
 
 {{--@section('start-button', '/choose-your-trial/')--}}
