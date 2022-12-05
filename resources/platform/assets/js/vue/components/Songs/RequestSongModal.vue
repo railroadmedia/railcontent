@@ -15,12 +15,12 @@ const emit = defineEmits(['onCloseModal']);
             <form accept-charset="UTF-8" method="POST">
                 <div class="tw-flex tw-flex-col tw-mb-[20px]">
                     <InputLabel inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D]" :brand="brand" inputType="text"
-                        id="inputSongName" inputName="songName" labelValue="Song Name" placeholder="Enter the song name..."
+                        id="inputSongName" inputName="song_name" labelValue="Song Name" placeholder="Enter the song name..."
                         :inputErrors="[]" @onChange="handleEmailChange" />
                 </div>
                 <div class="tw-flex tw-flex-col tw-mb-[20px]">
                     <InputLabel inputOverride="tw-w-full tw-h-[50px] tw-text-[#00101D]" :brand="brand" inputType="text"
-                        id="inputSongArtist" inputName="artistName" labelValue="Artist Name"
+                        id="inputSongArtist" inputName="artist_name" labelValue="Artist Name"
                         placeholder="Enter the artist name..." :inputErrors="[]" @onChange="handleEmailChange" />
                 </div>
                 <div class="tw-flex tw-flex-col tw-mb-[20px]">
