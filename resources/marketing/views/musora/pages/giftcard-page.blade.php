@@ -1,34 +1,22 @@
 @php
     $variations = [
             (object)[
-                "name" => "Small",
-                "fullPrice" => 22,
-                "price" => 22,
-                "sku" => "ind4000-retro-hoodie-S"
+                "name" => "1 Month",
+                "fullPrice" => 29,
+                "price" => 29,
+                "sku" => "PASS-1"
             ],
             (object)[
-                "name" => "Medium",
-                "fullPrice" => 22,
-                "price" => 22,
-                "sku" => "ind4000-retro-hoodie-M"
+                "name" => "6 Month",
+                "fullPrice" => 127,
+                "price" => 127,
+                "sku" => "PASS-6"
             ],
             (object)[
-                "name" => "Large",
-                "fullPrice" => 22,
-                "price" => 22,
-                "sku" => "ind4000-retro-hoodie-L"
-            ],
-            (object)[
-                "name" => "X-Large",
-                "fullPrice" => 22,
-                "price" => 22,
-                "sku" => "ind4000-retro-hoodie-XL"
-            ],
-            (object)[
-                "name" => "XX-Large",
-                "fullPrice" => 22,
-                "price" => 22,
-                "sku" => "ind4000-retro-hoodie-XXL"
+                "name" => "1 Year",
+                "fullPrice" => 240,
+                "price" => 240,
+                "sku" => "PASS-12"
             ],
         ];
 @endphp
@@ -98,13 +86,7 @@
                             <a
                                 class="online-atc merch vue-add-to-cart selected-pack"
                                 href="#"
-                                @if(!empty($promoCode))
-                                data-base-url="/laravel/public/shopping-cart/api/query?go-back-to-shop=true&promo-code={{$promoCode}}"
-                                data-promocode="{{ $promoCode }}"
-                                @else
                                 data-base-url="/laravel/public/shopping-cart/api/query?go-back-to-shop=true"
-                                @endif
-                                @if(!empty($lockedCart)) data-locked-cart="{{ $lockedCart }}" @endif
                             >
                                 <button class="join border-none mt-2 mb-4 w-full" style="background: #000;font: 400 20px/1em 'Bebas Neue', sans-serif !important;">
                                     <i class="fas fa-cart-plus text-2xl mr-1"></i> Add To Cart
