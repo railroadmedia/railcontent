@@ -228,59 +228,59 @@
         </div>
     @endif
     <div class="white-box">
-        <section class="bundles">
-            <div class="container mx-auto">
-                <div class="float-left w-full px-2 md:px-3 md:w-1/2 card-wrap">
-                    <a href="/sound-better-bundle" class="bundle-card">
-                        <span class="top-left-badge text-white bg-promo"><i class="fas fa-star"></i> FREE GUITAR GEAR</span>
-                        <div class="bg-center bg-cover pb-40 sm:pb-56 xl:pb-72" style="background-image:url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://guitareo.s3.amazonaws.com/sales/promos/black-friday/sound-better-thumb-no-play.jpg);"></div>
-                        <div class="float-left w-full px-2 md:px-3">
-                            <p><strong>Guitareo Membership + 6 Bonuses</strong><br><br>
-                                <em>
-                                    Annual Guitareo Membership <br class="inline md:hidden lg:inline">
-                                    + The Guitarist’s Survival Kit + 5 Training Packs<br></em>
-                                <strong class="price"><s class="opacity-30">$1164</s>&nbsp; <span class="linear-green">${{ \App\Prices::$guitareoMembershipAnnual }}</span></strong>
-                            </p>
-                            <span class="join max-w-md" style="background:linear-gradient(180deg, #00C9AC 0%, #16414A 100%);">See The Deal &raquo;</span>
-                        </div>
-                    </a>
-                </div>
+{{--        <section class="bundles">--}}
+{{--            <div class="container mx-auto">--}}
+{{--                <div class="float-left w-full px-2 md:px-3 md:w-1/2 card-wrap">--}}
+{{--                    <a href="/sound-better-bundle" class="bundle-card">--}}
+{{--                        <span class="top-left-badge text-white bg-promo"><i class="fas fa-star"></i> FREE GUITAR GEAR</span>--}}
+{{--                        <div class="bg-center bg-cover pb-40 sm:pb-56 xl:pb-72" style="background-image:url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://guitareo.s3.amazonaws.com/sales/promos/black-friday/sound-better-thumb-no-play.jpg);"></div>--}}
+{{--                        <div class="float-left w-full px-2 md:px-3">--}}
+{{--                            <p><strong>Guitareo Membership + 6 Bonuses</strong><br><br>--}}
+{{--                                <em>--}}
+{{--                                    Annual Guitareo Membership <br class="inline md:hidden lg:inline">--}}
+{{--                                    + The Guitarist’s Survival Kit + 5 Training Packs<br></em>--}}
+{{--                                <strong class="price"><s class="opacity-30">$1164</s>&nbsp; <span class="linear-green">${{ \App\Prices::$guitareoMembershipAnnual }}</span></strong>--}}
+{{--                            </p>--}}
+{{--                            <span class="join max-w-md" style="background:linear-gradient(180deg, #00C9AC 0%, #16414A 100%);">See The Deal &raquo;</span>--}}
+{{--                        </div>--}}
+{{--                    </a>--}}
+{{--                </div>--}}
 
-                <div class="float-left w-full px-2 md:px-3 md:w-1/2 card-wrap">
-                    <a href="/build-a-song" class="bundle-card">
-                        <span class="top-left-badge text-white bg-promo"><i class="fas fa-star"></i> 87% OFF</span>
-                        <div class="bg-center bg-cover pb-40 sm:pb-56 xl:pb-72" style="background-image:url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://guitareo.s3.amazonaws.com/sales/promos/black-friday/build-a-song-fb-share-image.jpg);"></div>
-                        <div class="float-left w-full px-2 md:px-3">
-                            <p><strong>5 Discounted Courses <br></strong><br>
-                                <em>Pay once and get lifetime <br class="hidden-sm hidden-md">
-                                    access to 5 courses.</em>
-                                <strong class="price"><s class="opacity-30">$735</s>&nbsp; <span style="color:#fe7c02;">$97</span></strong>
-                            </p>
-                            <span class="join max-w-md" style="background:linear-gradient(180deg, #fe7c02 0%, #feb157 100%);">See The Deal &raquo;</span>
-                        </div>
-                    </a>
-                </div>
+{{--                <div class="float-left w-full px-2 md:px-3 md:w-1/2 card-wrap">--}}
+{{--                    <a href="/build-a-song" class="bundle-card">--}}
+{{--                        <span class="top-left-badge text-white bg-promo"><i class="fas fa-star"></i> 87% OFF</span>--}}
+{{--                        <div class="bg-center bg-cover pb-40 sm:pb-56 xl:pb-72" style="background-image:url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://guitareo.s3.amazonaws.com/sales/promos/black-friday/build-a-song-fb-share-image.jpg);"></div>--}}
+{{--                        <div class="float-left w-full px-2 md:px-3">--}}
+{{--                            <p><strong>5 Discounted Courses <br></strong><br>--}}
+{{--                                <em>Pay once and get lifetime <br class="hidden-sm hidden-md">--}}
+{{--                                    access to 5 courses.</em>--}}
+{{--                                <strong class="price"><s class="opacity-30">$735</s>&nbsp; <span style="color:#fe7c02;">$97</span></strong>--}}
+{{--                            </p>--}}
+{{--                            <span class="join max-w-md" style="background:linear-gradient(180deg, #fe7c02 0%, #feb157 100%);">See The Deal &raquo;</span>--}}
+{{--                        </div>--}}
+{{--                    </a>--}}
+{{--                </div>--}}
 
-                {{--                    <div class="float-left w-full px-2 md:px-3 card-wrap">--}}
-                {{--                        <div class="px-2 sm:px-0 max-w-xs sm:max-w-full mx-auto">--}}
-                {{--                        <a href="/shop/six-month-pass" class="flex flex-row-reverse text-white rounded-xl mb-5 overflow-hidden relative block w-full sm:text-left px-5 lg:px-10 pt-36 pb-5 sm:py-7 lg:py-16 padding-per">--}}
-                {{--                            <div class="relative z-10 inline-block w-full sm:w-auto text-center mx-0">--}}
-                {{--                                <img class="h-14 lg:h-16" src="https://cdn.musora.com/image/fetch/w_240,q_auto:best/https://guitareo.s3.amazonaws.com/sales/promos/november/the-six-month-pass-white.png"><br>--}}
-                {{--                                <p class="leading-tight my-2 lg:my-3 text-sm">--}}
-                {{--                                    No subscription. No renewals. <br class="hidden md:inline lg:hidden">Enjoy six months of <br class="hidden lg:inline">access to guitar lessons <br class="hidden md:inline lg:hidden">+ unlimited teacher support.--}}
-                {{--                                </p>--}}
-                {{--                                <h4 class="inline-block leading-none"><strong>--}}
-                {{--                                    <s class="opacity-60">${{ \App\Prices::$guitareoMembership6monthFull }}</s>&nbsp; ${{ \App\Prices::$guitareoMembership6month }}</strong></h4><br>--}}
-                {{--                                <div class="join white smaller mt-2 lg:mt-3 w-full" style="background:black;font-size:17px;">See The Deal &raquo;</div><br>--}}
-                {{--                            </div>--}}
-                {{--                            <p class="absolute z-20 top-0 left-0 rounded-br-xl text-white bg-promo uppercase py-1.5 px-2.5 leading-none text-xs font-roboto"><i class="fas fa-star"></i> <strong>SAVE 30%</strong></p>--}}
-                {{--                            <div class="hidden sm:block absolute inset-0 z-0 bg-cover bg-center" style="background-color:#0d1d3f;background-image:url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://guitareo.s3.amazonaws.com/sales/promos/black-friday/6-month-pass-shop.jpg);"></div>--}}
-                {{--                            <div class="block sm:hidden absolute inset-0 z-0 bg-cover bg-center" style="background-color:#293239;background-image:url(https://cdn.musora.com/image/fetch/w_700,q_auto:best/https://guitareo.s3.amazonaws.com/sales/promos/november/6-month-pass-m.jpg);"></div>--}}
-                {{--                        </a>--}}
-                {{--                    </div>--}}
+{{--                --}}{{--                    <div class="float-left w-full px-2 md:px-3 card-wrap">--}}
+{{--                --}}{{--                        <div class="px-2 sm:px-0 max-w-xs sm:max-w-full mx-auto">--}}
+{{--                --}}{{--                        <a href="/shop/six-month-pass" class="flex flex-row-reverse text-white rounded-xl mb-5 overflow-hidden relative block w-full sm:text-left px-5 lg:px-10 pt-36 pb-5 sm:py-7 lg:py-16 padding-per">--}}
+{{--                --}}{{--                            <div class="relative z-10 inline-block w-full sm:w-auto text-center mx-0">--}}
+{{--                --}}{{--                                <img class="h-14 lg:h-16" src="https://cdn.musora.com/image/fetch/w_240,q_auto:best/https://guitareo.s3.amazonaws.com/sales/promos/november/the-six-month-pass-white.png"><br>--}}
+{{--                --}}{{--                                <p class="leading-tight my-2 lg:my-3 text-sm">--}}
+{{--                --}}{{--                                    No subscription. No renewals. <br class="hidden md:inline lg:hidden">Enjoy six months of <br class="hidden lg:inline">access to guitar lessons <br class="hidden md:inline lg:hidden">+ unlimited teacher support.--}}
+{{--                --}}{{--                                </p>--}}
+{{--                --}}{{--                                <h4 class="inline-block leading-none"><strong>--}}
+{{--                --}}{{--                                    <s class="opacity-60">${{ \App\Prices::$guitareoMembership6monthFull }}</s>&nbsp; ${{ \App\Prices::$guitareoMembership6month }}</strong></h4><br>--}}
+{{--                --}}{{--                                <div class="join white smaller mt-2 lg:mt-3 w-full" style="background:black;font-size:17px;">See The Deal &raquo;</div><br>--}}
+{{--                --}}{{--                            </div>--}}
+{{--                --}}{{--                            <p class="absolute z-20 top-0 left-0 rounded-br-xl text-white bg-promo uppercase py-1.5 px-2.5 leading-none text-xs font-roboto"><i class="fas fa-star"></i> <strong>SAVE 30%</strong></p>--}}
+{{--                --}}{{--                            <div class="hidden sm:block absolute inset-0 z-0 bg-cover bg-center" style="background-color:#0d1d3f;background-image:url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://guitareo.s3.amazonaws.com/sales/promos/black-friday/6-month-pass-shop.jpg);"></div>--}}
+{{--                --}}{{--                            <div class="block sm:hidden absolute inset-0 z-0 bg-cover bg-center" style="background-color:#293239;background-image:url(https://cdn.musora.com/image/fetch/w_700,q_auto:best/https://guitareo.s3.amazonaws.com/sales/promos/november/6-month-pass-m.jpg);"></div>--}}
+{{--                --}}{{--                        </a>--}}
+{{--                --}}{{--                    </div>--}}
 
-            </div>
-        </section>
+{{--            </div>--}}
+{{--        </section>--}}
         <section class="grid-view category-section" data-category="lessons">
             <ul class="container mx-auto fixed-cards">
                 @foreach($products as $product){

@@ -313,12 +313,7 @@
         </section>
     </div>
 
-
     @include('pianote._partials._footer')
-    <script src="{{ asset('marketing/js/pianote/manifest.js') }}"></script>
-    <script src="{{ asset('marketing/js/pianote/vendor.js') }}"></script>
-    <script src="{{ asset('marketing/js/pianote/cart-sidebar.js') }}"></script>
-    <script src="{{ asset('marketing/js/pianote/app.js') }}"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
@@ -413,6 +408,8 @@
     <script src="{{ asset('/marketing/js/pianote/manifest.js') }}"></script>
     <script src="{{ asset('/marketing/js/pianote/vendor.js') }}"></script>
     <script src="{{ asset('/marketing/js/pianote/app.js') }}"></script>
+    <script src="{{ asset('/marketing/js/pianote/cart-sidebar.js') }}"></script>
+
     {{-- Platform --}}
     <script src="{{ mix('/platform/js/manifest.js') }}"></script>
     <script src="{{ mix('/platform/js/vendor.js') }}"></script>
