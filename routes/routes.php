@@ -194,6 +194,10 @@ Route::group(
 
                 Route::post('/add-to-primary-playlist', \Railroad\Railcontent\Controllers\MyListJsonController::class . '@addToPrimaryPlaylist');
                 Route::post('/remove-from-primary-playlist', \Railroad\Railcontent\Controllers\MyListJsonController::class . '@removeFromPrimaryPlaylist');
+                Route::post(
+                    '/request-song',
+                    Railroad\Railcontent\Controllers\RequestedSongsJsonController::class . '@requestSong'
+                )->name('request.song');
             }
         );
 
