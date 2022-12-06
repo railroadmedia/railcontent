@@ -17,9 +17,9 @@
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"></noscript>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
+    <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     {{--<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">--}}
 @stop
 
@@ -60,11 +60,14 @@
                     direct access to legendary drummers every step of the way.</h6>
                 <a data-aos="fade-up"
                     @hasSection('start-button')
-                        href="@yield('start-button')" class="join blue smaller w-1/2 md:w-1/3 lg:w-1/4"
+                        href="@yield('start-button')" class="join blue smaller w-2/3 md:w-auto"
                     @else
-                        href="#customize-anchor" class="join blue smaller anchor-slide w-1/2 md:w-1/3 lg:w-1/4 anchor-slide"
+                        href="#customize-anchor" class="join blue smaller anchor-slide w-2/3 md:w-auto anchor-slide"
                     @endif
                 >Get Started</a>
+                @if(!empty($bfButton))
+                    <a data-open="trailer" class="join outline promo smaller autoplay-video w-2/3 md:w-auto mt-3 md:mt-0"><i class="fas fa-play"></i> Holiday Deals</a>
+                @endif
             </div>
         </div>
         <div class="top-0 left-0 absolute w-full h-full z-10 hidden md:block" style="background: linear-gradient(to right, #011434, transparent);"></div>
@@ -159,7 +162,7 @@
                 $coaches = [
                     [
                     'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2022/coaches/steve-smith.jpg',
-                    'date' => 'This Month',
+                    'date' => 'Now Available',
                     'name' => 'Steve<br> Smith',
                     'subtitle' => 'Crafting Musical<br> Drum Solos',
                     'smallInfo' => 'Learn to craft musical & dynamic solos no matter what skill level you’re at -- hall-of-fame drummer Steve Smith is here to guide you. ',
@@ -232,7 +235,7 @@
                     'info' => 'As a drummer, you have the opportunity to bring LIFE to any song. Hannah Welton’s experience drumming for Prince was like attending the world’s greatest masterclass on creating the <strong>perfect</strong> drum part for every song. And now she’s going to pass that wisdom on to YOU in her first-ever DrumeoCOACHES course.',
                     'modal' => 'welton',
                     'prev' => 'nekrutman',
-                    'next' => 'weinberg',
+                    'next' => 'blackman',
                     'trending' => true,
                     'trailer' => true
                     ],
@@ -243,7 +246,7 @@
                     'subtitle' => 'Jazz & Fusion<br> Drumming',
                     'smallInfo' => 'Learning jazz will improve every area of your drumming. You’re in good hands with Cindy Blackman Santana – a legend who brought jazz fundamentals to stadium rock.',
                     'modal' => 'blackman',
-                    'prev' => 'weinberg',
+                    'prev' => 'welton',
                     'next' => false,
                     'info' => "Learning jazz will improve every area of your drumming. Dive into drumming's most challenging (and rewarding) style guided by Cindy Blackman Santana. Cindy will help you bring the spirit of jazz into everything you play for a more creative and inspiring approach to drumming.",
                     'trending' => true
@@ -504,7 +507,7 @@
     {{--</section>--}}
     <section class="py-10 md:py-16 lg:py-20 px-3 lg:px-6 text-white text-center" style="background:linear-gradient(to bottom, #0b76db, #014486);">
         <div class="container mx-auto max-w-6xl">
-            <h2 class="leading-tight max-w-2xl"><em>“... a smooth process that makes it easy to learn and develop good habits”</em></h2>
+            <h2 class="leading-tight max-w-2xl"><em>“... a smooth process that makes it easy to learn and develop good habits.”</em></h2>
             <h6 class="mt-5 mb-10 md:mb-20"><em>- DrummingReview.com</em></h6>
             <div class="flex flex-wrap justify-center mx-auto max-w-md w-full opacity-70">
                 <div class="w-1/3">
@@ -1087,7 +1090,7 @@
                 {{--@endforeach--}}
             {{--</div>--}}
             <h3 class="leading-tight mt-8 md:mt-16" data-aos="fade-up"><strong>Your calendar never<br class="inline sm:hidden"> sounded so good.</strong></h3>
-            <h6 class="leading-normal max-w-2xl lg:max-w-4xl text-light-navy mt-3 md:mt-5 mb-5 md:mb-20">You’ll have the chance to learn from a NEW featured coach every month of 2022 including drumming’s biggest names like Steve Smith, Jay Weinberg, Cindy Blackman-Santana and more. </h6>
+            <h6 class="leading-normal max-w-2xl lg:max-w-4xl text-light-navy mt-3 md:mt-5 mb-5 md:mb-20">You’ll have ongoing live events & on-demand access to workshops, performances, and lessons with legendary drummers. Choose your favorites and build your perfect week of drum lessons! </h6>
             <div class="feature-rotater w-full max-w-md md:max-w-full flex flex-wrap md:flex-nowrap items-center mx-auto mb-8 md:mb-10">
                 <div class="pic-wrap md:order-0 mx-auto my-5 md:my-0 pr-0 md:pr-5 lg:pr-10 flex-shrink-0">
                     <img class="lazyload side-pic coaches w-full hidden" data-src="https://cdn.musora.com/image/fetch/w_800,q_auto:best/https://drumeo-assets.s3.amazonaws.com/sales/2022/coach-rotating-01.png" alt="coach-rotating-1">
@@ -1289,7 +1292,7 @@
                     <div class="instagram py-4 md:py-5 lg:py-6 rounded-xl w-full" style="background: #051124;">
                         <a href="https://instagram.com/drumeoofficial/" target="_blank" aria-label="instagram"> <i class="fab fa-instagram text-3xl md:text-5xl" style="background: linear-gradient(30deg, #FFD521 17%, #F20008 50%, #B900B4 83%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"></i>
                         </a>
-                        <h2 class="font-black leading-none my-2 text-white">942K</h2>
+                        <h2 class="font-black leading-none my-2 text-white">945K</h2>
                         <p class="uppercase leading-none md:tracking-widest" style="color:#E1306C">Followers</p>
                     </div>
                 </div>
@@ -1416,8 +1419,8 @@
         </div>
     </section>
 
-    <div class="unstick-trigger block"></div>
     @yield('final')
+    <div class="unstick-trigger block"></div>
 
     @foreach($coaches as $coach)
         <div class="reveal coach-wrap relative rounded-xl text-center overflow-visible select-none max-w-xs md:max-w-md" id="{{ $coach['modal'] }}" data-reveal data-reset-on-close="false">
@@ -1536,6 +1539,10 @@
             'modal' => 'smithTrailer',
             'vimeo' => '726153277',
             ],
+            [
+            'modal' => 'trailer',
+            'vimeo' => '772644658',
+            ],
          ]
     @endphp
     @foreach($videoModals as $videoModal)
@@ -1556,71 +1563,9 @@
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/sliding-anchor.js') }}"></script>
-    <script type="text/javascript" src="/marketing/js/jquery.countdown-2.min.js"></script>
     <script async type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script async type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('.tzcd-mcdays').countdown('2022/10/01')
-                .on('update.countdown', function (event) {
-                    var format = '';
 
-                    if (event.offset.totalDays > 0) {
-                        format = '%-D ' + format;
-                    } else if (event.offset.totalHours > 0) {
-                        format = '%-H Hour%!H ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('limited time');
-                });
-            $('.tzcd-full').countdown('2022/10/01')
-                .on('update.countdown', function (event) {
-                    var format = '%-M Minute%!M %-S Second%!S';
-                    if (event.offset.totalHours > 0) {
-                        format = '%-H Hour%!H ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '%-D Day%!D ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('a limited time');
-                });
-            $('.tzcd-days').countdown('2022/10/01')
-                .on('update.countdown', function (event) {
-                    var format = '';
-
-                    if (event.offset.totalDays > 0) {
-                        format = '%-D Day%!D ' + format;
-                    } else if (event.offset.totalHours > 0) {
-                        format = '%-H Hour%!H ' + format;
-                    } else if (event.offset.totalHours <= 0) {
-                        format = '%-M Minute%!M %-S Second%!S' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('limited time');
-                });
-            $('.tzcd-small').countdown('2022/10/01')
-                .on('update.countdown', function (event) {
-                    var format = '%-MM %-SS';
-                    if (event.offset.totalHours > 0) {
-                        format = '%-HH ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '%-DD ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('a limited time');
-                });
-        });
-    </script>
 
     @yield('scripts')
 @stop

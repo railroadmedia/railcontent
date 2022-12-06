@@ -56,4 +56,9 @@ class SalesController extends BaseController
     {
         return view('pianote.products.the-power-of-chords-giveaway');
     }
+
+    public function concertHeadphones()
+    {
+        return view('pianote.products.concert-headphones');
+    }
 }

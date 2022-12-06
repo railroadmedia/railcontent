@@ -299,7 +299,6 @@
                     <h4 class="px-3 lg:px-5"><strong>September 5th</strong></h4>
                     <hr class="border-gray-300 my-4 sm:my-2 lg:my-4">
                     <p class="text-sm px-3 lg:px-5">
-                        {{--Enrollment closes in<br class="inline lg:hidden"> <span class="tzcd-med text-drumeo">a limited time</span>.--}}
                         Enrollment is closed.
                     </p>
                 </div>
@@ -588,7 +587,6 @@
             </div>
             <h1 class="font-bebas text-5xl sm:text-6xl lg:text-7xl">FAIR WARNING</h1>
             <h6 class="leading-normal  mt-4 {{--mb-8--}}">30-Day Drummer is a daily guided workout program for drummers — where you’ll get a new video each weekday and a live session each weekend throughout the month. Because of this, students will not be able to join midway — and you need to register before the course begins. {{--on September 5th.--}}</h6>
-            {{--<h4 class="py-1.5 w-full font-bebas uppercase inline-block mx-auto bg-white" style="color:#9d1032;">REGISTRATION CLOSES IN<br class="inline sm:hidden"> <span class="tzcd-full">a limited time</span></h4>--}}
         </div>
     </section>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f4f8fb;">
@@ -726,7 +724,6 @@
             {{--<h2 class="leading-tight mt-2 mb-3 sm:my-3 lg:my-4"><strong>Learn the drums with daily guided workouts.</strong></h2>--}}
 
                 {{--<h6 class="leading-normal"><strong>Launch Special:</strong> Get a FREE pair of Drumeo 5A Drumsticks + <br class="hidden sm:inline">one-month Drumeo membership with your enrollment.--}}
-                {{--<span class="text-drumeo lowercase">Only <span class="inline sm:hidden tzcd-med2">a limited time</span> <span class="hidden sm:inline tzcd-full2">a limited time</span> left!</span> </h6>--}}
             {{--@endif--}}
 
             <div class="flex flex-wrap items-center mt-7 sm:mt-10">
@@ -927,7 +924,7 @@
     <script src="{{ asset('marketing/js/drumeo/cart-sidebar.js') }}"></script>
     <script src="{{ asset('marketing/js/drumeo/app.js') }}"></script>
 
-    <script type="text/javascript" src="/marketing/js/jquery.countdown-2.min.js"></script>
+
     <script>
         $(document).ready(function () {
             $(document).foundation();
@@ -935,64 +932,6 @@
                 $(this).toggleClass('active');
                 $(this).find('i').toggleClass('rotate-180');
             });
-
-            $('.tzcd-full').countdown('2022/09/06')
-                .on('update.countdown', function (event) {
-                    var format = '%-M Minute%!M %-S Second%!S';
-                    if (event.offset.totalHours > 0) {
-                        format = '%-H Hour%!H ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '%-D Day%!D ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('a limited time');
-                });
-            $('.tzcd-med').countdown('2022/09/06')
-                .on('update.countdown', function (event) {
-                    var format = '%-M Minute%!M';
-                    if (event.offset.totalHours > 0) {
-                        format = '%-H Hour%!H ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '%-D Day%!D ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('a limited time');
-                });
-
-            $('.tzcd-full2').countdown('2022/08/21')
-                .on('update.countdown', function (event) {
-                    var format = '%-M Minute%!M %-S Second%!S';
-                    if (event.offset.totalHours > 0) {
-                        format = '%-H Hour%!H ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '%-D Day%!D ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('a limited time');
-                });
-            $('.tzcd-med2').countdown('2022/08/21')
-                .on('update.countdown', function (event) {
-                    var format = '%-M Minute%!M';
-                    if (event.offset.totalHours > 0) {
-                        format = '%-H Hour%!H ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '%-D Day%!D ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('a limited time');
-                });
 
             $('.comparison tr td:nth-child(3)').on('click', function(){
                 $(this).parents().find('table').removeClass('private books online');

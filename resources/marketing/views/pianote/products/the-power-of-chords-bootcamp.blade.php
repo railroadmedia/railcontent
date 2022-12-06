@@ -24,7 +24,7 @@
 @endsection
 
 @section('countdown')
-    <br><strong class="uppercase"><span class="tzcd-full hidden sm:inline">A LIMITED TIME</span> <span class="tzcd-small inline sm:hidden">A LIMITED TIME</span> LEFT!</strong>
+
 @endsection
 
 @section('product-json')

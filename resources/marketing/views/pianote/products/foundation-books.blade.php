@@ -186,7 +186,7 @@
     @include('pianote._partials._nav', [
         "cartVersion" => true
     ])
-    @include('pianote._partials._promo-banner', [
+    @include('pianote._partials._promo-banner-no-tw', [
                     "name" => "Pianote Foundations Books",
                     "fullPrice" => PianotePrices::$foundationBooksFull,
                     "price" => PianotePrices::$foundationBooksRegular,
@@ -615,6 +615,5 @@
     <script src="{{ asset('marketing/js/pianote/cart-sidebar.js') }}"></script>
     <script src="{{ asset('marketing/js/pianote/app.js') }}"></script>
 
-    @include('pianote._partials._promo-countdown')
     @include('pianote._partials.inspectlet')
 @stop

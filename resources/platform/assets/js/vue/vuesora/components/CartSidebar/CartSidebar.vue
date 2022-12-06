@@ -25,6 +25,7 @@
                         <cart-item
                             v-for="item in cartItems"
                             v-if="cartItems"
+                            :brand="brand"
                             :key="item.sku"
                             :item="item"
                             :loading="loading"
@@ -36,6 +37,7 @@
                         <cart-item
                             v-for="item in bonusItems"
                             v-if="bonusItems"
+                            :brand="brand"
                             :key="item.sku"
                             :item="item"
                             :loading="loading"
@@ -157,7 +159,7 @@ export default {
         //Fetch Cart Data
         axios.get(this.cartDataUrl + '/ecommerce/json/cart')
             .then(response => {
-                this.cartData = response.data;
+                this.updateCartData(response.data)
             }
         )
     },
@@ -296,7 +298,7 @@ export default {
                 this.loading = true;
 
                 EcommerceService
-                    .removeCartItem({productSku: cartItem.sku})
+                    .removeCartItem(this.cartDataUrl, {productSku: cartItem.sku})
                     .then(this.handleCartUpdate)
                     .catch(this.handleError);
             }
@@ -307,7 +309,7 @@ export default {
                 this.loading = true;
 
                 EcommerceService
-                    .clearCart()
+                    .clearCart(this.cartDataUrl,)
                     .then(this.handleCartUpdate)
                     .catch(this.handleError);
             }
@@ -318,7 +320,7 @@ export default {
                 this.loading = true;
 
                 EcommerceService
-                    .updateCartItemQuantity({productSku: cartItem.sku, quantity})
+                    .updateCartItemQuantity(this.cartDataUrl, {productSku: cartItem.sku, quantity})
                     .then(this.handleCartUpdate)
                     .catch((e) => {
                         this.buildInitialCartData();

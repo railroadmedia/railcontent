@@ -68,7 +68,7 @@
                 "freeShipping" => $product->free_shipping,
                 "size_case_sensitive" => $product->size_case_sensitive,
                 "category" => strtolower($product->productType->name),
-                'bundle' => $product->productType->name === 'Bundles' || str_contains($product->sku, 'member') ? true : false,
+                'bundle' => $product->productType->name === 'Bundles' || str_contains($product->sku, 'member') || str_contains($product->sku, 'products')? true : false,
             ])
         </div>
 
@@ -139,7 +139,6 @@
     <script type="text/javascript" src="/marketing/parcel/pianote/shop-product.js"></script>
     <script src="{{ asset('marketing/parcel/pianote/manifest.js') }}"></script>
     <script src="{{ asset('marketing/parcel/pianote/vendor.js') }}"></script>
-    <script src="{{ asset('marketing/parcel/pianote/cart-sidebar.js') }}"></script>
     <script src="{{ asset('marketing/parcel/pianote/app.js') }}"></script>
 
     @include('pianote.shop._partials._promo-countdown')

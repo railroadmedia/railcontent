@@ -64,6 +64,7 @@
                 "freeShipping" => $product->free_shipping,
                 "size_case_sensitive" => $product->size_case_sensitive,
                 "category" => strtolower($product->productType->name),
+                'bundle' => $product->productType->name === 'Bundles' || str_contains($product->sku, 'member') || str_contains($product->sku, 'products')? true : false,
             ])
         </div>
 
@@ -128,7 +129,6 @@
     @include("singeo.sales.partials._footer")
     <script src="{{ asset('marketing/js/singeo/manifest.js') }}"></script>
     <script src="{{ asset('marketing/js/singeo/vendor.js') }}"></script>
-    <script src="{{ asset('marketing/js/singeo/cart-sidebar.js') }}"></script>
     <script src="{{ asset('marketing/js/singeo/app.js') }}"></script>
 
 

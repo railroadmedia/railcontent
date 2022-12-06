@@ -64,7 +64,22 @@ abstract class Command extends CommandBase
     /**
      * Function for chunking queries into jobs to avoid running into Lambda 15 minute execution limit
      */
-    public function withBatched(callable $getJob, $chunks = 1000, $timeout = 600): bool
+    public function runBatchQuery(callable $getJob, $chunks = 1000): bool
+    {
+        return $this->runJobsQuery($getJob, false, $chunks);
+    }
+
+    /**
+     * Function for chunking queries into a chain of jobs to avoid running into Lambda 15 minute execution limit
+     *
+     * Reverse process helps for issues when items are removed from the query after processing
+     */
+    public function runChainQuery(callable $getJob, $chunks = 1000, $reverseProcessJobs = false): bool
+    {
+        return $this->runJobsQuery($getJob, true, $chunks, $reverseProcessJobs);
+    }
+
+    private function runJobsQuery(callable $getJob, bool $isChain, $chunks = 1000, $reverseProcessJobs = false): bool
     {
         Artisan::call('queue:prune-batches');
         $timeStart = microtime(true);
@@ -91,7 +106,13 @@ abstract class Command extends CommandBase
             return true;
         }
         $this->info("Dispatching $nJobs jobs.");
-        $batch = Bus::batch($jobs)->name(class_basename($this))->dispatch();
+        $batch = null;
+        if($reverseProcessJobs) $jobs = array_reverse($jobs);
+        if ($isChain) {
+            Bus::chain($jobs)->dispatch();
+        } else {
+            $batch = Bus::batch($jobs)->name(class_basename($this))->dispatch();
+        }
         $this->info("Dispatched $nJobs jobs.");
         if ($batch) {
             $this->info("Check batch status: artisan batch:status $batch->id");

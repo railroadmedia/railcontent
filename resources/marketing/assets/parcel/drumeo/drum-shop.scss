@@ -431,7 +431,7 @@ img {
     text-transform: uppercase;
     font-size: 54px;
     @include tablet {
-      font-size: 100px;
+      font-size: 92px;
     }
   }
 
@@ -460,42 +460,6 @@ img {
       }
       @include desktop {
         padding: 14px 30px;
-      }
-    }
-  }
-
-
-  .tzcd-big {
-    text-transform: uppercase;
-    display: inline-block;
-    vertical-align: middle;
-
-    div {
-      float: left;
-      text-align: center;
-      padding: 0 15px 0 0;
-      @include tablet {
-        padding: 0 25px 0 0;
-      }
-
-      &:last-child {
-        padding-right: 0;
-      }
-
-      h1 {
-        color: #ddf7ff;
-        margin: 0 auto;
-        font: 900 28px/1em $opensans;
-        @include tablet {
-          font-size: 32px;
-        }
-      }
-
-      p {
-        font: 800 10px/1em $opensans;
-        color: #ffac00;
-        //color: $drumeoBlue;
-        margin: 0 auto;
       }
     }
   }
@@ -556,8 +520,6 @@ img {
 .catalogue-filters {
   text-align: center;
   margin: 0 auto;
-  width: 100%;
-  max-width: 1400px;
   padding: 0 0 5px;
   @include tablet {
     padding: 40px 20px 5px;
@@ -568,12 +530,10 @@ img {
 
   .container {
     @include tablet {
-      max-width: 720px;
       padding: 0 7px;
     }
     @include desktop {
-      max-width: 1360px;
-      padding: 0;
+      padding: 0 10px;
     }
   }
 
@@ -778,13 +738,6 @@ img {
   margin: 0 auto 20px;
   text-align: center;
 
-  .container {
-    max-width: 720px;
-    @include desktop {
-      max-width: 1360px;
-    }
-  }
-
   .card-wrap {
     padding: 0 7px;
     @include desktop {
@@ -797,8 +750,6 @@ img {
     border-radius: 0 0 10px 0;
     top: 0;
     left: 0;
-    background: #ffac00;
-    color: #000;
     font: 700 11px/1em $robotocondensed;
     text-transform: uppercase;
     //border: 1px solid #ddd;
@@ -846,20 +797,11 @@ img {
       opacity: 0.8;
     }
 
-    .thumb {
-      background: #fff center center/cover;
-      padding-bottom: 80%;
-      @include desktop {
-        padding-bottom: 40%;
-        background-size: contain;
-      }
-    }
-
     .float-left {
       text-align: center;
-      padding: 15px;
+      padding: 20px 15px;
       @include desktop {
-        padding: 20px;
+        padding: 30px 20px;
       }
 
       p {
@@ -1018,15 +960,12 @@ img {
     font-size: 0;
     text-align: center;
     margin: 0 auto 15px;
-    max-width: 320px;
     @include tablet {
       margin: 0 auto 25px;
       text-align: left;
-      max-width: 720px;
     }
     @include desktop {
       margin: 0 auto 40px;
-      max-width: 1360px;
     }
 
     h1 {
@@ -1050,10 +989,6 @@ img {
           margin-right: 8px;
           max-width: 250px;
           font-size: 34px;
-        }
-
-        &.promo {
-          color: #155E4D;
         }
 
         i {
@@ -1175,14 +1110,8 @@ img {
               border-radius: 0 0 10px 0;
               top: 0;
               left: 0;
-              //background: #ffac00;
-              //color: #000;
-              background: $coachesOrange;
-              color: #000;
               font: 700 11px/1em $robotocondensed;
               text-transform: uppercase;
-              //border: 1px solid #ddd;
-              //border-width: 0 1px 1px 0;
               padding: 4px 7px;
               @include tablet {
                 padding: 6px 9px;
@@ -1251,8 +1180,6 @@ img {
               }
 
               strong {
-                //color: $promoColor;
-                color: $drumeoBlue;
                 display: inline-block;
                 margin: 5px auto 0;
               }
@@ -1368,11 +1295,6 @@ img {
             }
             @include desktop {
               font-size: 30px;
-            }
-
-            strong {
-              //color: $promoColor;
-              color: $drumeoBlue;
             }
 
             s {

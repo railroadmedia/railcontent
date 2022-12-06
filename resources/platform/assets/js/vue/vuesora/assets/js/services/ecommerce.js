@@ -51,11 +51,13 @@ export default {
      *
      * @returns {Promise}
      */
-    updateCartItemQuantity({
+    updateCartItemQuantity(
         url,
-        productSku,
-        quantity,
-    }) {
+        {
+            productSku,
+            quantity,
+        }
+    ) {
         return axios.patch(url+`/ecommerce/json/update-product-quantity/${productSku}/${quantity}`)
     },
 

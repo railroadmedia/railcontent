@@ -25,7 +25,7 @@ if (!function_exists('get_legacy_brand_base_url')) {
         }
 
         if (App::environment() == 'local' || App::environment() == 'development') {
-            return 'https://dev.' . $brand . '.com' . ($withPort ? '8443' : '');
+            return 'https://dev.' . $brand . '.com' . ($withPort ? ':8443' : '');
         } elseif (App::environment() == 'beta-testing' || str_contains(App::environment(), 'staging')) {
             return 'https://staging.' . $brand . '.com';
         }

@@ -2,7 +2,6 @@ $(document).ready(function (){
     var menuOverlay = $('.menu-overlay');
     var sideBar = $('.nav-side-bar');
     var nav = $('.menu-toggle');
-    var navHomepage = $('.menu-toggle.homepage');
 
 
     nav.click(function () {
@@ -25,23 +24,6 @@ $(document).ready(function (){
         var lessonLinks = $(this).next(".dropdown");
         lessonLinks.toggleClass("active");
         arrowIcon.toggleClass("active");
-    });
-    $('.musicounts').click(function (e) {
-        e.stopPropagation();
-        $('.musicounts-banner').toggleClass('active');
-    });
-
-    //hides menu button on scroll down
-    var prev = 0;
-    var $window = $(window);
-    $window.on('scroll', function () {
-        var scrollTop = $window.scrollTop();
-        if(scrollTop > 0){
-            navHomepage.addClass('scroll-hide');
-        }
-        else {
-            navHomepage.removeClass('scroll-hide');
-        }
     });
 
     // cookie bar

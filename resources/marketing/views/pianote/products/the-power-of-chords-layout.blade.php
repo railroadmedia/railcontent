@@ -514,9 +514,6 @@
     {{--<section class="py-10 md:py-20 relative" style="background: linear-gradient(180deg, #F61A30 0%, #910000 122.85%);">--}}
         {{--<div class="max-w-5xl mx-auto md:flex px-4 relative z-40">--}}
             {{--<div class="flex-1 text-white md:pr-4 lg:pr-0 mb-6 md:mb-0 max-w-md md:max-w-auto mx-auto">--}}
-                {{--<h5 class="uppercase mb-2 text-center md:text-left" style="color: #FFAE00;">--}}
-                    {{--limited time bonus<br> only <span class="tzcd-small2">a limited time</span> left!--}}
-                {{--</h5>--}}
                 {{--<h2 class="font-extrabold mb-4 text-center md:text-left">--}}
                     {{--Master every chord & <br>scale with this guide.--}}
                 {{--</h2>--}}
@@ -597,7 +594,6 @@
             <h2 class="font-extrabold">Play the music you love.</h2>
             <h6 class="mt-2 leading-normal">
                 Simple steps to transform your <br class="md:hidden">understanding of music.
-                {{--<br><strong class="text-pianote">Only <span class="tzcd-full2">A Limited Time</span> Left!</strong>--}}
             </h6>
             {{--<div class="flex flex-wrap items-end justify-center 2-full my-7 sm:my-10">--}}
                 {{--<div class="max-w-xs sm:max-w-full w-full md:w-1/2 px-2 md:px-3 relative">--}}
@@ -713,7 +709,6 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="/marketing/js/modal.js"></script>
-    <script type="text/javascript" src="/marketing/js/jquery.countdown-2.min.js"></script>
     <script>
         $(document).ready(function(){
             $(document).foundation();
@@ -747,43 +742,11 @@
                     $('#seeInside1').find('img').attr('src', imgSrc.data('src'))
                 })
             })
-
-
-            // Countdown
-            $('.tzcd-full2').countdown('2022/09/01')
-                .on('update.countdown', function (event) {
-                    var format = '%-M Minute%!M %-S Second%!S';
-                    if (event.offset.totalHours > 0) {
-                        format = '%-H Hour%!H ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '%-D Day%!D ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('a limited time');
-                });
-            $('.tzcd-small2').countdown('2022/09/01')
-                .on('update.countdown', function (event) {
-                    var format = '%-MM %-SS';
-                    if (event.offset.totalHours > 0) {
-                        format = '%-HH ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '%-DD ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('a limited time');
-                });
         })
     </script>
     <script type="text/javascript" src="/marketing/js/modal-autoplay.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
     <script type="text/javascript" src="/marketing/parcel/pianote/nav-footer.js"></script>
-    <script type="text/javascript" src="/marketing/js/modal-autoplay.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
 
@@ -792,6 +755,5 @@
     <script src="{{ asset('marketing/js/pianote/cart-sidebar.js') }}"></script>
     <script src="{{ asset('marketing/js/pianote/app.js') }}"></script>
 
-    @include('pianote._partials._promo-countdown')
     @include('pianote._partials.inspectlet')
 @endsection

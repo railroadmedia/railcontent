@@ -98,7 +98,7 @@
                 <p>Protect your ears + play your favorite songs.</p>
                 <i class="fas fa-play play-button autoplay-video my-28 md:my-36" data-open="trailer"></i><br>
                 @if( $products['drumeo-eardrums']->getStock() > 1 && !empty($products['drumeo-eardrums']->getStock()))
-                    <a class="join blue my-2 sm:my-4 w-full sm:w-2/3 anchor-slide" href="#customize-anchor">GRAB A PAIR &raquo;</a>
+                    <a class="join blue my-2 sm:my-4 w-full sm:w-2/3" href="/laravel/public/shopping-cart/api/query?products[drumeo-eardrums]=1">GRAB A PAIR &raquo;</a>
                 @else
                     <a class="join sold-out my-2 sm:my-4 w-full sm:w-2/3">SOLD OUT</a>
                 @endif
@@ -324,7 +324,7 @@
                 <div class="flex flex-wrap items-end justify-center 2-full max-w-sm md:max-w-2xl lg:max-w-3xl my-5 sm:my-10 mx-auto">
                     <div class="w-full md:w-1/2 px-2 md:px-3 relative">
                         {{--<p class="w-full px-4 pt-2 pb-4 -mb-3 text-white rounded-t-2xl" style="background:linear-gradient(to bottom, #0a73d8, #10518f);"><strong>LAUNCH SPECIAL</strong></p>--}}
-                        <a href="/laravel/public/shopping-cart/api/query?products[drumeo-eardrums]=1" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">
+                        <a href="{{ URL::Route('shopping-cart.to-cart.api') }}?products[drumeo-eardrums]=1" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">
                             <div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">
                                 <h5 class="leading-none mb-3">EarDrums</h5>
                                 <h1 class="inline-block leading-none">
@@ -333,28 +333,7 @@
                                     @endif
                                     <strong>${{ Prices::$earDrums }}</strong></h1>
                                 {{--<p class="text-sm my-2 sm:my-4 opacity-60"><em>Save {{ round(100 - (100 * (Prices::$earDrums / Prices::$earDrumsFull))) }}% for a limited time.</em></p>--}}
-                                <div class="join blue smaller w-full transition-opacity duration-300 group-hover:opacity-80 mt-2 sm:mt-4" style="max-width: 230px;">Select</div>
-                            </div>
-                            <div class="px-3 pt-5 md:pt-6 pb-9 md:pb-10" style="background: #f1f8ff;border-top: 2px solid #e6f2ff;">
-                                <p class="mb-1">Drumeo EarDrum IEMs</p>
-                                <p class="mb-1">3 Eartip Options (3 Sizes Each)</p>
-                                <p class="mb-1">Detachable Cable</p>
-                                <p class="mb-1">¼” Adapter</p>
-                                <p class="mb-1">Cleaning Brush</p>
-                                <p>Drumeo Carrying Case</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="w-full md:w-1/2 px-2 md:px-3 relative">
-                        <p class="w-full px-4 pt-2 pb-4 -mb-3 text-white rounded-t-2xl" style="background:linear-gradient(to bottom, #0a73d8, #10518f);"><strong>BEST DEAL</strong></p>
-                        <a data-open="membershipModal" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group cursor-pointer">
-                            <div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">
-                                <h5 class="leading-none mb-3">
-                                    Join Drumeo and get <br>
-                                    your EarDrums FREE</h5>
-                                <h1 class="inline-block leading-none"><strong>${{ Prices::$drumeoEdgeAnnual }}/yr</strong></h1>
-                                {{--<p class="text-sm my-2 sm:my-4 opacity-60"><em>Save {{ round(100 - (100 * (Prices::$drumeoEdgeAnnual / (Prices::$drumeoEdgeAnnualFull + Prices::$earDrumsFull)))) }}% for a limited time.</em></p>--}}
-                                <div class="join blue smaller w-full transition-opacity duration-300 group-hover:opacity-80 mt-2 sm:mt-4" style="max-width: 230px;">Learn More</div>
+                                <div class="join blue smaller w-full transition-opacity duration-300 group-hover:opacity-80 mt-2 sm:mt-4" style="max-width: 230px;">Get Started</div>
                             </div>
                             <div class="px-3 pt-5 md:pt-6 pb-9 md:pb-10" style="background: #f1f8ff;border-top: 2px solid #e6f2ff;">
                                 <p class="mb-1">Drumeo EarDrum IEMs</p>
@@ -398,20 +377,6 @@
         </div>
     </div>
 
-    <div class="reveal coach-wrap relative rounded-xl text-center overflow-visible select-none max-w-xs md:max-w-md" id="membershipModal" style="max-width: 530px;" data-reveal data-reset-on-close="false">
-        <div class="relative rounded-t-lg pb-44 md:pb-60 bg-top bg-cover bg-black lazyload" data-bg="https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/eardrums/Product_Image01.jpg"></div>
-        <div class="p-3 sm:p-5">
-            <h4 class="leading-tight text-drumeo mb-4"><strong>Join Drumeo and get your<br> pair of EarDrums FREE.</strong></h4>
-            <p class="opacity-50 text-sm"><em>You’ll get one year of unlimited<br class="inline sm:hidden"> drum lessons, including:</em></p>
-            <p class="text-left inline-block text-sm sm:text-base"><i class="fas fa-check text-drumeo"></i> <strong>Step-by-step drum lessons</strong> for ALL skill levels.<br>
-            <i class="fas fa-check text-drumeo"></i> Play-along tools for <strong>3100+ famous drum songs.</strong><br>
-            <i class="fas fa-check text-drumeo"></i> <strong>Ongoing support</strong> from legendary drummers</p>
-            <h2 class="text-drumeo mt-2"><strong>$240/yr</strong></h2>
-            <p class="leading-none text-sm"><em>Includes Drumeo EarDrums <s class="opacity-50">${{ Prices::$earDrumsFull }}</s> <strong>FREE</strong></em></p>
-            <a href="/laravel/public/shopping-cart/api/query?products[DLM]=1,year,1&products[drumeo-eardrums]=1&locked=true" class="join blue smaller w-full max-w-xs">Join Drumeo</a>
-        </div>
-    </div>
-
     @include("drumeo.sales.partials._footer")
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -423,7 +388,6 @@
     <script src="{{ asset('marketing/js/drumeo/cart-sidebar.js') }}"></script>
     <script src="{{ asset('marketing/js/drumeo/app.js') }}"></script>
 
-    <script type="text/javascript" src="/marketing/js/jquery.countdown-2.min.js"></script>
     <script>
         $(document).ready(function () {
             $(document).foundation();
@@ -436,20 +400,6 @@
                 $(this).parents().find('table').removeClass('headphones');
                 $(this).parents().find('table').addClass('earbuds');
             });
-            $('.tzcd-big').countdown('2022/08/01')
-                .on('update.countdown', function (event) {
-                    var format = '' + '<div><h1>%M</h1> <p>min%!M</p></div> ' + '<div><h1>%S</h1> <p>sec%!S</p></div>';
-                    if (event.offset.totalHours > 0) {
-                        format = '' + '<div><h1>%H</h1> <p>hr%!H</p></div> ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '' + '<div><h1>%D</h1> <p>day%!D</p></div> ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('<div><h1>LIMITED</h1> <p>TIME LEFT</p></div>');
-                });
         });
     </script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>

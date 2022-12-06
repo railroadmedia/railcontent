@@ -6,6 +6,7 @@
         <div class="flex flex-column order-form xs-12 md-9 ph-1">
             <order-form-cart
                 :theme-color="themeColor"
+                :cart-data-url="cartDataUrl"
                 :cart-items="cartData.items"
                 :bonuses="bonuses"
                 :is-cart-locked="cartData.locked"

@@ -5,7 +5,7 @@
                 'styles' => 'h-14 sm:h-16 lg:h-20 mx-auto'
             ])
         </a>
-        <p class="leading-tight mt-3 uppercase mb-7"><strong class="text-promo">{!! $text !!}</strong></p>
+        <p class="leading-tight mt-3 uppercase mb-4 text-white"><strong>{!! $text !!}</strong></p>
         {{-- <div class="mt-6 mb-7 rounded-xl px-3 sm:px-6 py-1 inline-flex flex-wrap mx-auto justify-center items-center" style="background-color:#181515;">
             <p class="leading-none m-0"><strong>DEALS END IN:</strong></p>
             <div class="h-12 mx-3 sm:mx-5 bg-promo" style="width:2px;"></div>

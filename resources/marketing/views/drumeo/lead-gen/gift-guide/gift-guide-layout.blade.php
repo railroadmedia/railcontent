@@ -236,16 +236,6 @@
                         ])
 
             @include("drumeo.lead-gen.gift-guide._item-card", [
-                        "price" => Prices::$dsOnlineRegular,
-                        "popularity" => "75",
-                        "itemURL" => "/drumshop/drumming-system/",
-                        "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/promos/gift-guide/gifts/the-drumming-system.jpg",
-                        "title" => "The Drumming System",
-                        "bottomText" => "This training pack features 20 training DVDs, 21 play-along CDs, and five workbooks to help you reach your drumming goals. You’ll also receive full online access meaning you can watch every video from anywhere!",
-                        "onDrumeo" => "TRUE"
-                        ])
-
-            @include("drumeo.lead-gen.gift-guide._item-card", [
                         "price" => "20",
                         "popularity" => "75",
                         "giggingDrummer" => "TRUE",

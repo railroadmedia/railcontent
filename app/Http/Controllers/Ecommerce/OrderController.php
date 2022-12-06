@@ -67,8 +67,7 @@ class OrderController extends Controller
         PaymentMethodRepository $paymentMethodRepository,
         UserProviderInterface $userProvider,
         OrderRepository $orderRepository
-    )
-    {
+    ) {
         $this->addressRepository = $addressRepository;
         $this->cartAddressService = $cartAddressService;
         $this->cartService = $cartService;
@@ -142,19 +141,12 @@ class OrderController extends Controller
         $bonuses = $request->session()->get('bonuses', []);
 
         foreach ($bonuses as $bonusIndex => $bonus) {
-
             if ($bonus['sku'] == 'rock-drumming-masterclass-pack') {
-
                 $bonuses[$bonusIndex]['description'] = 'Get Todd Sucherman\'s masterclass with Drumeo Edge.';
-
             } elseif ($bonus['sku'] == 'drum-technique-made-easy-pack') {
-
                 $bonuses[$bonusIndex]['description'] = 'Get Bruce Becker\'s 26-week course with Drumeo Edge.';
-
             } elseif ($bonus['sku'] == 'independence-made-easy-pack') {
-
                 $bonuses[$bonusIndex]['description'] = 'Get Jared Falk\'s 26-week course with Drumeo Edge.';
-
             }
         }
 
@@ -174,7 +166,6 @@ class OrderController extends Controller
             $existingPayPalAgreementIds = [];
 
             foreach ($paymentMethods as $paymentMethodIndex => $paymentMethod) {
-
                 if ($paymentMethod->getMethodType() == PaymentMethod::TYPE_CREDIT_CARD) {
                     if (isset($existingCardFingerPrints[$paymentMethod->getMethod()->getFingerprint()])) {
                         unset($paymentMethods[$paymentMethodIndex]);
@@ -190,7 +181,6 @@ class OrderController extends Controller
                         $existingPayPalAgreementIds[$paymentMethod->getMethod()->getExternalId()] = true;
                     }
                 }
-
             }
 
             /**
@@ -242,7 +232,6 @@ class OrderController extends Controller
             }
 
             $shippingAddresses = array_splice($shippingAddresses, 0, 5);
-
         }
 
         // remove all but the latest paypal payment method otherwise people get confused that they can have
@@ -317,5 +306,48 @@ class OrderController extends Controller
 
         // default
         return redirect()->away(get_musora_brand_base_url() . '/order/drumeo');
+    }
+
+    public function redirectLegacyDrumeoAddToCartUrl(Request $request)
+    {
+        $input = $request->all();
+        $addedProducts = [];
+
+        // Lots of urls were set up using the wrong locked param name.
+        if (!empty($input['lock-cart'])) {
+            $input['locked'] = $input['lock-cart'];
+        }
+
+        if (($input['go-back-to-shop'] ?? null) == true) {
+            // redirecting to hardcoded url, instead of route('drumshop.index'), avoids two redirects made by .htaccess
+            $input['redirect'] = '/drumshop/';
+        } else {
+            $input['redirect'] = route('order-form', ['brand' => 'drumeo']);
+        }
+
+        unset($input['go-back-to-shop']);
+
+        $products = [];
+
+        foreach ($input['products'] as $requestProductSku => $productInfo) {
+            $productSku = $requestProductSku;
+            $productInfo = explode(',', $productInfo);
+            $quantityToAdd = $productInfo[0];
+
+            if (!empty($productInfo[1])) {
+                // remap product sku for subscriptions
+                $subscriptionType = !empty($productInfo[1]) ? $productInfo[1] : null;
+                $subscriptionFrequency = !empty($productInfo[2]) ? $productInfo[2] : null;
+                $productSku = $requestProductSku . '-' . $subscriptionFrequency . '-' . $subscriptionType;
+            }
+
+            $products[$productSku] = $quantityToAdd;
+        }
+
+        $input['products'] = $products; // rebuilt products array to maintain cart items order for the subscriptions sku remap case
+
+        // route from ecommerce package
+        return redirect()->away(get_musora_brand_base_url() . '/ecommerce/add-to-cart?' . http_build_query($input));
+
     }
 }

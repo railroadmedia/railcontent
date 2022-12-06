@@ -1,4 +1,6 @@
-@extends('drumeo.sales.standard-layout')
+@extends('drumeo.sales.standard-layout', [
+    "bfButton" => true
+])
 
 @section('meta')
     <title>Drumeo | Reach your drumming goals.</title>
@@ -8,7 +10,7 @@
 
 @section('promo-banner-alt')
     @include('_partials.layout.holiday.homepage-top-banner',[
-        'text' => 'GET 5 FREE BONUSES WORTH $538'
+        'text' => 'GET 10 FREE BONUSES WORTH $1228.94'
     ])
 @endsection
 
@@ -18,11 +20,9 @@
 {{--            <img class="h-7 md:h-12 lg:h-14 mb-3 sm:mb-5 lazyload" data-src="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/september/sticktember-logo.png" alt="10year_logo">--}}
 {{--            --}}{{--<h1 data-aos="fade-down" class="font-bebas leading-none mb-1 text-4xl md:text-6xl">REACH YOUR  <br class="inline md:hidden">  <span class="text-coaches">DRUMMING GOALS.</span></h1>--}}
 {{--            <h4 class="leading-normal"><strong>Get 6 free pairs of sticks + support <br class="inline sm:hidden"> underfunded music programs!</strong>--}}
-{{--                <br><span class="uppercase" style="color:#cda880">ONLY <span class="tzcd-full hidden sm:inline">A LIMITED TIME</span> <span class="tzcd-small inline sm:hidden">A LIMITED TIME</span> LEFT!</span>--}}
 {{--            </h4>--}}
 {{--            --}}{{--<p class="leading-normal mb-3 md:mb-5 uppercase"><strong>--}}
 {{--                    --}}{{--GET 3 BONUS TRAINING PACKS<br class="inline md:hidden"> FREE WHEN YOU JOIN DRUMEO--}}
-{{--                    --}}{{--<br><span class="text-coaches uppercase">ONLY <span class="tzcd-full">A LIMITED TIME</span> LEFT!</span>--}}
 {{--                --}}{{--</strong></p>--}}
 {{--            <div class="flex flex-wrap items-start justify-center mx-auto my-5 sm:my-10">--}}
 {{--                <div class="flex flex-wrap items-start flex-image mx-auto w-full md:w-4/12 lg:w-4/12 md:order-1 mb-5 md:mb-0 justify-center">--}}
@@ -77,8 +77,8 @@
 @endsection
 
 @section('sticky-bar')
-    @include('_partials.layout.holiday.homepage-sticky-bar', [
-        'text' => 'GET 10 FREE BONUSES <br> WORTH $1228.94'
+    @include('_partials.layout.holiday.sticky-bar', [
+        'text' => 'GET 10 FREE BONUSES <br> WORTH $1228.94',
     ])
 
     {{--<div class="h-10 relative w-full block" style="background:linear-gradient(to bottom, #022040, #01050f);"></div>--}}

@@ -13,13 +13,13 @@
             <section class="shop">
                 <div class="top-image @if(!empty($packLogo)) with-logo @endif" style="background-image:url(https://cdn.musora.com/image/fetch/w_600,q_auto:best/{{ $thumbnail }});">
                     @if (!empty($badgeText))
-                        <span class="top-left-badge">
+                        <span class="top-left-badge text-white bg-promo">
                             {!! $badgeText !!}
                         </span>
                     @elseif ($soldOut)
-                        <span class="top-left-badge">Sold Out</span>
+                        <span class="top-left-badge bg-gray-600 text-white">Sold Out</span>
                     @elseif (round(100 - (100 * ($price / $fullPrice))) > 1)
-                        <span class="top-left-badge">
+                        <span class="top-left-badge text-white bg-promo">
                             <i class="fas fa-star"></i> Save {{ round(100 - (100 * ($price / $fullPrice))) }}%
                         </span>
                     @endif
@@ -36,11 +36,11 @@
                         <p><em>{{ $packAuthor }}</em></p>
                     @endif
                     @if (round(100 - (100 * ($price / $fullPrice))) > 1)
-                        <p><s>WAS ${{ floatval($fullPrice) }}</s> <strong> NOW ${{  floatval($price)  }}</strong></p>
+                        <p><s>WAS ${{ floatval($fullPrice) }}</s> <strong class="text-promo"> NOW ${{  floatval($price)  }}</strong></p>
                     @elseif(!empty($soldOut))
                         <p><strong>SOLD OUT</strong></p>
                     @else
-                        <p><strong> ${{  floatval($price)  }}</strong></p>
+                        <p><strong class="text-promo"> ${{  floatval($price)  }}</strong></p>
                     @endif
                 </div>
             </section>
@@ -88,8 +88,8 @@
                         @elseif(!empty($sku) && (empty($sizes) || count($sizes) === 0))
                             <a
                                 class="online-atc vue-add-to-cart"
-                                href="/ecommerce/add-to-cart?products[{{ $sku }}]=1&redirect=/shop" data-base-url="/ecommerce/add-to-cart?products[{{ $sku }}]=1&redirect=/shop"
-                                data-product-json='{"{{ $sku }}": 1}'
+                                href="/ecommerce/add-to-cart?products[{!! $sku !!}]=1&redirect=/shop" data-base-url="/ecommerce/add-to-cart?products[{!! $sku !!}]=1&redirect=/shop"
+                                data-product-json='{"{!! $sku !!}": 1}'
                                 @if(!empty($promoCode)) data-promocode="{{ $promoCode }}" @endif
                                 @if(!empty($lockedCart)) data-locked-cart="{{ $lockedCart }}" @endif
                             >

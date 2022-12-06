@@ -196,14 +196,33 @@
     </div>
 
     <header class="drum-shop-header" style="background-image:url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/header-background.jpg);">
-        <div class="container mx-auto">
+        <div class="container mx-auto relative z-10">
             <div class="px-2 md:px-3">
-                @include('_partials.layout.holiday.shop-page-banner',[
-                    'text' => 'Save up to 81% on lessons,<br class="inline md:hidden"> accessories, and merch.'
-                ])
-{{--                <img class="h-6 md:h-9" src="https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="drumeo logo">--}}
-{{--                <h1><strong>DRUM SHOP</strong></h1>--}}
-{{--                <p>GET LESSONS, MERCH, GEAR, & MUCH MORE</p>--}}
+                <img class="h-14 sm:h-16 lg:h-20" src="https://cdn.musora.com/image/fetch/w_450,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/christmas/holiday-drums.png"><br>
+                <h1 class="my-2"><strong>DRUM SHOP</strong></h1>
+                <h5 class="leading-tight">Save up to <span class="">81%</span> on lessons,<br class="inline md:hidden"> accessories, and merch.</h5>
+                {{-- <div class="rounded-xl px-6 py-2 inline-flex flex-wrap mx-auto mt-5 justify-center items-center" style="background-color:#181515;">
+                    <p class="leading-none m-0"><strong>DEALS END IN:</strong></p>
+                    <div class="h-12 mx-5 bg-promo" style="width:2px;"></div>
+                    <div class="tzcd-big">
+                        <div class="inline-block">
+                            <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>
+                            <p class="leading-none uppercase font-extrabold text-xs text-promo">days</p>
+                        </div>
+                        <div class="inline-block mx-2">
+                            <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>
+                            <p class="leading-none uppercase font-extrabold text-xs text-promo">hrs</p>
+                        </div>
+                        <div class="inline-block mr-2">
+                            <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>
+                            <p class="leading-none uppercase font-extrabold text-xs text-promo">mins</p>
+                        </div>
+                        <div class="inline-block">
+                            <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>
+                            <p class="leading-none uppercase font-extrabold text-xs text-promo">secs</p>
+                        </div>
+                    </div>
+                </div> --}}
             </div>
         </div>
     </header>
@@ -269,6 +288,7 @@
 
     <div class="white-box">
         @include('_partials.layout.holiday.bundle-cards')
+
         <section class="bundles">
             <div class="container mx-auto">
                 <div class="float-left w-full px-2 md:px-3 card-wrap">
@@ -287,6 +307,7 @@
                         </a>
                     </div>
                 </div>
+
             </div>
         </section>
 
@@ -474,67 +495,9 @@
     <script type="text/javascript" src="{{ asset('/marketing/js/drumeo/ba-bbq.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/drumeo/misc.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-    <script type="text/javascript" src="/marketing/js/jquery.countdown-2.min.js"></script>
     <script>
         $(document).ready(function () {
             $(document).foundation();
-            // Countdown
-            $('.tzcd-full').countdown('2022/10/01')
-                .on('update.countdown', function (event) {
-                    var format = '%-M Minute%!M %-S Second%!S';
-                    if (event.offset.totalHours > 0) {
-                        format = '%-H Hour%!H ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '%-D Day%!D ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('a limited time');
-                });
-            $('.tzcd-med').countdown('2022/10/01')
-                .on('update.countdown', function (event) {
-                    var format = '%-M Minute%!M';
-                    if (event.offset.totalHours > 0) {
-                        format = '%-H Hour%!H ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '%-D Day%!D ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('a limited time');
-                });
-            $('.tzcd-small').countdown('2022/10/01')
-                .on('update.countdown', function (event) {
-                    var format = '%-MM %-SS';
-                    if (event.offset.totalHours > 0) {
-                        format = '%-HH ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '%-DD ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('a limited time');
-                });
-            $('.tzcd-big').countdown('2022/10/01')
-                .on('update.countdown', function (event) {
-                    var format = '' + '<div><h1>%M</h1> <p>min%!M</p></div> ' + '<div><h1>%S</h1> <p>sec%!S</p></div>';
-                    if (event.offset.totalHours > 0) {
-                        format = '' + '<div><h1>%H</h1> <p>hr%!H</p></div> ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '' + '<div><h1>%D</h1> <p>day%!D</p></div> ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('<div><h1>LIMITED</h1> <p>TIME LEFT</p></div>');
-                });
         });
     </script>
     <script src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
@@ -587,7 +550,6 @@
 
                 $('.delay-overlay').removeClass('active');
                 $('.shipping-info').removeClass('active');
-                $('.timing-info').removeClass('active');
             });
 
             $(".shipping-delay .shipping-trigger").on('click', function () {
@@ -595,21 +557,14 @@
                 $('.shipping-info').addClass('active');
             });
 
-            $(".shipping-delay .timing-trigger").on('click', function () {
-                $('.delay-overlay').addClass('active');
-                $('.timing-info').addClass('active');
-            });
-
             $(".shipping-delay .close-modal").on('click', function () {
                 $('.delay-overlay').removeClass('active');
                 $('.shipping-info').removeClass('active');
-                $('.timing-info').removeClass('active');
             });
             $(document).keyup(function(e) {
                 if (e.which === 27) {
                     $('.delay-overlay').removeClass('active');
                     $('.shipping-info').removeClass('active');
-                    $('.timing-info').removeClass('active');
                 }
             });
         });
