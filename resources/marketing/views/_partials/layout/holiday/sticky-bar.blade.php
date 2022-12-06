@@ -1,4 +1,4 @@
-<a href="@if(!empty($homepage))#orderNow @elseif($theme === 'drumeo')/drumshop @else/shop @endif" style="background: #000 url(https://drumeo-assets.s3.amazonaws.com/promos/christmas/snow-dark.gif) center center/250px;box-shadow: 0 0 10px inset #000;"
+<a href="#orderNow" style="background: #000 url(https://drumeo-assets.s3.amazonaws.com/promos/christmas/snow-dark.gif) center center/250px;box-shadow: 0 0 10px inset #000;"
    class="anchor-slide promo-banner block text-center w-full transition-opacity duration-300 overflow-hidden whitespace-nowrap bg-cover bg-center shadow-md py-1 z-0 mx-auto -mt-10 text-xs">
     <div class="container mx-auto relative">
         <div class="inline-block align-middle text-center">
