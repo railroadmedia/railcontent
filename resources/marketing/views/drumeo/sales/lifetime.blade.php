@@ -7,7 +7,7 @@
 
     <meta name="description" content="Drum lessons for LIFE. (+20 FREE bonuses)">
     <meta property="og:description" content="Drum lessons for LIFE. (+20 FREE bonuses)">
-    <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/lifetime/lifetime-thumb.jpg" style="display: none;">
+    <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/promos/november/lifetime-fb-share-image.jpg" style="display: none;">
 
     @include('drumeo._partials._fonts')
 
@@ -41,6 +41,15 @@
         .beg-adv-bar div:nth-child(1) {
             width: 40%;
         }
+        .text-gradient {
+            display:inline-block;
+            background:-webkit-linear-gradient(20deg, #03c8ac, #0976db, #9a01ee, #f61a30);
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+        }
+        .text-gradient s {
+            -webkit-text-fill-color: #888;
+        }
     </style>
 @stop
 
@@ -49,47 +58,38 @@
             "edgeVersion" => true,
             "scrollToJoin" => true
         ])
-    <section class="content-section text-center" style="padding-bottom: 0; background:linear-gradient(to bottom, #01050f 70%, #020c1a);">
-        <div class="container mx-auto">
-            <h1 class="font-bebas leading-none mb-1 text-4xl md:text-6xl">GET A <span class="text-coaches">LIFETIME</span> <br class="inline md:hidden">DRUMEO MEMBERSHIP</h1>
-            <h4 class="text-coaches uppercase">+ 20 FREE Bonuses and an Exclusive Masterclass!</h4>
+        <section class="content-section text-center" style="padding-bottom: 0; background:linear-gradient(to bottom, #01050f 70%, #020c1a);">
+            <div class="container mx-auto">
+                <h1 class="font-bebas leading-none mb-1 text-4xl md:text-6xl">GET A <span class="text-gradient">LIFETIME</span> <br class="inline md:hidden">DRUMEO MEMBERSHIP</h1>
+                <h4 class="text-gradient uppercase">+ FREE In-Ear Headphones, An Exclusive Masterclass, And More!</h4>
 
-            <div class="w-full mx-auto my-10 px-3" style="max-width:920px;">
-                <div class="aspect-16:9 w-full relative">
-                    <iframe class="absolute w-full h-full reset-on-close" src="//player.vimeo.com/video/733733565" frameborder="0" allowfullscreen allow="autoplay"></iframe>
+                <div class="w-full mx-auto my-10 px-3" style="max-width:920px;">
+                    <div class="aspect-16:9 w-full relative">
+                        <iframe class="absolute w-full h-full reset-on-close" src="//player.vimeo.com/video/774477396" frameborder="0" allowfullscreen allow="autoplay"></iframe>
+                    </div>
                 </div>
-            </div>
-            @if($products['DLM-Lifetime']->getPublicStockCount() > 0)
-                <h3 class="leading-tight text-coaches uppercase">
-                    {{--<strong class="text-promo">ONLY <s class="opacity-60">100</s> {{ $products['DLM-Lifetime']->getPublicStockCount() }} SPOTS</strong><br>--}}
-                    <strong>AVAILABLE UNTIL AUGUST 3RD AT MIDNIGHT</strong>
-                </h3>
-                <h5 class="leading-tight text-coaches uppercase">ONLY <span class="tzcd-full">A LIMITED TIME</span> LEFT</h5>
-            @endif
-            <p class="leading-relaxed px-3 my-5 text-left text-light-navy" style="width: 100%;max-width: 650px;">
-                <em>“My soul is that of a drummer. I didn’t do it to become rich and famous. I did it because it was the love of my life.” – Ringo Starr</em>
-                <br><br>
-                Wise words from drumming royalty ^.
-                <br><br>
-                If you feel similarly, we want to invite you to make a lifelong commitment to your drumming.
-                <br><br>
-                <strong>For the next 3 days only, Drumeo Lifetime Memberships are back!</strong>
-                <br><br>
-                This is your chance to make one final payment for your Drumeo Membership and then enjoy unlimited drum lessons, song breakdowns, and LIVE events with your favorite drummers for years to come.
-                <br><br>
-                <strong>And heads up:</strong> You can split the payment for 1, 2, or 5 installments. (You’ll see that option upon checkout.)
-                <br><br>
-                You’ll also get 20 FREE bonuses with your membership – including a NEW pair of Drumeo EarDrums + an exclusive masterclass with Drumeo co-founder Jared Falk to help you maximize your potential on the drums.
-                <br><br>
-                Scroll down to see everything included with your Drumeo Lifetime Membership and we’ll see you with your little infinity badge around your name very soon!
-            </p>
-            @if($products['DLM-Lifetime']->getPublicStockCount() > 0)
-                <a class="join blue my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-2xl" href="/laravel/public/shopping-cart/api/query?products[DLM-Lifetime]=1&products[drumeo-eardrums]=1&products[Drumeo-VaterSticks]=6&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[drum-technique-made-easy-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[four-weeks-to-better-drum-fills]=1&products[learn-songs-faster-pack]=1&products[TLOD-DIGI]=1&products[MAM-DIGI]=1&products[GHFAL-DIGI]=1&products[HGAF-DIGI]=1&products[AOADS-DIGI]=1&products[ICM-DIGI]=1&products[BTC-DIGI]=1&products[CC-DIGI]=1&products[TG-DIGI]=1&locked=true&redirect=/order">BECOME A LIFETIME MEMBER &raquo;</a>
-            @else
+                <p class="leading-relaxed px-3 my-5 text-left text-light-navy" style="width: 100%;max-width: 650px;">
+                    <em>“My soul is that of a drummer. I didn’t do it to become rich and famous. I did it because it was the love of my life.” – Ringo Starr</em>
+                    <br><br>
+                    If you feel like Ringo, we want to invite you to make a lifelong commitment to your drumming.
+                    <br><br>
+                    Drumeo Lifetime Memberships are back – for Cyber Monday ONLY!
+                    <br><br>
+                    This is your chance to make one final payment for your Drumeo Membership and then enjoy unlimited drum lessons, song breakdowns, and LIVE events with your favorite drummers for years to come.
+                    <br><br>
+                    <strong>And heads up:</strong> You can split the payment for 1, 2, or 5 installments. (You’ll see that option upon checkout.)
+                    <br><br>
+                    You’ll also get FREE bonuses with your membership – including a NEW pair of Drumeo EarDrums + an exclusive masterclass with award-winning Drumeo Coach, Todd Sucherman.
+                    <br><br>
+                    Scroll down to see everything included with your Drumeo Lifetime Membership and we’ll see you with your little infinity badge around your name very soon!
+                </p>
+                {{--            @if($products['DLM-Lifetime']->getPublicStockCount() > 0)--}}
+                {{--                <a class="join blue my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-2xl" href="{{ URL::Route('shopping-cart.to-cart.api') }}?products[DLM-Lifetime]=1&products[drumeo-eardrums]=1&products[Drumeo-VaterSticks]=12&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[learn-songs-faster-pack]=1&products[TLOD-DIGI]=1&products[MAM-DIGI]=1&products[GHFAL-DIGI]=1&products[HGAF-DIGI]=1&products[AOADS-DIGI]=1&products[ICM-DIGI]=1&products[BTC-DIGI]=1&products[CC-DIGI]=1&products[TG-DIGI]=1&locked=true">BECOME A LIFETIME MEMBER &raquo;</a>--}}
+                {{--            @else--}}
                 <a class="join sold-out my-4">Sold Out</a>
-            @endif
-        </div>
-    </section>
+                {{--            @endif--}}
+            </div>
+        </section>
 
     <section class="text-center text-white py-10 md:py-20 lg:py-24 px-2 md:px-4 relative overflow-hidden" style="background:linear-gradient(to bottom, #020c1a, #021125);">
         <div class="container mx-auto z-10 relative">
@@ -129,34 +129,23 @@
 
     <section class="text-center text-white py-10 md:py-20 lg:py-24 px-4 md:px-6 relative overflow-hidden" style="background:#01050f;">
         <div class="container mx-auto z-10 relative max-w-4xl">
-            <h3 class="mb-8 sm:mb-12"><strong>Fall in love with the process,<br class="inline sm:hidden"> and the results will come.</strong></h3>
-            <div class="flex flex-wrap sm:flex-nowrap items-start justify-center">
+            <h3 class="mb-8 sm:mb-12"><strong>Get Timeless Wisdom <br class="inline sm:hidden">From A Drumming Legend</strong></h3>
+            <div class="flex flex-wrap sm:flex-nowrap items-start lg:items-center justify-center">
                 <div class="order-1 sm:order-0 text-left text-light-navy sm:pr-5 lg:pr-12">
-                    <p>There’s a pattern with all great drummers: the more successful they are, the more work they feel still needs to be done.
+                    <p>Todd Sucherman can do it all.
                         <br><br>
-                        <strong>That’s because drumming is a beautiful, life-long endeavor.</strong>
+                        Technique, musicianship, groove, double bass, multiple styles… You name it, Todd has studied it and thoroughly understands what it takes to be successful. And now he’s going to share it with you.
                         <br><br>
-                        And the sooner you fall in love with the <em>process</em> of learning, the more rapid your progress will become. That’s why I’m so excited to dedicate a masterclass for Drumeo Lifetime members to help you realize your creative potential on the drums.
+                        In this exclusive Drumeo Lifetime Member Masterclass, Todd Sucherman will impart his wisdom on what it takes to be successful on the drums – no matter what level you’re at or what your goals are.
                         <br><br>
-                        If you’ve ever found yourself feeling like you:</p>
-                    <ul class="list-disc ml-10 my-4">
-                        <li>Lack the time to improve</li>
-                        <li>Don’t have the right gear</li>
-                        <li>Or are missing natural “talent”</li>
-                    </ul>
-                    <p>This masterclass will help you change your mindset and clarify 1) Your goals on the drums; 2) Building a path to get there; and 3) Staying inspired throughout the process.
+                        This Masterclass will be streamed LIVE in January (date TBD – you’ll be notified by mid-December) and available for on-demand access.
                         <br><br>
-                        <strong>And it will ONLY be available to you & your fellow Lifetime Members.</strong>
+                        This is your chance to learn directly from a drumming legend & have your questions answered LIVE.
                         <br><br>
-                        You can tune in LIVE on August 27th and then have on-demand access to reference anytime you need a refresher.
-                        <br><br>
-                        Join us on:
-                        <br><br>
-                        August 27th @ 12pm & 6pm EST
-                        <br><br>
-                        See you there!</p>
+                        <strong>Masterclass Date:</strong> January 2023 (Exact date to be determined).
+                    </p>
                 </div>
-                <img class="mb-4 sm:mb-0 order-0 sm:order-1 w-36 sm:w-72 lg:w-80" src="https://cdn.musora.com/image/fetch/w_640,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/july/ui_screen.jpg">
+                <img class="mb-4 sm:mb-0 order-0 sm:order-1 w-36 sm:w-72 lg:w-80 rounded-xl" src="https://cdn.musora.com/image/fetch/w_640,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/november/todd-sucherman-exclusive-lifetime.jpg">
             </div>
         </div>
     </section>
@@ -188,7 +177,7 @@
 
                     <p class="uppercase w-full leading-normal mt-2">
                         <strong class="font-black leading-tight inline-block mb-1">Drumeo Lifetime Membership</strong><br>
-                        <span class="text-promo" style="text-transform:uppercase; display:inline-block;"><strong>${{ Prices::$drumeoEdgeLifetime }}</strong><br>
+                        <span class="text-gradient" style="text-transform:uppercase; display:inline-block;"><strong>${{ Prices::$drumeoEdgeLifetime }}</strong><br>
                                 Instant Access</span>
                     </p>
                 </div>
@@ -197,7 +186,7 @@
 
                     $bonuses = [
                         [
-                        'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/eardrums.jpg',
+                        'image' => 'https://cdn.musora.com/image/fetch/c_fill,w_300,q_auto:good/https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/eardrums.jpg',
                         'title' => 'Drumeo EarDrums',
                         'description' => 'Drumeo EarDrums reduce external volume by up to -29dB. That means you can play hard while protecting your ears.',
                         'price' => Prices::$earDrumsFull,
@@ -206,26 +195,19 @@
                         ],
                         [
                         'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/drumsticks.jpg',
-                        'title' => '6 Pairs Of Drumeo Drumsticks',
+                        'title' => '12 Pairs Of Drumeo Drumsticks',
                         'description' => 'Drumeo 5A Drumsticks by Vater -- made with hickory and extra moisture to last longer.',
-                        'price' => Prices::$sticksFull,
+                        'price' => 155.40,
                         'online-ship' => "Free Shipping",
                         'shipping' => "no-shipping"
                         ],
                         [
-                        'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/july/jared_masterclass.jpg',
-                        'title' => 'Jared Falk’s Masterclass',
-                        'description' => 'Jared ’s masterclass for goal-setting & staying inspired for your drumming journey.',
-                        'price' => Prices::$learnSongsFasterFull,
+                        'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/november/todd-sucherman-masterclass.png',
+                        'title' => 'Todd Sucherman’s Exclusive Lifetime Masterclass',
+                        'description' => ' ',
+                        'price' => 0,
                         'online-ship' => "Instant Access",
                         'live' => true,
-                        ],
-                        [
-                        'image' => 'https://drumeo-assets.s3.amazonaws.com/drum-shop/lifetime/15_digital_card.jpg',
-                        'title' => 'Plus 17 Digital Lesson Packs',
-                        'description' => 'All Hudson Packs, Drumming System, Successful Drumming, Rock Drumming Masterclass, Drum Technique Made Easy, Independence Made Easy, and Learn Songs Faster',
-                        'price' => Prices::$learnSongsFasterFull,
-                        'online-ship' => "Instant Access"
                         ],
                     ]
                 @endphp
@@ -235,10 +217,10 @@
                             <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
                                 <div class="border-2 border-drumeo front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
                                     @if(!empty($bonus['shipping']))
-                                        <p class="absolute text-white top-0 left-0 w-full pb-0.5 text-sm bg-drumeo rounded-t-xl"><strong>Free Shipping</strong></p>
+                                        <p class="absolute text-white top-0 left-0 w-full pb-0.5 text-sm bg-drumeo"><strong>Free Shipping</strong></p>
                                     @endif
                                     @if(!empty($bonus['live']))
-                                        <p class="absolute text-white top-0 left-0 w-full pb-0.5 text-sm bg-drumeo rounded-t-xl"><strong>Exclusive</strong></p>
+                                        <p class="absolute text-white top-0 left-0 w-full pb-0.5 text-sm bg-drumeo"><strong>Exclusive</strong></p>
                                     @endif
                                     <div class="h-full w-full bg-black bg-top bg-cover lazyload" data-bg="https://cdn.musora.com/image/fetch/w_460,q_auto:best/{{ $bonus['image'] }}"></div>
                                     <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
@@ -256,8 +238,9 @@
 
                         <p class="uppercase w-full leading-normal mt-2">
                             <strong class="font-black leading-tight inline-block mb-1">{!!  $bonus['title']  !!}</strong><br>
-                            <span class="text-promo" style="text-transform:uppercase; display:inline-block;">
-                                {{--<s>${{ $bonus['price'] }}</s>--}} <strong>FREE</strong><br>
+                            <span class="text-gradient" style="text-transform:uppercase; display:inline-block;">
+                                @if($bonus['price'] > 0) <s>${{ $bonus['price'] }}</s> @endif <strong>FREE</strong><br>
+
                                 @if(!empty($bonus['shipping']))
                                     Free Shipping
                                 @elseif(!empty($bonus['live']))
@@ -271,11 +254,11 @@
                 @endforeach
             </div>
 
-            @if($products['DLM-Lifetime']->getPublicStockCount() > 0)
-                <a class="join blue bigger my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="/laravel/public/shopping-cart/api/query?products[DLM-Lifetime]=1&products[drumeo-eardrums]=1&products[Drumeo-VaterSticks]=6&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[drum-technique-made-easy-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[four-weeks-to-better-drum-fills]=1&products[learn-songs-faster-pack]=1&products[TLOD-DIGI]=1&products[MAM-DIGI]=1&products[GHFAL-DIGI]=1&products[HGAF-DIGI]=1&products[AOADS-DIGI]=1&products[ICM-DIGI]=1&products[BTC-DIGI]=1&products[CC-DIGI]=1&products[TG-DIGI]=1&locked=true&redirect=/order">BECOME A LIFETIME MEMBER &raquo;</a>
-            @else
-                <a class="join sold-out my-4">Sold Out</a>
-            @endif
+            {{--            @if($products['DLM-Lifetime']->getPublicStockCount() > 0)--}}
+            {{--                <a class="join blue bigger my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ URL::Route('shopping-cart.to-cart.api') }}?products[DLM-Lifetime]=1&products[drumeo-eardrums]=1&products[Drumeo-VaterSticks]=12&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[learn-songs-faster-pack]=1&products[TLOD-DIGI]=1&products[MAM-DIGI]=1&products[GHFAL-DIGI]=1&products[HGAF-DIGI]=1&products[AOADS-DIGI]=1&products[ICM-DIGI]=1&products[BTC-DIGI]=1&products[CC-DIGI]=1&products[TG-DIGI]=1&locked=true">BECOME A LIFETIME MEMBER &raquo;</a>--}}
+            {{--            @else--}}
+            <a class="join sold-out my-4">Sold Out</a>
+            {{--            @endif--}}
         </div>
     </section>
 

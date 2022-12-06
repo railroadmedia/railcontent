@@ -2,14 +2,13 @@
     $annualLink = '/laravel/public/shopping-cart/api/query?products[DLM]=1,year,1&products[quietpad]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[GHFAL-DIGI]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[learn-songs-faster-pack]=1&locked=true';
 @endphp
 
-<section class="content-section text-center customize px-4 lg:px-6 relative z-50 overflow-hidden bg-top lazyload" style="background: #000 url(https://drumeo-assets.s3.amazonaws.com/promos/christmas/snow-dark.gif) center center/250px;box-shadow: 0 0 100px inset #000;">
-{{--<img class="h-10 sm:h-12 lg:h-14 --}}{{--mb-5 md:mb-7 lg:mb-10--}}{{--" src="https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="drumeo-logo">--}}
-    <img class="h-12 sm:h-14 lg:h-16 mb-4 md:mb-6 {{--mb-5 md:mb-7 lg:mb-10--}}" src="https://drumeo-assets.s3.amazonaws.com/promos/christmas/holiday-drums.png" alt="drumeo-logo">
-
+<div style="background:linear-gradient(to bottom, #02010f, #010522);">
+<section class="content-section text-center customize px-4 lg:px-6 relative z-50 overflow-hidden bg-top lazyload" style="background: url(https://drumeo-assets.s3.amazonaws.com/promos/christmas/snow-dark.gif) center center/250px;box-shadow: 0 0 100px inset #000;">
     <div class="container mx-auto relative z-50">
         <div class="mx-auto max-w-4xl" style="font-size: 0;">
             <div class="w-full">
                 <div class="bonus-wrap relative inline-block align-top mx-auto px-1 md:px-3 w-full max-w-md">
+                    <img class="h-20 absolute top-0 right-0 z-10 -mt-8 -mr-2" src="https://drumeo-assets.s3.amazonaws.com/promos/december/santa-hat.png">
                     <div class=" inline-block relative w-full group" style="padding-bottom: 47%;perspective: 1000px;">
                         <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
                             <div class="border-2 border-promo front absolute z-20 overflow-hidden rounded-3xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
@@ -17,13 +16,17 @@
                             </div>
                         </div>
                     </div>
-
-                    <h4 class="uppercase w-full leading-normal mt-2">
-                        <span style="text-transform:uppercase; display:inline-block;"><strong class="text-promo">${{ Prices::$drumeoEdgeAnnual }}</strong></span>
-                    </h4>
                 </div>
-                <a class="join promo bigger my-3 md:my-4 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="{{ $annualLink }}" {{--data-open="orderModal"--}}>GET Started &raquo;</a>
-                <h3 class="leading-tight my-6 sm:my-8">+ GET 10 FREE BONUSES<br class="inline sm:hidden"> WORTH $1228.94</h3>
+                <h3 class="leading-tight my-3">
+                    <strong>
+                        Join Drumeo for just ${{  round(Prices::$drumeoEdgeAnnual / 12, 2) }}/month</strong> <br class="hidden sm:inline">
+                    <strong class="text-promo">PLUS</strong> get 10 free bonuses worth $1228.94.
+
+                </h3>
+                <a class="join promo bigger my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="{{ $annualLink }}" {{--data-open="orderModal"--}}>GET Started &raquo;</a>
+                <p class="leading-tight text-sm"><em>Billed at ${{ Prices::$drumeoEdgeAnnual }} per year.<br class="inline sm:hidden">  Cancel anytime. 90-day guarantee.</em></p>
+                <h4 class="leading-tight my-6 sm:my-8">
+                    <strong>10 FREE BONUSES.</strong> <em>ONLY<br class="inline sm:hidden"> AVAILABLE UNTIL DECEMBER 26</em></h4>
             </div>
             @php
                 $bonuses = [
@@ -104,7 +107,7 @@
                             <div class="border-2 border-promo front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style="@if(!empty($bonus['special'])) overflow: visible;border-color: #cda880; @endif backface-visibility: hidden;">
                                 @if(!empty($bonus['badge']))
                                     <h6 class="absolute text-white top-0 left-0 w-full py-0.5 bg-drumeo rounded-t-xl font-bebas uppercase">{{ $bonus['badge'] }}</h6>
-{{--                                        <h4 class="absolute text-white -top-3 -left-3  py-3 px-2.5 rounded-full transform -rotate-12" style="    line-height: 0.6;background-color:#cda880;"><strong>6<br><span class="leading-none" style="font-size: 50%;">PAIRS</span></strong></h4>--}}
+                                    {{--                                        <h4 class="absolute text-white -top-3 -left-3  py-3 px-2.5 rounded-full transform -rotate-12" style="    line-height: 0.6;background-color:#cda880;"><strong>6<br><span class="leading-none" style="font-size: 50%;">PAIRS</span></strong></h4>--}}
                                 @endif
                                 <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover lazyload" data-bg="https://cdn.musora.com/image/fetch/w_460,q_auto:best/{{ $bonus['image'] }}"></div>
                                 <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
@@ -123,18 +126,18 @@
                     <p class="w-full leading-normal mt-2">
                         {{--<strong class="font-black leading-tight inline-block mb-1">{!!  $bonus['title']  !!}</strong><br>--}}
                         <span style="text-transform:uppercase; display:inline-block;"><s>${{ $bonus['price'] }}</s> <strong class="text-promo">FREE</strong></span><br>
-                       <em>
+                        <em>
                             @if(!empty($bonus['shipping']))
                                 Free Shipping
                             @else
                                 Online Access
                             @endif
-                       </em>
+                        </em>
                     </p>
                 </div>
             @endforeach
             {{-- <p class=" mt-4 md:mt-5" style="display:inline-block;background: -webkit-linear-gradient(20deg, #03c8ac, #0976db, #9a01ee, #f61a30);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"><strong>By joining today, we’ll donate 20% of your new membership<br class="hidden sm:inline"> towards the <a target="_blank" href="https://musicounts.ca/en/take-action/ways-of-giving/fundraise-on-musicounts-behalf/fundraisers-supporting-musicounts/give-the-gift-of-music-with-musora/"><u>MusiCounts Band Aid Program</u></a>.</strong></p> --}}
-{{--            <h4 class="leading-tight mt-4"><strong>Only $12.50/month <br class="inline sm:hidden">(billed annually at ${{ Prices::$drumeoEdgeAnnual }}).</strong></h4>--}}
+            {{--            <h4 class="leading-tight mt-4"><strong>Only $12.50/month <br class="inline sm:hidden">(billed annually at ${{ Prices::$drumeoEdgeAnnual }}).</strong></h4>--}}
             <a class="join promo bigger my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $annualLink }}" {{--data-open="orderModal"--}}>GET Started &raquo;</a>
             {{-- <p class="leading-tight">Billed annually at <s class="opacity-60">${{ Prices::$drumeoEdgeAnnualFull }}</s>${{ Prices::$drumeoEdgeAnnual }} per year.</p> --}}
             <br>
@@ -143,7 +146,7 @@
         </div>
     </div>
 </section>
-
+</div>
 <section class="content-section text-center" style="background: #0c1429;">
     <div class="container mx-auto relative z-50">
         <a class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738', 'newwindow', 'width=750, height=550'); return false;">

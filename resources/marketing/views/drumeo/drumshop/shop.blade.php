@@ -196,14 +196,33 @@
     </div>
 
     <header class="drum-shop-header" style="background-image:url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/header-background.jpg);">
-        <div class="container mx-auto">
+        <div class="container mx-auto relative z-10">
             <div class="px-2 md:px-3">
-                @include('_partials.layout.holiday.shop-page-banner',[
-                    'text' => 'Save up to 81% on lessons,<br class="inline md:hidden"> accessories, and merch.'
-                ])
-{{--                <img class="h-6 md:h-9" src="https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="drumeo logo">--}}
-{{--                <h1><strong>DRUM SHOP</strong></h1>--}}
-{{--                <p>GET LESSONS, MERCH, GEAR, & MUCH MORE</p>--}}
+                <img class="h-14 sm:h-16 lg:h-20" src="https://cdn.musora.com/image/fetch/w_450,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/christmas/holiday-drums.png"><br>
+                <h1 class="my-2"><strong>DRUM SHOP</strong></h1>
+                <h5 class="leading-tight">Save up to <span class="">81%</span> on lessons,<br class="inline md:hidden"> accessories, and merch.</h5>
+                {{-- <div class="rounded-xl px-6 py-2 inline-flex flex-wrap mx-auto mt-5 justify-center items-center" style="background-color:#181515;">
+                    <p class="leading-none m-0"><strong>DEALS END IN:</strong></p>
+                    <div class="h-12 mx-5 bg-promo" style="width:2px;"></div>
+                    <div class="tzcd-big">
+                        <div class="inline-block">
+                            <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>
+                            <p class="leading-none uppercase font-extrabold text-xs text-promo">days</p>
+                        </div>
+                        <div class="inline-block mx-2">
+                            <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>
+                            <p class="leading-none uppercase font-extrabold text-xs text-promo">hrs</p>
+                        </div>
+                        <div class="inline-block mr-2">
+                            <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>
+                            <p class="leading-none uppercase font-extrabold text-xs text-promo">mins</p>
+                        </div>
+                        <div class="inline-block">
+                            <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>
+                            <p class="leading-none uppercase font-extrabold text-xs text-promo">secs</p>
+                        </div>
+                    </div>
+                </div> --}}
             </div>
         </div>
     </header>
@@ -271,9 +290,39 @@
         @include('_partials.layout.holiday.bundle-cards')
         <section class="bundles">
             <div class="container mx-auto">
+                <div class="float-left w-full px-2 md:px-3 md:w-1/2 card-wrap">
+                    <a href="/drumshop/bundle-ultimate-lessons" class="bundle-card">
+                        <span class="top-left-badge text-white bg-promo"><i class="fas fa-star"></i> FREE QUIETPAD & DRUMSTICKS</span>
+                        <div class="bg-center bg-cover pb-40 sm:pb-56 xl:pb-72" style="background-image:url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/november/ultimate-lessons-shop-2.jpg);"></div>
+                        <div class="float-left w-full px-2 md:px-3">
+                            <p><strong>Drumeo Membership<br> + 10 Bonuses</strong><br>
+                                <em>
+                                    Drumeo Annual Membership<br class="inline md:hidden lg:inline">
+                                    + Practice Pad + Sticks + 8 Training Packs<br></em>
+                                <strong class="price"><s class="opacity-30">$1468.94</s>&nbsp; <span style="color:#107ab8;">${{ Prices::$drumeoEdgeAnnual }}</span></strong>
+                            </p>
+                            <span class="join max-w-md" style="background: linear-gradient(to bottom, #04afec, #213472);">See The Deal &raquo;</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="float-left w-full px-2 md:px-3 md:w-1/2 card-wrap">
+                    <a href="/drumshop/bundle-perfect-gift" class="bundle-card">
+                        <span class="top-left-badge text-white bg-promo"><i class="fas fa-star"></i> FREE P4 & DRUMSTICKS</span>
+                        <div class="bg-center bg-cover pb-40 sm:pb-56 xl:pb-72" style="background-image:url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/november/perfect-gift-fb-share-image.jpg);"></div>
+                        <div class="float-left w-full px-2 md:px-3">
+                            <p><strong>Drumeo Access Card<br> + 2 Bonuses</strong><br>
+                                <em>
+                                    Drumeo Access Card<br class="inline md:hidden lg:inline">
+                                    + Practice Pad + Sticks<br></em>
+                                <strong class="price"><s class="opacity-30">$331.95</s>&nbsp; <span style="color:#289077;">${{ Prices::$drumeoEdgeAnnual }}</span></strong>
+                            </p>
+                            <span class="join max-w-md" style="background: linear-gradient(to bottom, #01fdc0, #289077);">See The Deal &raquo;</span>
+                        </div>
+                    </a>
+                </div>
                 <div class="float-left w-full px-2 md:px-3 card-wrap">
                     <div class="px-2 sm:px-0 max-w-xs sm:max-w-full mx-auto">
-                        <a href="/drumshop/bundle-practice-anywhere/" class="flex flex-row-reverse text-white rounded-xl mx-auto mb-5 overflow-hidden relative w-full sm:text-left px-5 lg:px-12 pt-40 pb-5 sm:py-7 lg:py-8">
+                        <a href="/drumshop/bundle-practice-anywhere/" class="flex flex-row-reverse text-white rounded-xl mx-auto mb-5 overflow-hidden relative block w-full sm:text-left px-5 lg:px-12 pt-40 pb-5 sm:py-7 lg:py-8">
                             <div class="relative z-10 inline-block w-full sm:w-auto text-center mx-0">
                                 <img class="h-14 lg:h-28" src="https://cdn.musora.com/image/fetch/w_700,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/november/practice-anywhere-logo-wide-white.png"><br>
                                 <p class="leading-tight my-3">P4 Practice Pad + Drumsticks<br class="inline lg:hidden"> + Rudiment Poster</p>
@@ -287,6 +336,7 @@
                         </a>
                     </div>
                 </div>
+
             </div>
         </section>
 

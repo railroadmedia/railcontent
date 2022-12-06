@@ -12,11 +12,11 @@
             <section class="drum-shop">
                 <div class="top-image @if(!empty($packLogo)) with-logo @endif" style="background-image:url(https://cdn.musora.com/image/fetch/w_600,q_auto:best/{{ $thumbnail }});">
                     @if (!empty($badgeText))
-                        <span class="top-left-badge">
+                        <span class="top-left-badge text-white bg-promo">
                             {!! $badgeText !!}
                         </span>
                     @elseif (round(100 - (100 * ($price / $fullPrice))) > 1)
-                        <span class="top-left-badge">
+                        <span class="top-left-badge text-white bg-promo">
                             Save {{ round(100 - (100 * ($price / $fullPrice))) }}%
                         </span>
                     @endif
@@ -33,10 +33,10 @@
                         <p><em>{{ $packAuthor }}</em></p>
                     @endif
                     @if(!empty($specialPrice))
-                        <p><strong>{{ $specialPrice }}</strong></p>
+                        <p><strong class="text-promo">{{ $specialPrice }}</strong></p>
                     @elseif (round(100 - (100 * ($price / $fullPrice))) > 1)
                         <p><s>WAS ${{ floatVal($fullPrice) }}</s>
-                            <strong> NOW
+                            <strong class="text-promo"> NOW
                                 @if(number_format($price, 2) == intval($price))
                                     ${{  floatVal($price)  }}
                                 @else
@@ -44,7 +44,7 @@
                                 @endif
                             </strong></p>
                     @else
-                        <p><strong>${{  floatVal($price)  }}</strong></p>
+                        <p><strong class="text-promo">${{  floatVal($price)  }}</strong></p>
                     @endif
                 </div>
             </section>
@@ -62,7 +62,7 @@
                     @if(!empty($specialPrice))
                         <p><strong>{{  floatVal($specialPrice)  }}</strong><br><br></p>
                     @elseif (round(100 - (100 * ($price / $fullPrice))) > 1)
-                        <p class="price"><s>${{ floatVal($fullPrice) }}</s> <strong>
+                        <p class="price"><s>${{ floatVal($fullPrice) }}</s> <strong class="text-promo">
                                 @if(number_format($price, 2) == intval($price))
                                     ${{  floatVal($price)  }}
                                 @else
@@ -70,7 +70,7 @@
                                 @endif
                             </strong></p>
                     @else
-                        <p class="price"><strong> ${{  floatVal($price)  }}</strong></p>
+                        <p class="price"><strong class="text-promo"> ${{  floatVal($price)  }}</strong></p>
                     @endif
                     @if(!empty($includedEdge))
                         <p class="description" style="top: -13px;position: relative;margin: 0;"><em class="text-red">Or free with Drumeo</em></p>

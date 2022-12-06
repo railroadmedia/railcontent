@@ -1,4 +1,6 @@
-@extends('drumeo.sales.standard-layout')
+@extends('drumeo.sales.standard-layout', [
+    "bfButton" => true
+])
 
 @section('meta')
     <title>Drumeo | Reach your drumming goals.</title>
@@ -8,7 +10,7 @@
 
 @section('promo-banner-alt')
     @include('_partials.layout.holiday.homepage-top-banner',[
-        'text' => 'GET 5 FREE BONUSES WORTH $538'
+        'text' => 'GET 10 FREE BONUSES WORTH $1228.94'
     ])
 @endsection
 

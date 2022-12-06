@@ -724,7 +724,6 @@
             {{--<h2 class="leading-tight mt-2 mb-3 sm:my-3 lg:my-4"><strong>Learn the drums with daily guided workouts.</strong></h2>--}}
 
                 {{--<h6 class="leading-normal"><strong>Launch Special:</strong> Get a FREE pair of Drumeo 5A Drumsticks + <br class="hidden sm:inline">one-month Drumeo membership with your enrollment.--}}
-                {{--<span class="text-drumeo lowercase">Only <span class="inline sm:hidden tzcd-med2">a limited time</span> <span class="hidden sm:inline tzcd-full2">a limited time</span> left!</span> </h6>--}}
             {{--@endif--}}
 
             <div class="flex flex-wrap items-center mt-7 sm:mt-10">
