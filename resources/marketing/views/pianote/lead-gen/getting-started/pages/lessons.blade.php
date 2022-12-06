@@ -18,7 +18,7 @@
     ])
 
     @include('pianote.lead-gen.partials.series1',[
-        "customSize" => "w-full md:w-1/3"
+        "customSize" => "w-full md:w-1/2"
     ])
 
     @include('lead-gen.partials._7-day-trial-offer')

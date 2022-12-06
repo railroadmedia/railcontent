@@ -191,7 +191,6 @@
                 @else
                     <strong class="text-yellow">ONLY ${{ number_format(Prices::$comfortCoverRegular, 2) }}.</strong>
                 @endif
-                <br><a href="/laravel/public/shopping-cart/api/query?products[comfort-cover]=1&products[DLM]=1,year,1&locked=true" class="text-blue smaller"><em><u>Or free with Drumeo</u></em></a>
             </p>
         </div>
         <div class="reveal large text-center" id="previewModal" data-reveal data-reset-on-close="false">
@@ -356,7 +355,7 @@
                 @else
                     <strong class="text-yellow">ONLY ${{ number_format(Prices::$comfortCoverRegular, 2) }}.</strong>
                 @endif
-                <br><a href="/laravel/public/shopping-cart/api/query?products[comfort-cover]=1&products[DLM]=1,year,1&locked=true" class="text-blue smaller"><em><u>Or free with Drumeo</u></em></a></p>
+            </p>
 
             <div class="credit-cards columns">
                 <i class="fab fa-cc-visa"></i>

@@ -1,6 +1,6 @@
 <section class="catalogue-filters clearfix">
     <div class="container mx-auto">
-        <div class="sm:flex justify-between">
+        <div class="md:flex justify-between">
             <div class="filter-wrap clearfix">
                 <span
                     class="filter float-left px-2 md:px-3 w-1/2 md:w-full"

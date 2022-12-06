@@ -182,7 +182,7 @@
         "cartVersion" => true
     ])
 
-    @include('pianote._partials._promo-banner', [
+    @include('pianote._partials._promo-banner-no-tw', [
         "name" => "Playing Beautiful Piano",
         "fullPrice" => PianotePrices::$playBeautifulPianoFull,
         "price" => PianotePrices::$playBeautifulPiano,
@@ -462,6 +462,5 @@
     <script src="{{ asset('marketing/js/pianote/cart-sidebar.js') }}"></script>
     <script src="{{ asset('marketing/js/pianote/app.js') }}"></script>
 
-    @include('pianote._partials._promo-countdown')
     @include('pianote._partials.inspectlet')
 @stop

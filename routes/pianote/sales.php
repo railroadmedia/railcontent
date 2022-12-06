@@ -56,6 +56,7 @@ Route::domain('{pianoteDomain}')
     Route::get('/shop/destupefy-your-left-hand', function () { return view('pianote.products.destupefy-your-left-hand'); } );
     Route::get('/shop/play-beautiful-piano', function () { return view('pianote.products.play-beautiful-piano'); } );
     Route::get('/beginner-classical-piano', function () { return view('pianote.products.beginner-classical-piano'); } );
+        Route::get('/worship-piano', function () { return view('pianote.products.worship-piano', ['theme' => 'pianote']); } );
 
     Route::get('/lifetime', function () { return view('pianote.shop.pages.lifetime', ['theme' => 'pianote']); } );
     Route::get('/keep-learning', function () { return view('pianote.shop.pages.keep-learning', ['theme' => 'pianote']); } );

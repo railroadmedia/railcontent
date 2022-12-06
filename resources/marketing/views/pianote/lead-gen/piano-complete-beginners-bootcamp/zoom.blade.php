@@ -305,6 +305,3 @@
         </div>
     </section>
 @endsection
-@section('scripts')
-    <script type="text/javascript" src="/marketing/js/jquery.countdown-2.min.js"></script>
-@stop

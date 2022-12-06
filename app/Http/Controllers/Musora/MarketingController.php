@@ -51,4 +51,14 @@ class MarketingController extends BaseController
     {
         return view('musora.pages.recitals');
     }
+
+    public function giftcard()
+    {
+        return view('musora.pages.giftcard-page');
+    }
+
+    public function redeem()
+    {
+        return view('musora.pages.redeem.card-redeem-theme');
+    }
 }

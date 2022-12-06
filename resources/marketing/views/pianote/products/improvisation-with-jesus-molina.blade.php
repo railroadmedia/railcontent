@@ -90,6 +90,13 @@
     "cartVersion" => true,
     ])
 
+    @include('pianote._partials._promo-banner-no-tw', [
+        "name" => "Improvisation & Musical Freedom",
+        "fullPrice" => App\Prices::$improvisationAndMusicalFreedomFull,
+        "price" => App\Prices::$improvisationAndMusicalFreedom,
+        "noBreadcrumb" => true
+    ])
+
     @php $annualLink = '/ecommerce/add-to-cart?products[jesus-molina-improvisation-and-musical-freedom-pack]=1&redirect=/order' @endphp
 
     <header class="header text-white relative overflow-hidden z-10" style="background: rgba(38, 13, 15, 0.7);">

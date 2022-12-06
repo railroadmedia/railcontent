@@ -53,8 +53,6 @@
                     <div class="md:max-w-md">
                         <p class="mb-4" style="color:#D0E2E7;">
                             Want a free piano? Simply enter your email address before <span class="text-white font-extrabold">November 21st</span> to secure your chance to win. No purchase necessary. No age restrictions. No location restrictions.
-                            <br>
-                            <strong class="text-pianote uppercase">ONLY <span class="tzcd-full">A LIMITED TIME</span> LEFT</strong>
                         </p>
                         @include('pianote._partials._sign-up-form', [
                             "formId" => 'Pianote - Engagement - Trigger - FP30 Giveaway - Web Form',
@@ -222,38 +220,5 @@
     <script type="text/javascript" src="/marketing/js/modal-autoplay.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
-    <script type="text/javascript" src="/marketing/js/jquery.countdown-2.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('.tzcd-full').countdown('2022/11/21')
-                .on('update.countdown', function (event) {
-                    var format = '%-M Minute%!M %-S Second%!S';
-                    if (event.offset.totalHours > 0) {
-                        format = '%-H Hour%!H ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '%-D Day%!D ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('a limited time');
-                });
-            $('.tzcd-small').countdown('2022/11/21')
-                .on('update.countdown', function (event) {
-                    var format = '%-MM %-SS';
-                    if (event.offset.totalHours > 0) {
-                        format = '%-HH ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '%-DD ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('a limited time');
-                });
-        });
-    </script>
 @endsection
 

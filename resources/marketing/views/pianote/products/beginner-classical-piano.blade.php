@@ -732,7 +732,6 @@
         <h1 class="font-knewave text-white mb-4">Jump-Start Program</h1>
         <p class="uppercase text-gray-400 leading-5 mb-10">
             Personal Support For <br class="sm:hidden">Guaranteed Results
-            {{--<br><span class="text-theme font-bold">ONLY <span class="tzcd-full">A LIMITED TIME</span> LEFT!</span>--}}
         </p>
 
         <h2 class="font-knewave text-theme mb-10 lg:leading-9">
@@ -929,42 +928,11 @@
 @section('scripts')
     @parent
 
-    <script type="text/javascript" src="/marketing/js/jquery.countdown-2.min.js"></script>
     <script>
         $(document).ready(function () {
             $(document).foundation();
 
             $('.slick').slick();
-
-            // Countdown
-            $('.tzcd-full').countdown('2022/06/17')
-                .on('update.countdown', function (event) {
-                    var format = '%-M Minute%!M %-S Second%!S';
-                    if (event.offset.totalHours > 0) {
-                        format = '%-H Hour%!H ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '%-D Day%!D ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('a limited time');
-                });
-            $('.tzcd-small').countdown('2022/06/17')
-                .on('update.countdown', function (event) {
-                    var format = '%-MM %-SS';
-                    if (event.offset.totalHours > 0) {
-                        format = '%-HH ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '%-DD ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('a limited time');
-                });
         });
 
 

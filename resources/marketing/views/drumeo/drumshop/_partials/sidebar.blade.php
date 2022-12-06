@@ -6,10 +6,10 @@
 {{--    }--}}
 {{--@endphp--}}
 
-<div class="side-bar sliding-function lg:px-4 lg:w-1/3 px-3 md:px-4 mt-2">
+<div class="side-bar sliding-function lg:px-4 lg:w-1/3 px-3 md:px-4 mt-2 mb-4 lg:mb-0">
     <div class="lg:h-0">
     <div id="order" class="anchor"></div>
-    <div class="side-slide overflow-hidden md:rounded md:border md:border-solid" style="border-color: #CCD3D3;">
+    <div class="side-slide overflow-hidden rounded border border-solid" style="border-color: #CCD3D3;">
         @include('_partials.layout.holiday.shop-sidebar-banner')
 
         <div class="buy-section active px-5 pt-2 pb-6 text-center lg:py-6">
@@ -17,7 +17,7 @@
                 <p class="instructor hidden lg:inline"><em>{{ $instructor }} </em></p>
             @endif
             @if(!empty($logo))
-                <img class="hidden max-h-20 w-full mx-auto mb-4 object-contain lg:block" src="{{ $logo }}" alt="product logo">
+                <img class="hidden max-h-20 w-full mx-auto mb-4 object-contain lg:block @if(!empty($invert)) filter invert @endif" src="{{ $logo }}">
             @endif
 
             @if(isset($fullPrice) && isset($price) && ($fullPrice - $price) > 0)
@@ -34,7 +34,7 @@
             @endif
 
             @if(!empty($specialText))
-                <p class="text-center mx-auto mb-1 text-sm italic md:text-base" style="color:#F71B26;">{!! $specialText  !!}</p>
+                <p class="text-center mx-auto mb-1 text-sm italic md:text-base" style="color:#858c93;">{!! $specialText  !!}</p>
             @endif
 
             @if(!empty($soldOut) && $soldOut)
@@ -92,19 +92,18 @@
                     </a>
                 @endif
             @endif
-
-            <p class="italic text-center mx-auto my-0 text-xs">
-                @if(!empty($freeShipping))
-                    <i class="fas fa-truck"></i> <strong>FREE SHIPPING!</strong><br>
-                @endif
-                You can also order by phone toll-free at<br class="hidden sm:inline">
-                <a class="text-drumeo" href="tel:1-800-439-8921">1-800-439-8921</a> or directly at
-                <a class="text-drumeo" href="tel:1-604-855-7605">1-604-855-7605</a>. </p>
+                <p class="italic text-center mx-auto my-0 text-xs" style="color:#858c93;">
+                    @if(!empty($freeShipping))
+                        <i class="fas fa-truck text-drumeo"></i> <strong class="text-drumeo">FREE SHIPPING!</strong><br>
+                    @endif
+                    You can also order by phone toll-free at<br class="hidden sm:inline">
+                    <a href="tel:1-800-439-8921" class="text-drumeo">1-800-439-8921</a> or directly at
+                    <a href="tel:1-604-855-7605" class="text-drumeo">1-604-855-7605</a>. </p>
         </div>
         @if(!empty($guaranteeBadge))
-            <div class="flex justify-center items-center px-5 pb-5 text-center md:pt-2 md:pt-4 md:pb-6 lg:p-5 lg:-mt-1 lg:mx-auto lg:mb-0 border-t-0 lg:border-t" style="border-color: #CCD3D3; border-top-style: solid;">
+            <div class="hidden lg:flex justify-center items-center px-5 pb-5 text-center md:pt-2 md:pt-4 md:pb-6 lg:p-5 lg:-mt-1 lg:mx-auto lg:mb-0 border-t-0 lg:border-t" style="border-color: #CCD3D3; border-top-style: solid;">
                 <img class="w-24 my-0 pr-6" src="https://cdn.musora.com/image/fetch/w_170,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/sales/guarantee-badge.png">
-                <p class="text-xs font-bold text-left my-0 text-drumeo">Your entire order is backed by<br class="lg:hidden" /> our 90-Day Money Back <br class="lg:hidden" /> Guarantee.</p>
+                <p class="text-sm text-left my-0 text-drumeo"><em>Your entire order is backed by<br class="lg:hidden" /> our 90-Day Money Back <br class="lg:hidden" /> Guarantee.</em></p>
             </div>
         @endif
     </div>

@@ -101,7 +101,7 @@
                                     {{-- <span class="loading"><i class="fad fa-spinner-third fa-spin"></i> Adding to cart...</span> --}}
                                 </button>
                             </a>
-                        @elseif(!empty($sku) && empty($sizes))
+                        @elseif(!empty($sku) && count($sizes) === 0)
                             <a
                                 class="online-atc vue-add-to-cart"
                                 href="/ecommerce/add-to-cart?redirect=/shop&products[{{ $sku }}]=1&redirect={{ $redirectUrl ?? '/shop' }}"

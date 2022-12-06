@@ -61,6 +61,9 @@
                             Get Started
                         @endif
                     </a>
+                    @if(!empty($bfButton))
+                        <a data-open="trailer" class="join outline promo smaller autoplay-video w-2/3 md:w-auto mt-3 md:mt-0"><i class="fas fa-play"></i> Holiday Deals</a>
+                    @endif
                 </div>
             </div>
             <div class="header-image relative mx-auto w-full h-full relative z-0" style="max-width: 1536px;background-image:url(https://cdn.musora.com/image/fetch/w_2500,q_auto:best/q_auto:best/https://pianote.s3.amazonaws.com/sales/2022/header-image5.jpg);">
@@ -1194,8 +1197,12 @@
                             @else
                                 <td class="rounded-b-xl">
                                     @if(empty($trialVersion))
-                                        <strong>${{ number_format(PianotePrices::$pianoteMembershipAnnualRegular/ 12, 2) }}</strong>/mo<br>
-                                        <em>Billed annually</em><br><br>
+                                        @if(number_format(PianotePrices::$pianoteMembershipAnnualRegular, 2) == intval(PianotePrices::$pianoteMembershipAnnualRegular))
+                                            <strong>${{  round(PianotePrices::$pianoteMembershipAnnualRegular / 12, 2) }}</strong>/mo<br>
+                                        @else
+                                            <strong>${{  number_format(PianotePrices::$pianoteMembershipAnnualRegular / 12, 2)  }}</strong>/mo<br>
+                                        @endif
+                                        <em>Billed annually at ${{  PianotePrices::$pianoteMembershipAnnualRegular }}</em><br><br>
                                         Unlimited lessons & support.
                                     @else
                                         <strong>Free Trial</strong><br>&nbsp;
@@ -1222,16 +1229,16 @@
                             <div class="py-4 md:py-5 lg:py-6 rounded-xl w-full" style="color:#cd201f;background: #051124;">
                                 <a href="https://www.youtube.com/pianolessonscom/" target="_blank" aria-label="youtube"> <i class="fab fa-youtube text-3xl md:text-4xl"></i>
                                 </a>
-                                <h2 class="hidden sm:block count font-black leading-none my-2 md:my-3 text-white" id="youtube-count" data-total-count="1200000">0</h2>
-                                <h2 class="count block sm:hidden font-black leading-none my-2 md:my-3 text-white">1.2M</h2>
+                                <h2 class="hidden sm:block count font-black leading-none my-2 md:my-3 text-white" id="youtube-count" data-total-count="1230000">0</h2>
+                                <h2 class="count block sm:hidden font-black leading-none my-2 md:my-3 text-white">1.23M</h2>
                                 <p class="uppercase leading-none md:tracking-widest">Subs<span class="hidden sm:inline-block">cribers</span></p>
                             </div>
                         </div>
                         <div class="w-1/3 px-1 md:px-2 mb-2 md:mb-4">
                             <div class="py-4 md:py-5 lg:py-6 rounded-xl w-full" style="color:#3b5998;background: #051124;">
                                 <a href="https://facebook.com/pianoteofficial/" target="_blank" aria-label="facebook"> <i class="fab fa-facebook-f text-3xl md:text-4xl"></i> </a>
-                                <h2 class="hidden sm:block count font-black leading-none my-2 md:my-3 text-white" id="likes-count" data-total-count="414000">0</h2>
-                                <h2 class="count block sm:hidden font-black leading-none my-2 md:my-3 text-white">414K</h2>
+                                <h2 class="hidden sm:block count font-black leading-none my-2 md:my-3 text-white" id="likes-count" data-total-count="418000">0</h2>
+                                <h2 class="count block sm:hidden font-black leading-none my-2 md:my-3 text-white">418K</h2>
                                 <p class="uppercase leading-none md:tracking-widest">Likes</p>
                             </div>
                         </div>
@@ -1239,8 +1246,8 @@
                             <div class="instagram py-4 md:py-5 lg:py-6 rounded-xl w-full" style="background: #051124;">
                                 <a href="https://instagram.com/pianoteofficial/" target="_blank" aria-label="instagram"> <i class="fab fa-instagram text-3xl md:text-4xl" style="background: linear-gradient(30deg, #FFD521 17%, #F20008 50%, #B900B4 83%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"></i>
                                 </a>
-                                <h2 class="hidden sm:block count font-black leading-none my-2 md:my-3 text-white" id="follower-count" data-total-count="168000">0</h2>
-                                <h2 class="count block sm:hidden font-black leading-none my-2 md:my-3 text-white">168K</h2>
+                                <h2 class="hidden sm:block count font-black leading-none my-2 md:my-3 text-white" id="follower-count" data-total-count="171000">0</h2>
+                                <h2 class="count block sm:hidden font-black leading-none my-2 md:my-3 text-white">171K</h2>
                                 <p class="uppercase leading-none md:tracking-widest" style="color:#E1306C">Followers</p>
                             </div>
                         </div>
@@ -1562,9 +1569,10 @@
         </div>
     </section>
 
-    <div class="unstick-trigger block"></div>
+
     <div id="orderNow" class="anchor"></div>
     @yield('final')
+    <div class="unstick-trigger block"></div>
 
     @foreach($coaches as $coach)
         <div class="reveal large relative coach-wrap rounded-xl text-center overflow-visible select-none max-w-xs md:max-w-md" id="{{ $coach['modal'] }}" data-reveal data-reset-on-close="false">
@@ -1662,6 +1670,10 @@
             'modal' => 'singhTrailer',
             'vimeo' => '744366357',
             ],
+            [
+            'modal' => 'trailer',
+            'vimeo' => '774401601',
+            ],
          ]
     @endphp
     @foreach($videoModals as $videoModal)
@@ -1686,69 +1698,9 @@
     <script type="text/javascript" src="/marketing/parcel/pianote/sales.js?v={{ filemtime(__FILE__) }}"></script>
     <script type="text/javascript" src="/marketing/js/modal.js"></script>
     <script type="text/javascript" src="/marketing/js/modal-autoplay.js"></script>
-    <script type="text/javascript" src="/marketing/js/jquery.countdown-2.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('.tzcd-full').countdown('2022/11/01')
-                .on('update.countdown', function (event) {
-                    var format = '%-M Minute%!M %-S Second%!S';
-                    if (event.offset.totalHours > 0) {
-                        format = '%-H Hour%!H ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '%-D Day%!D ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('a limited time');
-                });
-            $('.tzcd-small').countdown('2022/11/01')
-                .on('update.countdown', function (event) {
-                    var format = '%-MM %-SS';
-                    if (event.offset.totalHours > 0) {
-                        format = '%-HH ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '%-DD ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('a limited time');
-                });
-            $('.tzcd-days').countdown('2022/11/01')
-                .on('update.countdown', function (event) {
-                    var format = '';
 
-                    if (event.offset.totalDays > 0) {
-                        format = '%-D Day%!D ' + format;
-                    } else if (event.offset.totalHours > 0) {
-                        format = '%-H Hour%!H ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('a limited time');
-                });
-            $('.tzcd-big').countdown('2022/11/01')
-                .on('update.countdown', function (event) {
-                    var format = '' + '<div><h1>%M</h1> <p>min%!M</p></div> ' + '<div><h1>%S</h1> <p>sec%!S</p></div>';
-                    if (event.offset.totalHours > 0) {
-                        format = '' + '<div><h1>%H</h1> <p>hr%!H</p></div> ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '' + '<div><h1>%D</h1> <p>day%!D</p></div> ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('<div><h1>LIMITED</h1> <p>TIME LEFT</p></div>');
-                });
-        });
-    </script>
 
     @yield('scripts')
 

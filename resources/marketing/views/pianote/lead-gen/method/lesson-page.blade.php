@@ -112,7 +112,6 @@
                     <div class="thumb">
                         <img src="https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/method/thumb.png">
                     </div>
-                    {{--<p>Coming In <span class="tzcd"></span>!</p>--}}
                     <p>Learn More &raquo;</p>
                 </a>
             </div>
@@ -146,29 +145,7 @@
     @include('pianote._partials._footer')
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="/marketing/js/jquery.countdown-2.min.js"></script>
     <script type="text/javascript" src="/marketing/parcel/pianote/nav-footer.js"></script>
     <script type="text/javascript" src="/marketing/js/modal-autoplay-bootstrap.js"></script>
-    <script>
-        $(document).ready(function () {
-            // countdown function
-            $(function () {
-                $('.tzcd').countdown('2021/01/01 09:00:00')
-                    .on('update.countdown', function (event) {
-                        var format = '%-MM';
-                        if (event.offset.totalHours > 0) {
-                            format = '%-HH ' + format;
-                        }
-                        if (event.offset.totalDays > 0) {
-                            format = '%-DD ' + format;
-                        }
-                        $(this).html(event.strftime(format));
-                    })
-                    .on('finish.countdown', function (event) {
-                        $(this).html('a limited time');
-                    });
-            });
-        });
-    </script>
     @yield('scripts')
 @stop

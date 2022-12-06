@@ -7,7 +7,7 @@
 @endsection
 
 @section('topbar')
-    @include('pianote._partials._promo-banner', [
+    @include('pianote._partials._promo-banner-no-tw', [
                     "name" => "500 Songs In 5 Days",
                     "fullPrice" => PianotePrices::$songs500Full,
                     "price" => PianotePrices::$songs500Regular,

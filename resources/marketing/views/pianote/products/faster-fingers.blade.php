@@ -11,6 +11,7 @@
     <meta property="og:url" content="https://www.pianote.com/faster-fingers">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
     <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="/marketing/parcel/pianote/faster-fingers.css">
 @stop
@@ -20,7 +21,7 @@
         "cartVersion" => true
     ])
 
-    @include('pianote._partials._promo-banner', [
+    @include('pianote._partials._promo-banner-no-tw', [
                     "name" => "Faster Fingers",
                     "fullPrice" => PianotePrices::$fasterFingersFull,
                     "price" => PianotePrices::$fasterFingersRegular,
@@ -389,17 +390,8 @@
                     <strong><u>ONLY ${{ PianotePrices::$fasterFingersRegular }}</u></strong>
                 @endif
                 <br><a href="/" class="red">(OR FREE WITH A PIANOTE MEMBERSHIP)</a><br> <strong
-                        class="yellow">** 90-DAY GUARANTEE **</strong></p>
-
-            {{--<div class="countdown columns no-padding">--}}
-                {{--<p>HOLIDAY DEALS END IN:</p>--}}
-                {{--<div class="tzcd-big">--}}
-                    {{--<div><h1>00</h1> <p>days</p></div>--}}
-                    {{--<div><h1>00</h1> <p>hrs</p></div>--}}
-                    {{--<div><h1>00</h1> <p>mins</p></div>--}}
-                    {{--<div><h1>00</h1> <p>secs</p></div>--}}
-                {{--</div>--}}
-            {{--</div>--}}
+                        class="yellow">** 90-DAY GUARANTEE **</strong>
+            </p>
 
             <div class="credit-cards col-xs-12">
                 <i class="fab fa-cc-visa"></i>
@@ -474,7 +466,6 @@
     <script src="{{ asset('marketing/js/pianote/vendor.js') }}"></script>
     <script src="{{ asset('marketing/js/pianote/cart-sidebar.js') }}"></script>
     <script src="{{ asset('marketing/js/pianote/app.js') }}"></script>
-    @include('pianote._partials._promo-countdown')
 
     @include('pianote._partials.inspectlet')
 

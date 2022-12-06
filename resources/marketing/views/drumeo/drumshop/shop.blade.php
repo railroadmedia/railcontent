@@ -196,14 +196,33 @@
     </div>
 
     <header class="drum-shop-header" style="background-image:url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/header-background.jpg);">
-        <div class="container mx-auto">
+        <div class="container mx-auto relative z-10">
             <div class="px-2 md:px-3">
-                @include('_partials.layout.holiday.shop-page-banner',[
-                    'text' => 'Save up to 81% on lessons,<br class="inline md:hidden"> accessories, and merch.'
-                ])
-{{--                <img class="h-6 md:h-9" src="https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="drumeo logo">--}}
-{{--                <h1><strong>DRUM SHOP</strong></h1>--}}
-{{--                <p>GET LESSONS, MERCH, GEAR, & MUCH MORE</p>--}}
+                <img class="h-14 sm:h-16 lg:h-20" src="https://cdn.musora.com/image/fetch/w_450,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/christmas/holiday-drums.png"><br>
+                <h1 class="my-2"><strong>DRUM SHOP</strong></h1>
+                <h5 class="leading-tight">Save up to <span class="">81%</span> on lessons,<br class="inline md:hidden"> accessories, and merch.</h5>
+                {{-- <div class="rounded-xl px-6 py-2 inline-flex flex-wrap mx-auto mt-5 justify-center items-center" style="background-color:#181515;">
+                    <p class="leading-none m-0"><strong>DEALS END IN:</strong></p>
+                    <div class="h-12 mx-5 bg-promo" style="width:2px;"></div>
+                    <div class="tzcd-big">
+                        <div class="inline-block">
+                            <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>
+                            <p class="leading-none uppercase font-extrabold text-xs text-promo">days</p>
+                        </div>
+                        <div class="inline-block mx-2">
+                            <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>
+                            <p class="leading-none uppercase font-extrabold text-xs text-promo">hrs</p>
+                        </div>
+                        <div class="inline-block mr-2">
+                            <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>
+                            <p class="leading-none uppercase font-extrabold text-xs text-promo">mins</p>
+                        </div>
+                        <div class="inline-block">
+                            <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>
+                            <p class="leading-none uppercase font-extrabold text-xs text-promo">secs</p>
+                        </div>
+                    </div>
+                </div> --}}
             </div>
         </div>
     </header>
@@ -269,6 +288,7 @@
 
     <div class="white-box">
         @include('_partials.layout.holiday.bundle-cards')
+
         <section class="bundles">
             <div class="container mx-auto">
                 <div class="float-left w-full px-2 md:px-3 card-wrap">
@@ -287,6 +307,7 @@
                         </a>
                     </div>
                 </div>
+
             </div>
         </section>
 
