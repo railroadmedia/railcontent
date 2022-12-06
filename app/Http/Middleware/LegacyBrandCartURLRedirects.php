@@ -26,9 +26,12 @@ class LegacyBrandCartURLRedirects
         Closure $next
     ) {
         $parse = parse_url($request->fullUrl());
+        $parse['path'] = $parse['path'] ?? '';
+        $parse['query'] = $parse['query'] ?? '';
+        $parse['host'] = $parse['host'] ?? '';
 
         if (Str::startsWith($parse['path'], '/ecommerce/add-to-cart')) {
-            parse_str($parse['query'] ?? '', $queryStringArray);
+            parse_str($parse['query'], $queryStringArray);
 
             if (Str::endsWith($parse['host'], 'drumeo.com')) {
                 $queryStringArray['redirect'] = '/order/drumeo';
