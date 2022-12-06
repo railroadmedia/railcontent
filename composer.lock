@@ -7976,16 +7976,16 @@
         },
         {
             "name": "railroad/ecommerce",
-            "version": "dev-support-old-app-purchases",
+            "version": "v5.0.39",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "2c76099a5f86d98a0940cf7f2606c3b2e16ef3c7"
+                "reference": "a54d7a5c831e74c7a85c24582fa983e07bb50bb5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/2c76099a5f86d98a0940cf7f2606c3b2e16ef3c7",
-                "reference": "2c76099a5f86d98a0940cf7f2606c3b2e16ef3c7",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/a54d7a5c831e74c7a85c24582fa983e07bb50bb5",
+                "reference": "a54d7a5c831e74c7a85c24582fa983e07bb50bb5",
                 "shasum": ""
             },
             "require": {
@@ -8022,9 +8022,9 @@
             "description": "Ecommerce system",
             "support": {
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
-                "source": "https://github.com/railroadmedia/ecommerce/tree/support-old-app-purchases"
+                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.39"
             },
-            "time": "2022-11-29T15:33:15+00:00"
+            "time": "2022-12-06T01:14:36+00:00"
         },
         {
             "name": "railroad/location",
@@ -8127,16 +8127,16 @@
         },
         {
             "name": "railroad/musora-api",
-            "version": "dev-v2.0-railcontent-v2-integration-banner-updates",
+            "version": "dev-v2.0-railcontent-v2-integration",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "1b3fedecf61b5ef20988b9dfc2319ceff503dd3a"
+                "reference": "4a2d45caa42874a3278924cd27e3de0ab20f80ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/1b3fedecf61b5ef20988b9dfc2319ceff503dd3a",
-                "reference": "1b3fedecf61b5ef20988b9dfc2319ceff503dd3a",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/4a2d45caa42874a3278924cd27e3de0ab20f80ab",
+                "reference": "4a2d45caa42874a3278924cd27e3de0ab20f80ab",
                 "shasum": ""
             },
             "require": {
@@ -8166,9 +8166,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
-                "source": "https://github.com/railroadmedia/musora-api/tree/v2.0-railcontent-v2-integration-banner-updates"
+                "source": "https://github.com/railroadmedia/musora-api/tree/v2.0-railcontent-v2-integration"
             },
-            "time": "2022-11-28T15:05:07+00:00"
+            "time": "2022-12-06T08:35:46+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -16593,5 +16593,5 @@
         "ext-curl": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.2.0"
 }

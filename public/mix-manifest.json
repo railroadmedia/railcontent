@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
     "/platform/js/app.js": "/platform/js/app.js?id=00cc73580b98cd446c21ccc5a8bc1c18",
     "/platform/js/profile.js": "/platform/js/profile.js?id=a13ed5f750a89e00edbe84934bd56773",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=9b1b997eda2b5545804b8d7649790e48",
@@ -28,4 +29,31 @@
     "/platform/js/vendor~onboarding.js": "/platform/js/vendor~onboarding.js?id=95b61f73a67fc65546a81e742dda8905",
     "/marketing/css/app.css": "/marketing/css/app.css?id=cfb6bbfc43ef4db3fb11ff461af061a2",
     "/platform/js/vendor.js": "/platform/js/vendor.js?id=49f0817b99cd1af9df9cbd7fcee415f7"
+=======
+    "/platform/js/app.js": "/platform/js/app.js?id=7c99dcb11ac751ae8bc3f578529161a9",
+    "/platform/js/profile.js": "/platform/js/profile.js?id=a13ed5f750a89e00edbe84934bd56773",
+    "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=9b1b997eda2b5545804b8d7649790e48",
+    "/platform/js/books.js": "/platform/js/books.js?id=bd6874db5faa8414cda38fb1fa497d2c",
+    "/platform/js/manifest.js": "/platform/js/manifest.js?id=598c6dc36bc60ce4b3161c1034a7df96",
+    "/platform/js/piano-backing-tracks.js": "/platform/js/piano-backing-tracks.js?id=d1eba1355e67f9daf178af304ebf9066",
+    "/platform/js/student-review-form-iframe.js": "/platform/js/student-review-form-iframe.js?id=7d0fc16c09e2a2e52f4ecbb423033346",
+    "/platform/js/comments-catalogue-component.js": "/platform/js/comments-catalogue-component.js?id=5caf5acb47e7d09dbeb0cbe0dc842aee",
+    "/platform/js/forum-thread-component.js": "/platform/js/forum-thread-component.js?id=c97c4765419c148fd1c7c0ba2841d3d0",
+    "/platform/js/text-editor-component.js": "/platform/js/text-editor-component.js?id=cea2bc4dc4dda95920a97bcbc4396a08",
+    "/platform/js/contact-member-form.js": "/platform/js/contact-member-form.js?id=2f4d7252d7c62af95b420a29ae9d60a2",
+    "/platform/js/contact-email-form-marketing.js": "/platform/js/contact-email-form-marketing.js?id=575a9900d15ca649010c9e0912708f3c",
+    "/platform/js/contact-email-form.js": "/platform/js/contact-email-form.js?id=b2112abbbbe1edf11465ba9af9241de8",
+    "/platform/js/youtube-player-component.js": "/platform/js/youtube-player-component.js?id=842ce07fa977b6d5819c084d9fcbc1f7",
+    "/platform/js/onboarding-component.js": "/platform/js/onboarding-component.js?id=a539702a9abe8e6384e2eaf50904bc23",
+    "/platform/js/video-player-component.js": "/platform/js/video-player-component.js?id=839b34b68f8e31e86d3457b613f568a2",
+    "/platform/js/video-media-element-component.js": "/platform/js/video-media-element-component.js?id=a97d6a7588fb750e71b633821038f6ec",
+    "/platform/js/image-cropper-component.js": "/platform/js/image-cropper-component.js?id=d96aae0fe3ca453c5e919c6ee6bb6128",
+    "/platform/js/comments-component.js": "/platform/js/comments-component.js?id=8ec59034bbcfef0e7cdb4b0be9944ca4",
+    "/platform/js/email-form-component.js": "/platform/js/email-form-component.js?id=2c01e28bf20a970b462a5e961974a1c7",
+    "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=ad36d354a9935d195747a0af2bba042a",
+    "/platform/css/app.css": "/platform/css/app.css?id=12e01b9bb4fc291ef402d5b0aba40bf6",
+    "/platform/js/vendor~onboarding.js": "/platform/js/vendor~onboarding.js?id=6a776bc796133d4f18717675877c01ef",
+    "/marketing/css/app.css": "/marketing/css/app.css?id=e82665dc4655b70386a071d98d4c353d",
+    "/platform/js/vendor.js": "/platform/js/vendor.js?id=19e21ae9084a3d0b1ae3cbda2b9cf57e"
+>>>>>>> master
 }

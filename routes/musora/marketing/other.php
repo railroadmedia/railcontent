@@ -18,4 +18,6 @@ Route::domain('{musoraDomain}')
         Route::get('unified-2022', [MarketingController::class, 'unified2022']);
         Route::get('referral-join', [ReferralJoinController::class, 'join']);
         Route::get('recitals', [MarketingController::class, 'recitals']);
+        Route::get('gift-card', [MarketingController::class, 'giftcard']);
+        Route::get('redeem', [MarketingController::class, 'redeem']);
     });
