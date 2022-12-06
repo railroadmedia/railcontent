@@ -54,7 +54,6 @@
             @if( Prices::$toolboxBookFull > Prices::$toolboxBookRegular)
                 <p><s>WAS ${{ Prices::$toolboxBookFull }}</s> &nbsp;<strong>NOW ${{ Prices::$toolboxBookRegular }}</strong>&nbsp; (SAVE ${{ (Prices::$toolboxBookFull - Prices::$toolboxBookRegular) }}).
                     {{--<br>SAVE ${{ (Prices::$toolboxBookFull - Prices::$toolboxBookRegular) }} UNTIL MAY 19TH<br>--}}
-                    {{--<strong class="text-blue">ONLY <span class="tzcd-med">A LIMITED TIME</span> LEFT</strong>--}}
                 </p>
             @else
                 <p><strong>ONLY ${{ Prices::$toolboxBookRegular }}</strong></p>
@@ -491,7 +490,6 @@
                     <img src="https://dpwjbsxqtam5n.cloudfront.net/books/drummers-toolbox/sales/logo-stacked.png">
                     @if( Prices::$toolboxBookFull > Prices::$toolboxBookRegular)
                         <p><s>WAS ${{ Prices::$toolboxBookFull }}</s> <strong> NOW ${{ Prices::$toolboxBookRegular }}</strong>.
-                            {{--<br><span class="show-for-large">ONLY</span> <strong class="tzcd-med">A LIMITED TIME</strong> LEFT--}}
                         </p>
                     @else
                         <p><strong>ONLY ${{ Prices::$toolboxBookRegular }}.</strong></p>

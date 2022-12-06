@@ -19,12 +19,10 @@
                 {{--<h1 data-aos="fade-down" class="font-bebas leading-none mt-3 md:mt-5 text-5xl md:text-6xl">REACH YOUR  <br class="inline md:hidden"> <span class="text-coaches">DRUMMING GOALS.</span></h1>--}}
                 {{-- <h4 class="my-4 md:my-5 leading-tight">
                     <strong>Get unlimited drum lessons, 6 free pairs of drumsticks and help put instruments in underfunded schools.</strong>
-                    <br><span class="uppercase" style="color:#cda880">ONLY <span class="tzcd-full hidden sm:inline">A LIMITED TIME</span> <span class="tzcd-small inline sm:hidden">A LIMITED TIME</span> LEFT!</span>
                 </h4> --}}
                 {{-- <h6 class="mb-4 md:mb-5" style="color:#cda880"><em>Includes $304.69 in free bonuses.</em></h6> --}}
                 {{--<h5 class="leading-tight mb-4 md:mb-6 uppercase" style="color:#ffd300;">--}}
                     {{--ONLY AVAILABLE UNTIL JULY 31ST--}}
-                    {{----<br><strong><span class="tzcd-full">A LIMITED TIME</span> LEFT!</strong>--}}
                 {{--</h5>--}}
 
                 <div class="bonus-wrap relative inline-block align-top mx-auto mb-3 px-1 md:px-3 w-1/2 md:w-1/3">

@@ -51,7 +51,6 @@
                 <p class="price-info">
                     <s>NORMALLY ${{ Prices::$sdOnlineFull }}.</s> <strong>NOW ${{ Prices::$sdOnlineRegular }}</strong> (SAVE {{ round(100 - (100 * (Prices::$sdOnlineRegular / Prices::$sdOnlineFull))) }}%).
                     <br> <span class="text-blue">90-DAY GUARANTEE.</span>
-                    {{--<br><span class="text-yellow">ONLY <strong class="tzcd-full">a limited time</strong> LEFT!</span>--}}
                 </p>
             </div>
         </div>

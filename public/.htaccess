@@ -713,6 +713,7 @@
     RewriteRule ^thedrumninja/fwtgf/?$.* /faster/?utm_source=drumninja&utm_medium=sponsor&utm_campaign=drumninja_faster [R=307,L,QSA]
     RewriteRule ^thedrumninja/gsotd/?$.* /getting-started/?utm_source=drumninja&utm_medium=sponsor&utm_campaign=drumninja_gsotd [R=307,L,QSA]
     RewriteRule ^theyre-back/?$.* /drumshop/tone-control-kit [R=307,L,QSA]
+    RewriteRule ^thomann/?$.* /redeem-thomann [R=307,L,QSA]
     RewriteRule ^thomas-lang/?$.* /beat/thomas-lang-drum-lessons/ [R=307,L,QSA]
     RewriteRule ^thomaslang/?$.* /beat/thomas-lang-drum-lessons/ [R=307,L,QSA]
     RewriteRule ^thomaspridgen/?$.* /beat/thomas-pridgen/ [R=307,L,QSA]
