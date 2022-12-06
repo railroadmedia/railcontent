@@ -12,12 +12,12 @@
     </div>
     @if(!empty($checkoutVersion))
         <div class="button-wrap">
-            <a href="/drumshop" class="join promo outline-button">Shop</a>
+            <a href="{{ get_legacy_brand_base_url('drumeo') }}/drumshop" class="join promo outline-button">Shop</a>
         </div>
     @endif
     @if(!empty($cartVersion))
         <div class="button-wrap" id="app">
-            <a href="/drumshop" class="join promo outline-button">Shop</a>
+            <a href="{{ get_legacy_brand_base_url('drumeo') }}/drumshop" class="join promo outline-button">Shop</a>
 
             <nav-cart-button
                 {{-- cart-data='{{ $cartData }}' --}}
@@ -43,7 +43,7 @@
         </div>
 
         <div class="button-wrap">
-            <a href="/drumshop" class="join promo outline-button">Shop</a>
+            <a href="{{ get_legacy_brand_base_url('drumeo') }}/drumshop" class="join promo outline-button">Shop</a>
             <a @if(!empty($scrollToJoin))
                     href="#customize-anchor" class="join anchor-slide"
                 @elseif(!empty($joinUrl))
