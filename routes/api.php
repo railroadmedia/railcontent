@@ -188,10 +188,5 @@ Route::group(
             '/followed-lessons',
             Railroad\Railcontent\Controllers\ContentFollowsJsonController::class . '@getLatestLessonsForFollowedContentByType'
         )->name('api.followed.lessons');
-
-        Route::post(
-            '/request-song',
-            Railroad\Railcontent\Controllers\RequestedSongsJsonController::class . '@requestSong'
-        )->name('api.request.song');
     }
 );

@@ -2,8 +2,6 @@
 
 namespace Railroad\Railcontent\Requests;
 
-use Railroad\Railcontent\Services\ConfigService;
-
 class RequestSongRequest extends FormRequest
 {
     /**
