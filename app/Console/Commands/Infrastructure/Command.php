@@ -109,7 +109,9 @@ abstract class Command extends CommandBase
         }
         $this->info("Dispatching $nJobs jobs.");
         $batch = null;
-        if($reverseProcessJobs) $jobs = array_reverse($jobs);
+        if ($reverseProcessJobs) {
+            $jobs = array_reverse($jobs);
+        }
 
         if ($isChain) {
             $jobs[] = new FinishedCommandJob($this->name);
