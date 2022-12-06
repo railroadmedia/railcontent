@@ -372,7 +372,7 @@
 
     <script src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script src="{{asset('/marketing/parcel/pianote/nav-footer.js') }}"></script>
-    <script src="{{ asset('/marketing/js/jquery.countdown-2.min.js') }}"></script>
+    {{-- <script src="{{ asset('/marketing/js/jquery.countdown-2.min.js') }}"></script> --}}
 
     <script>
         $(function () {
