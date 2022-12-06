@@ -307,8 +307,6 @@
                             </div>
                             <p class="leading-tight uppercase text-yellow ml-4">
                                 <a target="_blank" href="https://www.google.com/search?q=2pm+PDT" class="font-extrabold"><strong>Tuesday, September 13 @ 2pm PDT</strong> <i class="fal fa-info-circle"></i></a>
-                                {{--<br class="inline sm:hidden"> starts in<br class="hidden sm:inline">--}}
-                                 {{--<strong><span class="tzcd-full hidden md:inline">A LIMITED TIME</span> <span class="tzcd-small inline md:hidden">A LIMITED TIME</span></strong>--}}
                             </p>
                         </div>
                         <p class="leading-tight mb-4" style="color:#fcffe3">
@@ -449,11 +447,6 @@
             <h5 class="my-2">
                 <strong class="font-extrabold">Free 90-minute LIVE piano<br class="inline sm:hidden"> lesson</strong> with Lisa Witt
             </h5>
-            {{--<h5 class="uppercase text-yellow font-extrabold time-counter mb-8 leading-tight md:leading-tight">--}}
-                {{--ONLY--}}
-                {{--<span class="tzcd-full hidden sm:inline">A LIMITED TIME</span> <span class="tzcd-small inline sm:hidden">A LIMITED TIME</span>--}}
-                {{--LEFT!--}}
-            {{--</h5>--}}
             <p class="mb-4">
                 Transform your piano playing in 90 minutes <br class="inline sm:hidden">
                 with LIVE support from a professional teacher
@@ -475,38 +468,9 @@
 @endsection
 
 @section('scripts')
-    <script type="text/javascript" src="/marketing/js/jquery.countdown-2.min.js"></script>
     <script>
         $(document).ready(function () {
             $(document).foundation();
-            $('.tzcd-full').countdown('2022/08/30')
-                .on('update.countdown', function (event) {
-                    var format = '%-M Minute%!M %-S Second%!S';
-                    if (event.offset.totalHours > 0) {
-                        format = '%-H Hour%!H ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '%-D Day%!D ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('a limited time');
-                });
-            $('.tzcd-small').countdown('2022/08/30')
-                .on('update.countdown', function (event) {
-                    var format = '%-MM %-SS';
-                    if (event.offset.totalHours > 0) {
-                        format = '%-HH ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '%-DD ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('a limited time');
-                });
         });
     </script>
     <script type="text/javascript" src="/marketing/js/modal.js"></script>

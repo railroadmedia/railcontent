@@ -10,6 +10,7 @@
     <meta property="og:url" content="https://www.pianote.com/500-songs">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
     <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="/marketing/parcel/pianote/500-songs.css">
     <link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap" rel="stylesheet">
@@ -61,7 +62,6 @@
                     <strong><u>ONLY ${{ $productPrice }}</u></strong>
                 @endif
                     <br><a href="/" class="red">(OR FREE WITH A PIANOTE MEMBERSHIP)</a><br>
-                    <span style="text-transform:uppercase">ONLY <span class="tzcd-full"></span> LEFT!</span><br>
                 <strong class="yellow">** 90-DAY GUARANTEE **</strong></p>
             @yield('badge-2')
         </div>
@@ -393,7 +393,6 @@
                     <strong><u>ONLY ${{ $productPrice }}</u></strong>
                 @endif
                 <br><a href="/" class="red">(OR FREE WITH A PIANOTE MEMBERSHIP)</a><br>
-                    <span style="text-transform:uppercase">ONLY <span class="tzcd-full"></span> LEFT!</span><br>
                 <strong class="yellow">** 90-DAY GUARANTEE **</strong></p>
 
             <div class="credit-cards col-xs-12">
@@ -482,7 +481,6 @@
     <script src="{{ asset('marketing/js/pianote/cart-sidebar.js') }}"></script>
     <script src="{{ asset('marketing/js/pianote/app.js') }}"></script>
 
-    @include('pianote._partials._promo-countdown')
     @yield('scripts')
 
     @include('pianote._partials.inspectlet')

@@ -1,4 +1,6 @@
-@extends('pianote.sales.standard-layout')
+@extends('pianote.sales.standard-layout',[
+    'bfButton' => true
+])
 
 @section('meta')
     <title>Learn the piano anytime with real teachers. | Pianote</title>
@@ -50,8 +52,9 @@
 @endsection
 
 @section('sticky-bar')
-    @include('_partials.layout.holiday.homepage-sticky-bar', [
-        'text' => 'GET 15 FREE BONUSES <br> WORTH $861'
+    @include('_partials.layout.holiday.sticky-bar', [
+        'text' => 'GET 15 FREE BONUSES <br> WORTH $861',
+        'homepage' => true,
     ])
 
 {{--   <div class="h-10 w-full block" style="background:linear-gradient(140deg, #fff, #fd5257);"></div>--}}

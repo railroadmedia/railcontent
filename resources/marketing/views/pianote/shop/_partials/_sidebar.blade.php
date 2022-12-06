@@ -13,6 +13,9 @@
         @include('_partials.layout.holiday.shop-sidebar-banner')
 
         <div class="pt-2 px-5 pb-6 text-center md:py-6 md:px-4">
+            @if(!empty($newOnly))
+                <p class="py-1.5 px-3 leading-none rounded-sm bg-black text-white uppercase inline-block mb-4 mx-auto text-xs"><strong>NEW STUDENTS ONLY</strong></p>
+            @endif
             @if(!empty($instructor))
                 <p class="text-center text-sm uppercase mx-auto mb-1 hidden lg:inline"><em>{{ $instructor }}</em></p>
             @endif
@@ -92,7 +95,7 @@
         @if(!empty($guaranteeBadge))
             <div class="flex justify-center items-center px-5 pb-5 text-center md:pt-2 md:pt-4 md:pb-6 lg:p-5 lg:-mt-1 lg:mx-auto lg:mb-0 border-t-0 lg:border-t" style="border-color: #CCD3D3; border-top-style: solid;">
                 <img class="w-36 my-0 pr-6" src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/90-day.png">
-                <p class="text-xs font-bold text-left my-0 text-pianote">Your entire order is backed by<br class="lg:hidden" /> our 90-Day Money Back <br class="lg:hidden" /> Guarantee.</p>
+                <p class="text-sm italic text-left my-0 text-pianote">Your entire order is backed by<br class="lg:hidden" /> our 90-Day Money Back <br class="lg:hidden" /> Guarantee.</p>
             </div>
         @endif
     </div>

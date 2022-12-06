@@ -11,29 +11,17 @@
         <span></span>
     </div>
 
-    @if(!empty($checkoutVersion))
-        <div class="button-wrap">
-            <a href="/shop" class="join outline-button">Shop</a>
-        </div>
-    @endif
 
     @if(!empty($cartVersion))
         <div class="button-wrap" id="app">
-            <a href="/shop" class="join outline-button">Shop</a>
+            <a href="/shop" class="join promo outline-button">Shop</a>
 
             <nav-cart-button
-                {{-- cart-data='{{ $cartData }}' --}}
-                cart-data-url='{{ get_musora_brand_base_url() }}'
-                checkout-url='{{ get_legacy_brand_base_url("musora") }}/order/pianote'
-                api-domain-url='{{ get_musora_brand_base_url() }}'
+                cart-data='{{ $cartData }}'
             ></nav-cart-button>
-
             <cart-sidebar
                 brand="pianote"
-                {{-- cart-data='{{ $cartData }}' --}}
-                cart-data-url='{{ get_musora_brand_base_url() }}'
-                checkout-url='{{ get_legacy_brand_base_url("musora") }}/order/pianote'
-                api-domain-url='{{ get_musora_brand_base_url() }}'
+                cart-data='{{ $cartData }}'
             ></cart-sidebar>
         </div>
     @endif
@@ -45,12 +33,12 @@
             <a class="@if(!empty($scrollToJoin)) anchor-slide @endif"  href="/#coaches" >Coaches</a>
         </div>
         <div class="button-wrap">
-            <a href="/shop" class="join outline-button">Shop</a>
+            <a href="/shop" class="join promo outline-button">Shop</a>
             <a
                 @if(!empty($scrollToJoin))
-                    href="/#orderNow" class="join anchor-slide"
+                href="/#orderNow" class="join anchor-slide"
                 @else
-                    href="/#orderNow" class="join"
+                href="/#orderNow" class="join"
                 @endif
             >
                 @if(!empty($trialVersion) && $trialVersion) Start your free trial @else Join <span class="show-for-medium"> Pianote</span> @endif
@@ -69,7 +57,7 @@
         @include('pianote.sales.partials._nav-link', [
             "linkName" => "Contact",
             "linkIcon" => "fas fa-phone",
-            "linkUrl" => get_legacy_brand_base_url("musora").'/contact'
+            "linkUrl" => "/contact/"
         ])
         @include('pianote.sales.partials._nav-link', [
             "linkName" => "Pianote",
@@ -77,7 +65,7 @@
             "linkUrl" => "/",
         ])
         @include('pianote.sales.partials._nav-link', [
-            "linkName" => "Shop",
+            "linkName" => "Holiday Deals",
             "linkIcon" => "fas fa-tag",
             "linkUrl" => "/shop",
         ])

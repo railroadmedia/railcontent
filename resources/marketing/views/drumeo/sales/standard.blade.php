@@ -77,8 +77,9 @@
 @endsection
 
 @section('sticky-bar')
-    @include('_partials.layout.holiday.homepage-sticky-bar', [
-        'text' => 'GET 10 FREE BONUSES <br> WORTH $1228.94'
+    @include('_partials.layout.holiday.sticky-bar', [
+        'text' => 'GET 10 FREE BONUSES <br> WORTH $1228.94',
+        'homepage' => true,
     ])
 
     {{--<div class="h-10 relative w-full block" style="background:linear-gradient(to bottom, #022040, #01050f);"></div>--}}

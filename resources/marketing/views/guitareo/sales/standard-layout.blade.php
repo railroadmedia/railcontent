@@ -1340,7 +1340,7 @@
         </div>
     </section>
 
-    <div id="customize-anchor" class="anchor"></div>
+    <div id="orderNow" class="anchor"></div>
     @yield('final')
     <div class="unstick-trigger block"></div>
 

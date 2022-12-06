@@ -11,6 +11,7 @@
 
     <link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
     <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="/marketing/parcel/pianote/destupefy.css">
 @stop
@@ -19,7 +20,7 @@
     @include('pianote._partials._nav', [
         "cartVersion" => true
     ])
-    @include('pianote._partials._promo-banner', [
+    @include('pianote._partials._promo-banner-no-tw', [
                     "name" => "De-Stupefy Your Left Hand",
                     "fullPrice" => PianotePrices::$destupefyFull,
                     "price" => PianotePrices::$destupefyRegular,
@@ -451,6 +452,5 @@
         });
     </script>
 
-    @include('pianote._partials._promo-countdown')
     @include('pianote._partials.inspectlet')
 @stop

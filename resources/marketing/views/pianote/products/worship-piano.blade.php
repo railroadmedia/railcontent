@@ -10,6 +10,7 @@
     <meta property="og:url" content="https://www.pianote.com/worship-piano">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="/marketing/parcel/pianote/worship-piano.css">
 @stop
@@ -18,7 +19,7 @@
     @include('pianote._partials._nav', [
         "cartVersion" => true
     ])
-    @include('pianote._partials._promo-banner', [
+    @include('pianote._partials._promo-banner-no-tw', [
                     "name" => "Worship Piano",
                     "fullPrice" => PianotePrices::$worshipPianoFull,
                     "price" => PianotePrices::$worshipPianoRegular,
@@ -577,6 +578,5 @@
     <script src="{{ asset('marketing/js/pianote/cart-sidebar.js') }}"></script>
     <script src="{{ asset('marketing/js/pianote/app.js') }}"></script>
 
-    @include('pianote._partials._promo-countdown')
     @include('pianote._partials.inspectlet')
 @stop

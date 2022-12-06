@@ -10,6 +10,7 @@
     <meta property="og:url" content="https://www.pianote.com/riffs-and-fills">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
     <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="/marketing/parcel/pianote/riffs-and-fills.css">
 @stop
@@ -19,7 +20,7 @@
         "cartVersion" => true
     ])
 
-    @include('pianote._partials._promo-banner', [
+    @include('pianote._partials._promo-banner-no-tw', [
                     "name" => "Piano Riffs & Fills",
                     "fullPrice" => PianotePrices::$pianoRiffsAndFillsFull,
                     "price" => PianotePrices::$pianoRiffsAndFillsRegular,
@@ -335,6 +336,5 @@ Connect every riff, fill and tip you’ve learned and see how to apply it to pre
     <script src="{{ asset('marketing/js/pianote/cart-sidebar.js') }}"></script>
     <script src="{{ asset('marketing/js/pianote/app.js') }}"></script>
 
-    @include('pianote._partials._promo-countdown')
     @include('pianote._partials.inspectlet')
 @stop
