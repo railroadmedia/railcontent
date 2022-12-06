@@ -19,7 +19,7 @@
 
 </head>
 
-<body>
+<body @yield('body-data')>
 
 {!! \App\Analytics\Tracker::bodyTop() !!}
 
