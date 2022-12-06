@@ -247,7 +247,7 @@
 
         {{--    LESSONS    --}}
         <section class="grid-view category-section" data-category="lessons">
-            <ul class="container mx-auto fixed-cards text-center">
+            <ul class="container mx-auto fixed-cards text-center lg:text-left">
                 <li>
                     <h1 class="float-left px-2 md:px-3 w-full">
                         <div class="heading-icon"><i class="fas fa-video"></i></div>
