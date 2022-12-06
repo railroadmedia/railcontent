@@ -1636,7 +1636,7 @@ The Guitareo Survival Guide is perfect for adding a little fun while navigating 
                     "desc" => "Black Wire"
                 ],
             ],
-            "visible" => true,
+            "visible" => false,
             "sold_out" => false,
             "guaranteed" => false,
             "lifetime_access" => false,
