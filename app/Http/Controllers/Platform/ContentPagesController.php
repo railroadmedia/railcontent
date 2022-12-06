@@ -214,6 +214,8 @@ class ContentPagesController extends BaseController
                 "hasRecentRoutines" => $hasRecentRoutines,
                 "routinesCount" => $routinesCount,
                 "catalogueMeta" => $catalogueMeta,
+                "artistsNumber" => count($listLessons->filterOptions()['artist']??[]),
+                "songsNumber" => $listLessons->totalResults()
             ]);
         } else {
             return view('content.catalogue', [

@@ -6,7 +6,7 @@
 
 @section('styles')
     <style>
-        /* TODO: Componentize ContentCatalogue and use slots to avoid using so many conditionals, for now let's hide the type filter, to not introduce another conditional */ 
+        /* TODO: Componentize ContentCatalogue and use slots to avoid using so many conditionals, for now let's hide the type filter, to not introduce another conditional */
         .songs-catalogue-container .typeFilterContainer {
             display: none;
         }
@@ -26,7 +26,7 @@
                     </h1>
                     <p class="tw-text-white tw-text-[18px] tw-mb-4 tw-max-w-4xl tw-pr-12 tw-text-base tw-uppercase tw-font-open-sans tw-font-bold">
                         <!-- TODO: GET THIS INFO FROM BACKEND -->
-                        813 ARTISTS | 23,327 SONGS test
+                        {{$artistsNumber}} ARTISTS | {{$songsNumber}} SONGS
                     </p>
                 </div>
                 <div class="tw-flex tw-flex-row">
