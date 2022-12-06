@@ -2,6 +2,7 @@
     <div class="flex flex-column pv-2 mb-1">
         <order-form-cart-item
             v-for="item in cartItems"
+            :cart-data-url="cartDataUrl"
             :key="item.sku"
             :theme-color="themeColor"
             :item="item"
@@ -11,6 +12,7 @@
 
         <order-form-cart-item
             v-for="item in bonuses"
+            :cart-data-url="cartDataUrl"
             :key="item.sku"
             :theme-color="themeColor"
             :item="item"
@@ -41,6 +43,10 @@ export default {
         cartItems: {
             type: Array,
             default: () => [],
+        },
+        
+        cartDataUrl: {
+            type: String,
         },
 
         isCartLocked: {

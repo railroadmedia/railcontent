@@ -14,12 +14,12 @@
 
     @if(!empty($checkoutVersion))
         <div class="button-wrap">
-            <a href="/shop" class="join promo outline-button">Shop</a>
+            <a href="{{ get_legacy_brand_base_url('singeo') }}/shop" class="join promo outline-button">Shop</a>
         </div>
     @endif
     @if(!empty($cartVersion))
         <div class="button-wrap" id="app">
-            <a href="/shop" class="join promo outline-button">Shop</a>
+            <a href="{{ get_legacy_brand_base_url('singeo') }}/shop" class="join promo outline-button">Shop</a>
 
             <nav-cart-button
                 {{-- cart-data='{{ $cartData }}' --}}
@@ -43,7 +43,7 @@
             <a class="@if(!empty($scrollToJoin)) anchor-slide @endif"  href="/#coaches" >Coaches</a>
         </div>
         <div class="button-wrap">
-            <a href="/shop" class="join promo outline-button">Shop</a>
+            <a href="{{ get_legacy_brand_base_url('singeo') }}/shop" class="join promo outline-button">Shop</a>
             <a href="#customize-anchor" class="join anchor-slide">Join Singeo</a>
         </div>
     @endif

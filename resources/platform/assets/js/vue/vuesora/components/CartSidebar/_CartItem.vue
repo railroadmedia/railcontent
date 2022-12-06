@@ -32,7 +32,7 @@
                         class="flex flex-column flex-auto body csb-product-price"
                     >
                         <i
-                            class="fas fa-spin fa-spinner text-center"
+                            class="fas fa-spin fa-spinner text-singeo tw-inline-flex tw-justify-center"
                             :class="'tw-text-'+brand"
                         ></i>
                     </div>
