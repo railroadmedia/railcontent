@@ -110,7 +110,7 @@
                         </a>
                     @endif
                     @if(!empty($itemURL))
-                        <a href="{{ ($itemURL === '/shop/') ? '/' : $itemURL }}" class="join black">@if(!empty($buttonText)) {{ $buttonText }} @else View Product
+                        <a href="{{ ($itemURL === '/shop/') ? '/' : $itemURL }}" class="join black">@if(!empty($buttonText)) {{ $buttonText }} @elseif($itemURL === '/shop/') See More  @else View Product
                             <i class="fas fa-arrow-right"></i> @endif</a>
                     @endif
                     <p class="disclaimer"><em>@if($category !== 'lessons') Worldwide shipping. @endif All prices in USD. <br> <span style="color:red;"> @if(!empty($specialText)) {!!  $specialText  !!} @endif </span></em></p>
