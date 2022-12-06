@@ -176,16 +176,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.252.1",
+            "version": "3.252.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "5cc35b5f66d026d99ba843dba6fe1783571c20af"
+                "reference": "28daf91328380c7e61188738e36d1a0789a7b298"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/5cc35b5f66d026d99ba843dba6fe1783571c20af",
-                "reference": "5cc35b5f66d026d99ba843dba6fe1783571c20af",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/28daf91328380c7e61188738e36d1a0789a7b298",
+                "reference": "28daf91328380c7e61188738e36d1a0789a7b298",
                 "shasum": ""
             },
             "require": {
@@ -264,9 +264,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.252.1"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.252.2"
             },
-            "time": "2022-12-02T19:21:15+00:00"
+            "time": "2022-12-05T19:23:12+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -7926,16 +7926,16 @@
         },
         {
             "name": "railroad/ecommerce",
-            "version": "v5.0.36",
+            "version": "v5.0.39",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "8f029d8cff6b1b7b92db923b63a6d5c62933b838"
+                "reference": "a54d7a5c831e74c7a85c24582fa983e07bb50bb5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/8f029d8cff6b1b7b92db923b63a6d5c62933b838",
-                "reference": "8f029d8cff6b1b7b92db923b63a6d5c62933b838",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/a54d7a5c831e74c7a85c24582fa983e07bb50bb5",
+                "reference": "a54d7a5c831e74c7a85c24582fa983e07bb50bb5",
                 "shasum": ""
             },
             "require": {
@@ -7972,9 +7972,9 @@
             "description": "Ecommerce system",
             "support": {
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
-                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.36"
+                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.39"
             },
-            "time": "2022-12-02T06:12:15+00:00"
+            "time": "2022-12-06T01:14:36+00:00"
         },
         {
             "name": "railroad/location",
@@ -8311,16 +8311,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "2.0.52",
+            "version": "2.0.53",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "1c1fd5ecde90e43d89ad46a847a3fd17fcc71e12"
+                "reference": "c9b06d5fbad74035be7a9d7fc38eff2e6ff7c214"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/1c1fd5ecde90e43d89ad46a847a3fd17fcc71e12",
-                "reference": "1c1fd5ecde90e43d89ad46a847a3fd17fcc71e12",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/c9b06d5fbad74035be7a9d7fc38eff2e6ff7c214",
+                "reference": "c9b06d5fbad74035be7a9d7fc38eff2e6ff7c214",
                 "shasum": ""
             },
             "require": {
@@ -8374,9 +8374,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/2.0.52"
+                "source": "https://github.com/railroadmedia/railcontent/tree/2.0.53"
             },
-            "time": "2022-12-01T12:22:41+00:00"
+            "time": "2022-12-06T11:40:03+00:00"
         },
         {
             "name": "railroad/railforums",
