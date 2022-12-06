@@ -663,7 +663,7 @@ You’ll get 10 of the 14 songs delivered to your inbox immediately after comple
                     "desc" => "38 pages"
                 ],
             ],
-            "visible" => true,
+            "visible" => false,
             "sold_out" => false,
             "guaranteed" => false,
             "lifetime_access" => false,
@@ -863,7 +863,7 @@ And so many more!",
                     "desc" => "92 pages"
                 ],
             ],
-            "visible" => true,
+            "visible" => false,
             "sold_out" => false,
             "guaranteed" => false,
             "lifetime_access" => false,
