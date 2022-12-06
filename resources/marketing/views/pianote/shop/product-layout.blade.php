@@ -139,7 +139,6 @@
     <script type="text/javascript" src="/marketing/parcel/pianote/shop-product.js"></script>
     <script src="{{ asset('marketing/parcel/pianote/manifest.js') }}"></script>
     <script src="{{ asset('marketing/parcel/pianote/vendor.js') }}"></script>
-    <script src="{{ asset('marketing/parcel/pianote/cart-sidebar.js') }}"></script>
     <script src="{{ asset('marketing/parcel/pianote/app.js') }}"></script>
 
     @include('pianote.shop._partials._promo-countdown')
