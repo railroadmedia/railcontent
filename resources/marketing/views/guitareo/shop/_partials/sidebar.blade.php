@@ -6,7 +6,7 @@
 {{--    }--}}
 {{--@endphp--}}
 
-<div class="side-bar sliding-function px-3 md:px-4 lg:px-4 lg:w-1/3 lg:mt-5">
+<div class="side-bar sliding-function px-3 md:px-4 lg:px-4 lg:w-1/3 lg:mt-5 mb-4 lg:mb-0">
     <div class="lg:h-0">
     <div id="order" class="anchor"></div>
     <div class="side-slide overflow-hidden md:rounded border border-solid" style="border-color: #CCD3D3;">
@@ -36,7 +36,11 @@
                 <p class="text-center text-sm leading-none mx-auto mb-1 md:text-base italic" style="color:#F71B26;">{!! $specialText  !!}</p>
             @endif
 
-            @if(!$soldOut)
+            @if(!empty($soldOut) && $soldOut)
+                <button class="border-none join w-full sm:w-1/2 lg:w-full sold-out">
+                    SOLD OUT
+                </button>
+            @else
                 @if($category !== 'bundles' && count($sizes) === 0)
                     <a
                         class="online-atc vue-add-to-cart"
@@ -56,9 +60,9 @@
                                 class="bg-white text-black"
                                 @if(isset($size->soldOut) && $size->soldOut) disabled @endif
                                 {{-- @if($productStock[$sku.'-'.$size->code]->isProductSoldOut()) disabled @endif --}}
-                                value="{{$product->sku . '-' . $size->code}}"
-                                data-price="{{floatVal($product->price) ?? 0}}"
-                                data-product-json='{"{{$product->sku . '-' . $size->code}}": 1}'
+                                value="@if(!empty($sku)){{$sku}}-@endif{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}"
+                                data-price="{{!empty($size->price) ? $size->price : $price}}"
+                                data-product-json='{"@if(!empty($sku)){{$sku}}-@endif{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}": 1}'
                             >
                                 {{ $size->name }}
                             </option>
@@ -84,14 +88,10 @@
 
                 @if($category === 'bundles')
                     <a class="online-atc" href="/ecommerce/add-to-cart?redirect=/order&{{ $product->sku }}"
-                            data-base-url="/ecommerce/add-to-cart?redirect=/order&{{ $product->sku }}">
+                       data-base-url="/ecommerce/add-to-cart?redirect=/order&{{ $product->sku }}">
                         <button class="border-none join w-full sm:w-1/2 lg:w-full"><i class="fas fa-cart-plus"></i> Order Now</button>
                     </a>
                 @endif
-            @else
-                <button class="border-none join w-full sm:w-1/2 lg:w-full sold-out">
-                    SOLD OUT
-                </button>
             @endif
             <p class="italic text-xs leading-normal text-center mx-auto">
                 @if($freeShipping)
@@ -102,7 +102,7 @@
                 <a class="text-guitareo" href="tel:1-604-855-7605">1-604-855-7605</a>. </p>
         </div>
         @if($guaranteeBadge)
-            <div class="flex justify-center items-center px-5 py-2 text-center md:pt-2 md:pt-4 md:pb-6 lg:p-5 lg:-mt-1 lg:mx-auto lg:mb-0 border-t" style="border-color: #CCD3D3; border-top-style: solid;">
+            <div class="flex justify-center items-center px-5 py-2 text-center md:pt-2 md:pt-4 md:pb-6 lg:p-5 lg:-mt-1 lg:mx-auto border-t" style="border-color: #CCD3D3; border-top-style: solid;">
                 <img class="w-24 my-0 pr-6" src="https://cdn.musora.com/image/fetch/w_220,q_auto:best/https://guitareo.s3.amazonaws.com/sales/2021/guarantee-badge.png">
                 <p class="text-xs font-bold text-left my-0 text-guitareo">Your entire order is backed by<br class="lg:hidden" /> our 90-Day Money Back <br class="lg:hidden" /> Guarantee.</p>
             </div>

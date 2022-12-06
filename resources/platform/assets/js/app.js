@@ -57,6 +57,7 @@ import mitt from 'mitt'; //Temporary Event Bus library for Chatsora code (need f
 import Chatsora from './vue/Libraries/Chatsora/components/index';
 const eventBus = mitt();
 
+axios.defaults.withCredentials = true;
 
 // laravel vapor library for file uploading to S3 directly
 window.Vapor = require('laravel-vapor');

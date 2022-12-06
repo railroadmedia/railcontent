@@ -1294,12 +1294,12 @@
                     @else
                         <td class="rounded-b-xl">
                             @if(empty($trialVersion))
-                                @if(number_format(\App\Prices::$guitareoMembershipAnnual, 2) == intval(\App\Prices::$guitareoMembershipAnnual))
-                                    <strong>${{  round(\App\Prices::$guitareoMembershipAnnual / 12, 2) }}</strong>/mo<br>
+                                @if(number_format(GuitareoPrices::$guitareoMembershipAnnual, 2) == intval(GuitareoPrices::$guitareoMembershipAnnual))
+                                    <strong>${{  round(GuitareoPrices::$guitareoMembershipAnnual / 12, 2) }}</strong>/mo<br>
                                 @else
-                                    <strong>${{  number_format(\App\Prices::$guitareoMembershipAnnual / 12, 2)  }}</strong>/mo<br>
+                                    <strong>${{  number_format(GuitareoPrices::$guitareoMembershipAnnual / 12, 2)  }}</strong>/mo<br>
                                 @endif
-                                <em>Billed annually at ${{  \App\Prices::$guitareoMembershipAnnual }}</em><br><br>
+                                <em>Billed annually at ${{  GuitareoPrices::$guitareoMembershipAnnual }}</em><br><br>
                                 Unlimited lessons & support.
                             @else
                                 <strong>Free Trial</strong><br>&nbsp;

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Ecommerce;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Str;
 use Railroad\Ecommerce\Contracts\UserProviderInterface;
 use Railroad\Ecommerce\Entities\PaymentMethod;
 use Railroad\Ecommerce\Entities\User;
@@ -100,6 +101,7 @@ class OrderController extends Controller
         $this->cartService->refreshCart();
 
         $cart = $this->cartService->getCart();
+        $cartDataArray = $this->cartService->toArray();
 
         // this is likely no longer needed
 //        if (!empty($user) &&
@@ -116,9 +118,9 @@ class OrderController extends Controller
         }
 
         Tracker::queue(
-            function () {
+            function () use ($cartDataArray) {
                 $trackerProducts = [];
-                foreach ($this->cartService->toArray()['items'] as $cartItemData) {
+                foreach ($cartDataArray['items'] as $cartItemData) {
                     $trackerProduct = null;
                     $trackerProduct['id'] = $cartItemData['id'];
                     $trackerProduct['name'] = $cartItemData['name'];
@@ -163,7 +165,7 @@ class OrderController extends Controller
             $paymentMethods = $this->paymentMethodRepository->getAllUsersPaymentMethods(
                 $user->id,
                 $request,
-                'drumeo'
+                $brand
             );
 
             // we only want to show unique payment methods, based on the card finger print and paypal agreement id
@@ -272,7 +274,7 @@ class OrderController extends Controller
         return view(
             $brand . '.pages.order-form',
             [
-                'cart' => $this->cartService->toArray(),
+                'cart' => $cartDataArray,
                 'billingAddress' => $billingAddress->toArray(),
                 'shippingAddress' => $shippingAddress->toArray(),
                 'user' => $user ? [
@@ -297,5 +299,23 @@ class OrderController extends Controller
     public function thankYouPageForCustomerOrder()
     {
         return view('order-form.order-thankyou-physical');
+    }
+
+    public function redirectToMusoraOrderForm(Request $request)
+    {
+        $parse = parse_url($request->url());
+
+        if (Str::endsWith($parse['host'], 'drumeo.com')) {
+            return redirect()->away(get_musora_brand_base_url() . '/order/drumeo');
+        } elseif (Str::endsWith($parse['host'], 'pianote.com')) {
+            return redirect()->away(get_musora_brand_base_url() . '/order/pianote');
+        } elseif (Str::endsWith($parse['host'], 'guitareo.com')) {
+            return redirect()->away(get_musora_brand_base_url() . '/order/guitareo');
+        } elseif (Str::endsWith($parse['host'], 'singeo.com')) {
+            return redirect()->away(get_musora_brand_base_url() . '/order/singeo');
+        }
+
+        // default
+        return redirect()->away(get_musora_brand_base_url() . '/order/drumeo');
     }
 }

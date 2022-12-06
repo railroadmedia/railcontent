@@ -44,7 +44,6 @@ return new class extends Migration
             $table->boolean('sold_out')->default(false);
             $table->boolean('guaranteed')->default(false);
             $table->boolean('visible')->default(true);
-            $table->boolean('lifetime_access')->default(false);
             $table->boolean('free_shipping')->default(false);
             $table->boolean('included_edge')->default(false);
             $table->boolean('size_case_sensitive')->default(false);

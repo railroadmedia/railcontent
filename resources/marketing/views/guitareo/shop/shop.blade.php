@@ -1,3 +1,32 @@
+@php
+    $bundles = [
+        [
+            'slug' => '/shop/sound-better-bundle',
+            'badgeText' => 'FREE GUITAR GEAR',
+            'img' => 'https://guitareo.s3.amazonaws.com/sales/promos/black-friday/sound-better-thumb-no-play.jpg',
+            'title' => 'Guitareo Membership + 6 Bonuses',
+            'desc' => 'Annual Guitareo Membership <br class="inline md:hidden lg:inline">+ The Guitarist’s Survival Kit + 5 Training Packs',
+            'price' => 1164,
+            'discountedPrice' => GuitareoPrices::$guitareoMembershipAnnual,
+            'priceColor' => 'linear-gradient(180deg, #00C9AC 0%, #16414A 100%)',
+            'buttonColor' => 'linear-gradient(180deg, #00C9AC 0%, #16414A 100%)',
+            'visible' => 1,
+        ],
+        [
+            'slug' => '/shop/build-a-song',
+            'badgeText' => '87% OFF',
+            'img' => 'https://guitareo.s3.amazonaws.com/sales/promos/black-friday/build-a-song-fb-share-image.jpg',
+            'title' => '5 Discounted Courses',
+            'desc' => 'Pay once and get lifetime <br class="hidden-sm hidden-md">access to 5 courses.',
+            'price' => 735,
+            'discountedPrice' => 97,
+            'priceColor' => 'linear-gradient(180deg, #fe7c02 0%, #feb157 100%)',
+            'buttonColor' => 'linear-gradient(180deg, #fe7c02 0%, #feb157 100%)',
+            'visible' => 1,
+        ],
+    ];
+@endphp
+
 @extends('guitareo._partials.global-layout')
 
 @section('meta')
@@ -228,109 +257,58 @@
         </div>
     @endif
     <div class="white-box">
-        <section class="bundles">
-            <div class="container mx-auto">
-                <div class="float-left w-full px-2 md:px-3 md:w-1/2 card-wrap">
-                    <a href="/sound-better-bundle" class="bundle-card">
-                        <span class="top-left-badge text-white bg-promo"><i class="fas fa-star"></i> FREE GUITAR GEAR</span>
-                        <div class="bg-center bg-cover pb-40 sm:pb-56 xl:pb-72" style="background-image:url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://guitareo.s3.amazonaws.com/sales/promos/black-friday/sound-better-thumb-no-play.jpg);"></div>
-                        <div class="float-left w-full px-2 md:px-3">
-                            <p><strong>Guitareo Membership + 6 Bonuses</strong><br><br>
-                                <em>
-                                    Annual Guitareo Membership <br class="inline md:hidden lg:inline">
-                                    + The Guitarist’s Survival Kit + 5 Training Packs<br></em>
-                                <strong class="price"><s class="opacity-30">$1164</s>&nbsp; <span class="linear-green">${{ \App\Prices::$guitareoMembershipAnnual }}</span></strong>
-                            </p>
-                            <span class="join max-w-md" style="background:linear-gradient(180deg, #00C9AC 0%, #16414A 100%);">See The Deal &raquo;</span>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="float-left w-full px-2 md:px-3 md:w-1/2 card-wrap">
-                    <a href="/build-a-song" class="bundle-card">
-                        <span class="top-left-badge text-white bg-promo"><i class="fas fa-star"></i> 87% OFF</span>
-                        <div class="bg-center bg-cover pb-40 sm:pb-56 xl:pb-72" style="background-image:url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://guitareo.s3.amazonaws.com/sales/promos/black-friday/build-a-song-fb-share-image.jpg);"></div>
-                        <div class="float-left w-full px-2 md:px-3">
-                            <p><strong>5 Discounted Courses <br></strong><br>
-                                <em>Pay once and get lifetime <br class="hidden-sm hidden-md">
-                                    access to 5 courses.</em>
-                                <strong class="price"><s class="opacity-30">$735</s>&nbsp; <span style="color:#fe7c02;">$97</span></strong>
-                            </p>
-                            <span class="join max-w-md" style="background:linear-gradient(180deg, #fe7c02 0%, #feb157 100%);">See The Deal &raquo;</span>
-                        </div>
-                    </a>
-                </div>
-
-                {{--                    <div class="float-left w-full px-2 md:px-3 card-wrap">--}}
-                {{--                        <div class="px-2 sm:px-0 max-w-xs sm:max-w-full mx-auto">--}}
-                {{--                        <a href="/shop/six-month-pass" class="flex flex-row-reverse text-white rounded-xl mb-5 overflow-hidden relative block w-full sm:text-left px-5 lg:px-10 pt-36 pb-5 sm:py-7 lg:py-16 padding-per">--}}
-                {{--                            <div class="relative z-10 inline-block w-full sm:w-auto text-center mx-0">--}}
-                {{--                                <img class="h-14 lg:h-16" src="https://cdn.musora.com/image/fetch/w_240,q_auto:best/https://guitareo.s3.amazonaws.com/sales/promos/november/the-six-month-pass-white.png"><br>--}}
-                {{--                                <p class="leading-tight my-2 lg:my-3 text-sm">--}}
-                {{--                                    No subscription. No renewals. <br class="hidden md:inline lg:hidden">Enjoy six months of <br class="hidden lg:inline">access to guitar lessons <br class="hidden md:inline lg:hidden">+ unlimited teacher support.--}}
-                {{--                                </p>--}}
-                {{--                                <h4 class="inline-block leading-none"><strong>--}}
-                {{--                                    <s class="opacity-60">${{ \App\Prices::$guitareoMembership6monthFull }}</s>&nbsp; ${{ \App\Prices::$guitareoMembership6month }}</strong></h4><br>--}}
-                {{--                                <div class="join white smaller mt-2 lg:mt-3 w-full" style="background:black;font-size:17px;">See The Deal &raquo;</div><br>--}}
-                {{--                            </div>--}}
-                {{--                            <p class="absolute z-20 top-0 left-0 rounded-br-xl text-white bg-promo uppercase py-1.5 px-2.5 leading-none text-xs font-roboto"><i class="fas fa-star"></i> <strong>SAVE 30%</strong></p>--}}
-                {{--                            <div class="hidden sm:block absolute inset-0 z-0 bg-cover bg-center" style="background-color:#0d1d3f;background-image:url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://guitareo.s3.amazonaws.com/sales/promos/black-friday/6-month-pass-shop.jpg);"></div>--}}
-                {{--                            <div class="block sm:hidden absolute inset-0 z-0 bg-cover bg-center" style="background-color:#293239;background-image:url(https://cdn.musora.com/image/fetch/w_700,q_auto:best/https://guitareo.s3.amazonaws.com/sales/promos/november/6-month-pass-m.jpg);"></div>--}}
-                {{--                        </a>--}}
-                {{--                    </div>--}}
-
-            </div>
-        </section>
+        @include('_partials.layout.holiday.bundle-cards')
         <section class="grid-view category-section" data-category="lessons">
-            <ul class="container mx-auto fixed-cards">
+            <ul class="container mx-auto fixed-cards text-center">
                 @foreach($products as $product){
-                    @include('guitareo.shop._partials._shop-card', [
-                        "sku" => $product->sku,
-                        "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $product->slug ),
-                        "thumbnail" => $product->thumbnail,
-                        "packLogo" => $product->thumbnail_logo,
-                        "badgeText" => $product->badge_text,
-                        "title" => $product->name,
-                        "packAuthor" => $product->instructor_name ? $product->instructor_name : 'Guitareo',
-                        "cardDescription" => $product->short_desc,
-                        "includedEdge" => $product->included_edge,
-                        "fullPrice" => $product->price,
-                        "price" => $product->discounted_price === '0.00' || empty($product->discounted_price) ? $product->price : $product->discounted_price,
-                        "category" => strtolower($product->productType->name),
-                        "sizes" => $product->sizes,
-                        "soldOut" => $product->sold_out,
-                        "size_case_sensitive" => $product->size_case_sensitive,
-                    ])
+                @include('guitareo.shop._partials._shop-card', [
+                    "sku" => $product->sku,
+                    "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $product->slug ),
+                    "thumbnail" => $product->thumbnail,
+                    "packLogo" => $product->thumbnail_logo,
+                    "badgeText" => $product->badge_text,
+                    "title" => $product->name,
+                    "packAuthor" => $product->instructor_name ? $product->instructor_name : 'Guitareo',
+                    "cardDescription" => $product->short_desc,
+                    "includedEdge" => $product->included_edge,
+                    "fullPrice" => $product->price,
+                    "price" => $product->discounted_price === '0.00' || empty($product->discounted_price) ? $product->price : $product->discounted_price,
+                    "category" => strtolower($product->productType->name),
+                    "sizes" => $product->sizes,
+                    "soldOut" => $product->sold_out,
+                    "size_case_sensitive" => $product->size_case_sensitive,
+                ])
                 }
                 @endforeach
 
             </ul>
         </section>
 
-    </div>
-    <section class="content-section text-white text-center px-6 py-10 sm:py-20" style="background:linear-gradient(to bottom, #01050f, #021225);overflow:visible">
-        <div class="container mx-auto max-w-4xl">
-            <img class="h-28 md:h-32 lazyload" data-src="https://cdn.musora.com/image/fetch/w_250,q_auto:best/https://guitareo.s3.amazonaws.com/sales/2022/guitareo-guarantee.png" alt="guitareo-guarantee">
+        </div>
+        <section class="content-section text-white text-center px-6 py-10 sm:py-20" style="background:linear-gradient(to bottom, #01050f, #021225);overflow:visible">
+            <div class="container mx-auto max-w-4xl">
+                <img class="h-28 md:h-32 lazyload" data-src="https://cdn.musora.com/image/fetch/w_250,q_auto:best/https://guitareo.s3.amazonaws.com/sales/2022/guitareo-guarantee.png" alt="guitareo-guarantee">
 
-            <h3 class="leading-tight mt-5 md:mt-8 mb-4 md:mb-6 " data-aos-once="true" data-aos="fade-up" data-aos-offset="150" data-aos-delay="150"><strong>Happy student guarantee. </strong><br>
-                Test-drive your lessons for 90 days. Zero risk. </h3>
-            <p class=" opacity-60 leading-normal md:leading-loose">Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence on the guitar. </p>
-            <div class="flex flex-wrap items-start justify-center mt-5 md:mt-7">
-                <div class="w-full sm:w-1/3 px-2 mb-3 sm:mb-0">
-                    <h5 class="text-guitareo border-guitareo border-2 rounded-full inline-block py-2 px-3 mb-1">1</h5>
-                    <h6 class="leading-normal">Start your<br> lessons today.</h6>
-                </div>
-                <div class="w-full sm:w-1/3 px-2 mb-3 sm:mb-0">
-                    <h5 class="text-guitareo border-guitareo border-2 rounded-full inline-block py-2 px-3 mb-1">2</h5>
-                    <h6 class="leading-normal">Enjoy them for 90<br> days, risk-free.</h6>
-                </div>
-                <div class="w-full sm:w-1/3 px-2">
-                    <h5 class="text-guitareo border-guitareo border-2 rounded-full inline-block py-2 px-3 mb-1">3</h5>
-                    <h6 class="leading-normal">Change your mind?<br> Get a refund. <div class="inline-block tooltip cursor-pointer" tip="If it’s not for you, simply cancel your membership within 90 days and contact us for a full refund. (If your membership includes any bonuses, your refund will deduct the value of hard goods that were shipped to you.)"><i class="fas fa-info-circle"></i></div></h6>
+                <h3 class="leading-tight mt-5 md:mt-8 mb-4 md:mb-6 " data-aos-once="true" data-aos="fade-up" data-aos-offset="150" data-aos-delay="150"><strong>Happy student guarantee. </strong><br>
+                    Test-drive your lessons for 90 days. Zero risk. </h3>
+                <p class=" opacity-60 leading-normal md:leading-loose">Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence on the guitar. </p>
+                <div class="flex flex-wrap items-start justify-center mt-5 md:mt-7">
+                    <div class="w-full sm:w-1/3 px-2 mb-3 sm:mb-0">
+                        <h5 class="text-guitareo border-guitareo border-2 rounded-full inline-block py-2 px-3 mb-1">1</h5>
+                        <h6 class="leading-normal">Start your<br> lessons today.</h6>
+                    </div>
+                    <div class="w-full sm:w-1/3 px-2 mb-3 sm:mb-0">
+                        <h5 class="text-guitareo border-guitareo border-2 rounded-full inline-block py-2 px-3 mb-1">2</h5>
+                        <h6 class="leading-normal">Enjoy them for 90<br> days, risk-free.</h6>
+                    </div>
+                    <div class="w-full sm:w-1/3 px-2">
+                        <h5 class="text-guitareo border-guitareo border-2 rounded-full inline-block py-2 px-3 mb-1">3</h5>
+                        <h6 class="leading-normal">Change your mind?<br> Get a refund. <div class="inline-block tooltip cursor-pointer" tip="If it’s not for you, simply cancel your membership within 90 days and contact us for a full refund. (If your membership includes any bonuses, your refund will deduct the value of hard goods that were shipped to you.)"><i class="fas fa-info-circle"></i></div></h6>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
     @include("guitareo.sales.partials._footer")
 @stop
+

@@ -74,10 +74,17 @@
 
         <div class="product-wrap px-3 md:px-4 lg:w-2/3">
             <div class="pack-details mx-auto mb-7 pb-5 sm:pb-9 lg:pb-11">
-                @if($product->productType->name === 'Lessons')
+                @if($product->productType->name === 'Lessons' && count($product->benefits) > 0)
                     @include('musora.product.partials.benefits',[
                         'benefits' => $product->benefits
                     ])
+                @endif
+
+                @if($product->productType->name === 'Bundles' && !empty($product->spread_img))
+                    <div class="text-center">
+                        <h3 class="mb-4"><strong>What's included:</strong></h3>
+                        <img class="mb-4" src="https://cdn.musora.com/image/fetch/w_800,q_auto:best/@if(str_contains($product->spread_img, 'amazonaws') || str_contains($product->spread_img, 'cloudfront')){{$product->spread_img}}@else{{'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$product->spread_img}}@endif" alt="bundle spread image" />
+                    </div>
                 @endif
 
                 @if(!empty($product->overview))
@@ -103,7 +110,7 @@
                 @endif
 
 
-                @if($product->productType->name === 'Lessons')
+                @if($product->productType->name === 'Lessons' && !empty($product->instructor_desc))
                     @include('musora.product.partials.instructor',[
                         "instructorPhoto" => $product->product_img,
                         "instructorBio" => $product->instructor_desc

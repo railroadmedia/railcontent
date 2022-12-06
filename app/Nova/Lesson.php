@@ -241,7 +241,6 @@ class Lesson extends Resource
                 ->addLayout(SpectLayout::class)
                 ->preset(SpecPreset::class),
             Boolean::make('Guarantee Badge', 'guaranteed')->default(false)->hideFromIndex(),
-            Boolean::make('Lifetime Access', 'lifetime_access')->default(false)->hideFromIndex(),
             Boolean::make('Free Shipping', 'free_shipping')->default(false)->hideFromIndex(),
             Heading::make('Bundle'),
             Image::make('Bundle Image', 'bundle_img')

@@ -28,7 +28,7 @@
                     @endforeach
                 @endif
             </div>
-            <div class="slider-nav mx-auto w-full @if(count($images) <= 1) hidden @endif">
+            <div class="slider-nav mx-auto w-full @if(!empty($images) && count($images) <= 1) hidden @endif">
                 @if(!empty($images))
                     @foreach ($images as $key => $image)
                         <div @if(count($images) > 1)style="display: none;"@endif>

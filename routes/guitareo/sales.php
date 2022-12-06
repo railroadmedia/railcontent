@@ -18,6 +18,8 @@ Route::domain('{guitareoDomain}')
     Route::get('/terms', function () { return view('guitareo.sales.pages.terms'); });
     Route::get('/privacy', function () { return view('guitareo.sales.pages.privacy'); });
 
+    Route::get('/lifetime', function () { return view('guitareo.shop.pages.lifetime-bundle', ['theme' => 'guitareo']); });
+        Route::get('/survival-kit-instructions', function () { return view('guitareo.shop.pages.survival-kit-tutorial', ['theme' => 'guitareo']); });
 
     Route::get('/daddario-string-session', function () { return view('guitareo.sales.trials.daddario-string-session'); });
     Route::get('/daddario-string-session-ga ', function () { return view('guitareo.sales.trials.daddario-string-session'); });

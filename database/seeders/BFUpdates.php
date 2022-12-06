@@ -230,6 +230,7 @@ This bundle is for new members only. You’ll pay just $129 for your first year 
         Product::where('brand_id', 3)->where('name', "Guitarist's Survival Kit")->update(['discounted_price' => 69]);
         Product::where('brand_id', 3)->where('name', "Rhythm & Groove")->update(['discounted_price' => 27]);
         Product::where('brand_id', 3)->where('name', "Guitareo Survival Guide")->update(['discounted_price' => 5]);
+        Product::where('brand_id', 3)->where('name', "The Build A Song Bundle")->update(['discounted_price' => 97]);
 
         //SINGEO UPDATES
         Product::where('brand_id', 4)->where('name', 'The Singing Starter Kit')->update(['discounted_price' => 5]);

@@ -10,7 +10,7 @@ class Prices
 
     // Drumming System
     public static $dsOnlineFull = 247;
-    public static $dsOnlineRegular = 47;
+    public static $dsOnlineRegular = 247;
 
     // Drum Technique Made Easy
     public static $dtmeFull = 197;
@@ -40,11 +40,15 @@ class Prices
     public static $beyondBeginnerDrummingFull = 127;
     public static $beyondBeginnerDrumming = 97;
 
+    // 30 Day Drummer
+    public static $thirtyDayDrummerFull = 97;
+    public static $thirtyDayDrummer = 97;
+
     // Drumeo Edge
     public static $drumeoEdgeFull = 29;
     public static $drumeoEdgeRegular = 29;
     public static $drumeoEdgeAnnualFull = 240;
-    public static $drumeoEdgeAnnual = 200;
+    public static $drumeoEdgeAnnual = 240;
     public static $drumeoEdgeLifetime = 1200;
 
     // Anatomy Of A Drum Solo
@@ -114,7 +118,7 @@ class Prices
 
     // QuietKick
     public static $quietKickFull = 79;
-    public static $quietKick = 67;
+    public static $quietKick = 59;
 
     // Drum Sticks
     public static $sticksFull = 12.95;
@@ -122,7 +126,7 @@ class Prices
 
     // Tone Control Kit
     public static $toneControlKitFull = 79;
-    public static $toneControlKitRegular = 63;
+    public static $toneControlKitRegular = 69;
 
     // Comfort Cover
     public static $comfortCoverFull = 149;
@@ -130,7 +134,7 @@ class Prices
 
     // Drumeo EarDrums
     public static $earDrumsFull = 149;
-    public static $earDrums = 149;
+    public static $earDrums = 129;
 
     //Merch
 
@@ -152,7 +156,7 @@ class Prices
 
     // T Shirts
     public static $shirtFull = 25;
-    public static $shirtRegular = 12.50;
+    public static $shirtRegular = 15;
 
     // Hoodies
     public static $hoodieFull = 59;
@@ -167,17 +171,13 @@ class Prices
 
 
     //Bundles
-    public static $bundleCyberMonday = 240;
-    public static $bundleUltimateLessons = 240;
-    public static $bundlePerfectGift = 240;
-
     public static $bundleBeginner = 200;
     public static $bundleHandsFeet = 200;
 
     //Content Counts For Marketing
     public static $lessons = 2500;
     public static $playAlongs = 300;
-    public static $songs = 3100;
+    public static $songs = 5000;
     public static $courses = 260;
     public static $coaches = 11;
 

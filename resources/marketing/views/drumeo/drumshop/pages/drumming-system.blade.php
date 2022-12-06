@@ -1,4 +1,4 @@
-@extends('products.product-layout')
+@extends('drumeo.drumshop.shop-page-layout')
 
 @section('meta')
     @parent
@@ -14,17 +14,8 @@
     <?php \App\Analytics\Tracker::trackProductImpression('DSYS2-DIGI'); ?>
 @stop()
 
-@section('banner')
-    @include('products.partials.promo-banner', [
-        "name" => "The Drumming System",
-        "fullPrice" => Prices::$dsOnlineFull,
-        "price" => Prices::$dsOnlineRegular,
-        "videos" => true
-    ])
-@endsection
-
 @section('top')
-    @include('products.partials.slider', [
+    @include('drumeo.drumshop._partials.slider', [
         "headerText" => "The <strong>ultimate encyclopedia</strong> of video drum lessons",
         "instructorName" => "Mike Michalkow",
         "videoSrc" => "//player.vimeo.com/video/93153615",
@@ -32,7 +23,7 @@
         "packBanner" => "https://s3.amazonaws.com/drumeo-packs/Pack%20Images/Drumming%20System/spread.png"
     ])
 
-    @include('products.partials.sidebar', [
+    @include('drumeo.drumshop._partials.sidebar', [
         "sku" => "DSYS2-DIGI",
         "instructor" => "Mike Michalkow's",
         "logo" => "https://dpwjbsxqtam5n.cloudfront.net/pack-logos/drumming-system-2-black.png",
@@ -44,7 +35,7 @@
 @endsection
 
 @section('bottom')
-    @include('products.partials.features', [
+    @include('drumeo.drumshop._partials.features', [
         'features' => [
             [
                 "icon" => "fa-list-ol",
@@ -64,7 +55,7 @@
         ]
     ])
 
-    @include('products.partials.specs',[
+    @include('drumeo.drumshop._partials.specs',[
         "specsList" => [
             (object)[
             'specIcon' => 'fa-video',
@@ -98,12 +89,12 @@
         ]
     ])
 
-    @include('products.partials.instructor',[
+    @include('drumeo.drumshop._partials.instructor',[
         "instructorPhoto" => "https://s3.amazonaws.com/drumeo-packs/Instructors/mike-michalkow.jpg",
         "instructorBio" => "Mike Michalkow has been teaching drums and percussion for more than 20 years, having studied under master drummers Dom Famularo, Jim Chapin, Chuck Silverman, Thomas Lang, John “JR” Robinson, Peter Magadini, and Virgil Donati.\n\nHe has a wealth of experience to draw from having played in various original and cover bands, working on a popular cruise line as the orchestra drummer, and recording with songwriters and bands with styles ranging from prog-rock, latin, jazz, blues, pop, folk, celtic, country, metal, and R&B.\n\nMike’s comprehensive teaching methods have helped thousands of drummers around the world reach their goals, through his best-selling training packs including The Drumming System, Jazz Drumming System, Latin Drumming System, Moeller Method Secrets, and Total Rock Drummer."
     ])
 
-    @include('products.partials.dvd-contents',[
+    @include('drumeo.drumshop._partials.dvd-contents',[
         "spread" => "https://s3.amazonaws.com/drumeo-packs/Pack%20Images/Drumming%20System/spread.png",
         "dvdList" => [
         //How to Play Drums by Ear

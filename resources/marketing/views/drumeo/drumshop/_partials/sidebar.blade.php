@@ -37,7 +37,11 @@
                 <p class="text-center mx-auto mb-1 text-sm italic md:text-base" style="color:#F71B26;">{!! $specialText  !!}</p>
             @endif
 
-            @if(!$soldOut)
+            @if(!empty($soldOut) && $soldOut)
+                <button class="join sold-out border-none">
+                    SOLD OUT
+                </button>
+            @else
                 @if($category !== 'bundles' && count($sizes) === 0)
                     <a
                         class="online-atc vue-add-to-cart"
@@ -57,23 +61,23 @@
                                 class="bg-white text-black"
                                 @if(isset($size->soldOut) && $size->soldOut) disabled @endif
                                 {{-- @if($productStock[$sku.'-'.$size->code]->isProductSoldOut()) disabled @endif --}}
-                                value="{{$product->sku}}-{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}"
-                                data-price="{{$product->discounted_price === '0.00' || empty($product->discounted_price) ? floatVal($product->price) : floatVal($product->discounted_price)}}"
-                                data-product-json='{"{{$product->sku}}-{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}": 1}'
+                                value="@if(!empty($sku)){{$sku}}-@endif{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}"
+                                data-price="{{!empty($size->price) ? $size->price : $price}}"
+                                data-product-json='{"@if(!empty($sku)){{$sku}}-@endif{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}": 1}'
                             >{{ $size->name }}</option>
                         @endforeach
                     </select>
 
                     <a
-                            class="online-atc merch vue-add-to-cart selected-pack"
-                            href="#"
-                            @if(!empty($promoCode))
-                            data-base-url="/laravel/public/shopping-cart/api/query?go-back-to-shop=true&promo-code={{$promoCode}}"
-                            data-promocode="{{ $promoCode }}"
-                            @else
-                            data-base-url="/laravel/public/shopping-cart/api/query?go-back-to-shop=true"
-                            @endif
-                            @if(!empty($lockedCart)) data-locked-cart="{{ $lockedCart }}" @endif
+                        class="online-atc merch vue-add-to-cart selected-pack"
+                        href="#"
+                        @if(!empty($promoCode))
+                        data-base-url="/laravel/public/shopping-cart/api/query?go-back-to-shop=true&promo-code={{$promoCode}}"
+                        data-promocode="{{ $promoCode }}"
+                        @else
+                        data-base-url="/laravel/public/shopping-cart/api/query?go-back-to-shop=true"
+                        @endif
+                        @if(!empty($lockedCart)) data-locked-cart="{{ $lockedCart }}" @endif
                     >
                         <button class="join border-none">
                             <i class="fas fa-cart-plus text-2xl mr-1"></i> Add To Cart
@@ -83,15 +87,12 @@
 
                 @if($category === 'bundles')
                     <a class="online-atc" href="/laravel/public/shopping-cart/api/query?{{ $sku }}"
-                            data-base-url="/laravel/public/shopping-cart/api/query?{{ $sku }}">
+                       data-base-url="/laravel/public/shopping-cart/api/query?{{ $sku }}">
                         <button class="join border-none"><i class="fas fa-cart-plus text-2xl mr-1"></i> Order Now</button>
                     </a>
                 @endif
-            @else
-                <button class="join sold-out border-none">
-                    SOLD OUT
-                </button>
             @endif
+
             <p class="italic text-center mx-auto my-0 text-xs">
                 @if(!empty($freeShipping))
                     <i class="fas fa-truck"></i> <strong>FREE SHIPPING!</strong><br>

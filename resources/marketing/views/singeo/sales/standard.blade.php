@@ -87,5 +87,55 @@
 @endsection
 
 @section('final')
-     @include("singeo.sales.partials._subscribe-options")
+{{--     @include("singeo.sales.partials._subscribe-options")--}}
+    @include('_partials.layout.holiday.homepage-bottom-membership',[
+        'logo' => 'https://singeo.s3.amazonaws.com/sales/promos/august/homepage_chart.png',
+        'singeo' => true,
+        'joinText' => '<strong>Join Singeo for just $'.round(SingeoPrices::$singeoMembershipAnnual / 12, 2).'/month</strong> <br class="hidden sm:inline"><strong class="text-promo">PLUS</strong> get 5 free bonuses worth $538.',
+        'annualLink' => '/ecommerce/add-to-cart?products[singeo-annual-recurring-membership]=1&products[singing-starter-kit]=1&products[the-essential-guide-to-beautiful-harmonies]=1&products[vowel-sounds-poster]=1&bonuses[PIANOTE-MEMBERSHIP-1-YEAR]=1&bonuses[GUITAREO-1-YEAR-MEMBERSHIP]=1&locked=true&redirect=/order',
+        'bonusNum' => 5,
+        'tileWidth' => 'w-1/2 sm:w-1/3 lg:w-1/5',
+        'bonuses' => [
+                    [
+                        'image' => 'https://singeo.s3.amazonaws.com/sales/promos/november/singing-starter-kit.jpg',
+                        'title' => 'Singing<br> Starter Kit',
+                        'description' => 'Get everything you need to start singing now. In just 7 hands-on lessons, you’ll overcome the challenges most beginner singers face and will instantly sound better.',
+                        'price' => SingeoPrices::$singingStarterKitFull,
+                        'online-ship' => "Lifetime Access"
+                    ],
+                    [
+                        'image' => 'https://singeo.s3.amazonaws.com/sales/promos/october/Beautiful_harmonies_card.jpg',
+                        'title' => 'Harmony',
+                        'description' => 'In just 8, short, sing-a-long lessons, you’ll learn how to elevate any vocal performance with incredible harmonies. Even if you’re a total beginner, you’ll be singing your first harmony within the first 10 minutes of this course.',
+                        'price' => SingeoPrices::$beautifulHarmoniesFull,
+                        'online-ship' => "Lifetime Access"
+                    ],
+                    [
+                        'image' => 'https://singeo.s3.amazonaws.com/sales/promos/november/poster2.png',
+                        'title' => 'Vowel Practice<br> Poster',
+                        'badge' => 'Vowel Practice Poster',
+                        'description' => 'Your new favorite practice tool - and your ticket hitting higher notes with ease and confidence.',
+                        'price' => SingeoPrices::$posterFull,
+                        'online-ship' => "Free Shipping",
+                        'br' => '<br class="hidden sm:inline">'
+                    ],
+                    [
+                        'image' => 'https://singeo.s3.amazonaws.com/sales/lifetime/1-year-of-guitar-card.jpg',
+                        'title' => '1 Year of Guitareo Lessons',
+                        'badge' => '1 Year of Guitareo Lessons',
+                        'description' => '1 year of online video-based guitar lessons and personal support.',
+                        'price' => 240,
+                        'online-ship' => "Online Access",
+                    ],
+                    [
+                        'image' => 'https://singeo.s3.amazonaws.com/sales/lifetime/1-year-of-piano-card.jpg',
+                        'title' => '1 Year of Pianote Lessons',
+                        'badge' => '1 Year of Pianote Lessons',
+                        'description' => '1 year of online video-based piano lessons and personal support.',
+                        'price' => 240,
+                        'online-ship' => "Online Access",
+                    ],
+                ],
+        'monthlyLink' => '/ecommerce/add-to-cart?products[singeo-monthly-recurring-membership]=1&redirect=/order&locked=true'
+    ])
 @endsection

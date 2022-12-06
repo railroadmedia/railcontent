@@ -400,99 +400,126 @@ And you’ll get 2 big color posters to hang in your practice space for easy and
                 ],
             ],
             [
+                'brand' => 2,
+                'product_type_id' => 6,
+                'name' => 'The Whole 9 Yards Cyber Bundle',
+                'slug' => 'bundle-9-yards',
+                'sku' => 'products[the-power-of-chords]=1&products[classical-piano]=1&products[jesus-molina-improvisation-and-musical-freedom-pack]=1&products[play-beautiful-piano]=1&products[piano-riffs-and-fills]=1&products[piano-technique-made-easy]=1&products[destupefy-your-left-hand]=1&products[worship-piano]=1&products[faster-fingers]=1&locked=true',
+                'meta_desc' => 'Everything You Need. The Whole 9 Yards',
+                'meta_img' => 'https://pianote.s3.amazonaws.com/sales/promos/november/whole-9-yards-fb-share-image.jpg',
+                'price' => 716,
+                'discounted_price' => 127,
+                'special_text' => '',
+                'page_logo' => 'https://pianote.s3.amazonaws.com/sales/promos/november/the-whole-9-yards-bundle-black.png',
+                'header_text' => 'Everything You Need. The Whole 9 Yards',
+                'video_src' => '//player.vimeo.com/video/774401637',
+                'spread' => 'https://pianote.s3.amazonaws.com/sales/promos/november/the-whole-9-yards-spread.png',
+                'images' => [
+
+                ],
+                'overview' => 'All the courses, none of the commitment. The Whole 9 Yards Cyber Bundle is your complete guide to learning the piano without a membership.
+
+Pay once and get lifetime access to 9 courses. You’ll learn how to play beautiful chords, classical piano, amazing improvisation, boost your speed, and more.',
+                'sold_out' => false,
+                'guaranteed' => true,
+                'free_shipping' => false,
+                'products' => [
+                    [
+                        'name' => 'Piano Chords & Scales',
+                        'free_bonus' => false,
+                        'lifetime_access' => true,
+                    ],
+                    [
+                        'name' => 'Classical Piano',
+                        'free_bonus' => false,
+                        'lifetime_access' => true,
+                    ],
+                    [
+                        'name' => 'Improvisation & Musical Freedom',
+                        'free_bonus' => false,
+                        'lifetime_access' => true,
+                    ],
+                    [
+                        'name' => 'Playing Beautiful Piano',
+                        'free_bonus' => false,
+                        'lifetime_access' => true,
+                    ],
+                    [
+                        'name' => 'Piano Riffs & Fills',
+                        'free_bonus' => false,
+                        'lifetime_access' => true,
+                    ],
+                    [
+                        'name' => 'Piano Technique Made Easy',
+                        'free_bonus' => false,
+                        'lifetime_access' => true,
+                    ],
+                    [
+                        'name' => 'De-Stupefy Your Left Hand',
+                        'free_bonus' => false,
+                        'lifetime_access' => true,
+                    ],
+                    [
+                        'name' => 'Worship Piano',
+                        'free_bonus' => false,
+                        'lifetime_access' => true,
+                    ],
+                    [
+                        'name' => 'Faster Fingers',
+                        'free_bonus' => false,
+                        'lifetime_access' => true,
+                    ],
+                ],
+            ],
+            [
                 'brand' => 3,
                 'product_type_id' => 6,
-                'name' => 'The Buginner Quick-Start Bundle',
-                'slug' => 'beginner-bundle',
-                'sku' => 'products[guitar-quest]=1&products[500-songs-in-5-days-guitareo]=1&products[GUITAR-SYSTEM]=1&locked=true',
-                'meta_desc' => 'Thinking of becoming a guitarist? Start here.',
-                'meta_img' => 'https://guitareo.s3.amazonaws.com/sales/promos/black-friday/bundles/beginner/vid-thumb.jpg',
-                'price' => 491,
+                'name' => 'The Build A Song Bundle',
+                'slug' => 'build-a-song',
+                'sku' => 'products[500-songs-in-5-days-guitareo]=1&products[guitar-quest]=1&products[AGME-JAN-2019-SEMESTER]=1&products[GTME-OCT-2018-SEMESTER]=1&products[rhythm-and-groove]=1&redirect=/order&locked=true',
+                'meta_desc' => 'Build and play songs you love on the guitar.',
+                'meta_img' => 'https://guitareo.s3.amazonaws.com/sales/promos/black-friday/build-a-song-fb-share-image.jpg',
+                'price' => 735,
                 'discounted_price' => 127,
                 'special_text' => '',
                 'page_logo' => 'https://guitareo.s3.amazonaws.com/sales/promos/black-friday/bundles/beginner/logo-black.png',
-                'header_text' => 'Thinking of becoming a guitarist? <br>Start here.',
-                'video_src' => '//player.vimeo.com/video/649717515',
+                'header_text' => 'Build and play songs you love on the guitar.',
+                'video_src' => '//player.vimeo.com/video/774474785',
                 'images' => [
                 ],
-                'overview' => 'Have you ever wanted to be able to pick up a guitar and start playing your favorite songs? Or be able to start jamming with your friends? Or maybe you want to pursue your dreams as a professional guitarist. No matter what your reasons are, THE BEGINNER QUICK-START BUNDLE is for you. These three digital lesson packs are designed to get you started on the guitar, playing songs and having fun right away! Go on an adventure, learn hundreds of songs, and build your skills on the guitar so you can reach your goals faster. And you get these lessons for a lifetime, so you can keep growing and learning the guitar as much as you want.',
-                'sold_out' => true,
+                'spread' => 'https://guitareo.s3.amazonaws.com/sales/promos/black-friday/build-a-song-spread.png',
+                'sold_out' => false,
                 'guaranteed' => true,
                 'free_shipping' => false,
                 'products' => [
-                    [
-                        'name' => 'GuitarQuest',
-                        'free_bonus' => false,
-                        'lifetime_access' => false,
-                    ],
                     [
                         'name' => '500 Songs In 5 Days',
-                        'free_bonus' => false,
-                        'lifetime_access' => false,
-                    ],
-                    [
-                        'name' => 'The Guitar System',
-                        'free_bonus' => false,
-                        'lifetime_access' => false,
-                    ],
-                ],
-            ],
-            [
-                'brand' => 3,
-                'product_type_id' => 6,
-                'name' => 'The 5-Pack Bundle',
-                'slug' => '5-pack-bundle',
-                'sku' => 'products[guitar-quest]=1&products[500-songs-in-5-days-guitareo]=1&products[AGME-JAN-2019-SEMESTER]=1&products[GTME-OCT-2018-SEMESTER]=1&products[GUITAR-SYSTEM]=1&redirect=/order&locked=true',
-                'meta_desc' => 'Chase your guitar goals with 5 digital training packs for one low price.',
-                'meta_img' => 'https://guitareo.s3.amazonaws.com/sales/promos/july/ultimate_banner.jpg',
-                'price' => 885,
-                'discounted_price' => 97,
-                'special_text' => '',
-                'page_logo' => 'https://guitareo.s3.amazonaws.com/sales/promos/july/5pack_black_logo.png',
-                'header_text' => 'Chase your guitar goals with 5 digital training packs for one low price.',
-                'video_src' => '',
-                'images' => [
-                    'https://guitareo.s3.amazonaws.com/sales/promos/july/5pack_banner.jpg'
-                ],
-                'overview' => 'Sure, six packs are all the rage – but this 5-pack bundle will give you goal-oriented lesson plans for the most popular guitar goals.
-
-**Want to get started on guitar?** GuitarQuest is here!
-**Want to play songs easier?** Try 500 Songs In 5 Days.
-
-**Want a rock-solid foundation for the acoustic?**
-Acoustic Guitar Made Easy is a 26-week plan that’s easy to follow – with one lesson each week and a clear path to better strumming, clean chords, changing chords, music theory, and playing songs.
-
-**Need to improve your technique?**
-Guitar Technique Made Easy is a 26-week plan for building a technical foundation that will allow you to express yourself creatively and without limitations.
-
-**Or if you want an encyclopedia of lessons on EVERY TOPIC**, you’ll also get The Guitar System – with 35 hours of lessons and 85 jam tracks to help you accelerate any skill, anytime.
-
-**The 5-Pack Bundle gives you instant digital access to all five packs with no membership and no recurring fees.**',
-                'sold_out' => true,
-                'guaranteed' => true,
-                'free_shipping' => false,
-                'products' => [
-                    [
-                        'name' => 'GuitarQuest',
-                        'free_bonus' => false,
+                        'free_bonus' => true,
                         'lifetime_access' => true,
                     ],
                     [
-                        'name' => '500 Songs In 5 Days',
-                        'free_bonus' => false,
+                        'name' => 'GuitarQuest',
+                        'free_bonus' => true,
+                        'lifetime_access' => true,
+                    ],
+                    [
+                        'name' => 'The Guitar System',
+                        'free_bonus' => true,
+                        'lifetime_access' => true,
+                    ],
+                    [
+                        'name' => 'Rhythm & Groove',
+                        'free_bonus' => true,
                         'lifetime_access' => true,
                     ],
                     [
                         'name' => 'Acoustic Guitar Made Easy',
-                        'free_bonus' => false,
+                        'free_bonus' => true,
                         'lifetime_access' => true,
-                    ],                    [
+                    ],
+                    [
                         'name' => 'Guitar Technique Made Easy',
-                        'free_bonus' => false,
-                        'lifetime_access' => true,
-                    ],                    [
-                        'name' => 'The Guitar System',
-                        'free_bonus' => false,
+                        'free_bonus' => true,
                         'lifetime_access' => true,
                     ],
                 ],
@@ -500,60 +527,23 @@ Guitar Technique Made Easy is a 26-week plan for building a technical foundation
             [
                 'brand' => 3,
                 'product_type_id' => 6,
-                'name' => 'The Summer Songs Bundle',
-                'slug' => 'summer-songs-bundle',
-                'sku' => 'products[500-songs-in-5-days-guitareo]=1&products[AGME-JAN-2019-SEMESTER]=1&locked=true',
-                'meta_desc' => 'CRUSH your campfire singalongs this summer.',
-                'meta_img' => 'https://cdn.musora.com/image/fetch/w_1000,q_auto:best/https://guitareo.s3.amazonaws.com/shop/bundles/500songs_acoustic_combo.jpg',
-                'price' => 294,
-                'discounted_price' => 49,
+                'name' => 'The Sound Better Bundle',
+                'slug' => 'sound-better-bundle',
+                'sku' => 'products[GUITAREO-1-YEAR-MEMBERSHIP]=1&amp;products[guitarists-survival-kit]=1&amp;products[guitar-quest]=1&amp;products[rhythm-and-groove]=1&amp;products[GUITAR-SYSTEM]=1&amp;products[AGME-JAN-2019-SEMESTER]=1&amp;products[GTME-OCT-2018-SEMESTER]=1&amp;redirect=/order&amp;locked=true" data-base-url="/ecommerce/add-to-cart?redirect=/order&amp;products[GUITAREO-1-YEAR-MEMBERSHIP]=1&amp;products[guitarists-survival-kit]=1&amp;products[guitar-quest]=1&amp;products[rhythm-and-groove]=1&amp;products[GUITAR-SYSTEM]=1&amp;products[AGME-JAN-2019-SEMESTER]=1&amp;products[GTME-OCT-2018-SEMESTER]=1&amp;redirect=/order&amp;locked=true',
+                'meta_desc' => 'Get ALL the lessons and gear essentials to sound better on the guitar.',
+                'meta_img' => 'https://guitareo.s3.amazonaws.com/sales/promos/black-friday/sound-better-fb-share-image.jpg',
+                'price' => 491,
+                'discounted_price' => 240,
                 'special_text' => '',
-                'page_logo' => 'https://guitareo.s3.amazonaws.com/shop/bundles/SummerSongs_logo_stacked.png',
-                'header_text' => 'CRUSH your campfire singalongs this summer. Get comfortable on your acoustic guitar + learn 500 songs!',
-                'video_src' => '',
+                'page_logo' => 'https://guitareo.s3.amazonaws.com/sales/promos/black-friday/the-sound-better-bundle-black.png',
+                'header_text' => 'Get ALL the lessons and gear essentials to start sounding better on the guitar.',
+                'video_src' => '//player.vimeo.com/video/774475126',
+                'spread' => 'src="https://guitareo.s3.amazonaws.com/sales/promos/black-friday/sound-better-bundle-spread-.png"',
                 'images' => [
-                    'https://guitareo.s3.amazonaws.com/shop/bundles/500songs_acoustic_bundle.jpg'
-                ],
-                'overview' => 'It’s summer. You’re sitting around the campfire when someone pulls out an acoustic guitar. Suddenly it’s your time to shine…
 
-Get the skills to feel confident on the acoustic with Acoustic Guitar Made Easy. But what good are skills without songs? That’s why you’ll also get 500 Songs in 5 Days. So you’ll be primed and ready to crush any campfire singalong.
-
-Make this summer one to remember with the Summer Songs Bundle.',
-                'sold_out' => true,
-                'guaranteed' => true,
-                'free_shipping' => false,
-                'products' => [
-                    [
-                        'name' => '500 Songs In 5 Days',
-                        'free_bonus' => false,
-                        'lifetime_access' => false,
-                    ],
-                    [
-                        'name' => 'Acoustic Guitar Made Easy',
-                        'free_bonus' => false,
-                        'lifetime_access' => false,
-                    ],
                 ],
-            ],
-            [
-                'brand' => 3,
-                'product_type_id' => 6,
-                'name' => 'The Ultimate Lessons Bundle',
-                'slug' => 'ultimate-bundle',
-                'sku' => 'products[GUITAREO-1-YEAR-MEMBERSHIP]=1&products[guitar-quest]=1&products[500-songs-in-5-days-guitareo]=1&products[AGME-JAN-2019-SEMESTER]=1&products[GTME-OCT-2018-SEMESTER]=1&products[GUITAR-SYSTEM]=1&products[survival-guide]=1&redirect=/order&locked=true',
-                'meta_desc' => 'Your ULTIMATE way to learn the guitar.',
-                'meta_img' => 'https://guitareo.s3.amazonaws.com/sales/promos/black-friday/bundles/ultimate/vid-thumb.jpg',
-                'price' => 127,
-                'discounted_price' => 0,
-                'special_text' => '6 bonuses worth $904',
-                'page_logo' => 'https://guitareo.s3.amazonaws.com/sales/promos/july/ultimate_black_logo.png',
-                'header_text' => 'Your ULTIMATE way to learn the guitar.',
-                'video_src' => '',
-                'images' => [
-                    'https://guitareo.s3.amazonaws.com/sales/promos/july/ultimate_banner.jpg'
-                ],
-                'overview' => "This is the ULTIMATE bundle for any guitarist. Whether you're just getting started, taking that next step in your playing, or just looking for new creative ways to have fun on the guitar - this is the bundle for you! With LIFETIME access to every digital lesson pack and a 1-year membership to Guitareo, you'll study any technique imaginable, learn hundreds of songs, and explore your creativity the way you've always wanted on the guitar.",
-                'sold_out' => true,
+                'overview' => '',
+                'sold_out' => false,
                 'guaranteed' => true,
                 'free_shipping' => false,
                 'products' => [
@@ -563,22 +553,12 @@ Make this summer one to remember with the Summer Songs Bundle.',
                         'lifetime_access' => false,
                     ],
                     [
+                        'name' => "Guitarist's Survival Kit",
+                        'free_bonus' => true,
+                        'lifetime_access' => false,
+                    ],
+                    [
                         'name' => 'GuitarQuest',
-                        'free_bonus' => true,
-                        'lifetime_access' => true,
-                    ],
-                    [
-                        'name' => '500 Songs In 5 Days',
-                        'free_bonus' => true,
-                        'lifetime_access' => true,
-                    ],
-                    [
-                        'name' => 'Acoustic Guitar Made Easy',
-                        'free_bonus' => true,
-                        'lifetime_access' => true,
-                    ],
-                    [
-                        'name' => 'Guitar Technique Made Easy',
                         'free_bonus' => true,
                         'lifetime_access' => true,
                     ],
@@ -588,41 +568,68 @@ Make this summer one to remember with the Summer Songs Bundle.',
                         'lifetime_access' => true,
                     ],
                     [
-                        'name' => 'Guitareo Survival Guide',
-                        'free_bonus' => false,
-                        'lifetime_access' => false,
+                        'name' => 'Guitar Technique Made Easy',
+                        'free_bonus' => true,
+                        'lifetime_access' => true,
+                    ],
+                    [
+                        'name' => 'Acoustic Guitar Made Easy',
+                        'free_bonus' => true,
+                        'lifetime_access' => true,
+                    ],
+                    [
+                        'name' => 'Rhythm & Groove',
+                        'free_bonus' => true,
+                        'lifetime_access' => true,
                     ],
                 ],
             ],
             [
                 'brand' => 4,
                 'product_type_id' => 6,
-                'name' => 'The Perfect Harmony Bundle',
-                'slug' => 'harmony-bundle',
-                'sku' => 'products[singeo-annual-recurring-membership]=1&products[the-essential-guide-to-beautiful-harmonies]=1&products[singing-starter-kit]=1&locked=true',
-                'meta_desc' => 'The EASY way to sing in perfect harmony',
-                'meta_img' => 'https://singeo.s3.amazonaws.com/sales/promos/october/harmony_bundle_banner.jpg',
-                'price' => 158,
-                'discounted_price' => 127,
+                'name' => 'The Unlimited Lessons Bundle',
+                'slug' => 'bundle-unlimited',
+                'sku' => 'products[singeo-annual-recurring-membership]=1&products[singing-starter-kit]=1&products[the-essential-guide-to-beautiful-harmonies]=1&products[vowel-sounds-poster]=1&bonuses[PIANOTE-MEMBERSHIP-1-YEAR]=1&bonuses[GUITAREO-1-YEAR-MEMBERSHIP]=1&locked=true&redirect=/order',
+                'meta_desc' => 'Get UNLIMITED personal coaching to become the musician you’ve always wanted to be.',
+                'meta_img' => 'https://singeo.s3.amazonaws.com/shop/bundles/unlimited-lessons/unlimited-lessons.png',
+                'price' => 778,
+                'discounted_price' => 240,
                 'special_text' => '',
-                'page_logo' => 'https://singeo.s3.amazonaws.com/sales/promos/october/perfect_harmony_bundle_black.png',
-                'header_text' => 'The EASY way to sing in perfect harmony',
+                'page_logo' => 'https://singeo.s3.amazonaws.com/shop/bundles/unlimited-lessons/unlimited-lessons-bundle-black.png',
+                'header_text' => 'Get UNLIMITED personal coaching to become the musician you’ve always wanted to be.',
                 'video_src' => '',
                 'images' => [
-                    'https://singeo.s3.amazonaws.com/sales/promos/october/harmony_bundle_banner.jpg'
+                    'https://singeo.s3.amazonaws.com/shop/bundles/unlimited-lessons/unlimited-lessons.png'
                 ],
-                'overview' => "<h2 class=\"text-center font-extrabold text-lg md:text-xl lg:text-2xl mb-6\" style=\"font-weight: 900;\">What's included:</h2><img class='hidden md:inline mb-4' src='https://laravel-nova.s3.us-east-2.amazonaws.com/Singeo/product-image/harmony-bundle.png' alt='what is included image' /><img class='md:hidden mb-4' src='https://laravel-nova.s3.us-east-2.amazonaws.com/Singeo/product-image/harmony-bundle-m.png' alt='what is included image' />
-                If you dream of singing beautiful harmonies and creating something extraordinary, then you need The Perfect Harmony Bundle.
+                'spread' => 'https://singeo.s3.amazonaws.com/shop/bundles/unlimited-lessons/unlimited-lessons-spread.png',
+                'overview' => "Picture some of the world's most iconic singers.
 
-Kick your singing journey into gear with the Singer Starter Kit and learn to unleash the full potential of your voice. From warm-up exercise routines to tricks and techniques to help you vocalize with less tension and accurate pitch.
+Elton John. Elvis Presley. Dolly Parton. Johnny Cash. Lady Gaga. Taylor Swift. - The list goes on and on.
 
-Then use The Essential Guide To Beautiful Harmonies to elevate your performances with your choir, band, or duet partner. This 8-lesson, easy-to-follow course will have you harmonizing after the first lesson. **That means you could sing your first harmony 10 minutes from now!**
+All of them are incredible vocalists. But there is something else they have in common… They all play the guitar or piano.
 
-Finally, use your Singeo Member Access to get unlimited personal feedback from real coaches to help you get unstuck in your journey. Get the support you need to achieve your singing goals and have the voice you’ve always wanted.
+Now you might think the coordination to sing AND play is some super-human skill, but it's not. It's more like riding a bike.
+
+Sure, you might wobble a bit at first - but once you figure out the basics, you've got a new skill… for life.
+
+With The Unlimited Lessons Bundle, you can get all the personal support you need to make the process even easier!
+
+REAL teachers will guide you every step of the way on your journey to becoming a complete, talented musician.
+
+And the best part? You can be chording along to your favorite song 10 minutes from now!
+
+If you've always dreamed of sitting at the piano keys, picking up the guitar around a campfire, and singing your favorite songs (or even writing your own)...
+
+This is the perfect time.
+
+You'll get all-access memberships to ALL THREE BRANDS for an entire year. That means structured step-by-step lessons, live Q&As and access to world-class coaches. Coaches that will personally give you the feedback you need to make sure you're getting better.
+
+No going around in circles. No wasting your time.
+
+Taking the first step is the hardest part of learning to play an instrument or improving your voice. This is your chance to become the musician you've always dreamed of being.
 
 **Lifetime Access:**
-
-Once you grab The Perfect Harmony Bundle, you’ll never have to worry about having access to your lessons. Because even if you don’t choose to renew your Singeo membership, you’ll get to keep your bonus featured courses FOREVER.",
+Once you grab The Unlimited Lessons Bundle, you’ll never have to worry about having access to your lessons. Because even if you don’t choose to renew your Singeo membership, you’ll get to keep your bonus featured courses FOREVER.",
                 'sold_out' => false,
                 'guaranteed' => true,
                 'free_shipping' => true,
@@ -633,66 +640,21 @@ Once you grab The Perfect Harmony Bundle, you’ll never have to worry about hav
                         'lifetime_access' => false,
                     ],
                     [
-                        'name' => 'The Singing Starter Kit',
+                        'name' => 'Pianote Membership',
                         'free_bonus' => false,
-                        'lifetime_access' => true,
+                        'lifetime_access' => false,
+                        'mix' => true
+                    ],
+                    [
+                        'name' => 'Guitareo Membership',
+                        'free_bonus' => false,
+                        'lifetime_access' => false,
+                        'mix' => true
                     ],
                     [
                         'name' => 'The Essential Guide to Beautiful Harmonies',
-                        'free_bonus' => false,
+                        'free_bonus' => true,
                         'lifetime_access' => true,
-                    ],
-                ],
-            ],
-            [
-                'brand' => 4,
-                'product_type_id' => 6,
-                'name' => 'The Beginner Bundle',
-                'slug' => 'beginner-bundle',
-                'sku' => 'products[singeo-annual-recurring-membership]=1&products[singing-starter-kit]=1&products[vowel-sounds-poster]=1&locked=true',
-                'meta_desc' => 'Know exactly where to start & get immediate results',
-                'meta_img' => 'https://singeo.s3.amazonaws.com/sales/promos/august/beginner_bundle.jpg',
-                'price' => 158,
-                'discounted_price' => 127,
-                'special_text' => '+$31 In Bonuses',
-                'page_logo' => 'https://singeo.s3.amazonaws.com/sales/promos/november/bundles/beginner-logo.png',
-                'header_text' => 'Know exactly where to start & get immediate results',
-                'video_src' => '',
-                'images' => [
-                    'https://singeo.s3.amazonaws.com/sales/promos/august/beginner_banner.jpg'
-                ],
-                'overview' => 'If you’ve been struggling with the sound or quality of your voice - not seeing a difference despite putting in the work, there’s something you need to know
-
-**The problem is NOT YOU.**
-
-Because beginner singers all face the same problem…
-
-You don’t know what you don’t know!
-
-And it’s not your fault. But it can lead to vocal strain and frustration, and ultimately lead you to quit.
-
-That’s why having a REAL vocal coach guide your every step is so important. **It’s the best way to guarantee you’re making progress and not just going in circles.**
-
-With **The Beginner Bundle**, you can take your first singing lesson in less than 2 minutes from now -- and hear the difference in your voice by the end of it.
-
-Maximize results using the Singing Starter Kit. Then use your Member Access to get personal feedback from real vocal coaches who will guide you every step of the way.
-
-The Singeo Method will give you all the tools you need to bring your voice to a whole new level and become a proficient, confident singer. Learn to…
-
-• Develop your voice
-• Sound better when you sing
-• Fine tune your pitch
-• Do vocal riffs and runs like your favorite artists
-• Train your ear to tackle harmonies.
-',
-                'sold_out' => true,
-                'guaranteed' => true,
-                'free_shipping' => false,
-                'products' => [
-                    [
-                        'name' => 'Singeo Membership',
-                        'free_bonus' => false,
-                        'lifetime_access' => false,
                     ],
                     [
                         'name' => 'The Singing Starter Kit',
@@ -701,45 +663,6 @@ The Singeo Method will give you all the tools you need to bring your voice to a 
                     ],
                     [
                         'name' => 'Vowel Practice Poster',
-                        'free_bonus' => true,
-                        'lifetime_access' => false,
-                    ],
-                ],
-            ],
-            [
-                'brand' => 4,
-                'product_type_id' => 6,
-                'name' => 'The Swag Bundle',
-                'slug' => 'swag-bundle',
-                'sku' => 'products[singeo-annual-recurring-membership]=1&products[vowel-sounds-poster]=1&products[mouth-mug]=1&products[wallflower-tumbler]=1&products[singing-starter-kit]=1&redirect=/order&locked=true',
-                'meta_desc' => 'Sing with confidence AND Style',
-                'meta_img' => 'https://singeo.s3.amazonaws.com/sales/promos/august/swag_bundle.jpg',
-                'price' => 127,
-                'discounted_price' => 0,
-                'special_text' => '',
-                'page_logo' => '',
-                'header_text' => 'Sing with confidence AND Style',
-                'video_src' => '',
-                'images' => [
-                    'https://singeo.s3.amazonaws.com/sales/promos/august/swag_banner.jpg'
-                ],
-                'overview' => '',
-                'sold_out' => true,
-                'guaranteed' => true,
-                'free_shipping' => false,
-                'products' => [
-                    [
-                        'name' => 'Singeo Membership',
-                        'free_bonus' => false,
-                        'lifetime_access' => false,
-                    ],
-                    [
-                        'name' => 'Rockstar Mug',
-                        'free_bonus' => true,
-                        'lifetime_access' => false,
-                    ],
-                    [
-                        'name' => 'Retro T-shirt',
                         'free_bonus' => true,
                         'lifetime_access' => false,
                     ],
@@ -805,7 +728,12 @@ The Singeo Method will give you all the tools you need to bring your voice to a 
             }
 
             foreach($product['products'] as $key => $bundle){
-                $product_id = Product::where('name', '=', $bundle['name'])->where('brand_id', '=', $product['brand'])->first()->id;
+                if(!empty($bundle['mix']) && $bundle['mix']){
+                    $product_id = Product::where('name', '=', $bundle['name'])->first()->id;
+                }
+                else {
+                    $product_id = Product::where('name', '=', $bundle['name'])->where('brand_id', '=', $product['brand'])->first()->id;
+                }
 
                 Bundle::create([
                     'bundle_id' => $newProduct->id,

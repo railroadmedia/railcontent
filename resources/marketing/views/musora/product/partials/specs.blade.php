@@ -27,7 +27,10 @@
         "binding" => "fa-book",
         "audio" => "fa-volume-up",
         "books" => "fa-book",
-        "sweatshirt" => "fa-tshirt"
+        "sweatshirt" => "fa-tshirt",
+        'format' => 'fa-file-pdf',
+        'redeem' => 'fa-check',
+        'membership' => 'fa-calendar'
     ];
 ?>
 
