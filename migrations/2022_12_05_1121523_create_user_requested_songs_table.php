@@ -1,0 +1,40 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateUserRequestedSongsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::connection(config('railcontent.database_connection_name'))->create(
+            config('railcontent.table_prefix') . 'user_requested_songs',
+            function (Blueprint $table) {
+                $table->increments('id');
+                $table->integer('user_id')->index();
+                $table->string('song')->index();
+                $table->string('artist')->index();
+                $table->string('brand')->index();
+                $table->dateTime('created_at')->index();
+
+                $table->index(['song', 'artist','brand'], 'urssa');
+            }
+        );
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists(config('railcontent.table_prefix') . 'user_requested_songs');
+    }
+}
