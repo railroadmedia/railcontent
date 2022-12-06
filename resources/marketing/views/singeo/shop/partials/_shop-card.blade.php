@@ -36,7 +36,7 @@
                         <p><strong>{{ $specialPrice }}</strong></p>
                     @elseif (round(100 - (100 * ($price / $fullPrice))) > 1)
                         <p><s>WAS ${{ $fullPrice }}</s>
-                            <strong> NOW
+                            <strong class="text-promo"> NOW
                                 @if(number_format($price, 2) == intval($price))
                                     ${{  floatval($price)  }}
                                 @else
