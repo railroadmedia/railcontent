@@ -19,7 +19,18 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*.musora.com:*', '*.drumeo.com:*', '*.pianote.com:*', '*.guitareo.com:*', '*.singeo.com:*'],
+    'allowed_origins' => [
+        '*.musora.com:*',
+        '*.drumeo.com:*',
+        '*.pianote.com:*',
+        '*.guitareo.com:*',
+        '*.singeo.com:*',
+        '*.musora.com',
+        '*.drumeo.com',
+        '*.pianote.com',
+        '*.guitareo.com',
+        '*.singeo.com'
+    ],
 
     'allowed_origins_patterns' => [],
 
