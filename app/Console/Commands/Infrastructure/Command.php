@@ -71,13 +71,15 @@ abstract class Command extends CommandBase
 
     /**
      * Function for chunking queries into a chain of jobs to avoid running into Lambda 15 minute execution limit
+     *
+     * Reverse process helps for issues when items are removed from the query after processing
      */
-    public function runChainQuery(callable $getJob, $chunks = 1000): bool
+    public function runChainQuery(callable $getJob, $chunks = 1000, $reverseProcessJobs = false): bool
     {
-        return $this->runJobsQuery($getJob, true, $chunks);
+        return $this->runJobsQuery($getJob, true, $chunks, $reverseProcessJobs);
     }
 
-    private function runJobsQuery(callable $getJob, bool $isChain, $chunks = 1000,): bool
+    private function runJobsQuery(callable $getJob, bool $isChain, $chunks = 1000, $reverseProcessJobs = false): bool
     {
         Artisan::call('queue:prune-batches');
         $timeStart = microtime(true);
@@ -105,6 +107,7 @@ abstract class Command extends CommandBase
         }
         $this->info("Dispatching $nJobs jobs.");
         $batch = null;
+        if($reverseProcessJobs) $jobs = array_reverse($jobs);
         if ($isChain) {
             Bus::chain($jobs)->dispatch();
         } else {
