@@ -9,6 +9,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
+use Railroad\Railcontent\Services\ContentService;
 
 class ContentQueryBuilder extends QueryBuilder
 {
@@ -189,7 +190,19 @@ class ContentQueryBuilder extends QueryBuilder
     public function restrictStatuses()
     {
         if (is_array(ContentRepository::$availableContentStatues)) {
-            $this->whereIn(ConfigService::$tableContent.'.status', ContentRepository::$availableContentStatues);
+            if (in_array(ContentService::STATUS_SCHEDULED, ContentRepository::$availableContentStatues)) {
+//                We make sure not to show the 'scheduled' content that is already in the past
+//              SQL condition:  "where ((status in (published)) or (status = 'scheduled' and slug = 'what-is-harmony-in-theory'))"
+                $this->where(function (Builder $builder) {
+                    return $builder->whereIn('status', array_diff(ContentRepository::$availableContentStatues, [ContentService::STATUS_SCHEDULED]))
+                        ->orWhere(function (Builder $builder) {
+                            return $builder->where('status', 'scheduled')
+                                ->where('published_on', '>', Carbon::now()->toDateTimeString());
+                        });
+                });
+            } else {
+                $this->whereIn(ConfigService::$tableContent . '.status', ContentRepository::$availableContentStatues);
+            }
         }
 
         return $this;
