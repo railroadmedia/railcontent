@@ -76,7 +76,7 @@
                         <p class="description" style="top: -13px;position: relative;margin: 0;"><em class="text-red">Or free with Guitareo</em></p>
                     @endif
                     @if(!$soldOut)
-                        @if(!empty($sizes) && count($sizes) > 0)
+                        @if(!$sizes->empty() && count($sizes) > 0)
                             <select class="pack-pick" title="Shirt Size" required>
                                 <option hidden value="">Choose Size</option>
                                 @foreach($sizes as $size)
@@ -101,12 +101,12 @@
                                     {{-- <span class="loading"><i class="fad fa-spinner-third fa-spin"></i> Adding to cart...</span> --}}
                                 </button>
                             </a>
-                        @elseif(!empty($sku) && count($sizes) === 0)
+                        @elseif(!empty($sku) && $sizes->empty())
                             <a
                                 class="online-atc vue-add-to-cart"
-                                href="/ecommerce/add-to-cart?redirect=/shop&products[{{ $sku }}]=1&redirect={{ $redirectUrl ?? '/shop' }}"
-                                data-base-url="/ecommerce/add-to-cart?redirect=/shop&products[{{ $sku }}]=1&redirect={{ $redirectUrl ?? '/shop' }}"
-                                data-product-json='{ "{{ $sku }}": 1}'
+                                href="/ecommerce/add-to-cart?redirect=/shop&products[{!! $sku !!}]=1&redirect={{ $redirectUrl ?? '/shop' }}"
+                                data-base-url="/ecommerce/add-to-cart?redirect=/shop&products[{!! $sku !!}]=1&redirect={{ $redirectUrl ?? '/shop' }}"
+                                data-product-json='{ "{!! $sku !!}": 1}'
                                 @if(!empty($promoCode)) data-promocode="{{ $promoCode }}" @endif
                                 @if(!empty($lockedCart)) data-locked-cart="{{ $lockedCart }}" @endif
                             >

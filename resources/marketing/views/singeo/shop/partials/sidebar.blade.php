@@ -42,9 +42,9 @@
                 @if($category !== 'bundles' && count($sizes) === 0)
                     <a
                         class="online-atc vue-add-to-cart"
-                        href="/ecommerce/add-to-cart?redirect=/shop&products[{{ $sku }}]=1"
-                        data-base-url="/ecommerce/add-to-cart?redirect=/shop&products[{{ $sku }}]=1"
-                        data-product-json='{"{{ $sku }}": 1}'
+                        href="/ecommerce/add-to-cart?redirect=/shop&products[{!! $sku !!}]=1"
+                        data-base-url="/ecommerce/add-to-cart?redirect=/shop&products[{!! $sku !!}]=1"
+                        data-product-json='{"{!! $sku !!}": 1}'
                     >
                         <button class="border-none join"><i class="fas fa-cart-plus"></i> Add To Cart</button>
                     </a>
@@ -84,8 +84,8 @@
                 @endif
 
                 @if($category === 'bundles')
-                    <a class="online-atc" href="/ecommerce/add-to-cart?redirect=/order&{{ $sku }}"
-                       data-base-url="/ecommerce/add-to-cart?redirect=/order&{{ $sku }}">
+                    <a class="online-atc" href="/ecommerce/add-to-cart?redirect=/order&{!! $sku !!}"
+                       data-base-url="/ecommerce/add-to-cart?redirect=/order&{!! $sku !!}">
                         <button class="border-none join"><i class="fas fa-cart-plus"></i> Order Now</button>
                     </a>
                 @endif
