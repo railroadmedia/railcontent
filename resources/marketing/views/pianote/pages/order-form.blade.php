@@ -113,7 +113,7 @@
             </div>
         </div>
     </div>
-    
+
     @include('pianote._partials._footer')
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

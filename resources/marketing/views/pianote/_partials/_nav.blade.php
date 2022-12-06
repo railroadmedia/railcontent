@@ -11,7 +11,11 @@
         <span></span>
     </div>
 
-
+    @if(!empty($checkoutVersion))
+        <div class="button-wrap">
+            <a href="{{ get_legacy_brand_base_url('pianote') }}/shop" class="join promo outline-button">Shop</a>
+        </div>
+    @endif
     @if(!empty($cartVersion))
         <div class="button-wrap" id="app">
             <a href="{{ get_legacy_brand_base_url('pianote') }}/shop" class="join promo outline-button">Shop</a>

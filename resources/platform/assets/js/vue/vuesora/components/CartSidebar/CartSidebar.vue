@@ -25,6 +25,7 @@
                         <cart-item
                             v-for="item in cartItems"
                             v-if="cartItems"
+                            :brand="brand"
                             :key="item.sku"
                             :item="item"
                             :loading="loading"
@@ -36,6 +37,7 @@
                         <cart-item
                             v-for="item in bonusItems"
                             v-if="bonusItems"
+                            :brand="brand"
                             :key="item.sku"
                             :item="item"
                             :loading="loading"

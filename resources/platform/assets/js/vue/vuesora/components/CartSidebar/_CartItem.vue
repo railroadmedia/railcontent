@@ -8,7 +8,7 @@
         </div>
         <div class="csb-details">
             <div class="csb-title"><a :href="this.item.sales_page_url">{{ item.name }}</a></div>
-            <div class="middle-container">
+            <div class="middle-container mt-1">
                 <div class="csb-quantity" v-if="!item.is_digital && !isBonus && item.quantity && !locked">
                     <div class="csb-quantity-label">Qty:</div>
                     <div class="csb-quantity-control">
@@ -25,15 +25,15 @@
                     </div>
                 </div>
                 <div class="csb-size" v-if="item.size">Size: {{ item.size }}</div>
-                <div>
+                <div class="flex">
                     <product-price :item="item" :brand="brand"></product-price>
                     <div
-                        v-show="loading"
-                        class="flex flex-column flex-auto body csb-product-price"
+                        v-if="loading"
+                        class="inline-flex flex-column body ml-2 mr-auto csb-product-price"
                     >
                         <i
-                            class="fas fa-spin fa-spinner text-singeo tw-inline-flex tw-justify-center"
-                            :class="'tw-text-'+brand"
+                            class="fas fa-spin fa-spinner inline-flex justify-center"
+                            :class="'text-'+brand"
                         ></i>
                     </div>
                 </div>
