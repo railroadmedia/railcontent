@@ -7,14 +7,14 @@ use App\Http\Controllers\Pianote\SalesController;
 Route::domain('{pianoteDomain}')
     ->middleware(['web_public'])
     ->group(function () {
-    Route::get('/shop', [ShopController::class, 'shop']);
+    Route::get('/{category}', [ShopController::class, 'shop'])
+        ->whereIn('category', ['shop', 'lessons', 'accessories', 'clothing']);;
 
     Route::get('/shop/{productslug}', [ShopController::class, 'product']);
 
-        Route::group(['prefix' => 'shop' ],
-            function () {
-                Route::get('/concer-headphones', [SalesController::class, 'concertHeadphones']);
-
-            }
-        );
+    Route::group(['prefix' => 'shop' ],
+        function () {
+            Route::get('/concert-headphones', [SalesController::class, 'concertHeadphones']);
+        }
+    );
 });
