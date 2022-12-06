@@ -155,20 +155,6 @@
         <h5 class="text-blue"><em>The Brazilian metal drumming sensation holds nothing back — and that kit!</em></h5>
     </section>
 
-
-    {{--<section class="warning-section">--}}
-    {{--<div class="row">--}}
-    {{--<h1>THIS MONTH ONLY</h1>--}}
-    {{--<h3 class="text-yellow uppercase"><strong>ONLY <span class="tzcd-small hide-for-medium">A LIMITED TIME</span> <span class="tzcd-full show-for-medium">A LIMITED TIME</span> LEFT</strong></h3>--}}
-    {{--<img class="sticks" src="https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/fair-warning-x.png"><br>--}}
-    {{--<p>This is your chance to get lifetime access to all of the performances and footage from the 2020 event -- accessible anytime with any internet-ready device, and all for just $1 -- along with a bonus 30-days of access to our award-winning online drum lessons.--}}
-    {{--<br><br>--}}
-    {{--But the Drumeo Festival Video Pack is only available as a standalone purchase until August 31st at midnight. After that, it will only be available within Drumeo.</p>--}}
-    {{--<img class="bg-icon sign" src="https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/fair-warning-1.png">--}}
-    {{--<img class="bg-icon cal" src="https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/fair-warning-2.png">--}}
-    {{--</div>--}}
-    {{--</section>--}}
-
     <section class="content-section final text-center" style="background-image:url(https://dpwjbsxqtam5n.cloudfront.net/festival/2020-pack/order-section-background.jpg);">
         <div class="row">
             <img class="logo" src="https://dpwjbsxqtam5n.cloudfront.net/festival/2020-pack/festival-video-pack-logo.png">

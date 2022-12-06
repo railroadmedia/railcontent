@@ -62,8 +62,7 @@
                     @else
                         <strong>ONLY ${{ Prices::$dsOnlineRegular }}</strong>
                     @endif
-                    <br> <span class="text-blue">90-DAY GUARANTEE.</span>
-                    {{--<br><span class="text-yellow">ONLY <strong class="tzcd-full">a limited time</strong> LEFT!</span>--}}</p>
+                    <br> <span class="text-blue">90-DAY GUARANTEE.</span></p>
             </div>
         </div>
         <div class="reveal large" id="previewModal" data-reveal data-reset-on-close="false">
@@ -368,7 +367,6 @@
                     <strong>ONLY ${{ Prices::$dsOnlineRegular }}</strong>
                 @endif
                 <br> <span class="text-blue">90-DAY GUARANTEE.</span>
-                {{--<br><span class="text-yellow">ONLY <strong class="tzcd-full">a limited time</strong> LEFT!--}}</span>
             </h2>
 
             <div class="credit-cards float-left w-full px-3 sm:px-4">

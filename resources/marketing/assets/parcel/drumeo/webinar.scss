@@ -34,17 +34,6 @@ h1, h2, h3, h4, h5, h6 {
   @include desktop {
     font-size: 38px;
   }
-
-  &.white {
-    background: #FFF;
-    color: $drumeoBlue;
-
-    &:hover {
-      background: #e6e6e6;
-      color: $drumeoBlue;
-    }
-  }
-
 }
 
 h1, h2 {

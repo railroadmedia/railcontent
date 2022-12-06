@@ -1556,71 +1556,9 @@
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/sliding-anchor.js') }}"></script>
-    <script type="text/javascript" src="/marketing/js/jquery.countdown-2.min.js"></script>
     <script async type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script async type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('.tzcd-mcdays').countdown('2022/10/01')
-                .on('update.countdown', function (event) {
-                    var format = '';
 
-                    if (event.offset.totalDays > 0) {
-                        format = '%-D ' + format;
-                    } else if (event.offset.totalHours > 0) {
-                        format = '%-H Hour%!H ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('limited time');
-                });
-            $('.tzcd-full').countdown('2022/10/01')
-                .on('update.countdown', function (event) {
-                    var format = '%-M Minute%!M %-S Second%!S';
-                    if (event.offset.totalHours > 0) {
-                        format = '%-H Hour%!H ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '%-D Day%!D ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('a limited time');
-                });
-            $('.tzcd-days').countdown('2022/10/01')
-                .on('update.countdown', function (event) {
-                    var format = '';
-
-                    if (event.offset.totalDays > 0) {
-                        format = '%-D Day%!D ' + format;
-                    } else if (event.offset.totalHours > 0) {
-                        format = '%-H Hour%!H ' + format;
-                    } else if (event.offset.totalHours <= 0) {
-                        format = '%-M Minute%!M %-S Second%!S' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('limited time');
-                });
-            $('.tzcd-small').countdown('2022/10/01')
-                .on('update.countdown', function (event) {
-                    var format = '%-MM %-SS';
-                    if (event.offset.totalHours > 0) {
-                        format = '%-HH ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '%-DD ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('a limited time');
-                });
-        });
-    </script>
 
     @yield('scripts')
 @stop
