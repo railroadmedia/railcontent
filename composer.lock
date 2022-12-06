@@ -176,16 +176,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.252.1",
+            "version": "3.252.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "5cc35b5f66d026d99ba843dba6fe1783571c20af"
+                "reference": "28daf91328380c7e61188738e36d1a0789a7b298"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/5cc35b5f66d026d99ba843dba6fe1783571c20af",
-                "reference": "5cc35b5f66d026d99ba843dba6fe1783571c20af",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/28daf91328380c7e61188738e36d1a0789a7b298",
+                "reference": "28daf91328380c7e61188738e36d1a0789a7b298",
                 "shasum": ""
             },
             "require": {
@@ -264,9 +264,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.252.1"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.252.2"
             },
-            "time": "2022-12-02T19:21:15+00:00"
+            "time": "2022-12-05T19:23:12+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -2843,16 +2843,16 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.276.0",
+            "version": "v0.277.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client-services.git",
-                "reference": "9a0bab5e4472d46bf979e06208da4bd03a5e6103"
+                "reference": "72e0eacbd51131c954da05edf110d9774f0f5af0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/9a0bab5e4472d46bf979e06208da4bd03a5e6103",
-                "reference": "9a0bab5e4472d46bf979e06208da4bd03a5e6103",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/72e0eacbd51131c954da05edf110d9774f0f5af0",
+                "reference": "72e0eacbd51131c954da05edf110d9774f0f5af0",
                 "shasum": ""
             },
             "require": {
@@ -2881,9 +2881,9 @@
             ],
             "support": {
                 "issues": "https://github.com/googleapis/google-api-php-client-services/issues",
-                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.276.0"
+                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.277.0"
             },
-            "time": "2022-11-25T01:16:27+00:00"
+            "time": "2022-12-05T01:04:16+00:00"
         },
         {
             "name": "google/auth",
@@ -8081,12 +8081,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "a55c86df6c14b2f776c3c857bb14013c545941ee"
+                "reference": "4a2d45caa42874a3278924cd27e3de0ab20f80ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/a55c86df6c14b2f776c3c857bb14013c545941ee",
-                "reference": "a55c86df6c14b2f776c3c857bb14013c545941ee",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/4a2d45caa42874a3278924cd27e3de0ab20f80ab",
+                "reference": "4a2d45caa42874a3278924cd27e3de0ab20f80ab",
                 "shasum": ""
             },
             "require": {
@@ -8118,7 +8118,7 @@
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
                 "source": "https://github.com/railroadmedia/musora-api/tree/v2.0-railcontent-v2-integration"
             },
-            "time": "2022-11-30T17:58:11+00:00"
+            "time": "2022-12-06T08:35:46+00:00"
         },
         {
             "name": "railroad/permissions",
