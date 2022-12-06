@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\AddMissingQuietPadsForBFOrders2022;
 use App\Console\Commands\MigrateCoachesToInstructors;
 use App\Console\Commands\MigrateGuitareoUserXP;
 use App\Console\Commands\MigrateTypeBasedContentPermissionsToIdBased;
@@ -32,17 +33,12 @@ class Kernel extends ConsoleKernel
         SeedLiveAndScheduledContent::class,
         PopulateNewRolesAndPermissionsTables::class,
         PopulateUserRolesTable::class,
-        RunMWPPhaseOneLaunchMigrations::class,
-        MigrateCoachesToInstructors::class,
         PopulateUserBrandLevel::class,
         RepairVimeoDurations::class,
         PopulateUserTotalXpPerBrand::class,
         PopulateUserMinutesPracticedPerBrand::class,
         VaporEnvManager::class,
         TestLessonsDescriptionUrls::class,
-        MigrateGuitareoUserXP::class,
-        RepairUserProductsFromReferral::class,
-        MigrateTypeBasedContentPermissionsToIdBased::class,
     ];
 
     /**
