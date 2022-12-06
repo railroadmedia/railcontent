@@ -111,8 +111,8 @@ abstract class Command extends CommandBase
         $batch = null;
         if($reverseProcessJobs) $jobs = array_reverse($jobs);
 
-        $jobs[] = new FinishedCommandJob($this->name);
         if ($isChain) {
+            $jobs[] = new FinishedCommandJob($this->name);
             Bus::chain($jobs)->dispatch();
         } else {
             $batch = Bus::batch($jobs)->name(class_basename($this))->dispatch();
