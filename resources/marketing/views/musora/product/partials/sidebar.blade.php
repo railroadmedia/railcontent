@@ -51,9 +51,9 @@
                     @if($product->productType->name !== 'Bundles' && count($sizes) === 0)
                         <a
                             class="online-atc vue-add-to-cart"
-                            href="/laravel/public/shopping-cart/api/query?go-back-to-shop=true&products[{{ $sku }}]=1"
-                            data-base-url="/laravel/public/shopping-cart/api/query?go-back-to-shop=true&products[{{ $sku }}]=1"
-                            data-product-json='{"{{ $sku }}": 1}'
+                            href="/laravel/public/shopping-cart/api/query?go-back-to-shop=true&products[{!! $sku !!}]=1"
+                            data-base-url="/laravel/public/shopping-cart/api/query?go-back-to-shop=true&products[{!! $sku !!}]=1"
+                            data-product-json='{"{!! $sku !!}": 1}'
                         >
                             <button class="btn-primary bg-[#10d05f] border-none font-bebas py-4 w-full my-4"><i class="fas fa-cart-plus text-2xl mr-1"></i> Add To Cart</button>
                         </a>

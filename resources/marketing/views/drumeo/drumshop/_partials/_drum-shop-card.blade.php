@@ -81,8 +81,8 @@
                                 <option hidden value="">Choose Size</option>
                                 @foreach($sizes as $size)
                                     <option
-                                        @if(!empty($physical) && $physical && $products[$sku.'-'.$size->sku]->isProductSoldOut()) disabled @endif value="?products[{{ $sku }}-{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}]=1"
-                                        data-product-json='{ "{{ $sku }}-{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}": 1 }'
+                                        @if(!empty($physical) && $physical && $products[$sku.'-'.$size->sku]->isProductSoldOut()) disabled @endif value="?products[{!! $sku !!}-{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}]=1"
+                                        data-product-json='{ "{!! $sku !!}-{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}": 1 }'
                                     >
                                         {{ $size->name }}
                                     </option>
@@ -102,7 +102,7 @@
                             </a>
                         @elseif(!empty($sku) && count($sizes) === 0)
                             <a
-                                class="online-atc vue-add-to-cart" href="/laravel/public/shopping-cart/api/query?go-back-to-shop=true&products[{{ $sku }}]=1"   data-base-url="/laravel/public/shopping-cart/api/query?go-back-to-shop=true&products[{{ $sku }}]=1"
+                                class="online-atc vue-add-to-cart" href="/laravel/public/shopping-cart/api/query?go-back-to-shop=true&products[{!! $sku !!}]=1"   data-base-url="/laravel/public/shopping-cart/api/query?go-back-to-shop=true&products[{!! $sku !!}]=1"
                                 data-product-json='{ "{{$sku}}": 1 }'
                                 @if(!empty($promoCode)) data-promocode="{{ $promoCode }}" @endif
                                 @if(!empty($lockedCart)) data-locked-cart="{{ $lockedCart }}" @endif

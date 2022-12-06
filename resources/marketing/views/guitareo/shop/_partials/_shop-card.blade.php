@@ -104,9 +104,9 @@
                         @elseif(!empty($sku) && $sizes->empty())
                             <a
                                 class="online-atc vue-add-to-cart"
-                                href="/ecommerce/add-to-cart?redirect=/shop&products[{{ $sku }}]=1&redirect={{ $redirectUrl ?? '/shop' }}"
-                                data-base-url="/ecommerce/add-to-cart?redirect=/shop&products[{{ $sku }}]=1&redirect={{ $redirectUrl ?? '/shop' }}"
-                                data-product-json='{ "{{ $sku }}": 1}'
+                                href="/ecommerce/add-to-cart?redirect=/shop&products[{!! $sku !!}]=1&redirect={{ $redirectUrl ?? '/shop' }}"
+                                data-base-url="/ecommerce/add-to-cart?redirect=/shop&products[{!! $sku !!}]=1&redirect={{ $redirectUrl ?? '/shop' }}"
+                                data-product-json='{ "{!! $sku !!}": 1}'
                                 @if(!empty($promoCode)) data-promocode="{{ $promoCode }}" @endif
                                 @if(!empty($lockedCart)) data-locked-cart="{{ $lockedCart }}" @endif
                             >
