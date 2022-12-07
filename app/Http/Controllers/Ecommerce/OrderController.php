@@ -87,9 +87,9 @@ class OrderController extends Controller
 
     public function showOrderForm(Request $request, $domain, $brand)
     {
-        $currentUrl = route('order-form');
+        $currentUrl = route('order-form', ['brand' => $brand]);
         $loginUrl = route('login', ['redirect_to' => $currentUrl]);
-        $logoutUrl = route('user_management_system.logout.cookie', ['redirect' => $currentUrl]);
+        $logoutUrl = route('user_management_system.logout.cookie', ['redirect_to' => $currentUrl]);
 
         $user = user();
 

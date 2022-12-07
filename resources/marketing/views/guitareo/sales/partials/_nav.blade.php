@@ -22,14 +22,14 @@
             <nav-cart-button
                     {{-- cart-data='{{ $cartData }}' --}}
                     cart-data-url='{{ get_musora_brand_base_url() }}'
-                    checkout-url='{{ get_legacy_brand_base_url("musora") }}/order/guitareo'
+                    checkout-url='{{ get_musora_brand_base_url() }}/order/guitareo'
                     api-domain-url='{{ get_musora_brand_base_url() }}'
             ></nav-cart-button>
             <cart-sidebar
                     brand="guitareo"
                     {{-- cart-data='{{ $cartData }}' --}}
                     cart-data-url='{{ get_musora_brand_base_url() }}'
-                    checkout-url='{{ get_legacy_brand_base_url("musora") }}/order/guitareo'
+                    checkout-url='{{ get_musora_brand_base_url() }}/order/guitareo'
                     api-domain-url='{{ get_musora_brand_base_url() }}'
             ></cart-sidebar>
         </div>
@@ -58,7 +58,7 @@
         @include('guitareo.sales.partials._nav-link', [
             "linkName" => "Contact",
             "linkIcon" => "fas fa-phone",
-            "linkUrl" => get_legacy_brand_base_url("musora").'/contact'
+            "linkUrl" => get_musora_brand_base_url().'/contact'
         ])
 
         @include('guitareo.sales.partials._nav-link', [

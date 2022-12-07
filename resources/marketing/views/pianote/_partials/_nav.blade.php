@@ -23,14 +23,14 @@
             <nav-cart-button
                 {{-- cart-data='{{ $cartData }}' --}}
                 cart-data-url='{{ get_musora_brand_base_url() }}'
-                checkout-url='{{ get_legacy_brand_base_url("musora") }}/order/pianote'
+                checkout-url='{{ get_musora_brand_base_url() }}/order/pianote'
                 api-domain-url='{{ get_musora_brand_base_url() }}'
             ></nav-cart-button>
             <cart-sidebar
                 brand="pianote"
                 {{-- cart-data='{{ $cartData }}' --}}
                 cart-data-url='{{ get_musora_brand_base_url() }}'
-                checkout-url='{{ get_legacy_brand_base_url("musora") }}/order/pianote'
+                checkout-url='{{ get_musora_brand_base_url() }}/order/pianote'
                 api-domain-url='{{ get_musora_brand_base_url() }}'
             ></cart-sidebar>
         </div>

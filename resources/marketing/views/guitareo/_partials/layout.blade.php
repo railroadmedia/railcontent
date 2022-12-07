@@ -25,7 +25,7 @@
             ],
             "Contact" => [
                 "iconClass" => "fas fa-phone",
-                "url" => get_legacy_brand_base_url("musora").'/contact',
+                "url" => get_musora_brand_base_url().'/contact',
             ],
             "Guitareo" => [
                 "iconClass" => "icon-courses",
@@ -86,7 +86,7 @@
 @stop
 
 <!-- Global Wrapper -->
-@section('global-layout-body') 
+@section('global-layout-body')
     <!-- Brand Specific Content -->
     @yield('layout-body')
 @stop
@@ -152,7 +152,7 @@
                 "links" => [
                     [
                         "name" => "Musora",
-                        "url" => get_legacy_brand_base_url("musora"),
+                        "url" => get_musora_brand_base_url(),
                     ],
                     [
                         "name" => "Drumeo",
