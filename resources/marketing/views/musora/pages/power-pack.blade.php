@@ -1,104 +1,14 @@
-@extends('drumeo.sales.standard-layout', [
-    "trialVersion" => true
-])
+@extends('musora._partials.layout')
 
-@section('meta')
-    <title>Drumeo Power Pack</title>
-    <meta property="og:title" content="Drumeo Power Pack">
-    <meta property="og:url" content="https://www.drumeo.com/power-pack/">
-    <meta name="robots" content="noindex">
-@endsection
+@section('head-includes')
+    <title>Musora | Drumeo, Pianote, Singeo, Guitareo</title>
+    <meta property="og:title" content="Musora | Drumeo, Pianote, Singeo, Guitareo">
 
-@section('global-head')
-@parent
+    <meta name="description" content="Learn the songs you love; now on drums, piano, guitar, or vocals.">
+    <meta property="og:description" content="Learn the songs you love; now on drums, piano, guitar, or vocals.">
 
-<style>
-    .yellow-banner {
-        background: #FDCE02;
-        padding: 20px 0;
-        text-align:center;
-    }
-
-    @media (min-width: 40em) {
-        .yellow-banner {
-            padding: 30px 0;
-            text-align:left;
-        }
-    }
-
-    @media (min-width: 64em) {
-        .yellow-banner {
-            padding: 40px 20px
-        }
-    }
-
-    .yellow-banner .container {
-        padding: 0 10px
-    }
-
-    @media (min-width: 40em) {
-        .yellow-banner .container {
-            padding: 0 15px
-        }
-    }
-
-    .yellow-banner .container img {
-        width: 130px;
-    }
-
-    @media (min-width: 40em) {
-        .yellow-banner .container img {
-            float:left;
-            width: 150px;
-        }
-    }
-
-
-    .yellow-banner .container p {
-        font: 400 13px/1.5em "Open Sans", sans-serif;
-        margin: 10px auto 0;
-        width: 100%;
-    }
-
-    @media (min-width: 40em) {
-        .yellow-banner .container p {
-            font-size: 16px;
-            width: calc(100% - 150px);
-            padding-left: 25px;
-            margin: 0 auto;
-        }
-    }
-
-    @media (min-width: 64em) {
-        .yellow-banner .container p {
-            font-size: 18px;
-            margin: 15px auto 0;
-        }
-    }
-
-    .yellow-banner .container p a {
-        color: #000;
-        text-decoration: underline;
-        display:inline-block;
-    }
-</style>
-@endsection
-
-@section('promo-banner')
-
-    <section class="yellow-banner clearfix">
-        <div class="container mx-auto">
-            <div class="float-left w-full px-3 md:px-4">
-                <img src="https://dpwjbsxqtam5n.cloudfront.net/promos/february/hlag-logo.png">
-                <p class="float-left"><strong>Power Pack 2020:</strong> You’re eligible for a FREE 30-day membership to Drumeo. Browse
-                    around this page for all the details and then
-                    <a class="anchor-slide" href="#customize-anchor">click here to claim your gift</a>. </p>
-            </div>
-        </div>
-    </section>
-@endsection
-
-@section('final')
+    <meta property="og:url" content="https://www.musora.com/unified-2022">
+    <meta property="og:image" content="https://musora-center.s3.amazonaws.com/homepage/2021/share-image.jpg">
     <style>
         [placeholder]:focus::-webkit-input-placeholder {
             color: transparent;
@@ -320,64 +230,56 @@
             }
         }
     </style>
-    <div id="customize-anchor" class="anchor anchor-slide"></div>
-    <section class="customize" style="padding: 0;"></section>
-    <section class="power-pack-signup text-center">
-        <div class="row">
-            <div class="logo"><img src="https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png"> </div>
-            <div class="logo"><img src="https://dpwjbsxqtam5n.cloudfront.net/promos/february/hlag-logo.png"> </div>
-            <h3>Claim Your Free 30-Day <br class="hide-for-medium"> Membership To Drumeo</h3>
-            <div class="columns">
-                @if(!empty($errors))
-                    @foreach ($errors->all() as $error)
-                        <p class="mb-1 text-error body">{{ $error }}</p>
-                    @endforeach
-                @endif
+@endsection
 
-                @if(session()->has('success'))
-                        <div class="success">
-                            <p><strong>Success!</strong></p>
-                            <h2>{{ session()->get('success') }}</h2>
-                            <p><em>You will receive an email with your access code for your free 30-day membership. <br>
-                                    This access code can be used anytime, so you can start your free membership whenever it works best for you.</em></p>
-                        </div>
-                        <br><br>
-                    @elseif(session()->has('error'))
-                        <div class="error">
-                            <p><strong>Error</strong></p>
-                            <p><em>We're sorry, but there's been a problem on our end. <br>Please <a class="text-white" href="/support">contact us</a> or call 1-800-439-8921 and we'll get things sorted out!</em></p>
-                        </div>
-                        <br><br>
-                    @else
-                        <form accept-charset="UTF-8" action="/hlag-submit" id="inf_form" class="clearfix infusion-form" method="POST">
-                            <input type="hidden" name="_token" class="sort-input" value="{{ csrf_token() }}" />
-                            <input name="inf_form_xid" type="hidden" value=""/>
-                            <input name="inf_form_name" type="hidden" value=""/>
-                            <div class="infusion-field columns medium-6">
-                                <input class="infusion-field-input-container" id="first_name" name="first_name" placeholder="First Name..." required/>
-                            </div>
-                            <div class="infusion-field columns medium-6">
-                                <input class="infusion-field-input-container" id="last_name" name="last_name" placeholder="Last Name..." required/>
-                            </div>
-                            <div class="infusion-field columns">
-                                <input class="infusion-field-input-container" id="email" name="email" type="email" placeholder="Email Address..." required/>
-                            </div>
-                            <div class="infusion-submit columns">
-                                <input class="submit" type="submit" value="Claim Your Access Code &raquo;"/>
-                            </div>
-                        </form>
-                        <div class="disclaimer">
-                            <i class="fal fa-info-circle"></i>
-                            <p>By signing up you’ll also receive our ongoing free lessons and special offers. Don’t worry, we value your privacy and you can unsubscribe at any time.</p>
-                        </div>
-                    <br><br>
-                @endif
-            </div>
-            <div class="columns questions">
-                <p><strong>Any questions?</strong> Call us toll-free at
-                    <a href="tel:+18004398921">1-800-439-8921</a> or directly at
-                    <a href="tel:+16048557605">1-604-855-7605</a>. </p>
-            </div>
+@section('body-class', 'dark')
+
+<!-- Main -->
+@section('layout-body')
+    @foreach ($errors->all() as $error)
+        <p class="mb-1 text-error body">{{ $error }}</p>
+    @endforeach
+
+    <section class="power-pack-signup text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f9f9fb;">
+        <div class="container max-w-4xl mx-auto">
+            @if(session()->has('success'))
+                <div class="success">
+                    <p><strong>Success!</strong></p>
+                    <h2>{{ session()->get('success') }}</h2>
+                    <p><em>You will receive an email with your access code for your free 30-day membership. <br>
+                            This access code can be used anytime, so you can start your free membership whenever it works best for you.</em></p>
+                </div>
+                <br><br>
+            @elseif(session()->has('error'))
+                <div class="error">
+                    <p><strong>Error</strong></p>
+                    <p><em>We're sorry, but there's been a problem on our end. <br>Please <a class="text-white" href="/support">contact us</a> or call 1-800-439-8921 and we'll get things sorted out!</em></p>
+                </div>
+                <br><br>
+            @else
+            <form accept-charset="UTF-8" action="/hlag-submit" id="inf_form" class="clearfix infusion-form" method="POST">
+                <input type="hidden" name="_token" class="sort-input" value="{{ csrf_token() }}" />
+                <input name="inf_form_xid" type="hidden" value=""/>
+                <input name="inf_form_name" type="hidden" value=""/>
+                <div class="infusion-field columns medium-6">
+                    <input class="infusion-field-input-container" id="first_name" name="first_name" placeholder="First Name..." required/>
+                </div>
+                <div class="infusion-field columns medium-6">
+                    <input class="infusion-field-input-container" id="last_name" name="last_name" placeholder="Last Name..." required/>
+                </div>
+                <div class="infusion-field columns">
+                    <input class="infusion-field-input-container" id="email" name="email" type="email" placeholder="Email Address..." required/>
+                </div>
+                <div class="infusion-submit columns">
+                    <input class="submit" type="submit" value="Claim Your Access Code &raquo;"/>
+                </div>
+            </form>
+                <div class="disclaimer">
+                    <i class="fal fa-info-circle"></i>
+                    <p>By signing up you’ll also receive our ongoing free lessons and special offers. Don’t worry, we value your privacy and you can unsubscribe at any time.</p>
+                </div>
+                <br><br>
+            @endif
         </div>
     </section>
-@endsection
+@stop

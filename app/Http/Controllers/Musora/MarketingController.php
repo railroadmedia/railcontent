@@ -60,5 +60,13 @@ class MarketingController extends BaseController
     public function redeem()
     {
         return view('musora.pages.redeem.card-redeem-theme');
+    public function bestBookTrial()
+    {
+        return view('drumeo.sales.trials.bestbook-trial');
+    }
+
+    public function chooseTrial()
+    {
+        return view('drumeo.sales.trials.trial-selection.choose-your-trial');
     }
 }

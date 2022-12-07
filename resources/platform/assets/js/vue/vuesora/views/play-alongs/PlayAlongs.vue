@@ -92,7 +92,7 @@
             </div>
         </transition>
 
-        <play-alongs-player v-show="activeItem != null" ref="progressBar" :active-item="activeItem"
+        <play-alongs-player v-show="activeItem != null" :no-sidebar="noSidebar" ref="progressBar" :active-item="activeItem"
             :audio-player="audioPlayer" :drums="drums" :metronome="metronome" :loop="loop" :current-time="currentTime"
             :total-duration="totalDuration" :current-position="currentPosition" :is-playing="isPlaying"
             :anchor-offsets="anchorOffsets" :current-mouse-x="currentMousePosition.x" :played-content="playedContent"
@@ -144,6 +144,11 @@ export default {
         brand: {
             type: String,
             default: () => 'drumeo',
+        },
+
+        noSidebar: {
+            type: Boolean, 
+            default: () => false,
         },
 
         preLoadedContent: {
