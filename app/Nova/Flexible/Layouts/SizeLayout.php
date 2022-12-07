@@ -33,7 +33,6 @@ class SizeLayout extends Layout
         return [
             Select::make('Sizes', 'size')
             ->options(\App\Models\Size::pluck('name', 'name')),
-            Boolean::make('Sold Out', 'sold_out'),
             Text::make('id', 'id')->hide()->hideFromDetail()
         ];
     }

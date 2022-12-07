@@ -27,7 +27,6 @@ class SizeResolver implements ResolverInterface
 
             return $layout->duplicateAndHydrate($size->id, [
                 'size' => $size->name,
-                'sold_out' => $size->sold_out,
                 'id' => $size->id
             ]);
         })->filter();
@@ -49,7 +48,6 @@ class SizeResolver implements ResolverInterface
             $sizes = $groups->map(function($group, $index) use($model){
                 return [
                     'size_id' => is_null($group->getAttributes()['size']) ? null : Size::firstWhere('name', $group->getAttributes()['size'])->id,
-                    'sold_out' => $group->getAttributes()['sold_out'],
                     'id' => isset($group->getAttributes()['id']) ? $group->getAttributes()['id'] : null,
                 ];
             });
@@ -71,10 +69,6 @@ class SizeResolver implements ResolverInterface
                             $dbSize->size_id = $size['size_id'];
                         }
 
-                        if($dbSize->sold_out !== $size['sold_out']){
-                            $dbSize->sold_out = $size['sold_out'];
-                        }
-
                         $dbSize->save();
                         $updatedIds[] = $size['id'];
                     }
@@ -82,7 +76,6 @@ class SizeResolver implements ResolverInterface
                         $addSize = new ProductSize();
                         $addSize->product_id = $model['id'];
                         $addSize->size_id = $size['size_id'];
-                        $addSize->sold_out = $size['sold_out'];
                         $addSize->save();
 
                         $updatedIds[] = $addSize->id;
