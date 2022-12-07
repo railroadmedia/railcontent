@@ -176,16 +176,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.252.1",
+            "version": "3.252.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "5cc35b5f66d026d99ba843dba6fe1783571c20af"
+                "reference": "28daf91328380c7e61188738e36d1a0789a7b298"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/5cc35b5f66d026d99ba843dba6fe1783571c20af",
-                "reference": "5cc35b5f66d026d99ba843dba6fe1783571c20af",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/28daf91328380c7e61188738e36d1a0789a7b298",
+                "reference": "28daf91328380c7e61188738e36d1a0789a7b298",
                 "shasum": ""
             },
             "require": {
@@ -264,9 +264,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.252.1"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.252.2"
             },
-            "time": "2022-12-02T19:21:15+00:00"
+            "time": "2022-12-05T19:23:12+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -7926,16 +7926,16 @@
         },
         {
             "name": "railroad/ecommerce",
-            "version": "v5.0.36",
+            "version": "v5.0.39",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "8f029d8cff6b1b7b92db923b63a6d5c62933b838"
+                "reference": "a54d7a5c831e74c7a85c24582fa983e07bb50bb5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/8f029d8cff6b1b7b92db923b63a6d5c62933b838",
-                "reference": "8f029d8cff6b1b7b92db923b63a6d5c62933b838",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/a54d7a5c831e74c7a85c24582fa983e07bb50bb5",
+                "reference": "a54d7a5c831e74c7a85c24582fa983e07bb50bb5",
                 "shasum": ""
             },
             "require": {
@@ -7972,9 +7972,9 @@
             "description": "Ecommerce system",
             "support": {
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
-                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.36"
+                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.39"
             },
-            "time": "2022-12-02T06:12:15+00:00"
+            "time": "2022-12-06T01:14:36+00:00"
         },
         {
             "name": "railroad/location",
@@ -8077,16 +8077,16 @@
         },
         {
             "name": "railroad/musora-api",
-            "version": "dev-project-pianote-song-tutorial",
+            "version": "dev-v2.0-railcontent-v2-integration",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "29caa41514d21c12b71d09c91139f1f5da1dfd48"
+                "reference": "4a2d45caa42874a3278924cd27e3de0ab20f80ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/29caa41514d21c12b71d09c91139f1f5da1dfd48",
-                "reference": "29caa41514d21c12b71d09c91139f1f5da1dfd48",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/4a2d45caa42874a3278924cd27e3de0ab20f80ab",
+                "reference": "4a2d45caa42874a3278924cd27e3de0ab20f80ab",
                 "shasum": ""
             },
             "require": {
@@ -8118,7 +8118,7 @@
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
                 "source": "https://github.com/railroadmedia/musora-api/tree/project-pianote-song-tutorial"
             },
-            "time": "2022-11-29T08:46:07+00:00"
+            "time": "2022-12-06T08:35:46+00:00"
         },
         {
             "name": "railroad/permissions",
