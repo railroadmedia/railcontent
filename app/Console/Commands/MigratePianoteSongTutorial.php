@@ -2,13 +2,10 @@
 
 namespace App\Console\Commands;
 
-use Carbon\Carbon;
-use Illuminate\Support\Collection;
-use Modules\UserManagementSystem\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
-use Spatie\Permission\Models\Role;
-use Exception;
+use Illuminate\Support\Collection;
+use Railroad\Railcontent\Services\ContentHierarchyService;
 use Railroad\Railcontent\Services\ContentService;
 
 class MigratePianoteSongTutorial extends Command
@@ -35,20 +32,23 @@ class MigratePianoteSongTutorial extends Command
      *
      * @return mixed
      */
-    public function handle(DatabaseManager $databaseManager, ContentService $contentService)
-    {
+    public function handle(
+        DatabaseManager $databaseManager,
+        ContentService $contentService,
+        ContentHierarchyService $contentHierarchyService
+    ) {
         $this->info("MigratePianoteSongTutorial command starts now \n");
 
         $dbConn = $databaseManager->connection(config('railcontent.database_connection_name'));
 
         $query =
             $dbConn->table('railcontent_content')
-                ->select('id')
+                ->select('id', 'type')
                 ->where('brand', 'pianote')
                 ->where('type', 'song')
                 ->orderBy('id', 'asc');
 
-        $query->chunk(200, function (Collection $rows) use ($dbConn, $contentService) {
+        $query->chunk(200, function (Collection $rows) use ($dbConn, $contentService, $contentHierarchyService) {
             $dbConn->table('railcontent_content')
                 ->whereIn('id', $rows->pluck('id'))
                 ->update([
@@ -62,27 +62,32 @@ class MigratePianoteSongTutorial extends Command
                 $rows->pluck('id')
                     ->toArray()
             );
-        });
 
-        $query =
-            $dbConn->table('railcontent_content')
-                ->select('id')
-                ->where('brand', 'pianote')
-                ->where('type', 'song-part')
-                ->orderBy('id', 'asc');
+            $childrenIds =
+                $contentHierarchyService->getByParentIds(
+                    $rows->pluck('id')
+                        ->toArray()
+                );
+            $childrens =
+                $dbConn->table('railcontent_content')
+                    ->select('id', 'type')
+                    ->where('brand', 'pianote')
+                    ->whereIn('id', \Arr::pluck($childrenIds, 'child_id'))
+                    ->where('type', '!=', 'assignment')
+                    ->orderBy('id', 'asc')
+                    ->get();
 
-        $query->chunk(200, function (Collection $rows) use ($dbConn, $contentService) {
             $dbConn->table('railcontent_content')
-                ->whereIn('id', $rows->pluck('id'))
+                ->whereIn('id', $childrens->pluck('id'))
                 ->update([
                              'type' => 'song-tutorial-children',
                          ]);
             $contentService->fillCompiledViewContentDataColumnForContentIds(
-                $rows->pluck('id')
+                $childrens->pluck('id')
                     ->toArray()
             );
             $contentService->fillParentContentDataColumnForContentIds(
-                $rows->pluck('id')
+                $childrens->pluck('id')
                     ->toArray()
             );
         });
