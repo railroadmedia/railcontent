@@ -14,6 +14,6 @@ class ProcessAppleExpiredSubscriptions extends Command
     public function handle() {
         $this->runChainQuery(function (int $skip, int $take) {
             return new ProcessAppleExpiredSubscriptionsJob($skip, $take);
-        }, chunks: 100);
+        }, chunks: 100, reverseProcessJobs: true);
     }
 }

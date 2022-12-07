@@ -34,19 +34,13 @@ class Kernel extends ConsoleKernel
         SeedLiveAndScheduledContent::class,
         PopulateNewRolesAndPermissionsTables::class,
         PopulateUserRolesTable::class,
-        RunMWPPhaseOneLaunchMigrations::class,
-        MigrateCoachesToInstructors::class,
         PopulateUserBrandLevel::class,
         RepairVimeoDurations::class,
         PopulateUserTotalXpPerBrand::class,
         PopulateUserMinutesPracticedPerBrand::class,
         VaporEnvManager::class,
         TestLessonsDescriptionUrls::class,
-        MigrateGuitareoUserXP::class,
-        RepairUserProductsFromReferral::class,
-        MigrateTypeBasedContentPermissionsToIdBased::class,
-        AddMissingQuietPadsForBFOrders2022::class,
-        MigratePianoteSongTutorial::class,
+	MigratePianoteSongTutorial::class,
     ];
 
     /**
@@ -69,6 +63,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('content:CreateYoutubeVideoContentRecordsViaClientAPI', [1])->cron("0 */6 * * *");
 
         $schedule->command('ecommerce:renewalDueSubscriptions')->cron("15 */8 * * *"); // every 8 hours
+        $schedule->command('ecommerce:ProcessAppleExpiredSubscriptionsQueued')->cron("30 */8 * * *"); // every 8 hours
 
         $schedule->command('mentors:verify')->daily();
         //temporary measure to assign mentors until ecommerce is integrated with MWP
