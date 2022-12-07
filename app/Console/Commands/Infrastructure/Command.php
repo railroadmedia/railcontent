@@ -102,13 +102,19 @@ abstract class Command extends CommandBase
         $nJobs = count($jobs);
         if ($nJobs == 0) {
             $this->info("No jobs to dispatch.");
-            $this->info("Finished $this->name");
+            $diff = microtime(true) - $timeStart;
+            $sec = intval($diff);
+            $this->info("Finished $this->name ($sec s)");
             return true;
         }
         $this->info("Dispatching $nJobs jobs.");
         $batch = null;
-        if($reverseProcessJobs) $jobs = array_reverse($jobs);
+        if ($reverseProcessJobs) {
+            $jobs = array_reverse($jobs);
+        }
+
         if ($isChain) {
+            $jobs[] = new FinishedCommandJob($this->name);
             Bus::chain($jobs)->dispatch();
         } else {
             $batch = Bus::batch($jobs)->name(class_basename($this))->dispatch();
