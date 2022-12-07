@@ -989,6 +989,7 @@ class ContentService
                 'brand' => $brand ?? ConfigService::$brand,
                 'total_xp' => $this->getDefaultXP($type, 0),
                 'user_id' => $userId,
+                'instrumentless' => ($type == 'song') ? false : null,
                 'published_on' => $publishedOn,
                 'created_on' => Carbon::now()
                     ->toDateTimeString(),
