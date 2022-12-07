@@ -1,8 +1,6 @@
-@extends('guitareo._partials.layout')
+@extends('guitareo.lead-gen.lead-gen-layout-tw')
 
-@section('head-includes')
-    @parent
-
+@section('meta')
     <meta name="robots" content="noindex">
     <title>Getting Started On The Acoustic Guitar</title>
     <meta property="og:title" content="Getting Started On The Acoustic Guitar">
@@ -13,10 +11,11 @@
     <meta property="og:image" content="https://guitareo.s3.amazonaws.com/lead-gen/free-acoustic-guitar-lessons/og-image.jpg">
     <meta property="og:url" content="https://www.guitareo.com/free-acoustic-guitar-lessons/">
 
-    <link rel="stylesheet" href="{{ asset('/assets/marketing/lead-gen.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/lead-gen.css') }}">
+    @parent
 @stop
 
-@section('layout-body')
+@section('body')
 
     @include('guitareo.lead-gen.partials._course-lessons1', [
         "bgColor" => "#030d17",
@@ -68,5 +67,5 @@
             ],
         ]
     ])
-    
+
 @stop

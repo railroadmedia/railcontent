@@ -1,8 +1,6 @@
-@extends('guitareo._partials.layout')
+@extends('guitareo.lead-gen.lead-gen-layout-tw')
 
-@section('head-includes')
-    @parent
-    
+@section('meta')
     <meta name="robots" content="noindex">
     <title>Solo In An Hour | Guitareo</title>
     <meta property="og:title" content="Solo In An Hour">
@@ -10,15 +8,16 @@
     <meta property="og:description" content="Play your first solo in less than 60 minutes">
     <meta property="og:image" content="https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/og-image.jpg">
     <meta property="og:url" content="https://www.guitareo.com/solo-in-an-hour/">
-    <link rel="stylesheet" href="{{ asset('/assets/marketing/lead-gen.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/lead-gen.css') }}">
+    @parent
 @stop
 
-@section('layout-body')
+@section('body')
 
     @include('guitareo.lead-gen.partials._course-lessons1', [
         "bgColor" => "#030d17",
         "bgImg" => "https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/order-bg.jpg",
-        "img" => '<img class="h-20 md:h-28 lg:h-40 inline-block" src="https://cdn.musora.com/image/fetch/w_800,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/logo.png">',
+        "img" => '<img class="tw-h-20 md:tw-h-28 lg:tw-h-40 tw-inline-block" src="https://cdn.musora.com/image/fetch/w_800,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/logo.png">',
         "rootLink" => "/solo-in-an-hour/lessons/",
         "bonuses" => [
             [

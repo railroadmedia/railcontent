@@ -10,10 +10,7 @@
 
                 <form
                     method="POST"
-                    action="{{ url()->route(
-                        'user_management_system.login.cookie',
-                        ['redirect' => url()->current()]
-                    ) }}"
+                    action="{{ url()->route('user_management_system.login.cookie') }}?redirect_to={{$redirectUrl }}"
                 >
                     {{ method_field('POST') }}
                     {{ csrf_field() }}
@@ -26,20 +23,20 @@
                             "inputName" => "email",
                             "inputLabel" => "Email Address...",
                             "inputValue" => old('email'),
-                            "inputErrors" => $errors->get('log'),
+                            "inputErrors" => [],
                         ])
                     </div>
 
                     <div class="flex flex-column mb-1">
                         @include('partials.bladesora.members.inputs.text-input', [
-                            "brand" => "pianote",
-                            "type" => "password",
-                            "inputId" => "loginPassword",
-                            "inputName" => "password",
-                            "inputLabel" => "Password...",
-                            "inputValue" => old('password'),
-                            "inputErrors" => $errors->get('pwd'),
-                        ])
+                             "brand" => "pianote",
+                             "type" => "password",
+                             "inputId" => "loginPassword",
+                             "inputName" => "password",
+                             "inputLabel" => "Password...",
+                             "inputValue" => old('password'),
+                             "inputErrors" => [],
+                       ]          )
                     </div>
 
                     <div class="flex flex-column">

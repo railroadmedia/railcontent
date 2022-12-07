@@ -402,7 +402,7 @@ export default {
             }
 
             if (this.enableEvent) {
-                this.$root.$emit(this.eventName, { text });
+                this.eventBus.emit(this.eventName, { text });
             }
 
           SupportService.sendEmail({

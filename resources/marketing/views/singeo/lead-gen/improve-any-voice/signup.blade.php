@@ -11,8 +11,8 @@
     <meta property="og:description" content="Anyone can sing! Singeo is here to show you how in this free mini lesson series.">
     <meta property="og:url" content="https://www.singeo.com/improve-any-voice/">
 
-    <link rel="stylesheet" href="{{ asset('/assets/css/animate.css') }}">
-    <link rel="stylesheet" href="{{ asset('/assets/marketing/lead-gen.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/css/animate.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/singeo/lead-gen.css') }}">
 
     <style>
         .hero-header {
@@ -36,7 +36,7 @@
     </style>
 @stop
 @section('scripts')
-    <script type="text/javascript" src="/assets/js/modal-autoplay.js"></script>
+    <script type="text/javascript" src="/marketing/js/modal-autoplay.js"></script>
 @stop
 
 @section('body')
@@ -48,9 +48,9 @@
                 </div>
                 <div class="w-full md:w-7/12 lg:text-left">
                     <h1 class="leading-tight"><strong>4 Exercises Guaranteed<br class="inline sm:hidden lg:inline"> To Improve ANY Voice!</strong></h1>
-                    <h3 class="mt-2 md:mt-5 mb-3 md:mb-7 lg:mb-10 text-singeo" style="text-shadow: 0 0 5px #000;"><em>You CAN sing! We'll show you how.</em></h3>
+                    <h3 class="mt-2 md:mt-5 mb-3 md:mb-7 lg:mb-10" style="text-shadow: 0 0 5px #000;"><em>You CAN sing! We'll show you how.</em></h3>
                     <h5 class="mb-3 md:mb-5 leading-tight">Simply enter your email to<br class="inline lg:hidden"> unlock your FREE videos!</h5>
-                    @include("singeo.lead-gen.partials._sign-up-form-cio", [
+                    @include("singeo._partials._sign-up-form", [
                     "formId" => "Singeo - Engagement - Trigger - 4 Exercises - Web Form",
                     "formName" => 'Improve Any Voice',
                     "buttonText" => "Send My Videos",
@@ -65,7 +65,7 @@
         "id" => "trailer",
         "code" => "545534938"
     ])
-    
+
     @include('singeo.lead-gen.partials._video-player',[
         "id" => "lesson1",
         "code" => "543823396"
@@ -126,7 +126,7 @@
         <div class="container mx-auto">
             <h3 class="mb-5 md:mb-8 lg:mb-10"><strong>Simply enter your email to<br class="inline lg:hidden"> unlock your FREE videos!</strong></h3>
             <div class="w-full mx-auto max-w-lg lg:max-w-3xl">
-                @include("singeo.lead-gen.partials._sign-up-form-cio", [
+                @include("singeo._partials._sign-up-form", [
                     "formId" => "Singeo - Engagement - Trigger - 4 Exercises - Web Form",
                     "formName" => 'Improve Any Voice',
                     "buttonText" => "Send My Videos",
@@ -135,4 +135,6 @@
             </div>
         </div>
     </section>
+
+
 @stop

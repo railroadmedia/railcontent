@@ -1,0 +1,49 @@
+$opensans:'Open Sans', sans-serif;
+$robotocondensed:'Roboto Condensed', sans-serif;
+$bebas:'Bebas Neue', sans-serif;
+
+$drumeoBlue:#0b76db;
+$pianoteRed:#F61A30;
+$guitareoGreen:#00C9AC;
+$recordeoYellow:#ffae00;
+$singeoPurple:#8300E9;
+
+$youtube:#cd201f;
+$facebook:#3b5998;
+$instagram:#e1306c;
+
+$methodGreen:#00d6af;
+$songsPink:#ec0061;
+$coachesOrange:#fe9f13;
+
+$promoColor:#df0032;
+
+@mixin sm {
+  @media (min-width: 640px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin xl {
+  @media (min-width: 1280px) {
+    @content;
+  }
+}
+
+@mixin xxl {
+  @media (min-width: 1536px) {
+    @content;
+  }
+}

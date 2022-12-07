@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "56b49247e33b348bf453c5eb2aa79cc4",
+    "content-hash": "70ef387df6a868b0fcf7498b7c8f5b24",
     "packages": [
         {
             "name": "aporat/store-receipt-validator",
@@ -176,16 +176,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.252.3",
+            "version": "3.252.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "badab73e791c38410756388968b151e0e395105a"
+                "reference": "ce0b006b73c6ea78eb570aa3fcd838d0df34ec1b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/badab73e791c38410756388968b151e0e395105a",
-                "reference": "badab73e791c38410756388968b151e0e395105a",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/ce0b006b73c6ea78eb570aa3fcd838d0df34ec1b",
+                "reference": "ce0b006b73c6ea78eb570aa3fcd838d0df34ec1b",
                 "shasum": ""
             },
             "require": {
@@ -264,9 +264,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.252.3"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.252.4"
             },
-            "time": "2022-12-06T19:23:24+00:00"
+            "time": "2022-12-07T19:47:20+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -4806,74 +4806,6 @@
             "time": "2022-12-05T15:09:21+00:00"
         },
         {
-            "name": "laravel/vapor-cli",
-            "version": "v1.50.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravel/vapor-cli.git",
-                "reference": "5a28bc8ebcfdd2f12c2cc79e1061e7bb665e2af1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laravel/vapor-cli/zipball/5a28bc8ebcfdd2f12c2cc79e1061e7bb665e2af1",
-                "reference": "5a28bc8ebcfdd2f12c2cc79e1061e7bb665e2af1",
-                "shasum": ""
-            },
-            "require": {
-                "ext-zip": "*",
-                "guzzlehttp/guzzle": "^6.3|^7.0",
-                "illuminate/container": "^6.0|^7.0|^8.0|^9.0",
-                "illuminate/filesystem": "^6.0|^7.0|^8.0|^9.0",
-                "illuminate/support": "^6.0|^7.0|^8.0|^9.0",
-                "league/flysystem": "^1.0|^3.0",
-                "league/flysystem-aws-s3-v3": "^1.0|^3.0",
-                "php": "^7.2|^8.0",
-                "ramsey/uuid": "^3.8|^4.0",
-                "symfony/console": "^4.2|^5.0|^6.0",
-                "symfony/process": "^4.2|^5.0|^6.0",
-                "symfony/var-dumper": "^4.2|^5.0|^6.0",
-                "symfony/yaml": "^4.2|^5.0|^6.0",
-                "vlucas/phpdotenv": "^3.0|^4.0|^5.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^8.0|^9.0"
-            },
-            "bin": [
-                "vapor"
-            ],
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Laravel\\VaporCli\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Taylor Otwell",
-                    "email": "taylor@laravel.com"
-                }
-            ],
-            "description": "The Laravel Vapor CLI",
-            "homepage": "https://github.com/laravel/vapor-cli",
-            "keywords": [
-                "laravel",
-                "vapor"
-            ],
-            "support": {
-                "source": "https://github.com/laravel/vapor-cli/tree/v1.50.0"
-            },
-            "time": "2022-11-28T14:42:27+00:00"
-        },
-        {
             "name": "laravel/vapor-core",
             "version": "v2.26.0",
             "source": {
@@ -6402,6 +6334,56 @@
             "time": "2022-11-12T15:38:23+00:00"
         },
         {
+            "name": "nova-kit/nova-packages-tool",
+            "version": "v1.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nova-kit/nova-packages-tool.git",
+                "reference": "c6deaf054a94d36c20b9472979c5dc94415f1283"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nova-kit/nova-packages-tool/zipball/c6deaf054a94d36c20b9472979c5dc94415f1283",
+                "reference": "c6deaf054a94d36c20b9472979c5dc94415f1283",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/nova": ">=4.19.0 <4.20.0",
+                "php": "^7.3 || ^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.24 || ^7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "NovaKit\\NovaPackagesTool\\LaravelServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "NovaKit\\NovaPackagesTool\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mior Muhammad Zaki",
+                    "email": "crynobone@gmail.com"
+                }
+            ],
+            "description": "Tool for Laravel Nova Packages Development",
+            "support": {
+                "source": "https://github.com/nova-kit/nova-packages-tool/tree/v1.6.1"
+            },
+            "time": "2022-11-22T21:40:15+00:00"
+        },
+        {
             "name": "nunomaduro/termwind",
             "version": "v1.14.2",
             "source": {
@@ -7926,16 +7908,16 @@
         },
         {
             "name": "railroad/ecommerce",
-            "version": "v5.0.39",
+            "version": "v5.0.41",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "a54d7a5c831e74c7a85c24582fa983e07bb50bb5"
+                "reference": "f94f037cae915befdf8bcca83f895a9c15b86b70"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/a54d7a5c831e74c7a85c24582fa983e07bb50bb5",
-                "reference": "a54d7a5c831e74c7a85c24582fa983e07bb50bb5",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/f94f037cae915befdf8bcca83f895a9c15b86b70",
+                "reference": "f94f037cae915befdf8bcca83f895a9c15b86b70",
                 "shasum": ""
             },
             "require": {
@@ -7972,22 +7954,22 @@
             "description": "Ecommerce system",
             "support": {
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
-                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.39"
+                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.41"
             },
-            "time": "2022-12-06T01:14:36+00:00"
+            "time": "2022-12-07T19:36:56+00:00"
         },
         {
             "name": "railroad/location",
-            "version": "v3.0.3",
+            "version": "v3.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/location.git",
-                "reference": "6020ac7ac0adabdd52f7354e9ee50b79362536c9"
+                "reference": "68ecac15142f564d4b7a69703c4f1e71b402f51f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/location/zipball/6020ac7ac0adabdd52f7354e9ee50b79362536c9",
-                "reference": "6020ac7ac0adabdd52f7354e9ee50b79362536c9",
+                "url": "https://api.github.com/repos/railroadmedia/location/zipball/68ecac15142f564d4b7a69703c4f1e71b402f51f",
+                "reference": "68ecac15142f564d4b7a69703c4f1e71b402f51f",
                 "shasum": ""
             },
             "require": {
@@ -8014,9 +7996,9 @@
             "description": "Location service",
             "support": {
                 "issues": "https://github.com/railroadmedia/location/issues",
-                "source": "https://github.com/railroadmedia/location/tree/v3.0.3"
+                "source": "https://github.com/railroadmedia/location/tree/v3.0.4"
             },
-            "time": "2022-10-24T19:12:06+00:00"
+            "time": "2022-12-07T19:18:27+00:00"
         },
         {
             "name": "railroad/mailora",
@@ -9484,6 +9466,66 @@
             "time": "2022-09-09T19:47:11+00:00"
         },
         {
+            "name": "spatie/commonmark-shiki-highlighter",
+            "version": "2.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/commonmark-shiki-highlighter.git",
+                "reference": "52528a02f61d84030b313b5c7b0c4dd8edca7187"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/commonmark-shiki-highlighter/zipball/52528a02f61d84030b313b5c7b0c4dd8edca7187",
+                "reference": "52528a02f61d84030b313b5c7b0c4dd8edca7187",
+                "shasum": ""
+            },
+            "require": {
+                "league/commonmark": "^2.0",
+                "php": "^8.0",
+                "spatie/shiki-php": "^1.1.1",
+                "symfony/process": "^5.3|^6.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.19",
+                "phpunit/phpunit": "^9.5",
+                "spatie/phpunit-snapshot-assertions": "^4.2.7",
+                "spatie/ray": "^1.28"
+            },
+            "type": "commonmark-extension",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\CommonMarkShikiHighlighter\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Highlight code blocks with league/commonmark and Shiki",
+            "homepage": "https://github.com/spatie/commonmark-shiki-highlighter",
+            "keywords": [
+                "commonmark-shiki-highlighter",
+                "spatie"
+            ],
+            "support": {
+                "source": "https://github.com/spatie/commonmark-shiki-highlighter/tree/2.1.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-11-28T08:03:04+00:00"
+        },
+        {
             "name": "spatie/fractalistic",
             "version": "2.9.5",
             "source": {
@@ -9622,6 +9664,81 @@
                 }
             ],
             "time": "2022-04-04T07:53:13+00:00"
+        },
+        {
+            "name": "spatie/laravel-markdown",
+            "version": "2.2.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-markdown.git",
+                "reference": "fbc1932b9513f4ee3ec83ac00537d92c188fc3cb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-markdown/zipball/fbc1932b9513f4ee3ec83ac00537d92c188fc3cb",
+                "reference": "fbc1932b9513f4ee3ec83ac00537d92c188fc3cb",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/cache": "^8.49|^9.0",
+                "illuminate/contracts": "^8.37|^9.0",
+                "illuminate/support": "^8.49|^9.0",
+                "illuminate/view": "^8.49|^9.0",
+                "league/commonmark": "^2.2",
+                "php": "^8.0",
+                "spatie/commonmark-shiki-highlighter": "^2.0",
+                "spatie/laravel-package-tools": "^1.4.3"
+            },
+            "require-dev": {
+                "brianium/paratest": "^6.2",
+                "nunomaduro/collision": "^5.3|^6.0",
+                "orchestra/testbench": "^6.15|^7.0",
+                "phpunit/phpunit": "^9.3",
+                "spatie/laravel-ray": "^1.23",
+                "spatie/phpunit-snapshot-assertions": "^4.2",
+                "vimeo/psalm": "^4.8"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Spatie\\LaravelMarkdown\\MarkdownServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\LaravelMarkdown\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A highly configurable markdown renderer and Blade component for Laravel",
+            "homepage": "https://github.com/spatie/laravel-markdown",
+            "keywords": [
+                "Laravel-Markdown",
+                "laravel",
+                "spatie"
+            ],
+            "support": {
+                "source": "https://github.com/spatie/laravel-markdown/tree/2.2.4"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-05-21T11:53:53+00:00"
         },
         {
             "name": "spatie/laravel-package-tools",
@@ -9826,6 +9943,69 @@
                 }
             ],
             "time": "2022-04-21T12:23:20+00:00"
+        },
+        {
+            "name": "spatie/shiki-php",
+            "version": "1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/shiki-php.git",
+                "reference": "34fe61405b405c735c82a9c56feffd3f7c5544ff"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/shiki-php/zipball/34fe61405b405c735c82a9c56feffd3f7c5544ff",
+                "reference": "34fe61405b405c735c82a9c56feffd3f7c5544ff",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4|^8.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^v3.0",
+                "pestphp/pest": "^1.8",
+                "phpunit/phpunit": "^9.5",
+                "spatie/pest-plugin-snapshots": "^1.1",
+                "spatie/ray": "^1.10"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\ShikiPhp\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rias Van der Veken",
+                    "email": "rias@spatie.be",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Highlight code using Shiki in PHP",
+            "homepage": "https://github.com/spatie/shiki-php",
+            "keywords": [
+                "shiki",
+                "spatie"
+            ],
+            "support": {
+                "source": "https://github.com/spatie/shiki-php/tree/1.3.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-06-01T11:28:41+00:00"
         },
         {
             "name": "stella-maris/clock",
@@ -13129,6 +13309,70 @@
             "time": "2022-09-12T13:28:28+00:00"
         },
         {
+            "name": "venturecraft/revisionable",
+            "version": "1.39.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/VentureCraft/revisionable.git",
+                "reference": "24ef304dfe7fe64362cc815faab0fc80030d0c59"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/VentureCraft/revisionable/zipball/24ef304dfe7fe64362cc815faab0fc80030d0c59",
+                "reference": "24ef304dfe7fe64362cc815faab0fc80030d0c59",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~4.0|~5.0|~5.1|^6.0|^7.0|^8.0|^9.0",
+                "laravel/framework": "~5.4|^6.0|^7.0|^8.0|^9.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "~3.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Venturecraft\\Revisionable\\RevisionableServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Venturecraft\\Revisionable": "src/"
+                },
+                "classmap": [
+                    "src/migrations"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Chris Duell",
+                    "email": "me@chrisduell.com"
+                }
+            ],
+            "description": "Keep a revision history for your models without thinking, created as a package for use with Laravel",
+            "homepage": "http://github.com/venturecraft/revisionable",
+            "keywords": [
+                "Audit",
+                "ardent",
+                "history",
+                "laravel",
+                "model",
+                "revision"
+            ],
+            "support": {
+                "issues": "https://github.com/VentureCraft/revisionable/issues",
+                "source": "https://github.com/VentureCraft/revisionable"
+            },
+            "time": "2022-01-20T05:56:12+00:00"
+        },
+        {
             "name": "vimeo/vimeo-api",
             "version": "1.3.0",
             "source": {
@@ -13393,6 +13637,75 @@
                 "source": "https://github.com/webmozarts/assert/tree/1.11.0"
             },
             "time": "2022-06-03T18:03:27+00:00"
+        },
+        {
+            "name": "whitecube/nova-flexible-content",
+            "version": "v1.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/whitecube/nova-flexible-content.git",
+                "reference": "246519e945c839efa86b3e49efaaf09897d9bde0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/whitecube/nova-flexible-content/zipball/246519e945c839efa86b3e49efaaf09897d9bde0",
+                "reference": "246519e945c839efa86b3e49efaaf09897d9bde0",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^8.0|^9.0",
+                "laravel/nova": "^4.0",
+                "nova-kit/nova-packages-tool": "^1.3.1",
+                "php": "^7.3|^8.0"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.2",
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Whitecube\\NovaFlexibleContent\\FieldServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Whitecube\\NovaFlexibleContent\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Toon Van den Bos",
+                    "email": "toon@whitecube.be"
+                }
+            ],
+            "description": "Flexible Content & Repeater Fields for Laravel Nova.",
+            "keywords": [
+                "Flexible",
+                "field",
+                "group",
+                "laravel",
+                "layout",
+                "nova",
+                "repeat"
+            ],
+            "support": {
+                "issues": "https://github.com/whitecube/nova-flexible-content/issues",
+                "source": "https://github.com/whitecube/nova-flexible-content/tree/v1.0.6"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/whitecube",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-12-02T09:32:29+00:00"
         }
     ],
     "packages-dev": [

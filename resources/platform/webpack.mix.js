@@ -29,7 +29,13 @@ mix.js('resources/platform/assets/js/app.js', 'public/platform/js')
         [tailwindcss('./resources/platform/tailwind.config.js')]
     )
     .sass(
-        'resources/marketing/assets/css/app.scss',
+        'resources/marketing/assets/sass/app.scss',
+        'public/marketing/css',
+        {},
+        [tailwindcss('./resources/marketing/marketing.tailwind.config.js')]
+    )
+    .sass(
+        'resources/marketing/assets/sass/vuesora.scss',
         'public/marketing/css',
         {},
         [tailwindcss('./resources/marketing/marketing.tailwind.config.js')]

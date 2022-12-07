@@ -11,7 +11,7 @@
             <div class="container mx-auto">
                 <div class="text">
                     <p><strong>Improve Any Voice Students</strong><br>
-                        Exclusive Discount - Save {{ round(100 - (100 * ($productPrice / \App\Prices::$singingStarterKitFull))) }}%
+                        Exclusive Discount - Save {{ round(100 - (100 * ($productPrice / SingeoPrices::$singingStarterKitFull))) }}%
                     </p>
                 </div>
             </div>

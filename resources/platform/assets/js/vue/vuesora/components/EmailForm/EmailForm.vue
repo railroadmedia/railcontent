@@ -197,7 +197,7 @@ export default {
                 this.loading = true;
 
                 if (this.enableEvent) {
-                    this.$root.$emit(this.eventName, { text });
+                    this.eventBus.emit(this.eventName, { text });
                 }
 
                 this.valueInterface = '';
