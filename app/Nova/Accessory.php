@@ -141,7 +141,6 @@ class Accessory extends Resource
                 ->preset(FeaturePreset::class),
             Boolean::make('Guarantee Badge', 'guaranteed')->default(false)->hideFromIndex(),
             Boolean::make('Free Shipping', 'free_shipping')->default(false)->hideFromIndex(),
-            Boolean::make('Physical')->default(true)->hideFromIndex()->hideFromDetail()->hideWhenCreating()->hideWhenUpdating(),
             Heading::make('Bundle'),
             Image::make('Bundle Image', 'bundle_img')
                 ->disk('nova_s3')

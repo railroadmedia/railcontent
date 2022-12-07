@@ -166,7 +166,6 @@ class Clothing extends Resource
             Boolean::make('Size Case Sensitive', 'size_case_sensitive')->default(false)->hideFromIndex()->help('Size codes are uppercases by default and will be lowercases if checked'),
             Boolean::make('Guarantee Badge', 'guaranteed')->default(false)->hideFromIndex(),
             Boolean::make('Free Shipping', 'free_shipping')->default(false)->hideFromIndex(),
-            Boolean::make('Physical')->default(true)->hideFromIndex()->hideFromDetail()->hideWhenCreating()->hideWhenUpdating(),
             Heading::make('Bundle'),
             Image::make('Bundle Image', 'bundle_img')
                 ->disk('nova_s3')
