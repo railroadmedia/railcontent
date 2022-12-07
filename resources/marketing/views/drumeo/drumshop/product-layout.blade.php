@@ -68,7 +68,8 @@
                 "freeShipping" => $product->free_shipping,
                 "size_case_sensitive" => $product->size_case_sensitive,
                 "category" => strtolower($product->productType->name),
-                'promoCode' => $product->promo_code
+                'promoCode' => $product->promo_code,
+                'bundle' => $product->productType->name === 'Bundles' || str_contains($product->sku, 'member') || str_contains($product->sku, 'products')? true : false,
             ])
         </div>
         <div class="product-wrap lg:w-2/3 px-3 md:px-4">

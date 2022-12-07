@@ -1,19 +1,43 @@
-{{--<section class="catalogue-filters">--}}
-    {{--<div class="container mx-auto">--}}
-        {{--<div class="float-left px-2 md:px-3 w-full no-padding md:w-9/12 filter-wrap">--}}
-            {{--<a href="/shop/" class="filter float-left px-2 md:px-3 w-1/2 @if(!empty($all)) active @endif">All</a>--}}
-            {{--<a href="/lessons/" class="filter float-left px-2 md:px-3 w-1/2 @if(!empty($lessons)) active @endif">Lessons</a>--}}
-            {{--<a href="/clothing/" class="filter float-left px-2 md:px-3 w-1/2 @if(!empty($clothing)) active @endif">Clothing</a>--}}
-        {{--</div>--}}
-        {{--<div class="float-left px-2 md:px-3 w-full no-padding md:w-3/12 select-wrap">--}}
-            {{--<label for="sortBySection" class="overlapping-label"> <span class="label-text">Sort By...</span>--}}
-                {{--<span class="cancel-filter"><i class="fas fa-times"></i></span> </label>--}}
-            {{--<select id="sortBySection" data-filter-type="sort-order" class="catalogue-filter">--}}
-                {{--<option class="selectable-option" disabled selected>Sort By..</option>--}}
-                {{--<option class="selectable-option">Popularity</option>--}}
-                {{--<option class="selectable-option">Price: Low to High</option>--}}
-                {{--<option class="selectable-option">Price: High to Low</option>--}}
-            {{--</select>--}}
-        {{--</div>--}}
-    {{--</div>--}}
-{{--</section>--}}
+<section class="catalogue-filters clearfix">
+    <div class="container mx-auto">
+        <div class="md:flex justify-between md:px-3 lg:px-2">
+            <div class="filter-wrap clearfix">
+                <span
+                    class="filter float-left w-1/2 md:w-auto"
+                    x-bind:class="filter === 'all' && 'active'"
+                    x-on:click="filter = 'all'"
+                >
+                    All
+                </span>
+                <span
+                    class="filter float-left w-1/2 md:w-auto"
+                    x-bind:class="filter === 'lessons' && 'active'"
+                    x-on:click="filter = 'lessons'"
+                >
+                    Lessons
+                </span>
+                <span
+                    class="filter float-left w-1/2 md:w-auto"
+                    x-bind:class="filter === 'accessories' && 'active'"
+                    x-on:click="filter = 'accessories'"
+                >
+                    Accessories
+                </span>
+                <span
+                    class="filter float-left w-1/2 md:w-auto"
+                    x-bind:class="filter === 'clothing' && 'active'"
+                    x-on:click="filter = 'clothing'"
+                >
+                    Clothing
+                </span>
+            </div>
+            <div class="select-wrap relative px-3 md:px-0">
+                <select id="sortBySection" data-filter-type="sort-order" class="catalogue-filter w-full">
+                    <option class="selectable-option" disabled selected>Sort By..</option>
+                    <option class="selectable-option">Price: Low to High</option>
+                    <option class="selectable-option">Price: High to Low</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</section>

@@ -125,7 +125,7 @@
                     @endif
                     @if(!empty($itemURL))
                         <a href="{{ ($itemURL === '/drumshop/') ? '/' : $itemURL }}" class="join outline" @if(!empty($externalURL)) target="_blank" @endif>
-                            @if(!empty($buttonText)) {!!  $buttonText  !!} @else View Product
+                            @if(!empty($buttonText)) {!!  $buttonText  !!} @elseif($itemURL === '/drumshop/') See the deal  @else View Product
                             <i class="fas fa-arrow-right"></i> @endif</a>
                     @endif
                     <p class="disclaimer"><em>@if(!empty($physical)) Worldwide shipping. @endif All prices in USD. <br> <span style="color:red;"> @if(!empty($specialText)) {!!  $specialText  !!} @endif </span></em></p>

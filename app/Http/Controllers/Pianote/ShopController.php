@@ -8,7 +8,7 @@ use App\Models\Product;
 
 class ShopController extends BaseController
 {
-    public function shop()
+    public function shop(Request $request)
     {
         $products = Product::whereHas('brand', fn($query) => $query->where('name', 'pianote'))->where('visible', '=', 1)->where('product_type_id', '!=', 6)->orderBy('display_order')->get();
 
@@ -39,6 +39,7 @@ class ShopController extends BaseController
             'shirts' => $shirts,
             'hoodies' => $hoodies,
             'theme' => 'pianote',
+            'category' => $request->category
         ]);
     }
 

@@ -172,7 +172,7 @@ class CmsClothingSeeder extends Seeder
                     ],
                 ],
                 "visible" => true,
-                "sold_out" => false,
+                "sold_out" => true,
                 "guaranteed" => false,
                 "lifetime_access" => false,
                 "free_shipping" => false,

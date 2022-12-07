@@ -160,6 +160,12 @@
     </style>
 @stop()
 
+@section('body-data')
+    x-data="{
+        filter: '{{ $category !== 'shop' ? $category : 'all' }}'
+    }"
+@endsection
+
 @section('global-body')
     @include('pianote._partials._nav', [
         "cartVersion" => true
@@ -247,7 +253,7 @@
         </section>
 
         {{--    LESSONS    --}}
-        <section class="grid-view category-section" data-category="lessons">
+        <section class="grid-view category-section" data-category="lessons" x-show="filter === 'lessons' || filter === 'all'">
             <ul class="container mx-auto fixed-cards text-center lg:text-left">
                 <li>
                     <h1 class="float-left px-2 md:px-3 w-full">
@@ -257,28 +263,28 @@
                 </li>
 
                 @foreach($lessons as $lesson){
-                @include('pianote.shop._partials._shop-card', [
-                        "sku" => $lesson->sku === 'drumeo' || $lesson->sku === 'pianote' || $lesson->sku === 'singeo' || $lesson->sku === 'guitareo' ? null : $lesson->sku,
-                        "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $lesson->slug ),
-                        "thumbnail" => $lesson->thumbnail,
-                        "packLogo" => $lesson->thumbnail_logo,
-                        "title" => $lesson->name,
-                        "packAuthor" => $lesson->instructor_name,
-                        "cardDescription" => $lesson->short_desc,
-                        "fullPrice" => $lesson->price,
-                        "price" => $lesson->discounted_price === '0.00' || empty($lesson->discounted_price) ? $lesson->price : $lesson->discounted_price,
-                        "category" => strtolower($lesson->productType->name),
-                        "soldOut" => $lesson->sold_out,
-                        "includedMembership" => $lesson->included_edge,
-                        "badgeText" => $lesson->badge_text,
-                ])
+                    @include('pianote.shop._partials._shop-card', [
+                            "sku" => $lesson->sku === 'drumeo' || $lesson->sku === 'pianote' || $lesson->sku === 'singeo' || $lesson->sku === 'guitareo' ? null : $lesson->sku,
+                            "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $lesson->slug ),
+                            "thumbnail" => $lesson->thumbnail,
+                            "packLogo" => $lesson->thumbnail_logo,
+                            "title" => $lesson->name,
+                            "packAuthor" => $lesson->instructor_name,
+                            "cardDescription" => $lesson->short_desc,
+                            "fullPrice" => $lesson->price,
+                            "price" => $lesson->discounted_price === '0.00' || empty($lesson->discounted_price) ? $lesson->price : $lesson->discounted_price,
+                            "category" => strtolower($lesson->productType->name),
+                            "soldOut" => $lesson->sold_out,
+                            "includedMembership" => $lesson->included_edge,
+                            "badgeText" => $lesson->badge_text,
+                    ])
                 }
                 @endforeach
             </ul>
         </section>
 
         {{--   ACCESSORIES     --}}
-        <section class="grid-view category-section" data-category="shirts">
+        <section class="grid-view category-section" data-category="shirts" x-show="filter === 'accessories' || filter === 'all'">
             <ul class="container mx-auto fixed-cards">
                 <li>
                     <h1 class="float-left px-2 md:px-3 w-full">
@@ -287,26 +293,26 @@
                     </h1>
                 </li>
                 @foreach($accessories as $accessory){
-                @include('pianote.shop._partials._shop-card', [
-                        "sku" => $accessory->sku,
-                        "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $accessory->slug ),
-                        "thumbnail" => $accessory->thumbnail,
-                        "badgeText" => $accessory->badge_text,
-                        "title" => $accessory->name,
-                        "cardDescription" => $accessory->short_desc,
-                        "fullPrice" => $accessory->price,
-                        "price" => $accessory->discounted_price === '0.00' || empty($accessory->discounted_price) ? $accessory->price : $accessory->discounted_price,
-                        "category" => strtolower($accessory->productType->name),
-                        "soldOut" => $accessory->sold_out,
-                        "size_case_sensitive" => $accessory->size_case_sensitive,
-                ])
+                    @include('pianote.shop._partials._shop-card', [
+                            "sku" => $accessory->sku,
+                            "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $accessory->slug ),
+                            "thumbnail" => $accessory->thumbnail,
+                            "badgeText" => $accessory->badge_text,
+                            "title" => $accessory->name,
+                            "cardDescription" => $accessory->short_desc,
+                            "fullPrice" => $accessory->price,
+                            "price" => $accessory->discounted_price === '0.00' || empty($accessory->discounted_price) ? $accessory->price : $accessory->discounted_price,
+                            "category" => strtolower($accessory->productType->name),
+                            "soldOut" => $accessory->sold_out,
+                            "size_case_sensitive" => $accessory->size_case_sensitive,
+                    ])
                 }
                 @endforeach
             </ul>
         </section>
 
         {{--   SHIRTS     --}}
-        <section class="grid-view category-section" data-category="shirts">
+        <section class="grid-view category-section" data-category="shirts" x-show="filter === 'clothing' || filter === 'all'">
             <ul class="container mx-auto fixed-cards">
                 <li>
                     <h1 class="float-left px-2 md:px-3 w-full">
@@ -315,27 +321,27 @@
                     </h1>
                 </li>
                 @foreach($shirts as $shirt){
-                @include('pianote.shop._partials._shop-card', [
-                    "sku" => $shirt->sku,
-                    "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $shirt->slug ),
-                    "thumbnail" => $shirt->thumbnail,
-                    "badgeText" => $shirt->badge_text,
-                    "title" => $shirt->name,
-                    "cardDescription" => $shirt->short_desc,
-                    "fullPrice" => $shirt->price,
-                    "price" => $shirt->discounted_price === '0.00' || empty($shirt->discounted_price) ? $shirt->price : $shirt->discounted_price,
-                    "category" => strtolower($shirt->productType->name),
-                    "sizes" => $shirt->sizes,
-                    "soldOut" => $shirt->sold_out,
-                    "size_case_sensitive" => $shirt->size_case_sensitive,
-                ])
+                    @include('pianote.shop._partials._shop-card', [
+                        "sku" => $shirt->sku,
+                        "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $shirt->slug ),
+                        "thumbnail" => $shirt->thumbnail,
+                        "badgeText" => $shirt->badge_text,
+                        "title" => $shirt->name,
+                        "cardDescription" => $shirt->short_desc,
+                        "fullPrice" => $shirt->price,
+                        "price" => $shirt->discounted_price === '0.00' || empty($shirt->discounted_price) ? $shirt->price : $shirt->discounted_price,
+                        "category" => strtolower($shirt->productType->name),
+                        "sizes" => $shirt->sizes,
+                        "soldOut" => $shirt->sold_out,
+                        "size_case_sensitive" => $shirt->size_case_sensitive,
+                    ])
                 }
                 @endforeach
             </ul>
         </section>
 
         {{--   HOODIES     --}}
-        <section class="grid-view category-section" data-category="shirts">
+        <section class="grid-view category-section" data-category="shirts" x-show="filter === 'clothing' || filter === 'all'">
             <ul class="container mx-auto fixed-cards">
                 <li>
                     <h1 class="float-left px-2 md:px-3 w-full">
@@ -344,20 +350,20 @@
                     </h1>
                 </li>
                 @foreach($hoodies as $hoodie){
-                @include('pianote.shop._partials._shop-card', [
-                    "sku" => $hoodie->sku,
-                    "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hoodie->slug ),
-                    "thumbnail" => $hoodie->thumbnail,
-                    "badgeText" => $hoodie->badge_text,
-                    "title" => $hoodie->name,
-                    "cardDescription" => $hoodie->short_desc,
-                    "fullPrice" => $hoodie->price,
-                    "price" => $hoodie->discounted_price === '0.00' || empty($hoodie->discounted_price) ? $hoodie->price : $hoodie->discounted_price,
-                    "category" => strtolower($hoodie->productType->name),
-                    "sizes" => $hoodie->sizes,
-                    "soldOut" => $hoodie->sold_out,
-                    "size_case_sensitive" => $hoodie->size_case_sensitive,
-                ])
+                    @include('pianote.shop._partials._shop-card', [
+                        "sku" => $hoodie->sku,
+                        "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hoodie->slug ),
+                        "thumbnail" => $hoodie->thumbnail,
+                        "badgeText" => $hoodie->badge_text,
+                        "title" => $hoodie->name,
+                        "cardDescription" => $hoodie->short_desc,
+                        "fullPrice" => $hoodie->price,
+                        "price" => $hoodie->discounted_price === '0.00' || empty($hoodie->discounted_price) ? $hoodie->price : $hoodie->discounted_price,
+                        "category" => strtolower($hoodie->productType->name),
+                        "sizes" => $hoodie->sizes,
+                        "soldOut" => $hoodie->sold_out,
+                        "size_case_sensitive" => $hoodie->size_case_sensitive,
+                    ])
                 }
                 @endforeach
 
@@ -367,6 +373,7 @@
 
     @include('pianote._partials._footer')
 
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.3/moment-timezone-with-data.min.js"></script>

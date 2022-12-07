@@ -127,7 +127,7 @@ class CmsLessonSeeder extends Seeder
                 ],
                 "specs" => [
                 ],
-                "visible" => true,
+                "visible" => false,
                 "sold_out" => false,
                 "freeBonus" => false,
                 "guaranteed" => true,
@@ -1228,7 +1228,7 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                 "meta_img" => "",
                 "short_desc" => "Perfectly structured step by step lessons, with teachers that are fun to watch, and unlimited support - 100% guaranteed. Learn piano online the easy way.",
                 "header_text" => "",
-                "price" => 197,
+                "price" => 240,
                 "discounted_price" => "",
                 "features" => [
                 ],
@@ -1610,7 +1610,7 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                 "meta_img" => "",
                 "short_desc" => "Unlimited guitar lessons, a huge song library, and ongoing support from real teachers.",
                 "header_text" => "",
-                "price" => 127,
+                "price" => 240,
                 "discounted_price" => "",
                 "features" => [
 
@@ -2940,7 +2940,7 @@ This powerful resource makes it easy to access your lessons anytime from virtual
                 "meta_img" => "",
                 "short_desc" => "",
                 "header_text" => "",
-                "price" => 127,
+                "price" => 240,
                 "discounted_price" => "",
                 "features" => [
 
@@ -2982,7 +2982,7 @@ This powerful resource makes it easy to access your lessons anytime from virtual
                 ],
                 "specs" => [
                 ],
-                "visible" => true,
+                "visible" => false,
                 "sold_out" => false,
                 "guaranteed" => false,
                 "lifetime_access" => false,
