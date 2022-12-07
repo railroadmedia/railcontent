@@ -520,11 +520,7 @@ Route::domain('{musoraDomain}')
         Route::get(
             '/jump-to-content-id/{contentId}',
             [ContentPagesController::class, 'jumpToContentId']
-        )
-            ->name('platform.content.jump-to-content-id');
-
-        Route::get(
-            ->name('platform.content.jump-to-content-id');
+        );
 
         Route::get('/jump-to-continue-content/{contentId}', [ContentPagesController::class, 'jumpToContinueContent'])
             ->name('platform.content.jump-to-continue-content');
