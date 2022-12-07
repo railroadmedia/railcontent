@@ -41,13 +41,13 @@
     <link href="https://fonts.googleapis.com/css?family=Oswald:500" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
-    
+
     <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
 
     <link href="{{ asset('/marketing/parcel/pianote/shop.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/css/vuesora.css') }}" rel="stylesheet">
-    
+
     <style>
         .shipping-delay .delay-bar {
             background:#e3e3e3;
@@ -219,7 +219,7 @@
                         Cart Subtotal({{ Session::get('cartNumberOfItems') }}):
                         <strong>${{ Session::get('cartSubTotal') }}</strong>
                     </h5>
-                    <a href="{{ get_legacy_brand_base_url("musora") }}/order/{{ $brand }}" class="checkout-button"><i class="fas fa-cart-plus"></i> Checkout</a>
+                    <a href="{{ get_musora_brand_base_url() }}/order/{{ $brand }}" class="checkout-button"><i class="fas fa-cart-plus"></i> Checkout</a>
                 </div>
             </div>
         </section>

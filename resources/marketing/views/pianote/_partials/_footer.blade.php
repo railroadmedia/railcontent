@@ -56,11 +56,11 @@
         </div>
         <div class="footer-link-wrap">
             <h1>Other Sites</h1>
-            <p><a rel="noopener" href="{{ get_legacy_brand_base_url("musora") }}">Musora</a><br>
+            <p><a rel="noopener" href="{{ get_musora_brand_base_url() }}">Musora</a><br>
                 <a rel="noopener" href="{{ get_legacy_brand_base_url("drumeo") }}">Drumeo</a><br>
                 <a rel="noopener" href="{{ get_legacy_brand_base_url("guitareo") }}">Guitareo</a><br>
                 <a rel="noopener" href="{{ get_legacy_brand_base_url("singeo") }}">Singeo</a><br>
-                <a rel="noopener" href="{{ get_legacy_brand_base_url("musora") }}">Recordeo</a></p>
+                <a rel="noopener" href="{{ get_musora_brand_base_url() }}">Recordeo</a></p>
         </div>
     </div>
     <div class="footer-bottom">
