@@ -87,7 +87,7 @@ class Lesson extends Resource
             Text::make('Meta Image', 'meta_img')->hideFromIndex()->hideFromDetail(),
             Text::make('Promo Code', 'promo_code')->hideFromIndex(),
             Currency::make('Price')->required(),
-            Currency::make('Discounted Price', 'discounted_price')->hideFromIndex()->help('Leave it blank if it is not on discount.'),
+            Currency::make('Discounted Price', 'discounted_price')->hideFromIndex(),
             Boolean::make('Sold Out', 'sold_out')->default(false)->hideFromIndex(),
             Heading::make('Shop Card'),
             Text::make('Badge Text', 'badge_text')->hideFromIndex(),
@@ -156,8 +156,8 @@ class Lesson extends Resource
             Text::make('Shop Card Description', 'short_desc')->hideFromIndex(),
             Boolean::make('Visible On Shop Page','visible')->default(true)->hideFromIndex(),
             Boolean::make('Included Edge', 'included_edge')->default(false)->hideFromIndex(),
-            Number::make('Display order', 'display_order')->required()->help('Shop cards will be displayed in the order of this.'),
-            Heading::make('Page'),
+            Number::make('Display order', 'display_order')->required(),
+            Heading::make('Product page'),
             Text::make('Header Text', 'header_text')->hideFromIndex(),
             Text::make('Subheader Text', 'subheader_text')->hideFromIndex(),
             Text::make('Special Text', 'special_text')->hideFromIndex(),
@@ -194,11 +194,11 @@ class Lesson extends Resource
             Text::make('Page Logo', 'page_logo')->hideFromIndex()->hideFromDetail(),
             Text::make('Video Link', 'video_src')
                 ->hideFromIndex(),
-            Markdown::make('Overview')->hideFromIndex()->help('If you want to make text bold, wrap with ** **. ex) ** Text ** Text'),
+            Markdown::make('Overview')->hideFromIndex(),
             Flexible::make('Benefits')
                 ->addLayout(BenefitLayout::class)
                 ->preset(BenefitPreset::class)
-                ->help('There has to be 2 benefits.'),
+                ->help('There has to be 2 benefits or leave it blank.'),
             Text::make('Instructor Name', 'instructor_name')
                 ->hideFromIndex(),
             Image::make('Instructor Image', 'product_img')
@@ -274,7 +274,7 @@ class Lesson extends Resource
                     return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
                 }),
             Text::make('Bundle Description', 'bundle_desc')->hideFromIndex(),
-            Boolean::make('Bundle Free Shipping', 'bundle_free_shipping')->default(false)->hideFromIndex(),
+            Boolean::make('Bundle Free Shipping', 'bundle_free_shipping')->default(false)->hideFromIndex()->hideFromDetail()->hideWhenCreating()->hideWhenUpdating(),
         ];
     }
 
