@@ -22,7 +22,7 @@
                     @endif
                     @if(!empty($packLogo))
                         <div class="logo">
-                            <img src="{{ $packLogo }}" alt="product logo">
+                            <img src="{{ $packLogo }}" alt="{{ $title }} logo">
                         </div>
                     @endif
                     <i class="fas fa-arrow-right hover-icon"></i>
@@ -76,12 +76,14 @@
                         <p class="description" style="top: -13px;position: relative;margin: 0;"><em class="text-red">Or free with Drumeo</em></p>
                     @endif
                     @if(!$soldOut)
-                        @if(!empty($sku) && count($sizes) > 0)
+                        @if(!empty($sizes) && count($sizes) > 0)
                             <select class="pack-pick" title="Shirt Size" required>
                                 <option hidden value="">Choose Size</option>
                                 @foreach($sizes as $size)
                                     <option
-                                        @if(!empty($physical) && $physical && $products[$sku.'-'.$size->sku]->isProductSoldOut()) disabled @endif value="?products[{!! $sku !!}-{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}]=1"
+                                        @if(!empty($physical) && $physical && $products[$sku.'-'.$size->sku]->isProductSoldOut()) disabled @endif
+                                        {{-- @if($productStock[$sku.'-'.$size->code]->isProductSoldOut()) disabled @endif --}}
+                                        value="?products[{!! $sku !!}-{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}]=1"
                                         data-product-json='{ "{!! $sku !!}-{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}": 1 }'
                                     >
                                         {{ $size->name }}
@@ -128,7 +130,7 @@
                             @if(!empty($buttonText)) {!!  $buttonText  !!} @elseif($itemURL === '/drumshop/') See the deal  @else View Product
                             <i class="fas fa-arrow-right"></i> @endif</a>
                     @endif
-                    <p class="disclaimer"><em>@if(!empty($physical)) Worldwide shipping. @endif All prices in USD. <br> <span style="color:red;"> @if(!empty($specialText)) {!!  $specialText  !!} @endif </span></em></p>
+                    <p class="disclaimer"><em>@if($category !== 'lessons') Worldwide shipping. @endif All prices in USD. <br> <span style="color:red;"> @if(!empty($specialText)) {!!  $specialText  !!} @endif </span></em></p>
                 </div>
             </div>
         @endif

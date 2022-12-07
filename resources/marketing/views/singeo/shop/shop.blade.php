@@ -285,7 +285,7 @@
                     </a>
                 </div>
                 <div class="float-left w-full px-2 md:px-3 md:w-1/2 card-wrap">
-                    <a href="/singing-starter-kit" class="flex flex-row text-white rounded-xl mb-3 md:mb-5 overflow-hidden relative w-full sm:text-left px-5 lg:px-10 py-10 sm:py-10 lg:py-28 xl:py-32">
+                    <a href="/shop/singing-starter-kit" class="flex flex-row text-white rounded-xl mb-3 md:mb-5 overflow-hidden relative w-full sm:text-left px-5 lg:px-10 py-10 sm:py-10 lg:py-28 xl:py-32">
                         <div class="relative z-10 inline-block w-full sm:w-auto text-center mx-0">
                             <img class="h-20 md:h-16 lg:h-28" src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://singeo.s3.amazonaws.com/products/singing-starter-kit/logo.png" alt="essential bundle logo"><br>
                             <p class="leading-tight mt-2 mb-2 lg:mb-3 lg:mt-5 text-sm">

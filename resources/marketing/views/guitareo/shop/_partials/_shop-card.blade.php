@@ -112,7 +112,7 @@
                             >
                                 <button class="join">
                                     <span class="initial"><i class="fas fa-cart-plus"></i> Add To Cart</span>
-                                    {{--<span class="loading"><i class="fad fa-spinner-third fa-spin"></i> Adding to cart...</span>--}}
+                                    <span class="loading"><i class="fad fa-spinner-third fa-spin"></i> Adding to cart...</span>
                                 </button>
                             </a>
                         @endif
