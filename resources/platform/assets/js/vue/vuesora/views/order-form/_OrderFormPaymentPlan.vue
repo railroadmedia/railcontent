@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-column mb-1">
+    <div class="flex flex-column mb-4">
         <div class="flex flex-row flex-wrap nmh-1 align-v-center">
             <div class="flex flex-column ph-1 xs-12 sm-6 mb-1 pt-1">
                 <div class="form-group">

@@ -54,7 +54,7 @@
               <div class="border-bottom"></div>
             </div>
             <div class="summary-container">
-                <div class="summary-container-inner">
+                <div class="summary-container-inner text-sm">
                     <div class="summary-row">
                         <div class="summary">Subtotal</div>
                         <div v-if="subTotalBeforeDiscounts() !== subTotalAfterDiscounts()" class="due">
