@@ -136,6 +136,7 @@
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/drumeo/ba-bbq.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/drumeo/pack-drumshop.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/sliding-anchor.js') }}"></script>
 
     {{-- Platform --}}
     <script src="{{ mix('/platform/js/manifest.js') }}"></script>

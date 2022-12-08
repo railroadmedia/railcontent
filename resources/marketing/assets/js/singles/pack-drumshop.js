@@ -1,14 +1,4 @@
 $(document).ready(function () {
-    //scrolls window when clicking on ID link
-    $('.anchor-slide').on('click', function (event) {
-        event.preventDefault();
-
-        var anchor = $(this).attr('href').replace('/', '');
-
-        $('html, body').stop().animate({
-            scrollTop: $(anchor).offset().top
-        }, 1000);
-    });
 
     // Setup Slick slider
     $('.slider-for').slick({
