@@ -251,7 +251,7 @@ class SalesController extends BaseController
         $products = $this->productRepository->all();
         $products = array_combine(array_entity_column($products, 'getSku'), $products);
 
-        return view('drumeo.sales.2023-home', ['products' => $products, 'theme' => 'drumeo']);
+        return view('musora.sales.subscription-homepages', ['products' => $products, 'theme' => 'drumeo']);
     }
     public function salesStudents()
     {
