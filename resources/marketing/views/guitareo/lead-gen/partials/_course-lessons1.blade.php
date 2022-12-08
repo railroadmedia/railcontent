@@ -6,7 +6,7 @@
 
 <section class="lesson-catalogue guitar-tricks">
     <div class="max-w-6xl mx-auto clearfix">
-        <div class="list-wrapper float-left w-full">
+        <div class="list-wrapper w-full overflow-auto">
                 @foreach($bonuses as $bonus)
                     <a href="{{ $rootLink }}{{ $bonus['URL'] }}" class="lesson-row float-left w-full text-center">
                         <div class="lesson-number float-left px-3 md:px-4">{{ $bonus['lessonNumber'] }}</div>

@@ -19,7 +19,7 @@
                 @if(!empty($relatedLesson['external_link']))
                     <a
                             href="{{ $relatedLesson['external_link'] }}"
-                            class="btn short text-pianote flat bg-pianote"
+                            class="btn short text-{{$relatedLesson['brand']}} flat bg-{{$relatedLesson['brand']}}"
                             target="_blank"
                     >
                         <i class="fas fa-external-link mr-1"></i>
@@ -47,18 +47,18 @@
                 @if(!empty($relatedLesson['content_id']))
                     @if($hasAccess)
                         <a
-                            href="{{ url()->route('platform.content.jump-to-content-id', [$relatedLesson['content_id']]) }}"
-                            class="btn short text-pianote flat bg-pianote"
+                            href="{{ url()->route('platform.content.jump-to-content-id', [$relatedLesson['content_id'], 'brand'=>$relatedLesson['brand']]) }}"
+                            class="btn short text-{{$relatedLesson['brand']}} flat bg-{{$relatedLesson['brand']}}"
                             target="_blank"
                         >
-                            <i class="icon-pianote mr-1"></i>
-                            <span class="hide-xs-only">Watch on&nbsp;</span>Pianote
+                            <i class="icon-{{$relatedLesson['brand']}} mr-1"></i>
+                            <span class="hide-xs-only">Watch on&nbsp;</span>{{$relatedLesson['brand']}}
                         </a>
                     @else
                         <button class="btn short" data-open-modal="loginModal">
                             <span class="text-grey-2 bg-grey-2 flat">
                                 <i class="fas fa-sign-in mr-1"></i>
-                                Login <span class="hide-xs-only">&nbsp;To Pianote</span>
+                                Login <span class="hide-xs-only">&nbsp;To {{$relatedLesson['brand']}}</span>
                             </span>
                         </button>
                     @endif

@@ -1,0 +1,947 @@
+@import "_variables";
+
+h1, h2, h3, h4, h5, h6, p, li {
+  font-family: $opensans;
+}
+
+h1 {
+  font-size: 23px;
+  line-height: 1.2em;
+  margin: 0 auto;
+  @include tablet {
+    font-size: 35px;
+  }
+  @include desktop {
+    font-size: 48px;
+  }
+
+  strong {
+    font-weight: 900;
+  }
+
+  sup {
+    font-size: 50%;
+    top: -0.75em;
+  }
+
+  &.permanent {
+    font-size: 35px;
+    @include tablet {
+      font-size: 55px;
+    }
+    @include desktop {
+      font-size: 70px;
+    }
+  }
+}
+
+h2 {
+  font-size: 21px;
+  line-height: 1.2em;
+  margin: 0 auto;
+  @include tablet {
+    font-size: 23px;
+  }
+  @include desktop {
+    font-size: 35px;
+  }
+
+  strong {
+    font-weight: 900;
+  }
+}
+
+h3 {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1em;
+  margin: 0 auto;
+  @include tablet {
+    font-size: 18px;
+  }
+  @include desktop {
+    font-size: 22px;
+  }
+}
+
+h4 {
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1em;
+  margin: 0 auto;
+  @include tablet {
+    font-size: 16px;
+  }
+  @include desktop {
+    font-size: 17px;
+  }
+}
+
+p {
+  font-size: 13px;
+  line-height: 1.7em;
+  margin: 0 auto;
+  @include tablet {
+    font-size: 14px;
+  }
+  @include desktop {
+    font-size: 15px;
+  }
+}
+
+.text-yellow,
+a.text-yellow:hover {
+  color: #ffdb00;
+}
+
+.text-blue {
+  color: $drumeoBlue;
+}
+
+.text-grey {
+  color: #646464;
+}
+
+.text-white {
+  color: #fff;
+}
+
+.permanent {
+  font-family: "Permanent Marker", sans-serif;
+}
+
+.triangle-bg {
+  width: 100%;
+  padding-bottom: 31.25%;
+  background: transparent center center/cover no-repeat;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  @include desktop {
+    background-size: 1500px;
+  }
+}
+
+.play-button {
+  cursor: pointer;
+  outline: none;
+  transition: opacity .3s;
+  background: rgba(0, 0, 0, 0.6);
+  border: 3px solid #fff;
+  border-radius: 200px;
+  line-height: 1em;
+  font-size: 29px;
+  padding: 18px 22px;
+  @include tablet {
+    font-size: 35px;
+    padding: 22px 27px;
+    border-width: 4px;
+  }
+  @include desktop {
+    font-size: 39px;
+    padding: 25px 30px;
+  }
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.header {
+  background: #000c17 55% center/950px no-repeat;
+  position: relative;
+  color: #FFF;
+  padding: 25px 10px 50px;
+  @include tablet {
+    padding: 35px 0 70px;
+    background-position: center top;
+    background-size: 1450px;
+  }
+  @include desktop {
+    background-size: 1550px;
+    padding-bottom: 70px;
+  }
+
+  &:after {
+    content: ' ';
+    position: absolute;
+    bottom: 0;
+    height: 53%;
+    background: linear-gradient(0deg, #000c17, rgba(9, 42, 78, 0.5) 60%, transparent);
+    z-index: 1;
+    left: 0;
+    right: 0;
+  }
+
+  .row {
+    position: relative;
+    z-index: 2;
+  }
+
+  .logo {
+    width: 230px;
+    @include tablet {
+      width: 350px;
+    }
+    @include desktop {
+      width: 400px;
+    }
+  }
+
+  .play-button {
+    margin: 150px auto 50px;
+    @include tablet {
+      margin: 190px auto 120px;
+    }
+    @include desktop {
+      margin: 200px auto 130px;
+    }
+  }
+
+  h1 {
+    font-size: 22px;
+    @include tablet {
+      font-size: 25px;
+    }
+    @include desktop {
+      font-size: 40px;
+    }
+  }
+
+  .join {
+    width: 95%;
+    margin: 15px auto;
+    @include tablet {
+      margin: 25px auto;
+      font-size: 35px;
+    }
+    @include desktop {
+      margin: 30px auto;
+      font-size: 40px;
+      padding: 20px;
+
+    }
+  }
+
+  p {
+    font: 400 13px/1.2em $robotocondensed;
+    text-transform: uppercase;
+    @include tablet {
+      font-size: 17px;
+    }
+    @include desktop {
+      font-size: 19px;
+    }
+    s {
+      opacity: 0.6;
+    }
+
+    .bigger {
+      font-size: 15px;
+      @include tablet {
+        font-size: 18px;
+      }
+      @include desktop {
+        font-size: 21px;
+      }
+    }
+
+    .smaller {
+      font-size: 13px;
+      @include tablet {
+        //margin: 7px auto 0;
+        font-size: 14px;
+      }
+      @include desktop {
+        font-size: 15px;
+      }
+    }
+
+  }
+
+}
+
+.power-outage {
+  position: relative;
+  background: #000c17;
+  color: #fff;
+  padding: 0 15px 30px;
+  margin-bottom: -90px;
+  @include tablet {
+    padding: 30px 30px 0;
+    margin-bottom: -50px;
+  }
+  @include desktop {
+    padding: 90px 30px 0;
+    margin-bottom: -10px;
+  }
+
+  .row {
+    position: relative;
+    z-index: 2;
+  }
+
+  h1 {
+    transform: rotate(-10deg);
+    display: inline-block;
+    margin: 0 0 40px;
+    @include tablet {
+      margin: 0 270px 50px 0;
+    }
+    @include desktop {
+      margin: 0 300px 60px 0;
+    }
+  }
+
+  .flex-container {
+    @include tablet {
+      display: flex;
+      align-items: flex-start;
+      text-align: left;
+      margin: 0 auto;
+      max-width: 780px;
+    }
+  }
+
+  p {
+    width: 100%;
+    max-width: 310px;
+    @include tablet {
+      max-width: 100%;
+      padding-right: 20px;
+    }
+  }
+
+  img {
+    width: 250px;
+    margin: 0 auto 25px;
+    @include tablet {
+      width: 240px;
+      min-width: 240px;
+      order: 1;
+      margin: 0 auto;
+
+    }
+    @include desktop {
+      width: 300px;
+      min-width: 300px;
+    }
+  }
+}
+
+.amplify-songs {
+  background: #000c18 center top/900px no-repeat;
+  position: relative;
+  color: #fff;
+  padding: 150px 15px 100px;
+  @include tablet {
+    padding: 210px 0 150px;
+    background-size: 1400px;
+  }
+  @include desktop {
+    padding: 200px 0 200px;
+    background-size: 1500px;
+  }
+
+  h1 {
+    display: inline-block;
+    margin: 0 0 200px;
+    @include tablet {
+      margin: 0 0 410px 210px;
+    }
+    @include desktop {
+      margin: 0 0 510px 300px;
+    }
+  }
+
+  .emoji-point {
+    margin: 0 auto 30px;
+    @include tablet {
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    i {
+      font-size: 50px;
+      @include tablet {
+        font-size: 60px;
+      }
+    }
+
+    h3 {
+      font-size: 14px;
+      line-height: 1em;
+      margin: 17px auto 10px;
+      @include tablet {
+        font-size: 17px;
+        margin: 23px auto 17px;
+      }
+      @include desktop {
+        font-size: 22px;
+      }
+
+      strong {
+        font-weight: 900;
+      }
+    }
+    p {
+      width: 100%;
+      max-width: 310px;
+      @include tablet {
+        max-width: 100%;
+      }
+    }
+  }
+}
+
+.lesson-descriptions {
+  background: #000c17 center top/770px no-repeat;
+  color: #fff;
+  position: relative;
+  padding: 0 20px 60px;
+  @include tablet {
+    padding: 20px 10px 150px;
+    background-size: 1400px;
+  }
+  @include desktop {
+    padding: 70px 0 270px;
+    background-size: 1500px;
+  }
+
+  .row {
+    max-width: 1000px;
+  }
+
+  .content-wrap {
+    float: right;
+    max-width: 500px;
+    @include desktop {
+      max-width: 580px;
+    }
+
+    .text {
+      padding-left: 33%;
+      @include tablet {
+        padding-left: 0;
+      }
+    }
+  }
+
+  h1 {
+    transform: rotate(-5deg);
+    display: inline-block;
+  }
+
+  h4 {
+    font-weight: 900;
+    margin: 20px auto 0;
+    @include tablet {
+      margin: 60px auto 0;
+    }
+  }
+
+  p {
+    margin: 20px auto;
+    text-shadow: 0 0 15px #000c17;
+  }
+
+  .question-dropdown {
+    border-radius: 10px;
+    background: #000c17;
+    border: 2px solid #001b34;
+    margin: 5px auto 0;
+    height: auto;
+    max-height: 44px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+    transform: translateZ(0);
+
+    &:hover {
+      background: lighten(#000c17, 10%);
+    }
+
+    &.active {
+      max-height: 1000px;
+    }
+
+    .drop-down-wrap {
+      position: relative;
+
+      p {
+        margin: 0 auto 15px;
+
+        &.details {
+          font: 400 13px/1.2em $opensans;
+          text-transform: uppercase;
+          position: absolute;
+          top: 50%;
+          right: 0;
+          transform: translate(0, -50%);
+          margin: 0 auto;
+        }
+      }
+
+      .week-number {
+        background: $drumeoBlue;
+        text-transform: uppercase;
+        font: 400 14px/40px $opensans;
+        height: 100%;
+        position: absolute;
+
+        .number {
+          font-size: 25px;
+          vertical-align: sub;
+        }
+      }
+
+      .question {
+        height: 40px;
+        width: 100%;
+        position: relative;
+
+        h2 {
+          font: 700 14px/1.2em "Permanent Marker", sans-serif;
+          position: absolute;
+          top: 50%;
+          left: 0;
+          transform: translate(0, -50%);
+          user-select: none;
+          margin: 0 auto;
+          @include tablet {
+            font-size: 15px;
+          }
+          @include desktop {
+            font-size: 18px;
+          }
+        }
+      }
+    }
+
+    .fa-chevron-down {
+      color: #ffdb00;
+      line-height: 40px;
+      transition: all .3s ease-in-out;
+      font-size: 14px;
+      @include tablet {
+        font-size: 18px;
+      }
+
+      &.rotated {
+        transform: rotate(-180deg);
+      }
+    }
+  }
+}
+
+.meet-instructor {
+  background: #000c17 50% top/620px no-repeat;
+  color: #fff;
+  position: relative;
+  padding: 0 10px 20px;
+  @include tablet {
+    background-size: 1400px;
+    padding: 20px 15px;
+    margin-bottom: -40px;
+  }
+  @include desktop {
+    padding: 20px;
+    background-size: 1500px;
+    margin-bottom: -90px;
+  }
+
+  .row {
+    max-width: 1020px;
+    position: relative;
+    z-index: 2;
+  }
+
+  h1 {
+    margin: 0 auto;
+    text-shadow: 0 0 50px #010d19;
+    transform: rotate(-2deg);
+  }
+
+  h2 {
+    width: auto;
+    display: inline-block;
+    transform: rotate(-2deg);
+    text-shadow: 0 0 50px #010d19;
+    padding: 0 10px;
+    @include tablet {
+      background-color: #000c17;
+    }
+  }
+
+  .play-button {
+    margin: 70px auto;
+    @include tablet {
+      margin: 190px auto 120px;
+    }
+    @include desktop {
+      margin: 200px auto 160px;
+    }
+  }
+
+  .bio {
+    background: rgba(0, 12, 23, 0.9);
+    border-radius: 10px;
+    max-width: 520px;
+    margin: 0 auto;
+    text-align: left;
+    padding: 15px 20px;
+    @include tablet {
+      padding: 30px 40px;
+    }
+  }
+}
+
+.icon-grid {
+  position: relative;
+  background: #000c17;
+  color: #fff;
+  padding: 40px 10px 70px;
+  @include tablet {
+    padding: 100px 20px 100px;
+  }
+  @include desktop {
+    padding: 220px 0 150px;
+  }
+
+  h1 {
+    transform: rotate(3deg);
+    display: inline-block;
+    margin: 0 0 40px;
+    @include tablet {
+      margin: 0 0 60px 270px;
+    }
+    @include desktop {
+      margin: 0 0 90px 290px;
+    }
+  }
+
+  p {
+    margin: 15px auto 0;
+    @include desktop {
+      margin: 20px auto 0;
+    }
+  }
+
+  .circle-point {
+    margin: 30px auto 0;
+    @include tablet {
+      margin: 40px auto 0;
+    }
+    @include desktop {
+      margin: 50px auto 0;
+    }
+
+    i {
+      border: 2px solid #ffdb00;
+      border-radius: 50%;
+      text-align: center;
+      font-size: 35px;
+      line-height: 66px;
+      height: 70px;
+      width: 70px;
+      margin: 0 auto 15px;
+      @include desktop {
+        margin: 0;
+        line-height: 76px;
+        height: 80px;
+        width: 80px;
+        font-size: 35px;
+        float: left;
+      }
+    }
+
+    p {
+      margin: 0 auto;
+      max-width: 310px;
+      @include tablet {
+        max-width: 250px;
+      }
+      @include desktop {
+        width: calc(100% - 80px);
+        text-align: left;
+        padding-left: 15px;
+        float: left;
+        max-width: 390px;
+      }
+
+      strong {
+        font-size: 14px;
+        margin: 0 auto 5px;
+        display: inline-block;
+        @include tablet {
+          font-size: 15px;
+        }
+        @include desktop {
+          font-size: 17px;
+        }
+      }
+    }
+  }
+}
+
+.guarantee {
+  background: #001324;
+  color: #fff;
+  padding: 60px 0 30px;
+  -webkit-clip-path: polygon(0% 30px, 100% 0%, 100% 100%, 0% 100%);
+  clip-path: polygon(0% 30px, 100% 0%, 100% 100%, 0% 100%);
+  margin-top: -30px;
+  @include tablet {
+    padding: 100px 20px 60px;
+    -webkit-clip-path: polygon(0% 40px, 100% 0%, 100% 100%, 0% 100%);
+    clip-path: polygon(0% 40px, 100% 0%, 100% 100%, 0% 100%);
+    margin-top: -40px;
+  }
+  @include desktop {
+    padding: 140px 0 80px;
+    -webkit-clip-path: polygon(0% 80px, 100% 0%, 100% 100%, 0% 100%);
+    clip-path: polygon(0% 80px, 100% 0%, 100% 100%, 0% 100%);
+    margin-top: -80px;
+  }
+
+  .guarantee-badge {
+    width: 120px;
+    @include tablet {
+      width: 180px;
+      order: 1;
+    }
+    @include desktop {
+      width: 240px;
+    }
+  }
+
+  .flex-container {
+    margin: 15px auto 0;
+    padding: 0 15px;
+    @include tablet {
+      margin: 0 auto;
+      padding: 0;
+      display: flex;
+      align-items: flex-start;
+    }
+    @include desktop {
+      max-width: 860px;
+      align-items: center;
+    }
+
+    .text-wrap {
+      margin: 15px auto 0;
+      @include tablet {
+        margin: 0;
+        padding-right: 15px;
+      }
+      @include desktop {
+        padding-right: 40px;
+      }
+
+
+      h2 {
+        margin: 0 auto 15px;
+        width: 100%;
+        max-width: 310px;
+        @include tablet {
+          max-width: 100%;
+          margin: 0 auto 20px;
+        }
+      }
+
+      p {
+        line-height: 2em;
+        margin: 0 auto;
+        width: 100%;
+        max-width: 310px;
+        @include tablet {
+          max-width: 100%;
+        }
+      }
+    }
+  }
+}
+
+.final {
+  background: #000c17 65% 50%/cover;
+  color: #fff;
+  text-align: center;
+  padding: 50px 10px;
+  @include tablet {
+    padding: 80px 10px;
+  }
+  @include desktop {
+    padding: 100px 20px;
+  }
+
+  .logo img {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto 40px;
+    @include tablet {
+      max-width: 430px;
+      margin: 0 auto 50px;
+    }
+    @include desktop {
+      max-width: 550px;
+      margin: 0 auto 60px;
+    }
+  }
+
+  .join {
+    width: 100%;
+    max-width: 330px;
+    font-size: 27px;
+    padding: 16px;
+    margin: 30px auto;
+    @include tablet {
+      font-size: 43px;
+      padding: 22px;
+      max-width: 575px;
+      margin: 25px auto;
+    }
+    @include desktop {
+      max-width: 920px;
+      margin: 30px auto;
+    }
+  }
+
+  h4 {
+    font-family: $robotocondensed;
+    text-transform: uppercase;
+    margin: 0 auto;
+    line-height: 1.2em;
+
+    s {
+      opacity: 0.7;
+    }
+
+    .bigger {
+      font-size: 15px;
+      @include tablet {
+        font-size: 18px;
+      }
+      @include desktop {
+        font-size: 21px;
+      }
+    }
+
+    .smaller {
+      font-size: 13px;
+      @include tablet {
+        //margin: 7px auto 0;
+        font-size: 14px;
+      }
+      @include desktop {
+        font-size: 15px;
+      }
+    }
+  }
+
+  .credit-cards {
+    margin: 40px auto 0;
+    @include tablet {
+      margin: 50px auto 0;
+    }
+    @include desktop {
+      margin: 60px auto 0;
+    }
+
+    i {
+      opacity: 0.7;
+      margin: 0 3px;
+      font-size: 45px;
+      @include tablet {
+        font-size: 50px;
+      }
+    }
+
+    img {
+      width: 100%;
+      max-width: 340px;
+      @include tablet {
+        max-width: 480px;
+      }
+      @include desktop {
+        max-width: 550px;
+      }
+    }
+  }
+
+  .questions {
+    margin: 15px 0 0;
+
+    p {
+      margin: 0;
+      opacity: 0.7;
+      max-width: 100%;
+      font-size: 13px;
+
+      a {
+        color: inherit;
+        display: inline-block;
+      }
+    }
+  }
+}
+
+.reveal-overlay {
+  background-color: rgba(0, 0, 0, 0.8);
+
+  &:after {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-family: "Font Awesome 5 Pro";
+    font-weight: 900;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    content: "\f00d";
+    color: #fff;
+    z-index: 1;
+    opacity: 0.8;
+    position: absolute;
+    margin: 0;
+    line-height: 1em;
+    text-align: center;
+    display: inline-block;
+    outline: none;
+    top: 0;
+    right: 0;
+    font-size: 35px;
+    width: 35px;
+    @include tablet {
+      top: 7px;
+      right: 7px;
+      font-size: 50px;
+      width: 50px;
+    }
+  }
+
+  .reveal {
+    height: inherit;
+    min-height: 0;
+    outline: none;
+    padding: 0;
+    border: none;
+    border-radius: 5px;
+
+    .flex-video {
+      margin: 0 auto;
+    }
+
+    p {
+      margin: 5px auto;
+    }
+
+    .join {
+      margin: 10px auto;
+    }
+  }
+}

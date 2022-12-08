@@ -594,19 +594,19 @@ export default {
     mounted() {
         this.setupChat();
 
-        this.chatEventBus.on('updateMessage', this.updateMessage);
-        this.chatEventBus.on('removeMessage', this.removeMessage);
-        this.chatEventBus.on('removeAllMessages', this.removeAllMessages);
-        this.chatEventBus.on('blockUser', this.blockUser);
-        this.chatEventBus.on('toggleMessageReaction', this.toggleMessageReaction);
-        this.chatEventBus.on('messageThread', this.showMessageThread);
-        this.chatEventBus.on('pinMessage', this.pinMessage);
-        this.chatEventBus.on('unpinMessage', this.unpinMessage);
-        this.chatEventBus.on('insertEmoji', this.insertEmoji);
-        this.chatEventBus.on('closeEmojiWindow', this.closeEmojiWindow);
-        this.chatEventBus.on('markAsAnswered', this.markAsAnswered);
-        this.chatEventBus.on('postQuestion', this.postQuestion);
-        this.chatEventBus.on('messageMenuToggled', this.messageMenuToggledHandler);
+        this.eventBus.on('updateMessage', this.updateMessage);
+        this.eventBus.on('removeMessage', this.removeMessage);
+        this.eventBus.on('removeAllMessages', this.removeAllMessages);
+        this.eventBus.on('blockUser', this.blockUser);
+        this.eventBus.on('toggleMessageReaction', this.toggleMessageReaction);
+        this.eventBus.on('messageThread', this.showMessageThread);
+        this.eventBus.on('pinMessage', this.pinMessage);
+        this.eventBus.on('unpinMessage', this.unpinMessage);
+        this.eventBus.on('insertEmoji', this.insertEmoji);
+        this.eventBus.on('closeEmojiWindow', this.closeEmojiWindow);
+        this.eventBus.on('markAsAnswered', this.markAsAnswered);
+        this.eventBus.on('postQuestion', this.postQuestion);
+        this.eventBus.on('messageMenuToggled', this.messageMenuToggledHandler);
 
     },
     watch: {
@@ -1388,7 +1388,7 @@ export default {
             storedMessage.reaction_scores = messageRectionScores;
             if (reaction.user.id == this.userId) {
                 storedMessage.own_reactions.push({ type: reaction.type, score: reaction.score });
-                this.chatEventBus.emit('messageOwnReactionUpdate', { message: storedMessage });
+                this.eventBus.emit('messageOwnReactionUpdate', { message: storedMessage });
             }
         },
 
@@ -1456,7 +1456,7 @@ export default {
                                 ownReaction.score = reaction.score;
                             }
                         });
-                        this.chatEventBus.emit('messageOwnReactionUpdate', { message });
+                        this.eventBus.emit('messageOwnReactionUpdate', { message });
                     }
                 }
             });

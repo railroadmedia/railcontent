@@ -51,7 +51,7 @@
                 <template v-if="newAddress || shippingAddresses.data.length === 0">
                     <p
                         v-if="shippingAddresses.data.length > 0"
-                        class="body font-bold uppercase pt-2"
+                        class="body font-bold uppercase pt-4"
                     >
                         create a new shipping address
                     </p>
@@ -71,7 +71,7 @@
             <!-- Plan Section -->
             <section v-if="canAcceptPaymentPlans">
                 <!-- Section Heading -->
-                <div class="flex flex-row mb-1 pt-2 section-border">
+                <div class="flex flex-row mb-1 pt-4 section-border">
                     <h3 class="title uppercase font-bold">
                         Payment Plan
                     </h3>
@@ -92,7 +92,7 @@
                 class="mb-3"
             >
                 <!-- Section Heading -->
-                <div class="flex flex-row mb-1 pt-2 section-border">
+                <div class="flex flex-row mb-1 pt-4 section-border">
                     <h3 class="title uppercase font-bold">
                         Payment Details
                     </h3>

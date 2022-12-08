@@ -1,12 +1,11 @@
 @extends('singeo.sales.standard-layout', [
     "trialVersion" => true
 ])
-@section('head-includes')
-    @parent
-
+@section('global-head')
     <title>@yield('name') | Singeo Trial</title>
     <meta property="og:title" content="@yield('name') | Singeo Trial">
     <meta property="og:url" content="https://www.singeo.com/{{ Request::path() }}/">
+    @parent
 @endsection
 
 @section('share-image')
@@ -41,5 +40,5 @@
 
 @section('final')
     <div id="customize-anchor" class="anchor"></div>
-    @include('sales.partials._final-trial', [ "url" => "/affiliate-trial/" ])
+    @include('singeo.sales.partials._final-trial', [ "url" => "/affiliate-trial/" ])
 @stop

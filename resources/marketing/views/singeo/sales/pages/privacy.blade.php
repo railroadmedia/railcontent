@@ -1,8 +1,6 @@
-@extends('singeo._partials.layout')
+@extends('singeo._partials.global-layout')
 
-@section('head-includes')
-    @parent
-
+@section('global-head')
     <title>Privacy Policy | Singeo</title>
     <meta property="og:title" content="Privacy Policy">
     <meta name="description" content="Below is a list of the standard policies we use on this website.">
@@ -10,8 +8,8 @@
     <meta property="og:url" content="https://www.singeo.com/privacy/">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link rel="stylesheet" href="{{ asset('/assets/css/tailwind-helpers.css') }}">
-    <link href="{{ asset('/assets/marketing/nav-footer.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/marketing/css/singeo/tailwind-helpers.css') }}">
+    <link href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}" rel="stylesheet">
 
     <style>
         h1, h2, h3, p {
@@ -20,7 +18,7 @@
     </style>
 @stop
 
-@section('layout-body')
+@section('global-body')
     @include("singeo.sales.partials._nav", [
         "joinVersion" => true,
     ])
@@ -270,10 +268,10 @@
         <p class="py-2">We will let you know via email and/or a prominent notice on our Service, prior to the change becoming effective and update the "effective date" at the top of this Privacy Policy.</p>
         <p class="py-2">You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.</p>
         <h2 class="font-bold md:text-2xl mt-10 mb-4">Contact Us</h2>
-        <p class="py-2">If you have any questions about this Privacy Policy, please <a class="text-white" href="/support">contact us</a>.</p>
+        <p class="py-2">If you have any questions about this Privacy Policy, please <a class="text-blue-600" href="/support">contact us</a>.</p>
     </div>
     @include("singeo.sales.partials._footer")
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="/assets/marketing/nav-footer.js"></script>
+    <script type="text/javascript" src="/marketing/parcel/singeo/nav-footer.js"></script>
 @stop

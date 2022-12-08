@@ -1,12 +1,11 @@
 @extends('guitareo.sales.standard-layout', [
     "trialVersion" => true
 ])
-@section('head-includes')
-    @parent
-
+@section('global-head')
     <title>@yield('name') | Guitareo Trial</title>
     <meta property="og:title" content="@yield('name') | Guitareo Trial">
     <meta property="og:url" content="https://www.guitareo.com/{{ Request::path() }}/">
+    @parent
 @endsection
 
 @section('share-image')

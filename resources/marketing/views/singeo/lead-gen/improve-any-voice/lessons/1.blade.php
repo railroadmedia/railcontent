@@ -1,14 +1,12 @@
 @extends('singeo.lead-gen.improve-any-voice.lesson-page-layout')
 
-@section('title')
+@section('subtitle')
     Why You Need To Exercise Your Voice
 @stop
 
-@section('video')
-    <iframe class="absolute w-full h-full" src="//player.vimeo.com/video/543823396" frameborder="0" allowfullscreen></iframe>
-@stop
+@section('video', '//player.vimeo.com/video/543823396')
 
-@section('lesson-number', 'Lesson 1 of 7')
+@section('current-lesson-number', 1)
 
 @section('next')
     /improve-any-voice/lessons/2

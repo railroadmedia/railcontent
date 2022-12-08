@@ -98,7 +98,7 @@ export default {
         },
     },
     mounted() {
-        this.chatEventBus
+        this.eventBus
             .on(
                 'toggleChatPopup',
                 ({ message, domRect }) => {

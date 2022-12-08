@@ -1,8 +1,6 @@
-@extends('guitareo._partials.layout')
+@extends('guitareo.lead-gen.lead-gen-layout')
 
-@section('head-includes')
-    @parent
-
+@section('meta')
     <meta name="robots" content="noindex">
     <title>Acoustic Guitar Jumpstart | Guitareo</title>
     <meta name="description" content="Sign up on this page and you'll get a guided beginner guitar course with Nate Savage designed specifically for acoustic guitarists.">
@@ -10,9 +8,10 @@
     <meta property="og:title" content="Acoustic Guitar Jumpstart">
     <meta property="og:description" content="Sign up on this page and you'll get a guided beginner guitar course with Nate Savage designed specifically for acoustic guitarists.">
     <meta property="og:url" content="https://www.guitareo.com/acoustic-guitar-jumpstart/">
+    @parent
 @stop
 
-@section('layout-body')
+@section('body')
 
     @include('guitareo.lead-gen.partials._course-lessons1', [
         "bgColor" => "#161819",

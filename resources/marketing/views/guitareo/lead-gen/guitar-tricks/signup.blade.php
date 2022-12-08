@@ -1,6 +1,6 @@
-@extends('guitareo._partials.layout')
+@extends('guitareo.lead-gen.lead-gen-layout')
 
-@section('head-includes')
+@section('meta')
     @parent
 
     <title>2 Simple Guitar Tricks | Guitareo</title>
@@ -11,24 +11,43 @@
     <meta property="og:description" content="How to use vibrato & palm muting to unlock new possibilities on the guitar.">
     <meta property="og:url" content="https://www.guitareo.com/guitar-tricks/">
 
-    <link rel="stylesheet" href="/assets/marketing/guitar-tricks.css">
+    <link rel="preload" href="/marketing/parcel/guitareo/guitar-tricks.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/marketing/parcel/guitareo/guitar-tricks.css"></noscript>
+
+    <style>
+        .header-bg {
+            background-image:url('https://cdn.musora.com/image/fetch/w_800,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/guitar-tricks/header.jpg');
+            background-position-y: top;
+            background-position-x: center;
+        }
+
+        @media (min-width:768px) {
+            .header-bg {
+                background-image:url('https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/guitar-tricks/header.jpg');
+                background-position: center;
+            }
+        }
+
+        @media (min-width:1024px) {
+            .header-bg {
+                background-image:url('https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/guitar-tricks/header.jpg');
+            }
+        }
+    </style>
 @stop
 
-@section('layout-scripts')
+@section('scripts')
     @parent
-    
-    <script src="/assets/js/sign-up-form.js"></script>
     <script>
         $(document).ready(function () {
             $(document).foundation();
         });
     </script>
-    <script src="/assets/js/modal-autoplay.js"></script>
+    <script src="/marketing/js/modal-autoplay.js"></script>
 @stop
 
-@section('layout-body')
+@section('body')
     @include('guitareo.lead-gen.partials._header1', [
-        "bgImg" => "https://guitareo.s3.amazonaws.com/lead-gen/guitar-tricks/header.jpg",
         "bgColor" => "black",
         "imgs" => [
             '<img class="md:max-w-sm lg:max-w-md" style="max-width:220px;" src="https://guitareo.s3.amazonaws.com/lead-gen/guitar-tricks/logo-with.png">',

@@ -7,9 +7,9 @@
             </div>
         </div>
         <div class="csb-details">
-            <div class="csb-title"><a :href="this.item.sales_page_url">{{ item.name }}</a></div>
-            <div class="middle-container">
-                <div class="csb-quantity" v-if="!item.is_digital && !isBonus && item.quantity && !locked">
+            <div class="csb-title text-sm"><a :href="this.item.sales_page_url">{{ item.name }}</a></div>
+            <div class="middle-container mt-0.5">
+                <div class="csb-quantity text-sm" v-if="!item.is_digital && !isBonus && item.quantity && !locked">
                     <div class="csb-quantity-label">Qty:</div>
                     <div class="csb-quantity-control">
                         <div class="csb-quantity-dec" @click.stop.prevent="decQuantity"><i class="fal fa-minus"></i></div>
@@ -21,24 +21,24 @@
                                 @change="restoreEmptyQuantityValue"
                             >
                         </div>
-                        <div class="csb-quantity-inc" @click.stop.prevent="incQuantity"><i class="fal fa-plus"></i></div>
+                        <div class="csb-quantity-inc text-sm" @click.stop.prevent="incQuantity"><i class="fal fa-plus"></i></div>
                     </div>
                 </div>
-                <div class="csb-size" v-if="item.size">Size: {{ item.size }}</div>
-                <div>
+                <div class="csb-size text-sm" v-if="item.size">Size: {{ item.size }}</div>
+                <div class="flex text-sm">
                     <product-price :item="item" :brand="brand"></product-price>
                     <div
-                        v-show="loading"
-                        class="flex flex-column flex-auto body csb-product-price"
+                        v-if="loading"
+                        class="inline-flex flex-column body ml-2 mr-auto csb-product-price"
                     >
                         <i
-                            class="fas fa-spin fa-spinner"
-                            :class="themeTextClass"
+                            class="fas fa-spin fa-spinner inline-flex justify-center"
+                            :class="'text-'+brand"
                         ></i>
                     </div>
                 </div>
             </div>
-            <div class="item-remove" v-if="!isBonus && !locked"><a href="#" @click.stop.prevent="remove">Remove</a></div>
+            <div class="item-remove text-sm" v-if="!isBonus && !locked"><a href="#" @click.stop.prevent="remove">Remove</a></div>
         </div>
     </div>
 </template>
