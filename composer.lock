@@ -176,16 +176,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.252.3",
+            "version": "3.252.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "badab73e791c38410756388968b151e0e395105a"
+                "reference": "ce0b006b73c6ea78eb570aa3fcd838d0df34ec1b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/badab73e791c38410756388968b151e0e395105a",
-                "reference": "badab73e791c38410756388968b151e0e395105a",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/ce0b006b73c6ea78eb570aa3fcd838d0df34ec1b",
+                "reference": "ce0b006b73c6ea78eb570aa3fcd838d0df34ec1b",
                 "shasum": ""
             },
             "require": {
@@ -264,9 +264,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.252.3"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.252.4"
             },
-            "time": "2022-12-06T19:23:24+00:00"
+            "time": "2022-12-07T19:47:20+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -2945,16 +2945,16 @@
         },
         {
             "name": "google/cloud-core",
-            "version": "v1.47.4",
+            "version": "v1.48.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-core.git",
-                "reference": "3a00a21e2af5a07a77cd01a7dcbc664d459c8fa2"
+                "reference": "83d1c896ab481ae647d536d017f4a5374f1bf094"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/3a00a21e2af5a07a77cd01a7dcbc664d459c8fa2",
-                "reference": "3a00a21e2af5a07a77cd01a7dcbc664d459c8fa2",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/83d1c896ab481ae647d536d017f4a5374f1bf094",
+                "reference": "83d1c896ab481ae647d536d017f4a5374f1bf094",
                 "shasum": ""
             },
             "require": {
@@ -3005,22 +3005,22 @@
             ],
             "description": "Google Cloud PHP shared dependency, providing functionality useful to all components.",
             "support": {
-                "source": "https://github.com/googleapis/google-cloud-php-core/tree/v1.47.4"
+                "source": "https://github.com/googleapis/google-cloud-php-core/tree/v1.48.0"
             },
-            "time": "2022-11-01T20:21:07+00:00"
+            "time": "2022-12-07T23:19:22+00:00"
         },
         {
             "name": "google/cloud-storage",
-            "version": "v1.29.0",
+            "version": "v1.30.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-storage.git",
-                "reference": "7b32f74023e4970159a489bd6ab703210e7c1d35"
+                "reference": "afebe49c62d0263f721f1be0a79e72267def3b3a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-storage/zipball/7b32f74023e4970159a489bd6ab703210e7c1d35",
-                "reference": "7b32f74023e4970159a489bd6ab703210e7c1d35",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-storage/zipball/afebe49c62d0263f721f1be0a79e72267def3b3a",
+                "reference": "afebe49c62d0263f721f1be0a79e72267def3b3a",
                 "shasum": ""
             },
             "require": {
@@ -3061,9 +3061,9 @@
             ],
             "description": "Cloud Storage Client for PHP",
             "support": {
-                "source": "https://github.com/googleapis/google-cloud-php-storage/tree/v1.29.0"
+                "source": "https://github.com/googleapis/google-cloud-php-storage/tree/v1.30.0"
             },
-            "time": "2022-11-03T21:58:06+00:00"
+            "time": "2022-12-07T23:19:22+00:00"
         },
         {
             "name": "google/crc32",
@@ -7926,16 +7926,16 @@
         },
         {
             "name": "railroad/ecommerce",
-            "version": "v5.0.39",
+            "version": "v5.0.42",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "a54d7a5c831e74c7a85c24582fa983e07bb50bb5"
+                "reference": "f51a8726d7f6e941a6d4ae64b8e00f9fc4badfc6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/a54d7a5c831e74c7a85c24582fa983e07bb50bb5",
-                "reference": "a54d7a5c831e74c7a85c24582fa983e07bb50bb5",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/f51a8726d7f6e941a6d4ae64b8e00f9fc4badfc6",
+                "reference": "f51a8726d7f6e941a6d4ae64b8e00f9fc4badfc6",
                 "shasum": ""
             },
             "require": {
@@ -7972,22 +7972,22 @@
             "description": "Ecommerce system",
             "support": {
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
-                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.39"
+                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.42"
             },
-            "time": "2022-12-06T01:14:36+00:00"
+            "time": "2022-12-07T20:24:05+00:00"
         },
         {
             "name": "railroad/location",
-            "version": "v3.0.3",
+            "version": "v3.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/location.git",
-                "reference": "6020ac7ac0adabdd52f7354e9ee50b79362536c9"
+                "reference": "68ecac15142f564d4b7a69703c4f1e71b402f51f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/location/zipball/6020ac7ac0adabdd52f7354e9ee50b79362536c9",
-                "reference": "6020ac7ac0adabdd52f7354e9ee50b79362536c9",
+                "url": "https://api.github.com/repos/railroadmedia/location/zipball/68ecac15142f564d4b7a69703c4f1e71b402f51f",
+                "reference": "68ecac15142f564d4b7a69703c4f1e71b402f51f",
                 "shasum": ""
             },
             "require": {
@@ -8014,9 +8014,9 @@
             "description": "Location service",
             "support": {
                 "issues": "https://github.com/railroadmedia/location/issues",
-                "source": "https://github.com/railroadmedia/location/tree/v3.0.3"
+                "source": "https://github.com/railroadmedia/location/tree/v3.0.4"
             },
-            "time": "2022-10-24T19:12:06+00:00"
+            "time": "2022-12-07T19:18:27+00:00"
         },
         {
             "name": "railroad/mailora",
@@ -8311,16 +8311,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "2.0.54",
+            "version": "2.0.55",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "96d64808c60e3f51d296d8fc2391e8a065918b6f"
+                "reference": "d885abe4b893b2161c3c960e81ea1962e6e1a8f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/96d64808c60e3f51d296d8fc2391e8a065918b6f",
-                "reference": "96d64808c60e3f51d296d8fc2391e8a065918b6f",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/d885abe4b893b2161c3c960e81ea1962e6e1a8f4",
+                "reference": "d885abe4b893b2161c3c960e81ea1962e6e1a8f4",
                 "shasum": ""
             },
             "require": {
@@ -8374,9 +8374,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/2.0.54"
+                "source": "https://github.com/railroadmedia/railcontent/tree/2.0.55"
             },
-            "time": "2022-12-07T13:30:18+00:00"
+            "time": "2022-12-08T14:18:40+00:00"
         },
         {
             "name": "railroad/railforums",
