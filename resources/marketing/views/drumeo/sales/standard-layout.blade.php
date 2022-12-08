@@ -14,13 +14,39 @@
 
     @include('drumeo._partials._fonts')
 
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"></noscript>
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
     {{--<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">--}}
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
+
+    <style>
+        .splide__pagination__page.is-active {
+            background: #01050F;
+        }
+
+        .splide__arrow svg {
+            fill: #0B76DB !important;
+        }
+
+        .bubble:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border: 5px solid transparent;
+            border-top-color: black;
+            border-bottom: 0;
+            margin-left: -5px;
+            margin-bottom: -5px;
+        }
+    </style>
 @stop
 
 @section('global-body')
@@ -1421,6 +1447,155 @@
 
     @yield('final')
     <div class="unstick-trigger block"></div>
+
+    @php
+        $buttons = [
+            'Styles', 'Creativity', 'Grooves'
+        ];
+
+        $courses = [
+            [
+                'title' => 'Learn and style',
+                'images' => [
+                    [
+                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/rock-drumming.jpg',
+                        'title' => 'Rock <br>Drumming',
+                        'instructor' => 'Todd Sucherman',
+                    ],
+                    [
+                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/metal-drumming.jpg',
+                        'title' => 'Metal <br>Drumming',
+                        'instructor' => 'Jay Weinberg',
+                    ],
+                    [
+                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/jazz-fusion-drumming.jpg',
+                        'title' => 'Jazz & Fusion <br>Drumming',
+                        'instructor' => 'Cindy Blackman Santana',
+                    ],
+                    [
+                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/gospel-drumming.jpg',
+                        'title' => 'Gospel <br>Drumming',
+                        'instructor' => 'Larnell Lewis',
+                    ],
+                    [
+                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/pop-drumming.jpg',
+                        'title' => 'Pop <br>Drumming',
+                        'instructor' => 'Domino Santantonio',
+                    ],
+                    [
+                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/rock-drumming.jpg',
+                        'title' => 'Rock <br>Drumming',
+                        'instructor' => 'Todd Sucherman',
+                    ],
+                    [
+                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/rock-drumming.jpg',
+                        'title' => 'Rock <br>Drumming',
+                        'instructor' => 'Todd Sucherman',
+                    ],
+                    [
+                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/rock-drumming.jpg',
+                        'title' => 'Rock <br>Drumming',
+                        'instructor' => 'Todd Sucherman',
+                    ],
+                ]
+            ],
+            [
+                'title' => 'Play more creatively',
+                'images' => [
+                    [
+                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/rock-drumming.jpg',
+                        'title' => 'Rock <br>Drumming',
+                        'instructor' => 'Todd Sucherman',
+                    ],
+                    [
+                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/rock-drumming.jpg',
+                        'title' => 'Rock <br>Drumming',
+                        'instructor' => 'Todd Sucherman',
+                    ],
+                    [
+                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/rock-drumming.jpg',
+                        'title' => 'Rock <br>Drumming',
+                        'instructor' => 'Todd Sucherman',
+                    ],
+                    [
+                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/rock-drumming.jpg',
+                        'title' => 'Rock <br>Drumming',
+                        'instructor' => 'Todd Sucherman',
+                    ],
+                    [
+                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/rock-drumming.jpg',
+                        'title' => 'Rock <br>Drumming',
+                        'instructor' => 'Todd Sucherman',
+                    ],
+                    [
+                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/rock-drumming.jpg',
+                        'title' => 'Rock <br>Drumming',
+                        'instructor' => 'Todd Sucherman',
+                    ],
+                    [
+                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/rock-drumming.jpg',
+                        'title' => 'Rock <br>Drumming',
+                        'instructor' => 'Todd Sucherman',
+                    ],
+                    [
+                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/rock-drumming.jpg',
+                        'title' => 'Rock <br>Drumming',
+                        'instructor' => 'Todd Sucherman',
+                    ],
+                ]
+            ],
+            [
+                'title' => 'Find your groove',
+                'images' => [
+                    [
+                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/rock-drumming.jpg',
+                        'title' => 'Rock <br>Drumming',
+                        'instructor' => 'Todd Sucherman',
+                    ],
+                    [
+                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/rock-drumming.jpg',
+                        'title' => 'Rock <br>Drumming',
+                        'instructor' => 'Todd Sucherman',
+                    ],
+                    [
+                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/rock-drumming.jpg',
+                        'title' => 'Rock <br>Drumming',
+                        'instructor' => 'Todd Sucherman',
+                    ],
+                    [
+                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/rock-drumming.jpg',
+                        'title' => 'Rock <br>Drumming',
+                        'instructor' => 'Todd Sucherman',
+                    ],
+                    [
+                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/rock-drumming.jpg',
+                        'title' => 'Rock <br>Drumming',
+                        'instructor' => 'Todd Sucherman',
+                    ],
+                    [
+                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/rock-drumming.jpg',
+                        'title' => 'Rock <br>Drumming',
+                        'instructor' => 'Todd Sucherman',
+                    ],
+                    [
+                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/rock-drumming.jpg',
+                        'title' => 'Rock <br>Drumming',
+                        'instructor' => 'Todd Sucherman',
+                    ],
+                    [
+                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/rock-drumming.jpg',
+                        'title' => 'Rock <br>Drumming',
+                        'instructor' => 'Todd Sucherman',
+                    ],
+                ]
+            ],
+        ];
+    @endphp
+
+    @include('musora.sales.coaches-section', [
+        'header' => 'Study with the world’s <br class="md:hidden">best drummers.',
+        'desc' => 'Diversify your drumming knowledge by studying with the world’s best drummers and teachers – with 200+ goal-oriented artist courses to amplify your skills & exclusive live events with drumming royalty.'
+    ])
 
     @foreach($coaches as $coach)
         <div class="reveal coach-wrap relative rounded-xl text-center overflow-visible select-none max-w-xs md:max-w-md" id="{{ $coach['modal'] }}" data-reveal data-reset-on-close="false">
