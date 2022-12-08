@@ -23,6 +23,25 @@
     <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
     {{--<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">--}}
+    <style>
+        .slick-slider.slick-light-buttons .slick-arrow {
+            background: #fff;
+        }
+
+        .dropdown .description {
+            height: 0;
+            max-height: 0;
+            visibility: hidden;
+            opacity: 0;
+            overflow: hidden;
+        }
+        .dropdown.active .description {
+            visibility: visible;
+            opacity: 1;
+            height: auto;
+            max-height: 400px;
+        }
+    </style>
 @stop
 
 @section('global-body')
@@ -58,73 +77,34 @@
     ])
 
 
-    <header class="px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:#eff7ff;">
+    <header class="px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:#f6f8fc;">
         <div class="container max-w-5xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center">
                 <div class="w-full sm:w-7/12 text-center lg:text-left">
-                    <img class="h-20 sm:h-24 lg:h-28 -mb-3 sm:mb-0 lg:mb-3 lazyload" data-src="https://cdn.musora.com/image/fetch/w_440,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/30_day_drummer_logo.png">
-                    <h1 class="rotater-text overflow-hidden"><strong>
-                            <span class="relative nowrap top-0 delay-1000 ease-in-out">Learn the drums</span><br>
-                            <span class="relative nowrap top-0 delay-1000 ease-in-out">Improve your timing</span><br>
-                            <span class="relative nowrap top-0 delay-1000 ease-in-out">Boost your creativity</span><br>
-
-                            <span class="relative nowrap top-0 delay-1000 ease-in-out">Learn the drums</span><br>
-                            <span class="relative nowrap top-0 delay-1000 ease-in-out">Improve your timing</span><br>
-                            <span class="relative nowrap top-0 delay-1000 ease-in-out">Boost your creativity</span><br>
-
-                            <span class="relative nowrap top-0 delay-1000 ease-in-out">Learn the drums</span><br>
-                            <span class="relative nowrap top-0 delay-1000 ease-in-out">Improve your timing</span><br>
-                            <span class="relative nowrap top-0 delay-1000 ease-in-out">Boost your creativity</span><br>
-
-                            <span class="relative nowrap top-0 delay-1000 ease-in-out">Learn the drums</span><br>
-                            <span class="relative nowrap top-0 delay-1000 ease-in-out">Improve your timing</span><br>
-                            <span class="relative nowrap top-0 delay-1000 ease-in-out">Boost your creativity</span><br>
-
-                            <span class="relative nowrap top-0 delay-1000 ease-in-out">Learn the drums</span><br>
-                            <span class="relative nowrap top-0 delay-1000 ease-in-out">Improve your timing</span><br>
-                            <span class="relative nowrap top-0 delay-1000 ease-in-out">Boost your creativity</span><br>
-                        </strong></h1>
-                    <h2 class="-mt-3 sm:-mt-1 lg:mt-0">with daily guided workouts.</h2>
-
-                    <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>Save your seat in the first-ever <br class="inline lg:hidden">class starting September 5th.</strong></h6>
+                    <h1 class="rotater-text text-drumeo"><strong>Online drum lessons for all skill levels.</strong></h1>
+                    <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>Learn the drums faster with organized video lessons, thousands of songs, and unlimited personal support.</strong></h6>
 
                     <div class="mt-6 mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top cursor-hover autoplay-video lazyload" style="padding-bottom: 75%;" data-bg="https://cdn.musora.com/image/fetch/w_850,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/header_thumb.png" data-open="trailer">
-                        {{--<video class="object-cover w-full h-full absolute z-0 lazyload" data-src="https://player.vimeo.com/progressive_redirect/download/738758998/rendition/source/video-reel2.mp4%20%28Original%29.mp4?loc=external&signature=323bf87c6c208cda28dd99180b56fbc7238cd98d3ca6b60dba352659187783ff" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>--}}
                         <div class="join white smaller absolute bottom-5 left-5"><i class="fas fa-play"></i> Watch Trailer</div>
                     </div>
 
                     <p class="hidden lg:inline">
                         <i class="fas fa-check text-drumeo"></i> Improve Your Skills
-                        <i class="ml-2 fas fa-check text-drumeo"></i> Drum Every Day
-                        <i class="ml-2 fas fa-check text-drumeo"></i> Learn By Doing</p>
+                        <i class="ml-2 fas fa-check text-drumeo"></i> World-Class Teachers
+                        <i class="ml-2 fas fa-check text-drumeo"></i> Play More Songs</p>
                     <div class="flex inline lg:hidden">
                         <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-drumeo"></i><br> Improve<br> Your Skills</p>
-                        <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-drumeo"></i><br> Drum<br> Every Day</p>
-                        <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-drumeo"></i><br> Learn<br> By Doing</p>
+                        <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-drumeo"></i><br> World-Class<br>  Teachers</p>
+                        <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-drumeo"></i><br> Play More <br> Songs</p>
                     </div>
-                    {{--@if(session()->has('success-message'))--}}
-                    {{--<p class="mb-3 lg:-mb-7 mt-3 text-drumeo text-center"><strong>Congrats! You have registered for 30-Day Drummer.<br class="hidden md:inline"> Check your email for the details.</strong></p>--}}
-                    {{--@endif--}}
-                    <div class="flex flex-wrap sm:flex-nowrap items-center mt-6 sm:mt-5 lg:mt-10">
-                        <div class="w-full sm:w-1/2 text-center sm:pr-2">
-                            <a class="join blue medium w-full" data-open="waitlistModal">JOIN THE WAITLIST</a>
-                            <p class="opacity-50 text-sm mt-1 mb-5 sm:mb-0">Enrollment is now closed.</p>
-
-                            {{--@if($isUserAlreadyRegistered)--}}
-                            {{--<a class="join sold-out medium w-full">YOU'RE ENROLLED</a>--}}
-                            {{--@else--}}
-                            {{--<a href="{{ $registerButtonUrl }}" class="join blue medium w-full @if(!is_current_user_a_member()) anchor-slide @endif">ENROLL NOW</a>--}}
-                            {{--@endif--}}
-                            {{--@if(is_current_user_a_member())--}}
-                            {{--<p class="opacity-50 text-sm mt-1 mb-5 sm:mb-0">Registration is FREE for Drumeo Members.</p>--}}
-                            {{--@else--}}
-                            {{--<p class="opacity-50 text-sm mt-1 mb-5 sm:mb-0">&nbsp;</p>--}}
-                            {{--@endif--}}
+                    <div class="flex flex-wrap items-center mt-6 sm:mt-5 lg:mt-10">
+                        <div class="w-full">
+                            <a href="" class="join blue smaller anchor-slide">START FOR FREE <i class="fas fa-arrow-right"></i> </a>
                         </div>
-                        {{--<div class="w-full sm:w-1/2 lg:pb-5">--}}
-                        {{--<img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/Joined_profiles.png">--}}
-                        {{--<p class="inline-block leading-tight text-sm align-middle">Join {{ $students ?? 0 }} drummers who<br> have already registered.</p>--}}
-                        {{--</div>--}}
+                        <div class="w-full mt-2">
+                            <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/Joined_profiles.png">
+                            <p class="inline-block leading-tight text-sm align-middle"><em>Trusted by {{ 31856 }} active students.</em></p>
+                        </div>
                     </div>
                 </div>
                 <div class="w-full sm:w-5/12 hidden sm:block">
@@ -135,142 +115,32 @@
                 </div>
             </div>
 
-            <div class="flex flex-wrap sm:flex-nowrap text-center border rounded-lg border-gray-300 mt-8 lg:mt-12 mb-2 lg:mb-4">
-                <div class="w-full sm:w-auto border-b sm:border-b-0 sm:border-r border-gray-300 py-4 sm:py-3 lg:py-4">
-                    <p class="tracking-wide opacity-70 text-sm">STARTS ON</p>
-                    <h4 class="px-3 lg:px-5"><strong>September 5th</strong></h4>
-                    <hr class="border-gray-300 my-4 sm:my-2 lg:my-4">
-                    <p class="text-sm px-3 lg:px-5">
-                        Enrollment is closed.
-                    </p>
-                </div>
+            <div class="flex flex-wrap sm:flex-nowrap text-center border-2 rounded-xl border-drumeo mt-8 lg:mt-12 mb-2 lg:mb-4" style="background-color:#eaf1fa;">
                 <div class="flex flex-wrap sm:flex-nowrap items-center justify-evenly w-full sm:w-auto sm:flex-grow py-4 sm:py-3 lg:py-4 text-left sm:text-center">
                     <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3 mb-4 sm:mb-0">
                         <i class="far fa-fw mr-3 sm:mr-0 fa-calendar-day text-drumeo text-2xl"></i>
-                        <p class="leading-tight mx-0"><strong class="font-black">Course Dates</strong><br>
-                            <span class="text-sm"> September 5th to<br class="hidden sm:inline"> October 5th</span></p>
+                        <p class="leading-tight mx-0"><strong class="font-black">Drum Lessons</strong><br>
+                            <span class="text-sm">Step-by-step video lessons on every topic.</span></p>
                     </div>
                     <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3 mb-4 sm:mb-0">
                         <i class="far fa-fw mr-3 sm:mr-0 fa-clock text-drumeo text-2xl"></i>
-                        <p class="leading-tight mx-0"><strong class="font-black">Commitment</strong><br>
-                            <span class="text-sm">10 minutes/day<br class="hidden sm:inline"> for 30 days.</span></p>
+                        <p class="leading-tight mx-0"><strong class="font-black">Artist Courses</strong><br>
+                            <span class="text-sm">Courses and live events with drumming royalty.</span></p>
+                    </div>
+                    <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3 mb-4 sm:mb-0">
+                        <i class="far fa-fw mr-3 sm:mr-0 fa-trophy text-drumeo text-2xl"></i>
+                        <p class="leading-tight mx-0"><strong class="font-black">5000+ Songs</strong><br>
+                            <span class="text-sm">Play popular songs from every style & era.</span></p>
                     </div>
                     <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3">
                         <i class="far fa-fw mr-3 sm:mr-0 fa-trophy text-drumeo text-2xl"></i>
-                        <p class="leading-tight mx-0"><strong class="font-black">Result</strong><br>
-                            <span class="text-sm">Play your favorite songs<br> with excellent timing & feel.</span></p>
-                    </div>
-                </div>
-            </div>
-            <p class="opacity-50 text-center"><em>Flexible lesson times to fit any schedule<br class="inline sm:hidden"> PLUS you get lifetime access!</em></p>
-        </div>
-    </header>
-
-    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
-        <div class="container max-w-4xl mx-auto">
-            <img class="h-56 inline sm:hidden lazyload" data-src="https://cdn.musora.com/image/fetch/w_690,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/Collage_intro_m.png">
-            <h2 class="text-center my-5 sm:mt-0 sm:mb-7"><strong>Learn the drums by<br class="inline sm:hidden"> <u>playing the drums</u>.</strong></h2>
-            <div class="text-left flex flex-wrap sm:flex-nowrap mb-32 sm:mb-56 lg:mb-72">
-                <h6 class="leading-normal max-w-lg pr-7">It’s all about repetition.
-                    <br><br>
-                    Drumming is simple motions repeated over and over to create, you guessed it, RHYTHM! In this one-month class, you’ll <strong>build your musical skills</strong> following 10-minute daily guided drum workouts. By focusing on timing & coordination, you’ll learn the skills to play hundreds of your favorite pop & rock songs on the drums.
-                    <br><br>
-                    Plus, you’ll have a weekly LIVE session with your instructor, Domino Santantonio – to ask your questions, stay motivated, and make sure you’re having FUN playing the drums.
-                    <br><br>
-                    Scroll down to watch the trailer and save your seat in the first-ever 30-Day Drummer class.</h6>
-                <img class="h-96 hidden sm:inline lazyload" data-src="https://cdn.musora.com/image/fetch/w_690,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/Collage_intro.png">
-            </div>
-        </div>
-    </section>
-
-    <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #f4f8fb calc(50% + 1px));"></div>
-    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f4f8fb;">
-        <div class="container max-w-4xl mx-auto">
-            <div class="aspect-16:9 cursor-hover rounded-xl autoplay-video overflow-hidden w-full relative -mt-36 sm:-mt-64 lg:-mt-96" data-open="trailer">
-                <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
-                <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0 lazyload" poster="https://i.vimeocdn.com/video/1488646391-d2694ba3d38847b00d9fcd70c946d3c45efe1202cedf305361a253a275ef5f90-d_890" data-src="https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/video-reel.mp4" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
-                {{--<iframe class="absolute w-full h-full" src="//player.vimeo.com/video/738385463" frameborder="0" allowfullscreen allow="autoplay" title="10year-video"></iframe>--}}
-            </div>
-
-
-        </div>
-    </section>
-
-
-    <header class="header text-white relative overflow-hidden z-10" style="background-color:#011434;">
-        <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center md:text-left">
-            <div class="container mx-auto max-w-6xl">
-                <h1 data-aos="fade-down" class="leading-tight max-w-xs md:max-w-md lg:max-w-2xl mx-auto md:mx-0 md:text-3xl lg:text-4xl"><strong>Learn to play the drums with the best teachers in the world.</strong></h1>
-                <h6 class="leading-normal text-light-navy mt-5 mb-7 text-shadow-4">
-                    Organized video drum lessons you can watch anytime with <br class="hidden sm:inline">
-                    direct access to legendary drummers every step of the way.</h6>
-                <a data-aos="fade-up"
-                    @hasSection('start-button')
-                        href="@yield('start-button')" class="join blue smaller w-2/3 md:w-auto"
-                    @else
-                        href="#customize-anchor" class="join blue smaller anchor-slide w-2/3 md:w-auto anchor-slide"
-                    @endif
-                >Get Started</a>
-                @if(!empty($bfButton))
-                    <a data-open="trailer" class="join outline promo smaller autoplay-video w-2/3 md:w-auto mt-3 md:mt-0"><i class="fas fa-play"></i> Holiday Deals</a>
-                @endif
-            </div>
-        </div>
-        <div class="top-0 left-0 absolute w-full h-full z-10 hidden md:block" style="background: linear-gradient(to right, #011434, transparent);"></div>
-        <div class="top-0 left-0 absolute w-full h-full z-10 block md:hidden" style="background: rgba(1, 19, 50, 0.7);"></div>
-        <video class="object-cover w-full h-full relative z-0" poster="https://i.vimeocdn.com/video/1246906562-a88c36cebb94874513441385c9c4d9b65b02c8537aae511ff4a872e1c5cad6ec-d_720" src="https://dpwjbsxqtam5n.cloudfront.net/sales/header-compress.mp4" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
-    </header>
-
-
-    <section class="px-2 lg:px-4 py-10 md:py-14 md:py-20 text-white text-center overflow-hidden" style="background:linear-gradient(to bottom, #01050f 60%, #021124);">
-        <div class="container mx-auto max-w-6xl">
-            <h3 class="leading-tight " data-aos="fade-up"><strong>The Ultimate Drum<br class="inline md:hidden"> Lessons Experience&trade;</strong></h3>
-            <p class="text-light-navy mt-2 md:mt-4 mb-8 md:mb-10">
-                You’ll have the perfect balance of step-by-step lessons, breakdowns of your favorite songs, <br class="hidden md:inline">
-                and ongoing motivation & support from REAL teachers to help you achieve your goals.</p>
-            <div class="md:grid md:grid-cols-3 md:gap-4 max-w-xs md:max-w-full mx-auto">
-                <div class="relative rounded-xl overflow-hidden mb-3 md:mb-0" style="background-color:#051124;">
-                    <div class="w-full aspect-16:9 bg-cover bg-center lazyload" data-bg="https://cdn.musora.com/image/fetch/w_700,q_auto:best/https://drumeo-assets.s3.amazonaws.com/sales/2022/thumb-method.jpg"></div>
-                    <div class=" px-4 lg:px-6 py-5 lg:py-7">
-                        <i class="text-4xl align-middle icon-drumeo-method text-drumeo"></i>
-                        <img class="h-5 ml-2 imgfilter-method lazyload" data-src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/method-text.svg" alt="method-text">
-                        <h4 class="leading-tight my-3"><strong>Step-By-Step<br class="hidden md:inline"> Curriculum</strong></h4>
-                        <p class="leading-normal text-light-navy mb-10 md:mb-14">Fail to plan, plan to fail. With the Drumeo Method, you’ll always know what to work on next. It’s your step-by-step guide to go from a beginner drummer to playing anything you want on the drums.</p>
-                        <a class="absolute bottom-4 lg:bottom-6 left-0 right-0 join smaller method outline anchor-slide w-2/3 md:w-5/6 lg:w-2/3 mx-auto" href="#method">Learn More</a>
-                    </div>
-                </div>
-                <div class="relative rounded-xl overflow-hidden mb-3 md:mb-0" style="background-color:#051124;">
-                    <div class="w-full aspect-16:9 bg-cover bg-center lazyload" data-bg="https://cdn.musora.com/image/fetch/w_700,q_auto:best/https://drumeo-assets.s3.amazonaws.com/sales/2022/thumb-songs2.jpg"></div>
-                    <div class="px-4 lg:px-6 py-5 lg:py-7">
-                        <i class="text-4xl align-middle icon-songs text-songs"></i>
-                        <img class="h-5 ml-2 imgfilter-songs lazyload" data-src="https://cdn.musora.com/image/fetch/w_150,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/songs-text.svg" alt="songs-text">
-                        <h4 class="leading-tight my-3"><strong>{{ Prices::$songs }}+ Songs &<br class="hidden md:inline">  Practice Tools</strong></h4>
-                        <p class="leading-normal text-light-navy mb-10 md:mb-14">Nothing beats the rush of playing your favorite song on the drums. Drumeo Songs makes it easier – with note-for-note transcriptions of {{ Prices::$songs }}+ popular songs and handy play-back tools so you can nail every note.</p>
-                        <a class="absolute bottom-4 lg:bottom-6 left-0 right-0 join smaller songs outline anchor-slide w-2/3 md:w-5/6 lg:w-2/3 mx-auto" href="#songs">Learn More</a>
-                    </div>
-                </div>
-                <div class="relative rounded-xl overflow-hidden" style="background-color:#051124;">
-                    <div class="w-full aspect-16:9 bg-cover bg-center lazyload" data-bg="https://cdn.musora.com/image/fetch/w_700,q_auto:best/https://drumeo-assets.s3.amazonaws.com/sales/2022/thumb-coaches.jpg"></div>
-                    <div class="px-4 lg:px-6 py-5 lg:py-7">
-                        <img class="h-8 icon imgfilter-coaches" src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/coaches-icon.svg" alt="coaches-icon">
-                        <img class="h-5 ml-2 imgfilter-coaches lazyload" data-src="https://cdn.musora.com/image/fetch/q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/coaches-text.svg" alt="coaches-text">
-                        <h4 class="leading-tight my-3"><strong>Ongoing Motivation<br class="hidden md:inline"> & Support</strong></h4>
-                        <p class="leading-normal text-light-navy mb-10 md:mb-14">We brought all your favorite drummers to one place. You’ll have exclusive live events, new courses every month, and opportunities to have your questions answered by drumming’s biggest names.</p>
-                        <a class="absolute bottom-4 lg:bottom-6 left-0 right-0 join smaller coaches outline anchor-slide w-2/3 md:w-5/6 lg:w-2/3 mx-auto" href="#coaches">Learn More</a>
+                        <p class="leading-tight mx-0"><strong class="font-black">24/7 Support</strong><br>
+                            <span class="text-sm">The largest community of students & teachers.</span></p>
                     </div>
                 </div>
             </div>
 
-            <a
-                @hasSection('start-button')
-                    href="@yield('start-button')" class="join smaller blue mt-12 mb-2 lg:w-1/3"
-                @else
-                    href="#customize-anchor" class="join smaller blue anchor-slide mt-9 md:mt-12 mb-2 lg:w-1/3"
-                @endif
-            >Get The Drumeo Advantage</a>
-            <p class="text-light-navy text-sm"><em>Trusted by 31,856 active students.</em></p>
-
-            <div class="slick mx-auto max-w-xs md:max-w-xl lg:max-w-4xl my-9 md:mb-0 h-40 sm:h-24 lg:h-20">
+            <div class="slick slick-light-buttons text-center mx-auto my-9 md:mb-0 h-40 sm:h-24 lg:h-20">
                 <div class="px-3 md:px-6 slick-slide">
                     <p class="leading-normal text-sm"><em>“Drumeo is the real deal folks - a good place to study and realize one’s dreams.”</em></p>
                     <div class="flex flex-wrap md:flex-nowrap items-center justify-center mt-1.5">
@@ -294,15 +164,178 @@
                 </div>
             </div>
         </div>
+    </header>
+
+    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
+        <div class="container max-w-5xl mx-auto">
+            <img class="h-56 inline sm:hidden lazyload" data-src="https://cdn.musora.com/image/fetch/w_690,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/Collage_intro_m.png">
+            <h2 class="text-center my-5 sm:mt-0 sm:mb-7"><strong>Learn the drums by<br class="inline sm:hidden"> <u>playing the drums</u>.</strong></h2>
+            <div class="text-left flex flex-wrap sm:flex-nowrap mb-32 sm:mb-56 lg:mb-72">
+                <h6 class="leading-normal max-w-lg pr-7">It’s been proven over and over –
+                    <br><br>
+                    Playing the drums is one of the healthiest activities you can perform for your brain – showing signs of boosting happiness, intelligence, and overall well being.
+                    <br><br>
+                    Drumeo will help you tap into the benefits of playing the drums with organized lessons, motivational instructors, and practical tools to help you play the songs you love – and express yourself creatively in any musical setting.
+                    <br><br>
+                    You’ll play more. You’ll fall in love with your progress. And you’ll be surrounded by a community of students and teachers to connect, support, and grow your passion.
+                    <br><br>
+                    Scroll down to watch the trailer, see more details, and join the community where drummers gather – and play like you’ve always wanted!</h6>
+                <img class="h-96 hidden sm:inline lazyload" data-src="https://cdn.musora.com/image/fetch/w_690,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/Collage_intro.png">
+            </div>
+        </div>
     </section>
+
+    <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #f4f8fb calc(50% + 1px));"></div>
+    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f4f8fb;">
+        <div class="container max-w-5xl mx-auto">
+            <div class="aspect-16:9 cursor-hover rounded-xl autoplay-video overflow-hidden w-full relative -mt-36 sm:-mt-64 lg:-mt-96" data-open="trailer">
+                <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
+                <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0 lazyload" poster="https://i.vimeocdn.com/video/1488646391-d2694ba3d38847b00d9fcd70c946d3c45efe1202cedf305361a253a275ef5f90-d_890" data-src="https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/video-reel.mp4" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
+                {{--<iframe class="absolute w-full h-full" src="//player.vimeo.com/video/738385463" frameborder="0" allowfullscreen allow="autoplay" title="10year-video"></iframe>--}}
+            </div>
+            <h2><strong>Your drumming goals start here.</strong></h2>
+            <h6>Learn to play drums online with an organized 10-level curriculum featuring many of the world’s best teachers.</h6>
+            <div class="flex flex-wrap items-center justify-center text-left mb-6">
+                <div class="w-full sm:w-1/2 lg:w-1/3 px-3 sm:px-4">
+                    <img class="rounded-xl mb-4" src="">
+                    <p>
+                        <strong>10-Level Curriculum</strong><br> The most trusted step-by-step video lessons for every technique, pattern, and style.
+                    </p>
+                </div>
+                <div class="w-full sm:w-1/2 lg:w-1/3 px-3 sm:px-4">
+                    <img class="rounded-xl mb-4" src="">
+                    <p>
+                        <strong>Practical Assignments</strong><br> You'll always have on-screen assignments and practice tools to increase retention.
+                    </p>
+                </div>
+                <div class="w-full sm:w-1/2 lg:w-1/3 px-3 sm:px-4">
+                    <img class="rounded-xl mb-4" src="">
+
+                    <p>
+                        <strong>## Guided Workouts</strong><br> Stay inspired with our guided workouts where we’ll practice-along with you in real time.
+                    </p>
+                </div>
+                <div class="w-full sm:w-1/2 lg:w-1/3 px-3 sm:px-4">
+                    <img class="rounded-xl mb-4" src="">
+
+                    <p>
+                        <strong>World-Class Teachers</strong><br> The best drummers are here -- including Grammy Award winners and touring musicians.
+                    </p>
+                </div>
+                <div class="w-full sm:w-1/2 lg:w-1/3 px-3 sm:px-4">
+                    <img class="rounded-xl mb-4" src="">
+
+                    <p>
+                        <strong>Downloadable Videos</strong><br> Stream your lessons OR download your videos so you can practice anywhere, anytime.
+                    </p>
+                </div>
+                <div class="w-full sm:w-1/2 lg:w-1/3 px-3 sm:px-4">
+                    <img class="rounded-xl mb-4" src="">
+
+                    <p>
+                        <strong>Personalized Support</strong><br> Get weekly live streams, student lesson plans, and access to a global drum community.
+                    </p>
+                </div>
+            </div>
+            <a href="" class="mx-1 join outline method smaller">EXPLORE THE METHOD <i class="fas fa-info-circle"></i> </a>
+            <a href="" class="mx-1 join blue smaller anchor-slide">START FOR FREE <i class="fas fa-arrow-right"></i> </a>
+        </div>
+    </section>
+    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
+        <div class="container max-w-5xl mx-auto">
+            <h2><strong>Study with the world’s best drummers.</strong></h2>
+            <h6>Amplify your skills with 200+ artist courses + access exclusive live events with drumming royalty.</h6>
+            <div class="w-full">
+                <a href="" class="mx-1 join outline method smaller">Styles</a>
+                <a href="" class="mx-1 join outline method smaller">Creativity</a>
+                <a href="" class="mx-1 join outline method smaller">Grooves</a>
+            </div>
+            <p>Rock Drumming - Todd Sucherman
+            Metal Drumming - Jay Weinberg
+            Jazz & Fusion Drumming - Cindy Blackman Santana
+            Gospel Drumming - Larnell Lewis
+            Pop Drumming - Domino Santantonio
+            Funk Drumming - Dennis Chambers
+            Indian Grooves - Sarah Thawer
+            Big Band Drumming - Greyson Nekrutman
+
+            Elevate Your Drum Sound - Simon Phillips
+            Drum Chops - Aaron Spears
+            Writing Drum Parts - Hannah Welton
+            Song Breakdowns - Matt McGuire
+            Rudiments & Patterns - Dorothea Taylor
+            The Creative Mindset - Aric Improta
+            Crafting Drum Solos - Steve Smith
+            Bass Drum Calibration - Gavin Harrison
+
+            Building Combinations - Marco Minnemann
+            Subdivision Studies - Anika Nilles
+            Musical Exercises - Kaz Rodriguez
+            Rhythmic Confidence - Mark Guiliana
+            Internal Synchronization - Billy Cobham
+            Drum Licks - Senri Kawaguchi
+            Groove Essentials - Tommy Igoe
+                Electric Performances - Michael Schack</p>
+
+            <a href="" class="mx-1 join outline method smaller">EXPLORE 200+ COURSES <i class="fas fa-info-circle"></i> </a>
+            <a href="" class="mx-1 join blue smaller anchor-slide">START FOR FREE <i class="fas fa-arrow-right"></i> </a>
+        </div>
+    </section>
+
+    <section class="text-center text-white px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#0c1524;">
+        <div class="container max-w-5xl mx-auto">
+            <h2><strong>Play your favorite songs.</strong></h2>
+            <h6>You’ll have all the tools you need to make sure you never miss a beat.</h6>
+
+            <div class="flex mb-4">
+                <div class="text-left pr-4">
+                    <div class="flex mb-4">
+                        <i class="fas fa-music text-drumeo"></i>
+                        <div class="flex-grow pl-4">
+                            <h4><em>5000+ popular songs.</em></h4>
+                            <p>Get note-for-note song breakdowns for music from every style & era, sorted by skill level so you can always find a song you’ll love.</p>
+                        </div>
+                    </div>
+                    <div class="flex mb-4">
+                        <i class="fas fa-music text-drumeo"></i>
+                        <div class="flex-grow pl-4">
+                            <h4><em>Find the perfect tempo.</em></h4>
+                            <p>Slow down any section of a song to hear every note. When you’ve nailed the part, bump the tempo back up to rock out in real time!</p>
+                        </div>
+                    </div>
+                    <div class="flex mb-4">
+                        <i class="fas fa-music text-drumeo"></i>
+                        <div class="flex-grow pl-4">
+                            <h4><em>Loop the trouble spots.</em></h4>
+                            <p>No more pausing and rewinding when you mess up that fill. Simply grab the section of a song and loop it – over and over again.</p>
+                        </div>
+                    </div>
+                    <div class="flex mb-4">
+                        <i class="fas fa-music text-drumeo"></i>
+                        <div class="flex-grow pl-4">
+                            <h4><em>Remove the drums *NEW*</em></h4>
+                            <p>Play-along with the original drummer – or magically remove the original drum parts to make each song and performance uniquely yours!</p>
+                        </div>
+                    </div>
+                    <div class="flex">
+                        <i class="fas fa-music text-drumeo"></i>
+                        <div class="flex-grow pl-4">
+                            <h4><em>Take your songs anywhere.</em></h4>
+                            <p>Accessible on any device, plus get printable sheet music. You’ll be able to learn and play the songs you love whenever and wherever you want.</p>
+                        </div>
+                    </div>
+                </div>
+                <img src="">
+            </div>
+            <a href="" class="mx-1 join outline method smaller">SEE SONGS LIST <i class="fas fa-info-circle"></i> </a>
+            <a href="" class="mx-1 join blue smaller anchor-slide">START FOR FREE <i class="fas fa-arrow-right"></i> </a>
+            <p class="text-light-navy text-sm mt-3"><em>Songs included with Drumeo+</em></p>
+        </div>
+    </section>
+
 
     <div id="promo" class="anchor"></div>
     @yield('promo-banner')
-
-    {{--<section class="content-section text-center px-4 lg:px-5" style="background:linear-gradient(to bottom, #01050f 60%, #021124);">--}}
-        {{--<div class="container mx-auto max-w-6xl">--}}
-            {{--<h3 class="" data-aos="fade-up"><strong>Join the party</strong></h3>--}}
-            {{--<p class="leading-normal text-light-navy mt-2 md:mt-4">You’ll be front row for NEW drum<br class="inline sm:hidden"> lessons dropping in May and beyond.</p>--}}
 
             @php
                 $coaches = [
@@ -538,912 +571,50 @@
                 ]
             @endphp
 
-            {{--@php--}}
-                {{--$altSlider = [--}}
-                    {{--[--}}
-                    {{--'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/may/simon-flippy.jpg',--}}
-                    {{--'date' => 'MAY',--}}
-                    {{--'name' => 'SIMON<br> PHILLIPS',--}}
-                    {{--'subtitle' => 'Legendary Drum Sounds',--}}
-                    {{--'smallInfo' => 'Simon Phillips will show you everything he’s learned about getting the best drum sounds in any playing situation. Get ready to learn from session drumming royalty!',--}}
-                    {{--],--}}
-                    {{--[--}}
-                    {{--'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2022/coach-cards/lewis.jpg',--}}
-                    {{--'date' => 'MAY 9',--}}
-                    {{--'name' => 'LARNELL<br> LEWIS',--}}
-                    {{--'subtitle' => 'Cymbals VS Drums',--}}
-                    {{--'smallInfo' => 'Learn how to harness the dynamic power of your cymbals & drums with Larnell Lewis. He’ll show you how to get maximum impact from your gear.',--}}
-                    {{--],--}}
-                    {{--[--}}
-                    {{--'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2022/coach-cards/santantonio.jpg',--}}
-                    {{--'date' => 'MAY 10',--}}
-                    {{--'name' => 'DOMINO<br> SANTANTONIO',--}}
-                    {{--'subtitle' => 'Perfecting Pop Dynamics',--}}
-                    {{--'smallInfo' => 'Learn how to choose & tune your drums for the perfect pop punch. Domino Santantonio is showing you the tricks behind her viral pop videos.',--}}
-                    {{--],--}}
-                    {{--[--}}
-                    {{--'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2022/coach-cards/sucherman.jpg',--}}
-                    {{--'date' => 'MAY 11',--}}
-                    {{--'name' => 'TODD <br>SUCHERMAN',--}}
-                    {{--'subtitle' => 'Spotlight: Danny Seraphine',--}}
-                    {{--'smallInfo' => 'Award-winning drummer, Todd Sucherman, shows you the world of fusion drummers and techniques you can apply to your own drumming.',--}}
-                    {{--],--}}
-                    {{--[--}}
-                    {{--'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2022/coach-cards/improta.jpg',--}}
-                    {{--'date' => 'MAY 13',--}}
-                    {{--'name' => 'ARIC<br> IMPROTA',--}}
-                    {{--'subtitle' => 'Artist Interview Series',--}}
-                    {{--'smallInfo' => 'Dive deeper into the creative process with Aric Improta. You’ll hear from the musical innovators that will help you unlock your own creative potential.',--}}
-                    {{--],--}}
-                    {{--[--}}
-                    {{--'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/march/flippy_card_7.jpg',--}}
-                    {{--'date' => 'MAY 16',--}}
-                    {{--'name' => 'KAZ <br>RODRIGUEZ',--}}
-                    {{--'subtitle' => 'NEW Drum Playalong Production',--}}
-                    {{--'smallInfo' => 'Join Kaz Rodriguez LIVE as he creates a brand new exclusive drum play-along for you to jam with at your next practice session.',--}}
-                    {{--],--}}
-                    {{--[--}}
-                    {{--'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2022/coach-cards/taylor.jpg',--}}
-                    {{--'date' => 'MAY 17',--}}
-                    {{--'name' => 'DOROTHEA<br> TAYLOR',--}}
-                    {{--'subtitle' => 'Triple Paradiddles',--}}
-                    {{--'smallInfo' => 'It’s one of the most underrated rudiments – and you’ll be learning how to apply it from the Godmother of Drumming herself.',--}}
-                    {{--],--}}
-                    {{--[--}}
-                    {{--'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/may/drumeo-team-flippy.jpg',--}}
-                    {{--'date' => 'MAY 19',--}}
-                    {{--'name' => 'DRUMEO<br>TEAM',--}}
-                    {{--'subtitle' => 'Make Subdivisions Feel EASY',--}}
-                    {{--'smallInfo' => 'They sound intimidating at first. But subdividing beats doesn’t have to be scary. Aaron Edgar will walk you through tricks to make odd time feel less, well… odd!',--}}
-                    {{--],--}}
-                    {{--[--}}
-                    {{--'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2022/coach-cards/mcguire.jpg',--}}
-                    {{--'date' => 'MAY 31',--}}
-                    {{--'name' => 'MATT<br> MCGUIRE',--}}
-                    {{--'subtitle' => 'Drum Cover Roast & Review',--}}
-                    {{--'smallInfo' => 'Are you brave enough? Matt McGuire is personally reviewing your drum cover videos – the good, the bad, and the ugly. You’ll get pro tips on how to take yours to the next level.',--}}
-                    {{--],--}}
-                    {{--[--}}
-                    {{--'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/april/flippy_cards10.jpg',--}}
-                    {{--'date' => 'And More...',--}}
-                    {{--'name' => 'Join<br>Drumeo',--}}
-                    {{--'subtitle' => 'get unlimited access to lessons, playalongs, live events, and more!',--}}
-                    {{--'smallInfo' => 'Join Drumeo to get unlimited access to lessons, playalongs, live events, and more!',--}}
-                    {{--],--}}
-                {{--]--}}
-            {{--@endphp--}}
-            {{--<div class="slick-2 mx-auto mb-12 mt-7 md:my-10 max-w-md md:max-w-3xl lg:max-w-full h-64 sm:h-80">--}}
-                {{--@foreach($altSlider as $altSlide)--}}
-                    {{--<div class="px-1 md:px-2 slick-slide">--}}
-                        {{--<div class="mx-auto" style="max-width:215px">--}}
-                            {{--<div class="flip-div inline-block relative w-full group" style="perspective: 1000px;">--}}
-                                {{--<div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">--}}
-                                    {{--<div class="front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">--}}
-                                        {{--<div class="bg-image w-full bg-black bg-top bg-cover lazyload" data-bg="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/{{ $altSlide['image'] }}"></div>--}}
-                                        {{--<div class="absolute uppercase w-full bottom-3 lg:bottom-4 z-10 text-shadow-4">--}}
-                                            {{--<h2 class="font-bebas text-3xl mb-0.5" style="line-height:0.85em">{!! $altSlide['name']  !!}</h2>--}}
-                                            {{--<p class="text-coaches uppercase leading-tight mx-auto text-sm">{!! $altSlide['subtitle'] !!}</p>--}}
-                                        {{--</div>--}}
-                                        {{--@if(!empty($altSlide['date']))--}}
-                                            {{--<p class="leading-none font-bebas text-black bg-coaches rounded-md pt-1 px-2 absolute top-2 left-2">{!! $altSlide['date'] !!}</p>--}}
-                                        {{--@endif--}}
-                                        {{--<div class="absolute inset-0 z-0" style="background:linear-gradient(to bottom, transparent 30%, #010510);"></div>--}}
-                                    {{--</div>--}}
-                                    {{--<div class="back absolute z-40 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">--}}
-                                        {{--<div class="w-full h-full mx-auto text-center text-white flex flex-wrap justify-center items-center content-center p-2 md:p-3" style="background:linear-gradient(to bottom, #01050f, #021225);">--}}
-                                            {{--<p class="text-coaches uppercase leading-tight mx-auto mb-1">{!!  str_replace('<br>', ' ', $altSlide['subtitle'])  !!}</p>--}}
-                                            {{--<p class="leading-normal mx-auto text-sm">{!! $altSlide['smallInfo'] !!}</p>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                {{--@endforeach--}}
-            {{--</div>--}}
-            {{--<a--}}
-                {{--@hasSection('start-button')--}}
-                    {{--href="@yield('start-button')" class="join smaller blue md:mt-6 mb-2 md:w-1/3"--}}
-                {{--@else--}}
-                    {{--href="#customize-anchor" class="join smaller blue anchor-slide md:mt-6 mb-2 md:w-1/3"--}}
-                {{--@endif--}}
-            {{-->Get Started</a>--}}
-            {{--<p class="text-light-navy text-sm"><em>It takes less than a minute to sign up.</em></p>--}}
-        {{--</div>--}}
-    {{--</section>--}}
-    <section class="py-10 md:py-16 lg:py-20 px-3 lg:px-6 text-white text-center" style="background:linear-gradient(to bottom, #0b76db, #014486);">
-        <div class="container mx-auto max-w-6xl">
-            <h2 class="leading-tight max-w-2xl"><em>“... a smooth process that makes it easy to learn and develop good habits.”</em></h2>
-            <h6 class="mt-5 mb-10 md:mb-20"><em>- DrummingReview.com</em></h6>
-            <div class="flex flex-wrap justify-center mx-auto max-w-md w-full opacity-70">
-                <div class="w-1/3">
-                    <img class="h-9 lg:h-12 mb-2 lazyload" data-src="https://cdn.musora.com/image/fetch/w_150,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/sales/badge-modern-drummer.png" alt="badge-modern-drummer">
-                    <p class="leading-tight text-sm">Education Award</p>
-                </div>
-                <div class="w-1/3 ">
-                    <img class="h-9 lg:h-12 mb-2 lazyload" data-src="https://cdn.musora.com/image/fetch/w_150,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/sales/badge-shopper-approved.png" alt="rated 5 stars">
-                    <p class="leading-tight text-sm">Rated 5 Stars</p>
-                </div>
-                <div class="w-1/3">
-                    <img class="h-9 lg:h-12 mb-2 lazyload" data-src="https://cdn.musora.com/image/fetch/w_150,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/sales/badge-drummies.png" alt="badge-drummies">
-                    <p class="leading-tight text-sm">Education Award</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div id="method" class="anchor"></div>
-    <section class="content-section text-center px-4 lg:px-6 lazyload" style="padding-bottom: 0;" data-bg="https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://drumeo-assets.s3.amazonaws.com/sales/2022/bg-method.jpg">
-        <div class="container mx-auto clearfix max-w-6xl">
-            <i class="text-3xl md:text-5xl lg:text-6xl icon-drumeo-method text-drumeo"></i><br>
-            <img class="h-7 md:h-10 lg:h-11 mt-1 mb-4 md:mb-8 imgfilter-method lazyload" data-src="https://dpwjbsxqtam5n.cloudfront.net/sales/2021/method-text.svg" alt="method-text">
-            <h3 class="leading-tight " data-aos="fade-up"><strong>Always know exactly<br class="inline md:hidden"> what to practice.</strong></h3>
-            <h6 class="leading-normal text-light-navy text-shadow-4 mt-3 md:mt-5 mb-20 md:mb-40">10 perfectly organized levels with video lessons<br class="inline md:hidden"> from the top authorities on every topic.</h6>
-            <i class="fas fa-play play-button autoplay-video opacity-0" data-open="methodTrailer"></i>
-            <h6 class="uppercase font-bebas mt-4 opacity-0">Play Method Trailer</h6>
-            <h3 class="leading-tight mt-20 md:mt-40 mb-6 md:mb-10 " data-aos="fade-up"><strong>Your clear path, frustration-free <br class="inline lg:hidden">
-                    guide to playing the drums.</strong></h3>
-            @php
-                $levels = [
-                    [
-                    "navyBorder" => true,
-                    "defaultOpen" => true,
-                    "level" => "1",
-                    "title" => "Getting Started On The Drums",
-                    "description" => "This is where it starts. You’ll learn how to set up your drum-set, hold your drumsticks properly, and play your first beats. And, best of all, you’ll learn how to play your first two songs on the drums.",
-                    "meta" => "30 Lessons"
-                    ],
-                    [
-                    "navyBorder" => true,
-                    "level" => "2",
-                    "title" => "Basic Theory & Ear Training",
-                    "description" => "In Level Two, you’ll continue to build your drumming foundation. You’re going to learn your first drum rudiments, develop basic reading skills (it’s not that hard, we promise!), and get introduced to three styles of drumming: rock, punk, and metal.",
-                    "meta" => "51 Lessons"
-                    ],
-                    [
-                    "navyBorder" => true,
-                    "level" => "3",
-                    "title" => "The Motions Of Drumming",
-                    "description" => "Learning the motions of drumming will help you play faster, smoother, and for longer periods. This level introduces you to key drum set techniques like the three main stick grips and beginner bass drum pedal technique.",
-                    "meta" => "59 Lessons"
-                    ],
-                    [
-                    "navyBorder" => true,
-                    "level" => "4",
-                    "title" => "The Moeller Method & Essential Grooves",
-                    "description" => "You’re ready to learn drumming’s most powerful technique! The Moeller Method is a technique drummers have used for decades to achieve power, efficiency and fluidity on the drums – all your favorites use it! Level Four also introduces you to new styles like jazz, blues, and rock ballads.",
-                    "meta" => "64 Lessons"
-                    ],
-                    [
-                    "navyBorder" => true,
-                    "level" => "5",
-                    "title" => "Rhythmic Groupings & Independence",
-                    "description" => "This is where you get creative. You’ll be introduced to the concept of “groupings” and how you can use them to create powerful grooves & fills of your own. You’ll also dig into more new styles like funk, Motown, and reggae that will push your independence – in a good way!",
-                    "meta" => "63 Lessons"
-                    ],
-                    [
-                    "navyBorder" => true,
-                    "level" => "6",
-                    "title" => "Odd Time & Inspiration",
-                    "description" => "Not gonna lie… Level Six is tough. But you’ve laid the foundation and you’re ready! Intermediate drummers will love learning how to play odd-time signatures and digging into world styles like Caribbean soca grooves and New Orleans second line.",
-                    "meta" => "51 Lessons"
-                    ],
-                    [
-                    "navyBorder" => true,
-                    "level" => "7",
-                    "title" => "Foot Technique & Combinations",
-                    "description" => "If you ever wondered how John Bonham’s foot was so fast… this is the level for you. You’ll dig into challenging bass drum techniques like slide, heel-toe, and swivel. And you’ll also get introduced to playing double-bass drum beats. Yup… get the double pedals out!",
-                    "meta" => "34 Lessons"
-                    ],
-                    [
-                    "navyBorder" => true,
-                    "level" => "8",
-                    "title" => "Brushes, Texture & Articulation",
-                    "description" => "This is where things get deeper. Level Eight dives into advanced topics like articulation and texture – how to express yourself more clearly on the drums. You’ll also explore new dynamic levels by learning brush stroke patterns and challenging new jazz styles. ",
-                    "meta" => "43 Lessons"
-                    ],
-                    [
-                    "navyBorder" => true,
-                    "level" => "9",
-                    "title" => "Advanced Styles & Musical Decisions",
-                    "description" => "By Level 9, you’re thinking about high-level concepts that will help you play live, in the studio, and on camera. Whether you’re jamming with a guitarist in your basement, playing in a wedding cover band, or touring the world playing stadiums with a rock band, it’s important to know how to make musical decisions for your specific scenario.",
-                    "meta" => "38 Lessons"
-                    ],
-                    [
-                    "navyBorder" => true,
-                    "level" => "10",
-                    "title" => "Go Anywhere On The Drums",
-                    "description" => "Level 10 prepares you to “go anywhere on the drums.” You’ll learn about advanced rhythmic concepts like metric modulation, polyrhythms and polymeters, hybrid rudiments, and way more. These are concepts you can explore endlessly on your drumming journey.",
-                    "meta" => "38 Lessons"
-                    ],
-                ]
-            @endphp
-            @foreach($levels as $level)
-                    <div class="dropdown text-center border-2 border-gray-500 rounded-md overflow-hidden flex cursor-pointer mb-3 select-none @if(!empty($level['defaultOpen'])) active @endif
-                    @if(!empty($level['navyBorder'])) border-navy-600 @endif">
-                        <div class="bg-drumeo py-5 px-2 sm:px-3 ">
-                            <h5 class="leading-tight whitespace-nowrap inline-flex items-center">
-                                <span class="text-xs hidden md:inline mr-1"> LEVEL</span>
-                                <strong>{{ $level['level'] }}</strong>
-                            </h5>
-                        </div>
-                        <div class="py-5 px-3 md:px-4 text-left flex-grow">
-                            <div class="flex items-center text-left flex-col sm:flex-row relative">
-                                <h5 class="leading-tight flex-grow w-full sm:w-auto"><strong>{!! $level['title'] !!}</strong></h5>
-                                @if(!empty($level['meta']))
-                                    <p class="inline-flex text-light-navy w-full sm:w-auto">
-                                        <em><strong> {!!  $level['meta'] !!} </strong></em>
-                                    </p>
-                                @endif
-                            </div>
-                            @if(!empty($level['description']))
-                                <p class="description leading-normal transition-all duration-300 overflow-hidden opacity-0 h-0 max-h-0 invisible text-light-navy">
-                                    <br>
-                                    {!! nl2br( $level['description']) !!}
-                                </p>
-                            @endif
-                        </div>
-                        @if(!empty($level['description']))
-                            <div class="py-5 px-2 sm:px-3 ml-auto">
-                                <i class="text-sm sm:text-xl @if(!empty($level['navyBorder'])) text-light-navy @endif fas fa-chevron-down transform transition-all duration-300 @if(!empty($level['defaultOpen'])) rotate-180 @endif"></i>
-                            </div>
-                        @endif
-                    </div>
-                @endforeach
-
-        </div>
-    </section>
-    <section class="content-section text-center px-4 lg:px-5" style="padding-top: 0;background:linear-gradient(to bottom, #01050f 60%, #021225);">
-        <div class="container mx-auto clearfix max-w-6xl">
-
-            <h4 class="mb-6 md:mb-7 lg:mb-10 mt-8 md:mt-10 lg:mt-14 leading-normal"><strong class="inline-block mr-1 bg-drumeo px-1 md:px-3 md:py-1 rounded-md md:rounded-lg leading-none" style="color: #000a1e;">PLUS</strong><em>On-demand access to <strong class="text-drumeo">{{ Prices::$courses }}+<br class="inline md:hidden"> courses</strong> &<br class="hidden md:inline">
-                    <strong class="text-drumeo">{{ Prices::$lessons }}+ lessons</strong> to <br class="inline md:hidden">improve any skill, anytime.</em></h4>
-
-            <div class="w-full flex flex-wrap justify-center md:mb-2 mx-auto max-w-xs md:max-w-full">
-                @php
-                    $topics = [
-                        [
-                        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2021/topic-jared-falk.jpg',
-                        'title' => 'Getting<br class="hidden md:inline"> Started',
-                        'description' => 'Everything you need to get started on the drums, from setting up your kit to playing your first song!',
-                        'artist' => 'Jared <strong>Falk</strong>',
-                        'credit' => "Co-Founder of Drumeo.com",
-                        ],
-                        [
-                        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2021/topic-bruce-becker.jpg',
-                        'title' => 'Hand<br class="hidden md:inline"> Technique',
-                        'description' => 'Learn the most effective grips and motions so you can play with unlimited fluidity and confidence.',
-                        'artist' => 'Bruce <strong>Becker</strong>',
-                        'credit' => "Technique Author & Guru",
-                        ],
-                        [
-                        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/instructors/drummer-jonathanmoffett.jpg',
-                        'title' => 'Foot<br class="hidden md:inline"> Technique',
-                        'description' => 'Improve your bass drum speed, power, control, and independence with lessons for all skill levels.',
-                        'artist' => 'Jonathan <strong>Moffett</strong>',
-                        'credit' => "Pop drummer for Michael Jackson",
-                        ],
-                        [
-                        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2021/topic-anika-nilles.jpg',
-                        'title' => 'Creative<br class="hidden md:inline"> Drumming',
-                        'description' => 'Stop playing the same old beats and fills - you’ll get insights to take your creativity to new heights. ',
-                        'artist' => 'Anika <strong>Nilles</strong>',
-                        'credit' => "Composer & Clinician",
-                        ],
-                        [
-                        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2021/topic-brian-frasier-moore.jpg',
-                        'title' => 'Better<br class="hidden md:inline"> Grooves',
-                        'description' => 'Make your playing come alive with practical tips for adding flavor to your drum grooves.',
-                        'artist' => 'Brian <strong>Frasier-Moore</strong>',
-                        'credit' => "3x Super Bowl Performer",
-                        ],
-                        [
-                        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2021/topic-thomas-lang.jpg',
-                        'title' => 'Independence',
-                        'description' => 'Unlock all four limbs so you can play complex patterns and achieve freedom behind the drums.',
-                        'artist' => 'Thomas <strong>Lang</strong>',
-                        'credit' => "8X Best Clinician",
-                        ],
-                        [
-                        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2021/topic-todd-sucherman.jpg',
-                        'title' => 'Rudiments &<br class="hidden md:inline"> Application',
-                        'description' => 'Learn all 40 drum rudiments PLUS get tips for applying them effectively and creatively.',
-                        'artist' => 'Todd <strong>Sucherman</strong>',
-                        'credit' => "Rock Drummer for Styx",
-                        ],
-                        [
-                        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2021/topic-rashid-williams.jpg',
-                        'title' => 'Playing<br class="hidden md:inline"> Songs',
-                        'description' => 'You’ll be able to break down any song, learn the drum parts, and put it all together quickly.',
-                        'artist' => 'Rashid <strong>Williams</strong>',
-                        'credit' => "John Legend, Alicia Keys",
-                        ],
-                        [
-                        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2021/topic-gene-hoglan.jpg',
-                        'title' => 'Double<br class="hidden md:inline"> Bass',
-                        'description' => 'Develop your double bass skills for better endurance, speed, dexterity, and balance.',
-                        'artist' => 'Gene <strong>Hoglan</strong>',
-                        'credit' => "Metal Drummer for Strapping Young Lad",
-                        ],
-                        [
-                        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2021/topic-gregg-bissonette.jpg',
-                        'title' => 'Gigging<br class="hidden md:inline"> Tips',
-                        'description' => 'Time-tested advice for working drummers - on getting gigs, playing styles, and stage presence. ',
-                        'artist' => 'Gregg <strong>Bissonette</strong>',
-                        'credit' => "Grammy Award Winner, Santana",
-                        ],
-                        [
-                        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2021/topic-peter-erskine.jpg',
-                        'title' => 'Better<br class="hidden md:inline"> Practice',
-                        'description' => 'Practice makes perfect. And you’ll get tips for more efficient practice routines to see faster results.',
-                        'artist' => 'Peter <strong>Erskine</strong>',
-                        'credit' => "Jazz Drummer, 2x Grammy Awards",
-                        ],
-                        [
-                        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2021/topic-senri-kawaguchi.jpg',
-                        'title' => 'Speed &<br class="hidden md:inline"> Endurance',
-                        'description' => 'Build incredible speed, power, and endurance with simple exercises that are proven to work.',
-                        'artist' => 'Senri <strong>Kawaguchi</strong>',
-                        'credit' => "Drum Prodigy & YouTube Sensation",
-                        ],
-                        [
-                        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2021/topic-heather-thomas.jpg',
-                        'title' => 'Musicality',
-                        'description' => 'Your skills only matter if the music sounds great -- so we’ll help you lock-in for any style & setting. ',
-                        'artist' => 'Heather <strong>Thomas</strong>',
-                        'credit' => "Singer & Drummer, Good Morning America",
-                        ],
-                        [
-                        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2021/topic-larnell-lewis.jpg',
-                        'title' => 'Drum<br class="hidden md:inline"> Solos',
-                        'description' => 'No matter your skill level, you’ll gain a blueprint for creating musical and interesting drum solos.',
-                        'artist' => 'Larnell <strong>Lewis</strong>',
-                        'credit' => "Grammy Award Winner, Snarky Puppy",
-                        ],
-                        [
-                        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2021/topic-michael-schack.jpg',
-                        'title' => 'Electronic<br class="hidden md:inline"> Drums',
-                        'description' => 'Get more from your electronic drums with setup demos, hybrid tips, and expert advice.',
-                        'artist' => 'Michael <strong>Schack</strong>',
-                        'credit' => "Touring E-Drums Clinician, Netsky",
-                        ],
-                        [
-                        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2021/topic-taylor-gordon.jpg',
-                        'title' => 'Developing<br class="hidden md:inline"> Pocket',
-                        'description' => 'Better pocket means you’ll have more people moving, dancing, and head bobbing to YOUR drumming.',
-                        'artist' => 'Taylor <strong>Gordon</strong>',
-                        'credit' => "The Pocket Queen",
-                        ],
-                        [
-                        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2021/topic-marco-minnemann.jpg',
-                        'title' => 'Showmanship',
-                        'description' => 'Learn simple but effective stick tricks to create incredible live shows and “WOW” your audiences.',
-                        'artist' => 'Marco <strong>Minnemann</strong>',
-                        'credit' => "Drummer & Composer, The Aristocrats",
-                        ],
-                        [
-                        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2021/topic-benny-greb.jpg',
-                        'title' => 'Dynamic<br class="hidden md:inline"> Drumming',
-                        'description' => 'Add dynamics to your playing to make even the simplest of drum beats sound totally amazing.',
-                        'artist' => 'Benny <strong>Greb</strong>',
-                        'credit' => "Clinician & Author, Language Of Drumming",
-                        ],
-                        [
-                        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2021/topic-tuning.jpg',
-                        'title' => 'Tuning &<br class="hidden md:inline"> Recording',
-                        'description' => 'Make your drums sound better with tuning tips, mic overviews, and recording advice from Drumeo engineers.',
-                        'artist' => 'Victor <strong>Guidera</strong>',
-                        'credit' => "Drumeo’s Audio Guru",
-                        ],
-                        [
-                        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2021/topic-tony-coleman.jpg',
-                        'title' => 'Musical<br class="hidden md:inline"> Styles',
-                        'description' => 'Study any musical style -- rock, metal, jazz, latin, funk, prog, gospel, country, and more -- with legends.',
-                        'artist' => '<span class="hidden md:inline"><strong>100+</strong> of the best drummers in the world.</span>',
-                        'credit' => '',
-                        ]
-                    ]
-                @endphp
-                @foreach($topics as $topic)
-                    <div class="relative md:px-2 lg:px-1 w-full md:w-1/3 lg:w-1/4 mx-auto mb-3 md:mb-5 lg:mb-1.5">
-                        <div class="flip-div inline-block relative md:w-full group" style="perspective: 1000px;" data-aos="fade-down">
-                            <div class="text-center relative md:w-full md:h-full md:absolute cursor-pointer" style="transform-style: preserve-3d;">
-                                <div class="front relative z-20 overflow-hidden rounded-xl md:w-full md:h-full md:absolute transition-transform duration-700" style="backface-visibility: hidden;">
-                                    <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 hidden md:visible opacity-0 group-hover:opacity-100 text-shadow-2">
-                                        <i class="fas fa-arrow-right text-4xl"></i><br>
-                                        <p class="text-sm"><strong>DETAILS</strong></p>
-                                    </div>
-                                    <div class="bg-image w-full bg-black bg-top bg-cover lazyload" data-bg="https://cdn.musora.com/image/fetch/w_550,q_auto:best/{{ $topic['image'] }}"></div>
-                                    <div class="absolute uppercase w-full bottom-3 md:bottom-5 z-10 text-shadow-4">
-                                        <h3><strong> {!! $topic['title']  !!} </strong></h3>
-                                    </div>
-                                    <div class="absolute inset-0 rounded-xl overflow-hidden z-0" style="background:linear-gradient(to bottom, rgba(0,0,0,0) 50%, rgba(11,118,219,0.9) 100%);"></div>
-                                </div>
-                                <div class="back relative z-40 overflow-hidden rounded-xl md:w-full md:h-full md:absolute transition-transform duration-700" style="backface-visibility: hidden;">
-                                    <div class="w-full h-full mx-auto text-center md:text-black md:bg-white flex flex-wrap justify-center items-center content-center pt-3 md:p-3">
-                                        <h5 class="leading-none uppercase mx-auto mb-2 md:mb-3 hidden sm:inline-block"><strong>{!! $topic['title']  !!}</strong></h5>
-                                        <p class="leading-normal mx-auto">{{ $topic['description'] }}</p>
-                                        <h6 class="w-full leading-normal uppercase mt-2 md:mt-3 mx-auto text-drumeo hidden md:inline-block">{!! $topic['artist'] !!}</h6>
-                                        <p class="w-full leading-tight text-drumeo hidden md:inline-block"><em>{{ $topic['credit'] }}</em></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-            <br>
-            <a
-                @hasSection('start-button')
-                    href="@yield('start-button')" class="join blue smaller"
-                @else
-                    href="#customize-anchor" class="join blue smaller anchor-slide"
-                @endif
-            >GET STARTED</a>
-        </div>
-    </section>
-
-    <div id="songs" class="anchor"></div>
-    <section class="content-section text-center relative" style="background:linear-gradient(to bottom, #01050f 80%, #021225);">
-        <div class="song-wrap relative z-0 overflow-hidden">
-            <div class="song-row absolute z-0 whitespace-nowrap">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/acdc-back-in-black.png" alt="AC/DC - Back In Black">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/270343-card-thumbnail-maxres-1602085835.jpg" alt="Avenged Sevenfold - Hail To The King">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/260310-card-thumbnail-maxres-1592340581.jpg" alt="B.B. King - The Thrill Is Gone">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-july/album-art/beastie-boys-fight-for-your-right.jpg" alt="Beastie Boys - Fight For Your Right">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/20249-card-thumbnail-maxres-1592340937.jpeg" alt="Blink-182 - All The Small Things">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/bon-jovi-livin-on-a-prayer.jpg" alt="Bon Jovi - Livin' On A Prayer">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/264327-card-thumbnail-maxres-1596218854.jpg" alt="Chick Corea Elektric Band - Beneath The Mask">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-dec/album-art/chris-stapleton-tennessee-whiskey.jpg" alt="Chris Stapleton - Tennessee Whiskey">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/260343-card-thumbnail-maxres-1592340469.jpg" alt="Coldplay - Yellow">
-
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/acdc-back-in-black.png" alt="AC/DC - Back In Black">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/270343-card-thumbnail-maxres-1602085835.jpg" alt="Avenged Sevenfold - Hail To The King">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/260310-card-thumbnail-maxres-1592340581.jpg" alt="B.B. King - The Thrill Is Gone">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-july/album-art/beastie-boys-fight-for-your-right.jpg" alt="Beastie Boys - Fight For Your Right">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/20249-card-thumbnail-maxres-1592340937.jpeg" alt="Blink-182 - All The Small Things">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/bon-jovi-livin-on-a-prayer.jpg" alt="Bon Jovi - Livin' On A Prayer">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/264327-card-thumbnail-maxres-1596218854.jpg" alt="Chick Corea Elektric Band - Beneath The Mask">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-dec/album-art/chris-stapleton-tennessee-whiskey.jpg" alt="Chris Stapleton - Tennessee Whiskey">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/260343-card-thumbnail-maxres-1592340469.jpg" alt="Coldplay - Yellow">
-            </div>
-            <div class="song-row absolute z-0 whitespace-nowrap">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-july/album-art/creedence-clearwater-revival-bad-moon-rising.jpg" alt="Creedence Clearwater Revival - Bad Moon Rising">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-july/album-art/dr-dre-i-need-a-doctor.jpg" alt="Dr. Dre - I Need A Doctor">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/foo-fighters-everlong.jpg" alt="Foo Fighters - Everlong">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-september/album-art/eminem-lose-yourself.jpg" alt="Eminem - Lose Yourself">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/260404-card-thumbnail-maxres-1592340380.jpeg" alt="Green Day - 21 Guns">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-dec/album-art/jason-aldean-dirt-road-anthem.jpg" alt="Jason Aldean - Dirt Road Anthem">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-september/album-art/jay-z-empire-state-of-mind.jpg" alt="Jay-Z - Empire State Of Mind">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-july/album-art/john-coltrane-acknowledgement.jpg" alt="John Coltrane - Acknowledgement">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/john-lennon-imagine.jpg" alt="John Lennon - Imagine">
-
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-july/album-art/creedence-clearwater-revival-bad-moon-rising.jpg" alt="Creedence Clearwater Revival - Bad Moon Rising">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-july/album-art/dr-dre-i-need-a-doctor.jpg" alt="Dr. Dre - I Need A Doctor">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/foo-fighters-everlong.jpg" alt="Foo Fighters - Everlong">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-september/album-art/eminem-lose-yourself.jpg" alt="Eminem - Lose Yourself">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/260404-card-thumbnail-maxres-1592340380.jpeg" alt="Green Day - 21 Guns">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-dec/album-art/jason-aldean-dirt-road-anthem.jpg" alt="Jason Aldean - Dirt Road Anthem">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-september/album-art/jay-z-empire-state-of-mind.jpg" alt="Jay-Z - Empire State Of Mind">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-july/album-art/john-coltrane-acknowledgement.jpg" alt="John Coltrane - Acknowledgement">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/john-lennon-imagine.jpg" alt="John Lennon - Imagine">
-            </div>
-            <div class="song-row absolute z-0 whitespace-nowrap">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-dec/album-art/johnny-cash-i-walk-the-line.jpg" alt="Johnny Cash - I Walk The Line">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/journey-don_t-stop-believin.jpg" alt="Journey - Don't Stop Believin'">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/led-zeppelin-good-times-bad-times.jpg" alt="Led Zeppelin - Good Times Bad Times">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/metallica-enter-sandman.jpg" alt="Metallica - Enter Sandman">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/miles-davis-freddie-freeloader.jpg" alt="Miles Davis - Freddie Freeloader">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-july/album-art/nirvana-come-as-you-are.jpg" alt="Nirvana - Come As You Are">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/nitty-gritty-dirt-band-fishin-in-the-dark.jpg" alt="Nitty Gritty Dirt Band - Fishin' In The Dark">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/oasis-wonderwall.jpg" alt="Oasis - Wonderwall">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-september/album-art/outkast-hey-ya.jpg" alt="OutKast - Hey Ya!">
-
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-dec/album-art/johnny-cash-i-walk-the-line.jpg" alt="Johnny Cash - I Walk The Line">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/journey-don_t-stop-believin.jpg" alt="Journey - Don't Stop Believin'">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/led-zeppelin-good-times-bad-times.jpg" alt="Led Zeppelin - Good Times Bad Times">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/metallica-enter-sandman.jpg" alt="Metallica - Enter Sandman">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/miles-davis-freddie-freeloader.jpg" alt="Miles Davis - Freddie Freeloader">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-july/album-art/nirvana-come-as-you-are.jpg" alt="Nirvana - Come As You Are">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/nitty-gritty-dirt-band-fishin-in-the-dark.jpg" alt="Nitty Gritty Dirt Band - Fishin' In The Dark">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/oasis-wonderwall.jpg" alt="Oasis - Wonderwall">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-september/album-art/outkast-hey-ya.jpg" alt="OutKast - Hey Ya!">
-            </div>
-            <div class="song-row absolute z-0 whitespace-nowrap">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/22613-card-thumbnail-maxres-1592341635.jpeg" alt="Pantera - Walk">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/paul-simon-50-ways-to-leave-your-lover.jpg" alt="Paul Simon - 50 Ways To Leave Your Lover">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/pearl-jam-even-flow.jpg" alt="Pearl Jam - Even Flow">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-september/album-art/phil-collins-in-the-air-tonight.jpg" alt="Phil Collins - In The Air Tonight">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-july/album-art/red-hot-chili-peppers-under-the-bridge.jpg" alt="Red Hot Chili Peppers - Under The Bridge">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/rush-tom-sawyer.jpg" alt="Rush - Tom Sawyer">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/santana-smooth.jpg" alt="Santana - Smooth">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/280219-card-thumbnail-maxres-1608317248.jpg" alt="Snarky Puppy - What About Me?">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/31234-card-thumbnail-maxres-1592341311.jpg" alt="Sublime - Santeria">
-
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/22613-card-thumbnail-maxres-1592341635.jpeg" alt="Pantera - Walk">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/paul-simon-50-ways-to-leave-your-lover.jpg" alt="Paul Simon - 50 Ways To Leave Your Lover">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/pearl-jam-even-flow.jpg" alt="Pearl Jam - Even Flow">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-september/album-art/phil-collins-in-the-air-tonight.jpg" alt="Phil Collins - In The Air Tonight">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-july/album-art/red-hot-chili-peppers-under-the-bridge.jpg" alt="Red Hot Chili Peppers - Under The Bridge">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/rush-tom-sawyer.jpg" alt="Rush - Tom Sawyer">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/santana-smooth.jpg" alt="Santana - Smooth">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/280219-card-thumbnail-maxres-1608317248.jpg" alt="Snarky Puppy - What About Me?">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/31234-card-thumbnail-maxres-1592341311.jpg" alt="Sublime - Santeria">
-            </div>
-            <div class="song-row absolute z-0 whitespace-nowrap">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/system-of-a-down-toxicity.jpg" alt="System Of A Down - Chop Suey!">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-july/album-art/the-killers-mr-brightside.jpg" alt="The Killers - Mr. Brightside">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-november/album-art/The-Roots-Mellow-My-Man.jpg" alt="The Roots - Mellow My Man">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/tool-the-pot.jpg" alt="Tool - The Pot">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-july/album-art/twenty-one-pilots-heathens.jpg" alt="Twenty One Pilots - Heathens">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/van-halen-hot-for-teacher.jpg" alt="Van Halen - Hot For Teacher">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-july/album-art/weezer-buddy-holly.jpg" alt="Weezer - Buddy Holly">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/260702-card-thumbnail-maxres-1592339760.jpg" alt="Wolfmother - Joker &amp; The Thief">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/260706-card-thumbnail-maxres-1592339732.jpg" alt="Zac Brown Band - Chicken Fried">
-
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/system-of-a-down-toxicity.jpg" alt="System Of A Down - Chop Suey!">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-july/album-art/the-killers-mr-brightside.jpg" alt="The Killers - Mr. Brightside">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-november/album-art/The-Roots-Mellow-My-Man.jpg" alt="The Roots - Mellow My Man">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/tool-the-pot.jpg" alt="Tool - The Pot">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-july/album-art/twenty-one-pilots-heathens.jpg" alt="Twenty One Pilots - Heathens">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/van-halen-hot-for-teacher.jpg" alt="Van Halen - Hot For Teacher">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-july/album-art/weezer-buddy-holly.jpg" alt="Weezer - Buddy Holly">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/260702-card-thumbnail-maxres-1592339760.jpg" alt="Wolfmother - Joker &amp; The Thief">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/260706-card-thumbnail-maxres-1592339732.jpg" alt="Zac Brown Band - Chicken Fried">
-            </div>
-            <div class="absolute z-10 inset-0" style="background: linear-gradient(to bottom, #01050f, rgba(41,47,61,0.7), #01050f);"></div>
-        </div>
-        <div class="px-4 lg:px-6">
-            <div class="container mx-auto relative z-10 max-w-6xl">
-                <i class="text-3xl md:text-5xl lg:text-6xl icon-songs text-songs"></i><br>
-                <img class="h-7 md:h-10 lg:h-11 mt-1 mb-4 md:mb-8 imgfilter-songs lazyload" data-src="https://cdn.musora.com/image/fetch/q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/songs-text.svg" alt="songs-text">
-                <h3 class="" data-aos="fade-up"><strong>Play your favorite songs.</strong></h3>
-                <h6 class="leading-normal max-w-2xl lg:max-w-4xl text-light-navy mt-3 md:mt-5 mb-20 md:mb-40 text-shadow-4">
-                    Playing drums is all about the MUSIC. So we’ve transcribed {{ Prices::$songs }}+ songs and created the ultimate practice tools. DrumeoSONGS automatically syncs sheet music with audio tracks for each song -- and lets you adjust the speed, create practice loops, play with or without the metronome, and so much more!
-                </h6>
-                <i class="fas fa-play play-button autoplay-video" data-open="songsTrailer"></i>
-                <h6 class="uppercase font-bebas mt-4">Play Songs Trailer</h6>
-
-                <h4 class="mt-20 md:mt-40 mb-6 md:mb-7 lg:mb-10 leading-normal"><strong class="inline-block mr-1 bg-songs px-3 py-1 rounded-md md:rounded-lg leading-none" style="color: #000a1e;">THE BEST PART ABOUT<br class="inline sm:hidden"> PLAYING THE DRUMS</strong><br>
-                    <em class="text-shadow-4">Get {{ Prices::$songs }}+ note-for-note song breakdowns for every<br class="hidden md:inline"> <strong class="text-songs">style</strong>, <strong class="text-songs">era</strong>, and <strong class="text-songs">skill</strong> with handy play-along tools.</em></h4>
-
-                <div class="feature-rotater w-full max-w-md md:max-w-full flex flex-wrap md:flex-nowrap items-center mx-auto mt-4 md:mt-14 lg:mt-20 mb-8 md:mb-10 px-2">
-                    <div class="pic-wrap md:order-1 mx-auto my-5 md:my-0 pl-0 md:pl-5 lg:pl-10 flex-shrink-0">
-                        <img class="lazyload side-pic songs w-full hidden" data-src="https://cdn.musora.com/image/fetch/w_800,q_auto:best/https://drumeo-assets.s3.amazonaws.com/sales/2022/method-screens-05.png" alt="method-screen-5">
-                        <img class="lazyload side-pic songs w-full md:hidden" data-src="https://cdn.musora.com/image/fetch/w_800,q_auto:best/https://drumeo-assets.s3.amazonaws.com/sales/2022/method-screens-04.png" alt="method-screen-4">
-                        <img class="lazyload side-pic songs w-full hidden" data-src="https://cdn.musora.com/image/fetch/w_800,q_auto:best/https://drumeo-assets.s3.amazonaws.com/sales/2022/method-screens-03.png" alt="method-screen-3">
-                        <img class="lazyload side-pic songs w-full hidden" data-src="https://cdn.musora.com/image/fetch/w_800,q_auto:best/https://drumeo-assets.s3.amazonaws.com/sales/2022/method-screens-02.png" alt="method-screen-2">
-                        <img class="lazyload side-pic songs w-full hidden" data-src="https://cdn.musora.com/image/fetch/w_800,q_auto:best/https://drumeo-assets.s3.amazonaws.com/sales/2022/method-screens-01.png" alt="method-screen-1">
-                    </div>
-                    <div class="text-left text-light-navy">
-                        <div class="flex mx-auto mb-9 md:mb-7 lg:mb-8 md:cursor-pointer text-icon-wrap songs md:opacity-60 hover:opacity-90 active">
-                            <i class="flex-shrink-0 w-8 md:w-10 lg:w-11 text-2xl md:text-3xl text-songs fal fa-music"></i>
-                            <div class="pl-3">
-                                <h4 class="mx-auto mb-2 md:mb-3"><strong>Find the perfect tempo.</strong></h4>
-                                <p>Slow down or speed up any section of a song to hear every note your favorite drummer plays. When you’ve nailed the part, bump the tempo back up and rock out in real time.</p>
-                            </div>
-                        </div>
-                        <div class="flex mx-auto mb-9 md:mb-7 lg:mb-8 md:cursor-pointer text-icon-wrap songs md:opacity-60 hover:opacity-90">
-                            <i class="flex-shrink-0 w-8 md:w-10 lg:w-11 text-2xl md:text-3xl text-songs fal fa-repeat"></i>
-                            <div class="pl-3">
-                                <h4 class="mx-auto mb-2 md:mb-3"><strong>Loop the trouble spots.</strong></h4>
-                                <p>No more pausing and rewinding when you mess up that fill. Simply grab the section of the song and loop it over, and over, and over until you’ve got it down.</p>
-                            </div>
-                        </div>
-                        <div class="flex mx-auto mb-9 md:mb-7 lg:mb-8 md:cursor-pointer text-icon-wrap songs md:opacity-60 hover:opacity-90">
-                            <i class="flex-shrink-0 w-8 md:w-10 lg:w-11 text-2xl md:text-3xl text-songs icon-metronome"></i>
-                            <div class="pl-3">
-                                <h4 class="mx-auto mb-2 md:mb-3"><strong>Counting just got easier.</strong></h4>
-                                <p>Add or remove the metronome to help you count out the beats in a bar. This makes learning songs of all levels easier -- even that odd-time Rush song!</p>
-                            </div>
-                        </div>
-                        <div class="flex mx-auto mb-9 md:mb-7 lg:mb-8 md:cursor-pointer text-icon-wrap songs md:opacity-60 hover:opacity-90">
-                            <i class="flex-shrink-0 w-8 md:w-10 lg:w-11 text-2xl md:text-3xl text-songs fal fa-arrow-to-bottom"></i>
-                            <div class="pl-3">
-                                <h4 class="mx-auto mb-2 md:mb-3"><strong>Take your charts anywhere.</strong></h4>
-                                <p>Downloadable pdf files let you take sheet music of your favorite songs anywhere -- to the gig, rehearsal with the band, or back to the practice space.</p>
-                            </div>
-                        </div>
-                        <div class="flex mx-auto md:cursor-pointer text-icon-wrap songs md:opacity-60 hover:opacity-90">
-                            <i class="flex-shrink-0 w-8 md:w-10 lg:w-11 text-2xl md:text-3xl text-songs fal fa-phone-laptop"></i>
-                            <div class="pl-3">
-                                <h4 class="mx-auto mb-2 md:mb-3"><strong>Available on all your devices.</strong></h4>
-                                <p>Load up DrumeoSONGS on your phone during practice time, your laptop when you’re behind the kit, and your tablet at the gig -- wherever the music takes you!</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <a
-                    @hasSection('start-button')
-                        href="@yield('start-button')" class="join blue smaller"
-                    @else
-                        href="#customize-anchor" class="join blue smaller anchor-slide"
-                    @endif
-                >GET STARTED &raquo;</a>
-            </div>
-        </div>
-    </section>
-
-    <div id="coaches" class="anchor"></div>
-    <section class="content-section text-center px-4 lg:px-6 lazyload" data-bg="https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://drumeo-assets.s3.amazonaws.com/sales/2022/bg-coaches.jpg">
-        <div class="container mx-auto max-w-6xl">
-            <img class="inline h-10 md:h-14 lg:h-16 icon imgfilter-coaches" src="https://cdn.musora.com/image/fetch/w_800,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/coaches-icon.svg" alt="coaches-icon"><br>
-            <img class="h-7 md:h-10 lg:h-11 mt-3 mb-4 md:mb-8 imgfilter-coaches lazyload" data-src="https://cdn.musora.com/image/fetch/q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/coaches-text.svg" alt="coaches-text">
-            <h3 class="leading-tight " data-aos="fade-up"><strong>Stay motivated with backstage<br class="inline lg:hidden"> access to your drum heroes.</strong></h3>
-            <h6 class="leading-normal max-w-2xl lg:max-w-4xl text-light-navy mt-3 md:mt-5 mb-8 md:mb-10 text-shadow-4">Connect with legendary coaches who’ll answer your questions and encourage your development as a drummer PLUS get unlimited personal support from our in-house team of professional drummers to review your videos and answer every question.</h6>
-            @foreach($coaches as $coach)
-                @if(!empty($coach['bigTile']))
-                    <div class="px-1 md:px-2 mb-3 md:mb-4 mx-auto max-w-md md:max-w-3xl lg:max-w-full">
-                        <div class="relative big-tile-bg bg-left-top rounded-xl overflow-hidden text-left px-3 md:px-10 lg:px-20 py-10 md:py-20 lg:py-36 cursor-pointer group @if(!empty($coach['trailer'])) autoplay-video @endif lazyload" data-bg="https://cdn.musora.com/image/fetch/w_2000,q_auto:best/{{ $coach['image'] }}" style="background-color:#010510"
-                                @if(!empty($coach['trailer'])) data-open="{{ $coach['modal'] }}Trailer" @else  data-open="{{ $coach['modal'] }}" @endif >
-                            @if(!empty($coach['trailer']))
-                                <i class="absolute bottom-5 sm:bottom-auto sm:top-5 right-5 z-10 transition-opacity duration-300 text-xl md:text-2xl group-hover:opacity-100 fas fa-play play-button smaller" data-open="{{ $coach['modal'] }}Trailer"></i>
-                            @else
-                                <i class="fas fa-expand absolute top-5 right-5 z-10 transition-opacity duration-300 text-xl md:text-2xl lg:opacity-50 group-hover:opacity-100"></i>
-                            @endif
-                            <div class="relative z-10">
-                                <h4 class="inline-block leading-none font-bebas bg-coaches text-black rounded-sm px-2 md:px-3 pt-1">{!! $coach['date']  !!}</h4><br>
-                                <h1 class="inline-block font-bebas leading-none mt-3 md:mt-5 mb-1 md:mb-4 text-5xl md:text-7xl lg:text-8xl" style="line-height: 0.85em;">{!! $coach['name']  !!}</h1><br>
-                                <h5 class="inline-block leading-tight text-coaches uppercase">{!! $coach['subtitle'] !!}</h5><br>
-                            </div>
-                            <div class="absolute inset-0 z-0" style="background:linear-gradient(to right, #010510, transparent 50%);"></div>
-                        </div>
-                    </div>
-                @endif
-            @endforeach
-            <div class="flex flex-wrap items-center justify-center mx-auto max-w-md md:max-w-3xl lg:max-w-full">
-                @foreach($coaches as $coach)
-                    @if(!empty($coach['trending']))
-                        @if(empty($coach['bigTile']))
-                            <div class="px-1 md:px-2 lg:px-0.5 w-1/2 md:w-1/3 lg:w-1/6 mb-1 md:mb-2">
-                                <div class="mx-auto" style="max-width:240px">
-                                    <div class="inline-block relative w-full group" style="padding-bottom: 148%; perspective: 1000px;" data-open="{{ $coach['modal'] }}">
-                                        <div class="text-center w-full h-full absolute cursor-pointer">
-                                            <div class="absolute z-20 overflow-hidden rounded-xl w-full h-full">
-                                                <i class="fas fa-expand absolute top-2 right-2 z-10 transition-opacity duration-300 text-xl md:text-2xl lg:opacity-50 group-hover:opacity-100"></i>
-                                                <div class="bg-image w-full bg-black bg-top bg-cover lazyload" style="padding-bottom: 145%;" data-bg="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/{{ $coach['image'] }}"></div>
-                                                <div class="absolute uppercase w-full bottom-3 lg:bottom-4 z-10 text-shadow-4">
-                                                    <h2 class="font-bebas text-3xl mb-0.5" style="line-height:0.85em">{!! $coach['name']  !!}</h2>
-                                                    <p class="text-coaches uppercase leading-tight mx-auto text-sm">{!! $coach['subtitle'] !!}</p>
-                                                </div>
-                                                <p class="leading-none font-bebas text-black bg-coaches rounded-md pt-1 px-2 absolute top-2 left-2">{!! $coach['date'] !!}</p>
-                                                <div class="absolute inset-0 z-0" style="background:linear-gradient(to bottom, transparent 30%, #010510);"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        @endif
-                    @endif
-                @endforeach
-            </div>
-            {{--<h4 class="mt-8 md:mt-12 mb-6 md:mb-7 lg:mb-10 leading-normal"><strong class="inline-block mr-1 bg-coaches px-3 py-1 rounded md:rounded-lg leading-none" style="color: #000a1e;">PLUS ONGOING ACCESS<br class="inline sm:hidden"> & PERSONAL SUPPORT</strong><br>--}}
-                {{--<em>Enjoy new monthly releases and direct access to Grammy winners,<br class="hidden md:inline"> social media sensations, and award-winning clinicians.</em></h4>--}}
-            {{--<div class="relative z-10 mx-auto mb-8 md:mb-16 flex flex-wrap justify-center max-w-md md:max-w-full">--}}
-                {{--@foreach($coaches as $coach)--}}
-                    {{--@if(empty($coach['trending']))--}}
-                        {{--<div class="w-full md:w-1/2 px-1 md:px-2">--}}
-                            {{--<div data-aos="fade-down" class="overflow-hidden cursor-pointer relative mx-auto mb-3 rounded-3xl bg-cover bg-top group lazyload" data-bg="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/{{ $coach['image'] }}" data-open="{{ $coach['modal'] }}" style="background-color:#00141d;padding-bottom: 52.65%;">--}}
-                                {{--<i class="fas fa-expand absolute top-5 right-5 z-10 transition-opacity duration-300 text-xl md:text-2xl lg:opacity-50 group-hover:opacity-100"></i>--}}
-                                {{--<div class="absolute text-left uppercase select-none z-10 left-4 bottom-4 lg:bottom-auto transform lg:-translate-y-1/2 lg:top-1/2 text-shadow-1">--}}
-                                    {{--<h1 class="leading-none mx-auto mb-1 md:mb-2 font-bebas" style="line-height:0.85em;">{!! $coach['name'] !!}</h1>--}}
-                                    {{--<h6 class="leading-tight text-coaches uppercase">{!! $coach['tileSubtitle'] !!}</h6>--}}
-                                {{--</div>--}}
-                                {{--<div class="z-0 absolute inset-0" style="background: linear-gradient(to right, #000a18, transparent 60%);"></div>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                    {{--@endif--}}
-                {{--@endforeach--}}
-            {{--</div>--}}
-            <h3 class="leading-tight mt-8 md:mt-16" data-aos="fade-up"><strong>Your calendar never<br class="inline sm:hidden"> sounded so good.</strong></h3>
-            <h6 class="leading-normal max-w-2xl lg:max-w-4xl text-light-navy mt-3 md:mt-5 mb-5 md:mb-20">You’ll have ongoing live events & on-demand access to workshops, performances, and lessons with legendary drummers. Choose your favorites and build your perfect week of drum lessons! </h6>
-            <div class="feature-rotater w-full max-w-md md:max-w-full flex flex-wrap md:flex-nowrap items-center mx-auto mb-8 md:mb-10">
-                <div class="pic-wrap md:order-0 mx-auto my-5 md:my-0 pr-0 md:pr-5 lg:pr-10 flex-shrink-0">
-                    <img class="lazyload side-pic coaches w-full hidden" data-src="https://cdn.musora.com/image/fetch/w_800,q_auto:best/https://drumeo-assets.s3.amazonaws.com/sales/2022/coach-rotating-01.png" alt="coach-rotating-1">
-                    <img class="lazyload side-pic coaches w-full md:hidden" data-src="https://cdn.musora.com/image/fetch/w_800,q_auto:best/https://drumeo-assets.s3.amazonaws.com/sales/2022/coach-rotating-02.png" alt="coach-rotating-2">
-                    <img class="lazyload side-pic coaches w-full hidden" data-src="https://cdn.musora.com/image/fetch/w_800,q_auto:best/https://drumeo-assets.s3.amazonaws.com/sales/2022/coach-rotating-03.png" alt="coach-rotating-3">
-                </div>
-                <div class="text-left text-light-navy">
-                    <div class="flex mx-auto mb-9 md:mb-7 lg:mb-10 md:cursor-pointer text-icon-wrap coaches md:opacity-60 hover:opacity-90 active">
-                            <i class="flex-shrink-0 w-8 md:w-10 lg:w-11 text-2xl md:text-4xl text-coaches fal fa-lightbulb-on"></i>
-                            <div class="pl-3">
-                            <h3 class="mx-auto mb-2 md:mb-3"><strong>Inspiration</strong></h3>
-                            <p>You’ve got front-row seats to the best drummers in the world. Your coaches are here to inspire you about what’s possible on the drums through organized courses, live streams, and Q&A sessions.</p>
-                        </div>
-                    </div>
-                    <div class="flex mx-auto mb-9 md:mb-7 lg:mb-10 md:cursor-pointer text-icon-wrap coaches md:opacity-60 hover:opacity-90">
-                            <i class="flex-shrink-0 w-8 md:w-10 lg:w-11 text-2xl md:text-4xl text-coaches fal fa-users"></i>
-                            <div class="pl-3">
-                            <h3 class="mx-auto mb-2 md:mb-3"><strong>Connection</strong></h3>
-                            <p>Every coach is in your corner. You’ll have opportunities to get feedback on your playing, ask your biggest questions, and have ongoing support throughout your drumming journey and beyond.</p>
-                        </div>
-                    </div>
-                    <div class="flex mx-auto md:cursor-pointer text-icon-wrap coaches md:opacity-60 hover:opacity-90">
-                            <i class="flex-shrink-0 w-8 md:w-10 lg:w-11 text-2xl md:text-4xl text-coaches fal fa-signal-alt"></i>
-                            <div class="pl-3">
-                            <h3 class="mx-auto mb-2 md:mb-3"><strong>Results</strong></h3>
-                            <p>Your coaching sessions include clear takeaways you can start applying to your own drumming right away. You can play with confidence knowing you’re getting advice from your favorite drum heroes.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <a
-                @hasSection('start-button')
-                    href="@yield('start-button')" class="join blue smaller"
-                @else
-                    href="#customize-anchor" class="join blue smaller anchor-slide"
-                @endif
-            >GET STARTED &raquo;</a>
-        </div>
-    </section>
-
-    <section class="content-section text-center">
-        <div class="gradient-bg absolute top-0 left-0 right-0 z-0" style="background: linear-gradient(to bottom, #01050f 60%, #021225);"></div>
-        <div class="container mx-auto relative z-10">
-            <img class="h-32 md:h-48 lg:h-56 mb-14 lazyload" data-src="https://cdn.musora.com/image/fetch/w_800,q_auto:best/https://drumeo-assets.s3.amazonaws.com/sales/2022/drumeo-dotted-logo.png" alt="drumeo-dotted-logo">
-            <h6 class="text-light-navy">Drum lessons at your fingertips.</h6>
-            <h3 class="mt-3 md:mt-5 mb-8 md:mb-12 " data-aos="fade-up"><strong>Wherever you go. Whatever you use.</strong></h3>
-            <div class="device-spread relative w-full mx-auto mb-5 md:mb-0">
-                <div class="z-10 text-arrow w-1/4 md:w-auto transform md:-translate-x-1/2 -translate-y-1/2 absolute uppercase text-xs md:text-sm lg:text-md desktop">
-                    <em class="inline-block">World<br> Class<br> Teachers</em><br class="hidden md:inline">
-                    <img class="hidden md:inline mt-1 w-7 lg:w-10 lazyload" data-src="https://cdn.musora.com/image/fetch/q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/sales/arrow-right-blue.png" alt="arrow-right">
-                </div>
-                <div class="z-10 text-arrow w-1/4 md:w-auto transform md:-translate-x-1/2 -translate-y-1/2 absolute uppercase text-xs md:text-sm lg:text-md macbook">
-                    <em class="inline-block">Regular<br> Live<br> Lessons</em><br class="hidden md:inline">
-                    <img class="hidden md:inline mt-1 w-7 lg:w-10 lazyload" data-src="https://cdn.musora.com/image/fetch/q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/sales/arrow-right-alt-blue.png" alt="arrow-right">
-                </div>
-                <div class="z-10 text-arrow w-1/4 md:w-auto transform md:-translate-x-1/2 -translate-y-1/2 absolute uppercase text-xs md:text-sm lg:text-md ipad">
-                    <em class="inline-block">better<br> practice<br> tools</em><br class="hidden md:inline">
-                    <img class="hidden md:inline mt-1 h-7 lg:h-9 lazyload" data-src="https://cdn.musora.com/image/fetch/q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/sales/arrow-left-down-blue.png" alt="arrow-left">
-                </div>
-                <div class="z-10 text-arrow w-1/4 md:w-auto transform md:-translate-x-1/2 -translate-y-1/2 absolute uppercase text-xs md:text-sm lg:text-md iphone">
-                    <em class="inline-block">Learn<br> from<br> anywhere</em><br class="hidden md:inline">
-                    <img class="hidden md:inline mt-1 w-7 lg:w-10 lazyload" data-src="https://cdn.musora.com/image/fetch/q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/sales/arrow-left-blue.png" alt="arrow-left">
-                </div>
-                <img class="w-full lazyload" data-src="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://drumeo-assets.s3.amazonaws.com/sales/2022/drumeo-spread.png" alt="drumeo-spread">
-                <video class="absolute rounded-md" style="width: 43.1%;height: 54%;left: 6.5%;top: 39.1%;" src="https://drumeo-assets.s3.amazonaws.com/sales/2022/spread-vid.mp4" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
-            </div>
-        </div>
-    </section>
-
-    <section class="content-section text-center comparison px-1 lg:px-3">
-        <div class="container mx-auto max-w-6xl">
-            <h3 class="mb-8 md:mb-12 " data-aos="fade-up"><strong>Say hello to your unfair advantage.</strong></h3>
-            <table class="w-full mx-auto border-separate comparison">
-                <tbody>
-                <tr style="background-color:transparent!important;">
-                    <td></td>
-                    <td class="rounded-t-xl">
-                        <img class="h-5 md:h-9 lazyload"  data-src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png" alt="logo-white">
-                    </td>
-                    <td class="rounded-t-xl">Private Lessons</td>
-                </tr>
-                <tr>
-                    <td>Step-By-Step Curriculum</td>
-                    <td><i class="fas fa-check-circle"></i></td>
-                    <td><i class="fas fa-check-circle"></i></td>
-                </tr>
-                <tr>
-                    <td>Consistent & Qualified Advice</td>
-                    <td><i class="fas fa-check-circle"></i></td>
-                    <td><i class="fas fa-check-circle"></i></td>
-                </tr>
-                <tr>
-                    <td>Progress-Tracking</td>
-                    <td><i class="fas fa-check-circle"></i></td>
-                    <td><i class="fas fa-check-circle"></i></td>
-                </tr>
-                <tr>
-                    <td>Live Lessons & Questions</td>
-                    <td><i class="fas fa-check-circle"></i></td>
-                    <td><i class="fas fa-check-circle"></i></td>
-                </tr>
-                <tr>
-                    <td>Personal Reviews & Feedback</td>
-                    <td><i class="fas fa-check-circle"></i></td>
-                    <td><i class="fas fa-check-circle"></i></td>
-                </tr>
-                <tr>
-                    <td>{{ Prices::$songs }}+ Popular Songs</td>
-                    <td><i class="fas fa-check-circle"></i></td>
-                    <td><i class="fas fa-minus"></i></td>
-                </tr>
-                <tr>
-                    <td>Downloadable Sheet Music</td>
-                    <td><i class="fas fa-check-circle"></i></td>
-                    <td><i class="fas fa-minus"></i></td>
-                </tr>
-                <tr>
-                    <td>Connect With Drum Legends</td>
-                    <td><i class="fas fa-check-circle"></i></td>
-                    <td><i class="fas fa-minus"></i></td>
-                </tr>
-                <tr>
-                    <td>100+ World-Class Teachers</td>
-                    <td><i class="fas fa-check-circle"></i></td>
-                    <td><i class="fas fa-minus"></i></td>
-                </tr>
-                <tr>
-                    <td>Re-Watch Any Lesson</td>
-                    <td><i class="fas fa-check-circle"></i></td>
-                    <td><i class="fas fa-minus"></i></td>
-                </tr>
-                <tr>
-                    <td>Learn From Home, Anytime</td>
-                    <td><i class="fas fa-check-circle"></i></td>
-                    <td><i class="fas fa-minus"></i></td>
-                </tr>
-                <tr>
-                    <td>Supportive Community</td>
-                    <td><i class="fas fa-check-circle"></i></td>
-                    <td><i class="fas fa-minus"></i></td>
-                </tr>
-                <tr>
-                    <td>100% Money Back Guarantee</td>
-                    <td><i class="fas fa-check-circle"></i></td>
-                    <td><i class="fas fa-minus"></i></td>
-                </tr>
-                <tr style="background-color:transparent!important;">
-                    <td></td>
-
-                    @hasSection('comparison')
-                        @yield('comparison')
-                    @else
-                        <td class="rounded-b-xl">
-                            @if(empty($trialVersion))
-                                @if(number_format(Prices::$drumeoEdgeAnnual, 2) == intval(Prices::$drumeoEdgeAnnual))
-                                    <strong>${{  round(Prices::$drumeoEdgeAnnual / 12, 2) }}</strong>/mo<br>
-                                @else
-                                    <strong>${{  number_format(Prices::$drumeoEdgeAnnual / 12, 2)  }}</strong>/mo<br>
-                                @endif
-                                <em>Billed annually at ${{  Prices::$drumeoEdgeAnnual }}</em><br><br>
-                                Unlimited lessons & support.
-                            @else
-                                <strong>Free Trial</strong><br>&nbsp;
-                            @endif
-                        </td>
-                    @endif
-                    <td class="rounded-b-xl">
-                        <strong>$200</strong>/mo<br>
-                        <em>Typically $50 per 30-minutes.</em><br><br>
-                        For private lessons.
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </section>
-
     <div id="testimonials" class="anchor"></div>
-    <section class="content-section text-center px-3 lg:px-5">
-        <div class="container mx-auto max-w-6xl">
-            <h3 class="leading-tight mb-8 md:mb-11 " data-aos="fade-up"><strong>Trusted By Drummers<br class="inline-block sm:hidden">  Everywhere</strong></h3>
-            <div class="flex flex-wrap items-start justify-center mx-auto">
+    <section class="py-10 sm:py-14 lg:py-20 relative overflow-hidden text-center px-3 lg:px-5">
+        <div class="container mx-auto max-w-5xl">
+            <h3 class="leading-tight mb-3" data-aos="fade-up"><strong>Trusted By Drummers<br class="inline-block sm:hidden">  Everywhere</strong></h3>
+
+
+            <a class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738', 'newwindow', 'width=750, height=550'); return false;">
+                <p class="mx-auto mb-2">Drumeo is rated 5-stars for price, satisfaction,<br class="inline sm:hidden"> and customer service. <u>See The Reviews »</u></p>
+            </a>
+            <br>
+            <img alt="" class="h-6 sm:h-8 mb-2 md:mb-0 mx-auto sm:mr-1 filter invert lazyload" data-src="https://cdn.musora.com/image/fetch/w_320,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/shopper-approved-logo-white.png">
+            <i class="align-middle text-lg md:text-2xl fas fa-star" style="color: #f68d2d;"></i>
+            <i class="align-middle text-lg md:text-2xl fas fa-star" style="color: #f68d2d;"></i>
+            <i class="align-middle text-lg md:text-2xl fas fa-star" style="color: #f68d2d;"></i>
+            <i class="align-middle text-lg md:text-2xl fas fa-star" style="color: #f68d2d;"></i>
+            <i class="align-middle text-lg md:text-2xl fas fa-star" style="color: #f68d2d;"></i>
+
+
+            <div class="flex flex-wrap items-start justify-center mx-auto mt-6">
                 <div class="w-1/3 px-1 md:px-2 mb-2 md:mb-4">
-                    <div class="py-4 md:py-5 lg:py-6 rounded-xl w-full" style="color:#cd201f;background: #051124;">
+                    <div class="py-4 md:py-5 lg:py-6 rounded-xl w-full" style="color:#cd201f;">
                         <a href="https://www.youtube.com/freedrumlessons/" target="_blank" aria-label="youtube"> <i class="fab fa-youtube text-3xl md:text-5xl"></i>
                         </a>
-                        <h2 class="font-black leading-none my-2 text-white">2.4M</h2>
+                        <h2 class="font-black leading-none my-2 text-black">2.4M</h2>
                         <p class="uppercase leading-none md:tracking-widest">Subs<span class="hidden sm:inline-block">cribers</span></p>
                     </div>
                 </div>
                 <div class="w-1/3 px-1 md:px-2 mb-2 md:mb-4">
-                    <div class="py-4 md:py-5 lg:py-6 rounded-xl w-full" style="color:#3b5998;background: #051124;">
+                    <div class="py-4 md:py-5 lg:py-6 rounded-xl w-full" style="color:#3b5998;">
                         <a href="https://facebook.com/drumeo/" target="_blank" aria-label="facebook"> <i class="fab fa-facebook-f text-3xl md:text-5xl"></i> </a>
-                        <h2 class="font-black leading-none my-2 text-white">1.2M</h2>
+                        <h2 class="font-black leading-none my-2 text-black">1.2M</h2>
                         <p class="uppercase leading-none md:tracking-widest">Likes</p>
                     </div>
                 </div>
                 <div class="w-1/3 px-1 md:px-2 mb-2 md:mb-4">
-                    <div class="instagram py-4 md:py-5 lg:py-6 rounded-xl w-full" style="background: #051124;">
+                    <div class="instagram py-4 md:py-5 lg:py-6 rounded-xl w-full">
                         <a href="https://instagram.com/drumeoofficial/" target="_blank" aria-label="instagram"> <i class="fab fa-instagram text-3xl md:text-5xl" style="background: linear-gradient(30deg, #FFD521 17%, #F20008 50%, #B900B4 83%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"></i>
                         </a>
-                        <h2 class="font-black leading-none my-2 text-white">945K</h2>
+                        <h2 class="font-black leading-none my-2">945K</h2>
                         <p class="uppercase leading-none md:tracking-widest" style="color:#E1306C">Followers</p>
                     </div>
                 </div>
             </div>
-            <div class="testimonials flex flex-wrap justify-center mx-auto w-full max-w-xs md:max-w-full">
+            <div class="testimonials flex flex-wrap justify-center mx-auto w-full">
                 @php
                     $testimonials = [
                         [
@@ -1522,32 +693,29 @@
                 @endphp
                 @foreach($testimonials as $testimonial)
                     <div class="testimonial w-full md:w-1/3 lg:w-1/4 md:px-2 pb-2 md:pb-4 flex flex-auto">
-                        <div class="rounded-xl overflow-hidden" style="background: #051124;">
+                        <div class="rounded-xl overflow-hidden">
                             <div class="thumb aspect-16:9 relative bg-center bg-cover autoplay-video cursor-pointer lazyload" data-bg="https://cdn.musora.com/image/fetch/w_500,q_auto:best/{{ $testimonial['image'] }}" data-open="{{ $testimonial['modal'] }}">
                                 <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button smaller"></i>
                             </div>
                             <div class="p-4">
                                 <p class="leading-tight mb-2"><strong>{!!  $testimonial['title'] !!}</strong></p>
-                                <p class="leading-normal text-light-navy text-sm">{{ $testimonial['description'] }}</p>
+                                <p class="leading-normal text-xs">{{ $testimonial['description'] }}</p>
                             </div>
                         </div>
                     </div>
                 @endforeach
-
-                <div class="w-full -mt-14 lg:-mt-5">
-                    <div class="join smaller outline light-navy testimonials-show-all mx-auto">Show More</div>
-                </div>
             </div>
         </div>
     </section>
 
-    <section class="content-section text-center px-6" style="background:linear-gradient(to bottom, #01050f, #021225);overflow:visible">
-        <div class="container mx-auto max-w-4xl">
+    <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #f4f8fb calc(50% + 1px));"></div>
+    <section class="py-10 sm:py-14 lg:py-20 relative overflow-hidden text-center px-6" style="background-color:#f6f8fc;">
+        <div class="container mx-auto max-w-5xl">
             <img data-aos="fade-down" class="h-28 md:h-32 lazyload" data-src="https://cdn.musora.com/image/fetch/w_250,q_auto:best/https://drumeo-assets.s3.amazonaws.com/sales/2022/guarantee.png" alt="guarantee-badge">
 
             <h3 class="leading-tight mt-5 md:mt-8 mb-4 md:mb-6 "><strong>Test-drive your lessons for 90 days.</strong><br>
             Zero risk.</h3>
-            <p class="text-light-navy leading-normal md:leading-loose">Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence on the drums. </p>
+            <p class="leading-normal md:leading-loose">Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence on the drums.</p>
             <div class="flex flex-wrap items-start justify-center mt-5 md:mt-7">
                 <div data-aos="fade-down" class="w-full sm:w-1/3 px-2 mb-3 sm:mb-0">
                     <h5 class="text-drumeo border-drumeo border-2 rounded-full inline-block py-2 px-3 mb-1">1</h5>
@@ -1566,84 +734,79 @@
     </section>
 
     <div id="customize-anchor" class="anchor anchor-slide"></div>
-    @include('_partials.layout.holiday.homepage-bottom-membership',[
-        'logo' => 'https://drumeo-assets.s3.amazonaws.com/promos/november/drumeo-annual-card.jpg',
-        'joinText' => '<strong>Join Drumeo for just $.'.round(Prices::$drumeoEdgeAnnual / 12, 2).'/month</strong> <br class="hidden sm:inline"><strong class="text-promo">PLUS</strong> get 10 free bonuses worth $1228.94.',
-        'annualLink' => '/laravel/public/shopping-cart/api/query?products[DLM]=1,year,1&products[quietpad]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[GHFAL-DIGI]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[learn-songs-faster-pack]=1&locked=true',
-        'bonusNum' => 10,
-        'tileWidth' => 'w-1/2 md:w-1/4 lg:w-1/5',
-        'bonuses' => [
-                    [
-                        'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/pad.jpg',
-                        'title' => 'QuietPad',
-                        'description' => 'Practice anywhere with two full-size playing surfaces.',
-                        'price' => Prices::$quietPadFull,
-                        'shipping' => true,
-                    ],
-                    [
-                        'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/drumsticks.jpg',
-                        'title' => 'Drumeo Drumsticks',
-                        'description' => 'Drumeo 5A Drumsticks by Vater -- made with hickory and extra moisture to last longer.',
-                        'price' => Prices::$sticksFull,
-                        'shipping' => true,
-                    ],
-                    [
-                        'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/sd.jpg',
-                        'title' => 'Successful Drumming',
-                        'description' => 'Jared Falk’s step-by-step curriculum for building a rock-solid foundation on the drums.',
-                        'price' => Prices::$sdOnlineFull,
-                        'online-ship' => "Instant Access"
-                    ],
-                    [
-                        'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/ime.jpg',
-                        'title' => 'Independence Made Easy',
-                        'description' => 'Jared Falk’s 26-week masterclass to unlock your musicality and freedom on the drums.',
-                        'price' => Prices::$imeFull,
-                        'online-ship' => "Instant Access"
-                    ],
-                    [
-                        'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/rdm.jpg',
-                        'title' => 'Rock Drumming Masterclass',
-                        'description' => 'Todd Sucherman’s 26-week masterclass to help you improve your rock drumming.',
-                        'price' => Prices::$rdmFull,
-                        'online-ship' => "Instant Access"
-                    ],
-                    [
-                        'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/dtme.jpg',
-                        'title' => 'Drum Technique Made Easy',
-                        'description' => 'Bruce Becker’s 26-week masterclass to improve your hand & foot technique.',
-                        'price' => Prices::$dtmeFull,
-                    ],
-                    [
-                        'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/eyd.jpg',
-                        'title' => 'Electrify Your Drumming',
-                        'description' => 'Your guide to playing 10 styles of electronic dance music - includes 23 play-alongs!',
-                        'price' => Prices::$eydFull,
-                        'online-ship' => "Instant Access"
-                    ],
-                    [
-                        'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/fwtbdf.jpg',
-                        'title' => 'Better Drum Fills',
-                        'description' => 'The ultimate four-week crash course to playing more creative & musical drum fills.',
-                        'price' => Prices::$bdfFull,
-                        'online-ship' => "Instant Access"
-                    ],
-                    [
-                        'image' => 'https://cdn.musora.com/image/fetch/c_fill,w_300,q_auto:good/https://drumeo-assets.s3.amazonaws.com/promos/july/tommy_card.jpg',
-                        'title' => 'Great Hands For A Lifetime',
-                        'description' => 'Tommy Igoe helps you improve your hand strength, speed, stamina, comfort, and control in the drums in four hours of video lessons.',
-                        'price' => Prices::$ghfalFull,
-                    ],
-                    [
-                        'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/lsf.jpg',
-                        'title' => 'Learn Songs Faster',
-                        'description' => 'This masterclass will give you proven techniques for learning MORE songs in less time.',
-                        'price' => Prices::$learnSongsFasterFull,
-                        'online-ship' => "Instant Access"
-                    ],
-                ],
-        'monthlyLink' => '/laravel/public/shopping-cart/api/query?products[DLM]=1,month,1&locked=true'
-    ])
+    @php
+        $annualLink = '/laravel/public/shopping-cart/api/query?products[DLM]=1,year,1&products[30-day-drummer]=1&products[practicepad]=1&products[Drumeo-VaterSticks]=2&products[BeginnerBook]=1&locked=true';
+    @endphp
+
+    <section class="py-10 sm:py-14 lg:py-20 relative overflow-hidden text-white text-center customize px-4 lg:px-6 relative z-50 overflow-hidden" style="background: linear-gradient(to right, #07233e, #0c1524);">
+        <div class="container mx-auto max-w-5xl relative z-50">
+
+            <div class="flex flex-wrap items-center">
+                <div class="text-center sm:text-left w-full sm:w-1/2 lg:w-5/12 sm:pl-5">
+                    <h3 class="leading-normal"><strong>Unlimited drum lessons<br> The world’s best teachers<br> 5000+ popular songs</strong></h3>
+                    <p class="text-left my-4 sm:my-5 mx-auto inline-block sm:leading-loose">
+                        <i class="text-drumeo fas fa-check sm:mr-2"></i> Trusted by 30,000 students.<br>
+                        <i class="text-drumeo fas fa-check sm:mr-2"></i> Online lessons on every topic.<br>
+                        <i class="text-drumeo fas fa-check sm:mr-2"></i> Personalized feedback from real teachers.<br>
+                        <span class="text-coaches"><i class="fas fa-check sm:mr-2"></i> <strong>*BONUS*</strong> includes free access to Musora’s lessons for piano, guitar, and voice.</span>
+                    </p>
+                    <div class="w-72 lg:w-96 mx-auto sm:mx-0">
+                        <h3><strong>Only $20/month</strong></h3>
+                        <a class="join blue w-full my-3" href="{{ $annualLink }}">Get Started</a>
+                        <p class="text-center text-sm">Billed annually at $240/yr</p>
+                    </div>
+                </div>
+                <div class="flex w-full justify-center sm:justify-start sm:w-1/2 lg:w-7/12 sm:order-1 sm:pl-5 lg:pl-10 mt-7 sm:mt-0">
+                    <img class="max-w-xl sm:max-w-3xl lg:max-w-5xl lazyload" data-src="https://cdn.musora.com/image/fetch/w_1400,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/august/order_collage.png">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="text-center py-10 md:py-20 lg:py-24">
+        <div class="container mx-auto max-w-5xl">
+            <h3><strong>Frequently Asked Questions</strong></h3>
+            <h6>If your questions aren’t answered below, please start a chat with us in the bottom right!</h6>
+            <div class="dropdowns">
+                @include('drumeo.products.partials.question-dropdown-tw', [
+                        "customClass" => "border-blue md:rounded-full",
+                        "customArrow" => "text-blue",
+                        "question" => true,
+                        "title" => "What is Musora",
+                        "description" => 'todo',
+                        ])
+                @include('drumeo.products.partials.question-dropdown-tw', [
+                        "customClass" => "border-blue md:rounded-full",
+                        "customArrow" => "text-blue",
+                        "question" => true,
+                        "title" => "How does Drumeo & Musora work?",
+                        "description" => 'todo',
+                        ])
+                @include('drumeo.products.partials.question-dropdown-tw', [
+                        "customClass" => "border-blue md:rounded-full",
+                        "customArrow" => "text-blue",
+                        "question" => true,
+                        "title" => "Will I be able to cancel before paying the full rate?",
+                        "description" => 'todo',
+                        ])
+                @include('drumeo.products.partials.question-dropdown-tw', [
+                        "customClass" => "border-blue md:rounded-full",
+                        "customArrow" => "text-blue",
+                        "question" => true,
+                        "title" => "What if I just want to try Musora before choosing a plan?",
+                        "description" => 'todo',
+                        ])
+                @include('drumeo.products.partials.question-dropdown-tw', [
+                        "customClass" => "border-blue md:rounded-full",
+                        "customArrow" => "text-blue",
+                        "question" => true,
+                        "title" => "What devices does Musora work on?",
+                        "description" => 'todo',
+                        ])
+            </div>
+        </div>
+    </section>
+
     <div class="unstick-trigger block"></div>
 
     @foreach($coaches as $coach)
@@ -1783,7 +946,46 @@
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/sales-page.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            $(document).foundation();
+
+            $('.slick').slick({
+                slidesToShow: 1
+            });
+
+            $('.dropdown').on('click', function(){
+                $(this).toggleClass('active');
+                $(this).find('i').toggleClass('rotate-180');
+            });
+
+            // sticky topbar before orderSection
+            var stickyBar = $('.promo-banner');
+            $(window).scroll(function () {
+                var stickTrigger = $('.sticky-trigger').offset().top;
+                var unstickTrigger = $('.unstick-trigger').offset().top;
+                if ($(this).scrollTop() > (unstickTrigger - 115)) {
+                    stickyBar.removeClass('fixed');
+                }
+                if ($(this).scrollTop() < stickTrigger - 115) {
+                    stickyBar.removeClass('fixed');
+                }
+                if ($(this).scrollTop() < unstickTrigger - 115 && $(this).scrollTop() > stickTrigger - 115) {
+                    stickyBar.addClass('fixed');
+                }
+            });
+
+            $('.flip-div').click(function (e) {
+                $(this).toggleClass('flipped');
+            });
+
+            //testimony show all button
+            $('.testimonials-show-all').click(function () {
+                $('.testimonials').addClass('show-all');
+            });
+        });
+    </script>
+
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/sliding-anchor.js') }}"></script>

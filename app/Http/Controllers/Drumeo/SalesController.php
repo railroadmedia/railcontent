@@ -246,6 +246,13 @@ class SalesController extends BaseController
 
         return view('drumeo.sales.standard', ['products' => $products, 'theme' => 'drumeo']);
     }
+    public function home23()
+    {
+        $products = $this->productRepository->all();
+        $products = array_combine(array_entity_column($products, 'getSku'), $products);
+
+        return view('drumeo.sales.2023-home', ['products' => $products, 'theme' => 'drumeo']);
+    }
     public function salesStudents()
     {
         $products = $this->productRepository->all();

@@ -11,6 +11,7 @@ Route::domain('{drumeoDomain}')
         'uses' => App\Http\Controllers\Profiles\ReferralController::class . '@join',
     ]);
     Route::get('/', [SalesController::class, 'sales'] );
+    Route::get('/2023-home', [SalesController::class, 'home23'] );
     Route::get('/anniversary-deal', [SalesController::class, 'sales'] );
     Route::get('/mydrumset', [SalesController::class, 'sales'] );
     Route::get('/student-only', [SalesController::class, 'salesStudents'] );
