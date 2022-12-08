@@ -70,7 +70,8 @@
         "files": [
             "helpers/helpers.php",
             "app/Modules/UserManagementSystem/helpers/user_management_system_helpers.php",
-            "app/Modules/Brand/helpers/brand_helpers.php"
+            "app/Modules/Brand/helpers/brand_helpers.php",
+            "app/Modules/Brand/helpers/prices.php"
         ]
     },
     "autoload-dev": {
