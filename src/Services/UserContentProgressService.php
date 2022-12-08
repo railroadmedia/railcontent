@@ -392,7 +392,7 @@ class UserContentProgressService
             'completed_on' => null,
         ];
 
-        if (!empty($currentProgress) && empty($currentProgress['started_on'])) {
+        if (empty($currentProgress) || (!empty($currentProgress) && empty($currentProgress['started_on']))) {
             $updateArray['started_on'] = Carbon::now()->toDateTimeString();
         }
 
