@@ -26,7 +26,6 @@ Route::domain('{musoraDomain}')
         Route::get('choose-your-trial', [MarketingController::class, 'chooseTrial']);
 
         Route::get('gift-card', [MarketingController::class, 'giftcard']);
-        Route::get('redeem', [MarketingController::class, 'redeem']);
 
         Route::get('redeem', [CodeRedemptionController::class, 'renderNewAccountRedeemPage']);
         Route::get('redeem/existing', [CodeRedemptionController::class, 'renderExistingAccountRedeemPage']);
