@@ -1569,7 +1569,7 @@
                     ],
                     [
                         'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/internal-synchronization.jpg',
-                        'title' => 'Internal <br>Synchronization',
+                        'title' => 'Internal <br> Synchronization',
                         'instructor' => 'Billy Cobham',
                     ],
                     [
@@ -1595,6 +1595,116 @@
     @include('musora.sales.coaches-section', [
         'header' => 'Study with the world’s <br class="md:hidden">best drummers.',
         'desc' => 'Diversify your drumming knowledge by studying with the world’s best drummers and teachers – with 200+ goal-oriented artist courses to amplify your skills & exclusive live events with drumming royalty.'
+    ])
+
+    @php
+        $testimonials = [
+            [
+                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/testimonials/ed-koop.jpg',
+                'modal' => 'testimonial1',
+                'name' => 'Ed Koop',
+                'title' => 'He made the band & he’s<br> playing his dream gigs.',
+                'description' => 'After 20 years away from the drums, Ed says he’s loving music more than ever. He nailed his first audition and has now played at the venues of his dreams.',
+                'video' => '342059271',
+            ],
+            [
+                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/testimonials/lisa-aragon.jpg',
+                'modal' => 'testimonial2',
+                'name' => 'Lisa Aragon',
+                'title' => 'She can now jam with<br> anyone she wants.',
+                'description' => 'Lisa got interested in the drums by playing Rock Band. She had no idea she’d be performing with strangers in Nashville just a few years later.',
+                'video' => '373252004',
+            ],
+            [
+                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/testimonials/nick-rudman-2.jpg',
+                'modal' => 'testimonial3',
+                'name' => 'Nick Rudman',
+                'title' => 'Retirement was too<br> slow for him.',
+                'description' => 'After working on the railroad for 40 years, Nick now keeps his snare drum beside his bed...just in case he wakes up with a good idea.',
+                'video' => '342066325',
+            ],
+            [
+                'image' => 'https://i.vimeocdn.com/video/1143532818-61ead907372040ae51f23b9d5f05469c271aee744e9cb67e777ae4307f762b23-d_620',
+                'modal' => 'testimonial12',
+                'name' => 'Omari Augustine',
+                'title' => 'The student has<br> become the teacher.',
+                'description' => 'Omari had big shoes to fill. His father was already an accomplished drummer in Trinidad & Tobago when Omari decided to take his drumming to the next level.',
+                'video' => '553438851',
+            ],
+            [
+                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/testimonials/guy-dobbins.jpg',
+                'modal' => 'testimonial4',
+                'name' => 'Guy Dobbins',
+                'title' => 'Same-day advice got<br> him through the gig.',
+                'description' => 'Guy had trouble figuring out a song, he reached out and an instructor walked him through it that same day - getting him through the gig that evening.',
+                'video' => '373445704',
+            ],
+            [
+                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/testimonials/marlene-rosen.jpg',
+                'modal' => 'testimonial5',
+                'name' => 'Marlene Rosen',
+                'title' => 'She didn’t let cancer<br> stop the rhythm.',
+                'description' => 'Marlene, a cancer survivor, filled her recovery time with drumming and was able to progress at a pace that worked for her.',
+                'video' => '373446024',
+            ],
+            [
+                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/testimonials/barry-lisle.jpg',
+                'modal' => 'testimonial6',
+                'name' => 'Barry Lisle',
+                'title' => 'He loved the drums as a <br>kid, now he’s in two bands.',
+                'description' => 'Barry wanted something to keep his mind busy, so he revisited the instrument he’d loved as a kid: the drums. Now he’s playing in bands and recording an album.',
+                'video' => '342066433',
+            ],
+            [
+                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/testimonials/jay-damberg-2.jpg',
+                'modal' => 'testimonial7',
+                'name' => 'Jay Damberg',
+                'title' => 'Private teachers weren’t<br> available at 11PM',
+                'description' => 'Barry wanted something to keep his mind busy, so he revisited the instrument he’d loved as a kid: the drums. Now he’s playing in bands and recording an album.',
+                'video' => '373445466',
+            ],
+            [
+                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/testimonials/ivy-elizondo-2.jpg',
+                'modal' => 'testimonial8',
+                'name' => 'Ivy Elizondo',
+                'title' => 'She took her kids’ drums<br> and started a band.',
+                'description' => 'When Ivy’s kids decided to stop playing drums, she jumped on the throne instead -- she’s used Drumeo to build a foundation and formed a band.',
+                'video' => '373445819',
+            ],
+            [
+                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/testimonials/scott-anderson.jpg',
+                'modal' => 'testimonial9',
+                'name' => 'Scott Anderson',
+                'title' => 'He’s addicted to<br> self-improvement.',
+                'description' => 'Scott was frustrated starting out on the drums, so he joined Drumeo which helped him slow down, see how everything fits together, and gain momentum.',
+                'video' => '',
+            ],
+            [
+                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/testimonials/john-pruden.jpg',
+                'modal' => 'testimonial10',
+                'name' => 'John Pruden',
+                'title' => 'He developed his own<br> style with an army of teachers.',
+                'description' => 'John didn’t have time for weekly lessons or sifting through online content. Drumeo gave him structure and the ability to learn from different world class instructors.',
+                'video' => '373445917',
+            ],
+            [
+                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/testimonials/phil-davis.jpg',
+                'modal' => 'testimonial11',
+                'name' => 'Phil Davis',
+                'title' => 'Finally, online drum<br> lessons he could trust.',
+                'description' => 'Phil found the vast amount of online content disorganized, overwhelming and contradictory, so he quickly made himself at home with Drumeo.',
+                'video' => '373446155',
+            ],
+        ]
+    @endphp
+
+    @include('musora.sales.subscription-homepages', [
+        'header' => 'Trusted By Drummers<br class="inline-block sm:hidden">  Everywhere',
+        'reviewText' => 'Rated 5 stars by thousands by Drumeo students from around the world!',
+        'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738',
+        'youtube' => '2,110,000',
+        'facebook' => '1,120,000',
+        'instagram' => '842,000'
     ])
 
     @foreach($coaches as $coach)
