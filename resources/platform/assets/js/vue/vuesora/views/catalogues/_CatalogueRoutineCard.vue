@@ -1,65 +1,3 @@
-<template>
-    <div
-        class="tw-flex tw-flex-col pa-1 tw-border-box tw-w-full sm:tw-w-1/2 md:tw-w-1/3 xl:tw-w-1/4"
-        :class="class_object"
-    >
-        <div class="tw-flex tw-flex-col">
-            <div
-                class="tw-flex tw-flex-col tw-rounded-lg tw-overflow-hidden"
-                :class="[item.type + '-thumbnail']"
-            >
-                <div
-                    class="card-media bg-grey-2 active corners-10 dark:tw-bg-[#081825]"
-                    :class="[thumbnailType]"
-                >
-
-                    <img
-                        :src="mappedData.thumbnail"
-                        alt="thumbnail"
-                        class="tw-transition-opacity tw-duration-500"
-                        loading="lazy"
-                        :class="mappedData.imageLoaded ? 'tw-opacity-1' : 'tw-opacity-0'"
-                        @load="mappedData.imageLoaded = true"
-                    />
-
-                    <div class="lesson-progress overflow">
-                        <span
-                            class="progress"
-                            :class="themeBgClass"
-                            :style="'width:' + progress_percent + '%'"
-                        ></span>
-                    </div>
-
-                    <div class="routine-actions tw-flex tw-flex-col tw-justify-center tw-px-4">
-                        <div class="tw-text-white tw-text-center pb-2 tw-text-sm sm:tw-text-xs lg:tw-text-sm">Choose your preferred vocal range:</div>
-                        <div class="">
-                            <div class="tw-flex tw-flex-row">
-                                <button
-                                    class="btn routine-high"
-                                    dusk="routine-high"
-                                    @click.stop.prevent="showRoutineSoundSlice('high')"
-                                >
-                                    <span class="text-white" :class="themeBgClass">high</span>
-                                </button>
-                                <button
-                                    class="btn routine-low"
-                                    dusk="routine-low"
-                                    @click.stop.prevent="showRoutineSoundSlice('low')"
-                                >
-                                    <span class="text-white" :class="themeBgClass">low</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card-info tw-flex tw-flex-col">
-                <p class="tw-text-sm dark:tw-text-white tw-text-[#00101D] mb-1 mt-1">{{ mappedData.description }}</p>
-            </div>
-        </div>
-    </div>
-</template>
 <script>
 import Mixin from './_mixin';
 import ThemeClasses from '../../mixins/ThemeClasses';
@@ -91,3 +29,65 @@ export default {
     },
 };
 </script>
+<template>
+    <div
+        class="tw-flex tw-flex-col pa-1 tw-border-box tw-w-full tw-mb-4 md:tw-mb-0"
+        :class="class_object"
+    >
+        <div class="tw-flex tw-flex-col md:tw-flex-row">
+            <div
+                class="tw-flex tw-flex-col tw-rounded-lg tw-overflow-hidden tw-w-full md:tw-h-[280px] md:tw-w-[280px] tw-mb-4 md:tw-mb-0 tw-flex-shrink-0"
+                :class="[item.type + '-thumbnail']"
+            >
+                <div
+                    class="card-media bg-grey-2 active corners-10 dark:tw-bg-[#081825] tw-h-full tw-w-full"
+                    :class="[thumbnailType]"
+                >
+
+                    <img
+                        :src="mappedData.thumbnail"
+                        alt="thumbnail"
+                        class="tw-transition-opacity tw-duration-500 tw-absolute tw-object-cover tw-object-left "
+                        loading="lazy"
+                        :class="mappedData.imageLoaded ? 'tw-opacity-1' : 'tw-opacity-0'"
+                        @load="mappedData.imageLoaded = true"
+                    />
+
+                </div>
+            </div>
+
+            <div class="card-info tw-flex tw-flex-col tw-px-4 tw-justify-center">
+                <h2 class="dark:tw-text-white tw-text-[#00101D] tw-text-xl tw-font-bold">{{ mappedData.black_title }}</h2>
+                <p class="tw-text-sm dark:tw-text-white tw-text-[#00101D] tw-mb-4 tw-mt-3">{{ mappedData.description }}</p>
+                
+                <div class="tw-flex tw-flex-col md:tw-flex-row">
+                    <button
+                        class="tw-btn-primary tw-bg-singeo routine-high tw-w-full md:tw-w-auto tw-mb-4 md:tw-mb-0 md:tw-mr-4"
+                        dusk="routine-high"
+                        @click.stop.prevent="showRoutineSoundSlice('high')"
+                    >   
+                        <svg width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10.1992 17.459L10.1993 17.4582C8.80922 17.2831 7.54891 16.6416 6.6868 15.6661L6.68545 15.6646L6.68547 15.6646C5.78007 14.5972 5.39524 13.2566 5.61966 11.9379C6.0286 9.36544 8.29459 8.1678 10.3309 7.45071V4.70531V4.70162L10.331 4.70162C10.3544 4.066 10.6572 3.46592 11.1716 3.0249C11.6854 2.58421 12.3715 2.33527 13.0868 2.32673L13.088 2.32672L13.1297 2.32673C14.4286 2.32673 15.4862 3.21137 15.6496 4.4645L15.6501 4.46813L15.65 4.46814C15.7058 5.066 15.5774 5.66531 15.2793 6.20374C14.9813 6.74196 14.525 7.1991 13.9592 7.52895L13.9591 7.52899C13.3234 7.89895 12.6396 8.20052 11.9221 8.42751V9.74884C12.6371 9.71553 13.3498 9.85636 13.9808 10.1571L13.9808 10.1571C14.6433 10.4731 15.1877 10.9523 15.5453 11.5374L15.5459 11.5383C15.9577 12.2282 16.1285 13.0101 16.0355 13.786M10.1992 17.459L15.9362 13.774M10.1992 17.459H10.2118C10.2406 17.459 10.2711 17.4626 10.307 17.4678C10.3134 17.4688 10.3202 17.4698 10.3272 17.4708C10.3284 17.471 10.3296 17.4712 10.3309 17.4714M10.1992 17.459L10.2118 17.359C10.2557 17.359 10.2996 17.3656 10.3435 17.3721C10.3726 17.3765 10.4018 17.3808 10.4309 17.3833M16.0355 13.786L15.9362 13.774M16.0355 13.786C16.0355 13.786 16.0355 13.7859 16.0355 13.7859L15.9362 13.774M16.0355 13.786C15.9425 14.5617 15.5903 15.2945 15.025 15.8934L15.0234 15.895L15.0234 15.895C14.2215 16.7068 13.1249 17.248 11.9221 17.4304M15.9362 13.774C15.8459 14.5272 15.5038 15.2405 14.9522 15.8248C14.1478 16.6391 13.0386 17.1774 11.8221 17.3438M11.9221 17.4304V17.3438H11.8221M11.9221 17.4304C11.8933 17.4348 11.8645 17.4389 11.8356 17.4429L11.8221 17.3438M11.9221 17.4304V18.5287C11.9221 19.3311 11.4321 20.0651 10.6498 20.4597C9.86829 20.8538 8.90667 20.8538 8.12516 20.4597C7.34288 20.0651 6.8529 19.3311 6.8529 18.5287C6.8529 18.2689 7.01137 18.0363 7.25567 17.9131C7.49919 17.7904 7.7978 17.7904 8.04131 17.9131C8.28562 18.0363 8.44409 18.2689 8.44409 18.5287C8.44409 18.8116 8.61708 19.0805 8.91081 19.2287M11.8221 17.3438V18.5287C11.8221 19.2885 11.358 19.9905 10.6048 20.3704C9.85158 20.7503 8.92338 20.7503 8.17019 20.3704C7.417 19.9905 6.9529 19.2885 6.9529 18.5287C6.9529 18.3115 7.0855 18.1109 7.3007 18.0024C7.51589 17.8939 7.78109 17.8939 7.99629 18.0024C8.21149 18.1109 8.34409 18.3115 8.34409 18.5287C8.34409 18.8543 8.54299 19.1551 8.86579 19.318M8.86579 19.318L8.91081 19.2287M8.86579 19.318C9.18858 19.4808 9.58638 19.4808 9.90918 19.318M8.86579 19.318L8.91084 19.2287C8.91083 19.2287 8.91082 19.2287 8.91081 19.2287M8.91081 19.2287C9.20528 19.3772 9.56965 19.3772 9.86413 19.2287M9.90918 19.318L9.86413 19.2287M9.90918 19.318C10.232 19.1551 10.4309 18.8543 10.4309 18.5287V17.3833M9.90918 19.318L9.86416 19.2287C9.86415 19.2287 9.86414 19.2287 9.86413 19.2287M9.86413 19.2287C10.1579 19.0805 10.3309 18.8116 10.3309 18.5287V17.4714M10.4309 17.3833L10.4225 17.4829C10.3912 17.4803 10.3593 17.4756 10.3309 17.4714M10.4309 17.3833H10.3309V17.4714M7.19434 12.1373L7.19421 12.1381C7.03627 13.0708 7.3067 14.022 7.95056 14.7845C8.53346 15.4495 9.38332 15.8998 10.3311 16.0443V11.9072C10.2039 12.018 10.0866 12.1371 9.98014 12.2633C9.85667 12.4221 9.66741 12.527 9.45807 12.5584L9.458 12.5584C9.2479 12.5898 9.03109 12.5452 8.85712 12.4327L8.85703 12.4326C8.68295 12.3197 8.56486 12.1467 8.53671 11.9507C8.53671 11.9506 8.5367 11.9506 8.5367 11.9506L8.63569 11.9364C8.61193 11.7719 8.66627 11.606 8.78598 11.4774L7.19434 12.1373ZM7.19434 12.1373C7.4143 10.7695 8.34951 9.79184 10.331 8.98499V10.1593C9.69311 10.4665 9.13946 10.8937 8.71074 11.4115L7.19434 12.1373ZM11.9221 9.84895C11.8887 9.85054 11.8554 9.85252 11.8221 9.85489V9.75464L11.9221 9.84895ZM13.0781 6.36668C12.7217 6.58168 12.3422 6.76598 11.945 6.91698L11.9221 4.70289C11.9437 4.44843 12.0738 4.20711 12.292 4.02792L12.2921 4.02789C12.5117 3.84744 12.8034 3.74431 13.1093 3.74208H13.1297C13.6917 3.74208 14.0043 4.17134 14.0737 4.62571C14.1 4.96367 14.0232 5.30249 13.85 5.60762C13.6761 5.91397 13.4108 6.17605 13.08 6.36554L13.08 6.36552L13.0781 6.36668ZM13.8159 14.9657C13.3153 15.4696 12.6462 15.8254 11.9018 15.9828L11.9217 11.1693C12.3552 11.1305 12.7926 11.2012 13.1811 11.3735L13.1812 11.3735C13.5956 11.5571 13.9331 11.8464 14.15 12.2001C14.407 12.6405 14.5116 13.1353 14.4526 13.6249L14.4526 13.6249C14.3937 14.1146 14.1732 14.5803 13.8159 14.9657Z" fill="white" stroke="white" stroke-width="0.2"/>
+                        </svg>
+                        <span class="text-white" :class="themeBgClass">high</span>
+                    </button>
+                    <button
+                        class="tw-btn-primary tw-bg-singeo routine-low tw-w-full md:tw-w-auto"
+                        dusk="routine-low"
+                        @click.stop.prevent="showRoutineSoundSlice('low')"
+                    >
+                        <svg width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M16.5083 9.14974C17.1112 9.14974 17.6 8.6909 17.6 8.12489C17.6 7.55889 17.1112 7.10005 16.5083 7.10005C15.9053 7.10005 15.4165 7.55889 15.4165 8.12489C15.4165 8.6909 15.9053 9.14974 16.5083 9.14974Z" fill="white"/>
+                            <path d="M16.4861 12.9103C17.0749 12.9245 17.5646 12.488 17.5798 11.9352C17.595 11.3824 17.1299 10.9227 16.541 10.9085C15.9522 10.8942 15.4625 11.3308 15.4473 11.8836C15.4321 12.4364 15.8972 12.896 16.4861 12.9103Z" fill="white"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M3.77142 7.64149C3.77142 5.72291 5.53993 3.6839 8.39435 3.6839C9.93892 3.6839 11.3566 4.36479 12.3862 5.60081C13.4017 6.82015 13.9609 8.51622 13.9609 10.3771C13.9609 12.9972 12.9793 15.3665 11.197 17.0482C9.61441 18.5418 7.52503 19.3982 5.46459 19.3982V17.6521C7.05521 17.6521 8.74556 16.9532 9.98632 15.7825C10.9976 14.8281 12.203 13.116 12.203 10.3771C12.203 7.51039 10.6012 5.43 8.39435 5.43C6.77874 5.43 5.88206 6.39914 5.76963 7.42165C6.14506 7.21714 6.58126 7.10005 7.04661 7.10005C8.45349 7.10005 9.59398 8.1706 9.59398 9.49135C9.59398 10.8121 8.45349 11.8827 7.04661 11.8827C6.10826 11.8827 5.28841 11.4061 4.84642 10.6972C4.7975 10.6187 4.74612 10.5414 4.68586 10.4702L4.43551 10.1746C3.94223 9.41329 3.77142 8.59561 3.77142 7.64149ZM7.04661 10.5162C7.64956 10.5162 8.13834 10.0574 8.13834 9.49135C8.13834 8.92535 7.64956 8.46651 7.04661 8.46651C6.44367 8.46651 5.95488 8.92535 5.95488 9.49135C5.95488 10.0574 6.44367 10.5162 7.04661 10.5162Z" fill="white"/>
+                        </svg>
+                        <span class="text-white" :class="themeBgClass">low</span>
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</template>
+
