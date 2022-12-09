@@ -59,6 +59,13 @@
                     </div>
                     @if(!empty($bonus['br'])) {!! $bonus['br'] !!} @endif
                 @endforeach
+                @if($theme === 'drumeo')
+                    <div class="grid md:grid-cols-3 lg:px-16 gap-4">
+                        <img class="rounded-xl" src="https://cdn.musora.com/image/fetch/w_460,q_auto:best/https://drumeo-assets.s3.amazonaws.com/sales/2023/pianote-included.jpg" alt="pianote included" />
+                        <img class="rounded-xl" src="https://cdn.musora.com/image/fetch/w_460,q_auto:best/https://drumeo-assets.s3.amazonaws.com/sales/2023/guitareo-included.jpg" alt="guitareo included" />
+                        <img class="rounded-xl" src="https://cdn.musora.com/image/fetch/w_460,q_auto:best/https://drumeo-assets.s3.amazonaws.com/sales/2023/singeo-included.jpg" alt="singeo included" />
+                    </div>
+                @endif
                 {{-- <p class=" mt-4 md:mt-5" style="display:inline-block;background: -webkit-linear-gradient(20deg, #03c8ac, #0976db, #9a01ee, #f61a30);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"><strong>By joining today, we’ll donate 20% of your new membership<br class="hidden sm:inline"> towards the <a target="_blank" href="https://musicounts.ca/en/take-action/ways-of-giving/fundraise-on-musicounts-behalf/fundraisers-supporting-musicounts/give-the-gift-of-music-with-musora/"><u>MusiCounts Band Aid Program</u></a>.</strong></p> --}}
                 {{--            <h4 class="leading-tight mt-4"><strong>Only $12.50/month <br class="inline sm:hidden">(billed annually at ${{ Prices::$drumeoEdgeAnnual }}).</strong></h4>--}}
                 <a class="join bg-{{$theme}} bigger my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="{{ $annualLink }}" {{--data-open="orderModal"--}}>GET Started <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
