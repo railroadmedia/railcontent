@@ -190,6 +190,7 @@ export default {
                     this.handleResponse(response)
                 })
                 .catch(() => {
+                    console.log('ERROR')
                     this.showErrorToast();
                     this.loading = false;
                 });
