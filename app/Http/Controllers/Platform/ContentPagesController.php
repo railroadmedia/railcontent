@@ -1015,6 +1015,7 @@ class ContentPagesController extends BaseController
         $packs[] =
             $this->contentService->getBySlugAndType('guitar-system', 'pack')
                 ->first();
+        $packs = array_values(array_filter($packs));
 
         $guitarQuestPack =
             $this->contentService->getBySlugAndType('guitar-quest', 'pack')

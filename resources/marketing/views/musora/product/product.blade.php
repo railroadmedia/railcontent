@@ -95,6 +95,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
     <script type="text/javascript" src="{{ asset('marketing/parcel/js/drumeo/pack-drumshop.js')  }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/sliding-anchor.js') }}"></script>
     <script>
         $(document).ready(function(){
 
