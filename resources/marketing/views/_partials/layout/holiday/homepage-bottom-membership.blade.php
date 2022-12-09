@@ -37,7 +37,7 @@
                                         <p class="text-sm"><strong>DETAILS</strong></p>
                                     </div>
                                 </div>
-                                <div class="back border-2 border-promo absolute z-40 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
+                                <div class="back border-2 border-[#FFAC00] absolute z-40 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
                                     <div class="w-full h-full mx-auto text-center text-white flex flex-wrap justify-center items-center content-center p-2 md:p-3" style="background:linear-gradient(to bottom, #01050f, #021225);">
                                         <p class="leading-snug mx-auto text-xs">{!! $bonus['description'] !!}</p>
                                     </div>
