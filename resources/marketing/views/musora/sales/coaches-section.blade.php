@@ -144,4 +144,8 @@
             @endforeach
         </div>
     </div>
+
+
+    <a href="" class="mx-1 join outline method smaller">EXPLORE 200+ COURSES <i class="fas fa-info-circle"></i> </a>
+    <a href="" class="mx-1 join blue smaller anchor-slide">START FOR FREE <i class="fas fa-arrow-right"></i> </a>
 </section>
