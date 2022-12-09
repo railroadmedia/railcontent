@@ -47,7 +47,7 @@ environments:
         tmp-storage: 2048
         cli-tmp-storage: 2048
         queue-tmp-storage: 2048
-        cache: staging-cache
+        cache: musora-staging-redis-cache
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'
@@ -72,7 +72,7 @@ environments:
         tmp-storage: 2048
         cli-tmp-storage: 2048
         queue-tmp-storage: 2048
-        cache: staging-cache
+        cache: musora-staging-redis-cache
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'
@@ -96,7 +96,7 @@ environments:
         tmp-storage: 2048
         cli-tmp-storage: 2048
         queue-tmp-storage: 2048
-        cache: staging-cache
+        cache: musora-staging-redis-cache
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:clear'
@@ -120,7 +120,7 @@ environments:
         tmp-storage: 2048
         cli-tmp-storage: 2048
         queue-tmp-storage: 2048
-        cache: staging-cache
+        cache: musora-staging-redis-cache
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'
@@ -144,7 +144,7 @@ environments:
         tmp-storage: 2048
         cli-tmp-storage: 2048
         queue-tmp-storage: 2048
-        cache: staging-cache
+        cache: musora-staging-redis-cache
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'
@@ -168,7 +168,7 @@ environments:
         tmp-storage: 2048
         cli-tmp-storage: 2048
         queue-tmp-storage: 2048
-        cache: staging-cache
+        cache: musora-staging-redis-cache
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'
@@ -194,7 +194,7 @@ environments:
         tmp-storage: 2048
         cli-tmp-storage: 2048
         queue-tmp-storage: 2048
-        cache: staging-cache
+        cache: musora-staging-redis-cache
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'
@@ -218,7 +218,7 @@ environments:
         tmp-storage: 2048
         cli-tmp-storage: 2048
         queue-tmp-storage: 2048
-        cache: staging-cache
+        cache: musora-staging-redis-cache
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'
@@ -242,7 +242,7 @@ environments:
         tmp-storage: 2048
         cli-tmp-storage: 2048
         queue-tmp-storage: 2048
-        cache: staging-cache
+        cache: musora-staging-redis-cache
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'
@@ -266,7 +266,7 @@ environments:
         tmp-storage: 2048
         cli-tmp-storage: 2048
         queue-tmp-storage: 2048
-        cache: staging-cache
+        cache: musora-staging-redis-cache
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
             - 'php artisan event:cache'
