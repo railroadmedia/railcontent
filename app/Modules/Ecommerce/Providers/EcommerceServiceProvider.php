@@ -32,6 +32,8 @@ class EcommerceServiceProvider extends ServiceProvider
                 ProcessAppleExpiredSubscriptions::class
             ]
         );
+
+        $this->loadRoutesFrom(__DIR__ . '/../routes/routes.php');
     }
 
     /**

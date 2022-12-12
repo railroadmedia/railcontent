@@ -442,7 +442,6 @@ Route::domain('{musoraDomain}')
                    [ContentPagesController::class, 'firstLevel'])
             ->whereIn('brand', all_brands())
             ->whereIn('primaryPage', [
-                'packs',
                 'method',
                 'coaches',
                 'songs',
@@ -486,14 +485,14 @@ Route::domain('{musoraDomain}')
         Route::get('/{brand}/{primaryPage}/{firstContentSlug}/{firstContentId}/{secondContentSlug}/{secondContentId}',
                    [ContentPagesController::class, 'secondLevel'])
             ->whereIn('brand', all_brands())
-            ->whereIn('primaryPage', ['packs', 'method', 'coaches', 'courses', 'songs', 'play-alongs'])
+            ->whereIn('primaryPage', ['method', 'coaches', 'courses', 'songs', 'play-alongs'])
             ->name('platform.content.second-level');
 
         Route::get(
             '/{brand}/{primaryPage}/{firstContentSlug}/{firstContentId}/{secondContentSlug}/{secondContentId}/{thirdContentSlug}/{thirdContentId}',
             [ContentPagesController::class, 'thirdLevel'])
             ->whereIn('brand', all_brands())
-            ->whereIn('primaryPage', ['packs', 'method'])
+            ->whereIn('primaryPage', [ 'method'])
             ->name('platform.content.third-level');
 
         Route::get(

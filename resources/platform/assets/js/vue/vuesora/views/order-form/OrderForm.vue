@@ -433,6 +433,7 @@ export default {
     },
 
     beforeMount() {
+        console.log('Order form loaded')
         if (!this.isSignedIn || !this.shippingAddresses || this.shippingAddresses.data.length === 0) {
             this.newAddress = true;
         }

@@ -22,7 +22,7 @@
                 <div class="tw-flex tw-flex-row tw-flex-auto tw-mt-3 tw-p-3 tw-text-[#00101D] dark:tw-text-white">
                     <h2 class="tw-font-bold tw-text-lg">
                         What type of notifications would you like to receive from 
-                        <span class="tw-capitalize">{{ app('request')->input('selected-brand') ? app('request')->input('selected-brand') : $brand }}</span>?
+                        <span class="tw-capitalize">{{ $selectedBrand }}</span>?
                     </h2>
                 </div>
 
