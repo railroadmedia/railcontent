@@ -421,47 +421,47 @@
     <section class="text-center text-white px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#0c1524;">
         <div class="container max-w-5xl mx-auto">
             <h2><strong>Play your favorite songs.</strong></h2>
-            <h6 class="leading-tight mt-3">You’ll have all the tools you need to <br class="hidden sm:inline"> make sure you never miss a beat.</h6>
+            <p class="leading-tight mt-3">You’ll have all the tools you need to <br class="hidden sm:inline"> make sure you never miss a beat.</p>
 
             <div class="flex my-10">
                 <div class="text-left pr-4">
                     <div class="flex mb-4">
-                        <i class="fas fa-music text-drumeo"></i>
+                        <i class="fal fa-music text-drumeo"></i>
                         <div class="flex-grow pl-4">
-                            <h4><em>5000+ popular songs.</em></h4>
-                            <p>Get note-for-note song breakdowns for music from every style & era, sorted by skill level so you can always find a song you’ll love.</p>
+                            <h5><strong>5000+ popular songs.</strong></h5>
+                            <p class="text-sm">Get note-for-note song breakdowns for music from every style & era, sorted by skill level so you can always find a song you’ll love.</p>
                         </div>
                     </div>
                     <div class="flex mb-4">
-                        <i class="fas fa-music text-drumeo"></i>
+                        <i class="fal fa-music text-drumeo"></i>
                         <div class="flex-grow pl-4">
-                            <h4><em>Find the perfect tempo.</em></h4>
-                            <p>Slow down any section of a song to hear every note. When you’ve nailed the part, bump the tempo back up to rock out in real time!</p>
+                            <h5><strong>Find the perfect tempo.</strong></h5>
+                            <p class="text-sm">Slow down any section of a song to hear every note. When you’ve nailed the part, bump the tempo back up to rock out in real time!</p>
                         </div>
                     </div>
                     <div class="flex mb-4">
-                        <i class="fas fa-music text-drumeo"></i>
+                        <i class="fal fa-music text-drumeo"></i>
                         <div class="flex-grow pl-4">
-                            <h4><em>Loop the trouble spots.</em></h4>
-                            <p>No more pausing and rewinding when you mess up that fill. Simply grab the section of a song and loop it – over and over again.</p>
+                            <h5><strong>Loop the trouble spots.</strong></h5>
+                            <p class="text-sm">No more pausing and rewinding when you mess up that fill. Simply grab the section of a song and loop it – over and over again.</p>
                         </div>
                     </div>
                     <div class="flex mb-4">
-                        <i class="fas fa-music text-drumeo"></i>
+                        <i class="fal fa-music text-drumeo"></i>
                         <div class="flex-grow pl-4">
-                            <h4><em>Remove the drums *NEW*</em></h4>
-                            <p>Play-along with the original drummer – or magically remove the original drum parts to make each song and performance uniquely yours!</p>
+                            <h5><strong>Remove the drums *NEW*</strong></h5>
+                            <p class="text-sm">Play-along with the original drummer – or magically remove the original drum parts to make each song and performance uniquely yours!</p>
                         </div>
                     </div>
                     <div class="flex">
-                        <i class="fas fa-music text-drumeo"></i>
+                        <i class="fal fa-music text-drumeo"></i>
                         <div class="flex-grow pl-4">
-                            <h4><em>Take your songs anywhere.</em></h4>
-                            <p>Accessible on any device, plus get printable sheet music. You’ll be able to learn and play the songs you love whenever and wherever you want.</p>
+                            <h5><strong>Take your songs anywhere.</strong></h5>
+                            <p class="text-sm">Accessible on any device, plus get printable sheet music. You’ll be able to learn and play the songs you love whenever and wherever you want.</p>
                         </div>
                     </div>
                 </div>
-                <img src="">
+                <img class="h-96" src="https://cdn.musora.com/image/fetch/w_1400,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/august/order_collage.png">
             </div>
             <a href="" class="mx-1 join outline method smaller">SEE SONGS LIST <i class="fas fa-info-circle"></i> </a>
             <a href="" class="mx-1 join blue smaller anchor-slide">START FOR FREE <i class="fas fa-arrow-right"></i> </a>
@@ -798,7 +798,7 @@
     @endphp
     <div id="testimonials" class="anchor"></div>
     @include('musora.sales.testimonials-section', [
-        'header' => 'Trusted By Drummers<br class="inline-block sm:hidden">  Everywhere',
+        'header' => 'Trusted by drummers<br class="inline-block sm:hidden">  everywhere',
         'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738',
         'reviewText' => 'Drumeo is rated 5-stars for price, satisfaction,<br class="inline sm:hidden"> and customer service.',
         'youtubeLink' => 'https://www.youtube.com/freedrumlessons/',
@@ -845,12 +845,12 @@
             <div class="flex flex-wrap items-center">
                 <div class="text-center sm:text-left w-full sm:w-1/2 lg:w-1/2 sm:pl-5">
                     <h3 class="leading-normal"><strong>Unlimited drum lessons<br> The world’s best teachers<br> 5000+ popular songs</strong></h3>
-                    <p class="text-left my-4 sm:my-5 mx-auto inline-block sm:leading-loose">
-                        <i class="text-drumeo fas fa-check sm:mr-2"></i> Trusted by 30,000 students.<br>
-                        <i class="text-drumeo fas fa-check sm:mr-2"></i> Online lessons on every topic.<br>
-                        <i class="text-drumeo fas fa-check sm:mr-2"></i> Personalized feedback from real teachers.<br>
-                        <span class="text-coaches"><i class="fas fa-check sm:mr-2"></i> <strong>*BONUS*</strong> includes free access to Musora’s lessons for piano, guitar, and voice.</span>
-                    </p>
+                    <ul class="fa-ul text-left  my-4 sm:my-5 mx-auto">
+                        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Trusted by 30,000 students.</li>
+                        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Online lessons on every topic.</li>
+                        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Personalized feedback from real teachers.</li>
+                        <li class="leading-tight text-coaches"><i class="fa-li fas fa-check"></i> <strong>*BONUS*</strong> includes free access to Musora’s lessons for piano, guitar, and voice.</li>
+                    </ul>
                     <div class="w-72 lg:w-96 mx-auto sm:mx-0">
                         <a class="join smaller blue w-full my-3" href="{{ $annualLink }}">START FOR FREE <i class="fas fa-arrow-right"></i> </a>
                         <p class="text-center text-sm"><em>Pay nothing for 7 days, then $20/month billed annually.</em></p>
@@ -863,42 +863,32 @@
         </div>
     </section>
 
-    <section class="text-center py-10 md:py-20 lg:py-24">
+    <section class="text-center py-10 md:py-20 lg:py-24 px-4 sm:px-6">
         <div class="container mx-auto max-w-5xl">
-            <h3><strong>Frequently Asked Questions</strong></h3>
-            <h6 class="mt-3 mb-10">If your questions aren’t answered below, please start a chat with us in the bottom right!</h6>
+            <h2><strong>Frequently Asked Questions</strong></h2>
+            <p class="mt-3 mb-10">If your questions aren’t answered below, please start a chat with us in the bottom right!</p>
             <div class="dropdowns">
                 @include('drumeo.products.partials.question-dropdown-tw', [
-                        "customClass" => "border-blue md:rounded-full",
-                        "customArrow" => "text-blue",
                         "question" => true,
                         "title" => "What is Drumeo?",
                         "description" => 'Drumeo is an online platform that offers an organized drum curriculum, artist courses on popular topics, 5000+ songs transcribed note-for-note, and a supportive global community of students and teachers. ',
                         ])
                 @include('drumeo.products.partials.question-dropdown-tw', [
-                        "customClass" => "border-blue md:rounded-full",
-                        "customArrow" => "text-blue",
                         "question" => true,
                         "title" => "Is Drumeo good for beginners?",
                         "description" => 'Yes! You’ll always know what to practice with sequential step-by-step video lessons – plus have fun applying your new skills to your favorite songs, sorted by skill level. And if you ever need help, you’ll have unlimited personal support through live Q&A sessions, student reviews, and a helpful community. ',
                         ])
                 @include('drumeo.products.partials.question-dropdown-tw', [
-                        "customClass" => "border-blue md:rounded-full",
-                        "customArrow" => "text-blue",
                         "question" => true,
                         "title" => "Does Drumeo have anything for advanced drummers?",
                         "description" => 'Drumeo is the perfect companion for advanced drummers, giving you access to artist courses so you can gain insights and inspiration from the legends – with 200+ artist courses on a variety of topics. Plus, you’ll get note-for-note transcriptions for thousands of songs and practical playback tools, so you can take on any new challenge with confidence. ',
                         ])
                 @include('drumeo.products.partials.question-dropdown-tw', [
-                        "customClass" => "border-blue md:rounded-full",
-                        "customArrow" => "text-blue",
                         "question" => true,
                         "title" => "Am I too old to learn the drums?",
                         "description" => 'You’re never too old to learn the drums. Drumeo has a community of students of all ages, from all around the world. Whether you’re 40, 50, 60, 70, or beyond – you’ll connect with drummers just like you who are learning and applying their skills to music. ',
                         ])
                 @include('drumeo.products.partials.question-dropdown-tw', [
-                        "customClass" => "border-blue md:rounded-full",
-                        "customArrow" => "text-blue",
                         "question" => true,
                         "title" => "Do I need to be tech-savvy to learn through your app?",
                         "description" => 'Not at all! Technology is here to make your life easier, and Drumeo is designed to help you find lessons and songs easily. And if you ever get stuck, you can contact our Student Experience team by phone or email for prompt and helpful support. ',
@@ -1009,7 +999,7 @@
 
             $('.dropdown').on('click', function(){
                 $(this).toggleClass('active');
-                $(this).find('i').toggleClass('rotate-180');
+                $(this).find('i').toggleClass('rotate-45');
             });
 
             // sticky topbar before orderSection

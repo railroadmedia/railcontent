@@ -80,7 +80,7 @@ $(document).ready(function () {
         currentSongPoint = $songPointToggle.index($(this));
         clearInterval(autoplaySongPoints);
     });
-    
+
     // song point cycle
     var $coachPoint = $('.side-pic.coaches'),
         $coachPointToggle = $('.text-icon-wrap.coaches'),
