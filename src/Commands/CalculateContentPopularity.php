@@ -116,18 +116,18 @@ class CalculateContentPopularity extends Command
         \Illuminate\Database\Connection $dbConnection
     ): int {
         $this->info("Update Elastic Search Popularity (disabled)");
-        $client = $elasticService->getClient();
-        if (!$client->indices()
-            ->exists(['index' => 'content'])) {
-            $elasticService->createContentIndex();
-        }
+//        $client = $elasticService->getClient();
+//        if (!$client->indices()
+//            ->exists(['index' => 'content'])) {
+//            $elasticService->createContentIndex();
+//        }
 
         $rowsUpdated = 0;
         $dbConnection->table(config('railcontent.table_prefix') . 'content')
             ->select(['id', 'popularity', 'popularity_old'])
             ->where('popularity', '!=', 'popularity_old')
             ->orderBy('id', 'asc')
-            ->chunk(2000, function (Collection $rows) use (&$rowsUpdated, $client) {
+            ->chunk(2000, function (Collection $rows) use (&$rowsUpdated) {
                 foreach ($rows as $row) {
                     //For some reason the mysql where check does not work
                     if ($row->popularity == $row->popularity_old) {
