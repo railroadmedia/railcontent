@@ -47,7 +47,6 @@ return new class extends Migration
             $table->boolean('free_shipping')->default(false);
             $table->boolean('included_edge')->default(false);
             $table->boolean('size_case_sensitive')->default(false);
-            $table->boolean('physical')->default(false);
             $table->boolean('bundle_free_shipping')->default(false);
             $table->string('bundle_img')->nullable();
             $table->longText('bundle_desc')->nullable();

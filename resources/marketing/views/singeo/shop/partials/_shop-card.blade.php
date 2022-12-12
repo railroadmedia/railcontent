@@ -35,8 +35,8 @@
                     @if(!empty($specialPrice))
                         <p><strong>{{ $specialPrice }}</strong></p>
                     @elseif (round(100 - (100 * ($price / $fullPrice))) > 1)
-                        <p><s>WAS ${{ $fullPrice }}</s>
-                            <strong> NOW
+                        <p><s>WAS ${{ floatval($fullPrice) }}</s>
+                            <strong class="text-promo"> NOW
                                 @if(number_format($price, 2) == intval($price))
                                     ${{  floatval($price)  }}
                                 @else
@@ -62,7 +62,7 @@
                     @if(!empty($specialPrice))
                         <p><strong class="text-promo">{{  $specialPrice  }}</strong><br><br></p>
                     @elseif (round(100 - (100 * ($price / $fullPrice))) > 1)
-                        <p class="price"><s>${{ $fullPrice }}</s> <strong class="text-promo">
+                        <p class="price"><s>${{ floatval($fullPrice) }}</s> <strong class="text-promo">
                                 @if(number_format($price, 2) == intval($price))
                                     ${{  floatval($price)  }}
                                 @else
@@ -116,7 +116,7 @@
                             >
                                 <button class="join">
                                     <span class="initial"><i class="fas fa-cart-plus"></i> Add To Cart</span>
-                                    {{--<span class="loading"><i class="fad fa-spinner-third fa-spin"></i> Adding to cart...</span>--}}
+                                    <span class="loading"><i class="fad fa-spinner-third fa-spin"></i> Adding to cart...</span>
                                 </button>
                             </a>
                         @endif

@@ -49,10 +49,11 @@
     <script type="text/javascript" src="/marketing/parcel/pianote/nav-footer.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
     <script type="text/javascript" src="/marketing/parcel/pianote/shop-product.js"></script>
-    <script src="{{ asset('marketin/js/pianote/manifest.js') }}"></script>
-    <script src="{{ asset('marketin/js/pianote/vendor.js') }}"></script>
-    <script src="{{ asset('marketin/js/pianote/cart-sidebar.js') }}"></script>
-    <script src="{{ asset('marketin/js/pianote/app.js') }}"></script>
+
+    {{-- Platform --}}
+    <script src="{{ mix('/platform/js/manifest.js') }}"></script>
+    <script src="{{ mix('/platform/js/vendor.js') }}"></script>
+    <script src="{{ mix('/platform/js/app.js') }}"></script>
 
     @yield('end-body-scripts')
 @stop

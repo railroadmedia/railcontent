@@ -14,6 +14,7 @@ use Illuminate\Support\Str;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Currency;
+use Laravel\Nova\Fields\Heading;
 use Laravel\Nova\Fields\Hidden;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Image;
@@ -87,6 +88,8 @@ class Accessory extends Resource
             Text::make('Promo Code', 'promo_code')->hideFromIndex(),
             Currency::make('Price')->required(),
             Currency::make('Discounted Price', 'discounted_price')->hideFromIndex(),
+            Boolean::make('Sold Out', 'sold_out')->default(false)->hideFromIndex(),
+            Heading::make('Shop Card'),
             Text::make('Badge Text', 'badge_text')->hideFromIndex(),
             Image::make('Shop Card Thumbnail', 'thumbnail')
                 ->disk('nova_s3')
@@ -120,58 +123,25 @@ class Accessory extends Resource
                 }),
             Text::make('Shop Card Thumbnail', 'thumbnail')->hideFromIndex()->hideFromDetail(),
             Text::make('Shop Card Description', 'short_desc')->hideFromIndex(),
+            Boolean::make('Visible On Shop Page','visible')->default(true)->hideFromIndex(),
+            Number::make('Display order', 'display_order')->required(),
+            Heading::make('Product page'),
             Text::make('Header Text', 'header_text')->hideFromIndex(),
             Text::make('Subheader Text', 'subheader_text')->hideFromIndex(),
             Text::make('Special Text', 'special_text')->hideFromIndex(),
-            Boolean::make('Visible On Shop Page','visible')->default(true)->hideFromIndex(),
-            Boolean::make('Sold Out', 'sold_out')->default(false)->hideFromIndex(),
-            Boolean::make('Guarantee Badge', 'guaranteed')->default(false)->hideFromIndex(),
-            Boolean::make('Free Shipping', 'free_shipping')->default(false)->hideFromIndex(),
-            Boolean::make('Bundle Free Shipping', 'bundle_free_shipping')->default(false)->hideFromIndex(),
-            Boolean::make('Size Case Sensitive', 'size_case_sensitive')->default(false)->hideFromIndex(),
-            Boolean::make('Physical')->default(true)->hideFromIndex()->hideFromDetail()->hideWhenCreating()->hideWhenUpdating(),
-            Number::make('Display order', 'display_order')->required(),
-            Markdown::make('Overview')->hideFromIndex(),
-            Image::make('Product Image', 'product_img')
-                ->disk('nova_s3')
-                ->prunable()
-                ->hideFromIndex()
-                ->disableDownload()
-                ->nullable()
-                ->storeAs(function (Request $request){
-                    $brandId = $request->brand;
-                    $brand = '';
-
-                    if($brandId === "1") {
-                        $brand = 'Drumeo';
-                    }
-                    elseif($brandId === "2"){
-                        $brand = 'Pianote';
-                    }
-                    elseif($brandId === "3"){
-                        $brand = 'Guitareo';
-                    }
-                    elseif($brandId === "4"){
-                        $brand = 'Singeo';
-                    }
-
-                    return '/'.$brand.'/'.$request->uuid.'-'.$request->file('product_img')->getClientOriginalName();
-                })
-                ->preview(function($value){
-                    if(empty($value)) return null;
-
-                    return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
-                }),
-            Text::make('Product Image', 'product_img')->hideFromIndex()->hideFromDetail(),
             Flexible::make('Slide Images', 'images')
                 ->addLayout(ImageLayout::class)
                 ->preset(ImagePreset::class),
-            Flexible::make('Features')
-                ->addLayout(FeatureLayout::class)
-                ->preset(FeaturePreset::class),
+            Markdown::make('Overview')->hideFromIndex(),
             Flexible::make('Specs')
                 ->addLayout(SpectLayout::class)
                 ->preset(SpecPreset::class),
+            Flexible::make('Features')
+                ->addLayout(FeatureLayout::class)
+                ->preset(FeaturePreset::class),
+            Boolean::make('Guarantee Badge', 'guaranteed')->default(false)->hideFromIndex(),
+            Boolean::make('Free Shipping', 'free_shipping')->default(false)->hideFromIndex(),
+            Heading::make('Bundle'),
             Image::make('Bundle Image', 'bundle_img')
                 ->disk('nova_s3')
                 ->prunable()
@@ -203,6 +173,7 @@ class Accessory extends Resource
                     return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
                 }),
             Text::make('Bundle Description', 'bundle_desc')->hideFromIndex(),
+            Boolean::make('Bundle Free Shipping', 'bundle_free_shipping')->default(false)->hideFromIndex(),
         ];
     }
 

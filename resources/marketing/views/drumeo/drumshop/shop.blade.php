@@ -249,7 +249,7 @@
                         Cart Subtotal({{ Session::get('cartNumberOfItems') }}):
                         <strong>${{ number_format(Session::get('cartSubTotal'), 2, '.', ',') }}</strong>
                     </h5>
-                    <a href="{{ get_legacy_brand_base_url("musora") }}/order/{{ $brand }}" class="join"><i class="fas fa-cart-plus"></i> Proceed to Checkout</a>
+                    <a href="{{ get_musora_brand_base_url() }}/order/{{ $brand }}" class="join"><i class="fas fa-cart-plus"></i> Proceed to Checkout</a>
                 </div>
             </div>
         </section>
@@ -348,8 +348,7 @@
                     "cardDescription" => "Give the gift of drum lessons with a gift card to Drumeo -- with your choice between a one-month, 6-month, or 1-year membership pass.",
                     "fullPrice" =>Prices::$cardMonthFull,
                     "price" => Prices::$cardMonth,
-                    "category" => "lessons",
-                    "physical" => true,
+                    "category" => "card",
                     'soldOut' => false,
                 ])
             </ul>

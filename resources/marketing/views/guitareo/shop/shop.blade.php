@@ -224,7 +224,7 @@
                             Cart Subtotal({{ Session::get('cartNumberOfItems') }}):
                             <strong>${{ number_format(Session::get('cartSubTotal'), 2, '.', ',') }}</strong>
                         </p>
-                        <a href="{{ get_legacy_brand_base_url("musora") }}/order/{{ $brand }}" class="join smaller"><i class="fas fa-cart-plus"></i> Proceed to Checkout</a>
+                        <a href="{{ get_musora_brand_base_url() }}/order/{{ $brand }}" class="join smaller"><i class="fas fa-cart-plus"></i> Proceed to Checkout</a>
                     </div>
                 </div>
             </div>
@@ -261,23 +261,23 @@
         <section class="grid-view category-section" data-category="lessons">
             <ul class="container mx-auto fixed-cards text-center lg:text-left">
                 @foreach($products as $product){
-                @include('guitareo.shop._partials._shop-card', [
-                    "sku" => $product->sku,
-                    "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $product->slug ),
-                    "thumbnail" => $product->thumbnail,
-                    "packLogo" => $product->thumbnail_logo,
-                    "badgeText" => $product->badge_text,
-                    "title" => $product->name,
-                    "packAuthor" => $product->instructor_name ? $product->instructor_name : 'Guitareo',
-                    "cardDescription" => $product->short_desc,
-                    "includedEdge" => $product->included_edge,
-                    "fullPrice" => $product->price,
-                    "price" => $product->discounted_price === '0.00' || empty($product->discounted_price) ? $product->price : $product->discounted_price,
-                    "category" => strtolower($product->productType->name),
-                    "sizes" => $product->sizes,
-                    "soldOut" => $product->sold_out,
-                    "size_case_sensitive" => $product->size_case_sensitive,
-                ])
+                    @include('guitareo.shop._partials._shop-card', [
+                        "sku" => $product->sku,
+                        "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $product->slug ),
+                        "thumbnail" => $product->thumbnail,
+                        "packLogo" => $product->thumbnail_logo,
+                        "badgeText" => $product->badge_text,
+                        "title" => $product->name,
+                        "packAuthor" => $product->instructor_name ? $product->instructor_name : 'Guitareo',
+                        "cardDescription" => $product->short_desc,
+                        "includedEdge" => $product->included_edge,
+                        "fullPrice" => $product->price,
+                        "price" => $product->discounted_price === '0.00' || empty($product->discounted_price) ? $product->price : $product->discounted_price,
+                        "category" => strtolower($product->productType->name),
+                        "sizes" => $product->sizes,
+                        "soldOut" => $product->sold_out,
+                        "size_case_sensitive" => $product->size_case_sensitive,
+                    ])
                 }
                 @endforeach
 

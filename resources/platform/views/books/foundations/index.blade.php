@@ -1,4 +1,10 @@
-@extends('partials.layout')
+<?php
+$layout = 'books.layout';
+if(!empty($user)){
+    $layout = 'partials.layout';
+} ?>
+
+@extends($layout)
 
 @section('meta')
     @parent
@@ -39,7 +45,9 @@
         @endslot
     @endcomponent
 
-    @include('books.partials.login-modal')
+    @include('books.partials.login-modal', ['redirectUrl' => url()->route('platform.books.resources',[
+    'brand'=>'pianote'
+])])
 
     @include('books.partials.ask-question-modal')
 
@@ -86,7 +94,7 @@
             @foreach($chapterThumbs as $index => $chapter)
                 <div class="flex flex-column chapter-thumb pa-1">
                     <a
-                        href="{{ url()->route('platform.books.resources.chapter', [($index + 1)]) }}"
+                        href="{{ url()->route('platform.books.resources.chapter', [($index + 1), 'brand' => 'pianote']) }}"
                         class="book-cover bg-grey-2 dark:tw-bg-[#081825] tw-rounded-xl tw-overflow-hidden tw-group"
                     >
 
@@ -108,6 +116,6 @@
     </div>
 @endsection
 
-@section('layout-scripts')
+@section('inject-components')
     <script src="{{ mix('platform/js/books.js') }}"></script>
 @endsection

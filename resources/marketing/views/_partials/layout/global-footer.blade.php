@@ -36,7 +36,7 @@
             </a>
             <a class="text-xs md:text-sm block md:inline leading-loose md:leading-normal" href="tel:+18004398921">Toll Free: 1-800-439-8921  / </a>
             <a class="text-xs md:text-sm block md:inline leading-loose md:leading-normal" href="tel:+16048557605">Direct: 1-604-855-7605 / </a>
-            <a class="text-xs md:text-sm" href="{{ get_legacy_brand_base_url("musora") }}/contact">Contact Us</a>
+            <a class="text-xs md:text-sm" href="{{ get_musora_brand_base_url() }}/contact">Contact Us</a>
         </p>
         {{-- <div class="flex items-center justify-center my-4">
             <a rel="noopener" href="https://www.youtube.com/user/guitarlessonscom" target="_blank" class="flex items-center justify-center mx-2 text-xl h-11 w-11 border-2 border-gray-500 rounded-full"><i class="fab fa-youtube" aria-hidden="true"></i></a>

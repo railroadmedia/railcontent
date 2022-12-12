@@ -34,9 +34,10 @@
     </script>
     <script src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
 
-    <script src="{{ asset('marketing/js/drumeo/manifest.js') }}"></script>
-    <script src="{{ asset('marketing/js/drumeo/vendor.js') }}"></script>
-    <script src="{{ asset('marketing/js/drumeo/cart-sidebar.js') }}"></script>
-    <script src="{{ asset('marketing/js/drumeo/app.js') }}"></script>
+    {{-- Platform --}}
+    <script src="{{ mix('/platform/js/manifest.js') }}"></script>
+    <script src="{{ mix('/platform/js/vendor.js') }}"></script>
+    <script src="{{ mix('/platform/js/app.js') }}"></script>
+
     @yield('scripts')
 @stop

@@ -124,8 +124,10 @@
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/drumeo/ba-bbq.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/drumeo/pack-drumshop.js') }}"></script>
-    <script src="{{ asset('marketing/js/drumeo/manifest.js') }}"></script>
-    <script src="{{ asset('marketing/js/drumeo/vendor.js') }}"></script>
-    <script src="{{ asset('marketing/js/drumeo/cart-sidebar.js') }}"></script>
-    <script src="{{ asset('marketing/js/drumeo/app.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/sliding-anchor.js') }}"></script>
+
+    {{-- Platform --}}
+    <script src="{{ mix('/platform/js/manifest.js') }}"></script>
+    <script src="{{ mix('/platform/js/vendor.js') }}"></script>
+    <script src="{{ mix('/platform/js/app.js') }}"></script>
 @endsection

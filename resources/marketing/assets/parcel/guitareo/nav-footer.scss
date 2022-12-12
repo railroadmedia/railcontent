@@ -839,3 +839,23 @@ body {
     }
   }
 }
+
+.vue-add-to-cart {
+    .loading {
+        display: none;
+    }
+
+    .initial {
+        display: inline-block;
+    }
+
+    &.loading {
+        .loading {
+            display: inline-block;
+        }
+
+        .initial {
+            display: none;
+        }
+    }
+}

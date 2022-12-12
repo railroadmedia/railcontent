@@ -58,25 +58,25 @@ class BFUpdates extends Seeder
         Product::where('brand_id', 2)->where('name', 'Piano Riffs & Fills')->update(['discounted_price' => 39]);
         Product::where('brand_id', 2)->where('name', '500 Songs In 5 Days')->update(['discounted_price' => 39]);
         Product::where('brand_id', 2)->where('name', 'Faster Fingers')->update(['discounted_price' => 39]);
-        Product::where('brand_id', 2)->where('name', 'Piano Technique Made Easy')->update(['discounted_price' => 39]);
+        Product::where('brand_id', 2)->where('name', 'Piano Technique Made Easy')->update(['discounted_price' => 19]);
         Product::where('brand_id', 2)->where('name', 'The Power Of Chords')->update(['discounted_price' => 39]);
         Product::where('brand_id', 2)->where('name', 'Improvisation & Musical Freedom')->update(['discounted_price' => 29]);
         Product::where('brand_id', 2)->where('name', 'Playing Beautiful Piano')->update(['discounted_price' => 4]);
-        Product::where('brand_id', 2)->where('name', 'Scales Poster')->update(['discounted_price' => 9]);
-        Product::where('brand_id', 2)->where('name', 'Chords Poster')->update(['discounted_price' => 9]);
-        Product::where('brand_id', 2)->where('name', 'Pianote Practice Planner')->update(['discounted_price' => 39]);
-        Product::where('brand_id', 2)->where('name', 'Piano Chords & Scales')->update(['discounted_price' => 39]);
+        Product::where('brand_id', 2)->where('name', 'Scales Poster')->update(['discounted_price' => 5]);
+        Product::where('brand_id', 2)->where('name', 'Chords Poster')->update(['discounted_price' => 5]);
+        Product::where('brand_id', 2)->where('name', 'Pianote Practice Planner')->update(['discounted_price' => 29]);
+        Product::where('brand_id', 2)->where('name', 'Piano Chords & Scales')->update(['discounted_price' => 29]);
         Product::where('brand_id', 2)->where('name', 'Worship Piano')->update(['discounted_price' => 39]);
         Product::where('brand_id', 2)->where('name', 'Pianote Headphones')->update(['discounted_price' => 169]);
         Product::where('brand_id', 2)->where('name', 'Pianote Christmas Songbook')->update(['discounted_price' => 29]);
         Product::where('brand_id', 2)->where('name', 'Member Pianote Christmas Songbook')->update(['discounted_price' => 29]);
-        Product::where('brand_id', 2)->where('name', 'Classical Piano Pieces')->update(['discounted_price' => 39]);
+        Product::where('brand_id', 2)->where('name', 'Classical Piano Pieces')->update(['discounted_price' => 19]);
 
-        Product::where('brand_id', 2)->where('product_type_id', 3)->update(['discounted_price' => 19]);
+        Product::where('brand_id', 2)->where('product_type_id', 3)->update(['discounted_price' => 5]);
         Product::where('brand_id', 2)->where('product_type_id', 4)->update(['discounted_price' => 5]);
         Product::where('brand_id', 2)->where('product_type_id', 5)->update(['discounted_price' => 19]);
-        Product::where('brand_id', 2)->where('name', 'Sketchy Mug')->update(['discounted_price' => 12]);
-        Product::where('brand_id', 2)->where('name', 'Music Brings Happiness Mug')->update(['discounted_price' => 12]);
+        Product::where('brand_id', 2)->where('name', 'Sketchy Mug')->update(['discounted_price' => 5]);
+        Product::where('brand_id', 2)->where('name', 'Music Brings Happiness Mug')->update(['discounted_price' => 5]);
 
         Product::where('brand_id', 2)->where('name', 'The Unlimited Lessons Bundle')->update(['overview' => 'The Unlimited Lessons Bundle gives you just that - unlimited piano lessons. Watch as many as you like, as often as you like.
 
