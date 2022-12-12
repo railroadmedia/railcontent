@@ -3170,7 +3170,7 @@ This powerful resource makes it easy to access your lessons anytime from virtual
                             'included_edge' => empty($product['included_edge']) ? false : $product['included_edge'],
                             'guaranteed' => $product['guaranteed'],
                             'visible' => $product['visible'],
-                            'display_order' => empty($product['display_order']) ? $orderNum : $product['display_order'],
+                            'display_order' => $product['visible'] ? $orderNum : 0,
                             'bundle_img' => empty($product['bundle_img']) ? null : $product['bundle_img'],
                             'bundle_desc' => empty($product['bundle_desc']) ? null : $product['bundle_desc'],
                             'created_at' => now(),
