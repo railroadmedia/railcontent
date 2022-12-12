@@ -36,7 +36,7 @@
                     Sold Out
                 </button>
             @else
-                @if($category !== 'bundles' && count($sizes) === 0)
+                @if($category !== 'bundles' && count($sizes) === 0 && !$bundle)
                     <a
                         class="online-atc vue-add-to-cart"
                         href="/ecommerce/add-to-cart?redirect=%2Fshop&products[{!! $sku !!}]=1"
@@ -44,6 +44,11 @@
                         data-product-json='{"{!! $sku !!}": 1}'
                     >
                         <button class="join text-xl leading-none uppercase text-white w-full py-4 px-2 rounded-full border-0 mx-auto my-2 md:py-5 md:py-2 md:my-4 md:mx-auto hover:opacity-90"><i class="fas fa-cart-plus text-2xl mr-1"></i> Add To Cart</button>
+                    </a>
+                @elseif($bundle)
+                    <a class="online-atc" href="/ecommerce/add-to-cart?redirect=%2Forder&{!! $sku !!}"
+                       data-base-url="/ecommerce/add-to-cart?redirect=%2Forder&{!! $sku !!}">
+                        <button class="join green text-xl leading-none uppercase text-white w-full py-4 px-2 rounded-full border-0 mx-auto my-2 md:py-5 md:py-2 md:my-4 md:mx-auto hover:opacity-90"><i class="fas fa-cart-plus text-2xl mr-1"></i> Order Now</button>
                     </a>
                 @endif
                 @if(count($sizes) > 0)
@@ -78,12 +83,7 @@
                         </button>
                     </a>
                 @endif
-                @if($bundle)
-                    <a class="online-atc" href="/ecommerce/add-to-cart?redirect=%2Forder&{!! $sku !!}"
-                       data-base-url="/ecommerce/add-to-cart?redirect=%2Forder&{!! $sku !!}">
-                        <button class="join green text-xl leading-none uppercase text-white w-full py-4 px-2 rounded-full border-0 mx-auto my-2 md:py-5 md:py-2 md:my-4 md:mx-auto hover:opacity-90"><i class="fas fa-cart-plus text-2xl mr-1"></i> Order Now</button>
-                    </a>
-                @endif
+
             @endif
             @if(!empty($shippingdelay))
                 <p class="mt-0 text-xs">{!! $shippingdelay !!}</p>
