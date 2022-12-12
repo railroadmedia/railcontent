@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Repositories;
 
 use Carbon\Carbon;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Query\JoinClause;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
@@ -694,27 +695,67 @@ class ContentRepository extends RepositoryBase
         $columnValue,
         $siblingPairLimit = 1,
         $orderColumn = 'published_on',
-        $orderDirection = 'desc'
+        $orderDirection = 'desc',
+        $contentId = null
     ) {
+
+        $beforeSubqueryOne = $this
+            ->query()
+            ->selectRaw(DB::raw(
+                'ROW_NUMBER() OVER (order by railcontent_content.' . $orderColumn . ' desc, railcontent_content.id desc) AS rowNumber'
+            ))
+            ->selectPrimaryColumns()
+            ->restrictByUserAccess()
+            ->where(ConfigService::$tableContent . '.type', $type)
+            ->where(ConfigService::$tableContent . '.' . $columnName, '<=', $columnValue)
+            ->limit(50)
+            ;
+
+        $beforeSubqueryTwo = $this->query()
+            ->selectRaw(DB::raw('rowNumber'))
+            ->fromSub($beforeSubqueryOne, 'sub')
+            ->where('id', $contentId)
+            ->get()
+            ->value('rowNumber')
+        ;
+
         $beforeContents =
             $this->query()
-                ->selectPrimaryColumns()
-                ->restrictByUserAccess()
-                ->where(ConfigService::$tableContent . '.type', $type)
-                ->where(ConfigService::$tableContent . '.' . $columnName, '<', $columnValue)
-                ->orderBy($orderColumn, 'desc')
-                ->limit($siblingPairLimit)
-                ->getToArray();
+                ->select('*')
+            ->fromSub($beforeSubqueryOne, 'sub')
+            ->where('rowNumber', '>', $beforeSubqueryTwo)
+            ->limit($siblingPairLimit)
+            ->getToArray()
+            ;
+
+        $afterSubqueryOne = $this
+            ->query()
+            ->selectRaw(DB::raw(
+                'ROW_NUMBER() OVER (order by railcontent_content.' . $orderColumn . ' asc, railcontent_content.id asc) AS rowNumber'
+            ))
+            ->selectPrimaryColumns()
+            ->restrictByUserAccess()
+            ->where(ConfigService::$tableContent . '.type', $type)
+            ->where(ConfigService::$tableContent . '.' . $columnName, '>=', $columnValue)
+            ->limit(50)
+        ;
+
+        $afterSubqueryTwo = $this->query()
+            ->selectRaw(DB::raw('rowNumber'))
+            ->fromSub($afterSubqueryOne, 'sub')
+            ->where('id', $contentId)
+            ->get()
+            ->value('rowNumber')
+        ;
 
         $afterContents =
             $this->query()
-                ->selectPrimaryColumns()
-                ->restrictByUserAccess()
-                ->where(ConfigService::$tableContent . '.type', $type)
-                ->where(ConfigService::$tableContent . '.' . $columnName, '>', $columnValue)
-                ->orderBy($orderColumn, 'asc')
+                ->select('*')
+                ->fromSub($afterSubqueryOne, 'sub')
+                ->where('rowNumber', '>', $afterSubqueryTwo)
                 ->limit($siblingPairLimit)
-                ->getToArray();
+                ->getToArray()
+        ;
 
         $merged = array_merge($beforeContents, $afterContents);
 
