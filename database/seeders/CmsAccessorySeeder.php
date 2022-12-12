@@ -749,7 +749,6 @@ And because it’s a digital copy, you’ll have instant access to all the songs
             "slug" => "classical-book",
             "sku" => "classical-book",
             "thumbnail" => "https://pianote.s3.amazonaws.com/sales/promos/july/classical_piano_book.png",
-            "badge_text" => "New",
             "meta_desc" => "Welcome to the world of classical piano music (you can actually play)!",
             "meta_img" => "https://pianote.s3.amazonaws.com/products/classical-book/2022-07-14-pianote-classical-book-103.png",
             "short_desc" => "What good is learning classical piano if you don’t have beautiful music to play?",
