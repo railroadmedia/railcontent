@@ -272,3 +272,23 @@ function isLive()
 
     return $isLive;
 }
+
+if (!function_exists('array_entity_column')) {
+    /**
+     * @param stdClass[] $arrayOfEntities
+     * @param string $getMethodName
+     * @return array
+     */
+    function array_entity_column(array $arrayOfEntities, $getMethodName)
+    {
+        $arrayOfValues = [];
+
+        foreach ($arrayOfEntities as $entity) {
+            if (method_exists($entity, $getMethodName)) {
+                $arrayOfValues[] = $entity->$getMethodName();
+            }
+        }
+
+        return $arrayOfValues;
+    }
+}
