@@ -2187,7 +2187,7 @@ class CmsClothingSeeder extends Seeder
                 'free_shipping' => $product['free_shipping'],
                 'guaranteed' => $product['guaranteed'],
                 'visible' => $product['visible'],
-                'display_order' => $orderNum,
+                'display_order' => $product['visible'] ? $orderNum : 0,
                 'size_case_sensitive' => empty($product['size_case_sensitive']) ? false : $product['size_case_sensitive'],
                 'size_chart_id' => empty($product['sizeChart']) ? null : $product['sizeChart'],
                 'bundle_img' => empty($product['bundle_img']) ? null : $product['bundle_img'],
