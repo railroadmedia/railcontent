@@ -73,6 +73,7 @@
 @section('final')
 {{--     @include('pianote.sales.partials._subscribe-cards')--}}
 {{--    @include('pianote.sales.partials._subscribe-bonus-list')--}}
+<div id="customize-anchor" class="anchor"></div>
      @include('_partials.layout.holiday.homepage-bottom-membership',[
          'logo' => 'https://pianote.s3.amazonaws.com/sales/promos/november/pianote-annual-card.jpg',
          'joinText' => '<strong>Join Pianote for just $'.round(\PianotePrices::$pianoteMembershipAnnualRegular / 12, 2).'/month</strong> <br class="hidden sm:inline"><strong class="text-promo">PLUS</strong> get 15 free bonuses worth $861.',
