@@ -19,14 +19,14 @@ Route::domain('{musoraDomain}')
         Route::get('unified-2022', [MarketingController::class, 'unified2022']);
         Route::get('referral-join', [ReferralJoinController::class, 'join']);
         Route::get('recitals', [MarketingController::class, 'recitals']);
-        Route::get('gift-card', [MarketingController::class, 'giftcard']);
-        Route::get('redeem', [MarketingController::class, 'redeem']);
         Route::get('power-pack', [CodeRedemptionController::class, 'powerPack']);
         Route::post('hlag-submit', [CodeRedemptionController::class, 'hitLikeAGirlSubmission']);
-        Route::get('redeem', [CodeRedemptionController::class, 'renderNewAccountRedeemPage']);
-        Route::get('redeem/existing', [CodeRedemptionController::class, 'renderExistingAccountRedeemPage']);
         Route::get('sonor', [CodeRedemptionController::class, 'sonor']);
         Route::get('bestbook-trial', [MarketingController::class, 'bestBookTrial']);
         Route::get('choose-your-trial', [MarketingController::class, 'chooseTrial']);
 
+        Route::get('gift-card', [MarketingController::class, 'giftcard']);
+
+        Route::get('redeem', [CodeRedemptionController::class, 'renderNewAccountRedeemPage']);
+        Route::get('redeem/existing', [CodeRedemptionController::class, 'renderExistingAccountRedeemPage']);
     });

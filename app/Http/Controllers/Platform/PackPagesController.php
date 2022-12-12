@@ -150,10 +150,12 @@ class PackPagesController extends Controller
                                      ]);
         }
 
-        $infoData = [
-            "lessons" => $thisPackBundle['child_count'],
-            "xp" => $pack->fetch('total_xp'),
-        ];
+        if($pack['type'] == 'pack'){
+            $infoData['lessons'] = $packBundles->sumFetched('lesson_count');
+        }else{
+            $infoData["lessons"] = count($packBundles);
+        }
+        $infoData['xp'] = $pack->fetch('total_xp', 0);
 
         $backButton = [
             "text" => "Back to All Lessons",
@@ -229,7 +231,7 @@ class PackPagesController extends Controller
         $childContent = new ContentFilterResultsEntity(['results' => $lessons]);
 
         $infoData = [
-            "lessons" => $thisPackBundle['child_count'],
+            "lessons" => count($lessons),
             "xp" => $thisPackBundle->fetch('total_xp'),
         ];
 
@@ -305,7 +307,7 @@ class PackPagesController extends Controller
         }
 
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
-        
+
         $pack =
             $this->contentService->getBySlugAndType($packSlug, 'pack')
                 ->first();
