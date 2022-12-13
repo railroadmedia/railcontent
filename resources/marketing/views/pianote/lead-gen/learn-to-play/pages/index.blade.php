@@ -1,5 +1,5 @@
 @php
-    require_once(resource_path('views/lead-gen/learn-to-play/lessons.php'))
+    require_once(resource_path('marketing/views/pianote/lead-gen/learn-to-play/lessons.php'))
 @endphp
 
 @extends('pianote.lead-gen.learn-to-play.layout')
@@ -35,5 +35,5 @@
         </div>
     </section>
 
-    @include('lead-gen.partials._7-day-trial-offer')
+    @include('pianote.lead-gen.partials._7-day-trial-offer')
 @stop
