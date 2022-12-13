@@ -134,7 +134,7 @@
                     </div>
                 </div>
                 <div class="w-full sm:w-5/12 hidden sm:block">
-                    <div class="rounded-xl aspect-1:1 overflow-hidden relative bg-cover bg-center cursor-hover autoplay-video lazyload" data-bg="https://cdn.musora.com/image/fetch/w_850,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/header_thumb.png" data-open="trailer">
+                    <div class="shadow-2xl rounded-xl aspect-1:1 overflow-hidden relative bg-cover bg-center cursor-pointer autoplay-video lazyload" data-bg="https://cdn.musora.com/image/fetch/w_850,q_auto:best/https://drumeo-assets.s3.amazonaws.com/sales/2023/header-thumb.jpg" data-open="trailer">
                         {{--<video class="object-cover w-full h-full absolute z-0 lazyload" data-src="https://player.vimeo.com/progressive_redirect/download/738758998/rendition/source/video-reel2.mp4%20%28Original%29.mp4?loc=external&signature=323bf87c6c208cda28dd99180b56fbc7238cd98d3ca6b60dba352659187783ff" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>--}}
                         <div class="join white smaller absolute bottom-5 left-5"><i class="fas fa-play"></i> Watch Trailer</div>
                     </div>
@@ -142,7 +142,7 @@
             </div>
 
             <div class="flex flex-wrap sm:flex-nowrap text-center border-2 rounded-xl border-drumeo mt-8 lg:mt-12 mb-2 lg:mb-4" style="background-color:#eaf1fa;">
-                <div class="flex flex-wrap sm:flex-nowrap items-center justify-evenly w-full sm:w-auto sm:flex-grow py-4 sm:py-3 lg:py-4 text-left sm:text-center">
+                <div class="flex flex-wrap sm:flex-nowrap items-center justify-evenly w-full sm:w-auto sm:flex-grow py-4 sm:py-3 lg:py-4 lg:px-5 text-left sm:text-center">
                     <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3 mb-4 sm:mb-0">
                         <i class="far fa-fw mr-3 sm:mr-0 fa-calendar-day text-drumeo text-2xl"></i>
                         <p class="leading-tight mx-0"><strong class="font-black">Drum Lessons</strong><br>
@@ -429,35 +429,35 @@
                         <i class="fal fa-music text-drumeo"></i>
                         <div class="flex-grow pl-4">
                             <h5><strong>5000+ popular songs.</strong></h5>
-                            <p class="text-sm">Get note-for-note song breakdowns for music from every style & era, sorted by skill level so you can always find a song you’ll love.</p>
+                            <p class="text-sm">Get note-for-note song breakdowns for every style, era, and skill with handy play-along tools. </p>
                         </div>
                     </div>
                     <div class="flex mb-4">
                         <i class="fal fa-music text-drumeo"></i>
                         <div class="flex-grow pl-4">
                             <h5><strong>Find the perfect tempo.</strong></h5>
-                            <p class="text-sm">Slow down any section of a song to hear every note. When you’ve nailed the part, bump the tempo back up to rock out in real time!</p>
+                            <p class="text-sm">Slow down or speed up any section of a song to hear every note your favorite drummer plays. </p>
                         </div>
                     </div>
                     <div class="flex mb-4">
                         <i class="fal fa-music text-drumeo"></i>
                         <div class="flex-grow pl-4">
                             <h5><strong>Loop the trouble spots.</strong></h5>
-                            <p class="text-sm">No more pausing and rewinding when you mess up that fill. Simply grab the section of a song and loop it – over and over again.</p>
+                            <p class="text-sm">No more pausing and rewinding that tricky fill. Grab any song section and loop it, over and over! </p>
                         </div>
                     </div>
                     <div class="flex mb-4">
                         <i class="fal fa-music text-drumeo"></i>
                         <div class="flex-grow pl-4">
                             <h5><strong>Remove the drums *NEW*</strong></h5>
-                            <p class="text-sm">Play-along with the original drummer – or magically remove the original drum parts to make each song and performance uniquely yours!</p>
+                            <p class="text-sm">Magically remove the original drum part to make each song and performance uniquely yours. </p>
                         </div>
                     </div>
                     <div class="flex">
                         <i class="fal fa-music text-drumeo"></i>
                         <div class="flex-grow pl-4">
                             <h5><strong>Take your songs anywhere.</strong></h5>
-                            <p class="text-sm">Accessible on any device, plus get printable sheet music. You’ll be able to learn and play the songs you love whenever and wherever you want.</p>
+                            <p class="text-sm">Accessible on any device, or printable, so you can play the songs you love whenever and wherever. </p>
                         </div>
                     </div>
                 </div>
