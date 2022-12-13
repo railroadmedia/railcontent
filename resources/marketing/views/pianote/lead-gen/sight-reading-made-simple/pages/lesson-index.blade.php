@@ -51,5 +51,5 @@
         ],
     ])
 
-    @include('lead-gen.partials._7-day-trial-offer')
+    @include('pianote.lead-gen.partials._7-day-trial-offer')
 @stop
