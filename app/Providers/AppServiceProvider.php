@@ -56,10 +56,12 @@ class AppServiceProvider extends ServiceProvider
         view()->composer(
             [
                 'drumeo.drumshop.*',
-                'guitareo.shop.*',
-                'pianote.shop.*',
-                'singeo.shop.*',
                 'drumeo.sales.*',
+                'guitareo.shop.*',
+                'guitareo.products.guitar-quest.*',
+                'pianote.shop.*',
+                'pianote.products.*',
+                'singeo.shop.*',
             ],
             MarketingPagesProductsViewComposer::class
         );
