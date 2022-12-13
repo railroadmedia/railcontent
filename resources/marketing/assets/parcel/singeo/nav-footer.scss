@@ -586,286 +586,297 @@ a {
   }
 }
 
-.sales-footer {
-  text-align: center;
-  background: #000;
-  padding: 35px 0 25px;
-  @include tablet {
-    padding: 50px 0 35px;
-  }
-
-  .row {
-    max-width: 75rem;
-    margin-right: auto;
-    margin-left: auto;
-
-    &:before,
-    &:after {
-      display: table;
-      content: ' ';
-    }
-
-    &:after {
-      clear: both;
-    }
-  }
-
-  .footer-link-wrap {
-    margin-bottom: 20px;
-    width: 100%;
-    padding: 0 15px;
-    display: inline-block;
-    vertical-align: top;
+.bottom-footer {
+    text-align: center;
+    background: #000;
+    padding: 35px 0 25px;
     @include tablet {
-      text-align: left;
-      width: auto;
-      padding: 0 7px;
-      margin-bottom: 30px;
-    }
-    @include desktop {
-      padding: 0 40px;
+        padding: 50px 0 35px;
     }
 
-    &.footer-sign-up {
-      @include tablet {
-        width: 30%;
-        margin: 0 auto;
-      }
-      @include desktop {
-        width: 340px;
-      }
+    .container {
+        max-width: 1170px;
+        margin-right: auto;
+        margin-left: auto;
 
-      .hide-for-desktop {
-        @include desktop {
-          display: none;
+        &:before,
+        &:after {
+            display: table;
+            content: ' ';
         }
-      }
 
-      .show-for-desktop {
-        display: none;
-        @include desktop {
-          display: inline;
+        &:after {
+            clear: both;
         }
-      }
+    }
 
-      .columns {
-        float: left;
+    .footer-link-wrap {
+        margin-bottom: 20px;
         width: 100%;
-        padding: 0;
-        @include desktop {
-          padding: 0 5px 0 0;
-
-        }
-
-        &.medium-7 {
-          @include desktop {
-            width: 58.33%;
-          }
-        }
-
-        &.medium-5 {
-          @include desktop {
-            width: 41.66%;
-          }
-        }
-      }
-
-      form {
-        position: relative;
-        width: 100%;
-        max-width: 220px;
-        margin: 10px auto 0;
+        padding: 0 15px;
+        display: inline-block;
+        vertical-align: top;
         @include tablet {
-          max-width: 100%;
+            text-align: left;
+            width: auto;
+            padding: 0 7px;
+            margin-bottom: 30px;
+        }
+        @include desktop {
+            padding: 0 28px;
         }
 
-        input,
-        button {
-          border: none;
-          outline: none;
-          font: 400 14px/35px $opensans;
-          height: 35px;
-          background: #49535a;
-          color: #fff;
-          border-radius: 100px;
-          width: 100%;
-          text-align: left;
-          padding: 7px 20px;
-          margin: 0 auto 7px;
-          @include desktop {
-            margin: 0 auto;
-          }
-
-          &[type="submit"],
-          button {
-            font-family: $bebas;
-            background: $singeoPurple;
-            text-transform: uppercase;
-            display: inline-block;
-            cursor: pointer;
-            text-align: center;
-            padding: 0;
-            margin: 0;
-            color: $singeoPurple;
-            background: transparent;
-            border: 2px solid $singeoPurple;
-            line-height: 31px;
-            &:hover {
-              background: $singeoPurple;
-              color: #000;
+        &.footer-sign-up {
+            @include tablet {
+                width: 30%;
+                margin: 0 auto;
             }
-          }
-        }
-      }
+            @include desktop {
+                width: 340px;
+            }
 
-      .thank-you-box {
-        width: 100%;
-        max-width: 960px;
-        border-radius: 5px;
-        height: auto;
-        max-height: 0;
-        visibility: hidden;
-        opacity: 0;
-        transition: all .4s ease-in;
-        display: block;
+            .hide-for-desktop {
+                @include desktop {
+                    display: none;
+                }
+            }
+
+            .show-for-desktop {
+                display: none;
+                @include desktop {
+                    display: inline;
+                }
+            }
+
+            .form-group {
+                margin-bottom: 0;
+            }
+
+            .col-xs-12 {
+                float: left;
+                width: 100%;
+                padding: 0;
+                @include desktop {
+                    padding: 0 5px 0 0;
+
+                }
+
+                &.col-sm-7 {
+                    @include desktop {
+                        width: 58.33%;
+                    }
+                }
+
+                &.col-sm-5 {
+                    @include desktop {
+                        width: 41.66%;
+                    }
+                }
+            }
+
+            ::-webkit-input-placeholder,
+            ::-moz-placeholder,
+            :-ms-input-placeholder,
+            ::placeholder {
+                color: #aaa;
+            }
+
+            form {
+                position: relative;
+                width: 100%;
+                max-width: 220px;
+                margin: 10px auto 0;
+                @include tablet {
+                    max-width: 100%;
+                }
+
+                input,
+                button {
+                    border: none;
+                    outline: none;
+                    font: 400 13px/35px $opensans;
+                    height: 35px;
+                    background: #49535a;
+                    color: #fff;
+                    border-radius: 100px;
+                    width: 100%;
+                    text-align: left;
+                    padding: 7px 20px;
+                    margin: 0 auto 7px;
+                    @include desktop {
+                        margin: 0 auto;
+                    }
+
+                    &[type="submit"],
+                    button {
+                        font-family: $bebas;
+                        color: $singeoPurple;
+                        background: transparent;
+                        text-transform: uppercase;
+                        display: inline-block;
+                        cursor: pointer;
+                        border: 2px solid $singeoPurple;
+                        text-align: center;
+                        padding: 0;
+                        margin: 0;
+                        line-height: 31px;
+
+                        &:hover {
+                            background: $singeoPurple;
+                            color: #000;
+                        }
+                    }
+                }
+            }
+
+            .thank-you-box {
+                width: 100%;
+                max-width: 960px;
+                border-radius: 5px;
+                height: auto;
+                max-height: 0;
+                visibility: hidden;
+                opacity: 0;
+                transition: all .4s ease-in;
+                display: block;
+                margin: 0 auto;
+                text-align: center;
+                overflow: hidden;
+                background: transparent;
+                @include tablet {
+                    text-align: left;
+                }
+
+                &.active {
+                    max-height: 1000px;
+                    visibility: visible;
+                    opacity: 1;
+                    padding: 5px 0 0;
+                }
+
+                p {
+                    font: 400 13px/1.55em $opensans;
+                    margin: 0 auto;
+                    color: #fff;
+                    @include tablet {
+                        font-size: 15px;
+                    }
+                }
+            }
+        }
+    }
+
+    h1 {
+        color: #c5c5c6;
+        font: 700 17px/2em $robotocondensed;
+        text-transform: uppercase;
         margin: 0 auto;
-        text-align: center;
-        overflow: hidden;
-        background: transparent;
         @include tablet {
-          text-align: left;
+            font-size: 19px;
         }
 
-        &.active {
-          max-height: 1000px;
-          visibility: visible;
-          opacity: 1;
-          padding: 5px 0 0;
+        a {
+            color: inherit;
+            display: inline-block;
+
+            &:hover {
+                color: lighten(#c5c5c6, 10%);
+            }
+        }
+    }
+
+    p {
+        color: #5c6870;
+        font: 400 13px/2em $opensans;
+        margin: 0 auto;
+        @include tablet {
+            font-size: 16px;
         }
 
-        p {
-          font: 400 13px/1.55em $opensans;
-          margin: 0 auto;
-          color: #fff;
-          @include tablet {
-            font-size: 15px;
-          }
+        a {
+            font-size: inherit;
+            color: inherit;
+            display: inline-block;
+
+            &:hover {
+                color: lighten(#5c6870, 10%);
+            }
         }
-      }
-    }
-  }
 
-  h1 {
-    color: #c5c5c6;
-    font: 700 17px/2em $robotocondensed;
-    text-transform: uppercase;
-    margin: 0 auto;
-    @include tablet {
-      font-size: 19px;
+        &.tiny {
+            font-size: 12px;
+        }
     }
 
-    a {
-      color: inherit;
-      display: inline-block;
-
-      &:hover {
-        color: lighten(#c5c5c6, 10%);
-      }
-    }
-  }
-
-  p {
-    color: #5c6870;
-    font: 400 13px/2em $opensans;
-    margin: 0 auto;
-    @include tablet {
-      font-size: 16px;
+    .logo {
+        opacity: 0.6;
+        margin: 0 auto 10px;
+        width: 120px;
+        @include tablet {
+            width: 140px;
+            margin: 0 auto 15px;
+        }
     }
 
-    a {
-      font-size: inherit;
-      color: inherit;
-      display: inline-block;
+    .social-media {
+        transition: all .3s;
+        color: #5c6870;
+        border-radius: 50%;
+        display: inline-block;
+        text-align: center;
+        margin: 20px 1px 15px;
+        width: 40px;
+        height: 40px;
+        line-height: 36px;
+        font-size: 20px;
+        box-shadow: 0 0 0 #000;
+        transform: scale(1.01);
+        border: 2px solid #5c6870;
 
-      &:hover {
-        color: lighten(#5c6870, 10%);
-      }
+        &:hover {
+            color: #fff;
+            transform: scale(1.2);
+            box-shadow: 0 0 15px #000;
+
+            &.youtube {
+                background: $youtube;
+                border-color: $youtube;
+            }
+
+            &.facebook {
+                background: $facebook;
+                border-color: $facebook;
+            }
+
+            &.instagram {
+                background: linear-gradient(30deg, #FFD521 17%, #F20008 50%, #B900B4 83%);
+                border-color: #B900B4;
+            }
+
+            &.tiktok {
+                border-color: #25f4ee;
+            }
+        }
     }
 
-    &.tiny {
-      font-size: 12px;
+    br.mobile-only {
+        @include tablet {
+            display: none;
+        }
     }
-  }
 
-  .logo {
-    opacity: 0.6;
-    margin: 0 auto 10px;
-    width: 120px;
-    @include tablet {
-      width: 140px;
-      margin: 0 auto 15px;
+    .disclaimer {
+        display: none;
     }
-  }
 
-  .social-media {
-    transition: all .3s;
-    color: #5c6870;
-    border-radius: 50%;
-    display: inline-block;
-    text-align: center;
-    margin: 20px 1px 15px;
-    width: 40px;
-    height: 40px;
-    line-height: 36px;
-    font-size: 20px;
-    box-shadow: 0 0 0 #000;
-    transform: scale(1.01);
-    border: 2px solid #5c6870;
-
-    &:hover {
-      color: #fff;
-      transform: scale(1.2);
-      box-shadow: 0 0 15px #000;
-
-      &.youtube {
-        background: $youtube;
-        border-color: $youtube;
-      }
-
-      &.facebook {
-        background: $facebook;
-        border-color: $facebook;
-      }
-
-      &.instagram {
-        background: linear-gradient(30deg, #FFD521 17%, #F20008 50%, #B900B4 83%);
-        border-color: #B900B4;
-      }
-
-      &.tiktok {
-        border-color: #25f4ee;
-      }
+    .footer-bottom {
+        text-align: center;
+        border-top: 1px solid #242729;
+        padding: 20px 0 0;
+        @include tablet {
+            padding: 25px 0 0;
+        }
     }
-  }
-
-  br.mobile-only {
-    @include tablet {
-      display: none;
-    }
-  }
-
-  .disclaimer {
-    display: none;
-  }
-
-  .footer-bottom {
-    text-align: center;
-    border-top: 1px solid #242729;
-    padding: 20px 0 0;
-    @include tablet {
-      padding: 25px 0 0;
-    }
-  }
 }
 
 iframe[name='google_conversion_frame'] {

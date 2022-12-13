@@ -7,7 +7,7 @@
         {{--</div>--}}
     {{--</div>--}}
 {{--</div>--}}
-<footer class="sales-footer">
+<footer id="footer" class="bottom-footer clearfix relative">
     <div class="container">
         {{--<div class="footer-link-wrap footer-sign-up">--}}
             {{--<h1>Stay Connected</h1>--}}
