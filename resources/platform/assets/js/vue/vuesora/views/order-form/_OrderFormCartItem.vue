@@ -178,7 +178,9 @@ export default {
     methods: {
         updateCartItemQuantity(quantity) {
             this.loading = true;
-            
+            console.log('url', this.cartDataUrl)
+            console.log('sku', this.item.sku)
+            console.log('quantity', quantity)
             EcommerceService.updateCartItemQuantity(
                 this.cartDataUrl,
                 {

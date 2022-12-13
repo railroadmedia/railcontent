@@ -78,14 +78,6 @@ class BFUpdates extends Seeder
         Product::where('brand_id', 2)->where('name', 'Sketchy Mug')->update(['discounted_price' => 5]);
         Product::where('brand_id', 2)->where('name', 'Music Brings Happiness Mug')->update(['discounted_price' => 5]);
 
-        Product::where('brand_id', 2)->where('name', 'The Unlimited Lessons Bundle')->update(['overview' => 'The Unlimited Lessons Bundle gives you just that - unlimited piano lessons. Watch as many as you like, as often as you like.
-
-Learn your favorite songs in the comfort of your own home, whenever you want. Impress your family and friends with your piano playing - for a tiny fraction of the cost of private lessons.
-
-And get support and feedback from real teachers who will help you every step of the way.
-
-This bundle is for new members only. You’ll pay just $129 for your first year (recurring price will be $240/year).']);
-
         //GUITAREO UPDATES
         Product::where('brand_id', 3)->where('name', 'GuitarQuest')->update(['discounted_price' => 60]);
         Product::where('brand_id', 3)->where('name', '500 Songs In 5 Days')->update(['discounted_price' => 9]);

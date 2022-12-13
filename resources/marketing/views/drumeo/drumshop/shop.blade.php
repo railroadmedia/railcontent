@@ -374,8 +374,9 @@
                         "fullPrice" => $accessory->price,
                         "price" => $accessory->discounted_price === '0.00' || empty($accessory->discounted_price) ? $accessory->price : $accessory->discounted_price,
                         "sizes" => $accessory->sizes,
-                        "soldOut" => $accessory->sold_out,
+                        "soldOut" => !empty($products[$accessory->sku]) ? $products[$accessory->sku]->getPublicStockCount() === 0 :$accessory->sold_out,
                         "category" => strtolower($accessory->productType->name),
+                        "size_case_sensitive" => $accessory->size_case_sensitive,
                     ])
                 }
                 @endforeach
@@ -403,8 +404,9 @@
                          "fullPrice" => $hat->price,
                          "price" => $hat->discounted_price === '0.00' || empty($hat->discounted_price) ? $hat->price : $hat->discounted_price,
                          "sizes" => $hat->sizes,
-                         "soldOut" => $hat->sold_out,
+                         "soldOut" => !empty($products[$hat->sku]) ? $products[$hat->sku]->getPublicStockCount() === 0 : $hat->sold_out,
                          "category" => strtolower($hat->productType->name),
+                         "size_case_sensitive" => $hat->size_case_sensitive,
                     ])
                 }
                 @endforeach
@@ -433,7 +435,7 @@
                          "fullPrice" => $shirt->price,
                          "price" => $shirt->discounted_price === '0.00' || empty($shirt->discounted_price) ? $shirt->price : $shirt->discounted_price,
                          "sizes" => $shirt->sizes,
-                         "soldOut" => $shirt->sold_out,
+                         "soldOut" => !empty($products[$shirt->sku]) ? $products[$shirt->sku]->getPublicStockCount() === 0 : $shirt->sold_out,
                          "size_case_sensitive" => $shirt->size_case_sensitive,
                          "category" => strtolower($shirt->productType->name),
                     ])
@@ -476,8 +478,9 @@
                          "fullPrice" => $hoodie->price,
                          "price" => $hoodie->discounted_price === '0.00' || empty($hoodie->discounted_price) ? $hoodie->price : $hoodie->discounted_price,
                          "sizes" => $hoodie->sizes,
-                         "soldOut" => $hoodie->sold_out,
+                         "soldOut" => !empty($products[$hoodie->sku]) ? $products[$hoodie->sku]->getPublicStockCount() === 0 : $hoodie->sold_out,
                          "category" => strtolower($hoodie->productType->name),
+                         "size_case_sensitive" => $hoodie->size_case_sensitive,
                     ])
                 }
                 @endforeach

@@ -6,6 +6,7 @@
         <div class="flex flex-column order-form xs-12 md-9 ph-1">
             <order-form-cart
                 :theme-color="themeColor"
+                :cartDataUrl="cartDataUrl"
                 :cart-items="cartData.items"
                 :bonuses="bonuses"
                 :is-cart-locked="cartData.locked"
@@ -247,6 +248,10 @@ export default {
             default: () => null,
         },
 
+        cartDataUrl: {
+            type: String,
+        },
+
         shippingAddresses: {
             type: Object,
             default: () => {
@@ -433,7 +438,7 @@ export default {
     },
 
     beforeMount() {
-        console.log('Order form loaded')
+        
         if (!this.isSignedIn || !this.shippingAddresses || this.shippingAddresses.data.length === 0) {
             this.newAddress = true;
         }

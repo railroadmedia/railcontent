@@ -1,12 +1,4 @@
-{{--@php    --}}
-{{--    $soldOut = false;--}}
-
-{{--    if(!empty($sku) && !empty($productStock[$sku]) && ($category !== 'lessons' && $category !== 'bundles')){--}}
-{{--        $soldOut = $productStock[$sku]->isProductSoldOut();--}}
-{{--    }--}}
-{{--@endphp--}}
-
-<li class="scalable-card {{ !empty($cardType) ? $cardType : '' }} {{ !empty($soldOut) ? 'sold-out' : '' }}" data-price="{{ floatVal($price) }}" data-category="{{ $category }}">
+{<li class="scalable-card {{ !empty($cardType) ? $cardType : '' }} {{ !empty($soldOut) ? 'sold-out' : '' }}" data-price="{{ floatVal($price) }}" data-category="{{ $category }}">
     <div class="flip-card-inner">
         <div class="flip-card-front card-inside">
             <section class="drum-shop">
@@ -81,8 +73,7 @@
                                 <option hidden value="">Choose Size</option>
                                 @foreach($sizes as $size)
                                     <option
-                                        @if(!empty($physical) && $physical && $products[$sku.'-'.$size->sku]->isProductSoldOut()) disabled @endif
-                                        {{-- @if($productStock[$sku.'-'.$size->code]->isProductSoldOut()) disabled @endif --}}
+                                        @if($products[$sku.'-'.($size_case_sensitive ? strtolower($size->code) : $size->code)]->getPublicStockCount() === 0) disabled @endif
                                         value="?products[{!! $sku !!}-{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}]=1"
                                         data-product-json='{ "{!! $sku !!}-{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}": 1 }'
                                     >
