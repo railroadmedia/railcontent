@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
     <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
-    <link href="/marketing/parcel/pianoteg/play-beautiful-piano.css" rel="stylesheet">
+    <link href="/marketing/parcel/pianote/play-beautiful-piano.css" rel="stylesheet">
     <link href="{{ asset('/marketing/css/pianote/tailwind-helpers.css') }}" rel="stylesheet">
     <style>
         .text-yellow {
