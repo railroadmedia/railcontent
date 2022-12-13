@@ -136,7 +136,7 @@ class OrderController extends Controller
             }
         );
 
-        $stripePublishableKey = config('ecommerce.payment_gateways.stripe.drumeo.stripe_publishable_key');
+        $stripePublishableKey = config('ecommerce.payment_gateways.stripe.' . $brand . '.stripe_publishable_key');
 
         $bonuses = $request->session()->get('bonuses', []);
 
@@ -188,12 +188,12 @@ class OrderController extends Controller
              */
             $paymentMethods = array_splice($paymentMethods, 0, 5);
 
-            $shippingAddresses = $this->addressRepository->getUserShippingAddresses($user->id, 'drumeo');
+            $shippingAddresses = $this->addressRepository->getUserShippingAddresses($user->id, $brand);
 
             // also get all shipping addresses from their previous orders
             $userOrders =
                 $this->orderRepository->findBy(
-                    ['user' => new User($user->id, $user->email), 'brand' => 'drumeo'],
+                    ['user' => new User($user->id, $user->email), 'brand' => $brand],
                     ['createdAt' => 'DESC']
                 );
 

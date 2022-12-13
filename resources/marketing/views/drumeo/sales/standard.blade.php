@@ -98,6 +98,7 @@
 
 @section('final')
 {{--     @include("drumeo.sales.partials._subscribe-options")--}}
+     <div id="customize-anchor" class="anchor anchor-slide"></div>
     @include('_partials.layout.holiday.homepage-bottom-membership',[
         'logo' => 'https://drumeo-assets.s3.amazonaws.com/promos/november/drumeo-annual-card.jpg',
         'joinText' => '<strong>Join Drumeo for just $.'.round(Prices::$drumeoEdgeAnnual / 12, 2).'/month</strong> <br class="hidden sm:inline"><strong class="text-promo">PLUS</strong> get 10 free bonuses worth $1228.94.',

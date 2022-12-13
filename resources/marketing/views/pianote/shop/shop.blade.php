@@ -301,9 +301,10 @@
                             "title" => $accessory->name,
                             "cardDescription" => $accessory->short_desc,
                             "fullPrice" => $accessory->price,
+                            "sizes" => $accessory->sizes,
                             "price" => $accessory->discounted_price === '0.00' || empty($accessory->discounted_price) ? $accessory->price : $accessory->discounted_price,
                             "category" => strtolower($accessory->productType->name),
-                            "soldOut" => $accessory->sold_out,
+                            "soldOut" => !empty($products[$accessory->sku]) ? $products[$accessory->sku]->getPublicStockCount() === 0 : $accessory->sold_out,
                             "size_case_sensitive" => $accessory->size_case_sensitive,
                     ])
                 }
@@ -332,7 +333,7 @@
                         "price" => $shirt->discounted_price === '0.00' || empty($shirt->discounted_price) ? $shirt->price : $shirt->discounted_price,
                         "category" => strtolower($shirt->productType->name),
                         "sizes" => $shirt->sizes,
-                        "soldOut" => $shirt->sold_out,
+                        "soldOut" => !empty($products[$shirt->sku]) ? $products[$shirt->sku]->getPublicStockCount() === 0 : $shirt->sold_out,
                         "size_case_sensitive" => $shirt->size_case_sensitive,
                     ])
                 }
@@ -361,7 +362,7 @@
                         "price" => $hoodie->discounted_price === '0.00' || empty($hoodie->discounted_price) ? $hoodie->price : $hoodie->discounted_price,
                         "category" => strtolower($hoodie->productType->name),
                         "sizes" => $hoodie->sizes,
-                        "soldOut" => $hoodie->sold_out,
+                        "soldOut" => !empty($products[$hoodie->sku]) ? $products[$hoodie->sku]->getPublicStockCount() === 0 :$hoodie->sold_out,
                         "size_case_sensitive" => $hoodie->size_case_sensitive,
                     ])
                 }

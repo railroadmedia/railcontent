@@ -182,7 +182,7 @@
 @endsection
 
 @section('final')
-{{--    @include("sales.partials._subscribe-options")--}}
+    <div id="customize-anchor" class="anchor anchor-slide"></div>
     @include('_partials.layout.holiday.homepage-bottom-membership',[
         'logo' => 'https://guitareo.s3.amazonaws.com/sales/promos/black-friday/bundles/ultimate/annual.jpg',
         'joinText' => '<strong>Join Guitareo for just ${{  round(GuitareoPrices::$guitareoMembershipAnnual / 12, 2) }}/month</strong> <br class="hidden sm:inline"><strong class="text-promo">PLUS</strong> get 6 free bonuses worth $924.',

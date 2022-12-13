@@ -94,6 +94,7 @@
 
 @section('final')
 {{--     @include("singeo.sales.partials._subscribe-options")--}}
+<div id="customize-anchor" class="anchor anchor-slide"></div>
     @include('_partials.layout.holiday.homepage-bottom-membership',[
         'logo' => 'https://singeo.s3.amazonaws.com/sales/promos/august/homepage_chart.png',
         'singeo' => true,

@@ -41,7 +41,7 @@
                     SOLD OUT
                 </button>
             @else
-                @if($category !== 'bundles' && count($sizes) === 0)
+                @if($category !== 'bundles' && count($sizes) === 0 && !$bundle)
                     <a
                         class="online-atc vue-add-to-cart"
                         href="/ecommerce/add-to-cart?redirect=/shop&products[{!! $sku !!}]=1"
@@ -49,6 +49,11 @@
                         data-product-json='{"{!! $sku !!}": 1}'
                     >
                         <button class="border-none join"><i class="fas fa-cart-plus"></i> Add To Cart</button>
+                    </a>
+                @elseif($bundle)
+                    <a class="online-atc" href="/ecommerce/add-to-cart?redirect=/order&{{ $product->sku }}"
+                       data-base-url="/ecommerce/add-to-cart?redirect=/order&{{ $product->sku }}">
+                        <button class="border-none join w-full sm:w-1/2 lg:w-full"><i class="fas fa-cart-plus"></i> Order Now</button>
                     </a>
                 @endif
 
@@ -58,8 +63,7 @@
                         @foreach($sizes as $size)
                             <option
                                 class="bg-white text-black"
-                                @if(isset($size->soldOut) && $size->soldOut) disabled @endif
-                                {{-- @if($productStock[$sku.'-'.$size->code]->isProductSoldOut()) disabled @endif --}}
+                                @if($products[$sku.'-'.($size_case_sensitive ? strtolower($size->code) : $size->code)]->getPublicStockCount() === 0) disabled @endif
                                 value="@if(!empty($sku)){{$sku}}-@endif{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}"
                                 data-price="{{!empty($size->price) ? $size->price : $price}}"
                                 data-product-json='{"@if(!empty($sku)){{$sku}}-@endif{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}": 1}'
@@ -83,13 +87,6 @@
                         <button class="border-none join w-full sm:w-1/2 lg:w-full">
                             <i class="fas fa-cart-plus"></i> Add To Cart
                         </button>
-                    </a>
-                @endif
-
-                @if($category === 'bundles')
-                    <a class="online-atc" href="/ecommerce/add-to-cart?redirect=/order&{{ $product->sku }}"
-                       data-base-url="/ecommerce/add-to-cart?redirect=/order&{{ $product->sku }}">
-                        <button class="border-none join w-full sm:w-1/2 lg:w-full"><i class="fas fa-cart-plus"></i> Order Now</button>
                     </a>
                 @endif
             @endif

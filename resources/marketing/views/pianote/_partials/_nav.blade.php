@@ -18,7 +18,7 @@
     @endif
     @if(!empty($cartVersion))
         <div class="button-wrap" id="app">
-            <a href="{{ get_legacy_brand_base_url('pianote') }}/shop" class="join promo outline-button">Shop</a>
+            <a href="{{ get_legacy_brand_base_url('pianote') }}/shop" class="join promo outline-button hover:no-underline">Shop</a>
 
             <nav-cart-button
                 {{-- cart-data='{{ $cartData }}' --}}

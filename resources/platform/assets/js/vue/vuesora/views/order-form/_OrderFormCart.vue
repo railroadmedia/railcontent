@@ -3,7 +3,7 @@
 
         <order-form-cart-item
             v-for="item in cartItems"
-            :cart-data-url="cartDataUrl"
+            :cartDataUrl="cartDataUrl"
             :key="item.sku"
             :theme-color="themeColor"
             :item="item"
@@ -13,7 +13,7 @@
 
         <order-form-cart-item
             v-for="item in bonuses"
-            :cart-data-url="cartDataUrl"
+            :cartDataUrl="cartDataUrl"
             :key="item.sku"
             :theme-color="themeColor"
             :item="item"
