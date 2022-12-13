@@ -1779,6 +1779,7 @@ class CmsClothingSeeder extends Seeder
                 "guaranteed" => false,
                 "lifetime_access" => false,
                 "free_shipping" => false,
+                'size_case_sensitive' => true,
                 "images" => [
                     'https://singeo.s3.amazonaws.com/products/hoodie-shop-sale-page.jpg'
                 ],
@@ -1827,6 +1828,7 @@ class CmsClothingSeeder extends Seeder
                 "guaranteed" => false,
                 "lifetime_access" => false,
                 "free_shipping" => false,
+                'size_case_sensitive' => true,
                 "images" => [
                     'https://singeo.s3.amazonaws.com/products/t-shirt-shop-sale-page.jpg'
                 ],
