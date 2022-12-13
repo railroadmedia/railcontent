@@ -122,7 +122,7 @@
                         <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-drumeo"></i><br> World-Class<br>  Teachers</p>
                         <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-drumeo"></i><br> Play More <br> Songs</p>
                     </div>
-                    <div class="flex flex-wrap items-center mt-6 sm:mt-5 lg:mt-10">
+                    <div class="flex flex-wrap items-center mt-6 sm:mt-5 lg:mt-10 max-w-xs">
                         <a href="" class="w-full join blue smaller anchor-slide mb-2">START FOR FREE <i class="fas fa-arrow-right"></i> </a>
                         <i class="align-middle text-lg fas fa-star" style="color: #ffac00;"></i>
                         <i class="align-middle text-lg -ml-3 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;"></i>
@@ -144,22 +144,22 @@
             <div class="flex flex-wrap sm:flex-nowrap text-center border-2 rounded-xl border-drumeo mt-8 lg:mt-12 mb-2 lg:mb-4" style="background-color:#eaf1fa;">
                 <div class="flex flex-wrap sm:flex-nowrap items-center justify-evenly w-full sm:w-auto sm:flex-grow py-4 sm:py-3 lg:py-4 lg:px-5 text-left sm:text-center">
                     <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3 mb-4 sm:mb-0">
-                        <i class="far fa-fw mr-3 sm:mr-0 fa-calendar-day text-drumeo text-2xl"></i>
+                        <img src="https://drumeo-assets.s3.amazonaws.com/sales/2023/drum-lessons-icon.svg" class="h-7 mb-2 mr-3 sm:mr-0">
                         <p class="leading-tight mx-0"><strong class="font-black">Drum Lessons</strong><br>
                             <span class="text-sm">Step-by-step video lessons on every topic.</span></p>
                     </div>
                     <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3 mb-4 sm:mb-0">
-                        <i class="far fa-fw mr-3 sm:mr-0 fa-clock text-drumeo text-2xl"></i>
+                        <img src="https://drumeo-assets.s3.amazonaws.com/sales/2023/artist-course-icon.svg" class="h-7 mb-2 mr-3 sm:mr-0">
                         <p class="leading-tight mx-0"><strong class="font-black">Artist Courses</strong><br>
                             <span class="text-sm">Courses and live events with drumming royalty.</span></p>
                     </div>
                     <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3 mb-4 sm:mb-0">
-                        <i class="far fa-fw mr-3 sm:mr-0 fa-trophy text-drumeo text-2xl"></i>
+                        <img src="https://drumeo-assets.s3.amazonaws.com/sales/2023/songs-icon.svg" class="h-7 mb-2 mr-3 sm:mr-0">
                         <p class="leading-tight mx-0"><strong class="font-black">5000+ Songs</strong><br>
                             <span class="text-sm">Play popular songs from every style & era.</span></p>
                     </div>
                     <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3">
-                        <i class="far fa-fw mr-3 sm:mr-0 fa-trophy text-drumeo text-2xl"></i>
+                        <img src="https://drumeo-assets.s3.amazonaws.com/sales/2023/support-icon.svg" class="h-7 mb-2 mr-3 sm:mr-0">
                         <p class="leading-tight mx-0"><strong class="font-black">24/7 Support</strong><br>
                             <span class="text-sm">The largest community of students & teachers.</span></p>
                     </div>
@@ -171,21 +171,21 @@
                     <p class="leading-normal text-sm"><em>“Drumeo is the real deal folks - a good place to study and realize one’s dreams.”</em></p>
                     <div class="flex flex-wrap md:flex-nowrap text-left items-center justify-center mt-1.5">
                         <img class="rounded-full h-10 lazyload" data-src="https://cdn.musora.com/image/fetch/w_80,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/new-drummers/billy-cobham.jpg"><br class="inline md:hidden">
-                        <p class="leading-tight w-full md:w-auto text-sm text-light-navy ml-1 md:ml-2 mr-0 mt-1 md:mt-0"><em>Billy Cobham,<br> Rolling Stone  Top 100 Drummer</em></p>
+                        <p class="leading-tight w-full md:w-auto text-sm text-light-navy ml-1 md:ml-2 mr-0 mt-1 md:mt-0"><em>Billy Cobham<br> Rolling Stone  Top 100 Drummer</em></p>
                     </div>
                 </div>
                 <div class="px-3 md:px-6 slick-slide">
                     <p class="leading-normal text-sm"><em>“A world-class site for continuing education and insight into the world of drumming!”</em></p>
                     <div class="flex flex-wrap md:flex-nowrap text-left items-center justify-center mt-1.5">
                         <img class="rounded-full h-10 lazyload" data-src="https://cdn.musora.com/image/fetch/w_80,q_auto:best/https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/redmond.jpg"><br class="inline md:hidden">
-                        <p class="leading-tight w-full md:w-auto text-sm text-light-navy ml-1 md:ml-2 mr-0 mt-1 md:mt-0"><em>Rich Redmond,<br> 3x Country Drummer Of The Year</em></p>
+                        <p class="leading-tight w-full md:w-auto text-sm text-light-navy ml-1 md:ml-2 mr-0 mt-1 md:mt-0"><em>Rich Redmond<br> 3x Country Drummer Of The Year</em></p>
                     </div>
                 </div>
                 <div class="px-3 md:px-6 slick-slide">
                     <p class="leading-normal text-sm"><em>“The Drumeo standard is one of the highest quality and is THE place to go for the best in drum education.”</em></p>
                     <div class="flex flex-wrap md:flex-nowrap text-left items-center justify-center mt-1.5">
                         <img class="rounded-full h-10 lazyload" data-src="https://cdn.musora.com/image/fetch/w_80,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/four-weeks-to-better-drum-fills/drummer-david-garibaldi.jpg"><br class="inline md:hidden">
-                        <p class="leading-tight w-full md:w-auto text-sm text-light-navy ml-1 md:ml-2 mr-0 mt-1 md:mt-0"><em>David Garibaldi,<br> Rolling Stone Top 100 Drummer</em></p>
+                        <p class="leading-tight w-full md:w-auto text-sm text-light-navy ml-1 md:ml-2 mr-0 mt-1 md:mt-0"><em>David Garibaldi<br> Rolling Stone Top 100 Drummer</em></p>
                     </div>
                 </div>
             </div>
@@ -197,7 +197,7 @@
             <img class="h-56 inline sm:hidden lazyload" data-src="https://cdn.musora.com/image/fetch/w_690,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/Collage_intro_m.png">
             <h2 class="text-center my-5 sm:mt-0 sm:mb-7"><strong>Learn the drums by<br class="inline sm:hidden"> <u>playing the drums</u>.</strong></h2>
             <div class="text-left flex flex-wrap sm:flex-nowrap mb-32 sm:mb-56 lg:mb-72">
-                <h6 class="leading-normal max-w-lg pr-7">It’s been proven over and over –
+                <p class="leading-normal max-w-lg pr-7">It’s been proven over and over –
                     <br><br>
                     Playing the drums is one of the healthiest activities you can perform for your brain – showing signs of boosting happiness, intelligence, and overall well being.
                     <br><br>
@@ -205,7 +205,7 @@
                     <br><br>
                     You’ll play more. You’ll fall in love with your progress. And you’ll be surrounded by a community of students and teachers to connect, support, and grow your passion.
                     <br><br>
-                    Scroll down to watch the trailer, see more details, and join the community where drummers gather – and play like you’ve always wanted!</h6>
+                    Scroll down to watch the trailer, see more details, and join the community where drummers gather – and play like you’ve always wanted!</p>
                 <img class="h-96 hidden sm:inline lazyload" data-src="https://cdn.musora.com/image/fetch/w_690,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/Collage_intro.png">
             </div>
         </div>
@@ -214,52 +214,52 @@
     <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #f4f8fb calc(50% + 1px));"></div>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f4f8fb;">
         <div class="container max-w-5xl mx-auto">
-            <div class="aspect-16:9 cursor-hover rounded-xl autoplay-video overflow-hidden w-full relative -mt-36 sm:-mt-64 lg:-mt-96" data-open="trailer">
+            <div class="aspect-16:9 cursor-hover rounded-xl autoplay-video overflow-hidden w-full relative -mt-36 sm:-mt-64 lg:-mt-96 mb-20" data-open="trailer">
                 <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
                 <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0 lazyload" poster="https://i.vimeocdn.com/video/1488646391-d2694ba3d38847b00d9fcd70c946d3c45efe1202cedf305361a253a275ef5f90-d_890" data-src="https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/video-reel.mp4" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
                 {{--<iframe class="absolute w-full h-full" src="//player.vimeo.com/video/738385463" frameborder="0" allowfullscreen allow="autoplay" title="10year-video"></iframe>--}}
             </div>
             <h2><strong>Your drumming goals start here.</strong></h2>
-            <h6>Learn to play drums online with an organized 10-level curriculum featuring many of the world’s best teachers.</h6>
-            <div class="flex flex-wrap items-center justify-center text-left mb-6">
-                <div class="w-full sm:w-1/2 lg:w-1/3 px-3 sm:px-4">
-                    <img class="rounded-xl mb-4" src="">
-                    <p>
-                        <strong>10-Level Curriculum</strong><br> The most trusted step-by-step video lessons for every technique, pattern, and style.
+            <p class="mt-2 mb-10">Learn to play drums online with an organized 10-level curriculum featuring many of the world’s best teachers.</p>
+            <div class="flex flex-wrap items-center justify-center text-left">
+                <div class="w-full sm:w-1/2 lg:w-1/3 px-2 sm:px-3 mb-8">
+                    <img class="rounded-xl mb-4" src="https://drumeo-assets.s3.amazonaws.com/sales/2023/10-level-cirriculum.jpg">
+                    <p class="leading-tight">
+                        <strong class="font-black">10-Level Curriculum</strong><br> The most trusted step-by-step video lessons for every technique, pattern, and style.
                     </p>
                 </div>
-                <div class="w-full sm:w-1/2 lg:w-1/3 px-3 sm:px-4">
-                    <img class="rounded-xl mb-4" src="">
-                    <p>
-                        <strong>Practical Assignments</strong><br> You'll always have on-screen assignments and practice tools to increase retention.
+                <div class="w-full sm:w-1/2 lg:w-1/3 px-2 sm:px-3 mb-8">
+                    <img class="rounded-xl mb-4" src="https://drumeo-assets.s3.amazonaws.com/sales/2023/practical-assignments.jpg">
+                    <p class="leading-tight">
+                        <strong class="font-black">Practical Assignments</strong><br> You'll always have on-screen assignments and practice tools to increase retention.
                     </p>
                 </div>
-                <div class="w-full sm:w-1/2 lg:w-1/3 px-3 sm:px-4">
-                    <img class="rounded-xl mb-4" src="">
+                <div class="w-full sm:w-1/2 lg:w-1/3 px-2 sm:px-3 mb-8">
+                    <img class="rounded-xl mb-4" src="https://drumeo-assets.s3.amazonaws.com/sales/2023/guided-workouts.jpg">
 
-                    <p>
-                        <strong>## Guided Workouts</strong><br> Stay inspired with our guided workouts where we’ll practice-along with you in real time.
+                    <p class="leading-tight">
+                        <strong class="font-black">Guided Workouts</strong><br> Stay inspired with our guided workouts where we’ll practice-along with you in real time.
                     </p>
                 </div>
-                <div class="w-full sm:w-1/2 lg:w-1/3 px-3 sm:px-4">
-                    <img class="rounded-xl mb-4" src="">
+                <div class="w-full sm:w-1/2 lg:w-1/3 px-2 sm:px-3 mb-8">
+                    <img class="rounded-xl mb-4" src="https://drumeo-assets.s3.amazonaws.com/sales/2023/world-class-teachers.jpg">
 
-                    <p>
-                        <strong>World-Class Teachers</strong><br> The best drummers are here -- including Grammy Award winners and touring musicians.
+                    <p class="leading-tight">
+                        <strong class="font-black">World-Class Teachers</strong><br> The best drummers are here -- including Grammy Award winners and touring musicians.
                     </p>
                 </div>
-                <div class="w-full sm:w-1/2 lg:w-1/3 px-3 sm:px-4">
-                    <img class="rounded-xl mb-4" src="">
+                <div class="w-full sm:w-1/2 lg:w-1/3 px-2 sm:px-3 mb-8">
+                    <img class="rounded-xl mb-4" src="https://drumeo-assets.s3.amazonaws.com/sales/2023/downloadable-videos.jpg">
 
-                    <p>
-                        <strong>Downloadable Videos</strong><br> Stream your lessons OR download your videos so you can practice anywhere, anytime.
+                    <p class="leading-tight">
+                        <strong class="font-black">Downloadable Videos</strong><br> Stream your lessons OR download your videos so you can practice anywhere, anytime.
                     </p>
                 </div>
-                <div class="w-full sm:w-1/2 lg:w-1/3 px-3 sm:px-4">
-                    <img class="rounded-xl mb-4" src="">
+                <div class="w-full sm:w-1/2 lg:w-1/3 px-2 sm:px-3 mb-8">
+                    <img class="rounded-xl mb-4" src="https://drumeo-assets.s3.amazonaws.com/sales/2023/personalized-support.jpg">
 
-                    <p>
-                        <strong>Personalized Support</strong><br> Get weekly live streams, student lesson plans, and access to a global drum community.
+                    <p class="leading-tight">
+                        <strong class="font-black">Personalized Support</strong><br> Get weekly live streams, student lesson plans, and access to a global drum community.
                     </p>
                 </div>
             </div>
@@ -424,44 +424,44 @@
             <p class="leading-tight mt-3">You’ll have all the tools you need to <br class="hidden sm:inline"> make sure you never miss a beat.</p>
 
             <div class="flex my-10">
-                <div class="text-left pr-4">
+                <div class="text-left pr-8 max-w-md">
                     <div class="flex mb-4">
-                        <i class="fal fa-music text-drumeo"></i>
+                        <div class="w-14 flex-grow-0"><img src="https://drumeo-assets.s3.amazonaws.com/sales/2023/5000-songs-icon.svg" class="h-10"></div>
                         <div class="flex-grow pl-4">
                             <h5><strong>5000+ popular songs.</strong></h5>
-                            <p class="text-sm">Get note-for-note song breakdowns for every style, era, and skill with handy play-along tools. </p>
+                            <p class="mt-2 text-sm">Get note-for-note song breakdowns for every style, era, and skill with handy play-along tools. </p>
                         </div>
                     </div>
                     <div class="flex mb-4">
-                        <i class="fal fa-music text-drumeo"></i>
+                        <div class="w-14 flex-grow-0"><img src="https://drumeo-assets.s3.amazonaws.com/sales/2023/note-for-note-icon.svg" class="h-10"></div>
                         <div class="flex-grow pl-4">
                             <h5><strong>Find the perfect tempo.</strong></h5>
-                            <p class="text-sm">Slow down or speed up any section of a song to hear every note your favorite drummer plays. </p>
+                            <p class="mt-2 text-sm">Slow down or speed up any section of a song to hear every note your favorite drummer plays. </p>
                         </div>
                     </div>
                     <div class="flex mb-4">
-                        <i class="fal fa-music text-drumeo"></i>
+                        <div class="w-14 flex-grow-0"><img src="https://drumeo-assets.s3.amazonaws.com/sales/2023/tempo-icon.svg" class="h-10"></div>
                         <div class="flex-grow pl-4">
                             <h5><strong>Loop the trouble spots.</strong></h5>
-                            <p class="text-sm">No more pausing and rewinding that tricky fill. Grab any song section and loop it, over and over! </p>
+                            <p class="mt-2 text-sm">No more pausing and rewinding that tricky fill. Grab any song section and loop it, over and over! </p>
                         </div>
                     </div>
                     <div class="flex mb-4">
-                        <i class="fal fa-music text-drumeo"></i>
+                        <div class="w-14 flex-grow-0"><img src="https://drumeo-assets.s3.amazonaws.com/sales/2023/metronome-icon.svg" class="h-10"></div>
                         <div class="flex-grow pl-4">
                             <h5><strong>Remove the drums *NEW*</strong></h5>
-                            <p class="text-sm">Magically remove the original drum part to make each song and performance uniquely yours. </p>
+                            <p class="mt-2 text-sm">Magically remove the original drum part to make each song and performance uniquely yours. </p>
                         </div>
                     </div>
                     <div class="flex">
-                        <i class="fal fa-music text-drumeo"></i>
+                        <div class="w-14 flex-grow-0"><img src="https://drumeo-assets.s3.amazonaws.com/sales/2023/loop-icon.svg" class="h-10"></div>
                         <div class="flex-grow pl-4">
                             <h5><strong>Take your songs anywhere.</strong></h5>
-                            <p class="text-sm">Accessible on any device, or printable, so you can play the songs you love whenever and wherever. </p>
+                            <p class="mt-2 text-sm">Accessible on any device, or printable, so you can play the songs you love whenever and wherever. </p>
                         </div>
                     </div>
                 </div>
-                <img class="h-96" src="https://cdn.musora.com/image/fetch/w_1400,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/august/order_collage.png">
+                <img class="h-96" src="https://cdn.musora.com/image/fetch/w_1400,q_auto:best/https://drumeo-assets.s3.amazonaws.com/sales/2023/collage.png">
             </div>
             <a href="" class="mx-1 join outline method smaller">SEE SONGS LIST <i class="fas fa-info-circle"></i> </a>
             <a href="" class="mx-1 join blue smaller anchor-slide">START FOR FREE <i class="fas fa-arrow-right"></i> </a>
@@ -857,7 +857,7 @@
                     </div>
                 </div>
                 <div class="flex w-full justify-center sm:justify-start sm:w-1/2 lg:w-1/2 sm:order-1 sm:pl-5 lg:pl-10 mt-7 sm:mt-0">
-                    <img class="max-w-xl sm:max-w-3xl lg:max-w-5xl lazyload" data-src="https://cdn.musora.com/image/fetch/w_1400,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/august/order_collage.png">
+                    <img class="max-w-xl sm:max-w-3xl lg:max-w-5xl lazyload" data-src="https://cdn.musora.com/image/fetch/w_1400,q_auto:best/https://drumeo-assets.s3.amazonaws.com/sales/2023/devices.png">
                 </div>
             </div>
         </div>
