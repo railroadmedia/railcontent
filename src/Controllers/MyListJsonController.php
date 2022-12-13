@@ -214,4 +214,52 @@ class MyListJsonController extends Controller
                                                    'filter_options' => $lessons->filterOptions(),
                                                ]))->toJsonResponse();
     }
+
+    public function createPlaylist(Request $request)
+    {
+        $playlist = $this->userPlaylistsService->create([
+                                                            'user_id' => auth()->id(),
+                                                            'type' => 'user-playlist',
+                                                            'brand' => $request->get('brand')
+                                                                ??
+                                                                config('railcontent.brand'),
+                                                            'name' => $request->get('name'),
+                                                            'description' => $request->get('description'),
+                                                            'thumbnail_url' => $request->get('thumbnail_url'),
+                                                            'category' => $request->get('category'),
+                                                            'private' => $request->get('private', true),
+                                                            'created_at' => Carbon::now()
+                                                                ->toDateTimeString(),
+                                                        ]);
+
+        return $playlist;
+    }
+
+    public function getUserPlaylists(Request $request)
+    {
+        $page = $request->get('page', 1);
+        $limit = $request->get('limit', 10);
+
+        $playlists = $this->userPlaylistsService->getUserPlaylist(auth()->id(), 'user-playlist', config('railcontent.brand'), $limit, $page);
+        $playlistsNumber = $this->userPlaylistsService->countUserPlaylists(auth()->id(),'user-playlist', config('railcontent.brand') );
+
+        return (new ContentFilterResultsEntity([
+                                                   'results' => $playlists,
+                                                   'total_results' => 16,
+                                               ]))->toJsonResponse();
+    }
+
+    public function getPublicPlaylists()
+    {
+        $playlists = $this->userPlaylistsService->getPublicPlaylists('user-playlist', config('railcontent.brand'));
+
+        return $playlists;
+    }
+
+    public function addItemToPlaylist(Request $request)
+    {
+        $this->userPlaylistsService->addItemToPlaylist($request->get('user_playlist_id'), $request->get('content_id'), $request->get('position'));
+
+        return response()->json(['success']);
+    }
 }

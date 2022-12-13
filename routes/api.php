@@ -188,5 +188,16 @@ Route::group(
             '/followed-lessons',
             Railroad\Railcontent\Controllers\ContentFollowsJsonController::class . '@getLatestLessonsForFollowedContentByType'
         )->name('api.followed.lessons');
+
+        Route::post('/playlist', MyListJsonController::class . '@createPlaylist');
+
+        Route::get('/playlists', MyListJsonController::class . '@getUserPlaylists');
+
+        Route::get('/public-playlists', MyListJsonController::class . '@getPublicPlaylists');
+
+        Route::put('/add-item-to-list', MyListJsonController::class . '@addItemToPlaylist');
+//        Route::put('/remove-from-my-list', MyListJsonController::class . '@removeFromPrimaryPlaylist');
+//        Route::get('/my-list', MyListJsonController::class . '@getMyLists');
+        //addItemToPlaylist
     }
 );

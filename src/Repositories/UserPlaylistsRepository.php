@@ -15,14 +15,37 @@ class UserPlaylistsRepository extends RepositoryBase
      * @param null $brand
      * @return array|mixed[]
      */
-    public function getUserPlaylist($userId, $playlistType, $brand=null)
+    public function getUserPlaylist($userId, $playlistType, $brand=null, $limit = null, $page = 1)
+    {
+        if (!$brand) {
+            $brand = config('railcontent.brand');
+        }
+
+        $query = $this->query()
+            ->where('user_id', $userId)
+            ->where('brand', $brand)
+            ->where('type', $playlistType)
+            ->orderBy('id', 'desc');
+
+        if ($limit) {
+            $query->limit($limit)
+                ->skip(($page - 1) * $limit);
+        }
+
+            $data = $query->get()
+            ->toArray();
+
+        return $data;
+    }
+
+    public function getPublicPlaylists($playlistType, $brand=null)
     {
         if (!$brand) {
             $brand = config('railcontent.brand');
         }
 
         $data = $this->query()
-            ->where('user_id', $userId)
+            ->where('private', false)
             ->where('brand', $brand)
             ->where('type', $playlistType)
             ->orderBy('id', 'desc')
@@ -30,5 +53,18 @@ class UserPlaylistsRepository extends RepositoryBase
             ->toArray();
 
         return $data;
+    }
+
+    public function countUserPlaylists($userId, $playlistType, $brand = null)
+    {
+        if (!$brand) {
+            $brand = config('railcontent.brand');
+        }
+
+        return $this->query()
+            ->where('user_id', $userId)
+            ->where('brand', $brand)
+            ->where('type', $playlistType)
+            ->count();
     }
 }

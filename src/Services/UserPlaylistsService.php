@@ -68,9 +68,9 @@ class UserPlaylistsService
      * @param null $brand
      * @return array|mixed[]
      */
-    public function getUserPlaylist($userId, $playlistType, $brand = null)
+    public function getUserPlaylist($userId, $playlistType, $brand = null, $limit, $page)
     {
-        return $this->userPlaylistsRepository->getUserPlaylist($userId, $playlistType, $brand);
+        return $this->userPlaylistsRepository->getUserPlaylist($userId, $playlistType, $brand, $limit, $page);
     }
 
     /**
@@ -141,5 +141,26 @@ class UserPlaylistsService
         }
 
         return $this->userPlaylistContentRepository->delete($userPlaylistContent[0]['id']);
+    }
+
+    public function create($attributes)
+    {
+        $userPlaylist = $this->userPlaylistsRepository->create($attributes);
+
+        return $this->userPlaylistsRepository->getById($userPlaylist);
+    }
+
+    public function getPublicPlaylists($type='user-playlist', $brand)
+    {
+        return $this->userPlaylistsRepository->getPublicPlaylists($type, $brand);
+    }
+
+    public function addItemToPlaylist($userPlaylistId, $contentId, $position=null)
+    {
+
+    }
+
+    public function countUserPlaylists($userId, $type, $brand){
+        return $this->userPlaylistsRepository->countUserPlaylists($userId, $type, $brand);
     }
 }
