@@ -50,9 +50,9 @@
             <h1><a href="/shop/">GUITAREO Shop</a></h1>
             <p><a href="/">Guitareo Membership</a><br>
                 <a href="/guitar-quest">GuitarQuest</a><br>
-                <a href="/500-songs">500 Songs In 5 Days</a><br>
+                <a href="/shop/500-songs">500 Songs In 5 Days</a><br>
                 <a href="/shop/survival-guide">Guitareo Survival Guide</a><br>
-                <a href="/acoustic-guitar-made-easy">Acoustic Guitar Made Easy</a></p>
+                <a href="/shop/acoustic-guitar-made-easy">Acoustic Guitar Made Easy</a></p>
         </div>
         <div class="footer-link-wrap">
             <h1>Other Sites</h1>

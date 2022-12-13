@@ -49,7 +49,7 @@
         <div class="footer-link-wrap">
             <h1><a href="/shop/">Singeo SHOP</a></h1>
             <p><a href="/">Singeo Membership</a><br>
-                <a href="/singing-starter-kit">Singing Starter Kit</a><br>
+                <a href="/shop/singing-starter-kit">Singing Starter Kit</a><br>
                 <a href="/shop/poster-vowels">Vowel Practice Poster</a><br>
                 <a href="/shop/shirt-retro">Singeo T-Shirt</a><br>
                 <a href="/shop/tumbler-doremi">Do-Ti-La-So Tumbler</a></p>
