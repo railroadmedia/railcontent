@@ -317,23 +317,23 @@
         <section class="grid-view category-section" data-category="lessons">
             <ul class="container mx-auto fixed-cards">
 
-                @foreach($products as $product){
+                @foreach($items as $item){
                     @include('singeo.shop.partials._shop-card', [
-                            "sku" => $product->sku,
-                            "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $product->slug ),
-                            "thumbnail" => $product->thumbnail,
-                            "packLogo" => $product->thumbnail_logo,
-                            "badgeText" => $product->badge_text,
-                            "title" => $product->name,
-                            "packAuthor" => $product->instructor_name,
-                            "cardDescription" => $product->short_desc,
-                            "fullPrice" => $product->price,
-                            "price" => $product->discounted_price === '0.00' || empty($product->discounted_price) ? $product->price : $product->discounted_price,
-                            "category" => strtolower($product->productType->name),
-                            "includedEdge" => $product->included_edge,
-                            "sizes" => $product->sizes,
-                            "soldOut" => $product->sold_out,
-                            "size_case_sensitive" => $product->size_case_sensitive,
+                            "sku" => $item->sku,
+                            "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $item->slug ),
+                            "thumbnail" => $item->thumbnail,
+                            "packLogo" => $item->thumbnail_logo,
+                            "badgeText" => $item->badge_text,
+                            "title" => $item->name,
+                            "packAuthor" => $item->instructor_name ?? 'Singeo',
+                            "cardDescription" => $item->short_desc,
+                            "fullPrice" => $item->price,
+                            "price" => $item->discounted_price === '0.00' || empty($item->discounted_price) ? $item->price : $item->discounted_price,
+                            "category" => strtolower($item->productType->name),
+                            "includedEdge" => $item->included_edge,
+                            "sizes" => $item->sizes,
+                            "soldOut" => (!empty($products[$item->sku]) && $item->productType->name !== 'Lessons') ? $products[$item->sku]->getPublicStockCount() === 0 : $item->sold_out,
+                            "size_case_sensitive" => $item->size_case_sensitive,
                     ])
                 }
                 @endforeach

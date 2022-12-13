@@ -39,7 +39,7 @@
                     SOLD OUT
                 </button>
             @else
-                @if($category !== 'bundles' && count($sizes) === 0)
+                @if($category !== 'bundles' && count($sizes) === 0 && !$bundle)
                     <a
                         class="online-atc vue-add-to-cart"
                         href="/ecommerce/add-to-cart?redirect=/shop&products[{!! $sku !!}]=1"
@@ -48,6 +48,11 @@
                     >
                         <button class="border-none join"><i class="fas fa-cart-plus"></i> Add To Cart</button>
                     </a>
+                @elseif($bundle)
+                    <a class="online-atc" href="/ecommerce/add-to-cart?redirect=/order&{!! $sku !!}"
+                       data-base-url="/ecommerce/add-to-cart?redirect=/order&{!! $sku !!}">
+                        <button class="border-none join"><i class="fas fa-cart-plus"></i> Order Now</button>
+                    </a>
                 @endif
 
                 @if(!empty($sizes) && count($sizes) > 0)
@@ -55,9 +60,8 @@
                         <option hidden value="">@if(!empty($optionText)) {{ $optionText }} @else Choose Size @endif</option>
                         @foreach($sizes as $size)
                             <option
-                                @if(isset($size->soldOut) && $size->soldOut) disabled @endif
-                            {{-- @if($productStock[$sku.'-'.$size->code]->isProductSoldOut()) disabled @endif --}}
-                            value="@if(!empty($sku)){{$sku}}-@endif{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}"
+                                @if($products[$sku.'-'.($size_case_sensitive ? strtolower($size->code) : $size->code)]->getPublicStockCount() === 0) disabled @endif
+                                value="@if(!empty($sku)){{$sku}}-@endif{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}"
                                 data-price="{{!empty($size->price) ? $size->price : $price}}"
                                 data-product-json='{"@if(!empty($sku)){{$sku}}-@endif{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}": 1}'
                             >
@@ -80,13 +84,6 @@
                         <button class="border-none join">
                             <i class="fas fa-cart-plus"></i> Add To Cart
                         </button>
-                    </a>
-                @endif
-
-                @if($category === 'bundles')
-                    <a class="online-atc" href="/ecommerce/add-to-cart?redirect=/order&{!! $sku !!}"
-                       data-base-url="/ecommerce/add-to-cart?redirect=/order&{!! $sku !!}">
-                        <button class="border-none join"><i class="fas fa-cart-plus"></i> Order Now</button>
                     </a>
                 @endif
             @endif

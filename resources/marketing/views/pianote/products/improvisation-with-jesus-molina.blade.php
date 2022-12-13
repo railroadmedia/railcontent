@@ -92,8 +92,8 @@
 
     @include('pianote._partials._promo-banner-no-tw', [
         "name" => "Improvisation & Musical Freedom",
-        "fullPrice" => App\Prices::$improvisationAndMusicalFreedomFull,
-        "price" => App\Prices::$improvisationAndMusicalFreedom,
+        "fullPrice" => PianotePrices::$improvisationAndMusicalFreedomFull,
+        "price" => PianotePrices::$improvisationAndMusicalFreedom,
         "noBreadcrumb" => true
     ])
 

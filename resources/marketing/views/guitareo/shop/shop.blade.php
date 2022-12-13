@@ -256,27 +256,28 @@
             </div>
         </div>
     @endif
+
     <div class="white-box">
         @include('_partials.layout.holiday.bundle-cards')
         <section class="grid-view category-section" data-category="lessons">
             <ul class="container mx-auto fixed-cards text-center lg:text-left">
-                @foreach($products as $product){
+                @foreach($items as $item){
                     @include('guitareo.shop._partials._shop-card', [
-                        "sku" => $product->sku,
-                        "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $product->slug ),
-                        "thumbnail" => $product->thumbnail,
-                        "packLogo" => $product->thumbnail_logo,
-                        "badgeText" => $product->badge_text,
-                        "title" => $product->name,
-                        "packAuthor" => $product->instructor_name ? $product->instructor_name : 'Guitareo',
-                        "cardDescription" => $product->short_desc,
-                        "includedEdge" => $product->included_edge,
-                        "fullPrice" => $product->price,
-                        "price" => $product->discounted_price === '0.00' || empty($product->discounted_price) ? $product->price : $product->discounted_price,
-                        "category" => strtolower($product->productType->name),
-                        "sizes" => $product->sizes,
-                        "soldOut" => $product->sold_out,
-                        "size_case_sensitive" => $product->size_case_sensitive,
+                        "sku" => $item->sku,
+                        "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $item->slug ),
+                        "thumbnail" => $item->thumbnail,
+                        "packLogo" => $item->thumbnail_logo,
+                        "badgeText" => $item->badge_text,
+                        "title" => $item->name,
+                        "packAuthor" => $item->instructor_name ?? 'Guitareo',
+                        "cardDescription" => $item->short_desc,
+                        "includedEdge" => $item->included_edge,
+                        "fullPrice" => $item->price,
+                        "price" => $item->discounted_price === '0.00' || empty($item->discounted_price) ? $item->price : $item->discounted_price,
+                        "category" => strtolower($item->productType->name),
+                        "sizes" => $item->sizes,
+                        "soldOut" => (!empty($products[$item->sku]) && $item->productType->name !== 'Lessons') ? $products[$item->sku]->getPublicStockCount() === 0 : $item->sold_out,
+                        "size_case_sensitive" => $item->size_case_sensitive,
                     ])
                 }
                 @endforeach

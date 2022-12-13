@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(window).on("load", function (){
     // Setup Slick slider
     $('.slider-for').slick({
         slidesToShow: 1,
@@ -24,7 +24,7 @@ $(document).ready(function(){
     });
 
     if($('#videoPlayer').length) {
-        $('.slider-for').on('afterChange', function () {
+        $('.slider-for').on('afterChange', function (event, slick, currentSlide, nextSlide) {
             var iframe = $('#videoPlayer')
             var src = $('#videoSrc').get(0).innerText
             if(iframe.attr('src')){
@@ -35,26 +35,27 @@ $(document).ready(function(){
             }
         });
     }
-    
+
+
     //customize section pack picker
-    var originalLink = '/ecommerce/add-to-cart?redirect=/order';
+    var originalLink = '/ecommerce/add-to-cart?';
 
     $('select').prop('selectedIndex', 0);
-    $('.pack-pick').change(function () {
-        var orderButton = $(this).parent().find('.selected-pack');
-        var selectedOption = $(this).find('option:selected');
+    $(".pack-pick").change(function () {
+        var orderButton = $(this).parent().find(".selected-pack");
+        var selectedOption = $(this).find("option:selected");
         $(this).removeClass('error');
         orderButton.addClass('active');
         orderButton.attr('href', originalLink);
-        orderButton.attr('href', orderButton.attr('href') + '&products[' + selectedOption.val() + ']=1');
+        orderButton.attr('href', orderButton.attr('href') + '&products[' + selectedOption.val() + ']=1' + '&redirect=/shop');
         orderButton.attr('data-product-json', selectedOption.attr('data-product-json'));
     });
 
-    $('.selected-pack').on('click', function (ev) {
+    $(".selected-pack").on('click', function (ev) {
         if (!$(this).hasClass('active')) {
             ev.preventDefault();
             ev.stopPropagation();
-            var selecter = $(this).parent().find('.pack-pick');
+            var selecter = $(this).parent().find(".pack-pick");
             selecter.addClass('error');
         }
     });
@@ -85,7 +86,7 @@ $(document).ready(function(){
     var originalDistanceFromTop = getDistanceFromTop(slidingElm);
     $(window).scroll(function () {
         if (bodyWidth > 1023) {
-            var footerOffsetTop = $('.sales-footer').offset().top;
+            var footerOffsetTop = $('.bottom-footer').offset().top;
 
             if (originalDistanceFromTop === false) {
                 return;

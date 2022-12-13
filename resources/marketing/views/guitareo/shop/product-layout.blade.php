@@ -40,7 +40,7 @@
 @section('scripts')
     <script type="text/javascript" src="/marketing/parcel/guitareo/nav-footer.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
-    <script type="text/javascript" src="/marketing/parcel/guitareo/shop-product.js"></script>
+    <script type="text/javascript" src="/marketing/parcel/drumeo/shop-product.js"></script>
 @endsection
 
 @section('content')
@@ -66,7 +66,7 @@
                 "price"=> $product->discounted_price === '0.00' || empty($product->discounted_price) ? $product->price : $product->discounted_price,
                 "guaranteeBadge" => $product->guaranteed,
                 "sizes" => $product->sizes,
-                "soldOut" => $product->sold_out,
+                "soldOut" => !empty($products[$product->sku]) ? $products[$product->sku]->getPublicStockCount() === 0 : $product->sold_out,
                 "specialText" => $product->special_text,
                 "freeShipping" => $product->free_shipping,
                 "size_case_sensitive" => $product->size_case_sensitive,

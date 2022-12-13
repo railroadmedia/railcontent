@@ -105,7 +105,7 @@
     {{--<img class="logo"--}}
     {{--src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/march/logo.png">--}}
     {{--<p>--}}
-    {{--@if(!empty(App\Prices::$pianoteMembershipLifetime))--}}
+    {{--@if(!empty(PianotePrices::$pianoteMembershipLifetime))--}}
     {{--<strong>ONLY <s class='opacity-60'>50</s> {{ $products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount()}} SPOTS LEFT</strong>--}}
     {{--@endif--}}
     {{--</p>--}}
@@ -251,14 +251,14 @@
                             'image' => 'https://pianote.s3.amazonaws.com/shop/card-thumbs/headphones-cart.jpg',
                             'title' => 'Pianote Headphones',
                             'description' => 'Hi-end, lightweight over-ear headphones for beautiful private practice sessions.',
-                            'price' => App\Prices::$headphonesFull,
+                            'price' => PianotePrices::$headphonesFull,
                             'feature' => "Free Shipping",
                         ],
                         [
                             'image' => 'https://pianote.s3.amazonaws.com/sales/2022/bonus-chords-scales.jpg',
                             'title' => 'Chords & <br>Scales Book',
                             'description' => 'Your encyclopedia of piano chords & scales.',
-                            'price' => App\Prices::$chordsScalesBookFull,
+                            'price' => PianotePrices::$chordsScalesBookFull,
                             'feature' => "Free Shipping",
                         ],
 
@@ -266,35 +266,35 @@
                             'image' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/planner.png',
                             'title' => 'Practice <br>Planner',
                             'description' => 'Always know exactly what to practice.',
-                            'price' => App\Prices::$practicePlannerFull,
+                            'price' => PianotePrices::$practicePlannerFull,
                             'feature' => "Free Shipping",
                         ],
                         [
                             'image' => 'https://pianote.s3.amazonaws.com/sales/promos/november/bonuses/christmas-book.jpg',
                             'title' => 'Christmas Book',
                             'description' => '14 beautiful Christmas Carols hand-picked and arranged for solo piano.',
-                            'price' => App\Prices::$christmasBookFull,
+                            'price' => PianotePrices::$christmasBookFull,
                             'feature' => "Free Shipping",
                         ],
                         [
                             'image' => 'https://pianote.s3.amazonaws.com/sales/promos/november/bonuses/christmas-songbook-card.jpg',
                             'title' => 'Christmas Book',
                             'description' => 'Learn these 10 beautiful Christmas Carols.',
-                            'price' => App\Prices::$christmasBookDigital,
+                            'price' => PianotePrices::$christmasBookDigital,
                             'feature' => "Instant Access",
                         ],
                         [
                             'image' => 'https://pianote.s3.amazonaws.com/shop/products/2021-merch/card-chords-poster.jpg',
                             'title' => 'Chords Poster',
                             'description' => 'Always know your chord shapes with this helpful poster.',
-                            'price' => App\Prices::$posterFull,
+                            'price' => PianotePrices::$posterFull,
                             'feature' => "Free Shipping",
                         ],
                         [
                             'image' => 'https://pianote.s3.amazonaws.com/shop/products/2021-merch/card-scales-poster.jpg',
                             'title' => 'Scales Poster',
                             'description' => 'Never forget the notes of a scale with this easy-to-read poster.',
-                            'price' => App\Prices::$posterFull,
+                            'price' => PianotePrices::$posterFull,
                             'feature' => "Free Shipping",
                         ],
                         [

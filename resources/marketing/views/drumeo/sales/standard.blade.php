@@ -98,6 +98,7 @@
 
 @section('final')
 {{--     @include("drumeo.sales.partials._subscribe-options")--}}
+     <div id="customize-anchor" class="anchor anchor-slide"></div>
     @include('_partials.layout.holiday.homepage-bottom-membership',[
         'theme' => 'drumeo',
         'logo' => 'https://drumeo-assets.s3.amazonaws.com/promos/november/drumeo-annual-card.jpg',

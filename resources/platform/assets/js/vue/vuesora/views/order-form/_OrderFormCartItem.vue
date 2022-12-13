@@ -178,7 +178,6 @@ export default {
     methods: {
         updateCartItemQuantity(quantity) {
             this.loading = true;
-            
             EcommerceService.updateCartItemQuantity(
                 this.cartDataUrl,
                 {
@@ -190,6 +189,7 @@ export default {
                     this.handleResponse(response)
                 })
                 .catch(() => {
+                    console.log('ERROR')
                     this.showErrorToast();
                     this.loading = false;
                 });

@@ -6,6 +6,7 @@
         <div class="flex flex-column order-form xs-12 md-9 ph-1">
             <order-form-cart
                 :theme-color="themeColor"
+                :cartDataUrl="cartDataUrl"
                 :cart-items="cartData.items"
                 :bonuses="bonuses"
                 :is-cart-locked="cartData.locked"
@@ -174,19 +175,19 @@
 
         <transition name="grow-fade">
             <div
-                v-show="loading"
+                v-if="loading"
                 class="form-loading bg-white shadow corners-10 overflow pa-3 text-center"
                 @click.stop
             >
                 <div class="square">
-                    <loading-animation :theme-color="themeColor" />
+                    <loading-animation :theme-color="themeColor" class="tw-ml-0 md:tw-ml-0" />
                 </div>
                 <p class="body mt-3">
                     Loading Please Wait...
                 </p>
                 <transition name="grow-fade">
                     <div
-                        v-show="formSuccess"
+                        v-if="formSuccess"
                         class="success-message flex flex-column flex-center bg-white pa-3"
                     >
                         <i class="fas fa-check-circle text-success"></i>
@@ -202,7 +203,7 @@
         </transition>
 
         <div
-            v-show="loading"
+            v-if="loading"
             class="loading-overlay"
         ></div>
     </div>
@@ -245,6 +246,10 @@ export default {
         billingAddress: {
             type: Object,
             default: () => null,
+        },
+
+        cartDataUrl: {
+            type: String,
         },
 
         shippingAddresses: {
@@ -433,6 +438,7 @@ export default {
     },
 
     beforeMount() {
+        
         if (!this.isSignedIn || !this.shippingAddresses || this.shippingAddresses.data.length === 0) {
             this.newAddress = true;
         }

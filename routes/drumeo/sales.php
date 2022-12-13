@@ -118,7 +118,6 @@ Route::domain('{drumeoDomain}')
             Route::get('/eardrums', [SalesController::class, 'eardrums'] );
             Route::get('/quietkick', [SalesController::class, 'quietKick'] );
             Route::get('/tone-control-kit', [SalesController::class, 'toneControl'] );
-
             Route::get('/beginner-book', function () { return view('drumeo.products.beginner-book'); });
             Route::get('/better-drum-fills', function () { return view('drumeo.products.better-drum-fills'); });
             Route::get('/beyond-beginner-drumming/', function () { return view('drumeo.products.beyond-beginner-drumming'); });

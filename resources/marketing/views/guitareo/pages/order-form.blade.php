@@ -11,14 +11,11 @@
         <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/sales/2022/og-image.jpg" style="display: none;">
     @endif
 
-    @include('guitareo._partials._fonts')
     <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
-
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
     <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind.css') }}" />
     <link rel="stylesheet" href="{{ asset('/marketing/css/app.css') }}" />
-    <link href="{{ asset('/marketing/css/guitareo/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/css/vuesora.css') }}" rel="stylesheet">
     {{--<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">--}}
@@ -45,6 +42,7 @@
                 theme-color="guitareo"
                 brand="guitareo"
                 :cart="{{ json_encode($cart) }}"
+                cart-data-url='{{ get_musora_brand_base_url() }}'
                 :billing-address="{{ json_encode($billingAddress) }}"
                 :shipping-address="{{ json_encode($shippingAddress) }}"
                 :user="{{ json_encode($user) }}"
@@ -130,17 +128,9 @@
 
         }, false);
         document.addEventListener('click', function (event) {
-            if (!event.target.closest('.timing-trigger')) return;
-
-            document.querySelector('.timing-info').classList.add("active");
-            document.querySelector('.delay-overlay').classList.add("active");
-
-        }, false);
-        document.addEventListener('click', function (event) {
             if (!event.target.closest('.close-modal')) return;
 
             document.querySelector('.shipping-info').classList.remove("active");
-            document.querySelector('.timing-info').classList.remove("active");
             document.querySelector('.delay-overlay').classList.remove("active");
 
         }, false);
@@ -148,7 +138,6 @@
             if (!event.target.closest('.delay-overlay')) return;
 
             document.querySelector('.shipping-info').classList.remove("active");
-            document.querySelector('.timing-info').classList.remove("active");
             document.querySelector('.delay-overlay').classList.remove("active");
 
         }, false);

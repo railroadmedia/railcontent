@@ -188,7 +188,7 @@ class CmsClothingSeeder extends Seeder
             ],
             [
                 "brand" => 2,
-                "product_type_id" => 2,
+                "product_type_id" => 3,
                 "name" => "Pianote Hat",
                 "slug" => "hat-logo",
                 "sku" => "pianote-hat",
@@ -1779,6 +1779,7 @@ class CmsClothingSeeder extends Seeder
                 "guaranteed" => false,
                 "lifetime_access" => false,
                 "free_shipping" => false,
+                'size_case_sensitive' => true,
                 "images" => [
                     'https://singeo.s3.amazonaws.com/products/hoodie-shop-sale-page.jpg'
                 ],
@@ -1827,6 +1828,7 @@ class CmsClothingSeeder extends Seeder
                 "guaranteed" => false,
                 "lifetime_access" => false,
                 "free_shipping" => false,
+                'size_case_sensitive' => true,
                 "images" => [
                     'https://singeo.s3.amazonaws.com/products/t-shirt-shop-sale-page.jpg'
                 ],
@@ -2187,7 +2189,7 @@ class CmsClothingSeeder extends Seeder
                 'free_shipping' => $product['free_shipping'],
                 'guaranteed' => $product['guaranteed'],
                 'visible' => $product['visible'],
-                'display_order' => $orderNum,
+                'display_order' => $product['visible'] ? $orderNum : 0,
                 'size_case_sensitive' => empty($product['size_case_sensitive']) ? false : $product['size_case_sensitive'],
                 'size_chart_id' => empty($product['sizeChart']) ? null : $product['sizeChart'],
                 'bundle_img' => empty($product['bundle_img']) ? null : $product['bundle_img'],

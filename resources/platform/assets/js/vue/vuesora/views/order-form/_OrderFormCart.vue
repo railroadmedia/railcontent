@@ -1,27 +1,28 @@
 <template>
     <div class="flex flex-column pv-2 mb-1">
+
         <order-form-cart-item
             v-for="item in cartItems"
-            :cart-data-url="cartDataUrl"
+            :cartDataUrl="cartDataUrl"
             :key="item.sku"
             :theme-color="themeColor"
             :item="item"
             :is-cart-locked="isCartLocked"
             @updateCartItem="emitUpdateCartItem"
-        ></order-form-cart-item>
+        />
 
         <order-form-cart-item
             v-for="item in bonuses"
-            :cart-data-url="cartDataUrl"
+            :cartDataUrl="cartDataUrl"
             :key="item.sku"
             :theme-color="themeColor"
             :item="item"
             :is-cart-locked="isCartLocked"
             @updateCartItem="emitUpdateCartItem"
-        ></order-form-cart-item>
+        />
 
         <h4
-            v-show="cartItems.length == 0"
+            v-if="cartItems.length == 0"
             class="pa-3 text-center"
         >
             Cart is empty
