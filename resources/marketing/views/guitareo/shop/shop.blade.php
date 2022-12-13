@@ -256,6 +256,7 @@
             </div>
         </div>
     @endif
+
     <div class="white-box">
         @include('_partials.layout.holiday.bundle-cards')
         <section class="grid-view category-section" data-category="lessons">
@@ -275,7 +276,7 @@
                         "price" => $item->discounted_price === '0.00' || empty($item->discounted_price) ? $item->price : $item->discounted_price,
                         "category" => strtolower($item->productType->name),
                         "sizes" => $item->sizes,
-                        "soldOut" => !empty($products[$item->sku]) ? $products[$item->sku]->getPublicStockCount() === 0 : $item->sold_out,
+                        "soldOut" => (!empty($products[$item->sku]) && $item->productType->name !== 'Lessons') ? $products[$item->sku]->getPublicStockCount() === 0 : $item->sold_out,
                         "size_case_sensitive" => $item->size_case_sensitive,
                     ])
                 }

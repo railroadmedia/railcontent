@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Guitareo\SalesController;
 
 Route::domain('{guitareoDomain}')
@@ -57,12 +58,12 @@ Route::domain('{guitareoDomain}')
              */
             Route::group(['prefix' => 'your-challenge'],
                 function () {
-                    Route::get('/{lessonNumber}', function ($lessonNumber) {
+                    Route::get('/{lessonNumber}', function (Request $request) {
                         return view(
-                            'guitareo.lead-gen.song-in-an-hour.lessons.' . $lessonNumber,
+                            'guitareo.lead-gen.song-in-an-hour.lessons.' . $request->lessonNumber,
                             [
                                 'songInAnHourProgress' => json_decode(request()->cookie('song_in_an_hour_progress')),
-                                'lessonNumber' => $lessonNumber,
+                                'lessonNumber' => $request->lessonNumber,
                             ]
                         );
                     });
