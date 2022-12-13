@@ -38,6 +38,8 @@ Route::domain('{pianoteDomain}')
     Route::get('/the-power-of-chords-bootcamp', [SalesController::class, 'PowerOfChordsBootcamp'] );
     Route::get('/the-power-of-chords-giveaway', [SalesController::class, 'PowerOfChordsGiveaway'] );
 
+    Route::get('/foundations', [SalesController::class, 'foundations'] );
+
     Route::get('/giveaway', function () { return view('pianote.lead-gen.giveaway'); });
 
     Route::get('/500-songs-fb', function () { return view('pianote.products.500-songs-fb'); } );
@@ -55,8 +57,8 @@ Route::domain('{pianoteDomain}')
     Route::get('/shop/piano-technique-made-easy', function () { return view('pianote.products.piano-technique-made-easy'); } );
     Route::get('/shop/destupefy-your-left-hand', function () { return view('pianote.products.destupefy-your-left-hand'); } );
     Route::get('/shop/play-beautiful-piano', function () { return view('pianote.products.play-beautiful-piano'); } );
-    Route::get('/beginner-classical-piano', function () { return view('pianote.products.beginner-classical-piano'); } );
-        Route::get('/worship-piano', function () { return view('pianote.products.worship-piano', ['theme' => 'pianote']); } );
+    Route::get('/shop/beginner-classical-piano', function () { return view('pianote.products.beginner-classical-piano'); } );
+    Route::get('/worship-piano', function () { return view('pianote.products.worship-piano', ['theme' => 'pianote']); } );
 
     Route::get('/lifetime', function () { return view('pianote.shop.pages.lifetime', ['theme' => 'pianote']); } );
     Route::get('/keep-learning', function () { return view('pianote.shop.pages.keep-learning', ['theme' => 'pianote']); } );

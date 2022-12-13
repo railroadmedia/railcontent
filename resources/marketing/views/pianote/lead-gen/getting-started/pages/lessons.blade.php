@@ -1,5 +1,5 @@
 @php
-    require_once(resource_path('views/lead-gen/getting-started/lessons.php'))
+    require_once(resource_path('marketing/views/pianote/lead-gen/getting-started/lessons.php'))
 @endphp
 
 @extends('pianote.lead-gen.getting-started.layout')
@@ -21,5 +21,5 @@
         "customSize" => "w-full md:w-1/2"
     ])
 
-    @include('lead-gen.partials._7-day-trial-offer')
+    @include('pianote.lead-gen.partials._7-day-trial-offer')
 @stop
