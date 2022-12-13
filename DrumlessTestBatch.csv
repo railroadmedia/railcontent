@@ -1,9 +1,9 @@
-brand,artist,title,album,style,difficulty,total_xp,artwork_filename,pdf_filename,assignment_title,assignment_xp,soundslice_slug,publishing_status,instrument_removed
-Drumeo,David Bowie,Ashes To Ashes,Scary Monsters (And Super Creeps),Pop/Rock,3,100,david-bowie-scary-monsters-and-super-creeps.jpg,david-bowie-ashes-to-ashes.pdf,Ashes To Ashes,25,Stckc,Published,1
-Drumeo,U2,Stuck In A Moment You Can’t Get Out Of,All That You Can't Leave Behind,Pop/Rock,4,150,u2-all-that-you-cant-leave-behind.jpg,u2-stuck-in-a-moment.pdf,Stuck In A Moment You Can’t Get Out Of,25,4QcMc,Published,1
-Drumeo,U2,When I Look At The World,All That You Can't Leave Behind,Pop/Rock,4,150,u2-all-that-you-cant-leave-behind.jpg,u2-when-I-look-at-the-world.pdf,When I Look At The World,25,bncMc,Published,1
-Drumeo,U2,Unknown Caller,No Line On The Horizon,Pop/Rock,3,100,u2-no-line-on-the-horizon.jpg,u2-unknown-caller.pdf,Unknown Caller,25,1ScMc,Published,1
-Drumeo,U2,The Ground Beneath Her Feet,All That You Can't Leave Behind,Pop/Rock,4,150,u2-all-that-you-cant-leave-behind.jpg,u2-the-ground-beneath-her-feet.pdf,The Ground Beneath Her Feet,25,zQcMc,Published,1
-Drumeo,Slipknot,Unsainted,We Are Not Your Kind,Metal,7,200,slipknot-we-are-not-your-kind.jpg,slipknot-unsainted.pdf,Unsainted,25,9mwMc,Published,1
-Drumeo,Avenged Sevenfold,Unholy Confessions,Waking The Fallen,Metal,8,200,avenged-sevenfold-waking-the-fallen.jpg,Avenged Sevenfold - Unholy Confessions.pdf,Unholy Confessions,25,Hcffc,Published,1
-Drumeo,Van Halen,Intruder/(Oh) Pretty Woman,Diver Down,Pop/Rock,3,100,van-halen-diver-down.jpg,van-halen-intruderoh-pretty-woman.pdf,Intruder/(Oh) Pretty Woman,25,XnFMc,Published,1
+brand,artist,title,album,style,difficulty,total_xp,artwork_filename,pdf_filename,assignment_title,assignment_xp,soundslice_slug,publishing_status,instrument_removed,content_id
+Drumeo,David Bowie,Ashes To Ashes,Scary Monsters (And Super Creeps),Pop/Rock,3,100,david-bowie-scary-monsters-and-super-creeps.jpg,david-bowie-ashes-to-ashes.pdf,Ashes To Ashes,25,Stckc,Published,1,356022
+Drumeo,U2,Stuck In A Moment You Can’t Get Out Of,'All That You Can''t Leave Behind',Pop/Rock,4,150,u2-all-that-you-cant-leave-behind.jpg,u2-stuck-in-a-moment.pdf,Stuck In A Moment You Can’t Get Out Of,25,4QcMc,Published,1,323922
+Drumeo,U2,When I Look At The World,'All That You Can''t Leave Behind',Pop/Rock,4,150,u2-all-that-you-cant-leave-behind.jpg,u2-when-I-look-at-the-world.pdf,When I Look At The World,25,bncMc,Published,1,323934
+Drumeo,U2,Unknown Caller,No Line On The Horizon,Pop/Rock,3,100,u2-no-line-on-the-horizon.jpg,u2-unknown-caller.pdf,Unknown Caller,25,1ScMc,Published,1,324020
+Drumeo,U2,The Ground Beneath Her Feet,'All That You Can''t Leave Behind',Pop/Rock,4,150,u2-all-that-you-cant-leave-behind.jpg,u2-the-ground-beneath-her-feet.pdf,The Ground Beneath Her Feet,25,zQcMc,Published,1,323926
+Drumeo,Slipknot,Unsainted,We Are Not Your Kind,Metal,7,200,slipknot-we-are-not-your-kind.jpg,slipknot-unsainted.pdf,Unsainted,25,9mwMc,Published,1,328239
+Drumeo,Avenged Sevenfold,Unholy Confessions,Waking The Fallen,Metal,8,200,avenged-sevenfold-waking-the-fallen.jpg,Avenged Sevenfold - Unholy Confessions.pdf,Unholy Confessions,25,Hcffc,Published,1,264279
+Drumeo,Van Halen,Intruder/(Oh) Pretty Woman,Diver Down,Pop/Rock,3,100,van-halen-diver-down.jpg,van-halen-intruderoh-pretty-woman.pdf,Intruder/(Oh) Pretty Woman,25,XnFMc,Published,1,349887

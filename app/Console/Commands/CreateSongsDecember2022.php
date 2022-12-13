@@ -54,25 +54,48 @@ class CreateSongsDecember2022 extends Command
 
         unset($csv[0]);
 
+        // todo: treat situation when song has multiple styles
+        // todo: treat instrumentless column when value is a string (TRUE)
         $csv = array_slice($csv, 0, 250);
 
         foreach ($csv as $rowIndex => $row) {
-            $content = $this->updateOrInsertAndGetFirst(
+            $existingContent = $this->getFirst(
                 'railcontent_content',
-                [
-                    'slug' => ContentHelper::slugify($row[1] . ' ' . $row[2]),
-                    'type' => 'song',
-                    'status' => 'published',
-                    'brand' => $row[0],
-                    'published_on' => '2022-12-02 00:00:00',
-                    'language' => 'en-US',
-                    'instrumentless' => $row[13]
-                ],
-                [
-                    'created_on' => Carbon::now()->toDateTimeString(),
-                ]
+//                [
+//                    'slug' => ContentHelper::slugify($row[2]),
+//                    'type' => 'song',
+//                    'status' => 'published',
+//                    'brand' => lcfirst($row[0]),
+//                    'album' => $row[3],
+//                ]
+                ['id' => $row[14]]  // todo: if row[14] : else, search for these parameters
             );
 
+            if ($existingContent) {
+                $this->info("Song <" . $existingContent->slug . "> with id " . $existingContent->id . " exists and will be updated.");
+            }
+            $content = $this->updateOrInsertAndGetFirst(
+                'railcontent_content',
+//                [
+//                    'slug' => ContentHelper::slugify($row[2]),
+//                    'type' => 'song',
+//                    'status' => 'published',
+//                    'brand' => lcfirst($row[0]),
+//                    'album' => $row[3],
+//                ],
+                ['id' => $row[14]],  //todo: if row[14] : else, search for these parameters
+                [
+                    'slug' => $existingContent ? $existingContent->slug :ContentHelper::slugify($row[2]),
+                    'type' => 'song',
+                    'status' => 'published',
+                    'album' => $row[3],
+                    'language' => 'en-US',
+                    'instrumentless' => $row[13],
+                    // todo: set published_on to now!
+                    'published_on' => $existingContent ? $existingContent->published_on : Carbon::now()->toDateTimeString(),
+                    'created_on' => $existingContent ? $existingContent->created_on : Carbon::now()->toDateTimeString(),
+                ]
+            );
             // fields
             $this->updateOrInsertAndGetFirst(
                 'railcontent_content_fields',
@@ -149,6 +172,7 @@ class CreateSongsDecember2022 extends Command
                 );
             }
 
+            // todo: uncomment once we have proper pdfs and jpgs links
             // pdf download
             //            $pdfUrlPrefix = '';
             //            $pdfFileName = $row[8];
@@ -222,19 +246,35 @@ class CreateSongsDecember2022 extends Command
             //            }
 
             // assignment
-            $assignment = $this->updateOrInsertAndGetFirst(
-                'railcontent_content',
+            $existingAssignment = $this->getFirst('railcontent_content',
                 [
-                    'slug' => ContentHelper::slugify($row[1] . ' - ' . $row[2]),
+//                    'slug' => ContentHelper::slugify($row[2]),
+                    'slug' => $content->slug,
                     'type' => 'assignment',
                     'sort' => 0,
                     'status' => 'published',
-                    'brand' => $row[0],
+                    'brand' => lcfirst($row[0]),
+                    'language' => 'en-US'
+                ]
+            );
+
+
+            //todo: update
+            $assignment = $this->updateOrInsertAndGetFirst(
+                'railcontent_content',
+                [
+//                    'slug' => ContentHelper::slugify($row[2]),
+                    'slug' => $content->slug,
+                    'type' => 'assignment',
+                    'sort' => 0,
+                    'status' => 'published',
+                    'brand' => lcfirst($row[0]),
                     'language' => 'en-US',
                 ],
                 [
-                    'published_on' => Carbon::now()->toDateTimeString(),
-                    'created_on' => Carbon::now()->toDateTimeString(),
+                    // todo: set published_on to now!
+                    'published_on' => ($existingContent && $existingAssignment) ? $existingContent->published_on : Carbon::now()->toDateTimeString(),
+                    'created_on' => ($existingContent && $existingAssignment) ? $existingContent->created_on : Carbon::now()->toDateTimeString(),
                 ]
             );
 
@@ -264,6 +304,12 @@ class CreateSongsDecember2022 extends Command
                 ]
             );
 
+            $existingContentHierarchy = $this->getFirst('railcontent_content_hierarchy',
+                [
+                    'parent_id' => $content->id,
+                    'child_id' => $assignment->id,
+                    'child_position' => 1,
+                ]);
             $this->updateOrInsertAndGetFirst(
                 'railcontent_content_hierarchy',
                 [
@@ -271,8 +317,10 @@ class CreateSongsDecember2022 extends Command
                     'child_id' => $assignment->id,
                     'child_position' => 1,
                 ],
+
                 [
-                    'created_on' => Carbon::now()->toDateTimeString(),
+                    'created_on' => ($existingContent && $existingContentHierarchy) ?
+                        $existingContentHierarchy->created_on : Carbon::now()->toDateTimeString(),
                 ]
             );
 
@@ -292,7 +340,17 @@ class CreateSongsDecember2022 extends Command
     {
         $this->musoraDB()->from($table)->updateOrInsert($attributes, $values);
 
-        return $this->musoraDB()->from($table)->where(array_merge($attributes, $values))->get()->first();
+        return $this->getFirst($table, $attributes, $values);
+    }
+
+    /**
+     * @param array $attributes
+     * @param array $values
+     * @return object
+     */
+    private function getFirst($table, array $attributes)
+    {
+        return $this->musoraDB()->from($table)->where($attributes)->get()->first();
     }
 
     private function musoraDB()
