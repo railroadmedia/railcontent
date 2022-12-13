@@ -908,6 +908,7 @@ return [
             'id',
             'type',
             'url',
+            'instrumentless',
             'published_on',
             'completed',
             'started',
