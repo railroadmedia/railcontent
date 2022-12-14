@@ -13,6 +13,7 @@ Route::domain('{drumeoDomain}')
     Route::get('/', [SalesController::class, 'sales'] );
     Route::get('/2023-home', [SalesController::class, 'home23'] );
     Route::get('/choose-plan', [SalesController::class, 'plan23'] );
+    Route::get('/method', [SalesController::class, 'method'] );
     Route::get('/anniversary-deal', [SalesController::class, 'sales'] );
     Route::get('/mydrumset', [SalesController::class, 'sales'] );
     Route::get('/student-only', [SalesController::class, 'salesStudents'] );
