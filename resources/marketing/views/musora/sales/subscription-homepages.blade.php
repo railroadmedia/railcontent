@@ -18,6 +18,7 @@
 
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"></noscript>
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
@@ -155,15 +156,9 @@
         'pointThree' => 'Play More Songs',
         'students' => '31856',
     ])
-
-
-
-    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
-        <div class="container max-w-5xl mx-auto">
-            <img class="h-56 inline sm:hidden lazyload" data-src="https://cdn.musora.com/image/fetch/w_690,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/Collage_intro_m.png">
-            <h2 class="text-center my-5 sm:mt-0 sm:mb-7"><strong>Learn the drums by<br class="inline sm:hidden"> <u>playing the drums</u>.</strong></h2>
-            <div class="text-left flex flex-wrap sm:flex-nowrap mb-32 sm:mb-56 lg:mb-72">
-                <p class="leading-normal max-w-lg pr-7">It’s been proven over and over –
+    @include('musora.sales.learn-by-playing-section', [
+        'header' => 'Learn the drums by<br class="inline sm:hidden"> <u>playing the drums</u>.',
+        'desc' => 'It’s been proven over and over –
                     <br><br>
                     Playing the drums is one of the healthiest activities you can perform for your brain – showing signs of boosting happiness, intelligence, and overall well being.
                     <br><br>
@@ -171,67 +166,44 @@
                     <br><br>
                     You’ll play more. You’ll fall in love with your progress. And you’ll be surrounded by a community of students and teachers to connect, support, and grow your passion.
                     <br><br>
-                    Scroll down to watch the trailer, see more details, and join the community where drummers gather – and play like you’ve always wanted!</p>
-                <img class="h-96 hidden sm:inline lazyload" data-src="https://cdn.musora.com/image/fetch/w_690,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/Collage_intro.png">
-            </div>
-        </div>
-    </section>
+                    Scroll down to watch the trailer, see more details, and join the community where drummers gather – and play like you’ve always wanted!',
+        'imgMobile' => 'https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/Collage_intro_m.png',
+        'img' => 'https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/Collage_intro.png',
+    ])
 
-    <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #f4f8fb calc(50% + 1px));"></div>
-    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f4f8fb;">
-        <div class="container max-w-5xl mx-auto">
-            <div class="aspect-16:9 cursor-hover rounded-xl autoplay-video overflow-hidden w-full relative -mt-36 sm:-mt-64 lg:-mt-96 mb-20" data-open="trailer">
-                <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
-                <img class="rounded-xl overflow-hidden inset-0 absolute z-0 lazyload" data-src="https://drumeo-assets.s3.amazonaws.com/sales/2023/feature-video-thumb.jpg">
-            </div>
-            <h2><strong>Your drumming goals start here.</strong></h2>
-            <p class="mt-2 mb-10">Learn to play drums online with an organized 10-level curriculum featuring many of the world’s best teachers.</p>
-            <div class="flex flex-wrap items-start justify-center text-left">
-                <div class="w-full sm:w-1/2 lg:w-1/3 px-2 sm:px-3 mb-8">
-                    <img class="rounded-xl mb-4" src="https://drumeo-assets.s3.amazonaws.com/sales/2023/10-level-cirriculum.jpg">
-                    <p class="leading-tight">
-                        <strong class="font-black">10-Level Curriculum</strong><br> The most trusted step-by-step video lessons for every technique, pattern, and style.
-                    </p>
-                </div>
-                <div class="w-full sm:w-1/2 lg:w-1/3 px-2 sm:px-3 mb-8">
-                    <img class="rounded-xl mb-4" src="https://drumeo-assets.s3.amazonaws.com/sales/2023/practical-assignments.jpg">
-                    <p class="leading-tight">
-                        <strong class="font-black">Practical Assignments</strong><br> You'll always have on-screen assignments and practice tools to increase retention.
-                    </p>
-                </div>
-                <div class="w-full sm:w-1/2 lg:w-1/3 px-2 sm:px-3 mb-8">
-                    <img class="rounded-xl mb-4" src="https://drumeo-assets.s3.amazonaws.com/sales/2023/guided-workouts.jpg">
-
-                    <p class="leading-tight">
-                        <strong class="font-black">Guided Workouts</strong><br> Stay inspired with our guided workouts where we’ll practice-along with you in real time.
-                    </p>
-                </div>
-                <div class="w-full sm:w-1/2 lg:w-1/3 px-2 sm:px-3 mb-8">
-                    <img class="rounded-xl mb-4" src="https://drumeo-assets.s3.amazonaws.com/sales/2023/world-class-teachers.jpg">
-
-                    <p class="leading-tight">
-                        <strong class="font-black">World-Class Teachers</strong><br> The best drummers are here -- including Grammy Award winners and touring musicians.
-                    </p>
-                </div>
-                <div class="w-full sm:w-1/2 lg:w-1/3 px-2 sm:px-3 mb-8">
-                    <img class="rounded-xl mb-4" src="https://drumeo-assets.s3.amazonaws.com/sales/2023/downloadable-videos.jpg">
-
-                    <p class="leading-tight">
-                        <strong class="font-black">Downloadable Videos</strong><br> Stream your lessons OR download your videos so you can practice anywhere, anytime.
-                    </p>
-                </div>
-                <div class="w-full sm:w-1/2 lg:w-1/3 px-2 sm:px-3 mb-8">
-                    <img class="rounded-xl mb-4" src="https://drumeo-assets.s3.amazonaws.com/sales/2023/personalized-support.jpg">
-
-                    <p class="leading-tight">
-                        <strong class="font-black">Personalized Support</strong><br> Get weekly live streams, student lesson plans, and access to a global drum community.
-                    </p>
-                </div>
-            </div>
-            <a href="" class="mx-1 join outline method smaller">EXPLORE THE METHOD <i class="fas fa-info-circle"></i> </a>
-            <a href="" class="mx-1 join blue smaller anchor-slide">START FOR FREE <i class="fas fa-arrow-right"></i> </a>
-        </div>
-    </section>
+    @php
+        $gridItems = [
+            [
+                'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/10-level-cirriculum.jpg',
+                'desc' => '<strong class="font-black">10-Level Curriculum</strong><br> The most trusted step-by-step video lessons for every technique, pattern, and style.',
+            ],
+            [
+                'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/practical-assignments.jpg',
+                'desc' => '<strong class="font-black">Practical Assignments</strong><br> You\'ll always have on-screen assignments and practice tools to increase retention.',
+            ],
+            [
+                'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/guided-workouts.jpg',
+                'desc' => '<strong class="font-black">Guided Workouts</strong><br> Stay inspired with our guided workouts where we’ll practice-along with you in real time.',
+            ],
+            [
+                'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/world-class-teachers.jpg',
+                'desc' => '<strong class="font-black">World-Class Teachers</strong><br> The best drummers are here -- including Grammy Award winners and touring musicians.',
+            ],
+            [
+                'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/downloadable-videos.jpg',
+                'desc' => '<strong class="font-black">Downloadable Videos</strong><br> Stream your lessons OR download your videos so you can practice anywhere, anytime.',
+            ],
+            [
+                'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/personalized-support.jpg',
+                'desc' => '<strong class="font-black">Personalized Support</strong><br> Get weekly live streams, student lesson plans, and access to a global drum community.',
+            ],
+        ];
+    @endphp
+    @include('musora.sales.trailer-grid-section', [
+        'vidThumb' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/feature-video-thumb.jpg',
+        'header' => 'Your drumming goals start here.',
+        'desc' => 'Learn to play drums online with an organized 10-level curriculum featuring many of the world’s best teachers.',
+    ])
 
     @php
         $buttons = [
@@ -426,7 +398,7 @@
                         </div>
                     </div>
                 </div>
-                <img class="h-96" src="https://cdn.musora.com/image/fetch/w_1400,q_auto:best/https://drumeo-assets.s3.amazonaws.com/sales/2023/collage.png">
+                <video class="h-96 rounded-xl lazyload" data-src="https://drumeo-assets.s3.amazonaws.com/sales/2023/back-in-black-player.mp4" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
             </div>
             <a href="" class="mx-1 join outline method smaller">SEE SONGS LIST <i class="fas fa-info-circle"></i> </a>
             <a href="" class="mx-1 join blue smaller anchor-slide">START FOR FREE <i class="fas fa-arrow-right"></i> </a>
@@ -804,9 +776,8 @@
         $annualLink = '/laravel/public/shopping-cart/api/query?products[DLM]=1,year,1&products[30-day-drummer]=1&products[practicepad]=1&products[Drumeo-VaterSticks]=2&products[BeginnerBook]=1&locked=true';
     @endphp
 
-    <section class="py-10 sm:py-14 lg:py-20 relative overflow-hidden text-white text-center customize px-4 lg:px-6 relative z-50 overflow-hidden" style="background: linear-gradient(45deg, #07233e, #0c1524);">
-        <div class="container mx-auto max-w-5xl relative z-50">
-
+    <section class="py-10 sm:py-14 lg:py-20 relative overflow-hidden text-white text-center customize px-4 lg:px-6 relative overflow-hidden" style="background: linear-gradient(45deg, #07233e, #0c1524);">
+        <div class="container mx-auto max-w-5xl">
             <div class="flex flex-wrap items-center">
                 <div class="text-center sm:text-left w-full sm:w-1/2 lg:w-1/2 sm:pl-5">
                     <h3 class="leading-normal"><strong>Unlimited drum lessons<br> The world’s best teachers<br> 5000+ popular songs</strong></h3>
@@ -828,11 +799,26 @@
         </div>
     </section>
 
+    <div class="h-5 sm:h-10 -mt-5 sm:-mt-10 relative z-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #f4f8fb calc(50% + 1px));"></div>
+    <section class="relative text-center px-6" style="background-color:#f6f8fc;">
+        <div class="container mx-auto max-w-5xl relative z-20">
+            <div class="text-left flex justify-center items-center">
+                <div class="pr-7">
+                    <h4 class="leading-normal mb-7"><strong>Available across web,<br> tablet, & mobile.</strong></h4>
+                    <a class="inline-block" href="https://itunes.apple.com/us/app/musora/id1619053766?ls=1" target="_blank">
+                        <img class="h-10 m-1" src="https://cdn.musora.com/image/fetch/w_260,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/app/download-on-app-store-button.png"></a>
+                    <a class="inline-block" href="https://play.google.com/store/apps/details?id=com.musoraapp" target="_blank">
+                        <img class="h-10 m-1" src="https://cdn.musora.com/image/fetch/w_260,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/app/google-play-button.png"></a>
+                </div>
+                <img class="-mt-11 -mb-4 max-w-2xl lazyload" data-src="https://cdn.musora.com/image/fetch/w_690,q_auto:best/https://drumeo-assets.s3.amazonaws.com/sales/2023/devices.png">
+            </div>
+        </div>
+    </section>
+
     <section class="text-center py-10 md:py-20 lg:py-24 px-4 sm:px-6">
         <div class="container mx-auto max-w-5xl">
             <h2><strong>Frequently Asked Questions</strong></h2>
-            <p class="mt-3 mb-10">If your questions aren’t answered below, please start a chat with us in the bottom right!</p>
-            <div class="dropdowns">
+            <div class="dropdowns my-10">
                 @include('drumeo.products.partials.question-dropdown-tw', [
                         "question" => true,
                         "title" => "What is Drumeo?",
@@ -859,6 +845,8 @@
                         "description" => 'Not at all! Technology is here to make your life easier, and Drumeo is designed to help you find lessons and songs easily. And if you ever get stuck, you can contact our Student Experience team by phone or email for prompt and helpful support. ',
                         ])
             </div>
+            <p><strong>Still have questions?</strong> Call us toll-free at 1-800-439-8921, directly at<br>
+                1-604-855-7605 or start a chat with us in the bottom right corner of any page!</p>
         </div>
     </section>
 
@@ -999,5 +987,3 @@
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
     @yield('scripts')
 @stop
-
-
