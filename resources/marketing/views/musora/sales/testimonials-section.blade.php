@@ -15,7 +15,7 @@
     }">
 
     <div class="container mx-auto max-w-5xl">
-        <h2 class="leading-tight mb-3" data-aos="fade-up"><strong>{!! $header !!}</strong></h2>
+        <h2 class="leading-tight mb-4" data-aos="fade-up"><strong>{!! $header !!}</strong></h2>
 
         <a class="inline-block" href="{{ $reviewLink }}" target="_blank" onclick="window.open('{{ $reviewLink }}', 'newwindow', 'width=750, height=550'); return false;">
             <p class="mx-auto mb-2">{!!  $reviewText  !!} <u>See The Reviews »</u></p>

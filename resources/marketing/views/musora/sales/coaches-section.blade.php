@@ -27,10 +27,10 @@
 {{--</style>--}}
 
 
-<section class="py-12 md:py-20">
-    <div class="text-center max-w-3xl mx-auto">
-        <h2 class="font-extrabold mb-4">{!! $header !!}</h2>
-        <p class="px-4 md:px-0 mb-4 md:mb-0">{!! $desc !!}</p>
+<section class="py-12 md:py-20 text-center">
+    <div class="max-w-3xl mx-auto">
+        <h2 class="font-extrabold">{!! $header !!}</h2>
+        <p class="px-4 md:px-0 mt-3 mb-4 md:mb-0">{!! $desc !!}</p>
     </div>
 
     <!-- Tabs -->

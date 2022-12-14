@@ -1,4 +1,4 @@
-<div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #f4f8fb calc(50% + 1px));"></div>
+<div class="h-5 sm:h-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #f4f8fb calc(50% + 1px));"></div>
 <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f4f8fb;">
     <div class="container max-w-5xl mx-auto">
         <div class="aspect-16:9 cursor-hover rounded-xl autoplay-video overflow-hidden w-full relative -mt-36 sm:-mt-64 lg:-mt-96 mb-20" x-on:click="trailer = true;">
@@ -12,8 +12,8 @@
             >
         </div>
         <h2><strong>{!! $header !!}</strong></h2>
-        <p class="mt-2 mb-10">{!! $desc !!}</p>
-        <div class="flex flex-wrap items-start justify-center text-left">
+        <p class="mt-3 mb-10">{!! $desc !!}</p>
+        <div class="flex flex-wrap items-start justify-center text-left mb-6">
             @foreach ($gridItems as $key => $gridItem)
                 <div class="w-full sm:w-1/2 lg:w-1/3 px-2 sm:px-3 mb-8">
                     <img

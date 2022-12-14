@@ -373,7 +373,7 @@
             <h2><strong>Play your favorite songs.</strong></h2>
             <p class="leading-tight mt-3">You’ll have all the tools you need to <br class="hidden sm:inline"> make sure you never miss a beat.</p>
 
-            <div class="flex my-10">
+            <div class="flex my-12">
                 <div class="text-left pr-8 max-w-md">
                     <div class="flex mb-4">
                         <div class="w-14 flex-grow-0"><img src="https://drumeo-assets.s3.amazonaws.com/sales/2023/5000-songs-icon.svg" class="h-10"></div>
@@ -762,12 +762,10 @@
     <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #f4f8fb calc(50% + 1px));"></div>
     <section class="pb-10 sm:pb-14 lg:pb-20 relative text-center px-6" style="background-color:#f6f8fc;">
         <div class="container mx-auto max-w-5xl">
-            <img data-aos="fade-down" class="h-28 md:h-32 -mt-14 md:-mt-16 lazyload" data-src="https://cdn.musora.com/image/fetch/w_250,q_auto:best/https://drumeo-assets.s3.amazonaws.com/sales/2022/guarantee.png" alt="guarantee-badge">
-
-            <h3 class="leading-tight mt-5 md:mt-8 mb-4 md:mb-6 "><strong>Test-drive your lessons for 90 days.</strong><br>
-                Zero risk.</h3>
-            <p class="leading-normal md:leading-loose">Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence on the drums.</p>
-            <div class="flex flex-wrap items-start justify-center mt-5 md:mt-7">
+            <img data-aos="fade-down" class="h-28 md:h-32 -mt-14 md:-mt-16 mb-5 sm:mb-8 lazyload" data-src="https://cdn.musora.com/image/fetch/w_250,q_auto:best/https://drumeo-assets.s3.amazonaws.com/sales/2022/guarantee.png" alt="guarantee-badge">
+            <h3 class="leading-tight"><strong>Test-drive your lessons for 90 days.</strong><br>Zero risk.</h3>
+            <p class="leading-normal md:leading-loose my-4 sm:my-7">Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence on the drums.</p>
+            <div class="flex flex-wrap items-start justify-center">
                 <div data-aos="fade-down" class="w-full sm:w-1/3 px-2 mb-3 sm:mb-0">
                     <h5 class="text-drumeo border-drumeo border-2 rounded-full inline-block py-2 px-3 mb-1">1</h5>
                     <h6 class="leading-normal">Start your<br> lessons today.</h6>
@@ -789,8 +787,8 @@
         $annualLink = '/laravel/public/shopping-cart/api/query?products[DLM]=1,year,1&products[30-day-drummer]=1&products[practicepad]=1&products[Drumeo-VaterSticks]=2&products[BeginnerBook]=1&locked=true';
     @endphp
 
-    <section class="py-10 sm:py-14 lg:py-20 relative overflow-hidden text-white text-center customize px-4 lg:px-6 relative overflow-hidden" style="background: linear-gradient(45deg, #07233e, #0c1524);">
-        <div class="container mx-auto max-w-5xl">
+    <section class="py-14 sm:py-24 lg:py-32 relative overflow-hidden text-white text-center customize px-4 lg:px-6 relative overflow-hidden" style="background: linear-gradient(45deg, #07233e, #0c1524);">
+        <div class="container mx-auto max-w-5xl mb-16">
             <div class="flex flex-wrap items-center">
                 <div class="text-center sm:text-left w-full sm:w-1/2 lg:w-1/2 sm:pl-5">
                     <h3 class="leading-normal"><strong>Unlimited drum lessons<br> The world’s best teachers<br> 5000+ popular songs</strong></h3>
@@ -806,7 +804,7 @@
                     </div>
                 </div>
                 <div class="flex w-full justify-center sm:justify-start sm:w-1/2 lg:w-1/2 sm:order-1 sm:pl-5 lg:pl-10 mt-7 sm:mt-0">
-                    <img class="max-w-xl sm:max-w-3xl lg:max-w-5xl lazyload" data-src="https://cdn.musora.com/image/fetch/w_1400,q_auto:best/https://drumeo-assets.s3.amazonaws.com/sales/2023/devices.png">
+                    <img class="max-w-xl sm:max-w-2xl lg:max-w-3xl lazyload" data-src="https://cdn.musora.com/image/fetch/w_1400,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/august/order_collage.png">
                 </div>
             </div>
         </div>
