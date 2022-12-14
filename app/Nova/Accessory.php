@@ -48,7 +48,7 @@ class Accessory extends Resource
             Text::make('Name')->required()->sortable(),
             //slug field for displaying to use a tag
             Text::make('Slug', function(){
-                return '<a class="link-default" target="_blank" href="/'.strtolower($this->brand->name).'/shop/'.$this->slug.'">'.$this->slug.'</a>';
+                return '<a class="link-default" target="_blank" href="'.get_legacy_brand_base_url(strtolower($this->brand->name)).($this->brand->name === 'Drumeo' ? '/drumshop/' : '/shop/').$this->slug.'">'.$this->slug.'</a>';
             })->asHtml()->hideWhenUpdating()->hideWhenCreating(),
             //slug field for saving
             Text::make('Slug')->hideFromDetail()->hideFromIndex(),
