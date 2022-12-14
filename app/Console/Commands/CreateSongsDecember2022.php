@@ -4,7 +4,6 @@ namespace App\Console\Commands;
 
 use Carbon\Carbon;
 use Illuminate\Console\Command;
-use Illuminate\Database\DatabaseManager;
 use Illuminate\Support\Facades\DB;
 use Railroad\Railcontent\Events\ContentCreated;
 use Railroad\Railcontent\Helpers\ContentHelper;
@@ -27,31 +26,14 @@ class CreateSongsDecember2022 extends Command
      */
     protected $description = 'CreateSongsDecember2022';
 
-    /**
-     * @var DatabaseManager
-     */
-    private $databaseManager;
-
-    /**
-     * @var ContentRepository
-     */
-    private $contentRepository;
 
     /**
      * Create a new command instance.
      *
-     * @param DatabaseManager $databaseManager
-     * @param ContentRepository $contentRepository
      */
-    public function __construct(
-        DatabaseManager $databaseManager,
-        ContentRepository $contentRepository
-    )
+    public function __construct()
     {
         parent::__construct();
-
-        $this->databaseManager = $databaseManager;
-        $this->contentRepository = $contentRepository;
     }
 
     /**
@@ -59,7 +41,9 @@ class CreateSongsDecember2022 extends Command
      *
      * @return mixed
      */
-    public function handle()
+    public function handle(
+        ContentRepository $contentRepository,
+    )
     {
 //        $songFile = file(base_path('test-to-be-deleted.csv'));
         $songFile = file(base_path('all-songs-december-2022.csv'));
@@ -246,7 +230,7 @@ class CreateSongsDecember2022 extends Command
             //            }
 
             // assignment
-            $assignmentChildren = $this->contentRepository->getByParentIdWhereTypeIn($content->id, ['assignment']);
+            $assignmentChildren = $contentRepository->getByParentIdWhereTypeIn($content->id, ['assignment']);
             $assignmentSearchAttributes = [
                 'title' => $row[9],
                 'type' => 'assignment',
