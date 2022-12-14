@@ -49,7 +49,7 @@ Route::domain('{singeoDomain}')
     Route::get('/live-vocal-bootcamp', function () { return view('singeo.lead-gen.live-vocal-bootcamp.live-vocal-bootcamp'); } );
     Route::get('/live-vocal-bootcamp/zoom', function () { return view('singeo.lead-gen.live-vocal-bootcamp.zoom'); } );
 
-    Route::get('/live-bootcamp', function () { return view('singeo.lead-gen.harmony-bootcamp.harmony-bootcamp'); } );
+    Route::get('/shop/live-bootcamp', function () { return view('singeo.lead-gen.harmony-bootcamp.harmony-bootcamp'); } );
     Route::get('/live-bootcamp/zoom', function () { return view('singeo.lead-gen.harmony-bootcamp.zoom'); } );
 
     Route::get('/holiday-karaoke', function () { return view('singeo.lead-gen.holiday-karaoke.signup'); } );
