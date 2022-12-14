@@ -21,7 +21,13 @@
             <p class="mx-auto mb-2">{!!  $reviewText  !!} <u>See The Reviews »</u></p>
         </a>
         <br>
-        <img alt="" class="h-6 sm:h-8 mb-2 md:mb-0 mx-auto sm:mr-1 lazyload" src="https://cdn.musora.com/image/fetch/w_320,q_auto:best/https://drumeo-assets.s3.amazonaws.com/sales/2023/shopper-approved-icon.svg">
+        <img
+            alt="shopper approved image"
+            class="h-6 sm:h-8 mb-2 md:mb-0 mx-auto sm:mr-1 transition-opacity opacity-0"
+            src="https://cdn.musora.com/image/fetch/w_320,q_auto:best/https://drumeo-assets.s3.amazonaws.com/sales/2023/shopper-approved-icon.svg"
+            loading="lazy"
+            onload="this.classList.remove('opacity-0')"
+        >
 
 
         <div class="flex flex-wrap items-start justify-center mx-auto mt-6">
@@ -82,7 +88,13 @@
                         @foreach ($testimonials as $testimonial)
                             <li class="splide__slide flex flex-col items-center justify-center pb-8">
                                 <div class="relative cursor-pointer mb-2" x-on:click="{{str_replace(' ', '', $testimonial['name'])}} = true;">
-                                    <img class="rounded-xl" src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/{{$testimonial['image']}}" alt="{{$testimonial['name']}} testimonial">
+                                    <img
+                                        class="rounded-xl transition-opacity opacity-0"
+                                        src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/{{$testimonial['image']}}"
+                                        alt="{{$testimonial['name']}} testimonial"
+                                        loading="lazy"
+                                        onload="this.classList.remove('opacity-0')"
+                                    >
                                     <div class="absolute inset-0 flex justify-center align-center">
                                         <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play text-lg text-white border-2 border-white px-3 py-1 rounded-full bg-[#0009] hover:opacity-80"></i>
                                     </div>

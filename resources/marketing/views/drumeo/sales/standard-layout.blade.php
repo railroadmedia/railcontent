@@ -1698,13 +1698,16 @@
         ]
     @endphp
 
-    @include('musora.sales.subscription-homepages', [
-        'header' => 'Trusted By Drummers<br class="inline-block sm:hidden">  Everywhere',
-        'reviewText' => 'Rated 5 stars by thousands by Drumeo students from around the world!',
+    @include('musora.sales.testimonials-section', [
+        'header' => 'Trusted by drummers<br class="inline-block sm:hidden">  everywhere',
         'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738',
+        'reviewText' => 'Drumeo is rated 5-stars for price, satisfaction,<br class="inline sm:hidden"> and customer service.',
+        'youtubeLink' => 'https://www.youtube.com/freedrumlessons/',
         'youtube' => '2,110,000',
+        'facebookLink' => 'https://facebook.com/drumeo/',
         'facebook' => '1,120,000',
-        'instagram' => '842,000'
+        'instagramLink' => 'https://instagram.com/drumeoofficial/',
+        'instagram' => '842,000',
     ])
 
     @foreach($coaches as $coach)

@@ -16,14 +16,14 @@
 
     @include('drumeo._partials._fonts')
 
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"></noscript>
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
     {{--<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">--}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
+
     <style>
         .slick-slider.slick-light-buttons .slick-arrow {
             background: #fff;
@@ -69,6 +69,12 @@
         }
     </style>
 @stop
+
+@section('body-data')
+    x-data ='{
+        trailer : false
+    }'
+@endsection
 
 @section('global-body')
     @if(!empty($trialVersion))
@@ -175,30 +181,37 @@
         $gridItems = [
             [
                 'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/10-level-cirriculum.jpg',
-                'desc' => '<strong class="font-black">10-Level Curriculum</strong><br> The most trusted step-by-step video lessons for every technique, pattern, and style.',
+                'title' => '10-Level Curriculum',
+                'desc' => 'The most trusted step-by-step video lessons for every technique, pattern, and style.',
             ],
             [
                 'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/practical-assignments.jpg',
-                'desc' => '<strong class="font-black">Practical Assignments</strong><br> You\'ll always have on-screen assignments and practice tools to increase retention.',
+                'title' => 'Practical Assignments',
+                'desc' => 'You\'ll always have on-screen assignments and practice tools to increase retention.',
             ],
             [
                 'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/guided-workouts.jpg',
-                'desc' => '<strong class="font-black">Guided Workouts</strong><br> Stay inspired with our guided workouts where we’ll practice-along with you in real time.',
+                'title' => 'Guided Workouts',
+                'desc' => 'Stay inspired with our guided workouts where we’ll practice-along with you in real time.',
             ],
             [
                 'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/world-class-teachers.jpg',
-                'desc' => '<strong class="font-black">World-Class Teachers</strong><br> The best drummers are here -- including Grammy Award winners and touring musicians.',
+                'title' => 'World-Class Teachers',
+                'desc' => 'The best drummers are here -- including Grammy Award winners and touring musicians.',
             ],
             [
                 'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/downloadable-videos.jpg',
-                'desc' => '<strong class="font-black">Downloadable Videos</strong><br> Stream your lessons OR download your videos so you can practice anywhere, anytime.',
+                'title' => 'Downloadable Videos',
+                'desc' => 'Stream your lessons OR download your videos so you can practice anywhere, anytime.',
             ],
             [
                 'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/personalized-support.jpg',
-                'desc' => '<strong class="font-black">Personalized Support</strong><br> Get weekly live streams, student lesson plans, and access to a global drum community.',
+                'title' => 'Personalized Support',
+                'desc' => 'Get weekly live streams, student lesson plans, and access to a global drum community.',
             ],
         ];
     @endphp
+
     @include('musora.sales.trailer-grid-section', [
         'vidThumb' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/feature-video-thumb.jpg',
         'header' => 'Your drumming goals start here.',
@@ -349,10 +362,10 @@
         ];
     @endphp
 
-    @include('musora.sales.coaches-section', [
-        'header' => 'Study with the world’s <br class="md:hidden">best drummers.',
-        'desc' => 'Diversify your drumming knowledge by studying with the world’s best drummers and teachers – with 200+ goal-oriented artist courses to amplify your skills & exclusive live events with drumming royalty.'
-    ])
+{{--    @include('musora.sales.coaches-section', [--}}
+{{--        'header' => 'Study with the world’s <br class="md:hidden">best drummers.',--}}
+{{--        'desc' => 'Diversify your drumming knowledge by studying with the world’s best drummers and teachers – with 200+ goal-oriented artist courses to amplify your skills & exclusive live events with drumming royalty.'--}}
+{{--    ])--}}
 
     <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #0c1524 calc(50% + 1px));"></div>
     <section class="text-center text-white px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#0c1524;">
@@ -650,84 +663,84 @@
             [
             'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/testimonials/ed-koop.jpg',
             'name' => 'testimonial1',
-    'video' => '342059271',
+            'video' => '342059271',
             'title' => 'He made the band & he’s<br> playing his dream gigs.',
             'description' => 'After 20 years away from the drums, Ed says he’s loving music more than ever. He nailed his first audition and has now played at the venues of his dreams.',
             ],
             [
             'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/testimonials/lisa-aragon.jpg',
             'name' => 'testimonial2',
-    'video' => '373252004',
+            'video' => '373252004',
             'title' => 'She can now jam with<br> anyone she wants.',
             'description' => 'Lisa got interested in the drums by playing Rock Band. She had no idea she’d be performing with strangers in Nashville just a few years later.',
             ],
             [
             'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/testimonials/nick-rudman-2.jpg',
             'name' => 'testimonial3',
-    'video' => '342066325',
+            'video' => '342066325',
             'title' => 'Retirement was too<br> slow for him.',
             'description' => 'After working on the railroad for 40 years, Nick now keeps his snare drum beside his bed...just in case he wakes up with a good idea.',
             ],
             [
             'image' => 'https://i.vimeocdn.com/video/1143532818-61ead907372040ae51f23b9d5f05469c271aee744e9cb67e777ae4307f762b23-d_620',
             'name' => 'testimonial12',
-    'video' => '553438851',
+            'video' => '553438851',
             'title' => 'The student has<br> become the teacher.',
             'description' => 'Omari had big shoes to fill. His father was already an accomplished drummer in Trinidad & Tobago when Omari decided to take his drumming to the next level.',
             ],
             [
             'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/testimonials/guy-dobbins.jpg',
             'name' => 'testimonial4',
-    'video' => '373445704',
+            'video' => '373445704',
             'title' => 'Same-day advice got<br> him through the gig.',
             'description' => 'Guy had trouble figuring out a song, he reached out and an instructor walked him through it that same day - getting him through the gig that evening.',
             ],
             [
             'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/testimonials/marlene-rosen.jpg',
             'name' => 'testimonial5',
-    'video' => '373446024',
+            'video' => '373446024',
             'title' => 'She didn’t let cancer<br> stop the rhythm.',
             'description' => 'Marlene, a cancer survivor, filled her recovery time with drumming and was able to progress at a pace that worked for her.',
             ],
             [
             'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/testimonials/barry-lisle.jpg',
             'name' => 'testimonial6',
-    'video' => '342066433',
+            'video' => '342066433',
             'title' => 'He loved the drums as a <br>kid, now he’s in two bands.',
             'description' => 'Barry wanted something to keep his mind busy, so he revisited the instrument he’d loved as a kid: the drums. Now he’s playing in bands and recording an album.',
             ],
             [
             'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/testimonials/jay-damberg-2.jpg',
             'name' => 'testimonial7',
-    'video' => '373445466',
+            'video' => '373445466',
             'title' => 'Private teachers weren’t<br> available at 11PM',
             'description' => 'With a full-time job and a family, Jay often can’t practice drums until late at night, which is why he loves being able to access Drumeo whenever he wants.',
             ],
             [
             'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/testimonials/ivy-elizondo-2.jpg',
             'name' => 'testimonial8',
-    'video' => '373445819',
+            'video' => '373445819',
             'title' => 'She took her kids’ drums<br> and started a band.',
             'description' => 'When Ivy’s kids decided to stop playing drums, she jumped on the throne instead -- she’s used Drumeo to build a foundation and formed a band.',
             ],
             [
             'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/testimonials/scott-anderson.jpg',
             'name' => 'testimonial9',
-    'video' => '373445587',
+            'video' => '373445587',
             'title' => 'He’s addicted to<br> self-improvement.',
             'description' => 'Scott was frustrated starting out on the drums, so he joined Drumeo which helped him slow down, see how everything fits together, and gain momentum.',
             ],
             [
             'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/testimonials/john-pruden.jpg',
             'name' => 'testimonial10',
-    'video' => '373445917',
+            'video' => '373445917',
             'title' => 'He developed his own<br> style with an army of teachers.',
             'description' => 'John didn’t have time for weekly lessons or sifting through online content. Drumeo gave him structure and the ability to learn from different world class instructors.',
             ],
             [
             'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/testimonials/phil-davis.jpg',
             'name' => 'testimonial11',
-    'video' => '373446155',
+            'video' => '373446155',
             'title' => 'Finally, online drum<br> lessons he could trust.',
             'description' => 'Phil found the vast amount of online content disorganized, overwhelming and contradictory, so he quickly made himself at home with Drumeo.',
             ],
@@ -935,6 +948,11 @@
         </div>
     @endforeach
 
+    @include('_partials.components.video-modal',[
+        'name' => 'trailer',
+        'video' => '772644658'
+    ])
+
 
     @include("drumeo.sales.partials._footer")
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -981,9 +999,7 @@
     <script type="text/javascript" src="{{ asset('/marketing/js/sliding-anchor.js') }}"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
-
-
-    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
     @yield('scripts')
 @stop

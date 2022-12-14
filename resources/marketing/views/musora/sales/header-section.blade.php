@@ -5,7 +5,7 @@
                 <h1 class="rotater-text text-drumeo"><strong>{!! $header !!}</strong></h1>
                 <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>{!! $desc !!}</strong></h6>
 
-                <div class="mt-6 mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top cursor-hover autoplay-video lazyload" style="padding-bottom: 75%;" data-bg="https://cdn.musora.com/image/fetch/w_850,q_auto:best/{!! $thumb !!}" data-open="trailer">
+                <div class="mt-6 mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top cursor-hover autoplay-video lazyload" style="padding-bottom: 75%;" data-bg="https://cdn.musora.com/image/fetch/w_850,q_auto:best/{!! $thumb !!}" x-on:click="trailer = true;" alt="header image">
                     <div class="join white smaller absolute bottom-5 left-5"><i class="fas fa-play"></i> Watch Trailer</div>
                 </div>
 
@@ -30,7 +30,7 @@
                 </div>
             </div>
             <div class="w-full sm:w-5/12 hidden sm:block">
-                <div class="shadow-2xl rounded-xl aspect-1:1 overflow-hidden relative bg-cover bg-center cursor-pointer autoplay-video lazyload" data-bg="https://cdn.musora.com/image/fetch/w_850,q_auto:best/{!! $thumb !!}" data-open="trailer">
+                <div class="shadow-2xl rounded-xl aspect-1:1 overflow-hidden relative bg-cover bg-center cursor-pointer autoplay-video lazyload" data-bg="https://cdn.musora.com/image/fetch/w_850,q_auto:best/{!! $thumb !!}" x-on:click="trailer = true;">
                     <div class="join white smaller absolute bottom-5 left-5"><i class="fas fa-play"></i> Watch Trailer</div>
                 </div>
             </div>
@@ -38,9 +38,15 @@
 
         <div class="flex flex-wrap sm:flex-nowrap text-center border-2 rounded-xl border-drumeo mt-8 lg:mt-12 mb-2 lg:mb-4" style="background-color:#eaf1fa;">
             <div class="flex flex-wrap sm:flex-nowrap items-center justify-evenly w-full sm:w-auto sm:flex-grow py-4 sm:py-3 lg:py-4 lg:px-5 text-left sm:text-center">
-                @foreach ($features as $feature)
+                @foreach ($features as $key => $feature)
                     <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3 mb-4 sm:mb-0">
-                        <img src="{{ $feature['image'] }}" class="h-7 mb-2 mr-3 sm:mr-0">
+                        <img
+                            src="{{ $feature['image'] }}"
+                            class="h-7 mb-2 mr-3 sm:mr-0 transition-opacity opacity-0"
+                            alt="feature image{{$key+1}}"
+                            loading="lazy"
+                            onload="this.classList.remove('opacity-0')"
+                        >
                         <p class="leading-tight mx-0"><strong class="font-black">{{ $feature['title'] }}</strong><br>
                             <span class="text-sm">{{ $feature['desc'] }}</span></p>
                     </div>
@@ -53,7 +59,12 @@
                 <div class="px-3 md:px-6 slick-slide">
                     <p class="leading-normal text-sm"><em>“{{ $slide['desc'] }}”</em></p>
                     <div class="flex flex-wrap md:flex-nowrap text-left items-center justify-center mt-1.5">
-                        <img class="rounded-full h-10 lazyload" data-src="https://cdn.musora.com/image/fetch/w_80,q_auto:best/{{ $slide['thumb'] }}"><br class="inline md:hidden">
+                        <img
+                            class="rounded-full h-10 transition-opacity opacity-0"
+                            src="https://cdn.musora.com/image/fetch/w_80,q_auto:best/{{ $slide['thumb'] }}"
+                            loading="lazy"
+                            onload="this.classList.remove('opacity-0')"
+                        ><br class="inline md:hidden">
                         <p class="leading-tight w-full md:w-auto text-sm text-light-navy ml-1 md:ml-2 mr-0 mt-1 md:mt-0"><em>{{ $slide['name'] }}<br> {{ $slide['credit'] }}</em></p>
                     </div>
                 </div>
