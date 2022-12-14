@@ -19,6 +19,7 @@ use App\Console\Commands\SeedLiveAndScheduledContent;
 use App\Console\Commands\SeedUserContentData;
 use App\Console\Commands\TestLessonsDescriptionUrls;
 use App\Console\Commands\VaporEnvManager;
+use App\Console\Commands\UpdateRoutines;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -40,7 +41,8 @@ class Kernel extends ConsoleKernel
         PopulateUserMinutesPracticedPerBrand::class,
         VaporEnvManager::class,
         TestLessonsDescriptionUrls::class,
-        RepairUserProgressStartedOn::class
+        RepairUserProgressStartedOn::class,
+        UpdateRoutines::class,
     ];
 
     /**
