@@ -30,7 +30,7 @@
 
 </head>
 
-<body class="@yield('body-class')" @yield('body-data')>
+<body @hasSection('body-class') class="@yield('body-class')" @endif @yield('body-data')>
 {!! \App\Analytics\Tracker::bodyTop() !!}
 
 @yield('global-body')
