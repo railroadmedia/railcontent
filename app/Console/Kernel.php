@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use App\Console\Commands\AddMissingQuietPadsForBFOrders2022;
+use App\Console\Commands\CreateSongsDecember2022;
 use App\Console\Commands\MigrateCoachesToInstructors;
 use App\Console\Commands\MigrateGuitareoUserXP;
 use App\Console\Commands\MigrateTypeBasedContentPermissionsToIdBased;
@@ -40,7 +41,8 @@ class Kernel extends ConsoleKernel
         PopulateUserMinutesPracticedPerBrand::class,
         VaporEnvManager::class,
         TestLessonsDescriptionUrls::class,
-	MigratePianoteSongTutorial::class,
+	    MigratePianoteSongTutorial::class,
+        CreateSongsDecember2022::class,
     ];
 
     /**
