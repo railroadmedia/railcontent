@@ -260,6 +260,13 @@ class SalesController extends BaseController
 
         return view('musora.sales.choose-plan', ['products' => $products, 'theme' => 'drumeo']);
     }
+    public function method()
+    {
+        $products = $this->productRepository->all();
+        $products = array_combine(array_entity_column($products, 'getSku'), $products);
+
+        return view('drumeo.sales.pages.method', ['products' => $products, 'theme' => 'drumeo']);
+    }
     public function salesStudents()
     {
         $products = $this->productRepository->all();
