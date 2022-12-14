@@ -1,0 +1,16 @@
+<section class="text-center py-10 md:py-20 lg:py-24 px-4 sm:px-6">
+    <div class="container mx-auto max-w-5xl">
+        <h2><strong>Frequently Asked Questions</strong></h2>
+        <div class="dropdowns my-10">
+            @foreach ($faqs as $faq)
+                @include('drumeo.products.partials.question-dropdown-tw', [
+                        "question" => true,
+                        "title" => $faq['title'],
+                        "description" => $faq['description'],
+                        ])
+            @endforeach
+        </div>
+        <p><strong>Still have questions?</strong> Call us toll-free at 1-800-439-8921, directly at<br>
+            1-604-855-7605 or start a chat with us in the bottom right corner of any page!</p>
+    </div>
+</section>

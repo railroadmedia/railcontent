@@ -5,7 +5,7 @@
             <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
             <img
                 class="rounded-xl overflow-hidden inset-0 absolute z-0 transition-opacity opacity-0"
-                src="{{ $vidThumb }}"
+                src="https://cdn.musora.com/image/fetch/w_2000,q_auto:best/{{ $vidThumb }}"
                 alt="trailer thumb"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
@@ -18,7 +18,7 @@
                 <div class="w-full sm:w-1/2 lg:w-1/3 px-2 sm:px-3 mb-8">
                     <img
                         class="rounded-xl mb-4 transition-opacity opacity-0"
-                        src="{{ $gridItem['image'] }}"
+                        src="https://cdn.musora.com/image/fetch/w_640,q_auto:best/{{ $gridItem['image'] }}"
                         alt="grid{{$key+1}}"
                         loading="lazy"
                         onload="this.classList.remove('opacity-0')"
