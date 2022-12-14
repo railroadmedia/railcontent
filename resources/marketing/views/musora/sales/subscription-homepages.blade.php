@@ -43,8 +43,6 @@
             max-height: 400px;
         }
     </style>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
-
     <style>
         .splide__pagination__page.is-active {
             background: #01050F;
