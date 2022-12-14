@@ -96,28 +96,28 @@
                         x-data="{
                                 init() {
                                     new Splide(this.$refs.splide, {
-                                    classes: {
-                                            arrow: 'splide__arrow bg-white opacity-100',
-                                            prev: 'hidden',
-                                            next: 'splide__arrow--next your-class-next hidden sm:flex',
-                                    },
-                                    perPage: 5,
-                                    perMove: 1,
-                                    gap: '0.5rem',
-                                    type: 'loop',
-                                    autoplay: true,
-                                    interval: 2000,
-                                    breakpoints: {
-                                        1024: {
-                                            perPage: 4,
+                                        classes: {
+                                                arrow: 'splide__arrow bg-white opacity-100',
+                                                prev: 'hidden',
+                                                next: 'splide__arrow--next your-class-next hidden sm:flex',
                                         },
-                                        720: {
-                                            perPage: 3,
+                                        perPage: 5,
+                                        perMove: 1,
+                                        gap: '0.5rem',
+                                        type: 'loop',
+                                        autoplay: true,
+                                        interval: 2000,
+                                        breakpoints: {
+                                            1024: {
+                                                perPage: 4,
+                                            },
+                                            720: {
+                                                perPage: 3,
+                                            },
+                                            620: {
+                                                perPage: 2,
+                                            },
                                         },
-                                        620: {
-                                            perPage: 2,
-                                        },
-                                    },
                                     }).mount()
                                 },
                             }"
@@ -145,7 +145,8 @@
         </div>
     </div>
 
-
-    <a href="" class="mx-1 join outline method smaller">EXPLORE 200+ COURSES <i class="fas fa-info-circle"></i> </a>
-    <a href="" class="mx-1 join blue smaller anchor-slide">START FOR FREE <i class="fas fa-arrow-right"></i> </a>
+    <div class="text-center">
+        <a href="" class="mx-1 join outline method smaller">EXPLORE 200+ COURSES <i class="fas fa-info-circle"></i> </a>
+        <a href="" class="mx-1 join blue smaller anchor-slide">START FOR FREE <i class="fas fa-arrow-right"></i> </a>
+    </div>
 </section>
