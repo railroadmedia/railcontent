@@ -8,6 +8,8 @@ use Illuminate\Database\DatabaseManager;
 use Illuminate\Support\Facades\DB;
 use Railroad\Railcontent\Events\ContentCreated;
 use Railroad\Railcontent\Helpers\ContentHelper;
+use Railroad\Railcontent\Repositories\ContentRepository;
+
 
 class CreateSongsDecember2022 extends Command
 {
@@ -31,15 +33,25 @@ class CreateSongsDecember2022 extends Command
     private $databaseManager;
 
     /**
+     * @var ContentRepository
+     */
+    private $contentRepository;
+
+    /**
      * Create a new command instance.
      *
      * @param DatabaseManager $databaseManager
+     * @param ContentRepository $contentRepository
      */
-    public function __construct(DatabaseManager $databaseManager)
+    public function __construct(
+        DatabaseManager $databaseManager,
+        ContentRepository $contentRepository
+    )
     {
         parent::__construct();
 
         $this->databaseManager = $databaseManager;
+        $this->contentRepository = $contentRepository;
     }
 
     /**
@@ -49,49 +61,36 @@ class CreateSongsDecember2022 extends Command
      */
     public function handle()
     {
-        $songFile = file(base_path('DrumlessTestBatch.csv'));
+//        $songFile = file(base_path('test-to-be-deleted.csv'));
+        $songFile = file(base_path('all-songs-december-2022.csv'));
         $csv = array_map('str_getcsv', $songFile);
 
         unset($csv[0]);
 
-        // todo: treat situation when song has multiple styles
-        // todo: treat instrumentless column when value is a string (TRUE)
         $csv = array_slice($csv, 0, 250);
 
         foreach ($csv as $rowIndex => $row) {
-            $existingContent = $this->getFirst(
-                'railcontent_content',
-//                [
-//                    'slug' => ContentHelper::slugify($row[2]),
-//                    'type' => 'song',
-//                    'status' => 'published',
-//                    'brand' => lcfirst($row[0]),
-//                    'album' => $row[3],
-//                ]
-                ['id' => $row[14]]  // todo: if row[14] : else, search for these parameters
-            );
+            $searchAttributes = $row[14] ? ['id' => $row[14]] : [
+                'slug' => ContentHelper::slugify($row[2]),
+                'type' => 'song',
+                'status' => 'published',
+                'brand' => lcfirst($row[0]),
+                'album' => $row[3],
+            ];
+
+            $existingContent = $this->getFirst('railcontent_content', $searchAttributes);
 
             if ($existingContent) {
                 $this->info("Song <" . $existingContent->slug . "> with id " . $existingContent->id . " exists and will be updated.");
             }
-            $content = $this->updateOrInsertAndGetFirst(
-                'railcontent_content',
-//                [
-//                    'slug' => ContentHelper::slugify($row[2]),
-//                    'type' => 'song',
-//                    'status' => 'published',
-//                    'brand' => lcfirst($row[0]),
-//                    'album' => $row[3],
-//                ],
-                ['id' => $row[14]],  //todo: if row[14] : else, search for these parameters
+            $content = $this->updateOrInsertAndGetFirst('railcontent_content', $searchAttributes,
                 [
-                    'slug' => $existingContent ? $existingContent->slug :ContentHelper::slugify($row[2]),
+                    'slug' => $existingContent ? $existingContent->slug : ContentHelper::slugify($row[2]),
                     'type' => 'song',
                     'status' => 'published',
                     'album' => $row[3],
                     'language' => 'en-US',
-                    'instrumentless' => $row[13],
-                    // todo: set published_on to now!
+                    'instrumentless' => boolval($row[13]),
                     'published_on' => $existingContent ? $existingContent->published_on : Carbon::now()->toDateTimeString(),
                     'created_on' => $existingContent ? $existingContent->created_on : Carbon::now()->toDateTimeString(),
                 ]
@@ -158,6 +157,7 @@ class CreateSongsDecember2022 extends Command
                 ]
             );
             foreach (explode(', ', $row[4]) as $styleIndex => $style) {
+                // todo: make sure explode is working properly
                 $this->updateOrInsertAndGetFirst(
                     'railcontent_content_fields',
                     [
@@ -246,35 +246,32 @@ class CreateSongsDecember2022 extends Command
             //            }
 
             // assignment
-            $existingAssignment = $this->getFirst('railcontent_content',
-                [
-//                    'slug' => ContentHelper::slugify($row[2]),
-                    'slug' => $content->slug,
-                    'type' => 'assignment',
-                    'sort' => 0,
-                    'status' => 'published',
-                    'brand' => lcfirst($row[0]),
-                    'language' => 'en-US'
-                ]
-            );
+            $assignmentChildren = $this->contentRepository->getByParentIdWhereTypeIn($content->id, ['assignment']);
+            $assignmentSearchAttributes = [
+                'title' => $row[9],
+                'type' => 'assignment',
+                'sort' => 0,
+                'status' => 'published',
+                'brand' => lcfirst($row[0]),
+            ];
 
+            $existingAssignment = (count($assignmentChildren) == 1) ? $assignmentChildren[0] :
+                (array)$this->getFirst('railcontent_content', $assignmentSearchAttributes);
 
-            //todo: update
             $assignment = $this->updateOrInsertAndGetFirst(
                 'railcontent_content',
                 [
-//                    'slug' => ContentHelper::slugify($row[2]),
-                    'slug' => $content->slug,
+                    'slug' => $existingAssignment ? $existingAssignment['slug'] : ContentHelper::slugify($row[2]),
+                    'title' => $row[9],
                     'type' => 'assignment',
                     'sort' => 0,
                     'status' => 'published',
                     'brand' => lcfirst($row[0]),
-                    'language' => 'en-US',
                 ],
                 [
-                    // todo: set published_on to now!
                     'published_on' => ($existingContent && $existingAssignment) ? $existingContent->published_on : Carbon::now()->toDateTimeString(),
                     'created_on' => ($existingContent && $existingAssignment) ? $existingContent->created_on : Carbon::now()->toDateTimeString(),
+                    'language' => 'en-US'
                 ]
             );
 
@@ -339,8 +336,7 @@ class CreateSongsDecember2022 extends Command
     private function updateOrInsertAndGetFirst($table, array $attributes, array $values = [])
     {
         $this->musoraDB()->from($table)->updateOrInsert($attributes, $values);
-
-        return $this->getFirst($table, $attributes, $values);
+        return $this->getFirst($table, $attributes);
     }
 
     /**
