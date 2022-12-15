@@ -68,7 +68,7 @@
         @include('drumeo.sales.partials._nav-link', [
             "linkName" => "Member Login",
             "linkIcon" => "fas fa-sign-in",
-            "linkUrl" => "/login"
+            "linkUrl" => get_musora_brand_base_url() . '/login',
         ])
         @include('drumeo.sales.partials._nav-link', [
             "linkName" => "Contact",

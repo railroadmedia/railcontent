@@ -61,7 +61,7 @@
         @include('musora.product.partials._nav-link', [
             "linkName" => "Member Login",
             "linkIcon" => "fas fa-sign-in",
-            "linkUrl" => "/login"
+            "linkUrl" => get_musora_brand_base_url() . '/login',
         ])
         @include('musora.product.partials._nav-link', [
             "linkName" => "Contact",
