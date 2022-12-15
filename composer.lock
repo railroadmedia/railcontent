@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bbed81c61c8d6d8d8c40c4fe618134d7",
+    "content-hash": "89421e991494ce7e47e3a4df7b1c2afa",
     "packages": [
         {
             "name": "aporat/store-receipt-validator",
@@ -176,16 +176,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.253.1",
+            "version": "3.253.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "96611780bfc4d71248a3b1b147da420b811c8e37"
+                "reference": "0f0e24bfae22edcdd62bcaedaff9610f8a328952"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/96611780bfc4d71248a3b1b147da420b811c8e37",
-                "reference": "96611780bfc4d71248a3b1b147da420b811c8e37",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/0f0e24bfae22edcdd62bcaedaff9610f8a328952",
+                "reference": "0f0e24bfae22edcdd62bcaedaff9610f8a328952",
                 "shasum": ""
             },
             "require": {
@@ -264,9 +264,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.253.1"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.253.2"
             },
-            "time": "2022-12-13T19:29:11+00:00"
+            "time": "2022-12-14T19:25:13+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -4446,17 +4446,17 @@
         },
         {
             "name": "laravel/nova",
-            "version": "4.19.4",
+            "version": "4.19.5",
             "source": {
                 "type": "git",
                 "url": "git@github.com:laravel/nova.git",
-                "reference": "962deed1c3df3740620be19646c8acd69430e66d"
+                "reference": "1c4f32ab373d93314ae84bd175b644b71c96a28d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-962deed1c3df3740620be19646c8acd69430e66d-zip-804f62.zip",
-                "reference": "962deed1c3df3740620be19646c8acd69430e66d",
-                "shasum": "51ac67d601f0f11213b23a9a8f5df425ae48f122"
+                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-1c4f32ab373d93314ae84bd175b644b71c96a28d-zip-42a3e1.zip",
+                "reference": "1c4f32ab373d93314ae84bd175b644b71c96a28d",
+                "shasum": "853ce862f1e4adb43b3f18b0542512d6dd54f18a"
             },
             "require": {
                 "brick/money": "^0.5.0|^0.6.0|^0.7.0",
@@ -4467,7 +4467,7 @@
                 "laravel/ui": "^3.3|^4.0",
                 "nesbot/carbon": "^2.53.1",
                 "php": "^7.3|^8.0",
-                "rap2hpoutre/fast-excel": "^3.2|^4.1",
+                "rap2hpoutre/fast-excel": "^3.2|^4.1|^5.0",
                 "spatie/once": "^1.1|^2.0|^3.0",
                 "symfony/console": "^5.4|^6.0",
                 "symfony/finder": "^5.4|^6.0",
@@ -4551,9 +4551,9 @@
                 "laravel"
             ],
             "support": {
-                "source": "https://github.com/laravel/nova/tree/v4.19.4"
+                "source": "https://github.com/laravel/nova/tree/v4.19.5"
             },
-            "time": "2022-11-29T15:30:53+00:00"
+            "time": "2022-12-14T02:03:19+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -6407,16 +6407,16 @@
         },
         {
             "name": "nova-kit/nova-packages-tool",
-            "version": "v1.6.1",
+            "version": "v1.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nova-kit/nova-packages-tool.git",
-                "reference": "c6deaf054a94d36c20b9472979c5dc94415f1283"
+                "reference": "cbed89e52c04b5b2adb415f4f39b6323ae8a683d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nova-kit/nova-packages-tool/zipball/c6deaf054a94d36c20b9472979c5dc94415f1283",
-                "reference": "c6deaf054a94d36c20b9472979c5dc94415f1283",
+                "url": "https://api.github.com/repos/nova-kit/nova-packages-tool/zipball/cbed89e52c04b5b2adb415f4f39b6323ae8a683d",
+                "reference": "cbed89e52c04b5b2adb415f4f39b6323ae8a683d",
                 "shasum": ""
             },
             "require": {
@@ -6451,9 +6451,9 @@
             ],
             "description": "Tool for Laravel Nova Packages Development",
             "support": {
-                "source": "https://github.com/nova-kit/nova-packages-tool/tree/v1.6.1"
+                "source": "https://github.com/nova-kit/nova-packages-tool/tree/v1.6.2"
             },
-            "time": "2022-11-22T21:40:15+00:00"
+            "time": "2022-12-14T02:09:50+00:00"
         },
         {
             "name": "nunomaduro/termwind",
@@ -6620,32 +6620,36 @@
         },
         {
             "name": "openspout/openspout",
-            "version": "v3.7.4",
+            "version": "v4.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/openspout/openspout.git",
-                "reference": "dfbbd53b5edcd486b45a37f6a04fac33073c70f3"
+                "reference": "7b0db352e25c83e42d3375f57041a30a1ea9cd2c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/openspout/openspout/zipball/dfbbd53b5edcd486b45a37f6a04fac33073c70f3",
-                "reference": "dfbbd53b5edcd486b45a37f6a04fac33073c70f3",
+                "url": "https://api.github.com/repos/openspout/openspout/zipball/7b0db352e25c83e42d3375f57041a30a1ea9cd2c",
+                "reference": "7b0db352e25c83e42d3375f57041a30a1ea9cd2c",
                 "shasum": ""
             },
             "require": {
                 "ext-dom": "*",
+                "ext-fileinfo": "*",
                 "ext-filter": "*",
                 "ext-libxml": "*",
                 "ext-xmlreader": "*",
                 "ext-zip": "*",
-                "php": "~7.3.0 || ~7.4.0 || ~8.0.0 || ~8.1.0"
+                "php": "~8.0.0 || ~8.1.0 || ~8.2.0"
             },
             "require-dev": {
                 "ext-zlib": "*",
-                "friendsofphp/php-cs-fixer": "^3.4",
-                "phpstan/phpstan": "^1.4",
-                "phpstan/phpstan-phpunit": "^1.0",
-                "phpunit/phpunit": "^9.5"
+                "friendsofphp/php-cs-fixer": "^3.8.0",
+                "infection/infection": "^0.26.10",
+                "phpbench/phpbench": "^1.2.5",
+                "phpstan/phpstan": "^1.6.8",
+                "phpstan/phpstan-phpunit": "^1.1.1",
+                "phpstan/phpstan-strict-rules": "^1.2.3",
+                "phpunit/phpunit": "^9.5.20"
             },
             "suggest": {
                 "ext-iconv": "To handle non UTF-8 CSV files (if \"php-intl\" is not already installed or is too limited)",
@@ -6693,7 +6697,7 @@
             ],
             "support": {
                 "issues": "https://github.com/openspout/openspout/issues",
-                "source": "https://github.com/openspout/openspout/tree/v3.7.4"
+                "source": "https://github.com/openspout/openspout/tree/v4.9.0"
             },
             "funding": [
                 {
@@ -6705,7 +6709,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-03-31T06:15:15+00:00"
+            "time": "2022-12-13T07:41:37+00:00"
         },
         {
             "name": "paragonie/constant_time_encoding",
@@ -8031,6 +8035,59 @@
             "time": "2022-12-12T21:49:52+00:00"
         },
         {
+            "name": "railroad/lead-tracker",
+            "version": "v3.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/railroadmedia/lead-tracker.git",
+                "reference": "3bf0e29be1e7f4152c1bd494efee21abc258d8e9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/railroadmedia/lead-tracker/zipball/3bf0e29be1e7f4152c1bd494efee21abc258d8e9",
+                "reference": "3bf0e29be1e7f4152c1bd494efee21abc258d8e9",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/dbal": "^3.5",
+                "laravel/framework": "^9.0",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "dms/phpunit-arraysubset-asserts": "^0.4.0",
+                "orchestra/testbench": "^7.4",
+                "phpunit/php-code-coverage": "^9.2.10",
+                "phpunit/phpunit": "^9.5.10"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Railroad\\LeadTracker\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Caleb Favor",
+                    "email": "caleb@drumeo.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Tracks email form submissions and marketing data for visitor origins.",
+            "keywords": [
+                "lead",
+                "tracker"
+            ],
+            "support": {
+                "issues": "https://github.com/railroadmedia/lead-tracker/issues",
+                "source": "https://github.com/railroadmedia/lead-tracker/tree/v3.0.1"
+            },
+            "time": "2022-12-14T21:54:44+00:00"
+        },
+        {
             "name": "railroad/location",
             "version": "v3.0.4",
             "source": {
@@ -9132,22 +9189,22 @@
         },
         {
             "name": "rap2hpoutre/fast-excel",
-            "version": "v4.1.0",
+            "version": "v5.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rap2hpoutre/fast-excel.git",
-                "reference": "724557e844170a231fd4515bbc3ea435ca622e7d"
+                "reference": "ae87162555c6c359964d671af6b7ad6c73f5f013"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rap2hpoutre/fast-excel/zipball/724557e844170a231fd4515bbc3ea435ca622e7d",
-                "reference": "724557e844170a231fd4515bbc3ea435ca622e7d",
+                "url": "https://api.github.com/repos/rap2hpoutre/fast-excel/zipball/ae87162555c6c359964d671af6b7ad6c73f5f013",
+                "reference": "ae87162555c6c359964d671af6b7ad6c73f5f013",
                 "shasum": ""
             },
             "require": {
-                "illuminate/support": "5.3.* || 5.4.* || 5.5.* || 5.6.* || 5.7.* || 5.8.* || ^6.0 || ^7.0 || ^8.0 || ^9.0",
-                "openspout/openspout": "^3",
-                "php": "^7.3 || ^8.0"
+                "illuminate/support": "^6.0 || ^7.0 || ^8.0 || ^9.0",
+                "openspout/openspout": "^4.1.1",
+                "php": "^8.0"
             },
             "require-dev": {
                 "illuminate/database": "^6.20.12 || ^7.30.4 || ^8.24.0 || ^9.0",
@@ -9190,7 +9247,7 @@
             ],
             "support": {
                 "issues": "https://github.com/rap2hpoutre/fast-excel/issues",
-                "source": "https://github.com/rap2hpoutre/fast-excel/tree/v4.1.0"
+                "source": "https://github.com/rap2hpoutre/fast-excel/tree/v5.0.0"
             },
             "funding": [
                 {
@@ -9198,7 +9255,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-07-21T14:21:25+00:00"
+            "time": "2022-12-09T15:18:32+00:00"
         },
         {
             "name": "react/promise",
@@ -14842,16 +14899,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "9.2.20",
+            "version": "9.2.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "af7463c955007de36db0c5e26d03e2f933c2e980"
+                "reference": "3f893e19712bb0c8bc86665d1562e9fd509c4ef0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/af7463c955007de36db0c5e26d03e2f933c2e980",
-                "reference": "af7463c955007de36db0c5e26d03e2f933c2e980",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/3f893e19712bb0c8bc86665d1562e9fd509c4ef0",
+                "reference": "3f893e19712bb0c8bc86665d1562e9fd509c4ef0",
                 "shasum": ""
             },
             "require": {
@@ -14907,7 +14964,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
-                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.20"
+                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.21"
             },
             "funding": [
                 {
@@ -14915,7 +14972,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-12-13T07:49:28+00:00"
+            "time": "2022-12-14T13:26:54+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -16583,5 +16640,5 @@
         "ext-curl": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }

@@ -5,20 +5,26 @@ use Illuminate\Support\Facades\Route;
 Route::domain('{drumeoDomain}')->group(function () {
     Route::group(['prefix' => '100-songs'],
         function () {
-            Route::get('/', function () { return view('drumeo.lead-gen.100-songs.signup'); });
-            Route::get('/unlocked', function () { return view('drumeo.lead-gen.100-songs.unlocked'); });
+
+            // if page is null, it's the root /
+            Route::get('/{page?}', \App\Http\Controllers\Drumeo\LeadGenController::class . '@oneHundredSongs')
+                ->whereIn('page', [null, 'unlocked']);
+
         }
     );
     Route::group(['prefix' => 'coop3rdrumm3r'],
         function () {
-            Route::get('/', function () { return view('drumeo.lead-gen.coop3rdrumm3r.signup'); });
-            Route::get('/lessons', function () { return view('drumeo.lead-gen.coop3rdrumm3r.lesson-grid'); });
-            Route::get('/1-the-drum-set', function () { return view('drumeo.lead-gen.coop3rdrumm3r.lessons.1'); });
-            Route::get('/2-drum-theory', function () { return view('drumeo.lead-gen.coop3rdrumm3r.lessons.2'); });
-            Route::get('/3-practice', function () { return view('drumeo.lead-gen.coop3rdrumm3r.lessons.3'); });
-            Route::get('/4-grooves', function () { return view('drumeo.lead-gen.coop3rdrumm3r.lessons.4'); });
-            Route::get('/5-drum-fills', function () { return view('drumeo.lead-gen.coop3rdrumm3r.lessons.5'); });
-            Route::get('/keep-getting-better', function () { return view('drumeo.lead-gen.coop3rdrumm3r.lessons.get-better'); });
+            Route::get('/{page?}', \App\Http\Controllers\Drumeo\LeadGenController::class . '@coop3rdrumm3r')
+                ->whereIn('page', [
+                    null,
+                    'lessons',
+                    '1-the-drum-set',
+                    '2-drum-theory',
+                    '3-practice',
+                    '4-grooves',
+                    '5-drum-fills',
+                    'keep-getting-better',
+                ]);
         }
     );
     Route::get('/destupefying-your-weak-hand', function () { return view('drumeo.lead-gen.destupefy.destupefy'); });
