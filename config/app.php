@@ -193,6 +193,7 @@ return [
         App\Modules\CustomerIO\Providers\CustomerIoServiceProvider::class,
         App\Modules\Content\Providers\ContentServiceProvider::class,
         App\Modules\Notifications\Providers\NotificationServiceProvider::class,
+        App\Modules\Reporting\Providers\ReportingServiceProvider::class,
 
         /*
          * Application Service Providers...
