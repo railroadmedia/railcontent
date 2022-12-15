@@ -233,6 +233,7 @@ class ContentRepository extends RepositoryBase
     {
         $contentRows =
             $this->query()
+                ->distinct()
                 ->selectPrimaryColumns()
                 ->restrictByUserAccess()
                 ->leftJoin(

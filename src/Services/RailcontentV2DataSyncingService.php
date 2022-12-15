@@ -78,7 +78,6 @@ class RailcontentV2DataSyncingService
             'xp' => 'xp',
             'week' => 'week',
             'released' => 'released',
-            'total_xp' => 'total_xp',
         ];
 
         $this->fieldNameToTableMap = [
