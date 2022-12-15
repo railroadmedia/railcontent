@@ -121,6 +121,8 @@
     </div>
     @include("drumeo.sales.partials._footer")
 
+    @include('partials._brand-set-authentication-cookies-iframe')
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script src="{{ mix('/platform/js/manifest.js') }}"></script>

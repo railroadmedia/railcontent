@@ -2,7 +2,36 @@
 
 use Illuminate\Support\Facades\Route;
 
+// not needed until we have a shopping experience on musora.com
 Route::domain('{musoraDomain}')
+    ->middleware(['web_public'])
+    ->group(function () {
+        Route::get('/order/{brand}', [\App\Http\Controllers\Ecommerce\OrderController::class, 'showOrderForm'])
+            ->name('order-form');
+    });
+
+Route::domain('{drumeoDomain}')
+    ->middleware(['web_public'])
+    ->group(function () {
+        Route::get('/order/{brand}', [\App\Http\Controllers\Ecommerce\OrderController::class, 'showOrderForm'])
+            ->name('order-form');
+    });
+
+Route::domain('{pianoteDomain}')
+    ->middleware(['web_public'])
+    ->group(function () {
+        Route::get('/order/{brand}', [\App\Http\Controllers\Ecommerce\OrderController::class, 'showOrderForm'])
+            ->name('order-form');
+    });
+
+Route::domain('{guitareoDomain}')
+    ->middleware(['web_public'])
+    ->group(function () {
+        Route::get('/order/{brand}', [\App\Http\Controllers\Ecommerce\OrderController::class, 'showOrderForm'])
+            ->name('order-form');
+    });
+
+Route::domain('{singeoDomain}')
     ->middleware(['web_public'])
     ->group(function () {
         Route::get('/order/{brand}', [\App\Http\Controllers\Ecommerce\OrderController::class, 'showOrderForm'])

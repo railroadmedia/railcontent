@@ -17,14 +17,16 @@
 
             <nav-cart-button
 {{--                cart-data='{{ $cartData }}'--}}
-                checkout-url='{{ get_musora_brand_base_url() }}/order/musora'
-                api-domain-url='{{ get_musora_brand_base_url() }}'
+                cart-data-url=''
+                checkout-url='/order/musora'
+                api-domain-url=''
             ></nav-cart-button>
             <cart-sidebar
                 brand="drumeo"
 {{--                cart-data='{{ $cartData }}'--}}
-                checkout-url='{{ get_musora_brand_base_url() }}/order/musora'
-                api-domain-url='{{ get_musora_brand_base_url() }}'
+                cart-data-url=''
+                checkout-url='/order/musora'
+                api-domain-url=''
             ></cart-sidebar>
         </div>
     @endif

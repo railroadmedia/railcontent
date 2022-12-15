@@ -23,16 +23,16 @@
 
             <nav-cart-button
                 {{-- cart-data='{{ $cartData }}' --}}
-                cart-data-url='{{ get_musora_brand_base_url() }}'
-                checkout-url='{{ get_musora_brand_base_url() }}/order/singeo'
-                api-domain-url='{{ get_musora_brand_base_url() }}'
+                cart-data-url=''
+                checkout-url='/order/singeo'
+                api-domain-url=''
             ></nav-cart-button>
             <cart-sidebar
                 brand="singeo"
                 {{-- cart-data='{{ $cartData }}' --}}
-                cart-data-url='{{ get_musora_brand_base_url() }}'
-                checkout-url='{{ get_musora_brand_base_url() }}/order/singeo'
-                api-domain-url='{{ get_musora_brand_base_url() }}'
+                cart-data-url=''
+                checkout-url='/order/singeo'
+                api-domain-url=''
             ></cart-sidebar>
         </div>
     @endif
