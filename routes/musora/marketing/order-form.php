@@ -14,28 +14,28 @@ Route::domain('{drumeoDomain}')
     ->middleware(['web_public'])
     ->group(function () {
         Route::get('/order/{brand}', [\App\Http\Controllers\Ecommerce\OrderController::class, 'showOrderForm'])
-            ->name('order-form');
+            ->name('drumeo.order-form');
     });
 
 Route::domain('{pianoteDomain}')
     ->middleware(['web_public'])
     ->group(function () {
         Route::get('/order/{brand}', [\App\Http\Controllers\Ecommerce\OrderController::class, 'showOrderForm'])
-            ->name('order-form');
+            ->name('pianote.order-form');
     });
 
 Route::domain('{guitareoDomain}')
     ->middleware(['web_public'])
     ->group(function () {
         Route::get('/order/{brand}', [\App\Http\Controllers\Ecommerce\OrderController::class, 'showOrderForm'])
-            ->name('order-form');
+            ->name('guitareo.order-form');
     });
 
 Route::domain('{singeoDomain}')
     ->middleware(['web_public'])
     ->group(function () {
         Route::get('/order/{brand}', [\App\Http\Controllers\Ecommerce\OrderController::class, 'showOrderForm'])
-            ->name('order-form');
+            ->name('singeo.order-form');
     });
 
 Route::middleware(['web_public'])
