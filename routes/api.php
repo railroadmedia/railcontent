@@ -193,9 +193,26 @@ Route::group(
 
         Route::get('/playlists', MyListJsonController::class . '@getUserPlaylists');
 
+        Route::get('/playlist', MyListJsonController::class . '@getPlaylist');
+
+        Route::put('/copy-playlist', MyListJsonController::class . '@copyPlaylist')->name('api.copy.playlist');
+
+        Route::patch(
+            '/playlist/{id}',
+            MyListJsonController::class . '@updatePlaylist'
+        )
+            ->name('api.update.playlist');
+
         Route::get('/public-playlists', MyListJsonController::class . '@getPublicPlaylists');
 
+
         Route::put('/add-item-to-list', MyListJsonController::class . '@addItemToPlaylist');
+        Route::put(
+            '/pin-playlist',
+            MyListJsonController::class . '@pinPlaylist'
+        )->name('api.pin.playlist');
+
+        Route::get('/my-pinned-playlists', MyListJsonController::class . '@getPinnedPlaylists');
 //        Route::put('/remove-from-my-list', MyListJsonController::class . '@removeFromPrimaryPlaylist');
 //        Route::get('/my-list', MyListJsonController::class . '@getMyLists');
         //addItemToPlaylist

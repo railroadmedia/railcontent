@@ -12,6 +12,8 @@ use Railroad\Railcontent\Services\ContentHierarchyService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\UserPlaylistsService;
 use Railroad\Railcontent\Support\Collection;
+use Railroad\Railcontent\Transformers\ArrayTransformer;
+use Railroad\Railcontent\Transformers\DataTransformer;
 use Symfony\Component\HttpFoundation\Request;
 
 class MyListJsonController extends Controller
@@ -235,17 +237,49 @@ class MyListJsonController extends Controller
         return $playlist;
     }
 
+    public function getPlaylist(Request $request)
+    {
+        return $this->userPlaylistsService->getPlaylist($request->get('playlist_id'));
+    }
+
+    public function copyPlaylist(Request $request)
+    {
+        $playlist = $this->userPlaylistsService->getPlaylist($request->get('playlist_id'));
+
+        $playlist = $this->userPlaylistsService->create([
+                                                            'user_id' => auth()->id(),
+                                                            'type' => 'user-playlist',
+                                                            'brand' => $playlist['brand'],
+                                                            'name' => $playlist['name'],
+                                                            'description' => $playlist['description'],
+                                                            'thumbnail_url' => $playlist['thumbnail_url'],
+                                                            'category' => $playlist['category'],
+                                                            'private' => $playlist['private'],
+                                                            'created_at' => Carbon::now()
+                                                                ->toDateTimeString(),
+                                                        ]);
+
+        return $playlist;
+    }
+
     public function getUserPlaylists(Request $request)
     {
         $page = $request->get('page', 1);
         $limit = $request->get('limit', 10);
 
-        $playlists = $this->userPlaylistsService->getUserPlaylist(auth()->id(), 'user-playlist', config('railcontent.brand'), $limit, $page);
-        $playlistsNumber = $this->userPlaylistsService->countUserPlaylists(auth()->id(),'user-playlist', config('railcontent.brand') );
-
         return (new ContentFilterResultsEntity([
-                                                   'results' => $playlists,
-                                                   'total_results' => 16,
+                                                   'results' => $this->userPlaylistsService->getUserPlaylist(
+                                                       auth()->id(),
+                                                       'user-playlist',
+                                                       config('railcontent.brand'),
+                                                       $limit,
+                                                       $page
+                                                   ),
+                                                   'total_results' => $this->userPlaylistsService->countUserPlaylists(
+                                                       auth()->id(),
+                                                       'user-playlist',
+                                                       config('railcontent.brand')
+                                                   ),
                                                ]))->toJsonResponse();
     }
 
@@ -258,8 +292,46 @@ class MyListJsonController extends Controller
 
     public function addItemToPlaylist(Request $request)
     {
-        $this->userPlaylistsService->addItemToPlaylist($request->get('user_playlist_id'), $request->get('content_id'), $request->get('position'));
+        $this->userPlaylistsService->addItemToPlaylist(
+            $request->get('user_playlist_id'),
+            $request->get('content_id'),
+            $request->get('position')
+        );
 
         return response()->json(['success']);
+    }
+
+    public function updatePlaylist(Request $request, $playlistId)
+    {
+        $playlist = $this->userPlaylistsService->update(
+            $playlistId,
+            array_intersect_key($request->all(), [
+                'name' => '',
+                'description' => '',
+                'thumbnail_url' => '',
+                'category' => '',
+                'private' => '',
+            ])
+        );
+
+        return reply()->json([$playlist], [
+            'transformer' => DataTransformer::class,
+            'code' => 201,
+        ]);
+    }
+
+
+    public function pinPlaylist(Request $request)
+    {
+        $this->userPlaylistsService->pinPlaylist($request->get('user_playlist_id'));
+
+        return response()->json(['success']);
+    }
+
+    public function getPinnedPlaylists()
+    {
+        $playlists = $this->userPlaylistsService->getPinnedPlaylists();
+
+        return $playlists;
     }
 }

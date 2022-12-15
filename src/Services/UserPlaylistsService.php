@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Repositories\UserPlaylistContentRepository;
 use Railroad\Railcontent\Repositories\UserPlaylistsRepository;
+use Railroad\Railcontent\Repositories\PinnedPlaylistsRepository;
 
 class UserPlaylistsService
 {
@@ -18,16 +19,20 @@ class UserPlaylistsService
      */
     private $userPlaylistContentRepository;
 
+    private PinnedPlaylistsRepository $pinnedPlaylistsRepository;
+
     /**
      * @param UserPlaylistsRepository $userPlaylistRepository
      * @param UserPlaylistContentRepository $userPlaylistContentRepository
      */
     public function __construct(
         UserPlaylistsRepository $userPlaylistRepository,
-        UserPlaylistContentRepository $userPlaylistContentRepository
+        UserPlaylistContentRepository $userPlaylistContentRepository,
+        PinnedPlaylistsRepository $pinnedPlaylistsRepository
     ) {
         $this->userPlaylistsRepository = $userPlaylistRepository;
         $this->userPlaylistContentRepository = $userPlaylistContentRepository;
+        $this->pinnedPlaylistsRepository = $pinnedPlaylistsRepository;
     }
 
     /**
@@ -103,13 +108,12 @@ class UserPlaylistsService
      */
     public function getUserPlaylistContents($playlistId, $contentType = [], $limit = null, $page = 1)
     {
-        $results =
-            $this->userPlaylistContentRepository->getUserPlaylistContents(
-                $playlistId,
-                $contentType,
-                $limit,
-                $page
-            );
+        $results = $this->userPlaylistContentRepository->getUserPlaylistContents(
+            $playlistId,
+            $contentType,
+            $limit,
+            $page
+        );
 
         return Decorator::decorate($results, 'content');
     }
@@ -121,8 +125,7 @@ class UserPlaylistsService
      */
     public function countUserPlaylistContents($playlistId, $contentType = [])
     {
-        $results =
-            $this->userPlaylistContentRepository->countUserPlaylistContents($playlistId, $contentType);
+        $results = $this->userPlaylistContentRepository->countUserPlaylistContents($playlistId, $contentType);
 
         return $results;
     }
@@ -134,7 +137,8 @@ class UserPlaylistsService
      */
     public function removeContentFromUserPlaylist($userPlaylistId, $contentId)
     {
-        $userPlaylistContent = $this->userPlaylistContentRepository->getByPlaylistIdAndContentId($userPlaylistId, $contentId);
+        $userPlaylistContent =
+            $this->userPlaylistContentRepository->getByPlaylistIdAndContentId($userPlaylistId, $contentId);
 
         if (empty($userPlaylistContent)) {
             return true;
@@ -150,17 +154,47 @@ class UserPlaylistsService
         return $this->userPlaylistsRepository->getById($userPlaylist);
     }
 
-    public function getPublicPlaylists($type='user-playlist', $brand)
+    public function getPublicPlaylists($type = 'user-playlist', $brand)
     {
         return $this->userPlaylistsRepository->getPublicPlaylists($type, $brand);
     }
 
-    public function addItemToPlaylist($userPlaylistId, $contentId, $position=null)
+    public function addItemToPlaylist($userPlaylistId, $contentId, $position = null)
     {
-
     }
 
-    public function countUserPlaylists($userId, $type, $brand){
+    public function countUserPlaylists($userId, $type, $brand)
+    {
         return $this->userPlaylistsRepository->countUserPlaylists($userId, $type, $brand);
     }
+
+    public function getPlaylist($playlistId)
+    {
+        return $this->userPlaylistsRepository->getById($playlistId);
+    }
+
+    public function update($id, $attributes)
+    {
+        $userPlaylist = $this->userPlaylistsRepository->update($id, $attributes);
+
+        return $this->userPlaylistsRepository->getById($userPlaylist);
+    }
+
+    public function pinPlaylist($playlistId)
+    {
+        $this->pinnedPlaylistsRepository->create([
+                                                     'user_id' => auth()->id(),
+                                                     'playlist_id' => $playlistId,
+                                                     'created_at' => Carbon::now()
+                                                         ->toDateTimeString(),
+                                                 ]);
+
+        return true;
+    }
+
+    public function getPinnedPlaylists()
+    {
+        return $this->pinnedPlaylistsRepository->getMyPinnedPlaylists();
+    }
+
 }
