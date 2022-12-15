@@ -1,6 +1,6 @@
 <template>
   <teleport v-if="showNotification" to="#notifications-container">
-    <div style="position: fixed; left: 0; width: 100vw; z-index: 2000; bottom: 40px;">
+    <div style="position: fixed; left: 0; width: 100vw; z-index: 10000; bottom: 40px;">
       <div class="tw-text-center tw-pb-6">
         <div :class="`
                   tw-px-[16px]
