@@ -732,7 +732,8 @@ class ContentPagesController extends BaseController
                 $sort == 'sort' ? $contentToRenderAsLesson['sort'] : $contentToRenderAsLesson['published_on'],
                 1,
                 $sort,
-                'desc'
+                'desc',
+                $contentToRenderAsLesson['id']
             );
 
             // Revert to previous state
@@ -1542,4 +1543,16 @@ class ContentPagesController extends BaseController
         }
         return null;
     }
+<<<<<<< Updated upstream
+=======
+
+    public function comments()
+    {
+        if (!user()->isAdmin()) {
+            throw new NotFoundHttpException();
+        }
+
+        return view('content.comments');
+    }
+>>>>>>> Stashed changes
 }
