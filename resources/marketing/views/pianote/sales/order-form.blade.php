@@ -127,6 +127,9 @@
 @stop()
 
 @section('content')
+    {{-- Notifications Container --}}
+    <div id="notifications-container"></div>
+
     <header id="nav" class="bg-black-1 flex flex-row" style="background-color:#00162a;position: relative;padding: 7px 10px;">
         <a href="/" class="logo flex flex-column align-center ph-1" style="max-width:144px;">
             <img src="https://cdn.musora.com/image/fetch/w_250,q_auto:best/https://pianote.s3.amazonaws.com/logo/pianote-logo-red.png">

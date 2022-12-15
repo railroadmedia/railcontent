@@ -21,7 +21,7 @@
               <i class="fas tw-mr-2 tw-text-[22px]" :class="notificationIcon ? notificationIcon : 'fa-bell'"></i>
               {{ notificationText }}
             </div>
-            <button class="dark:tw-bg-[#E4E4E7] tw-bg-[#223F57] tw-w-[40px] tw-h-[40px] tw-border-none tw-rounded-full"
+            <button class="tw-ml-2 dark:tw-bg-[#E4E4E7] tw-bg-[#223F57] tw-w-[40px] tw-h-[40px] tw-flex-shrink-0 tw-border-none tw-rounded-full"
               v-on:click="handleOnClose">
               <i class="far fa-times dark:tw-text-black tw-text-white"></i>
             </button>
