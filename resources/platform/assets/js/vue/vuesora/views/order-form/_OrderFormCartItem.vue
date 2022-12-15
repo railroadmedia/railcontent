@@ -5,7 +5,7 @@
                 class="square rounded bg-center"
             >
                 <img
-                    :src="item.thumbnail_url"
+                    :src="'https://cdn.musora.com/image/fetch/w_200,q_auto:best/' + item.thumbnail_url"
                     class="rounded"
                 >
             </div>
@@ -38,7 +38,7 @@
                                 max="99"
                                 class="no-label text-center tw-text-sm tw-p-2"
                                 style="border:none;background:none;"
-                            > 
+                            >
                         </div>
 
                         <div
@@ -123,7 +123,7 @@ export default {
         item: {
             type: Object,
         },
-        
+
         cartDataUrl: {
             type: String,
         },
