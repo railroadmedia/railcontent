@@ -5,9 +5,9 @@
             onload="this.classList.remove('opacity-0')"
             src="https://cdn.musora.com/image/fetch/w_520,q_auto:best/{{ $imgMobile }}">
         <h2 class="text-center my-5 sm:mt-0 sm:mb-10"><strong>{!! $header !!}</strong></h2>
-        <div class="text-left flex flex-wrap sm:flex-nowrap mb-32 sm:mb-56 lg:mb-72">
+        <div class="text-left flex flex-wrap sm:flex-nowrap mb-32 sm:mb-44 lg:mb-72">
             <p class="leading-normal max-w-lg pr-7">{!! $desc !!}</p>
-            <img class="h-96 hidden sm:inline transition-opacity opacity-0"
+            <img class="h-72 lg:h-96 hidden sm:inline transition-opacity opacity-0"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 src="https://cdn.musora.com/image/fetch/w_690,q_auto:best/{{ $img }}">

@@ -14,7 +14,7 @@
         @endforeach
     }">
 
-    <div class="container mx-auto max-w-5xl">
+    <div class="container mx-auto max-w-5xl mb-12">
         <h2 class="leading-tight mb-4"><strong>{!! $header !!}</strong></h2>
 
         <a class="inline-block" href="{{ $reviewLink }}" target="_blank" onclick="window.open('{{ $reviewLink }}', 'newwindow', 'width=750, height=550'); return false;">

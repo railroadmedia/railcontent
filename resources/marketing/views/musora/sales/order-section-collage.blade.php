@@ -1,5 +1,5 @@
 
-<div id="customize-anchor" class="anchor anchor-slide"></div>
+<div id="customize-anchor" class="anchor"></div>
 <section class="py-14 sm:py-24 lg:py-32 relative overflow-hidden text-white text-center customize px-4 lg:px-6 relative overflow-hidden" style="background: linear-gradient(45deg, #07233e, #0c1524);">
     <div class="container mx-auto max-w-5xl mb-16">
         <div class="flex flex-wrap items-center">

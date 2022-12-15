@@ -59,7 +59,7 @@
         <ul
             x-ref="tablist"
             role="tablist"
-            class="hidden md:flex mx-auto max-w-md lg:max-w-xl my-10 rounded-full bg-[#F5F8FC] border-[#ABB5C2] border-2"
+            class="hidden md:flex mx-auto max-w-md lg:max-w-xl mt-8 mb-10 rounded-full bg-[#F5F8FC] border-[#ABB5C2] border-2"
         >
             <!-- Tab -->
             @foreach ($buttons as $button)
@@ -145,8 +145,8 @@
         </div>
     </div>
 
-    <div class="text-center">
-        <a href="" class="mx-1 join outline method smaller">EXPLORE 200+ COURSES <i class="fas fa-info-circle"></i> </a>
-        <a href="" class="mx-1 join blue smaller anchor-slide">START FOR FREE <i class="fas fa-arrow-right"></i> </a>
+    <div class="text-center mt-10">
+        <a href="/courses" class="mx-1 join outline method smaller">EXPLORE 200+ COURSES <i class="fas fa-info-circle"></i> </a>
+        <a href="/pricing" class="mx-1 join blue smaller">START FOR FREE <i class="fas fa-arrow-right"></i> </a>
     </div>
 </section>

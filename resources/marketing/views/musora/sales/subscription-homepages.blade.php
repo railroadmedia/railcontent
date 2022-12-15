@@ -204,7 +204,7 @@
     @include('musora.sales.trailer-grid-section', [
         'vidThumb' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/feature-video-thumb.jpg',
         'header' => 'Your drumming goals start here.',
-        'desc' => 'Learn to play drums online with an organized 10-level curriculum featuring many of the world’s best teachers.',
+        'desc' => 'Learn to play drums online with an organized 10-level<br class="inline lg:hidden"> curriculum featuring many of the world’s best teachers.',
     ])
 
     @php
@@ -510,7 +510,6 @@
         'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/august/order_collage.png',
     ])
     @include('musora.sales.app-section', [
-        'header' => 'Available across web,<br> tablet, & mobile.',
         'appleLink' => 'https://itunes.apple.com/us/app/musora/id1619053766?ls=1',
         'googleLink' => 'https://play.google.com/store/apps/details?id=com.musoraapp',
         'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/devices.png',
@@ -551,11 +550,8 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script>
         $(document).ready(function () {
-            $(document).foundation();
-
             $('.slick').slick({
                 slidesToShow: 1
             });
@@ -583,7 +579,6 @@
         });
     </script>
 
-    <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/sliding-anchor.js') }}"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>

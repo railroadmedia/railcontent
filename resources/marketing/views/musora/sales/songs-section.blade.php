@@ -4,7 +4,7 @@
         <h2><strong>{!! $header !!}</strong></h2>
         <p class="leading-tight mt-3">{!! $desc !!}</p>
 
-        <div class="flex my-12">
+        <div class="flex flex-wrap sm:flex-nowrap my-12">
             <div class="text-left pr-8 max-w-md">
                 @foreach ($songItems as $songItem)
                     <div class="flex mb-4">
@@ -16,10 +16,10 @@
                     </div>
                 @endforeach
             </div>
-            <video class="h-96 rounded-xl lazyload" data-src="{{ $video }}" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
+            <video class="h-64 lg:h-96 rounded-xl lazyload" data-src="{{ $video }}" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
         </div>
-        <a href="" class="mx-1 join outline method smaller">SEE SONGS LIST <i class="fas fa-info-circle"></i> </a>
-        <a href="" class="mx-1 join blue smaller anchor-slide">START FOR FREE <i class="fas fa-arrow-right"></i> </a>
+        <a href="/songs" class="mx-1 join outline method smaller">SEE SONGS LIST <i class="fas fa-info-circle"></i> </a>
+        <a href="/pricing" class="mx-1 join blue smaller">START FOR FREE <i class="fas fa-arrow-right"></i> </a>
         <p class="text-light-navy text-sm mt-5"><em>Songs included with {{ $brand }}</em></p>
     </div>
 </section>
