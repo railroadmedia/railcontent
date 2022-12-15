@@ -393,7 +393,7 @@ class CoachPagesController extends Controller
             1,
             $sort,
             'desc',
-            $lessonContent['id']  //todo: test the controller!
+            $lessonContent['id']
         );
 
         // Revert to previous state
