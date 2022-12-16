@@ -9,11 +9,15 @@
             x-on:click="
                 open = !open;
                 if(open){
-                    $refs.dropdown1.classList.remove('hidden');
-                    $refs.dropdown2.classList.remove('hidden');
+                    $refs.dropdown1.classList.remove('hidden', 'h-0', 'max-h-0');
+                    $refs.dropdown1.classList.add('h-auto', 'max-h-96');
+                    $refs.dropdown2.classList.remove('hidden', 'h-0', 'max-h-0');
+                     $refs.dropdown2.classList.add('h-auto', 'max-h-96');
                 } else {
-                    $refs.dropdown1.classList.add('hidden');
-                    $refs.dropdown2.classList.add('hidden');
+                    $refs.dropdown1.classList.add( 'h-0', 'max-h-0');
+                    $refs.dropdown1.classList.remove('h-auto', 'max-h-96');
+                    $refs.dropdown2.classList.add( 'h-0', 'max-h-0');
+                    $refs.dropdown2.classList.remove('h-auto', 'max-h-96');
                 }
             "
         >
@@ -23,7 +27,7 @@
             </h6>
             <p
                 x-ref="dropdown1"
-                class="transition-all duration-300 text-xs sm:text-sm hidden leading-relaxed sm:leading-relaxed"
+                class="transition-all duration-300 text-xs sm:text-sm h-0 leading-relaxed sm:leading-relaxed overflow-hidden"
                 :class="open ? '' : ''"
             >
                 {!! nl2br( $desc) !!}
@@ -47,7 +51,7 @@
         </div>
     </div>
     @if(!empty($lessons))
-        <div x-ref="dropdown2" class="transition-all duration-300 text-xs sm:text-sm text-left bg-[#F5F8FC] hidden" :class="open ? 'py-4 sm:py-6 pl-4 sm:pl-5 pr-8 sm:pr-12' : ''">
+        <div x-ref="dropdown2" class="transition-all duration-300 text-xs sm:text-sm text-left bg-[#F5F8FC] h-0 overflow-hidden" :class="open ? 'py-4 sm:py-6 pl-4 sm:pl-5 pr-8 sm:pr-12' : ''">
             @foreach($lessons as $key => $lesson)
                 <div class="bg-white p-4 rounded-xl flex flex-col md:flex-row mb-2">
                     <img
