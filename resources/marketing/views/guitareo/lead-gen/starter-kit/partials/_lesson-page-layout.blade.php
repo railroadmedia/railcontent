@@ -6,6 +6,7 @@
 
 @section('image', 'https://guitarlessons-com-public.s3.amazonaws.com/images/guitar-toolbox-og.jpg')
 
+
 @section('url', 'https://www.guitareo.com/starter-kit')
 
 @section('all-lesson-link', '/starter-kit/lessons')
