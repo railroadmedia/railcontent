@@ -1,6 +1,6 @@
 <div class="h-5 sm:h-10 -mt-5 sm:-mt-10 relative z-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #f4f8fb calc(50% + 1px));"></div>
 <section class="relative text-center px-6" style="background-color:#f6f8fc;">
-    <div class="container mx-auto max-w-5xl relative z-20">
+    <div class="container mx-auto max-w-6xl relative z-20">
         <div class="text-left flex justify-center items-center">
             <div class="pr-4 lg:pr-7">
                 <h4 class="leading-normal mb-3 lg:mb-7"><strong>Available across web,<br> tablet, & mobile.</strong></h4>

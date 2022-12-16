@@ -37,7 +37,7 @@
 
     <div id="customize-anchor" class="anchor anchor-slide"></div>
     <section class="content-section grey text-center customize trial" style="background-color:#000318;">
-        <div class="container mx-auto">
+        <div class="container mx-auto max-w-6xl">
             <img class="h-7 md:h-9 lg:h-14 mb-4" src="https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png">
             <br>
             <h1><strong>Your first

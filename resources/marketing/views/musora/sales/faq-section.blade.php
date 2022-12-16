@@ -1,5 +1,5 @@
 <section class="text-center py-10 md:py-20 lg:py-24 px-4 sm:px-6">
-    <div class="container mx-auto max-w-5xl">
+    <div class="container mx-auto max-w-6xl">
         <h2><strong>Frequently Asked Questions</strong></h2>
         <div class="dropdowns my-10">
             @foreach ($faqs as $faq)

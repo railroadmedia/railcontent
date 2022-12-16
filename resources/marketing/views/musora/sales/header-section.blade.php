@@ -1,5 +1,5 @@
 <header class="px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:#f6f8fc;">
-    <div class="container max-w-5xl mx-auto">
+    <div class="container max-w-6xl mx-auto">
         <div class="flex flex-wrap sm:flex-nowrap items-center">
             <div class="w-full sm:w-7/12 sm:pr-8 text-center lg:text-left">
                 <h1 class="rotater-text text-drumeo"><strong>{!! $header !!}</strong></h1>
