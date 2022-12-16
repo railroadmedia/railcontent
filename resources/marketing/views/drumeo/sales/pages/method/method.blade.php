@@ -98,7 +98,7 @@
         <div class="container mx-auto max-w-5xl px-6">
             <h3 class="font-extrabold text-center mb-10 leading-snug">Your clear path, frustration-free <br>guide to playing the drums.</h3>
             @foreach($lessons as $key => $lesson)
-                @include('drumeo.products.partials.question-dropdown-alt', [
+                @include('_partials.components.question-dropdown', [
                     'num' => $key+1,
                     "title" => $lesson['title'],
                     "desc" => $lesson['desc'],
