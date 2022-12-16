@@ -217,6 +217,10 @@ class MyListJsonController extends Controller
                                                ]))->toJsonResponse();
     }
 
+    /**
+     * @param Request $request
+     * @return array
+     */
     public function createPlaylist(Request $request)
     {
         $playlist = $this->userPlaylistsService->create([
@@ -237,11 +241,19 @@ class MyListJsonController extends Controller
         return $playlist;
     }
 
+    /**
+     * @param Request $request
+     * @return array
+     */
     public function getPlaylist(Request $request)
     {
         return $this->userPlaylistsService->getPlaylist($request->get('playlist_id'));
     }
 
+    /**
+     * @param Request $request
+     * @return array
+     */
     public function copyPlaylist(Request $request)
     {
         $playlist = $this->userPlaylistsService->getPlaylist($request->get('playlist_id'));
@@ -262,6 +274,10 @@ class MyListJsonController extends Controller
         return $playlist;
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getUserPlaylists(Request $request)
     {
         $page = $request->get('page', 1);
@@ -283,6 +299,9 @@ class MyListJsonController extends Controller
                                                ]))->toJsonResponse();
     }
 
+    /**
+     * @return array|mixed[]
+     */
     public function getPublicPlaylists()
     {
         $playlists = $this->userPlaylistsService->getPublicPlaylists('user-playlist', config('railcontent.brand'));
@@ -290,6 +309,10 @@ class MyListJsonController extends Controller
         return $playlists;
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function addItemToPlaylist(Request $request)
     {
         $this->userPlaylistsService->addItemToPlaylist(
@@ -301,6 +324,11 @@ class MyListJsonController extends Controller
         return response()->json(['success']);
     }
 
+    /**
+     * @param Request $request
+     * @param $playlistId
+     * @return mixed
+     */
     public function updatePlaylist(Request $request, $playlistId)
     {
         $playlist = $this->userPlaylistsService->update(
@@ -320,18 +348,53 @@ class MyListJsonController extends Controller
         ]);
     }
 
-
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function pinPlaylist(Request $request)
     {
-        $this->userPlaylistsService->pinPlaylist($request->get('user_playlist_id'));
+        $pin = $this->userPlaylistsService->pinPlaylist($request->get('user_playlist_id'));
 
-        return response()->json(['success']);
+        return reply()->json([$pin], [
+            'code' => $pin ? 200 : 500,
+            'transformer' => DataTransformer::class,
+        ]);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function unpinPlaylist(Request $request)
+    {
+        $deleted =$this->userPlaylistsService->unpinPlaylist($request->get('user_playlist_id'));
+
+        return reply()->json([[$deleted>0]], [
+            'code' => $deleted ? 200 : 500,
+            'transformer' => DataTransformer::class,
+        ]);
+    }
+
+    /**
+     * @return array|mixed[]
+     */
     public function getPinnedPlaylists()
     {
         $playlists = $this->userPlaylistsService->getPinnedPlaylists();
 
         return $playlists;
+    }
+
+    //likePlaylist
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function likePlaylist(Request $request)
+    {
+        $this->userPlaylistsService->pinPlaylist($request->get('user_playlist_id'));
+
+        return response()->json(['success']);
     }
 }

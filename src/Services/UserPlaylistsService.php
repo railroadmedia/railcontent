@@ -163,16 +163,31 @@ class UserPlaylistsService
     {
     }
 
+    /**
+     * @param $userId
+     * @param $type
+     * @param $brand
+     * @return int
+     */
     public function countUserPlaylists($userId, $type, $brand)
     {
         return $this->userPlaylistsRepository->countUserPlaylists($userId, $type, $brand);
     }
 
+    /**
+     * @param $playlistId
+     * @return array
+     */
     public function getPlaylist($playlistId)
     {
         return $this->userPlaylistsRepository->getById($playlistId);
     }
 
+    /**
+     * @param $id
+     * @param $attributes
+     * @return array
+     */
     public function update($id, $attributes)
     {
         $userPlaylist = $this->userPlaylistsRepository->update($id, $attributes);
@@ -180,18 +195,54 @@ class UserPlaylistsService
         return $this->userPlaylistsRepository->getById($userPlaylist);
     }
 
+    /**
+     * @param $playlistId
+     * @return bool
+     */
     public function pinPlaylist($playlistId)
     {
-        $this->pinnedPlaylistsRepository->create([
-                                                     'user_id' => auth()->id(),
-                                                     'playlist_id' => $playlistId,
-                                                     'created_at' => Carbon::now()
-                                                         ->toDateTimeString(),
-                                                 ]);
+        $stored =
+            $this->pinnedPlaylistsRepository->query()
+                ->updateOrInsert(
+                    [
+                        'user_id' => auth()->id(),
+                        'playlist_id' => $playlistId,
+                    ],
+                    [
+                        'created_at' => Carbon::now()
+                            ->toDateTimeString(),
+                    ]
+                );
 
-        return true;
+        return $this->pinnedPlaylistsRepository->query()
+            ->where(
+                [
+                    'user_id' => auth()->id(),
+                    'playlist_id' => $playlistId,
+                ]
+            )
+            ->first();
     }
 
+    /**
+     * @param $playlistId
+     * @return bool
+     */
+    public function unpinPlaylist($playlistId)
+    {
+        return $this->pinnedPlaylistsRepository->query()
+            ->where(
+                [
+                    'playlist_id' => $playlistId,
+                    'user_id' => auth()->id(),
+                ]
+            )
+            ->delete();
+    }
+
+    /**
+     * @return array|mixed[]
+     */
     public function getPinnedPlaylists()
     {
         return $this->pinnedPlaylistsRepository->getMyPinnedPlaylists();

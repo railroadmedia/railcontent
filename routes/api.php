@@ -213,6 +213,16 @@ Route::group(
         )->name('api.pin.playlist');
 
         Route::get('/my-pinned-playlists', MyListJsonController::class . '@getPinnedPlaylists');
+
+        Route::put(
+            '/unpin-playlist',
+            MyListJsonController::class . '@unpinPlaylist'
+        )->name('api.unpin.playlist');
+
+        Route::put(
+            '/like-playlist',
+            MyListJsonController::class . '@likePlaylist'
+        )->name('api.like.playlist');
 //        Route::put('/remove-from-my-list', MyListJsonController::class . '@removeFromPrimaryPlaylist');
 //        Route::get('/my-list', MyListJsonController::class . '@getMyLists');
         //addItemToPlaylist
