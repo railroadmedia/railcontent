@@ -18,7 +18,7 @@
             "
         >
             <h6 class="leading-tight sm:leading-loose font-bold relative" :class="open && 'mb-2'">
-                @if(!empty($num))<span class="text-white rounded-full py-1 px-2 md:px-2.5 text-xs md:text-sm absolute -left-11 md:-left-16 -top-0.5 md:top-0.5" :class="open ? 'bg-drumeo' : 'bg-[#838C98]'">{{$num}}</span>@endif
+                @if(!empty($num))<span class="text-white rounded-full py-1 px-2 md:px-2.5 text-xs md:text-sm absolute -left-11 md:-left-16 -top-0.5 md:top-0.5" :class="open ? 'bg-{{$theme}}' : 'bg-[#838C98]'">{{$num}}</span>@endif
                 {!! $title !!}
             </h6>
             <p
