@@ -25,7 +25,7 @@
         >
             <!-- Content -->
             <div
-                class="aspect-16:9 w-full relative bg-white"
+                class="aspect-16:9 overflow-hidden rounded-xl w-full relative"
             >
                 <iframe class="absolute w-full h-full reset-on-close" x-bind:src="{{ $name }} && '//player.vimeo.com/video/{{ $video }}?autoplay=1'" frameborder="0" allowfullscreen allow="autoplay" title="{{ $name }}"></iframe>
             </div>

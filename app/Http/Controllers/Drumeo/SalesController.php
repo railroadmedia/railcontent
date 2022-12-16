@@ -253,6 +253,13 @@ class SalesController extends BaseController
 
         return view('musora.sales.subscription-homepages', ['products' => $products, 'theme' => 'drumeo']);
     }
+    public function promo23()
+    {
+        $products = $this->productRepository->all();
+        $products = array_combine(array_entity_column($products, 'getSku'), $products);
+
+        return view('musora.sales.subscription-homepages', ['products' => $products, 'theme' => 'drumeo', 'promoVersion' => 'true']);
+    }
     public function plan23()
     {
         $products = $this->productRepository->all();
