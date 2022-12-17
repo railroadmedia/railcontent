@@ -41,8 +41,50 @@
             height: auto;
             max-height: 400px;
         }
-    </style>
-    <style>
+
+        .tool:after, .tool:before {
+            position: absolute;
+            transform: translate(-50%, 0);
+            height: auto;
+            max-height: 0;
+            visibility: hidden;
+            opacity: 0;
+            transition: all .3s;
+            overflow: hidden;
+            font-size: 14px;
+        }
+        .tool:before {
+            z-index: 100;
+            content: "";
+            bottom: 23px;
+            left: 50%;
+            border-right: 7px transparent solid;
+            border-left: 7px transparent solid;
+            border-top: 7px solid #fff;
+        }
+        .tool:after {
+            padding: 5px 8px;
+            content: attr(tip);
+            font-size: 14px;
+            text-align: left;
+            color: #000;
+            width: 220px;
+            border-radius: 8px;
+            background: #fff;
+            box-shadow: 0 0 15px #000;
+            bottom: 30px;
+            left: -300%;
+        }
+        .tool:hover, .tool:active, .tool:focus {
+            z-index: 100;
+        }
+        .tool:hover:after, .tool:hover:before, .tool:active:after, .tool:active:before, .tool:focus:after, .tool:focus:before {
+            max-height: 1000px;
+            visibility: visible;
+            opacity: 1;
+            display: block;
+        }
+
         .splide__pagination__page.is-active {
             background: #01050F;
         }
@@ -96,15 +138,6 @@
         ])
     @endif
 
-    @include('_partials.layout.holiday.homepage-top-banner',[
-        'text' => 'GET 10 FREE BONUSES WORTH $1228.94'
-    ])
-
-    <div class="sticky-trigger block"></div>
-    @include('_partials.layout.holiday.sticky-bar', [
-        'text' => 'GET 10 FREE BONUSES <br> WORTH $1228.94',
-    ])
-
 
     @php
         $features = [
@@ -157,7 +190,7 @@
         'pointOne' => 'Improve Your Skills',
         'pointTwo' => 'World-Class Teachers',
         'pointThree' => 'Play More Songs',
-        'students' => '31856',
+        'students' => number_format(31856),
     ])
 
     @if(!empty($promoVersion))
@@ -403,9 +436,9 @@
     @endphp
     @include('musora.sales.songs-section', [
         'header' => 'Play your favorite songs.',
-        'desc' => 'You’ll have all the tools you need to <br class="hidden sm:inline"> make sure you never miss a beat.',
+        'desc' => 'You’ll have <strong>all the tools you need</strong> to make sure you never miss a beat.',
         'video' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/back-in-black-player.mp4',
-        'brand' => 'Drumeo+',
+        'brandName' => 'Drumeo+',
     ])
 
     @php
@@ -482,13 +515,13 @@
     ])
     @include('musora.sales.guarantee-section', [
         'badge' => 'https://drumeo-assets.s3.amazonaws.com/sales/2022/guarantee.png',
-        'header' => '<strong>Test-drive your lessons for 90 days.</strong><br>Zero risk.',
+        'header' => '<strong>Happy student guarantee.</strong><br>Test-drive your lessons for 90 days. Zero risk.',
         'desc' => 'Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence on the drums.',
     ])
     <div class="unstick-trigger block"></div>
     @include('musora.sales.order-section-collage', [
         'header' => 'Unlimited drum lessons<br> The world’s best teachers<br> 5000+ popular songs',
-        'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Trusted by 30,000 students.</li>
+        'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Trusted by ' . number_format(31856) . ' students.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Online lessons on every topic.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Personalized feedback from real teachers.</li>
                     <li class="leading-tight text-coaches"><i class="fa-li fas fa-check"></i> <strong>*BONUS*</strong> includes free access to Musora’s lessons for piano, guitar, and voice.</li>',

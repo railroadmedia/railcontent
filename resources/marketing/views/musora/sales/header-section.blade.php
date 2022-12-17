@@ -65,7 +65,7 @@
                                 loading="lazy"
                                 onload="this.classList.remove('opacity-0')"
                             ><br class="inline md:hidden">
-                            <p class="leading-tight w-full md:w-auto text-sm text-light-navy ml-1 md:ml-2 mr-0 mt-1 md:mt-0"><em>{{ $slide['name'] }}<br> {{ $slide['credit'] }}</em></p>
+                            <p class="leading-tight w-full md:w-auto text-sm text-light-navy ml-1 md:ml-2 mr-0 mt-1 md:mt-0"><em>{{ $slide['name'] }}, {{ $slide['credit'] }}</em></p>
                         </div>
                     </div>
                 @endforeach

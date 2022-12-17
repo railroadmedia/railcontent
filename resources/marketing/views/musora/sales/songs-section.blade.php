@@ -18,8 +18,8 @@
             </div>
             <video class="h-64 lg:h-96 rounded-xl lazyload" data-src="{{ $video }}" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
         </div>
-        <a href="/songs" class="mx-1 join outline method smaller">SEE SONGS LIST <i class="fas fa-info-circle"></i> </a>
+        <a href="/songs" class="mx-1 join outline method smaller">SEE SONGS LIST <i class="fas fa-list-music"></i> </a>
         <a href="/pricing" class="mx-1 join blue smaller">START FOR FREE <i class="fas fa-arrow-right"></i> </a>
-        <p class="text-light-navy text-sm mt-5"><em>Songs included with {{ $brand }}</em></p>
+        <p class="text-light-navy text-sm mt-5"><em>Songs included with {{ $brandName }}</em></p>
     </div>
 </section>
