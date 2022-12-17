@@ -16,10 +16,20 @@
                     </div>
                 @endforeach
             </div>
-            <video class="h-64 lg:h-96 rounded-xl lazyload" data-src="{{ $video }}" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
+            <video class="h-64 lg:h-96 rounded-xl lazyload" x-on:click="soundslice = true;" data-src="{{ $video }}" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
         </div>
         <a href="/songs" class="mx-1 join outline method smaller">SEE SONGS LIST <i class="fas fa-list-music"></i> </a>
         <a href="/pricing" class="mx-1 join blue smaller">START FOR FREE <i class="fas fa-arrow-right"></i> </a>
-        <p class="text-light-navy text-sm mt-5"><em>Songs included with {{ $brandName }}</em></p>
+        <p class="text-light-navy text-sm mt-5"><em>Songs included with {{ $brandName }}+</em></p>
+    </div>
+</section>
+<section class="text-center text-white px-5 sm:px-6 py-7 sm:py-8" style="    background: linear-gradient(40deg,#03c8ac, #0976db, #9a01ee, #f61a30);">
+    <div class="container max-w-6xl mx-auto">
+        <div class="flex flex-wrap sm:flex-nowrap items-center justify-center">
+            <img class="h-10 sm:h-14" src="https://drumeo-assets.s3.amazonaws.com/sales/2023/musora-instruments.svg">
+            <p class="w-full sm:w-auto sm:text-left max-w-md mt-2 sm:mt-0 mx-0 sm:pl-8 leading-tight"><strong>Any instrument, any time.</strong><br>
+                Powered by Musora, {{ $brandName }} includes full access to our communities for piano, guitar, and voice.
+            </p>
+        </div>
     </div>
 </section>

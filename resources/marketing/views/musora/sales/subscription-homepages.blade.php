@@ -111,6 +111,7 @@
 
 @section('body-data')
     x-data ='{
+        soundslice : false,
         trailer : false
     }'
 @endsection
@@ -186,10 +187,11 @@
     @include('musora.sales.header-section', [
         'header' => 'Online drum lessons for all skill levels.',
         'desc' => 'Learn the drums faster with step-by-step lessons, thousands of songs and unlimited personal support.',
-        'thumb' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/header-thumb.jpg',
+        'thumb' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/header-thumb2.jpg',
         'pointOne' => 'Improve Your Skills',
         'pointTwo' => 'World-Class Teachers',
         'pointThree' => 'Play More Songs',
+        'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738',
         'students' => number_format(31856),
     ])
 
@@ -250,7 +252,7 @@
     @endphp
 
     @include('musora.sales.trailer-grid-section', [
-        'vidThumb' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/feature-video-thumb.jpg',
+        'vid' => 'https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/video-reel.mp4',
         'header' => 'Your drumming goals start here.',
         'desc' => 'Always know <em>exactly</em> what to practice with an organized 10-level curriculum featuring many of the world’s best teachers. ',
     ])
@@ -422,12 +424,12 @@
                 'desc' => 'No more pausing and rewinding that tricky fill. Loop it over and over again!  ',
             ],
             [
-                'icon' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/metronome-icon.svg',
-                'title' => 'Remove the drums *NEW*',
+                'icon' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/no-drums-icon.svg',
+                'title' => 'Remove the drums <div class="rounded-full ml-2 inline-block bg-promo text-black text-xs px-2">NEW</div>',
                 'desc' => 'Magically remove the original drums to make each song uniquely yours. ',
             ],
             [
-                'icon' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/loop-icon.svg',
+                'icon' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/devices-icon.svg',
                 'title' => 'Take your songs anywhere.',
                 'desc' => 'Accessible on any device, or printable, so you can play any song, any time.  ',
             ],
@@ -438,7 +440,7 @@
         'header' => 'Play your favorite songs.',
         'desc' => 'You’ll have <strong>all the tools you need</strong> to make sure you never miss a beat.',
         'video' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/back-in-black-player.mp4',
-        'brandName' => 'Drumeo+',
+        'brandName' => 'Drumeo',
     ])
 
     @php
@@ -561,6 +563,10 @@
     @endphp
     @include('musora.sales.faq-section')
 
+    @include('_partials.components.soundslice-modal',[
+        'name' => 'soundslice',
+        'video' => '162928'
+    ])
     @include('_partials.components.video-modal',[
         'name' => 'trailer',
         'video' => '772644658'

@@ -37,9 +37,9 @@
     @endif
     @if(!empty($edgeVersion))
         <div class="edge-wrap show-for-medium">
-            <a class=" @if(strpos(url()->full(), 'method')) active @endif @if(!empty($homepage)) anchor-slide @endif"  href="/#method" >Method</a>
-            <a class=" @if(strpos(url()->full(), 'songs')) active @endif @if(!empty($homepage)) anchor-slide @endif"  href="/#songs" >Songs</a>
-            <a class=" @if(strpos(url()->full(), 'coaches')) active @endif @if(!empty($homepage)) anchor-slide @endif"  href="/#coaches" >Coaches</a>
+            <a class=" @if(strpos(url()->full(), 'method')) active @endif @if(!empty($homepage)) anchor-slide @endif"  href="/method" >Method</a>
+            <a class=" @if(strpos(url()->full(), 'songs')) active @endif @if(!empty($homepage)) anchor-slide @endif"  href="/songs" >Songs</a>
+            <a class=" @if(strpos(url()->full(), 'coaches')) active @endif @if(!empty($homepage)) anchor-slide @endif"  href="/coaches" >Coaches</a>
         </div>
 
         <div class="button-wrap">

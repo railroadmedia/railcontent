@@ -3,13 +3,7 @@
     <div class="container max-w-6xl mx-auto">
         <div class="aspect-16:9 cursor-hover rounded-xl autoplay-video overflow-hidden w-full relative -mt-36 sm:-mt-64 lg:-mt-96 mb-20" x-on:click="trailer = true;">
             <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
-            <img
-                class="rounded-xl overflow-hidden inset-0 absolute z-0 transition-opacity opacity-0"
-                src="https://cdn.musora.com/image/fetch/w_2000,q_auto:best/{{ $vidThumb }}"
-                alt="trailer thumb"
-                loading="lazy"
-                onload="this.classList.remove('opacity-0')"
-            >
+            <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0 lazyload" data-src="{{ $vid }}" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
         </div>
         <h2><strong>{!! $header !!}</strong></h2>
         <p class="mt-3 mb-10">{!! $desc !!}</p>
@@ -17,14 +11,14 @@
             @foreach ($gridItems as $key => $gridItem)
                 <div class="w-full sm:w-1/2 lg:w-1/3 px-2 sm:px-3 mb-8">
                     <img
-                        class="rounded-xl mb-4 transition-opacity opacity-0"
+                        class="rounded-xl mb-3 transition-opacity opacity-0"
                         src="https://cdn.musora.com/image/fetch/w_640,q_auto:best/{{ $gridItem['image'] }}"
                         alt="grid{{$key+1}}"
                         loading="lazy"
                         onload="this.classList.remove('opacity-0')"
                     >
-                    <p class="leading-tight">
-                        <strong class="font-black">{{ $gridItem['title'] }}</strong><br> {{ $gridItem['desc'] }}
+                    <p class="leading-normal">
+                        <strong class="font-black inline-block mb-0.5">{{ $gridItem['title'] }}</strong><br> {{ $gridItem['desc'] }}
                     </p>
                 </div>
             @endforeach
