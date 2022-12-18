@@ -106,6 +106,34 @@
             margin-left: -5px;
             margin-bottom: -5px;
         }
+
+        .flip-div .back,
+        .flip-div .back {
+            -ms-transform: rotateY(-180deg)!important;
+            -webkit-transform: rotateY(-180deg)!important;
+            transform: rotateY(-180deg)!important;
+        }
+        .flip-div .front,
+        .flip-div .back {
+            -ms-transition: transform 0.8s!important;
+            -webkit-transition: transform 0.8s!important;
+            transition: transform 0.8s!important;
+            -ms-backface-visibility: hidden!important;
+            -webkit-backface-visibility: hidden!important;
+            backface-visibility: hidden!important;
+        }
+        .flip-div.flipped .front,
+        .flip-div.flipped .front {
+            -ms-transform: rotateY(180deg)!important;
+            -webkit-transform: rotateY(180deg)!important;
+            transform: rotateY(180deg)!important;
+        }
+        .flip-div.flipped .back,
+        .flip-div.flipped .back {
+            -ms-transform: rotateY(0deg)!important;
+            -webkit-transform: rotateY(0deg)!important;
+            transform: rotateY(0deg)!important;
+        }
     </style>
 @stop
 
@@ -198,7 +226,7 @@
     @if(!empty($promoVersion))
         @include('musora.sales.promo-section', [
         'promoLogo' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs.svg',
-           'promoLogoM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs-m.svg',
+           'promoLogoM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs-m.png',
         'desc' => 'Loop, learn, and remove the drums from 5,000+ drumming anthems. ',
            'text' => 'It\'s hard to learn your favorite songs with famous drummers bashing along with you. It covers your mistakes and limits your creativity.<br><br>Enter the NEW Drumeo Songs.<br><br>You can now magically remove the drums from 5,000+ popular drumming anthems. And with note-for-note sheet music, tempo adjustment, and a looping feature you’ll have the ultimate tool for learning songs on the drums.<br><br>And to make your goals easier in 2023 – you’ll also get a FREE pair of Drumeo’s in-ear headphones when you join Drumeo. So you can enjoy unlimited drum lessons, note-for-note song breakdowns, AND protect your ears while playing your favorite songs.<br><br>Click below to grab the deal – or scroll down to try a demo of the NEW Drumeo Songs.',
            'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/collage.png',
@@ -253,8 +281,9 @@
 
     @include('musora.sales.trailer-grid-section', [
         'vid' => 'https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/video-reel.mp4',
-        'header' => 'Your drumming goals start here.',
-        'desc' => 'Always know <em>exactly</em> what to practice with an organized 10-level curriculum featuring many of the world’s best teachers. ',
+        'header' => 'Your drumming goals<br class="inline sm:hidden"> start here.',
+        'desc' => '
+        Always know <em>exactly</em> what to practice with an organized 10-level <br class="hidden sm:inline lg:hidden">curriculum featuring many of the world’s best teachers. ',
     ])
 
     @php
@@ -521,7 +550,94 @@
         'desc' => 'Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence on the drums.',
     ])
     <div class="unstick-trigger block"></div>
-    @include('musora.sales.order-section-collage', [
+
+    @if(!empty($promoVersion))
+
+        @php
+            $bonuses = [
+                [
+                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/pad.jpg',
+                'title' => 'QuietPad',
+                'description' => 'Practice anywhere with two full-size playing surfaces.',
+                'price' => Prices::$quietPadFull,
+                'shipping' => true,
+                ],
+                [
+                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/drumsticks.jpg',
+                'title' => 'Drumeo Drumsticks',
+                'description' => 'Drumeo 5A Drumsticks by Vater -- made with hickory and extra moisture to last longer.',
+                'price' => Prices::$sticksFull,
+                'shipping' => true,
+                ],
+                [
+                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/sd.jpg',
+                'title' => 'Successful Drumming',
+                'description' => 'Jared Falk’s step-by-step curriculum for building a rock-solid foundation on the drums.',
+                'price' => Prices::$sdOnlineFull,
+                'online-ship' => "Instant Access"
+                ],
+                [
+                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/ime.jpg',
+                'title' => 'Independence Made Easy',
+                'description' => 'Jared Falk’s 26-week masterclass to unlock your musicality and freedom on the drums.',
+                'price' => Prices::$imeFull,
+                'online-ship' => "Instant Access"
+                ],
+                [
+                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/rdm.jpg',
+                'title' => 'Rock Drumming Masterclass',
+                'description' => 'Todd Sucherman’s 26-week masterclass to help you improve your rock drumming.',
+                'price' => Prices::$rdmFull,
+                'online-ship' => "Instant Access"
+                ],
+                [
+                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/dtme.jpg',
+                'title' => 'Drum Technique Made Easy',
+                'description' => 'Bruce Becker’s 26-week masterclass to improve your hand & foot technique.',
+                'price' => Prices::$dtmeFull,
+                ],
+                [
+                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/eyd.jpg',
+                'title' => 'Electrify Your Drumming',
+                'description' => 'Your guide to playing 10 styles of electronic dance music - includes 23 play-alongs!',
+                'price' => Prices::$eydFull,
+                'online-ship' => "Instant Access"
+                ],
+                [
+                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/fwtbdf.jpg',
+                'title' => 'Better Drum Fills',
+                'description' => 'The ultimate four-week crash course to playing more creative & musical drum fills.',
+                'price' => Prices::$bdfFull,
+                'online-ship' => "Instant Access"
+                ],
+                [
+                'image' => 'https://cdn.musora.com/image/fetch/c_fill,w_300,q_auto:good/https://drumeo-assets.s3.amazonaws.com/promos/july/tommy_card.jpg',
+                'title' => 'Great Hands For A Lifetime',
+                'description' => 'Tommy Igoe helps you improve your hand strength, speed, stamina, comfort, and control in the drums in four hours of video lessons.',
+                'price' => Prices::$ghfalFull,
+                ],
+                [
+                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/lsf.jpg',
+                'title' => 'Learn Songs Faster',
+                'description' => 'This masterclass will give you proven techniques for learning MORE songs in less time.',
+                'price' => Prices::$learnSongsFasterFull,
+                'online-ship' => "Instant Access"
+                ],
+            ]
+        @endphp
+        @include('musora.sales.order-section-bonuses', [
+        'topImage' => '',
+        'promoLogo' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs.svg',
+        'header' => 'Save 17% + get 10 bonuses<br class="inline sm:hidden"> worth $1342.94',
+        'fullPrice' => '240',
+        'price' => '200',
+        'buttonLink' => '/laravel/public/shopping-cart/api/query?products[DLM]=1,year,1&products[quietpad]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[GHFAL-DIGI]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[learn-songs-faster-pack]=1&locked=true',
+        'subDescription' => '<strong>10 free bonuses.</strong> <br class="inline sm:hidden"><em>only available until january 31st.</em>',
+        'altButtonLink' => '/laravel/public/shopping-cart/api/query?products[DLM]=1,month,1&locked=true',
+        'altPrice' => '29',
+        ])
+    @else
+        @include('musora.sales.order-section-collage', [
         'header' => 'Unlimited drum lessons<br> The world’s best teachers<br> 5000+ popular songs',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Trusted by ' . number_format(31856) . ' students.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Online lessons on every topic.</li>
@@ -530,7 +646,9 @@
         'buttonLink' => '/laravel/public/shopping-cart/api/query?products[DLM]=1,year,1&products[30-day-drummer]=1&products[practicepad]=1&products[Drumeo-VaterSticks]=2&products[BeginnerBook]=1&locked=true',
         'price' => '20',
         'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/august/order_collage.png',
-    ])
+        ])
+    @endif
+
     @include('musora.sales.app-section', [
         'appleLink' => 'https://itunes.apple.com/us/app/musora/id1619053766?ls=1',
         'googleLink' => 'https://play.google.com/store/apps/details?id=com.musoraapp',
@@ -580,6 +698,10 @@
         $(document).ready(function () {
             $('.slick').slick({
                 slidesToShow: 1
+            });
+
+            $('.flip-div').click(function (e) {
+                $(this).toggleClass('flipped');
             });
 
             $('.dropdown').on('click', function(){

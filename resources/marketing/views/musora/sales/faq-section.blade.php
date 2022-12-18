@@ -10,7 +10,7 @@
                         ])
             @endforeach
         </div>
-        <p><strong>Still have questions?</strong> Call us toll-free at 1-800-439-8921, directly at<br>
+        <p><strong>Still have questions?</strong> Call us toll-free at 1-800-439-8921, directly at<br class="hidden sm:inline">
             1-604-855-7605 or start a chat with us in the bottom right corner of any page!</p>
     </div>
 </section>

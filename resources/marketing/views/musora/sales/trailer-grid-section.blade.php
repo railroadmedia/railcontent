@@ -6,10 +6,10 @@
             <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0 lazyload" data-src="{{ $vid }}" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
         </div>
         <h2><strong>{!! $header !!}</strong></h2>
-        <p class="mt-3 mb-10">{!! $desc !!}</p>
+        <p class="mt-2 sm:mt-3 mb-6 sm:mb-10">{!! $desc !!}</p>
         <div class="flex flex-wrap items-start justify-center text-left mb-6">
             @foreach ($gridItems as $key => $gridItem)
-                <div class="w-full sm:w-1/2 lg:w-1/3 px-2 sm:px-3 mb-8">
+                <div class="w-full sm:w-1/2 lg:w-1/3 px-2 sm:px-3 mb-4 sm:mb-8">
                     <img
                         class="rounded-xl mb-3 transition-opacity opacity-0"
                         src="https://cdn.musora.com/image/fetch/w_640,q_auto:best/{{ $gridItem['image'] }}"
@@ -23,7 +23,7 @@
                 </div>
             @endforeach
         </div>
-        <a href="/method" class="mx-1 join outline method smaller">EXPLORE THE METHOD <i class="fas fa-info-circle"></i> </a>
+        <a href="/method" class="mx-1 mb-2 sm:mb-0 join outline method smaller">EXPLORE THE METHOD <i class="fas fa-info-circle"></i> </a>
         <a href="/pricing" class="mx-1 join blue smaller">START FOR FREE <i class="fas fa-arrow-right"></i> </a>
     </div>
 </section>
