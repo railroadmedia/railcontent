@@ -14,7 +14,6 @@ Route::domain('{drumeoDomain}')
     Route::get('/2023-home', [SalesController::class, 'home23'] );
     Route::get('/2023-promo', [SalesController::class, 'promo23'] );
     Route::get('/choose-plan', [SalesController::class, 'plan23'] );
-    Route::get('/method', [SalesController::class, 'method'] );
     Route::get('/anniversary-deal', [SalesController::class, 'sales'] );
     Route::get('/mydrumset', [SalesController::class, 'sales'] );
     Route::get('/student-only', [SalesController::class, 'salesStudents'] );
@@ -25,7 +24,9 @@ Route::domain('{drumeoDomain}')
 
     //    sales pages
     Route::get('/beginner', function () { return view('drumeo.sales.pages.beginner'); });
-    Route::get('/songs', function () { return view('drumeo.sales.pages.songs'); });
+    Route::get('/method', [SalesController::class, 'method'] );
+    Route::get('/songs', [SalesController::class, 'songs'] );
+    Route::get('/coaches', [SalesController::class, 'coaches'] );
     Route::get('/impact', function () { return view('drumeo.sales.pages.impact'); });
     Route::get('/support', function () { return view('drumeo.sales.pages.support'); });
     Route::get('/about', function () { return view('drumeo.sales.pages.about'); });
