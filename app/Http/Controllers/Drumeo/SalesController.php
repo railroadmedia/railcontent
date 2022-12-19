@@ -272,7 +272,21 @@ class SalesController extends BaseController
         $products = $this->productRepository->all();
         $products = array_combine(array_entity_column($products, 'getSku'), $products);
 
-        return view('drumeo.sales.pages.method.method', ['products' => $products, 'theme' => 'drumeo']);
+        return view('drumeo.sales.pages.method.method', ['products' => $products, 'theme' => 'drumeo', 'page' => 'method']);
+    }
+    public function songs()
+    {
+        $products = $this->productRepository->all();
+        $products = array_combine(array_entity_column($products, 'getSku'), $products);
+
+        return view('drumeo.sales.pages.songs.songs', ['products' => $products, 'theme' => 'drumeo', 'page' => 'songs']);
+    }
+    public function coaches()
+    {
+        $products = $this->productRepository->all();
+        $products = array_combine(array_entity_column($products, 'getSku'), $products);
+
+        return view('drumeo.sales.pages.coaches.coaches', ['products' => $products, 'theme' => 'drumeo', 'page' => 'coaches']);
     }
     public function salesStudents()
     {
