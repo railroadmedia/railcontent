@@ -199,7 +199,7 @@
             ],
         ];
     @endphp
-    @include('musora.sales.header-section', [
+    @include('musora.sales.components.header-section', [
         'header' => 'Online drum lessons for all skill levels.',
         'desc' => 'Learn the drums faster with step-by-step lessons, thousands of songs and unlimited personal support.',
         'thumb' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/header-thumb2.jpg',
@@ -211,7 +211,7 @@
     ])
 
     @if(!empty($promoVersion))
-        @include('musora.sales.promo-section', [
+        @include('musora.sales.components.promo-section', [
         'promoLogo' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs.svg',
            'promoLogoM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs-m.png',
         'desc' => 'Loop, learn, and remove the drums from 5,000+ drumming anthems. ',
@@ -221,7 +221,7 @@
            'belowButton' => 'SAVE 17% + GET 10 BONUSES WORTH $1342.94',
        ])
     @else
-        @include('musora.sales.learn-by-playing-section', [
+        @include('musora.sales.components.learn-by-playing-section', [
             'header' => 'Learn the drums by<br class="inline sm:hidden"> <u>playing the drums</u>.',
             'desc' => 'It’s the best feeling in the world –<br><br>Nailing that fill in your favorite song, slamming out the chorus of an all-time classic, or writing your own drum part that locks in with the music… but it’s a process.<br><br>And it starts with learning the skills & techniques you need to play the drums.<br><br>Drumeo makes learning the drums easier by giving you step-by-step lessons anytime & anywhere it fits your schedule. Plus, the groundbreaking NEW Drumeo Songs tool makes playing your favorite songs a reality – with note-for-note breakdowns of 5,000 popular songs.<br><br>You’ll play more. You’ll fall in love with your progress. And you’ll have personalized support every step of the way.<br><br>Scroll down to watch the trailer, see more details, and learn to play like you’ve always wanted!',
             'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/collage2.png',
@@ -265,7 +265,7 @@
         ];
     @endphp
 
-    @include('musora.sales.trailer-grid-section', [
+    @include('musora.sales.components.trailer-grid-section', [
         'vid' => 'https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/video-reel.mp4',
         'header' => 'Your drumming goals<br class="inline sm:hidden"> start here.',
         'desc' => '
@@ -416,7 +416,7 @@
         ];
     @endphp
 
-    @include('musora.sales.coaches-section', [
+    @include('musora.sales.components.coaches-section', [
         'header' => 'Study with the world’s <br class="md:hidden">best drummers.',
         'desc' => 'Amplify your skills with 200+ artist courses + access exclusive live events with drumming legends.'
     ])
@@ -451,7 +451,7 @@
 
         ];
     @endphp
-    @include('musora.sales.songs-section', [
+    @include('musora.sales.components.songs-section', [
         'header' => 'Play your favorite songs.',
         'desc' => 'You’ll have <strong>all the tools you need</strong> to make sure you never miss a beat.',
         'video' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/smells-like-teen-spirit.mp4',
@@ -519,7 +519,7 @@
         ]
     @endphp
     <div id="testimonials" class="anchor"></div>
-    @include('musora.sales.testimonials-section', [
+    @include('musora.sales.components.testimonials-section', [
         'header' => 'Trusted by drummers<br class="inline-block sm:hidden">  everywhere',
         'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738',
         'reviewText' => 'Drumeo is rated 5-stars for price, satisfaction,<br class="inline sm:hidden"> and customer service.',
@@ -530,7 +530,7 @@
         'instagramLink' => 'https://instagram.com/drumeoofficial/',
         'instagram' => '950K',
     ])
-    @include('musora.sales.guarantee-section', [
+    @include('musora.sales.components.guarantee-section', [
         'badge' => 'https://drumeo-assets.s3.amazonaws.com/sales/2022/guarantee.png',
         'header' => '<strong>Happy student guarantee.</strong><br>Test-drive your lessons for 90 days. Zero risk.',
         'desc' => 'Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence on the drums.',
@@ -611,7 +611,7 @@
                 ],
             ]
         @endphp
-        @include('musora.sales.order-section-bonuses', [
+        @include('musora.sales.components.order-section-bonuses', [
         'topImage' => '',
         'promoLogo' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs.svg',
         'header' => 'Save 17% + get 10 bonuses<br class="inline sm:hidden"> worth $1342.94',
@@ -623,7 +623,7 @@
         'altPrice' => '29',
         ])
     @else
-        @include('musora.sales.order-section-collage', [
+        @include('musora.sales.components.order-section-collage', [
         'header' => 'Unlimited drum lessons<br> The world’s best teachers<br> 5000+ popular songs',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Trusted by ' . number_format(31856) . ' students.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Online lessons on every topic.</li>
@@ -635,7 +635,7 @@
         ])
     @endif
 
-    @include('musora.sales.app-section', [
+    @include('musora.sales.components.app-section', [
         'appleLink' => 'https://itunes.apple.com/us/app/musora/id1619053766?ls=1',
         'googleLink' => 'https://play.google.com/store/apps/details?id=com.musoraapp',
         'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/devices.png',
@@ -665,7 +665,7 @@
             ],
         ]
     @endphp
-    @include('musora.sales.faq-section')
+    @include('musora.sales.components.faq-section')
 
     @include('_partials.components.soundslice-modal',[
         'name' => 'soundslice',

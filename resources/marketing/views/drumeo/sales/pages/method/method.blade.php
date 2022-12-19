@@ -114,7 +114,7 @@
 {{--        'video' => '772644658'--}}
 {{--    ])--}}
 
-    @include('musora.sales.order-section-collage', [
+    @include('musora.sales.components.order-section-collage', [
         'header' => 'Unlimited drum lessons<br> The world’s best teachers<br> 5000+ popular songs',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Trusted by 30,000 students.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Online lessons on every topic.</li>
@@ -124,7 +124,7 @@
         'price' => '20',
         'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/august/order_collage.png',
     ])
-    @include('musora.sales.app-section', [
+    @include('musora.sales.components.app-section', [
         'appleLink' => 'https://itunes.apple.com/us/app/musora/id1619053766?ls=1',
         'googleLink' => 'https://play.google.com/store/apps/details?id=com.musoraapp',
         'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/devices.png',
@@ -154,7 +154,7 @@
             ],
         ]
     @endphp
-    @include('musora.sales.faq-section')
+    @include('musora.sales.components.faq-section')
 
     @include("drumeo.sales.partials._footer")
 
