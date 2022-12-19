@@ -27,15 +27,6 @@ class CreateSongsDecember2022 extends Command
      */
     protected $description = 'CreateSongsDecember2022';
 
-    /**
-     * @var DatabaseManager
-     */
-    private $databaseManager;
-
-    /**
-     * @var ContentRepository
-     */
-    private $contentRepository;
 
     /**
      * Create a new command instance.
@@ -43,15 +34,9 @@ class CreateSongsDecember2022 extends Command
      * @param DatabaseManager $databaseManager
      * @param ContentRepository $contentRepository
      */
-    public function __construct(
-        DatabaseManager $databaseManager,
-        ContentRepository $contentRepository
-    )
+    public function __construct()
     {
         parent::__construct();
-
-        $this->databaseManager = $databaseManager;
-        $this->contentRepository = $contentRepository;
     }
 
     /**
@@ -59,24 +44,22 @@ class CreateSongsDecember2022 extends Command
      *
      * @return mixed
      */
-    public function handle()
+    public function handle(ContentRepository $contentRepository)
     {
-//        $songFile = file(base_path('test-to-be-deleted.csv'));
-        $songFile = file(base_path('all-songs-december-2022.csv'));
-        $csv = array_map('str_getcsv', $songFile);
-
+        $csv = array_map(function($v){return str_getcsv($v, ";");}, file(base_path('18-december-songs-import.csv')));
         unset($csv[0]);
 
-        $csv = array_slice($csv, 0, 250);
+        // to be updated in case the csv has more than 2000 songs
+        $csv = array_slice($csv, 0, 2000);
 
         foreach ($csv as $rowIndex => $row) {
             $brand = lcfirst($row[0]);
 
-            $searchAttributes = $row[14] ? ['id' => $row[14]] : [
+            $searchAttributes = array_key_exists(15, $row) ? ['id' => $row[15]] : [
                 'slug' => ContentHelper::slugify($row[2]),
                 'type' => 'song',
                 'status' => 'published',
-                'brand' => lcfirst($row[0]),
+                'brand' => $brand,
                 'album' => $row[3],
             ];
 
@@ -105,7 +88,6 @@ class CreateSongsDecember2022 extends Command
                 var_dump($searchAttributes);
                 continue;
             }
-
             $content = $this->updateOrInsertAndGetFirst('railcontent_content', $searchAttributes,
                 [
                     'slug' => $existingContent ? $existingContent->slug : ContentHelper::slugify($row[2]),
@@ -118,6 +100,7 @@ class CreateSongsDecember2022 extends Command
                     'created_on' => $existingContent ? $existingContent->created_on : Carbon::now()->toDateTimeString(),
                 ]
             );
+
             // fields
             $this->updateOrInsertAndGetFirst(
                 'railcontent_content_fields',
@@ -195,42 +178,49 @@ class CreateSongsDecember2022 extends Command
                 );
             }
 
-            // todo: uncomment once we have proper pdfs and jpgs links
+            // todo: uncomment once we have proper pdfs links
             // pdf download
-            //            $pdfUrlPrefix = '';
-            //            $pdfFileName = $row[8];
-
-            //            $this->info('-------------------------------');
-            //            $this->info($row[0] . $row[1] . $row[2]);
-            //            $this->info($pdfFileName);
-
-            //            if (!empty($pdfFileName)) {
-            //                $this->updateOrInsertAndGetFirst(
-            //                    'railcontent_content_data',
-            //                    [
-            //                        'content_id' => $content->id,
-            //                        'key' => 'resource_url',
-            //                        'position' => 1,
-            //                    ],
-            //                    [
-            //                        'value' => $pdfUrlPrefix . $pdfFileName,
-            //                    ]
-            //                );
-            //                $this->updateOrInsertAndGetFirst(
-            //                    'railcontent_content_data',
-            //                    [
-            //                        'content_id' => $content->id,
-            //                        'key' => 'resource_name',
-            //                        'position' => 1,
-            //                    ],
-            //                    [
-            //                        'value' => 'PDF Sheet Music',
-            //                    ]
-            //                );
-            //            } else {
-            //                $this->info('PDF not found for: ');
-            //                var_dump($row);
-            //            }
+//            $pdfUrlPrefix = 'https://d1923uyy6spedc.cloudfront.net/';
+//            $pdfFileName = $row[8];
+//            $guitareoPdfFileName = ((array_key_exists(14, $row) && $brand == 'guitareo')) ? $row[14] : null;
+//
+//            $this->info('-------------------------------');
+//            $this->info($row[0] . $row[1] . $row[2]);
+//            $this->info($pdfFileName);
+//
+//            if (!empty($pdfFileName)) {
+//                // here it overrides resource_name and resource_url values, if it already finds something on this position and key name
+//                $this->updateOrInsertAndGetFirst(
+//                    'railcontent_content_data',
+//                    [
+//                        'content_id' => $content->id,
+//                        'key' => 'resource_url',
+//                        'position' => 1,
+//                    ],
+//                    [
+//                        'value' => $pdfUrlPrefix . $pdfFileName,
+//                    ]
+//                );
+//                $this->updateOrInsertAndGetFirst(
+//                    'railcontent_content_data',
+//                    [
+//                        'content_id' => $content->id,
+//                        'key' => 'resource_name',
+//                        'position' => 1,
+//                    ],
+//                    [
+//                        'value' => 'PDF Sheet Music',
+//                    ]
+//                );
+//
+//                // todo: if $guitareoPdfFileName -> position 2, PDF Guitareo Sheet Music
+//                // todo: make sure we do not override the position
+//
+//
+//            } else {
+//                $this->info('PDF not found for: ');
+//                var_dump($row);
+//            }
 
             // album art thumbnail
             $albumArtUrlPrefix = 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/';
@@ -269,13 +259,14 @@ class CreateSongsDecember2022 extends Command
             }
 
             // assignment
-            $assignmentChildren = $this->contentRepository->getByParentIdWhereTypeIn($content->id, ['assignment']);
+            $assignmentChildren = $contentRepository->getByParentIdWhereTypeIn($content->id, ['assignment']);
+
             $assignmentSearchAttributes = [
                 'title' => $row[9],
                 'type' => 'assignment',
                 'sort' => 0,
                 'status' => 'published',
-                'brand' => lcfirst($row[0]),
+                'brand' => $brand,
             ];
 
             $existingAssignment = (count($assignmentChildren) == 1) ? $assignmentChildren[0] :
@@ -289,7 +280,7 @@ class CreateSongsDecember2022 extends Command
                     'type' => 'assignment',
                     'sort' => 0,
                     'status' => 'published',
-                    'brand' => lcfirst($row[0]),
+                    'brand' => $brand,
                 ],
                 [
                     'published_on' => ($existingContent && $existingAssignment) ? $existingContent->published_on : Carbon::now()->toDateTimeString(),
