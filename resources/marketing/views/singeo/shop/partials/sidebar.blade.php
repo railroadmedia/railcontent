@@ -1,9 +1,13 @@
-<div class="side-bar sliding-function px-3 md:px-4 lg:px-4 lg:w-1/3 lg:mt-5">
+{{--@php--}}
+{{--    if(!empty($sku) && !empty($productStock[$sku]) && ($category !== 'lessons' && $category !== 'bundles')){--}}
+{{--        $soldOut = $productStock[$sku]->isProductSoldOut();--}}
+{{--    }--}}
+{{--@endphp--}}
+
+<div class="side-bar sliding-function px-3 md:px-4 lg:px-4 lg:w-1/3 lg:mt-5 lg:h-0 mb-4 lg:mb-0">
     <div id="order" class="anchor"></div>
     <div class="side-slide md:border md:border-solid md:rounded-md" style="border-color: #CCD3D3;">
-        {{--<div class="text-center py-2 py-3 hidden lg:inline" style="position:relative;background:#1e1e1e;">--}}
-            {{--<img class="w-auto max-h-12" src="https://singeo.s3.amazonaws.com/sales/promos/november/xm-logo2021.png">--}}
-        {{--</div>--}}
+        @include('_partials.layout.holiday.shop-sidebar-banner')
 
         <div class="active pt-2 px-5 pb-6 text-center md:py-6 md:px-4">
             @if(!empty($instructor))
@@ -15,43 +19,54 @@
 
             @if(isset($fullPrice) && isset($price) && ($fullPrice - $price) > 0)
                 <p class="text-singeo text-center font-bold text-sm leading-none mb-1 md:text-base">Save {{ round(100 - (100 * ($price / $fullPrice))) }}%</p>
-                <h1 class="text-center text-4xl no-leading uppercase md:text-3xl"><s class="opacity-40 text-2xl">${{ $fullPrice }}</s>
+                <h1 class="text-center text-4xl no-leading uppercase md:text-3xl"><s class="opacity-40 text-2xl">${{ floatVal($fullPrice) }}</s>
                     @if(number_format($price, 2) == intval($price))
-                        <strong class="font-black text-singeo">$<span class="text-singeo chosen-variant-price-float">{{  $price  }}</span></strong>
+                        <strong class="font-black text-singeo">$<span class="text-singeo chosen-variant-price-float">{{  floatVal($price)  }}</span></strong>
                     @else
-                        <strong class="font-black text-singeo">$<span class="text-singeo chosen-variant-price-float">{{  number_format($price, 2)  }}</span></strong>
+                        <strong class="font-black text-singeo">$<span class="text-singeo chosen-variant-price-float">{{  floatVal(number_format($price, 2))  }}</span></strong>
                     @endif
                 </h1>
             @elseif(isset($price))
-                <h1 class="text-center text-4xl no-leading uppercase md:text-3xl"><strong class="font-black text-singeo">Only $<span class="text-singeo chosen-variant-price-float">{{ $price }}</span></strong></h1>
+                <h1 class="text-center text-4xl no-leading uppercase md:text-3xl"><strong class="font-black text-singeo">Only $<span class="text-singeo chosen-variant-price-float">{{ floatVal($price) }}</span></strong></h1>
             @endif
 
             @if(!empty($specialText))
                 <p class="text-center text-sm leading-none mb-1 md:text-base italic" style="color: #F71B26;">{!! $specialText  !!}</p>
             @endif
 
-            @if(empty($soldOut))
-                @if(empty($bundle) && empty($options))
+            @if(!empty($soldOut) && $soldOut)
+                <button class="border-none join sold-out">
+                    SOLD OUT
+                </button>
+            @else
+                @if($category !== 'bundles' && count($sizes) === 0 && !$bundle)
                     <a
                         class="online-atc vue-add-to-cart"
-                        href="/ecommerce/add-to-cart?redirect=/shop&products[{{ $sku }}]=1"
-                        data-base-url="/ecommerce/add-to-cart?redirect=/shop&products[{{ $sku }}]=1"
-                        data-product-json='{"{{ $sku }}": 1}'
+                        href="/ecommerce/add-to-cart?redirect=/shop&products[{!! $sku !!}]=1"
+                        data-base-url="/ecommerce/add-to-cart?redirect=/shop&products[{!! $sku !!}]=1"
+                        data-product-json='{"{!! $sku !!}": 1}'
                     >
                         <button class="border-none join"><i class="fas fa-cart-plus"></i> Add To Cart</button>
                     </a>
+                @elseif($bundle)
+                    <a class="online-atc" href="/ecommerce/add-to-cart?redirect=/order&{!! $sku !!}"
+                       data-base-url="/ecommerce/add-to-cart?redirect=/order&{!! $sku !!}">
+                        <button class="border-none join"><i class="fas fa-cart-plus"></i> Order Now</button>
+                    </a>
                 @endif
 
-                @if(!empty($options))
+                @if(!empty($sizes) && count($sizes) > 0)
                     <select class="pack-pick uppercase border-2 border-solid rounded-full font-bold text-xl w-full  h-auto py-2 pl-7 pr-5 bg-white md:py-2 lg:py-4" title="Shirt Size" required style="border-color: #717D80; color: #717D80; font-family: Roboto Condensed, sans-serif;">
                         <option hidden value="">@if(!empty($optionText)) {{ $optionText }} @else Choose Size @endif</option>
-                        @foreach($variations as $variant)
+                        @foreach($sizes as $size)
                             <option
-                                @if(isset($variant->soldOut) && $variant->soldOut) disabled @endif
-                                value="{{$variant->sku}}"
-                                data-price="{{$variant->price ?? 0}}"
-                                data-product-json='{"{{$variant->sku}}": 1}'
-                            >{{ $variant->name }}</option>
+                                @if($products[$sku.'-'.($size_case_sensitive ? strtolower($size->code) : $size->code)]->getPublicStockCount() === 0) disabled @endif
+                                value="@if(!empty($sku)){{$sku}}-@endif{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}"
+                                data-price="{{!empty($size->price) ? $size->price : $price}}"
+                                data-product-json='{"@if(!empty($sku)){{$sku}}-@endif{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}": 1}'
+                            >
+                                {{ $size->name }}
+                            </option>
                         @endforeach
                     </select>
 
@@ -71,17 +86,6 @@
                         </button>
                     </a>
                 @endif
-
-                @if(!empty($bundle))
-                    <a class="online-atc" href="/ecommerce/add-to-cart?redirect=/order&{{ $sku }}"
-                            data-base-url="/ecommerce/add-to-cart?redirect=/order&{{ $sku }}">
-                        <button class="border-none join"><i class="fas fa-cart-plus"></i> Order Now</button>
-                    </a>
-                @endif
-            @else
-                <button class="border-none join sold-out">
-                    SOLD OUT
-                </button>
             @endif
             <p class="italic text-xs leading-normal text-center mx-auto">
                 @if(!empty($freeShipping))
@@ -89,7 +93,7 @@
                 @endif
                 You can also order by phone toll-free at<br class="hidden sm:inline">
                 <a class="text-singeo" href="tel:1-800-439-8921">1-800-439-8921</a> or directly at
-                <a class="text-singeo" href="tel:1-604-855-7605">1-604-855-7605</a>. 
+                <a class="text-singeo" href="tel:1-604-855-7605">1-604-855-7605</a>.
             </p>
         </div>
         @if(!empty($guaranteeBadge))

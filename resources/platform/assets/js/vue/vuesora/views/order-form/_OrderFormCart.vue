@@ -1,22 +1,25 @@
 <template>
     <div class="flex flex-column pv-2 mb-1">
+
         <order-form-cart-item
             v-for="item in cartItems"
+            :cartDataUrl="cartDataUrl"
             :key="item.sku"
             :theme-color="themeColor"
             :item="item"
             :is-cart-locked="isCartLocked"
             @updateCartItem="emitUpdateCartItem"
-        ></order-form-cart-item>
+        />
 
         <order-form-cart-item
             v-for="item in bonuses"
+            :cartDataUrl="cartDataUrl"
             :key="item.sku"
             :theme-color="themeColor"
             :item="item"
             :is-cart-locked="isCartLocked"
             @updateCartItem="emitUpdateCartItem"
-        ></order-form-cart-item>
+        />
 
         <h4
             v-show="cartItems.length == 0"
@@ -41,6 +44,10 @@ export default {
         cartItems: {
             type: Array,
             default: () => [],
+        },
+        
+        cartDataUrl: {
+            type: String,
         },
 
         isCartLocked: {

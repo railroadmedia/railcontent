@@ -14,6 +14,7 @@ use App\Console\Commands\PopulateUserMinutesPracticedPerBrand;
 use App\Console\Commands\PopulateUserRolesTable;
 use App\Console\Commands\PopulateUserTotalXpPerBrand;
 use App\Console\Commands\RepairUserProductsFromReferral;
+use App\Console\Commands\RepairUserProgressStartedOn;
 use App\Console\Commands\RepairVimeoDurations;
 use App\Console\Commands\RunMWPPhaseOneLaunchMigrations;
 use App\Console\Commands\SeedLiveAndScheduledContent;
@@ -43,6 +44,7 @@ class Kernel extends ConsoleKernel
         TestLessonsDescriptionUrls::class,
 	    MigratePianoteSongTutorial::class,
         CreateSongsDecember2022::class,
+        RepairUserProgressStartedOn::class,
     ];
 
     /**

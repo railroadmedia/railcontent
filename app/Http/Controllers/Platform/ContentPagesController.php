@@ -284,11 +284,10 @@ class ContentPagesController extends BaseController
             );
 
         $childrenContentResultsEntity = new ContentFilterResultsEntity(['results' => $childrenContent]);
+        $childrenLabel = config('railcontent.children_name_mapping')[brand()][$firstLevelContent['type']] ?? 'lessons';
+        $infoData["$childrenLabel"] = count($childrenContentResultsEntity->results());
 
-        $infoData = [
-            "courses" => count($childrenContentResultsEntity),
-            "xp" => $firstLevelContent->fetch('xp', 0),
-        ];
+        $infoData['xp'] = $firstLevelContent->fetch('total_xp', 0);
 
         $nextLessonUrl = $nextContentForUser['url'] ?? '';
         $nextLessonJson = $nextContentForUser ?? null;
@@ -1032,6 +1031,7 @@ class ContentPagesController extends BaseController
         $packs[] =
             $this->contentService->getBySlugAndType('guitar-system', 'pack')
                 ->first();
+        $packs = array_values(array_filter($packs));
 
         $guitarQuestPack =
             $this->contentService->getBySlugAndType('guitar-quest', 'pack')

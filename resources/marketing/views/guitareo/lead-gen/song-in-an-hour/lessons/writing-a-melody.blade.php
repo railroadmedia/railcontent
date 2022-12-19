@@ -6,9 +6,7 @@
     Writing A Melody
 @stop
 
-@section('video')
-    <iframe class="tw-absolute tw-w-full tw-h-full" src="//player.vimeo.com/video/488587514" frameborder="0" allowfullscreen></iframe>
-@stop
+@section('video', '488587514')
 
 @section('lesson-number', 'Bonus Lesson')
 

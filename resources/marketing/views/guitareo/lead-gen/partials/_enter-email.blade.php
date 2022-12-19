@@ -5,13 +5,13 @@
         {!! $text !!}
 
         @if(!empty($submitButtonColor))
-            @include("lead-gen.partials._sign-up-form-tw", [
+            @include("guitareo.lead-gen.partials._sign-up-form-tw", [
                 "formId" => $formId,
                 "formName" => $formName,
                 "submitButtonColor" => $submitButtonColor,
             ])
         @else
-            @include("lead-gen.partials._sign-up-form-tw", [
+            @include("guitareo.lead-gen.partials._sign-up-form-tw", [
                 "formId" => $formId,
                 "formName" => $formName,
             ])

@@ -40,7 +40,8 @@ class SearchService
 
         $types = $this->getContentTypes();
         $statuses = ConfigService::$indexableContentStatuses;
-        $query = Content::query()->whereStatuses($statuses)->whereTypes($types)->orderBy('id');
+        $query = Content::query()->select(['id', 'slug', 'title', 'brand', 'status', 'type', 'published_on'])
+            ->whereStatuses($statuses)->whereTypes($types)->orderBy('id');
 
         $query->chunk(1000, function ($query) {
             $contentRows = $query->toArray();

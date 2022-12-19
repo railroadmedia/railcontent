@@ -71,7 +71,7 @@
                             <h1 class="text-center text-3xl uppercase md:text-4xl">
                                 <strong class="font-black">$<span class="chosen-variant-price-float">29</span></strong>
                             </h1>
-                            <select class="pack-pick mx-auto mt-4 border-2 rounded-full font-bold text-xl uppercase w-full h-auto py-2 pr-7 pl-5 bg-white md:py-2 lg:py-4" style="border-color: #717D80; color:#717D80; font-family: Roboto Condensed, sans-serif" title="Shirt Size" required>
+                            <select class="pack-pick2 mx-auto mt-4 border-2 rounded-full font-bold text-xl uppercase w-full h-auto py-2 pr-7 pl-5 bg-white md:py-2 lg:py-4" style="border-color: #717D80; color:#717D80; font-family: Roboto Condensed, sans-serif" title="Shirt Size" required>
                                 <option hidden value="">Pick duration</option>
                                 @foreach($variations as $variant)
                                     <option
@@ -84,9 +84,9 @@
                                 @endforeach
                             </select>
                             <a
-                                class="online-atc merch vue-add-to-cart selected-pack"
+                                class="online-atc merch vue-add-to-cart selected-pack2"
                                 href="#"
-                                data-base-url="/laravel/public/shopping-cart/api/query?go-back-to-shop=true"
+                                data-base-url="https://www.drumeo.com/laravel/public/shopping-cart/api/query?locked=true"
                             >
                                 <button class="join border-none mt-2 mb-4 w-full" style="background: #000;font: 400 20px/1em 'Bebas Neue', sans-serif !important;">
                                     <i class="fas fa-cart-plus text-2xl mr-1"></i> Add To Cart
@@ -124,8 +124,43 @@
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/drumeo/ba-bbq.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/drumeo/pack-drumshop.js') }}"></script>
-    <script src="{{ asset('marketing/js/drumeo/manifest.js') }}"></script>
-    <script src="{{ asset('marketing/js/drumeo/vendor.js') }}"></script>
-    <script src="{{ asset('marketing/js/drumeo/cart-sidebar.js') }}"></script>
-    <script src="{{ asset('marketing/js/drumeo/app.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            //customize section pack picker
+            var originalLink2 = 'https://www.drumeo.com/laravel/public/shopping-cart/api/query?locked=true';
+
+            $('select').prop('selectedIndex', 0);
+            $('.pack-pick2').change(function () {
+                var orderButton = $(this).parent().find('.selected-pack2');
+                var selectedOption = $(this).find('option:selected');
+                var selectedPrice = $(selectedOption).data('price');
+                var variantPriceSpanElement = $(this).parent().find('.chosen-variant-price-float2');
+
+                variantPriceSpanElement.html(selectedPrice);
+
+                $(this).removeClass('error');
+                orderButton.addClass('active');
+                orderButton.attr('href', originalLink2);
+                orderButton.attr('href', orderButton.attr('href') + '&products[' + selectedOption.val() + ']=1');
+                orderButton.attr('data-product-json', selectedOption.attr('data-product-json'));
+            });
+
+            $('.selected-pack2').on('click', function (ev) {
+                if (!$(this).hasClass('active')) {
+                    ev.preventDefault();
+                    ev.stopPropagation();
+                    var selecter = $(this).parent().find('.pack-pick2');
+                    selecter.addClass('error');
+                }
+            });
+
+        });
+
+    </script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/sliding-anchor.js') }}"></script>
+
+    {{-- Platform --}}
+    <script src="{{ mix('/platform/js/manifest.js') }}"></script>
+    <script src="{{ mix('/platform/js/vendor.js') }}"></script>
+    <script src="{{ mix('/platform/js/app.js') }}"></script>
 @endsection

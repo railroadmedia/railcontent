@@ -1,8 +1,6 @@
-@extends('singeo._partials.layout')
+@extends('singeo._partials.global-layout')
 
-@section('head-includes')
-    @parent
-
+@section('global-head')
     <title>Singing Starter Kit | Singeo</title>
     <meta property="og:title" content="Singing Starter Kit | Singeo">
 
@@ -13,173 +11,92 @@
     <meta property="og:url" content="https://www.singeo.com/{{ Request::path() }}">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link href="{{ asset('/assets/marketing/nav-footer.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('/assets/css/tailwind-helpers.css') }}">
-    <link href="{{ asset('/assets/css/animate.css') }}" rel="stylesheet">
-    <link href="{{ asset('/assets/marketing/singing-starter-kit.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/marketing/css/singeo/tailwind-helpers.css') }}">
+    <link href="{{ asset('/marketing/css/animate.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/singeo/singing-starter-kit.css') }}" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css"/>
 @stop
 
-@section('layout-body')
+@section('global-body')
     @include("singeo.sales.partials._nav", [
         "cartVersion" => true
     ])
 
     {{--@include('shop.partials.promo-banner', [--}}
                 {{--"name" => "Singing Starter Kit",--}}
-                {{--"fullPrice" => App\Prices::$singingStarterKitFull,--}}
-                {{--"price" => App\Prices::$singingStarterKit,--}}
+                {{--"fullPrice" => SingeoPrices::$singingStarterKitFull,--}}
+                {{--"price" => SingeoPrices::$singingStarterKit,--}}
                 {{--"noBreadcrumb" => true--}}
             {{--])--}}
     @yield('topbar')
 
-    <header class="text-center text-white py-5 md:py-8 bg-top bg-no-repeat relative" style="background-color:#000419;background-image: url(https://cdn.musora.com/image/fetch/w_1900,q_auto:best/https://singeo.s3.amazonaws.com/products/singing-starter-kit/header.jpg);">
+    <header class="text-center text-white py-5 md:py-8 bg-top bg-no-repeat relative" style="background-color:#000419;background-image: url(https://cdn.musora.com/image/fetch/w_1900,q_auto:best/https://singeo.s3.amazonaws.com/products/singing-starter-kit/header2.jpg);">
         <div class="container mx-auto relative z-10">
             <i class="fas fa-play play-button autoplay-video mt-40 md:mt-56 lg:mt-64 mb-3 md:mb-3" data-open="trailer"></i><br>
             <img class="h-20 md:h-32 lg:h-40" src="https://cdn.musora.com/image/fetch/w_980,q_auto:best/https://singeo.s3.amazonaws.com/products/singing-starter-kit/logo.png"><br>
             <h4 class="mt-2 mb-5">Everything You Need To Start Singing Now</h4>
             <a class="join" href="@yield('order-link')">START SINGING FOR
-                @if($productPrice < \App\Prices::$singingStarterKitFull)
-                    <s class="opacity-50">${{ \App\Prices::$singingStarterKitFull }}</s>
+                @if($productPrice < SingeoPrices::$singingStarterKitFull)
+                    <s class="opacity-50">${{ SingeoPrices::$singingStarterKitFull }}</s>
                 @endif
                 ${{ $productPrice }} </a>
+            <h6 class="font-bebas text-yellow-400 mt-5">
+                @if($productPrice < SingeoPrices::$singingStarterKitFull)
+                    SAVE {{ round(100 - (100 * ($productPrice / SingeoPrices::$singingStarterKitFull))) }}% <br>
+                @endif
+                <span class="text-white">** 90-DAY GUARANTEE**</span></h6>
         </div>
     </header>
 
     @yield('banner')
 
-    <section class="text-center text-white py-10 md:py-20 lg:py-24 relative overflow-hidden" style="background:#000419;">
-        <div class="container mx-auto z-10 relative">
-            <div class="mx-auto px-5" style="max-width:730px">
-                <p class="leading-normal">Every voice. Any Age. Any Style. If you can speak, you <strong>CAN</strong> sing!
-                    <br><br>
-                    Like ANY instrument, singing takes time, training and practice.  So, you <strong>CAN</strong> sing… you just might need a bit of guidance on <strong>how</strong> to sing. And the Singing Starter Kit is the perfect way to start your singing journey!
-                    <br><br>
-                    This course will build your vocal strength, give you more pitch control, and help you gain confidence about singing from the VERY. FIRST. LESSON!
-                    <br><br>
-                    These lessons are online - So you never have to stress or worry about singing in front of anyone, and you can do them at your own pace somewhere you feel comfortable singing.
-                    <br><br>
-                    And when you have questions, you can always reach out to us and get the support you need.
-                    <br><br>
-                    The Singing Starter Kit will show you what singing is really about. Discover what your unique singing voice sounds like as you begin to develop strength, control, and confidence!
-                </p>
+    <section class="text-white sm:px-5 sm:py-12 relative" style="background:#000419;">
+        <div class="container mx-auto relative max-w-5xl">
+            <div class="py-6 sm:py-8 lg:py-14 px-4 sm:px-5 lg:px-10 bg-cover overflow-hidden sm:rounded-2xl bg-center sm:bg-left lazyload" {{--style="background-position: 60% 50%;"--}} data-bg="https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://singeo.s3.amazonaws.com/products/singing-starter-kit/intro2.jpg">
+                <div class="w-full sm:w-3/5 lg:w-1/2 relative z-10">
+                    <p class="leading-tight text-left">Start your singing journey the <em>right</em> way with The Singing Starter Kit.
+                        <br><br>
+                        Get rid of all the guesswork and frustration as you follow along with 6 step-by-step lessons to discover your beautiful, unique voice.
+                        <br><br>
+                        Use “The Most Important Vocal Exercise” to warm up your voice, and unlock the “Singer’s Secret Weapon” that will <em>instantly</em> make you sound better.
+                        <br><br>
+                        Plus you’ll have support and feedback from real teachers to help you at every turn.
+                        <br><br>
+                        The hardest part of any journey is the first step…
+                        <br><br>
+                        Take yours with confidence thanks to our 90-day guarantee and start singing today.
+                    </p>
+                    <a class="join smaller mt-5 w-full sm:w-2/3" href="/ecommerce/add-to-cart?products[singing-starter-kit]=1&redirect=/order">START SINGING &raquo;</a>
+                </div>
+                <div class="hidden sm:block absolute inset-0 z-0" style="background:linear-gradient(to right, #000419, transparent);"></div>
+                <div class="block sm:hidden absolute inset-0 z-0" style="background:rgba(0,4,25,0.6);"></div>
             </div>
         </div>
-        <img class="w-44 md:w-64 lg:w-80 z-0 absolute left-0 top-1/2 lazyload" style="margin-left: -50px;transform: translate(0, -50%);" data-src="https://cdn.musora.com/image/fetch/w_640,q_auto:best/https://singeo.s3.amazonaws.com/products/singing-starter-kit/mic.png">
-        <img class="w-40 md:w-60 lg:w-72 z-0 absolute right-0 top-1/2 lazyload" style="margin-right: -60px;transform: translate(0, -50%);" data-src="https://cdn.musora.com/image/fetch/w_580,q_auto:best/https://singeo.s3.amazonaws.com/products/singing-starter-kit/notes.png">
     </section>
 
     <section class="text-center text-white py-10 md:py-20 lg:py-24 overflow-hidden" style="background:#000419;">
         <div class="container mx-auto">
-            <div class="slick-1 text-left mx-auto w-full" style="max-width:1024px; margin-bottom: 0;">
-                <div class="px-5">
+            <div class="text-left mx-auto w-full" style="max-width:1024px; margin-bottom: 0;">
+                <div class="px-5 mb-6 sm:mb-20">
                     <div class="md:flex flex-wrap items-start md:items-center">
-                        <div class="w-full md:w-3/5 lg:w-1/2 mb-4 md:mb-0 md:pr-10 lg:pr-12 pt-7">
-                            <h3 class="text-purple-gradient leading-normal"><strong>Welcome To The Singing Starter Kit!</strong></h3>
-                            <p class="leading-relaxed mt-3 md:mt-5">Get ready to sing! These are your first steps towards confident singing! This video will tell you exactly what to expect and what you will need as you move forward through these lessons.</p>
-
-                        </div>
                         <div class="w-full md:w-2/5 lg:w-1/2 px-5 md:px-0 relative">
                             <h1 class="text-singeo absolute bottom-0 text-7xl lg:text-9xl -left-5 lg:-left-10 font-hey-august text-pink-gradient"><strong>01</strong></h1>
                             <img class="rounded-3xl" src="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://singeo.s3.amazonaws.com/products/singing-starter-kit/introduction.jpg">
                         </div>
-                    </div>
-                </div>
-                <div class="px-5">
-                    <div class="md:flex flex-wrap items-start md:items-center">
-                        <div class="w-full md:w-3/5 lg:w-1/2 mb-4 md:mb-0 md:pr-10 lg:pr-12 pt-7">
-                            <h3 class="text-purple-gradient leading-normal"><strong>3 MUST-KNOW Singing Basics!</strong></h3>
-                            <p class="leading-relaxed mt-3 md:mt-5">Let’s make some noise. This video will uncover some simple, yet very impactful tips and exercises for singing. Even as a beginner, you will be gaining valuable knowledge that some seasoned singers don’t even know.</p>
-
-                        </div>
-                        <div class="w-full md:w-2/5 lg:w-1/2 px-5 md:px-0 relative">
-                            <h1 class="text-singeo absolute bottom-0 text-7xl lg:text-9xl -left-5 lg:-left-10 font-hey-august text-pink-gradient"><strong>02</strong></h1>
-                            <img class="rounded-3xl" src="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://singeo.s3.amazonaws.com/products/singing-starter-kit/lesson1.jpg"></div>
-                    </div>
-                </div>
-                <div class="px-5">
-                    <div class="md:flex flex-wrap items-start md:items-center">
-                        <div class="w-full md:w-3/5 lg:w-1/2 mb-4 md:mb-0 md:pr-10 lg:pr-12 pt-7">
-                            <h3 class="text-purple-gradient leading-normal"><strong>Understanding Your Unique Voice!</strong></h3>
-                            <p class="leading-relaxed mt-3 md:mt-5">One of the most valuable lessons you can understand and embrace as a singer, is that your voice is completely and utterly unique to YOU!  This video will reveal your unique voice and why you should be excited to learn and understand the beauty of being “different”.</p>
-
-                        </div>
-                        <div class="w-full md:w-2/5 lg:w-1/2 px-5 md:px-0 relative">
-                            <h1 class="text-singeo absolute bottom-0 text-7xl lg:text-9xl -left-5 lg:-left-10 font-hey-august text-pink-gradient"><strong>03</strong></h1>
-                            <img class="rounded-3xl" src="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://singeo.s3.amazonaws.com/products/singing-starter-kit/lesson2.jpg"></div>
-                    </div>
-                </div>
-                <div class="px-5">
-                    <div class="md:flex flex-wrap items-start md:items-center">
-                        <div class="w-full md:w-3/5 lg:w-1/2 mb-4 md:mb-0 md:pr-10 lg:pr-12 pt-7">
-                            <h3 class="text-purple-gradient leading-normal"><strong>The Most Important Vocal Exercise</strong></h3>
-                            <p class="leading-relaxed mt-3 md:mt-5">This vocal exercise will have you giggling and feeling a bit ridiculous… which is good (laughing is healthy!). It’s also normal, and with some practice you will notice your voice getting stronger from this powerful exercise!</p>
-
-                        </div>
-                        <div class="w-full md:w-2/5 lg:w-1/2 px-5 md:px-0 relative">
-                            <h1 class="text-singeo absolute bottom-0 text-7xl lg:text-9xl -left-5 lg:-left-10 font-hey-august text-pink-gradient"><strong>04</strong></h1>
-                            <img class="rounded-3xl" src="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://singeo.s3.amazonaws.com/products/singing-starter-kit/lesson3.jpg"></div>
-                    </div>
-                </div>
-                <div class="px-5">
-                    <div class="md:flex flex-wrap items-start md:items-center">
-                        <div class="w-full md:w-3/5 lg:w-1/2 mb-4 md:mb-0 md:pr-10 lg:pr-12 pt-7">
-                            <h3 class="text-purple-gradient leading-normal"><strong>Sing Songs Better!</strong></h3>
-                            <p class="leading-relaxed mt-3 md:mt-5">SONGS! That’s the goal, right?  We all want to sing songs! This video will show you the best way to approach singing your favorite songs… and maybe surprise your friends at the next karaoke night.</p>
-
-                        </div>
-                        <div class="w-full md:w-2/5 lg:w-1/2 px-5 md:px-0 relative">
-                            <h1 class="text-singeo absolute bottom-0 text-7xl lg:text-9xl -left-5 lg:-left-10 font-hey-august text-pink-gradient"><strong>05</strong></h1>
-                            <img class="rounded-3xl" src="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://singeo.s3.amazonaws.com/products/singing-starter-kit/lesson4.jpg"></div>
-                    </div>
-                </div>
-                <div class="px-5">
-                    <div class="md:flex flex-wrap items-start md:items-center">
-                        <div class="w-full md:w-3/5 lg:w-1/2 mb-4 md:mb-0 md:pr-10 lg:pr-12 pt-7">
-                            <h3 class="text-purple-gradient leading-normal"><strong>Singer’s Secret Weapon!</strong></h3>
-                            <p class="leading-relaxed mt-3 md:mt-5">This truly is a game-changer when it comes to singing. The singer’s secret weapon will change the way you look at singing forever! And it will also change the way you sing… for the better!</p>
-
-                        </div>
-                        <div class="w-full md:w-2/5 lg:w-1/2 px-5 md:px-0 relative">
-                            <h1 class="text-singeo absolute bottom-0 text-7xl lg:text-9xl -left-5 lg:-left-10 font-hey-august text-pink-gradient"><strong>06</strong></h1>
-                            <img class="rounded-3xl" src="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://singeo.s3.amazonaws.com/products/singing-starter-kit/lesson5.jpg"></div>
-                    </div>
-                </div>
-                <div class="px-5">
-                    <div class="md:flex flex-wrap items-start md:items-center">
-                        <div class="w-full md:w-3/5 lg:w-1/2 mb-4 md:mb-0 md:pr-10 lg:pr-12 pt-7">
-                            <h3 class="text-purple-gradient leading-normal"><strong>Congratulations!</strong></h3>
-                            <p class="leading-relaxed mt-3 md:mt-5">Congratulations you’ve just successfully kickstarted your singing journey! This video will give you some helpful pointers for you to move forward as a singer and keep your voice in shape.</p>
-
-                        </div>
-                        <div class="w-full md:w-2/5 lg:w-1/2 px-5 md:px-0 relative">
-                            <h1 class="text-singeo absolute bottom-0 text-7xl lg:text-9xl -left-5 lg:-left-10 font-hey-august text-pink-gradient"><strong>07</strong></h1>
-                            <img class="rounded-3xl" src="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://singeo.s3.amazonaws.com/products/singing-starter-kit/lesson6.jpg"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="inline-block md:hidden text-left mx-auto w-full" style="max-width:1200px; margin-bottom: 0;">
-                {{--paste all above in here for mobile--}}
-                <div class="px-5 mb-12">
-                    <div class="w-full md:w-2/5 lg:w-1/2 px-5 md:px-0 relative">
-                        <h1 class="text-singeo absolute bottom-0 text-7xl lg:text-9xl -left-1 lg:-left-10 font-hey-august text-pink-gradient"><strong>01</strong></h1>
-                        <img class="rounded-3xl" src="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://singeo.s3.amazonaws.com/products/singing-starter-kit/introduction.jpg">
-                    </div>
-                    <div class="md:flex flex-wrap items-start md:items-center">
-                        <div class="w-full md:w-3/5 lg:w-1/2 mb-4 md:mb-0 md:pr-10 lg:pr-12 pt-7">
+                        <div class="w-full md:w-3/5 lg:w-1/2 mb-4 md:mb-0 md:pl-10 lg:pl-12 pt-7">
                             <h3 class="text-purple-gradient leading-normal"><strong>Welcome To The Singing Starter Kit!</strong></h3>
                             <p class="leading-relaxed mt-3 md:mt-5">Get ready to sing! These are your first steps towards confident singing! This video will tell you exactly what to expect and what you will need as you move forward through these lessons.</p>
 
                         </div>
                     </div>
                 </div>
-                <div class="px-5 mb-12">
+                <div class="px-5 mb-6 sm:mb-20">
                     <div class="md:flex flex-wrap items-start md:items-center">
-                        <div class="w-full md:w-2/5 lg:w-1/2 px-5 md:px-0 relative">
-                            <h1 class="text-singeo absolute bottom-0 text-7xl lg:text-9xl -left-1 lg:-left-10 font-hey-august text-pink-gradient"><strong>02</strong></h1>
+                        <div class="w-full md:w-2/5 lg:w-1/2 px-5 md:px-0 relative sm:order-2">
+                            <h1 class="text-singeo absolute bottom-0 text-7xl lg:text-9xl -left-5 lg:-left-10 font-hey-august text-pink-gradient"><strong>02</strong></h1>
                             <img class="rounded-3xl" src="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://singeo.s3.amazonaws.com/products/singing-starter-kit/lesson1.jpg"></div>
                         <div class="w-full md:w-3/5 lg:w-1/2 mb-4 md:mb-0 md:pr-10 lg:pr-12 pt-7">
                             <h3 class="text-purple-gradient leading-normal"><strong>3 MUST-KNOW Singing Basics!</strong></h3>
@@ -188,22 +105,22 @@
                         </div>
                     </div>
                 </div>
-                <div class="px-5 mb-12">
+                <div class="px-5 mb-6 sm:mb-20">
                     <div class="md:flex flex-wrap items-start md:items-center">
                         <div class="w-full md:w-2/5 lg:w-1/2 px-5 md:px-0 relative">
-                            <h1 class="text-singeo absolute bottom-0 text-7xl lg:text-9xl -left-1 lg:-left-10 font-hey-august text-pink-gradient"><strong>03</strong></h1>
+                            <h1 class="text-singeo absolute bottom-0 text-7xl lg:text-9xl -left-5 lg:-left-10 font-hey-august text-pink-gradient"><strong>03</strong></h1>
                             <img class="rounded-3xl" src="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://singeo.s3.amazonaws.com/products/singing-starter-kit/lesson2.jpg"></div>
-                        <div class="w-full md:w-3/5 lg:w-1/2 mb-4 md:mb-0 md:pr-10 lg:pr-12 pt-7">
+                        <div class="w-full md:w-3/5 lg:w-1/2 mb-4 md:mb-0 md:pl-10 lg:pl-12 pt-7">
                             <h3 class="text-purple-gradient leading-normal"><strong>Understanding Your Unique Voice!</strong></h3>
                             <p class="leading-relaxed mt-3 md:mt-5">One of the most valuable lessons you can understand and embrace as a singer, is that your voice is completely and utterly unique to YOU!  This video will reveal your unique voice and why you should be excited to learn and understand the beauty of being “different”.</p>
 
                         </div>
                     </div>
                 </div>
-                <div class="px-5 mb-12">
+                <div class="px-5 mb-6 sm:mb-20">
                     <div class="md:flex flex-wrap items-start md:items-center">
-                        <div class="w-full md:w-2/5 lg:w-1/2 px-5 md:px-0 relative">
-                            <h1 class="text-singeo absolute bottom-0 text-7xl lg:text-9xl -left-1 lg:-left-10 font-hey-august text-pink-gradient"><strong>04</strong></h1>
+                        <div class="w-full md:w-2/5 lg:w-1/2 px-5 md:px-0 relative sm:order-2">
+                            <h1 class="text-singeo absolute bottom-0 text-7xl lg:text-9xl -left-5 lg:-left-10 font-hey-august text-pink-gradient"><strong>04</strong></h1>
                             <img class="rounded-3xl" src="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://singeo.s3.amazonaws.com/products/singing-starter-kit/lesson3.jpg"></div>
                         <div class="w-full md:w-3/5 lg:w-1/2 mb-4 md:mb-0 md:pr-10 lg:pr-12 pt-7">
                             <h3 class="text-purple-gradient leading-normal"><strong>The Most Important Vocal Exercise</strong></h3>
@@ -212,22 +129,22 @@
                         </div>
                     </div>
                 </div>
-                <div class="px-5 mb-12">
+                <div class="px-5 mb-6 sm:mb-20">
                     <div class="md:flex flex-wrap items-start md:items-center">
                         <div class="w-full md:w-2/5 lg:w-1/2 px-5 md:px-0 relative">
-                            <h1 class="text-singeo absolute bottom-0 text-7xl lg:text-9xl -left-1 lg:-left-10 font-hey-august text-pink-gradient"><strong>05</strong></h1>
+                            <h1 class="text-singeo absolute bottom-0 text-7xl lg:text-9xl -left-5 lg:-left-10 font-hey-august text-pink-gradient"><strong>05</strong></h1>
                             <img class="rounded-3xl" src="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://singeo.s3.amazonaws.com/products/singing-starter-kit/lesson4.jpg"></div>
-                        <div class="w-full md:w-3/5 lg:w-1/2 mb-4 md:mb-0 md:pr-10 lg:pr-12 pt-7">
+                        <div class="w-full md:w-3/5 lg:w-1/2 mb-4 md:mb-0 md:pl-10 lg:pl-12 pt-7">
                             <h3 class="text-purple-gradient leading-normal"><strong>Sing Songs Better!</strong></h3>
                             <p class="leading-relaxed mt-3 md:mt-5">SONGS! That’s the goal, right?  We all want to sing songs! This video will show you the best way to approach singing your favorite songs… and maybe surprise your friends at the next karaoke night.</p>
 
                         </div>
                     </div>
                 </div>
-                <div class="px-5 mb-12">
+                <div class="px-5 mb-6 sm:mb-20">
                     <div class="md:flex flex-wrap items-start md:items-center">
-                        <div class="w-full md:w-2/5 lg:w-1/2 px-5 md:px-0 relative">
-                            <h1 class="text-singeo absolute bottom-0 text-7xl lg:text-9xl -left-1 lg:-left-10 font-hey-august text-pink-gradient"><strong>06</strong></h1>
+                        <div class="w-full md:w-2/5 lg:w-1/2 px-5 md:px-0 relative sm:order-2">
+                            <h1 class="text-singeo absolute bottom-0 text-7xl lg:text-9xl -left-5 lg:-left-10 font-hey-august text-pink-gradient"><strong>06</strong></h1>
                             <img class="rounded-3xl" src="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://singeo.s3.amazonaws.com/products/singing-starter-kit/lesson5.jpg"></div>
                         <div class="w-full md:w-3/5 lg:w-1/2 mb-4 md:mb-0 md:pr-10 lg:pr-12 pt-7">
                             <h3 class="text-purple-gradient leading-normal"><strong>Singer’s Secret Weapon!</strong></h3>
@@ -239,16 +156,15 @@
                 <div class="px-5">
                     <div class="md:flex flex-wrap items-start md:items-center">
                         <div class="w-full md:w-2/5 lg:w-1/2 px-5 md:px-0 relative">
-                            <h1 class="text-singeo absolute bottom-0 text-7xl lg:text-9xl -left-1 lg:-left-10 font-hey-august text-pink-gradient"><strong>07</strong></h1>
+                            <h1 class="text-singeo absolute bottom-0 text-7xl lg:text-9xl -left-5 lg:-left-10 font-hey-august text-pink-gradient"><strong>07</strong></h1>
                             <img class="rounded-3xl" src="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://singeo.s3.amazonaws.com/products/singing-starter-kit/lesson6.jpg"></div>
-                        <div class="w-full md:w-3/5 lg:w-1/2 mb-4 md:mb-0 md:pr-10 lg:pr-12 pt-7">
+                        <div class="w-full md:w-3/5 lg:w-1/2 mb-4 md:mb-0 md:pl-10 lg:pl-12 pt-7">
                             <h3 class="text-purple-gradient leading-normal"><strong>Congratulations!</strong></h3>
-                            <p class="leading-relaxed mt-3 md:mt-5">Congratulations you’ve just successfully kickstarted your singing journey! This video will give you the pointers you need to move forward for you as a singer and how to keep your voice in shape.</p>
+                            <p class="leading-relaxed mt-3 md:mt-5">Congratulations you’ve just successfully kickstarted your singing journey! This video will give you some helpful pointers for you to move forward as a singer and keep your voice in shape.</p>
 
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -323,15 +239,17 @@
     <section class="text-center text-white py-16 md:py-20 lg:py-24 bg-cover bg-left md:bg-center lazyload" style="background-color:#210436;" data-bg="https://singeo.s3.amazonaws.com/products/singing-starter-kit/final-bg.jpg">
         <div class="container mx-auto">
             <img class="h-20 md:h-32 lg:h-40" src="https://cdn.musora.com/image/fetch/w_980,q_auto:best/https://singeo.s3.amazonaws.com/products/singing-starter-kit/logo.png"><br>
-            {{--<h4 class="mt-3 mt-4 leading-tight">Get the Singing Starter Kit + BONUS 30-Day<br class="inline lg:hidden"> All-Access Singeo Membership!!--}}
-                {{--<br><strong class="uppercase text-yellow-500">ONLY <span class="tzcd-full">A LIMITED TIME</span> LEFT!</strong></h4>--}}
             <h4 class="mt-2 mt-3 leading-normal">Everything You Need To Start Singing Now</h4>
             <a class="join my-2 md:my-3" href="@yield('order-link')">START SINGING FOR
-                @if($productPrice < \App\Prices::$singingStarterKitFull)
-                    <s class="opacity-50">${{ \App\Prices::$singingStarterKitFull }}</s>
+                @if($productPrice < SingeoPrices::$singingStarterKitFull)
+                    <s class="opacity-50">${{ SingeoPrices::$singingStarterKitFull }}</s>
                 @endif
                 ${{ $productPrice }}</a>
-            <p><strong><em>** 90-DAY GUARANTEE **</em></strong></p>
+            <h6 class="font-bebas text-yellow-400">
+                @if($productPrice < SingeoPrices::$singingStarterKitFull)
+                    SAVE {{ round(100 - (100 * ($productPrice / SingeoPrices::$singingStarterKitFull))) }}% <br>
+                @endif
+                <span class="text-white">** 90-DAY GUARANTEE**</span></h6>
             <div class="mt-5 md:mt-10 inline-block w-full px-3 md:px-4 credit-cards opacity-60">
                 <i class="fab fa-cc-visa"></i>
                 <i class="fab fa-cc-mastercard"></i>
@@ -353,19 +271,19 @@
         <div class="container mx-auto">
             <h2 class="mb-5"><strong>Are There Any Questions? </strong></h2>
             <div class="dropdowns max-w-4xl mx-auto px-4">
-                @include('sales.partials._dropdown', [
+                @include('singeo.sales.partials._dropdown', [
                 "customClass" => "rounded-3xl",
                 "question" => true,
                 "title" => "Is There An Age Limit For Learning To Sing?",
                 "description" => "If you can speak, you CAN sing.  There’s no age limit for when you can experience the enrichment that singing brings to your life.  Everyone progresses differently, so it’s important to remember to have patience with yourself and celebrate the milestones of your personal singing journey.",
                 ])
-                @include('sales.partials._dropdown', [
+                @include('singeo.sales.partials._dropdown', [
                 "customClass" => "rounded-3xl",
                 "question" => true,
                 "title" => "I Have Extreme “Stage Fright”. Can I Still Learn To Sing?",
                 "description" => "Absolutely! Singing is more than a performance. You don’t have to have an audience to sing. Singing can just be for YOU.  And when you take the time to learn and practice properly you will gain confidence in your singing and, when you’re ready, maybe you WILL take the stage!",
                 ])
-                @include('sales.partials._dropdown', [
+                @include('singeo.sales.partials._dropdown', [
                 "customClass" => "rounded-3xl",
                 "question" => true,
                 "title" => "Can I Really Learn How To Sing Online?",
@@ -389,13 +307,6 @@
         $(function () {
             $(document).foundation();
 
-            $('.slick-1').slick({
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                dots: true,
-                autoplay: true,
-                autoplaySpeed: 5000,
-            });
             $('.slick-2').slick({
                 slidesToShow: 3,
                 responsive: [
@@ -423,56 +334,9 @@
             });
         });
     </script>
-    <script type="text/javascript" src="/assets/marketing/nav-footer.js"></script>
+    <script type="text/javascript" src="/marketing/parcel/singeo/nav-footer.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
-    <script type="text/javascript" src="/assets/js/modal.js"></script>
-    <script type="text/javascript" src="/assets/js/modal-autoplay.js"></script>
-    <script type="text/javascript" src="/assets/js/jquery.countdown-2.js"></script>
-    <script>
-        $(function() {
-            $('.tzcd-full').countdown('2022/02/11')
-                .on('update.countdown', function (event) {
-                    var format = '%-M Minute%!M %-S Second%!S';
-                    if (event.offset.totalHours > 0) {
-                        format = '%-H Hour%!H ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '%-D Day%!D ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('a limited time');
-                });
-            $('.tzcd-small').countdown('2022/02/11')
-                .on('update.countdown', function (event) {
-                    var format = '%-MM %-SS';
-                    if (event.offset.totalHours > 0) {
-                        format = '%-HH ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '%-DD ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('a limited time');
-                });
-            $('.tzcd-big').countdown('2022/02/11')
-                .on('update.countdown', function (event) {
-                    var format = '' + '<div><h1>%M</h1> <p>min%!M</p></div> ' + '<div><h1>%S</h1> <p>sec%!S</p></div>';
-                    if (event.offset.totalHours > 0) {
-                        format = '' + '<div><h1>%H</h1> <p>hr%!H</p></div> ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '' + '<div><h1>%D</h1> <p>day%!D</p></div> ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('<div><h1>LIMITED</h1> <p>TIME LEFT</p></div>');
-                });
-        });
-    </script>
+    <script type="text/javascript" src="/marketing/js/modal.js"></script>
+    <script type="text/javascript" src="/marketing/js/modal-autoplay.js"></script>
 @stop

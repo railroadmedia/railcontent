@@ -1,8 +1,6 @@
-@extends('guitareo._partials.layout')
+@extends('guitareo.lead-gen.lead-gen-layout')
 
-@section('head-includes')
-    @parent
-
+@section('meta')
     <meta name="robots" content="noindex">
     <title>2 Simple Guitar Tricks | Guitareo</title>
     <meta name="description" content="How to use vibrato & palm muting to unlock new possibilities on the guitar."/>
@@ -11,9 +9,10 @@
     <meta property="og:title" content="2 Simple Guitar Tricks">
     <meta property="og:description" content="How to use vibrato & palm muting to unlock new possibilities on the guitar.">
     <meta property="og:url" content="https://www.guitareo.com/guitar-tricks/">
+    @parent
 @stop
 
-@section('layout-body')
+@section('body')
 
     @include('guitareo.lead-gen.partials._course-lessons1', [
         "bgColor" => "#000316",

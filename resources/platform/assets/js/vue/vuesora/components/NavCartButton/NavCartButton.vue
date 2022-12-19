@@ -1,6 +1,7 @@
 <template>
     <a
-        href="/order"
+        :href="checkoutUrl"
+        v-if="cartItems.length"
         class="join outline-button cart-button"
         @click.stop.prevent="handleClick"
     >
@@ -13,28 +14,49 @@
 export default {
     name: 'NavCartButton',
     props: {
-        cartData: {
-            item: String,
+        // cartData: {
+        //     item: String,
+        // },
+        cartDataUrl: {
+            type: String,
         },
+        checkoutUrl: {
+            type: String,
+        }
     },
     data() {
         return {
-            cartItems: null,
+            //Initial Cart Data
+            cartData: {
+                "meta": {
+                    "cart": {
+                        "items": [],
+                    }
+                }
+            },
+            cartItems: [],
         }
     },
+    beforeMount() {
+        //Fetch Cart Data
+        axios.get(this.cartDataUrl+'/ecommerce/json/cart')
+            .then(response => {
+                this.updateCartData(response.data);
+            }
+        )
+    },
     mounted() {
-        let cartData = JSON.parse(this.cartData);
+        this.updateCartData(this.cartData);
 
-        this.updateCartData(cartData);
-
-        this.$root.$on('updateCartData', this.updateCartData);
+        this.eventBus.on('updateCartData', this.updateCartData);        
     },
     methods: {
         updateCartData(cartData) {
             this.cartItems = cartData.meta.cart.items;
         },
+
         handleClick() {
-            this.$root.$emit('openCartSidebar', {});
+            this.eventBus.emit('openCartSidebar', {});
         },
     },
 }

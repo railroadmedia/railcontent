@@ -25,6 +25,7 @@
                         <cart-item
                             v-for="item in cartItems"
                             v-if="cartItems"
+                            :brand="brand"
                             :key="item.sku"
                             :item="item"
                             :loading="loading"
@@ -36,6 +37,7 @@
                         <cart-item
                             v-for="item in bonusItems"
                             v-if="bonusItems"
+                            :brand="brand"
                             :key="item.sku"
                             :item="item"
                             :loading="loading"
@@ -52,7 +54,7 @@
               <div class="border-bottom"></div>
             </div>
             <div class="summary-container">
-                <div class="summary-container-inner">
+                <div class="summary-container-inner text-sm">
                     <div class="summary-row">
                         <div class="summary">Subtotal</div>
                         <div v-if="subTotalBeforeDiscounts() !== subTotalAfterDiscounts()" class="due">
@@ -82,7 +84,7 @@
                 </div>
             </div>
             <div class="checkout">
-                <a href="/order" :class="brand"><i class="fas fa-lock"></i>checkout</a>
+                <a :href="checkoutUrl" :class="brand"><i class="fas fa-lock"></i>checkout</a>
             </div>
             <div v-if="!locked" class="recommended-title">
                 <div>customers also liked</div>
@@ -122,15 +124,28 @@ export default {
             type: String,
             default: () => 'drumeo',
         },
-        cartData: {
-            item: String,
+        // cartData: {
+        //     item: String,
+        // },
+        cartDataUrl: {
+            type: String,
         },
+        checkoutUrl: {
+            type: String
+        }
     },
     data() {
         return {
             active: false,
             locked: false,
             cartItems: null,
+            cartData: {
+                "meta": {
+                    "cart": {
+                        "items": [],
+                    }
+                }
+            },
             bonusItems: null,
             cartTotals: null,
             recommendedProducts: null,
@@ -140,10 +155,18 @@ export default {
             scrollTop: false,
         };
     },
+    beforeMount() {
+        //Fetch Cart Data
+        axios.get(this.cartDataUrl + '/ecommerce/json/cart')
+            .then(response => {
+                this.updateCartData(response.data)
+            }
+        )
+    },
     mounted() {
         this.buildInitialCartData();
 
-        this.$root.$on('openCartSidebar', this.openCartSidebar);
+        this.eventBus.on('openCartSidebar', this.openCartSidebar);
 
         this.simpleBar = new SimpleBar(this.$refs.simplebar, {autoHide: false});
         this.loading = false;
@@ -169,9 +192,8 @@ export default {
     },
     methods: {
         buildInitialCartData() {
-            const cartData = JSON.parse(this.cartData);
 
-            this.updateCartData(cartData);
+            this.updateCartData(this.cartData);
         },
         openCartSidebar() {
             this.active = true;
@@ -265,7 +287,7 @@ export default {
                 this.scrollTop = true;
 
                 return EcommerceService
-                    .addCartItems(payload)
+                    .addCartItems(this.cartDataUrl, payload)
                     .then(this.handleCartUpdate)
                     .catch(this.handleError);
             }
@@ -276,7 +298,7 @@ export default {
                 this.loading = true;
 
                 EcommerceService
-                    .removeCartItem({productSku: cartItem.sku})
+                    .removeCartItem(this.cartDataUrl, {productSku: cartItem.sku})
                     .then(this.handleCartUpdate)
                     .catch(this.handleError);
             }
@@ -287,7 +309,7 @@ export default {
                 this.loading = true;
 
                 EcommerceService
-                    .clearCart()
+                    .clearCart(this.cartDataUrl,)
                     .then(this.handleCartUpdate)
                     .catch(this.handleError);
             }
@@ -298,7 +320,7 @@ export default {
                 this.loading = true;
 
                 EcommerceService
-                    .updateCartItemQuantity({productSku: cartItem.sku, quantity})
+                    .updateCartItemQuantity(this.cartDataUrl, {productSku: cartItem.sku, quantity})
                     .then(this.handleCartUpdate)
                     .catch((e) => {
                         this.buildInitialCartData();
@@ -309,7 +331,7 @@ export default {
 
         handleCartUpdate(response) {
             response.data ? this.updateCartData(response.data) : '';
-            this.$root.$emit('updateCartData', response.data);
+            this.eventBus.emit('updateCartData', response.data);
 
             this.loading = false;
 

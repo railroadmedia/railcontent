@@ -1,8 +1,9 @@
 <?php
 
+use App\Http\Controllers\Musora\CodeRedemptionController;
 use App\Http\Controllers\Musora\MarketingController;
 use App\Http\Controllers\Musora\ReferralJoinController;
-use App\Http\Controllers\Platform\PasswordResetController;
+
 use Illuminate\Support\Facades\Route;
 
 Route::domain('{musoraDomain}')
@@ -18,6 +19,14 @@ Route::domain('{musoraDomain}')
         Route::get('unified-2022', [MarketingController::class, 'unified2022']);
         Route::get('referral-join', [ReferralJoinController::class, 'join']);
         Route::get('recitals', [MarketingController::class, 'recitals']);
+        Route::get('power-pack', [CodeRedemptionController::class, 'powerPack']);
+        Route::post('hlag-submit', [CodeRedemptionController::class, 'hitLikeAGirlSubmission']);
+        Route::get('sonor', [CodeRedemptionController::class, 'sonor']);
+        Route::get('bestbook-trial', [MarketingController::class, 'bestBookTrial']);
+        Route::get('choose-your-trial', [MarketingController::class, 'chooseTrial']);
+
         Route::get('gift-card', [MarketingController::class, 'giftcard']);
-        Route::get('redeem', [MarketingController::class, 'redeem']);
+
+        Route::get('redeem', [CodeRedemptionController::class, 'renderNewAccountRedeemPage']);
+        Route::get('redeem/existing', [CodeRedemptionController::class, 'renderExistingAccountRedeemPage']);
     });

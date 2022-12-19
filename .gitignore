@@ -73,6 +73,7 @@ typings/
 .env.test
 
 # parcel-bundler cache (https://parceljs.org/)
+
 .cache
 .parcel-cache/*
 
@@ -109,7 +110,7 @@ dist
 # Get built by Laravel
 public/mix-manifest.json
 public/platform/
-public/marketing/
+#public/marketing/
 
 .idea
 .phpunit*
@@ -120,6 +121,7 @@ auth.json.vapor/
 .vapor
 auth.json
 
+storage/clockwork/*
 .env.pre-production
 .env.app-staging-three
 .env.beta-testing
