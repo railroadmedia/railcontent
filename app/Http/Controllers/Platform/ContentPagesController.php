@@ -144,20 +144,46 @@ class ContentPagesController extends BaseController
         }
 
         ContentRepository::$pullFilterResultsOptionsAndCount = true;
+        
+        $searchTerm = null;
 
-        $listLessons = $this->contentService->getFiltered(
-            $request->get('page', 1),
-            $request->get('limit', $defaultPage),
-            $sortOverride ?? $request->get('sort', '-published_on'),
-            [$lessonType],
-            $request->get('slug_hierarchy', []),
-            $request->get('required_parent_ids', []),
-            $request->get('required_fields', []),
-            $request->get('included_fields', []),
-            $request->get('required_user_states', []),
-            $request->get('included_user_states', []),
-            true
-        );
+        if (!empty($request->get('term', null))) {
+            $searchTerm = $request->get('term', null);
+        }
+
+        if (!empty($searchTerm)) {
+            $searchResults = $this->fullTextSearchService->search(
+                $request->get('term', null),
+                $request->get('page', 1),
+                $request->get('limit', 20),
+                [$lessonType],
+                $request->get('statuses', []),
+                $request->get('sort', '-score'),
+                $request->get('date_time_cutoff', null),
+                $request->get('brands', null),
+                $request->get('coach_ids', [])
+            );
+
+            $listLessons = new ContentFilterResultsEntity([
+                'results' => $searchResults['results'],
+                'total_results' => $searchResults['total_results'],
+                'filter_options' => [],
+            ]);
+        } else {
+            $listLessons = $this->contentService->getFiltered(
+                $request->get('page', 1),
+                $request->get('limit', $defaultPage),
+                $sortOverride ?? $request->get('sort', '-published_on'),
+                [$lessonType],
+                $request->get('slug_hierarchy', []),
+                $request->get('required_parent_ids', []),
+                $request->get('required_fields', []),
+                $request->get('included_fields', []),
+                $request->get('required_user_states', []),
+                $request->get('included_user_states', []),
+                true
+            );
+        }
 
         ContentRepository::$pullFilterResultsOptionsAndCount = false;
 
@@ -215,7 +241,8 @@ class ContentPagesController extends BaseController
                 "routinesCount" => $routinesCount,
                 "catalogueMeta" => $catalogueMeta,
                 "artistsNumber" => count($listLessons->filterOptions()['artist']??[]),
-                "songsNumber" => $listLessons->totalResults()
+                "songsNumber" => $listLessons->totalResults(),
+                "searchTerm" => $searchTerm,
             ]);
         } else {
             return view('content.catalogue', [
@@ -228,6 +255,7 @@ class ContentPagesController extends BaseController
                 "hasRecentRoutines" => $hasRecentRoutines,
                 "routinesCount" => $routinesCount,
                 "catalogueMeta" => $catalogueMeta,
+                "searchTerm" => $searchTerm,
             ]);
         }
     }

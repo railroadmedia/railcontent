@@ -479,7 +479,11 @@ export default {
     branchPathContent: {
       type: Object,
       default: () => ({}),
-    }
+    },
+    searchTerm: {
+        type: String,
+        default: () => undefined,
+    },
   },
   data() {
     return {
@@ -501,7 +505,7 @@ export default {
         topic: null,
       },
       selected_types: null,
-      search_term: undefined,
+      search_term: this.searchTerm,
       required_user_states: this.requiredUserStates || [],
       selected_tab: "new",
       singleEventDropdown: false,
