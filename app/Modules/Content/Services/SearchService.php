@@ -40,7 +40,7 @@ class SearchService
 
         $types = $this->getContentTypes();
         $statuses = ConfigService::$indexableContentStatuses;
-        $query = Content::query()->select(['id', 'slug', 'title', 'brand', 'status', 'type', 'published_on'])
+        $query = Content::query()->select(array_merge(['id', 'slug', 'title', 'brand', 'status', 'type', 'published_on'], config('railcontent.contentColumnNamesForFields')))
             ->whereStatuses($statuses)->whereTypes($types)->orderBy('id');
 
         $query->chunk(1000, function ($query) {
