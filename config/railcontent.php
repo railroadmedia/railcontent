@@ -151,8 +151,8 @@ return [
 
     'search_index_values' => [
         'high_value' => [
-            'content_attributes' => ['slug','title'],
-            'field_keys' => ['instructor:name'],
+            'content_attributes' => ['slug','title',],
+            'field_keys' => ['instructor:name', 'artist', 'album'],
             'data_keys' => [],
         ],
         'medium_value' => [
@@ -1224,17 +1224,13 @@ return [
     'contentColumnNamesForFields' => [
         'difficulty',
         'home_staff_pick_rating',
-        'legacy_id',
-        'legacy_wordpress_post_id',
         'title',
         'xp',
         'album',
         'artist',
-        'cd-tracks',
         'chord_or_scale',
         'difficulty_range',
         'episode_number',
-        'exercise-book-pages',
         'fast_bpm',
         'includes_song',
         'live_event_start_time',
@@ -1256,7 +1252,6 @@ return [
         'show_in_new_feed',
         'bands',
         'endorsements',
-        'focus',
         'forum_thread_id',
         'is_active',
         'is_coach',
@@ -1268,8 +1263,6 @@ return [
         'low_soundslice_slug',
         'pdf',
         'pdf_in_g',
-        'sbt_bpm',
-        'sbt_exercise_number',
         'song_name',
         'soundslice_xml_file_url',
         'original_video',
