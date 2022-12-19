@@ -23,7 +23,15 @@
                 </div>
             @endforeach
         </div>
-        <a href="/method" class="mx-1 mb-2 sm:mb-0 join outline method smaller">EXPLORE THE METHOD <i class="fas fa-info-circle"></i> </a>
-        <a href="/pricing" class="mx-1 join blue smaller">START FOR FREE <i class="fas fa-arrow-right"></i> </a>
+        @if(empty($promoVersion))
+            <a href="/method" class="mx-1 mb-2 sm:mb-0 join outline method smaller">EXPLORE THE METHOD <i class="fas fa-info-circle"></i> </a>
+        @endif
+        <a href="/pricing" class="mx-1 join blue smaller">
+            @if(!empty($promoVersion))
+                Get Started &raquo;
+            @else
+                START FOR FREE <i class="fas fa-arrow-right"></i>
+            @endif
+        </a>
     </div>
 </section>

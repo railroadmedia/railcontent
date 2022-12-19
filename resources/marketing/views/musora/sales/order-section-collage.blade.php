@@ -9,9 +9,13 @@
                     {!! $list !!}
                 </ul>
                 <div class="w-72 lg:w-96 mx-auto sm:mx-0">
-                    <a class="join smaller blue w-full my-3"
-                        href="{!! $buttonLink !!}"
-                    >START FOR FREE <i class="fas fa-arrow-right"></i> </a>
+                    <a class="join smaller blue w-full my-3" href="{!! $buttonLink !!}">
+                        @if(!empty($promoVersion))
+                            Get Started &raquo;
+                        @else
+                            START FOR FREE <i class="fas fa-arrow-right"></i>
+                        @endif
+                    </a>
                     <p class="text-center text-sm"><em>Pay nothing for 7 days, then ${!! $price !!}/month billed annually.</em></p>
                 </div>
             </div>

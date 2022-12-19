@@ -145,25 +145,12 @@
 @endsection
 
 @section('global-body')
-    @if(!empty($trialVersion))
-        @if(!empty($joinUrl))
-            @include("drumeo.sales.partials._nav", [
-                "edgeVersion" => true,
-                "trialVersion" => true,
-                "joinUrl" => $joinUrl
-            ])
-        @else
-            @include("drumeo.sales.partials._nav", [
-                "edgeVersion" => true,
-                "trialVersion" => true,
-                "scrollToJoin" => true,
-            ])
-        @endif
+    @if(!empty($promoVersion))
+        @include("drumeo.sales.partials._nav")
     @else
         @include("drumeo.sales.partials._nav", [
             "edgeVersion" => true,
-            "scrollToJoin" => true,
-            "homepage" => true
+            "trialVersion" => true,
         ])
     @endif
 
@@ -176,7 +163,7 @@
                 'desc' => 'Step-by-step video lessons on every topic.',
             ],
             [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/artist-course-icon.svg',
+                'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/artist-course-icon2.svg',
                 'title' => 'Artist Courses',
                 'desc' => 'Courses and live events with drumming heroes. ',
             ],
@@ -237,8 +224,7 @@
         @include('musora.sales.learn-by-playing-section', [
             'header' => 'Learn the drums by<br class="inline sm:hidden"> <u>playing the drums</u>.',
             'desc' => 'It’s the best feeling in the world –<br><br>Nailing that fill in your favorite song, slamming out the chorus of an all-time classic, or writing your own drum part that locks in with the music… but it’s a process.<br><br>And it starts with learning the skills & techniques you need to play the drums.<br><br>Drumeo makes learning the drums easier by giving you step-by-step lessons anytime & anywhere it fits your schedule. Plus, the groundbreaking NEW Drumeo Songs tool makes playing your favorite songs a reality – with note-for-note breakdowns of 5,000 popular songs.<br><br>You’ll play more. You’ll fall in love with your progress. And you’ll have personalized support every step of the way.<br><br>Scroll down to watch the trailer, see more details, and learn to play like you’ve always wanted!',
-            'imgMobile' => 'https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/Collage_intro_m.png',
-            'img' => 'https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/Collage_intro.png',
+            'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/collage2.png',
         ])
 
     @endif
@@ -468,7 +454,7 @@
     @include('musora.sales.songs-section', [
         'header' => 'Play your favorite songs.',
         'desc' => 'You’ll have <strong>all the tools you need</strong> to make sure you never miss a beat.',
-        'video' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/back-in-black-player.mp4',
+        'video' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/smells-like-teen-spirit.mp4',
         'brandName' => 'Drumeo',
     ])
 
@@ -642,7 +628,7 @@
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Trusted by ' . number_format(31856) . ' students.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Online lessons on every topic.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Personalized feedback from real teachers.</li>
-                    <li class="leading-tight text-coaches"><i class="fa-li fas fa-check"></i> <strong>*BONUS*</strong> includes free access to Musora’s lessons for piano, guitar, and voice.</li>',
+                    <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>*BONUS*</strong> includes free access to Musora’s lessons for piano, guitar, and voice.</li>',
         'buttonLink' => '/laravel/public/shopping-cart/api/query?products[DLM]=1,year,1&products[30-day-drummer]=1&products[practicepad]=1&products[Drumeo-VaterSticks]=2&products[BeginnerBook]=1&locked=true',
         'price' => '20',
         'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drumeo-spread.png',
@@ -690,7 +676,13 @@
         'video' => '772644658'
     ])
 
-    @include("drumeo.sales.partials._footer")
+    @if(!empty($promoVersion))
+        @include("drumeo.sales.partials._footer", [
+            "minimal" => true
+        ])
+    @else
+        @include("drumeo.sales.partials._footer")
+    @endif
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>

@@ -20,7 +20,13 @@
                     <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-drumeo"></i><br> {!! $pointThree !!}</p>
                 </div>
                 <div class="flex flex-wrap items-center mt-6 sm:mt-5 lg:mt-10 max-w-xs">
-                    <a href="/pricing" class="w-full join blue smaller mb-2">START FOR FREE <i class="fas fa-arrow-right"></i> </a>
+                    <a href="/pricing" class="w-full join blue smaller mb-2">
+                        @if(!empty($promoVersion))
+                            Get Started &raquo;
+                        @else
+                            START FOR FREE <i class="fas fa-arrow-right"></i>
+                        @endif
+                    </a>
                     <a class="inline-block" href="{{ $reviewLink }}" target="_blank" onclick="window.open('{{ $reviewLink }}', 'newwindow', 'width=750, height=550'); return false;">
                     <i class="align-middle text-lg fas fa-star" style="color: #ffac00;"></i>
                     <i class="align-middle text-lg -ml-3 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;"></i>
