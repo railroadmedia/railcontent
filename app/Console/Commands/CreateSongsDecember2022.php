@@ -46,7 +46,9 @@ class CreateSongsDecember2022 extends Command
      */
     public function handle(ContentRepository $contentRepository)
     {
-        $csv = array_map(function($v){return str_getcsv($v, ";");}, file(base_path('18-december-songs-import.csv')));
+        $this->info('Starting CreateSongsDecember2022...');
+
+        $csv = array_map(function($v){return str_getcsv($v, ";");}, file(base_path('december_19_songs_import_semi.csv')));
         unset($csv[0]);
 
         // to be updated in case the csv has more than 2000 songs
@@ -180,47 +182,75 @@ class CreateSongsDecember2022 extends Command
 
             // todo: uncomment once we have proper pdfs links
             // pdf download
-//            $pdfUrlPrefix = 'https://d1923uyy6spedc.cloudfront.net/';
-//            $pdfFileName = $row[8];
-//            $guitareoPdfFileName = ((array_key_exists(14, $row) && $brand == 'guitareo')) ? $row[14] : null;
-//
-//            $this->info('-------------------------------');
-//            $this->info($row[0] . $row[1] . $row[2]);
-//            $this->info($pdfFileName);
-//
-//            if (!empty($pdfFileName)) {
-//                // here it overrides resource_name and resource_url values, if it already finds something on this position and key name
-//                $this->updateOrInsertAndGetFirst(
-//                    'railcontent_content_data',
-//                    [
-//                        'content_id' => $content->id,
-//                        'key' => 'resource_url',
-//                        'position' => 1,
-//                    ],
-//                    [
-//                        'value' => $pdfUrlPrefix . $pdfFileName,
-//                    ]
-//                );
-//                $this->updateOrInsertAndGetFirst(
-//                    'railcontent_content_data',
-//                    [
-//                        'content_id' => $content->id,
-//                        'key' => 'resource_name',
-//                        'position' => 1,
-//                    ],
-//                    [
-//                        'value' => 'PDF Sheet Music',
-//                    ]
-//                );
-//
-//                // todo: if $guitareoPdfFileName -> position 2, PDF Guitareo Sheet Music
-//                // todo: make sure we do not override the position
-//
-//
-//            } else {
-//                $this->info('PDF not found for: ');
-//                var_dump($row);
-//            }
+            if ($brand == 'guitareo') {
+                $pdfUrlPrefix = 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/pdfs/guitareo/';
+                $pdfResourceName1 = 'PDF Tabs';
+                $pdfResourceName2 = 'PDF Tabs + Notation';
+            } elseif ($brand == 'pianote') {
+                $pdfUrlPrefix = 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/pdfs/pianote/';
+                $pdfResourceName1 = 'PDF Sheet Music';
+                $pdfResourceName2 = 'PDF Sheet Music';
+            }
+
+            $pdfFileName = $row[8];
+            $guitareoPdfFileName = ((array_key_exists(14, $row) && $brand == 'guitareo')) ? $row[14] : null;
+
+            $this->info('-------------------------------');
+            $this->info($row[0] . $row[1] . $row[2]);
+            $this->info($pdfFileName);
+
+            if (!empty($pdfFileName) && !empty($pdfUrlPrefix) && !empty($pdfResourceName1)) {
+                // here it overrides resource_name and resource_url values, if it already finds something on this position and key name
+                $this->updateOrInsertAndGetFirst(
+                    'railcontent_content_data',
+                    [
+                        'content_id' => $content->id,
+                        'key' => 'resource_url',
+                        'position' => 1,
+                    ],
+                    [
+                        'value' => $pdfUrlPrefix . $pdfFileName,
+                    ]
+                );
+                $this->updateOrInsertAndGetFirst(
+                    'railcontent_content_data',
+                    [
+                        'content_id' => $content->id,
+                        'key' => 'resource_name',
+                        'position' => 1,
+                    ],
+                    [
+                        'value' => $pdfResourceName1,
+                    ]
+                );
+            }
+
+            // guitareo only has a second PDF
+            if (!empty($guitareoPdfFileName)  && !empty($pdfUrlPrefix) && !empty($pdfResourceName2)) {
+                // here it overrides resource_name and resource_url values, if it already finds something on this position and key name
+                $this->updateOrInsertAndGetFirst(
+                    'railcontent_content_data',
+                    [
+                        'content_id' => $content->id,
+                        'key' => 'resource_url',
+                        'position' => 2,
+                    ],
+                    [
+                        'value' => $pdfUrlPrefix . $guitareoPdfFileName,
+                    ]
+                );
+                $this->updateOrInsertAndGetFirst(
+                    'railcontent_content_data',
+                    [
+                        'content_id' => $content->id,
+                        'key' => 'resource_name',
+                        'position' => 2,
+                    ],
+                    [
+                        'value' => $pdfResourceName2,
+                    ]
+                );
+            }
 
             // album art thumbnail
             $albumArtUrlPrefix = 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/';

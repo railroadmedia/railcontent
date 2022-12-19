@@ -198,7 +198,7 @@ const markSongAsComplete = () => {
                             </p>
 
                             <div class="tw-flex tw-flex-col 3xl:tw-flex-row">
-                                <button style="padding: 0 24px;" @click="openInstrumentless"
+                                <button style="padding: 0 24px;" @click="openInstrumentless" v-if="brand === 'drumeo'"
                                     :class="`tw-btn-primary tw-bg-${brand} hover:tw-bg-${brand}-600 tw-mb-3 3xl:tw-mr-3`">
                                     <svg class="tw-mr-2 tw-text-base " width="25" height="24" viewBox="0 0 25 24"
                                         fill="none" xmlns="http://www.w3.org/2000/svg">
