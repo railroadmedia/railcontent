@@ -48,13 +48,14 @@
 @section('global-body')
     @yield('page-nav')
 
-    <header class="pb-12 md:pt-20 bg-[#111729] text-center text-white">
+    <header class="pb-12 md:pb-0 md:pt-20 bg-[#111729] text-center text-white">
         <img
-            class="md:hidden mb-16 transition-opacity opacity-0"
-            src="https://cdn.musora.com/image/fetch/w_900,q_auto:best/@yield('headerImg')"
+            class="md:hidden mb-16 transition-opacity opacity-0 @if($page !== 'coaches') cursor-pointer @endif"
+            src="https://cdn.musora.com/image/fetch/w_900,q_auto:best/@yield('header-img')"
             alt="{{$page}} thumb"
             loading="lazy"
             onload="this.classList.remove('opacity-0')"
+            @if($page !== 'coaches') x-on:click="trailer = true" @endif
         />
         <div class="px-4 md:px-0">
             <div class="mb-6">
@@ -75,13 +76,16 @@
                     onload="this.classList.remove('opacity-0')"
                 />
             </div>
-            <h2 class="font-extrabold mb-4">{{$header}}</h2>
-            <p class="md:mb-10">{{$desc}}</p>
+            <h2 class="font-extrabold mb-4">@yield('header')</h2>
+            <p class="md:mb-10">@yield('desc')</p>
         </div>
         <img
-            class="rounded-xl md:h-72 lg:h-80 hidden md:inline-block transition-opacity opacity-0"
-            src="https://cdn.musora.com/image/fetch/w_900,q_auto:best/@yield('headerImg')"
+            class="rounded-t-xl md:h-72 lg:h-80 hidden md:inline-block transition-opacity opacity-0 @if($page !== 'coaches') cursor-pointer @endif"
+            src="https://cdn.musora.com/image/fetch/w_900,q_auto:best/@yield('header-img')"
             alt="{{$page}} thumb"
+            loading="lazy"
+            onload="this.classList.remove('opacity-0')"
+            @if($page !== 'coaches') x-on:click="trailer = true" @endif
         />
     </header>
 
