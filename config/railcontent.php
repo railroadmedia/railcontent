@@ -1154,6 +1154,7 @@ return [
         'pack',
         'semester-pack-lesson',
         'semester-pack',
+        'quick-tips',
     ],
     'hiddenContentTypes' => [
         'ha-oemurd-pmac',
