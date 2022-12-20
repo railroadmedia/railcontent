@@ -95,8 +95,8 @@
                     <i class="fas fa-truck"></i> <strong>FREE SHIPPING!</strong><br>
                 @endif
                 You can also order by phone toll-free at<br class="hidden sm:inline">
-                <a class="text-guitareo" href="tel:1-800-439-8921">1-800-439-8921</a> or directly at
-                <a class="text-guitareo" href="tel:1-604-855-7605">1-604-855-7605</a>. </p>
+                <a class="text-guitareo" href="tel:+18004398921">1-800-439-8921</a> or directly at
+                <a class="text-guitareo" href="tel:+16048557605">1-604-855-7605</a>. </p>
         </div>
         @if($guaranteeBadge)
             <div class="flex justify-center items-center px-5 py-2 text-center md:pt-2 md:pt-4 md:pb-6 lg:p-5 lg:-mt-1 lg:mx-auto border-t" style="border-color: #CCD3D3; border-top-style: solid;">

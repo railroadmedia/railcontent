@@ -12,7 +12,7 @@
 
     @include('partials.fonts')
 
-    <link href="/laravel/public/css/tailwind-helpers.css" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/assets/members-area/css/gulp/navigation-sales.css') }}" rel="stylesheet">
     <style>
         h1 strong,

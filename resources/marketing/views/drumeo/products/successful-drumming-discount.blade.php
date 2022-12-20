@@ -292,7 +292,7 @@
                 <h1>90-Day Money-Back Guarantee.</h1>
                 <p>More than anything, we want you to enjoy a super-positive experience on the drums. And that means we
                     only want you to pay if you actually LOVE your Successful Drumming experience. So get started below
-                    to try it out risk-free. If it’s not for you, simply <a class="text-white" href="/support">contact us</a> within 90 days for
+                    to try it out risk-free. If it’s not for you, simply <a class="text-white" href="{{ get_musora_brand_base_url() }}/contact">contact us</a> within 90 days for
                     a full refund.</p>
             </div>
         </div>

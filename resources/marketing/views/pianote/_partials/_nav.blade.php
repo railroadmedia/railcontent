@@ -67,7 +67,7 @@
         @include('pianote.sales.partials._nav-link', [
             "linkName" => "Contact",
             "linkIcon" => "fas fa-phone",
-            "linkUrl" => "/contact/"
+            "linkUrl" => "{{ get_musora_brand_base_url() }}/contact"
         ])
         @include('pianote.sales.partials._nav-link', [
             "linkName" => "Pianote",

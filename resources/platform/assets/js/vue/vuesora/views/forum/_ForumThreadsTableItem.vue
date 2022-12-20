@@ -34,7 +34,7 @@
             <!-- Thread Category -->
             <div v-if="thread.category"
                 class="tw-hidden tw-mx-6 tw-w-52 tw-items-center tw-flex-shrink-0 xl:tw-flex">
-                <p class="tw-text-sm tw-text-[#00101D] tw-font-bold">
+                <p class="tw-text-sm tw-text-[#00101D] dark:tw-text-[#9EC0DC] tw-font-bold ">
                     {{ thread.category }}
                 </p>
             </div>

@@ -642,7 +642,7 @@
                 <img class="guarantee-badge hidden sm:inline-block" style="filter: hue-rotate(305deg) brightness(1.13);" src="https://dpwjbsxqtam5n.cloudfront.net/sales/guarantee-badge.png">
                 <div class="text-wrap text-left">
                     <h1>90-Day Money-Back Guarantee</h1>
-                    <p><strong>OUR PROMISE TO YOU:</strong> More than anything, we want you to enjoy a super-positive experience on the drums. And that means we only want you to pay if you actually LOVE your Drum Technique Made Easy experience. So click any of the big buttons on this page to get started risk-free. If it’s not for you, simply <a class="text-white" href="/support">contact us</a> within 90 days for a full refund.</p>
+                    <p><strong>OUR PROMISE TO YOU:</strong> More than anything, we want you to enjoy a super-positive experience on the drums. And that means we only want you to pay if you actually LOVE your Drum Technique Made Easy experience. So click any of the big buttons on this page to get started risk-free. If it’s not for you, simply <a class="text-white" href="{{ get_musora_brand_base_url() }}/contact">contact us</a> within 90 days for a full refund.</p>
                 </div>
             </div>
         </div>
@@ -677,8 +677,8 @@
             </div>
             <p class="final-questions">
                 <span><strong>Any questions?</strong></span> You can also call us or order by phone<br class="inline lg:hidden"> toll-free at
-                <a href="tel:1-800-439-8921">1-800-439-8921</a><br class="inline sm:hidden"> or directly at
-                <a href="tel:1-604-855-7605">1-604-855-7605</a>.<br> All prices listed in USD.</p>
+                <a href="tel:+18004398921">1-800-439-8921</a><br class="inline sm:hidden"> or directly at
+                <a href="tel:+16048557605">1-604-855-7605</a>.<br> All prices listed in USD.</p>
         </div>
     </section>
 

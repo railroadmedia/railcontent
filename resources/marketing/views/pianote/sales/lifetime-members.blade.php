@@ -387,7 +387,7 @@
         <div class="container mx-auto relative z-50 max-w-md">
             <div class="inline-block w-full px-3 md:px-4 mb-5 text-light-navy">
                 <h5 class="mb-2"><strong>Still have questions?</strong></h5>
-                <p>If you need any further information about becoming a Lifetime Member, <a href="/support"><u>contact our amazing support team!</u></a>
+                <p>If you need any further information about becoming a Lifetime Member, <a href="{{ get_musora_brand_base_url() }}/contact"><u>contact our amazing support team!</u></a>
                     <br><br>
                     A friendly and knowledgeable support team member will get back to you right away.</p>
             </div>
@@ -408,7 +408,7 @@
     @include('pianote._partials._footer')
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-{{--    <script type="text/javascript" src="/marketing/parcel/pianote/nav-footer.js?v={{ filemtime(__FILE__) }}"></script>--}}
+{{--    <script type="text/javascript" src="{{ asset('/marketing/parcel/pianote/nav-footer.js') }}"></script>--}}
     <script type="text/javascript" src="{{ asset('/marketing/parcel/pianote/nav-footer.js') }}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>

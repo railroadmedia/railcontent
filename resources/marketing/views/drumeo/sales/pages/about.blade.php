@@ -98,7 +98,7 @@
             <p class="text-light-navy my-2 sm:my-4 lg:my-7 mx-0 max-w-xs sm:max-w-sm lg:max-w-lg pr-6 sm:pr-0">Get online drum lessons, step-by-step video courses, and an awesome community you can access from anywhere, anytime.</p>
             <a class="join blue smaller mb-2 sm:mb-3 lg:mb-0" href="/">How It Works</a><br class="inline lg:hidden">
             <a class="join smaller outline mb-2 sm:mb-0" href="https://www.musora.com/careers">JOIN OUR TEAM</a><br class="inline sm:hidden">
-            <a class="join smaller outline" href="/support">CONTACT US</a>
+            <a class="join smaller outline" href="{{ get_musora_brand_base_url() }}/contact">CONTACT US</a>
         </div>
     </section>
     <section class="text-white relative z-10 overflow-hidden px-4 md:px-8 py-8 md:py-14 bg-cover bg-center" style="background:#000c17;">
@@ -420,7 +420,7 @@
                 </div>
                 <div class="w-full sm:w-1/3 px-2">
                     <p class="leading-tight mb-4">Still have<br class="hidden sm:inline lg:hidden"> questions?</p>
-                    <a class="w-full join smaller outline" href="/support">CONTACT US</a>
+                    <a class="w-full join smaller outline" href="{{ get_musora_brand_base_url() }}/contact">CONTACT US</a>
                 </div>
             </div>
         </div>

@@ -10,7 +10,6 @@ Route::domain('{pianoteDomain}')
 
     Route::get('/about', function () { return view('pianote.sales.pages.about'); });
     Route::get('/app', function () { return view('pianote.sales.pages.app'); } );
-    Route::get('/support', function () { return view('pianote.sales.pages.support'); } );
     Route::get('/cookie', function () { return view('pianote.sales.pages.cookie'); } );
     Route::get('/terms', function () { return view('pianote.sales.pages.terms'); } );
     Route::get('/privacy', function () {return view('pianote.sales.pages.privacy'); } );

@@ -11,8 +11,8 @@
     <meta property="og:description" content="How to use vibrato & palm muting to unlock new possibilities on the guitar.">
     <meta property="og:url" content="https://www.guitareo.com/guitar-tricks/">
 
-    <link rel="preload" href="/marketing/parcel/guitareo/guitar-tricks.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/marketing/parcel/guitareo/guitar-tricks.css"></noscript>
+    <link rel="preload" href="{{ asset('/marketing/parcel/guitareo/guitar-tricks.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/guitar-tricks.css') }}"></noscript>
 
     <style>
         .header-bg {
@@ -43,7 +43,7 @@
             $(document).foundation();
         });
     </script>
-    <script src="/marketing/js/modal-autoplay.js"></script>
+    <script src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
 @stop
 
 @section('body')

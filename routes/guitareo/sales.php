@@ -13,7 +13,6 @@ Route::domain('{guitareoDomain}')
     Route::get('/choose-your-trial', function () { return view('guitareo.sales.trials.trial-selection.week'); });
     Route::get('/choose-your-trial-month', function () { return view('guitareo.sales.trials.trial-selection.month'); });
 
-    Route::get('/support', function () { return view('guitareo.sales.pages.support'); });
     Route::get('/cookie', function () { return view('guitareo.sales.pages.cookie'); });
     Route::get('/terms', function () { return view('guitareo.sales.pages.terms'); });
     Route::get('/privacy', function () { return view('guitareo.sales.pages.privacy'); });

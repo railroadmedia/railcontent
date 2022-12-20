@@ -19,7 +19,7 @@
 @section('url-slug', 'sonor' )
 
 @section('show-url')
-    /members/lessons/sonor-drums
+    {{ get_musora_brand_base_url() }}/drumeo/sonor-drums   
 @endsection
 
 @section('grid-title')

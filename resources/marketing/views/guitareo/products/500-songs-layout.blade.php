@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/css/guitareo/tailwind-helpers.css') }}">
-    <link rel="stylesheet" href="/marketing/parcel/guitareo/500-songs.css">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/500-songs.css') }}">
     <style>
 
         .join.smaller {
@@ -34,8 +34,8 @@
 @stop()
 
 @section('scripts')
-    <script src="/marketing/js/modal.js"></script>
-    <script src="/marketing/parcel/guitareo/nav-footer.js"></script>
+    <script src="{{ asset('/marketing/js/modal.js') }}"></script>
+    <script src="{{ asset('/marketing/parcel/guitareo/nav-footer.js') }}"></script>
     <script>
         $(document).ready(function () {
             $(document).foundation();
@@ -297,7 +297,7 @@
             </div>
             <div class="large-8 medium-7 columns end guarantee-text">
                 <h1>90-Day Money-Back Guarantee.</h1>
-                <p>We love our students. More than anything, we want you to enjoy a super-positive experience playing guitar. And that means we only want you to pay if you actually LOVE your Guitareo experience! So join below to try it out totally risk-free. If it’s not for you, simply <a class="text-white" href="/support">contact us</a> within 90 days to request a full refund.</p>
+                <p>We love our students. More than anything, we want you to enjoy a super-positive experience playing guitar. And that means we only want you to pay if you actually LOVE your Guitareo experience! So join below to try it out totally risk-free. If it’s not for you, simply <a class="text-white" href="{{ get_musora_brand_base_url() }}/contact">contact us</a> within 90 days to request a full refund.</p>
             </div>
         </div>
     </section>

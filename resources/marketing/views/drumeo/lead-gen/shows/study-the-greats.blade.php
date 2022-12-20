@@ -19,7 +19,7 @@
 @section('url-slug', 'study-the-greats' )
 
 @section('show-url')
-    /members/lessons/study-the-greats
+    {{ get_musora_brand_base_url() }}/drumeo/study-the-greats
 @endsection
 
 @section('grid-title')

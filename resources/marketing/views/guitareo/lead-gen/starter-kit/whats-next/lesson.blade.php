@@ -1,7 +1,7 @@
 @extends('guitareo.lead-gen.starter-kit.partials._lesson-page-layout')
 
 @section('styles')
-    <link rel="stylesheet" href="/marketing/parcel/guitareo/lead-gen-lessons.css">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/lead-gen-lessons.css') }}">
 @endsection
 
 @section('lesson-total-number', 1)
