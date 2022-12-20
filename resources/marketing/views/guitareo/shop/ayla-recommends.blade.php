@@ -23,7 +23,7 @@
 
 @section('scripts')
     @parent
-    <script type="text/javascript" src="/marketing/parcel/guitareo/nav-footer.js"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/guitareo/nav-footer.js') }}"></script>
 
     <script>
         $(function () {

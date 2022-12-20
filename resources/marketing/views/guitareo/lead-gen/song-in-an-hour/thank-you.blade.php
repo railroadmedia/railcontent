@@ -12,7 +12,7 @@
     <meta property="og:description" content="Play your first song on the guitar, start to finish, in an hour -- even if you’ve never played before.">
     <meta property="og:url" content="https://www.guitareo.com/song-in-an-hour/">
 
-    <link rel="stylesheet" href="/marketing/parcel/guitareo/song-in-an-hour.css">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/song-in-an-hour.css') }}">
     <style>
         .hero-header:after {
             content:none;

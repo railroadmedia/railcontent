@@ -61,7 +61,7 @@
         })
     </script>
 {!! \App\Analytics\Tracker::bodyBottom() !!}
-<script src="/marketing/js/jquery.countdown-2.min.js"></script>
+<script src={{ asset('/marketing/js/jquery.countdown-2.min.js') }}></script>
 <script>
     $(document).ready(function () {
         $('.tzcd-bigtw').countdown('2022/12/27')

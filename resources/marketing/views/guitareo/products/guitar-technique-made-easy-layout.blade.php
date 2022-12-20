@@ -30,9 +30,9 @@
 @stop()
 
 @section('scripts')
-    <script src="/marketing/js/modal.js"></script>
+    <script src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/1.9.3/countUp.min.js"></script>
-    <script src="/marketing/parcel/guitareo/nav-footer.js"></script>
+    <script src="{{ asset('/marketing/parcel/guitareo/nav-footer.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $(document).foundation();

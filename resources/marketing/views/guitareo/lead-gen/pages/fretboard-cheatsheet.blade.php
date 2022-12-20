@@ -10,7 +10,7 @@
     <meta property="og:image" content="https://guitareo.s3.amazonaws.com/lead-gen/Fretboard+Cheatsheet/share-image.png">
     <meta property="og:url" content="https://www.guitareo.com/fretboard-cheatsheet/">
 
-    <link rel="stylesheet" href="/marketing/parcel/guitareo/song-in-an-hour.css">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/song-in-an-hour.css') }}">
     <style>
         .hero-header img {
             width:auto;
@@ -54,7 +54,7 @@
             $(document).foundation();
         });
     </script>
-    <script src="/marketing/js/modal-autoplay.js"></script>
+    <script src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
 @stop
 
 @section('body')

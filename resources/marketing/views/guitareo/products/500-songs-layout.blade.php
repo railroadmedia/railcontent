@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/css/guitareo/tailwind-helpers.css') }}">
-    <link rel="stylesheet" href="/marketing/parcel/guitareo/500-songs.css">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/500-songs.css') }}">
     <style>
 
         .join.smaller {
@@ -34,8 +34,8 @@
 @stop()
 
 @section('scripts')
-    <script src="/marketing/js/modal.js"></script>
-    <script src="/marketing/parcel/guitareo/nav-footer.js"></script>
+    <script src="{{ asset('/marketing/js/modal.js') }}"></script>
+    <script src="{{ asset('/marketing/parcel/guitareo/nav-footer.js') }}"></script>
     <script>
         $(document).ready(function () {
             $(document).foundation();

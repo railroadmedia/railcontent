@@ -12,7 +12,7 @@
     <meta property="og:image" content="https://guitareo.s3.amazonaws.com/sales/trials/daddario-string-session/og-image.jpg">
     <meta property="og:url" content="https://www.guitareo.com/{{ Request::path() }}">
 
-    <link rel="stylesheet" href="/marketing/parcel/guitareo/song-in-an-hour.css">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/song-in-an-hour.css') }}">
     <style>
         .text-yello {
             color: #FFAE00;
