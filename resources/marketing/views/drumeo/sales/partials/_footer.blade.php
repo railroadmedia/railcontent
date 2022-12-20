@@ -65,7 +65,7 @@
         <div class="row">
             <img class="logo" src="https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png" alt="Drumeo">
             <p><a href="https://goo.gl/maps/c4JxakSmnjB2" rel="noopener" target="_blank">107-31265 Wheel Ave. Abbotsford,<br class="mobile-only"> BC, V2T 6H2 Canada</a><br>
-                <a href="tel:+18004398921">Toll Free: 1-800-439-8921</a> / <br class="mobile-only"><a href="tel:+16048557605">Direct: 1-604-855-7605</a> / <br class="mobile-only"><a class="text-white" href="/support">Contact Us</a></p>
+                <a href="tel:+18004398921">Toll Free: 1-800-439-8921</a> / <br class="mobile-only"><a href="tel:+16048557605">Direct: 1-604-855-7605</a> / <br class="mobile-only"><a class="text-white" href="{{ get_musora_brand_base_url() }}/contact">Contact Us</a></p>
             <a rel="noopener" href="https://www.youtube.com/freedrumlessons/" target="_blank" class="social-media youtube" aria-label="youtube"><i class="fab fa-youtube"></i></a>
             <a rel="noopener" href="https://facebook.com/drumeo/" target="_blank" class="social-media facebook" aria-label="facebook"><i class="fab fa-facebook-f"></i></a>
             <a rel="noopener" href="https://instagram.com/drumeoofficial/" target="_blank" class="social-media instagram" aria-label="instagram"><i class="fab fa-instagram"></i></a>

@@ -268,6 +268,6 @@
         <p class="py-2">We will let you know via email and/or a prominent notice on our Service, prior to the change becoming effective and update the "effective date" at the top of this Privacy Policy.</p>
         <p class="py-2">You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.</p>
         <h2 class="font-bold md:text-2xl mt-10 mb-4">Contact Us</h2>
-        <p class="py-2">If you have any questions about this Privacy Policy, please <a class="text-blue-600" href="/support">contact us</a>.</p>
+        <p class="py-2">If you have any questions about this Privacy Policy, please <a class="text-blue-600" href="{{ get_musora_brand_base_url() }}/contact">contact us</a>.</p>
     </div>
 @stop

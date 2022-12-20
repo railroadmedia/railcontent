@@ -457,7 +457,7 @@
                 <img class="guarantee-badge show-for-medium" style="filter: hue-rotate(305deg) brightness(1.13);" src="https://dpwjbsxqtam5n.cloudfront.net/sales/guarantee-badge.png">
                 <div class="text-wrap text-left">
                     <h1>90-Day Money-Back Guarantee</h1>
-                    <p><strong>OUR PROMISE TO YOU:</strong> More than anything, we want you to enjoy a super-positive experience on the drums. And that means we only want you to pay if you actually LOVE your Independence Made Easy experience. So click any of the big buttons on this page to get started risk-free. If it’s not for you, simply <a class="text-white" href="/support">contact us</a> within 90 days for a full refund.</p>
+                    <p><strong>OUR PROMISE TO YOU:</strong> More than anything, we want you to enjoy a super-positive experience on the drums. And that means we only want you to pay if you actually LOVE your Independence Made Easy experience. So click any of the big buttons on this page to get started risk-free. If it’s not for you, simply <a class="text-white" href="{{ get_musora_brand_base_url() }}/contact">contact us</a> within 90 days for a full refund.</p>
                 </div>
             </div>
         </div>
