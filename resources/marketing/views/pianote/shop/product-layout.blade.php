@@ -136,7 +136,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/marketing/parcel/pianote/nav-footer.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
-    <script type="text/javascript" src="/marketing/parcel/pianote/shop-product.js"></script>
+    <script type="text/javascript" src="/marketing/parcel/drumeo/shop-product.js"></script>
     <script src="{{ asset('marketing/parcel/pianote/manifest.js') }}"></script>
     <script src="{{ asset('marketing/parcel/pianote/vendor.js') }}"></script>
     <script src="{{ asset('marketing/parcel/pianote/app.js') }}"></script>

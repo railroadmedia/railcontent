@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Singeo\SalesController;
+use App\Http\Controllers\Singeo\LeadGenController;
 
 Route::domain('{singeoDomain}')
     ->middleware(['web_public'])
@@ -43,44 +44,53 @@ Route::domain('{singeoDomain}')
     Route::get('/beginner-bundle', function(){ return redirect('/shop/beginner-bundle'); });
     Route::get('/love-to-sing-bundle', function(){ return redirect('/shop/love-to-sing-bundle'); });
 
-    Route::get('/beginner-vocal-bootcamp', function () { return view('singeo.lead-gen.beginner-vocal-bootcamp.beginner-vocal-bootcamp'); } );
-    Route::get('/beginner-vocal-bootcamp/zoom', function () { return view('singeo.lead-gen.beginner-vocal-bootcamp.zoom'); } );
-
-    Route::get('/live-vocal-bootcamp', function () { return view('singeo.lead-gen.live-vocal-bootcamp.live-vocal-bootcamp'); } );
-    Route::get('/live-vocal-bootcamp/zoom', function () { return view('singeo.lead-gen.live-vocal-bootcamp.zoom'); } );
-
-    Route::get('/live-bootcamp', function () { return view('singeo.lead-gen.harmony-bootcamp.harmony-bootcamp'); } );
-    Route::get('/live-bootcamp/zoom', function () { return view('singeo.lead-gen.harmony-bootcamp.zoom'); } );
-
-    Route::get('/holiday-karaoke', function () { return view('singeo.lead-gen.holiday-karaoke.signup'); } );
-    Route::get('/holiday-karaoke/unlocked', function () { return view('singeo.lead-gen.holiday-karaoke.unlocked'); } );
+    Route::group(['prefix' => 'beginner-vocal-bootcamp'],
+        function () {
+            Route::get('/{page?}', LeadGenController::class . '@beginnerBootcamp')
+                ->whereIn('page', [
+                    null, 'zoom'
+                ]);
+        }
+    );
+    Route::group(['prefix' => 'holiday-karaoke'],
+        function () {
+            Route::get('/{page?}', LeadGenController::class . '@holidayKaraoke')
+                ->whereIn('page', [
+                    null, 'unlocked'
+                ]);
+        }
+    );
+    Route::group(['prefix' => 'improve-any-voice'],
+        function () {
+            Route::get('/{page?}/{lesson?}', LeadGenController::class . '@improveAnyVoice')
+                ->whereIn('page', [
+                    null, 'lessons'
+                ])
+                ->whereIn('lesson', [
+                    null, '1', '2', '3', '4', '5', '6', '7'
+                ]);
+        }
+    );
+    Route::group(['prefix' => 'live-vocal-bootcamp'],
+        function () {
+            Route::get('/{page?}', LeadGenController::class . '@liveBootcamp')
+                ->whereIn('page', [
+                    null, 'zoom'
+                ]);
+        }
+    );
+    Route::group(['prefix' => 'stop-hating-your-voice'],
+        function () {
+            Route::get('/{page?}/{lesson?}', LeadGenController::class . '@stopHatingVoice')
+                ->whereIn('page', [
+                    null, 'lessons'
+                ])
+                ->whereIn('lesson', [
+                    null, '1', '2', '3'
+                ]);
+        }
+    );
 
     Route::get('/beautiful-harmonies', function () { return view('singeo.products.beautiful-harmonies'); } );
-
-    Route::group(['prefix' => 'improve-any-voice' ], function () {
-        Route::get('/', function () { return view('singeo.lead-gen.improve-any-voice.signup'); });
-        Route::group(['prefix' => 'lessons' ],
-            function () {
-                Route::get('/', function () { return view('singeo.lead-gen.improve-any-voice.lessons.1'); });
-                Route::get('/1', function () { return view('singeo.lead-gen.improve-any-voice.lessons.1'); });
-                Route::get('/2', function () { return view('singeo.lead-gen.improve-any-voice.lessons.2'); });
-                Route::get('/3', function () { return view('singeo.lead-gen.improve-any-voice.lessons.3'); });
-                Route::get('/4', function () { return view('singeo.lead-gen.improve-any-voice.lessons.4'); });
-                Route::get('/5', function () { return view('singeo.lead-gen.improve-any-voice.lessons.5'); });
-                Route::get('/6', function () { return view('singeo.lead-gen.improve-any-voice.lessons.6'); });
-                Route::get('/7', function () { return view('singeo.lead-gen.improve-any-voice.lessons.7'); });
-            });
-    });
-
-    Route::group(['prefix' => 'stop-hating-your-voice' ], function () {
-        Route::get('/', function () { return view('singeo.lead-gen.stop-hating-your-voice.signup'); });
-        Route::group(['prefix' => 'lessons' ],
-            function () {
-                Route::get('/', function () { return view('singeo.lead-gen.stop-hating-your-voice.lesson-index'); });
-                Route::get('/1', function () { return view('singeo.lead-gen.stop-hating-your-voice.lessons.1'); });
-                Route::get('/2', function () { return view('singeo.lead-gen.stop-hating-your-voice.lessons.2'); });
-                Route::get('/3', function () { return view('singeo.lead-gen.stop-hating-your-voice.lessons.3'); });
-            });
-    });
 });
 

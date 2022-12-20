@@ -180,6 +180,7 @@ return [
         \Railroad\Railanalytics\AnalyticsServiceProvider::class,
         \Railroad\Location\Providers\LocationServiceProvider::class,
         \Railroad\RemoteStorage\Providers\RemoteStorageServiceProvider::class,
+        \Railroad\LeadTracker\Providers\LeadTrackerServiceProvider::class,
 
         /*
          * Module Service Providers

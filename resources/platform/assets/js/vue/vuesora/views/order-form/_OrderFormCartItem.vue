@@ -5,7 +5,7 @@
                 class="square rounded bg-center"
             >
                 <img
-                    :src="item.thumbnail_url"
+                    :src="'https://cdn.musora.com/image/fetch/w_200,q_auto:best/' + item.thumbnail_url"
                     class="rounded"
                 >
             </div>
@@ -25,7 +25,7 @@
                         class="tw-inline-flex tw-justify-start tw-items-center tw-mr-auto"
                     >
                         <div class="tw-flex tw-items-center tw-mr-2">
-                            <h4 class="quantity-label tw-leading-none tw-mt-1 tw-tracking-normal tw-text-sm dense tw-uppercase">
+                            <h4 class="quantity-label tw-leading-none tw-mt-1 tw-tracking-normal tw-font-normal tw-text-sm dense tw-uppercase">
                                 Quantity:
                             </h4>
                         </div>
@@ -38,7 +38,7 @@
                                 max="99"
                                 class="no-label text-center tw-text-sm tw-p-2"
                                 style="border:none;background:none;"
-                            > 
+                            >
                         </div>
 
                         <div
@@ -123,7 +123,7 @@ export default {
         item: {
             type: Object,
         },
-        
+
         cartDataUrl: {
             type: String,
         },
@@ -178,9 +178,6 @@ export default {
     methods: {
         updateCartItemQuantity(quantity) {
             this.loading = true;
-            console.log('url', this.cartDataUrl)
-            console.log('sku', this.item.sku)
-            console.log('quantity', quantity)
             EcommerceService.updateCartItemQuantity(
                 this.cartDataUrl,
                 {

@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
     <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind.css') }}" />
     <link rel="stylesheet" href="{{ asset('/marketing/css/app.css') }}" />
+    <link rel="stylesheet" href="{{ mix('platform/css/app.css') }}">
+
     <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/css/vuesora.css') }}" rel="stylesheet">
@@ -25,6 +27,9 @@
 @stop
 
 @section('global-body')
+    {{-- Notifications Container --}}
+    <div id="notifications-container"></div>
+
     @include("drumeo.sales.partials._nav", [
         "checkoutVersion" => true,
     ])
@@ -115,6 +120,8 @@
         </div>
     </div>
     @include("drumeo.sales.partials._footer")
+
+    @include('partials._brand-set-authentication-cookies-iframe')
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>

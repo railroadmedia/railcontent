@@ -6,14 +6,16 @@
 
         <nav-cart-button
             cart-data='{{ $cartData }}'
-            checkout-url='{{ get_musora_brand_base_url() }}/order/guitareo'
-            api-domain-url='{{ get_musora_brand_base_url() }}'
+            cart-data-url=''
+            checkout-url='/order/guitareo'
+            api-domain-url=''
         ></nav-cart-button>
         <cart-sidebar
             brand="guitareo"
             cart-data='{{ $cartData }}'
-            checkout-url='{{ get_musora_brand_base_url() }}/order/guitareo'
-            api-domain-url='{{ get_musora_brand_base_url() }}'
+            cart-data-url=''
+            checkout-url='/order/guitareo'
+            api-domain-url=''
         ></cart-sidebar>
     </div>
 @endsection

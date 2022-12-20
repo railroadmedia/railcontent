@@ -16,12 +16,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
     <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind.css') }}" />
     <link rel="stylesheet" href="{{ asset('/marketing/css/app.css') }}" />
+    <link rel="stylesheet" href="{{ mix('platform/css/app.css') }}">
     <link href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/css/vuesora.css') }}" rel="stylesheet">
     {{--<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">--}}
 @stop
 
 @section('content')
+    {{-- Notifications Container --}}
+    <div id="notifications-container"></div>
+
     @include("guitareo.sales.partials._nav", [
         "checkoutVersion" => true
     ])
@@ -111,7 +115,10 @@
             </div>
         </div>
     </div>
+
     @include("guitareo.sales.partials._footer")
+
+    @include('partials._brand-set-authentication-cookies-iframe')
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{ asset('/marketing/parcel/guitareo/nav-footer.js') }}"></script>

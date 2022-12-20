@@ -1,4 +1,4 @@
-<li class="scalable-card {{ !empty($cardType) ? $cardType : '' }} {{ $soldOut ? 'sold-out' : '' }}" data-price="{{ $price }}" data-category="{{ $category }}">
+<li class="scalable-card {{ !empty($cardType) ? $cardType : '' }}" data-price="{{ $price }}" data-category="{{ $category }}">
     <div class="flip-card-inner">
         <div class="flip-card-front card-inside">
             <section class="drum-shop">
