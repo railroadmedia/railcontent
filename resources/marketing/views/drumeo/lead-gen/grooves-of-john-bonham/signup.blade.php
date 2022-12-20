@@ -11,11 +11,11 @@
     @include('drumeo._partials._fonts')
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link href="/marketing/css/drumeo/tailwind-helpers.css" rel="stylesheet">
+    <link href="{{ asset('marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/lead-gen-tw.css') }}" rel="stylesheet">
-    <link href="/marketing/parcel/drumeo/lead-gen.css" rel="stylesheet">
-    <link href="/marketing/parcel/drumeo/lead-gen-shows.css" rel="stylesheet">
+    <link href="{{ asset('marketing/parcel/drumeo/lead-gen.css') }}" rel="stylesheet">
+    <link href="{{ asset('marketing/parcel/drumeo/lead-gen-shows.css') }}" rel="stylesheet">
     <style>
         .lazyload {opacity: 0;}  .lazyloading {opacity: 1;transition: opacity 300ms;}
     </style>

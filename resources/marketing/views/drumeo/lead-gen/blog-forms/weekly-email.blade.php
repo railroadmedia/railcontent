@@ -13,7 +13,7 @@
     @include('drumeo._partials._fonts')
     <base target="_parent">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link href="/marketing/css/drumeo/tailwind-helpers.css" rel="stylesheet">
+    <link href="{{ assest('marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
     <style>
         body {
             height:100vh;

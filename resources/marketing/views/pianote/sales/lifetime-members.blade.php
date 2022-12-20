@@ -411,7 +411,7 @@
     <script type="text/javascript" src="/marketing/parcel/pianote/nav-footer.js?v={{ filemtime(__FILE__) }}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
-    <script type="text/javascript" src="/marketing/js/modal.js"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script>
         $(document).ready(function () {
             $(document).foundation();
@@ -421,5 +421,5 @@
             });
         });
     </script>
-    <script type="text/javascript" src="/marketing/js/modal-autoplay.js"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
 @stop

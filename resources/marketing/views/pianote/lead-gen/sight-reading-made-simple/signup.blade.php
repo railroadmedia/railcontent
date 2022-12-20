@@ -16,7 +16,7 @@
 @stop
 
 @section('head')
-    <link href="/marketing/parcel/pianote/lead-gen-learn-songs.css" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/pianote/lead-gen-learn-songs.css') }}" rel="stylesheet">
 
     <style>
         .header-bg {
@@ -317,9 +317,9 @@
 
 @section('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/marketing/js/modal-autoplay-bootstrap.js"></script>
-    <script type="text/javascript" src="/marketing/js/modal-autoplay.js"></script>
-    <script type="text/javascript" src="/marketing/js/modal.js"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay-bootstrap.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script>
         $(document).ready(function(){
             $(document).foundation();

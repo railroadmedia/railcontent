@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
     <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="/marketing/parcel/pianote/ptme.css">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/ptme.css') }}">
 @stop
 
 @section('global-body')
@@ -603,8 +603,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
-    <script type="text/javascript" src="/marketing/parcel/pianote/nav-footer.js"></script>
-    <script type="text/javascript" src="/marketing/js/modal-autoplay-bootstrap.js"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/pianote/nav-footer.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay-bootstrap.js') }}"></script>
     <script>
         $(document).ready(function () {
             $('.lazy').Lazy({

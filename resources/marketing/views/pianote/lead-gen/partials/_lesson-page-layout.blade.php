@@ -14,19 +14,19 @@
 @endsection
 
 @section('head')
-    <link href="/marketing/parcel/pianote/lead-gen-learn-songs.css" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/pianote/lead-gen-learn-songs.css') }}" rel="stylesheet">
 
     @yield('extra-style')
 @endsection
 
 @section('scripts')
-    <script type="text/javascript" src="/marketing/js/modal.js"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script>
         $(document).ready(function () {
             $(document).foundation();
         });
     </script>
-    <script type="text/javascript" src="/marketing/js/modal-autoplay.js"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $('.assignment-row .fa-angle-down').click(function () {
