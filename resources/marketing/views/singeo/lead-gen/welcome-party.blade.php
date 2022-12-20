@@ -62,10 +62,10 @@
                 You can (and should) start using your membership right away. Because singing is fun! Here are a few tips on where to get started:
             </p>
             <ul>
-                <li class="mt-2 md:mt-4 lg:mt-2 mb-6 md:mb-4 lg:mb-7"><a class="text-white" href="/members/learning-paths/singeo-method/308514"><u>Singeo Method:</u></a> This is your step-by-step singing curriculum that allows you to progress at your own, comfortable pace as you work through each level towards confident singing.</li>
-                <li class="mt-2 md:mt-4 lg:mt-2 mb-6 md:mb-4 lg:mb-7"><a class="text-white" href="/members/routines"><u>Routines:</u></a> Start your day with our bite-sized routines -- ranging from 5 to 20 minutes -- perfect for the busy days or when you just want to shake things up a bit.</li>
-                <li class="mt-2 md:mt-4 lg:mt-2 mb-6 md:mb-4 lg:mb-7"><a class="text-white" href="/members/quick-tips"><u>Quick Tips:</u></a> Looking for some singing tips on a certain topic? Check out our ever-expanding Quick Tips library filled with a wide variety of useful singing topics.</li>
-                <li class="mt-2 md:mt-4 lg:mt-2 mb-6 md:mb-4 lg:mb-7"><a class="text-white" href="/members/student-focus"><u>Student Focus:</u></a> Want feedback on your singing? Submit a video for student review. We will watch your submission and then provide helpful encouragement and feedback.</li>
+                <li class="mt-2 md:mt-4 lg:mt-2 mb-6 md:mb-4 lg:mb-7"><a class="text-white" href="{{ get_musora_brand_base_url() }}/singeo/method/singeo-method/308514"><u>Singeo Method:</u></a> This is your step-by-step singing curriculum that allows you to progress at your own, comfortable pace as you work through each level towards confident singing.</li>
+                <li class="mt-2 md:mt-4 lg:mt-2 mb-6 md:mb-4 lg:mb-7"><a class="text-white" href="{{ get_musora_brand_base_url() }}/singeo/routines"><u>Routines:</u></a> Start your day with our bite-sized routines -- ranging from 5 to 20 minutes -- perfect for the busy days or when you just want to shake things up a bit.</li>
+                <li class="mt-2 md:mt-4 lg:mt-2 mb-6 md:mb-4 lg:mb-7"><a class="text-white" href="{{ get_musora_brand_base_url() }}/singeo/quick-tips"><u>Quick Tips:</u></a> Looking for some singing tips on a certain topic? Check out our ever-expanding Quick Tips library filled with a wide variety of useful singing topics.</li>
+                <li class="mt-2 md:mt-4 lg:mt-2 mb-6 md:mb-4 lg:mb-7"><a class="text-white" href="{{ get_musora_brand_base_url() }}/singeo/student-focus"><u>Student Focus:</u></a> Want feedback on your singing? Submit a video for student review. We will watch your submission and then provide helpful encouragement and feedback.</li>
             </ul>
             <p>See you at the New Member Welcome Party!</p>
         </div>
