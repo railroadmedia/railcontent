@@ -655,8 +655,8 @@
             </div>
             <p class="columns final-questions">
                 <span><strong>Any questions?</strong></span> You can also call us or order by phone<br class="hide-for-large"> toll-free at
-                <a href="tel:1-800-439-8921">1-800-439-8921</a><br class="hide-for-medium"> or directly at
-                <a href="tel:1-604-855-7605">1-604-855-7605</a>.<br> All prices listed in USD.</p>
+                <a href="tel:+18004398921">1-800-439-8921</a><br class="hide-for-medium"> or directly at
+                <a href="tel:+16048557605">1-604-855-7605</a>.<br> All prices listed in USD.</p>
         </div>
     </section>
 

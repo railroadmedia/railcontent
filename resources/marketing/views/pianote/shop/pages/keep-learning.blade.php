@@ -64,8 +64,8 @@
                 <a class="text-pianote" href="/ecommerce/add-to-cart?products%5BPIANOTE-MEMBERSHIP-1-MONTH%5D=1&redirect=%2Forder&locked=true"><em>Or choose a monthly membership for ${{ PianotePrices::$pianoteMembershipMonthlyRegular }}/month (no bonuses)</em></a>
                 <br><br>
                 <p class="text-black italic text-xs leading-normal text-center mx-auto">You can also order by phone toll-free at<br class="hidden-xs">
-                    <a class="text-pianote" href="tel:1-800-439-8921">1-800-439-8921</a> or directly at
-                    <a class="text-pianote" href="tel:1-604-855-7605">1-604-855-7605</a>. </p>
+                    <a class="text-pianote" href="tel:+18004398921">1-800-439-8921</a> or directly at
+                    <a class="text-pianote" href="tel:+16048557605">1-604-855-7605</a>. </p>
             </div>
             <div class="flex justify-center items-center px-5 pb-5 text-center md:pt-2 md:pt-4 md:pb-6 lg:p-5 lg:-mt-1 lg:mx-auto lg:mb-0 border-t-0 lg:border-t" style="border-color: #CCD3D3; border-top-style: solid;">
                 <img class="w-36 my-0 pr-6" src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/90-day.png">

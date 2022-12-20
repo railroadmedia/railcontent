@@ -94,8 +94,8 @@
                         <i class="fas fa-truck text-drumeo"></i> <strong class="text-drumeo">FREE SHIPPING!</strong><br>
                     @endif
                     You can also order by phone toll-free at<br class="hidden sm:inline">
-                    <a href="tel:1-800-439-8921" class="text-drumeo">1-800-439-8921</a> or directly at
-                    <a href="tel:1-604-855-7605" class="text-drumeo">1-604-855-7605</a>. </p>
+                    <a href="tel:+18004398921" class="text-drumeo">1-800-439-8921</a> or directly at
+                    <a href="tel:+16048557605" class="text-drumeo">1-604-855-7605</a>. </p>
         </div>
         @if(!empty($guaranteeBadge))
             <div class="hidden lg:flex justify-center items-center px-5 pb-5 text-center md:pt-2 md:pt-4 md:pb-6 lg:p-5 lg:-mt-1 lg:mx-auto lg:mb-0 border-t-0 lg:border-t" style="border-color: #CCD3D3; border-top-style: solid;">
