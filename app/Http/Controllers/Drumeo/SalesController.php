@@ -387,4 +387,120 @@ class SalesController extends BaseController
 
         return redirect()->away(url()->route('shopping-cart.to-cart.api') . "?products[30-day-drummer]=1");
     }
+
+    public function beginner()
+    {
+        return view('drumeo.sales.pages.beginner');
+    }
+
+    public function songs()
+    {
+        return view('drumeo.sales.pages.songs');
+    }
+
+    public function impact()
+    {
+        return view('drumeo.sales.pages.impact');
+    }
+
+    public function about()
+    {
+        return view('drumeo.sales.pages.about');
+    }
+
+    public function privacy()
+    {
+        return view('drumeo.sales.pages.privacy');
+    }
+
+    public function terms()
+    {
+        return view('drumeo.sales.pages.terms');
+    }
+
+    public function cookie()
+    {
+        return view('drumeo.sales.pages.cookie');
+    }
+
+    public function app()
+    {
+        return view('drumeo.sales.pages.app');
+    }
+
+    public function kids()
+    {
+        return view('drumeo.sales.pages.kids');
+    }
+
+    public function songDemo()
+    {
+        return view('drumeo.sales.pages.song-demo');
+    }
+
+    public function tomSawyer()
+    {
+        return view('drumeo.sales.pages.tom-sawyer');
+    }
+
+    public function drumFest()
+    {
+        return view('drumeo.sales.pages.drumfest');
+    }
+
+    public function trial()
+    {
+        return view('drumeo.sales.trials.trial');
+    }
+
+    public function earthWorks()
+    {
+        return view('drumeo.sales.trials.earthworks');
+    }
+
+    public function coachesQuiz()
+    {
+        return view('drumeo.sales.trials.coaches-quiz');
+    }
+
+    public function thirtyDayTrial()
+    {
+        return view('drumeo.sales.trials.30-day-trial');
+    }
+
+    public function melodics()
+    {
+        return view('drumeo.sales.trials.melodics');
+    }
+
+    public function newDrummerTrial()
+    {
+        return view('drumeo.sales.trials.new-drummers-trial');
+    }
+
+    public function powerPack()
+    {
+        return view('drumeo.sales.trials.power-pack');
+    }
+
+    public function bestBookTrial()
+    {
+        return view('drumeo.sales.trials.bestbook-trial');
+    }
+
+    public function toolBoxTrial()
+    {
+        return view('drumeo.sales.trials.toolbox-trial');
+    }
+
+    public function vDrums()
+    {
+        return view('drumeo.sales.trials.vdrums');
+    }
+
+    public function sonor()
+    {
+        return view('drumeo.sales.trials.sonor');
+    }
+
 }
