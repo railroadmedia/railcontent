@@ -8,7 +8,7 @@
     @include('_partials.layout.favicons.drumeo-favicons')
     @include('drumeo._partials._fonts')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link href="/marketing/css/drumeo/tailwind-helpers.css" rel="stylesheet">
+    <link href="{{ asset('marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
     <style>
         body {
             padding:30px;
