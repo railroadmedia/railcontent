@@ -70,7 +70,7 @@
             <a rel="noopener" href="https://facebook.com/drumeo/" target="_blank" class="social-media facebook" aria-label="facebook"><i class="fab fa-facebook-f"></i></a>
             <a rel="noopener" href="https://instagram.com/drumeoofficial/" target="_blank" class="social-media instagram" aria-label="instagram"><i class="fab fa-instagram"></i></a>
             <a rel="noopener" href="https://www.tiktok.com/@drumeoofficial" target="_blank" class="social-media tiktok" aria-label="tiktok"><i class="fab fa-tiktok"></i></a>
-            <p class="tiny">Musora Media, Inc. &copy; {{ date('Y') }} - &nbsp; <a href="/terms/">Terms</a>&nbsp;&nbsp;/&nbsp;&nbsp;<a href="/privacy/">Privacy</a>&nbsp;&nbsp;/&nbsp;&nbsp;<a rel="noopener" href="https://www.musora.com/jobs">Careers</a>&nbsp;&nbsp;/&nbsp;&nbsp;<a rel="noopener" href="https://www.musora.com/brand">Brand Guide</a></p>
+            <p class="tiny">Musora Media, Inc. &copy; {{ date('Y') }} - &nbsp; <a href="/terms/">Terms</a>&nbsp;&nbsp;/&nbsp;&nbsp;<a href="/privacy/">Privacy</a>&nbsp;&nbsp;/&nbsp;&nbsp;<a rel="noopener" href="https://www.musora.com/careers">Careers</a>&nbsp;&nbsp;/&nbsp;&nbsp;<a rel="noopener" href="https://www.musora.com/brand">Brand Guide</a></p>
         </div>
     </div>
 </footer>

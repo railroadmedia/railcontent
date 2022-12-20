@@ -192,13 +192,7 @@ class PostUrlsDecorator
             ConfigService::$availableBrands = $availableBrands;
 
             return $content['url'] ?? '';
-        } elseif (in_array('packs', $segments) && !is_numeric($lastSegment)) {
-            $content =
-                $this->contentService->getBySlugAndType($lastSegment, 'pack')
-                    ->first();
-            ConfigService::$availableBrands = $availableBrands;
 
-            return $content['url'];
         } elseif ($numberOfSegments == 3 && $segments[1] == 'semester-packs') {
             $content =
                 $this->contentService->getBySlugAndType($lastSegment, 'semester-pack')
@@ -244,6 +238,13 @@ class PostUrlsDecorator
         } elseif ($numberOfSegments == 4 && $segments[1] == 'learning-paths') {
             $content =
                 $this->contentService->getBySlugAndType($lastSegment, 'learning-path-level')
+                    ->first();
+            ConfigService::$availableBrands = $availableBrands;
+
+            return $content['url'];
+        } elseif (in_array('packs', $segments) && !is_numeric($lastSegment)) {
+            $content =
+                $this->contentService->getBySlugAndType($lastSegment, 'pack')
                     ->first();
             ConfigService::$availableBrands = $availableBrands;
 

@@ -23,7 +23,6 @@ Route::domain('{drumeoDomain}')
     Route::get('/beginner', function () { return view('drumeo.sales.pages.beginner'); });
     Route::get('/songs', function () { return view('drumeo.sales.pages.songs'); });
     Route::get('/impact', function () { return view('drumeo.sales.pages.impact'); });
-    Route::get('/support', function () { return view('drumeo.sales.pages.support'); });
     Route::get('/about', function () { return view('drumeo.sales.pages.about'); });
     Route::get('/privacy', function () { return view('drumeo.sales.pages.privacy'); });
     Route::get('/terms', function () { return view('drumeo.sales.pages.terms'); });
