@@ -1,11 +1,16 @@
 <?php
 
 return [
+    // brand, this gets swapped dynamically based on the current domain and members area page
+    'brand' => 'musora',
+
     // database
-    'database_connection_name' => env('DB_DEFAULT_CONNECTION_NAME','musora_laravel_mysql'),
+    'database_connection_name' => env('DB_DEFAULT_CONNECTION_NAME', 'musora_laravel_mysql'),
 
     // endpoint middleware
-    'all_routes_middleware' => [],
+    'all_routes_middleware' => [
+        'web_public',
+    ],
 
     // By default if a user id is passed to the service or controller functions it will be synced to all customers
     // using this custom attribute name. Typically this should refer to your users ID in your own database.
@@ -52,19 +57,693 @@ return [
 
     // form names and configuration
     'forms' => [
-        'Example Form Name' => [
-            'custom_attributes' => [
-                'attribute_to_sync_1' => 'my attribute value 1',
-                'attribute_to_sync_2' => 'my attribute value 2',
+        'drumeo' => [
+            '40 Songs' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'drumeo_prospect_top-40-songs',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
             ],
-            'events' => [
-                'event_to_sync_1',
-                'event_to_sync_2',
+            'Fastest Way To Get Faster' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'drumeo_prospect_fastest-way-to-get-faster',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
             ],
-            // can sync to multiple accounts using this
-            'accounts_to_sync' => [
-                'musora',
+            'Fastest Way To Get Faster - Facebook' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'drumeo_prospect_fastest-way-to-get-faster',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
             ],
-        ]
+            'Sucherman Sound' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'drumeo_prospect_sucherman-sound',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+            ],
+            'The Ultimate Drumming Toolbox' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'drumeo_prospect_ultimate-toolbox',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+            ],
+            'Hand Technique' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'drumeo_prospect_hand-technique',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+            ],
+            'Getting Started On The Drums' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'drumeo_prospect_getting-started',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+            ],
+            'Getting Started On The Drums - Facebook' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'drumeo_prospect_getting-started',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+            ],
+            'Getting Started On The Drums - Thrive' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'drumeo_prospect_getting-started',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+            ],
+            'Must-Know Drum Grooves' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'drumeo_prospect_must-know',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+            ],
+            'Grooves Of Michael Jackson' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'drumeo_prospect_mj-grooves',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+            ],
+            'Drum Set Maintenance' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'drumeo_prospect_drum-maintenence',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+            ],
+            'Linear Drumming' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'drumeo_prospect_cooper-linear',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+            ],
+            'COOP3RDRUMM3R - CC HTSPD - Lead Gen' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'drumeo_prospect_cooper-htspd',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+            ],
+            'Gavins Grooves' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'drumeo_prospect_gavins-grooves',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+            ],
+            'Free Play-Alongs' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'drumeo_prospect_free-playalongs',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+            ],
+            'Metal Play-Alongs' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'drumeo_prospect_metal-playalongs',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+            ],
+            'Grooves Of John Bonham' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'drumeo_prospect_grooves-of-john-bonham',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+            ],
+            'Blog Signup' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'drumeo_prospect_blog-sign-up',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+            ],
+            '2 Million Celebration' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'drumeo_prospect_2-million',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+            ],
+            'Drumeo Awards Giveaway' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'drumeo_prospect_awards-giveaway',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+            ],
+            '30 Day Drummer Waitlist' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'drumeo_prospect_30dd-waitlist',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+            ],
+        ],
+        'pianote' => [
+            'Chord Hacks' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_chord-hacks',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
+            'Chord Hacks - Facebook' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_chord-hacks',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
+            'Getting Started On The Piano' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_getting-started',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
+            'Getting Started On The Piano - Facebook' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_getting-started',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
+            'Sight Reading Made Simple' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_sight-reading-made-simple',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
+            'Learn 3 Songs On Piano' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_learn-3-songs',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
+            'Beginner Piano Christmas Carols' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_christmas-carols',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
+            'Blog Signup' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_blog-signup',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
+            'Riffs And Fills' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_riffs-and-fills',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
+            '50 Chord Charts' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_50-free-chord-charts',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
+            '1 Million' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_1-million',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
+            'Classical Piano Quick Start' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_classical-piano',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
+            'Piano In 5 Days' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_piano-in-5-days',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
+            'Piano For Complete Beginners Bootcamp' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_complete-beginner-bootcamp',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
+            'Perfect Practice Bootcamp' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_perfect-practice-bootcamp',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
+            'Giveaway Form' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_giveaway',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
+            'FP30 Giveaway' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_fp30-giveaway',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
+            '7 Days To Sight Reading' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_7-days',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
+            'Personality Quiz Academic' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_personality-quiz-academic',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
+            'Personality Quiz Entertainer' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_personality-quiz-entertainer',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
+            'Personality Quiz Explorer' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_personality-quiz-explorer',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
+            'Personality Quiz Scientist' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_personality-quiz-scientist',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
+        ],
+        'guitareo' => [
+            'The Guitarists Toolbox' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'guitareo_prospect_toolbox',
+                ],
+                'accounts_to_sync' => [
+                    'guitareo',
+                ],
+            ],
+            'Song Hour' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'guitareo_prospect_song-hour',
+                ],
+                'accounts_to_sync' => [
+                    'guitareo',
+                ],
+            ],
+            'Acoustic Guitar Jump Start' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'guitareo_prospect_acoustic-jumpstart',
+                ],
+                'accounts_to_sync' => [
+                    'guitareo',
+                ],
+            ],
+            'Guitar Chords for Hit Songs' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'guitareo_prospect_guitar-chords-for-hit-songs',
+                ],
+                'accounts_to_sync' => [
+                    'guitareo',
+                ],
+            ],
+            'Guitar Tricks' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'guitareo_prospect_guitar-tricks',
+                ],
+                'accounts_to_sync' => [
+                    'guitareo',
+                ],
+            ],
+            'The Beginner Guitar Starter' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'guitareo_prospect_starter-kit',
+                ],
+                'accounts_to_sync' => [
+                    'guitareo',
+                ],
+            ],
+            'Blog Signup' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'guitareo_prospect_blog-signup',
+                ],
+                'accounts_to_sync' => [
+                    'guitareo',
+                ],
+            ],
+            'Guitareo Waitlist 2' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'guitareo_prospect_waitlist_signup',
+                ],
+                'accounts_to_sync' => [
+                    'guitareo',
+                ],
+            ],
+            'Fretboard Cheatsheet' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'guitareo_prospect_fretboard-cheatsheet',
+                ],
+                'accounts_to_sync' => [
+                    'guitareo',
+                ],
+            ],
+            'Solo In An Hour' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'guitareo_prospect_solo-in-an-hour',
+                ],
+                'accounts_to_sync' => [
+                    'guitareo',
+                ],
+            ],
+            'Getting Started On The Acoustic Guitar' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'guitareo_prospect_getting-started-on-the-acoustic-guitar',
+                ],
+                'accounts_to_sync' => [
+                    'guitareo',
+                ],
+            ],
+            'Getting Started On The Electric Guitar' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'guitareo_prospect_getting-started-on-the-electric-guitar',
+                ],
+                'accounts_to_sync' => [
+                    'guitareo',
+                ],
+            ],
+            'Live Bootcamp' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'guitareo_prospect_live-bootcamp',
+                ],
+                'accounts_to_sync' => [
+                    'guitareo',
+                ],
+            ],
+            'Chord Bootcamp' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'guitareo_prospect_chord-bootcamp',
+                ],
+                'accounts_to_sync' => [
+                    'guitareo',
+                ],
+            ],
+        ],
+        'singeo' => [
+            'Improve Any Voice' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'singeo_prospect_improve-any-voice',
+                ],
+                'accounts_to_sync' => [
+                    'singeo',
+                ],
+            ],
+            'Holiday Karaoke' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'singeo_prospect_holiday-karaoke',
+                ],
+                'accounts_to_sync' => [
+                    'singeo',
+                ],
+            ],
+            'Singeo Waitlist' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'singeo_prospect_launch-waitlist',
+                ],
+                'accounts_to_sync' => [
+                    'singeo',
+                ],
+            ],
+            'Stop Hating Your Voice' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'singo_prospect_stop-hating_signup',
+                ],
+                'accounts_to_sync' => [
+                    'singeo',
+                ],
+            ],
+            'Eikon Giveaway' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'singo_prospect_eikon_giveaway_signup',
+                ],
+                'accounts_to_sync' => [
+                    'singeo',
+                ],
+            ],
+            'Ultimate Giveaway' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'singeo_prospect_ultimate_giveaway_signup',
+                ],
+                'accounts_to_sync' => [
+                    'singeo',
+                ],
+            ],
+            'Vocal Bootcamp' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'singeo_prospect_vocal-bootcamp_signup',
+                ],
+                'accounts_to_sync' => [
+                    'singeo',
+                ],
+            ],
+            'Breath Bootcamp' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'singeo_prospect_breath-bootcamp_signup',
+                ],
+                'accounts_to_sync' => [
+                    'singeo',
+                ],
+            ],
+            'Harmony Bootcamp' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'singeo_prospect_harmony-bootcamp_signup',
+                ],
+                'accounts_to_sync' => [
+                    'singeo',
+                ],
+            ],
+            'Blog Signup' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'singeo_prospect_blog_signup',
+                ],
+                'accounts_to_sync' => [
+                    'singeo',
+                ],
+            ],
+        ],
     ]
 ];

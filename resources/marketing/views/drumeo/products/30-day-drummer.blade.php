@@ -11,10 +11,10 @@
 
     @include('drumeo._partials._fonts')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-    <link href="/marketing/css/drumeo/tailwind-helpers.css" rel="stylesheet">
+    <link href="{{ asset('marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/30dd.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="/marketing/css/animate.css">
+    <link rel="stylesheet" href="{{ asset('/marketing/css/animate.css') }}">
     <style>
 
         [placeholder]:focus::-webkit-input-placeholder {

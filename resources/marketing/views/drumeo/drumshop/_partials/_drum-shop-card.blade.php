@@ -14,7 +14,7 @@
                     @endif
                     @if(!empty($packLogo))
                         <div class="logo">
-                            <img src="{{ $packLogo }}" alt="{{ $title }} logo">
+                            <img src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/{{ $packLogo }}" alt="{{ $title }} logo">
                         </div>
                     @endif
                     <i class="fas fa-arrow-right hover-icon"></i>

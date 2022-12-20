@@ -801,9 +801,10 @@ class ProfileSettingsPagesController extends BaseController
         session()->put('additional-feedback', $additionalFeedback);
 
         // TEMPORARY version that immediately cancels instead of offering a retention offer.
-        //return $this->cancel($request);
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        return $this->cancel($request);
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!
         // TEMPORARY version that immediately cancels instead of offering a retention offer.
-
 
         // if they claimed retention(win-back) offer recently don't offer it again, instead go right to cancelling
         if (ProductAccessMap::hasClaimedRetentionOfferWithin(user()) || $isTrial) {

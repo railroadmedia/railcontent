@@ -204,6 +204,11 @@ class NavigationService
                         'path' => '/'.brand().'/bootcamps',
                         'icon' => 'keys',
                     ],
+                    [
+                        'name' => 'Song Tutorial',
+                        'path' => '/'.brand().'/song-tutorials',
+                        'icon' => 'keys',
+                    ],
                 ],
                 [ // section
                     [

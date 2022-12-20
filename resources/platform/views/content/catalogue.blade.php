@@ -122,8 +122,8 @@
             @if($catalogueMeta['name'] == 'Songs' && $brand === 'drumeo')
                 <div class="tw-flex tw-mt-4">
                     <a
-                        @if(Carbon\Carbon::create(2022, 11, 15, 11, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
-                            href="/drumeo/forums/drumeo-songs/15/december-2022-song-request-voting-thread/13853?sortby_val=published_on"
+                        @if(Carbon\Carbon::create(2023, 1, 15, 11, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+                            href="/drumeo/forums/drumeo-songs/15/february-2023-song-request-voting-thread/14114?sortby_val=published_on"
                         @else
                             href="/drumeo/forums/threads/drumeo-songs/15"
                         @endif
@@ -308,6 +308,9 @@
                         :search-bar="true"
                         search-endpoint="/railcontent/search"
                         total-results="{{ $totalResults }}"
+                    @endif
+                    @if(!empty($searchTerm))
+                        search-term="{{ $searchTerm }}"
                     @endif
                     @if(!empty($sortOverride))
                         sort-override="{{ $sortOverride }}"

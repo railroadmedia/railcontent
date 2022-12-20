@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Bus;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 abstract class Command extends CommandBase
@@ -16,6 +17,16 @@ abstract class Command extends CommandBase
     {
         Log::info($string); //also write info statements to log
         $this->line($string, 'info', $verbosity);
+    }
+
+    public function infoSQL(string $sql)
+    {
+        $results = DB::select(DB::raw($sql));
+        $headers = array_keys(get_object_vars($results[0]));
+        $rows = collect($results)->map(function ($row) {
+            return get_object_vars($row);
+        });
+        $this->table($headers, $rows);
     }
 
     public function withProgressBarChunked(Builder $query, callable $function, $chunks = 1000, $timeout = 600): bool

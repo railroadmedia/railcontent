@@ -16,7 +16,7 @@
     <link href="{{ asset('/marketing/parcel/drumeo/ndsh.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css"/>
-    <link rel="stylesheet" href="/marketing/css/animate.css">
+    <link rel="stylesheet" href="{{ asset('/marketing/css/animate.css') }}">
     <style>
         header:after,
         .jared-bio:after  {

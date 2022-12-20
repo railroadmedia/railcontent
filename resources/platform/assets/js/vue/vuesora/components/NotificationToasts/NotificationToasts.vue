@@ -1,6 +1,6 @@
 <template>
   <teleport v-if="showNotification" to="#notifications-container">
-    <div style="position: fixed; left: 0; width: 100vw; z-index: 2000; bottom: 40px;">
+    <div style="position: fixed; left: 0; width: 100vw; z-index: 10000; bottom: 40px;">
       <div class="tw-text-center tw-pb-6">
         <div :class="`
                   tw-px-[16px]
@@ -21,7 +21,7 @@
               <i class="fas tw-mr-2 tw-text-[22px]" :class="notificationIcon ? notificationIcon : 'fa-bell'"></i>
               {{ notificationText }}
             </div>
-            <button class="dark:tw-bg-[#E4E4E7] tw-bg-[#223F57] tw-w-[40px] tw-h-[40px] tw-border-none tw-rounded-full"
+            <button class="tw-ml-2 dark:tw-bg-[#E4E4E7] tw-bg-[#223F57] tw-w-[40px] tw-h-[40px] tw-flex-shrink-0 tw-border-none tw-rounded-full"
               v-on:click="handleOnClose">
               <i class="far fa-times dark:tw-text-black tw-text-white"></i>
             </button>

@@ -90,6 +90,28 @@ class PackPagesController extends Controller
             )['results']
         ))->sortByUserActivity(user()->id);
 
+        foreach($packs as $pack){
+            $nextLesson = $this->contentService->getNextContentForParentContentForUser($pack['id'], user()->id);
+            if($nextLesson && $nextLesson['type'] == 'pack-bundle-lesson'){
+                $bundle = $this->contentService->getByChildIdWhereParentTypeIn($nextLesson['id'],['pack-bundle'])->first();
+
+                $nextLesson['url'] = url()->route(
+                    'platform.packs.third-level',
+                    [
+                        "brand" => $brand,
+                        "packSlug" => $pack['slug'],
+                        "packId" => $pack['id'],
+                        "packBundleSlug" => $bundle['slug'],
+                        "packBundleId" => $bundle['id'],
+                        "packBundleLessonSlug" => $nextLesson['slug'],
+                        "packBundleLessonId" => $nextLesson['id'],
+                    ]
+                );
+
+                $pack['next_lesson_url'] = $nextLesson['url'];
+            }
+        }
+
         if (user()->isALifetimeMember() && brand() == 'drumeo') {
             foreach ($packs as $packIndex => $pack) {
                 // only lifetime drumeo members should have access to this pack 'lifetime-members-masterclass'
@@ -228,6 +250,22 @@ class PackPagesController extends Controller
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MAXIMUM;
         $collectionForDecoration = Decorator::decorate($collectionForDecoration, 'content');
 
+        foreach ($lessons as $lesson) {
+            $url = url()->route(
+                'platform.packs.third-level',
+                [
+                    "brand" => $brand,
+                    "packSlug" => $packSlug,
+                    "packId" => $packId,
+                    "packBundleSlug" => $thisPackBundle['slug'],
+                    "packBundleId" => $thisPackBundle['id'],
+                    "packBundleLessonSlug" => $lesson['slug'],
+                    "packBundleLessonId" => $lesson['id'],
+                ]
+            );
+            $lesson['url'] = $url;
+        }
+
         $childContent = new ContentFilterResultsEntity(['results' => $lessons]);
 
         $infoData = [
@@ -328,6 +366,18 @@ class PackPagesController extends Controller
             if ($parentChild['id'] == $packBundleLessonId) {
                 $lesson = $parentChild;
             }
+            $parentChild['url'] = url()->route(
+                'platform.packs.third-level',
+                [
+                    "brand" => $brand,
+                    "packSlug" => $packSlug,
+                    "packId" => $packId,
+                    "packBundleSlug" => $thisPackBundle['slug'],
+                    "packBundleId" => $thisPackBundle['id'],
+                    "packBundleLessonSlug" => $parentChild['slug'],
+                    "packBundleLessonId" => $parentChild['id'],
+                ]
+            );
         }
 
         if (empty($lesson)) {

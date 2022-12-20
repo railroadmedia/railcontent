@@ -49,8 +49,8 @@
         <div class="footer-link-wrap">
             <h1><a href="/shop/">PIANOTE SHOP</a></h1>
             <p><a href="/">Pianote Membership</a><br>
-                <a href="/500-songs">500 Songs In 5 Days</a><br>
-                <a href="/play-beautiful-piano">Playing Beautiful Piano</a><br>
+                <a href="/shop/500-songs">500 Songs In 5 Days</a><br>
+                <a href="/shop/play-beautiful-piano">Playing Beautiful Piano</a><br>
                 <a href="/shop/chords-scales-book">Chords & Scales Book</a><br>
                 <a href="/shop/practice-planner">Practice Planner</a></p>
         </div>
