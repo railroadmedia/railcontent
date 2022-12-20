@@ -3,9 +3,11 @@
 namespace App\Console;
 
 use App\Console\Commands\AddMissingQuietPadsForBFOrders2022;
+use App\Console\Commands\CreateSongsDecember2022;
 use App\Console\Commands\MigrateCoachesToInstructors;
 use App\Console\Commands\MigrateGuitareoUserXP;
 use App\Console\Commands\MigrateTypeBasedContentPermissionsToIdBased;
+use App\Console\Commands\MigratePianoteSongTutorial;
 use App\Console\Commands\PopulateNewRolesAndPermissionsTables;
 use App\Console\Commands\PopulateUserBrandLevel;
 use App\Console\Commands\PopulateUserMinutesPracticedPerBrand;
@@ -40,7 +42,9 @@ class Kernel extends ConsoleKernel
         PopulateUserMinutesPracticedPerBrand::class,
         VaporEnvManager::class,
         TestLessonsDescriptionUrls::class,
-        RepairUserProgressStartedOn::class
+	    MigratePianoteSongTutorial::class,
+        CreateSongsDecember2022::class,
+        RepairUserProgressStartedOn::class,
     ];
 
     /**
