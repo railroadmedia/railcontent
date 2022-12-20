@@ -8,6 +8,72 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class LeadGenController extends BaseController
 {
+
+    public function thankyou()
+    {
+        return view('pianote.lead-gen.thank-you');
+    }
+
+    public function thankyoualt()
+    {
+        return view('pianote.lead-gen.thank-you-alt');
+    }
+
+    public function emailconfirmation ()
+    {
+        return view('pianote.lead-gen.email-confirmation');
+    }
+
+    public function confirming()
+    {
+        return view('pianote.lead-gen.confirming');
+    }
+
+    public function subscribed()
+    {
+        return view('pianote.lead-gen.subscribed');
+    }
+
+    public function weeklyemail()
+    {
+        return view('pianote.lead-gen.weekly-email');
+    }
+
+    public function weeklyemail2()
+    {
+        return view('pianote.lead-gen.weekly-email-2');
+    }
+
+    public function recitals()
+    {
+        return view('pianote.lead-gen.recitals');
+    }
+
+    public function classicalcohort1()
+    {
+        return view('pianote.lead-gen.classical-cohort-1');
+    }
+
+    public function classicalcohort2()
+    {
+        return view('pianote.lead-gen.classical-cohort-2');
+    }
+
+    public function classicalcohort3()
+    {
+        return view('pianote.lead-gen.classical-cohort-3');
+    }
+
+    public function classicalcohort4()
+    {
+        return view('pianote.lead-gen.classical-cohort-4');
+    }
+
+    public function onemillion()
+    {
+        return view('pianote.lead-gen.one-million');
+    }
+
     public function beginnerBootcamp(Request $request, $domain, $page = null)
     {
         if(is_null($page)){

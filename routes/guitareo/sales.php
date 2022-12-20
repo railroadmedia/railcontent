@@ -10,29 +10,28 @@ Route::domain('{guitareoDomain}')
     Route::get('/student-only', [SalesController::class, 'membershipStudents']);
     Route::get('/trial', [SalesController::class, 'trial']);
     Route::get('/trial-month', [SalesController::class, 'trial30']);
-    Route::get('/choose-your-trial', function () { return view('guitareo.sales.trials.trial-selection.week'); });
-    Route::get('/choose-your-trial-month', function () { return view('guitareo.sales.trials.trial-selection.month'); });
+    Route::get('/choose-your-trial', [SalesController::class, 'chooseyourtrial']);
+    Route::get('/choose-your-trial-month', [SalesController::class, 'chooseyourtrialmonth']);
 
-    Route::get('/cookie', function () { return view('guitareo.sales.pages.cookie'); });
-    Route::get('/terms', function () { return view('guitareo.sales.pages.terms'); });
-    Route::get('/privacy', function () { return view('guitareo.sales.pages.privacy'); });
+    Route::get('/cookie', [SalesController::class, 'cookie']);
+    Route::get('/terms', [SalesController::class, 'terms']);
+    Route::get('/privacy', [SalesController::class, 'privacy']);
 
-    Route::get('/lifetime', function () { return view('guitareo.shop.pages.lifetime-bundle', ['theme' => 'guitareo']); });
-        Route::get('/survival-kit-instructions', function () { return view('guitareo.shop.pages.survival-kit-tutorial', ['theme' => 'guitareo']); });
+    Route::get('/lifetime', [SalesController::class, 'lifetime']);
+        Route::get('/survival-kit-instructions', [SalesController::class, 'survivalkitinstructions']);
 
-    Route::get('/daddario-string-session', function () { return view('guitareo.sales.trials.daddario-string-session'); });
-    Route::get('/daddario-string-session-ga ', function () { return view('guitareo.sales.trials.daddario-string-session'); });
+    Route::get('/daddario-string-session', [SalesController::class, 'daddariostringsession']);
+    Route::get('/daddario-string-session-ga ', [SalesController::class, 'daddariostringsessionga']);
 
-    Route::get('/affiliate/asobergirlsguide', function () { return view('guitareo.sales.trials.affiliates.asobergirlsguide'); });
-    Route::get('/affiliate-trial', function () { return view('guitareo.sales.trials.trial-selection.affiliates'); });
+    Route::get('/affiliate/asobergirlsguide', [SalesController::class, 'asobergirlsguide']);
+    Route::get('/affiliate-trial', [SalesController::class, 'affiliatetrial']);
 
-    Route::get('/welcome', function () { return view('guitareo.sales.pages.welcome-1'); });
-    Route::get('/welcome/2', function () { return view('guitareo.sales.pages.welcome-2'); });
-    Route::get('/welcome/3', function () { return view('guitareo.sales.pages.welcome-3'); });
-    Route::get('/ayla-recommends', function () { return view('guitareo.shop.ayla-recommends'); });
+    Route::get('/welcome', [SalesController::class, 'welcome']);
+    Route::get('/welcome/2', [SalesController::class, 'welcome2']);
+    Route::get('/welcome/3', [SalesController::class, 'welcome3']);
+    Route::get('/ayla-recommends', [SalesController::class, 'aylarecommends']);
 
-    Route::get('/survival-kit', function () { return view('shop.pages.survival-kit'); });
-    Route::get('/survival-kit-instructions', function () { return view('shop.pages.survival-kit-tutorial'); });
+    Route::get('/survival-kit', [SalesController::class, 'survivalkit']);
 
     Route::get('/shop/500-songs', [SalesController::class, 'songs500']);
     Route::get('/500-songs-discount', [SalesController::class, 'songs500Discount']);

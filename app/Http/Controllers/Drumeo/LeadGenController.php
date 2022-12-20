@@ -478,4 +478,75 @@ class LeadGenController extends BaseController
 
         throw new NotFoundHttpException();
     }
+
+    public function giftGuide()
+    {
+        return view('drumeo.lead-gen.gift-guide.new-years-guide');
+    }
+
+    public function newYearGift()
+    {
+        return view('drumeo.lead-gen.gift-guide.new-years-guide');
+    }
+
+    public function birthdayGifts()
+    {
+        return view('drumeo.lead-gen.gift-guide.birthday-guide');
+    }
+
+    public function christmasGift()
+    {
+        return view('drumeo.lead-gen.gift-guide.christmas-guide');
+    }
+
+    public function fatherGift()
+    {
+        return view('drumeo.lead-gen.gift-guide.fathers-day-guide');
+    }
+
+    public function shows(Request $request, $domain, $page = null)
+    {
+        return view('drumeo.lead-gen.shows.'.$page);
+
+        throw new NotFoundHttpException();
+    }
+
+    public function pages(Request $request, $domain, $page = null)
+    {
+        return view('drumeo.lead-gen.pages.'.$page);
+
+        throw new NotFoundHttpException();
+    }
+
+    public function druminarCBTTD()
+    {
+        return view('drumeo.lead-gen.webinar.coming-back-to-the-drums');
+    }
+
+    public function druminarEvent()
+    {
+        return view('drumeo.lead-gen.webinar.event');
+    }
+
+    public function teachDrums()
+    {
+        return view('drumeo.lead-gen.pages.teach-drums');
+    }
+
+    public function teachBeginner()
+    {
+        return view('drumeo.lead-gen.pages.teach-a-beginner-lessons');
+    }
+
+    public function weeklyMail()
+    {
+        return view('drumeo.lead-gen.blog-forms.weeklyemail');
+    }
+
+    public function blogForms(Request $request, $domain, $page = null)
+    {
+        return view('drumeo.lead-gen.blog-forms.'.$page);
+
+        throw new NotFoundHttpException();
+    }
 }
