@@ -7,7 +7,7 @@
                         <img class="h-36 sm:h-72 lg:h-96" src="https://cdn.musora.com/image/fetch/w_1100,q_auto:best/{{$logo}}" alt="logo" />
                     @else
                         <div class="bonus-wrap relative inline-block align-top mx-auto px-1 md:px-3 w-full max-w-md">
-                            <img class="h-20 absolute top-0 right-0 z-10 -mt-8 -mr-2" src="https://drumeo-assets.s3.amazonaws.com/promos/december/santa-hat.png">
+                            <img class="h-20 absolute top-0 right-0 z-10 -mt-8 -mr-2" src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/december/santa-hat.png">
                             <div class=" inline-block relative w-full group" style="padding-bottom: 47%;perspective: 1000px;">
                                 <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
                                     <div class="border-2 border-promo front absolute z-20 overflow-hidden rounded-3xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
