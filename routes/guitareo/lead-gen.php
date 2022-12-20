@@ -7,15 +7,16 @@ use App\Http\Controllers\Guitareo\LeadGenController;
 Route::domain('{guitareoDomain}')
     ->middleware(['web_public'])
     ->group(function () {
-    Route::get('/thank-you-white', function () { return view('guitareo.lead-gen.pages.thank-you'); });
-    Route::get('/welcome-party', function () { return view('guitareo.lead-gen.pages.welcome-party'); });
-    Route::get('/welcome-party-carlos', function () { return view('guitareo.lead-gen.pages.welcome-party-carlos'); });
-    Route::get('/confirming', function () { return view('guitareo.lead-gen.pages.confirming'); });
-    Route::get('/subscribed', function () { return view('guitareo.lead-gen.pages.subscribed'); });
-    Route::get('/weekly-email',function () { return view('guitareo.lead-gen.pages.weekly-email'); } );
-    Route::get('/weeklyemail',function () { return view('guitareo.lead-gen.pages.weekly-email-2'); } );
-    Route::get('/recitals',function () { return view('guitareo.lead-gen.pages.recitals'); } );
-    Route::get('/fretboard-cheatsheet',function () { return view('guitareo.lead-gen.pages.fretboard-cheatsheet'); } );
+
+    Route::get('/thank-you-white', [LeadGenController::class, 'thankyouwhite']);
+    Route::get('/welcome-party', [LeadGenController::class, 'welcomeparty']);
+    Route::get('/welcome-party-carlos', [LeadGenController::class, 'welcomepartycarlos']);
+    Route::get('/confirming', [LeadGenController::class, 'confirming']);
+    Route::get('/subscribed', [LeadGenController::class, 'subscribed']);
+    Route::get('/weekly-email', [LeadGenController::class, 'weeklyemail']);
+    Route::get('/weeklyemail', [LeadGenController::class, 'weeklyemail2']);
+    Route::get('/recitals', [LeadGenController::class, 'recitals']);
+    Route::get('/fretboard-cheatsheet', [LeadGenController::class, 'fretboardcheatsheet']);
 
     Route::group(['prefix' => 'back-to-basics'],
         function () {
