@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/sales.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/lead-gen.css') }}">
-    <link rel="stylesheet" href="https://www.drumeo.com/laravel/public/assets/members-area/css/gulp/lead-gen.css">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/lead-gen.css') }}">
 
     <style>
         a:hover {

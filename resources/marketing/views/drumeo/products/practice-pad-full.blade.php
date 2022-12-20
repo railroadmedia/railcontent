@@ -960,7 +960,7 @@
 
 @section('scripts')
     @parent
-    <script src="/marketing/js/drumeo/imageMapResizer.min.js"></script>
+    <script src="{{ asset('/marketing/js/drumeo/imageMapResizer.min.js') }}"></script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script src="{{ asset('/marketing/js/sliding-anchor.js') }}"></script>
     <script>

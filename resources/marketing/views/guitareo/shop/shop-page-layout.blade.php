@@ -18,9 +18,9 @@
 @endsection
 
 @section('scripts')
-    <script type="text/javascript" src="/marketing/parcel/guitareo/nav-footer.js"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/guitareo/nav-footer.js') }}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
-    <script type="text/javascript" src="/marketing/parcel/guitareo/shop-product.js"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/guitareo/shop-product.js') }}"></script>
 @endsection
 
 @section('content')

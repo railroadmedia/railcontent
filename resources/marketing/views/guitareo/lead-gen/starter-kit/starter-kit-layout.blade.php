@@ -12,7 +12,7 @@
 @section('styles')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation-float.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link rel="stylesheet" href="/marketing/parcel/guitareo/lead-gen-lessons.css">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/lead-gen-lessons.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}">
 @endsection
 
@@ -25,5 +25,5 @@
 @endsection
 
 @section('scripts')
-    <script src="/marketing/parcel/guitareo/nav-footer.js"></script>
+    <script src="{{ asset('/marketing/parcel/guitareo/nav-footer.js') }}"></script>
 @endsection
