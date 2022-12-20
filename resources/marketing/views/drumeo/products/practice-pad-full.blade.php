@@ -1361,7 +1361,7 @@
 
             @include('drumeo.lead-gen.partials.thank-you-box', [
                 "headline" => "SENT",
-                "body" => "We'll respond to you soon! If you haven't heard back in the next week, please email <a class='text-white' href='/support'>contact us</a>."
+                "body" => "We'll respond to you soon! If you haven't heard back in the next week, please email <a class='text-white' href='{{ get_musora_brand_base_url() }}/contact'>contact us</a>."
             ])
         </div>
     </div>
