@@ -121,7 +121,7 @@
             <br class="hidden md:inline">
             If you don’t, then check your spam folder or re-enter your email address again.
             <br class="hidden md:inline">
-            Or you can contact us <a class="text-blue-600" href="/support">here</a><br><br>
+            Or you can contact us <a class="text-blue-600" href="{{ get_musora_brand_base_url() }}/contact">here</a><br><br>
             You can also reach us any time <a class="text-blue-600" href="tel:+18004398921">1-800-439-8921</a><br class="md:hidden"> or directly at <a class="text-blue-600" href="tel:+16048557605">1-604-855-7605</a>.</em>
         </p>
         <div class="social-links">

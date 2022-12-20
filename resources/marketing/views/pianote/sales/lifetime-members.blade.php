@@ -387,7 +387,7 @@
         <div class="container mx-auto relative z-50 max-w-md">
             <div class="inline-block w-full px-3 md:px-4 mb-5 text-light-navy">
                 <h5 class="mb-2"><strong>Still have questions?</strong></h5>
-                <p>If you need any further information about becoming a Lifetime Member, <a href="/support"><u>contact our amazing support team!</u></a>
+                <p>If you need any further information about becoming a Lifetime Member, <a href="{{ get_musora_brand_base_url() }}/contact"><u>contact our amazing support team!</u></a>
                     <br><br>
                     A friendly and knowledgeable support team member will get back to you right away.</p>
             </div>

@@ -7,7 +7,6 @@ Route::domain('{singeoDomain}')
     ->middleware(['web_public'])
     ->group(function () {
     Route::get('/', [SalesController::class, 'home']);
-    Route::get('/support', function () { return view('singeo.sales.pages.support'); } );
     Route::get('/student-only', function () { return view('singeo.sales.student-only'); } );
     Route::get('/privacy', function () { return view('singeo.sales.pages.privacy'); } );
     Route::get('/terms', function () { return view('singeo.sales.pages.terms'); } );

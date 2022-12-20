@@ -67,7 +67,7 @@
         <div class="container mx-auto">
             <img class="logo" src="https://cdn.musora.com/image/fetch/w_280,q_auto:best/https://musora-center.s3.amazonaws.com/logos/singeo-logo-white.png" alt="Singeo">
             <p><a href="https://goo.gl/maps/c4JxakSmnjB2" target="_blank">107-31265 Wheel Ave. Abbotsford,<br class="mobile-only"> BC, V2T 6H2 Canada</a><br>
-                <a href="tel:+18004398921">Toll Free: 1-800-439-8921</a> / <br class="mobile-only"><a href="tel:+16048557605">Direct: 1-604-855-7605</a> / <br class="mobile-only"><a href="/support">Contact Us</a></p>
+                <a href="tel:+18004398921">Toll Free: 1-800-439-8921</a> / <br class="mobile-only"><a href="tel:+16048557605">Direct: 1-604-855-7605</a> / <br class="mobile-only"><a href="{{ get_musora_brand_base_url() }}/contact">Contact Us</a></p>
             <a href="https://www.youtube.com/c/singeoofficial" target="_blank" class="social-media youtube"><i class="fab fa-youtube"></i></a>
             <a href="https://www.facebook.com/singeoofficial/" target="_blank" class="social-media facebook"><i class="fab fa-facebook-f"></i></a>
             <a href="https://www.instagram.com/singeoofficial/" target="_blank" class="social-media instagram"><i class="fab fa-instagram"></i></a>

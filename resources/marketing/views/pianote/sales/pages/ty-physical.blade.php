@@ -221,7 +221,7 @@
             <div class="phone-email w-full">
                 <div class="md:w-1/3 float-left px-3 md:px-4 w-full">
                     <p><strong>Contact Us</strong><br>
-                        <a class="text-blue-600" href="/support">here</a></p>
+                        <a class="text-blue-600" href="{{ get_musora_brand_base_url() }}/contact">here</a></p>
                 </div>
                 <div class="md:w-1/3 float-left px-3 md:px-4 w-full">
                     <p><strong>International</strong><br>

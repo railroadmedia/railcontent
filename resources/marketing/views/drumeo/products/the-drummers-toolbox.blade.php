@@ -23,7 +23,7 @@
     @if(strpos(url()->full(), 'thankyou'))
         <div class="thank-you-banner text-center">
             <p><strong>Thanks for contacting us!</strong><br>
-                We'll respond to you soon! If you haven't heard back in the next week, please <a class="text-white" href="/support">contact us</a>.</p>
+                We'll respond to you soon! If you haven't heard back in the next week, please <a class="text-white" href="{{ get_musora_brand_base_url() }}/contact">contact us</a>.</p>
         </div>
     @endif
     @if(strpos(url()->full(), 'error'))
@@ -582,7 +582,7 @@
 
                 @include('drumeo.lead-gen.partials.thank-you-box', [
                     "headline" => "SENT",
-                    "body" => "We'll respond to you soon! If you haven't heard back in the next week, please <a class='text-white' href='/support'>contact us</a>."
+                    "body" => "We'll respond to you soon! If you haven't heard back in the next week, please <a class='text-white' href='{{ get_musora_brand_base_url() }}/contact'>contact us</a>."
                 ])
             </div>
         </div>

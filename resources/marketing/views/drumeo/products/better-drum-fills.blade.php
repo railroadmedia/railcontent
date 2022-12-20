@@ -282,7 +282,7 @@
                 <img class="guarantee-badge show-for-medium" src="https://dpwjbsxqtam5n.cloudfront.net/sales/guarantee-badge.png">
                 <div class="text-wrap text-left">
                     <h2><strong>90-Day Money-Back Guarantee</strong></h2>
-                    <p><strong>OUR PROMISE TO YOU:</strong> More than anything, we want you to enjoy a super-positive experience on the drums. And that means we only want you to pay if you actually LOVE your Four Weeks To Better Drum Fills experience. So click any of the big buttons on this page to get started risk-free. If it’s not for you, simply <a class="text-white" href="/support">contact us</a> within 90 days for a full refund.</p>
+                    <p><strong>OUR PROMISE TO YOU:</strong> More than anything, we want you to enjoy a super-positive experience on the drums. And that means we only want you to pay if you actually LOVE your Four Weeks To Better Drum Fills experience. So click any of the big buttons on this page to get started risk-free. If it’s not for you, simply <a class="text-white" href="{{ get_musora_brand_base_url() }}/contact">contact us</a> within 90 days for a full refund.</p>
                 </div>
             </div>
         </div>

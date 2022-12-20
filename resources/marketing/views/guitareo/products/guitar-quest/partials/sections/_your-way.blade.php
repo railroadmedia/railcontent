@@ -51,7 +51,7 @@
                         </span>
                     </h2>
                     <p class="font-semibold w-full m-auto text-center md:text-lg md:w-3/4 lg:text-left lg:w-auto">
-                        We love our students. More than anything, we want you to enjoy a super-positive experience playing guitar. And that means we only want you to pay if you actually LOVE your Guitareo experience! So join below to try it out totally risk-free. If it’s not for you, simply <a class="text-white" href="/support">contact us</a> within 90 days to request a full refund.
+                        We love our students. More than anything, we want you to enjoy a super-positive experience playing guitar. And that means we only want you to pay if you actually LOVE your Guitareo experience! So join below to try it out totally risk-free. If it’s not for you, simply <a class="text-white" href="{{ get_musora_brand_base_url() }}/contact">contact us</a> within 90 days to request a full refund.
                     </p>
                 </div>
                 <div class="mx-auto w-7/12 order-first pb-12 md:w-full md:pl-4 lg:pb-0 lg:w-2/6 lg:order-none">

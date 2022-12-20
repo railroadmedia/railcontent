@@ -420,7 +420,7 @@
             </div>
             <div class="large-8 medium-7 columns text-center medium-text-left">
                 <h1>90-Day Money-Back Guarantee.</h1>
-                <p>We love our students. More than anything, we want you to enjoy a super-positive experience playing guitar. And that means we only want you to pay if you actually LOVE your Guitareo experience! So join below to try it out totally risk-free. If it’s not for you, simply <a class="text-white" href="/support">contact us</a> within 90 days to request a full refund.</p>
+                <p>We love our students. More than anything, we want you to enjoy a super-positive experience playing guitar. And that means we only want you to pay if you actually LOVE your Guitareo experience! So join below to try it out totally risk-free. If it’s not for you, simply <a class="text-white" href="{{ get_musora_brand_base_url() }}/contact">contact us</a> within 90 days to request a full refund.</p>
             </div>
         </div>
     </section>

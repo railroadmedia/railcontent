@@ -292,7 +292,7 @@
             </div>
             {{-- <div class="inline-block w-full px-3 md:px-4 questions max-w-2xl"> --}}
             {{-- <h4><strong>Still have questions?</strong></h4> --}}
-            {{-- <p>If you need any further information about becoming a Lifetime Member, contact our amazing support team <a class="text-white" href="/support">here</a> --}}
+            {{-- <p>If you need any further information about becoming a Lifetime Member, contact our amazing support team <a class="text-white" href="{{ get_musora_brand_base_url() }}/contact">here</a> --}}
             {{-- <br><br> --}}
             {{-- A friendly and knowledgeable support team member will get back to you right away. --}}
             {{-- <br> All prices listed in USD.</p> --}}
