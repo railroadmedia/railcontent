@@ -19,7 +19,7 @@
 @section('url-slug', 'in-rhythm' )
 
 @section('show-url')
-    /members/lessons/in-rhythm
+    {{ get_musora_brand_base_url() }}/drumeo/in-rhythm
 @endsection
 
 @section('watch-arrow')

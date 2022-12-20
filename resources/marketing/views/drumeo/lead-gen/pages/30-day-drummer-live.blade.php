@@ -175,25 +175,25 @@
                 <p class="leading-none tracking-tighter text-xs py-0.5 text-white" style="background-color:#bb3744;"><strong>SEPT</strong></p>
                 <p class="leading-none text-lg py-1 text-black"><strong class="font-black">10</strong></p>
             </div><br class="inline sm:hidden">
-            <a target="_blank" class=" @if(Carbon\Carbon::create(2022, 9, 10, 17, 0, 0, 'America/Vancouver') < Carbon\Carbon::now()) sold-out @endif join blue medium my-2 sm:my-0" href="/members/30-day-drummer-1">Afternoon Session - 3pm PDT</a>
+            <a target="_blank" class=" @if(Carbon\Carbon::create(2022, 9, 10, 17, 0, 0, 'America/Vancouver') < Carbon\Carbon::now()) sold-out @endif join blue medium my-2 sm:my-0" href="{{ get_musora_brand_base_url() }}/drumeo/packs/30-day-drummer/367385/30-day-drummer/367664">Afternoon Session - 3pm PDT</a>
             <hr class="my-7 sm:my-10">
             <div class="bg-white text-center rounded-md inline-block overflow-hidden w-11 mr-2 align-middle">
                 <p class="leading-none tracking-tighter text-xs py-0.5 text-white" style="background-color:#bb3744;"><strong>SEPT</strong></p>
                 <p class="leading-none text-lg py-1 text-black"><strong class="font-black">17</strong></p>
             </div><br class="inline sm:hidden">
-            <a target="_blank" class=" @if(Carbon\Carbon::create(2022, 9, 17, 12, 0, 0, 'America/Vancouver') < Carbon\Carbon::now()) sold-out @endif join blue medium my-2 sm:my-0" href="/members/30-day-drummer-2">Morning Session - 10am PDT</a>
+            <a target="_blank" class=" @if(Carbon\Carbon::create(2022, 9, 17, 12, 0, 0, 'America/Vancouver') < Carbon\Carbon::now()) sold-out @endif join blue medium my-2 sm:my-0" href="{{ get_musora_brand_base_url() }}/drumeo/packs/30-day-drummer/367385/30-day-drummer/367664">Morning Session - 10am PDT</a>
             <hr class="my-7 sm:my-10">
             <div class="bg-white text-center rounded-md inline-block overflow-hidden w-11 mr-2 align-middle">
                 <p class="leading-none tracking-tighter text-xs py-0.5 text-white" style="background-color:#bb3744;"><strong>SEPT</strong></p>
                 <p class="leading-none text-lg py-1 text-black"><strong class="font-black">24</strong></p>
             </div><br class="inline sm:hidden">
-            <a target="_blank" class=" @if(Carbon\Carbon::create(2022, 9, 24, 17, 0, 0, 'America/Vancouver') < Carbon\Carbon::now()) sold-out @endif join blue medium my-2 sm:my-0" href="/members/30-day-drummer-3">Afternoon Session - 3pm PDT</a>
+            <a target="_blank" class=" @if(Carbon\Carbon::create(2022, 9, 24, 17, 0, 0, 'America/Vancouver') < Carbon\Carbon::now()) sold-out @endif join blue medium my-2 sm:my-0" href="{{ get_musora_brand_base_url() }}/drumeo/packs/30-day-drummer/367385/30-day-drummer/367664">Afternoon Session - 3pm PDT</a>
             <hr class="my-7 sm:my-10">
             <div class="bg-white text-center rounded-md inline-block overflow-hidden w-11 mr-2 align-middle">
                 <p class="leading-none tracking-tighter text-xs py-0.5 text-white" style="background-color:#bb3744;"><strong>OCT</strong></p>
                 <p class="leading-none text-lg py-1 text-black"><strong class="font-black">1</strong></p>
             </div><br class="inline sm:hidden">
-            <a target="_blank" class=" @if(Carbon\Carbon::create(2022, 10, 1, 12, 0, 0, 'America/Vancouver') < Carbon\Carbon::now()) sold-out @endif join blue medium my-2 sm:my-0" href="/members/30-day-drummer-4">Morning Session - 10am PDT</a>
+            <a target="_blank" class=" @if(Carbon\Carbon::create(2022, 10, 1, 12, 0, 0, 'America/Vancouver') < Carbon\Carbon::now()) sold-out @endif join blue medium my-2 sm:my-0" href="{{ get_musora_brand_base_url() }}/drumeo/packs/30-day-drummer/367385/30-day-drummer/367664">Morning Session - 10am PDT</a>
         </div>
     </section>
 

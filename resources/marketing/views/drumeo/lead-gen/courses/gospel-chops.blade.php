@@ -24,7 +24,7 @@
 @section('url-slug', 'gospel-chops' )
 
 @section('course-url')
-    /members/lessons/courses/218926
+    {{ get_musora_brand_base_url() }}/drumeo/courses/gospel-chops-tasty-combinations/218926
 @endsection
 
 @section('biography')
