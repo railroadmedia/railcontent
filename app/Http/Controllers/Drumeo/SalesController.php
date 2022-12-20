@@ -13,6 +13,7 @@ use Railroad\Ecommerce\Repositories\ProductRepository;
 
 use Railroad\Ecommerce\Entities\User;
 use Railroad\Ecommerce\Services\UserProductService;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * @param stdClass[] $arrayOfEntities
@@ -503,4 +504,134 @@ class SalesController extends BaseController
         return view('drumeo.sales.trials.sonor');
     }
 
+    public function coachTrial()
+    {
+        return view('drumeo.sales.trials.trial-selection.coach-trial');
+    }
+
+    public function chooseTrial()
+    {
+        return view('drumeo.sales.trials.trial-selection.choose-your-trial');
+    }
+
+    public function earthWorksTrial()
+    {
+        return view('drumeo.sales.trials.trial-selection.earthworks-trial');
+    }
+
+    public function coachQuizTrial()
+    {
+        return view('drumeo.sales.trials.trial-selection.coaches-quiz-trial');
+    }
+
+    public function chooseTrialMonth()
+    {
+        return view('drumeo.sales.trials.trial-selection.choose-your-trial-month');
+    }
+
+    public function melodicTrial()
+    {
+        return view('drumeo.sales.trials.trial-selection.melodics-trial');
+    }
+
+    public function newDrummerTrialMonth()
+    {
+        return view('drumeo.sales.trials.trial-selection.new-drummers-trial-month');
+    }
+
+    public function affiliateTrial()
+    {
+        return view('drumeo.sales.trials.trial-selection.affiliate-trial');
+    }
+
+    public function aric()
+    {
+        return view('drumeo.sales.trials.coaches.aric');
+    }
+
+    public function domino()
+    {
+        return view('drumeo.sales.trials.coaches.domino');
+    }
+
+    public function dorothea()
+    {
+        return view('drumeo.sales.trials.coaches.dorothea');
+    }
+
+    public function jared()
+    {
+        return view('drumeo.sales.trials.coaches.jared');
+    }
+
+    public function john()
+    {
+        return view('drumeo.sales.trials.coaches.john');
+    }
+
+    public function kaz()
+    {
+        return view('drumeo.sales.trials.coaches.kaz');
+    }
+
+    public function larnell()
+    {
+        return view('drumeo.sales.trials.coaches.larnell');
+    }
+
+    public function matt()
+    {
+        return view('drumeo.sales.trials.coaches.matt');
+    }
+
+    public function sarah()
+    {
+        return view('drumeo.sales.trials.coaches.sarah');
+    }
+
+    public function schack()
+    {
+        return view('drumeo.sales.trials.coaches.schack');
+    }
+
+    public function sharon()
+    {
+        return view('drumeo.sales.trials.coaches.sharon');
+    }
+
+    public function todd()
+    {
+        return view('drumeo.sales.trials.coaches.todd');
+    }
+
+    public function a(Request $request, $domain, $page = null)
+    {
+        return view('drumeo.sales.trials.affiliate.'.$page);
+
+        throw new NotFoundHttpException();
+    }
+
+    public function affiliates(Request $request, $domain, $page = null)
+    {
+        return view('drumeo.sales.trials.affiliate.'.$page);
+
+        throw new NotFoundHttpException();
+    }
+
+    public function pro()
+    {
+        return view('drumeo.products.pro');
+    }
+
+    public function jaredRecommends()
+    {
+        return view('drumeo.drumshop.jared-recommends');
+    }
+
+    public function products(Request $request, $domain, $page = null)
+    {
+        return view('drumeo.products.'.$page);
+
+        throw new NotFoundHttpException();
+    }
 }
