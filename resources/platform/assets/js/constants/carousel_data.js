@@ -4,6 +4,14 @@ export const testCarousel = [
         slides: [
             {
                 topSubtitle: null,
+                title: "2022 DRUMEO AWARDS",
+                ctaText: "VOTE NOW",
+                description: "Let’s celebrate the best of the best. 450,000 people worldwide voted for their favorite drummers in the Drumeo Awards last year. Tap below to cast your votes now - polls close on December 25th.",
+                ctaUrl: "https://www.drumeo.com/vote/",
+                img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,fit=cover,metadata=none/https://musora-web-platform.s3.amazonaws.com/carousel/DrumeoAwardsBanner-01.jpg",
+            },
+            {
+                topSubtitle: null,
                 title: "Rudiment Drumset Applications",
                 ctaText: "Go To Rudiments",
                 description: "We have brand new rudiment application lessons launching daily in December. Learn a new one every day of the month!",
