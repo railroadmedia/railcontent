@@ -22,7 +22,7 @@
                     <a class="join bg-{{$theme}} bigger mb-2 mt-4 md:mt-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="{{ $annualLink }}" {{--data-open="orderModal"--}}>GET Started <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
                     <p class="leading-tight text-sm"><em>Billed at ${{ Prices::$drumeoEdgeAnnual }} per year.<br class="inline sm:hidden">  Cancel anytime. 90-day guarantee.</em></p>
                     <h4 class="leading-tight my-6 sm:my-8 uppercase">
-                        + get {{ $bonusNum }} free bonuses worth ${{ $worth }}.
+                        + get {{ $bonusNum }} free bonuses worth ${{ $worth ?? '' }}.
                     </h4>
                 </div>
 
