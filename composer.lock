@@ -1754,18 +1754,6 @@
         },
         {
             "name": "doctrine/persistence",
-<<<<<<< HEAD
-            "version": "3.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/doctrine/persistence.git",
-                "reference": "d87426f07dd66f97cfdcf5210925e483b6c993b5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/persistence/zipball/d87426f07dd66f97cfdcf5210925e483b6c993b5",
-                "reference": "d87426f07dd66f97cfdcf5210925e483b6c993b5",
-=======
             "version": "3.1.2",
             "source": {
                 "type": "git",
@@ -1776,7 +1764,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/doctrine/persistence/zipball/b44d128311af55275dbed6a4558ca59a2b9f9387",
                 "reference": "b44d128311af55275dbed6a4558ca59a2b9f9387",
->>>>>>> 30aef872c41af7104afbd189392893679f8b2091
                 "shasum": ""
             },
             "require": {
@@ -1845,11 +1832,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/persistence/issues",
-<<<<<<< HEAD
-                "source": "https://github.com/doctrine/persistence/tree/3.1.1"
-=======
                 "source": "https://github.com/doctrine/persistence/tree/3.1.2"
->>>>>>> 30aef872c41af7104afbd189392893679f8b2091
             },
             "funding": [
                 {
@@ -1865,11 +1848,7 @@
                     "type": "tidelift"
                 }
             ],
-<<<<<<< HEAD
-            "time": "2022-12-13T21:21:05+00:00"
-=======
             "time": "2022-12-19T13:58:18+00:00"
->>>>>>> 30aef872c41af7104afbd189392893679f8b2091
         },
         {
             "name": "dragonmantank/cron-expression",
