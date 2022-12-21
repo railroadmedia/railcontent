@@ -94,8 +94,8 @@
                             </a>
                             <p class="italic text-center mx-auto my-0 text-xs">
                                 You can also order by phone toll-free at<br class="hidden sm:inline">
-                                <a href="tel:1-800-439-8921">1-800-439-8921</a> or directly at
-                                <a href="tel:1-604-855-7605">1-604-855-7605</a>.
+                                <a href="tel:+18004398921">1-800-439-8921</a> or directly at
+                                <a href="tel:+16048557605">1-604-855-7605</a>.
                             </p>
                         </div>
                     </div>

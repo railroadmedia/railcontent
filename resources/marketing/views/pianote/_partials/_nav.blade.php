@@ -22,16 +22,16 @@
 
             <nav-cart-button
                 {{-- cart-data='{{ $cartData }}' --}}
-                cart-data-url='{{ get_musora_brand_base_url() }}'
-                checkout-url='{{ get_musora_brand_base_url() }}/order/pianote'
-                api-domain-url='{{ get_musora_brand_base_url() }}'
+                cart-data-url=''
+                checkout-url='/order/pianote'
+                api-domain-url=''
             ></nav-cart-button>
             <cart-sidebar
                 brand="pianote"
                 {{-- cart-data='{{ $cartData }}' --}}
-                cart-data-url='{{ get_musora_brand_base_url() }}'
-                checkout-url='{{ get_musora_brand_base_url() }}/order/pianote'
-                api-domain-url='{{ get_musora_brand_base_url() }}'
+                cart-data-url=''
+                checkout-url='/order/pianote'
+                api-domain-url=''
             ></cart-sidebar>
         </div>
     @endif
@@ -62,12 +62,12 @@
         @include('pianote.sales.partials._nav-link', [
             "linkName" => "Member Login",
             "linkIcon" => "fas fa-sign-in",
-            "linkUrl" => "/login"
+            "linkUrl" => get_musora_brand_base_url() . '/login',
         ])
         @include('pianote.sales.partials._nav-link', [
             "linkName" => "Contact",
             "linkIcon" => "fas fa-phone",
-            "linkUrl" => "/contact/"
+            "linkUrl" => "{{ get_musora_brand_base_url() }}/contact"
         ])
         @include('pianote.sales.partials._nav-link', [
             "linkName" => "Pianote",

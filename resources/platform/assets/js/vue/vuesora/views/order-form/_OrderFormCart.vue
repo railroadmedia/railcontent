@@ -22,7 +22,7 @@
         />
 
         <h4
-            v-show="cartItems.length == 0"
+            v-if="cartItems.length == 0"
             class="pa-3 text-center"
         >
             Cart is empty

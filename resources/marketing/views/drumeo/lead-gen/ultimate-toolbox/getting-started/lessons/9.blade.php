@@ -1,7 +1,7 @@
 @extends('drumeo.lead-gen.ultimate-toolbox.getting-started.lesson-page')
 
 @section('title')
-    Lesson 9: Playing Your First Song
+    Playing Your First Song
 @stop
 
 @section('video', '//player.vimeo.com/video/90068633')

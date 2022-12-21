@@ -218,7 +218,7 @@
                 Our promise to you:
             </h2>
             <p class="text-center mb-8">
-                It’s important to us that you have an AWESOME time learning guitar. That’s why you have a 90-day risk-free guarantee. If this course doesn’t fulfill its promises to you, you’ll be eligible for a full refund by contacting our Student Experience Team <a href="/support"><u>here</u></a>.
+                It’s important to us that you have an AWESOME time learning guitar. That’s why you have a 90-day risk-free guarantee. If this course doesn’t fulfill its promises to you, you’ll be eligible for a full refund by contacting our Student Experience Team <a href="{{ get_musora_brand_base_url() }}/contact"><u>here</u></a>.
             </p>
             <div class="sm:flex lg:gap-6">
                 <div class="w-full sm:w-1/3 px-2 mb-3 sm:mb-0 text-center">
@@ -306,14 +306,14 @@
 
 @section('scripts')
     @parent
-    <script src="/marketing/js/modal.js"></script>
+    <script src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script src="{{ asset('marketing/parcel/guitareo/nav-footer.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $(document).foundation();
         });
     </script>
-    <script src="/marketing/js/modal-autoplay.js"></script>
+    <script src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
 @stop()

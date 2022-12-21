@@ -30,6 +30,12 @@ class ClearLegacyMusoraCookies
             try {
                 $cookies = explode(';', $_SERVER['HTTP_COOKIE']);
 
+                foreach ($cookies as $cookieIndex => $cookie) {
+                    if (str_contains($cookie, 'cookieAccept=true')) {
+                        unset($cookies[$cookieIndex]);
+                    }
+                }
+
                 $cookiesWithDuplicateNames = [];
                 $clearAllCookies = false;
 

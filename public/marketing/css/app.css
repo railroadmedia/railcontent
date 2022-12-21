@@ -4648,9 +4648,6 @@ img {
   .sm\:border-l {
     border-left-width: 1px !important;
   }
-  .sm\:border-r-2 {
-    border-right-width: 2px !important;
-  }
   .sm\:bg-right {
     background-position: right !important;
   }

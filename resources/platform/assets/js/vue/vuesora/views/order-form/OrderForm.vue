@@ -1,5 +1,13 @@
 <template>
     <div class="flex flex-row flex-wrap align-v-top nmh-1">
+        <NotificationToasts 
+            :icon="notification.icon" 
+            :text="notification.text" 
+            :isError="notification.isError" 
+            :slideClass="notification.slideClass" 
+            @onClose="handleNotificationClear" 
+        />
+
         <!-- Payment SVG -->
         <payment-svg></payment-svg>
 
@@ -144,11 +152,11 @@
                 :cartData="cartData"
             />
 
-          <p v-if="showVatMessage" class="tiny disclaimer mb-2 text-grey-3">
-            As of July 1st 2021, the European Union has mandated the collection of VAT on all imported physical goods.
-            Upon delivery of your shipment by the carrier, you will be required to pay VAT as well as a collection fee,
-            ranging from 5-25 EUR, dependant on the value of your delivery.
-          </p>
+            <p v-if="showVatMessage" class="tiny disclaimer mb-2 text-grey-3">
+                As of July 1st 2021, the European Union has mandated the collection of VAT on all imported physical goods.
+                Upon delivery of your shipment by the carrier, you will be required to pay VAT as well as a collection fee,
+                ranging from 5-25 EUR, dependant on the value of your delivery.
+            </p>
             <button
                 class="btn"
                 @click.stop="submitForm"
@@ -175,19 +183,19 @@
 
         <transition name="grow-fade">
             <div
-                v-show="loading"
+                v-if="loading"
                 class="form-loading bg-white shadow corners-10 overflow pa-3 text-center"
                 @click.stop
             >
                 <div class="square">
-                    <loading-animation :theme-color="themeColor" />
+                    <loading-animation :theme-color="themeColor" class="tw-ml-0 md:tw-ml-0" />
                 </div>
                 <p class="body mt-3">
                     Loading Please Wait...
                 </p>
                 <transition name="grow-fade">
                     <div
-                        v-show="formSuccess"
+                        v-if="formSuccess"
                         class="success-message flex flex-column flex-center bg-white pa-3"
                     >
                         <i class="fas fa-check-circle text-success"></i>
@@ -203,7 +211,7 @@
         </transition>
 
         <div
-            v-show="loading"
+            v-if="loading"
             class="loading-overlay"
         ></div>
     </div>
@@ -219,6 +227,8 @@ import OrderFormPaymentPlan from './_OrderFormPaymentPlan.vue';
 import OrderFormShipping from './_OrderFormShipping.vue';
 import OrderFormTotals from './_OrderFormTotals.vue';
 import ThemeClasses from '../../mixins/ThemeClasses';
+import { useNotificationStore } from '../../../../stores/notification';
+import NotificationToasts from '../../components/NotificationToasts/NotificationToasts.vue';
 import Toasts from '../../assets/js/classes/toasts';
 import LoadingAnimation from '../../components/LoadingAnimation/LoadingAnimation.vue';
 import PaymentSVG from '../../components/SVGSprites/_PaymentSVG.vue';
@@ -229,6 +239,7 @@ import TOSMessage from './_TOSMessage.vue';
 export default {
     name: 'OrderForm',
     components: {
+        'NotificationToasts': NotificationToasts,
         'order-form-account': OrderFormAccount,
         'order-form-cart': OrderFormCart,
         'order-form-shipping': OrderFormShipping,
@@ -338,6 +349,7 @@ export default {
     },
     data() {
         return {
+            notification: useNotificationStore(),
             newAddress: false,
             newPayment: false,
             selectedPaymentMethod: null,
@@ -446,9 +458,18 @@ export default {
         if (!this.isSignedIn || !this.paymentMethods || this.paymentMethods.data.length === 0) {
             this.newPayment = true;
         }
+
+        // Attach notification push to window
+        window.shownotification = (n) => {
+            this.notification.push(n);
+        };
+
     },
 
     methods: {
+        handleNotificationClear() {
+            this.notification.clear();
+        },
         updateSelectedPayment(method) {
             this.selectedPaymentMethod = method;
         },
@@ -612,7 +633,9 @@ export default {
             const payload = this.createOrderPayload();
             axios.put('/ecommerce/json/order-form/submit', payload)
                 .then(this.orderSuccess)
-                .catch(this.orderFailure);
+                .catch((error) => {
+                    this.orderFailure(error.response);
+                })
         },
 
         createOrderPayload() {
@@ -686,7 +709,7 @@ export default {
             }
         },
 
-        orderFailure({ response }) {
+        orderFailure(response) {
             this.formSuccess = false;
 
             let title = 'Oops, something went wrong';

@@ -188,7 +188,7 @@ class CmsClothingSeeder extends Seeder
             ],
             [
                 "brand" => 2,
-                "product_type_id" => 2,
+                "product_type_id" => 3,
                 "name" => "Pianote Hat",
                 "slug" => "hat-logo",
                 "sku" => "pianote-hat",

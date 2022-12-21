@@ -36,6 +36,6 @@
 @stop
 
 @section('scripts')
-    <script src="/marketing/js/modal.js"></script>
-    <script src="/marketing/parcel/guitareo/nav-footer.js"></script>
+    <script src="{{ asset('/marketing/js/modal.js') }}"></script>
+    <script src="{{ asset('/marketing/parcel/guitareo/nav-footer.js') }}"></script>
 @stop

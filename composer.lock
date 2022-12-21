@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bbed81c61c8d6d8d8c40c4fe618134d7",
+    "content-hash": "89421e991494ce7e47e3a4df7b1c2afa",
     "packages": [
         {
             "name": "aporat/store-receipt-validator",
@@ -8034,6 +8034,59 @@
                 "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.47"
             },
             "time": "2022-12-15T21:50:52+00:00"
+        },
+        {
+            "name": "railroad/lead-tracker",
+            "version": "v3.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/railroadmedia/lead-tracker.git",
+                "reference": "3bf0e29be1e7f4152c1bd494efee21abc258d8e9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/railroadmedia/lead-tracker/zipball/3bf0e29be1e7f4152c1bd494efee21abc258d8e9",
+                "reference": "3bf0e29be1e7f4152c1bd494efee21abc258d8e9",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/dbal": "^3.5",
+                "laravel/framework": "^9.0",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "dms/phpunit-arraysubset-asserts": "^0.4.0",
+                "orchestra/testbench": "^7.4",
+                "phpunit/php-code-coverage": "^9.2.10",
+                "phpunit/phpunit": "^9.5.10"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Railroad\\LeadTracker\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Caleb Favor",
+                    "email": "caleb@drumeo.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Tracks email form submissions and marketing data for visitor origins.",
+            "keywords": [
+                "lead",
+                "tracker"
+            ],
+            "support": {
+                "issues": "https://github.com/railroadmedia/lead-tracker/issues",
+                "source": "https://github.com/railroadmedia/lead-tracker/tree/v3.0.1"
+            },
+            "time": "2022-12-14T21:54:44+00:00"
         },
         {
             "name": "railroad/location",

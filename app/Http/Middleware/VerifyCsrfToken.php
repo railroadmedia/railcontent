@@ -15,6 +15,6 @@ class VerifyCsrfToken extends Middleware
         '/user-management-system/login/token',
         '/user-management-system/login/cookie',
         '/railtracker/media-playback-session',
-        '*/songs'
+        '/customer-io/*',
     ];
 }

@@ -189,19 +189,6 @@
     <h1 class="text-guitareo my-4"><i class="fas fa-check"></i> </h1>
     <p class="mb-5">We will send you an email reminder about the upcoming Q&A 1 hour before we start. <br class="hidden md:inline">
         The next live session is on Tuesday at 10 AM PDT. Hope to see you there!</p>
-    {{--<div class="my-2 mx-1 addeventatc" id="addeventatc1">--}}
-        {{--Mark Your Calendar <i class="fas fa-caret-down"></i>--}}
-        {{--<span class="hide start">2021/09/07 14:00:00</span>--}}
-        {{--<span class="hide end">2021/09/07 15:00:00</span>--}}
-        {{--<span class="hide timezone">America/Vancouver</span>--}}
-        {{--<span class="hide title">Technique Tuesday - Live With Cassi (Gb Major / Eb Minor - Week 2)</span>--}}
-        {{--<span class="hide description">Welcome to "Technique Tuesday" with Cassi! This is an all-level live stream that focuses on how you can improve your technique. This is so important because great technique makes great pianists! <br class="atc_node"> <br class="atc_node"> And in this session, join Cassi as she teaches some of her favorite exercises in the key of Gb Major and Eb Minor! <br class="atc_node"> <br class="atc_node"> You Access Link: https://www.pianote.com/members/live<br class="atc_node"> <br class="atc_node"> See you there!</span>--}}
-        {{--<span class="hide location">https://www.pianote.com/members/live</span>--}}
-        {{--<span class="hide all_day_event">false</span>--}}
-        {{--<span class="hide date_format">MM/DD/YYYY</span>--}}
-        {{--<span class="hide alarm_reminder">15</span>--}}
-    {{--</div>--}}
-    {{--<a class="my-2 mx-1 join" href="https://www.addevent.com/event/ro8273845">Mark Your Calendar</a>--}}
     <br><a class="my-2 mx-1 join" href="/members">Go To Members Area &raquo;</a>
 </body>
 </html>

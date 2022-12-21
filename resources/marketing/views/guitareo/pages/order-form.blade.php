@@ -22,6 +22,9 @@
 @stop
 
 @section('content')
+    {{-- Notifications Container --}}
+    <div id="notifications-container"></div>
+
     @include("guitareo.sales.partials._nav", [
         "checkoutVersion" => true
     ])
@@ -111,7 +114,10 @@
             </div>
         </div>
     </div>
+
     @include("guitareo.sales.partials._footer")
+
+    @include('partials._brand-set-authentication-cookies-iframe')
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{ asset('/marketing/parcel/guitareo/nav-footer.js') }}"></script>

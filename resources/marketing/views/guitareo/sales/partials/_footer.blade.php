@@ -50,9 +50,9 @@
             <h1><a href="/shop/">GUITAREO Shop</a></h1>
             <p><a href="/">Guitareo Membership</a><br>
                 <a href="/guitar-quest">GuitarQuest</a><br>
-                <a href="/500-songs">500 Songs In 5 Days</a><br>
+                <a href="/shop/500-songs">500 Songs In 5 Days</a><br>
                 <a href="/shop/survival-guide">Guitareo Survival Guide</a><br>
-                <a href="/acoustic-guitar-made-easy">Acoustic Guitar Made Easy</a></p>
+                <a href="/shop/acoustic-guitar-made-easy">Acoustic Guitar Made Easy</a></p>
         </div>
         <div class="footer-link-wrap">
             <h1>Other Sites</h1>
@@ -67,7 +67,7 @@
         <div class="container">
             <img class="logo" src="https://guitareo.s3.amazonaws.com/sales/guitareo-logo.png" alt="Guitareo">
             <p><a rel="noopener" href="https://goo.gl/maps/c4JxakSmnjB2" target="_blank">107-31265 Wheel Ave. Abbotsford,<br class="mobile-only"> BC, V2T 6H2 Canada</a><br>
-                <a href="tel:+18004398921">Toll Free: 1-800-439-8921</a> / <br class="mobile-only"><a href="tel:+16048557605">Direct: 1-604-855-7605</a> / <br class="mobile-only"><a class="text-white" href="/support">Contact Us</a></p>
+                <a href="tel:+18004398921">Toll Free: 1-800-439-8921</a> / <br class="mobile-only"><a href="tel:+16048557605">Direct: 1-604-855-7605</a> / <br class="mobile-only"><a class="text-white" href="{{ get_musora_brand_base_url() }}/contact">Contact Us</a></p>
             <a rel="noopener" href="https://www.youtube.com/user/guitarlessonscom" target="_blank" class="social-media youtube"><i class="fab fa-youtube"></i></a>
             <a rel="noopener" href="https://www.facebook.com/guitareoofficial" target="_blank" class="social-media facebook"><i class="fab fa-facebook-f"></i></a>
             <a rel="noopener" href="https://www.instagram.com/guitareoofficial/" target="_blank" class="social-media instagram"><i class="fab fa-instagram"></i></a>

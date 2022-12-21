@@ -160,7 +160,7 @@
 {!! \App\Analytics\Tracker::bodyBottom() !!}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="/marketing/parcel/guitareo/nav-footer.js"></script>
+<script src="{{ asset('/marketing/parcel/guitareo/nav-footer.js') }}"></script>
 </body>
 @include("guitareo.lead-gen.partials.impact-email-sign-up-tracker")
 </html>

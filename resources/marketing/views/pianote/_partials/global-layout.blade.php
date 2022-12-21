@@ -34,7 +34,7 @@
 </script>
 {!! \App\Analytics\Tracker::bodyBottom() !!}
 
-<script type="text/javascript" src="/marketing/js/jquery.countdown-2.min.js"></script>
+<script type="text/javascript" src={{ asset('/marketing/js/jquery.countdown-2.min.js') }}></script>
 <script>
     $(document).ready(function () {
         $('.tzcd-smaller2').countdown('2022/12/27')

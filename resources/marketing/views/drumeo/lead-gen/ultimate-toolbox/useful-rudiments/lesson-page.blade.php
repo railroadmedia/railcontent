@@ -1,6 +1,6 @@
 @extends('drumeo.lead-gen.ultimate-toolbox.lesson-page-layout')
 
-@section('lesson-title', 'Useful Rudiments For Modern Drummers')
+@section('title', 'Useful Rudiments For Modern Drummers')
 
 @section('backURL', '/ultimate-toolbox/catalogue')
 

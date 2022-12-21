@@ -113,7 +113,7 @@
             </ol>
                 <p>That's it! The mobile site will now be listed on your iOS home screen, so you can quickly access it anytime.  We hope to add a mobile app in the future, but until then this is the best way to use the site on iOS.<br><br></p>
             </div>
-            <a href="/members/guitar-forum/how-to-add-gl-to-your-phone-or-tablet" class="join">Ask A Question On The Forums &raquo;</a>
+            <a href="{{ get_musora_brand_base_url() }}/guitareo/forums" class="join">Ask A Question On The Forums &raquo;</a>
         </div>
     </section>
 

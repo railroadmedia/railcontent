@@ -114,11 +114,11 @@
 
 @section('scripts')
     @parent
-    {{--<script src="/assets/js/modal.js"></script>--}}
-    {{--<script type="text/javascript" src="/marketing/js/modal-autoplay.js"></script>--}}
+    {{--<script src="{{ asset('/marketing/js/modal.js') }}"></script>--}}
+    {{--<script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>--}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.3/moment-timezone-with-data.min.js"></script>
-    <script type="text/javascript" src="/marketing/parcel/guitareo/nav-footer.js"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/guitareo/nav-footer.js') }}"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
     {{-- Platform --}}
@@ -256,6 +256,7 @@
             </div>
         </div>
     @endif
+
     <div class="white-box">
         @include('_partials.layout.holiday.bundle-cards')
         <section class="grid-view category-section" data-category="lessons">
@@ -275,7 +276,7 @@
                         "price" => $item->discounted_price === '0.00' || empty($item->discounted_price) ? $item->price : $item->discounted_price,
                         "category" => strtolower($item->productType->name),
                         "sizes" => $item->sizes,
-                        "soldOut" => !empty($products[$item->sku]) ? $products[$item->sku]->getPublicStockCount() === 0 : $item->sold_out,
+                        "soldOut" => (!empty($products[$item->sku]) && $item->productType->name !== 'Lessons') ? $products[$item->sku]->getPublicStockCount() === 0 : $item->sold_out,
                         "size_case_sensitive" => $item->size_case_sensitive,
                     ])
                 }

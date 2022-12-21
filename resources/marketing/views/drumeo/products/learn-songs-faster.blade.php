@@ -54,7 +54,7 @@
                     @endif
                 </strong></h3>
             @if(auth()->check())
-                <a href="/members/packs" class="join blue">View Masterclass &raquo;</a>
+                <a href="{{ get_musora_brand_base_url() }}/drumeo/packs" class="join blue">View Masterclass &raquo;</a>
             @else
                 <a href="/laravel/public/shopping-cart/api/query?products[learn-songs-faster-pack]=1" class="join blue">GET STARTED &raquo;</a>
             @endif
@@ -210,7 +210,7 @@
                     @endif
                 </strong></h2>
             @if(auth()->check())
-                <a href="/members/packs" class="join blue">View Masterclass &raquo;</a>
+                <a href="{{ get_musora_brand_base_url()}}/drumeo/packs" class="join blue">View Masterclass &raquo;</a>
             @else
                 <a href="/laravel/public/shopping-cart/api/query?products[learn-songs-faster-pack]=1" class="join blue">GET STARTED &raquo;</a>
             @endif
