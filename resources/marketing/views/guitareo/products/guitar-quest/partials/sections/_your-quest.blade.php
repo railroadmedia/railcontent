@@ -25,7 +25,7 @@
                 >
                     <i class="fas fa-play pr-1"></i> Watch Trailer
                 </button>
-                @if($products['guitar-quest']->getPublicStockCount() > 0)
+                @if($products['guitar-quest']->getStock() > 0)
                     <a class="bg-goldenrod-gradient transition duration-300 linear px-6 sm:px-10 py-2 inline-block uppercase text-black font-roboto-condensed-bold rounded-full" title="Go To Order Page" href="{{ $orderLink }}">Get Started</a>
                 @else
                     <a class="bg-gray-400 hover-yellow transition duration-300 linear px-6 sm:px-10 py-2 inline-block uppercase text-black font-roboto-condensed-bold rounded-full" x-on:click.prevent="modalOpen = 'waitlistModal'">Join The Waitlist</a>

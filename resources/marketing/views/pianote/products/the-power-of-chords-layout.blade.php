@@ -63,9 +63,9 @@
   ];
 @endphp
 
-@if(!empty($products['the-power-of-chords']->getPublicStockCount()))
+@if(!empty($products['the-power-of-chords']->getStock()))
     @php
-        $students = $products['the-power-of-chords']->getPublicStockCount()
+        $students = $products['the-power-of-chords']->getStock()
     @endphp
 @endif
 
