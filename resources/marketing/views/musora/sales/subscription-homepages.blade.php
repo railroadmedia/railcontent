@@ -1,4 +1,4 @@
-@extends('drumeo._partials.layout-template')
+@extends('drumeo._partials.global-layout')
 
 @section('global-head')
     <title>Drumeo | Reach your drumming goals.</title>
@@ -645,27 +645,40 @@
         $faqs = [
             [
             "title" => "What is Drumeo?",
-            "description" => 'Drumeo is an online platform that offers an organized drum curriculum, artist courses on popular topics, 5000+ songs transcribed note-for-note, and a supportive global community of students and teachers. ',
+            "desc" => 'Drumeo is an online platform that offers an organized drum curriculum, artist courses on popular topics, 5000+ songs transcribed note-for-note, and a supportive global community of students and teachers. ',
             ],
             [
             "title" => "Is Drumeo good for beginners?",
-            "description" => 'Yes! You’ll always know what to practice with sequential step-by-step video lessons – plus have fun applying your new skills to your favorite songs, sorted by skill level. And if you ever need help, you’ll have unlimited personal support through live Q&A sessions, student reviews, and a helpful community. ',
+            "desc" => 'Yes! You’ll always know what to practice with sequential step-by-step video lessons – plus have fun applying your new skills to your favorite songs, sorted by skill level. And if you ever need help, you’ll have unlimited personal support through live Q&A sessions, student reviews, and a helpful community. ',
             ],
             [
             "title" => "Does Drumeo have anything for advanced drummers?",
-            "description" => 'Drumeo is the perfect companion for advanced drummers, giving you access to artist courses so you can gain insights and inspiration from the legends – with 200+ artist courses on a variety of topics. Plus, you’ll get note-for-note transcriptions for thousands of songs and practical playback tools, so you can take on any new challenge with confidence. ',
+            "desc" => 'Drumeo is the perfect companion for advanced drummers, giving you access to artist courses so you can gain insights and inspiration from the legends – with 200+ artist courses on a variety of topics. Plus, you’ll get note-for-note transcriptions for thousands of songs and practical playback tools, so you can take on any new challenge with confidence. ',
             ],
             [
             "title" => "Am I too old to learn the drums?",
-            "description" => 'You’re never too old to learn the drums. Drumeo has a community of students of all ages, from all around the world. Whether you’re 40, 50, 60, 70, or beyond – you’ll connect with drummers just like you who are learning and applying their skills to music. ',
+            "desc" => 'You’re never too old to learn the drums. Drumeo has a community of students of all ages, from all around the world. Whether you’re 40, 50, 60, 70, or beyond – you’ll connect with drummers just like you who are learning and applying their skills to music. ',
             ],
             [
             "title" => "Do I need to be tech-savvy to learn through your app?",
-            "description" => 'Not at all! Technology is here to make your life easier, and Drumeo is designed to help you find lessons and songs easily. And if you ever get stuck, you can contact our Student Experience team by phone or email for prompt and helpful support. ',
+            "desc" => 'Not at all! Technology is here to make your life easier, and Drumeo is designed to help you find lessons and songs easily. And if you ever get stuck, you can contact our Student Experience team by phone or email for prompt and helpful support. ',
             ],
         ]
     @endphp
-    @include('musora.sales.components.faq-section')
+
+    <section class="py-12 md:py-20">
+        <div class="container mx-auto max-w-5xl px-6">
+            <h2 class="font-extrabold mb-10 text-center">Frequently Asked Questions</h2>
+            @foreach($faqs as $faq)
+                @include('_partials.components.question-dropdown', [
+                    'num' => '?',
+                    "title" => $faq['title'],
+                    "desc" => $faq['desc'],
+                ])
+            @endforeach
+        </div>
+    </section>
+
 
     @include('_partials.components.soundslice-modal',[
         'name' => 'soundslice',
@@ -702,20 +715,20 @@
             });
 
             // sticky topbar before orderSection
-            var stickyBar = $('.promo-banner');
-            $(window).scroll(function () {
-                var stickTrigger = $('.sticky-trigger').offset().top;
-                var unstickTrigger = $('.unstick-trigger').offset().top;
-                if ($(this).scrollTop() > (unstickTrigger - 115)) {
-                    stickyBar.removeClass('fixed');
-                }
-                if ($(this).scrollTop() < stickTrigger - 115) {
-                    stickyBar.removeClass('fixed');
-                }
-                if ($(this).scrollTop() < unstickTrigger - 115 && $(this).scrollTop() > stickTrigger - 115) {
-                    stickyBar.addClass('fixed');
-                }
-            });
+            // var stickyBar = $('.promo-banner');
+            // $(window).scroll(function () {
+            //     var stickTrigger = $('.sticky-trigger').offset().top;
+            //     var unstickTrigger = $('.unstick-trigger').offset().top;
+            //     if ($(this).scrollTop() > (unstickTrigger - 115)) {
+            //         stickyBar.removeClass('fixed');
+            //     }
+            //     if ($(this).scrollTop() < stickTrigger - 115) {
+            //         stickyBar.removeClass('fixed');
+            //     }
+            //     if ($(this).scrollTop() < unstickTrigger - 115 && $(this).scrollTop() > stickTrigger - 115) {
+            //         stickyBar.addClass('fixed');
+            //     }
+            // });
         });
     </script>
 
