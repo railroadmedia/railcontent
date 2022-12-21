@@ -159,7 +159,7 @@
                     'contentType' => $lessonContent->fetch('type'),
                     'progress' => $lessonContent->fetch('progress_percent'),
                     'nextLessonUrl' => '',
-                    'xpAmount' => $lessonContent->fetch('fields.total_xp', $lessonContent->fetch('xp', 0)),
+                    'xpAmount' => $lessonContent->fetch('total_xp', $lessonContent->fetch('xp', 0)),
                     'showCompleteButton' => true,
                     'contentId' => $lessonContent->fetch('id'),
                     'brand' => '{{ $brand }}',

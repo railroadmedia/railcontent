@@ -24,7 +24,7 @@ class CustomerIoController extends Controller
 
     public function submitEmailForm(Request $request)
     {
-        $allConfiguredFormNames = array_keys(config('customer-io.forms', []));
+        $allConfiguredFormNames = array_keys(config('customer-io.forms.' . config('customer-io.brand'), []));
 
         $this->validate(
             $request,

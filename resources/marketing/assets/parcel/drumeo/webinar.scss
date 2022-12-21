@@ -1,0 +1,707 @@
+@import "_variables";
+
+.no-padding {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.half-padding {
+  padding-left: 7px;
+  padding-right: 7px;
+}
+
+hr {
+  margin: 40px auto;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $opensans;
+}
+
+.anchor {
+  display: block;
+  position: relative;
+  top: -100px;
+  visibility: hidden;
+}
+
+.join {
+  font-size:22px;
+  padding: 20px;
+  @include tablet {
+    font-size: 30px;
+  }
+  @include desktop {
+    font-size: 38px;
+  }
+}
+
+h1, h2 {
+  font-family: $robotocondensed;
+  text-transform: uppercase;
+
+  &.blue-tab {
+    width: auto;
+    display: inline-block;
+    position: relative;
+    padding-top: 20px;
+
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, 0);
+      width: 60px;
+      height: 9px;
+      background: $drumeoBlue;
+      border-radius: 20px;
+    }
+  }
+}
+
+h1 {
+  font-size: 30px;
+  @include tablet {
+    font-size: 34px;
+  }
+  @include desktop {
+    font-size: 50px;
+  }
+}
+
+p, li {
+  font-size: 13px;
+  @include tablet {
+    font-size: 14px;
+  }
+  @include desktop {
+    font-size: 16px;
+  }
+}
+
+.row {
+  max-width: 425px;
+  @include tablet {
+    max-width: 75rem;
+  }
+}
+
+.logo {
+  h1 {
+    text-shadow: 0 0 30px #000;
+    font: 400 26px/1em $robotocondensed;
+    margin: 0 auto 10px;
+    letter-spacing: 0.07em;
+    @include tablet {
+      font-size: 30px;
+    }
+    @include desktop {
+      font-size: 45px;
+    }
+
+    strong {
+      font-size: 45px;
+      line-height: 1em;
+      letter-spacing: -0.04em;
+      @include tablet {
+        font-size: 52px;
+      }
+      @include desktop {
+        font-size: 82px;
+      }
+    }
+  }
+}
+
+.jared-header {
+  background: url(https://dpwjbsxqtam5n.cloudfront.net/lead-gen/webinar/header.jpg) center top/cover;
+  color: #fff;
+  text-align: center;
+  padding: 200px 0 55px;
+  @include tablet {
+    padding: 300px 0 70px;
+  }
+  @include desktop {
+    padding: 390px 0 90px;
+  }
+
+  p {
+    color: $drumeoBlue;
+    text-shadow: 0 0 30px #000;
+    font: 400 18px/1em $opensans;
+    margin: 0 auto;
+    @include tablet {
+      font-size: 19px;
+    }
+    @include desktop {
+      font-size: 23px;
+    }
+  }
+}
+
+.three-details {
+  margin: -38px auto 0;
+  text-align: center;
+  @include tablet {
+    margin: -44px auto 0;
+  }
+  @include desktop {
+    margin: -50px auto 0;
+  }
+
+  .detail-box {
+    display: inline-block;
+    text-align: left;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 7px 15px rgba(0, 0, 0, 0.1);
+    margin: 0 5px 5px;
+    width: 280px;
+    padding: 10px 15px;
+    @include tablet {
+      width: 280px;
+      padding: 15px;
+    }
+    @include desktop {
+      width: 320px;
+      padding: 17px 20px;
+      margin: 0 5px;
+    }
+
+    i {
+      color: $drumeoBlue;
+      float: left;
+      font-size: 24px;
+      width: 40px;
+      line-height: 55px;
+      @include tablet {
+        font-size: 27px;
+        line-height: 59px;
+      }
+      @include desktop {
+        font-size: 35px;
+        width: 50px;
+        line-height: 65px;
+      }
+
+    }
+
+    p {
+      border-left: 1px solid #000;
+      float: left;
+      margin: 0 auto;
+      text-transform: uppercase;
+      padding: 5px 0 5px 10px;
+      width: calc(100% - 40px);
+      font: 400 13px/1.2em $opensans;
+      @include tablet {
+        font-size: 14px;
+      }
+      @include desktop {
+        padding: 5px 0 5px 15px;
+        width: calc(100% - 50px);
+        font-size: 15px;
+      }
+
+      em {
+        text-transform: none;
+        color: #999;
+        font-size: 12px;
+        @include desktop {
+          font-size: 13px;
+        }
+      }
+    }
+  }
+
+  .join {
+    margin: 20px auto 0;
+    width: 100%;
+    max-width: 280px;
+    @include tablet {
+      width: 100%;
+      max-width: 570px;
+    }
+    @include desktop {
+      margin: 30px auto 0;
+      max-width: 990px;
+    }
+  }
+
+  p {
+    margin: 20px auto 0;
+    text-transform: uppercase;
+    font-size: 12px;
+    @include desktop {
+      font-size: 14px;
+    }
+
+    .tzcd {
+      display: inline-block;
+    }
+  }
+}
+
+.jared-letter {
+  padding: 40px 20px;
+  text-align: center;
+  @include tablet {
+    padding: 50px 15px;
+  }
+  @include desktop {
+    padding: 60px 20px;
+  }
+
+  .row {
+    max-width: 650px;
+  }
+
+  .quote {
+    margin: 15px 0 15px 15px;
+    width: 140px;
+    @include tablet {
+      width: 170px;
+    }
+  }
+
+  .avatar {
+    img {
+      width: 80px;
+      border-radius: 50%;
+    }
+
+    h4 {
+      line-height: 1em;
+      margin: 15px auto;
+    }
+
+    h5 {
+      color: #999;
+      font-size: 14px;
+      margin: 0 auto;
+    }
+  }
+
+  .awards {
+    margin: 20px auto 0;
+
+    img {
+      width: 100%;
+      max-width: 160px;
+    }
+  }
+}
+
+.equipment {
+  overflow: hidden;
+  padding: 0 20px 40px;
+  @include tablet {
+    padding: 0 20px 50px;
+  }
+  @include desktop {
+    padding: 0 20px 60px;
+  }
+
+  .row {
+    max-width: 1000px;
+    position: relative;
+  }
+
+  .details {
+    margin: 0 auto 30px;
+    @include tablet {
+      margin: 0 auto 50px;
+    }
+    @include desktop {
+      margin: 25px auto 50px;
+    }
+  }
+
+  .detail-box {
+    display: inline-block;
+    text-align: left;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+    margin: 0 5px 5px;
+    width: 280px;
+    padding: 10px 15px;
+    @include tablet {
+      width: 305px;
+      padding: 15px;
+    }
+    @include desktop {
+      display: block;
+      width: 350px;
+      margin: 0 0 20px;
+      padding: 17px;
+    }
+
+    i {
+      color: $drumeoBlue;
+      float: left;
+      font-size: 24px;
+      width: 40px;
+      line-height: 1em;
+      @include tablet {
+        font-size: 27px;
+      }
+      @include desktop {
+        font-size: 30px;
+        line-height: 93px;
+      }
+
+    }
+
+    p {
+      border-left: 1px solid #000;
+      float: left;
+      margin: 0 auto;
+      padding: 5px 0 5px 10px;
+      width: calc(100% - 40px);
+      font: 400 12px/1.6em $opensans;
+      @include desktop {
+        padding: 5px 0 5px 15px;
+      }
+
+      strong {
+        display: inline-block;
+        margin: 0 auto 7px;
+        font-size: 14px;
+      }
+    }
+  }
+
+  img {
+    width: 100%;
+    max-width: 630px;
+    margin: 15px auto -5px;
+    @include tablet {
+      margin: 20px auto -15px;
+    }
+    @include desktop {
+      position: absolute;
+      top: 120px;
+      right: -180px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+  }
+
+  p {
+    text-align: left;
+    width: 100%;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+}
+
+.final {
+  background: $drumeoBlue;
+  color: #fff;
+  padding: 40px 20px;
+  @include tablet {
+    padding: 50px 20px;
+  }
+  @include desktop {
+    padding: 70px 20px;
+  }
+
+  .logo h1 {
+    text-shadow: none;
+
+  }
+
+  h2 {
+    font-family: $opensans;
+    margin: 0 auto;
+    line-height: 1em;
+    font-size: 20px;
+    @include tablet {
+      font-size: 26px;
+    }
+    @include desktop {
+      font-size: 41px;
+    }
+  }
+
+  h5 {
+    margin: 20px auto;
+    @include tablet {
+      margin: 30px auto;
+    }
+  }
+
+  .join {
+    width: 100%;
+    max-width: 280px;
+    margin: 0 auto 20px;
+    @include tablet {
+      max-width: 590px;
+      margin: 0 auto 30px;
+    }
+    @include desktop {
+      max-width: 930px;
+    }
+  }
+
+  p {
+    margin: 0 auto;
+    text-transform: uppercase;
+    font-size: 13px;
+
+    .tzcd {
+      display: inline-block;
+    }
+  }
+}
+
+.billy-quote {
+  padding: 40px 20px;
+  text-align: center;
+  @include tablet {
+    padding: 50px 15px;
+    text-align: left;
+  }
+  @include desktop {
+    padding: 60px 20px;
+  }
+
+  .row {
+    max-width: 900px;
+  }
+
+  img {
+    width: 100%;
+    max-width: 140px;
+    @include tablet {
+      float: left;
+      max-width: 170px;
+    }
+    @include desktop {
+      max-width: 240px;
+    }
+  }
+
+  p {
+    font: 400 15px/1.5em $opensans;
+    margin: 15px auto 0;
+    @include tablet {
+      float: left;
+      width: calc(100% - 170px);
+      padding-left: 30px;
+      font-size: 19px;
+      margin: 0 auto;
+    }
+    @include desktop {
+      width: calc(100% - 250px);
+      font-size: 24px;
+      margin: 25px auto 0;
+    }
+
+    strong {
+      font-size: 16px;
+      display: block;
+      margin: 15px auto 0;
+      @include desktop {
+        font-size: 17px;
+      }
+    }
+
+    em {
+      font-size: 12px;
+      display: block;
+      color: $drumeoBlue;
+      line-height: 1em;
+      @include tablet {
+        font-size: 13px;
+
+      }
+    }
+  }
+}
+
+.reveal {
+  outline: none;
+  padding: 50px 20px;
+  width: 95%;
+  margin: 0 auto;
+  @include tablet {
+    padding: 50px 50px;
+    width: 620px;
+  }
+
+  h1 {
+    line-height: 1em;
+    margin: 0 auto 10px;
+  }
+
+  .logo h1 {
+    text-shadow: none;
+
+    strong {
+      font-size: 35px;
+      @include tablet {
+        font-size: 44px;
+      }
+    }
+  }
+
+  h2 {
+    margin: 0 auto;
+    font-size: 17px;
+    font-family: $opensans;
+    @include tablet {
+      font-size: 22px;
+    }
+  }
+
+  p {
+    font-size: 13px;
+    margin: 7px auto 15px;
+    @include tablet {
+      font-size: 16px;
+      margin: 20px auto;
+    }
+
+    .red {
+      color: red;
+    }
+  }
+
+  #addeventatc1 {
+    background: $drumeoBlue;
+    font: 700 26px/1em $robotocondensed;
+    text-transform: uppercase;
+    padding: 16px 40px;
+    margin: 20px auto;
+    color: rgb(255, 255, 255) !important;
+
+    .addeventatc_icon {
+      display: none;
+    }
+
+    .addeventatc_dropdown {
+      font-family: $robotocondensed;
+    }
+  }
+
+  .social-links a {
+    background: #000;
+    color: #FFF;
+    border-radius: 50%;
+    display: inline-block;
+    text-align: center;
+    margin: 15px 10px 0;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 26px;
+
+    &:hover {
+      background: #222;
+    }
+  }
+}
+
+.event-wrap {
+  padding: 30px 7px;
+  @include tablet {
+    padding: 40px 20px 60px;
+  }
+  @include desktop {
+    padding: 50px 20px 80px;
+  }
+
+  .row {
+    position: relative;
+  }
+
+  h1 {
+    letter-spacing: -0.03em;
+    line-height: 1em;
+    font-size: 40px;
+    margin: 0 auto;
+    @include tablet {
+      font-size: 51px;
+      margin: 0 auto 5px;
+    }
+    @include desktop {
+      font-size: 80px;
+    }
+  }
+
+  h2 {
+    line-height: 1.3em;
+    margin: 0 auto;
+    font-size: 24px;
+    @include tablet {
+      font-size: 30px;
+    }
+    @include desktop {
+      font-size: 48px;
+    }
+    &.red {
+      color: #DB4437;
+    }
+  }
+
+  h5 {
+    font-size: 14px;
+    margin: 0 auto 20px;
+    @include tablet {
+      font-size: 16px;
+      margin: 0 auto 30px;
+    }
+    @include desktop {
+      font-size: 20px;
+      margin: 0 auto 40px;
+    }
+  }
+
+  .video {
+    @include desktop {
+      width: calc(100% - 350px);
+    }
+
+    .flex-video {
+      border-radius: 5px;
+      overflow: hidden;
+      @include desktop {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .chat-wrap {
+    @include desktop {
+      position: absolute;
+      width: 350px;
+      height: 100%;
+      right: 0;
+      top: 0;
+      bottom: 0;
+    }
+    .chat-border {
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      overflow: hidden;
+      width: 100%;
+      height: 333px;
+      @include desktop {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .chat {
+      width: 100%;
+      height: 333px;
+      @include desktop {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+
+}

@@ -7,6 +7,7 @@ use Closure;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\URL;
 use Modules\UserManagementSystem\Events\UserEvent;
 use Modules\UserManagementSystem\Models\User;
 
@@ -57,6 +58,10 @@ class AuthenticateViaKeyIfAvailable
             auth()->login($user, $remember);
 
             event(new UserEvent($user->id, 'authenticated'));
+
+            if ($request->has('blank_response')) {
+                return response('');
+            }
         }
 
         return $next($request);

@@ -21,11 +21,11 @@
         "links" => [
             "Member Login" => [
                 "iconClass" => "fas fa-sign-in",
-                "url" => "/members",
+                "url" => get_musora_brand_base_url() . '/login',
             ],
             "Contact" => [
                 "iconClass" => "fas fa-phone",
-                "url" => get_legacy_brand_base_url("musora").'/contact',
+                "url" => get_musora_brand_base_url().'/contact',
             ],
             "Drumeo" => [
                 "iconClass" => "icon-courses",
@@ -59,8 +59,8 @@
                     "How To Play Drums"=> [
                         "url" => "/beat/how-to-play-drums/",
                     ],
-                    "40 Free Songs"=> [
-                        "url" => "/40-songs",
+                    "100 Free Songs"=> [
+                        "url" => "/100-songs",
                     ],
                 ],
             ],
@@ -92,7 +92,7 @@
 @stop
 
 <!-- Global Wrapper -->
-@section('global-layout-body') 
+@section('global-layout-body')
     <!-- Brand Specific Content -->
     @yield('layout-body')
 @stop
@@ -158,7 +158,7 @@
                 "links" => [
                     [
                         "name" => "Musora",
-                        "url" => get_legacy_brand_base_url("musora")
+                        "url" => get_musora_brand_base_url()
                     ],
                     [
                         "name" => "Guitareo",

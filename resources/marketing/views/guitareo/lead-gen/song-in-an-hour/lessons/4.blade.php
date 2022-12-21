@@ -21,7 +21,7 @@
 @section('next-thumb', 'https://cdn.musora.com/image/fetch/w_800,q_60,q_auto:best/https://d1923uyy6spedc.cloudfront.net/Guitar-Quest-1-5.png')
 
 @section('assignments')
-    <p class="tw-mb-2 sm:tw-mb-3 bg-yellow tw-px-2 tw-inline-block tw-rounded-md">Interactive sheet music is optional. <br class="tw-hidden sm:tw-inline lg:tw-hidden"> To complete your challenge in one-hour, only practice-along with the video.</p>
+    <p class="mb-2 sm:mb-3 bg-yellow px-2 inline-block rounded-md">Interactive sheet music is optional. <br class="hidden sm:inline lg:hidden"> To complete your challenge in one-hour, only practice-along with the video.</p>
     @include('guitareo.lead-gen.song-in-an-hour._assignment-resources', [
         "title" => "Become comfortable strumming all the strings!",
         "subTitle" => "Practice strumming all strings without any snags.",

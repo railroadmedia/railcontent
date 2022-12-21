@@ -11,7 +11,7 @@
 
     <base target="_parent">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link rel="stylesheet" href="{{ asset('/assets/css/tailwind-helpers.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/css/guitareo/tailwind-helpers.css') }}">
     <style>
         body {
             height:100vh;
@@ -72,9 +72,32 @@
             background:#00e0bf
         }
     </style>
+    <style>
+        form input, form button {
+            line-height:40px;
+            height: 40px;
+        }
+        @media (min-width: 40em) {
+            form input, form button {
+                height: 52px;
+                line-height: 52px;
+            }
+        }
+        .thank-you-box.active {
+            max-height:1000px;
+            visibility:visible;
+            opacity:1;
+            padding:10px;
+        }
+        @media (min-width: 40em) {
+            .thank-you-box.active {
+                padding: 12px;
+            }
+        }
+    </style>
 
-    @include('layouts.partials._favicons')
-    @include('layouts.partials._fonts')
+    @include('_partials.layout.favicons.guitareo-favicons')
+    @include('guitareo._partials._fonts')
 
     {!! \App\Analytics\Tracker::trackPageView() !!}
 
@@ -86,8 +109,8 @@
 {!! \App\Analytics\Tracker::bodyTop() !!}
 
 <section class="text-center absolute top-1/2 left-1/2 w-full px-5" style="transform:translate(-50%,-50%)">
-    <form id=" ajaxFormFooter " accept-charset="UTF-8" action="/customer-io/submit-email-form"
-          method="POST" class="clearfix infusion-form max-w-3xl mx-auto" onsubmit="emailSignUpConversionTrackerForImpactProvider()">
+    <form id="GuitareoEngagementTriggerWebsiteSignupWebForm" accept-charset="UTF-8" action="/customer-io/submit-email-form"
+          method="POST" class="ajax-form clearfix infusion-form max-w-3xl mx-auto" onsubmit="emailSignUpConversionTrackerForImpactProvider()">
         <input type="hidden" name="form_name" value="Blog Signup">
         <input type="hidden" name="leadtracker_form_name" value="Blog Signup">
         <div class="infusion-field w-full sm:pr-3 float-left sm:w-7/12 md:text-left">
@@ -101,10 +124,15 @@
         <input name="list_ids_to_subscribe_to[]" type="hidden" value="32">
         <input name="success_redirect" type="hidden" value="/thank-you-white">
     </form>
+    <div class="thank-you-box bg-white rounded-full w-full mx-auto text-center text-green-300 max-w-2xl transition-all duration-700 block overflow-hidden invisible max-h-0 opacity-0">
+        <h5 class="mx-auto text-xl font-bold"><strong><i class="fas fa-check"></i> Success, Check your email!</strong></h5>
+    </div>
 </section>
 
 {!! \App\Analytics\Tracker::bodyBottom() !!}
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="{{ asset('/marketing/parcel/guitareo/nav-footer.js') }}"></script>
 </body>
-@include("lead-gen.partials.impact-email-sign-up-tracker")
+@include("guitareo.lead-gen.partials.impact-email-sign-up-tracker")
 </html>

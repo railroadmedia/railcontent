@@ -1,13 +1,9 @@
-@php
-    $lessonNum = 1;
-@endphp
-
 <div class="lesson-grid">
     <div class="container lg:mx-auto max-w-6xl">
         <div class="white-box">
             <h2 class="px-3 md:px-4">{{ $header }}</h2>
             <div class="flex flex-wrap">
-                @foreach ($lessons as $lesson)
+                @foreach ($lessons as $key => $lesson)
                     <div class="relative lg:w-1/3 sm:w-1/2 px-3 md:px-4 lesson-thumbnail @if(!empty($details)) with-details @endif">
                         <a @if(!empty($lesson['locked'])) class="get-access-trigger" @elseif(!empty($lesson['Url'])) href="{{ $lesson['Url'] }}" @endif>
                             <div class="thumb col">
@@ -34,7 +30,7 @@
                                         {{ $lesson['details'] }}
                                     </div>
                                 @endif
-                                <img src="{{ $lesson['imgUrl'] }}" alt="lesson-{{ $lessonNum }}">
+                                <img src="{{ $lesson['imgUrl'] }}" alt="lesson-{{ $key + 1 }}">
                             </div>
                             @isset($lesson['accessButton'])
                                 <div class="access-button @if(!empty($accessButtonColor)) {{ $accessButtonColor }} @endif">{{ $lesson['accessButton'] }}</div>
@@ -47,10 +43,6 @@
                             <h4 class="col"></h4>
                         @endif
                     </div>
-
-                    @php
-                        $lessonNum++;
-                    @endphp
                 @endforeach
             </div>
         </div>

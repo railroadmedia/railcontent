@@ -21,49 +21,56 @@ export default {
     /**
      * Request to submit the order form data
      *
+     * @param {String} url
      * @param {Object} payload
      *
      * @returns {Promise}
      */
-    submitOrder(payload) {
-        return axios.put('/ecommerce/json/order-form/submit', payload);
+    submitOrder(url, payload) {
+        return axios.put(url+'/ecommerce/json/order-form/submit', payload);
     },
 
     /**
      * Request to add cart items
      *
+     * @param {String} url
      * @param {Object} payload
      *
      * @returns {Promise}
      */
-    addCartItems(payload) {
-        return axios.put('/ecommerce/json/add-to-cart', payload);
+    addCartItems(url, payload) {
+        return axios.put(url+'/ecommerce/json/add-to-cart', payload);
     },
 
     /**
      * Updates the cart item quantity
      *
+     * @param {String} url
      * @param {String} productSku
      * @param {Number} quantity
      *
      * @returns {Promise}
      */
-    updateCartItemQuantity({
-        productSku,
-        quantity,
-    }) {
-        return axios.patch(`/ecommerce/json/update-product-quantity/${productSku}/${quantity}`)
+    updateCartItemQuantity(
+        url,
+        {
+            productSku,
+            quantity,
+        }
+    ) {
+        return axios.patch(url+`/ecommerce/json/update-product-quantity/${productSku}/${quantity}`)
     },
 
     /**
      * Removes a cart item
      *
+     * @param {String} url
      * @param {String} productSku
      *
      * @returns {Promise}
      */
-    removeCartItem({ productSku }) {
-        return axios.delete(`/ecommerce/json/remove-from-cart/${productSku}`)
+    removeCartItem(url, { productSku }) {
+        return axios.delete(url+`/ecommerce/json/remove-from-cart/${productSku}`)
             .then(response => response)
             .catch(ErrorHandler);
     },
@@ -71,10 +78,12 @@ export default {
     /**
      * Clears all cart items.
      *
+     * @param {String} url
+     * 
      * @returns {Promise}
      */
-    clearCart() {
-        return axios.delete(`/ecommerce/json/clear-cart`)
+    clearCart(url) {
+        return axios.delete(url+`/ecommerce/json/clear-cart`)
             .then(response => response)
             .catch(ErrorHandler);
     },
@@ -143,8 +152,8 @@ export default {
      * @param {String|Number} numberOfPayments
      * @returns {Promise}
      */
-    updateNumberOfPayments(numberOfPayments) {
-        return axios.put(`/ecommerce/json/update-number-of-payments/${numberOfPayments}`)
+    updateNumberOfPayments(url, numberOfPayments) {
+        return axios.put(url+`/ecommerce/json/update-number-of-payments/${numberOfPayments}`)
             .then(response => response)
             .catch(ErrorHandler);
     },
@@ -154,8 +163,8 @@ export default {
      *
      * @returns {Promise}
      */
-    getPaymentMethods(user_id) {
-        return axios.get(`/ecommerce/user-payment-method/${user_id}`)
+    getPaymentMethods(url, user_id) {
+        return axios.get(url+`/ecommerce/user-payment-method/${user_id}`)
             .then(response => response)
             .catch(ErrorHandler);
     },
@@ -203,8 +212,8 @@ export default {
      * @param {String|Number} payment_method_id
      * @returns {Promise}
      */
-    setPaymentMethodAsDefault(payment_method_id) {
-        return axios.patch('/ecommerce/payment-method/set-default', {
+    setPaymentMethodAsDefault(url, payment_method_id) {
+        return axios.patch(url+'/ecommerce/payment-method/set-default', {
             id: payment_method_id,
         })
             .then(response => response)
@@ -217,8 +226,8 @@ export default {
      * @param {String|Number} payment_method_id
      * @returns {Promise}
      */
-    deletePaymentMethod(payment_method_id) {
-        return axios.delete(`/ecommerce/payment-method/${payment_method_id}`)
+    deletePaymentMethod(url, payment_method_id) {
+        return axios.delete(url+`/ecommerce/payment-method/${payment_method_id}`)
             .then(response => response)
             .catch(ErrorHandler);
     },

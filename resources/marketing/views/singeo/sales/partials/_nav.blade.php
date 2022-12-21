@@ -11,16 +11,28 @@
         <span></span>
         <span></span>
     </div>
+
+    @if(!empty($checkoutVersion))
+        <div class="button-wrap">
+            <a href="{{ get_legacy_brand_base_url('singeo') }}/shop" class="join promo outline-button">Shop</a>
+        </div>
+    @endif
     @if(!empty($cartVersion))
         <div class="button-wrap" id="app">
-            <a href="/shop" class="join outline-button">Shop</a>
+            <a href="{{ get_legacy_brand_base_url('singeo') }}/shop" class="join promo outline-button">Shop</a>
 
             <nav-cart-button
-                    cart-data='{{ $cartData }}'
+                {{-- cart-data='{{ $cartData }}' --}}
+                cart-data-url=''
+                checkout-url='/order/singeo'
+                api-domain-url=''
             ></nav-cart-button>
             <cart-sidebar
-                    brand="singeo"
-                    cart-data='{{ $cartData }}'
+                brand="singeo"
+                {{-- cart-data='{{ $cartData }}' --}}
+                cart-data-url=''
+                checkout-url='/order/singeo'
+                api-domain-url=''
             ></cart-sidebar>
         </div>
     @endif
@@ -31,7 +43,7 @@
             <a class="@if(!empty($scrollToJoin)) anchor-slide @endif"  href="/#coaches" >Coaches</a>
         </div>
         <div class="button-wrap">
-            <a href="/shop" class="join outline-button">Shop</a>
+            <a href="{{ get_legacy_brand_base_url('singeo') }}/shop" class="join promo outline-button">Shop</a>
             <a href="#customize-anchor" class="join anchor-slide">Join Singeo</a>
         </div>
     @endif
@@ -39,53 +51,58 @@
 
 <div class="nav-side-bar">
     <div class="bottom-section">
-        @include('sales.partials._nav-link', [
+        @include('singeo.sales.partials._nav-link', [
             "linkName" => "Member Login",
             "linkIcon" => "fas fa-sign-in",
-            "linkUrl" => "/login",
+            "linkUrl" => get_musora_brand_base_url() . '/login',
         ])
-        @include('sales.partials._nav-link', [
+        @include('singeo.sales.partials._nav-link', [
             "linkName" => "Contact",
             "linkIcon" => "fas fa-phone",
-            "linkUrl" => get_legacy_brand_base_url("musora").'/contact'
+            "linkUrl" => get_musora_brand_base_url().'/contact'
         ])
-        @include('sales.partials._nav-link', [
+        @include('singeo.sales.partials._nav-link', [
             "linkName" => "Singeo",
             "linkIcon" => "icon-courses",
             "linkUrl" => "/",
         ])
-        @include('sales.partials._nav-link', [
-            "linkName" => "Shop",
+        @include('singeo.sales.partials._nav-link', [
+            "linkName" => "Holiday Deals",
             "linkIcon" => "fas fa-tag",
             "linkUrl" => '/shop',
         ])
-        @include('sales.partials._nav-link', [
+        @include('singeo.sales.partials._nav-link', [
             "linkName" => "The Chorus",
             "linkIcon" => "fas fa-comment-alt-edit",
             "linkUrl" => "/chorus",
         ])
-        @include('sales.partials._nav-link', [
+        @include('singeo.sales.partials._nav-link', [
             "linkName" => "4 Vocal Exercises",
             "linkIcon" => "fas fa-microphone-alt",
             "linkUrl" => "/improve-any-voice",
         ])
         <span class="shim"></span>
-        @include('sales.partials._secondary-nav-link', [
+        @include('singeo.sales.partials._secondary-nav-link', [
             "linkName" => "<i class='fab fa-fw fa-youtube'></i>&nbsp; YouTube",
             "linkUrl" => "https://www.youtube.com/c/singeoofficial",
             "externalLink" => true
         ])
-        @include('sales.partials._secondary-nav-link', [
+        @include('singeo.sales.partials._secondary-nav-link', [
             "linkName" => "<i class='fab fa-fw fa-facebook'></i>&nbsp; Facebook",
             "linkUrl" => "https://www.facebook.com/singeoofficial/",
             "externalLink" => true
         ])
-        @include('sales.partials._secondary-nav-link', [
+        @include('singeo.sales.partials._secondary-nav-link', [
             "linkName" => "<i class='fab fa-fw fa-instagram'></i>&nbsp; Instagram",
             "linkUrl" => "https://www.instagram.com/singeoofficial/",
             "externalLink" => true
         ])
-        @include('sales.partials._secondary-nav-link', [
+        @include('singeo.sales.partials._secondary-nav-link', [
+            "linkName" => "<i class='fab fa-fw fa-tiktok'></i>&nbsp; TikTok",
+            "linkUrl" => "https://www.tiktok.com/@singeoofficial",
+            "externalLink" => true
+        ])
+        @include('singeo.sales.partials._secondary-nav-link', [
             "linkName" => "<i class='fas fa-fw fa-question'></i>&nbsp; FAQs",
             "linkUrl" => "https://help.singeo.com/",
             "externalLink" => false

@@ -1,6 +1,6 @@
-@extends('guitareo._partials.layout')
+@extends('guitareo.lead-gen.lead-gen-layout-tw')
 
-@section('head-includes')
+@section('meta')
     @parent
 
     <title>The D’Addario String Session</title>
@@ -12,8 +12,7 @@
     <meta property="og:image" content="https://guitareo.s3.amazonaws.com/sales/trials/daddario-string-session/og-image.jpg">
     <meta property="og:url" content="https://www.guitareo.com/{{ Request::path() }}">
 
-    <link rel="stylesheet" href="/assets/marketing/song-in-an-hour.css">
-
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/song-in-an-hour.css') }}">
     <style>
         .text-yello {
             color: #FFAE00;
@@ -53,13 +52,12 @@
                 background-position:center;
             }
         }
-        
+
     </style>
 @stop
 
-@section('layout-scripts')
+@section('scripts')
     @parent
-    <script src="/assets/js/sign-up-form.js"></script>
     <script>
         $(document).ready(function () {
             $(document).foundation();
@@ -71,34 +69,34 @@
     $day = str_contains(Request::path(), 'ga') ? 7 : 30;
 @endphp
 
-@section('layout-body')
-    <header class="header tw-text-white tw-text-center tw-bg-no-repeat tw-px-3 tw-pt-2 tw-pb-10 sm:tw-py-2 lg:tw-py-8 tw-relative lazyload" data-bg="https://cdn.musora.com/image/fetch/w_1300,q_auto:best/https://guitareo.s3.amazonaws.com/sales/trials/daddario-string-session/header_bg.jpg" style="background-color:#000C17;">
-        <div class="tw-container tw-mx-auto tw-relative tw-z-10">
-            <p class="tw-flex tw-items-center tw-justify-center tw-mt-12 md:tw-mt-8 lg:tw-mt-0 tw-mb-2"><em class="text-navy">Hosted by</em> <img class="tw-h-6 md:tw-h-8 lg::tw-h-10 tw-pl-2 lazyload" data-src="https://cdn.musora.com/image/fetch/w_640,q_auto:best/https://guitareo.s3.amazonaws.com/sales/guitareo-logo-green.png" /></p>
-            <h1 class="tw-uppercase font-bebas">The <span class="text-guitareo">D’Addario</span> String Session</h1>
-            <p class="tw-leading-normal tw-uppercase tw-tracking-wider text-yellow tw--mt-2 md:tw--mt-3 tw-mb-64 lg:tw-mb-60">Live Q&A With D’Addario’s<br class="tw-inline sm:tw-hidden"> Brian Vance</p>
-            
-            
+@section('body')
+    <header class="header text-white text-center bg-no-repeat px-3 pt-2 pb-10 sm:py-2 lg:py-8 relative lazyload" data-bg="https://cdn.musora.com/image/fetch/w_1300,q_auto:best/https://guitareo.s3.amazonaws.com/sales/trials/daddario-string-session/header_bg.jpg" style="background-color:#000C17;">
+        <div class="container mx-auto relative z-10">
+            <p class="flex items-center justify-center mt-12 md:mt-8 lg:mt-0 mb-2"><em class="text-navy">Hosted by</em> <img class="h-6 md:h-8 lg::h-10 pl-2 lazyload" data-src="https://cdn.musora.com/image/fetch/w_640,q_auto:best/https://guitareo.s3.amazonaws.com/sales/guitareo-logo-green.png" /></p>
+            <h1 class="uppercase font-bebas">The <span class="text-guitareo">D’Addario</span> String Session</h1>
+            <p class="leading-normal uppercase tracking-wider text-yellow -mt-2 md:-mt-3 mb-64 lg:mb-60">Live Q&A With D’Addario’s<br class="inline sm:hidden"> Brian Vance</p>
 
-            <h3 class="font-bebas tw-uppercase"><span class="text-yello">LIVE</span> | <span class="text-yello">March 25th @ 12:00 PST</span> | <br class="tw-inline sm:tw-hidden">Free For Player Circle Members</h3>
+
+
+            <h3 class="font-bebas uppercase"><span class="text-yello">LIVE</span> | <span class="text-yello">April 8th @ 12:00 PST</span> | <br class="inline sm:hidden">Free For Players Circle Members</h3>
             <em class="text-navy">
-                Get all your burning questions answered as we dive deep into strings,<br class="tw-hidden sm:tw-inline"> capos, tuners, and all sorts of guitar accessories. 
+                Get all your burning questions answered as we dive deep into strings,<br class="hidden sm:inline"> capos, tuners, and all sorts of guitar accessories.
             </em>
-            <p class="tw-my-4 tw-leading-tight">
-                Join Guitareo FREE for {{ $day }} days and get access to this exclusive <br class="tw-hidden sm:tw-inline">
-                LIVE Q&A only for D’Addario Player Circle Members.
+            <p class="my-4 leading-tight">
+                Join Guitareo FREE for {{ $day }} days and get access to this exclusive <br class="hidden sm:inline">
+                LIVE Q&A only for D’Addario Players Circle Members.
             </p>
             <a class="join" href="@if(str_contains(Request::path(), 'ga')) /ecommerce/add-to-cart?products[GUITAREO-7-DAY-TRIAL-ONE-TIME]=1&redirect=/order&locked=true @else /ecommerce/add-to-cart?products[guitareo_access_30-days]=1&redirect=/order&locked=true&promo-code=daddario @endif">Reserve Your Free Spot &raquo;</a>
-            <p class="tw-uppercase font-bebas tw-leading-none tw-mt-4">
+            <p class="uppercase font-bebas leading-none mt-4">
                 <span class="text-guitareo">JOIN GUITAREO FREE FOR {{ $day }} DAYS</span><br>
                 <span class="text-navy">(@if(!str_contains(Request::path(), 'ga')) NO AUTO-RENEWALS, @endif NO HIDDEN CHARGES )</span>
             </p>
         </div>
     </header>
     @if(!str_contains(Request::path(), 'ga'))
-    @include('lead-gen.partials._meet-your-teacher2',[
-        "headLine" => '<h3 class="tw-font-bold tw-mb-1">You Love Your Guitar.</h3>
-        <em class="lg:tw-text-lg text-yellow">
+    @include('guitareo.lead-gen.partials._meet-your-teacher2',[
+        "headLine" => '<h3 class="font-bold mb-1">You Love Your Guitar.</h3>
+        <em class="lg:text-lg text-yellow">
             So prove it with the best knowledge and accessories.
         </em>',
         "description" => 'Your guitar is so much more than wood and steel. But you already know that. <br><br>
@@ -108,13 +106,13 @@
         So take your guitar to new places, and join the D’Addario String Session.<br><br>
         Click any button to begin a free, non-recurring Guitareo Membership and save your spot. <br><br>
         No hidden charges, no sneaky auto-renewals, just a free membership…<br><br>
-        …only for Player’s Circle Members.',
-        "gradient" => '<div class="tw-absolute tw-bottom-0 tw-left-0 tw-right-0 tw-h-28" style="background:linear-gradient(180deg, rgba(1, 5, 15, 0) 0%, rgba(3, 37, 70, 0.5) 100%);"></div>'
+        …only for Players Circle Members.',
+        "gradient" => '<div class="absolute bottom-0 left-0 right-0 h-28" style="background:linear-gradient(180deg, rgba(1, 5, 15, 0) 0%, rgba(3, 37, 70, 0.5) 100%);"></div>'
     ])
     @else
-        @include('lead-gen.partials._meet-your-teacher2',[
-            "headLine" => '<h3 class="tw-font-bold tw-mb-1">You Love Your Guitar.</h3>
-            <em class="lg:tw-text-lg text-yellow">
+        @include('guitareo.lead-gen.partials._meet-your-teacher2',[
+            "headLine" => '<h3 class="font-bold mb-1">You Love Your Guitar.</h3>
+            <em class="lg:text-lg text-yellow">
                 So prove it with the best knowledge and accessories.
             </em>',
             "description" => 'Your guitar is so much more than wood and steel. But you already know that. <br><br>
@@ -124,18 +122,18 @@
             So take your guitar to new places, and join the D’Addario String Session.<br><br>
             Click any button to begin a free, Guitareo Membership and save your spot. <br><br>
             No hidden charges, just a free membership…<br><br>
-            …only for Player’s Circle Members.',
-            "gradient" => '<div class="tw-absolute tw-bottom-0 tw-left-0 tw-right-0 tw-h-28" style="background:linear-gradient(180deg, rgba(1, 5, 15, 0) 0%, rgba(3, 37, 70, 0.5) 100%);"></div>'
+            …only for Players Circle Members.',
+            "gradient" => '<div class="absolute bottom-0 left-0 right-0 h-28" style="background:linear-gradient(180deg, rgba(1, 5, 15, 0) 0%, rgba(3, 37, 70, 0.5) 100%);"></div>'
         ])
 
     @endif
 
-    <section class="tw-text-center tw-text-white tw-bg-no-repeat tw-bg-cover tw-bg-center tw-py-24 lazyload" style="background-color: black;" data-bg="https://cdn.musora.com/image/fetch/w_1300,q_auto:best/https://guitareo.s3.amazonaws.com/sales/trials/daddario-string-session/order_bg.jpg">
-        <p class="tw-flex tw-items-center tw-justify-center tw-mb-2"><em class="text-navy">Hosted by</em> <img class="tw-h-6 md:tw-h-8 lg::tw-h-10 tw-pl-2 lazyload" data-src="https://cdn.musora.com/image/fetch/w_640,q_auto:best/https://guitareo.s3.amazonaws.com/sales/guitareo-logo-green.png" /></p>
-        <h1 class="tw-uppercase font-bebas">The <span class="text-guitareo">D’Addario</span> String Session</h1>
-        <p class="tw-leading-normal tw-uppercase tw-tracking-wider text-yellow tw--mt-2 tw-mb-6">Live Q&A With D’Addario’s<br class="tw-inline sm:tw-hidden"> Brian Vance</p>
+    <section class="text-center text-white bg-no-repeat bg-cover bg-center py-24 lazyload" style="background-color: black;" data-bg="https://cdn.musora.com/image/fetch/w_1300,q_auto:best/https://guitareo.s3.amazonaws.com/sales/trials/daddario-string-session/order_bg.jpg">
+        <p class="flex items-center justify-center mb-2"><em class="text-navy">Hosted by</em> <img class="h-6 md:h-8 lg::h-10 pl-2 lazyload" data-src="https://cdn.musora.com/image/fetch/w_640,q_auto:best/https://guitareo.s3.amazonaws.com/sales/guitareo-logo-green.png" /></p>
+        <h1 class="uppercase font-bebas">The <span class="text-guitareo">D’Addario</span> String Session</h1>
+        <p class="leading-normal uppercase tracking-wider text-yellow -mt-2 mb-6">Live Q&A With D’Addario’s<br class="inline sm:hidden"> Brian Vance</p>
         <a class="join" style="background:#00C9AC;" href="@if(str_contains(Request::path(), 'ga')) /ecommerce/add-to-cart?products[GUITAREO-7-DAY-TRIAL-ONE-TIME]=1&redirect=/order&locked=true @else /ecommerce/add-to-cart?products[guitareo_access_30-days]=1&redirect=/order&locked=true&promo-code=daddario @endif">Reserve Your Free Spot &raquo;</a>
-        <p class="tw-uppercase tw-leading-none font-bebas tw-mt-3">
+        <p class="uppercase leading-none font-bebas mt-3">
             <span class="text-guitareo">Join guitareo free for {{ $day }} days</span><br>
             <span class="text-navy">(@if(!str_contains(Request::path(), 'ga')) NO AUTO-RENEWALS, @endif no hidden charges )</span>
         </p>

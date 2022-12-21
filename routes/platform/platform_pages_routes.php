@@ -16,6 +16,7 @@ use App\Http\Controllers\Platform\ProfileSettingsPagesController;
 use App\Http\Controllers\Platform\ReferralPagesController;
 use App\Http\Controllers\Platform\SupportController;
 use App\Http\Controllers\Platform\UserListPagesController;
+use App\Http\Controllers\Platform\BooksController;
 use App\Modules\Brand\Enums\Brand;
 use App\Modules\Content\Controllers\MusoraCenterContentController;
 use Illuminate\Support\Facades\Route;
@@ -305,17 +306,14 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('platform.packs.first-level');
 
-        Route::get(
-            '/{brand}/packs/{packSlug}/{packId}/{packBundleSlug}/{packBundleId}',
-            [PackPagesController::class, 'packBundleLessons']
-        )
+        Route::get('/{brand}/packs/{packSlug}/{packId}/{packBundleSlug}/{packBundleId}',
+                   [PackPagesController::class, 'packBundleLessons'])
             ->whereIn('brand', all_brands())
             ->name('platform.packs.second-level');
 
         Route::get(
             '/{brand}/packs/{packSlug}/{packId}/{packBundleSlug}/{packBundleId}/{packBundleLessonSlug}/{packBundleLessonId}',
-            [PackPagesController::class, 'packBundleLesson']
-        )
+            [PackPagesController::class, 'packBundleLesson'])
             ->whereIn('brand', all_brands())
             ->name('platform.packs.third-level');
 
@@ -344,10 +342,7 @@ Route::domain('{musoraDomain}')
         )
             ->name('platform.content.jump-to-content-id');
 
-        Route::get(
-            '/jump-to-continue-content/{contentId}',
-            [ContentPagesController::class, 'jumpToContinueContent']
-        )
+        Route::get('/jump-to-continue-content/{contentId}', [ContentPagesController::class, 'jumpToContinueContent'])
             ->name('platform.content.jump-to-continue-content');
 
         Route::get(
@@ -386,10 +381,8 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.profile');
 
-        Route::get(
-            '/{brand}/profile/{userId}/settings/login-credentials',
-            [ProfileSettingsPagesController::class, 'loginCredentials']
-        )
+        Route::get('/{brand}/profile/{userId}/settings/login-credentials',
+                   [ProfileSettingsPagesController::class, 'loginCredentials'])
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.login-credentials');
 
@@ -397,31 +390,20 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.payments');
 
-        Route::get(
-            '/{brand}/profile/{userId}/settings/notifications',
-            [ProfileSettingsPagesController::class, 'notifications']
-        )
+        Route::get('/{brand}/profile/{userId}/settings/notifications',
+                   [ProfileSettingsPagesController::class, 'notifications'])
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.notifications');
 
-        Route::get(
-            '/{brand}/profile/{userId}/settings/account',
-            [ProfileSettingsPagesController::class, 'account']
-        )
+        Route::get('/{brand}/profile/{userId}/settings/account', [ProfileSettingsPagesController::class, 'account'])
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.account.id');
 
-        Route::get(
-            '/{brand}/profile/settings/account',
-            [ProfileSettingsPagesController::class, 'account']
-        )
+        Route::get('/{brand}/profile/settings/account', [ProfileSettingsPagesController::class, 'account'])
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.account');
 
-        Route::put(
-            '/update-payment-method',
-            [PaymentMethodUpdateController::class, 'submitUpdateForm']
-        )
+        Route::put('/update-payment-method', [PaymentMethodUpdateController::class, 'submitUpdateForm'])
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.update-payment-method');
 
@@ -438,44 +420,39 @@ Route::domain('{musoraDomain}')
         /*
          * Cancellation-related
          */
+        // POST accept-annual-offer
+        Route::post('/{brand}/profile/settings/account/accept-annual-offer',
+                    [ProfileSettingsPagesController::class, 'acceptAnnualOffer'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.accept-annual-offer');
 
         // POST resume-paused
-        Route::post(
-            '/{brand}/profile/settings/account/resume-paused',
-            [ProfileSettingsPagesController::class, 'resumePaused']
-        )
+        Route::post('/{brand}/profile/settings/account/resume-paused',
+                    [ProfileSettingsPagesController::class, 'resumePaused'])
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.resume-paused');
 
         // POST submit-cancel-reason
-        Route::post(
-            '/{brand}/profile/settings/account/submit-cancel-reason',
-            [ProfileSettingsPagesController::class, 'submitCancelReason']
-        )
+        Route::post('/{brand}/profile/settings/account/submit-cancel-reason',
+                    [ProfileSettingsPagesController::class, 'submitCancelReason'])
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.submit-cancel-reason');
 
         // POST accept student-plan offer
-        Route::post(
-            '/{brand}/profile/settings/account/student-plan-offer',
-            [ProfileSettingsPagesController::class, 'acceptStudentPlanOffer']
-        )
+        Route::post('/{brand}/profile/settings/account/student-plan-offer',
+                    [ProfileSettingsPagesController::class, 'acceptStudentPlanOffer'])
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.student-plan-offer');
 
         // POST accept switch-to-monthly offer
-        Route::post(
-            '/{brand}/profile/settings/account/switch-to-monthly',
-            [ProfileSettingsPagesController::class, 'acceptSwitchToMonthly']
-        )
+        Route::post('/{brand}/profile/settings/account/switch-to-monthly',
+                    [ProfileSettingsPagesController::class, 'acceptSwitchToMonthly'])
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.switch-to-monthly');
 
         // POST accept student-plan offer
-        Route::post(
-            '/{brand}/profile/settings/account/gratis-access',
-            [ProfileSettingsPagesController::class, 'acceptGratisAccess']
-        )
+        Route::post('/{brand}/profile/settings/account/gratis-access',
+                    [ProfileSettingsPagesController::class, 'acceptGratisAccess'])
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.gratis-access');
 
@@ -502,22 +479,28 @@ Route::domain('{musoraDomain}')
             ->name('platform.profile.settings.decline-offer-proceed-with-cancel');
 
 
+        Route::post('/{brand}/profile/settings/account/send-help-email',
+                    [ProfileSettingsPagesController::class, 'sendHelpEmail'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.send-help-email');
+
         // GET cancel-reason-form
-        Route::get(
-            '/{brand}/profile/settings/account/cancel',
-            [ProfileSettingsPagesController::class, 'cancelReasonForm']
-        )
+        Route::get('/{brand}/profile/settings/account/cancel',
+                   [ProfileSettingsPagesController::class, 'cancelReasonForm'])
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.cancel');
+        
+        // GET win-back
+        Route::post('/{brand}/profile/settings/account/win-back', [ProfileSettingsPagesController::class, 'winBack'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.win-back');
 
         // - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -
         // (end of cancellation-related)
         // - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -   - -
 
-        Route::get(
-            '/{brand}/profile/{userId}/settings/payment-invoice/{id}',
-            [ProfileSettingsPagesController::class, 'showInvoiceForPayment']
-        )
+        Route::get('/{brand}/profile/{userId}/settings/payment-invoice/{id}',
+                   [ProfileSettingsPagesController::class, 'showInvoiceForPayment'])
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.payment-invoice');
 
@@ -539,17 +522,13 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('forums.show-all-latest-threads');
 
-        Route::get(
-            '/{brand}/forums/threads/{categorySlug}/{categoryId}',
-            [ForumPagesController::class, 'showCategoryThreads']
-        )
+        Route::get('/{brand}/forums/threads/{categorySlug}/{categoryId}',
+                   [ForumPagesController::class, 'showCategoryThreads'])
             ->whereIn('brand', all_brands())
             ->name('forums.show-category-threads');
 
-        Route::get(
-            '/{brand}/forums/{categorySlug}/{categoryId}/{threadSlug}/{threadId}',
-            [ForumPagesController::class, 'showThreadPosts']
-        )
+        Route::get('/{brand}/forums/{categorySlug}/{categoryId}/{threadSlug}/{threadId}',
+                   [ForumPagesController::class, 'showThreadPosts'])
             ->whereIn('brand', all_brands())
             ->name('forums.show-thread-posts');
 
@@ -629,9 +608,21 @@ Route::domain('{musoraDomain}')
             ->name('platform.books.resources.chapter');
 
 //        //todo: to be moved outside members area
+        //        //todo: to be moved outside members area
         Route::get('/{brand}/contact', [SupportController::class, 'contact'])
             ->whereIn('brand', all_brands())
             ->name('platform.contact');
+    });
+
+/*
+ * Referral Pages
+ */
+Route::domain('{musoraDomain}')
+    ->middleware([AuthIfTokenExist::class, 'web_authenticated'])
+    ->group(function () {
+        Route::get('/{brand}/referral/invite-a-friend', [ReferralPagesController::class, 'inviteAFriend'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.invite-a-friend');
     });
 
 Route::get(
@@ -639,3 +630,74 @@ Route::get(
     [\App\Http\Controllers\Misc\ManifestFilesController::class, 'appleAssociationFile']
 )
     ->name('platform.apple-association-file');
+
+
+Route::domain('{musoraDomain}')
+    ->middleware(['web_public'])
+    ->group(function () {
+        /**
+         * Pianote Foundation Book
+         */
+        Route::get('/{brand}/resources', [\App\Http\Controllers\Platform\BooksController::class, 'resources'])
+            ->whereIn('brand', ['pianote'])
+            ->name('platform.books.resources');
+
+        Route::get(
+            '/{brand}/resources/level-{chapterNumber}',
+            [\App\Http\Controllers\Platform\BooksController::class, 'chapter']
+        )
+            ->whereIn('brand', ['pianote'])
+            ->name('platform.books.resources.chapter');
+        /**
+         * Drumeo Best Beginner Drum Book
+         */
+        Route::get('/{brand}/bestbook', [\App\Http\Controllers\Platform\BooksController::class, 'bestBeginner'])
+            ->whereIn('brand', ['drumeo'])
+            ->name('books.best-beginner-drum-book');
+
+        Route::get('/{brand}/bestbook/play-alongs',
+                   [\App\Http\Controllers\Platform\BooksController::class, 'bestBeginnerPlayAlongs'])
+            ->whereIn('brand', ['drumeo'])
+            ->name('books.best-beginner-drum-book.play-alongs');
+
+        Route::get('/{brand}/bestbook-digital', [\App\Http\Controllers\Platform\BooksController::class, 'bestBeginner'])
+            ->whereIn('brand', ['drumeo'])
+            ->name('books.best-beginner-drum-book-digital');
+        /**
+         * Drumeo Drummer's Toolbox Book
+         */
+        Route::get(
+            '/{brand}/drummers-toolbox-digital',
+            [\App\Http\Controllers\Platform\BooksController::class, 'drummersToolbox']
+        )
+            ->whereIn('brand', ['drumeo'])
+            ->name('books.digital.drummers-toolbox');
+
+        Route::get(
+            '/{brand}/drummers-toolbox-digital/{chapterNumber}',
+            [\App\Http\Controllers\Platform\BooksController::class, 'drummersToolboxChapter']
+        )
+            ->whereIn('brand', ['drumeo'])
+            ->name('books.digital.drummers-toolbox.chapter');
+
+        Route::get(
+            '/{brand}/drummers-toolbox',
+            [\App\Http\Controllers\Platform\BooksController::class, 'drummersToolbox']
+        )
+            ->whereIn('brand', ['drumeo'])
+            ->name('books.drummers-toolbox');
+
+        Route::get(
+            '/{brand}/drummers-toolbox/trial',
+            [\App\Http\Controllers\Platform\BooksController::class, 'drummersToolbox']
+        )
+            ->whereIn('brand', ['drumeo'])
+            ->name('books.drummers-toolbox.trial');
+
+        Route::get(
+            '/{brand}/drummers-toolbox/{chapterNumber}',
+            [\App\Http\Controllers\Platform\BooksController::class, 'drummersToolboxChapter']
+        )
+            ->whereIn('brand', ['drumeo'])
+            ->name('books.drummers-toolbox.chapter');
+    });

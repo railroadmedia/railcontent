@@ -1,21 +1,13 @@
 @extends('guitareo.lead-gen.acoustic-guitar-jumpstart.lesson-page-layout')
 
-@php
-    $title = 'What To Do Next';
-    $video = '//player.vimeo.com/video/299280602';
-    $previous = '/acoustic-guitar-jumpstart/course-index/7';
-    $resources = '
-        <div class="flex w-full">
-            <div class="px-3 md:px-4 w-1/2">
-                <a href="/trial" target="_blank" class="download-button outline big">Learn More About Guitareo</a>
-            </div>
-            <div class="px-3 md:px-4 w-1/2">
-                <a href="{{ url()->route(\'shopping-cart.add-to-cart\', [
-                    \'products\' => [\'GUITAREO-7-DAY-TRIAL-ONE-TIME\' => 1],
-                    \'redirect\' => \'/order\', \'locked\' => \'true\']) }}" target="_blank" class="download-button big">
-                    Start A Free Guitareo Trial
-                </a>
-            </div>
-        </div>
-    '
-@endphp
+@section('subtitle')
+    What To Do Next
+@stop
+
+@section('video', '//player.vimeo.com/video/299280602')
+
+@section('current-lesson-number', 8)
+
+@section('previous', '/acoustic-guitar-jumpstart/course-index/7')
+
+@section('prev-thumb', 'https://i.vimeocdn.com/video/737368212-33be88307072a4bca4a01b530a7f00ac433097e6ea49da74bbf90d3fc9340fe6-d?mw=1200&mh=675')
