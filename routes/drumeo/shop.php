@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Drumeo\ShopController;
+use App\Http\Controllers\Drumeo\SalesController;
 
 Route::domain('{drumeoDomain}')
     ->middleware(['web_public'])
