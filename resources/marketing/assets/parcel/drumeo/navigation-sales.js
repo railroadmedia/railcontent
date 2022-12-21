@@ -25,13 +25,6 @@ $(document).ready(function (){
         arrowIcon.toggleClass("active");
     });
 
-    // topbar background
-
-    $(".top-bar").toggleClass("scrolled", $(this).scrollTop() > 0);
-    $(document).scroll(function () {
-        $(".top-bar").toggleClass("scrolled", $(this).scrollTop() > 0);
-    });
-
     // cookie bar
     var popUp = false;
     (function getPopUpCookie() {
