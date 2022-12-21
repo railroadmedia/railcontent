@@ -176,16 +176,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.254.1",
+            "version": "3.255.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "c020b283360bd802ee24959ffb63d70603f8b408"
+                "reference": "1afa73a23916c1801dd89f987634e8e8c13d2b35"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/c020b283360bd802ee24959ffb63d70603f8b408",
-                "reference": "c020b283360bd802ee24959ffb63d70603f8b408",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/1afa73a23916c1801dd89f987634e8e8c13d2b35",
+                "reference": "1afa73a23916c1801dd89f987634e8e8c13d2b35",
                 "shasum": ""
             },
             "require": {
@@ -264,9 +264,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.254.1"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.255.0"
             },
-            "time": "2022-12-20T19:28:05+00:00"
+            "time": "2022-12-21T20:15:15+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -4258,16 +4258,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v9.45.0",
+            "version": "v9.45.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "f2c51fdfcb0c50c19cdc49c2e82690ad1a21eafe"
+                "reference": "faeb20d3fc61b69790068161ab42bcf2d5faccbc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/f2c51fdfcb0c50c19cdc49c2e82690ad1a21eafe",
-                "reference": "f2c51fdfcb0c50c19cdc49c2e82690ad1a21eafe",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/faeb20d3fc61b69790068161ab42bcf2d5faccbc",
+                "reference": "faeb20d3fc61b69790068161ab42bcf2d5faccbc",
                 "shasum": ""
             },
             "require": {
@@ -4440,7 +4440,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2022-12-20T14:16:06+00:00"
+            "time": "2022-12-21T19:37:46+00:00"
         },
         {
             "name": "laravel/nova",
@@ -7985,16 +7985,16 @@
         },
         {
             "name": "railroad/ecommerce",
-            "version": "v5.0.47",
+            "version": "v5.0.49",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "b1928bbf6e00fce10b18caac3746494bcc526db1"
+                "reference": "8aaa03040ad9f18ab9f884711689939b6cc5023c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/b1928bbf6e00fce10b18caac3746494bcc526db1",
-                "reference": "b1928bbf6e00fce10b18caac3746494bcc526db1",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/8aaa03040ad9f18ab9f884711689939b6cc5023c",
+                "reference": "8aaa03040ad9f18ab9f884711689939b6cc5023c",
                 "shasum": ""
             },
             "require": {
@@ -8031,9 +8031,9 @@
             "description": "Ecommerce system",
             "support": {
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
-                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.47"
+                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.49"
             },
-            "time": "2022-12-15T21:50:52+00:00"
+            "time": "2022-12-21T21:02:03+00:00"
         },
         {
             "name": "railroad/lead-tracker",
@@ -16641,5 +16641,5 @@
         "ext-curl": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
