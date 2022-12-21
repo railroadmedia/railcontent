@@ -627,11 +627,4 @@ class SalesController extends BaseController
     {
         return view('drumeo.drumshop.jared-recommends');
     }
-
-    public function products(Request $request, $domain, $page = null)
-    {
-        return view('drumeo.products.'.$page);
-
-        throw new NotFoundHttpException();
-    }
 }
