@@ -1,8 +1,8 @@
 @php
-    require_once(resource_path('marketing/views/drumeo/sales/pages/coaches/sliders.php'))
+    require_once(resource_path('marketing/views/pianote/sales/pages/coaches/sliders.php'))
 @endphp
 
-@extends('drumeo.sales.pages.coaches-method-songs-layout')
+@extends('pianote.sales.pages.coaches-method-songs-layout')
 
 @section('page-meta')
 

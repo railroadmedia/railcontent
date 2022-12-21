@@ -1,46 +1,42 @@
 <?php
 $lessons = [
     [
-        "title" => "Getting Started On The Drums",
-        "desc" => 'This is where it starts. You’ll learn how to set up your drum-set, hold your drumsticks properly, and play your first beats. And, best of all, you’ll learn how to play your first two songs on the drums.',
-        'detail' => '30 lessons',
+        "title" => "Getting Started On The Piano",
+        "desc" => 'Welcome to the piano. This level will get you acquainted with this beautiful instrument, and teach you the fundamental skills to be successful on the keys, no matter what style you want to play.
+
+        You’ll learn how to set up your practice space, identify the notes on the keyboard and start practicing your first scale.
+
+        But it won’t just be exercises. You’ll learn your first real song.
+',
+        'detail' => '16 lessons',
         'lessons' => [
             [
-                'thumb' => 'https://d1923uyy6spedc.cloudfront.net/241249-card-thumbnail-maxres-1593029951.png',
-                'title' => 'Gear',
-                'desc' => 'In this course, you\'ll learn about all the different parts of your drum-set. You\'ll learn the name of each piece of drum equipment, the function and purpose of each piece, and how to set everything up properly and efficiently. ',
-                'lessonNum' => '10',
-            ],
-            [
-                'thumb' => 'https://d1923uyy6spedc.cloudfront.net/241260-card-thumbnail-maxres-1593030096.png',
-                'title' => 'Technique',
-                'desc' => 'Here you\'ll learn the most basic drum techniques to get you playing as soon as possible. You\'ll learn how to hold your drumsticks properly and how to play your hi-hat and bass drum pedals.',
+                'thumb' => 'https://d1923uyy6spedc.cloudfront.net/pianote-method-level-1-c1-title.png',
+                'title' => 'How To Use The Method',
+                'desc' => 'Learn how to use the Pianote Method, select your keyboard, set up your practice space, and set goals so that you can be sure to achieve your piano playing dreams.',
                 'lessonNum' => '5',
             ],
             [
-                'thumb' => 'https://d1923uyy6spedc.cloudfront.net/241266-card-thumbnail-maxres-1593030157.png',
-                'title' => 'Your First Song',
-                'desc' => 'In this course, you\'ll learn how to play along to your first song! You\'ll learn how to play a drum beat, drum fill, and most importantly, how to play the drums in time.',
+                'thumb' => 'https://d1923uyy6spedc.cloudfront.net/pianote-method-level-1-c2-title.png',
+                'title' => 'Welcome To The Keyboard',
+                'desc' => 'It is time to play the piano! These lessons will teach you all you need to know to begin building confidence at the piano. From proper posture to your first scales, this is where you will start to develop the connection from your brain to your fingers. The best part is that you will be introduced to chords so that you can begin to play the songs you love.',
+                'lessonNum' => '8',
+            ],
+            [
+                'thumb' => 'https://d1923uyy6spedc.cloudfront.net/pianote-method-level-1-c3-title.png',
+                'title' => 'Theory & Ear Training',
+                'desc' => 'Theory and Ear Training are critical elements to making you the best musician you can be. This course focuses on melodic and rhythmic patterns as well as understanding rhythm. All of these elements will help you so much when it comes to reading and understanding music, playing by ear, and composing your own music.',
                 'lessonNum' => '4',
-            ],
-            [
-                'thumb' => 'https://d1923uyy6spedc.cloudfront.net/241271-card-thumbnail-maxres-1593030265.png',
-                'title' => 'Your Second Song',
-                'desc' => 'This course expands on what you learned in the previous one. Here you\'ll learn how to play along to your second song, orchestrate your drum beats and fills, and how to combine them together in different ways.',
-                'lessonNum' => '6',
-            ],
-            [
-                'thumb' => 'https://d1923uyy6spedc.cloudfront.net/241278-card-thumbnail-maxres-1593030445.png',
-                'title' => 'Ears',
-                'desc' => 'Ear training is an essential skill for any musician. In this course, you\'ll take your first steps into the world of ear training by focusing on active listening, call and response exercises, and developing your sense of time.',
-                'lessonNum' => '5',
             ],
         ]
     ],
     [
-        "title" => "Basic Theory & Ear Training",
-        "desc" => 'In Level Two, you’ll continue to build your drumming foundation. You’re going to learn your first drum rudiments, develop basic reading skills (it’s not that hard, we promise!), and get introduced to three styles of drumming: rock, punk, and metal.',
-        'detail' => '51 lessons',
+        "title" => "Keyboard Confidence & Control",
+        "desc" => 'Scales can get real boring, real fast. In Level 2, you’ll learn how to make scale practice musical so you not only develop greater control and confidence at the keyboard, you also have a ton of fun (and sound great).
+
+        Feeling comfortable and confident at the keyboard will make you want to keep coming back for more, which is the key to seeing results. This level will teach you good practice habits that will be instrumental in your long-term success.
+',
+        'detail' => '12 lessons',
         'lessons' => [
             [
             'thumb' => 'https://d1923uyy6spedc.cloudfront.net/243084-card-thumbnail-maxres-1593030792.png',

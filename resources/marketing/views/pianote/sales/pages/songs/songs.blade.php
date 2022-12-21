@@ -1,18 +1,18 @@
 @php
-    require_once(resource_path('marketing/views/drumeo/sales/pages/songs/sliders.php'))
+    require_once(resource_path('marketing/views/pianote/sales/pages/songs/sliders.php'))
 @endphp
 
-@extends('drumeo.sales.pages.coaches-method-songs-layout')
+@extends('pianote.sales.pages.coaches-method-songs-layout')
 
 @section('page-meta')
 
 @endsection
-<title>Drumeo | Reach your drumming goals.</title>
-<meta property="og:title" content="Drumeo | Reach your drumming goals.">
-<meta property="og:url" content="https://www.drumeo.com/method">
-<meta name="description" content="Learn the drums faster with organized video lessons, legendary teachers, and better practice tools. 90-Day Guarantee.">
-<meta property="og:description" content="Learn the drums faster with organized video lessons, legendary teachers, and better practice tools. 90-Day Guarantee.">
-<meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/sales/2022/og-image.jpg" style="display: none;">
+<title>Pianote | </title>
+<meta property="og:title" content="Pianote | ">
+<meta property="og:url" content="https://www.pianote.com/method">
+<meta name="description" content="">
+<meta property="og:description" content="">
+<meta property="og:image" content="" style="display: none;">
 
 @section('body-data')
     x-data ='{
@@ -20,11 +20,11 @@
     }'
 @endsection
 
-@section('header-img', 'https://drumeo-assets.s3.amazonaws.com/sales/2023/songs-thumb.jpg')
+@section('header-img', '')
 
-@section('header', 'Play your favorite songs.')
+@section('header', 'Your piano goals start here.')
 
-@section('desc', 'Get 5000+ note-for-note song breakdowns for every style, era, and skill with handy play-along tools')
+@section('desc', 'Always know exactly what to practice with an organized 10-level curriculum.')
 
 @section('page-body')
     <section class="py-12 md:py-20">
