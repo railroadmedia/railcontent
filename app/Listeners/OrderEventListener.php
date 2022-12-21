@@ -3,6 +3,8 @@
 namespace App\Listeners;
 
 use App\Analytics\Tracker;
+use App\Modules\Brand\Enums\Brand;
+use App\Modules\Brand\Services\BrandService;
 use App\Services\User\UserAccessService;
 use Carbon\Carbon;
 use Illuminate\Database\DatabaseManager;
@@ -32,6 +34,7 @@ class OrderEventListener
      * @var UserProductService
      */
     private $userProductService;
+    private BrandService $brandService;
 
     /**
      * OrderEventListener constructor.
@@ -42,14 +45,15 @@ class OrderEventListener
     public function __construct(
         DatabaseManager $databaseManager,
         UserProductService $userProductService,
-        CartService $cartService
+        CartService $cartService,
+        BrandService $brandService
     )
 
     {
         $this->databaseManager = $databaseManager;
         $this->userProductService = $userProductService;
         $this->cartService = $cartService;
-
+        $this->brandService = $brandService;
     }
 
     /**
