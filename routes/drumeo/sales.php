@@ -91,18 +91,4 @@ Route::domain('{drumeoDomain}')
     Route::get('/30-day-drummer-register-endpoint', [SalesController::class, 'registerFor30DayDrummer'] );
     Route::get('/pro/', [SalesController::class, 'pro']);
     Route::get('/jared-recommends', [SalesController::class, 'jaredRecommends']);
-
-    Route::group(['prefix' => 'drumshop'],
-        function () {
-            Route::get('/{page?}', SalesController::class . '@products')
-                ->whereIn('page', [
-                    'beginner-book', 'better-drum-fills', 'beyond-beginner-drumming', 'comfort-cover', 'drum-technique-made-easy', 'drumming-system-discount', 'drumsticks', 'electrify-your-drumming', 'festival-videos', 'independence-made-easy', 'learn-songs-faster', 'new-drummers', 'practice-pad-full', 'quietpad', 'rock-drumming-masterclass', 'successful-drumming-discount', 'the-drummers-toolbox', 'tony-royster-jr'
-                ]);
-
-            Route::get('/30-day-drummer', [SalesController::class, 'thirtyDayDrummer'] );
-            Route::get('/eardrums', [SalesController::class, 'eardrums'] );
-            Route::get('/quietkick', [SalesController::class, 'quietKick'] );
-            Route::get('/tone-control-kit', [SalesController::class, 'toneControl'] );
-        }
-    );
 });

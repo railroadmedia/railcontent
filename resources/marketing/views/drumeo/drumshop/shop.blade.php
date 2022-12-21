@@ -374,7 +374,7 @@
                         "fullPrice" => $accessory->price,
                         "price" => $accessory->discounted_price === '0.00' || empty($accessory->discounted_price) ? $accessory->price : $accessory->discounted_price,
                         "sizes" => $accessory->sizes,
-                        "soldOut" => !empty($products[$accessory->sku]) ? $products[$accessory->sku]->getPublicStockCount() === 0 :$accessory->sold_out,
+                        "soldOut" => !empty($products[$accessory->sku]) ? $products[$accessory->sku]->getPublicStockCount() === 0 : $accessory->sold_out,
                         "category" => strtolower($accessory->productType->name),
                         "size_case_sensitive" => $accessory->size_case_sensitive,
                     ])
