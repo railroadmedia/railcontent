@@ -8,7 +8,7 @@
     @include('drumeo._partials._fonts')
     @include('_partials.layout.favicons.drumeo-favicons')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link href="/marketing/css/drumeo/tailwind-helpers.css" rel="stylesheet">
+    <link href="{{ asset('marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
     <style>
         body {
             text-align:center;
@@ -192,20 +192,6 @@
     We will send you an email reminder about the upcoming (No)Drum Solo Contest an hour<br class="hidden md:inline">
     before we begin. The live stream will be on Friday, October 29th, at 2 PM PDT.<br class="hidden md:inline">
     Hope to see you there!</p>
-{{--<div class="my-2 mx-1 addeventatc" id="addeventatc1">--}}
-    {{--Mark Your Calendar <i class="fas fa-caret-down"></i>--}}
-    {{--<span class="hide start">2021/09/10 10:00:00</span>--}}
-    {{--<span class="hide end">2021/09/10 11:15:00</span>--}}
-    {{--<span class="hide timezone">America/Vancouver</span>--}}
-    {{--<span class="hide title">Drumeo's Song Request Lottery!</span>--}}
-    {{--<span class="hide description" style="">Drumeo will be running this event quarterly to help the students get their requested songs into the Song library- We will take all the requested songs that haven't made the monthly top 15 votes, and randomly draw 50 songs to add to the library.&nbsp;<br class="atc_node"> <br class="atc_node"> You Access Link: https://www.drumeo.com/members/live</span>--}}
-    {{--<span class="hide location">https://www.drumeo.com/members/live</span>--}}
-    {{--<span class="hide all_day_event">false</span>--}}
-    {{--<span class="hide date_format">MM/DD/YYYY</span>--}}
-    {{--<span class="hide alarm_reminder">15</span>--}}
-    {{--<span class="hide recurring"></span>--}}
-{{--</div>--}}
-{{--<a class="my-2 mx-1 join" href="https://www.addevent.com/event/gJ8180726">Mark Your Calendar</a>--}}
 <br><a class="my-2 mx-1 join" href="/members">Go To Members Area &raquo;</a>
 </body>
 </html>

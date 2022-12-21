@@ -200,41 +200,38 @@ Route::domain('{drumeoDomain}')->group(function () {
 
         }
     );
-
-    Route::get('/shows/{slug}', function ($root, $slug) { return view('drumeo.lead-gen.shows.' . $slug); });
-
-    Route::get('/birthday-gifts/', function () { return view('drumeo.lead-gen.gift-guide.birthday-guide'); });
-    Route::get('/christmas-gift-guide/', function () { return view('drumeo.lead-gen.gift-guide.christmas-guide'); });
-    Route::get('/click/', function () { return view('drumeo.lead-gen.pages.click'); });
-    Route::get('/druminar/coming-back-to-the-drums', function () { return view('drumeo.lead-gen.webinar.coming-back-to-the-drums'); });
-    Route::get('/druminar/coming-back-to-the-drums/june-12-live-event', function () { return view('drumeo.lead-gen.webinar.event'); });
-    Route::get('/fathers-day-gifts/', function () { return view('drumeo.lead-gen.gift-guide.fathers-day-guide'); });
-    Route::get('/for-teachers/teach-drums/', function () { return view('drumeo.lead-gen.pages.teach-drums'); });
-    Route::get('/free-drum-lessons/', function () { return view('drumeo.lead-gen.pages.free-drum-lessons'); });
-    Route::get('/gift-guide/', function () { return view('drumeo.lead-gen.gift-guide.new-years-guide'); });
-    Route::get('/new-years-gift-guide/', function () { return view('drumeo.lead-gen.gift-guide.new-years-guide'); });
-    Route::get('/quick-drummer-survey/', function () { return view('drumeo.lead-gen.pages.quick-drummer-survey'); });
-    Route::get('/teach-a-beginner/', function () { return view('drumeo.lead-gen.pages.teach-a-beginner'); });
-    Route::get('/teach-a-beginner/lessons/', function () { return view('drumeo.lead-gen.pages.teach-a-beginner-lessons'); });
-    Route::get('/thankyou/', function () { return view('drumeo.lead-gen.pages.thank-you'); });
-    Route::get('/thank-you/', function () { return view('drumeo.lead-gen.pages.thank-you-alt'); });
-    Route::get('/30-day-drummer-unsubscribe/', function () { return view('drumeo.lead-gen.pages.30-day-drummer-unsubscribe'); });
-    Route::get('/30-day-drummer-subscribe/', function () { return view('drumeo.lead-gen.pages.30-day-drummer-subscribe'); });
-    Route::get('/subscribed/', function () { return view('drumeo.lead-gen.pages.subscribed'); });
-    Route::get('/confirming/', function () { return view('drumeo.lead-gen.pages.confirming'); });
-    Route::get('/lets-stay-together/', function () { return view('drumeo.lead-gen.pages.lets-stay-together'); });
-    Route::get('/welcome-party/', function () { return view('drumeo.lead-gen.pages.welcome-party'); });
-    Route::get('/2-million/', function () { return view('drumeo.lead-gen.pages.2-million'); });
-    Route::get('/awards-giveaway/', function () { return view('drumeo.lead-gen.pages.awards-giveaway'); });
-    Route::get('/recitals/', function () { return view('drumeo.lead-gen.pages.recitals'); });
-    Route::get('/lifetime-members-masterclass/', function () { return view('drumeo.lead-gen.pages.lifetime-members-masterclass'); });
-    Route::get('/30-day-drummer-live/', function () { return view('drumeo.lead-gen.pages.30-day-drummer-live'); });
-    Route::get('/awards/', function () { return view('drumeo.lead-gen.pages.awards'); });
-    Route::get('/weeklyemail/', function () { return view('drumeo.lead-gen.blog-forms.weeklyemail'); });
-    Route::get('/weekly-email/', function () { return view('drumeo.lead-gen.blog-forms.weekly-email'); });
-    Route::get('/fwtgf-blog/', function () { return view('drumeo.lead-gen.blog-forms.fwtgf-blog'); });
-    Route::get('/40s-blog/', function () { return view('drumeo.lead-gen.blog-forms.40s-blog'); });
-    Route::get('/gsd-blog/', function () { return view('drumeo.lead-gen.blog-forms.gsd-blog'); });
-    Route::get('/gojb-blog/', function () { return view('drumeo.lead-gen.blog-forms.gojb-blog'); });
-    Route::get('/fpa-blog/', function () { return view('drumeo.lead-gen.blog-forms.fpa-blog'); });
+    Route::group(['prefix' => 'shows' ],
+        function () {
+            Route::get('/{page?}', LeadGenController::class . '@shows')
+                ->whereIn('page', [
+                    'behind-the-scenes', 'in-rhythm', 'sonor', 'study-the-greats'
+                ]);
+        }
+    );
+    Route::group(['prefix' => 'shows' ],
+        function () {
+            Route::get('/{page?}', LeadGenController::class . '@shows')
+                ->whereIn('page', [
+                    'behind-the-scenes', 'in-rhythm', 'sonor', 'study-the-greats'
+                ]);
+        }
+    );
+    Route::get('/birthday-gifts/', [LeadGenController::class, 'birthdayGifts']);
+    Route::get('/christmas-gift-guide/', [LeadGenController::class, 'christmasGift']);
+    Route::get('/{page?}', LeadGenController::class . '@pages')
+        ->whereIn('page', [
+            'click', 'free-drum-lessons', 'quick-drummer-survey', 'teach-a-beginner', 'thankyou', '30-day-drummer-unsubscribe', '30-day-drummer-subscribe', 'subscribed', 'confirming', 'lets-stay-together', 'welcome-party', '2-million', 'awards-giveaway', 'recitals', 'lifetime-members-masterclass', '30-day-drummer-live', 'awards',
+        ]);
+    Route::get('/druminar/coming-back-to-the-drums', [LeadGenController::class, 'druminarCBTTD']);
+    Route::get('/druminar/coming-back-to-the-drums/june-12-live-event', [LeadGenController::class, 'druminarEvent']);
+    Route::get('/fathers-day-gifts/', [LeadGenController::class, 'fatherGift']);
+    Route::get('/for-teachers/teach-drums/', [LeadGenController::class, 'teachDrums']);
+    Route::get('/gift-guide/', [LeadGenController::class, 'giftGuide']);
+    Route::get('/new-years-gift-guide/', [LeadGenController::class, 'newYearGift']);
+    Route::get('/teach-a-beginner/lessons/', [LeadGenController::class, 'teachBeginner']);
+    Route::get('/weeklyemail/', [LeadGenController::class, 'weeklyMail']);
+    Route::get('/{page?}', LeadGenController::class . '@blogForms')
+        ->whereIn('page', [
+            'fwtgf-blog', '40s-blog', 'gsd-blog', 'gojb-blog', 'fpa-blog'
+        ]);
 });

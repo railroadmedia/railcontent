@@ -14,7 +14,7 @@
     <style>
         .lazyload {opacity: 0;}  .lazyloading {opacity: 1;transition: opacity 300ms;}
     </style>
-    <link href="/marketing/parcel/pianote/lead-gen-50-charts.css" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/pianote/lead-gen-50-charts.css') }}" rel="stylesheet">
 @endsection
 @section('scripts')
     @parent
@@ -23,8 +23,8 @@
             $(document).foundation();
         });
     </script>
-    <script type="text/javascript" src="/marketing/js/modal.js"></script>
-    <script type="text/javascript" src="/marketing/js/modal-autoplay.js"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
 @endsection
 @section('page-body')
     <header class="text-white text-center lg:text-left py-7 md:py-12 lg:py-20 px-6 md:px-4 lg:px-6" style="background: #06091a url(https://cdn.musora.com/image/fetch/w_2000,q_60,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/50-chord-charts/header-bg.jpg) center bottom/cover;">

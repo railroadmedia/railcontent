@@ -345,7 +345,7 @@
                     @elseif(session()->has('error'))
                         <div class="error">
                             <p><strong>Error</strong></p>
-                            <p><em>We're sorry, but there's been a problem on our end. <br>Please <a class="text-white" href="/support">contact us</a> or call 1-800-439-8921 and we'll get things sorted out!</em></p>
+                            <p><em>We're sorry, but there's been a problem on our end. <br>Please <a class="text-white" href="{{ get_musora_brand_base_url() }}/contact">contact us</a> or call 1-800-439-8921 and we'll get things sorted out!</em></p>
                         </div>
                         <br><br>
                     @else

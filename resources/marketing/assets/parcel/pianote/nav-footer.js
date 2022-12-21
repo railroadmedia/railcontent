@@ -43,7 +43,7 @@ $(document).ready(function (){
 
     function setPopUpCookie() {
         if (!popUp) {
-            document.cookie = "cookieAccept=true; expires=" + new Date(2147483647 * 1000).toUTCString() + "; path=/";
+            document.cookie = "cookieAccept=true; expires=" + new Date(2147483647 * 1000).toUTCString() + "; path=/; domain=pianote.com;";
             popUp = true;
         }
     }

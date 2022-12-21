@@ -16,7 +16,7 @@
 @endsection
 
 @section('head')
-    <link href="/marketing/parcel/pianote/lead-gen-learn-songs.css" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/pianote/lead-gen-learn-songs.css') }}" rel="stylesheet">
     <style>
         header {
             background-image: url('https://pianote.s3.amazonaws.com/lead-gen/7-days-to-sight-reading/header_m_lesson.jpg');

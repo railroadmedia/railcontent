@@ -1,4 +1,4 @@
-<script type="text/javascript" src="/marketing/js/jquery.countdown-2.min.js"></script>
+<script type="text/javascript" src={{ asset('/marketing/js/jquery.countdown-2.min.js') }}></script>
 <script>
     $(document).ready(function () {
         // Countdown

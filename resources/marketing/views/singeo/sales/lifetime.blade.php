@@ -292,7 +292,7 @@
             </div>
             {{-- <div class="inline-block w-full px-3 md:px-4 questions max-w-2xl"> --}}
             {{-- <h4><strong>Still have questions?</strong></h4> --}}
-            {{-- <p>If you need any further information about becoming a Lifetime Member, contact our amazing support team <a class="text-white" href="/support">here</a> --}}
+            {{-- <p>If you need any further information about becoming a Lifetime Member, contact our amazing support team <a class="text-white" href="{{ get_musora_brand_base_url() }}/contact">here</a> --}}
             {{-- <br><br> --}}
             {{-- A friendly and knowledgeable support team member will get back to you right away. --}}
             {{-- <br> All prices listed in USD.</p> --}}
@@ -324,11 +324,11 @@
     @include("singeo.sales.partials._footer")
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="/marketing/parcel/singeo/nav-footer.js"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/singeo/nav-footer.js') }}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
-    <script type="text/javascript" src="/marketing/js/modal.js"></script>
-    <script type="text/javascript" src="/marketing/js/modal-autoplay.js"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
     <script>
         $(document).ready(function () {
             $('.flip-div').click(function (e) {

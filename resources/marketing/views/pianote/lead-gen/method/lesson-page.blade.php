@@ -14,8 +14,8 @@
     <link href="{{ asset('/marketing/css/pianote/tailwind-helpers.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/sales.css') }}">
-    <link rel="stylesheet" href="/marketing/parcel/pianote/lead-gen.css">
-    <link rel="stylesheet" href="https://www.drumeo.com/laravel/public/assets/members-area/css/gulp/lead-gen.css">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/lead-gen.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/lead-gen.css') }}">
 
     <style>
         a:hover {
@@ -145,7 +145,7 @@
     @include('pianote._partials._footer')
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="/marketing/parcel/pianote/nav-footer.js"></script>
-    <script type="text/javascript" src="/marketing/js/modal-autoplay-bootstrap.js"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/pianote/nav-footer.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay-bootstrap.js') }}"></script>
     @yield('scripts')
 @stop

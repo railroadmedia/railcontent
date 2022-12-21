@@ -45,7 +45,7 @@
         // redirect to members area when cart complete
         function checkUrl() {
             if($('iframe.trial').contents().get(0).location.href.indexOf('members') > -1) {
-                window.location.href = "https://www.drumeo.com/members/lessons/courses";
+                window.location.href = "https://www.musora.com/drumeo/courses";
             }
         }
     </script>

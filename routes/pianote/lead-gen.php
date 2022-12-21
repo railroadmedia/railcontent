@@ -7,19 +7,20 @@ use App\Http\Controllers\Pianote\LeadGenController;
 Route::domain('{pianoteDomain}')
     ->middleware(['web_public'])
     ->group(function () {
-    Route::get('/thank-you',function () { return view('pianote.lead-gen.thank-you'); } );
-    Route::get('/thankyou',function () { return view('pianote.lead-gen.thank-you-alt'); } );
-    Route::get('/email-confirmation ',function () { return view('pianote.lead-gen.email-confirmation'); } );
-    Route::get('/confirming',function () { return view('pianote.lead-gen.confirming'); } );
-    Route::get('/subscribed',function () { return view('pianote.lead-gen.subscribed'); } );
-    Route::get('/weekly-email',function () { return view('pianote.lead-gen.weekly-email'); } );
-    Route::get('/weeklyemail',function () { return view('pianote.lead-gen.weekly-email-2'); } );
-    Route::get('/recitals',function () { return view('pianote.lead-gen.recitals'); } );
-    Route::get('/classical-cohort-1',function () { return view('pianote.lead-gen.classical-cohort-1'); } );
-    Route::get('/classical-cohort-2',function () { return view('pianote.lead-gen.classical-cohort-2'); } );
-    Route::get('/classical-cohort-3',function () { return view('pianote.lead-gen.classical-cohort-3'); } );
-    Route::get('/classical-cohort-4',function () { return view('pianote.lead-gen.classical-cohort-4'); } );
-    Route::get('/one-million',function () { return view('pianote.lead-gen.one-million'); } );
+
+    Route::get('/thank-you', [LeadGenController::class, 'thankyou']);
+    Route::get('/thankyou', [LeadGenController::class, 'thankyoualt']);
+    Route::get('/email-confirmation ', [LeadGenController::class, 'emailconfirmation']);
+    Route::get('/confirming', [LeadGenController::class, 'confirming']);
+    Route::get('/subscribed', [LeadGenController::class, 'subscribed']);
+    Route::get('/weekly-email', [LeadGenController::class, 'weeklyemail']);
+    Route::get('/weeklyemail', [LeadGenController::class, 'weeklyemail2']);
+    Route::get('/recitals', [LeadGenController::class, 'recitals']);
+    Route::get('/classical-cohort-1', [LeadGenController::class, 'classicalcohort1']);
+    Route::get('/classical-cohort-2', [LeadGenController::class, 'classicalcohort2']);
+    Route::get('/classical-cohort-3', [LeadGenController::class, 'classicalcohort3']);
+    Route::get('/classical-cohort-4', [LeadGenController::class, 'classicalcohort4']);
+    Route::get('/one-million', [LeadGenController::class, 'onemillion']);
 
     Route::group(['prefix' => 'piano-complete-beginners-bootcamp'],
         function () {

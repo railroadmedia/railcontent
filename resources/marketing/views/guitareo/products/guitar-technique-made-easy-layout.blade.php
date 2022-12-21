@@ -30,9 +30,9 @@
 @stop()
 
 @section('scripts')
-    <script src="/marketing/js/modal.js"></script>
+    <script src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/1.9.3/countUp.min.js"></script>
-    <script src="/marketing/parcel/guitareo/nav-footer.js"></script>
+    <script src="{{ asset('/marketing/parcel/guitareo/nav-footer.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $(document).foundation();
@@ -647,7 +647,7 @@
             </div>
             <div class="large-8 medium-7 columns text-center medium-text-left">
                 <h1>90-Day Money-Back Guarantee.</h1>
-                <p>We love our students. More than anything, we want you to enjoy a super-positive experience playing guitar. And that means we only want you to pay if you actually LOVE your Guitareo experience! So join below to try it out totally risk-free. If it’s not for you, simply <a class="text-white" href="/support">contact us</a> within 90 days to request a full refund.</p>
+                <p>We love our students. More than anything, we want you to enjoy a super-positive experience playing guitar. And that means we only want you to pay if you actually LOVE your Guitareo experience! So join below to try it out totally risk-free. If it’s not for you, simply <a class="text-white" href="{{ get_musora_brand_base_url() }}/contact">contact us</a> within 90 days to request a full refund.</p>
             </div>
         </div>
     </section>
@@ -713,8 +713,8 @@
             <p class="columns final-questions">
                 <span><strong>Any questions?</strong></span>
                 You can also call us or order by phone<br class="hide-for-large"> toll-free at
-                <a href="tel:1-800-439-8921">1-800-439-8921</a><br class="hide-for-medium"> or directly at
-                <a href="tel:1-604-855-7605">1-604-855-7605</a>. <br>
+                <a href="tel:+18004398921">1-800-439-8921</a><br class="hide-for-medium"> or directly at
+                <a href="tel:+16048557605">1-604-855-7605</a>. <br>
                 All prices listed in USD.</p>
         </div>
     </section>

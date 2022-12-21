@@ -47,7 +47,7 @@
     <meta property="og:url" content="https://www.guitareo.com/chords-for-hit-songs/lessons">
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/marketing/parcel/guitareo/song-in-an-hour.css">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/song-in-an-hour.css') }}">
     @parent
 @stop
 

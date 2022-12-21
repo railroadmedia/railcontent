@@ -8,6 +8,34 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class LeadGenController extends BaseController
 {
+    public function thankyouwhite() {
+        return view('guitareo.lead-gen.pages.thank-you');
+    }
+    public function welcomeparty() {
+        return view('guitareo.lead-gen.pages.welcome-party');
+    }
+    public function welcomepartycarlos() {
+        return view('guitareo.lead-gen.pages.welcome-party-carlos');
+    }
+    public function confirming() {
+        return view('guitareo.lead-gen.pages.confirming');
+    }
+    public function subscribed() {
+        return view('guitareo.lead-gen.pages.subscribed');
+    }
+    public function weeklyemail() {
+        return view('guitareo.lead-gen.pages.weekly-email');
+    }
+    public function weeklyemail2() {
+        return view('guitareo.lead-gen.pages.weekly-email-2');
+    }
+    public function recitals() {
+        return view('guitareo.lead-gen.pages.recitals');
+    }
+    public function fretboardcheatsheet() {
+        return view('guitareo.lead-gen.pages.fretboard-cheatsheet');
+    }
+
     public function backToBasics(Request $request, $domain, $page = null)
     {
         switch ($page) {

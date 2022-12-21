@@ -8,41 +8,34 @@ Route::domain('{singeoDomain}')
     ->middleware(['web_public'])
     ->group(function () {
     Route::get('/', [SalesController::class, 'home']);
-    Route::get('/support', function () { return view('singeo.sales.pages.support'); } );
-    Route::get('/student-only', function () { return view('singeo.sales.student-only'); } );
-    Route::get('/privacy', function () { return view('singeo.sales.pages.privacy'); } );
-    Route::get('/terms', function () { return view('singeo.sales.pages.terms'); } );
-    Route::get('/trial', function () { return view('singeo.sales.trials.trial'); } );
-    Route::get('/trial-month', function () { return view('singeo.sales.trials.30-trial'); } );
-    Route::get('/choose-your-trial', function () { return view('singeo.sales.trials.trial-selection.week'); } );
-    Route::get('/choose-your-trial-month', function () { return view('singeo.sales.trials.trial-selection.month'); } );
-    Route::get('/cookie', function () { return view('singeo.sales.pages.cookie'); } );
+    Route::get('/student-only', [SalesController::class, 'studentOnly']);
+    Route::get('/privacy', [SalesController::class, 'privacy']);
+    Route::get('/terms', [SalesController::class, 'terms']);
+    Route::get('/trial', [SalesController::class, 'trial']);
+    Route::get('/trial-month', [SalesController::class, 'trialMonth']);
+    Route::get('/choose-your-trial', [SalesController::class, 'chooseYourTrial']);
+    Route::get('/choose-your-trial-month', [SalesController::class, 'chooseYourTrialMonth']);
+    Route::get('/cookie', [SalesController::class, 'cookie']);
 
-    Route::get('/affiliate/asobergirlsguide', function () { return view('singeo.sales.trials.affiliates.asobergirlsguide'); });
-    Route::get('/affiliate-trial', function () { return view('singeo.sales.trials.trial-selection.affiliates'); });
+    Route::get('/affiliate/asobergirlsguide', [SalesController::class, 'asobergirlsguide']);
+    Route::get('/affiliate-trial', [SalesController::class, 'affiliateTrial']);
 
-    Route::group(['prefix' => 'preferences' ], function () {
-        Route::get('/beginner', function () { return view('singeo.lead-gen.self-segmentaion.beginner'); });
-        Route::get('/intermediate', function () { return view('singeo.lead-gen.self-segmentaion.intermediate'); });
-        Route::get('/professionals', function () { return view('singeo.lead-gen.self-segmentaion.professional'); });
-    });
+    Route::get('/preferences/beginner', [SalesController::class, 'prefBeginner']);
+    Route::get('/preferences/intermediate', [SalesController::class, 'prefIntermediate']);
+    Route::get('/preferences/professionals', [SalesController::class, 'prefProfessionals']);
 
-    Route::get('/thank-you', function () { return view('singeo.lead-gen.thank-you'); });
-    Route::get('/subscribed', function () { return view('singeo.lead-gen.subscribed'); });
-    Route::get('/lets-sing-a-song', function () { return view('singeo.lead-gen.lets-sing-a-song'); });
-    Route::get('/welcome-party', function () { return view('singeo.lead-gen.welcome-party'); });
-    Route::get('/shop/singing-starter-kit', function () { return view('singeo.products.singing-starter-kit'); });
-    Route::get('/singingstarterkit', function () { return view('singeo.products.singing-starter-kit-alt'); });
-    Route::get('/singing-starter-kit-discount', function () { return view('singeo.products.singing-starter-kit-discount'); });
-    Route::get('/singing-starter-kit-shyv-discount', function () { return view('singeo.products.singing-starter-kit-shyv-discount'); });
-    Route::get('/recitals', function () { return view('singeo.lead-gen.recitals'); });
-    Route::get('/giveaway', function () { return view('singeo.lead-gen.giveaway'); });
-        Route::get('/ultimate-giveaway', function () { return view('lead-gen.ultimate-giveaway'); });
-
-
-    // redirect pages
-    Route::get('/beginner-bundle', function(){ return redirect('/shop/beginner-bundle'); });
-    Route::get('/love-to-sing-bundle', function(){ return redirect('/shop/love-to-sing-bundle'); });
+    Route::get('/thank-you', [SalesController::class, 'thankyou']);
+    Route::get('/subscribed', [SalesController::class, 'subscribed']);
+    Route::get('/lets-sing-a-song', [SalesController::class, 'letssingasong']);
+    Route::get('/welcome-party', [SalesController::class, 'welcomeparty']);
+    Route::get('/shop/singing-starter-kit', [SalesController::class, 'singingstarterkit']);
+    Route::get('/singingstarterkit', [SalesController::class, 'singingstarterkitalt']);
+    Route::get('/singing-starter-kit-discount', [SalesController::class, 'singingstarterkitdiscount']);
+    Route::get('/singing-starter-kit-shyv-discount', [SalesController::class, 'singingstarterkitshyvdiscount']);
+    Route::get('/recitals', [SalesController::class, 'recitals']);
+    Route::get('/giveaway', [SalesController::class, 'giveaway']);
+    Route::get('/ultimate-giveaway', [SalesController::class, 'ultimategiveaway']);
+    Route::get('/beautiful-harmonies', [SalesController::class, 'beautifulharmonies']);
 
     Route::group(['prefix' => 'beginner-vocal-bootcamp'],
         function () {
@@ -90,7 +83,5 @@ Route::domain('{singeoDomain}')
                 ]);
         }
     );
-
-    Route::get('/beautiful-harmonies', function () { return view('singeo.products.beautiful-harmonies'); } );
 });
 

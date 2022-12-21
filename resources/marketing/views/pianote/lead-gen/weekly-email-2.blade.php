@@ -132,7 +132,7 @@
 {!! \App\Analytics\Tracker::bodyBottom() !!}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script type="text/javascript" src="/marketing/parcel/pianote/nav-footer.js"></script>
+<script type="text/javascript" src="{{ asset('/marketing/parcel/pianote/nav-footer.js') }}"></script>
 </body>
 @include("pianote.lead-gen.impact-email-sign-up-tracker")
 </html>

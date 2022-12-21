@@ -173,11 +173,11 @@
                     </h5>
                     <div class="flex justify-center items-center md:justify-start mb-2 sm:mb-5">
                         <div class="align-middle bg-white text-center rounded-lg inline-block overflow-hidden w-11 mb-2 md:mb-0">
-                            <p class="leading-none tracking-tighter text-xs py-0.5 text-white" style="background-color:#bb3744;"><strong>NOV</strong></p>
-                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">10</strong></p>
+                            <p class="leading-none tracking-tighter text-xs py-0.5 text-white" style="background-color:#bb3744;"><strong>DEC</strong></p>
+                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">20</strong></p>
                         </div>
                         <p class="leading-tight uppercase text-yellow ml-4">
-                            <a target="_blank" href="https://www.google.com/search?q=11am+PDT" class="font-extrabold"><strong>Thursday, Nov 10 @ 11:00am PDT</strong> <i class="fal fa-info-circle"></i></a>
+                            <a target="_blank" href="https://www.google.com/search?q=2pm+PDT" class="font-extrabold"><strong>Tuesday, Dec 20 @ 2:00pm PDT</strong> <i class="fal fa-info-circle"></i></a>
                         </p>
                     </div>
                     <h6 class="leading-tight mb-4">
@@ -365,5 +365,5 @@
 
 @section('scripts')
 
-    <script type="text/javascript" src="/marketing/js/modal-autoplay.js"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
 @stop

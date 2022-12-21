@@ -13,7 +13,7 @@
 @section('head')
     @parent
     <link href="{{ asset('/marketing/parcel/drumeo/pro.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="/marketing/css/animate.css">
+    <link rel="stylesheet" href="{{ asset('/marketing/css/animate.css') }}">
 @stop()
 
 @section('scripts')

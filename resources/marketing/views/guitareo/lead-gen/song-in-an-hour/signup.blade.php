@@ -12,8 +12,8 @@
     <meta property="og:url" content="https://www.guitareo.com/song-in-an-hour/">
 
 
-    <link rel="preload" href="/marketing/parcel/guitareo/song-in-an-hour.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/marketing/parcel/guitareo/song-in-an-hour.css"></noscript>
+    <link rel="preload" href="{{ asset('/marketing/parcel/guitareo/song-in-an-hour.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/song-in-an-hour.css') }}"></noscript>
 
     <style>
         .reveal-overlay {background: linear-gradient(180deg, rgba(1, 7, 19, 0.9), #10052b);}
@@ -79,7 +79,7 @@
             });
         });
     </script>
-    <script src="/marketing/js/modal-autoplay.js"></script>
+    <script src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
 @stop
 
 @section('body')

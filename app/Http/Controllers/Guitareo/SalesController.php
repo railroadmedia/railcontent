@@ -7,15 +7,96 @@ use App\Http\Controllers\BaseController;
 
 class SalesController extends BaseController
 {
+    public function chooseyourtrial()
+    {
+        return view('guitareo.sales.trials.trial-selection.week');
+    }
+
+    public function chooseyourtrialmonth()
+    {
+        return view('guitareo.sales.trials.trial-selection.month');
+    }
+
+    public function cookie()
+    {
+        return view('guitareo.sales.pages.cookie');
+    }
+
+    public function terms()
+    {
+        return view('guitareo.sales.pages.terms');
+    }
+
+    public function privacy()
+    {
+        return view('guitareo.sales.pages.privacy');
+    }
+
+    public function lifetime()
+    {
+        return view('guitareo.shop.pages.lifetime-bundle');
+    }
+
+    public function survivalkitinstructions()
+    {
+        return view('guitareo.shop.pages.survival-kit-tutorial');
+    }
+
+    public function daddariostringsession()
+    {
+        return view('guitareo.sales.trials.daddario-string-session');
+    }
+
+    public function daddariostringsessionga()
+    {
+        return view('guitareo.sales.trials.daddario-string-session');
+    }
+
+    public function asobergirlsguide()
+    {
+        return view('guitareo.sales.trials.affiliates.asobergirlsguide');
+    }
+
+    public function affiliatetrial()
+    {
+        return view('guitareo.sales.trials.trial-selection.affiliates');
+    }
+
+    public function welcome()
+    {
+        return view('guitareo.sales.pages.welcome-1');
+    }
+
+    public function welcome2()
+    {
+        return view('guitareo.sales.pages.welcome-2');
+    }
+
+    public function welcome3()
+    {
+        return view('guitareo.sales.pages.welcome-3');
+    }
+
+    public function aylarecommends()
+    {
+        return view('guitareo.shop.ayla-recommends');
+    }
+
+    public function survivalkit()
+    {
+        return view('shop.pages.survival-kit');
+    }
+
     public function home()
     {
-        return view('guitareo.sales.standard', [ 'theme' => 'guitareo' ]);
+        return view('guitareo.sales.standard', ['theme' => 'guitareo']);
     }
 
     public function membership()
     {
         return view('guitareo.sales.standard');
     }
+
     public function membershipStudents()
     {
         return view('guitareo.sales.student-only');
@@ -44,11 +125,6 @@ class SalesController extends BaseController
     public function acousticGuitarMadeEasy()
     {
         return view('guitareo.products.acoustic-guitar-made-easy');
-    }
-
-    public function lifetime()
-    {
-        return view('guitareo.sales.lifetime');
     }
 
     public function guitarQuest()
