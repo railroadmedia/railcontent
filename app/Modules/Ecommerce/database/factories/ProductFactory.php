@@ -2,6 +2,8 @@
 
 namespace App\Modules\Ecommerce\database\factories;
 
+use App\Enums\Interval;
+use App\Modules\Ecommerce\Enums\DigitalAccessType;
 use App\Modules\Ecommerce\Models\Product;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -54,6 +56,18 @@ class ProductFactory extends Factory
             'digital_access_type' => fake()->text,
             'digital_access_permission_names' => fake()->text,
         ];
+    }
+
+    public static function createSubscriptionProduct(DigitalAccessType $accessType, Interval $interval, float $price,
+        array $attributes = []): Product
+    {
+        $attributes = array_merge($attributes, [
+            'price' => $price,
+            'type' => Product::TYPE_DIGITAL_SUBSCRIPTION,
+            'digital_access_type' => $accessType,
+            'digital_access_time_interval_type' => $interval,
+        ]);
+        return Product::factory()->create($attributes);
     }
 
 }
