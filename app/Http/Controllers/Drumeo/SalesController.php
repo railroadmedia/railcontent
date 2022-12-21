@@ -436,11 +436,6 @@ class SalesController extends BaseController
         return view('drumeo.sales.pages.beginner');
     }
 
-    public function songs()
-    {
-        return view('drumeo.sales.pages.songs');
-    }
-
     public function impact()
     {
         return view('drumeo.sales.pages.impact');
