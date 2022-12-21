@@ -1,6 +1,5 @@
 <div
     class="dropdown text-center rounded-xl mb-3 select-none text-black border-2 border-[#EFF3F5]"
-    :class="open && 'active'"
     x-data="{ open: false }"
 >
     <div class="flex">
@@ -11,13 +10,17 @@
                 if(open){
                     $refs.dropdown1.classList.remove('hidden', 'h-0', 'max-h-0');
                     $refs.dropdown1.classList.add('h-auto', 'max-h-full');
+                    @if(!empty($lessons))
                     $refs.dropdown2.classList.remove('hidden', 'h-0', 'max-h-0');
-                     $refs.dropdown2.classList.add('h-auto', 'max-h-full');
+                    $refs.dropdown2.classList.add('h-auto', 'max-h-full');
+                    @endif
                 } else {
                     $refs.dropdown1.classList.add( 'h-0', 'max-h-0');
                     $refs.dropdown1.classList.remove('h-auto', 'max-h-full');
+                    @if(!empty($lessons))
                     $refs.dropdown2.classList.add( 'h-0', 'max-h-0');
                     $refs.dropdown2.classList.remove('h-auto', 'max-h-full');
+                    @endif
                 }
             "
         >
@@ -39,15 +42,25 @@
             x-on:click="
                 open = !open;
                 if(open){
-                    $refs.dropdown1.classList.remove('hidden');
-                    $refs.dropdown2.classList.remove('hidden');
+                    $refs.dropdown1.classList.remove('hidden', 'h-0', 'max-h-0');
+                    $refs.dropdown1.classList.add('h-auto', 'max-h-full');
+                    @if(!empty($lessons))
+                    $refs.dropdown2.classList.remove('hidden', 'h-0', 'max-h-0');
+                    $refs.dropdown2.classList.add('h-auto', 'max-h-full');
+                    @endif
+                    $refs.icon.classList.add('rotate-45');
                 } else {
-                    $refs.dropdown1.classList.add('hidden');
-                    $refs.dropdown2.classList.add('hidden');
+                    $refs.dropdown1.classList.add( 'h-0', 'max-h-0');
+                    $refs.dropdown1.classList.remove('h-auto', 'max-h-full');
+                    @if(!empty($lessons))
+                    $refs.dropdown2.classList.add( 'h-0', 'max-h-0');
+                    $refs.dropdown2.classList.remove('h-auto', 'max-h-full');
+                    @endif
+                    $refs.icon.classList.remove('rotate-45');
                 }
             "
         >
-            <i class="fas fa-plus transform transition-all duration-300 text-lg md:text-2xl lg:text-3xl" :class="open && 'rotate-45'"></i>
+            <i x-ref="icon" class="fas fa-plus transform transition-all duration-300 text-lg md:text-2xl lg:text-3xl"></i>
         </div>
     </div>
     @if(!empty($lessons))

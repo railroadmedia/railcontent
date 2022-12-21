@@ -27,7 +27,7 @@
     ];
 @endphp
 
-@extends('drumeo._partials.layout-template')
+@extends('drumeo._partials.global-layout')
 
 @section('global-head')
     <title>Drumeo Drum Shop - Get Lessons, T-Shirts, Gear, & Much More!</title>
