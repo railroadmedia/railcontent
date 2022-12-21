@@ -19,8 +19,6 @@
 
         <a class="inline-block" href="{{ $reviewLink }}" target="_blank" onclick="window.open('{{ $reviewLink }}', 'newwindow', 'width=750, height=550'); return false;">
             <p class="mx-auto mb-2">{!!  $reviewText  !!} <u>See The Reviews »</u></p>
-        </a>
-        <br>
         <img
             alt="shopper approved image"
             class="h-6 sm:h-8 mb-2 md:mb-0 mx-auto sm:mr-1 transition-opacity opacity-0"
@@ -29,6 +27,7 @@
             onload="this.classList.remove('opacity-0')"
         >
 
+        </a>
 
         <div class="flex flex-wrap items-start justify-center mx-auto mt-6">
             <div class="w-1/3 px-1 md:px-2 mb-2 md:mb-4">

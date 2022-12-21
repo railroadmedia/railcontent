@@ -145,7 +145,7 @@
         </div>
     </div>
 
-    <div class="text-center mt-10">
+    <div class="text-center my-10">
         @if(empty($promoVersion))
             <a href="/courses" class="mx-1 mb-2 sm:mb-0 join outline method smaller">EXPLORE 200+ COURSES <i class="fas fa-info-circle"></i> </a>
         @endif

@@ -56,7 +56,7 @@
                             onload="this.classList.remove('opacity-0')"
                         >
                         <p class="leading-tight mx-0"><strong class="font-black">{{ $feature['title'] }}</strong><br>
-                            <span class="text-sm">{{ $feature['desc'] }}</span></p>
+                            <span class="text-sm">{!!  $feature['desc']  !!}</span></p>
                     </div>
                 @endforeach
             </div>

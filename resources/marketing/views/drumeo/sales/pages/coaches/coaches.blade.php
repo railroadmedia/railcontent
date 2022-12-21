@@ -7,12 +7,12 @@
 @section('page-meta')
 
 @endsection
-<title></title>
-<meta property="og:title" content="">
-<meta property="og:url" content="https://www.drumeo.com/">
-<meta name="description" content="">
-<meta property="og:description" content="">
-<meta property="og:image" content="">
+<title>Drumeo | Reach your drumming goals.</title>
+<meta property="og:title" content="Drumeo | Reach your drumming goals.">
+<meta property="og:url" content="https://www.drumeo.com/method">
+<meta name="description" content="Learn the drums faster with organized video lessons, legendary teachers, and better practice tools. 90-Day Guarantee.">
+<meta property="og:description" content="Learn the drums faster with organized video lessons, legendary teachers, and better practice tools. 90-Day Guarantee.">
+<meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/sales/2022/og-image.jpg" style="display: none;">
 
 
 @section('header-img', 'https://drumeo-assets.s3.amazonaws.com/sales/2023/coaches-thumb.jpg')

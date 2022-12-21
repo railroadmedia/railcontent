@@ -160,22 +160,22 @@
             [
                 'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drum-lessons-icon.svg',
                 'title' => 'Drum Lessons',
-                'desc' => 'Step-by-step video lessons on every topic.',
+                'desc' => 'Step-by-step video<br class="hidden sm:inline"> lessons on every topic.',
             ],
             [
                 'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/artist-course-icon2.svg',
                 'title' => 'Artist Courses',
-                'desc' => 'Courses and live events with drumming heroes. ',
+                'desc' => 'Courses and live events<br class="hidden sm:inline"> with drumming heroes. ',
             ],
             [
                 'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/songs-icon.svg',
                 'title' => '5000+ Songs',
-                'desc' => 'Play your favorite songs from every style & era.',
+                'desc' => 'Play your favorite songs<br class="hidden sm:inline"> from every style & era.',
             ],
             [
                 'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/support-icon.svg',
                 'title' => '24/7 Support',
-                'desc' => 'The largest community of students & teachers.',
+                'desc' => 'The largest community<br class="hidden sm:inline"> of students & teachers.',
             ],
         ];
         $slides = [
