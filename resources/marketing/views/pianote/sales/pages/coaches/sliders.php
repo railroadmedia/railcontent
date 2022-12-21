@@ -90,47 +90,27 @@
             'artist' => 'Lisa Witt',
         ],
         [
-            'img' => 'https://dzryyo1we6bm3.cloudfront.net/card-thumbnails/courses/550/dci-93.jpg',
-            'title' => 'Internal Synchronization',
-            'artist' => 'Billy Cobham',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/Screen-Shot-2018-12-28-at-9.23.47-AM-1.png',
+            'title' => 'Dexterity & Finger Strength',
+            'artist' => 'Cassi Falk',
         ],
         [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/292810-card-thumbnail-maxres-1626793627.png',
-            'title' => '4-Way Coordination',
-            'artist' => 'Sarah Thawer',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/Db-Major-Bb-Minor-1667939903.jpg',
+            'title' => 'Adding Articulation',
+            'artist' => 'Cassi Falk',
         ],
         [
-            'img' => 'https://dzryyo1we6bm3.cloudfront.net/card-thumbnails/courses/550/dci-66.jpg',
-            'title' => 'Moeller Technique',
-            'artist' => 'Henrique De Almeida',
-        ],
-        [
-            'img' => 'https://dzryyo1we6bm3.cloudfront.net/card-thumbnails/courses/550/dcb-31.jpg',
-            'title' => 'Open Handed Drumming',
-            'artist' => 'Claus Hessler',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-method/level-8/8-3-3.png',
-            'title' => 'Brush Technique',
-            'artist' => 'Steve Lyman',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/dcb-54.jpg',
-            'title' => 'The Body Fulcrum',
-            'artist' => 'Rodney Holmes',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/295185-card-thumbnail-maxres-1618648196.png',
-            'title' => 'Blast Beats',
-            'artist' => 'Ash Pearson',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/235004-card-thumbnail-maxres-1571237531.jpg',
+            'title' => 'Hand Independence',
+            'artist' => 'Lisa Witt',
         ],
     ];
 
     $creativities = [
         [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/course-card-1651667448.jpg',
-            'title' => 'Elevate Your Drum Sound',
-            'artist' => 'Simon Phillips',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/313494-card-thumbnail-1628021741.png',
+            'title' => 'Playing Piano Beautifully',
+            'artist' => 'Lisa Witt',
         ],
         [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/drum-chops-course-card-1646062165.png',
