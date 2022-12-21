@@ -25,6 +25,9 @@ Route::domain('{pianoteDomain}')
     Route::get('/cookie', [SalesController::class, 'cookie'] );
     Route::get('/terms', [SalesController::class, 'terms'] );
     Route::get('/privacy', [SalesController::class, 'privacy'] );
+    Route::get('/songs', [SalesController::class, 'songs'] );
+    Route::get('/method', [SalesController::class, 'method'] );
+    Route::get('/coaches', [SalesController::class, 'coaches'] );
     Route::get('/choose-your-trial', [SalesController::class, 'chooseyourtrial'] );
     Route::get('/choose-your-trial-month', [SalesController::class, 'chooseyourtrialmonth'] );
     Route::get('/a/davidbennett', [SalesController::class, 'davidbennett'] );

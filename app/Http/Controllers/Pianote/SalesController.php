@@ -34,6 +34,21 @@ class SalesController extends BaseController
         return view('pianote.sales.pages.privacy');
     }
 
+    public function songs()
+    {
+        return view('pianote.sales.pages.songs.songs', [ 'theme' => 'pianote', 'page' => 'songs']);
+    }
+
+    public function method()
+    {
+        return view('pianote.sales.pages.method.method', [ 'theme' => 'pianote', 'page' => 'method']);
+    }
+
+    public function coaches()
+    {
+        return view('pianote.sales.pages.coaches.coaches', [ 'theme' => 'pianote', 'page' => 'coaches']);
+    }
+
     public function chooseyourtrial()
     {
         return view('pianote.sales.trials.trial-selection.week');
