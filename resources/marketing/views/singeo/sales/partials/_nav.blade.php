@@ -1,5 +1,4 @@
-@if(!empty($transparentNav)) <style>body {padding-top:0;}</style> @endif
-<nav id="nav" class="top-bar expanded @if(!empty($transparentNav)) transparent @endif">
+<nav id="nav" class="top-bar expanded">
     <div class="logo">
         <a href="/">
             <img src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png" alt="Singeo">
