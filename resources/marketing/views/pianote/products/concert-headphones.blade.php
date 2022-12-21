@@ -97,7 +97,7 @@
             <a class="join w-full" href="#orderNow">Grab your pair</a>
             <h4 class="text-white font-extrabold my-4">
                 Only
-                @if(PianotePrices::$headphonesFull -PianotePrices::$headphonesRegular) > 0)
+                @if((PianotePrices::$headphonesFull -PianotePrices::$headphonesRegular) > 0)
                     <s class="font-normal">${{PianotePrices::$headphonesFull }}</s>
                 @endif
                 ${{PianotePrices::$headphonesRegular }}
