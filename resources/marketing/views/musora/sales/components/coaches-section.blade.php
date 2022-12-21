@@ -84,7 +84,7 @@
             </ul>
 
             <!-- Border -->
-            <div class="border-[#ABB5C2] border-2 inset-0 absolute rounded-full z-10"></div>
+            <div class="hidden md:block border-[#ABB5C2] border-2 inset-0 absolute rounded-full z-10"></div>
         </div>
 
         <!-- Panels -->
