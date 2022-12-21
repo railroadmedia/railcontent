@@ -113,9 +113,9 @@
             'artist' => 'Lisa Witt',
         ],
         [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/drum-chops-course-card-1646062165.png',
-            'title' => 'Drum Chops',
-            'artist' => 'Aaron Spears',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/card-1661796221.jpg',
+            'title' => 'Musical Freedom & Improvisation',
+            'artist' => 'Jesús Molina',
         ],
         [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/course-card-1651762585.jpg',
