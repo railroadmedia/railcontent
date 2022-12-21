@@ -1,5 +1,5 @@
 @php
-    require_once(resource_path('marketing/views/pianote/sales/pages/method/lessons.php'))
+    require_once(resource_path('marketing/views/pianote/sales/pages/method/methods.php'))
 @endphp
 
 @extends('pianote.sales.pages.coaches-method-songs-layout')
@@ -15,7 +15,7 @@
 <meta property="og:image" content="" style="display: none;">
 
 
-@section('header-img', 'https://drumeo-assets.s3.amazonaws.com/sales/2023/method/method-thumb2.jpg')
+@section('header-img', '')
 
 @section('header', 'Your piano goals start here.')
 
@@ -31,13 +31,13 @@
     <section class="py-12 md:py-20">
         <div class="container mx-auto max-w-5xl px-6">
             <h3 class="font-extrabold text-center mb-10 leading-snug">Your clear path, frustration-free <br>guide to playing the piano.</h3>
-            @foreach($lessons as $key => $lesson)
+            @foreach($methods as $key => $method)
                 @include('_partials.components.question-dropdown', [
                     'num' => $key+1,
-                    "title" => $lesson['title'],
-                    "desc" => $lesson['desc'],
-                    'detail' => $lesson['detail'],
-                    'lessons' => $lesson['lessons']
+                    "title" => $method['title'],
+                    "desc" => $method['desc'],
+                    'detail' => $method['detail'],
+                    'lessons' => $method['lessons']
                 ])
             @endforeach
         </div>

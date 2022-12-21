@@ -15,11 +15,11 @@
 <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/sales/2022/og-image.jpg" style="display: none;">
 
 
-@section('header-img', 'https://drumeo-assets.s3.amazonaws.com/sales/2023/coaches-thumb.jpg')
+@section('header-img', '')
 
-@section('header', 'Play your favorite songs.')
+@section('header', 'Study with the world’s best teachers.')
 
-@section('desc', 'Get 3100+ note-for-note song breakdowns for every style, era, and skill with handy play-along tools.')
+@section('desc', 'Amplify your skills with artist courses + exclusive live events with teachers, performers, and trending stars.')
 
 @section('page-body')
     <section class="py-12 md:py-20">
