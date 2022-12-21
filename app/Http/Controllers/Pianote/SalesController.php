@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Pianote;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class SalesController extends BaseController
 {
@@ -48,24 +49,11 @@ class SalesController extends BaseController
         return view('pianote.sales.trials.affiliates.davidbennett');
     }
 
-    public function asobergirlsguide()
+    public function affiliates(Request $request, $domain, $page = null)
     {
-        return view('pianote.sales.trials.affiliates.asobergirlsguide');
-    }
+        return view('pianote.sales.trials.affiliates.'.$page);
 
-    public function keyboardkraze()
-    {
-        return view('pianote.sales.trials.affiliates.keyboardkraze');
-    }
-
-    public function leviclay()
-    {
-        return view('pianote.sales.trials.affiliates.leviclay');
-    }
-
-    public function pianodreamers()
-    {
-        return view('pianote.sales.trials.affiliates.pianodreamers');
+        throw new NotFoundHttpException();
     }
 
     public function affiliatetrial()
@@ -78,54 +66,11 @@ class SalesController extends BaseController
         return view('pianote.lead-gen.giveaway');
     }
 
-    public function songs500fb()
+    public function products(Request $request, $domain, $page = null)
     {
-        return view('pianote.products.500-songs-fb');
-    }
+        return view('pianote.products.'.$page);
 
-    public function songs500discount()
-    {
-        return view('pianote.products.500-songs-discount');
-    }
-
-    public function songs500carolsdiscount()
-    {
-        return view('pianote.products.500-songs-carols-discount');
-    }
-
-    public function songs500chorddiscount()
-    {
-        return view('pianote.products.500-songs-chord-discount');
-    }
-
-    public function songs500eltonjohn()
-    {
-        return view('pianote.products.500-songs-elton-john');
-    }
-
-    public function songs500aliciakeys()
-    {
-        return view('pianote.products.500-songs-alicia-keys');
-    }
-
-    public function songs500samsmith()
-    {
-        return view('pianote.products.500-songs-sam-smith');
-    }
-
-    public function songs500taylorswift()
-    {
-        return view('pianote.products.500-songs-taylor-swift');
-    }
-
-    public function songs500thebeatles()
-    {
-        return view('pianote.products.500-songs-the-beatles');
-    }
-
-    public function songs500freelesson()
-    {
-        return view('pianote.lead-gen.500-songs-free-lesson');
+        throw new NotFoundHttpException();
     }
 
     public function fasterfingers()
