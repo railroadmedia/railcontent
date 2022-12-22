@@ -51,7 +51,7 @@
                     >
                         <button class="join border-none"><i class="fas fa-cart-plus text-2xl mr-1"></i> Add To Cart</button>
                     </a>
-                @elseif($bundle)
+                @elseif(!empty($bundle))
                     <a class="online-atc" href="/laravel/public/shopping-cart/api/query?{!! $sku !!}"
                        data-base-url="/laravel/public/shopping-cart/api/query?{!! $sku !!}">
                         <button class="join border-none"><i class="fas fa-cart-plus text-2xl mr-1"></i> Order Now</button>
