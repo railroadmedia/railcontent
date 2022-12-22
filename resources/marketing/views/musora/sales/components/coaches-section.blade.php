@@ -132,8 +132,7 @@
                                 <ul class="splide__list">
                                     @foreach ($course['images'] as $image)
                                         <li class="splide__slide flex flex-col items-center justify-center pb-8 pr-5 -mr-4">
-                                            <div class="relative">
-                                                <img class="rounded-xl lg:h-64" src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/{{$image['img']}}" alt="{{ str_replace('<br>', '', $image['title']) }}">
+                                            <div class="relative w-full rounded-xl bg-cover bg-center" style="padding-bottom: 140%; background-image:url(https://cdn.musora.com/image/fetch/w_400,q_auto:best/{{$image['img']}});">
                                                 <div class="rounded-b-xl absolute w-full bottom-0 h-1/2 text-white text-center flex justify-center flex-col" style="background:linear-gradient(180deg, rgba(1, 5, 15, 0) 0%, #01050F 100%);">
                                                     <h4 class="font-extrabold mb-2">{!! $image['title'] !!}</h4>
                                                     <p class="leading-none">{{ $image['instructor'] }}</p>

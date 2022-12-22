@@ -16,7 +16,7 @@
                     </div>
                 @endforeach
             </div>
-            <video class="h-64 lg:h-96 rounded-xl lazyload" x-on:click="soundslice = true;" data-src="{{ $video }}" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
+            <video class="h-64 lg:h-96 rounded-xl cursor-pointer lazyload" x-on:click="soundslice = true;" data-src="{{ $video }}" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
         </div>
         @if(empty($promoVersion))
             <a href="/songs" class="mx-1 mb-2 sm:mb-0 join outline method smaller">SEE SONGS LIST <i class="fas fa-list-music"></i> </a>
