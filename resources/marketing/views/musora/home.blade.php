@@ -49,7 +49,7 @@
             {{--</div>--}}
             <div class="flex flex-wrap items-start max-w-6xl mx-auto mt-9">
                 <div class="w-full px-4 md:px-2 lg:px-4 md:w-1/3 mb-5 md:mb-0">
-                    <i class="icon-courses text-3xl md:text-5xl leading-none text-musora"></i><br>
+                    <i class="fas fa-graduation-cap text-3xl md:text-5xl leading-none text-musora"></i><br>
                     <img
                         class="filter invert h-4 md:h-6 transition-opacity opacity-0"
                         src="https://cdn.musora.com/image/fetch/q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/method-text.svg"

@@ -138,7 +138,7 @@
                 event footage, gear guides, drum solos, performances, video podcasts, and more!</h3>
 
             <div class="columns medium-4">
-                <div class="point-icon"><i class="icon-courses"></i></div>
+                <div class="point-icon"><i class="fas fa-graduation-cap"></i></div>
                 <p><strong>Award-Winning<br> Drum Lessons</strong><br>
                     {{ Prices::$courses }}+ step-by-step courses from the
                     world’s best drummers and teachers.</p>
