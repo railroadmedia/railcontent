@@ -49,3 +49,9 @@ Route::middleware(['web_public'])
         Route::get('/laravel/public/shopping-cart/api/query', [\App\Http\Controllers\Ecommerce\OrderController::class, 'redirectLegacyDrumeoAddToCartUrl'])
             ->name('redirect-legacy-drumeo-add-to-cart-url');
     });
+
+Route::middleware(['web_public'])
+    ->group(function () {
+        Route::get('/thankyou', [\App\Http\Controllers\Ecommerce\OrderController::class, 'thankYouPageForCustomerOrder'])
+            ->name('order-thank-you');
+    });
