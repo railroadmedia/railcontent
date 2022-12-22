@@ -46,7 +46,38 @@ class SubscriptionUpgradeServiceTests extends TestCase
 
         $this->subscriptionUpgradeService->upgrade($user->id);
 
+        /** @var Subscription $oldSubscription */
         $oldSubscription = Subscription::query()->find($subscription->id);
+        /** @var Subscription $newSubscription */
+        $newSubscription = Subscription::query()->where('user_id', '=', $user->id)
+            ->where('id', '!=', $subscription->id)
+            ->where('product_id', '=', $product2->id)
+            ->first();
+
+        $this->assertTrue($oldSubscription->isCancelled());
+        $this->assertTrue($oldSubscription->paid_until == $newSubscription->paid_until);
+    }
+
+    public function test_downgrade(): void
+    {
+        /** @var User $user */
+        $user = User::factory()->create();
+        Auth::loginUsingId($user->id);
+        UserPaymentMethodFactory::createPrimarySuccessfulPaymentMethod($user);
+        $product1 = ProductFactory::createSubscriptionProduct(DigitalAccessType::Plus, Interval::Year, 100);
+        $activeTime = Carbon::today();
+        $expirationTime = Carbon::today()->addMonths(6)->addDays(10);
+        /** @var Subscription $subscription */
+        $subscription = SubscriptionFactory::createWith($user, $product1, $activeTime, $expirationTime);
+        UserProductFactory::createUserProduct($user, $product1, $activeTime, $expirationTime);
+        $product2 = ProductFactory::createSubscriptionProduct(DigitalAccessType::Basic, Interval::Year, 200);
+
+
+        $this->subscriptionUpgradeService->downgrade($user->id);
+
+        /** @var Subscription $oldSubscription */
+        $oldSubscription = Subscription::query()->find($subscription->id);
+        /** @var Subscription $newSubscription */
         $newSubscription = Subscription::query()->where('user_id', '=', $user->id)
             ->where('id', '!=', $subscription->id)
             ->where('product_id', '=', $product2->id)
