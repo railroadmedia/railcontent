@@ -24627,13 +24627,13 @@ a:visited{
   --tw-text-opacity: 1 !important;
   color: rgb(0 16 23 / var(--tw-text-opacity)) !important;
 }
-.hover\:tw-text-black:hover{
-  --tw-text-opacity: 1 !important;
-  color: rgb(0 0 0 / var(--tw-text-opacity)) !important;
-}
 .hover\:tw-text-gray-500:hover{
   --tw-text-opacity: 1 !important;
   color: rgb(107 114 128 / var(--tw-text-opacity)) !important;
+}
+.hover\:tw-text-black:hover{
+  --tw-text-opacity: 1 !important;
+  color: rgb(0 0 0 / var(--tw-text-opacity)) !important;
 }
 .hover\:tw-text-\[\#0B76DB\]:hover{
   --tw-text-opacity: 1 !important;
