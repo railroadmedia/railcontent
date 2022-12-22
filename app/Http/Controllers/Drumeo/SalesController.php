@@ -630,7 +630,7 @@ class SalesController extends BaseController
 
     public function giftCard()
     {
-        return view('drumeo.drumshop.pages.drumming-system', ['theme' => 'drumeo']);
+        return view('drumeo.drumshop.pages.gift-card', ['theme' => 'drumeo']);
     }
 
     public function drummingSystem()
