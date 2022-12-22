@@ -18,7 +18,6 @@ const formData = ref({
 
 const submitForm = () => {
     axios.post(`/${props.brand}/songs`, formData.value).then((e) => {
-        console.log(e)
         if (window.shownotification) {
             window.shownotification({
                 icon: 'check',
