@@ -9,7 +9,7 @@ $methods = [
         But it won’t just be exercises. You’ll learn your first real song.
 ',
         'detail' => '16 lessons',
-        'lessons' => [
+        'lessonInfo' => [
             [
                 'thumb' => 'https://d1923uyy6spedc.cloudfront.net/pianote-method-level-1-c1-title.png',
                 'title' => 'How To Use The Method',
@@ -37,7 +37,7 @@ $methods = [
         Feeling comfortable and confident at the keyboard will make you want to keep coming back for more, which is the key to seeing results. This level will teach you good practice habits that will be instrumental in your long-term success.
 ',
         'detail' => '12 lessons',
-        'lessons' => [
+        'lessonInfo' => [
             [
                 'thumb' => 'https://d1923uyy6spedc.cloudfront.net/pianote-method-level-2-c1-title.png',
                 'title' => 'Developing Your Hands',
@@ -67,7 +67,7 @@ $methods = [
         You’ll also learn some “fancy” chords that are simple to play, but sound amazing and give you incredible improvisational options.
         ',
         'detail' => '15 lessons',
-        'lessons' => [
+        'lessonInfo' => [
             [
                 'thumb' => 'https://d1923uyy6spedc.cloudfront.net/pianote-method-level-3-c1-title.png',
                 'title' => 'Chording',
@@ -97,7 +97,7 @@ $methods = [
         Your ear training will also take a big step forward in this level, as you’ll start to learn the skills to figure out what key signature a song is in, and how to identify the order of a chord progression.
         ',
         'detail' => '15 lessons',
-        'lessons' => [
+        'lessonInfo' => [
             [
                 'thumb' => 'https://d1923uyy6spedc.cloudfront.net/pianote-method-level-4-c1-title.png',
                 'title' => 'Playing In New Keys',
@@ -127,7 +127,7 @@ In this level, you will learn how to identify and play notes in the treble clef,
 And you’ll also WRITE your own music. You do have the skills. This level will show you how.
 ',
         'detail' => '16 lessons',
-        'lessons' => [
+        'lessonInfo' => [
             [
                 'thumb' => 'https://d1923uyy6spedc.cloudfront.net/pianote-method-level-5-1-0.png',
                 'title' => 'Introduction To Sight Reading',
@@ -157,7 +157,7 @@ And you’ll also WRITE your own music. You do have the skills. This level will 
         Not only will you take your technique and sight reading further in this level, you will also learn how to play from a lead sheet which will open up a whole new world of songs for you!
         ',
         'detail' => '19 lessons',
-        'lessons' => [
+        'lessonInfo' => [
             [
                 'thumb' => 'https://d1923uyy6spedc.cloudfront.net/pianote-method-level-6-1-0.png',
                 'title' => 'Warm Ups & Technique',
@@ -191,7 +191,7 @@ And you’ll also WRITE your own music. You do have the skills. This level will 
         Expect to emerge from this level with a clear understanding of how to develop your hand independence, keyboard confidence, practice your technique in creative and exciting ways and improvise in a variety of styles AND the ability to play in every single key signature!
         ',
         'detail' => '20 lessons',
-        'lessons' => [
+        'lessonInfo' => [
             [
                 'thumb' => 'https://d1923uyy6spedc.cloudfront.net/pianote-method-level-7-1-0.png',
                 'title' => 'The Circle Of 5ths',
@@ -225,7 +225,7 @@ And you’ll also WRITE your own music. You do have the skills. This level will 
         You’ll learn some beautiful classical music pieces from different eras, before studying the blues and finally moving on to jazz. Who knows, you might even discover a new style of music that you had no idea you loved!
         ',
         'detail' => '30 lessons',
-        'lessons' => [
+        'lessonInfo' => [
             [
                 'thumb' => 'https://d1923uyy6spedc.cloudfront.net/8-1-0.png',
                 'title' => 'Classical',
@@ -255,7 +255,7 @@ And you’ll also WRITE your own music. You do have the skills. This level will 
         You’ll also learn how to listen to music with a “new” ear, hearing things you might never have noticed before.
 ',
         'detail' => '15 lessons',
-        'lessons' => [
+        'lessonInfo' => [
             [
                 'thumb' => 'https://d1923uyy6spedc.cloudfront.net/9-1-0.png',
                 'title' => 'Just Get Creating',
@@ -291,7 +291,7 @@ And you’ll also WRITE your own music. You do have the skills. This level will 
         Wherever you want to go with the piano, this level will show you how to create your own journey. But of course, as a Pianote member, you’ll always have access to our professional guidance and help.
         ',
         'detail' => '18 lessons',
-        'lessons' => [
+        'lessonInfo' => [
             [
                 'thumb' => 'https://d1923uyy6spedc.cloudfront.net/10-1-0.png',
                 'title' => 'The Next Steps For Learning & Playing Songs',

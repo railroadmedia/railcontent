@@ -1,22 +1,26 @@
 @extends('_partials.layout.coaches-method-songs-layout')
 
+@section('page-styles')
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}">
+@endsection
+
 @section('page-nav')
     @if(!empty($trialVersion))
         @if(!empty($joinUrl))
-            @include("singeo.sales.partials._nav", [
+            @include("pianote._partials._nav", [
                 "edgeVersion" => true,
                 "trialVersion" => true,
                 "joinUrl" => $joinUrl
             ])
         @else
-            @include("singeo.sales.partials._nav", [
+            @include("pianote._partials._nav", [
                 "edgeVersion" => true,
                 "trialVersion" => true,
                 "scrollToJoin" => true,
             ])
         @endif
     @else
-        @include("singeo.sales.partials._nav", [
+        @include("pianote._partials._nav", [
             "edgeVersion" => true,
             "scrollToJoin" => true,
             "homepage" => true
@@ -26,14 +30,14 @@
 
 @section('page-footer')
     @include('musora.sales.components.order-section-collage', [
-        'header' => 'Unlimited singing lessons.<br> Vocal coaches and support.<br> 1000+ popular songs.',
-        'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Unlimited singing lessons.</li>
-                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Vocal coaches and support.</li>
-                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Personalized feedback from vocal coaches.</li>
-                    <li class="leading-tight text-coaches"><i class="fa-li fas fa-check"></i> <strong>*BONUS*</strong> piano, guitar, and drum lessons with full access to all Musora communities.</li>',
+        'header' => 'Unlimited piano lessons.<br> Direct access to real teachers.<br> Personalized feedback from real teachers.',
+        'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Trusted by 30,000 happy students.</li>
+                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Online piano lessons on every topic.</li>
+                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Personalized feedback from real teachers.</li>
+                    <li class="leading-tight text-coaches"><i class="fa-li fas fa-check"></i> <strong>*BONUS*</strong> voice, guitar, and drums lessons with full access to all Musora communities.</li>',
         'buttonLink' => '',
         'price' => '',
-        'image' => 'https://singeo.s3.amazonaws.com/sales/2023/singeo-spread.png',
+        'image' => 'https://pianote.s3.amazonaws.com/sales/2023/pianote-spread.png',
     ])
 
     @include('musora.sales.components.app-section', [

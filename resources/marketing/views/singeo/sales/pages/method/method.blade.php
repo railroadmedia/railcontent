@@ -37,7 +37,8 @@
                     "title" => $method['title'],
                     "desc" => $method['desc'],
                     'detail' => $method['detail'],
-                    'lessonInfo' => $method['lessonInfo']
+                    'lessonInfo' => $method['lessonInfo'],
+                    'open' => $key === 0 ? true : false
                 ])
             @endforeach
         </div>
