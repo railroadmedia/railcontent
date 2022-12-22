@@ -44,19 +44,19 @@
             x-on:click="
                 open = !open;
                 if(open){
-                    $refs.dropdown1.classList.remove('hidden', 'h-0');
-                    $refs.dropdown1.classList.add('h-auto' );
-                    @if(!empty($lessons))
-                    $refs.dropdown2.classList.remove('hidden', 'h-0');
-                    $refs.dropdown2.classList.add('h-auto');
+                    $refs.dropdown1.classList.remove('hidden', 'h-0', 'max-h-0');
+                    $refs.dropdown1.classList.add('h-auto', 'max-h-full');
+                    @if(!empty($lessonInfo))
+                    $refs.dropdown2.classList.remove('hidden', 'h-0', 'max-h-0');
+                    $refs.dropdown2.classList.add('h-auto', 'max-h-full');
                     @endif
                     $refs.icon.classList.add('rotate-45');
                 } else {
-                    $refs.dropdown1.classList.add('h-0');
-                    $refs.dropdown1.classList.remove('h-auto');
-                    @if(!empty($lessons))
-                    $refs.dropdown2.classList.add('h-0');
-                    $refs.dropdown2.classList.remove('h-auto');
+                    $refs.dropdown1.classList.add( 'h-0', 'max-h-0');
+                    $refs.dropdown1.classList.remove('h-auto', 'max-h-full');
+                    @if(!empty($lessonInfo))
+                    $refs.dropdown2.classList.add( 'h-0', 'max-h-0');
+                    $refs.dropdown2.classList.remove('h-auto', 'max-h-full');
                     @endif
                     $refs.icon.classList.remove('rotate-45');
                 }
