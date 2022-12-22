@@ -19,6 +19,12 @@
     <style>
         .splide__pagination__page.is-active {
             background: #01050F;
+            transform: none !important;
+        }
+
+        .splide__pagination__page {
+            margin: 3px 6px !important;
+            opacity: 1 !important;
         }
 
         .splide__arrow svg {
@@ -48,7 +54,7 @@
 
     <header class="pb-12 md:pb-0 md:pt-20 bg-[#111729] text-center text-white">
         <img
-            class="md:hidden mb-16 transition-opacity opacity-0 @if($page !== 'coaches') cursor-pointer @endif"
+            class="md:hidden mb-16 transition-opacity opacity-0 @if($page === 'songs') cursor-pointer @endif"
             src="https://cdn.musora.com/image/fetch/w_900,q_auto:best/@yield('header-img')"
             alt="{{$page}} thumb"
             loading="lazy"
