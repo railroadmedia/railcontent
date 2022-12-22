@@ -1,5 +1,4 @@
-@if(!empty($transparentNav)) <style>body {padding-top:0;}</style> @endif
-<nav id="nav" class="top-bar row expanded @if(!empty($transparentNav)) transparent @endif">
+<nav id="nav" class="top-bar row expanded">
     <div class="logo">
         <a href="/">
             <img src="https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="Drumeo">

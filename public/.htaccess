@@ -794,7 +794,7 @@
     RewriteRule ^vip-for-vipers/?$.* /VIP/ [R=307,L,QSA,NC]
     RewriteRule ^vip/?$.* /VIP/ [R=307,L,QSA]
     RewriteRule ^vip/thank-you.* /VIP/?thankyou [R=307,L,QSA]
-    RewriteRule ^vote/?$.* /beat/drumeo-drummer-of-the-year-awards [R=307,L,QSA]
+    RewriteRule ^vote/?$.* /beat/the-drumeo-drummer-of-the-year-awards-2022 [R=307,L,QSA]
     RewriteRule ^walkthrough.* /members/ [R=307,L,QSA]
     RewriteRule ^watch-the-video/?$.* / [R=307,L,QSA]
     RewriteRule ^we-miss-you/.* https://www.youtube.com/watch?v=VLCUOb3O7LQ [R=307,L,QSA]

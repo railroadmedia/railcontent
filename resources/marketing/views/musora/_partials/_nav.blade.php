@@ -170,18 +170,6 @@
         }
     }
 
-    .top-bar.transparent {
-        background:transparent;
-        position:absolute;
-        box-shadow:0 0 0 rgba(0, 0, 0, .5)
-    }
-
-    .top-bar.transparent.scrolled {
-        background:#020815;
-        box-shadow:0 0 10px rgba(0, 0, 0, .5);
-        position:fixed
-    }
-
     .top-bar .logo {
         display:inline-block;
         box-sizing:border-box;

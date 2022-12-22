@@ -276,7 +276,7 @@
                         "price" => $item->discounted_price === '0.00' || empty($item->discounted_price) ? $item->price : $item->discounted_price,
                         "category" => strtolower($item->productType->name),
                         "sizes" => $item->sizes,
-                        "soldOut" => (!empty($products[$item->sku]) && $item->productType->name !== 'Lessons') ? $products[$item->sku]->getPublicStockCount() === 0 : $item->sold_out,
+                        "soldOut" => (!empty($products[$item->sku]) && $item->productType->name !== 'Lessons') ? $products[$item->sku]->getStock() === 0 : $item->sold_out,
                         "size_case_sensitive" => $item->size_case_sensitive,
                     ])
                 }
