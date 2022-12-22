@@ -9,7 +9,7 @@ const handleShowModal = () => {
 };
 </script>
 <template>
-    <div>
+    <div class="tw-flex tw-items-center tw-justify-center">
         <button @click="handleShowModal"
             class="tw-flex tw-flex-col tw-justify-center tw-items-center lg:tw-ml-[64px] tw-ml-[12px] hover:tw-underline tw-text-white tw-text-[20px] tw-font-bebas-neue">
             <svg class="tw-h-[37px] tw-w-[37px]" id="music-icon-header" width="31" height="32" viewBox="0 0 31 32"
