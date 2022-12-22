@@ -73,6 +73,12 @@
 
         .splide__pagination__page.is-active {
             background: #01050F;
+            transform: none !important;
+        }
+
+        .splide__pagination__page {
+            margin: 3px 6px !important;
+            opacity: 1 !important;
         }
 
         .splide__arrow svg {

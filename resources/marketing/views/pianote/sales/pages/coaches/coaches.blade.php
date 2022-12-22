@@ -29,7 +29,9 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: 'hidden',
+                            arrow: 'splide__arrow bg-white opacity-100',
+                            prev: 'hidden',
+                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50',
                             pagination: 'hidden',
                         },
                         perPage: 4,
@@ -37,7 +39,6 @@
                         gap: '0.5rem',
                         type: 'loop',
                         interval: 2000,
-                        autoplay: true,
                         breakpoints: {
                             1160: {
                                 perPage: 4,
@@ -55,7 +56,7 @@
                         @foreach ($learn as $slide)
                             <li class="splide__slide">
                                 <div>
-                                    <div class="relative mb-2 sm:mb-4" style="padding-bottom: 56.25%;">
+                                    <div class="relative mb-2" style="padding-bottom: 56.25%;">
                                         <img
                                             class="rounded-xl transition-opacity opacity-0 w-full absolute w-full h-full object-cover"
                                             src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/{{$slide['img']}}"
@@ -78,7 +79,9 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: 'hidden',
+                            arrow: 'splide__arrow bg-white opacity-100',
+                            prev: 'hidden',
+                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50',
                             pagination: 'hidden',
                         },
                         perPage: 4,
@@ -86,7 +89,6 @@
                         gap: '0.5rem',
                         type: 'loop',
                         interval: 2000,
-                        autoplay: true,
                         breakpoints: {
                             1160: {
                                 perPage: 4,
@@ -104,7 +106,7 @@
                         @foreach ($techniques as $slide)
                             <li class="splide__slide">
                                 <div>
-                                    <div class="relative mb-2 sm:mb-4" style="padding-bottom: 56.25%;">
+                                    <div class="relative mb-2" style="padding-bottom: 56.25%;">
                                         <img
                                             class="rounded-xl transition-opacity opacity-0 w-full absolute w-full h-full object-cover"
                                             src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/{{$slide['img']}}"
@@ -127,7 +129,9 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: 'hidden',
+                            arrow: 'splide__arrow bg-white opacity-100',
+                            prev: 'hidden',
+                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50',
                             pagination: 'hidden',
                         },
                         perPage: 4,
@@ -135,7 +139,6 @@
                         gap: '0.5rem',
                         type: 'loop',
                         interval: 2000,
-                        autoplay: true,
                         breakpoints: {
                             1160: {
                                 perPage: 4,
@@ -153,7 +156,7 @@
                         @foreach ($creativities as $slide)
                             <li class="splide__slide">
                                 <div>
-                                    <div class="relative mb-2 sm:mb-4" style="padding-bottom: 56.25%;">
+                                    <div class="relative mb-2" style="padding-bottom: 56.25%;">
                                         <img
                                             class="rounded-xl transition-opacity opacity-0 w-full absolute w-full h-full object-cover"
                                             src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/{{$slide['img']}}"
@@ -176,7 +179,9 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: 'hidden',
+                            arrow: 'splide__arrow bg-white opacity-100',
+                            prev: 'hidden',
+                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50',
                             pagination: 'hidden',
                         },
                         perPage: 4,
@@ -184,7 +189,6 @@
                         gap: '0.5rem',
                         type: 'loop',
                         interval: 2000,
-                        autoplay: true,
                         breakpoints: {
                             1160: {
                                 perPage: 4,
@@ -202,7 +206,7 @@
                         @foreach ($chords as $slide)
                             <li class="splide__slide">
                                 <div>
-                                    <div class="relative mb-2 sm:mb-4" style="padding-bottom: 56.25%;">
+                                    <div class="relative mb-2" style="padding-bottom: 56.25%;">
                                         <img
                                             class="rounded-xl transition-opacity opacity-0 w-full absolute w-full h-full object-cover"
                                             src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/{{$slide['img']}}"
@@ -225,7 +229,9 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: 'hidden',
+                            arrow: 'splide__arrow bg-white opacity-100',
+                            prev: 'hidden',
+                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50',
                             pagination: 'hidden',
                         },
                         perPage: 4,
@@ -233,7 +239,6 @@
                         gap: '0.5rem',
                         type: 'loop',
                         interval: 2000,
-                        autoplay: true,
                         breakpoints: {
                             1160: {
                                 perPage: 4,
@@ -251,7 +256,7 @@
                         @foreach ($anythingElse as $slide)
                             <li class="splide__slide">
                                 <div>
-                                    <div class="relative mb-2 sm:mb-4" style="padding-bottom: 56.25%;">
+                                    <div class="relative mb-2" style="padding-bottom: 56.25%;">
                                         <img
                                             class="rounded-xl transition-opacity opacity-0 w-full absolute w-full h-full object-cover"
                                             src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/{{$slide['img']}}"

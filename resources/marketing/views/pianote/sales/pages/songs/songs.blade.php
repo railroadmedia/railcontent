@@ -34,7 +34,9 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: 'hidden',
+                            arrow: 'splide__arrow bg-white opacity-100',
+                            prev: 'hidden',
+                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50',
                             pagination: 'hidden',
                         },
                         perPage: 6,
@@ -42,7 +44,6 @@
                         gap: '1rem',
                         type: 'loop',
                         interval: 2000,
-                        autoplay: true,
                         breakpoints: {
                             1160: {
                                 perPage: 5,
@@ -83,7 +84,9 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: 'hidden',
+                            arrow: 'splide__arrow bg-white opacity-100',
+                            prev: 'hidden',
+                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50',
                             pagination: 'hidden',
                         },
                         perPage: 6,
@@ -91,7 +94,6 @@
                         gap: '1rem',
                         type: 'loop',
                         interval: 2000,
-                        autoplay: true,
                         breakpoints: {
                             1160: {
                                 perPage: 5,
@@ -132,7 +134,9 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: 'hidden',
+                            arrow: 'splide__arrow bg-white opacity-100',
+                            prev: 'hidden',
+                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50',
                             pagination: 'hidden',
                         },
                         perPage: 6,
@@ -140,7 +144,6 @@
                         gap: '1rem',
                         type: 'loop',
                         interval: 2000,
-                        autoplay: true,
                         breakpoints: {
                             1160: {
                                 perPage: 5,
@@ -181,7 +184,9 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: 'hidden',
+                            arrow: 'splide__arrow bg-white opacity-100',
+                            prev: 'hidden',
+                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50',
                             pagination: 'hidden',
                         },
                         perPage: 6,
@@ -189,7 +194,6 @@
                         gap: '1rem',
                         type: 'loop',
                         interval: 2000,
-                        autoplay: true,
                         breakpoints: {
                             1160: {
                                 perPage: 5,
@@ -230,7 +234,9 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: 'hidden',
+                            arrow: 'splide__arrow bg-white opacity-100',
+                            prev: 'hidden',
+                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50',
                             pagination: 'hidden',
                         },
                         perPage: 6,
@@ -238,7 +244,6 @@
                         gap: '1rem',
                         type: 'loop',
                         interval: 2000,
-                        autoplay: true,
                         breakpoints: {
                             1160: {
                                 perPage: 5,
@@ -279,7 +284,9 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: 'hidden',
+                            arrow: 'splide__arrow bg-white opacity-100',
+                            prev: 'hidden',
+                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50',
                             pagination: 'hidden',
                         },
                         perPage: 6,
@@ -287,7 +294,6 @@
                         gap: '1rem',
                         type: 'loop',
                         interval: 2000,
-                        autoplay: true,
                         breakpoints: {
                             1160: {
                                 perPage: 5,
@@ -328,7 +334,9 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: 'hidden',
+                            arrow: 'splide__arrow bg-white opacity-100',
+                            prev: 'hidden',
+                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50',
                             pagination: 'hidden',
                         },
                         perPage: 6,
@@ -336,7 +344,6 @@
                         gap: '1rem',
                         type: 'loop',
                         interval: 2000,
-                        autoplay: true,
                         breakpoints: {
                             1160: {
                                 perPage: 5,
@@ -377,7 +384,9 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: 'hidden',
+                            arrow: 'splide__arrow bg-white opacity-100',
+                            prev: 'hidden',
+                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50',
                             pagination: 'hidden',
                         },
                         perPage: 6,
@@ -385,7 +394,6 @@
                         gap: '1rem',
                         type: 'loop',
                         interval: 2000,
-                        autoplay: true,
                         breakpoints: {
                             1160: {
                                 perPage: 5,
@@ -426,7 +434,9 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: 'hidden',
+                            arrow: 'splide__arrow bg-white opacity-100',
+                            prev: 'hidden',
+                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50',
                             pagination: 'hidden',
                         },
                         perPage: 6,
@@ -434,7 +444,6 @@
                         gap: '1rem',
                         type: 'loop',
                         interval: 2000,
-                        autoplay: true,
                         breakpoints: {
                             1160: {
                                 perPage: 5,
@@ -475,7 +484,9 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: 'hidden',
+                            arrow: 'splide__arrow bg-white opacity-100',
+                            prev: 'hidden',
+                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50',
                             pagination: 'hidden',
                         },
                         perPage: 6,
@@ -483,7 +494,6 @@
                         gap: '1rem',
                         type: 'loop',
                         interval: 2000,
-                        autoplay: true,
                         breakpoints: {
                             1160: {
                                 perPage: 5,
@@ -524,7 +534,9 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: 'hidden',
+                            arrow: 'splide__arrow bg-white opacity-100',
+                            prev: 'hidden',
+                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50',
                             pagination: 'hidden',
                         },
                         perPage: 6,
@@ -532,7 +544,6 @@
                         gap: '1rem',
                         type: 'loop',
                         interval: 2000,
-                        autoplay: true,
                         breakpoints: {
                             1160: {
                                 perPage: 5,
@@ -572,7 +583,7 @@
 
         <div class="text-center">
             <h3 class="font-extrabold mb-6">Plus thousands more popular songs.</h3>
-            <a href="" class="mx-1 join blue smaller">Get started <i class="fas fa-arrow-right" aria-hidden="true"></i> </a>
+            <a href="" class="mx-1 join bg-pianote smaller">Get started <i class="fas fa-arrow-right" aria-hidden="true"></i> </a>
         </div>
     </section>
 

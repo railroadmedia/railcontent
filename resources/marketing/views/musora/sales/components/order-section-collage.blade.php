@@ -14,7 +14,7 @@
                     {!! $list !!}
                 </ul>
                 <div class="w-72 lg:w-96 mx-auto sm:mx-0">
-                    <a class="join smaller blue w-full my-3" href="{!! $buttonLink !!}">
+                    <a class="join smaller bg-{{$theme}} w-full my-3" href="{!! $buttonLink !!}">
                         @if(!empty($promoVersion))
                             Get Started &raquo;
                         @else

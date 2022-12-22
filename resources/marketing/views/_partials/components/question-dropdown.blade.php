@@ -1,6 +1,6 @@
 <div
     class="dropdown text-center rounded-xl mb-3 select-none text-black border-2 border-[#EFF3F5]"
-    x-data="{ open: false }"
+    x-data="{ open: @if(!empty($open) && $open) true @else false @endif}"
 >
     <div class="flex">
         <div
@@ -10,7 +10,7 @@
                 if(open){
                     $refs.dropdown1.classList.remove('hidden', 'h-0', 'max-h-0');
                     $refs.dropdown1.classList.add('h-auto', 'max-h-full');
-                    @if(!empty($lessons))
+                    @if(!empty($lessonInfo))
                     $refs.dropdown2.classList.remove('hidden', 'h-0', 'max-h-0');
                     $refs.dropdown2.classList.add('h-auto', 'max-h-full');
                     @endif
@@ -18,7 +18,7 @@
                 } else {
                     $refs.dropdown1.classList.add( 'h-0', 'max-h-0');
                     $refs.dropdown1.classList.remove('h-auto', 'max-h-full');
-                    @if(!empty($lessons))
+                    @if(!empty($lessonInfo))
                     $refs.dropdown2.classList.add( 'h-0', 'max-h-0');
                     $refs.dropdown2.classList.remove('h-auto', 'max-h-full');
                     @endif
@@ -32,7 +32,7 @@
             </h6>
             <p
                 x-ref="dropdown1"
-                class="transition-all duration-300 text-xs sm:text-sm h-0 leading-relaxed sm:leading-relaxed overflow-hidden"
+                class="transition-all duration-300 text-xs sm:text-sm @if(empty($open) || !$open) h-0 @endif leading-relaxed sm:leading-relaxed overflow-hidden"
                 :class="open ? '' : ''"
             >
                 {!! nl2br( $desc) !!}
@@ -44,19 +44,19 @@
             x-on:click="
                 open = !open;
                 if(open){
-                    $refs.dropdown1.classList.remove('hidden', 'h-0', 'max-h-0');
-                    $refs.dropdown1.classList.add('h-auto', 'max-h-full');
+                    $refs.dropdown1.classList.remove('hidden', 'h-0');
+                    $refs.dropdown1.classList.add('h-auto' );
                     @if(!empty($lessons))
-                    $refs.dropdown2.classList.remove('hidden', 'h-0', 'max-h-0');
-                    $refs.dropdown2.classList.add('h-auto', 'max-h-full');
+                    $refs.dropdown2.classList.remove('hidden', 'h-0');
+                    $refs.dropdown2.classList.add('h-auto');
                     @endif
                     $refs.icon.classList.add('rotate-45');
                 } else {
-                    $refs.dropdown1.classList.add( 'h-0', 'max-h-0');
-                    $refs.dropdown1.classList.remove('h-auto', 'max-h-full');
+                    $refs.dropdown1.classList.add('h-0');
+                    $refs.dropdown1.classList.remove('h-auto');
                     @if(!empty($lessons))
-                    $refs.dropdown2.classList.add( 'h-0', 'max-h-0');
-                    $refs.dropdown2.classList.remove('h-auto', 'max-h-full');
+                    $refs.dropdown2.classList.add('h-0');
+                    $refs.dropdown2.classList.remove('h-auto');
                     @endif
                     $refs.icon.classList.remove('rotate-45');
                 }
@@ -66,7 +66,7 @@
         </div>
     </div>
     @if(!empty($lessonInfo))
-        <div x-ref="dropdown2" class="transition-all duration-300 text-xs sm:text-sm text-left bg-[#F5F8FC] h-0 overflow-hidden" :class="open ? 'py-4 sm:py-6 pl-4 sm:pl-5 pr-8 sm:pr-12' : ''">
+        <div x-ref="dropdown2" class="transition-all duration-300 text-xs sm:text-sm text-left bg-[#F5F8FC] @if(empty($open) || !$open) h-0 @endif overflow-hidden" :class="open ? 'py-4 sm:py-6 pl-4 sm:pl-5 pr-8 sm:pr-12' : ''">
             @foreach($lessonInfo as $key => $info)
                 <div class="bg-white p-4 rounded-xl flex flex-col md:flex-row mb-2">
                     <img
