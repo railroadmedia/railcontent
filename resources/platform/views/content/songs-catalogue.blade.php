@@ -24,14 +24,17 @@
                         </musora-icon>
                         <span class="tw-text-32 tw-font-bold">{{ ucfirst($catalogueMeta['name']) }}</span>
                     </h1>
-                    <p class="tw-text-white tw-text-[18px] tw-mb-4 tw-max-w-4xl tw-pr-12 tw-text-base tw-uppercase tw-font-open-sans tw-font-bold">
+                    <p
+                        class="tw-text-white tw-text-[18px] tw-mb-4 tw-max-w-4xl tw-pr-12 tw-text-base tw-uppercase tw-font-open-sans tw-font-bold">
                         <!-- TODO: GET THIS INFO FROM BACKEND -->
-                        {{$artistsNumber}} ARTISTS | {{$songsNumber}} SONGS
+                        {{ $artistsNumber }} ARTISTS | {{ $songsNumber }} SONGS
                     </p>
                 </div>
                 <div class="tw-flex tw-flex-row tw-items-center tw-justify-center">
-                    <a href="#aboutmoises" class="tw-flex tw-flex-col tw-justify-center tw-items-center hover:tw-underline tw-text-white tw-text-[20px] tw-font-bebas-neue">
-                        <svg class="tw-h-[37px] tw-w-[37px]" id="info-icon-header" width="37" height="36" viewBox="0 0 37 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <a href="#aboutmoises"
+                        class="tw-flex tw-flex-col tw-justify-center tw-items-center hover:tw-underline tw-text-white tw-text-[20px] tw-font-bebas-neue">
+                        <svg class="tw-h-[37px] tw-w-[37px]" id="info-icon-header" width="37" height="36" viewBox="0 0 37 36"
+                            fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M20.2917 25H18.5V18H16.7083M18.5 11H18.5179M34.625 18C34.625 26.6985 27.4056 33.75 18.5 33.75C9.59441 33.75 2.375 26.6985 2.375 18C2.375 9.30151 9.59441 2.25 18.5 2.25C27.4056 2.25 34.625 9.30151 34.625 18Z"
                                 stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
@@ -59,11 +62,24 @@
     @endcomponent
 
     @if (session()->has('success-message'))
-        <div class="form-success-message container mt-3">
-            <div class="flex flex-column bg-success shadow corners-10 pa">
-                <p class="body text-white">{{ session()->get('success-message') }}</p>
-            </div>
-        </div>
+        @section('layout-scripts')
+            <script type="text/javascript">
+                // Try to force show notification, should replace with an async approach with an endpoint (Todo)
+                function showSuccessNotification() {
+                    if (window.shownotification) {
+                        window.shownotification({
+                            icon: 'check',
+                            text: 'Success! Your song request has been submitted.'
+                        });
+                    } else {
+                        setTimeout(function() {
+                            showSuccessNotification();
+                        }, 300)
+                    }
+                }
+            showSuccessNotification();
+            </script>
+        @endsection
     @endif
 
     @if ($hasStartedLessons)
@@ -121,9 +137,7 @@
                 no-results-message="There are no songs that match those filters. Please remove some filters."
                 catalogue-type="list" :infinite-scroll="true" limit="20"
                 :included-types="{{ json_encode(is_array($lessonType) ? $lessonType : explode(',', $lessonType)) }}"
-                @if(!empty($searchTerm))
-                    search-term="{{ $searchTerm }}"
-                @endif
+                @if (!empty($searchTerm)) search-term="{{ $searchTerm }}" @endif
                 @if (!empty($sortOverride)) sort-override="{{ $sortOverride }}" @endif>
                 @include('partials.bladesora.members.skeletons.catalog-filters', [
                     'length' => count($catalogueMeta['allowableFilters']),
