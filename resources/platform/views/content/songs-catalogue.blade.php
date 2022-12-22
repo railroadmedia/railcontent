@@ -61,27 +61,6 @@
         @endslot
     @endcomponent
 
-    @if (session()->has('success-message'))
-        @section('layout-scripts')
-            <script type="text/javascript">
-                // Try to force show notification, should replace with an async approach with an endpoint (Todo)
-                function showSuccessNotification() {
-                    if (window.shownotification) {
-                        window.shownotification({
-                            icon: 'check',
-                            text: 'Success! Your song request has been submitted.'
-                        });
-                    } else {
-                        setTimeout(function() {
-                            showSuccessNotification();
-                        }, 300)
-                    }
-                }
-            showSuccessNotification();
-            </script>
-        @endsection
-    @endif
-
     @if ($hasStartedLessons)
         <section class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
             <div class="flex flex-row tw-pt-4">
