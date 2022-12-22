@@ -65,7 +65,7 @@
 @section('bottom')
     <p>The Drumeo Gift Card is a physical access pass that you can use for yourself, or to send as a gift to another drummer.
         Simply choose a membership card with 1, 6, or 12 months of access.
-        We’ll ship it to you, and once it arrives it can be <a href="https://drumeo.com/redeem" target="_blank">redeemed by anybody, anytime</a>.
+        We’ll ship it to you, and once it arrives it can be <a href="https://musora.com/redeem" target="_blank">redeemed by anybody, anytime</a>.
         <br><br>
         <strong>Drumeo offers ongoing access to:</strong></p>
     <ul>
