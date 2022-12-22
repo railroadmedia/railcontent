@@ -34,7 +34,7 @@ $(document).ready(function (){
         document.cookie = "cookiesEnabled=true; expires=" + date.toUTCString() + "; path=/";
         var cookiesEnabled = document.cookie.indexOf("cookiesEnabled=") !== -1;
         var hasCookie = document.cookie.indexOf("cookieAccept=true");
-        if (hasCookie < 0 && cookiesEnabled === true) {
+        if (hasCookie < 0 && cookiesEnabled === true && window.location.hostname.endsWith('pianote.com')) {
             setTimeout(function () {
                 $(".cookie-notice").removeClass("hide");
             }, 3000);

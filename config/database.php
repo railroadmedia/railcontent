@@ -201,11 +201,10 @@ return [
             'port' => env('REDIS_PORT', '6379'),
             'database' => env('REDIS_CACHE_DB', '0'),
         ],
-
         'session' => [
-            'host' => env('REDIS_HOST', 'redis'),
-            'password' => env('REDIS_PASSWORD', null),
-            'port' => env('REDIS_PORT', '6379'),
+            'host' => env('SESSION_REDIS_HOST', env('REDIS_HOST', 'redis')),
+            'password' => env('SESSION_REDIS_PASSWORD', env('REDIS_PASSWORD', null)),
+            'port' => env('SESSION_REDIS_PORT', env('REDIS_PORT', '6379')),
             'database' => env('REDIS_CACHE_DB', '0'),
         ],
 
