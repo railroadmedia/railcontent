@@ -4,7 +4,7 @@ $lessons = [
         "title" => "Getting Started On The Drums",
         "desc" => 'This is where it starts. You’ll learn how to set up your drum-set, hold your drumsticks properly, and play your first beats. And, best of all, you’ll learn how to play your first two songs on the drums.',
         'detail' => '30 lessons',
-        'lessons' => [
+        'lessonInfo' => [
             [
                 'thumb' => 'https://d1923uyy6spedc.cloudfront.net/241249-card-thumbnail-maxres-1593029951.png',
                 'title' => 'Gear',
@@ -41,7 +41,7 @@ $lessons = [
         "title" => "Basic Theory & Ear Training",
         "desc" => 'In Level Two, you’ll continue to build your drumming foundation. You’re going to learn your first drum rudiments, develop basic reading skills (it’s not that hard, we promise!), and get introduced to three styles of drumming: rock, punk, and metal.',
         'detail' => '51 lessons',
-        'lessons' => [
+        'lessonInfo' => [
             [
             'thumb' => 'https://d1923uyy6spedc.cloudfront.net/243084-card-thumbnail-maxres-1593030792.png',
             'title' => 'Theory',
@@ -90,7 +90,7 @@ $lessons = [
         "title" => "The Motions Of Drumming	",
         "desc" => 'Learning the motions of drumming will help you play faster, smoother, and for longer periods. This level introduces you to key drum set techniques like the three main stick grips and beginner bass drum pedal technique.',
         'detail' => '59 lessons',
-        'lessons' => [
+        'lessonInfo' => [
             [
                 'thumb' => 'https://d1923uyy6spedc.cloudfront.net/246125-card-thumbnail-maxres-1593032540.png',
                 'title' => 'Theory',
@@ -139,7 +139,7 @@ $lessons = [
         "title" => "The Moeller Method & Essential Grooves",
         "desc" => 'You’re ready to learn drumming’s most powerful technique! The Moeller Method is a technique drummers have used for decades to achieve power, efficiency and fluidity on the drums – all your favorites use it! Level Four also introduces you to new styles like jazz, blues, and rock ballads.',
         'detail' => '64 lessons',
-        'lessons' => [
+        'lessonInfo' => [
             [
                 'thumb' => 'https://d1923uyy6spedc.cloudfront.net/248133-card-thumbnail-maxres-1593037388.png',
                 'title' => 'Theory',
@@ -194,7 +194,7 @@ $lessons = [
         "title" => "Rhythmic Groupings & Independence",
         "desc" => 'This is where you get creative. You’ll be introduced to the concept of “groupings” and how you can use them to create powerful grooves & fills of your own. You’ll also dig into more new styles like funk, Motown, and reggae that will push your independence – in a good way!',
         'detail' => '63 lessons',
-        'lessons' => [
+        'lessonInfo' => [
             [
                 'thumb' => 'https://d1923uyy6spedc.cloudfront.net/273406-card-thumbnail-maxres-1607017103.png',
                 'title' => 'Theory',
@@ -249,7 +249,7 @@ $lessons = [
         "title" => "Odd Time & Inspiration",
         "desc" => 'Not gonna lie… Level Six is tough. But you’ve laid the foundation and you’re ready! Intermediate drummers will love learning how to play odd-time signatures and digging into world styles like Caribbean soca grooves and New Orleans second line.',
         'detail' => '51 lessons',
-        'lessons' => [
+        'lessonInfo' => [
             [
                 'thumb' => 'https://d1923uyy6spedc.cloudfront.net/276534-card-thumbnail-maxres-1606560437.png',
                 'title' => 'Theory',
@@ -304,7 +304,7 @@ $lessons = [
         "title" => "Foot Technique & Combinations",
         "desc" => 'If you ever wondered how John Bonham’s foot was so fast, this is the level for you. You’ll dig into challenging bass drum techniques like slide, heel-toe, and swivel. And you’ll also get introduced to playing double-bass drum beats. It’s time to bring the double pedals out!',
         'detail' => '34 lessons',
-        'lessons' => [
+        'lessonInfo' => [
             [
                 'thumb' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-method/level-7/7-1-0.png',
                 'title' => 'Rudiments',
@@ -353,7 +353,7 @@ $lessons = [
         "title" => "Brushes, Texture & Articulation",
         "desc" => 'This is where you go deeper into the world of drums. Level Eight dives into advanced topics like articulation, texture, and how to express yourself more clearly on the drums. You’ll also explore new dynamic levels by learning brush stroke patterns and challenging new jazz styles.',
         'detail' => '43 lessons',
-        'lessons' => [
+        'lessonInfo' => [
             [
                 'thumb' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-method/level-8/8-1-0.png',
                 'title' => 'Theory',
@@ -402,7 +402,7 @@ $lessons = [
         "title" => "Advanced Styles & Musical Decisions",
         "desc" => 'By Level 9, you’re thinking about high-level concepts that will help you play live, in the studio, and on camera. Whether you’re jamming with a guitarist in your basement, playing in a wedding cover band, or touring the world playing stadiums, it’s important to know how to make musical decisions for your specific scenario.',
         'detail' => '38 lessons',
-        'lessons' => [
+        'lessonInfo' => [
             [
                 'thumb' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-method/level-9/9-1-0.png',
                 'title' => 'Rudiments',
@@ -451,7 +451,7 @@ $lessons = [
         "title" => "Go Anywhere On The Drums",
         "desc" => 'Level 10 prepares you to “go anywhere on the drums.” You’ll learn about advanced rhythmic concepts like metric modulation, polyrhythms and polymeters, hybrid rudiments, and way more. These are concepts you can explore endlessly on your drumming journey.',
         'detail' => '38 lessons',
-        'lessons' => [
+        'lessonInfo' => [
             [
                 'thumb' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-method/level-10/10-1-0.png',
                 'title' => 'Theory',

@@ -200,7 +200,8 @@ img {
       }
     }
 
-    &.method {
+    &.method,
+    &.drumeo-blue {
       border-color: $drumeoBlue;
       color: $drumeoBlue;
 

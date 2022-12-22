@@ -37,7 +37,7 @@
                     "title" => $method['title'],
                     "desc" => $method['desc'],
                     'detail' => $method['detail'],
-                    'lessons' => $method['lessons']
+                    'lessonInfo' => $method['lessonInfo']
                 ])
             @endforeach
         </div>

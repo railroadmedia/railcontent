@@ -12,20 +12,20 @@
                     <div class="join white smaller absolute bottom-1 left-1"><i class="fas fa-play"></i> Watch Trailer</div>
                 </div>
                 <div class="px-5 sm:px-0">
-                    <h1 class="rotater-text text-drumeo"><strong>{!! $header !!}</strong></h1>
+                    <h1 class="rotater-text text-{{ $theme }}"><strong>{!! $header !!}</strong></h1>
                     <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>{!! $desc !!}</strong></h6>
                     <p class="hidden lg:inline">
-                        <i class="fas fa-check text-drumeo"></i> {!! $pointOne !!}
-                        <i class="ml-2 fas fa-check text-drumeo"></i> {!! $pointTwo !!}
-                        <i class="ml-2 fas fa-check text-drumeo"></i> {!! $pointThree !!}
+                        <i class="fas fa-check text-{{ $theme }}"></i> {!! $pointOne !!}
+                        <i class="ml-2 fas fa-check text-{{ $theme }}"></i> {!! $pointTwo !!}
+                        <i class="ml-2 fas fa-check text-{{ $theme }}"></i> {!! $pointThree !!}
                     </p>
                     <div class="flex inline lg:hidden">
-                        <p class="w-1/3 leading-tight"><i class="fas fa-check text-drumeo"></i><br> {!! $pointOne !!}</p>
-                        <p class="w-1/3 leading-tight"><i class="fas fa-check text-drumeo"></i><br> {!! $pointTwo !!}</p>
-                        <p class="w-1/3 leading-tight"><i class="fas fa-check text-drumeo"></i><br> {!! $pointThree !!}</p>
+                        <p class="w-1/3 leading-tight"><i class="fas fa-check text-{{ $theme }}"></i><br> {!! $pointOne !!}</p>
+                        <p class="w-1/3 leading-tight"><i class="fas fa-check text-{{ $theme }}"></i><br> {!! $pointTwo !!}</p>
+                        <p class="w-1/3 leading-tight"><i class="fas fa-check text-{{ $theme }}"></i><br> {!! $pointThree !!}</p>
                     </div>
                     <div class="flex flex-wrap items-center mt-6 sm:mt-5 lg:mt-10 max-w-xs">
-                        <a href="/pricing" class="w-full join blue smaller mb-2">
+                        <a href="/pricing" class="w-full join {{ $theme }}-blue smaller mb-2">
                             @if(!empty($promoVersion))
                                 Get Started &raquo;
                             @else
@@ -58,8 +58,10 @@
             </div>
         </div>
         <div class="px-5 sm:px-0">
-            <div class="flex flex-wrap sm:flex-nowrap text-center border-2 rounded-xl border-drumeo mt-8 lg:mt-12 lg:mb-4" style="background-color:#eaf1fa;">
-                    <div class="flex flex-wrap sm:flex-nowrap items-start justify-evenly w-full sm:w-auto sm:flex-grow py-4 sm:py-3 lg:py-4 lg:px-5 text-left sm:text-center">
+            <div class="flex flex-wrap sm:flex-nowrap text-center border-2 rounded-xl border-{{ $theme }} mt-8 lg:mt-12 lg:mb-4 relative"
+{{--                style="background-color:#eaf1fa;"--}}
+            >
+                    <div class="z-20 flex flex-wrap sm:flex-nowrap items-start justify-evenly w-full sm:w-auto sm:flex-grow py-4 sm:py-3 lg:py-4 lg:px-5 text-left sm:text-center">
                         @foreach ($features as $key => $feature)
                             <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3 my-2 sm:mb-0">
                                 <img
@@ -74,6 +76,7 @@
                             </div>
                         @endforeach
                     </div>
+                <div class="absolute inset-0 z-10 bg-{{ $theme }}" style="opacity: 0.07;"></div>
                 </div>
         </div>
         <div class="px-5">

@@ -151,9 +151,9 @@
 
     <div class="text-center my-10">
         @if(empty($promoVersion))
-            <a href="/courses" class="mx-1 mb-2 sm:mb-0 join outline method smaller">EXPLORE 200+ COURSES <i class="fas fa-info-circle"></i> </a>
+            <a href="/courses" class="mx-1 mb-2 sm:mb-0 join outline {{ $theme }}-blue smaller">EXPLORE 200+ COURSES <i class="fas fa-info-circle"></i> </a>
         @endif
-        <a href="/pricing" class="mx-1 join blue smaller">
+        <a href="/pricing" class="mx-1 join {{ $theme }}-blue smaller">
             @if(!empty($promoVersion))
                 Get Started &raquo;
             @else

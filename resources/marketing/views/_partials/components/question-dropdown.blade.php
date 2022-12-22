@@ -65,21 +65,21 @@
             <i x-ref="icon" class="fas fa-plus transform transition-all duration-300 text-lg md:text-2xl lg:text-3xl"></i>
         </div>
     </div>
-    @if(!empty($lessons))
+    @if(!empty($lessonInfo))
         <div x-ref="dropdown2" class="transition-all duration-300 text-xs sm:text-sm text-left bg-[#F5F8FC] h-0 overflow-hidden" :class="open ? 'py-4 sm:py-6 pl-4 sm:pl-5 pr-8 sm:pr-12' : ''">
-            @foreach($lessons as $key => $lesson)
+            @foreach($lessonInfo as $key => $info)
                 <div class="bg-white p-4 rounded-xl flex flex-col md:flex-row mb-2">
                     <img
                         class="rounded-xl md:h-32 mb-6 md:mb-0 transition-opacity opacity-0"
-                        src="https://cdn.musora.com/image/fetch/w_650,q_auto:best/{{$lesson['thumb']}}"
+                        src="https://cdn.musora.com/image/fetch/w_650,q_auto:best/{{$info['thumb']}}"
                         alt="lesson{{$key+1}} thumb"
                         loading="lazy"
                         onload="this.classList.remove('opacity-0')"
                     />
                     <div class="md:pl-6">
-                        <h5 class="font-extrabold">{{$lesson['title']}}</h5>
-                        <p class="my-2">{{$lesson['desc']}}</p>
-                        <p class="text-[#838C98]">{{ $lesson['lessonNum'] }} lessons</p>
+                        <h5 class="font-extrabold">{{$info['title']}}</h5>
+                        <p class="my-2">{{$info['desc']}}</p>
+                            <p class="text-[#838C98]">{{ $info['lessonNum'] }} lessons</p>
                     </div>
                 </div>
             @endforeach

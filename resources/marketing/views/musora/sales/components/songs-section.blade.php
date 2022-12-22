@@ -19,9 +19,9 @@
             </div>
         </div>
         @if(empty($promoVersion))
-            <a href="/songs" class="mx-1 mb-2 sm:mb-0 join outline method smaller">SEE SONGS LIST <i class="fas fa-list-music"></i> </a>
+            <a href="/songs" class="mx-1 mb-2 sm:mb-0 join outline {{ $theme }}-blue smaller">SEE SONGS LIST <i class="fas fa-list-music"></i> </a>
         @endif
-        <a href="/pricing" class="mx-1 join blue smaller">
+        <a href="/pricing" class="mx-1 join {{ $theme }}-blue smaller">
             @if(!empty($promoVersion))
                 Get Started &raquo;
             @else

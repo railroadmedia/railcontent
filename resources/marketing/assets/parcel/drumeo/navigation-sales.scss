@@ -101,7 +101,8 @@ a {
     box-shadow: 0 0 7px hsla(0, 0%, 0%, 0.35);
   }
 
-  &.blue {
+  &.blue,
+  &.drumeo-blue {
     background: $drumeoBlue;
 
     &:hover,

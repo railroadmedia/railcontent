@@ -95,7 +95,7 @@
                                 <div class="text-center">
                                     <div class="font-bold text-sm leading-snug mb-2">{!! $testimonial['title'] !!}</div>
                                     <p class="text-sm mb-1">{{ $testimonial['name'] }}</p>
-                                    <p class="text-xs text-drumeo cursor-pointer" x-on:click="{{str_replace(' ', '', $testimonial['name'])}} = true;">Watch video</p>
+                                    <p class="text-xs text-{{ $theme }} cursor-pointer" x-on:click="{{str_replace(' ', '', $testimonial['name'])}} = true;">Watch video</p>
                                 </div>
                             </li>
                         @endforeach

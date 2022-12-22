@@ -81,14 +81,14 @@
                     </a>
                 </div>
                 <div class="float-left px-2 w-full md:w-1/2 relative">
-                    <p class="bg-drumeo rounded-t-2xl absolute left-1/2 inline-block w-4/5 transform -translate-x-1/2" style="top: -23px;">
+                    <p class="bg-{{ $theme }} rounded-t-2xl absolute left-1/2 inline-block w-4/5 transform -translate-x-1/2" style="top: -23px;">
                         @hasSection('badge-text')
                             @yield('badge-text')
                         @else
                             Most Popular
                         @endif
                     </p>
-                    <a class="border-2 overflow-hidden rounded-2xl block mx-auto mb-10 md:mb-0 px-4 md:px-6 py-7 md:py-10 border-drumeo text-drumeo"
+                    <a class="border-2 overflow-hidden rounded-2xl block mx-auto mb-10 md:mb-0 px-4 md:px-6 py-7 md:py-10 border-{{ $theme }} text-{{ $theme }}"
                             @hasSection('annual-url')
                                 @yield('annual-url')
                             @else
