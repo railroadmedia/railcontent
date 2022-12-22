@@ -185,7 +185,7 @@
     <div id="customize-anchor" class="anchor anchor-slide"></div>
     @include('_partials.layout.holiday.homepage-bottom-membership',[
         'logo' => 'https://guitareo.s3.amazonaws.com/sales/promos/black-friday/bundles/ultimate/annual.jpg',
-        'joinText' => '<strong>Join Guitareo for just ${{  round(GuitareoPrices::$guitareoMembershipAnnual / 12, 2) }}/month</strong> <br class="hidden sm:inline"><strong class="text-promo">PLUS</strong> get 6 free bonuses worth $924.',
+        'joinText' => '<strong>Join Guitareo for just $' . round(GuitareoPrices::$guitareoMembershipAnnual / 12, 2) . '/month</strong> <br class="hidden sm:inline"><strong class="text-promo">PLUS</strong> get 6 free bonuses worth $924.',
         'annualLink' => '/ecommerce/add-to-cart?products[GUITAREO-1-YEAR-MEMBERSHIP]=1&products[guitarists-survival-kit]=1&products[guitar-quest]=1&products[rhythm-and-groove]=1&products[GUITAR-SYSTEM]=1&products[AGME-JAN-2019-SEMESTER]=1&products[GTME-OCT-2018-SEMESTER]=1&redirect=/order&locked=true',
         'bonusNum' => 6,
         'tileWidth' => 'w-1/2 sm:w-1/3',
