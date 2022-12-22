@@ -261,28 +261,28 @@
                     </div>
                 </a>
             </div>
-            <div class="w-full md:w-1/2 px-2 md:px-3 relative">
+{{--            <div class="w-full md:w-1/2 px-2 md:px-3 relative">--}}
 
-                <a href="/lifetime" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">
-                    <p class="w-full px-4 pt-2 pb-4 -mb-3 text-white rounded-t-2xl font-extrabold uppercase" style="background: linear-gradient(180deg, #F51A30 0%, #9A1120 64.29%);">
-                        LIMITED TIME PIANOTE DEAL
-                    </p>
-                    <div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">
-                        <h6 class="leading-none mb-3">Get a LIFETIME Pianote membership <br class="hidden lg:inline">& Get Your Headphones FREE</h6>
-                        <h1 class="inline-block leading-none">
-                            <strong>${{ PianotePrices::$pianoteMembershipLifetime }}</strong>
-                        </h1>
-                        <p class="text-sm my-4"><em>LIMITED EDITION.</em></p>
-                        <div class="join smaller w-full transition-opacity duration-300 group-hover:opacity-80" style="max-width: 230px;">Learn more</div>
-                    </div>
-                    <div class="px-3 pt-5 md:pt-6 pb-9 md:pb-10" style="background: #f1f8ff;border-top: 2px solid #e6f2ff;">
-                        <p class="mb-1 text-pianote"><strong>Lifetime Pianote Membership</strong></p>
-                        <p class="mb-1">Pianote Concert Series Headphones</p>
-                        <p class="mb-1">Two, 3-Meter Detachable Cables</p>
-                        <p class="mb-1">3.5mm Plug with ¼” Adapter</p>
-                    </div>
-                </a>
-            </div>
+{{--                <a href="/lifetime" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">--}}
+{{--                    <p class="w-full px-4 pt-2 pb-4 -mb-3 text-white rounded-t-2xl font-extrabold uppercase" style="background: linear-gradient(180deg, #F51A30 0%, #9A1120 64.29%);">--}}
+{{--                        LIMITED TIME PIANOTE DEAL--}}
+{{--                    </p>--}}
+{{--                    <div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">--}}
+{{--                        <h6 class="leading-none mb-3">Get a LIFETIME Pianote membership <br class="hidden lg:inline">& Get Your Headphones FREE</h6>--}}
+{{--                        <h1 class="inline-block leading-none">--}}
+{{--                            <strong>${{ PianotePrices::$pianoteMembershipLifetime }}</strong>--}}
+{{--                        </h1>--}}
+{{--                        <p class="text-sm my-4"><em>LIMITED EDITION.</em></p>--}}
+{{--                        <div class="join smaller w-full transition-opacity duration-300 group-hover:opacity-80" style="max-width: 230px;">Learn more</div>--}}
+{{--                    </div>--}}
+{{--                    <div class="px-3 pt-5 md:pt-6 pb-9 md:pb-10" style="background: #f1f8ff;border-top: 2px solid #e6f2ff;">--}}
+{{--                        <p class="mb-1 text-pianote"><strong>Lifetime Pianote Membership</strong></p>--}}
+{{--                        <p class="mb-1">Pianote Concert Series Headphones</p>--}}
+{{--                        <p class="mb-1">Two, 3-Meter Detachable Cables</p>--}}
+{{--                        <p class="mb-1">3.5mm Plug with ¼” Adapter</p>--}}
+{{--                    </div>--}}
+{{--                </a>--}}
+{{--            </div>--}}
         </div>
     </section>
     <section class="content-section text-center" style="background: #00101D;">

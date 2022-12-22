@@ -550,7 +550,7 @@
         </div>
     </section>
 
-    @include('musora._partials._modal',[
+    @include('_partials.components.modal',[
         'name' => 'modal',
         'additionalOnClose' => 'trailer = false;',
         'content' => '

@@ -200,9 +200,9 @@
                 "noBreadcrumb" => true
             ])
 
-    @if(!empty($products['30-day-drummer']->getPublicStockCount()))
+    @if(!empty($products['30-day-drummer']->getStock()))
         @php
-        $students = number_format($products['30-day-drummer']->getPublicStockCount())
+        $students = number_format($products['30-day-drummer']->getStock())
         @endphp
     @endif
     @php

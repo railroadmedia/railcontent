@@ -96,20 +96,6 @@ body {
       display: none !important;
     }
   }
-
-  &.transparent {
-    background: transparent;
-    position: absolute;
-    box-shadow: 0 0 0 rgba(0, 0, 0, 0.5);
-
-    &.scrolled {
-      background: #020815;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-      position: fixed;
-    }
-  }
-
-
   .logo {
     display: inline-block;
     box-sizing: border-box;
