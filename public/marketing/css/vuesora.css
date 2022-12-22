@@ -16143,9 +16143,9 @@ a {
   visibility: visible;
 }
 .catalogue-card .thumbnail-col {
-  flex: 0 0 175px;
-  max-width: 175px;
-  min-width: 175px;
+  flex: 0 0 125px;
+  max-width: 125px;
+  min-width: 125px;
 }
 @media screen and (min-width: 40rem) {
   .catalogue-card .thumbnail-col {
