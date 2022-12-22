@@ -15,7 +15,7 @@
 <meta property="og:image" content="" style="display: none;">
 
 
-@section('header-img', '')
+@section('header-img', 'https://pianote.s3.amazonaws.com/sales/2023/method-thumb.jpg')
 
 @section('header', 'Your piano goals start here.')
 

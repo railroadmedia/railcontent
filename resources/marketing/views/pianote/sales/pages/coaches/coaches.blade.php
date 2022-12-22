@@ -7,15 +7,15 @@
 @section('page-meta')
 
 @endsection
-<title>Drumeo | Reach your drumming goals.</title>
-<meta property="og:title" content="Drumeo | Reach your drumming goals.">
-<meta property="og:url" content="https://www.drumeo.com/method">
-<meta name="description" content="Learn the drums faster with organized video lessons, legendary teachers, and better practice tools. 90-Day Guarantee.">
-<meta property="og:description" content="Learn the drums faster with organized video lessons, legendary teachers, and better practice tools. 90-Day Guarantee.">
-<meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/sales/2022/og-image.jpg" style="display: none;">
+<title>Pianote | </title>
+<meta property="og:title" content="Pianote | ">
+<meta property="og:url" content="https://www.pianote.com/method">
+<meta name="description" content="">
+<meta property="og:description" content="">
+<meta property="og:image" content="" style="display: none;">
 
 
-@section('header-img', '')
+@section('header-img', 'https://pianote.s3.amazonaws.com/sales/2023/coaches-thumb.jpg')
 
 @section('header', 'Study with the world’s best teachers.')
 
@@ -172,7 +172,7 @@
                 @endcomponent
             </div>
             <div class="mb-6">
-                <h4 class="font-extrabold mb-4">Legendary grooves</h4>
+                <h4 class="font-extrabold mb-4">The power of chords</h4>
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
@@ -199,7 +199,7 @@
                     ",
                 ])
                     @slot('content')
-                        @foreach ($grooves as $slide)
+                        @foreach ($chords as $slide)
                             <li class="splide__slide">
                                 <div>
                                     <div class="relative mb-2 sm:mb-4" style="padding-bottom: 56.25%;">
@@ -271,8 +271,8 @@
             </div>
 
         <div class="text-center">
-            <h3 class="font-extrabold mb-6">Plus 200+ more courses.</h3>
-            <a href="" class="mx-1 join blue smaller">Get started <i class="fas fa-arrow-right" aria-hidden="true"></i> </a>
+            <h3 class="font-extrabold mb-6">More lessons & live events added every week.</h3>
+            <a href="" class="mx-1 join bg-pianote smaller">Get started <i class="fas fa-arrow-right" aria-hidden="true"></i> </a>
         </div>
     </section>
 
