@@ -58,10 +58,15 @@ class ProductFactory extends Factory
         ];
     }
 
-    public static function createSubscriptionProduct(DigitalAccessType $accessType, Interval $interval, float $price,
-        array $attributes = []): Product
-    {
+    public static function createSubscriptionProduct(
+        string $brand,
+        DigitalAccessType $accessType,
+        Interval $interval,
+        float $price,
+        array $attributes = []
+    ): Product {
         $attributes = array_merge($attributes, [
+            'brand' => $brand,
             'price' => $price,
             'type' => Product::TYPE_DIGITAL_SUBSCRIPTION,
             'digital_access_type' => $accessType,

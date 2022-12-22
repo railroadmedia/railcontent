@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Ecommerce\Repositories\ProductRepository;
 use Railroad\Ecommerce\Services\SubscriptionUpgradeService;
+use Railroad\Ecommerce\Services\UpgradeService;
 use Tests\TestCase;
 
 class SubscriptionUpgradeServiceTests extends TestCase
@@ -35,13 +36,13 @@ class SubscriptionUpgradeServiceTests extends TestCase
         $user = User::factory()->create();
         Auth::loginUsingId($user->id);
         UserPaymentMethodFactory::createPrimarySuccessfulPaymentMethod($user);
-        $product1 = ProductFactory::createSubscriptionProduct(DigitalAccessType::Basic, Interval::Year, 100);
+        $product1 = ProductFactory::createSubscriptionProduct( UpgradeService::MusoraProductBrand, DigitalAccessType::Basic, Interval::Year, 100);
         $activeTime = Carbon::today();
         $expirationTime = Carbon::today()->addMonths(6)->addDays(10);
         /** @var Subscription $subscription */
         $subscription = SubscriptionFactory::createWith($user, $product1, $activeTime, $expirationTime);
         UserProductFactory::createUserProduct($user, $product1, $activeTime, $expirationTime);
-        $product2 = ProductFactory::createSubscriptionProduct(DigitalAccessType::Plus, Interval::Year, 200);
+        $product2 = ProductFactory::createSubscriptionProduct(UpgradeService::MusoraProductBrand, DigitalAccessType::Plus, Interval::Year, 200);
 
 
         $this->subscriptionUpgradeService->upgrade($user->id);
@@ -64,13 +65,13 @@ class SubscriptionUpgradeServiceTests extends TestCase
         $user = User::factory()->create();
         Auth::loginUsingId($user->id);
         UserPaymentMethodFactory::createPrimarySuccessfulPaymentMethod($user);
-        $product1 = ProductFactory::createSubscriptionProduct(DigitalAccessType::Plus, Interval::Year, 100);
+        $product1 = ProductFactory::createSubscriptionProduct(UpgradeService::MusoraProductBrand, DigitalAccessType::Plus, Interval::Year, 100);
         $activeTime = Carbon::today();
         $expirationTime = Carbon::today()->addMonths(6)->addDays(10);
         /** @var Subscription $subscription */
         $subscription = SubscriptionFactory::createWith($user, $product1, $activeTime, $expirationTime);
         UserProductFactory::createUserProduct($user, $product1, $activeTime, $expirationTime);
-        $product2 = ProductFactory::createSubscriptionProduct(DigitalAccessType::Basic, Interval::Year, 200);
+        $product2 = ProductFactory::createSubscriptionProduct(UpgradeService::MusoraProductBrand, DigitalAccessType::Basic, Interval::Year, 200);
 
 
         $this->subscriptionUpgradeService->downgrade($user->id);

@@ -39,7 +39,12 @@ class UpgradeServiceTests extends TestCase
         /** @var User $user */
         $user = User::factory()->create();
         Auth::loginUsingId($user->id);
-        $product1 = ProductFactory::createSubscriptionProduct(DigitalAccessType::Basic, Interval::Year, 100);
+        $product1 = ProductFactory::createSubscriptionProduct(
+            UpgradeService::MusoraProductBrand,
+            DigitalAccessType::Basic,
+            Interval::Year,
+            100
+        );
 
         $discount = $this->getDiscountAmount($product1);
 
@@ -51,12 +56,22 @@ class UpgradeServiceTests extends TestCase
         /** @var User $user */
         $user = User::factory()->create();
         Auth::loginUsingId($user->id);
-        $product1 = ProductFactory::createSubscriptionProduct(DigitalAccessType::Basic, Interval::Year, 100);
+        $product1 = ProductFactory::createSubscriptionProduct(
+            UpgradeService::MusoraProductBrand,
+            DigitalAccessType::Basic,
+            Interval::Year,
+            100
+        );
         $activeTime = Carbon::today();
         $expirationTime = Carbon::today()->addMonths(6)->addDays(10);
         SubscriptionFactory::createWith($user, $product1, $activeTime, $expirationTime);
         UserProductFactory::createUserProduct($user, $product1, $activeTime, $expirationTime);
-        $product2 =  ProductFactory::createSubscriptionProduct(DigitalAccessType::Plus, Interval::Year, 200);
+        $product2 = ProductFactory::createSubscriptionProduct(
+            UpgradeService::MusoraProductBrand,
+            DigitalAccessType::Plus,
+            Interval::Year,
+            200
+        );
 
         $discount = $this->getDiscountAmount($product2);
 
@@ -68,12 +83,22 @@ class UpgradeServiceTests extends TestCase
         /** @var User $user */
         $user = User::factory()->create();
         Auth::loginUsingId($user->id);
-        $product1 = ProductFactory::createSubscriptionProduct(DigitalAccessType::Basic, Interval::Month, 100);
+        $product1 = ProductFactory::createSubscriptionProduct(
+            UpgradeService::MusoraProductBrand,
+            DigitalAccessType::Basic,
+            Interval::Month,
+            100
+        );
         $activeTime = Carbon::today();
         $expirationTime = Carbon::today()->addDays(10);
         SubscriptionFactory::createWith($user, $product1, $activeTime, $expirationTime);
         UserProductFactory::createUserProduct($user, $product1, $activeTime, $expirationTime);
-        $product2 =  ProductFactory::createSubscriptionProduct(DigitalAccessType::Plus, Interval::Month, 200);
+        $product2 = ProductFactory::createSubscriptionProduct(
+            UpgradeService::MusoraProductBrand,
+            DigitalAccessType::Plus,
+            Interval::Month,
+            200
+        );
 
         $discount = $this->getDiscountAmount($product2);
 
@@ -85,12 +110,22 @@ class UpgradeServiceTests extends TestCase
         /** @var User $user */
         $user = User::factory()->create();
         Auth::loginUsingId($user->id);
-        $product1 =  ProductFactory::createSubscriptionProduct(DigitalAccessType::Plus, Interval::Year, 100);
+        $product1 = ProductFactory::createSubscriptionProduct(
+            UpgradeService::MusoraProductBrand,
+            DigitalAccessType::Plus,
+            Interval::Year,
+            100
+        );
         $activeTime = Carbon::today();
         $expirationTime = Carbon::today()->addMonths(6)->addDays(10);
         SubscriptionFactory::createWith($user, $product1, $activeTime, $expirationTime);
         UserProductFactory::createUserProduct($user, $product1, $activeTime, $expirationTime);
-        $product2 =  ProductFactory::createSubscriptionProduct(DigitalAccessType::Plus, Interval::Year, 200);
+        $product2 = ProductFactory::createSubscriptionProduct(
+            UpgradeService::MusoraProductBrand,
+            DigitalAccessType::Plus,
+            Interval::Year,
+            200
+        );
 
         $discount = $this->getDiscountAmount($product2);
 
@@ -102,12 +137,22 @@ class UpgradeServiceTests extends TestCase
         /** @var User $user */
         $user = User::factory()->create();
         Auth::loginUsingId($user->id);
-        $product1 = ProductFactory::createSubscriptionProduct(DigitalAccessType::Basic, Interval::Year, 100);
+        $product1 = ProductFactory::createSubscriptionProduct(
+            UpgradeService::MusoraProductBrand,
+            DigitalAccessType::Basic,
+            Interval::Year,
+            100
+        );
         $activeTime = Carbon::today();
         $expirationTime = Carbon::today()->addMonths(6)->addDays(10);
         SubscriptionFactory::createWith($user, $product1, $activeTime, $expirationTime);
         UserProductFactory::createUserProduct($user, $product1, $activeTime, $expirationTime);
-        $product2 =  ProductFactory::createSubscriptionProduct(DigitalAccessType::Basic, Interval::Year, 200);
+        $product2 = ProductFactory::createSubscriptionProduct(
+            UpgradeService::MusoraProductBrand,
+            DigitalAccessType::Basic,
+            Interval::Year,
+            200
+        );
 
         $discount = $this->getDiscountAmount($product2);
 
