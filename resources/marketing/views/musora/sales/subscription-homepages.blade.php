@@ -406,7 +406,7 @@
 
     @include('musora.sales.components.coaches-section', [
         'header' => 'Study with the world’s <br class="md:hidden">best drummers.',
-        'desc' => 'Amplify your skills with 200+ artist courses + access exclusive live events with drumming legends.'
+        'desc' => 'Amplify your skills with 200+ artist courses + <br class="hidden md:inline">access exclusive live events with drumming legends.'
     ])
 
     @php

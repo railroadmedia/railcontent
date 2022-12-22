@@ -30,7 +30,7 @@
 <section class="py-12 md:py-20 text-center">
     <div class="max-w-3xl mx-auto">
         <h2 class="font-extrabold">{!! $header !!}</h2>
-        <p class="px-4 md:px-0 mt-3 mb-4 md:mb-0">{!! $desc !!}</p>
+        <p class="px-4 md:px-0 mt-3 mb-4 md:mb-0 max-w-md">{!! $desc !!}</p>
     </div>
 
     <!-- Tabs -->
@@ -106,16 +106,12 @@
                                                 prev: 'hidden',
                                                 next: 'splide__arrow--next your-class-next hidden sm:flex',
                                         },
-                                        perPage: 5,
+                                        perPage: 4,
                                         perMove: 1,
                                         type: 'loop',
-                                        autoplay: true,
                                         focus: 0,
                                         interval: 2000,
                                         breakpoints: {
-                                            1024: {
-                                                perPage: 4,
-                                            },
                                             720: {
                                                 perPage: 3,
                                             },
@@ -131,8 +127,8 @@
                             <div class="splide__track">
                                 <ul class="splide__list">
                                     @foreach ($course['images'] as $image)
-                                        <li class="splide__slide flex flex-col items-center justify-center pb-8 pr-5 -mr-4">
-                                            <div class="relative w-full rounded-xl bg-cover bg-center" style="padding-bottom: 140%; background-image:url(https://cdn.musora.com/image/fetch/w_400,q_auto:best/{{$image['img']}});">
+                                        <li class="splide__slide flex flex-col items-center justify-center pb-8 pr-6 -mr-4">
+                                            <div class="relative w-full rounded-xl bg-cover bg-center" style="padding-bottom: 120%; background-image:url(https://cdn.musora.com/image/fetch/w_400,q_auto:best/{{$image['img']}});">
                                                 <div class="rounded-b-xl absolute w-full bottom-0 h-1/2 text-white text-center flex justify-center flex-col" style="background:linear-gradient(180deg, rgba(1, 5, 15, 0) 0%, #01050F 100%);">
                                                     <h4 class="font-extrabold mb-2">{!! $image['title'] !!}</h4>
                                                     <p class="leading-none">{{ $image['instructor'] }}</p>
