@@ -13,7 +13,7 @@
         return signUpActionTrackerId;
     }
     function emailSignUpConversionTrackerForImpactProvider() {
-        var email = document.getElementById('inf_form_xid').value;
+        var email = $('.infusion-field').find('input').val();
         var hashedEmail = sha1(email);
         var hashedOrderId = md5('guitareo_'.concat(email))
         ire('trackConversion', getSignUpActionTrackerId('{{ config('app.env') }}'), {

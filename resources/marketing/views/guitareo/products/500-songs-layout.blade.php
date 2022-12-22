@@ -1,6 +1,6 @@
-@extends('guitareo._partials.layout')
+@extends('guitareo._partials.global-vue-layout')
 
-@section('head-includes')
+@section('meta')
     <title>500 Songs In 5 Days | Guitareo</title>
     <meta name="description" content="This training pack will give you the skills and knowledge to quickly learn and play 500 popular songs from a variety of eras and styles.">
 
@@ -8,13 +8,14 @@
     <meta property="og:title" content="Learn To Play Guitar With 500 Songs In 5 Days">
     <meta property="og:description" content="This training pack will give you the skills and knowledge to quickly learn and play 500 popular songs from a variety of eras and styles.">
     <meta property="og:url" content="https://www.guitareo.com/500-songs">
+@stop()
 
+@section('styles')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation-float.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('/assets/marketing/nav-footer.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('/assets/css/tailwind-helpers.css') }}">
-    <link rel="stylesheet" href="/assets/marketing/500-songs.css">
-    
+    <link rel="stylesheet" href="{{ asset('/marketing/css/guitareo/tailwind-helpers.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/500-songs.css') }}">
     <style>
 
         .join.smaller {
@@ -32,58 +33,9 @@
     </style>
 @stop()
 
-@section('layout-scripts')
-    <script src="/assets/js/modal.js"></script>
-    <script src="/assets/marketing/nav-footer.js"></script>
-
-    <script src="/js/jquery.countdown-2.js"></script>
-    <script>
-        $(document).ready(function () {
-            // Countdown
-            $('.tzcd-full').countdown('2021/11/30')
-                .on('update.countdown', function (event) {
-                    var format = '%-M Minute%!M';
-                    if (event.offset.totalHours > 0) {
-                        format = '%-H Hour%!H ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '%-D Day%!D ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('a limited time');
-                });
-            $('.tzcd-small').countdown('2021/11/30')
-                .on('update.countdown', function (event) {
-                    var format = '%-MM %-SS';
-                    if (event.offset.totalHours > 0) {
-                        format = '%-HH ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '%-DD ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('a limited time');
-                });
-            $('.tzcd-big').countdown('2021/11/30')
-                .on('update.countdown', function (event) {
-                    var format = '' + '<div><h1>%M</h1> <p>min%!M</p></div> ' + '<div><h1>%S</h1> <p>sec%!S</p></div>';
-                    if (event.offset.totalHours > 0) {
-                        format = '' + '<div><h1>%H</h1> <p>hr%!H</p></div> ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '' + '<div><h1>%D</h1> <p>day%!D</p></div> ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('<div><h1>LIMITED</h1> <p>TIME LEFT</p></div>');
-                });
-        });
-    </script>
+@section('scripts')
+    <script src="{{ asset('/marketing/js/modal.js') }}"></script>
+    <script src="{{ asset('/marketing/parcel/guitareo/nav-footer.js') }}"></script>
     <script>
         $(document).ready(function () {
             $(document).foundation();
@@ -129,9 +81,8 @@
                 <strong>500 Songs On The Guitar</strong> In 5 Days</h2>
             <a class="join" href="@yield('order-link')" @yield('product-json')>Get Started &raquo;</a>
             <p class="breakdown">
-                {{--<strong class="yellow" style="text-transform:uppercase;">ONLY <span class="tzcd-full">A LIMITED TIME</span> LEFT!</strong><br>--}}
-                @if(App\Prices::$songs500Full > $productPrice)
-                    <s>NORMALLY ${{ App\Prices::$songs500Full }}.</s> &nbsp;<strong class="text-guitareo"><u>ONLY ${{ $productPrice }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * ($productPrice / App\Prices::$songs500Full))) }}%)
+                @if(GuitareoPrices::$songs500Full > $productPrice)
+                    <s>NORMALLY ${{ GuitareoPrices::$songs500Full }}.</s> &nbsp;<strong class="text-guitareo"><u>ONLY ${{ $productPrice }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * ($productPrice / GuitareoPrices::$songs500Full))) }}%)
                 @else
                     <strong class="text-guitareo"><u>ONLY ${{ $productPrice }}</u></strong>
                 @endif
@@ -153,8 +104,8 @@
     <section class="day-breakdown text-center">
         <div class="row">
             <h1>The Fastest Way To Playing Your<br class="show-for-medium"> Favorite Songs... <u class="text-guitareo">For Just ${{ $productPrice }}</u></h1>
-            @if(App\Prices::$songs500Full > $productPrice)
-                <h3><em><s>NORMALLY ${{ App\Prices::$songs500Full }}</s></em></h3>
+            @if(GuitareoPrices::$songs500Full > $productPrice)
+                <h3><em><s>NORMALLY ${{ GuitareoPrices::$songs500Full }}</s></em></h3>
             @else
                 <h3>&nbsp;</h3>
             @endif
@@ -346,7 +297,7 @@
             </div>
             <div class="large-8 medium-7 columns end guarantee-text">
                 <h1>90-Day Money-Back Guarantee.</h1>
-                <p>We love our students. More than anything, we want you to enjoy a super-positive experience playing guitar. And that means we only want you to pay if you actually LOVE your Guitareo experience! So join below to try it out totally risk-free. If it’s not for you, simply <a class="text-white" href="/support">contact us</a> within 90 days to request a full refund.</p>
+                <p>We love our students. More than anything, we want you to enjoy a super-positive experience playing guitar. And that means we only want you to pay if you actually LOVE your Guitareo experience! So join below to try it out totally risk-free. If it’s not for you, simply <a class="text-white" href="{{ get_musora_brand_base_url() }}/contact">contact us</a> within 90 days to request a full refund.</p>
             </div>
         </div>
     </section>
@@ -354,15 +305,14 @@
     <section class="final text-center">
         <div class="row">
             {{--<img class="logo edge" src="https://guitareo.s3.amazonaws.com/sales/promos/cyber-monday/logo.png"><br>--}}
-            <img class="logo" src="https://guitareo.s3.amazonaws.com/500-songs/logo.svg">
+            <img class="h-12 md:h-16 lg:h-20 mb-2 md:mb-4" src="https://guitareo.s3.amazonaws.com/500-songs/logo.svg">
             <h2>Build The Knowledge & Skills To Play<br>
                 <strong>500 Songs On The Guitar</strong> In 5 Days</h2>
 
-            <a href="@yield('order-link')" class="join" @yield('product-json')>Get Started &raquo;</a>
+            <a href="@yield('order-link')" class="join tracking-normal my-2 md:my-4" @yield('product-json')>Get Started &raquo;</a>
             <p class="breakdown">
-                {{--<strong class="yellow" style="text-transform:uppercase;">ONLY <span class="tzcd-full">A LIMITED TIME</span> LEFT!</strong><br>--}}
-                @if(App\Prices::$songs500Full > $productPrice)
-                    <s>NORMALLY ${{ App\Prices::$songs500Full }}.</s> &nbsp;<strong class="text-guitareo"><u>ONLY ${{ $productPrice }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * ($productPrice / App\Prices::$songs500Full))) }}%)
+                @if(GuitareoPrices::$songs500Full > $productPrice)
+                    <s>NORMALLY ${{ GuitareoPrices::$songs500Full }}.</s> &nbsp;<strong class="text-guitareo"><u>ONLY ${{ $productPrice }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * ($productPrice / GuitareoPrices::$songs500Full))) }}%)
                 @else
                     <strong class="text-guitareo"><u>ONLY ${{ $productPrice }}</u></strong>
                 @endif

@@ -108,6 +108,8 @@ return [
         'song-part',
         'student-focus',
         'student-review',
+        'song-tutorial',
+        'song-tutorial-children',
     ],
     'validation' => [
         'drumeo' => [
@@ -151,8 +153,8 @@ return [
 
     'search_index_values' => [
         'high_value' => [
-            'content_attributes' => ['slug','title'],
-            'field_keys' => ['instructor:name'],
+            'content_attributes' => ['slug','title',],
+            'field_keys' => ['instructor:name', 'artist', 'album'],
             'data_keys' => [],
         ],
         'medium_value' => [
@@ -189,7 +191,9 @@ return [
             'learning-path-course',
             'learning-path-level',
             'unit-part',
-            'unit'
+            'unit',
+            'song-tutorial',
+            'song-tutorial-children',
         ],
         'completed' => [
             'course',
@@ -213,7 +217,9 @@ return [
             'learning-path-course',
             'learning-path-level',
             'unit-part',
-            'unit'
+            'unit',
+            'song-tutorial',
+            'song-tutorial-children',
         ],
     ],
 
@@ -800,6 +806,17 @@ return [
                 'amountOfFutureLessonsToShow' => 3,
                 'showFutureLessonAtTopOrBottom' => 'bottom',
             ],
+            'song-tutorials' => [
+                "name" => "Song Tutorials",
+                'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/pianote/songs.jpg',
+                "allowableFilters" => ['difficulty', 'style', 'artist', 'progress'],
+                'sortBy' => '-published_on',
+                'shortname' => 'song tutorials',
+                "icon" => "icon-songs",
+                "description" => "",
+                'amountOfFutureLessonsToShow' => 3,
+                'showFutureLessonAtTopOrBottom' => 'bottom',
+            ],
         ],
         'guitareo' => [
             'all' => [
@@ -1009,6 +1026,8 @@ return [
         'chord-and-scale',
         'pack-bundle-lesson',
         'podcasts',
+        'song-tutorial',
+        'song-tutorial-children',
     ],
     'liveContentTypes' => [
         'student-focus',
@@ -1098,6 +1117,8 @@ return [
         'pack-bundle-lesson',
         'podcasts',
         'learning-path-lesson',
+        'song-tutorial',
+        'song-tutorial-children'
     ],
     'dashboardInProgressContentTypes' => [
         'course',
@@ -1138,6 +1159,7 @@ return [
         'unit-part',
         'song-part',
         'play-along-part',
+        'song-tutorial-children',
     ],
     'appUserListContentTypes' => [
         'course',
@@ -1154,6 +1176,7 @@ return [
         'pack',
         'semester-pack-lesson',
         'semester-pack',
+        'quick-tips',
     ],
     'hiddenContentTypes' => [
         'ha-oemurd-pmac',
@@ -1209,6 +1232,8 @@ return [
         'behind-the-scenes', /* 2019*/
         'exploring-beats', /* 2018*/
         'sonor-drums', /* 2018*/
+        'song-tutorial',
+        'song-tutorial-children'
     ],
 
     'contentTypesWithChildren' => [
@@ -1224,17 +1249,13 @@ return [
     'contentColumnNamesForFields' => [
         'difficulty',
         'home_staff_pick_rating',
-        'legacy_id',
-        'legacy_wordpress_post_id',
         'title',
         'xp',
         'album',
         'artist',
-        'cd-tracks',
         'chord_or_scale',
         'difficulty_range',
         'episode_number',
-        'exercise-book-pages',
         'fast_bpm',
         'includes_song',
         'live_event_start_time',
@@ -1256,7 +1277,6 @@ return [
         'show_in_new_feed',
         'bands',
         'endorsements',
-        'focus',
         'forum_thread_id',
         'is_active',
         'is_coach',
@@ -1268,8 +1288,6 @@ return [
         'low_soundslice_slug',
         'pdf',
         'pdf_in_g',
-        'sbt_bpm',
-        'sbt_exercise_number',
         'song_name',
         'soundslice_xml_file_url',
         'original_video',
@@ -1410,7 +1428,9 @@ return [
             'pack-bundle' => 'lessons',
             'semester-pack' => 'lessons',
             'song' => 'lessons',
-            'unit' => 'lessons'
+            'unit' => 'lessons',
+            'song-tutorial' => 'lessons',
+            'song-tutorial-children' => 'lessons',
         ],
         'guitareo' => [
             'learning-path' => 'levels',

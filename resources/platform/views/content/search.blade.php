@@ -20,7 +20,7 @@
         <div class="tw-flex tw-flex-col ">
 
             <div class="tw-flex tw-flex-col tw-mb-3 tw-mr-auto">
-                <h1 class="tw-text-[#00101D] dark:tw-text-white heading tw-capitalize tw-mr-2 tw-flex tw-items-center"> 
+                <h1 class="tw-text-[#00101D] dark:tw-text-white heading tw-capitalize tw-mr-2 tw-flex tw-items-center">
                     <a href="javascript:history.back()" class="tw-no-underline tw-inline-flex tw-items-center tw-text-[#00101D] dark:tw-text-white">
                         <i class="fas fa-arrow-circle-left tw-text-2xl tw-mr-2"></i>
                     </a>

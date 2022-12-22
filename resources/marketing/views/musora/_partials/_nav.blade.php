@@ -80,7 +80,7 @@
         background:#fff;
         color:#0b76db;
     }
-    
+
     .join.drumeo,
 	.join.blue {
         background:#0b76db
@@ -509,7 +509,7 @@
         @include('public.partials._nav-link', [
             "linkName" => "Contact",
             "linkIcon" => "fas fa-phone",
-            "linkUrl" => get_legacy_brand_base_url("musora").'/contact'
+            "linkUrl" => get_musora_brand_base_url().'/contact'
         ])
         @include('public.partials._nav-link', [
             "linkName" => "Careers",

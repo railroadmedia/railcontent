@@ -45,20 +45,22 @@ class CreateSongsDecember2022 extends Command
         ContentRepository $contentRepository,
     )
     {
-//        $songFile = file(base_path('test-to-be-deleted.csv'));
-        $songFile = file(base_path('all-songs-december-2022.csv'));
-        $csv = array_map('str_getcsv', $songFile);
+        $this->info('Starting CreateSongsDecember2022...');
 
+        $csv = array_map(function($v){return str_getcsv($v, ";");}, file(base_path('december_19_songs_import_semi.csv')));
         unset($csv[0]);
 
-        $csv = array_slice($csv, 0, 250);
+        // to be updated in case the csv has more than 2000 songs
+        $csv = array_slice($csv, 0, 2000);
 
         foreach ($csv as $rowIndex => $row) {
-            $searchAttributes = $row[14] ? ['id' => $row[14]] : [
+            $brand = lcfirst($row[0]);
+
+            $searchAttributes = array_key_exists(15, $row) ? ['id' => $row[15]] : [
                 'slug' => ContentHelper::slugify($row[2]),
                 'type' => 'song',
                 'status' => 'published',
-                'brand' => lcfirst($row[0]),
+                'brand' => $brand,
                 'album' => $row[3],
             ];
 
@@ -66,6 +68,26 @@ class CreateSongsDecember2022 extends Command
 
             if ($existingContent) {
                 $this->info("Song <" . $existingContent->slug . "> with id " . $existingContent->id . " exists and will be updated.");
+            }
+
+            if (!empty($existingContent) && !empty($existingContent->id) && $brand == 'drumeo') {
+
+                // for drumeo, we only need to add update instrumentless flag to true, nothing else should be updated
+                $this->info('Setting instrumentless flag for existing drumeo content ' . $existingContent->id);
+
+                $this->musoraDB()->from('railcontent_content')
+                    ->where('id', $existingContent->id)
+                    ->update(['instrumentless' => boolval($row[13]),]);
+
+                event(new ContentCreated($existingContent->id));
+
+                continue;
+            }
+
+            if (!$existingContent && $brand == 'drumeo') {
+                $this->info('Failed to find existing drumeo song for row, skipping: ');
+                var_dump($searchAttributes);
+                continue;
             }
             $content = $this->updateOrInsertAndGetFirst('railcontent_content', $searchAttributes,
                 [
@@ -79,6 +101,7 @@ class CreateSongsDecember2022 extends Command
                     'created_on' => $existingContent ? $existingContent->created_on : Carbon::now()->toDateTimeString(),
                 ]
             );
+
             // fields
             $this->updateOrInsertAndGetFirst(
                 'railcontent_content_fields',
@@ -156,78 +179,113 @@ class CreateSongsDecember2022 extends Command
                 );
             }
 
-            // todo: uncomment once we have proper pdfs and jpgs links
+            // todo: uncomment once we have proper pdfs links
             // pdf download
-            //            $pdfUrlPrefix = '';
-            //            $pdfFileName = $row[8];
+            if ($brand == 'guitareo') {
+                $pdfUrlPrefix = 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/pdfs/guitareo/';
+                $pdfResourceName1 = 'PDF Tabs';
+                $pdfResourceName2 = 'PDF Tabs + Notation';
+            } elseif ($brand == 'pianote') {
+                $pdfUrlPrefix = 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/pdfs/pianote/';
+                $pdfResourceName1 = 'PDF Sheet Music';
+                $pdfResourceName2 = 'PDF Sheet Music';
+            }
+
+            $pdfFileName = $row[8];
+            $guitareoPdfFileName = ((array_key_exists(14, $row) && $brand == 'guitareo')) ? $row[14] : null;
+
+            $this->info('-------------------------------');
+            $this->info($row[0] . $row[1] . $row[2]);
+            $this->info($pdfFileName);
+
+            if (!empty($pdfFileName) && !empty($pdfUrlPrefix) && !empty($pdfResourceName1)) {
+                // here it overrides resource_name and resource_url values, if it already finds something on this position and key name
+                $this->updateOrInsertAndGetFirst(
+                    'railcontent_content_data',
+                    [
+                        'content_id' => $content->id,
+                        'key' => 'resource_url',
+                        'position' => 1,
+                    ],
+                    [
+                        'value' => $pdfUrlPrefix . $pdfFileName,
+                    ]
+                );
+                $this->updateOrInsertAndGetFirst(
+                    'railcontent_content_data',
+                    [
+                        'content_id' => $content->id,
+                        'key' => 'resource_name',
+                        'position' => 1,
+                    ],
+                    [
+                        'value' => $pdfResourceName1,
+                    ]
+                );
+            }
+
+            // guitareo only has a second PDF
+            if (!empty($guitareoPdfFileName)  && !empty($pdfUrlPrefix) && !empty($pdfResourceName2)) {
+                // here it overrides resource_name and resource_url values, if it already finds something on this position and key name
+                $this->updateOrInsertAndGetFirst(
+                    'railcontent_content_data',
+                    [
+                        'content_id' => $content->id,
+                        'key' => 'resource_url',
+                        'position' => 2,
+                    ],
+                    [
+                        'value' => $pdfUrlPrefix . $guitareoPdfFileName,
+                    ]
+                );
+                $this->updateOrInsertAndGetFirst(
+                    'railcontent_content_data',
+                    [
+                        'content_id' => $content->id,
+                        'key' => 'resource_name',
+                        'position' => 2,
+                    ],
+                    [
+                        'value' => $pdfResourceName2,
+                    ]
+                );
+            }
+
+            // album art thumbnail
+            $albumArtUrlPrefix = 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/';
+            $albumArtFileName = $row[7];
 
             //            $this->info('-------------------------------');
             //            $this->info($row[0] . $row[1] . $row[2]);
-            //            $this->info($pdfFileName);
+            //            $this->info($albumArtFileName);
 
-            //            if (!empty($pdfFileName)) {
-            //                $this->updateOrInsertAndGetFirst(
-            //                    'railcontent_content_data',
-            //                    [
-            //                        'content_id' => $content->id,
-            //                        'key' => 'resource_url',
-            //                        'position' => 1,
-            //                    ],
-            //                    [
-            //                        'value' => $pdfUrlPrefix . $pdfFileName,
-            //                    ]
-            //                );
-            //                $this->updateOrInsertAndGetFirst(
-            //                    'railcontent_content_data',
-            //                    [
-            //                        'content_id' => $content->id,
-            //                        'key' => 'resource_name',
-            //                        'position' => 1,
-            //                    ],
-            //                    [
-            //                        'value' => 'PDF Sheet Music',
-            //                    ]
-            //                );
-            //            } else {
-            //                $this->info('PDF not found for: ');
-            //                var_dump($row);
-            //            }
-
-            //            // album art thumbnail
-            //            $albumArtUrlPrefix = '';
-            //            $albumArtFileName = $row[7];
-            //
-            ////            $this->info('-------------------------------');
-            ////            $this->info($row[0] . $row[1] . $row[2]);
-            ////            $this->info($albumArtFileName);
-            //
-            //            if (!empty($albumArtFileName)) {
-            //                $this->updateOrInsertAndGetFirst(
-            //                    'railcontent_content_data',
-            //                    [
-            //                        'content_id' => $content->id,
-            //                        'key' => 'original_thumbnail_url',
-            //                        'position' => 1,
-            //                    ],
-            //                    [
-            //                        'value' => $albumArtUrlPrefix . $albumArtFileName,
-            //                    ]
-            //                );
-            //                $this->updateOrInsertAndGetFirst(
-            //                    'railcontent_content_data',
-            //                    [
-            //                        'content_id' => $content->id,
-            //                        'key' => 'thumbnail_url',
-            //                        'position' => 1,
-            //                    ],
-            //                    [
-            //                        'value' => $albumArtUrlPrefix . $albumArtFileName,
-            //                    ]
-            //                );
-            //            } else {
-            //                $this->info('Album art not found for: ');
-            //                var_dump($row);
-            //            }
+            if (!empty($albumArtFileName)) {
+                $this->updateOrInsertAndGetFirst(
+                    'railcontent_content_data',
+                    [
+                        'content_id' => $content->id,
+                        'key' => 'original_thumbnail_url',
+                        'position' => 1,
+                    ],
+                    [
+                        'value' => $albumArtUrlPrefix . $albumArtFileName,
+                    ]
+                );
+                $this->updateOrInsertAndGetFirst(
+                    'railcontent_content_data',
+                    [
+                        'content_id' => $content->id,
+                        'key' => 'thumbnail_url',
+                        'position' => 1,
+                    ],
+                    [
+                        'value' => $albumArtUrlPrefix . $albumArtFileName,
+                    ]
+                );
+            } else {
+                $this->info('Album art not found for: ');
+                var_dump($row);
+            }
 
             // assignment
             $assignmentChildren = $contentRepository->getByParentIdWhereTypeIn($content->id, ['assignment']);
@@ -236,7 +294,7 @@ class CreateSongsDecember2022 extends Command
                 'type' => 'assignment',
                 'sort' => 0,
                 'status' => 'published',
-                'brand' => lcfirst($row[0]),
+                'brand' => $brand,
             ];
 
             $existingAssignment = (count($assignmentChildren) == 1) ? $assignmentChildren[0] :
@@ -250,7 +308,7 @@ class CreateSongsDecember2022 extends Command
                     'type' => 'assignment',
                     'sort' => 0,
                     'status' => 'published',
-                    'brand' => lcfirst($row[0]),
+                    'brand' => $brand,
                 ],
                 [
                     'published_on' => ($existingContent && $existingAssignment) ? $existingContent->published_on : Carbon::now()->toDateTimeString(),
@@ -291,6 +349,7 @@ class CreateSongsDecember2022 extends Command
                     'child_id' => $assignment->id,
                     'child_position' => 1,
                 ]);
+
             $this->updateOrInsertAndGetFirst(
                 'railcontent_content_hierarchy',
                 [

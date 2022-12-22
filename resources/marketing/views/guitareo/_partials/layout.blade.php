@@ -21,11 +21,11 @@
         "links" => [
             "Member Login" => [
                 "iconClass" => "fas fa-sign-in",
-                "url" => "/members",
+                "url" => get_musora_brand_base_url() . '/login',
             ],
             "Contact" => [
                 "iconClass" => "fas fa-phone",
-                "url" => get_legacy_brand_base_url("musora").'/contact',
+                "url" => get_musora_brand_base_url().'/contact',
             ],
             "Guitareo" => [
                 "iconClass" => "icon-courses",
@@ -86,7 +86,7 @@
 @stop
 
 <!-- Global Wrapper -->
-@section('global-layout-body') 
+@section('global-layout-body')
     <!-- Brand Specific Content -->
     @yield('layout-body')
 @stop
@@ -118,7 +118,7 @@
                     ],
                     [
                         "name" => "Member Login",
-                        "url" => "/",
+                        "url" => get_musora_brand_base_url() . '/login',
                     ]
                 ]
             ],
@@ -152,7 +152,7 @@
                 "links" => [
                     [
                         "name" => "Musora",
-                        "url" => get_legacy_brand_base_url("musora"),
+                        "url" => get_musora_brand_base_url(),
                     ],
                     [
                         "name" => "Drumeo",

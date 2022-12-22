@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Bus;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 abstract class Command extends CommandBase
@@ -16,6 +17,16 @@ abstract class Command extends CommandBase
     {
         Log::info($string); //also write info statements to log
         $this->line($string, 'info', $verbosity);
+    }
+
+    public function infoSQL(string $sql)
+    {
+        $results = DB::select(DB::raw($sql));
+        $headers = array_keys(get_object_vars($results[0]));
+        $rows = collect($results)->map(function ($row) {
+            return get_object_vars($row);
+        });
+        $this->table($headers, $rows);
     }
 
     public function withProgressBarChunked(Builder $query, callable $function, $chunks = 1000, $timeout = 600): bool
@@ -71,13 +82,15 @@ abstract class Command extends CommandBase
 
     /**
      * Function for chunking queries into a chain of jobs to avoid running into Lambda 15 minute execution limit
+     *
+     * Reverse process helps for issues when items are removed from the query after processing
      */
-    public function runChainQuery(callable $getJob, $chunks = 1000): bool
+    public function runChainQuery(callable $getJob, $chunks = 1000, $reverseProcessJobs = false): bool
     {
-        return $this->runJobsQuery($getJob, true, $chunks);
+        return $this->runJobsQuery($getJob, true, $chunks, $reverseProcessJobs);
     }
 
-    private function runJobsQuery(callable $getJob, bool $isChain, $chunks = 1000,): bool
+    private function runJobsQuery(callable $getJob, bool $isChain, $chunks = 1000, $reverseProcessJobs = false): bool
     {
         Artisan::call('queue:prune-batches');
         $timeStart = microtime(true);
@@ -100,12 +113,19 @@ abstract class Command extends CommandBase
         $nJobs = count($jobs);
         if ($nJobs == 0) {
             $this->info("No jobs to dispatch.");
-            $this->info("Finished $this->name");
+            $diff = microtime(true) - $timeStart;
+            $sec = intval($diff);
+            $this->info("Finished $this->name ($sec s)");
             return true;
         }
         $this->info("Dispatching $nJobs jobs.");
         $batch = null;
+        if ($reverseProcessJobs) {
+            $jobs = array_reverse($jobs);
+        }
+
         if ($isChain) {
+            $jobs[] = new FinishedCommandJob($this->name);
             Bus::chain($jobs)->dispatch();
         } else {
             $batch = Bus::batch($jobs)->name(class_basename($this))->dispatch();

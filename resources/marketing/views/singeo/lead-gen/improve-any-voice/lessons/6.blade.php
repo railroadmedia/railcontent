@@ -1,14 +1,12 @@
 @extends('singeo.lead-gen.improve-any-voice.lesson-page-layout')
 
-@section('title')
+@section('subtitle')
     The Full Vocal Routine
 @stop
 
-@section('video')
-    <iframe class="absolute w-full h-full" src="//player.vimeo.com/video/543823702" frameborder="0" allowfullscreen></iframe>
-@stop
+@section('video', '//player.vimeo.com/video/543823702')
 
-@section('lesson-number', 'Lesson 6 of 7')
+@section('current-lesson-number', 6)
 
 @section('previous')
     /improve-any-voice/lessons/5
@@ -23,13 +21,15 @@
 @section('next-thumb', 'https://i.vimeocdn.com/video/1125685312-50e2683c4aae37fd0bde953dcd962a8ec505a43e31c100ab92f3fb258424342c-d_800')
 
 @section('assets')
-    @include('singeo.lead-gen.improve-any-voice._assignment-resources', [
+    @parent
+
+    @include('singeo.lead-gen.partials._assignment-resources', [
         "title" => "Full Routine (Lower Octave)",
         "mp3URL" => "https://singeo.s3.amazonaws.com/lead-gen/4-exercises/full-routine-lower.mp3",
         "defaultOpen" => true,
         "vimeo" => "543823736",
     ])
-    @include('singeo.lead-gen.improve-any-voice._assignment-resources', [
+    @include('singeo.lead-gen.partials._assignment-resources', [
         "title" => "Full Routine (Higher Octave)",
         "mp3URL" => "https://singeo.s3.amazonaws.com/lead-gen/4-exercises/full-routine-higher.mp3",
         "defaultOpen" => true,
