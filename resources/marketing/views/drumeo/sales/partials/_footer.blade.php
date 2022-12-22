@@ -7,27 +7,27 @@
         </div>
     </div>
 </div>
-<footer id="footer" class="bottom-footer clearfix relative">
+<footer id="footer" class="bottom-footer clearfix relative sales-footer">
     @if(empty($minimal))
-        <div class="row">
-            <div class="footer-link-wrap footer-sign-up">
-                <h1>Stay Connected</h1>
-                <p class="show-for-desktop">Join over 200,000 drummers who receive free weekly drum lessons.</p>
-                <p class="hide-for-desktop">Receive free weekly lessons.</p>
-                <form id="DrumeoEngagementTriggerBlogSignupWebForm" accept-charset="UTF-8" action="/laravel/public/customer-io/submit-email-form"
-                      method="POST" class="ajax-form clearfix infusion-form facebook-track-lead" onsubmit="emailSignUpConversionTrackerForImpactProvider()">
-                    <input type="hidden" name="form_name" value="Blog Signup">
-                    <div class="columns medium-7">
-                        <input id="sign-up-email" class="infusion-field-input-container" name="email" type="email" placeholder="Email Address..." required="">
-                    </div>
-                    <div class="infusion-submit columns medium-5">
-                        <button class="submit infusion-recaptcha" type="submit">
-                            <span class="pre-add"> Sign Up  <i class="fas fa-paper-plane"></i></span>
-                            <span class="pending hide hidden">Sending <i class="fas fa-spinner-third fa-spin"></i></span>
-                            <span class="success hide hidden">Sent <i class="fas fa-thumbs-up"></i></span>
-                            <span class="fail hide hidden">Try Again <i class="fas fa-exclamation-triangle"></i></span>
+    <div class="row">
+        <div class="footer-link-wrap footer-sign-up">
+            <h1>Stay Connected</h1>
+            <p class="show-for-desktop">Join over 200,000 drummers who receive free weekly drum lessons.</p>
+            <p class="hide-for-desktop">Receive free weekly lessons.</p>
+            <form id="DrumeoEngagementTriggerBlogSignupWebForm" accept-charset="UTF-8" action="/laravel/public/customer-io/submit-email-form"
+                  method="POST" class="ajax-form clearfix infusion-form facebook-track-lead" onsubmit="emailSignUpConversionTrackerForImpactProvider()">
+                <input type="hidden" name="form_name" value="Blog Signup">
+                <div class="columns medium-7">
+                    <input id="sign-up-email" class="infusion-field-input-container" name="email" type="email" placeholder="Email Address..." required="">
+                </div>
+                <div class="infusion-submit columns medium-5">
+                    <button class="submit infusion-recaptcha" type="submit">
+                        <span class="pre-add"> Sign Up  <i class="fas fa-paper-plane"></i></span>
+                        <span class="pending hide hidden">Sending <i class="fas fa-spinner-third fa-spin"></i></span>
+                        <span class="success hide hidden">Sent <i class="fas fa-thumbs-up"></i></span>
+                        <span class="fail hide hidden">Try Again <i class="fas fa-exclamation-triangle"></i></span>
                         </button>
-                    </div>
+                </div>
                     <input name="inf_form_xid" type="hidden" value="DrumeoEngagementTriggerBlogSignupWebForm">
                     <input name="tag_names_to_add[]" type="hidden" value="Drumeo - Engagement - Trigger - Blog Signup - Web Form">
                     <input name="list_ids_to_subscribe_to[]" type="hidden" value="31">

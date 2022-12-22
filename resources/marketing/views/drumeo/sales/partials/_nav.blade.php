@@ -1,6 +1,6 @@
 <nav id="nav" class="top-bar row expanded">
     <div class="logo">
-        <a href="/">
+        <a href="{{ get_legacy_brand_base_url('drumeo') }}">
             <img src="https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="Drumeo">
         </a>
     </div>

@@ -1,6 +1,6 @@
 <div class="top-bar expanded">
     <div class="logo">
-        <a href="/">
+        <a href="{{ get_legacy_brand_base_url('guitareo') }}">
             <img src="https://guitareo.s3.amazonaws.com/sales/guitareo-logo-green.png" alt="Guitareo Logo">
         </a>
     </div>

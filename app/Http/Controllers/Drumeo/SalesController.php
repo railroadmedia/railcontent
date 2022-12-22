@@ -664,4 +664,14 @@ class SalesController extends BaseController
     {
         return view('drumeo.drumshop.jared-recommends');
     }
+
+    public function giftCard()
+    {
+        return view('drumeo.drumshop.pages.drumming-system', ['theme' => 'drumeo']);
+    }
+
+    public function drummingSystem()
+    {
+        return view('drumeo.drumshop.pages.drumming-system', ['theme' => 'drumeo']);
+    }
 }
