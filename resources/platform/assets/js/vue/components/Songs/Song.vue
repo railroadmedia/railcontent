@@ -257,7 +257,7 @@ const markSongAsComplete = () => {
                 <transition name="show-from-bottom">
                     <div v-if="openSoundslice === 'instrumentless'" id="practiceOverlay" class="bg-white">
                         <SoundSlice :loading="loading" :user-id="userId" :theme-color="themeColor"
-                            additional-params="&layout=3&show_chords=0&scroll_type=1&recording_idx=1"
+                            additional-params="&layout=3&show_chords=0&scroll_type=1&recording_idx=2"
                             :soundslice-slug="soundsliceObject.soundsliceSlug" @onLoad="handleOnLoad"
                             @onPlay="handlePlay" @onPause="handlePause">
                             <template v-slot:soundsliceControls>
@@ -271,7 +271,7 @@ const markSongAsComplete = () => {
                 <transition name="show-from-bottom">
                     <div v-if="openSoundslice === 'full'" id="practiceOverlay" class="bg-white">
                         <SoundSlice :loading="loading" :user-id="userId" :theme-color="themeColor"
-                            additional-params="&layout=3&show_chords=0&scroll_type=1&recording_idx=2"
+                            additional-params="&layout=3&show_chords=0&scroll_type=1&recording_idx=1"
                             :soundslice-slug="soundsliceObject.soundsliceSlug" @onLoad="handleOnLoad"
                             @onPlay="handlePlay" @onPause="handlePause">
                             <template v-slot:soundsliceControls>
