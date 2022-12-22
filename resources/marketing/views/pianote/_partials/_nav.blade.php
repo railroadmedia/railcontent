@@ -71,7 +71,7 @@
         ])
         @include('pianote.sales.partials._nav-link', [
             "linkName" => "Pianote",
-            "linkIcon" => "icon-courses",
+            "linkIcon" => "fas fa-graduation-cap",
             "linkUrl" => "/",
         ])
         @include('pianote.sales.partials._nav-link', [
@@ -81,7 +81,7 @@
         ])
         <div class="has-drop-down cursor-pointer">
             <div class="nav-link">
-                <i class="icon-live"></i>
+                <i class="fas fa-circle-play"></i>
                 Free Resources
 
                 <div class="drop-down-arrow ">

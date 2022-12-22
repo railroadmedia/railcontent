@@ -71,7 +71,7 @@
         ])
         @include('musora.product.partials._nav-link', [
             "linkName" => "Drumeo",
-            "linkIcon" => "icon-courses",
+            "linkIcon" => "fas fa-graduation-cap",
             "linkUrl" => "/",
         ])
         @include('musora.product.partials._nav-link', [
@@ -81,7 +81,7 @@
         ])
         <div class="has-drop-down" target="_parent" rel="">
             <div class="nav-link">
-                <i class="icon-live"></i>
+                <i class="fas fa-circle-play"></i>
                 Free Resources
                 <div class="drop-down-arrow ">
                     <span></span>

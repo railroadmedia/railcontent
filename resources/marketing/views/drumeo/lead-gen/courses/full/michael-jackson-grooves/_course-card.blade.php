@@ -11,7 +11,7 @@
     </div>
     <div class="flex flex-col mb-4">
         <h5 class="x-tiny text-gray-500 uppercase w-full" style="font-size:10px;">
-            <i class="icon-courses" style="margin-right:5px;"></i> course</h5>
+            <i class="fas fa-graduation-cap" style="margin-right:5px;"></i> course</h5>
         <h4 class="tiny w-full text-xs text-black mb-1 font-compressed font-bold capitalize" style="word-wrap: break-word;">{{ $title }}</h4>
     </div>
 </a>
