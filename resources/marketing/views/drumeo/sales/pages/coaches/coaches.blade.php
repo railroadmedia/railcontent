@@ -5,21 +5,21 @@
 @extends('drumeo.sales.pages.coaches-method-songs-layout')
 
 @section('page-meta')
+    <title>Drumeo | Study with the world’s best drummers.</title>
+    <meta property="og:title" content="Drumeo | Study with the world’s best drummers.">
+    <meta property="og:url" content="https://www.drumeo.com/coaches">
+    <meta name="description" content="Amplify your skills with 200+ artist courses + access exclusive live events with drumming legends. ">
+    <meta property="og:description" content="Amplify your skills with 200+ artist courses + access exclusive live events with drumming legends. ">
+    <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/sales/2023/method/share-image-coaches.jpg" style="display: none;">
 
 @endsection
-<title>Drumeo | Reach your drumming goals.</title>
-<meta property="og:title" content="Drumeo | Reach your drumming goals.">
-<meta property="og:url" content="https://www.drumeo.com/method">
-<meta name="description" content="Learn the drums faster with organized video lessons, legendary teachers, and better practice tools. 90-Day Guarantee.">
-<meta property="og:description" content="Learn the drums faster with organized video lessons, legendary teachers, and better practice tools. 90-Day Guarantee.">
-<meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/sales/2022/og-image.jpg" style="display: none;">
 
 
 @section('header-img', 'https://drumeo-assets.s3.amazonaws.com/sales/2023/coaches-thumb.jpg')
 
-@section('header', 'Play your favorite songs.')
+@section('header', 'Study with the world’s best drummers.')
 
-@section('desc', 'Get 3100+ note-for-note song breakdowns for every style, era, and skill with handy play-along tools.')
+@section('desc', 'Amplify your skills with 200+ artist courses + access exclusive live events with drumming legends. ')
 
 @section('page-body')
     <section class="py-12 md:py-20">

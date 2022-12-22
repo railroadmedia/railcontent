@@ -5,17 +5,18 @@
                 <div class=" inline-block relative w-full group" style="padding-bottom: 45%;perspective: 1000px;">
                     <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
                         <div class=" {{--border-2 border-promo--}} front absolute z-20 overflow-hidden rounded-3xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
-                            <div class="h-full w-full bg-top bg-cover lazyload" data-bg="https://cdn.musora.com/image/fetch/w_850,q_auto:best/https://drumeo-assets.s3.amazonaws.com/sales/2023/drumeo-annual-2w-card.png"></div>
+                            <div class="h-full w-full bg-top bg-cover lazyload" data-bg="https://cdn.musora.com/image/fetch/w_850,q_auto:best/{{ $topImage }}"></div>
                         </div>
                     </div>
                 </div>
             </div>
             <br>
             <img class="hidden sm:inline-block h-7 lg:h-8 mt-5" alt="promo logo" src="{{ $promoLogo }}">
+            <img class="inline-block sm:hidden h-12 mt-4" alt="mobile promo logo" src="{{ $promoLogoM }}">
             <h4 class="leading-tight my-2 uppercase">{!! $header !!}</h4>
             <a class="join blue my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="{{ $buttonLink }}" {{--data-open="orderModal"--}}>GET Started &raquo;</a>
             <p class="leading-tight text-sm"><em>First year discount: <s class="opacity-40">${{ $fullPrice }}</s> ${{ $price }}.<br class="inline sm:hidden"> Cancel anytime. 90-day guarantee.</em></p>
-            <h3 class="leading-tight my-6 sm:my-8 uppercase">{!!  $subDescription  !!}</h3>
+            <h3 class="leading-tight mt-8 mb-4 sm:my-8 uppercase">{!!  $subDescription  !!}</h3>
         </div>
         <div style="font-size:0px">
             @foreach($bonuses as $bonus)

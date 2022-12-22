@@ -29,29 +29,23 @@
 
         </a>
 
-        <div class="flex flex-wrap items-start justify-center mx-auto mt-6">
-            <div class="w-1/3 px-1 md:px-2 mb-2 md:mb-4">
-                <div class="py-4 md:py-5 lg:py-6 rounded-xl w-full" style="color:#cd201f;">
-                    <a href="{{ $youtubeLink }}" target="_blank" aria-label="youtube"> <i class="fab fa-youtube text-3xl md:text-5xl"></i>
-                    </a>
-                    <h2 class="font-black leading-none my-2 text-black">{{ $youtube }}</h2>
-                    <p class="uppercase leading-none md:tracking-widest">Subs<span class="hidden sm:inline-block">cribers</span></p>
-                </div>
+        <div class="flex flex-wrap items-start justify-center mx-auto mt-2 sm:mt-6">
+            <div class="w-full sm:w-1/3 px-2 mb-4 py-1 sm:py-4 lg:py-5" style="color:#cd201f;">
+                <a href="{{ $youtubeLink }}" target="_blank" aria-label="youtube"> <i class="fab fa-youtube text-4xl sm:text-5xl"></i>
+                </a>
+                <h2 class="font-black leading-none my-1 sm:my-2 text-black">{{ $youtube }}</h2>
+                <p class="uppercase tracking-widest">Subscribers</p>
             </div>
-            <div class="w-1/3 px-1 md:px-2 mb-2 md:mb-4">
-                <div class="py-4 md:py-5 lg:py-6 rounded-xl w-full" style="color:#3b5998;">
-                    <a href="{{ $facebookLink }}" target="_blank" aria-label="facebook"> <i class="fab fa-facebook-f text-3xl md:text-5xl"></i> </a>
-                    <h2 class="font-black leading-none my-2 text-black">{{ $facebook }}</h2>
-                    <p class="uppercase leading-none md:tracking-widest">Likes</p>
-                </div>
+            <div class="w-full sm:w-1/3 px-2 mb-4 py-1 sm:py-4 lg:py-5" style="color:#3b5998;">
+                <a href="{{ $facebookLink }}" target="_blank" aria-label="facebook"> <i class="fab fa-facebook-f text-4xl sm:text-5xl"></i> </a>
+                <h2 class="font-black leading-none my-1 sm:my-2 text-black">{{ $facebook }}</h2>
+                <p class="uppercase tracking-widest">Likes</p>
             </div>
-            <div class="w-1/3 px-1 md:px-2 mb-2 md:mb-4">
-                <div class="instagram py-4 md:py-5 lg:py-6 rounded-xl w-full">
-                    <a href="{{ $instagramLink }}" target="_blank" aria-label="instagram"> <i class="fab fa-instagram text-3xl md:text-5xl" style="background: linear-gradient(30deg, #FFD521 17%, #F20008 50%, #B900B4 83%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"></i>
-                    </a>
-                    <h2 class="font-black leading-none my-2">{{ $instagram }}</h2>
-                    <p class="uppercase leading-none md:tracking-widest" style="color:#E1306C">Followers</p>
-                </div>
+            <div class="w-full sm:w-1/3 px-2 mb-4 py-1 sm:py-4 lg:py-5 instagram">
+                <a href="{{ $instagramLink }}" target="_blank" aria-label="instagram"> <i class="fab fa-instagram text-4xl sm:text-5xl" style="background: linear-gradient(30deg, #FFD521 17%, #F20008 50%, #B900B4 83%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"></i>
+                </a>
+                <h2 class="font-black leading-none my-1 sm:my-2">{{ $instagram }}</h2>
+                <p class="uppercase tracking-widest" style="color:#E1306C">Followers</p>
             </div>
         </div>
         <div
@@ -85,7 +79,7 @@
                 <div class="splide__track">
                     <ul class="splide__list">
                         @foreach ($testimonials as $testimonial)
-                            <li class="splide__slide flex flex-col items-center justify-center pb-8">
+                            <li class="splide__slide flex flex-col items-start pb-8">
                                 <div class="relative cursor-pointer mb-2" x-on:click="{{str_replace(' ', '', $testimonial['name'])}} = true;">
                                     <img
                                         class="rounded-xl transition-opacity opacity-0"

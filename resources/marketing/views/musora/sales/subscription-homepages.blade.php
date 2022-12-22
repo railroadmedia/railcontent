@@ -11,7 +11,7 @@
     @hasSection('share-image')
         @yield('share-image')
     @else
-        <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/sales/2022/og-image.jpg" style="display: none;">
+        <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/sales/2023/share-image-drumeo.jpg" style="display: none;">
     @endif
 
     @include('drumeo._partials._fonts')
@@ -26,20 +26,6 @@
     <style>
         .slick-slider.slick-light-buttons .slick-arrow {
             background: #fff;
-        }
-
-        .dropdown .description {
-            height: 0;
-            max-height: 0;
-            visibility: hidden;
-            opacity: 0;
-            overflow: hidden;
-        }
-        .dropdown.active .description {
-            visibility: visible;
-            opacity: 1;
-            height: auto;
-            max-height: 400px;
         }
 
         .tool:after, .tool:before {
@@ -203,6 +189,8 @@
         'header' => 'Online drum lessons for all skill levels.',
         'desc' => 'Learn the drums faster with step-by-step lessons, thousands of songs and unlimited personal support.',
         'thumb' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/header-thumb2.jpg',
+        'promoThumb' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/header-thumb-promo.png',
+        'promoThumbM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/header-thumb-promo-m.jpg',
         'pointOne' => 'Improve Your Skills',
         'pointTwo' => 'World-Class Teachers',
         'pointThree' => 'Play More Songs',
@@ -216,7 +204,7 @@
            'promoLogoM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs-m.png',
         'desc' => 'Loop, learn, and remove the drums from 5,000+ drumming anthems. ',
            'text' => 'It\'s hard to learn your favorite songs with famous drummers bashing along with you. It covers your mistakes and limits your creativity.<br><br>Enter the NEW Drumeo Songs.<br><br>You can now magically remove the drums from 5,000+ popular drumming anthems. And with note-for-note sheet music, tempo adjustment, and a looping feature you’ll have the ultimate tool for learning songs on the drums.<br><br>And to make your goals easier in 2023 – you’ll also get a FREE pair of Drumeo’s in-ear headphones when you join Drumeo. So you can enjoy unlimited drum lessons, note-for-note song breakdowns, AND protect your ears while playing your favorite songs.<br><br>Click below to grab the deal – or scroll down to try a demo of the NEW Drumeo Songs.',
-           'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/collage.png',
+           'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/collage-promo.png',
            'bgImage' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/order-bg.jpg',
            'belowButton' => 'SAVE 17% + GET 10 BONUSES WORTH $1342.94',
        ])
@@ -612,8 +600,9 @@
             ]
         @endphp
         @include('musora.sales.components.order-section-bonuses', [
-        'topImage' => '',
+        'topImage' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drumeo-annual-2w-card.png',
         'promoLogo' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs.svg',
+       'promoLogoM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs-m.png',
         'header' => 'Save 17% + get 10 bonuses<br class="inline sm:hidden"> worth $1342.94',
         'fullPrice' => '240',
         'price' => '200',
@@ -665,19 +654,8 @@
             ],
         ]
     @endphp
+    @include('musora.sales.components.faq-section')
 
-    <section class="py-12 md:py-20">
-        <div class="container mx-auto max-w-5xl px-6">
-            <h2 class="font-extrabold mb-10 text-center">Frequently Asked Questions</h2>
-            @foreach($faqs as $faq)
-                @include('_partials.components.question-dropdown', [
-                    'num' => '?',
-                    "title" => $faq['title'],
-                    "desc" => $faq['desc'],
-                ])
-            @endforeach
-        </div>
-    </section>
 
 
     @include('_partials.components.soundslice-modal',[
@@ -708,27 +686,6 @@
             $('.flip-div').click(function (e) {
                 $(this).toggleClass('flipped');
             });
-
-            $('.dropdown').on('click', function(){
-                $(this).toggleClass('active');
-                $(this).find('i').toggleClass('rotate-45');
-            });
-
-            // sticky topbar before orderSection
-            // var stickyBar = $('.promo-banner');
-            // $(window).scroll(function () {
-            //     var stickTrigger = $('.sticky-trigger').offset().top;
-            //     var unstickTrigger = $('.unstick-trigger').offset().top;
-            //     if ($(this).scrollTop() > (unstickTrigger - 115)) {
-            //         stickyBar.removeClass('fixed');
-            //     }
-            //     if ($(this).scrollTop() < stickTrigger - 115) {
-            //         stickyBar.removeClass('fixed');
-            //     }
-            //     if ($(this).scrollTop() < unstickTrigger - 115 && $(this).scrollTop() > stickTrigger - 115) {
-            //         stickyBar.addClass('fixed');
-            //     }
-            // });
         });
     </script>
 
