@@ -176,9 +176,8 @@
         'promoLogo' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs.svg',
            'promoLogoM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs-m.png',
         'desc' => 'Loop, learn, and remove the drums from 5,000+ drumming anthems. ',
-           'text' => 'It\'s hard to learn your favorite songs with famous drummers bashing along with you. It covers your mistakes and limits your creativity.<br><br>Enter the NEW Drumeo Songs.<br><br>You can now magically remove the drums from 5,000+ popular drumming anthems. And with note-for-note sheet music, tempo adjustment, and a looping feature you’ll have the ultimate tool for learning songs on the drums.<br><br>And to make your goals easier in 2023 – you’ll also get a FREE pair of Drumeo’s in-ear headphones when you join Drumeo. So you can enjoy unlimited drum lessons, note-for-note song breakdowns, AND protect your ears while playing your favorite songs.<br><br>Click below to grab the deal – or scroll down to try a demo of the NEW Drumeo Songs.',
+           'text' => 'The NEW Drumeo Songs is here.<br><br>You can now magically remove the drums from 5,000+ popular drumming anthems. And with note-for-note sheet music, tempo adjustment, and a looping feature you’ll have <strong>the ultimate tool for learning songs on the drums.</strong> <br><br>And to make your goals easier in 2023 – you’ll also get a FREE pair of Drumeo’s in-ear headphones when you join Drumeo. So you can enjoy unlimited drum lessons, note-for-note song breakdowns, AND protect your ears while playing your favorite songs.<br><br>Click below to grab the deal – or scroll down to try a demo of the NEW Drumeo Songs.',
            'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/collage-promo.png',
-           'bgImage' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/order-bg.jpg',
            'belowButton' => 'SAVE 17% + GET 10 BONUSES WORTH $1342.94',
        ])
     @else
@@ -201,12 +200,12 @@
             [
                 'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/practical-assignments.jpg',
                 'title' => 'Practical Assignments',
-                'desc' => 'You\'ll always have on-screen assignments and practice tools to increase retention.',
+                'desc' => 'Keep up your progress with clear assignments and handy practice tools for every level.',
             ],
             [
                 'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/guided-workouts.jpg',
                 'title' => 'Guided Workouts',
-                'desc' => 'Stay inspired with our guided workouts where we’ll practice-along with you in real time.',
+                'desc' => 'Stay inspired with guided workouts where you’ll play along with your teacher in real time.',
             ],
             [
                 'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/world-class-teachers.jpg',

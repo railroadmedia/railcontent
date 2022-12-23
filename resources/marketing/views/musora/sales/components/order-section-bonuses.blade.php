@@ -1,4 +1,5 @@
-<section class="py-14 sm:py-24 lg:py-32 relative overflow-hidden text-white text-center customize px-4 lg:px-6 bg-cover bg-center"  style="background-image:url(https://drumeo-assets.s3.amazonaws.com/sales/2023/order-bg.jpg);">
+<div style="background:linear-gradient(30deg, #0a3761, #0c1526);">
+<section class="py-14 sm:py-24 lg:py-32 relative overflow-hidden text-white text-center customize px-4 lg:px-6"  style="background:url(https://drumeo-assets.s3.amazonaws.com/sales/2023/order-bg-tile-2.png) center center/160px;">
     <div class="container mx-auto max-w-6xl relative z-50">
         <div class="w-full">
             <div class="bonus-wrap relative inline-block align-top mx-auto px-1 md:px-3 w-full max-w-lg">
@@ -89,3 +90,4 @@
         <a class="inline-block text-light-navy mt-2" href="{{ $altButtonLink }}"><p><u><em>Or start a monthly membership for <br class="inline-block md:hidden">${{ $altPrice }}/month. (no bonuses)</em></u></p></a>
     </div>
 </section>
+</div>

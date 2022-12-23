@@ -1,4 +1,5 @@
-<section class="text-center text-white px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background: #07233e url({{ $bgImage }}) center center/cover;">
+<div style="background:linear-gradient(30deg, #0a3761, #0c1526);">
+<section class="text-center text-white px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:url(https://drumeo-assets.s3.amazonaws.com/sales/2023/order-bg-tile-2.png) center center/160px;">
     <div class="container max-w-6xl mx-auto">
         <img class="hidden sm:inline-block h-9 lg:h-11" alt="promo logo" src="{{ $promoLogo }}">
         <img class="inline-block sm:hidden h-14" alt="mobile promo logo" src="{{ $promoLogoM }}">
@@ -19,6 +20,7 @@
         <p class="text-promo mt-3 mb-24 sm:mb-44 lg:mb-72">{!! $belowButton !!}</p>
     </div>
 </section>
+</div>
 
 
 
