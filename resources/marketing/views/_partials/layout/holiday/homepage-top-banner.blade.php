@@ -6,7 +6,7 @@
             ])
         </a>
         <p class="leading-tight mt-3 uppercase mb-4 text-white"><strong>{!! $text !!}</strong></p>
-        {{-- <div class="mt-6 mb-7 rounded-xl px-3 sm:px-6 py-1 inline-flex flex-wrap mx-auto justify-center items-center" style="background-color:#181515;">
+         <div class="mt-6 mb-7 rounded-xl px-3 sm:px-6 py-1 inline-flex flex-wrap mx-auto justify-center items-center" style="background-color:#181515;">
             <p class="leading-none m-0"><strong>DEALS END IN:</strong></p>
             <div class="h-12 mx-3 sm:mx-5 bg-promo" style="width:2px;"></div>
             <div class="tzcd-big">
@@ -27,7 +27,7 @@
                     <p class="leading-none uppercase font-extrabold text-xs text-promo">secs</p>
                 </div>
             </div>
-        </div> --}}
+        </div>
 
         {{-- This is for when a student is on the order form with an offer in their cart they are not eligible for.
              We redirect them back here and show them this error message. --}}

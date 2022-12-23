@@ -201,7 +201,7 @@
                 <img class="h-14 sm:h-16 lg:h-20" src="https://cdn.musora.com/image/fetch/w_450,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/christmas/holiday-drums.png"><br>
                 <h1 class="my-2"><strong>DRUM SHOP</strong></h1>
                 <h5 class="leading-tight">Save up to <span class="">81%</span> on lessons,<br class="inline md:hidden"> accessories, and merch.</h5>
-                {{-- <div class="rounded-xl px-6 py-2 inline-flex flex-wrap mx-auto mt-5 justify-center items-center" style="background-color:#181515;">
+                 <div class="rounded-xl px-6 py-2 inline-flex flex-wrap mx-auto mt-5 justify-center items-center" style="background-color:#181515;">
                     <p class="leading-none m-0"><strong>DEALS END IN:</strong></p>
                     <div class="h-12 mx-5 bg-promo" style="width:2px;"></div>
                     <div class="tzcd-big">
@@ -222,7 +222,7 @@
                             <p class="leading-none uppercase font-extrabold text-xs text-promo">secs</p>
                         </div>
                     </div>
-                </div> --}}
+                </div>
             </div>
         </div>
     </header>

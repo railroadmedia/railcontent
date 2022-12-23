@@ -10,7 +10,7 @@
                 {!! $text !!}
             </p>
 
-            {{-- <div class="tzcd-smaller text-white align-middle inline-block">
+             <div class="tzcd-smaller text-white align-middle inline-block">
                 <div class="inline-block">
                     <h2 class="font-extrabold leading-none text-lg">00</h2>
                     <p class="leading-none uppercase font-extrabold text-xs text-promo">days</p>
@@ -27,7 +27,7 @@
                     <h2 class="font-extrabold leading-none text-lg">00</h2>
                     <p class="leading-none uppercase font-extrabold text-xs text-promo">secs</p>
                 </div>
-            </div> --}}
+            </div>
         </div>
     </div>
 </a>

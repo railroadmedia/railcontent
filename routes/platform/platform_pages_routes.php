@@ -16,7 +16,6 @@ use App\Http\Controllers\Platform\ProfileSettingsPagesController;
 use App\Http\Controllers\Platform\ReferralPagesController;
 use App\Http\Controllers\Platform\SupportController;
 use App\Http\Controllers\Platform\UserListPagesController;
-use App\Http\Controllers\Platform\BooksController;
 use App\Modules\Brand\Enums\Brand;
 use App\Modules\Content\Controllers\MusoraCenterContentController;
 use Illuminate\Support\Facades\Route;
@@ -489,7 +488,7 @@ Route::domain('{musoraDomain}')
                    [ProfileSettingsPagesController::class, 'cancelReasonForm'])
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.cancel');
-        
+
         // GET win-back
         Route::post('/{brand}/profile/settings/account/win-back', [ProfileSettingsPagesController::class, 'winBack'])
             ->whereIn('brand', all_brands())
@@ -631,6 +630,18 @@ Route::get(
 )
     ->name('platform.apple-association-file');
 
+
+
+    Route::domain('{musoraDomain}')
+    ->middleware(['web_authenticated'])
+    ->group(function () {
+        /*
+         * Home Page
+         */
+        Route::get('/{brand}/comments', [ContentPagesController::class, 'comments'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.members-area.comments');
+    });
 
 Route::domain('{musoraDomain}')
     ->middleware(['web_public'])
