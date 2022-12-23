@@ -21,8 +21,5 @@
                 {{ $content }}
             </ul>
         </div>
-        <div class="absolute w-full top-1/2">
-            <div class="border-2 border-white w-2/3 mx-auto"></div>
-        </div>
     </div>
 </div>
