@@ -368,7 +368,7 @@
                 <p class="validation-error">{{ $error }}</p>
             @endforeach
 
-            <form id="commentform" name="pianote" method="post" action="{{ url()->route('access-codes.form-claim') }}">
+            <form id="commentform" name="pianote" method="post" action="{{ get_musora_brand_base_url() }}/ecommerce/access-codes/redeem">
                 {{ csrf_field() }}
                 <input type="hidden" name="credentials_type" value="new">
                 <input type="hidden" name="redirect" value="/members">
@@ -433,7 +433,7 @@
                 <p class="validation-error">{{ $error }}</p>
             @endforeach
 
-            <form id="commentform" name="pianote" method="post" action="{{ url()->route('access-codes.form-claim') }}">
+            <form id="commentform" name="pianote" method="post" action="{{ get_musora_brand_base_url() }}/ecommerce/access-codes/redeem">
                 <input type="hidden" name="credentials_type" value="existing">
                 <input type="hidden" name="redirect" value="/members">
                 {{ csrf_field() }}
