@@ -16,7 +16,6 @@ use App\Http\Controllers\Platform\ProfileSettingsPagesController;
 use App\Http\Controllers\Platform\ReferralPagesController;
 use App\Http\Controllers\Platform\SupportController;
 use App\Http\Controllers\Platform\UserListPagesController;
-use App\Http\Controllers\Platform\BooksController;
 use App\Modules\Brand\Enums\Brand;
 use App\Modules\Content\Controllers\MusoraCenterContentController;
 use Illuminate\Support\Facades\Route;
@@ -489,7 +488,7 @@ Route::domain('{musoraDomain}')
                    [ProfileSettingsPagesController::class, 'cancelReasonForm'])
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.cancel');
-        
+
         // GET win-back
         Route::post('/{brand}/profile/settings/account/win-back', [ProfileSettingsPagesController::class, 'winBack'])
             ->whereIn('brand', all_brands())
@@ -643,7 +642,7 @@ Route::get(
             ->whereIn('brand', all_brands())
             ->name('platform.members-area.comments');
     });
-    
+
 Route::domain('{musoraDomain}')
     ->middleware(['web_public'])
     ->group(function () {
@@ -712,4 +711,14 @@ Route::domain('{musoraDomain}')
         )
             ->whereIn('brand', ['drumeo'])
             ->name('books.drummers-toolbox.chapter');
+    });
+
+// legacy brand domain redirects
+Route::domain('{drumeoDomain}')
+    ->middleware(['web_public'])
+    ->group(function () {
+        Route::any(
+            'members/{segment1?}/{segment2?}/{segment3?}/{segment4?}/{segment5?}/{segment6?}/{segment7?}/{segment8?}',
+            \App\Http\Controllers\Misc\RedirectLegacyMembersURLsToUPController::class . '@redirectDrumeo'
+        );
     });
