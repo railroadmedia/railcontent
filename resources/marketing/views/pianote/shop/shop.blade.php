@@ -476,6 +476,5 @@
 
     @yield('scripts')
 
-    @include('pianote.shop._partials._promo-countdown')
 @stop
 
