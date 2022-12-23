@@ -5,7 +5,7 @@ return [
     'brand' => 'drumeo', // this is what will go in the brand column for requests to this project
 
     // database
-    'database_connection_name' => 'musora_laravel_mysql',
+    'database_connection_name' => env('DB_DEFAULT_CONNECTION_NAME', 'musora_laravel_mysql'),
     'data_mode' => 'host', // 'host' or 'client', hosts do the db migrations, clients do not
     'charset' => 'utf8mb4',
     'collation' => 'utf8mb4_bin',
