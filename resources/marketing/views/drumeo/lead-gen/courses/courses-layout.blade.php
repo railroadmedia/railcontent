@@ -109,7 +109,7 @@
             </div>
             <a class="join blue start-trial">Start Free Trial &raquo;</a>
             <p class="disclaimer">Credit card required. You’ll get unlimited access FREE for 7 days before continuing with<br class="show-for-large">
-                a monthly membership for $29/month. Cancel anytime during or after your trial.</p>
+                a monthly membership for ${{ Prices::$drumeoEdgeFull }}/month. Cancel anytime during or after your trial.</p>
         </div>
 
         <iframe class="trial" name="cartIframe" onload="checkUrl();" src="/laravel/public/shopping-cart/api/query?products[DLM-Trial]=1,month,1&locked=true" frameborder="none"></iframe>

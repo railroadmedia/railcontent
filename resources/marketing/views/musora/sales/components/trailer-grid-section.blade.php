@@ -3,7 +3,7 @@
     <div class="container max-w-6xl mx-auto">
         <div class="aspect-16:9 cursor-hover rounded-xl autoplay-video overflow-hidden w-full relative -mt-36 sm:-mt-64 lg:-mt-96 mb-6 sm:mb-20" x-on:click="trailer = true;">
             <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
-            <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0 lazyload" data-src="{{ $vid }}" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
+            <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0" src="{{ $vid }}" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
         </div>
         <h2><strong>{!! $header !!}</strong></h2>
         <p class="mt-2 sm:mt-3 mb-8 sm:mb-10">{!! $desc !!}</p>
@@ -24,9 +24,15 @@
             @endforeach
         </div>
         @if(empty($promoVersion))
-            <a href="/method" class="mx-1 mb-2 sm:mb-0 join outline {{ $theme }}-blue smaller">EXPLORE THE METHOD <i class="fas fa-info-circle"></i> </a>
+            <a href="/method" class="mx-1 mb-2 sm:mb-0 w-full sm:w-auto join outline {{ $theme }}-blue smaller">EXPLORE THE METHOD <i class="fas fa-info-circle"></i> </a>
         @endif
-        <a href="/pricing" class="mx-1 join {{ $theme }}-blue smaller">
+        <a class="mx-1 w-full sm:w-auto join {{ $theme }}-blue smaller"
+            @if(!empty($promoVersion))
+                href="/choose-plan"
+            @else
+                href="/choose-your-trial"
+            @endif
+        >
             @if(!empty($promoVersion))
                 Get Started &raquo;
             @else

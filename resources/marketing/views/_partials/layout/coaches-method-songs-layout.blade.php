@@ -59,7 +59,7 @@
             alt="{{$page}} thumb"
             loading="lazy"
             onload="this.classList.remove('opacity-0')"
-            @if($page !== 'coaches') x-on:click="trailer = true" @endif
+            @if($page === 'songs') x-on:click="trailer = true" @endif
         />
         <div class="px-4 md:px-0">
             <div class="mb-6">
@@ -84,12 +84,12 @@
             <p class="md:mb-10">@yield('desc')</p>
         </div>
         <img
-            class="rounded-t-xl md:h-72 lg:h-80 hidden md:inline-block transition-opacity opacity-0 @if($page !== 'coaches') cursor-pointer @endif"
+            class="rounded-t-xl md:h-72 lg:h-80 hidden md:inline-block transition-opacity opacity-0 @if($page === 'songs') cursor-pointer @endif"
             src="https://cdn.musora.com/image/fetch/w_900,q_auto:best/@yield('header-img')"
             alt="{{$page}} thumb"
             loading="lazy"
             onload="this.classList.remove('opacity-0')"
-            @if($page !== 'coaches') x-on:click="trailer = true" @endif
+            @if($page === 'songs') x-on:click="trailer = true" @endif
         />
     </header>
 

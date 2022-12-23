@@ -4,11 +4,11 @@
         <h2><strong>{!! $header !!}</strong></h2>
         <p class="leading-tight mt-3">{!! $desc !!}</p>
 
-        <div class="flex flex-wrap sm:flex-nowrap items-center justify-center my-6 sm:my-12">
-            <video class="sm:order-1 h-64 lg:h-96 rounded-xl cursor-pointer lazyload" x-on:click="soundslice = true;" data-src="{{ $video }}" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
-            <div class="text-left mt-6 sm:mt-0 sm:pr-8">
+        <div class="flex flex-wrap lg:flex-nowrap items-center justify-center my-6 lg:my-8">
+            <video class="lg:order-1 h-64 sm:h-96 rounded-xl cursor-pointer" x-on:click="soundslice = true;" src="{{ $video }}" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
+            <div class="text-left w-full sm:w-auto mt-6 lg:mt-0 lg:pr-8">
                 @foreach ($songItems as $songItem)
-                    <div class="flex mb-4">
+                    <div class="flex mb-4 lg:my-6">
                         <div class="w-10 sm:w-14 flex-grow-0"><img alt="point icon" src="{{ $songItem['icon'] }}" class="h-6 sm:h-10"></div>
                         <div class="flex-grow pl-4">
                             <h5><strong>{!!$songItem['title']!!}</strong></h5>
@@ -19,9 +19,15 @@
             </div>
         </div>
         @if(empty($promoVersion))
-            <a href="/songs" class="mx-1 mb-2 sm:mb-0 join outline {{ $theme }}-blue smaller">SEE SONGS LIST <i class="fas fa-list-music"></i> </a>
+            <a href="/songs" class="mx-1 mb-2 sm:mb-0 w-full sm:w-auto join outline {{ $theme }}-blue smaller">SEE SONGS LIST <i class="fas fa-list-music"></i> </a>
         @endif
-        <a href="/pricing" class="mx-1 join {{ $theme }}-blue smaller">
+        <a class="mx-1 w-full sm:w-auto join {{ $theme }}-blue smaller"
+            @if(!empty($promoVersion))
+                href="/choose-plan"
+            @else
+                href="/choose-your-trial"
+            @endif
+        >
             @if(!empty($promoVersion))
                 Get Started &raquo;
             @else

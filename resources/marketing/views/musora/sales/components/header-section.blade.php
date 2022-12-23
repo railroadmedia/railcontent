@@ -2,11 +2,11 @@
     <div class="container max-w-6xl mx-auto">
         <div class="flex flex-wrap sm:flex-nowrap items-center">
             <div class="w-full sm:w-7/12 sm:pr-8 text-center lg:text-left">
-                <div x-on:click="trailer = true;" alt="header image" class="mb-5 overflow-hidden relative block sm:hidden bg-cover bg-top cursor-hover autoplay-video lazyload"
+                <div x-on:click="trailer = true;" alt="header image" class="mb-5 overflow-hidden relative block sm:hidden bg-cover bg-top cursor-hover autoplay-video"
                     @if(!empty($promoVersion))
-                        data-bg="https://cdn.musora.com/image/fetch/w_850,q_auto:best/{!! $promoThumbM !!}" style="padding-bottom: 60%;"
+                        style="background-image:url(https://cdn.musora.com/image/fetch/w_850,q_auto:best/{!! $promoThumbM !!});padding-bottom: 60%;"
                     @else
-                        data-bg="https://cdn.musora.com/image/fetch/w_850,q_auto:best/{!! $thumb !!}" style="padding-bottom: 75%;"
+                        style="background-image:url(https://cdn.musora.com/image/fetch/w_850,q_auto:best/{!! $thumb !!});padding-bottom: 75%;"
                     @endif
                 >
                     <div class="join white smaller absolute bottom-1 left-1"><i class="fas fa-play"></i> Watch Trailer</div>
@@ -25,7 +25,13 @@
                         <p class="w-1/3 leading-tight"><i class="fas fa-check text-{{ $theme }}"></i><br> {!! $pointThree !!}</p>
                     </div>
                     <div class="flex flex-wrap items-center mt-6 sm:mt-5 lg:mt-10 max-w-xs">
-                        <a href="/pricing" class="w-full join {{ $theme }}-blue smaller mb-2">
+                        <a class="w-full join {{ $theme }}-blue smaller mb-2"
+                            @if(!empty($promoVersion))
+                                href="/choose-plan"
+                            @else
+                                href="/choose-your-trial"
+                            @endif
+                        >
                             @if(!empty($promoVersion))
                                 Get Started &raquo;
                             @else
@@ -46,11 +52,9 @@
             <div class="w-full sm:w-5/12 hidden sm:block">
                     <div x-on:click="trailer = true;"
                         @if(!empty($promoVersion))
-                            class="relative bg-contain bg-center bg-no-repeat cursor-pointer autoplay-video lazyload" style="padding-bottom: 108%;"
-                            data-bg="https://cdn.musora.com/image/fetch/w_850,q_auto:best/{!! $promoThumb !!}"
+                            class="relative bg-contain bg-center bg-no-repeat cursor-pointer autoplay-video" style="background-image:url(https://cdn.musora.com/image/fetch/w_850,q_auto:best/{!! $promoThumb !!});padding-bottom: 108%;"
                         @else
-                            class="shadow-2xl rounded-xl aspect-1:1 overflow-hidden relative bg-cover bg-center cursor-pointer autoplay-video lazyload"
-                            data-bg="https://cdn.musora.com/image/fetch/w_850,q_auto:best/{!! $thumb !!}"
+                            class="shadow-2xl rounded-xl aspect-1:1 overflow-hidden relative bg-cover bg-center cursor-pointer autoplay-video" style="background-image:url(https://cdn.musora.com/image/fetch/w_850,q_auto:best/{!! $thumb !!});"
                         @endif
                         >
                         <div class="join white smaller absolute bottom-2 left-2"><i class="fas fa-play"></i> Watch Trailer</div>
@@ -61,7 +65,7 @@
             <div class="flex flex-wrap sm:flex-nowrap text-center border-2 rounded-xl border-{{ $theme }} mt-8 lg:mt-12 lg:mb-4 relative"
 {{--                style="background-color:#eaf1fa;"--}}
             >
-                    <div class="z-20 flex flex-wrap sm:flex-nowrap items-start justify-evenly w-full sm:w-auto sm:flex-grow py-4 sm:py-3 lg:py-4 lg:px-5 text-left sm:text-center">
+                    <div class="z-10 flex flex-wrap sm:flex-nowrap items-start justify-evenly w-full sm:w-auto sm:flex-grow py-4 sm:py-3 lg:py-4 lg:px-5 text-left sm:text-center">
                         @foreach ($features as $key => $feature)
                             <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3 my-2 sm:mb-0">
                                 <img
@@ -76,7 +80,7 @@
                             </div>
                         @endforeach
                     </div>
-                <div class="absolute inset-0 z-10 bg-{{ $theme }}" style="opacity: 0.07;"></div>
+                <div class="absolute inset-0 z-0 bg-{{ $theme }}" style="opacity: 0.07;"></div>
                 </div>
         </div>
 

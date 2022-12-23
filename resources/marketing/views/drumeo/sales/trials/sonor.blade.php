@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=5">
     <title>Sonor Drummers Free Trial</title>
-    <meta name="description" content="You’re eligible for a free 30-day membership to Drumeo (normally $29).">
+    <meta name="description" content="You’re eligible for a free 30-day membership to Drumeo (normally $30).">
 
     <!-- Social Media -->
     <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/promos/sonor-trial/header-background.jpg" style="display: none;">
     <meta property="og:title" content="Sonor Drummers Free Trial">
-    <meta property="og:description" content="You’re eligible for a free 30-day membership to Drumeo (normally $29).">
+    <meta property="og:description" content="You’re eligible for a free 30-day membership to Drumeo (normally $30).">
     <meta property="og:url" content="https://www.drumeo.com/sonor/">
 
     @include('_partials.layout.favicons.drumeo-favicons')
@@ -48,7 +48,7 @@
             <h1><strong>The Ultimate Online <br class="inline lg:hidden"> Drum Lessons Experience<sup>&trade;</sup></strong></h1>
             <i class="fas fa-play play-button autoplay-video" data-open="trailer"></i>
             <br>
-            <h4 class="px-2 md:px-3"><strong>Sonor Drummers:</strong> You’re eligible for a free 30-day membership to Drumeo (normally $29).<br class="hidden lg:inline">
+            <h4 class="px-2 md:px-3"><strong>Sonor Drummers:</strong> You’re eligible for a free 30-day membership to Drumeo (normally $30).<br class="hidden lg:inline">
                 Simply use the special access code you received on your flyer to activate your online drum lessons.</h4>
             <a data-open="redeem" class="join blue">REDEEM YOUR FREE LESSONS &raquo;</a>
         </div>
@@ -110,7 +110,7 @@
             <br>
             <h1><strong>The Ultimate Online <br class="inline lg:hidden"> Drum Lessons Experience<sup>&trade;</sup></strong></h1>
             <br>
-            <h4 class="px-2 md:px-3"><strong>Sonor Drummers:</strong> You’re eligible for a free 30-day membership to Drumeo (normally $29).<br class="hidden lg:inline">
+            <h4 class="px-2 md:px-3"><strong>Sonor Drummers:</strong> You’re eligible for a free 30-day membership to Drumeo (normally $30).<br class="hidden lg:inline">
                 Simply use the special access code you received on your flyer to activate your online drum lessons.</h4>
             <a data-open="redeem" class="join blue">REDEEM YOUR FREE LESSONS &raquo;</a>
         </div>

@@ -8,19 +8,13 @@
                     onload="this.classList.remove('opacity-0')"
                     src="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/{!! $image !!}">
             </div>
-            <div class="text-center sm:text-left w-full sm:w-1/2 pl-5">
+            <div class="text-center sm:text-left w-full sm:w-1/2 sm:pl-5">
                 <h3 class="leading-normal"><strong>{!! $header !!}</strong></h3>
-                <ul class="fa-ul text-left  my-4 sm:my-5 mx-auto">
+                <ul class="fa-ul text-left pl-6 my-4 sm:my-5 mx-auto inline-block">
                     {!! $list !!}
                 </ul>
                 <div class="w-72 lg:w-96 mx-auto sm:mx-0">
-                    <a class="join smaller bg-{{$theme}} w-full my-3" href="{!! $buttonLink !!}">
-                        @if(!empty($promoVersion))
-                            Get Started &raquo;
-                        @else
-                            START FOR FREE <i class="fas fa-arrow-right"></i>
-                        @endif
-                    </a>
+                    <a class=" w-full sm:w-auto join smaller bg-{{$theme}} w-full my-3" href="{!! $buttonLink !!}">START FOR FREE <i class="fas fa-arrow-right"></i></a>
                     <p class="text-center text-sm"><em>Pay nothing for 7 days, then ${!! $price !!}/month billed annually.</em></p>
                 </div>
             </div>

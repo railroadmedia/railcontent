@@ -45,8 +45,8 @@ class Prices
     public static $thirtyDayDrummer = 97;
 
     // Drumeo Edge
-    public static $drumeoEdgeFull = 29;
-    public static $drumeoEdgeRegular = 29;
+    public static $drumeoEdgeFull = 30;
+    public static $drumeoEdgeRegular = 30;
     public static $drumeoEdgeAnnualFull = 240;
     public static $drumeoEdgeAnnual = 240;
     public static $drumeoEdgeLifetime = 1200;

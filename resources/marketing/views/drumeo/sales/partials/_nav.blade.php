@@ -37,13 +37,15 @@
     @endif
     @if(!empty($edgeVersion))
         <div class="edge-wrap show-for-medium">
-            <a class=" @if(strpos(url()->full(), 'method')) active @endif @if(!empty($homepage)) anchor-slide @endif"  href="/method" >Method</a>
-            <a class=" @if(strpos(url()->full(), 'songs')) active @endif @if(!empty($homepage)) anchor-slide @endif"  href="/songs" >Songs</a>
-            <a class=" @if(strpos(url()->full(), 'coaches')) active @endif @if(!empty($homepage)) anchor-slide @endif"  href="/coaches" >Coaches</a>
+            <a class=" @if(strpos(url()->full(), 'method')) active @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/method" >Method</a>
+            <a class=" @if(strpos(url()->full(), 'songs')) active @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/songs" >Songs</a>
+            <a class=" @if(strpos(url()->full(), 'coaches')) active @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/coaches" >Coaches</a>
+            <a class=" @if(strpos(url()->full(), 'choose-plan')) active @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/choose-plan" >Pricing</a>
+            <a class=" @if(strpos(url()->full(), 'drumshop')) active @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/drumshop" >Shop</a>
+            <a class="" href="{{ get_legacy_brand_base_url('drumeo') }}/beat" >Blog</a>
         </div>
 
         <div class="button-wrap">
-            <a href="{{ get_legacy_brand_base_url('drumeo') }}/drumshop" class="join outline-button">Shop</a>
             <a @if(!empty($scrollToJoin))
                     href="#customize-anchor" class="join anchor-slide"
                 @elseif(!empty($joinUrl))

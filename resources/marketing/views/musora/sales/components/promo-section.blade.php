@@ -16,7 +16,7 @@
                 src="https://cdn.musora.com/image/fetch/w_690,q_auto:best/{{ $img }}">
         </div>
 
-        <a href="/pricing" class="join promo smaller w-full max-w-sm">GET STARTED &raquo;</a>
+        <a href="/choose-plan" class="w-full sm:w-auto join promo smaller w-full max-w-sm">GET STARTED &raquo;</a>
         <p class="text-promo mt-3 mb-24 sm:mb-44 lg:mb-72">{!! $belowButton !!}</p>
     </div>
 </section>

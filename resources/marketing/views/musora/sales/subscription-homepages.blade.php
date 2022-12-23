@@ -65,7 +65,9 @@
             opacity: 1;
             display: block;
         }
-
+        .splide__pagination {
+            bottom:0;
+        }
         .splide__pagination__page.is-active {
             background: #01050F;
             transform: none !important;
@@ -162,8 +164,8 @@
         'header' => 'Online drum lessons for all skill levels.',
         'desc' => 'Learn the drums faster with step-by-step lessons, thousands of songs and unlimited personal support.',
         'thumb' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/header-thumb2.jpg',
-        'promoThumb' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/header-thumb-promo.png',
-        'promoThumbM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/header-thumb-promo-m.jpg',
+        'promoThumb' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/header-thumb-promo2.png',
+        'promoThumbM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/header-thumb-promo-m2.jpg',
         'pointOne' => 'Improve Your Skills',
         'pointTwo' => 'World-Class Teachers',
         'pointThree' => 'Play More Songs',
@@ -386,27 +388,27 @@
             [
                 'icon' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/5000-songs-icon.svg',
                 'title' => '5000+ popular songs.',
-                'desc' => 'Get note-for-note song breakdowns for every style, era, and skill level.',
+                'desc' => 'Get note-for-note song breakdowns for <br class="hidden sm:inline"> every style, era, and skill level.',
             ],
             [
                 'icon' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/note-for-note-icon.svg',
                 'title' => 'Find the perfect tempo.',
-                'desc' => 'Slow down or speed up any section of a song to hear every note.',
+                'desc' => 'Slow down or speed up any section <br class="hidden sm:inline">of a song to hear every note.',
             ],
             [
                 'icon' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/tempo-icon.svg',
                 'title' => 'Loop the trouble spots.',
-                'desc' => 'No more pausing and rewinding that tricky fill. Loop it over and over again!  ',
+                'desc' => 'No more pausing and rewinding that<br class="hidden sm:inline"> tricky fill. Loop it over and over again!  ',
             ],
             [
                 'icon' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/no-drums-icon.svg',
                 'title' => 'Remove the drums <div class="rounded-full ml-2 inline-block bg-promo text-black text-xs px-2">NEW</div>',
-                'desc' => 'Magically remove the original drums to make each song uniquely yours. ',
+                'desc' => 'Magically remove the original drums<br class="hidden sm:inline"> to make each song uniquely yours. ',
             ],
             [
                 'icon' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/devices-icon.svg',
                 'title' => 'Take your songs anywhere.',
-                'desc' => 'Accessible on any device, or printable, so you can play any song, any time.  ',
+                'desc' => 'Accessible on any device, or printable,<br class="hidden sm:inline"> so you can play any song, any time.  ',
             ],
 
         ];
@@ -480,7 +482,7 @@
     @endphp
     <div id="testimonials" class="anchor"></div>
     @include('musora.sales.components.testimonials-section', [
-        'header' => 'Trusted by drummers<br class="inline-block sm:hidden">  everywhere',
+        'header' => 'Trusted by drummers<br class="inline-block sm:hidden">  everywhere.',
         'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738',
         'reviewText' => 'Drumeo is rated 5-stars for price, satisfaction,<br class="inline sm:hidden"> and customer service.',
         'youtubeLink' => 'https://www.youtube.com/freedrumlessons/',
@@ -585,7 +587,7 @@
         ])
     @else
         @include('musora.sales.components.order-section-collage', [
-        'header' => 'Unlimited drum lessons<br> The world’s best teachers<br> 5000+ popular songs',
+        'header' => 'Unlimited drum lessons<br> The world’s best teachers<br> 5000+ popular songs.',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Trusted by ' . number_format(31856) . ' students.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Online lessons on every topic.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Personalized feedback from real teachers.</li>
@@ -623,8 +625,6 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/sliding-anchor.js') }}"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
     @yield('scripts')

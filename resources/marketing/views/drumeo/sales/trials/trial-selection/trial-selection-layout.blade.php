@@ -67,7 +67,7 @@
                             @endif
                     >
                         <h2><strong>MONTHLY</strong></h2>
-                        <h1 class="my-2 md:my-4"><strong>$29</strong><sub class="bottom-0 text-xs -mr-10" st>/month</sub></h1>
+                        <h1 class="my-2 md:my-4"><strong>$30</strong><sub class="bottom-0 text-xs -mr-10" st>/month</sub></h1>
                         <p class="mb-3 text-light-navy"><em>If you're just giving it a test-drive.</em></p>
                         <ul class="fa-ul text-left my-4 md:my-6">
                             <li><i class="fa-li fal fa-check"></i> DrumeoMETHOD</li>

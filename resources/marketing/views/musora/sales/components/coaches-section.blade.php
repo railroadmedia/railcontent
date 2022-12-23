@@ -147,9 +147,15 @@
 
     <div class="text-center my-10">
         @if(empty($promoVersion))
-            <a href="/courses" class="mx-1 mb-2 sm:mb-0 join outline {{ $theme }}-blue smaller">EXPLORE 200+ COURSES <i class="fas fa-info-circle"></i> </a>
+            <a href="/courses" class="mx-1 mb-2 sm:mb-0 w-full sm:w-auto join outline {{ $theme }}-blue smaller">EXPLORE 200+ COURSES <i class="fas fa-info-circle"></i> </a>
         @endif
-        <a href="/pricing" class="mx-1 join {{ $theme }}-blue smaller">
+        <a class="mx-1 w-full sm:w-auto join {{ $theme }}-blue smaller"
+            @if(!empty($promoVersion))
+                href="/choose-plan"
+            @else
+                href="/choose-your-trial"
+            @endif
+        >
             @if(!empty($promoVersion))
                 Get Started &raquo;
             @else
