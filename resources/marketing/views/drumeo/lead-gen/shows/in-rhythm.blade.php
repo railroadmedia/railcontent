@@ -101,7 +101,7 @@
     "tileText" => "With Dave Atkinson & Reuben Spyker"
     ])
     <div class="columns artist show-for-medium">
-        <div class="plus"><i class="icon-courses"></i></div>
+        <div class="plus"><i class="fas fa-graduation-cap"></i></div>
         <p><strong>200 LESSON COURSES</strong><br>
             WITH LEGENDARY DRUMMERS</p>
     </div>

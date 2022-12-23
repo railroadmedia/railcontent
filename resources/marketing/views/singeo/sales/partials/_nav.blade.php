@@ -62,7 +62,7 @@
         ])
         @include('singeo.sales.partials._nav-link', [
             "linkName" => "Singeo",
-            "linkIcon" => "icon-courses",
+            "linkIcon" => "fas fa-graduation-cap",
             "linkUrl" => "/",
         ])
         @include('singeo.sales.partials._nav-link', [

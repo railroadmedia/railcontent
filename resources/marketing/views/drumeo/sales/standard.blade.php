@@ -102,7 +102,7 @@
     @include('_partials.layout.holiday.homepage-bottom-membership',[
         'theme' => 'drumeo',
         'logo' => 'https://drumeo-assets.s3.amazonaws.com/promos/november/drumeo-annual-card.jpg',
-        'joinText' => '<strong>Join Drumeo for just $.'.round(Prices::$drumeoEdgeAnnual / 12, 2).'/month</strong> <br class="hidden sm:inline"><strong class="text-[#FFAC00]">PLUS</strong> get 10 free bonuses worth $1228.94.',
+        'joinText' => '<strong>Join Drumeo for just $' . round(Prices::$drumeoEdgeAnnual / 12, 2) . '/month</strong> <br class="hidden sm:inline"><strong class="text-[#FFAC00]">PLUS</strong> get 10 free bonuses worth $1228.94.',
         'annualLink' => '/laravel/public/shopping-cart/api/query?products[DLM]=1,year,1&products[quietpad]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[GHFAL-DIGI]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[learn-songs-faster-pack]=1&locked=true',
         'bonusNum' => 10,
         'worth' => 7777,

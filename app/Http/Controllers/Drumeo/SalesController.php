@@ -641,6 +641,11 @@ class SalesController extends BaseController
         return view('drumeo.sales.trials.coaches.todd');
     }
 
+    public function estepario()
+    {
+        return view('drumeo.sales.trials.affiliate.estepario');
+    }
+
     public function a(Request $request, $domain, $page = null)
     {
         return view('drumeo.sales.trials.affiliate.'.$page);
@@ -667,7 +672,7 @@ class SalesController extends BaseController
 
     public function giftCard()
     {
-        return view('drumeo.drumshop.pages.drumming-system', ['theme' => 'drumeo']);
+        return view('drumeo.drumshop.pages.gift-card', ['theme' => 'drumeo']);
     }
 
     public function drummingSystem()

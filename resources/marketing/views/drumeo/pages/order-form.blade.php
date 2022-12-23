@@ -3,6 +3,7 @@
 @section('global-head')
     @yield('meta')
 
+    <title>Join Drumeo</title>
     <meta name="description" content="Learn the drums faster with organized video lessons, legendary teachers, and better practice tools. 90-Day Guarantee.">
     <meta property="og:description" content="Learn the drums faster with organized video lessons, legendary teachers, and better practice tools. 90-Day Guarantee.">
 
