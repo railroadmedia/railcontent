@@ -1,6 +1,6 @@
 <template>
-    <div class="flex flex-column bg-white shadow corners-10">
-        <div class="flex flex-row pa-2 align-v-center bb-grey-1-1">
+    <div class="tw-flex tw-flex-col tw-flex-grow comments-container dark:tw-text-white tw-w-full">
+        <div class="flex flex-row pa-2 align-v-center bb-grey-1-1 tw-w-full">
             <h1 class="heading grow">
                 Comments
             </h1>
@@ -17,7 +17,7 @@
         <transition name="slide-fade">
             <div
                 v-if="filters"
-                class="flex flex-row pa-2 bb-grey-1-1"
+                class="flex flex-row pa-2 bb-grey-1-1 tw-w-full"
             >
                 <div class="flex flex-column">
                     <div
@@ -134,7 +134,7 @@
             </p>
         </div>
 
-        <div class="flex flex-row pa-2 bg-grey-7 bb-grey-1-1 comment-data">
+        <div class="flex flex-row pa-2 comment-data">
             <div class="flex flex-column user-name tw-text-xs dense font-bold ph-1">
                 User
             </div>
@@ -157,8 +157,7 @@
         <div
             v-for="comment in comments"
             v-if="!loading"
-            class="comment-item flex flex-row bb-grey-1-1 pointer hover-bg-grey-7"
-            :class="[openCommentId === comment.id ? 'bg-grey-7' : '']"
+            class="comment-item flex flex-row bb-grey-1-1 pointer hover:tw-opacity-80"
             @click="openCommentThread(comment)"
         >
             <div class="flex flex-column">
@@ -247,7 +246,7 @@
                 >
                     <div
                         v-if="openCommentId === comment.id"
-                        class="flex flex-row pa-2 ba-grey-1-1 bg-white corners-10 active-comment"
+                        class="flex flex-row pa-2 active-comment"
                     >
                         <div class="flex flex-column">
                             <comment-post
