@@ -1244,6 +1244,7 @@
     RewriteRule ^workshop/?(.*) / [R=307,L,QSA]
     RewriteRule ^your-best-year/?$.* / [R=307,L,QSA]
     RewriteRule ^youtube/?(.*) https://www.youtube.com/user/guitarlessonscom [R=307,L,QSA]
+    RewriteRule ^trial-youtube.* https://www.guitareo.com/trial/?utm_source=YouTube&utm_medium=Social&utm_campaign=trial-youtube [R=307,L,QSA]
 
     #################
     #singeo redirects

@@ -324,7 +324,7 @@ class OrderController extends Controller
 
     public function thankYouPageForCustomerOrder()
     {
-        return view('order-form.order-thankyou-physical');
+        return view('musora.pages.order-thankyou');
     }
 
     public function redirectToMusoraOrderForm(Request $request)

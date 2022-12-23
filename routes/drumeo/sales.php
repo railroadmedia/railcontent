@@ -65,7 +65,7 @@ Route::domain('{drumeoDomain}')
     Route::get('/schack', [SalesController::class, 'schack']);
     Route::get('/sharon', [SalesController::class, 'sharon']);
     Route::get('/todd', [SalesController::class, 'todd']);
-    Route::get('/estepario', function () { return view('drumeo.sales.trials.affiliate.estepario'); });
+    Route::get('/estepario', [SalesController::class, 'estepario']);
     Route::group(['prefix' => 'a' ],
         function () {
             Route::get('/{page?}', SalesController::class . '@a')
