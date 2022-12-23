@@ -60,6 +60,7 @@
                         gap: '0.5rem',
                         type: 'loop',
                         interval: 2000,
+                        focus: 0,
                         breakpoints: {
                             1024: {
                                 perPage: 4,
