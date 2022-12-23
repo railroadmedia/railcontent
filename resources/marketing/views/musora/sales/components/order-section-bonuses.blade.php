@@ -20,10 +20,31 @@
         </div>
         <div style="font-size:0px">
             @foreach($bonuses as $bonus)
-                <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3 w-1/2 md:w-1/4 lg:w-1/5">
+                <div
+                    class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3 w-1/2 md:w-1/4 lg:w-1/5"
+                    x-data="{
+                        flipped: false,
+                    }"
+                    x-on:click="
+                        flipped = !flipped;
+                        if(flipped){
+                            $refs.front.classList.add('rotate-y-180');
+                            $refs.back.classList.remove('-rotate-y-180');
+                            $refs.back.classList.add('rotate-y-0');
+                        }
+                        else {
+                            $refs.front.classList.remove('rotate-y-180');
+                            $refs.back.classList.add('-rotate-y-180');
+                            $refs.back.classList.remove('rotate-y-0');
+                        }
+                    "
+                >
                     <div class="flip-div inline-block relative w-full group" style="@if(empty($bonus['bigCard'])) padding-bottom: 133%; @else padding-bottom: 103%; @endif perspective: 1000px;">
                         <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
-                            <div class="border-2 border-promo front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style="@if(!empty($bonus['special'])) overflow: visible;border-color: #cda880; @endif backface-visibility: hidden;">
+                            <div
+                                x-ref="front"
+                                class="border-2 border-promo front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700"
+                                style="@if(!empty($bonus['special'])) overflow: visible;border-color: #cda880; @endif backface-visibility: hidden;">
                                 @if(!empty($bonus['badge']))
                                     <h6 class="absolute text-white top-0 left-0 w-full py-0.5 bg-{{ $theme }} rounded-t-xl font-bebas uppercase">{{ $bonus['badge'] }}</h6>
                                     {{--                                        <h4 class="absolute text-white -top-3 -left-3  py-3 px-2.5 rounded-full transform -rotate-12" style="    line-height: 0.6;background-color:#cda880;"><strong>6<br><span class="leading-none" style="font-size: 50%;">PAIRS</span></strong></h4>--}}
@@ -34,7 +55,11 @@
                                     <p class="text-sm"><strong>DETAILS</strong></p>
                                 </div>
                             </div>
-                            <div class="back border-2 border-promo absolute z-40 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
+                            <div
+                                x-ref="back"
+                                class="back border-2 border-promo absolute z-40 overflow-hidden rounded-xl w-full h-full transition-transform duration-700 -rotate-y-180"
+                                style="backface-visibility: hidden;"
+                            >
                                 <div class="w-full h-full mx-auto text-center text-white flex flex-wrap justify-center items-center content-center p-2 md:p-3" style="background:linear-gradient(to bottom, #01050f, #021225);">
                                     <p class="leading-normal mx-auto text-sm">{!! $bonus['description'] !!}</p>
                                 </div>
