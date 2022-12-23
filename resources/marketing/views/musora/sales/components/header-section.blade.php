@@ -57,7 +57,7 @@
                     </div>
             </div>
         </div>
-        <div class="px-5 sm:px-0">
+        <div class="px-5 sm:px-0 mb-10">
             <div class="flex flex-wrap sm:flex-nowrap text-center border-2 rounded-xl border-{{ $theme }} mt-8 lg:mt-12 lg:mb-4 relative"
 {{--                style="background-color:#eaf1fa;"--}}
             >
@@ -79,23 +79,40 @@
                 <div class="absolute inset-0 z-10 bg-{{ $theme }}" style="opacity: 0.07;"></div>
                 </div>
         </div>
-        <div class="px-5">
-            <div class="slick slick-light-buttons text-center mx-auto my-9 md:mb-0 h-40 sm:h-24 lg:h-20">
+
+        @component('_partials.components.carousel',[
+            'xdata' => "
+                classes: {
+                    arrows: 'splide__arrows',
+                    arrow : 'splide__arrow bg-white text-xl z-50',
+                    prev  : 'splide__arrow--prev',
+                    next  : 'splide__arrow--next',
+                    pagination: 'hidden',
+                },
+                perPage: 1,
+                perMove: 1,
+                type: 'loop',
+                interval: 2000,
+            ",
+        ])
+            @slot('content')
                 @foreach ($slides as $slide)
-                    <div class="px-3 md:px-6 slick-slide">
-                        <p class="leading-normal text-sm"><em>“{{ $slide['desc'] }}”</em></p>
-                        <div class="flex flex-wrap md:flex-nowrap sm:text-left items-center justify-center mt-1.5">
-                            <img
-                                class="rounded-full h-10 transition-opacity opacity-0"
-                                src="https://cdn.musora.com/image/fetch/w_80,q_auto:best/{{ $slide['thumb'] }}"
-                                loading="lazy"
-                                onload="this.classList.remove('opacity-0')"
-                            ><br class="inline md:hidden">
-                            <p class="leading-tight w-full md:w-auto text-sm text-light-navy ml-1 md:ml-2 mr-0 mt-1 md:mt-0"><em>{{ $slide['name'] }}, {{ $slide['credit'] }}</em></p>
+                    <li class="splide__slide">
+                        <div class="px-3 md:px-6 text-center">
+                            <p class="leading-normal text-sm"><em>“{{ $slide['desc'] }}”</em></p>
+                            <div class="flex flex-wrap md:flex-nowrap sm:text-left items-center justify-center mt-1.5">
+                                <img
+                                    class="rounded-full h-10 transition-opacity opacity-0"
+                                    src="https://cdn.musora.com/image/fetch/w_80,q_auto:best/{{ $slide['thumb'] }}"
+                                    loading="lazy"
+                                    onload="this.classList.remove('opacity-0')"
+                                ><br class="inline md:hidden">
+                                <p class="leading-tight w-full md:w-auto text-sm text-light-navy ml-1 md:ml-2 mr-0 mt-1 md:mt-0"><em>{{ $slide['name'] }}, {{ $slide['credit'] }}</em></p>
+                            </div>
                         </div>
-                    </div>
+                    </li>
                 @endforeach
-            </div>
-        </div>
+            @endslot
+        @endcomponent
     </div>
 </header>
