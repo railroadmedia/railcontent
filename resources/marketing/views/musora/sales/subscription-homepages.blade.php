@@ -17,17 +17,12 @@
     @include('drumeo._partials._fonts')
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
 
     <style>
-        .slick-slider.slick-light-buttons .slick-arrow {
-            background: #fff;
-        }
-
         .tool:after, .tool:before {
             position: absolute;
             transform: translate(-50%, 0);
@@ -99,32 +94,14 @@
             margin-bottom: -5px;
         }
 
-        .flip-div .back,
         .flip-div .back {
-            -ms-transform: rotateY(-180deg)!important;
-            -webkit-transform: rotateY(-180deg)!important;
-            transform: rotateY(-180deg)!important;
+            transform: rotateY(-180deg);
         }
-        .flip-div .front,
-        .flip-div .back {
-            -ms-transition: transform 0.8s!important;
-            -webkit-transition: transform 0.8s!important;
-            transition: transform 0.8s!important;
-            -ms-backface-visibility: hidden!important;
-            -webkit-backface-visibility: hidden!important;
-            backface-visibility: hidden!important;
-        }
-        .flip-div.flipped .front,
-        .flip-div.flipped .front {
-            -ms-transform: rotateY(180deg)!important;
-            -webkit-transform: rotateY(180deg)!important;
-            transform: rotateY(180deg)!important;
-        }
-        .flip-div.flipped .back,
         .flip-div.flipped .back {
-            -ms-transform: rotateY(0deg)!important;
-            -webkit-transform: rotateY(0deg)!important;
-            transform: rotateY(0deg)!important;
+            transform: rotateY(0deg);
+        }
+        .flip-div.flipped .front {
+            transform: rotateY(180deg);
         }
     </style>
 @stop
@@ -656,13 +633,8 @@
     @endif
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
     <script>
         $(document).ready(function () {
-            $('.slick').slick({
-                slidesToShow: 1
-            });
-
             $('.flip-div').click(function (e) {
                 $(this).toggleClass('flipped');
             });
