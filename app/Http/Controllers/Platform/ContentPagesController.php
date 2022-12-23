@@ -1542,4 +1542,13 @@ class ContentPagesController extends BaseController
         }
         return null;
     }
+
+    public function comments()
+    {
+        if (!user()->isAdmin()) {
+            throw new NotFoundHttpException();
+        }
+        
+        return view('content.comments');
+    }
 }
