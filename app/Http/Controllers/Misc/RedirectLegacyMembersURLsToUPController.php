@@ -32,7 +32,6 @@ class RedirectLegacyMembersURLsToUPController extends BaseController
     {
         $userId = null;
         $authParams = null;
-        ContentRepository::$bypassPermissions = true;
 
         if (user()) {
             $userId = user()->getId();
@@ -255,7 +254,6 @@ class RedirectLegacyMembersURLsToUPController extends BaseController
         $segment7 = null,
         $segment8 = null
     ) {
-        ContentRepository::$bypassPermissions = true;
         $userId = null;
         $authParams = null;
 
@@ -663,6 +661,179 @@ class RedirectLegacyMembersURLsToUPController extends BaseController
                 }
             }
 
+            return redirect()->to($unifiedUrl);
+        }
+
+        if ($segment6 == null) {
+            if ($segment1 == 'learning-paths') {
+                $learningPath = $this->contentService->getBySlugAndType($segment2, 'learning-path')->first();
+                $learningPathLevel = $this->contentService->getBySlugAndType($segment3, 'learning-path-level')->first();
+                if ($learningPath && $learningPathLevel) {
+                    $unifiedUrl = $unifiedUrl . 'method/' . $segment2 . "/" . $learningPath['id'] . '/' .
+                        $segment3 . "/" . $learningPathLevel['id'] . "/" . $segment4 . "/" . $segment5;
+                }
+            }
+
+            return redirect()->to($unifiedUrl . $authParams);
+        }
+
+        if ($segment8 == null) {
+            if ($segment1 == 'learning-paths') {
+                $learningPath = $this->contentService->getBySlugAndType($segment2, 'learning-path')->first();
+                $learningPathLevel = $this->contentService->getBySlugAndType($segment3, 'learning-path-level')->first();
+                if ($learningPath && $learningPathLevel) {
+                    $unifiedUrl = $unifiedUrl . 'method/' . $segment2 . "/" . $learningPath['id'] . '/' .
+                        $segment3 . "/" . $learningPathLevel['id'] . "/" . $segment4 . "/" .
+                        $segment5 . "/" . $segment6 . "/" . $segment7;
+                }
+            }
+
+            return redirect()->to($unifiedUrl . $authParams);
+        }
+
+        return redirect()->to($unifiedUrl . $authParams);
+    }
+
+    public function redirectSingeo(
+        $domain,
+        $segment1 = null,
+        $segment2 = null,
+        $segment3 = null,
+        $segment4 = null,
+        $segment5 = null,
+        $segment6 = null,
+        $segment7 = null,
+        $segment8 = null
+    ) {
+        $userId = null;
+        $authParams = null;
+
+        if (user()) {
+            $userId = user()->getId();
+            $authParams = '';
+        }
+
+        $unifiedUrl = get_musora_brand_base_url() . '/singeo/';
+
+        if ($segment1 == null) {
+            return redirect()->to($unifiedUrl . $authParams);
+        }
+
+        if (in_array($segment1, [
+            'forums',
+            'referral',
+            'support',
+            'live',
+            'schedule',
+            'legacy-resources',
+            'search',
+            'quick-tips',
+            'routines',
+            'courses',
+            'songs',
+            'student-reviews',
+            'question-and-answer'
+        ])) {
+            /* here we treat all the routes that are similar */
+            $unifiedUrl = $unifiedUrl . $segment1 . "/";
+            foreach ([$segment2, $segment3, $segment4, $segment5] as $segment) {
+                if ($segment) {
+                    $unifiedUrl = $unifiedUrl . $segment . "/";
+                } else {
+                    break;
+                }
+            }
+            return redirect()->to($unifiedUrl . $authParams);
+        }
+
+        if ($segment2 == null) {
+            if (in_array($segment1, ['packs', 'coaches', 'student-focus'])) {
+                $unifiedUrl = $unifiedUrl . $segment1;
+            }
+            if ($segment1 == 'chat') {
+                $unifiedUrl = $unifiedUrl . 'live-chat';
+            } elseif ($segment1 == 'profile' && $userId) {
+                $unifiedUrl = $unifiedUrl . 'profile/' . $userId . '/dashboard';
+            } elseif (in_array($segment1, ['archives', 'loops', 'dictionary-of-terms'])) {
+                $unifiedUrl = $unifiedUrl . 'legacy-resources/' . $segment1;
+            }
+
+            return redirect()->to($unifiedUrl . $authParams);
+        }
+
+        if ($segment3 == null) {
+            if ($segment1 == 'profile') {
+                if ($segment2 == 'notifications') {
+                    $unifiedUrl = $unifiedUrl . $segment2;
+                } elseif ($segment2 == 'lists') {
+                    $unifiedUrl = $unifiedUrl . 'lists/my-list';
+                } elseif (is_numeric($segment2)) {
+                    $unifiedUrl = $unifiedUrl . 'profile/' . $segment2 . '/dashboard';
+                }
+            } elseif ($segment1 == 'settings' && $userId) {
+                if (in_array($segment2, ['profile', 'login-credentials', 'payments'])) {
+                    $unifiedUrl = $unifiedUrl . 'profile/' . $userId . '/settings/' . $segment2;
+                } elseif ($segment2 == 'settings') {
+                    $unifiedUrl = $unifiedUrl . 'profile/' . $userId . '/settings/notifications';
+                } elseif ($segment2 == 'access') {
+                    $unifiedUrl = $unifiedUrl . 'profile/' . $userId . '/settings/account';
+                }
+            }
+
+            if ($segment1 == 'coaches') {
+                $content = $this->contentService->getBySlugAndType($segment2, 'instructor')->first();
+                if ($content) {
+                    $unifiedUrl = $unifiedUrl . 'coaches/' . $segment2 . '/' . $content['id'];
+                }
+            } elseif ($segment1 == 'lessons') {
+                if (in_array($segment2, ['all', 'subscribed'])) {
+                    $unifiedUrl = $unifiedUrl . 'lessons/' . $segment2;
+                } else {
+                    $unifiedUrl = $unifiedUrl . $segment2;
+                }
+            } elseif ($segment1 == 'packs') {
+                $content = $this->contentService->getBySlugAndType($segment2, 'pack')->first();
+                if ($content) {
+                    $unifiedUrl = $unifiedUrl . 'packs/' . $segment2 . '/' . $content['id'];
+                }
+            } elseif ($segment1 == 'learning-paths') {
+                $content = $this->contentService->getBySlugAndType($segment2, 'learning-path')->first();
+                if ($content) {
+                    $unifiedUrl = $unifiedUrl . 'singeo-method/' . $segment2 . '/' . $content['id'];
+                }
+            }
+
+            return redirect()->to($unifiedUrl . $authParams);
+        }
+
+
+        if ($segment4 == null) {
+            if ($segment1 == 'packs') {
+                $pack = $this->contentService->getBySlugAndType($segment2, 'pack')->first();
+                $packBundle = $this->contentService->getBySlugAndType($segment3, 'pack-bundle')->first();
+                if ($pack && $packBundle) {
+                    $unifiedUrl = $unifiedUrl . $segment1 . '/' . $segment2 . "/" . $pack['id'] . '/' . $segment3 . "/" . $packBundle['id'];
+                }
+            } elseif ($segment1 == 'learning-paths') {
+                $unifiedUrl = $unifiedUrl . 'method/' . $segment2 . "/" . $segment3;
+            }
+
+            return redirect()->to($unifiedUrl . $authParams);
+        }
+
+        if ($segment5 == null) {
+            if ($segment1 == 'packs') {
+                //https://dev.drumeo.com/members/packs/new-drummers-start-here/the-drum-setup-system/welcome
+                //https://devplatform.musora.com:8443/drumeo/packs/new-drummers-start-here/299812/the-drum-setup-system/299813/welcome/299814
+                $pack = $this->contentService->getBySlugAndType($segment2, 'pack')->first();
+                $packBundle = $this->contentService->getBySlugAndType($segment3, 'pack-bundle')->first();
+                $packBundleLesson = $this->contentService->getBySlugAndType($segment4, 'pack-bundle-lesson')->first();
+
+                if ($pack && $packBundle && $packBundleLesson) {
+                    $unifiedUrl = $unifiedUrl . "packs/" . $segment2 . "/" . $pack['id'] . "/" . $segment3 . "/" . $packBundle['id'] .
+                        "/" . $segment4 . "/" . $packBundleLesson['id'];
+                }
+            }
             return redirect()->to($unifiedUrl);
         }
 

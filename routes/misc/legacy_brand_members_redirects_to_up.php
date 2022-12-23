@@ -26,3 +26,12 @@ Route::domain('{guitareoDomain}')
             \App\Http\Controllers\Misc\RedirectLegacyMembersURLsToUPController::class . '@redirectGuitareo'
         );
     });
+
+Route::domain('{singeoDomain}')
+    ->middleware(['web_public'])
+    ->group(function () {
+        Route::any(
+            'members/{segment1?}/{segment2?}/{segment3?}/{segment4?}/{segment5?}/{segment6?}/{segment7?}/{segment8?}',
+            \App\Http\Controllers\Misc\RedirectLegacyMembersURLsToUPController::class . '@redirectSingeo'
+        );
+    });
