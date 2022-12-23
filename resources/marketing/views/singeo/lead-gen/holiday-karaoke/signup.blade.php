@@ -1,8 +1,6 @@
 @extends('singeo.lead-gen.lead-gen-layout')
 
 @section('styles')
-    @parent
-
     <title>Singeo Holiday Karaoke | Singeo</title>
     <meta property="og:title" content="Singeo Holiday Karaoke | Singeo">
     <meta name="description" content="Simply enter your email to unlock your holiday karaoke library!">
@@ -10,7 +8,7 @@
     <meta property="og:image" content="https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/og-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.singeo.com/holiday-karaoke/">
 
-    <link href="{{ asset('/assets/marketing/lead-gen.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/singeo/lead-gen.css') }}" rel="stylesheet">
 @stop
 
 @section('body')
@@ -19,7 +17,7 @@
             <img class="py-1 md:py-0 h-28 md:h-48 lg:h-60" src="https://cdn.musora.com/image/fetch/w_1300,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/logo.png">
             <h6 class="mt-3 md:mt-4 lg:mt-6 mb-5 md:mb-6 leading-tight">Simply enter your email to unlock<br class="inline md:hidden"> your holiday karaoke library!</h6>
             <div class="mx-auto text-center max-w-2xl">
-                @include("singeo.lead-gen.partials._sign-up-form-cio", [
+                @include("singeo._partials._sign-up-form", [
                 "formName" => 'Holiday Karaoke',
                 "formId" => "Singeo - Engagement - Trigger - Holiday Karaoke - Web Form",
                 "buttonText" => "Send My Songs ",
@@ -303,7 +301,7 @@
             <img class="py-1 md:py-0 h-28 md:h-48 lg:h-60" src="https://cdn.musora.com/image/fetch/w_1300,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/logo.png">
             <h6 class="mt-2 md:mt-4 lg:mt-6 mb-4 md:mb-6 leading-tight">Simply enter your email to unlock<br class="inline md:hidden"> your holiday karaoke library!</h6>
             <div class="mx-auto text-center max-w-2xl">
-                @include("singeo.lead-gen.partials._sign-up-form-cio", [
+                @include("singeo._partials._sign-up-form", [
                 "formName" => 'Holiday Karaoke',
                 "formId" => "Singeo - Engagement - Trigger - Holiday Karaoke - Web Form",
                 "buttonText" => "Send My Songs ",
@@ -325,7 +323,7 @@
     <div class="reveal text-center max-w-xl text-white lazyload" id="signUpModal" data-reveal style="background: #6d7894 right center/cover;" data-bg="https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/final.jpg">
         <div class="py-5 px-3 md:px-9 md:py-9">
             <h4 class="leading-normal mb-4"><strong>Simply enter your email to unlock<br class="inline lg:hidden"> your holiday karaoke library!</strong></h4>
-            @include("singeo.lead-gen.partials._sign-up-form-cio", [
+            @include("singeo._partials._sign-up-form", [
             "formId" => "Singeo - Engagement - Trigger - Holiday Karaoke - Web Form",
             "formName" => 'Holiday Karaoke',
             "oneLine" => true,

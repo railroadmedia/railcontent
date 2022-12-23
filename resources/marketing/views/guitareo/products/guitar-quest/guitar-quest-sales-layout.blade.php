@@ -1,86 +1,36 @@
-@extends('guitareo._partials.layout')
+@extends('guitareo.products.guitar-quest.guitar-quest-layout')
 
-@section('head-includes')
+@section('meta')
     @parent
-
     <title>GuitarQuest | Your Guitar Journey Starts Here</title>
     <meta name="description" content="Rob Scallon’s online guitar lessons for getting started on the guitar and making your favorite musical projects come to life."/>
 
     <meta property="og:url" content="https://www.guitareo.com/guitar-quest"/>
     <meta property="og:title" content="GuitarQuest | Your Guitar Journey Starts Here"/>
     <meta property="og:description" content="Rob Scallon’s online guitar lessons for getting started on the guitar and making your favorite musical projects come to life."/>
-    <meta property="og:image" content="{{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/share-image.png", ["auto" => "format", "w" => 1500]) }}"/>
+    <meta property="og:image" content="https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Fshare-image.png?auto=format&ixlib=php-1.2.1&w=1500&s=4294b260a12b5d809a9b8182414e2312"/>
+@stop()
 
+@section('styles')
+    @parent
     <style>
         .hover-yellow:hover {
             transition:background-color .3s;
             background-color:#FFB500!important;
         }
     </style>
-
-    <link href="{{ asset('assets/marketing/nav-footer.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/marketing/fonts.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/marketing/guitar-quest.css') }}" rel="stylesheet">
+    <link href="{{ asset('marketing/parcel/guitareo/nav-footer.css') }}" rel="stylesheet">
+    <link href="{{ asset('marketing/parcel/guitareo/fonts.css') }}" rel="stylesheet">
+    <link href="{{ asset('marketing/parcel/guitareo/guitar-quest.css') }}" rel="stylesheet">
 
 @stop()
 
-@section('layout-scripts')
+@section('scripts')
     @parent
-    <script src="{{ asset('assets/marketing/svg-polyfil.js') }}"></script>
-    <script src="{{ asset('assets/marketing/nav-footer.js') }}"></script>
-    <script src="/js/jquery.countdown-2.min.js"></script>
+    <script src="{{ asset('marketing/parcel/guitareo/svg-polyfil.js') }}"></script>
+    <script src="{{ asset('marketing/js/app.js') }}"></script>
+    <script src="{{ asset('marketing/parcel/guitareo/nav-footer.js') }}"></script>
     <script>
-        $(document).ready(function () {
-            // Countdown
-            $('.tzcd-full').countdown('2021/11/30')
-                .on('update.countdown', function (event) {
-                    var format = '%-M Minute%!M %-S Second%!S';
-                    if (event.offset.totalHours > 0) {
-                        format = '%-H Hour%!H ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '%-D Day%!D ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('a limited time');
-                });
-            $('.tzcd-small').countdown('2021/11/30')
-                .on('update.countdown', function (event) {
-                    var format = '%-MM %-SS';
-                    if (event.offset.totalHours > 0) {
-                        format = '%-HH ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '%-DD ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('a limited time');
-                });
-            $('.tzcd-big').countdown('2021/11/30')
-                .on('update.countdown', function (event) {
-                    var format = '' + '<div><h1>%M</h1> <p>min%!M</p></div> ' + '<div><h1>%S</h1> <p>sec%!S</p></div>';
-                    if (event.offset.totalHours > 0) {
-                        format = '' + '<div><h1>%H</h1> <p>hr%!H</p></div> ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '' + '<div><h1>%D</h1> <p>day%!D</p></div> ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('<div><h1>LIMITED</h1> <p>TIME LEFT</p></div>');
-                });
-        });
-        
-        // $(document).on('mouseleave', function(e){
-        //     if( e.clientY < 0 )
-        //         document.getElementById("exitPop").click();
-        //         document.getElementById("exitPop").remove();
-        // });
         $(document).ready(function () {
             $(".infusion-form").submit(function(event) {
                 if(event.originalEvent != null) {
@@ -97,40 +47,44 @@
     </script>
 @stop()
 
-@section('layout-body')
+@section('content')
     <!-- Guitareo Nav -->
     @include("guitareo.sales.partials._nav")
     <!-- Guitar Quest Nav -->
-    @include("products.guitar-quest.partials._nav")
+    @include("guitareo.products.guitar-quest.partials._nav")
 
 
     <main>
         @yield('top-promo-banner')
-        <!-- Your Quest Section --> 
-        @include("products.guitar-quest.partials.sections._your-quest")
+        <!-- Your Quest Section -->
+        @hasSection ('quest-section')
+            @yield('quest-section')
+        @else
+            @include("guitareo.products.guitar-quest.partials.sections._your-quest")
+        @endif
 
         @yield('promo-banner')
 
         <!-- Fixed Image Featues (x3) -->
-        @include("products.guitar-quest.partials.sections._fixed-image-features")
+        @include("guitareo.products.guitar-quest.partials.sections._fixed-image-features")
 
         <!-- Your Map Section -->
-        @include("products.guitar-quest.partials.sections._your-map")
+        @include("guitareo.products.guitar-quest.partials.sections._your-map")
 
         <!-- Your Skills Section -->
-        @include("products.guitar-quest.partials.sections._your-skills")
+        @include("guitareo.products.guitar-quest.partials.sections._your-skills")
 
         <!-- Your Teacher Section -->
-        @include("products.guitar-quest.partials.sections._your-teacher")
+        @include("guitareo.products.guitar-quest.partials.sections._your-teacher")
 
         <!-- Your Way -->
-        @include("products.guitar-quest.partials.sections._your-way")
+        @include("guitareo.products.guitar-quest.partials.sections._your-way")
 
         <!-- Start Here -->
         @yield('final')
 
         <!-- Trailer Modal -->
-        @include("products.guitar-quest.partials._trailer-modal")
+        @include("guitareo.products.guitar-quest.partials._trailer-modal")
 
     </main>
     {{--<div id="exitPop" class="tw-opacity-0" x-on:click.prevent="modalOpen = 'exitModal';"></div>--}}
@@ -153,7 +107,7 @@
             {{--<p class="tw-w-full tw-text-md md:tw-text-xl tw-my-3">Enter your email to start your GuitarQuest <br class="tw-hidden md:tw-inline">--}}
                 {{--for free, no credit card required.</p>--}}
             {{--<div class="tw-w-full">--}}
-                {{--@include("lead-gen.partials._sign-up-form-tw", [--}}
+                {{--@include("guitareo.lead-gen.partials._sign-up-form-tw", [--}}
                         {{--"stacked" => true,--}}
                         {{--"formId" => "Guitareo - Engagement - Trigger - Song Hour - Web Form",--}}
                         {{--"formName" => 'Song Hour',--}}

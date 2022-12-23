@@ -403,20 +403,20 @@
                     <animate attributeType="CSS" attributeName="opacity" begin="0s" dur="1.5s" repeatCount="indefinite" from="1" to="0"></animate>
                 </circle>
                 <foreignObject class="node" x="510.266" y="4647.50" width="71" height="71">
-                    <div id="mobile-level-1" 
+                    <div id="mobile-level-1"
                         x-show="levelMap === false"
                         x-on:click.prevent="levelModalOpen = 1"
-                        class="map-badge" 
-                        style="background-image: url({{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-1.png", ["auto" => "format", "w" => 150]) }})">
-                    </div>  
+                        class="map-badge"
+                        style="background-image: url('https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Flevel-1.png?auto=format&ixlib=php-1.2.1&w=150&s=fa2accd21554e90a0e1291f114d6ade0')">
+                    </div>
                     <template x-if="levelMap === true">
                         <a  x-bind:href="levelOneHref"
-                            class="tw-block map-badge bg-goldenrod" 
+                            class="tw-block map-badge bg-goldenrod"
                             x-bind:class="{ 'completed-badge': levelOneStatus === 'completed' }"
-                            style="background-image: url({{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-1.png", ["auto" => "format", "w" => 150]) }})"    
+                            style="background-image: url('https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Flevel-1.png?auto=format&ixlib=php-1.2.1&w=150&s=fa2accd21554e90a0e1291f114d6ade0')"
                         >
-                        </a>  
-                    </template>               
+                        </a>
+                    </template>
                 </foreignObject>
             </g>
         </g>
@@ -435,18 +435,18 @@
                 <foreignObject class="node" x="510.266" y="4647.50" width="71" height="71">
                     <div id="mobile-level-2"
                         x-show="levelMap === false"
-                        x-on:click.prevent="levelModalOpen = 2" 
-                        class="map-badge" 
-                        style="background-image: url({{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-2.png", ["auto" => "format", "w" => 150]) }})">
-                    </div>  
-                    <template x-if="levelMap === true"> 
+                        x-on:click.prevent="levelModalOpen = 2"
+                        class="map-badge"
+                        style="background-image: url('https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Flevel-2.png?auto=format&ixlib=php-1.2.1&w=150&s=2c970953619d408c9fbd61a61ee9bd39')">
+                    </div>
+                    <template x-if="levelMap === true">
                         <a  x-bind:href="levelTwoHref"
-                            class="tw-block map-badge" 
-                            x-bind:class="{ 'completed-badge': levelTwoStatus === 'completed' }"    
-                            style="background-image: url({{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-2.png", ["auto" => "format", "w" => 150]) }})"    
+                            class="tw-block map-badge"
+                            x-bind:class="{ 'completed-badge': levelTwoStatus === 'completed' }"
+                            style="background-image: url('https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Flevel-2.png?auto=format&ixlib=php-1.2.1&w=150&s=2c970953619d408c9fbd61a61ee9bd39')"
                         >
-                        </a>   
-                    </template>             
+                        </a>
+                    </template>
                 </foreignObject>
             </g>
         </g>
@@ -1158,20 +1158,20 @@
                     <animate attributeType="CSS" attributeName="opacity" begin="0s" dur="1.5s" repeatCount="indefinite" from="1" to="0"></animate>
                 </circle>
                 <foreignObject class="node" x="510.266" y="4647.50" width="71" height="71">
-                    <div id="mobile-level-3" 
+                    <div id="mobile-level-3"
                         x-show="levelMap === false"
                         x-on:click.prevent="levelModalOpen = 3"
-                        class="map-badge" 
-                        style="background-image: url({{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-3.png", ["auto" => "format", "w" => 150]) }})">
-                    </div> 
+                        class="map-badge"
+                        style="background-image: url('https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Flevel-3.png?auto=format&ixlib=php-1.2.1&w=150&s=5bbfc3ae7a623a3e63352e4c3372c7c9')">
+                    </div>
                     <template x-if="levelMap === true">
                         <a  x-bind:href="levelThreeHref"
-                            class="tw-block map-badge" 
+                            class="tw-block map-badge"
                             x-bind:class="{ 'completed-badge': levelThreeStatus === 'completed' }"
-                            style="background-image: url({{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-3.png", ["auto" => "format", "w" => 150]) }})"    
+                            style="background-image: url('https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Flevel-3.png?auto=format&ixlib=php-1.2.1&w=150&s=5bbfc3ae7a623a3e63352e4c3372c7c9')"
                         >
-                        </a>  
-                    </template>                
+                        </a>
+                    </template>
                 </foreignObject>
             </g>
         </g>
@@ -1190,18 +1190,18 @@
                 <foreignObject class="node" x="510.266" y="4647.50" width="71" height="71">
                     <div id="mobile-level-4"
                         x-show="levelMap === false"
-                        x-on:click.prevent="levelModalOpen = 4" 
-                        class="map-badge" 
-                        style="background-image: url({{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-4.png", ["auto" => "format", "w" => 150]) }})">
-                    </div>  
+                        x-on:click.prevent="levelModalOpen = 4"
+                        class="map-badge"
+                        style="background-image: url('https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Flevel-4.png?auto=format&ixlib=php-1.2.1&w=150&s=712e33f8f1a23c4b5da909ac1c82052d')">
+                    </div>
                     <template x-if="levelMap === true">
                         <a  x-bind:href="levelFourHref"
-                            class="tw-block map-badge" 
+                            class="tw-block map-badge"
                             x-bind:class="{ 'completed-badge': levelFourStatus === 'completed' }"
-                            style="background-image: url({{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-4.png", ["auto" => "format", "w" => 150]) }})"    
+                            style="background-image: url('https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Flevel-4.png?auto=format&ixlib=php-1.2.1&w=150&s=712e33f8f1a23c4b5da909ac1c82052d')"
                         >
-                        </a>    
-                    </template>             
+                        </a>
+                    </template>
                 </foreignObject>
             </g>
         </g>
@@ -1778,20 +1778,20 @@
                     <animate attributeType="CSS" attributeName="opacity" begin="0s" dur="1.5s" repeatCount="indefinite" from="1" to="0"></animate>
                 </circle>
                 <foreignObject class="node" x="510.266" y="4647.50" width="71" height="71">
-                    <div id="mobile-level-5" 
+                    <div id="mobile-level-5"
                         x-show="levelMap === false"
                         x-on:click.prevent="levelModalOpen = 5"
-                        class="map-badge" 
-                        style="background-image: url({{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-5.png", ["auto" => "format", "w" => 150]) }})">
-                    </div>  
+                        class="map-badge"
+                        style="background-image: url('https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Flevel-5.png?auto=format&ixlib=php-1.2.1&w=150&s=344fd6041c3047e406350d423617cf94')">
+                    </div>
                     <template x-if="levelMap === true">
                         <a  x-bind:href="levelFiveHref"
-                            class="tw-block map-badge" 
+                            class="tw-block map-badge"
                             x-bind:class="{ 'completed-badge': levelFiveStatus === 'completed' }"
-                            style="background-image: url({{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-5.png", ["auto" => "format", "w" => 150]) }})"    
+                            style="background-image: url('https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Flevel-5.png?auto=format&ixlib=php-1.2.1&w=150&s=344fd6041c3047e406350d423617cf94')"
                         >
-                        </a>   
-                    </template>              
+                        </a>
+                    </template>
                 </foreignObject>
             </g>
         </g>
@@ -2373,20 +2373,20 @@
                     <animate attributeType="CSS" attributeName="opacity" begin="0s" dur="1.5s" repeatCount="indefinite" from="1" to="0"></animate>
                 </circle>
                 <foreignObject class="node" x="510.266" y="4647.50" width="71" height="71">
-                    <div id="mobile-level-6" 
+                    <div id="mobile-level-6"
                         x-show="levelMap === false"
                         x-on:click.prevent="levelModalOpen = 6"
-                        class="map-badge" 
-                        style="background-image: url({{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-6.png", ["auto" => "format", "w" => 150]) }})">
+                        class="map-badge"
+                        style="background-image: url('https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Flevel-6.png?auto=format&ixlib=php-1.2.1&w=150&s=e1df924a10719f68bc48f67e1e8ca582')">
                     </div>
                     <template x-if="levelMap === true">
                         <a  x-bind:href="levelSixHref"
-                            class="tw-block map-badge" 
+                            class="tw-block map-badge"
                             x-bind:class="{ 'completed-badge': levelSixStatus === 'completed' }"
-                            style="background-image: url({{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-6.png", ["auto" => "format", "w" => 150]) }})"
+                            style="background-image: url('https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Flevel-6.png?auto=format&ixlib=php-1.2.1&w=150&s=e1df924a10719f68bc48f67e1e8ca582')"
                         >
-                        </a>      
-                    </template>             
+                        </a>
+                    </template>
                 </foreignObject>
             </g>
         </g>
@@ -2403,20 +2403,20 @@
                     <animate attributeType="CSS" attributeName="opacity" begin="0s" dur="1.5s" repeatCount="indefinite" from="1" to="0"></animate>
                 </circle>
                 <foreignObject class="node" x="510.266" y="4647.50" width="71" height="71">
-                    <div id="mobile-level-7" 
+                    <div id="mobile-level-7"
                         x-show="levelMap === false"
                         x-on:click.prevent="levelModalOpen = 7"
-                        class="map-badge" 
-                        style="background-image: url({{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-7.png", ["auto" => "format", "w" => 150]) }})">
-                    </div>  
-                    <template x-if="levelMap === true"> 
+                        class="map-badge"
+                        style="background-image: url('https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Flevel-7.png?auto=format&ixlib=php-1.2.1&w=150&s=da9c5588c4a03c39a7e6024ce0505d43')">
+                    </div>
+                    <template x-if="levelMap === true">
                         <a  x-bind:href="levelSevenHref"
-                            class="tw-block map-badge" 
+                            class="tw-block map-badge"
                             x-bind:class="{ 'completed-badge': levelSevenStatus === 'completed' }"
-                            style="background-image: url({{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-7.png", ["auto" => "format", "w" => 150]) }})"
+                            style="background-image: url('https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Flevel-7.png?auto=format&ixlib=php-1.2.1&w=150&s=da9c5588c4a03c39a7e6024ce0505d43')"
                         >
-                        </a>  
-                    </template>              
+                        </a>
+                    </template>
                 </foreignObject>
             </g>
         </g>
@@ -2980,18 +2980,18 @@
                 <foreignObject class="node" x="510.266" y="4647.50" width="71" height="71">
                     <div id="mobile-level-8"
                         x-show="levelMap === false"
-                        x-on:click.prevent="levelModalOpen = 8" 
-                        class="tw-block map-badge" 
-                        style="background-image: url({{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-8.png", ["auto" => "format", "w" => 150]) }})">
-                    </div> 
-                    <template x-if="levelMap === true">    
+                        x-on:click.prevent="levelModalOpen = 8"
+                        class="tw-block map-badge"
+                        style="background-image: url('https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Flevel-8.png?auto=format&ixlib=php-1.2.1&w=150&s=6ba8ca3f90a0f4d4e7f831eb4ae3630c')">
+                    </div>
+                    <template x-if="levelMap === true">
                         <a  x-bind:href="levelEightHref"
-                            class="map-badge" 
+                            class="map-badge"
                             x-bind:class="{ 'completed-badge': levelEightStatus === 'completed' }"
-                            style="background-image: url({{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-8.png", ["auto" => "format", "w" => 150]) }})"
+                            style="background-image: url('https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Flevel-8.png?auto=format&ixlib=php-1.2.1&w=150&s=6ba8ca3f90a0f4d4e7f831eb4ae3630c')"
                         >
-                        </a>   
-                    </template>           
+                        </a>
+                    </template>
                 </foreignObject>
             </g>
         </g>
@@ -3009,19 +3009,19 @@
                 </circle>
                 <foreignObject class="node" x="510.266" y="4647.50" width="71" height="71">
                     <div id="mobile-level-9"
-                        x-show="levelMap === false" 
+                        x-show="levelMap === false"
                         x-on:click.prevent="levelModalOpen = 9"
-                        class="map-badge" 
-                        style="background-image: url({{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-9.png", ["auto" => "format", "w" => 150]) }})">
-                    </div> 
+                        class="map-badge"
+                        style="background-image: url('https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Flevel-9.png?auto=format&ixlib=php-1.2.1&w=150&s=95465dc8f87ec0f06398fc783a5e6a37')">
+                    </div>
                     <template x-if="levelMap === true">
                         <a  x-bind:href="levelNineHref"
-                            class="tw-block map-badge" 
+                            class="tw-block map-badge"
                             x-bind:class="{ 'completed-badge': levelNineStatus === 'completed' }"
-                            style="background-image: url({{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/level-9.png", ["auto" => "format", "w" => 150]) }})"
+                            style="background-image: url('https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Flevel-9.png?auto=format&ixlib=php-1.2.1&w=150&s=95465dc8f87ec0f06398fc783a5e6a37')"
                         >
-                        </a>    
-                    </template>              
+                        </a>
+                    </template>
                 </foreignObject>
             </g>
         </g>

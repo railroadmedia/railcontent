@@ -372,7 +372,7 @@ Other environments are being added to papertrial in the near future.
 
 ## Local
 
-Run `r logs {container-id}` from within railenvmanager, specifing the php8 apache container.
+Run `docker logs {container-id} -f` from within railenvmanager, specifing the php8 apache container.
 
 Get the container id of the apache-php-fpm-8 container by running this (in railenvmanager container):
 

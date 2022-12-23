@@ -1,6 +1,6 @@
 <div class="top-bar expanded">
     <div class="logo">
-        <a href="/">
+        <a href="{{ get_legacy_brand_base_url('guitareo') }}">
             <img src="https://guitareo.s3.amazonaws.com/sales/guitareo-logo-green.png" alt="Guitareo Logo">
         </a>
     </div>
@@ -10,16 +10,27 @@
         <span></span>
     </div>
 
+    @if(!empty($checkoutVersion))
+        <div class="button-wrap">
+            <a href="{{ get_legacy_brand_base_url('guitareo') }}/shop" class="join promo outline-button">Shop</a>
+        </div>
+    @endif
     @if(!empty($cartVersion))
         <div class="button-wrap" id="app">
-            <a href="/shop" class="join outline-button">Shop</a>
+            <a href="{{ get_legacy_brand_base_url('guitareo') }}/shop" class="join promo outline-button">Shop</a>
 
             <nav-cart-button
-                    cart-data='{{ $cartData }}'
+                    {{-- cart-data='{{ $cartData }}' --}}
+                    cart-data-url=''
+                    checkout-url='/order/guitareo'
+                    api-domain-url=''
             ></nav-cart-button>
             <cart-sidebar
                     brand="guitareo"
-                    cart-data='{{ $cartData }}'
+                    {{-- cart-data='{{ $cartData }}' --}}
+                    cart-data-url=''
+                    checkout-url='/order/guitareo'
+                    api-domain-url=''
             ></cart-sidebar>
         </div>
     @endif
@@ -30,8 +41,8 @@
             <a class="@if(!empty($scrollToJoin)) anchor-slide @endif"  href="/#coaches" >Coaches</a>
         </div>
         <div class="button-wrap">
-            <a href="/shop" class="join outline-button">Shop</a>
-            <a href="#customize-anchor" class="join anchor-slide">Join Guitareo</a>
+            <a href="{{ get_legacy_brand_base_url('guitareo') }}/shop" class="join promo outline-button">Shop</a>
+            <a href="#customize-anchor" class="join anchor-slide">Join<span class="show-for-medium"> Guitareo</span></a>
         </div>
     @endif
 </div>
@@ -41,23 +52,23 @@
         @include('guitareo.sales.partials._nav-link', [
             "linkName" => "Member Login",
             "linkIcon" => "fas fa-sign-in",
-            "linkUrl" => URL::Route('members.login')
+            "linkUrl" => get_musora_brand_base_url() . '/login',
         ])
 
         @include('guitareo.sales.partials._nav-link', [
             "linkName" => "Contact",
             "linkIcon" => "fas fa-phone",
-            "linkUrl" => get_legacy_brand_base_url("musora").'/contact'
+            "linkUrl" => get_musora_brand_base_url().'/contact'
         ])
 
         @include('guitareo.sales.partials._nav-link', [
             "linkName" => "Guitareo",
-            "linkIcon" => "icon-courses",
+            "linkIcon" => "fas fa-graduation-cap",
             "linkUrl" => "/",
         ])
 
         @include('guitareo.sales.partials._nav-link', [
-            "linkName" => "Shop",
+            "linkName" => "Holiday Deals",
             "linkIcon" => "fas fa-tag",
             "linkUrl" => '/shop',
         ])
@@ -67,13 +78,18 @@
             "linkIcon" => 'fas fa-comment-alt-edit'
         ])
 
-        @include('guitareo.sales.partials._nav-link', [
-            "linkName" => "Free Resources",
-            "linkIcon" => "icon-live",
-            "hasDropdown" => true,
-            "linkUrl" => '',
-            "noClick" => true
-        ])
+        <div class="has-drop-down" target="_parent" rel="">
+            <div class="nav-link">
+                <i class="fas fa-circle-play"></i>
+                Free Resources
+                <div class="drop-down-arrow ">
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+
+
         <div class="lesson-links dropdown">
             @include('guitareo.sales.partials._nav-link', [
                 "linkName" => "Getting Started On The Acoustic Guitar",
@@ -115,18 +131,23 @@
 
         <span class="shim"></span>
         @include('guitareo.sales.partials._nav-secondary-link', [
-            "linkName" => "YouTube <i class='fas fa-external-link'></i>",
+            "linkName" => "<i class='fab fa-fw fa-youtube'></i>&nbsp; YouTube",
             "linkUrl" => "https://www.youtube.com/user/guitarlessonscom",
             "externalLink" => true
         ])
         @include('guitareo.sales.partials._nav-secondary-link', [
-            "linkName" => "Facebook <i class='fas fa-external-link'></i>",
+            "linkName" => "<i class='fab fa-fw fa-facebook'></i>&nbsp; Facebook",
             "linkUrl" => "https://www.facebook.com/guitareoofficial",
             "externalLink" => true
         ])
         @include('guitareo.sales.partials._nav-secondary-link', [
-            "linkName" => "Instagram <i class='fas fa-external-link'></i>",
+            "linkName" => "<i class='fab fa-fw fa-instagram'></i>&nbsp; Instagram",
             "linkUrl" => "https://www.instagram.com/guitareoofficial/",
+            "externalLink" => true
+        ])
+        @include('guitareo.sales.partials._nav-secondary-link', [
+            "linkName" => "<i class='fab fa-fw fa-tiktok'></i>&nbsp; TikTok",
+            "linkUrl" => "https://www.tiktok.com/@guitareoofficial",
             "externalLink" => true
         ])
         @include('guitareo.sales.partials._nav-secondary-link', [

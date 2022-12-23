@@ -84,7 +84,7 @@
               >
                 <h4 class="tw-leading-none tw-text-lg tw-uppercase tw-font-normal tw-text-[#00101D] dark:tw-text-white">
                   <span class="tw-mr-1">{{ coach.name.split(" ")[0] }}</span>
-                  <span class="tw-font-bold">{{ coach.name.split(" ")[1] }}</span>
+                  <span class="tw-font-bold tw-mr-1">{{ coach.name.split(" ")[1] }}</span>
                   <!-- Optional third name -->
                   <span class="tw-font-bold">{{ coach.name.split(" ")[2] }}</span>
                 </h4>

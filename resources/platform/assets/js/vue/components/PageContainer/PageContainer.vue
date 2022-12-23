@@ -167,7 +167,7 @@ const handleCloseConfirmationModal = () => {
 
 const handleNotificationClear = () => {
   notification.clear();
-};;
+};
 
 const onResize = (e) => {
   const smallBreakpoint = window.matchMedia("(max-width: 1023px)");

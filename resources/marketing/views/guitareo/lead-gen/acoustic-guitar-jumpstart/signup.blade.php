@@ -1,20 +1,24 @@
-@extends('guitareo._partials.layout')
+@extends('guitareo.lead-gen.lead-gen-layout')
 
-@section('head-includes')
-    @parent
-
+@section('meta')
     <title>Acoustic Guitar Jump-Start | Guitareo</title>
     <meta name="description" content="Sign up on this page and you'll get a guided beginner guitar course with Nate Savage designed specifically for acoustic guitarists.">
     <meta property="og:image" content="https://s3.amazonaws.com/guitareo/acoustic-jump-start/6.jpg" style="display: none;">
     <meta property="og:title" content="Acoustic Guitar Jump-Start">
     <meta property="og:description" content="Sign up on this page and you'll get a guided beginner guitar course with Nate Savage designed specifically for acoustic guitarists.">
-    <meta property="og:url" content="https://www.guitareo.com/acoustic-guitar-jumpstart/">
+    <meta property="og:url" content="https://www.guitareo.com/
+    acoustic-guitar-jumpstart/">
+
+    <style>
+        .final-pitch {
+            background-image: url('https://s3.amazonaws.com/guitareo/acoustic-jump-start/final-bg.jpg');
+        }
+    </style>
+    @parent
 @stop
 
-@section('layout-scripts')
+@section('scripts')
     @parent
-    
-    <script src="/assets/js/sign-up-form.js"></script>
     <script>
         $(document).ready(function () {
             $(document).foundation();
@@ -36,25 +40,25 @@
     </script>
 @stop
 
-@section('layout-body')
+@section('body')
     <header class="header acoustic py-7 md:py-12 lg:py-14" style="background: #161819;">
         <div class="row mx-auto md:max-w-2xl lg:max-w-4xl">
-            <img class="mx-auto max-w-xs mb-5 md:max-w-xl md:mb-7 lg:max-w-4xl lg:mb-10" src="https://s3.amazonaws.com/guitareo/acoustic-jump-start/logo-white.png">
+            <img class="mx-auto max-w-xs mb-5 md:max-w-xl md:mb-7 lg:max-w-4xl lg:mb-10" src="https://s3.amazonaws.com/guitareo/acoustic-jump-start/logo-white.png" alt="logo">
             <div class="flex flex-col sm:flex-row">
                 <div class="text-center sm:w-5/12 relative">
-                    <img class="absolute -top-3 w-24 sm:left-0 lg:w-28" style="left: 19%;" src="https://s3.amazonaws.com/guitareo/acoustic-jump-start/free-preview-text.png">
+                    <img class="absolute -top-3 w-24 sm:left-0 lg:w-28" style="left: 19%;" src="https://s3.amazonaws.com/guitareo/acoustic-jump-start/free-preview-text.png" alt="preview-text">
                     <div class="play-vimeo flex justify-center items-center absolute inset-0 cursor-pointer md:text-xl" data-open="getAccess"><i class="fas fa-play border-2 border-solid border-white rounded-full leading-4 p-3 md:p-4" style="background: #FF8C00;"></i></div>
-                <img class="circle-nate" src="https://s3.amazonaws.com/guitareo/acoustic-jump-start/nate-savage.jpg">
+                <img class="circle-nate" src="https://s3.amazonaws.com/guitareo/acoustic-jump-start/nate-savage.jpg" alt="nate-savage">
                 </div>
                 <div class="sm:w-7/12">
                     <h2>Enter your email below to get my
                         <br> free beginner acoustic guitar course!</h2>
-                    @include("lead-gen.partials._sign-up-form-tw", [
+                    @include("guitareo.lead-gen.partials._sign-up-form-tw", [
                         "stacked" => true,
                         "formId" => "Guitareo - Engagement - Trigger - AGJS - Web Form",
                         "formName" => 'Acoustic Guitar Jump Start',
                         "submitButtonColor" => "#ff8c00",
-                    ])
+                ])
                 </div>
             </div>
         </div>
@@ -157,14 +161,12 @@
 
     @include('guitareo.lead-gen.partials._enter-email',[
         "bgColor" => "#1A1C1D",
-        "bgImg" => "https://s3.amazonaws.com/guitareo/acoustic-jump-start/final-bg.jpg",
-        "img" => '<img class="h-14 mb-5 md:mb-7 lg:mb-10 sm:h-20 lg:h-36 mx-auto" src="https://s3.amazonaws.com/guitareo/acoustic-jump-start/logo-white.png">',
+        "img" => '<img class="h-14 mb-5 md:mb-7 lg:mb-10 sm:h-20 lg:h-36 mx-auto" src="https://s3.amazonaws.com/guitareo/acoustic-jump-start/logo-white.png" alt="logo">',
         "text" => '<p class="mb-4 px-3 text-sm md:px-4 md:text-xl">Enter your email below to get my<br class="hidden sm:inline lg:hidden"> free beginner acoustic guitar course!</p>',
         "formId" => "Guitareo - Engagement - Trigger - AGJS - Web Form",
         "formName" => 'Acoustic Guitar Jump Start',
         "submitButtonColor" => "#ff8c00",
-    ]) 
-    
+    ])
 
     <div class="reveal acoustic text-center max-w-2xl" id="getAccess" data-reveal data-reset-on-close="false">
 

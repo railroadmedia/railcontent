@@ -28,9 +28,5 @@ class ContentServiceProvider extends ServiceProvider
             CoachBulkImageUpdate::class,
             RebuildSearchIndexes::class
         ]);
-
-        $this->callAfterResolving(Schedule::class, function (Schedule $schedule) {
-            $schedule->command('CreateVimeoVideoContentRecords', [50])->everyThirtyMinutes();
-        });
     }
 }

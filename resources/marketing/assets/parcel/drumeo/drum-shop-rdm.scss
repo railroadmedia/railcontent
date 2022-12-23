@@ -1,0 +1,2427 @@
+@import "_variables";
+
+.no-padding {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  font-family: $opensans;
+}
+
+h1 {
+  font-weight: 700;
+  font-size: 21px;
+  line-height: 1.1em;
+  margin: 0 auto 5px;
+  @include tablet {
+    font-size: 28px;
+  }
+  @include desktop {
+    font-size: 32px;
+  }
+}
+
+h3 {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1em;
+  margin: 0 auto 35px;
+  @include tablet {
+    font-size: 18px;
+    margin: 0 auto 40px;
+  }
+  @include desktop {
+    font-size: 21px;
+    margin: 0 auto 55px;
+  }
+}
+
+body {
+  background: #FFF;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.text-blue {
+  color: $drumeoBlue;
+}
+
+.text-yellow {
+  color: #f7bd51;
+}
+
+.join {
+  font-size: 24px;
+  padding: 10px 15%;
+  @include tablet {
+    font-size: 28px;
+    padding: 15px 10%;
+  }
+  @include desktop {
+    font-size: 30px;
+  }
+
+  &.outline {
+    background: transparent;
+    color: $drumeoBlue;
+    border: 2px solid $drumeoBlue;
+    font-size: 18px;
+    padding: 10px 9%;
+
+    &:hover {
+      background: $drumeoBlue;
+      color: #fff;
+    }
+
+    &.black {
+      color: #000;
+      border-color: #000;
+
+      &:hover {
+        color: #fff;
+        background: #000;
+      }
+    }
+  }
+}
+
+.play-icon {
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  transition: all .2s ease-in-out;
+  display: block;
+  cursor: pointer;
+  outline: none;
+  top: 75%;
+  width: 70px;
+  height: 70px;
+  text-align: center;
+  border: 2px solid #FFF;
+  background: $drumeoBlue;
+  border-radius: 50%;
+  @include tablet {
+    width: 80px;
+    height: 80px;
+    &:hover {
+      -webkit-transform: translate(-50%, -50%) scale(1.1, 1.1);
+      transform: translate(-50%, -50%) scale(1.1, 1.1);
+      background: lighten($drumeoBlue, 5%);
+    }
+  }
+  @include desktop {
+    width: 100px;
+    height: 100px;
+  }
+
+  i {
+    color: #FFF;
+    font-size: 40px;
+    line-height: 66px;
+    margin-left: 10px;
+    @include tablet {
+      line-height: 76px;
+    }
+    @include desktop {
+      font-size: 50px;
+      line-height: 96px;
+    }
+  }
+
+  .text {
+    display: block;
+    width: 140px;
+    white-space: nowrap;
+    font: italic 400 15px/1.4em $opensans;
+    margin: 10px auto 0;
+    transform: translate(-20%, 0);
+  }
+}
+
+.hero-header {
+  background: #131416;
+  color: #FFF;
+  text-align: center;
+  padding: 0 0 30px;
+  @include tablet {
+    padding: 0 0 60px;
+  }
+  @include desktop {
+    padding: 0 20px 70px;
+  }
+
+  .video-wrap {
+    position: relative;
+    outline: none;
+    padding-bottom: 85%;
+    background: url(https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/header.jpg) center/cover;
+    @include tablet {
+      padding-bottom: 56.25%;
+    }
+
+    .logo {
+      position: absolute;
+      top: 4%;
+      left: 50%;
+      -webkit-transform: translate(-50%, 0);
+      transform: translate(-50%, 0);
+      @include desktop {
+        top: 5%;
+
+      }
+
+      p {
+        font: 400 12px/1em $opensans;
+        margin: 0 auto 7px;
+        @include tablet {
+          font-size: 14px;
+        }
+        @include desktop {
+          font-size: 16px;
+          margin: 0 auto 10px;
+        }
+      }
+
+      img {
+        max-width: 230px;
+        @include tablet {
+          max-width: 370px;
+        }
+        @include desktop {
+          max-width: 460px;
+        }
+      }
+    }
+  }
+
+  h3 {
+    font: 400 15px/1.3em $opensans;
+    margin: 0 auto;
+    @include tablet {
+      font-size: 20px;
+    }
+    @include desktop {
+      font-size: 23px;
+    }
+  }
+  p {
+    font-family: $robotocondensed;
+    margin: 0 auto;
+    font-size: 14px;
+    @include tablet {
+      font-size: 15px;
+    }
+    @include desktop {
+      font-size: 16px;
+    }
+  }
+
+  .join {
+    width: 90%;
+    padding: 15px;
+    font-size: 25px;
+    margin: 15px auto;
+    @include tablet {
+      padding: 17px;
+      font-size: 35px;
+    }
+    @include desktop {
+      padding: 20px;
+      font-size: 40px;
+      margin: 17px auto;
+    }
+  }
+}
+
+.hidden-buy-slice {
+  text-align: center;
+  left: 0;
+  right: 0;
+  top: 0;
+  width: 100%;
+  z-index: 101;
+  position: fixed;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  background: #000;
+  height: 0;
+  max-height: 0;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity .3s ease-in-out;
+  overflow: hidden;
+
+  &.active {
+    height: inherit;
+    max-height: 1000px;
+    visibility: visible;
+    opacity: 1;
+    padding: 6px 0;
+    @include desktop {
+      padding: 12px 0;
+    }
+  }
+
+  p {
+    font: 700 14px/1em $robotocondensed;
+    color: #fff;
+    display: inline-block;
+    margin: 0 0 7px;
+    @include tablet {
+      margin: 0 7px 0 0;
+    }
+  }
+
+  .join {
+    padding: 6px 5%;
+    font-size: 17px;
+    @include tablet {
+      font-size: 19px;
+      padding: 10px 5%;
+    }
+    @include desktop {
+      font-size: 21px;
+    }
+  }
+}
+
+
+.special-promo {
+  background: #FFF800;
+  background: linear-gradient(0deg, #FFA600 0%, #FFF800 100%);
+  color: #000;
+  text-align: center;
+
+  .row {
+    position: relative;
+    padding: 30px 0;
+    @include tablet {
+      padding: 40px 0;
+    }
+    @include desktop {
+      padding: 50px 0;
+    }
+  }
+
+  h1 {
+    font: 800 21px/1em $opensans;
+    margin: 0 auto;
+    @include tablet {
+      font-size: 29px;
+    }
+    @include desktop {
+      font-size: 34px;
+    }
+
+    img {
+      height: 14px;
+      margin: 0 4px;
+      @include tablet {
+        height: 24px;
+        margin: 0 10px;
+      }
+
+      &:last-child {
+        -moz-transform: scaleX(-1);
+        -o-transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        filter: FlipH;
+      }
+    }
+  }
+
+  h2 {
+    font-family: $opensans;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 10px auto;
+    font-size: 14px;
+    @include tablet {
+      margin: 15px auto;
+      font-size: 17px;
+    }
+    @include desktop {
+      font-size: 20px;
+    }
+  }
+
+
+  p {
+    margin: 0 auto;
+    font: 400 13px/1.8em $opensans;
+    max-width: 330px;
+    @include tablet {
+      font-size: 14px;
+      max-width: 560px;
+    }
+    @include desktop {
+      font-size: 15px;
+      max-width: 740px;
+    }
+
+    a {
+      color: rgba(0, 0, 0, 0.7);
+    }
+  }
+
+}
+
+.lesson-breakdown {
+  background: #FFF;
+  text-align: center;
+  padding: 40px 0;
+  @include tablet {
+    padding: 70px 0;
+  }
+  @include desktop {
+    padding: 100px 0;
+  }
+
+  h1 {
+    font: 400 28px/1em $robotocondensed;
+    text-transform: uppercase;
+    margin: 0 auto 35px;
+    @include tablet {
+      margin: 0 auto 40px;
+      font-size: 49px;
+    }
+    @include desktop {
+      font-size: 64px;
+      margin: 0 auto 55px;
+
+    }
+  }
+
+  h3 {
+    font: 400 15px/1.2em $opensans;
+    @include tablet {
+      font-size: 20px;
+    }
+    @include desktop {
+      font-size: 26px;
+    }
+  }
+
+  .tile-wrap {
+    padding: 0 15px;
+    margin-bottom: -20px;
+    @include tablet {
+      margin-bottom: -30px;
+    }
+    @include desktop {
+      margin-bottom: -40px;
+    }
+
+    .lesson-tile {
+      text-align: left;
+      margin: 0 auto 30px;
+      @include tablet {
+        margin: 0 auto 40px;
+      }
+
+      img {
+        border-radius: 5px;
+        width: 100%;
+        max-width: 360px;
+        display: block;
+        margin: 0 auto;
+      }
+
+      h1 {
+        font: 700 15px/1.2em $opensans;
+        text-transform: none;
+        width: 100%;
+        max-width: 360px;
+        margin: 6px auto 3px;
+        @include tablet {
+          font-size: 17px;
+          margin: 10px auto 5px;
+        }
+        @include desktop {
+          font-size: 18px;
+        }
+      }
+
+      p {
+        font: 500 13px/1.5em $opensans;
+        margin: 0 auto;
+        width: 100%;
+        max-width: 360px;
+        @include tablet {
+          font-size: 14px;
+        }
+        @include desktop {
+          font-size: 15px;
+        }
+      }
+    }
+  }
+}
+
+#icon-grid {
+  background: #191B1C;
+  color: #FFF;
+  padding: 40px 0;
+  text-align: center;
+  @include tablet {
+    padding: 60px 0;
+  }
+  @include desktop {
+    padding: 70px 0;
+  }
+
+  .title-text {
+    h1 {
+      font: 700 30px/1em $robotocondensed;
+      margin: 0 auto;
+      text-transform: uppercase;
+      color: $drumeoBlue;
+      @include tablet {
+        font-size: 44px;
+      }
+      @include desktop {
+        font-size: 55px;
+      }
+    }
+
+    p {
+      font: 400 13px/1.6em $opensans;
+      margin: 7px auto 25px;
+      @include tablet {
+        font-size: 15px;
+        margin: 7px auto 40px;
+      }
+      @include desktop {
+        font-size: 22px;
+        margin: 10px auto 50px;
+      }
+    }
+  }
+
+  .grid-item {
+    margin: 0 auto 30px;
+    @include tablet {
+      margin: 0 auto 35px;
+    }
+    @include desktop {
+      margin: 0 auto 40px;
+    }
+
+    .icon-wrap {
+      padding: 0;
+
+      i {
+        background: $drumeoBlue;
+        border-radius: 50%;
+        text-align: center;
+        margin: 0 auto 10px;
+        width: 60px;
+        height: 60px;
+        line-height: 60px;
+        font-size: 25px;
+        @include tablet {
+          width: 40px;
+          height: 40px;
+          line-height: 40px;
+          margin: 0 auto;
+          font-size: 19px;
+        }
+        @include desktop {
+          font-size: 22px;
+          width: 50px;
+          height: 50px;
+          line-height: 50px;
+        }
+      }
+    }
+
+    .text-wrap {
+      text-align: center;
+      @include tablet {
+        text-align: left;
+      }
+
+      h2 {
+        margin: 0 auto 3px;
+        text-transform: uppercase;
+        font: 700 17px/1em $robotocondensed;
+        @include tablet {
+          font-size: 16px;
+        }
+        @include desktop {
+          font-size: 18px;
+        }
+      }
+
+      p {
+        margin: 0 auto;
+        font: 400 13px/1.6em $opensans;
+        width: 100%;
+        max-width: 285px;
+        @include tablet {
+          font-size: 12px;
+          max-width: 100%;
+        }
+        @include desktop {
+          font-size: 13px;
+        }
+      }
+    }
+  }
+
+  .lesson-descriptions {
+    margin: 15px auto 0;
+    position: relative;
+    height: auto;
+    max-height: 500px;
+    overflow: hidden;
+    transition: all 1s;
+    min-height: inherit;
+
+    .question-dropdown {
+      border-radius: 5px;
+      border: 1px solid #777;
+      margin: 10px auto 0;
+      height: auto;
+      max-height: 62px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all .3s ease-in-out;
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+
+      &.active {
+        max-height: 1000px;
+      }
+
+      .drop-down-wrap {
+        position: relative;
+
+        p {
+          font: 400 13px/1.6em $opensans;
+          margin: 0 auto 15px;
+          @include tablet {
+            font-size: 14px;
+          }
+          @include desktop {
+            font-size: 15px;
+          }
+
+          &.details {
+            font: italic 400 14px/1.2em $opensans;
+            position: absolute;
+            color: #8c9698;
+            top: 50%;
+            right: 0;
+            -webkit-transform: translate(0, -50%);
+            transform: translate(0, -50%);
+            margin: 0 auto;
+          }
+        }
+
+        .week-number {
+          background: $drumeoBlue;
+          text-transform: uppercase;
+          font: 400 14px/60px $opensans;
+          height: 100%;
+          position: absolute;
+
+          .number {
+            font-size: 25px;
+            vertical-align: sub;
+          }
+        }
+
+        .question {
+          height: 60px;
+          width: 100%;
+          position: relative;
+
+          h2 {
+            font: 700 14px/1.2em $opensans;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            -webkit-transform: translate(0, -50%);
+            transform: translate(0, -50%);
+            user-select: none;
+            margin: 0 auto;
+            @include tablet {
+              font-size: 15px;
+            }
+            @include desktop {
+              font-size: 18px;
+            }
+          }
+        }
+      }
+
+      .fa-chevron-down {
+        color: #fff;
+        line-height: 60px;
+        transition: all .3s ease-in-out;
+        font-size: 14px;
+        @include tablet {
+          font-size: 30px;
+        }
+
+        &.rotated {
+          transform: rotate(-180deg);
+        }
+      }
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 100px;
+      box-shadow: 0 -50px 50px #191B1C inset;
+      transition: all .3s;
+    }
+
+    &.active {
+      max-height: 7110px;
+      @include tablet {
+        max-height: 4870px;
+      }
+      @include desktop {
+        max-height: 3970px;
+      }
+
+      &:after {
+        height: 0;
+        box-shadow: 0 0 0 #191B1C inset;
+      }
+
+
+    }
+  }
+
+  .join.outline {
+    margin: 15px auto 0;
+    font-size: 18px;
+    padding: 10px 9%;
+    height: inherit;
+    visibility: visible;
+
+    &.active {
+      padding: 0;
+      margin: 0;
+      height: 0;
+      visibility: hidden;
+      opacity: 0;
+      overflow: hidden;
+      min-height: inherit;
+    }
+  }
+}
+
+.warning-section {
+  background: #9b1b1c;
+  color: #FFF;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  padding: 30px 0;
+  @include tablet {
+    padding: 50px 15px 60px;
+  }
+  @include desktop {
+    padding: 70px 15px 80px;
+  }
+
+  .bg-icon {
+    position: absolute;
+    -webkit-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+    opacity: 0.3;
+    -webkit-filter: brightness(0%);
+    filter: brightness(0%);
+    z-index: 1;
+    top: 15%;
+    height: 100px;
+    @include tablet {
+      top: 25%;
+      height: 200px;
+    }
+    @include desktop {
+      top: 45%;
+      height: 400px;
+    }
+
+    &.sign {
+      left: -30px;
+      @include tablet {
+        left: -20px;
+      }
+      @include desktop {
+        left: -110px;
+      }
+    }
+
+    &.cal {
+      right: -50px;
+      @include tablet {
+        right: -70px;
+      }
+      @include desktop {
+        right: -230px;
+      }
+    }
+  }
+
+  h1 {
+    position: relative;
+    z-index: 2;
+    font: 700 30px/1em $robotocondensed;
+    text-transform: uppercase;
+    margin: 0 auto;
+    @include tablet {
+      font-size: 44px;
+    }
+    @include desktop {
+      font-size: 55px;
+    }
+  }
+
+  .sticks-x {
+    position: relative;
+    z-index: 2;
+    opacity: 0.3;
+    -webkit-filter: brightness(0%);
+    filter: brightness(0%);
+    margin: 17px auto;
+    @include tablet {
+      margin: 25px auto;
+    }
+    @include desktop {
+      margin: 30px auto;
+    }
+
+    img {
+      width: 80px;
+      @include tablet {
+        width: 100px;
+      }
+      @include tablet {
+        width: 90px;
+      }
+    }
+  }
+
+  p {
+    position: relative;
+    z-index: 2;
+    font: 400 13px/1.7em $opensans;
+    display: inline-block;
+    max-width: inherit;
+    padding: 0 10px;
+    margin: 0 auto;
+    @include tablet {
+      font-size: 15px;
+      max-width: 620px;
+    }
+    @include desktop {
+      font-size: 16px;
+      max-width: 660px;
+    }
+
+    strong {
+      color: #FDCE02;
+    }
+  }
+}
+
+body.is-reveal-open {
+  position: relative;
+}
+
+.reveal-overlay {
+  background-color: rgba(0, 0, 0, 0.9);
+
+  &:after {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-family: "Font Awesome 5 Pro";
+    font-weight: 900;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    content: "\f00d";
+    color: #fff;
+    z-index: 1;
+    opacity: 0.8;
+    position: absolute;
+    margin: 0;
+    line-height: 1em;
+    text-align: center;
+    display: inline-block;
+    outline: none;
+    top: 0;
+    right: 0;
+    font-size: 35px;
+    width: 35px;
+    @include tablet {
+      top: 7px;
+      right: 7px;
+      font-size: 50px;
+      width: 50px;
+    }
+  }
+
+  .reveal {
+    height: inherit;
+    min-height: 0;
+    max-height: inherit;
+    outline: none;
+    padding: 0;
+
+    .flex-video {
+      margin: 0 auto;
+    }
+
+    &.trailer {
+      width: 100%;
+      margin: 0 auto;
+      max-width: 100%;
+      border: none;
+      text-align: center;
+      border-radius: 5px;
+      background: transparent;
+      @include tablet {
+        width: 80%;
+      }
+    }
+  }
+}
+
+
+.meet-instructor {
+  background: #000 url("https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/meet.jpg") center top/cover;
+  color: #FFF;
+  text-align: center;
+  position: relative;
+  padding: 180px 0 25px;
+  @include tablet {
+    padding: 230px 0 40px;
+  }
+  @include desktop {
+    padding: 440px 0 70px;
+  }
+
+  h1 {
+    text-transform: uppercase;
+    font: 700 33px/1em $robotocondensed;
+    z-index: 1;
+    margin: 0;
+    @include tablet {
+      font-size: 47px;
+    }
+    @include desktop {
+      font-size: 77px;
+    }
+  }
+
+  p {
+    font: 400 18px/1em $robotocondensed;
+    text-transform: uppercase;
+    margin: 5px auto 0;
+    @include tablet {
+      font-size: 26px;
+      margin: 10px auto 0;
+    }
+    @include desktop {
+      font-size: 41px;
+
+    }
+  }
+
+  .play-icon {
+    top: 46%;
+    @include tablet {
+      top: 51%;
+    }
+  }
+}
+
+.instructor-bio {
+  padding: 30px 15px;
+  @include tablet {
+    padding: 40px 0 70px;
+  }
+  @include desktop {
+    padding: 50px 0 80px;
+  }
+
+  .row {
+    max-width: 1000px;
+  }
+
+  p {
+    margin: 0 auto;
+    font: 400 14px/1.6em $opensans;
+    @include tablet {
+      -moz-column-count: 2;
+      -webkit-column-count: 2;
+      column-count: 2;
+      -webkit-column-gap: 40px;
+      -moz-column-gap: 40px;
+      column-gap: 40px;
+      font-size: 14px;
+    }
+  }
+
+  .first-letter {
+    float: left;
+    padding-right: 7px;
+    width: 51px;
+    @include tablet {
+      width: 73px;
+    }
+  }
+
+  .timeline-pic {
+    text-align: center;
+    margin: 20px auto 0;
+
+    @include desktop {
+      margin: 40px auto 0;
+    }
+
+    img {
+      width: 100%;
+      max-width: 375px;
+      margin: 0 auto;
+      @include tablet {
+        max-width: 470px;
+      }
+      @include desktop {
+        max-width: 100%;
+      }
+    }
+  }
+
+}
+
+.drummer-credits {
+  background: #191B1C;
+  color: #FFF;
+  padding: 40px 15px 20px;
+  @include tablet {
+    padding: 70px 20px 20px;
+  }
+  @include desktop {
+    padding: 100px 40px 50px;
+  }
+
+  h1 {
+    font-weight: 400;
+    font-size: 27px;
+    @include tablet {
+      font-size: 32px;
+    }
+    @include desktop {
+      font-size: 46px;
+    }
+  }
+
+  .drummer-testimonial {
+    padding: 0 10px;
+    text-align: center;
+    @include tablet {
+      padding: 50px 0;
+      border-top: 1px solid #444;
+      text-align: left;
+    }
+
+    .float-right {
+      order: 2;
+    }
+
+    .drummer-pic {
+      border-radius: 50%;
+      overflow: hidden;
+      border: 6px solid #FFF;
+      background: #FFF;
+      width: 100%;
+      max-width: 220px;
+      margin: 0 auto;
+      @include tablet {
+        max-width: 100%;
+      }
+      @include desktop {
+        border-width: 11px;
+      }
+    }
+
+    h1 {
+      font: 700 21px/1em $robotocondensed;
+      margin: 15px auto 5px;
+      text-transform: uppercase;
+      @include tablet {
+        font-size: 25px;
+        margin: 30px auto 5px;
+      }
+      @include desktop {
+        font-size: 30px;
+      }
+
+      .band {
+        color: $drumeoBlue;
+        font: italic 400 17px/1em $robotocondensed;
+        margin: 0 auto;
+        text-transform: uppercase;
+        display: inline-block;
+        @include tablet {
+          font-size: 19px;
+        }
+        @include desktop {
+          font-size: 20px;
+        }
+      }
+    }
+
+    h2 {
+      font: 400 17px/1.2em $opensans;
+      margin: 10px auto;
+      color: #999;
+      @include tablet {
+        font-size: 20px;
+        margin: 15px auto 7px;
+      }
+      @include desktop {
+        font-size: 26px;
+      }
+    }
+
+    p {
+      font: 400 14px/1.6em $opensans;
+      margin: 7px auto 35px;
+      color: #999;
+      @include tablet {
+        font-size: 14px;
+        margin: 7px auto 0;
+      }
+      @include desktop {
+        font-size: 16px;
+        margin: 7px auto 0;
+      }
+    }
+
+    &:nth-child(2) {
+      border-top: 0;
+      margin-top: 20px;
+      @include tablet {
+        margin-top: 10px;
+      }
+      @include desktop {
+        margin-top: 25px;
+      }
+    }
+
+    &.featured-testimonial {
+      @include tablet {
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+        .picture {
+          vertical-align: middle;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+
+          img {
+            flex-shrink: 0;
+            max-width: 100%;
+          }
+        }
+        .text {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          flex: 1 1;
+          padding-right: 0;
+
+          h1 {
+            margin: 0;
+          }
+
+          p {
+            line-height: 1.8em;
+            font-size: 14px;
+            @include tablet {
+              font-size: 15px;
+            }
+            @include desktop {
+              font-size: 17px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.compare-table {
+  background: #FFF;
+  text-align: center;
+  padding: 40px 10px;
+  @include tablet {
+    padding: 70px 10px;
+  }
+  @include desktop {
+    padding: 90px 10px;
+  }
+
+  h1 {
+    font: 700 30px/1em $robotocondensed;
+    text-transform: uppercase;
+    margin: 0 auto 7px;
+    @include tablet {
+      font-size: 42px;
+      margin: 0 auto 10px;
+    }
+    @include desktop {
+      font-size: 50px;
+      margin: 0 auto 15px;
+    }
+  }
+
+  table {
+    border-collapse: separate;
+    border-spacing: 10px 0;
+    margin: 0 auto 45px;
+    padding: 0;
+    @include tablet {
+      padding: 0 15px;
+    }
+    @include desktop {
+      padding: 0 45px;
+    }
+
+    tbody {
+      border: none;
+      color: #99A19E;
+      background: #FFF;
+
+      tr {
+        td {
+          width: 33.33%;
+          border: 1px solid #DFE6E3;
+          border-width: 0 1px;
+          padding: 7px;
+          font: 600 11px/1.2em $robotocondensed;
+          text-transform: uppercase;
+          @include tablet {
+            font-size: 15px;
+          }
+          @include desktop {
+            font-size: 18px;
+          }
+
+          i {
+            font-size: 24px;
+            @include desktop {
+              font-size: 35px;
+            }
+          }
+
+          &:nth-child(2) {
+            border-color: $drumeoBlue;
+            color: $drumeoBlue;
+
+            i {
+              font-size: 34px;
+              @include desktop {
+                font-size: 50px;
+              }
+            }
+          }
+        }
+
+        &:nth-child(even) {
+          background-color: #f2f4f5;
+
+          &:hover {
+            background-color: #e8e9eb;
+          }
+
+          td:nth-child(2) {
+            background-color: #edf4fa;
+
+            &:hover td:nth-child(2) {
+              background-color: #dfe5eb;
+            }
+          }
+        }
+
+        &:nth-child(odd):hover {
+          background-color: #f7f9fa;
+        }
+
+        &:nth-child(1) td {
+          border-width: 1px 1px 0;
+          border-radius: 4px 4px 0 0;
+          padding: 10px 0 15px;
+          @include tablet {
+            font-size: 24px;
+            padding: 20px 10px 30px;
+          }
+          @include desktop {
+            font-size: 30px;
+            padding: 20px 10px 40px;
+          }
+
+          .macbook {
+            width: 70%;
+            margin: 0 auto 5px;
+            @include tablet {
+              width: 175px;
+              margin: 0 auto 15px;
+            }
+            @include desktop {
+              width: 250px;
+              margin: 10px auto 30px;
+            }
+          }
+
+          .blue-logo {
+            width: 80%;
+            @include tablet {
+              width: 200px;
+            }
+            @include desktop {
+              width: 290px;
+            }
+          }
+
+          i {
+            margin: 0 0 5px;
+            font-size: 50px;
+            @include tablet {
+              font-size: 100px;
+              margin: 0 0 10px;
+            }
+            @include desktop {
+              font-size: 145px;
+              margin: 0 0 30px;
+            }
+          }
+
+          &:nth-child(1) {
+            border-width: 0;
+            background: #FFF;
+          }
+        }
+
+        &:nth-child(2) td:nth-child(1) {
+          border-width: 1px 1px 0;
+          border-radius: 4px 4px 0 0;
+        }
+
+        &:last-child td {
+          border-width: 0 1px 1px;
+          border-radius: 0 0 4px 4px;
+
+          &:nth-child(2) {
+            font-weight: 700;
+            line-height: 0.8em;
+            font-size: 17px;
+            padding: 19px 0;
+            @include tablet {
+              font-size: 23px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  p {
+    text-align: left;
+    font: 400 16px/1.4em $opensans;
+    margin: 0 auto;
+    padding: 0 10px;
+    @include tablet {
+      padding: 0 25px;
+      font-size: 18px;
+    }
+    @include desktop {
+      padding: 0 55px;
+    }
+  }
+}
+
+.guarantee {
+  background: #fff;
+  padding: 30px 0;
+  @include tablet {
+    padding: 60px 20px;
+  }
+  @include desktop {
+    padding: 90px 0;
+  }
+
+  .guarantee-badge {
+    width: 120px;
+    @include tablet {
+      width: 140px;
+      order: 1;
+    }
+    @include desktop {
+      width: 210px;
+    }
+  }
+
+  .flex-container {
+    margin: 15px auto 0;
+    padding: 0 15px;
+    @include tablet {
+      margin: 0 auto;
+      padding: 0;
+      display: flex;
+      align-items: flex-start;
+    }
+    @include desktop {
+      max-width: 970px;
+    }
+
+    .text-wrap {
+      margin: 15px auto 0;
+      @include tablet {
+        margin: 0;
+        padding-right: 15px;
+      }
+      @include desktop {
+        padding-right: 40px;
+      }
+
+
+      h1 {
+        font: 700 22px/1em $robotocondensed;
+        text-transform: uppercase;
+        margin: 0 auto 15px;
+        @include tablet {
+          margin: 0 auto 20px;
+          font-size: 29px;
+        }
+        @include desktop {
+          font-size: 41px;
+        }
+
+      }
+
+      p {
+        line-height: 2em;
+        margin: 0 auto;
+        font-size: 13px;
+        @include tablet {
+          font-size: 15px;
+        }
+        @include desktop {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}
+
+.final {
+  background: #000 url("https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/customize.jpg") 65% 50%/cover;
+  text-align: center;
+  padding: 50px 10px;
+  color: #FFF;
+  @include tablet {
+    padding: 70px 10px;
+  }
+  @include desktop {
+    padding: 80px 20px;
+  }
+
+  .logo img {
+    width: 100%;
+    max-width: 350px;
+    margin: 0 auto 30px;
+    @include tablet {
+      max-width: 570px;
+      margin: 0 auto 50px;
+    }
+    @include desktop {
+      max-width: 650px;
+      margin: 0 auto 60px;
+    }
+  }
+
+  h1 {
+    font: 500 20px/1.2em $opensans;
+    margin: 0 auto;
+    @include tablet {
+      font-size: 25px;
+    }
+    @include desktop {
+      font-size: 29px;
+    }
+  }
+
+  h2 {
+    font: 400 14px/1.3em $robotocondensed;
+    text-transform: uppercase;
+    margin: 0 auto;
+    @include tablet {
+      font-size: 16px;
+    }
+    @include desktop {
+      font-size: 21px;
+    }
+
+    s {
+      opacity: 0.7;
+    }
+
+    &.yellow {
+      text-transform: uppercase;
+      color: #FDCE02;
+      font-style: normal;
+      margin: 15px auto 0;
+      @include tablet {
+        margin: 20px auto 5px;
+      }
+
+      strong {
+        display: inline-block;
+      }
+    }
+  }
+
+  .join {
+    width: 100%;
+    max-width: 330px;
+    font-size: 27px;
+    padding: 16px;
+    margin: 20px auto;
+    @include tablet {
+      font-size: 43px;
+      padding: 22px;
+      max-width: 575px;
+      margin: 25px auto;
+    }
+    @include desktop {
+      max-width: 920px;
+      margin: 30px auto;
+    }
+  }
+
+  .cards {
+    margin: 40px auto 0;
+    @include tablet {
+      margin: 60px auto 0;
+    }
+    @include desktop {
+      margin: 80px auto 0;
+    }
+
+    i {
+      color: #8C9698;
+      margin: 0 4px;
+      font-size: 36px;
+      @include tablet {
+        font-size: 55px;
+      }
+    }
+  }
+
+  p {
+    font: 400 13px/1em $opensans;
+    color: #FFF;
+    @include tablet {
+      font-size: 15px;
+    }
+
+    &.final-questions {
+      text-transform: none;
+      color: #8C9698;
+      margin: 20px auto 0;
+      @include tablet {
+        margin: 30px auto 0;
+      }
+    }
+
+    span {
+      margin: 0 auto 7px;
+      text-transform: uppercase;
+      display: block;
+      font-size: 15px;
+      @include tablet {
+        font-size: 17px;
+      }
+    }
+
+    a {
+      color: inherit;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.bonus {
+  display: inline-block;
+  border: 2px solid #FDCE02;
+  border-radius: 10px;
+  padding: 0 15px 15px;
+  margin: 10px auto 30px;
+  max-width: 360px;
+  @include tablet {
+    border-radius: 25px;
+    padding: 0 25px 25px;
+    margin: 15px auto 50px;
+    max-width: 640px;
+  }
+  @include desktop {
+    padding: 0 40px 40px;
+    margin: 15px auto 60px;
+    max-width: 960px;
+  }
+
+  .title {
+    h1 {
+      font: 800 23px/1em $opensans;
+      color: #FDCE02;
+      position: relative;
+      z-index: 2;
+      margin: -13px auto 20px;
+      @include tablet {
+        font-size: 29px;
+        margin: -16px auto 25px;
+      }
+      @include desktop {
+        font-size: 35px;
+        margin: -19px auto 30px;
+      }
+
+      &:before {
+        content: ' ';
+        position: absolute;
+        height: 2px;
+        background: #010407;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: -1;
+        width: 180px;
+        @include tablet {
+          width: 220px;
+        }
+        @include desktop {
+          width: 260px;
+        }
+      }
+
+      img {
+        height: 14px;
+        margin: 0 4px;
+        -webkit-filter: invert(1) sepia(1) brightness(0.8) hue-rotate(-11deg) saturate(16);
+        filter: invert(1) sepia(1) brightness(0.8) hue-rotate(-11deg) saturate(16);
+        @include tablet {
+          height: 20px;
+          margin: 0 8px;
+        }
+        @include desktop {
+          height: 24px;
+        }
+
+        &:last-child {
+          -moz-transform: scaleX(-1);
+          -o-transform: scaleX(-1);
+          -webkit-transform: scaleX(-1);
+          transform: scaleX(-1);
+          filter: FlipH;
+        }
+      }
+    }
+
+    h2 {
+      font-family: $opensans;
+      color: #FDCE02;
+      text-transform: uppercase;
+      text-align: center;
+      margin: 10px auto;
+      font-size: 14px;
+      @include tablet {
+        margin: 15px auto;
+        font-size: 17px;
+      }
+      @include desktop {
+        font-size: 20px;
+      }
+    }
+  }
+
+  .white-bubble {
+    margin: 0 auto 15px;
+    @include tablet {
+      margin: 0 auto 25px;
+    }
+    @include desktop {
+      margin: 0 auto 40px;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    img {
+      background: #FDCE02;
+      border-radius: 50%;
+      border: 2px solid #FDCE02;
+      width: 110px;
+      @include tablet {
+        float: left;
+        width: 120px;
+        border-width: 5px;
+      }
+      @include desktop {
+        width: 180px;
+      }
+    }
+
+    .text-wrap {
+      float: left;
+      text-align: center;
+      width: 100%;
+      padding: 0;
+      margin: 10px auto 0;
+      @include tablet {
+        text-align: left;
+        padding: 0 15px;
+        width: calc(100% - 210px);
+        margin: 0 auto;
+      }
+      @include desktop {
+        padding: 0 40px;
+        width: calc(100% - 280px);
+        margin: 10px auto 0;
+      }
+
+      h2 {
+        margin: 0 auto;
+        text-transform: uppercase;
+        color: #8a9495;
+        font-size: 13px;
+        @include tablet {
+          font-size: 14px;
+        }
+        @include desktop {
+          font-size: 16px;
+        }
+      }
+
+      h1 {
+        margin: 5px auto;
+        font: 700 20px/1em $opensans;
+        text-transform: none;
+        @include tablet {
+          font-size: 22px;
+          margin: 5px auto;
+        }
+        @include desktop {
+          font-size: 25px;
+          margin: 7px auto;
+        }
+      }
+
+      p {
+        font: 400 13px/1.6em $opensans;
+        margin: 0;
+        padding: 0;
+
+        em {
+          color: #FDCE02;
+        }
+      }
+    }
+
+    .number-wrap {
+      width: 70px;
+      height: 70px;
+      margin: 0 auto;
+      border-radius: 50%;
+      background: #FDCE02;
+      border: 3px solid #FDCE02;
+      position: relative;
+      display: inline-block;
+      vertical-align: bottom;
+      @include tablet {
+        float: left;
+        width: 90px;
+        height: 90px;
+        margin: 15px auto 0;
+      }
+      @include desktop {
+        width: 100px;
+        height: 100px;
+        margin: 50px auto 0;
+      }
+
+      p {
+        font: 400 15px/1em $robotocondensed;
+        color: #000;
+        text-transform: uppercase;
+        margin: 18px auto 0;
+        padding: 0;
+        @include tablet {
+          margin: 25px auto 0;
+        }
+        @include desktop {
+          margin: 30px auto 0;
+          font-size: 17px;
+        }
+
+        strong {
+          font-size: 17px;
+          margin: 0 auto;
+          @include tablet {
+            font-size: 23px;
+          }
+          @include desktop {
+            font-size: 25px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.student-reviews {
+  background: #f1f4f3;
+  text-align: center;
+  padding: 40px 20px;
+  @include tablet {
+    padding: 50px 10px;
+  }
+  @include desktop {
+    padding: 70px 10px;
+  }
+
+  .testimonial-section {
+    h1 {
+      font: 400 27px/1.2em $opensans;
+      text-transform: none;
+      margin: 0 auto 20px;
+      @include tablet {
+        font-size: 32px;
+        margin: 0 auto 50px;
+      }
+      @include desktop {
+        font-size: 46px;
+        margin: 0 auto 60px;
+      }
+    }
+  }
+}
+
+.questions {
+  background: #fff;
+  text-align: center;
+  padding: 40px 7px;
+  margin: 0 auto -15px;
+  @include tablet {
+    padding: 60px 15px;
+  }
+  @include desktop {
+    padding: 90px 20px;
+  }
+
+
+  h1.upper {
+    font: 700 22px/1em $robotocondensed;
+    text-transform: uppercase;
+    margin: 0 auto 20px;
+    @include tablet {
+      margin: 0 auto 30px;
+      font-size: 29px;
+    }
+    @include desktop {
+      margin: 0 auto 40px;
+      font-size: 35px;
+    }
+
+  }
+
+  .question-dropdown {
+    background: #FFF;
+    border-radius: 6px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+    height: auto;
+    max-height: 60px;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    transition: all .3s ease-in-out;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+
+    &.active {
+      max-height: 1000px;
+    }
+
+    .question-wrap {
+      position: relative;
+    }
+
+    .question-icon {
+      background: $drumeoBlue;
+      text-transform: uppercase;
+      line-height: 60px;
+      height: 100%;
+      position: absolute;
+      color: #fff;
+      font-size: 25px;
+      @include tablet {
+        font-size: 38px;
+      }
+    }
+
+    .fa-chevron-down {
+      color: #000;
+      line-height: 60px;
+      transition: all .3s ease-in-out;
+      font-size: 15px;
+      @include tablet {
+        font-size: 22px;
+      }
+
+      &.rotated {
+        transform: rotate(-180deg);
+      }
+    }
+
+    .question-answer {
+      text-align: left;
+      padding: 0 5px 0 10px;
+
+      .question {
+        height: 60px;
+        width: 100%;
+        position: relative;
+
+        h2 {
+          font: 600 12px/1.2em $opensans;
+          position: absolute;
+          top: 50%;
+          left: 0;
+          -webkit-transform: translate(0, -50%);
+          transform: translate(0, -50%);
+          margin: 0 auto;
+          @include tablet {
+            font-size: 15px;
+          }
+          @include desktop {
+            font-size: 17px;
+          }
+        }
+      }
+
+      p {
+        font: 400 13px/1.6em $opensans;
+        margin: 0 auto 10px;
+        @include tablet {
+          font-size: 15px;
+        }
+        @include desktop {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+
+  .join {
+    font-size: 17px;
+    margin: 5px auto 0;
+    @include tablet {
+      font-size: 19px;
+      margin: 20px auto 0;
+    }
+    @include desktop {
+      font-size: 21px;
+    }
+  }
+}
+
+
+.black-friday-banner {
+  display: block;
+  background: #FDCE02;
+  text-align: center;
+  color: #000;
+  width: 100%;
+  z-index: 97;
+  transition: opacity .5s;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 0 10px hsla(0, 0%, 0%, 0.2);
+  margin: 0 auto;
+  padding: 9px 0;
+  @include tablet {
+    padding: 7px 0;
+  }
+
+  .row {
+    max-width: 570px;
+    position: relative;
+  }
+
+  h1 {
+    font: 700 24px/1em $robotocondensed;
+    vertical-align: middle;
+    display: inline-block;
+    text-transform: uppercase;
+    margin: 0 7px 0 0;
+    text-align: left;
+    @include tablet {
+      font-size: 31px;
+    }
+  }
+
+  p {
+    font: 700 12px/1em $opensans;
+    vertical-align: middle;
+    display: inline-block;
+    margin: 0 auto;
+    text-align: left;
+
+    strong {
+      display: inline-block;
+    }
+  }
+}
+
+.yellow-tab {
+  background: #FDCE02;
+  text-align: center;
+  position: relative;
+  padding: 10px;
+  @include tablet {
+    padding: 15px;
+  }
+
+  &:after {
+    content: "";
+    position: absolute;
+    height: 0;
+    width: 0;
+    margin: -2px -50px 0 0;
+    top: 100%;
+    right: 50%;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-top: 15px solid #FDCE02;
+    @include desktop {
+      border-top-width: 20px;
+    }
+  }
+
+  p {
+    font: 700 15px/1em $opensans;
+    margin: 0 auto;
+    text-transform: uppercase;
+    @include tablet {
+      font-size: 18px;
+    }
+    @include desktop {
+      font-size: 21px;
+    }
+  }
+}
+
+#leadGen {
+  background: #000 url(https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gavins-grooves/bg-customize.jpg) center center/cover;
+  color: #FFF;
+  max-width: 800px;
+  padding: 45px 0;
+  text-align: center;
+  border: 2px solid #444;
+  border-radius: 5px;
+
+  .series-logo {
+    width: 100%;
+    max-width: 270px;
+    @include tablet {
+      max-width: 420px;
+    }
+    @include desktop {
+      max-width: 500px;
+    }
+
+    &.slim {
+      max-width: 330px;
+      @include tablet {
+        max-width: 500px;
+      }
+      @include desktop {
+        max-width: 700px;
+      }
+
+    }
+  }
+
+  h2 {
+    font: 400 17px/1.3em $opensans;
+    margin: 0 auto;
+    @include tablet {
+      font-size: 20px;
+    }
+  }
+
+  .course-logo {
+    margin: 20px auto;
+    @include tablet {
+      margin: 40px auto 50px;
+    }
+
+    h2 {
+      font: 700 36px/1em $robotocondensed;
+      margin: 0 auto;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      @include tablet {
+        font-size: 55px;
+        letter-spacing: 8px;
+      }
+    }
+
+    h3 {
+      font: 300 16px/1em $robotocondensed;
+      margin: 0 auto;
+      text-transform: uppercase;
+      @include tablet {
+        font-size: 22px;
+        letter-spacing: 3px;
+      }
+    }
+  }
+}
+
+
+.header {
+  background: #f2f3f3 url(https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/header-mobile.jpg) center center/cover;
+  padding-bottom: 88.8%;
+  @include tablet {
+    background-image: url(https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/header.jpg);
+    padding-bottom: 41.667%;
+  }
+}
+
+.anchor {
+  top: -60px;
+  @include tablet {
+    top: -142px;
+  }
+}
+
+.gray-bg {
+  background: #f2f3f3;
+  padding: 0 0 20px;
+  @include tablet {
+    padding: 0 0 30px;
+  }
+
+  .join.outline {
+    padding: 14px 9%;
+  }
+}
+
+.topic-linker {
+  text-align: center;
+  padding: 30px 0;
+  @include tablet {
+    padding: 50px 0;
+  }
+  @include desktop {
+    padding: 70px 0;
+  }
+
+  .row {
+    max-width: 1050px;
+  }
+
+  p {
+    font: 400 14px/1em $opensans;
+    margin: 0 auto 5px;
+    @include tablet {
+      margin: 0 auto 10px;
+      font-size: 19px;
+    }
+    @include desktop {
+      margin: 0 auto 15px;
+      font-size: 24px;
+    }
+  }
+
+  img {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto 25px;
+    @include tablet {
+      max-width: 450px;
+      margin: 0 auto 30px;
+    }
+    @include desktop {
+      max-width: 600px;
+      margin: 0 auto 40px;
+    }
+  }
+
+  .topic-link-wrap-shim {
+    height: 82px;
+    @include desktop {
+      height: 70px;
+    }
+  }
+
+  .topic-link-wrap {
+    @include tablet {
+      background: transparent;
+      width: 100%;
+      z-index: 97;
+      padding: 7px;
+      margin-top: -82px;
+    }
+    @include desktop {
+      margin-top: -70px;
+      padding: 10px;
+    }
+
+    &.stick-to-top {
+      @include tablet {
+        top: 56px;
+        background: #fff;
+        box-shadow: 0 0 5px hsla(0, 0%, 0%, .1);
+        position: fixed;
+        left: 0;
+        right: 0;
+        margin-top: 0;
+      }
+
+      .join {
+        @include tablet {
+          padding: 5px;
+          font-size: 14px;
+        }
+        @include desktop {
+          padding: 10px;
+          font-size: 16px;
+        }
+      }
+    }
+
+    .join {
+      width: 100%;
+      margin: 0 auto 10px;
+      @include tablet {
+        margin: 0 auto;
+      }
+
+      &.active {
+        background: #000;
+        color: #fff;
+        cursor: default;
+      }
+    }
+  }
+}
+
+.testimonial-section {
+  text-align: center;
+  padding: 0 15px;
+  @include tablet {
+    padding: 0 30px;
+  }
+
+  .row {
+    max-width: 1000px;
+  }
+
+  h1 {
+    text-transform: uppercase;
+    font: 700 25px/1em $robotocondensed;
+    margin: 0 auto 20px;
+    @include tablet {
+      font-size: 32px;
+      margin: 0 auto 30px;
+    }
+    @include desktop {
+      font-size: 40px;
+      margin: 0 auto 40px;
+    }
+  }
+
+  .testimonial-box {
+    background: #fff;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+    margin: 0 auto 20px;
+    @include tablet {
+      padding: 30px;
+      border-radius: 30px;
+      box-shadow: 0 20px 20px rgba(0, 0, 0, 0.05);
+      margin: 0 auto 30px;
+    }
+    @include desktop {
+      padding: 40px;
+      border-radius: 40px;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    .avatar {
+      position: relative;
+      float: left;
+      border-radius: 50%;
+      overflow: hidden;
+
+      .credit {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        text-align: center;
+        font: 600 9px/1.15em $robotocondensed;
+        text-transform: uppercase;
+        color: #fff;
+        text-shadow: 0 0 15px #000;
+        padding: 10px 0 13px;
+        @include desktop {
+          font-size: 10px;
+        }
+      }
+    }
+
+    img {
+      border-radius: 50%;
+      margin: 15px auto 0;
+      width: 110px;
+      @include tablet {
+        width: 130px;
+        float: left;
+        margin: 0;
+      }
+      @include desktop {
+        width: 220px;
+      }
+    }
+
+    .quote-wrap {
+      float: left;
+      text-align: center;
+      @include tablet {
+        width: calc(100% - 130px);
+        padding-left: 20px;
+        text-align: left;
+      }
+      @include desktop {
+        width: calc(100% - 220px);
+        padding-left: 30px;
+      }
+
+      h3 {
+        font: 700 16px/1.3em $opensans;
+        margin: 0 auto 10px;
+        color: $drumeoBlue;
+        text-align: left;
+        @include tablet {
+          font-size: 18px;
+          margin: 0 auto 15px;
+        }
+        @include desktop {
+          font-size: 22px;
+          margin: 0 auto 20px;
+        }
+      }
+
+      p {
+        font: 400 14px/1.5em $opensans;
+        margin: 0 auto;
+        text-align: left;
+        @include tablet {
+          font-size: 15px;
+        }
+        @include desktop {
+          font-size: 16px;
+        }
+
+        &.name-location {
+          text-transform: uppercase;
+          color: #565D5F;
+          text-align: center;
+          font-size: 12px;
+          margin: 15px auto 0;
+          @include tablet {
+            text-align: left;
+          }
+          @include desktop {
+            font-size: 14px;
+            margin: 20px auto 0;
+          }
+
+          strong {
+            color: #000;
+          }
+        }
+      }
+    }
+  }
+}
+
+.testimonial-pitch {
+  text-align: center;
+  padding: 25px 10px 40px;
+  @include tablet {
+    padding: 30px 0 50px;
+  }
+  @include desktop {
+    padding: 40px 0 70px;
+  }
+
+  h3 {
+    font: 400 16px/1.3em $opensans;
+    margin: 0 auto 10px;
+    @include tablet {
+      font-size: 18px;
+      margin: 0 auto 15px;
+    }
+    @include desktop {
+      font-size: 22px;
+      margin: 0 auto 20px;
+    }
+  }
+
+  .join {
+    font-size: 18px;
+    padding: 16px 32px;
+    margin: 10px auto 0;
+    @include tablet {
+      margin: 0 auto;
+    }
+
+    &.outline {
+      padding: 14px 32px;
+    }
+  }
+}

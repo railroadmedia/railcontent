@@ -71,10 +71,6 @@ class PackPagesController extends Controller
     {
         ContentRepository::$pullFutureContent = true;
 
-        if (user()->isAMember()) {
-            ContentRepository::$bypassPermissions = true;
-        }
-
         AddedToPrimaryPlaylistDecorator::$skip = true;
         PackDecorator::$skip = true;
         LessonAssignmentDecorator::$skip = true;
@@ -93,6 +89,28 @@ class PackPagesController extends Controller
                                                false
             )['results']
         ))->sortByUserActivity(user()->id);
+
+        foreach($packs as $pack){
+            $nextLesson = $this->contentService->getNextContentForParentContentForUser($pack['id'], user()->id);
+            if($nextLesson && $nextLesson['type'] == 'pack-bundle-lesson'){
+                $bundle = $this->contentService->getByChildIdWhereParentTypeIn($nextLesson['id'],['pack-bundle'])->first();
+
+                $nextLesson['url'] = url()->route(
+                    'platform.packs.third-level',
+                    [
+                        "brand" => $brand,
+                        "packSlug" => $pack['slug'],
+                        "packId" => $pack['id'],
+                        "packBundleSlug" => $bundle['slug'],
+                        "packBundleId" => $bundle['id'],
+                        "packBundleLessonSlug" => $nextLesson['slug'],
+                        "packBundleLessonId" => $nextLesson['id'],
+                    ]
+                );
+
+                $pack['next_lesson_url'] = $nextLesson['url'];
+            }
+        }
 
         if (user()->isALifetimeMember() && brand() == 'drumeo') {
             foreach ($packs as $packIndex => $pack) {
@@ -116,15 +134,11 @@ class PackPagesController extends Controller
     public function packBundles(Request $request, $domain, $brand, $packSlug, $packId)
     {
         ContentRepository::$pullFutureContent = true;
-
-        if (user()->isAMember()) {
-            ContentRepository::$bypassPermissions = true;
-        }
-
+        
         Decorator::$typeDecoratorsEnabled = false;
         ContentRepository::$pullFilterResultsOptionsAndCount = false;
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
-
+        
         $pack = $this->contentService->getById($packId);
 
         if (empty($pack)) {
@@ -158,10 +172,12 @@ class PackPagesController extends Controller
                                      ]);
         }
 
-        $infoData = [
-            "lessons" => $thisPackBundle['child_count'],
-            "xp" => $pack->fetch('total_xp'),
-        ];
+        if($pack['type'] == 'pack'){
+            $infoData['lessons'] = $packBundles->sumFetched('lesson_count');
+        }else{
+            $infoData["lessons"] = count($packBundles);
+        }
+        $infoData['xp'] = $pack->fetch('total_xp', 0);
 
         $backButton = [
             "text" => "Back to All Lessons",
@@ -200,10 +216,6 @@ class PackPagesController extends Controller
     ) {
         ContentRepository::$pullFutureContent = true;
 
-        if (user()->isAMember()) {
-            ContentRepository::$bypassPermissions = true;
-        }
-
         Decorator::$typeDecoratorsEnabled = false;
         ContentRepository::$pullFilterResultsOptionsAndCount = false;
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
@@ -238,10 +250,26 @@ class PackPagesController extends Controller
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MAXIMUM;
         $collectionForDecoration = Decorator::decorate($collectionForDecoration, 'content');
 
+        foreach ($lessons as $lesson) {
+            $url = url()->route(
+                'platform.packs.third-level',
+                [
+                    "brand" => $brand,
+                    "packSlug" => $packSlug,
+                    "packId" => $packId,
+                    "packBundleSlug" => $thisPackBundle['slug'],
+                    "packBundleId" => $thisPackBundle['id'],
+                    "packBundleLessonSlug" => $lesson['slug'],
+                    "packBundleLessonId" => $lesson['id'],
+                ]
+            );
+            $lesson['url'] = $url;
+        }
+
         $childContent = new ContentFilterResultsEntity(['results' => $lessons]);
 
         $infoData = [
-            "lessons" => $thisPackBundle['child_count'],
+            "lessons" => count($lessons),
             "xp" => $thisPackBundle->fetch('total_xp'),
         ];
 
@@ -316,10 +344,6 @@ class PackPagesController extends Controller
                 [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED, ContentService::STATUS_SCHEDULED];
         }
 
-        if (user()->isAMember()) {
-            ContentRepository::$bypassPermissions = true;
-        }
-
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
 
         $pack =
@@ -342,6 +366,18 @@ class PackPagesController extends Controller
             if ($parentChild['id'] == $packBundleLessonId) {
                 $lesson = $parentChild;
             }
+            $parentChild['url'] = url()->route(
+                'platform.packs.third-level',
+                [
+                    "brand" => $brand,
+                    "packSlug" => $packSlug,
+                    "packId" => $packId,
+                    "packBundleSlug" => $thisPackBundle['slug'],
+                    "packBundleId" => $thisPackBundle['id'],
+                    "packBundleLessonSlug" => $parentChild['slug'],
+                    "packBundleLessonId" => $parentChild['id'],
+                ]
+            );
         }
 
         if (empty($lesson)) {
@@ -429,10 +465,6 @@ class PackPagesController extends Controller
         } else {
             ContentRepository::$availableContentStatues =
                 [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED];
-        }
-
-        if (user()->isAMember()) {
-            ContentRepository::$bypassPermissions = true;
         }
 
         $pack =
@@ -595,10 +627,6 @@ class PackPagesController extends Controller
         } else {
             ContentRepository::$availableContentStatues =
                 [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED];
-        }
-
-        if (user()->isAMember()) {
-            ContentRepository::$bypassPermissions = true;
         }
 
         Decorator::$typeDecoratorsEnabled = false;

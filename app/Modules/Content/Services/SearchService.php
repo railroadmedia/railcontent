@@ -38,11 +38,10 @@ class SearchService
             DB::statement('CREATE TABLE railcontent_search_indexes_staging LIKE railcontent_search_indexes');
         }
 
-        $test = Content::all();
-
         $types = $this->getContentTypes();
         $statuses = ConfigService::$indexableContentStatuses;
-        $query = Content::query()->whereNotFuture()->whereStatuses($statuses)->whereTypes($types)->orderBy('id');
+        $query = Content::query()->select(array_merge(['id', 'slug', 'title', 'brand', 'status', 'type', 'published_on'], config('railcontent.contentColumnNamesForFields')))
+            ->whereStatuses($statuses)->whereTypes($types)->orderBy('id');
 
         $query->chunk(1000, function ($query) {
             $contentRows = $query->toArray();

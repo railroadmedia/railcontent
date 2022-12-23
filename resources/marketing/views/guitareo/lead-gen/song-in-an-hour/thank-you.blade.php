@@ -1,6 +1,6 @@
-@extends('guitareo._partials.layout')
+@extends('guitareo.lead-gen.lead-gen-layout-tw')
 
-@section('head-includes')
+@section('meta')
     @parent
     <meta name="robots" content="noindex">
 
@@ -12,6 +12,7 @@
     <meta property="og:description" content="Play your first song on the guitar, start to finish, in an hour -- even if you’ve never played before.">
     <meta property="og:url" content="https://www.guitareo.com/song-in-an-hour/">
 
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/song-in-an-hour.css') }}">
     <style>
         .hero-header:after {
             content:none;
@@ -19,7 +20,7 @@
     </style>
 @stop
 
-@section('layout-body')
+@section('body')
     <header class="hero-header text-center px-3 py-5 md:py-6 lg:py-16 relative text-white" style="background: linear-gradient(180deg, #010611, #10052b);">
         <div class="container mx-auto relative z-10">
             <img class="logo guitar-quest mx-auto mb-2 sm:mb-5" src="https://cdn.musora.com/image/fetch/w_220,q_60,q_auto:best/https://guitareo.s3.amazonaws.com/shop/logos/guitar-quest-logo.png"><br>

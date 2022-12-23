@@ -1,19 +1,22 @@
-@extends('guitareo._partials.layout')
+@extends('guitareo._partials.global-vue-layout')
 
-@section('head-includes')
+@section('meta')
     @parent
-
     <title>The Guitar System  - Online Guitar Lessons With Nate Savage</title>
     <meta name="description" content="The Guitar System is a complete and comprehensive collection of online guitar lessons featuring Nate Savage.  The step-by-step video lessons are designed to produce rapid results for students of all skill levels.">
 
     <meta property="og:image" content="https://guitarsystem-com.s3.amazonaws.com/media/social/gs-1200x630.jpg" style="display: none;">
     <meta property="og:description" content="The Guitar System is a complete and comprehensive collection of online guitar lessons featuring Nate Savage.  The step-by-step video lessons are designed to produce rapid results for students of all skill levels.">
     <meta property="og:url" content="https://www.guitareo.com/guitar-system">
+@stop()
 
-    <link href="{{ asset('/assets/css/tailwind-helpers.css') }}" rel="stylesheet">
+@section('styles')
+    @parent
+    <link href="{{ asset('/marketing/css/guitareo/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation-float.min.css" rel="stylesheet">
-    <link href="{{ asset('assets/marketing/gs.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/marketing/nav-footer.css') }}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="{{ asset('marketing/parcel/guitareo/gs.css') }}" rel="stylesheet">
+    <link href="{{ asset('marketing/parcel/guitareo/nav-footer.css') }}" rel="stylesheet">
     <style>
         .text-yellow {
             color: #ffe200;
@@ -21,58 +24,10 @@
     </style>
 @stop()
 
-@section('layout-scripts')
+@section('scripts')
     @parent
-    <script src="/assets/js/modal.js"></script>
-    <script src="{{ asset('assets/marketing/nav-footer.js') }}"></script>
-    <script src="/js/jquery.countdown-2.js"></script>
-    <script>
-        $(document).ready(function () {
-            // Countdown
-            $('.tzcd-full').countdown('2021/11/30')
-                .on('update.countdown', function (event) {
-                    var format = '%-M Minute%!M';
-                    if (event.offset.totalHours > 0) {
-                        format = '%-H Hour%!H ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '%-D Day%!D ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('a limited time');
-                });
-            $('.tzcd-small').countdown('2021/11/30')
-                .on('update.countdown', function (event) {
-                    var format = '%-MM %-SS';
-                    if (event.offset.totalHours > 0) {
-                        format = '%-HH ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '%-DD ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('a limited time');
-                });
-            $('.tzcd-big').countdown('2021/11/30')
-                .on('update.countdown', function (event) {
-                    var format = '' + '<div><h1>%M</h1> <p>min%!M</p></div> ' + '<div><h1>%S</h1> <p>sec%!S</p></div>';
-                    if (event.offset.totalHours > 0) {
-                        format = '' + '<div><h1>%H</h1> <p>hr%!H</p></div> ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '' + '<div><h1>%D</h1> <p>day%!D</p></div> ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('<div><h1>LIMITED</h1> <p>TIME LEFT</p></div>');
-                });
-        });
-    </script>
+    <script src="{{ asset('/marketing/js/modal.js') }}"></script>
+    <script src="{{ asset('marketing/parcel/guitareo/nav-footer.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $(document).foundation();
@@ -90,27 +45,16 @@
 @stop()
 
 
-@section('layout-body')
+@section('content')
     @include("guitareo.sales.partials._nav", [
         "cartVersion" => true
     ])
-    @include('shop.elements.promo-banner', [
+    @include('guitareo._partials.promo-banner', [
                 "name" => "Guitar System",
-                "fullPrice" => App\Prices::$guitarSystemFull,
-                "price" => App\Prices::$guitarSystemRegular,
+                "fullPrice" => GuitareoPrices::$guitarSystemFull,
+                "price" => GuitareoPrices::$guitarSystemRegular,
                 "noBreadcrumb" => true
             ])
-    <div class="promo-banner-shim"></div>
-    <a href="/" class="promo-banner fixed" style="background: linear-gradient(to bottom, #97fabf, #9ddcf7);color:#000;">
-        <div class="noise-wrap">
-            <div class="row container mx-auto">
-                <div class="text text-center">
-                    {{--<img class="logo" src="https://guitareo.s3.amazonaws.com/sales/promos/black-friday/xm-logo2021.png">--}}
-                    <p><strong>$197 or FREE With A $100<br>  Guitareo Membership</strong></p>
-                </div>
-            </div>
-        </div>
-    </a>
 
     <header class="header stacked">
         <div class="row header-row">
@@ -127,10 +71,10 @@
                 <p><strong>Transform your guitar playing with the <br class="show-for-medium">ULTIMATE Encyclopedia of Guitar Lessons</strong></p>
                 <a href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['GUITAR-SYSTEM' => 1],'redirect' => '/order']) }}" class="join" data-product-json='{"GUITAR-SYSTEM": 1}'>Get Started &raquo;</a>
                 <p class="price-info">
-                    @if(App\Prices::$guitarSystemFull > App\Prices::$guitarSystemRegular)
-                        <s>NORMALLY ${{ App\Prices::$guitarSystemFull }}.</s> &nbsp;<strong><u>ONLY ${{ App\Prices::$guitarSystemRegular }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (App\Prices::$guitarSystemRegular / App\Prices::$guitarSystemFull))) }}%)
+                    @if(GuitareoPrices::$guitarSystemFull > GuitareoPrices::$guitarSystemRegular)
+                        <s>NORMALLY ${{ GuitareoPrices::$guitarSystemFull }}.</s> &nbsp;<strong><u>ONLY ${{ GuitareoPrices::$guitarSystemRegular }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (GuitareoPrices::$guitarSystemRegular / GuitareoPrices::$guitarSystemFull))) }}%)
                     @else
-                        <strong><u>ONLY ${{ App\Prices::$guitarSystemRegular }}</u></strong>
+                        <strong><u>ONLY ${{ GuitareoPrices::$guitarSystemRegular }}</u></strong>
                     @endif
                     <br><a href="/" class="text-guitareo">(OR FREE WITH A GUITAREO MEMBERSHIP)</a>
                         <br> <strong>** 90-DAY GUARANTEE **</strong>
@@ -155,7 +99,7 @@
                     {{--<img class="logo animated tada delay-2s" src="https://guitareo.s3.amazonaws.com/sales/promos/april/guitar-month-logo.png">--}}
                     {{--<br>--}}
                     {{--<div class="text">--}}
-                        {{--<p class="text-left" style="max-width:510px">It’s Guitar Month! And we’re celebrating by giving you a {{ round(100 - (100 * (\App\Prices::$guitarSystemRegular / \App\Prices::$guitarSystemFull))) }}% discount on our most popular training pack where you’ll learn ANYTHING you want on guitar.--}}
+                        {{--<p class="text-left" style="max-width:510px">It’s Guitar Month! And we’re celebrating by giving you a {{ round(100 - (100 * (GuitareoPrices::$guitarSystemRegular / GuitareoPrices::$guitarSystemFull))) }}% discount on our most popular training pack where you’ll learn ANYTHING you want on guitar.--}}
                             {{--<br><br>--}}
                             {{--Yes, anything!--}}
                             {{--<br><br>--}}
@@ -163,12 +107,6 @@
                             {{--<br><br>--}}
                             {{--<u>Just click here to get started</u> -- and join in the celebration by playing and creating the music you love.--}}
                             {{--<br></p>--}}
-                        {{--<div class="tzcd-big">--}}
-                        {{--<div><h1>00</h1> <p>days</p></div>--}}
-                        {{--<div><h1>00</h1> <p>hrs</p></div>--}}
-                        {{--<div><h1>00</h1> <p>mins</p></div>--}}
-                        {{--<div><h1>00</h1> <p>secs</p></div>--}}
-                        {{--</div>--}}
                         {{--<div class="join">Get Started &raquo;</div>--}}
                     {{--</div>--}}
                 {{--</a>--}}
@@ -178,8 +116,8 @@
 
     <section class="lesson-breakdown">
         <div class="row">
-            <h1>Learn How To Play Anything On Guitar... <u>For Just ${{ App\Prices::$guitarSystemRegular }}</u></h1>
-            {{--<h3 class="light"><em><s>NORMALLY ${{ App\Prices::$guitarSystemFull }}</s></em></h3>--}}
+            <h1>Learn How To Play Anything On Guitar... <u>For Just ${{ GuitareoPrices::$guitarSystemRegular }}</u></h1>
+            {{--<h3 class="light"><em><s>NORMALLY ${{ GuitareoPrices::$guitarSystemFull }}</s></em></h3>--}}
             <h3 class="light">&nbsp;</h3>
             <div class="columns tile-wrap small-up-2 medium-up-3">
                 @include('guitareo.products._lesson-tile', [
@@ -364,7 +302,7 @@
                 ])
             </div>
             <a href="#order-section" class="join anchor-slide">Get Started &raquo;</a>
-            <p class="price-info">{{--SAVE {{ round(100 - (100 * (App\Prices::$guitarSystemRegular / App\Prices::$guitarSystemFull))) }}% +--}} 90-DAY MONEY BACK GUARANTEE</p>
+            <p class="price-info">{{--SAVE {{ round(100 - (100 * (GuitareoPrices::$guitarSystemRegular / GuitareoPrices::$guitarSystemFull))) }}% +--}} 90-DAY MONEY BACK GUARANTEE</p>
         </div>
     </section>
 
@@ -396,7 +334,7 @@
             <div class="columns medium-6 circle-point">
                 <div class="point-icon"><i class="fal fa-id-card"></i></div>
                 <p><strong>Unlimited Lifetime Access</strong><br>
-                    Get The Guitar System for just ${{ App\Prices::$guitarSystemRegular }} today to get online access to the entire course - for life.</p>
+                    Get The Guitar System for just ${{ GuitareoPrices::$guitarSystemRegular }} today to get online access to the entire course - for life.</p>
             </div>
             <div class="columns medium-6 circle-point">
                 <div class="point-icon"><i class="fal fa-thumbs-up"></i></div>
@@ -482,7 +420,7 @@
             </div>
             <div class="large-8 medium-7 columns text-center medium-text-left">
                 <h1>90-Day Money-Back Guarantee.</h1>
-                <p>We love our students. More than anything, we want you to enjoy a super-positive experience playing guitar. And that means we only want you to pay if you actually LOVE your Guitareo experience! So join below to try it out totally risk-free. If it’s not for you, simply <a class="text-white" href="/support">contact us</a> within 90 days to request a full refund.</p>
+                <p>We love our students. More than anything, we want you to enjoy a super-positive experience playing guitar. And that means we only want you to pay if you actually LOVE your Guitareo experience! So join below to try it out totally risk-free. If it’s not for you, simply <a class="text-white" href="{{ get_musora_brand_base_url() }}/contact">contact us</a> within 90 days to request a full refund.</p>
             </div>
         </div>
     </section>
@@ -491,15 +429,15 @@
     <section class="final text-center">
         <div class="row">
             {{--<img class="logo edge" src="https://guitareo.s3.amazonaws.com/sales/promos/cyber-monday/logo.png"><br>--}}
-            <img class="logo" src="https://guitareo.s3.amazonaws.com/tripwire/gs-logo.png">
+            <img class="logo mx-auto" src="https://guitareo.s3.amazonaws.com/tripwire/gs-logo.png">
             <h2>The Ultimate Encyclopedia <br>Of Guitar Lessons</h2>
             <a href="{{ url()->route('shopping-cart.add-to-cart',
                 ['products' => ['GUITAR-SYSTEM' => 1], 'redirect' => '/order']) }}" class="join" data-product-json='{"GUITAR-SYSTEM": 1}'>Get Started &raquo;</a>
             <p class="breakdown">
-                @if(App\Prices::$guitarSystemFull > App\Prices::$guitarSystemRegular)
-                    <s style="opacity: 0.6;">NORMALLY ${{ App\Prices::$guitarSystemFull }}.</s> &nbsp;<strong><u>ONLY ${{ App\Prices::$guitarSystemRegular }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (App\Prices::$guitarSystemRegular / App\Prices::$guitarSystemFull))) }}%)
+                @if(GuitareoPrices::$guitarSystemFull > GuitareoPrices::$guitarSystemRegular)
+                    <s style="opacity: 0.6;">NORMALLY ${{ GuitareoPrices::$guitarSystemFull }}.</s> &nbsp;<strong><u>ONLY ${{ GuitareoPrices::$guitarSystemRegular }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (GuitareoPrices::$guitarSystemRegular / GuitareoPrices::$guitarSystemFull))) }}%)
                 @else
-                    <strong><u>ONLY ${{ App\Prices::$guitarSystemRegular }}</u></strong>
+                    <strong><u>ONLY ${{ GuitareoPrices::$guitarSystemRegular }}</u></strong>
                 @endif
                 <br><a href="/" class="text-guitareo">(OR FREE WITH A GUITAREO MEMBERSHIP)</a>
                 <br><strong>** 90-DAY GUARANTEE **</strong></p>

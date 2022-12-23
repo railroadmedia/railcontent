@@ -168,7 +168,7 @@ class VaporEnvManager extends Command
         $stringChunksToSave = [];
 
         while (strlen($remainingString) > 0) {
-            $chunk = substr($remainingString, 0, 1024);
+            $chunk = substr($remainingString, 0, 1536);
             $lastNewlinePos = strrpos($chunk, "\n");
 
             if (!$lastNewlinePos) {

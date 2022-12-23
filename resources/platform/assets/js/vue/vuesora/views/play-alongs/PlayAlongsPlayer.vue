@@ -2,12 +2,12 @@
     <div
         id="playAlongsPlayer"
         class="container collapsed fluid bg-white shadow tw-transition"
-        :class="collapsed ? 'collapsed-down' : ''"
+        :class="[collapsed ? 'collapsed-down' : '', !noSidebar ? 'with-sidebar' : '']"
     >
         <div
             v-if="loop"
             id="anchorA"
-            class="loop-anchor bg-drumeo text-white body dense font-bold rounded noselect pointer"
+            class="loop-anchor bg-drumeo text-white body dense font-bold tw-rounded-full noselect pointer"
             :style="'left:' + anchorOffsets.a + '%;'"
             @mousedown="emitAnchorMouseDown('a')"
             @touchstart="emitAnchorMouseDown('a')"
@@ -18,7 +18,7 @@
         <div
             v-if="loop"
             id="anchorB"
-            class="loop-anchor bg-drumeo text-white body dense font-bold rounded noselect pointer"
+            class="loop-anchor bg-drumeo text-white body dense font-bold tw-rounded-full noselect pointer"
             :style="'left:' + anchorOffsets.b + '%;'"
             @mousedown="emitAnchorMouseDown('b')"
             @touchstart="emitAnchorMouseDown('b')"
@@ -72,7 +72,7 @@
                     {{ $_title }}
                 </h4>
                 <h6 class="body text-center text-grey-4 mb-2">
-                    <span class="capitalize">{{ $_style }}</span> @ {{ $_bpm }} BPM
+                    <span class="capitalize">{{ $_style }}</span> @ {{ $_bpm }} BPM {{ noSidebar }}
                 </h6>
                 <h6 class="body dense text-grey-4 text-center">
                     {{ parseTime(currentTime) }} / {{ parseTime(totalDuration) }}
@@ -100,34 +100,34 @@
 
         <div class="flex flex-row align-h-center pv-1">
             <button
-                class="btn collapse-square mh-1"
+                class="btn collapse-square mh-1 tw-rounded-full"
                 :disabled="disablePreviousTrack"
                 @click.stop="previousTrack"
                 @keyup.prevent
                 @keydown.prevent
             >
-                <span class="flat bg-black">
+                <span class="flat tw-text-black">
                     <i class="fas fa-step-backward tw-text-[#00101D]"></i>
                 </span>
             </button>
 
             <button
-                class="btn collapse-square mh-1 skip-5"
+                class="btn collapse-square mh-1 skip-5 tw-rounded-full"
                 @click.stop="skipFive(false)"
                 @keyup.prevent
                 @keydown.prevent
             >
-                <span class="flat bg-black">
+                <span class="flat tw-text-black">
                     <i class="fas fa-undo tw-text-[#00101D]"></i>
                 </span>
             </button>
 
             <button
-                class="btn collapse-square mh-1"
+                class="btn collapse-square mh-1 tw-rounded-full"
                 @click.stop="playPause"
                 @keydown.prevent
             >
-                <span class="flat bg-black">
+                <span class="flat tw-text-black">
                     <i
                         class="fas tw-text-[#00101D]"
                         :class="!audioPlayer.paused ? 'fa-pause' : 'fa-play'"
@@ -136,22 +136,22 @@
             </button>
 
             <button
-                class="btn collapse-square mh-1 skip-5"
+                class="btn collapse-square mh-1 skip-5 tw-rounded-full"
                 @click.stop="skipFive(true)"
                 @keydown.prevent
             >
-                <span class="flat bg-black">
+                <span class="flat tw-text-black">
                     <i class="fas fa-redo tw-text-[#00101D]"></i>
                 </span>
             </button>
 
             <button
-                class="btn collapse-square mh-1"
+                class="btn collapse-square mh-1 tw-rounded-full"
                 :disabled="isShuffle && playedContent.length === totalResults"
                 @click.stop="nextTrack"
                 @keydown.prevent
             >
-                <span class="flat bg-black">
+                <span class="flat tw-text-black">
                     <i class="fas fa-step-forward tw-text-[#00101D]"></i>
                 </span>
             </button>
@@ -163,27 +163,27 @@
                 <div class="flex flex-row">
 
                     <button
-                        class="btn collapse-square mh-1"
+                        class="btn collapse-square mh-1 tw-rounded-full"
                         :title="metronome ? 'Disable Click Track' : 'Enable Click Track'"
                         @click.self.stop.prevent="toggleMetronome"
                         @keydown.prevent
                     >
                         <span
-                            class="bg-white rounded"
+                            class="bg-white tw-rounded-full"
                             :class="metronome ? 'text-grey-5' : 'inverted text-white'"
                         >
-                            <i class="icon-metronome"></i>
+                            <musora-icon icon-name="metronome" class="tw-w-[20px]"></musora-icon>
                         </span>
                     </button>
 
                     <button
-                        class="btn collapse-square mh-1"
+                        class="btn collapse-square mh-1 tw-rounded-full"
                         :title="drums ? 'Disable Drum Track' : 'Enable Drum Track'"
                         @click.stop="toggleDrums"
                         @keydown.prevent
                     >
                         <span
-                            class="bg-white rounded"
+                            class="bg-white tw-rounded-full"
                             :class="drums ? 'text-grey-5' : 'inverted text-white'"
                         >
                             <i class="icon-drums"></i>
@@ -191,13 +191,13 @@
                     </button>
 
                     <button
-                        class="btn collapse-square mh-1"
+                        class="btn collapse-square mh-1 tw-rounded-full"
                         :title="loop ? 'Disable Loop' : 'Enable Loop'"
                         @click.stop="toggleLoop"
                         @keydown.prevent
                     >
                         <span
-                            class="bg-white rounded"
+                            class="bg-white tw-rounded-full tw-rounded-full"
                             :class="loop ? 'text-grey-5' : 'inverted text-white'"
                         >
                             <i class="fa fa-repeat"></i>
@@ -275,6 +275,11 @@ export default {
 
         isPlaying: {
             type: Boolean,
+            default: () => false,
+        },
+
+        noSidebar: {
+            type: Boolean, 
             default: () => false,
         },
 
