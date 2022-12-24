@@ -163,7 +163,7 @@
     @include('musora.sales.components.header-section', [
         'header' => 'Online drum lessons for all skill levels.',
         'desc' => 'Learn the drums faster with step-by-step lessons, thousands of songs and unlimited personal support.',
-        'thumb' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/header-thumb2.jpg',
+        'thumb' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/jan-thumb-no-badge.jpg',
         'promoThumb' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/header-thumb-promo2.png',
         'promoThumbM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/header-thumb-promo-m2.jpg',
         'pointOne' => 'Improve Your Skills',
