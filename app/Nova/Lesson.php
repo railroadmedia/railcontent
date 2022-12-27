@@ -156,7 +156,7 @@ class Lesson extends Resource
             Text::make('Shop Card Description', 'short_desc')->hideFromIndex(),
             Boolean::make('Visible On Shop Page','visible')->default(true)->hideFromIndex(),
             Boolean::make('Included Edge', 'included_edge')->default(false)->hideFromIndex(),
-            Number::make('Display order', 'display_order')->required()->sortable(),
+            Number::make('Display order', 'display_order')->default(0)->sortable(),
             Heading::make('Product page'),
             Text::make('Header Text', 'header_text')->hideFromIndex(),
             Text::make('Subheader Text', 'subheader_text')->hideFromIndex(),
