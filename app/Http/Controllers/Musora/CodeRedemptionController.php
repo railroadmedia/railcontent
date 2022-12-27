@@ -93,6 +93,11 @@ class CodeRedemptionController extends BaseController
         return view('musora.pages.redeem.card-redeem-theme', ['newAccount' => true]);
     }
 
+    public function renderNewAccountThomannRedeemPage(    )
+    {
+        return view('musora.pages.redeem.thomann-redeem-theme', ['newAccount' => true]);
+    }
+
     public function renderExistingAccountRedeemPage()
     {
         return view('musora.pages.redeem.card-redeem-theme', ['newAccount' => false]);
