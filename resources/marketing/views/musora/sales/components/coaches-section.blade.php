@@ -106,17 +106,17 @@
                                                 prev: 'hidden',
                                                 next: 'splide__arrow--next your-class-next hidden sm:flex',
                                         },
-                                        perPage: 4,
+                                        perPage: 4.5,
                                         perMove: 1,
                                         type: 'loop',
                                         focus: 0,
                                         interval: 2000,
                                         breakpoints: {
                                             720: {
-                                                perPage: 3,
+                                                perPage: 3.2,
                                             },
                                             620: {
-                                                perPage: 2,
+                                                perPage: 2.2,
                                             },
                                         },
                                     }).mount()
@@ -127,7 +127,7 @@
                             <div class="splide__track">
                                 <ul class="splide__list">
                                     @foreach ($course['images'] as $image)
-                                        <li class="splide__slide flex flex-col items-center justify-center pb-8 pr-6 -mr-4">
+                                        <li class="splide__slide flex flex-col items-center justify-center pb-10 px-1">
                                             <div class="relative w-full rounded-xl bg-cover bg-center" style="padding-bottom: 120%; background-image:url(https://cdn.musora.com/image/fetch/w_400,q_auto:best/{{$image['img']}});">
                                                 <div class="rounded-b-xl absolute w-full bottom-0 h-1/2 text-white text-center flex justify-center flex-col" style="background:linear-gradient(180deg, rgba(1, 5, 15, 0) 0%, #01050F 100%);">
                                                     <h4 class="font-extrabold mb-2">{!! $image['title'] !!}</h4>

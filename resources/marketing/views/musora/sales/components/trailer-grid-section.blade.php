@@ -9,7 +9,7 @@
         <p class="mt-2 sm:mt-3 mb-8 sm:mb-10">{!! $desc !!}</p>
         <div class="flex flex-wrap items-start justify-center text-left mb-2 sm:mb-6">
             @foreach ($gridItems as $key => $gridItem)
-                <div class="flex flex-nowrap sm:flex-wrap items-start w-full sm:w-1/2 lg:w-1/3 pb-4 sm:pb-0 sm:px-3 mb-4 sm:mb-8 border-b sm:border-b-0">
+                <div class="flex flex-wrap items-start w-full sm:w-1/2 lg:w-1/3 pb-4 sm:pb-0 sm:px-3 mb-4 sm:mb-8 border-b sm:border-b-0">
                     <img
                         class="w-1/3 sm:w-full rounded-xl mb-3 transition-opacity opacity-0"
                         src="https://cdn.musora.com/image/fetch/w_640,q_auto:best/{{ $gridItem['image'] }}"

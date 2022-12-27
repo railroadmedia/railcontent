@@ -290,42 +290,42 @@
                 'images' => [
                     [
                         'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Anika-Nilles.jpg',
-                        'title' => 'Subdivision Studies',
+                        'title' => 'Subdivision<br> Studies',
                         'instructor' => 'Anika Nilles',
                     ],
                     [
                         'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Dom-Famularo.jpg',
-                        'title' => 'Pedal Control',
+                        'title' => 'Pedal<br> Control',
                         'instructor' => 'Dom Famularo',
                     ],
                     [
                         'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Tommy-Igoe.jpg',
-                        'title' => 'Groove Essentials',
+                        'title' => 'Groove<br> Essentials',
                         'instructor' => 'Tommy Igoe',
                     ],
                     [
                         'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Dorothe-Taylor-01.jpg',
-                        'title' => 'Stick Control',
+                        'title' => 'Stick<br> Control',
                         'instructor' => 'Dorothea Taylor',
                     ],
                     [
                         'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Bruce-Becker.jpg',
-                        'title' => 'Hand Technique',
+                        'title' => 'Hand<br> Technique',
                         'instructor' => 'Bruce Becker',
                     ],
                     [
                         'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Billy-Cobham.jpg',
-                        'title' => 'Internal Synchronization',
+                        'title' => 'Internal<br> Synchronization',
                         'instructor' => 'Billy Cobham',
                     ],
                     [
                         'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Emmanuelle-Caplette.jpg',
-                        'title' => 'Traditional Grip',
+                        'title' => 'Traditional<br> Grip',
                         'instructor' => 'Emmanuelle Caplette',
                     ],
                     [
                         'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Sarah-Thawer.jpg',
-                        'title' => '4-Way Coordination',
+                        'title' => '4-Way<br> Coordination',
                         'instructor' => 'Sarah Thawer',
                     ],
                 ]
@@ -335,42 +335,42 @@
                 'images' => [
                     [
                     'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Simon-Phillips.jpg',
-                    'title' => 'Elevate Your Drum Sound',
+                    'title' => 'Elevate Your<br> Drum Sound',
                     'instructor' => 'Simon Phillips',
                     ],
                     [
                     'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Aaron-Spears.jpg',
-                    'title' => 'Drum Chops',
+                    'title' => 'Drum<br> Chops',
                     'instructor' => 'Aaron Spears',
                     ],
                     [
                     'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Hannah-Welton.jpg',
-                    'title' => 'Writing Drum Parts',
+                    'title' => 'Writing<br> Drum Parts',
                     'instructor' => 'Hannah Welton',
                     ],
                     [
                     'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Matt-McGuire.jpg',
-                    'title' => 'Song Breakdowns',
+                    'title' => 'Song<br> Breakdowns',
                     'instructor' => 'Matt McGuire',
                     ],
                     [
                     'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Dorothe-Taylor-02.jpg',
-                    'title' => 'Rudiments & Patterns',
+                    'title' => 'Rudiments<br> & Patterns',
                     'instructor' => 'Dorothea Taylor',
                     ],
                     [
                     'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Aric-Improta.jpg',
-                    'title' => 'The Creative Mindset',
+                    'title' => 'The Creative<br> Mindset',
                     'instructor' => 'Aric Improta',
                     ],
                     [
                     'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Kaz-Rodgriguez.jpg',
-                    'title' => 'Musical Exercises',
+                    'title' => 'Musical<br> Exercises',
                     'instructor' => 'Kaz Rodriguez',
                     ],
                     [
                     'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Gavin-Harrison.jpg',
-                    'title' => 'Bass Drum Calibration',
+                    'title' => 'Bass Drum<br> Calibration',
                     'instructor' => 'Gavin Harrison',
                     ],
                 ]

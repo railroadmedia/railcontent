@@ -44,7 +44,7 @@
                     <div class="flex items-center rounded-xl px-3 py-2" style="background-color:#273040;">
                         <div class="text-left">
                             <img class="h-5 sm:h-6" src="https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png">
-                            <p class="opacity-60 text-sm"><em>Lessons only.</em></p>
+                            <p class="opacity-60 text-sm"><em>Lessons only.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</em></p>
                         </div>
                         <i class="far fa-circle text-2xl ml-1 sm:ml-10"></i>
                     </div>

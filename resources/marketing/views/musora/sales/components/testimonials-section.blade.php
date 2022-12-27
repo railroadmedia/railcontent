@@ -53,11 +53,11 @@
                     init() {
                         new Splide(this.$refs.splide, {
                         classes: {
-                                arrow: 'splide__arrow bg-white opacity-100',
+                                arrow: 'splide__arrow top-1/4 bg-white opacity-100',
                                 prev: 'hidden',
                                 next: 'splide__arrow--next your-class-next hidden sm:flex',
                         },
-                        perPage: 5,
+                        perPage: 5.2,
                         perMove: 1,
                         gap: '0.5rem',
                         type: 'loop',
@@ -65,13 +65,13 @@
                         focus: 0,
                         breakpoints: {
                             1024: {
-                                perPage: 4,
+                                perPage: 4.2,
                             },
                             720: {
-                                perPage: 3,
+                                perPage: 3.2,
                             },
                             620: {
-                                perPage: 2,
+                                perPage: 2.2,
                             },
                         },
                         }).mount()
@@ -82,7 +82,7 @@
                 <div class="splide__track">
                     <ul class="splide__list">
                         @foreach ($testimonials as $testimonial)
-                            <li class="splide__slide flex flex-col items-start pb-8">
+                            <li class="splide__slide flex flex-col items-start pb-10">
                                 <div class="relative cursor-pointer mb-2 overflow-hidden" x-on:click="{{str_replace(' ', '', $testimonial['name'])}} = true;">
                                     <img
                                         class="rounded-xl transition-opacity opacity-0"
