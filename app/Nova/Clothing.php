@@ -197,6 +197,7 @@ class Clothing extends Resource
 
                     return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
                 }),
+            Text::make('Bundle Image', 'bunde_img')->hideFromIndex()->hideFromDetail(),
             Text::make('Bundle Description', 'bundle_desc')->hideFromIndex(),
             Boolean::make('Bundle Free Shipping', 'bundle_free_shipping')->default(false)->hideFromIndex(),
         ];
