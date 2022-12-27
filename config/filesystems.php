@@ -58,9 +58,9 @@ return [
         ],
         'nova_s3' => [
             'driver' => 's3',
-            'key' => env('MWP_AWS_S3_ACCESS_KEY_ID'),
-            'secret' => env('MWP_AWS_S3_SECRET_ACCESS_KEY'),
-            'region' => env('MWP_AWS_S3_DEFAULT_REGION'),
+            'key' => env('NOVA_S3_KEY'),
+            'secret' => env('NOVA_S3_SECRET'),
+            'region' => env('NOVA_S3_REGION'),
             'bucket' => env('NOVA_S3_BUCKET', 'laravel-nova'),
             'url' => null,
             'endpoint' => null,
