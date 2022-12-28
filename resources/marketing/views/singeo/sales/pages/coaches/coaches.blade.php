@@ -1,31 +1,29 @@
 @php
-    require_once(resource_path('marketing/views/pianote/sales/pages/coaches/sliders.php'))
+    require_once(resource_path('marketing/views/singeo/sales/pages/coaches/sliders.php'))
 @endphp
 
-@extends('pianote.sales.pages.coaches-method-songs-layout')
+@extends('singeo.sales.pages.coaches-method-songs-layout')
 
 @section('page-meta')
-
+    <title>Singeo | Study with vocal coaches & performers.</title>
+    <meta property="og:title" content="Singeo | Study with vocal coaches & performers.">
+    <meta property="og:url" content="https://www.singeo.com/coaches">
+    <meta name="description" content="Shape your voice with warm up routines, artist courses, and live events.">
+    <meta property="og:description" content="Shape your voice with warm up routines, artist courses, and live events.">
+    <meta property="og:image" content="https://singeo.s3.amazonaws.com/sales/2023/share-image-coaches.jpg" style="display: none;">
 @endsection
-<title>Pianote | </title>
-<meta property="og:title" content="Pianote | ">
-<meta property="og:url" content="https://www.pianote.com/method">
-<meta name="description" content="">
-<meta property="og:description" content="">
-<meta property="og:image" content="" style="display: none;">
 
+@section('header-img', 'https://singeo.s3.amazonaws.com/sales/2023/coaches-thumb.jpg')
 
-@section('header-img', 'https://pianote.s3.amazonaws.com/sales/2023/coaches-thumb.jpg')
+@section('header', 'Study with vocal coaches & performers.')
 
-@section('header', 'Study with the world’s best teachers.')
-
-@section('desc', 'Amplify your skills with artist courses + exclusive live events with teachers, performers, and trending stars.')
+@section('desc', 'Shape your voice with warm up routines, artist courses, and live events.')
 
 @section('page-body')
     <section class="py-12 md:py-20">
         <div class="container max-w-6xl lg:ml-auto lg:mr-0 xl:mx-auto px-6 xl:px-0">
             <div class="mb-6">
-                <h4 class="font-extrabold mb-4">Learn and Style</h4>
+                <h4 class="font-extrabold mb-4">Express your voice</h4>
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
@@ -53,7 +51,7 @@
                     ",
                 ])
                     @slot('content')
-                        @foreach ($learn as $slide)
+                        @foreach ($express as $slide)
                             <li class="splide__slide">
                                 <div>
                                     <div class="relative mb-2" style="padding-bottom: 56.25%;">
@@ -125,7 +123,7 @@
                 @endcomponent
             </div>
             <div class="mb-6">
-                <h4 class="font-extrabold mb-4">Play more creatively</h4>
+                <h4 class="font-extrabold mb-4">Songwriting & Performance</h4>
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
@@ -153,7 +151,7 @@
                     ",
                 ])
                     @slot('content')
-                        @foreach ($creativities as $slide)
+                        @foreach ($performances as $slide)
                             <li class="splide__slide">
                                 <div>
                                     <div class="relative mb-2" style="padding-bottom: 56.25%;">
@@ -175,7 +173,7 @@
                 @endcomponent
             </div>
             <div class="mb-6">
-                <h4 class="font-extrabold mb-4">The power of chords</h4>
+                <h4 class="font-extrabold mb-4">Warm up routines</h4>
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
@@ -203,7 +201,56 @@
                     ",
                 ])
                     @slot('content')
-                        @foreach ($chords as $slide)
+                        @foreach ($routines as $slide)
+                            <li class="splide__slide">
+                                <div>
+                                    <div class="relative mb-2" style="padding-bottom: 56.25%;">
+                                        <img
+                                            class="rounded-xl transition-opacity opacity-0 w-full absolute w-full h-full object-cover"
+                                            src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/{{$slide['img']}}"
+                                            alt="{{$slide['title']}} img"
+                                            loading="lazy"
+                                            onload="this.classList.remove('opacity-0')"
+                                            style="object-position: top;"
+                                        >
+                                    </div>
+                                    <p class="font-bold mb-1 leading-tight">{{$slide['title']}}</p>
+                                </div>
+                            </li>
+                        @endforeach
+                    @endslot
+                @endcomponent
+            </div>
+            <div class="mb-6">
+                <h4 class="font-extrabold mb-4">Song breakdowns</h4>
+                @component('_partials.components.carousel',[
+                    'xdata' => "
+                        classes: {
+                            arrow: 'splide__arrow bg-white opacity-100',
+                            prev: 'hidden',
+                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50',
+                            pagination: 'hidden',
+                        },
+                        perPage: 4,
+                        perMove: 1,
+                        gap: '0.5rem',
+                        type: 'loop',
+                        interval: 2000,
+                        breakpoints: {
+                            1160: {
+                                perPage: 4,
+                            },
+                            900: {
+                                perPage: 3,
+                            },
+                            700: {
+                                perPage: 2,
+                            },
+                        },
+                    ",
+                ])
+                    @slot('content')
+                        @foreach ($breakdowns as $slide)
                             <li class="splide__slide">
                                 <div>
                                     <div class="relative mb-2" style="padding-bottom: 56.25%;">
@@ -225,7 +272,7 @@
                 @endcomponent
             </div>
             <div class="mb-6">
-                <h4 class="font-extrabold mb-4">Or… anything else!</h4>
+                <h4 class="font-extrabold mb-4">Just for beginners</h4>
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
@@ -253,7 +300,7 @@
                     ",
                 ])
                     @slot('content')
-                        @foreach ($anythingElse as $slide)
+                        @foreach ($beginners as $slide)
                             <li class="splide__slide">
                                 <div>
                                     <div class="relative mb-2" style="padding-bottom: 56.25%;">
@@ -277,12 +324,7 @@
 
         <div class="text-center">
             <h3 class="font-extrabold mb-6">More lessons & live events added every week.</h3>
-            <a href="" class="mx-1 join bg-pianote smaller">Get started <i class="fas fa-arrow-right" aria-hidden="true"></i> </a>
+            <a href="" class="mx-1 join bg-singeo smaller">Get started <i class="fas fa-arrow-right" aria-hidden="true"></i> </a>
         </div>
     </section>
-
-    {{--    @include('_partials.components.video-modal',[--}}
-    {{--        'name' => 'trailer',--}}
-    {{--        'video' => '772644658'--}}
-    {{--    ])--}}
 @stop

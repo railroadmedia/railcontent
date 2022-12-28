@@ -1,18 +1,17 @@
 @php
-    require_once(resource_path('marketing/views/pianote/sales/pages/songs/sliders.php'))
+    require_once(resource_path('marketing/views/singeo/sales/pages/songs/sliders.php'))
 @endphp
 
-@extends('pianote.sales.pages.coaches-method-songs-layout')
+@extends('singeo.sales.pages.coaches-method-songs-layout')
 
 @section('page-meta')
-
+    <title>Singeo | Sing your favorite songs. </title>
+    <meta property="og:title" content="Singeo | Sing your favorite songs. ">
+    <meta property="og:url" content="https://www.singeo.com/method">
+    <meta name="description" content="1000+ popular song breakdowns for every style, era, and skill level with handy play-along tools.">
+    <meta property="og:description" content="1000+ popular song breakdowns for every style, era, and skill level with handy play-along tools.">
+    <meta property="og:image" content="" style="display: none;">
 @endsection
-<title>Pianote | </title>
-<meta property="og:title" content="Pianote | ">
-<meta property="og:url" content="https://www.pianote.com/method">
-<meta name="description" content="">
-<meta property="og:description" content="">
-<meta property="og:image" content="" style="display: none;">
 
 @section('body-data')
     x-data ='{
@@ -22,9 +21,9 @@
 
 @section('header-img', 'https://pianote.s3.amazonaws.com/sales/2023/songs-thumb.jpg')
 
-@section('header', 'Play your favorite songs.')
+@section('header', 'Sing your favorite songs. ')
 
-@section('desc', '1000+ note-for-note song breakdowns for every style, era, and skill level with handy play-along tools.')
+@section('desc', '1000+ popular song breakdowns for every style, era, and skill level with handy play-along tools.')
 
 @section('page-body')
     <section class="py-12 md:py-20">
