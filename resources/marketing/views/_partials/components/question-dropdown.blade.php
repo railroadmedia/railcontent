@@ -8,19 +8,19 @@
             x-on:click="
                 open = !open;
                 if(open){
-                    $refs.dropdown1.classList.remove('hidden', 'h-0', 'max-h-0');
-                    $refs.dropdown1.classList.add('h-auto', 'max-h-full');
+                    $refs.dropdown1.classList.remove('hidden', 'h-0');
+                    $refs.dropdown1.classList.add('h-auto');
                     @if(!empty($lessonInfo))
-                    $refs.dropdown2.classList.remove('hidden', 'h-0', 'max-h-0');
-                    $refs.dropdown2.classList.add('h-auto', 'max-h-full');
+                    $refs.dropdown2.classList.remove('hidden', 'h-0');
+                    $refs.dropdown2.classList.add('h-auto');
                     @endif
                     $refs.icon.classList.add('rotate-45');
                 } else {
-                    $refs.dropdown1.classList.add( 'h-0', 'max-h-0');
-                    $refs.dropdown1.classList.remove('h-auto', 'max-h-full');
+                    $refs.dropdown1.classList.add('h-0');
+                    $refs.dropdown1.classList.remove('h-auto');
                     @if(!empty($lessonInfo))
-                    $refs.dropdown2.classList.add( 'h-0', 'max-h-0');
-                    $refs.dropdown2.classList.remove('h-auto', 'max-h-full');
+                    $refs.dropdown2.classList.add('h-0');
+                    $refs.dropdown2.classList.remove('h-auto');
                     @endif
                     $refs.icon.classList.remove('rotate-45');
                 }
@@ -44,19 +44,19 @@
             x-on:click="
                 open = !open;
                 if(open){
-                    $refs.dropdown1.classList.remove('hidden', 'h-0', 'max-h-0');
-                    $refs.dropdown1.classList.add('h-auto', 'max-h-full');
+                    $refs.dropdown1.classList.remove('hidden', 'h-0');
+                    $refs.dropdown1.classList.add('h-auto');
                     @if(!empty($lessonInfo))
-                    $refs.dropdown2.classList.remove('hidden', 'h-0', 'max-h-0');
-                    $refs.dropdown2.classList.add('h-auto', 'max-h-full');
+                    $refs.dropdown2.classList.remove('hidden', 'h-0');
+                    $refs.dropdown2.classList.add('h-auto');
                     @endif
                     $refs.icon.classList.add('rotate-45');
                 } else {
-                    $refs.dropdown1.classList.add( 'h-0', 'max-h-0');
-                    $refs.dropdown1.classList.remove('h-auto', 'max-h-full');
+                    $refs.dropdown1.classList.add('h-0');
+                    $refs.dropdown1.classList.remove('h-auto');
                     @if(!empty($lessonInfo))
-                    $refs.dropdown2.classList.add( 'h-0', 'max-h-0');
-                    $refs.dropdown2.classList.remove('h-auto', 'max-h-full');
+                    $refs.dropdown2.classList.add('h-0');
+                    $refs.dropdown2.classList.remove('h-auto');
                     @endif
                     $refs.icon.classList.remove('rotate-45');
                 }
@@ -68,9 +68,9 @@
     @if(!empty($lessonInfo))
         <div x-ref="dropdown2" class="transition-all duration-300 text-xs sm:text-sm text-left bg-[#F5F8FC] @if(empty($open) || !$open) h-0 @endif overflow-hidden" :class="open ? 'py-4 sm:py-6 pl-4 sm:pl-5 pr-8 sm:pr-12' : ''">
             @foreach($lessonInfo as $key => $info)
-                <div class="bg-white p-4 rounded-xl flex flex-col md:flex-row mb-2">
+                <div class="bg-white p-4 rounded-xl flex flex-col md:flex-row mb-2 @if(empty($info['desc'])) md:items-center @endif">
                     <img
-                        class="rounded-xl md:h-32 mb-6 md:mb-0 transition-opacity opacity-0"
+                        class="rounded-xl @if(empty($info['desc'])) md:h-24 @else md:h-32 @endif mb-6 md:mb-0 transition-opacity opacity-0"
                         src="https://cdn.musora.com/image/fetch/w_650,q_auto:best/{{$info['thumb']}}"
                         alt="lesson{{$key+1}} thumb"
                         loading="lazy"
@@ -78,8 +78,8 @@
                     />
                     <div class="md:pl-6">
                         <h5 class="font-extrabold">{{$info['title']}}</h5>
-                        <p class="my-2">{{$info['desc']}}</p>
-                            <p class="text-[#838C98]">{{ $info['lessonNum'] }} lessons</p>
+                        @if(!empty($info['desc']))<p class="my-2">{{$info['desc']}}</p>@endif
+                        @if(!empty($info['lessonNum']))<p class="text-[#838C98]">{{ $info['lessonNum'] }} lessons</p>@endif
                     </div>
                 </div>
             @endforeach
