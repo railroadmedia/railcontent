@@ -45,7 +45,7 @@
                                 perPage: 3.3,
                             },
                             700: {
-                                perPage: 2.3,
+                                perPage: 1.3,
                             },
                         },
                     ",
@@ -94,7 +94,7 @@
                                 perPage: 3.3,
                             },
                             700: {
-                                perPage: 2.3,
+                                perPage: 1.3,
                             },
                         },
                     ",
@@ -143,7 +143,7 @@
                                 perPage: 3.3,
                             },
                             700: {
-                                perPage: 2.3,
+                                perPage: 1.3,
                             },
                         },
                     ",
@@ -192,7 +192,7 @@
                                 perPage: 3.3,
                             },
                             700: {
-                                perPage: 2.3,
+                                perPage: 1.3,
                             },
                         },
                     ",
@@ -241,7 +241,7 @@
                                 perPage: 3.3,
                             },
                             700: {
-                                perPage: 2.3,
+                                perPage: 1.3,
                             },
                         },
                     ",

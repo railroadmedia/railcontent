@@ -24,7 +24,7 @@
 
 @section('header', 'Play your favorite songs.')
 
-@section('desc', 'Get 5000+ note-for-note song breakdowns for every style, era, and skill with handy play-along tools')
+@section('desc', 'Get 5000+ note-for-note song breakdowns for every style, era, and skill with handy play-along tools.')
 
 @section('page-body')
     <section class="py-12 md:py-20">

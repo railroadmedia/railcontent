@@ -11,10 +11,12 @@ $(document).ready(function (){
 
     $(".edge-wrap .features").click(function (e) {
         e.stopPropagation();
+        $(".instruments-dd").addClass("hidden");
         $(".features-dd").toggleClass("hidden");
     });
     $(".edge-wrap .instruments").click(function (e) {
         e.stopPropagation();
+        $(".features-dd").addClass("hidden");
         $(".instruments-dd").toggleClass("hidden");
     });
 

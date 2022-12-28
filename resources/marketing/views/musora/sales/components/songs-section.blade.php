@@ -2,17 +2,17 @@
 <section class="text-center text-white px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#0c1524;">
     <div class="container max-w-6xl mx-auto">
         <h2><strong>{!! $header !!}</strong></h2>
-        <p class="leading-tight mt-3">{!! $desc !!}</p>
+        <p class="leading-tight mt-2 sm:mt-3">{!! $desc !!}</p>
 
-        <div class="flex flex-wrap lg:flex-nowrap items-center justify-center my-6 lg:my-8">
+        <div class="flex flex-wrap lg:flex-nowrap items-center justify-center mt-4 sm:mt-6 lg:my-6">
             <video class="lg:order-1 h-64 sm:h-96 rounded-xl cursor-pointer" x-on:click="soundslice = true;" src="{{ $video }}" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
             <div class="text-left w-full sm:w-auto mt-6 lg:mt-0 lg:pr-8">
                 @foreach ($songItems as $songItem)
-                    <div class="flex mb-4 lg:my-6">
+                    <div class="flex mb-6 lg:my-6">
                         <div class="w-10 sm:w-14 flex-grow-0"><img alt="point icon" src="{{ $songItem['icon'] }}" class="h-6 sm:h-10"></div>
                         <div class="flex-grow pl-4">
                             <h5><strong>{!!$songItem['title']!!}</strong></h5>
-                            <p class="mt-2 text-sm">{!! $songItem['desc'] !!}</p>
+                            <p class="mt-1 sm:mt-2 text-sm">{!! $songItem['desc'] !!}</p>
                         </div>
                     </div>
                 @endforeach
@@ -34,7 +34,9 @@
                 START FOR FREE <i class="fas fa-arrow-right" style="line-height: 0;"></i>
             @endif
         </a>
-        <p class="text-light-navy text-sm mt-5"><em>Songs included with {{ $brandName }}+</em></p>
+        @if(empty($promoVersion))
+            <p class="text-light-navy text-sm mt-5"><em>Songs included with {{ $brandName }}+</em></p>
+        @endif
     </div>
 </section>
 <section class="text-center text-white px-5 sm:px-6 py-7 sm:py-8" style="    background: linear-gradient(40deg,#03c8ac, #0976db, #9a01ee, #f61a30);">

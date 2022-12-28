@@ -93,12 +93,66 @@
             "linkIcon" => "fas fa-graduation-cap",
             "linkUrl" => "/",
         ])
+        <div class="has-drop-down" target="_parent" rel="">
+            <div class="nav-link">
+                <i class="fas fa-star"></i>
+                Features
+                <div class="drop-down-arrow ">
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div class="lesson-links dropdown">
+            @include('drumeo.sales.partials._nav-link', [
+                "linkName" => "Method",
+                "linkUrl" => "/method/",
+                "linkIcon" => ''
+            ])
+            @include('drumeo.sales.partials._nav-link', [
+                "linkName" => "Songs",
+                "linkUrl" => "/songs/",
+                "linkIcon" => ''
+            ])
+            @include('drumeo.sales.partials._nav-link', [
+                "linkName" => "Coaches",
+                "linkUrl" => "/coaches/",
+                "linkIcon" => ''
+            ])
+        </div>
+        <div class="has-drop-down" target="_parent" rel="">
+            <div class="nav-link">
+                <i class="fas fa-piano-keyboard"></i>
+                Instruments
+                <div class="drop-down-arrow ">
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div class="lesson-links dropdown">
+            @include('drumeo.sales.partials._nav-link', [
+                "linkName" => "Pianote",
+                "linkUrl" => "https://www.pianote.com/",
+                "linkIcon" => ''
+            ])
+            @include('drumeo.sales.partials._nav-link', [
+                "linkName" => "Guitareo",
+                "linkUrl" => "https://www.guitareo.com/",
+                "linkIcon" => ''
+            ])
+            @include('drumeo.sales.partials._nav-link', [
+                "linkName" => "Singeo",
+                "linkUrl" => "https://www.singeo.com/",
+                "linkIcon" => ''
+            ])
+        </div>
 
 
 
         @include('drumeo.sales.partials._nav-link', [
             "linkName" => "Pricing",
-            "linkIcon" => "fas fa-money",
+            "linkIcon" => "fas fa-money-bill-wave",
             "linkUrl" => "/choose-plan",
         ])
         @include('drumeo.sales.partials._nav-link', [

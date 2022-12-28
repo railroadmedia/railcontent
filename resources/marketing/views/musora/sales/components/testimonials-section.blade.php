@@ -55,14 +55,13 @@
                         classes: {
                             arrow: 'splide__arrow bg-white opacity-100 top-1/4 shadow-lg h-11 w-11',
                             prev: 'hidden',
-                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50',
+                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                         },
                         perPage: 5.2,
                         perMove: 1,
-                        gap: '0.5rem',
                         type: 'loop',
-                        interval: 2000,
                         focus: 0,
+                        interval: 2000,
                         breakpoints: {
                             1024: {
                                 perPage: 4.2,
@@ -82,7 +81,7 @@
                 <div class="splide__track">
                     <ul class="splide__list">
                         @foreach ($testimonials as $testimonial)
-                            <li class="splide__slide flex flex-col items-start pb-10">
+                            <li class="splide__slide flex flex-col items-start pb-10 px-1">
                                 <div class="relative cursor-pointer mb-2 overflow-hidden" x-on:click="{{str_replace(' ', '', $testimonial['name'])}} = true;">
                                     <img
                                         class="rounded-xl transition-opacity opacity-0"
