@@ -27,10 +27,6 @@
             opacity: 1 !important;
         }
 
-        .splide__arrow svg {
-            fill: #0B76DB !important;
-        }
-
         .bubble:after {
             content: '';
             position: absolute;
@@ -65,8 +61,7 @@
             <div class="mb-6">
                 <img
                     class="h-6 md:h-10 transition-opacity opacity-0 @if($theme !== 'drumeo') mr-2 @endif"
-                    src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/@if($theme === 'drumeo')https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png @elseif($theme === 'pianote')https://pianote.s3.amazonaws.com/logo/pianote-logo-red.png @elseif($theme === 'guitareo')https://guitareo.s3.amazonaws.com/sales/guitareo-logo-green.png @elseif($theme === 'singeo')
-                        https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png @endif"
+                    src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/@if($theme === 'drumeo')https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png @elseif($theme === 'pianote')https://pianote.s3.amazonaws.com/logo/pianote-logo-red.png @elseif($theme === 'guitareo')https://guitareo.s3.amazonaws.com/sales/guitareo-logo-green.png @elseif($theme === 'singeo')https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png @endif"
                     alt="{{$theme}} logo"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"

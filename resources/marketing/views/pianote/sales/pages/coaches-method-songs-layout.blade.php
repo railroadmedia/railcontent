@@ -2,6 +2,11 @@
 
 @section('page-styles')
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}">
+    <style>
+        .splide__arrow svg {
+            fill: #F61A30 !important;
+        }
+    </style>
 @endsection
 
 @section('page-nav')

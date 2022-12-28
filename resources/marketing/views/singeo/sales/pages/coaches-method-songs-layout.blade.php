@@ -1,26 +1,31 @@
 @extends('_partials.layout.coaches-method-songs-layout')
 
 @section('page-styles')
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}">
+    <link href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}" rel="stylesheet">
+    <style>
+        .splide__arrow svg {
+            fill: #8300E9 !important;
+        }
+    </style>
 @endsection
 
 @section('page-nav')
     @if(!empty($trialVersion))
         @if(!empty($joinUrl))
-            @include("pianote._partials._nav", [
+            @include("singeo.sales.partials._nav", [
                 "edgeVersion" => true,
                 "trialVersion" => true,
                 "joinUrl" => $joinUrl
             ])
         @else
-            @include("pianote._partials._nav", [
+            @include("singeo.sales.partials._nav", [
                 "edgeVersion" => true,
                 "trialVersion" => true,
                 "scrollToJoin" => true,
             ])
         @endif
     @else
-        @include("pianote._partials._nav", [
+        @include("singeo.sales.partials._nav", [
             "edgeVersion" => true,
             "scrollToJoin" => true,
             "homepage" => true
@@ -46,7 +51,7 @@
         'image' => 'https://pianote.s3.amazonaws.com/sales/2023/devices.png',
     ])
 
-    @include('pianote._partials.faq')
+    @include('singeo._partials.faq')
 
-    @include('pianote._partials._footer')
+    @include('singeo.sales.partials._footer')
 @endsection

@@ -1,5 +1,13 @@
 @extends('_partials.layout.coaches-method-songs-layout')
 
+@section('page-styles')
+    <style>
+        .splide__arrow svg {
+            fill: #0B76DB !important;
+        }
+    </style>
+@endsection
+
 @section('page-nav')
         @include("drumeo.sales.partials._nav", [
             "subscriptionVersion" => true,
