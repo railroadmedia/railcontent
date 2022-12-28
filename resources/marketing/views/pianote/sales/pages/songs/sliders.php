@@ -1,13 +1,12 @@
 <?php
-
     $classics = [
         [
-            'img' => '',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/tom-petty-and-the-heartbreakers-tom-petty-and-the-heartbreakers.jpg',
             'title' => 'American Girl',
             'artist' => 'Tom Petty And The Heartbreakers',
         ],
         [
-            'img' => '',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/andrea-bocelli-amore-the-best-of-andrea-bocelli-vivere.jpg',
             'title' => 'Because We Believe',
             'artist' => 'Andrea Bocelli',
         ],
@@ -17,7 +16,7 @@
             'artist' => 'Elton John',
         ],
         [
-            'img' => '',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/simon-and-garfunkel-bridge-over-troubled-water.jpg',
             'title' => 'Cecilia',
             'artist' => 'Simon & Garfunkel',
         ],
@@ -47,7 +46,7 @@
             'artist' => 'Aretha Franklin',
         ],
         [
-            'img' => '',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-september/album-art/tina-turner-whats-love-got-to-do-with-it.jpg',
             'title' => 'What’s Love Got To Do With It',
             'artist' => 'Tina Turner',
         ],
@@ -55,7 +54,7 @@
 
     $modernPops = [
         [
-            'img' => '',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/lady-gaga-joanne.jpg',
             'title' => 'A Million Reasons',
             'artist' => 'Lady Gaga',
         ],
@@ -65,7 +64,7 @@
             'artist' => 'Vanessa Carlton',
         ],
         [
-            'img' => '',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/john-legend-love-in-the-future.jpg',
             'title' => 'All Of Me',
             'artist' => 'John Legend',
         ],
@@ -90,12 +89,12 @@
             'artist' => 'Snow Patrol',
         ],
         [
-            'img' => '',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/the-chainsmokers-halsey-collage.jpg',
             'title' => 'Closer',
             'artist' => 'The Chainsmokers, Halsey',
         ],
         [
-            'img' => '',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/anna-kendrick-pitch-perfect-soundtrack.jpg',
             'title' => 'Cups (When I\'m Gone)',
             'artist' => 'Anna Kendrick',
         ],
@@ -161,32 +160,32 @@
 
     $jazz = [
         [
-            'img' => '',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/bobby-mcferrin-simple-pleasures.jpg',
             'title' => 'Don’t Worry Be Happy',
             'artist' => 'Bobby McFerrin',
         ],
         [
-            'img' => '',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/ella-fitzgerald-dream-a-little-dream.jpg',
             'title' => 'Dream A Little Dream',
             'artist' => 'Ella Fitzgerald',
         ],
         [
-            'img' => '',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/ray-charles-the-genius-hits-the-road.jpg',
             'title' => 'Georgia On My Mind',
             'artist' => 'Ray Charles',
         ],
         [
-            'img' => '',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/milt-gabler-duke-ellington-.jpg',
             'title' => 'In A Mellow Tone',
             'artist' => 'Milt Gabler, Duke Ellington',
         ],
         [
-            'img' => '',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/duke-ellington-manny-kurtz-irving-mills-.jpg',
             'title' => 'In A Sentimental Mood',
             'artist' => 'Duke Ellington, Manny Kurtz, Irving Mills',
         ],
         [
-            'img' => '',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/judy-garland-over-the-rainbow-1629605191.jpg',
             'title' => 'Over The Rainbow',
             'artist' => 'Judy Garland',
         ],
@@ -196,7 +195,7 @@
             'artist' => 'Miles Davis',
         ],
         [
-            'img' => '',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/ben-bernie-kenneth-casey-maceo-pinkard-.jpg',
             'title' => 'Sweet Georgia Brown',
             'artist' => 'Ben Bernie, Kenneth Casey, Maceo Pinkard',
         ],
