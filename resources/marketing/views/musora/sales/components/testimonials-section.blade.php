@@ -50,22 +50,19 @@
         </div>
         <div
             x-data="{
-                    init() {
-                        new Splide(this.$refs.splide, {
+                init() {
+                    new Splide(this.$refs.splide, {
                         classes: {
-                            arrow: 'splide__arrow bg-white opacity-100 top-1/4 shadow-lg h-11 w-11',
-                            prev: 'hidden',
-                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
+                                arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
+                                prev: 'hidden',
+                                next: 'splide__arrow--next your-class-next hidden sm:flex -right-1',
                         },
-                        perPage: 5.2,
+                        perPage: 4.5,
                         perMove: 1,
                         type: 'loop',
                         focus: 0,
                         interval: 2000,
                         breakpoints: {
-                            1024: {
-                                perPage: 4.2,
-                            },
                             720: {
                                 perPage: 3.2,
                             },
@@ -73,9 +70,9 @@
                                 perPage: 2.2,
                             },
                         },
-                        }).mount()
-                    },
-                }"
+                    }).mount()
+                },
+            }"
         >
             <section x-ref="splide" class="splide" aria-label="Splide/Alpine.js Carousel Example">
                 <div class="splide__track">
