@@ -47,7 +47,9 @@ class CreateSongsDecember2022 extends Command
     {
         $this->info('Starting CreateSongsDecember2022...');
 
-        $csv = array_map(function($v){return str_getcsv($v, ";");}, file(base_path('december_19_songs_import_semi.csv')));
+        $csv = array_map(function($v){return str_getcsv($v, ";");}, file(base_path('december_28_songs_import.csv')));
+//        $csv = array_map(function($v){return str_getcsv($v, ";");}, file(base_path('december_19_songs_import_semi.csv')));
+
         unset($csv[0]);
 
         // to be updated in case the csv has more than 2000 songs
