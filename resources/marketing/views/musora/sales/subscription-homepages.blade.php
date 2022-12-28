@@ -109,6 +109,8 @@
     @if(!empty($promoVersion))
         @include("drumeo.sales.partials._nav", [
             "subscriptionVersion" => true,
+            "scrollToJoin" => true,
+            "hideMenu" => true,
         ])
     @else
         @include("drumeo.sales.partials._nav", [
@@ -501,7 +503,7 @@
         'desc' => 'Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence on the drums.',
     ])
     <div class="unstick-trigger block"></div>
-
+    <div id="customize-anchor" class="anchor"></div>
     @if(!empty($promoVersion))
 
         @php
@@ -590,7 +592,7 @@
         ])
     @else
         @include('musora.sales.components.order-section-collage', [
-        'header' => 'Unlimited drum lessons<br> The world’s best teachers<br> 5000+ popular songs.',
+        'header' => 'Unlimited drum lessons.<br> The world’s best teachers.<br> 5000+ popular songs.',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Trusted by ' . number_format(31856) . ' students.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Online lessons on every topic.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Personalized feedback from real teachers.</li>

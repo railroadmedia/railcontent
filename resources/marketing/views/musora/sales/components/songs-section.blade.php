@@ -21,9 +21,9 @@
         @if(empty($promoVersion))
             <a href="/songs" class="sm:mx-1 mb-2 sm:mb-0 w-full sm:w-64 join outline {{ $theme }}-blue smaller">SEE SONGS LIST <i class="fas fa-list-music"></i> </a>
         @endif
-        <a class="sm:mx-1 w-full sm:w-64 join {{ $theme }}-blue smaller"
+        <a class="sm:mx-1 w-full sm:w-64 join {{ $theme }}-blue smaller @if(!empty($promoVersion)) anchor-slide @endif"
             @if(!empty($promoVersion))
-                href="/choose-plan"
+                href="#customize-anchor"
             @else
                 href="/choose-your-trial"
             @endif
@@ -31,7 +31,7 @@
             @if(!empty($promoVersion))
                 Get Started &raquo;
             @else
-                START FOR FREE <i class="fas fa-arrow-right"></i>
+                START FOR FREE <i class="fas fa-arrow-right" style="line-height: 0;"></i>
             @endif
         </a>
         <p class="text-light-navy text-sm mt-5"><em>Songs included with {{ $brandName }}+</em></p>

@@ -4,10 +4,10 @@
         <div class="flex items-center rounded-xl py-3 px-3 sm:px-6">
             <div class="w-1/2 text-left"></div>
             <div class="w-1/4">
-                <img class="h-3 sm:h-6 lg:h-8 filter invert" src="https://drumeo-assets.s3.amazonaws.com/sales/2023/drumeoplus_logo.svg">
+                <img class="h-3 sm:h-6 lg:h-8" src="https://drumeo-assets.s3.amazonaws.com/sales/2023/drumeoplus_logo-dark.svg">
             </div>
             <div class="w-1/4">
-                <img class="h-3 sm:h-6 lg:h-8 filter invert" src="https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png">
+                <img class="h-3 sm:h-6 lg:h-8" src="https://musora-center.s3.amazonaws.com/logos/drumeo-logo.png">
             </div>
         </div>
         <div class="flex items-center rounded-xl py-4 px-3 sm:px-6" style="background-color:#f5f8fc;">

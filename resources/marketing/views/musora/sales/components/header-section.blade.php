@@ -25,9 +25,9 @@
                         <p class="w-1/3 leading-tight"><i class="fas fa-check text-{{ $theme }}"></i><br> {!! $pointThree !!}</p>
                     </div>
                     <div class="flex flex-wrap items-center mt-6 sm:mt-5 lg:mt-10 max-w-xs">
-                        <a class="w-full join {{ $theme }}-blue smaller mb-2"
+                        <a class="w-full join {{ $theme }}-blue smaller mb-2 @if(!empty($promoVersion)) anchor-slide @endif"
                             @if(!empty($promoVersion))
-                                href="/choose-plan"
+                                href="#customize-anchor"
                             @else
                                 href="/choose-your-trial"
                             @endif
@@ -35,7 +35,7 @@
                             @if(!empty($promoVersion))
                                 Get Started &raquo;
                             @else
-                                START FOR FREE <i class="fas fa-arrow-right"></i>
+                                START FOR FREE <i class="fas fa-arrow-right" style="line-height: 0;"></i>
                             @endif
                         </a>
                         <a class="inline-block" href="{{ $reviewLink }}" target="_blank" onclick="window.open('{{ $reviewLink }}', 'newwindow', 'width=750, height=550'); return false;">
@@ -87,10 +87,9 @@
         @component('_partials.components.carousel',[
             'xdata' => "
                 classes: {
-                    arrows: 'splide__arrows',
-                    arrow : 'splide__arrow bg-white text-xl z-50',
-                    prev  : 'splide__arrow--prev',
-                    next  : 'splide__arrow--next',
+                    arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
+                    prev: 'hidden',
+                    next: 'splide__arrow--next your-class-next hidden sm:flex z-50',
                     pagination: 'hidden',
                 },
                 perPage: 1,

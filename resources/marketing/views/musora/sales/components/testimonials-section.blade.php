@@ -53,9 +53,9 @@
                     init() {
                         new Splide(this.$refs.splide, {
                         classes: {
-                                arrow: 'splide__arrow top-1/4 bg-white opacity-100',
-                                prev: 'hidden',
-                                next: 'splide__arrow--next your-class-next hidden sm:flex',
+                            arrow: 'splide__arrow bg-white opacity-100 top-1/4 shadow-lg h-11 w-11',
+                            prev: 'hidden',
+                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50',
                         },
                         perPage: 5.2,
                         perMove: 1,

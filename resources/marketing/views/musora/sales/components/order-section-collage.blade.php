@@ -1,4 +1,3 @@
-<div id="customize-anchor" class="anchor"></div>
 <section class="py-14 sm:py-24 lg:py-32 relative overflow-hidden text-white text-center customize px-4 lg:px-6 relative overflow-hidden" style="background: linear-gradient(45deg, #07233e, #0c1524);">
     <div class="container mx-auto max-w-6xl sm:mb-16">
         <div class="flex flex-wrap items-center">
@@ -14,7 +13,7 @@
                     {!! $list !!}
                 </ul>
                 <div class="w-72 lg:w-96 mx-auto sm:mx-0">
-                    <a class=" w-full sm:w-64 join smaller bg-{{$theme}} w-full my-3" href="{!! $buttonLink !!}">START FOR FREE <i class="fas fa-arrow-right"></i></a>
+                    <a class=" w-full sm:w-64 join smaller bg-{{$theme}} w-full my-3" href="{!! $buttonLink !!}">START FOR FREE <i class="fas fa-arrow-right" style="line-height: 0;"></i></a>
                     <p class="text-center text-sm"><em>Pay nothing for 7 days, then ${!! $price !!}/month billed annually.</em></p>
                 </div>
             </div>

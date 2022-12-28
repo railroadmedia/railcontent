@@ -5,11 +5,13 @@
         </a>
     </div>
 
-    <div class="menu-toggle">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
+
+        <div class="menu-toggle @if(!empty($hideMenu)) opacity-0 px-0.5 @endif">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
     @if(!empty($checkoutVersion))
         <div class="button-wrap">
             <a href="{{ get_legacy_brand_base_url('drumeo') }}/drumshop" class="join outline-button">Shop</a>
@@ -39,8 +41,8 @@
         @if(!empty($fullSubscriptionVersion))
             <div class="relative">
                 <div class="edge-wrap show-for-medium">
-                    <a class="features @if(strpos(url()->full(), 'method') || strpos(url()->full(), 'songs') || strpos(url()->full(), 'coaches')) active @endif">Features <i class="fa-solid fa-caret-down"></i></a>
-                    <a class="instruments">Instruments <i class="fa-solid fa-caret-down"></i></a>
+                    <a class="cursor-pointer features @if(strpos(url()->full(), 'method') || strpos(url()->full(), 'songs') || strpos(url()->full(), 'coaches')) active @endif">Features <i class="fa-solid fa-caret-down"></i></a>
+                    <a class="cursor-pointer instruments">Instruments <i class="fa-solid fa-caret-down"></i></a>
                     <a class=" @if(strpos(url()->full(), 'choose-plan')) active @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/choose-plan" >Pricing</a>
                     <a class=" @if(strpos(url()->full(), 'drumshop')) active @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/drumshop" >Shop</a>
                     <a class="" href="{{ get_legacy_brand_base_url('drumeo') }}/beat" >Blog</a>
@@ -87,18 +89,26 @@
             "linkUrl" => get_musora_brand_base_url() . '/login',
         ])
         @include('drumeo.sales.partials._nav-link', [
-            "linkName" => "Contact",
-            "linkIcon" => "fas fa-phone",
-            "linkUrl" => get_musora_brand_base_url().'/contact'
-        ])
-        @include('drumeo.sales.partials._nav-link', [
-            "linkName" => "Drumeo",
+            "linkName" => "Home",
             "linkIcon" => "fas fa-graduation-cap",
             "linkUrl" => "/",
         ])
+
+
+
         @include('drumeo.sales.partials._nav-link', [
-            "linkName" => "Holiday Deals",
+            "linkName" => "Pricing",
+            "linkIcon" => "fas fa-money",
+            "linkUrl" => "/choose-plan",
+        ])
+        @include('drumeo.sales.partials._nav-link', [
+            "linkName" => "Shop",
             "linkIcon" => "fas fa-tag",
+            "linkUrl" => "/drumshop",
+        ])
+        @include('drumeo.sales.partials._nav-link', [
+            "linkName" => "Blog",
+            "linkIcon" => "fas fa-comment-pen",
             "linkUrl" => "/drumshop",
         ])
         <div class="has-drop-down" target="_parent" rel="">
@@ -112,11 +122,6 @@
             </div>
         </div>
         <div class="lesson-links dropdown">
-            @include('drumeo.sales.partials._nav-link', [
-                "linkName" => "Drumeo Beat",
-                "linkUrl" => "/beat/",
-                "linkIcon" => ''
-            ])
             @include('drumeo.sales.partials._nav-link', [
                 "linkName" => "Getting Started On The Drums",
                 "linkUrl" => "/getting-started/",
@@ -187,6 +192,11 @@
         @include('drumeo.sales.partials._secondary-nav-link', [
             "linkName" => "<i class='fas fa-fw fa-question'></i>&nbsp; FAQs",
             "linkUrl" => "https://help.drumeo.com/",
+            "externalLink" => false
+        ])
+        @include('drumeo.sales.partials._secondary-nav-link', [
+            "linkName" => "<i class='fas fa-fw fa-phone'></i>&nbsp; Contact",
+            "linkUrl" => get_musora_brand_base_url().'/contact',
             "externalLink" => false
         ])
         <span class="shim"></span>

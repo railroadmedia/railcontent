@@ -34,9 +34,9 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: 'splide__arrow bg-white opacity-100',
+                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
                             prev: 'hidden',
-                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50',
+                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
                         perPage: 6,
@@ -84,9 +84,9 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: 'splide__arrow bg-white opacity-100',
+                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
                             prev: 'hidden',
-                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50',
+                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
                         perPage: 6,
@@ -134,9 +134,9 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: 'splide__arrow bg-white opacity-100',
+                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
                             prev: 'hidden',
-                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50',
+                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
                         perPage: 6,
@@ -184,9 +184,9 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: 'splide__arrow bg-white opacity-100',
+                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
                             prev: 'hidden',
-                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50',
+                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
                         perPage: 6,
@@ -234,9 +234,9 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: 'splide__arrow bg-white opacity-100',
+                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
                             prev: 'hidden',
-                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50',
+                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
                         perPage: 6,
@@ -284,9 +284,9 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: 'splide__arrow bg-white opacity-100',
+                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
                             prev: 'hidden',
-                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50',
+                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
                         perPage: 6,
@@ -334,9 +334,9 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: 'splide__arrow bg-white opacity-100',
+                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
                             prev: 'hidden',
-                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50',
+                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
                         perPage: 6,
@@ -384,9 +384,9 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: 'splide__arrow bg-white opacity-100',
+                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
                             prev: 'hidden',
-                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50',
+                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
                         perPage: 6,
@@ -434,9 +434,9 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: 'splide__arrow bg-white opacity-100',
+                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
                             prev: 'hidden',
-                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50',
+                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
                         perPage: 6,
@@ -484,9 +484,9 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: 'splide__arrow bg-white opacity-100',
+                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
                             prev: 'hidden',
-                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50',
+                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
                         perPage: 6,
@@ -534,9 +534,9 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: 'splide__arrow bg-white opacity-100',
+                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
                             prev: 'hidden',
-                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50',
+                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
                         perPage: 6,

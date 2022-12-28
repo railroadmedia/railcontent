@@ -102,9 +102,9 @@
                                 init() {
                                     new Splide(this.$refs.splide, {
                                         classes: {
-                                                arrow: 'splide__arrow bg-white opacity-100',
+                                                arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
                                                 prev: 'hidden',
-                                                next: 'splide__arrow--next your-class-next hidden sm:flex',
+                                                next: 'splide__arrow--next your-class-next hidden sm:flex -right-1',
                                         },
                                         perPage: 4.5,
                                         perMove: 1,
@@ -149,9 +149,9 @@
         @if(empty($promoVersion))
             <a href="/courses" class="sm:mx-1 mb-2 sm:mb-0 w-full sm:w-64 join outline {{ $theme }}-blue smaller">EXPLORE 200+ COURSES <i class="fas fa-info-circle"></i> </a>
         @endif
-        <a class="sm:mx-1 w-full sm:w-64 join {{ $theme }}-blue smaller"
+        <a class="sm:mx-1 w-full sm:w-64 join {{ $theme }}-blue smaller @if(!empty($promoVersion)) anchor-slide @endif"
             @if(!empty($promoVersion))
-                href="/choose-plan"
+                href="#customize-anchor"
             @else
                 href="/choose-your-trial"
             @endif
@@ -159,7 +159,7 @@
             @if(!empty($promoVersion))
                 Get Started &raquo;
             @else
-                START FOR FREE <i class="fas fa-arrow-right"></i>
+                START FOR FREE <i class="fas fa-arrow-right" style="line-height: 0;"></i>
             @endif
         </a>
     </div>

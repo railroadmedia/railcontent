@@ -95,7 +95,7 @@
                         <div class="px-3 pt-5 md:pt-6 pb-9 md:pb-10 bg-[#e7edf4]">
                             <p class="text-sm mb-1"><strong>The world’s best drum lessons.</strong></p>
                             <p class="text-sm mb-1"><strong>5000+ popular songs.</strong></p>
-                            <p class="text-sm mb-1"><strong>Unlimited personal support</strong></p>
+                            <p class="text-sm mb-1"><strong>Unlimited personal support.</strong></p>
                             <p class="text-sm mb-1">Join a community of {{ number_format(31856) }} drum students.</p>
                             <p class="text-sm mb-1">Lesson access for piano, guitar, and singing.</p>
                             <p class="text-sm">90-day money back guarantee.</p>
