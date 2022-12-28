@@ -5,14 +5,13 @@
 @extends('pianote.sales.pages.coaches-method-songs-layout')
 
 @section('page-meta')
-
+    <title>Pianote | Play your favorite songs.</title>
+    <meta property="og:title" content="Pianote | Play your favorite songs.">
+    <meta property="og:url" content="https://www.pianote.com/songs">
+    <meta name="description" content="1000+ note-for-note song breakdowns for every style, era, and skill level with handy play-along tools.">
+    <meta property="og:description" content="1000+ note-for-note song breakdowns for every style, era, and skill level with handy play-along tools.">
+    <meta property="og:image" content="https://pianote.s3.amazonaws.com/sales/2023/share-image-songs.jpg" style="display: none;">
 @endsection
-<title>Pianote | </title>
-<meta property="og:title" content="Pianote | ">
-<meta property="og:url" content="https://www.pianote.com/method">
-<meta name="description" content="">
-<meta property="og:description" content="">
-<meta property="og:image" content="" style="display: none;">
 
 @section('body-data')
     x-data ='{

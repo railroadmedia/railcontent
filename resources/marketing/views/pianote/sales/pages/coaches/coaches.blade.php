@@ -5,15 +5,13 @@
 @extends('pianote.sales.pages.coaches-method-songs-layout')
 
 @section('page-meta')
-
+    <title>Pianote | Study with the world’s best teachers.</title>
+    <meta property="og:title" content="Pianote | Study with the world’s best teachers.">
+    <meta property="og:url" content="https://www.pianote.com/coaches">
+    <meta name="description" content="Amplify your skills with artist courses + exclusive live events with teachers, performers, and trending stars.">
+    <meta property="og:description" content="Amplify your skills with artist courses + exclusive live events with teachers, performers, and trending stars.">
+    <meta property="og:image" content="https://pianote.s3.amazonaws.com/sales/2023/share-image-coaches.jpg" style="display: none;">
 @endsection
-<title>Pianote | </title>
-<meta property="og:title" content="Pianote | ">
-<meta property="og:url" content="https://www.pianote.com/method">
-<meta name="description" content="">
-<meta property="og:description" content="">
-<meta property="og:image" content="" style="display: none;">
-
 
 @section('header-img', 'https://pianote.s3.amazonaws.com/sales/2023/coaches-thumb.jpg')
 

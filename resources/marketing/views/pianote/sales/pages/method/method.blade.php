@@ -5,27 +5,19 @@
 @extends('pianote.sales.pages.coaches-method-songs-layout')
 
 @section('page-meta')
-
+    <title>Pianote | Your piano goals start here.</title>
+    <meta property="og:title" content="Pianote | Your piano goals start here.">
+    <meta property="og:url" content="https://www.pianote.com/method">
+    <meta name="description" content="Always know exactly what to practice with an organized 10-level curriculum.">
+    <meta property="og:description" content="Always know exactly what to practice with an organized 10-level curriculum.">
+    <meta property="og:image" content="https://pianote.s3.amazonaws.com/sales/2023/share-image-method.jpg" style="display: none;">
 @endsection
-<title>Pianote | </title>
-<meta property="og:title" content="Pianote | ">
-<meta property="og:url" content="https://www.pianote.com/method">
-<meta name="description" content="">
-<meta property="og:description" content="">
-<meta property="og:image" content="" style="display: none;">
-
 
 @section('header-img', 'https://pianote.s3.amazonaws.com/sales/2023/method-thumb.jpg')
 
 @section('header', 'Your piano goals start here.')
 
 @section('desc', 'Always know exactly what to practice with an organized 10-level curriculum.')
-
-@section('body-data')
-    x-data ='{
-        trailer : false
-    }'
-@endsection
 
 @section('page-body')
     <section class="py-12 md:py-20">
