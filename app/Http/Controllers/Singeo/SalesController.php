@@ -123,4 +123,16 @@ class SalesController extends BaseController
     {
         return view('singeo.products.beautiful-harmonies');
     }
+    public function method()
+    {
+        return view('singeo.sales.pages.method.method', ['theme' => 'singeo', 'page' => 'method']);
+    }
+    public function coaches()
+    {
+        return view('singeo.sales.pages.coaches.coaches', ['theme' => 'singeo', 'page' => 'coaches']);
+    }
+    public function songs()
+    {
+        return view('singeo.sales.pages.songs.songs', ['theme' => 'singeo', 'page' => 'songs']);
+    }
 }

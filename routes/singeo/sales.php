@@ -20,6 +20,10 @@ Route::domain('{singeoDomain}')
     Route::get('/choose-your-trial-month', [SalesController::class, 'chooseYourTrialMonth']);
     Route::get('/cookie', [SalesController::class, 'cookie']);
 
+    Route::get('/method', [SalesController::class, 'method']);
+    Route::get('/coaches', [SalesController::class, 'coaches']);
+    Route::get('/songs', [SalesController::class, 'songs']);
+
     Route::get('/affiliate/asobergirlsguide', [SalesController::class, 'asobergirlsguide']);
     Route::get('/affiliate-trial', [SalesController::class, 'affiliateTrial']);
 
