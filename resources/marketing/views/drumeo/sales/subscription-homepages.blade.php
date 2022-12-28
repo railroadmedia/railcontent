@@ -173,7 +173,7 @@
         'promoThumbM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/header-thumb-promo-m2.jpg',
         'pointOne' => 'Improve Your Skills',
         'pointTwo' => 'World-Class Teachers',
-        'pointThree' => 'Play More Songs',
+        'pointThree' => 'Play More<br class="inline lg:hidden"> Songs',
         'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738',
         'students' => number_format(31856),
     ])

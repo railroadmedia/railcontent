@@ -254,7 +254,7 @@ class SalesController extends BaseController
 
         return view('drumeo.sales.subscription-homepages', ['products' => $products, 'theme' => 'drumeo']);
     }
-    public function promo23()
+    public function promo()
     {
         $products = $this->productRepository->all();
         $products = array_combine(array_entity_column($products, 'getSku'), $products);

@@ -24,7 +24,7 @@
                         <p class="w-1/3 leading-tight"><i class="fas fa-check text-{{ $theme }}"></i><br> {!! $pointTwo !!}</p>
                         <p class="w-1/3 leading-tight"><i class="fas fa-check text-{{ $theme }}"></i><br> {!! $pointThree !!}</p>
                     </div>
-                    <div class="flex flex-wrap items-center mt-6 sm:mt-5 lg:mt-10 max-w-xs">
+                    <div class="flex flex-wrap items-center justify-center sm:justify-start mt-6 sm:mt-5 lg:mt-10 sm:max-w-xs">
                         <a class="w-full join {{ $theme }}-blue smaller mb-2 @if(!empty($promoVersion)) anchor-slide @endif"
                             @if(!empty($promoVersion))
                                 href="#customize-anchor"

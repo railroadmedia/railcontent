@@ -165,7 +165,7 @@ class SalesController extends BaseController
     {
         return view('pianote.sales.subscription-homepages', ['theme' => 'pianote']);
     }
-    public function promo23()
+    public function promo()
     {
         return view('pianote.sales.subscription-homepages', ['theme' => 'pianote', 'promoVersion' => 'true']);
     }

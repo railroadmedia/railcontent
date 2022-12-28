@@ -8,7 +8,7 @@ Route::domain('{guitareoDomain}')
     ->group(function () {
     Route::get('/', [SalesController::class, 'home']);
     Route::get('/2023-home', [SalesController::class, 'home23'] );
-    Route::get('/2023-promo', [SalesController::class, 'promo23'] );
+    Route::get('/new-year', [SalesController::class, 'promo'] );
     Route::get('/choose-plan', [SalesController::class, 'plan23'] );
     Route::get('/student-only', [SalesController::class, 'membershipStudents']);
     Route::get('/trial', [SalesController::class, 'trial']);

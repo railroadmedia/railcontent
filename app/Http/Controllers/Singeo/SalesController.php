@@ -15,7 +15,7 @@ class SalesController extends BaseController
     {
         return view('singeo.sales.subscription-homepages', ['theme' => 'singeo']);
     }
-    public function promo23()
+    public function promo()
     {
         return view('singeo.sales.subscription-homepages', ['theme' => 'singeo', 'promoVersion' => 'true']);
     }

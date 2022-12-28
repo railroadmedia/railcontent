@@ -97,7 +97,7 @@ class SalesController extends BaseController
     {
         return view('guitareo.sales.subscription-homepages', ['theme' => 'guitareo']);
     }
-    public function promo23()
+    public function promo()
     {
         return view('guitareo.sales.subscription-homepages', ['theme' => 'guitareo', 'promoVersion' => 'true']);
     }
