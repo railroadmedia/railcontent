@@ -23,7 +23,7 @@
         var hashedOrderId = md5('drumeo_'.concat(email))
         /*
         TODO: Uncomment when impact provider is installed properly
-        
+
             ire('trackConversion', getSignUpActionTrackerId('{{ config('app.env') }}'), {
                     orderId: hashedOrderId,
                     customerId: hashedOrderId,
@@ -33,6 +33,7 @@
                     verifySiteDefinitionMatch:true
                 }
             );
-        }
-        */
+          */
+    }
+
 </script>
