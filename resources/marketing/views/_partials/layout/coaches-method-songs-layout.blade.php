@@ -70,7 +70,7 @@
                     class="h-6 md:h-10 transition-opacity opacity-0"
                     src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/@if($page === 'method')https://dpwjbsxqtam5n.cloudfront.net/sales/2021/method-text.svg @elseif($page === 'coaches')https://dpwjbsxqtam5n.cloudfront.net/sales/2021/coaches-text.svg @elseif($page === 'songs')https://dpwjbsxqtam5n.cloudfront.net/sales/2021/songs-text.svg @endif"
                     alt="{{$page}} logo"
-                    style="filter:@if($theme === 'drumeo')invert(1) brightness(.35) sepia(1) saturate(50) hue-rotate(195deg); @elseif($theme === 'pianote')invert(21%) sepia(91%) saturate(4092%) hue-rotate(344deg) brightness(96%) contrast(102%); @elseif($theme === 'guitareo')invert(55%) sepia(45%) saturate(5847%) hue-rotate(141deg) brightness(110%) contrast(101%); @elseif($theme === 'singeo')invert(11%) sepia(100%) saturate(4932%) hue-rotate(281deg) brightness(105%) contrast(108%); @endif"
+                    style="filter:@if($theme === 'drumeo')invert(1) brightness(.35) sepia(1) saturate(50) hue-rotate(195deg); @elseif($theme === 'pianote')invert(21%) sepia(91%) saturate(4092%) hue-rotate(344deg) brightness(96%) contrast(102%); @elseif($theme === 'guitareo')invert(55%) sepia(45%) saturate(5847%) hue-rotate(141deg) brightness(110%) contrast(101%); @elseif($theme === 'singeo')invert(24%) sepia(99%) saturate(7465%) hue-rotate(275deg) brightness(85%) contrast(125%); @endif"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
                 />
