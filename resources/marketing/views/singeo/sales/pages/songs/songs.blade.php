@@ -10,7 +10,7 @@
     <meta property="og:url" content="https://www.singeo.com/method">
     <meta name="description" content="1000+ popular song breakdowns for every style, era, and skill level with handy play-along tools.">
     <meta property="og:description" content="1000+ popular song breakdowns for every style, era, and skill level with handy play-along tools.">
-    <meta property="og:image" content="" style="display: none;">
+    <meta property="og:image" content="https://singeo.s3.amazonaws.com/sales/2023/share-image-songs.jpg" style="display: none;">
 @endsection
 
 @section('body-data')
@@ -19,7 +19,7 @@
     }'
 @endsection
 
-@section('header-img', 'https://pianote.s3.amazonaws.com/sales/2023/songs-thumb.jpg')
+@section('header-img', 'https://singeo.s3.amazonaws.com/sales/2023/songs-thumb.jpg')
 
 @section('header', 'Sing your favorite songs. ')
 
@@ -111,56 +111,6 @@
                 ])
                     @slot('content')
                         @foreach ($modernPops as $slide)
-                            <li class="splide__slide">
-                                <div>
-                                    <img
-                                        class="rounded-xl mb-1 transition-opacity opacity-0"
-                                        src="https://cdn.musora.com/image/fetch/w_250,q_auto:best/{{$slide['img']}}"
-                                        alt="{{$slide['title']}} img"
-                                        loading="lazy"
-                                        onload="this.classList.remove('opacity-0')"
-                                    >
-                                    <p class="font-bold mb-1 leading-tight">{{$slide['title']}}</p>
-                                    <p class="text-[#838C98] leading-tight">{{$slide['artist']}}</p>
-                                </div>
-                            </li>
-                        @endforeach
-                    @endslot
-                @endcomponent
-            </div>
-            <div class="mb-6">
-                <h4 class="font-extrabold mb-4">Classical</h4>
-                @component('_partials.components.carousel',[
-                    'xdata' => "
-                        classes: {
-                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
-                            prev: 'hidden',
-                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
-                            pagination: 'hidden',
-                        },
-                        perPage: 6,
-                        perMove: 1,
-                        gap: '1rem',
-                        type: 'loop',
-                        interval: 2000,
-                        breakpoints: {
-                            1160: {
-                                perPage: 5,
-                            },
-                            900: {
-                                perPage: 4,
-                            },
-                            760: {
-                                perPage: 3,
-                            },
-                            590: {
-                                perPage: 2,
-                            },
-                        },
-                    ",
-                ])
-                    @slot('content')
-                        @foreach ($classicals as $slide)
                             <li class="splide__slide">
                                 <div>
                                     <img
