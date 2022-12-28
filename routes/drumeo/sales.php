@@ -78,7 +78,7 @@ Route::domain('{drumeoDomain}')
         function () {
             Route::get('/{page?}', SalesController::class . '@affiliates')
                 ->whereIn('page', [
-                    'andrewrooney', 'asobergirlsguide', 'bhcollective', 'bryanforcedrums', 'drummingreview', 'drumninja', 'electronicdrumadvisor', 'jessica-burdeaux', 'kylemcgrail', 'leyandrums', 'lindseyward', 'musicindustryhowto', 'rickyficarelli', 'tobines'
+                    'andrewrooney', 'asobergirlsguide', 'bhcollective', 'bryanforcedrums', 'drummingreview', 'drumninja', 'electronicdrumadvisor', 'jessica-burdeaux', 'kylemcgrail', 'leyandrums', 'lindseyward', 'musicindustryhowto', 'rickyficarelli', 'tobines', '66samus', 'adriendrums', 'alejandrosifuentes', 'brandonscott', 'cooperdrummer', 'davidcola', 'drumhelper', 'joshcrawford', 'leviclay', 'linaanderberg', 'rdavidr', 'robbrown', 'the8bitdrummer', 'worshipdrummer', 'wyattstav', 'zackgrooves'
                 ]);
         }
     );
