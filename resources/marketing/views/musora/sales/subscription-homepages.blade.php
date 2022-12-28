@@ -107,10 +107,13 @@
 
 @section('global-body')
     @if(!empty($promoVersion))
-        @include("drumeo.sales.partials._nav")
+        @include("drumeo.sales.partials._nav", [
+            "subscriptionVersion" => true,
+        ])
     @else
         @include("drumeo.sales.partials._nav", [
-            "edgeVersion" => true,
+            "subscriptionVersion" => true,
+            "fullSubscriptionVersion" => true,
             "trialVersion" => true,
         ])
     @endif

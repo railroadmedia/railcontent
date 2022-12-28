@@ -25,7 +25,7 @@
 
 @section('global-body')
     @include("drumeo.sales.partials._nav", [
-        "edgeVersion" => true
+        "subscriptionVersion" => true
     ])
     <section class="trailer-section text-center kids-app">
         <div class="container mx-auto clearfix relative z-10">

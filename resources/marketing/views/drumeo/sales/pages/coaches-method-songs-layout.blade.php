@@ -1,27 +1,11 @@
 @extends('_partials.layout.coaches-method-songs-layout')
 
 @section('page-nav')
-    @if(!empty($trialVersion))
-        @if(!empty($joinUrl))
-            @include("drumeo.sales.partials._nav", [
-                "edgeVersion" => true,
-                "trialVersion" => true,
-                "joinUrl" => $joinUrl
-            ])
-        @else
-            @include("drumeo.sales.partials._nav", [
-                "edgeVersion" => true,
-                "trialVersion" => true,
-                "scrollToJoin" => true,
-            ])
-        @endif
-    @else
         @include("drumeo.sales.partials._nav", [
-            "edgeVersion" => true,
+            "subscriptionVersion" => true,
+            "fullSubscriptionVersion" => true,
             "scrollToJoin" => true,
-            "homepage" => true
         ])
-    @endif
 @endsection
 
 @section('page-footer')

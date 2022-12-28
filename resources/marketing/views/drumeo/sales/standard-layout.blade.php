@@ -26,20 +26,20 @@
     @if(!empty($trialVersion))
         @if(!empty($joinUrl))
             @include("drumeo.sales.partials._nav", [
-                "edgeVersion" => true,
+                "subscriptionVersion" => true,
                 "trialVersion" => true,
                 "joinUrl" => $joinUrl
             ])
         @else
             @include("drumeo.sales.partials._nav", [
-                "edgeVersion" => true,
+                "subscriptionVersion" => true,
                 "trialVersion" => true,
                 "scrollToJoin" => true,
             ])
         @endif
     @else
         @include("drumeo.sales.partials._nav", [
-            "edgeVersion" => true,
+            "subscriptionVersion" => true,
             "scrollToJoin" => true,
             "homepage" => true
         ])

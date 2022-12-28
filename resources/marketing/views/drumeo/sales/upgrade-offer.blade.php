@@ -29,7 +29,7 @@
 
 @section('global-body')
         @include("drumeo.sales.partials._nav", [
-            "edgeVersion" => true,
+            "subscriptionVersion" => true,
             "scrollToJoin" => true
         ])
     <section class="content-section text-center" style="padding-bottom: 0;">

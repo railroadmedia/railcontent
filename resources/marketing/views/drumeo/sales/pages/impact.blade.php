@@ -629,7 +629,7 @@
 
 @section('global-body')
     @include("drumeo.sales.partials._nav", [
-        "edgeVersion" => true,
+        "subscriptionVersion" => true,
     ])
 
     <header>
