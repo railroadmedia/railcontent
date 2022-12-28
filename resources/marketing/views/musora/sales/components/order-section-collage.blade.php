@@ -14,7 +14,7 @@
                     {!! $list !!}
                 </ul>
                 <div class="w-72 lg:w-96 mx-auto sm:mx-0">
-                    <a class=" w-full sm:w-auto join smaller bg-{{$theme}} w-full my-3" href="{!! $buttonLink !!}">START FOR FREE <i class="fas fa-arrow-right"></i></a>
+                    <a class=" w-full sm:w-64 join smaller bg-{{$theme}} w-full my-3" href="{!! $buttonLink !!}">START FOR FREE <i class="fas fa-arrow-right"></i></a>
                     <p class="text-center text-sm"><em>Pay nothing for 7 days, then ${!! $price !!}/month billed annually.</em></p>
                 </div>
             </div>

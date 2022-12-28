@@ -36,13 +36,25 @@
         </div>
     @endif
     @if(!empty($edgeVersion))
-        <div class="edge-wrap show-for-medium">
-            <a class=" @if(strpos(url()->full(), 'method')) active @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/method" >Method</a>
-            <a class=" @if(strpos(url()->full(), 'songs')) active @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/songs" >Songs</a>
-            <a class=" @if(strpos(url()->full(), 'coaches')) active @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/coaches" >Coaches</a>
-            <a class=" @if(strpos(url()->full(), 'choose-plan')) active @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/choose-plan" >Pricing</a>
-            <a class=" @if(strpos(url()->full(), 'drumshop')) active @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/drumshop" >Shop</a>
-            <a class="" href="{{ get_legacy_brand_base_url('drumeo') }}/beat" >Blog</a>
+        <div class="relative">
+            <div class="edge-wrap show-for-medium">
+                <a class="features @if(strpos(url()->full(), 'method') || strpos(url()->full(), 'songs') || strpos(url()->full(), 'coaches')) active @endif">Features <i class="fa-solid fa-caret-down"></i></a>
+                <a class="instruments">Instruments <i class="fa-solid fa-caret-down"></i></a>
+                <a class=" @if(strpos(url()->full(), 'choose-plan')) active @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/choose-plan" >Pricing</a>
+                <a class=" @if(strpos(url()->full(), 'drumshop')) active @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/drumshop" >Shop</a>
+                <a class="" href="{{ get_legacy_brand_base_url('drumeo') }}/beat" >Blog</a>
+
+            </div>
+            <div class="features-dd hidden shadow-md bg-white rounded-xl p-2 absolute flex flex-col left-44 lg:left-48 top-10 lg:top-12 w-44">
+                <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full @if(strpos(url()->full(), 'method')) active @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/method" ><i class="mr-1 text-lg fa-fw far fa-music-note"></i> Method</a>
+                <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full @if(strpos(url()->full(), 'songs')) active @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/songs" ><i class="mr-1 text-lg fa-fw far fa-headphones"></i> Songs</a>
+                <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full @if(strpos(url()->full(), 'coaches')) active @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/coaches" ><i class="mr-1 text-lg fa-fw far fa-whistle"></i> Coaches</a>
+            </div>
+            <div class="instruments-dd hidden shadow-md bg-white rounded-xl p-2 absolute flex flex-col left-72 lg:left-80 -ml-3 top-10 lg:top-12 w-44">
+                <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full" href="{{ get_legacy_brand_base_url('pianote') }}/2023-home" ><i class="mr-1 text-lg fa-fw far fa-piano-keyboard"></i> Pianote</a>
+                <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full" href="{{ get_legacy_brand_base_url('guitareo') }}/2023-home" ><i class="mr-1 text-lg fa-fw far fa-guitar"></i> Guitareo</a>
+                <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full" href="{{ get_legacy_brand_base_url('singeo') }}/2023-home" ><i class="mr-1 text-lg fa-fw far fa-microphone-stand"></i> Singeo</a>
+            </div>
         </div>
 
         <div class="button-wrap">

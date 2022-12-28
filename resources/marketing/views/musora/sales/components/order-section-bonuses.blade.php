@@ -81,6 +81,20 @@
                     </p>
                 </div>
             @endforeach
+            <div class="flex flex-wrap sm:flex-nowrap justify-center items-start my-4">
+                @if($theme !== 'drumeo')
+                    <img alt="brand tile" class="h-20 sm:h-24 md:h-28 lg:h-36 mb-2 sm:mb-0 mx-2 lg:mx-3 rounded-xl" src="https://drumeo-assets.s3.amazonaws.com/sales/2023/guitareo-included.jpg">
+                @endif
+                @if($theme !== 'pianote')
+                    <img alt="brand tile" class="h-20 sm:h-24 md:h-28 lg:h-36 mb-2 sm:mb-0 mx-2 lg:mx-3 rounded-xl" src="https://drumeo-assets.s3.amazonaws.com/sales/2023/pianote-included.jpg">
+                @endif
+                @if($theme !== 'guitareo')
+                    <img alt="brand tile" class="h-20 sm:h-24 md:h-28 lg:h-36 mb-2 sm:mb-0 mx-2 lg:mx-3 rounded-xl" src="https://drumeo-assets.s3.amazonaws.com/sales/2023/guitareo-included.jpg">
+                @endif
+                @if($theme !== 'singeo')
+                    <img alt="brand tile" class="h-20 sm:h-24 md:h-28 lg:h-36 mb-2 sm:mb-0 mx-2 lg:mx-3 rounded-xl" src="https://drumeo-assets.s3.amazonaws.com/sales/2023/singeo-included.jpg">
+                @endif
+            </div>
         </div>
         {{-- <p class=" mt-4 md:mt-5" style="display:inline-block;background: -webkit-linear-gradient(20deg, #03c8ac, #0976db, #9a01ee, #f61a30);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"><strong>By joining today, we’ll donate 20% of your new membership<br class="hidden sm:inline"> towards the <a target="_blank" href="https://musicounts.ca/en/take-action/ways-of-giving/fundraise-on-musicounts-behalf/fundraisers-supporting-musicounts/give-the-gift-of-music-with-musora/"><u>MusiCounts Band Aid Program</u></a>.</strong></p> --}}
         {{--            <h4 class="leading-tight mt-4"><strong>Only $12.50/month <br class="inline sm:hidden">(billed annually at ${{ Prices::$drumeoEdgeAnnual }}).</strong></h4>--}}

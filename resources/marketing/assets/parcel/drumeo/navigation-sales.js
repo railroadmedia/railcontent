@@ -9,6 +9,20 @@ $(document).ready(function (){
         $(this).toggleClass("active");
     });
 
+    $(".edge-wrap .features").click(function (e) {
+        e.stopPropagation();
+        $(".features-dd").toggleClass("hidden");
+    });
+    $(".edge-wrap .instruments").click(function (e) {
+        e.stopPropagation();
+        $(".instruments-dd").toggleClass("hidden");
+    });
+
+    $(window).click(function() {
+        $(".instruments-dd").addClass("hidden");
+        $(".features-dd").addClass("hidden");
+    });
+
     menuOverlay.click(function (e) {
         e.stopPropagation();
         $(this).removeClass("active");

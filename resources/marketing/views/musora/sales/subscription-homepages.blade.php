@@ -504,10 +504,10 @@
         @php
             $bonuses = [
                 [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/pad.jpg',
-                'title' => 'QuietPad',
-                'description' => 'Practice anywhere with two full-size playing surfaces.',
-                'price' => Prices::$quietPadFull,
+                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/eardrums.jpg',
+                'title' => 'EarDrums',
+                'description' => 'Drumeo EarDrums reduce external volume by up to -29dB. That means you can play hard while protecting your ears.',
+                'price' => Prices::$earDrumsFull,
                 'shipping' => true,
                 ],
                 [
@@ -516,20 +516,6 @@
                 'description' => 'Drumeo 5A Drumsticks by Vater -- made with hickory and extra moisture to last longer.',
                 'price' => Prices::$sticksFull,
                 'shipping' => true,
-                ],
-                [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/sd.jpg',
-                'title' => 'Successful Drumming',
-                'description' => 'Jared Falk’s step-by-step curriculum for building a rock-solid foundation on the drums.',
-                'price' => Prices::$sdOnlineFull,
-                'online-ship' => "Instant Access"
-                ],
-                [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/ime.jpg',
-                'title' => 'Independence Made Easy',
-                'description' => 'Jared Falk’s 26-week masterclass to unlock your musicality and freedom on the drums.',
-                'price' => Prices::$imeFull,
-                'online-ship' => "Instant Access"
                 ],
                 [
                 'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/rdm.jpg',
@@ -545,6 +531,13 @@
                 'price' => Prices::$dtmeFull,
                 ],
                 [
+                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/ime.jpg',
+                'title' => 'Independence Made Easy',
+                'description' => 'Jared Falk’s 26-week masterclass to unlock your musicality and freedom on the drums.',
+                'price' => Prices::$imeFull,
+                'online-ship' => "Instant Access"
+                ],
+                [
                 'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/eyd.jpg',
                 'title' => 'Electrify Your Drumming',
                 'description' => 'Your guide to playing 10 styles of electronic dance music - includes 23 play-alongs!',
@@ -556,6 +549,13 @@
                 'title' => 'Better Drum Fills',
                 'description' => 'The ultimate four-week crash course to playing more creative & musical drum fills.',
                 'price' => Prices::$bdfFull,
+                'online-ship' => "Instant Access"
+                ],
+                [
+                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/sd.jpg',
+                'title' => 'Successful Drumming',
+                'description' => 'Jared Falk’s step-by-step curriculum for building a rock-solid foundation on the drums.',
+                'price' => Prices::$sdOnlineFull,
                 'online-ship' => "Instant Access"
                 ],
                 [
