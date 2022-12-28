@@ -1,6 +1,6 @@
 @if((session()->has('logged_in_recently') && !empty(user())) ||
 (!session()->has('last_set_auth_time') && !empty(user())) ||
-(time() - session()->get('last_set_auth_time') > 1000) && !empty(user())) ))
+(time() - session()->get('last_set_auth_time') > 1000) && !empty(user()))
 
     @php
         session()->put('last_set_auth_time', time());
