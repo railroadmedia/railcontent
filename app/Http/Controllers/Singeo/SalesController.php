@@ -11,6 +11,18 @@ class SalesController extends BaseController
     {
         return view('singeo.sales.standard', [ 'theme' => 'singeo' ]);
     }
+    public function home23()
+    {
+        return view('singeo.sales.subscription-homepages', ['theme' => 'singeo']);
+    }
+    public function promo23()
+    {
+        return view('singeo.sales.subscription-homepages', ['theme' => 'singeo', 'promoVersion' => 'true']);
+    }
+    public function plan23()
+    {
+        return view('singeo.sales.choose-plan', ['theme' => 'singeo']);
+    }
     public function studentOnly()
     {
         return view('singeo.sales.student-only');

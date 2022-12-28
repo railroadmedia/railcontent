@@ -252,21 +252,21 @@ class SalesController extends BaseController
         $products = $this->productRepository->all();
         $products = array_combine(array_entity_column($products, 'getSku'), $products);
 
-        return view('musora.sales.subscription-homepages', ['products' => $products, 'theme' => 'drumeo']);
+        return view('drumeo.sales.subscription-homepages', ['products' => $products, 'theme' => 'drumeo']);
     }
     public function promo23()
     {
         $products = $this->productRepository->all();
         $products = array_combine(array_entity_column($products, 'getSku'), $products);
 
-        return view('musora.sales.subscription-homepages', ['products' => $products, 'theme' => 'drumeo', 'promoVersion' => 'true']);
+        return view('drumeo.sales.subscription-homepages', ['products' => $products, 'theme' => 'drumeo', 'promoVersion' => 'true']);
     }
     public function plan23()
     {
         $products = $this->productRepository->all();
         $products = array_combine(array_entity_column($products, 'getSku'), $products);
 
-        return view('musora.sales.choose-plan', ['products' => $products, 'theme' => 'drumeo']);
+        return view('drumeo.sales.choose-plan', ['products' => $products, 'theme' => 'drumeo']);
     }
     public function method()
     {

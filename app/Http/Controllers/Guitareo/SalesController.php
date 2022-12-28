@@ -93,6 +93,19 @@ class SalesController extends BaseController
         return view('guitareo.sales.standard', ['theme' => 'guitareo']);
     }
 
+    public function home23()
+    {
+        return view('guitareo.sales.subscription-homepages', ['theme' => 'guitareo']);
+    }
+    public function promo23()
+    {
+        return view('guitareo.sales.subscription-homepages', ['theme' => 'guitareo', 'promoVersion' => 'true']);
+    }
+    public function plan23()
+    {
+        return view('guitareo.sales.choose-plan', ['theme' => 'guitareo']);
+    }
+
     public function membership()
     {
         return view('guitareo.sales.standard');

@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
 use Railroad\Ecommerce\Services\AccessCodeService;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use function App\Http\Controllers\Drumeo\array_entity_column;
 
 class SalesController extends BaseController
 {
@@ -158,6 +159,19 @@ class SalesController extends BaseController
     public function home()
     {
         return view('pianote.sales.standard', [ 'theme' => 'pianote' ]);
+    }
+
+    public function home23()
+    {
+        return view('pianote.sales.subscription-homepages', ['theme' => 'pianote']);
+    }
+    public function promo23()
+    {
+        return view('pianote.sales.subscription-homepages', ['theme' => 'pianote', 'promoVersion' => 'true']);
+    }
+    public function plan23()
+    {
+        return view('pianote.sales.choose-plan', ['theme' => 'pianote']);
     }
 
     public function jesusMolina()
