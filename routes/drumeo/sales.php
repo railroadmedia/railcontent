@@ -24,7 +24,7 @@ Route::domain('{drumeoDomain}')
 
     //    sales pages
     Route::get('/beginner', [SalesController::class, 'beginner']);
-     Route::get('/method', [SalesController::class, 'method'] );
+    Route::get('/method', [SalesController::class, 'method'] );
     Route::get('/songs', [SalesController::class, 'songs'] );
     Route::get('/coaches', [SalesController::class, 'coaches'] );
     Route::get('/impact', [SalesController::class, 'impact']);
