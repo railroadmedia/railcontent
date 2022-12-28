@@ -4,7 +4,6 @@ namespace App\Console\Commands;
 
 use Carbon\Carbon;
 use Illuminate\Console\Command;
-use Illuminate\Database\DatabaseManager;
 use Illuminate\Support\Facades\DB;
 use Railroad\Railcontent\Events\ContentCreated;
 use Railroad\Railcontent\Helpers\ContentHelper;
@@ -31,8 +30,6 @@ class CreateSongsDecember2022 extends Command
     /**
      * Create a new command instance.
      *
-     * @param DatabaseManager $databaseManager
-     * @param ContentRepository $contentRepository
      */
     public function __construct()
     {
@@ -44,11 +41,15 @@ class CreateSongsDecember2022 extends Command
      *
      * @return mixed
      */
-    public function handle(ContentRepository $contentRepository)
+    public function handle(
+        ContentRepository $contentRepository,
+    )
     {
         $this->info('Starting CreateSongsDecember2022...');
 
-        $csv = array_map(function($v){return str_getcsv($v, ";");}, file(base_path('december_19_songs_import_semi.csv')));
+        $csv = array_map(function($v){return str_getcsv($v, ";");}, file(base_path('december_28_songs_import.csv')));
+//        $csv = array_map(function($v){return str_getcsv($v, ";");}, file(base_path('december_19_songs_import_semi.csv')));
+
         unset($csv[0]);
 
         // to be updated in case the csv has more than 2000 songs
@@ -290,7 +291,6 @@ class CreateSongsDecember2022 extends Command
 
             // assignment
             $assignmentChildren = $contentRepository->getByParentIdWhereTypeIn($content->id, ['assignment']);
-
             $assignmentSearchAttributes = [
                 'title' => $row[9],
                 'type' => 'assignment',
