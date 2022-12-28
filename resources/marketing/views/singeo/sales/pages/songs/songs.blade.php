@@ -478,6 +478,56 @@
                     @endslot
                 @endcomponent
             </div>
+            <div class="mb-6">
+                <h4 class="font-extrabold mb-4">Soul</h4>
+                @component('_partials.components.carousel',[
+                    'xdata' => "
+                        classes: {
+                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
+                            prev: 'hidden',
+                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
+                            pagination: 'hidden',
+                        },
+                        perPage: 6,
+                        perMove: 1,
+                        gap: '1rem',
+                        type: 'loop',
+                        interval: 2000,
+                        breakpoints: {
+                            1160: {
+                                perPage: 5,
+                            },
+                            900: {
+                                perPage: 4,
+                            },
+                            760: {
+                                perPage: 3,
+                            },
+                            590: {
+                                perPage: 2,
+                            },
+                        },
+                    ",
+                ])
+                    @slot('content')
+                        @foreach ($soul as $slide)
+                            <li class="splide__slide">
+                                <div>
+                                    <img
+                                        class="rounded-xl mb-1 transition-opacity opacity-0"
+                                        src="https://cdn.musora.com/image/fetch/w_250,q_auto:best/{{$slide['img']}}"
+                                        alt="{{$slide['title']}} img"
+                                        loading="lazy"
+                                        onload="this.classList.remove('opacity-0')"
+                                    >
+                                    <p class="font-bold mb-1 leading-tight">{{$slide['title']}}</p>
+                                    <p class="text-[#838C98] leading-tight">{{$slide['artist']}}</p>
+                                </div>
+                            </li>
+                        @endforeach
+                    @endslot
+                @endcomponent
+            </div>
             <div class="mb-10">
                 <h4 class="font-extrabold mb-4">Worship</h4>
                 @component('_partials.components.carousel',[
@@ -532,7 +582,7 @@
 
         <div class="text-center">
             <h3 class="font-extrabold mb-6">Plus thousands more popular songs.</h3>
-            <a href="" class="mx-1 join bg-pianote smaller">Get started <i class="fas fa-arrow-right" aria-hidden="true"></i> </a>
+            <a href="" class="mx-1 join bg-singeo smaller">Get started <i class="fas fa-arrow-right" aria-hidden="true"></i> </a>
         </div>
     </section>
 
