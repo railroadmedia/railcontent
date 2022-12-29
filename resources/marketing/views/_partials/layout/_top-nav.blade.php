@@ -4,21 +4,98 @@
         <img src="{{ $logo }}" alt="Musora Logo" class="w-full max-w-[77px] md:max-w-[144px] max-h-9">
     </a>
 
+    {{-- 
+        @if(!empty($promoVersion))
+            @include("drumeo.sales.partials._nav", [
+                "subscriptionVersion" => true,
+                "scrollToJoin" => true,
+                "hideMenu" => true,
+            ])
+        @else
+            @include("drumeo.sales.partials._nav", [
+                "subscriptionVersion" => true,
+                "fullSubscriptionVersion" => true,
+                "trialVersion" => true,
+            ])
+        @endif 
+    --}}
+
     <!-- link-wrapper -->
     <div class="flex flex-1">
+       
+        @if(!$emptyPromoVersion)
+            {{-- Nav Links --}}
+            <ul class="flex items-center text-white font-bebas-neue hidden md:flex">
+                @foreach($nav_links as $page => $info)
+                    @if(!empty($info['children']))
+                        @include('_partials.layout._secondary-nav-link', [
+                            "page" => $page,
+                            "children" => $info['children'],
+                        ])
+                    @else
+                        @include('_partials.layout._nav-link', [
+                            "page" => $page,
+                            "url" => $info['url'],
+                            "greyed" => $info['greyed'] ?? false,
+                        ])
+                    @endif
+                @endforeach 
+            </ul>
 
-        <!-- Page Links -->
-        {{--<ul class="flex items-center text-white font-bebas-neue hidden md:flex">--}}
-            {{--<li class="lg:ml-5"><a href="/#method" alt="Go to Method Section" class="uppercase border-b-[3px] pb-0.5 transition border-transparent hover:border-gray-600">Method</a></li>--}}
-            {{--<li class="ml-3 lg:ml-6"><a href="/#songs" alt="Go to Songs Section" class="uppercase border-b-[3px] pb-0.5 transition border-transparent hover:border-gray-600">Songs</a></li>--}}
-            {{--<li class="ml-3 lg:ml-6"><a href="/#coaches" alt="Go to Coaches Section" class="uppercase border-b-[3px] pb-0.5 transition border-transparent hover:border-gray-600">Coaches</a></li>--}}
-        {{--</ul>--}}
+            {{-- CTA Button --}}
+            <div class="ml-auto flex items-center">
+                <a @if(!empty($scrollToJoin))
+                        href="#customize-anchor" 
+                        class="anchor-slide btn-primary btn-small text-base leading-none bg-{{ $brand }} border-0 py-1.5 px-3 md:py-3 md:px-8 mr-1.5 mb-0 h-auto md:h-initial"
+                    @elseif(!empty($joinUrl))
+                        href="{{ $joinUrl }}" class="btn-primary btn-small text-base leading-none bg-{{ $brand }} border-0 py-1.5 px-3 md:py-3 md:px-8 mr-1.5 mb-0 h-auto md:h-initial"
+                    @else
+                        href="/#customize-anchor" class="btn-primary btn-small text-base leading-none bg-{{ $brand }} border-0 py-1.5 px-3 md:py-3 md:px-8 mr-1.5 mb-0 h-auto md:h-initial"
+                    @endif
+                >
+                    @if(!empty(!$emptyPromoVersion))
+                        Start Trial
+                    @else
+                        Join<span class="show-for-medium"> {{ $brand }}</span>
+                    @endif
+                </a>
+            </div>
+
+        @endif
+        
+        {{-- Cart and Shop CTA buttons --}}
+        @if(!empty($checkoutVersion))
+            <div class="ml-auto flex items-center">
+                <a href="{{ get_legacy_brand_base_url('drumeo') }}/drumshop" class="join outline-button">Shop</a>
+            </div>
+        @endif
+        
+        @if(!empty($cartVersion))
+            <div class="ml-auto flex items-center" id="app">
+                <a href="{{ get_legacy_brand_base_url('drumeo') }}/drumshop" class="join outline-button">Shop</a>
+
+                <nav-cart-button
+                    {{-- cart-data='{{ $cartData }}' --}}
+                    cart-data-url=''
+                    checkout-url='/order/drumeo'
+                    api-domain-url=''
+                ></nav-cart-button>
+                <cart-sidebar
+                    brand="drumeo"
+                    {{-- cart-data='{{ $cartData }}' --}}
+                    cart-data-url=''
+                    checkout-url='/order/drumeo'
+                    api-domain-url=''
+                ></cart-sidebar>
+
+            </div>
+        @endif
 
         <!-- Nav CTA buttons -->
-        <div class="ml-auto flex items-center">
+        {{-- <div class="ml-auto flex items-center"> --}}
             {{--<a href="/shop" class="btn-secondary btn-small text-base leading-none text-white mr-1.5 py-1 px-3 md:py-2.5 md:px-8 mb-0 h-auto md:h-initial hover:text-black hover:bg-white hover:border-white">Shop</a>--}}
-            <a href="/members" class="btn-primary btn-small text-base leading-none {{ $theme_bg }} border-0 py-1.5 px-3 md:py-3 md:px-8 mr-1.5 mb-0 h-auto md:h-initial">Log In</a>
-        </div>
+            {{-- <a href="/members" class="btn-primary btn-small text-base leading-none bg-{{ $brand }} border-0 py-1.5 px-3 md:py-3 md:px-8 mr-1.5 mb-0 h-auto md:h-initial">Log In</a>
+        </div> --}}
 
     </div>
 

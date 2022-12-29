@@ -2,14 +2,14 @@
 
     <!-- Nav -->
     @include('_partials.layout._top-nav', [
+        "emptyPromoVersion" => $emptyPromoVersion,
         "logo" => $logo,
-        "theme_bg" => $theme_bg,
+        "links" => $nav_links,
     ])
 
     <!-- Sidebar -->
     @include('_partials.layout._sidebar', [
-        "theme_text" => $theme_text,
-        "links" => $links,
+        "links" => $sidebar_links,
     ])
 
 </header>

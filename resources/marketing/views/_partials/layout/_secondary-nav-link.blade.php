@@ -9,7 +9,7 @@
           x-on:click.prevent="dropdown_{{ $id }} = !dropdown_{{ $id }}"      
     >
         @if(!empty($iconClass))
-            <i class="no-events {{ $iconClass }} {{ $theme_text }} mr-2.5 text-lg"></i>
+            <i class="no-events {{ $iconClass }} text-{{ $brand }} mr-2.5 text-lg"></i>
             {{ $page }}
         @elseif(!empty($iconSvg))
             <svg class="mr-2.5" width="20" height="20" aria-hidden="true" focusable="false"><use xlink:href="#{{ $iconSvg }}"></use></svg>
@@ -17,7 +17,7 @@
         @else
             {{ $page }}
         @endif
-        <i class="no-events far fa-chevron-down arrow ml-auto transition-all transform-gpu origin-center {{ $theme_text }}"
+        <i class="no-events far fa-chevron-down arrow ml-auto transition-all transform-gpu origin-center text-{{ $brand }}"
            x-bind:class="dropdown_{{ $id }} ? '-rotate-180' : 'rotate-0'" 
         ></i>
     </div>
@@ -28,7 +28,6 @@
         @foreach($children as $page => $info)
             @include('_partials.layout._nav-link', [
                 "page" => $page,
-                "theme_text" => $theme_text,
                 "iconClass" => $info['iconClass'] ?? null,
                 "iconSvg" => $info['iconSvg'] ?? null,
                 "url" => $info['url'],

@@ -5,18 +5,18 @@
         </a>
     </div>
 
-
-        <div class="menu-toggle @if(!empty($hideMenu)) opacity-0 px-0.5 @endif">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
+    <div class="menu-toggle @if(!empty($hideMenu)) opacity-0 px-0.5 @endif">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
 
     @if(!empty($checkoutVersion))
         <div class="button-wrap">
             <a href="{{ get_legacy_brand_base_url('drumeo') }}/drumshop" class="join outline-button">Shop</a>
         </div>
     @endif
+    
     @if(!empty($cartVersion))
         <div class="button-wrap" id="app">
             <a href="{{ get_legacy_brand_base_url('drumeo') }}/drumshop" class="join outline-button">Shop</a>
@@ -37,6 +37,7 @@
 
         </div>
     @endif
+
     @if(!empty($subscriptionVersion))
         @if(!empty($fullSubscriptionVersion))
             <div class="relative">
@@ -46,7 +47,6 @@
                     <a class=" @if(strpos(url()->full(), 'choose-plan')) active @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/choose-plan" >Pricing</a>
                     <a class=" @if(strpos(url()->full(), 'drumshop')) active @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/drumshop" >Shop</a>
                     <a class="" href="{{ get_legacy_brand_base_url('drumeo') }}/beat" >Blog</a>
-
                 </div>
                 <div class="features-dd hidden shadow-md bg-white rounded-xl p-2 absolute flex flex-col left-44 lg:left-48 top-10 lg:top-12 w-44">
                     <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full @if(strpos(url()->full(), 'method')) active @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/method" ><i class="mr-1 text-lg fa-fw far fa-music-note"></i> Method</a>

@@ -1,6 +1,6 @@
-@extends('drumeo._partials.global-layout')
+@extends('singeo._partials.sales-layout', ['emptyPromoVersion' => empty($promoVersion) ])
 
-@section('global-head')
+@section('head-includes')
     <title>Drumeo | Reach your drumming goals.</title>
     <meta property="og:title" content="Drumeo | Reach your drumming goals.">
     <meta property="og:url" content="https://www.drumeo.com/">
@@ -13,8 +13,6 @@
     @else
         <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/sales/2023/share-image-drumeo.jpg" style="display: none;">
     @endif
-
-    @include('drumeo._partials._fonts')
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
@@ -105,22 +103,8 @@
     }'
 @endsection
 
-@section('global-body')
-    @if(!empty($promoVersion))
-        @include("drumeo.sales.partials._nav", [
-            "subscriptionVersion" => true,
-            "scrollToJoin" => true,
-            "hideMenu" => true,
-        ])
-    @else
-        @include("drumeo.sales.partials._nav", [
-            "subscriptionVersion" => true,
-            "fullSubscriptionVersion" => true,
-            "trialVersion" => true,
-        ])
-    @endif
-
-
+@section('layout-body')
+    
     @php
         $features = [
             [
@@ -231,7 +215,7 @@
             ],
         ];
     @endphp
-
+    
     @include('musora.sales.components.trailer-grid-section', [
         'vid' => 'https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/video-reel.mp4',
         'header' => 'Your drumming goals<br class="inline sm:hidden"> start here.',
@@ -619,18 +603,16 @@
         'name' => 'trailer',
         'video' => '772644658'
     ])
+    
+@stop
 
-    @if(!empty($promoVersion))
-        @include("drumeo.sales.partials._footer", [
-            "minimal" => true
-        ])
-    @else
-        @include("drumeo.sales.partials._footer")
-    @endif
+{{-- Scripts --}}
+@section('layout-scripts')
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/sliding-anchor.js') }}"></script>
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
-    @yield('scripts')
+
+    {{-- Alpine Plugins --}}
+    <script defer src="https://unpkg.com/@alpinejs/focus@3.x.x/dist/cdn.min.js"></script>
 @stop
