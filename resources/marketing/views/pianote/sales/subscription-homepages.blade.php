@@ -571,7 +571,7 @@
             ]
         @endphp
         @include('musora.sales.components.order-section-bonuses', [
-        'topImage' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drumeo-annual-2w-card.png',
+        'topImage' => 'https://pianote.s3.amazonaws.com/sales/2023/pianote-annual-2w-card.png',
         'promoLogo' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs.svg',
        'promoLogoM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs-m.png',
         'header' => 'Save 17% + get 10 bonuses<br class="inline sm:hidden"> worth $905',
