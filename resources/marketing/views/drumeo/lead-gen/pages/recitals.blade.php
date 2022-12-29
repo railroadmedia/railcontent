@@ -8,7 +8,7 @@
     <meta property="og:description" content="We can’t wait to see your submission. Don’t be shy! Submit today!">
 
     <meta property="og:url" content="https://www.drumeo.com/recitals/">
-    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/sales/2022/og-image.jpg" style="display: none;">
+    <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/sales/2023/share-image-drumeo.jpg" style="display: none;">
 
     @include('drumeo._partials._fonts')
 

@@ -52,9 +52,9 @@
             <div class="w-full sm:w-5/12 hidden sm:block">
                     <div x-on:click="trailer = true;"
                         @if(!empty($promoVersion))
-                            class="relative bg-contain bg-center bg-no-repeat cursor-pointer autoplay-video" style="background-image:url(https://cdn.musora.com/image/fetch/w_850,q_auto:best/{!! $promoThumb !!});padding-bottom: 108%;"
+                            class="relative bg-contain bg-top bg-no-repeat cursor-pointer autoplay-video" style="background-image:url(https://cdn.musora.com/image/fetch/w_850,q_auto:best/{!! $promoThumb !!});padding-bottom: 108%;"
                         @else
-                            class="shadow-2xl rounded-xl aspect-1:1 overflow-hidden relative bg-cover bg-center cursor-pointer autoplay-video" style="background-image:url(https://cdn.musora.com/image/fetch/w_850,q_auto:best/{!! $thumb !!});"
+                            class="shadow-2xl rounded-xl aspect-1:1 overflow-hidden relative bg-cover bg-top cursor-pointer autoplay-video" style="background-image:url(https://cdn.musora.com/image/fetch/w_850,q_auto:best/{!! $thumb !!});"
                         @endif
                         >
                         <div class="join white smaller absolute bottom-2 left-2"><i class="fas fa-play"></i> Watch Trailer</div>

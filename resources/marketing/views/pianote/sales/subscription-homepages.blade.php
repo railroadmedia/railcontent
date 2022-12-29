@@ -1,25 +1,26 @@
-@extends('drumeo._partials.global-layout')
+@extends('pianote._partials.global-layout')
 
 @section('global-head')
-    <title>Drumeo | Reach your drumming goals.</title>
-    <meta property="og:title" content="Drumeo | Reach your drumming goals.">
-    <meta property="og:url" content="https://www.drumeo.com/">
 
-    <meta name="description" content="Learn the drums faster with organized video lessons, legendary teachers, and better practice tools. 90-Day Guarantee.">
-    <meta property="og:description" content="Learn the drums faster with organized video lessons, legendary teachers, and better practice tools. 90-Day Guarantee.">
+    <title>Learn the piano anytime with real teachers. | Pianote</title>
+    <meta property="og:title" content="Pianote - Learn the piano anytime with real teachers.">
+    <meta property="og:url" content="https://www.pianote.com/">
+
+    <meta name="description" content="Learn the piano anytime with step-by-step video lessons, world-class teachers, and unlimited personal support. 90-Day Guarantee.">
+    <meta property="og:description" content="Learn the piano anytime with step-by-step video lessons, world-class teachers, and unlimited personal support. 90-Day Guarantee.">
 
     @hasSection('share-image')
         @yield('share-image')
     @else
-        <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/sales/2023/share-image-drumeo.jpg" style="display: none;">
+        <meta property="og:image" content="https://pianote.s3.amazonaws.com/sales/2023/share-image-pianote.jpg" style="display: none;">
     @endif
 
-    @include('drumeo._partials._fonts')
+    @include('pianote._partials._fonts')
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
-    <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}">
+    <link href="{{ asset('/marketing/css/pianote/tailwind-helpers.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/sales.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
 
     <style>
@@ -79,7 +80,7 @@
         }
 
         .splide__arrow svg {
-            fill: #0B76DB !important;
+            fill: #f61a30 !important;
         }
 
         .bubble:after {
@@ -107,13 +108,13 @@
 
 @section('global-body')
     @if(!empty($promoVersion))
-        @include("drumeo.sales.partials._nav", [
+        @include("pianote._partials._nav", [
             "subscriptionVersion" => true,
             "scrollToJoin" => true,
             "hideMenu" => true,
         ])
     @else
-        @include("drumeo.sales.partials._nav", [
+        @include("pianote._partials._nav", [
             "subscriptionVersion" => true,
             "fullSubscriptionVersion" => true,
             "trialVersion" => true,
@@ -124,74 +125,74 @@
     @php
         $features = [
             [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drum-lessons-icon.svg',
-                'title' => 'Drum Lessons',
-                'desc' => 'Step-by-step video<br class="hidden sm:inline"> lessons on every topic.',
+                'image' => 'https://pianote.s3.amazonaws.com/sales/2023/piano-lesson-icon.svg',
+                'title' => 'Piano Lessons',
+                'desc' => 'Step-by-step video <br class="hidden sm:inline"> lessons on every topic.',
             ],
             [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/artist-course-icon2.svg',
+                'image' => 'https://pianote.s3.amazonaws.com/sales/2023/artist-course-icon.svg',
                 'title' => 'Artist Courses',
-                'desc' => 'Courses and live events<br class="hidden sm:inline"> with drumming heroes. ',
+                'desc' => 'Courses and live events<br class="hidden sm:inline"> with inspiring pianists. ',
             ],
             [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/songs-icon.svg',
-                'title' => '5000+ Songs',
+                'image' => 'https://pianote.s3.amazonaws.com/sales/2023/songs-icon.svg',
+                'title' => '1000+ Songs',
                 'desc' => 'Play your favorite songs<br class="hidden sm:inline"> from every style & era.',
             ],
             [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/support-icon.svg',
+                'image' => 'https://pianote.s3.amazonaws.com/sales/2023/support-icon.svg',
                 'title' => '24/7 Support',
                 'desc' => 'The largest community<br class="hidden sm:inline"> of students & teachers.',
             ],
         ];
         $slides = [
             [
-                'desc' => 'Drumeo is the real deal folks - a good place to study and realize one’s dreams.',
-                'thumb' => 'https://drumeo-assets.s3.amazonaws.com/drum-shop/new-drummers/billy-cobham.jpg',
-                'name' => 'Billy Cobham',
-                'credit' => 'Rolling Stone  Top 100 Drummer',
+                'desc' => 'Pianote is a really fun resource for those wishing to pick up tips and tricks and gain perspective. ',
+                'thumb' => 'https://pianote.s3.amazonaws.com/sales/2022/feature-testimonial-yvette.jpg',
+                'name' => 'Yvette Young',
+                'credit' => ' Multi-Instrumentalist',
             ],
             [
-                'desc' => 'A world-class site for continuing education and insight into the world of drumming!',
-                'thumb' => 'https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/redmond.jpg',
-                'name' => 'Rich Redmond',
-                'credit' => '3x Country Drummer Of The Year',
+                'desc' => 'You should check out Pianote. If you’re a beginner or intermediate, this is ideal for you!',
+                'thumb' => 'https://pianote.s3.amazonaws.com/sales/2022/feature-testimonial-ali.jpg',
+                'name' => 'Ali Spagnola',
+                'credit' => ' YouTube Entertainer',
             ],
             [
-                'desc' => 'The Drumeo standard is one of the highest quality and is THE place to go for the best in drum education.',
-                'thumb' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/four-weeks-to-better-drum-fills/drummer-david-garibaldi.jpg',
-                'name' => 'David Garibaldi',
-                'credit' => 'Rolling Stone Top 100 Drummer',
+                'desc' => 'Whether you’re getting your head around “Chopsticks” or brushing up on your Shostakovich, there should be a lesson for you.',
+                'thumb' => 'https://pianote.s3.amazonaws.com/sales/2022/feature-testimonial-musicradar.jpg',
+                'name' => 'MusicRadar',
+                'credit' => ' Website For Musicians',
             ],
         ];
     @endphp
     @include('musora.sales.components.header-section', [
-        'header' => 'Online drum lessons for all skill levels.',
-        'desc' => 'Learn the drums faster with step-by-step lessons, thousands of songs and unlimited personal support.',
-        'thumb' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/jan-thumb-no-badge.jpg',
-        'promoThumb' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/header-thumb-promo2.png',
-        'promoThumbM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/header-thumb-promo-m2.jpg',
+        'header' => 'Online piano lessons for all skill levels.',
+        'desc' => 'Learn the piano faster with step-by-step lessons, a thousand songs, and unlimited personal support. ',
+        'thumb' => 'https://pianote.s3.amazonaws.com/sales/2023/header-thumb.jpg',
+        'promoThumb' => 'https://pianote.s3.amazonaws.com/sales/2023/jan-thumb.png',
+        'promoThumbM' => 'https://pianote.s3.amazonaws.com/sales/2023/jan-thumb-m.jpg',
         'pointOne' => 'Improve Your Skills',
         'pointTwo' => 'World-Class Teachers',
-        'pointThree' => 'Play More Songs',
-        'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738',
-        'students' => number_format(31856),
+        'pointThree' => 'Play More<br class="inline lg:hidden"> Songs',
+        'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Pianote+Membership/79348450',
+        'students' => number_format(Prices::$students),
     ])
 
     @if(!empty($promoVersion))
         @include('musora.sales.components.promo-section', [
         'promoLogo' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs.svg',
            'promoLogoM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs-m.png',
-        'desc' => 'Loop, learn, and remove the drums from 5,000+ drumming anthems. ',
-           'text' => 'The NEW Drumeo Songs is here.<br><br>You can now magically remove the drums from 5,000+ popular drumming anthems. And with note-for-note sheet music, tempo adjustment, and a looping feature you’ll have <strong>the ultimate tool for learning songs on the drums.</strong> <br><br>And to make your goals easier in 2023 – you’ll also get a FREE pair of Drumeo’s in-ear headphones when you join Drumeo. So you can enjoy unlimited drum lessons, note-for-note song breakdowns, AND protect your ears while playing your favorite songs.<br><br>Click below to grab the deal – or scroll down to try a demo of the NEW Drumeo Songs.',
-           'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/collage-promo.png',
-           'belowButton' => 'SAVE 17% + GET 10 BONUSES WORTH $1342.94',
+        'desc' => 'One membership. All instruments. 1000s of songs.',
+           'text' => 'This is your year.<br><br>Experience the NEW Pianote membership in 2023 and make the best investment in yourself. You’ll get guided lessons from world-class piano teachers to help you reach any goal this year.<br><br>And best of all…<br><br>You’ll have unlimited access to our brand new song library, complete with 1000 note-for-note transcriptions from our partners at Hal Leonard. Play your favorite songs the way they were written, complete with professional backing tracks so you’ll feel like a star.<br><br>And it gets better.<br><br>Because your Pianote membership now comes fully-loaded with all instruments. You can learn to sing, play guitar, or even rock out on the drums. All for no extra cost.<br><br>Join today and you’ll also get a set of Pianote professional over-ear headphones. Valued at $189, they’re yours free. Start the year off right. Click below to begin.',
+           'img' => 'https://pianote.s3.amazonaws.com/sales/2023/jan-launch-collage.png',
+           'belowButton' => 'SAVE 17% + GET 10 BONUSES WORTH $905',
        ])
     @else
         @include('musora.sales.components.learn-by-playing-section', [
-            'header' => 'Learn the drums by<br class="inline sm:hidden"> <u>playing the drums</u>.',
-            'desc' => 'It’s the best feeling in the world –<br><br>Nailing that fill in your favorite song, slamming out the chorus of an all-time classic, or writing your own drum part that locks in with the music… but it’s a process.<br><br>And it starts with learning the skills & techniques you need to play the drums.<br><br>Drumeo makes learning the drums easier by giving you step-by-step lessons anytime & anywhere it fits your schedule. Plus, the groundbreaking NEW Drumeo Songs tool makes playing your favorite songs a reality – with note-for-note breakdowns of 5,000 popular songs.<br><br>You’ll play more. You’ll fall in love with your progress. And you’ll have personalized support every step of the way.<br><br>Scroll down to watch the trailer, see more details, and learn to play like you’ve always wanted!',
-            'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/collage2.png',
+            'header' => 'Learn the piano by<br class="inline sm:hidden"> <u>playing the piano</u>.',
+            'desc' => 'It’s not rocket science.<br><br>If you don’t play your piano, you won’t get better. At Pianote, our mission is to get you playing more so you get better, faster (while having FUN!).<br><br>In short, you’ll learn piano <u>by playing piano</u>.<br><br>These are short, fun lessons from world-class teachers. But the real magic happens when you practice ALONG with your coaches.<br><br>You’ll play more, you’ll get better faster, and you’ll fall in love with your progress. Plus you’ll have access to a library of thousands of popular songs with sheet music and backing tracks.<br><br>Scroll down to watch the trailer, see more details, and start playing like you’ve always wanted!',
+            'img' => 'https://pianote.s3.amazonaws.com/sales/2023/collage-evergreen.png',
         ])
 
     @endif
@@ -200,93 +201,137 @@
     @php
         $gridItems = [
             [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/10-level-cirriculum.jpg',
+                'image' => 'https://pianote.s3.amazonaws.com/sales/2023/modern-method.jpg',
                 'title' => '10-Level Curriculum',
-                'desc' => 'The most trusted step-by-step video lessons for every technique, pattern, and style.',
+                'desc' => 'Develop your core skills, techniques, and musicality to play beautifully in any setting. ',
             ],
             [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/practical-assignments.jpg',
+                'image' => 'https://pianote.s3.amazonaws.com/sales/2023/practical-assignments.jpg',
                 'title' => 'Practical Assignments',
-                'desc' => 'Keep up your progress with clear assignments and handy practice tools for every level.',
+                'desc' => 'You\'ll always have on-screen assignments and practice tools to help you see results.',
             ],
             [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/guided-workouts.jpg',
+                'image' => 'https://pianote.s3.amazonaws.com/sales/2023/guided-workouts.jpg',
                 'title' => 'Guided Workouts',
                 'desc' => 'Stay inspired with guided workouts where you’ll play along with your teacher in real time.',
             ],
             [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/world-class-teachers.jpg',
+                'image' => 'https://pianote.s3.amazonaws.com/sales/2023/world-class-teachers.jpg',
                 'title' => 'World-Class Teachers',
-                'desc' => 'The best drummers are here -- including Grammy Award winners and touring musicians.',
+                'desc' => 'Lifetime teachers, touring performers, recording professionals, and trending stars. ',
             ],
             [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/downloadable-videos.jpg',
+                'image' => 'https://pianote.s3.amazonaws.com/sales/2023/downloadable-videos.jpg',
                 'title' => 'Downloadable Videos',
-                'desc' => 'Stream your lessons OR download your videos so you can practice anywhere, anytime.',
+                'desc' => 'Stream your lessons OR download your videos so you can practice anywhere, anytime. ',
             ],
             [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/personalized-support.jpg',
+                'image' => 'https://pianote.s3.amazonaws.com/sales/2023/personalized-support.jpg',
                 'title' => 'Personalized Support',
-                'desc' => 'Get weekly live streams, student lesson plans, and access to a global drum community.',
+                'desc' => 'Get weekly live streams, student lesson plans, and access to a global piano community. ',
             ],
         ];
     @endphp
 
     @include('musora.sales.components.trailer-grid-section', [
         'vid' => 'https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/video-reel.mp4',
-        'header' => 'Your drumming goals<br class="inline sm:hidden"> start here.',
-        'desc' => '
-        Always know <em>exactly</em> what to practice with an organized 10-level <br class="hidden sm:inline lg:hidden">curriculum featuring many of the world’s best teachers. ',
+        'header' => 'Your piano goals<br class="inline sm:hidden"> start here.',
+        'desc' => 'Always know <em>exactly</em> what to practice with an organized 10-level <br class="hidden sm:inline lg:hidden">curriculum and direct access to real teachers. ',
     ])
 
     @php
         $buttons = [
-            'Styles', 'Creativity', 'Grooves'
+            'Styles', 'Technique', 'Creativity'
         ];
 
         $courses = [
             [
-                'title' => 'Learn and style',
+                'title' => 'Learn any style',
                 'images' => [
                     [
-                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Todd-Sucherman.jpg',
-                        'title' => 'Rock <br>Drumming',
-                        'instructor' => 'Todd Sucherman',
+                    'img' => 'https://pianote.s3.amazonaws.com/sales/2023/classical-piano.jpg',
+                    'title' => 'Classical Piano',
+                    'instructor' => 'Victoria Theodore',
                     ],
                     [
-                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Dennis-Chambers.jpg',
-                        'title' => 'Funk <br>Drumming',
-                        'instructor' => 'Dennis Chambers',
+                    'img' => 'https://pianote.s3.amazonaws.com/sales/2023/cocktail-piano.jpg',
+                    'title' => 'Cocktail Piano',
+                    'instructor' => 'Brett Ziegler',
                     ],
                     [
-                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Domino-Santatonio.jpg',
-                        'title' => 'Pop <br>Drumming',
-                        'instructor' => 'Domino Santantonio',
+                    'img' => 'https://pianote.s3.amazonaws.com/sales/2023/latin-essentials.jpg',
+                    'title' => 'Latin Essentials',
+                    'instructor' => 'Kevin Castro',
                     ],
                     [
-                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Steve-Smith.jpg',
-                        'title' => 'Jazz <br>Drumming',
-                        'instructor' => 'Steve Smith',
+                    'img' => 'https://pianote.s3.amazonaws.com/sales/2023/worship-piano.jpg',
+                    'title' => 'Worship Piano',
+                    'instructor' => 'Amberly Martz',
                     ],
                     [
-                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Larnell-Lewis.jpg',
-                        'title' => 'Gospel <br>Drumming',
-                        'instructor' => 'Larnell Lewis',
+                    'img' => 'https://pianote.s3.amazonaws.com/sales/2023/improvisational-jazz.jpg',
+                    'title' => 'Improvisational Jazz',
+                    'instructor' => 'Jesús Molina',
                     ],
                     [
-                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Greyson-Nektrutman.jpg',
-                        'title' => 'Big Band <br>Drumming',
-                        'instructor' => 'Greyson Nekrutman',
+                    'img' => 'https://pianote.s3.amazonaws.com/sales/2023/gospel-piano.jpg',
+                    'title' => 'Gospel Piano',
+                    'instructor' => 'Erskine Hawkins',
                     ],
                     [
-                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Gene-Hoglan.jpg',
-                        'title' => 'Metal <br>Drumming',
-                        'instructor' => 'Gene Hoglan',
+                    'img' => 'https://pianote.s3.amazonaws.com/sales/2023/Latin-Jazz.jpg',
+                    'title' => 'Latin Jazz',
+                    'instructor' => 'Gabriel Palatchi',
                     ],
                     [
-                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/John-Wooton.jpg',
-                        'title' => 'Latin <br>Drumming',
-                        'instructor' => 'John Wooton',
+                    'img' => 'https://pianote.s3.amazonaws.com/sales/2023/Tango-Piano.jpg',
+                    'title' => 'Tango Piano',
+                    'instructor' => 'Sangah Noona',
+                    ]
+                ]
+            ],
+            [
+                'title' => 'Add essential techniques',
+                'images' => [
+                    [
+                    'img' => 'https://pianote.s3.amazonaws.com/sales/2023/piano-technique-made-easy.jpg',
+                    'title' => 'Piano Technique Made Easy',
+                    'instructor' => 'Cassi Falk',
+                    ],
+                    [
+                    'img' => 'https://pianote.s3.amazonaws.com/sales/2023/faster-fingers.jpg',
+                    'title' => 'Faster Fingers',
+                    'instructor' => 'Lisa Witt',
+                    ],
+                    [
+                    'img' => 'https://pianote.s3.amazonaws.com/sales/2023/hanon-exercises.jpg',
+                    'title' => 'Hanon Exercises',
+                    'instructor' => 'Cassi Falk',
+                    ],
+                    [
+                    'img' => 'https://pianote.s3.amazonaws.com/sales/2023/de-stupefy-your-left-hand.jpg',
+                    'title' => 'De-Stupefy Your Left Hand',
+                    'instructor' => 'Lisa Witt',
+                    ],
+                    [
+                    'img' => 'https://pianote.s3.amazonaws.com/sales/2023/beautifully-simple-piano-arpeggios.jpg',
+                    'title' => 'Beautifully Simple Piano Arpeggios',
+                    'instructor' => 'Sangah Noona',
+                    ],
+                    [
+                    'img' => 'https://pianote.s3.amazonaws.com/sales/2023/riffs-fills.jpg',
+                    'title' => 'Riffs & Fills',
+                    'instructor' => 'Lisa Witt',
+                    ],
+                    [
+                    'img' => 'https://pianote.s3.amazonaws.com/sales/2023/7-days-to-sight-reading.jpg',
+                    'title' => '7 Days To Sight Reading',
+                    'instructor' => 'Lisa Witt',
+                    ],
+                    [
+                    'img' => 'https://pianote.s3.amazonaws.com/sales/2023/dexterity-finger-strength.jpg',
+                    'title' => 'Dexterity & Finger Strength',
+                    'instructor' => 'Cassi Falk',
                     ],
                 ]
             ],
@@ -294,89 +339,44 @@
                 'title' => 'Play more creatively',
                 'images' => [
                     [
-                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Anika-Nilles.jpg',
-                        'title' => 'Subdivision<br> Studies',
-                        'instructor' => 'Anika Nilles',
+                    'img' => 'https://pianote.s3.amazonaws.com/sales/2023/playing-piano-beautifully.jpg',
+                    'title' => 'Playing Piano Beautifully',
+                    'instructor' => 'Lisa Witt',
                     ],
                     [
-                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Dom-Famularo.jpg',
-                        'title' => 'Pedal<br> Control',
-                        'instructor' => 'Dom Famularo',
+                    'img' => 'https://pianote.s3.amazonaws.com/sales/2023/musical-freedom.jpg',
+                    'title' => 'Improvisation & Musical Freedom',
+                    'instructor' => 'Jesús Molina',
                     ],
                     [
-                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Tommy-Igoe.jpg',
-                        'title' => 'Groove<br> Essentials',
-                        'instructor' => 'Tommy Igoe',
+                    'img' => 'https://pianote.s3.amazonaws.com/sales/2023/the-perfect-arrangement.jpg',
+                    'title' => 'The Perfect Arrangement',
+                    'instructor' => 'Summer Swee-Singh',
                     ],
                     [
-                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Dorothe-Taylor-01.jpg',
-                        'title' => 'Stick<br> Control',
-                        'instructor' => 'Dorothea Taylor',
+                    'img' => 'https://pianote.s3.amazonaws.com/sales/2023/creative-composition.jpg',
+                    'title' => 'Creative Composition',
+                    'instructor' => 'Lisa Witt',
                     ],
                     [
-                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Bruce-Becker.jpg',
-                        'title' => 'Hand<br> Technique',
-                        'instructor' => 'Bruce Becker',
+                    'img' => 'https://pianote.s3.amazonaws.com/sales/2023/pillars-of-improvisation.jpg',
+                    'title' => 'Pillars of Improvisation',
+                    'instructor' => 'Jordan Leibel',
                     ],
                     [
-                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Billy-Cobham.jpg',
-                        'title' => 'Internal<br> Synchronization',
-                        'instructor' => 'Billy Cobham',
+                    'img' => 'https://pianote.s3.amazonaws.com/sales/2023/the-power-of-chords.jpg',
+                    'title' => 'The Power of Chords',
+                    'instructor' => 'Lisa Witt',
                     ],
                     [
-                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Emmanuelle-Caplette.jpg',
-                        'title' => 'Traditional<br> Grip',
-                        'instructor' => 'Emmanuelle Caplette',
+                    'img' => 'https://pianote.s3.amazonaws.com/sales/2023/creative-song-writing.jpg',
+                    'title' => 'Creative Songwriting',
+                    'instructor' => 'Josh Dion',
                     ],
                     [
-                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Sarah-Thawer.jpg',
-                        'title' => '4-Way<br> Coordination',
-                        'instructor' => 'Sarah Thawer',
-                    ],
-                ]
-            ],
-            [
-                'title' => 'Find your groove',
-                'images' => [
-                    [
-                    'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Simon-Phillips.jpg',
-                    'title' => 'Elevate Your<br> Drum Sound',
-                    'instructor' => 'Simon Phillips',
-                    ],
-                    [
-                    'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Aaron-Spears.jpg',
-                    'title' => 'Drum<br> Chops',
-                    'instructor' => 'Aaron Spears',
-                    ],
-                    [
-                    'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Hannah-Welton.jpg',
-                    'title' => 'Writing<br> Drum Parts',
-                    'instructor' => 'Hannah Welton',
-                    ],
-                    [
-                    'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Matt-McGuire.jpg',
-                    'title' => 'Song<br> Breakdowns',
-                    'instructor' => 'Matt McGuire',
-                    ],
-                    [
-                    'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Dorothe-Taylor-02.jpg',
-                    'title' => 'Rudiments<br> & Patterns',
-                    'instructor' => 'Dorothea Taylor',
-                    ],
-                    [
-                    'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Aric-Improta.jpg',
-                    'title' => 'The Creative<br> Mindset',
-                    'instructor' => 'Aric Improta',
-                    ],
-                    [
-                    'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Kaz-Rodgriguez.jpg',
-                    'title' => 'Musical<br> Exercises',
-                    'instructor' => 'Kaz Rodriguez',
-                    ],
-                    [
-                    'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Gavin-Harrison.jpg',
-                    'title' => 'Bass Drum<br> Calibration',
-                    'instructor' => 'Gavin Harrison',
+                    'img' => 'https://pianote.s3.amazonaws.com/sales/2023/rhythmic-playing.jpg',
+                    'title' => 'Rhythmic Playing',
+                    'instructor' => 'Jay Oliver',
                     ],
                 ]
             ],
@@ -384,123 +384,120 @@
     @endphp
 
     @include('musora.sales.components.coaches-section', [
-        'header' => 'Study with the world’s <br class="md:hidden">best drummers.',
-        'desc' => 'Amplify your skills with 200+ artist courses + <br class="hidden md:inline">access exclusive live events with drumming legends.'
+        'header' => 'Real Teachers,  <br class="sm:hidden">Real Results.',
+        'desc' => 'Amplify your skills with exclusive artist <br class="hidden md:inline"> courses + live events with special guests.'
     ])
 
     @php
         $songItems = [
             [
-                'icon' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/5000-songs-icon.svg',
-                'title' => '5000+ popular songs.',
-                'desc' => 'Get note-for-note song breakdowns for <br class="hidden sm:inline"> every style, era, and skill level.',
+                'icon' => 'https://pianote.s3.amazonaws.com/sales/2023/songs-icon.svg',
+                'title' => '1000+ popular songs.',
+                'desc' => 'Get note-for-note song breakdowns for  <br class="hidden sm:inline"> every style, era, and skill level. ',
             ],
             [
-                'icon' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/note-for-note-icon.svg',
+                'icon' => 'https://pianote.s3.amazonaws.com/sales/2023/tempo-icons.svg',
                 'title' => 'Find the perfect tempo.',
-                'desc' => 'Slow down or speed up any section <br class="hidden sm:inline">of a song to hear every note.',
+                'desc' => 'Slow down any section of a song  <br class="hidden sm:inline">to make those tricky bars easier. ',
             ],
             [
-                'icon' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/tempo-icon.svg',
-                'title' => 'Loop the trouble spots.',
-                'desc' => 'No more pausing and rewinding that<br class="hidden sm:inline"> tricky fill. Loop it over and over again!  ',
+                'icon' => 'https://pianote.s3.amazonaws.com/sales/2023/loop-icons.svg',
+                'title' => 'Loop the hard parts.',
+                'desc' => 'Create practice loops to play-through <br class="hidden sm:inline"> those difficult parts over and over.   ',
             ],
             [
-                'icon' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/no-drums-icon.svg',
-                'title' => 'Remove the drums <div class="rounded-full ml-2 inline-block bg-promo text-black text-xs px-2">NEW</div>',
-                'desc' => 'Magically remove the original drums<br class="hidden sm:inline"> to make each song uniquely yours. ',
+                'icon' => 'https://pianote.s3.amazonaws.com/sales/2023/timing-icons.svg',
+                'title' => 'Improve your timing.',
+                'desc' => 'Use the built-in-metronome – your new <br class="hidden sm:inline"> best friend for difficult rhythms.  ',
             ],
             [
-                'icon' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/devices-icon.svg',
+                'icon' => 'https://pianote.s3.amazonaws.com/sales/2023/devices-icons.svg',
                 'title' => 'Take your songs anywhere.',
-                'desc' => 'Accessible on any device, or printable,<br class="hidden sm:inline"> so you can play any song, any time.  ',
+                'desc' => 'Accessible on any device, or printable, <br class="hidden sm:inline"> so you can play any song, any time.    ',
             ],
 
         ];
     @endphp
     @include('musora.sales.components.songs-section', [
         'header' => 'Play your favorite songs.',
-        'desc' => 'You’ll have <strong>all the tools you need</strong> to make sure you never miss a beat.',
-        'video' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/smells-like-teen-spirit2.mp4',
-        'brandName' => 'Drumeo',
+        'desc' => 'You’ll have <strong>all the tools you need</strong> to make sure you never miss a note.',
+        'video' => 'https://pianote.s3.amazonaws.com/sales/2023/someone-like+you.mp4',
+        'brandName' => 'Pianote',
+        'bannerDesc' => 'Powered by Musora, Pianote includes full access to our communities for drums, guitar, and voice.',
     ])
 
     @php
         $testimonials = [
             [
-            'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/testimonials/ed-koop.jpg',
-            'name' => 'Ed Koop',
-            'video' => '342059271',
-            'title' => 'I’m loving music more than I ever did before!',
-            'description' => 'After 20 years away from the drums, Ed says he’s loving music more than ever. He nailed his first audition and has now played at the venues of his dreams.',
+            'image' => 'https://pianote.s3.amazonaws.com/sales/2022/testimonials/iankershaw.jpg',
+            'title' => "Such a fantastic and welcoming student community.",
+            'description' => "When I signed up for Pianote, I knew I was going to get Lisa’s great energy, the Method, the courses, the bootcamps, and the student reviews.<br><br>But my breakthrough came when I realized that sitting behind all of this is such a fantastic and welcoming, supportive student community. It’s this community – as well as the teachers and the rest of the Pianote team – that really actively encourages you to share your progress and practice. And it doesn’t have to be perfect. And that really does encourage you to practice more. And it’s in that sharing and practice that the real breakthroughs come. Thank you!",
+            'name' => 'Ian Kershaw',
+            'video' => '660596700',
             ],
             [
-            'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/testimonials/barry-lisle.jpg',
-            'name' => 'Barry Lisle',
-            'video' => '342066433',
-            'title' => 'They walk you through, step-by-step, for any goal.',
-            'description' => 'Barry wanted something to keep his mind busy, so he revisited the instrument he’d loved as a kid: the drums. Now he’s playing in bands and recording an album.',
+            'image' => 'https://pianote.s3.amazonaws.com/sales/2022/testimonials/jaydemcintosh.jpg',
+            'title' => "I’ve had to give up on a lot of my dreams. Then I discovered Pianote.",
+            'description' => "I’ve been chronically ill for the last six years, which means I’ve had to give up on a lot of my dreams and goals.<br><br>During my health journey, my interest in piano and my connection to music really arose – but it also seemed impossible. I had no prior music knowledge and couldn’t even get out of bed some days. This is when I discovered Pianote and they’ve been amazing.<br><br>I have to work at a very slow pace due to my health, but I’ve already learned so many basics. I can play some of my all-time favorite songs – and it’s just so awesome to know I can learn from home and accomplish one of my dreams. I’m so excited to keep learning and I recommend Pianote so much.",
+            'name' => 'Jayde McIntosh',
+            'video' => '660596722',
             ],
             [
-            'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/testimonials/lisa-aragon.jpg',
-            'name' => 'Lisa Aragon',
-            'video' => '373252004',
-            'title' => 'I was able to play drums on stage!',
-            'description' => 'Lisa got interested in the drums by playing Rock Band. She had no idea she’d be performing with strangers in Nashville just a few years later.',
+            'image' => 'https://pianote.s3.amazonaws.com/sales/2022/testimonials/xitlalicaballero2.jpg',
+            'title' => "I’m six years old. My biggest moment is when I play Für Elise.",
+            'description' => "My name is Xitlali. I’m six years old. I started playing piano when I was five. A few weeks ago, I started using pianote. My biggest moment is when I play Für Elise.",
+            'name' => 'Xitlali Caballero',
+            'video' => '660596752',
             ],
             [
-            'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/testimonials/guy-dobbins.jpg',
-            'name' => 'Guy Dobbins',
-            'video' => '373445704',
-            'title' => 'Drummers from all around the world helping you out.',
-            'description' => 'Guy had trouble figuring out a song, he reached out and an instructor walked him through it that same day - getting him through the gig that evening.',
+            'image' => 'https://pianote.s3.amazonaws.com/sales/2022/testimonials/nabilabdelmoneim.jpg',
+            'title' => "I’m a lot better at using both hands and it opened up more songs.",
+            'description' => "You guys make learning way too fun.<br><br>I’ve had two breakthrough moments. There was this video that promised hand independence in five days. And what do you know? A few days later I’m a lot better at using both hands and it just opened up a bunch more songs for me. And my second breakthrough moment was finding this chord chart that made it so much easier to go through the chords and practice them. And I started realizing that these chords sounded a lot like the ones I play on guitar. So I managed to take the notes that were in the practice log and apply them to my guitar, and actually learned theory for both instruments at once. Thank you Lisa and happy playing!",
+            'name' => 'Nabil Abd El-Moneim',
+            'video' => '660596735',
             ],
             [
-            'image' => 'https://i.vimeocdn.com/video/1143532818-61ead907372040ae51f23b9d5f05469c271aee744e9cb67e777ae4307f762b23-d_620',
-            'name' => 'Omari Augustine',
-            'video' => '553438851',
-            'title' => 'Something you can’t get from having a drum teacher.',
-            'description' => 'Omari had big shoes to fill. His father was already an accomplished drummer in Trinidad & Tobago when Omari decided to take his drumming to the next level.',
+            'image' => 'https://pianote.s3.amazonaws.com/sales/2022/testimonials/jessripley.jpg',
+            'title' => "I’m blown away by the program you’ve created.",
+            'description' => "Pianote is an insanely encouraging and supportive community run by an insanely encouraging and supportive team. Sincerely, I’m blown away by the program you’ve created.<br><br>I sat down one day and it just clicked. From then on, I’ve felt VERY encouraged to keep learning and practicing. It’s fulfilling and fun to see myself progress and achieve goals. Now I’m playing with both hands at the same time with confidence – and I’ve started playing along with more backing tracks and making up my own songs.",
+            'name' => 'Jess Ripley',
             ],
             [
-            'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/testimonials/marlene-rosen.jpg',
-            'name' => 'Marlene Rosen',
-            'video' => '373446024',
-            'title' => 'I’m rediscovering music again.',
-            'description' => 'Marlene, a cancer survivor, filled her recovery time with drumming and was able to progress at a pace that worked for her.',
+            'image' => 'https://pianote.s3.amazonaws.com/sales/2022/testimonials/anselmdesouza.jpg',
+            'title' => "Helped coordinate my left and right hands.",
+            'description' => "I was using a piano app, but it wasn’t personal and I had to figure it out on my own most of the time. So I joined Pianote and went back to the basics.<br><br>Pianote helped coordinate my left and right hands. The explanations and instructions are very clear, easy to follow, and slowly I noticed I was improving by using skills from one lesson to the next. It’s structured to allow you to build the foundations, and the tips and tricks videos make your playing special. The lessons are fun and the instructors are engaging.",
+            'name' => 'Anselm de Souza',
             ],
             [
-            'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/testimonials/jay-damberg-2.jpg',
-            'name' => 'Jay Damberg',
-            'video' => '373445466',
-            'title' => 'Anytime, day or night, I can access the lessons I need.',
-            'description' => 'With a full-time job and a family, Jay often can’t practice drums until late at night, which is why he loves being able to access Drumeo whenever he wants.',
+            'image' => 'https://pianote.s3.amazonaws.com/sales/2022/testimonials/johnmaclean.jpg',
+            'title' => "My 6 year old daughter started dancing as I played.",
+            'description' => "Before Pianote and The Method, I was completely lost in terms of knowing how to become a better musician. All I would do is try to play songs, but without any of the structure and practice that is required to actually improve. And with face to face lessons I wasn’t really progressing much between the lessons. But having access to the video tutorials online lets me go back as often as I need to.<br><br>My biggest breakthrough has been independent hand control – allowing me to hear rich music that I’m creating for the first time. And gaining that confidence has allowed me to start to improvise the pieces that I learn.<br><br>The lightbulb moment happened when my 6 year old daughter started dancing as I played! You must be doing something right if someone dances to music that you’re playing, right?",
+            'name' => 'John Maclean',
             ],
             [
-            'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/testimonials/ivy-elizondo-2.jpg',
-            'name' => 'Ivy Elizondo',
-            'video' => '373445819',
-            'title' => 'Now we have a band and we’re recording an album!',
-            'description' => 'When Ivy’s kids decided to stop playing drums, she jumped on the throne instead -- she’s used Drumeo to build a foundation and formed a band.',
+            'image' => 'https://pianote.s3.amazonaws.com/sales/2022/testimonials/serenadorward.jpg',
+            'title' => "If I was taught this way as a child, I would have never quit.",
+            'description' => "I decided to sign up with Pianote not only to re-learn how to play the piano, but also because my mental health was really suffering and I needed something positive to focus on that was just for ME. I knew almost immediately that this was the answer I had been looking for. It felt like the heaviness on my shoulders got a bit lighter after every piano session.  And even though the lessons are virtual, it was like Lisa was right there beside me cheering me on.<br><br>I was blown away by how quickly I progressed with a few tutorials from Lisa. My overall confidence improved, especially with improvisation. Now I know all these little tricks (fills & riffs) and how to play inversions and practice chords in ways that sound so lovely.  If I had been taught this way as a child, I probably never would have quit.",
+            'name' => 'Serena Dorward',
             ],
         ]
     @endphp
     <div id="testimonials" class="anchor"></div>
     @include('musora.sales.components.testimonials-section', [
-        'header' => 'Trusted by drummers<br class="inline-block sm:hidden">  everywhere.',
-        'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738',
-        'reviewText' => 'Drumeo is rated 5-stars for price, satisfaction,<br class="inline sm:hidden"> and customer service.',
-        'youtubeLink' => 'https://www.youtube.com/freedrumlessons/',
-        'youtube' => '2.5M',
-        'facebookLink' => 'https://facebook.com/drumeo/',
-        'facebook' => '1.2M',
-        'instagramLink' => 'https://instagram.com/drumeoofficial/',
-        'instagram' => '950K',
+        'header' => 'Trusted by pianists<br class="inline-block sm:hidden">  everywhere.',
+        'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Pianote+Membership/79348450',
+        'reviewText' => 'Rated 5 stars by Pianote students of all skill levels!',
+        'youtubeLink' => 'https://www.youtube.com/pianolessonscom/',
+        'youtube' => '1.2M',
+        'facebookLink' => 'https://facebook.com/pianoteofficial/',
+        'facebook' => '418K',
+        'instagramLink' => 'https://instagram.com/pianoteofficial/',
+        'instagram' => '171K',
     ])
     @include('musora.sales.components.guarantee-section', [
-        'badge' => 'https://drumeo-assets.s3.amazonaws.com/sales/2022/guarantee.png',
+        'badge' => 'https://pianote.s3.amazonaws.com/sales/2022/piano-guarantee.png',
         'header' => '<strong>Happy student guarantee.</strong><br>Test-drive your lessons for 90 days. Zero risk.',
-        'desc' => 'Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence on the drums.',
+        'desc' => 'Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence on the piano.',
     ])
     <div class="unstick-trigger block"></div>
     <div id="customize-anchor" class="anchor"></div>
@@ -509,72 +506,67 @@
         @php
             $bonuses = [
                 [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/eardrums.jpg',
-                'title' => 'EarDrums',
-                'description' => 'Drumeo EarDrums reduce external volume by up to -29dB. That means you can play hard while protecting your ears.',
-                'price' => Prices::$earDrumsFull,
-                'shipping' => true,
+                    'image' => 'https://pianote.s3.amazonaws.com/sales/2023/concert-series-headphones.jpg',
+                    'title' => 'Pianote Headphones',
+                    'description' => 'Hi-end, lightweight over-ear headphones for beautiful private practice sessions.',
+                    'price' => PianotePrices::$headphonesFull,
+                    'feature' => "Free Shipping",
                 ],
                 [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/drumsticks.jpg',
-                'title' => 'Drumeo Drumsticks',
-                'description' => 'Drumeo 5A Drumsticks by Vater -- made with hickory and extra moisture to last longer.',
-                'price' => Prices::$sticksFull,
-                'shipping' => true,
+                    'image' => 'https://pianote.s3.amazonaws.com/sales/promos/october/power_of_chords_card.jpg',
+                    'title' => '',
+                    'description' => 'Play the music you love using the power of chords.',
+                    'price' => PianotePrices::$powerOfChordsFull,
+                    'online-ship' => "Lifetime Access"
                 ],
                 [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/rdm.jpg',
-                'title' => 'Rock Drumming Masterclass',
-                'description' => 'Todd Sucherman’s 26-week masterclass to help you improve your rock drumming.',
-                'price' => Prices::$rdmFull,
-                'online-ship' => "Instant Access"
+                'image' => 'https://pianote.s3.amazonaws.com/sales/promos/november/bonuses/TBGTCP.jpg',
+                'title' => '',
+                'description' => 'Pieces you can actually play, with lessons that are actually fun.',
+                'price' => PianotePrices::$classicalPianoFull,
                 ],
                 [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/dtme.jpg',
-                'title' => 'Drum Technique Made Easy',
-                'description' => 'Bruce Becker’s 26-week masterclass to improve your hand & foot technique.',
-                'price' => Prices::$dtmeFull,
+                'image' => 'https://pianote.s3.amazonaws.com/sales/promos/november/bonuses/improv-musical-freedom.jpg',
+                'title' => '',
+                'description' => 'Learn to improvise from one of the best piano players in the world, Jesús Molina',
+                'price' => PianotePrices::$improvisationAndMusicalFreedomFull,
                 ],
                 [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/ime.jpg',
-                'title' => 'Independence Made Easy',
-                'description' => 'Jared Falk’s 26-week masterclass to unlock your musicality and freedom on the drums.',
-                'price' => Prices::$imeFull,
-                'online-ship' => "Instant Access"
+                'image' => 'https://pianote.s3.amazonaws.com/sales/promos/november/bonuses/TBGTPBP.jpg',
+                'title' => '',
+                'description' => 'Start playing beautiful music from your very 1st lesson',
+                'price' => PianotePrices::$playBeautifulPianoFull,
                 ],
                 [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/eyd.jpg',
-                'title' => 'Electrify Your Drumming',
-                'description' => 'Your guide to playing 10 styles of electronic dance music - includes 23 play-alongs!',
-                'price' => Prices::$eydFull,
-                'online-ship' => "Instant Access"
+                'image' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/piano-riffs-and-fills.jpg',
+                'title' => 'Piano Riffs<br> & Fills',
+                'description' => 'Learn the secrets and tips to play fills that sound complicated and advanced, but are simple to learn.',
+                'price' => PianotePrices::$pianoRiffsAndFillsFull,
                 ],
                 [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/fwtbdf.jpg',
-                'title' => 'Better Drum Fills',
-                'description' => 'The ultimate four-week crash course to playing more creative & musical drum fills.',
-                'price' => Prices::$bdfFull,
-                'online-ship' => "Instant Access"
+                'image' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/piano-technique-made-easy.jpg',
+                'title' => 'Piano Technique<br> Made Easy',
+                'description' => 'Your ultimate guide to learning the piano. Learn EVERY scale, chord, arpeggio, and key signature.',
+                'price' => PianotePrices::$PTMEFull,
                 ],
                 [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/sd.jpg',
-                'title' => 'Successful Drumming',
-                'description' => 'Jared Falk’s step-by-step curriculum for building a rock-solid foundation on the drums.',
-                'price' => Prices::$sdOnlineFull,
-                'online-ship' => "Instant Access"
+                'image' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/de-stupefy-your-left-hand.jpg',
+                'title' => 'De-Stupefy Your<br> Left Hand',
+                'description' => 'Most piano players find their left-hand is weaker. Fix those weaknesses and “de-stupefy” that left hand.',
+                'price' => PianotePrices::$destupefyFull,
                 ],
                 [
-                'image' => 'https://cdn.musora.com/image/fetch/c_fill,w_300,q_auto:good/https://drumeo-assets.s3.amazonaws.com/promos/july/tommy_card.jpg',
-                'title' => 'Great Hands For A Lifetime',
-                'description' => 'Tommy Igoe helps you improve your hand strength, speed, stamina, comfort, and control in the drums in four hours of video lessons.',
-                'price' => Prices::$ghfalFull,
+                'image' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/worship-piano.jpg',
+                'title' => 'Worship<br> Piano',
+                'description' => 'Learn hundreds of worship songs and get the skills to start playing in a worship band.',
+                'price' => PianotePrices::$worshipPianoFull,
                 ],
                 [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/lsf.jpg',
-                'title' => 'Learn Songs Faster',
-                'description' => 'This masterclass will give you proven techniques for learning MORE songs in less time.',
-                'price' => Prices::$learnSongsFasterFull,
-                'online-ship' => "Instant Access"
+                    'image' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/faster-fingers.jpg',
+                    'title' => '',
+                    'description' => 'Boost your speed and confidence with this guided practice course.',
+                    'price' => PianotePrices::$fasterFingersFull,
+                    'online-ship' => "Lifetime Access"
                 ],
             ]
         @endphp
@@ -582,34 +574,32 @@
         'topImage' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drumeo-annual-2w-card.png',
         'promoLogo' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs.svg',
        'promoLogoM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs-m.png',
-        'header' => 'Save 17% + get 10 bonuses<br class="inline sm:hidden"> worth $1342.94',
+        'header' => 'Save 17% + get 10 bonuses<br class="inline sm:hidden"> worth $905',
         'fullPrice' => '240',
         'price' => '200',
-        'buttonLink' => '/laravel/public/shopping-cart/api/query?products[DLM]=1,year,1&products[quietpad]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[GHFAL-DIGI]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[learn-songs-faster-pack]=1&locked=true',
+        'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[piano-chords-and-scales-guide]=1&products[pianote-practice-planner]=1&products[christmas-song-book]=1&products[christmas-song-book-digital]=1&products[poster-chords]=1&products[poster-scales]=1&products[the-power-of-chords]=1&products[classical-piano]=1&products[jesus-molina-improvisation-and-musical-freedom-pack]=1&products[play-beautiful-piano]=1&products[piano-riffs-and-fills]=1&products[piano-technique-made-easy]=1&products[destupefy-your-left-hand]=1&products[worship-piano]=1&products[faster-fingers]=1&redirect=/order&locked=true',
         'subDescription' => '<strong>10 free bonuses.</strong> <br class="inline sm:hidden"><em>only available until january 31st.</em>',
         'altButtonLink' => '/laravel/public/shopping-cart/api/query?products[DLM]=1,month,1&locked=true',
-        'altPrice' => '29',
+        'altPrice' => '30',
         ])
     @else
         @include('musora.sales.components.order-section-collage', [
-        'header' => 'Unlimited drum lessons.<br> The world’s best teachers.<br> 5000+ popular songs.',
-        'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Trusted by ' . number_format(31856) . ' students.</li>
-                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Online lessons on every topic.</li>
-                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Personalized feedback from real teachers.</li>
-                    <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> piano, guitar, and voice lessons with full access to all Musora communities.</li>',
-        'buttonLink' => '/laravel/public/shopping-cart/api/query?products[DLM]=1,year,1&products[30-day-drummer]=1&products[practicepad]=1&products[Drumeo-VaterSticks]=2&products[BeginnerBook]=1&locked=true',
+        'header' => 'Unlimited piano lessons.<br> Direct access to real teachers.<br> 1000+ popular songs.',
+        'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
+                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Online piano lessons on every topic.</li>
+                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Personalized feedback from real teachers.</li>
+                    <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> voice, guitar, and drums lessons with full access to all Musora communities.</li>',
+        'buttonLink' => '/choose-plan',
         'price' => '20',
-        'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drumeo-spread.png',
+        'image' => 'https://pianote.s3.amazonaws.com/sales/2023/pianote-spread.png',
         ])
     @endif
 
     @include('musora.sales.components.app-section', [
-        'appleLink' => 'https://itunes.apple.com/us/app/musora/id1619053766?ls=1',
-        'googleLink' => 'https://play.google.com/store/apps/details?id=com.musoraapp',
-        'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/devices.png',
+        'image' => 'https://pianote.s3.amazonaws.com/sales/2023/devices.png',
     ])
 
-    @include('drumeo._partials.faq')
+    @include('pianote._partials.faq')
 
     @include('_partials.components.soundslice-modal',[
         'name' => 'soundslice',
@@ -621,11 +611,11 @@
     ])
 
     @if(!empty($promoVersion))
-        @include("drumeo.sales.partials._footer", [
+        @include("pianote._partials._footer", [
             "minimal" => true
         ])
     @else
-        @include("drumeo.sales.partials._footer")
+        @include("pianote._partials._footer")
     @endif
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>

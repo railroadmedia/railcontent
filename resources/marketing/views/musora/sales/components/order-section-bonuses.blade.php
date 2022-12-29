@@ -86,7 +86,7 @@
             @endforeach
             <div class="flex flex-wrap sm:flex-nowrap justify-center items-start my-4">
                 @if($theme !== 'drumeo')
-                    <img alt="brand tile" class="h-20 sm:h-24 md:h-28 lg:h-36 mb-2 sm:mb-0 mx-2 lg:mx-3 rounded-xl" src="https://drumeo-assets.s3.amazonaws.com/sales/2023/guitareo-included.jpg">
+                    <img alt="brand tile" class="h-20 sm:h-24 md:h-28 lg:h-36 mb-2 sm:mb-0 mx-2 lg:mx-3 rounded-xl" src="https://drumeo-assets.s3.amazonaws.com/sales/2023/drumeo-included.jpg">
                 @endif
                 @if($theme !== 'pianote')
                     <img alt="brand tile" class="h-20 sm:h-24 md:h-28 lg:h-36 mb-2 sm:mb-0 mx-2 lg:mx-3 rounded-xl" src="https://drumeo-assets.s3.amazonaws.com/sales/2023/pianote-included.jpg">

@@ -7,7 +7,7 @@
 
     <meta name="description" content="You’ve spent 30-days crushing it with step-by-step drum lessons and we want to help you keep it going! ">
     <meta property="og:description" content="You’ve spent 30-days crushing it with step-by-step drum lessons and we want to help you keep it going! ">
-        <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/sales/2022/og-image.jpg" style="display: none;">
+        <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/sales/2023/share-image-drumeo.jpg" style="display: none;">
 
     @include('drumeo._partials._fonts')
 

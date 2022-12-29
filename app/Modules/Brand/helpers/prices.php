@@ -180,5 +180,6 @@ class Prices
     public static $songs = 5000;
     public static $courses = 260;
     public static $coaches = 11;
+    public static $students = 66300;
 
 }

@@ -23,7 +23,7 @@
     <section class="py-12 md:py-20">
         <div class="container max-w-6xl lg:ml-auto lg:mr-0 xl:mx-auto px-6 xl:px-0">
             <div class="mb-6">
-                <h4 class="font-extrabold mb-4">Learn and Style</h4>
+                <h4 class="font-extrabold mb-4">Learn any Style</h4>
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {

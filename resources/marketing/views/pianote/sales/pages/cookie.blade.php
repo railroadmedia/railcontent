@@ -4,7 +4,7 @@
     <title>Cookie Policy | Pianote</title>
     <meta property="og:title" content="Cookie Policy">
     <meta name="description" content="When you visit or access Musora Media, Inc websites, we may use web beacons, cookies, pixel tags, scripts, tags, API and other technologies.">
-    <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/og-image.jpg" style="display: none;">
+    <meta property="og:image" content="https://pianote.s3.amazonaws.com/sales/2023/share-image-pianote.jpg" style="display: none;">
     <meta property="og:url" content="https://www.pianote.com/cookie/">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />

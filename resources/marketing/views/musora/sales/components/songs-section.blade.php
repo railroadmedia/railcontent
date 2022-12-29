@@ -44,7 +44,7 @@
         <div class="flex flex-wrap sm:flex-nowrap items-center justify-center">
             <img class="h-12 sm:h-14" src="https://drumeo-assets.s3.amazonaws.com/sales/2023/musora-instruments.svg">
             <p class="w-full sm:w-auto sm:text-left max-w-md mt-2 sm:mt-0 mx-0 sm:pl-8 leading-normal sm:leading-tight"><strong>Any instrument, any time.</strong><br>
-                Powered by Musora, {{ $brandName }} includes full access to our communities for piano, guitar, and voice.
+                {{ $bannerDesc }}
             </p>
         </div>
     </div>

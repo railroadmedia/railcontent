@@ -79,7 +79,11 @@
                     <ul class="splide__list">
                         @foreach ($testimonials as $testimonial)
                             <li class="splide__slide flex flex-col items-start pb-10 px-1">
-                                <div class="relative cursor-pointer mb-2 overflow-hidden" x-on:click="{{str_replace(' ', '', $testimonial['name'])}} = true;">
+                                <div class="relative mb-2 overflow-hidden @if(!empty($testimonial['video'])) cursor-pointer @endif"
+                                    @if(!empty($testimonial['video']))
+                                        x-on:click="{{str_replace(' ', '', $testimonial['name'])}} = true;"
+                                    @endif
+                                >
                                     <img
                                         class="rounded-xl transition-opacity opacity-0"
                                         src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/{{$testimonial['image']}}"
@@ -87,14 +91,18 @@
                                         loading="lazy"
                                         onload="this.classList.remove('opacity-0')"
                                     >
-                                    <div class="absolute inset-0 flex justify-center align-center">
-                                        <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play text-lg text-white border-2 border-white px-3 py-1 rounded-full bg-[#0009] hover:opacity-80"></i>
-                                    </div>
+                                    @if(!empty($testimonial['video']))
+                                        <div class="absolute inset-0 flex justify-center align-center">
+                                            <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play text-lg text-white border-2 border-white px-3 py-1 rounded-full bg-[#0009] hover:opacity-80"></i>
+                                        </div>
+                                    @endif
                                 </div>
                                 <div class="text-center">
                                     <div class="font-bold text-sm leading-snug mb-2">{!! $testimonial['title'] !!}</div>
-                                    <p class="text-sm mb-1">{{ $testimonial['name'] }}</p>
-                                    <p class="text-xs text-{{ $theme }} cursor-pointer" x-on:click="{{str_replace(' ', '', $testimonial['name'])}} = true;">Watch video</p>
+                                    <p class="text-sm">{{ $testimonial['name'] }}</p>
+                                    @if(!empty($testimonial['video']))
+                                        <p class="mt-1 text-xs text-{{ $theme }} cursor-pointer" x-on:click="{{str_replace(' ', '', $testimonial['name'])}} = true;">Watch video</p>
+                                    @endif
                                 </div>
                             </li>
                         @endforeach
@@ -104,9 +112,11 @@
         </div>
     </div>
     @foreach($testimonials as $testimonial)
-        @include('_partials.components.video-modal',[
-            'name' => str_replace(' ', '', $testimonial['name']),
-            'video' => $testimonial['video']
-        ])
+        @if(!empty($testimonial['video']))
+            @include('_partials.components.video-modal',[
+                'name' => str_replace(' ', '', $testimonial['name']),
+                'video' => $testimonial['video']
+            ])
+        @endif
     @endforeach
 </section>

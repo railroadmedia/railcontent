@@ -175,7 +175,7 @@
         'pointTwo' => 'World-Class Teachers',
         'pointThree' => 'Play More<br class="inline lg:hidden"> Songs',
         'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738',
-        'students' => number_format(31856),
+        'students' => number_format(Prices::$students),
     ])
 
     @if(!empty($promoVersion))
@@ -246,7 +246,7 @@
 
         $courses = [
             [
-                'title' => 'Learn and style',
+                'title' => 'Learn any style',
                 'images' => [
                     [
                         'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Todd-Sucherman.jpg',
@@ -423,6 +423,7 @@
         'desc' => 'You’ll have <strong>all the tools you need</strong> to make sure you never miss a beat.',
         'video' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/smells-like-teen-spirit2.mp4',
         'brandName' => 'Drumeo',
+        'bannerDesc' => 'Powered by Musora, Drumeo includes full access to our communities for piano, guitar, and voice.',
     ])
 
     @php
@@ -588,24 +589,22 @@
         'buttonLink' => '/laravel/public/shopping-cart/api/query?products[DLM]=1,year,1&products[quietpad]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[GHFAL-DIGI]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[learn-songs-faster-pack]=1&locked=true',
         'subDescription' => '<strong>10 free bonuses.</strong> <br class="inline sm:hidden"><em>only available until january 31st.</em>',
         'altButtonLink' => '/laravel/public/shopping-cart/api/query?products[DLM]=1,month,1&locked=true',
-        'altPrice' => '29',
+        'altPrice' => '30',
         ])
     @else
         @include('musora.sales.components.order-section-collage', [
         'header' => 'Unlimited drum lessons.<br> The world’s best teachers.<br> 5000+ popular songs.',
-        'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Trusted by ' . number_format(31856) . ' students.</li>
+        'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Online lessons on every topic.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Personalized feedback from real teachers.</li>
                     <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> piano, guitar, and voice lessons with full access to all Musora communities.</li>',
-        'buttonLink' => '/laravel/public/shopping-cart/api/query?products[DLM]=1,year,1&products[30-day-drummer]=1&products[practicepad]=1&products[Drumeo-VaterSticks]=2&products[BeginnerBook]=1&locked=true',
+        'buttonLink' => '/choose-plan',
         'price' => '20',
         'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drumeo-spread.png',
         ])
     @endif
 
     @include('musora.sales.components.app-section', [
-        'appleLink' => 'https://itunes.apple.com/us/app/musora/id1619053766?ls=1',
-        'googleLink' => 'https://play.google.com/store/apps/details?id=com.musoraapp',
         'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/devices.png',
     ])
 

@@ -14,7 +14,7 @@
             </div>
             <div class="w-full sm:w-1/3 px-2 mb-3 sm:mb-0">
                 <h5 class="text-{{ $theme }} border-{{ $theme }} border-2 rounded-full inline-block py-2 px-3 mb-1">2</h5>
-                <h6 class="leading-normal">Enjoy them for 90<br>  days, risk-free.</h6>
+                <h6 class="leading-normal">Enjoy them for <br>90-days, risk-free.</h6>
             </div>
             <div class="w-full sm:w-1/3 px-2">
                 <h5 class="text-{{ $theme }} border-{{ $theme }} border-2 rounded-full inline-block py-2 px-3 mb-1">3</h5>

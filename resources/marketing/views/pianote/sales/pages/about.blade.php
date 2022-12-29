@@ -112,7 +112,7 @@
     <meta name="description" content="Life is better with music - Learn how to play piano, whenever you want, wherever you want.">
     <meta property="og:description" content="Life is better with music - Learn how to play piano, whenever you want, wherever you want.">
 
-    <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/og-image.jpg" style="display: none;">
+    <meta property="og:image" content="https://pianote.s3.amazonaws.com/sales/2023/share-image-pianote.jpg" style="display: none;">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 
     <!-- Tailwind -->
