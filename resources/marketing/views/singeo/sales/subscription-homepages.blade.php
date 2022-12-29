@@ -489,7 +489,7 @@
     <div id="testimonials" class="anchor"></div>
     @include('musora.sales.components.testimonials-section', [
         'header' => 'Trusted by drummers<br class="inline-block sm:hidden">  everywhere.',
-        'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738',
+        'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Singeo+Membership/79348458',
         'reviewText' => 'Drumeo is rated 5-stars for price, satisfaction,<br class="inline sm:hidden"> and customer service.',
         'youtubeLink' => 'https://www.youtube.com/freedrumlessons/',
         'youtube' => '2.5M',
