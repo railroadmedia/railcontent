@@ -36,7 +36,7 @@
             </div>
         </div>
     </div>
-    <a href="#orderNow" style="background:#0c1429;"
+    <a href="#customize-anchor" style="background:#0c1429;"
             class="promo-banner anchor-slide block text-center w-full transition-opacity duration-300 overflow-hidden whitespace-nowrap text-white bg-cover bg-center shadow-md py-1 hover:text-gray-100 z-0 mx-auto -mt-10 text-xs">
         <div class="container mx-auto">
             <div class="text text-center">

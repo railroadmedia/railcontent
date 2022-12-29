@@ -213,7 +213,7 @@
 
 @section('global-body')
     @include('pianote._partials._nav', [
-        "joinVersion" => true
+        "subscriptionVersion" => true
     ])
 
     <header class="px-4 sm:px-6 py-12 md:py-32 lg:py-36 bg-no-repeat text-white">

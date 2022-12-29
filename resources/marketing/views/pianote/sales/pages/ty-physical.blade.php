@@ -205,7 +205,7 @@
 
 @section('global-body')
     @include('pianote._partials._nav', [
-        "joinVersion" => true
+        "subscriptionVersion" => true
     ])
 
     <div class="hero-header">

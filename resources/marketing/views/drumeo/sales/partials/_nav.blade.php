@@ -163,7 +163,7 @@
         @include('drumeo.sales.partials._nav-link', [
             "linkName" => "Blog",
             "linkIcon" => "fas fa-comment-pen",
-            "linkUrl" => "/drumshop",
+            "linkUrl" => "/beat",
         ])
         <div class="has-drop-down" target="_parent" rel="">
             <div class="nav-link">

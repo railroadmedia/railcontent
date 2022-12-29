@@ -37,9 +37,21 @@
 
 
     <div id="customize-anchor" class="anchor anchor-slide"></div>
-    @include('musora.sales.components.card-selection-section')
+    @include('musora.sales.components.card-selection-section', [
+        "instrument" => "piano",
+        "songs" => "1000",
+        "firstPoint" => "Unlimited piano lessons",
+        "thirdPoint" => "Direct access to real teachers.",
+        "fifthPoint" => "Lesson access for singing, guitar, and drums.",
+    ])
 
-    @include('musora.sales.components.plans-different-section')
+    @include('musora.sales.components.plans-different-section', [
+        "plusLogo" => "https://drumeo-assets.s3.amazonaws.com/sales/2023/drumeoplus_logo-dark.svg",
+        "logo" => "https://musora-center.s3.amazonaws.com/logos/drumeo-logo.png",
+        "secondPoint" => "Artist courses and exclusive events with special guests.",
+        "thirdPoint" => "Go beyond piano with lessons for singing, guitar, and drums.",
+        "fifthPoint" => "1000+ songs transcribed w/ playback tools for all instruments.",
+    ])
     @include('drumeo._partials.faq')
 
     @include("drumeo.sales.partials._footer")

@@ -4,10 +4,10 @@
         <div class="flex items-center rounded-xl py-3 px-3 sm:px-6">
             <div class="w-1/2 text-left"></div>
             <div class="w-1/4">
-                <img class="h-4 sm:h-6 lg:h-8" src="https://drumeo-assets.s3.amazonaws.com/sales/2023/drumeoplus_logo-dark.svg">
+                <img class="h-4 sm:h-6 lg:h-8" src="{{ $plusLogo }}">
             </div>
             <div class="w-1/4">
-                <img class="h-4 sm:h-6 lg:h-8" src="https://musora-center.s3.amazonaws.com/logos/drumeo-logo.png">
+                <img class="h-4 sm:h-6 lg:h-8" src="{{ $logo }}">
             </div>
         </div>
         <div class="flex items-center rounded-xl py-4 px-3 sm:px-6" style="background-color:#f5f8fc;">
@@ -16,34 +16,34 @@
                 <p class="leading-tight text-xs sm:text-sm">10-level step-by-step curriculum</p>
             </div>
             <div class="w-1/4">
-                <i class="fas fa-check text-2xl sm:text-3xl text-drumeo"></i>
+                <i class="fas fa-check text-2xl sm:text-3xl text-{{ $theme }}"></i>
             </div>
             <div class="w-1/4">
-                <i class="fas fa-check text-2xl sm:text-3xl text-drumeo"></i>
+                <i class="fas fa-check text-2xl sm:text-3xl text-{{ $theme }}"></i>
             </div>
         </div>
         <div class="flex items-center rounded-xl py-4 px-3 sm:px-6">
             <div class="w-1/2 text-left">
                 <h5 class="mb-1 sm:mb-2 leading-tight"><strong>Coaches</strong></h5>
-                <p class="leading-tight text-xs sm:text-sm">200+ courses with legendary teachers</p>
+                <p class="leading-tight text-xs sm:text-sm">{{ $secondPoint }}</p>
             </div>
             <div class="w-1/4">
-                <i class="fas fa-check text-2xl sm:text-3xl text-drumeo"></i>
+                <i class="fas fa-check text-2xl sm:text-3xl text-{{ $theme }}"></i>
             </div>
             <div class="w-1/4">
-                <i class="fas fa-check text-2xl sm:text-3xl text-drumeo"></i>
+                <i class="fas fa-check text-2xl sm:text-3xl text-{{ $theme }}"></i>
             </div>
         </div>
         <div class="flex items-center rounded-xl py-4 px-3 sm:px-6" style="background-color:#f5f8fc;">
             <div class="w-1/2 text-left">
                 <h5 class="mb-1 sm:mb-2 leading-tight"><strong>Instruments</strong></h5>
-                <p class="leading-tight text-xs sm:text-sm">Go beyond drums with lessons for piano, guitar, and singing.</p>
+                <p class="leading-tight text-xs sm:text-sm">{{ $thirdPoint }}</p>
             </div>
             <div class="w-1/4">
-                <i class="fas fa-check text-2xl sm:text-3xl text-drumeo"></i>
+                <i class="fas fa-check text-2xl sm:text-3xl text-{{ $theme }}"></i>
             </div>
             <div class="w-1/4">
-                <i class="fas fa-check text-2xl sm:text-3xl text-drumeo"></i>
+                <i class="fas fa-check text-2xl sm:text-3xl text-{{ $theme }}"></i>
             </div>
         </div>
         <div class="flex items-center rounded-xl py-4 px-3 sm:px-6">
@@ -52,19 +52,19 @@
                 <p class="leading-tight text-xs sm:text-sm">Student plans, weekly live Q&As, and unlimited personal support</p>
             </div>
             <div class="w-1/4">
-                <i class="fas fa-check text-2xl sm:text-3xl text-drumeo"></i>
+                <i class="fas fa-check text-2xl sm:text-3xl text-{{ $theme }}"></i>
             </div>
             <div class="w-1/4">
-                <i class="fas fa-check text-2xl sm:text-3xl text-drumeo"></i>
+                <i class="fas fa-check text-2xl sm:text-3xl text-{{ $theme }}"></i>
             </div>
         </div>
         <div class="flex items-center rounded-xl py-4 px-3 sm:px-6" style="background-color:#f5f8fc;">
             <div class="w-1/2 text-left">
                 <h5 class="mb-1 sm:mb-2 leading-tight"><strong>Songs</strong></h5>
-                <p class="leading-tight text-xs sm:text-sm">Thousands of songs transcribed w/ playback tools for all instruments.</p>
+                <p class="leading-tight text-xs sm:text-sm">{{ $fifthPoint }}</p>
             </div>
             <div class="w-1/4">
-                <i class="fas fa-check text-2xl sm:text-3xl text-drumeo"></i>
+                <i class="fas fa-check text-2xl sm:text-3xl text-{{ $theme }}"></i>
             </div>
             <div class="w-1/4"></div>
         </div>

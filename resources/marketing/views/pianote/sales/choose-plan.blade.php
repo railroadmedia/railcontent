@@ -1,27 +1,33 @@
-@extends('drumeo._partials.global-layout')
+@extends('pianote._partials.global-layout')
 
 @section('global-head')
-    <title>Drumeo | Reach your drumming goals.</title>
-    <meta property="og:title" content="Drumeo | Reach your drumming goals.">
-    <meta name="description" content="Learn the drums faster with organized video lessons, legendary teachers, and better practice tools. 90-Day Guarantee.">
-    <meta property="og:description" content="Learn the drums faster with organized video lessons, legendary teachers, and better practice tools. 90-Day Guarantee.">
-    <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/sales/2023/share-image-drumeo.jpg" style="display: none;">
-    <meta property="og:url" content="https://www.drumeo.com/">
+    <title>Learn the piano anytime with real teachers. | Pianote</title>
+    <meta property="og:title" content="Pianote - Learn the piano anytime with real teachers.">
+    <meta property="og:url" content="https://www.pianote.com/">
 
-    @include('drumeo._partials._fonts')
+    <meta name="description" content="Learn the piano anytime with step-by-step video lessons, world-class teachers, and unlimited personal support. 90-Day Guarantee.">
+    <meta property="og:description" content="Learn the piano anytime with step-by-step video lessons, world-class teachers, and unlimited personal support. 90-Day Guarantee.">
+
+    @hasSection('share-image')
+        @yield('share-image')
+    @else
+        <meta property="og:image" content="https://pianote.s3.amazonaws.com/sales/2023/share-image-pianote.jpg" style="display: none;">
+    @endif
+
+    @include('pianote._partials._fonts')
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
-    <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}">
+    <link href="{{ asset('/marketing/css/pianote/tailwind-helpers.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/sales.css') }}">
     <style>
         .option-buttons.active {
-            border-color:#0b76db!important;
-            background-color:#0c2949!important;
+            border-color:#f61a30!important;
+            background-color:#4a0c12 !important;
         }
         .option-buttons.active .radio-check {
-            border-color:#0b76db!important;
-            background-color:#0b76db!important;
+            border-color:#f61a30!important;
+            background-color:#f61a30!important;
         }
         .option-buttons.active .radio-check i {
             display:block!important;
@@ -30,19 +36,31 @@
 @stop
 
 @section('global-body')
-    @include("drumeo.sales.partials._nav", [
+    @include("pianote._partials._nav", [
             "subscriptionVersion" => true,
             "fullSubscriptionVersion" => true,
         ])
 
 
     <div id="customize-anchor" class="anchor anchor-slide"></div>
-    @include('musora.sales.components.card-selection-section')
+    @include('musora.sales.components.card-selection-section', [
+        "instrument" => "piano",
+        "songs" => "1000",
+        "firstPoint" => "Unlimited piano lessons",
+        "thirdPoint" => "Direct access to real teachers.",
+        "fifthPoint" => "Lesson access for singing, guitar, and drums.",
+    ])
 
-    @include('musora.sales.components.plans-different-section')
-    @include('drumeo._partials.faq')
+    @include('musora.sales.components.plans-different-section', [
+        "plusLogo" => "https://drumeo-assets.s3.amazonaws.com/sales/2023/drumeoplus_logo-dark.svg",
+        "logo" => "https://musora-center.s3.amazonaws.com/logos/drumeo-logo.png",
+        "secondPoint" => "Artist courses and exclusive events with special guests.",
+        "thirdPoint" => "Go beyond piano with lessons for singing, guitar, and drums.",
+        "fifthPoint" => "1000+ songs transcribed w/ playback tools for all instruments.",
+    ])
+    @include('pianote._partials.faq')
 
-    @include("drumeo.sales.partials._footer")
+    @include("pianote._partials._footer")
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>

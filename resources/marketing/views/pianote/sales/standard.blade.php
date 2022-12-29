@@ -45,7 +45,7 @@
 {{--                </div>--}}
 {{--            </div>--}}
 {{--            <div class="text-center">--}}
-{{--                <a href="#orderNow" class="join smaller blue anchor-slide md:w-1/4 mx-auto">See the deal</a>--}}
+{{--                <a href="#customize-anchor" class="join smaller blue anchor-slide md:w-1/4 mx-auto">See the deal</a>--}}
 {{--            </div>--}}
 {{--        </div>--}}
 {{--    </section>--}}
@@ -58,7 +58,7 @@
     ])
 
 {{--   <div class="h-10 w-full block" style="background:linear-gradient(140deg, #fff, #fd5257);"></div>--}}
-{{--   <a href="#orderNow" style="background:linear-gradient(140deg, #fff, #fd5257);"--}}
+{{--   <a href="#customize-anchor" style="background:linear-gradient(140deg, #fff, #fd5257);"--}}
 {{--       class="promo-banner anchor-slide block text-center w-full transition-opacity duration-300 overflow-hidden whitespace-nowrap--}}{{--text-white--}}{{----}}{{-- bg-cover bg-center shadow-md py-1 --}}{{----}}{{--hover:text-gray-100--}}{{--z-0 mx-auto -mt-10 text-xs py-2">--}}
 {{--       <div class="container mx-auto relative">--}}
 {{--           <div class="inline-block align-middle text-center">--}}

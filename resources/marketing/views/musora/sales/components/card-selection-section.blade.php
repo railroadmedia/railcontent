@@ -54,10 +54,10 @@
                         <div class="join blue smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Free for 7 days</div>
                     </div>
                     <div class="px-3 pt-5 md:pt-6 pb-9 md:pb-10 bg-[#e7edf4]">
-                        <p class="text-sm mb-1"><strong>The world’s best drum lessons.</strong></p>
-                        <p class="text-sm mb-1"><strong>5000+ popular songs.</strong></p>
-                        <p class="text-sm mb-1"><strong>Unlimited personal support.</strong></p>
-                        <p class="text-sm mb-1">Join a community of {{ number_format(Prices::$students) }} drum students.</p>
+                        <p class="text-sm mb-1"><strong>{{ $firstPoint }}</strong></p>
+                        <p class="text-sm mb-1"><strong>{{ $songs }}+ popular songs.</strong></p>
+                        <p class="text-sm mb-1"><strong>{{ $thirdPoint }}.</strong></p>
+                        <p class="text-sm mb-1">Join a community of {{ number_format(Prices::$students) }} {{ $instrument }} students.</p>
                         <p class="text-sm mb-1">Lesson access for piano, guitar, and singing.</p>
                         <p class="text-sm">90-day money back guarantee.</p>
                     </div>
@@ -72,11 +72,11 @@
                         <div class="join blue smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Free for 7 days</div>
                     </div>
                     <div class="px-3 pt-5 md:pt-6 pb-9 md:pb-10 bg-[#e7edf4]">
-                        <p class="text-sm mb-1"><strong>The world’s best drum lessons.</strong></p>
-                        <p class="text-sm mb-1"><strong>5000+ popular songs.</strong></p>
-                        <p class="text-sm mb-1"><strong>Unlimited personal support</strong></p>
-                        <p class="text-sm mb-1">Join a community of {{ number_format(Prices::$students) }} drum students.</p>
-                        <p class="text-sm mb-1">Lesson access for piano, guitar, and singing.</p>
+                        <p class="text-sm mb-1"><strong>{{ $firstPoint }}</strong></p>
+                        <p class="text-sm mb-1"><strong>{{ $songs }}+ popular songs.</strong></p>
+                        <p class="text-sm mb-1"><strong>{{ $thirdPoint }}</strong></p>
+                        <p class="text-sm mb-1">Join a community of {{ number_format(Prices::$students) }} {{ $instrument }} students.</p>
+                        <p class="text-sm mb-1">{{ $fifthPoint }}</p>
                         <p class="text-sm">90-day money back guarantee.</p>
                     </div>
                 </a>
@@ -98,11 +98,11 @@
                     </div>
                 </a>
                 <div class="text-black overflow-hidden rounded-b-2xl block mx-auto group px-3 pt-5 md:pt-6 pb-9 md:pb-10 bg-[#e7edf4]">
-                    <p class="text-sm mb-1"><strong>The world’s best drum lessons.</strong></p>
-                    <p class="text-sm mb-1">Join a community of {{ number_format(Prices::$students) }} drum students.</p>
-                    <p class="text-sm mb-1">Lesson access for piano, guitar, and singing.</p>
+                    <p class="text-sm mb-1"><strong>{{ $firstPoint }}</strong></p>
+                    <p class="text-sm mb-1">Join a community of {{ number_format(Prices::$students) }} {{ $instrument }} students.</p>
+                    <p class="text-sm mb-1">{{ $fifthPoint }}</p>
                     <p class="text-sm mb-2">90-day money back guarantee.</p>
-                    <a class="todo" href=""><p class="text-sm text-{{ $theme }}">You can add 5000+ popular songs<br> for just $40/year. <u>Click Here.</u></p></a>
+                    <a class="todo" href=""><p class="text-sm text-{{ $theme }}">You can add {{ $songs }}+ popular songs<br> for just $40/year. <u>Click Here.</u></p></a>
                 </div>
             </div>
             <div class="w-full md:w-1/2 px-2 md:px-3 mb-4 md:mb-0 relative">
@@ -115,11 +115,11 @@
                     </div>
                 </a>
                 <div class="text-black overflow-hidden rounded-b-2xl block mx-auto group px-3 pt-5 md:pt-6 pb-9 md:pb-10 bg-[#e7edf4]">
-                    <p class="text-sm mb-1"><strong>The world’s best drum lessons.</strong></p>
-                    <p class="text-sm mb-1">Join a community of {{ number_format(Prices::$students) }} drum students.</p>
+                    <p class="text-sm mb-1"><strong>{{ $firstPoint }}</strong></p>
+                    <p class="text-sm mb-1">Join a community of {{ number_format(Prices::$students) }} {{ $instrument }} students.</p>
                     <p class="text-sm mb-1">Lesson access for piano, guitar, and singing.</p>
                     <p class="text-sm mb-2">90-day money back guarantee.</p>
-                    <a class="todo" href=""><p class="text-sm text-{{ $theme }}">You can add 5000+ popular songs<br> for just $40/year. <u>Click Here.</u></p></a>
+                    <a class="todo" href=""><p class="text-sm text-{{ $theme }}">You can add {{ $songs }}+ popular songs<br> for just $40/year. <u>Click Here.</u></p></a>
                 </div>
             </div>
         </div>
