@@ -83,11 +83,6 @@ class SalesController extends BaseController
         return view('guitareo.shop.ayla-recommends');
     }
 
-    public function survivalkit()
-    {
-        return view('shop.pages.survival-kit');
-    }
-
     public function home()
     {
         return view('guitareo.sales.standard', ['theme' => 'guitareo']);

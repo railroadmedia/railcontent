@@ -76,7 +76,7 @@
 <div id="customize-anchor" class="anchor"></div>
      @include('_partials.layout.holiday.homepage-bottom-membership',[
          'logo' => 'https://pianote.s3.amazonaws.com/sales/promos/november/pianote-annual-card.jpg',
-         'joinText' => '<strong>Join Pianote for just $'.round(\PianotePrices::$pianoteMembershipAnnualRegular / 12, 2).'/month</strong> <br class="hidden sm:inline"><strong class="text-promo">PLUS</strong> get 15 free bonuses worth $861.',
+         'joinText' => '<strong>Join Pianote for just $' . round(\PianotePrices::$pianoteMembershipAnnualRegular / 12, 2) . '/month</strong> <br class="hidden sm:inline"><strong class="text-promo">PLUS</strong> get 15 free bonuses worth $861.',
          'annualLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[piano-chords-and-scales-guide]=1&products[pianote-practice-planner]=1&products[christmas-song-book]=1&products[christmas-song-book-digital]=1&products[poster-chords]=1&products[poster-scales]=1&products[the-power-of-chords]=1&products[classical-piano]=1&products[jesus-molina-improvisation-and-musical-freedom-pack]=1&products[play-beautiful-piano]=1&products[piano-riffs-and-fills]=1&products[piano-technique-made-easy]=1&products[destupefy-your-left-hand]=1&products[worship-piano]=1&products[faster-fingers]=1&redirect=/order&locked=true',
          'bonusNum' => 15,
          'tileWidth' => 'w-1/2 md:w-1/4 lg:w-1/5',

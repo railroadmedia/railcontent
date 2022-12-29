@@ -176,16 +176,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.255.0",
+            "version": "3.255.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "1afa73a23916c1801dd89f987634e8e8c13d2b35"
+                "reference": "b6b995c70b7ed4359b4310243899cbfe11a73caa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/1afa73a23916c1801dd89f987634e8e8c13d2b35",
-                "reference": "1afa73a23916c1801dd89f987634e8e8c13d2b35",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/b6b995c70b7ed4359b4310243899cbfe11a73caa",
+                "reference": "b6b995c70b7ed4359b4310243899cbfe11a73caa",
                 "shasum": ""
             },
             "require": {
@@ -264,9 +264,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.255.0"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.255.2"
             },
-            "time": "2022-12-21T20:15:15+00:00"
+            "time": "2022-12-22T19:23:30+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -1090,34 +1090,34 @@
         },
         {
             "name": "doctrine/data-fixtures",
-            "version": "1.5.3",
+            "version": "1.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/data-fixtures.git",
-                "reference": "ba37bfb776de763c5bf04a36d074cd5f5a083c42"
+                "reference": "1a4232c15143ca3c127812d19b23a7961c41eeed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/data-fixtures/zipball/ba37bfb776de763c5bf04a36d074cd5f5a083c42",
-                "reference": "ba37bfb776de763c5bf04a36d074cd5f5a083c42",
+                "url": "https://api.github.com/repos/doctrine/data-fixtures/zipball/1a4232c15143ca3c127812d19b23a7961c41eeed",
+                "reference": "1a4232c15143ca3c127812d19b23a7961c41eeed",
                 "shasum": ""
             },
             "require": {
-                "doctrine/common": "^2.13|^3.0",
                 "doctrine/persistence": "^1.3.3|^2.0|^3.0",
                 "php": "^7.2 || ^8.0"
             },
             "conflict": {
                 "doctrine/dbal": "<2.13",
+                "doctrine/orm": "<2.12",
                 "doctrine/phpcr-odm": "<1.3.0"
             },
             "require-dev": {
-                "doctrine/coding-standard": "^9.0",
+                "doctrine/coding-standard": "^10.0",
                 "doctrine/dbal": "^2.13 || ^3.0",
+                "doctrine/deprecations": "^1.0",
                 "doctrine/mongodb-odm": "^1.3.0 || ^2.0.0",
-                "doctrine/orm": "^2.7.0",
+                "doctrine/orm": "^2.12",
                 "ext-sqlite3": "*",
-                "jangregor/phpstan-prophecy": "^1",
                 "phpstan/phpstan": "^1.5",
                 "phpunit/phpunit": "^8.5 || ^9.5",
                 "symfony/cache": "^5.0 || ^6.0",
@@ -1152,7 +1152,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/data-fixtures/issues",
-                "source": "https://github.com/doctrine/data-fixtures/tree/1.5.3"
+                "source": "https://github.com/doctrine/data-fixtures/tree/1.6.1"
             },
             "funding": [
                 {
@@ -1168,7 +1168,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-04-19T10:01:44+00:00"
+            "time": "2022-12-23T12:13:51+00:00"
         },
         {
             "name": "doctrine/dbal",
@@ -7985,16 +7985,16 @@
         },
         {
             "name": "railroad/ecommerce",
-            "version": "v5.0.49",
+            "version": "v5.0.52",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "8aaa03040ad9f18ab9f884711689939b6cc5023c"
+                "reference": "609216d17d8e23836ca3958cc07e7b40b466a845"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/8aaa03040ad9f18ab9f884711689939b6cc5023c",
-                "reference": "8aaa03040ad9f18ab9f884711689939b6cc5023c",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/609216d17d8e23836ca3958cc07e7b40b466a845",
+                "reference": "609216d17d8e23836ca3958cc07e7b40b466a845",
                 "shasum": ""
             },
             "require": {
@@ -8031,9 +8031,9 @@
             "description": "Ecommerce system",
             "support": {
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
-                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.49"
+                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.52"
             },
-            "time": "2022-12-21T21:02:03+00:00"
+            "time": "2022-12-29T19:42:34+00:00"
         },
         {
             "name": "railroad/lead-tracker",
@@ -8193,12 +8193,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "9046db87ee5c5710f6212a914c384d010094c105"
+                "reference": "b34dc5bc30ea5ba188350e1006b58759928b1832"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/9046db87ee5c5710f6212a914c384d010094c105",
-                "reference": "9046db87ee5c5710f6212a914c384d010094c105",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/b34dc5bc30ea5ba188350e1006b58759928b1832",
+                "reference": "b34dc5bc30ea5ba188350e1006b58759928b1832",
                 "shasum": ""
             },
             "require": {
@@ -8230,7 +8230,7 @@
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
                 "source": "https://github.com/railroadmedia/musora-api/tree/v2.0-railcontent-v2-integration"
             },
-            "time": "2022-12-20T17:09:52+00:00"
+            "time": "2022-12-29T21:43:47+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -8423,16 +8423,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "v2.0.56",
+            "version": "v2.0.57",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "6d9a961772aa38ca003630244b09396db6ce4dd2"
+                "reference": "70578439106cee225c87f371386e4837b01ef1e0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/6d9a961772aa38ca003630244b09396db6ce4dd2",
-                "reference": "6d9a961772aa38ca003630244b09396db6ce4dd2",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/70578439106cee225c87f371386e4837b01ef1e0",
+                "reference": "70578439106cee225c87f371386e4837b01ef1e0",
                 "shasum": ""
             },
             "require": {
@@ -8486,9 +8486,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/v2.0.56"
+                "source": "https://github.com/railroadmedia/railcontent/tree/v2.0.57"
             },
-            "time": "2022-12-12T21:55:15+00:00"
+            "time": "2022-12-22T16:38:04+00:00"
         },
         {
             "name": "railroad/railforums",

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Musora\CodeRedemptionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Drumeo\SalesController;
 
@@ -65,7 +66,7 @@ Route::domain('{drumeoDomain}')
     Route::get('/schack', [SalesController::class, 'schack']);
     Route::get('/sharon', [SalesController::class, 'sharon']);
     Route::get('/todd', [SalesController::class, 'todd']);
-    Route::get('/estepario', function () { return view('drumeo.sales.trials.affiliate.estepario'); });
+    Route::get('/estepario', [SalesController::class, 'estepario']);
     Route::group(['prefix' => 'a' ],
         function () {
             Route::get('/{page?}', SalesController::class . '@a')
@@ -78,7 +79,7 @@ Route::domain('{drumeoDomain}')
         function () {
             Route::get('/{page?}', SalesController::class . '@affiliates')
                 ->whereIn('page', [
-                    'andrewrooney', 'asobergirlsguide', 'bhcollective', 'bryanforcedrums', 'drummingreview', 'drumninja', 'electronicdrumadvisor', 'jessica-burdeaux', 'kylemcgrail', 'leyandrums', 'lindseyward', 'musicindustryhowto', 'rickyficarelli', 'tobines'
+                    'andrewrooney', 'asobergirlsguide', 'bhcollective', 'bryanforcedrums', 'drummingreview', 'drumninja', 'electronicdrumadvisor', 'jessica-burdeaux', 'kylemcgrail', 'leyandrums', 'lindseyward', 'musicindustryhowto', 'rickyficarelli', 'tobines', '66samus', 'adriendrums', 'alejandrosifuentes', 'brandonscott', 'cooperdrummer', 'davidcola', 'drumhelper', 'joshcrawford', 'leviclay', 'linaanderberg', 'rdavidr', 'robbrown', 'the8bitdrummer', 'worshipdrummer', 'wyattstav', 'zackgrooves'
                 ]);
         }
     );
@@ -86,4 +87,6 @@ Route::domain('{drumeoDomain}')
     Route::get('/30-day-drummer-register-endpoint', [SalesController::class, 'registerFor30DayDrummer'] );
     Route::get('/pro/', [SalesController::class, 'pro']);
     Route::get('/jared-recommends', [SalesController::class, 'jaredRecommends']);
+
+    Route::get('redeem-thomann', [CodeRedemptionController::class, 'renderNewAccountThomannRedeemPage']);
 });

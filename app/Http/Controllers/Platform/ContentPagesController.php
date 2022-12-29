@@ -103,7 +103,7 @@ class ContentPagesController extends BaseController
                 [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED, ContentService::STATUS_DRAFT];
         }
 
-        if (empty($lessonType)) {
+        if (empty($lessonType) || empty($catalogueMeta)) {
             throw new NotFoundHttpException();
         }
 
@@ -1586,5 +1586,14 @@ class ContentPagesController extends BaseController
             }
         }
         return null;
+    }
+
+    public function comments()
+    {
+        if (!user()->isAdmin()) {
+            throw new NotFoundHttpException();
+        }
+
+        return view('content.comments');
     }
 }

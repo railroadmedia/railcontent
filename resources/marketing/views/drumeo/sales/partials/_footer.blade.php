@@ -7,7 +7,7 @@
         </div>
     </div>
 </div>
-<footer id="footer" class="bottom-footer clearfix relative">
+<footer id="footer" class="bottom-footer clearfix relative sales-footer">
     <div class="row">
         <div class="footer-link-wrap footer-sign-up">
             <h1>Stay Connected</h1>

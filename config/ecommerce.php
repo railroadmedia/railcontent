@@ -48,7 +48,8 @@ return [
 
     // post purchase redirect
     'post_purchase_redirect_digital_items' => '/members',
-    'post_purchase_redirect_customer_order' => '/laravel/public/order-complete/thank-you',
+    'order_form_post_purchase_redirect_path_without_brand' => '/',
+    'post_purchase_redirect_customer_order' => '/thankyou',
     'post_add_to_cart_redirect' => '/order',
 
     // tax config
@@ -467,7 +468,6 @@ return [
     'paypal' => [
         'agreement_route' => 'payment-method.paypal.agreement',
         'agreement_fulfilled_path' => '/members/profile/settings/payments',
-        'order_form_post_purchase_redirect_path_without_brand' => '/',
     ],
 
     // membership subscription duplicate syncing

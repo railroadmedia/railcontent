@@ -51,7 +51,7 @@
                 </a>
             </div>
             {{--<div class="w-full md:w-1/2 px-2 md:px-3 relative">--}}
-                {{--<p class="w-full px-4 pt-2 pb-4 -mb-3 --}}{{----}}{{--bg-guitareo--}}{{----}}{{-- text-black rounded-t-2xl" style="background: linear-gradient(to bottom, #feab01, #fd7a00);"><strong>ONLY <s class="opacity-60">100</s> {{ $products['DLM-Lifetime']->getStock() }} SPOTS LEFT!</strong></p>--}}
+                {{--<p class="w-full px-4 pt-2 pb-4 -mb-3 --}}{{----}}{{--bg-guitareo--}}{{----}}{{-- text-black rounded-t-2xl" style="background: linear-gradient(to bottom, #feab01, #fd7a00);"><strong>ONLY <s class="opacity-60">100</s> {{ $products['DLM-Lifetime']->getStockAvailability() }} SPOTS LEFT!</strong></p>--}}
                 {{--<a href="{{ $lifetimeLink }}" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">--}}
                     {{--<div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">--}}
                         {{--<h5 class="leading-none mb-3"><strong>LIFETIME</strong></h5>--}}

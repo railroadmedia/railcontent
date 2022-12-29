@@ -324,7 +324,7 @@
             <br>
             <h1><strong>Better drum sounds<br class="hide-for-medium"> in seconds.</strong></h1>
 
-            @if( $products['tone-control-kit']->getStock() > 1 && !empty($products['tone-control-kit']->getStock()))
+            @if( $products['tone-control-kit']->getStockAvailability() > 1 && !empty($products['tone-control-kit']->getStockAvailability()))
                 <a class="join blue" href="/laravel/public/shopping-cart/api/query?products[tone-control-kit]=1">Buy Now &raquo;</a>
             @else
                 <a class="join sold-out">SOLD OUT</a>
@@ -505,7 +505,7 @@
                     {{--<br>LIMITED QUANTITIES--}}
                 </h2>
                 <div class="columns">
-                    @if( $products['tone-control-kit']->getStock() > 1 && !empty($products['tone-control-kit']->getStock()))
+                    @if( $products['tone-control-kit']->getStockAvailability() > 1 && !empty($products['tone-control-kit']->getStockAvailability()))
                         <a class="join blue" href="/laravel/public/shopping-cart/api/query?products[tone-control-kit]=1">Buy Now &raquo;</a>
                     @else
                         <a class="join sold-out">SOLD OUT</a>

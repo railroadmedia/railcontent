@@ -177,7 +177,7 @@
             <i data-open="previewModal" class="fas fa-play play-button autoplay-video"></i>
             <br>
             <h1><strong>Upgrade your drum<br class="hide-for-medium"> throne in seconds.</strong></h1>
-            {{--            @if($products['comfort-cover']->getStock() > 0)--}}
+            {{--            @if($products['comfort-cover']->getStockAvailability() > 0)--}}
             <a class="join blue" href="/laravel/public/shopping-cart/api/query?products[comfort-cover]=1">Get Comfy &raquo;</a>
             {{--@else--}}
             {{--<a class="join blue sold-out">Sold Out</a>--}}
@@ -198,7 +198,7 @@
                 <iframe class="reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/510872818?autoplay=1"
                     frameborder="0" allowfullscreen allow="autoplay"></iframe>
             </div>
-            {{--            @if($products['comfort-cover']->getStock() > 0)--}}
+            {{--            @if($products['comfort-cover']->getStockAvailability() > 0)--}}
             <a href="/laravel/public/shopping-cart/api/query?products[comfort-cover]=1" class="join blue">Get Comfy &raquo;</a>
             {{--@endif--}}
         </div>
@@ -342,7 +342,7 @@
         <div class="row">
             <img class="logo" src="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/comfort-cover/comfort-cover-logo-w-drumart.png"><br>
             <h1><strong>Upgrade your drum<br class="hide-for-medium"> throne in seconds.</strong></h1>
-            {{--            @if($products['comfort-cover']->getStock() > 0)--}}
+            {{--            @if($products['comfort-cover']->getStockAvailability() > 0)--}}
             <a href="/laravel/public/shopping-cart/api/query?products[comfort-cover]=1" class="join blue">Get Comfy &raquo;</a>
             {{--@else--}}
             {{--<a class="join blue sold-out">Sold Out</a>--}}

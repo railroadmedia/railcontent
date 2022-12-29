@@ -36,7 +36,7 @@
         </div>
     </a>
 
-    <section class="text-center relative py-8 md:py-10 lg:py-16 px-4" style="background-color:#010a2b;">
+    <section class="text-center relative text-white py-8 md:py-10 lg:py-16 px-4" style="background-color:#010a2b;">
         <div class="container mx-auto">
             <h3 class="mb-4 md:mb-5">
                 <strong>100 Drumming Anthems<br> Every. Single. Note.</strong>
