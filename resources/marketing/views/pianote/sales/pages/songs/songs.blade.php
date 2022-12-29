@@ -15,7 +15,7 @@
 
 @section('body-data')
     x-data ='{
-    trailer : false
+    soundslice : false
     }'
 @endsection
 
@@ -586,8 +586,8 @@
         </div>
     </section>
 
-    {{--    @include('_partials.components.video-modal',[--}}
-    {{--        'name' => 'trailer',--}}
-    {{--        'video' => '772644658'--}}
-    {{--    ])--}}
+    @include('_partials.components.soundslice-modal',[
+        'name' => 'soundslice',
+        'video' => '162928'
+    ])
 @stop

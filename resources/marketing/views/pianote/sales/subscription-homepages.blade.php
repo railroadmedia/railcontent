@@ -1,7 +1,6 @@
 @extends('pianote._partials.global-layout')
 
 @section('global-head')
-
     <title>Learn the piano anytime with real teachers. | Pianote</title>
     <meta property="og:title" content="Pianote - Learn the piano anytime with real teachers.">
     <meta property="og:url" content="https://www.pianote.com/">
@@ -121,7 +120,6 @@
         ])
     @endif
 
-
     @php
         $features = [
             [
@@ -166,6 +164,7 @@
             ],
         ];
     @endphp
+
     @include('musora.sales.components.header-section', [
         'header' => 'Online piano lessons for all skill levels.',
         'desc' => 'Learn the piano faster with step-by-step lessons, a thousand songs, and unlimited personal support. ',
@@ -194,9 +193,7 @@
             'desc' => 'It’s not rocket science.<br><br>If you don’t play your piano, you won’t get better. At Pianote, our mission is to get you playing more so you get better, faster (while having FUN!).<br><br>In short, you’ll learn piano <u>by playing piano</u>.<br><br>These are short, fun lessons from world-class teachers. But the real magic happens when you practice ALONG with your coaches.<br><br>You’ll play more, you’ll get better faster, and you’ll fall in love with your progress. Plus you’ll have access to a library of thousands of popular songs with sheet music and backing tracks.<br><br>Scroll down to watch the trailer, see more details, and start playing like you’ve always wanted!',
             'img' => 'https://pianote.s3.amazonaws.com/sales/2023/collage-evergreen.png',
         ])
-
     @endif
-
 
     @php
         $gridItems = [
@@ -418,6 +415,7 @@
 
         ];
     @endphp
+
     @include('musora.sales.components.songs-section', [
         'header' => 'Play your favorite songs.',
         'desc' => 'You’ll have <strong>all the tools you need</strong> to make sure you never miss a note.',
@@ -453,7 +451,7 @@
             'image' => 'https://pianote.s3.amazonaws.com/sales/2022/testimonials/nabilabdelmoneim.jpg',
             'title' => "I’m a lot better at using both hands and it opened up more songs.",
             'description' => "You guys make learning way too fun.<br><br>I’ve had two breakthrough moments. There was this video that promised hand independence in five days. And what do you know? A few days later I’m a lot better at using both hands and it just opened up a bunch more songs for me. And my second breakthrough moment was finding this chord chart that made it so much easier to go through the chords and practice them. And I started realizing that these chords sounded a lot like the ones I play on guitar. So I managed to take the notes that were in the practice log and apply them to my guitar, and actually learned theory for both instruments at once. Thank you Lisa and happy playing!",
-            'name' => 'Nabil Abd El-Moneim',
+            'name' => 'Nabil Abd El Moneim',
             'video' => '660596735',
             ],
             [

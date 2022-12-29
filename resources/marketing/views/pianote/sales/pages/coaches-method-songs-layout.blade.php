@@ -2,6 +2,8 @@
 
 @section('page-styles')
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}">
+    <link href="{{ asset('/marketing/css/pianote/tailwind-helpers.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/sales.css') }}">
     <style>
         .splide__arrow svg {
             fill: #F61A30 !important;

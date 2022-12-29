@@ -4,19 +4,12 @@
     @yield('page-meta')
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
-    <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
-    {{--<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">--}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
 
     <style>
         .slick-slider.slick-light-buttons .slick-arrow {
             background: #fff;
         }
-    </style>
-
-    <style>
         .splide__pagination__page.is-active {
             background: #01050F;
             transform: none !important;
@@ -55,7 +48,7 @@
             alt="{{$page}} thumb"
             loading="lazy"
             onload="this.classList.remove('opacity-0')"
-            @if($page === 'songs') x-on:click="trailer = true" @endif
+            @if($page === 'songs') x-on:click="soundslice = true" @endif
         />
         <div class="px-4 md:px-0">
             <div class="mb-6">
@@ -84,7 +77,7 @@
             alt="{{$page}} thumb"
             loading="lazy"
             onload="this.classList.remove('opacity-0')"
-            @if($page === 'songs') x-on:click="trailer = true" @endif
+            @if($page === 'songs') x-on:click="soundslice = true" @endif
         />
     </header>
 

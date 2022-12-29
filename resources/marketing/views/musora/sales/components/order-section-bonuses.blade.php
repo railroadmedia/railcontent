@@ -84,18 +84,42 @@
                     </p>
                 </div>
             @endforeach
-            <div class="flex flex-wrap sm:flex-nowrap justify-center items-start my-4">
+            <div class="flex flex-wrap sm:flex-nowrap justify-center items-start my-2 sm:my-4">
                 @if($theme !== 'drumeo')
-                    <img alt="brand tile" class="h-20 sm:h-24 md:h-28 lg:h-36 mb-2 sm:mb-0 mx-2 lg:mx-3 rounded-xl" src="https://drumeo-assets.s3.amazonaws.com/sales/2023/drumeo-included.jpg">
+                    <div class="relative mb-3 sm:mb-0 mx-1 sm:mx-2 lg:mx-3">
+                        <img alt="brand tile" class="hidden sm:inline-block sm:h-24 md:h-28 lg:h-36 rounded-xl"
+                            src="https://drumeo-assets.s3.amazonaws.com/sales/2023/drumeo-bonus.jpg">
+                        <img alt="brand tile" class="sm:hidden inline-block h-44 rounded-xl"
+                            src="https://drumeo-assets.s3.amazonaws.com/sales/2023/drumeo-bonus-m.jpg">
+                        <p class="absolute w-full text-sm lg:text-base uppercase font-bebas" style="bottom: 20%;">INCLUDED WITH {{ $theme }}</p>
+                    </div>
                 @endif
                 @if($theme !== 'pianote')
-                    <img alt="brand tile" class="h-20 sm:h-24 md:h-28 lg:h-36 mb-2 sm:mb-0 mx-2 lg:mx-3 rounded-xl" src="https://drumeo-assets.s3.amazonaws.com/sales/2023/pianote-included.jpg">
+                    <div class="relative mb-3 sm:mb-0 mx-1 sm:mx-2 lg:mx-3">
+                        <img alt="brand tile" class="hidden sm:inline-block sm:h-24 md:h-28 lg:h-36 rounded-xl"
+                            src="https://drumeo-assets.s3.amazonaws.com/sales/2023/pianote-bonus.jpg">
+                        <img alt="brand tile" class="sm:hidden inline-block h-44 rounded-xl"
+                            src="https://drumeo-assets.s3.amazonaws.com/sales/2023/pianote-bonus-m.jpg">
+                        <p class="absolute w-full text-sm lg:text-base uppercase font-bebas" style="bottom: 20%;">INCLUDED WITH {{ $theme }}</p>
+                    </div>
                 @endif
                 @if($theme !== 'guitareo')
-                    <img alt="brand tile" class="h-20 sm:h-24 md:h-28 lg:h-36 mb-2 sm:mb-0 mx-2 lg:mx-3 rounded-xl" src="https://drumeo-assets.s3.amazonaws.com/sales/2023/guitareo-included.jpg">
+                    <div class="relative mb-3 sm:mb-0 mx-1 sm:mx-2 lg:mx-3">
+                        <img alt="brand tile" class="hidden sm:inline-block sm:h-24 md:h-28 lg:h-36 rounded-xl"
+                            src="https://drumeo-assets.s3.amazonaws.com/sales/2023/guitareo-bonus.jpg">
+                        <img alt="brand tile" class="sm:hidden inline-block h-44 rounded-xl"
+                            src="https://drumeo-assets.s3.amazonaws.com/sales/2023/guitareo-bonus-m.jpg">
+                        <p class="absolute w-full text-sm lg:text-base uppercase font-bebas" style="bottom: 20%;">INCLUDED WITH {{ $theme }}</p>
+                    </div>
                 @endif
                 @if($theme !== 'singeo')
-                    <img alt="brand tile" class="h-20 sm:h-24 md:h-28 lg:h-36 mb-2 sm:mb-0 mx-2 lg:mx-3 rounded-xl" src="https://drumeo-assets.s3.amazonaws.com/sales/2023/singeo-included.jpg">
+                    <div class="relative mb-3 sm:mb-0 mx-1 sm:mx-2 lg:mx-3">
+                        <img alt="brand tile" class="hidden sm:inline-block sm:h-24 md:h-28 lg:h-36 rounded-xl"
+                            src="https://drumeo-assets.s3.amazonaws.com/sales/2023/singeo-bonus.jpg">
+                        <img alt="brand tile" class="sm:hidden inline-block h-44 rounded-xl"
+                            src="https://drumeo-assets.s3.amazonaws.com/sales/2023/singeo-bonus-m.jpg">
+                        <p class="absolute w-full text-sm lg:text-base uppercase font-bebas" style="bottom: 20%;">INCLUDED WITH {{ $theme }}</p>
+                    </div>
                 @endif
             </div>
         </div>

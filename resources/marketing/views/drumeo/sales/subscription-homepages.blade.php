@@ -120,7 +120,6 @@
         ])
     @endif
 
-
     @php
         $features = [
             [
@@ -165,6 +164,7 @@
             ],
         ];
     @endphp
+
     @include('musora.sales.components.header-section', [
         'header' => 'Online drum lessons for all skill levels.',
         'desc' => 'Learn the drums faster with step-by-step lessons, thousands of songs and unlimited personal support.',
@@ -195,7 +195,6 @@
         ])
 
     @endif
-
 
     @php
         $gridItems = [

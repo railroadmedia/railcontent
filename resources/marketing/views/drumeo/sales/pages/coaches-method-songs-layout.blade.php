@@ -1,6 +1,9 @@
 @extends('_partials.layout.coaches-method-songs-layout')
 
 @section('page-styles')
+    <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
     <style>
         .splide__arrow svg {
             fill: #0B76DB !important;
