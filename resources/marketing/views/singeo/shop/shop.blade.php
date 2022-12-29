@@ -332,7 +332,7 @@
                             "category" => strtolower($item->productType->name),
                             "includedEdge" => $item->included_edge,
                             "sizes" => $item->sizes,
-                            "soldOut" => (!empty($products[$item->sku]) && $item->productType->name !== 'Lessons') ? $products[$item->sku]->getStock() === 0 : $item->sold_out,
+                            "soldOut" => (!empty($products[$item->sku]) && $item->productType->name !== 'Lessons') ? $products[$item->sku]->getStockAvailability() === 0 : $item->sold_out,
                             "size_case_sensitive" => $item->size_case_sensitive,
                     ])
                 }
