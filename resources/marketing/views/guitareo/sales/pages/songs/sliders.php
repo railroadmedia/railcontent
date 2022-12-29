@@ -25,11 +25,11 @@
             'title' => 'Basket Case',
             'artist' => 'Green Day',
         ],
-        [
-            'img' => '',
-            'title' => 'Lightning Crashes',
-            'artist' => 'Live',
-        ],
+//        [
+//            'img' => '',
+//            'title' => 'Lightning Crashes',
+//            'artist' => 'Live',
+//        ],
         [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/nirvana-smells-like-teen-spirit.jpg',
             'title' => 'Smells Like Teen Spirit',
@@ -63,11 +63,11 @@
             'title' => 'Walk This Way',
             'artist' => 'Aerosmith',
         ],
-        [
-            'img' => '',
-            'title' => 'Hey Joe',
-            'artist' => 'Jimi Hendrix',
-        ],
+//        [
+//            'img' => '',
+//            'title' => 'Hey Joe',
+//            'artist' => 'Jimi Hendrix',
+//        ],
         [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/journey-separate-ways-worlds-apart.jpg',
             'title' => 'Separate Ways',
@@ -106,11 +106,11 @@
     ];
 
     $modern = [
-        [
-            'img' => '',
-            'title' => 'Don\'t Wanna Fight',
-            'artist' => 'Alabama Shakes',
-        ],
+//        [
+//            'img' => '',
+//            'title' => 'Don\'t Wanna Fight',
+//            'artist' => 'Alabama Shakes',
+//        ],
         [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-september/album-art/arctic-monkeys-do-i-wanna-know.jpg',
             'title' => 'Do I Wanna Know?',
@@ -131,11 +131,11 @@
             'title' => 'Pumped Up Kicks',
             'artist' => 'Foster The People',
         ],
-        [
-            'img' => '',
-            'title' => 'Highway Tune',
-            'artist' => 'Greta Van Fleet',
-        ],
+//        [
+//            'img' => '',
+//            'title' => 'Highway Tune',
+//            'artist' => 'Greta Van Fleet',
+//        ],
         [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-november/album-art/imagine-dragons-Believer.jpg',
             'title' => 'Believer',
@@ -146,16 +146,16 @@
             'title' => 'Take Me To Church',
             'artist' => 'Hozier',
         ],
-        [
-            'img' => '',
-            'title' => 'The Night We Met',
-            'artist' => 'Lord Huron',
-        ],
-        [
-            'img' => '',
-            'title' => 'Little Lion Man',
-            'artist' => 'Mumford & Sons',
-        ],
+//        [
+//            'img' => '',
+//            'title' => 'The Night We Met',
+//            'artist' => 'Lord Huron',
+//        ],
+//        [
+//            'img' => '',
+//            'title' => 'Little Lion Man',
+//            'artist' => 'Mumford & Sons',
+//        ],
     ];
 
     $metal = [
@@ -199,16 +199,16 @@
             'title' => 'Aerials',
             'artist' => 'System of a Down',
         ],
-        [
-            'img' => '',
-            'title' => 'Through the Fire and Flames',
-            'artist' => 'Dragon Force',
-        ],
-        [
-            'img' => '',
-            'title' => 'Darker Still',
-            'artist' => 'Parkway Drive',
-        ],
+//        [
+//            'img' => '',
+//            'title' => 'Through the Fire and Flames',
+//            'artist' => 'Dragon Force',
+//        ],
+//        [
+//            'img' => '',
+//            'title' => 'Darker Still',
+//            'artist' => 'Parkway Drive',
+//        ],
     ];
 
     $pop = [
@@ -242,21 +242,21 @@
             'title' => 'Bad Guy',
             'artist' => 'Billie Eilish',
         ],
-        [
-            'img' => '',
-            'title' => 'Circles',
-            'artist' => 'Post Malone',
-        ],
+//        [
+//            'img' => '',
+//            'title' => 'Circles',
+//            'artist' => 'Post Malone',
+//        ],
         [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/olivia-rodrigo-sour.jpg',
             'title' => 'Drivers Licence',
             'artist' => 'Olivia Rodrigo',
         ],
-        [
-            'img' => '',
-            'title' => 'Fireflies',
-            'artist' => 'Owl City',
-        ],
+//        [
+//            'img' => '',
+//            'title' => 'Fireflies',
+//            'artist' => 'Owl City',
+//        ],
         [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-september/album-art/pink-raise-your-glass.jpg',
             'title' => 'Raise Your Glass',
@@ -275,11 +275,11 @@
             'title' => 'Misirlou',
             'artist' => 'Dick Dale',
         ],
-        [
-            'img' => '',
-            'title' => 'Pipeline',
-            'artist' => 'The Ventures',
-        ],
+//        [
+//            'img' => '',
+//            'title' => 'Pipeline',
+//            'artist' => 'The Ventures',
+//        ],
         [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-dec/album-art/the-ventures-walk-dont-run.jpg',
             'title' => 'Walk Don\'t Run',
@@ -290,31 +290,31 @@
             'title' => 'Fun, Fun, Fun',
             'artist' => 'The Beach Boys',
         ],
-        [
-            'img' => '',
-            'title' => 'Surfin\' Bird',
-            'artist' => 'The Trashmen',
-        ],
-        [
-            'img' => '',
-            'title' => 'Mr. Moto',
-            'artist' => 'The Bel-Airs',
-        ],
+//        [
+//            'img' => '',
+//            'title' => 'Surfin\' Bird',
+//            'artist' => 'The Trashmen',
+//        ],
+//        [
+//            'img' => '',
+//            'title' => 'Mr. Moto',
+//            'artist' => 'The Bel-Airs',
+//        ],
         [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/the-beach-boys-surfer-girl.jpg',
             'title' => 'Surfer Girl',
             'artist' => 'The Beach Boys',
         ],
-        [
-            'img' => '',
-            'title' => 'Surf Rider',
-            'artist' => 'The Lively Ones',
-        ],
-        [
-            'img' => '',
-            'title' => 'Freaks',
-            'artist' => 'Surf Curse',
-        ],
+//        [
+//            'img' => '',
+//            'title' => 'Surf Rider',
+//            'artist' => 'The Lively Ones',
+//        ],
+//        [
+//            'img' => '',
+//            'title' => 'Freaks',
+//            'artist' => 'Surf Curse',
+//        ],
     ];
 
     $blues = [
@@ -348,21 +348,21 @@
             'title' => 'Green Onions',
             'artist' => 'Booker T. & The M.G.\'s',
         ],
-        [
-            'img' => '',
-            'title' => 'Folsom Prison Blues',
-            'artist' => 'Johnny Cash',
-        ],
+//        [
+//            'img' => '',
+//            'title' => 'Folsom Prison Blues',
+//            'artist' => 'Johnny Cash',
+//        ],
         [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/muddy-waters-rolling-stone.jpg',
             'title' => 'Got My Mojo Working',
             'artist' => 'Muddy Waters',
         ],
-        [
-            'img' => '',
-            'title' => 'Sweet Home Chicago',
-            'artist' => 'Robert Johnson',
-        ],
+//        [
+//            'img' => '',
+//            'title' => 'Sweet Home Chicago',
+//            'artist' => 'Robert Johnson',
+//        ],
         [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/sonny-boy-williamson-more-folk-blues.jpg',
             'title' => 'Help Me',
@@ -381,11 +381,11 @@
             'title' => 'Sangría',
             'artist' => 'Blake Shelton',
         ],
-        [
-            'img' => '',
-            'title' => 'Mr. Bojangles',
-            'artist' => 'Nitty Gritty Dirt Band',
-        ],
+//        [
+//            'img' => '',
+//            'title' => 'Mr. Bojangles',
+//            'artist' => 'Nitty Gritty Dirt Band',
+//        ],
         [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/shania-twain-come-on-over.jpg',
             'title' => 'From This Moment',
@@ -406,11 +406,11 @@
             'title' => 'Tennessey Whiskey',
             'artist' => 'Chris Stapleton',
         ],
-        [
-            'img' => '',
-            'title' => 'Tequila',
-            'artist' => 'Dan + Shay',
-        ],
+//        [
+//            'img' => '',
+//            'title' => 'Tequila',
+//            'artist' => 'Dan + Shay',
+//        ],
         [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/florida-georgia-line-heres-to-the-good-times.jpg',
             'title' => 'Cruise',
@@ -424,11 +424,11 @@
     ];
 
     $electronic = [
-        [
-            'img' => '',
-            'title' => 'Sweet But Psycho',
-            'artist' => 'Ava Max',
-        ],
+//        [
+//            'img' => '',
+//            'title' => 'Sweet But Psycho',
+//            'artist' => 'Ava Max',
+//        ],
         [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/avicii-true.jpg',
             'title' => 'Wake Me Up',
@@ -439,11 +439,11 @@
             'title' => 'Eastside',
             'artist' => 'Benny Blanco, Halsey, Khalid',
         ],
-        [
-            'img' => '',
-            'title' => 'All Falls Down',
-            'artist' => 'Alan Walker',
-        ],
+//        [
+//            'img' => '',
+//            'title' => 'All Falls Down',
+//            'artist' => 'Alan Walker',
+//        ],
         [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/daft-punk-get-lucky.jpg',
             'title' => 'Get Lucky',
@@ -454,11 +454,11 @@
             'title' => 'Feel Good Inc',
             'artist' => 'Gorillaz',
         ],
-        [
-            'img' => '',
-            'title' => 'Without Me',
-            'artist' => 'Halsey',
-        ],
+//        [
+//            'img' => '',
+//            'title' => 'Without Me',
+//            'artist' => 'Halsey',
+//        ],
         [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/marshmello-and-annemarie-speak-your-mind.jpg',
             'title' => 'Friends',
@@ -492,11 +492,11 @@
             'title' => 'Ain\'t No Sunshine',
             'artist' => 'Bill Withers',
         ],
-        [
-            'img' => '',
-            'title' => 'Me and Your Mama',
-            'artist' => 'Childish Gambino',
-        ],
+//        [
+//            'img' => '',
+//            'title' => 'Me and Your Mama',
+//            'artist' => 'Childish Gambino',
+//        ],
         [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/diana-ross-and-lionel-richie-endless-love.jpg',
             'title' => 'Endless Love',
@@ -545,16 +545,16 @@
             'title' => 'Have You Ever Seen The Rain',
             'artist' => 'Creedence Clearwater Revival',
         ],
-        [
-            'img' => '',
-            'title' => 'Fire and Rain',
-            'artist' => 'James Taylor',
-        ],
-        [
-            'img' => '',
-            'title' => 'Better Together',
-            'artist' => 'Jack Johnson',
-        ],
+//        [
+//            'img' => '',
+//            'title' => 'Fire and Rain',
+//            'artist' => 'James Taylor',
+//        ],
+//        [
+//            'img' => '',
+//            'title' => 'Better Together',
+//            'artist' => 'Jack Johnson',
+//        ],
         [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/oasis-wonderwall-1629262609.jpeg',
             'title' => 'Wonderwall',
@@ -575,9 +575,9 @@
             'title' => 'Georgia',
             'artist' => 'Vance Joy',
         ],
-        [
-            'img' => '',
-            'title' => 'Country Roads',
-            'artist' => 'John Denver',
-        ],
+//        [
+//            'img' => '',
+//            'title' => 'Country Roads',
+//            'artist' => 'John Denver',
+//        ],
     ];

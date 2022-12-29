@@ -25,27 +25,24 @@
             <div class="mb-6">
                 <h4 class="font-extrabold mb-4">Express your voice</h4>
                 @component('_partials.components.carousel',[
-                    'xdata' => "
+                     'xdata' => "
                         classes: {
-                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
+                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11 top-[38%]',
                             prev: 'hidden',
                             next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
-                        perPage: 4,
+                        perPage: 4.5,
                         perMove: 1,
-                        gap: '0.5rem',
                         type: 'loop',
+                        gap: '0.5rem',
                         interval: 2000,
                         breakpoints: {
-                            1160: {
-                                perPage: 4,
-                            },
                             900: {
-                                perPage: 3,
+                                perPage: 3.5,
                             },
                             700: {
-                                perPage: 2,
+                                perPage: 1.5,
                             },
                         },
                     ",
@@ -75,27 +72,24 @@
             <div class="mb-6">
                 <h4 class="font-extrabold mb-4">Essential techniques</h4>
                 @component('_partials.components.carousel',[
-                    'xdata' => "
+                     'xdata' => "
                         classes: {
-                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
+                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11 top-[38%]',
                             prev: 'hidden',
                             next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
-                        perPage: 4,
+                        perPage: 4.5,
                         perMove: 1,
-                        gap: '0.5rem',
                         type: 'loop',
+                        gap: '0.5rem',
                         interval: 2000,
                         breakpoints: {
-                            1160: {
-                                perPage: 4,
-                            },
                             900: {
-                                perPage: 3,
+                                perPage: 3.5,
                             },
                             700: {
-                                perPage: 2,
+                                perPage: 1.5,
                             },
                         },
                     ",
@@ -125,27 +119,24 @@
             <div class="mb-6">
                 <h4 class="font-extrabold mb-4">Songwriting & Performance</h4>
                 @component('_partials.components.carousel',[
-                    'xdata' => "
+                     'xdata' => "
                         classes: {
-                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
+                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11 top-[38%]',
                             prev: 'hidden',
                             next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
-                        perPage: 4,
+                        perPage: 4.5,
                         perMove: 1,
-                        gap: '0.5rem',
                         type: 'loop',
+                        gap: '0.5rem',
                         interval: 2000,
                         breakpoints: {
-                            1160: {
-                                perPage: 4,
-                            },
                             900: {
-                                perPage: 3,
+                                perPage: 3.5,
                             },
                             700: {
-                                perPage: 2,
+                                perPage: 1.5,
                             },
                         },
                     ",
@@ -175,27 +166,24 @@
             <div class="mb-6">
                 <h4 class="font-extrabold mb-4">Warm up routines</h4>
                 @component('_partials.components.carousel',[
-                    'xdata' => "
+                     'xdata' => "
                         classes: {
-                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
+                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11 top-[38%]',
                             prev: 'hidden',
                             next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
-                        perPage: 4,
+                        perPage: 4.5,
                         perMove: 1,
-                        gap: '0.5rem',
                         type: 'loop',
+                        gap: '0.5rem',
                         interval: 2000,
                         breakpoints: {
-                            1160: {
-                                perPage: 4,
-                            },
                             900: {
-                                perPage: 3,
+                                perPage: 3.5,
                             },
                             700: {
-                                perPage: 2,
+                                perPage: 1.5,
                             },
                         },
                     ",
@@ -224,27 +212,24 @@
             <div class="mb-6">
                 <h4 class="font-extrabold mb-4">Song breakdowns</h4>
                 @component('_partials.components.carousel',[
-                    'xdata' => "
+                     'xdata' => "
                         classes: {
-                            arrow: 'splide__arrow bg-white opacity-100',
+                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11 top-[38%]',
                             prev: 'hidden',
-                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50',
+                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
-                        perPage: 4,
+                        perPage: 4.5,
                         perMove: 1,
-                        gap: '0.5rem',
                         type: 'loop',
+                        gap: '0.5rem',
                         interval: 2000,
                         breakpoints: {
-                            1160: {
-                                perPage: 4,
-                            },
                             900: {
-                                perPage: 3,
+                                perPage: 3.5,
                             },
                             700: {
-                                perPage: 2,
+                                perPage: 1.5,
                             },
                         },
                     ",
@@ -274,27 +259,24 @@
             <div class="mb-6">
                 <h4 class="font-extrabold mb-4">Just for beginners</h4>
                 @component('_partials.components.carousel',[
-                    'xdata' => "
+                     'xdata' => "
                         classes: {
-                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
+                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11 top-[38%]',
                             prev: 'hidden',
                             next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
-                        perPage: 4,
+                        perPage: 4.5,
                         perMove: 1,
-                        gap: '0.5rem',
                         type: 'loop',
+                        gap: '0.5rem',
                         interval: 2000,
                         breakpoints: {
-                            1160: {
-                                perPage: 4,
-                            },
                             900: {
-                                perPage: 3,
+                                perPage: 3.5,
                             },
                             700: {
-                                perPage: 2,
+                                perPage: 1.5,
                             },
                         },
                     ",

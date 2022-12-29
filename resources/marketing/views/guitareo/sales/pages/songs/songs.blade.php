@@ -33,35 +33,34 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
+                            arrow: 'splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',
                             prev: 'hidden',
                             next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
-                        perPage: 6,
+                        perPage: 6.5,
                         perMove: 1,
-                        gap: '1rem',
                         type: 'loop',
                         interval: 2000,
                         breakpoints: {
                             1160: {
-                                perPage: 5,
+                                perPage: 5.5,
                             },
                             900: {
-                                perPage: 4,
+                                perPage: 4.5,
                             },
                             760: {
-                                perPage: 3,
+                                perPage: 3.5,
                             },
                             590: {
-                                perPage: 2,
+                                perPage: 2.5,
                             },
                         },
                     ",
                 ])
                     @slot('content')
                         @foreach ($rock90s as $slide)
-                            <li class="splide__slide">
+                            <li class="splide__slide px-1">
                                 <div>
                                     <img
                                         class="rounded-xl mb-1 transition-opacity opacity-0"
@@ -83,35 +82,34 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
+                            arrow: 'splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',
                             prev: 'hidden',
                             next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
-                        perPage: 6,
+                        perPage: 6.5,
                         perMove: 1,
-                        gap: '1rem',
                         type: 'loop',
                         interval: 2000,
                         breakpoints: {
                             1160: {
-                                perPage: 5,
+                                perPage: 5.5,
                             },
                             900: {
-                                perPage: 4,
+                                perPage: 4.5,
                             },
                             760: {
-                                perPage: 3,
+                                perPage: 3.5,
                             },
                             590: {
-                                perPage: 2,
+                                perPage: 2.5,
                             },
                         },
                     ",
                 ])
                     @slot('content')
                         @foreach ($classic as $slide)
-                            <li class="splide__slide">
+                            <li class="splide__slide px-1">
                                 <div>
                                     <img
                                         class="rounded-xl mb-1 transition-opacity opacity-0"
@@ -133,35 +131,34 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
+                            arrow: 'splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',
                             prev: 'hidden',
                             next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
-                        perPage: 6,
+                        perPage: 6.5,
                         perMove: 1,
-                        gap: '1rem',
                         type: 'loop',
                         interval: 2000,
                         breakpoints: {
                             1160: {
-                                perPage: 5,
+                                perPage: 5.5,
                             },
                             900: {
-                                perPage: 4,
+                                perPage: 4.5,
                             },
                             760: {
-                                perPage: 3,
+                                perPage: 3.5,
                             },
                             590: {
-                                perPage: 2,
+                                perPage: 2.5,
                             },
                         },
                     ",
                 ])
                     @slot('content')
                         @foreach ($modern as $slide)
-                            <li class="splide__slide">
+                            <li class="splide__slide px-1">
                                 <div>
                                     <img
                                         class="rounded-xl mb-1 transition-opacity opacity-0"
@@ -183,35 +180,34 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
+                            arrow: 'splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',
                             prev: 'hidden',
                             next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
-                        perPage: 6,
+                        perPage: 6.5,
                         perMove: 1,
-                        gap: '1rem',
                         type: 'loop',
                         interval: 2000,
                         breakpoints: {
                             1160: {
-                                perPage: 5,
+                                perPage: 5.5,
                             },
                             900: {
-                                perPage: 4,
+                                perPage: 4.5,
                             },
                             760: {
-                                perPage: 3,
+                                perPage: 3.5,
                             },
                             590: {
-                                perPage: 2,
+                                perPage: 2.5,
                             },
                         },
                     ",
                 ])
                     @slot('content')
                         @foreach ($metal as $slide)
-                            <li class="splide__slide">
+                            <li class="splide__slide px-1">
                                 <div>
                                     <img
                                         class="rounded-xl mb-1 transition-opacity opacity-0"
@@ -233,35 +229,34 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
+                            arrow: 'splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',
                             prev: 'hidden',
                             next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
-                        perPage: 6,
+                        perPage: 6.5,
                         perMove: 1,
-                        gap: '1rem',
                         type: 'loop',
                         interval: 2000,
                         breakpoints: {
                             1160: {
-                                perPage: 5,
+                                perPage: 5.5,
                             },
                             900: {
-                                perPage: 4,
+                                perPage: 4.5,
                             },
                             760: {
-                                perPage: 3,
+                                perPage: 3.5,
                             },
                             590: {
-                                perPage: 2,
+                                perPage: 2.5,
                             },
                         },
                     ",
                 ])
                     @slot('content')
                         @foreach ($pop as $slide)
-                            <li class="splide__slide">
+                            <li class="splide__slide px-1">
                                 <div>
                                     <img
                                         class="rounded-xl mb-1 transition-opacity opacity-0"
@@ -283,35 +278,34 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
+                            arrow: 'splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',
                             prev: 'hidden',
                             next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
-                        perPage: 6,
+                        perPage: 6.5,
                         perMove: 1,
-                        gap: '1rem',
                         type: 'loop',
                         interval: 2000,
                         breakpoints: {
                             1160: {
-                                perPage: 5,
+                                perPage: 5.5,
                             },
                             900: {
-                                perPage: 4,
+                                perPage: 4.5,
                             },
                             760: {
-                                perPage: 3,
+                                perPage: 3.5,
                             },
                             590: {
-                                perPage: 2,
+                                perPage: 2.5,
                             },
                         },
                     ",
                 ])
                     @slot('content')
                         @foreach ($surf as $slide)
-                            <li class="splide__slide">
+                            <li class="splide__slide px-1">
                                 <div>
                                     <img
                                         class="rounded-xl mb-1 transition-opacity opacity-0"
@@ -333,35 +327,34 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
+                            arrow: 'splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',
                             prev: 'hidden',
                             next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
-                        perPage: 6,
+                        perPage: 6.5,
                         perMove: 1,
-                        gap: '1rem',
                         type: 'loop',
                         interval: 2000,
                         breakpoints: {
                             1160: {
-                                perPage: 5,
+                                perPage: 5.5,
                             },
                             900: {
-                                perPage: 4,
+                                perPage: 4.5,
                             },
                             760: {
-                                perPage: 3,
+                                perPage: 3.5,
                             },
                             590: {
-                                perPage: 2,
+                                perPage: 2.5,
                             },
                         },
                     ",
                 ])
                     @slot('content')
                         @foreach ($blues as $slide)
-                            <li class="splide__slide">
+                            <li class="splide__slide px-1">
                                 <div>
                                     <img
                                         class="rounded-xl mb-1 transition-opacity opacity-0"
@@ -383,35 +376,34 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
+                            arrow: 'splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',
                             prev: 'hidden',
                             next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
-                        perPage: 6,
+                        perPage: 6.5,
                         perMove: 1,
-                        gap: '1rem',
                         type: 'loop',
                         interval: 2000,
                         breakpoints: {
                             1160: {
-                                perPage: 5,
+                                perPage: 5.5,
                             },
                             900: {
-                                perPage: 4,
+                                perPage: 4.5,
                             },
                             760: {
-                                perPage: 3,
+                                perPage: 3.5,
                             },
                             590: {
-                                perPage: 2,
+                                perPage: 2.5,
                             },
                         },
                     ",
                 ])
                     @slot('content')
                         @foreach ($country as $slide)
-                            <li class="splide__slide">
+                            <li class="splide__slide px-1">
                                 <div>
                                     <img
                                         class="rounded-xl mb-1 transition-opacity opacity-0"
@@ -433,35 +425,34 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
+                            arrow: 'splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',
                             prev: 'hidden',
                             next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
-                        perPage: 6,
+                        perPage: 6.5,
                         perMove: 1,
-                        gap: '1rem',
                         type: 'loop',
                         interval: 2000,
                         breakpoints: {
                             1160: {
-                                perPage: 5,
+                                perPage: 5.5,
                             },
                             900: {
-                                perPage: 4,
+                                perPage: 4.5,
                             },
                             760: {
-                                perPage: 3,
+                                perPage: 3.5,
                             },
                             590: {
-                                perPage: 2,
+                                perPage: 2.5,
                             },
                         },
                     ",
                 ])
                     @slot('content')
                         @foreach ($electronic as $slide)
-                            <li class="splide__slide">
+                            <li class="splide__slide px-1">
                                 <div>
                                     <img
                                         class="rounded-xl mb-1 transition-opacity opacity-0"
@@ -483,35 +474,34 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
+                            arrow: 'splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',
                             prev: 'hidden',
                             next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
-                        perPage: 6,
+                        perPage: 6.5,
                         perMove: 1,
-                        gap: '1rem',
                         type: 'loop',
                         interval: 2000,
                         breakpoints: {
                             1160: {
-                                perPage: 5,
+                                perPage: 5.5,
                             },
                             900: {
-                                perPage: 4,
+                                perPage: 4.5,
                             },
                             760: {
-                                perPage: 3,
+                                perPage: 3.5,
                             },
                             590: {
-                                perPage: 2,
+                                perPage: 2.5,
                             },
                         },
                     ",
                 ])
                     @slot('content')
                         @foreach ($soul as $slide)
-                            <li class="splide__slide">
+                            <li class="splide__slide px-1">
                                 <div>
                                     <img
                                         class="rounded-xl mb-1 transition-opacity opacity-0"
@@ -533,35 +523,34 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
+                            arrow: 'splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',
                             prev: 'hidden',
                             next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
-                        perPage: 6,
+                        perPage: 6.5,
                         perMove: 1,
-                        gap: '1rem',
                         type: 'loop',
                         interval: 2000,
                         breakpoints: {
                             1160: {
-                                perPage: 5,
+                                perPage: 5.5,
                             },
                             900: {
-                                perPage: 4,
+                                perPage: 4.5,
                             },
                             760: {
-                                perPage: 3,
+                                perPage: 3.5,
                             },
                             590: {
-                                perPage: 2,
+                                perPage: 2.5,
                             },
                         },
                     ",
                 ])
                     @slot('content')
                         @foreach ($acoustic as $slide)
-                            <li class="splide__slide">
+                            <li class="splide__slide px-1">
                                 <div>
                                     <img
                                         class="rounded-xl mb-1 transition-opacity opacity-0"
@@ -581,8 +570,8 @@
         </div>
 
         <div class="text-center">
-            <h3 class="font-extrabold mb-6">Plus thousands more popular songs.</h3>
-            <a href="" class="mx-1 join bg-pianote smaller">Get started <i class="fas fa-arrow-right" aria-hidden="true"></i> </a>
+            <h3 class="font-extrabold mb-6">Plus hundreds more popular songs.</h3>
+            <a href="" class="mx-1 join bg-guitareo smaller">Get started <i class="fas fa-arrow-right" aria-hidden="true"></i> </a>
         </div>
     </section>
 

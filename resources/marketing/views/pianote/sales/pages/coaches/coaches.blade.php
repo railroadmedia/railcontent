@@ -25,27 +25,24 @@
             <div class="mb-6">
                 <h4 class="font-extrabold mb-4">Learn any Style</h4>
                 @component('_partials.components.carousel',[
-                    'xdata' => "
+                   'xdata' => "
                         classes: {
-                            arrow: ' splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
+                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11 top-[38%]',
                             prev: 'hidden',
                             next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
-                        perPage: 4,
+                        perPage: 4.5,
                         perMove: 1,
-                        gap: '0.5rem',
                         type: 'loop',
+                        gap: '0.5rem',
                         interval: 2000,
                         breakpoints: {
-                            1160: {
-                                perPage: 4,
-                            },
                             900: {
-                                perPage: 3,
+                                perPage: 3.5,
                             },
                             700: {
-                                perPage: 2,
+                                perPage: 1.5,
                             },
                         },
                     ",
@@ -75,27 +72,24 @@
             <div class="mb-6">
                 <h4 class="font-extrabold mb-4">Essential techniques</h4>
                 @component('_partials.components.carousel',[
-                    'xdata' => "
+                   'xdata' => "
                         classes: {
-                            arrow: ' splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
+                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11 top-[38%]',
                             prev: 'hidden',
                             next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
-                        perPage: 4,
+                        perPage: 4.5,
                         perMove: 1,
-                        gap: '0.5rem',
                         type: 'loop',
+                        gap: '0.5rem',
                         interval: 2000,
                         breakpoints: {
-                            1160: {
-                                perPage: 4,
-                            },
                             900: {
-                                perPage: 3,
+                                perPage: 3.5,
                             },
                             700: {
-                                perPage: 2,
+                                perPage: 1.5,
                             },
                         },
                     ",
@@ -125,27 +119,24 @@
             <div class="mb-6">
                 <h4 class="font-extrabold mb-4">Play more creatively</h4>
                 @component('_partials.components.carousel',[
-                    'xdata' => "
+                   'xdata' => "
                         classes: {
-                            arrow: ' splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
+                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11 top-[38%]',
                             prev: 'hidden',
                             next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
-                        perPage: 4,
+                        perPage: 4.5,
                         perMove: 1,
-                        gap: '0.5rem',
                         type: 'loop',
+                        gap: '0.5rem',
                         interval: 2000,
                         breakpoints: {
-                            1160: {
-                                perPage: 4,
-                            },
                             900: {
-                                perPage: 3,
+                                perPage: 3.5,
                             },
                             700: {
-                                perPage: 2,
+                                perPage: 1.5,
                             },
                         },
                     ",
@@ -175,27 +166,24 @@
             <div class="mb-6">
                 <h4 class="font-extrabold mb-4">The power of chords</h4>
                 @component('_partials.components.carousel',[
-                    'xdata' => "
+                   'xdata' => "
                         classes: {
-                            arrow: ' splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
+                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11 top-[38%]',
                             prev: 'hidden',
                             next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
-                        perPage: 4,
+                        perPage: 4.5,
                         perMove: 1,
-                        gap: '0.5rem',
                         type: 'loop',
+                        gap: '0.5rem',
                         interval: 2000,
                         breakpoints: {
-                            1160: {
-                                perPage: 4,
-                            },
                             900: {
-                                perPage: 3,
+                                perPage: 3.5,
                             },
                             700: {
-                                perPage: 2,
+                                perPage: 1.5,
                             },
                         },
                     ",
@@ -225,27 +213,24 @@
             <div class="mb-6">
                 <h4 class="font-extrabold mb-4">Or… anything else!</h4>
                 @component('_partials.components.carousel',[
-                    'xdata' => "
+                   'xdata' => "
                         classes: {
-                            arrow: ' splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
+                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11 top-[38%]',
                             prev: 'hidden',
                             next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
-                        perPage: 4,
+                        perPage: 4.5,
                         perMove: 1,
-                        gap: '0.5rem',
                         type: 'loop',
+                        gap: '0.5rem',
                         interval: 2000,
                         breakpoints: {
-                            1160: {
-                                perPage: 4,
-                            },
                             900: {
-                                perPage: 3,
+                                perPage: 3.5,
                             },
                             700: {
-                                perPage: 2,
+                                perPage: 1.5,
                             },
                         },
                     ",
@@ -273,9 +258,10 @@
                 @endcomponent
             </div>
 
-        <div class="text-center">
-            <h3 class="font-extrabold mb-6">More lessons & live events added every week.</h3>
-            <a href="" class="mx-1 join bg-pianote smaller">Get started <i class="fas fa-arrow-right" aria-hidden="true"></i> </a>
+            <div class="text-center">
+                <h3 class="font-extrabold mb-6">More lessons & live events added every week.</h3>
+                <a href="" class="mx-1 join bg-pianote smaller">Get started <i class="fas fa-arrow-right" aria-hidden="true"></i> </a>
+            </div>
         </div>
     </section>
 
