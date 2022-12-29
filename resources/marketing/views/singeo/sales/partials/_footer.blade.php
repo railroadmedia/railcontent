@@ -7,37 +7,47 @@
         </div>
     </div>
 </div>
-<footer id="footer" class="bottom-footer clearfix relative">
+<footer id="footer" class="bottom-footer clearfix relative bg-[#111729]">
+    @if(empty($minimal))
     <div class="container">
-        {{--<div class="footer-link-wrap footer-sign-up">--}}
-            {{--<h1>Stay Connected</h1>--}}
-            {{--<p class="show-for-desktop">Join thousands of singers who get free weekly vocal lessons.</p>--}}
-            {{--<p class="hide-for-desktop">Receive free weekly lessons.</p>--}}
-            {{--<form id="SingeoEngagementTriggerWebsiteSignupWebForm" accept-charset="UTF-8" action="/customer-io/submit-email-form" method="POST"--}}
-                    {{--class="ajax-form clearfix infusion-form facebook-track-lead" onsubmit="emailSignUpConversionTrackerForImpactProvider()">--}}
-                {{--<input type="hidden" name="form_name" value="Blog Signup">--}}
+        <div class="footer-link-wrap footer-sign-up">
+            <h1>Stay Connected</h1>
+            <p class="show-for-desktop">Join thousands of singers who get free weekly vocal lessons.</p>
+            <p class="hide-for-desktop">Receive free weekly lessons.</p>
+            <form id="SingeoEngagementTriggerWebsiteSignupWebForm" accept-charset="UTF-8" action="/customer-io/submit-email-form" method="POST"
+                    class="ajax-form clearfix infusion-form facebook-track-lead" onsubmit="emailSignUpConversionTrackerForImpactProvider()">
+                <input type="hidden" name="form_name" value="Blog Signup">
 
-                {{--<input type="hidden" name="leadtracker_form_name" value="Singeo General">--}}
-                {{--<div class="infusion-field col-xs-12 form-group text-center medium-text-left col-sm-7">--}}
-                    {{--<input class="medium-body infusion-field-input-container" id="inf_field_Email" name="email" type="email" placeholder="Email Address..." required="">--}}
-                {{--</div>--}}
-                {{--<div class="infusion-submit col-xs-12 form-group col-sm-5">--}}
-                    {{--<button class="submit button-red infusion-recaptcha join-form-button " type="submit">--}}
-                        {{--<span class="pre-add"> Sign up <i class="fas fa-paper-plane"></i></span>--}}
-                        {{--<span class="pending hide hidden">Sending <i class="fas fa-spinner-third fa-spin"></i></span>--}}
-                        {{--<span class="success hide hidden">Sent <i class="fas fa-thumbs-up"></i></span>--}}
-                        {{--<span class="fail hide hidden">Try Again <i class="fas fa-exclamation-triangle"></i></span>--}}
-                    {{--</button>--}}
-                {{--</div>--}}
-                {{--<input name="inf_form_xid" type="hidden" value="SingeoEngagementTriggerWebsiteSignupWebForm">--}}
-                {{--<input name="tag_names_to_add[]" type="hidden" value="Singeo - Engagement - Trigger - Website Signup - Web Form">--}}
-                {{--<input name="list_ids_to_subscribe_to[]" type="hidden" value="33">--}}
-                {{--<input name="success_redirect" type="hidden" value="/thank-you-white">--}}
-            {{--</form>--}}
-            {{--<div class="thank-you-box">--}}
-                {{--<p><em>You should receive an email from team@singeo.com within 10 minutes.</em></p>--}}
-            {{--</div>--}}
-        {{--</div>--}}
+                <input type="hidden" name="leadtracker_form_name" value="Singeo General">
+                <div class="infusion-field col-xs-12 form-group text-center medium-text-left col-sm-7">
+                    <input class="medium-body infusion-field-input-container" id="inf_field_Email" name="email" type="email" placeholder="Email Address..." required="">
+                </div>
+                <div class="infusion-submit col-xs-12 form-group col-sm-5">
+                    <button class="submit button-red infusion-recaptcha join-form-button " type="submit">
+                        <span class="pre-add"> Sign up <i class="fas fa-paper-plane"></i></span>
+                        <span class="pending hide hidden">Sending <i class="fas fa-spinner-third fa-spin"></i></span>
+                        <span class="success hide hidden">Sent <i class="fas fa-thumbs-up"></i></span>
+                        <span class="fail hide hidden">Try Again <i class="fas fa-exclamation-triangle"></i></span>
+                    </button>
+                </div>
+                <input name="inf_form_xid" type="hidden" value="SingeoEngagementTriggerWebsiteSignupWebForm">
+                <input name="tag_names_to_add[]" type="hidden" value="Singeo - Engagement - Trigger - Website Signup - Web Form">
+                <input name="list_ids_to_subscribe_to[]" type="hidden" value="33">
+                <input name="success_redirect" type="hidden" value="/thank-you-white">
+            </form>
+            <div class="thank-you-box">
+                <p><em>You should receive an email from team@singeo.com within 10 minutes.</em></p>
+            </div>
+            <a style="width: 48%;max-width:130px;
+        display: inline-block;
+        margin-right: 2%;
+        margin-top: 10px;" href="https://itunes.apple.com/us/app/musora/id1619053766?ls=1" target="_blank">
+                <img src="https://cdn.musora.com/image/fetch/w_260,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/app/download-on-app-store-button.png"></a>
+            <a style="width: 48%;max-width:130px;
+        display: inline-block;
+        margin-top: 10px;" href="https://play.google.com/store/apps/details?id=com.musoraapp" target="_blank">
+                <img src="https://cdn.musora.com/image/fetch/w_260,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/app/google-play-button.png"></a>
+        </div>
         <div class="footer-link-wrap">
             <h1>Resources</h1>
             <p><a href="/chorus/">The Singeo Chorus</a><br>
@@ -63,15 +73,20 @@
                 <a rel="noopener" href="{{ get_musora_brand_base_url() }}">Recordeo</a></p>
         </div>
     </div>
-    <div class="footer-bottom" style="padding-top: 0; border-top: 0;">
+    @endif
+    <div class="footer-bottom" style="@if(!empty($minimal))padding-top: 0; border-top: 0;@endif">
         <div class="container mx-auto">
             <img class="logo" src="https://cdn.musora.com/image/fetch/w_280,q_auto:best/https://musora-center.s3.amazonaws.com/logos/singeo-logo-white.png" alt="Singeo">
-            <p><a href="https://goo.gl/maps/c4JxakSmnjB2" target="_blank">107-31265 Wheel Ave. Abbotsford,<br class="mobile-only"> BC, V2T 6H2 Canada</a><br>
-                <a href="tel:+18004398921">Toll Free: 1-800-439-8921</a> / <br class="mobile-only"><a href="tel:+16048557605">Direct: 1-604-855-7605</a> / <br class="mobile-only"><a href="{{ get_musora_brand_base_url() }}/contact">Contact Us</a></p>
-            <a href="https://www.youtube.com/c/singeoofficial" target="_blank" class="social-media youtube"><i class="fab fa-youtube"></i></a>
-            <a href="https://www.facebook.com/singeoofficial/" target="_blank" class="social-media facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://www.instagram.com/singeoofficial/" target="_blank" class="social-media instagram"><i class="fab fa-instagram"></i></a>
+            @if(empty($minimal))
+                <p><a href="https://goo.gl/maps/c4JxakSmnjB2" target="_blank">107-31265 Wheel Ave. Abbotsford,<br class="mobile-only"> BC, V2T 6H2 Canada</a><br>
+                    <a href="tel:+18004398921">Toll Free: 1-800-439-8921</a> / <br class="mobile-only"><a href="tel:+16048557605">Direct: 1-604-855-7605</a> / <br class="mobile-only"><a href="{{ get_musora_brand_base_url() }}/contact">Contact Us</a></p>
+                <a href="https://www.youtube.com/c/singeoofficial" target="_blank" class="social-media youtube"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.facebook.com/singeoofficial/" target="_blank" class="social-media facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/singeoofficial/" target="_blank" class="social-media instagram"><i class="fab fa-instagram"></i></a>
+            @endif
+
             <p class="tiny">Musora Media, Inc. © {{ date('Y') }} - &nbsp; <a href="/terms">Terms</a>&nbsp;&nbsp;/&nbsp;&nbsp;<a href="/privacy">Privacy</a>&nbsp;&nbsp;/&nbsp;&nbsp;<a href="https://www.musora.com/careers">Careers</a>&nbsp;&nbsp;/&nbsp;&nbsp;<a href="https://www.musora.com/brand">Brand Guide</a></p>
         </div>
     </div>
 </footer>
+@include("singeo.lead-gen.partials.impact-email-sign-up-tracker")
