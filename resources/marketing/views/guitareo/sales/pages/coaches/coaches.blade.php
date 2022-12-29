@@ -13,7 +13,6 @@
     <meta property="og:image" content="https://guitareo.s3.amazonaws.com/sales/2023/share-image-coaches.jpg" style="display: none;">
 @endsection
 
-
 @section('header-img', 'https://guitareo.s3.amazonaws.com/sales/2023/coaches-thumb.jpg')
 
 @section('header', 'Study with the world’s best teachers.')
@@ -28,31 +27,32 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: '  splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',
+                            arrow: ' splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
                             prev: 'hidden',
-                            next: ' splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
+                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
-                        perPage: 4.3,
+                        perPage: 4,
                         perMove: 1,
+                        gap: '0.5rem',
                         type: 'loop',
                         interval: 2000,
                         breakpoints: {
                             1160: {
-                                perPage: 4.3,
+                                perPage: 4,
                             },
                             900: {
-                                perPage: 3.3,
+                                perPage: 3,
                             },
                             700: {
-                                perPage: 1.3,
+                                perPage: 2,
                             },
                         },
                     ",
                 ])
                     @slot('content')
                         @foreach ($creativities as $slide)
-                            <li class="splide__slide px-1">
+                            <li class="splide__slide">
                                 <div>
                                     <div class="relative mb-2" style="padding-bottom: 56.25%;">
                                         <img
@@ -73,35 +73,36 @@
                 @endcomponent
             </div>
             <div class="mb-6">
-                <h4 class="font-extrabold mb-4">Learn and style</h4>
+                <h4 class="font-extrabold mb-4">Learn any style</h4>
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: '  splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',
+                            arrow: ' splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
                             prev: 'hidden',
-                            next: ' splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
+                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
-                        perPage: 4.3,
+                        perPage: 4,
                         perMove: 1,
+                        gap: '0.5rem',
                         type: 'loop',
                         interval: 2000,
                         breakpoints: {
                             1160: {
-                                perPage: 4.3,
+                                perPage: 4,
                             },
                             900: {
-                                perPage: 3.3,
+                                perPage: 3,
                             },
                             700: {
-                                perPage: 1.3,
+                                perPage: 2,
                             },
                         },
                     ",
                 ])
                     @slot('content')
                         @foreach ($learn as $slide)
-                            <li class="splide__slide px-1">
+                            <li class="splide__slide">
                                 <div>
                                     <div class="relative mb-2" style="padding-bottom: 56.25%;">
                                         <img
@@ -126,31 +127,32 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: '  splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',
+                            arrow: ' splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
                             prev: 'hidden',
-                            next: ' splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
+                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
-                        perPage: 4.3,
+                        perPage: 4,
                         perMove: 1,
+                        gap: '0.5rem',
                         type: 'loop',
                         interval: 2000,
                         breakpoints: {
                             1160: {
-                                perPage: 4.3,
+                                perPage: 4,
                             },
                             900: {
-                                perPage: 3.3,
+                                perPage: 3,
                             },
                             700: {
-                                perPage: 1.3,
+                                perPage: 2,
                             },
                         },
                     ",
                 ])
                     @slot('content')
                         @foreach ($techniques as $slide)
-                            <li class="splide__slide px-1">
+                            <li class="splide__slide">
                                 <div>
                                     <div class="relative mb-2" style="padding-bottom: 56.25%;">
                                         <img
@@ -175,31 +177,32 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: '  splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',
+                            arrow: ' splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
                             prev: 'hidden',
-                            next: ' splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
+                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
-                        perPage: 4.3,
+                        perPage: 4,
                         perMove: 1,
+                        gap: '0.5rem',
                         type: 'loop',
                         interval: 2000,
                         breakpoints: {
                             1160: {
-                                perPage: 4.3,
+                                perPage: 4,
                             },
                             900: {
-                                perPage: 3.3,
+                                perPage: 3,
                             },
                             700: {
-                                perPage: 1.3,
+                                perPage: 2,
                             },
                         },
                     ",
                 ])
                     @slot('content')
                         @foreach ($plans as $slide)
-                            <li class="splide__slide px-1">
+                            <li class="splide__slide">
                                 <div>
                                     <div class="relative mb-2" style="padding-bottom: 56.25%;">
                                         <img
@@ -224,31 +227,32 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: '  splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',
+                            arrow: ' splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
                             prev: 'hidden',
-                            next: ' splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
+                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
-                        perPage: 4.3,
+                        perPage: 4,
                         perMove: 1,
+                        gap: '0.5rem',
                         type: 'loop',
                         interval: 2000,
                         breakpoints: {
                             1160: {
-                                perPage: 4.3,
+                                perPage: 4,
                             },
                             900: {
-                                perPage: 3.3,
+                                perPage: 3,
                             },
                             700: {
-                                perPage: 1.3,
+                                perPage: 2,
                             },
                         },
                     ",
                 ])
                     @slot('content')
                         @foreach ($anythingElse as $slide)
-                            <li class="splide__slide px-1">
+                            <li class="splide__slide">
                                 <div>
                                     <div class="relative mb-2" style="padding-bottom: 56.25%;">
                                         <img
@@ -269,14 +273,11 @@
                 @endcomponent
             </div>
 
-        <div class="text-center">
-            <h3 class="font-extrabold mb-6">Plus 200+ more courses.</h3>
-            <a href="/choose-plan" class="mx-1 join blue smaller">Get started <i class="fas fa-arrow-right" style="line-height: 0;"></i> </a>
+            <div class="text-center">
+                <h3 class="font-extrabold mb-6">More lessons & live events added every week.</h3>
+                <a href="" class="mx-1 join bg-guitareo smaller">Get started <i class="fas fa-arrow-right" aria-hidden="true"></i> </a>
+            </div>
         </div>
     </section>
-
-    {{--    @include('_partials.components.video-modal',[--}}
-    {{--        'name' => 'trailer',--}}
-    {{--        'video' => '772644658'--}}
-    {{--    ])--}}
 @stop
+

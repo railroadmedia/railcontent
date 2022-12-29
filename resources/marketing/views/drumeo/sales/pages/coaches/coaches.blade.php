@@ -13,7 +13,6 @@
     <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/sales/2023/method/share-image-coaches.jpg" style="display: none;">
 @endsection
 
-
 @section('header-img', 'https://drumeo-assets.s3.amazonaws.com/sales/2023/coaches-thumb.jpg')
 
 @section('header', 'Study with the world’s best drummers.')
@@ -62,7 +61,7 @@
                                             loading="lazy"
                                             onload="this.classList.remove('opacity-0')"
                                             style="object-position: top;"
-                                        >
+                                        />
                                     </div>
                                     <p class="font-bold mb-1 leading-tight">{{$slide['title']}}</p>
                                     <p class="text-[#838C98] leading-tight">{{$slide['artist']}}</p>
@@ -111,7 +110,7 @@
                                             loading="lazy"
                                             onload="this.classList.remove('opacity-0')"
                                             style="object-position: top;"
-                                        >
+                                        />
                                     </div>
                                     <p class="font-bold mb-1 leading-tight">{{$slide['title']}}</p>
                                     <p class="text-[#838C98] leading-tight">{{$slide['artist']}}</p>
@@ -209,7 +208,7 @@
                                             loading="lazy"
                                             onload="this.classList.remove('opacity-0')"
                                             style="object-position: top;"
-                                        >
+                                        />
                                     </div>
                                     <p class="font-bold mb-1 leading-tight">{{$slide['title']}}</p>
                                     <p class="text-[#838C98] leading-tight">{{$slide['artist']}}</p>
@@ -258,7 +257,7 @@
                                             loading="lazy"
                                             onload="this.classList.remove('opacity-0')"
                                             style="object-position: top;"
-                                        >
+                                        />
                                     </div>
                                     <p class="font-bold mb-1 leading-tight">{{$slide['title']}}</p>
                                     <p class="text-[#838C98] leading-tight">{{$slide['artist']}}</p>
@@ -269,9 +268,10 @@
                 @endcomponent
             </div>
 
-        <div class="text-center">
-            <h3 class="font-extrabold mb-6">Plus 200+ more courses.</h3>
-            <a href="/choose-plan" class="mx-1 join blue smaller">Get started <i class="fas fa-arrow-right" style="line-height: 0;"></i> </a>
+            <div class="text-center">
+                <h3 class="font-extrabold mb-6">Plus 200+ more courses.</h3>
+                <a href="/choose-plan" class="mx-1 join blue smaller">Get started <i class="fas fa-arrow-right" style="line-height: 0;"></i> </a>
+            </div>
         </div>
     </section>
 

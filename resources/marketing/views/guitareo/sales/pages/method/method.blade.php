@@ -14,7 +14,6 @@
 
 @endsection
 
-
 @section('header-img', 'https://guitareo.s3.amazonaws.com/sales/2023/method-thumb.jpg')
 
 @section('header', 'Your guitar goals start here.')
@@ -37,9 +36,4 @@
             @endforeach
         </div>
     </section>
-
-{{--    @include('_partials.components.video-modal',[--}}
-{{--        'name' => 'trailer',--}}
-{{--        'video' => '772644658'--}}
-{{--    ])--}}
 @stop
