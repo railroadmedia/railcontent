@@ -140,7 +140,7 @@ class NavigationService
                 ],
             ];
 
-            if (!empty(user()) && !user()->isAPlusMember() && !user()->isAdmin()) {
+            if (!empty(user()) && !user()->isAPlusMember()) {
                 unset($navData[0]['songs']);
             }
 
@@ -235,7 +235,7 @@ class NavigationService
                 ],
             ];
 
-            if (!empty(user()) && !user()->isAPlusMember() && !user()->isAdmin()) {
+            if (!empty(user()) && !user()->isAPlusMember()) {
                 unset($navData[0]['songs']);
             }
 
@@ -340,7 +340,7 @@ class NavigationService
                 ],
             ];
 
-            if (!empty(user()) && !user()->isAPlusMember() && !user()->isAdmin()) {
+            if (!empty(user()) && !user()->isAPlusMember()) {
                 unset($navData[0]['songs']);
             }
 
@@ -420,7 +420,7 @@ class NavigationService
                 ],
             ];
 
-            if (!empty(user()) && !user()->isAPlusMember() && !user()->isAdmin()) {
+            if (!empty(user()) && !user()->isAPlusMember()) {
                 unset($navData[0]['songs']);
             }
 
