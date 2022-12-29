@@ -57,17 +57,17 @@
                                 prev: 'hidden',
                                 next: 'splide__arrow--next your-class-next hidden sm:flex -right-1',
                         },
-                        perPage: 4.5,
+                        perPage: 5.5,
                         perMove: 1,
                         type: 'loop',
                         focus: 0,
                         interval: 2000,
                         breakpoints: {
                             720: {
-                                perPage: 3.2,
+                                perPage: 4.2,
                             },
                             620: {
-                                perPage: 2.2,
+                                perPage: 3.2,
                             },
                         },
                     }).mount()
