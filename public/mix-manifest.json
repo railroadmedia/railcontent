@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
     "/platform/js/app.js": "/platform/js/app.js?id=e1489226e86d8aa45c6415d51c5cbb0d",
     "/platform/js/profile.js": "/platform/js/profile.js?id=c7e869f012d1252699ff65de1e5e0547",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=24098ec7990ff98a565fd1e4693746ed",
@@ -27,37 +26,6 @@
     "/marketing/css/vuesora.css": "/marketing/css/vuesora.css?id=3a7ad8c8416c33c28a79283461922734",
     "/platform/css/app.css": "/platform/css/app.css?id=ef923f89a01f05335f5f052a008fb42c",
     "/platform/js/vendor~onboarding.js": "/platform/js/vendor~onboarding.js?id=56868ea369faf90d0978a204535ee2e6",
-    "/marketing/css/app.css": "/marketing/css/app.css?id=01d9b110f23bbf1985b8935c10a380c5",
+    "/marketing/css/app.css": "/marketing/css/app.css?id=32311de39487edc30578e9f3fd3e5839",
     "/platform/js/vendor.js": "/platform/js/vendor.js?id=05dd83ebb4f3d065d57fc2d6da2069b0"
-=======
-    "/platform/js/app.js": "/platform/js/app.js?id=1142b6095d9bc1d8086862f713954173",
-    "/platform/js/profile.js": "/platform/js/profile.js?id=a13ed5f750a89e00edbe84934bd56773",
-    "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=9b1b997eda2b5545804b8d7649790e48",
-    "/platform/js/books.js": "/platform/js/books.js?id=bd6874db5faa8414cda38fb1fa497d2c",
-    "/platform/js/manifest.js": "/platform/js/manifest.js?id=94df61bc5ab477a367d79ad1bd3bd40c",
-    "/platform/js/piano-backing-tracks.js": "/platform/js/piano-backing-tracks.js?id=a121116bf28ae9fddf985bb2860bc9a9",
-    "/platform/js/student-review-form-iframe.js": "/platform/js/student-review-form-iframe.js?id=2cb6cdf4d68ab4ce703cbb67c210ec2e",
-    "/platform/js/comments-catalogue-component.js": "/platform/js/comments-catalogue-component.js?id=e1aff93b03d2b1a2c6bc672c52b2ba23",
-    "/platform/js/order-form.js": "/platform/js/order-form.js?id=444f145d139ead8f51bd417861f4d547",
-    "/platform/js/forum-thread-component.js": "/platform/js/forum-thread-component.js?id=c928ff1cf086963b21ad1d98f8f1a395",
-    "/platform/js/text-editor-component.js": "/platform/js/text-editor-component.js?id=81a9404cd71a68b793e020b62446c1e8",
-    "/platform/js/contact-member-form.js": "/platform/js/contact-member-form.js?id=d340487f0b9bc3c2ebc3748dac8c1dad",
-    "/platform/js/cart-sidebar.js": "/platform/js/cart-sidebar.js?id=64e65d0ac3336a16517f430a644fb266",
-    "/platform/js/nav-cart-button.js": "/platform/js/nav-cart-button.js?id=aac1d09564b9dc21e6655310c5232f48",
-    "/platform/js/contact-email-form-marketing.js": "/platform/js/contact-email-form-marketing.js?id=2ffc323971e9d67fe85ab4c0f7e823d5",
-    "/platform/js/contact-email-form.js": "/platform/js/contact-email-form.js?id=8c42a7f79169d75d784b0afc1471daba",
-    "/platform/js/youtube-player-component.js": "/platform/js/youtube-player-component.js?id=fa034becc87a52ea151b981f707363b1",
-    "/platform/js/onboarding-component.js": "/platform/js/onboarding-component.js?id=7def826c5b2e359b6479d4a0d4d421cd",
-    "/platform/js/video-player-component.js": "/platform/js/video-player-component.js?id=9a1d6aed2c705f5acb543fbb06853cb9",
-    "/platform/js/video-media-element-component.js": "/platform/js/video-media-element-component.js?id=316ae4561a831312b3fe669d0bb920d9",
-    "/platform/js/image-cropper-component.js": "/platform/js/image-cropper-component.js?id=3b29eed954db900d64bb3ede3bdb26cc",
-    "/platform/js/comments-component.js": "/platform/js/comments-component.js?id=24e76aba874a0661a350aee68a6b49db",
-    "/platform/js/email-form-component.js": "/platform/js/email-form-component.js?id=6a2c51699bce35f9f2370ad3d5a1691f",
-    "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=2c2504852a49bdee4c76e53adfa83391",
-    "/marketing/css/vuesora.css": "/marketing/css/vuesora.css?id=329c515d81e97ce2c4266b46065d6b83",
-    "/platform/css/app.css": "/platform/css/app.css?id=b7c36d9b31be5196cd2e1e612db66565",
-    "/platform/js/vendor~onboarding.js": "/platform/js/vendor~onboarding.js?id=95b61f73a67fc65546a81e742dda8905",
-    "/marketing/css/app.css": "/marketing/css/app.css?id=776603c1c72ba439c167e21e8704f4b3",
-    "/platform/js/vendor.js": "/platform/js/vendor.js?id=49f0817b99cd1af9df9cbd7fcee415f7"
->>>>>>> 31ad89f55c659d02fdecd15f6f35ff0782f28bdd
 }
