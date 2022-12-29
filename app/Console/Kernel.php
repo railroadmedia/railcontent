@@ -18,6 +18,7 @@ use App\Console\Commands\RepairUserProgressStartedOn;
 use App\Console\Commands\RepairVimeoDurations;
 use App\Console\Commands\RunMWPPhaseOneLaunchMigrations;
 use App\Console\Commands\SeedLiveAndScheduledContent;
+use App\Console\Commands\SeedNewSongsPermissions;
 use App\Console\Commands\SeedUserContentData;
 use App\Console\Commands\TestLessonsDescriptionUrls;
 use App\Console\Commands\VaporEnvManager;
@@ -45,6 +46,7 @@ class Kernel extends ConsoleKernel
 	    MigratePianoteSongTutorial::class,
         CreateSongsDecember2022::class,
         RepairUserProgressStartedOn::class,
+        SeedNewSongsPermissions::class,
     ];
 
     /**
