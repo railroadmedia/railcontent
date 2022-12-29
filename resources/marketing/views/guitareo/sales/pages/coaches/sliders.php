@@ -1,225 +1,134 @@
-
 <?php
+    $creativities = [
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/301043-card-thumbnail-maxres-1621412323.png',
+            'title' => 'Solo In An Hour',
+            'artist' => 'Ayla Tesler-Mabé',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/course-card-5-songwriting-cheatcodes-1640922846.png',
+            'title' => 'Songwriting Cheat Codes',
+            'artist' => 'Rob Scallon',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/course-card-1648717349.jpg',
+            'title' => 'Rhythm & Groove',
+            'artist' => 'Sami Ghawi',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/220981-card-thumbnail-maxres-1551210078',
+            'title' => 'Timing & Feel',
+            'artist' => 'David Becker',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/course-card-1664263514.jpg',
+            'title' => 'Musical Lanes',
+            'artist' => 'Mark Lettieri',
+        ],
+        [
+            'img' => '',
+            'title' => 'Add Power To Your Playing',
+            'artist' => 'Dave Weiner',
+        ],
+        [
+            'img' => '',
+            'title' => 'Unlock Your Creativity',
+            'artist' => 'Yvette Young',
+        ],
+        [
+            'img' => '',
+            'title' => 'The Anatomy of a Song',
+            'artist' => 'Pete Thorn',
+        ],
+    ];
+
     $learn = [
         [
-            'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/rock-drumming-masterclass.jpg',
-            'title' => 'Rock',
-            'artist' => 'Todd Sucherman',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/YT-TechniquesToSoundLikeARockGod-05-1628743345.jpg',
+            'title' => 'Rock Guitar',
+            'artist' => 'Ayla Tesler-Mabé',
         ],
         [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/funk-drumming-course-thumbnail-1647969027.jpg',
-            'title' => 'Funk',
-            'artist' => 'Dennis Chambers',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/course-card-1647158359.jpg',
+            'title' => 'Punk Rock',
+            'artist' => 'Kent Shores',
         ],
         [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/course-card-domino-santantonio-1641811646.png',
-            'title' => 'Pop',
-            'artist' => 'Domino Santantonio',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/course-Card-1646897809.png',
+            'title' => 'Surf Guitar',
+            'artist' => 'Kent Shores',
         ],
         [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/course-card-1659026051.jpg',
-            'title' => 'Jazz',
-            'artist' => 'Steve Smith',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/280679-card-thumbnail-maxres-1609366267.png',
+            'title' => 'Campfire Chords',
+            'artist' => 'Rob Scallon',
         ],
         [
-            'img' => 'https://dzryyo1we6bm3.cloudfront.net/thumbnails/21067_thumbnail_360p.jpg',
-            'title' => 'Gospel',
-            'artist' => 'Larnell Lewis',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/278525-card-thumbnail-maxres-1609945442.png',
+            'title' => 'Funk Essentials',
+            'artist' => 'Ayla Tesler-Mabé',
         ],
         [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/course-card-1651763773.jpg',
-            'title' => 'Big Band',
-            'artist' => 'Greyson Nekrutman',
+            'img' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons/eba35aa-bg1-card-scaled@2x.jpg',
+            'title' => 'Bluegrass',
+            'artist' => 'Nate Savage',
         ],
         [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/1520342158-drumeo-edge-1765.jpg',
-            'title' => 'Metal',
-            'artist' => 'Gene Hoglan',
+            'img' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons/7fb6e2b-road15-scaled@2x.jpg',
+            'title' => 'Fingerstyle',
+            'artist' => 'Nate Savage',
         ],
         [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/course-card-john-wooton-1641818185.png',
-            'title' => 'Latin',
-            'artist' => 'John Wooton',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/236744-card-thumbnail-maxres-1574338816.jpg',
-            'title' => 'Reggae',
-            'artist' => 'Gil Sharone',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/course-card-aaron-edgar(1)-1656512880.png',
-            'title' => 'Progressive',
-            'artist' => 'Aaron Edgar',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/224271-card-thumbnail-maxres-1558649348.jpg',
-            'title' => 'Blues',
-            'artist' => 'Tony Coleman',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/dci-122.jpg',
-            'title' => 'Indian',
-            'artist' => 'Sarah Thawer',
-        ],
-        [
-            'img' => 'https://dzryyo1we6bm3.cloudfront.net/card-thumbnails/courses/550/dcb-27.jpg',
-            'title' => 'Afro Cuban',
-            'artist' => 'Henrique De Almeida',
-        ],
-        [
-            'img' => 'https://dzryyo1we6bm3.cloudfront.net/card-thumbnails/courses/550/dci-47.jpg',
-            'title' => 'New Orleans',
-            'artist' => 'Stanton Moore',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/course-card-1651207142.jpg',
+            'title' => 'Shred Guitar',
+            'artist' => 'Dean Lamb',
         ],
     ];
 
     $techniques = [
         [
-            'img' => 'https://dzryyo1we6bm3.cloudfront.net/card-thumbnails/courses/550/dci-102.jpg',
-            'title' => 'Subdivision Studies',
-            'artist' => 'Anika Nilles',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/294635-card-thumbnail-maxres-1617276103.png',
+            'title' => 'Getting Started On The Acoustic Guitar',
+            'artist' => 'Ayla Tesler-Mabé',
         ],
         [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/230114-card-thumbnail-maxres-1564771415.jpg',
-            'title' => 'Pedal Control',
-            'artist' => 'Dom Famularo',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/290985-card-thumbnail-maxres-1614867316.png',
+            'title' => 'Getting Started On The Electric Guitar',
+            'artist' => 'Ayla Tesler-Mabé',
         ],
         [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/dcb-59-hd.jpg',
-            'title' => 'Groove Essentials',
-            'artist' => 'Tommy Igoe',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/altered-open-tunings.jpg',
+            'title' => 'Altered & Open Tunings',
+            'artist' => 'Don Ross',
         ],
         [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/course-card-dorothea-taylor-1641823298.png',
-            'title' => 'Stick Control',
-            'artist' => 'Dorothea Taylor',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/222675-card-thumbnail-maxres-1553776379.jpg',
+            'title' => 'Looping',
+            'artist' => 'David Becker',
         ],
         [
-            'img' => 'https://dzryyo1we6bm3.cloudfront.net/card-thumbnails/courses/550/dcb-34.jpg',
-            'title' => 'Hand Technique',
-            'artist' => 'Bruce Becker',
+            'img' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons/212a52c-picking-card-scaled@2x.jpg',
+            'title' => 'Picking',
+            'artist' => 'Nate Savage',
         ],
         [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/241114-card-thumbnail-maxres-1578499902.jpg',
-            'title' => 'Foot Technique',
-            'artist' => 'Gil Sharone',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/qa-feb22-2022-1644338778.jpg',
+            'title' => 'Legato',
+            'artist' => 'Kent Shores',
         ],
         [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/qt-EC-fundamentals-traditional-grip-1634639041.png',
-            'title' => 'Traditional Grip',
-            'artist' => 'Emmanuelle Caplette',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/YT-thumb-1920x1080_2-1659614695.jpg',
+            'title' => 'Strumming Workouts',
+            'artist' => 'Ayla Tesler-Mabé',
         ],
         [
-            'img' => 'https://dzryyo1we6bm3.cloudfront.net/card-thumbnails/courses/550/dci-93.jpg',
-            'title' => 'Internal Synchronization',
-            'artist' => 'Billy Cobham',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/292810-card-thumbnail-maxres-1626793627.png',
-            'title' => '4-Way Coordination',
-            'artist' => 'Sarah Thawer',
-        ],
-        [
-            'img' => 'https://dzryyo1we6bm3.cloudfront.net/card-thumbnails/courses/550/dci-66.jpg',
-            'title' => 'Moeller Technique',
-            'artist' => 'Henrique De Almeida',
-        ],
-        [
-            'img' => 'https://dzryyo1we6bm3.cloudfront.net/card-thumbnails/courses/550/dcb-31.jpg',
-            'title' => 'Open Handed Drumming',
-            'artist' => 'Claus Hessler',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-method/level-8/8-3-3.png',
-            'title' => 'Brush Technique',
-            'artist' => 'Steve Lyman',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/dcb-54.jpg',
-            'title' => 'The Body Fulcrum',
-            'artist' => 'Rodney Holmes',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/295185-card-thumbnail-maxres-1618648196.png',
-            'title' => 'Blast Beats',
-            'artist' => 'Ash Pearson',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/303027-card-thumbnail-maxres-1621854579.png',
+            'title' => 'Bending & Vibrato',
+            'artist' => 'Ayla Tesler-Mabé',
         ],
     ];
 
-    $creativities = [
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/course-card-1651667448.jpg',
-            'title' => 'Elevate Your Drum Sound',
-            'artist' => 'Simon Phillips',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/drum-chops-course-card-1646062165.png',
-            'title' => 'Drum Chops',
-            'artist' => 'Aaron Spears',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/course-card-1651762585.jpg',
-            'title' => 'Writing Drum Parts',
-            'artist' => 'Hannah Welton',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/Matt-CoachCard-1656512668.jpg',
-            'title' => 'Song Breakdowns',
-            'artist' => 'Matt McGuire',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-dorthea-16x9-1641338317.jpg',
-            'title' => 'Rudiments & Patterns',
-            'artist' => 'Dorothea Taylor',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/course-card-aric-improta-1657904226.jpg',
-            'title' => 'The Creative Mindset',
-            'artist' => 'Aric Improta',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/dcb-58-hd.jpg',
-            'title' => 'Musical Exercises',
-            'artist' => 'Kaz Rodriguez',
-        ],
-        [
-            'img' => 'https://dzryyo1we6bm3.cloudfront.net/card-thumbnails/courses/550/dci-109.jpg',
-            'title' => 'Bass Drum Calibration',
-            'artist' => 'Gavin Harrison',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/course-card-1656579725.jpg',
-            'title' => 'Crafting Drum Solos',
-            'artist' => 'Steve Smith',
-        ],
-        [
-            'img' => 'https://dzryyo1we6bm3.cloudfront.net/card-thumbnails/courses/550/dca-06.jpg',
-            'title' => 'Independence',
-            'artist' => 'Thomas Lang',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/225963-card-thumbnail-maxres-1559214248.jpg',
-            'title' => 'Building Grooves',
-            'artist' => 'Taylor Gordon',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/course-card-michael-schack-1641814654.png',
-            'title' => 'Master Your Timing',
-            'artist' => 'Michael Schack',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/course-card-larnell-lewis-1641809297.png',
-            'title' => 'Supercharged Drum Solos',
-            'artist' => 'Larnell Lewis',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/280492-card-thumbnail-maxres-1611224723.png',
-            'title' => 'Improving Your Jazz Flow',
-            'artist' => 'Rob Brown',
-        ],
-    ];
-
-    $grooves = [
+    $plans = [
         [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/dcb-55.jpg',
             'title' => 'The Grooves of Michael Jackson',
