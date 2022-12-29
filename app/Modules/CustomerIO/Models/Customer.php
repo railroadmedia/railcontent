@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class Customer
+ *
  * @package App\Modules\CustomerIO\Models
  * @property integer $id
  * @property string $uuid
@@ -19,6 +20,24 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property Carbon|null $deleted_at
+ * @property int $internal_id
+ * @method static \Illuminate\Database\Eloquent\Builder|Customer newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Customer newQuery()
+ * @method static \Illuminate\Database\Query\Builder|Customer onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Customer query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Customer whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Customer whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Customer whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Customer whereInternalId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Customer whereSiteId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Customer whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Customer whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Customer whereUuid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Customer whereWorkspaceId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Customer whereWorkspaceName($value)
+ * @method static \Illuminate\Database\Query\Builder|Customer withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|Customer withoutTrashed()
+ * @mixin \Eloquent
  */
 class Customer extends Model
 {

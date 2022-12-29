@@ -44,7 +44,7 @@ class TestingUserProvider implements UserProviderInterface
                 ) > 0;
     }
 
-    public function saveExperiencePoints(int $userId, int $totalXp): bool
+    public function saveExperiencePoints(int $userId, array $totalXp, $shouldRevert = false): bool
     {
         // TODO: Implement saveExperiencePoints() method.
     }

@@ -10,20 +10,28 @@ use Modules\UserManagementSystem\Models\User;
 
 /**
  * Class MentorStudent
- * @internal
  *
+ * @internal 
  * @package App\Modules\Mentor\Models
- *
  * @property integer $id
  * @property integer $user_id
  * @property string $primary_brand
  * @property integer $mentor_user_id
- *
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property Carbon|null $deleted_at
  * @property User $user
  * @property mixed|null $mentor
+ * @method static \Illuminate\Database\Eloquent\Builder|MentorStudent newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|MentorStudent newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|MentorStudent query()
+ * @method static \Illuminate\Database\Eloquent\Builder|MentorStudent whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MentorStudent whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MentorStudent whereMentorUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MentorStudent wherePrimaryBrand($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MentorStudent whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MentorStudent whereUserId($value)
+ * @mixin \Eloquent
  */
 class MentorStudent extends Model
 {
