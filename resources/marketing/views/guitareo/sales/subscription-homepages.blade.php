@@ -173,9 +173,9 @@
         'promoThumbM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/header-thumb-promo-m2.jpg',
         'pointOne' => 'Improve Your Skills',
         'pointTwo' => 'World-Class Teachers',
-        'pointThree' => 'Play More Songs',
+        'pointThree' => 'Play More<br class="inline lg:hidden"> Songs',
         'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738',
-        'students' => number_format(31856),
+        'students' => number_format(Prices::$students),
     ])
 
     @if(!empty($promoVersion))
@@ -246,7 +246,7 @@
 
         $courses = [
             [
-                'title' => 'Learn and style',
+                'title' => 'Learn any style',
                 'images' => [
                     [
                         'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Todd-Sucherman.jpg',
@@ -423,6 +423,7 @@
         'desc' => 'You’ll have <strong>all the tools you need</strong> to make sure you never miss a beat.',
         'video' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/smells-like-teen-spirit2.mp4',
         'brandName' => 'Drumeo',
+        'bannerDesc' => 'Powered by Musora, Drumeo includes full access to our communities for piano, guitar, and voice.',
     ])
 
     @php
@@ -488,7 +489,7 @@
     <div id="testimonials" class="anchor"></div>
     @include('musora.sales.components.testimonials-section', [
         'header' => 'Trusted by drummers<br class="inline-block sm:hidden">  everywhere.',
-        'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738',
+        'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Guitareo+Membership/79348454',
         'reviewText' => 'Drumeo is rated 5-stars for price, satisfaction,<br class="inline sm:hidden"> and customer service.',
         'youtubeLink' => 'https://www.youtube.com/freedrumlessons/',
         'youtube' => '2.5M',
@@ -593,19 +594,17 @@
     @else
         @include('musora.sales.components.order-section-collage', [
         'header' => 'Unlimited drum lessons.<br> The world’s best teachers.<br> 5000+ popular songs.',
-        'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Trusted by ' . number_format(31856) . ' students.</li>
+        'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Online lessons on every topic.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Personalized feedback from real teachers.</li>
                     <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> piano, guitar, and voice lessons with full access to all Musora communities.</li>',
-        'buttonLink' => '/laravel/public/shopping-cart/api/query?products[DLM]=1,year,1&products[30-day-drummer]=1&products[practicepad]=1&products[Drumeo-VaterSticks]=2&products[BeginnerBook]=1&locked=true',
+        'buttonLink' => '/choose-plan',
         'price' => '20',
         'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drumeo-spread.png',
         ])
     @endif
 
     @include('musora.sales.components.app-section', [
-        'appleLink' => 'https://itunes.apple.com/us/app/musora/id1619053766?ls=1',
-        'googleLink' => 'https://play.google.com/store/apps/details?id=com.musoraapp',
         'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/devices.png',
     ])
 

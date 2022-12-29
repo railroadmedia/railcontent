@@ -4,19 +4,12 @@
     @yield('page-meta')
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
-    <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
-    {{--<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">--}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
 
     <style>
         .slick-slider.slick-light-buttons .slick-arrow {
             background: #fff;
         }
-    </style>
-
-    <style>
         .splide__pagination__page.is-active {
             background: #01050F;
             transform: none !important;
@@ -55,7 +48,7 @@
             alt="{{$page}} thumb"
             loading="lazy"
             onload="this.classList.remove('opacity-0')"
-            @if($page === 'songs') x-on:click="trailer = true" @endif
+            @if($page === 'songs') x-on:click="soundslice = true" @endif
         />
         <div class="px-4 md:px-0">
             <div class="mb-6">
@@ -70,7 +63,7 @@
                     class="h-6 md:h-10 transition-opacity opacity-0"
                     src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/@if($page === 'method')https://dpwjbsxqtam5n.cloudfront.net/sales/2021/method-text.svg @elseif($page === 'coaches')https://dpwjbsxqtam5n.cloudfront.net/sales/2021/coaches-text.svg @elseif($page === 'songs')https://dpwjbsxqtam5n.cloudfront.net/sales/2021/songs-text.svg @endif"
                     alt="{{$page}} logo"
-                    style="filter:@if($theme === 'drumeo')invert(1) brightness(.35) sepia(1) saturate(50) hue-rotate(195deg); @elseif($theme === 'pianote')invert(21%) sepia(91%) saturate(4092%) hue-rotate(344deg) brightness(96%) contrast(102%); @elseif($theme === 'guitareo')invert(55%) sepia(45%) saturate(5847%) hue-rotate(141deg) brightness(110%) contrast(101%); @elseif($theme === 'singeo')invert(11%) sepia(100%) saturate(4932%) hue-rotate(281deg) brightness(105%) contrast(108%); @endif"
+                    style="filter:@if($theme === 'drumeo')invert(1) brightness(.35) sepia(1) saturate(50) hue-rotate(195deg); @elseif($theme === 'pianote')invert(21%) sepia(91%) saturate(4092%) hue-rotate(344deg) brightness(96%) contrast(102%); @elseif($theme === 'guitareo')invert(55%) sepia(45%) saturate(5847%) hue-rotate(141deg) brightness(110%) contrast(101%); @elseif($theme === 'singeo')invert(24%) sepia(99%) saturate(7465%) hue-rotate(275deg) brightness(85%) contrast(125%); @endif"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
                 />
@@ -84,7 +77,7 @@
             alt="{{$page}} thumb"
             loading="lazy"
             onload="this.classList.remove('opacity-0')"
-            @if($page === 'songs') x-on:click="trailer = true" @endif
+            @if($page === 'songs') x-on:click="soundslice = true" @endif
         />
     </header>
 

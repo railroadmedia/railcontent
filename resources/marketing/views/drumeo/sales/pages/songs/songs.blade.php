@@ -16,7 +16,7 @@
 
 @section('body-data')
     x-data ='{
-    trailer : false
+    soundslice : false
     }'
 @endsection
 
@@ -24,7 +24,7 @@
 
 @section('header', 'Play your favorite songs.')
 
-@section('desc', 'Get 5000+ note-for-note song breakdowns for every style, era, and skill with handy play-along tools')
+@section('desc', 'Get 5000+ note-for-note song breakdowns for every style, era, and skill with handy play-along tools.')
 
 @section('page-body')
     <section class="py-12 md:py-20">
@@ -39,22 +39,22 @@
                             next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
-                        perPage: 6.3,
+                        perPage: 6.5,
                         perMove: 1,
                         type: 'loop',
                         interval: 2000,
                         breakpoints: {
                             1160: {
-                                perPage: 5.3,
+                                perPage: 5.5,
                             },
                             900: {
-                                perPage: 4.3,
+                                perPage: 4.5,
                             },
                             760: {
-                                perPage: 3.3,
+                                perPage: 3.5,
                             },
                             590: {
-                                perPage: 2.3,
+                                perPage: 2.5,
                             },
                         },
                     ",
@@ -83,27 +83,27 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: '  splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',
+                            arrow: 'splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',
                             prev: 'hidden',
                             next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
-                        perPage: 6.3,
+                        perPage: 6.5,
                         perMove: 1,
                         type: 'loop',
                         interval: 2000,
                         breakpoints: {
                             1160: {
-                                perPage: 5.3,
+                                perPage: 5.5,
                             },
                             900: {
-                                perPage: 4.3,
+                                perPage: 4.5,
                             },
                             760: {
-                                perPage: 3.3,
+                                perPage: 3.5,
                             },
                             590: {
-                                perPage: 2.3,
+                                perPage: 2.5,
                             },
                         },
                     ",
@@ -132,27 +132,27 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: ' splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',
+                            arrow: 'splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',
                             prev: 'hidden',
                             next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
-                        perPage: 6.3,
+                        perPage: 6.5,
                         perMove: 1,
                         type: 'loop',
                         interval: 2000,
                         breakpoints: {
                             1160: {
-                                perPage: 5.3,
+                                perPage: 5.5,
                             },
                             900: {
-                                perPage: 4.3,
+                                perPage: 4.5,
                             },
                             760: {
-                                perPage: 3.3,
+                                perPage: 3.5,
                             },
                             590: {
-                                perPage: 2.3,
+                                perPage: 2.5,
                             },
                         },
                     ",
@@ -181,27 +181,27 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: ' splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',
+                            arrow: 'splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',
                             prev: 'hidden',
                             next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
-                        perPage: 6.3,
+                        perPage: 6.5,
                         perMove: 1,
                         type: 'loop',
                         interval: 2000,
                         breakpoints: {
                             1160: {
-                                perPage: 5.3,
+                                perPage: 5.5,
                             },
                             900: {
-                                perPage: 4.3,
+                                perPage: 4.5,
                             },
                             760: {
-                                perPage: 3.3,
+                                perPage: 3.5,
                             },
                             590: {
-                                perPage: 2.3,
+                                perPage: 2.5,
                             },
                         },
                     ",
@@ -230,27 +230,27 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: ' splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',
+                            arrow: 'splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',
                             prev: 'hidden',
                             next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
-                        perPage: 6.3,
+                        perPage: 6.5,
                         perMove: 1,
                         type: 'loop',
                         interval: 2000,
                         breakpoints: {
                             1160: {
-                                perPage: 5.3,
+                                perPage: 5.5,
                             },
                             900: {
-                                perPage: 4.3,
+                                perPage: 4.5,
                             },
                             760: {
-                                perPage: 3.3,
+                                perPage: 3.5,
                             },
                             590: {
-                                perPage: 2.3,
+                                perPage: 2.5,
                             },
                         },
                     ",
@@ -279,27 +279,27 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: ' splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',
+                            arrow: 'splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',
                             prev: 'hidden',
                             next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
-                        perPage: 6.3,
+                        perPage: 6.5,
                         perMove: 1,
                         type: 'loop',
                         interval: 2000,
                         breakpoints: {
                             1160: {
-                                perPage: 5.3,
+                                perPage: 5.5,
                             },
                             900: {
-                                perPage: 4.3,
+                                perPage: 4.5,
                             },
                             760: {
-                                perPage: 3.3,
+                                perPage: 3.5,
                             },
                             590: {
-                                perPage: 2.3,
+                                perPage: 2.5,
                             },
                         },
                     ",
@@ -328,27 +328,27 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: ' splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',
+                            arrow: 'splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',
                             prev: 'hidden',
                             next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
-                        perPage: 6.3,
+                        perPage: 6.5,
                         perMove: 1,
                         type: 'loop',
                         interval: 2000,
                         breakpoints: {
                             1160: {
-                                perPage: 5.3,
+                                perPage: 5.5,
                             },
                             900: {
-                                perPage: 4.3,
+                                perPage: 4.5,
                             },
                             760: {
-                                perPage: 3.3,
+                                perPage: 3.5,
                             },
                             590: {
-                                perPage: 2.3,
+                                perPage: 2.5,
                             },
                         },
                     ",
@@ -377,27 +377,27 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: ' splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',
+                            arrow: 'splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',
                             prev: 'hidden',
                             next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
-                        perPage: 6.3,
+                        perPage: 6.5,
                         perMove: 1,
                         type: 'loop',
                         interval: 2000,
                         breakpoints: {
                             1160: {
-                                perPage: 5.3,
+                                perPage: 5.5,
                             },
                             900: {
-                                perPage: 4.3,
+                                perPage: 4.5,
                             },
                             760: {
-                                perPage: 3.3,
+                                perPage: 3.5,
                             },
                             590: {
-                                perPage: 2.3,
+                                perPage: 2.5,
                             },
                         },
                     ",
@@ -426,27 +426,27 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: ' splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',
+                            arrow: 'splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',
                             prev: 'hidden',
                             next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
-                        perPage: 6.3,
+                        perPage: 6.5,
                         perMove: 1,
                         type: 'loop',
                         interval: 2000,
                         breakpoints: {
                             1160: {
-                                perPage: 5.3,
+                                perPage: 5.5,
                             },
                             900: {
-                                perPage: 4.3,
+                                perPage: 4.5,
                             },
                             760: {
-                                perPage: 3.3,
+                                perPage: 3.5,
                             },
                             590: {
-                                perPage: 2.3,
+                                perPage: 2.5,
                             },
                         },
                     ",
@@ -475,27 +475,27 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: ' splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',
+                            arrow: 'splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',
                             prev: 'hidden',
                             next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
-                        perPage: 6.3,
+                        perPage: 6.5,
                         perMove: 1,
                         type: 'loop',
                         interval: 2000,
                         breakpoints: {
                             1160: {
-                                perPage: 5.3,
+                                perPage: 5.5,
                             },
                             900: {
-                                perPage: 4.3,
+                                perPage: 4.5,
                             },
                             760: {
-                                perPage: 3.3,
+                                perPage: 3.5,
                             },
                             590: {
-                                perPage: 2.3,
+                                perPage: 2.5,
                             },
                         },
                     ",
@@ -524,27 +524,27 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: ' splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',
+                            arrow: 'splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',
                             prev: 'hidden',
                             next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
-                        perPage: 6.3,
+                        perPage: 6.5,
                         perMove: 1,
                         type: 'loop',
                         interval: 2000,
                         breakpoints: {
                             1160: {
-                                perPage: 5.3,
+                                perPage: 5.5,
                             },
                             900: {
-                                perPage: 4.3,
+                                perPage: 4.5,
                             },
                             760: {
-                                perPage: 3.3,
+                                perPage: 3.5,
                             },
                             590: {
-                                perPage: 2.3,
+                                perPage: 2.5,
                             },
                         },
                     ",
@@ -577,7 +577,7 @@
     </section>
 
     @include('_partials.components.soundslice-modal',[
-        'name' => 'trailer',
+        'name' => 'soundslice',
         'video' => '162928'
     ])
 @stop

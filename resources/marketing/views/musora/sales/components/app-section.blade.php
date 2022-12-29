@@ -12,9 +12,9 @@
             >
             <div class="pr-4 lg:pr-7">
                 <h4 class="leading-normal mb-3 lg:mb-7"><strong>Available across web,<br> tablet, & mobile.</strong></h4>
-                <a class="inline-block" href="{!! $appleLink !!}" target="_blank">
+                <a class="inline-block" href="https://itunes.apple.com/us/app/musora/id1619053766?ls=1" target="_blank">
                     <img class="h-8 md:h-10 m-1" src="https://cdn.musora.com/image/fetch/w_260,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/app/download-on-app-store-button.png"></a>
-                <a class="inline-block" href="{!! $googleLink !!}" target="_blank">
+                <a class="inline-block" href="https://play.google.com/store/apps/details?id=com.musoraapp" target="_blank">
                     <img class="h-8 md:h-10 m-1" src="https://cdn.musora.com/image/fetch/w_260,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/app/google-play-button.png"></a>
             </div>
         </div>

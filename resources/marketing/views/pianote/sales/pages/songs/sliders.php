@@ -1,13 +1,12 @@
 <?php
-
     $classics = [
         [
-            'img' => '',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/tom-petty-and-the-heartbreakers-tom-petty-and-the-heartbreakers.jpg',
             'title' => 'American Girl',
             'artist' => 'Tom Petty And The Heartbreakers',
         ],
         [
-            'img' => '',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/andrea-bocelli-amore-the-best-of-andrea-bocelli-vivere.jpg',
             'title' => 'Because We Believe',
             'artist' => 'Andrea Bocelli',
         ],
@@ -17,7 +16,7 @@
             'artist' => 'Elton John',
         ],
         [
-            'img' => '',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/simon-and-garfunkel-bridge-over-troubled-water.jpg',
             'title' => 'Cecilia',
             'artist' => 'Simon & Garfunkel',
         ],
@@ -47,7 +46,7 @@
             'artist' => 'Aretha Franklin',
         ],
         [
-            'img' => '',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-september/album-art/tina-turner-whats-love-got-to-do-with-it.jpg',
             'title' => 'What’s Love Got To Do With It',
             'artist' => 'Tina Turner',
         ],
@@ -55,7 +54,7 @@
 
     $modernPops = [
         [
-            'img' => '',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/lady-gaga-joanne.jpg',
             'title' => 'A Million Reasons',
             'artist' => 'Lady Gaga',
         ],
@@ -65,7 +64,7 @@
             'artist' => 'Vanessa Carlton',
         ],
         [
-            'img' => '',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/john-legend-love-in-the-future.jpg',
             'title' => 'All Of Me',
             'artist' => 'John Legend',
         ],
@@ -90,12 +89,12 @@
             'artist' => 'Snow Patrol',
         ],
         [
-            'img' => '',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/the-chainsmokers-halsey-collage.jpg',
             'title' => 'Closer',
             'artist' => 'The Chainsmokers, Halsey',
         ],
         [
-            'img' => '',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/anna-kendrick-pitch-perfect-soundtrack.jpg',
             'title' => 'Cups (When I\'m Gone)',
             'artist' => 'Anna Kendrick',
         ],
@@ -108,25 +107,25 @@
 
     $classicals = [
         [
-            'img' => '',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/pachebel-.jpg',
             'title' => 'Canon in D',
             'artist' => 'Pachebel',
         ],
         [
-            'img' => '',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/debussy-.jpg',
             'title' => 'Clair de Lune',
             'artist' => 'Debussy',
         ],
         [
-            'img' => '',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/einaudi-winds-of-change.jpg',
             'title' => 'Experience',
             'artist' => 'Einaudi',
         ],
-        [
-            'img' => '',
-            'title' => 'Fantasie-Impromptu',
-            'artist' => 'Chopin',
-        ],
+//        [
+//            'img' => '',
+//            'title' => 'Fantasie-Impromptu',
+//            'artist' => 'Chopin',
+//        ],
         [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/261104-card-thumbnail-maxres-1593253480.jpg ',
             'title' => 'Fur Elise',
@@ -142,18 +141,18 @@
             'title' => 'Hungarian Dance No. 5',
             'artist' => 'Brahms',
         ],
+//        [
+//            'img' => '',
+//            'title' => 'Ode To Joy',
+//            'artist' => 'Beethoven',
+//        ],
+//        [
+//            'img' => '',
+//            'title' => 'Sonata No. 16 in C Major',
+//            'artist' => 'Wolfgang Amadeus Mozart',
+//        ],
         [
-            'img' => '',
-            'title' => 'Ode To Joy',
-            'artist' => 'Beethoven',
-        ],
-        [
-            'img' => '',
-            'title' => 'Sonata No. 16 in C Major',
-            'artist' => 'Wolfgang Amadeus Mozart',
-        ],
-        [
-            'img' => '',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/tchaikovsky-.jpg',
             'title' => 'Swan Lake Waltz',
             'artist' => 'Tchaikovsky',
         ],
@@ -161,32 +160,32 @@
 
     $jazz = [
         [
-            'img' => '',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/bobby-mcferrin-simple-pleasures.jpg',
             'title' => 'Don’t Worry Be Happy',
             'artist' => 'Bobby McFerrin',
         ],
         [
-            'img' => '',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/ella-fitzgerald-dream-a-little-dream.jpg',
             'title' => 'Dream A Little Dream',
             'artist' => 'Ella Fitzgerald',
         ],
         [
-            'img' => '',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/ray-charles-the-genius-hits-the-road.jpg',
             'title' => 'Georgia On My Mind',
             'artist' => 'Ray Charles',
         ],
         [
-            'img' => '',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/milt-gabler-duke-ellington-.jpg',
             'title' => 'In A Mellow Tone',
             'artist' => 'Milt Gabler, Duke Ellington',
         ],
         [
-            'img' => '',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/duke-ellington-manny-kurtz-irving-mills-.jpg',
             'title' => 'In A Sentimental Mood',
             'artist' => 'Duke Ellington, Manny Kurtz, Irving Mills',
         ],
         [
-            'img' => '',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/judy-garland-over-the-rainbow-1629605191.jpg',
             'title' => 'Over The Rainbow',
             'artist' => 'Judy Garland',
         ],
@@ -196,20 +195,20 @@
             'artist' => 'Miles Davis',
         ],
         [
-            'img' => '',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/ben-bernie-kenneth-casey-maceo-pinkard-.jpg',
             'title' => 'Sweet Georgia Brown',
             'artist' => 'Ben Bernie, Kenneth Casey, Maceo Pinkard',
         ],
-        [
-            'img' => '',
-            'title' => 'The Way You Look Tonight',
-            'artist' => 'Frank Sinatra',
-        ],
-        [
-            'img' => '',
-            'title' => 'You Are My Sunshine',
-            'artist' => 'Wayne King',
-        ],
+//        [
+//            'img' => '',
+//            'title' => 'The Way You Look Tonight',
+//            'artist' => 'Frank Sinatra',
+//        ],
+//        [
+//            'img' => '',
+//            'title' => 'You Are My Sunshine',
+//            'artist' => 'Wayne King',
+//        ],
     ];
 
     $musicals = [
@@ -349,11 +348,11 @@
             'title' => '(Everything I Do) I Do It For You',
             'artist' => 'Bryan Adams',
         ],
-        [
-            'img' => '',
-            'title' => 'Good Golly Miss Molly',
-            'artist' => 'Little Richard',
-        ],
+//        [
+//            'img' => '',
+//            'title' => 'Good Golly Miss Molly',
+//            'artist' => 'Little Richard',
+//        ],
         [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2021-jan/album-art/Elvis Presley-Jailhouse Rock.jpg',
             'title' => 'Jailhouse Rock',
@@ -377,11 +376,11 @@
             'title' => 'Believer',
             'artist' => 'Imagine Dragons',
         ],
-        [
-            'img' => '',
-            'title' => 'Brick',
-            'artist' => 'Ben Folds Five',
-        ],
+//        [
+//            'img' => '',
+//            'title' => 'Brick',
+//            'artist' => 'Ben Folds Five',
+//        ],
         [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/evanescence-bring-me-to-life.jpg',
             'title' => 'Bring Me To Life',
@@ -397,11 +396,11 @@
             'title' => 'Mr. Brightside',
             'artist' => 'The Killers',
         ],
-        [
-            'img' => '',
-            'title' => 'My Happy Ending',
-            'artist' => 'Avril Lavigne',
-        ],
+//        [
+//            'img' => '',
+//            'title' => 'My Happy Ending',
+//            'artist' => 'Avril Lavigne',
+//        ],
         [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-dec/album-art/bastille-pompeii.jpg',
             'title' => 'Pompeii',
@@ -425,13 +424,13 @@
     ];
 
     $country = [
+//        [
+//            'img' => '',
+//            'title' => 'Always On My Mind',
+//            'artist' => 'Willie Nelson',
+//        ],
         [
-            'img' => '',
-            'title' => 'Always On My Mind',
-            'artist' => 'Willie Nelson',
-        ],
-        [
-            'img' => '',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/lonestar-lonely-grill.jpg',
             'title' => 'Amazed',
             'artist' => 'Lonestar',
         ],
@@ -441,12 +440,12 @@
             'artist' => 'Rascal Flatts',
         ],
         [
-            'img' => '',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/florida-georgia-line-heres-to-the-good-times.jpg',
             'title' => 'Cruise',
             'artist' => 'Florida Georgia Line',
         ],
         [
-            'img' => '',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/blake-shelton-red-river-blue.jpg',
             'title' => 'God Gave Me You',
             'artist' => 'Blake Shelton',
         ],
@@ -456,7 +455,7 @@
             'artist' => 'Johnny Cash',
         ],
         [
-            'img' => '',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/hank-williams-i-saw-the-light.jpg',
             'title' => 'I Saw The Light',
             'artist' => 'Hank Williams',
         ],
@@ -471,7 +470,7 @@
             'artist' => 'Dolly Parton',
         ],
         [
-            'img' => '',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/shania-twain-come-on-over.jpg',
             'title' => 'You\'re Still The One',
             'artist' => 'Shania Twain',
         ],
@@ -484,7 +483,7 @@
             'artist' => 'John Legend',
         ],
         [
-            'img' => '',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/leona-lewis-spirit.jpg',
             'title' => 'Bleeding Love',
             'artist' => 'Leona Lewis',
         ],
@@ -499,27 +498,27 @@
             'artist' => 'Alicia Keys',
         ],
         [
-            'img' => '',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/whitney-houston-whitney-houston.jpg',
             'title' => 'Greatest Love Of All',
             'artist' => 'Whitney Houston',
         ],
         [
-            'img' => '',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/r-kelly-i-believe-i-can-fly.jpg',
             'title' => 'I Believe I Can Fly',
             'artist' => 'R. Kelly',
         ],
         [
-            'img' => '',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2021-jan/album-art/a-day-to-remember-sometimes-youre-the-hammer.jpg',
             'title' => 'I Swear',
             'artist' => 'All-4-One',
         ],
         [
-            'img' => '',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/roberta-flack-killing-me-softly.jpg',
             'title' => 'Killing Me Softly',
             'artist' => 'Roberta Flack',
         ],
         [
-            'img' => '',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/tlc-fanmail.jpg',
             'title' => 'No Scrubs',
             'artist' => 'TLC',
         ],
@@ -532,7 +531,7 @@
 
     $worship = [
         [
-            'img' => '',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/matt-redman-spirit-and-song-disc-m.jpg',
             'title' => '10,000 Reasons (Bless The Lord)',
             'artist' => 'Matt Redman',
         ],

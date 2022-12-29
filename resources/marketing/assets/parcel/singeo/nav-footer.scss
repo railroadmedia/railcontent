@@ -104,10 +104,10 @@ a {
   }
     &.promo {
         border-color: $promoColor;
-        //color: #000;
+        color: #000;
         &:hover {
             background:lighten($promoColor, 10%) ;
-            //color: #000;
+            color: #000;
         }
     }
 
@@ -873,4 +873,9 @@ iframe[name='google_conversion_frame'] {
   font-size: 0 !important;
   margin-top: -13px;
   float: left;
+}
+
+.FabButtonFramecss__FabButtonFrameUI-sc-y1b4md-0.iCEwMd.BeaconFabButtonFrame {
+    bottom:5px!important;
+    right:3px!important;
 }

@@ -44,7 +44,7 @@
                         anytime with real teachers.</strong></h2>
                 <h5 class="leading-tight text-light-navy my-4"><strong style="font-weight: 900;">Technology meets tradition:</strong> Online video lessons you can watch anytime,<br class="hidden sm:inline">
                     along with real teachers who’ll support you every step of the way.</h5>
-                <a href="#orderNow" class="join anchor-slide memcta">Start Your Free Trial »</a>
+                <a href="#customize-anchor" class="join anchor-slide memcta">Start Your Free Trial »</a>
             </div>
             <div class="absolute inset-0 z-0 hidden lg:block" style="background:linear-gradient(to right, #0e1213, transparent 15%, transparent 85%, #0e1213);"></div>
         </div>
@@ -83,7 +83,7 @@
             </div>
     </section>
 
-    <a href="#orderNow" style="background:linear-gradient(to bottom, #022040, #01050f);"
+    <a href="#customize-anchor" style="background:linear-gradient(to bottom, #022040, #01050f);"
             class="promo-banner anchor-slide block text-center w-full transition-opacity duration-300 overflow-hidden whitespace-nowrap text-white bg-cover bg-center shadow-md py-1 hover:text-gray-100 z-0 mx-auto -mt-10 text-xs">
         <div class="container mx-auto relative">
             <div class="inline-block align-middle text-center">
@@ -150,6 +150,6 @@
         <div class="aspect-16:9 w-full relative">
             <iframe class="absolute w-full h-full reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/567535328?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
         </div>
-        <a href="#orderNow" class="join anchor-slide methodcta my-3" data-close aria-label="Close modal">Start Your Free Trial »</a>
+        <a href="#customize-anchor" class="join anchor-slide methodcta my-3" data-close aria-label="Close modal">Start Your Free Trial »</a>
     </div>
 @endsection

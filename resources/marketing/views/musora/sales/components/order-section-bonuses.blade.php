@@ -18,7 +18,7 @@
             <img class="hidden sm:inline-block h-7 lg:h-8 mt-5" alt="promo logo" src="{{ $promoLogo }}">
             <img class="inline-block sm:hidden h-12 mt-4" alt="mobile promo logo" src="{{ $promoLogoM }}">
             <h4 class="leading-tight my-2 uppercase">{!! $header !!}</h4>
-            <a class="join {{ $theme }}-blue my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="{{ $buttonLink }}" {{--data-open="orderModal"--}}>GET Started &raquo;</a>
+            <a class="join {{ $theme }} my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="{{ $buttonLink }}" {{--data-open="orderModal"--}}>GET Started &raquo;</a>
             <p class="leading-tight text-sm"><em>First year discount: <s class="opacity-40">${{ $fullPrice }}</s> ${{ $price }}.<br class="inline sm:hidden"> Cancel anytime. 90-day guarantee.</em></p>
             <h3 class="leading-tight mt-8 mb-4 sm:my-8 uppercase">{!!  $subDescription  !!}</h3>
         </div>
@@ -84,24 +84,48 @@
                     </p>
                 </div>
             @endforeach
-            <div class="flex flex-wrap sm:flex-nowrap justify-center items-start my-4">
+            <div class="flex flex-wrap sm:flex-nowrap justify-center items-start my-2 sm:my-4">
                 @if($theme !== 'drumeo')
-                    <img alt="brand tile" class="h-20 sm:h-24 md:h-28 lg:h-36 mb-2 sm:mb-0 mx-2 lg:mx-3 rounded-xl" src="https://drumeo-assets.s3.amazonaws.com/sales/2023/guitareo-included.jpg">
+                    <div class="relative mb-3 sm:mb-0 mx-1 sm:mx-2 lg:mx-3">
+                        <img alt="brand tile" class="hidden sm:inline-block sm:h-24 md:h-28 lg:h-36 rounded-xl"
+                            src="https://drumeo-assets.s3.amazonaws.com/sales/2023/drumeo-bonus.jpg">
+                        <img alt="brand tile" class="sm:hidden inline-block h-44 rounded-xl"
+                            src="https://drumeo-assets.s3.amazonaws.com/sales/2023/drumeo-bonus-m.jpg">
+                        <p class="absolute w-full text-sm lg:text-base uppercase font-bebas" style="bottom: 20%;">DRUM LESSONS INCLUDED</p>
+                    </div>
                 @endif
                 @if($theme !== 'pianote')
-                    <img alt="brand tile" class="h-20 sm:h-24 md:h-28 lg:h-36 mb-2 sm:mb-0 mx-2 lg:mx-3 rounded-xl" src="https://drumeo-assets.s3.amazonaws.com/sales/2023/pianote-included.jpg">
+                    <div class="relative mb-3 sm:mb-0 mx-1 sm:mx-2 lg:mx-3">
+                        <img alt="brand tile" class="hidden sm:inline-block sm:h-24 md:h-28 lg:h-36 rounded-xl"
+                            src="https://drumeo-assets.s3.amazonaws.com/sales/2023/pianote-bonus.jpg">
+                        <img alt="brand tile" class="sm:hidden inline-block h-44 rounded-xl"
+                            src="https://drumeo-assets.s3.amazonaws.com/sales/2023/pianote-bonus-m.jpg">
+                        <p class="absolute w-full text-sm lg:text-base uppercase font-bebas" style="bottom: 20%;">PIANO LESSONS INCLUDED</p>
+                    </div>
                 @endif
                 @if($theme !== 'guitareo')
-                    <img alt="brand tile" class="h-20 sm:h-24 md:h-28 lg:h-36 mb-2 sm:mb-0 mx-2 lg:mx-3 rounded-xl" src="https://drumeo-assets.s3.amazonaws.com/sales/2023/guitareo-included.jpg">
+                    <div class="relative mb-3 sm:mb-0 mx-1 sm:mx-2 lg:mx-3">
+                        <img alt="brand tile" class="hidden sm:inline-block sm:h-24 md:h-28 lg:h-36 rounded-xl"
+                            src="https://drumeo-assets.s3.amazonaws.com/sales/2023/guitareo-bonus.jpg">
+                        <img alt="brand tile" class="sm:hidden inline-block h-44 rounded-xl"
+                            src="https://drumeo-assets.s3.amazonaws.com/sales/2023/guitareo-bonus-m.jpg">
+                        <p class="absolute w-full text-sm lg:text-base uppercase font-bebas" style="bottom: 20%;">GUITAR LESSONS INCLUDED</p>
+                    </div>
                 @endif
                 @if($theme !== 'singeo')
-                    <img alt="brand tile" class="h-20 sm:h-24 md:h-28 lg:h-36 mb-2 sm:mb-0 mx-2 lg:mx-3 rounded-xl" src="https://drumeo-assets.s3.amazonaws.com/sales/2023/singeo-included.jpg">
+                    <div class="relative mb-3 sm:mb-0 mx-1 sm:mx-2 lg:mx-3">
+                        <img alt="brand tile" class="hidden sm:inline-block sm:h-24 md:h-28 lg:h-36 rounded-xl"
+                            src="https://drumeo-assets.s3.amazonaws.com/sales/2023/singeo-bonus.jpg">
+                        <img alt="brand tile" class="sm:hidden inline-block h-44 rounded-xl"
+                            src="https://drumeo-assets.s3.amazonaws.com/sales/2023/singeo-bonus-m.jpg">
+                        <p class="absolute w-full text-sm lg:text-base uppercase font-bebas" style="bottom: 20%;">SINGING LESSONS INCLUDED</p>
+                    </div>
                 @endif
             </div>
         </div>
         {{-- <p class=" mt-4 md:mt-5" style="display:inline-block;background: -webkit-linear-gradient(20deg, #03c8ac, #0976db, #9a01ee, #f61a30);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"><strong>By joining today, we’ll donate 20% of your new membership<br class="hidden sm:inline"> towards the <a target="_blank" href="https://musicounts.ca/en/take-action/ways-of-giving/fundraise-on-musicounts-behalf/fundraisers-supporting-musicounts/give-the-gift-of-music-with-musora/"><u>MusiCounts Band Aid Program</u></a>.</strong></p> --}}
         {{--            <h4 class="leading-tight mt-4"><strong>Only $12.50/month <br class="inline sm:hidden">(billed annually at ${{ Prices::$drumeoEdgeAnnual }}).</strong></h4>--}}
-        <a class="join {{ $theme }}-blue my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="/laravel/public/shopping-cart/api/query?products[DLM]=1,year,1&products[quietpad]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[GHFAL-DIGI]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[learn-songs-faster-pack]=1&locked=true" {{--data-open="orderModal"--}}>GET Started &raquo;</a>
+        <a class="join {{ $theme }} my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="/laravel/public/shopping-cart/api/query?products[DLM]=1,year,1&products[quietpad]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[GHFAL-DIGI]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[learn-songs-faster-pack]=1&locked=true" {{--data-open="orderModal"--}}>GET Started &raquo;</a>
         {{-- <p class="leading-tight">Billed annually at <s class="opacity-40">${{ Prices::$drumeoEdgeAnnualFull }}</s>${{ Prices::$drumeoEdgeAnnual }} per year.</p> --}}
         <br>
         <a class="inline-block text-light-navy mt-2" href="{{ $altButtonLink }}"><p><u><em>Or start a monthly membership for <br class="inline-block md:hidden">${{ $altPrice }}/month. (no bonuses)</em></u></p></a>

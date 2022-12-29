@@ -26,7 +26,7 @@
 
 @section('global-body')
     @include('pianote._partials._nav', [
-        "joinVersion" => true
+        "subscriptionVersion" => true
     ])
 
     <section class="py-12 md:py-20 bg-center bg-cover bg-no-repeat" style="background-color:#1c0203;background-image:url('https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/quiz/bg.jpg')">

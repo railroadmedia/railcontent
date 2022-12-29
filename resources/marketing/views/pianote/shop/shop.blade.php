@@ -35,7 +35,7 @@
     <meta property="og:title" content="Pianote Shop">
     <meta name="description" content="Get Lessons, T-Shirts, & Much More!">
     <meta property="og:description" content="Get Lessons, T-Shirts, & Much More!">
-    <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/og-image.jpg">
+    <meta property="og:image" content="https://pianote.s3.amazonaws.com/sales/2023/share-image-pianote.jpg">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 
     <link href="https://fonts.googleapis.com/css?family=Oswald:500" rel="stylesheet">

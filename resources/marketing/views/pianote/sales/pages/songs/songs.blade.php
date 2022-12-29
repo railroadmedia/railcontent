@@ -15,7 +15,7 @@
 
 @section('body-data')
     x-data ='{
-    trailer : false
+    soundslice : false
     }'
 @endsection
 
@@ -33,35 +33,34 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
+                            arrow: 'splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',
                             prev: 'hidden',
                             next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
-                        perPage: 6,
+                        perPage: 6.5,
                         perMove: 1,
-                        gap: '1rem',
                         type: 'loop',
                         interval: 2000,
                         breakpoints: {
                             1160: {
-                                perPage: 5,
+                                perPage: 5.5,
                             },
                             900: {
-                                perPage: 4,
+                                perPage: 4.5,
                             },
                             760: {
-                                perPage: 3,
+                                perPage: 3.5,
                             },
                             590: {
-                                perPage: 2,
+                                perPage: 2.5,
                             },
                         },
                     ",
                 ])
                     @slot('content')
                         @foreach ($classics as $slide)
-                            <li class="splide__slide">
+                            <li class="splide__slide px-1">
                                 <div>
                                     <img
                                         class="rounded-xl mb-1 transition-opacity opacity-0"
@@ -83,35 +82,34 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
+                            arrow: 'splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',
                             prev: 'hidden',
                             next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
-                        perPage: 6,
+                        perPage: 6.5,
                         perMove: 1,
-                        gap: '1rem',
                         type: 'loop',
                         interval: 2000,
                         breakpoints: {
                             1160: {
-                                perPage: 5,
+                                perPage: 5.5,
                             },
                             900: {
-                                perPage: 4,
+                                perPage: 4.5,
                             },
                             760: {
-                                perPage: 3,
+                                perPage: 3.5,
                             },
                             590: {
-                                perPage: 2,
+                                perPage: 2.5,
                             },
                         },
                     ",
                 ])
                     @slot('content')
                         @foreach ($modernPops as $slide)
-                            <li class="splide__slide">
+                            <li class="splide__slide px-1">
                                 <div>
                                     <img
                                         class="rounded-xl mb-1 transition-opacity opacity-0"
@@ -133,35 +131,34 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
+                            arrow: 'splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',
                             prev: 'hidden',
                             next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
-                        perPage: 6,
+                        perPage: 6.5,
                         perMove: 1,
-                        gap: '1rem',
                         type: 'loop',
                         interval: 2000,
                         breakpoints: {
                             1160: {
-                                perPage: 5,
+                                perPage: 5.5,
                             },
                             900: {
-                                perPage: 4,
+                                perPage: 4.5,
                             },
                             760: {
-                                perPage: 3,
+                                perPage: 3.5,
                             },
                             590: {
-                                perPage: 2,
+                                perPage: 2.5,
                             },
                         },
                     ",
                 ])
                     @slot('content')
                         @foreach ($classicals as $slide)
-                            <li class="splide__slide">
+                            <li class="splide__slide px-1">
                                 <div>
                                     <img
                                         class="rounded-xl mb-1 transition-opacity opacity-0"
@@ -183,35 +180,34 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
+                            arrow: 'splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',
                             prev: 'hidden',
                             next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
-                        perPage: 6,
+                        perPage: 6.5,
                         perMove: 1,
-                        gap: '1rem',
                         type: 'loop',
                         interval: 2000,
                         breakpoints: {
                             1160: {
-                                perPage: 5,
+                                perPage: 5.5,
                             },
                             900: {
-                                perPage: 4,
+                                perPage: 4.5,
                             },
                             760: {
-                                perPage: 3,
+                                perPage: 3.5,
                             },
                             590: {
-                                perPage: 2,
+                                perPage: 2.5,
                             },
                         },
                     ",
                 ])
                     @slot('content')
                         @foreach ($jazz as $slide)
-                            <li class="splide__slide">
+                            <li class="splide__slide px-1">
                                 <div>
                                     <img
                                         class="rounded-xl mb-1 transition-opacity opacity-0"
@@ -228,140 +224,131 @@
                     @endslot
                 @endcomponent
             </div>
-            <div class="mb-6">
-                <h4 class="font-extrabold mb-4">Musicals</h4>
-                @component('_partials.components.carousel',[
-                    'xdata' => "
-                        classes: {
-                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
-                            prev: 'hidden',
-                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
-                            pagination: 'hidden',
-                        },
-                        perPage: 6,
-                        perMove: 1,
-                        gap: '1rem',
-                        type: 'loop',
-                        interval: 2000,
-                        breakpoints: {
-                            1160: {
-                                perPage: 5,
-                            },
-                            900: {
-                                perPage: 4,
-                            },
-                            760: {
-                                perPage: 3,
-                            },
-                            590: {
-                                perPage: 2,
-                            },
-                        },
-                    ",
-                ])
-                    @slot('content')
-                        @foreach ($musicals as $slide)
-                            <li class="splide__slide">
-                                <div>
-                                    <img
-                                        class="rounded-xl mb-1 transition-opacity opacity-0"
-                                        src="https://cdn.musora.com/image/fetch/w_250,q_auto:best/{{$slide['img']}}"
-                                        alt="{{$slide['title']}} img"
-                                        loading="lazy"
-                                        onload="this.classList.remove('opacity-0')"
-                                    >
-                                    <p class="font-bold mb-1 leading-tight">{{$slide['title']}}</p>
-                                    <p class="text-[#838C98] leading-tight">{{$slide['artist']}}</p>
-                                </div>
-                            </li>
-                        @endforeach
-                    @endslot
-                @endcomponent
-            </div>
-            <div class="mb-6">
-                <h4 class="font-extrabold mb-4">Disney</h4>
-                @component('_partials.components.carousel',[
-                    'xdata' => "
-                        classes: {
-                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
-                            prev: 'hidden',
-                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
-                            pagination: 'hidden',
-                        },
-                        perPage: 6,
-                        perMove: 1,
-                        gap: '1rem',
-                        type: 'loop',
-                        interval: 2000,
-                        breakpoints: {
-                            1160: {
-                                perPage: 5,
-                            },
-                            900: {
-                                perPage: 4,
-                            },
-                            760: {
-                                perPage: 3,
-                            },
-                            590: {
-                                perPage: 2,
-                            },
-                        },
-                    ",
-                ])
-                    @slot('content')
-                        @foreach ($disney as $slide)
-                            <li class="splide__slide">
-                                <div>
-                                    <img
-                                        class="rounded-xl mb-1 transition-opacity opacity-0"
-                                        src="https://cdn.musora.com/image/fetch/w_250,q_auto:best/{{$slide['img']}}"
-                                        alt="{{$slide['title']}} img"
-                                        loading="lazy"
-                                        onload="this.classList.remove('opacity-0')"
-                                    >
-                                    <p class="font-bold mb-1 leading-tight">{{$slide['title']}}</p>
-                                    <p class="text-[#838C98] leading-tight">{{$slide['artist']}}</p>
-                                </div>
-                            </li>
-                        @endforeach
-                    @endslot
-                @endcomponent
-            </div>
+{{--            <div class="mb-6">--}}
+{{--                <h4 class="font-extrabold mb-4">Musicals</h4>--}}
+{{--                @component('_partials.components.carousel',[--}}
+{{--                    'xdata' => "--}}
+{{--                        classes: {--}}
+{{--                            arrow: 'splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',--}}
+{{--                            prev: 'hidden',--}}
+{{--                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',--}}
+{{--                            pagination: 'hidden',--}}
+{{--                        },--}}
+{{--                        perPage: 6,--}}
+{{--                        perMove: 1,--}}
+{{--                        type: 'loop',--}}
+{{--                        interval: 2000,--}}
+{{--                        breakpoints: {--}}
+{{--                            1024: {--}}
+{{--                                perPage: 5,--}}
+{{--                            },--}}
+{{--                            768: {--}}
+{{--                                perPage: 3,--}}
+{{--                            },--}}
+{{--                            640: {--}}
+{{--                                perPage: 2,--}}
+{{--                            },--}}
+{{--                        },--}}
+{{--                    ",--}}
+{{--                ])--}}
+{{--                    @slot('content')--}}
+{{--                        @foreach ($musicals as $slide)--}}
+{{--                            <li class="splide__slide px-1">--}}
+{{--                                <div>--}}
+{{--                                    <img--}}
+{{--                                        class="rounded-xl mb-1 transition-opacity opacity-0"--}}
+{{--                                        src="https://cdn.musora.com/image/fetch/w_250,q_auto:best/{{$slide['img']}}"--}}
+{{--                                        alt="{{$slide['title']}} img"--}}
+{{--                                        loading="lazy"--}}
+{{--                                        onload="this.classList.remove('opacity-0')"--}}
+{{--                                    >--}}
+{{--                                    <p class="font-bold mb-1 leading-tight">{{$slide['title']}}</p>--}}
+{{--                                    <p class="text-[#838C98] leading-tight">{{$slide['artist']}}</p>--}}
+{{--                                </div>--}}
+{{--                            </li>--}}
+{{--                        @endforeach--}}
+{{--                    @endslot--}}
+{{--                @endcomponent--}}
+{{--            </div>--}}
+{{--            <div class="mb-6">--}}
+{{--                <h4 class="font-extrabold mb-4">Disney</h4>--}}
+{{--                @component('_partials.components.carousel',[--}}
+{{--                    'xdata' => "--}}
+{{--                        classes: {--}}
+{{--                            arrow: 'splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',--}}
+{{--                            prev: 'hidden',--}}
+{{--                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',--}}
+{{--                            pagination: 'hidden',--}}
+{{--                        },--}}
+{{--                        perPage: 6,--}}
+{{--                        perMove: 1,--}}
+{{--                        type: 'loop',--}}
+{{--                        interval: 2000,--}}
+{{--                        breakpoints: {--}}
+{{--                            1024: {--}}
+{{--                                perPage: 5,--}}
+{{--                            },--}}
+{{--                            768: {--}}
+{{--                                perPage: 3,--}}
+{{--                            },--}}
+{{--                            640: {--}}
+{{--                                perPage: 2,--}}
+{{--                            },--}}
+{{--                        },--}}
+{{--                    ",--}}
+{{--                ])--}}
+{{--                    @slot('content')--}}
+{{--                        @foreach ($disney as $slide)--}}
+{{--                            <li class="splide__slide px-1">--}}
+{{--                                <div>--}}
+{{--                                    <img--}}
+{{--                                        class="rounded-xl mb-1 transition-opacity opacity-0"--}}
+{{--                                        src="https://cdn.musora.com/image/fetch/w_250,q_auto:best/{{$slide['img']}}"--}}
+{{--                                        alt="{{$slide['title']}} img"--}}
+{{--                                        loading="lazy"--}}
+{{--                                        onload="this.classList.remove('opacity-0')"--}}
+{{--                                    >--}}
+{{--                                    <p class="font-bold mb-1 leading-tight">{{$slide['title']}}</p>--}}
+{{--                                    <p class="text-[#838C98] leading-tight">{{$slide['artist']}}</p>--}}
+{{--                                </div>--}}
+{{--                            </li>--}}
+{{--                        @endforeach--}}
+{{--                    @endslot--}}
+{{--                @endcomponent--}}
+{{--            </div>--}}
             <div class="mb-6">
                 <h4 class="font-extrabold mb-4">Rock Classics</h4>
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
+                            arrow: 'splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',
                             prev: 'hidden',
                             next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
-                        perPage: 6,
+                        perPage: 6.5,
                         perMove: 1,
-                        gap: '1rem',
                         type: 'loop',
                         interval: 2000,
                         breakpoints: {
                             1160: {
-                                perPage: 5,
+                                perPage: 5.5,
                             },
                             900: {
-                                perPage: 4,
+                                perPage: 4.5,
                             },
                             760: {
-                                perPage: 3,
+                                perPage: 3.5,
                             },
                             590: {
-                                perPage: 2,
+                                perPage: 2.5,
                             },
                         },
                     ",
                 ])
                     @slot('content')
                         @foreach ($rockClassics as $slide)
-                            <li class="splide__slide">
+                            <li class="splide__slide px-1">
                                 <div>
                                     <img
                                         class="rounded-xl mb-1 transition-opacity opacity-0"
@@ -383,35 +370,34 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
+                            arrow: 'splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',
                             prev: 'hidden',
                             next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
-                        perPage: 6,
+                        perPage: 6.5,
                         perMove: 1,
-                        gap: '1rem',
                         type: 'loop',
                         interval: 2000,
                         breakpoints: {
                             1160: {
-                                perPage: 5,
+                                perPage: 5.5,
                             },
                             900: {
-                                perPage: 4,
+                                perPage: 4.5,
                             },
                             760: {
-                                perPage: 3,
+                                perPage: 3.5,
                             },
                             590: {
-                                perPage: 2,
+                                perPage: 2.5,
                             },
                         },
                     ",
                 ])
                     @slot('content')
                         @foreach ($modernRock as $slide)
-                            <li class="splide__slide">
+                            <li class="splide__slide px-1">
                                 <div>
                                     <img
                                         class="rounded-xl mb-1 transition-opacity opacity-0"
@@ -433,35 +419,34 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
+                            arrow: 'splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',
                             prev: 'hidden',
                             next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
-                        perPage: 6,
+                        perPage: 6.5,
                         perMove: 1,
-                        gap: '1rem',
                         type: 'loop',
                         interval: 2000,
                         breakpoints: {
                             1160: {
-                                perPage: 5,
+                                perPage: 5.5,
                             },
                             900: {
-                                perPage: 4,
+                                perPage: 4.5,
                             },
                             760: {
-                                perPage: 3,
+                                perPage: 3.5,
                             },
                             590: {
-                                perPage: 2,
+                                perPage: 2.5,
                             },
                         },
                     ",
                 ])
                     @slot('content')
                         @foreach ($country as $slide)
-                            <li class="splide__slide">
+                            <li class="splide__slide px-1">
                                 <div>
                                     <img
                                         class="rounded-xl mb-1 transition-opacity opacity-0"
@@ -483,35 +468,34 @@
                 @component('_partials.components.carousel',[
                     'xdata' => "
                         classes: {
-                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
+                            arrow: 'splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',
                             prev: 'hidden',
                             next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
                             pagination: 'hidden',
                         },
-                        perPage: 6,
+                        perPage: 6.5,
                         perMove: 1,
-                        gap: '1rem',
                         type: 'loop',
                         interval: 2000,
                         breakpoints: {
                             1160: {
-                                perPage: 5,
+                                perPage: 5.5,
                             },
                             900: {
-                                perPage: 4,
+                                perPage: 4.5,
                             },
                             760: {
-                                perPage: 3,
+                                perPage: 3.5,
                             },
                             590: {
-                                perPage: 2,
+                                perPage: 2.5,
                             },
                         },
                     ",
                 ])
                     @slot('content')
                         @foreach ($rhythmandblues as $slide)
-                            <li class="splide__slide">
+                            <li class="splide__slide px-1">
                                 <div>
                                     <img
                                         class="rounded-xl mb-1 transition-opacity opacity-0"
@@ -528,66 +512,62 @@
                     @endslot
                 @endcomponent
             </div>
-            <div class="mb-10">
-                <h4 class="font-extrabold mb-4">Worship</h4>
-                @component('_partials.components.carousel',[
-                    'xdata' => "
-                        classes: {
-                            arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
-                            prev: 'hidden',
-                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
-                            pagination: 'hidden',
-                        },
-                        perPage: 6,
-                        perMove: 1,
-                        gap: '1rem',
-                        type: 'loop',
-                        interval: 2000,
-                        breakpoints: {
-                            1160: {
-                                perPage: 5,
-                            },
-                            900: {
-                                perPage: 4,
-                            },
-                            760: {
-                                perPage: 3,
-                            },
-                            590: {
-                                perPage: 2,
-                            },
-                        },
-                    ",
-                ])
-                    @slot('content')
-                        @foreach ($worship as $slide)
-                            <li class="splide__slide">
-                                <div>
-                                    <img
-                                        class="rounded-xl mb-1 transition-opacity opacity-0"
-                                        src="https://cdn.musora.com/image/fetch/w_250,q_auto:best/{{$slide['img']}}"
-                                        alt="{{$slide['title']}} img"
-                                        loading="lazy"
-                                        onload="this.classList.remove('opacity-0')"
-                                    >
-                                    <p class="font-bold mb-1 leading-tight">{{$slide['title']}}</p>
-                                    <p class="text-[#838C98] leading-tight">{{$slide['artist']}}</p>
-                                </div>
-                            </li>
-                        @endforeach
-                    @endslot
-                @endcomponent
-            </div>
-        </div>
+{{--            <div class="mb-10">--}}
+{{--                <h4 class="font-extrabold mb-4">Worship</h4>--}}
+{{--                @component('_partials.components.carousel',[--}}
+{{--                    'xdata' => "--}}
+{{--                        classes: {--}}
+{{--                            arrow: 'splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',--}}
+{{--                            prev: 'hidden',--}}
+{{--                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',--}}
+{{--                            pagination: 'hidden',--}}
+{{--                        },--}}
+{{--                        perPage: 6,--}}
+{{--                        perMove: 1,--}}
+{{--                        type: 'loop',--}}
+{{--                        interval: 2000,--}}
+{{--                        breakpoints: {--}}
+{{--                            1024: {--}}
+{{--                                perPage: 5,--}}
+{{--                            },--}}
+{{--                            768: {--}}
+{{--                                perPage: 3,--}}
+{{--                            },--}}
+{{--                            640: {--}}
+{{--                                perPage: 2,--}}
+{{--                            },--}}
+{{--                        },--}}
+{{--                    ",--}}
+{{--                ])--}}
+{{--                    @slot('content')--}}
+{{--                        @foreach ($worship as $slide)--}}
+{{--                            <li class="splide__slide px-1">--}}
+{{--                                <div>--}}
+{{--                                    <img--}}
+{{--                                        class="rounded-xl mb-1 transition-opacity opacity-0"--}}
+{{--                                        src="https://cdn.musora.com/image/fetch/w_250,q_auto:best/{{$slide['img']}}"--}}
+{{--                                        alt="{{$slide['title']}} img"--}}
+{{--                                        loading="lazy"--}}
+{{--                                        onload="this.classList.remove('opacity-0')"--}}
+{{--                                    >--}}
+{{--                                    <p class="font-bold mb-1 leading-tight">{{$slide['title']}}</p>--}}
+{{--                                    <p class="text-[#838C98] leading-tight">{{$slide['artist']}}</p>--}}
+{{--                                </div>--}}
+{{--                            </li>--}}
+{{--                        @endforeach--}}
+{{--                    @endslot--}}
+{{--                @endcomponent--}}
+{{--            </div>--}}
+{{--        </div>--}}
 
         <div class="text-center">
-            <h3 class="font-extrabold mb-6">Plus thousands more popular songs.</h3>
+            <h3 class="font-extrabold mb-6">Plus hundreds more popular songs.</h3>
             <a href="" class="mx-1 join bg-pianote smaller">Get started <i class="fas fa-arrow-right" aria-hidden="true"></i> </a>
         </div>
     </section>
 
-    {{--    @include('_partials.components.video-modal',[--}}
-    {{--        'name' => 'trailer',--}}
-    {{--        'video' => '772644658'--}}
-    {{--    ])--}}
+    @include('_partials.components.soundslice-modal',[
+        'name' => 'soundslice',
+        'video' => '162928'
+    ])
 @stop

@@ -9,6 +9,7 @@
           content="width=device-width, height=device-height, initial-scale=1, maximum-scale=5">
 
     @yield('meta')
+    @yield('global-head')
 
     {!! \App\Analytics\Tracker::trackPageView() !!}
 
@@ -19,6 +20,7 @@
     @include('guitareo._partials._fonts')
 
     @yield('styles')
+    @yield('page-styles')
 
     {!! \App\Analytics\Tracker::headBottom() !!}
 </head>
@@ -26,6 +28,8 @@
 <body class="@yield('body-class')">
 
 {!! \App\Analytics\Tracker::bodyTop() !!}
+
+    @yield('global-body')
 
     @yield('navigation')
 

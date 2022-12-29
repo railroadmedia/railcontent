@@ -5,7 +5,7 @@
     <meta property="og:title" content="Drumeo Trial">
     <meta property="og:url" content="https://www.drumeo.com/trial/">
     <meta name="description" content="Learn the drums faster with organized video lessons, legendary teachers, and better practice tools. 90-Day Guarantee. ">
-    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/sales/2022/og-image.jpg" style="display: none;">
+    <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/sales/2023/share-image-drumeo.jpg" style="display: none;">
     <meta property="og:description" content="Reach your drumming goals with organized video lessons, legendary teachers, and better practice tools. 90-Day Guarantee.">
     @if(empty($weekly))
         <meta name="robots" content="noindex">

@@ -25,7 +25,7 @@
                         <p class="w-1/3 leading-tight"><i class="fas fa-check text-{{ $theme }}"></i><br> {!! $pointThree !!}</p>
                     </div>
                     <div class="flex flex-wrap items-center justify-center sm:justify-start mt-6 sm:mt-5 lg:mt-10 sm:max-w-xs">
-                        <a class="w-full join {{ $theme }}-blue smaller mb-2 @if(!empty($promoVersion)) anchor-slide @endif"
+                        <a class="w-full join {{ $theme }} smaller mb-2 @if(!empty($promoVersion)) anchor-slide @endif"
                             @if(!empty($promoVersion))
                                 href="#customize-anchor"
                             @else
@@ -52,9 +52,9 @@
             <div class="w-full sm:w-5/12 hidden sm:block">
                     <div x-on:click="trailer = true;"
                         @if(!empty($promoVersion))
-                            class="relative bg-contain bg-center bg-no-repeat cursor-pointer autoplay-video" style="background-image:url(https://cdn.musora.com/image/fetch/w_850,q_auto:best/{!! $promoThumb !!});padding-bottom: 108%;"
+                            class="relative bg-contain bg-top bg-no-repeat cursor-pointer autoplay-video" style="background-image:url(https://cdn.musora.com/image/fetch/w_850,q_auto:best/{!! $promoThumb !!});padding-bottom: 108%;"
                         @else
-                            class="shadow-2xl rounded-xl aspect-1:1 overflow-hidden relative bg-cover bg-center cursor-pointer autoplay-video" style="background-image:url(https://cdn.musora.com/image/fetch/w_850,q_auto:best/{!! $thumb !!});"
+                            class="shadow-2xl rounded-xl aspect-1:1 overflow-hidden relative bg-cover bg-top cursor-pointer autoplay-video" style="background-image:url(https://cdn.musora.com/image/fetch/w_850,q_auto:best/{!! $thumb !!});"
                         @endif
                         >
                         <div class="join white smaller absolute bottom-2 left-2"><i class="fas fa-play"></i> Watch Trailer</div>

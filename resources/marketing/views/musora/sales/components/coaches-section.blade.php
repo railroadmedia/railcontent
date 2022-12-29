@@ -129,8 +129,8 @@
                                     @foreach ($course['images'] as $image)
                                         <li class="splide__slide flex flex-col items-center justify-center pb-10 px-1">
                                             <div class="relative w-full rounded-xl bg-cover bg-center" style="padding-bottom: 120%; background-image:url(https://cdn.musora.com/image/fetch/w_400,q_auto:best/{{$image['img']}});">
-                                                <div class="rounded-b-xl absolute w-full bottom-0 h-1/2 text-white text-center flex justify-center flex-col" style="background:linear-gradient(180deg, rgba(1, 5, 15, 0) 0%, #01050F 100%);">
-                                                    <h4 class="font-extrabold mb-2">{!! $image['title'] !!}</h4>
+                                                <div class="rounded-b-xl absolute w-full bottom-0 h-full text-white text-center flex justify-end flex-col pb-3 lg:pb-6" style="background:linear-gradient(180deg, rgba(1, 5, 15, 0) 50%, #01050F 100%);">
+                                                    <h4 class="font-extrabold mb-1 lg:mb-2">{!! $image['title'] !!}</h4>
                                                     <p class="leading-none">{{ $image['instructor'] }}</p>
                                                 </div>
                                             </div>
@@ -147,9 +147,9 @@
 
     <div class="text-center my-10 px-4 sm:px-0">
         @if(empty($promoVersion))
-            <a href="/courses" class="sm:mx-1 mb-2 sm:mb-0 w-full sm:w-64 join outline {{ $theme }}-blue smaller">EXPLORE 200+ COURSES <i class="fas fa-info-circle"></i> </a>
+            <a href="/coaches" class="sm:mx-1 mb-2 sm:mb-0 w-full sm:w-64 join outline {{ $theme }} smaller">EXPLORE THE COURSES <i class="fas fa-info-circle"></i> </a>
         @endif
-        <a class="sm:mx-1 w-full sm:w-64 join {{ $theme }}-blue smaller @if(!empty($promoVersion)) anchor-slide @endif"
+        <a class="sm:mx-1 w-full sm:w-64 join {{ $theme }} smaller @if(!empty($promoVersion)) anchor-slide @endif"
             @if(!empty($promoVersion))
                 href="#customize-anchor"
             @else
