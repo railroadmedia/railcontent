@@ -55,7 +55,6 @@ onUnmounted(() => {
     >
       <div
         class="
-          tw-max-w-[575px]
           tw-w-full
           tw-rounded-[8px]
           tw-z-30
