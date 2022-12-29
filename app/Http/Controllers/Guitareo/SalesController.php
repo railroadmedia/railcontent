@@ -181,4 +181,19 @@ class SalesController extends BaseController
 
         throw new NotFoundHttpException();
     }
+
+    public function songs()
+    {
+        return view('guitareo.sales.pages.songs.songs', ['theme' => 'guitareo', 'page' => 'songs']);
+    }
+
+    public function coaches()
+    {
+        return view('guitareo.sales.pages.coaches.coaches', ['theme' => 'guitareo', 'page' => 'coaches']);
+    }
+
+    public function method()
+    {
+        return view('guitareo.sales.pages.method.method', ['theme' => 'guitareo', 'page' => 'method']);
+    }
 }
