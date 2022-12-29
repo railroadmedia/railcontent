@@ -13,6 +13,7 @@ import SoundSliceControls from "../SoundSlice/SoundSliceControls.vue";
 import ContentService from "../../vuesora/assets/js/services/content";
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner.vue';
 import { ArrowSmLeftIcon } from '@heroicons/vue/solid';
+//import SelectModal from '../Membership/SelectModal.vue';
 
 const props = defineProps({
     brand: {
@@ -91,6 +92,9 @@ const props = defineProps({
     },
     isAdmin: {
         type: Boolean,
+    },
+    hasInstrumentless: {
+        type: Boolean,
     }
 });
 
@@ -161,6 +165,15 @@ const markSongAsComplete = () => {
     }
 };
 
+const getInstrumentlessLabel = () => {
+    return ({
+        drumeo: 'PLAY DRUMLESS TRACK',
+        singeo: 'PLAY INSTRUMENTAL TRACK',
+        guitareo: 'PLAY GUITARLESS TRACK',
+        pianote: 'PLAY PIANOLESS TRACK'
+    }[props.brand]);
+};
+
 </script>
 
 <template>
@@ -198,7 +211,7 @@ const markSongAsComplete = () => {
                             </p>
 
                             <div class="tw-flex tw-flex-col 3xl:tw-flex-row">
-                                <button style="padding: 0 24px;" @click="openInstrumentless" v-if="brand === 'drumeo'"
+                                <button v-if="hasInstrumentless" style="padding: 0 24px;" @click="openInstrumentless"
                                     :class="`tw-btn-primary tw-bg-${brand} hover:tw-bg-${brand}-600 tw-mb-3 3xl:tw-mr-3`">
                                     <svg class="tw-mr-2 tw-text-base " width="25" height="24" viewBox="0 0 25 24"
                                         fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -207,7 +220,7 @@ const markSongAsComplete = () => {
                                             fill="white" stroke="white" stroke-width="0.5" />
                                     </svg>
 
-                                    PLAY DRUMLESS TRACK
+                                    {{ getInstrumentlessLabel() }}
                                 </button>
 
                                 <button style="padding: 0 24px;" @click="openFull"

@@ -33,6 +33,8 @@
             $content['position'] = $index;
             $formattedAssignments[] = $content;
         }
+
+        //dd($lessonContent->fetch('instrumentless'));
     @endphp
 
     <song
@@ -61,6 +63,7 @@
         :resources="{{ json_encode(array_merge($lessonContent['resources'] ?? [], $parent['resources'] ?? [])) }}"
         :related-lessons="{{ $relatedLessons }}"
         :assignments="{{ json_encode($formattedAssignments) }}"
+        hasInstrumentless="{{ json_encode($lessonContent->fetch('instrumentless')) }}"
         @if(!empty($lockUnowned))
             :lock-unowned="true"
         @endif

@@ -31,7 +31,7 @@
                     </p>
                 </div>
                 <div class="tw-flex tw-flex-row tw-items-center tw-justify-center">
-                    <a href="#aboutmoises"
+                    <!-- <a href="#aboutmoises"
                         class="tw-flex tw-flex-col tw-justify-center tw-items-center hover:tw-underline tw-text-white tw-text-[20px] tw-font-bebas-neue">
                         <svg class="tw-h-[37px] tw-w-[37px]" id="info-icon-header" width="37" height="36" viewBox="0 0 37 36"
                             fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -40,7 +40,7 @@
                                 stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                         <div class="tw-pt-[20px]">ABOUT MOISES</div>
-                    </a>
+                    </a> -->
                     <song-request></song-request>
                 </div>
             </div>
@@ -103,6 +103,9 @@
         </div>
     </div>
 
+    @php
+       //dd($listLessons);
+    @endphp
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-[10px] dark:tw-text-white songs-catalogue-container">
         <transition appear name="fade">
             <content-catalogue dusk="content-catalogue" brand="{{ $brand }}" theme-color="{{ $brand }}"
