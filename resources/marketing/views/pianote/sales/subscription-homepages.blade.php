@@ -250,42 +250,42 @@
                 'images' => [
                     [
                     'img' => 'https://pianote.s3.amazonaws.com/sales/2023/classical-piano.jpg',
-                    'title' => 'Classical Piano',
+                    'title' => 'Classical<br> Piano',
                     'instructor' => 'Victoria Theodore',
                     ],
                     [
                     'img' => 'https://pianote.s3.amazonaws.com/sales/2023/cocktail-piano.jpg',
-                    'title' => 'Cocktail Piano',
+                    'title' => 'Cocktail<br> Piano',
                     'instructor' => 'Brett Ziegler',
                     ],
                     [
                     'img' => 'https://pianote.s3.amazonaws.com/sales/2023/latin-essentials.jpg',
-                    'title' => 'Latin Essentials',
+                    'title' => 'Latin<br> Essentials',
                     'instructor' => 'Kevin Castro',
                     ],
                     [
                     'img' => 'https://pianote.s3.amazonaws.com/sales/2023/worship-piano.jpg',
-                    'title' => 'Worship Piano',
+                    'title' => 'Worship<br> Piano',
                     'instructor' => 'Amberly Martz',
                     ],
                     [
                     'img' => 'https://pianote.s3.amazonaws.com/sales/2023/improvisational-jazz.jpg',
-                    'title' => 'Improvisational Jazz',
+                    'title' => 'Improvisational<br> Jazz',
                     'instructor' => 'Jesús Molina',
                     ],
                     [
                     'img' => 'https://pianote.s3.amazonaws.com/sales/2023/gospel-piano.jpg',
-                    'title' => 'Gospel Piano',
+                    'title' => 'Gospel<br> Piano',
                     'instructor' => 'Erskine Hawkins',
                     ],
                     [
                     'img' => 'https://pianote.s3.amazonaws.com/sales/2023/Latin-Jazz.jpg',
-                    'title' => 'Latin Jazz',
+                    'title' => 'Latin<br> Jazz',
                     'instructor' => 'Gabriel Palatchi',
                     ],
                     [
                     'img' => 'https://pianote.s3.amazonaws.com/sales/2023/Tango-Piano.jpg',
-                    'title' => 'Tango Piano',
+                    'title' => 'Tango<br> Piano',
                     'instructor' => 'Sangah Noona',
                     ]
                 ]
@@ -295,42 +295,42 @@
                 'images' => [
                     [
                     'img' => 'https://pianote.s3.amazonaws.com/sales/2023/piano-technique-made-easy.jpg',
-                    'title' => 'Piano Technique Made Easy',
+                    'title' => 'Piano Technique<br> Made Easy',
                     'instructor' => 'Cassi Falk',
                     ],
                     [
                     'img' => 'https://pianote.s3.amazonaws.com/sales/2023/faster-fingers.jpg',
-                    'title' => 'Faster Fingers',
+                    'title' => 'Faster<br> Fingers',
                     'instructor' => 'Lisa Witt',
                     ],
                     [
                     'img' => 'https://pianote.s3.amazonaws.com/sales/2023/hanon-exercises.jpg',
-                    'title' => 'Hanon Exercises',
+                    'title' => 'Hanon<br> Exercises',
                     'instructor' => 'Cassi Falk',
                     ],
                     [
                     'img' => 'https://pianote.s3.amazonaws.com/sales/2023/de-stupefy-your-left-hand.jpg',
-                    'title' => 'De-Stupefy Your Left Hand',
+                    'title' => 'De-Stupefy<br> Your Left Hand',
                     'instructor' => 'Lisa Witt',
                     ],
                     [
                     'img' => 'https://pianote.s3.amazonaws.com/sales/2023/beautifully-simple-piano-arpeggios.jpg',
-                    'title' => 'Beautifully Simple Piano Arpeggios',
+                    'title' => 'Beautifully<br> Simple Piano<br> Arpeggios',
                     'instructor' => 'Sangah Noona',
                     ],
                     [
                     'img' => 'https://pianote.s3.amazonaws.com/sales/2023/riffs-fills.jpg',
-                    'title' => 'Riffs & Fills',
+                    'title' => 'Riffs<br> & Fills',
                     'instructor' => 'Lisa Witt',
                     ],
                     [
                     'img' => 'https://pianote.s3.amazonaws.com/sales/2023/7-days-to-sight-reading.jpg',
-                    'title' => '7 Days To Sight Reading',
+                    'title' => '7 Days To<br> Sight Reading',
                     'instructor' => 'Lisa Witt',
                     ],
                     [
                     'img' => 'https://pianote.s3.amazonaws.com/sales/2023/dexterity-finger-strength.jpg',
-                    'title' => 'Dexterity & Finger Strength',
+                    'title' => 'Dexterity &<br> Finger Strength',
                     'instructor' => 'Cassi Falk',
                     ],
                 ]
@@ -340,42 +340,42 @@
                 'images' => [
                     [
                     'img' => 'https://pianote.s3.amazonaws.com/sales/2023/playing-piano-beautifully.jpg',
-                    'title' => 'Playing Piano Beautifully',
+                    'title' => 'Playing Piano<br> Beautifully',
                     'instructor' => 'Lisa Witt',
                     ],
                     [
                     'img' => 'https://pianote.s3.amazonaws.com/sales/2023/musical-freedom.jpg',
-                    'title' => 'Improvisation & Musical Freedom',
+                    'title' => 'Improvisation &<br> Musical Freedom',
                     'instructor' => 'Jesús Molina',
                     ],
                     [
                     'img' => 'https://pianote.s3.amazonaws.com/sales/2023/the-perfect-arrangement.jpg',
-                    'title' => 'The Perfect Arrangement',
+                    'title' => 'The Perfect<br> Arrangement',
                     'instructor' => 'Summer Swee-Singh',
                     ],
                     [
                     'img' => 'https://pianote.s3.amazonaws.com/sales/2023/creative-composition.jpg',
-                    'title' => 'Creative Composition',
+                    'title' => 'Creative<br> Composition',
                     'instructor' => 'Lisa Witt',
                     ],
                     [
                     'img' => 'https://pianote.s3.amazonaws.com/sales/2023/pillars-of-improvisation.jpg',
-                    'title' => 'Pillars of Improvisation',
+                    'title' => 'Pillars of<br> Improvisation',
                     'instructor' => 'Jordan Leibel',
                     ],
                     [
                     'img' => 'https://pianote.s3.amazonaws.com/sales/2023/the-power-of-chords.jpg',
-                    'title' => 'The Power of Chords',
+                    'title' => 'The Power<br> of Chords',
                     'instructor' => 'Lisa Witt',
                     ],
                     [
                     'img' => 'https://pianote.s3.amazonaws.com/sales/2023/creative-song-writing.jpg',
-                    'title' => 'Creative Songwriting',
+                    'title' => 'Creative<br> Songwriting',
                     'instructor' => 'Josh Dion',
                     ],
                     [
                     'img' => 'https://pianote.s3.amazonaws.com/sales/2023/rhythmic-playing.jpg',
-                    'title' => 'Rhythmic Playing',
+                    'title' => 'Rhythmic<br> Playing',
                     'instructor' => 'Jay Oliver',
                     ],
                 ]

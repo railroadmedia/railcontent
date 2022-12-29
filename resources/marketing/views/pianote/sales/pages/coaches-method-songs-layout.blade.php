@@ -10,27 +10,11 @@
 @endsection
 
 @section('page-nav')
-    @if(!empty($trialVersion))
-        @if(!empty($joinUrl))
-            @include("pianote._partials._nav", [
-                "edgeVersion" => true,
-                "trialVersion" => true,
-                "joinUrl" => $joinUrl
-            ])
-        @else
-            @include("pianote._partials._nav", [
-                "edgeVersion" => true,
-                "trialVersion" => true,
-                "scrollToJoin" => true,
-            ])
-        @endif
-    @else
-        @include("pianote._partials._nav", [
-            "edgeVersion" => true,
-            "scrollToJoin" => true,
-            "homepage" => true
-        ])
-    @endif
+    @include("pianote._partials._nav", [
+        "subscriptionVersion" => true,
+        "fullSubscriptionVersion" => true,
+        "scrollToJoin" => true,
+    ])
 @endsection
 
 @section('page-footer')

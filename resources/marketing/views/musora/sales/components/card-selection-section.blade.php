@@ -15,7 +15,7 @@
                     x-on:click="plusMembershipSelected = true"
                 >
                     <div class="text-left">
-                        <img class="h-5 sm:h-6" src="https://drumeo-assets.s3.amazonaws.com/sales/2023/drumeoplus_logo.svg">
+                        <img class="h-5 sm:h-6" src="{{ $plusLogo }}">
                         <p class="opacity-60 text-xs no-select mt-0.5"><em>Lessons + Songs</em></p>
                     </div>
                     <div class="radio-check ml-3 sm:ml-10 w-7 h-7 flex content-center justify-center border-2 rounded-full border-gray-500 text-gray-500">
@@ -29,7 +29,7 @@
                     x-on:click="plusMembershipSelected = false"
                 >
                     <div class="text-left">
-                        <img class="h-5 sm:h-6" src="https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png">
+                        <img class="h-5 sm:h-6" src="{{ $logo }}">
                         <p class="opacity-60 text-xs no-select mt-0.5"><em>Lessons only.</em></p>
                     </div>
                     <div class="radio-check ml-3 sm:ml-14 w-7 h-7 flex content-center justify-center border-2 rounded-full border-gray-500 text-gray-500">

@@ -26,17 +26,17 @@
             'artist' => 'Mark Lettieri',
         ],
         [
-            'img' => '',
+            'img' => 'https://guitareo.s3.amazonaws.com/sales/2022/coaches/dave-weiner.jpg',
             'title' => 'Add Power To Your Playing',
             'artist' => 'Dave Weiner',
         ],
         [
-            'img' => '',
+            'img' => 'https://guitareo.s3.amazonaws.com/sales/2022/coaches/yvette-young.jpg',
             'title' => 'Unlock Your Creativity',
             'artist' => 'Yvette Young',
         ],
         [
-            'img' => '',
+            'img' => 'https://guitareo.s3.amazonaws.com/sales/2022/coaches/pete-thorn2.jpg',
             'title' => 'The Anatomy of a Song',
             'artist' => 'Pete Thorn',
         ],

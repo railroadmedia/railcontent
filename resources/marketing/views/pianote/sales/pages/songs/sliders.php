@@ -122,7 +122,7 @@
             'artist' => 'Einaudi',
         ],
         [
-            'img' => '',
+            'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/song-default.png',
             'title' => 'Fantasie-Impromptu',
             'artist' => 'Chopin',
         ],
@@ -142,12 +142,12 @@
             'artist' => 'Brahms',
         ],
         [
-            'img' => '',
+            'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/song-default.png',
             'title' => 'Ode To Joy',
             'artist' => 'Beethoven',
         ],
         [
-            'img' => '',
+            'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/song-default.png',
             'title' => 'Sonata No. 16 in C Major',
             'artist' => 'Wolfgang Amadeus Mozart',
         ],
@@ -200,12 +200,12 @@
             'artist' => 'Ben Bernie, Kenneth Casey, Maceo Pinkard',
         ],
         [
-            'img' => '',
+            'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/song-default.png',
             'title' => 'The Way You Look Tonight',
             'artist' => 'Frank Sinatra',
         ],
         [
-            'img' => '',
+            'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/song-default.png',
             'title' => 'You Are My Sunshine',
             'artist' => 'Wayne King',
         ],
@@ -218,47 +218,47 @@
             'artist' => 'Lin-Manuel Miranda',
         ],
         [
-            'img' => '',
+            'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/song-default.png',
             'title' => 'And All That Jazz',
             'artist' => 'Kander & Ebb',
         ],
         [
-            'img' => '',
+            'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/song-default.png',
             'title' => 'Castle On A Cloud',
             'artist' => 'Boublil and Schonberg',
         ],
         [
-            'img' => '',
+            'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/song-default.png',
             'title' => 'Memory',
             'artist' => 'Andrew Lloyd Webber',
         ],
         [
-            'img' => '',
+            'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/song-default.png',
             'title' => 'I Could Have Danced All Night',
             'artist' => 'Frederick Loewe',
         ],
         [
-            'img' => '',
+            'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/song-default.png',
             'title' => 'The Phantom Of The Opera',
             'artist' => 'Andrew Lloyd Webber',
         ],
         [
-            'img' => '',
+            'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/song-default.png',
             'title' => 'Tomorrow',
             'artist' => 'Charles Strouse',
         ],
         [
-            'img' => '',
+            'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/song-default.png',
             'title' => 'The Sound Of Music',
             'artist' => 'Rodgers & Hammerstein',
         ],
         [
-            'img' => '',
+            'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/song-default.png',
             'title' => 'Where Do We Go From Here ',
             'artist' => 'Nathan Tysen & Daniel Messé',
         ],
         [
-            'img' => '',
+            'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/song-default.png',
             'title' => 'You Can\'t Stop The Beat',
             'artist' => 'Marc Shaiman',
         ],
@@ -266,22 +266,22 @@
 
     $disney = [
         [
-            'img' => '',
+            'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/song-default.png',
             'title' => 'A Spoonful Of Sugar',
             'artist' => 'Sherman Brothers',
         ],
         [
-            'img' => '',
+            'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/song-default.png',
             'title' => 'Bibbidi-Bobbidi-Boo (The Magic Song)',
             'artist' => 'Verna Felton',
         ],
         [
-            'img' => '',
+            'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/song-default.png',
             'title' => 'Can You Feel The Love Tonight',
             'artist' => 'Elton John',
         ],
         [
-            'img' => '',
+            'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/song-default.png',
             'title' => 'Colors Of The Wind',
             'artist' => 'Judy Kuhn',
         ],
@@ -291,27 +291,27 @@
             'artist' => 'Idina Menzel',
         ],
         [
-            'img' => '',
+            'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/song-default.png',
             'title' => 'Once Upon A Dream',
             'artist' => 'Sammy Fain',
         ],
         [
-            'img' => '',
+            'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/song-default.png',
             'title' => 'Part Of Your World',
             'artist' => 'Alan Menken / Disney',
         ],
         [
-            'img' => '',
+            'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/song-default.png',
             'title' => 'Start Of Something New',
             'artist' => 'High School Musical Cast',
         ],
         [
-            'img' => '',
+            'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/song-default.png',
             'title' => 'The Bare Necessities',
             'artist' => 'Terry Gilkyson',
         ],
         [
-            'img' => '',
+            'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/song-default.png',
             'title' => 'Winnie The Pooh',
             'artist' => 'Sherman Brothers',
         ],
@@ -349,7 +349,7 @@
             'artist' => 'Bryan Adams',
         ],
         [
-            'img' => '',
+            'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/song-default.png',
             'title' => 'Good Golly Miss Molly',
             'artist' => 'Little Richard',
         ],
@@ -377,7 +377,7 @@
             'artist' => 'Imagine Dragons',
         ],
         [
-            'img' => '',
+            'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/song-default.png',
             'title' => 'Brick',
             'artist' => 'Ben Folds Five',
         ],
@@ -397,7 +397,7 @@
             'artist' => 'The Killers',
         ],
         [
-            'img' => '',
+            'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/song-default.png',
             'title' => 'My Happy Ending',
             'artist' => 'Avril Lavigne',
         ],
@@ -425,7 +425,7 @@
 
     $country = [
         [
-            'img' => '',
+            'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/song-default.png',
             'title' => 'Always On My Mind',
             'artist' => 'Willie Nelson',
         ],
@@ -536,27 +536,27 @@
             'artist' => 'Matt Redman',
         ],
         [
-            'img' => '',
+            'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/song-default.png',
             'title' => 'Amazing Grace',
             'artist' => 'Traditional Hymn ',
         ],
         [
-            'img' => '',
+            'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/song-default.png',
             'title' => 'Balm In Gilead',
             'artist' => 'African-American Spiritual',
         ],
         [
-            'img' => '',
+            'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/song-default.png',
             'title' => 'Every Time I Feel The Spirit',
             'artist' => 'African-American Spiritual',
         ],
         [
-            'img' => '',
+            'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/song-default.png',
             'title' => 'Go, Tell It On The Mountain',
             'artist' => 'African-American Spiritual',
         ],
         [
-            'img' => '',
+            'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/song-default.png',
             'title' => 'How Great Thou Art',
             'artist' => 'Hymn',
         ],
@@ -566,17 +566,17 @@
             'artist' => 'Hillsong Worship',
         ],
         [
-            'img' => '',
+            'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/song-default.png',
             'title' => 'This Little Light Of Mine',
             'artist' => 'African-American Spiritual',
         ],
         [
-            'img' => '',
+            'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/song-default.png',
             'title' => 'Were You There?',
             'artist' => 'African-American Spiritual',
         ],
         [
-            'img' => '',
+            'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/song-default.png',
             'title' => 'When The Saints Go Marching In',
             'artist' => 'Louis Armstrong',
         ],
