@@ -46,7 +46,7 @@ class UpgradeServiceTests extends TestCase
         $this->assertEquals(0, $discount);
     }
 
-    public function test_discount_upgrade(): void
+    public function test_discount_upgrade_yearly(): void
     {
         /** @var User $user */
         $user = User::factory()->create();
@@ -56,11 +56,28 @@ class UpgradeServiceTests extends TestCase
         $expirationTime = Carbon::today()->addMonths(6)->addDays(10);
         SubscriptionFactory::createWith($user, $product1, $activeTime, $expirationTime);
         UserProductFactory::createUserProduct($user, $product1, $activeTime, $expirationTime);
-        $product2 =  ProductFactory::createSubscriptionProduct(DigitalAccessType::All, Interval::Year, 200);
+        $product2 =  ProductFactory::createSubscriptionProduct(DigitalAccessType::Plus, Interval::Year, 200);
 
         $discount = $this->getDiscountAmount($product2);
 
         $this->assertEquals(150, $discount);
+    }
+
+    public function test_discount_upgrade_monthly(): void
+    {
+        /** @var User $user */
+        $user = User::factory()->create();
+        Auth::loginUsingId($user->id);
+        $product1 = ProductFactory::createSubscriptionProduct(DigitalAccessType::Basic, Interval::Month, 100);
+        $activeTime = Carbon::today();
+        $expirationTime = Carbon::today()->addDays(10);
+        SubscriptionFactory::createWith($user, $product1, $activeTime, $expirationTime);
+        UserProductFactory::createUserProduct($user, $product1, $activeTime, $expirationTime);
+        $product2 =  ProductFactory::createSubscriptionProduct(DigitalAccessType::Plus, Interval::Month, 200);
+
+        $discount = $this->getDiscountAmount($product2);
+
+        $this->assertEquals(200, $discount);
     }
 
     public function test_discount_crossgrade_all(): void
@@ -68,12 +85,12 @@ class UpgradeServiceTests extends TestCase
         /** @var User $user */
         $user = User::factory()->create();
         Auth::loginUsingId($user->id);
-        $product1 =  ProductFactory::createSubscriptionProduct(DigitalAccessType::All, Interval::Year, 100);
+        $product1 =  ProductFactory::createSubscriptionProduct(DigitalAccessType::Plus, Interval::Year, 100);
         $activeTime = Carbon::today();
         $expirationTime = Carbon::today()->addMonths(6)->addDays(10);
         SubscriptionFactory::createWith($user, $product1, $activeTime, $expirationTime);
         UserProductFactory::createUserProduct($user, $product1, $activeTime, $expirationTime);
-        $product2 =  ProductFactory::createSubscriptionProduct(DigitalAccessType::All, Interval::Year, 200);
+        $product2 =  ProductFactory::createSubscriptionProduct(DigitalAccessType::Plus, Interval::Year, 200);
 
         $discount = $this->getDiscountAmount($product2);
 

@@ -28,7 +28,7 @@ class ProductFactory extends Factory
                     Product::TYPE_PHYSICAL_ONE_TIME,
                 ]
             ),
-            'active' => fake()->randomElement([0, 1]),
+            'active' => 1,
             'category' => fake()->word,
             'description' => fake()->text,
             'thumbnail_url' => fake()->imageUrl(),
@@ -54,7 +54,7 @@ class ProductFactory extends Factory
             'digital_access_time_type' => fake()->text,
             'digital_access_time_interval_type' => fake()->text,
             'digital_access_type' => fake()->text,
-            'digital_access_permission_names' => fake()->text,
+            'digital_access_permission_names' => '[]',
         ];
     }
 

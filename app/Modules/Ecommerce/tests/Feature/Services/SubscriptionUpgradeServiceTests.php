@@ -9,17 +9,15 @@ use App\Modules\Ecommerce\database\factories\SubscriptionFactory;
 use App\Modules\Ecommerce\database\factories\UserPaymentMethodFactory;
 use App\Modules\Ecommerce\database\factories\UserProductFactory;
 use App\Modules\Ecommerce\Enums\DigitalAccessType;
-use App\Modules\Ecommerce\Models\Product;
 use App\Modules\Ecommerce\Models\Subscription;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Ecommerce\Repositories\ProductRepository;
 use Railroad\Ecommerce\Services\SubscriptionUpgradeService;
-use Railroad\Ecommerce\Services\UpgradeService;
 use Tests\TestCase;
 
-class UpgradeServiceTests extends TestCase
+class SubscriptionUpgradeServiceTests extends TestCase
 {
     private SubscriptionUpgradeService $subscriptionUpgradeService;
     private ProductRepository $productRepository;
@@ -43,13 +41,20 @@ class UpgradeServiceTests extends TestCase
         /** @var Subscription $subscription */
         $subscription = SubscriptionFactory::createWith($user, $product1, $activeTime, $expirationTime);
         UserProductFactory::createUserProduct($user, $product1, $activeTime, $expirationTime);
-        $product2 = ProductFactory::createSubscriptionProduct(DigitalAccessType::All, Interval::Year, 200);
+        $product2 = ProductFactory::createSubscriptionProduct(DigitalAccessType::Plus, Interval::Year, 200);
 
 
         $this->subscriptionUpgradeService->upgrade($user->id);
 
         $oldSubscription = Subscription::query()->find($subscription->id);
         $newSubscription = Subscription::query()->where('user_id', '=', $user->id)
-            ->where('id', '!=', $subscription->id);
+            ->where('id', '!=', $subscription->id)
+            ->where('product_id', '=', $product2->id)
+            ->first();
+
+        $this->assertTrue($oldSubscription->isCancelled());
+        $this->assertTrue($oldSubscription->paid_until == $newSubscription->paid_until);
     }
+
+
 }

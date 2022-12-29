@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\Model;
  * Class Product
  *
  * @package App\Modules\Ecommerce\Models
+ *
+ * @property integer id
  * @property string brand
  * @property string name
  * @property string sku
@@ -123,7 +125,7 @@ class Product extends Model
 
 
 
-    const MEMBERSHIP_DIGITAL_ACCESS_TYPES = [DigitalAccessType::All, DigitalAccessType::Basic];
+    const MEMBERSHIP_DIGITAL_ACCESS_TYPES = [DigitalAccessType::Plus, DigitalAccessType::Basic];
 
     protected $table = 'ecommerce_products';
 
