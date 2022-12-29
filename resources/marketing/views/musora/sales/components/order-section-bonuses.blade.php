@@ -91,7 +91,7 @@
                             src="https://drumeo-assets.s3.amazonaws.com/sales/2023/drumeo-bonus.jpg">
                         <img alt="brand tile" class="sm:hidden inline-block h-44 rounded-xl"
                             src="https://drumeo-assets.s3.amazonaws.com/sales/2023/drumeo-bonus-m.jpg">
-                        <p class="absolute w-full text-sm lg:text-base uppercase font-bebas" style="bottom: 20%;">INCLUDED WITH {{ $theme }}</p>
+                        <p class="absolute w-full text-sm lg:text-base uppercase font-bebas" style="bottom: 20%;">DRUM LESSONS INCLUDED</p>
                     </div>
                 @endif
                 @if($theme !== 'pianote')
@@ -100,7 +100,7 @@
                             src="https://drumeo-assets.s3.amazonaws.com/sales/2023/pianote-bonus.jpg">
                         <img alt="brand tile" class="sm:hidden inline-block h-44 rounded-xl"
                             src="https://drumeo-assets.s3.amazonaws.com/sales/2023/pianote-bonus-m.jpg">
-                        <p class="absolute w-full text-sm lg:text-base uppercase font-bebas" style="bottom: 20%;">INCLUDED WITH {{ $theme }}</p>
+                        <p class="absolute w-full text-sm lg:text-base uppercase font-bebas" style="bottom: 20%;">PIANO LESSONS INCLUDED</p>
                     </div>
                 @endif
                 @if($theme !== 'guitareo')
@@ -109,7 +109,7 @@
                             src="https://drumeo-assets.s3.amazonaws.com/sales/2023/guitareo-bonus.jpg">
                         <img alt="brand tile" class="sm:hidden inline-block h-44 rounded-xl"
                             src="https://drumeo-assets.s3.amazonaws.com/sales/2023/guitareo-bonus-m.jpg">
-                        <p class="absolute w-full text-sm lg:text-base uppercase font-bebas" style="bottom: 20%;">INCLUDED WITH {{ $theme }}</p>
+                        <p class="absolute w-full text-sm lg:text-base uppercase font-bebas" style="bottom: 20%;">GUITAR LESSONS INCLUDED</p>
                     </div>
                 @endif
                 @if($theme !== 'singeo')
@@ -118,7 +118,7 @@
                             src="https://drumeo-assets.s3.amazonaws.com/sales/2023/singeo-bonus.jpg">
                         <img alt="brand tile" class="sm:hidden inline-block h-44 rounded-xl"
                             src="https://drumeo-assets.s3.amazonaws.com/sales/2023/singeo-bonus-m.jpg">
-                        <p class="absolute w-full text-sm lg:text-base uppercase font-bebas" style="bottom: 20%;">INCLUDED WITH {{ $theme }}</p>
+                        <p class="absolute w-full text-sm lg:text-base uppercase font-bebas" style="bottom: 20%;">SINGING LESSONS INCLUDED</p>
                     </div>
                 @endif
             </div>
