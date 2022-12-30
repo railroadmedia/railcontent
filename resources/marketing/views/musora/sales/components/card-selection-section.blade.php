@@ -46,7 +46,7 @@
         >
             <div class="w-full md:w-1/2 px-2 md:px-3 relative">
                 <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-black text-sm rounded-full bg-[#ffac00]" >SAVE 33%</p>
-                <a href="todo" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">
+                <a href="{{$plusAnnualLink}}" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">
                     <div class="bg-white px-3 py-6 md:py-9">
                         <h2 class="leading-none mb-6"><strong>Annual</strong></h2>
                         <h4 class="inline-block leading-none"><strong>${{ number_format(Prices::$drumeoEdgeAnnual / 12) }}/month</strong></h4>
@@ -64,7 +64,7 @@
                 </a>
             </div>
             <div class="w-full md:w-1/2 px-2 md:px-3 relative">
-                <a href="todo" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">
+                <a href="{{$plusMonthlyLink}}" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">
                     <div class="bg-white px-3 py-6 md:py-9">
                         <h2 class="leading-none mb-6"><strong>Monthly</strong></h2>
                         <h4 class="inline-block leading-none"><strong>${{ Prices::$drumeoEdgeRegular }}/month</strong></h4>
@@ -89,7 +89,7 @@
         >
             <div class="w-full md:w-1/2 px-2 md:px-3 mb-4 md:mb-0 relative">
                 <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-black text-sm rounded-full bg-[#ffac00]">SAVE 33%</p>
-                <a href="todo" class="text-black overflow-hidden rounded-t-2xl block mx-auto group">
+                <a href="{{$annualLink}}" class="text-black overflow-hidden rounded-t-2xl block mx-auto group">
                     <div class="bg-white px-3 py-6 md:py-9">
                         <h2 class="leading-none mb-6"><strong>Annual</strong></h2>
                         <h4 class="inline-block leading-none"><strong>${{ number_format(200 / 12, 2) }}/month</strong></h4>
@@ -106,7 +106,7 @@
                 </div>
             </div>
             <div class="w-full md:w-1/2 px-2 md:px-3 mb-4 md:mb-0 relative">
-                <a href="todo" class="text-black overflow-hidden rounded-t-2xl block mx-auto group">
+                <a href="{{$monthlyLink}}" class="text-black overflow-hidden rounded-t-2xl block mx-auto group">
                     <div class="bg-white px-3 py-6 md:py-9">
                         <h2 class="leading-none mb-6"><strong>Monthly</strong></h2>
                         <h4 class="inline-block leading-none"><strong>${{ 25 }}/month</strong></h4>
