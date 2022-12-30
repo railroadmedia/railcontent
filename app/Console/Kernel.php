@@ -2,19 +2,18 @@
 
 namespace App\Console;
 
-use App\Console\Commands\AddMissingQuietPadsForBFOrders2022;
-use App\Console\Commands\MigrateCoachesToInstructors;
-use App\Console\Commands\MigrateGuitareoUserXP;
-use App\Console\Commands\MigrateTypeBasedContentPermissionsToIdBased;
+use App\Console\Commands\AssignSongsPermissionsToAllUsers;
+use App\Console\Commands\AssignSongsPermissionsToContent;
+use App\Console\Commands\AssignSongsPermissionsToProducts;
+use App\Console\Commands\CreateSongsDecember2022;
+use App\Console\Commands\MigratePianoteSongTutorial;
 use App\Console\Commands\PopulateNewRolesAndPermissionsTables;
 use App\Console\Commands\PopulateUserBrandLevel;
 use App\Console\Commands\PopulateUserMinutesPracticedPerBrand;
 use App\Console\Commands\PopulateUserRolesTable;
 use App\Console\Commands\PopulateUserTotalXpPerBrand;
-use App\Console\Commands\RepairUserProductsFromReferral;
 use App\Console\Commands\RepairUserProgressStartedOn;
 use App\Console\Commands\RepairVimeoDurations;
-use App\Console\Commands\RunMWPPhaseOneLaunchMigrations;
 use App\Console\Commands\SeedLiveAndScheduledContent;
 use App\Console\Commands\SeedUserContentData;
 use App\Console\Commands\TestLessonsDescriptionUrls;
@@ -40,7 +39,12 @@ class Kernel extends ConsoleKernel
         PopulateUserMinutesPracticedPerBrand::class,
         VaporEnvManager::class,
         TestLessonsDescriptionUrls::class,
-        RepairUserProgressStartedOn::class
+        MigratePianoteSongTutorial::class,
+        CreateSongsDecember2022::class,
+        RepairUserProgressStartedOn::class,
+        AssignSongsPermissionsToContent::class,
+        AssignSongsPermissionsToProducts::class,
+        AssignSongsPermissionsToAllUsers::class,
     ];
 
     /**

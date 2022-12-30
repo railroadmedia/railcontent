@@ -49,5 +49,6 @@ class PrimaryURLSlugToContentTypeMap
         'coaches' => 'instructor',
         'rudiments' => 'rudiment',
         'routines' => 'routine',
+        'song-tutorials' => 'song-tutorial',
     ];
 }

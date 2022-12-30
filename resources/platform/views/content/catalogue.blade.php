@@ -309,6 +309,9 @@
                         search-endpoint="/railcontent/search"
                         total-results="{{ $totalResults }}"
                     @endif
+                    @if(!empty($searchTerm))
+                        search-term="{{ $searchTerm }}"
+                    @endif
                     @if(!empty($sortOverride))
                         sort-override="{{ $sortOverride }}"
                     @endif

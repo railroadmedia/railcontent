@@ -6,6 +6,8 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
+ * App\Modules\Notifications\Models\Broadcast
+ *
  * @property integer $id
  * @property string $channel
  * @property string $type
@@ -16,6 +18,20 @@ use Illuminate\Database\Eloquent\Model;
  * @property Carbon $broadcast_on
  * @property Carbon $created_at
  * @property Carbon $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Broadcast newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Broadcast newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Broadcast query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Broadcast whereAggregationGroupId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Broadcast whereBroadcastOn($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Broadcast whereChannel($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Broadcast whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Broadcast whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Broadcast whereNotificationId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Broadcast whereReport($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Broadcast whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Broadcast whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Broadcast whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class Broadcast extends Model
 {

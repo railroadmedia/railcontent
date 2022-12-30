@@ -213,6 +213,12 @@ use Spatie\Permission\Traits\HasRoles;
  * @property Collection $subscriptions
  * @property mixed|null $brand_minutes_practiced
  * @property Collection $notificationSettings
+ * @property string|null $membership_level // can be 'basic' or 'plus'
+ * @property-read int|null $notification_settings_count
+ * @property-read int|null $subscriptions_count
+ * @method static Builder|User whereBrandMinutesPracticed($value)
+ * @method static Builder|User whereBrandTotalXp($value)
+ * @method static Builder|User whereMembershipLevel($value)
  */
 class User extends Model implements Authenticatable, CanResetPassword, AuthorizableContract
 {
@@ -415,8 +421,6 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     }
 
     /**
-     * Values: pack, member, lifetime, coach, house-coach, team
-     *
      * @return Attribute
      */
     public function timezone(): Attribute
@@ -777,6 +781,16 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     {
         return
             !empty($this->membership_expiration_date) && $this->membership_expiration_date < Carbon::now();
+    }
+
+    public function isABasicMember()
+    {
+        return $this->isAMember() && $this->membership_level == 'basic';
+    }
+
+    public function isAPlusMember()
+    {
+        return ($this->isAMember() && $this->membership_level == 'plus') || $this->isAdmin();
     }
 
     public function getTotalXp()
