@@ -304,9 +304,10 @@
                 @endcomponent
             </div>
 
-        <div class="text-center">
-            <h3 class="font-extrabold mb-6">More lessons & live events added every week.</h3>
-            <a href="" class="mx-1 join bg-singeo smaller">Get started <i class="fas fa-arrow-right" aria-hidden="true"></i> </a>
+            <div class="text-center">
+                <h3 class="font-extrabold mb-6">More lessons & live events added every week.</h3>
+                <a href="/choose-plan" class="mx-1 join bg-singeo smaller">Get started <i class="fas fa-arrow-right" aria-hidden="true"></i> </a>
+            </div>
         </div>
     </section>
 @stop

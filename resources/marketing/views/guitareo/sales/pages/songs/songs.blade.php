@@ -571,7 +571,7 @@
 
         <div class="text-center">
             <h3 class="font-extrabold mb-6">Plus hundreds more popular songs.</h3>
-            <a href="" class="mx-1 join bg-guitareo smaller">Get started <i class="fas fa-arrow-right" aria-hidden="true"></i> </a>
+            <a href="/choose-plan" class="mx-1 join bg-guitareo smaller">Get started <i class="fas fa-arrow-right" aria-hidden="true"></i> </a>
         </div>
     </section>
 
