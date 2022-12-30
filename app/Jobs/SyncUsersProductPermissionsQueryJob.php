@@ -10,6 +10,7 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
+use Modules\UserManagementSystem\Models\User;
 
 class SyncUsersProductPermissionsQueryJob implements ShouldQueue
 {
@@ -36,6 +37,7 @@ class SyncUsersProductPermissionsQueryJob implements ShouldQueue
 
         foreach ($this->userIdsToSync as $userId) {
             $userProductToUserContentPermissionListener->syncUserId($userId);
+            User::query()->findOrFail($userId)->update(['membership_level' => 'plus']);
         }
 
         Log::info(
