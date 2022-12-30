@@ -79,10 +79,8 @@
                     <ul class="splide__list">
                         @foreach ($testimonials as $testimonial)
                             <li class="splide__slide flex flex-col items-start pb-10 px-1">
-                                <div class="relative mb-2 overflow-hidden @if(!empty($testimonial['video'])) cursor-pointer @endif"
-                                    @if(!empty($testimonial['video']))
-                                        x-on:click="{{str_replace(' ', '', $testimonial['name'])}} = true;"
-                                    @endif
+                                <div class="relative mb-2 overflow-hidden cursor-pointer"
+                                     x-on:click="{{str_replace(' ', '', $testimonial['name'])}} = true;"
                                 >
                                     <img
                                         class="rounded-xl transition-opacity opacity-0"
@@ -117,6 +115,20 @@
                 'name' => str_replace(' ', '', $testimonial['name']),
                 'video' => $testimonial['video']
             ])
+        @else
+            @component('_partials.components.modal', ['name' => str_replace(' ', '', $testimonial['name'])])
+                @slot('content')
+                    <div class="overflow-hidden rounded-xl max-w-sm mx-auto">
+                        <img src="{{$testimonial['image']}}" alt="{{$testimonial['name']}}" />
+                        <div class="bg-white p-4">
+                            <h2 class="leading-none font-bebas">{{$testimonial['name']}}</h2>
+                            <p class="text-coaches uppercase mx-auto mb-3 md:mb-2">{!!  $testimonial['location'] !!}</p>
+                            <p class="mx-auto mt-2 mb-3 md:mb-2 leading-tight"><strong>{!!  $testimonial['title'] !!}</strong></p>
+                            <p class="mx-auto text-left leading-normal md:leading-normal">{!! $testimonial['description'] !!}</p>
+                        </div>
+                    </div>
+                @endslot
+            @endcomponent
         @endif
     @endforeach
 </section>
