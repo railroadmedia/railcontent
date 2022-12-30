@@ -790,6 +790,8 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
 
     public function isAPlusMember()
     {
+        return true; // todo: remove when permissions are live
+
         return ($this->isAMember() && $this->membership_level == 'plus') || $this->isAdmin();
     }
 
