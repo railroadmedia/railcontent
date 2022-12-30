@@ -28,6 +28,13 @@ Route::domain('{musoraDomain}')
             ->middleware(['web_member_only'])
             ->group(function () {
                 /*
+                 * Home Page
+                 */
+                Route::get('/{brand}', [HomePageController::class, 'home'])
+                    ->whereIn('brand', all_brands())
+                    ->name('platform.home');
+
+                /*
                  * Primary Content Pages
                  */
                 Route::get('/{brand}/coaches', [CoachPagesController::class, 'coaches'])
@@ -43,7 +50,6 @@ Route::domain('{musoraDomain}')
                     ->name('platform.subscribed-lessons');
 
 
-                // singeo courses are allowed through the membership permissions inside the ExpiredMembershipMiddleware
                 Route::get('/{brand}/{contentTypeName}', [ContentPagesController::class, 'contentTypeCatalog'])
                     ->whereIn('brand', all_brands())
                     ->whereIn('contentTypeName', [
@@ -86,6 +92,7 @@ Route::domain('{musoraDomain}')
                         'sonor-drums',
                         'rudiments',
                         'boot-camps',
+                        'song-tutorials'
                     ])
                     ->name('platform.content-type-catalog');
 
@@ -130,13 +137,6 @@ Route::domain('{musoraDomain}')
                 )
                     ->whereIn('brand', all_brands())
                     ->name('platform.content.coach.show');
-
-                Route::get(
-                    '/{brand}/coaches/{coachSlug}/{contentSlug}/{contentId}',
-                    [CoachPagesController::class, 'stream']
-                )
-                    ->whereIn('brand', all_brands())
-                    ->name('platform.coach.first-level');
 
                 /*
                  * Live & Schedule
@@ -197,6 +197,7 @@ Route::domain('{musoraDomain}')
                             'archives',
                             'recording',
                             'play-alongs',
+                            'song-tutorials',
                         ]
                     )
                     ->name('platform.content.first-level');
@@ -206,7 +207,7 @@ Route::domain('{musoraDomain}')
                     [ContentPagesController::class, 'secondLevel']
                 )
                     ->whereIn('brand', all_brands())
-                    ->whereIn('primaryPage', ['method', 'coaches', 'courses', 'songs', 'play-alongs'])
+                    ->whereIn('primaryPage', ['method', 'coaches', 'courses', 'songs', 'play-alongs','song-tutorials'])
                     ->name('platform.content.second-level');
 
                 Route::get(
@@ -238,12 +239,6 @@ Route::domain('{musoraDomain}')
             });
 
         // anyone even without pack or a membership can access these
-        /*
-         * Home Page
-         */
-        Route::get('/{brand}', [HomePageController::class, 'home'])
-            ->whereIn('brand', all_brands())
-            ->name('platform.home');
 
         /*
          * Redirect Helpers
@@ -327,6 +322,10 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('platform.semester-packs.lesson');
 
+        Route::get('/{brand}/coaches/{coachSlug}/{contentSlug}/{contentId}', [CoachPagesController::class, 'stream'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.coach.first-level');
+
         Route::get(
             '/{brand}/content/{contentId}',
             [MusoraCenterContentController::class, 'showPreview']
@@ -406,13 +405,6 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.update-payment-method');
 
-        Route::get(
-            '/{brand}/profile/settings/cancellation-confirmed',
-            [ProfileSettingsPagesController::class, 'cancellationConfirmation']
-        )
-            ->whereIn('brand', all_brands())
-            ->name('platform.profile.settings.cancellation-confirmed');
-
         // ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
         // ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
@@ -455,27 +447,12 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.gratis-access');
 
-        // POST accept student-plan offer
-        Route::post(
-            '/{brand}/profile/settings/account/accept-pause-offer',
-            [ProfileSettingsPagesController::class, 'acceptPauseOffer']
-        )
-            ->whereIn('brand', all_brands())
-            ->name('platform.profile.settings.accept-pause-offer');
-
         Route::post(
             '/{brand}/profile/settings/account/send-help-email',
             [ProfileSettingsPagesController::class, 'sendHelpEmail']
         )
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.send-help-email');
-
-        Route::post(
-            '/{brand}/profile/settings/account/decline-offer-proceed-with-cancel',
-            [ProfileSettingsPagesController::class, 'declineOfferProceedWithCancel']
-        )
-            ->whereIn('brand', all_brands())
-            ->name('platform.profile.settings.decline-offer-proceed-with-cancel');
 
 
         Route::post('/{brand}/profile/settings/account/send-help-email',
@@ -611,6 +588,13 @@ Route::domain('{musoraDomain}')
         Route::get('/{brand}/contact', [SupportController::class, 'contact'])
             ->whereIn('brand', all_brands())
             ->name('platform.contact');
+
+        Route::post(
+            '/{brand}/songs',
+            [\Railroad\Railcontent\Controllers\RequestedSongsJsonController::class, 'requestSong']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.request-song');
     });
 
 /*

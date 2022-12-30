@@ -55,7 +55,8 @@ export default {
   },
   emits: ['onClose'],
   updated() {
-    console.log('showNotification', this.showNotification);
+    // for debugging purposes
+    //console.log('showNotification', this.showNotification);
   },
   methods: {
     handleOnClose() {

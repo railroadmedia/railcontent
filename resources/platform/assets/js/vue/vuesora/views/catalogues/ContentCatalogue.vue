@@ -479,14 +479,18 @@ export default {
     branchPathContent: {
       type: Object,
       default: () => ({}),
-    }
+    },
+    searchTerm: {
+        type: String,
+        default: () => undefined,
+    },
   },
   data() {
     return {
       page: this.initialPage || 1,
       content: this.preLoadedContent ? this.preLoadedContent.data : [],
-      filters: this.preLoadedContent ? ContentHelpers.flattenFilters( this.preLoadedContent.meta.filterOptions || [] ): {},
-      total_results: this.totalResults || 0,
+      filters: this.preLoadedContent ? ContentHelpers.flattenFilters( this.preLoadedContent?.meta?.filterOptions || [] ): {},
+      total_results: this.preLoadedContent ? this.preLoadedContent.data.length : (this.totalResults || 0),
       total_pages: this.preLoadedContent
         ? Math.ceil(this.preLoadedContent.meta.totalResults / this.limit)
         : 0,
@@ -501,7 +505,7 @@ export default {
         topic: null,
       },
       selected_types: null,
-      search_term: undefined,
+      search_term: this.searchTerm,
       required_user_states: this.requiredUserStates || [],
       selected_tab: "new",
       singleEventDropdown: false,
