@@ -150,14 +150,14 @@
         ];
     @endphp
     @include('musora.sales.components.header-section', [
-        'header' => 'Online drum lessons for all skill levels.',
-        'desc' => 'Learn the drums faster with step-by-step lessons, thousands of songs and unlimited personal support.',
+        'header' => 'Get the singing voice you’ve always wanted.',
+        'desc' => 'Improve your vocal range, strength, and control with step-by-step lessons and unlimited personal support.',
         'thumb' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/jan-thumb-no-badge.jpg',
         'promoThumb' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/header-thumb-promo2.png',
         'promoThumbM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/header-thumb-promo-m2.jpg',
-        'pointOne' => 'Improve Your Skills',
-        'pointTwo' => 'World-Class Teachers',
-        'pointThree' => 'Play More<br class="inline lg:hidden"> Songs',
+        'pointOne' => 'Improve Your Voice',
+        'pointTwo' => 'Helpful Vocal Coaches',
+        'pointThree' => 'Sing Popular Songs',
         'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738',
         'students' => number_format(Prices::$students),
     ])
@@ -173,8 +173,8 @@
        ])
     @else
         @include('musora.sales.components.learn-by-playing-section', [
-            'header' => 'Learn the drums by<br class="inline sm:hidden"> <u>playing the drums</u>.',
-            'desc' => 'It’s the best feeling in the world –<br><br>Nailing that fill in your favorite song, slamming out the chorus of an all-time classic, or writing your own drum part that locks in with the music… but it’s a process.<br><br>And it starts with learning the skills & techniques you need to play the drums.<br><br>Drumeo makes learning the drums easier by giving you step-by-step lessons anytime & anywhere it fits your schedule. Plus, the groundbreaking NEW Drumeo Songs tool makes playing your favorite songs a reality – with note-for-note breakdowns of 5,000 popular songs.<br><br>You’ll play more. You’ll fall in love with your progress. And you’ll have personalized support every step of the way.<br><br>Scroll down to watch the trailer, see more details, and learn to play like you’ve always wanted!',
+            'header' => 'Learning to sing made easy with <u>personal coaching</u>.',
+            'desc' => 'If you’ve tried online singing lessons, you know the struggle: spending months, even years, going around in circles – never actually singing like you’ve wished.<br><br>With videos alone, you’re all alone.<br><br>And that’s why Singeo doubles down on the personal touch – with direct and unlimited access to vocal coaches to give you personal feedback, tailored for your voice.<br><br>You’ll get the convenience of step-by-step video lessons, warmups, artist courses, and song tools so you can improve your vocals anywhere, anytime. PLUS you’ll also enjoy personalized video reviews, live Q&A sessions, community recitals, and technique-boosting bootcamps.<br><br>If you’ve dreamed of hitting higher notes, finding the perfect pitch, and delivering confident performances – we’d love to help. Click any of the big buttons to try Singeo risk-free and start your journey to becoming the singer you’ve always wanted to be.',
             'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/collage2.png',
         ])
 
@@ -186,22 +186,22 @@
             [
                 'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/10-level-cirriculum.jpg',
                 'title' => '10-Level Curriculum',
-                'desc' => 'The most trusted step-by-step video lessons for every technique, pattern, and style.',
+                'desc' => 'Turn your desire to sing into passionate practice with useful lessons and exercises.',
             ],
             [
                 'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/practical-assignments.jpg',
                 'title' => 'Practical Assignments',
-                'desc' => 'Keep up your progress with clear assignments and handy practice tools for every level.',
+                'desc' => 'You\'ll always have on-screen assignments and practice tools to guide you along the way.',
             ],
             [
                 'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/guided-workouts.jpg',
-                'title' => 'Guided Workouts',
-                'desc' => 'Stay inspired with guided workouts where you’ll play along with your teacher in real time.',
+                'title' => 'Warm-Up Routines',
+                'desc' => 'Access our quick warm-up routines to fit any schedule, ranging from 5 to 20 minutes.',
             ],
             [
                 'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/world-class-teachers.jpg',
                 'title' => 'World-Class Teachers',
-                'desc' => 'The best drummers are here -- including Grammy Award winners and touring musicians.',
+                'desc' => 'Gain insights from vocal coaches, Grammy-Award winners, and chart-topping performers.',
             ],
             [
                 'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/downloadable-videos.jpg',
@@ -211,16 +211,15 @@
             [
                 'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/personalized-support.jpg',
                 'title' => 'Personalized Support',
-                'desc' => 'Get weekly live streams, student lesson plans, and access to a global drum community.',
+                'desc' => 'Get weekly live streams, student lesson plans, and access to a global singing community.',
             ],
         ];
     @endphp
     
     @include('musora.sales.components.trailer-grid-section', [
         'vid' => 'https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/video-reel.mp4',
-        'header' => 'Your drumming goals<br class="inline sm:hidden"> start here.',
-        'desc' => '
-        Always know <em>exactly</em> what to practice with an organized 10-level <br class="hidden sm:inline lg:hidden">curriculum featuring many of the world’s best teachers. ',
+        'header' => 'Your singing goals start here.',
+        'desc' => 'An organized curriculum to help you understand your voice, how it functions, how to strengthen it, and sing with confidence.',
     ])
 
     @php
@@ -368,8 +367,8 @@
     @endphp
 
     @include('musora.sales.components.coaches-section', [
-        'header' => 'Study with the world’s <br class="md:hidden">best drummers.',
-        'desc' => 'Amplify your skills with 200+ artist courses + <br class="hidden md:inline">access exclusive live events with drumming legends.'
+        'header' => 'Your voice. Your vocal coaches.',
+        'desc' => 'Shape your voice with exclusive artist courses + live events with special guests.'
     ])
 
     @php
@@ -402,6 +401,7 @@
 
         ];
     @endphp
+
     @include('musora.sales.components.songs-section', [
         'header' => 'Play your favorite songs.',
         'desc' => 'You’ll have <strong>all the tools you need</strong> to make sure you never miss a beat.',
@@ -470,7 +470,9 @@
             ],
         ]
     @endphp
+
     <div id="testimonials" class="anchor"></div>
+
     @include('musora.sales.components.testimonials-section', [
         'header' => 'Trusted by drummers<br class="inline-block sm:hidden">  everywhere.',
         'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Singeo+Membership/79348458',
@@ -482,13 +484,16 @@
         'instagramLink' => 'https://instagram.com/drumeoofficial/',
         'instagram' => '950K',
     ])
+
     @include('musora.sales.components.guarantee-section', [
         'badge' => 'https://drumeo-assets.s3.amazonaws.com/sales/2022/guarantee.png',
         'header' => '<strong>Happy student guarantee.</strong><br>Test-drive your lessons for 90 days. Zero risk.',
         'desc' => 'Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence on the drums.',
     ])
+
     <div class="unstick-trigger block"></div>
     <div id="customize-anchor" class="anchor"></div>
+
     @if(!empty($promoVersion))
 
         @php
