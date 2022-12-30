@@ -106,8 +106,6 @@ class AssignSongsPermissionsToAllUsers extends Command
             $jobsToChain[] = new SyncUsersProductPermissionsQueryJob($userIdsChunk);
         }
 
-        $jobsToChain = array_slice($jobsToChain, 0, 10);
-
         $this->info('About to chain jobs, count: ' . count($jobsToChain));
 
         foreach ($jobsToChain as $jobToChainIndex => $jobToChain) {
