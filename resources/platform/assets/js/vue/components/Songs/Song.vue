@@ -103,10 +103,8 @@ const soundsliceObject = ref(props.assignments.length ? props.assignments[0] : {
 const openSoundslice = ref(null);
 const loading = ref(true);
 const lessonProgressRef = ref(props.lessonProgress);
-const apiCallInProgress = ref(false);
 
-const openInstrumentl        <SelectModal />
-ess = () => {
+const openInstrumentless = () => {
     openSoundslice.value = 'instrumentless';
 };
 
@@ -176,6 +174,14 @@ const getInstrumentlessLabel = () => {
     }[props.brand]);
 };
 
+const getBrandSpecificParams = () => {
+    return ({
+        drumeo: '&show_chords=0',
+        singeo: '&show_staff_t1=0&show_staff_t2=0',
+        guitareo: '',
+        pianote: '&show_chords=1'
+    }[props.brand]);
+};
 </script>
 
 <template>
@@ -272,7 +278,7 @@ const getInstrumentlessLabel = () => {
                 <transition name="show-from-bottom">
                     <div v-if="openSoundslice === 'instrumentless'" id="practiceOverlay" class="bg-white">
                         <SoundSlice :loading="loading" :user-id="userId" :theme-color="themeColor"
-                            additional-params="&layout=3&show_chords=0&scroll_type=1&recording_idx=2"
+                            :additional-params="`${getBrandSpecificParams()}&layout=3&scroll_type=1&recording_idx=2`"
                             :soundslice-slug="soundsliceObject.soundsliceSlug" @onLoad="handleOnLoad"
                             @onPlay="handlePlay" @onPause="handlePause">
                             <template v-slot:soundsliceControls>
@@ -286,7 +292,7 @@ const getInstrumentlessLabel = () => {
                 <transition name="show-from-bottom">
                     <div v-if="openSoundslice === 'full'" id="practiceOverlay" class="bg-white">
                         <SoundSlice :loading="loading" :user-id="userId" :theme-color="themeColor"
-                            additional-params="&layout=3&show_chords=0&scroll_type=1&recording_idx=1"
+                            :additional-params="`${getBrandSpecificParams()}&layout=3&scroll_type=1&recording_idx=1`"
                             :soundslice-slug="soundsliceObject.soundsliceSlug" @onLoad="handleOnLoad"
                             @onPlay="handlePlay" @onPause="handlePause">
                             <template v-slot:soundsliceControls>
