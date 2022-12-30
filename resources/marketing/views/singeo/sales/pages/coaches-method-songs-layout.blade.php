@@ -12,27 +12,11 @@
 @endsection
 
 @section('page-nav')
-    @if(!empty($trialVersion))
-        @if(!empty($joinUrl))
-            @include("singeo.sales.partials._nav", [
-                "edgeVersion" => true,
-                "trialVersion" => true,
-                "joinUrl" => $joinUrl
-            ])
-        @else
-            @include("singeo.sales.partials._nav", [
-                "edgeVersion" => true,
-                "trialVersion" => true,
-                "scrollToJoin" => true,
-            ])
-        @endif
-    @else
-        @include("singeo.sales.partials._nav", [
-            "edgeVersion" => true,
-            "scrollToJoin" => true,
-            "homepage" => true
-        ])
-    @endif
+    @include("singeo.sales.partials._nav", [
+        "subscriptionVersion" => true,
+        "fullSubscriptionVersion" => true,
+        "scrollToJoin" => true,
+    ])
 @endsection
 
 @section('page-footer')
