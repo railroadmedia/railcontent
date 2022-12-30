@@ -21,12 +21,6 @@
 
 @section('desc', '10 perfectly organized levels with video lessons from the top authorities on every topic.')
 
-@section('body-data')
-    x-data ='{
-    trailer : false
-    }'
-@endsection
-
 @section('page-body')
     <section class="py-12 md:py-20">
         <div class="container mx-auto max-w-5xl px-6">
@@ -43,9 +37,4 @@
             @endforeach
         </div>
     </section>
-
-{{--    @include('_partials.components.video-modal',[--}}
-{{--        'name' => 'trailer',--}}
-{{--        'video' => '772644658'--}}
-{{--    ])--}}
 @stop
