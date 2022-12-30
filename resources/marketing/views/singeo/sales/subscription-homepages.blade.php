@@ -224,142 +224,112 @@
 
     @php
         $buttons = [
-            'Styles', 'Creativity', 'Grooves'
+            'Expression', 'Technique', 'Performance'
         ];
 
         $courses = [
             [
-                'title' => 'Learn any style',
+                'title' => 'Express your voice',
                 'images' => [
                     [
                         'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Todd-Sucherman.jpg',
-                        'title' => 'Rock <br>Drumming',
-                        'instructor' => 'Todd Sucherman',
+                        'title' => 'Find Your True Voice',
+                        'instructor' => 'Sheléa',
                     ],
                     [
                         'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Dennis-Chambers.jpg',
-                        'title' => 'Funk <br>Drumming',
-                        'instructor' => 'Dennis Chambers',
+                        'title' => 'The Power of Movement ',
+                        'instructor' => 'Chris Johnson',
                     ],
                     [
                         'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Domino-Santatonio.jpg',
-                        'title' => 'Pop <br>Drumming',
-                        'instructor' => 'Domino Santantonio',
+                        'title' => 'Singing With Soul',
+                        'instructor' => 'Tony Lindsay',
                     ],
                     [
                         'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Steve-Smith.jpg',
-                        'title' => 'Jazz <br>Drumming',
-                        'instructor' => 'Steve Smith',
+                        'title' => 'Define Your Singing',
+                        'instructor' => 'Cate Canning',
                     ],
                     [
                         'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Larnell-Lewis.jpg',
-                        'title' => 'Gospel <br>Drumming',
-                        'instructor' => 'Larnell Lewis',
+                        'title' => 'The Science of Singing Better',
+                        'instructor' => 'Darcy D',
                     ],
                     [
                         'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Greyson-Nektrutman.jpg',
-                        'title' => 'Big Band <br>Drumming',
-                        'instructor' => 'Greyson Nekrutman',
-                    ],
-                    [
-                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Gene-Hoglan.jpg',
-                        'title' => 'Metal <br>Drumming',
-                        'instructor' => 'Gene Hoglan',
-                    ],
-                    [
-                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/John-Wooton.jpg',
-                        'title' => 'Latin <br>Drumming',
-                        'instructor' => 'John Wooton',
-                    ],
+                        'title' => 'Get Your Voice Heard Online',
+                        'instructor' => 'Hailey Benedict',
+                    ]
                 ]
             ],
             [
-                'title' => 'Play more creatively',
+                'title' => 'Add essential techniqes',
                 'images' => [
                     [
                         'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Anika-Nilles.jpg',
-                        'title' => 'Subdivision<br> Studies',
-                        'instructor' => 'Anika Nilles',
+                        'title' => 'Sing With Vibrato',
+                        'instructor' => 'Lisa Witt',
                     ],
                     [
                         'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Dom-Famularo.jpg',
-                        'title' => 'Pedal<br> Control',
-                        'instructor' => 'Dom Famularo',
+                        'title' => 'Hit The High Notes',
+                        'instructor' => 'Lisa Witt',
                     ],
                     [
                         'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Tommy-Igoe.jpg',
-                        'title' => 'Groove<br> Essentials',
-                        'instructor' => 'Tommy Igoe',
+                        'title' => 'Beautiful Harmonies',
+                        'instructor' => 'Julia Ziegler',
                     ],
                     [
                         'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Dorothe-Taylor-01.jpg',
-                        'title' => 'Stick<br> Control',
-                        'instructor' => 'Dorothea Taylor',
+                        'title' => 'How To Sing A Duet',
+                        'instructor' => 'Tony Lindsay & Lisa Witt',
                     ],
                     [
                         'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Bruce-Becker.jpg',
-                        'title' => 'Hand<br> Technique',
-                        'instructor' => 'Bruce Becker',
+                        'title' => 'Singing Runs',
+                        'instructor' => 'Lisa Witt',
                     ],
                     [
                         'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Billy-Cobham.jpg',
-                        'title' => 'Internal<br> Synchronization',
-                        'instructor' => 'Billy Cobham',
-                    ],
-                    [
-                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Emmanuelle-Caplette.jpg',
-                        'title' => 'Traditional<br> Grip',
-                        'instructor' => 'Emmanuelle Caplette',
-                    ],
-                    [
-                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Sarah-Thawer.jpg',
-                        'title' => '4-Way<br> Coordination',
-                        'instructor' => 'Sarah Thawer',
+                        'title' => 'Increase Your Vocal Range',
+                        'instructor' => 'Lisa Witt',
                     ],
                 ]
             ],
             [
-                'title' => 'Find your groove',
+                'title' => 'Songwriting & performance',
                 'images' => [
                     [
                     'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Simon-Phillips.jpg',
-                    'title' => 'Elevate Your<br> Drum Sound',
-                    'instructor' => 'Simon Phillips',
+                    'title' => 'Singing Starter Kit',
+                    'instructor' => 'Lisa Witt',
                     ],
                     [
                     'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Aaron-Spears.jpg',
-                    'title' => 'Drum<br> Chops',
-                    'instructor' => 'Aaron Spears',
+                    'title' => 'Start Writing Songs',
+                    'instructor' => 'Cate Canning',
                     ],
                     [
                     'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Hannah-Welton.jpg',
-                    'title' => 'Writing<br> Drum Parts',
-                    'instructor' => 'Hannah Welton',
+                    'title' => 'Composing Lyrics',
+                    'instructor' => 'Tony Lindsay',
                     ],
                     [
                     'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Matt-McGuire.jpg',
-                    'title' => 'Song<br> Breakdowns',
-                    'instructor' => 'Matt McGuire',
+                    'title' => 'Songwriting For Singers',
+                    'instructor' => 'Hailey Benedict',
                     ],
                     [
                     'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Dorothe-Taylor-02.jpg',
-                    'title' => 'Rudiments<br> & Patterns',
-                    'instructor' => 'Dorothea Taylor',
+                    'title' => 'How Your Voice Works',
+                    'instructor' => 'Darcy D',
                     ],
                     [
                     'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Aric-Improta.jpg',
-                    'title' => 'The Creative<br> Mindset',
-                    'instructor' => 'Aric Improta',
-                    ],
-                    [
-                    'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Kaz-Rodgriguez.jpg',
-                    'title' => 'Musical<br> Exercises',
-                    'instructor' => 'Kaz Rodriguez',
-                    ],
-                    [
-                    'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Gavin-Harrison.jpg',
-                    'title' => 'Bass Drum<br> Calibration',
-                    'instructor' => 'Gavin Harrison',
+                    'title' => 'How To Record Your Voice',
+                    'instructor' => 'Cate Canning',
                     ],
                 ]
             ],
@@ -375,39 +345,39 @@
         $songItems = [
             [
                 'icon' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/5000-songs-icon.svg',
-                'title' => '5000+ popular songs.',
-                'desc' => 'Get note-for-note song breakdowns for <br class="hidden sm:inline"> every style, era, and skill level.',
+                'title' => '1000+ popular songs.',
+                'desc' => 'Get note-for-note song breakdowns for every style, era, and skill level.',
             ],
             [
                 'icon' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/note-for-note-icon.svg',
                 'title' => 'Find the perfect tempo.',
-                'desc' => 'Slow down or speed up any section <br class="hidden sm:inline">of a song to hear every note.',
+                'desc' => 'Slow down any section of a song to hear the cadence and intricacies.',
             ],
             [
                 'icon' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/tempo-icon.svg',
-                'title' => 'Loop the trouble spots.',
-                'desc' => 'No more pausing and rewinding that<br class="hidden sm:inline"> tricky fill. Loop it over and over again!  ',
+                'title' => 'Loop the hard parts.',
+                'desc' => 'Working on the chorus? Simply create a loop to sing it over and over!',
             ],
             [
                 'icon' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/no-drums-icon.svg',
-                'title' => 'Remove the drums <div class="rounded-full ml-2 inline-block bg-promo text-black text-xs px-2">NEW</div>',
-                'desc' => 'Magically remove the original drums<br class="hidden sm:inline"> to make each song uniquely yours. ',
+                'title' => 'Personal feedback, anytime.',
+                'desc' => 'Share a video and you’ll get helpful feedback from our singing community.',
             ],
             [
                 'icon' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/devices-icon.svg',
                 'title' => 'Take your songs anywhere.',
-                'desc' => 'Accessible on any device, or printable,<br class="hidden sm:inline"> so you can play any song, any time.  ',
+                'desc' => 'Accessible on any device, or printable, so you can sing any song, any time.',
             ],
 
         ];
     @endphp
 
     @include('musora.sales.components.songs-section', [
-        'header' => 'Play your favorite songs.',
-        'desc' => 'You’ll have <strong>all the tools you need</strong> to make sure you never miss a beat.',
+        'header' => 'Sing your favorite songs.',
+        'desc' => 'You’ll have <strong>all the tools you need</strong> to make sure you never miss a note. ',
         'video' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/smells-like-teen-spirit2.mp4',
-        'brandName' => 'Drumeo',
-        'bannerDesc' => 'Powered by Musora, Drumeo includes full access to our communities for piano, guitar, and voice.',
+        'brandName' => 'Singeo',
+        'bannerDesc' => 'Powered by Musora, Singeo includes full access to our communities for drums, piano, and guitar.',
     ])
 
     @php
