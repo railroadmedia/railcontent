@@ -1,8 +1,8 @@
 @php
-    require_once(resource_path('marketing/views/singeo/sales/pages/songs/sliders.php'))
+    require_once(resource_path('marketing/views/singeo/sales/features/songs.php'))
 @endphp
 
-@extends('singeo.sales.pages.coaches-method-songs-layout')
+@extends('singeo.sales.features.features-layout')
 
 @section('page-meta')
     <title>Singeo | Sing your favorite songs. </title>

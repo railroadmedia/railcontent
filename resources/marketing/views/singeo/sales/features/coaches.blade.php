@@ -1,8 +1,8 @@
 @php
-    require_once(resource_path('marketing/views/singeo/sales/pages/coaches/sliders.php'))
+    require_once(resource_path('marketing/views/singeo/sales/features/coaches.php'))
 @endphp
 
-@extends('singeo.sales.pages.coaches-method-songs-layout')
+@extends('singeo.sales.features.features-layout')
 
 @section('page-meta')
     <title>Singeo | Study with vocal coaches & performers.</title>

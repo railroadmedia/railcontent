@@ -7,10 +7,9 @@ use App\Http\Controllers\Singeo\LeadGenController;
 Route::domain('{singeoDomain}')
     ->middleware(['web_public'])
     ->group(function () {
-    Route::get('/', [SalesController::class, 'home']);
-    Route::get('/2023-home', [SalesController::class, 'home23'] );
+    Route::get('/', [SalesController::class, 'home'] );
     Route::get('/new-year', [SalesController::class, 'promo'] );
-    Route::get('/choose-plan', [SalesController::class, 'plan23'] );
+    Route::get('/choose-plan', [SalesController::class, 'choosePlan'] );
     Route::get('/student-only', [SalesController::class, 'studentOnly']);
     Route::get('/privacy', [SalesController::class, 'privacy']);
     Route::get('/terms', [SalesController::class, 'terms']);

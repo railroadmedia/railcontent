@@ -9,17 +9,13 @@ class SalesController extends BaseController
 {
     public function home()
     {
-        return view('singeo.sales.standard', [ 'theme' => 'singeo' ]);
-    }
-    public function home23()
-    {
-        return view('singeo.sales.subscription-homepages', ['theme' => 'singeo']);
+        return view('singeo.sales.subscription', ['theme' => 'singeo']);
     }
     public function promo()
     {
-        return view('singeo.sales.subscription-homepages', ['theme' => 'singeo', 'promoVersion' => 'true']);
+        return view('singeo.sales.subscription', ['theme' => 'singeo', 'promoVersion' => 'true']);
     }
-    public function plan23()
+    public function choosePlan()
     {
         return view('singeo.sales.choose-plan', ['theme' => 'singeo']);
     }
@@ -125,14 +121,14 @@ class SalesController extends BaseController
     }
     public function method()
     {
-        return view('singeo.sales.pages.method.method', ['theme' => 'singeo', 'page' => 'method']);
+        return view('singeo.sales.features.method', ['theme' => 'singeo', 'page' => 'method']);
     }
     public function coaches()
     {
-        return view('singeo.sales.pages.coaches.coaches', ['theme' => 'singeo', 'page' => 'coaches']);
+        return view('singeo.sales.features.coaches', ['theme' => 'singeo', 'page' => 'coaches']);
     }
     public function songs()
     {
-        return view('singeo.sales.pages.songs.songs', ['theme' => 'singeo', 'page' => 'songs']);
+        return view('singeo.sales.features.songs', ['theme' => 'singeo', 'page' => 'songs']);
     }
 }
