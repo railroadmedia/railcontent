@@ -74,7 +74,7 @@
 
 @section('content')
     @include("guitareo.sales.partials._nav", [
-        "homepageVersion" => true,
+        "subscriptionVersion" => true,
         "scrollToJoin" => true,
         "mcVersion" => true
     ])

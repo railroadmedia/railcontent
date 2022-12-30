@@ -25,7 +25,7 @@
         <div style="font-size:0px">
             @foreach($bonuses as $bonus)
                 <div
-                    class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3 w-1/2 md:w-1/4 lg:w-1/5"
+                    class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3 @if(!empty($bonusWidth)) {{ $bonusWidth }} @else w-1/2 md:w-1/4 lg:w-1/5 @endif"
                     x-data="{
                         flipped: false,
                     }"

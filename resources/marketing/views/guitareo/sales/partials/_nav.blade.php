@@ -34,15 +34,45 @@
             ></cart-sidebar>
         </div>
     @endif
-    @if(!empty($homepageVersion))
-        <div class="edge-wrap show-for-medium">
-            <a class="@if(!empty($scrollToJoin)) anchor-slide @endif"  href="/#method" >Method</a>
-            <a class="@if(!empty($scrollToJoin)) anchor-slide @endif"  href="/#songs" >Songs</a>
-            <a class="@if(!empty($scrollToJoin)) anchor-slide @endif"  href="/#coaches" >Coaches</a>
-        </div>
+    @if(!empty($subscriptionVersion))
+        @if(!empty($fullSubscriptionVersion))
+            <div class="relative">
+                <div class="edge-wrap show-for-medium">
+                    <a class="cursor-pointer features @if(strpos(url()->full(), 'method') || strpos(url()->full(), 'songs') || strpos(url()->full(), 'coaches')) active @endif">Features <i class="fa-solid fa-caret-down"></i></a>
+                    <a class="cursor-pointer instruments">Instruments <i class="fa-solid fa-caret-down"></i></a>
+                    <a class=" @if(strpos(url()->full(), 'choose-plan')) active @endif" href="{{ get_legacy_brand_base_url('guitareo') }}/choose-plan" >Pricing</a>
+                    <a class=" @if(strpos(url()->full(), 'shop')) active @endif" href="{{ get_legacy_brand_base_url('guitareo') }}/shop" >Shop</a>
+                    <a class="" href="{{ get_legacy_brand_base_url('guitareo') }}/riff" >Blog</a>
+
+                </div>
+                <div class="features-dd hidden shadow-md bg-white rounded-xl p-2 absolute flex flex-col left-44 lg:left-48 top-10 lg:top-12 w-44">
+                    <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full @if(strpos(url()->full(), 'method')) active @endif" href="{{ get_legacy_brand_base_url('guitareo') }}/method" ><i class="mr-1 text-lg fa-fw far fa-music-note"></i> Method</a>
+                    <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full @if(strpos(url()->full(), 'songs')) active @endif" href="{{ get_legacy_brand_base_url('guitareo') }}/songs" ><i class="mr-1 text-lg fa-fw far fa-headphones"></i> Songs</a>
+                    <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full @if(strpos(url()->full(), 'coaches')) active @endif" href="{{ get_legacy_brand_base_url('guitareo') }}/coaches" ><i class="mr-1 text-lg fa-fw far fa-whistle"></i> Coaches</a>
+                </div>
+                <div class="instruments-dd hidden shadow-md bg-white rounded-xl p-2 absolute flex flex-col left-72 lg:left-80 -ml-3 top-10 lg:top-12 w-44">
+                    <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full" href="{{ get_legacy_brand_base_url('drumeo') }}/2023-home" ><i class="mr-1 text-lg fa-fw far fa-drum"></i> Drums</a>
+                    <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full" href="{{ get_legacy_brand_base_url('pianote') }}/2023-home" ><i class="mr-1 text-lg fa-fw far fa-piano-keyboard"></i> Pianote</a>
+                    <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full" href="{{ get_legacy_brand_base_url('singeo') }}/2023-home" ><i class="mr-1 text-lg fa-fw far fa-microphone-stand"></i> Singing</a>
+                </div>
+            </div>
+        @endif
         <div class="button-wrap">
-            <a href="{{ get_legacy_brand_base_url('guitareo') }}/shop" class="join outline-button">Shop</a>
-            <a href="#customize-anchor" class="join anchor-slide">Join<span class="show-for-medium"> Guitareo</span></a>
+            <a @if(!empty($scrollToJoin))
+                href="#customize-anchor" class="join anchor-slide"
+                @elseif(!empty($joinUrl))
+                    href="{{ $joinUrl }}" class="join"
+                @else
+                    href="/#customize-anchor" class="join"
+                @endif
+            >
+
+                @if(!empty($trialVersion))
+                    Start Trial
+                @else
+                    Join<span class="show-for-medium"> Guitareo</span>
+                @endif
+            </a>
         </div>
     @endif
 </div>
@@ -56,24 +86,77 @@
         ])
 
         @include('guitareo.sales.partials._nav-link', [
-            "linkName" => "Contact",
-            "linkIcon" => "fas fa-phone",
-            "linkUrl" => get_musora_brand_base_url().'/contact'
-        ])
-
-        @include('guitareo.sales.partials._nav-link', [
-            "linkName" => "Guitareo",
+            "linkName" => "Home",
             "linkIcon" => "fas fa-graduation-cap",
-            "linkUrl" => "/",
+            "linkUrl" => "/2023-home",
         ])
+        <div class="has-drop-down" target="_parent" rel="">
+            <div class="nav-link">
+                <i class="fas fa-star"></i>
+                Features
+                <div class="drop-down-arrow ">
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div class="lesson-links dropdown">
+            @include('guitareo.sales.partials._nav-link', [
+                "linkName" => "Method",
+                "linkUrl" => "/method/",
+                "linkIcon" => ''
+            ])
+            @include('guitareo.sales.partials._nav-link', [
+                "linkName" => "Songs",
+                "linkUrl" => "/songs/",
+                "linkIcon" => ''
+            ])
+            @include('guitareo.sales.partials._nav-link', [
+                "linkName" => "Coaches",
+                "linkUrl" => "/coaches/",
+                "linkIcon" => ''
+            ])
+        </div>
+        <div class="has-drop-down" target="_parent" rel="">
+            <div class="nav-link">
+                <i class="fas fa-piano-keyboard"></i>
+                Instruments
+                <div class="drop-down-arrow ">
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div class="lesson-links dropdown">
+            @include('guitareo.sales.partials._nav-link', [
+                "linkName" => "Drumeo",
+                "linkUrl" => "https://www.drumeo.com/",
+                "linkIcon" => ''
+            ])
+            @include('guitareo.sales.partials._nav-link', [
+                "linkName" => "Pianote",
+                "linkUrl" => "https://www.pianote.com/",
+                "linkIcon" => ''
+            ])
+            @include('guitareo.sales.partials._nav-link', [
+                "linkName" => "Singeo",
+                "linkUrl" => "https://www.singeo.com/",
+                "linkIcon" => ''
+            ])
+        </div>
 
         @include('guitareo.sales.partials._nav-link', [
-            "linkName" => "Holiday Deals",
+            "linkName" => "Pricing",
+            "linkIcon" => "fas fa-money-bill-wave",
+            "linkUrl" => "/choose-plan",
+        ])
+        @include('guitareo.sales.partials._nav-link', [
+            "linkName" => "Shop",
             "linkIcon" => "fas fa-tag",
             "linkUrl" => '/shop',
         ])
         @include('guitareo.sales.partials._nav-link', [
-            "linkName" => "The Riff",
+            "linkName" => "Blog",
             "linkUrl" => "/riff/",
             "linkIcon" => 'fas fa-comment-alt-edit'
         ])
@@ -153,6 +236,11 @@
         @include('guitareo.sales.partials._nav-secondary-link', [
             "linkName" => "<i class='fas fa-fw fa-question'></i>&nbsp; FAQs",
             "linkUrl" => "https://help.guitareo.com/",
+            "externalLink" => false
+        ])
+        @include('guitareo.sales.partials._nav-secondary-link', [
+            "linkName" => "<i class='fas fa-fw fa-phone'></i>&nbsp; Contact",
+            "linkUrl" => get_musora_brand_base_url().'/contact',
             "externalLink" => false
         ])
 
