@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\AssignSongsPermissionsToAllUsers;
 use App\Console\Commands\AssignSongsPermissionsToContent;
 use App\Console\Commands\AssignSongsPermissionsToProducts;
 use App\Console\Commands\CreateSongsDecember2022;
@@ -43,6 +44,7 @@ class Kernel extends ConsoleKernel
         RepairUserProgressStartedOn::class,
         AssignSongsPermissionsToContent::class,
         AssignSongsPermissionsToProducts::class,
+        AssignSongsPermissionsToAllUsers::class,
     ];
 
     /**
