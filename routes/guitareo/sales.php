@@ -31,10 +31,7 @@ Route::domain('{guitareoDomain}')
     Route::get('/welcome/3', [SalesController::class, 'welcome3']);
     Route::get('/ayla-recommends', [SalesController::class, 'aylarecommends']);
 
-    Route::get('/survival-kit', [SalesController::class, 'survivalkit']);
-
     Route::get('/shop/500-songs', [SalesController::class, 'songs500']);
-    Route::get('/500-songs-discount', [SalesController::class, 'songs500Discount']);
     Route::get('/shop/acoustic-guitar-made-easy', [SalesController::class, 'acousticGuitarMadeEasy']);
     Route::get('/shop/guitar-quest', [SalesController::class, 'guitarQuest']);
     Route::get('/guitar-quest', [SalesController::class, 'guitarQuest']);
@@ -43,9 +40,9 @@ Route::domain('{guitareoDomain}')
     Route::get('/guitar-quest/testimonials', [SalesController::class, 'guitarQuestTestimonials']);
     Route::get('/shop/guitar-system', [SalesController::class, 'gs']);
     Route::get('/shop/guitar-technique-made-easy', [SalesController::class, 'guitarTechniqueMadeEasy']);
-    Route::get('/guitar-technique-made-easy-beginner', [SalesController::class, 'guitarTechniqueMadeEasyBeginner']);
-    Route::get('/guitar-technique-made-easy-discount', [SalesController::class, 'guitarTechniqueMadeEasyDiscount']);
-    Route::get('/guitar-technique-made-easy-gs', [SalesController::class, 'guitarTechniqueMadeEasyGSDiscount']);
-    Route::get('/guitar-technique-made-easy-pack', [SalesController::class, 'guitarTechniqueMadeEasyPack']);
     Route::get('/shop/rhythm-and-groove', [SalesController::class, 'rhythmAndGroove']);
+    Route::get('/{page?}', SalesController::class . '@products')
+        ->whereIn('page', [
+            'guitar-technique-made-easy-discount', 'guitar-technique-made-easy-beginner', '500-songs-discount'
+        ]);
 });

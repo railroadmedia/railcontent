@@ -3,7 +3,7 @@
     <div class="flip-card-inner">
         <div class="flip-card-front card-inside">
             <section class="shop">
-                <div class="top-image @if(!empty($packLogo)) with-logo @endif" style="background-image:url(https://cdn.musora.com/image/fetch/w_600,q_auto:best/{{ $thumbnail }});">
+                <div class="top-image @if(!empty($packLogo)) with-logo @endif" style="background-image:url('https://cdn.musora.com/image/fetch/w_600,q_auto:best/@if(str_contains($thumbnail, 'amazonaws') || str_contains($thumbnail, 'cloudfront')){{$thumbnail}}@else{{'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$thumbnail}}@endif');">
                     @if (!empty($badgeText))
                         <span class="top-left-badge text-white bg-promo">
                             {!! $badgeText !!}
@@ -17,7 +17,7 @@
                     @endif
                     @if(!empty($packLogo))
                         <div class="logo">
-                            <img @if(!empty($invertLogo)) style="filter:invert(1);" @endif src="{{ $packLogo }}">
+                            <img @if(!empty($invertLogo)) style="filter:invert(1);" @endif src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/@if(str_contains($packLogo, 'amazonaws') || str_contains($packLogo, 'cloudfront')){{$packLogo}}@else{{'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$packLogo}}@endif" alt="{{ $title }} logo">
                         </div>
                     @endif
                     <i class="fas fa-arrow-right hover-icon"></i>
@@ -61,7 +61,7 @@
                                 <option hidden value="">Choose Size</option>
                                 @foreach($sizes as $size)
                                     <option
-                                        @if($products[$sku.'-'.($size_case_sensitive ? strtolower($size->code) : $size->code)]->getPublicStockCount() === 0) disabled @endif
+                                        @if($products[$sku.'-'.($size_case_sensitive ? strtolower($size->code) : $size->code)]->getStockAvailability() === 0) disabled @endif
                                         value="?products[{{$sku}}-{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}]=1"
                                         data-product-json='{"{{$sku}}-{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}": 1}'
                                     >

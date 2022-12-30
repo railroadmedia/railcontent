@@ -28,12 +28,7 @@ class MarketingPagesProductsViewComposer
      */
     public function compose(View $view)
     {
-        if (Cache::has('all_ecommerce_product_entities')) {
-            $products = Cache::get('all_ecommerce_product_entities');
-        } else {
-            $products = $this->productRepository->all();
-            Cache::set('all_ecommerce_product_entities', $products, 300);
-        }
+        $products = $this->productRepository->all();
 
         $products = array_combine(array_entity_column($products, 'getSku'), $products);
 

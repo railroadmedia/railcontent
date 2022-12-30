@@ -49,9 +49,9 @@
                 </div>
             </div>
 
-            <!-- v-show is used to keep the stripe elements iframes loaded but hidden, using v-if would require re-initialization -->
+            <!-- v-if is used to keep the stripe elements iframes loaded but hidden, using v-if would require re-initialization -->
             <div
-                v-show="$_paymentMethod === 'credit_card'"
+                v-if="$_paymentMethod === 'credit_card'"
                 class="flex flex-row flex-wrap"
             >
                 <div class="flex flex-column xs-12 sm-6 ph-1 mb-2">

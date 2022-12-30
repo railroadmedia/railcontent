@@ -1,6 +1,6 @@
 <div class="top-bar expanded">
     <div class="logo">
-        <a href="/">
+        <a href="{{ get_legacy_brand_base_url('guitareo') }}">
             <img src="https://guitareo.s3.amazonaws.com/sales/guitareo-logo-green.png" alt="Guitareo Logo">
         </a>
     </div>
@@ -63,7 +63,7 @@
 
         @include('guitareo.sales.partials._nav-link', [
             "linkName" => "Guitareo",
-            "linkIcon" => "icon-courses",
+            "linkIcon" => "fas fa-graduation-cap",
             "linkUrl" => "/",
         ])
 
@@ -80,7 +80,7 @@
 
         <div class="has-drop-down" target="_parent" rel="">
             <div class="nav-link">
-                <i class="icon-live"></i>
+                <i class="fas fa-circle-play"></i>
                 Free Resources
                 <div class="drop-down-arrow ">
                     <span></span>

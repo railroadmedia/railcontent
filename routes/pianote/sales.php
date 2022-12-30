@@ -28,24 +28,22 @@ Route::domain('{pianoteDomain}')
     Route::get('/choose-your-trial', [SalesController::class, 'chooseyourtrial'] );
     Route::get('/choose-your-trial-month', [SalesController::class, 'chooseyourtrialmonth'] );
     Route::get('/a/davidbennett', [SalesController::class, 'davidbennett'] );
-    Route::get('/affiliate/asobergirlsguide', [SalesController::class, 'asobergirlsguide'] );
-    Route::get('/affiliate/keyboardkraze', [SalesController::class, 'keyboardkraze'] );
-    Route::get('/affiliate/leviclay', [SalesController::class, 'leviclay'] );
-    Route::get('/affiliate/pianodreamers', [SalesController::class, 'pianodreamers'] );
+    Route::group(['prefix' => 'affiliate' ],
+        function () {
+            Route::get('/{page?}', SalesController::class . '@affiliates')
+                ->whereIn('page', [
+                    'asobergirlsguide', 'keyboardkraze', 'leviclay', 'pianodreamers'
+                ]);
+        }
+    );
     Route::get('/affiliate-trial', [SalesController::class, 'affiliatetrial'] );
     Route::get('/giveaway', [SalesController::class, 'giveaway'] );
-    Route::get('/500-songs-fb', [SalesController::class, 'songs500fb'] );
-    Route::get('/500-songs-discount', [SalesController::class, 'songs500discount'] );
-    Route::get('/500-songs-carols-discount', [SalesController::class, 'songs500carolsdiscount'] );
-    Route::get('/500-songs-chord-discount', [SalesController::class, 'songs500chorddiscount'] );
-    Route::get('/500-songs-elton-john', [SalesController::class, 'songs500eltonjohn'] );
-    Route::get('/500-songs-alicia-keys', [SalesController::class, 'songs500aliciakeys'] );
-    Route::get('/500-songs-sam-smith', [SalesController::class, 'songs500samsmith'] );
-    Route::get('/500-songs-taylor-swift', [SalesController::class, 'songs500taylorswift'] );
-    Route::get('/500-songs-the-beatles', [SalesController::class, 'songs500thebeatles'] );
-    Route::get('/500-songs-free-lesson', [SalesController::class, 'songs500freelesson'] );
+    Route::get('/{page?}', SalesController::class . '@products')
+        ->whereIn('page', [
+            '500-songs-fb', '500-songs-discount', '500-songs-carols-discount', '500-songs-chord-discount', '500-songs-elton-john', '500-songs-alicia-keys', '500-songs-sam-smith', '500-songs-taylor-swift', '500-songs-the-beatles', '500-songs-free-lesson'
+        ]);
     Route::get('/shop/faster-fingers', [SalesController::class, 'fasterfingers'] );
-    Route::get('/worship-piano', [SalesController::class, 'worshippiano'] );
+    Route::get('/shop/worship-piano', [SalesController::class, 'worshippiano'] );
     Route::get('/shop/piano-technique-made-easy', [SalesController::class, 'pianotechniquemadeeasy'] );
     Route::get('/shop/destupefy-your-left-hand', [SalesController::class, 'destupefyyourlefthand'] );
     Route::get('/shop/play-beautiful-piano', [SalesController::class, 'playbeautifulpiano'] );
@@ -55,4 +53,6 @@ Route::domain('{pianoteDomain}')
     Route::get('/upgrade-offer', [SalesController::class, 'upgradeoffer'] );
     Route::get('/lisa-recommends', [SalesController::class, 'lisarecommends'] );
     Route::get('/welcome-party', [SalesController::class, 'welcomeparty'] );
+    Route::post('/claim-roland-90-day-access', [SalesController::class, 'claimRoland90DaysAccess'] );
+
 });

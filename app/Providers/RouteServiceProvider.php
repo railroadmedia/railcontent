@@ -85,6 +85,8 @@ class RouteServiceProvider extends ServiceProvider
             Route::group([], base_path('routes/singeo/shop.php'));
 
             Route::group([], base_path('routes/misc/http_error_code_routes.php'));
+            
+            Route::group([], base_path('routes/misc/legacy_brand_members_redirects_to_up.php'));
         });
     }
 }

@@ -207,7 +207,7 @@
                 <div class="relative z-20 pb-12 header-text px-6">
                     <h4 class="font-bold text-base md:text-lg"><strong>BUY NOW: ${{ PianotePrices::$foundationBooksRegular }} USD</strong></h4>
 
-                    @if($products['pianote-foundation']->getStock() < 1)
+                    @if($products['pianote-foundation']->getStockAvailability() < 1)
                     <a class="join sold-out mt-3 mb-5 sm:mb-10 w-full max-w-2xl text-lg sm:text-xl md:text-2xl lg:text-3xl">SOLD OUT!</a>
                     @else
 
@@ -483,7 +483,7 @@
                         <h4 class="mt-4 sm:mt-6 mb-5 sm:mb-8 text-base md:text-lg">GET THE ENTIRE SET TODAY.<br><strong class="font-bold">JUST ${{ PianotePrices::$foundationBooksRegular }} USD</strong></h4>
 
 
-                        @if($products['pianote-foundation']->getStock() < 1)
+                        @if($products['pianote-foundation']->getStockAvailability() < 1)
                             <a class="join sold-out mt-3 mb-5 sm:mb-10 w-full max-w-2xl text-lg sm:text-xl md:text-2xl lg:text-3xl">SOLD OUT!</a>
                         @else
                             <a

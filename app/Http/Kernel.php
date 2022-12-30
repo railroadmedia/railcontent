@@ -37,7 +37,7 @@ class Kernel extends HttpKernel
      */
     protected $middlewareGroups = [
         'web_public' => [
-            \App\Http\Middleware\ClearLegacyMusoraCookies::class,
+//            \App\Http\Middleware\ClearLegacyMusoraCookies::class,
             \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
@@ -53,7 +53,7 @@ class Kernel extends HttpKernel
         ],
 
         'web_authenticated' => [
-            \App\Http\Middleware\ClearLegacyMusoraCookies::class,
+//            \App\Http\Middleware\ClearLegacyMusoraCookies::class,
             \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
@@ -73,7 +73,7 @@ class Kernel extends HttpKernel
         ],
 
         'api_public' => [
-            \App\Http\Middleware\ClearLegacyMusoraCookies::class,
+//            \App\Http\Middleware\ClearLegacyMusoraCookies::class,
             \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
@@ -86,7 +86,7 @@ class Kernel extends HttpKernel
         ],
 
         'api_authenticated' => [
-            \App\Http\Middleware\ClearLegacyMusoraCookies::class,
+//            \App\Http\Middleware\ClearLegacyMusoraCookies::class,
             \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,

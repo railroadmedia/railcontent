@@ -51,7 +51,7 @@
                     >
                         <button class="join border-none"><i class="fas fa-cart-plus text-2xl mr-1"></i> Add To Cart</button>
                     </a>
-                @elseif($bundle)
+                @elseif(!empty($bundle))
                     <a class="online-atc" href="/laravel/public/shopping-cart/api/query?{!! $sku !!}"
                        data-base-url="/laravel/public/shopping-cart/api/query?{!! $sku !!}">
                         <button class="join border-none"><i class="fas fa-cart-plus text-2xl mr-1"></i> Order Now</button>
@@ -64,7 +64,7 @@
                         @foreach($sizes as $size)
                             <option
                                 class="bg-white text-black"
-                                @if($products[$sku.'-'.($size_case_sensitive ? strtolower($size->code) : $size->code)]->getPublicStockCount() === 0) disabled @endif
+                                @if($products[$sku.'-'.($size_case_sensitive ? strtolower($size->code) : $size->code)]->getStockAvailability() === 0) disabled @endif
                                 value="@if(!empty($sku)){{$sku}}-@endif{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}"
                                 data-price="{{!empty($size->price) ? $size->price : $price}}"
                                 data-product-json='{"@if(!empty($sku)){{$sku}}-@endif{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}": 1}'

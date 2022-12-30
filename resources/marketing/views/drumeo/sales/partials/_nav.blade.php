@@ -1,6 +1,6 @@
 <nav id="nav" class="top-bar row expanded">
     <div class="logo">
-        <a href="/">
+        <a href="{{ get_legacy_brand_base_url('drumeo') }}">
             <img src="https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="Drumeo">
         </a>
     </div>
@@ -77,7 +77,7 @@
         ])
         @include('drumeo.sales.partials._nav-link', [
             "linkName" => "Drumeo",
-            "linkIcon" => "icon-courses",
+            "linkIcon" => "fas fa-graduation-cap",
             "linkUrl" => "/",
         ])
         @include('drumeo.sales.partials._nav-link', [
@@ -87,7 +87,7 @@
         ])
         <div class="has-drop-down" target="_parent" rel="">
             <div class="nav-link">
-                <i class="icon-live"></i>
+                <i class="fas fa-circle-play"></i>
                 Free Resources
                 <div class="drop-down-arrow ">
                     <span></span>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Drumeo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
 use App\Models\Product;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ShopController extends BaseController
 {
@@ -48,5 +49,12 @@ class ShopController extends BaseController
         $product = Product::where('slug', 'Drumeo-'.$slug)->firstOrFail();
 
         return view('drumeo.drumshop.product-layout', [ 'product' => $product, 'theme' => 'drumeo' ]);
+    }
+
+    public function products(Request $request, $domain, $page = null)
+    {
+        return view('drumeo.products.'.$page);
+
+        throw new NotFoundHttpException();
     }
 }

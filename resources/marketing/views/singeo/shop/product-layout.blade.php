@@ -3,10 +3,10 @@
 @section('global-head')
     @parent
     <title>{{ $product->name }}</title>
-    <meta property="og:description" content="{{ $product->meta_desc  }}}">
+    <meta property="og:description" content="{{ $product->meta_desc  }}">
     <meta property="og:url" content="https://www.singeo.com/{{ Request::path() }}">
     @if(!empty($product->meta_img))
-        <meta property="og:image" content="@if(str_contains($product->meta_img, 'amazonaws') || str_contains($product->meta_img, 'cloudfront')) {{$product->meta_img}} @else https://laravel-nova.s3.us-east-2.amazonaws.com/{{ $product->meta_img  }}@endif">
+        <meta property="og:image" content="@if(str_contains($product->meta_img, 'amazonaws') || str_contains($product->meta_img, 'cloudfront') || str_contains($product->meta_img, 'vimeocdn')) {{$product->meta_img}} @else https://laravel-nova.s3.us-east-2.amazonaws.com/{{ $product->meta_img  }}@endif">
     @endif
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
@@ -59,7 +59,7 @@
                 "price"=> $product->discounted_price === '0.00' || empty($product->discounted_price) ? $product->price : $product->discounted_price,
                 "guaranteeBadge" => $product->guaranteed,
                 "sizes" => $product->sizes,
-                "soldOut" => !empty($products[$product->sku]) ? $products[$product->sku]->getPublicStockCount() === 0 : $product->sold_out,
+                "soldOut" => !empty($products[$product->sku]) ? $products[$product->sku]->getStockAvailability() === 0 : $product->sold_out,
                 "specialText" => $product->special_text,
                 "freeShipping" => $product->free_shipping,
                 "size_case_sensitive" => $product->size_case_sensitive,
@@ -80,7 +80,7 @@
                 @if($product->productType->name === 'Bundles' && !empty($product->spread_img))
                     <div class="text-center">
                         <h3 class="text-center mb-4"><strong>What's included:</strong></h3>
-                        <img class="mb-4" src="https://cdn.musora.com/image/fetch/w_800,q_auto:best/@if(str_contains($product->spread_img, 'amazonaws') || str_contains($product->spread_img, 'cloudfront')){{$product->spread_img}}@else https://laravel-nova.s3.us-east-2.amazonaws.com/{{ $product->spread_img  }}@endif" alt="bundle spread image" />
+                        <img class="mb-4" src="https://cdn.musora.com/image/fetch/w_800,q_auto:best/@if(str_contains($product->spread_img, 'amazonaws') || str_contains($product->spread_img, 'cloudfront') || str_contains($product->meta_img, 'vimeocdn')){{$product->spread_img}}@else https://laravel-nova.s3.us-east-2.amazonaws.com/{{ $product->spread_img  }}@endif" alt="bundle spread image" />
                     </div>
                 @endif
 
@@ -127,9 +127,10 @@
 
     @yield('bottom-banner')
     @include("singeo.sales.partials._footer")
-    <script src="{{ asset('marketing/js/singeo/manifest.js') }}"></script>
-    <script src="{{ asset('marketing/js/singeo/vendor.js') }}"></script>
-    <script src="{{ asset('marketing/js/singeo/app.js') }}"></script>
+    {{-- Platform --}}
+    <script src="{{ mix('/platform/js/manifest.js') }}"></script>
+    <script src="{{ mix('/platform/js/vendor.js') }}"></script>
+    <script src="{{ mix('/platform/js/app.js') }}"></script>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

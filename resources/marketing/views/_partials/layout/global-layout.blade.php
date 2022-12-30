@@ -13,7 +13,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
         <!-- Icons -->
         <link rel="stylesheet" href="https://dpwjbsxqtam5n.cloudfront.net/fonts/font-awesome-5/fontawesome-all.min.css">
-        <link rel="stylesheet" href="https://d1prhhmg8i11jr.cloudfront.net/v1.0.3/dist/icons.css">
+        <link href="https://dpwjbsxqtam5n.cloudfront.net/fonts/icons.css" rel="stylesheet">
         <!-- Favicons -->
         @include('_partials.layout.favicons.musora-favicons')
 

@@ -55,7 +55,7 @@
         {{--</a>--}}
         {{--</div>--}}
         {{--<div class="w-full md:w-1/2 px-2 md:px-3 relative">--}}
-        {{--<p class="w-full px-4 pt-2 pb-4 -mb-3 --}}{{----}}{{----}}{{----}}{{--bg-guitareo--}}{{----}}{{----}}{{----}}{{-- text-black rounded-t-2xl" style="background: linear-gradient(to bottom, #feab01, #fd7a00);"><strong>ONLY <s class="opacity-60">50</s> {{ $products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() }} SPOTS LEFT!</strong></p>--}}
+        {{--<p class="w-full px-4 pt-2 pb-4 -mb-3 --}}{{----}}{{----}}{{----}}{{--bg-guitareo--}}{{----}}{{----}}{{----}}{{-- text-black rounded-t-2xl" style="background: linear-gradient(to bottom, #feab01, #fd7a00);"><strong>ONLY <s class="opacity-60">50</s> {{ $products['PIANOTE-MEMBERSHIP-LIFETIME']->getStockAvailability() }} SPOTS LEFT!</strong></p>--}}
         {{--<a href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[piano-chords-and-scales-guide]=1&products[100-days-of-practice-poster]=1&products[poster-chords]=1&products[poster-scales]=1&products[pianote-practice-planner]=1&locked=true&redirect=/order" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">--}}
         {{--<div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">--}}
         {{--<h5 class="leading-none mb-3"><strong>LIFETIME</strong></h5>--}}

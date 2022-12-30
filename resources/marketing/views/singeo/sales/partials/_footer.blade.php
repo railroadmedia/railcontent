@@ -1,12 +1,12 @@
-{{--<div class="cookie-notice hide">--}}
-    {{--<div class="text-wrap">--}}
-        {{--<p>We use cookies to store information on your computer. Some of these cookies are essential, while others are used to help our efforts in improving your experience while using the site. By clicking "Accept All Cookies" you agree to the storing of cookies on your device.</p>--}}
-        {{--<div class="text-center">--}}
-            {{--<div id="accept-cookies">ACCEPT ALL COOKIES</div>--}}
-            {{--<a href="/cookie">Cookie Policy</a>--}}
-        {{--</div>--}}
-    {{--</div>--}}
-{{--</div>--}}
+<div class="cookie-notice hide">
+    <div class="text-wrap">
+        <p>We use cookies to store information on your computer. Some of these cookies are essential, while others are used to help our efforts in improving your experience while using the site. By clicking "Accept All Cookies" you agree to the storing of cookies on your device.</p>
+        <div class="text-center">
+            <div id="accept-cookies">ACCEPT ALL COOKIES</div>
+            <a href="/cookie">Cookie Policy</a>
+        </div>
+    </div>
+</div>
 <footer id="footer" class="bottom-footer clearfix relative">
     <div class="container">
         {{--<div class="footer-link-wrap footer-sign-up">--}}

@@ -25,13 +25,6 @@ $(document).ready(function (){
         arrowIcon.toggleClass("active");
     });
 
-    // topbar background
-
-    $(".top-bar").toggleClass("scrolled", $(this).scrollTop() > 0);
-    $(document).scroll(function () {
-        $(".top-bar").toggleClass("scrolled", $(this).scrollTop() > 0);
-    });
-
     // cookie bar
     var popUp = false;
     (function getPopUpCookie() {
@@ -40,7 +33,7 @@ $(document).ready(function (){
         document.cookie = "cookiesEnabled=true; expires=" + date.toUTCString() + "; path=/";
         var cookiesEnabled = document.cookie.indexOf("cookiesEnabled=") !== -1;
         var hasCookie = document.cookie.indexOf("cookieAccept=true");
-        if (hasCookie < 0 && cookiesEnabled === true) {
+        if (hasCookie < 0 && cookiesEnabled === true && window.location.hostname.endsWith('drumeo.com')) {
             setTimeout(function () {
                 $(".cookie-notice").removeClass("hide");
             }, 3000);

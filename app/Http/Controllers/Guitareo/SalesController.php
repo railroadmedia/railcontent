@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Guitareo;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class SalesController extends BaseController
 {
@@ -82,11 +83,6 @@ class SalesController extends BaseController
         return view('guitareo.shop.ayla-recommends');
     }
 
-    public function survivalkit()
-    {
-        return view('shop.pages.survival-kit');
-    }
-
     public function home()
     {
         return view('guitareo.sales.standard', ['theme' => 'guitareo']);
@@ -115,11 +111,6 @@ class SalesController extends BaseController
     public function songs500()
     {
         return view('guitareo.products.500-songs');
-    }
-
-    public function songs500Discount()
-    {
-        return view('guitareo.products.500-songs-discount');
     }
 
     public function acousticGuitarMadeEasy()
@@ -161,28 +152,15 @@ class SalesController extends BaseController
         return view('guitareo.products.guitar-technique-made-easy');
     }
 
-    public function guitarTechniqueMadeEasyBeginner()
-    {
-        return view('guitareo.products.guitar-technique-made-easy-beginner');
-    }
-
-    public function guitarTechniqueMadeEasyDiscount()
-    {
-        return view('guitareo.products.guitar-technique-made-easy-discount');
-    }
-
-    public function guitarTechniqueMadeEasyGSDiscount()
-    {
-        return view('guitareo.products.guitar-technique-made-easy-gs');
-    }
-
-    public function guitarTechniqueMadeEasyPack()
-    {
-        return view('guitareo.products.guitar-technique-made-easy-pack');
-    }
-
     public function rhythmAndGroove()
     {
         return view('guitareo.products.rhythm-and-groove');
+    }
+
+    public function products(Request $request, $domain, $page = null)
+    {
+        return view('guitareo.products.'.$page);
+
+        throw new NotFoundHttpException();
     }
 }

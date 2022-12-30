@@ -1,11 +1,11 @@
 <template>
     <div class="flex flex-row flex-wrap align-v-top nmh-1">
-        <NotificationToasts 
-            :icon="notification.icon" 
-            :text="notification.text" 
-            :isError="notification.isError" 
-            :slideClass="notification.slideClass" 
-            @onClose="handleNotificationClear" 
+        <NotificationToasts
+            :icon="notification.icon"
+            :text="notification.text"
+            :isError="notification.isError"
+            :slideClass="notification.slideClass"
+            @onClose="handleNotificationClear"
         />
 
         <!-- Payment SVG -->
@@ -450,7 +450,7 @@ export default {
     },
 
     beforeMount() {
-        
+
         if (!this.isSignedIn || !this.shippingAddresses || this.shippingAddresses.data.length === 0) {
             this.newAddress = true;
         }
@@ -641,6 +641,7 @@ export default {
         createOrderPayload() {
             const payload = {
                 gateway: this.brand,
+                brand: this.brand,
                 billing_country: this.paymentStateFactory.billingCountry,
                 billing_region: this.paymentStateFactory.billingRegion,
             };

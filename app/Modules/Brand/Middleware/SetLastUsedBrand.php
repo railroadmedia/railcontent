@@ -42,10 +42,6 @@ class SetLastUsedBrand
             $this->brandService->setLastUsedBrand(user(), Brand::from($request->get('brand')));
         }
 
-        if (!empty(user())) {
-            $brand = BrandService::getLastUsedBrand(user());
-        }
-
         // check the domain, all brand domains should always have the brand set to that domain regardless of the user
         // or cookie values
         if (Str::endsWith(request()->getHost(), 'drumeo.com')) {
@@ -58,7 +54,15 @@ class SetLastUsedBrand
             $brand = 'singeo';
         }
 
+        if (empty($brand) && !empty(user())) {
+            $brand = BrandService::getLastUsedBrand(user());
+        }
+
         if (!empty($brand)) {
+            if (!empty(user())) {
+                $this->brandService->setLastUsedBrand(user(), Brand::from($brand));
+            }
+
             // set railforums brand and DB connection
             $railforumsConnectionName = config('railforums.brand_database_connection_names')[$brand];
             \Railroad\Railforums\Services\ConfigService::$databaseConnectionName = $railforumsConnectionName;

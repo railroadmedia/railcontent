@@ -2,11 +2,23 @@
 
 namespace App\Http\Controllers\Pianote;
 
+use App\Modules\EventDataSynchronizer\Jobs\CustomerIoSendTransactionalEmail;
+use App\Modules\EventDataSynchronizer\Jobs\CustomerIoTriggerEvent;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
+use Railroad\Ecommerce\Services\AccessCodeService;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class SalesController extends BaseController
 {
+    private AccessCodeService $accessCodeService;
+
+    public function __construct(AccessCodeService $accessCodeService)
+    {
+        $this->accessCodeService = $accessCodeService;
+    }
+
 
     public function about()
     {
@@ -48,24 +60,11 @@ class SalesController extends BaseController
         return view('pianote.sales.trials.affiliates.davidbennett');
     }
 
-    public function asobergirlsguide()
+    public function affiliates(Request $request, $domain, $page = null)
     {
-        return view('pianote.sales.trials.affiliates.asobergirlsguide');
-    }
+        return view('pianote.sales.trials.affiliates.'.$page);
 
-    public function keyboardkraze()
-    {
-        return view('pianote.sales.trials.affiliates.keyboardkraze');
-    }
-
-    public function leviclay()
-    {
-        return view('pianote.sales.trials.affiliates.leviclay');
-    }
-
-    public function pianodreamers()
-    {
-        return view('pianote.sales.trials.affiliates.pianodreamers');
+        throw new NotFoundHttpException();
     }
 
     public function affiliatetrial()
@@ -78,54 +77,11 @@ class SalesController extends BaseController
         return view('pianote.lead-gen.giveaway');
     }
 
-    public function songs500fb()
+    public function products(Request $request, $domain, $page = null)
     {
-        return view('pianote.products.500-songs-fb');
-    }
+        return view('pianote.products.'.$page);
 
-    public function songs500discount()
-    {
-        return view('pianote.products.500-songs-discount');
-    }
-
-    public function songs500carolsdiscount()
-    {
-        return view('pianote.products.500-songs-carols-discount');
-    }
-
-    public function songs500chorddiscount()
-    {
-        return view('pianote.products.500-songs-chord-discount');
-    }
-
-    public function songs500eltonjohn()
-    {
-        return view('pianote.products.500-songs-elton-john');
-    }
-
-    public function songs500aliciakeys()
-    {
-        return view('pianote.products.500-songs-alicia-keys');
-    }
-
-    public function songs500samsmith()
-    {
-        return view('pianote.products.500-songs-sam-smith');
-    }
-
-    public function songs500taylorswift()
-    {
-        return view('pianote.products.500-songs-taylor-swift');
-    }
-
-    public function songs500thebeatles()
-    {
-        return view('pianote.products.500-songs-the-beatles');
-    }
-
-    public function songs500freelesson()
-    {
-        return view('pianote.lead-gen.500-songs-free-lesson');
+        throw new NotFoundHttpException();
     }
 
     public function fasterfingers()
@@ -242,5 +198,43 @@ class SalesController extends BaseController
     public function foundations()
     {
         return view('pianote.products.foundation-books');
+    }
+
+
+    // 408 is the 3 month access code product
+    // 2 is the customer.io email ID from their system
+    public function claimRoland90DaysAccess(Request $request)
+    {
+        // create access code
+        $accessCode = $this->accessCodeService->generateAccessCode([408], 'pianote');
+
+        // create the customer and send the email
+        dispatch(
+            (new CustomerIoSendTransactionalEmail(
+                'pianote',
+                2,
+                $request->get('email'),
+                ['access_code' => strtoupper($this->accessCodeService->hyphenateCode($accessCode->getCode()))]
+            ))
+                ->onConnection(config('event-data-synchronizer.customer_io_queue_connection_name', 'database'))
+                ->onQueue(config('event-data-synchronizer.customer_io_queue_name', 'customer_io'))
+                ->delay(Carbon::now()->addSeconds(3))
+        );
+
+        // dispatch the event
+        dispatch(
+            (new CustomerIoTriggerEvent(
+                'pianote',
+                $request->get('email'),
+                null,
+                'pianote_onboarding_roland-trial',
+                null
+            ))
+                ->onConnection(config('event-data-synchronizer.customer_io_queue_connection_name', 'database'))
+                ->onQueue(config('event-data-synchronizer.customer_io_queue_name', 'customer_io'))
+                ->delay(Carbon::now()->addSeconds(10))
+        );
+
+        return response()->json(['success' => true]);
     }
 }

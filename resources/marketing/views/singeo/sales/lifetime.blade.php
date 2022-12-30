@@ -45,7 +45,7 @@
         <div class="container mx-auto">
             <h1 class="uppercase font-bebas">Get a <span style="color:#FFAE00;">LIFETIME Singeo Membership</span></h1>
             <p class="font-extrabold">& GET EXCLUSIVE PRODUCTS, A PRIVATE MASTERCLASS… FOR FREE</p>
-            <p class="uppercase" style="color:#FFAE00;">ONLY <s>100</s> {{ $products['singeo-lifetime-membership-access']->getPublicStockCount() }} spots available</p>
+            <p class="uppercase" style="color:#FFAE00;">ONLY <s>100</s> {{ $products['singeo-lifetime-membership-access']->getStockAvailability() }} spots available</p>
             <div class="w-full mx-auto my-10 px-3" style="max-width:920px;">
                 <div class="overflow-hidden relative w-full" style="padding-bottom: 56.25%;">
                     <iframe class="absolute w-full h-full inset-0" src="//player.vimeo.com/video/774399848" frameborder="0" allowfullscreen id="videoPlayer"></iframe>

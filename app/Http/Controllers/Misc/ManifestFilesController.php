@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Misc;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
+use Illuminate\Support\Str;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ManifestFilesController extends BaseController
 {
@@ -14,7 +16,17 @@ class ManifestFilesController extends BaseController
 
     public function rootManifestFile()
     {
-        return file_get_contents(public_path('/favicon/site.webmanifest'));
+        if (Str::endsWith(request()->host(), 'drumeo.com')) {
+            return redirect()->to('/favicons/drumeo/manifest.json');
+        } elseif (Str::endsWith(request()->host(), 'pianote.com')) {
+            return redirect()->to('/favicons/pianote/site.webmanifest');
+        } elseif (Str::endsWith(request()->host(), 'guitareo.com')) {
+            return redirect()->to('/favicons/guitareo/site.webmanifest');
+        } elseif (Str::endsWith(request()->host(), 'singeo.com')) {
+            return redirect()->to('/favicons/singeo/site.webmanifest');
+        }
+
+        throw new NotFoundHttpException();
     }
 
     public function brandManifestFile($brand)

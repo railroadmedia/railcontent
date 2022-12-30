@@ -1121,7 +1121,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   transition-duration: 150ms;
   transition-property: opacity;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
   white-space: normal;
@@ -1226,7 +1225,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   position: relative !important;
 }
 .sticky {
-  position: -webkit-sticky !important;
   position: sticky !important;
 }
 .inset-0 {
@@ -3627,6 +3625,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-text-opacity: 1 !important;
   color: rgb(156 163 175 / var(--tw-text-opacity)) !important;
 }
+.text-green-500 {
+  --tw-text-opacity: 1 !important;
+  color: rgb(34 197 94 / var(--tw-text-opacity)) !important;
+}
 .text-blue-600 {
   --tw-text-opacity: 1 !important;
   color: rgb(37 99 235 / var(--tw-text-opacity)) !important;
@@ -3662,10 +3664,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-green-600 {
   --tw-text-opacity: 1 !important;
   color: rgb(22 163 74 / var(--tw-text-opacity)) !important;
-}
-.text-green-500 {
-  --tw-text-opacity: 1 !important;
-  color: rgb(34 197 94 / var(--tw-text-opacity)) !important;
 }
 .text-\[\#9da6a8\] {
   --tw-text-opacity: 1 !important;
@@ -4539,7 +4537,6 @@ img {
     width: 75% !important;
   }
   .sm\:w-min {
-    width: -webkit-min-content !important;
     width: -moz-min-content !important;
     width: min-content !important;
   }
