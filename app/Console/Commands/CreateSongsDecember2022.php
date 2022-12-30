@@ -47,7 +47,8 @@ class CreateSongsDecember2022 extends Command
     {
         $this->info('Starting CreateSongsDecember2022...');
 
-        $csv = array_map(function($v){return str_getcsv($v, ";");}, file(base_path('december_29_songs_import.csv')));
+        $csv = array_map(function($v){return str_getcsv($v, ";");}, file(base_path('december_30_songs_import.csv')));
+//        $csv = array_map(function($v){return str_getcsv($v, ";");}, file(base_path('december_29_songs_import.csv')));
 //        $csv = array_map(function($v){return str_getcsv($v, ";");}, file(base_path('december_28_songs_import.csv')));
 //        $csv = array_map(function($v){return str_getcsv($v, ";");}, file(base_path('december_19_songs_import_semi.csv')));
 
@@ -82,6 +83,19 @@ class CreateSongsDecember2022 extends Command
                     ->where('id', $existingContent->id)
                     ->update(['instrumentless' => boolval($row[13]),]);
 
+                $this->updateOrInsertAndGetFirst(
+                    'railcontent_content_fields',
+                    [
+                        'content_id' => $existingContent->id,
+                        'key' => 'style',
+                        'type' => 'string',
+                        'position' => 5,
+                    ],
+                    [
+                        'value' => 'Drums-Removed',
+                    ]
+                );
+
                 event(new ContentCreated($existingContent->id));
 
                 continue;
@@ -92,18 +106,43 @@ class CreateSongsDecember2022 extends Command
                 var_dump($searchAttributes);
                 continue;
             }
-            $content = $this->updateOrInsertAndGetFirst('railcontent_content', $searchAttributes,
-                [
-                    'slug' => $existingContent ? $existingContent->slug : ContentHelper::slugify($row[2]),
-                    'type' => 'song',
-                    'status' => 'published',
-                    'album' => $row[3],
-                    'language' => 'en-US',
-                    'instrumentless' => boolval($row[13]),
-                    'published_on' => $existingContent ? $existingContent->published_on : Carbon::now()->toDateTimeString(),
-                    'created_on' => $existingContent ? $existingContent->created_on : Carbon::now()->toDateTimeString(),
-                ]
-            );
+
+            if (!empty($existingContent)) {
+                $this->musoraDB()->from('railcontent_content')->where('id', $existingContent->id)
+                    ->update([
+                        'slug' => $existingContent ? $existingContent->slug : ContentHelper::slugify($row[2]),
+                        'brand' => $brand,
+                        'type' => 'song',
+                        'status' => 'published',
+                        'album' => $row[3],
+                        'language' => 'en-US',
+                        'instrumentless' => boolval($row[13]),
+                        'published_on' => $existingContent ? $existingContent->published_on : Carbon::now(
+                        )->toDateTimeString(),
+                        'created_on' => $existingContent ? $existingContent->created_on : Carbon::now(
+                        )->toDateTimeString(),
+                    ]);
+            } else {
+                $contentId = $this->musoraDB()->from('railcontent_content')
+                    ->insertGetId(
+                    [
+                        'slug' => $existingContent ? $existingContent->slug : ContentHelper::slugify($row[2]),
+                        'brand' => $brand,
+                        'type' => 'song',
+                        'status' => 'published',
+                        'album' => $row[3],
+                        'language' => 'en-US',
+                        'instrumentless' => boolval($row[13]),
+                        'published_on' => $existingContent ? $existingContent->published_on : Carbon::now(
+                        )->toDateTimeString(),
+                        'created_on' => $existingContent ? $existingContent->created_on : Carbon::now(
+                        )->toDateTimeString(),
+                    ]
+                );
+
+                $content = $this->musoraDB()->from('railcontent_content')->where('id', $contentId)
+                    ->first();
+            }
 
             // fields
             $this->updateOrInsertAndGetFirst(
