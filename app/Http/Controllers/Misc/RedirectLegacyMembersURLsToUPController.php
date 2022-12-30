@@ -152,7 +152,7 @@ class RedirectLegacyMembersURLsToUPController extends BaseController
                         $lessons = new Collection(
                             $lessons->sort(
                                 function ($a, $b) {
-                                    return $a['position'] > $b['position'];
+                                    return $a['child_position'] > $b['child_position'];
                                 }
                             )
                                 ->values()

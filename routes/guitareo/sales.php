@@ -38,8 +38,6 @@ Route::domain('{guitareoDomain}')
     Route::get('/welcome/3', [SalesController::class, 'welcome3']);
     Route::get('/ayla-recommends', [SalesController::class, 'aylarecommends']);
 
-    Route::get('/survival-kit', [SalesController::class, 'survivalkit']);
-
     Route::get('/shop/500-songs', [SalesController::class, 'songs500']);
     Route::get('/shop/acoustic-guitar-made-easy', [SalesController::class, 'acousticGuitarMadeEasy']);
     Route::get('/shop/guitar-quest', [SalesController::class, 'guitarQuest']);

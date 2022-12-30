@@ -107,6 +107,10 @@ class VaporEnvManager extends Command
             }
         }
 
+        usort($parametersForEnvironment, function ($a, $b) {
+            return strcmp($a["Name"], $b["Name"]);
+        });
+
         foreach ($parametersForEnvironment as $parameterData) {
             $this->info('Getting env data from parameter: ' . $parameterData['Name']);
             $parameterValueData = $ssmClient->getParameter([

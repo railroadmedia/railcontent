@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Musora\CodeRedemptionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Drumeo\SalesController;
 
@@ -37,6 +38,7 @@ Route::domain('{drumeoDomain}')
     Route::get('/song-demo/', [SalesController::class, 'songDemo']);
     Route::get('/tom-sawyer/', [SalesController::class, 'tomSawyer']);
     Route::get('/drumfest', [SalesController::class, 'drumFest']);
+    Route::get('/awards/', [SalesController::class, 'awards']);
 
     Route::get('/trial', [SalesController::class, 'trial']);
     Route::get('/earthworks', [SalesController::class, 'earthWorks']);
@@ -83,7 +85,7 @@ Route::domain('{drumeoDomain}')
         function () {
             Route::get('/{page?}', SalesController::class . '@affiliates')
                 ->whereIn('page', [
-                    'andrewrooney', 'asobergirlsguide', 'bhcollective', 'bryanforcedrums', 'drummingreview', 'drumninja', 'electronicdrumadvisor', 'jessica-burdeaux', 'kylemcgrail', 'leyandrums', 'lindseyward', 'musicindustryhowto', 'rickyficarelli', 'tobines'
+                    'andrewrooney', 'asobergirlsguide', 'bhcollective', 'bryanforcedrums', 'drummingreview', 'drumninja', 'electronicdrumadvisor', 'jessica-burdeaux', 'kylemcgrail', 'leyandrums', 'lindseyward', 'musicindustryhowto', 'rickyficarelli', 'tobines', '66samus', 'adriendrums', 'alejandrosifuentes', 'brandonscott', 'cooperdrummer', 'davidcola', 'drumhelper', 'joshcrawford', 'leviclay', 'linaanderberg', 'rdavidr', 'robbrown', 'the8bitdrummer', 'worshipdrummer', 'wyattstav', 'zackgrooves'
                 ]);
         }
     );
@@ -91,4 +93,6 @@ Route::domain('{drumeoDomain}')
     Route::get('/30-day-drummer-register-endpoint', [SalesController::class, 'registerFor30DayDrummer'] );
     Route::get('/pro/', [SalesController::class, 'pro']);
     Route::get('/jared-recommends', [SalesController::class, 'jaredRecommends']);
+
+    Route::get('redeem-thomann', [CodeRedemptionController::class, 'renderNewAccountThomannRedeemPage']);
 });
