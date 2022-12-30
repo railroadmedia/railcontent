@@ -39,49 +39,49 @@
         @if(!empty($fullSubscriptionVersion))
             <div
                 class="relative"
-                x-data="{
-                    features: false,
-                    instruments: false,
-                }"
+{{--                x-data="{--}}
+{{--                    features: false,--}}
+{{--                    instruments: false,--}}
+{{--                }"--}}
             >
                 <div
                     class="edge-wrap show-for-medium"
-                    x-on:click.away="
-                        features = false;
-                        instruments = false;
-                        $refs.features.classList.add('hidden');
-                        $refs.instruments.classList.add('hidden');
-                    "
+{{--                    x-on:click.away="--}}
+{{--                        features = false;--}}
+{{--                        instruments = false;--}}
+{{--                        $refs.features.classList.add('hidden');--}}
+{{--                        $refs.instruments.classList.add('hidden');--}}
+{{--                    "--}}
                 >
                     <a
                         class="cursor-pointer features  @if(strpos(url()->full(), 'method') || strpos(url()->full(), 'songs') || strpos(url()->full(), 'coaches')) text-singeo @endif"
-                        x-on:click="
-                            features = !features;
-                            if(features){
-                                $refs.features.classList.remove('hidden');
-                                $refs.instruments.classList.add('hidden');
-                                instruments = false;
-                            }
-                            else {
-                                $refs.features.classList.add('hidden');
-                            }
-                        "
+{{--                        x-on:click="--}}
+{{--                            features = !features;--}}
+{{--                            if(features){--}}
+{{--                                $refs.features.classList.remove('hidden');--}}
+{{--                                $refs.instruments.classList.add('hidden');--}}
+{{--                                instruments = false;--}}
+{{--                            }--}}
+{{--                            else {--}}
+{{--                                $refs.features.classList.add('hidden');--}}
+{{--                            }--}}
+{{--                        "--}}
                     >
                         Features <i class="fa-solid fa-caret-down"></i>
                     </a>
                     <a
                         class="cursor-pointer instruments"
-                        x-on:click="
-                            instruments = !instruments;
-                            if(instruments){
-                                $refs.instruments.classList.remove('hidden');
-                                $refs.features.classList.add('hidden');
-                                features = false;
-                            }
-                            else {
-                                $refs.instruments.classList.add('hidden');
-                            }
-                        "
+{{--                        x-on:click="--}}
+{{--                            instruments = !instruments;--}}
+{{--                            if(instruments){--}}
+{{--                                $refs.instruments.classList.remove('hidden');--}}
+{{--                                $refs.features.classList.add('hidden');--}}
+{{--                                features = false;--}}
+{{--                            }--}}
+{{--                            else {--}}
+{{--                                $refs.instruments.classList.add('hidden');--}}
+{{--                            }--}}
+{{--                        "--}}
                     >
                         Instruments <i class="fa-solid fa-caret-down"></i>
                     </a>

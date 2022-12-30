@@ -236,32 +236,32 @@
                 'images' => [
                     [
                         'img' => 'https://singeo.s3.amazonaws.com/sales/2023/coaches/find-your-true-voice.jpg',
-                        'title' => 'Find Your True Voice',
+                        'title' => 'Find Your<br> True Voice',
                         'instructor' => 'Sheléa',
                     ],
                     [
                         'img' => 'https://singeo.s3.amazonaws.com/sales/2023/coaches/The-power-of-movement.jpg',
-                        'title' => 'The Power of Movement ',
+                        'title' => 'The Power<br> of Movement ',
                         'instructor' => 'Chris Johnson',
                     ],
                     [
                         'img' => 'https://singeo.s3.amazonaws.com/sales/2023/coaches/singing-with-soul.jpg',
-                        'title' => 'Singing With Soul',
+                        'title' => 'Singing<br> With Soul',
                         'instructor' => 'Tony Lindsay',
                     ],
                     [
                         'img' => 'https://singeo.s3.amazonaws.com/sales/2023/coaches/define-your-singing.jpg',
-                        'title' => 'Define Your Singing',
+                        'title' => 'Define Your<br> Singing',
                         'instructor' => 'Cate Canning',
                     ],
                     [
                         'img' => 'https://singeo.s3.amazonaws.com/sales/2023/coaches/the-science-of-singing-better.jpg',
-                        'title' => 'The Science of Singing Better',
+                        'title' => 'The Science of<br> Singing Better',
                         'instructor' => 'Darcy D',
                     ],
                     [
                         'img' => 'https://singeo.s3.amazonaws.com/sales/2023/coaches/get-your-voice-heard-online.jpg',
-                        'title' => 'Get Your Voice Heard Online',
+                        'title' => 'Get Your Voice<br> Heard Online',
                         'instructor' => 'Hailey Benedict',
                     ]
                 ]
@@ -271,32 +271,32 @@
                 'images' => [
                     [
                         'img' => 'https://singeo.s3.amazonaws.com/sales/2023/coaches/singing-with-vibrato.jpg',
-                        'title' => 'Sing With Vibrato',
+                        'title' => 'Sing With<br> Vibrato',
                         'instructor' => 'Lisa Witt',
                     ],
                     [
                         'img' => 'https://singeo.s3.amazonaws.com/sales/2023/coaches/hit-the-high-notes.jpg',
-                        'title' => 'Hit The High Notes',
+                        'title' => 'Hit The <br>High Notes',
                         'instructor' => 'Lisa Witt',
                     ],
                     [
                         'img' => 'https://singeo.s3.amazonaws.com/sales/2023/coaches/beautiful-harmonies.jpg',
-                        'title' => 'Beautiful Harmonies',
+                        'title' => 'Beautiful<br> Harmonies',
                         'instructor' => 'Julia Ziegler',
                     ],
                     [
                         'img' => 'https://singeo.s3.amazonaws.com/sales/2023/coaches/how-to-sing-a-duet.jpg',
-                        'title' => 'How To Sing A Duet',
+                        'title' => 'How To Sing<br> A Duet',
                         'instructor' => 'Tony Lindsay & Lisa Witt',
                     ],
                     [
-                        'img' => 'https://singeo.s3.amazonaws.com/sales/2023/coaches/sining-runs.jpg',
-                        'title' => 'Singing Runs',
+                        'img' => 'https://singeo.s3.amazonaws.com/sales/2023/coaches/singing-runs.jpg',
+                        'title' => 'Singing<br> Runs',
                         'instructor' => 'Lisa Witt',
                     ],
                     [
                         'img' => 'https://singeo.s3.amazonaws.com/sales/2023/coaches/increase-your-vocal-range.jpg',
-                        'title' => 'Increase Your Vocal Range',
+                        'title' => 'Increase Your<br> Vocal Range',
                         'instructor' => 'Lisa Witt',
                     ],
                 ]
@@ -306,32 +306,32 @@
                 'images' => [
                     [
                     'img' => 'https://singeo.s3.amazonaws.com/sales/2023/coaches/singing-starter-kit.jpg',
-                    'title' => 'Singing Starter Kit',
+                    'title' => 'Singing <br>Starter Kit',
                     'instructor' => 'Lisa Witt',
                     ],
                     [
                     'img' => 'https://singeo.s3.amazonaws.com/sales/2023/coaches/start-writing-songs.jpg',
-                    'title' => 'Start Writing Songs',
+                    'title' => 'Start Writing<br> Songs',
                     'instructor' => 'Cate Canning',
                     ],
                     [
                     'img' => 'https://singeo.s3.amazonaws.com/sales/2023/coaches/composing-lyrics.jpg',
-                    'title' => 'Composing Lyrics',
+                    'title' => 'Composing<br> Lyrics',
                     'instructor' => 'Tony Lindsay',
                     ],
                     [
                     'img' => 'https://singeo.s3.amazonaws.com/sales/2023/coaches/songwriting-for-singers.jpg',
-                    'title' => 'Songwriting For Singers',
+                    'title' => 'Songwriting <br>For Singers',
                     'instructor' => 'Hailey Benedict',
                     ],
                     [
                     'img' => 'https://singeo.s3.amazonaws.com/sales/2023/coaches/how-your-voice-works.jpg',
-                    'title' => 'How Your Voice Works',
+                    'title' => 'How Your <br>Voice Works',
                     'instructor' => 'Darcy D',
                     ],
                     [
                     'img' => 'https://singeo.s3.amazonaws.com/sales/2023/coaches/how-to-record-your-voice.jpg',
-                    'title' => 'How To Record Your Voice',
+                    'title' => 'How To Record<br> Your Voice',
                     'instructor' => 'Cate Canning',
                     ],
                 ]
@@ -349,27 +349,27 @@
             [
                 'icon' => 'https://singeo.s3.amazonaws.com/sales/2023/1000-songs-icon.svg',
                 'title' => '1000+ popular songs.',
-                'desc' => 'Get note-for-note song breakdowns for every style, era, and skill level.',
+                'desc' => 'Get note-for-note song breakdowns<br class="hidden sm:inline"> for every style, era, and skill level.',
             ],
             [
                 'icon' => 'https://singeo.s3.amazonaws.com/sales/2023/find-tempo-icon.svg',
                 'title' => 'Find the perfect tempo.',
-                'desc' => 'Slow down any section of a song to hear the cadence and intricacies.',
+                'desc' => 'Slow down any section of a song to<br class="hidden sm:inline">  hear the cadence and intricacies.',
             ],
             [
                 'icon' => 'https://singeo.s3.amazonaws.com/sales/2023/loop-icon.svg',
                 'title' => 'Loop the hard parts.',
-                'desc' => 'Working on the chorus? Simply create a loop to sing it over and over!',
+                'desc' => 'Working on the chorus? Simply create<br class="hidden sm:inline">  a loop to sing it over and over!',
             ],
             [
                 'icon' => 'https://singeo.s3.amazonaws.com/sales/2023/personal-feedback-icon.svg',
                 'title' => 'Personal feedback, anytime.',
-                'desc' => 'Share a video and you’ll get helpful feedback from our singing community.',
+                'desc' => 'Share a video and you’ll get helpful<br class="hidden sm:inline">  feedback from our singing community.',
             ],
             [
                 'icon' => 'https://singeo.s3.amazonaws.com/sales/2023/device-icon.svg',
                 'title' => 'Take your songs anywhere.',
-                'desc' => 'Accessible on any device, or printable, so you can sing any song, any time.',
+                'desc' => 'Accessible on any device, or printable,<br class="hidden sm:inline">  so you can sing any song, any time.',
             ],
 
         ];
