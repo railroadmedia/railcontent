@@ -74,7 +74,7 @@
         </div>
     </div>
     @endif
-    <div class="footer-bottom" style="@if(!empty($minimal))padding-top: 0; border-top: 0;@endif">
+    <div class="footer-bottom" @if(!empty($minimal)) style="border-top: 0;padding-top: 0;" @endif>
         <div class="container mx-auto">
             <img class="logo" src="https://cdn.musora.com/image/fetch/w_280,q_auto:best/https://musora-center.s3.amazonaws.com/logos/singeo-logo-white.png" alt="Singeo">
             @if(empty($minimal))

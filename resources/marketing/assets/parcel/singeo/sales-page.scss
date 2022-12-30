@@ -195,6 +195,7 @@ img {
     background: transparent;
     border: 1px solid #fff;
     color: #fff;
+      outline-style: none!important;
     padding: 6px 12px;
     @include tablet {
       border-width: 2px;
@@ -218,7 +219,8 @@ img {
       }
     }
 
-    &.method {
+    &.method,
+    &.singeo {
       border-color: $singeoPurple;
       color: $singeoPurple;
 

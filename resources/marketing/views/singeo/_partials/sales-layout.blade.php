@@ -120,76 +120,78 @@
 
 <!-- Footer -->
 @section('layout-footer')
-    @include('_partials.layout.global-footer', [
-        "emptyPromoVersion" => empty($promoVersion),
-        "brand" => "singeo",
-        "logo" => "https://musora-ui.s3.amazonaws.com/logos/singeo-white.svg",
-        "sections" => [
-            [
-                "title" => "Resources",
-                "links" => [
-                    [
-                        "name" => "Blog",
-                        "url" => "/",
-                    ],
-                    [
-                        "name" => "Getting Started",
-                        "url" => "/",
-                    ],
-                    [
-                        "name" => "Chord Hacks",
-                        "url" => "/",
-                    ],
-                    [
-                        "name" => "Sight Reading Made Simple",
-                        "url" => "/",
-                    ]
-                ]
-            ],
-            [
-                "title" => "Shop",
-                "links" => [
-                    [
-                        "name" => "Pianote Membership",
-                        "url" => "/",
-                    ],
-                    [
-                        "name" => "Worship Piano",
-                        "url" => "/",
-                    ],
-                    [
-                        "name" => "500 Songs",
-                        "url" => "/",
-                    ],
-                    [
-                        "name" => "Riffs & Fills",
-                        "url" => "/",
-                    ]
-                ]
-            ],
-            [
-                "title" => "Other Sites",
-                "links" => [
-                    [
-                        "name" => "Musora",
-                        "url" => get_musora_brand_base_url(),
-                    ],
-                    [
-                        "name" => "Drumeo",
-                        "url" => get_legacy_brand_base_url("drumeo"),
-                    ],
-                    [
-                        "name" => "Guitareo",
-                        "url" => get_legacy_brand_base_url("guitareo"),
-                    ],
-                    [
-                        "name" => "Singeo",
-                        "url" => get_legacy_brand_base_url("singeo"),
-                    ]
-                ]
-            ],
-        ]
-    ])
+
+    @include("singeo.sales.partials._footer")
+{{--    @include('_partials.layout.global-footer', [--}}
+{{--        "emptyPromoVersion" => empty($promoVersion),--}}
+{{--        "brand" => "singeo",--}}
+{{--        "logo" => "https://musora-ui.s3.amazonaws.com/logos/singeo-white.svg",--}}
+{{--        "sections" => [--}}
+{{--            [--}}
+{{--                "title" => "Resources",--}}
+{{--                "links" => [--}}
+{{--                    [--}}
+{{--                        "name" => "Blog",--}}
+{{--                        "url" => "/",--}}
+{{--                    ],--}}
+{{--                    [--}}
+{{--                        "name" => "Getting Started",--}}
+{{--                        "url" => "/",--}}
+{{--                    ],--}}
+{{--                    [--}}
+{{--                        "name" => "Chord Hacks",--}}
+{{--                        "url" => "/",--}}
+{{--                    ],--}}
+{{--                    [--}}
+{{--                        "name" => "Sight Reading Made Simple",--}}
+{{--                        "url" => "/",--}}
+{{--                    ]--}}
+{{--                ]--}}
+{{--            ],--}}
+{{--            [--}}
+{{--                "title" => "Shop",--}}
+{{--                "links" => [--}}
+{{--                    [--}}
+{{--                        "name" => "Pianote Membership",--}}
+{{--                        "url" => "/",--}}
+{{--                    ],--}}
+{{--                    [--}}
+{{--                        "name" => "Worship Piano",--}}
+{{--                        "url" => "/",--}}
+{{--                    ],--}}
+{{--                    [--}}
+{{--                        "name" => "500 Songs",--}}
+{{--                        "url" => "/",--}}
+{{--                    ],--}}
+{{--                    [--}}
+{{--                        "name" => "Riffs & Fills",--}}
+{{--                        "url" => "/",--}}
+{{--                    ]--}}
+{{--                ]--}}
+{{--            ],--}}
+{{--            [--}}
+{{--                "title" => "Other Sites",--}}
+{{--                "links" => [--}}
+{{--                    [--}}
+{{--                        "name" => "Musora",--}}
+{{--                        "url" => get_musora_brand_base_url(),--}}
+{{--                    ],--}}
+{{--                    [--}}
+{{--                        "name" => "Drumeo",--}}
+{{--                        "url" => get_legacy_brand_base_url("drumeo"),--}}
+{{--                    ],--}}
+{{--                    [--}}
+{{--                        "name" => "Guitareo",--}}
+{{--                        "url" => get_legacy_brand_base_url("guitareo"),--}}
+{{--                    ],--}}
+{{--                    [--}}
+{{--                        "name" => "Singeo",--}}
+{{--                        "url" => get_legacy_brand_base_url("singeo"),--}}
+{{--                    ]--}}
+{{--                ]--}}
+{{--            ],--}}
+{{--        ]--}}
+{{--    ])--}}
 @stop
 
 
