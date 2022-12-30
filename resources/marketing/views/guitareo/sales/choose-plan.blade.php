@@ -44,8 +44,8 @@
 
     <div id="customize-anchor" class="anchor anchor-slide"></div>
     @include('musora.sales.components.card-selection-section', [
-        "plusLogo" => "https://pianote.s3.amazonaws.com/sales/2023/pianote-plus-logo-light.svg",
-        "logo" => "https://pianote.s3.amazonaws.com/logo/pianote-logo-white.png",
+        "plusLogo" => "https://guitareo.s3.amazonaws.com/sales/2023/guitareo-plus-logo-light.svg",
+        "logo" => "https://guitareo.s3.amazonaws.com/sales/guitareo-logo.png",
         "instrument" => "piano",
         "songs" => "1000",
         "firstPoint" => "Unlimited piano lessons",
@@ -54,8 +54,8 @@
     ])
 
     @include('musora.sales.components.plans-different-section', [
-        "plusLogo" => "https://pianote.s3.amazonaws.com/sales/2023/pianote-plus-logo.svg",
-        "logo" => "https://musora-center.s3.amazonaws.com/logos/pianote-logo.png",
+        "plusLogo" => "https://guitareo.s3.amazonaws.com/sales/2023/guitareo-plus-logo.svg",
+        "logo" => "https://musora-center.s3.amazonaws.com/logos/guitareo-logo.png",
         "secondPoint" => "Artist courses and exclusive events with special guests.",
         "thirdPoint" => "Go beyond piano with lessons for singing, guitar, and drums.",
         "fifthPoint" => "1000+ songs transcribed w/ playback tools for all instruments.",

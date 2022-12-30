@@ -11,7 +11,7 @@
     @hasSection('share-image')
         @yield('share-image')
     @else
-        <meta property="og:image" content="https://d122ay5chh2hr5.cloudfront.net/sales/2022/og-image.jpg"/>
+        <meta property="og:image" content="https://guitareo.s3.amazonaws.com/sales/2023/share-image-guitareo.jpg"/>
     @endif
 
     @include('guitareo._partials._fonts')
@@ -170,9 +170,9 @@
     @include('musora.sales.components.header-section', [
         'header' => 'Online guitar lessons for all skill levels.',
         'desc' => 'Learn the guitar faster with step-by-step lessons, a thousand songs, and unlimited personal support. ',
-        'thumb' => 'https://pianote.s3.amazonaws.com/sales/2023/header-thumb.jpg',
-        'promoThumb' => 'https://pianote.s3.amazonaws.com/sales/2023/jan-thumb.png',
-        'promoThumbM' => 'https://pianote.s3.amazonaws.com/sales/2023/jan-thumb-m.jpg',
+        'thumb' => 'https://guitareo.s3.amazonaws.com/sales/2023/header-thumb.jpg',
+        'promoThumb' => 'https://guitareo.s3.amazonaws.com/sales/2023/jan-thumb.png',
+        'promoThumbM' => 'https://guitareo.s3.amazonaws.com/sales/2023/jan-thumb-m.png',
         'pointOne' => 'Improve Your Skills',
         'pointTwo' => 'World-Class Teachers',
         'pointThree' => 'Play More<br class="inline lg:hidden"> Songs',
@@ -186,46 +186,46 @@
            'promoLogoM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs-m.png',
         'desc' => 'Unlock step-by-step lessons & 1000+ songs to reach your guitar goals in 2023. ',
            'text' => 'Learning songs has <u>never</u> been easier.<br><br>Introducing NEW Guitareo Songs – <strong>the ultimate tool for learning songs faster and better</strong> with note-for-note sheet music, tempo adjustments, and a looping feature.<br><br>And unlike other song tools, every song is perfectly transcribed and professionally proofed to guarantee its accuracy. Because playing songs should be fun, not frustrating.<br><br>PLUS you’ll have access to step-by-step video lessons on every topic, artist courses and exclusive events, and unlimited personal support to reach all of your guitar goals in 2023.<br><br>When you join today, you\'ll receive a Guitarist\'s Survival Kit for free (valued at $89) to help you sound even better on guitar.<br><br>Click below to grab the deal – or scroll down to try a demo of the NEW Guitareo Songs.',
-           'img' => 'https://pianote.s3.amazonaws.com/sales/2023/jan-launch-collage.png',
+           'img' => 'https://guitareo.s3.amazonaws.com/sales/2023/jan-launch-collage.png',
            'belowButton' => 'SAVE 17% + GET 6 BONUSES WORTH $924',
        ])
     @else
         @include('musora.sales.components.learn-by-playing-section', [
             'header' => 'Learn the guitar by<br class="inline sm:hidden"> <u>playing the guitar</u>.',
             'desc' => 'Most new guitarists learn a chord or two – and then hit some sort of roadblock. Life gets in the way. Your calluses become soft. Or even worse, you lose motivation.<br><br>But playing guitar should never feel like a chore.<br><br>And it’s our mission to help you make progress faster by playing music that inspires you – with 1000+ popular songs – and conquer new styles, skills, and techniques to play like you’ve always wanted.<br><br>Whether you want to play your favorite songs, express your creativity over a backing track, or follow inspirational coaches – you’ll have it all in the Guitareo membership. You’ll get step-by-step lessons, interactive tools, and unlimited support to play your guitar better and faster.<br><br>So give the trailer a watch, and hear how you can achieve your guitar goals today.',
-            'img' => 'https://pianote.s3.amazonaws.com/sales/2023/collage-evergreen.png',
+            'img' => 'https://guitareo.s3.amazonaws.com/sales/2023/collage-evergreen.png',
         ])
     @endif
 
     @php
         $gridItems = [
             [
-                'image' => 'https://pianote.s3.amazonaws.com/sales/2023/modern-method.jpg',
+                'image' => 'https://guitareo.s3.amazonaws.com/sales/2023/method.jpg',
                 'title' => '10-Level Curriculum',
                 'desc' => 'Develop your core skills, techniques, and musicality to play confidently in any setting. ',
             ],
             [
-                'image' => 'https://pianote.s3.amazonaws.com/sales/2023/practical-assignments.jpg',
+                'image' => 'https://guitareo.s3.amazonaws.com/sales/2023/practical-assignments.jpg',
                 'title' => 'Practical Assignments',
                 'desc' => 'You\'ll always have on-screen assignments and practice tools to increase retention. ',
             ],
             [
-                'image' => 'https://pianote.s3.amazonaws.com/sales/2023/guided-workouts.jpg',
+                'image' => 'https://guitareo.s3.amazonaws.com/sales/2023/guided-workouts.jpg',
                 'title' => 'Guided Workouts',
                 'desc' => 'Stay inspired with guided workouts where you’ll play along with your teacher in real time.',
             ],
             [
-                'image' => 'https://pianote.s3.amazonaws.com/sales/2023/world-class-teachers.jpg',
+                'image' => 'https://guitareo.s3.amazonaws.com/sales/2023/world-class-teachers.jpg',
                 'title' => 'World-Class Teachers',
                 'desc' => 'The best guitarists are here – including Grammy Award winners and touring musicians.',
             ],
             [
-                'image' => 'https://pianote.s3.amazonaws.com/sales/2023/downloadable-videos.jpg',
+                'image' => 'https://guitareo.s3.amazonaws.com/sales/2023/downloadable-videos.jpg',
                 'title' => 'Downloadable Videos',
                 'desc' => 'Stream your lessons OR download your videos so you can practice anywhere, anytime. ',
             ],
             [
-                'image' => 'https://pianote.s3.amazonaws.com/sales/2023/personalized-support.jpg',
+                'image' => 'https://guitareo.s3.amazonaws.com/sales/2023/personalized-support.jpg',
                 'title' => 'Personalized Support',
                 'desc' => 'Get weekly live streams, student lesson plans, and access to a global guitar community. ',
             ],
@@ -248,42 +248,42 @@
                 'title' => 'Play more creatively',
                 'images' => [
                     [
-                    'img' => 'todo',
+                    'img' => 'https://guitareo.s3.amazonaws.com/sales/2023/coaches/solo-in-an-hour.jpg',
                     'title' => 'Solo In An Hour',
                     'instructor' => 'Ayla Tesler-Mabé',
                     ],
                     [
-                    'img' => 'todo',
+                    'img' => 'https://guitareo.s3.amazonaws.com/sales/2023/coaches/songwriting-cheat-codes.jpg',
                     'title' => 'Songwriting Cheat Codes',
                     'instructor' => 'Rob Scallon',
                     ],
                     [
-                    'img' => 'todo',
+                    'img' => 'https://guitareo.s3.amazonaws.com/sales/2023/coaches/rhythm-groove.jpg',
                     'title' => 'Rhythm & Groove ',
                     'instructor' => 'Sami Ghawi',
                     ],
                     [
-                    'img' => 'todo',
+                    'img' => 'https://guitareo.s3.amazonaws.com/sales/2023/coaches/timing-feel.jpg',
                     'title' => 'Timing & Feel',
                     'instructor' => 'David Becker',
                     ],
                     [
-                    'img' => 'todo',
+                    'img' => 'https://guitareo.s3.amazonaws.com/sales/2023/coaches/musical-lanes.jpg',
                     'title' => 'Musical Lanes',
                     'instructor' => 'Mark Lettieri',
                     ],
                     [
-                    'img' => 'todo',
+                    'img' => 'https://guitareo.s3.amazonaws.com/sales/2023/coaches/add-power-to-your-playing.jpg',
                     'title' => 'Add Power To Your Playing',
                     'instructor' => 'Dave Weiner',
                     ],
                     [
-                    'img' => 'todo',
+                    'img' => 'https://guitareo.s3.amazonaws.com/sales/2023/coaches/unlock-your-creativity.jpg',
                     'title' => 'Unlock Your Creativity',
                     'instructor' => 'Yvette Young',
                     ],
                     [
-                    'img' => 'todo',
+                    'img' => 'https://guitareo.s3.amazonaws.com/sales/2023/coaches/the-anatomy-of-a-song.jpg',
                     'title' => 'The Anatomy of a Song',
                     'instructor' => 'Pete Thorn',
                     ],
@@ -293,42 +293,42 @@
                 'title' => 'Learn any style',
                 'images' => [
                     [
-                    'img' => 'todo',
+                    'img' => 'https://guitareo.s3.amazonaws.com/sales/2023/coaches/rock-guitar.jpg',
                     'title' => 'Rock Guitar ',
                     'instructor' => 'Ayla Tesler-Mabé',
                     ],
                     [
-                    'img' => 'todo',
+                    'img' => 'https://guitareo.s3.amazonaws.com/sales/2023/coaches/punk-rock.jpg',
                     'title' => 'Punk Rock',
                     'instructor' => 'Kent Shores',
                     ],
                     [
-                    'img' => 'todo',
+                    'img' => 'https://guitareo.s3.amazonaws.com/sales/2023/coaches/surf-guitar.jpg',
                     'title' => 'Surf Guitar',
                     'instructor' => 'Kent Shores',
                     ],
                     [
-                    'img' => 'todo',
+                    'img' => 'https://guitareo.s3.amazonaws.com/sales/2023/coaches/campfire-chords.jpg',
                     'title' => 'Campfire Chords',
                     'instructor' => 'Rob Scallon',
                     ],
                     [
-                    'img' => 'todo',
+                    'img' => 'https://guitareo.s3.amazonaws.com/sales/2023/coaches/funk-essentials.jpg',
                     'title' => 'Funk Essentials',
                     'instructor' => 'Ayla Tesler-Mabé',
                     ],
                     [
-                    'img' => 'todo',
+                    'img' => 'https://guitareo.s3.amazonaws.com/sales/2023/coaches/bluegrass.jpg',
                     'title' => 'Bluegrass',
                     'instructor' => 'Nate Savage',
                     ],
                     [
-                    'img' => 'todo',
+                    'img' => 'https://guitareo.s3.amazonaws.com/sales/2023/coaches/fingerstyle.jpg',
                     'title' => 'Fingerstyle',
                     'instructor' => 'Nate Savage',
                     ],
                     [
-                    'img' => 'todo',
+                    'img' => 'https://guitareo.s3.amazonaws.com/sales/2023/coaches/shred-guitar.jpg',
                     'title' => 'Shred Guitar',
                     'instructor' => 'Dean Lamb',
                     ],
@@ -338,42 +338,42 @@
                 'title' => 'Add essential techniques',
                 'images' => [
                     [
-                    'img' => 'todo',
+                    'img' => 'https://guitareo.s3.amazonaws.com/sales/2023/coaches/getting-started-on-the-acoustic.jpg',
                     'title' => 'Getting Started On The Acoustic Guitar',
                     'instructor' => 'Ayla Tesler-Mabé',
                     ],
                     [
-                    'img' => 'todo',
+                    'img' => 'https://guitareo.s3.amazonaws.com/sales/2023/coaches/getting-started-on-the-electric.jpg',
                     'title' => 'Getting Started On The Electric Guitar',
                     'instructor' => 'Ayla Tesler-Mabé',
                     ],
                     [
-                    'img' => 'todo',
+                    'img' => 'https://guitareo.s3.amazonaws.com/sales/2023/coaches/altered-open-tunings.jpg',
                     'title' => 'Altered & Open Tunings',
                     'instructor' => 'Don Ross',
                     ],
                     [
-                    'img' => 'todo',
+                    'img' => 'https://guitareo.s3.amazonaws.com/sales/2023/coaches/looping.jpg',
                     'title' => 'Looping',
                     'instructor' => 'David Becker',
                     ],
                     [
-                    'img' => 'todo',
+                    'img' => 'https://guitareo.s3.amazonaws.com/sales/2023/coaches/picking.jpg',
                     'title' => 'Picking',
                     'instructor' => 'Nate Savage',
                     ],
                     [
-                    'img' => 'todo',
+                    'img' => 'https://guitareo.s3.amazonaws.com/sales/2023/coaches/legato.jpg',
                     'title' => 'Legato',
                     'instructor' => 'Kent Shores',
                     ],
                     [
-                    'img' => 'todo',
+                    'img' => 'https://guitareo.s3.amazonaws.com/sales/2023/coaches/strumming-workouts.jpg',
                     'title' => 'Strumming Workouts',
                     'instructor' => 'Ayla Tesler-Mabé',
                     ],
                     [
-                    'img' => 'todo',
+                    'img' => 'https://guitareo.s3.amazonaws.com/sales/2023/coaches/bending-virbrato.jpg',
                     'title' => 'Bending & Vibrato',
                     'instructor' => 'Ayla Tesler-Mabé',
                     ],
@@ -502,7 +502,7 @@
         @php
             $bonuses = [
                 [
-                    'image' => 'https://guitareo.s3.amazonaws.com/sales/promos/november/survival-kit-narrow-card-sale-site.jpg',
+                    'image' => 'https://guitareo.s3.amazonaws.com/sales/2023/guitarits-survival-kit.jpg',
                     'title' => 'Survival Kit',
                     'description' => 'Electric Strings, Acoustic Strings, String Pro-Winder, 10 Assorted Picks, Tuner, Chord & Scales Book, and more!',
                     'price' => GuitareoPrices::$survivalKitFull,
@@ -546,7 +546,7 @@
             ]
         @endphp
         @include('musora.sales.components.order-section-bonuses', [
-        'topImage' => 'https://pianote.s3.amazonaws.com/sales/2023/pianote-annual-2w-card.png',
+        'topImage' => 'https://guitareo.s3.amazonaws.com/sales/2023/guitareo-annual-2w-card.png',
         'promoLogo' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs.svg',
        'promoLogoM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs-m.png',
         'header' => 'Save 17% + get 6 bonuses<br class="inline sm:hidden"> worth $924',
@@ -567,12 +567,12 @@
                     <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> voice, piano, and drum lessons with full access to all Musora communities.</li>',
         'buttonLink' => '/choose-plan',
         'price' => '20',
-        'image' => 'https://pianote.s3.amazonaws.com/sales/2023/pianote-spread.png',
+        'image' => 'https://guitareo.s3.amazonaws.com/sales/2023/guitareo-spread.png',
         ])
     @endif
 
     @include('musora.sales.components.app-section', [
-        'image' => 'https://pianote.s3.amazonaws.com/sales/2023/devices.png',
+        'image' => 'https://guitareo.s3.amazonaws.com/sales/2023/devices.png',
     ])
 
     @include('guitareo._partials.faq')
