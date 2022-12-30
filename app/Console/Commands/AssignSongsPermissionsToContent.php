@@ -79,6 +79,28 @@ class AssignSongsPermissionsToContent extends Command
                 ->first()
                 ->id;
 
+
+        $this->musoraDB()->from('railcontent_permissions')
+            ->updateOrInsert([
+                'name' => 'Musora Only Songs Membership',
+                'brand' => 'musora',
+            ]);
+
+        $musoraOnlySongsMembershipPermissionId =
+            $this->musoraDB()->from('railcontent_permissions')
+                ->where([
+                    'name' => 'Musora Only Songs Membership',
+                    'brand' => 'musora',
+                ])
+                ->first()
+                ->id;
+
+        $this->musoraDB()->from('railcontent_permissions')
+            ->updateOrInsert([
+                'name' => 'Drumeo Lifetime Member',
+                'brand' => 'drumeo',
+            ]);
+
         $drumeoLifetimeMembershipPermissionId =
             $this->musoraDB()->from('railcontent_permissions')
                 ->where([
@@ -90,141 +112,154 @@ class AssignSongsPermissionsToContent extends Command
 
         $this->info("musoraBasicMembershipPermissionId: $musoraBasicMembershipPermissionId");
         $this->info("musoraPlusMembershipPermissionId: $musoraPlusMembershipPermissionId");
+        $this->info("musoraOnlySongsMembershipPermissionId: $musoraOnlySongsMembershipPermissionId");
         $this->info("drumeoLifetimeMembershipPermissionId: $drumeoLifetimeMembershipPermissionId");
 
         $this->info('Permissions created successfully. Adding to content...');
+        $this->info('Starting to add permissions to content...');
+
         $createdCount = 0;
 
-        // drumeo
+        // pianote, guitareo, singeo- plus, song only
         $this->musoraDB()->from('railcontent_content')
-            ->select(['id'])
+            ->select(['id', 'brand'])
             ->where('type', 'song')
-            ->where('brand', 'drumeo')
+            ->whereIn('brand', ['pianote', 'guitareo', 'singeo', 'drumeo'])
             ->orderBy('id', 'asc')
-            ->chunk(250, function(Collection $drumeoSongContentIds) use ($musoraPlusMembershipPermissionId, &$createdCount, $drumeoLifetimeMembershipPermissionId) {
-                $drumeoSongContentIds = $drumeoSongContentIds->pluck('id')->toArray();
+            ->chunk(
+                250,
+                function (Collection $songContentIdRows) use (
+                    $musoraOnlySongsMembershipPermissionId,
+                    $musoraPlusMembershipPermissionId,
+                    &$createdCount,
+                    $drumeoLifetimeMembershipPermissionId
+                ) {
+                    $songContentIds = $songContentIdRows->pluck('id')->toArray();
 
-                $drumeoSongsContentPermissions = $this->musoraDB()->from('railcontent_content_permissions')
-                    ->whereIn('content_id', $drumeoSongContentIds)
-                    ->get()
-                    ->groupBy('content_id');
+                    $songsContentPermissions = $this->musoraDB()->from('railcontent_content_permissions')
+                        ->whereIn('content_id', $songContentIds)
+                        ->get()
+                        ->groupBy('content_id');
 
-                foreach ($drumeoSongContentIds as $drumeoSongContentId) {
-                    $drumeoSongContentPermissions = $drumeoSongsContentPermissions[$drumeoSongContentId] ?? [];
+                    foreach ($songContentIdRows as $songContentIdRow) {
+                        $songContentId = $songContentIdRow->id;
+                        $songContentPermissions = $songsContentPermissions[$songContentId] ?? [];
 
-                    // drumeo specific songs permission first
-                    $hasDrumeoSongsPermission = false;
+                        // musora plus permission
+                        $hasMusoraPlusPermission = false;
 
-                    foreach ($drumeoSongContentPermissions as $drumeoSongContentPermission) {
-                        if ($drumeoSongContentPermission->permission_id == $drumeoLifetimeMembershipPermissionId) {
-                            $hasDrumeoSongsPermission = true;
+                        foreach ($songContentPermissions as $songContentPermission) {
+                            if ($songContentPermission->permission_id == $musoraPlusMembershipPermissionId) {
+                                $hasMusoraPlusPermission = true;
+                            }
+                        }
+
+                        if (!$hasMusoraPlusPermission) {
+                            $this->musoraDB()->from('railcontent_content_permissions')
+                                ->updateOrInsert([
+                                    'content_id' => $songContentId,
+                                    'content_type' => null,
+                                    'permission_id' => $musoraPlusMembershipPermissionId,
+                                    'brand' => 'musora',
+                                ]);
+                        }
+
+                        // musora songs only permission
+                        $hasMusoraSongsOnlyPermission = false;
+
+                        foreach ($songContentPermissions as $songContentPermission) {
+                            if ($songContentPermission->permission_id == $musoraOnlySongsMembershipPermissionId) {
+                                $hasMusoraSongsOnlyPermission = true;
+                            }
+                        }
+
+                        if (!$hasMusoraSongsOnlyPermission) {
+                            $this->musoraDB()->from('railcontent_content_permissions')
+                                ->updateOrInsert([
+                                    'content_id' => $songContentId,
+                                    'content_type' => null,
+                                    'permission_id' => $musoraOnlySongsMembershipPermissionId,
+                                    'brand' => 'musora',
+                                ]);
+                        }
+
+                        // if drumeo, add drumeo lifetime permission
+                        if ($songContentIdRow->brand == 'drumeo') {
+                            $hasDrumeoLifetimePermission = false;
+
+                            foreach ($songContentPermissions as $songContentPermission) {
+                                if ($songContentPermission->permission_id == $drumeoLifetimeMembershipPermissionId) {
+                                    $hasDrumeoLifetimePermission = true;
+                                }
+                            }
+
+                            if (!$hasDrumeoLifetimePermission) {
+                                $this->musoraDB()->from('railcontent_content_permissions')
+                                    ->updateOrInsert([
+                                        'content_id' => $songContentId,
+                                        'content_type' => null,
+                                        'permission_id' => $drumeoLifetimeMembershipPermissionId,
+                                        'brand' => 'drumeo',
+                                    ]);
+                            }
                         }
                     }
 
-                    if (!$hasDrumeoSongsPermission) {
-                        $this->musoraDB()->from('railcontent_content_permissions')
-                            ->updateOrInsert([
-                                'content_id' => $drumeoSongContentId,
-                                'content_type' => null,
-                                'permission_id' => $drumeoLifetimeMembershipPermissionId,
-                                'brand' => 'drumeo',
-                            ]);
-                    }
-
-                    // musora songs permission first
-                    $hasMusoraPlusPermission = false;
-
-                    foreach ($drumeoSongContentPermissions as $drumeoSongContentPermission) {
-                        if ($drumeoSongContentPermission->permission_id == $musoraPlusMembershipPermissionId) {
-                            $hasMusoraPlusPermission = true;
-                        }
-                    }
-
-                    if (!$hasMusoraPlusPermission) {
-                        $this->musoraDB()->from('railcontent_content_permissions')
-                            ->updateOrInsert([
-                                'content_id' => $drumeoSongContentId,
-                                'content_type' => null,
-                                'permission_id' => $musoraPlusMembershipPermissionId,
-                                'brand' => 'musora',
-                            ]);
-                    }
+                    $createdCount += 250;
+                    $this->info($createdCount . ' done pianote, guitareo, singeo');
                 }
-
-                $createdCount += 250;
-                $this->info($createdCount . ' done drumeo');
-            });
-
-        $this->info('Drumeo songs permissions done.');
-
-        $this->info('Starting pianote, guitareo, singeo...');
-        $createdCount = 0;
-
-        // pianote, guitareo, singeo
-        $this->musoraDB()->from('railcontent_content')
-            ->select(['id'])
-            ->where('type', 'song')
-            ->whereIn('brand', ['pianote', 'guitareo', 'singeo'])
-            ->orderBy('id', 'asc')
-            ->chunk(250, function(Collection $songContentIds) use ($musoraPlusMembershipPermissionId, &$createdCount, $drumeoLifetimeMembershipPermissionId) {
-                $songContentIds = $songContentIds->pluck('id')->toArray();
-
-                $songsContentPermissions = $this->musoraDB()->from('railcontent_content_permissions')
-                    ->whereIn('content_id', $songContentIds)
-                    ->get()
-                    ->groupBy('content_id');
-
-                foreach ($songContentIds as $drumeoSongContentId) {
-                    $songContentPermissions = $songsContentPermissions[$drumeoSongContentId] ?? [];
-
-                    // musora songs permission first
-                    $hasMusoraPlusPermission = false;
-
-                    foreach ($songContentPermissions as $drumeoSongContentPermission) {
-                        if ($drumeoSongContentPermission->permission_id == $musoraPlusMembershipPermissionId) {
-                            $hasMusoraPlusPermission = true;
-                        }
-                    }
-
-                    if (!$hasMusoraPlusPermission) {
-                        $this->musoraDB()->from('railcontent_content_permissions')
-                            ->updateOrInsert([
-                                'content_id' => $drumeoSongContentId,
-                                'content_type' => null,
-                                'permission_id' => $musoraPlusMembershipPermissionId,
-                                'brand' => 'musora',
-                            ]);
-                    }
-                }
-
-                $createdCount += 250;
-                $this->info($createdCount . ' done pianote, guitareo, singeo');
-            });
+            );
 
 
         $this->info('Done AssignSongsPermissionsToContent!');
         $createdCount = 0;
 
-        // all non-song content should have musora basic membership permissions added
+        // all non-song content should have musora basic and plus membership permissions added
         $this->musoraDB()->from('railcontent_content_permissions')
-            ->leftJoin('railcontent_content', 'railcontent_content.id', '=', 'railcontent_content_permissions.content_id')
+            ->leftJoin(
+                'railcontent_content',
+                'railcontent_content.id',
+                '=',
+                'railcontent_content_permissions.content_id'
+            )
+            ->select(['railcontent_content_permissions.*'])
             ->where('railcontent_content.type', '!=', 'song')
             ->whereIn('permission_id', [1, 52, 73, 77, 85])
             ->orderBy('railcontent_content_permissions.id', 'desc')
-            ->chunk(250, function (Collection $rows) use (&$createdCount, $musoraBasicMembershipPermissionId) {
-                foreach ($rows as $row) {
-                    $this->musoraDB()->from('railcontent_content_permissions')
-                        ->updateOrInsert([
+            ->chunkById(
+                250,
+                function (Collection $rows) use (
+                    &$createdCount,
+                    $musoraBasicMembershipPermissionId,
+                    $musoraPlusMembershipPermissionId,
+                    $musoraOnlySongsMembershipPermissionId
+                ) {
+                    $dataToInsertOrUpdate = [];
+
+                    foreach ($rows as $row) {
+                        $dataToInsertOrUpdate[] = [
                             'content_id' => $row->content_id,
                             'content_type' => null,
                             'permission_id' => $musoraBasicMembershipPermissionId,
                             'brand' => 'musora',
-                        ]);
-                }
+                        ];
+                        $dataToInsertOrUpdate[] = [
+                            'content_id' => $row->content_id,
+                            'content_type' => null,
+                            'permission_id' => $musoraPlusMembershipPermissionId,
+                            'brand' => 'musora',
+                        ];
+                    }
 
-                $createdCount += 250;
-                $this->info($createdCount . ' done basic permissions');
-            });
+                    $this->musoraDB()->from('railcontent_content_permissions')
+                        ->upsert($dataToInsertOrUpdate, ['content_id', 'permission_id', 'brand']);
+
+                    $createdCount += 250;
+                    $this->info($createdCount . ' done basic permissions');
+                },
+                'railcontent_content_permissions.id',
+                'id'
+            );
 
         return 0;
     }
