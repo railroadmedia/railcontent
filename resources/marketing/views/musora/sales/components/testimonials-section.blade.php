@@ -97,7 +97,7 @@
                                         </div>
                                     @endif
                                 </div>
-                                <div class="text-center">
+                                <div class="w-full text-center">
                                     <div class="font-bold text-sm leading-snug mb-2">{!! $testimonial['title'] !!}</div>
                                     <p class="text-sm">{{ $testimonial['name'] }}</p>
                                     @if(!empty($testimonial['video']))

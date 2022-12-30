@@ -24,7 +24,7 @@
                 </div>
                 <div class="infusion-submit col-xs-12 form-group col-sm-5">
                     <button class="submit button-red infusion-recaptcha join-form-button " type="submit">
-                        <span class="pre-add"> Sign up <i class="fas fa-paper-plane"></i></span>
+                        <span class="pre-add text-base"> Sign up <i class="fas fa-paper-plane text-sm ml-1"></i></span>
                         <span class="pending hide hidden">Sending <i class="fas fa-spinner-third fa-spin"></i></span>
                         <span class="success hide hidden">Sent <i class="fas fa-thumbs-up"></i></span>
                         <span class="fail hide hidden">Try Again <i class="fas fa-exclamation-triangle"></i></span>

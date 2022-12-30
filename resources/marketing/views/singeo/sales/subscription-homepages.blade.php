@@ -346,27 +346,27 @@
     @php
         $songItems = [
             [
-                'icon' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/5000-songs-icon.svg',
+                'icon' => 'https://singeo.s3.amazonaws.com/sales/2023/1000-songs-icon.svg',
                 'title' => '1000+ popular songs.',
                 'desc' => 'Get note-for-note song breakdowns for every style, era, and skill level.',
             ],
             [
-                'icon' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/note-for-note-icon.svg',
+                'icon' => 'https://singeo.s3.amazonaws.com/sales/2023/find-tempo-icon.svg',
                 'title' => 'Find the perfect tempo.',
                 'desc' => 'Slow down any section of a song to hear the cadence and intricacies.',
             ],
             [
-                'icon' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/tempo-icon.svg',
+                'icon' => 'https://singeo.s3.amazonaws.com/sales/2023/loop-icon.svg',
                 'title' => 'Loop the hard parts.',
                 'desc' => 'Working on the chorus? Simply create a loop to sing it over and over!',
             ],
             [
-                'icon' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/no-drums-icon.svg',
+                'icon' => 'https://singeo.s3.amazonaws.com/sales/2023/personal-feedback-icon.svg',
                 'title' => 'Personal feedback, anytime.',
                 'desc' => 'Share a video and you’ll get helpful feedback from our singing community.',
             ],
             [
-                'icon' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/devices-icon.svg',
+                'icon' => 'https://singeo.s3.amazonaws.com/sales/2023/device-icon.svg',
                 'title' => 'Take your songs anywhere.',
                 'desc' => 'Accessible on any device, or printable, so you can sing any song, any time.',
             ],
