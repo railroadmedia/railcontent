@@ -419,7 +419,7 @@
     @include('musora.sales.components.songs-section', [
         'header' => 'Play your favorite songs.',
         'desc' => 'You’ll have <strong>all the tools you need</strong> to make sure you never miss a note.',
-        'video' => 'https://pianote.s3.amazonaws.com/sales/2023/someone-like+you.mp4',
+        'video' => 'https://pianote.s3.amazonaws.com/sales/2023/someone-like-you2.mp4',
         'brandName' => 'Pianote',
         'bannerDesc' => 'Powered by Musora, Pianote includes full access to our communities for drums, guitar, and voice.',
     ])
