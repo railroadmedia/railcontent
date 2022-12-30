@@ -25,19 +25,4 @@ class UserProductFactory extends Factory
         ];
     }
 
-    public static function createUserProduct(
-        User $user,
-        Product $product,
-        Carbon $startTime,
-        Carbon $expirationDate,
-        array $attributes = []
-    ) {
-        $attributes = array_merge($attributes, [
-            'product_id' => $product,
-            'user_id' => $user,
-            'created_at' => $startTime,
-            'expiration_date' => $expirationDate,
-        ]);
-        return UserProduct::factory()->create($attributes);
-    }
 }

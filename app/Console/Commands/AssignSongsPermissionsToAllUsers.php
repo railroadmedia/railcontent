@@ -110,7 +110,13 @@ class AssignSongsPermissionsToAllUsers extends Command
 
         $this->info('About to chain jobs, count: ' . count($jobsToChain));
 
-        Bus::chain($jobsToChain)->dispatch();
+        foreach ($jobsToChain as $jobToChainIndex => $jobToChain) {
+            dispatch($jobToChain);
+
+            if ($jobToChainIndex % 50 === 0) {
+                $this->info('Dispatched : ' . $jobToChainIndex);
+            }
+        }
 
         $this->info('Done!');
 

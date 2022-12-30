@@ -163,15 +163,8 @@ class Subscription extends Model
         $this->is_active = 0;
     }
 
-    public function isCancelled(): bool
-    {
-        return $this->canceled_on;
-    }
-
     public function isMobile(): bool
     {
         return $this->type == Subscription::TYPE_APPLE_SUBSCRIPTION || $this->type == Subscription::TYPE_GOOGLE_SUBSCRIPTION;
     }
-
-
 }
