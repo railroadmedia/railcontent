@@ -71,7 +71,7 @@
         ])
         @include('musora.product.partials._nav-link', [
             "linkName" => "Drumeo",
-            "linkIcon" => "fas fa-graduation-cap",
+            "linkIcon" => "fas fa-home",
             "linkUrl" => "/",
         ])
         @include('musora.product.partials._nav-link', [

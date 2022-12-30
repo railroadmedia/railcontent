@@ -70,7 +70,7 @@
                 "url" => get_musora_brand_base_url() . '/login',
             ],
             "Home" => [
-                "iconClass" => "fas fa-graduation-cap",
+                "iconClass" => "fas fa-home",
                 "url" => '/',
             ],
             "Features" => [

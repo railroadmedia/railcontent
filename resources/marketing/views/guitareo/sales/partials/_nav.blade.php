@@ -87,7 +87,7 @@
 
         @include('guitareo.sales.partials._nav-link', [
             "linkName" => "Home",
-            "linkIcon" => "fas fa-graduation-cap",
+            "linkIcon" => "fas fa-home",
             "linkUrl" => "/2023-home",
         ])
         <div class="has-drop-down" target="_parent" rel="">

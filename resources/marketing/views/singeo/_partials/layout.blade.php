@@ -30,7 +30,7 @@
                 "url" => get_musora_brand_base_url().'/contact',
             ],
             "Singeo" => [
-                "iconClass" => "fas fa-graduation-cap",
+                "iconClass" => "fas fa-home",
                 "url" => '/',
             ],
             "Shop" => [

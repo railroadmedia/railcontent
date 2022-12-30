@@ -16,7 +16,7 @@
             <a href="{{ get_legacy_brand_base_url('drumeo') }}/drumshop" class="join outline-button">Shop</a>
         </div>
     @endif
-    
+
     @if(!empty($cartVersion))
         <div class="button-wrap" id="app">
             <a href="{{ get_legacy_brand_base_url('drumeo') }}/drumshop" class="join outline-button">Shop</a>
@@ -90,7 +90,7 @@
         ])
         @include('drumeo.sales.partials._nav-link', [
             "linkName" => "Home",
-            "linkIcon" => "fas fa-graduation-cap",
+            "linkIcon" => "fas fa-home",
             "linkUrl" => "/",
         ])
         <div class="has-drop-down" target="_parent" rel="">

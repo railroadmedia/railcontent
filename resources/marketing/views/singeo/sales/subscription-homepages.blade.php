@@ -65,9 +65,6 @@
             opacity: 1;
             display: block;
         }
-        .splide__pagination {
-            bottom:0;
-        }
         .splide__pagination__page.is-active {
             background: #01050F;
             transform: none !important;

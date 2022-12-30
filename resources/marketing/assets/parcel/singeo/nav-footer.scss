@@ -575,16 +575,17 @@ a {
   }
 }
 
+
 .bottom-footer {
     text-align: center;
-    background: #000;
+    background: #111729;
     padding: 35px 0 25px;
     @include tablet {
         padding: 50px 0 35px;
     }
 
     .container {
-        max-width: 1170px;
+        max-width: 75rem;
         margin-right: auto;
         margin-left: auto;
 
@@ -612,7 +613,7 @@ a {
             margin-bottom: 30px;
         }
         @include desktop {
-            padding: 0 28px;
+            padding: 0 40px;
         }
 
         &.footer-sign-up {
@@ -637,10 +638,6 @@ a {
                 }
             }
 
-            .form-group {
-                margin-bottom: 0;
-            }
-
             .col-xs-12 {
                 float: left;
                 width: 100%;
@@ -663,13 +660,6 @@ a {
                 }
             }
 
-            ::-webkit-input-placeholder,
-            ::-moz-placeholder,
-            :-ms-input-placeholder,
-            ::placeholder {
-                color: #aaa;
-            }
-
             form {
                 position: relative;
                 width: 100%;
@@ -683,7 +673,7 @@ a {
                 button {
                     border: none;
                     outline: none;
-                    font: 400 13px/35px $opensans;
+                    font: 400 14px/35px $opensans;
                     height: 35px;
                     background: #49535a;
                     color: #fff;
@@ -699,15 +689,17 @@ a {
                     &[type="submit"],
                     button {
                         font-family: $bebas;
-                        color: $singeoPurple;
-                        background: transparent;
+                        letter-spacing: 0.1em;
+                        background: $singeoPurple;
                         text-transform: uppercase;
                         display: inline-block;
                         cursor: pointer;
-                        border: 2px solid $singeoPurple;
                         text-align: center;
                         padding: 0;
                         margin: 0;
+                        color: $singeoPurple;
+                        background: transparent;
+                        border: 2px solid $singeoPurple;
                         line-height: 31px;
 
                         &:hover {
@@ -756,12 +748,12 @@ a {
     }
 
     h1 {
-        color: #c5c5c6;
-        font: 700 17px/2em $robotocondensed;
+        color: #fff;
+        font: 400 20px/2em $bebas;
         text-transform: uppercase;
         margin: 0 auto;
         @include tablet {
-            font-size: 19px;
+            font-size: 22px;
         }
 
         a {
@@ -775,7 +767,7 @@ a {
     }
 
     p {
-        color: #5c6870;
+        color: #879097;
         font: 400 13px/2em $opensans;
         margin: 0 auto;
         @include tablet {
@@ -788,7 +780,7 @@ a {
             display: inline-block;
 
             &:hover {
-                color: lighten(#5c6870, 10%);
+                color: lighten(#879097, 10%);
             }
         }
 
@@ -798,7 +790,7 @@ a {
     }
 
     .logo {
-        opacity: 0.6;
+        opacity: 0.55;
         margin: 0 auto 10px;
         width: 120px;
         @include tablet {
