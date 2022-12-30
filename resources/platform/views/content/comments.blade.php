@@ -5,8 +5,8 @@
 @endsection
 
 @section('content')
-    <div class="container">
-        <div class="flex flex-column bg-white shadows corners-10 mv-3">
+    <div class="tw-w-full container">
+        <div class="flex flex-column tw-w-full">
             <comments-catalogue
                     theme-color="{{ $brand }}"
                     brand="{{ $brand }}"

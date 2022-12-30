@@ -201,7 +201,7 @@
                 <img class="h-14 sm:h-16 lg:h-20" src="https://cdn.musora.com/image/fetch/w_450,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/christmas/holiday-drums.png"><br>
                 <h1 class="my-2"><strong>DRUM SHOP</strong></h1>
                 <h5 class="leading-tight">Save up to <span class="">81%</span> on lessons,<br class="inline md:hidden"> accessories, and merch.</h5>
-                {{-- <div class="rounded-xl px-6 py-2 inline-flex flex-wrap mx-auto mt-5 justify-center items-center" style="background-color:#181515;">
+                 <div class="rounded-xl px-6 py-2 inline-flex flex-wrap mx-auto mt-5 justify-center items-center" style="background-color:#181515;">
                     <p class="leading-none m-0"><strong>DEALS END IN:</strong></p>
                     <div class="h-12 mx-5 bg-promo" style="width:2px;"></div>
                     <div class="tzcd-big">
@@ -222,7 +222,7 @@
                             <p class="leading-none uppercase font-extrabold text-xs text-promo">secs</p>
                         </div>
                     </div>
-                </div> --}}
+                </div>
             </div>
         </div>
     </header>
@@ -374,7 +374,7 @@
                         "fullPrice" => $accessory->price,
                         "price" => $accessory->discounted_price === '0.00' || empty($accessory->discounted_price) ? $accessory->price : $accessory->discounted_price,
                         "sizes" => $accessory->sizes,
-                        "soldOut" => !empty($products[$accessory->sku]) ? $products[$accessory->sku]->getStock() === 0 : $accessory->sold_out,
+                        "soldOut" => !empty($products[$accessory->sku]) ? $products[$accessory->sku]->getStockAvailability() === 0 : $accessory->sold_out,
                         "category" => strtolower($accessory->productType->name),
                         "size_case_sensitive" => $accessory->size_case_sensitive,
                     ])
@@ -404,7 +404,7 @@
                          "fullPrice" => $hat->price,
                          "price" => $hat->discounted_price === '0.00' || empty($hat->discounted_price) ? $hat->price : $hat->discounted_price,
                          "sizes" => $hat->sizes,
-                         "soldOut" => !empty($products[$hat->sku]) ? $products[$hat->sku]->getStock() === 0 : $hat->sold_out,
+                         "soldOut" => !empty($products[$hat->sku]) ? $products[$hat->sku]->getStockAvailability() === 0 : $hat->sold_out,
                          "category" => strtolower($hat->productType->name),
                          "size_case_sensitive" => $hat->size_case_sensitive,
                     ])
@@ -435,7 +435,7 @@
                          "fullPrice" => $shirt->price,
                          "price" => $shirt->discounted_price === '0.00' || empty($shirt->discounted_price) ? $shirt->price : $shirt->discounted_price,
                          "sizes" => $shirt->sizes,
-                         "soldOut" => !empty($products[$shirt->sku]) ? $products[$shirt->sku]->getStock() === 0 : $shirt->sold_out,
+                         "soldOut" => !empty($products[$shirt->sku]) ? $products[$shirt->sku]->getStockAvailability() === 0 : $shirt->sold_out,
                          "size_case_sensitive" => $shirt->size_case_sensitive,
                          "category" => strtolower($shirt->productType->name),
                     ])
@@ -478,7 +478,7 @@
                          "fullPrice" => $hoodie->price,
                          "price" => $hoodie->discounted_price === '0.00' || empty($hoodie->discounted_price) ? $hoodie->price : $hoodie->discounted_price,
                          "sizes" => $hoodie->sizes,
-                         "soldOut" => !empty($products[$hoodie->sku]) ? $products[$hoodie->sku]->getStock() === 0 : $hoodie->sold_out,
+                         "soldOut" => !empty($products[$hoodie->sku]) ? $products[$hoodie->sku]->getStockAvailability() === 0 : $hoodie->sold_out,
                          "category" => strtolower($hoodie->productType->name),
                          "size_case_sensitive" => $hoodie->size_case_sensitive,
                     ])

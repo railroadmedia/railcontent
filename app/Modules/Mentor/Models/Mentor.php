@@ -10,10 +10,9 @@ use Modules\UserManagementSystem\Models\User;
 
 /**
  * Class Mentor
- * @internal
  *
+ * @internal 
  * @package App\Modules\Mentor\Models
- *
  * @property integer $id
  * @property integer $user_id
  * @property string $supported_brands
@@ -23,6 +22,19 @@ use Modules\UserManagementSystem\Models\User;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property-read User $user
+ * @method static \App\Modules\Mentor\database\factories\MentorFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|Mentor newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Mentor newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Mentor query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Mentor whereActiveStudentCount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Mentor whereActiveStudentMaxCount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Mentor whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Mentor whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Mentor whereSupportedBrands($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Mentor whereTotalStudentCount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Mentor whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Mentor whereUserId($value)
+ * @mixin \Eloquent
  */
 class Mentor extends Model
 {

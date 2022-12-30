@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "89421e991494ce7e47e3a4df7b1c2afa",
+    "content-hash": "0af330d3e476c6a0a902d11fbf02ff3a",
     "packages": [
         {
             "name": "aporat/store-receipt-validator",
@@ -7985,16 +7985,16 @@
         },
         {
             "name": "railroad/ecommerce",
-            "version": "v5.0.49",
+            "version": "dev-feature-upgrade-rwillems-20221412",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "8aaa03040ad9f18ab9f884711689939b6cc5023c"
+                "reference": "696005fd75d0020e0f8eb86084cb34ecdc12f0b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/8aaa03040ad9f18ab9f884711689939b6cc5023c",
-                "reference": "8aaa03040ad9f18ab9f884711689939b6cc5023c",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/696005fd75d0020e0f8eb86084cb34ecdc12f0b7",
+                "reference": "696005fd75d0020e0f8eb86084cb34ecdc12f0b7",
                 "shasum": ""
             },
             "require": {
@@ -8031,9 +8031,9 @@
             "description": "Ecommerce system",
             "support": {
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
-                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.49"
+                "source": "https://github.com/railroadmedia/ecommerce/tree/feature-upgrade-rwillems-20221412"
             },
-            "time": "2022-12-21T21:02:03+00:00"
+            "time": "2022-12-29T22:54:33+00:00"
         },
         {
             "name": "railroad/lead-tracker",
@@ -8193,12 +8193,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "9046db87ee5c5710f6212a914c384d010094c105"
+                "reference": "b34dc5bc30ea5ba188350e1006b58759928b1832"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/9046db87ee5c5710f6212a914c384d010094c105",
-                "reference": "9046db87ee5c5710f6212a914c384d010094c105",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/b34dc5bc30ea5ba188350e1006b58759928b1832",
+                "reference": "b34dc5bc30ea5ba188350e1006b58759928b1832",
                 "shasum": ""
             },
             "require": {
@@ -8230,7 +8230,7 @@
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
                 "source": "https://github.com/railroadmedia/musora-api/tree/v2.0-railcontent-v2-integration"
             },
-            "time": "2022-12-20T17:09:52+00:00"
+            "time": "2022-12-29T21:43:47+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -16629,9 +16629,17 @@
             "time": "2021-07-28T10:34:58+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "package": "railroad/ecommerce",
+            "version": "dev-feature-upgrade-rwillems-20221412",
+            "alias": "v5.0.53",
+            "alias_normalized": "5.0.53.0"
+        }
+    ],
     "minimum-stability": "dev",
     "stability-flags": {
+        "railroad/ecommerce": 20,
         "railroad/musora-api": 20
     },
     "prefer-stable": true,

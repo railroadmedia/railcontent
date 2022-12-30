@@ -89,6 +89,10 @@ class ContentPagesController extends BaseController
             return $this->guitareoLessonsPage($request, $domain, $brand);
         }
 
+        if ($contentTypeName == 'songs' && !user()->isAPlusMember()) {
+            return redirect()->away(get_legacy_brand_base_url()); // todo: send to songs upgrade page
+        }
+
         $lessonType = PrimaryURLSlugToContentTypeMap::$map[$contentTypeName];
         $catalogName = $contentTypeName;
         $catalogueMeta = config('railcontent.cataloguesMetadata')[$brand][$catalogName] ?? [];
@@ -103,7 +107,7 @@ class ContentPagesController extends BaseController
                 [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED, ContentService::STATUS_DRAFT];
         }
 
-        if (empty($lessonType)) {
+        if (empty($lessonType) || empty($catalogueMeta)) {
             throw new NotFoundHttpException();
         }
 
@@ -144,7 +148,7 @@ class ContentPagesController extends BaseController
         }
 
         ContentRepository::$pullFilterResultsOptionsAndCount = true;
-        
+
         $searchTerm = null;
 
         if (!empty($request->get('term', null))) {
@@ -262,6 +266,10 @@ class ContentPagesController extends BaseController
 
     public function firstLevel(Request $request, $domain, $brand, $primaryPage, $firstSlug, $firstId)
     {
+        if ($primaryPage == 'songs' && !user()->isAPlusMember()) {
+            return redirect()->away(get_legacy_brand_base_url()); // todo: send to songs upgrade page
+        }
+
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
         ContentLikesDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
 
@@ -415,6 +423,10 @@ class ContentPagesController extends BaseController
         $secondSlug,
         $secondId
     ) {
+        if ($primaryPage == 'songs' && !user()->isAPlusMember()) {
+            return redirect()->away(get_legacy_brand_base_url()); // todo: send to songs upgrade page
+        }
+
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
 
         $secondContent = $this->contentService->getById($secondId);
@@ -1593,7 +1605,7 @@ class ContentPagesController extends BaseController
         if (!user()->isAdmin()) {
             throw new NotFoundHttpException();
         }
-        
+
         return view('content.comments');
     }
 }

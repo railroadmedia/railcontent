@@ -97,7 +97,7 @@
                 <img alt="quietkick" class="h-14 sm:h-16 lg:h-20 mb-1 lazyload" data-src="https://cdn.musora.com/image/fetch/w_550,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/eardrums/Logo.png"><br>
                 <p>Protect your ears + play your favorite songs.</p>
                 <i class="fas fa-play play-button autoplay-video my-28 md:my-36" data-open="trailer"></i><br>
-                @if( $products['drumeo-eardrums']->getStock() > 1 && !empty($products['drumeo-eardrums']->getStock()))
+                @if( $products['drumeo-eardrums']->getStockAvailability() > 1 && !empty($products['drumeo-eardrums']->getStockAvailability()))
                     <a class="join blue my-2 sm:my-4 w-full sm:w-2/3" href="/laravel/public/shopping-cart/api/query?products[drumeo-eardrums]=1">GRAB A PAIR &raquo;</a>
                 @else
                     <a class="join sold-out my-2 sm:my-4 w-full sm:w-2/3">SOLD OUT</a>
@@ -320,7 +320,7 @@
         <div class="container mx-auto">
             <img alt="quietkick logo" class="h-12 sm:h-16 lg:h-20 lazyload" data-src="https://cdn.musora.com/image/fetch/w_550,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/eardrums/Logo.png"><br>
             <h2 class="leading-tight mt-4 mb-2"><strong>Protect your ears +<br> play your favorite songs. </strong></h2>
-            @if( $products['drumeo-eardrums']->getStock() > 1 && !empty($products['drumeo-eardrums']->getStock()))
+            @if( $products['drumeo-eardrums']->getStockAvailability() > 1 && !empty($products['drumeo-eardrums']->getStockAvailability()))
                 <div class="flex flex-wrap items-end justify-center 2-full max-w-sm md:max-w-2xl lg:max-w-3xl my-5 sm:my-10 mx-auto">
                     <div class="w-full md:w-1/2 px-2 md:px-3 relative">
                         {{--<p class="w-full px-4 pt-2 pb-4 -mb-3 text-white rounded-t-2xl" style="background:linear-gradient(to bottom, #0a73d8, #10518f);"><strong>LAUNCH SPECIAL</strong></p>--}}

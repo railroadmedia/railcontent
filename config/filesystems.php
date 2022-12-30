@@ -61,7 +61,7 @@ return [
             'key' => env('NOVA_S3_KEY'),
             'secret' => env('NOVA_S3_SECRET'),
             'region' => env('NOVA_S3_REGION'),
-            'bucket' => env('NOVA_S3_BUCKET'),
+            'bucket' => env('NOVA_S3_BUCKET', 'laravel-nova'),
             'url' => null,
             'endpoint' => null,
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),

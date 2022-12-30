@@ -98,6 +98,10 @@ const props = defineProps({
     }
 });
 
+onMounted(() => {
+    console.log(props.hasInstrumentless)
+})
+
 const soundsliceObject = ref(props.assignments.length ? props.assignments[0] : {});
 const openSoundslice = ref(null);
 const loading = ref(true);
@@ -168,7 +172,7 @@ const markSongAsComplete = () => {
 const getInstrumentlessLabel = () => {
     return ({
         drumeo: 'PLAY DRUMLESS TRACK',
-        singeo: 'PLAY INSTRUMENTAL TRACK',
+        singeo: 'PLAY VOCALLES TRACK',
         guitareo: 'PLAY GUITARLESS TRACK',
         pianote: 'PLAY PIANOLESS TRACK'
     }[props.brand]);
@@ -193,10 +197,11 @@ const getInstrumentlessLabel = () => {
                                 loading="lazy">
                             <div class="thumb-title flex-center text-center ph-1 rounded ba-white-2 hover-border-drumeo"
                                 style="width: 80px; height: 80px; position: absolute;">
-                                <div class="square heading rounded pointer text-white hover-text-drumeo shadow-md"
+                                <button @click="openFull"
+                                    class="square heading rounded pointer text-white hover-text-drumeo shadow-md"
                                     style="width: 80px; height: 80px;">
                                     <i class="fas fa-play absolute-center" style="margin-left: 2px;"></i>
-                                </div>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -233,8 +238,7 @@ const getInstrumentlessLabel = () => {
                                     :class="`tw-h-[50px] ${lessonProgressRef === '100' ? `tw-bg-${themeColor} tw-text-white dark:tw-bg-${themeColor} dark:tw-text-white tw-btn-primary` : 'tw-text-[#00101D] tw-box-border tw-leading-none tw-btn-secondary dark:tw-text-white hover:tw-bg-black/10 dark:hover:tw-bg-white/10'}`"
                                     data-tooltip="Mark Lesson as Complete" :data-content-id="contentId"
                                     @click="markSongAsComplete">
-                                    <span
-                                        v-if="lessonProgressRef !== '100'">
+                                    <span v-if="lessonProgressRef !== '100'">
                                         <i class="fas fa-check tw-mr-2 tw-text-base"></i>
                                         Mark as Complete
                                     </span>

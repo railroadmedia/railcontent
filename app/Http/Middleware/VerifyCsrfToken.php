@@ -17,5 +17,6 @@ class VerifyCsrfToken extends Middleware
         '/railtracker/media-playback-session',
         '/customer-io/*',
         '*/songs',
+        '/ecommerce/access-codes*',
     ];
 }

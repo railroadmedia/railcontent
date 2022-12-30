@@ -103,9 +103,6 @@
         </div>
     </div>
 
-    @php
-       //dd($listLessons);
-    @endphp
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-[10px] dark:tw-text-white songs-catalogue-container">
         <transition appear name="fade">
             <content-catalogue dusk="content-catalogue" brand="{{ $brand }}" theme-color="{{ $brand }}"

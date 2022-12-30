@@ -86,7 +86,7 @@
             <div class="container mx-auto max-w-6xl">
                 <img alt="quietkick" class="h-16 sm:h-24 lg:h-28" src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/quietkick/drumeo-quietkick.png"><br>
                 <h1 class="leading-tight mt-72 sm:mt-96"><strong>Improve your kick<br class="inline sm:hidden"> foot anywhere.</strong></h1>
-                @if( $products['quietkick']->getStock() > 1 && !empty($products['quietkick']->getStock()))
+                @if( $products['quietkick']->getStockAvailability() > 1 && !empty($products['quietkick']->getStockAvailability()))
                     <a class="join blue my-2 sm:my-4 lg:my-6 w-2/3 anchor-slide" href="#customize-anchor">Get Started &raquo;</a>
                 @else
                     <a class="join sold-out my-2 sm:my-4 lg:my-6 w-2/3">SOLD OUT</a>
@@ -94,7 +94,7 @@
                 <h6 class="leading-tight">
                     STARTING AT @if(Prices::$quietKickFull > Prices::$quietKick) <s style="opacity: 0.6;">${{ Prices::$quietKickFull }}</s> @endif
                     ${{ Prices::$quietKick }}
-                    {{--@if( $products['quietkick']->getStock() > 1 && !empty($products['quietkick']->getStock()))--}}
+                    {{--@if( $products['quietkick']->getStockAvailability() > 1 && !empty($products['quietkick']->getStockAvailability()))--}}
                         {{--<br><strong class="text-yellow-500">LAUNCH SPECIAL</strong>--}}
                     {{--@endif--}}
                 </h6>
@@ -220,7 +220,7 @@
             <h2 class="leading-tight mt-4 mb-2"><strong>Improve your kick foot anywhere.</strong></h2>
             <h6><em>Bass drum pedal not included.</em></h6>
 
-            @if( $products['quietkick']->getStock() > 1 && !empty($products['quietkick']->getStock()))
+            @if( $products['quietkick']->getStockAvailability() > 1 && !empty($products['quietkick']->getStockAvailability()))
                 <div class="flex flex-wrap items-end justify-center 2-full max-w-sm md:max-w-2xl lg:max-w-3xl my-5 sm:my-10 mx-auto">
                     <div class="w-full md:w-1/2 px-2 md:px-3 relative">
                         {{--<p class="w-full px-4 pt-2 pb-4 -mb-3 text-white rounded-t-2xl" style="background:linear-gradient(to bottom, #0a73d8, #10518f);"><strong>LAUNCH SPECIAL</strong></p>--}}
