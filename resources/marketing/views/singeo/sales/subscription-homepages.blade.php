@@ -238,32 +238,32 @@
                 'title' => 'Express your voice',
                 'images' => [
                     [
-                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Todd-Sucherman.jpg',
+                        'img' => 'https://singeo.s3.amazonaws.com/sales/2023/coaches/find-your-true-voice.jpg',
                         'title' => 'Find Your True Voice',
                         'instructor' => 'Sheléa',
                     ],
                     [
-                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Dennis-Chambers.jpg',
+                        'img' => 'https://singeo.s3.amazonaws.com/sales/2023/coaches/The-power-of-movement.jpg',
                         'title' => 'The Power of Movement ',
                         'instructor' => 'Chris Johnson',
                     ],
                     [
-                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Domino-Santatonio.jpg',
+                        'img' => 'https://singeo.s3.amazonaws.com/sales/2023/coaches/singing-with-soul.jpg',
                         'title' => 'Singing With Soul',
                         'instructor' => 'Tony Lindsay',
                     ],
                     [
-                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Steve-Smith.jpg',
+                        'img' => 'https://singeo.s3.amazonaws.com/sales/2023/coaches/define-your-singing.jpg',
                         'title' => 'Define Your Singing',
                         'instructor' => 'Cate Canning',
                     ],
                     [
-                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Larnell-Lewis.jpg',
+                        'img' => 'https://singeo.s3.amazonaws.com/sales/2023/coaches/the-science-of-singing-better.jpg',
                         'title' => 'The Science of Singing Better',
                         'instructor' => 'Darcy D',
                     ],
                     [
-                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Greyson-Nektrutman.jpg',
+                        'img' => 'https://singeo.s3.amazonaws.com/sales/2023/coaches/get-your-voice-heard-online.jpg',
                         'title' => 'Get Your Voice Heard Online',
                         'instructor' => 'Hailey Benedict',
                     ]
@@ -273,32 +273,32 @@
                 'title' => 'Add essential techniqes',
                 'images' => [
                     [
-                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Anika-Nilles.jpg',
+                        'img' => 'https://singeo.s3.amazonaws.com/sales/2023/coaches/singing-with-vibrato.jpg',
                         'title' => 'Sing With Vibrato',
                         'instructor' => 'Lisa Witt',
                     ],
                     [
-                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Dom-Famularo.jpg',
+                        'img' => 'https://singeo.s3.amazonaws.com/sales/2023/coaches/hit-the-high-notes.jpg',
                         'title' => 'Hit The High Notes',
                         'instructor' => 'Lisa Witt',
                     ],
                     [
-                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Tommy-Igoe.jpg',
+                        'img' => 'https://singeo.s3.amazonaws.com/sales/2023/coaches/beautiful-harmonies.jpg',
                         'title' => 'Beautiful Harmonies',
                         'instructor' => 'Julia Ziegler',
                     ],
                     [
-                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Dorothe-Taylor-01.jpg',
+                        'img' => 'https://singeo.s3.amazonaws.com/sales/2023/coaches/how-to-sing-a-duet.jpg',
                         'title' => 'How To Sing A Duet',
                         'instructor' => 'Tony Lindsay & Lisa Witt',
                     ],
                     [
-                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Bruce-Becker.jpg',
+                        'img' => 'https://singeo.s3.amazonaws.com/sales/2023/coaches/sining-runs.jpg',
                         'title' => 'Singing Runs',
                         'instructor' => 'Lisa Witt',
                     ],
                     [
-                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Billy-Cobham.jpg',
+                        'img' => 'https://singeo.s3.amazonaws.com/sales/2023/coaches/increase-your-vocal-range.jpg',
                         'title' => 'Increase Your Vocal Range',
                         'instructor' => 'Lisa Witt',
                     ],
@@ -308,32 +308,32 @@
                 'title' => 'Songwriting & performance',
                 'images' => [
                     [
-                    'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Simon-Phillips.jpg',
+                    'img' => 'https://singeo.s3.amazonaws.com/sales/2023/coaches/singing-starter-kit.jpg',
                     'title' => 'Singing Starter Kit',
                     'instructor' => 'Lisa Witt',
                     ],
                     [
-                    'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Aaron-Spears.jpg',
+                    'img' => 'https://singeo.s3.amazonaws.com/sales/2023/coaches/start-writing-songs.jpg',
                     'title' => 'Start Writing Songs',
                     'instructor' => 'Cate Canning',
                     ],
                     [
-                    'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Hannah-Welton.jpg',
+                    'img' => 'https://singeo.s3.amazonaws.com/sales/2023/coaches/composing-lyrics.jpg',
                     'title' => 'Composing Lyrics',
                     'instructor' => 'Tony Lindsay',
                     ],
                     [
-                    'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Matt-McGuire.jpg',
+                    'img' => 'https://singeo.s3.amazonaws.com/sales/2023/coaches/songwriting-for-singers.jpg',
                     'title' => 'Songwriting For Singers',
                     'instructor' => 'Hailey Benedict',
                     ],
                     [
-                    'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Dorothe-Taylor-02.jpg',
+                    'img' => 'https://singeo.s3.amazonaws.com/sales/2023/coaches/how-your-voice-works.jpg',
                     'title' => 'How Your Voice Works',
                     'instructor' => 'Darcy D',
                     ],
                     [
-                    'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Aric-Improta.jpg',
+                    'img' => 'https://singeo.s3.amazonaws.com/sales/2023/coaches/how-to-record-your-voice.jpg',
                     'title' => 'How To Record Your Voice',
                     'instructor' => 'Cate Canning',
                     ],
