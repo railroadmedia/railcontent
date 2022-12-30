@@ -113,10 +113,10 @@
                                         interval: 2000,
                                         breakpoints: {
                                             720: {
-                                                perPage: 3.2,
+                                                perPage: 3.5,
                                             },
                                             620: {
-                                                perPage: 2.2,
+                                                perPage: 2.5,
                                             },
                                         },
                                     }).mount()
