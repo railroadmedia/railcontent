@@ -2062,9 +2062,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .h-auto {
   height: auto !important;
 }
-.h-0 {
-  height: 0px !important;
-}
 .h-\[calc\(100vh-40px\)\] {
   height: calc(100vh - 40px) !important;
 }
@@ -2073,6 +2070,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .h-0\.5 {
   height: 0.125rem !important;
+}
+.h-0 {
+  height: 0px !important;
 }
 .h-11 {
   height: 2.75rem !important;
@@ -2152,11 +2152,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 .h-2\/3 {
   height: 66.666667% !important;
 }
-.max-h-\[500px\] {
-  max-height: 500px !important;
-}
 .max-h-0 {
   max-height: 0px !important;
+}
+.max-h-\[2000px\] {
+  max-height: 2000px !important;
+}
+.max-h-\[500px\] {
+  max-height: 500px !important;
 }
 .max-h-9 {
   max-height: 2.25rem !important;
