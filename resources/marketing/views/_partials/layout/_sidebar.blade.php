@@ -23,7 +23,7 @@
         @endforeach
         <div class="flex flex-col"></div>
     </section>
-    <!-- Social Links -->
+    {{-- Social Links --}}
     @if( @isset($external_links) )
         <section class="pt-1">
             <ul class="py-3 px-5">
@@ -35,7 +35,7 @@
                             @else
                                 target="_blank" 
                             @endif 
-                            class="text-sm text-black"
+                            class="text-base text-black py-2 w-full"
                         >
                             <i class="{{ $info['iconClass'] }} mr-1 @if(@isset($info['themeClass'])){{$info['themeClass']}}@endif" aria-hidden="true"></i>
                             {{ $page }} 

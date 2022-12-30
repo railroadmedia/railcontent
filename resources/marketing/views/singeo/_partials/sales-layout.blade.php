@@ -25,15 +25,15 @@
                 "children" => [
                     "Method"=> [
                         "iconClass" => "fa-fw far fa-music-note",
-                        "url" => "/method",
+                        "url" => get_legacy_brand_base_url("singeo")."/method",
                     ],
                     "Songs"=> [
                         "iconClass" => "fa-fw far fa-headphones",
-                        "url" => "/songs",
+                        "url" => get_legacy_brand_base_url("singeo")."/songs",
                     ],
                     "Coaches"=> [
                         "iconClass" => "fa-fw far fa-whistle",
-                        "url" => "/coaches",
+                        "url" => get_legacy_brand_base_url("singeo")."/coaches",
                     ],
                 ],
             ],
@@ -54,13 +54,13 @@
                 ],
             ],
             "Pricing" => [
-                "url" => get_musora_brand_base_url() . '/pricing',
+                "url" => '/choose-plan',
             ],
             "Shop" => [
-                "url" => get_musora_brand_base_url() . '/shop',
+                "url" => '/shop',
             ],
             "Blog" => [
-                "url" => get_musora_brand_base_url() . '/chorus/',
+                "url" => '/chorus',
             ],
         ],
         // SIDEBAR
@@ -69,26 +69,54 @@
                 "iconClass" => "fas fa-sign-in",
                 "url" => get_musora_brand_base_url() . '/login',
             ],
-            "Contact" => [
-                "iconClass" => "fas fa-phone",
-                "url" => get_musora_brand_base_url().'/contact',
-            ],
-            "Singeo" => [
+            "Home" => [
                 "iconClass" => "fas fa-graduation-cap",
                 "url" => '/',
+            ],
+            "Features" => [
+                "iconClass" => "fas fa-star",
+                "children" => [
+                    "Method"=> [
+                        "url" => "/methods",
+                    ],
+                    "Songs"=> [
+                        "url" => "/songs",
+                    ],
+                    "Coaches"=> [
+                        "url" => "/coaches",
+                    ],
+                ],
+            ],
+            "Instuments" => [
+                "iconClass" => "fas fa-piano-keyboard",
+                "children" => [
+                    "Drumeo"=> [
+                        "url" => get_legacy_brand_base_url("drumeo"),
+                    ],
+                    "Pianote"=> [
+                        "url" => get_legacy_brand_base_url("pianote"),
+                    ],
+                    "Guitareo"=> [
+                        "url" => get_legacy_brand_base_url("guitareo"),
+                    ],
+                ],
+            ],
+            "Pricing" => [
+                "iconClass" => "fas fa-money-bill-wave",
+                "url" => '/choose-plan',
             ],
             "Shop" => [
                 "iconClass" => "fas fa-tag",
                 "url" => '/shop',
             ],
-            "The Chorus" => [
+            "Blog" => [
                 "iconClass" => "fas fa-comment-alt-edit",
                 "url" => '/chorus',
             ],
             "4 Vocal Exercises" => [
                 "iconClass" => "fas fa-microphone-alt",
                 "url" => '/improve-any-voice',
-            ]
+            ],
         ],
         "external_links" => [
             "YouTube" => [
@@ -103,11 +131,20 @@
                 "iconClass" => "fab fa-fw fa-instagram",
                 "url" => 'https://instagram.com/singeoofficial/'
             ],
+            "TikTok" => [
+                "iconClass" => "fab fa-fw fa-tiktok",
+                "url" => 'https://www.tiktok.com/@singeoofficial'
+            ],
             "FAQs" => [
                 "iconClass" => "fas fa-fw fa-question",
                 "url" => 'https://help.singeo.com/',
                 "target" => '_parent'
-            ]
+            ],
+            "Contact" => [
+                "iconClass" => "fas fa-fw fa-phone",
+                "url" => '/contact',
+                "target" => '_parent'
+            ],
         ]
     ])
 @stop

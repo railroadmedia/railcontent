@@ -26,7 +26,7 @@
          x-bind:class="dropdown_{{ $id }} ? 'max-h-[500px]' : 'max-h-0'"
     >
         @foreach($children as $page => $info)
-            @include('_partials.layout._nav-link', [
+            @include('_partials.layout._sidebar-link', [
                 "page" => $page,
                 "iconClass" => $info['iconClass'] ?? null,
                 "iconSvg" => $info['iconSvg'] ?? null,

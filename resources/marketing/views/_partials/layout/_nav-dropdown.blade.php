@@ -3,9 +3,10 @@
 <div class="relative flex flex-col items-center"
      data-remain-open="{{ strtolower(str_replace(' ', '-', $page)) }}"
      x-data="{ dropdown_{{ $id }}: false }"
+     x-on:click.away="dropdown_{{ $id }} = false"
 >
     {{-- DROPDOWN TRIGGER --}}
-    <div class="flex py-2 mr-8 items-center text-white hover:text-{{ $brand }} tracking-widest text-base leading-none"
+    <div class="flex py-2 mr-4 lg:mr-8 items-center text-white hover:text-{{ $brand }} tracking-widest text-base leading-none"
           dusk="parent-button-{{ strtolower(str_replace(' ', '-', $page)) }}"
           x-on:click.prevent="dropdown_{{ $id }} = !dropdown_{{ $id }}"      
     >
