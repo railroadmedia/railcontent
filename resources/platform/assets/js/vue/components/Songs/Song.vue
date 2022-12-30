@@ -7,7 +7,6 @@ Mark as complete
 
 */
 import { ref, onMounted, onBeforeUnmount } from 'vue';
-import axios from 'axios';
 import ContentLessonActionButtons from '../../vuesora/components/VideoResources/ContentLessonActionButtons.vue';
 import SoundSlice from "../SoundSlice/SoundSlice.vue"
 import SoundSliceControls from "../SoundSlice/SoundSliceControls.vue";
@@ -98,6 +97,10 @@ const props = defineProps({
         type: Boolean,
     }
 });
+
+onMounted(() => {
+    console.log(props.hasInstrumentless)
+})
 
 const soundsliceObject = ref(props.assignments.length ? props.assignments[0] : {});
 const openSoundslice = ref(null);

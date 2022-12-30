@@ -22685,9 +22685,6 @@ a:visited{
 .tw-items-center{
   align-items: center !important;
 }
-.tw-items-stretch{
-  align-items: stretch !important;
-}
 .tw-justify-start{
   justify-content: flex-start !important;
 }
@@ -22749,9 +22746,6 @@ a:visited{
 }
 .tw-self-end{
   align-self: flex-end !important;
-}
-.tw-self-stretch{
-  align-self: stretch !important;
 }
 .tw-justify-self-end{
   justify-self: end !important;

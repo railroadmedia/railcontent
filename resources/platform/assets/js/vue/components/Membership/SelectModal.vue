@@ -1,6 +1,5 @@
 <script setup>
-import axios from 'axios';
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 import ModalRenderer from '../Modal/ModalRenderer.vue';
 
 const props = defineProps({
@@ -13,35 +12,15 @@ const props = defineProps({
 const emit = defineEmits(['onCloseModal']);
 
 const selectedTier = ref('plus');
-const yearUpgradeCostRef = ref(0);
+const selectedInterval = ref('year');
 
 const handleSelectedTier = (val) => {
     selectedTier.value = val;
 };
 
-const handleSelectInterval = (interval) => {
-    axios.get(`/ecommerce/subscription/change/${selectedTier.value}/${interval}`)
-        .then((r) => {
-            console.log(r);
-            window.shownotification({
-                icon: 'check',
-                text: `We successfully changed your membership.`
-            });
-        }).catch((e) => {
-            console.log(e);
-            window.shownotification({
-                icon: 'error',
-                text: 'There was an error changing your membership, please try again later or contact support.'
-            });
-        });
+const handleSelectedInterval = (val) => {
+    selectedInterval.value = val;
 };
-
-onMounted(() => {
-    axios.get(`/ecommerce/subscription/change/info`).then((r) => {
-        const { currentTier, yearUpgradeCost } = r.data;
-        yearUpgradeCostRef.value = yearUpgradeCost;
-    });
-})
 
 </script>
 <template>
@@ -69,14 +48,11 @@ onMounted(() => {
                                             fill="white" />
                                     </svg>
                                 </div>
-                                <p class="tw-opacitBy clicking 'Pay Annually', I agree to be billed immediately for a
-                                    prorated upgrade cost of $[x]. I understand that my next renewal will be $240 for
-                                    Musora+ with Songs.y-60 tw-text-[10px]"><em>Lessons, songs & support</em></p>
+                                <p class="tw-opacity-60 tw-text-[10px]"><em>Lessons, songs & support</em></p>
                             </div>
                             <div
                                 class="tw-flex tw-h-full tw-absolute tw-right-0 tw-items-center tw-justify-end -tw-mb-2 tw-mr-2">
-                                <i
-                                    :class="`${selectedTier === 'plus' ? 'fas fa-check-circle' : 'far fa-circle'} tw-text-2xl`"></i>
+                                <i :class="`${selectedTier === 'plus' ? 'fas fa-check-circle' : 'far fa-circle'} tw-text-2xl`"></i>
                             </div>
                         </div>
                     </button>
@@ -91,8 +67,7 @@ onMounted(() => {
                             </div>
                             <div
                                 class="tw-flex tw-h-full tw-absolute tw-right-0 tw-items-center tw-justify-end -tw-mb-2 tw-mr-4">
-                                <i
-                                    :class="`${selectedTier === 'basic' ? 'fas fa-check-circle' : 'far fa-circle'} tw-text-2xl`"></i>
+                                <i :class="`${selectedTier === 'basic' ? 'fas fa-check-circle' : 'far fa-circle'} tw-text-2xl`"></i>
                             </div>
                         </div>
                     </button>
@@ -100,18 +75,17 @@ onMounted(() => {
                 </div>
 
                 <div
-                    class="tw-flex tw-items-stretch tw-flex-wrap tw-items-end tw-justify-center tw-2-full tw-max-w-sm md:tw-max-w-2xl lg:tw-max-w-3xl tw-my-5 sm:tw-my-7 tw-mx-auto">
-                    <div class="tw-flex tw-flex-col tw-w-full md:tw-w-1/2 tw-px-2 md:tw-px-3 tw-relative">
+                    class="tw-flex tw-flex-wrap tw-items-end tw-justify-center tw-2-full tw-max-w-sm md:tw-max-w-2xl lg:tw-max-w-3xl tw-my-5 sm:tw-my-7 tw-mx-auto">
+                    <div class="tw-w-full md:tw-w-1/2 tw-px-2 md:tw-px-3 tw-relative">
                         <p class="tw-inline-block tw-absolute -tw-mt-3 tw-px-5 tw-py-1 tw-z-10 tw-text-[12px] tw-text-black tw-rounded-full tw-mx-auto tw-left-0 tw-right-0 tw-w-[100px]"
                             style="background-color:#ffac00;">SAVE 33%</p>
-                        <div
-                            class="tw-text-black tw-overflow-hidden tw-rounded-2xl tw-mx-auto tw-mb-4 md:tw-mb-0 tw-group">
+                        <a href="todo"
+                            class="tw-text-black tw-overflow-hidden tw-rounded-2xl tw-block tw-mx-auto tw-mb-4 md:tw-mb-0 tw-group">
                             <div class="tw-bg-white tw-px-3 tw-pt-6 md:tw-pt-8 tw-pb-5 md:tw-pb-8">
                                 <h2 class="tw-leading-none tw-mb-3"><strong>Annual</strong></h2>
                                 <h4 class="tw-inline-block tw-leading-none"><strong>$20/month</strong></h4>
                                 <p class="tw-text-sm tw-mb-4"><em>Billed at $240 per year.</em></p>
-                                <button @click="() => handleSelectInterval('year')"
-                                    class="tw-btn-primary tw-bg-[#00101D]">PAY ANNUALLY</button>
+                                <button class="tw-btn-primary tw-bg-[#00101D]">PAY ANNUALLY</button>
                             </div>
                             <div class="tw-px-3 tw-pt-5 md:tw-pt-6 tw-pb-9 md:tw-pb-10"
                                 style="background: #f1f8ff;border-top: 2px solid #e6f2ff;">
@@ -119,48 +93,28 @@ onMounted(() => {
                                 <p class="tw-mb-1"><strong>Step-by-step curriculums.</strong></p>
                                 <p class="tw-mb-1"><strong>Unlimited personal support</strong></p>
                                 <p class="tw-mb-2"><strong>Thousand of popular songs</strong></p>
-                                <p class="tw-mb-1">
-                                    {{
-                                    yearUpgradeCostRef > 0
-                                    ?
-                                    `By clicking 'Pay Annually', I agree to be billed immediately for a
-                                    prorated upgrade cost of $${yearUpgradeCostRef}. I understand that my next renewal will be $240 for
-                                    Musora+ with Songs.`
-                                    :
-                                    `By clicking "Pay Annually", I understand that my next renewal will be $240 for Musora+ with Songs.`
-                                }}
-                                </p>
+                                <p class="tw-mb-1">By clicking 'Pay Annually', I agree to be billed immediately for a prorated upgrade cost of $[x]. I understand that my next renewal will be $240 for Musora+ with Songs.</p>
                             </div>
-                        </div>
+                        </a>
                     </div>
-                    <div class="tw-flex tw-flex-col tw-w-full md:tw-w-1/2 tw-px-2 md:tw-px-3 tw-relative">
-                        <div
-                            class="tw-text-black tw-overflow-hidden tw-rounded-2xl tw-flex tw-flex-col tw-mx-auto tw-mb-4 md:tw-mb-0 tw-group tw-h-full">
+                    <div class="tw-w-full md:tw-w-1/2 tw-px-2 md:tw-px-3 tw-relative">
+                        <a href="todo"
+                            class="tw-text-black tw-overflow-hidden tw-rounded-2xl tw-block tw-mx-auto tw-mb-4 md:tw-mb-0 tw-group">
                             <div class="tw-bg-white tw-px-3 tw-pt-6 md:tw-pt-8 tw-pb-5 md:tw-pb-8">
                                 <h2 class="tw-leading-none tw-mb-3"><strong>Monthly</strong></h2>
                                 <h4 class="tw-inline-block tw-leading-none"><strong>$29/month</strong></h4>
                                 <p class="tw-text-sm tw-mb-4"><em>Pay as you go.</em></p>
-                                <button @click="() => handleSelectInterval('month')"
-                                    class="tw-btn-primary tw-bg-[#00101D]">PAY MONTHLY</button>
+                                <button class="tw-btn-primary tw-bg-[#00101D]">PAY MONTHLY</button>
                             </div>
-                            <div class="tw-px-3 tw-pt-5 md:tw-pt-6 tw-pb-9 md:tw-pb-10 tw-self-stretch tw-h-full"
+                            <div class="tw-px-3 tw-pt-5 md:tw-pt-6 tw-pb-9 md:tw-pb-10"
                                 style="background: #f1f8ff;border-top: 2px solid #e6f2ff;">
                                 <p class="tw-mb-1"><strong>The world’s best music lessons.</strong></p>
                                 <p class="tw-mb-1"><strong>Step-by-step curriculums.</strong></p>
                                 <p class="tw-mb-1"><strong>Unlimited personal support</strong></p>
                                 <p class="tw-mb-2"><strong>Thousand of popular songs</strong></p>
-                                <p class="tw-mb-1">
-                                    {{
-                                yearUpgradeCostRef > 0
-                                ?
-                                `By clicking 'Pay Monthly', I understand that my next renewal will be
-                                    $29 for Musora+ with Songs.`
-                                :
-                                ``
-                                }}
-                                </p>
+                                <p class="tw-mb-1">By clicking 'Pay Monthly', I understand that my next renewal will be $29 for Musora+ with Songs.</p>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
                 <p><em>All prices listed in USD.</em></p>

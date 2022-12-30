@@ -96,7 +96,7 @@ class AssignSongsPermissionsToAllUsers extends Command
         $this->info('Syncing ' . count($allUsersIdsToSync) . ' user ids.');
 
         // sync all those user ids by dispatching jobs
-        $allUsersIdsToSyncChunked = array_chunk($allUsersIdsToSync, 100);
+        $allUsersIdsToSyncChunked = array_chunk($allUsersIdsToSync, 500);
 
         $jobsToChain = [];
 
