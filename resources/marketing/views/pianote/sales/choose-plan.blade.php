@@ -47,6 +47,10 @@
         "firstPoint" => "Unlimited piano lessons",
         "thirdPoint" => "Direct access to real teachers.",
         "fifthPoint" => "Lesson access for singing, guitar, and drums.",
+        "plusAnnualLink" => "/ecommerce/add-to-cart?products%5BPIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL%5D=1&promo-code=annual-trial&redirect=%2Forder&locked=true",
+        "plusMonthlyLink" => "/ecommerce/add-to-cart?products%5BPIANOTE-MEMBERSHIP-TRIAL%5D=1&redirect=%2Forder&locked=true",
+        "annualLink" => "/ecommerce/add-to-cart?products%5BPIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL%5D=1&promo-code=annual-trial&redirect=%2Forder&locked=true",
+        "monthlyLink" => "/ecommerce/add-to-cart?products%5BPIANOTE-MEMBERSHIP-TRIAL%5D=1&redirect=%2Forder&locked=true",
     ])
 
     @include('musora.sales.components.plans-different-section', [
