@@ -560,14 +560,10 @@
 {{--            </div>--}}
 {{--        </div>--}}
 
-        <div class="text-center">
-            <h3 class="font-extrabold mb-6">Plus hundreds more popular songs.</h3>
-            <a href="" class="mx-1 join bg-singeo smaller">Get started <i class="fas fa-arrow-right" aria-hidden="true"></i> </a>
-        </div>
+            <div class="text-center">
+                <h3 class="font-extrabold mb-6">Plus hundreds more popular songs.</h3>
+                <a href="/choose-plan" class="mx-1 join bg-singeo smaller">Get started <i class="fas fa-arrow-right" aria-hidden="true"></i> </a>
+            </div>
+        </div>.
     </section>
-
-    {{--    @include('_partials.components.video-modal',[--}}
-    {{--        'name' => 'trailer',--}}
-    {{--        'video' => '772644658'--}}
-    {{--    ])--}}
 @stop
