@@ -79,16 +79,10 @@ class AssignSongsPermissionsToContent extends Command
                 ->first()
                 ->id;
 
-        $this->musoraDB()->from('railcontent_permissions')
-            ->updateOrInsert([
-                'name' => 'Drumeo Songs Access',
-                'brand' => 'drumeo',
-            ]);
-
-        $drumeoSongsMembershipPermissionId =
+        $drumeoLifetimeMembershipPermissionId =
             $this->musoraDB()->from('railcontent_permissions')
                 ->where([
-                    'name' => 'Drumeo Songs Access',
+                    'name' => 'Drumeo Lifetime Member',
                     'brand' => 'drumeo',
                 ])
                 ->first()
@@ -96,7 +90,7 @@ class AssignSongsPermissionsToContent extends Command
 
         $this->info("musoraBasicMembershipPermissionId: $musoraBasicMembershipPermissionId");
         $this->info("musoraPlusMembershipPermissionId: $musoraPlusMembershipPermissionId");
-        $this->info("drumeoSongsMembershipPermissionId: $drumeoSongsMembershipPermissionId");
+        $this->info("drumeoLifetimeMembershipPermissionId: $drumeoLifetimeMembershipPermissionId");
 
         $this->info('Permissions created successfully. Adding to content...');
         $createdCount = 0;
@@ -107,7 +101,7 @@ class AssignSongsPermissionsToContent extends Command
             ->where('type', 'song')
             ->where('brand', 'drumeo')
             ->orderBy('id', 'asc')
-            ->chunk(250, function(Collection $drumeoSongContentIds) use ($musoraPlusMembershipPermissionId, &$createdCount, $drumeoSongsMembershipPermissionId) {
+            ->chunk(250, function(Collection $drumeoSongContentIds) use ($musoraPlusMembershipPermissionId, &$createdCount, $drumeoLifetimeMembershipPermissionId) {
                 $drumeoSongContentIds = $drumeoSongContentIds->pluck('id')->toArray();
 
                 $drumeoSongsContentPermissions = $this->musoraDB()->from('railcontent_content_permissions')
@@ -122,7 +116,7 @@ class AssignSongsPermissionsToContent extends Command
                     $hasDrumeoSongsPermission = false;
 
                     foreach ($drumeoSongContentPermissions as $drumeoSongContentPermission) {
-                        if ($drumeoSongContentPermission->permission_id == $drumeoSongsMembershipPermissionId) {
+                        if ($drumeoSongContentPermission->permission_id == $drumeoLifetimeMembershipPermissionId) {
                             $hasDrumeoSongsPermission = true;
                         }
                     }
@@ -132,7 +126,7 @@ class AssignSongsPermissionsToContent extends Command
                             ->updateOrInsert([
                                 'content_id' => $drumeoSongContentId,
                                 'content_type' => null,
-                                'permission_id' => $drumeoSongsMembershipPermissionId,
+                                'permission_id' => $drumeoLifetimeMembershipPermissionId,
                                 'brand' => 'drumeo',
                             ]);
                     }
@@ -172,7 +166,7 @@ class AssignSongsPermissionsToContent extends Command
             ->where('type', 'song')
             ->whereIn('brand', ['pianote', 'guitareo', 'singeo'])
             ->orderBy('id', 'asc')
-            ->chunk(250, function(Collection $songContentIds) use ($musoraPlusMembershipPermissionId, &$createdCount, $drumeoSongsMembershipPermissionId) {
+            ->chunk(250, function(Collection $songContentIds) use ($musoraPlusMembershipPermissionId, &$createdCount, $drumeoLifetimeMembershipPermissionId) {
                 $songContentIds = $songContentIds->pluck('id')->toArray();
 
                 $songsContentPermissions = $this->musoraDB()->from('railcontent_content_permissions')
@@ -209,6 +203,28 @@ class AssignSongsPermissionsToContent extends Command
 
 
         $this->info('Done AssignSongsPermissionsToContent!');
+        $createdCount = 0;
+
+        // all non-song content should have musora basic membership permissions added
+        $this->musoraDB()->from('railcontent_content_permissions')
+            ->leftJoin('railcontent_content', 'railcontent_content.id', '=', 'railcontent_content_permissions.content_id')
+            ->where('railcontent_content.type', '!=', 'song')
+            ->whereIn('permission_id', [1, 52, 73, 77, 85])
+            ->orderBy('railcontent_content_permissions.id', 'desc')
+            ->chunk(250, function (Collection $rows) use (&$createdCount, $musoraBasicMembershipPermissionId) {
+                foreach ($rows as $row) {
+                    $this->musoraDB()->from('railcontent_content_permissions')
+                        ->updateOrInsert([
+                            'content_id' => $row->content_id,
+                            'content_type' => null,
+                            'permission_id' => $musoraBasicMembershipPermissionId,
+                            'brand' => 'musora',
+                        ]);
+                }
+
+                $createdCount += 250;
+                $this->info($createdCount . ' done basic permissions');
+            });
 
         return 0;
     }
