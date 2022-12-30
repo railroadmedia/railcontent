@@ -26,10 +26,10 @@
                 }
             "
         >
-            <h6 class="leading-tight sm:leading-loose font-bold relative" :class="open && 'mb-2'">
+            <h5 class="leading-tight sm:leading-loose font-black relative" :class="open && 'mb-2'">
                 @if(!empty($num))<span class="text-white rounded-full py-1 px-2 md:px-2.5 text-xs md:text-sm absolute -left-11 md:-left-16 -top-0.5 md:top-0.5" :class="open ? 'bg-{{$theme}}' : 'bg-[#838C98]'">{{$num}}</span>@endif
                 {!! $title !!}
-            </h6>
+            </h5>
             <p
                 x-ref="dropdown1"
                 class="transition-all duration-300 text-xs sm:text-sm @if(empty($open) || !$open) h-0 @endif leading-relaxed sm:leading-relaxed overflow-hidden"
@@ -77,7 +77,7 @@
                         onload="this.classList.remove('opacity-0')"
                     />
                     <div class="md:pl-6">
-                        <h5 class="font-extrabold">{{$info['title']}}</h5>
+                        <h6 class="font-black">{{$info['title']}}</h6>
                         @if(!empty($info['desc']))<p class="my-2">{{$info['desc']}}</p>@endif
                         @if(!empty($info['lessonNum']))<p class="text-[#838C98]">{{ $info['lessonNum'] }} lessons</p>@endif
                     </div>

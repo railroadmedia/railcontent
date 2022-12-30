@@ -124,22 +124,22 @@
     @php
         $features = [
             [
-                'image' => 'https://pianote.s3.amazonaws.com/sales/2023/piano-lesson-icon.svg',
+                'image' => 'https://guitareo.s3.amazonaws.com/sales/2023/guitar-lessons-icon.svg',
                 'title' => 'Guitar Lessons',
                 'desc' => 'Step-by-step video <br class="hidden sm:inline"> lessons on every topic.',
             ],
             [
-                'image' => 'https://pianote.s3.amazonaws.com/sales/2023/artist-course-icon.svg',
+                'image' => 'https://guitareo.s3.amazonaws.com/sales/2023/artist-courses-icon.svg',
                 'title' => 'Artist Courses',
                 'desc' => 'Courses and live events<br class="hidden sm:inline"> with inspiring guitarists. ',
             ],
             [
-                'image' => 'https://pianote.s3.amazonaws.com/sales/2023/songs-icon.svg',
+                'image' => 'https://guitareo.s3.amazonaws.com/sales/2023/songs-icon.svg',
                 'title' => '1000+ Songs',
                 'desc' => 'Play your favorite songs<br class="hidden sm:inline"> from every style & era.',
             ],
             [
-                'image' => 'https://pianote.s3.amazonaws.com/sales/2023/support-icon.svg',
+                'image' => 'https://guitareo.s3.amazonaws.com/sales/2023/support-icon.svg',
                 'title' => '24/7 Support',
                 'desc' => 'The largest community<br class="hidden sm:inline"> of students & teachers.',
             ],
@@ -386,30 +386,31 @@
         'desc' => 'Amplify your skills with exclusive artist <br class="hidden md:inline"> courses + live events with special guests.'
     ])
 
+
     @php
         $songItems = [
             [
-                'icon' => 'https://pianote.s3.amazonaws.com/sales/2023/songs-icon.svg',
+                'icon' => 'https://guitareo.s3.amazonaws.com/sales/2023/songs-icon.svg',
                 'title' => '1000+ popular songs.',
                 'desc' => 'Get note-for-note song breakdowns for  <br class="hidden sm:inline"> every style, era, and skill level. ',
             ],
             [
-                'icon' => 'https://pianote.s3.amazonaws.com/sales/2023/tempo-icons.svg',
+                'icon' => 'https://guitareo.s3.amazonaws.com/sales/2023/tempo-icon.svg',
                 'title' => 'Find the perfect tempo.',
                 'desc' => 'Slow down any section of a song  <br class="hidden sm:inline">to make those tricky bars easier. ',
             ],
             [
-                'icon' => 'https://pianote.s3.amazonaws.com/sales/2023/loop-icons.svg',
+                'icon' => 'https://guitareo.s3.amazonaws.com/sales/2023/loop-icon.svg',
                 'title' => 'Loop the hard parts.',
                 'desc' => 'Create practice loops to play-through <br class="hidden sm:inline"> those difficult parts over and over.   ',
             ],
             [
-                'icon' => 'https://pianote.s3.amazonaws.com/sales/2023/timing-icons.svg',
+                'icon' => 'https://guitareo.s3.amazonaws.com/sales/2023/timing-icon.svg',
                 'title' => 'Improve your timing.',
                 'desc' => 'Use the built-in-metronome – your new <br class="hidden sm:inline"> best friend for difficult rhythms.  ',
             ],
             [
-                'icon' => 'https://pianote.s3.amazonaws.com/sales/2023/devices-icons.svg',
+                'icon' => 'https://guitareo.s3.amazonaws.com/sales/2023/devices-icon.svg',
                 'title' => 'Take your songs anywhere.',
                 'desc' => 'Accessible on any device, or printable, <br class="hidden sm:inline"> so you can play any song, any time.    ',
             ],
