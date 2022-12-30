@@ -13,7 +13,7 @@
             </h5>
             <p
                 x-cloak
-                class="transition-all duration-300 leading-relaxed sm:leading-relaxed overflow-hidden"
+                class="transition-all duration-100 leading-relaxed sm:leading-relaxed overflow-hidden"
                 x-bind:class="{ 'max-h-0': !open, 'max-h-[2000px]': open  }"
             >
                 {!! nl2br( $desc) !!}
@@ -30,7 +30,7 @@
     @if(!empty($lessonInfo))
         <div
             x-cloak
-            class="transition-all duration-300 text-xs sm:text-sm text-left bg-[#F5F8FC] overflow-hidden"
+            class="transition-all duration-200 text-xs sm:text-sm text-left bg-[#F5F8FC] overflow-hidden"
             x-bind:class="open ? 'max-h-[2000px]' : 'max-h-0'">
             <div class="py-4 sm:py-6 pl-4 sm:pl-5 pr-8 sm:pr-12">
             @foreach($lessonInfo as $key => $info)
