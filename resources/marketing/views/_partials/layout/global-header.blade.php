@@ -1,15 +1,30 @@
 <header class="flex-none z-40">  
-
     <!-- Nav -->
-    @include('_partials.layout._top-nav', [
-        "logo" => $logo,
-        "theme_bg" => $theme_bg,
-    ])
+    @if(!$emptyPromoVersion)
+        @include('_partials.layout._top-nav', [
+            "subscriptionVersion" => true,
+            "scrollToJoin" => true,
+            "hideMenu" => true,
+            "logo" => $logo,
+            "links" => $nav_links,
+            "cartVersion" => false,
+            "checkoutVersion" => false,
+        ])
+    @else
+        @include('_partials.layout._top-nav', [
+            "subscriptionVersion" => true,
+            "fullSubscriptionVersion" => true,
+            "trialVersion" => true,
+            "cartVersion" => false,
+            "checkoutVersion" => false, 
+            "logo" => $logo,
+            "links" => $nav_links,
+        ])
+    @endif
 
     <!-- Sidebar -->
     @include('_partials.layout._sidebar', [
-        "theme_text" => $theme_text,
-        "links" => $links,
+        "links" => $sidebar_links,
     ])
 
 </header>

@@ -1,31 +1,29 @@
 <aside id="navSideBar" 
        x-cloak
-       class="fixed w-80 right-0 top-10 md:top-14 h-[calc(100vh-40px)] md:h-[calc(100vh-56px)] bg-white border-l border-gray-200 shadow-lg transition duration-300 ease-in-out"
+       class="z-[1000] fixed w-80 right-0 top-10 md:top-14 h-[calc(100vh-40px)] md:h-[calc(100vh-56px)] bg-white border-l border-gray-200 shadow-lg transition duration-300 ease-in-out"
        x-bind:class="sidebarOpen? 'translate-x-0' : 'translate-x-full'"
 >
     <!-- Sidebar Links -->
     <section id="pageLinks" class="flex flex-col">
         @foreach($links as $page => $info)
             @if(!empty($info['children']))
-                @include('_partials.layout._secondary-nav-link', [
+                @include('_partials.layout._sidebar-dropdown', [
                     "page" => $page,
-                    "theme_text" => $theme_text,
                     "iconClass" => $info['iconClass'],
                     "children" => $info['children'],
                 ])
             @else
-                @include('_partials.layout._nav-link', [
+                @include('_partials.layout._sidebar-link', [
                     "page" => $page,
                     "iconClass" => $info['iconClass'],
                     "url" => $info['url'],
-                    "theme_text" => $theme_text,
                     "greyed" => $info['greyed'] ?? false,
                 ])
             @endif
         @endforeach
         <div class="flex flex-col"></div>
     </section>
-    <!-- Social Links -->
+    {{-- Social Links --}}
     @if( @isset($external_links) )
         <section class="pt-1">
             <ul class="py-3 px-5">
@@ -37,7 +35,7 @@
                             @else
                                 target="_blank" 
                             @endif 
-                           class="text-sm text-black"
+                            class="text-base text-black py-2 w-full"
                         >
                             <i class="{{ $info['iconClass'] }} mr-1 @if(@isset($info['themeClass'])){{$info['themeClass']}}@endif" aria-hidden="true"></i>
                             {{ $page }} 

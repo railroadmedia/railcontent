@@ -28,7 +28,7 @@
                 "url" => get_musora_brand_base_url().'/contact',
             ],
             "Drumeo" => [
-                "iconClass" => "fas fa-graduation-cap",
+                "iconClass" => "fas fa-home",
                 "url" => '/',
             ],
             "Drum Shop" => [

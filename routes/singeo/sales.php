@@ -7,7 +7,9 @@ use App\Http\Controllers\Singeo\LeadGenController;
 Route::domain('{singeoDomain}')
     ->middleware(['web_public'])
     ->group(function () {
-    Route::get('/', [SalesController::class, 'home']);
+    Route::get('/', [SalesController::class, 'home'] );
+    Route::get('/new-year', [SalesController::class, 'promo'] );
+    Route::get('/choose-plan', [SalesController::class, 'choosePlan'] );
     Route::get('/student-only', [SalesController::class, 'studentOnly']);
     Route::get('/privacy', [SalesController::class, 'privacy']);
     Route::get('/terms', [SalesController::class, 'terms']);
@@ -16,6 +18,10 @@ Route::domain('{singeoDomain}')
     Route::get('/choose-your-trial', [SalesController::class, 'chooseYourTrial']);
     Route::get('/choose-your-trial-month', [SalesController::class, 'chooseYourTrialMonth']);
     Route::get('/cookie', [SalesController::class, 'cookie']);
+
+    Route::get('/method', [SalesController::class, 'method']);
+    Route::get('/coaches', [SalesController::class, 'coaches']);
+    Route::get('/songs', [SalesController::class, 'songs']);
 
     Route::get('/affiliate/asobergirlsguide', [SalesController::class, 'asobergirlsguide']);
     Route::get('/affiliate-trial', [SalesController::class, 'affiliateTrial']);

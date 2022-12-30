@@ -7,11 +7,7 @@
     <meta name="description" content="Online singing lessons for any voice & vocal coaches to support you every step of the way. 90-Day Guarantee." />
     <meta property="og:description" content="Online singing lessons for any voice & vocal coaches to support you every step of the way. 90-Day Guarantee."/>
 
-    @hasSection('share-image')
-        @yield('share-image')
-    @else
         <meta property="og:image" content="https://singeo.s3.amazonaws.com/sales/2022/og-image.jpg"/>
-    @endif
 
     <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
 

@@ -11,9 +11,9 @@ Route::domain('{drumeoDomain}')
         'as' => 'referral.invite-a-friend-landing',
         'uses' => App\Http\Controllers\Profiles\ReferralController::class . '@join',
     ]);
-    Route::get('/', [SalesController::class, 'sales'] );
-    Route::get('/anniversary-deal', [SalesController::class, 'sales'] );
-    Route::get('/mydrumset', [SalesController::class, 'sales'] );
+    Route::get('/', [SalesController::class, 'home'] );
+    Route::get('/new-year', [SalesController::class, 'promo'] );
+    Route::get('/choose-plan', [SalesController::class, 'choosePlan'] );
     Route::get('/student-only', [SalesController::class, 'salesStudents'] );
     Route::get('/upgrade-offer', [SalesController::class, 'salesUpgrade'] );
     Route::get('/lifetime', [SalesController::class, 'salesUpgradeLifetime'] );
@@ -22,7 +22,9 @@ Route::domain('{drumeoDomain}')
 
     //    sales pages
     Route::get('/beginner', [SalesController::class, 'beginner']);
-    Route::get('/songs', [SalesController::class, 'songs']);
+    Route::get('/method', [SalesController::class, 'method'] );
+    Route::get('/songs', [SalesController::class, 'songs'] );
+    Route::get('/coaches', [SalesController::class, 'coaches'] );
     Route::get('/impact', [SalesController::class, 'impact']);
     Route::get('/about', [SalesController::class, 'about']);
     Route::get('/privacy', [SalesController::class, 'privacy']);
@@ -33,6 +35,7 @@ Route::domain('{drumeoDomain}')
     Route::get('/song-demo/', [SalesController::class, 'songDemo']);
     Route::get('/tom-sawyer/', [SalesController::class, 'tomSawyer']);
     Route::get('/drumfest', [SalesController::class, 'drumFest']);
+    Route::get('/awards/', [SalesController::class, 'awards']);
 
     Route::get('/trial', [SalesController::class, 'trial']);
     Route::get('/earthworks', [SalesController::class, 'earthWorks']);

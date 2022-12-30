@@ -5,7 +5,7 @@
     <meta name="description" content="Piano Lessons At Your Fingertips Wherever You Go. Whatever You Use.">
 
     <!-- Social Media -->
-    <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/og-image.jpg" style="display: none;">
+    <meta property="og:image" content="https://pianote.s3.amazonaws.com/sales/2023/share-image-pianote.jpg" style="display: none;">
     <meta property="og:title" content="The New Pianote App">
     <meta property="og:description" content="Piano Lessons At Your Fingertips Wherever You Go. Whatever You Use.">
     <meta property="og:url" content="https://www.pianote.com/app/">

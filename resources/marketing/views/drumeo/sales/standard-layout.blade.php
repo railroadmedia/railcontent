@@ -1,4 +1,4 @@
-@extends('drumeo._partials.layout-template')
+@extends('drumeo._partials.global-layout')
 
 @section('global-head')
     @yield('meta')
@@ -9,13 +9,12 @@
     @hasSection('share-image')
         @yield('share-image')
     @else
-        <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/sales/2022/og-image.jpg" style="display: none;">
+        <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/sales/2023/share-image-drumeo.jpg" style="display: none;">
     @endif
 
     @include('drumeo._partials._fonts')
-
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"></noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
@@ -27,20 +26,20 @@
     @if(!empty($trialVersion))
         @if(!empty($joinUrl))
             @include("drumeo.sales.partials._nav", [
-                "edgeVersion" => true,
+                "subscriptionVersion" => true,
                 "trialVersion" => true,
                 "joinUrl" => $joinUrl
             ])
         @else
             @include("drumeo.sales.partials._nav", [
-                "edgeVersion" => true,
+                "subscriptionVersion" => true,
                 "trialVersion" => true,
                 "scrollToJoin" => true,
             ])
         @endif
     @else
         @include("drumeo.sales.partials._nav", [
-            "edgeVersion" => true,
+            "subscriptionVersion" => true,
             "scrollToJoin" => true,
             "homepage" => true
         ])

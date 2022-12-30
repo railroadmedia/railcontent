@@ -45,10 +45,10 @@ class Prices
     public static $thirtyDayDrummer = 97;
 
     // Drumeo Edge
-    public static $drumeoEdgeFull = 29;
-    public static $drumeoEdgeRegular = 29;
+    public static $drumeoEdgeFull = 30;
+    public static $drumeoEdgeRegular = 30;
     public static $drumeoEdgeAnnualFull = 240;
-    public static $drumeoEdgeAnnual = 240;
+    public static $drumeoEdgeAnnual = 200;
     public static $drumeoEdgeLifetime = 1200;
 
     // Anatomy Of A Drum Solo
@@ -180,5 +180,6 @@ class Prices
     public static $songs = 5000;
     public static $courses = 260;
     public static $coaches = 11;
+    public static $students = 66378;
 
 }

@@ -1,6 +1,6 @@
 @extends('_partials.layout.global-layout')
 
-@section('head-includes')
+@section('html-head')
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -10,6 +10,8 @@
     <link href="https://dpwjbsxqtam5n.cloudfront.net/fonts/icons.css" rel="stylesheet">
     <!-- Favicons -->
     @include('_partials.layout.favicons.singeo-favicons')
+
+    @yield('head-includes')
 @stop
 
 <!-- Header -->
@@ -28,7 +30,7 @@
                 "url" => get_musora_brand_base_url().'/contact',
             ],
             "Singeo" => [
-                "iconClass" => "fas fa-graduation-cap",
+                "iconClass" => "fas fa-home",
                 "url" => '/',
             ],
             "Shop" => [
