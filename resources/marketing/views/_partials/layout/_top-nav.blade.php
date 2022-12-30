@@ -23,24 +23,27 @@
     <!-- link-wrapper -->
     <div class="flex flex-1">
        
-        @if(!$emptyPromoVersion)
-            {{-- Nav Links --}}
-            <ul class="flex items-center text-white font-bebas-neue hidden md:flex">
-                @foreach($nav_links as $page => $info)
-                    @if(!empty($info['children']))
-                        @include('_partials.layout._secondary-nav-link', [
-                            "page" => $page,
-                            "children" => $info['children'],
-                        ])
-                    @else
-                        @include('_partials.layout._nav-link', [
-                            "page" => $page,
-                            "url" => $info['url'],
-                            "greyed" => $info['greyed'] ?? false,
-                        ])
-                    @endif
-                @endforeach 
-            </ul>
+        @if(!empty($subscriptionVersion))
+            @if(!empty($fullSubscriptionVersion))
+
+                {{-- Nav Links --}}
+                <ul class="flex items-center text-white font-bebas-neue hidden md:flex">
+                    @foreach($nav_links as $page => $info)
+                        @if(!empty($info['children']))
+                            @include('_partials.layout._nav-dropdown', [
+                                "page" => $page,
+                                "children" => $info['children'],
+                            ])
+                        @else
+                            @include('_partials.layout._nav-link', [
+                                "page" => $page,
+                                "url" => $info['url'],
+                            ])
+                        @endif
+                    @endforeach 
+                </ul>
+            
+            @endif
 
             {{-- CTA Button --}}
             <div class="ml-auto flex items-center">
@@ -53,7 +56,7 @@
                         href="/#customize-anchor" class="btn-primary btn-small text-base leading-none bg-{{ $brand }} border-0 py-1.5 px-3 md:py-3 md:px-8 mr-1.5 mb-0 h-auto md:h-initial"
                     @endif
                 >
-                    @if(!empty(!$emptyPromoVersion))
+                    @if(!empty($emptyPromoVersion))
                         Start Trial
                     @else
                         Join<span class="show-for-medium"> {{ $brand }}</span>
@@ -90,12 +93,6 @@
 
             </div>
         @endif
-
-        <!-- Nav CTA buttons -->
-        {{-- <div class="ml-auto flex items-center"> --}}
-            {{--<a href="/shop" class="btn-secondary btn-small text-base leading-none text-white mr-1.5 py-1 px-3 md:py-2.5 md:px-8 mb-0 h-auto md:h-initial hover:text-black hover:bg-white hover:border-white">Shop</a>--}}
-            {{-- <a href="/members" class="btn-primary btn-small text-base leading-none bg-{{ $brand }} border-0 py-1.5 px-3 md:py-3 md:px-8 mr-1.5 mb-0 h-auto md:h-initial">Log In</a>
-        </div> --}}
 
     </div>
 

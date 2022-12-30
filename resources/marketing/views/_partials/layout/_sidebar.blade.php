@@ -7,13 +7,13 @@
     <section id="pageLinks" class="flex flex-col">
         @foreach($links as $page => $info)
             @if(!empty($info['children']))
-                @include('_partials.layout._secondary-nav-link', [
+                @include('_partials.layout._sidebar-dropdown', [
                     "page" => $page,
                     "iconClass" => $info['iconClass'],
                     "children" => $info['children'],
                 ])
             @else
-                @include('_partials.layout._nav-link', [
+                @include('_partials.layout._sidebar-link', [
                     "page" => $page,
                     "iconClass" => $info['iconClass'],
                     "url" => $info['url'],
