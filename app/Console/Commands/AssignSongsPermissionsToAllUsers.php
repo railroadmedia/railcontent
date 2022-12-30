@@ -100,6 +100,8 @@ class AssignSongsPermissionsToAllUsers extends Command
 
         $jobsToChain = [];
 
+        $allUsersIdsToSyncChunked = array_reverse($allUsersIdsToSyncChunked);
+
         foreach ($allUsersIdsToSyncChunked as $chunkIndex => $userIdsChunk) {
             $jobsToChain[] =new SyncUsersProductPermissionsQueryJob($userIdsChunk);
         }

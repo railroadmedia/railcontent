@@ -151,6 +151,12 @@ class UserProductToUserContentPermissionListener
 
             $permissionNameToSync = explode('|', $permissionNameAndBrandToSync)[0];
             $permissionBrandToSync = explode('|', $permissionNameAndBrandToSync)[1];
+
+            // special use case for musora permissions
+            if (str_contains($permissionNameToSync, 'Musora')) {
+                $permissionBrandToSync = 'musora';
+            }
+
             $expirationDate = $dates['expiration_date'];
             $startDate = $dates['start_date'] ?? Carbon::now()->toDateTimeString();
 
