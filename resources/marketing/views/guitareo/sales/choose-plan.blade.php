@@ -1,25 +1,25 @@
-@extends('pianote._partials.global-layout')
+@extends('guitareo._partials.global-layout')
 
 @section('global-head')
-    <title>Learn the piano anytime with real teachers. | Pianote</title>
-    <meta property="og:title" content="Pianote - Learn the piano anytime with real teachers.">
-    <meta property="og:url" content="https://www.pianote.com/">
+    <title>Learn to play guitar anytime with real teachers. | Guitareo.com</title>
+    <meta property="og:title" content="Guitareo.com: Learn to play guitar anytime with real teachers."/>
+    <meta property="og:url" content="https://www.guitareo.com"/>
 
-    <meta name="description" content="Learn the piano anytime with step-by-step video lessons, world-class teachers, and unlimited personal support. 90-Day Guarantee.">
-    <meta property="og:description" content="Learn the piano anytime with step-by-step video lessons, world-class teachers, and unlimited personal support. 90-Day Guarantee.">
+    <meta name="description" content="Play guitar like you've always wanted with step-by-step video lessons, world-class teachers, and unlimited personal support. 90-Day Guarantee." />
+    <meta property="og:description" content="Play guitar like you've always wanted with step-by-step video lessons, world-class teachers, and unlimited personal support. 90-Day Guarantee."/>
 
     @hasSection('share-image')
         @yield('share-image')
     @else
-        <meta property="og:image" content="https://pianote.s3.amazonaws.com/sales/2023/share-image-pianote.jpg" style="display: none;">
+        <meta property="og:image" content="https://guitareo.s3.amazonaws.com/sales/2023/share-image-guitareo.jpg"/>
     @endif
 
-    @include('pianote._partials._fonts')
+    @include('guitareo._partials._fonts')
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}">
-    <link href="{{ asset('/marketing/css/pianote/tailwind-helpers.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/sales.css') }}">
+    <link href="{{ asset('/marketing/css/guitareo/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/guitareo/sales-page.css') }}" rel="stylesheet">
     <style>
         .option-buttons.active {
             border-color:#00c9ac!important;
@@ -46,23 +46,23 @@
     @include('musora.sales.components.card-selection-section', [
         "plusLogo" => "https://guitareo.s3.amazonaws.com/sales/2023/guitareo-plus-logo-light.svg",
         "logo" => "https://guitareo.s3.amazonaws.com/sales/guitareo-logo.png",
-        "instrument" => "piano",
+        "instrument" => "guitareo",
         "songs" => "1000",
-        "firstPoint" => "Unlimited piano lessons",
+        "firstPoint" => "Unlimited guitar lessons",
         "thirdPoint" => "Direct access to real teachers.",
-        "fifthPoint" => "Lesson access for singing, guitar, and drums.",
+        "fifthPoint" => "Lesson access for singing, piano, and drums.",
     ])
 
     @include('musora.sales.components.plans-different-section', [
         "plusLogo" => "https://guitareo.s3.amazonaws.com/sales/2023/guitareo-plus-logo.svg",
         "logo" => "https://musora-center.s3.amazonaws.com/logos/guitareo-logo.png",
         "secondPoint" => "Artist courses and exclusive events with special guests.",
-        "thirdPoint" => "Go beyond piano with lessons for singing, guitar, and drums.",
+        "thirdPoint" => "Go beyond guitar with lessons for singing, piano, and drums.",
         "fifthPoint" => "1000+ songs transcribed w/ playback tools for all instruments.",
     ])
     @include('guitareo._partials.faq')
 
-    @include("pianote._partials._footer")
+    @include("guitareo.sales.partials._footer")
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
