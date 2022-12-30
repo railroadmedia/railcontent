@@ -87,7 +87,7 @@
         @component('_partials.components.carousel',[
             'xdata' => "
                 classes: {
-                    arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
+                    arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11 header-slide-btn',
                     prev: 'hidden',
                     next: 'splide__arrow--next your-class-next hidden sm:flex z-50',
                     pagination: 'hidden',
