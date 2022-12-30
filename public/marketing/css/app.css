@@ -4703,6 +4703,9 @@ img {
     width: -moz-min-content !important;
     width: min-content !important;
   }
+  .sm\:w-7 {
+    width: 1.75rem !important;
+  }
   .sm\:w-6\/12 {
     width: 50% !important;
   }

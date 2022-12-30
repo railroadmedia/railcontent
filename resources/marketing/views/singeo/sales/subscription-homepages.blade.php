@@ -110,22 +110,22 @@
     @php
         $features = [
             [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drum-lessons-icon.svg',
+                'image' => 'https://singeo.s3.amazonaws.com/sales/2023/vocal-lessons-icon.svg',
                 'title' => 'Vocal Lessons',
                 'desc' => 'Step-by-step video<br class="hidden sm:inline"> lessons on every topic.',
             ],
             [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/artist-course-icon2.svg',
+                'image' => 'https://singeo.s3.amazonaws.com/sales/2023/artist-course-icon.svg',
                 'title' => 'Artist Courses',
                 'desc' => 'Courses and live events<br class="hidden sm:inline"> with drumming heroes. ',
             ],
             [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/songs-icon.svg',
+                'image' => 'https://singeo.s3.amazonaws.com/sales/2023/songs-icon.svg',
                 'title' => '1000+ Songs',
                 'desc' => 'Sing your favorite<br class="hidden sm:inline"> from every style & era.',
             ],
             [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/support-icon.svg',
+                'image' => 'https://singeo.s3.amazonaws.com/sales/2023/support-icon.svg',
                 'title' => '24/7 Support',
                 'desc' => 'A global community<br class="hidden sm:inline"> of students & teachers.',
             ],
@@ -133,7 +133,7 @@
         $slides = [
             [
                 'desc' => 'You’re going to learn how your voice works, how to strengthen it – and to sing with confidence.',
-                'thumb' => 'https://drumeo-assets.s3.amazonaws.com/drum-shop/new-drummers/billy-cobham.jpg',
+                'thumb' => 'https://singeo.s3.amazonaws.com/sales/2023/testimonials/CodyMcManus.png',
                 'name' => 'Cody McManus',
                 'credit' => 'Music Producer',
             ],

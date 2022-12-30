@@ -105,7 +105,7 @@
                             <p class="leading-normal text-sm"><em>“{{ $slide['desc'] }}”</em></p>
                             <div class="flex flex-wrap md:flex-nowrap sm:text-left items-center justify-center mt-1.5">
                                 <img
-                                    class="rounded-full h-10 transition-opacity opacity-0"
+                                    class="rounded-full object-cover object-right w-10 h-10 transition-opacity opacity-0"
                                     src="https://cdn.musora.com/image/fetch/w_80,q_auto:best/{{ $slide['thumb'] }}"
                                     loading="lazy"
                                     onload="this.classList.remove('opacity-0')"

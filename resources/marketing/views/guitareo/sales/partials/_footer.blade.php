@@ -71,9 +71,9 @@
             @if(empty($minimal))
             <p><a rel="noopener" href="https://goo.gl/maps/c4JxakSmnjB2" target="_blank">107-31265 Wheel Ave. Abbotsford,<br class="mobile-only"> BC, V2T 6H2 Canada</a><br>
                 <a href="tel:+18004398921">Toll Free: 1-800-439-8921</a> / <br class="mobile-only"><a href="tel:+16048557605">Direct: 1-604-855-7605</a> / <br class="mobile-only"><a href="{{ get_musora_brand_base_url() }}/contact">Contact Us</a></p>
-            <a rel="noopener" href="https://www.youtube.com/user/guitarlessonscom" target="_blank" class="social-media youtube"><i class="fab fa-youtube"></i></a>
-            <a rel="noopener" href="https://www.facebook.com/guitareoofficial" target="_blank" class="social-media facebook"><i class="fab fa-facebook-f"></i></a>
-            <a rel="noopener" href="https://www.instagram.com/guitareoofficial/" target="_blank" class="social-media instagram"><i class="fab fa-instagram"></i></a>
+            <a rel="noopener" href="https://www.youtube.com/user/guitarlessonscom" target="_blank" class="inline-flex items-center justify-center "><i class="fab fa-youtube"></i></a>
+            <a rel="noopener" href="https://www.facebook.com/guitareoofficial" target="_blank" class="inline-flex items-center justify-center social-media facebook"><i class="fab fa-facebook-f"></i></a>
+            <a rel="noopener" href="https://www.instagram.com/guitareoofficial/" target="_blank" class="inline-flex items-center justify-center social-media instagram"><i class="fab fa-instagram"></i></a>
             @endif
             <p class="tiny">Musora Media, Inc. &copy; {{ date('Y') }} - &nbsp; <a href="/terms">Terms</a>&nbsp;&nbsp;/&nbsp;&nbsp;<a href="/privacy">Privacy</a>&nbsp;&nbsp;/&nbsp;&nbsp;<a rel="noopener" href="https://www.musora.com/careers">Careers</a>&nbsp;&nbsp;/&nbsp;&nbsp;<a rel="noopener" href="https://www.musora.com/brand">Brand Guide</a></p>
         </div>
