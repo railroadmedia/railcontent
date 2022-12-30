@@ -5,7 +5,7 @@
         </a>
     </div>
 
-    <div class="menu-toggle">
+    <div class="menu-toggle @if(!empty($hideMenu)) opacity-0 px-0.5 @endif">
         <span></span>
         <span></span>
         <span></span>
@@ -35,16 +35,95 @@
             ></cart-sidebar>
         </div>
     @endif
-    @if(!empty($joinVersion))
-        <div class="edge-wrap show-for-medium">
-            <a class="@if(!empty($scrollToJoin)) anchor-slide @endif"  href="/#method" >Method</a>
-            <a class="@if(!empty($scrollToJoin)) anchor-slide @endif"  href="/#songs" >Songs</a>
-            <a class="@if(!empty($scrollToJoin)) anchor-slide @endif"  href="/#coaches" >Coaches</a>
-        </div>
-        <div class="button-wrap">
-            <a href="{{ get_legacy_brand_base_url('singeo') }}/shop" class="join outline-button">Shop</a>
-            <a href="#customize-anchor" class="join anchor-slide">Join Singeo</a>
-        </div>
+    @if(!empty($subscriptionVersion))
+        @if(!empty($fullSubscriptionVersion))
+            <div
+                class="relative"
+                x-data="{
+                    features: false,
+                    instruments: false,
+                }"
+            >
+                <div
+                    class="edge-wrap show-for-medium"
+                    x-on:click.away="
+                        features = false;
+                        instruments = false;
+                        $refs.features.classList.add('hidden');
+                        $refs.instruments.classList.add('hidden');
+                    "
+                >
+                    <a
+                        class="cursor-pointer features  @if(strpos(url()->full(), 'method') || strpos(url()->full(), 'songs') || strpos(url()->full(), 'coaches')) text-singeo @endif"
+                        x-on:click="
+                            features = !features;
+                            if(features){
+                                $refs.features.classList.remove('hidden');
+                                $refs.instruments.classList.add('hidden');
+                                instruments = false;
+                            }
+                            else {
+                                $refs.features.classList.add('hidden');
+                            }
+                        "
+                    >
+                        Features <i class="fa-solid fa-caret-down"></i>
+                    </a>
+                    <a
+                        class="cursor-pointer instruments"
+                        x-on:click="
+                            instruments = !instruments;
+                            if(instruments){
+                                $refs.instruments.classList.remove('hidden');
+                                $refs.features.classList.add('hidden');
+                                features = false;
+                            }
+                            else {
+                                $refs.instruments.classList.add('hidden');
+                            }
+                        "
+                    >
+                        Instruments <i class="fa-solid fa-caret-down"></i>
+                    </a>
+                    <a class=" @if(strpos(url()->full(), 'choose-plan')) text-singeo @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/choose-plan" >Pricing</a>
+                    <a class=" @if(strpos(url()->full(), 'drumshop')) text-singeo @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/drumshop" >Shop</a>
+                    <a class="" href="{{ get_legacy_brand_base_url('drumeo') }}/beat" >Blog</a>
+                </div>
+                <div
+                    class="features-dd hidden shadow-md bg-white rounded-xl p-2 absolute flex flex-col left-32 lg:left-36 top-10 lg:top-12 w-44"
+                    x-ref="features"
+                >
+                    <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full @if(strpos(url()->full(), 'method')) text-singeo @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/method" ><i class="mr-1 text-lg fa-fw far fa-music-note"></i> Method</a>
+                    <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full @if(strpos(url()->full(), 'songs')) text-singeo @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/songs" ><i class="mr-1 text-lg fa-fw far fa-headphones"></i> Songs</a>
+                    <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full @if(strpos(url()->full(), 'coaches')) text-singeo @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/coaches" ><i class="mr-1 text-lg fa-fw far fa-whistle"></i> Coaches</a>
+                </div>
+                <div
+                    class="instruments-dd hidden shadow-md bg-white rounded-xl p-2 absolute flex flex-col left-60 lg:left-68 -ml-3 top-10 lg:top-12 w-44"
+                    x-ref="instruments"
+                >
+                    <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full" href="{{ get_legacy_brand_base_url('drumeo') }}/2023-home" ><i class="mr-1 text-lg fa-fw far fa-microphone-stand"></i> Drums</a>
+                    <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full" href="{{ get_legacy_brand_base_url('pianote') }}/2023-home" ><i class="mr-1 text-lg fa-fw far fa-piano-keyboard"></i> Piano</a>
+                    <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full" href="{{ get_legacy_brand_base_url('guitareo') }}/2023-home" ><i class="mr-1 text-lg fa-fw far fa-guitar"></i> Guitar</a>
+                </div>
+            </div>
+        @endif
+            <div class="button-wrap">
+                <a @if(!empty($scrollToJoin))
+                   href="#customize-anchor" class="join anchor-slide"
+                   @elseif(!empty($joinUrl))
+                   href="{{ $joinUrl }}" class="join"
+                   @else
+                   href="/#customize-anchor" class="join"
+                    @endif
+                >
+
+                    @if(!empty($trialVersion))
+                        Start Trial
+                    @else
+                        Join<span class="show-for-medium"> Singeo</span>
+                    @endif
+                </a>
+            </div>
     @endif
 </nav>
 

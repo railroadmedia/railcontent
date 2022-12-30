@@ -180,7 +180,6 @@ a {
       width: auto;
       padding: 6px 0 3px;
       transition: border-color .3s;
-      border-bottom: 3px solid transparent;
       margin-left: 15px;
       @include tablet {
         font-size: 16px;
@@ -191,16 +190,11 @@ a {
       }
 
       &:hover {
-        border-color: rgba(255, 255, 255, 0.3);
+        color: lighten($singeoPurple, 20%);
       }
 
       &:first-child {
         margin-left: 0;
-      }
-
-      &.active,
-      &.active:hover {
-        border-color: #fff;
       }
     }
   }

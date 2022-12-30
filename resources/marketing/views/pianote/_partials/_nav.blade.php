@@ -43,7 +43,7 @@
                     <a class="cursor-pointer features @if(strpos(url()->full(), 'method') || strpos(url()->full(), 'songs') || strpos(url()->full(), 'coaches')) active @endif">Features <i class="fa-solid fa-caret-down"></i></a>
                     <a class="cursor-pointer instruments">Instruments <i class="fa-solid fa-caret-down"></i></a>
                     <a class=" @if(strpos(url()->full(), 'choose-plan')) active @endif" href="{{ get_legacy_brand_base_url('pianote') }}/choose-plan" >Pricing</a>
-                    <a class=" @if(strpos(url()->full(), 'drumshop')) active @endif" href="{{ get_legacy_brand_base_url('pianote') }}/shop" >Shop</a>
+                    <a class=" @if(strpos(url()->full(), 'shop')) active @endif" href="{{ get_legacy_brand_base_url('pianote') }}/shop" >Shop</a>
                     <a class="" href="{{ get_legacy_brand_base_url('pianote') }}/blog" >Blog</a>
 
                 </div>

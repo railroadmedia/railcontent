@@ -34,7 +34,7 @@
     <meta property="og:title" content="Guitareo Shop">
     <meta name="description" content="Say goodbye to “do it yourself” guitar lessons.">
     <meta property="og:description" content="Say goodbye to “do it yourself” guitar lessons.">
-    <meta property="og:image" content="https://d122ay5chh2hr5.cloudfront.net/sales/2022/og-image.jpg">
+    <meta property="og:image" content="https://guitareo.s3.amazonaws.com/sales/2023/share-image-guitareo.jpg">
     <meta property="og:url" content="https://www.guitareo.com/shop/">
 
     @include('_partials.layout.favicons.guitareo-favicons')

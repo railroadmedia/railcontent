@@ -104,7 +104,7 @@
 @endsection
 
 @section('layout-body')
-    
+
     @php
         $features = [
             [
@@ -215,7 +215,7 @@
             ],
         ];
     @endphp
-    
+
     @include('musora.sales.components.trailer-grid-section', [
         'vid' => 'https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/video-reel.mp4',
         'header' => 'Your singing goals start here.',
@@ -607,7 +607,7 @@
         'name' => 'trailer',
         'video' => '772644658'
     ])
-    
+
 @stop
 
 {{-- Scripts --}}
@@ -616,7 +616,4 @@
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/sliding-anchor.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
-
-    {{-- Alpine Plugins --}}
-    <script defer src="https://unpkg.com/@alpinejs/focus@3.x.x/dist/cdn.min.js"></script>
 @stop

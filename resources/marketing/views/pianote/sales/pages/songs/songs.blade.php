@@ -19,7 +19,7 @@
     }'
 @endsection
 
-@section('header-img', 'https://pianote.s3.amazonaws.com/sales/2023/songs-thumb.jpg')
+@section('header-img', 'https://pianote.s3.amazonaws.com/sales/2023/songs-thumb2.jpg')
 
 @section('header', 'Play your favorite songs.')
 
