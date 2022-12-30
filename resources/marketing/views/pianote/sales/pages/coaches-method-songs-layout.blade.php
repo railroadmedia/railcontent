@@ -1,9 +1,9 @@
 @extends('_partials.layout.coaches-method-songs-layout')
 
 @section('page-styles')
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}">
+    <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/css/pianote/tailwind-helpers.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/sales.css') }}">
+    <link href="{{ asset('/marketing/parcel/pianote/sales.css') }}" rel="stylesheet">
     <style>
         .splide__arrow svg {
             fill: #F61A30 !important;

@@ -1,9 +1,9 @@
 @extends('_partials.layout.coaches-method-songs-layout')
 
 @section('page-styles')
+    <link href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/css/guitareo/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/guitareo/sales-page.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}" rel="stylesheet">
     <style>
         .splide__arrow svg {
             fill: #00C9AC !important;
@@ -12,11 +12,11 @@
 @endsection
 
 @section('page-nav')
-        @include("guitareo.sales.partials._nav", [
-            "subscriptionVersion" => true,
-            "fullSubscriptionVersion" => true,
-            "scrollToJoin" => true,
-        ])
+    @include("guitareo.sales.partials._nav", [
+        "subscriptionVersion" => true,
+        "fullSubscriptionVersion" => true,
+        "scrollToJoin" => true,
+    ])
 @endsection
 
 @section('page-footer')
@@ -32,8 +32,6 @@
     ])
 
     @include('musora.sales.components.app-section', [
-        'appleLink' => 'https://itunes.apple.com/us/app/musora/id1619053766?ls=1',
-        'googleLink' => 'https://play.google.com/store/apps/details?id=com.musoraapp',
         'image' => 'https://guitareo.s3.amazonaws.com/sales/2023/devices.png',
     ])
 

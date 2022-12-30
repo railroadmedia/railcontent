@@ -11,9 +11,7 @@
     <meta name="description" content="10 perfectly organized levels with video lessons from the top authorities on every topic.">
     <meta property="og:description" content="10 perfectly organized levels with video lessons from the top authorities on every topic.">
     <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/sales/2023/method/share-image-method.jpg" style="display: none;">
-
 @endsection
-
 
 @section('header-img', 'https://drumeo-assets.s3.amazonaws.com/sales/2023/method-header.jpg')
 

@@ -11,7 +11,6 @@
     <meta name="description" content="Always know exactly what to practice with an organized 10-level curriculum.">
     <meta property="og:description" content="Always know exactly what to practice with an organized 10-level curriculum.">
     <meta property="og:image" content="https://guitareo.s3.amazonaws.com/sales/2023/share-image-method.jpg" style="display: none;">
-
 @endsection
 
 @section('header-img', 'https://guitareo.s3.amazonaws.com/sales/2023/method-thumb.jpg')

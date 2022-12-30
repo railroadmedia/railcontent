@@ -264,9 +264,4 @@
             </div>
         </div>
     </section>
-
-    {{--    @include('_partials.components.video-modal',[--}}
-    {{--        'name' => 'trailer',--}}
-    {{--        'video' => '772644658'--}}
-    {{--    ])--}}
 @stop

@@ -12,11 +12,11 @@
 @endsection
 
 @section('page-nav')
-        @include("drumeo.sales.partials._nav", [
-            "subscriptionVersion" => true,
-            "fullSubscriptionVersion" => true,
-            "scrollToJoin" => true,
-        ])
+    @include("drumeo.sales.partials._nav", [
+        "subscriptionVersion" => true,
+        "fullSubscriptionVersion" => true,
+        "scrollToJoin" => true,
+    ])
 @endsection
 
 @section('page-footer')

@@ -11,7 +11,6 @@
     <meta name="description" content="Get 5000+ note-for-note song breakdowns for every style, era, and skill with handy play-along tools">
     <meta property="og:description" content="Get 5000+ note-for-note song breakdowns for every style, era, and skill with handy play-along tools">
     <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/sales/2023/method/share-image-songs.jpg" style="display: none;">
-
 @endsection
 
 @section('body-data')
