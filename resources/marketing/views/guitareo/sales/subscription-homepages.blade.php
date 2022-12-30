@@ -248,42 +248,42 @@
                 'images' => [
                     [
                     'img' => 'https://guitareo.s3.amazonaws.com/sales/2023/coaches/solo-in-an-hour.jpg',
-                    'title' => 'Solo In An Hour',
+                    'title' => 'Solo In<br> An Hour',
                     'instructor' => 'Ayla Tesler-Mabé',
                     ],
                     [
                     'img' => 'https://guitareo.s3.amazonaws.com/sales/2023/coaches/songwriting-cheat-codes.jpg',
-                    'title' => 'Songwriting Cheat Codes',
+                    'title' => 'Songwriting<br> Cheat Codes',
                     'instructor' => 'Rob Scallon',
                     ],
                     [
                     'img' => 'https://guitareo.s3.amazonaws.com/sales/2023/coaches/rhythm-groove.jpg',
-                    'title' => 'Rhythm & Groove ',
+                    'title' => 'Rhythm<br> & Groove ',
                     'instructor' => 'Sami Ghawi',
                     ],
                     [
                     'img' => 'https://guitareo.s3.amazonaws.com/sales/2023/coaches/timing-feel.jpg',
-                    'title' => 'Timing & Feel',
+                    'title' => 'Timing<br> & Feel',
                     'instructor' => 'David Becker',
                     ],
                     [
                     'img' => 'https://guitareo.s3.amazonaws.com/sales/2023/coaches/musical-lanes.jpg',
-                    'title' => 'Musical Lanes',
+                    'title' => 'Musical<br> Lanes',
                     'instructor' => 'Mark Lettieri',
                     ],
                     [
                     'img' => 'https://guitareo.s3.amazonaws.com/sales/2023/coaches/add-power-to-your-playing.jpg',
-                    'title' => 'Add Power To Your Playing',
+                    'title' => 'Add Power To<br> Your Playing',
                     'instructor' => 'Dave Weiner',
                     ],
                     [
                     'img' => 'https://guitareo.s3.amazonaws.com/sales/2023/coaches/unlock-your-creativity.jpg',
-                    'title' => 'Unlock Your Creativity',
+                    'title' => 'Unlock Your<br> Creativity',
                     'instructor' => 'Yvette Young',
                     ],
                     [
                     'img' => 'https://guitareo.s3.amazonaws.com/sales/2023/coaches/the-anatomy-of-a-song.jpg',
-                    'title' => 'The Anatomy of a Song',
+                    'title' => 'The Anatomy<br> of a Song',
                     'instructor' => 'Pete Thorn',
                     ],
                 ]
@@ -293,27 +293,27 @@
                 'images' => [
                     [
                     'img' => 'https://guitareo.s3.amazonaws.com/sales/2023/coaches/rock-guitar.jpg',
-                    'title' => 'Rock Guitar ',
+                    'title' => 'Rock<br> Guitar ',
                     'instructor' => 'Ayla Tesler-Mabé',
                     ],
                     [
                     'img' => 'https://guitareo.s3.amazonaws.com/sales/2023/coaches/punk-rock.jpg',
-                    'title' => 'Punk Rock',
+                    'title' => 'Punk<br> Rock',
                     'instructor' => 'Kent Shores',
                     ],
                     [
                     'img' => 'https://guitareo.s3.amazonaws.com/sales/2023/coaches/surf-guitar.jpg',
-                    'title' => 'Surf Guitar',
+                    'title' => 'Surf<br> Guitar',
                     'instructor' => 'Kent Shores',
                     ],
                     [
                     'img' => 'https://guitareo.s3.amazonaws.com/sales/2023/coaches/campfire-chords.jpg',
-                    'title' => 'Campfire Chords',
+                    'title' => 'Campfire<br> Chords',
                     'instructor' => 'Rob Scallon',
                     ],
                     [
                     'img' => 'https://guitareo.s3.amazonaws.com/sales/2023/coaches/funk-essentials.jpg',
-                    'title' => 'Funk Essentials',
+                    'title' => 'Funk<br> Essentials',
                     'instructor' => 'Ayla Tesler-Mabé',
                     ],
                     [
@@ -328,7 +328,7 @@
                     ],
                     [
                     'img' => 'https://guitareo.s3.amazonaws.com/sales/2023/coaches/shred-guitar.jpg',
-                    'title' => 'Shred Guitar',
+                    'title' => 'Shred<br> Guitar',
                     'instructor' => 'Dean Lamb',
                     ],
                 ]
@@ -338,17 +338,17 @@
                 'images' => [
                     [
                     'img' => 'https://guitareo.s3.amazonaws.com/sales/2023/coaches/getting-started-on-the-acoustic.jpg',
-                    'title' => 'Getting Started On The Acoustic Guitar',
+                    'title' => 'Getting Started<br> On The Acoustic<br> Guitar',
                     'instructor' => 'Ayla Tesler-Mabé',
                     ],
                     [
                     'img' => 'https://guitareo.s3.amazonaws.com/sales/2023/coaches/getting-started-on-the-electric.jpg',
-                    'title' => 'Getting Started On The Electric Guitar',
+                    'title' => 'Getting Started<br> On The Electric<br> Guitar',
                     'instructor' => 'Ayla Tesler-Mabé',
                     ],
                     [
                     'img' => 'https://guitareo.s3.amazonaws.com/sales/2023/coaches/altered-open-tunings.jpg',
-                    'title' => 'Altered & Open Tunings',
+                    'title' => 'Altered &<br> Open Tunings',
                     'instructor' => 'Don Ross',
                     ],
                     [
@@ -368,12 +368,12 @@
                     ],
                     [
                     'img' => 'https://guitareo.s3.amazonaws.com/sales/2023/coaches/strumming-workouts.jpg',
-                    'title' => 'Strumming Workouts',
+                    'title' => 'Strumming<br> Workouts',
                     'instructor' => 'Ayla Tesler-Mabé',
                     ],
                     [
                     'img' => 'https://guitareo.s3.amazonaws.com/sales/2023/coaches/bending-virbrato.jpg',
-                    'title' => 'Bending & Vibrato',
+                    'title' => 'Bending &<br> Vibrato',
                     'instructor' => 'Ayla Tesler-Mabé',
                     ],
                 ]
