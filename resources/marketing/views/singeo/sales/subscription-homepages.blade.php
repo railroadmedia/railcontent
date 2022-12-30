@@ -171,7 +171,7 @@
         'desc' => 'Loop, learn, and remove the drums from 5,000+ drumming anthems. ',
            'text' => 'The NEW Drumeo Songs is here.<br><br>You can now magically remove the drums from 5,000+ popular drumming anthems. And with note-for-note sheet music, tempo adjustment, and a looping feature you’ll have <strong>the ultimate tool for learning songs on the drums.</strong> <br><br>And to make your goals easier in 2023 – you’ll also get a FREE pair of Drumeo’s in-ear headphones when you join Drumeo. So you can enjoy unlimited drum lessons, note-for-note song breakdowns, AND protect your ears while playing your favorite songs.<br><br>Click below to grab the deal – or scroll down to try a demo of the NEW Drumeo Songs.',
            'img' => 'https://singeo.s3.amazonaws.com/sales/2023/jan-launch-collage2.png',
-           'belowButton' => 'SAVE 17% + GET 10 BONUSES WORTH $1342.94',
+           'belowButton' => 'SAVE 17% + GET 3 BONUSES WORTH $58',
        ])
     @else
         @include('musora.sales.components.learn-by-playing-section', [
@@ -441,12 +441,12 @@
         'header' => 'Trusted by singers everywhere.',
         'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Singeo+Membership/79348458',
         'reviewText' => 'Rated 5 stars by Singeo students from around the world!',
-        'youtubeLink' => 'https://www.youtube.com/freedrumlessons/',
-        'youtube' => '2.5M',
-        'facebookLink' => 'https://facebook.com/drumeo/',
-        'facebook' => '1.2M',
-        'instagramLink' => 'https://instagram.com/drumeoofficial/',
-        'instagram' => '950K',
+        'youtubeLink' => 'https://www.youtube.com/singeoofficial/',
+        'youtube' => '28,000',
+        'facebookLink' => 'https://facebook.com/singeoofficial/',
+        'facebook' => '23,000',
+        'instagramLink' => 'https://instagram.com/singeoofficial/',
+        'instagram' => '9,000',
     ])
 
     @include('musora.sales.components.guarantee-section', [
@@ -507,7 +507,7 @@
         'topImage' => 'https://singeo.s3.amazonaws.com/sales/2023/singeo-annual-2w-card.png',
         'promoLogo' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs.svg',
        'promoLogoM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs-m.png',
-        'header' => 'Save 17% + get 10 bonuses<br class="inline sm:hidden"> worth $1342.94',
+        'header' => 'Save 17% + get 3 bonuses<br class="inline sm:hidden"> worth $58',
         'fullPrice' => '240',
         'price' => '200',
         'buttonLink' => '/laravel/public/shopping-cart/api/query?products[DLM]=1,year,1&products[quietpad]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[GHFAL-DIGI]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[learn-songs-faster-pack]=1&locked=true',
