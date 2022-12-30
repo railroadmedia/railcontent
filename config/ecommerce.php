@@ -470,7 +470,6 @@ return [
         'agreement_fulfilled_path' => '/members/profile/settings/payments',
     ],
 
-
     // membership subscription duplicate syncing
     'membership_product_syncing_info' => [
         'drumeo' => [
@@ -490,46 +489,7 @@ return [
                 'DLM-Trial-Best-Book-1-month',
                 'DLM-Trial-Drummers-Toolbox-1-month',
                 'DLM-Lifetime',
-                'drumeo_access_30-days',
-            ],
-        ],
-        'guitareo' => [
-            'membership_product_skus' => [
-                'GUITAREO-1-MONTH-MEMBERSHIP',
-                'GUITAREO-1-YEAR-MEMBERSHIP',
-                'GUITAREO-6-MONTH-MEMBERSHIP',
-                'GUITAREO-6-MONTH-ACCESS',
-                'GUITAREO-LIFETIME-MEMBERSHIP',
-                'guitareo_access_30-days',
-            ],
-        ],
-        'pianote' => [
-            'membership_product_skus' => [
-                'PIANOTE-MEMBERSHIP-1-MONTH',
-                'PIANOTE-MEMBERSHIP-1-YEAR',
-                'PIANOTE-MEMBERSHIP-LIFETIME',
-                'PIANOTE-MEMBERSHIP-LIFETIME-EXISTING-MEMBERS',
-                'PIANOTE-MEMBERSHIP-6-MONTH',
-                'PIANOTE-MEMBERSHIP-TRIAL',
-                'PIANOTE-MEMBERSHIP-TRIAL-30-DAY',
-                'PIANOTE-MEMBERSHIP-TRIAL-30-DAY-ANNUAL',
-                'PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL',
-                'pianote_access_30-days',
-            ],
-        ],
-        'singeo' => [
-            'membership_product_skus' => [
-                'singeo-annual-recurring-30-day-trial-membership',
-                'singeo-monthly-recurring-30-day-trial-membership',
-                'singeo-lifetime-membership-access',
-                'singeo-1-year-membership-access',
-                'singeo-annual-recurring-membership',
-                'singeo-monthly-recurring-membership',
-                'singeo_access_30-days',
-                'singeo_access_90-days',
-                'singeo-annual-recurring-7-day-trial-membership',
-                'singeo-monthly-recurring-7-day-trial-membership',
-                'singeo-6-month-recurring-membership',
+                'DLM-Trial-30-Day',
             ],
         ],
     ],
