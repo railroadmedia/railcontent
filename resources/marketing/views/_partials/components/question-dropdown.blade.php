@@ -13,7 +13,7 @@
             </h5>
             <p
                 x-cloak
-                class="transition-all duration-300 text-xs sm:text-sm leading-relaxed sm:leading-relaxed overflow-hidden"
+                class="transition-all duration-300 leading-relaxed sm:leading-relaxed overflow-hidden"
                 x-bind:class="{ 'max-h-0': !open, 'max-h-[2000px]': open  }"
             >
                 {!! nl2br( $desc) !!}
@@ -43,7 +43,7 @@
                         onload="this.classList.remove('opacity-0')"
                     />
                     <div class="md:pl-6">
-                        <h6 class="font-black">{{$info['title']}}</h6>
+                        <h5 class="font-black">{{$info['title']}}</h5>
                         @if(!empty($info['desc']))<p class="my-2">{{$info['desc']}}</p>@endif
                         @if(!empty($info['lessonNum']))<p class="text-[#838C98]">{{ $info['lessonNum'] }} lessons</p>@endif
                     </div>
