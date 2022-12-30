@@ -26,8 +26,6 @@
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Online piano lessons on every topic.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Personalized feedback from real teachers.</li>
                     <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> voice, guitar, and drums lessons with full access to all Musora communities.</li>',
-        'buttonLink' => '/choose-plan',
-        'price' => '20',
         'image' => 'https://pianote.s3.amazonaws.com/sales/2023/pianote-spread.png',
         ])
 

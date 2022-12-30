@@ -48,7 +48,7 @@ class Prices
     public static $drumeoEdgeFull = 30;
     public static $drumeoEdgeRegular = 30;
     public static $drumeoEdgeAnnualFull = 240;
-    public static $drumeoEdgeAnnual = 240;
+    public static $drumeoEdgeAnnual = 200;
     public static $drumeoEdgeLifetime = 1200;
 
     // Anatomy Of A Drum Solo

@@ -13,8 +13,8 @@
                     {!! $list !!}
                 </ul>
                 <div class="w-72 lg:w-96 mx-auto sm:mx-0">
-                    <a class=" w-full sm:w-64 join smaller bg-{{$theme}} w-full my-3" href="{!! $buttonLink !!}">START FOR FREE <i class="fas fa-arrow-right" style="line-height: 0;"></i></a>
-                    <p class="text-center text-sm"><em>Pay nothing for 7 days, then ${!! $price !!}/month billed annually.</em></p>
+                    <a class=" w-full sm:w-64 join smaller bg-{{$theme}} w-full my-3" href="/choose-plan">START FOR FREE <i class="fas fa-arrow-right" style="line-height: 0;"></i></a>
+                    <p class="text-center text-sm"><em>Pay nothing for 7 days, then ${{ Prices::$drumeoEdgeRegular }}/month billed annually.</em></p>
                 </div>
             </div>
         </div>
