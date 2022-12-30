@@ -1499,9 +1499,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .z-250 {
   z-index: 250 !important;
 }
-.z-40 {
-  z-index: 40 !important;
-}
 .order-1 {
   order: 1 !important;
 }
@@ -2394,9 +2391,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .flex-auto {
   flex: 1 1 auto !important;
-}
-.flex-none {
-  flex: none !important;
 }
 .flex-shrink-0 {
   flex-shrink: 0 !important;
@@ -4120,6 +4114,22 @@ img {
 .hover\:bg-opacity-80:hover {
   --tw-bg-opacity: 0.8 !important;
 }
+.hover\:text-singeo:hover {
+  --tw-text-opacity: 1 !important;
+  color: rgb(131 0 233 / var(--tw-text-opacity)) !important;
+}
+.hover\:text-drumeo:hover {
+  --tw-text-opacity: 1 !important;
+  color: rgb(11 118 219 / var(--tw-text-opacity)) !important;
+}
+.hover\:text-guitareo:hover {
+  --tw-text-opacity: 1 !important;
+  color: rgb(0 201 172 / var(--tw-text-opacity)) !important;
+}
+.hover\:text-pianote:hover {
+  --tw-text-opacity: 1 !important;
+  color: rgb(246 26 48 / var(--tw-text-opacity)) !important;
+}
 .hover\:text-gray-50:hover {
   --tw-text-opacity: 1 !important;
   color: rgb(249 250 251 / var(--tw-text-opacity)) !important;
@@ -4139,22 +4149,6 @@ img {
 .hover\:text-black:hover {
   --tw-text-opacity: 1 !important;
   color: rgb(0 0 0 / var(--tw-text-opacity)) !important;
-}
-.hover\:text-drumeo:hover {
-  --tw-text-opacity: 1 !important;
-  color: rgb(11 118 219 / var(--tw-text-opacity)) !important;
-}
-.hover\:text-singeo:hover {
-  --tw-text-opacity: 1 !important;
-  color: rgb(131 0 233 / var(--tw-text-opacity)) !important;
-}
-.hover\:text-pianote:hover {
-  --tw-text-opacity: 1 !important;
-  color: rgb(246 26 48 / var(--tw-text-opacity)) !important;
-}
-.hover\:text-guitareo:hover {
-  --tw-text-opacity: 1 !important;
-  color: rgb(0 201 172 / var(--tw-text-opacity)) !important;
 }
 .hover\:underline:hover {
   -webkit-text-decoration-line: underline !important;

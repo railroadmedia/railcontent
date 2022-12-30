@@ -3,8 +3,8 @@
      data-remain-open="{{ strtolower(str_replace(' ', '-', $page)) }}"
      x-data="{ dropdown_{{ $id }}: false }"
 >
-    
-     <div class="flex py-2 px-5 border-b border-gray-100 md:text-[17px] items-center leading-none"
+    {{-- Dropdown Trigger --}}
+     <div class="flex py-2 px-5 border-b border-gray-100 md:text-[17px] items-center leading-none cursor-pointer"
           dusk="parent-button-{{ strtolower(str_replace(' ', '-', $page)) }}"
           x-on:click.prevent="dropdown_{{ $id }} = !dropdown_{{ $id }}"      
     >
@@ -22,6 +22,7 @@
         ></i>
     </div>
 
+    {{-- Dropdown --}}
     <div class="flex flex-col overflow-hidden transition-all transform-gpu"
          x-bind:class="dropdown_{{ $id }} ? 'max-h-[500px]' : 'max-h-0'"
     >
