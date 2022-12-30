@@ -50,6 +50,7 @@
         document.querySelector('.BeaconFabButtonFrame').style.bottom = "50px";
     });
 </script>
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 <script type="text/javascript" src="{{ asset('marketing/js/jquery.countdown-2.min.js') }}"></script>
 
 <script>
