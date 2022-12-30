@@ -103,10 +103,19 @@
 @endsection
 
 @section('global-body')
-    @include("singeo.sales.partials._nav", [
+    @if(!empty($promoVersion))
+        @include("singeo.sales.partials._nav", [
+            "subscriptionVersion" => true,
+            "scrollToJoin" => true,
+            "hideMenu" => true,
+        ])
+    @else
+        @include("singeo.sales.partials._nav", [
             "subscriptionVersion" => true,
             "fullSubscriptionVersion" => true,
+            "trialVersion" => true,
         ])
+    @endif
 
     @php
         $features = [
@@ -552,6 +561,13 @@
         'video' => '772644658'
     ])
 
+    @if(!empty($promoVersion))
+        @include("singeo.sales.partials._footer", [
+            "minimal" => true
+        ])
+    @else
+        @include("singeo.sales.partials._footer")
+    @endif
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/sliding-anchor.js') }}"></script>
