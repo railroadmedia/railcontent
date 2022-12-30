@@ -449,6 +449,11 @@ class SalesController extends BaseController
         return view('drumeo.sales.pages.drumfest');
     }
 
+    public function awards()
+    {
+        return view('drumeo.lead-gen.pages.awards');
+    }
+
     public function trial()
     {
         return view('drumeo.sales.trials.trial');
