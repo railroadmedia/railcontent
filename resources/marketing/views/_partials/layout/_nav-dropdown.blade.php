@@ -1,40 +1,31 @@
 @php($id = uniqid())
-<div class="page-link parent flex flex-col flex-wrap align-v-center"
+
+<div class="relative flex flex-col items-center"
      data-remain-open="{{ strtolower(str_replace(' ', '-', $page)) }}"
      x-data="{ dropdown_{{ $id }}: false }"
 >
-    
-     <div class="flex py-2 px-5 items-center leading-none text-white text-base"
+    {{-- DROPDOWN TRIGGER --}}
+    <div class="flex py-2 mr-8 items-center text-white hover:text-{{ $brand }} tracking-widest text-base leading-none"
           dusk="parent-button-{{ strtolower(str_replace(' ', '-', $page)) }}"
           x-on:click.prevent="dropdown_{{ $id }} = !dropdown_{{ $id }}"      
     >
-        @if(!empty($iconClass))
-            <i class="no-events {{ $iconClass }} text-{{ $brand }} mr-2.5 text-lg"></i>
-            <span class="tracking-wide text-base">{{ $page }}</span>
-        @elseif(!empty($iconSvg))
-            <svg class="mr-2.5" width="20" height="20" aria-hidden="true" focusable="false"><use xlink:href="#{{ $iconSvg }}"></use></svg>
-            <span class="tracking-wide text-base">{{ $page }}</span>
-        @else
-            <span class="tracking-wide text-base">{{ $page }}</span>
-        @endif
-        <i class="no-events far fa-chevron-down arrow ml-1 transition-all transform-gpu origin-center text-{{ $brand }}"
-           x-bind:class="dropdown_{{ $id }} ? '-rotate-180' : 'rotate-0'" 
-        ></i>
+        {{ $page }}
+        <i class="no-events fa-solid fa-caret-down ml-1 mb-1"></i>
     </div>
 
     {{-- DROPDOWN --}}
-    <div class="flex flex-col overflow-hidden transition-all transform-gpu"
+    <div class="flex flex-col overflow-hidden transition-all text-black transform-gpu bg-white absolute w-44 shadow-lg left-0 top-[100%] left-0 rounded-lg p-2"
          x-cloak
-         x-bind:class="dropdown_{{ $id }} ? 'max-h-[500px]' : 'max-h-0'"
+         x-bind:class="dropdown_{{ $id }} ? '' : 'hidden' "
     >
         @foreach($children as $page => $info)
-            @include('_partials.layout._nav-link', [
-                "page" => $page,
-                "iconClass" => $info['iconClass'] ?? null,
-                "iconSvg" => $info['iconSvg'] ?? null,
-                "url" => $info['url'],
-                "greyed" => true
-            ])
+            <a href="{{ $info['url'] }}" class="flex items-center text-base tracking-widest hover:text-{{ $brand }} px-2 py-1 hover:bg-gray-100 w-full"
+                dusk="page-link-{{ strtolower(str_replace(' ', '-', $page)) }}">
+                @if(!empty($info['iconClass']))
+                    <i class="no-events {{ $info['iconClass'] }} mr-1"></i>
+                @endif
+                {{ $page }}
+            </a>
         @endforeach
     </div>
 </div>

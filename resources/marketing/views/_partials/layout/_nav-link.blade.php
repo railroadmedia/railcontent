@@ -1,4 +1,4 @@
-<a href="{{ $url }}" class="flex items-center text-base tracking-wide text-white py-2 px-5 hover:bg-gray-100 leading-none"
+<a href="{{ $url }}" class="flex items-center text-base tracking-widest hover:text-{{ $brand }} py-2 mr-8 leading-none"
     dusk="page-link-{{ strtolower(str_replace(' ', '-', $page)) }}">
     {{ $page }}
 </a>

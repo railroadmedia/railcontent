@@ -40,7 +40,7 @@
             "Instruments" => [
                 "children" => [
                     "Drumeo"=> [
-                        "iconClass" => "fa-fw far fa-drums",
+                        "iconClass" => "fa-fw far fa-drum",
                         "url" => get_legacy_brand_base_url("drumeo"),
                     ],
                     "Pianote"=> [
