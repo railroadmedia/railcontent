@@ -33,8 +33,6 @@
             $content['position'] = $index;
             $formattedAssignments[] = $content;
         }
-
-        //dd($lessonContent->fetch('instrumentless'));
     @endphp
 
     <song
