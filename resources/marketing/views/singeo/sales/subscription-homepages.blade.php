@@ -1,23 +1,25 @@
 @extends('singeo._partials.sales-layout', ['emptyPromoVersion' => empty($promoVersion) ])
 
 @section('head-includes')
-    <title>Drumeo | Reach your drumming goals.</title>
-    <meta property="og:title" content="Drumeo | Reach your drumming goals.">
-    <meta property="og:url" content="https://www.drumeo.com/">
+    <title>Your complete guide to confident singing. | Singeo.com</title>
+    <meta property="og:title" content="Singeo.com: Your complete guide to confident singing."/>
+    <meta property="og:url" content="https://www.singeo.com"/>
 
-    <meta name="description" content="Learn the drums faster with organized video lessons, legendary teachers, and better practice tools. 90-Day Guarantee.">
-    <meta property="og:description" content="Learn the drums faster with organized video lessons, legendary teachers, and better practice tools. 90-Day Guarantee.">
+    <meta name="description" content="Online singing lessons for any voice & vocal coaches to support you every step of the way. 90-Day Guarantee." />
+    <meta property="og:description" content="Online singing lessons for any voice & vocal coaches to support you every step of the way. 90-Day Guarantee."/>
 
     @hasSection('share-image')
         @yield('share-image')
     @else
-        <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/sales/2023/share-image-drumeo.jpg" style="display: none;">
+        <meta property="og:image" content="https://singeo.s3.amazonaws.com/sales/2023/share-image-singeo.jpg"/>
     @endif
 
+    @include('singeo.sales.partials._fonts')
+
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
-    <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/marketing/css/singeo/tailwind-helpers.css') }}">
+    <link href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/singeo/sales-page.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
 
     <style>
@@ -77,7 +79,7 @@
         }
 
         .splide__arrow svg {
-            fill: #0B76DB !important;
+            fill: #8300E9 !important;
         }
 
         .bubble:after {
@@ -152,9 +154,9 @@
     @include('musora.sales.components.header-section', [
         'header' => 'Get the singing voice you’ve always wanted.',
         'desc' => 'Improve your vocal range, strength, and control with step-by-step lessons and unlimited personal support.',
-        'thumb' => 'https://singeo.s3.amazonaws.com/sales/2023/header-thumb.jpg',
-        'promoThumb' => 'https://singeo.s3.amazonaws.com/sales/2023/header-thumb.jpg',
-        'promoThumbM' => 'https://singeo.s3.amazonaws.com/sales/2023/header-thumb-mobile.jpg',
+        'thumb' => 'https://singeo.s3.amazonaws.com/sales/2023/header-thumb2.jpg',
+        'promoThumb' => 'https://singeo.s3.amazonaws.com/sales/2023/jan-thumb.png',
+        'promoThumbM' => 'https://singeo.s3.amazonaws.com/sales/2023/jan-thumb-m.png',
         'pointOne' => 'Improve Your Voice',
         'pointTwo' => 'Helpful Vocal Coaches',
         'pointThree' => 'Sing Popular Songs',
@@ -168,14 +170,14 @@
            'promoLogoM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs-m.png',
         'desc' => 'Loop, learn, and remove the drums from 5,000+ drumming anthems. ',
            'text' => 'The NEW Drumeo Songs is here.<br><br>You can now magically remove the drums from 5,000+ popular drumming anthems. And with note-for-note sheet music, tempo adjustment, and a looping feature you’ll have <strong>the ultimate tool for learning songs on the drums.</strong> <br><br>And to make your goals easier in 2023 – you’ll also get a FREE pair of Drumeo’s in-ear headphones when you join Drumeo. So you can enjoy unlimited drum lessons, note-for-note song breakdowns, AND protect your ears while playing your favorite songs.<br><br>Click below to grab the deal – or scroll down to try a demo of the NEW Drumeo Songs.',
-           'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/collage-promo.png',
+           'img' => 'https://singeo.s3.amazonaws.com/sales/2023/jan-launch-collage2.png',
            'belowButton' => 'SAVE 17% + GET 10 BONUSES WORTH $1342.94',
        ])
     @else
         @include('musora.sales.components.learn-by-playing-section', [
             'header' => 'Learning to sing made easy with <u>personal coaching</u>.',
             'desc' => 'If you’ve tried online singing lessons, you know the struggle: spending months, even years, going around in circles – never actually singing like you’ve wished.<br><br>With videos alone, you’re all alone.<br><br>And that’s why Singeo doubles down on the personal touch – with direct and unlimited access to vocal coaches to give you personal feedback, tailored for your voice.<br><br>You’ll get the convenience of step-by-step video lessons, warmups, artist courses, and song tools so you can improve your vocals anywhere, anytime. PLUS you’ll also enjoy personalized video reviews, live Q&A sessions, community recitals, and technique-boosting bootcamps.<br><br>If you’ve dreamed of hitting higher notes, finding the perfect pitch, and delivering confident performances – we’d love to help. Click any of the big buttons to try Singeo risk-free and start your journey to becoming the singer you’ve always wanted to be.',
-            'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/collage2.png',
+            'img' => 'https://singeo.s3.amazonaws.com/sales/2023/collage-evergreen.png',
         ])
 
     @endif
@@ -184,32 +186,32 @@
     @php
         $gridItems = [
             [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/10-level-cirriculum.jpg',
+                'image' => 'https://singeo.s3.amazonaws.com/sales/2023/method.jpg',
                 'title' => '10-Level Curriculum',
                 'desc' => 'Turn your desire to sing into passionate practice with useful lessons and exercises.',
             ],
             [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/practical-assignments.jpg',
+                'image' => 'https://singeo.s3.amazonaws.com/sales/2023/practical-assignments.jpg',
                 'title' => 'Practical Assignments',
                 'desc' => 'You\'ll always have on-screen assignments and practice tools to guide you along the way.',
             ],
             [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/guided-workouts.jpg',
+                'image' => 'https://singeo.s3.amazonaws.com/sales/2023/guided-workouts.jpg',
                 'title' => 'Warm-Up Routines',
                 'desc' => 'Access our quick warm-up routines to fit any schedule, ranging from 5 to 20 minutes.',
             ],
             [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/world-class-teachers.jpg',
+                'image' => 'https://singeo.s3.amazonaws.com/sales/2023/world-class-teachers.jpg',
                 'title' => 'World-Class Teachers',
                 'desc' => 'Gain insights from vocal coaches, Grammy-Award winners, and chart-topping performers.',
             ],
             [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/downloadable-videos.jpg',
+                'image' => 'https://singeo.s3.amazonaws.com/sales/2023/downloadable-videos.jpg',
                 'title' => 'Downloadable Videos',
                 'desc' => 'Stream your lessons OR download your videos so you can practice anywhere, anytime.',
             ],
             [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/personalized-support.jpg',
+                'image' => 'https://singeo.s3.amazonaws.com/sales/2023/personalized-support.jpg',
                 'title' => 'Personalized Support',
                 'desc' => 'Get weekly live streams, student lesson plans, and access to a global singing community.',
             ],
@@ -375,7 +377,7 @@
     @include('musora.sales.components.songs-section', [
         'header' => 'Sing your favorite songs.',
         'desc' => 'You’ll have <strong>all the tools you need</strong> to make sure you never miss a note. ',
-        'video' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/smells-like-teen-spirit2.mp4',
+        'video' => 'https://singeo.s3.amazonaws.com/sales/2023/dont-stop-believin.mp4',
         'brandName' => 'Singeo',
         'bannerDesc' => 'Powered by Musora, Singeo includes full access to our communities for drums, piano, and guitar.',
     ])
@@ -448,7 +450,7 @@
     ])
 
     @include('musora.sales.components.guarantee-section', [
-        'badge' => 'https://drumeo-assets.s3.amazonaws.com/sales/2022/guarantee.png',
+        'badge' => 'https://singeo.s3.amazonaws.com/sales/2022/singeo-guarantee.png',
         'header' => '<strong>Happy student guarantee.</strong><br>Test-drive your lessons for 90 days. Zero risk.',
         'desc' => 'Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence to share your voice with the world.',
     ])
@@ -461,87 +463,57 @@
         @php
             $bonuses = [
                 [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/eardrums.jpg',
-                'title' => 'EarDrums',
-                'description' => 'Drumeo EarDrums reduce external volume by up to -29dB. That means you can play hard while protecting your ears.',
-                'price' => Prices::$earDrumsFull,
-                'shipping' => true,
+                    'image' => 'https://singeo.s3.amazonaws.com/sales/promos/november/singing-starter-kit.jpg',
+                    'title' => 'Singing<br> Starter Kit',
+                    'description' => 'Get everything you need to start singing now. In just 7 hands-on lessons, you’ll overcome the challenges most beginner singers face and will instantly sound better.',
+                    'price' => SingeoPrices::$singingStarterKitFull,
+                    'online-ship' => "Lifetime Access"
                 ],
                 [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/drumsticks.jpg',
-                'title' => 'Drumeo Drumsticks',
-                'description' => 'Drumeo 5A Drumsticks by Vater -- made with hickory and extra moisture to last longer.',
-                'price' => Prices::$sticksFull,
-                'shipping' => true,
+                    'image' => 'https://singeo.s3.amazonaws.com/sales/promos/october/Beautiful_harmonies_card.jpg',
+                    'title' => 'Harmony',
+                    'description' => 'In just 8, short, sing-a-long lessons, you’ll learn how to elevate any vocal performance with incredible harmonies. Even if you’re a total beginner, you’ll be singing your first harmony within the first 10 minutes of this course.',
+                    'price' => SingeoPrices::$beautifulHarmoniesFull,
+                    'online-ship' => "Lifetime Access"
                 ],
                 [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/rdm.jpg',
-                'title' => 'Rock Drumming Masterclass',
-                'description' => 'Todd Sucherman’s 26-week masterclass to help you improve your rock drumming.',
-                'price' => Prices::$rdmFull,
-                'online-ship' => "Instant Access"
+                    'image' => 'https://singeo.s3.amazonaws.com/sales/promos/november/poster2.png',
+                    'title' => 'Vowel Practice<br> Poster',
+                    'badge' => 'Vowel Practice Poster',
+                    'description' => 'Your new favorite practice tool - and your ticket hitting higher notes with ease and confidence.',
+                    'price' => SingeoPrices::$posterFull,
+                    'online-ship' => "Free Shipping",
                 ],
                 [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/dtme.jpg',
-                'title' => 'Drum Technique Made Easy',
-                'description' => 'Bruce Becker’s 26-week masterclass to improve your hand & foot technique.',
-                'price' => Prices::$dtmeFull,
+                    'image' => 'https://singeo.s3.amazonaws.com/sales/lifetime/1-year-of-guitar-card.jpg',
+                    'title' => '1 Year of Guitareo Lessons',
+                    'badge' => '1 Year of Guitareo Lessons',
+                    'description' => '1 year of online video-based guitar lessons and personal support.',
+                    'price' => 240,
+                    'online-ship' => "Online Access",
                 ],
                 [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/ime.jpg',
-                'title' => 'Independence Made Easy',
-                'description' => 'Jared Falk’s 26-week masterclass to unlock your musicality and freedom on the drums.',
-                'price' => Prices::$imeFull,
-                'online-ship' => "Instant Access"
-                ],
-                [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/eyd.jpg',
-                'title' => 'Electrify Your Drumming',
-                'description' => 'Your guide to playing 10 styles of electronic dance music - includes 23 play-alongs!',
-                'price' => Prices::$eydFull,
-                'online-ship' => "Instant Access"
-                ],
-                [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/fwtbdf.jpg',
-                'title' => 'Better Drum Fills',
-                'description' => 'The ultimate four-week crash course to playing more creative & musical drum fills.',
-                'price' => Prices::$bdfFull,
-                'online-ship' => "Instant Access"
-                ],
-                [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/sd.jpg',
-                'title' => 'Successful Drumming',
-                'description' => 'Jared Falk’s step-by-step curriculum for building a rock-solid foundation on the drums.',
-                'price' => Prices::$sdOnlineFull,
-                'online-ship' => "Instant Access"
-                ],
-                [
-                'image' => 'https://cdn.musora.com/image/fetch/c_fill,w_300,q_auto:good/https://drumeo-assets.s3.amazonaws.com/promos/july/tommy_card.jpg',
-                'title' => 'Great Hands For A Lifetime',
-                'description' => 'Tommy Igoe helps you improve your hand strength, speed, stamina, comfort, and control in the drums in four hours of video lessons.',
-                'price' => Prices::$ghfalFull,
-                ],
-                [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/lsf.jpg',
-                'title' => 'Learn Songs Faster',
-                'description' => 'This masterclass will give you proven techniques for learning MORE songs in less time.',
-                'price' => Prices::$learnSongsFasterFull,
-                'online-ship' => "Instant Access"
+                    'image' => 'https://singeo.s3.amazonaws.com/sales/lifetime/1-year-of-piano-card.jpg',
+                    'title' => '1 Year of Pianote Lessons',
+                    'badge' => '1 Year of Pianote Lessons',
+                    'description' => '1 year of online video-based piano lessons and personal support.',
+                    'price' => 240,
+                    'online-ship' => "Online Access",
                 ],
             ]
         @endphp
 
         @include('musora.sales.components.order-section-bonuses', [
-            'topImage' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drumeo-annual-2w-card.png',
-            'promoLogo' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs.svg',
-        'promoLogoM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs-m.png',
-            'header' => 'Save 17% + get 10 bonuses<br class="inline sm:hidden"> worth $1342.94',
-            'fullPrice' => '240',
-            'price' => '200',
-            'buttonLink' => '/laravel/public/shopping-cart/api/query?products[DLM]=1,year,1&products[quietpad]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[GHFAL-DIGI]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[learn-songs-faster-pack]=1&locked=true',
-            'subDescription' => '<strong>10 free bonuses.</strong> <br class="inline sm:hidden"><em>only available until january 31st.</em>',
-            'altButtonLink' => '/laravel/public/shopping-cart/api/query?products[DLM]=1,month,1&locked=true',
-            'altPrice' => '29',
+        'topImage' => 'https://singeo.s3.amazonaws.com/sales/2023/singeo-annual-2w-card.png',
+        'promoLogo' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs.svg',
+       'promoLogoM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs-m.png',
+        'header' => 'Save 17% + get 10 bonuses<br class="inline sm:hidden"> worth $1342.94',
+        'fullPrice' => '240',
+        'price' => '200',
+        'buttonLink' => '/laravel/public/shopping-cart/api/query?products[DLM]=1,year,1&products[quietpad]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[GHFAL-DIGI]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[learn-songs-faster-pack]=1&locked=true',
+        'subDescription' => '<strong>10 free bonuses.</strong> <br class="inline sm:hidden"><em>only available until january 31st.</em>',
+        'altButtonLink' => '/laravel/public/shopping-cart/api/query?products[DLM]=1,month,1&locked=true',
+        'altPrice' => '29',
         ])
     @else
         @include('musora.sales.components.order-section-collage', [
@@ -552,12 +524,12 @@
                     <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> piano, guitar, and drum lessons with full access to all Musora communities.</li>',
         'buttonLink' => '/choose-plan',
         'price' => '20',
-        'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drumeo-spread.png',
+        'image' => 'https://singeo.s3.amazonaws.com/sales/2023/singeo-spread.png',
         ])
     @endif
 
     @include('musora.sales.components.app-section', [
-        'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/devices.png',
+        'image' => 'https://singeo.s3.amazonaws.com/sales/2023/devices.png',
     ])
 
     @include('singeo._partials.faq')

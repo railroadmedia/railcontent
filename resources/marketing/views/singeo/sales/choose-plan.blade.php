@@ -1,27 +1,33 @@
-@extends('drumeo._partials.global-layout')
+@extends('singeo._partials.global-layout')
 
 @section('global-head')
-    <title>Drumeo | Reach your drumming goals.</title>
-    <meta property="og:title" content="Drumeo | Reach your drumming goals.">
-    <meta name="description" content="Learn the drums faster with organized video lessons, legendary teachers, and better practice tools. 90-Day Guarantee.">
-    <meta property="og:description" content="Learn the drums faster with organized video lessons, legendary teachers, and better practice tools. 90-Day Guarantee.">
-    <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/sales/2023/share-image-drumeo.jpg" style="display: none;">
-    <meta property="og:url" content="https://www.drumeo.com/">
+    <title>Your complete guide to confident singing. | Singeo.com</title>
+    <meta property="og:title" content="Singeo.com: Your complete guide to confident singing."/>
+    <meta property="og:url" content="https://www.singeo.com"/>
 
-    @include('drumeo._partials._fonts')
+    <meta name="description" content="Online singing lessons for any voice & vocal coaches to support you every step of the way. 90-Day Guarantee." />
+    <meta property="og:description" content="Online singing lessons for any voice & vocal coaches to support you every step of the way. 90-Day Guarantee."/>
+
+    @hasSection('share-image')
+        @yield('share-image')
+    @else
+        <meta property="og:image" content="https://singeo.s3.amazonaws.com/sales/2023/share-image-singeo.jpg"/>
+    @endif
+
+    @include('singeo.sales.partials._fonts')
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
-    <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/marketing/css/singeo/tailwind-helpers.css') }}">
+    <link href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/singeo/sales-page.css') }}" rel="stylesheet">
     <style>
         .option-buttons.active {
-            border-color:#0b76db!important;
-            background-color:#0c2949!important;
+            border-color:#8300E9!important;
+            background-color:#2f0c4a !important;
         }
         .option-buttons.active .radio-check {
-            border-color:#0b76db!important;
-            background-color:#0b76db!important;
+            border-color:#8300E9!important;
+            background-color:#8300E9!important;
         }
         .option-buttons.active .radio-check i {
             display:block!important;
@@ -30,7 +36,7 @@
 @stop
 
 @section('global-body')
-    @include("drumeo.sales.partials._nav", [
+    @include("singeo.sales.partials._nav", [
             "subscriptionVersion" => true,
             "fullSubscriptionVersion" => true,
         ])
@@ -38,23 +44,25 @@
 
     <div id="customize-anchor" class="anchor anchor-slide"></div>
     @include('musora.sales.components.card-selection-section', [
-        "instrument" => "piano",
+        "plusLogo" => "https://singeo.s3.amazonaws.com/sales/2023/singeo-plus-logo-light.svg",
+        "logo" => "https://musora-ui.s3.amazonaws.com/logos/singeo-white.svg",
+        "instrument" => "singing",
         "songs" => "1000",
-        "firstPoint" => "Unlimited piano lessons",
-        "thirdPoint" => "Direct access to real teachers.",
-        "fifthPoint" => "Lesson access for singing, guitar, and drums.",
+        "firstPoint" => "Unlimited singing lessons",
+        "thirdPoint" => "Direct access to vocal coaches.",
+        "fifthPoint" => "Lesson access for guitar, piano, and drums.",
     ])
 
     @include('musora.sales.components.plans-different-section', [
-        "plusLogo" => "https://drumeo-assets.s3.amazonaws.com/sales/2023/drumeoplus_logo-dark.svg",
-        "logo" => "https://musora-center.s3.amazonaws.com/logos/drumeo-logo.png",
+        "plusLogo" => "https://singeo.s3.amazonaws.com/sales/2023/singeo-plus-logo.svg",
+        "logo" => "https://musora-center.s3.amazonaws.com/logos/singeo-logo-black.png",
         "secondPoint" => "Artist courses and exclusive events with special guests.",
-        "thirdPoint" => "Go beyond piano with lessons for singing, guitar, and drums.",
+        "thirdPoint" => "Go beyond singing with lessons for guitar, piano, and drums.",
         "fifthPoint" => "1000+ songs transcribed w/ playback tools for all instruments.",
     ])
-    @include('drumeo._partials.faq')
+    @include('singeo._partials.faq')
 
-    @include("drumeo.sales.partials._footer")
+    @include("singeo.sales.partials._footer")
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>

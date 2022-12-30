@@ -85,17 +85,17 @@
                     >
                         Instruments <i class="fa-solid fa-caret-down"></i>
                     </a>
-                    <a class=" @if(strpos(url()->full(), 'choose-plan')) text-singeo @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/choose-plan" >Pricing</a>
-                    <a class=" @if(strpos(url()->full(), 'drumshop')) text-singeo @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/drumshop" >Shop</a>
-                    <a class="" href="{{ get_legacy_brand_base_url('drumeo') }}/beat" >Blog</a>
+                    <a class=" @if(strpos(url()->full(), 'choose-plan')) text-singeo @endif" href="{{ get_legacy_brand_base_url('singeo') }}/choose-plan" >Pricing</a>
+                    <a class=" @if(strpos(url()->full(), 'shop')) text-singeo @endif" href="{{ get_legacy_brand_base_url('singeo') }}/shop" >Shop</a>
+                    <a class="" href="{{ get_legacy_brand_base_url('singeo') }}/chorus" >Blog</a>
                 </div>
                 <div
                     class="features-dd hidden shadow-md bg-white rounded-xl p-2 absolute flex flex-col left-32 lg:left-36 top-10 lg:top-12 w-44"
                     x-ref="features"
                 >
-                    <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full @if(strpos(url()->full(), 'method')) text-singeo @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/method" ><i class="mr-1 text-lg fa-fw far fa-music-note"></i> Method</a>
-                    <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full @if(strpos(url()->full(), 'songs')) text-singeo @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/songs" ><i class="mr-1 text-lg fa-fw far fa-headphones"></i> Songs</a>
-                    <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full @if(strpos(url()->full(), 'coaches')) text-singeo @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/coaches" ><i class="mr-1 text-lg fa-fw far fa-whistle"></i> Coaches</a>
+                    <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full @if(strpos(url()->full(), 'method')) text-singeo @endif" href="{{ get_legacy_brand_base_url('singeo') }}/method" ><i class="mr-1 text-lg fa-fw far fa-music-note"></i> Method</a>
+                    <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full @if(strpos(url()->full(), 'songs')) text-singeo @endif" href="{{ get_legacy_brand_base_url('singeo') }}/songs" ><i class="mr-1 text-lg fa-fw far fa-headphones"></i> Songs</a>
+                    <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full @if(strpos(url()->full(), 'coaches')) text-singeo @endif" href="{{ get_legacy_brand_base_url('singeo') }}/coaches" ><i class="mr-1 text-lg fa-fw far fa-whistle"></i> Coaches</a>
                 </div>
                 <div
                     class="instruments-dd hidden shadow-md bg-white rounded-xl p-2 absolute flex flex-col left-60 lg:left-68 -ml-3 top-10 lg:top-12 w-44"
@@ -135,22 +135,76 @@
             "linkUrl" => get_musora_brand_base_url() . '/login',
         ])
         @include('singeo.sales.partials._nav-link', [
-            "linkName" => "Contact",
-            "linkIcon" => "fas fa-phone",
-            "linkUrl" => get_musora_brand_base_url().'/contact'
-        ])
-        @include('singeo.sales.partials._nav-link', [
-            "linkName" => "Singeo",
+            "linkName" => "Home",
             "linkIcon" => "fas fa-graduation-cap",
             "linkUrl" => "/",
         ])
+        <div class="has-drop-down" target="_parent" rel="">
+            <div class="nav-link">
+                <i class="fas fa-star"></i>
+                Features
+                <div class="drop-down-arrow ">
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div class="lesson-links dropdown">
+            @include('singeo.sales.partials._nav-link', [
+                "linkName" => "Method",
+                "linkUrl" => "/method/",
+                "linkIcon" => ''
+            ])
+            @include('singeo.sales.partials._nav-link', [
+                "linkName" => "Songs",
+                "linkUrl" => "/songs/",
+                "linkIcon" => ''
+            ])
+            @include('singeo.sales.partials._nav-link', [
+                "linkName" => "Coaches",
+                "linkUrl" => "/coaches/",
+                "linkIcon" => ''
+            ])
+        </div>
+        <div class="has-drop-down" target="_parent" rel="">
+            <div class="nav-link">
+                <i class="fas fa-piano-keyboard"></i>
+                Instruments
+                <div class="drop-down-arrow ">
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div class="lesson-links dropdown">
+            @include('singeo.sales.partials._nav-link', [
+                "linkName" => "Drumeo",
+                "linkUrl" => "https://www.drumeo.com/",
+                "linkIcon" => ''
+            ])
+            @include('singeo.sales.partials._nav-link', [
+                "linkName" => "Pianote",
+                "linkUrl" => "https://www.pianote.com/",
+                "linkIcon" => ''
+            ])
+            @include('singeo.sales.partials._nav-link', [
+                "linkName" => "Guitareo",
+                "linkUrl" => "https://www.guitareo.com/",
+                "linkIcon" => ''
+            ])
+        </div>
         @include('singeo.sales.partials._nav-link', [
-            "linkName" => "Holiday Deals",
+            "linkName" => "Pricing",
+            "linkIcon" => "fas fa-money-bill-wave",
+            "linkUrl" => "/choose-plan",
+        ])
+        @include('singeo.sales.partials._nav-link', [
+            "linkName" => "Shop",
             "linkIcon" => "fas fa-tag",
             "linkUrl" => '/shop',
         ])
         @include('singeo.sales.partials._nav-link', [
-            "linkName" => "The Chorus",
+            "linkName" => "Blog",
             "linkIcon" => "fas fa-comment-alt-edit",
             "linkUrl" => "/chorus",
         ])
@@ -183,6 +237,11 @@
         @include('singeo.sales.partials._secondary-nav-link', [
             "linkName" => "<i class='fas fa-fw fa-question'></i>&nbsp; FAQs",
             "linkUrl" => "https://help.singeo.com/",
+            "externalLink" => false
+        ])
+        @include('singeo.sales.partials._secondary-nav-link', [
+            "linkName" => "<i class='fas fa-fw fa-phone'></i>&nbsp; Contact",
+            "linkUrl" => get_musora_brand_base_url().'/contact',
             "externalLink" => false
         ])
         <span class="shim"></span>
