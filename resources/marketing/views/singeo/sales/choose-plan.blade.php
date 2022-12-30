@@ -1,4 +1,4 @@
-@extends('drumeo._partials.global-layout')
+@extends('singeo._partials.global-layout')
 
 @section('global-head')
     <title>Your complete guide to confident singing. | Singeo.com</title>
@@ -36,7 +36,7 @@
 @stop
 
 @section('global-body')
-    @include("drumeo.sales.partials._nav", [
+    @include("singeo.sales.partials._nav", [
             "subscriptionVersion" => true,
             "fullSubscriptionVersion" => true,
         ])
