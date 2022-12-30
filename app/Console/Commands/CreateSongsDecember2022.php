@@ -82,7 +82,7 @@ class CreateSongsDecember2022 extends Command
 
                 $this->musoraDB()->from('railcontent_content')
                     ->where('id', $existingContent->id)
-                    ->update(['instrumentless' => boolval($row[13]),]);
+                    ->update(['instrumentless' => true,]);
 
                 $this->updateOrInsertAndGetFirst(
                     'railcontent_content_fields',
