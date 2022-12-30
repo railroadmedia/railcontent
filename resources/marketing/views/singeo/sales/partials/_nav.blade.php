@@ -37,52 +37,12 @@
     @endif
     @if(!empty($subscriptionVersion))
         @if(!empty($fullSubscriptionVersion))
-            <div
-                class="relative"
-{{--                x-data="{--}}
-{{--                    features: false,--}}
-{{--                    instruments: false,--}}
-{{--                }"--}}
-            >
-                <div
-                    class="edge-wrap show-for-medium"
-                    x-on:click.away="
-                        features = false;
-                        instruments = false;
-                        $refs.features.classList.remove('hidden');
-                        $refs.instruments.classList.remove('hidden');
-                    "
-                >
-                    <a
-                        class="cursor-pointer features  @if(strpos(url()->full(), 'method') || strpos(url()->full(), 'songs') || strpos(url()->full(), 'coaches')) text-singeo @endif"
-                        x-on:click="
-                            features = !features;
-                            if(features){
-                                $refs.features.classList.add('hidden');
-                                $refs.instruments.classList.remove('hidden');
-                                instruments = false;
-                            }
-                            else {
-                                $refs.features.classList.remove('hidden');
-                            }
-                        "
-                    >
+            <div class="relative">
+                <div class="edge-wrap show-for-medium">
+                    <a class="cursor-pointer features  @if(strpos(url()->full(), 'method') || strpos(url()->full(), 'songs') || strpos(url()->full(), 'coaches')) text-singeo @endif">
                         Features <i class="fa-solid fa-caret-down"></i>
                     </a>
-                    <a
-                        class="cursor-pointer instruments"
-                        x-on:click="
-                            instruments = !instruments;
-                            if(instruments){
-                                $refs.instruments.classList.add('hidden');
-                                $refs.features.classList.remove('hidden');
-                                features = false;
-                            }
-                            else {
-                                $refs.instruments.classList.remove('hidden');
-                            }
-                        "
-                    >
+                    <a class="cursor-pointer instruments">
                         Instruments <i class="fa-solid fa-caret-down"></i>
                     </a>
                     <a class=" @if(strpos(url()->full(), 'choose-plan')) text-singeo @endif" href="{{ get_legacy_brand_base_url('singeo') }}/choose-plan" >Pricing</a>
