@@ -1,4 +1,6 @@
 <header class="flex-none z-40">  
+    {{-- Add classes for later use, refactor later --}}
+    <span class="hidden hover:text-drumeo hover:text-singeo hover:text-pianote hover:text-guitareo"></span>
 
     <!-- Nav -->
     @if(!$emptyPromoVersion)
