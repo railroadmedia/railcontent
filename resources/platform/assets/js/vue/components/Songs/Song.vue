@@ -13,7 +13,7 @@ import SoundSliceControls from "../SoundSlice/SoundSliceControls.vue";
 import ContentService from "../../vuesora/assets/js/services/content";
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner.vue';
 import { ArrowSmLeftIcon } from '@heroicons/vue/solid';
-import SelectModal from '../Membership/SelectModal.vue';
+//import SelectModal from '../Membership/SelectModal.vue';
 
 const props = defineProps({
     brand: {
