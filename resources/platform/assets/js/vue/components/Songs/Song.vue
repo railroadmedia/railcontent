@@ -98,6 +98,10 @@ const props = defineProps({
     }
 });
 
+onMounted(() => {
+    console.log(props.hasInstrumentless)
+})
+
 const soundsliceObject = ref(props.assignments.length ? props.assignments[0] : {});
 const openSoundslice = ref(null);
 const loading = ref(true);
@@ -178,7 +182,6 @@ const getInstrumentlessLabel = () => {
 
 <template>
     <div class="tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8 mv-3">
-        <SelectModal />
         <div id="lessonInfo" class="tw-flex xl:tw-flex-row tw-flex-col align-v-top ">
             <div class="tw-flex tw-flex-col tw-pr-0 xl:tw-pr-8 tw-grow tw-w-full">
                 <a :href="backUrl ? backUrl : null"
