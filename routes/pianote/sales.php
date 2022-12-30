@@ -6,13 +6,11 @@ use App\Http\Controllers\Pianote\SalesController;
 Route::domain('{pianoteDomain}')
     ->middleware(['web_public'])
     ->group(function () {
-    Route::get('/', [SalesController::class, 'home']);
-    Route::get('/2023-home', [SalesController::class, 'home23'] );
+    Route::get('/', [SalesController::class, 'home'] );
     Route::get('/new-year', [SalesController::class, 'promo'] );
-    Route::get('/choose-plan', [SalesController::class, 'plan23'] );
+    Route::get('/choose-plan', [SalesController::class, 'choosePlan'] );
     Route::get('/shop/improvisation-with-jesus-molina', [SalesController::class, 'jesusMolina'] );
     Route::get('/student-only', [SalesController::class, 'studentOnly'] );
-    Route::get('/2', [SalesController::class, 'home'] );
     Route::get('/roland', [SalesController::class, 'roland'] );
     Route::get('/trial', [SalesController::class, 'trial'] );
     Route::get('/trial-month', [SalesController::class, 'trialMonth'] );

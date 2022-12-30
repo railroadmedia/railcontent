@@ -1,8 +1,8 @@
 @php
-    require_once(resource_path('marketing/views/pianote/sales/pages/method/methods.php'))
+    require_once(resource_path('marketing/views/pianote/sales/features/methods.php'))
 @endphp
 
-@extends('pianote.sales.pages.coaches-method-songs-layout')
+@extends('pianote.sales.features.features-layout')
 
 @section('page-meta')
     <title>Pianote | Your piano goals start here.</title>

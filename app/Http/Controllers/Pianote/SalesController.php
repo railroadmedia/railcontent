@@ -48,17 +48,17 @@ class SalesController extends BaseController
 
     public function songs()
     {
-        return view('pianote.sales.pages.songs.songs', [ 'theme' => 'pianote', 'page' => 'songs']);
+        return view('pianote.sales.features.songs', [ 'theme' => 'pianote', 'page' => 'songs']);
     }
 
     public function method()
     {
-        return view('pianote.sales.pages.method.method', [ 'theme' => 'pianote', 'page' => 'method']);
+        return view('pianote.sales.features.method', [ 'theme' => 'pianote', 'page' => 'method']);
     }
 
     public function coaches()
     {
-        return view('pianote.sales.pages.coaches.coaches', [ 'theme' => 'pianote', 'page' => 'coaches']);
+        return view('pianote.sales.features.coaches', [ 'theme' => 'pianote', 'page' => 'coaches']);
     }
 
     public function chooseyourtrial()
@@ -155,21 +155,15 @@ class SalesController extends BaseController
         return view('pianote.lead-gen.welcome-party');
     }
 
-
     public function home()
     {
-        return view('pianote.sales.standard', [ 'theme' => 'pianote' ]);
-    }
-
-    public function home23()
-    {
-        return view('pianote.sales.subscription-homepages', ['theme' => 'pianote']);
+        return view('pianote.sales.subscription', ['theme' => 'pianote']);
     }
     public function promo()
     {
-        return view('pianote.sales.subscription-homepages', ['theme' => 'pianote', 'promoVersion' => 'true']);
+        return view('pianote.sales.subscription', ['theme' => 'pianote', 'promoVersion' => 'true']);
     }
-    public function plan23()
+    public function choosePlan()
     {
         return view('pianote.sales.choose-plan', ['theme' => 'pianote']);
     }
