@@ -1,6 +1,6 @@
-@extends('singeo._partials.sales-layout', ['emptyPromoVersion' => empty($promoVersion) ])
+@extends('singeo._partials.global-layout')
 
-@section('head-includes')
+@section('global-head')
     <title>Your complete guide to confident singing. | Singeo.com</title>
     <meta property="og:title" content="Singeo.com: Your complete guide to confident singing."/>
     <meta property="og:url" content="https://www.singeo.com"/>
@@ -105,7 +105,11 @@
     }'
 @endsection
 
-@section('layout-body')
+@section('global-body')
+    @include("singeo.sales.partials._nav", [
+            "subscriptionVersion" => true,
+            "fullSubscriptionVersion" => true,
+        ])
 
     @php
         $features = [
@@ -543,10 +547,6 @@
         'video' => '772644658'
     ])
 
-@stop
-
-{{-- Scripts --}}
-@section('layout-scripts')
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/sliding-anchor.js') }}"></script>
