@@ -7,6 +7,7 @@ Mark as complete
 
 */
 import { ref, onMounted, onBeforeUnmount } from 'vue';
+import axios from 'axios';
 import ContentLessonActionButtons from '../../vuesora/components/VideoResources/ContentLessonActionButtons.vue';
 import SoundSlice from "../SoundSlice/SoundSlice.vue"
 import SoundSliceControls from "../SoundSlice/SoundSliceControls.vue";
@@ -98,17 +99,14 @@ const props = defineProps({
     }
 });
 
-onMounted(() => {
-    console.log(props.hasInstrumentless)
-})
-
 const soundsliceObject = ref(props.assignments.length ? props.assignments[0] : {});
 const openSoundslice = ref(null);
 const loading = ref(true);
 const lessonProgressRef = ref(props.lessonProgress);
 const apiCallInProgress = ref(false);
 
-const openInstrumentless = () => {
+const openInstrumentl        <SelectModal />
+ess = () => {
     openSoundslice.value = 'instrumentless';
 };
 
