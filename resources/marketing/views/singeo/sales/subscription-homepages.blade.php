@@ -109,7 +109,7 @@
         $features = [
             [
                 'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drum-lessons-icon.svg',
-                'title' => 'Drum Lessons',
+                'title' => 'Vocal Lessons',
                 'desc' => 'Step-by-step video<br class="hidden sm:inline"> lessons on every topic.',
             ],
             [
@@ -119,42 +119,42 @@
             ],
             [
                 'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/songs-icon.svg',
-                'title' => '5000+ Songs',
-                'desc' => 'Play your favorite songs<br class="hidden sm:inline"> from every style & era.',
+                'title' => '1000+ Songs',
+                'desc' => 'Sing your favorite<br class="hidden sm:inline"> from every style & era.',
             ],
             [
                 'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/support-icon.svg',
                 'title' => '24/7 Support',
-                'desc' => 'The largest community<br class="hidden sm:inline"> of students & teachers.',
+                'desc' => 'A global community<br class="hidden sm:inline"> of students & teachers.',
             ],
         ];
         $slides = [
             [
-                'desc' => 'Drumeo is the real deal folks - a good place to study and realize one’s dreams.',
+                'desc' => 'You’re going to learn how your voice works, how to strengthen it – and to sing with confidence.',
                 'thumb' => 'https://drumeo-assets.s3.amazonaws.com/drum-shop/new-drummers/billy-cobham.jpg',
-                'name' => 'Billy Cobham',
-                'credit' => 'Rolling Stone  Top 100 Drummer',
+                'name' => 'Cody McManus',
+                'credit' => 'Music Producer',
             ],
             [
-                'desc' => 'A world-class site for continuing education and insight into the world of drumming!',
-                'thumb' => 'https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/redmond.jpg',
-                'name' => 'Rich Redmond',
-                'credit' => '3x Country Drummer Of The Year',
+                'desc' => 'Singeo really works. The skills are attainable, easy to learn, and lots of fun.',
+                'thumb' => 'https://singeo.s3.amazonaws.com/sales/2022/testimonials/SylviaCantu.jpg',
+                'name' => 'Sylvia Cantu',
+                'credit' => 'Singeo Student from USA',
             ],
             [
-                'desc' => 'The Drumeo standard is one of the highest quality and is THE place to go for the best in drum education.',
-                'thumb' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/four-weeks-to-better-drum-fills/drummer-david-garibaldi.jpg',
-                'name' => 'David Garibaldi',
-                'credit' => 'Rolling Stone Top 100 Drummer',
+                'desc' => 'I took traditional singing lessons in the past and didn’t have nearly this much fun.',
+                'thumb' => 'https://singeo.s3.amazonaws.com/sales/2022/testimonials/AmberKissler.jpg',
+                'name' => 'Amber Kissler',
+                'credit' => 'Singeo Student from USA',
             ],
         ];
     @endphp
     @include('musora.sales.components.header-section', [
         'header' => 'Get the singing voice you’ve always wanted.',
         'desc' => 'Improve your vocal range, strength, and control with step-by-step lessons and unlimited personal support.',
-        'thumb' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/jan-thumb-no-badge.jpg',
-        'promoThumb' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/header-thumb-promo2.png',
-        'promoThumbM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/header-thumb-promo-m2.jpg',
+        'thumb' => 'https://singeo.s3.amazonaws.com/sales/2023/header-thumb.jpg',
+        'promoThumb' => 'https://singeo.s3.amazonaws.com/sales/2023/header-thumb.jpg',
+        'promoThumbM' => 'https://singeo.s3.amazonaws.com/sales/2023/header-thumb-mobile.jpg',
         'pointOne' => 'Improve Your Voice',
         'pointTwo' => 'Helpful Vocal Coaches',
         'pointThree' => 'Sing Popular Songs',
