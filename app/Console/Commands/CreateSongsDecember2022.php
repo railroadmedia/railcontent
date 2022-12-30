@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Illuminate\Database\DatabaseManager;
 use Illuminate\Support\Facades\DB;
 use Railroad\Railcontent\Events\ContentCreated;
 use Railroad\Railcontent\Helpers\ContentHelper;
@@ -30,6 +31,8 @@ class CreateSongsDecember2022 extends Command
     /**
      * Create a new command instance.
      *
+     * @param DatabaseManager $databaseManager
+     * @param ContentRepository $contentRepository
      */
     public function __construct()
     {
@@ -41,9 +44,7 @@ class CreateSongsDecember2022 extends Command
      *
      * @return mixed
      */
-    public function handle(
-        ContentRepository $contentRepository,
-    )
+    public function handle(ContentRepository $contentRepository)
     {
         $this->info('Starting CreateSongsDecember2022...');
 
@@ -331,6 +332,7 @@ class CreateSongsDecember2022 extends Command
 
             // assignment
             $assignmentChildren = $contentRepository->getByParentIdWhereTypeIn($content->id, ['assignment']);
+
             $assignmentSearchAttributes = [
                 'title' => $row[9],
                 'type' => 'assignment',

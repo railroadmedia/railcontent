@@ -46,7 +46,6 @@ class MigratePianoteSongTutorial extends Command
                 ->select('id', 'type')
                 ->where('brand', 'pianote')
                 ->where('type', 'song')
-                ->where('id','<=', 376469)
                 ->orderBy('id', 'asc');
 
         $query->chunk(200, function (Collection $rows) use ($dbConn, $contentService, $contentHierarchyService) {
