@@ -16,7 +16,7 @@
 
 @section('body-data')
     x-data ='{
-    soundslice : false
+        soundslice : false
     }'
 @endsection
 
