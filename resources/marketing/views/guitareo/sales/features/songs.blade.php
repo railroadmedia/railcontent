@@ -1,8 +1,8 @@
 @php
-    require_once(resource_path('marketing/views/guitareo/sales/pages/songs/sliders.php'))
+    require_once(resource_path('marketing/views/guitareo/sales/features/songs.php'))
 @endphp
 
-@extends('guitareo.sales.pages.coaches-method-songs-layout')
+@extends('guitareo.sales.features.features-layout')
 
 @section('page-meta')
     <title>Guitareo | Play your favorite songs.</title>

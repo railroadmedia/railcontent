@@ -1,8 +1,8 @@
 @php
-    require_once(resource_path('marketing/views/guitareo/sales/pages/coaches/sliders.php'))
+    require_once(resource_path('marketing/views/guitareo/sales/features/coaches.php'))
 @endphp
 
-@extends('guitareo.sales.pages.coaches-method-songs-layout')
+@extends('guitareo.sales.features.features-layout')
 
 @section('page-meta')
     <title>Guitareo | Study with the world’s best teachers.</title>

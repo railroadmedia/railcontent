@@ -1,8 +1,8 @@
 @php
-    require_once(resource_path('marketing/views/guitareo/sales/pages/method/methods.php'))
+    require_once(resource_path('marketing/views/guitareo/sales/features/methods.php'))
 @endphp
 
-@extends('guitareo.sales.pages.coaches-method-songs-layout')
+@extends('guitareo.sales.features.features-layout')
 
 @section('page-meta')
     <title>Guitareo | Your guitar goals start here.</title>
