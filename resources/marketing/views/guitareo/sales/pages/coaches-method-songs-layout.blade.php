@@ -1,4 +1,4 @@
-@extends('_partials.layout.coaches-method-songs-layout')
+@extends('_partials.layout.features-layout')
 
 @section('page-styles')
     <link href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}" rel="stylesheet">

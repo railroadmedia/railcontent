@@ -1,8 +1,8 @@
 @php
-    require_once(resource_path('marketing/views/drumeo/sales/pages/method/lessons.php'))
+    require_once(resource_path('marketing/views/drumeo/sales/features/lessons.php'))
 @endphp
 
-@extends('drumeo.sales.pages.coaches-method-songs-layout')
+@extends('drumeo.sales.features.features-layout')
 
 @section('page-meta')
     <title>Drumeo | Always know exactly what to practice.</title>

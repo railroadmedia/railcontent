@@ -1,8 +1,8 @@
 @php
-    require_once(resource_path('marketing/views/drumeo/sales/pages/coaches/sliders.php'))
+    require_once(resource_path('marketing/views/drumeo/sales/features/coaches.php'))
 @endphp
 
-@extends('drumeo.sales.pages.coaches-method-songs-layout')
+@extends('drumeo.sales.features.features-layout')
 
 @section('page-meta')
     <title>Drumeo | Study with the world’s best drummers.</title>

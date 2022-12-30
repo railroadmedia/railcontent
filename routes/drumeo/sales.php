@@ -11,8 +11,7 @@ Route::domain('{drumeoDomain}')
         'as' => 'referral.invite-a-friend-landing',
         'uses' => App\Http\Controllers\Profiles\ReferralController::class . '@join',
     ]);
-    Route::get('/', [SalesController::class, 'sales'] );
-    Route::get('/2023-home', [SalesController::class, 'home23'] );
+    Route::get('/', [SalesController::class, 'home'] );
     Route::get('/new-year', [SalesController::class, 'promo'] );
     Route::get('/choose-plan', [SalesController::class, 'plan23'] );
     Route::get('/anniversary-deal', [SalesController::class, 'sales'] );

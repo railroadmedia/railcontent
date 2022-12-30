@@ -1,8 +1,8 @@
 @php
-    require_once(resource_path('marketing/views/drumeo/sales/pages/songs/sliders.php'))
+    require_once(resource_path('marketing/views/drumeo/sales/features/songs.php'))
 @endphp
 
-@extends('drumeo.sales.pages.coaches-method-songs-layout')
+@extends('drumeo.sales.features.features-layout')
 
 @section('page-meta')
     <title>Drumeo | Play your favorite songs.</title>
