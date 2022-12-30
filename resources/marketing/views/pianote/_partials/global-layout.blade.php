@@ -17,6 +17,7 @@
 
     {!! \App\Analytics\Tracker::headBottom() !!}
 
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 
 <body @yield('body-data')>
@@ -34,7 +35,6 @@
 </script>
 {!! \App\Analytics\Tracker::bodyBottom() !!}
 
-<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 <script type="text/javascript" src={{ asset('/marketing/js/jquery.countdown-2.min.js') }}></script>
 <script>
     $(document).ready(function () {

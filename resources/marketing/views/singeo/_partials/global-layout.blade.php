@@ -24,7 +24,10 @@
 
     {!! \App\Analytics\Tracker::headBottom() !!}
 
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
     @yield('global-head')
+
 </head>
 
 <body class="@yield('body-class')">
@@ -45,7 +48,6 @@
     </script>
     {!! \App\Analytics\Tracker::bodyBottom() !!}
     <script type="text/javascript" src="{{ asset('/marketing/js/jquery.countdown-2.min.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     <script>
         $(document).ready(function () {
             $('.tzcd-bigtw').countdown('2022/12/27')
