@@ -6,11 +6,7 @@
     <meta name="description" content="Play guitar like you've always wanted with step-by-step video lessons, world-class teachers, and unlimited personal support. 90-Day Guarantee." />
     <meta property="og:description" content="Play guitar like you've always wanted with step-by-step video lessons, world-class teachers, and unlimited personal support. 90-Day Guarantee."/>
 
-    @hasSection('share-image')
-        @yield('share-image')
-    @else
         <meta property="og:image" content="https://guitareo.s3.amazonaws.com/sales/2023/share-image-guitareo.jpg"/>
-    @endif
 
     <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
 

@@ -7,11 +7,7 @@
     <meta name="description" content="Learn the drums faster with organized video lessons, legendary teachers, and better practice tools. 90-Day Guarantee.">
     <meta property="og:description" content="Learn the drums faster with organized video lessons, legendary teachers, and better practice tools. 90-Day Guarantee.">
 
-    @hasSection('share-image')
-        @yield('share-image')
-    @else
         <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/sales/2023/share-image-drumeo.jpg" style="display: none;">
-    @endif
 
     @include('drumeo._partials._fonts')
     <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
