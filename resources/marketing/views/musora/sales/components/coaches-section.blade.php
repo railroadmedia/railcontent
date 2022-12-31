@@ -120,7 +120,7 @@
                                 },
                             }"
                     >
-                        <section x-ref="splide" class="splide mb-20" aria-label="Splide/Alpine.js Carousel Example">
+                        <section x-ref="splide" class="splide mb-20 h-44 sm:h-48 lg:h-72" aria-label="Splide/Alpine.js Carousel Example">
                             <div class="splide__track">
                                 <ul class="splide__list">
                                     @foreach ($course['images'] as $image)
