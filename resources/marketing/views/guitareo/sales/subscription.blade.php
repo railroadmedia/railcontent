@@ -151,7 +151,7 @@
                 'desc' => 'for people who want to learn how to play guitar, and fast',
                 'thumb' => 'https://guitareo.s3.amazonaws.com/sales/2023/as-logo.png',
                 'name' => 'American Songwriter',
-                'credit' => ' ',
+                'credit' => 'Music Magazine',
             ],
         ];
     @endphp
