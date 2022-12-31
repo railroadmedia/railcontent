@@ -47,8 +47,8 @@
         "fifthPoint" => "Lesson access for piano, guitar, and singing.",
         "plusAnnualLink" => "/laravel/public/shopping-cart/api/query?products[DLM-Trial-Annual-7-Day]=1&locked=true",
         "plusMonthlyLink" => "/laravel/public/shopping-cart/api/query?products[DLM-Trial]=1,month,1&locked=true",
-        "annualLink" => "/laravel/public/shopping-cart/api/query?products[DLM-Trial-Annual-7-Day]=1&locked=true",
-        "monthlyLink" => "/laravel/public/shopping-cart/api/query?products[DLM-Trial]=1,month,1&locked=true",
+        "annualLink" => "/laravel/public/shopping-cart/api/query?products[drumeo-base-annual-recurring-7-day-trial-membership]=1&locked=true",
+        "monthlyLink" => "/laravel/public/shopping-cart/api/query?products[drumeo-base-monthly-recurring-7-day-trial-membership]=1,month,1&locked=true",
     ])
 
 
