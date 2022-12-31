@@ -109,6 +109,7 @@
                                     src="https://cdn.musora.com/image/fetch/w_80,q_auto:best/{{ $slide['thumb'] }}"
                                     loading="lazy"
                                     onload="this.classList.remove('opacity-0')"
+                                    alt="{{$slide['name']}}"
                                 ><br class="inline md:hidden">
                                 <p class="leading-tight w-full md:w-auto text-sm text-light-navy ml-1 md:ml-2 mr-0 mt-1 md:mt-0"><em>{{ $slide['name'] }}, {{ $slide['credit'] }}</em></p>
                             </div>

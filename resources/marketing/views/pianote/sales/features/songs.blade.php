@@ -569,6 +569,7 @@
 
     @include('_partials.components.soundslice-modal',[
         'name' => 'soundslice',
-        'video' => '162928'
+        'video' => '77f4c',
+        'slices' => true,
     ])
 @stop

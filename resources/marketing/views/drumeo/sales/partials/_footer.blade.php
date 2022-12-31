@@ -40,11 +40,11 @@
         display: inline-block;
         margin-right: 2%;
         margin-top: 10px;" href="https://itunes.apple.com/us/app/musora/id1619053766?ls=1" target="_blank">
-                    <img src="https://cdn.musora.com/image/fetch/w_260,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/app/download-on-app-store-button.png"></a>
+                    <img src="https://cdn.musora.com/image/fetch/w_260,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/app/download-on-app-store-button.png" alt="app store icon"></a>
                 <a style="width: 48%;max-width:130px;
         display: inline-block;
         margin-top: 10px;" href="https://play.google.com/store/apps/details?id=com.musoraapp" target="_blank">
-                    <img src="https://cdn.musora.com/image/fetch/w_260,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/app/google-play-button.png"></a>
+                    <img src="https://cdn.musora.com/image/fetch/w_260,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/app/google-play-button.png" alt="google play icon"></a>
             </div>
             <div class="footer-link-wrap">
                 <h1>Resources</h1>

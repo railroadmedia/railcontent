@@ -59,7 +59,6 @@
         <div class="relative mx-auto max-w-md lg:max-w-xl">
             <ul
                 x-ref="tablist"
-                role="tablist"
                 class="hidden md:flex mt-8 mb-10 rounded-full bg-[#F5F8FC]"
             >
                 <!-- Tab -->
@@ -72,10 +71,8 @@
                             @focus="select($el.id)"
                             type="button"
                             :tabindex="isSelected($el.id) ? 0 : -1"
-                            :aria-selected="isSelected($el.id)"
                             :class="isSelected($el.id) ? 'text-white bg-[#01050F] border-[#01050F] bubble' : 'border-transparent'"
                             class="px-5 py-2 lg:py-2.5 w-full relative rounded-full relative z-20"
-                            role="tab"
                         >
                             {{ $button }}
                         </button>
@@ -88,12 +85,11 @@
         </div>
 
         <!-- Panels -->
-        <div role="tabpanels">
+        <div>
             <!-- Panel -->
             @foreach ($courses as $course)
                 <section
                     x-show="isMobile || (!isMobile && isSelected($id('tab', whichChild($el, $el.parentElement))))"
-                    role="tabpanel"
                     class="max-w-6xl mx-auto px-4 lg:px-6 mb-6 md:mb-0"
                 >
                     <h4 class="font-extrabold text-center mb-2 md:hidden">{{ $course['title'] }}</h4>

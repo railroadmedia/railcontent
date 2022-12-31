@@ -49,8 +49,8 @@
         "fifthPoint" => "Lesson access for guitar, piano, and drums.",
         "plusAnnualLink" => "/ecommerce/add-to-cart?products[singeo-annual-recurring-7-day-trial-membership]=1&redirect=/order&locked=true&promo-code=annual-trial",
         "plusMonthlyLink" => "/ecommerce/add-to-cart?products[singeo-monthly-recurring-7-day-trial-membership]=1&redirect=/order&locked=true",
-        "annualLink" => "/ecommerce/add-to-cart?products[singeo-annual-recurring-7-day-trial-membership]=1&redirect=/order&locked=true&promo-code=annual-trial",
-        "monthlyLink" => "/ecommerce/add-to-cart?products[singeo-monthly-recurring-7-day-trial-membership]=1&redirect=/order&locked=true",
+        "annualLink" => "/ecommerce/add-to-cart?products[singeo-base-annual-recurring-7-day-trial-membership]=1&redirect=/order&locked=true&promo-code=annual-trial",
+        "monthlyLink" => "/ecommerce/add-to-cart?products[singeo-base-monthly-recurring-7-day-trial-membership]=1&redirect=/order&locked=true",
     ])
 
     @include('musora.sales.components.plans-different-section', [

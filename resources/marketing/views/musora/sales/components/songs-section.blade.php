@@ -42,7 +42,7 @@
 <section class="text-center text-white px-5 sm:px-6 py-7 sm:py-8" style="    background: linear-gradient(40deg,#03c8ac, #0976db, #9a01ee, #f61a30);">
     <div class="container max-w-6xl mx-auto">
         <div class="flex flex-wrap sm:flex-nowrap items-center justify-center">
-            <img class="h-12 sm:h-14" src="https://drumeo-assets.s3.amazonaws.com/sales/2023/musora-instruments.svg">
+            <img class="h-12 sm:h-14" src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://drumeo-assets.s3.amazonaws.com/sales/2023/musora-instruments.svg" alt="instrument image">
             <p class="w-full sm:w-auto sm:text-left max-w-md mt-2 sm:mt-0 mx-0 sm:pl-8 leading-normal sm:leading-tight"><strong>Any instrument, any time.</strong><br>
                 {{ $bannerDesc }}
             </p>

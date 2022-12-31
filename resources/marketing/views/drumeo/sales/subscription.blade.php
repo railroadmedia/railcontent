@@ -229,7 +229,7 @@
     @endphp
 
     @include('musora.sales.components.trailer-grid-section', [
-        'vid' => 'https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/video-reel.mp4',
+        'vid' => 'https://player.vimeo.com/progressive_redirect/playback/785314560/rendition/540p/file.mp4?loc=external&signature=1549cce1dacabad80dd416b5a439f6639d3b7b30c7e4d70d46245bf70c6d5102',
         'header' => 'Your drumming goals<br class="inline sm:hidden"> start here.',
         'desc' => '
         Always know <em>exactly</em> what to practice with an organized 10-level <br class="hidden sm:inline lg:hidden">curriculum featuring many of the world’s best teachers. ',
@@ -607,7 +607,7 @@
     ])
     @include('_partials.components.video-modal',[
         'name' => 'trailer',
-        'video' => '772644658'
+        'video' => '785314424'
     ])
 
     @if(!empty($promoVersion))
