@@ -45,15 +45,15 @@
                 @if($category !== 'bundles' && count($sizes) === 0 && !$bundle)
                     <a
                         class="online-atc vue-add-to-cart"
-                        href="/laravel/public/shopping-cart/api/query?go-back-to-shop=true&products[{!! $sku !!}]=1"
-                        data-base-url="/laravel/public/shopping-cart/api/query?go-back-to-shop=true&products[{!! $sku !!}]=1"
+                        href="/ecommerce/add-to-cart?go-back-to-shop=true&products[{!! $sku !!}]=1"
+                        data-base-url="/ecommerce/add-to-cart?go-back-to-shop=true&products[{!! $sku !!}]=1"
                         data-product-json='{"{!! $sku !!}": 1}'
                     >
                         <button class="join border-none"><i class="fas fa-cart-plus text-2xl mr-1"></i> Add To Cart</button>
                     </a>
                 @elseif(!empty($bundle))
-                    <a class="online-atc" href="/laravel/public/shopping-cart/api/query?{!! $sku !!}"
-                       data-base-url="/laravel/public/shopping-cart/api/query?{!! $sku !!}">
+                    <a class="online-atc" href="/ecommerce/add-to-cart?{!! $sku !!}"
+                       data-base-url="/ecommerce/add-to-cart?{!! $sku !!}">
                         <button class="join border-none"><i class="fas fa-cart-plus text-2xl mr-1"></i> Order Now</button>
                     </a>
                 @endif
@@ -76,10 +76,10 @@
                         class="online-atc merch vue-add-to-cart selected-pack"
                         href="#"
                         @if(!empty($promoCode))
-                        data-base-url="/laravel/public/shopping-cart/api/query?go-back-to-shop=true&promo-code={{$promoCode}}"
+                        data-base-url="/ecommerce/add-to-cart?go-back-to-shop=true&promo-code={{$promoCode}}"
                         data-promocode="{{ $promoCode }}"
                         @else
-                        data-base-url="/laravel/public/shopping-cart/api/query?go-back-to-shop=true"
+                        data-base-url="/ecommerce/add-to-cart?go-back-to-shop=true"
                         @endif
                         @if(!empty($lockedCart)) data-locked-cart="{{ $lockedCart }}" @endif
                     >

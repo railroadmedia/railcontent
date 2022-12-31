@@ -141,7 +141,7 @@
             <br class="hide-for-medium">
             <img class="logo hide-for-medium" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/drumeo-quietpad.png">
             <h2><strong style="font-weight: 900;">Practice anywhere</strong> with two<br class="hide-for-medium"> full-size playing surfaces.</h2>
-            <a href="/laravel/public/shopping-cart/api/query?products[quietpad]=1" class="join blue">Get Yours &raquo;</a>
+            <a href="/ecommerce/add-to-cart?products[quietpad]=1" class="join blue">Get Yours &raquo;</a>
             <p class="dense" style="opacity: 0;"><strong class="text-yellow">LAUNCH SPECIAL</strong><br>
                 <s>NORMALLY ${{ Prices::$quietPadFull }}.</s> <strong>ONLY ${{ Prices::$quietPadRegular }}</strong> (SAVE {{ round(100 - (100 * (Prices::$quietPadRegular / Prices::$quietPadFull))) }}%)</p>
         </div>
@@ -149,7 +149,7 @@
             <div class="flex-video widescreen vimeo">
                 <iframe class="reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/395000347?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
             </div>
-            <a href="/laravel/public/shopping-cart/api/query?products[quietpad]=1" class="join blue">Get Yours &raquo;</a>
+            <a href="/ecommerce/add-to-cart?products[quietpad]=1" class="join blue">Get Yours &raquo;</a>
         </div>
     </header>
 
@@ -211,7 +211,7 @@
             <div class="flex-video widescreen vimeo">
                 <iframe class="reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/394999066?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
             </div>
-            <a href="/laravel/public/shopping-cart/api/query?products[quietpad]=1" class="join blue">Get Yours &raquo;</a>
+            <a href="/ecommerce/add-to-cart?products[quietpad]=1" class="join blue">Get Yours &raquo;</a>
         </div>
     </section>
 
@@ -361,7 +361,7 @@
                     <strong>ONLY ${{ Prices::$quietPadRegular }}</strong>
                 @endif
             </h3>
-            <a href="/laravel/public/shopping-cart/api/query?products[quietpad]=1" class="join blue">Get Yours &raquo;</a>
+            <a href="/ecommerce/add-to-cart?products[quietpad]=1" class="join blue">Get Yours &raquo;</a>
 
             <div class="credit-cards columns">
                 <i class="fab fa-cc-visa"></i>

@@ -1,6 +1,6 @@
 @php
-    $annualLink = '/laravel/public/shopping-cart/api/query?products[DLM]=1,year,1&locked=true';
-    $lifetimeLink = '/laravel/public/shopping-cart/api/query?products[DLM-Lifetime]=1&products[practicepad]=1&products[quietpad]=1&products[Drumeo-VaterSticks]=6&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[drum-technique-made-easy-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[four-weeks-to-better-drum-fills]=1&products[learn-songs-faster-pack]=1&products[TLOD-DIGI]=1&products[MAM-DIGI]=1&products[GHFAL-DIGI]=1&products[HGAF-DIGI]=1&products[AOADS-DIGI]=1&products[ICM-DIGI]=1&products[BTC-DIGI]=1&products[CC-DIGI]=1&products[TG-DIGI]=1&locked=true&redirect=/order';
+    $annualLink = '/ecommerce/add-to-cart?products[DLM]=1,year,1&locked=true';
+    $lifetimeLink = '/ecommerce/add-to-cart?products[DLM-Lifetime]=1&products[practicepad]=1&products[quietpad]=1&products[Drumeo-VaterSticks]=6&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[drum-technique-made-easy-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[four-weeks-to-better-drum-fills]=1&products[learn-songs-faster-pack]=1&products[TLOD-DIGI]=1&products[MAM-DIGI]=1&products[GHFAL-DIGI]=1&products[HGAF-DIGI]=1&products[AOADS-DIGI]=1&products[ICM-DIGI]=1&products[BTC-DIGI]=1&products[CC-DIGI]=1&products[TG-DIGI]=1&locked=true&redirect=/order';
 @endphp
 <section class="content-section text-center customize px-4 lg:px-6" style="background:#000;">
     <div class="container mx-auto">
@@ -8,7 +8,7 @@
         <h2 class="mt-3 mb-10"><strong>Choose the plan <br class="inline md:hidden">that's right for you.</strong></h2>
         <div class="flex flex-wrap items-end justify-center 2-full max-w-sm md:max-w-2xl lg:max-w-3xl my-5 sm:my-7 mx-auto">
             <div class="w-full md:w-1/2 px-2 md:px-3 relative">
-                <a href="/laravel/public/shopping-cart/api/query?products[DLM]=1,month,1" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">
+                <a href="/ecommerce/add-to-cart?products[DLM]=1,month,1" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">
                     <div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">
                         <h5 class="leading-none mb-3"><strong>Monthly</strong></h5>
                         <h1 class="inline-block leading-none">

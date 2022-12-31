@@ -120,7 +120,7 @@
                 <i class="mx-6 md:mx-12 fal fa-chevron-down animated delay-2s infinite pulse"></i>
             </div>
 
-            <a class="join" href="/laravel/public/shopping-cart/api/query?products[DLM-Trial-Drummers-Toolbox-1-month]=1&locked=true">Click Here To Get Started &raquo;</a><br>
+            <a class="join" href="/ecommerce/add-to-cart?products[DLM-Trial-Drummers-Toolbox-1-month]=1&locked=true">Click Here To Get Started &raquo;</a><br>
 
             <div class="inline-block w-full px-3 md:px-4 my-5 text-light-navy">
                 <p><strong>Any questions?</strong><br class="inline-block md:hidden"> Call us toll-free at

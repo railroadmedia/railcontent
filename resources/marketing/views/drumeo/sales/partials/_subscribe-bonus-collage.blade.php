@@ -1,5 +1,5 @@
 @php
-    $annualLink = '/laravel/public/shopping-cart/api/query?products[DLM]=1,year,1&products[30-day-drummer]=1&products[practicepad]=1&products[Drumeo-VaterSticks]=2&products[BeginnerBook]=1&locked=true';
+    $annualLink = '/ecommerce/add-to-cart?products[DLM]=1,year,1&products[30-day-drummer]=1&products[practicepad]=1&products[Drumeo-VaterSticks]=2&products[BeginnerBook]=1&locked=true';
 @endphp
 
 <section class="content-section text-center customize px-4 lg:px-6 relative z-50 overflow-hidden" style="background: linear-gradient(to bottom, #01050f 60%, #02152a);">
@@ -28,7 +28,7 @@
             </div>
         </div>
 
-        <a class="inline-block text-sm text-light-navy mt-7" href="/laravel/public/shopping-cart/api/query?products[DLM]=1,month,1&locked=true"><p><u><em>Or start a monthly membership for <br class="inline-block md:hidden">${{ Prices::$drumeoEdgeRegular }}/month. (no bonuses)</em></u></p></a>
+        <a class="inline-block text-sm text-light-navy mt-7" href="/ecommerce/add-to-cart?products[DLM]=1,month,1&locked=true"><p><u><em>Or start a monthly membership for <br class="inline-block md:hidden">${{ Prices::$drumeoEdgeRegular }}/month. (no bonuses)</em></u></p></a>
 </section>
 
 <section class="content-section text-center" style="background: #060c1b;">

@@ -79,7 +79,7 @@
             <i class="fas fa-play play-button autoplay-video mt-36 lg:mt-44 mb-5 md:mb-12" data-open="trailer"></i>
             <h2><strong>Make the jump from beginner to<br> intermediate drummer.</strong></h2>
             <img class="mt-1 h-10 sm:h-14 lg:h-16" src="https://drumeo-assets.s3.amazonaws.com/drum-shop/beyond-beginner-drummer/with+Siros+Vaziri.svg"><br>
-            <a class="join blue my-3 md:my-4 w-full max-w-xl" href="/laravel/public/shopping-cart/api/query?products[beyond-beginner-drumming]=1">Get Started</a>
+            <a class="join blue my-3 md:my-4 w-full max-w-xl" href="/ecommerce/add-to-cart?products[beyond-beginner-drumming]=1">Get Started</a>
             <h6>ONLY @if(Prices::$beyondBeginnerDrummingFull > Prices::$beyondBeginnerDrumming) <s class="opacity-60">${{ Prices::$beyondBeginnerDrummingFull }}</s> @endif
                 <strong class="text-yellow-400">${{ Prices::$beyondBeginnerDrumming }} {{--Launch Special--}}</strong></h6>
         </div>
@@ -284,7 +284,7 @@
             <img class="logo" src="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/beyond-beginner-drummer/BeyondBeginnerDrumming_Logo.svg"><br>
             <h2 class="mt-5"><strong>Make the jump from beginner to<br> intermediate drummer.</strong></h2>
             <img class="mt-1 h-10 sm:h-14 lg:h-16" src="https://drumeo-assets.s3.amazonaws.com/drum-shop/beyond-beginner-drummer/with+Siros+Vaziri.svg"><br>
-            <a class="join blue my-3 md:my-4 w-full max-w-xl" href="/laravel/public/shopping-cart/api/query?products[beyond-beginner-drumming]=1">Get Started</a>
+            <a class="join blue my-3 md:my-4 w-full max-w-xl" href="/ecommerce/add-to-cart?products[beyond-beginner-drumming]=1">Get Started</a>
             <h6>ONLY @if(Prices::$beyondBeginnerDrummingFull > Prices::$beyondBeginnerDrumming) <s class="opacity-60">${{ Prices::$beyondBeginnerDrummingFull }}</s> @endif
                 <strong class="text-yellow-400">${{ Prices::$beyondBeginnerDrumming }} {{--Launch Special--}}</strong></h6>
         </div>

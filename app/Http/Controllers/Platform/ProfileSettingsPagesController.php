@@ -553,7 +553,7 @@ class ProfileSettingsPagesController extends BaseController
             $urlParams = $urlParamsByBrandForTrial[$brand];
             $addToCartUrlTrial = 'https://' . $brand . '.com/ecommerce/add-to-cart?' . $urlParams;
             if ($brand == 'drumeo') {
-                $addToCartUrlTrial = 'https://drumeo.com/laravel/public/shopping-cart/api/query?' . $urlParams;
+                $addToCartUrlTrial = 'https://drumeo.com/ecommerce/add-to-cart?' . $urlParams;
             }
         } else {
             $addToCartUrlTrial = 'https://musora.com/';
