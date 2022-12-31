@@ -61,7 +61,7 @@
             </div>
         @endif
 
-        <div class="button-wrap">
+        <div class="button-wrap @if(!empty($hideJoin)) opacity-0 px-0.5 @endif">
             <a @if(!empty($scrollToJoin))
                     href="#customize-anchor" class="join anchor-slide"
                 @elseif(!empty($joinUrl))

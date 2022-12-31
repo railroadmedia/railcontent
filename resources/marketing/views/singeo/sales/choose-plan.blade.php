@@ -33,6 +33,7 @@
 
 @section('global-body')
     @include("singeo.sales.partials._nav", [
+            "hideJoin" => true,
             "subscriptionVersion" => true,
             "fullSubscriptionVersion" => true,
         ])

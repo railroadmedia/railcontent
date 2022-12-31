@@ -114,6 +114,7 @@
             "subscriptionVersion" => true,
             "fullSubscriptionVersion" => true,
             "trialVersion" => true,
+            "joinUrl" => '/choose-plan',
         ])
     @endif
 

@@ -49,8 +49,8 @@
                 <a href="{{$plusAnnualLink}}" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">
                     <div class="bg-white px-3 py-6 md:py-9">
                         <h2 class="leading-none mb-6"><strong>Annual</strong></h2>
-                        <h4 class="inline-block leading-none"><strong>${{ number_format(Prices::$drumeoEdgeAnnual / 12) }}/month</strong></h4>
-                        <p class="text-sm mb-6"><em>Billed at ${{Prices::$drumeoEdgeAnnual}} per year.</em></p>
+                        <h4 class="inline-block leading-none"><strong>${{ number_format(Prices::$drumeoEdgeAnnualFull / 12) }}/month</strong></h4>
+                        <p class="text-sm mb-6"><em>Billed at ${{Prices::$drumeoEdgeAnnualFull}} per year.</em></p>
                         <div class="join blue smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Free for 7 days</div>
                     </div>
                     <div class="px-3 pt-5 md:pt-6 pb-9 md:pb-10 bg-[#e7edf4]">
