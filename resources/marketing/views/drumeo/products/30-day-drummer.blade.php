@@ -787,7 +787,7 @@
                                 {{--<i class="fas fa-check text-drumeo mr-1"></i> Lifetime Course Access<br>--}}
                                 {{--<i class="fas fa-check text-drumeo mr-1"></i> 90-Day Money Back Guarantee</p>--}}
                             {{--</a>--}}
-                            {{--<a href="/ecommerce/add-to-cart?products[DLM]=1,year,1&products[30-day-drummer]=1&products[practicepad]=1&products[Drumeo-VaterSticks]=2&products[BeginnerBook]=1&locked=true" class="px-5 sm:px-7 lg:px-9 py-7 sm:py-11 sm:-ml-5 z-10 relative rounded-xl bg-white shadow-lg w-full sm:w-1/2">--}}
+                            {{--<a href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-drummer]=1&products[practicepad]=1&products[Drumeo-VaterSticks]=2&products[BeginnerBook]=1&locked=true" class="px-5 sm:px-7 lg:px-9 py-7 sm:py-11 sm:-ml-5 z-10 relative rounded-xl bg-white shadow-lg w-full sm:w-1/2">--}}
                                 {{--<h3><strong>Unlimited Lessons</strong></h3>--}}
                                 {{--<p class="text-sm mt-2 mb-5">1 Year of Drumeo + 5 Bonuses worth $231.89.</p>--}}
                                 {{--<h2 class="inline-block"><strong class="text-4xl">$20</strong>/mo</h2> <p class="inline-block text-xs">Billed annually at $240/yr.</p><br>--}}

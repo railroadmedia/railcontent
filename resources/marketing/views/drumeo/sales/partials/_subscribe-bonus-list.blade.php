@@ -1,5 +1,5 @@
 @php
-    $annualLink = '/ecommerce/add-to-cart?products[DLM]=1,year,1&products[rudiments-poster]=1&products[quietpad]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[GHFAL-DIGI]=1&locked=true';
+    $annualLink = '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[rudiments-poster]=1&products[quietpad]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[GHFAL-DIGI]=1&locked=true';
 @endphp
 
 <section class="content-section text-center customize px-4 lg:px-6 relative z-50 overflow-hidden bg-cover bg-top lazyload" {{--data-bg="https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/september/bg.jpg"--}} {{--style="background: linear-gradient(to bottom, #01050f, #021022);"--}} style="padding:0;">
@@ -126,7 +126,7 @@
                 <a class="join blue bigger my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $annualLink }}" {{--data-open="orderModal"--}}>GET Started &raquo;</a>
                 {{-- <p class="leading-tight">Billed annually at <s class="opacity-60">${{ Prices::$drumeoEdgeAnnualFull }}</s>${{ Prices::$drumeoEdgeAnnual }} per year.</p> --}}
                 <br>
-                <a class="inline-block text-light-navy mt-2" href="/ecommerce/add-to-cart?products[DLM]=1,month,1&locked=true"><p><u><em>Or start a monthly membership for <br class="inline-block md:hidden">${{ Prices::$drumeoEdgeRegular }}/month. (no bonuses)</em></u></p></a>
+                <a class="inline-block text-light-navy mt-2" href="/ecommerce/add-to-cart?products[DLM-1-month]=1&locked=true"><p><u><em>Or start a monthly membership for <br class="inline-block md:hidden">${{ Prices::$drumeoEdgeRegular }}/month. (no bonuses)</em></u></p></a>
 
             </div>
         </div>
