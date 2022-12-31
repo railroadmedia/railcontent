@@ -2,7 +2,7 @@
 "weekly" => true
 ])
 @section('month-url')
-    href="/ecommerce/add-to-cart?products[DLM-Trial]=1,month,1&locked=true"
+    href="/ecommerce/add-to-cart?products[DLM-Trial-1-month]=1&locked=true"
 @endsection
 
 @section('annual-url')

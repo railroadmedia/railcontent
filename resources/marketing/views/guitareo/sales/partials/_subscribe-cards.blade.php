@@ -74,7 +74,7 @@
             {{--</div>--}}
         </div>
         {{--<br><br>--}}
-        {{--<a class="join methodcta" href="{{ URL::Route('shopping-cart.to-cart.api') }}?products[DLM]=1,year,1&products[Drumeo-Sticks]=1&locked=true">Click Here To Get Started &raquo;</a><br>--}}
+        {{--<a class="join methodcta" href="{{ URL::Route('shopping-cart.to-cart.api') }}?products[DLM-1-year]=1&products[Drumeo-Sticks]=1&locked=true">Click Here To Get Started &raquo;</a><br>--}}
         {{--<a class="methodcta monthly-alt" href="/ecommerce/add-to-cart?products[GUITAREO-1-MONTH-MEMBERSHIP]=1&redirect=/order"><p><u><em>Or click here to start a monthly membership for <br class="inline md:hidden">${{ GuitareoPrices::$guitareoMembershipMonthly }}/month.</em></u></p></a>--}}
     </div>
 </section>

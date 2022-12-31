@@ -112,7 +112,7 @@
                 a monthly membership for ${{ Prices::$drumeoEdgeFull }}/month. Cancel anytime during or after your trial.</p>
         </div>
 
-        <iframe class="trial" name="cartIframe" onload="checkUrl();" src="/ecommerce/add-to-cart?products[DLM-Trial]=1,month,1&locked=true" frameborder="none"></iframe>
+        <iframe class="trial" name="cartIframe" onload="checkUrl();" src="/ecommerce/add-to-cart?products[DLM-Trial-1-month]=1&locked=true" frameborder="none"></iframe>
     </div>
 
     <section class="about-instructor">

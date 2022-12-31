@@ -27,7 +27,7 @@
             <h2><strong>Improve your drumming <br class="inline lg:hidden">for just <span class="text-blue">${{ round((Prices::$drumeoEdgeAnnual / 52), 2) }}</span> per week.</strong></h2>
             <h5 class="my-2">(Billed annually at ${{ Prices::$drumeoEdgeAnnual }} per year. Cancel anytime.<br class="inline-block lg:hidden"> 90-Day Money Back Guarantee)</h5>
             <br>
-            <a class="join" href="/ecommerce/add-to-cart?products[DLM]=1,year,1&products[practicepad]=1&products[Drumeo-VaterSticks]=1&locked=true">Click Here To Get Started &raquo;</a>
+            <a class="join" href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[practicepad]=1&products[Drumeo-VaterSticks]=1&locked=true">Click Here To Get Started &raquo;</a>
 
 
             <div class="inline-block w-full px-3 md:px-4 my-5 text-light-navy">

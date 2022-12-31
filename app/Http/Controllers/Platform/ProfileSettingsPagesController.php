@@ -543,7 +543,7 @@ class ProfileSettingsPagesController extends BaseController
         // -------------------------------------------------------------------------------------------------------------
 
         $urlParamsByBrandForTrial = [
-            'drumeo' => 'products[DLM-Trial]=1,month,1&locked=true',
+            'drumeo' => 'products[DLM-Trial-1-month]=1&locked=true',
             'pianote' => 'products[PIANOTE-MEMBERSHIP-TRIAL]=1&redirect=%2Forder&locked=true',
             'guitareo' => 'products[GUITAREO-7-DAY-TRIAL-ONE-TIME]=1&redirect=%2Forder&locked=true',
             'singeo' => 'products[singeo-monthly-recurring-7-day-trial-membership]=1&redirect=%2Forder&locked=true',
