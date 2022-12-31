@@ -229,7 +229,7 @@
     @endphp
 
     @include('musora.sales.components.trailer-grid-section', [
-        'vid' => 'https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/video-reel.mp4',
+        'vid' => 'https://player.vimeo.com/progressive_redirect/playback/785314557/rendition/540p/file.mp4?loc=external&signature=e1db56d3f22044707be08bbb02d7327bdf4bee7a07bc705017de56ef45bf1ed4',
         'header' => 'Your singing goals start here.',
         'desc' => 'An organized curriculum to help you understand your voice, how it functions, how to strengthen it, and sing with confidence.',
     ])
@@ -553,7 +553,7 @@
     ])
     @include('_partials.components.video-modal',[
         'name' => 'trailer',
-        'video' => '772644658'
+        'video' => '785314379'
     ])
 
     @if(!empty($promoVersion))

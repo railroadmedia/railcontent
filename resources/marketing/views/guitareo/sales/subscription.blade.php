@@ -221,7 +221,7 @@
     @endphp
 
     @include('musora.sales.components.trailer-grid-section', [
-        'vid' => 'https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/video-reel.mp4',
+        'vid' => 'https://player.vimeo.com/progressive_redirect/playback/785314551/rendition/540p/file.mp4?loc=external&signature=49333e2b437f90a4af69eb5b19468b68f5185729516f735cd390a6ce8b673516',
         'header' => 'Your guitar goals<br class="inline sm:hidden"> start here.',
         'desc' => 'Learn to play guitar online with a fluff-free curriculum that’ll<br class="hidden sm:inline">  take your skills from zero to guitar hero – with step-by-step<br class="hidden sm:inline">  lessons designed around playing songs faster. ',
     ])
@@ -575,7 +575,7 @@
     ])
     @include('_partials.components.video-modal',[
         'name' => 'trailer',
-        'video' => '772644658'
+        'video' => '785314408'
     ])
 
     @if(!empty($promoVersion))
