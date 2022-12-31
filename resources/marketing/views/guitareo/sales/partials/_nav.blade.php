@@ -129,17 +129,17 @@
         </div>
         <div class="lesson-links dropdown">
             @include('guitareo.sales.partials._nav-link', [
-                "linkName" => "Drumeo",
+                "linkName" => "Drums",
                 "linkUrl" => "https://www.drumeo.com/",
                 "linkIcon" => ''
             ])
             @include('guitareo.sales.partials._nav-link', [
-                "linkName" => "Pianote",
+                "linkName" => "Piano",
                 "linkUrl" => "https://www.pianote.com/",
                 "linkIcon" => ''
             ])
             @include('guitareo.sales.partials._nav-link', [
-                "linkName" => "Singeo",
+                "linkName" => "Singing",
                 "linkUrl" => "https://www.singeo.com/",
                 "linkIcon" => ''
             ])

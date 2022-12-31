@@ -130,17 +130,17 @@
         </div>
         <div class="lesson-links dropdown">
             @include('pianote.sales.partials._nav-link', [
-                "linkName" => "Drumeo",
+                "linkName" => "Drums",
                 "linkUrl" => "https://www.drumeo.com/",
                 "linkIcon" => ''
             ])
             @include('pianote.sales.partials._nav-link', [
-                "linkName" => "Guitareo",
+                "linkName" => "Guitar",
                 "linkUrl" => "https://www.guitareo.com/",
                 "linkIcon" => ''
             ])
             @include('pianote.sales.partials._nav-link', [
-                "linkName" => "Singeo",
+                "linkName" => "Singing",
                 "linkUrl" => "https://www.singeo.com/",
                 "linkIcon" => ''
             ])
