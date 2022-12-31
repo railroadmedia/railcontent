@@ -23,7 +23,7 @@
         <div
             x-on:click.stop
             x-trap.noscroll.inert="{{ $name }}"
-            class="relative w-full overflow-y-visible"
+            class="relative overflow-y-visible"
         >
             <!-- Content -->
             {!! $content !!}
