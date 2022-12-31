@@ -27,7 +27,13 @@
             <div
                 class="overflow-hidden rounded-xl w-full relative bg-white" style="padding-bottom: 66vh;"
             >
-                <iframe class="z-10 absolute w-full h-full reset-on-close" x-bind:src="{{ $name }} && 'https://www.soundslice.com/scores/{{ $video }}/embed/?api=1&amp;scroll_type=2&amp;branding=0'" frameborder="0" allowfullscreen allow="autoplay" title="{{ $name }}"></iframe>
+                <iframe class="z-10 absolute w-full h-full reset-on-close" frameborder="0" allowfullscreen allow="autoplay" title="{{ $name }}"
+                    @if(!empty($slices))
+                        x-bind:src="{{ $name }} && 'https://www.soundslice.com/slices/{{ $video }}/embed/?api=1&amp;scroll_type=2&amp;branding=0'"
+                    @else
+                        x-bind:src="{{ $name }} && 'https://www.soundslice.com/scores/{{ $video }}/embed/?api=1&amp;scroll_type=2&amp;branding=0'"
+                    @endif
+                    ></iframe>
             </div>
         </div>
     </div>
