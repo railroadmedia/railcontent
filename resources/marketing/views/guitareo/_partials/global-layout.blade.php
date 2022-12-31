@@ -26,7 +26,7 @@
     {!! \App\Analytics\Tracker::headBottom() !!}
 </head>
 
-<body class="@yield('body-class')">
+<body class="@yield('body-class')" @yield('body-data')>
 
 {!! \App\Analytics\Tracker::bodyTop() !!}
 
