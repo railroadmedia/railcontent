@@ -114,6 +114,7 @@
             "subscriptionVersion" => true,
             "fullSubscriptionVersion" => true,
             "trialVersion" => true,
+            "joinUrl" => '/choose-plan',
         ])
     @endif
 
@@ -178,8 +179,8 @@
         @include('musora.sales.components.promo-section', [
         'promoLogo' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs.svg',
            'promoLogoM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs-m.png',
-        'desc' => 'Loop, learn, and remove the drums from 5,000+ drumming anthems. ',
-           'text' => 'The NEW Drumeo Songs is here.<br><br>You can now magically remove the drums from 5,000+ popular drumming anthems. And with note-for-note sheet music, tempo adjustment, and a looping feature you’ll have <strong>the ultimate tool for learning songs on the drums.</strong> <br><br>And to make your goals easier in 2023 – you’ll also get a FREE pair of Drumeo’s in-ear headphones when you join Drumeo. So you can enjoy unlimited drum lessons, note-for-note song breakdowns, AND protect your ears while playing your favorite songs.<br><br>Click below to grab the deal – or scroll down to try a demo of the NEW Drumeo Songs.',
+        'desc' => 'Vocal lessons, personal coaches, and 1000+ songs to reach your singing goals.',
+           'text' => 'If you’ve tried online singing lessons, you know the struggle: spending months, even years, going around in circles – never <em>actually</em> singing like you’ve wished.<br><br>With videos alone, you’re all alone.<br><br>And that’s why Singeo doubles down on the personal touch – with direct and unlimited access to vocal coaches to give you personal feedback, tailored for your voice.<br><br>You’ll boost your skills with step-by-step video lessons, warmups, artist courses, video reviews, live Q&A sessions with real vocal coaches, and 1000+ songs with playback tools to help you practice and hit every note! PLUS you’ll get unlimited access to our communities for guitar lessons, piano lessons, and drum lessons to reach all of your musical goals.<br><br>Just click the link to make 2023 the year you FINALLY sing like you’ve always wanted.',
            'img' => 'https://singeo.s3.amazonaws.com/sales/2023/jan-launch-collage2.png',
            'belowButton' => 'SAVE 17% + GET 3 BONUSES WORTH $58',
        ])

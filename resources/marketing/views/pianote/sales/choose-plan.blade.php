@@ -33,6 +33,7 @@
 
 @section('global-body')
     @include("pianote._partials._nav", [
+            "hideJoin" => true,
             "subscriptionVersion" => true,
             "fullSubscriptionVersion" => true,
         ])

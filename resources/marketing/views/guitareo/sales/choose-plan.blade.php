@@ -33,6 +33,7 @@
 
 @section('global-body')
     @include("guitareo.sales.partials._nav", [
+            "hideJoin" => true,
             "subscriptionVersion" => true,
             "fullSubscriptionVersion" => true,
         ])

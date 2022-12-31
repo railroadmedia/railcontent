@@ -31,6 +31,7 @@
 
 @section('global-body')
     @include("drumeo.sales.partials._nav", [
+            "hideJoin" => true,
             "subscriptionVersion" => true,
             "fullSubscriptionVersion" => true,
         ])

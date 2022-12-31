@@ -114,6 +114,7 @@
             "subscriptionVersion" => true,
             "fullSubscriptionVersion" => true,
             "trialVersion" => true,
+            "joinUrl" => '/choose-plan',
         ])
     @endif
 
@@ -603,7 +604,8 @@
 
     @include('_partials.components.soundslice-modal',[
         'name' => 'soundslice',
-        'video' => '162928'
+        'video' => '1D6Vc',
+        'slices' => true,
     ])
     @include('_partials.components.video-modal',[
         'name' => 'trailer',
