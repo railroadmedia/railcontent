@@ -70,7 +70,6 @@
                 <a rel="noopener" href="{{ get_legacy_brand_base_url("drumeo") }}">Drumeo</a><br>
                 <a rel="noopener" href="{{ get_legacy_brand_base_url("pianote") }}">Pianote</a><br>
                 <a rel="noopener" href="{{ get_legacy_brand_base_url("singeo") }}">Singeo</a><br>
-                <a rel="noopener" href="{{ get_musora_brand_base_url() }}">Recordeo</a></p>
         </div>
     </div>
     @endif

@@ -138,17 +138,17 @@
         </div>
         <div class="lesson-links dropdown">
             @include('singeo.sales.partials._nav-link', [
-                "linkName" => "Drumeo",
+                "linkName" => "Drums",
                 "linkUrl" => "https://www.drumeo.com/",
                 "linkIcon" => ''
             ])
             @include('singeo.sales.partials._nav-link', [
-                "linkName" => "Pianote",
+                "linkName" => "Piano",
                 "linkUrl" => "https://www.pianote.com/",
                 "linkIcon" => ''
             ])
             @include('singeo.sales.partials._nav-link', [
-                "linkName" => "Guitareo",
+                "linkName" => "Guitar",
                 "linkUrl" => "https://www.guitareo.com/",
                 "linkIcon" => ''
             ])

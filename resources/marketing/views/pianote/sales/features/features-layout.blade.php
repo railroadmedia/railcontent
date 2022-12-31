@@ -15,7 +15,8 @@
     @include("pianote._partials._nav", [
         "subscriptionVersion" => true,
         "fullSubscriptionVersion" => true,
-        "scrollToJoin" => true,
+        "trialVersion" => true,
+        "joinUrl" => '/choose-plan',
     ])
 @endsection
 
