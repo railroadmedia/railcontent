@@ -32,8 +32,8 @@ class GuitareoPrices
     public static $guitareoMembership6monthFull = 127;
     public static $guitareoMembership6month = 89;
 
-    public static $guitareoMembershipMonthlyFull = 29;
-    public static $guitareoMembershipMonthly = 29;
+    public static $guitareoMembershipMonthlyFull = 30;
+    public static $guitareoMembershipMonthly = 30;
 
     public static $survivalGuideFull = 19;
     public static $survivalGuide = 5;

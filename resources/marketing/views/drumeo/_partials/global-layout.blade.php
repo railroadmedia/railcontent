@@ -27,10 +27,10 @@
     <!-- End Inspectlet Embed Code -->
 
     {!! \App\Analytics\Tracker::headBottom() !!}
-
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 
-<body class="@yield('body-class')" @yield('body-data')>
+<body @hasSection('body-class') class="@yield('body-class')" @endif @yield('body-data')>
 {!! \App\Analytics\Tracker::bodyTop() !!}
 
 @yield('global-body')

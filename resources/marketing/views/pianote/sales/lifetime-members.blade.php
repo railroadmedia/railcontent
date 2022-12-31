@@ -91,7 +91,7 @@
 
 @section('global-body')
     @include('pianote._partials._nav', [
-    "joinVersion" => true,
+    "subscriptionVersion" => true,
     ])
     {{--<style>--}}
     {{--.promo-banner-shim{display:block;width:100%;height:40px}--}}

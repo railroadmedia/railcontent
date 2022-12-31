@@ -1,4 +1,4 @@
-@extends('drumeo._partials.layout-template')
+@extends('drumeo._partials.global-layout')
 
 @section('global-head')
     <title>30 Day Drummer with Domino Santantonio</title>
@@ -8,7 +8,7 @@
     <meta property="og:description" content="">
 
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
-    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/sales/2022/og-image.jpg" style="display: none;">
+    <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/sales/2023/share-image-drumeo.jpg" style="display: none;">
 
     @include('drumeo._partials._fonts')
 

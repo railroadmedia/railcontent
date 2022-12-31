@@ -13,8 +13,8 @@ class SingeoPrices
     public static $singeoMembership6MonthFull = 120;
     public static $singeoMembership6Month = 120;
 
-    public static $singeoMembershipMonthlyFull = 29;
-    public static $singeoMembershipMonthly = 29;
+    public static $singeoMembershipMonthlyFull = 30;
+    public static $singeoMembershipMonthly = 30;
 
     public static $singingStarterKitFull = 19;
     public static $singingStarterKit = 5;

@@ -35,7 +35,7 @@
     <meta property="og:title" content="Pianote Shop">
     <meta name="description" content="Get Lessons, T-Shirts, & Much More!">
     <meta property="og:description" content="Get Lessons, T-Shirts, & Much More!">
-    <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/og-image.jpg">
+    <meta property="og:image" content="https://pianote.s3.amazonaws.com/sales/2023/share-image-pianote.jpg">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 
     <link href="https://fonts.googleapis.com/css?family=Oswald:500" rel="stylesheet">
@@ -374,7 +374,6 @@
 
     @include('pianote._partials._footer')
 
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.3/moment-timezone-with-data.min.js"></script>

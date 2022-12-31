@@ -9,7 +9,7 @@
     @hasSection('share-image')
         @yield('share-image')
     @else
-        <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/og-image.jpg" style="display: none;">
+        <meta property="og:image" content="https://pianote.s3.amazonaws.com/sales/2023/share-image-pianote.jpg" style="display: none;">
     @endif
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
@@ -24,7 +24,7 @@
 @section('global-body')
     @if(empty($rolandVersion))
         @include('pianote._partials._nav', [
-        "joinVersion" => true,
+        "subscriptionVersion" => true,
         "scrollToJoin" => true,
         "homepageVersion" => true,
         ])
@@ -52,7 +52,7 @@
                         @hasSection('start-button')
                             href="@yield('start-button')" class="join blue smaller w-1/2 md:w-1/3 lg:w-1/4"
                         @else
-                            href="#orderNow" class="join blue smaller anchor-slide w-1/2 md:w-1/3 lg:w-1/4 anchor-slide"
+                            href="#customize-anchor" class="join blue smaller anchor-slide w-1/2 md:w-1/3 lg:w-1/4 anchor-slide"
                         @endif
                     >
                         @if(!empty($trialVersion) && $trialVersion)
@@ -116,7 +116,7 @@
                 @hasSection('start-button')
                     href="@yield('start-button')" class="join smaller blue mt-12 mb-2 lg:w-1/3"
                 @else
-                    href="#orderNow" class="join smaller blue anchor-slide mt-9 md:mt-12 mb-2 lg:w-1/3"
+                    href="#customize-anchor" class="join smaller blue anchor-slide mt-9 md:mt-12 mb-2 lg:w-1/3"
                 @endif
             >
                 @if(!empty($trialVersion) && $trialVersion)
@@ -388,7 +388,7 @@
                 @hasSection('start-button')
                     href="@yield('start-button')" class="join smaller blue md:mt-6 mb-2 md:w-1/3"
                 @else
-                    href="#orderNow" class="join smaller blue anchor-slide md:mt-6 mb-2 md:w-1/3"
+                    href="#customize-anchor" class="join smaller blue anchor-slide md:mt-6 mb-2 md:w-1/3"
                 @endif
             >
                 @if(!empty($trialVersion) && $trialVersion)
@@ -770,7 +770,7 @@
                         {{--@hasSection('start-button')--}}
                             {{--href="@yield('start-button')" class="join blue smaller"--}}
                         {{--@else--}}
-                            {{--href="#orderNow" class="join blue smaller anchor-slide"--}}
+                            {{--href="#customize-anchor" class="join blue smaller anchor-slide"--}}
                         {{--@endif--}}
                     {{-->--}}
                         {{--@if(!empty($trialVersion) && $trialVersion)--}}
@@ -947,7 +947,7 @@
                             @hasSection('start-button')
                                 href="@yield('start-button')" class="join blue smaller"
                             @else
-                                href="#orderNow" class="join blue smaller anchor-slide"
+                                href="#customize-anchor" class="join blue smaller anchor-slide"
                             @endif
                         >
                             @if(!empty($trialVersion) && $trialVersion)
@@ -1071,7 +1071,7 @@
                         @hasSection('start-button')
                             href="@yield('start-button')" class="join blue smaller"
                         @else
-                            href="#orderNow" class="join blue smaller anchor-slide"
+                            href="#customize-anchor" class="join blue smaller anchor-slide"
                         @endif
                     >
                         @if(!empty($trialVersion) && $trialVersion)
@@ -1570,7 +1570,7 @@
     </section>
 
 
-    <div id="orderNow" class="anchor"></div>
+    <div id="customize-anchor" class="anchor"></div>
     @yield('final')
     <div class="unstick-trigger block"></div>
 

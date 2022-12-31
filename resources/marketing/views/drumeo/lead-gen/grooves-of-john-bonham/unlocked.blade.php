@@ -2,7 +2,7 @@
   require_once(resource_path('marketing/views/drumeo/lead-gen/grooves-of-john-bonham/lessons.php'))
 @endphp
 
-@extends('drumeo._partials.layout-template')
+@extends('drumeo._partials.global-layout')
 
 @section('global-head')
     <meta name="robots" content="noindex">

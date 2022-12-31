@@ -318,7 +318,7 @@
       ];
 @endphp
 
-@extends('drumeo._partials.layout-template')
+@extends('drumeo._partials.global-layout')
 
 @section('global-head')
     <title>The World’s Largest Online Drum Lessons Community. | Drumeo</title>
@@ -629,7 +629,7 @@
 
 @section('global-body')
     @include("drumeo.sales.partials._nav", [
-        "edgeVersion" => true,
+        "subscriptionVersion" => true,
     ])
 
     <header>

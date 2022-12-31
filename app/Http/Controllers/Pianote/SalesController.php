@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
 use Railroad\Ecommerce\Services\AccessCodeService;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use function App\Http\Controllers\Drumeo\array_entity_column;
 
 class SalesController extends BaseController
 {
@@ -43,6 +44,21 @@ class SalesController extends BaseController
     public function privacy()
     {
         return view('pianote.sales.pages.privacy');
+    }
+
+    public function songs()
+    {
+        return view('pianote.sales.features.songs', [ 'theme' => 'pianote', 'page' => 'songs']);
+    }
+
+    public function method()
+    {
+        return view('pianote.sales.features.method', [ 'theme' => 'pianote', 'page' => 'method']);
+    }
+
+    public function coaches()
+    {
+        return view('pianote.sales.features.coaches', [ 'theme' => 'pianote', 'page' => 'coaches']);
     }
 
     public function chooseyourtrial()
@@ -139,10 +155,17 @@ class SalesController extends BaseController
         return view('pianote.lead-gen.welcome-party');
     }
 
-
     public function home()
     {
-        return view('pianote.sales.standard', [ 'theme' => 'pianote' ]);
+        return view('pianote.sales.subscription', ['theme' => 'pianote']);
+    }
+    public function promo()
+    {
+        return view('pianote.sales.subscription', ['theme' => 'pianote', 'promoVersion' => 'true']);
+    }
+    public function choosePlan()
+    {
+        return view('pianote.sales.choose-plan', ['theme' => 'pianote']);
     }
 
     public function jesusMolina()

@@ -10,8 +10,8 @@ class PianotePrices
     public static $pianoteMembershipAnnualFull = 240;
     public static $pianoteMembershipAnnualRegular = 240;
 
-    public static $pianoteMembershipMonthlyFull = 29;
-    public static $pianoteMembershipMonthlyRegular = 29;
+    public static $pianoteMembershipMonthlyFull = 30;
+    public static $pianoteMembershipMonthlyRegular = 30;
 
     public static $pianoteMembershipSixMonthFull = 120;
     public static $pianoteMembershipSixMonthRegular = 120;

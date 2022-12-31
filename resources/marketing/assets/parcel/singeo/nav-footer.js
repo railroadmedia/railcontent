@@ -3,13 +3,28 @@ $(document).ready(function (){
     var menuOverlay = $('.menu-overlay');
     var sideBar = $('.nav-side-bar');
     var nav = $('.menu-toggle');
-    var navHomepage = $('.menu-toggle.homepage');
 
 
     nav.click(function () {
         sideBar.toggleClass('active');
         menuOverlay.toggleClass('active');
         $(this).toggleClass('active');
+    });
+
+    $(".edge-wrap .features").click(function (e) {
+        e.stopPropagation();
+        $(".instruments-dd").addClass("hidden");
+        $(".features-dd").toggleClass("hidden");
+    });
+    $(".edge-wrap .instruments").click(function (e) {
+        e.stopPropagation();
+        $(".features-dd").addClass("hidden");
+        $(".instruments-dd").toggleClass("hidden");
+    });
+
+    $(window).click(function() {
+        $(".instruments-dd").addClass("hidden");
+        $(".features-dd").addClass("hidden");
     });
 
     menuOverlay.click(function (e) {
@@ -28,18 +43,6 @@ $(document).ready(function (){
         arrowIcon.toggleClass("active");
     });
 
-    //hides menu button on scroll down
-    var prev = 0;
-    var $window = $(window);
-    $window.on('scroll', function () {
-        var scrollTop = $window.scrollTop();
-        if(scrollTop > 0){
-            navHomepage.addClass('scroll-hide');
-        }
-        else {
-            navHomepage.removeClass('scroll-hide');
-        }
-    });
 
     // cookie bar
     var popUp = false;
