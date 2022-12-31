@@ -1,32 +1,3 @@
-@php
-    $bundles = [
-        [
-            'slug' => '/shop/sound-better-bundle',
-            'badgeText' => 'FREE GUITAR GEAR',
-            'img' => 'https://guitareo.s3.amazonaws.com/sales/promos/black-friday/sound-better-thumb-no-play.jpg',
-            'title' => 'Guitareo Membership + 6 Bonuses',
-            'desc' => 'Annual Guitareo Membership <br class="inline md:hidden lg:inline">+ The Guitarist’s Survival Kit + 5 Training Packs',
-            'price' => 1164,
-            'discountedPrice' => GuitareoPrices::$guitareoMembershipAnnual,
-            'priceColor' => 'linear-gradient(180deg, #00C9AC 0%, #16414A 100%)',
-            'buttonColor' => 'linear-gradient(180deg, #00C9AC 0%, #16414A 100%)',
-            'visible' => 1,
-        ],
-        [
-            'slug' => '/shop/build-a-song',
-            'badgeText' => '87% OFF',
-            'img' => 'https://guitareo.s3.amazonaws.com/sales/promos/black-friday/build-a-song-fb-share-image.jpg',
-            'title' => '5 Discounted Courses',
-            'desc' => 'Pay once and get lifetime <br class="hidden-sm hidden-md">access to 5 courses.',
-            'price' => 735,
-            'discountedPrice' => 97,
-            'priceColor' => 'linear-gradient(180deg, #fe7c02 0%, #feb157 100%)',
-            'buttonColor' => 'linear-gradient(180deg, #fe7c02 0%, #feb157 100%)',
-            'visible' => 1,
-        ],
-    ];
-@endphp
-
 @extends('guitareo._partials.global-layout')
 
 @section('meta')
@@ -171,34 +142,10 @@
     <header class="drum-shop-header" style="background-image:url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://guitareo.s3.amazonaws.com/sales/promos/black-friday/shop-bg.jpg);">
         <div class="container mx-auto relative z-10">
             <div class="px-2 md:px-3">
-                <img class="h-14 sm:h-16 lg:h-20" src="https://cdn.musora.com/image/fetch/w_450,q_auto:best/https://guitareo.s3.amazonaws.com/sales/promos/november/holiday-guitar.png"><br>
-                <h1 class="my-2"><strong>GUITAREO SHOP</strong></h1>
-                <h5 class="leading-tight">Save up to <span class="">91%</span> on guitar  <br class="inline md:hidden"> lessons & accessories</h5>
-{{--                                <div class="rounded-xl px-6 py-2 inline-flex flex-wrap mx-auto mt-5 justify-center items-center" style="background-color:#181515;">--}}
-{{--                                    <p class="leading-none m-0"><strong>DEALS END IN:</strong></p>--}}
-{{--                                    <div class="h-12 mx-5 bg-promo" style="width:2px;"></div>--}}
-{{--                                    <div class="tzcd-big">--}}
-{{--                                        <div class="inline-block">--}}
-{{--                                            <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>--}}
-{{--                                            <p class="leading-none uppercase font-extrabold text-xs text-promo">days</p>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="inline-block mx-2">--}}
-{{--                                            <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>--}}
-{{--                                            <p class="leading-none uppercase font-extrabold text-xs text-promo">hrs</p>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="inline-block mr-2">--}}
-{{--                                            <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>--}}
-{{--                                            <p class="leading-none uppercase font-extrabold text-xs text-promo">mins</p>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="inline-block">--}}
-{{--                                            <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>--}}
-{{--                                            <p class="leading-none uppercase font-extrabold text-xs text-promo">secs</p>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
+                <img class="logo" src="https://guitareo.s3.amazonaws.com/sales/guitareo-logo-green.png">
+                <h1><strong>SHOP</strong></h1>
             </div>
         </div>
-        <div class="absolute inset-0" style="background:linear-gradient(to bottom, rgba(255, 0, 21, 0.25), transparent);"></div>
     </header>
 
     @if(Session::has('addedProducts'))
@@ -258,7 +205,7 @@
     @endif
 
     <div class="white-box">
-        @include('_partials.layout.holiday.bundle-cards')
+{{--        @include('_partials.layout.holiday.bundle-cards')--}}
         <section class="grid-view category-section" data-category="lessons">
             <ul class="container mx-auto fixed-cards text-center lg:text-left">
                 @foreach($items as $item){
