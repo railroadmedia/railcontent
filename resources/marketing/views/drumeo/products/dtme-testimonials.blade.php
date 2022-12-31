@@ -454,7 +454,7 @@
             </h1>
             <h2 class="columns">(${{ Prices::$dtmeRegular }} one-time payment. Or choose a<br class="hide-for-medium"> 2-pay or 5-pay plan on the next page.)
             </h2>
-            <div class="columns"><a href="/laravel/public/shopping-cart/api/query?products[drum-technique-made-easy-pack]=1" class="join">Get Started &raquo;</a></div>
+            <div class="columns"><a href="/ecommerce/add-to-cart?products[drum-technique-made-easy-pack]=1" class="join">Get Started &raquo;</a></div>
             {{--<div class="columns"><a class="join sold-out">Closed</a></div>--}}
             {{--<h2 class="columns yellow">Registration Extended Until <strong>May 6th At Midnight</strong>.</h2>--}}
             <div class="columns cards">

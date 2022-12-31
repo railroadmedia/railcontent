@@ -59,7 +59,7 @@
                         ${{ Prices::$beginnerBookRegular }} USD
                     @endif
                 </p>
-                <a href="/laravel/public/shopping-cart/api/query?products[BeginnerBook]=1" class="join">Click Here To Order</a>
+                <a href="/ecommerce/add-to-cart?products[BeginnerBook]=1" class="join">Click Here To Order</a>
                 <a target="_blank" href="https://www.amazon.com/dp/B07G8N348K" class="join orange">Get Your Copy On <img class="amazon inline-block" src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/amazon-logo.png"></a>
             </div>
         </div>
@@ -441,7 +441,7 @@
                     ${{ Prices::$beginnerBookRegular }} USD
                 @endif
                 </p>
-                <a href="/laravel/public/shopping-cart/api/query?products[BeginnerBook]=1" class="join">Click Here To Order</a>
+                <a href="/ecommerce/add-to-cart?products[BeginnerBook]=1" class="join">Click Here To Order</a>
                 <a target="_blank" href="https://www.amazon.com/dp/B07G8N348K" class="join orange">Get Your Copy On <img class="amazon inline-block" src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/amazon-logo.png"></a>
             </div>
         </div>

@@ -1,5 +1,5 @@
 @php
-    $annualLink = '/laravel/public/shopping-cart/api/query?products[DLM]=1,year,1&products[quietpad]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[GHFAL-DIGI]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[learn-songs-faster-pack]=1&locked=true';
+    $annualLink = '/ecommerce/add-to-cart?products[DLM]=1,year,1&products[quietpad]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[GHFAL-DIGI]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[learn-songs-faster-pack]=1&locked=true';
 @endphp
 
 <div style="background:linear-gradient(to bottom, #02010f, #010522);">
@@ -141,7 +141,7 @@
             <a class="join promo bigger my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $annualLink }}" {{--data-open="orderModal"--}}>GET Started &raquo;</a>
             {{-- <p class="leading-tight">Billed annually at <s class="opacity-60">${{ Prices::$drumeoEdgeAnnualFull }}</s>${{ Prices::$drumeoEdgeAnnual }} per year.</p> --}}
             <br>
-            <a class="inline-block text-light-navy mt-2" href="/laravel/public/shopping-cart/api/query?products[DLM]=1,month,1&locked=true"><p><u><em>Or start a monthly membership for <br class="inline-block md:hidden">${{ Prices::$drumeoEdgeRegular }}/month. (no bonuses)</em></u></p></a>
+            <a class="inline-block text-light-navy mt-2" href="/ecommerce/add-to-cart?products[DLM]=1,month,1&locked=true"><p><u><em>Or start a monthly membership for <br class="inline-block md:hidden">${{ Prices::$drumeoEdgeRegular }}/month. (no bonuses)</em></u></p></a>
 
         </div>
     </div>

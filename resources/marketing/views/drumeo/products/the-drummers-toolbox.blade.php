@@ -58,7 +58,7 @@
             @else
                 <p><strong>ONLY ${{ Prices::$toolboxBookRegular }}</strong></p>
             @endif
-            <a class="join rounded" href="/laravel/public/shopping-cart/api/query?products[the-drummers-toolbox-book]=1">GET STARTED &raquo;</a>
+            <a class="join rounded" href="/ecommerce/add-to-cart?products[the-drummers-toolbox-book]=1">GET STARTED &raquo;</a>
 
             {{--<a class="join blue outline rounded" href="/">GET FREE WITH <img src="https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png"> &raquo;</a>--}}
                 <p>OR BUY FROM YOUR FAVORITE ONLINE STORES:<br class="hide-for-medium"> <a class="text-blue" target="_blank" href="https://www.amazon.com/dp/1999151933">AMAZON</a> &nbsp;|&nbsp; <a class="text-blue" target="_blank" href="https://www.amazon.com/dp/B07ZTTHK82/">KINDLE</a> &nbsp;|&nbsp; <a class="text-blue" target="_blank" href="https://books.apple.com/ca/book/id1487097588">APPLE</a></p>
@@ -494,7 +494,7 @@
                     @else
                         <p><strong>ONLY ${{ Prices::$toolboxBookRegular }}.</strong></p>
                     @endif
-                    <a class="join rounded" href="/laravel/public/shopping-cart/api/query?products[the-drummers-toolbox-book]=1">CLICK HERE TO ORDER &raquo;</a>
+                    <a class="join rounded" href="/ecommerce/add-to-cart?products[the-drummers-toolbox-book]=1">CLICK HERE TO ORDER &raquo;</a>
                     {{--<a class="join white outline rounded" href="/">GET FREE WITH <img src="https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png"> &raquo;</a>--}}
                     <div class="button-centerer"><p style="max-width:100%">OR BUY FROM YOUR FAVORITE ONLINE STORES:<br class="hide-for-medium"> <a class="or-drumeo" target="_blank" href="https://www.amazon.com/dp/1999151933">AMAZON</a> &nbsp;|&nbsp; <a class="or-drumeo" target="_blank" href="https://www.amazon.com/dp/B07ZTTHK82/">KINDLE</a> &nbsp;|&nbsp; <a class="or-drumeo" target="_blank" href="https://books.apple.com/ca/book/id1487097588">APPLE</a></p></div>
                 </div>

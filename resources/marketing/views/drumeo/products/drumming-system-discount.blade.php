@@ -51,7 +51,7 @@
                 </div>
                 <p>Turn your drumming goals into reality with <br class="inline sm:hidden">
                     video lessons, practice plans, & play-alongs.</p>
-                <a href="/laravel/public/shopping-cart/api/query?products[DSYS2-DIGI]=1" class="join blue">Get Started &raquo;</a>
+                <a href="/ecommerce/add-to-cart?products[DSYS2-DIGI]=1" class="join blue">Get Started &raquo;</a>
 
 
                 <p class="price-info">
@@ -218,7 +218,7 @@
                 "lessonDuration" => "3 HR 10",
                 ])
             </div>
-            <a class="join blue" href="/laravel/public/shopping-cart/api/query?products[DSYS2-DIGI]=1">Get Everything <span class="show-for-medium">Above </span>For Just ${{ Prices::$dsOnlineRegular }} &raquo;</a>
+            <a class="join blue" href="/ecommerce/add-to-cart?products[DSYS2-DIGI]=1">Get Everything <span class="show-for-medium">Above </span>For Just ${{ Prices::$dsOnlineRegular }} &raquo;</a>
             <p class="price-info">{{--SAVE {{ round(100 - (100 * (Prices::$dsOnlineRegular / Prices::$dsOnlineFull))) }}% +--}} 90-DAY MONEY BACK GUARANTEE</p>
         </div>
     </section>
@@ -355,7 +355,7 @@
             </div>
             <h2 class="float-left w-full px-3 sm:px-4">Get the ultimate encyclopedia of drum lessons <br class="inline sm:hidden">
                                 for a one-time payment of just ${{ Prices::$dsOnlineRegular }}.</h2>
-            <div class="float-left w-full px-3 sm:px-4"><a href="/laravel/public/shopping-cart/api/query?products[DSYS2-DIGI]=1" class="join blue">Get Started &raquo;</a></div>
+            <div class="float-left w-full px-3 sm:px-4"><a href="/ecommerce/add-to-cart?products[DSYS2-DIGI]=1" class="join blue">Get Started &raquo;</a></div>
             {{--<a class="join sold-out">Sold Out</a>--}}
 
             <h2 class="float-left w-full px-3 sm:px-4 highlighted">

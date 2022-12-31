@@ -46,7 +46,7 @@
                         <option class="bg-white text-black" value="PASS-12" data-price="240" data-product-json="{&quot;PASS-12&quot;: 1}">1 Year</option>
                     </select>
 
-                    <a class="online-atc merch vue-add-to-cart selected-pack" href="#" data-base-url="/laravel/public/shopping-cart/api/query?go-back-to-shop=true">
+                    <a class="online-atc merch vue-add-to-cart selected-pack" href="#" data-base-url="/ecommerce/add-to-cart?go-back-to-shop=true">
                         <button class="join border-none">
                             <i class="fas fa-cart-plus text-2xl mr-1" aria-hidden="true"></i> Add To Cart
                         </button>

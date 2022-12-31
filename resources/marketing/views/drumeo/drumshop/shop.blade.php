@@ -201,28 +201,28 @@
                 <img class="h-14 sm:h-16 lg:h-20" src="https://cdn.musora.com/image/fetch/w_450,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/christmas/holiday-drums.png"><br>
                 <h1 class="my-2"><strong>DRUM SHOP</strong></h1>
                 <h5 class="leading-tight">Save up to <span class="">81%</span> on lessons,<br class="inline md:hidden"> accessories, and merch.</h5>
-                 <div class="rounded-xl px-6 py-2 inline-flex flex-wrap mx-auto mt-5 justify-center items-center" style="background-color:#181515;">
-                    <p class="leading-none m-0"><strong>DEALS END IN:</strong></p>
-                    <div class="h-12 mx-5 bg-promo" style="width:2px;"></div>
-                    <div class="tzcd-big">
-                        <div class="inline-block">
-                            <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>
-                            <p class="leading-none uppercase font-extrabold text-xs text-promo">days</p>
-                        </div>
-                        <div class="inline-block mx-2">
-                            <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>
-                            <p class="leading-none uppercase font-extrabold text-xs text-promo">hrs</p>
-                        </div>
-                        <div class="inline-block mr-2">
-                            <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>
-                            <p class="leading-none uppercase font-extrabold text-xs text-promo">mins</p>
-                        </div>
-                        <div class="inline-block">
-                            <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>
-                            <p class="leading-none uppercase font-extrabold text-xs text-promo">secs</p>
-                        </div>
-                    </div>
-                </div>
+{{--                 <div class="rounded-xl px-6 py-2 inline-flex flex-wrap mx-auto mt-5 justify-center items-center" style="background-color:#181515;">--}}
+{{--                    <p class="leading-none m-0"><strong>DEALS END IN:</strong></p>--}}
+{{--                    <div class="h-12 mx-5 bg-promo" style="width:2px;"></div>--}}
+{{--                    <div class="tzcd-big">--}}
+{{--                        <div class="inline-block">--}}
+{{--                            <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>--}}
+{{--                            <p class="leading-none uppercase font-extrabold text-xs text-promo">days</p>--}}
+{{--                        </div>--}}
+{{--                        <div class="inline-block mx-2">--}}
+{{--                            <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>--}}
+{{--                            <p class="leading-none uppercase font-extrabold text-xs text-promo">hrs</p>--}}
+{{--                        </div>--}}
+{{--                        <div class="inline-block mr-2">--}}
+{{--                            <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>--}}
+{{--                            <p class="leading-none uppercase font-extrabold text-xs text-promo">mins</p>--}}
+{{--                        </div>--}}
+{{--                        <div class="inline-block">--}}
+{{--                            <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>--}}
+{{--                            <p class="leading-none uppercase font-extrabold text-xs text-promo">secs</p>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
             </div>
         </div>
     </header>
@@ -525,7 +525,7 @@
             });
 
             //customize section pack picker
-            var originalLink = '/laravel/public/shopping-cart/api/query?go-back-to-shop=true';
+            var originalLink = '/ecommerce/add-to-cart?go-back-to-shop=true';
 
             $('select').prop('selectedIndex', 0);
             $(".pack-pick").change(function () {

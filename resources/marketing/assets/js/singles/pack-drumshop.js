@@ -39,7 +39,7 @@ $(document).ready(function () {
     }
 
     //customize section pack picker
-    var originalLink = '/laravel/public/shopping-cart/api/query?go-back-to-shop=true';
+    var originalLink = '/ecommerce/add-to-cart?go-back-to-shop=true';
 
     $('select').prop('selectedIndex', 0);
     $('.pack-pick').change(function () {

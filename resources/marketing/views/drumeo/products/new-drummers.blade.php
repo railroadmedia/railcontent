@@ -74,7 +74,7 @@
             <h4 class="text-yellow-400 mb-3 md:mb-5"><strong>ONLY
                     @if(Prices::$ndshFull > Prices::$ndshRegular) <s class="opacity-60">${{ Prices::$ndshFull }}</s> @endif
                     ${{ Prices::$ndshRegular }}</strong></h4>
-            <a class="join ndsh" href="/laravel/public/shopping-cart/api/query?products[new-drummers-start-here]=1">Start Drumming &raquo;</a>
+            <a class="join ndsh" href="/ecommerce/add-to-cart?products[new-drummers-start-here]=1">Start Drumming &raquo;</a>
         </div>
     </header>
 
@@ -584,7 +584,7 @@
                     @if(Prices::$ndshFull > Prices::$ndshRegular) <s class="opacity-60">${{ Prices::$ndshFull }}</s> @endif
                     ${{ Prices::$ndshRegular }}</strong></h4>
 
-            <a href="/laravel/public/shopping-cart/api/query?products[new-drummers-start-here]=1" class="join ndsh w-2/3 md:-mt-4">START DRUMMING &raquo;</a>
+            <a href="/ecommerce/add-to-cart?products[new-drummers-start-here]=1" class="join ndsh w-2/3 md:-mt-4">START DRUMMING &raquo;</a>
 
             <div class="inline-block w-full px-3 md:px-4 mt-5 md:mt-8 text-light-navy text-4xl md:text-5xl">
                 <i class="fab mx-1 fa-cc-visa"></i>

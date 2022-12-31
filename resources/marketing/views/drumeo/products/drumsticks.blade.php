@@ -58,7 +58,7 @@
             </div>
             <img data-open="previewModal" class="play-button autoplay-video" src="https://dpwjbsxqtam5n.cloudfront.net/sales/play-button.png">
             <br>
-            <a class="join blue" href="/laravel/public/shopping-cart/api/query?products[Drumeo-VaterSticks]=1">Grab A Pair &raquo;</a>
+            <a class="join blue" href="/ecommerce/add-to-cart?products[Drumeo-VaterSticks]=1">Grab A Pair &raquo;</a>
             {{--<a class="join sold-out">Sold Out</a>--}}
             <p class="dense">
                 @if(Prices::$sticksFull > Prices::$sticksRegular)
@@ -75,7 +75,7 @@
                 <iframe class="reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/436834726?autoplay=1"
                         frameborder="0" allowfullscreen allow="autoplay"></iframe>
             </div>
-            <a class="join blue" href="/laravel/public/shopping-cart/api/query?products[Drumeo-VaterSticks]=1">Grab A Pair &raquo;</a>
+            <a class="join blue" href="/ecommerce/add-to-cart?products[Drumeo-VaterSticks]=1">Grab A Pair &raquo;</a>
         </div>
     </header>
 
@@ -268,7 +268,7 @@
             <img class="bubbles" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/vater-sticks/bubbles-vater.png">
             <img class="logo" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/vater-sticks/drumeo-drumsticks-logo.png">
             <br>
-            <a class="join blue" href="/laravel/public/shopping-cart/api/query?products[Drumeo-VaterSticks]=1">Grab A Pair &raquo;</a>
+            <a class="join blue" href="/ecommerce/add-to-cart?products[Drumeo-VaterSticks]=1">Grab A Pair &raquo;</a>
             {{--<a class="join sold-out">Sold Out</a>--}}
             <p class="dense">
                 @if(Prices::$sticksFull > Prices::$sticksRegular)

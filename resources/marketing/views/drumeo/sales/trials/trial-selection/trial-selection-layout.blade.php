@@ -63,7 +63,7 @@
                             @hasSection('month-url')
                                 @yield('month-url')
                             @else
-                                href="/laravel/public/shopping-cart/api/query?products[DLM-Trial-30-Day]=1&promo-code=melodics-special-offer&locked=true"
+                                href="/ecommerce/add-to-cart?products[DLM-Trial-30-Day]=1&promo-code=melodics-special-offer&locked=true"
                             @endif
                     >
                         <h2><strong>MONTHLY</strong></h2>
@@ -92,7 +92,7 @@
                             @hasSection('annual-url')
                                 @yield('annual-url')
                             @else
-                                href="/laravel/public/shopping-cart/api/query?products[DLM-Trial-Annual-30-Day]=1&locked=true"
+                                href="/ecommerce/add-to-cart?products[DLM-Trial-Annual-30-Day]=1&locked=true"
                             @endif
                     >
                         <h2><strong>ANNUAL</strong></h2>
