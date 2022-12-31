@@ -4,13 +4,17 @@
         <img class="my-5 h-64 inline sm:hidden transition-opacity opacity-0"
             loading="lazy"
             onload="this.classList.remove('opacity-0')"
-            src="https://cdn.musora.com/image/fetch/w_690,q_auto:best/{{ $img }}">
+            src="https://cdn.musora.com/image/fetch/w_690,q_auto:best/{{ $img }}"
+             alt="learn playing image"
+        >
         <div class="text-left flex flex-wrap sm:flex-nowrap justify-center mb-24 sm:mb-44 lg:mb-72">
             <p class="leading-normal max-w-xl pr-7 mx-0">{!! $desc !!}</p>
             <img class="h-72 lg:h-96 hidden sm:inline transition-opacity opacity-0"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
-                src="https://cdn.musora.com/image/fetch/w_690,q_auto:best/{{ $img }}">
+                src="https://cdn.musora.com/image/fetch/w_690,q_auto:best/{{ $img }}"
+                alt="learn playing image"
+            >
         </div>
     </div>
 </section>

@@ -5,7 +5,9 @@
                 <img class="max-w-xl sm:max-w-2xl lg:max-w-4xl transition-opacity opacity-0"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
-                    src="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/{!! $image !!}">
+                    src="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/{!! $image !!}"
+                     alt="{{$theme}} collage image"
+                >
             </div>
             <div class="text-center sm:text-left w-full sm:w-1/2 sm:pl-5">
                 <h3 class="leading-normal"><strong>{!! $header !!}</strong></h3>

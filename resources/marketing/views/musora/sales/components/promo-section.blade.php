@@ -8,12 +8,16 @@
             <img class="h-56 mb-5 inline sm:hidden transition-opacity opacity-0"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
-                src="https://cdn.musora.com/image/fetch/w_520,q_auto:best/{{ $img }}">
+                src="https://cdn.musora.com/image/fetch/w_520,q_auto:best/{{ $img }}"
+                alt="promo image"
+            >
             <p class="leading-normal max-w-xl pr-7 mx-0">{!! $text !!}</p>
             <img class="h-72 lg:h-96 hidden sm:inline transition-opacity opacity-0"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
-                src="https://cdn.musora.com/image/fetch/w_690,q_auto:best/{{ $img }}">
+                src="https://cdn.musora.com/image/fetch/w_690,q_auto:best/{{ $img }}"
+                alt="promo image"
+            >
         </div>
 
         <a href="#customize-anchor" class="w-full sm:w-64 join promo smaller w-full max-w-sm @if(!empty($promoVersion)) anchor-slide @endif">GET STARTED &raquo;</a>
