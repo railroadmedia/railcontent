@@ -587,7 +587,7 @@
         </div>
     </section>
 
-    <div id="orderNow" class="anchor"></div>
+    <div id="customize-anchor" class="anchor"></div>
     <section class="px-4 py-10 md:py-20" style="background: #EFF7FF;">
         <div class="max-w-sm md:max-w-2xl lg:max-w-3xl mx-auto text-center">
             <img class="h-20 sm:h-24 mb-8 lazyload" data-src="https://pianote.s3.amazonaws.com/products/the-power-of-chords/Logo_center.png" alt="centerd logo">

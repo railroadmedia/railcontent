@@ -1,4 +1,4 @@
-@extends('drumeo._partials.layout-template')
+@extends('drumeo._partials.global-layout')
 
 @section('global-head')
     <title>Drumeo | Reach your drumming goals.</title>
@@ -7,7 +7,7 @@
     <meta name="description" content="Learn the drums faster with organized video lessons, legendary teachers, and better practice tools. 90-Day Guarantee.">
     <meta property="og:description" content="Learn the drums faster with organized video lessons, legendary teachers, and better practice tools. 90-Day Guarantee.">
 
-    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/sales/2022/og-image.jpg" style="display: none;">
+    <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/sales/2023/share-image-drumeo.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/">
 
     @include('drumeo._partials._fonts')
@@ -88,7 +88,7 @@
 
 @section('global-body')
     @include("drumeo.sales.partials._nav", [
-        "edgeVersion" => true,
+        "subscriptionVersion" => true,
     ])
 
     <section class="text-white relative z-10 overflow-hidden px-4 md:px-8 py-8 md:py-40 lg:py-52 bg-cover bg-center lazyload" style="background-color:#163146;" data-bg="https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://drumeo-assets.s3.amazonaws.com/sales/about/Header_BG.jpg">

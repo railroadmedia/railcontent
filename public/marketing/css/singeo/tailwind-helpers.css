@@ -1,11 +1,11 @@
 .bg-promo {
-    background-color:#df0032 !important;
+    background-color:#ffac00 !important;
 }
 .text-promo {
-    color:#df0032 !important;
+    color:#ffac00 !important;
 }
 .border-promo {
-    border-color:#df0032 !important;
+    border-color:#ffac00 !important;
 }
 
 .clearfix::after {

@@ -4,7 +4,7 @@
     <title>Privacy Policy | Pianote</title>
     <meta property="og:title" content="Privacy Policy">
     <meta name="description" content="Below is a list of the standard policies we use on this website.">
-    <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/og-image.jpg" style="display: none;">
+    <meta property="og:image" content="https://pianote.s3.amazonaws.com/sales/2023/share-image-pianote.jpg" style="display: none;">
     <meta property="og:url" content="https://www.pianote.com/privacy/">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
@@ -20,7 +20,7 @@
 
 @section('global-body')
     @include('pianote._partials._nav', [
-        "joinVersion" => true
+        "subscriptionVersion" => true
     ])
     <div class="hero-header px-4 py-12 md:py-20 lg:py-32 bg-black bg-center bg-cover" style="background-image:url(https://d2vyvo0tyx8ig5.cloudfront.net/sales/customize-bg.jpg);">
         <div class="container mx-auto">

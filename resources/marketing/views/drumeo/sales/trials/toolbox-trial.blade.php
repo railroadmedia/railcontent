@@ -110,7 +110,7 @@
             <img class="h-7 md:h-9 lg:h-14 mb-4" src="https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png">
             <br>
             <h2><strong>Start Your Free 30 Day <br class="hide-for-medium">Trial To Drumeo</strong></h2>
-            <h4 class="my-3 max-w-2xl" style="line-height: 1.4em;"><em>Your Drumeo free trial lasts for 30 days. You'll get access to everything in our members area for a full-week, and after your trial ends you'll simply continue at the monthly rate of $29/month, which is less than $1 per day.
+            <h4 class="my-3 max-w-2xl" style="line-height: 1.4em;"><em>Your Drumeo free trial lasts for 30 days. You'll get access to everything in our members area for a full-week, and after your trial ends you'll simply continue at the monthly rate of $30/month, which is less than $1 per day.
                     <br><br>
                     And don't worry, you can cancel anytime before you are billed by <a class="text-white" href="{{ get_musora_brand_base_url() }}/contact">contact us</a> - or you can keep using Drumeo risk-free for another three months, thanks to our 90-day money back guarantee!</em></h4>
 

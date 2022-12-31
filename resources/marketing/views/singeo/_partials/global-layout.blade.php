@@ -24,10 +24,13 @@
 
     {!! \App\Analytics\Tracker::headBottom() !!}
 
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
     @yield('global-head')
+
 </head>
 
-<body class="@yield('body-class')">
+<body class="@yield('body-class')" @yield('body-data')>
 
     {!! \App\Analytics\Tracker::bodyTop() !!}
 

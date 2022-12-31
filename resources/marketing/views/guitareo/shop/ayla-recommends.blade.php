@@ -9,7 +9,7 @@
     <meta name="description" content="You can peruse Ayla’s top gear recommendations with confidence, knowing they’ve passed the test of millions of YouTube views -- and gotten the Guitareo stamp of approval!">
     <meta property="og:description" content="You can peruse Ayla’s top gear recommendations with confidence, knowing they’ve passed the test of millions of YouTube views -- and gotten the Guitareo stamp of approval!">
 
-    <meta property="og:image" content="https://d122ay5chh2hr5.cloudfront.net/sales/2022/og-image.jpg">
+    <meta property="og:image" content="https://guitareo.s3.amazonaws.com/sales/2023/share-image-guitareo.jpg">
     <meta property="og:url" content="https://www.guitareo.com/{{ Request::path() }}">
 @stop()
 
