@@ -1,32 +1,3 @@
-@php
-    $bundles = [
-        [
-            'slug' => '/drumshop/bundle-ultimate-lessons',
-            'badgeText' => 'FREE QUIETPAD & DRUMSTICKS',
-            'img' => 'https://drumeo-assets.s3.amazonaws.com/promos/november/ultimate-lessons-shop-2.jpg',
-            'title' => 'Drumeo Membership<br> + 10 Bonuses',
-            'desc' => 'Drumeo Annual Membership<br class="inline md:hidden lg:inline"> + Practice Pad + Sticks + 8 Training Packs',
-            'price' => 1468.94,
-            'discountedPrice' => Prices::$drumeoEdgeAnnual,
-            'priceColor' => 'linear-gradient(to bottom, #04afec, #213472)',
-            'buttonColor' => 'linear-gradient(to bottom, #04afec, #213472)',
-            'visible' => 1,
-        ],
-        [
-            'slug' => '/drumshop/bundle-perfect-gift',
-            'badgeText' => 'FREE P4 & DRUMSTICKS',
-            'img' => 'https://drumeo-assets.s3.amazonaws.com/promos/november/perfect-gift-fb-share-image.jpg',
-            'title' => 'Drumeo Access Card<br> + 2 Bonuses',
-            'desc' => 'Drumeo Access Card<br class="inline md:hidden lg:inline"> + Practice Pad + Sticks',
-            'price' => 331.95,
-            'discountedPrice' => Prices::$drumeoEdgeAnnual,
-            'priceColor' => 'linear-gradient(to bottom, #01fdc0, #289077)',
-            'buttonColor' => 'linear-gradient(to bottom, #01fdc0, #289077)',
-            'visible' => 1,
-        ],
-    ];
-@endphp
-
 @extends('drumeo._partials.global-layout')
 
 @section('global-head')
@@ -198,31 +169,9 @@
     <header class="drum-shop-header" style="background-image:url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/header-background.jpg);">
         <div class="container mx-auto relative z-10">
             <div class="px-2 md:px-3">
-                <img class="h-14 sm:h-16 lg:h-20" src="https://cdn.musora.com/image/fetch/w_450,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/christmas/holiday-drums.png"><br>
-                <h1 class="my-2"><strong>DRUM SHOP</strong></h1>
-                <h5 class="leading-tight">Save up to <span class="">81%</span> on lessons,<br class="inline md:hidden"> accessories, and merch.</h5>
-{{--                 <div class="rounded-xl px-6 py-2 inline-flex flex-wrap mx-auto mt-5 justify-center items-center" style="background-color:#181515;">--}}
-{{--                    <p class="leading-none m-0"><strong>DEALS END IN:</strong></p>--}}
-{{--                    <div class="h-12 mx-5 bg-promo" style="width:2px;"></div>--}}
-{{--                    <div class="tzcd-big">--}}
-{{--                        <div class="inline-block">--}}
-{{--                            <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>--}}
-{{--                            <p class="leading-none uppercase font-extrabold text-xs text-promo">days</p>--}}
-{{--                        </div>--}}
-{{--                        <div class="inline-block mx-2">--}}
-{{--                            <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>--}}
-{{--                            <p class="leading-none uppercase font-extrabold text-xs text-promo">hrs</p>--}}
-{{--                        </div>--}}
-{{--                        <div class="inline-block mr-2">--}}
-{{--                            <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>--}}
-{{--                            <p class="leading-none uppercase font-extrabold text-xs text-promo">mins</p>--}}
-{{--                        </div>--}}
-{{--                        <div class="inline-block">--}}
-{{--                            <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>--}}
-{{--                            <p class="leading-none uppercase font-extrabold text-xs text-promo">secs</p>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
+                                <img class="h-6 md:h-9" src="https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png">
+                                <h1><strong>DRUM SHOP</strong></h1>
+                                <p>GET LESSONS, MERCH, GEAR, & MUCH MORE</p>
             </div>
         </div>
     </header>
@@ -287,29 +236,29 @@
 
 
     <div class="white-box">
-        @include('_partials.layout.holiday.bundle-cards')
+{{--        @include('_partials.layout.holiday.bundle-cards')--}}
 
-        <section class="bundles">
-            <div class="container mx-auto">
-                <div class="float-left w-full px-2 md:px-3 card-wrap">
-                    <div class="px-2 sm:px-0 max-w-xs sm:max-w-full mx-auto">
-                        <a href="/drumshop/bundle-practice-anywhere/" class="flex flex-row-reverse text-white rounded-xl mx-auto mb-5 overflow-hidden relative w-full sm:text-left px-5 lg:px-12 pt-40 pb-5 sm:py-7 lg:py-8">
-                            <div class="relative z-10 inline-block w-full sm:w-auto text-center mx-0">
-                                <img class="h-14 lg:h-28" src="https://cdn.musora.com/image/fetch/w_700,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/november/practice-anywhere-logo-wide-white.png"><br>
-                                <p class="leading-tight my-3">P4 Practice Pad + Drumsticks<br class="inline lg:hidden"> + Rudiment Poster</p>
-                                <h4 class="inline-block leading-none"><strong>
-                                        <s class="opacity-60">$98.95</s>&nbsp; $79</strong></h4><br>
-                                <div class="join white smaller mt-3 w-full">See The Deal &raquo;</div><br>
-                            </div>
-                            <p class="absolute z-20 top-0 left-0 text-white rounded-br-xl bg-promo uppercase py-1.5 px-2.5 leading-none text-xs font-roboto"><i class="fas fa-star"></i> <strong>SAVE 20%</strong></p>
-                            <div class="hidden sm:block absolute inset-0 z-0 bg-cover bg-center" style="background-color:#0d1d3f;background-image:url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/november/practice-anywhere-shop.jpg);"></div>
-                            <div class="block sm:hidden absolute inset-0 z-0 bg-cover bg-right" style="background-color:#0d1d3f;background-image:url(https://cdn.musora.com/image/fetch/w_800,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/november/practice-anywhere-m.jpg);"></div>
-                        </a>
-                    </div>
-                </div>
+{{--        <section class="bundles">--}}
+{{--            <div class="container mx-auto">--}}
+{{--                <div class="float-left w-full px-2 md:px-3 card-wrap">--}}
+{{--                    <div class="px-2 sm:px-0 max-w-xs sm:max-w-full mx-auto">--}}
+{{--                        <a href="/drumshop/bundle-practice-anywhere/" class="flex flex-row-reverse text-white rounded-xl mx-auto mb-5 overflow-hidden relative w-full sm:text-left px-5 lg:px-12 pt-40 pb-5 sm:py-7 lg:py-8">--}}
+{{--                            <div class="relative z-10 inline-block w-full sm:w-auto text-center mx-0">--}}
+{{--                                <img class="h-14 lg:h-28" src="https://cdn.musora.com/image/fetch/w_700,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/november/practice-anywhere-logo-wide-white.png"><br>--}}
+{{--                                <p class="leading-tight my-3">P4 Practice Pad + Drumsticks<br class="inline lg:hidden"> + Rudiment Poster</p>--}}
+{{--                                <h4 class="inline-block leading-none"><strong>--}}
+{{--                                        <s class="opacity-60">$98.95</s>&nbsp; $79</strong></h4><br>--}}
+{{--                                <div class="join white smaller mt-3 w-full">See The Deal &raquo;</div><br>--}}
+{{--                            </div>--}}
+{{--                            <p class="absolute z-20 top-0 left-0 text-white rounded-br-xl bg-promo uppercase py-1.5 px-2.5 leading-none text-xs font-roboto"><i class="fas fa-star"></i> <strong>SAVE 20%</strong></p>--}}
+{{--                            <div class="hidden sm:block absolute inset-0 z-0 bg-cover bg-center" style="background-color:#0d1d3f;background-image:url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/november/practice-anywhere-shop.jpg);"></div>--}}
+{{--                            <div class="block sm:hidden absolute inset-0 z-0 bg-cover bg-right" style="background-color:#0d1d3f;background-image:url(https://cdn.musora.com/image/fetch/w_800,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/november/practice-anywhere-m.jpg);"></div>--}}
+{{--                        </a>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
 
-            </div>
-        </section>
+{{--            </div>--}}
+{{--        </section>--}}
 
         {{--  LESSONS  --}}
 
