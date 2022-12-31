@@ -28,7 +28,7 @@ class EventDataSynchronizerUserProvider implements UserProviderInterface
         bool $isLifetimeMember,
         string $accessLevel,
         bool $isPackOwner,
-        string $membershipLevel
+        ?string $membershipLevel
     )
     : bool {
         $user =

@@ -18,16 +18,16 @@ interface UserProviderInterface
      * @param bool $isLifetimeMember
      * @param string $accessLevel
      * @param bool $isPackOwner
-     * @param string $membershipLevel
+     * @param string|null $membershipLevel
      * @return bool
      */
     public function saveMembershipData(
         int $userId,
-        Carbon $membershipExpirationDate,
+        ?Carbon $membershipExpirationDate,
         bool $isLifetimeMember,
         string $accessLevel,
         bool $isPackOwner,
-        string $membershipLevel
+        ?string $membershipLevel
     ): bool;
 
     /**
