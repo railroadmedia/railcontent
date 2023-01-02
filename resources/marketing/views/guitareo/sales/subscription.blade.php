@@ -161,7 +161,7 @@
         'desc' => 'Learn the guitar faster with step-by-step lessons, a thousand songs, and unlimited personal support. ',
         'thumb' => 'https://guitareo.s3.amazonaws.com/sales/2023/header-thumb.jpg',
         'promoThumb' => 'https://guitareo.s3.amazonaws.com/sales/2023/jan-thumb.png',
-        'promoThumbM' => 'https://guitareo.s3.amazonaws.com/sales/2023/jan-thumb-m.png',
+        'promoThumbM' => 'https://guitareo.s3.amazonaws.com/sales/2023/jan-thumb-m.jpg',
         'pointOne' => 'Improve Your Skills',
         'pointTwo' => 'World-Class Teachers',
         'pointThree' => 'Play More<br class="inline lg:hidden"> Songs',
