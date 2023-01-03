@@ -32,7 +32,7 @@
 @section('scripts')
     <script src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/1.9.3/countUp.min.js"></script>
-    <script src="{{ asset('/marketing/parcel/guitareo/nav-footer.js') }}"></script>
+    <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $(document).foundation();

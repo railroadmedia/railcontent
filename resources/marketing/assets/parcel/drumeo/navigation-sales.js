@@ -68,6 +68,15 @@ $(document).ready(function (){
         setPopUpCookie();
     });
 
+    $('.anchor-slide').bind('click', function (event) {
+        event.preventDefault();
+        var anchor = $(this).attr('href').replace('/', '');
+
+        $('html, body').animate({
+            scrollTop: $(anchor).offset().top
+        }, 1000);
+    });
+
     $(".infusion-form").submit(function(event) {
         if(event.originalEvent != null) {
             var formId = $(this).find("input[name='inf_form_xid']").val();

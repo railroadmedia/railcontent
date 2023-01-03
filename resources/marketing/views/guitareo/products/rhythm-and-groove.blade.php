@@ -307,7 +307,7 @@
 @section('scripts')
     @parent
     <script src="{{ asset('/marketing/js/modal.js') }}"></script>
-    <script src="{{ asset('marketing/parcel/guitareo/nav-footer.js') }}"></script>
+    <script src="{{ asset('marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $(document).foundation();

@@ -546,7 +546,7 @@
 @stop
 
 @section('scripts')
-    <script src="{{ asset('/marketing/js/sliding-anchor.js') }}"></script>
+
     <script>
         $(document).ready(function () {
             $(document).foundation();
