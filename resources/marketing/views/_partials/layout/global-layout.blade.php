@@ -19,7 +19,7 @@
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
 
-        @yield('html-head')
+        @yield('head-includes')
 
         {!! \App\Analytics\Tracker::trackPageView() !!}
 
