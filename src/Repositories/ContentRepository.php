@@ -60,6 +60,7 @@ class ContentRepository extends RepositoryBase
 
     public static $getFutureContentOnly = false;
     public static $getFollowedContentOnly = false;
+    public static $getFutureScheduledContentOnly = false;
 
     private $page;
     private $limit;
@@ -1193,7 +1194,8 @@ class ContentRepository extends RepositoryBase
         array $slugHierarchy,
         array $requiredParentIds,
         $getFutureContentOnly = false,
-        $getFollowedContentOnly = false
+        $getFollowedContentOnly = false,
+        $getFutureScheduledContentOnly = false
     ) {
         $this->page = $page;
         $this->limit = $limit;
@@ -1205,6 +1207,7 @@ class ContentRepository extends RepositoryBase
 
         self::$getFutureContentOnly = $getFutureContentOnly;
         self::$getFollowedContentOnly = $getFollowedContentOnly;
+        self::$getFutureScheduledContentOnly = $getFutureScheduledContentOnly;
 
         // reset all the filters for the new query
         $this->requiredFields = [];

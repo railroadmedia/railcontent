@@ -9,6 +9,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
+use Railroad\Railcontent\Services\ContentService;
 
 class ContentQueryBuilder extends QueryBuilder
 {
@@ -190,6 +191,18 @@ class ContentQueryBuilder extends QueryBuilder
     {
         if (is_array(ContentRepository::$availableContentStatues)) {
             $this->whereIn(ConfigService::$tableContent.'.status', ContentRepository::$availableContentStatues);
+        }
+
+        if (ContentRepository::$getFutureScheduledContentOnly) {
+//            We make sure not to show the 'scheduled' content that is already in the past
+//              SQL condition:  "where ((status in (published)) or (status = 'scheduled' and published_on > $now))"
+            $this->where(function (Builder $builder) {
+                return $builder->whereIn('status', array_diff(ContentRepository::$availableContentStatues, [ContentService::STATUS_SCHEDULED]))
+                    ->orWhere(function (Builder $builder) {
+                        return $builder->where('status', 'scheduled')
+                            ->where('published_on', '>', Carbon::now()->toDateTimeString());
+                    });
+            });
         }
 
         return $this;
