@@ -50,5 +50,6 @@ class PrimaryURLSlugToContentTypeMap
         'rudiments' => 'rudiment',
         'routines' => 'routine',
         'song-tutorials' => 'song-tutorial',
+        'sing-alongs' => 'sing-along',
     ];
 }

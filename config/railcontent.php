@@ -65,6 +65,7 @@ return [
         'podcast',
         'song-tutorial',
         'song-tutorial-children',
+        'sing-along',
     ],
     'comment_assignation_owner_ids' => [
         102905,
@@ -112,6 +113,7 @@ return [
         'student-review',
         'song-tutorial',
         'song-tutorial-children',
+        'sing-along',
     ],
     'validation' => [
         'drumeo' => [
@@ -196,6 +198,7 @@ return [
             'unit',
             'song-tutorial',
             'song-tutorial-children',
+            'sing-along',
         ],
         'completed' => [
             'course',
@@ -222,6 +225,7 @@ return [
             'unit',
             'song-tutorial',
             'song-tutorial-children',
+            'sing-along',
         ],
     ],
 
@@ -948,6 +952,17 @@ return [
                 "description" => "Warm up your voice for any occasion with our bite-sized routines - ranging from 5 to 20 minutes - perfect for busy days or when you need motivation.",
                 "allowableFilters" => [],
             ],
+            'sing-alongs' => [
+                "name" => "Sing-Alongs",
+                'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/pianote/songs.jpg',
+                "allowableFilters" => ['difficulty', 'style', 'artist', 'progress'],
+                'sortBy' => '-published_on',
+                'shortname' => 'sing alongs',
+                "icon" => "icon-songs",
+                "description" => "",
+                'amountOfFutureLessonsToShow' => 3,
+                'showFutureLessonAtTopOrBottom' => 'bottom',
+            ],
         ],
     ],
 
@@ -1030,6 +1045,7 @@ return [
         'podcasts',
         'song-tutorial',
         'song-tutorial-children',
+        'sing-along',
     ],
     'liveContentTypes' => [
         'student-focus',
@@ -1120,7 +1136,8 @@ return [
         'podcasts',
         'learning-path-lesson',
         'song-tutorial',
-        'song-tutorial-children'
+        'song-tutorial-children',
+        'sing-along',
     ],
     'dashboardInProgressContentTypes' => [
         'course',
@@ -1162,6 +1179,7 @@ return [
         'song-part',
         'play-along-part',
         'song-tutorial-children',
+        'sing-along',
     ],
     'appUserListContentTypes' => [
         'course',
@@ -1235,7 +1253,8 @@ return [
         'exploring-beats', /* 2018*/
         'sonor-drums', /* 2018*/
         'song-tutorial',
-        'song-tutorial-children'
+        'song-tutorial-children',
+        'sing-along',
     ],
 
     'contentTypesWithChildren' => [
@@ -1451,6 +1470,7 @@ return [
             'pack' => 'bundles',
             'pack-bundle' => 'lessons',
             'semester-pack' => 'lessons',
+            'sing-along' => 'lessons',
         ],
 
     ],
