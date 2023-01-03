@@ -8,10 +8,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class SalesController extends BaseController
 {
-    public function chooseyourtrial()
-    {
-        return view('guitareo.sales.trials.trial-selection.week');
-    }
 
     public function chooseyourtrialmonth()
     {

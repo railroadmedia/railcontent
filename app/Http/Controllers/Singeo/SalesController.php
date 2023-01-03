@@ -39,10 +39,6 @@ class SalesController extends BaseController
     {
         return view('singeo.sales.trials.30-trial');
     }
-    public function chooseYourTrial()
-    {
-        return view('singeo.sales.trials.trial-selection.week');
-    }
     public function chooseYourTrialMonth()
     {
         return view('singeo.sales.trials.trial-selection.month');

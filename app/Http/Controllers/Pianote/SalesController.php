@@ -61,11 +61,6 @@ class SalesController extends BaseController
         return view('pianote.sales.features.coaches', [ 'theme' => 'pianote', 'page' => 'coaches']);
     }
 
-    public function chooseyourtrial()
-    {
-        return view('pianote.sales.trials.trial-selection.week');
-    }
-
     public function chooseyourtrialmonth()
     {
         return view('pianote.sales.trials.trial-selection.month');
