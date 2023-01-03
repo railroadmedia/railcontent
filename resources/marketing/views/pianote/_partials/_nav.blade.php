@@ -81,12 +81,12 @@
 
 <div class="nav-side-bar">
     <div class="bottom-section">
-        @include('pianote.sales.partials._nav-link', [
+        @include('drumeo.sales.partials._nav-link', [
             "linkName" => "Member Login",
             "linkIcon" => "fas fa-sign-in",
             "linkUrl" => get_musora_brand_base_url() . '/login',
         ])
-        @include('pianote.sales.partials._nav-link', [
+        @include('drumeo.sales.partials._nav-link', [
             "linkName" => "Home",
             "linkIcon" => "fas fa-home",
             "linkUrl" => "/",
@@ -102,17 +102,17 @@
             </div>
         </div>
         <div class="lesson-links dropdown">
-            @include('pianote.sales.partials._nav-link', [
+            @include('drumeo.sales.partials._nav-link', [
                 "linkName" => "Method",
                 "linkUrl" => "/method/",
                 "linkIcon" => ''
             ])
-            @include('pianote.sales.partials._nav-link', [
+            @include('drumeo.sales.partials._nav-link', [
                 "linkName" => "Songs",
                 "linkUrl" => "/songs/",
                 "linkIcon" => ''
             ])
-            @include('pianote.sales.partials._nav-link', [
+            @include('drumeo.sales.partials._nav-link', [
                 "linkName" => "Coaches",
                 "linkUrl" => "/coaches/",
                 "linkIcon" => ''
@@ -129,33 +129,33 @@
             </div>
         </div>
         <div class="lesson-links dropdown">
-            @include('pianote.sales.partials._nav-link', [
+            @include('drumeo.sales.partials._nav-link', [
                 "linkName" => "Drums",
                 "linkUrl" => "https://www.drumeo.com/",
                 "linkIcon" => ''
             ])
-            @include('pianote.sales.partials._nav-link', [
+            @include('drumeo.sales.partials._nav-link', [
                 "linkName" => "Guitar",
                 "linkUrl" => "https://www.guitareo.com/",
                 "linkIcon" => ''
             ])
-            @include('pianote.sales.partials._nav-link', [
+            @include('drumeo.sales.partials._nav-link', [
                 "linkName" => "Singing",
                 "linkUrl" => "https://www.singeo.com/",
                 "linkIcon" => ''
             ])
         </div>
-        @include('pianote.sales.partials._nav-link', [
+        @include('drumeo.sales.partials._nav-link', [
             "linkName" => "Pricing",
             "linkIcon" => "fas fa-money-bill-wave",
             "linkUrl" => "/choose-plan",
         ])
-        @include('pianote.sales.partials._nav-link', [
+        @include('drumeo.sales.partials._nav-link', [
             "linkName" => "Shop",
             "linkIcon" => "fas fa-tag",
             "linkUrl" => "/shop",
         ])
-        @include('pianote.sales.partials._nav-link', [
+        @include('drumeo.sales.partials._nav-link', [
             "linkName" => "Blog",
             "linkIcon" => "fas fa-comment-pen",
             "linkUrl" => "/blog",
@@ -172,74 +172,74 @@
             </div>
         </div>
         <div class="lesson-links dropdown">
-            @include('pianote.sales.partials._nav-link', [
+            @include('drumeo.sales.partials._nav-link', [
                 "linkName" => "Chord Hacks",
                 "linkUrl" => "/chord-hacks",
                 "linkIcon" => ''
             ])
-            @include('pianote.sales.partials._nav-link', [
+            @include('drumeo.sales.partials._nav-link', [
                 "linkName" => "Getting Started On The Piano",
                 "linkUrl" => "/getting-started",
                 "linkIcon" => ''
             ])
-            @include('pianote.sales.partials._nav-link', [
+            @include('drumeo.sales.partials._nav-link', [
                 "linkName" => "Learn 3 Songs On Piano",
                 "linkUrl" => "/learn-songs",
                 "linkIcon" => ''
             ])
-            @include('pianote.sales.partials._nav-link', [
+            @include('drumeo.sales.partials._nav-link', [
                 "linkName" => "5 Days To Playing Piano",
                 "linkUrl" => "/piano-in-5-days",
                 "linkIcon" => ''
             ])
-            @include('pianote.sales.partials._nav-link', [
+            @include('drumeo.sales.partials._nav-link', [
                 "linkName" => "Classical Piano Quick Start",
                 "linkUrl" => "/classical-piano",
                 "linkIcon" => ''
             ])
-            @include('pianote.sales.partials._nav-link', [
+            @include('drumeo.sales.partials._nav-link', [
                 "linkName" => "Sight Reading Made Simple",
                 "linkUrl" => "/sight-reading-made-simple",
                 "linkIcon" => "",
             ])
         </div>
-        @include('pianote.sales.partials._nav-link', [
+        @include('drumeo.sales.partials._nav-link', [
             "linkName" => "About Us",
             "linkIcon" => "fas fa-users",
             "linkUrl" => "/about",
         ])
         <span class="shim"></span>
-        @include('pianote.sales.partials._secondary-nav-link', [
+        @include('drumeo.sales.partials._secondary-nav-link', [
             "linkName" => "<i class='fas fa-fw fa-mobile-alt'></i>&nbsp; Mobile App ",
             "linkUrl" => "/app",
             "externalLink" => false
         ])
-        @include('pianote.sales.partials._secondary-nav-link', [
+        @include('drumeo.sales.partials._secondary-nav-link', [
             "linkName" => "<i class='fab fa-fw fa-youtube'></i>&nbsp; YouTube",
             "linkUrl" => "https://youtube.com/user/pianolessonscom",
             "externalLink" => true
         ])
-        @include('pianote.sales.partials._secondary-nav-link', [
+        @include('drumeo.sales.partials._secondary-nav-link', [
             "linkName" => "<i class='fab fa-fw fa-facebook'></i>&nbsp; Facebook",
             "linkUrl" => "https://facebook.com/pianoteofficial",
             "externalLink" => true
         ])
-        @include('pianote.sales.partials._secondary-nav-link', [
+        @include('drumeo.sales.partials._secondary-nav-link', [
             "linkName" => "<i class='fab fa-fw fa-instagram'></i>&nbsp; Instagram",
             "linkUrl" => "https://instagram.com/pianoteofficial",
             "externalLink" => true
         ])
-        @include('pianote.sales.partials._secondary-nav-link', [
+        @include('drumeo.sales.partials._secondary-nav-link', [
             "linkName" => "<i class='fab fa-fw fa-tiktok'></i>&nbsp; TikTok",
             "linkUrl" => "https://www.tiktok.com/@pianoteofficial",
             "externalLink" => true
         ])
-        @include('pianote.sales.partials._secondary-nav-link', [
+        @include('drumeo.sales.partials._secondary-nav-link', [
             "linkName" => "<i class='fas fa-fw fa-question'></i>&nbsp; FAQs",
             "linkUrl" => "https://help.pianote.com/",
             "externalLink" => false
         ])
-        @include('pianote.sales.partials._secondary-nav-link', [
+        @include('drumeo.sales.partials._secondary-nav-link', [
             "linkName" => "<i class='fas fa-fw fa-phone'></i>&nbsp; Contact",
             "linkUrl" => get_musora_brand_base_url().'/contact',
             "externalLink" => false

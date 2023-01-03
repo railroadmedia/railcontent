@@ -12,7 +12,7 @@ Route::domain('{pianoteDomain}')
     Route::get('/shop/improvisation-with-jesus-molina', [SalesController::class, 'jesusMolina'] );
     Route::get('/student-only', [SalesController::class, 'studentOnly'] );
     Route::get('/roland', [SalesController::class, 'roland'] );
-    Route::get('/trial', [SalesController::class, 'trial'] );
+    Route::get('/trial', [SalesController::class, 'home'] );
     Route::get('/trial-month', [SalesController::class, 'trialMonth'] );
     Route::get('/shop/500-songs', [SalesController::class, 'songs500'] );
     Route::get('/the-power-of-chords', [SalesController::class, 'PowerOfChords'] );
@@ -29,7 +29,7 @@ Route::domain('{pianoteDomain}')
     Route::get('/songs', [SalesController::class, 'songs'] );
     Route::get('/method', [SalesController::class, 'method'] );
     Route::get('/coaches', [SalesController::class, 'coaches'] );
-    Route::get('/choose-your-trial', [SalesController::class, 'chooseyourtrial'] );
+    Route::get('/choose-your-trial', [SalesController::class, 'choosePlan'] );
     Route::get('/choose-your-trial-month', [SalesController::class, 'chooseyourtrialmonth'] );
     Route::get('/a/davidbennett', [SalesController::class, 'davidbennett'] );
     Route::group(['prefix' => 'affiliate' ],
