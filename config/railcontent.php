@@ -63,6 +63,8 @@ return [
         'boot-camps',
         'podcasts',
         'podcast',
+        'song-tutorial',
+        'song-tutorial-children',
     ],
     'comment_assignation_owner_ids' => [
         102905,
