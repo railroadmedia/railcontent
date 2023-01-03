@@ -90,18 +90,21 @@
                                         loading="lazy"
                                         onload="this.classList.remove('opacity-0')"
                                     >
-                                    @if(!empty($testimonial['video']))
-                                        <div class="absolute inset-0 flex justify-center align-center">
-                                            <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play text-lg text-white border-2 border-white px-3 py-1 rounded-full bg-[#0009] hover:opacity-80"></i>
-                                        </div>
-                                    @endif
+                                    <div class="absolute inset-0 flex justify-center align-center">
+                                        <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas @if(!empty($testimonial['video'])) fa-play @else fa-align-left @endif text-lg text-white border-2 border-white px-3 py-1 rounded-full bg-[#0009] hover:opacity-80"></i>
+                                    </div>
                                 </div>
                                 <div class="w-full text-center">
                                     <div class="font-bold text-sm leading-snug mb-2">{!! $testimonial['title'] !!}</div>
                                     <p class="text-sm">{{ $testimonial['name'] }}</p>
-                                    @if(!empty($testimonial['video']))
-                                        <p class="mt-1 text-xs text-{{ $theme }} cursor-pointer" x-on:click="{{str_replace(' ', '', $testimonial['name'])}} = true;">Watch video</p>
-                                    @endif
+
+                                        <p class="mt-1 text-xs text-{{ $theme }} cursor-pointer" x-on:click="{{str_replace(' ', '', $testimonial['name'])}} = true;">
+                                            @if(!empty($testimonial['video']))
+                                                Watch video
+                                            @else
+                                                Read more
+                                            @endif
+                                        </p>
                                 </div>
                             </li>
                         @endforeach

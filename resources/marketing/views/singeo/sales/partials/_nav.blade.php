@@ -54,8 +54,8 @@
                     x-ref="features"
                 >
                     <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full @if(strpos(url()->full(), 'method')) text-singeo @endif" href="{{ get_legacy_brand_base_url('singeo') }}/method" ><i class="mr-1 text-lg fa-fw far fa-music-note"></i> Method</a>
-                    <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full @if(strpos(url()->full(), 'songs')) text-singeo @endif" href="{{ get_legacy_brand_base_url('singeo') }}/songs" ><i class="mr-1 text-lg fa-fw far fa-headphones"></i> Songs</a>
                     <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full @if(strpos(url()->full(), 'coaches')) text-singeo @endif" href="{{ get_legacy_brand_base_url('singeo') }}/coaches" ><i class="mr-1 text-lg fa-fw far fa-whistle"></i> Coaches</a>
+                    <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full @if(strpos(url()->full(), 'songs')) text-singeo @endif" href="{{ get_legacy_brand_base_url('singeo') }}/songs" ><i class="mr-1 text-lg fa-fw far fa-headphones"></i> Songs</a>
                 </div>
                 <div
                     class="instruments-dd hidden shadow-md bg-white rounded-xl p-2 absolute flex flex-col left-60 lg:left-68 -ml-3 top-10 lg:top-12 w-44"
@@ -67,7 +67,7 @@
                 </div>
             </div>
         @endif
-            <div class="button-wrap">
+            <div class="button-wrap @if(!empty($hideJoin)) opacity-0 px-0.5 @endif">
                 <a @if(!empty($scrollToJoin))
                    href="#customize-anchor" class="join anchor-slide"
                    @elseif(!empty($joinUrl))
@@ -138,17 +138,17 @@
         </div>
         <div class="lesson-links dropdown">
             @include('singeo.sales.partials._nav-link', [
-                "linkName" => "Drumeo",
+                "linkName" => "Drums",
                 "linkUrl" => "https://www.drumeo.com/",
                 "linkIcon" => ''
             ])
             @include('singeo.sales.partials._nav-link', [
-                "linkName" => "Pianote",
+                "linkName" => "Piano",
                 "linkUrl" => "https://www.pianote.com/",
                 "linkIcon" => ''
             ])
             @include('singeo.sales.partials._nav-link', [
-                "linkName" => "Guitareo",
+                "linkName" => "Guitar",
                 "linkUrl" => "https://www.guitareo.com/",
                 "linkIcon" => ''
             ])

@@ -61,7 +61,7 @@
                 <a href="{{ get_musora_brand_base_url() }}/drumeo/packs" class="join blue">View Pack &raquo;</a>
             @else
                 <a class="join sold-out">NOT AVAILABLE</a>
-                {{--<a href="/laravel/public/shopping-cart/api/query?products[festival-2020]=1&products[drumeo_edge_30_days_access]=1&locked=true" class="join blue">Order Now &raquo;</a>--}}
+                {{--<a href="/ecommerce/add-to-cart?products[festival-2020]=1&products[drumeo_edge_30_days_access]=1&locked=true" class="join blue">Order Now &raquo;</a>--}}
             @endif
             {{--<h6>FREE BONUS: 1 Month Drumeo Membership</h6>--}}
         </div>
@@ -166,7 +166,7 @@
                 <a href="{{ get_musora_brand_base_url() }}/drumeo/packs" class="join blue">View Pack &raquo;</a>
             @else
                 <a class="join sold-out">NOT AVAILABLE</a>
-                {{--<a href="/laravel/public/shopping-cart/api/query?products[festival-2020]=1&products[drumeo_edge_30_days_access]=1&locked=true" class="join blue">Order Now &raquo;</a>--}}
+                {{--<a href="/ecommerce/add-to-cart?products[festival-2020]=1&products[drumeo_edge_30_days_access]=1&locked=true" class="join blue">Order Now &raquo;</a>--}}
             @endif
             {{--<h6>FREE BONUS: 1 Month Drumeo Membership</h6>--}}
             <br><br>

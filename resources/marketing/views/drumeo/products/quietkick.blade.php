@@ -224,7 +224,7 @@
                 <div class="flex flex-wrap items-end justify-center 2-full max-w-sm md:max-w-2xl lg:max-w-3xl my-5 sm:my-10 mx-auto">
                     <div class="w-full md:w-1/2 px-2 md:px-3 relative">
                         {{--<p class="w-full px-4 pt-2 pb-4 -mb-3 text-white rounded-t-2xl" style="background:linear-gradient(to bottom, #0a73d8, #10518f);"><strong>LAUNCH SPECIAL</strong></p>--}}
-                        <a href="/laravel/public/shopping-cart/api/query?products[quietkick]=1" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">
+                        <a href="/ecommerce/add-to-cart?products[quietkick]=1" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">
                             <div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">
                                 <h5 class="leading-none mb-3"><strong>Single Kick</strong></h5>
                                 <h1 class="inline-block leading-none">
@@ -246,7 +246,7 @@
                     </div>
                     <div class="w-full md:w-1/2 px-2 md:px-3 relative">
                         {{--<p class="w-full px-4 pt-2 pb-4 -mb-3 text-white rounded-t-2xl" style="background:linear-gradient(to bottom, #0a73d8, #10518f);"><strong>LAUNCH SPECIAL</strong></p>--}}
-                        <a href="/laravel/public/shopping-cart/api/query?products[quietkick]=1&products[quietkick-beater]=1" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">
+                        <a href="/ecommerce/add-to-cart?products[quietkick]=1&products[quietkick-beater]=1" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">
                             <div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">
                                 <h5 class="leading-none mb-3"><strong>Double Kick</strong></h5>
                                 <h1 class="inline-block leading-none">
@@ -267,7 +267,7 @@
                         </a>
                     </div>
                 </div>
-                <a style="color: #00bc75;" class="inline-block cursor-pointer" href="/laravel/public/shopping-cart/api/query?products[DLM]=1,year,1&products[quietkick]=1&locked=true"><h4><strong><u>Or get it FREE when you join Drumeo &raquo;</u></strong></h4></a>
+                <a style="color: #00bc75;" class="inline-block cursor-pointer" href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[quietkick]=1&locked=true"><h4><strong><u>Or get it FREE when you join Drumeo &raquo;</u></strong></h4></a>
             @else
                 <a class="join sold-out mt-5 sm:mt-10">SOLD OUT</a>
             @endif
@@ -305,7 +305,7 @@
                 ])
                 @include('drumeo.products.partials.question-dropdown-tw', [
                 "title" => "Will it ship internationally?",
-                "description" => "Yes! Just enter your country upon checkout – you’ll see the shipping tally in your cart. You can also grab the QuietKick with FREE shipping by joining Drumeo. You’ll get a free QuietKick shipped anywhere in the world for the price of your annual membership. <a href='/laravel/public/shopping-cart/api/query?products[DLM]=1,year,1&products[quietkick]=1&locked=true'><u>Click here to see that option.</u></a>",
+                "description" => "Yes! Just enter your country upon checkout – you’ll see the shipping tally in your cart. You can also grab the QuietKick with FREE shipping by joining Drumeo. You’ll get a free QuietKick shipped anywhere in the world for the price of your annual membership. <a href='/ecommerce/add-to-cart?products[DLM-1-year]=1&products[quietkick]=1&locked=true'><u>Click here to see that option.</u></a>",
                 ])
             </div>
         </div>

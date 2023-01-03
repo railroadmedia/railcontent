@@ -114,6 +114,7 @@
             "subscriptionVersion" => true,
             "fullSubscriptionVersion" => true,
             "trialVersion" => true,
+            "joinUrl" => '/choose-plan',
         ])
     @endif
 
@@ -524,7 +525,6 @@
                 'title' => 'Rock Drumming Masterclass',
                 'description' => 'Todd Sucherman’s 26-week masterclass to help you improve your rock drumming.',
                 'price' => Prices::$rdmFull,
-                'online-ship' => "Instant Access"
                 ],
                 [
                 'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/dtme.jpg',
@@ -537,28 +537,24 @@
                 'title' => 'Independence Made Easy',
                 'description' => 'Jared Falk’s 26-week masterclass to unlock your musicality and freedom on the drums.',
                 'price' => Prices::$imeFull,
-                'online-ship' => "Instant Access"
                 ],
                 [
                 'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/eyd.jpg',
                 'title' => 'Electrify Your Drumming',
                 'description' => 'Your guide to playing 10 styles of electronic dance music - includes 23 play-alongs!',
                 'price' => Prices::$eydFull,
-                'online-ship' => "Instant Access"
                 ],
                 [
                 'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/fwtbdf.jpg',
                 'title' => 'Better Drum Fills',
                 'description' => 'The ultimate four-week crash course to playing more creative & musical drum fills.',
                 'price' => Prices::$bdfFull,
-                'online-ship' => "Instant Access"
                 ],
                 [
                 'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/sd.jpg',
                 'title' => 'Successful Drumming',
                 'description' => 'Jared Falk’s step-by-step curriculum for building a rock-solid foundation on the drums.',
                 'price' => Prices::$sdOnlineFull,
-                'online-ship' => "Instant Access"
                 ],
                 [
                 'image' => 'https://cdn.musora.com/image/fetch/c_fill,w_300,q_auto:good/https://drumeo-assets.s3.amazonaws.com/promos/july/tommy_card.jpg',
@@ -571,7 +567,6 @@
                 'title' => 'Learn Songs Faster',
                 'description' => 'This masterclass will give you proven techniques for learning MORE songs in less time.',
                 'price' => Prices::$learnSongsFasterFull,
-                'online-ship' => "Instant Access"
                 ],
             ]
         @endphp
@@ -580,9 +575,9 @@
         'promoLogo' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs.svg',
        'promoLogoM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs-m.png',
         'header' => 'Save 17% + get 10 bonuses<br class="inline sm:hidden"> worth $1342.94',
-        'buttonLink' => '/laravel/public/shopping-cart/api/query?products[DLM]=1,year,1&products[drumeo-eardrums]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[GHFAL-DIGI]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[learn-songs-faster-pack]=1&locked=true',
+        'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[drumeo-eardrums]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[GHFAL-DIGI]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[learn-songs-faster-pack]=1&locked=true',
         'subDescription' => '<strong>10 free bonuses.</strong> <br class="inline sm:hidden"><em>only available until january 31st.</em>',
-        'altButtonLink' => '/laravel/public/shopping-cart/api/query?products[DLM]=1,month,1&locked=true',
+        'altButtonLink' => '/ecommerce/add-to-cart?products[DLM-1-month]=1&locked=true',
         ])
     @else
         @include('musora.sales.components.order-section-collage', [
@@ -603,7 +598,8 @@
 
     @include('_partials.components.soundslice-modal',[
         'name' => 'soundslice',
-        'video' => '162928'
+        'video' => '1D6Vc',
+        'slices' => true,
     ])
     @include('_partials.components.video-modal',[
         'name' => 'trailer',

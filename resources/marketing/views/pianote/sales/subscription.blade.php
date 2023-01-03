@@ -114,6 +114,7 @@
             "subscriptionVersion" => true,
             "fullSubscriptionVersion" => true,
             "trialVersion" => true,
+            "joinUrl" => '/choose-plan',
         ])
     @endif
 
@@ -513,14 +514,13 @@
                     'title' => 'Pianote Headphones',
                     'description' => 'Hi-end, lightweight over-ear headphones for beautiful private practice sessions.',
                     'price' => PianotePrices::$headphonesFull,
-                    'feature' => "Free Shipping",
+                    'shipping' => true
                 ],
                 [
                     'image' => 'https://pianote.s3.amazonaws.com/sales/promos/october/power_of_chords_card.jpg',
                     'title' => '',
                     'description' => 'Play the music you love using the power of chords.',
                     'price' => PianotePrices::$powerOfChordsFull,
-                    'online-ship' => "Lifetime Access"
                 ],
                 [
                 'image' => 'https://pianote.s3.amazonaws.com/sales/promos/november/bonuses/TBGTCP.jpg',
@@ -569,7 +569,6 @@
                     'title' => '',
                     'description' => 'Boost your speed and confidence with this guided practice course.',
                     'price' => PianotePrices::$fasterFingersFull,
-                    'online-ship' => "Lifetime Access"
                 ],
             ]
         @endphp

@@ -6,7 +6,7 @@
 
     <!-- link-wrapper -->
     <div class="flex flex-1">
-       
+
         @if(!empty($subscriptionVersion))
             @if(!empty($fullSubscriptionVersion))
 
@@ -24,15 +24,15 @@
                                 "url" => $info['url'],
                             ])
                         @endif
-                    @endforeach 
+                    @endforeach
                 </ul>
-            
+
             @endif
 
             {{-- CTA Button --}}
             <div class="ml-auto flex items-center">
                 <a @if(!empty($scrollToJoin))
-                        href="#customize-anchor" 
+                        href="#customize-anchor"
                         class="anchor-slide btn-primary btn-small text-base leading-none bg-{{ $brand }} border-0 py-1.5 px-3 md:py-3 md:px-8 mr-1.5 mb-0 h-auto md:h-initial"
                     @elseif(!empty($joinUrl))
                         href="{{ $joinUrl }}" class="btn-primary btn-small text-base leading-none bg-{{ $brand }} border-0 py-1.5 px-3 md:py-3 md:px-8 mr-1.5 mb-0 h-auto md:h-initial"
@@ -49,14 +49,14 @@
             </div>
 
         @endif
-        
+
         {{-- Cart and Shop CTA buttons --}}
         @if(!empty($checkoutVersion))
             <div class="ml-auto flex items-center">
                 <a href="{{ get_legacy_brand_base_url('drumeo') }}/drumshop" class="join outline-button">Shop</a>
             </div>
         @endif
-        
+
         @if(!empty($cartVersion))
             <div class="ml-auto flex items-center" id="app">
                 <a href="{{ get_legacy_brand_base_url('drumeo') }}/drumshop" class="join outline-button">Shop</a>

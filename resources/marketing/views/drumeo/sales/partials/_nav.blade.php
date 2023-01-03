@@ -50,8 +50,8 @@
                 </div>
                 <div class="features-dd hidden shadow-md bg-white rounded-xl p-2 absolute flex flex-col left-44 lg:left-48 top-10 lg:top-12 w-44">
                     <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full @if(strpos(url()->full(), 'method')) active @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/method" ><i class="mr-1 text-lg fa-fw far fa-music-note"></i> Method</a>
-                    <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full @if(strpos(url()->full(), 'songs')) active @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/songs" ><i class="mr-1 text-lg fa-fw far fa-headphones"></i> Songs</a>
                     <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full @if(strpos(url()->full(), 'coaches')) active @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/coaches" ><i class="mr-1 text-lg fa-fw far fa-whistle"></i> Coaches</a>
+                    <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full @if(strpos(url()->full(), 'songs')) active @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/songs" ><i class="mr-1 text-lg fa-fw far fa-headphones"></i> Songs</a>
                 </div>
                 <div class="instruments-dd hidden shadow-md bg-white rounded-xl p-2 absolute flex flex-col left-72 lg:left-80 -ml-3 top-10 lg:top-12 w-44">
                     <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full" href="{{ get_legacy_brand_base_url('pianote') }}" ><i class="mr-1 text-lg fa-fw far fa-piano-keyboard"></i> Piano</a>
@@ -61,7 +61,7 @@
             </div>
         @endif
 
-        <div class="button-wrap">
+        <div class="button-wrap @if(!empty($hideJoin)) opacity-0 px-0.5 @endif">
             <a @if(!empty($scrollToJoin))
                     href="#customize-anchor" class="join anchor-slide"
                 @elseif(!empty($joinUrl))
@@ -132,17 +132,17 @@
         </div>
         <div class="lesson-links dropdown">
             @include('drumeo.sales.partials._nav-link', [
-                "linkName" => "Pianote",
+                "linkName" => "Piano",
                 "linkUrl" => "https://www.pianote.com/",
                 "linkIcon" => ''
             ])
             @include('drumeo.sales.partials._nav-link', [
-                "linkName" => "Guitareo",
+                "linkName" => "Guitar",
                 "linkUrl" => "https://www.guitareo.com/",
                 "linkIcon" => ''
             ])
             @include('drumeo.sales.partials._nav-link', [
-                "linkName" => "Singeo",
+                "linkName" => "Singing",
                 "linkUrl" => "https://www.singeo.com/",
                 "linkIcon" => ''
             ])

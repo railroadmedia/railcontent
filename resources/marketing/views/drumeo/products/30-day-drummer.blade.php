@@ -770,7 +770,7 @@
                         </div>
                     {{--@else--}}
                         {{--<div class="flex flex-wrap sm:flex-nowrap items-center text-left w-full max-w-3xl mx-auto xl:w-7/12">--}}
-                            {{--<a href="/laravel/public/shopping-cart/api/query?products[30-day-drummer]=1&products[Drumeo-VaterSticks]=1&products[drumeo_access_30-days]=1&locked=true" class="px-5 sm:px-7 lg:px-9 py-7 sm:py-9 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-1/2" style="background-color:#d4eaff;">--}}
+                            {{--<a href="/ecommerce/add-to-cart?products[30-day-drummer]=1&products[Drumeo-VaterSticks]=1&products[drumeo_access_30-days]=1&locked=true" class="px-5 sm:px-7 lg:px-9 py-7 sm:py-9 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-1/2" style="background-color:#d4eaff;">--}}
                                 {{--<h3><strong>30-Day Drummer</strong></h3>--}}
                                 {{--<p class="text-sm mt-2 mb-5">Just The Course + 2 Bonuses worth $42.94.</p>--}}
                                 {{--<h2 class="inline-block"><strong class="text-4xl">${{ Prices::$thirtyDayDrummer }}</strong></h2> <p class="inline-block text-xs">one time payment.</p><br>--}}
@@ -787,7 +787,7 @@
                                 {{--<i class="fas fa-check text-drumeo mr-1"></i> Lifetime Course Access<br>--}}
                                 {{--<i class="fas fa-check text-drumeo mr-1"></i> 90-Day Money Back Guarantee</p>--}}
                             {{--</a>--}}
-                            {{--<a href="/laravel/public/shopping-cart/api/query?products[DLM]=1,year,1&products[30-day-drummer]=1&products[practicepad]=1&products[Drumeo-VaterSticks]=2&products[BeginnerBook]=1&locked=true" class="px-5 sm:px-7 lg:px-9 py-7 sm:py-11 sm:-ml-5 z-10 relative rounded-xl bg-white shadow-lg w-full sm:w-1/2">--}}
+                            {{--<a href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-drummer]=1&products[practicepad]=1&products[Drumeo-VaterSticks]=2&products[BeginnerBook]=1&locked=true" class="px-5 sm:px-7 lg:px-9 py-7 sm:py-11 sm:-ml-5 z-10 relative rounded-xl bg-white shadow-lg w-full sm:w-1/2">--}}
                                 {{--<h3><strong>Unlimited Lessons</strong></h3>--}}
                                 {{--<p class="text-sm mt-2 mb-5">1 Year of Drumeo + 5 Bonuses worth $231.89.</p>--}}
                                 {{--<h2 class="inline-block"><strong class="text-4xl">$20</strong>/mo</h2> <p class="inline-block text-xs">Billed annually at $240/yr.</p><br>--}}

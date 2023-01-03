@@ -114,6 +114,7 @@
             "subscriptionVersion" => true,
             "fullSubscriptionVersion" => true,
             "trialVersion" => true,
+            "joinUrl" => '/choose-plan',
         ])
     @endif
 
@@ -178,8 +179,8 @@
         @include('musora.sales.components.promo-section', [
         'promoLogo' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs.svg',
            'promoLogoM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs-m.png',
-        'desc' => 'Loop, learn, and remove the drums from 5,000+ drumming anthems. ',
-           'text' => 'The NEW Drumeo Songs is here.<br><br>You can now magically remove the drums from 5,000+ popular drumming anthems. And with note-for-note sheet music, tempo adjustment, and a looping feature you’ll have <strong>the ultimate tool for learning songs on the drums.</strong> <br><br>And to make your goals easier in 2023 – you’ll also get a FREE pair of Drumeo’s in-ear headphones when you join Drumeo. So you can enjoy unlimited drum lessons, note-for-note song breakdowns, AND protect your ears while playing your favorite songs.<br><br>Click below to grab the deal – or scroll down to try a demo of the NEW Drumeo Songs.',
+        'desc' => 'Vocal lessons, personal coaches, and 1000+ songs to reach your singing goals.',
+           'text' => 'If you’ve tried online singing lessons, you know the struggle: spending months, even years, going around in circles – never <em>actually</em> singing like you’ve wished.<br><br>With videos alone, you’re all alone.<br><br>And that’s why Singeo doubles down on the personal touch – with direct and unlimited access to vocal coaches to give you personal feedback, tailored for your voice.<br><br>You’ll boost your skills with step-by-step video lessons, warmups, artist courses, video reviews, live Q&A sessions with real vocal coaches, and 1000+ songs with playback tools to help you practice and hit every note! PLUS you’ll get unlimited access to our communities for guitar lessons, piano lessons, and drum lessons to reach all of your musical goals.<br><br>Just click the link to make 2023 the year you FINALLY sing like you’ve always wanted.',
            'img' => 'https://singeo.s3.amazonaws.com/sales/2023/jan-launch-collage2.png',
            'belowButton' => 'SAVE 17% + GET 3 BONUSES WORTH $58',
        ])
@@ -485,38 +486,20 @@
                     'title' => 'Singing<br> Starter Kit',
                     'description' => 'Get everything you need to start singing now. In just 7 hands-on lessons, you’ll overcome the challenges most beginner singers face and will instantly sound better.',
                     'price' => SingeoPrices::$singingStarterKitFull,
-                    'online-ship' => "Lifetime Access"
                 ],
                 [
                     'image' => 'https://singeo.s3.amazonaws.com/sales/promos/october/Beautiful_harmonies_card.jpg',
                     'title' => 'Harmony',
                     'description' => 'In just 8, short, sing-a-long lessons, you’ll learn how to elevate any vocal performance with incredible harmonies. Even if you’re a total beginner, you’ll be singing your first harmony within the first 10 minutes of this course.',
                     'price' => SingeoPrices::$beautifulHarmoniesFull,
-                    'online-ship' => "Lifetime Access"
                 ],
                 [
                     'image' => 'https://singeo.s3.amazonaws.com/sales/promos/november/poster2.png',
                     'title' => 'Vowel Practice<br> Poster',
-                    'badge' => 'Vowel Practice Poster',
                     'description' => 'Your new favorite practice tool - and your ticket hitting higher notes with ease and confidence.',
                     'price' => SingeoPrices::$posterFull,
-                    'online-ship' => "Free Shipping",
-                ],
-                [
-                    'image' => 'https://singeo.s3.amazonaws.com/sales/lifetime/1-year-of-guitar-card.jpg',
-                    'title' => '1 Year of Guitareo Lessons',
-                    'badge' => '1 Year of Guitareo Lessons',
-                    'description' => '1 year of online video-based guitar lessons and personal support.',
-                    'price' => 240,
-                    'online-ship' => "Online Access",
-                ],
-                [
-                    'image' => 'https://singeo.s3.amazonaws.com/sales/lifetime/1-year-of-piano-card.jpg',
-                    'title' => '1 Year of Pianote Lessons',
-                    'badge' => '1 Year of Pianote Lessons',
-                    'description' => '1 year of online video-based piano lessons and personal support.',
-                    'price' => 240,
-                    'online-ship' => "Online Access",
+                    'shipping' => true
+
                 ],
             ]
         @endphp
@@ -526,8 +509,8 @@
         'promoLogo' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs.svg',
        'promoLogoM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs-m.png',
         'header' => 'Save 17% + get 3 bonuses<br class="inline sm:hidden"> worth $58',
-        'buttonLink' => '/ecommerce/add-to-cart?products[singeo-annual-recurring-membership]=1&products[the-essential-guide-to-beautiful-harmonies]=1&products[vowel-sounds-poster]=1&bonuses[PIANOTE-MEMBERSHIP-1-YEAR]=1&bonuses[GUITAREO-1-YEAR-MEMBERSHIP]=1&locked=true&redirect=/order',
-        'subDescription' => '<strong>10 free bonuses.</strong> <br class="inline sm:hidden"><em>only available until january 31st.</em>',
+        'buttonLink' => '/ecommerce/add-to-cart?products[singeo-annual-recurring-membership]=1&products[singing-starter-kit]=1&products[the-essential-guide-to-beautiful-harmonies]=1&products[vowel-sounds-poster]=1&locked=true&redirect=/order',
+        'subDescription' => '<strong>3 free bonuses.</strong> <br class="inline sm:hidden"><em>only available until january 31st.</em>',
         'altButtonLink' => '/ecommerce/add-to-cart?products[singeo-monthly-recurring-membership]=1&redirect=/order&locked=true',
         ])
     @else

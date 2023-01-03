@@ -30,7 +30,7 @@
             @if(!empty($promoVersion))
                 href="#customize-anchor"
             @else
-                href="/choose-your-trial"
+                href="/choose-plan"
             @endif
         >
             @if(!empty($promoVersion))

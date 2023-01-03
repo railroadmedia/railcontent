@@ -116,6 +116,7 @@
                 no-results-message="There are no songs that match those filters. Please remove some filters."
                 catalogue-type="list" :infinite-scroll="true" limit="20"
                 :included-types="{{ json_encode(is_array($lessonType) ? $lessonType : explode(',', $lessonType)) }}"
+                total-results="{{ $songsNumber }}"
                 @if (!empty($searchTerm)) search-term="{{ $searchTerm }}" @endif
                 @if (!empty($sortOverride)) sort-override="{{ $sortOverride }}" @endif>
                 @include('partials.bladesora.members.skeletons.catalog-filters', [

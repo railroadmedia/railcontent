@@ -405,6 +405,13 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.update-payment-method');
 
+        Route::get(
+            '/{brand}/profile/settings/cancellation-confirmed',
+            [ProfileSettingsPagesController::class, 'cancellationConfirmation']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.cancellation-confirmed');
+
         // ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
         // ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
@@ -447,6 +454,14 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.gratis-access');
 
+        // POST accept student-plan offer
+        Route::post(
+            '/{brand}/profile/settings/account/accept-pause-offer',
+            [ProfileSettingsPagesController::class, 'acceptPauseOffer']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.accept-pause-offer');
+
         Route::post(
             '/{brand}/profile/settings/account/send-help-email',
             [ProfileSettingsPagesController::class, 'sendHelpEmail']
@@ -454,6 +469,12 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('platform.profile.settings.send-help-email');
 
+        Route::post(
+            '/{brand}/profile/settings/account/decline-offer-proceed-with-cancel',
+            [ProfileSettingsPagesController::class, 'declineOfferProceedWithCancel']
+        )
+            ->whereIn('brand', all_brands())
+            ->name('platform.profile.settings.decline-offer-proceed-with-cancel');
 
         Route::post('/{brand}/profile/settings/account/send-help-email',
                     [ProfileSettingsPagesController::class, 'sendHelpEmail'])

@@ -31,6 +31,7 @@
 
 @section('global-body')
     @include("drumeo.sales.partials._nav", [
+            "hideJoin" => true,
             "subscriptionVersion" => true,
             "fullSubscriptionVersion" => true,
         ])
@@ -45,10 +46,10 @@
         "firstPoint" => "The world’s best drum lessons.",
         "thirdPoint" => "Unlimited personal support",
         "fifthPoint" => "Lesson access for piano, guitar, and singing.",
-        "plusAnnualLink" => "/laravel/public/shopping-cart/api/query?products[DLM-Trial-Annual-7-Day]=1&locked=true",
-        "plusMonthlyLink" => "/laravel/public/shopping-cart/api/query?products[DLM-Trial]=1,month,1&locked=true",
-        "annualLink" => "/laravel/public/shopping-cart/api/query?products[drumeo-base-annual-recurring-7-day-trial-membership]=1&locked=true",
-        "monthlyLink" => "/laravel/public/shopping-cart/api/query?products[drumeo-base-monthly-recurring-7-day-trial-membership]=1,month,1&locked=true",
+        "plusAnnualLink" => "/ecommerce/add-to-cart?products[DLM-Trial-Annual-7-Day]=1&locked=true",
+        "plusMonthlyLink" => "/ecommerce/add-to-cart?products[DLM-Trial-1-month]=1&locked=true",
+        "annualLink" => "/ecommerce/add-to-cart?products[drumeo-base-annual-recurring-7-day-trial-membership]=1&locked=true",
+        "monthlyLink" => "/ecommerce/add-to-cart?products[drumeo-base-monthly-recurring-7-day-trial-membership]=1&locked=true",
     ])
 
 
