@@ -182,4 +182,17 @@ class Prices
     public static $coaches = 11;
     public static $students = 66378;
 
+
+//    pianote
+
+    public static $pianoteMembershipAnnualFull = 240;
+    public static $pianoteMembershipAnnualRegular = 240;
+    public static $pianoteMembershipMonthlyFull = 30;
+    public static $pianoteMembershipMonthlyRegular = 30;
+    public static $pianoteMembershipLifetimeFull = 1200;
+    public static $pianoteMembershipLifetime = 1200;
+//    marketing numbers
+    public static $pianoteSongs = 100;
+    public static $pianoteCourses = 22;
+    public static $pianoteLessons = 320;
 }

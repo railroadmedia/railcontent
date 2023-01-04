@@ -5,7 +5,7 @@
     <div class="container mx-auto">
         <img class="h-10 md:h-16 mx-auto" src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://pianote.s3.amazonaws.com/logo/pianote-logo-red.png">
 
-        <h2 class="my-3 md:my-5 leading-normal"><strong>Start learning piano <br>for just <span class="text-pianote">${{ round((PianotePrices::$pianoteMembershipAnnualRegular / 12), 2) }}</span> a month.</strong></h2>
+        <h2 class="my-3 md:my-5 leading-normal"><strong>Start learning piano <br>for just <span class="text-pianote">${{ round((Prices::$pianoteMembershipAnnualRegular / 12), 2) }}</span> a month.</strong></h2>
 
 
 
@@ -17,10 +17,10 @@
         {{--<div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">--}}
         {{--<h5 class="leading-none mb-3"><strong>MONTHLY</strong></h5>--}}
         {{--<h1 class="inline-block leading-none">--}}
-        {{--@if(PianotePrices::$pianoteMembershipMonthlyFull > PianotePrices::$pianoteMembershipMonthlyRegular)--}}
-        {{--<s class="opacity-60">${{ PianotePrices::$pianoteMembershipMonthlyFull }}</s>--}}
+        {{--@if(Prices::$pianoteMembershipMonthlyFull > Prices::$pianoteMembershipMonthlyRegular)--}}
+        {{--<s class="opacity-60">${{ Prices::$pianoteMembershipMonthlyFull }}</s>--}}
         {{--@endif--}}
-        {{--<strong>${{ PianotePrices::$pianoteMembershipMonthlyRegular }}</strong></h1> <p class="inline-block -mr-16">per month</p>--}}
+        {{--<strong>${{ Prices::$pianoteMembershipMonthlyRegular }}</strong></h1> <p class="inline-block -mr-16">per month</p>--}}
         {{--<p class="text-pianote text-sm my-4"><em>Recurring Payment</em></p>--}}
         {{--<div class="join smaller w-full transition-opacity duration-300 group-hover:opacity-80" style="max-width: 230px;">Get Started</div>--}}
         {{--</div>--}}
@@ -38,11 +38,11 @@
         {{--<div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">--}}
         {{--<h5 class="leading-none mb-3"><strong>ANNUAL</strong></h5>--}}
         {{--<h1 class="inline-block leading-none">--}}
-        {{--@if(PianotePrices::$pianoteMembershipAnnualFull > PianotePrices::$pianoteMembershipAnnualRegular)--}}
-        {{--<s class="opacity-60">${{ PianotePrices::$pianoteMembershipAnnualFull }}</s>--}}
+        {{--@if(Prices::$pianoteMembershipAnnualFull > Prices::$pianoteMembershipAnnualRegular)--}}
+        {{--<s class="opacity-60">${{ Prices::$pianoteMembershipAnnualFull }}</s>--}}
         {{--@endif--}}
-        {{--<strong>${{ PianotePrices::$pianoteMembershipAnnualRegular }}</strong></h1><p class="inline-block -mr-5">per year</p>--}}
-        {{--<p class="text-pianote text-sm my-4"><em>Save {{ round(100 - (100 * (PianotePrices::$pianoteMembershipAnnualRegular / PianotePrices::$pianoteMembershipAnnualFull))) }}%</em></p>--}}
+        {{--<strong>${{ Prices::$pianoteMembershipAnnualRegular }}</strong></h1><p class="inline-block -mr-5">per year</p>--}}
+        {{--<p class="text-pianote text-sm my-4"><em>Save {{ round(100 - (100 * (Prices::$pianoteMembershipAnnualRegular / Prices::$pianoteMembershipAnnualFull))) }}%</em></p>--}}
         {{--<div class="join smaller w-full transition-opacity duration-300 group-hover:opacity-80" style="max-width: 230px;">Get Started</div>--}}
         {{--</div>--}}
         {{--<div class="px-3 pt-5 md:pt-6 pb-9 md:pb-10" style="background: #f1f8ff;border-top: 2px solid #e6f2ff;">--}}
@@ -60,10 +60,10 @@
         {{--<div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">--}}
         {{--<h5 class="leading-none mb-3"><strong>LIFETIME</strong></h5>--}}
         {{--<h1 class="inline-block leading-none">--}}
-        {{--@if(PianotePrices::$pianoteMembershipLifetimeFull > PianotePrices::$pianoteMembershipLifetime)--}}
-        {{--<s class="opacity-60">${{ PianotePrices::$pianoteMembershipLifetimeFull }}</s>--}}
+        {{--@if(Prices::$pianoteMembershipLifetimeFull > Prices::$pianoteMembershipLifetime)--}}
+        {{--<s class="opacity-60">${{ Prices::$pianoteMembershipLifetimeFull }}</s>--}}
         {{--@endif--}}
-        {{--<strong>${{ PianotePrices::$pianoteMembershipLifetime }}</strong></h1>--}}
+        {{--<strong>${{ Prices::$pianoteMembershipLifetime }}</strong></h1>--}}
         {{--<p class="text-coaches text-sm my-4"><em>Or choose a payment plan on checkout.</em></p>--}}
         {{--<div class="join smaller coaches w-full transition-opacity duration-300 group-hover:opacity-80" style="max-width: 230px;">Get Started</div>--}}
         {{--</div>--}}
@@ -77,10 +77,10 @@
         {{--</a>--}}
         {{--</div>--}}
         {{--</div>--}}
-        <h4 class="leading-tight mt-5 md:mt-7 lg:mt-10"><strong>Billed annually at ${{ PianotePrices::$pianoteMembershipAnnualRegular }} per year.</strong></h4>
+        <h4 class="leading-tight mt-5 md:mt-7 lg:mt-10"><strong>Billed annually at ${{ Prices::$pianoteMembershipAnnualRegular }} per year.</strong></h4>
         <a class="join bigger" href="{{ $annualLink }}">Get Started &raquo;</a>
         <br><br class="inline-block md:hidden">
-        <a class="text-drumeo monthly-alt" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-MONTH]=1&redirect=%2Forder"><p><u><em>Or start a monthly membership for <br class="inline-block md:hidden">${{ PianotePrices::$pianoteMembershipMonthlyRegular }}/month.</em></u></p></a>
+        <a class="text-drumeo monthly-alt" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-MONTH]=1&redirect=%2Forder"><p><u><em>Or start a monthly membership for <br class="inline-block md:hidden">${{ Prices::$pianoteMembershipMonthlyRegular }}/month.</em></u></p></a>
     </div>
 </section>
 

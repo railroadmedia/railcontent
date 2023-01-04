@@ -7,7 +7,7 @@
                     src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-riffs-and-fills/piano-riffs-fills-logo.png"><br>
             <i class="fas fa-play play-vimeo autoplay-video" data-open="trailer"></i>
             <h2>The shortcuts to <br class="inline md:hidden"><strong>sounding great</strong> on the piano.</h2>
-            <h3 class="my-5 text-pianote"><strong>Only <s class="opacity-80">${{ PianotePrices::$pianoRiffsAndFillsFull }}</s> FREE until Nov 15th!</strong></h3>
+            <h3 class="my-5 text-pianote"><strong>Only <s class="opacity-80">${{ floatval($productPrices['piano-riffs-and-fills']->price) }}</s> FREE until Nov 15th!</strong></h3>
 
             <div class="form-wrap max-w-4xl mx-auto">
                 @include('pianote._partials._sign-up-form', [

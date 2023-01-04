@@ -22,8 +22,8 @@
     ])
     @include('pianote._partials._promo-banner-no-tw', [
                     "name" => "De-Stupefy Your Left Hand",
-                    "fullPrice" => PianotePrices::$destupefyFull,
-                    "price" => PianotePrices::$destupefyRegular,
+                    "fullPrice" => floatval($productPrices['destupefy-your-left-hand']->price),
+                    "price" => floatval($productPrices['destupefy-your-left-hand']->discounted_price)Regular,
                     "noBreadcrumb" => true
                 ])
     <header class="header text-center" style="background-image:url(https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/destupefy-your-left-hand/header.jpg);">
@@ -35,11 +35,11 @@
             <a class="join" href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['destupefy-your-left-hand' => 1], 'redirect' => '/order', 'locked' => 'false']) }}">Get Started &raquo;</a>
 
             <p class="breakdown">
-                @if(PianotePrices::$destupefyFull > PianotePrices::$destupefyRegular)
-                    <s>NORMALLY ${{ PianotePrices::$destupefyFull }}.</s> &nbsp;
-                    <strong><u>ONLY ${{ PianotePrices::$destupefyRegular }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (PianotePrices::$destupefyRegular / PianotePrices::$destupefyFull))) }}%)
+                @if(floatval($productPrices['destupefy-your-left-hand']->price) > floatval($productPrices['destupefy-your-left-hand']->discounted_price)Regular)
+                    <s>NORMALLY ${{ floatval($productPrices['destupefy-your-left-hand']->price) }}.</s> &nbsp;
+                    <strong><u>ONLY ${{ floatval($productPrices['destupefy-your-left-hand']->discounted_price)Regular }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (floatval($productPrices['destupefy-your-left-hand']->discounted_price)Regular / floatval($productPrices['destupefy-your-left-hand']->price)))) }}%)
                 @else
-                    <strong><u>ONLY ${{ PianotePrices::$destupefyRegular }}</u></strong>
+                    <strong><u>ONLY ${{ floatval($productPrices['destupefy-your-left-hand']->discounted_price)Regular }}</u></strong>
                 @endif
                 <br><a href="/" class="red">(OR FREE WITH A PIANOTE MEMBERSHIP)</a><br>
                     <strong class="yellow">** 90-DAY GUARANTEE **</strong></p>
@@ -376,11 +376,11 @@
             <h1><strong>It’s time to tame<br class="hidden-sm hidden-md hidden-lg"> your left hand.</strong></h1>
             <a href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['destupefy-your-left-hand' => 1], 'redirect' => '/order', 'locked' => 'false']) }}" class="join">Get Started &raquo;</a>
             <p class="breakdown">
-                @if(PianotePrices::$destupefyFull > PianotePrices::$destupefyRegular)
-                    <s>NORMALLY ${{ PianotePrices::$destupefyFull }}.</s> &nbsp;
-                    <strong><u>ONLY ${{ PianotePrices::$destupefyRegular }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (PianotePrices::$destupefyRegular / PianotePrices::$destupefyFull))) }}%)
+                @if(floatval($productPrices['destupefy-your-left-hand']->price) > floatval($productPrices['destupefy-your-left-hand']->discounted_price)Regular)
+                    <s>NORMALLY ${{ floatval($productPrices['destupefy-your-left-hand']->price) }}.</s> &nbsp;
+                    <strong><u>ONLY ${{ floatval($productPrices['destupefy-your-left-hand']->discounted_price)Regular }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (floatval($productPrices['destupefy-your-left-hand']->discounted_price)Regular / floatval($productPrices['destupefy-your-left-hand']->price)))) }}%)
                 @else
-                    <strong><u>ONLY ${{ PianotePrices::$destupefyRegular }}</u></strong>
+                    <strong><u>ONLY ${{ floatval($productPrices['destupefy-your-left-hand']->discounted_price)Regular }}</u></strong>
                 @endif
                 <br><a href="/" class="red">(OR FREE WITH A PIANOTE MEMBERSHIP)</a><br>
                     <strong class="yellow">** 90-DAY GUARANTEE **</strong></p>

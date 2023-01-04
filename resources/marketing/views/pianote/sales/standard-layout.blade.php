@@ -620,8 +620,8 @@
                         <strong class="inline-block mr-1 bg-pianote px-1 md:px-3 md:py-1 rounded-md md:rounded-lg leading-none" style="color: #000a1e;">PLUS</strong>
                         <em>
 
-                            On-demand access to <strong class="text-pianote">{{ PianotePrices::$courses }}+<br class="inline md:hidden"> comprehensive piano courses</strong> <br>
-                            and <strong class="text-pianote">{{ PianotePrices::$lessons }}+ lessons</strong> to focus on <br class="inline md:hidden">specific skills, styles, and techniques.</em></h4>
+                            On-demand access to <strong class="text-pianote">{{ Prices::$pianoteCourses }}+<br class="inline md:hidden"> comprehensive piano courses</strong> <br>
+                            and <strong class="text-pianote">{{ Prices::$pianoteLessons }}+ lessons</strong> to focus on <br class="inline md:hidden">specific skills, styles, and techniques.</em></h4>
 
                     <div class="course-tiles w-full flex flex-wrap justify-center md:mb-2 mx-auto max-w-xs md:max-w-full">
                         @php
@@ -1197,12 +1197,12 @@
                             @else
                                 <td class="rounded-b-xl">
                                     @if(empty($trialVersion))
-                                        @if(number_format(PianotePrices::$pianoteMembershipAnnualRegular, 2) == intval(PianotePrices::$pianoteMembershipAnnualRegular))
-                                            <strong>${{  round(PianotePrices::$pianoteMembershipAnnualRegular / 12, 2) }}</strong>/mo<br>
+                                        @if(number_format(Prices::$pianoteMembershipAnnualRegular, 2) == intval(Prices::$pianoteMembershipAnnualRegular))
+                                            <strong>${{  round(Prices::$pianoteMembershipAnnualRegular / 12, 2) }}</strong>/mo<br>
                                         @else
-                                            <strong>${{  number_format(PianotePrices::$pianoteMembershipAnnualRegular / 12, 2)  }}</strong>/mo<br>
+                                            <strong>${{  number_format(Prices::$pianoteMembershipAnnualRegular / 12, 2)  }}</strong>/mo<br>
                                         @endif
-                                        <em>Billed annually at ${{  PianotePrices::$pianoteMembershipAnnualRegular }}</em><br><br>
+                                        <em>Billed annually at ${{  Prices::$pianoteMembershipAnnualRegular }}</em><br><br>
                                         Unlimited lessons & support.
                                     @else
                                         <strong>Free Trial</strong><br>&nbsp;

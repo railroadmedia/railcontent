@@ -16,7 +16,7 @@
     </div>
     <div class="horizontal-bonuses mx-auto max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-xl" style="font-size: 0;">
         {{-- <img class="h-12 md:h-14 lg:h-16 lazyload" data-src="https://cdn.musora.com/image/fetch/w_420,q_auto:best/https://pianote.s3.amazonaws.com/logo/pianote-logo-red.png" alt="6th-anniversary-logo"> --}}
-        {{-- <h2 class="mt-3 leading-tight"><strong>Start playing beautiful music <br class="hidden sm:inline">for just <span class="text-pianote">${{ round((PianotePrices::$pianoteMembershipAnnualRegular / 12), 2) }}</span> a month.</strong></h2> --}}
+        {{-- <h2 class="mt-3 leading-tight"><strong>Start playing beautiful music <br class="hidden sm:inline">for just <span class="text-pianote">${{ round((Prices::$pianoteMembershipAnnualRegular / 12), 2) }}</span> a month.</strong></h2> --}}
         <h5 class="mb-5 md:mb-7 mt-2 text-coaches" style="line-height: 1.4em;">
             {{-- <img class="inline-block align-middle mr-2 h-14 mb-2" src="https://cdn.musora.com/image/fetch/w_160,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/piano-month/national-piano-month-logo-white.png">
             <br class="inline sm:hidden">
@@ -32,7 +32,7 @@
                     'image' => 'https://pianote.s3.amazonaws.com/sales/promos/may/Pianote_Planner_Card.jpg',
                     'title' => '',
                     'description' => 'Always know exactly what to practice.',
-                    'price' => PianotePrices::$chordsScalesBookFull,
+                    'price' => 39,
                     'online-ship' => "Free Shipping",
                     'badge' => 'Chords & Scales Book'
                 ],
@@ -40,7 +40,7 @@
                     'image' => 'https://pianote.s3.amazonaws.com/sales/promos/may/100_Days_Card.jpg',
                     'title' => '',
                     'description' => 'Stay motivated and on track with 100 days of practice.',
-                    'price' => PianotePrices::$posterFull,
+                    'price' => 9,
                     'online-ship' => "Free Shipping",
                     'badge' => 'Classical Piano Pieces'
                 ],
@@ -48,7 +48,7 @@
                     'image' => 'https://pianote.s3.amazonaws.com/sales/promos/may/Piano_Chords_Card.jpg',
                     'title' => '',
                     'description' => 'Always know your chord shapes with this helpful poster.',
-                    'price' => PianotePrices::$posterFull,
+                    'price' => 9,
                     'online-ship' => "Free Shipping",
                     'badge' => 'Chords Poster'
                 ],
@@ -56,21 +56,21 @@
                     'image' => 'https://pianote.s3.amazonaws.com/sales/promos/may/Piano_Scales_Card.jpg',
                     'title' => '',
                     'description' => 'Never forget the notes of a scale with this easy-to-read poster.',
-                    'price' => PianotePrices::$posterFull,
+                    'price' => 9,
                     'online-ship' => "Free Shipping"
                 ],
                 [
                     'image' => 'https://pianote.s3.amazonaws.com/sales/promos/october/power_of_chords_card.jpg',
                     'title' => '',
                     'description' => 'Play the music you love using the power of chords.',
-                    'price' => PianotePrices::$powerOfChordsFull,
+                    'price' => 97,
                     'online-ship' => "Lifetime Access"
                 ],
                 [
                     'image' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/faster-fingers.jpg',
                     'title' => '',
                     'description' => 'Boost your speed and confidence with this guided practice course.',
-                    'price' => PianotePrices::$fasterFingersFull,
+                    'price' => 99,
                     'online-ship' => "Lifetime Access"
                 ],
             ]
@@ -102,13 +102,13 @@
     {{-- <p class="mt-5 md:mt-7" style="display:inline-block;background: -webkit-linear-gradient(20deg, #03c8ac, #0976db, #9a01ee, #f61a30);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"><strong>By joining today, we’ll donate 20% of your new membership<br class="hidden sm:inline"> towards the <a target="_blank" href="https://musicounts.ca/en/take-action/ways-of-giving/fundraise-on-musicounts-behalf/fundraisers-supporting-musicounts/give-the-gift-of-music-with-musora/"><u>MusiCounts Band Aid Program</u></a>.</strong></p> --}}
     <h4 class="mt-2 leading-normal">
         {{--<span class="text-coaches">PIANOTE ANNUAL MEMBERSHIP</span><br>--}}
-        <strong>Billed annually at ${{ PianotePrices::$pianoteMembershipAnnualRegular }} per year.</strong>
-        {{--<br class="inline sm:hidden"><em class="text-coaches">(Normally ${{ PianotePrices::$pianoteMembershipAnnualFull }}, Save {{ round(100 - (100 * (PianotePrices::$pianoteMembershipAnnualRegular / PianotePrices::$pianoteMembershipAnnualFull))) }}%.)</em>--}}
+        <strong>Billed annually at ${{ Prices::$pianoteMembershipAnnualRegular }} per year.</strong>
+        {{--<br class="inline sm:hidden"><em class="text-coaches">(Normally ${{ Prices::$pianoteMembershipAnnualFull }}, Save {{ round(100 - (100 * (Prices::$pianoteMembershipAnnualRegular / Prices::$pianoteMembershipAnnualFull))) }}%.)</em>--}}
     </h4>
     <a class="join bigger" href="{{ $annualLink }}">GET STARTED</a>
     <a class="text-light-navy monthly-alt" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-MONTH]=1&redirect=%2Forder">
         <p class="mb-20">
-            <u><em>Or start a monthly membership for <br class="inline-block md:hidden">${{ PianotePrices::$pianoteMembershipMonthlyRegular }}/month.</em></u>
+            <u><em>Or start a monthly membership for <br class="inline-block md:hidden">${{ Prices::$pianoteMembershipMonthlyRegular }}/month.</em></u>
         </p>
     </a>
 </section>

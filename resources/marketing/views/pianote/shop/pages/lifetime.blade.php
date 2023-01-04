@@ -297,8 +297,8 @@
             "logo" => "https://drumeo-assets.s3.amazonaws.com/promos/november/lifetime-bundle-white.png",
             "invert" => true,
             "sku" => "products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[pianote-headphones]=1&products[piano-chords-and-scales-guide]=1&products[pianote-practice-planner]=1&products[christmas-song-book]=1&products[christmas-song-book-digital]=1&products[poster-chords]=1&products[poster-scales]=1&products[the-power-of-chords]=1&products[classical-piano]=1&products[jesus-molina-improvisation-and-musical-freedom-pack]=1&products[play-beautiful-piano]=1&products[piano-riffs-and-fills]=1&products[piano-technique-made-easy]=1&products[destupefy-your-left-hand]=1&products[worship-piano]=1&products[faster-fingers]=1&redirect=/order&locked=true",
-            "fullPrice" => PianotePrices::$pianoteMembershipLifetimeFull,
-            "price" => PianotePrices::$pianoteMembershipLifetime,
+            "fullPrice" => Prices::$pianoteMembershipLifetimeFull,
+            "price" => Prices::$pianoteMembershipLifetime,
             "specialText" => "+$1050 in FREE Bonuses",
             "soldOut" => true,
     ])

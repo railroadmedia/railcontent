@@ -23,8 +23,8 @@
 
     @include('pianote._partials._promo-banner-no-tw', [
                     "name" => "Faster Fingers",
-                    "fullPrice" => PianotePrices::$fasterFingersFull,
-                    "price" => PianotePrices::$fasterFingersRegular,
+                    "fullPrice" => floatval($productPrices['faster-fingers']->price),
+                    "price" => floatval($productPrices['faster-fingers']->discounted_price),
                     "noBreadcrumb" => true
                 ])
 
@@ -41,11 +41,11 @@
                 data-product-json='{"faster-fingers": 1}'
             >Get Started &raquo;</a>
             <p class="breakdown">
-                @if(PianotePrices::$fasterFingersFull > PianotePrices::$fasterFingersRegular)
-                    <s>NORMALLY ${{ PianotePrices::$fasterFingersFull }}.</s> &nbsp;
-                    <strong><u>ONLY ${{ PianotePrices::$fasterFingersRegular }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (PianotePrices::$fasterFingersRegular / PianotePrices::$fasterFingersFull))) }}%)
+                @if(floatval($productPrices['faster-fingers']->price) > floatval($productPrices['faster-fingers']->discounted_price))
+                    <s>NORMALLY ${{ floatval($productPrices['faster-fingers']->price) }}.</s> &nbsp;
+                    <strong><u>ONLY ${{ floatval($productPrices['faster-fingers']->discounted_price) }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (floatval($productPrices['faster-fingers']->discounted_price) / floatval($productPrices['faster-fingers']->price)))) }}%)
                 @else
-                    <strong><u>ONLY ${{ PianotePrices::$fasterFingersRegular }}</u></strong>
+                    <strong><u>ONLY ${{ floatval($productPrices['faster-fingers']->discounted_price) }}</u></strong>
                 @endif
                 <br><a href="/" class="red">(OR FREE WITH A PIANOTE MEMBERSHIP)</a><br> <strong
                         class="yellow">** 90-DAY GUARANTEE **</strong></p>
@@ -72,10 +72,10 @@
             <h1>Increase Your Speed And Finger Strength<br class="hidden-xs hidden-md hidden-lg"> With This<br
                         class="hidden-xs hidden-sm"> Step-By-Step Training Pack.<br class="hidden-xs hidden-md hidden-lg">
                 <strong>You WILL Get Faster!</strong></h1>
-            @if(PianotePrices::$fasterFingersFull > PianotePrices::$fasterFingersRegular)
-                <h3 class="text-red"><em><s>NORMALLY ${{ PianotePrices::$fasterFingersFull }}</s> - JUST ${{ PianotePrices::$fasterFingersRegular }}</em></h3>
+            @if(floatval($productPrices['faster-fingers']->price) > floatval($productPrices['faster-fingers']->discounted_price))
+                <h3 class="text-red"><em><s>NORMALLY ${{ floatval($productPrices['faster-fingers']->price) }}</s> - JUST ${{ floatval($productPrices['faster-fingers']->discounted_price) }}</em></h3>
             @else
-                <h3 class="text-red"><em>ONLY ${{ PianotePrices::$fasterFingersRegular }}</em></h3>
+                <h3 class="text-red"><em>ONLY ${{ floatval($productPrices['faster-fingers']->discounted_price) }}</em></h3>
             @endif
             <div class="wrapper">
                 <img src="https://d2vyvo0tyx8ig5.cloudfront.net/faster-fingers/sales/lisa.jpg">
@@ -383,11 +383,11 @@
                 data-product-json='{"faster-fingers": 1}'
             >Play Faster Today &raquo;</a>
             <p class="breakdown">
-                @if(PianotePrices::$fasterFingersFull > PianotePrices::$fasterFingersRegular)
-                    <s>NORMALLY ${{ PianotePrices::$fasterFingersFull }}.</s> &nbsp;
-                    <strong><u>ONLY ${{ PianotePrices::$fasterFingersRegular }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (PianotePrices::$fasterFingersRegular / PianotePrices::$fasterFingersFull))) }}%)
+                @if(floatval($productPrices['faster-fingers']->price) > floatval($productPrices['faster-fingers']->discounted_price))
+                    <s>NORMALLY ${{ floatval($productPrices['faster-fingers']->price) }}.</s> &nbsp;
+                    <strong><u>ONLY ${{ floatval($productPrices['faster-fingers']->discounted_price) }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (floatval($productPrices['faster-fingers']->discounted_price) / floatval($productPrices['faster-fingers']->price)))) }}%)
                 @else
-                    <strong><u>ONLY ${{ PianotePrices::$fasterFingersRegular }}</u></strong>
+                    <strong><u>ONLY ${{ floatval($productPrices['faster-fingers']->discounted_price) }}</u></strong>
                 @endif
                 <br><a href="/" class="red">(OR FREE WITH A PIANOTE MEMBERSHIP)</a><br> <strong
                         class="yellow">** 90-DAY GUARANTEE **</strong>

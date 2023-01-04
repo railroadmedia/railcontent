@@ -210,7 +210,7 @@
 {{--                                Chords & Scales Book + Practice Planner + Christmas<br class="hidden sm:inline">--}}
 {{--                                Songbook + Chords Poster + Scales Poster</p>--}}
 {{--                            <h4 class="inline-block leading-none"><strong>--}}
-{{--                                    <s class="opacity-60">$145</s>&nbsp; ${{ PianotePrices::$bundleBook }}</strong></h4><br>--}}
+{{--                                    <s class="opacity-60">$145</s>&nbsp; ${{  }}</strong></h4><br>--}}
 {{--                            <span class="join smaller mt-2 lg:mt-3" style="background-color:#000;">See The Deal &raquo;</span>--}}
 {{--                        </div>--}}
 {{--                        --}}{{--                <div class="absolute top-0 left-0 right-0 bottom-0 z-0 hidden md:block" style="background:linear-gradient(to right, rgba(18,139,165,0.4) 25%, #003643);"></div>--}}
