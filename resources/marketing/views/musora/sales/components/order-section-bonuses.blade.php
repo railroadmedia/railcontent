@@ -1,6 +1,3 @@
-
-
-
 <div style="background:linear-gradient(30deg, #0a3761, #0c1526);">
 <section class="py-14 sm:py-24 lg:py-32 relative overflow-hidden text-white text-center customize px-4 lg:px-6"  style="background:url(https://drumeo-assets.s3.amazonaws.com/sales/2023/order-bg-tile-2.png) center center/160px;">
     <div class="container mx-auto max-w-6xl relative z-50">
