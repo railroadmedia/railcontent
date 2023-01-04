@@ -57,6 +57,7 @@ class AppServiceProvider extends ServiceProvider
             [
                 'drumeo.drumshop.*',
                 'drumeo.sales.*',
+                'drumeo.products.*',
                 'guitareo.shop.*',
                 'guitareo.products.guitar-quest.*',
                 'pianote.shop.*',
