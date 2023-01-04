@@ -1120,7 +1120,7 @@ return [
         'podcasts',
         'learning-path-lesson',
         'song-tutorial',
-        'song-tutorial-children'
+        'song-tutorial-children',
     ],
     'dashboardInProgressContentTypes' => [
         'course',
@@ -1235,7 +1235,7 @@ return [
         'exploring-beats', /* 2018*/
         'sonor-drums', /* 2018*/
         'song-tutorial',
-        'song-tutorial-children'
+        'song-tutorial-children',
     ],
 
     'contentTypesWithChildren' => [
