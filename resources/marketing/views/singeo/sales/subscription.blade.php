@@ -453,9 +453,6 @@
             ],
         ]
     @endphp
-
-    <div id="testimonials" class="anchor"></div>
-
     @include('musora.sales.components.testimonials-section', [
         'header' => 'Trusted by singers everywhere.',
         'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Singeo+Membership/79348458',
@@ -476,6 +473,7 @@
 
     <div class="unstick-trigger block"></div>
     <div id="customize-anchor" class="anchor"></div>
+    <div id="order" class="anchor"></div>
 
     @if(!empty($promoVersion))
 
