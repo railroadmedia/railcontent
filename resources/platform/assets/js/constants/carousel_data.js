@@ -8,7 +8,7 @@ export const testCarousel = [
                 ctaText: "Play Songs",
                 description: "Drumeo students can now use our 5000+ note-for-note song transcriptions along with a drumless track. Try it out today and put yourself in the shoes of your favorite drummer!",
                 ctaUrl: "/drumeo/songs",
-                img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,fit=cover,metadata=none/https://singeo.s3.amazonaws.com/sales/2023/2023-songs-bannerdrumeo+close.jpg",
+                img: "https://imagedelivery.net/0Hon__GSkIjm-B_W77SWCA/96bf5455-7e05-4f20-8300-fd533662c300/w=1536,sharpen=3",
             },
             {
                 topSubtitle: "",
@@ -45,7 +45,7 @@ export const testCarousel = [
                 ctaText: "PLAY SONGS",
                 description: "Songs that are automatically synced to sheet music with audio tracks. You can adjust the speed, create practice loops, and play with or without the metronome. Check out our library and choose your favorite now!",
                 ctaUrl: "/pianote/songs",
-                img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,fit=cover,metadata=none/https://singeo.s3.amazonaws.com/sales/2023/2023-songs-bannerdrumeo+close.jpg",
+                img: "https://imagedelivery.net/0Hon__GSkIjm-B_W77SWCA/6f6d73a3-67b9-44b2-1f9e-77c4bc870c00/w=1536,sharpen=3",
             },
             {
                 topSubtitle: "",
@@ -82,7 +82,7 @@ export const testCarousel = [
                 ctaText: "PLAY SONGS",
                 description: "Songs that are automatically synced to sheet music with audio tracks. You can adjust the speed, create practice loops, and play with or without the metronome. Check out our library and choose your favorite now!",
                 ctaUrl: "/guitareo/songs",
-                img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,fit=cover,metadata=none/https://singeo.s3.amazonaws.com/sales/2023/2023-songs-bannerdrumeo+close.jpg",
+                img: "https://imagedelivery.net/0Hon__GSkIjm-B_W77SWCA/14786854-bbfc-49fa-c75b-64da6da7e800/w=1536,sharpen=3",
             },
             {
                 topSubtitle: "",
@@ -111,7 +111,7 @@ export const testCarousel = [
                 ctaText: "PLAY SONGS",
                 description: "Songs that are automatically synced to sheet music with audio tracks. You can adjust the speed, create practice loops, and play with or without the metronome. Check out our library and choose your favorite now!",
                 ctaUrl: "/singeo/songs",
-                img: "https://musora.com/cdn-cgi/image/quality=100,width=1536,fit=cover,metadata=none/https://singeo.s3.amazonaws.com/sales/2023/2023-songs-bannerdrumeo+close.jpg",
+                img: "https://imagedelivery.net/0Hon__GSkIjm-B_W77SWCA/4177b05e-b7c6-4782-b835-9db7ca5d0800/w=1536,sharpen=3",
             },
             {
                 topSubtitle: "",
