@@ -400,11 +400,6 @@ class NavigationService
                         'path' => '/'.brand().'/routines',
                         'icon' => 'routines',
                     ],
-                    [
-                        'name' => 'Sing-Alongs',
-                        'path' => '/'.brand().'/sing-alongs',
-                        'icon' => 'microphone',
-                    ],
                 ],
                 [ // section
                     [

@@ -863,7 +863,7 @@ class ContentPagesController extends BaseController
         $relatedLessons = (new ContentFilterResultsEntity(['results' => $parentChildrenTrimmed]))->toResponseRawJson();
 
         $rangesVideoIds = [];
-        if ($primaryPage == 'sing-alongs' && $brand == 'singeo') {
+        if ($primaryPage == 'songs' && $brand == 'singeo') {
             $rangesVideoIds = [];
             $ranges = ['low', 'original', 'high'];
             $contentToRenderAsLesson['ranges'] = [];

@@ -92,8 +92,7 @@ Route::domain('{musoraDomain}')
                         'sonor-drums',
                         'rudiments',
                         'boot-camps',
-                        'song-tutorials',
-                        'sing-alongs'
+                        'song-tutorials'
                     ])
                     ->name('platform.content-type-catalog');
 
@@ -199,7 +198,6 @@ Route::domain('{musoraDomain}')
                             'recording',
                             'play-alongs',
                             'song-tutorials',
-                            'sing-alongs'
                         ]
                     )
                     ->name('platform.content.first-level');
