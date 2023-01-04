@@ -87,7 +87,7 @@ class Accessory extends Resource
             Text::make('Meta Image', 'meta_img')->hideFromIndex()->hideFromDetail(),
             Text::make('Promo Code', 'promo_code')->hideFromIndex(),
             Currency::make('Price')->required(),
-            Currency::make('Discounted Price', 'discounted_price')->hideFromIndex(),
+            Currency::make('Discounted Price', 'discounted_price'),
             Boolean::make('Sold Out', 'sold_out')->default(false)->hideFromIndex(),
             Heading::make('Shop Card'),
             Text::make('Badge Text', 'badge_text')->hideFromIndex(),
