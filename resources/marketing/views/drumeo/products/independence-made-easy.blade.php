@@ -54,8 +54,8 @@
 @section('content')
     @include('drumeo.products.partials.promo-banner', [
                     "name" => "Independence Made Easy",
-                    "fullPrice" => Prices::$imeFull,
-                    "price" => Prices::$imeRegular,
+                    "fullPrice" => floatval($productPrices['independence-made-easy-pack']->price),
+                    "price" => floatval($productPrices['independence-made-easy-pack']->discounted_price),
                 "noBreadcrumb" => true
                 ])
     <header class="hero-header">
@@ -82,10 +82,10 @@
                     the drums through 26 weekly lessons.</p>
                 <a href="/ecommerce/add-to-cart?products[independence-made-easy-pack]=1" class="join">Get Started &raquo;</a>
                 <p class="uppercase price-info">
-                    @if(Prices::$imeFull > Prices::$imeRegular)
-                        <s>Normally ${{ Prices::$imeFull }}</s> <strong>Only ${{ Prices::$imeRegular, 2 }}</strong> (Save {{ round(100 - (100 * (Prices::$imeRegular / Prices::$imeFull))) }}%)
+                    @if(floatval($productPrices['independence-made-easy-pack']->price) > floatval($productPrices['independence-made-easy-pack']->discounted_price))
+                        <s>Normally ${{ floatval($productPrices['independence-made-easy-pack']->price) }}</s> <strong>Only ${{ floatval($productPrices['independence-made-easy-pack']->discounted_price), 2 }}</strong> (Save {{ round(100 - (100 * (floatval($productPrices['independence-made-easy-pack']->discounted_price) / floatval($productPrices['independence-made-easy-pack']->price)))) }}%)
                     @else
-                        <strong>Now ${{ Prices::$imeRegular }}.</strong>
+                        <strong>Now ${{ floatval($productPrices['independence-made-easy-pack']->discounted_price) }}.</strong>
                     @endif
                     <br>
                     <u class="text-green"><a href="/" style="color:inherit;">(Or get it free with Drumeo)</a></u>
@@ -433,16 +433,16 @@
                 <tr class="prices">
                     <td>Your Total Investment</td>
                     <td>
-                        @if(Prices::$imeFull > Prices::$imeRegular)
-                            <s>${{ Prices::$imeFull }}</s>
+                        @if(floatval($productPrices['independence-made-easy-pack']->price) > floatval($productPrices['independence-made-easy-pack']->discounted_price))
+                            <s>${{ floatval($productPrices['independence-made-easy-pack']->price) }}</s>
                         @endif
-                            ${{ Prices::$imeRegular, 2 }}</td>
+                            ${{ floatval($productPrices['independence-made-easy-pack']->discounted_price), 2 }}</td>
                     <td><strong>$50+</strong><br>FOR 1 LESSON</td>
                 </tr>
                 </tbody>
             </table>
             <p class="columns">
-                <strong>You can unlock the full 26-week course today</strong> to get Jared Falk’s best advice for improving your independence on the drums -- <u>all for just ${{ round(Prices::$imeRegular / 26, 2) }} per week</u> (billed at ${{ Prices::$imeRegular, 2 }} for the entire course).
+                <strong>You can unlock the full 26-week course today</strong> to get Jared Falk’s best advice for improving your independence on the drums -- <u>all for just ${{ round(floatval($productPrices['independence-made-easy-pack']->discounted_price) / 26, 2) }} per week</u> (billed at ${{ floatval($productPrices['independence-made-easy-pack']->discounted_price), 2 }} for the entire course).
                 <br><br>
                 You can choose a one-time payment, a two-payment plan, or a five-payment plan -- and the entire course is yours for life with no recurring subscription or additional fees.
 
@@ -470,15 +470,15 @@
 
             <h1 class="columns">
                 Jared Falk’s 26-Week Online <br class="hide-for-large">
-                Course For Just ${{ round(Prices::$imeRegular / 26, 2) }} Per Week</h1>
+                Course For Just ${{ round(floatval($productPrices['independence-made-easy-pack']->discounted_price) / 26, 2) }} Per Week</h1>
 
             <div class="columns"><a href="/ecommerce/add-to-cart?products[independence-made-easy-pack]=1" class="join">Get Started &raquo;</a></div>
 
             <h2 class="columns uppercase">
-                @if(Prices::$imeFull > Prices::$imeRegular)
-                    <s>Normally ${{ Prices::$imeFull }}</s> <strong>Only ${{ Prices::$imeRegular, 2 }}</strong> (Save {{ round(100 - (100 * (Prices::$imeRegular / Prices::$imeFull))) }}%)
+                @if(floatval($productPrices['independence-made-easy-pack']->price) > floatval($productPrices['independence-made-easy-pack']->discounted_price))
+                    <s>Normally ${{ floatval($productPrices['independence-made-easy-pack']->price) }}</s> <strong>Only ${{ floatval($productPrices['independence-made-easy-pack']->discounted_price), 2 }}</strong> (Save {{ round(100 - (100 * (floatval($productPrices['independence-made-easy-pack']->discounted_price) / floatval($productPrices['independence-made-easy-pack']->price)))) }}%)
                 @else
-                    <strong>Now ${{ Prices::$imeRegular }}.</strong>
+                    <strong>Now ${{ floatval($productPrices['independence-made-easy-pack']->discounted_price) }}.</strong>
                 @endif
                 <br>
                 <u class="text-green"><a href="/" style="color:inherit;">(Or get it free with Drumeo)</a></u>

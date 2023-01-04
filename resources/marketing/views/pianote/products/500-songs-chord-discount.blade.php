@@ -20,7 +20,7 @@
             <div class="container">
                 <img class="logo hidden-xs" src="https://d2vyvo0tyx8ig5.cloudfront.net/chord-hacks/logo.png">
                 <div class="text">
-                    <p><strong>Save {{ round(100 - (100 * ($productPrice / PianotePrices::$songs500Full))) }}% on 500 Songs in 5 Days</strong><br>
+                    <p><strong>Save {{ round(100 - (100 * ($productPrice / floatval($productPrices['500-songs-in-5-days']->price)))) }}% on 500 Songs in 5 Days</strong><br>
                         Special for Students Only</p>
                 </div>
             </div>

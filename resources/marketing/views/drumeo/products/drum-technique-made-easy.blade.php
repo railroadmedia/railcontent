@@ -60,8 +60,8 @@
 @section('content')
     @include('drumeo.products.partials.promo-banner', [
                     "name" => "Drum Technique Made Easy",
-                    "fullPrice" => Prices::$dtmeFull,
-                    "price" => Prices::$dtmeRegular,
+                    "fullPrice" => floatval($productPrices['drum-technique-made-easy-pack']->price),
+                    "price" => floatval($productPrices['drum-technique-made-easy-pack']->discounted_price),
                 "noBreadcrumb" => true
                 ])
     <header class="hero-header">
@@ -76,10 +76,10 @@
             <div><a href="/ecommerce/add-to-cart?products[drum-technique-made-easy-pack]=1" class="join">Get Started &raquo;</a></div>
 
             <p class="uppercase price">
-                @if(Prices::$dtmeFull > Prices::$dtmeRegular)
-                    <s>Normally ${{ Prices::$dtmeFull }}.</s> <strong>Only ${{ Prices::$dtmeRegular }}.</strong> (Save {{ round(100 - (100 * (Prices::$dtmeRegular / Prices::$dtmeFull))) }}%)
+                @if(floatval($productPrices['drum-technique-made-easy-pack']->price) > floatval($productPrices['drum-technique-made-easy-pack']->discounted_price))
+                    <s>Normally ${{ floatval($productPrices['drum-technique-made-easy-pack']->price) }}.</s> <strong>Only ${{ floatval($productPrices['drum-technique-made-easy-pack']->discounted_price) }}.</strong> (Save {{ round(100 - (100 * (floatval($productPrices['drum-technique-made-easy-pack']->discounted_price) / floatval($productPrices['drum-technique-made-easy-pack']->price)))) }}%)
                 @else
-                    <strong>Now ${{ Prices::$dtmeRegular }}.</strong>
+                    <strong>Now ${{ floatval($productPrices['drum-technique-made-easy-pack']->discounted_price) }}.</strong>
                 @endif
                 <br>
                 <u class="text-green"><a href="/" style="color:inherit;">(Or get it free with Drumeo)</a></u>
@@ -501,7 +501,7 @@
     <section class="compare-table">
         <div class="container clearfix lg:mx-auto max-w-6xl">
             <h1>UNLOCK YOUR UNFAIR ADVANTAGE</h1>
-            <h3>while saving {{ round(100 - (100 * (round(Prices::$dtmeRegular / 26, 2) / 30))) }}% or more <br class="inline sm:inline">
+            <h3>while saving {{ round(100 - (100 * (round(floatval($productPrices['drum-technique-made-easy-pack']->discounted_price) / 26, 2) / 30))) }}% or more <br class="inline sm:inline">
                 compared to private lessons.</h3>
 
             <table>
@@ -571,13 +571,13 @@
                 </tr>
                 <tr class="prices">
                     <td>Your Total Investment</td>
-                    <td>${{ round(Prices::$dtmeRegular / 26, 2) }}/week</td>
+                    <td>${{ round(floatval($productPrices['drum-technique-made-easy-pack']->discounted_price) / 26, 2) }}/week</td>
                     <td>$30-50/week</td>
                 </tr>
                 </tbody>
             </table>
             <p>
-                <strong>You can unlock the full 26-week course today</strong> to get Bruce Becker’s curriculum for improving your technique on the drums -- <u>all for just {{ round(Prices::$dtmeRegular / 26, 2) }} per week</u> (billed at ${{ Prices::$dtmeRegular }} for the entire course).
+                <strong>You can unlock the full 26-week course today</strong> to get Bruce Becker’s curriculum for improving your technique on the drums -- <u>all for just {{ round(floatval($productPrices['drum-technique-made-easy-pack']->discounted_price) / 26, 2) }} per week</u> (billed at ${{ floatval($productPrices['drum-technique-made-easy-pack']->discounted_price) }} for the entire course).
                 <br><br> You can choose a one-time payment, a two-payment plan, or a five-payment plan -- and the entire course is yours for life with no recurring subscription or additional fees.
             </p>
         </div>
@@ -654,15 +654,15 @@
 
             <h1>
                 Bruce Becker’s 26-Week Online <br class="inline lg:hidden">
-                Course For Just ${{ round(Prices::$dtmeRegular / 26, 2) }} Per Week</h1>
+                Course For Just ${{ round(floatval($productPrices['drum-technique-made-easy-pack']->discounted_price) / 26, 2) }} Per Week</h1>
 
             <div><a href="/ecommerce/add-to-cart?products[drum-technique-made-easy-pack]=1" class="join">Get Started &raquo;</a></div>
 
             <h2 class="uppercase">
-                @if(Prices::$dtmeFull > Prices::$dtmeRegular)
-                    <s>Normally ${{ Prices::$dtmeFull }}.</s> <strong>Only ${{ Prices::$dtmeRegular }}.</strong> (Save {{ round(100 - (100 * (Prices::$dtmeRegular / Prices::$dtmeFull))) }}%)
+                @if(floatval($productPrices['drum-technique-made-easy-pack']->price) > floatval($productPrices['drum-technique-made-easy-pack']->discounted_price))
+                    <s>Normally ${{ floatval($productPrices['drum-technique-made-easy-pack']->price) }}.</s> <strong>Only ${{ floatval($productPrices['drum-technique-made-easy-pack']->discounted_price) }}.</strong> (Save {{ round(100 - (100 * (floatval($productPrices['drum-technique-made-easy-pack']->discounted_price) / floatval($productPrices['drum-technique-made-easy-pack']->price)))) }}%)
                 @else
-                    <strong>Now ${{ Prices::$dtmeRegular }}.</strong>
+                    <strong>Now ${{ floatval($productPrices['drum-technique-made-easy-pack']->discounted_price) }}.</strong>
                 @endif
                 <br>
                 <u class="text-green"><a href="/" style="color:inherit;">(Or get it free with Drumeo)</a></u>

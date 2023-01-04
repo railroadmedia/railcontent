@@ -22,8 +22,8 @@
 
     @include('pianote._partials._promo-banner-no-tw', [
                     "name" => "Piano Riffs & Fills",
-                    "fullPrice" => PianotePrices::$pianoRiffsAndFillsFull,
-                    "price" => PianotePrices::$pianoRiffsAndFillsRegular,
+                    "fullPrice" => floatval($productPrices['piano-riffs-and-fills']->price),
+                    "price" => floatval($productPrices['piano-riffs-and-fills']->discounted_price),
                     "noBreadcrumb" => true
                 ])
 
@@ -41,11 +41,11 @@
             >Get Started &raquo;</a>
 
             <p class="breakdown">
-                @if(PianotePrices::$pianoRiffsAndFillsFull > PianotePrices::$pianoRiffsAndFillsRegular)
-                    <s>NORMALLY ${{ PianotePrices::$pianoRiffsAndFillsFull }}.</s> &nbsp;
-                    <strong><u>ONLY ${{ PianotePrices::$pianoRiffsAndFillsRegular }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (PianotePrices::$pianoRiffsAndFillsRegular / PianotePrices::$pianoRiffsAndFillsFull))) }}%)
+                @if(floatval($productPrices['piano-riffs-and-fills']->price) > floatval($productPrices['piano-riffs-and-fills']->discounted_price))
+                    <s>NORMALLY ${{ floatval($productPrices['piano-riffs-and-fills']->price) }}.</s> &nbsp;
+                    <strong><u>ONLY ${{ floatval($productPrices['piano-riffs-and-fills']->discounted_price) }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (floatval($productPrices['piano-riffs-and-fills']->discounted_price) / floatval($productPrices['piano-riffs-and-fills']->price)))) }}%)
                 @else
-                    <strong><u>ONLY ${{ PianotePrices::$pianoRiffsAndFillsRegular }}</u></strong>
+                    <strong><u>ONLY ${{ floatval($productPrices['piano-riffs-and-fills']->discounted_price) }}</u></strong>
                 @endif
 
                 <br><a href="/" class="red">(OR FREE WITH A PIANOTE MEMBERSHIP)</a><br>
@@ -253,11 +253,11 @@ Connect every riff, fill and tip you’ve learned and see how to apply it to pre
                 data-product-json='{"piano-riffs-and-fills": 1}'
             >Get Started &raquo;</a>
             <p class="breakdown">
-                @if(PianotePrices::$pianoRiffsAndFillsFull > PianotePrices::$pianoRiffsAndFillsRegular)
-                    <s>NORMALLY ${{ PianotePrices::$pianoRiffsAndFillsFull }}.</s> &nbsp;
-                    <strong><u>ONLY ${{ PianotePrices::$pianoRiffsAndFillsRegular }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (PianotePrices::$pianoRiffsAndFillsRegular / PianotePrices::$pianoRiffsAndFillsFull))) }}%)
+                @if(floatval($productPrices['piano-riffs-and-fills']->price) > floatval($productPrices['piano-riffs-and-fills']->discounted_price))
+                    <s>NORMALLY ${{ floatval($productPrices['piano-riffs-and-fills']->price) }}.</s> &nbsp;
+                    <strong><u>ONLY ${{ floatval($productPrices['piano-riffs-and-fills']->discounted_price) }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (floatval($productPrices['piano-riffs-and-fills']->discounted_price) / floatval($productPrices['piano-riffs-and-fills']->price)))) }}%)
                 @else
-                    <strong><u>ONLY ${{ PianotePrices::$pianoRiffsAndFillsRegular }}</u></strong>
+                    <strong><u>ONLY ${{ floatval($productPrices['piano-riffs-and-fills']->discounted_price) }}</u></strong>
                 @endif
                 <br><a href="/" class="red">(OR FREE WITH A PIANOTE MEMBERSHIP)</a><br>
                     <strong class="yellow">** 90-DAY GUARANTEE **</strong></p>

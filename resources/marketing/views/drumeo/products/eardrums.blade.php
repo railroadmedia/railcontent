@@ -86,8 +86,8 @@
     ])
     @include('drumeo.products.partials.promo-banner', [
                 "name" => "Drumeo EarDrums",
-                "fullPrice" => Prices::$earDrumsFull,
-                "price" => Prices::$earDrums,
+                "fullPrice" => floatval($productPrices['drumeo-eardrums']->price),
+                "price" => floatval($productPrices['drumeo-eardrums']->discounted_price),
                 "noBreadcrumb" => true
             ])
 
@@ -103,8 +103,8 @@
                     <a class="join sold-out my-2 sm:my-4 w-full sm:w-2/3">SOLD OUT</a>
                 @endif
                 <h6 class="leading-tight">
-                    <strong> ONLY @if(Prices::$earDrumsFull > Prices::$earDrums) <s style="opacity: 0.6;">${{ Prices::$earDrumsFull }}</s> @endif
-                    ${{ Prices::$earDrums }}
+                    <strong> ONLY @if(floatval($productPrices['drumeo-eardrums']->price) > floatval($productPrices['drumeo-eardrums']->discounted_price)) <s style="opacity: 0.6;">${{ floatval($productPrices['drumeo-eardrums']->price) }}</s> @endif
+                    ${{ floatval($productPrices['drumeo-eardrums']->discounted_price) }}
                     </strong>
                 </h6>
             </div>
@@ -328,11 +328,11 @@
                             <div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">
                                 <h5 class="leading-none mb-3">EarDrums</h5>
                                 <h1 class="inline-block leading-none">
-                                    @if(Prices::$earDrumsFull > Prices::$earDrums)
-                                        <s class="opacity-40">${{ Prices::$earDrumsFull }}</s>
+                                    @if(floatval($productPrices['drumeo-eardrums']->price) > floatval($productPrices['drumeo-eardrums']->discounted_price))
+                                        <s class="opacity-40">${{ floatval($productPrices['drumeo-eardrums']->price) }}</s>
                                     @endif
-                                    <strong>${{ Prices::$earDrums }}</strong></h1>
-                                {{--<p class="text-sm my-2 sm:my-4 opacity-60"><em>Save {{ round(100 - (100 * (Prices::$earDrums / Prices::$earDrumsFull))) }}% for a limited time.</em></p>--}}
+                                    <strong>${{ floatval($productPrices['drumeo-eardrums']->discounted_price) }}</strong></h1>
+                                {{--<p class="text-sm my-2 sm:my-4 opacity-60"><em>Save {{ round(100 - (100 * (floatval($productPrices['drumeo-eardrums']->discounted_price) / floatval($productPrices['drumeo-eardrums']->price)))) }}% for a limited time.</em></p>--}}
                                 <div class="join blue smaller w-full transition-opacity duration-300 group-hover:opacity-80 mt-2 sm:mt-4" style="max-width: 230px;">Get Started</div>
                             </div>
                             <div class="px-3 pt-5 md:pt-6 pb-9 md:pb-10" style="background: #f1f8ff;border-top: 2px solid #e6f2ff;">

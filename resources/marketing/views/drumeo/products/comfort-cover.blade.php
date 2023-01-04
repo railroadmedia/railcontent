@@ -160,8 +160,8 @@
 @section('content')
     @include('drumeo.products.partials.promo-banner', [
                 "name" => "Comfort Cover",
-                "fullPrice" => Prices::$comfortCoverFull,
-                "price" => Prices::$comfortCoverRegular,
+                "fullPrice" => floatval($productPrices['comfort-cover']->price),
+                "price" => floatval($productPrices['comfort-cover']->discounted_price),
                 "noBreadcrumb" => true
             ])
 
@@ -183,13 +183,13 @@
             {{--<a class="join blue sold-out">Sold Out</a>--}}
             {{--@endif--}}
             <p>
-                @if(Prices::$comfortCoverFull > Prices::$comfortCoverRegular)
-                    <s style="opacity: 0.6;">NORMALLY ${{ Prices::$comfortCoverFull }}</s>
+                @if(floatval($productPrices['comfort-cover']->price) > floatval($productPrices['comfort-cover']->discounted_price))
+                    <s style="opacity: 0.6;">NORMALLY ${{ floatval($productPrices['comfort-cover']->price) }}</s>
                     <strong class="text-yellow">
-                        ONLY ${{ number_format(Prices::$comfortCoverRegular, 2) }}
+                        ONLY ${{ number_format(floatval($productPrices['comfort-cover']->discounted_price), 2) }}
                     </strong>
                 @else
-                    <strong class="text-yellow">ONLY ${{ number_format(Prices::$comfortCoverRegular, 2) }}.</strong>
+                    <strong class="text-yellow">ONLY ${{ number_format(floatval($productPrices['comfort-cover']->discounted_price), 2) }}.</strong>
                 @endif
             </p>
         </div>
@@ -302,10 +302,10 @@
                         </tr>
                         <tr>
                             <td>Cost</td>
-                            <td> @if(Prices::$comfortCoverFull > Prices::$comfortCoverRegular)
-                                    <s>${{ Prices::$comfortCoverFull }}</s><br>
+                            <td> @if(floatval($productPrices['comfort-cover']->price) > floatval($productPrices['comfort-cover']->discounted_price))
+                                    <s>${{ floatval($productPrices['comfort-cover']->price) }}</s><br>
                                 @endif
-                                ${{ number_format(Prices::$comfortCoverRegular, 2) }}</td>
+                                ${{ number_format(floatval($productPrices['comfort-cover']->discounted_price), 2) }}</td>
                         </tr>
                     </table>
                 </div>
@@ -347,13 +347,13 @@
             {{--@else--}}
             {{--<a class="join blue sold-out">Sold Out</a>--}}
             {{--@endif--}}
-            <p>@if(Prices::$comfortCoverFull > Prices::$comfortCoverRegular)
-                    <s style="opacity: 0.6;">NORMALLY ${{ Prices::$comfortCoverFull }}</s>
+            <p>@if(floatval($productPrices['comfort-cover']->price) > floatval($productPrices['comfort-cover']->discounted_price))
+                    <s style="opacity: 0.6;">NORMALLY ${{ floatval($productPrices['comfort-cover']->price) }}</s>
                     <strong class="text-yellow">
-                        ONLY ${{ number_format(Prices::$comfortCoverRegular, 2) }}
+                        ONLY ${{ number_format(floatval($productPrices['comfort-cover']->discounted_price), 2) }}
                     </strong>
                 @else
-                    <strong class="text-yellow">ONLY ${{ number_format(Prices::$comfortCoverRegular, 2) }}.</strong>
+                    <strong class="text-yellow">ONLY ${{ number_format(floatval($productPrices['comfort-cover']->discounted_price), 2) }}.</strong>
                 @endif
             </p>
 

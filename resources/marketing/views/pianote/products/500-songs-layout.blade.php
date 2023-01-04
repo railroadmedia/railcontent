@@ -56,8 +56,8 @@
                 @hasSection('badge')
                     @yield('badge')
                 @endif
-                @if(PianotePrices::$songs500Full > $productPrice)
-                        <s>NORMALLY ${{ PianotePrices::$songs500Full }}.</s> &nbsp;<strong><u>ONLY ${{ $productPrice }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * ($productPrice / PianotePrices::$songs500Full))) }}%)
+                @if(floatval($productPrices['500-songs-in-5-days']->price) > $productPrice)
+                        <s>NORMALLY ${{ floatval($productPrices['500-songs-in-5-days']->price) }}.</s> &nbsp;<strong><u>ONLY ${{ $productPrice }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * ($productPrice / floatval($productPrices['500-songs-in-5-days']->price)))) }}%)
                 @else
                     <strong><u>ONLY ${{ $productPrice }}</u></strong>
                 @endif
@@ -105,8 +105,8 @@
                     The Fastest Way To Learn How<br class="hidden-xs"> To Play Songs -- <u>For Just ${{ $productPrice }}</u>
                 @endif
             </h1>
-            @if(PianotePrices::$songs500Full > $productPrice)
-                <h3><em><s>NORMALLY ${{ PianotePrices::$songs500Full }}</s></em></h3>
+            @if(floatval($productPrices['500-songs-in-5-days']->price) > $productPrice)
+                <h3><em><s>NORMALLY ${{ floatval($productPrices['500-songs-in-5-days']->price) }}</s></em></h3>
                 @else
 
                 <h3>&nbsp;</h3>
@@ -372,8 +372,8 @@
                 @endif
                     payment of just
 
-                @if(PianotePrices::$songs500Full > $productPrice)
-                    <s>${{ PianotePrices::$songs500Full }}</s> <strong>${{ $productPrice }}</strong>
+                @if(floatval($productPrices['500-songs-in-5-days']->price) > $productPrice)
+                    <s>${{ floatval($productPrices['500-songs-in-5-days']->price) }}</s> <strong>${{ $productPrice }}</strong>
                 @else
                     <strong>${{ $productPrice }}</strong>
                 @endif
@@ -387,8 +387,8 @@
                 @hasSection('badge')
                     @yield('badge')
                 @endif
-                @if(PianotePrices::$songs500Full > $productPrice)
-                    <s>NORMALLY ${{ PianotePrices::$songs500Full }}.</s> &nbsp;<strong><u>ONLY ${{ $productPrice }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * ($productPrice / PianotePrices::$songs500Full))) }}%)
+                @if(floatval($productPrices['500-songs-in-5-days']->price) > $productPrice)
+                    <s>NORMALLY ${{ floatval($productPrices['500-songs-in-5-days']->price) }}.</s> &nbsp;<strong><u>ONLY ${{ $productPrice }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * ($productPrice / floatval($productPrices['500-songs-in-5-days']->price)))) }}%)
                 @else
                     <strong><u>ONLY ${{ $productPrice }}</u></strong>
                 @endif

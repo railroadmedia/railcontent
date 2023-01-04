@@ -97,8 +97,8 @@
                     <div class="px-4 lg:px-6 py-5 lg:py-7">
                         <i class="text-4xl align-middle icon-songs text-songs"></i>
                         <img class="h-5 ml-2 imgfilter-songs lazyload" data-src="https://cdn.musora.com/image/fetch/w_150,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/songs-text.svg" alt="songs-text">
-                        <h4 class="leading-tight my-3"><strong>{{ Prices::$songs }}+ Songs &<br class="hidden md:inline">  Practice Tools</strong></h4>
-                        <p class="leading-normal text-light-navy mb-10 md:mb-14">Nothing beats the rush of playing your favorite song on the drums. Drumeo Songs makes it easier – with note-for-note transcriptions of {{ Prices::$songs }}+ popular songs and handy play-back tools so you can nail every note.</p>
+                        <h4 class="leading-tight my-3"><strong>{{ Prices::$drumeoSongs }}+ Songs &<br class="hidden md:inline">  Practice Tools</strong></h4>
+                        <p class="leading-normal text-light-navy mb-10 md:mb-14">Nothing beats the rush of playing your favorite song on the drums. Drumeo Songs makes it easier – with note-for-note transcriptions of {{ Prices::$drumeoSongs }}+ popular songs and handy play-back tools so you can nail every note.</p>
                         <a class="absolute bottom-4 lg:bottom-6 left-0 right-0 join smaller songs outline anchor-slide w-2/3 md:w-5/6 lg:w-2/3 mx-auto" href="#songs">Learn More</a>
                     </div>
                 </div>
@@ -649,8 +649,8 @@
     <section class="content-section text-center px-4 lg:px-5" style="padding-top: 0;background:linear-gradient(to bottom, #01050f 60%, #021225);">
         <div class="container mx-auto clearfix max-w-6xl">
 
-            <h4 class="mb-6 md:mb-7 lg:mb-10 mt-8 md:mt-10 lg:mt-14 leading-normal"><strong class="inline-block mr-1 bg-drumeo px-1 md:px-3 md:py-1 rounded-md md:rounded-lg leading-none" style="color: #000a1e;">PLUS</strong><em>On-demand access to <strong class="text-drumeo">{{ Prices::$courses }}+<br class="inline md:hidden"> courses</strong> &<br class="hidden md:inline">
-                    <strong class="text-drumeo">{{ Prices::$lessons }}+ lessons</strong> to <br class="inline md:hidden">improve any skill, anytime.</em></h4>
+            <h4 class="mb-6 md:mb-7 lg:mb-10 mt-8 md:mt-10 lg:mt-14 leading-normal"><strong class="inline-block mr-1 bg-drumeo px-1 md:px-3 md:py-1 rounded-md md:rounded-lg leading-none" style="color: #000a1e;">PLUS</strong><em>On-demand access to <strong class="text-drumeo">{{ Prices::$drumeoCourses }}+<br class="inline md:hidden"> courses</strong> &<br class="hidden md:inline">
+                    <strong class="text-drumeo">{{ Prices::$drumeoLessons }}+ lessons</strong> to <br class="inline md:hidden">improve any skill, anytime.</em></h4>
 
             <div class="w-full flex flex-wrap justify-center md:mb-2 mx-auto max-w-xs md:max-w-full">
                 @php
@@ -952,13 +952,13 @@
                 <img class="h-7 md:h-10 lg:h-11 mt-1 mb-4 md:mb-8 imgfilter-songs lazyload" data-src="https://cdn.musora.com/image/fetch/q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/songs-text.svg" alt="songs-text">
                 <h3 class="" data-aos="fade-up"><strong>Play your favorite songs.</strong></h3>
                 <h6 class="leading-normal max-w-2xl lg:max-w-4xl text-light-navy mt-3 md:mt-5 mb-20 md:mb-40 text-shadow-4">
-                    Playing drums is all about the MUSIC. So we’ve transcribed {{ Prices::$songs }}+ songs and created the ultimate practice tools. DrumeoSONGS automatically syncs sheet music with audio tracks for each song -- and lets you adjust the speed, create practice loops, play with or without the metronome, and so much more!
+                    Playing drums is all about the MUSIC. So we’ve transcribed {{ Prices::$drumeoSongs }}+ songs and created the ultimate practice tools. DrumeoSONGS automatically syncs sheet music with audio tracks for each song -- and lets you adjust the speed, create practice loops, play with or without the metronome, and so much more!
                 </h6>
                 <i class="fas fa-play play-button autoplay-video" data-open="songsTrailer"></i>
                 <h6 class="uppercase font-bebas mt-4">Play Songs Trailer</h6>
 
                 <h4 class="mt-20 md:mt-40 mb-6 md:mb-7 lg:mb-10 leading-normal"><strong class="inline-block mr-1 bg-songs px-3 py-1 rounded-md md:rounded-lg leading-none" style="color: #000a1e;">THE BEST PART ABOUT<br class="inline sm:hidden"> PLAYING THE DRUMS</strong><br>
-                    <em class="text-shadow-4">Get {{ Prices::$songs }}+ note-for-note song breakdowns for every<br class="hidden md:inline"> <strong class="text-songs">style</strong>, <strong class="text-songs">era</strong>, and <strong class="text-songs">skill</strong> with handy play-along tools.</em></h4>
+                    <em class="text-shadow-4">Get {{ Prices::$drumeoSongs }}+ note-for-note song breakdowns for every<br class="hidden md:inline"> <strong class="text-songs">style</strong>, <strong class="text-songs">era</strong>, and <strong class="text-songs">skill</strong> with handy play-along tools.</em></h4>
 
                 <div class="feature-rotater w-full max-w-md md:max-w-full flex flex-wrap md:flex-nowrap items-center mx-auto mt-4 md:mt-14 lg:mt-20 mb-8 md:mb-10 px-2">
                     <div class="pic-wrap md:order-1 mx-auto my-5 md:my-0 pl-0 md:pl-5 lg:pl-10 flex-shrink-0">
@@ -1197,7 +1197,7 @@
                     <td><i class="fas fa-check-circle"></i></td>
                 </tr>
                 <tr>
-                    <td>{{ Prices::$songs }}+ Popular Songs</td>
+                    <td>{{ Prices::$drumeoSongs }}+ Popular Songs</td>
                     <td><i class="fas fa-check-circle"></i></td>
                     <td><i class="fas fa-minus"></i></td>
                 </tr>
@@ -1244,12 +1244,12 @@
                     @else
                         <td class="rounded-b-xl">
                             @if(empty($trialVersion))
-                                @if(number_format(Prices::$drumeoEdgeAnnual, 2) == intval(Prices::$drumeoEdgeAnnual))
-                                    <strong>${{  round(Prices::$drumeoEdgeAnnual / 12, 2) }}</strong>/mo<br>
+                                @if(number_format(Prices::$plusSubscriptionAnnual, 2) == intval(Prices::$plusSubscriptionAnnual))
+                                    <strong>${{  round(Prices::$plusSubscriptionAnnual / 12, 2) }}</strong>/mo<br>
                                 @else
-                                    <strong>${{  number_format(Prices::$drumeoEdgeAnnual / 12, 2)  }}</strong>/mo<br>
+                                    <strong>${{  number_format(Prices::$plusSubscriptionAnnual / 12, 2)  }}</strong>/mo<br>
                                 @endif
-                                <em>Billed annually at ${{  Prices::$drumeoEdgeAnnual }}</em><br><br>
+                                <em>Billed annually at ${{  Prices::$plusSubscriptionAnnual }}</em><br><br>
                                 Unlimited lessons & support.
                             @else
                                 <strong>Free Trial</strong><br>&nbsp;
