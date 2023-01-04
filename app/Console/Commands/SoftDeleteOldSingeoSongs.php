@@ -8,7 +8,7 @@ use Illuminate\Support\Collection;
 use Railroad\Railcontent\Services\ContentHierarchyService;
 use Railroad\Railcontent\Services\ContentService;
 
-class MigrateSingeoSingAlongs extends Command
+class SoftDeleteOldSingeoSongs extends Command
 {
 
     /**
@@ -16,16 +16,16 @@ class MigrateSingeoSingAlongs extends Command
      *
      * @var string
      */
-    protected $name = 'MigrateSingeoSingAlongs';
+    protected $name = 'SoftDeleteOldSingeoSongs';
 
-    protected $signature = 'MigrateSingeoSingAlongs';
+    protected $signature = 'SoftDeleteOldSingeoSongs';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Migrate Singeo old karaoke songs to sing-alongs.';
+    protected $description = 'Soft Delete Old Singeo Songs.';
 
     /**
      * Execute the console command.
@@ -37,7 +37,7 @@ class MigrateSingeoSingAlongs extends Command
         ContentService $contentService,
         ContentHierarchyService $contentHierarchyService
     ) {
-        $this->info("MigrateSingeoSingAlongs command starts now \n");
+        $this->info("SoftDeleteOldSingeoSongs command starts now \n");
 
         $dbConn = $databaseManager->connection(config('railcontent.database_connection_name'));
 
@@ -53,7 +53,7 @@ class MigrateSingeoSingAlongs extends Command
             $dbConn->table('railcontent_content')
                 ->whereIn('id', $rows->pluck('id'))
                 ->update([
-                             'type' => 'sing-along',
+                             'status' => 'deleted',
                          ]);
             $contentService->fillCompiledViewContentDataColumnForContentIds(
                 $rows->pluck('id')
@@ -65,7 +65,7 @@ class MigrateSingeoSingAlongs extends Command
             );
         });
 
-        $this->info("MigrateSingeoSingAlongs command has finished");
+        $this->info("SoftDeleteOldSingeoSongs command has finished");
     }
 
 }
