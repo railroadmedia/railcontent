@@ -78,7 +78,7 @@ onMounted(() => {
 <template>
     <ModalRenderer>
         <section class="tw-flex tw-justify-center lg:tw-items-center tw-h-full tw-w-full tw-overflow-auto tw-max-h-[100vh]">
-            <div class="tw-text-center tw-text-white tw-px-5 sm:tw-px-6 tw-py-10 sm:tw-py-14 lg:tw-py-20 tw-bg-[#081825] tw-border-[#445F74] tw-rounded-[10px] tw-border-[1px]">
+            <div class="tw-text-center tw-text-white tw-px-5 sm:tw-px-6 tw-py-10 sm:tw-py-14 lg:tw-py-20 tw-bg-[#081825] tw-border-[#445F74] tw-rounded-[10px] tw-border-[1px] tw-h-auto">
                 <h1 class="tw-mb-[20px]"><strong>Manage membership</strong></h1>
                 <div class="tw-flex tw-items-end tw-justify-center">
                     <button @click="() => handleSelectedTier('plus')" class="tw-px-2 tw-relative">
@@ -130,7 +130,7 @@ onMounted(() => {
                     <div class="tw-flex tw-flex-col tw-w-full tw-h-full md:tw-w-1/2 tw-px-2 md:tw-px-3 tw-relative">
                         <p class="tw-inline-block tw-absolute -tw-mt-3 tw-px-5 tw-py-1 tw-z-10 tw-text-[12px] tw-text-black tw-rounded-full tw-mx-auto tw-left-0 tw-right-0 tw-w-[100px]"
                             style="background-color:#ffac00;">SAVE 33%</p>
-                        <div class="tw-flex tw-flex-col tw-h-full tw-text-black tw-rounded-2xl tw-mx-auto tw-mb-4 md:tw-mb-0 tw-group">
+                        <div class="tw-flex tw-flex-col tw-h-full tw-text-black tw-overflow-hidden tw-rounded-2xl tw-mx-auto tw-mb-4 md:tw-mb-0 tw-group">
                             <div class="tw-bg-white tw-px-3 tw-pt-6 md:tw-pt-8 tw-pb-5 md:tw-pb-8">
                                 <h2 class="tw-leading-none tw-mb-3"><strong>Annual</strong></h2>
                                 <h4 class="tw-inline-block tw-leading-none"><strong>{{ intervalTierPrices[selectedTier].year.title }}</strong></h4>
@@ -148,7 +148,7 @@ onMounted(() => {
                         </div>
                     </div>
                     <div class="tw-flex tw-flex-col tw-grow tw-w-full tw-h-full md:tw-w-1/2 tw-px-2 md:tw-px-3 tw-relative">
-                        <div class="tw-flex tw-flex-col tw-grow tw-text-black tw-rounded-2xl tw-mx-auto tw-mb-4 md:tw-mb-0 tw-group">
+                        <div class="tw-flex tw-flex-col tw-grow tw-text-black tw-overflow-hidden tw-rounded-2xl tw-mx-auto tw-mb-4 md:tw-mb-0 tw-group">
                             <div class="tw-bg-white tw-px-3 tw-pt-6 md:tw-pt-8 tw-pb-5 md:tw-pb-8">
                                 <h2 class="tw-leading-none tw-mb-3"><strong>Monthly</strong></h2>
                                 <h4 class="tw-inline-block tw-leading-none"><strong>{{ intervalTierPrices[selectedTier].month.title }}</strong></h4>
