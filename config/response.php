@@ -903,7 +903,6 @@ return [
             ],
             'artist'
         ],
-
         'song' => [
             'ranges',
             'id',
