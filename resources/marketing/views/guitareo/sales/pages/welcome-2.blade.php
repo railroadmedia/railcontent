@@ -87,7 +87,7 @@
 
 @section('scripts')
     @parent
-    <script src="{{ asset('marketing/parcel/guitareo/nav-footer.js') }}"></script>
+    <script src="{{ asset('marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 @stop()
 
 @section('content')

@@ -29,7 +29,7 @@
     @parent
     <script src="{{ asset('marketing/parcel/guitareo/svg-polyfil.js') }}"></script>
     <script src="{{ asset('marketing/js/app.js') }}"></script>
-    <script src="{{ asset('marketing/parcel/guitareo/nav-footer.js') }}"></script>
+    <script src="{{ asset('marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script>
         $(document).ready(function () {
             $(".infusion-form").submit(function(event) {

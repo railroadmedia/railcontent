@@ -25,5 +25,5 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('/marketing/parcel/guitareo/nav-footer.js') }}"></script>
+    <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 @endsection

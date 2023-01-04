@@ -384,11 +384,6 @@ class SalesController extends BaseController
         return view('drumeo.sales.trials.trial-selection.coach-trial');
     }
 
-    public function chooseTrial()
-    {
-        return view('drumeo.sales.trials.trial-selection.choose-your-trial');
-    }
-
     public function earthWorksTrial()
     {
         return view('drumeo.sales.trials.trial-selection.earthworks-trial');
