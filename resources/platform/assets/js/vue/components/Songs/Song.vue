@@ -13,7 +13,7 @@ import SoundSliceControls from "../SoundSlice/SoundSliceControls.vue";
 import ContentService from "../../vuesora/assets/js/services/content";
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner.vue';
 import { ArrowSmLeftIcon } from '@heroicons/vue/solid';
-//import SelectModal from '../Membership/SelectModal.vue';
+import SelectModal from '../Membership/SelectModal.vue';
 
 const props = defineProps({
     brand: {
@@ -189,6 +189,7 @@ const getBrandSpecificParams = () => {
 
 <template>
     <div class="tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8 mv-3">
+        <SelectModal />
         <div id="lessonInfo" class="tw-flex xl:tw-flex-row tw-flex-col align-v-top ">
             <div class="tw-flex tw-flex-col tw-pr-0 xl:tw-pr-8 tw-grow tw-w-full">
                 <a :href="backUrl ? backUrl : null"
