@@ -56,7 +56,7 @@
                 "sku" => $product->sku,
                 "logo" => $product->page_logo,
                 "fullPrice" => $product->price,
-                "price"=> $product->discounted_price === '0.00' || empty($product->discounted_price) ? $product->price : $product->discounted_price,
+                "price"=> $product->discounted_price,
                 "guaranteeBadge" => $product->guaranteed,
                 "sizes" => $product->sizes,
                 "soldOut" => !empty($products[$product->sku]) ? $products[$product->sku]->getStockAvailability() === 0 : $product->sold_out,

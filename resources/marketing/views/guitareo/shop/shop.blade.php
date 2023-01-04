@@ -220,7 +220,7 @@
                         "cardDescription" => $item->short_desc,
                         "includedEdge" => $item->included_edge,
                         "fullPrice" => $item->price,
-                        "price" => $item->discounted_price === '0.00' || empty($item->discounted_price) ? $item->price : $item->discounted_price,
+                        "price" => $item->discounted_price,
                         "category" => strtolower($item->productType->name),
                         "sizes" => $item->sizes,
                         "soldOut" => (!empty($products[$item->sku]) && $item->productType->name !== 'Lessons') ? $products[$item->sku]->getStockAvailability() === 0 : $item->sold_out,
