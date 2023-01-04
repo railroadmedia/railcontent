@@ -96,7 +96,7 @@ class Clothing extends Resource
             Text::make('Meta Image', 'meta_img')->hideFromIndex()->hideFromDetail(),
             Text::make('Promo Code', 'promo_code')->hideFromIndex(),
             Currency::make('Price')->required(),
-            Currency::make('Discounted Price', 'discounted_price'),
+            Currency::make('Discounted Price', 'discounted_price')->help('If discounted price is the same as the price, no discount will show on the sales page.'),
             Boolean::make('Sold Out', 'sold_out')->default(false)->hideFromIndex(),
             Text::make('Badge Text', 'badge_text')->hideFromIndex(),
             Heading::make('Shop Card'),
