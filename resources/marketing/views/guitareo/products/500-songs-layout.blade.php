@@ -35,7 +35,7 @@
 
 @section('scripts')
     <script src="{{ asset('/marketing/js/modal.js') }}"></script>
-    <script src="{{ asset('/marketing/parcel/guitareo/nav-footer.js') }}"></script>
+    <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script>
         $(document).ready(function () {
             $(document).foundation();

@@ -21,7 +21,7 @@
 
 @section('scripts')
     @parent
-    <script src="{{ asset('/marketing/js/sliding-anchor.js') }}"></script>
+
     <script type="text/javascript">
         $(document).ready(function () {
             //sub nav sticky function
