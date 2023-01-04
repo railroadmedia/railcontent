@@ -1027,8 +1027,8 @@
 
     @include('drumeo.products.partials.promo-banner', [
                 "name" => "The P4 Practice Pad",
-                "fullPrice" => Prices::$padFull,
-                "price" => Prices::$padRegular,
+                "fullPrice" => floatval($productPrices['practicepad']->price),
+                "price" => floatval($productPrices['practicepad']->discounted_price),
                 "noBreadcrumb" => true
             ])
     @if(strpos(url()->full(), 'thankyou'))
@@ -1285,10 +1285,10 @@
         <div id="customize-anchor" class="anchor"></div>
         <div class="columns customize text-center">
             <div class="final-pitch">
-                @if(Prices::$padFull > Prices::$padRegular)
-                    <h1><s>WAS ${{ Prices::$padFull }}</s> NOW ${{ Prices::$padRegular }}</h1>
+                @if(floatval($productPrices['practicepad']->price) > floatval($productPrices['practicepad']->discounted_price))
+                    <h1><s>WAS ${{ floatval($productPrices['practicepad']->price) }}</s> NOW ${{ floatval($productPrices['practicepad']->discounted_price) }}</h1>
                 @else
-                    <h1>ONLY ${{ Prices::$padRegular }}</h1>
+                    <h1>ONLY ${{ floatval($productPrices['practicepad']->discounted_price) }}</h1>
                 @endif
                 <a class="join stores big"
                         href="/ecommerce/add-to-cart?products[practicepad]=1">Click Here To Order &raquo;</a>

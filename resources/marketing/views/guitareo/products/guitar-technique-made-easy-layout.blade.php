@@ -93,8 +93,8 @@
     ])
     @include('guitareo._partials.promo-banner', [
                 "name" => "Guitar Technique Made Easy",
-                "fullPrice" => GuitareoPrices::$GTMEFull,
-                "price" => GuitareoPrices::$GTMERegular,
+                "fullPrice" => floatval($productPrices['GTME-OCT-2018-SEMESTER']->price),
+                "price" => floatval($productPrices['GTME-OCT-2018-SEMESTER']->discounted_price),
                 "noBreadcrumb" => true
             ])
     @hasSection('topbar')
@@ -126,10 +126,10 @@
                     @hasSection('custom-price')
                         @yield('custom-price')
                     @else
-                        @if(GuitareoPrices::$GTMEFull > GuitareoPrices::$GTMERegular)
-                            <s>NORMALLY ${{ GuitareoPrices::$GTMEFull }}.</s> &nbsp;<strong style="color:#00BC75;"><u>ONLY ${{ GuitareoPrices::$GTMERegular }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (GuitareoPrices::$GTMERegular / GuitareoPrices::$GTMEFull))) }}%)
+                        @if(floatval($productPrices['GTME-OCT-2018-SEMESTER']->price) > floatval($productPrices['GTME-OCT-2018-SEMESTER']->discounted_price))
+                            <s>NORMALLY ${{ floatval($productPrices['GTME-OCT-2018-SEMESTER']->price) }}.</s> &nbsp;<strong style="color:#00BC75;"><u>ONLY ${{ floatval($productPrices['GTME-OCT-2018-SEMESTER']->discounted_price) }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (floatval($productPrices['GTME-OCT-2018-SEMESTER']->discounted_price) / floatval($productPrices['GTME-OCT-2018-SEMESTER']->price)))) }}%)
                         @else
-                            <strong><u>ONLY ${{ GuitareoPrices::$GTMERegular }}</u></strong>
+                            <strong><u>ONLY ${{ floatval($productPrices['GTME-OCT-2018-SEMESTER']->discounted_price) }}</u></strong>
                         @endif
                     @endif
 
@@ -155,7 +155,7 @@
                     {{--<div class="text">--}}
                         {{--<p class="text-left" style="max-width:510px">Celebrate Guitar Month right and brush up on your techniques.--}}
                             {{--<br><br>--}}
-                            {{--Guitar Technique Made Easy will improve your existing skills and help you master new ones, for only <s>${{ GuitareoPrices::$GTMEFull }}</s> ${{ GuitareoPrices::$GTMERegular }}! (Save {{ round(100 - (100 * (GuitareoPrices::$GTMERegular / GuitareoPrices::$GTMEFull))) }}%)--}}
+                            {{--Guitar Technique Made Easy will improve your existing skills and help you master new ones, for only <s>${{ floatval($productPrices['GTME-OCT-2018-SEMESTER']->price) }}</s> ${{ floatval($productPrices['GTME-OCT-2018-SEMESTER']->discounted_price) }}! (Save {{ round(100 - (100 * (floatval($productPrices['GTME-OCT-2018-SEMESTER']->discounted_price) / floatval($productPrices['GTME-OCT-2018-SEMESTER']->price)))) }}%)--}}
                             {{--<br><br>--}}
                             {{--Your guitar deserves to be played freely and effectively, and especially during its own dedicated month!--}}
                             {{--<br></p>--}}
@@ -616,7 +616,7 @@
                         @hasSection('custom-price')
                             @yield('custom-price-2')
                         @else
-                            ${{ number_format((GuitareoPrices::$GTMERegular / 26), 2, '.', ',') }}
+                            ${{ number_format((floatval($productPrices['GTME-OCT-2018-SEMESTER']->discounted_price) / 26), 2, '.', ',') }}
                         @endif
                             /week
                         </td>
@@ -631,7 +631,7 @@
                 @hasSection('custom-price-2')
                     @yield('custom-price-2')
                 @else
-                    ${{ number_format((GuitareoPrices::$GTMERegular / 26), 2, '.', ',') }}
+                    ${{ number_format((floatval($productPrices['GTME-OCT-2018-SEMESTER']->discounted_price) / 26), 2, '.', ',') }}
                 @endif
                  per week.</u>
                 <br><br>
@@ -672,10 +672,10 @@
                 @hasSection('custom-price-3')
                     @yield('custom-price-3')
                 @else
-                    @if(GuitareoPrices::$GTMEFull > GuitareoPrices::$GTMERegular)
-                        <s>Was ${{ GuitareoPrices::$GTMEFull }}.</s> <strong>Only ${{ GuitareoPrices::$GTMERegular }}.</strong>
+                    @if(floatval($productPrices['GTME-OCT-2018-SEMESTER']->price) > floatval($productPrices['GTME-OCT-2018-SEMESTER']->discounted_price))
+                        <s>Was ${{ floatval($productPrices['GTME-OCT-2018-SEMESTER']->price) }}.</s> <strong>Only ${{ floatval($productPrices['GTME-OCT-2018-SEMESTER']->discounted_price) }}.</strong>
                     @else
-                        <strong>Only ${{ GuitareoPrices::$GTMERegular }}.</strong>
+                        <strong>Only ${{ floatval($productPrices['GTME-OCT-2018-SEMESTER']->discounted_price) }}.</strong>
                     @endif
                 @endif
 
@@ -693,10 +693,10 @@
                     @hasSection('custom-price')
                         @yield('custom-price')
                     @else
-                        @if(GuitareoPrices::$GTMEFull > GuitareoPrices::$GTMERegular)
-                            <s>NORMALLY ${{ GuitareoPrices::$GTMEFull }}.</s> &nbsp;<strong style="color:#00BC75;"><u>ONLY ${{ GuitareoPrices::$GTMERegular }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (GuitareoPrices::$GTMERegular / GuitareoPrices::$GTMEFull))) }}%)
+                        @if(floatval($productPrices['GTME-OCT-2018-SEMESTER']->price) > floatval($productPrices['GTME-OCT-2018-SEMESTER']->discounted_price))
+                            <s>NORMALLY ${{ floatval($productPrices['GTME-OCT-2018-SEMESTER']->price) }}.</s> &nbsp;<strong style="color:#00BC75;"><u>ONLY ${{ floatval($productPrices['GTME-OCT-2018-SEMESTER']->discounted_price) }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (floatval($productPrices['GTME-OCT-2018-SEMESTER']->discounted_price) / floatval($productPrices['GTME-OCT-2018-SEMESTER']->price)))) }}%)
                         @else
-                            <strong><u>ONLY ${{ GuitareoPrices::$GTMERegular }}</u></strong>
+                            <strong><u>ONLY ${{ floatval($productPrices['GTME-OCT-2018-SEMESTER']->discounted_price) }}</u></strong>
                         @endif
                     @endif
 

@@ -51,8 +51,8 @@
     ])
     @include('guitareo._partials.promo-banner', [
                 "name" => "Guitar System",
-                "fullPrice" => GuitareoPrices::$guitarSystemFull,
-                "price" => GuitareoPrices::$guitarSystemRegular,
+                "fullPrice" => floatval($productPrices['GUITAR-SYSTEM']->price),
+                "price" => floatval($productPrices['GUITAR-SYSTEM']->discounted_price),
                 "noBreadcrumb" => true
             ])
 
@@ -71,10 +71,10 @@
                 <p><strong>Transform your guitar playing with the <br class="show-for-medium">ULTIMATE Encyclopedia of Guitar Lessons</strong></p>
                 <a href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['GUITAR-SYSTEM' => 1],'redirect' => '/order']) }}" class="join" data-product-json='{"GUITAR-SYSTEM": 1}'>Get Started &raquo;</a>
                 <p class="price-info">
-                    @if(GuitareoPrices::$guitarSystemFull > GuitareoPrices::$guitarSystemRegular)
-                        <s>NORMALLY ${{ GuitareoPrices::$guitarSystemFull }}.</s> &nbsp;<strong><u>ONLY ${{ GuitareoPrices::$guitarSystemRegular }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (GuitareoPrices::$guitarSystemRegular / GuitareoPrices::$guitarSystemFull))) }}%)
+                    @if(floatval($productPrices['GUITAR-SYSTEM']->price) > floatval($productPrices['GUITAR-SYSTEM']->discounted_price))
+                        <s>NORMALLY ${{ floatval($productPrices['GUITAR-SYSTEM']->price) }}.</s> &nbsp;<strong><u>ONLY ${{ floatval($productPrices['GUITAR-SYSTEM']->discounted_price) }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (floatval($productPrices['GUITAR-SYSTEM']->discounted_price) / floatval($productPrices['GUITAR-SYSTEM']->price)))) }}%)
                     @else
-                        <strong><u>ONLY ${{ GuitareoPrices::$guitarSystemRegular }}</u></strong>
+                        <strong><u>ONLY ${{ floatval($productPrices['GUITAR-SYSTEM']->discounted_price) }}</u></strong>
                     @endif
                     <br><a href="/" class="text-guitareo">(OR FREE WITH A GUITAREO MEMBERSHIP)</a>
                         <br> <strong>** 90-DAY GUARANTEE **</strong>
@@ -99,7 +99,7 @@
                     {{--<img class="logo animated tada delay-2s" src="https://guitareo.s3.amazonaws.com/sales/promos/april/guitar-month-logo.png">--}}
                     {{--<br>--}}
                     {{--<div class="text">--}}
-                        {{--<p class="text-left" style="max-width:510px">It’s Guitar Month! And we’re celebrating by giving you a {{ round(100 - (100 * (GuitareoPrices::$guitarSystemRegular / GuitareoPrices::$guitarSystemFull))) }}% discount on our most popular training pack where you’ll learn ANYTHING you want on guitar.--}}
+                        {{--<p class="text-left" style="max-width:510px">It’s Guitar Month! And we’re celebrating by giving you a {{ round(100 - (100 * (floatval($productPrices['GUITAR-SYSTEM']->discounted_price) / floatval($productPrices['GUITAR-SYSTEM']->price)))) }}% discount on our most popular training pack where you’ll learn ANYTHING you want on guitar.--}}
                             {{--<br><br>--}}
                             {{--Yes, anything!--}}
                             {{--<br><br>--}}
@@ -116,8 +116,8 @@
 
     <section class="lesson-breakdown">
         <div class="row">
-            <h1>Learn How To Play Anything On Guitar... <u>For Just ${{ GuitareoPrices::$guitarSystemRegular }}</u></h1>
-            {{--<h3 class="light"><em><s>NORMALLY ${{ GuitareoPrices::$guitarSystemFull }}</s></em></h3>--}}
+            <h1>Learn How To Play Anything On Guitar... <u>For Just ${{ floatval($productPrices['GUITAR-SYSTEM']->discounted_price) }}</u></h1>
+            {{--<h3 class="light"><em><s>NORMALLY ${{ floatval($productPrices['GUITAR-SYSTEM']->price) }}</s></em></h3>--}}
             <h3 class="light">&nbsp;</h3>
             <div class="columns tile-wrap small-up-2 medium-up-3">
                 @include('guitareo.products._lesson-tile', [
@@ -302,7 +302,7 @@
                 ])
             </div>
             <a href="#order-section" class="join anchor-slide">Get Started &raquo;</a>
-            <p class="price-info">{{--SAVE {{ round(100 - (100 * (GuitareoPrices::$guitarSystemRegular / GuitareoPrices::$guitarSystemFull))) }}% +--}} 90-DAY MONEY BACK GUARANTEE</p>
+            <p class="price-info">{{--SAVE {{ round(100 - (100 * (floatval($productPrices['GUITAR-SYSTEM']->discounted_price) / floatval($productPrices['GUITAR-SYSTEM']->price)))) }}% +--}} 90-DAY MONEY BACK GUARANTEE</p>
         </div>
     </section>
 
@@ -334,7 +334,7 @@
             <div class="columns medium-6 circle-point">
                 <div class="point-icon"><i class="fal fa-id-card"></i></div>
                 <p><strong>Unlimited Lifetime Access</strong><br>
-                    Get The Guitar System for just ${{ GuitareoPrices::$guitarSystemRegular }} today to get online access to the entire course - for life.</p>
+                    Get The Guitar System for just ${{ floatval($productPrices['GUITAR-SYSTEM']->discounted_price) }} today to get online access to the entire course - for life.</p>
             </div>
             <div class="columns medium-6 circle-point">
                 <div class="point-icon"><i class="fal fa-thumbs-up"></i></div>
@@ -434,10 +434,10 @@
             <a href="{{ url()->route('shopping-cart.add-to-cart',
                 ['products' => ['GUITAR-SYSTEM' => 1], 'redirect' => '/order']) }}" class="join" data-product-json='{"GUITAR-SYSTEM": 1}'>Get Started &raquo;</a>
             <p class="breakdown">
-                @if(GuitareoPrices::$guitarSystemFull > GuitareoPrices::$guitarSystemRegular)
-                    <s style="opacity: 0.6;">NORMALLY ${{ GuitareoPrices::$guitarSystemFull }}.</s> &nbsp;<strong><u>ONLY ${{ GuitareoPrices::$guitarSystemRegular }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (GuitareoPrices::$guitarSystemRegular / GuitareoPrices::$guitarSystemFull))) }}%)
+                @if(floatval($productPrices['GUITAR-SYSTEM']->price) > floatval($productPrices['GUITAR-SYSTEM']->discounted_price))
+                    <s style="opacity: 0.6;">NORMALLY ${{ floatval($productPrices['GUITAR-SYSTEM']->price) }}.</s> &nbsp;<strong><u>ONLY ${{ floatval($productPrices['GUITAR-SYSTEM']->discounted_price) }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (floatval($productPrices['GUITAR-SYSTEM']->discounted_price) / floatval($productPrices['GUITAR-SYSTEM']->price)))) }}%)
                 @else
-                    <strong><u>ONLY ${{ GuitareoPrices::$guitarSystemRegular }}</u></strong>
+                    <strong><u>ONLY ${{ floatval($productPrices['GUITAR-SYSTEM']->discounted_price) }}</u></strong>
                 @endif
                 <br><a href="/" class="text-guitareo">(OR FREE WITH A GUITAREO MEMBERSHIP)</a>
                 <br><strong>** 90-DAY GUARANTEE **</strong></p>

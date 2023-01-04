@@ -27,8 +27,8 @@
 
     {{--@include('shop.partials.promo-banner', [--}}
                 {{--"name" => "Singing Starter Kit",--}}
-                {{--"fullPrice" => SingeoPrices::$singingStarterKitFull,--}}
-                {{--"price" => SingeoPrices::$singingStarterKit,--}}
+                {{--"fullPrice" => floatval($productPrices['singing-starter-kit']->price),--}}
+                {{--"price" => floatval($productPrices['singing-starter-kit']->discounted_price),--}}
                 {{--"noBreadcrumb" => true--}}
             {{--])--}}
 
@@ -38,13 +38,13 @@
             <img class="h-20 md:h-32 lg:h-40" src="https://cdn.musora.com/image/fetch/w_980,q_auto:best/https://singeo.s3.amazonaws.com/products/singing-starter-kit/logo.png"><br>
             <h4 class="mt-2 mb-5">Everything You Need To Start Singing Now</h4>
             <a class="join" href="/ecommerce/add-to-cart?products[singing-starter-kit]=1&redirect=/order">START SINGING FOR
-                @if(SingeoPrices::$singingStarterKit < SingeoPrices::$singingStarterKitFull)
-                    <s class="opacity-50">${{ SingeoPrices::$singingStarterKitFull }}</s>
+                @if(floatval($productPrices['singing-starter-kit']->discounted_price) < floatval($productPrices['singing-starter-kit']->price))
+                    <s class="opacity-50">${{ floatval($productPrices['singing-starter-kit']->price) }}</s>
                 @endif
-                ${{ SingeoPrices::$singingStarterKit }} </a>
+                ${{ floatval($productPrices['singing-starter-kit']->discounted_price) }} </a>
             <h6 class="font-bebas text-yellow-400 mt-5">
-                @if(SingeoPrices::$singingStarterKit < SingeoPrices::$singingStarterKitFull)
-                    SAVE {{ round(100 - (100 * (SingeoPrices::$singingStarterKit / SingeoPrices::$singingStarterKitFull))) }}% <br>
+                @if(floatval($productPrices['singing-starter-kit']->discounted_price) < floatval($productPrices['singing-starter-kit']->price))
+                    SAVE {{ round(100 - (100 * (floatval($productPrices['singing-starter-kit']->discounted_price) / floatval($productPrices['singing-starter-kit']->price)))) }}% <br>
                 @endif
                 <span class="text-white">** 90-DAY GUARANTEE**</span></h6>
         </div>
@@ -207,13 +207,13 @@
             <img class="h-20 md:h-32 lg:h-40" src="https://cdn.musora.com/image/fetch/w_980,q_auto:best/https://singeo.s3.amazonaws.com/products/singing-starter-kit/logo.png"><br>
             <h4 class="mt-2 mt-3 leading-normal">Everything You Need To Start Singing Now</h4>
             <a class="join my-2 md:my-3" href="/ecommerce/add-to-cart?products[singing-starter-kit]=1&redirect=/order">START SINGING FOR
-                @if(SingeoPrices::$singingStarterKit < SingeoPrices::$singingStarterKitFull)
-                    <s class="opacity-50">${{ SingeoPrices::$singingStarterKitFull }}</s>
+                @if(floatval($productPrices['singing-starter-kit']->discounted_price) < floatval($productPrices['singing-starter-kit']->price))
+                    <s class="opacity-50">${{ floatval($productPrices['singing-starter-kit']->price) }}</s>
                 @endif
-                ${{ SingeoPrices::$singingStarterKit }}</a>
+                ${{ floatval($productPrices['singing-starter-kit']->discounted_price) }}</a>
             <h6 class="font-bebas text-yellow-400">
-                @if(SingeoPrices::$singingStarterKit < SingeoPrices::$singingStarterKitFull)
-                    SAVE {{ round(100 - (100 * (SingeoPrices::$singingStarterKit / SingeoPrices::$singingStarterKitFull))) }}% <br>
+                @if(floatval($productPrices['singing-starter-kit']->discounted_price) < floatval($productPrices['singing-starter-kit']->price))
+                    SAVE {{ round(100 - (100 * (floatval($productPrices['singing-starter-kit']->discounted_price) / floatval($productPrices['singing-starter-kit']->price)))) }}% <br>
                 @endif
                 <span class="text-white">** 90-DAY GUARANTEE**</span></h6>
             <div class="mt-5 md:mt-10 inline-block w-full px-3 md:px-4 credit-cards opacity-60">

@@ -43,8 +43,8 @@
 @section('content')
     @include('drumeo.products.partials.promo-banner', [
                     "name" => "Rock Drumming Masterclass",
-                    "fullPrice" => Prices::$rdmFull,
-                    "price" => Prices::$rdmRegular,
+                    "fullPrice" => floatval($productPrices['rock-drumming-masterclass-pack']->price),
+                    "price" => floatval($productPrices['rock-drumming-masterclass-pack']->discounted_price),
                 "noBreadcrumb" => true
                 ])
     <header class="hero-header">
@@ -62,10 +62,10 @@
             <div class="columns"><a href="/ecommerce/add-to-cart?products[rock-drumming-masterclass-pack]=1" class="join blue">Get Started &raquo;</a></div>
 
             <p class="columns uppercase price">
-                @if(Prices::$rdmFull > Prices::$rdmRegular)
-                    <s>Normally ${{ Prices::$rdmFull }}.</s> <strong>Only ${{ Prices::$rdmRegular }}.</strong> (Save {{ round(100 - (100 * (Prices::$rdmRegular / Prices::$rdmFull))) }}%)
+                @if(floatval($productPrices['rock-drumming-masterclass-pack']->price) > floatval($productPrices['rock-drumming-masterclass-pack']->discounted_price))
+                    <s>Normally ${{ floatval($productPrices['rock-drumming-masterclass-pack']->price) }}.</s> <strong>Only ${{ floatval($productPrices['rock-drumming-masterclass-pack']->discounted_price) }}.</strong> (Save {{ round(100 - (100 * (floatval($productPrices['rock-drumming-masterclass-pack']->discounted_price) / floatval($productPrices['rock-drumming-masterclass-pack']->price)))) }}%)
                 @else
-                    <strong>Now ${{ Prices::$rdmRegular }}.</strong>
+                    <strong>Now ${{ floatval($productPrices['rock-drumming-masterclass-pack']->discounted_price) }}.</strong>
                 @endif
 
                 <br>
@@ -476,7 +476,7 @@
     <section class="compare-table">
         <div class="row">
             <h1>UNLOCK YOUR UNFAIR ADVANTAGE</h1>
-            <h3>while saving {{ round(100 - (100 * (round(Prices::$rdmRegular / 26, 2) / 30))) }}% or more <br class="hide-for-medium"> compared to private lessons.</h3>
+            <h3>while saving {{ round(100 - (100 * (round(floatval($productPrices['rock-drumming-masterclass-pack']->discounted_price) / 26, 2) / 30))) }}% or more <br class="hide-for-medium"> compared to private lessons.</h3>
             <table>
                 <tbody>
                 <tr>
@@ -549,13 +549,13 @@
                 </tr>
                 <tr class="prices">
                     <td>Your Total Investment</td>
-                    <td>${{ round(Prices::$rdmRegular / 26, 2) }}/week</td>
+                    <td>${{ round(floatval($productPrices['rock-drumming-masterclass-pack']->discounted_price) / 26, 2) }}/week</td>
                     <td>$30-50/week</td>
                 </tr>
                 </tbody>
             </table>
             <p class="columns">
-                <strong>You can unlock the full 26-week course today</strong> to get Todd Sucherman’s masterclass for improving your skills -- <u>all for just ${{ round(Prices::$rdmRegular / 26, 2) }} per week</u> (billed at ${{ Prices::$rdmRegular }} for the entire course).
+                <strong>You can unlock the full 26-week course today</strong> to get Todd Sucherman’s masterclass for improving your skills -- <u>all for just ${{ round(floatval($productPrices['rock-drumming-masterclass-pack']->discounted_price) / 26, 2) }} per week</u> (billed at ${{ floatval($productPrices['rock-drumming-masterclass-pack']->discounted_price) }} for the entire course).
                 <br><br>
                 You can choose a one-time payment, a two-payment plan, or a five-payment plan -- and the entire course is yours for life with no recurring subscription or additional fees.
             </p>
@@ -632,15 +632,15 @@
 
             <h1 class="columns">
                 Todd Sucherman’s 26-Week Online <br class="hide-for-large">
-                Course For Just ${{ round(Prices::$rdmRegular / 26, 2) }} Per Week</h1>
+                Course For Just ${{ round(floatval($productPrices['rock-drumming-masterclass-pack']->discounted_price) / 26, 2) }} Per Week</h1>
 
             <div class="columns"><a href="/ecommerce/add-to-cart?products[rock-drumming-masterclass-pack]=1" class="join blue">Get Started &raquo;</a></div>
 
             <h2 class="columns uppercase">
-                @if(Prices::$rdmFull > Prices::$rdmRegular)
-                    <s>Normally ${{ Prices::$rdmFull }}.</s> <strong>Only ${{ Prices::$rdmRegular }}.</strong> (Save {{ round(100 - (100 * (Prices::$rdmRegular / Prices::$rdmFull))) }}%)
+                @if(floatval($productPrices['rock-drumming-masterclass-pack']->price) > floatval($productPrices['rock-drumming-masterclass-pack']->discounted_price))
+                    <s>Normally ${{ floatval($productPrices['rock-drumming-masterclass-pack']->price) }}.</s> <strong>Only ${{ floatval($productPrices['rock-drumming-masterclass-pack']->discounted_price) }}.</strong> (Save {{ round(100 - (100 * (floatval($productPrices['rock-drumming-masterclass-pack']->discounted_price) / floatval($productPrices['rock-drumming-masterclass-pack']->price)))) }}%)
                 @else
-                    <strong>Now ${{ Prices::$rdmRegular }}.</strong>
+                    <strong>Now ${{ floatval($productPrices['rock-drumming-masterclass-pack']->discounted_price) }}.</strong>
                 @endif
                 <br>
                 <u class="text-blue"><a href="/" style="color:inherit;">(Or get it free with Drumeo)</a></u>

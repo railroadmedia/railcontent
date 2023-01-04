@@ -82,7 +82,7 @@
                                 'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/pad.jpg',
                                 'title' => 'Drumeo QuietPad',
                                 'description' => 'The portable, double-sided practice pad with one traditional side and one quiet side.',
-                                'price' => Prices::$quietPadFull,
+                                'price' => floatval($productPrices['quietpad']->price),
                                 'online-ship' => "Free Shipping",
                                 'shipping' => "no-shipping"
                                 ],
@@ -90,7 +90,7 @@
                                 'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/drumsticks.jpg',
                                 'title' => 'Drumeo Drumsticks',
                                 'description' => 'Drumeo 5A Drumsticks by Vater -- made with hickory and extra moisture to last longer.',
-                                'price' => Prices::$sticksFull,
+                                'price' => floatval($productPrices['Drumeo-VaterSticks']->price),
                                 'online-ship' => "Free Shipping",
                                 'shipping' => "no-shipping"
                                 ],
@@ -98,7 +98,7 @@
                                 'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/tdt.jpg',
                                 'title' => "The Drummer's Toolbox",
                                 'description' => 'Presenting drummers the most comprehensive introduction to 101 drumming styles.',
-                                'price' => Prices::$toolboxBookFull,
+                                'price' => floatval($productPrices['the-drummers-toolbox-book']->price),
                                 'online-ship' => "Free Shipping",
                                 'shipping' => "no-shipping"
                                 ],
@@ -106,42 +106,42 @@
                                 'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/rdm.jpg',
                                 'title' => 'Rock Drumming Masterclass',
                                 'description' => 'Todd Sucherman’s 26-week masterclass to help you improve your rock drumming.',
-                                'price' => Prices::$rdmFull,
+                                'price' => floatval($productPrices['rock-drumming-masterclass-pack']->price),
                                 'online-ship' => "Instant Access"
                                 ],
                                 [
                                 'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/dtme.jpg',
                                 'title' => 'Drum Technique Made Easy',
                                 'description' => 'Bruce Becker’s 26-week masterclass to improve your hand & foot technique.',
-                                'price' => Prices::$dtmeFull,
+                                'price' => floatval($productPrices['drum-technique-made-easy-pack']->price),
                                 'online-ship' => "Instant Access"
                                 ],
                                 [
                                 'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/ime.jpg',
                                 'title' => 'Independence Made Easy',
                                 'description' => 'Jared Falk’s 26-week masterclass to unlock your musicality and freedom on the drums.',
-                                'price' => Prices::$imeFull,
+                                'price' => floatval($productPrices['independence-made-easy-pack']->price),
                                 'online-ship' => "Instant Access"
                                 ],
                                 [
                                 'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/sd.jpg',
                                 'title' => 'Successful Drumming',
                                 'description' => 'Jared Falk’s 18-hour video curriculum for building a solid foundation on the drums.',
-                                'price' => Prices::$sdOnlineFull,
+                                'price' => floatval($productPrices['SD-DIGI']->price),
                                 'online-ship' => "Instant Access"
                                 ],
                                 [
                                 'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/lsf.jpg',
                                 'title' => 'Learn Songs Faster',
                                 'description' => 'This masterclass will give you proven techniques for learning MORE songs in less time.',
-                                'price' => Prices::$learnSongsFasterFull,
+                                'price' => floatval($productPrices['learn-songs-faster-pack']->price),
                                 'online-ship' => "Instant Access"
                                 ],
                                 [
                                 'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/fwtbdf.jpg',
                                 'title' => 'Better Drum Fills',
                                 'description' => 'The ultimate four-week crash course to playing more creative & more musical drum fills.',
-                                'price' => Prices::$bdfFull,
+                                'price' => floatval($productPrices['four-weeks-to-better-drum-fills']->price),
                                 'online-ship' => "Instant Access"
                                 ],
                             ]

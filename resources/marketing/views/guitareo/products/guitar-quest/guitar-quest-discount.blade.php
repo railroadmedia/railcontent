@@ -9,11 +9,11 @@
         <div class="max-w-screen-xl m-auto px-6 lg:flex lg:items-start">
             <img class="inline-block w-3/4 sm:w-full sm:max-w-sm mb-5 lg:mb-0 mx-auto lg:mx-0" src="https://musora.imgix.net/https%3A%2F%2Fguitareo.s3.amazonaws.com%2Flead-gen%2Fsong-in-an-hour%2Flogo-purple-discount.png?auto=format&ixlib=php-1.2.1&w=770&s=4d7d292914d2861e342201198a006f95" alt="logo purple">
             <div class="lg:pl-10 max-w-lg lg:max-w-2xl mx-auto lg:mx-0">
-                <p class="font-primary text-lg sm:text-xl"><strong class="font-black">CONTINUE YOUR JOURNEY <i class="fas fa-long-arrow-right mx-1" style="color:#6100a6;"></i> <span class="inline-block"> SAVE {{ round(100 - (100 * (GuitareoPrices::$guitarQuestSpecial / GuitareoPrices::$guitarQuestFull))) }}% ON GUITAR QUEST</span></strong></p>
+                <p class="font-primary text-lg sm:text-xl"><strong class="font-black">CONTINUE YOUR JOURNEY <i class="fas fa-long-arrow-right mx-1" style="color:#6100a6;"></i> <span class="inline-block"> SAVE {{ round(100 - (100 * (GuitareoPrices::$guitarQuestSpecial / floatval($productPrices['guitar-quest']->price)))) }}% ON GUITAR QUEST</span></strong></p>
                 <p class="font-primary text-sm sm:text-base my-4 leading-relaxed text-left">
                     Congratulations on taking the Song In An Hour Challenge. We’re so excited that you’ve started your guitar journey and we’re here to support you the rest of the way.
                     <br><br>
-                    Song In An Hour is actually the FIRST level of GuitarQuest. And because we hope you’ll keep learning with us, we’re giving you a {{ round(100 - (100 * (GuitareoPrices::$guitarQuestSpecial / GuitareoPrices::$guitarQuestFull))) }}% discount to make things a little easier. Just click any of the big buttons on this page to continue your journey.
+                    Song In An Hour is actually the FIRST level of GuitarQuest. And because we hope you’ll keep learning with us, we’re giving you a {{ round(100 - (100 * (GuitareoPrices::$guitarQuestSpecial / floatval($productPrices['guitar-quest']->price)))) }}% discount to make things a little easier. Just click any of the big buttons on this page to continue your journey.
                 </p>
                 <a title="Go To Order Page" href="{{ $orderLink }}" class="bg-goldenrod-gradient transition duration-500 linear px-12 py-1 inline-block uppercase text-black font-roboto-condensed-bold rounded-full text-lg">
                     GET MY DISCOUNT &raquo;
@@ -27,8 +27,8 @@
     >
         <img class="inline-block w-32" src="https://guitareo.s3.amazonaws.com/lead-gen/song-in-an-hour/logo-white.png">
         <p class="uppercase my-0 ml-3 inline-block align-middle text-sm sm:text-base text-left" style="line-height: 1.2!important;">
-            SAVE {{ round(100 - (100 * (GuitareoPrices::$guitarQuestSpecial / GuitareoPrices::$guitarQuestFull))) }}% ON GUITAR QUEST<br>
-        <s class="opacity-60">WAS ${{ GuitareoPrices::$guitarQuestFull }}</s> <strong class="font-black text-goldenrod">ONLY ${{ $productPrice }}</strong>
+            SAVE {{ round(100 - (100 * (GuitareoPrices::$guitarQuestSpecial / floatval($productPrices['guitar-quest']->price)))) }}% ON GUITAR QUEST<br>
+        <s class="opacity-60">WAS ${{ floatval($productPrices['guitar-quest']->price) }}</s> <strong class="font-black text-goldenrod">ONLY ${{ $productPrice }}</strong>
         </p>
     </a>
 @endsection
@@ -43,10 +43,10 @@
                 <h2 class="uppercase text-3xl font-bison-bold sm:text-5xl md:text-6xl mb-2">Your Guitar Journey<br class="inline xl:hidden"> Starts Here.</h2>
 
                 <h4 class="text-xl mb-2 md:mb-10 font-primary sm:text-2xl md:text-3xl">
-                    @if($productPrice < GuitareoPrices::$guitarQuestFull)
+                    @if($productPrice < floatval($productPrices['guitar-quest']->price))
                         <span class="text-gray-500 line-through">Normally&nbsp;$197</span>
                         <span class="font-bold text-goldenrod uppercase font-extrabold">Only&nbsp;${{ $productPrice }}</span>
-                        <span>(Save&nbsp;{{ round(100 - (100 * ($productPrice / GuitareoPrices::$guitarQuestFull))) }}%)</span>
+                        <span>(Save&nbsp;{{ round(100 - (100 * ($productPrice / floatval($productPrices['guitar-quest']->price)))) }}%)</span>
                     @else
                         <span class="text-goldenrod uppercase">
                         Reach your goals on the <br class="inline xl:hidden">

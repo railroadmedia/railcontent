@@ -503,38 +503,38 @@
                     'image' => 'https://guitareo.s3.amazonaws.com/sales/2023/guitarits-survival-kit.jpg',
                     'title' => 'Survival Kit',
                     'description' => 'Electric Strings, Acoustic Strings, String Pro-Winder, 10 Assorted Picks, Tuner, Chord & Scales Book, and more!',
-                    'price' => GuitareoPrices::$survivalKitFull,
+                    'price' => floatval($productPrices['guitarists-survival-kit']->price),
                     'shipping' => true
                 ],
                 [
                     'image' => 'https://guitareo.s3.amazonaws.com/sales/promos/black-friday/bundles/ultimate/gq.jpg',
                     'title' => 'GuitarQuest',
                     'description' => 'Skip the boring stuff and start having fun! Your journey starts here.',
-                    'price' => GuitareoPrices::$guitarQuestFull,
+                    'price' => floatval($productPrices['guitar-quest']->price),
                 ],
                 [
                     'image' => 'https://guitareo.s3.amazonaws.com/sales/promos/black-friday/bundles/ultimate/gs.jpg',
                     'title' => 'The Guitar System',
                     'description' => 'Transform your guitar playing with the ultimate encyclopedia of guitar lessons.',
-                    'price' => GuitareoPrices::$guitarSystemFull,
+                    'price' => floatval($productPrices['GUITAR-SYSTEM']->price),
                 ],
                 [
                     'image' => 'https://guitareo.s3.amazonaws.com/sales/promos/black-friday/bundles/ultimate/agme.jpg',
                     'title' => 'Acoustic Guitar Made Easy',
                     'description' => 'Build a rock-solid foundation and get started on the acoustic guitar the right way.',
-                    'price' => GuitareoPrices::$AGMEFull,
+                    'price' => floatval($productPrices['AGME-JAN-2019-SEMESTER']->price),
                 ],
                 [
                     'image' => 'https://guitareo.s3.amazonaws.com/sales/promos/black-friday/bundles/ultimate/gtme.jpg',
                     'title' => 'Guitar Technique Made Easy',
                     'description' => 'Learn the most important guitar techniques and reach total guitar freedom.',
-                    'price' => GuitareoPrices::$GTMEFull,
+                    'price' => floatval($productPrices['GTME-OCT-2018-SEMESTER']->price),
                 ],
                 [
                     'image' => 'https://guitareo.s3.amazonaws.com/sales/promos/black-friday/rhythm_groove_cart.jpg',
                     'title' => 'Rhythm & Groove',
                     'description' => 'Go beyond simple strumming on the guitar.',
-                    'price' => GuitareoPrices::$rhythmAndGrooveFull,
+                    'price' => floatval($productPrices['rhythm-and-groove']->price),
                 ],
             ]
         @endphp

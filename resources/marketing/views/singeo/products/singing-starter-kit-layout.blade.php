@@ -27,8 +27,8 @@
 
     {{--@include('shop.partials.promo-banner', [--}}
                 {{--"name" => "Singing Starter Kit",--}}
-                {{--"fullPrice" => SingeoPrices::$singingStarterKitFull,--}}
-                {{--"price" => SingeoPrices::$singingStarterKit,--}}
+                {{--"fullPrice" => floatval($productPrices['singing-starter-kit']->price),--}}
+                {{--"price" => floatval($productPrices['singing-starter-kit']->discounted_price),--}}
                 {{--"noBreadcrumb" => true--}}
             {{--])--}}
     @yield('topbar')
@@ -39,13 +39,13 @@
             <img class="h-20 md:h-32 lg:h-40" src="https://cdn.musora.com/image/fetch/w_980,q_auto:best/https://singeo.s3.amazonaws.com/products/singing-starter-kit/logo.png"><br>
             <h4 class="mt-2 mb-5">Everything You Need To Start Singing Now</h4>
             <a class="join" href="@yield('order-link')">START SINGING FOR
-                @if($productPrice < SingeoPrices::$singingStarterKitFull)
-                    <s class="opacity-50">${{ SingeoPrices::$singingStarterKitFull }}</s>
+                @if($productPrice < floatval($productPrices['singing-starter-kit']->price))
+                    <s class="opacity-50">${{ floatval($productPrices['singing-starter-kit']->price) }}</s>
                 @endif
                 ${{ $productPrice }} </a>
             <h6 class="font-bebas text-yellow-400 mt-5">
-                @if($productPrice < SingeoPrices::$singingStarterKitFull)
-                    SAVE {{ round(100 - (100 * ($productPrice / SingeoPrices::$singingStarterKitFull))) }}% <br>
+                @if($productPrice < floatval($productPrices['singing-starter-kit']->price))
+                    SAVE {{ round(100 - (100 * ($productPrice / floatval($productPrices['singing-starter-kit']->price)))) }}% <br>
                 @endif
                 <span class="text-white">** 90-DAY GUARANTEE**</span></h6>
         </div>
@@ -241,13 +241,13 @@
             <img class="h-20 md:h-32 lg:h-40" src="https://cdn.musora.com/image/fetch/w_980,q_auto:best/https://singeo.s3.amazonaws.com/products/singing-starter-kit/logo.png"><br>
             <h4 class="mt-2 mt-3 leading-normal">Everything You Need To Start Singing Now</h4>
             <a class="join my-2 md:my-3" href="@yield('order-link')">START SINGING FOR
-                @if($productPrice < SingeoPrices::$singingStarterKitFull)
-                    <s class="opacity-50">${{ SingeoPrices::$singingStarterKitFull }}</s>
+                @if($productPrice < floatval($productPrices['singing-starter-kit']->price))
+                    <s class="opacity-50">${{ floatval($productPrices['singing-starter-kit']->price) }}</s>
                 @endif
                 ${{ $productPrice }}</a>
             <h6 class="font-bebas text-yellow-400">
-                @if($productPrice < SingeoPrices::$singingStarterKitFull)
-                    SAVE {{ round(100 - (100 * ($productPrice / SingeoPrices::$singingStarterKitFull))) }}% <br>
+                @if($productPrice < floatval($productPrices['singing-starter-kit']->price))
+                    SAVE {{ round(100 - (100 * ($productPrice / floatval($productPrices['singing-starter-kit']->price)))) }}% <br>
                 @endif
                 <span class="text-white">** 90-DAY GUARANTEE**</span></h6>
             <div class="mt-5 md:mt-10 inline-block w-full px-3 md:px-4 credit-cards opacity-60">

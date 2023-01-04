@@ -450,9 +450,9 @@
     <section class="final">
         <div class="row">
             <div class="columns logo"><img src="https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/logo-white.png"></div>
-            <h1 class="columns">26-Week Online Course <br class="hide-for-medium"> For Just ${{ round(Prices::$dtmeRegular / 26, 2) }} Per Week
+            <h1 class="columns">26-Week Online Course <br class="hide-for-medium"> For Just ${{ round(floatval($productPrices['drum-technique-made-easy-pack']->discounted_price) / 26, 2) }} Per Week
             </h1>
-            <h2 class="columns">(${{ Prices::$dtmeRegular }} one-time payment. Or choose a<br class="hide-for-medium"> 2-pay or 5-pay plan on the next page.)
+            <h2 class="columns">(${{ floatval($productPrices['drum-technique-made-easy-pack']->discounted_price) }} one-time payment. Or choose a<br class="hide-for-medium"> 2-pay or 5-pay plan on the next page.)
             </h2>
             <div class="columns"><a href="/ecommerce/add-to-cart?products[drum-technique-made-easy-pack]=1" class="join">Get Started &raquo;</a></div>
             {{--<div class="columns"><a class="join sold-out">Closed</a></div>--}}

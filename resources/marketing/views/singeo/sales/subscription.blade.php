@@ -485,19 +485,19 @@
                     'image' => 'https://singeo.s3.amazonaws.com/sales/promos/november/singing-starter-kit.jpg',
                     'title' => 'Singing<br> Starter Kit',
                     'description' => 'Get everything you need to start singing now. In just 7 hands-on lessons, you’ll overcome the challenges most beginner singers face and will instantly sound better.',
-                    'price' => SingeoPrices::$singingStarterKitFull,
+                    'price' => floatval($productPrices['singing-starter-kit']->price),
                 ],
                 [
                     'image' => 'https://singeo.s3.amazonaws.com/sales/promos/october/Beautiful_harmonies_card.jpg',
                     'title' => 'Harmony',
                     'description' => 'In just 8, short, sing-a-long lessons, you’ll learn how to elevate any vocal performance with incredible harmonies. Even if you’re a total beginner, you’ll be singing your first harmony within the first 10 minutes of this course.',
-                    'price' => SingeoPrices::$beautifulHarmoniesFull,
+                    'price' => floatval($productPrices['the-essential-guide-to-beautiful-harmonies']->price),
                 ],
                 [
                     'image' => 'https://singeo.s3.amazonaws.com/sales/promos/november/poster2.png',
                     'title' => 'Vowel Practice<br> Poster',
                     'description' => 'Your new favorite practice tool - and your ticket hitting higher notes with ease and confidence.',
-                    'price' => SingeoPrices::$posterFull,
+                    'price' => floatval($productPrices['vowel-sounds-poster']->price),
                     'shipping' => true
 
                 ],

@@ -76,8 +76,8 @@
     ])
     @include('drumeo.products.partials.promo-banner', [
                 "name" => "QuietKick",
-                "fullPrice" => Prices::$quietKickFull,
-                "price" => Prices::$quietKick,
+                "fullPrice" => floatval($productPrices['quietkick']->price),
+                "price" => floatval($productPrices['quietkick']->discounted_price),
                 "noBreadcrumb" => true
             ])
 
@@ -92,8 +92,8 @@
                     <a class="join sold-out my-2 sm:my-4 lg:my-6 w-2/3">SOLD OUT</a>
                 @endif
                 <h6 class="leading-tight">
-                    STARTING AT @if(Prices::$quietKickFull > Prices::$quietKick) <s style="opacity: 0.6;">${{ Prices::$quietKickFull }}</s> @endif
-                    ${{ Prices::$quietKick }}
+                    STARTING AT @if(floatval($productPrices['quietkick']->price) > floatval($productPrices['quietkick']->discounted_price)) <s style="opacity: 0.6;">${{ floatval($productPrices['quietkick']->price) }}</s> @endif
+                    ${{ floatval($productPrices['quietkick']->discounted_price) }}
                     {{--@if( $products['quietkick']->getStockAvailability() > 1 && !empty($products['quietkick']->getStockAvailability()))--}}
                         {{--<br><strong class="text-yellow-500">LAUNCH SPECIAL</strong>--}}
                     {{--@endif--}}
@@ -228,10 +228,10 @@
                             <div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">
                                 <h5 class="leading-none mb-3"><strong>Single Kick</strong></h5>
                                 <h1 class="inline-block leading-none">
-                                    @if(Prices::$quietKickFull > Prices::$quietKick)
-                                        <s class="opacity-60">${{ Prices::$quietKickFull }}</s>
+                                    @if(floatval($productPrices['quietkick']->price) > floatval($productPrices['quietkick']->discounted_price))
+                                        <s class="opacity-60">${{ floatval($productPrices['quietkick']->price) }}</s>
                                     @endif
-                                    <strong>${{ Prices::$quietKick }}</strong></h1>
+                                    <strong>${{ floatval($productPrices['quietkick']->discounted_price) }}</strong></h1>
                                 <p class="text-drumeo text-sm my-2 sm:my-4"><em>Plus shipping.</em></p>
                                 <div class="join blue smaller w-full transition-opacity duration-300 group-hover:opacity-80" style="max-width: 230px;">Select</div>
                             </div>
@@ -250,10 +250,10 @@
                             <div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">
                                 <h5 class="leading-none mb-3"><strong>Double Kick</strong></h5>
                                 <h1 class="inline-block leading-none">
-                                    @if(Prices::$quietKickFull > Prices::$quietKick)
-                                        <s class="opacity-60">${{ Prices::$quietKickFull + 20 }}</s>
+                                    @if(floatval($productPrices['quietkick']->price) > floatval($productPrices['quietkick']->discounted_price))
+                                        <s class="opacity-60">${{ floatval($productPrices['quietkick']->price) + 20 }}</s>
                                     @endif
-                                    <strong>${{ Prices::$quietKick + 20 }}</strong></h1><br>
+                                    <strong>${{ floatval($productPrices['quietkick']->discounted_price) + 20 }}</strong></h1><br>
                                 <p class="text-drumeo text-sm my-2 sm:my-4"><em>Plus shipping.</em></p>
                                 <div class="join blue smaller w-full transition-opacity duration-300 group-hover:opacity-80" style="max-width: 230px;">Select</div>
                             </div>

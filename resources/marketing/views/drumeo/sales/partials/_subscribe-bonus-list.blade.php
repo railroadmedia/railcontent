@@ -55,14 +55,14 @@
                         'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/pad.jpg',
                         'title' => 'QuietPad',
                         'description' => 'Practice anywhere with two full-size playing surfaces.',
-                        'price' => Prices::$quietPadFull,
+                        'price' => floatval($productPrices['quietpad']->price),
                         'shipping' => true,
                         ],
                         [
                         'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/drumsticks.jpg',
                         'title' => 'Drumeo Drumsticks',
                         'description' => 'Drumeo 5A Drumsticks by Vater -- made with hickory and extra moisture to last longer.',
-                        'price' => Prices::$sticksFull,
+                        'price' => floatval($productPrices['Drumeo-VaterSticks']->price),
                         'shipping' => true,
                         ],
                         [
@@ -77,13 +77,13 @@
                         'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/dtme.jpg',
                         'title' => 'Drum Technique Made Easy',
                         'description' => 'Bruce Becker’s 26-week masterclass to improve your hand & foot technique.',
-                        'price' => Prices::$dtmeFull,
+                        'price' => floatval($productPrices['drum-technique-made-easy-pack']->price),
                         ],
                         [
                         'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/july/tommy_card.jpg',
                         'title' => 'Great Hands For A Lifetime',
                         'description' => 'Tommy Igoe helps you improve your hand strength, speed, stamina, comfort, and control in the drums in four hours of video lessons.',
-                        'price' => Prices::$ghfalFull,
+                        'price' => floatval($productPrices['GHFAL-DIGI']->price),
                         ],
                     ]
                 @endphp

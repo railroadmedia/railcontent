@@ -195,8 +195,8 @@
     ])
     @include('drumeo.products.partials.promo-banner', [
                 "name" => "Drumeo EarDrums",
-                "fullPrice" => Prices::$earDrumsFull,
-                "price" => Prices::$earDrums,
+                "fullPrice" => floatval($productPrices['drumeo-eardrums']->price),
+                "price" => floatval($productPrices['drumeo-eardrums']->discounted_price),
                 "noBreadcrumb" => true
             ])
 

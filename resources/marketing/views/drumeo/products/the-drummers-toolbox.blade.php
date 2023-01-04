@@ -36,8 +36,8 @@
 
     @include('drumeo.products.partials.promo-banner', [
                     "name" => "The Drummer's Toolbox",
-                    "fullPrice" => Prices::$toolboxBookFull,
-                    "price" => Prices::$toolboxBookRegular,
+                    "fullPrice" => floatval($productPrices['the-drummers-toolbox-book']->price),
+                    "price" => floatval($productPrices['the-drummers-toolbox-book']->discounted_price),
                 "noBreadcrumb" => true
                 ])
     <header class="book-header toolbox text-center">
@@ -51,12 +51,12 @@
     </header>
     <section class="order-buttons text-center">
         <div class="row">
-            @if( Prices::$toolboxBookFull > Prices::$toolboxBookRegular)
-                <p><s>WAS ${{ Prices::$toolboxBookFull }}</s> &nbsp;<strong>NOW ${{ Prices::$toolboxBookRegular }}</strong>&nbsp; (SAVE ${{ (Prices::$toolboxBookFull - Prices::$toolboxBookRegular) }}).
-                    {{--<br>SAVE ${{ (Prices::$toolboxBookFull - Prices::$toolboxBookRegular) }} UNTIL MAY 19TH<br>--}}
+            @if( floatval($productPrices['the-drummers-toolbox-book']->price) > floatval($productPrices['the-drummers-toolbox-book']->discounted_price))
+                <p><s>WAS ${{ floatval($productPrices['the-drummers-toolbox-book']->price) }}</s> &nbsp;<strong>NOW ${{ floatval($productPrices['the-drummers-toolbox-book']->discounted_price) }}</strong>&nbsp; (SAVE ${{ (floatval($productPrices['the-drummers-toolbox-book']->price) - floatval($productPrices['the-drummers-toolbox-book']->discounted_price)) }}).
+                    {{--<br>SAVE ${{ (floatval($productPrices['the-drummers-toolbox-book']->price) - floatval($productPrices['the-drummers-toolbox-book']->discounted_price)) }} UNTIL MAY 19TH<br>--}}
                 </p>
             @else
-                <p><strong>ONLY ${{ Prices::$toolboxBookRegular }}</strong></p>
+                <p><strong>ONLY ${{ floatval($productPrices['the-drummers-toolbox-book']->discounted_price) }}</strong></p>
             @endif
             <a class="join rounded" href="/ecommerce/add-to-cart?products[the-drummers-toolbox-book]=1">GET STARTED &raquo;</a>
 
@@ -488,11 +488,11 @@
                 </div>
                 <div class="columns medium-6 text-wrap">
                     <img src="https://dpwjbsxqtam5n.cloudfront.net/books/drummers-toolbox/sales/logo-stacked.png">
-                    @if( Prices::$toolboxBookFull > Prices::$toolboxBookRegular)
-                        <p><s>WAS ${{ Prices::$toolboxBookFull }}</s> <strong> NOW ${{ Prices::$toolboxBookRegular }}</strong>.
+                    @if( floatval($productPrices['the-drummers-toolbox-book']->price) > floatval($productPrices['the-drummers-toolbox-book']->discounted_price))
+                        <p><s>WAS ${{ floatval($productPrices['the-drummers-toolbox-book']->price) }}</s> <strong> NOW ${{ floatval($productPrices['the-drummers-toolbox-book']->discounted_price) }}</strong>.
                         </p>
                     @else
-                        <p><strong>ONLY ${{ Prices::$toolboxBookRegular }}.</strong></p>
+                        <p><strong>ONLY ${{ floatval($productPrices['the-drummers-toolbox-book']->discounted_price) }}.</strong></p>
                     @endif
                     <a class="join rounded" href="/ecommerce/add-to-cart?products[the-drummers-toolbox-book]=1">CLICK HERE TO ORDER &raquo;</a>
                     {{--<a class="join white outline rounded" href="/">GET FREE WITH <img src="https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png"> &raquo;</a>--}}

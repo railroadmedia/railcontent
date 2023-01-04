@@ -56,7 +56,7 @@
     <section class="grid-view">
         <ul class="row fixed-cards">
             @include("drumeo.lead-gen.gift-guide._item-card", [
-                        "price" => Prices::$padRegular,
+                        "price" => floatval($productPrices['practicepad']->discounted_price),
                         "popularity" => "100",
                         "itemURL" => "/drumshop/practice-pad-full/",
                         "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/promos/gift-guide/gifts/drumeo-p4-practice-pad.jpg",
@@ -153,7 +153,7 @@
 
             @include("drumeo.lead-gen.gift-guide._item-card", [
                         "popularity" => "82",
-                        "price" => Prices::$waterBottleRegular,
+                        "price" => floatval($productPrices['Drumeo-Water-Bottle']->discounted_price),
                         "stockingStuffer" => "TRUE",
                         "itemURL" => "/drumshop/water-bottle/",
                         "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/promos/gift-guide/gifts/drumeo-water-bottle.jpg",
@@ -203,7 +203,7 @@
                         ])
 
             @include("drumeo.lead-gen.gift-guide._item-card", [
-                        "price" => Prices::$sticksRegular,
+                        "price" => floatval($productPrices['Drumeo-VaterSticks']->discounted_price),
                         "popularity" => "80",
                         "stockingStuffer" => "TRUE",
                         "rockDrummer" => "TRUE",
@@ -257,7 +257,7 @@
 
             @include("drumeo.lead-gen.gift-guide._item-card", [
                         "popularity" => "71",
-                        "price" => Prices::$drummerTowelRegular,
+                        "price" => floatval($productPrices['Drumeo-Towel']->discounted_price),
                         "stockingStuffer" => "TRUE",
                         "itemURL" => "/drumshop/drummer-towels/",
                         "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/promos/gift-guide/gifts/drumeo-towel.jpg",
@@ -278,7 +278,7 @@
 
             @include("drumeo.lead-gen.gift-guide._item-card", [
                         "popularity" => "68",
-                        "price" => Prices::$shirtRegular,
+                        "price" => floatval($productPrices['3001-unisex-jersey-sketchy-shirt']->discounted_price),
                         "stockingStuffer" => "TRUE",
                         "itemURL" => "/drumshop/tshirt-navy/",
                         "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/promos/gift-guide/gifts/drumeo-navy-shirt.jpg",

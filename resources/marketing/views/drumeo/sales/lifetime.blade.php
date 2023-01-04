@@ -189,7 +189,7 @@
                         'image' => 'https://cdn.musora.com/image/fetch/c_fill,w_300,q_auto:good/https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/eardrums.jpg',
                         'title' => 'Drumeo EarDrums',
                         'description' => 'Drumeo EarDrums reduce external volume by up to -29dB. That means you can play hard while protecting your ears.',
-                        'price' => Prices::$earDrumsFull,
+                        'price' => floatval($productPrices['drumeo-eardrums']->price),
                         'online-ship' => "Free Shipping",
                         'shipping' => "no-shipping"
                         ],

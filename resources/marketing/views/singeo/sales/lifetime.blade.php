@@ -201,7 +201,7 @@
                             'title' => 'Vowel Practice Poster',
                             'badge' => 'Vowel Practice Poster',
                             'description' => 'Your new favorite practice tool - and your ticket hitting higher notes with ease and confidence.',
-                            'price' => SingeoPrices::$posterFull,
+                            'price' => floatval($productPrices['vowel-sounds-poster']->price),
                             'online-ship' => "Free Shipping",
                         ],
                         [
