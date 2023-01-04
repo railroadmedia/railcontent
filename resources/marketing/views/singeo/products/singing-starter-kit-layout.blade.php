@@ -10,9 +10,9 @@
     <meta property="og:image" content="https://singeo.s3.amazonaws.com/products/singing-starter-kit/share-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.singeo.com/{{ Request::path() }}">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('/marketing/css/singeo/tailwind-helpers.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}">
     <link href="{{ asset('/marketing/css/animate.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/singeo/singing-starter-kit.css') }}" rel="stylesheet">
 
@@ -27,8 +27,8 @@
 
     {{--@include('shop.partials.promo-banner', [--}}
                 {{--"name" => "Singing Starter Kit",--}}
-                {{--"fullPrice" => SingeoPrices::$singingStarterKitFull,--}}
-                {{--"price" => SingeoPrices::$singingStarterKit,--}}
+                {{--"fullPrice" => floatval($productPrices['singing-starter-kit']->price),--}}
+                {{--"price" => floatval($productPrices['singing-starter-kit']->discounted_price),--}}
                 {{--"noBreadcrumb" => true--}}
             {{--])--}}
     @yield('topbar')
@@ -39,13 +39,13 @@
             <img class="h-20 md:h-32 lg:h-40" src="https://cdn.musora.com/image/fetch/w_980,q_auto:best/https://singeo.s3.amazonaws.com/products/singing-starter-kit/logo.png"><br>
             <h4 class="mt-2 mb-5">Everything You Need To Start Singing Now</h4>
             <a class="join" href="@yield('order-link')">START SINGING FOR
-                @if($productPrice < SingeoPrices::$singingStarterKitFull)
-                    <s class="opacity-50">${{ SingeoPrices::$singingStarterKitFull }}</s>
+                @if($productPrice < floatval($productPrices['singing-starter-kit']->price))
+                    <s class="opacity-50">${{ floatval($productPrices['singing-starter-kit']->price) }}</s>
                 @endif
                 ${{ $productPrice }} </a>
             <h6 class="font-bebas text-yellow-400 mt-5">
-                @if($productPrice < SingeoPrices::$singingStarterKitFull)
-                    SAVE {{ round(100 - (100 * ($productPrice / SingeoPrices::$singingStarterKitFull))) }}% <br>
+                @if($productPrice < floatval($productPrices['singing-starter-kit']->price))
+                    SAVE {{ round(100 - (100 * ($productPrice / floatval($productPrices['singing-starter-kit']->price)))) }}% <br>
                 @endif
                 <span class="text-white">** 90-DAY GUARANTEE**</span></h6>
         </div>
@@ -241,13 +241,13 @@
             <img class="h-20 md:h-32 lg:h-40" src="https://cdn.musora.com/image/fetch/w_980,q_auto:best/https://singeo.s3.amazonaws.com/products/singing-starter-kit/logo.png"><br>
             <h4 class="mt-2 mt-3 leading-normal">Everything You Need To Start Singing Now</h4>
             <a class="join my-2 md:my-3" href="@yield('order-link')">START SINGING FOR
-                @if($productPrice < SingeoPrices::$singingStarterKitFull)
-                    <s class="opacity-50">${{ SingeoPrices::$singingStarterKitFull }}</s>
+                @if($productPrice < floatval($productPrices['singing-starter-kit']->price))
+                    <s class="opacity-50">${{ floatval($productPrices['singing-starter-kit']->price) }}</s>
                 @endif
                 ${{ $productPrice }}</a>
             <h6 class="font-bebas text-yellow-400">
-                @if($productPrice < SingeoPrices::$singingStarterKitFull)
-                    SAVE {{ round(100 - (100 * ($productPrice / SingeoPrices::$singingStarterKitFull))) }}% <br>
+                @if($productPrice < floatval($productPrices['singing-starter-kit']->price))
+                    SAVE {{ round(100 - (100 * ($productPrice / floatval($productPrices['singing-starter-kit']->price)))) }}% <br>
                 @endif
                 <span class="text-white">** 90-DAY GUARANTEE**</span></h6>
             <div class="mt-5 md:mt-10 inline-block w-full px-3 md:px-4 credit-cards opacity-60">
@@ -271,23 +271,20 @@
         <div class="container mx-auto">
             <h2 class="mb-5"><strong>Are There Any Questions? </strong></h2>
             <div class="dropdowns max-w-4xl mx-auto px-4">
-                @include('singeo.sales.partials._dropdown', [
-                "customClass" => "rounded-3xl",
-                "question" => true,
+                @include('_partials.components.question-dropdown', [
+                "num" => "?",
                 "title" => "Is There An Age Limit For Learning To Sing?",
-                "description" => "If you can speak, you CAN sing.  There’s no age limit for when you can experience the enrichment that singing brings to your life.  Everyone progresses differently, so it’s important to remember to have patience with yourself and celebrate the milestones of your personal singing journey.",
+                "desc" => "If you can speak, you CAN sing.  There’s no age limit for when you can experience the enrichment that singing brings to your life.  Everyone progresses differently, so it’s important to remember to have patience with yourself and celebrate the milestones of your personal singing journey.",
                 ])
-                @include('singeo.sales.partials._dropdown', [
-                "customClass" => "rounded-3xl",
-                "question" => true,
+                @include('_partials.components.question-dropdown', [
+                "num" => "?",
                 "title" => "I Have Extreme “Stage Fright”. Can I Still Learn To Sing?",
-                "description" => "Absolutely! Singing is more than a performance. You don’t have to have an audience to sing. Singing can just be for YOU.  And when you take the time to learn and practice properly you will gain confidence in your singing and, when you’re ready, maybe you WILL take the stage!",
+                "desc" => "Absolutely! Singing is more than a performance. You don’t have to have an audience to sing. Singing can just be for YOU.  And when you take the time to learn and practice properly you will gain confidence in your singing and, when you’re ready, maybe you WILL take the stage!",
                 ])
-                @include('singeo.sales.partials._dropdown', [
-                "customClass" => "rounded-3xl",
-                "question" => true,
+                @include('_partials.components.question-dropdown', [
+                "num" => "?",
                 "title" => "Can I Really Learn How To Sing Online?",
-                "description" => "Great question!  Yes, you absolutely can. Our lessons are specifically designed for at-home learning.  Learning from home, in a space that makes you feel comfortable, helps you progress at your own pace without the intimidation of singing in front of anyone. If you have questions at any time, just reach out to us and get feedback from REAL teachers.",
+                "desc" => "Great question!  Yes, you absolutely can. Our lessons are specifically designed for at-home learning.  Learning from home, in a space that makes you feel comfortable, helps you progress at your own pace without the intimidation of singing in front of anyone. If you have questions at any time, just reach out to us and get feedback from REAL teachers.",
                 ])
             </div>
         </div>
@@ -327,14 +324,9 @@
                 ]
 
             });
-
-            $('.dropdown').on('click', function(){
-                $(this).toggleClass('active');
-                $(this).find('i').toggleClass('rotate-180');
-            });
         });
     </script>
-    <script type="text/javascript" src="{{ asset('/marketing/parcel/singeo/nav-footer.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>

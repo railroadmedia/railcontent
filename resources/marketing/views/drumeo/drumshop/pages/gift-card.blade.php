@@ -19,7 +19,7 @@
 @stop()
 
 @section('top')
-    @include('drumeo.drumshop._partials.slider', [
+    @include('_partials.components.shop.slider', [
         "headerText" => "<strong>The perfect gift for ANY drummer!</strong>",
         "videoSrc" => "//player.vimeo.com/video/495414119",
         "videoThumb" => "https://s3.amazonaws.com/drumeo-packs/Merch/pass.jpg",
@@ -46,7 +46,7 @@
                         <option class="bg-white text-black" value="PASS-12" data-price="240" data-product-json="{&quot;PASS-12&quot;: 1}">1 Year</option>
                     </select>
 
-                    <a class="online-atc merch vue-add-to-cart selected-pack" href="#" data-base-url="/laravel/public/shopping-cart/api/query?go-back-to-shop=true">
+                    <a class="online-atc merch vue-add-to-cart selected-pack" href="#" data-base-url="/ecommerce/add-to-cart?go-back-to-shop=true">
                         <button class="join border-none">
                             <i class="fas fa-cart-plus text-2xl mr-1" aria-hidden="true"></i> Add To Cart
                         </button>
@@ -70,8 +70,8 @@
         <strong>Drumeo offers ongoing access to:</strong></p>
     <ul>
         <li><strong>The Drumeo Method:</strong> Our 10-level step-by-step curriculum so you always know exactly what to practice next.</li>
-        <li><strong>Artist Courses:</strong> {{ Prices::$courses }}+ mini-courses by the best drummers and teachers in the world, always teaching the specific topics that made them famous!</li>
-        <li><strong>Famous Songs:</strong> {{ Prices::$songs }}+ play-along songs featuring our on-screen practice tools so you can play with or without the metronome, create loops, and learn your favorite songs faster.</li>
+        <li><strong>Artist Courses:</strong> {{ Prices::$drumeoCourses }}+ mini-courses by the best drummers and teachers in the world, always teaching the specific topics that made them famous!</li>
+        <li><strong>Famous Songs:</strong> {{ Prices::$drumeoSongs }}+ play-along songs featuring our on-screen practice tools so you can play with or without the metronome, create loops, and learn your favorite songs faster.</li>
         <li><strong>Entertaining Shows:</strong> We’ll take you beyond the classroom with entertaining shows for drummers including DIY Drum Experiments, Exploring Beats, In Rhythm, and Study The Greats.</li>
         <li><strong>Personal Support:</strong> You’ll have unlimited access to our community forums, student plans, weekly live streams, video reviews, and more!</li>
     </ul>

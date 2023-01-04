@@ -3,17 +3,10 @@
     <head>
         {!! \App\Analytics\Tracker::headTop() !!}
 
-
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=5">
 
-        <!-- Google Fonts -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-        <!-- Icons -->
-        <link rel="stylesheet" href="https://dpwjbsxqtam5n.cloudfront.net/fonts/font-awesome-5/fontawesome-all.min.css">
-        <link href="https://dpwjbsxqtam5n.cloudfront.net/fonts/icons.css" rel="stylesheet">
+        @include('_partials.layout._fonts')
         <!-- Favicons -->
         @include('_partials.layout.favicons.musora-favicons')
 
@@ -21,6 +14,7 @@
         <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
 
         @yield('head-includes')
+
         {!! \App\Analytics\Tracker::trackPageView() !!}
 
         {!! \App\Analytics\Tracker::headBottom() !!}

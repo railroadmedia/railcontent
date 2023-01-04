@@ -1,6 +1,6 @@
 @extends('drumeo.lead-gen.ultimate-toolbox.bass-drum-bootcamp.lesson-page')
 
-@section('lesson-title')
+@section('title')
     The Heel-Toe Technique
 @stop
 

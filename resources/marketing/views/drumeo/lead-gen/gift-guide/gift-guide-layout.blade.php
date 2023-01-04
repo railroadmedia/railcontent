@@ -1,4 +1,4 @@
-@extends('drumeo._partials.layout-template')
+@extends('drumeo._partials.global-layout')
 
 @section('global-head')
     @yield('meta')
@@ -7,7 +7,7 @@
     <meta property="og:description" content="Choosing gifts for the drummer in your life can be a tricky task.">
     <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/promos/gift-guide/og-image.jpg" style="display: none;">
 
-    @include('drumeo._partials._fonts')
+    @include('_partials.layout._fonts')
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation-float.min.css"/>
 
@@ -56,7 +56,7 @@
     <section class="grid-view">
         <ul class="row fixed-cards">
             @include("drumeo.lead-gen.gift-guide._item-card", [
-                        "price" => Prices::$padRegular,
+                        "price" => floatval($productPrices['practicepad']->discounted_price),
                         "popularity" => "100",
                         "itemURL" => "/drumshop/practice-pad-full/",
                         "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/promos/gift-guide/gifts/drumeo-p4-practice-pad.jpg",
@@ -66,7 +66,7 @@
                         ])
 
             @include("drumeo.lead-gen.gift-guide._item-card", [
-                        "price" => Prices::$drumeoEdgeAnnual,
+                        "price" => Prices::$plusSubscriptionAnnual,
                         "popularity" => "100",
                         "stockingStuffer" => "TRUE",
                         "rockDrummer" => "TRUE",
@@ -153,7 +153,7 @@
 
             @include("drumeo.lead-gen.gift-guide._item-card", [
                         "popularity" => "82",
-                        "price" => Prices::$waterBottleRegular,
+                        "price" => floatval($productPrices['Drumeo-Water-Bottle']->discounted_price),
                         "stockingStuffer" => "TRUE",
                         "itemURL" => "/drumshop/water-bottle/",
                         "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/promos/gift-guide/gifts/drumeo-water-bottle.jpg",
@@ -203,7 +203,7 @@
                         ])
 
             @include("drumeo.lead-gen.gift-guide._item-card", [
-                        "price" => Prices::$sticksRegular,
+                        "price" => floatval($productPrices['Drumeo-VaterSticks']->discounted_price),
                         "popularity" => "80",
                         "stockingStuffer" => "TRUE",
                         "rockDrummer" => "TRUE",
@@ -257,7 +257,7 @@
 
             @include("drumeo.lead-gen.gift-guide._item-card", [
                         "popularity" => "71",
-                        "price" => Prices::$drummerTowelRegular,
+                        "price" => floatval($productPrices['Drumeo-Towel']->discounted_price),
                         "stockingStuffer" => "TRUE",
                         "itemURL" => "/drumshop/drummer-towels/",
                         "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/promos/gift-guide/gifts/drumeo-towel.jpg",
@@ -278,7 +278,7 @@
 
             @include("drumeo.lead-gen.gift-guide._item-card", [
                         "popularity" => "68",
-                        "price" => Prices::$shirtRegular,
+                        "price" => floatval($productPrices['3001-unisex-jersey-sketchy-shirt']->discounted_price),
                         "stockingStuffer" => "TRUE",
                         "itemURL" => "/drumshop/tshirt-navy/",
                         "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/promos/gift-guide/gifts/drumeo-navy-shirt.jpg",
@@ -653,10 +653,107 @@
         </ul>
     </section>
 
-    @include("drumeo.sales.partials._footer")
+    @include("drumeo.sales.partials._footer", [
+            "minimal" => true
+        ])
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/js/foundation.min.js"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-    <script src="{{ asset('/marketing/js/drumeo/drum-shop-filters.js') }}"></script>
+    <script>
+        var Filters = {
+            filterByPrice: function(minPrice, maxPrice){
+                var scalableCard = $('.scalable-card');
+
+                scalableCard.addClass('hide');
+
+                scalableCard.each(function () {
+                    var thisPrice = $(this).data('price');
+
+                    if (thisPrice > minPrice && thisPrice < maxPrice) {
+                        $(this).removeClass('hide');
+                    }
+                });
+            }
+        };
+        var Sorting = {
+            sortItems: function(sortValue, sortDirection){
+                var sortItems = [];
+
+                $('.scalable-card').each(function(){
+                    var thisItem = $(this),
+                        thisData = $(this).data(sortValue);
+
+                    sortItems.push({
+                        item: thisItem,
+                        data: thisData
+                    });
+                });
+
+                if(sortDirection === 'desc'){
+                    sortItems.sort(
+                        Sorting.dynamicSort('data')
+                    );
+                }
+                else {
+                    sortItems.sort(
+                        Sorting.dynamicSort('-data')
+                    );
+                }
+
+                $.each(sortItems, function(){
+                    var thisItem = $(this.item),
+                        lastItem = $(sortItems[sortItems.length - 1].item);
+
+                    thisItem.insertBefore(lastItem);
+                });
+            },
+            dynamicSort: function(property){
+                var sortOrder = 1;
+
+                if(property[0] === "-") {
+                    sortOrder = -1;
+                    property = property.substr(1);
+                }
+                return function (a,b) {
+                    var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+                    return result * sortOrder;
+                };
+            }
+        };
+
+        $(function () {
+            $('.price-filter').on('click', function(){
+                $('.price-filter').removeClass('active');
+                $(this).addClass('active');
+
+                var minPrice = $(this).data('min-price'),
+                    maxPrice = $(this).data('max-price');
+
+                Filters.filterByPrice(minPrice, maxPrice);
+            });
+
+            $('#sortOrder').change(function () {
+                switch($(this).val()){
+                    case 'Price: Low to High':
+                        Sorting.sortItems('price', 'desc');
+                        break;
+                    case 'Price: High to Low':
+                        Sorting.sortItems('price', 'asc');
+                        break;
+                }
+            });
+
+            $('.scalable-card a').click(function(e){
+                var titleText = $(this).find('h4').text(),
+                    linkUrl = $(this).attr('href');
+
+                dataLayer.push({
+                    'event': 'gtm.linkClick',
+                    'gtm.elementText': titleText,
+                    'gtm.elementUrl': linkUrl
+                });
+            });
+        });
+    </script>
 @stop

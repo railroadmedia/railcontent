@@ -1,4 +1,4 @@
-@extends('drumeo._partials.layout-template')
+@extends('drumeo._partials.global-layout')
 
 @section('global-head')
     <title>Beyond Beginner Drumming | Drumeo</title>
@@ -8,10 +8,10 @@
     <meta property="og:image" content="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/beyond-beginner-drummer/Title+Banner.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
-    @include('drumeo._partials._fonts')
+    @include('_partials.layout._fonts')
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
+    @include('_partials.layout._tailwindcdn')
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/ndsh.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"/>
@@ -37,11 +37,11 @@
             }
 
         }
-        .dropdown .bg-pred {
+        .dropdown .bg-pianote {
             min-width: 32px;
         }
         @media (min-width: 40em) {
-            .dropdown .bg-pred {
+            .dropdown .bg-pianote {
                 min-width: 83px;
             }
         }
@@ -68,8 +68,8 @@
     ])
     @include('drumeo.products.partials.promo-banner', [
                     "name" => "Beyond Beginner Drumming",
-                    "fullPrice" => Prices::$beyondBeginnerDrummingFull,
-                    "price" => Prices::$beyondBeginnerDrumming,
+                    "fullPrice" => floatval($productPrices['beyond-beginner-drumming']->price),
+                    "price" => floatval($productPrices['beyond-beginner-drumming']->discounted_price),
                 "noBreadcrumb" => true
                 ])
 
@@ -79,9 +79,9 @@
             <i class="fas fa-play play-button autoplay-video mt-36 lg:mt-44 mb-5 md:mb-12" data-open="trailer"></i>
             <h2><strong>Make the jump from beginner to<br> intermediate drummer.</strong></h2>
             <img class="mt-1 h-10 sm:h-14 lg:h-16" src="https://drumeo-assets.s3.amazonaws.com/drum-shop/beyond-beginner-drummer/with+Siros+Vaziri.svg"><br>
-            <a class="join blue my-3 md:my-4 w-full max-w-xl" href="/laravel/public/shopping-cart/api/query?products[beyond-beginner-drumming]=1">Get Started</a>
-            <h6>ONLY @if(Prices::$beyondBeginnerDrummingFull > Prices::$beyondBeginnerDrumming) <s class="opacity-60">${{ Prices::$beyondBeginnerDrummingFull }}</s> @endif
-                <strong class="text-yellow-400">${{ Prices::$beyondBeginnerDrumming }} {{--Launch Special--}}</strong></h6>
+            <a class="join blue my-3 md:my-4 w-full max-w-xl" href="/ecommerce/add-to-cart?products[beyond-beginner-drumming]=1">Get Started</a>
+            <h6>ONLY @if(floatval($productPrices['beyond-beginner-drumming']->price) > floatval($productPrices['beyond-beginner-drumming']->discounted_price)) <s class="opacity-60">${{ floatval($productPrices['beyond-beginner-drumming']->price) }}</s> @endif
+                <strong class="text-yellow-400">${{ floatval($productPrices['beyond-beginner-drumming']->discounted_price) }} {{--Launch Special--}}</strong></h6>
         </div>
     </header>
 
@@ -212,7 +212,7 @@
             @endphp
             @foreach($levels as $level)
                 <div class="dropdown text-center border-2 border-gray-500 rounded-md overflow-hidden flex cursor-pointer mb-3 select-none @if(!empty($level['defaultOpen'])) active @endif
-                @if(!empty($level['navyBorder'])) border-navy-600 @endif">
+                @if(!empty($level['navyBorder'])) border-sky-900 @endif">
                     <div class="bg-drumeo py-5 px-2 sm:px-3 ">
                         <h5 class="leading-tight whitespace-nowrap inline-flex items-center">
                             <span class="text-xs hidden md:inline mr-1"> LEVEL</span>
@@ -284,9 +284,9 @@
             <img class="logo" src="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/beyond-beginner-drummer/BeyondBeginnerDrumming_Logo.svg"><br>
             <h2 class="mt-5"><strong>Make the jump from beginner to<br> intermediate drummer.</strong></h2>
             <img class="mt-1 h-10 sm:h-14 lg:h-16" src="https://drumeo-assets.s3.amazonaws.com/drum-shop/beyond-beginner-drummer/with+Siros+Vaziri.svg"><br>
-            <a class="join blue my-3 md:my-4 w-full max-w-xl" href="/laravel/public/shopping-cart/api/query?products[beyond-beginner-drumming]=1">Get Started</a>
-            <h6>ONLY @if(Prices::$beyondBeginnerDrummingFull > Prices::$beyondBeginnerDrumming) <s class="opacity-60">${{ Prices::$beyondBeginnerDrummingFull }}</s> @endif
-                <strong class="text-yellow-400">${{ Prices::$beyondBeginnerDrumming }} {{--Launch Special--}}</strong></h6>
+            <a class="join blue my-3 md:my-4 w-full max-w-xl" href="/ecommerce/add-to-cart?products[beyond-beginner-drumming]=1">Get Started</a>
+            <h6>ONLY @if(floatval($productPrices['beyond-beginner-drumming']->price) > floatval($productPrices['beyond-beginner-drumming']->discounted_price)) <s class="opacity-60">${{ floatval($productPrices['beyond-beginner-drumming']->price) }}</s> @endif
+                <strong class="text-yellow-400">${{ floatval($productPrices['beyond-beginner-drumming']->discounted_price) }} {{--Launch Special--}}</strong></h6>
         </div>
     </section>
     <section class="text-white py-7 md:py-10 lg:py-16 relative text-center" style="background: #0c1429;">
@@ -319,7 +319,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/js/sliding-anchor.js') }}"></script>
+
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/1.9.3/countUp.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>

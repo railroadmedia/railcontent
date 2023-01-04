@@ -5,13 +5,13 @@
     <meta name="description" content="Piano Lessons At Your Fingertips Wherever You Go. Whatever You Use.">
 
     <!-- Social Media -->
-    <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/og-image.jpg" style="display: none;">
+    <meta property="og:image" content="https://pianote.s3.amazonaws.com/sales/2023/share-image-pianote2.jpg" style="display: none;">
     <meta property="og:title" content="The New Pianote App">
     <meta property="og:description" content="Piano Lessons At Your Fingertips Wherever You Go. Whatever You Use.">
     <meta property="og:url" content="https://www.pianote.com/app/">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link href="{{ asset('/marketing/css/pianote/tailwind-helpers.css') }}" rel="stylesheet">
+    @include('_partials.layout._tailwindcdn')
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}">
     <link href="{{ asset('/marketing/parcel/pianote/sales-app.css') }}" rel="stylesheet">
 @stop
@@ -41,8 +41,8 @@
         <div class="container mx-auto">
             <p>Put your piano teacher in your pocket. Take your video lessons, <br class="hidden md:inline">
                 song tutorials, and practice sessions anywhere you go.</p>
-            <a class="download-badge" href="https://itunes.apple.com/us/app/pianote-mobile/id1500496457?ls=1" target="_blank"><img src="https://dpwjbsxqtam5n.cloudfront.net/app/download-on-app-store-button.png"></a>
-            <a class="download-badge" href="https://play.google.com/store/apps/details?id=com.pianote2" target="_blank"><img src="https://dpwjbsxqtam5n.cloudfront.net/app/google-play-button.png"></a>
+            <a class="download-badge" href="https://apps.apple.com/us/app/musora/id1619053766?ppid=afddd5f6-fbc3-46c9-b6e4-6c9e6a6936af" target="_blank"><img src="https://dpwjbsxqtam5n.cloudfront.net/app/download-on-app-store-button.png"></a>
+            <a class="download-badge" href="https://play.google.com/store/apps/details?id=com.musoraapp&listing=pianote_previews" target="_blank"><img src="https://dpwjbsxqtam5n.cloudfront.net/app/google-play-button.png"></a>
             <p class="small">Not a member? <a class="text-blue" href="/">Click here to join Pianote</a>.</p>
         </div>
     </section>
@@ -82,8 +82,8 @@
             <div class="float-left w-full md:w-1/2 px-2 md:px-3 option-wrap">
                 <p>MEMBERS</p>
                 <h4>Take your membership everywhere<br> with the Pianote app.</h4>
-                <a class="download-badge" href="https://itunes.apple.com/us/app/pianote-mobile/id1500496457?ls=1" target="_blank"><img src="https://dpwjbsxqtam5n.cloudfront.net/app/download-on-app-store-button.png"></a>
-                <a class="download-badge" href="https://play.google.com/store/apps/details?id=com.pianote2" target="_blank"><img src="https://dpwjbsxqtam5n.cloudfront.net/app/google-play-button.png"></a>
+                <a class="download-badge" href="https://apps.apple.com/us/app/musora/id1619053766?ppid=afddd5f6-fbc3-46c9-b6e4-6c9e6a6936af" target="_blank"><img src="https://dpwjbsxqtam5n.cloudfront.net/app/download-on-app-store-button.png"></a>
+                <a class="download-badge" href="https://play.google.com/store/apps/details?id=com.musoraapp&listing=pianote_previews" target="_blank"><img src="https://dpwjbsxqtam5n.cloudfront.net/app/google-play-button.png"></a>
             </div>
             <div class="float-left w-full md:w-1/2 px-2 md:px-3 option-wrap">
                 <p>NOT A MEMBER?</p>
@@ -97,8 +97,8 @@
     @include('pianote._partials._footer')
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/js/foundation.min.js"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/parcel/pianote/nav-footer.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
     <script>

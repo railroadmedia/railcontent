@@ -46,9 +46,9 @@
 
     <meta property="og:image" content="https://singeo.s3.amazonaws.com/lead-gen/harmony-pack/fb-share-image.jpg">
     <meta property="og:url" content="https://www.singeo.com/{{ Request::path() }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
+    @include('_partials.layout._tailwindcdn')
     <link href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('/marketing/css/singeo/tailwind-helpers.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}">
     <link href="{{ asset('/marketing/parcel/singeo/sales-page.css') }}" rel="stylesheet">
 
     <style>
@@ -71,8 +71,8 @@
 
     {{--@include('shop.partials.promo-banner', [--}}
     {{--"name" => "Beautiful Harmonies",--}}
-    {{--"fullPrice" => SingeoPrices::$beautifulHarmoniesFull,--}}
-    {{--"price" => SingeoPrices::$beautifulHarmonies,--}}
+    {{--"fullPrice" => floatval($productPrices['the-essential-guide-to-beautiful-harmonies']->price),--}}
+    {{--"price" => floatval($productPrices['the-essential-guide-to-beautiful-harmonies']->discounted_price),--}}
     {{--"noBreadcrumb" => true--}}
     {{--])--}}
     @yield('topbar')
@@ -92,7 +92,7 @@
                 </div>
                 <h3 class="font-extrabold leading-tight mb-2 md:mb-8 text-center md:text-left">Everything you need <br class="md:hidden">to start singing in <br class="md:hidden">perfect harmony now</h3>
                 <div class="md:w-72 lg:w-2/3 text-center">
-                    <a class="join smaller w-full tracking-tighter mb-2" href="/ecommerce/add-to-cart?products[the-essential-guide-to-beautiful-harmonies]=1&redirect=/order">get started for ${{ SingeoPrices::$beautifulHarmonies }}</a>
+                    <a class="join smaller w-full tracking-tighter mb-2" href="/ecommerce/add-to-cart?products[the-essential-guide-to-beautiful-harmonies]=1&redirect=/order">get started for ${{ floatval($productPrices['the-essential-guide-to-beautiful-harmonies']->discounted_price) }}</a>
                     <p>**90-DAY GUARANTEE**</p>
                 </div>
             </div>
@@ -126,7 +126,7 @@
                     So if you dream of singing beautiful harmonies and creating something extraordinary, then you need The Essential Guide To Beautiful Harmonies.
                 </p>
                 <div class="md:w-80 lg:w-2/3 mb-6 md:mb-0">
-                    <a class="join smaller w-full tracking-tighter mb-2" href="/ecommerce/add-to-cart?products[the-essential-guide-to-beautiful-harmonies]=1&redirect=/order">get started for ${{ SingeoPrices::$beautifulHarmonies }}</a>
+                    <a class="join smaller w-full tracking-tighter mb-2" href="/ecommerce/add-to-cart?products[the-essential-guide-to-beautiful-harmonies]=1&redirect=/order">get started for ${{ floatval($productPrices['the-essential-guide-to-beautiful-harmonies']->discounted_price) }}</a>
                 </div>
             </div>
             <div class="absolute md:relative left-0 right-0 md:w-2/5 flex justify-center md:block">
@@ -243,7 +243,7 @@
         <h3 class="font-extrabold leading-snug md:leading-normal mb-4">
             Everything you need to <br class="md:hidden">start singing <br class="hidden md:inline">in perfect <br class="md:hidden">harmony now
         </h3>
-        <a class="join smaller w-60 md:w-96 mb-2" href="/ecommerce/add-to-cart?products[the-essential-guide-to-beautiful-harmonies]=1&redirect=/order">Get started for ${{ SingeoPrices::$beautifulHarmonies }}</a>
+        <a class="join smaller w-60 md:w-96 mb-2" href="/ecommerce/add-to-cart?products[the-essential-guide-to-beautiful-harmonies]=1&redirect=/order">Get started for ${{ floatval($productPrices['the-essential-guide-to-beautiful-harmonies']->discounted_price) }}</a>
         <p style="color:#747474;">**90-DAY GUARANTEE**</p>
     </section>
 
@@ -253,14 +253,13 @@
     ])
     @include("singeo.sales.partials._footer")
 
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
         $(function () {
             $(document).foundation();
         });
     </script>
-    <script type="text/javascript" src="{{ asset('/marketing/parcel/singeo/nav-footer.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>

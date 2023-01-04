@@ -1,4 +1,4 @@
-@extends('drumeo._partials.layout-template')
+@extends('drumeo._partials.global-layout')
 
 @section('global-head')
     @parent
@@ -9,9 +9,9 @@
     <meta property="og:image" content="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/eardrums/Pro_BG2.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
-    @include('drumeo._partials._fonts')
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-    <link href="{{ asset('marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
+    @include('_partials.layout._fonts')
+    @include('_partials.layout._tailwindcdn')
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/css/animate.css') }}">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
 
@@ -86,8 +86,8 @@
     ])
     @include('drumeo.products.partials.promo-banner', [
                 "name" => "Drumeo EarDrums",
-                "fullPrice" => Prices::$earDrumsFull,
-                "price" => Prices::$earDrums,
+                "fullPrice" => floatval($productPrices['drumeo-eardrums']->price),
+                "price" => floatval($productPrices['drumeo-eardrums']->discounted_price),
                 "noBreadcrumb" => true
             ])
 
@@ -98,13 +98,13 @@
                 <p>Protect your ears + play your favorite songs.</p>
                 <i class="fas fa-play play-button autoplay-video my-28 md:my-36" data-open="trailer"></i><br>
                 @if( $products['drumeo-eardrums']->getStockAvailability() > 1 && !empty($products['drumeo-eardrums']->getStockAvailability()))
-                    <a class="join blue my-2 sm:my-4 w-full sm:w-2/3" href="/laravel/public/shopping-cart/api/query?products[drumeo-eardrums]=1">GRAB A PAIR &raquo;</a>
+                    <a class="join blue my-2 sm:my-4 w-full sm:w-2/3" href="/ecommerce/add-to-cart?products[drumeo-eardrums]=1">GRAB A PAIR &raquo;</a>
                 @else
                     <a class="join sold-out my-2 sm:my-4 w-full sm:w-2/3">SOLD OUT</a>
                 @endif
                 <h6 class="leading-tight">
-                    <strong> ONLY @if(Prices::$earDrumsFull > Prices::$earDrums) <s style="opacity: 0.6;">${{ Prices::$earDrumsFull }}</s> @endif
-                    ${{ Prices::$earDrums }}
+                    <strong> ONLY @if(floatval($productPrices['drumeo-eardrums']->price) > floatval($productPrices['drumeo-eardrums']->discounted_price)) <s style="opacity: 0.6;">${{ floatval($productPrices['drumeo-eardrums']->price) }}</s> @endif
+                    ${{ floatval($productPrices['drumeo-eardrums']->discounted_price) }}
                     </strong>
                 </h6>
             </div>
@@ -324,15 +324,15 @@
                 <div class="flex flex-wrap items-end justify-center 2-full max-w-sm md:max-w-2xl lg:max-w-3xl my-5 sm:my-10 mx-auto">
                     <div class="w-full md:w-1/2 px-2 md:px-3 relative">
                         {{--<p class="w-full px-4 pt-2 pb-4 -mb-3 text-white rounded-t-2xl" style="background:linear-gradient(to bottom, #0a73d8, #10518f);"><strong>LAUNCH SPECIAL</strong></p>--}}
-                        <a href="/laravel/public/shopping-cart/api/query?products[drumeo-eardrums]=1" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">
+                        <a href="/ecommerce/add-to-cart?products[drumeo-eardrums]=1" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">
                             <div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">
                                 <h5 class="leading-none mb-3">EarDrums</h5>
                                 <h1 class="inline-block leading-none">
-                                    @if(Prices::$earDrumsFull > Prices::$earDrums)
-                                        <s class="opacity-40">${{ Prices::$earDrumsFull }}</s>
+                                    @if(floatval($productPrices['drumeo-eardrums']->price) > floatval($productPrices['drumeo-eardrums']->discounted_price))
+                                        <s class="opacity-40">${{ floatval($productPrices['drumeo-eardrums']->price) }}</s>
                                     @endif
-                                    <strong>${{ Prices::$earDrums }}</strong></h1>
-                                {{--<p class="text-sm my-2 sm:my-4 opacity-60"><em>Save {{ round(100 - (100 * (Prices::$earDrums / Prices::$earDrumsFull))) }}% for a limited time.</em></p>--}}
+                                    <strong>${{ floatval($productPrices['drumeo-eardrums']->discounted_price) }}</strong></h1>
+                                {{--<p class="text-sm my-2 sm:my-4 opacity-60"><em>Save {{ round(100 - (100 * (floatval($productPrices['drumeo-eardrums']->discounted_price) / floatval($productPrices['drumeo-eardrums']->price)))) }}% for a limited time.</em></p>--}}
                                 <div class="join blue smaller w-full transition-opacity duration-300 group-hover:opacity-80 mt-2 sm:mt-4" style="max-width: 230px;">Get Started</div>
                             </div>
                             <div class="px-3 pt-5 md:pt-6 pb-9 md:pb-10" style="background: #f1f8ff;border-top: 2px solid #e6f2ff;">
@@ -383,10 +383,10 @@
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 
-    <script src="{{ asset('marketing/js/drumeo/manifest.js') }}"></script>
-    <script src="{{ asset('marketing/js/drumeo/vendor.js') }}"></script>
-    <script src="{{ asset('marketing/js/drumeo/cart-sidebar.js') }}"></script>
-    <script src="{{ asset('marketing/js/drumeo/app.js') }}"></script>
+    <script src="{{ asset('/marketing/js/drumeo/manifest.js') }}"></script>
+    <script src="{{ asset('/marketing/js/drumeo/vendor.js') }}"></script>
+    <script src="{{ asset('/marketing/js/drumeo/cart-sidebar.js') }}"></script>
+    <script src="{{ asset('/marketing/js/drumeo/app.js') }}"></script>
 
     <script>
         $(document).ready(function () {

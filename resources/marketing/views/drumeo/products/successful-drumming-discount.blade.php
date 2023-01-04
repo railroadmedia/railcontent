@@ -29,8 +29,8 @@
 @section('content')
     @include('drumeo.products.partials.promo-banner', [
                     "name" => "Successful Drumming",
-                    "fullPrice" => Prices::$sdOnlineFull,
-                    "price" => Prices::$sdOnlineRegular,
+                    "fullPrice" => floatval($productPrices['SD-DIGI']->price),
+                    "price" => floatval($productPrices['SD-DIGI']->discounted_price),
                 "noBreadcrumb" => true
                 ])
     <header class="header stacked">
@@ -47,9 +47,15 @@
                 <p>Jared Falk’s step-by-step plan for building a rock-solid <br class="hidden sm:inline">
                     drumming foundation for achieving any musical goals. </p>
                 {{--<a class="join sold-out">Sold Out</a>--}}
-                <a href="/laravel/public/shopping-cart/api/query?products[SD-DIGI]=1" class="join blue">Get Started &raquo;</a>
+                <a href="/ecommerce/add-to-cart?products[SD-DIGI]=1" class="join blue">Get Started &raquo;</a>
                 <p class="price-info">
-                    <s>NORMALLY ${{ Prices::$sdOnlineFull }}.</s> <strong>NOW ${{ Prices::$sdOnlineRegular }}</strong> (SAVE {{ round(100 - (100 * (Prices::$sdOnlineRegular / Prices::$sdOnlineFull))) }}%).
+                    @if($productPrices['SD-DIGI']->price > $productPrices['SD-DIGI']->discounted_price)
+                        <s>NORMALLY ${{ floatval($productPrices['SD-DIGI']->price) }}.</s>
+                        <strong>NOW ${{ floatval($productPrices['SD-DIGI']->discounted_price) }}</strong>
+                        (SAVE {{ round(100 - (100 * (floatval($productPrices['SD-DIGI']->discounted_price) / floatval($productPrices['SD-DIGI']->price)))) }}%).
+                    @else
+                        <strong>NOW ${{ floatval($productPrices['SD-DIGI']->discounted_price) }}</strong>
+                    @endif
                     <br> <span class="text-blue">90-DAY GUARANTEE.</span>
                 </p>
             </div>
@@ -65,9 +71,11 @@
     <section class="lesson-breakdown">
         <div class="container mx-auto clearfix">
             <h1>The Faster Way To Improve  <br class="hidden sm:inline lg:hidden">
-                Your Skills… <u>For Just ${{ Prices::$sdOnlineRegular }}</u></h1>
-            <h3 class="light"><s>NORMALLY ${{ Prices::$sdOnlineFull }}</s></h3>
-            <div class="float-left w-full px-3 sm:px-4 tile-wrap grid grid-cols-2 sm:grid-cols-3 gap-4">
+                Your Skills… <u>For Just ${{ floatval($productPrices['SD-DIGI']->discounted_price) }}</u></h1>
+            @if($productPrices['SD-DIGI']->price > $productPrices['SD-DIGI']->discounted_price)
+                <h3 class="light"><s>NORMALLY ${{ floatval($productPrices['SD-DIGI']->price) }}</s></h3>
+            @endif
+            <div class="float-left w-full px-3 sm:px-4 tile-wrap grid grid-cols-2 sm:grid-cols-3 gap-4 mt-4">
                 @include('drumeo.products.partials.lesson-tile2', [
                 "imageURL" => "https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/1.jpg",
                 "tileTitle" => "THE FOUNDATION",
@@ -304,13 +312,19 @@
                 <img src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/sd-logo.png">
             </div>
             <h2 class="float-left w-full px-3 sm:px-4">Get Jared Falk’s trusted step-by-step curriculum <br class="inline sm:hidden">
-                for a one-time payment of just ${{ Prices::$sdOnlineRegular }}.</h2>
+                for a one-time payment of just ${{ floatval($productPrices['SD-DIGI']->discounted_price) }}.</h2>
             {{--<div class="float-left w-full px-3 sm:px-4"><a class="join sold-out">Sold Out</a></div>--}}
-            <div class="float-left w-full px-3 sm:px-4"><a href="/laravel/public/shopping-cart/api/query?products[SD-DIGI]=1" class="join blue">Get Started &raquo;</a></div>
+            <div class="float-left w-full px-3 sm:px-4"><a href="/ecommerce/add-to-cart?products[SD-DIGI]=1" class="join blue">Get Started &raquo;</a></div>
 
-            <h2 class="float-left w-full px-3 sm:px-4 highlighted"><s>NORMALLY ${{ Prices::$sdOnlineFull }}.</s> <strong><u>ONLY ${{ Prices::$sdOnlineRegular }}</u></strong> (SAVE {{ round(100 - (100 * (Prices::$sdOnlineRegular / Prices::$sdOnlineFull))) }}%).
+            <h2 class="float-left w-full px-3 sm:px-4 highlighted">
+                @if($productPrices['SD-DIGI']->price > $productPrices['SD-DIGI']->discounted_price)
+                    <s>NORMALLY ${{ floatval($productPrices['SD-DIGI']->price) }}.</s> <strong><u>ONLY ${{ floatval($productPrices['SD-DIGI']->discounted_price) }}</u></strong> (SAVE {{ round(100 - (100 * (floatval($productPrices['SD-DIGI']->discounted_price) / floatval($productPrices['SD-DIGI']->price)))) }}%).
+                @else
+                    <strong>NOW ${{ floatval($productPrices['SD-DIGI']->discounted_price) }}</strong>
+                @endif
                 <br> <span class="text-blue">90-DAY GUARANTEE.</span>
-                {{--<br><span class="countdown">ONLY <strong class="tzcd2">a limited time</strong> LEFT!</span>--}}</h2>
+                {{--<br><span class="countdown">ONLY <strong class="tzcd2">a limited time</strong> LEFT!</span>--}}
+            </h2>
 
             <div class="credit-cards float-left w-full px-3 sm:px-4">
                 <i class="fab fa-cc-visa"></i>

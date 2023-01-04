@@ -9,7 +9,11 @@ module.exports = {
   darkMode: "class",
   content: require('fast-glob').sync([
     './resources/marketing/**/*.{blade.php,js}',
+    './resources/platform/**/*.vue',
   ]),
+  safelist: [
+    'hover:text-singeo','hover:text-drumeo','hover:text-guitareo','hover:text-pianote'
+  ],
   theme: {
     extend: {
       fontFamily: stylesoraTheme.fontFamily,

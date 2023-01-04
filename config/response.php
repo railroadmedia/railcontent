@@ -6,6 +6,7 @@ return [
             'id',
             'data.thumbnail_url',
             'data.sheet_music_thumbnail_url',
+            'difficulty_string',
             'type',
             'instrument',
             'published_on',
@@ -36,7 +37,12 @@ return [
             'live_event_end_time_in_timezone',
             'published_on_in_timezone',
             'lesson_count',
-            'lessons'
+            'lessons',
+            'coach_card_image',
+            'coach_bottom_banner_image',
+            'coach_top_banner_image',
+            'coach_profile_image',
+            'coach_featured_image',
         ],
 
         'instructor' => [
@@ -900,9 +906,9 @@ return [
                 'coach_profile_image',
                 'current_user_is_subscribed',
             ],
-            'artist'
+            'artist',
+            'parent'
         ],
-
         'song' => [
             'ranges',
             'id',
@@ -917,6 +923,7 @@ return [
             'fields.title',
             'fields.video.fields.length_in_seconds',
             'data.thumbnail_url',
+            'difficulty_string',
             'total_comments',
             'comments',
             'xp',
@@ -954,6 +961,7 @@ return [
                 'fields.title',
                 'length_in_seconds',
                 'data.thumbnail_url',
+                'difficulty_string',
                 'fields.artist',
                 'fields.style',
                 'lesson_count',
@@ -1066,6 +1074,7 @@ return [
             'fields.title',
             'fields.video.fields.length_in_seconds',
             'data.thumbnail_url',
+            'difficulty_string',
             'total_comments',
             'comments',
             'xp',
@@ -2050,7 +2059,10 @@ return [
             'permission_level',
             'helpscout_beacon_id',
             'cio_id',
-            'customer_io_id'
+            'customer_io_id',
+            'membership_level',
+            'is_lifetime_member',
+            'is_drumeo_lifetime_member',
         ],
 
         'quick-tips' => [

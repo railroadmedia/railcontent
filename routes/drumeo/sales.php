@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Musora\CodeRedemptionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Drumeo\SalesController;
 
@@ -9,20 +8,21 @@ Route::domain('{drumeoDomain}')
     ->group(function () {
     Route::get('/referral-join', [
         'as' => 'referral.invite-a-friend-landing',
-        'uses' => App\Http\Controllers\Profiles\ReferralController::class . '@join',
+        'uses' => \App\Http\Controllers\Musora\ReferralJoinController::class . '@join',
     ]);
-    Route::get('/', [SalesController::class, 'sales'] );
-    Route::get('/anniversary-deal', [SalesController::class, 'sales'] );
-    Route::get('/mydrumset', [SalesController::class, 'sales'] );
-    Route::get('/student-only', [SalesController::class, 'salesStudents'] );
+    Route::get('/', [SalesController::class, 'home'] );
+    Route::get('/new-year', [SalesController::class, 'promo'] );
+        Route::get('/beginner', [SalesController::class, 'promo']);
+    Route::get('/choose-plan', [SalesController::class, 'choosePlan'] );
+    Route::get('/student-only', [SalesController::class, 'promo'] );
     Route::get('/upgrade-offer', [SalesController::class, 'salesUpgrade'] );
     Route::get('/lifetime', [SalesController::class, 'salesUpgradeLifetime'] );
     Route::get('/festival/', [SalesController::class, 'Festival'] );
-    Route::post('/hlag-submit/', [SalesController::class, 'hitLikeAGirlSubmission'] );
 
     //    sales pages
-    Route::get('/beginner', [SalesController::class, 'beginner']);
-    Route::get('/songs', [SalesController::class, 'songs']);
+    Route::get('/method', [SalesController::class, 'method'] );
+    Route::get('/songs', [SalesController::class, 'songs'] );
+    Route::get('/coaches', [SalesController::class, 'coaches'] );
     Route::get('/impact', [SalesController::class, 'impact']);
     Route::get('/about', [SalesController::class, 'about']);
     Route::get('/privacy', [SalesController::class, 'privacy']);
@@ -34,39 +34,24 @@ Route::domain('{drumeoDomain}')
     Route::get('/tom-sawyer/', [SalesController::class, 'tomSawyer']);
     Route::get('/drumfest', [SalesController::class, 'drumFest']);
     Route::get('/awards/', [SalesController::class, 'awards']);
-
-    Route::get('/trial', [SalesController::class, 'trial']);
-    Route::get('/earthworks', [SalesController::class, 'earthWorks']);
-    Route::get('/coaches-quiz', [SalesController::class, 'coachesQuiz']);
-    Route::get('/30-day-trial', [SalesController::class, 'thirtyDayTrial']);
-    Route::get('/melodics', [SalesController::class, 'melodics']);
-    Route::get('/new-drummers-trial', [SalesController::class, 'newDrummerTrial']);
-    Route::get('/power-pack', [SalesController::class, 'powerPack']);
-    Route::get('/bestbook-trial', [SalesController::class, 'bestBookTrial']);
-    Route::get('/toolbox-trial', [SalesController::class, 'toolBoxTrial']);
-    Route::get('/vdrums', [SalesController::class, 'vDrums']);
     Route::get('/sonor/', [SalesController::class, 'sonor']);
-    Route::get('/coach-trial', [SalesController::class, 'coachTrial']);
-    Route::get('/choose-your-trial', [SalesController::class, 'chooseTrial']);
-    Route::get('/earthworks-trial', [SalesController::class, 'earthWorksTrial']);
-    Route::get('/coaches-quiz-trial', [SalesController::class, 'coachQuizTrial']);
-    Route::get('/choose-your-trial-month', [SalesController::class, 'chooseTrialMonth']);
-    Route::get('/melodics-trial', [SalesController::class, 'melodicTrial']);
-    Route::get('/new-drummers-trial-month', [SalesController::class, 'newDrummerTrialMonth']);
-    Route::get('/affiliate-trial', [SalesController::class, 'affiliateTrial']);
 
-    Route::get('/aric', [SalesController::class, 'aric']);
-    Route::get('/domino', [SalesController::class, 'domino']);
-    Route::get('/dorothea', [SalesController::class, 'dorothea']);
-    Route::get('/jared', [SalesController::class, 'jared']);
-    Route::get('/john', [SalesController::class, 'jared']);
-    Route::get('/kaz', [SalesController::class, 'kaz']);
-    Route::get('/larnell', [SalesController::class, 'larnell']);
-    Route::get('/matt', [SalesController::class, 'matt']);
-    Route::get('/sarah', [SalesController::class, 'sarah']);
-    Route::get('/schack', [SalesController::class, 'schack']);
-    Route::get('/sharon', [SalesController::class, 'sharon']);
-    Route::get('/todd', [SalesController::class, 'todd']);
+    Route::get('/trial', [SalesController::class, 'home']);
+    Route::get('/30-day-trial', [SalesController::class, 'homeMonth']);
+    Route::get('/choose-your-trial', [SalesController::class, 'choosePlan']);
+    Route::get('/choose-your-trial-month', [SalesController::class, 'choosePlanMonth']);
+
+    Route::get('/{pageT?}', SalesController::class . '@trialPages')
+        ->whereIn('pageT', [
+            'bestbook-trial', 'coaches-quiz', 'earthworks', 'melodics', 'new-drummers-trial', 'power-pack', 'toolbox-trial'
+        ]);
+
+    Route::get('/{pageC?}', SalesController::class . '@coachTrial')
+        ->whereIn('pageC', [
+            'aric', 'domino', 'dorothea', 'jared', 'john', 'kaz', 'larnell', 'matt', 'sarah', 'schack', 'sharon', 'todd'
+        ]);
+
+
     Route::get('/estepario', [SalesController::class, 'estepario']);
     Route::group(['prefix' => 'a' ],
         function () {
@@ -85,9 +70,8 @@ Route::domain('{drumeoDomain}')
         }
     );
 
+
     Route::get('/30-day-drummer-register-endpoint', [SalesController::class, 'registerFor30DayDrummer'] );
     Route::get('/pro/', [SalesController::class, 'pro']);
     Route::get('/jared-recommends', [SalesController::class, 'jaredRecommends']);
-
-    Route::get('redeem-thomann', [CodeRedemptionController::class, 'renderNewAccountThomannRedeemPage']);
 });

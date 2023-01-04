@@ -288,7 +288,7 @@
                     {{ csrf_field() }}
 
                     <input type="hidden" name="credentials_type" value="new">
-                    <input type="hidden" name="redirect" value="/members">
+                    <input type="hidden" name="redirect" value="{{ $redirectUrl ?? '/drumeo' }}">
 
                     <div class="mb-1">
                         @include('partials.bladesora.members.inputs.text-input', [
@@ -354,7 +354,7 @@
                             {{ method_field('POST') }}
                             {{ csrf_field() }}
                             <input type="hidden" name="credentials_type" value="existing">
-                            <input type="hidden" name="redirect" value="/members">
+                            <input type="hidden" name="redirect" value="{{ $redirectUrl ?? '/drumeo' }}">
 
                             <div class="mb-1">
                                 @include('partials.bladesora.members.inputs.text-input', [

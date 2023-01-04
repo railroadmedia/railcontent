@@ -9,6 +9,8 @@
     <meta property="og:image" content="https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/thumbnail.jpg" style="display: none;">
     <meta property="og:description" content="Jared Falk's 26-Week Online Course For Building Your Drumming Independence & Becoming A More Musical Drummer">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
+
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
 @stop()
 
 @section('head')
@@ -54,8 +56,8 @@
 @section('content')
     @include('drumeo.products.partials.promo-banner', [
                     "name" => "Independence Made Easy",
-                    "fullPrice" => Prices::$imeFull,
-                    "price" => Prices::$imeRegular,
+                    "fullPrice" => floatval($productPrices['independence-made-easy-pack']->price),
+                    "price" => floatval($productPrices['independence-made-easy-pack']->discounted_price),
                 "noBreadcrumb" => true
                 ])
     <header class="hero-header">
@@ -80,12 +82,12 @@
                 </div>
                 <p>Unlock your musicality & creativity on <br class="hide-for-medium">
                     the drums through 26 weekly lessons.</p>
-                <a href="/laravel/public/shopping-cart/api/query?products[independence-made-easy-pack]=1" class="join">Get Started &raquo;</a>
+                <a href="/ecommerce/add-to-cart?products[independence-made-easy-pack]=1" class="join">Get Started &raquo;</a>
                 <p class="uppercase price-info">
-                    @if(Prices::$imeFull > Prices::$imeRegular)
-                        <s>Normally ${{ Prices::$imeFull }}</s> <strong>Only ${{ Prices::$imeRegular, 2 }}</strong> (Save {{ round(100 - (100 * (Prices::$imeRegular / Prices::$imeFull))) }}%)
+                    @if(floatval($productPrices['independence-made-easy-pack']->price) > floatval($productPrices['independence-made-easy-pack']->discounted_price))
+                        <s>Normally ${{ floatval($productPrices['independence-made-easy-pack']->price) }}</s> <strong>Only ${{ floatval($productPrices['independence-made-easy-pack']->discounted_price), 2 }}</strong> (Save {{ round(100 - (100 * (floatval($productPrices['independence-made-easy-pack']->discounted_price) / floatval($productPrices['independence-made-easy-pack']->price)))) }}%)
                     @else
-                        <strong>Now ${{ Prices::$imeRegular }}.</strong>
+                        <strong>Now ${{ floatval($productPrices['independence-made-easy-pack']->discounted_price) }}.</strong>
                     @endif
                     <br>
                     <u class="text-green"><a href="/" style="color:inherit;">(Or get it free with Drumeo)</a></u>
@@ -99,7 +101,7 @@
                 <iframe class="reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/401069316?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
             </div>
             <br>
-            <a href="/laravel/public/shopping-cart/api/query?products[independence-made-easy-pack]=1" class="join">Get Started &raquo;</a>
+            <a href="/ecommerce/add-to-cart?products[independence-made-easy-pack]=1" class="join">Get Started &raquo;</a>
         </div>
     </header>
 
@@ -433,16 +435,16 @@
                 <tr class="prices">
                     <td>Your Total Investment</td>
                     <td>
-                        @if(Prices::$imeFull > Prices::$imeRegular)
-                            <s>${{ Prices::$imeFull }}</s>
+                        @if(floatval($productPrices['independence-made-easy-pack']->price) > floatval($productPrices['independence-made-easy-pack']->discounted_price))
+                            <s>${{ floatval($productPrices['independence-made-easy-pack']->price) }}</s>
                         @endif
-                            ${{ Prices::$imeRegular, 2 }}</td>
+                            ${{ floatval($productPrices['independence-made-easy-pack']->discounted_price), 2 }}</td>
                     <td><strong>$50+</strong><br>FOR 1 LESSON</td>
                 </tr>
                 </tbody>
             </table>
             <p class="columns">
-                <strong>You can unlock the full 26-week course today</strong> to get Jared Falk’s best advice for improving your independence on the drums -- <u>all for just ${{ round(Prices::$imeRegular / 26, 2) }} per week</u> (billed at ${{ Prices::$imeRegular, 2 }} for the entire course).
+                <strong>You can unlock the full 26-week course today</strong> to get Jared Falk’s best advice for improving your independence on the drums -- <u>all for just ${{ round(floatval($productPrices['independence-made-easy-pack']->discounted_price) / 26, 2) }} per week</u> (billed at ${{ floatval($productPrices['independence-made-easy-pack']->discounted_price), 2 }} for the entire course).
                 <br><br>
                 You can choose a one-time payment, a two-payment plan, or a five-payment plan -- and the entire course is yours for life with no recurring subscription or additional fees.
 
@@ -470,15 +472,15 @@
 
             <h1 class="columns">
                 Jared Falk’s 26-Week Online <br class="hide-for-large">
-                Course For Just ${{ round(Prices::$imeRegular / 26, 2) }} Per Week</h1>
+                Course For Just ${{ round(floatval($productPrices['independence-made-easy-pack']->discounted_price) / 26, 2) }} Per Week</h1>
 
-            <div class="columns"><a href="/laravel/public/shopping-cart/api/query?products[independence-made-easy-pack]=1" class="join">Get Started &raquo;</a></div>
+            <div class="columns"><a href="/ecommerce/add-to-cart?products[independence-made-easy-pack]=1" class="join">Get Started &raquo;</a></div>
 
             <h2 class="columns uppercase">
-                @if(Prices::$imeFull > Prices::$imeRegular)
-                    <s>Normally ${{ Prices::$imeFull }}</s> <strong>Only ${{ Prices::$imeRegular, 2 }}</strong> (Save {{ round(100 - (100 * (Prices::$imeRegular / Prices::$imeFull))) }}%)
+                @if(floatval($productPrices['independence-made-easy-pack']->price) > floatval($productPrices['independence-made-easy-pack']->discounted_price))
+                    <s>Normally ${{ floatval($productPrices['independence-made-easy-pack']->price) }}</s> <strong>Only ${{ floatval($productPrices['independence-made-easy-pack']->discounted_price), 2 }}</strong> (Save {{ round(100 - (100 * (floatval($productPrices['independence-made-easy-pack']->discounted_price) / floatval($productPrices['independence-made-easy-pack']->price)))) }}%)
                 @else
-                    <strong>Now ${{ Prices::$imeRegular }}.</strong>
+                    <strong>Now ${{ floatval($productPrices['independence-made-easy-pack']->discounted_price) }}.</strong>
                 @endif
                 <br>
                 <u class="text-green"><a href="/" style="color:inherit;">(Or get it free with Drumeo)</a></u>
@@ -502,25 +504,30 @@
         <div class="row">
             <h1>Still Have Questions?</h1>
             <div class="columns">
-                @include('drumeo.products.partials.question-dropdown', [
-                "question" => "When does the course officially start?",
-                "answer" => "You’ll get the entire 26-week course immediately, so you can start on your own schedule."
+                @include('_partials.components.question-dropdown', [
+                "num" => "?",
+                "title" => "When does the course officially start?",
+                "desc" => "You’ll get the entire 26-week course immediately, so you can start on your own schedule."
                 ])
-                @include('drumeo.products.partials.question-dropdown', [
-                "question" => "Will I still have full access to the course after 26 weeks?",
-                "answer" => "Yes! Even though it’s designed as a 26-week course, you’ll have LIFETIME online access to everything inside Independence Made Easy, so you can review the materials or re-watch the lessons, anytime."
+                @include('_partials.components.question-dropdown', [
+                "num" => "?",
+                "title" => "Will I still have full access to the course after 26 weeks?",
+                "desc" => "Yes! Even though it’s designed as a 26-week course, you’ll have LIFETIME online access to everything inside Independence Made Easy, so you can review the materials or re-watch the lessons, anytime."
                 ])
-                @include('drumeo.products.partials.question-dropdown', [
-                "question" => "What if I can’t follow the lessons EVERY week?",
-                "answer" => "You’ll get 26 weekly lessons and exercises. And while they’re intended to be completed week-after-week, we know that everybody’s schedules are different - so we’ve included progress-tracking so you never lose your spot. If you need to miss a week, that’s fine! You’ll have lifetime access to the entire course so you’ll never lose your spot -- and you can continue whenever it’s most convenient for you."
+                @include('_partials.components.question-dropdown', [
+                "num" => "?",
+                "title" => "What if I can’t follow the lessons EVERY week?",
+                "desc" => "You’ll get 26 weekly lessons and exercises. And while they’re intended to be completed week-after-week, we know that everybody’s schedules are different - so we’ve included progress-tracking so you never lose your spot. If you need to miss a week, that’s fine! You’ll have lifetime access to the entire course so you’ll never lose your spot -- and you can continue whenever it’s most convenient for you."
                 ])
-                @include('drumeo.products.partials.question-dropdown', [
-                "question" => "Do these lessons work for electronic and acoustic drum-sets? ",
-                "answer" => "Yes, the lessons will work on both electric and acoustic drum-sets. Since you'll be developing your drumming independence, you can actually practice on anything - even pots and pans if you want!"
+                @include('_partials.components.question-dropdown', [
+                "num" => "?",
+                "title" => "Do these lessons work for electronic and acoustic drum-sets? ",
+                "desc" => "Yes, the lessons will work on both electric and acoustic drum-sets. Since you'll be developing your drumming independence, you can actually practice on anything - even pots and pans if you want!"
                 ])
-                @include('drumeo.products.partials.question-dropdown', [
-                "question" => "How much time per week will this course require?",
-                "answer" => "For time invested, obviously the more time you practice the faster you’ll get better. But we recommend investing at least 2-3 hours per week to truly benefit from this course."
+                @include('_partials.components.question-dropdown', [
+                "num" => "?",
+                "title" => "How much time per week will this course require?",
+                "desc" => "For time invested, obviously the more time you practice the faster you’ll get better. But we recommend investing at least 2-3 hours per week to truly benefit from this course."
                 ])
             </div>
         </div>

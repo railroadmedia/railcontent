@@ -11,6 +11,7 @@ use Modules\UserManagementSystem\Models\FirebaseToken;
 use Railroad\Ecommerce\Entities\Subscription;
 use Railroad\Ecommerce\Repositories\ProductRepository;
 use Railroad\Ecommerce\Repositories\SubscriptionRepository;
+use Railroad\Ecommerce\Services\SubscriptionService;
 use Railroad\MusoraApi\Contracts\UserProviderInterface;
 use Railroad\MusoraApi\Entities\User;
 use Railroad\MusoraApi\Exceptions\MusoraAPIException;
@@ -30,6 +31,7 @@ class MusoraApiUserProvider implements UserProviderInterface
     private PostRepository $postRepository;
     private ContentService $contentService;
     private CustomerIoService $customerIoService;
+    private SubscriptionService $subscriptionService;
 
     public function __construct(
         SubscriptionRepository $subscriptionRepository,
@@ -38,7 +40,8 @@ class MusoraApiUserProvider implements UserProviderInterface
         CommentService $commentService,
         PostRepository $postRepository,
         ContentService $contentService,
-        CustomerIoService $customerIoService
+        CustomerIoService $customerIoService,
+        SubscriptionService $subscriptionService
     ) {
         $this->productRepository = $productRepository;
         $this->subscriptionRepository = $subscriptionRepository;
@@ -47,6 +50,7 @@ class MusoraApiUserProvider implements UserProviderInterface
         $this->postRepository = $postRepository;
         $this->contentService = $contentService;
         $this->customerIoService = $customerIoService;
+        $this->subscriptionService = $subscriptionService;
     }
 
     public function getCurrentUser()
@@ -98,6 +102,9 @@ class MusoraApiUserProvider implements UserProviderInterface
             'isPackOnlyOwner' => $user->isPackOnlyOwner(),
             'isAppleAppSubscriber' => $isAppleAppSubscriber,
             'isGoogleAppSubscriber' => $isGoogleAppSubscriber,
+            'membership_level' => $user->membership_level,
+            'is_drumeo_lifetime_member' => $user->is_drumeo_lifetime_member,
+            'is_lifetime_member' => $user->is_lifetime_member
         ];
     }
 
@@ -300,6 +307,7 @@ class MusoraApiUserProvider implements UserProviderInterface
 
         $this->commentService->markUserCommentsAsDeleted($userId);
         $this->postRepository->deleteByUserId($userId);
+        $this->subscriptionService->cancelUserSubscriptions($userId);
 
         $user->fill([
             'email' => 'musora+deleted_'.Carbon::now()->getTimestamp().'@musora.com',
@@ -329,6 +337,7 @@ class MusoraApiUserProvider implements UserProviderInterface
 
         ]);
         $user->email = 'musora+deleted_'.Carbon::now()->getTimestamp().'@musora.com';
+        $user->updated_at = Carbon::now()->toDateTimeString();
         $user->save();
 
         return $user;

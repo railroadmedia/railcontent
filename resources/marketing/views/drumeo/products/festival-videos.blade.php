@@ -56,12 +56,12 @@
         <div class="row">
             <img class="logo" src="https://dpwjbsxqtam5n.cloudfront.net/festival/2020-pack/festival-video-pack-logo.png">
             <h1><strong>10 Legendary Drum <br class="hide-for-large">Performances{{-- For Just $1--}}</strong></h1>
-            <h3 style="margin: 0 auto;"><strong class="text-yellow">ONLY ${{ Prices::$festival2020Regular }}.</strong> </h3>
+            <h3 style="margin: 0 auto;"><strong class="text-yellow">ONLY ${{ 1 }}.</strong> </h3>
             @if(auth()->check())
                 <a href="{{ get_musora_brand_base_url() }}/drumeo/packs" class="join blue">View Pack &raquo;</a>
             @else
                 <a class="join sold-out">NOT AVAILABLE</a>
-                {{--<a href="/laravel/public/shopping-cart/api/query?products[festival-2020]=1&products[drumeo_edge_30_days_access]=1&locked=true" class="join blue">Order Now &raquo;</a>--}}
+                {{--<a href="/ecommerce/add-to-cart?products[festival-2020]=1&products[drumeo_edge_30_days_access]=1&locked=true" class="join blue">Order Now &raquo;</a>--}}
             @endif
             {{--<h6>FREE BONUS: 1 Month Drumeo Membership</h6>--}}
         </div>
@@ -161,12 +161,12 @@
             <h1><strong>10 Legendary Drum <br class="hide-for-large">Performances{{-- For Just $1--}}</strong></h1>
             {{--<h4><strong>+ Free 1-Month Access To Drumeo</strong></h4>--}}
             {{--<p><em>(Free Bonus, No Hidden Renewing Payments)</em></p>--}}
-            <h3 style="margin: 0 auto;"><strong class="text-yellow">ONLY ${{ Prices::$festival2020Regular }}.</strong> </h3>
+            <h3 style="margin: 0 auto;"><strong class="text-yellow">ONLY ${{ 1 }}.</strong> </h3>
             @if(auth()->check())
                 <a href="{{ get_musora_brand_base_url() }}/drumeo/packs" class="join blue">View Pack &raquo;</a>
             @else
                 <a class="join sold-out">NOT AVAILABLE</a>
-                {{--<a href="/laravel/public/shopping-cart/api/query?products[festival-2020]=1&products[drumeo_edge_30_days_access]=1&locked=true" class="join blue">Order Now &raquo;</a>--}}
+                {{--<a href="/ecommerce/add-to-cart?products[festival-2020]=1&products[drumeo_edge_30_days_access]=1&locked=true" class="join blue">Order Now &raquo;</a>--}}
             @endif
             {{--<h6>FREE BONUS: 1 Month Drumeo Membership</h6>--}}
             <br><br>

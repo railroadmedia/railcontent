@@ -25,7 +25,7 @@
 
 @section('head-includes')
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    @include('_partials.layout._tailwindcdn')
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"/>
@@ -86,7 +86,7 @@
                             <a
                                 class="online-atc merch vue-add-to-cart selected-pack2"
                                 href="#"
-                                data-base-url="https://www.drumeo.com/laravel/public/shopping-cart/api/query?locked=true"
+                                data-base-url="https://www.drumeo.com/ecommerce/add-to-cart?locked=true"
                             >
                                 <button class="join border-none mt-2 mb-4 w-full" style="background: #000;font: 400 20px/1em 'Bebas Neue', sans-serif !important;">
                                     <i class="fas fa-cart-plus text-2xl mr-1"></i> Add To Cart
@@ -127,7 +127,7 @@
     <script>
         $(document).ready(function () {
             //customize section pack picker
-            var originalLink2 = 'https://www.drumeo.com/laravel/public/shopping-cart/api/query?locked=true';
+            var originalLink2 = 'https://www.drumeo.com/ecommerce/add-to-cart?locked=true';
 
             $('select').prop('selectedIndex', 0);
             $('.pack-pick2').change(function () {
@@ -157,7 +157,7 @@
         });
 
     </script>
-    <script type="text/javascript" src="{{ asset('/marketing/js/sliding-anchor.js') }}"></script>
+
 
     {{-- Platform --}}
     <script src="{{ mix('/platform/js/manifest.js') }}"></script>

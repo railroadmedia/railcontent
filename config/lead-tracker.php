@@ -18,7 +18,6 @@ return [
 
         //--------------------------------------------------
         // drumeo
-        // 40 Songs Customer IO
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -36,8 +35,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-
-        // COOP3RDRUMM3R
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -55,8 +52,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-
-        // Drum Set Maintenance
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -74,8 +69,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-
-        // Fastest Way To Get Faster
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -93,9 +86,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-
-
-        // Getting Started On The Drums
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -113,10 +103,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-
-
-
-        // Hand Technique
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -134,8 +120,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-
-        // Linear Drumming
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -153,8 +137,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-
-        // Michael Jackson Grooves
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -172,8 +154,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-
-        // Must-Know Drum Grooves
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -191,9 +171,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-
-
-        // Sucherman Sound
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -211,8 +188,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-
-        // The Ultimate Drumming Toolbox
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -230,7 +205,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-        // Fastest Way To Get Faster - Facebook
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -248,7 +222,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-        // Getting Started On The Drums - Facebook
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -266,7 +239,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-        // Getting Started On The Drums - Thrive
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -284,8 +256,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-
-        // Gavins Grooves
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -303,8 +273,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-
-        // Free Play-Alongs
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -322,8 +290,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-
-        // Metal Play-Alongs
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -341,7 +307,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-        // Grooves Of John Bonham
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -359,8 +324,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-
-        // Blog Signup
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -378,8 +341,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-
-        // 2 Million Celebration
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -397,7 +358,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-        // Drumeo Awards Giveaway
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -415,7 +375,23 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-        // 30 Day Drummer Waitlist
+        [
+            'path' => '/customer-io/submit-email-form',
+            'method' => 'post',
+            'form_name' => 'Drumeo Awards Giveaway 2',
+            'brand' => 'drumeo',
+
+            'input_data_map' => [
+                'email' => 'email',
+                'form_name' => 'form_name',
+                'utm_source' => 'leadtracker_utm_source',
+                'utm_medium' => 'leadtracker_utm_medium',
+                'utm_campaign' => 'leadtracker_utm_campaign',
+                'utm_term' => 'leadtracker_utm_term',
+                'customer_io_customer_id' => 'leadtracker_customer_io_customer_id',
+                'customer_io_event_name' => 'leadtracker_customer_io_event_name',
+            ],
+        ],
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -433,10 +409,8 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-
         //--------------------------------------------------
         // pianote
-        // Chord Hacks - Facebook
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -454,8 +428,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-
-        // Chord Hacks
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -473,8 +445,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-
-        // Getting Started On The Piano - Facebook
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -492,8 +462,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-
-        // Getting Started On The Piano
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -511,8 +479,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-
-        // Learn 3 Songs On Piano
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -530,8 +496,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-
-        // Beginner Piano Christmas Carols
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -549,8 +513,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-
-        // Learn 3 Songs On Piano
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -568,8 +530,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-
-        // Sight Reading Made Simple
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -587,7 +547,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-        // Blog Signup
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -605,7 +564,40 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-        // Riffs And Fills
+        [
+            'path' => '/customer-io/submit-email-form',
+            'method' => 'post',
+            'form_name' => 'The Minor Blues Made Easy',
+            'brand' => 'pianote',
+
+            'input_data_map' => [
+                'email' => 'email',
+                'form_name' => 'form_name',
+                'utm_source' => 'leadtracker_utm_source',
+                'utm_medium' => 'leadtracker_utm_medium',
+                'utm_campaign' => 'leadtracker_utm_campaign',
+                'utm_term' => 'leadtracker_utm_term',
+                'customer_io_customer_id' => 'leadtracker_customer_io_customer_id',
+                'customer_io_event_name' => 'leadtracker_customer_io_event_name',
+            ],
+        ],
+        [
+            'path' => '/customer-io/submit-email-form',
+            'method' => 'post',
+            'form_name' => 'Pentatonic Scale',
+            'brand' => 'pianote',
+
+            'input_data_map' => [
+                'email' => 'email',
+                'form_name' => 'form_name',
+                'utm_source' => 'leadtracker_utm_source',
+                'utm_medium' => 'leadtracker_utm_medium',
+                'utm_campaign' => 'leadtracker_utm_campaign',
+                'utm_term' => 'leadtracker_utm_term',
+                'customer_io_customer_id' => 'leadtracker_customer_io_customer_id',
+                'customer_io_event_name' => 'leadtracker_customer_io_event_name',
+            ],
+        ],
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -623,7 +615,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-        // 1 Million
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -641,7 +632,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-        // Classical Piano Quick Start
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -659,7 +649,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-        // Piano In 5 Days
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -677,7 +666,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-        // The Magic of Piano Chords Bootcamp
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -695,7 +683,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-        // Piano For Complete Beginners Bootcamp
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -713,7 +700,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-        // Perfect Practice Bootcamp
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -731,7 +717,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-        // Giveaway Form
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -749,7 +734,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-        // FP30 Giveaway
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -767,7 +751,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-        // 7 Days To Sight Reading
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -785,7 +768,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-        // Personality Quiz Academic
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -803,7 +785,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-        // Personality Quiz Entertainer
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -821,7 +802,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-        // Personality Quiz Explorer
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -839,7 +819,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-        // Personality Quiz Scientist
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -857,10 +836,8 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-
         //--------------------------------------------------
         // guitareo
-        // Acoustic Guitar Jump Start
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -878,8 +855,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-
-        // Guitar Chords for Hit Songs
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -897,8 +872,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-
-        // The Beginner Guitar Starter
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -916,9 +889,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-
-        // The Guitarists Toolbox
-
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -936,8 +906,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-
-        // Guitar Tricks
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -955,8 +923,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-
-        // GQ Waitlist
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -974,8 +940,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-
-        // Song In An Hour
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -993,8 +957,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-
-        // Fretboard Cheatsheet
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -1012,8 +974,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-
-        // Solo In An Hour
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -1031,8 +991,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-
-        // Getting Started On The Acoustic Guitar
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -1050,8 +1008,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-
-        // Getting Started On The Electric Guitar
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -1069,7 +1025,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-        // Blog Signup
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -1087,8 +1042,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-
-        // Waitlist 2
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -1106,8 +1059,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-
-        // Live Bootcamp
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -1125,8 +1076,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-
-        // Chord Bootcamp
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -1144,11 +1093,8 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-
         //-------------------------------------------
         // singeo
-        // --------------------------------
-        // Improve Any Voice
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -1166,8 +1112,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-        // --------------------------------
-        // Holiday Karaoke
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -1185,8 +1129,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-        // --------------------------------
-        // Singeo Waitlist
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -1204,8 +1146,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-        // --------------------------------
-        // Singeo Waitlist 2
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -1223,8 +1163,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-        // --------------------------------
-        // Stop Hating Your Voice
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -1242,8 +1180,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-        // --------------------------------
-        // Studio Giveaway
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -1261,8 +1197,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-        // --------------------------------
-        // Eikon Giveaway
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -1280,8 +1214,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-        // --------------------------------
-        // Ultimate Giveaway
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -1299,8 +1231,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-        // --------------------------------
-        // Mic Giveaway
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -1318,8 +1248,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-        // --------------------------------
-        // Vocal Bootcamp
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -1337,8 +1265,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-        // --------------------------------
-        // Breath Bootcamp
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -1356,8 +1282,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-        // --------------------------------
-        // Harmony Bootcamp
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
@@ -1375,8 +1299,6 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
-        // --------------------------------
-        // Blog Signup
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',

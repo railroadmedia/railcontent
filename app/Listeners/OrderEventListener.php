@@ -78,6 +78,7 @@ class OrderEventListener
             $promoCode = $this->cartService->getCart()->getPromoCode();
 
             Tracker::queue(
+                $orderEvent->getOrder()->getBrand(),
                 function () use ($orderEvent, $promoCode) {
                     $products = [];
                     $order = $orderEvent->getOrder();
@@ -107,7 +108,7 @@ class OrderEventListener
                 }
             );
         } catch (Throwable $throwable) {
-            error_log("There is a problem with drumeo ecommerce order syncing to analytics providers.");
+            error_log("There is a problem with musora ecommerce order syncing to analytics providers.");
             error_log($throwable);
         }
 

@@ -10,8 +10,8 @@
     <meta name="description" content="Enter your email address below to get more free singing lessons.">
 
     <base target="_parent">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link rel="stylesheet" href="{{ asset('/marketing/css/singeo/tailwind-helpers.css') }}" >
+    @include('_partials.layout._tailwindcdn')
+    <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}" >
     <style>
         body {
             height:100vh;
@@ -122,7 +122,7 @@
     </style>
 
     @include('_partials.layout.favicons.singeo-favicons')
-    @include('singeo.sales.partials._fonts')
+    @include('_partials.layout._fonts')
 
     {!! \App\Analytics\Tracker::trackPageView() !!}
 
@@ -159,7 +159,7 @@
 {!! \App\Analytics\Tracker::bodyBottom() !!}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script type="text/javascript" src="{{ asset('/marketing/parcel/singeo/nav-footer.js') }}"></script>
+<script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 </body>
 @include("singeo.lead-gen.partials.impact-email-sign-up-tracker")
 </html>

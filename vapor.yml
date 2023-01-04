@@ -22,7 +22,7 @@ environments:
         tmp-storage: 2048
         cli-tmp-storage: 2048
         queue-tmp-storage: 2048
-        queue-concurrency: 10
+        queue-concurrency: 50
         cache: musora-production-redis-cache
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'
@@ -30,7 +30,9 @@ environments:
             - 'php artisan route:cache'
             - 'php artisan view:cache'
             - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
-    pre-production:
+        deploy:
+            - 'php artisan migrate --force'
+    pre-production: # deploys the master branch
         domain:
             - 'pre-production.musora.com'
             - 'pre-production.drumeo.com'
@@ -54,6 +56,8 @@ environments:
             - 'php artisan route:cache'
             - 'php artisan view:cache'
             - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
+        deploy:
+            - 'php artisan migrate --force'
     beta-testing:
         domain:
             - 'beta-testing.musora.com'
@@ -80,6 +84,8 @@ environments:
             - 'php artisan route:cache'
             - 'php artisan view:cache'
             - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
+        deploy:
+            - 'php artisan migrate --force'
     web-staging-one:
         domain:
           - 'web-staging-one.musora.com'
@@ -104,6 +110,8 @@ environments:
             - 'php artisan route:clear'
             - 'php artisan view:cache'
             - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
+        deploy:
+            - 'php artisan migrate --force'
     web-staging-two:
         domain:
           - 'web-staging-two.musora.com'
@@ -128,6 +136,8 @@ environments:
             - 'php artisan route:cache'
             - 'php artisan view:cache'
             - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
+        deploy:
+            - 'php artisan migrate --force'
     web-staging-three:
         domain:
           - 'web-staging-three.musora.com'
@@ -152,6 +162,8 @@ environments:
             - 'php artisan route:cache'
             - 'php artisan view:cache'
             - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
+        deploy:
+            - 'php artisan migrate --force'
     web-staging-four:
         domain:
           - 'web-staging-four.musora.com'
@@ -177,7 +189,7 @@ environments:
             - 'php artisan view:cache'
             - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
         deploy:
-            - 'php artisan migrate'
+            - 'php artisan migrate --force'
     web-staging-five:
         domain:
           - 'web-staging-five.musora.com'
@@ -202,6 +214,8 @@ environments:
             - 'php artisan route:cache'
             - 'php artisan view:cache'
             - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
+        deploy:
+            - 'php artisan migrate --force'
     app-staging-one:
         domain:
           - 'app-staging-one.musora.com'
@@ -226,6 +240,8 @@ environments:
             - 'php artisan route:cache'
             - 'php artisan view:cache'
             - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
+        deploy:
+            - 'php artisan migrate --force'
     app-staging-two:
         domain:
           - 'app-staging-two.musora.com'
@@ -250,6 +266,8 @@ environments:
             - 'php artisan route:cache'
             - 'php artisan view:cache'
             - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
+        deploy:
+            - 'php artisan migrate --force'
     app-staging-three:
         domain:
           - 'app-staging-three.musora.com'
@@ -274,3 +292,5 @@ environments:
             - 'php artisan route:cache'
             - 'php artisan view:cache'
             - 'rm -rf public/mix-manifest.json && yarn install --frozen-lockfile && yarn platform-production && yarn marketing-production && rm -rf node_modules'
+        deploy:
+            - 'php artisan migrate --force'

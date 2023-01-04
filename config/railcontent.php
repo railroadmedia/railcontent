@@ -63,6 +63,8 @@ return [
         'boot-camps',
         'podcasts',
         'podcast',
+        'song-tutorial',
+        'song-tutorial-children',
     ],
     'comment_assignation_owner_ids' => [
         102905,
@@ -812,7 +814,7 @@ return [
                 "allowableFilters" => ['difficulty', 'style', 'artist', 'progress'],
                 'sortBy' => '-published_on',
                 'shortname' => 'song tutorials',
-                "icon" => "icon-songs",
+                "icon" => "play-progress",
                 "description" => "",
                 'amountOfFutureLessonsToShow' => 3,
                 'showFutureLessonAtTopOrBottom' => 'bottom',
@@ -1118,7 +1120,7 @@ return [
         'podcasts',
         'learning-path-lesson',
         'song-tutorial',
-        'song-tutorial-children'
+        'song-tutorial-children',
     ],
     'dashboardInProgressContentTypes' => [
         'course',
@@ -1177,6 +1179,8 @@ return [
         'semester-pack-lesson',
         'semester-pack',
         'quick-tips',
+        'song-tutorial',
+        'song-tutorial-children'
     ],
     'hiddenContentTypes' => [
         'ha-oemurd-pmac',
@@ -1233,7 +1237,7 @@ return [
         'exploring-beats', /* 2018*/
         'sonor-drums', /* 2018*/
         'song-tutorial',
-        'song-tutorial-children'
+        'song-tutorial-children',
     ],
 
     'contentTypesWithChildren' => [

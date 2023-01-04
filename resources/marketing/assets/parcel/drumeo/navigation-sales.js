@@ -9,6 +9,22 @@ $(document).ready(function (){
         $(this).toggleClass("active");
     });
 
+    $(".edge-wrap .features").click(function (e) {
+        e.stopPropagation();
+        $(".instruments-dd").addClass("hidden");
+        $(".features-dd").toggleClass("hidden");
+    });
+    $(".edge-wrap .instruments").click(function (e) {
+        e.stopPropagation();
+        $(".features-dd").addClass("hidden");
+        $(".instruments-dd").toggleClass("hidden");
+    });
+
+    $(window).click(function() {
+        $(".instruments-dd").addClass("hidden");
+        $(".features-dd").addClass("hidden");
+    });
+
     menuOverlay.click(function (e) {
         e.stopPropagation();
         $(this).removeClass("active");
@@ -50,6 +66,15 @@ $(document).ready(function (){
     $("#accept-cookies").click(function () {
         $(".cookie-notice").addClass("hide");
         setPopUpCookie();
+    });
+
+    $('.anchor-slide').bind('click', function (event) {
+        event.preventDefault();
+        var anchor = $(this).attr('href').replace('/', '');
+
+        $('html, body').animate({
+            scrollTop: $(anchor).offset().top
+        }, 1000);
     });
 
     $(".infusion-form").submit(function(event) {

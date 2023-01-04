@@ -37,11 +37,11 @@
             @filterChange="handleEventChange"
         ></catalogue-filter>
 
-      <div class="sm:tw-pr-0 tw-mb-3 sm:tw-mb-0 ph-1">
+      <div class="sm:tw-pr-0 tw-mb-3 sm:tw-mb-0 tw-px-[8px] lg:tw-px-[12px] xl:tw-px-[16px]">
         <div class="tw-flex tw-flex-col tw-mr-2 form-group tw-font-open-sans tw-text-[16px]">
           <select
               id="sortInput"
-              class="tw-pb-0 tw-text-[#00101D] dark:tw-text-white borderless"
+              class="tw-pb-0 tw-text-[#00101D] dark:tw-text-white borderless tw-px-0 tw-pr-[16px] tw-text-[14px] lg:tw-text-[16px]"
               @change="handleContentSort($event)"
               v-model="sort"
           >
@@ -143,11 +143,15 @@ export default {
             type: String,
             default: () => 'drumeo',
         },
+        initSort: {
+            type: String,
+            default: '-published_on'
+        }
     },
     data() {
         return {
             eventTypeValue: this.eventType,
-            sort: "-published_on",
+            sort: this.initSort,
         };
     },
     watch: {

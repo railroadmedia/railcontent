@@ -2,7 +2,7 @@
   require_once(resource_path('marketing/views/drumeo/lead-gen/grooves-of-john-bonham/lessons.php'))
 @endphp
 
-@extends('drumeo._partials.layout-template')
+@extends('drumeo._partials.global-layout')
 
 @section('global-head')
     <meta name="robots" content="noindex">
@@ -13,10 +13,10 @@
     <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/lead-gen/grooves-of-john-bonham/og-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/grooves-of-john-bonham/">
 
-    @include('drumeo._partials._fonts')
+    @include('_partials.layout._fonts')
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link href="{{ asset('marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
+    @include('_partials.layout._tailwindcdn')
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/lead-gen-tw.css') }}" rel="stylesheet">
     <style>
@@ -29,11 +29,11 @@
 @section('global-body')
     @include("drumeo.sales.partials._nav")
     <div class="shim w-full block h-11 sm:h-9" style="background-color:#010a2b;"></div>
-    <a href="/choose-your-trial" class="edge-pitch block text-center w-full whitespace-nowrap z-20 py-2 sm:py-1 fixed mx-auto bg-black text-white">
+    <a href="/choose-plan" class="edge-pitch block text-center w-full whitespace-nowrap z-20 py-2 sm:py-1 fixed mx-auto bg-black text-white">
         <div class="container mx-auto">
             <div class="text-center sm:text-left inline-block align-middle hover:opacity-90 transition-opacity duration-300">
                 <img class="align-middle w-auto mr-2 h-6 hidden sm:inline-block" src="https://cdn.musora.com/image/fetch/w_300,q_60,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png" alt="edge-logo">
-                <p class="inline-block align-middle mx-auto text-xs leading-tight">Get {{ Prices::$lessons }}+ more drum lessons & song breakdowns<br> inside Drumeo. Click here for a FREE trial.</p>
+                <p class="inline-block align-middle mx-auto text-xs leading-tight">Get {{ Prices::$drumeoLessons }}+ more drum lessons & song breakdowns<br> inside Drumeo. Click here for a FREE trial.</p>
             </div>
         </div>
     </a>
@@ -65,7 +65,9 @@
 
     @include('drumeo.lead-gen.partials._free-trial-offer')
 
-    @include("drumeo.sales.partials._footer")
+    @include("drumeo.sales.partials._footer", [
+            "minimal" => true
+        ])
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script>

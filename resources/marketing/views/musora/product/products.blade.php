@@ -9,9 +9,8 @@
     <meta property="og:url" content="https://www.drumeo.com/drumshop/">
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/css/drumeo/navigation-sales.css') }}">
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/css/shop.css') }}">
-    <script src="https://kit.fontawesome.com/cf2f4c6c71.js" crossorigin="anonymous"></script>
+    <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/pianote/shop.css') }}" rel="stylesheet">
 
     @parent
 @stop
@@ -282,7 +281,7 @@
             });
 
             //customize section pack picker
-            var originalLink = '/laravel/public/shopping-cart/api/query?go-back-to-shop=true';
+            var originalLink = '/ecommerce/add-to-cart?go-back-to-shop=true';
 
             $('select').prop('selectedIndex', 0);
             $(".pack-pick").change(function () {

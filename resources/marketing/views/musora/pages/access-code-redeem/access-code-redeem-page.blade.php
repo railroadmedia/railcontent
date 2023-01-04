@@ -4,8 +4,8 @@
     <title>Access Pass Redeem | Musora</title>
     <meta name="description" content="To redeem your access pass enter your code below!">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link href="{{ asset('/marketing/css/pianote/tailwind-helpers.css') }}" rel="stylesheet">
+    @include('_partials.layout._tailwindcdn')
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/lead-gen.css') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -371,7 +371,6 @@
             <form id="commentform" name="pianote" method="post" action="{{ get_musora_brand_base_url() }}/ecommerce/access-codes/redeem">
                 {{ csrf_field() }}
                 <input type="hidden" name="credentials_type" value="new">
-                <input type="hidden" name="redirect" value="/members">
                 <div class="container mx-auto clearfix">
                     <div class="flex flex-wrap w-full">
                         <p class="w-full input-describer">Code</p>
@@ -435,7 +434,6 @@
 
             <form id="commentform" name="pianote" method="post" action="{{ get_musora_brand_base_url() }}/ecommerce/access-codes/redeem">
                 <input type="hidden" name="credentials_type" value="existing">
-                <input type="hidden" name="redirect" value="/members">
                 {{ csrf_field() }}
 
                 <div class="container mx-auto  clearfix">
@@ -494,6 +492,6 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/parcel/pianote/nav-footer.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 
 @stop

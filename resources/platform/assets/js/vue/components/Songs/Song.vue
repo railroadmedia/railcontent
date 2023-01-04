@@ -180,7 +180,7 @@ const getInstrumentlessLabel = () => {
 const getBrandSpecificParams = () => {
     return ({
         drumeo: '&show_chords=0',
-        singeo: '&show_staff_t1=0&show_staff_t2=0',
+        singeo: '&show_staff_t1=0&show_staff_t2=0&show_chords=0',
         guitareo: '',
         pianote: '&show_chords=1'
     }[props.brand]);
@@ -242,7 +242,7 @@ const getBrandSpecificParams = () => {
                                 </button>
 
                                 <button style="padding: 0 24px;"
-                                    :class="`tw-h-[50px] ${lessonProgressRef === '100' ? `tw-bg-${themeColor} tw-text-white dark:tw-bg-${themeColor} dark:tw-text-white tw-btn-primary` : 'tw-text-[#00101D] tw-box-border tw-leading-none tw-btn-secondary dark:tw-text-white hover:tw-bg-black/10 dark:hover:tw-bg-white/10'}`"
+                                    :class="`tw-h-[50px] ${lessonProgressRef === '100' ? `tw-bg-${brand} tw-text-white dark:tw-bg-${brand} dark:tw-text-white tw-btn-primary` : 'tw-text-[#00101D] tw-box-border tw-leading-none tw-btn-secondary dark:tw-text-white hover:tw-bg-black/10 dark:hover:tw-bg-white/10'}`"
                                     data-tooltip="Mark Lesson as Complete" :data-content-id="contentId"
                                     @click="markSongAsComplete">
                                     <span v-if="lessonProgressRef !== '100'">
@@ -258,7 +258,7 @@ const getBrandSpecificParams = () => {
                             </div>
 
                             <div class="flex-row content-lesson-action-buttons">
-                                <ContentLessonActionButtons :theme-color="themeColor" :title="songTitle"
+                                <ContentLessonActionButtons :theme-color="brand" :title="songTitle"
                                     :instructors="instructors" :parent-title="parentTitle" :is-liked="isLiked"
                                     :like-count="likeCount" :is-added="isAdded" :content-id="contentId"
                                     :user-id="userId" :resources="resources" />
@@ -273,15 +273,15 @@ const getBrandSpecificParams = () => {
                         </h6>
                     </div>
 
-                    <content-catalogue catalogue-type="grid" :theme-color="themeColor" :use-theme-color="true"
+                    <content-catalogue catalogue-type="grid" :theme-color="brand" :use-theme-color="true"
                         :lock-unowned="lockUnowned" :pre-loaded-content="relatedLessons" :display-inline="true"
                         :user-id="String(userId)" />
                 </div>
 
                 <transition name="show-from-bottom">
                     <div v-if="openSoundslice === 'instrumentless'" id="practiceOverlay" class="bg-white">
-                        <SoundSlice :loading="loading" :user-id="userId" :theme-color="themeColor"
-                            :additional-params="`${getBrandSpecificParams()}&layout=3&scroll_type=1&recording_idx=2`"
+                        <SoundSlice :loading="loading" :user-id="userId" :theme-color="brand"
+                            :additional-params="`${getBrandSpecificParams()}&layout=3&recording_idx=2`"
                             :soundslice-slug="soundsliceObject.soundsliceSlug" @onLoad="handleOnLoad"
                             @onPlay="handlePlay" @onPause="handlePause">
                             <template v-slot:soundsliceControls>
@@ -294,8 +294,8 @@ const getBrandSpecificParams = () => {
 
                 <transition name="show-from-bottom">
                     <div v-if="openSoundslice === 'full'" id="practiceOverlay" class="bg-white">
-                        <SoundSlice :loading="loading" :user-id="userId" :theme-color="themeColor"
-                            :additional-params="`${getBrandSpecificParams()}&layout=3&scroll_type=1&recording_idx=1`"
+                        <SoundSlice :loading="loading" :user-id="userId" :theme-color="brand"
+                            :additional-params="`${getBrandSpecificParams()}&layout=3&recording_idx=1`"
                             :soundslice-slug="soundsliceObject.soundsliceSlug" @onLoad="handleOnLoad"
                             @onPlay="handlePlay" @onPause="handlePause">
                             <template v-slot:soundsliceControls>
@@ -307,7 +307,7 @@ const getBrandSpecificParams = () => {
                 </transition>
 
                 <div class="flex flex-row song-comments-container">
-                    <comments :brand="brand" :theme-color="themeColor" :content-id="contentId" :user-id="userId"
+                    <comments :brand="brand" :theme-color="brand" :content-id="contentId" :user-id="userId"
                         :user-name="userName" :user-avatar="userAvatar" :user-xp="userXP"
                         :user-access-level="userAccessLevel" :is-admin="isAdmin"></comments>
                 </div>
@@ -320,7 +320,7 @@ const getBrandSpecificParams = () => {
                     </h6>
                 </div>
 
-                <content-catalogue catalogue-type="grid" :theme-color="themeColor" :use-theme-color="true"
+                <content-catalogue catalogue-type="grid" :theme-color="brand" :use-theme-color="true"
                     :lock-unowned="lockUnowned" :pre-loaded-content="relatedLessons" :display-inline="true"
                     :user-id="String(userId)" />
             </div>

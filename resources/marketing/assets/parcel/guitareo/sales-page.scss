@@ -1,4 +1,4 @@
-@import "_variables";
+@import "../_variables";
 
 h1 strong, h2 strong, h3 strong, h4 strong, h5 strong, h6 strong, td strong {
   font-weight: 900;
@@ -17,73 +17,73 @@ h1, h2, h3, h4, h5, h6, li, p {
 }
 
 h1 {
-  line-height: 1.2em;
-  font-size: 24px;
-  @include tablet {
-    font-size: 36px;
-  }
-  @include desktop {
-    font-size: 48px;
-  }
+    line-height: 1.2em;
+    font-size: 30px;
+    @include tablet {
+        font-size: 36px;
+    }
+    @include desktop {
+        font-size: 48px;
+    }
 }
 
 h2 {
-  line-height: 1.2em;
-  font-size: 20px;
-  @include tablet {
-    font-size: 30px;
-  }
-  @include desktop {
-    font-size: 36px;
-  }
+    line-height: 1.2em;
+    font-size: 24px;
+    @include tablet {
+        font-size: 30px;
+    }
+    @include desktop {
+        font-size: 36px;
+    }
 }
 
 h3 {
-  font-size: 18px;
-  @include tablet {
-    font-size: 24px;
-  }
-  @include desktop {
-    font-size: 30px;
-  }
+    font-size: 20px;
+    @include tablet {
+        font-size: 24px;
+    }
+    @include desktop {
+        font-size: 30px;
+    }
 }
 
 h4 {
-  font-size: 17px;
-  @include tablet {
-    font-size: 20px;
-  }
-  @include desktop {
-    font-size: 24px;
-  }
+    font-size: 18px;
+    @include tablet {
+        font-size: 20px;
+    }
+    @include desktop {
+        font-size: 24px;
+    }
 }
 
 h5 {
-  font-size: 15px;
-  @include tablet {
-    font-size: 18px;
-  }
-  @include desktop {
-    font-size: 20px;
-  }
+    font-size: 16px;
+    @include tablet {
+        font-size: 18px;
+    }
+    @include desktop {
+        font-size: 20px;
+    }
 }
 
 h6 {
-  font-size: 15px;
-  @include tablet {
-    font-size: 16px;
-  }
-  @include desktop {
-    font-size: 18px;
-  }
+    font-size: 15px;
+    @include tablet {
+        font-size: 16px;
+    }
+    @include desktop {
+        font-size: 18px;
+    }
 }
 
 p, li {
-  line-height: 1.6em;
-  font-size: 15px;
-  @include desktop {
-    font-size: 16px;
-  }
+    line-height: 1.6em;
+    font-size: 15px;
+    @include desktop {
+        font-size: 16px;
+    }
 }
 
 img {
@@ -182,10 +182,12 @@ img {
 
   &.promo {
     background: $promoColor;
+      color: #000;
 
     &:hover,
     &:focus {
       background: lighten($promoColor, 10%);
+        color: #000;
     }
   }
 
@@ -193,6 +195,7 @@ img {
     background: transparent;
     border: 1px solid #fff;
     color: #fff;
+      outline-style: none!important;
     padding: 6px 12px;
     @include tablet {
       border-width: 2px;
@@ -216,7 +219,8 @@ img {
       }
     }
 
-    &.method {
+    &.method,
+    &.guitareo {
       border-color: $guitareoGreen;
       color: $guitareoGreen;
 

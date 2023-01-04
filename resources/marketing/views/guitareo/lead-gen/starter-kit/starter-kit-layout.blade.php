@@ -11,7 +11,7 @@
 
 @section('styles')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation-float.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
+    @include('_partials.layout._tailwindcdn')
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/lead-gen-lessons.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}">
 @endsection
@@ -21,9 +21,11 @@
 
     @yield('body-content')
 
-    @include("guitareo.sales.partials._footer")
+    @include("guitareo.sales.partials._footer", [
+            "minimal" => true
+        ])
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('/marketing/parcel/guitareo/nav-footer.js') }}"></script>
+    <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 @endsection

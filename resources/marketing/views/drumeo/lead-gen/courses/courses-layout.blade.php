@@ -67,7 +67,7 @@
                 @else
                     <a data-open="trial" class="join blue">Explore Drumeo &raquo;</a>
                 @endif
-                <p class="edge-info"><em>Drumeo includes unlimited access <br class="hide-for-medium"> to {{ Prices::$courses }}+ courses and so much more.</em></p>
+                <p class="edge-info"><em>Drumeo includes unlimited access <br class="hide-for-medium"> to {{ Prices::$drumeoCourses }}+ courses and so much more.</em></p>
             </div>
         </div>
     </header>
@@ -109,10 +109,10 @@
             </div>
             <a class="join blue start-trial">Start Free Trial &raquo;</a>
             <p class="disclaimer">Credit card required. You’ll get unlimited access FREE for 7 days before continuing with<br class="show-for-large">
-                a monthly membership for $29/month. Cancel anytime during or after your trial.</p>
+                a monthly membership for ${{ Prices::$plusSubscriptionMonthlyFull }}/month. Cancel anytime during or after your trial.</p>
         </div>
 
-        <iframe class="trial" name="cartIframe" onload="checkUrl();" src="/laravel/public/shopping-cart/api/query?products[DLM-Trial]=1,month,1&locked=true" frameborder="none"></iframe>
+        <iframe class="trial" name="cartIframe" onload="checkUrl();" src="/ecommerce/add-to-cart?products[DLM-Trial-1-month]=1&locked=true" frameborder="none"></iframe>
     </div>
 
     <section class="about-instructor">
@@ -146,7 +146,7 @@
             <div class="columns medium-4">
                 <div class="point-icon"><i class="fas fa-signal-alt-3"></i></div>
                 <p><strong>Improve Your Skills</strong><br>
-                    {{ Prices::$courses }}+ step-by-step courses from the
+                    {{ Prices::$drumeoCourses }}+ step-by-step courses from the
                     world’s best drummers and teachers.</p>
             </div>
             <div class="columns medium-4">

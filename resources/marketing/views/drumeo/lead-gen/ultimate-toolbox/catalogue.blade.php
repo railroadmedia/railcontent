@@ -15,10 +15,6 @@
 @section('scripts')
     <script>
         $(document).ready(function () {
-            var foundationInstances = [
-                new Foundation.Reveal($('#UnsubModal'))
-            ];
-
             var showModal = location.search.substr(1).includes('noMoreEmails');
 
             if (showModal) {

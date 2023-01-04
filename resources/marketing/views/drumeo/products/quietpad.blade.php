@@ -122,8 +122,8 @@
 
     @include('drumeo.products.partials.promo-banner', [
                 "name" => "Drumeo QuietPad",
-                "fullPrice" => Prices::$quietPadFull,
-                "price" => Prices::$quietPadRegular,
+                "fullPrice" => floatval($productPrices['quietpad']->price),
+                "price" => floatval($productPrices['quietpad']->discounted_price),
                 "noBreadcrumb" => true
             ])
 
@@ -141,15 +141,15 @@
             <br class="hide-for-medium">
             <img class="logo hide-for-medium" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/drumeo-quietpad.png">
             <h2><strong style="font-weight: 900;">Practice anywhere</strong> with two<br class="hide-for-medium"> full-size playing surfaces.</h2>
-            <a href="/laravel/public/shopping-cart/api/query?products[quietpad]=1" class="join blue">Get Yours &raquo;</a>
+            <a href="/ecommerce/add-to-cart?products[quietpad]=1" class="join blue">Get Yours &raquo;</a>
             <p class="dense" style="opacity: 0;"><strong class="text-yellow">LAUNCH SPECIAL</strong><br>
-                <s>NORMALLY ${{ Prices::$quietPadFull }}.</s> <strong>ONLY ${{ Prices::$quietPadRegular }}</strong> (SAVE {{ round(100 - (100 * (Prices::$quietPadRegular / Prices::$quietPadFull))) }}%)</p>
+                <s>NORMALLY ${{ floatval($productPrices['quietpad']->price) }}.</s> <strong>ONLY ${{ floatval($productPrices['quietpad']->discounted_price) }}</strong> (SAVE {{ round(100 - (100 * (floatval($productPrices['quietpad']->discounted_price) / floatval($productPrices['quietpad']->price)))) }}%)</p>
         </div>
         <div class="reveal large text-center" id="previewModal" data-reveal data-reset-on-close="false">
             <div class="flex-video widescreen vimeo">
                 <iframe class="reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/395000347?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
             </div>
-            <a href="/laravel/public/shopping-cart/api/query?products[quietpad]=1" class="join blue">Get Yours &raquo;</a>
+            <a href="/ecommerce/add-to-cart?products[quietpad]=1" class="join blue">Get Yours &raquo;</a>
         </div>
     </header>
 
@@ -211,7 +211,7 @@
             <div class="flex-video widescreen vimeo">
                 <iframe class="reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/394999066?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
             </div>
-            <a href="/laravel/public/shopping-cart/api/query?products[quietpad]=1" class="join blue">Get Yours &raquo;</a>
+            <a href="/ecommerce/add-to-cart?products[quietpad]=1" class="join blue">Get Yours &raquo;</a>
         </div>
     </section>
 
@@ -327,16 +327,16 @@
                 </tr>
                 <tr>
                     <td></td>
-                    <td>@if(Prices::$quietPadFull > Prices::$quietPadRegular)
-                            <s>${{ Prices::$quietPadFull }}</s>@endif
-                        <strong>${{ Prices::$quietPadRegular }}</strong><br>+ SHIPPING</td>
+                    <td>@if(floatval($productPrices['quietpad']->price) > floatval($productPrices['quietpad']->discounted_price))
+                            <s>${{ floatval($productPrices['quietpad']->price) }}</s>@endif
+                        <strong>${{ floatval($productPrices['quietpad']->discounted_price) }}</strong><br>+ SHIPPING</td>
                     <td><strong>$29</strong><br>+ SHIPPING</td>
                     <td><strong>$60</strong><br>+ SHIPPING</td>
-                    <td>@if(Prices::$padFull > Prices::$padRegular)
-                            <s>${{ Prices::$padFull }}</s>
-                            <strong>${{ Prices::$padRegular }}</strong><br>+ SHIPPING
+                    <td>@if(floatval($productPrices['practicepad']->price) > floatval($productPrices['practicepad']->discounted_price))
+                            <s>${{ floatval($productPrices['practicepad']->price) }}</s>
+                            <strong>${{ floatval($productPrices['practicepad']->discounted_price) }}</strong><br>+ SHIPPING
                         @else
-                            <strong>${{ Prices::$padRegular }}</strong><br>+ SHIPPING
+                            <strong>${{ floatval($productPrices['practicepad']->discounted_price) }}</strong><br>+ SHIPPING
                         @endif</td>
                 </tr>
                 </tbody>
@@ -353,15 +353,15 @@
 
 
             <h3>
-                @if(Prices::$quietPadFull > Prices::$quietPadRegular)
-                    <s>NORMALLY ${{ Prices::$quietPadFull }}.</s><br class="hide-for-medium">
-                    <strong>NOW ${{ Prices::$quietPadRegular }}</strong><br class="hide-for-medium">
-                    (SAVE {{ round(100 - (100 * (Prices::$quietPadRegular / Prices::$quietPadFull))) }}%).
+                @if(floatval($productPrices['quietpad']->price) > floatval($productPrices['quietpad']->discounted_price))
+                    <s>NORMALLY ${{ floatval($productPrices['quietpad']->price) }}.</s><br class="hide-for-medium">
+                    <strong>NOW ${{ floatval($productPrices['quietpad']->discounted_price) }}</strong><br class="hide-for-medium">
+                    (SAVE {{ round(100 - (100 * (floatval($productPrices['quietpad']->discounted_price) / floatval($productPrices['quietpad']->price)))) }}%).
                 @else
-                    <strong>ONLY ${{ Prices::$quietPadRegular }}</strong>
+                    <strong>ONLY ${{ floatval($productPrices['quietpad']->discounted_price) }}</strong>
                 @endif
             </h3>
-            <a href="/laravel/public/shopping-cart/api/query?products[quietpad]=1" class="join blue">Get Yours &raquo;</a>
+            <a href="/ecommerce/add-to-cart?products[quietpad]=1" class="join blue">Get Yours &raquo;</a>
 
             <div class="credit-cards columns">
                 <i class="fab fa-cc-visa"></i>

@@ -1,13 +1,13 @@
-@extends('drumeo._partials.layout-template')
+@extends('drumeo._partials.global-layout')
 
 @section('global-head')
     <title>Privacy Policy | Drumeo</title>
     <meta property="og:title" content="Privacy Policy">
     <meta name="description" content="Below is a list of the standard policies we use on this website.">
 
-    @include('drumeo._partials._fonts')
+    @include('_partials.layout._fonts')
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"/>
+    @include('_partials.layout._tailwindcdn')
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
 
     <style>
@@ -19,7 +19,7 @@
 
 @section('global-body')
     @include("drumeo.sales.partials._nav", [
-            "edgeVersion" => true
+            "subscriptionVersion" => true
         ])
 
     <div class="hero-header px-4 py-12 md:py-20 lg:py-32 bg-black bg-center bg-cover" style="background-image:url(https://dpwjbsxqtam5n.cloudfront.net/sales/sub-options-bg.jpg);">

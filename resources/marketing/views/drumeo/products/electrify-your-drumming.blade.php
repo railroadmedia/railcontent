@@ -42,8 +42,8 @@
 
     @include('drumeo.products.partials.promo-banner', [
                 "name" => "Electrify Your Drumming",
-                "fullPrice" => Prices::$eydFull,
-                "price" => Prices::$eydRegular,
+                "fullPrice" => floatval($productPrices['electrify-your-drumming']->price),
+                "price" => floatval($productPrices['electrify-your-drumming']->discounted_price),
                 "noBreadcrumb" => true
             ])
 
@@ -54,17 +54,17 @@
             <i data-open="previewModal" class="fas fa-play play-button autoplay-video"></i>
             <h1>The ultimate guide to playing<br>
                 <strong>electronic dance music</strong> on the drums.</h1>
-            <a href="/laravel/public/shopping-cart/api/query?products[electrify-your-drumming]=1" class="join blue">Get Started &raquo;</a>
-            <p>@if(Prices::$eydFull > Prices::$eydRegular)
-                    <strong>ONLY <s>${{ Prices::$eydFull }}</s>
-                        @if(number_format(Prices::$eydRegular, 2) == intval(Prices::$eydRegular))
-                            ${{  Prices::$eydRegular  }}.
+            <a href="/ecommerce/add-to-cart?products[electrify-your-drumming]=1" class="join blue">Get Started &raquo;</a>
+            <p>@if(floatval($productPrices['electrify-your-drumming']->price) > floatval($productPrices['electrify-your-drumming']->discounted_price))
+                    <strong>ONLY <s>${{ floatval($productPrices['electrify-your-drumming']->price) }}</s>
+                        @if(number_format(floatval($productPrices['electrify-your-drumming']->discounted_price), 2) == intval(floatval($productPrices['electrify-your-drumming']->discounted_price)))
+                            ${{  floatval($productPrices['electrify-your-drumming']->discounted_price)  }}.
                         @else
-                            ${{  number_format(Prices::$eydRegular, 2)  }}.
+                            ${{  number_format(floatval($productPrices['electrify-your-drumming']->discounted_price), 2)  }}.
                         @endif
-                    </strong> (SAVE {{ round(100 - (100 * (Prices::$eydRegular / Prices::$eydFull))) }}%)
+                    </strong> (SAVE {{ round(100 - (100 * (floatval($productPrices['electrify-your-drumming']->discounted_price) / floatval($productPrices['electrify-your-drumming']->price)))) }}%)
                 @else
-                    <strong>ONLY ${{ Prices::$eydRegular }}.</strong>
+                    <strong>ONLY ${{ floatval($productPrices['electrify-your-drumming']->discounted_price) }}.</strong>
                 @endif
                 90-DAY GUARANTEE <br><a href="/" class="text-blue smaller">(OR FREE WITH A DRUMEO MEMBERSHIP)</a>
             </p>
@@ -75,7 +75,7 @@
         <div class="flex-video widescreen vimeo">
             <iframe class="reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/454835085?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
         </div>
-        <a href="/laravel/public/shopping-cart/api/query?products[electrify-your-drumming]=1" class="join blue">Get Started &raquo;</a>
+        <a href="/ecommerce/add-to-cart?products[electrify-your-drumming]=1" class="join blue">Get Started &raquo;</a>
     </div>
 
     <section class="power-outage text-center">
@@ -433,19 +433,19 @@
             <h2 class="columns">The ultimate guide to playing<br>
                 <strong>electronic dance music</strong> on the drums.</h2>
 
-            <div class="columns"><a href="/laravel/public/shopping-cart/api/query?products[electrify-your-drumming]=1" class="join blue">Get Started &raquo;</a></div>
+            <div class="columns"><a href="/ecommerce/add-to-cart?products[electrify-your-drumming]=1" class="join blue">Get Started &raquo;</a></div>
 
             <h4 class="columns uppercase">
-                @if(Prices::$eydFull > Prices::$eydRegular)
-                    <strong>ONLY <s>${{ Prices::$eydFull }}</s>
-                        @if(number_format(Prices::$eydRegular, 2) == intval(Prices::$eydRegular))
-                            ${{  Prices::$eydRegular  }}.
+                @if(floatval($productPrices['electrify-your-drumming']->price) > floatval($productPrices['electrify-your-drumming']->discounted_price))
+                    <strong>ONLY <s>${{ floatval($productPrices['electrify-your-drumming']->price) }}</s>
+                        @if(number_format(floatval($productPrices['electrify-your-drumming']->discounted_price), 2) == intval(floatval($productPrices['electrify-your-drumming']->discounted_price)))
+                            ${{  floatval($productPrices['electrify-your-drumming']->discounted_price)  }}.
                         @else
-                            ${{  number_format(Prices::$eydRegular, 2)  }}.
+                            ${{  number_format(floatval($productPrices['electrify-your-drumming']->discounted_price), 2)  }}.
                         @endif
-                    </strong> (SAVE {{ round(100 - (100 * (Prices::$eydRegular / Prices::$eydFull))) }}%)
+                    </strong> (SAVE {{ round(100 - (100 * (floatval($productPrices['electrify-your-drumming']->discounted_price) / floatval($productPrices['electrify-your-drumming']->price)))) }}%)
                 @else
-                    <strong>ONLY ${{ Prices::$eydRegular }}.</strong>
+                    <strong>ONLY ${{ floatval($productPrices['electrify-your-drumming']->discounted_price) }}.</strong>
                 @endif
                 90-DAY GUARANTEE <br><a href="/" class="text-blue smaller">(OR FREE WITH A DRUMEO MEMBERSHIP)</a>
             </h4>

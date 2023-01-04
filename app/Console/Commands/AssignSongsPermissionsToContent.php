@@ -214,53 +214,6 @@ class AssignSongsPermissionsToContent extends Command
         $this->info('Done AssignSongsPermissionsToContent!');
         $createdCount = 0;
 
-        // all non-song content should have musora basic and plus membership permissions added
-        $this->musoraDB()->from('railcontent_content_permissions')
-            ->leftJoin(
-                'railcontent_content',
-                'railcontent_content.id',
-                '=',
-                'railcontent_content_permissions.content_id'
-            )
-            ->select(['railcontent_content_permissions.*'])
-            ->where('railcontent_content.type', '!=', 'song')
-            ->whereIn('permission_id', [1, 52, 73, 77, 85])
-            ->orderBy('railcontent_content_permissions.id', 'desc')
-            ->chunkById(
-                250,
-                function (Collection $rows) use (
-                    &$createdCount,
-                    $musoraBasicMembershipPermissionId,
-                    $musoraPlusMembershipPermissionId,
-                    $musoraOnlySongsMembershipPermissionId
-                ) {
-                    $dataToInsertOrUpdate = [];
-
-                    foreach ($rows as $row) {
-                        $dataToInsertOrUpdate[] = [
-                            'content_id' => $row->content_id,
-                            'content_type' => null,
-                            'permission_id' => $musoraBasicMembershipPermissionId,
-                            'brand' => 'musora',
-                        ];
-                        $dataToInsertOrUpdate[] = [
-                            'content_id' => $row->content_id,
-                            'content_type' => null,
-                            'permission_id' => $musoraPlusMembershipPermissionId,
-                            'brand' => 'musora',
-                        ];
-                    }
-
-                    $this->musoraDB()->from('railcontent_content_permissions')
-                        ->upsert($dataToInsertOrUpdate, ['content_id', 'permission_id', 'brand']);
-
-                    $createdCount += 250;
-                    $this->info($createdCount . ' done basic permissions');
-                },
-                'railcontent_content_permissions.id',
-                'id'
-            );
-
         return 0;
     }
 

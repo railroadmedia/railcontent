@@ -1,19 +1,20 @@
 <template>
-    <div class="cart-item-row flex flex-row ph-2 pt-2">
-        <div class="flex flex-column rounded-full overflow-hidden cart-thumbnail mb-2">
+    <div class="flex items-start sm:items-center sm:px-2 mb-2 sm:mb-4">
+        <div class="flex flex-col rounded-full overflow-hidden flex-grow-0 flex-shrink-0 w-16 sm:w-32 lg:w-32 border-4 border-gray-300 bg-gray-300">
             <div
-                class="square rounded bg-center"
+                class="relative"
+                style="padding-bottom:100%"
             >
                 <img
-                    :src="'https://cdn.musora.com/image/fetch/w_200,q_auto:best/' + item.thumbnail_url"
-                    class="rounded"
+                    class="absolute w-full h-full object-center object-cover"
+                    :src="'https://cdn.musora.com/image/fetch/w_290,q_auto:best/' + item.thumbnail_url"
                 >
             </div>
         </div>
-        <div class="flex flex-column mb-2 pl">
-            <div class="flex flex-row flex-wrap align-v-top">
-                <div class="flex flex-column xs-12 sm-8">
-                    <h3 class="title font-bold">
+        <div class="flex flex-col mb-2 pl-2 sm:pl-4">
+            <div class="flex flex-wrap items-start">
+                <div class="flex flex-col w-full sm:w-9/12">
+                    <h3 class="title font-black">
                         {{ item.name }}
                     </h3>
                     <h4 class="body text-grey-4">
@@ -22,31 +23,31 @@
 
                     <div
                         v-if="item.requires_shipping && !isCartLocked"
-                        class="tw-inline-flex tw-justify-start tw-items-center tw-mr-auto"
+                        class="inline-flex justify-start items-center mr-auto mt-2"
                     >
-                        <div class="tw-flex tw-items-center tw-mr-2">
-                            <h4 class="quantity-label tw-leading-none tw-mt-1 tw-tracking-normal tw-font-normal tw-text-sm dense tw-uppercase">
+                        <div class="flex items-center mr-2">
+                            <h4 class="leading-none font-black text-sm">
                                 Quantity:
                             </h4>
                         </div>
 
-                        <div class="flex flex-column flex-auto quantity-column tw-mr-2">
+                        <div class="flex flex-col flex-auto mr-2">
                             <input
                                 v-model="$_itemQuantity"
                                 type="number"
                                 min="1"
                                 max="99"
-                                class="no-label text-center tw-text-sm tw-p-2"
-                                style="border:none;background:none;"
+                                class="no-label text-center text-sm p-1 rounded-full"
+                                style="border: 1px solid #d1d1d1;background:none;"
                             >
                         </div>
 
                         <div
                             v-if="loading"
-                            class="flex flex-column flex-auto body "
+                            class="flex flex-col flex-auto body "
                         >
                             <i
-                                class="fas fa-spin fa-spinner tw-inline-flex tw-justify-center"
+                                class="fas fa-spin fa-spinner inline-flex justify-center"
                                 :class="themeTextClass"
                             ></i>
                         </div>
@@ -54,11 +55,11 @@
 
                     <div
                         v-if="!isCartLocked"
-                        class="flex flex-row"
+                        class="flex"
                     >
-                        <div class="tw-inline-flex tw-flex-col tw-mr-auto">
+                        <div class="inline-flex flex-col mr-auto">
                             <a
-                                class="text-error tw-text-sm tw-mt-1 tw-tracking-normal dense pointer uppercase"
+                                class="text-error text-xs mt-1 pointer"
                                 title="Remove Item"
                                 @click.stop.prevent="removeCartItem"
                             >
@@ -67,18 +68,18 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex flex-column price-column xs-12 sm-4 pt-1 text-right align-v-top">
-                    <div class="flex flex-column">
+                <div class="flex flex-col text-right w-full sm:w-3/12">
+                    <div class="flex flex-col">
                         <h3
                             v-if="isDiscounted"
-                            class="tw-text-xs font-bold font-strike text-grey-3 mr-1 m-xs-only"
+                            class="text-xs font-normal font-strike text-grey-3 mr-1"
                         >
                             ${{ Number(item.price_before_discounts).toFixed(2) }}
                         </h3>
 
                         <h2
                             v-if="totalPriceAfterDiscounts > 0"
-                            class="title font-bold"
+                            class="title font-black"
                             :class="themeTextClass"
                         >
                             ${{ totalPriceAfterDiscounts }}
@@ -86,7 +87,7 @@
 
                         <h2
                             v-if="totalPriceAfterDiscounts <= 0"
-                            class="title font-bold"
+                            class="title font-black"
                             :class="themeTextClass"
                         >
                             FREE
@@ -95,7 +96,7 @@
 
                     <h3
                         v-if="item.subscription_interval_type && totalPriceAfterDiscounts > 0"
-                        class="tw-text-xs"
+                        class="text-xs"
                     >
                         <span v-if="item.subscription_renewal_price != totalPriceAfterDiscounts">
                             then ${{ Number(item.subscription_renewal_price).toFixed(2)}}
@@ -229,49 +230,3 @@ export default {
     },
 };
 </script>
-
-<style lang="scss">
-    @import '../../assets/sass/partials/variables';
-
-    .cart-item-row {
-        align-items:flex-start;
-
-        @include small {
-            align-items:center;
-        }
-    }
-    .cart-thumbnail {
-        border:3px solid #d1d1d1;
-        background:#eee;
-        flex:0 0 60px;
-        max-width:60px;
-
-        @include small {
-            flex:0 0 120px;
-            max-width:120px;
-        }
-
-        @include medium {
-            flex:0 0 150px;
-            max-width:150px;
-        }
-    }
-    .quantity-column {
-        flex:0 0 75px;
-        max-width:75px;
-    }
-    .price-column {
-        text-align:left;
-
-        @include small {
-            text-align:right;
-        }
-    }
-    .price-flex {
-        flex-direction:row;
-
-        @include small {
-            flex-direction:column;
-        }
-    }
-</style>

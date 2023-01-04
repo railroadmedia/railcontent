@@ -8,10 +8,10 @@
     <meta property="og:description" content="We’ve just hit an incredible milestone… 1 MILLION SUBSCRIBERS!">
 
     <meta property="og:url" content="https://www.pianote.com/one-million/">
-    <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/og-image.jpg" style="display: none;">
+    <meta property="og:image" content="https://pianote.s3.amazonaws.com/sales/2023/share-image-pianote2.jpg" style="display: none;">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
-    <link href="{{ asset('/marketing/css/pianote/tailwind-helpers.css') }}" rel="stylesheet">
+    @include('_partials.layout._tailwindcdn')
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/lead-gen.css') }}">
     <link href="{{ asset('/marketing/parcel/pianote/lead-gen-learn-songs.css') }}" rel="stylesheet">
@@ -200,7 +200,9 @@
     <div class="reveal large text-center" id="trailer" data-reveal data-reset-on-close="false" style="max-width:440px">
         <iframe class="google-form w-full" src="https://docs.google.com/forms/d/e/1FAIpQLScfFSkurzZdJtpdG_ReoopBLnURr2e0D60OjMST-2GWUsC71A/viewform?embedded=true" height="810" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
     </div>
-    @include("pianote._partials._footer")
+    @include("pianote._partials._footer", [
+            "minimal" => true
+        ])
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
         $(document).ready(function () {
@@ -208,6 +210,6 @@
         });
     </script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/parcel/pianote/nav-footer.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="https://addevent.com/libs/atc/1.6.1/atc.min.js"></script>
 @stop

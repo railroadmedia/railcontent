@@ -71,9 +71,8 @@ Route::domain('{drumeoDomain}')->group(function () {
                 ]);
         }
     );
-    Route::get('/{page?}', [LeadGenController::class, 'getFaster'])->whereIn('page', [
-        'get-faster', 'get-faster-drums'
-    ]);
+    Route::get('/get-faster', [LeadGenController::class, 'getFaster']);
+    Route::get('/get-faster-drums', [LeadGenController::class, 'getFaster']);
     Route::group(['prefix' => 'getting-started'],
         function () {
             Route::get('/{page?}', LeadGenController::class . '@gstd')
@@ -177,24 +176,24 @@ Route::domain('{drumeoDomain}')->group(function () {
                 ->whereIn('page', [
                     null, 'catalogue'
                 ]);
-            Route::get('/gsotd/{page?}', LeadGenController::class . '@toolboxGsotd')
-                ->whereIn('page', [
+            Route::get('/gsotd/{page1?}', LeadGenController::class . '@toolboxGsotd')
+                ->whereIn('page1', [
                     null, '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'
                 ]);
-            Route::get('/5pa/{page?}', LeadGenController::class . '@toolbox5pa')
-                ->whereIn('page', [
+            Route::get('/5pa/{page2?}', LeadGenController::class . '@toolbox5pa')
+                ->whereIn('page2', [
                     null, '1', '2', '3', '4', '5'
                 ]);
-            Route::get('/bdbc/{page?}', LeadGenController::class . '@toolbox5pa')
-                ->whereIn('page', [
+            Route::get('/bdbc/{page3?}', LeadGenController::class . '@toolboxBdbc')
+                ->whereIn('page3', [
                     null, '1', '2', '3', '4', '5', '6', '7'
                 ]);
-            Route::get('/fwtgf/{page?}', LeadGenController::class . '@toolboxFwtgf')
-                ->whereIn('page', [
+            Route::get('/fwtgf/{page4?}', LeadGenController::class . '@toolboxFwtgf')
+                ->whereIn('page4', [
                     null, '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19'
                 ]);
-            Route::get('/{page?}', LeadGenController::class . '@toolboxRest')
-                ->whereIn('page', [
+            Route::get('/{page5?}', LeadGenController::class . '@toolboxRest')
+                ->whereIn('page5', [
                     'mcsa', 'urfd', 'htls', 'dodt',
                 ]);
 
@@ -220,7 +219,7 @@ Route::domain('{drumeoDomain}')->group(function () {
     Route::get('/christmas-gift-guide/', [LeadGenController::class, 'christmasGift']);
     Route::get('/{page?}', LeadGenController::class . '@pages')
         ->whereIn('page', [
-            'click', 'free-drum-lessons', 'quick-drummer-survey', 'teach-a-beginner', 'thankyou', '30-day-drummer-unsubscribe', '30-day-drummer-subscribe', 'subscribed', 'confirming', 'lets-stay-together', 'welcome-party', '2-million', 'awards-giveaway', 'recitals', 'lifetime-members-masterclass', '30-day-drummer-live', 'awards',
+            'lifetime-members-masterclass', 'click', 'free-drum-lessons', 'quick-drummer-survey', 'teach-a-beginner', 'thankyou', '30-day-drummer-unsubscribe', '30-day-drummer-subscribe', 'subscribed', 'confirming', 'lets-stay-together', 'welcome-party', 'awards-giveaway', 'recitals', '30-day-drummer-live', 'awards', 'fwtgf-blog', '40s-blog', 'gsd-blog', 'gojb-blog', 'fpa-blog'
         ]);
     Route::get('/druminar/coming-back-to-the-drums', [LeadGenController::class, 'druminarCBTTD']);
     Route::get('/druminar/coming-back-to-the-drums/june-12-live-event', [LeadGenController::class, 'druminarEvent']);
@@ -229,9 +228,6 @@ Route::domain('{drumeoDomain}')->group(function () {
     Route::get('/gift-guide/', [LeadGenController::class, 'giftGuide']);
     Route::get('/new-years-gift-guide/', [LeadGenController::class, 'newYearGift']);
     Route::get('/teach-a-beginner/lessons/', [LeadGenController::class, 'teachBeginner']);
+    Route::get('/weekly-email/', [LeadGenController::class, 'weeklyEmail']);
     Route::get('/weeklyemail/', [LeadGenController::class, 'weeklyMail']);
-    Route::get('/{page?}', LeadGenController::class . '@blogForms')
-        ->whereIn('page', [
-            'fwtgf-blog', '40s-blog', 'gsd-blog', 'gojb-blog', 'fpa-blog'
-        ]);
 });
