@@ -60,11 +60,13 @@ class AppServiceProvider extends ServiceProvider
                 'drumeo.products.*',
                 'guitareo.shop.*',
                 'guitareo.sales.*',
+
                 'guitareo.products.*',
                 'pianote.shop.*',
                 'pianote.sales.*',
                 'pianote.products.*',
                 'singeo.shop.*',
+				'singeo.products.*',
                 'singeo.sales.*',
                 'singeo.products.*',
             ],
