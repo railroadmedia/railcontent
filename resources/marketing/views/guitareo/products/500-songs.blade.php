@@ -1,6 +1,6 @@
 @extends('guitareo.products.500-songs-layout')
 
-@php $productPrice = GuitareoPrices::$songs500Regular @endphp
+@php $productPrice = floatval($productPrices['500-songs-in-5-days-guitareo']->discounted_price) @endphp
 
 @section('order-link')
     {{ url()->route('shopping-cart.add-to-cart', ['products' => ['500-songs-in-5-days-guitareo' => 1], 'redirect' => '/order']) }}
@@ -9,8 +9,8 @@
 @section('topbar')
     @include('guitareo._partials.promo-banner', [
                 "name" => "500 Songs In 5 Days",
-                "fullPrice" => GuitareoPrices::$songs500Full,
-                "price" => GuitareoPrices::$songs500Regular,
+                "fullPrice" => floatval($productPrices['500-songs-in-5-days-guitareo']->price),
+                "price" => floatval($productPrices['500-songs-in-5-days-guitareo']->discounted_price),
                 "noBreadcrumb" => true
             ])
 @endsection

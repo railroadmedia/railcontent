@@ -31,7 +31,7 @@
             <div class="sm:flex mx-auto items-center text-center" style="max-width: 890px;">
                 <img class="w-full avatar mx-auto mb-3 md:mb-0" src="https://drumeo-assets.s3.amazonaws.com/sales/2021/musora-brands.png">
                 <div class="md:text-left px-2 md:pl-8 lg:pl-10">
-                    <h6 class="leading-normal"><strong>Musora Students</strong> To thank you for already being a Musora student, you’ll save {{ round(100 - (100 * (77 / SingeoPrices::$singeoMembershipAnnualFull))) }}% when you add a Singeo membership to your existing account. (Normally ${{ SingeoPrices::$singeoMembershipAnnualFull }} per year, yours for just $77.)</h6>
+                    <h6 class="leading-normal"><strong>Musora Students</strong> To thank you for already being a Musora student, you’ll save {{ round(100 - (100 * (77 / Prices::$plusSubscriptionAnnualFull))) }}% when you add a Singeo membership to your existing account. (Normally ${{ Prices::$plusSubscriptionAnnualFull }} per year, yours for just $77.)</h6>
                 </div>
             </div>
         </div>
@@ -39,14 +39,14 @@
     <a href="#customize-anchor" class="promo-banner anchor-slide methodcta text-white" style="background-color:#000318;">
         <div class="container mx-auto">
             <div class="text text-center">
-                <p class="uppercase"><strong>Musora Students Join Singeo<br> For Just <s class="opacity-60">${{ SingeoPrices::$singeoMembershipAnnualFull }}</s> $77 per year</strong></p>
+                <p class="uppercase"><strong>Musora Students Join Singeo<br> For Just <s class="opacity-60">${{ Prices::$plusSubscriptionAnnualFull }}</s> $77 per year</strong></p>
             </div>
         </div>
     </a>
 @endsection
 
 @section('comparison')
-    <td><s>${{ SingeoPrices::$singeoMembershipAnnualFull }}</s> <strong>$77</strong><br>PER YEAR</td>
+    <td><s>${{ Prices::$plusSubscriptionAnnualFull }}</s> <strong>$77</strong><br>PER YEAR</td>
 @endsection
 
 @section('final')
@@ -54,8 +54,8 @@
     <section class="content-section relative overflow-hidden text-white grey text-center customize py-8 md:py-12 lg:py-20" style="background-color:#000;">
         <div class="container mx-auto">
             <img class="h-5 md:h-7 lg:h-10 mb-2" src="https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png">
-            <h1 class="font-roboto uppercase text-2xl md:text-4xl lg:text-5xl"><strong>{{ round(100 - (100 * (77 / SingeoPrices::$singeoMembershipAnnualFull))) }}%-OFF MUSORA DISCOUNT</strong></h1>
-            <h2 class="mt-4 md:mt-7"><strong>Join Singeo for just<br class="inline md:hidden"> <s class="opacity-60">${{ SingeoPrices::$singeoMembershipAnnualFull }}</s> <span class="text-singeo">$77</span> per year.</strong></h2>
+            <h1 class="font-roboto uppercase text-2xl md:text-4xl lg:text-5xl"><strong>{{ round(100 - (100 * (77 / Prices::$plusSubscriptionAnnualFull))) }}%-OFF MUSORA DISCOUNT</strong></h1>
+            <h2 class="mt-4 md:mt-7"><strong>Join Singeo for just<br class="inline md:hidden"> <s class="opacity-60">${{ Prices::$plusSubscriptionAnnualFull }}</s> <span class="text-singeo">$77</span> per year.</strong></h2>
             <h5 class="mt-3 mb-4 md:mb-7 text-navy"> (90-Day Money Back Guarantee.)</h5>
             <a class="join blue methodcta" href="/ecommerce/add-to-cart?products[singeo-annual-recurring-membership]=1&redirect=/order&locked=true&promo-code=student-discount">Get Started &raquo;</a>
             <p class="text-navy my-5"><em>Your discounted rate is conditional on your continuation as a multi-platform student. If you  <br class="hidden md:inline">

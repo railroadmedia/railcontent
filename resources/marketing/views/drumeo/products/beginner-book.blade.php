@@ -18,8 +18,8 @@
 @section('content')
     @include('drumeo.products.partials.promo-banner', [
                     "name" => "The Best Beginner Drum Book",
-                    "fullPrice" => Prices::$beginnerBookFull,
-                    "price" => Prices::$beginnerBookRegular,
+                    "fullPrice" => floatval($productPrices['BeginnerBook']->price),
+                    "price" => floatval($productPrices['BeginnerBook']->discounted_price),
                 "noBreadcrumb" => true
                 ])
 
@@ -53,10 +53,10 @@
                 <p>The simplest guide for beginner drummers to get started on the drums and take their drumming to the next level.
                     <br><br>
                     Get it today for just
-                    @if(Prices::$beginnerBookFull > Prices::$beginnerBookRegular)
-                        <s style="opacity: 0.6;">${{ Prices::$beginnerBookFull }}</s> ${{ Prices::$beginnerBookRegular }} USD
+                    @if(floatval($productPrices['BeginnerBook']->price) > floatval($productPrices['BeginnerBook']->discounted_price))
+                        <s style="opacity: 0.6;">${{ floatval($productPrices['BeginnerBook']->price) }}</s> ${{ floatval($productPrices['BeginnerBook']->discounted_price) }} USD
                     @else
-                        ${{ Prices::$beginnerBookRegular }} USD
+                        ${{ floatval($productPrices['BeginnerBook']->discounted_price) }} USD
                     @endif
                 </p>
                 <a href="/ecommerce/add-to-cart?products[BeginnerBook]=1" class="join">Click Here To Order</a>
@@ -423,7 +423,7 @@
     <div class="edge-banner text-center">
         <div class="row">
             <p><strong> ** Every Book Includes A Drumeo
-                    <br class="hide-for-medium"> 30-Day Membership Pass (${{ Prices::$drumeoEdgeFull }} Value) ** </strong></p>
+                    <br class="hide-for-medium"> 30-Day Membership Pass (${{ Prices::$plusSubscriptionMonthlyFull }} Value) ** </strong></p>
         </div>
     </div>
 
@@ -435,10 +435,10 @@
             <div class="columns medium-6 text-wrap">
                 <h1>The Best Beginner<br class="show-for-medium"> Drum Book</h1>
                 <p>Get it today for just
-                @if(Prices::$beginnerBookFull > Prices::$beginnerBookRegular)
-                    <s>${{ Prices::$beginnerBookFull }}</s> ${{ Prices::$beginnerBookRegular }} USD
+                @if(floatval($productPrices['BeginnerBook']->price) > floatval($productPrices['BeginnerBook']->discounted_price))
+                    <s>${{ floatval($productPrices['BeginnerBook']->price) }}</s> ${{ floatval($productPrices['BeginnerBook']->discounted_price) }} USD
                 @else
-                    ${{ Prices::$beginnerBookRegular }} USD
+                    ${{ floatval($productPrices['BeginnerBook']->discounted_price) }} USD
                 @endif
                 </p>
                 <a href="/ecommerce/add-to-cart?products[BeginnerBook]=1" class="join">Click Here To Order</a>

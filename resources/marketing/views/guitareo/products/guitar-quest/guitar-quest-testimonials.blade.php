@@ -214,7 +214,7 @@
     @php
         $orderLink = '/ecommerce/add-to-cart?products[guitar-quest]=1&redirect=/order&payment-plan=1';
         $orderLinkAlt = '/ecommerce/add-to-cart?products[guitar-quest]=1&redirect=/order&payment-plan=5';
-        $productPrice = GuitareoPrices::$guitarQuestRegular
+        $productPrice = floatval($productPrices['guitar-quest']->discounted_price)
     @endphp
 
     <header class="header">

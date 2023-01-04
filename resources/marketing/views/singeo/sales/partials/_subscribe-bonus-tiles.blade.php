@@ -6,11 +6,11 @@
         <img class="h-36 sm:h-72 lg:h-96" src="https://singeo.s3.amazonaws.com/sales/promos/august/homepage_chart.png" alt="singeo annual membership">
         <h3 class="leading-tight my-3">
             <strong>
-                Join Singeo for just ${{  round(SingeoPrices::$singeoMembershipAnnual / 12, 2) }}/month</strong> <br class="hidden sm:inline">
+                Join Singeo for just ${{  round(Prices::$plusSubscriptionAnnual / 12, 2) }}/month</strong> <br class="hidden sm:inline">
             <strong class="text-promo">PLUS</strong> get 5 free bonuses worth $538.
         </h3>
         <a href="{{ $annualLink }}" class="join promo my-3 md:my-4 w-full max-w-xs md:max-w-lg lg:max-w-xl">GET Started &raquo;</a>
-        <p class="leading-tight text-sm"><em>Billed at ${{ SingeoPrices::$singeoMembershipAnnual }} per year.<br class="inline sm:hidden">  Cancel anytime. 90-day guarantee.</em></p>
+        <p class="leading-tight text-sm"><em>Billed at ${{ Prices::$plusSubscriptionAnnual }} per year.<br class="inline sm:hidden">  Cancel anytime. 90-day guarantee.</em></p>
         <h4 class="leading-tight my-6 sm:my-8">
             <strong>5 FREE BONUSES.</strong> <em>ONLY<br class="inline sm:hidden"> AVAILABLE UNTIL DECEMBER 26</em></h4>
 
@@ -22,14 +22,14 @@
                         'image' => 'https://singeo.s3.amazonaws.com/sales/promos/november/singing-starter-kit.jpg',
                         'title' => 'Singing<br> Starter Kit',
                         'description' => 'Get everything you need to start singing now. In just 7 hands-on lessons, you’ll overcome the challenges most beginner singers face and will instantly sound better.',
-                        'price' => SingeoPrices::$singingStarterKitFull,
+                        'price' => floatval($productPrices['singing-starter-kit']->price),
                         'online-ship' => "Lifetime Access"
                     ],
                     [
                         'image' => 'https://singeo.s3.amazonaws.com/sales/promos/october/Beautiful_harmonies_card.jpg',
                         'title' => 'Harmony',
                         'description' => 'In just 8, short, sing-a-long lessons, you’ll learn how to elevate any vocal performance with incredible harmonies. Even if you’re a total beginner, you’ll be singing your first harmony within the first 10 minutes of this course.',
-                        'price' => SingeoPrices::$beautifulHarmoniesFull,
+                        'price' => floatval($productPrices['the-essential-guide-to-beautiful-harmonies']->price),
                         'online-ship' => "Lifetime Access"
                     ],
                     [
@@ -37,7 +37,7 @@
                         'title' => 'Vowel Practice<br> Poster',
                         'badge' => 'Vowel Practice Poster',
                         'description' => 'Your new favorite practice tool - and your ticket hitting higher notes with ease and confidence.',
-                        'price' => SingeoPrices::$posterFull,
+                        'price' => floatval($productPrices['vowel-sounds-poster']->price),
                         'online-ship' => "Free Shipping",
                     ],
                     [
@@ -83,7 +83,7 @@
         </div>
         <a class="join promo my-3 md:my-4 w-full max-w-xs md:max-w-lg lg:max-w-xl" href="{{ $annualLink }}">GET Started &raquo;</a>
         <br>
-        <a class="memcta monthly-alt text-light-navy" href="/ecommerce/add-to-cart?products[singeo-monthly-recurring-membership]=1&redirect=/order&locked=true" dusk="order-monthly"><p><u><em>Or start a monthly membership for <br class="inline sm:hidden">${{ SingeoPrices::$singeoMembershipMonthly }}/month. (no bonuses)</em></u></p></a>
+        <a class="memcta monthly-alt text-light-navy" href="/ecommerce/add-to-cart?products[singeo-monthly-recurring-membership]=1&redirect=/order&locked=true" dusk="order-monthly"><p><u><em>Or start a monthly membership for <br class="inline sm:hidden">${{ Prices::$plusSubscriptionMonthly }}/month. (no bonuses)</em></u></p></a>
     </div>
 </section>
 </div>

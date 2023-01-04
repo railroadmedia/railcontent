@@ -18,7 +18,7 @@
                 <img class="logo" src="https://cdn.musora.com/image/fetch/w_448,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/free-acoustic-guitar-lessons/logo.png">
                 <div class="text">
                     <p><strong>
-                            Save {{ round(100 - (100 * ($productPrice / GuitareoPrices::$songs500Full))) }}% on 500 Songs in 5 Days</strong><br>
+                            Save {{ round(100 - (100 * ($productPrice / floatval($productPrices['500-songs-in-5-days-guitareo']->price)))) }}% on 500 Songs in 5 Days</strong><br>
                         Special For students ONLY</p>
                 </div>
             </div>

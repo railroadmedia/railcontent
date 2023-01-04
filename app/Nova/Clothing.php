@@ -60,7 +60,7 @@ class Clothing extends Resource
                 return '<a class="link-default" target="_blank" href="'.get_legacy_brand_base_url(strtolower($this->brand->name)).($this->brand->name === 'Drumeo' ? '/drumshop/' : '/shop/').$this->slug.'">'.$this->slug.'</a>';
             })->asHtml(),
             //slug field for saving
-            Text::make('Slug')->required()->hideFromDetail()->hideFromIndex(),
+            Text::make('Slug')->hideFromDetail()->hideFromIndex(),
             Text::make('Sku')->hideFromIndex(),
             Text::make('Meta Description', 'meta_desc')->hideFromIndex(),
             Image::make('Meta Image', 'meta_img')
@@ -96,7 +96,7 @@ class Clothing extends Resource
             Text::make('Meta Image', 'meta_img')->hideFromIndex()->hideFromDetail(),
             Text::make('Promo Code', 'promo_code')->hideFromIndex(),
             Currency::make('Price')->required(),
-            Currency::make('Discounted Price', 'discounted_price')->hideFromIndex(),
+            Currency::make('Discounted Price', 'discounted_price')->help('If discounted price is the same as the price, no discount will show on the sales page.'),
             Boolean::make('Sold Out', 'sold_out')->default(false)->hideFromIndex(),
             Text::make('Badge Text', 'badge_text')->hideFromIndex(),
             Heading::make('Shop Card'),

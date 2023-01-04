@@ -155,7 +155,7 @@
         <div class="container mx-auto relative z-50">
             <div class="mx-auto max-w-xs sm:max-w-md md:max-w-xl lg:max-w-5xl" style="font-size: 0;">
                 {{--<h1 data-aos="fade-down" class="font-bebas leading-none mt-3 md:mt-5 text-5xl md:text-6xl">REACH YOUR  <br class="inline md:hidden"> <span class="text-coaches">DRUMMING GOALS.</span></h1>--}}
-                {{--<h2 data-aos-once="true" data-aos="fade-up" class="my-3 md:my-5 leading-normal"><strong>Improve your drumming for<br> just <span class="text-drumeo">${{ round((Prices::$drumeoEdgeAnnual / 12), 2) }}</span> per month.</strong></h2>--}}
+                {{--<h2 data-aos-once="true" data-aos="fade-up" class="my-3 md:my-5 leading-normal"><strong>Improve your drumming for<br> just <span class="text-drumeo">${{ round((Prices::$plusSubscriptionAnnual / 12), 2) }}</span> per month.</strong></h2>--}}
                 <h3 class="mb-5 md:mb-7 lg:mb-10" style="line-height: 1.4em;"><strong>Become a Lifetime Member<br class="inline sm:hidden"> today and get:</strong></h3>
                 <div class="bonus-wrap relative inline-block align-top mx-auto mb-3 px-1 md:px-3 w-full max-w-sm">
                     <div class="flip-div inline-block relative w-full group" style="padding-bottom: 70%;perspective: 1000px;">
@@ -177,7 +177,7 @@
 
                     <p class="uppercase w-full leading-normal mt-2">
                         <strong class="font-black leading-tight inline-block mb-1">Drumeo Lifetime Membership</strong><br>
-                        <span class="text-gradient" style="text-transform:uppercase; display:inline-block;"><strong>${{ Prices::$drumeoEdgeLifetime }}</strong><br>
+                        <span class="text-gradient" style="text-transform:uppercase; display:inline-block;"><strong>${{ Prices::$lifetimeMembership }}</strong><br>
                                 Instant Access</span>
                     </p>
                 </div>
@@ -189,7 +189,7 @@
                         'image' => 'https://cdn.musora.com/image/fetch/c_fill,w_300,q_auto:good/https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/eardrums.jpg',
                         'title' => 'Drumeo EarDrums',
                         'description' => 'Drumeo EarDrums reduce external volume by up to -29dB. That means you can play hard while protecting your ears.',
-                        'price' => Prices::$earDrumsFull,
+                        'price' => floatval($productPrices['drumeo-eardrums']->price),
                         'online-ship' => "Free Shipping",
                         'shipping' => "no-shipping"
                         ],

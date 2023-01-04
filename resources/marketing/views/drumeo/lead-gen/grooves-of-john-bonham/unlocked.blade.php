@@ -33,7 +33,7 @@
         <div class="container mx-auto">
             <div class="text-center sm:text-left inline-block align-middle hover:opacity-90 transition-opacity duration-300">
                 <img class="align-middle w-auto mr-2 h-6 hidden sm:inline-block" src="https://cdn.musora.com/image/fetch/w_300,q_60,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png" alt="edge-logo">
-                <p class="inline-block align-middle mx-auto text-xs leading-tight">Get {{ Prices::$lessons }}+ more drum lessons & song breakdowns<br> inside Drumeo. Click here for a FREE trial.</p>
+                <p class="inline-block align-middle mx-auto text-xs leading-tight">Get {{ Prices::$drumeoLessons }}+ more drum lessons & song breakdowns<br> inside Drumeo. Click here for a FREE trial.</p>
             </div>
         </div>
     </a>

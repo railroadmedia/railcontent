@@ -92,8 +92,8 @@
 
     @include('pianote._partials._promo-banner-no-tw', [
         "name" => "Improvisation & Musical Freedom",
-        "fullPrice" => PianotePrices::$improvisationAndMusicalFreedomFull,
-        "price" => PianotePrices::$improvisationAndMusicalFreedom,
+        "fullPrice" => floatval($productPrices['jesus-molina-improvisation-and-musical-freedom-pack']->price),
+        "price" => floatval($productPrices['jesus-molina-improvisation-and-musical-freedom-pack']->discounted_price),
         "noBreadcrumb" => true
     ])
 
@@ -499,7 +499,7 @@
             <div class="flex flex-wrap items-center">
                 <div class="text-center sm:text-left w-full sm:w-1/2 lg:w-5/12 sm:pl-5">
                     <img class="h-16 md:h-20 lg:h-24 lazyload" data-src="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://pianote.s3.amazonaws.com/sales/jesus-molina/Logo.png">
-                    <h4 class="leading-tight mt-2 md:mt-3"><strong>Learn from one of the world’s<br class="inline lg:hidden"> best for just <!--<s class="opacity-70">${{ PianotePrices::$improvisationAndMusicalFreedomFull }}</s>--> <span class="text-pianote">${{ PianotePrices::$improvisationAndMusicalFreedom }}</span></strong></h4>
+                    <h4 class="leading-tight mt-2 md:mt-3"><strong>Learn from one of the world’s<br class="inline lg:hidden"> best for just <!--<s class="opacity-70">${{ floatval($productPrices['jesus-molina-improvisation-and-musical-freedom-pack']->price) }}</s>--> <span class="text-pianote">${{ floatval($productPrices['jesus-molina-improvisation-and-musical-freedom-pack']->discounted_price) }}</span></strong></h4>
                     <p class="leading-tight mx-auto inline-block my-4 md:my-5"><em>Get Jesús Molina’s entire course for less than the cost of a single in-person piano lesson.</em></p>
                     <div class="w-full mx-auto sm:mx-0">
                         <p class="text-sm leading-relaxed">

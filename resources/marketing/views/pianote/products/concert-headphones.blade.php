@@ -97,10 +97,10 @@
             <a class="join w-full" href="#customize-anchor">Grab your pair</a>
             <h4 class="text-white font-extrabold my-4">
                 Only
-                @if((PianotePrices::$headphonesFull -PianotePrices::$headphonesRegular) > 0)
-                    <s class="font-normal">${{PianotePrices::$headphonesFull }}</s>
+                @if((floatval($productPrices['pianote-headphones']->price) -floatval($productPrices['pianote-headphones']->discounted_price)) > 0)
+                    <s class="font-normal">${{floatval($productPrices['pianote-headphones']->price) }}</s>
                 @endif
-                ${{PianotePrices::$headphonesRegular }}
+                ${{floatval($productPrices['pianote-headphones']->discounted_price) }}
             </h4>
             <p class="text-yellow italic font-bold leading-tight">LIMITED EDITION.</p>
 
@@ -248,9 +248,9 @@
                     <div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">
                         <h6 class="leading-none mb-3 md:mb-8">Concert Series Headphones</h6>
                         <h1 class="inline-block leading-none">
-                            <s style="color:#BBBBBF;">${{ PianotePrices::$headphonesFull }}</s> <strong>${{ PianotePrices::$headphonesRegular }}</strong>
+                            <s style="color:#BBBBBF;">${{ floatval($productPrices['pianote-headphones']->price) }}</s> <strong>${{ floatval($productPrices['pianote-headphones']->discounted_price) }}</strong>
                         </h1>
-                        <p class="text-sm my-4"><em>Save {{ round(100 - (100 * (PianotePrices::$headphonesRegular / PianotePrices::$headphonesFull))) }}% for a limited time.</em></p>
+                        <p class="text-sm my-4"><em>Save {{ round(100 - (100 * (floatval($productPrices['pianote-headphones']->discounted_price) / floatval($productPrices['pianote-headphones']->price)))) }}% for a limited time.</em></p>
                         <div class="join smaller w-full transition-opacity duration-300 group-hover:opacity-80" style="max-width: 230px;">Grab your pair</div>
                     </div>
                     <div class="px-3 pt-5 md:pt-6 pb-9 md:pb-10" style="background: #f1f8ff;border-top: 2px solid #e6f2ff;">
@@ -270,7 +270,7 @@
 {{--                    <div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">--}}
 {{--                        <h6 class="leading-none mb-3">Get a LIFETIME Pianote membership <br class="hidden lg:inline">& Get Your Headphones FREE</h6>--}}
 {{--                        <h1 class="inline-block leading-none">--}}
-{{--                            <strong>${{ PianotePrices::$pianoteMembershipLifetime }}</strong>--}}
+{{--                            <strong>${{  }}</strong>--}}
 {{--                        </h1>--}}
 {{--                        <p class="text-sm my-4"><em>LIMITED EDITION.</em></p>--}}
 {{--                        <div class="join smaller w-full transition-opacity duration-300 group-hover:opacity-80" style="max-width: 230px;">Learn more</div>--}}
