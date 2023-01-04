@@ -59,10 +59,14 @@ class AppServiceProvider extends ServiceProvider
                 'drumeo.sales.*',
                 'drumeo.products.*',
                 'guitareo.shop.*',
-                'guitareo.products.guitar-quest.*',
+                'guitareo.sales.*',
+                'guitareo.products.*',
                 'pianote.shop.*',
+                'pianote.sales.*',
                 'pianote.products.*',
                 'singeo.shop.*',
+                'singeo.sales.*',
+                'singeo.products.*',
             ],
             MarketingPagesProductsViewComposer::class
         );
