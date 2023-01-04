@@ -77,7 +77,7 @@
                 <strong>All the hits.</strong>
             </h2>
             <h6 class="leading-normal mb-6 md:mb-12 lg:mb-16 sm:px-4">
-                Out of {{ Prices::$songs }}+ songs inside Drumeo, these are the <s class="opacity-50">40</s> <strong>100</strong> songs drummers love to play the most– and now <br class="hidden lg:inline">
+                Out of {{ Prices::$drumeoSongs }}+ songs inside Drumeo, these are the <s class="opacity-50">40</s> <strong>100</strong> songs drummers love to play the most– and now <br class="hidden lg:inline">
                 it’s your turn. Scroll down to find your favorites and enter your email to get ALL the songs totally free.
             </h6>
             <div class="relative">

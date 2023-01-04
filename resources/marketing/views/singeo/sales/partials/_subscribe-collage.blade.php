@@ -5,7 +5,7 @@
         <div class="flex flex-wrap items-center">
             <div class="text-center sm:text-left w-full sm:w-7/12 lg:w-6/12 sm:pl-5">
                 <img class="h-14 md:h-24 lg:h-32 lazyload" data-src="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/https://singeo.s3.amazonaws.com/sales/promos/september/order_sticky_logo.png">
-                <h2 class="leading-tight mt-2 md:mt-3"><strong>Get a full year of singing <br class="inline sm:hidden">lessons for just <s>${{ SingeoPrices::$singeoMembershipAnnualFull }}</s> <span class="text-singeo">${{ SingeoPrices::$singeoMembershipAnnual }}</span>.</strong></h2>
+                <h2 class="leading-tight mt-2 md:mt-3"><strong>Get a full year of singing <br class="inline sm:hidden">lessons for just <s>${{ Prices::$plusSubscriptionAnnualFull }}</s> <span class="text-singeo">${{ Prices::$plusSubscriptionAnnual }}</span>.</strong></h2>
                 <p class="leading-tight mx-auto inline-block my-4 md:my-5 uppercase text-coaches"><strong>THE BACK-TO-SCHOOL DISCOUNT<br class="inline sm:hidden"> ENDS SEPTEMBER 30.</strong></p>
                 <p>Save $30. Billed annually, cancel anytime.</p>
                 <div class="w-72 lg:w-96 mx-auto sm:mx-0">
@@ -16,7 +16,7 @@
                 <img class="max-w-lg sm:max-w-2xl lg:max-w-4xl lazyload" data-src="https://cdn.musora.com/image/fetch/w_1400,q_auto:best/https://singeo.s3.amazonaws.com/sales/promos/july/footer_collage.png">
             </div>
         </div>
-        <a class="inline-block text-light-navy mt-2" href="/ecommerce/add-to-cart?products[singeo-monthly-recurring-membership]=1&redirect=/order&locked=true"><p><u><em>Or start a monthly membership for <br class="inline-block md:hidden">${{ SingeoPrices::$singeoMembershipMonthly }}/month. (no bonuses)</em></u></p></a>
+        <a class="inline-block text-light-navy mt-2" href="/ecommerce/add-to-cart?products[singeo-monthly-recurring-membership]=1&redirect=/order&locked=true"><p><u><em>Or start a monthly membership for <br class="inline-block md:hidden">${{ Prices::$plusSubscriptionMonthly }}/month. (no bonuses)</em></u></p></a>
     </div>
 </section>
 

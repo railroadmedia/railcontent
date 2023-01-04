@@ -538,7 +538,7 @@
                                 ${{ floatval($productPrices['new-drummers-start-here']->discounted_price) }}
                             @endif
                         </td>
-                        <td>${{ Prices::$drumeoEdgeAnnual }}/yr</td>
+                        <td>${{ Prices::$plusSubscriptionAnnual }}/yr</td>
                         <td>$89-$270</td>
                         <td>$89.99</td>
                         <td>$240/yr</td>

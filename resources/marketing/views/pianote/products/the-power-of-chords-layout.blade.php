@@ -632,7 +632,7 @@
                         {{--<div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">--}}
                             {{--<h5 class="leading-none mb-3">Power Of Chords + Pianote</h5>--}}
                             {{--<h1 class="inline-block leading-none text-4xl lg:text-5xl">--}}
-                                {{--<strong>${{ Prices::$pianoteMembershipAnnualRegular }}</strong>--}}
+                                {{--<strong>${{ Prices::$plusSubscriptionAnnual }}</strong>--}}
                             {{--</h1><p class="inline-block">/yr</p>--}}
                             {{--<p class="text-coaches text-sm my-4"><em>Annual Pianote Membership included.</em></p>--}}
                             {{--<div class="join smaller coaches w-full transition-opacity duration-300 group-hover:opacity-80"--}}

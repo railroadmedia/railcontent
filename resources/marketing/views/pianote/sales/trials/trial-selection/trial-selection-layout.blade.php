@@ -59,7 +59,7 @@
                             @endif
                     >
                         <h2><strong>MONTHLY</strong></h2>
-                        <h1 class="my-2 md:my-4"><strong>${{ Prices::$pianoteMembershipMonthlyFull }}</strong><sub>/month</sub></h1>
+                        <h1 class="my-2 md:my-4"><strong>${{ Prices::$plusSubscriptionMonthlyFull }}</strong><sub>/month</sub></h1>
                         <p class="text-navy"><em>If you're just giving it a test-drive.</em></p>
                         <ul class="fa-ul text-left my-4 md:my-6">
                             <li><i class="fa-li fal fa-check"></i> Unlimited access to every lesson.</li>
@@ -90,8 +90,8 @@
                             <h1 class="my-2 md:my-4"><strong>@yield('extra-savings-divided')</strong><sub>/month</sub></h1>
                             <p class="text-yellow"><em>Billed as @yield('extra-savings') per year. </em></p>
                         @else
-                            <h1 class="my-2 md:my-4"><strong>${{ number_format(Prices::$pianoteMembershipAnnualFull / 12, 2) }}</strong><sub>/month</sub></h1>
-                            <p class="text-yellow"><em>Billed as ${{ Prices::$pianoteMembershipAnnualFull }} per year. </em></p>
+                            <h1 class="my-2 md:my-4"><strong>${{ number_format(Prices::$plusSubscriptionAnnualFull / 12, 2) }}</strong><sub>/month</sub></h1>
+                            <p class="text-yellow"><em>Billed as ${{ Prices::$plusSubscriptionAnnualFull }} per year. </em></p>
                         @endif
                         <ul class="fa-ul text-left my-4 md:my-6">
                             <li><i class="fa-li fal fa-check"></i> Unlimited access to every lesson.</li>

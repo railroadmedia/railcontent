@@ -255,7 +255,7 @@
 {{--                        <div class="float-left w-full px-2 md:px-3">--}}
 {{--                            <p><strong>Singeo Membership + 5 Bonuses </strong><br>--}}
 {{--                                <em>Singeo Annual Membership<br class="hidden lg:inline"> + Starter Kit + Practice Poster + Guitar/Piano Lessons & More!</em>--}}
-{{--                                <span class="price"><s class="opacity-30">$778</s> <strong class="linear-purple">${{ SingeoPrices::$singeoMembershipAnnual }}</strong></span>--}}
+{{--                                <span class="price"><s class="opacity-30">$778</s> <strong class="linear-purple">${{ Prices::$plusSubscriptionAnnual }}</strong></span>--}}
 {{--                            </p>--}}
 {{--                            <span class="join" style="background:linear-gradient(180deg, #8300E9 0%, #03017C 100%);">See The Deal &raquo;</span>--}}
 {{--                        </div>--}}

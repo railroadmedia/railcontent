@@ -61,7 +61,7 @@
 @endsection
 
 @section('comparison')
-    <td><strong>FREE TRIAL</strong><br>THEN <s>${{ Prices::$drumeoEdgeAnnualFull }}</s> $200/YR</td>
+    <td><strong>FREE TRIAL</strong><br>THEN <s>${{ Prices::$plusSubscriptionAnnualFull }}</s> $200/YR</td>
 @endsection
 
 @section('final')

@@ -167,7 +167,7 @@
 {{--            <p class="text-light-navy text-sm">--}}
 {{--                <em>--}}
 {{--                        @if(empty($trialVersion))--}}
-{{--                            Just ${{ number_format(GuitareoPrices::$guitareoMembershipAnnual / 12, 2) }} per month, 90-day guarantee.--}}
+{{--                            Just ${{ number_format(Prices::$plusSubscriptionAnnual / 12, 2) }} per month, 90-day guarantee.--}}
 {{--                        @else--}}
 {{--                            Try it for free now--}}
 {{--                        @endif--}}
@@ -703,8 +703,8 @@
 
             <h4 class="mb-6 md:mb-7 lg:mb-10 mt-8 md:mt-10 lg:mt-14 leading-normal">
                 <strong class="inline-block mr-1 bg-guitareo px-1 md:px-3 md:py-1 rounded-md md:rounded-lg leading-none" style="color: #000a1e;">PLUS</strong>
-                <em>On-demand access to <strong class="text-guitareo">{{ GuitareoPrices::$courses }}+<br class="inline md:hidden"> courses</strong> and<br class="hidden md:inline">
-                    <strong class="text-guitareo">{{ GuitareoPrices::$lessons }}+ lessons</strong> to <br class="inline md:hidden">improve any skill, anytime.</em></h4>
+                <em>On-demand access to <strong class="text-guitareo">{{ Prices::$guitareoCourses }}+<br class="inline md:hidden"> courses</strong> and<br class="hidden md:inline">
+                    <strong class="text-guitareo">{{ Prices::$guitareoLessons }}+ lessons</strong> to <br class="inline md:hidden">improve any skill, anytime.</em></h4>
 
             <div class="testimonials w-full flex flex-wrap justify-center md:mb-2 mx-auto md:max-w-full">
 
@@ -1294,12 +1294,12 @@
                     @else
                         <td class="rounded-b-xl">
                             @if(empty($trialVersion))
-                                @if(number_format(GuitareoPrices::$guitareoMembershipAnnual, 2) == intval(GuitareoPrices::$guitareoMembershipAnnual))
-                                    <strong>${{  round(GuitareoPrices::$guitareoMembershipAnnual / 12, 2) }}</strong>/mo<br>
+                                @if(number_format(Prices::$plusSubscriptionAnnual, 2) == intval(Prices::$plusSubscriptionAnnual))
+                                    <strong>${{  round(Prices::$plusSubscriptionAnnual / 12, 2) }}</strong>/mo<br>
                                 @else
-                                    <strong>${{  number_format(GuitareoPrices::$guitareoMembershipAnnual / 12, 2)  }}</strong>/mo<br>
+                                    <strong>${{  number_format(Prices::$plusSubscriptionAnnual / 12, 2)  }}</strong>/mo<br>
                                 @endif
-                                <em>Billed annually at ${{  GuitareoPrices::$guitareoMembershipAnnual }}</em><br><br>
+                                <em>Billed annually at ${{  Prices::$plusSubscriptionAnnual }}</em><br><br>
                                 Unlimited lessons & support.
                             @else
                                 <strong>Free Trial</strong><br>&nbsp;

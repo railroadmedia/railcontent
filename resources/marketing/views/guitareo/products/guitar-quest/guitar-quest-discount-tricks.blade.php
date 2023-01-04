@@ -2,18 +2,18 @@
 
 @php $orderLink = '/ecommerce/add-to-cart?products[guitar-quest]=1&promo-code=siah-deal&redirect=/order&payment-plan=1' @endphp
 @php $orderLinkAlt = '/ecommerce/add-to-cart?products[guitar-quest]=1&promo-code=siah-deal&redirect=/order&payment-plan=5' @endphp
-@php $productPrice = GuitareoPrices::$guitarQuestSpecial @endphp
+@php $productPrice = 47 @endphp
 
 @section('promo-banner')
     <section class="py-8 md:py-12 relative text-white text-center" style="z-index: 51;margin: 0 auto -70px; background:#000612;">
         <div class="max-w-screen-xl m-auto px-6 lg:flex lg:items-start">
             <img class="inline-block w-3/4 sm:w-full sm:max-w-sm mb-5 lg:mb-0 mx-auto lg:mx-0" src="https://guitareo.s3.amazonaws.com/lead-gen/guitar-tricks/logo-with.png">
             <div class="lg:pl-10 max-w-lg lg:max-w-2xl mx-auto lg:mx-0">
-                <p class="font-primary text-lg sm:text-xl"><strong class="font-black">CONTINUE YOUR JOURNEY <i class="fas fa-long-arrow-right mx-1 text-goldenrod"></i> <span class="inline-block"> SAVE {{ round(100 - (100 * (GuitareoPrices::$guitarQuestSpecial / floatval($productPrices['guitar-quest']->price)))) }}% ON GUITAR QUEST</span></strong></p>
+                <p class="font-primary text-lg sm:text-xl"><strong class="font-black">CONTINUE YOUR JOURNEY <i class="fas fa-long-arrow-right mx-1 text-goldenrod"></i> <span class="inline-block"> SAVE {{ round(100 - (100 * ($productPrice / floatval($productPrices['guitar-quest']->price)))) }}% ON GUITAR QUEST</span></strong></p>
                 <p class="font-primary text-sm sm:text-base my-4 leading-relaxed text-left">
                     Congratulations on learning 2 Simple Guitar Tricks. Now let’s put them to use! These tricks are taken directly from a level of Rob GuitarQuest course.
                     <br><br>
-                    So if you’ve enjoyed learning these tricks, we know you’ll love the rest. And because we want you to keep learning and having fun on the guitar, we’re giving you a {{ round(100 - (100 * (GuitareoPrices::$guitarQuestSpecial / floatval($productPrices['guitar-quest']->price)))) }}% discount to continue your journey with Rob. Just click any of the big buttons on this page to get started.
+                    So if you’ve enjoyed learning these tricks, we know you’ll love the rest. And because we want you to keep learning and having fun on the guitar, we’re giving you a {{ round(100 - (100 * ($productPrice / floatval($productPrices['guitar-quest']->price)))) }}% discount to continue your journey with Rob. Just click any of the big buttons on this page to get started.
                 </p>
                 <a title="Go To Order Page" href="{{ $orderLink }}" class="bg-goldenrod-gradient transition duration-500 linear px-12 py-1 inline-block uppercase text-black font-roboto-condensed-bold rounded-full text-lg">
                     GET MY DISCOUNT &raquo;
@@ -27,7 +27,7 @@
     >
         <img class="inline-block w-32" src="https://guitareo.s3.amazonaws.com/lead-gen/guitar-tricks/logo-with.png">
         <p class="uppercase my-0 ml-3 inline-block align-middle text-sm sm:text-base text-left" style="line-height: 1.2!important;">
-            SAVE {{ round(100 - (100 * (GuitareoPrices::$guitarQuestSpecial / floatval($productPrices['guitar-quest']->price)))) }}% ON GUITAR QUEST<br>
+            SAVE {{ round(100 - (100 * ($productPrice / floatval($productPrices['guitar-quest']->price)))) }}% ON GUITAR QUEST<br>
         <s class="opacity-60">WAS ${{ floatval($productPrices['guitar-quest']->price) }}</s> <strong class="font-black text-goldenrod">ONLY ${{ $productPrice }}</strong>
         </p>
     </a>

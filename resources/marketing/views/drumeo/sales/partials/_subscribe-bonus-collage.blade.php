@@ -28,7 +28,7 @@
             </div>
         </div>
 
-        <a class="inline-block text-sm text-light-navy mt-7" href="/ecommerce/add-to-cart?products[DLM-1-month]=1&locked=true"><p><u><em>Or start a monthly membership for <br class="inline-block md:hidden">${{ Prices::$drumeoEdgeRegular }}/month. (no bonuses)</em></u></p></a>
+        <a class="inline-block text-sm text-light-navy mt-7" href="/ecommerce/add-to-cart?products[DLM-1-month]=1&locked=true"><p><u><em>Or start a monthly membership for <br class="inline-block md:hidden">${{ Prices::$plusSubscriptionMonthly }}/month. (no bonuses)</em></u></p></a>
 </section>
 
 <section class="content-section text-center" style="background: #060c1b;">

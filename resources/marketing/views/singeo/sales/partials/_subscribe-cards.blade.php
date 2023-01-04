@@ -8,7 +8,7 @@
     <div class="container mx-auto relative z-50">
         <div class="horizontal-bonuses mx-auto max-w-xs sm:max-w-md md:max-w-xl lg:max-w-4xl" style="font-size: 0;">
             <img class="h-10 md:h-16" src="https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png">
-            <h2 class="my-2 md:my-3 leading-normal"><strong>Learn to sing for just <span class="text-singeo">${{ number_format(SingeoPrices::$singeoMembershipAnnual/ 12, 2) }}</span> per month!</strong></h2>
+            <h2 class="my-2 md:my-3 leading-normal"><strong>Learn to sing for just <span class="text-singeo">${{ number_format(Prices::$plusSubscriptionAnnual/ 12, 2) }}</span> per month!</strong></h2>
             <h4><em>Discover and fall in love with the full potential of your voice.</em></h4>
         </div>
 
@@ -19,11 +19,11 @@
                     <div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">
                         <h5 class="leading-none mb-3"><strong>MONTHLY</strong></h5>
                         <h1 class="inline-block leading-none">
-                            @if(SingeoPrices::$singeoMembershipMonthlyFull > SingeoPrices::$singeoMembershipMonthly)
-                                <s class="opacity-60">${{ SingeoPrices::$singeoMembershipMonthlyFull }}</s>
+                            @if(Prices::$plusSubscriptionMonthlyFull > Prices::$plusSubscriptionMonthly)
+                                <s class="opacity-60">${{ Prices::$plusSubscriptionMonthlyFull }}</s>
                             @endif
-                            <strong>${{ SingeoPrices::$singeoMembershipMonthly }}</strong></h1> <p class="inline-block {{---mr-16--}}">per month</p>
-                        <p class="text-sm my-4"><em>Only ${{ number_format((SingeoPrices::$singeoMembershipMonthly * 12) / 52, 2) }} per week.</em></p>
+                            <strong>${{ Prices::$plusSubscriptionMonthly }}</strong></h1> <p class="inline-block {{---mr-16--}}">per month</p>
+                        <p class="text-sm my-4"><em>Only ${{ number_format((Prices::$plusSubscriptionMonthly * 12) / 52, 2) }} per week.</em></p>
                         <div class="join smaller w-full transition-opacity duration-300 group-hover:opacity-80" style="max-width: 230px;">Get Started</div>
                     </div>
                     <div class="px-3 pt-5 md:pt-6 pb-9 md:pb-10" style="background: #f1f8ff;border-top: 2px solid #e6f2ff;">
@@ -41,11 +41,11 @@
                     <div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">
                         <h5 class="leading-none mb-3"><strong>ANNUAL</strong></h5>
                         <h1 class="inline-block leading-none">
-                            @if(SingeoPrices::$singeoMembershipAnnualFull > SingeoPrices::$singeoMembershipAnnual)
-                                <s class="opacity-60">${{ SingeoPrices::$singeoMembershipAnnualFull }}</s>
+                            @if(Prices::$plusSubscriptionAnnualFull > Prices::$plusSubscriptionAnnual)
+                                <s class="opacity-60">${{ Prices::$plusSubscriptionAnnualFull }}</s>
                             @endif
-                            <strong>${{ SingeoPrices::$singeoMembershipAnnual }}</strong></h1> <p class="inline-block -mr-14">per year</p>
-                        <p class="text-singeo text-sm my-4"><em>Save {{ round(100 - (100 * (SingeoPrices::$singeoMembershipAnnual / (SingeoPrices::$singeoMembershipMonthly * 12)))) }}% vs monthly.</em></p>
+                            <strong>${{ Prices::$plusSubscriptionAnnual }}</strong></h1> <p class="inline-block -mr-14">per year</p>
+                        <p class="text-singeo text-sm my-4"><em>Save {{ round(100 - (100 * (Prices::$plusSubscriptionAnnual / (Prices::$plusSubscriptionMonthly * 12)))) }}% vs monthly.</em></p>
                         <div class="join smaller w-full transition-opacity duration-300 group-hover:opacity-80" style="max-width: 230px;">Get Started</div>
                     </div>
                     <div class="px-3 pt-5 md:pt-6 pb-9 md:pb-10" style="background: #f1f8ff;border-top: 2px solid #e6f2ff;">

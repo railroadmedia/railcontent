@@ -5,7 +5,7 @@
                 <strong>Ready for your next lesson?</strong>
             </h1>
             <div class="mt-5 lg:mt-6 mb-6 md:text-xl lg:mb-9 lg:text-2xl leading-normal px-3">
-                Get unlimited drum lessons & {{ Prices::$lessons }}+ note-for-note song breakdowns<br class="hidden md:inline">
+                Get unlimited drum lessons & {{ Prices::$drumeoLessons }}+ note-for-note song breakdowns<br class="hidden md:inline">
                  inside Drumeo. Click below to start your free trial.
             </div>
             <a class="join" href="/trial">Free Trial &raquo;</a>

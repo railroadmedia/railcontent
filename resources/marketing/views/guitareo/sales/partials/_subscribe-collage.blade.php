@@ -13,7 +13,7 @@
                         <i class="text-guitareo fas fa-check sm:mr-2"></i> <span class="text-guitareo">FREE</span> <strong>Survival Guide book shipped anywhere in the world.</strong> <em>($19 value)</em><br>
                         <i class="text-guitareo fas fa-check sm:mr-2"></i> <span class="text-guitareo">GIVE</span> <strong>We’re donating 20% of today’s payment to underfunded schools.</strong>
                     </p>
-                    <h4 class="my-4 sm:my-5"><strong>1 year of lessons for just <s>${{ GuitareoPrices::$guitareoMembershipAnnualFull }}</s> <span class="text-guitareo">${{ GuitareoPrices::$guitareoMembershipAnnual }}</span></strong></h4>
+                    <h4 class="my-4 sm:my-5"><strong>1 year of lessons for just <s>${{ Prices::$plusSubscriptionAnnualFull }}</s> <span class="text-guitareo">${{ Prices::$plusSubscriptionAnnual }}</span></strong></h4>
                     <div class="w-72 lg:w-96 mx-auto sm:mx-0">
                         <a class="join blue w-full mt-3" href="{{ $annualLink }}">Get Started</a>
                     </div>
@@ -24,7 +24,7 @@
             </div>
         </div>
         <p class="mt-5 md:mt-7" style="display:inline-block;background: -webkit-linear-gradient(20deg, #03c8ac, #0976db, #9a01ee, #f61a30);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"><strong>By joining today, we’ll donate 20% of your new membership<br class="hidden sm:inline"> towards the <a target="_blank" href="https://musicounts.ca/en/take-action/ways-of-giving/fundraise-on-musicounts-behalf/fundraisers-supporting-musicounts/give-the-gift-of-music-with-musora/"><u>MusiCounts Band Aid Program</u></a>.</strong></p><br>
-        <a class="inline-block text-sm text-light-navy mt-2" href="/ecommerce/add-to-cart?products[GUITAREO-1-MONTH-MEMBERSHIP]=1&redirect=/order&locked=true"><p><u><em>Or start a monthly membership for <br class="inline-block md:hidden">${{ GuitareoPrices::$guitareoMembershipMonthly }}/month. (no bonuses)</em></u></p></a>
+        <a class="inline-block text-sm text-light-navy mt-2" href="/ecommerce/add-to-cart?products[GUITAREO-1-MONTH-MEMBERSHIP]=1&redirect=/order&locked=true"><p><u><em>Or start a monthly membership for <br class="inline-block md:hidden">${{ Prices::$plusSubscriptionMonthly }}/month. (no bonuses)</em></u></p></a>
     </div>
 </section>
 

@@ -6,8 +6,8 @@
         <div class="flex flex-wrap items-center">
             <div class="text-center sm:text-left w-full sm:w-1/2 lg:w-5/12 sm:pl-5">
                 <img class="h-14 md:h-16 lazyload" data-src="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://pianote.s3.amazonaws.com/logo/pianote-logo-red.png">
-                <h4 class="leading-tight mt-2 md:mt-3"><strong>Start playing beautiful music <br> for just <span class="text-pianote">${{ round((Prices::$pianoteMembershipAnnualRegular / 12), 2) }}</span> a month.</strong></h4>
-                <p class="leading-tight mx-auto inline-block my-4 md:my-5"><em>Billed at ${{ Prices::$pianoteMembershipAnnualRegular }} per year.</em></p>
+                <h4 class="leading-tight mt-2 md:mt-3"><strong>Start playing beautiful music <br> for just <span class="text-pianote">${{ round((Prices::$plusSubscriptionAnnual / 12), 2) }}</span> a month.</strong></h4>
+                <p class="leading-tight mx-auto inline-block my-4 md:my-5"><em>Billed at ${{ Prices::$plusSubscriptionAnnual }} per year.</em></p>
                 <div class="w-full mx-auto sm:mx-0">
                     <p class="text-sm leading-relaxed">Get a full annual Pianote membership PLUS:<br>
                         <i class="fas fa-check text-pianote"></i> <span class="text-pianote">*NEW*</span> <strong>The Power Of Chords Course</strong> <em>(LIFETIME ACCESS)</em><br>
@@ -15,7 +15,7 @@
                         <i class="fas fa-check text-pianote"></i> <strong>500 Songs in 5 Days</strong> <em>(LIFETIME ACCESS)</em></p>
                     <a class="join w-full my-3 sm:my-5" style="background:#F61A30;" href="{{ $annualLink }}">Get Started</a>
                     <p class="text-center text-sm text-gray-300">
-                        <em><a href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-MONTH]=1&redirect=%2Forder">Or start a monthly membership <br class="inline sm:hidden"> for ${{ Prices::$pianoteMembershipMonthlyRegular }}/month.</a></em>
+                        <em><a href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-MONTH]=1&redirect=%2Forder">Or start a monthly membership <br class="inline sm:hidden"> for ${{ Prices::$plusSubscriptionMonthly }}/month.</a></em>
                     </p>
                 </div>
             </div>

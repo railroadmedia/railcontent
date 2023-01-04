@@ -12,11 +12,11 @@
                     <div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">
                         <h5 class="leading-none mb-3"><strong>Monthly</strong></h5>
                         <h1 class="inline-block leading-none">
-                            @if(Prices::$drumeoEdgeFull > Prices::$drumeoEdgeRegular)
-                                <s class="opacity-60">${{ Prices::$drumeoEdgeFull }}</s>
+                            @if(Prices::$plusSubscriptionMonthlyFull > Prices::$plusSubscriptionMonthly)
+                                <s class="opacity-60">${{ Prices::$plusSubscriptionMonthlyFull }}</s>
                             @endif
-                            <strong>${{ Prices::$drumeoEdgeRegular }}</strong></h1><p class="inline-block -mr-5">per month</p>
-                        <p class="text-drumeo text-sm my-4"><em>Only ${{ number_format((Prices::$drumeoEdgeRegular * 12) / 52, 2) }} per week.</em></p>
+                            <strong>${{ Prices::$plusSubscriptionMonthly }}</strong></h1><p class="inline-block -mr-5">per month</p>
+                        <p class="text-drumeo text-sm my-4"><em>Only ${{ number_format((Prices::$plusSubscriptionMonthly * 12) / 52, 2) }} per week.</em></p>
                         <div class="join blue smaller w-full transition-opacity duration-300 group-hover:opacity-80" style="max-width: 230px;">Get Started</div>
                     </div>
                     <div class="px-3 pt-5 md:pt-6 pb-9 md:pb-10" style="background: #f1f8ff;border-top: 2px solid #e6f2ff;">
@@ -34,11 +34,11 @@
                     <div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">
                         <h5 class="leading-none mb-3"><strong>ANNUAL</strong></h5>
                         <h1 class="inline-block leading-none">
-                            @if(Prices::$drumeoEdgeAnnualFull > Prices::$drumeoEdgeAnnual)
-                                <s class="opacity-60">${{ Prices::$drumeoEdgeAnnualFull }}</s>
+                            @if(Prices::$plusSubscriptionAnnualFull > Prices::$plusSubscriptionAnnual)
+                                <s class="opacity-60">${{ Prices::$plusSubscriptionAnnualFull }}</s>
                             @endif
-                            <strong>${{ Prices::$drumeoEdgeAnnual }}</strong></h1><p class="inline-block -mr-5">per year</p>
-                        <p class="text-drumeo text-sm my-4"><em>Save {{ round(100 - (100 * (Prices::$drumeoEdgeAnnual / (Prices::$drumeoEdgeRegular * 12)))) }}% vs monthly.</em></p>
+                            <strong>${{ Prices::$plusSubscriptionAnnual }}</strong></h1><p class="inline-block -mr-5">per year</p>
+                        <p class="text-drumeo text-sm my-4"><em>Save {{ round(100 - (100 * (Prices::$plusSubscriptionAnnual / (Prices::$plusSubscriptionMonthly * 12)))) }}% vs monthly.</em></p>
                         <div class="join blue smaller w-full transition-opacity duration-300 group-hover:opacity-80" style="max-width: 230px;">Get Started</div>
                     </div>
                     <div class="px-3 pt-5 md:pt-6 pb-9 md:pb-10" style="background: #f1f8ff;border-top: 2px solid #e6f2ff;">
@@ -56,7 +56,7 @@
                     {{--<div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">--}}
                         {{--<h5 class="leading-none mb-3"><strong>LIFETIME</strong></h5>--}}
                         {{--<h1 class="inline-block leading-none">--}}
-                            {{--<strong>${{ Prices::$drumeoEdgeLifetime }}</strong></h1>--}}
+                            {{--<strong>${{ Prices::$lifetimeMembership }}</strong></h1>--}}
                         {{--<p class="text-coaches text-sm my-4"><em>Or choose a payment plan on checkout.</em></p>--}}
                         {{--<div class="join smaller coaches w-full transition-opacity duration-300 group-hover:opacity-80" style="max-width: 230px;">Get Started</div>--}}
                     {{--</div>--}}

@@ -19,7 +19,7 @@
             <img class="inline-block sm:hidden h-12 mt-4" alt="mobile promo logo" src="{{ $promoLogoM }}">
             <h4 class="leading-tight my-2 uppercase">{!! $header !!}</h4>
             <a class="join {{ $theme }} my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>
-            <p class="leading-tight text-sm"><em>First year discount: <s class="opacity-40">${{ Prices::$drumeoEdgeAnnualFull }}</s> ${{ Prices::$drumeoEdgeAnnual }}.<br class="inline sm:hidden"> Cancel anytime. 90-day guarantee.</em></p>
+            <p class="leading-tight text-sm"><em>First year discount: <s class="opacity-40">${{ Prices::$plusSubscriptionAnnualFull }}</s> ${{ Prices::$plusSubscriptionAnnual }}.<br class="inline sm:hidden"> Cancel anytime. 90-day guarantee.</em></p>
             <h3 class="leading-tight mt-8 mb-4 sm:my-8 uppercase">{!!  $subDescription  !!}</h3>
         </div>
         <div style="font-size:0px">
@@ -125,7 +125,7 @@
         </div>
         <a class="join {{ $theme }} my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>
         <br>
-        <a class="inline-block text-light-navy mt-2" href="{{ $altButtonLink }}"><p><u><em>Or start a monthly membership for <br class="inline-block md:hidden">${{ Prices::$drumeoEdgeRegular }}/month. (no bonuses)</em></u></p></a>
+        <a class="inline-block text-light-navy mt-2" href="{{ $altButtonLink }}"><p><u><em>Or start a monthly membership for <br class="inline-block md:hidden">${{ Prices::$plusSubscriptionMonthly }}/month. (no bonuses)</em></u></p></a>
     </div>
 </section>
 </div>

@@ -2,18 +2,18 @@
 
 @php $orderLink = '/ecommerce/add-to-cart?products[guitar-quest]=1&promo-code=siah-deal&redirect=/order&payment-plan=1' @endphp
 @php $orderLinkAlt = '/ecommerce/add-to-cart?products[guitar-quest]=1&promo-code=siah-deal&redirect=/order&payment-plan=5' @endphp
-@php $productPrice = GuitareoPrices::$guitarQuestSpecial @endphp
+@php $productPrice = 47 @endphp
 
 @section('promo-banner')
     <section class="py-8 md:py-12 relative text-white text-center" style="z-index: 51;margin: 0 auto -70px; background:#000612;">
         <div class="max-w-screen-xl m-auto px-6 lg:flex lg:items-start">
             <img class="inline-block w-3/4 sm:w-full sm:max-w-sm mb-5 lg:mb-0 mx-auto lg:mx-0" src="https://musora.imgix.net/https%3A%2F%2Fguitareo.s3.amazonaws.com%2Flead-gen%2Fsong-in-an-hour%2Flogo-purple-discount.png?auto=format&ixlib=php-1.2.1&w=770&s=4d7d292914d2861e342201198a006f95" alt="logo purple">
             <div class="lg:pl-10 max-w-lg lg:max-w-2xl mx-auto lg:mx-0">
-                <p class="font-primary text-lg sm:text-xl"><strong class="font-black">CONTINUE YOUR JOURNEY <i class="fas fa-long-arrow-right mx-1" style="color:#6100a6;"></i> <span class="inline-block"> SAVE {{ round(100 - (100 * (GuitareoPrices::$guitarQuestSpecial / floatval($productPrices['guitar-quest']->price)))) }}% ON GUITAR QUEST</span></strong></p>
+                <p class="font-primary text-lg sm:text-xl"><strong class="font-black">CONTINUE YOUR JOURNEY <i class="fas fa-long-arrow-right mx-1" style="color:#6100a6;"></i> <span class="inline-block"> SAVE {{ round(100 - (100 * ($productPrice / floatval($productPrices['guitar-quest']->price)))) }}% ON GUITAR QUEST</span></strong></p>
                 <p class="font-primary text-sm sm:text-base my-4 leading-relaxed text-left">
                     Congratulations on taking the Song In An Hour Challenge. We’re so excited that you’ve started your guitar journey and we’re here to support you the rest of the way.
                     <br><br>
-                    Song In An Hour is actually the FIRST level of GuitarQuest. And because we hope you’ll keep learning with us, we’re giving you a {{ round(100 - (100 * (GuitareoPrices::$guitarQuestSpecial / floatval($productPrices['guitar-quest']->price)))) }}% discount to make things a little easier. Just click any of the big buttons on this page to continue your journey.
+                    Song In An Hour is actually the FIRST level of GuitarQuest. And because we hope you’ll keep learning with us, we’re giving you a {{ round(100 - (100 * ($productPrice / floatval($productPrices['guitar-quest']->price)))) }}% discount to make things a little easier. Just click any of the big buttons on this page to continue your journey.
                 </p>
                 <a title="Go To Order Page" href="{{ $orderLink }}" class="bg-goldenrod-gradient transition duration-500 linear px-12 py-1 inline-block uppercase text-black font-roboto-condensed-bold rounded-full text-lg">
                     GET MY DISCOUNT &raquo;
@@ -27,7 +27,7 @@
     >
         <img class="inline-block w-32" src="https://guitareo.s3.amazonaws.com/lead-gen/song-in-an-hour/logo-white.png">
         <p class="uppercase my-0 ml-3 inline-block align-middle text-sm sm:text-base text-left" style="line-height: 1.2!important;">
-            SAVE {{ round(100 - (100 * (GuitareoPrices::$guitarQuestSpecial / floatval($productPrices['guitar-quest']->price)))) }}% ON GUITAR QUEST<br>
+            SAVE {{ round(100 - (100 * ($productPrice / floatval($productPrices['guitar-quest']->price)))) }}% ON GUITAR QUEST<br>
         <s class="opacity-60">WAS ${{ floatval($productPrices['guitar-quest']->price) }}</s> <strong class="font-black text-goldenrod">ONLY ${{ $productPrice }}</strong>
         </p>
     </a>

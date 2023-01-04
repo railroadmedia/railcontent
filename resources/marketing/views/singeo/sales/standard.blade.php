@@ -98,7 +98,7 @@
     @include('_partials.layout.holiday.homepage-bottom-membership',[
         'logo' => 'https://singeo.s3.amazonaws.com/sales/promos/august/homepage_chart.png',
         'singeo' => true,
-        'joinText' => '<strong>Join Singeo for just $' . round(SingeoPrices::$singeoMembershipAnnual / 12, 2) . '/month</strong> <br class="hidden sm:inline"><strong class="text-promo">PLUS</strong> get 5 free bonuses worth $538.',
+        'joinText' => '<strong>Join Singeo for just $' . round(Prices::$plusSubscriptionAnnual / 12, 2) . '/month</strong> <br class="hidden sm:inline"><strong class="text-promo">PLUS</strong> get 5 free bonuses worth $538.',
         'annualLink' => '/ecommerce/add-to-cart?products[singeo-annual-recurring-membership]=1&products[singing-starter-kit]=1&products[the-essential-guide-to-beautiful-harmonies]=1&products[vowel-sounds-poster]=1&bonuses[PIANOTE-MEMBERSHIP-1-YEAR]=1&bonuses[GUITAREO-1-YEAR-MEMBERSHIP]=1&locked=true&redirect=/order',
         'bonusNum' => 5,
         'tileWidth' => 'w-1/2 sm:w-1/3 lg:w-1/5',

@@ -19,11 +19,11 @@
                 </div>
                 <h3 class="leading-tight my-3">
                     <strong>
-                        Join Guitareo for just ${{  round(GuitareoPrices::$guitareoMembershipAnnual / 12, 2) }}/month</strong> <br class="hidden sm:inline">
+                        Join Guitareo for just ${{  round(Prices::$plusSubscriptionAnnual / 12, 2) }}/month</strong> <br class="hidden sm:inline">
                     <strong class="text-promo">PLUS</strong> get 6 free bonuses worth $924.
                 </h3>
                 <a class="join promo bigger my-3 md:my-4 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="{{ $annualLink }}" {{--data-open="orderModal"--}}>GET Started &raquo;</a>
-                <p class="leading-tight text-sm"><em>Billed at ${{ GuitareoPrices::$guitareoMembershipAnnual }} per year.<br class="inline sm:hidden">  Cancel anytime. 90-day guarantee.</em></p>
+                <p class="leading-tight text-sm"><em>Billed at ${{ Prices::$plusSubscriptionAnnual }} per year.<br class="inline sm:hidden">  Cancel anytime. 90-day guarantee.</em></p>
                 <h4 class="leading-tight my-6 sm:my-8">
                     <strong>6 FREE BONUSES.</strong> <em>ONLY<br class="inline sm:hidden"> AVAILABLE UNTIL DECEMBER 26</em></h4>
 
@@ -84,7 +84,7 @@
                         // 'image' => 'https://guitareo.s3.amazonaws.com/sales/promos/july/survival_guide.jpg',
                         // 'title' => 'Survival Guide',
                         // 'description' => 'A handy 37-page book with all the essential chords, strumming patterns, scales, and riffs. ',
-                        // 'price' => GuitareoPrices::$survivalGuideFull,
+                        // 'price' => 5,
                         // 'online-ship' => "Free Shipping"
                         // ],
                     ]
@@ -122,10 +122,10 @@
                 @endforeach
             </div>
         </div>
-        {{-- <h4 class="leading-tight"><strong>Billed annually at <s class="opacity-60">${{ GuitareoPrices::$guitareoMembershipAnnualFull }}</s> ${{ GuitareoPrices::$guitareoMembershipAnnual }} per year.</strong><br class="inline sm:hidden"> <em class="text-coaches">(Save {{ round(100 - (100 * (GuitareoPrices::$guitareoMembershipAnnual / GuitareoPrices::$guitareoMembershipAnnualFull))) }}%.)</em></h4> --}}
+        {{-- <h4 class="leading-tight"><strong>Billed annually at <s class="opacity-60">${{ Prices::$plusSubscriptionAnnualFull }}</s> ${{ Prices::$plusSubscriptionAnnual }} per year.</strong><br class="inline sm:hidden"> <em class="text-coaches">(Save {{ round(100 - (100 * (Prices::$plusSubscriptionAnnual / Prices::$plusSubscriptionAnnualFull))) }}%.)</em></h4> --}}
         <a class="join bigger" href="/ecommerce/add-to-cart?redirect=/order&products[GUITAREO-1-YEAR-MEMBERSHIP]=1&products[guitarists-survival-kit]=1&products[guitar-quest]=1&products[rhythm-and-groove]=1&products[GUITAR-SYSTEM]=1&products[AGME-JAN-2019-SEMESTER]=1&products[GTME-OCT-2018-SEMESTER]=1&locked=true" style="background:#df0032;">Get Started &raquo;</a>
         <br>
-        <a class="monthly-alt" href="/ecommerce/add-to-cart?products[GUITAREO-1-MONTH-MEMBERSHIP]=1&redirect=/order&locked=true" style="color:#ABB5C2;"><p><u><em>Or start a monthly membership for <br class="inline-block md:hidden">${{ GuitareoPrices::$guitareoMembershipMonthly }}/month. (no bonuses)</em></u></p></a>
+        <a class="monthly-alt" href="/ecommerce/add-to-cart?products[GUITAREO-1-MONTH-MEMBERSHIP]=1&redirect=/order&locked=true" style="color:#ABB5C2;"><p><u><em>Or start a monthly membership for <br class="inline-block md:hidden">${{ Prices::$plusSubscriptionMonthly }}/month. (no bonuses)</em></u></p></a>
     </div>
 </section>
 </div>

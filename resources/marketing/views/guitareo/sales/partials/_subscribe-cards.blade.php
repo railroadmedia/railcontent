@@ -4,7 +4,7 @@
         {{--<img class="h-16 sm:h-28 lg:h-32 mb-3 md:mb-4 lazyload" data-src="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/https://guitareo.s3.amazonaws.com/sales/promos/april/international+guitar_logo.png" alt="play-better-solos">--}}
         <h2 class="leading-tight mb-3 md:mb-6 px-3"><strong>Learn what YOU want, get inspired, and <br class="hidden md:inline"> stay motivated with personal support.</strong></h2>
         <h6 class="text-navy">
-            <span class="text-coaches uppercase"> for only ${{ number_format((GuitareoPrices::$guitareoMembershipAnnual / 12), 2, '.', ',') }} a month</span>
+            <span class="text-coaches uppercase"> for only ${{ number_format((Prices::$plusSubscriptionAnnual / 12), 2, '.', ',') }} a month</span>
 
             {{--<br><em>(Cancel anytime, 90-Day Money Back Guarantee)</em>--}}
         </h6>
@@ -14,11 +14,11 @@
                     <div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">
                         <h5 class="leading-none mb-3"><strong>MONTHLY</strong></h5>
                         <h1 class="inline-block leading-none">
-                            @if(GuitareoPrices::$guitareoMembershipMonthlyFull > GuitareoPrices::$guitareoMembershipMonthly)
-                                <s class="opacity-60">${{ GuitareoPrices::$guitareoMembershipMonthlyFull }}</s>
+                            @if(Prices::$plusSubscriptionMonthlyFull > Prices::$plusSubscriptionMonthly)
+                                <s class="opacity-60">${{ Prices::$plusSubscriptionMonthlyFull }}</s>
                             @endif
-                            <strong>${{ GuitareoPrices::$guitareoMembershipMonthly }}</strong></h1> <p class="inline-block -mr-16">per month</p>
-                        <p class="text-sm my-4"><em>Only ${{ number_format((GuitareoPrices::$guitareoMembershipMonthly * 12) / 52, 2) }} per week.</em></p>
+                            <strong>${{ Prices::$plusSubscriptionMonthly }}</strong></h1> <p class="inline-block -mr-16">per month</p>
+                        <p class="text-sm my-4"><em>Only ${{ number_format((Prices::$plusSubscriptionMonthly * 12) / 52, 2) }} per week.</em></p>
                         <div class="join smaller w-full transition-opacity duration-300 group-hover:opacity-80" style="max-width: 230px;">Get Started</div>
                     </div>
                     <div class="px-3 pt-5 md:pt-6 pb-9 md:pb-10" style="background: #f1f8ff;border-top: 2px solid #e6f2ff;">
@@ -33,14 +33,14 @@
 
             <div class="w-full md:w-1/2 px-2 md:px-3 relative">
                 <p class="w-full px-4 pt-2 pb-4 -mb-3 bg-guitareo text-white rounded-t-2xl"><strong>BEST DEAL</strong></p>
-                <a href="{{ GuitareoPrices::$guitareoMembershipAnnualLink }}" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">
+                <a href="/ecommerce/add-to-cart?products[GUITAREO-1-YEAR-MEMBERSHIP]=1&redirect=/order&locked=true" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">
                     <div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">
                         <h5 class="leading-none mb-3"><strong>ANNUAL</strong></h5>
-                        @if(GuitareoPrices::$guitareoMembershipAnnualFull > GuitareoPrices::$guitareoMembershipAnnual)
-                            <h3 class="inline-block"><s class="opacity-60">${{ GuitareoPrices::$guitareoMembershipAnnualFull }}</s></h3>
+                        @if(Prices::$plusSubscriptionAnnualFull > Prices::$plusSubscriptionAnnual)
+                            <h3 class="inline-block"><s class="opacity-60">${{ Prices::$plusSubscriptionAnnualFull }}</s></h3>
                         @endif
-                        <h1 class="inline-block leading-none"><strong>${{ GuitareoPrices::$guitareoMembershipAnnual }}</strong></h1> <p class="inline-block mr-2">per year</p>
-                        <p class="text-sm my-4"><em>Save {{ round(100 - (100 * (GuitareoPrices::$guitareoMembershipAnnual / (GuitareoPrices::$guitareoMembershipMonthly * 12)))) }}% vs monthly.</em></p>
+                        <h1 class="inline-block leading-none"><strong>${{ Prices::$plusSubscriptionAnnual }}</strong></h1> <p class="inline-block mr-2">per year</p>
+                        <p class="text-sm my-4"><em>Save {{ round(100 - (100 * (Prices::$plusSubscriptionAnnual / (Prices::$plusSubscriptionMonthly * 12)))) }}% vs monthly.</em></p>
                         <div class="join smaller w-full transition-opacity duration-300 group-hover:opacity-80" style="max-width: 230px;">Get Started</div>
                     </div>
                     <div class="px-3 pt-5 md:pt-6 pb-9 md:pb-10" style="background: #f1f8ff;border-top: 2px solid #e6f2ff;">
@@ -51,7 +51,7 @@
                         <p>90-day money back guarantee.</p>
                     </div>
                 </a>
-                {{--<h4 class="bg-guitareo font-bebas rounded-full absolute top-0 right-0 -m-3 py-3 sm:py-3.5 px-4 sm:px-5 border-4 border-white">Save<br> {{ round(100 - (100 * (GuitareoPrices::$guitareoMembershipAnnual / GuitareoPrices::$guitareoMembershipAnnualFull))) }}%</h4>--}}
+                {{--<h4 class="bg-guitareo font-bebas rounded-full absolute top-0 right-0 -m-3 py-3 sm:py-3.5 px-4 sm:px-5 border-4 border-white">Save<br> {{ round(100 - (100 * (Prices::$plusSubscriptionAnnual / Prices::$plusSubscriptionAnnualFull))) }}%</h4>--}}
             </div>
             {{--<div class="w-full md:w-1/2 px-2 md:px-3 relative">--}}
                 {{--<p class="w-full px-4 pt-2 pb-4 -mb-3 --}}{{--bg-guitareo--}}{{-- text-black rounded-t-2xl" style="background: linear-gradient(to bottom, #feab01, #fd7a00);"><strong>BEST DEAL</strong></p>--}}
@@ -59,7 +59,7 @@
                     {{--<div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">--}}
                         {{--<h5 class="leading-none mb-3"><strong>LIFETIME</strong></h5>--}}
                         {{--<h1 class="inline-block leading-none">--}}
-                            {{--<strong>${{ GuitareoPrices::$guitareoMembershipLifetime }}</strong></h1>--}}
+                            {{--<strong>$1200</strong></h1>--}}
                         {{--<p class="text-coaches text-sm my-4"><em>One Time Payment</em></p>--}}
                         {{--<div class="join smaller coaches w-full transition-opacity duration-300 group-hover:opacity-80" style="max-width: 230px;">Get Started</div>--}}
                     {{--</div>--}}
@@ -75,7 +75,7 @@
         </div>
         {{--<br><br>--}}
         {{--<a class="join methodcta" href="{{ URL::Route('shopping-cart.to-cart.api') }}?products[DLM-1-year]=1&products[Drumeo-Sticks]=1&locked=true">Click Here To Get Started &raquo;</a><br>--}}
-        {{--<a class="methodcta monthly-alt" href="/ecommerce/add-to-cart?products[GUITAREO-1-MONTH-MEMBERSHIP]=1&redirect=/order"><p><u><em>Or click here to start a monthly membership for <br class="inline md:hidden">${{ GuitareoPrices::$guitareoMembershipMonthly }}/month.</em></u></p></a>--}}
+        {{--<a class="methodcta monthly-alt" href="/ecommerce/add-to-cart?products[GUITAREO-1-MONTH-MEMBERSHIP]=1&redirect=/order"><p><u><em>Or click here to start a monthly membership for <br class="inline md:hidden">${{ Prices::$plusSubscriptionMonthly }}/month.</em></u></p></a>--}}
     </div>
 </section>
 

@@ -45,7 +45,7 @@
 
                     <p class="uppercase w-full leading-normal mt-2">
                         {{--<strong class="font-black leading-tight inline-block mb-1">{!!  $bonus['title']  !!}</strong><br>--}}
-                        <span style="text-transform:uppercase; display:inline-block;"><strong class="text-promo">${{Prices::$drumeoEdgeAnnualFull}}</strong></span>
+                        <span style="text-transform:uppercase; display:inline-block;"><strong class="text-promo">${{Prices::$plusSubscriptionAnnualFull}}</strong></span>
                     </p>
                 </div>
 
@@ -122,11 +122,11 @@
                     </div>
                 @endforeach
                 {{-- <p class=" mt-4 md:mt-5" style="display:inline-block;background: -webkit-linear-gradient(20deg, #03c8ac, #0976db, #9a01ee, #f61a30);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"><strong>By joining today, we’ll donate 20% of your new membership<br class="hidden sm:inline"> towards the <a target="_blank" href="https://musicounts.ca/en/take-action/ways-of-giving/fundraise-on-musicounts-behalf/fundraisers-supporting-musicounts/give-the-gift-of-music-with-musora/"><u>MusiCounts Band Aid Program</u></a>.</strong></p> --}}
-                <h4 class="leading-tight mt-4"><strong>Only $20/month (billed annually at ${{ Prices::$drumeoEdgeAnnual }}).</strong></h4>
+                <h4 class="leading-tight mt-4"><strong>Only $20/month (billed annually at ${{ Prices::$plusSubscriptionAnnual }}).</strong></h4>
                 <a class="join blue bigger my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $annualLink }}" {{--data-open="orderModal"--}}>GET Started &raquo;</a>
-                {{-- <p class="leading-tight">Billed annually at <s class="opacity-60">${{ Prices::$drumeoEdgeAnnualFull }}</s>${{ Prices::$drumeoEdgeAnnual }} per year.</p> --}}
+                {{-- <p class="leading-tight">Billed annually at <s class="opacity-60">${{ Prices::$plusSubscriptionAnnualFull }}</s>${{ Prices::$plusSubscriptionAnnual }} per year.</p> --}}
                 <br>
-                <a class="inline-block text-light-navy mt-2" href="/ecommerce/add-to-cart?products[DLM-1-month]=1&locked=true"><p><u><em>Or start a monthly membership for <br class="inline-block md:hidden">${{ Prices::$drumeoEdgeRegular }}/month. (no bonuses)</em></u></p></a>
+                <a class="inline-block text-light-navy mt-2" href="/ecommerce/add-to-cart?products[DLM-1-month]=1&locked=true"><p><u><em>Or start a monthly membership for <br class="inline-block md:hidden">${{ Prices::$plusSubscriptionMonthly }}/month. (no bonuses)</em></u></p></a>
 
             </div>
         </div>

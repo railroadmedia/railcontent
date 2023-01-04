@@ -16,7 +16,7 @@
     </div>
     <div class="horizontal-bonuses mx-auto max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-xl" style="font-size: 0;">
         {{-- <img class="h-12 md:h-14 lg:h-16 lazyload" data-src="https://cdn.musora.com/image/fetch/w_420,q_auto:best/https://pianote.s3.amazonaws.com/logo/pianote-logo-red.png" alt="6th-anniversary-logo"> --}}
-        {{-- <h2 class="mt-3 leading-tight"><strong>Start playing beautiful music <br class="hidden sm:inline">for just <span class="text-pianote">${{ round((Prices::$pianoteMembershipAnnualRegular / 12), 2) }}</span> a month.</strong></h2> --}}
+        {{-- <h2 class="mt-3 leading-tight"><strong>Start playing beautiful music <br class="hidden sm:inline">for just <span class="text-pianote">${{ round((Prices::$plusSubscriptionAnnual / 12), 2) }}</span> a month.</strong></h2> --}}
         <h5 class="mb-5 md:mb-7 mt-2 text-coaches" style="line-height: 1.4em;">
             {{-- <img class="inline-block align-middle mr-2 h-14 mb-2" src="https://cdn.musora.com/image/fetch/w_160,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/piano-month/national-piano-month-logo-white.png">
             <br class="inline sm:hidden">
@@ -102,13 +102,13 @@
     {{-- <p class="mt-5 md:mt-7" style="display:inline-block;background: -webkit-linear-gradient(20deg, #03c8ac, #0976db, #9a01ee, #f61a30);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"><strong>By joining today, we’ll donate 20% of your new membership<br class="hidden sm:inline"> towards the <a target="_blank" href="https://musicounts.ca/en/take-action/ways-of-giving/fundraise-on-musicounts-behalf/fundraisers-supporting-musicounts/give-the-gift-of-music-with-musora/"><u>MusiCounts Band Aid Program</u></a>.</strong></p> --}}
     <h4 class="mt-2 leading-normal">
         {{--<span class="text-coaches">PIANOTE ANNUAL MEMBERSHIP</span><br>--}}
-        <strong>Billed annually at ${{ Prices::$pianoteMembershipAnnualRegular }} per year.</strong>
-        {{--<br class="inline sm:hidden"><em class="text-coaches">(Normally ${{ Prices::$pianoteMembershipAnnualFull }}, Save {{ round(100 - (100 * (Prices::$pianoteMembershipAnnualRegular / Prices::$pianoteMembershipAnnualFull))) }}%.)</em>--}}
+        <strong>Billed annually at ${{ Prices::$plusSubscriptionAnnual }} per year.</strong>
+        {{--<br class="inline sm:hidden"><em class="text-coaches">(Normally ${{ Prices::$plusSubscriptionAnnualFull }}, Save {{ round(100 - (100 * (Prices::$plusSubscriptionAnnual / Prices::$plusSubscriptionAnnualFull))) }}%.)</em>--}}
     </h4>
     <a class="join bigger" href="{{ $annualLink }}">GET STARTED</a>
     <a class="text-light-navy monthly-alt" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-MONTH]=1&redirect=%2Forder">
         <p class="mb-20">
-            <u><em>Or start a monthly membership for <br class="inline-block md:hidden">${{ Prices::$pianoteMembershipMonthlyRegular }}/month.</em></u>
+            <u><em>Or start a monthly membership for <br class="inline-block md:hidden">${{ Prices::$plusSubscriptionMonthly }}/month.</em></u>
         </p>
     </a>
 </section>

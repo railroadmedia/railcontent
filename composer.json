@@ -72,9 +72,7 @@
             "helpers/helpers.php",
             "app/Modules/UserManagementSystem/helpers/user_management_system_helpers.php",
             "app/Modules/Brand/helpers/brand_helpers.php",
-            "app/Modules/Brand/helpers/prices.php",
-            "app/Modules/Brand/helpers/guitareoprices.php",
-            "app/Modules/Brand/helpers/singeoprices.php"
+            "app/Modules/Brand/helpers/prices.php"
         ]
     },
     "autoload-dev": {

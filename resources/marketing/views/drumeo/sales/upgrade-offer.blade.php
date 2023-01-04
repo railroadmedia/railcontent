@@ -185,7 +185,7 @@
                     <a class="join blue bigger my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[quietpad]=1&products[Drumeo-VaterSticks]=1&products[the-drummers-toolbox-book]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&bonuses[drum-technique-made-easy-pack]=1&bonuses[independence-made-easy-pack]=1&bonuses[four-weeks-to-better-drum-fills]=1&bonuses[learn-songs-faster-pack]=1&locked=true&promo-code=full-time">Keep My Membership &raquo;</a>
 
                     <br><br class="inline-block md:hidden">
-                    <a class="monthly-alt" href="/ecommerce/add-to-cart?products[DLM-1-month]=1&locked=true"><p><u><em>Or start a monthly membership for <br class="inline-block md:hidden">${{ Prices::$drumeoEdgeRegular }}/month. (no bonuses)</em></u></p></a>
+                    <a class="monthly-alt" href="/ecommerce/add-to-cart?products[DLM-1-month]=1&locked=true"><p><u><em>Or start a monthly membership for <br class="inline-block md:hidden">${{ Prices::$plusSubscriptionMonthly }}/month. (no bonuses)</em></u></p></a>
                 </div>
         </section>
         <section class="content-section text-center" style="background: #0c1429;">

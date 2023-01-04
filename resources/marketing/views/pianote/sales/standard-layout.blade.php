@@ -1197,12 +1197,12 @@
                             @else
                                 <td class="rounded-b-xl">
                                     @if(empty($trialVersion))
-                                        @if(number_format(Prices::$pianoteMembershipAnnualRegular, 2) == intval(Prices::$pianoteMembershipAnnualRegular))
-                                            <strong>${{  round(Prices::$pianoteMembershipAnnualRegular / 12, 2) }}</strong>/mo<br>
+                                        @if(number_format(Prices::$plusSubscriptionAnnual, 2) == intval(Prices::$plusSubscriptionAnnual))
+                                            <strong>${{  round(Prices::$plusSubscriptionAnnual / 12, 2) }}</strong>/mo<br>
                                         @else
-                                            <strong>${{  number_format(Prices::$pianoteMembershipAnnualRegular / 12, 2)  }}</strong>/mo<br>
+                                            <strong>${{  number_format(Prices::$plusSubscriptionAnnual / 12, 2)  }}</strong>/mo<br>
                                         @endif
-                                        <em>Billed annually at ${{  Prices::$pianoteMembershipAnnualRegular }}</em><br><br>
+                                        <em>Billed annually at ${{  Prices::$plusSubscriptionAnnual }}</em><br><br>
                                         Unlimited lessons & support.
                                     @else
                                         <strong>Free Trial</strong><br>&nbsp;

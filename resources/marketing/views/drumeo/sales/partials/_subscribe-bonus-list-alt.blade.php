@@ -19,12 +19,12 @@
                 </div>
                 <h3 class="leading-tight my-3">
                     <strong>
-                        Join Drumeo for just ${{  round(Prices::$drumeoEdgeAnnual / 12, 2) }}/month</strong> <br class="hidden sm:inline">
+                        Join Drumeo for just ${{  round(Prices::$plusSubscriptionAnnual / 12, 2) }}/month</strong> <br class="hidden sm:inline">
                     <strong class="text-promo">PLUS</strong> get 10 free bonuses worth $1228.94.
 
                 </h3>
                 <a class="join promo bigger my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="{{ $annualLink }}" {{--data-open="orderModal"--}}>GET Started &raquo;</a>
-                <p class="leading-tight text-sm"><em>Billed at ${{ Prices::$drumeoEdgeAnnual }} per year.<br class="inline sm:hidden">  Cancel anytime. 90-day guarantee.</em></p>
+                <p class="leading-tight text-sm"><em>Billed at ${{ Prices::$plusSubscriptionAnnual }} per year.<br class="inline sm:hidden">  Cancel anytime. 90-day guarantee.</em></p>
                 <h4 class="leading-tight my-6 sm:my-8">
                     <strong>10 FREE BONUSES.</strong> <em>ONLY<br class="inline sm:hidden"> AVAILABLE UNTIL DECEMBER 26</em></h4>
             </div>
@@ -137,11 +137,11 @@
                 </div>
             @endforeach
             {{-- <p class=" mt-4 md:mt-5" style="display:inline-block;background: -webkit-linear-gradient(20deg, #03c8ac, #0976db, #9a01ee, #f61a30);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"><strong>By joining today, we’ll donate 20% of your new membership<br class="hidden sm:inline"> towards the <a target="_blank" href="https://musicounts.ca/en/take-action/ways-of-giving/fundraise-on-musicounts-behalf/fundraisers-supporting-musicounts/give-the-gift-of-music-with-musora/"><u>MusiCounts Band Aid Program</u></a>.</strong></p> --}}
-            {{--            <h4 class="leading-tight mt-4"><strong>Only $12.50/month <br class="inline sm:hidden">(billed annually at ${{ Prices::$drumeoEdgeAnnual }}).</strong></h4>--}}
+            {{--            <h4 class="leading-tight mt-4"><strong>Only $12.50/month <br class="inline sm:hidden">(billed annually at ${{ Prices::$plusSubscriptionAnnual }}).</strong></h4>--}}
             <a class="join promo bigger my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $annualLink }}" {{--data-open="orderModal"--}}>GET Started &raquo;</a>
-            {{-- <p class="leading-tight">Billed annually at <s class="opacity-60">${{ Prices::$drumeoEdgeAnnualFull }}</s>${{ Prices::$drumeoEdgeAnnual }} per year.</p> --}}
+            {{-- <p class="leading-tight">Billed annually at <s class="opacity-60">${{ Prices::$plusSubscriptionAnnualFull }}</s>${{ Prices::$plusSubscriptionAnnual }} per year.</p> --}}
             <br>
-            <a class="inline-block text-light-navy mt-2" href="/ecommerce/add-to-cart?products[DLM-1-month]=1&locked=true"><p><u><em>Or start a monthly membership for <br class="inline-block md:hidden">${{ Prices::$drumeoEdgeRegular }}/month. (no bonuses)</em></u></p></a>
+            <a class="inline-block text-light-navy mt-2" href="/ecommerce/add-to-cart?products[DLM-1-month]=1&locked=true"><p><u><em>Or start a monthly membership for <br class="inline-block md:hidden">${{ Prices::$plusSubscriptionMonthly }}/month. (no bonuses)</em></u></p></a>
 
         </div>
     </div>

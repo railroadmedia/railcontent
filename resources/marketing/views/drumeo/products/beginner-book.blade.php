@@ -423,7 +423,7 @@
     <div class="edge-banner text-center">
         <div class="row">
             <p><strong> ** Every Book Includes A Drumeo
-                    <br class="hide-for-medium"> 30-Day Membership Pass (${{ Prices::$drumeoEdgeFull }} Value) ** </strong></p>
+                    <br class="hide-for-medium"> 30-Day Membership Pass (${{ Prices::$plusSubscriptionMonthlyFull }} Value) ** </strong></p>
         </div>
     </div>
 

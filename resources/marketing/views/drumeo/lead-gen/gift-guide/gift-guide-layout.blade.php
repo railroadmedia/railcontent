@@ -66,7 +66,7 @@
                         ])
 
             @include("drumeo.lead-gen.gift-guide._item-card", [
-                        "price" => Prices::$drumeoEdgeAnnual,
+                        "price" => Prices::$plusSubscriptionAnnual,
                         "popularity" => "100",
                         "stockingStuffer" => "TRUE",
                         "rockDrummer" => "TRUE",
