@@ -1,6 +1,5 @@
 <form id="commentform" name="drumeo" method="post" action="{{ get_musora_brand_base_url() }}/ecommerce/access-codes/redeem">
     <input type="hidden" name="credentials_type" value="new">
-    <input type="hidden" name="redirect" value="/members">
     <div class="row">
         <div class="columns">
             <p class="input-describer">Code</p>

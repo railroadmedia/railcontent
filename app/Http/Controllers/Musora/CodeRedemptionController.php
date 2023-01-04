@@ -43,14 +43,14 @@ class CodeRedemptionController extends BaseController
         // todo: better way to prevent abuse?
         session()->push('claimed_hlag', true);
 
-        try{
+        try {
             $code = $this->accessCodeService->generateAccessCode([124], 'drumeo');
             // 124 is id for "Drumeo Edge Membership - Monthly" (sku: DLM-1-month)
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             error_log($e);
         }
 
-        if(!$code){
+        if (!$code) {
             Mail::send(
                 'emails.general',
                 [
@@ -59,8 +59,9 @@ class CodeRedemptionController extends BaseController
                         'access code. Please look up info about the user to see if maybe they\'ve tried again ' .
                         'successfully. If they haven\'t, please email them informing help on the way and then ' .
                         'development asking for a code to send them. The user\'s email is: ' .
-                        $request->get('email') . ' (name: '  . $request->get('first_name')  . ' ' .
-                        $request->get('last_name') . ')'],
+                        $request->get('email') . ' (name: ' . $request->get('first_name') . ' ' .
+                        $request->get('last_name') . ')'
+                ],
                 function (\Illuminate\Mail\Message $message) use ($request) {
                     $message->from('system@drumeo.com', 'Drumeo');
                     $message->to('support@drumeo.com')->subject('[Drumeo Edge] Your Free 30-Day Access Code');
@@ -88,12 +89,12 @@ class CodeRedemptionController extends BaseController
             ->with(['success' => 'Your code has been sent to your email!']);
     }
 
-    public function renderNewAccountRedeemPage(    )
+    public function renderNewAccountRedeemPage()
     {
         return view('musora.pages.redeem.card-redeem-theme', ['newAccount' => true]);
     }
 
-    public function renderNewAccountThomannRedeemPage(    )
+    public function renderNewAccountThomannRedeemPage()
     {
         return view('musora.pages.redeem.thomann-redeem-theme', ['newAccount' => true]);
     }
@@ -105,13 +106,27 @@ class CodeRedemptionController extends BaseController
 
     public function roland()
     {
-        return view('pianote.sales.roland');
+        return view('pianote.sales.roland', ['redirectUrl' => get_musora_brand_base_url() . '/pianote']);
     }
 
     public function sonor()
     {
-        return view('drumeo.sales.trials.sonor');
+        return view('drumeo.sales.trials.sonor', ['redirectUrl' => get_musora_brand_base_url() . '/drumeo']);
     }
 
+    public function showPianoteRedeemPageForNewUsers()
+    {
+        return view(
+            'pianote.access-code-redeem.access-code-redeem-page',
+            ['newAccount' => true, 'redirectUrl' => get_musora_brand_base_url() . '/pianote']
+        );
+    }
 
+    public function showPianoteRedeemPageForExistingUsers()
+    {
+        return view(
+            'pianote.access-code-redeem.access-code-redeem-page',
+            ['newAccount' => false, 'redirectUrl' => get_musora_brand_base_url() . '/pianote']
+        );
+    }
 }

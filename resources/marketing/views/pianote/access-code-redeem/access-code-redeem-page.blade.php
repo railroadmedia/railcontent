@@ -366,7 +366,7 @@
         @if($newAccount)
             @if(empty($noSwitch))
                 <div class="redeem-switcher">
-                    <span class="red"><i class="fas fa-user"></i> Existing Member? <a href="/redeem/existing">Click here to add your access to your existing account.</a> </span><br>
+                    <span class="red"><i class="fas fa-user"></i> Existing Member? <a href="/pianote/redeem/existing">Click here to add your access to your existing account.</a> </span><br>
                     (The form below is only for new accounts)
                 </div>
             @endif
@@ -378,7 +378,7 @@
             <form id="commentform" name="pianote" method="post" action="{{ get_musora_brand_base_url() }}/ecommerce/access-codes/redeem">
                 {{ csrf_field() }}
                 <input type="hidden" name="credentials_type" value="new">
-                <input type="hidden" name="redirect" value="/members">
+                <input type="hidden" name="redirect" value="{{ $redirectUrl ?? '/members' }}">
                 <div class="container mx-auto clearfix">
                     <div class="flex flex-wrap w-full">
                         <p class="w-full input-describer">Code</p>
@@ -431,7 +431,7 @@
         @else
             @if(empty($noSwitch))
                 <div class="redeem-switcher">
-                    <span class="red"><i class="fas fa-user-slash"></i> Not already a member? <a href="/redeem">Click here to redeem on a new Pianote account.</a> </span><br>
+                    <span class="red"><i class="fas fa-user-slash"></i> Not already a member? <a href="/pianote/redeem">Click here to redeem on a new Pianote account.</a> </span><br>
                     (The form below is only for existing members)
                 </div>
             @endif
@@ -442,7 +442,7 @@
 
             <form id="commentform" name="pianote" method="post" action="{{ get_musora_brand_base_url() }}/ecommerce/access-codes/redeem">
                 <input type="hidden" name="credentials_type" value="existing">
-                <input type="hidden" name="redirect" value="/members">
+                <input type="hidden" name="redirect" value="{{ $redirectUrl ?? '/members' }}">
                 {{ csrf_field() }}
 
                 <div class="container mx-auto  clearfix">
