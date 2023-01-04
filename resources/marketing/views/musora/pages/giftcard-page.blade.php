@@ -157,7 +157,7 @@
         });
 
     </script>
-    <script type="text/javascript" src="{{ asset('/marketing/js/sliding-anchor.js') }}"></script>
+
 
     {{-- Platform --}}
     <script src="{{ mix('/platform/js/manifest.js') }}"></script>

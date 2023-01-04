@@ -37,7 +37,7 @@ Route::domain('{drumeoDomain}')
     Route::get('/drumfest', [SalesController::class, 'drumFest']);
     Route::get('/awards/', [SalesController::class, 'awards']);
 
-    Route::get('/trial', [SalesController::class, 'trial']);
+    Route::get('/trial', [SalesController::class, 'home']);
     Route::get('/earthworks', [SalesController::class, 'earthWorks']);
     Route::get('/coaches-quiz', [SalesController::class, 'coachesQuiz']);
     Route::get('/30-day-trial', [SalesController::class, 'thirtyDayTrial']);
@@ -49,7 +49,7 @@ Route::domain('{drumeoDomain}')
     Route::get('/vdrums', [SalesController::class, 'vDrums']);
     Route::get('/sonor/', [SalesController::class, 'sonor']);
     Route::get('/coach-trial', [SalesController::class, 'coachTrial']);
-    Route::get('/choose-your-trial', [SalesController::class, 'chooseTrial']);
+    Route::get('/choose-your-trial', [SalesController::class, 'choosePlan']);
     Route::get('/earthworks-trial', [SalesController::class, 'earthWorksTrial']);
     Route::get('/coaches-quiz-trial', [SalesController::class, 'coachQuizTrial']);
     Route::get('/choose-your-trial-month', [SalesController::class, 'chooseTrialMonth']);
