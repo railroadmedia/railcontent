@@ -1,4 +1,4 @@
-@extends('drumeo._partials.layout-template')
+@extends('drumeo._partials.global-layout')
 
 @section('global-head')
     @parent
@@ -770,7 +770,7 @@
                         </div>
                     {{--@else--}}
                         {{--<div class="flex flex-wrap sm:flex-nowrap items-center text-left w-full max-w-3xl mx-auto xl:w-7/12">--}}
-                            {{--<a href="/laravel/public/shopping-cart/api/query?products[30-day-drummer]=1&products[Drumeo-VaterSticks]=1&products[drumeo_access_30-days]=1&locked=true" class="px-5 sm:px-7 lg:px-9 py-7 sm:py-9 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-1/2" style="background-color:#d4eaff;">--}}
+                            {{--<a href="/ecommerce/add-to-cart?products[30-day-drummer]=1&products[Drumeo-VaterSticks]=1&products[drumeo_access_30-days]=1&locked=true" class="px-5 sm:px-7 lg:px-9 py-7 sm:py-9 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-1/2" style="background-color:#d4eaff;">--}}
                                 {{--<h3><strong>30-Day Drummer</strong></h3>--}}
                                 {{--<p class="text-sm mt-2 mb-5">Just The Course + 2 Bonuses worth $42.94.</p>--}}
                                 {{--<h2 class="inline-block"><strong class="text-4xl">${{ Prices::$thirtyDayDrummer }}</strong></h2> <p class="inline-block text-xs">one time payment.</p><br>--}}
@@ -787,7 +787,7 @@
                                 {{--<i class="fas fa-check text-drumeo mr-1"></i> Lifetime Course Access<br>--}}
                                 {{--<i class="fas fa-check text-drumeo mr-1"></i> 90-Day Money Back Guarantee</p>--}}
                             {{--</a>--}}
-                            {{--<a href="/laravel/public/shopping-cart/api/query?products[DLM]=1,year,1&products[30-day-drummer]=1&products[practicepad]=1&products[Drumeo-VaterSticks]=2&products[BeginnerBook]=1&locked=true" class="px-5 sm:px-7 lg:px-9 py-7 sm:py-11 sm:-ml-5 z-10 relative rounded-xl bg-white shadow-lg w-full sm:w-1/2">--}}
+                            {{--<a href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-drummer]=1&products[practicepad]=1&products[Drumeo-VaterSticks]=2&products[BeginnerBook]=1&locked=true" class="px-5 sm:px-7 lg:px-9 py-7 sm:py-11 sm:-ml-5 z-10 relative rounded-xl bg-white shadow-lg w-full sm:w-1/2">--}}
                                 {{--<h3><strong>Unlimited Lessons</strong></h3>--}}
                                 {{--<p class="text-sm mt-2 mb-5">1 Year of Drumeo + 5 Bonuses worth $231.89.</p>--}}
                                 {{--<h2 class="inline-block"><strong class="text-4xl">$20</strong>/mo</h2> <p class="inline-block text-xs">Billed annually at $240/yr.</p><br>--}}
@@ -830,32 +830,22 @@
 {{--                    ])--}}
 {{--                @endif--}}
                 @include('drumeo.products.partials.question-dropdown-tw', [
-                "customClass" => "sm:rounded-full",
-                "question" => true,
                 "title" => "Do I need to attend the lessons live?",
                 "description" => "The weekday workouts are pre-recorded videos you can access on your own schedule – and the weekly live Q&A sessions are totally optional, and they’ll also include a recording that you can watch or re-watch anytime.",
                 ])
                 @include('drumeo.products.partials.question-dropdown-tw', [
-                "customClass" => "sm:rounded-full",
-                "question" => true,
                 "title" => "What if I’m going to miss a day (or two, or more)?",
                 "description" => "That’s totally fine. The course is meant to be flexible if you miss a day here or there. There are a few buffer days mixed in PLUS the lessons are short enough that you could watch 2-3 in a single session if you ever need to catch up.",
                 ])
                 @include('drumeo.products.partials.question-dropdown-tw', [
-                "customClass" => "sm:rounded-full",
-                "question" => true,
                 "title" => "Do I need a full drum set to complete the course?",
                 "description" => "The lessons work on both electric and acoustic drum sets. While you can even get value with just a practice pad & sticks, it’s recommended that you have access to a drum set to get the most from this course.",
                 ])
                 @include('drumeo.products.partials.question-dropdown-tw', [
-                "customClass" => "sm:rounded-full",
-                "question" => true,
                 "title" => "How much time per week will this course require?",
                 "description" => "30-Day Drummer gives you guided daily drum workouts for thirty days – with flex days built in for when life happens. With each workout being 10-15 minutes, you can miss a workout and make it up the next day or later in the week.",
                 ])
                 @include('drumeo.products.partials.question-dropdown-tw', [
-                "customClass" => "sm:rounded-full",
-                "question" => true,
                 "title" => "What devices can I access the course on?",
                 "description" => "30-Day Drummer is available on your laptop, tablet, or phone. You’ll also have access through the Drumeo app after you’ve completed your purchase of the course.",
                 ])
@@ -956,5 +946,5 @@
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/js/sliding-anchor.js') }}"></script>
+
 @stop

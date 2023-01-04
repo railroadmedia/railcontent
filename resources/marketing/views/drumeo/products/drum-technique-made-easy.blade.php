@@ -73,7 +73,7 @@
             <h3>Drum Technique Made Easy is a 26-week
                 <br class="inline lg:hidden">online course with Bruce Becker & Jared Falk.</h3>
 
-            <div><a href="/laravel/public/shopping-cart/api/query?products[drum-technique-made-easy-pack]=1" class="join">Get Started &raquo;</a></div>
+            <div><a href="/ecommerce/add-to-cart?products[drum-technique-made-easy-pack]=1" class="join">Get Started &raquo;</a></div>
 
             <p class="uppercase price">
                 @if(Prices::$dtmeFull > Prices::$dtmeRegular)
@@ -91,7 +91,7 @@
                     <iframe class="reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/400749789?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
                 </div>
                 <br>
-                <a href="/laravel/public/shopping-cart/api/query?products[drum-technique-made-easy-pack]=1" class="join">Get Started &raquo;</a>
+                <a href="/ecommerce/add-to-cart?products[drum-technique-made-easy-pack]=1" class="join">Get Started &raquo;</a>
             </div>
         </div>
     </header>
@@ -656,7 +656,7 @@
                 Bruce Becker’s 26-Week Online <br class="inline lg:hidden">
                 Course For Just ${{ round(Prices::$dtmeRegular / 26, 2) }} Per Week</h1>
 
-            <div><a href="/laravel/public/shopping-cart/api/query?products[drum-technique-made-easy-pack]=1" class="join">Get Started &raquo;</a></div>
+            <div><a href="/ecommerce/add-to-cart?products[drum-technique-made-easy-pack]=1" class="join">Get Started &raquo;</a></div>
 
             <h2 class="uppercase">
                 @if(Prices::$dtmeFull > Prices::$dtmeRegular)

@@ -1,4 +1,4 @@
-@extends('drumeo._partials.layout-template')
+@extends('drumeo._partials.global-layout')
 
 @section('global-head')
     <title>New Drummers Start Here | Drumeo</title>
@@ -74,7 +74,7 @@
             <h4 class="text-yellow-400 mb-3 md:mb-5"><strong>ONLY
                     @if(Prices::$ndshFull > Prices::$ndshRegular) <s class="opacity-60">${{ Prices::$ndshFull }}</s> @endif
                     ${{ Prices::$ndshRegular }}</strong></h4>
-            <a class="join ndsh" href="/laravel/public/shopping-cart/api/query?products[new-drummers-start-here]=1">Start Drumming &raquo;</a>
+            <a class="join ndsh" href="/ecommerce/add-to-cart?products[new-drummers-start-here]=1">Start Drumming &raquo;</a>
         </div>
     </header>
 
@@ -584,7 +584,7 @@
                     @if(Prices::$ndshFull > Prices::$ndshRegular) <s class="opacity-60">${{ Prices::$ndshFull }}</s> @endif
                     ${{ Prices::$ndshRegular }}</strong></h4>
 
-            <a href="/laravel/public/shopping-cart/api/query?products[new-drummers-start-here]=1" class="join ndsh w-2/3 md:-mt-4">START DRUMMING &raquo;</a>
+            <a href="/ecommerce/add-to-cart?products[new-drummers-start-here]=1" class="join ndsh w-2/3 md:-mt-4">START DRUMMING &raquo;</a>
 
             <div class="inline-block w-full px-3 md:px-4 mt-5 md:mt-8 text-light-navy text-4xl md:text-5xl">
                 <i class="fab mx-1 fa-cc-visa"></i>
@@ -601,28 +601,19 @@
         </div>
     </section>
 
-    <section class="text-center text-white py-10 md:py-20 lg:py-24" style="background:#000a1e;">
+    <section class="text-center py-10 md:py-20 lg:py-24" style="background:#000a1e;">
         <div class="container mx-auto">
-            <h3><strong>Still have questions?</strong></h3>
+            <h3 class="text-white"><strong>Still have questions?</strong></h3>
             <div class="dropdowns">
             @include('drumeo.products.partials.question-dropdown-tw', [
-                    "customClass" => "border-blue md:rounded-full",
-                    "customArrow" => "text-blue",
-                    "question" => true,
                     "title" => "Do I need a full drum set to complete the course?",
                     "description" => 'The lessons work on both electric and acoustic drum sets. While you can even get value with just a practice pad & sticks, it’s recommended that you have access to a drum set to get the most from this course.',
                     ])
             @include('drumeo.products.partials.question-dropdown-tw', [
-                    "customClass" => "border-blue md:rounded-full",
-                    "customArrow" => "text-blue",
-                    "question" => true,
                     "title" => "How much time per week will this course require?",
                     "description" => 'It’s up to you and your schedule! New Drummers Start Here is designed to be flexible so you can work through it at your own pace. Or, if you’re super motivated you could cruise the entire course in a week. Every drummer will be different!',
                     ])
             @include('drumeo.products.partials.question-dropdown-tw', [
-                    "customClass" => "border-blue md:rounded-full",
-                    "customArrow" => "text-blue",
-                    "question" => true,
                     "title" => "What devices can I access the course on?",
                     "description" => 'New Drummers Start Here is available on your laptop, tablet, or phone. You’ll also have access through the Drumeo app after you’ve completed your purchase of the course.',
                     ])
@@ -635,7 +626,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/js/sliding-anchor.js') }}"></script>
+
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/1.9.3/countUp.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>

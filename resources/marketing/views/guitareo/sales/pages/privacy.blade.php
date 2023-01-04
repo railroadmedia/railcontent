@@ -5,7 +5,7 @@
     <meta name="description" content="Below is a list of the standard policies we use on this website.">
 
     <meta property="og:title" content="Privacy Policy">
-    <meta property="og:image" content="https://d122ay5chh2hr5.cloudfront.net/sales/2022/og-image.jpg"/>
+    <meta property="og:image" content="https://guitareo.s3.amazonaws.com/sales/2023/share-image-guitareo.jpg"/>
     <meta property="og:url" content="https://www.guitareo.com/privacy/">
 
 @endsection
@@ -23,7 +23,7 @@
 @endsection
 
 @section('scripts')
-    <script type="text/javascript" src="{{ asset('/marketing/parcel/guitareo/nav-footer.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 @endsection
 
 @section('content')

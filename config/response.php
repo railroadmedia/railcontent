@@ -6,6 +6,7 @@ return [
             'id',
             'data.thumbnail_url',
             'data.sheet_music_thumbnail_url',
+            'difficulty_string',
             'type',
             'instrument',
             'published_on',
@@ -902,7 +903,6 @@ return [
             ],
             'artist'
         ],
-
         'song' => [
             'ranges',
             'id',
@@ -917,6 +917,7 @@ return [
             'fields.title',
             'fields.video.fields.length_in_seconds',
             'data.thumbnail_url',
+            'difficulty_string',
             'total_comments',
             'comments',
             'xp',
@@ -954,6 +955,7 @@ return [
                 'fields.title',
                 'length_in_seconds',
                 'data.thumbnail_url',
+                'difficulty_string',
                 'fields.artist',
                 'fields.style',
                 'lesson_count',
@@ -1066,6 +1068,7 @@ return [
             'fields.title',
             'fields.video.fields.length_in_seconds',
             'data.thumbnail_url',
+            'difficulty_string',
             'total_comments',
             'comments',
             'xp',

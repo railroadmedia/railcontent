@@ -10,6 +10,9 @@ module.exports = {
   content: require('fast-glob').sync([
     './resources/marketing/**/*.{blade.php,js}',
   ]),
+  safelist: [
+    'hover:text-singeo','hover:text-drumeo','hover:text-guitareo','hover:text-pianote'
+  ],
   theme: {
     extend: {
       fontFamily: stylesoraTheme.fontFamily,

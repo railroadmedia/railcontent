@@ -3,7 +3,6 @@
     <head>
         {!! \App\Analytics\Tracker::headTop() !!}
 
-
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=5">
 
@@ -21,6 +20,7 @@
         <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
 
         @yield('head-includes')
+
         {!! \App\Analytics\Tracker::trackPageView() !!}
 
         {!! \App\Analytics\Tracker::headBottom() !!}

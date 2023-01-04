@@ -94,7 +94,7 @@
             <h6 class="text-yellow italic font-bold">Enhance your playing experience.</h6>
             <i data-open="trailer" class="fas fa-play play-button autoplay-video text-white smaller my-80 mb-10"></i>
             <br>
-            <a class="join w-full" href="#orderNow">Grab your pair</a>
+            <a class="join w-full" href="#customize-anchor">Grab your pair</a>
             <h4 class="text-white font-extrabold my-4">
                 Only
                 @if((PianotePrices::$headphonesFull -PianotePrices::$headphonesRegular) > 0)
@@ -234,7 +234,7 @@
         </div>
     </section>
 
-    <div id="orderNow" class="anchor"></div>
+    <div id="customize-anchor" class="anchor"></div>
     <section class="py-12 md:py-20 text-center" style="background: linear-gradient(180deg, #010101 0%, #330606 43.19%)">
         <img class="h-16 md:h-20 mb-2 lazyload" data-src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://pianote.s3.amazonaws.com/products/concert-headphones/logo-promo.png" alt="headphone logo">
         <p class="text-yellow mb-4 italic font-bold">Enhance your playing experience.</p>
@@ -336,7 +336,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/parcel/pianote/nav-footer.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
     <script>

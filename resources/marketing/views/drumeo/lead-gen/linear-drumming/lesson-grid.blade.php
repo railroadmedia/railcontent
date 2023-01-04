@@ -10,7 +10,7 @@
     <meta name="description" content="In this exclusive video series, you'll get his best tips on linear drumming and how to apply it to a range of fills, grooves, and styles of music!">
 
     <!-- Social Media -->
-    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/sales/2022/og-image.jpg" style="display: none;">
+    <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/sales/2023/share-image-drumeo.jpg" style="display: none;">
     <meta property="og:title" content="Linear Drumming | Drumeo">
     <meta property="og:description" content="In this exclusive video series, you'll get his best tips on linear drumming and how to apply it to a range of fills, grooves, and styles of music!">
     <meta property="og:url" content="https://www.drumeo.com/linear-drumming/">

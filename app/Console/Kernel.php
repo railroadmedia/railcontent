@@ -6,7 +6,9 @@ use App\Console\Commands\AssignSongsPermissionsToAllUsers;
 use App\Console\Commands\AssignSongsPermissionsToContent;
 use App\Console\Commands\AssignSongsPermissionsToProducts;
 use App\Console\Commands\CreateSongsDecember2022;
+use App\Console\Commands\FixSongsTemp;
 use App\Console\Commands\MigratePianoteSongTutorial;
+use App\Console\Commands\SoftDeleteOldSingeoSongs;
 use App\Console\Commands\PopulateNewRolesAndPermissionsTables;
 use App\Console\Commands\PopulateUserBrandLevel;
 use App\Console\Commands\PopulateUserMinutesPracticedPerBrand;
@@ -45,6 +47,8 @@ class Kernel extends ConsoleKernel
         AssignSongsPermissionsToContent::class,
         AssignSongsPermissionsToProducts::class,
         AssignSongsPermissionsToAllUsers::class,
+        FixSongsTemp::class,
+        SoftDeleteOldSingeoSongs::class,
     ];
 
     /**

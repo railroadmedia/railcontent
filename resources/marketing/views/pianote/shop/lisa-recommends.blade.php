@@ -9,7 +9,7 @@
     <meta name="description" content="You can peruse Lisa’s top gear recommendations with confidence, knowing they’ve passed the test of millions of YouTube views -- and gotten the Pianote stamp of approval!">
     <meta property="og:description" content="You can peruse Lisa’s top gear recommendations with confidence, knowing they’ve passed the test of millions of YouTube views -- and gotten the Pianote stamp of approval!">
 
-    <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/og-image.jpg">
+    <meta property="og:image" content="https://pianote.s3.amazonaws.com/sales/2023/share-image-pianote.jpg">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
@@ -267,7 +267,7 @@
     @include('pianote._partials._footer')
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/parcel/pianote/nav-footer.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 
     <script>
         $(function () {

@@ -7,7 +7,7 @@
     @hasSection('share-image')
         @yield('share-image')
     @else
-        <meta property="og:image" content="https://d122ay5chh2hr5.cloudfront.net/sales/2022/og-image.jpg"/>
+        <meta property="og:image" content="https://guitareo.s3.amazonaws.com/sales/2023/share-image-guitareo.jpg"/>
     @endif
 
 @endsection
@@ -74,7 +74,7 @@
 
 @section('content')
     @include("guitareo.sales.partials._nav", [
-        "homepageVersion" => true,
+        "subscriptionVersion" => true,
         "scrollToJoin" => true,
         "mcVersion" => true
     ])
@@ -1432,7 +1432,7 @@
 
 @section('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/parcel/guitareo/nav-footer.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/1.9.3/countUp.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>

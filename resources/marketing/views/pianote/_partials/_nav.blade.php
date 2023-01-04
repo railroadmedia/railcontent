@@ -5,7 +5,7 @@
         </a>
     </div>
 
-    <div class="menu-toggle">
+    <div class="menu-toggle @if(!empty($hideMenu)) opacity-0 px-0.5 @endif">
         <span></span>
         <span></span>
         <span></span>
@@ -13,12 +13,12 @@
 
     @if(!empty($checkoutVersion))
         <div class="button-wrap">
-            <a href="{{ get_legacy_brand_base_url('pianote') }}/shop" class="join promo outline-button">Shop</a>
+            <a href="{{ get_legacy_brand_base_url('pianote') }}/shop" class="join outline-button">Shop</a>
         </div>
     @endif
     @if(!empty($cartVersion))
         <div class="button-wrap" id="app">
-            <a href="{{ get_legacy_brand_base_url('pianote') }}/shop" class="join promo outline-button hover:no-underline">Shop</a>
+            <a href="{{ get_legacy_brand_base_url('pianote') }}/shop" class="join outline-button hover:no-underline">Shop</a>
 
             <nav-cart-button
                 {{-- cart-data='{{ $cartData }}' --}}
@@ -36,22 +36,44 @@
         </div>
     @endif
 
-    @if(!empty($joinVersion))
-        <div class="edge-wrap show-for-medium">
-            <a class="@if(!empty($scrollToJoin)) anchor-slide @endif"  href="/#method" >Method</a>
-            <a class="@if(!empty($scrollToJoin)) anchor-slide @endif"  href="/#songs" >Songs</a>
-            <a class="@if(!empty($scrollToJoin)) anchor-slide @endif"  href="/#coaches" >Coaches</a>
-        </div>
-        <div class="button-wrap">
-            <a href="{{ get_legacy_brand_base_url('pianote') }}/shop" class="join promo outline-button">Shop</a>
-            <a
-                @if(!empty($scrollToJoin))
-                href="/#orderNow" class="join anchor-slide"
+    @if(!empty($subscriptionVersion))
+        @if(!empty($fullSubscriptionVersion))
+            <div class="relative">
+                <div class="edge-wrap show-for-medium">
+                    <a class="cursor-pointer features @if(strpos(url()->full(), 'method') || strpos(url()->full(), 'songs') || strpos(url()->full(), 'coaches')) active @endif">Features <i class="fa-solid fa-caret-down"></i></a>
+                    <a class="cursor-pointer instruments">Instruments <i class="fa-solid fa-caret-down"></i></a>
+                    <a class=" @if(strpos(url()->full(), 'choose-plan')) active @endif" href="{{ get_legacy_brand_base_url('pianote') }}/choose-plan" >Pricing</a>
+                    <a class=" @if(strpos(url()->full(), 'shop')) active @endif" href="{{ get_legacy_brand_base_url('pianote') }}/shop" >Shop</a>
+                    <a class="" href="{{ get_legacy_brand_base_url('pianote') }}/blog" >Blog</a>
+
+                </div>
+                <div class="features-dd hidden shadow-md bg-white rounded-xl p-2 absolute flex flex-col left-44 lg:left-48 top-10 lg:top-12 w-44">
+                    <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full @if(strpos(url()->full(), 'method')) active @endif" href="{{ get_legacy_brand_base_url('pianote') }}/method" ><i class="mr-1 text-lg fa-fw far fa-music-note"></i> Method</a>
+                    <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full @if(strpos(url()->full(), 'coaches')) active @endif" href="{{ get_legacy_brand_base_url('pianote') }}/coaches" ><i class="mr-1 text-lg fa-fw far fa-whistle"></i> Coaches</a>
+                    <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full @if(strpos(url()->full(), 'songs')) active @endif" href="{{ get_legacy_brand_base_url('pianote') }}/songs" ><i class="mr-1 text-lg fa-fw far fa-headphones"></i> Songs</a>
+                </div>
+                <div class="instruments-dd hidden shadow-md bg-white rounded-xl p-2 absolute flex flex-col left-72 lg:left-80 -ml-3 top-10 lg:top-12 w-44">
+                    <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full" href="{{ get_legacy_brand_base_url('drumeo') }}" ><i class="mr-1 text-lg fa-fw far fa-drum"></i> Drums</a>
+                    <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full" href="{{ get_legacy_brand_base_url('guitareo') }}" ><i class="mr-1 text-lg fa-fw far fa-guitar"></i> Guitar</a>
+                    <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full" href="{{ get_legacy_brand_base_url('singeo') }}" ><i class="mr-1 text-lg fa-fw far fa-microphone-stand"></i> Singing</a>
+                </div>
+            </div>
+        @endif
+        <div class="button-wrap @if(!empty($hideJoin)) opacity-0 px-0.5 @endif">
+            <a @if(!empty($scrollToJoin))
+                    href="#customize-anchor" class="join anchor-slide"
+                @elseif(!empty($joinUrl))
+                    href="{{ $joinUrl }}" class="join"
                 @else
-                href="/#orderNow" class="join"
+                    href="/#customize-anchor" class="join"
                 @endif
-            >
-                @if(!empty($trialVersion) && $trialVersion) Start your free trial @else Join <span class="show-for-medium"> Pianote</span> @endif
+                >
+
+                @if(!empty($trialVersion))
+                    Start Trial
+                @else
+                    Join<span class="show-for-medium"> Pianote</span>
+                @endif
             </a>
         </div>
     @endif
@@ -59,25 +81,84 @@
 
 <div class="nav-side-bar">
     <div class="bottom-section">
-        @include('pianote.sales.partials._nav-link', [
+        @include('drumeo.sales.partials._nav-link', [
             "linkName" => "Member Login",
             "linkIcon" => "fas fa-sign-in",
             "linkUrl" => get_musora_brand_base_url() . '/login',
         ])
-        @include('pianote.sales.partials._nav-link', [
-            "linkName" => "Contact",
-            "linkIcon" => "fas fa-phone",
-            "linkUrl" => "{{ get_musora_brand_base_url() }}/contact"
-        ])
-        @include('pianote.sales.partials._nav-link', [
-            "linkName" => "Pianote",
-            "linkIcon" => "fas fa-graduation-cap",
+        @include('drumeo.sales.partials._nav-link', [
+            "linkName" => "Home",
+            "linkIcon" => "fas fa-home",
             "linkUrl" => "/",
         ])
-        @include('pianote.sales.partials._nav-link', [
-            "linkName" => "Holiday Deals",
+        <div class="has-drop-down" target="_parent" rel="">
+            <div class="nav-link">
+                <i class="fas fa-star"></i>
+                Features
+                <div class="drop-down-arrow ">
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div class="lesson-links dropdown">
+            @include('drumeo.sales.partials._nav-link', [
+                "linkName" => "Method",
+                "linkUrl" => "/method/",
+                "linkIcon" => ''
+            ])
+            @include('drumeo.sales.partials._nav-link', [
+                "linkName" => "Songs",
+                "linkUrl" => "/songs/",
+                "linkIcon" => ''
+            ])
+            @include('drumeo.sales.partials._nav-link', [
+                "linkName" => "Coaches",
+                "linkUrl" => "/coaches/",
+                "linkIcon" => ''
+            ])
+        </div>
+        <div class="has-drop-down" target="_parent" rel="">
+            <div class="nav-link">
+                <i class="fas fa-piano-keyboard"></i>
+                Instruments
+                <div class="drop-down-arrow ">
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div class="lesson-links dropdown">
+            @include('drumeo.sales.partials._nav-link', [
+                "linkName" => "Drums",
+                "linkUrl" => "https://www.drumeo.com/",
+                "linkIcon" => ''
+            ])
+            @include('drumeo.sales.partials._nav-link', [
+                "linkName" => "Guitar",
+                "linkUrl" => "https://www.guitareo.com/",
+                "linkIcon" => ''
+            ])
+            @include('drumeo.sales.partials._nav-link', [
+                "linkName" => "Singing",
+                "linkUrl" => "https://www.singeo.com/",
+                "linkIcon" => ''
+            ])
+        </div>
+        @include('drumeo.sales.partials._nav-link', [
+            "linkName" => "Pricing",
+            "linkIcon" => "fas fa-money-bill-wave",
+            "linkUrl" => "/choose-plan",
+        ])
+        @include('drumeo.sales.partials._nav-link', [
+            "linkName" => "Shop",
             "linkIcon" => "fas fa-tag",
             "linkUrl" => "/shop",
+        ])
+        @include('drumeo.sales.partials._nav-link', [
+            "linkName" => "Blog",
+            "linkIcon" => "fas fa-comment-pen",
+            "linkUrl" => "/blog",
         ])
         <div class="has-drop-down cursor-pointer">
             <div class="nav-link">
@@ -91,76 +172,76 @@
             </div>
         </div>
         <div class="lesson-links dropdown">
-            @include('pianote.sales.partials._nav-link', [
-                "linkName" => "Blog",
-                "linkUrl" => "/blog/",
-                "linkIcon" => ''
-            ])
-            @include('pianote.sales.partials._nav-link', [
+            @include('drumeo.sales.partials._nav-link', [
                 "linkName" => "Chord Hacks",
                 "linkUrl" => "/chord-hacks",
                 "linkIcon" => ''
             ])
-            @include('pianote.sales.partials._nav-link', [
+            @include('drumeo.sales.partials._nav-link', [
                 "linkName" => "Getting Started On The Piano",
                 "linkUrl" => "/getting-started",
                 "linkIcon" => ''
             ])
-            @include('pianote.sales.partials._nav-link', [
+            @include('drumeo.sales.partials._nav-link', [
                 "linkName" => "Learn 3 Songs On Piano",
                 "linkUrl" => "/learn-songs",
                 "linkIcon" => ''
             ])
-            @include('pianote.sales.partials._nav-link', [
+            @include('drumeo.sales.partials._nav-link', [
                 "linkName" => "5 Days To Playing Piano",
                 "linkUrl" => "/piano-in-5-days",
                 "linkIcon" => ''
             ])
-            @include('pianote.sales.partials._nav-link', [
+            @include('drumeo.sales.partials._nav-link', [
                 "linkName" => "Classical Piano Quick Start",
                 "linkUrl" => "/classical-piano",
                 "linkIcon" => ''
             ])
-            @include('pianote.sales.partials._nav-link', [
+            @include('drumeo.sales.partials._nav-link', [
                 "linkName" => "Sight Reading Made Simple",
                 "linkUrl" => "/sight-reading-made-simple",
                 "linkIcon" => "",
             ])
         </div>
-        @include('pianote.sales.partials._nav-link', [
+        @include('drumeo.sales.partials._nav-link', [
             "linkName" => "About Us",
             "linkIcon" => "fas fa-users",
             "linkUrl" => "/about",
         ])
         <span class="shim"></span>
-        @include('pianote.sales.partials._secondary-nav-link', [
+        @include('drumeo.sales.partials._secondary-nav-link', [
             "linkName" => "<i class='fas fa-fw fa-mobile-alt'></i>&nbsp; Mobile App ",
             "linkUrl" => "/app",
             "externalLink" => false
         ])
-        @include('pianote.sales.partials._secondary-nav-link', [
+        @include('drumeo.sales.partials._secondary-nav-link', [
             "linkName" => "<i class='fab fa-fw fa-youtube'></i>&nbsp; YouTube",
             "linkUrl" => "https://youtube.com/user/pianolessonscom",
             "externalLink" => true
         ])
-        @include('pianote.sales.partials._secondary-nav-link', [
+        @include('drumeo.sales.partials._secondary-nav-link', [
             "linkName" => "<i class='fab fa-fw fa-facebook'></i>&nbsp; Facebook",
             "linkUrl" => "https://facebook.com/pianoteofficial",
             "externalLink" => true
         ])
-        @include('pianote.sales.partials._secondary-nav-link', [
+        @include('drumeo.sales.partials._secondary-nav-link', [
             "linkName" => "<i class='fab fa-fw fa-instagram'></i>&nbsp; Instagram",
             "linkUrl" => "https://instagram.com/pianoteofficial",
             "externalLink" => true
         ])
-        @include('pianote.sales.partials._secondary-nav-link', [
+        @include('drumeo.sales.partials._secondary-nav-link', [
             "linkName" => "<i class='fab fa-fw fa-tiktok'></i>&nbsp; TikTok",
             "linkUrl" => "https://www.tiktok.com/@pianoteofficial",
             "externalLink" => true
         ])
-        @include('pianote.sales.partials._secondary-nav-link', [
+        @include('drumeo.sales.partials._secondary-nav-link', [
             "linkName" => "<i class='fas fa-fw fa-question'></i>&nbsp; FAQs",
             "linkUrl" => "https://help.pianote.com/",
+            "externalLink" => false
+        ])
+        @include('drumeo.sales.partials._secondary-nav-link', [
+            "linkName" => "<i class='fas fa-fw fa-phone'></i>&nbsp; Contact",
+            "linkUrl" => get_musora_brand_base_url().'/contact',
             "externalLink" => false
         ])
         <span class="shim"></span>

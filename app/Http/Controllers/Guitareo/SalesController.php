@@ -8,10 +8,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class SalesController extends BaseController
 {
-    public function chooseyourtrial()
-    {
-        return view('guitareo.sales.trials.trial-selection.week');
-    }
 
     public function chooseyourtrialmonth()
     {
@@ -85,7 +81,15 @@ class SalesController extends BaseController
 
     public function home()
     {
-        return view('guitareo.sales.standard', ['theme' => 'guitareo']);
+        return view('guitareo.sales.subscription', ['theme' => 'guitareo']);
+    }
+    public function promo()
+    {
+        return view('guitareo.sales.subscription', ['theme' => 'guitareo', 'promoVersion' => 'true']);
+    }
+    public function choosePlan()
+    {
+        return view('guitareo.sales.choose-plan', ['theme' => 'guitareo']);
     }
 
     public function membership()
@@ -162,5 +166,20 @@ class SalesController extends BaseController
         return view('guitareo.products.'.$page);
 
         throw new NotFoundHttpException();
+    }
+
+    public function songs()
+    {
+        return view('guitareo.sales.features.songs', ['theme' => 'guitareo', 'page' => 'songs']);
+    }
+
+    public function coaches()
+    {
+        return view('guitareo.sales.features.coaches', ['theme' => 'guitareo', 'page' => 'coaches']);
+    }
+
+    public function method()
+    {
+        return view('guitareo.sales.features.method', ['theme' => 'guitareo', 'page' => 'method']);
     }
 }

@@ -1,4 +1,4 @@
-@extends('drumeo._partials.layout-template')
+@extends('drumeo._partials.global-layout')
 
 @section('global-head')
     <title>Lifetime Membership | Drumeo</title>
@@ -55,7 +55,7 @@
 
 @section('global-body')
         @include("drumeo.sales.partials._nav", [
-            "edgeVersion" => true,
+            "subscriptionVersion" => true,
             "scrollToJoin" => true
         ])
         <section class="content-section text-center" style="padding-bottom: 0; background:linear-gradient(to bottom, #01050f 70%, #020c1a);">
@@ -300,7 +300,7 @@
             });
         </script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/js/sliding-anchor.js') }}"></script>
+
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>

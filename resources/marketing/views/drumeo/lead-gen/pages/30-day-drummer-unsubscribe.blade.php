@@ -1,8 +1,8 @@
-@extends('drumeo._partials.layout-template')
+@extends('drumeo._partials.global-layout')
 
 @section('global-head')
     <title>Unsubscribe Successful | Drumeo</title>
-    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/sales/2022/og-image.jpg" style="display: none;">
+    <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/sales/2023/share-image-drumeo.jpg" style="display: none;">
     @include('drumeo._partials._fonts')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
     <link href="{{ asset('marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">

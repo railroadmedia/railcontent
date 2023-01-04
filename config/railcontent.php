@@ -63,6 +63,8 @@ return [
         'boot-camps',
         'podcasts',
         'podcast',
+        'song-tutorial',
+        'song-tutorial-children',
     ],
     'comment_assignation_owner_ids' => [
         102905,
@@ -1118,7 +1120,7 @@ return [
         'podcasts',
         'learning-path-lesson',
         'song-tutorial',
-        'song-tutorial-children'
+        'song-tutorial-children',
     ],
     'dashboardInProgressContentTypes' => [
         'course',
@@ -1233,7 +1235,7 @@ return [
         'exploring-beats', /* 2018*/
         'sonor-drums', /* 2018*/
         'song-tutorial',
-        'song-tutorial-children'
+        'song-tutorial-children',
     ],
 
     'contentTypesWithChildren' => [

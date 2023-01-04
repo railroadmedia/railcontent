@@ -2,7 +2,7 @@
   require_once(resource_path('marketing/views/drumeo/lead-gen/pages/free-drum-lesson-data.php'))
 @endphp
 
-@extends('drumeo._partials.layout-template')
+@extends('drumeo._partials.global-layout')
 
 @section('global-head')
 
@@ -442,7 +442,7 @@
     @include("drumeo.sales.partials._footer")
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="{{ asset('/marketing/js/sliding-anchor.js') }}"></script>
+
     <script>
         $(document).ready(function () {
 

@@ -21,7 +21,7 @@
 
 @section('scripts')
     @parent
-    <script src="{{ asset('/marketing/js/sliding-anchor.js') }}"></script>
+
     <script type="text/javascript">
         $(document).ready(function () {
             //sub nav sticky function
@@ -589,7 +589,7 @@
             <h2 class="columns"><em>(${{ Prices::$rdmRegular }} one-time payment. Or choose a <br
                         class="hide-for-medium"> 2-pay or 5-pay plan on the next page.)</em></h2>
             {{--<div class="columns"><a class="join sold-out">Closed</a></div>--}}
-            <div class="columns"><a href="/laravel/public/shopping-cart/api/query?products[rock-drumming-masterclass-pack]=1" class="join">Get Started &raquo;</a></div>
+            <div class="columns"><a href="/ecommerce/add-to-cart?products[rock-drumming-masterclass-pack]=1" class="join">Get Started &raquo;</a></div>
             <div class="columns cards">
                 <i class="fab fa-cc-visa"></i> <i class="fab fa-cc-mastercard"></i> <i class="fab fa-cc-amex"></i> <i
                     class="fab fa-cc-paypal"></i>

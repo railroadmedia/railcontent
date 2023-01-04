@@ -105,7 +105,7 @@
 
                             <a
                                 class="online-atc selected-pack vue-add-to-cart"
-                                href="/laravel/public/shopping-cart/api/query?go-back-to-shop=true"
+                                href="/ecommerce/add-to-cart?go-back-to-shop=true"
                                 @if(!empty($promoCode)) data-promocode="{{ $promoCode }}" @endif
                                 @if(!empty($lockedCart)) data-locked-cart="{{ $lockedCart }}" @endif
                             >
@@ -117,8 +117,8 @@
                         @elseif(!empty($sku))
                             <a
                                 class="online-atc vue-add-to-cart"
-                                href="/laravel/public/shopping-cart/api/query?go-back-to-shop=true&products[{!! $sku !!}]=1"
-                                data-base-url="/laravel/public/shopping-cart/api/query?go-back-to-shop=true&products[{!! $sku !!}]=1"
+                                href="/ecommerce/add-to-cart?go-back-to-shop=true&products[{!! $sku !!}]=1"
+                                data-base-url="/ecommerce/add-to-cart?go-back-to-shop=true&products[{!! $sku !!}]=1"
                                 @isset($productJson) data-product-json='{{ $productJson }}' @endisset
                                 @if(!empty($promoCode)) data-promocode="{{ $promoCode }}" @endif
                                 @if(!empty($lockedCart)) data-locked-cart="{{ $lockedCart }}" @endif

@@ -10,6 +10,8 @@
     <link href="https://dpwjbsxqtam5n.cloudfront.net/fonts/icons.css" rel="stylesheet">
     <!-- Favicons -->
     @include('_partials.layout.favicons.singeo-favicons')
+
+    @yield('head-includes')
 @stop
 
 <!-- Header -->
@@ -28,7 +30,7 @@
                 "url" => get_musora_brand_base_url().'/contact',
             ],
             "Singeo" => [
-                "iconClass" => "fas fa-graduation-cap",
+                "iconClass" => "fas fa-home",
                 "url" => '/',
             ],
             "Shop" => [

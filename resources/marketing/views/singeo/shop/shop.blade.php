@@ -182,32 +182,9 @@
     <header class="drum-shop-header" style="background-color:#080e1e;background-image:url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://singeo.s3.amazonaws.com/products/shop-header.jpg);">
         <div class="container mx-auto relative z-10">
             <div class="px-2 md:px-3">
-                <img class="h-14 sm:h-16 lg:h-20" src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://singeo.s3.amazonaws.com/sales/promos/november/holiday-singeo.png" alt="singeo black friday logo">
-                {{-- <img class="logo" src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png" alt="singeo logo"> --}}
-                <h1><strong>SINGEO SHOP</strong></h1>
-                <p>Save up to <span class="">74%</span> on lessons, accessories, and merch.</p>
-                                <div class="rounded-xl px-6 py-2 inline-flex flex-wrap mx-auto mt-5 justify-center items-center" style="background-color:#181515;">
-                                    <p class="leading-none m-0"><strong>DEALS END IN:</strong></p>
-                                    <div class="h-12 mx-5 bg-promo" style="width:2px;"></div>
-                                    <div class="tzcd-big">
-                                        <div class="inline-block">
-                                            <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>
-                                            <p class="leading-none uppercase font-extrabold text-xs text-promo">days</p>
-                                        </div>
-                                        <div class="inline-block mx-2">
-                                            <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>
-                                            <p class="leading-none uppercase font-extrabold text-xs text-promo">hrs</p>
-                                        </div>
-                                        <div class="inline-block mr-2">
-                                            <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>
-                                            <p class="leading-none uppercase font-extrabold text-xs text-promo">mins</p>
-                                        </div>
-                                        <div class="inline-block">
-                                            <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>
-                                            <p class="leading-none uppercase font-extrabold text-xs text-promo">secs</p>
-                                        </div>
-                                    </div>
-                                </div>
+                <img class="logo" src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png">
+                <h1><strong>SHOP</strong></h1>
+                <p>GET LESSONS, MERCH, GEAR, & MUCH MORE</p>
             </div>
         </div>
     </header>
@@ -271,20 +248,20 @@
     <div class="white-box">
         <section class="bundles">
             <div class="container mx-auto fixed-cards">
-                <div class="float-left w-full px-2 md:px-3 md:w-1/2 card-wrap">
-                    <a href="/shop/bundle-unlimited" class="bundle-card lg:pb-1">
-                        <span class="top-left-badge text-white bg-promo"><i class="fas fa-star"></i> $538 IN FREE BONUSES</span>
-                        <div class="bg-center bg-cover pb-40 sm:pb-56 xl:pb-64" style="background-image:url(https://cdn.musora.com/image/fetch/w_1000,q_auto:best/https://singeo.s3.amazonaws.com/sales/promos/black-friday/unlimited-lessons.png);"></div>
-                        <div class="float-left w-full px-2 md:px-3">
-                            <p><strong>Singeo Membership + 5 Bonuses </strong><br>
-                                <em>Singeo Annual Membership<br class="hidden lg:inline"> + Starter Kit + Practice Poster + Guitar/Piano Lessons & More!</em>
-                                <span class="price"><s class="opacity-30">$778</s> <strong class="linear-purple">${{ SingeoPrices::$singeoMembershipAnnual }}</strong></span>
-                            </p>
-                            <span class="join" style="background:linear-gradient(180deg, #8300E9 0%, #03017C 100%);">See The Deal &raquo;</span>
-                        </div>
-                    </a>
-                </div>
-                <div class="float-left w-full px-2 md:px-3 md:w-1/2 card-wrap">
+{{--                <div class="float-left w-full px-2 md:px-3 md:w-1/2 card-wrap">--}}
+{{--                    <a href="/shop/bundle-unlimited" class="bundle-card lg:pb-1">--}}
+{{--                        <span class="top-left-badge text-white bg-promo"><i class="fas fa-star"></i> $538 IN FREE BONUSES</span>--}}
+{{--                        <div class="bg-center bg-cover pb-40 sm:pb-56 xl:pb-64" style="background-image:url(https://cdn.musora.com/image/fetch/w_1000,q_auto:best/https://singeo.s3.amazonaws.com/sales/promos/black-friday/unlimited-lessons.png);"></div>--}}
+{{--                        <div class="float-left w-full px-2 md:px-3">--}}
+{{--                            <p><strong>Singeo Membership + 5 Bonuses </strong><br>--}}
+{{--                                <em>Singeo Annual Membership<br class="hidden lg:inline"> + Starter Kit + Practice Poster + Guitar/Piano Lessons & More!</em>--}}
+{{--                                <span class="price"><s class="opacity-30">$778</s> <strong class="linear-purple">${{ SingeoPrices::$singeoMembershipAnnual }}</strong></span>--}}
+{{--                            </p>--}}
+{{--                            <span class="join" style="background:linear-gradient(180deg, #8300E9 0%, #03017C 100%);">See The Deal &raquo;</span>--}}
+{{--                        </div>--}}
+{{--                    </a>--}}
+{{--                </div>--}}
+                <div class="float-left w-full px-2 md:px-3 card-wrap">
                     <a href="/shop/singing-starter-kit" class="flex flex-row text-white rounded-xl mb-3 md:mb-5 overflow-hidden relative w-full sm:text-left px-5 lg:px-10 py-10 sm:py-10 lg:py-28 xl:py-32">
                         <div class="relative z-10 inline-block w-full sm:w-auto text-center mx-0">
                             <img class="h-20 md:h-16 lg:h-28" src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://singeo.s3.amazonaws.com/products/singing-starter-kit/logo.png" alt="essential bundle logo"><br>
@@ -350,7 +327,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.3/moment-timezone-with-data.min.js"></script>
 
     <script src="{{ asset('/marketing/js/modal.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/parcel/singeo/nav-footer.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 
     <script>
         $(document).ready(function () {

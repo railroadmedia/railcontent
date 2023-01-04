@@ -91,7 +91,7 @@
 
 @section('global-body')
     @include('pianote._partials._nav', [
-    "joinVersion" => true,
+    "subscriptionVersion" => true,
     ])
     {{--<style>--}}
     {{--.promo-banner-shim{display:block;width:100%;height:40px}--}}
@@ -408,8 +408,8 @@
     @include('pianote._partials._footer')
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-{{--    <script type="text/javascript" src="{{ asset('/marketing/parcel/pianote/nav-footer.js') }}"></script>--}}
-    <script type="text/javascript" src="{{ asset('/marketing/parcel/pianote/nav-footer.js') }}"></script>
+{{--    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>--}}
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>

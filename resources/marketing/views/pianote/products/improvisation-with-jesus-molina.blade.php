@@ -493,7 +493,7 @@
         </div>
     </section>
 
-    <div id="orderNow" class="anchor"></div>
+    <div id="customize-anchor" class="anchor"></div>
     <section class="content-section px-3 sm:px-0 text-center customize relative z-50 overflow-hidden lazyload" data-bg="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://pianote.s3.amazonaws.com/sales/jesus-molina/Order_BG.jpg">
         <div class="container max-w-6xl mx-auto relative z-50">
             <div class="flex flex-wrap items-center">
@@ -509,7 +509,7 @@
                             <i class="fas fa-check text-pianote"></i> 90-day guarantee</p>
                         <a class="join w-full my-3 sm:my-5" style="background:#F61A30;" href="{{ $annualLink }}">Get Started</a>
                         <p class="text-center text-sm text-pianote">
-                            <em><a href="/#orderNow">(OR FREE WITH A PIANOTE MEMBERSHIP)</a></em>
+                            <em><a href="/#customize-anchor">(OR FREE WITH A PIANOTE MEMBERSHIP)</a></em>
                         </p>
                     </div>
                 </div>
@@ -571,8 +571,8 @@
 
     @include('pianote._partials._footer')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-{{--    <script type="text/javascript" src="{{ asset('/marketing/parcel/pianote/nav-footer.js') }}"></script>--}}
-    <script type="text/javascript" src="{{ asset('/marketing/parcel/pianote/nav-footer.js') }}"></script>
+{{--    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>--}}
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
     <script>

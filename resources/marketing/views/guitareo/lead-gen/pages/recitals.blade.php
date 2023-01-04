@@ -8,7 +8,7 @@
     <meta property="og:description" content="We can’t wait to see your submission. Don’t be shy! Submit today!">
 
     <meta property="og:url" content="https://www.guitareo.com/recitals/">
-    <meta property="og:image" content="https://d122ay5chh2hr5.cloudfront.net/sales/2022/og-image.jpg" style="display: none;">
+    <meta property="og:image" content="https://guitareo.s3.amazonaws.com/sales/2023/share-image-guitareo.jpg" style="display: none;">
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/css/guitareo/tailwind-helpers.css') }}">
@@ -257,5 +257,5 @@
 @stop
 
 @section('scripts')
-    <script type="text/javascript" src="{{ asset('/marketing/parcel/guitareo/nav-footer.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 @stop

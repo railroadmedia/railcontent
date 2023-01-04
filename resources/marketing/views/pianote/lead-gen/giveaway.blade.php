@@ -192,7 +192,6 @@
     <section class="text-center text-white py-8 md:py-16 lg:py-28 px-5 md:px-7 bg-center bg-cover lazyload" data-bg="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://pianote.s3.amazonaws.com/giveaways/footer.jpg">
         <div class="mx-auto max-w-md md:max-w-2xl">
             <img class="h-32 sm:h-36 md:h-44 lg:h-52 lazyload" data-src="https://cdn.musora.com/image/fetch/w_650,q_auto:best/https://pianote.s3.amazonaws.com/giveaways/logo.png" alt="title image">
-            <h6 class="my-4 sm:my-6 uppercase text-pianote"><strong>ONLY <span class="tzcd-full">A LIMITED TIME</span> LEFT</strong></h6>
             @include("pianote._partials._sign-up-form", [
                     "formId" => 'Pianote - Engagement - Trigger - FP30 Giveaway - Web Form',
                     "formName" => 'FP30 Giveaway',
@@ -210,7 +209,7 @@
     @include('pianote._partials._footer')
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/parcel/pianote/nav-footer.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script>
         $(document).ready(function () {
             $(document).foundation();

@@ -9,7 +9,7 @@
     <meta property="og:description" content="Say goodbye to “do it yourself” guitar lessons."/>
 
     <meta property="og:url" content="https://www.guitareo.com"/>
-    <meta property="og:image" content="https://d122ay5chh2hr5.cloudfront.net/sales/2022/og-image.jpg"/>
+    <meta property="og:image" content="https://guitareo.s3.amazonaws.com/sales/2023/share-image-guitareo.jpg"/>
 
 @stop
 @section('styles')
@@ -36,12 +36,12 @@
 
 @section('scripts')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/parcel/guitareo/nav-footer.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 @endsection
 
 @section('content')
     @include("guitareo.sales.partials._nav", [
-        "homepageVersion" => true
+        "subscriptionVersion" => true
     ])
 
 

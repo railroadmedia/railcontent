@@ -1,4 +1,4 @@
-@extends('drumeo._partials.layout-template')
+@extends('drumeo._partials.global-layout')
 
 @section('global-head')
     <title>QuietKick | Drumeo</title>
@@ -224,7 +224,7 @@
                 <div class="flex flex-wrap items-end justify-center 2-full max-w-sm md:max-w-2xl lg:max-w-3xl my-5 sm:my-10 mx-auto">
                     <div class="w-full md:w-1/2 px-2 md:px-3 relative">
                         {{--<p class="w-full px-4 pt-2 pb-4 -mb-3 text-white rounded-t-2xl" style="background:linear-gradient(to bottom, #0a73d8, #10518f);"><strong>LAUNCH SPECIAL</strong></p>--}}
-                        <a href="/laravel/public/shopping-cart/api/query?products[quietkick]=1" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">
+                        <a href="/ecommerce/add-to-cart?products[quietkick]=1" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">
                             <div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">
                                 <h5 class="leading-none mb-3"><strong>Single Kick</strong></h5>
                                 <h1 class="inline-block leading-none">
@@ -246,7 +246,7 @@
                     </div>
                     <div class="w-full md:w-1/2 px-2 md:px-3 relative">
                         {{--<p class="w-full px-4 pt-2 pb-4 -mb-3 text-white rounded-t-2xl" style="background:linear-gradient(to bottom, #0a73d8, #10518f);"><strong>LAUNCH SPECIAL</strong></p>--}}
-                        <a href="/laravel/public/shopping-cart/api/query?products[quietkick]=1&products[quietkick-beater]=1" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">
+                        <a href="/ecommerce/add-to-cart?products[quietkick]=1&products[quietkick-beater]=1" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">
                             <div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">
                                 <h5 class="leading-none mb-3"><strong>Double Kick</strong></h5>
                                 <h1 class="inline-block leading-none">
@@ -267,7 +267,7 @@
                         </a>
                     </div>
                 </div>
-                <a style="color: #00bc75;" class="inline-block cursor-pointer" href="/laravel/public/shopping-cart/api/query?products[DLM]=1,year,1&products[quietkick]=1&locked=true"><h4><strong><u>Or get it FREE when you join Drumeo &raquo;</u></strong></h4></a>
+                <a style="color: #00bc75;" class="inline-block cursor-pointer" href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[quietkick]=1&locked=true"><h4><strong><u>Or get it FREE when you join Drumeo &raquo;</u></strong></h4></a>
             @else
                 <a class="join sold-out mt-5 sm:mt-10">SOLD OUT</a>
             @endif
@@ -296,22 +296,16 @@
             <h2><strong>Still have questions?</strong></h2>
             <div class="dropdowns">
                 @include('drumeo.products.partials.question-dropdown-tw', [
-                "customClass" => "sm:rounded-full",
-                "question" => true,
                 "title" => "Does the QuietKick work with a double bass pedal?",
                 "description" => "Yes! You’ll see the option to add a second beater to your QuietKick. This allows you to attach your double pedal and work out both your feet. The extra beater is the only additional piece you need for this.",
                 ])
                 @include('drumeo.products.partials.question-dropdown-tw', [
-                "customClass" => "sm:rounded-full",
-                "question" => true,
                 "title" => "Does the QuietKick scoot?",
                 "description" => "You know what we mean – when your bass drum goes scooting across the floor everytime you hit it. The QuietKick has little to no scooting – but on a hard floor it will shift a little. For the best results, use your QuietKick on a rug or carpet. If you’re still having trouble add a bit of velcro to the bottom.",
                 ])
                 @include('drumeo.products.partials.question-dropdown-tw', [
-                "customClass" => "sm:rounded-full",
-                "question" => true,
                 "title" => "Will it ship internationally?",
-                "description" => "Yes! Just enter your country upon checkout – you’ll see the shipping tally in your cart. You can also grab the QuietKick with FREE shipping by joining Drumeo. You’ll get a free QuietKick shipped anywhere in the world for the price of your annual membership. <a href='/laravel/public/shopping-cart/api/query?products[DLM]=1,year,1&products[quietkick]=1&locked=true'><u>Click here to see that option.</u></a>",
+                "description" => "Yes! Just enter your country upon checkout – you’ll see the shipping tally in your cart. You can also grab the QuietKick with FREE shipping by joining Drumeo. You’ll get a free QuietKick shipped anywhere in the world for the price of your annual membership. <a href='/ecommerce/add-to-cart?products[DLM-1-year]=1&products[quietkick]=1&locked=true'><u>Click here to see that option.</u></a>",
                 ])
             </div>
         </div>
@@ -338,7 +332,6 @@
         });
     </script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}" defer></script>
-    <script type="text/javascript" src="{{ asset('/marketing/js/sliding-anchor.js') }}" defer></script>
     <script async type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js" defer></script>
     <script async type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js" defer></script>
 @stop

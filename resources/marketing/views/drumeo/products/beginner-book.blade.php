@@ -59,7 +59,7 @@
                         ${{ Prices::$beginnerBookRegular }} USD
                     @endif
                 </p>
-                <a href="/laravel/public/shopping-cart/api/query?products[BeginnerBook]=1" class="join">Click Here To Order</a>
+                <a href="/ecommerce/add-to-cart?products[BeginnerBook]=1" class="join">Click Here To Order</a>
                 <a target="_blank" href="https://www.amazon.com/dp/B07G8N348K" class="join orange">Get Your Copy On <img class="amazon inline-block" src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/amazon-logo.png"></a>
             </div>
         </div>
@@ -423,7 +423,7 @@
     <div class="edge-banner text-center">
         <div class="row">
             <p><strong> ** Every Book Includes A Drumeo
-                    <br class="hide-for-medium"> 30-Day Membership Pass ($29 Value) ** </strong></p>
+                    <br class="hide-for-medium"> 30-Day Membership Pass (${{ Prices::$drumeoEdgeFull }} Value) ** </strong></p>
         </div>
     </div>
 
@@ -441,7 +441,7 @@
                     ${{ Prices::$beginnerBookRegular }} USD
                 @endif
                 </p>
-                <a href="/laravel/public/shopping-cart/api/query?products[BeginnerBook]=1" class="join">Click Here To Order</a>
+                <a href="/ecommerce/add-to-cart?products[BeginnerBook]=1" class="join">Click Here To Order</a>
                 <a target="_blank" href="https://www.amazon.com/dp/B07G8N348K" class="join orange">Get Your Copy On <img class="amazon inline-block" src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/amazon-logo.png"></a>
             </div>
         </div>
@@ -480,7 +480,7 @@
             ])
             @include('drumeo.products.partials.question-dropdown', [
             "question" => "It says there’s a free 30-day membership pass to Drumeo. What’s that?",
-            "answer" => "Drumeo is our award-winning online drum lessons experience, where you’ll get step-by-step video lessons from the best drummers and teachers in the world: <a target='_blank' href='https://www.drumeo.com/'>www.Drumeo.com/</a>.<br><br>We’ve included a free 30-day membership redemption pass inside every copy of The Best Beginner Drum Book, so once your book arrives you’ll get an amazing book PLUS video drum lessons for 30 days ($29 value)."
+            "answer" => "Drumeo is our award-winning online drum lessons experience, where you’ll get step-by-step video lessons from the best drummers and teachers in the world: <a target='_blank' href='https://www.drumeo.com/'>www.Drumeo.com/</a>.<br><br>We’ve included a free 30-day membership redemption pass inside every copy of The Best Beginner Drum Book, so once your book arrives you’ll get an amazing book PLUS video drum lessons for 30 days ($30 value)."
             ])
         </div>
         <div class="row">
@@ -546,7 +546,7 @@
 @stop
 
 @section('scripts')
-    <script src="{{ asset('/marketing/js/sliding-anchor.js') }}"></script>
+
     <script>
         $(document).ready(function () {
             $(document).foundation();

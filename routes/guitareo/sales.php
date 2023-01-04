@@ -6,19 +6,25 @@ use App\Http\Controllers\Guitareo\SalesController;
 Route::domain('{guitareoDomain}')
     ->middleware(['web_public'])
     ->group(function () {
-    Route::get('/', [SalesController::class, 'home']);
+    Route::get('/', [SalesController::class, 'home'] );
+    Route::get('/new-year', [SalesController::class, 'promo'] );
+    Route::get('/choose-plan', [SalesController::class, 'choosePlan'] );
     Route::get('/student-only', [SalesController::class, 'membershipStudents']);
-    Route::get('/trial', [SalesController::class, 'trial']);
+    Route::get('/trial', [SalesController::class, 'home']);
     Route::get('/trial-month', [SalesController::class, 'trial30']);
-    Route::get('/choose-your-trial', [SalesController::class, 'chooseyourtrial']);
+    Route::get('/choose-your-trial', [SalesController::class, 'choosePlan']);
     Route::get('/choose-your-trial-month', [SalesController::class, 'chooseyourtrialmonth']);
 
     Route::get('/cookie', [SalesController::class, 'cookie']);
     Route::get('/terms', [SalesController::class, 'terms']);
     Route::get('/privacy', [SalesController::class, 'privacy']);
 
+    Route::get('/songs', [SalesController::class, 'songs']);
+    Route::get('/coaches', [SalesController::class, 'coaches']);
+    Route::get('/method', [SalesController::class, 'method']);
+
     Route::get('/lifetime', [SalesController::class, 'lifetime']);
-        Route::get('/survival-kit-instructions', [SalesController::class, 'survivalkitinstructions']);
+    Route::get('/survival-kit-instructions', [SalesController::class, 'survivalkitinstructions']);
 
     Route::get('/daddario-string-session', [SalesController::class, 'daddariostringsession']);
     Route::get('/daddario-string-session-ga ', [SalesController::class, 'daddariostringsessionga']);

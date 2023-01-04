@@ -1,4 +1,4 @@
-@extends('drumeo._partials.layout-template')
+@extends('drumeo._partials.global-layout')
 
 @section('global-head')
     <meta charset="UTF-8">
@@ -25,7 +25,7 @@
 
 @section('global-body')
     @include("drumeo.sales.partials._nav", [
-        "edgeVersion" => true
+        "subscriptionVersion" => true
     ])
     <section class="trailer-section text-center">
         <div class="container mx-auto clearfix">

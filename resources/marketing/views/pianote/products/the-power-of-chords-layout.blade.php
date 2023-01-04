@@ -587,7 +587,7 @@
         </div>
     </section>
 
-    <div id="orderNow" class="anchor"></div>
+    <div id="customize-anchor" class="anchor"></div>
     <section class="px-4 py-10 md:py-20" style="background: #EFF7FF;">
         <div class="max-w-sm md:max-w-2xl lg:max-w-3xl mx-auto text-center">
             <img class="h-20 sm:h-24 mb-8 lazyload" data-src="https://pianote.s3.amazonaws.com/products/the-power-of-chords/Logo_center.png" alt="centerd logo">
@@ -746,7 +746,7 @@
     </script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/parcel/pianote/nav-footer.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
 

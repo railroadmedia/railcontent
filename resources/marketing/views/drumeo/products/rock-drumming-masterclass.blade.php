@@ -18,7 +18,7 @@
 
 @section('scripts')
     @parent
-    <script src="{{ asset('/marketing/js/sliding-anchor.js') }}"></script>
+
     <script>
         $(function () {
             $(document).foundation();
@@ -59,7 +59,7 @@
             <h3 class="columns">The Rock Drumming Masterclass is a
                 <br class="show-for-medium-only">26-week online course with Todd Sucherman.</h3>
 
-            <div class="columns"><a href="/laravel/public/shopping-cart/api/query?products[rock-drumming-masterclass-pack]=1" class="join blue">Get Started &raquo;</a></div>
+            <div class="columns"><a href="/ecommerce/add-to-cart?products[rock-drumming-masterclass-pack]=1" class="join blue">Get Started &raquo;</a></div>
 
             <p class="columns uppercase price">
                 @if(Prices::$rdmFull > Prices::$rdmRegular)
@@ -78,7 +78,7 @@
                     <iframe class="reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/400735162?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
                 </div>
                 <br>
-                <a href="/laravel/public/shopping-cart/api/query?products[rock-drumming-masterclass-pack]=1" class="join blue">Get Started &raquo;</a>
+                <a href="/ecommerce/add-to-cart?products[rock-drumming-masterclass-pack]=1" class="join blue">Get Started &raquo;</a>
             </div>
         </div>
     </header>
@@ -634,7 +634,7 @@
                 Todd Sucherman’s 26-Week Online <br class="hide-for-large">
                 Course For Just ${{ round(Prices::$rdmRegular / 26, 2) }} Per Week</h1>
 
-            <div class="columns"><a href="/laravel/public/shopping-cart/api/query?products[rock-drumming-masterclass-pack]=1" class="join blue">Get Started &raquo;</a></div>
+            <div class="columns"><a href="/ecommerce/add-to-cart?products[rock-drumming-masterclass-pack]=1" class="join blue">Get Started &raquo;</a></div>
 
             <h2 class="columns uppercase">
                 @if(Prices::$rdmFull > Prices::$rdmRegular)

@@ -1,4 +1,4 @@
-@extends('drumeo._partials.layout-template')
+@extends('drumeo._partials.global-layout')
 
 @section('global-head')
     <title>Getting Started On The Drums | Drumeo</title>
@@ -505,7 +505,7 @@
             $(document).foundation();
         });
     </script>
-    <script src="{{ asset('/marketing/js/sliding-anchor.js') }}"></script>
+
     <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script src="{{ asset('/marketing/js/drumeo/pre-form-submit-facebook-lead.js') }}"></script>
     <script src="{{ asset('/marketing/js/drumeo/infusionsoft-tracking.js') }}"></script>
