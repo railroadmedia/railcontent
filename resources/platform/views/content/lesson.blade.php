@@ -23,7 +23,7 @@
 
                 <div class="p-lg-only lean">
                     {{-- Video Player --}}
-                    @if ($lessonType == 'sing-along')
+                    @if ($lessonType == 'song')
                         <youtube-player ref="mediaElementVueInstance" brand="{{ $brand }}"
                             video-id="{{ $rangesVideoIds['original'] ?? '' }}"
                             video-length="{{ $lessonContent->fetch(
@@ -83,7 +83,7 @@
                                         brand="{{ $brand }}"
                                         poster="{{ $lessonContent['video_poster_image_url'] ?? '' }}"
                                         :sources="{{ json_encode($lessonContent['video_playback_endpoints'] ?? []) }}"
-                                        @if ($lessonType == 'sing-along') :ranges="{{ json_encode($lessonContent['ranges'] ?? []) }}"
+                                        @if ($lessonType == 'song') :ranges="{{ json_encode($lessonContent['ranges'] ?? []) }}"
                                                     :ranges-video-ids="{{ json_encode($rangesVideoIds ?? []) }}"
                                                     :show-range-buttons="true" @endif
                                         hls-manifest-url="{{ $lessonContent['hlsManifestUrl'] ?? '' }}"
