@@ -29,7 +29,7 @@
             <div class="sm:flex mx-auto items-center text-center" style="max-width: 890px;">
                 <img class="w-full avatar mx-auto mb-3 md:mb-0" src="https://drumeo-assets.s3.amazonaws.com/sales/2021/musora-brands.png">
                 <div class="md:text-left px-2 md:pl-8 lg:pl-10">
-                    <h6 class="leading-normal mb-3"><strong>Musora Students</strong> To thank you for already being a Musora student, you’ll save {{ round(100 - (100 * (197 / Prices::$drumeoEdgeAnnualFull))) }}% when you add a Drumeo membership to your existing account. (Normally ${{ Prices::$drumeoEdgeAnnualFull }} per year, yours for just $197.)</h6>
+                    <h6 class="leading-normal mb-3"><strong>Musora Students</strong> To thank you for already being a Musora student, you’ll save {{ round(100 - (100 * (197 / Prices::$plusSubscriptionAnnualFull))) }}% when you add a Drumeo membership to your existing account. (Normally ${{ Prices::$plusSubscriptionAnnualFull }} per year, yours for just $197.)</h6>
                     <a class="join blue smaller" href="/ecommerce/add-to-cart?products[DLM-1-year]=1&promo-code=student-discount&locked=true">Get Started &raquo;</a>
                 </div>
             </div>
@@ -38,14 +38,14 @@
     <a href="#customize-anchor" class="promo-banner bg-black w-full py-1 mx-auto -mt-10 block z-10 whitespace-nowrap shadow-md overflow-hidden leading-none text-xs transition-colors duration-300 text-center text-white hover:text-gray-50 bg-black text-white">
         <div class="container mx-auto">
             <div class="text text-center">
-                <p class="leading-tight uppercase"><strong>Musora Students Join Drumeo<br> For Just <s class="opacity-60">${{ Prices::$drumeoEdgeAnnualFull }}</s> $197 per year</strong></p>
+                <p class="leading-tight uppercase"><strong>Musora Students Join Drumeo<br> For Just <s class="opacity-60">${{ Prices::$plusSubscriptionAnnualFull }}</s> $197 per year</strong></p>
             </div>
         </div>
     </a>
 @endsection
 
 @section('comparison')
-    <td><s>${{ Prices::$drumeoEdgeAnnualFull }}</s> <strong>$197</strong><br>PER YEAR</td>
+    <td><s>${{ Prices::$plusSubscriptionAnnualFull }}</s> <strong>$197</strong><br>PER YEAR</td>
 @endsection
 
 @section('final')
@@ -53,8 +53,8 @@
     <section class="content-section grey text-center customize trial" style="background-color:#000;">
         <div class="container mx-auto">
             <img class="h-5 md:h-7 lg:h-10 mb-2" src="https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png">
-            <h1 class="uppercase text-2xl md:text-4xl lg:text-5xl"><strong>{{ round(100 - (100 * (197 / Prices::$drumeoEdgeAnnualFull))) }}%-OFF MUSORA DISCOUNT</strong></h1>
-            <h2 class="mt-4 md:mt-7"><strong>Join Drumeo for just<br class="inline md:hidden"> <s class="opacity-60">${{ Prices::$drumeoEdgeAnnualFull }}</s> <span class="text-drumeo">$197</span> per year.</strong></h2>
+            <h1 class="uppercase text-2xl md:text-4xl lg:text-5xl"><strong>{{ round(100 - (100 * (197 / Prices::$plusSubscriptionAnnualFull))) }}%-OFF MUSORA DISCOUNT</strong></h1>
+            <h2 class="mt-4 md:mt-7"><strong>Join Drumeo for just<br class="inline md:hidden"> <s class="opacity-60">${{ Prices::$plusSubscriptionAnnualFull }}</s> <span class="text-drumeo">$197</span> per year.</strong></h2>
             <h5 class="mt-3 mb-4 md:mb-7 text-light-navy"> (90-Day Money Back Guarantee.)</h5>
             <a class="join blue" href="/ecommerce/add-to-cart?products[DLM-1-year]=1&promo-code=student-discount&locked=true">Get Started &raquo;</a>
             <p class="text-light-navy mb-5"><em>Your discounted rate is conditional on your continuation as a multi-platform student. If you  <br class="hidden md:inline">

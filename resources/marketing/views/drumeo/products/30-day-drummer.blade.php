@@ -195,8 +195,8 @@
     ])
     @include('drumeo.products.partials.promo-banner', [
                 "name" => "Drumeo EarDrums",
-                "fullPrice" => Prices::$earDrumsFull,
-                "price" => Prices::$earDrums,
+                "fullPrice" => floatval($productPrices['drumeo-eardrums']->price),
+                "price" => floatval($productPrices['drumeo-eardrums']->discounted_price),
                 "noBreadcrumb" => true
             ])
 
@@ -568,7 +568,7 @@
 {{--                        @if(is_current_user_a_member())--}}
 {{--                            <td class="rounded-b-xl"><strong>FREE</strong><br> for Drumeo<br class="inline lg:hidden"> Members</td>--}}
 {{--                        @else--}}
-{{--                            <td class="rounded-b-xl"><strong>${{ Prices::$thirtyDayDrummer }}</strong></td>--}}
+{{--                            <td class="rounded-b-xl"><strong>${{ 97 }}</strong></td>--}}
 {{--                        @endif--}}
                         <td class="rounded-bl-xl"><strong>$50-$100</strong><br> per lesson</td>
                         <td><strong>$89-$270+</strong><br>&nbsp;</td>
@@ -747,9 +747,9 @@
                                 {{--@endif--}}
 
                                 {{--@if(is_current_user_a_member())--}}
-                                    {{--<h1 class="inline-block mr-4 align-middle text-4xl sm:text-5xl"><s class="opacity-60">${{ Prices::$thirtyDayDrummerFull }}</s> <strong>FREE</strong></h1>--}}
+                                    {{--<h1 class="inline-block mr-4 align-middle text-4xl sm:text-5xl"><s class="opacity-60">${{ 97 }}</s> <strong>FREE</strong></h1>--}}
                                 {{--@else--}}
-                                    {{--<h1 class="inline-block mr-4 align-middle text-4xl sm:text-5xl"><strong>${{ Prices::$thirtyDayDrummer }}</strong></h1>--}}
+                                    {{--<h1 class="inline-block mr-4 align-middle text-4xl sm:text-5xl"><strong>${{ 97 }}</strong></h1>--}}
                                 {{--@endif--}}
 
                                 {{--@if($isUserAlreadyRegistered)--}}
@@ -760,7 +760,7 @@
                                 <a class="join blue medium w-1/2 align-middle" data-open="waitlistModal">JOIN THE WAITLIST</a>
 
                                 <p class="text-sm mt-1">Enrollment is now closed.</p>
-                                {{--<p class="text-sm mt-1 --}}{{--mb-5--}}{{--"><em>One-Time Payment. (Just ${{ round((Prices::$thirtyDayDrummer / 30), 2) }} per day.)</em></p>--}}
+                                {{--<p class="text-sm mt-1 --}}{{--mb-5--}}{{--"><em>One-Time Payment. (Just ${{ round((97 / 30), 2) }} per day.)</em></p>--}}
 
                                 {{--<p class="text-sm text-drumeo">--}}
                                     {{--<em><a class="cursor-pointer" data-open="bundle">Need a practice pad & drumsticks?<br class="inline lg:hidden"> Click <strong>here</strong> for a special offer.</a></em>--}}
@@ -773,7 +773,7 @@
                             {{--<a href="/ecommerce/add-to-cart?products[30-day-drummer]=1&products[Drumeo-VaterSticks]=1&products[drumeo_access_30-days]=1&locked=true" class="px-5 sm:px-7 lg:px-9 py-7 sm:py-9 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-1/2" style="background-color:#d4eaff;">--}}
                                 {{--<h3><strong>30-Day Drummer</strong></h3>--}}
                                 {{--<p class="text-sm mt-2 mb-5">Just The Course + 2 Bonuses worth $42.94.</p>--}}
-                                {{--<h2 class="inline-block"><strong class="text-4xl">${{ Prices::$thirtyDayDrummer }}</strong></h2> <p class="inline-block text-xs">one time payment.</p><br>--}}
+                                {{--<h2 class="inline-block"><strong class="text-4xl">${{ 97 }}</strong></h2> <p class="inline-block text-xs">one time payment.</p><br>--}}
                                 {{--<div class="join blue smaller my-4">ENROLL NOW</div>--}}
                                 {{--<ul class="list-disc ml-10">--}}
                                     {{--<li class="text-sm relaxed"><span class="text-drumeo">Free</span> Drumsticks</li>--}}

@@ -112,7 +112,7 @@
             </div>
             <a class="join blue start-trial">Start Free Trial &raquo;</a>
             <p class="disclaimer">Credit card required. You’ll get unlimited access FREE for 7 days before continuing with<br class="show-for-large">
-                a monthly membership for ${{ Prices::$drumeoEdgeFull }}/month. Cancel anytime during or after your trial.</p>
+                a monthly membership for ${{ Prices::$plusSubscriptionMonthlyFull }}/month. Cancel anytime during or after your trial.</p>
         </div>
 
         <iframe class="trial" name="cartIframe" onload="checkUrl();" src="/ecommerce/add-to-cart?products[DLM-Trial-1-month]=1&locked=true" frameborder="none"></iframe>
@@ -140,7 +140,7 @@
             <div class="columns medium-4">
                 <div class="point-icon"><i class="fas fa-graduation-cap"></i></div>
                 <p><strong>Award-Winning<br> Drum Lessons</strong><br>
-                    {{ Prices::$courses }}+ step-by-step courses from the
+                    {{ Prices::$drumeoCourses }}+ step-by-step courses from the
                     world’s best drummers and teachers.</p>
             </div>
             <div class="columns medium-4">
