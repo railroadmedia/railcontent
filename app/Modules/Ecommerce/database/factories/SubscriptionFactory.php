@@ -2,6 +2,7 @@
 
 namespace App\Modules\Ecommerce\database\factories;
 
+use App\Modules\Ecommerce\Models\Product;
 use App\Modules\Ecommerce\Models\Subscription;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -10,6 +11,23 @@ use Modules\UserManagementSystem\Models\User;
 class SubscriptionFactory extends Factory
 {
     protected $model = Subscription::class;
+
+    public static function createWith(
+        User $user,
+        Product $product,
+        Carbon $startTime,
+        Carbon $paidUntil,
+        array $attributes = []
+    ) {
+        $attributes = array_merge($attributes, [
+            'user_id' => $user,
+            'product_id' => $product,
+            'start_date' => $startTime,
+            'paid_until' => $paidUntil,
+            'total_price' => $product->price,
+        ]);
+        return Subscription::factory()->create($attributes);
+    }
 
     public function definition(): array
     {

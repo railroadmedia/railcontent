@@ -348,10 +348,10 @@
                                         class="tw-btn-primary tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600 tw-my-3 mu-modal-open"
                                         id="modal-upgrade"
                                     >
-                                        Upgrade Membership
+                                        Upgrade Membership to Annual
                                     </button>
                                 </div>
-                                <p class="tw-text-xs tw-italic tw-mt-1 tw-mb-3 tw-text-[#00101D] dark:tw-text-white tw-tracking-wide">Save with an annual plan</p>
+                                <p class="tw-text-xs tw-italic tw-mt-1 tw-mb-3 tw-text-[#00101D] dark:tw-text-white tw-tracking-wide">Save 37% with an annual plan</p>
 
                                 <div>
                                     @include('account.settings.partials.cancellation.cancel-btn')
@@ -364,6 +364,10 @@
                             @endif
 
                         </div>
+
+                        {{-- Song Membership Banner --}}
+                        <membership-update></membership-update>
+
                     </div>
 
                     {{-- ================================= Right box ================================= --}}

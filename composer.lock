@@ -16639,7 +16639,14 @@
             "time": "2021-07-28T10:34:58+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "package": "railroad/ecommerce",
+            "version": "dev-feature-upgrade-rwillems-20221412",
+            "alias": "v5.0.53",
+            "alias_normalized": "5.0.53.0"
+        }
+    ],
     "minimum-stability": "dev",
     "stability-flags": [],
     "prefer-stable": true,
