@@ -14,7 +14,7 @@
         <meta property="og:image" content="https://pianote.s3.amazonaws.com/sales/2023/share-image-pianote2.jpg" style="display: none;">
     @endif
 
-    @include('pianote._partials._fonts')
+    @include('_partials.layout._fonts')
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}">

@@ -10,7 +10,7 @@
     <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/festival/2021-notification/header.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/festival">
 
-    @include('drumeo._partials._fonts')
+    @include('_partials.layout._fonts')
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation-float.min.css"/>
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">

@@ -8,11 +8,11 @@
 
     {!! \App\Analytics\Tracker::trackPageView() !!}
 
-    @include('pianote._partials.google-optimize')
+    <script src="https://www.googleoptimize.com/optimize.js?id=GTM-NJR7J6C"></script>
 
     @yield('global-head')
 
-    @include('pianote._partials._fonts')
+    @include('_partials.layout._fonts')
     @include('_partials.layout.favicons.pianote-favicons')
 
     {!! \App\Analytics\Tracker::headBottom() !!}

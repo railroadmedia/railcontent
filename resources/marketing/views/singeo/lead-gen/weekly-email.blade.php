@@ -10,7 +10,7 @@
     <meta name="description" content="Enter your email address below to get more free singing lessons.">
 
     <base target="_parent">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
+    @include('_partials.layout._tailwindcdn')
     <link rel="stylesheet" href="{{ asset('/marketing/css/singeo/tailwind-helpers.css') }}" >
     <style>
         body {
@@ -122,7 +122,7 @@
     </style>
 
     @include('_partials.layout.favicons.singeo-favicons')
-    @include('singeo.sales.partials._fonts')
+    @include('_partials.layout._fonts')
 
     {!! \App\Analytics\Tracker::trackPageView() !!}
 

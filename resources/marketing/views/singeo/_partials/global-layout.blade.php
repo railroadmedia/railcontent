@@ -17,10 +17,10 @@
 
     {!! \App\Analytics\Tracker::trackPageView() !!}
 
-    @include('singeo._partials.includes.google-optimize')
+    <script src="https://www.googleoptimize.com/optimize.js?id=OPT-NV2LHJP"></script>
 
     @include('_partials.layout.favicons.singeo-favicons')
-    @include('singeo.sales.partials._fonts')
+    @include('_partials.layout._fonts')
 
     {!! \App\Analytics\Tracker::headBottom() !!}
 

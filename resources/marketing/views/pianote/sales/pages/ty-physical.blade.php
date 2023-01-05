@@ -11,7 +11,7 @@
     <meta property="og:description" content="Perfectly Structured Lessons, Insanely Engaging Teachers, and Unlimited Support - 100% Guaranteed.">
 
     <meta name="google-site-verification" content="jBgu6Dd2U4OfaZ_90eIjxuPWIJ1qIVBuO5nEp2xvhbE"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+    @include('_partials.layout._tailwindcdn')
     <link href="{{ asset('/marketing/css/pianote/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
 

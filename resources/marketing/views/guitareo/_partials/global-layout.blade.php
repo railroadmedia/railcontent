@@ -13,11 +13,11 @@
 
     {!! \App\Analytics\Tracker::trackPageView() !!}
 
-    @include('guitareo._partials.includes.google-optimize')
+    @include('guitareo._partials.google-optimize')
     @include('guitareo._partials.inspectlet')
 
     @include('_partials.layout.favicons.guitareo-favicons')
-    @include('guitareo._partials._fonts')
+    @include('_partials.layout._fonts')
 
     @yield('styles')
     @yield('page-styles')

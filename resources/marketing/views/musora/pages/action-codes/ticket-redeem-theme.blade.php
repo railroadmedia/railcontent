@@ -37,7 +37,7 @@
     @include('partials.favicons')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation-float.min.css"/>
     <link href="{{ asset('/assets/members-area/css/gulp/navigation-sales.css') }}" rel="stylesheet">
-    @include('partials.fonts')
+    @include('_partials.layout._fonts')
     <style>
         .tipsy { font-size: 10px; position: absolute; padding: 5px; z-index: 100000; }
         .tipsy-inner { background-color: #000; color: #FFF; max-width: 200px; padding: 5px 8px 4px 8px; text-align: center; }

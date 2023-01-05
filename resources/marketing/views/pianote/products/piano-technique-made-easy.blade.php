@@ -11,7 +11,7 @@
 
     <link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+    @include('_partials.layout._tailwindcdn')
     <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/ptme.css') }}">
 @stop
@@ -528,19 +528,19 @@
         <div class="container">
             <h2><strong>What students <br class="hidden-sm hidden-md hidden-lg"> are saying.</strong></h2>
             <div class="testimonials">
-                @include('pianote.sales.partials._testimonial', [
+                @include('pianote.products.partials._testimonial', [
                 "heading" => "I could learn songs … much easier",
                 "testimonial" => "I was unfamiliar with my scales and wanted to improve.<br><br>Piano Technique Made Easy was well laid out and thoughtful. I just needed to put in the work.<br><br>After starting, I noticed that I could learn songs in the keys I’ve practiced much easier, and it wasn’t tedious like before. It also helped me to doodle in case I forgot a few notes.<br><br>I’d recommend Piano Technique Made Easy because it will increase your familiarity with the piano and help you learn songs much faster.",
                 "name" => "Wasif Farhan",
                 "location" => "Dhaka, BANGLADESH",
                 ])
-                @include('pianote.sales.partials._testimonial', [
+                @include('pianote.products.partials._testimonial', [
                 "heading" => "I got the feeling I was actually improving…",
                 "testimonial" => "Piano Technique Made Easy has taught me the fundamentals and helped me get to playing some of my original songs.<br><br>Soon after starting, I got the feeling that I was actually improving and accomplishing what I set out to do.<br><br>If anyone is motivated to learn the piano, Pano Technique Made Easy is probably the best way to do it.",
                 "name" => "Dennis Inman",
                 "location" => "Washington, USA",
                 ])
-                @include('pianote.sales.partials._testimonial', [
+                @include('pianote.products.partials._testimonial', [
                 "heading" => "I had a hard time trying to remember scales…",
                 "testimonial" => "I had a hard time trying to remember scales. It is so much easier following the techniques on video, and it’s an excellent way of reinforcing memory.<br><br>Piano Technique Made Easy has helped to concentrate my learning. I enjoy a video demonstration that I can return to and find visual demo a good way to learn.<br><br>I REALLY enjoy the presentation of videos. They have a warm and encouraging teaching style. Well done!",
                 "name" => "Chris Fay",

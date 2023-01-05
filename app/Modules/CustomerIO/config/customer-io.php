@@ -360,6 +360,16 @@ return [
                     'pianote',
                 ],
             ],
+            'The Minor Blues Made Easy' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_minor-blues',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
             'Riffs And Fills' => [
                 'custom_attributes' => [
                 ],

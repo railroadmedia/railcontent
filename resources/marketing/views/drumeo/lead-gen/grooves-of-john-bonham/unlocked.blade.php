@@ -13,9 +13,9 @@
     <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/lead-gen/grooves-of-john-bonham/og-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/grooves-of-john-bonham/">
 
-    @include('drumeo._partials._fonts')
+    @include('_partials.layout._fonts')
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
+    @include('_partials.layout._tailwindcdn')
     <link href="{{ asset('marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/lead-gen-tw.css') }}" rel="stylesheet">

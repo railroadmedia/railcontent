@@ -1,5 +1,3 @@
-{{--<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;900&display=swap" rel="stylesheet">--}}
-
 <div style="background:linear-gradient(to bottom, #02010f, #010522);">
     <section class="content-section text-center customize px-4 lg:px-6 relative z-50 overflow-hidden bg-center bg-cover lazyload" style="background: url(https://drumeo-assets.s3.amazonaws.com/sales/2023/order-bg.jpg);">
         <div class="container mx-auto relative z-50">
