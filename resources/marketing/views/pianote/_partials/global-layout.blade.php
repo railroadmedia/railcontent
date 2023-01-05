@@ -8,7 +8,7 @@
 
     {!! \App\Analytics\Tracker::trackPageView() !!}
 
-    @include('pianote._partials.google-optimize')
+    <script src="https://www.googleoptimize.com/optimize.js?id=GTM-NJR7J6C"></script>
 
     @yield('global-head')
 
