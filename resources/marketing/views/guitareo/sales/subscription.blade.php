@@ -165,6 +165,7 @@
         'pointOne' => 'Improve Your Skills',
         'pointTwo' => 'World-Class Teachers',
         'pointThree' => 'Play More<br class="inline lg:hidden"> Songs',
+        'cta' => 'SEE YOUR DEAL &raquo',
         'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Guitareo+Membership/79348454',
         'students' => number_format(Prices::$students),
     ])
