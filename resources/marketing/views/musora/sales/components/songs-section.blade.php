@@ -1,4 +1,5 @@
 <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #0c1524 calc(50% + 1px));"></div>
+<div id="songs" class="anchor"></div>
 <section class="text-center text-white px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#0c1524;">
     <div class="container max-w-6xl mx-auto">
         <h2><strong>{!! $header !!}</strong></h2>

@@ -11,7 +11,7 @@
     @hasSection('share-image')
         @yield('share-image')
     @else
-        <meta property="og:image" content="https://pianote.s3.amazonaws.com/sales/2023/share-image-pianote.jpg" style="display: none;">
+        <meta property="og:image" content="https://pianote.s3.amazonaws.com/sales/2023/share-image-pianote2.jpg" style="display: none;">
     @endif
 
     @include('pianote._partials._fonts')
@@ -166,9 +166,9 @@
     @include('musora.sales.components.header-section', [
         'header' => 'Online piano lessons for all skill levels.',
         'desc' => 'Learn the piano faster with step-by-step lessons, a thousand songs, and unlimited personal support. ',
-        'thumb' => 'https://pianote.s3.amazonaws.com/sales/2023/header-thumb.jpg',
-        'promoThumb' => 'https://pianote.s3.amazonaws.com/sales/2023/jan-thumb.png',
-        'promoThumbM' => 'https://pianote.s3.amazonaws.com/sales/2023/jan-thumb-m.jpg',
+        'thumb' => 'https://pianote.s3.amazonaws.com/sales/2023/header-thumb2.jpg',
+        'promoThumb' => 'https://pianote.s3.amazonaws.com/sales/2023/jan-thumb2.png',
+        'promoThumbM' => 'https://pianote.s3.amazonaws.com/sales/2023/jan-thumb-m2.jpg',
         'pointOne' => 'Improve Your Skills',
         'pointTwo' => 'World-Class Teachers',
         'pointThree' => 'Play More<br class="inline lg:hidden"> Songs',
@@ -486,7 +486,6 @@
             ],
         ]
     @endphp
-    <div id="testimonials" class="anchor"></div>
     @include('musora.sales.components.testimonials-section', [
         'header' => 'Trusted by pianists<br class="inline-block sm:hidden">  everywhere.',
         'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Pianote+Membership/79348450',
@@ -505,6 +504,7 @@
     ])
     <div class="unstick-trigger block"></div>
     <div id="customize-anchor" class="anchor"></div>
+    <div id="order" class="anchor"></div>
     @if(!empty($promoVersion))
 
         @php

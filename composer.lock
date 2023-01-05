@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "89421e991494ce7e47e3a4df7b1c2afa",
+    "content-hash": "a8a7cd267c419352fe207a626fc0e496",
     "packages": [
         {
             "name": "aporat/store-receipt-validator",
@@ -8192,12 +8192,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "e35d5a7a371ce43a869075ced2dd236ed8262b9f"
+                "reference": "eded10ba4943d7bf9d6c9b39c272a5b6b733e0ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/e35d5a7a371ce43a869075ced2dd236ed8262b9f",
-                "reference": "e35d5a7a371ce43a869075ced2dd236ed8262b9f",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/eded10ba4943d7bf9d6c9b39c272a5b6b733e0ce",
+                "reference": "eded10ba4943d7bf9d6c9b39c272a5b6b733e0ce",
                 "shasum": ""
             },
             "require": {
