@@ -1,4 +1,4 @@
-<div class="mu-modal {{ $modalId }} tw-opacity-0 tw-pointer-events-none tw-fixed tw-w-full tw-h-full tw-top-0 tw-left-0 tw-flex tw-items-center tw-justify-center tw-z-150 tw-overflow-auto">
+<div class="mu-modal {{ $modalId }} tw-opacity-0 tw-pointer-events-none tw-fixed tw-w-full tw-h-full tw-top-0 tw-left-0 tw-flex tw-items-center tw-justify-center tw-z-[150] tw-overflow-auto">
 
     <div class="mu-modal-overlay tw-absolute tw-w-full tw-h-full tw-bg-gray-900 tw-opacity-75 tw-z-150"></div>
 

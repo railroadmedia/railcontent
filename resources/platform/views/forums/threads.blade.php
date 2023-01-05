@@ -73,7 +73,7 @@
                 @endslot
             @endcomponent
 
-            <div class="tw-container tw-mx-auto tw-px-4 dark:tw-text-white tw-pt-8 tw-pb-14">
+            <div class="tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white tw-pt-8 tw-pb-14">
                 <div class="tw-flex tw-flex-col">
                     <div class="tw-flex">
                         <forum-threads-table
@@ -83,6 +83,7 @@
                             :pinned-threads="{{ json_encode($pinnedThreads) }}"
                             :threads="{{ json_encode($threads) }}"
                             :thread-count="{{ $threadCount }}"
+                            search-json-results-endpoint-url="{{ url()->route('forums.get-search-results-json') }}"
                         />
                     </div>
                 <!-- <p class="font-bold">{{ json_encode($threads) }}</p> -->

@@ -46,6 +46,10 @@ const props = defineProps({
   adminMessage: {
     type: String,
   },
+  canReferNewStudents: {
+      type: Boolean,
+      default: true
+  },
 });
 
 const notification = useNotificationStore();
@@ -84,7 +88,7 @@ const onCollapseSidebar = (val) => {
     } else {
       isSidebarHidden.value = false;
       isSidebarCollapsed.value = !isSidebarCollapsed.value;
-      //Dom manipulation... 
+      //Dom manipulation...
       if (isSidebarCollapsed.value) {
         document.body.classList.add('sidebar-collapsed')
       } else {
@@ -134,7 +138,7 @@ onBeforeMount(() => {
   } else if (localStorage.getItem("isSidebarCollapsed") && !props.forceSidebarHidden) {
     // On desktop load the sidebar collapsed value saved on local storage, if the hidden state is not forced
     isSidebarCollapsed.value = JSON.parse(localStorage.getItem("isSidebarCollapsed"));
-    //Dom manipulation... 
+    //Dom manipulation...
     if (isSidebarCollapsed.value) {
       document.body.classList.add('sidebar-collapsed')
     } else {
@@ -163,7 +167,7 @@ const handleCloseConfirmationModal = () => {
 
 const handleNotificationClear = () => {
   notification.clear();
-};;
+};
 
 const onResize = (e) => {
   const smallBreakpoint = window.matchMedia("(max-width: 1023px)");
@@ -172,6 +176,11 @@ const onResize = (e) => {
     isSidebarCollapsed.value = false;
   }
 }
+
+const handleSubmit = () => {
+  confirmation.callbacks.submit();
+  confirmation.reset();
+};
 
 onMounted(() => {
   //Check if Mobile on Resize
@@ -196,12 +205,13 @@ onUnmounted(() => {
       :title="confirmation.title"
       :subtitle="confirmation.subtitle"
       @onCancel="handleCloseConfirmationModal"
-      @onSubmit="confirmation.callbacks.submit"
+      @onSubmit="handleSubmit"
     />
 
     <Navbar :forceSidebarHidden="forceSidebarHidden" :brand="brand" :has-notifications="hasNotifications"
       :user-name="userName" :userAvatar="userAvatar" :account-url="accountUrl" :isSidebarHidden="isSidebarHidden"
       :isDarkModeSelected="isDarkModeSelected" :isSidebarCollapsed="isSidebarCollapsed"
+      :canReferNewStudents="canReferNewStudents"
       @onCollapseSidebar="onCollapseSidebar" @onColorModeToggle="onColorModeToggle" />
 
     <!-- Page Container -->

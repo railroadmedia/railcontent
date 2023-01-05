@@ -1,19 +1,5 @@
 @extends('guitareo.products.guitar-technique-made-easy-layout')
 
-@section('topbar')
-    <div class="promo-banner-shim"></div>
-    <a href="/" class="promo-banner fixed" style="background: linear-gradient(to bottom, #97fabf, #9ddcf7);color:#000;">
-        <div class="noise-wrap">
-            <div class="row container mx-auto">
-                <div class="text text-center">
-                    {{--<img class="logo" src="https://guitareo.s3.amazonaws.com/sales/promos/black-friday/xm-logo2021.png">--}}
-                    <p><strong>$197 or FREE With A $100<br>  Guitareo Membership</strong></p>
-                </div>
-            </div>
-        </div>
-    </a>
-@stop
-
 @section('benefits')
     <div class="columns no-padding benefit-row">
         <div class="columns medium-6 float-right">

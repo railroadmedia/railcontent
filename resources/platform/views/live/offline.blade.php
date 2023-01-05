@@ -11,7 +11,7 @@
         @slot('content')
             <div class="tw-inline-flex tw-w-full tw-flex-col tw-pr-4">
                 <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">
-                    <i class="icon-live tw-text-{{$brand}} tw-mr-3 tw-text-3xl"></i>
+                    <musora-icon icon-name="play-circle-filled" class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                     <span class="tw-text-32 tw-font-bold"><span class="tw-capitalize">{{ $brand }}</span> Live</span>
                 </h1>
 

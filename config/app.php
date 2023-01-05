@@ -180,6 +180,7 @@ return [
         \Railroad\Railanalytics\AnalyticsServiceProvider::class,
         \Railroad\Location\Providers\LocationServiceProvider::class,
         \Railroad\RemoteStorage\Providers\RemoteStorageServiceProvider::class,
+        \Railroad\LeadTracker\Providers\LeadTrackerServiceProvider::class,
 
         /*
          * Module Service Providers
@@ -191,6 +192,8 @@ return [
         App\Modules\HelpScout\Providers\HelpScoutServiceProvider::class,
         App\Modules\CustomerIO\Providers\CustomerIoServiceProvider::class,
         App\Modules\Content\Providers\ContentServiceProvider::class,
+        App\Modules\Notifications\Providers\NotificationServiceProvider::class,
+        App\Modules\Reporting\Providers\ReportingServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -203,6 +206,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\VaporUiServiceProvider::class,
 
+        Venturecraft\Revisionable\RevisionableServiceProvider::class,
     ],
 
     /*

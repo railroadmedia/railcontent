@@ -6,8 +6,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <!-- Icons -->
-    <link rel="stylesheet" href="https://dpwjbsxqtam5n.cloudfront.net/fonts/font-awesome-5/fontawesome-all.min.css">
-    <link rel="stylesheet" href="https://d1prhhmg8i11jr.cloudfront.net/v1.0.3/dist/icons.css">
+    <script src="https://kit.fontawesome.com/cf2f4c6c71.js" crossorigin="anonymous"></script>
+    <link href="https://dpwjbsxqtam5n.cloudfront.net/fonts/icons.css" rel="stylesheet">
     <!-- Favicons -->
     @include('_partials.layout.favicons.drumeo-favicons')
 @stop
@@ -21,14 +21,14 @@
         "links" => [
             "Member Login" => [
                 "iconClass" => "fas fa-sign-in",
-                "url" => "/members",
+                "url" => get_musora_brand_base_url() . '/login',
             ],
             "Contact" => [
                 "iconClass" => "fas fa-phone",
-                "url" => '/contact',
+                "url" => get_musora_brand_base_url().'/contact',
             ],
             "Drumeo" => [
-                "iconClass" => "icon-courses",
+                "iconClass" => "fas fa-home",
                 "url" => '/',
             ],
             "Drum Shop" => [
@@ -59,8 +59,8 @@
                     "How To Play Drums"=> [
                         "url" => "/beat/how-to-play-drums/",
                     ],
-                    "40 Free Songs"=> [
-                        "url" => "/40-songs",
+                    "100 Free Songs"=> [
+                        "url" => "/100-songs",
                     ],
                 ],
             ],
@@ -92,7 +92,7 @@
 @stop
 
 <!-- Global Wrapper -->
-@section('global-layout-body') 
+@section('global-layout-body')
     <!-- Brand Specific Content -->
     @yield('layout-body')
 @stop
@@ -158,19 +158,19 @@
                 "links" => [
                     [
                         "name" => "Musora",
-                        "url" => "/",
+                        "url" => get_musora_brand_base_url()
                     ],
                     [
                         "name" => "Guitareo",
-                        "url" => "/",
+                        "url" => get_legacy_brand_base_url("guitareo")
                     ],
                     [
                         "name" => "Pianote",
-                        "url" => "/",
+                        "url" => get_legacy_brand_base_url("pianote")
                     ],
                     [
                         "name" => "Singeo",
-                        "url" => "/",
+                        "url" => get_legacy_brand_base_url("singeo")
                     ],
                     [
                         "name" => "Drumeo Kids",

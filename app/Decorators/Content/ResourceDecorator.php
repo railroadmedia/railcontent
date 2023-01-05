@@ -14,7 +14,7 @@ class ResourceDecorator extends ModeDecoratorBase
         }
 
         foreach ($contents as $contentIndex => $content) {
-            foreach ($content['data'] as $resource) {
+            foreach ($content['data'] ?? [] as $resource) {
 
                 if ($resource['key'] === 'resource_name') {
                     $contents[$contentIndex]['resources'][$resource['position']]['resource_id'] = $resource['id'];

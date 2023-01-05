@@ -4,8 +4,10 @@ namespace App\Http;
 
 use App\Http\Middleware\DynamicWebOrAppMiddlewareGroupsAuthenticated;
 use App\Http\Middleware\DynamicWebOrAppMiddlewareGroupsPublic;
+use App\Http\Middleware\ExpiredMemberRedirect;
 use App\Http\Middleware\RedirectIfMobileRequest;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use Railroad\LeadTracker\Middleware\LeadTrackerMiddleware;
 use Railroad\MusoraApi\Middleware\BrandMiddleware;
 
 class Kernel extends HttpKernel
@@ -25,6 +27,8 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+        \App\Http\Middleware\SessionDomains::class,
+        \App\Http\Middleware\LegacyBrandCartURLRedirects::class,
     ];
 
     /**
@@ -34,7 +38,7 @@ class Kernel extends HttpKernel
      */
     protected $middlewareGroups = [
         'web_public' => [
-            \App\Http\Middleware\ClearLegacyMusoraCookies::class,
+//            \App\Http\Middleware\ClearLegacyMusoraCookies::class,
             \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
@@ -47,10 +51,11 @@ class Kernel extends HttpKernel
             \Railroad\Railtracker\Middleware\RailtrackerMiddleware::class,
             \App\Http\Middleware\SetContentPermissions::class,
             RedirectIfMobileRequest::class,
+            LeadTrackerMiddleware::class,
         ],
 
         'web_authenticated' => [
-            \App\Http\Middleware\ClearLegacyMusoraCookies::class,
+//            \App\Http\Middleware\ClearLegacyMusoraCookies::class,
             \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
@@ -63,9 +68,19 @@ class Kernel extends HttpKernel
             \Railroad\Railtracker\Middleware\RailtrackerMiddleware::class,
             \App\Http\Middleware\SetContentPermissions::class,
             RedirectIfMobileRequest::class,
+            LeadTrackerMiddleware::class,
+        ],
+
+        'web_member_only' => [
+            ExpiredMemberRedirect::class,
         ],
 
         'api_public' => [
+//            \App\Http\Middleware\ClearLegacyMusoraCookies::class,
+            \App\Http\Middleware\EncryptCookies::class,
+            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+            \Illuminate\Session\Middleware\StartSession::class,
+            \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \Modules\UserManagementSystem\Middleware\AuthenticateIfAvailable::class,
             \App\Modules\Brand\Middleware\SetLastUsedBrand::class,
@@ -74,6 +89,11 @@ class Kernel extends HttpKernel
         ],
 
         'api_authenticated' => [
+//            \App\Http\Middleware\ClearLegacyMusoraCookies::class,
+            \App\Http\Middleware\EncryptCookies::class,
+            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+            \Illuminate\Session\Middleware\StartSession::class,
+            \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \Modules\UserManagementSystem\Middleware\AuthenticatedOnly::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Modules\Brand\Middleware\SetLastUsedBrand::class,

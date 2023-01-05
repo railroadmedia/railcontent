@@ -125,7 +125,7 @@
                         'hasQAVideo' => !empty($lessonContent['qna_video_playback_endpoints']),
                         'isCompleted' => $lessonContent->fetch('completed'),
                         'contentId' => $lessonContent->fetch('id'),
-                        'xpAmount' => $lessonContent->fetch('xp'),
+                        'xpAmount' => $lessonContent->fetch('fields.xp'),
                     ])
 
                     {{-- Ask a Question Input --}}
@@ -159,7 +159,7 @@
                     'contentType' => $lessonContent->fetch('type'),
                     'progress' => $lessonContent->fetch('progress_percent'),
                     'nextLessonUrl' => '',
-                    'xpAmount' => $lessonContent->fetch('xp'),
+                    'xpAmount' => $lessonContent->fetch('total_xp', $lessonContent->fetch('xp', 0)),
                     'showCompleteButton' => true,
                     'contentId' => $lessonContent->fetch('id'),
                     'brand' => '{{ $brand }}',
@@ -237,7 +237,7 @@
                                 $content['themeColor'] = brand();
                                 $content['timecode'] = $assignment->fetch('data.timecode', 0);
                                 $content['id'] = $assignment->fetch('id');
-                                $content['xp'] = $assignment->fetch('xp');
+                                $content['xp'] = $assignment->fetch('fields.total_xp');
                                 $content['title'] = $assignment->fetch('fields.title');
                                 $content['soundsliceSlug'] = $assignment->fetch('fields.soundslice_slug');
                                 $content['completed'] = $assignment->fetch('completed');

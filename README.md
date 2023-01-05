@@ -20,7 +20,7 @@ This repository is designed to run on PHP 8.0, MySQL 8.0, and Apache/PHP-FPM.
         ```
     - compile frontend assets
         ```
-        cd /app/musora-web-platform && nvm use 16 && yarn && yarn platform-production && yarn marketing-production
+        cd /app/musora-web-platform && nvm use 16 && yarn && yarn platform-production && yarn marketing-production && yarn pp && echo "gotem"
         ```
 - [https://devplatform.musora.com:8443](https://devplatform.musora.com:8443) should now load and the app and automated testing should work
 
@@ -345,6 +345,14 @@ r mwp artisan VaporEnvManager web-staging-one push
 Environment variables are highly sensitive and need to stay secure. Please do not ever commit these .env files or share
 them. They should be deleted from your machine after updates are pushed.
 
+# How To Update Staging/Vapor Environments Databases From Production Data
+
+Use the r command 'update-databases'. Example:  
+```
+r mwp update-databases
+```
+Then enter the corresponding environment number you want to be updated with production data.
+
 # Emails and Testing Emails
 All non-production environment emails sent by our system go to our mailtrap account and email address be default:
 [https://mailtrap.io/inboxes/1620451/messages](https://mailtrap.io/inboxes/1620451/messages)
@@ -364,7 +372,7 @@ Other environments are being added to papertrial in the near future.
 
 ## Local
 
-Run `r logs {container-id}` from within railenvmanager, specifing the php8 apache container.
+Run `docker logs {container-id} -f` from within railenvmanager, specifing the php8 apache container.
 
 Get the container id of the apache-php-fpm-8 container by running this (in railenvmanager container):
 
@@ -381,13 +389,13 @@ That'll return something like this:
 Then to view the logs for that that you can run (in railenvmanager container):
 
 ```
-r logs 90b0bd123eb0
+docker logs 90b0bd123eb0 -f
 ```
 
 Or because you don't need the entire id, just enough to differentiate it from other containers, this would probably do:
 
 ```
-r logs 90b0
+docker logs 90b0 -f
 ```
 
 # Image CDN Uploading, Serving, and Formatting 

@@ -1,13 +1,13 @@
 <template>
     <div class="cs-message-menu tw-absolute tw-text-base">
-        <div class="tw-relative">
+        <div class="t-relative">
             <div
                 class="cs-sub-menu tw-absolute tw-right-0 tw-bottom-0 tw-w-44 tw-py-3 tw-flex tw-flex-col tw-bg-black tw-rounded-lg tw-text-white cs-text-sm tw-z-50"
                 :class="{'cs-downdown':dropdownMenu}"
                 v-if="messageMenu"
             >
                 <div v-if="message.user.id != userId && !isAdministrator">
-                    <a :href="message.user.profileUrl" target="_blank" class="cs-sub-menu-item tw-px-3 tw-no-underline tw-text-white">View Dashboard</a>
+                    <a :href="message.user.profileUrl" target="_blank" class="cs-sub-menu-item tw-px-3 tw-no-underline tw-text-white">View Profile</a>
                 </div>
                 <div
                     :class="{'tw-mb-2': isAdministrator}"
@@ -23,7 +23,7 @@
                     >Delete</div>
                 </div>
                 <div v-if="isAdministrator">
-                    <div class="tw-px-3 tw-mb-2 tw-font-semibold tw-cursor-default">Moderation</div>
+                    <div class="t-px-3 tw-mb-2 tw-font-semibold tw-cursor-default">Moderation</div>
                     <div
                         class="cs-sub-menu-item tw-px-3 tw-mb-1 tw-cursor-pointer"
                         @click.stop.prevent="pinMessage()"
@@ -56,9 +56,9 @@
                 :class="{'cs-downdown':dropdownMenu}"
                 v-if="messageReact"
             >
-                <div class="tw-flex tw-flex-row tw-bg-black tw-rounded-full tw-text-center space-x-1 tw-py-2 tw-px-3 tw-mb-4">
+                <div class="t-flex tw-flex-row tw-bg-black tw-rounded-full tw-text-center space-x-1 tw-py-2 tw-px-3 tw-mb-4">
                     <div
-                        class="tw-text-xl tw-cursor-pointer tw-p-1 tw-px-0.5"
+                        class="t-text-xl tw-cursor-pointer tw-p-1 tw-px-0.5"
                         v-for="(emoji, reaction) in messageReactions"
                         :key="`add-reaction-${reaction}`"
                         @click.stop.prevent="reactToMessage(reaction)"
@@ -97,7 +97,7 @@
                 v-if="showThread"
             ><i class="fal fa-reply-all"></i></div>
             <div
-                class="tw-px-2 cs-text-sm"
+                class="t-px-2 cs-text-sm"
                 @click.stop.prevent="toggleMessageMenu()"
             ><i class="fas fa-ellipsis-h"></i></div>
         </div>
@@ -175,7 +175,7 @@ export default {
         },
     },
     mounted() {
-        this.chatEventBus
+        this.eventBus
             .on(
                 'messageMenuToggled',
                 ({ message }) => {
@@ -186,7 +186,7 @@ export default {
                 }
             );
 
-        this.chatEventBus
+        this.eventBus
             .on(
                 'messageThread',
                 () => {
@@ -195,12 +195,12 @@ export default {
                 }
             );
 
-        this.chatEventBus
+        this.eventBus
             .on(
                 'closeMessageMenus',
                 () => {
                     if (this.messageReact || this.messageMenu) {
-                        this.chatEventBus.emit('messageMenuToggled', { message: this.message, value: false });
+                        this.eventBus.emit('messageMenuToggled', { message: this.message, value: false });
                     }
 
                     this.messageReact = false;
@@ -213,60 +213,63 @@ export default {
             this.messageMenu = !this.messageMenu;
             this.messageReact = false;
 
-            this.chatEventBus.emit('messageMenuToggled', { message: this.message, value: this.messageMenu });
+            this.eventBus.emit('messageMenuToggled', { message: this.message, value: this.messageMenu });
         },
 
         toggleMessageReact() {
             this.messageReact = !this.messageReact;
             this.messageMenu = false;
 
-            this.chatEventBus.emit('messageMenuToggled', { message: this.message, value: this.messageReact });
+            this.eventBus.emit('messageMenuToggled', { message: this.message, value: this.messageReact });
         },
 
         messageThread() {
-            this.chatEventBus.emit('messageThread', { message: this.message });
+            this.eventBus.emit('messageThread', { message: this.message });
 
             this.messageReact = false;
             this.messageMenu = false;
+
+            this.eventBus.emit('messageMenuToggled', { message: this.message, value: this.messageMenu });
         },
 
         editMessage() {
-            this.chatEventBus.emit('editMessage', { message: this.message, pinnedMessage: this.pinnedMessage });
+            this.eventBus.emit('editMessage', { message: this.message, pinnedMessage: this.pinnedMessage });
         },
 
         removeMessage() {
-            this.chatEventBus.emit('removeMessage', { message: this.message });
+            this.eventBus.emit('removeMessage', { message: this.message });
         },
 
         removeAllMessages() {
-            this.chatEventBus.emit('removeAllMessages', { user: this.message.user });
+            this.eventBus.emit('removeAllMessages', { user: this.message.user });
         },
 
         blockUser() {
-            this.chatEventBus.emit('blockUser', { user: this.message.user });
+            this.eventBus.emit('blockUser', { user: this.message.user });
         },
 
         reactToMessage(reaction) {
-            this.chatEventBus.emit(
+            this.messageReact = false;
+            this.eventBus.emit('messageMenuToggled', { message: this.message, value: this.messageReact });
+            this.eventBus.emit(
                 'toggleMessageReaction',
                 {
                     message: this.message,
                     reaction: reaction
                 }
             );
-            this.messageReact = false;
         },
 
         pinMessage() {
-            this.chatEventBus.emit('pinMessage', { message: this.message });
+            this.eventBus.emit('pinMessage', { message: this.message });
         },
 
         unpinMessage() {
-            this.chatEventBus.emit('unpinMessage', { message: this.message });
+            this.eventBus.emit('unpinMessage', { message: this.message });
         },
 
         markAsAnswered() {
-            this.chatEventBus.emit('markAsAnswered', { message: this.message });
+            this.eventBus.emit('markAsAnswered', { message: this.message });
         },
     },
 }

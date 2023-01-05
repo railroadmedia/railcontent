@@ -1,71 +1,26 @@
-@extends('guitareo._partials.layout')
+@extends('guitareo._partials.global-vue-layout')
 
 <?php \App\Analytics\Tracker::trackProductImpression('AGME-JAN-2019-SEMESTER'); ?>
 
-@section('head-includes')
+@section('meta')
     <title>Acoustic Guitar Made Easy | Guitareo</title>
     <meta name="description" content="Acoustic Guitar Made Easy is an intimate 26-week online course with Nate Savage.">
     <meta property="og:image" content="https://s3.amazonaws.com/guitareo/acoustic-guitar-made-easy/sales/og-image.jpg" style="display: none;">
     <meta property="og:description" content="Acoustic Guitar Made Easy is an intimate 26-week online course with Nate Savage.">
     <meta property="og:url" content="https://www.guitareo.com/acoustic-guitar-made-easy">
-
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation-float.min.css" rel="stylesheet">
-    <link href="{{ asset('assets/marketing/agme-sales.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('/assets/marketing/nav-footer.css') }}">
 @stop()
 
-@section('layout-scripts')
-    <script src="/assets/marketing/nav-footer.js"></script>
-    <script src="/assets/js/modal.js"></script>
-    <script src="{{ asset('assets/js/countUp.js') }}"></script>
-    <script src="/js/jquery.countdown-2.js"></script>
-    <script>
-        $(document).ready(function () {
-            // Countdown
-            $('.tzcd-full').countdown('2021/11/30')
-                .on('update.countdown', function (event) {
-                    var format = '%-M Minute%!M';
-                    if (event.offset.totalHours > 0) {
-                        format = '%-H Hour%!H ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '%-D Day%!D ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('a limited time');
-                });
-            $('.tzcd-small').countdown('2021/11/30')
-                .on('update.countdown', function (event) {
-                    var format = '%-MM %-SS';
-                    if (event.offset.totalHours > 0) {
-                        format = '%-HH ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '%-DD ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('a limited time');
-                });
-            $('.tzcd-big').countdown('2021/11/30')
-                .on('update.countdown', function (event) {
-                    var format = '' + '<div><h1>%M</h1> <p>min%!M</p></div> ' + '<div><h1>%S</h1> <p>sec%!S</p></div>';
-                    if (event.offset.totalHours > 0) {
-                        format = '' + '<div><h1>%H</h1> <p>hr%!H</p></div> ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '' + '<div><h1>%D</h1> <p>day%!D</p></div> ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('<div><h1>LIMITED</h1> <p>TIME LEFT</p></div>');
-                });
-        });
-    </script>
+@section('styles')
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation-float.min.css" rel="stylesheet">
+    <link href="{{ asset('marketing/parcel/guitareo/agme-sales.css') }}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}">
+@stop()
+
+@section('scripts')
+    <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
+    <script src="{{ asset('/marketing/js/modal.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/1.9.3/countUp.min.js"></script>
     <script>
         $(function () {
             $(document).foundation();
@@ -125,18 +80,16 @@
     </script>
 @stop()
 
-@section('layout-body')
-
+@section('content')
     @include("guitareo.sales.partials._nav", [
         "cartVersion" => true
     ])
-
-    @include('guitareo.shop.elements.promo-banner', [
-        "name" => "Acoustic Guitar Made Easy",
-        "fullPrice" => App\Prices::$AGMEFull,
-        "price" => App\Prices::$AGMERegular,
-        "noBreadcrumb" => true
-    ])
+    @include('guitareo._partials.promo-banner', [
+                "name" => "Acoustic Guitar Made Easy",
+                "fullPrice" => floatval($productPrices['AGME-JAN-2019-SEMESTER']->price),
+                "price" => floatval($productPrices['AGME-JAN-2019-SEMESTER']->discounted_price),
+                "noBreadcrumb" => true
+            ])
 
     <header class="hero-header">
         <div class="row">
@@ -155,13 +108,12 @@
                 <a href="/ecommerce/add-to-cart?products[AGME-JAN-2019-SEMESTER]=1&redirect=/order" class="join made-easy" data-product-json='{"AGME-JAN-2019-SEMESTER": 1}'>Get Started &raquo;</a>
 
                 <p class="price-info">
-                    @if(App\Prices::$AGMEFull > App\Prices::$AGMERegular)
-                        <s>NORMALLY ${{ App\Prices::$AGMEFull }}.</s> &nbsp;<strong style="color:#00BC75;"><u>ONLY ${{ App\Prices::$AGMERegular }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (App\Prices::$AGMERegular / App\Prices::$AGMEFull))) }}%)
+                    @if(floatval($productPrices['AGME-JAN-2019-SEMESTER']->price) > floatval($productPrices['AGME-JAN-2019-SEMESTER']->discounted_price))
+                        <s>NORMALLY ${{ floatval($productPrices['AGME-JAN-2019-SEMESTER']->price) }}.</s> &nbsp;<strong style="color:#00BC75;"><u>ONLY ${{ floatval($productPrices['AGME-JAN-2019-SEMESTER']->discounted_price) }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (floatval($productPrices['AGME-JAN-2019-SEMESTER']->discounted_price) / floatval($productPrices['AGME-JAN-2019-SEMESTER']->price)))) }}%)
                     @else
-                        <strong><u>ONLY ${{ App\Prices::$AGMERegular }}</u></strong>
+                        <strong><u>ONLY ${{ floatval($productPrices['AGME-JAN-2019-SEMESTER']->discounted_price) }}</u></strong>
                     @endif
-                    <br> <strong>** 90-DAY GUARANTEE **</strong>
-                    {{--<br><span style="color:#f6bd52;">Only <strong class="tzcd-med">A Limited Time</strong> Left!</span>--}}</p>
+                    <br> <strong>** 90-DAY GUARANTEE **</strong></p>
 
             </div>
             <div class="reveal large trailer" id="trailer" data-reveal data-reset-on-close="true">
@@ -707,14 +659,14 @@
                 </tr>
                 <tr class="prices">
                     <td>Your Total Investment</td>
-                    <td>${{ number_format((App\Prices::$AGMERegular / 26), 2, '.', ',') }}/week</td>
+                    <td>${{ number_format((floatval($productPrices['AGME-JAN-2019-SEMESTER']->discounted_price) / 26), 2, '.', ',') }}/week</td>
                     {{--<td class="show-for-medium">$2.18/week</td>--}}
                     <td>$30-50/week</td>
                 </tr>
                 </tbody>
             </table>
             <p class="columns">
-                <strong>Normally, Nate Savage charges $50 for a 30-minute private lesson</strong> and is extremely selective on which students he’ll teach. With Acoustic Guitar Made Easy, Nate is your personal guitar coach for 26 weeks, giving you a new exclusive video lesson each week and a clear path to improve your skills -- <u>all for just ${{ number_format((App\Prices::$AGMERegular / 26), 2, '.', ',') }} per week.</u>
+                <strong>Normally, Nate Savage charges $50 for a 30-minute private lesson</strong> and is extremely selective on which students he’ll teach. With Acoustic Guitar Made Easy, Nate is your personal guitar coach for 26 weeks, giving you a new exclusive video lesson each week and a clear path to improve your skills -- <u>all for just ${{ number_format((floatval($productPrices['AGME-JAN-2019-SEMESTER']->discounted_price) / 26), 2, '.', ',') }} per week.</u>
                 <br><br>
                 You can choose a one-time payment, or two or five-time payment plans -- and the entire Acoustic Guitar Made Easy course is <u>yours for life</u> with no recurring subscription or additional fees.
             </p>
@@ -728,7 +680,7 @@
             </div>
             <div class="large-8 medium-7 columns text-center medium-text-left">
                 <h1>90-Day Money-Back Guarantee.</h1>
-                <p>We love our students. More than anything, we want you to enjoy a super-positive experience playing guitar. And that means we only want you to pay if you actually LOVE your Guitareo experience! So join below to try it out totally risk-free. If it’s not for you, simply <a class="text-white" href="/support">contact us</a> within 90 days to request a full refund.</p>
+                <p>We love our students. More than anything, we want you to enjoy a super-positive experience playing guitar. And that means we only want you to pay if you actually LOVE your Guitareo experience! So join below to try it out totally risk-free. If it’s not for you, simply <a class="text-white" href="{{ get_musora_brand_base_url() }}/contact">contact us</a> within 90 days to request a full refund.</p>
             </div>
         </div>
     </section>
@@ -741,12 +693,12 @@
                 <img src="https://s3.amazonaws.com/guitareo/acoustic-guitar-made-easy/sales/AGME-logo-white.png"></div>
 
             <h1 class="columns">26-Week Online Course <br class="hide-for-medium">
-                For Just ${{ number_format((App\Prices::$AGMERegular / 26), 2, '.', ',') }} Per Week</h1>
+                For Just ${{ number_format((floatval($productPrices['AGME-JAN-2019-SEMESTER']->discounted_price) / 26), 2, '.', ',') }} Per Week</h1>
 
-            @if(App\Prices::$AGMEFull > App\Prices::$AGMERegular)
-                <h2 class="columns">(<s>${{ App\Prices::$AGMEFull }}</s> <strong>${{ App\Prices::$AGMERegular }}</strong> one-time payment. Or choose <br class="hide-for-medium">a 2-pay or 5-pay plan on the next page.)</h2>
+            @if(floatval($productPrices['AGME-JAN-2019-SEMESTER']->price) > floatval($productPrices['AGME-JAN-2019-SEMESTER']->discounted_price))
+                <h2 class="columns">(<s>${{ floatval($productPrices['AGME-JAN-2019-SEMESTER']->price) }}</s> <strong>${{ floatval($productPrices['AGME-JAN-2019-SEMESTER']->discounted_price) }}</strong> one-time payment. Or choose <br class="hide-for-medium">a 2-pay or 5-pay plan on the next page.)</h2>
             @else
-                <h2 class="columns">(<strong>${{ App\Prices::$AGMEFull }}</strong> one-time payment. Or choose <br class="hide-for-medium">a 2-pay or 5-pay plan on the next page.)</h2>
+                <h2 class="columns">(<strong>${{ floatval($productPrices['AGME-JAN-2019-SEMESTER']->price) }}</strong> one-time payment. Or choose <br class="hide-for-medium">a 2-pay or 5-pay plan on the next page.)</h2>
             @endif
             <div class="columns"><a href="/ecommerce/add-to-cart?products[AGME-JAN-2019-SEMESTER]=1&redirect=/order" class="join made-easy" data-product-json='{"AGME-JAN-2019-SEMESTER": 1}'>Get Started &raquo;</a></div>
             <div class="columns cards">
@@ -756,8 +708,8 @@
             <p class="columns final-questions">
                 <span><strong>Any questions?</strong></span>
                 You can also call us or order by phone<br class="hide-for-large">
-                toll-free at <a href="tel:1-800-439-8921">1-800-439-8921</a><br class="hide-for-medium">
-                or directly at <a href="tel:1-604-855-7605">1-604-855-7605</a>. <br>
+                toll-free at <a href="tel:+18004398921">1-800-439-8921</a><br class="hide-for-medium">
+                or directly at <a href="tel:+16048557605">1-604-855-7605</a>. <br>
                 All prices listed in USD.</p>
         </div>
     </section>

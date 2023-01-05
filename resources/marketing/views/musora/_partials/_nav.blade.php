@@ -80,7 +80,7 @@
         background:#fff;
         color:#0b76db;
     }
-    
+
     .join.drumeo,
 	.join.blue {
         background:#0b76db
@@ -168,18 +168,6 @@
         .top-bar {
             height:56px
         }
-    }
-
-    .top-bar.transparent {
-        background:transparent;
-        position:absolute;
-        box-shadow:0 0 0 rgba(0, 0, 0, .5)
-    }
-
-    .top-bar.transparent.scrolled {
-        background:#020815;
-        box-shadow:0 0 10px rgba(0, 0, 0, .5);
-        position:fixed
     }
 
     .top-bar .logo {
@@ -509,7 +497,7 @@
         @include('public.partials._nav-link', [
             "linkName" => "Contact",
             "linkIcon" => "fas fa-phone",
-            "linkUrl" => "/contact/"
+            "linkUrl" => get_musora_brand_base_url().'/contact'
         ])
         @include('public.partials._nav-link', [
             "linkName" => "Careers",

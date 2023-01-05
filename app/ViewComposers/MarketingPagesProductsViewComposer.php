@@ -1,0 +1,43 @@
+<?php
+
+namespace App\ViewComposers;
+
+use App\Models\Product;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\View\View;
+use Railroad\Ecommerce\Repositories\ProductRepository;
+use Railroad\Ecommerce\Services\CartService;
+use Railroad\Ecommerce\Services\ResponseService;
+
+class MarketingPagesProductsViewComposer
+{
+    private ProductRepository $productRepository;
+
+    /**
+     * MarketingPagesProductsViewComposer constructor.
+     */
+    public function __construct(ProductRepository $productRepository)
+    {
+        $this->productRepository = $productRepository;
+    }
+
+    /**
+     * Add cart data to all sales pages
+     *
+     * @param  View  $view
+     * @return void
+     */
+    public function compose(View $view)
+    {
+        $products = $this->productRepository->all();
+
+        $products = array_combine(array_entity_column($products, 'getSku'), $products);
+
+        $productModel = Product::query()->select(['sku', 'price', 'discounted_price'])->where('sku', '!=', '')->where('sku', 'not like', '%products%')->get();
+        $productPrices = $productModel->mapWithKeys(function($item){
+            return [$item['sku'] => $item];
+        });
+
+        $view->with(['products' => $products, 'productPrices' => $productPrices]);
+    }
+}

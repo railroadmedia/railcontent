@@ -110,7 +110,7 @@
 
     {{-- Response Message --}}
     <div class="z-150 fixed rounded-lg w-[calc(100%-4rem)] left-8 shadow-lg mr-8 transition-all duration-200 ease-in-out"
-         x-cloak 
+         x-cloak
          x-bind:class="[responseMessageVisible ? 'bottom-8': '-bottom-52', formSuccessful ? 'bg-green-50 text-green-600' : 'bg-red-50 text-red-600']">
         {{-- Success Message --}}
         <div class="flex p-6 text-base " x-if="formSuccessful">
@@ -124,7 +124,7 @@
             </div>
         </div>
     </div>
-    
+
 </form>
 
 <script>
@@ -188,8 +188,10 @@
                 const formDataObj = new FormData();
                 formDataObj.append('type', 'support-contact');
                 formDataObj.append('subject', 'Contact request');  // append email or name
-                formDataObj.append('sender-name', this.formData.name);
-                formDataObj.append('sender-address', this.formData.email);
+                // formDataObj.append('sender-name', this.formData.name);
+                // formDataObj.append('sender-address', this.formData.email);
+                formDataObj.append('studentName', this.formData.name);
+                formDataObj.append('studentEmail', this.formData.email);
                 formDataObj.append('isMember', this.formData.membership);
                 formDataObj.append('supportOption', this.formData.supportOption);
                 formDataObj.append('message', this.formData.description);

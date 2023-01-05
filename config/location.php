@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'disabled' => true,
+
     'common-at-top' => [ // for usage example, see CountryListService::allWithCommonDuplicatedAtTop()
         'US', # United States of America (the)
         'CA', # Canada

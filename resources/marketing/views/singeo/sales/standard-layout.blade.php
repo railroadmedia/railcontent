@@ -1,10 +1,588 @@
-@extends('singeo._partials.layout')
+@php
+    $coaches = [
+      [
+      'image' => 'https://singeo.s3.amazonaws.com/sales/2022/coaches/lisa-witt2.jpg',
+      'modalImage' => 'https://singeo.s3.amazonaws.com/sales/2022/coaches/lisa-witt2.jpg',
+      'name' => 'Lisa <br> Witt',
+      'subtitle' => 'Lead Vocal<br> Coach',
+      'info' => 'Lisa is our lead voice at Singeo and arguably the happiest music teacher on the planet! With a background in classical and contemporary vocal training combined with a deep love for popular music, Lisa focuses on guiding her students to find their own, unique sound. Using simple routines, practical exercises, and tips for faster results, Lisa helps her students gain strength, control, and confidence in singing',
+      'modal' => 'witt',
+      'prev' => false,
+      'next' => 'ziegler',
+      ],
+      [
+      'image' => 'https://singeo.s3.amazonaws.com/sales/2022/coaches/julia-ziegler.jpg',
+      'modalImage' => 'https://singeo.s3.amazonaws.com/sales/2022/coaches/julia-ziegler.jpg',
+      'name' => 'Julia <br> Ziegler',
+      'subtitle' => 'Singeo<br> Coach',
+      'info' => 'Julia is the Community Specialist for Singeo and she’s excited to accompany YOU on your journey to becoming the best singer you can be! She sings in a female three-part band and she is a music director at a church where she leads worship teams and choirs. And with a background in classical voice, Julia is passionate about helping you find your own unique voice!',
+      'modal' => 'ziegler',
+      'prev' => 'witt',
+      'next' => 'johnson',
+      ],
+      [
+          'image' => 'https://singeo.s3.amazonaws.com/sales/2022/coaches/chris-johnson2.jpg',
+          'modalImage' => 'https://singeo.s3.amazonaws.com/sales/2022/coaches/chris-johnson2.jpg',
+          'date' => 'Now Available',
+          'name' => 'Chris   <br> Johnson',
+          'subtitle' => 'Balancing Technique<br> And Artistry',
+          'smallInfo' => 'Chris is known for helping singers to strike the perfect balance between technique and artistry. ',
+          'info' => 'Chris Johnson is a vocal coach known for developing areas of the voice that may not have been usable, or releasing any tension or discomfort that has crept in over time. Helping singers to strike the perfect balance between technique and artistry is an art unto itself. And Chris has mastered that art and will be sharing his secrets with Singeo members!',
+          'modal' => 'johnson',
+          'prev' => 'ziegler',
+          'next' => 'lindsay',
+          'trending' => true,
+          'bigTile' => true,
+      ],
+      [
+          'image' => 'https://singeo.s3.amazonaws.com/sales/2022/coaches/tony-lindsay2.jpg',
+          'modalImage' => 'https://singeo.s3.amazonaws.com/sales/2022/coaches/tony-lindsay2.jpg',
+          'date' => 'Now Available',
+          'name' => 'Tony  <br> Lindsay',
+          'subtitle' => 'Singing<br> With Soul',
+          'smallInfo' => 'Tony Lindsay is an 11-time Grammy award-winning artist for his 25 years as the lead singer of Santana. ',
+          'info' => 'Tony Lindsay is an 11-time Grammy award-winning artist for his 25 years as the lead singer of Santana. Tony has performed on the world’s largest stage singing with Santana at the Super Bowl in 2003. When it comes to confident singing - Tony Lindsay has earned his crown! ',
+          'modal' => 'lindsay',
+          'prev' => 'johnson',
+          'next' => 'canning',
+          'trending' => true,
+      ],
+      [
+      'image' => 'https://singeo.s3.amazonaws.com/sales/2022/coaches/cate-canning2.jpg',
+      'modalImage' => 'https://singeo.s3.amazonaws.com/sales/2022/coaches/cate-canning2.jpg',
+      'date' => 'Now Available',
+      'name' => 'Cate   <br> Canning',
+      'subtitle' => 'DEFINING YOURSELF <br> AS A SINGER',
+      'smallInfo' => 'For anyone who is finding their voice and curious about the possibilities in music that may lie ahead.',
+      'info' => 'With millions of streams across digital streaming platforms, Cate Canning has figured out how to be heard - all over the world! And as an independent artist who worked hard and successfully followed her dreams, Cate is an inspiration for anyone who is finding their voice and curious about the possibilities in music that may lie ahead.  ',
+      'modal' => 'canning',
+      'prev' => 'lindsay',
+      'next' => 'shelea',
+      'trending' => true,
+      ],
+      [
+      'image' => 'https://singeo.s3.amazonaws.com/sales/2022/coaches/shelea.jpg',
+      'modalImage' => 'https://singeo.s3.amazonaws.com/sales/2022/coaches/shelea.jpg',
+      'date' => 'Now Available',
+      'name' => 'SHELÉA',
+      'subtitle' => 'HOW TO FIND YOUR<br> TRUE VOICE',
+      'smallInfo' => "Singer, songwriter, keyboardist, producer, and actress, Sheléa is an inspiring talent mentored by the greats such as Stevie Wonder and Quincy Jones. Her single <em>I'll Never Let You Go</em> topped the Billboard Charts at #23, and a short introduction of her is all you need to see just how impactful her singing really is.",
+      'info' => "Singer, songwriter, keyboardist, producer, and actress, Sheléa is an inspiring talent mentored by the greats such as Stevie Wonder and Quincy Jones. Her single <em>I'll Never Let You Go</em> topped the Billboard Charts at #23, and a short introduction of her is all you need to see just how impactful her singing really is.",
+      'modal' => 'shelea',
+      'prev' => 'canning',
+      'next' => 'darcy',
+      'trending' => true,
+      'trailer' => true
+      ],
+      [
+      'image' => 'https://singeo.s3.amazonaws.com/sales/2022/coaches/darcy-deutsch.jpg',
+      'modalImage' => 'https://singeo.s3.amazonaws.com/sales/2022/coaches/darcy-deutsch.jpg',
+      'date' => 'Now Available',
+      'name' => 'Darcy  <br> D',
+      'subtitle' => 'The Science<br> of Singing',
+      'smallInfo' => 'Uncover the most powerful tools a singer can use and get the formula to change your singing voice for the better - forever. ',
+      'info' => 'Darcy has worked in various areas of the music industry for over 30 years, but first and foremost, Darcy is a singer and educator who has made the study of voice a focal point since 2005. He is also our resident rockstar having shared gold record success performing with Juno award-winning recording artists, Prism.',
+      'modal' => 'darcy',
+      'prev' => 'shelea',
+      'next' => 'benedict',
+      'trending' => true,
+      'trailer' => true
+      ],
+      [
+      'image' => 'https://singeo.s3.amazonaws.com/sales/2022/coaches/hailey-benedict2.jpg',
+      'modalImage' => 'https://singeo.s3.amazonaws.com/sales/2022/coaches/hailey-benedict2.jpg',
+      'date' => 'November',
+      'name' => 'Hailey   <br> Benedict',
+      'subtitle' => 'Sharing Your<br> Voice',
+      'smallInfo' => 'Her viral videos have made her one of the most followed Canadian country artists on TikTok. ',
+      'info' => 'Hailey Benedict is a mutil-award winning singer/songwriter who has celebrated national radio success, shared a stage with Keith Urban, has millions of views on social media... and is only 19 years old.  Hailey is excited to share her formula for growing an engaged online audience.',
+      'modal' => 'benedict',
+      'prev' => 'darcy',
+      'next' => false,
+      'trending' => true
+      ],
 
-@section('head-includes')
-    @parent
+  ];
 
-    @include('singeo._partials.includes.google-optimize')
+  $altSlider = [
+      [
+      'image' => 'https://singeo.s3.amazonaws.com/sales/promos/june/harmony_card.jpg',
+      'date' => 'NEW',
+      'name' => 'HARMONY',
+      'subtitle' => 'METHOD<br>RELEASE',
+      'smallInfo' => 'Discover the joy of duets as you learn to harmonize and sing with others. This is a new Level of the Singeo METHOD.',
+      ],
+      [
+      'image' => 'https://singeo.s3.amazonaws.com/sales/promos/may/The_Easy_Way_Card.jpg',
+      'name' => 'THE EASY WAY TO RECORD YOUR VOICE',
+      'subtitle' => 'WITH CATE<br> CANNING',
+      'smallInfo' => 'How to use a microphone, audio interface, and laptop to start recording yourself. You don’t need a fancy studio to get your voice out there.',
+      ],
+      [
+      'image' => 'https://singeo.s3.amazonaws.com/sales/promos/may/Daily_Routine_Card.jpg',
+      'name' => 'DAILY ROUTINE FOR A STRONG VOICE',
+      'subtitle' => 'Just 15 <br>minutes a day',
+      'smallInfo' => 'Do this 15 minute routine every day to see a huge difference in your voice! Build a bigger, stronger voice.',
+      ],
+      [
+      'image' => 'https://singeo.s3.amazonaws.com/sales/2022/coach-tiles/purple-laptop.jpg',
+      'name' => 'SING YOUR<br> FAVORITE SONGS',
+      'subtitle' => 'Put that <br>voice to use!',
+      'smallInfo' => 'We sing to sing songs! Find your favorites with the massive karaoke library inside Singeo. Over 150 to choose from (and counting).',
+      ],
+      [
+      'image' => 'https://singeo.s3.amazonaws.com/sales/promos/may/Cate_Canning_Card.jpg',
+      'name' => 'CATE CANNING',
+      'subtitle' => 'Defining Yourself<br> As A Singer',
+      'smallInfo' => 'As a talented Pop Singer-Songwriter who is finding success with her music, Cate is going to teach you how to define your artistry and who you are as a singer.',
+      ],
+      [
+      'image' => 'https://singeo.s3.amazonaws.com/sales/promos/june/riffs_funs_card.jpg',
+      'name' => 'RIFFS & FUNS',
+      'subtitle' => 'Sound <br>Like A Pro',
+      'smallInfo' => 'Riffs & Runs can be intimidating. This Level of the Singeo METHOD will break them down into easy-to-learn parts you can practice to sound more professional.',
+      ],
+      [
+      'image' => 'https://singeo.s3.amazonaws.com/sales/2022/coach-tiles/purple-lisa.jpg',
+      'name' => 'LIVE FEEDBACK<br> AND SUPPORT',
+      'subtitle' => 'From Lisa<br> & Darcy D',
+      'smallInfo' => 'Your Singeo coaches are available every week to help you see REAL progress in your voice. Get personal support and hear the results.',
+      ],
+  ];
 
+  $methodLevels = [
+      [
+      "navyBorder" => true,
+      "defaultOpen" => true,
+      "level" => "1",
+      "title" => "Understanding Your Voice",
+      "description" => "Welcome to the Singeo Method! Finding confidence and passion starts here as you learn how your voice works and why it’s unique to you.<br><br>We are snowflakes (metaphorically speaking) and no two human voices are the same. This level is designed to help you discover and understand your unique voice. We will discuss breath, the vocal cords and how shape can dramatically change your sound. ",
+      "meta" => "6 Lessons"
+      ],
+      [
+      "navyBorder" => true,
+      "level" => "2",
+      "title" => "Build Strength & Gain Control",
+      "description" => "Now that you know how your voice works, it’s time to begin developing your sound! In this level, you will learn how to warm your voice up properly so that you never cause any vocal damage or fatigue from practicing with a cold voice. We will discuss great practice habits, determine your vocal tendencies and learn how to exercise your voice based on those tendencies!<br><br>You can expect to expand your current vocal range while building strength and control to help hit the right notes and hold them longer.",
+      "meta" => "11 Lessons"
+      ],
+      [
+      "navyBorder" => true,
+      "level" => "3",
+      "title" => "Vowel Shapes & Sounds",
+      "description" => "Get ready to change your singing voice forever!<br><br>While practice and dedication are required to reach your full potential, there are a few secrets to hearing some massive positive changes in your voice, almost immediately... Vowels are one of those secrets.<br><br>You will work with vowel sounds and shapes and be challenged to find them within the lyrics of your favorite songs. You will learn a variety of vowel exercises that will help you adopt these sounds and apply them to everything you sing from this moment forward. Your singing will never be the same... it will be so much better!",
+      "meta" => "7 Lessons"
+      ],
+      [
+      "navyBorder" => true,
+      "level" => "4",
+      "title" => "Building A Proper Song List",
+      "description" => "Singing songs! That’s why we’re here right? Vocal warm-ups and exercises are super important but why do we do them? So we can sing songs better!   There are a lot of songs out there to choose from. It’s easy to get lost in all of your favorite songs and never really dedicate yourself to practicing just a few of them.<br><br>This level is all about singing songs from start to finish. So that means you will learn to make the best “set list” (small list of songs) for your unique voice!  You will learn how to determine what songs suit your range and style, effective practice tactics,  and how to fine-tune your performance.<br><br>This level will give you everything you need to confidently sing the songs you love. ",
+      "meta" => "8 Lessons"
+      ],
+      [
+      "navyBorder" => true,
+      "level" => "5",
+      "title" => "Vocal Styles & Sounds",
+      "description" => "Vibrato, Falsetto, Belting, Vocal Fry - What do they mean and which one are you?<br>Tip: You can be all of them!<br>When it comes to the voice, there are all kinds of words used to reference style techniques. These techniques can be used to help you express an emotion, tell a story, or create a unique sound of your very own!<br><br>This level will focus on helping you develop these specific techniques so that you can use them however you choose to help personalize your performance or any song.",
+      "meta" => "9 Lessons"
+      ],
+      [
+      "navyBorder" => true,
+      "level" => "6",
+      "title" => "Getting Fancy - Riffs And Runs",
+      "description" => "Riffs and runs are glitter for your voice, the gymnastics of the vocal Olympics… pulling you from the choir and putting you center stage.   But if the center stage is a little too bold for you just yet, that's ok! Riffs and runs will have you giving yourself a standing ovation wherever and whenever you choose to use them.<br><br>Learning to sing vocal runs might feel intimidating, and many singers never even attempt them. But once you've learned the scales and techniques required for this skill, you will be amazed at just how easily you can showcase your voice with riffs and runs!<br><br>In this level, we will go beyond the notes, dynamics, and vowel sounds by taking your voice to the next level and get fancy with simple tricks to help you execute vocal runs and riffs. ",
+      "meta" => "10 Lessons"
+      ],
+      [
+      "navyBorder" => true,
+      "level" => "7",
+      "title" => "Music Theory For Singers",
+      "description" => "Music Theory? For Singers? YES!! Understanding the language of music will help you to better understand what you are singing, make educated choices when it comes to adding your spin on popular melodies, and help you to communicate with other musicians and vocalists.<br><br>This level will give you the basics of music theory so that you can understand how rhythm, notation, and musical terms work! The word “theory” gets a bad rap for being boring, but, we promise, these lessons are fun and will give your voice AND brain a workout!",
+      "meta" => "9 Lessons"
+      ],
+      [
+      "navyBorder" => true,
+      "level" => "8",
+      "title" => "Fine Tuning Your Voice",
+      "description" => 'This Level is all about empowering you to assess and fine-tune your voice! You will learn how to curate the perfect practice routine for your unique voice, how to optimize your vowels to improve your sound, and how to develop and expand your range, control, and style.',
+      "meta" => "7 Lessons"
+      ],
+      [
+      "navyBorder" => true,
+      "level" => "9",
+      "title" => "Harmony & Singing With Others",
+      "description" => "Harmony is one of those skills that we dream of being able to do in the early stages of our singing aspirations, but it takes a little while to get here.  Congratulations! You are ready to enter the world of harmonizing. Harmony is what happens when two different notes are being sung at the same time and offer a pleasant sound.<br><br>In this level we will go over commonly used harmonies that you can find in almost every pop song.  You will learn how to find the harmony and anticipate the melody of the harmony while you are singing. ",
+      "meta" => "11 Lessons"
+      ],
+      [
+      "navyBorder" => true,
+      "level" => "10",
+      "title" => "Into The Spotlight, Onto The Stage",
+      "description" => "You are now a singer!! This is very exciting! You have worked so hard to get here… now what? Where can singing take you?  Singing doesn’t always have to be a performance, so don’t be intimidated by the thought of stepping onto a stage. There are many different ways you can use your new, confident singing voice.  Ways you may never have even imagined.<br><br>In this level we’ll explore some potential paths you can take with singing, opening up your mind to the possibilities and inspiring you to continue to keep singing a part of your daily life.  It doesn’t stop here!  We hope that you will  check out some of our course packs that focus on some specific topics in singing to expand your knowledge and give you more tools to develop your unique sound!",
+      "meta" => "Coming Soon!"
+      ]
+  ];
+
+  $testimonials = [
+      [
+      'title' => "It felt like the chains finally fell off my voice.",
+      'description' => "I was concerned that my singing style was too different to truly learn what I needed – and I wanted to strengthen my voice and stretch my range in a healthy manner.<br><br>With Singeo, I started practicing my songs more meticulously and it paid off – stronger high notes were available and it felt like the chains finally fell off my voice!",
+      'name' => 'Orianna Sells',
+      'location' => 'South Carolina, USA',
+      'image' => 'https://singeo.s3.amazonaws.com/sales/2022/testimonials/OriannaSells.jpg',
+      'prev' => false,
+      'next' => 'JocelynnRodrigues',
+      ],
+      [
+      'title' => "It’s so healing to sing.",
+      'description' => "I wasn’t sure if I could really learn online, because I’ve heard in the past how important it is to have somebody with you, who can guide you – and make sure you don’t get injured.<br><br>But I’ve been making so much progress with Singeo. After doing the routines, I noticed that it didn’t stress me out as much to sing the higher octaves during the exercise. And while I’m singing around the house my voice feels stronger. Everyone can truly sing, and it’s so healing to sing. We were all born with this beautiful instrument and it’s just waiting to be played.",
+      'name' => 'Jocelynn Rodrigues',
+      'location' => 'Alberta, Canada',
+      'image' => 'https://singeo.s3.amazonaws.com/sales/2022/testimonials/JocelynnRodrigues.jpg',
+      'prev' => 'OriannaSells',
+      'next' => 'JohnStevenson',
+      ],
+      [
+      'title' => "I have my first solo gig lined up!",
+      'description' => "For years I thought I wouldn’t be able to sing. I don’t feel like that anymore. I feel that I can and I now have my first solo gig lined up for January.<br><br>Essentially I realised that I needed to maintain a disciplined regimen. I needed to practice every day. I needed to do specific exercises that focussed on my weak spots. I also realised it wasn’t magic. Improvement is gradual and requires effort. It was a relief realising that if I put in the work, I would get there. Singeo is a good program. If you put in the time you will see improvement.",
+      'name' => 'John Stevenson',
+      'location' => 'Australia',
+      'image' => 'https://singeo.s3.amazonaws.com/sales/2022/testimonials/JohnStevenson.jpg',
+      'prev' => 'JocelynnRodrigues',
+      'next' => 'DamienGiven',
+      ],
+      [
+      'title' => "I’m getting back some of my old confidence.",
+      'description' => "Thirty-five years ago, I sang professionally in a group. And now at 74 years old, I’d given up the idea of ever singing properly again. But when tendonitis put a stop to my piano playing for several months, I decided to give Singeo a try – and boy, what a great choice!<br><br>I’m getting back some of my old confidence through the lessons and feedback – and I’m now keen to regain more pitch and breathing control, even though physiologically I’ve probably lost about one and a half steps at the top of my range. But that doesn’t bother me as much as I thought it would after a few months with Singeo. I’ve received a great deal of positive feedback from my classmates - and great tips from Lisa, Julia, and the team. What a find, what a course, and what great tutors!",
+      'name' => 'Damien Given',
+      'location' => 'Northern Ireland',
+      'image' => 'https://singeo.s3.amazonaws.com/sales/2022/testimonials/DamienGiven3.jpg',
+      'prev' => 'JohnStevenson',
+      'next' => 'KathyMandell',
+      ],
+      [
+      'title' => "It was like, OH! That’s what my problem is!",
+      'description' => "It was like, OH! THAT’S what my problem is! I’ve been having a lot of fun understanding the different singing styles, such as ‘flipper’ or ‘yeller’ – and getting past the flipping thing and either using it in my favor and flipping on purpose like Alanis Morrissette or opening my mouth more to have a stronger voice.<br><br>If you’ve always wanted to sing and didn’t have the confidence or thought you weren’t good enough, this is the program for you. The teachers and students are so supportive, non-judgmental, and encouraging.",
+      'name' => 'Kathy Mandell',
+      'location' => 'South Carolina, USA',
+      'image' => 'https://singeo.s3.amazonaws.com/sales/2022/testimonials/KathyMandell.jpg',
+      'prev' => 'DamienGiven',
+      'next' => 'JerryBradley',
+      ],
+      [
+      'title' => "More comfortable with my own voice every day.",
+      'description' => "This is NOT a standard web-based training where you are provided training videos with no interaction. The teachers are always willing to give personal feedback, suggestions, and recommendations.<br><br>Singeo made me realize it’s about being the best singer I can be while working within my own unique style – not matching somebody else’s. It’s like having a weight lifted off my shoulders. Don’t get me wrong, there is still lots of work to do, but my direction and understanding changed – and I’m feeling more comfortable with my own voice every day.<br><br>It’s up to you to take advantage of it all. The worst case is that you will learn a lot. The best case: you will improve your vocal abilities, confidence, make connections, and become a part of a family that really cares.",
+      'name' => 'Jerry Bradley',
+      'location' => 'North Carolina, USA',
+      'image' => 'https://singeo.s3.amazonaws.com/sales/2022/testimonials/JerryBradley2.jpg',
+      'prev' => 'KathyMandell',
+      'next' => 'RichardBailey',
+      ],
+      [
+      'title' => "Like having your own singing coach.",
+      'description' => "When I saw how knowledgeable, energetic, and bubbly Lisa was it convinced me that this was not just an online tutorial – Singeo is like having your own singing coach at your home, literally any time of the day or night. I’ve learned how to breathe and control my breath to sing – and I’m able to sing songs how they were meant to be sung.<br><br>I enjoy singing so much more than I did before and it’s great fun and so satisfying to hear others say how much they enjoy my singing!",
+      'name' => 'Richard Bailey',
+      'location' => 'New Jersey, USA',
+      'image' => 'https://singeo.s3.amazonaws.com/sales/2022/testimonials/RichardBailey.jpg',
+      'prev' => 'JerryBradley',
+      'next' => 'TerriPigg',
+      ],
+      [
+      'title' => "I sing all the time – at home, at the office, in the car, wherever!",
+      'description' => "The learning is always fun and customized to fit you and your singing goals. In addition to that, you’ll get to know people all around the world who also love singing. The Singeo community celebrates and encourages each other as we learn and grow as singers from the convenience of our own homes.<br><br>Singeo’s given me a confidence boost and helped me begin to believe that I can really DO this singing thing while having fun at the same time. I sing all the time – at home, at the office, in the car, wherever. Singing just makes me happy!",
+      'name' => 'Terri Pigg',
+      'location' => 'Tennessee, USA',
+      'image' => 'https://singeo.s3.amazonaws.com/sales/2022/testimonials/TerriPigg.jpg',
+      'prev' => 'RichardBailey',
+      'next' => false,
+      ],
+  ];
+
+  $questionLevels = [
+      [
+      "navyBorder" => true,
+      "title" => "Is There An Age Limit For Learning To Sing? ",
+      "description" => "If you can speak, you CAN sing.  There’s no age limit for when you can experience the enrichment that singing brings to your life.  Everyone progresses differently, so it’s important to remember to have patience with yourself and celebrate the milestones of your personal singing journey. ",
+      ],
+      [
+      "navyBorder" => true,
+      "title" => "I Have Extreme “Stage Fright”. Can I Still Learn To Sing?",
+      "description" => "Absolutely! Singing is more than a performance. You don’t have to have an audience to sing. Singing can just be for YOU.  And when you take the time to learn and practice properly you will gain confidence in your singing and, when you’re ready, maybe you WILL take the stage! ",
+      ],
+      [
+      "navyBorder" => true,
+      "title" => "What if I try Singeo and don’t like it?",
+      "description" => "We would be super sad 😉. But seriously, Singeo may NOT be for you. And if that’s the case, you’ll get a full refund. At Singeo, we want students, not customers. It’s why you’ll have 90 days to try all the lessons risk-free. If you decide it’s not for you, simply let us know and we’ll give you back all your hard-earned money. It’s our promise. (If your membership includes any bonuses, your refund will deduct the value of hard goods that were shipped to you.)",
+      ],
+  ];
+
+  $videoModals = [
+      [
+      'modal' => 'darcyTrailer',
+      'vimeo' => '//player.vimeo.com/video/661031242?autoplay=1',
+      ],
+      [
+      'modal' => 'sheleaTrailer',
+      'vimeo' => 'https://www.youtube.com/embed/GEZQZ3pxpAE?rel=0&showinfo=0&autoplay=1',
+      ],
+      [
+      'modal' => 'bfTrailer',
+      'vimeo' => '//player.vimeo.com/video/774002156?autoplay=1',
+      ],
+      [
+      'modal' => 'cmTrailer',
+      'vimeo' => '//player.vimeo.com/video/774002364?autoplay=1',
+      ],
+  ];
+
+  $advantages = [
+      [
+          'name' => 'Step-By-Step Lessons',
+          'privateLessons' => true
+      ],
+      [
+          'name' => 'Consistent & Qualified Advice',
+          'privateLessons' => true
+      ],
+      [
+          'name' => 'Progress-Tracking',
+          'privateLessons' => true
+      ],
+      [
+          'name' => 'Live Lessons & Questions',
+          'privateLessons' => true
+      ],
+      [
+          'name' => 'Personal Reviews & Feedback',
+          'privateLessons' => true
+      ],
+      [
+          'name' => 'SING YOUR FAVORITE SONGS',
+          'privateLessons' => false
+      ],
+      [
+          'name' => 'KARAOKE SING-A-LONG LIBRARY',
+          'privateLessons' => false
+      ],
+      [
+          'name' => 'CONNECT WITH FAMOUS SINGERS',
+          'privateLessons' => false
+      ],
+      [
+          'name' => 'ON-DEMAND WARMUP ROUTINES',
+          'privateLessons' => false
+      ],
+      [
+          'name' => 'Re-Watch Any Lesson',
+          'privateLessons' => false
+      ],
+      [
+          'name' => 'Learn From Home, Anytime',
+          'privateLessons' => false
+      ],
+      [
+          'name' => 'Supportive Community',
+          'privateLessons' => false
+      ],
+      [
+          'name' => '100% Money Back Guarantee',
+          'privateLessons' => false
+      ],
+  ];
+
+  //ALBUM ROWS
+  $firstRow = [
+      [
+          'src' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-july/album-art/ed-sheeran-perfect.jpg',
+          'name' => 'Ed Sheeran - Perfect',
+      ],
+      [
+          'src' => 'https://d1923uyy6spedc.cloudfront.net/221831-card-thumbnail-1552535868.jpg',
+          'name' => 'Leonard Cohen - Hallelujah',
+      ],
+      [
+          'src' => 'https://d1923uyy6spedc.cloudfront.net/235815-card-thumbnail-maxres-1572535303.jpg',
+          'name' => 'Vance joy - Riptide',
+      ],
+      [
+          'src' => 'https://singeo.s3.amazonaws.com/sales/2021/songs/taylor-swift-love-story.jpeg',
+          'name' => 'Taylor Swift - Love Story',
+      ],
+      [
+          'src' => 'https://singeo.s3.amazonaws.com/sales/2021/songs/anna-nalick-breathe.jpeg',
+          'name' => 'Anna Nalick - Breathe',
+      ],
+      [
+          'src' => 'https://singeo.s3.amazonaws.com/sales/2021/songs/the-animals-house-of-the-rising-sun.jpeg',
+          'name' => 'The Animals - House Of The Rising Sun',
+      ],
+      [
+          'src' => 'https://singeo.s3.amazonaws.com/sales/2021/songs/whitney-houston-i-will-always-love-you.jpeg',
+          'name' => 'Whitney Houston - I Will Always Love You',
+      ],
+      [
+          'src' => 'https://singeo.s3.amazonaws.com/sales/2021/songs/chris-stapleton-tennessee-whiskey.jpeg',
+          'name' => 'Chris Stapleton - Tennessee Whiskey',
+      ],
+      [
+          'src' => 'https://d1923uyy6spedc.cloudfront.net/221819-card-thumbnail-1552536357.jpg',
+          'name' => 'Rihanna - Stay',
+      ],
+  ];
+
+  $secondRow = [
+      [
+          'src' => 'https://singeo.s3.amazonaws.com/sales/2021/songs/dixie-chicks-landslide.jpeg',
+          'name' => 'Dixie Chicks - Landslide',
+      ],
+      [
+          'src' => 'https://d1923uyy6spedc.cloudfront.net/235190-card-thumbnail-maxres-1572008398.jpg',
+          'name' => 'Ed Sheeran - Photograph',
+      ],
+      [
+          'src' => 'https://d1923uyy6spedc.cloudfront.net/257690-card-thumbnail-maxres-1592474987.jpg',
+          'name' => 'Frank Sinatra - Fly Me To The Moon',
+      ],
+      [
+          'src' => 'https://singeo.s3.amazonaws.com/sales/2021/songs/bryan-adams-walking-up-the-neighbours.jpeg',
+          'name' => 'Bryan Adams - Everything I Do',
+      ],
+      [
+          'src' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-july/album-art/adele-rolling-in-the-deep.jpg',
+          'name' => 'Adele - Rolling In The Deep',
+      ],
+      [
+          'src' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-july/album-art/adele-rolling-in-the-deep.jpg',
+          'name' => 'Adele - Someone Like You',
+      ],
+      [
+          'src' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-september/album-art/the-beatles-i-want-to-hold-your-hand.jpg',
+          'name' => 'Beatles - I Want To Hold Your Hand',
+      ],
+      [
+          'src' => 'https://singeo.s3.amazonaws.com/sales/2021/songs/righteous-brothers--unchained-melody.jpeg',
+          'name' => 'Righteous Brothers - Unchained Melody',
+      ],
+  ];
+
+  $thirdRow = [
+      [
+          'src' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-july/album-art/elton-john-your-song.jpg',
+          'name' => 'Elton John - Your Song',
+      ],
+      [
+          'src' => 'https://singeo.s3.amazonaws.com/sales/2021/songs/alicia-keys-fallin.jpeg',
+          'name' => 'Alicia Keys - Fallin',
+      ],
+      [
+          'src' => 'https://d1923uyy6spedc.cloudfront.net/225983-card-thumbnail-maxres-1559663715.jpg',
+          'name' => 'Elvis - Can\'t Help Falling In Love',
+      ],
+      [
+          'src' => 'https://singeo.s3.amazonaws.com/sales/2021/songs/alicia-keys-no-one.jpeg',
+          'name' => 'Alicia Keys - No One',
+      ],
+      [
+          'src' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-july/album-art/bruno-mars-just-the-way-you-are.jpg',
+          'name' => 'Bruno Mars - Just The Way You Are',
+      ],
+      [
+          'src' => 'https://singeo.s3.amazonaws.com/sales/2021/songs/sinead-o-connor-nothing-compares-2-u.jpeg',
+          'name' => 'Sinead O Connor - Nothing Compares 2 U',
+      ],
+      [
+          'src' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/journey-don_t-stop-believin.jpg',
+          'name' => 'Journey - Don\'t Stop Believin',
+      ],
+      [
+          'src' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/john-lennon-imagine.jpg',
+          'name' => 'John Lennon - Imagine',
+      ],
+      [
+          'src' => 'https://d1923uyy6spedc.cloudfront.net/279826-card-thumbnail-maxres-1609786632.png',
+          'name' => 'Judy Garland - Over The Rainbow',
+      ],
+  ];
+
+  $fourthRow = [
+      [
+          'src' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-dec/album-art/the-beatles-let-it-be.jpg',
+          'name' => 'Beatles - Let It Be',
+      ],
+      [
+          'src' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/guns-n-roses-sweet-child-o-mine.jpg',
+          'name' => 'Guns &amp; Roses - Sweet Child O MIne',
+      ],
+      [
+          'src' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-september/album-art/bruce-springsteen-dancing-in-the-dark.jpg',
+          'name' => 'Bruce Springsteen - Dancing In The Dark',
+      ],
+      [
+          'src' => 'https://d1923uyy6spedc.cloudfront.net/236823-card-thumbnail-maxres-1573820297.jpg',
+          'name' => 'Lewis Capaldi - Someone You Loved',
+      ],
+      [
+          'src' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2021-jan/album-art/ABBA-Dancing Queen.jpg',
+          'name' => 'Abba - Dancing Queen',
+      ],
+      [
+          'src' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2021-feb/album-art/Carrie Underwood-Before He Cheats.jpg',
+          'name' => 'Carrie Underwood - Before He Cheats',
+      ],
+      [
+          'src' => 'https://singeo.s3.amazonaws.com/sales/2021/songs/carrie-underwood-jesus-take-the-wheel.jpeg',
+          'name' => 'Carrie Underwood - Jesus Take the Wheel',
+      ],
+      [
+          'src' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/joan-jett-and-the-blackhearts-i-love-rock-n-roll.jpg',
+          'name' => 'Joan Jett - I Love Rock N Roll',
+      ],
+  ];
+
+  $fifthRow = [
+      [
+          'src' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/kings-of-leon-use-somebody.jpg',
+          'name' => 'Kings Of Leon - Use Somebody',
+      ],
+      [
+          'src' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2021-jan/album-art/Matchbox Twenty-Unwell.jpg',
+          'name' => 'Matchbox Twenty - Unwell',
+      ],
+      [
+          'src' => 'https://singeo.s3.amazonaws.com/sales/2021/songs/sara-bareilles-she-used-to-be-mine.jpeg',
+          'name' => 'Sara Bareilles - She Used To Be Mine',
+      ],
+      [
+          'src' => 'https://singeo.s3.amazonaws.com/sales/2021/songs/sara-bareilles-the-blessed-unrest.jpeg',
+          'name' => 'Sara Bareilles - Brave',
+      ],
+      [
+          'src' => 'https://d1923uyy6spedc.cloudfront.net/13945-card-thumbnail-maxres-1592341257.jpg',
+          'name' => 'Radiohead - Creep',
+      ],
+      [
+          'src' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/eagles-hotel-california.jpg',
+          'name' => 'Eagles - Hotel California',
+      ],
+      [
+          'src' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-july/album-art/eagles-desperado.jpg',
+          'name' => 'Eagles - Desperado',
+      ],
+      [
+          'src' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/oasis-wonderwall.jpg',
+          'name' => 'Oasis - Wonderwall',
+      ],
+      [
+          'src' => 'https://singeo.s3.amazonaws.com/sales/2021/songs/olivia-rodrigo-drivers-license-.jpeg',
+          'name' => 'Olivia Rodrigo - Drivers License',
+      ],
+  ];
+@endphp
+
+@extends('singeo._partials.global-layout')
+
+@section('global-head')
     <meta name="description" content="Online singing lessons for any voice & vocal coaches to support you every step of the way. 90-Day Guarantee." />
     <meta property="og:description" content="Online singing lessons for any voice & vocal coaches to support you every step of the way. 90-Day Guarantee."/>
 
@@ -14,26 +592,36 @@
         <meta property="og:image" content="https://singeo.s3.amazonaws.com/sales/2022/og-image.jpg"/>
     @endif
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css"/>
-    <link rel="stylesheet" href="{{ asset('/assets/css/tailwind-helpers.css') }}">
-    <link href="{{ asset('/assets/marketing/sales-page.css') }}" rel="stylesheet">
-    <link href="{{ asset('/assets/marketing/nav-footer.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/marketing/css/singeo/tailwind-helpers.css') }}">
+    <link href="{{ asset('/marketing/parcel/singeo/sales-page.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}" rel="stylesheet">
     {{--<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">--}}
 @endsection
 
-@section('layout-body')
+@section('global-body')
     @include("singeo.sales.partials._nav", [
         "joinVersion" => true,
-        "scrollToJoin" => true
+        "scrollToJoin" => true,
+        "homepage" => true
     ])
+
+    @yield('top-promo-bar')
+
+    <div class="sticky-trigger block"></div>
+    @yield('sticky-bar')
 
     <header class="header text-white relative overflow-hidden" style="background-color:#1a0239;">
         <div class="transform -translate-y-1/2 top-3/4 md:top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center md:text-left">
             <div class="container mx-auto max-w-6xl">
-                <h1 class="leading-tight max-w-xs md:max-w-md lg:max-w-2xl mx-auto md:mx-0 md:text-3xl lg:text-4xl"><strong>Your complete guide <br> to confident singing.</strong></h1>
-                <h6 class="leading-normal text-light-navy mt-3 md:mt-5 mb-5 md:mb-7 text-shadow-4">Online singing lessons for any voice & vocal <br> coaches to support you every step of the way.</h6>
+                <h1 class="leading-tight max-w-xs md:max-w-md lg:max-w-2xl mx-auto md:mx-0 md:text-3xl lg:text-4xl"><strong>Get the singing voice<br>
+                        you've always wanted.</strong></h1>
+                <h6 class="leading-normal text-light-navy mt-3 md:mt-5 mb-5 md:mb-7 text-shadow-4">
+                    Enjoy step-by-step singing lessons, vocal coaches<br>
+                     to personally support you & on-demand<br>
+                    practice and vocal exercise routines.</h6>
                 <a
                         @hasSection('start-button')
                         href="@yield('start-button')" class="join blue smaller w-1/2 md:w-1/3 lg:w-1/4"
@@ -41,6 +629,15 @@
                         href="#customize-anchor" class="join blue smaller anchor-slide w-1/2 md:w-1/3 lg:w-1/4 anchor-slide"
                         @endif
                 >Get Started</a>
+                @if(!empty($bfButton))
+                    <a
+                        @if(Carbon\Carbon::create(2022, 11, 28, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+                            data-open="bfTrailer"
+                        @else
+                            data-open="cmTrailer"
+                        @endif
+                        class="join outline promo smaller autoplay-video w-2/3 md:w-auto mt-3 md:mt-0"><i class="fas fa-play"></i> Holiday Deals</a>
+                @endif
             </div>
         </div>
         <div class="header-image relative mx-auto w-full h-full relative z-0 bg-no-repeat" style="max-width: 1536px;background-image:url(https://cdn.musora.com/image/fetch/w_2500,q_auto:best/q_auto:best/https://singeo.s3.amazonaws.com/sales/2022/header-bg-3.jpg);">
@@ -49,9 +646,6 @@
             <div class="top-0 left-0 absolute w-full h-full z-10 block md:hidden" style="background: linear-gradient(to bottom, transparent 35%, #1a0239);"></div>
         </div>
     </header>
-
-    @yield('sticky-bar')
-    <div class="sticky-trigger block"></div>
 
     <section class="px-2 lg:px-4 py-10 md:py-14 md:py-20 text-white text-center overflow-hidden" style="background:linear-gradient(to bottom, #01050f 60%, #021124);">
         <div class="container mx-auto max-w-6xl">
@@ -74,7 +668,7 @@
                         <i class="text-4xl align-middle icon-songs text-songs"></i>
                         <img class="h-5 ml-2 imgfilter-songs lazyload" data-src="https://cdn.musora.com/image/fetch/q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/songs-text.svg">
                         <h4 class="leading-tight my-3"><strong>Sing Your <br class="hidden md:inline">  Favorite Songs</strong></h4>
-                        <p class="leading-normal text-light-navy mb-10 md:mb-14">Practice has never been so fun with the Singeo Songs library. Work on all the new singing techniques you’re learning in your lessons by applying them to your favorite songs. Choose from over {{ \App\Prices::$songs }} songs to practice with karaoke-style.</p>
+                        <p class="leading-normal text-light-navy mb-10 md:mb-14">Practice has never been so fun with the Singeo Songs library. Work on all the new singing techniques you’re learning in your lessons by applying them to your favorite songs. Choose from over {{ Prices::$singeoSongs }} songs to practice with karaoke-style.</p>
                         <a class="absolute bottom-4 lg:bottom-6 left-0 right-0 join smaller songs outline anchor-slide w-2/3 md:w-5/6 lg:w-2/3 mx-auto" href="#songs">Learn More</a>
                     </div>
                 </div>
@@ -97,7 +691,9 @@
                     href="#customize-anchor" class="join smaller blue anchor-slide mt-9 md:mt-12 mb-2 lg:w-1/3"
                     @endif
             >Get The Singeo Advantage</a>
-            <p class="text-light-navy text-sm"><em>Just ${{ number_format(App\Prices::$singeoMembershipAnnual / 12, 2) }} per month, 90-day guarantee.</em></p>
+{{--            @if(empty($trialVersion))--}}
+{{--                <p class="text-light-navy text-sm"><em>Just ${{ number_format(Prices::$plusSubscriptionAnnual / 12, 2) }} per month, 90-day guarantee.</em></p>--}}
+{{--            @endif--}}
 
             <div class="slick mx-auto max-w-xs md:max-w-xl lg:max-w-4xl my-9 md:mb-0 h-44 sm:h-24 lg:h-20">
                 <div class="px-3 md:px-6">
@@ -129,183 +725,9 @@
 
     <section class="content-section text-center px-4 lg:px-5" style="background:linear-gradient(to bottom, #01050f 60%, #021124);">
         <div class="container mx-auto max-w-6xl">
-            <h3 class="" data-aos-once="true" data-aos="fade-up" data-aos-offset="150" data-aos-delay="150"><strong>Your true voice awaits…</strong></h3>
-            <p class="leading-normal text-light-navy mt-2 md:mt-4">Discover what’s trending inside Singeo </p>
+            <h3 class="" data-aos-once="true" data-aos="fade-up" data-aos-offset="150" data-aos-delay="150"><strong>The lessons singers love…</strong></h3>
+            <p class="leading-normal text-light-navy mt-2 md:mt-4">Discover what’s trending inside Singeo this month</p>
 
-            @php
-                $coaches = [
-                    [
-                    'image' => 'https://singeo.s3.amazonaws.com/sales/2022/coaches/lisa-witt2.jpg',
-                    'modalImage' => 'https://singeo.s3.amazonaws.com/sales/2022/coaches/lisa-witt2.jpg',
-                    'name' => 'Lisa <br> Witt',
-                    'subtitle' => 'Lead Vocal<br> Coach',
-                    'info' => 'Lisa is our lead voice at Singeo and arguably the happiest music teacher on the planet! With a background in classical and contemporary vocal training combined with a deep love for popular music, Lisa focuses on guiding her students to find their own, unique sound. Using simple routines, practical exercises, and tips for faster results, Lisa helps her students gain strength, control, and confidence in singing',
-                    'modal' => 'witt',
-                    'prev' => false,
-                    'next' => 'ziegler',
-                    ],
-                    [
-                    'image' => 'https://singeo.s3.amazonaws.com/sales/2022/coaches/julia-ziegler.jpg',
-                    'modalImage' => 'https://singeo.s3.amazonaws.com/sales/2022/coaches/julia-ziegler.jpg',
-                    'name' => 'Julia <br> Ziegler',
-                    'subtitle' => 'Singeo<br> Coach',
-                    'info' => 'Julia is the Community Specialist for Singeo and she’s excited to accompany YOU on your journey to becoming the best singer you can be! She sings in a female three-part band and she is a music director at a church where she leads worship teams and choirs. And with a background in classical voice, Julia is passionate about helping you find your own unique voice!',
-                    'modal' => 'ziegler',
-                    'prev' => 'witt',
-                    'next' => 'darcy',
-                    ],
-                    [
-                    'image' => 'https://singeo.s3.amazonaws.com/sales/promos/march/shelea-big-tile.jpg',
-                    'modalImage' => 'https://singeo.s3.amazonaws.com/sales/promos/march/shelea-big-tile.jpg',
-                    'date' => 'This Month',
-                    'name' => 'SHELÉA',
-                    'subtitle' => 'HOW TO FIND YOUR<br> TRUE VOICE',
-                    'smallInfo' => "Singer, songwriter, keyboardist, producer, and actress, Sheléa is an inspiring talent mentored by the greats such as Stevie Wonder and Quincy Jones. Her single <em>I'll Never Let You Go</em> topped the Billboard Charts at #23, and a short introduction of her is all you need to see just how impactful her singing really is.",
-                    'info' => "Singer, songwriter, keyboardist, producer, and actress, Sheléa is an inspiring talent mentored by the greats such as Stevie Wonder and Quincy Jones. Her single <em>I'll Never Let You Go</em> topped the Billboard Charts at #23, and a short introduction of her is all you need to see just how impactful her singing really is.",
-                    'modal' => 'shelea',
-                    'prev' => 'ziegler',
-                    'next' => 'darcy',
-                    'trending' => true,
-                    'bigTile' => true,
-                    'trailer' => true
-                    ],
-                    [
-                    'image' => 'https://singeo.s3.amazonaws.com/sales/2022/coaches/darcy-deutsch.jpg',
-                    'modalImage' => 'https://singeo.s3.amazonaws.com/sales/2022/coaches/darcy-deutsch.jpg',
-                    'date' => 'Now Available',
-                    'name' => 'Darcy  <br> D',
-                    'subtitle' => 'The Science<br> of Singing',
-                    'smallInfo' => 'Uncover the most powerful tools a singer can use and get the formula to change your singing voice for the better - forever. ',
-                    'info' => 'Darcy has worked in various areas of the music industry for over 30 years, but first and foremost, Darcy is a singer and educator who has made the study of voice a focal point since 2005. He is also our resident rockstar having shared gold record success performing with Juno award-winning recording artists, Prism.',
-                    'modal' => 'darcy',
-                    'prev' => 'shelea',
-                    'next' => 'canning',
-                    'trending' => true,
-                    'trailer' => true
-                    ],
-
-
-
-                    [
-                    'image' => 'https://singeo.s3.amazonaws.com/sales/2022/coaches/cate-canning.jpg',
-                    'modalImage' => 'https://singeo.s3.amazonaws.com/sales/2022/coaches/cate-canning.jpg',
-                    'date' => 'May',
-                    'name' => 'Cate   <br> Canning',
-                    'subtitle' => 'Making Dreams<br> A Reality',
-                    'smallInfo' => 'For anyone who is finding their voice and curious about the possibilities in music that may lie ahead.',
-                    'info' => 'With millions of streams across digital streaming platforms, Cate Canning has figured out how to be heard - all over the world! And as an independent artist who worked hard and successfully followed her dreams, Cate is an inspiration for anyone who is finding their voice and curious about the possibilities in music that may lie ahead.  ',
-                    'modal' => 'canning',
-                    'prev' => 'darcy',
-                    'next' => 'lindsay',
-                    'trending' => true
-                    ],
-                    [
-                    'image' => 'https://singeo.s3.amazonaws.com/sales/2022/coaches/tony-lindsay.jpg',
-                    'modalImage' => 'https://singeo.s3.amazonaws.com/sales/2022/coaches/tony-lindsay.jpg',
-                    'date' => 'Sept',
-                    'name' => 'Tony  <br> Lindsay',
-                    'subtitle' => 'Singing<br> With Soul',
-                    'smallInfo' => 'Tony Lindsay is an 11-time Grammy award-winning artist for his 25 years as the lead singer of Santana. ',
-                    'info' => 'Tony Lindsay is an 11-time Grammy award-winning artist for his 25 years as the lead singer of Santana. Tony has performed on the world’s largest stage singing with Santana at the Super Bowl in 2003. When it comes to confident singing - Tony Lindsay has earned his crown! ',
-                    'modal' => 'lindsay',
-                    'prev' => 'canning',
-                    'next' => 'benedict',
-                    'trending' => true
-                    ],
-                    [
-                    'image' => 'https://singeo.s3.amazonaws.com/sales/2022/coaches/hailey-benedict.jpg',
-                    'modalImage' => 'https://singeo.s3.amazonaws.com/sales/2022/coaches/hailey-benedict.jpg',
-                    'date' => 'Oct',
-                    'name' => 'Hailey   <br> Benedict',
-                    'subtitle' => 'Sharing Your<br> Voice',
-                    'smallInfo' => 'Her viral videos have made her one of the most followed Canadian country artists on TikTok. ',
-                    'info' => 'Hailey Benedict is a mutil-award winning singer/songwriter who has celebrated national radio success, shared a stage with Keith Urban, has millions of views on social media... and is only 19 years old.  Hailey is excited to share her formula for growing an engaged online audience.',
-                    'modal' => 'benedict',
-                    'prev' => 'lindsay',
-                    'next' => 'johnson',
-                    'trending' => true
-                    ],
-                    [
-                    'image' => 'https://singeo.s3.amazonaws.com/sales/2022/coaches/chris-johnson.jpg',
-                    'modalImage' => 'https://singeo.s3.amazonaws.com/sales/2022/coaches/chris-johnson.jpg',
-                    'date' => 'Nov',
-                    'name' => 'Chris   <br> Johnson',
-                    'subtitle' => 'Balancing Technique<br> And Artistry',
-                    'smallInfo' => 'Chris is known for helping singers to strike the perfect balance between technique and artistry. ',
-                    'info' => 'Chris Johnson is a vocal coach known for developing areas of the voice that may not have been usable, or releasing any tension or discomfort that has crept in over time. Helping singers to strike the perfect balance between technique and artistry is an art unto itself. And Chris has mastered that art and will be sharing his secrets with Singeo members in July!',
-                    'modal' => 'johnson',
-                    'prev' => 'benedict',
-                    'next' => false,
-                    'trending' => true
-                    ],
-
-                ]
-            @endphp
-            {{--<div class="slick-2 mx-auto mb-12 mt-7 md:my-10 max-w-md md:max-w-3xl lg:max-w-full">--}}
-                {{--@foreach($coaches as $coach)--}}
-                    {{--@if(!empty($coach['trending']))--}}
-                        {{--<div class="px-1 md:px-2 slick-slide">--}}
-                            {{--<div class="mx-auto" style="max-width:215px">--}}
-                                {{--<div class="flip-div inline-block relative w-full group" style="perspective: 1000px;">--}}
-                                    {{--<div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">--}}
-                                        {{--<div class="front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">--}}
-                                            {{--<div class="bg-image w-full bg-black bg-top bg-cover lazyload" data-bg="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/{{ $coach['image'] }}"></div>--}}
-                                            {{--<div class="absolute uppercase w-full bottom-3 lg:bottom-4 z-10 text-shadow-4">--}}
-                                                {{--<h2 class="font-bebas text-3xl mb-0.5" style="line-height:0.85em">{!! $coach['name']  !!}</h2>--}}
-                                                {{--<p class="text-coaches uppercase leading-tight mx-auto text-sm">{!! $coach['subtitle'] !!}</p>--}}
-                                            {{--</div>--}}
-                                            {{--<p class="leading-none font-bebas text-black bg-coaches rounded-md pt-1 px-2 absolute top-2 left-2">{!! $coach['date'] !!}</p>--}}
-                                            {{--<div class="absolute inset-0 z-0" style="background:linear-gradient(to bottom, transparent 30%, #010510);"></div>--}}
-                                        {{--</div>--}}
-                                        {{--<div class="back absolute z-40 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">--}}
-                                            {{--<div class="w-full h-full mx-auto text-center text-white flex flex-wrap justify-center items-center content-center p-3" style="background:linear-gradient(to bottom, #01050f, #021225);">--}}
-                                                {{--<p class="text-coaches uppercase leading-tight mx-auto mb-1">{!! $coach['subtitle'] !!}</p>--}}
-                                                {{--<p class="leading-normal mx-auto text-sm">{!! $coach['smallInfo'] !!}</p>--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                    {{--@endif--}}
-                {{--@endforeach--}}
-            {{--</div>--}}
-
-
-            @php
-                $altSlider = [
-                    [
-                    'image' => 'https://singeo.s3.amazonaws.com/sales/promos/march/card-shelea.jpg',
-                    'name' => 'SHELÉA',
-                    'subtitle' => 'How To Find<br> Your True Voice',
-                    'smallInfo' => 'She’s been compared to Whitney Houston, now Sheléa is here to show you how to find, trust, develop, and fall in love with your voice.',
-                    ],
-                    [
-                    'image' => 'https://singeo.s3.amazonaws.com/sales/promos/march/card-shelea-2.jpg',
-                    'name' => 'LIVE Q&A<br> WITH SHELÉA',
-                    'subtitle' => 'Wisdom From A<br> World-Class Singer',
-                    'smallInfo' => 'Don’t just watch her course, ask her questions! Sheléa will be LIVE inside the SINGEO Members Area just for you.',
-                    ],
-                    [
-                    'image' => 'https://singeo.s3.amazonaws.com/sales/2022/coach-tiles/purple-lisa.jpg',
-                    'name' => 'LIVE FEEDBACK<br> AND SUPPORT',
-                    'subtitle' => 'From Lisa<br> & Darch D',
-                    'smallInfo' => 'Your SIngeo coaches are available every week to help you see REAL progress in your voice. Get personal support and hear the results.',
-                    ],
-                    [
-                    'image' => 'https://singeo.s3.amazonaws.com/sales/2022/coach-tiles/purple-laptop.jpg',
-                    'name' => 'SING YOUR<br> FAVORITE SONGS',
-                    'subtitle' => 'Put that <br>voice to use!',
-                    'smallInfo' => 'We sing to sing songs! Find your favorites with the massive karaoke library inside Singeo. Over 150 to choose from (and counting).',
-                    ],
-                    [
-                    'image' => 'https://singeo.s3.amazonaws.com/sales/promos/march/card-lisa.jpg',
-                    'name' => 'HOW TO<br> PRACTICE SONGS',
-                    'subtitle' => 'With<br> Lisa Witt',
-                    'smallInfo' => 'You want to sing songs, but how do you practice? Lisa breaks down exactly how to practice singing songs for the best results.',
-                    ],
-                ]
-            @endphp
             <div class="slick-2 mx-auto mb-12 mt-7 md:my-10 max-w-md md:max-w-3xl lg:max-w-full h-64 sm:h-80">
                 @foreach($altSlider as $altSlide)
                     <div class="px-1 md:px-2 slick-slide">
@@ -321,7 +743,7 @@
                                         @if(!empty($altSlide['date']))
                                             <p class="leading-none font-bebas text-black bg-coaches rounded-md pt-1 px-2 absolute top-2 left-2">{!! $altSlide['date'] !!}</p>
                                         @endif
-                                        <div class="absolute inset-0 z-0" style="background:linear-gradient(to bottom, transparent 30%, #010510);"></div>
+                                        <div class="absolute inset-0 z-0" style="background:linear-gradient(to bottom, transparent 50%, #010510);"></div>
                                     </div>
                                     <div class="back absolute z-40 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
                                         <div class="w-full h-full mx-auto text-center text-white flex flex-wrap justify-center items-center content-center p-2 md:p-3" style="background:linear-gradient(to bottom, #01050f, #021225);">
@@ -366,109 +788,35 @@
             <h3 class="leading-tight " data-aos-once="true" data-aos="fade-up" data-aos-offset="150" data-aos-delay="150"><strong>Your step-by-step path<br class="inline md:hidden"> to confident singing!</strong></h3>
             <h6 class="leading-normal text-light-navy mt-3 md:mt-5 mb-64 md:mb-96 md:pb-8 lg:pb-20 text-shadow-4">10 organized levels to help you understand your voice, how it functions, how to <br class="hidden md:inline"> strengthen it, and develop the control you’ve always wanted to sing with confidence.</h6>
             <img class="max-w-full h-8 md:h-14 lg:h-20 mb-6 md:mb-8 lazyload" data-src="https://cdn.musora.com/image/fetch/w_1400,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/method-graphic.png">
-            @php
-                $levels = [
-                    [
-                    "navyBorder" => true,
-                    "defaultOpen" => true,
-                    "level" => "1",
-                    "title" => "Understanding Your Voice",
-                    "description" => "Welcome to the Singeo Method! Finding confidence and passion starts here as you learn how your voice works and why it’s unique to you.<br><br>We are snowflakes (metaphorically speaking) and no two human voices are the same. This level is designed to help you discover and understand your unique voice. We will discuss breath, the vocal cords and how shape can dramatically change your sound. ",
-                    "meta" => "6 Lessons"
-                    ],
-                    [
-                    "navyBorder" => true,
-                    "level" => "2",
-                    "title" => "Build Strength & Gain Control",
-                    "description" => "Now that you know how your voice works, it’s time to begin developing your sound! In this level, you will learn how to warm your voice up properly so that you never cause any vocal damage or fatigue from practicing with a cold voice. We will discuss great practice habits, determine your vocal tendencies and learn how to exercise your voice based on those tendencies!<br><br>You can expect to expand your current vocal range while building strength and control to help hit the right notes and hold them longer.",
-                    "meta" => "11 Lessons"
-                    ],
-                    [
-                    "navyBorder" => true,
-                    "level" => "3",
-                    "title" => "Vowel Shapes & Sounds",
-                    "description" => "Get ready to change your singing voice forever!<br><br>While practice and dedication are required to reach your full potential, there are a few secrets to hearing some massive positive changes in your voice, almost immediately... Vowels are one of those secrets.<br><br>You will work with vowel sounds and shapes and be challenged to find them within the lyrics of your favorite songs. You will learn a variety of vowel exercises that will help you adopt these sounds and apply them to everything you sing from this moment forward. Your singing will never be the same... it will be so much better!",
-                    "meta" => "7 Lessons"
-                    ],
-                    [
-                    "navyBorder" => true,
-                    "level" => "4",
-                    "title" => "Building A Proper Song List",
-                    "description" => "Singing songs! That’s why we’re here right? Vocal warm-ups and exercises are super important but why do we do them? So we can sing songs better!   There are a lot of songs out there to choose from. It’s easy to get lost in all of your favorite songs and never really dedicate yourself to practicing just a few of them.<br><br>This level is all about singing songs from start to finish. So that means you will learn to make the best “set list” (small list of songs) for your unique voice!  You will learn how to determine what songs suit your range and style, effective practice tactics,  and how to fine-tune your performance.<br><br>This level will give you everything you need to confidently sing the songs you love. ",
-                    "meta" => "8 Lessons"
-                    ],
-                    [
-                    "navyBorder" => true,
-                    "level" => "5",
-                    "title" => "Vocal Styles & Sounds",
-                    "description" => "Vibrato, Falsetto, Belting, Vocal Fry - What do they mean and which one are you?<br>Tip: You can be all of them!<br>When it comes to the voice, there are all kinds of words used to reference style techniques. These techniques can be used to help you express an emotion, tell a story, or create a unique sound of your very own!<br><br>This level will focus on helping you develop these specific techniques so that you can use them however you choose to help personalize your performance or any song.",
-                    "meta" => "9 Lessons"
-                    ],
-                    [
-                    "navyBorder" => true,
-                    "level" => "6",
-                    "title" => "Getting Fancy - Riffs And Runs",
-                    "description" => "Riffs and runs are glitter for your voice, the gymnastics of the vocal Olympics… pulling you from the choir and putting you center stage.   But if the center stage is a little too bold for you just yet, that's ok! Riffs and runs will have you giving yourself a standing ovation wherever and whenever you choose to use them.<br><br>Learning to sing vocal runs might feel intimidating, and many singers never even attempt them. But once you've learned the scales and techniques required for this skill, you will be amazed at just how easily you can showcase your voice with riffs and runs!<br><br>In this level, we will go beyond the notes, dynamics, and vowel sounds by taking your voice to the next level and get fancy with simple tricks to help you execute vocal runs and riffs. ",
-                    "meta" => "10 Lessons"
-                    ],
-                    [
-                    "navyBorder" => true,
-                    "level" => "7",
-                    "title" => "Music Theory For Singers",
-                    "description" => "Music Theory? For Singers? YES!! Understanding the language of music will help you to better understand what you are singing, make educated choices when it comes to adding your spin on popular melodies, and help you to communicate with other musicians and vocalists.<br><br>This level will give you the basics of music theory so that you can understand how rhythm, notation, and musical terms work! The word “theory” gets a bad rap for being boring, but, we promise, these lessons are fun and will give your voice AND brain a workout!",
-                    "meta" => "9 Lessons"
-                    ],
-                    [
-                    "navyBorder" => true,
-                    "level" => "8",
-                    "title" => "Ear Training & Note Recognition",
-                    "description" => 'Hear notes before you sing them.  Ear training will set you apart from the “casual campfire singers” as this useful skill will be for harmonizing, analyzing melodies, and/or writing melodies of your own by learning different useful scales.<br><br>In this level, we will approach major and minor scales with acute listening skills and challenges.  Ear training is a super fun exercise for music nerds! And by now, at level 8, I think it’s safe to claim your name as a “music nerd” 😉',
-                    "meta" => "Apr."
-                    ],
-                    [
-                    "navyBorder" => true,
-                    "level" => "9",
-                    "title" => "Harmony & Singing With Others",
-                    "description" => "Harmony is one of those skills that we dream of being able to do in the early stages of our singing aspirations, but it takes a little while to get here.  Congratulations! You are ready to enter the world of harmonizing. Harmony is what happens when two different notes are being sung at the same time and offer a pleasant sound.<br><br>In this level we will go over commonly used harmonies that you can find in almost every pop song.  You will learn how to find the harmony and anticipate the melody of the harmony while you are singing. ",
-                    "meta" => "June"
-                    ],
-                    [
-                    "navyBorder" => true,
-                    "level" => "10",
-                    "title" => "Into The Spotlight, Onto The Stage",
-                    "description" => "You are now a singer!! This is very exciting! You have worked so hard to get here… now what? Where can singing take you?  Singing doesn’t always have to be a performance, so don’t be intimidated by the thought of stepping onto a stage. There are many different ways you can use your new, confident singing voice.  Ways you may never have even imagined.<br><br>In this level we’ll explore some potential paths you can take with singing, opening up your mind to the possibilities and inspiring you to continue to keep singing a part of your daily life.  It doesn’t stop here!  We hope that you will  check out some of our course packs that focus on some specific topics in singing to expand your knowledge and give you more tools to develop your unique sound!",
-                    "meta" => "Aug."
-                    ]
-                ]
-            @endphp
-            @foreach($levels as $level)
-                <div class="dropdown text-center border-2 border-gray-500 rounded-md overflow-hidden flex cursor-pointer mb-3 select-none @if(!empty($level['defaultOpen'])) active @endif
-                @if(!empty($level['navyBorder'])) border-navy-600 @endif">
+
+            @foreach($methodLevels as $methodLevel)
+                <div class="dropdown text-center border-2 border-gray-500 rounded-md overflow-hidden flex cursor-pointer mb-3 select-none @if(!empty($methodLevel['defaultOpen'])) active @endif
+                @if(!empty($methodLevel['navyBorder'])) border-navy-600 @endif">
                     <div class="bg-singeo py-5 px-2 sm:px-3 ">
                         <h5 class="leading-tight whitespace-nowrap inline-flex items-center">
                             <span class="text-xs hidden md:inline mr-1"> LEVEL</span>
-                            <strong>{{ $level['level'] }}</strong>
+                            <strong>{{ $methodLevel['level'] }}</strong>
                         </h5>
                     </div>
                     <div class="py-5 px-3 md:px-4 text-left flex-grow">
                         <div class="flex items-center text-left flex-col sm:flex-row relative">
-                            <h5 class="leading-tight flex-grow w-full sm:w-auto"><strong>{!! $level['title'] !!}</strong></h5>
-                            @if(!empty($level['meta']))
+                            <h5 class="leading-tight flex-grow w-full sm:w-auto"><strong>{!! $methodLevel['title'] !!}</strong></h5>
+                            @if(!empty($methodLevel['meta']))
                                 <p class="inline-flex text-light-navy w-full sm:w-auto">
-                                    <em><strong> {!!  $level['meta'] !!} </strong></em>
+                                    <em><strong> {!!  $methodLevel['meta'] !!} </strong></em>
                                 </p>
                             @endif
                         </div>
-                        @if(!empty($level['description']))
+                        @if(!empty($methodLevel['description']))
                             <p class="description leading-normal transition-all duration-300 overflow-hidden opacity-0 h-0 max-h-0 invisible text-light-navy">
                                 <br>
-                                {!! nl2br( $level['description']) !!}
+                                {!! nl2br( $methodLevel['description']) !!}
                             </p>
                         @endif
                     </div>
-                    @if(!empty($level['description']))
+                    @if(!empty($methodLevel['description']))
                         <div class="py-5 px-2 sm:px-3 ml-auto">
-                            <i class="text-sm sm:text-xl @if(!empty($level['navyBorder'])) text-light-navy @endif fas fa-chevron-down transform transition-all duration-300 @if(!empty($level['defaultOpen'])) rotate-180 @endif"></i>
+                            <i class="text-sm sm:text-xl @if(!empty($methodLevel['navyBorder'])) text-light-navy @endif fas fa-chevron-down transform transition-all duration-300 @if(!empty($methodLevel['defaultOpen'])) rotate-180 @endif"></i>
                         </div>
                     @endif
                 </div>
@@ -520,12 +868,14 @@
             </div>
             <br>
             <a
-                    @hasSection('start-button')
-                    href="@yield('start-button')" class="join blue smaller"
-                    @else
-                    href="#customize-anchor" class="join blue smaller anchor-slide"
-                    @endif
-            >GET STARTED</a>
+                @hasSection('start-button')
+                href="@yield('start-button')" class="join blue smaller"
+                @else
+                href="#customize-anchor" class="join blue smaller anchor-slide"
+                @endif
+            >
+                GET STARTED
+            </a>
         </div>
     </section>
 
@@ -533,105 +883,49 @@
     <section class="content-section text-center relative" style="background:linear-gradient(to bottom, #01050f 80%, #021225);">
         <div class="song-wrap relative z-0 overflow-hidden">
             <div class="song-row absolute z-0 whitespace-nowrap">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-july/album-art/ed-sheeran-perfect.jpg" alt="Ed Sheeran - Perfect">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/221831-card-thumbnail-1552535868.jpg" alt="Leonard Cohen - Hallelujah">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/235815-card-thumbnail-maxres-1572535303.jpg" alt="Vance joy - Riptide">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/songs/taylor-swift-love-story.jpeg" alt="Taylor Swift - Love Story">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/songs/anna-nalick-breathe.jpeg" alt="Anna Nalick - Breathe">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/songs/the-animals-house-of-the-rising-sun.jpeg" alt="The Animals - House Of The Rising Sun">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/songs/whitney-houston-i-will-always-love-you.jpeg" alt="Whitney Houston - I Will Always Love You">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/songs/chris-stapleton-tennessee-whiskey.jpeg" alt="Chris Stapleton - Tennessee Whiskey">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/221819-card-thumbnail-1552536357.jpg" alt="Rihanna - Stay">
+                @foreach ($firstRow as $item)
+                    <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/{{ $item['src'] }}" alt="{{ $item['name'] }}">
+                @endforeach
 
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-july/album-art/ed-sheeran-perfect.jpg" alt="Ed Sheeran - Perfect">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/221831-card-thumbnail-1552535868.jpg" alt="Leonard Cohen - Hallelujah">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/235815-card-thumbnail-maxres-1572535303.jpg" alt="Vance joy - Riptide">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/songs/taylor-swift-love-story.jpeg" alt="Taylor Swift - Love Story">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/songs/anna-nalick-breathe.jpeg" alt="Anna Nalick - Breathe">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/songs/the-animals-house-of-the-rising-sun.jpeg" alt="The Animals - House Of The Rising Sun">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/songs/whitney-houston-i-will-always-love-you.jpeg" alt="Whitney Houston - I Will Always Love You">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/songs/chris-stapleton-tennessee-whiskey.jpeg" alt="Chris Stapleton - Tennessee Whiskey">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/221819-card-thumbnail-1552536357.jpg" alt="Rihanna - Stay">
+                @foreach ($firstRow as $item)
+                    <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/{{ $item['src'] }}" alt="{{ $item['name'] }}">
+                @endforeach
             </div>
             <div class="song-row absolute z-0 whitespace-nowrap">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/songs/dixie-chicks-landslide.jpeg" alt="Dixie Chicks - Landslide">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/235190-card-thumbnail-maxres-1572008398.jpg" alt="Ed Sheeran - Photograph">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/257690-card-thumbnail-maxres-1592474987.jpg" alt="Frank Sinatra - Fly Me To The Moon">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/songs/bryan-adams-walking-up-the-neighbours.jpeg" alt="Bryan Adams - Everything I Do">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-july/album-art/adele-rolling-in-the-deep.jpg" alt="Adele - Rolling In The Deep">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-july/album-art/adele-rolling-in-the-deep.jpg" alt="Adele - Someone Like You">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-september/album-art/the-beatles-i-want-to-hold-your-hand.jpg" alt="Beatles - I Want To Hold Your Hand">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/songs/righteous-brothers--unchained-melody.jpeg" alt="Righteous Brothers - Unchained Melody">
+                @foreach ($secondRow as $item)
+                    <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/{{ $item['src'] }}" alt="{{ $item['name'] }}">
+                @endforeach
 
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/songs/dixie-chicks-landslide.jpeg" alt="Dixie Chicks - Landslide">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/235190-card-thumbnail-maxres-1572008398.jpg" alt="Ed Sheeran - Photograph">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/257690-card-thumbnail-maxres-1592474987.jpg" alt="Frank Sinatra - Fly Me To The Moon">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/songs/bryan-adams-walking-up-the-neighbours.jpeg" alt="Bryan Adams - Everything I Do">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-july/album-art/adele-rolling-in-the-deep.jpg" alt="Adele - Rolling In The Deep">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-july/album-art/adele-rolling-in-the-deep.jpg" alt="Adele - Someone Like You">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-september/album-art/the-beatles-i-want-to-hold-your-hand.jpg" alt="Beatles - I Want To Hold Your Hand">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/songs/righteous-brothers--unchained-melody.jpeg" alt="Righteous Brothers - Unchained Melody">
+                @foreach ($secondRow as $item)
+                    <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/{{ $item['src'] }}" alt="{{ $item['name'] }}">
+                @endforeach
             </div>
             <div class="song-row absolute z-0 whitespace-nowrap">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-july/album-art/elton-john-your-song.jpg" alt="Elton John - Your Song">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/songs/alicia-keys-fallin.jpeg" alt="Alicia Keys - Fallin">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/225983-card-thumbnail-maxres-1559663715.jpg" alt="Elvis - Can't Help Falling In Love">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/songs/alicia-keys-no-one.jpeg" alt="Alicia Keys - No One">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-july/album-art/bruno-mars-just-the-way-you-are.jpg" alt="Bruno Mars - Just The Way You Are">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/songs/sinead-o-connor-nothing-compares-2-u.jpeg" alt="Sinead O Connor - Nothing Compares 2 U">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/journey-don_t-stop-believin.jpg" alt="Journey - Don't Stop Believin">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/john-lennon-imagine.jpg" alt="John Lennon - Imagine">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/279826-card-thumbnail-maxres-1609786632.png" alt="Judy Garland - Over The Rainbow">
+                @foreach ($thirdRow as $item)
+                    <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/{{ $item['src'] }}" alt="{{ $item['name'] }}">
+                @endforeach
 
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-july/album-art/elton-john-your-song.jpg" alt="Elton John - Your Song">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/songs/alicia-keys-fallin.jpeg" alt="Alicia Keys - Fallin">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/225983-card-thumbnail-maxres-1559663715.jpg" alt="Elvis - Can't Help Falling In Love">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/songs/alicia-keys-no-one.jpeg" alt="Alicia Keys - No One">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-july/album-art/bruno-mars-just-the-way-you-are.jpg" alt="Bruno Mars - Just The Way You Are">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/songs/sinead-o-connor-nothing-compares-2-u.jpeg" alt="Sinead O Connor - Nothing Compares 2 U">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/journey-don_t-stop-believin.jpg" alt="Journey - Don't Stop Believin">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/john-lennon-imagine.jpg" alt="John Lennon - Imagine">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/279826-card-thumbnail-maxres-1609786632.png" alt="Judy Garland - Over The Rainbow">
+                @foreach ($thirdRow as $item)
+                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/{{ $item['src'] }}" alt="{{ $item['name'] }}">
+            @endforeach
             </div>
             <div class="song-row absolute z-0 whitespace-nowrap">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-dec/album-art/the-beatles-let-it-be.jpg" alt="Beatles - Let It Be">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/guns-n-roses-sweet-child-o-mine.jpg" alt="Guns &amp; Roses - Sweet Child O MIne">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-september/album-art/bruce-springsteen-dancing-in-the-dark.jpg" alt="Bruce Springsteen - Dancing In The Dark">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/236823-card-thumbnail-maxres-1573820297.jpg" alt="Lewis Capaldi - Someone You Loved">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2021-jan/album-art/ABBA-Dancing Queen.jpg" alt="Abba - Dancing Queen">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2021-feb/album-art/Carrie Underwood-Before He Cheats.jpg" alt="Carrie Underwood - Before He Cheats">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/songs/carrie-underwood-jesus-take-the-wheel.jpeg" alt="Carrie Underwood - Jesus Take the Wheel">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/joan-jett-and-the-blackhearts-i-love-rock-n-roll.jpg" alt="Joan Jett - I Love Rock N Roll">
+                @foreach ($fourthRow as $item)
+                    <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/{{ $item['src'] }}" alt="{{ $item['name'] }}">
+                @endforeach
 
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-dec/album-art/the-beatles-let-it-be.jpg" alt="Beatles - Let It Be">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/guns-n-roses-sweet-child-o-mine.jpg" alt="Guns &amp; Roses - Sweet Child O MIne">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-september/album-art/bruce-springsteen-dancing-in-the-dark.jpg" alt="Bruce Springsteen - Dancing In The Dark">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/236823-card-thumbnail-maxres-1573820297.jpg" alt="Lewis Capaldi - Someone You Loved">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2021-jan/album-art/ABBA-Dancing Queen.jpg" alt="Abba - Dancing Queen">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2021-feb/album-art/Carrie Underwood-Before He Cheats.jpg" alt="Carrie Underwood - Before He Cheats">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/songs/carrie-underwood-jesus-take-the-wheel.jpeg" alt="Carrie Underwood - Jesus Take the Wheel">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/joan-jett-and-the-blackhearts-i-love-rock-n-roll.jpg" alt="Joan Jett - I Love Rock N Roll">
+                @foreach ($fourthRow as $item)
+                    <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/{{ $item['src'] }}" alt="{{ $item['name'] }}">
+                @endforeach
             </div>
             <div class="song-row absolute z-0 whitespace-nowrap">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/kings-of-leon-use-somebody.jpg" alt="Kings Of Leon - Use Somebody">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2021-jan/album-art/Matchbox Twenty-Unwell.jpg" alt="Matchbox Twenty - Unwell">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/songs/sara-bareilles-she-used-to-be-mine.jpeg" alt="Sara Bareilles - She Used To Be Mine">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/songs/sara-bareilles-the-blessed-unrest.jpeg" alt="Sara Bareilles - Brave">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/13945-card-thumbnail-maxres-1592341257.jpg" alt="Radiohead - Creep">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/eagles-hotel-california.jpg" alt="Eagles - Hotel California">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-july/album-art/eagles-desperado.jpg" alt="Eagles - Desperado">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/oasis-wonderwall.jpg" alt="Oasis - Wonderwall">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/songs/olivia-rodrigo-drivers-license-.jpeg" alt="Olivia Rodrigo - Drivers License">
+                @foreach ($fifthRow as $item)
+                    <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/{{ $item['src'] }}" alt="{{ $item['name'] }}">
+                @endforeach
 
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/kings-of-leon-use-somebody.jpg" alt="Kings Of Leon - Use Somebody">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2021-jan/album-art/Matchbox Twenty-Unwell.jpg" alt="Matchbox Twenty - Unwell">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/songs/sara-bareilles-she-used-to-be-mine.jpeg" alt="Sara Bareilles - She Used To Be Mine">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/songs/sara-bareilles-the-blessed-unrest.jpeg" alt="Sara Bareilles - Brave">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/13945-card-thumbnail-maxres-1592341257.jpg" alt="Radiohead - Creep">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/eagles-hotel-california.jpg" alt="Eagles - Hotel California">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-july/album-art/eagles-desperado.jpg" alt="Eagles - Desperado">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/oasis-wonderwall.jpg" alt="Oasis - Wonderwall">
-                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/songs/olivia-rodrigo-drivers-license-.jpeg" alt="Olivia Rodrigo - Drivers License">
+                @foreach ($fifthRow as $item)
+                <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/{{ $item['src'] }}" alt="{{ $item['name'] }}">
+            @endforeach
             </div>
             <div class="absolute z-10 inset-0" style="background: linear-gradient(to bottom, #01050f, rgba(41,47,61,0.7), #01050f);"></div>
         </div>
@@ -642,7 +936,7 @@
                 <h3 class="" data-aos-once="true" data-aos="fade-up" data-aos-offset="150" data-aos-delay="150"><strong>Sing your favorite songs!</strong></h3>
                 <h6 class="leading-normal max-w-2xl lg:max-w-3xl text-light-navy mt-3 md:mt-5 mb-64 md:mb-96 md:pb-20 text-shadow-4">Singing songs is the best way to practice what you’re learning in your lessons.  And with the Singeo Songs library, you can choose your favorite songs to practice with karaoke-style.  It’s so fun that you don’t even feel like it’s “practice”!</h6>
                 <h4 class="mb-6 md:mb-7 lg:mb-10 leading-normal"><strong class="inline-block mr-1 bg-songs px-3 py-1 rounded-md md:rounded-lg leading-none" style="color: #000a1e;">PRACTICE HAS NEVER  <br class="inline sm:hidden"> BEEN SO FUN</strong><br>
-                    <em class="text-shadow-4">Sing along to <strong class="text-songs">{{ \App\Prices::$songs }}+ popular songs</strong> with built-in practice<br class="hidden md:inline">
+                    <em class="text-shadow-4">Sing along to <strong class="text-songs">{{ Prices::$singeoSongs }}+ popular songs</strong> with built-in practice<br class="hidden md:inline">
                         tools -- so you can karaoke anywhere, anytime.</em></h4>
                 <div class="feature-rotater w-full max-w-md md:max-w-full flex flex-wrap md:flex-nowrap items-center mx-auto mt-4 md:mt-14 lg:mt-20 mb-8 md:mb-10 px-2">
                     <div class="pic-wrap md:order-1 mx-auto my-5 md:my-0 pl-0 md:pl-5 lg:pl-10 flex-shrink-0">
@@ -727,7 +1021,7 @@
                                 <i class="fas fa-expand absolute top-5 right-5 z-10 transition-opacity duration-300 text-xl md:text-2xl lg:opacity-50 group-hover:opacity-100"></i>
                             @endif
                             <div class="relative z-10">
-                                <h4 class="inline-block leading-none font-bebas bg-coaches text-black rounded-sm px-2 md:px-3 pt-1">THIS MONTH</h4><br>
+                                <h4 class="inline-block leading-none font-bebas bg-coaches text-black rounded-sm px-2 md:px-3 pt-1">{!! $coach['date']  !!}</h4><br>
                                 <h1 class="inline-block font-bebas leading-none mt-3 md:mt-5 mb-1 md:mb-4 text-5xl md:text-7xl lg:text-8xl" style="line-height: 0.85em;">{!! $coach['name']  !!}</h1><br>
                                 <h5 class="inline-block leading-tight text-coaches uppercase">{!! $coach['subtitle'] !!}</h5><br>
                             </div>
@@ -795,12 +1089,14 @@
                 </div>
             </div>
             <a
-                    @hasSection('start-button')
-                    href="@yield('start-button')" class="join blue smaller"
-                    @else
-                    href="#customize-anchor" class="join blue smaller anchor-slide"
-                    @endif
-            >GET STARTED &raquo;</a>
+                @hasSection('start-button')
+                href="@yield('start-button')" class="join blue smaller"
+                @else
+                href="#customize-anchor" class="join blue smaller anchor-slide"
+                @endif
+            >
+                GET STARTED &raquo;
+            </a>
         </div>
     </section>
 
@@ -845,71 +1141,14 @@
                     </td>
                     <td class="rounded-t-xl">Private Lessons</td>
                 </tr>
-                <tr>
-                    <td>Step-By-Step Lessons</td>
-                    <td><i class="fas fa-check-circle"></i></td>
-                    <td><i class="fas fa-check-circle"></i></td>
-                </tr>
-                <tr>
-                    <td>Consistent & Qualified Advice</td>
-                    <td><i class="fas fa-check-circle"></i></td>
-                    <td><i class="fas fa-check-circle"></i></td>
-                </tr>
-                <tr>
-                    <td>Progress-Tracking</td>
-                    <td><i class="fas fa-check-circle"></i></td>
-                    <td><i class="fas fa-check-circle"></i></td>
-                </tr>
-                <tr>
-                    <td>Live Lessons & Questions</td>
-                    <td><i class="fas fa-check-circle"></i></td>
-                    <td><i class="fas fa-check-circle"></i></td>
-                </tr>
-                <tr>
-                    <td>Personal Reviews & Feedback</td>
-                    <td><i class="fas fa-check-circle"></i></td>
-                    <td><i class="fas fa-check-circle"></i></td>
-                </tr>
-                <tr>
-                    <td>SING YOUR FAVORITE SONGS</td>
-                    <td><i class="fas fa-check-circle"></i></td>
-                    <td><i class="fas fa-minus"></i></td>
-                </tr>
-                <tr>
-                    <td>KARAOKE SING-A-LONG LIBRARY</td>
-                    <td><i class="fas fa-check-circle"></i></td>
-                    <td><i class="fas fa-minus"></i></td>
-                </tr>
-                <tr>
-                    <td>CONNECT WITH FAMOUS SINGERS</td>
-                    <td><i class="fas fa-check-circle"></i></td>
-                    <td><i class="fas fa-minus"></i></td>
-                </tr>
-                <tr>
-                    <td>ON-DEMAND WARMUP ROUTINES</td>
-                    <td><i class="fas fa-check-circle"></i></td>
-                    <td><i class="fas fa-minus"></i></td>
-                </tr>
-                <tr>
-                    <td>Re-Watch Any Lesson</td>
-                    <td><i class="fas fa-check-circle"></i></td>
-                    <td><i class="fas fa-minus"></i></td>
-                </tr>
-                <tr>
-                    <td>Learn From Home, Anytime</td>
-                    <td><i class="fas fa-check-circle"></i></td>
-                    <td><i class="fas fa-minus"></i></td>
-                </tr>
-                <tr>
-                    <td>Supportive Community</td>
-                    <td><i class="fas fa-check-circle"></i></td>
-                    <td><i class="fas fa-minus"></i></td>
-                </tr>
-                <tr>
-                    <td>100% Money Back Guarantee</td>
-                    <td><i class="fas fa-check-circle"></i></td>
-                    <td><i class="fas fa-minus"></i></td>
-                </tr>
+                @foreach ($advantages as $advantage)
+                    <tr>
+                        <td>{{ $advantage['name'] }}</td>
+                        <td><i class="fas fa-check-circle"></i></td>
+                        <td><i class="fas @if($advantage['privateLessons'])fa-check-circle @else fa-minus @endif"></i></td>
+                    </tr>
+                @endforeach
+
                 <tr style="background-color:transparent!important;">
                     <td></td>
 
@@ -918,8 +1157,12 @@
                     @else
                         <td class="rounded-b-xl">
                             @if(empty($trialVersion))
-                                <strong>${{ number_format(\App\Prices::$singeoMembershipAnnual/ 12, 2) }}</strong>/mo<br>
-                                <em>Billed annually</em><br><br>
+                                @if(number_format(Prices::$plusSubscriptionAnnual, 2) == intval(Prices::$plusSubscriptionAnnual))
+                                    <strong>${{  round(Prices::$plusSubscriptionAnnual / 12, 2) }}</strong>/mo<br>
+                                @else
+                                    <strong>${{  number_format(Prices::$plusSubscriptionAnnual / 12, 2)  }}</strong>/mo<br>
+                                @endif
+                                <em>Billed annually at ${{  Prices::$plusSubscriptionAnnual }}</em><br><br>
                                 Unlimited lessons & support.
                             @else
                                 <strong>Free Trial</strong><br>&nbsp;
@@ -937,7 +1180,7 @@
 
             <h3 class="leading-tight mt-8 md:mt-12" data-aos-once="true" data-aos="fade-up" data-aos-offset="150" data-aos-delay="150"><strong>Meet Musora.</strong></h3>
             <h6 class="leading-normal max-w-2xl lg:max-w-4xl text-light-navy mt-3 md:mt-5 mb-8 md:mb-10">Musora Media has provided world-class music education to millions of students around the globe for the past 15 years. Singeo is the newest addition, operating out of the same high-end studios using the same lesson format that has created, inspired, and educated musicians all over the world.</h6>
-            <img class="timeline max-h-full px-3 md:px-0 lazyload" data-src="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/meet-musora.png">
+            <img class="timeline max-h-full px-3 md:px-0 lazyload" data-src="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://singeo.s3.amazonaws.com/sales/2022/meet-musora2.png">
         </div>
     </section>
 
@@ -947,82 +1190,6 @@
             <h3 class="leading-tight mb-8 md:mb-11 " data-aos-once="true" data-aos="fade-up" data-aos-offset="150" data-aos-delay="150"><strong>Trusted by singing<br class="inline sm:hidden"> students everywhere.</strong></h3>
 
             <div class="testimonials flex flex-wrap justify-center items-start mx-auto w-full max-w-xs md:max-w-full">
-                @php
-                    $testimonials = [
-                        [
-                        'title' => "It felt like the chains finally fell off my voice.",
-                        'description' => "I was concerned that my singing style was too different to truly learn what I needed – and I wanted to strengthen my voice and stretch my range in a healthy manner.<br><br>With Singeo, I started practicing my songs more meticulously and it paid off – stronger high notes were available and it felt like the chains finally fell off my voice!",
-                        'name' => 'Orianna Sells',
-                        'location' => 'South Carolina, USA',
-                        'image' => 'https://singeo.s3.amazonaws.com/sales/2022/testimonials/OriannaSells.jpg',
-                        'prev' => false,
-                        'next' => 'JocelynnRodrigues',
-                        ],
-                        [
-                        'title' => "It’s so healing to sing.",
-                        'description' => "I wasn’t sure if I could really learn online, because I’ve heard in the past how important it is to have somebody with you, who can guide you – and make sure you don’t get injured.<br><br>But I’ve been making so much progress with Singeo. After doing the routines, I noticed that it didn’t stress me out as much to sing the higher octaves during the exercise. And while I’m singing around the house my voice feels stronger. Everyone can truly sing, and it’s so healing to sing. We were all born with this beautiful instrument and it’s just waiting to be played.",
-                        'name' => 'Jocelynn Rodrigues',
-                        'location' => 'Alberta, Canada',
-                        'image' => 'https://singeo.s3.amazonaws.com/sales/2022/testimonials/JocelynnRodrigues.jpg',
-                        'prev' => 'OriannaSells',
-                        'next' => 'JohnStevenson',
-                        ],
-                        [
-                        'title' => "I have my first solo gig lined up!",
-                        'description' => "For years I thought I wouldn’t be able to sing. I don’t feel like that anymore. I feel that I can and I now have my first solo gig lined up for January.<br><br>Essentially I realised that I needed to maintain a disciplined regimen. I needed to practice every day. I needed to do specific exercises that focussed on my weak spots. I also realised it wasn’t magic. Improvement is gradual and requires effort. It was a relief realising that if I put in the work, I would get there. Singeo is a good program. If you put in the time you will see improvement.",
-                        'name' => 'John Stevenson',
-                        'location' => 'Australia',
-                        'image' => 'https://singeo.s3.amazonaws.com/sales/2022/testimonials/JohnStevenson.jpg',
-                        'prev' => 'JocelynnRodrigues',
-                        'next' => 'DamienGiven',
-                        ],
-                        [
-                        'title' => "I’m getting back some of my old confidence.",
-                        'description' => "Thirty-five years ago, I sang professionally in a group. And now at 74 years old, I’d given up the idea of ever singing properly again. But when tendonitis put a stop to my piano playing for several months, I decided to give Singeo a try – and boy, what a great choice!<br><br>I’m getting back some of my old confidence through the lessons and feedback – and I’m now keen to regain more pitch and breathing control, even though physiologically I’ve probably lost about one and a half steps at the top of my range. But that doesn’t bother me as much as I thought it would after a few months with Singeo. I’ve received a great deal of positive feedback from my classmates - and great tips from Lisa, Julia, and the team. What a find, what a course, and what great tutors!",
-                        'name' => 'Damien Given',
-                        'location' => 'Northern Ireland',
-                        'image' => 'https://singeo.s3.amazonaws.com/sales/2022/testimonials/DamienGiven3.jpg',
-                        'prev' => 'JohnStevenson',
-                        'next' => 'KathyMandell',
-                        ],
-                        [
-                        'title' => "It was like, OH! That’s what my problem is!",
-                        'description' => "It was like, OH! THAT’S what my problem is! I’ve been having a lot of fun understanding the different singing styles, such as ‘flipper’ or ‘yeller’ – and getting past the flipping thing and either using it in my favor and flipping on purpose like Alanis Morrissette or opening my mouth more to have a stronger voice.<br><br>If you’ve always wanted to sing and didn’t have the confidence or thought you weren’t good enough, this is the program for you. The teachers and students are so supportive, non-judgmental, and encouraging.",
-                        'name' => 'Kathy Mandell',
-                        'location' => 'South Carolina, USA',
-                        'image' => 'https://singeo.s3.amazonaws.com/sales/2022/testimonials/KathyMandell.jpg',
-                        'prev' => 'DamienGiven',
-                        'next' => 'JerryBradley',
-                        ],
-                        [
-                        'title' => "More comfortable with my own voice every day.",
-                        'description' => "This is NOT a standard web-based training where you are provided training videos with no interaction. The teachers are always willing to give personal feedback, suggestions, and recommendations.<br><br>Singeo made me realize it’s about being the best singer I can be while working within my own unique style – not matching somebody else’s. It’s like having a weight lifted off my shoulders. Don’t get me wrong, there is still lots of work to do, but my direction and understanding changed – and I’m feeling more comfortable with my own voice every day.<br><br>It’s up to you to take advantage of it all. The worst case is that you will learn a lot. The best case: you will improve your vocal abilities, confidence, make connections, and become a part of a family that really cares.",
-                        'name' => 'Jerry Bradley',
-                        'location' => 'North Carolina, USA',
-                        'image' => 'https://singeo.s3.amazonaws.com/sales/2022/testimonials/JerryBradley2.jpg',
-                        'prev' => 'KathyMandell',
-                        'next' => 'RichardBailey',
-                        ],
-                        [
-                        'title' => "Like having your own singing coach.",
-                        'description' => "When I saw how knowledgeable, energetic, and bubbly Lisa was it convinced me that this was not just an online tutorial – Singeo is like having your own singing coach at your home, literally any time of the day or night. I’ve learned how to breathe and control my breath to sing – and I’m able to sing songs how they were meant to be sung.<br><br>I enjoy singing so much more than I did before and it’s great fun and so satisfying to hear others say how much they enjoy my singing!",
-                        'name' => 'Richard Bailey',
-                        'location' => 'New Jersey, USA',
-                        'image' => 'https://singeo.s3.amazonaws.com/sales/2022/testimonials/RichardBailey.jpg',
-                        'prev' => 'JerryBradley',
-                        'next' => 'TerriPigg',
-                        ],
-                        [
-                        'title' => "I sing all the time – at home, at the office, in the car, wherever!",
-                        'description' => "The learning is always fun and customized to fit you and your singing goals. In addition to that, you’ll get to know people all around the world who also love singing. The Singeo community celebrates and encourages each other as we learn and grow as singers from the convenience of our own homes.<br><br>Singeo’s given me a confidence boost and helped me begin to believe that I can really DO this singing thing while having fun at the same time. I sing all the time – at home, at the office, in the car, wherever. Singing just makes me happy!",
-                        'name' => 'Terri Pigg',
-                        'location' => 'Tennessee, USA',
-                        'image' => 'https://singeo.s3.amazonaws.com/sales/2022/testimonials/TerriPigg.jpg',
-                        'prev' => 'RichardBailey',
-                        'next' => false,
-                        ],
-                    ]
-                @endphp
                 @foreach($testimonials as $testimonial)
                     <div class="testimonial w-full md:w-1/3 lg:w-1/4 md:px-2 pb-2 md:pb-4">
                         <div class="w-full rounded-xl overflow-hidden cursor-pointer" style="background: #051124;" data-open="{!!  str_replace(' ', '', $testimonial['name'])  !!}">
@@ -1075,31 +1242,13 @@
 
     @yield('final')
 
-    <section class="content-section text-center">
+    <section class="content-section text-center px-3">
         <div class="container mx-auto max-w-6xl">
             <h3 class="leading-tight mb-8 md:mb-11 " data-aos-once="true" data-aos="fade-up" data-aos-offset="150" data-aos-delay="150"><strong>Are There Any Questions? </strong></h3>
-            @php
-                $levels = [
-                    [
-                    "navyBorder" => true,
-                    "title" => "Is There An Age Limit For Learning To Sing? ",
-                    "description" => "If you can speak, you CAN sing.  There’s no age limit for when you can experience the enrichment that singing brings to your life.  Everyone progresses differently, so it’s important to remember to have patience with yourself and celebrate the milestones of your personal singing journey. ",
-                    ],
-                    [
-                    "navyBorder" => true,
-                    "title" => "I Have Extreme “Stage Fright”. Can I Still Learn To Sing?",
-                    "description" => "Absolutely! Singing is more than a performance. You don’t have to have an audience to sing. Singing can just be for YOU.  And when you take the time to learn and practice properly you will gain confidence in your singing and, when you’re ready, maybe you WILL take the stage! ",
-                    ],
-                    [
-                    "navyBorder" => true,
-                    "title" => "What if I try Singeo and don’t like it?",
-                    "description" => "We would be super sad 😉. But seriously, Singeo may NOT be for you. And if that’s the case, you’ll get a full refund. At Singeo, we want students, not customers. It’s why you’ll have 90 days to try all the lessons risk-free. If you decide it’s not for you, simply let us know and we’ll give you back all your hard-earned money. It’s our promise. (If your membership includes any bonuses, your refund will deduct the value of hard goods that were shipped to you.)",
-                    ],
-                ]
-            @endphp
-            @foreach($levels as $level)
-                <div class="dropdown text-center border-2 border-gray-500 rounded-md overflow-hidden flex cursor-pointer mb-3 select-none @if(!empty($level['defaultOpen'])) active @endif
-                @if(!empty($level['navyBorder'])) border-navy-600 @endif">
+
+            @foreach($questionLevels as $questionLevel)
+                <div class="dropdown text-center border-2 border-gray-500 rounded-md overflow-hidden flex cursor-pointer mb-3 select-none @if(!empty($questionLevel['defaultOpen'])) active @endif
+                @if(!empty($questionLevel['navyBorder'])) border-navy-600 @endif">
                     <div class="bg-singeo py-5 px-2 sm:px-3 ">
                         <h5 class="leading-tight whitespace-nowrap inline-flex items-center">
                             <strong><i class="fas fa-question"></i></strong>
@@ -1107,23 +1256,23 @@
                     </div>
                     <div class="py-5 px-3 md:px-4 text-left flex-grow">
                         <div class="flex items-center text-left flex-col sm:flex-row relative">
-                            <h5 class="leading-tight flex-grow w-full sm:w-auto"><strong>{!! $level['title'] !!}</strong></h5>
-                            @if(!empty($level['meta']))
+                            <h5 class="leading-tight flex-grow w-full sm:w-auto"><strong>{!! $questionLevel['title'] !!}</strong></h5>
+                            @if(!empty($questionLevel['meta']))
                                 <p class="inline-flex text-light-navy w-full sm:w-auto">
-                                    <em><strong> {!!  $level['meta'] !!} </strong></em>
+                                    <em><strong> {!!  $questionLevel['meta'] !!} </strong></em>
                                 </p>
                             @endif
                         </div>
-                        @if(!empty($level['description']))
+                        @if(!empty($questionLevel['description']))
                             <p class="description leading-normal transition-all duration-300 overflow-hidden opacity-0 h-0 max-h-0 invisible text-light-navy">
                                 <br>
-                                {!! nl2br( $level['description']) !!}
+                                {!! nl2br( $questionLevel['description']) !!}
                             </p>
                         @endif
                     </div>
-                    @if(!empty($level['description']))
+                    @if(!empty($questionLevel['description']))
                         <div class="py-5 px-2 sm:px-3 ml-auto">
-                            <i class="text-sm sm:text-xl @if(!empty($level['navyBorder'])) text-light-navy @endif fas fa-chevron-down transform transition-all duration-300 @if(!empty($level['defaultOpen'])) rotate-180 @endif"></i>
+                            <i class="text-sm sm:text-xl @if(!empty($questionLevel['navyBorder'])) text-light-navy @endif fas fa-chevron-down transform transition-all duration-300 @if(!empty($questionLevel['defaultOpen'])) rotate-180 @endif"></i>
                         </div>
                     @endif
                 </div>
@@ -1185,18 +1334,6 @@
         </div>
     @endforeach
 
-    @php
-        $videoModals = [
-            [
-            'modal' => 'darcyTrailer',
-            'vimeo' => '//player.vimeo.com/video/661031242?autoplay=1',
-            ],
-            [
-            'modal' => 'sheleaTrailer',
-            'vimeo' => 'https://www.youtube.com/embed/GEZQZ3pxpAE?rel=0&showinfo=0&autoplay=1',
-            ],
-         ]
-    @endphp
     @foreach($videoModals as $videoModal)
         <div class="reveal large" id="{{ $videoModal['modal'] }}" data-reveal data-reset-on-close="false">
             <div class="aspect-16:9 w-full relative">
@@ -1208,15 +1345,16 @@
     @include("singeo.sales.partials._footer")
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="/assets/marketing/nav-footer.js"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     {{--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/1.9.3/countUp.min.js"></script>--}}
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script type="text/javascript" src="/assets/marketing/sales-page.js"></script>
-    <script type="text/javascript" src="/assets/js/modal.js"></script>
-    <script type="text/javascript" src="/assets/js/modal-autoplay.js"></script>
-    {{--<script type="text/javascript" src="/js/jquery.countdown-2.min.js"></script>--}}
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/singeo/sales-page.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
-    <script type="text/javascript" src="/assets/js/sliding-anchor.js"></script>
+
+
+    @yield('additional-scripts')
 @endsection

@@ -100,7 +100,7 @@ module.exports = {
         },
         '.font-bebas-neue': {
           fontWeight: '400 !important', //force font weight
-          letterSpacing: '1px !important',
+          letterSpacing: '1px',
         },
         '.forum-post': {
           'ul, ol': {
@@ -108,6 +108,9 @@ module.exports = {
             paddingLeft: '40px',
             margin: '10px 0',
           }
+        },
+        '.break-words': {
+          wordBreak: 'break-word',
         }
       })
     })

@@ -27,7 +27,8 @@ class EventDataSynchronizerUserProvider implements UserProviderInterface
         ?Carbon $membershipExpirationDate,
         bool $isLifetimeMember,
         string $accessLevel,
-        bool $isPackOwner
+        bool $isPackOwner,
+        ?string $membershipLevel
     )
     : bool {
         $user =
@@ -45,6 +46,7 @@ class EventDataSynchronizerUserProvider implements UserProviderInterface
             $user->is_lifetime_member = $isLifetimeMember;
             $user->access_level = $accessLevel;
             $user->is_pack_owner = $isPackOwner;
+            $user->membership_level = $membershipLevel;
 
             $user->save();
 
@@ -64,8 +66,8 @@ class EventDataSynchronizerUserProvider implements UserProviderInterface
             User::query()
                 ->find($userId);
 
-        if (!empty($user)) {
-            $userBrandXP = user()->brand_total_xp;
+        if (!empty($user) && $user) {
+            $userBrandXP = $user->brand_total_xp;
             $totalXp = 0;
             foreach ($totalXpPerBrands as $brand => $totalXpPerBrand){
                 $userBrandXP[$brand] = $totalXpPerBrand;

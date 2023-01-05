@@ -16,8 +16,21 @@ class PackDecorator extends TypeDecoratorBase
     {
         $contentsOfType = $contents->where('type', 'pack');
 
-        if ($contentsOfType->isEmpty() || self::$skip) {
+        if ($contentsOfType->isEmpty()) {
             return $contents;
+        }
+
+        foreach ($contentsOfType as $contentIndex => $content) {
+            if (($content['completed'] ?? false) !== true) {
+                $contentsOfType[$contentIndex]['next_lesson_url'] =
+                    url()->route('platform.content.jump-to-continue-content', [$content['id']]);
+                $contentsOfType[$contentIndex]['mobile_next_lesson_url'] =
+                    url()->route('platform.content.jump-to-continue-content', [$content['id']]);
+            }
+        }
+
+        if (self::$skip) {
+            return $this->mergeDecorated($contents, $contentsOfType);
         }
 
         $childCounts = $this->contentHierarchyService->countParentsChildren(
@@ -44,13 +57,6 @@ class PackDecorator extends TypeDecoratorBase
                 config('xp_ranks.pack_content_completed')
             );
 
-            if (($content['completed'] ?? false) !== true) {
-                $contentsOfType[$contentIndex]['next_lesson_url'] =
-                    url()->route('platform.content.jump-to-continue-content', [$content['id']]);
-                $contentsOfType[$contentIndex]['mobile_next_lesson_url'] =
-                    url()->route('platform.content.jump-to-continue-content', [$content['id']]);
-
-            }
 
             $contentsOfType[$contentIndex]['bundle_count'] = $childCounts[$content['id']] ?? 0;
 

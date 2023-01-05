@@ -7,13 +7,15 @@ use Railroad\Railcontent\Support\Collection;
 
 class ContentExperienceDecorator extends TypeDecoratorBase
 {
+    public static $skip = false;
+
     /**
      * @param Collection $contents
      * @return Collection
      */
     public function decorate(Collection $contents)
     {
-        if (self::$decorationMode !== self::DECORATION_MODE_MAXIMUM) {
+        if (self::$decorationMode !== self::DECORATION_MODE_MAXIMUM || self::$skip) {
             return $contents;
         }
 
@@ -47,12 +49,10 @@ class ContentExperienceDecorator extends TypeDecoratorBase
                 $pointAmount = $content->fetch('fields.xp', $defaultPointAmount);
 
                 foreach ($content['assignments'] ?? [] as $assignment) {
-                    $pointAmount += $assignment['xp'] ?? 0;
+                    $pointAmount += $assignment->fetch('xp', 0);
                 }
-
                 $contents[$contentIndex]['xp'] = $pointAmount;
-
-                $contents[$contentIndex]['xp_bonus'] = $content->fetch('fields.xp', $defaultPointAmount);
+                $contents[$contentIndex]['xp_bonus'] = $pointAmount;
             }
 
             // units

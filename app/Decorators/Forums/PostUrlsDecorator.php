@@ -2,6 +2,7 @@
 
 namespace App\Decorators\Forums;
 
+use Carbon\Carbon;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
@@ -23,6 +24,10 @@ class PostUrlsDecorator
     public function decorate($posts)
     {
         foreach ($posts as $index => $post) {
+            $posts[$index]['url'] = route('forums.jump-to-post',['brand' => config('railnotifications.brand'), 'postId' => $post['id']]);
+            $posts[$index]['created_at_diff'] = Carbon::parse($posts[$index]['created_at'])
+                ->diffForHumans();
+
             $url = str_replace(
                 [
                     '"/members/forums',
@@ -187,13 +192,7 @@ class PostUrlsDecorator
             ConfigService::$availableBrands = $availableBrands;
 
             return $content['url'] ?? '';
-        } elseif (in_array('packs', $segments) && !is_numeric($lastSegment)) {
-            $content =
-                $this->contentService->getBySlugAndType($lastSegment, 'pack')
-                    ->first();
-            ConfigService::$availableBrands = $availableBrands;
 
-            return $content['url'];
         } elseif ($numberOfSegments == 3 && $segments[1] == 'semester-packs') {
             $content =
                 $this->contentService->getBySlugAndType($lastSegment, 'semester-pack')
@@ -239,6 +238,13 @@ class PostUrlsDecorator
         } elseif ($numberOfSegments == 4 && $segments[1] == 'learning-paths') {
             $content =
                 $this->contentService->getBySlugAndType($lastSegment, 'learning-path-level')
+                    ->first();
+            ConfigService::$availableBrands = $availableBrands;
+
+            return $content['url'];
+        } elseif (in_array('packs', $segments) && !is_numeric($lastSegment)) {
+            $content =
+                $this->contentService->getBySlugAndType($lastSegment, 'pack')
                     ->first();
             ConfigService::$availableBrands = $availableBrands;
 

@@ -51,6 +51,7 @@
                         user-avatar="{{ user()->profile_picture_url }}"
                         user-id="{{ user()->id }}"
                         account-url="{{ user()->getDashboardUrl() }}"
+                        :can-refer-new-students="{{ user()->isAMember() ? 'true' : 'false' }}"
                     @endif
                     @if(!empty( $hasUnreadNotifications ))
                         :has-notifications="{{ $hasUnreadNotifications ? 'true' : 'false' }}"
@@ -72,6 +73,8 @@
                 @yield('review-modal-section')
             </app-container>
         </div>
+
+        @include('partials._brand-set-authentication-cookies-iframe')
 
         {{-- Scripts --}}
         <script type="application/javascript">

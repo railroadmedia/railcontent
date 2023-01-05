@@ -13,7 +13,7 @@ if (!isset($assignmentID)) {
         @elseif(!empty($pdfURL))
             <i class="fal fa-fw fa-file-music text-3xl flex-shrink-0"></i>
         @elseif(!empty($mp3URL))
-            <a href="{{ $mp3URL }}" target="_blank"><i class="fal fa-fw fa-music text-3xl"></i></a>
+            <a class="text-black" href="{{ $mp3URL }}" target="_blank"><i class="fal fa-fw fa-music text-3xl"></i></a>
         @endif
 
         <div class="pl-3 sm:pl-4 max-w-2xl max-w-2xl mr-auto">
@@ -23,6 +23,8 @@ if (!isset($assignmentID)) {
                 <p class="flex-grow mt-1 sm:mt-2">{!!  $subTitle  !!}</p>
             @endif
         </div>
+
+
 
         @if(!empty($pdfURL) || !empty($mp3URL))
             @if(!empty($soundslice))

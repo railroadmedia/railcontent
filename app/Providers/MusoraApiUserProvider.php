@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Modules\CustomerIO\Services\CustomerIoService;
 use App\Services\CalendarService;
 use Carbon\Carbon;
 use Modules\UserManagementSystem\Events\MobileAppLogin;
@@ -18,6 +19,8 @@ use Railroad\Railcontent\Services\CommentService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railforums\Repositories\PostRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use \Illuminate\Database\Eloquent\ModelNotFoundException;
+
 
 class MusoraApiUserProvider implements UserProviderInterface
 {
@@ -27,6 +30,7 @@ class MusoraApiUserProvider implements UserProviderInterface
     private CommentService $commentService;
     private PostRepository $postRepository;
     private ContentService $contentService;
+    private CustomerIoService $customerIoService;
     private SubscriptionService $subscriptionService;
 
     public function __construct(
@@ -36,6 +40,7 @@ class MusoraApiUserProvider implements UserProviderInterface
         CommentService $commentService,
         PostRepository $postRepository,
         ContentService $contentService,
+        CustomerIoService $customerIoService,
         SubscriptionService $subscriptionService
     ) {
         $this->productRepository = $productRepository;
@@ -44,6 +49,7 @@ class MusoraApiUserProvider implements UserProviderInterface
         $this->commentService = $commentService;
         $this->postRepository = $postRepository;
         $this->contentService = $contentService;
+        $this->customerIoService = $customerIoService;
         $this->subscriptionService = $subscriptionService;
     }
 
@@ -129,7 +135,26 @@ class MusoraApiUserProvider implements UserProviderInterface
             $hasCompletedMethod = $methodContent['completed'];
         }
 
-        return [
+        try {
+            $customerIoData = $this->customerIoService->getCustomerByUserId(config('event-data-synchronizer.customer_io_account_to_sync_all_brands'),
+                                                                            $user->id);
+        } catch (ModelNotFoundException $exception) {
+            $customerIoData = null;
+        }
+
+        $extraData = [
+            'cio_id' => null,
+            'customer_io_id' => null,
+        ];
+
+        if ($customerIoData && !empty($externalAttributes = $customerIoData->getExternalAttributes())) {
+            $extraData = [
+                'cio_id' => $externalAttributes['cio_id'],
+                'customer_io_id' => $externalAttributes['id'],
+            ];
+        }
+
+        return array_merge([
             'id' => $user->id,
             'email' => $user->email,
             'permission_level' => $user->permission_level,
@@ -138,11 +163,11 @@ class MusoraApiUserProvider implements UserProviderInterface
             'last_name' => $user->last_name,
             'avatarUrl' => $user->profile_picture_url,
             'profile_picture_url' => $user->profile_picture_url,
-            'helpscout_beacon_id' => config('railhelpscout.helpscout_tracking_beacon_id.' . brand() ),
+            'helpscout_beacon_id' => config('railhelpscout.helpscout_tracking_beacon_id.' . brand()),
             'level_rank' => $user->getMethodLevel(),
             'has_started_method' => $hasStartedMethod ?? false,
             'has_completed_method' => $hasCompletedMethod ?? false,
-        ];
+        ], $extraData);
     }
 
     public function getCurrentUserExperienceData()

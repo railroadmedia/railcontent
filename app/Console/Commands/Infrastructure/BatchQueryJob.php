@@ -41,7 +41,11 @@ abstract class BatchQueryJob implements ShouldQueue
         $className = class_basename($this);
         Log::info("Processing $className job $skip-$end");
         $items = $this->getQuery()->skip($skip)->take($take)->get();
-        if ($this->handleAllItems($items)) {
+        if($items->count() == 0) {
+            Log::info("No items found.");
+            return;
+        }
+        if (!$this->handleAllItems($items)) {
             foreach ($items as $item) {
                 $this->handleItem($item);
             }

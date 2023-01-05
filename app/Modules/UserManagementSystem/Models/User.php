@@ -4,8 +4,9 @@ namespace Modules\UserManagementSystem\Models;
 
 use App\Modules\Ecommerce\Models\Subscription;
 use App\Modules\Mentor\Models\MentorStudent;
+use App\Modules\Notifications\Models\NotificationSetting;
+use App\Modules\Notifications\Models\NotificationSettings;
 use Barryvdh\LaravelIdeHelper\Eloquent;
-use DateTimeZone;
 use Exception;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable;
@@ -211,6 +212,13 @@ use Spatie\Permission\Traits\HasRoles;
  * @property mixed|null $brand_total_xp
  * @property Collection $subscriptions
  * @property mixed|null $brand_minutes_practiced
+ * @property Collection $notificationSettings
+ * @property string|null $membership_level // can be 'basic' or 'plus'
+ * @property-read int|null $notification_settings_count
+ * @property-read int|null $subscriptions_count
+ * @method static Builder|User whereBrandMinutesPracticed($value)
+ * @method static Builder|User whereBrandTotalXp($value)
+ * @method static Builder|User whereMembershipLevel($value)
  */
 class User extends Model implements Authenticatable, CanResetPassword, AuthorizableContract
 {
@@ -218,6 +226,8 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     use HasApiTokens;
     use HasRoles;
     use Authorizable;
+
+    private ?NotificationSettings $notificationSettingsLookup = null;
 
     protected $hidden = ['password', 'session_salt'];
     protected $table = 'usora_users';
@@ -299,6 +309,19 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         return $this->hasMany(Subscription::class, 'user_id');
     }
 
+    public function notificationSettings(): HasMany
+    {
+        return $this->hasMany(NotificationSetting::class, 'user_id');
+    }
+
+    public function getNotificationSetting(string $brand, string $settingName): bool
+    {
+        if (!$this->notificationSettingsLookup) {
+            $this->notificationSettingsLookup = new NotificationSettings($this->notificationSettings);
+        }
+        return $this->notificationSettingsLookup->getSetting($brand, $settingName);
+    }
+
     /**
      * @return int
      */
@@ -356,6 +379,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
 
         return 0;
     }
+
     /**
      * @return Attribute
      */
@@ -397,8 +421,6 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     }
 
     /**
-     * Values: pack, member, lifetime, coach, house-coach, team
-     *
      * @return Attribute
      */
     public function timezone(): Attribute
@@ -429,7 +451,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
      */
     public function getDashboardUrl()
     {
-        return url()->route('platform.profile.dashboard', [$this->id]);
+        return url()->route('platform.profile.dashboard', [$this->id, 'brand' => $this->last_used_brand]);
     }
 
     /**
@@ -485,6 +507,58 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
             case $this->total_xp >= 75000000 && $this->total_xp < 10000000:
                 return 'Legends: Porcaro';
             case $this->total_xp >= 10000000:
+                return 'Legends: Rich';
+            default:
+                return 'Member';
+        }
+    }
+
+    /**
+     * @return string
+     */
+    public function getBrandXpRank()
+    {
+        $brandXp = $this->getBrandTotalXp();
+        switch ($brandXp) {
+            case $brandXp < 250:
+                return 'Casual';
+            case $brandXp >= 250 && $this->total_xp < 1000:
+                return 'Enthusiast I';
+            case $brandXp >= 1000 && $this->total_xp < 2500:
+                return 'Enthusiast II';
+            case $brandXp >= 2500 && $this->total_xp < 5000:
+                return 'Pro I';
+            case $brandXp >= 5000 && $this->total_xp < 10000:
+                return 'Pro II';
+            case $brandXp >= 10000 && $this->total_xp < 20000:
+                return 'Pro III';
+            case $brandXp >= 20000 && $this->total_xp < 50000:
+                return 'Master I';
+            case $brandXp >= 50000 && $this->total_xp < 100000:
+                return 'Master II';
+            case $brandXp >= 100000 && $this->total_xp < 250000:
+                return 'Master III';
+            case $brandXp >= 250000 && $this->total_xp < 500000:
+                return 'Drumeo Legend';
+            case $brandXp >= 500000 && $this->total_xp < 1000000:
+                return 'Legends: Star';
+            case $brandXp >= 1000000 && $this->total_xp < 1500000:
+                return 'Legends: Erskine';
+            case $brandXp >= 1500000 && $this->total_xp < 2000000:
+                return 'Legends: Cobham';
+            case $brandXp >= 2000000 && $this->total_xp < 2500000:
+                return 'Legends: Garibaldi';
+            case $brandXp >= 2500000 && $this->total_xp < 3000000:
+                return 'Legends: Peart';
+            case $brandXp >= 3000000 && $this->total_xp < 4000000:
+                return 'Legends: Bonham';
+            case $brandXp >= 4000000 && $this->total_xp < 5000000:
+                return 'Legends: Colaiuta';
+            case $brandXp >= 5000000 && $this->total_xp < 7500000:
+                return 'Legends: Gadd';
+            case $brandXp >= 75000000 && $this->total_xp < 10000000:
+                return 'Legends: Porcaro';
+            case $brandXp >= 10000000:
                 return 'Legends: Rich';
             default:
                 return 'Member';
@@ -709,6 +783,18 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
             !empty($this->membership_expiration_date) && $this->membership_expiration_date < Carbon::now();
     }
 
+    public function isABasicMember()
+    {
+        return $this->isAMember() && $this->membership_level == 'basic';
+    }
+
+    public function isAPlusMember()
+    {
+        return true; // todo: remove when permissions are live
+
+        return ($this->isAMember() && $this->membership_level == 'plus') || $this->isAdmin();
+    }
+
     public function getTotalXp()
     {
         return $this->total_xp ?? 0;
@@ -718,6 +804,23 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     {
         return !$this->isAdmin()
             && !empty($this->membership_expiration_date)
-            && $this->membership_expiration_date >= Carbon::now()->addDays(-config('mentor.active_after_membership_expired_days'));
+            && $this->membership_expiration_date >= Carbon::now()->addDays(
+                -config('mentor.active_after_membership_expired_days')
+            );
+    }
+
+    /**
+     * @return bool
+     */
+    public function isNotLifetimeOrAnnualMember()
+    {
+        $annualSubscription = false;
+        foreach ($this->subscriptions as $subscription) {
+            $annualSubscription = in_array($subscription->product->sku, config('ecommerce.annual_product_skus'));
+            if ($annualSubscription) {
+                break;
+            }
+        }
+        return (!$annualSubscription && !$this->is_lifetime_member && $this->isAMember());
     }
 }

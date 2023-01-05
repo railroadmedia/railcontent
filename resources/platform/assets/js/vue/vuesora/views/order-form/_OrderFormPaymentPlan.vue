@@ -1,12 +1,12 @@
 <template>
-    <div class="flex flex-column mb-1">
+    <div class="flex flex-column mb-4">
         <div class="flex flex-row flex-wrap nmh-1 align-v-center">
             <div class="flex flex-column ph-1 xs-12 sm-6 mb-1 pt-1">
                 <div class="form-group">
                     <select
                         id="paymentPlans"
                         v-model.lazy="$_numberOfPayments"
-                        class="order-form-input"
+                        class="order-form-input has-input"
                     >
                         <option
                             v-for="item in paymentPlanOptions"

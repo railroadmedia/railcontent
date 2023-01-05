@@ -132,7 +132,7 @@
         <tr style="border-bottom:1px solid #d1d1d1;text-align:center;">
             <td colspan="2">
                 <a style="white-space:nowrap;display:inline-block;"
-                   href="{{ url()->route('platform.profile.settings.notifications',['userId' => user()->id]) }}">
+                   href="{{ url()->route('platform.notifications-redirect') }}">
                     {{ count($notificationRows) - 10 }}
                     More Notifications
                 </a>
@@ -143,17 +143,8 @@
     <tfoot>
     <tr>
         <td colspan="2">
-            <a href="https://facebook.com/pianoteofficial">
-{{--                <img src="{{ cdn('icons/facebook.png') }}">--}}
-            </a>
-            <a href="https://youtube.com/user/pianolessonscom">
-{{--                <img src="{{ cdn('icons/youtube.png') }}">--}}
-            </a>
-            <a href="https://instagram.com/pianoteofficial">
-{{--                <img src="{{ cdn('icons/instagram.png') }}">--}}
-            </a>
             <h6>Don't like receiving these emails? Change your <a
-                        href="{{ url()->route('platform.profile.settings.notifications',['userId' => user()->id]) }}">notification settings</a> to limit
+                        href="{{ url()->route('platform.profile.settings.notifications-redirect') }}">notification settings</a> to limit
                 the emails you receive.</h6>
             <p>Please do not reply to this email</p>
         </td>

@@ -3,7 +3,6 @@
     <head>
         {!! \App\Analytics\Tracker::headTop() !!}
 
-
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=5">
 
@@ -13,7 +12,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
         <!-- Icons -->
         <link rel="stylesheet" href="https://dpwjbsxqtam5n.cloudfront.net/fonts/font-awesome-5/fontawesome-all.min.css">
-        <link rel="stylesheet" href="https://d1prhhmg8i11jr.cloudfront.net/v1.0.3/dist/icons.css">
+        <link href="https://dpwjbsxqtam5n.cloudfront.net/fonts/icons.css" rel="stylesheet">
         <!-- Favicons -->
         @include('_partials.layout.favicons.musora-favicons')
 
@@ -21,12 +20,13 @@
         <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
 
         @yield('head-includes')
+
         {!! \App\Analytics\Tracker::trackPageView() !!}
 
         {!! \App\Analytics\Tracker::headBottom() !!}
     </head>
 
-    <body class="flex flex-col w-full min-h-screen lg:pt-[56px] @yield('body-class')" 
+    <body class="flex flex-col w-full min-h-screen pt-[40px] lg:pt-[56px] @yield('body-class')"
           x-data="{ sidebarOpen: false, showOverlay: false }"
     >
         {!! \App\Analytics\Tracker::bodyTop() !!}

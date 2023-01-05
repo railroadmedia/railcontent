@@ -55,8 +55,9 @@ import ContentLessonActionButtons from './vue/vuesora/components/VideoResources/
 //Chatsora
 import mitt from 'mitt'; //Temporary Event Bus library for Chatsora code (need full refactor for vue 3)
 import Chatsora from './vue/Libraries/Chatsora/components/index';
-const chatEventBus = mitt();
+const eventBus = mitt();
 
+axios.defaults.withCredentials = true;
 
 // laravel vapor library for file uploading to S3 directly
 window.Vapor = require('laravel-vapor');
@@ -216,7 +217,7 @@ const app = createApp({
 // in order to use provide/inject this will be default in vue v3.3
 app.config.unwrapInjectedRef = true;
 //Temporary Emitter for Chatsora
-app.config.globalProperties.chatEventBus = chatEventBus;
+app.config.globalProperties.eventBus = eventBus;
 
 //Register Global Components
 
@@ -245,6 +246,20 @@ app.component('AppContainer', AppContainer)
     .component('ContentAssignment', ContentAssignment)
     .component('AddEventModal', AddEventModal)
 
+    .component('Song', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "song" */
+            `./vue/components/Songs/Song.vue`
+        )
+    ))
+
+    .component('SongRequest', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "song-request" */
+            `./vue/components/Songs/SongRequest.vue`
+        )
+    ))
+
     .component('PianoBackingTracks', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "piano-backing-tracks" */
@@ -270,6 +285,13 @@ app.component('AppContainer', AppContainer)
         import(
             /* webpackChunkName: "comments-catalogue-component" */
             './vue/vuesora/views/comments/catalogue/CommentsCatalogue.vue'
+        )
+    ))
+
+    .component('OrderForm', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "order-form" */
+            './vue/vuesora/views/order-form/OrderForm.vue'
         )
     ))
 
@@ -300,6 +322,21 @@ app.component('AppContainer', AppContainer)
             './vue/vuesora/components/ContactMemberEmailForm/ContactMemberEmailForm.vue'
         )
     ))
+
+    .component('CartSidebar', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "cart-sidebar" */
+            './vue/vuesora/components/CartSidebar/CartSidebar.vue'
+        )
+    ))
+
+    .component('NavCartButton', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "nav-cart-button" */
+            './vue/vuesora/components/NavCartButton/NavCartButton.vue'
+        )
+    ))
+
 
     .component('ContactEmailFormMarketing', defineAsyncComponent(() =>
         import(

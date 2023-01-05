@@ -1,7 +1,6 @@
-@extends('singeo._partials.layout')
+@extends('singeo._partials.global-layout')
 
-@section('head-includes')
-    @parent
+@section('global-head')
 
     <title>Your start-to-finish guide to confident singing | Singeo.com</title>
     <meta property="og:title" content="Singeo.com: Your start-to-finish guide to confident singing"/>
@@ -11,9 +10,9 @@
     <meta property="og:image" content="https://singeo.s3.amazonaws.com/sales/2022/og-image.jpg"/>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link rel="stylesheet" href="{{ asset('/assets/css/tailwind-helpers.css') }}">
-    <link href="{{ asset('/assets/marketing/nav-footer.css') }}" rel="stylesheet">
-    <link href="{{ asset('/assets/marketing/sales-page.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/marketing/css/singeo/tailwind-helpers.css') }}">
+    <link href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/singeo/sales-page.css') }}" rel="stylesheet">
     <style>
         .text-yellow {
             color: #f6bd03;
@@ -21,7 +20,7 @@
     </style>
 @stop
 
-@section('layout-body')
+@section('global-body')
     @include("singeo.sales.partials._nav", [
         "joinVersion" => true
     ])
@@ -68,7 +67,7 @@
                             @endif
                     >
                         <h2><strong>MONTHLY</strong></h2>
-                        <h1 class="my-2 md:my-4"><strong>${{ \App\Prices::$singeoMembershipMonthlyFull }}</strong><sub>/month</sub></h1>
+                        <h1 class="my-2 md:my-4"><strong>${{ Prices::$plusSubscriptionMonthlyFull }}</strong><sub>/month</sub></h1>
                         <p class="text-navy"><em>If you're just giving it a test-drive.</em></p>
                         <ul class="fa-ul text-left my-4 md:my-6">
                             <li><i class="fa-li fal fa-check"></i> Unlimited access to every lesson.</li>
@@ -101,8 +100,8 @@
                             <h1 class="my-2 md:my-4"><strong>@yield('extra-savings-divided')</strong><sub>/month</sub></h1>
                             <p class="text-yellow"><em>Billed as @yield('extra-savings') per year. </em></p>
                         @else
-                            <h1 class="my-2 md:my-4"><strong>${{ number_format(App\Prices::$singeoMembershipAnnualFull / 12, 2) }}</strong><sub>/month</sub></h1>
-                            <p class="text-yellow"><em>Billed as ${{ \App\Prices::$singeoMembershipAnnualFull }} per year. </em></p>
+                            <h1 class="my-2 md:my-4"><strong>${{ number_format(Prices::$plusSubscriptionAnnualFull / 12, 2) }}</strong><sub>/month</sub></h1>
+                            <p class="text-yellow"><em>Billed as ${{ Prices::$plusSubscriptionAnnualFull }} per year. </em></p>
                         @endif
                         <ul class="fa-ul text-left my-4 md:my-6">
                             <li><i class="fa-li fal fa-check"></i> Unlimited access to every lesson.</li>
@@ -150,5 +149,5 @@
     @include("singeo.sales.partials._footer")
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="/assets/marketing/nav-footer.js"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 @stop

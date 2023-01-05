@@ -14,7 +14,6 @@ use Modules\UserManagementSystem\Models\User;
  * Class Subscription
  *
  * @package App\Modules\Ecommerce\Models
- *
  * @property integer $id
  * @property string $brand
  * @property string $type
@@ -41,12 +40,62 @@ use Modules\UserManagementSystem\Models\User;
  * @property Carbon apple_expiration_date
  * @property string external_app_store_id
  * @property string paypal_recurring_profile_id
- *
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property Carbon|null $deleted_at
- *
  * @property ?Product $product
+ * @property string|null $note
+ * @property string $total_price
+ * @property float $tax
+ * @property string $currency
+ * @property string $interval_type
+ * @property int $interval_count
+ * @property int|null $total_cycles_due
+ * @property int $total_cycles_paid
+ * @property int $renewal_attempt
+ * @property int|null $payment_method_id
+ * @property string|null $apple_expiration_date
+ * @property string|null $external_app_store_id
+ * @property string|null $paypal_recurring_profile_id
+ * @property int|null $failed_payment_id
+ * @property-read User|null $user
+ * @method static \App\Modules\Ecommerce\database\factories\SubscriptionFactory factory(...$parameters)
+ * @method static Builder|Subscription fromUser(int $userId)
+ * @method static Builder|Subscription newModelQuery()
+ * @method static Builder|Subscription newQuery()
+ * @method static Builder|Subscription notCancelled()
+ * @method static Builder|Subscription query()
+ * @method static Builder|Subscription whereAppleExpirationDate($value)
+ * @method static Builder|Subscription whereBrand($value)
+ * @method static Builder|Subscription whereCanceledOn($value)
+ * @method static Builder|Subscription whereCancellationReason($value)
+ * @method static Builder|Subscription whereCreatedAt($value)
+ * @method static Builder|Subscription whereCurrency($value)
+ * @method static Builder|Subscription whereCustomerId($value)
+ * @method static Builder|Subscription whereDeletedAt($value)
+ * @method static Builder|Subscription whereExternalAppStoreId($value)
+ * @method static Builder|Subscription whereFailedPaymentId($value)
+ * @method static Builder|Subscription whereId($value)
+ * @method static Builder|Subscription whereIntervalCount($value)
+ * @method static Builder|Subscription whereIntervalType($value)
+ * @method static Builder|Subscription whereIsActive($value)
+ * @method static Builder|Subscription whereNote($value)
+ * @method static Builder|Subscription whereOrderId($value)
+ * @method static Builder|Subscription wherePaidUntil($value)
+ * @method static Builder|Subscription wherePaymentMethodId($value)
+ * @method static Builder|Subscription wherePaypalRecurringProfileId($value)
+ * @method static Builder|Subscription whereProductId($value)
+ * @method static Builder|Subscription whereRenewalAttempt($value)
+ * @method static Builder|Subscription whereStartDate($value)
+ * @method static Builder|Subscription whereStopped($value)
+ * @method static Builder|Subscription whereTax($value)
+ * @method static Builder|Subscription whereTotalCyclesDue($value)
+ * @method static Builder|Subscription whereTotalCyclesPaid($value)
+ * @method static Builder|Subscription whereTotalPrice($value)
+ * @method static Builder|Subscription whereType($value)
+ * @method static Builder|Subscription whereUpdatedAt($value)
+ * @method static Builder|Subscription whereUserId($value)
+ * @mixin \Eloquent
  */
 class Subscription extends Model
 {

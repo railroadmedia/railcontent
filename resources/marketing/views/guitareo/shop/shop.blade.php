@@ -1,33 +1,101 @@
-@extends('guiatreo._partials.layout')
+@extends('guitareo._partials.global-layout')
 
-@section('head-includes')
-    @parent
-
+@section('meta')
     <title>Guitareo Shop</title>
     <meta property="og:title" content="Guitareo Shop">
     <meta name="description" content="Say goodbye to “do it yourself” guitar lessons.">
     <meta property="og:description" content="Say goodbye to “do it yourself” guitar lessons.">
-    <meta property="og:image" content="https://d122ay5chh2hr5.cloudfront.net/sales/2022/og-image.jpg">
+    <meta property="og:image" content="https://guitareo.s3.amazonaws.com/sales/2023/share-image-guitareo.jpg">
     <meta property="og:url" content="https://www.guitareo.com/shop/">
 
-    {{-- @include('layouts.partials._favicons')
-    @include('layouts.partials._fonts') --}}
+    @include('_partials.layout.favicons.guitareo-favicons')
+    @include('guitareo._partials._fonts')
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link href="{{ asset('/assets/css/tailwind-helpers.css') }}" rel="stylesheet">
-    <link href="{{ asset('/assets/marketing/nav-footer.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
+    <link href="{{ asset('/marketing/css/guitareo/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}" rel="stylesheet">
 
-    <link href="{{ asset('/assets/marketing/shop.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/guitareo/shop.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/vuesora.css') }}" rel="stylesheet">
+    <style>
+        .tooltip {
+            position: relative;
+        }
+        .tooltip:after, .tooltip:before {
+            position: absolute;
+            transform: translate(-50%, 0);
+            height: auto;
+            max-height: 0;
+            visibility: hidden;
+            opacity: 0;
+            transition: all 0.3s;
+            overflow: hidden;
+        }
+        .tooltip:before {
+            z-index: 100;
+            content: "";
+            bottom: 23px;
+            left: 50%;
+            border-right: 7px transparent solid;
+            border-left: 7px transparent solid;
+            border-top: 7px solid #fff;
+        }
+        .tooltip:after {
+            padding: 5px 8px;
+            content: attr(tip);
+            font: 400 14px/1.4em 'Open Sans', sans-serif;
+            text-align: left;
+            color: #000;
+            width: 220px;
+            border-radius: 8px;
+            background: #fff;
+            box-shadow: 0 0 15px #000;
+            bottom: 30px;
+            left: -300%;
+        }
+        .tooltip:hover, .tooltip:active, .tooltip:focus {
+            z-index: 100;
+        }
+        .tooltip:hover:after, .tooltip:active:after, .tooltip:focus:after, .tooltip:hover:before, .tooltip:active:before, .tooltip:focus:before {
+            max-height: 1000px;
+            visibility: visible;
+            opacity: 1;
+            display: block;
+        }
+
+        .linear-green {
+            background: linear-gradient(180deg, #00C9AC 0%, #16414A 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .linear-rainbow {
+            background: linear-gradient(75.93deg, #00C9AC 0%, #0B76DB 32.62%, #8300E9 65.25%, #F61A30 92.11%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        @media (min-width:1080px) {
+            .padding-per {
+                padding: 60px 8%;
+            }
+        }
+    </style>
 @stop
 
-@section('layout-scripts')
+@section('scripts')
     @parent
-    {{--<script src="/assets/js/modal.js"></script>--}}
-    {{--<script type="text/javascript" src="/assets/js/modal-autoplay.js"></script>--}}
+    {{--<script src="{{ asset('/marketing/js/modal.js') }}"></script>--}}
+    {{--<script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>--}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.3/moment-timezone-with-data.min.js"></script>
-    <script type="text/javascript" src="/assets/marketing/nav-footer.js"></script>
-    <script src="/js/jquery.countdown-2.min.js"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
+    {{-- Platform --}}
+    <script src="{{ mix('/platform/js/manifest.js') }}"></script>
+    <script src="{{ mix('/platform/js/vendor.js') }}"></script>
+    <script src="{{ mix('/platform/js/app.js') }}"></script>
     <script>
         $(document).ready(function () {
             $(function () {
@@ -62,83 +130,23 @@
                     }
                 });
             });
-            // Countdown
-            $('.tzcd-full').countdown('2021/11/30')
-                .on('update.countdown', function (event) {
-                    var format = '%-M Minute%!M %-S Second%!S';
-                    if (event.offset.totalHours > 0) {
-                        format = '%-H Hour%!H ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '%-D Day%!D ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('a limited time');
-                });
-            $('.tzcd-med').countdown('2021/11/30')
-                .on('update.countdown', function (event) {
-                    var format = '%-M Minute%!M';
-                    if (event.offset.totalHours > 0) {
-                        format = '%-H Hour%!H ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '%-D Day%!D ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('a limited time');
-                });
-            $('.tzcd-small').countdown('2021/11/30')
-                .on('update.countdown', function (event) {
-                    var format = '%-MM %-SS';
-                    if (event.offset.totalHours > 0) {
-                        format = '%-HH ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '%-DD ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('a limited time');
-                });
-            $('.tzcd-big').countdown('2021/11/30')
-                .on('update.countdown', function (event) {
-                    var format = '' + '<div><h1>%M</h1> <p>min%!M</p></div> ' + '<div><h1>%S</h1> <p>sec%!S</p></div>';
-                    if (event.offset.totalHours > 0) {
-                        format = '' + '<div><h1>%H</h1> <p>hr%!H</p></div> ' + format;
-                    }
-                    if (event.offset.totalDays > 0) {
-                        format = '' + '<div><h1>%D</h1> <p>day%!D</p></div> ' + format;
-                    }
-                    $(this).html(event.strftime(format));
-                })
-                .on('finish.countdown', function (event) {
-                    $(this).html('<div><h1>LIMITED</h1> <p>TIME LEFT</p></div>');
-                });
         });
     </script>
 @stop
 
-@section('layout-body')
-    @include("guiatreo.sales.partials._nav", [
+@section('content')
+    @include("guitareo.sales.partials._nav", [
         "cartVersion" => true
     ])
 
-    <header class="drum-shop-header" style="background-color:#080e1e;background-image:url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://guitareo.s3.amazonaws.com/sales/promos/black-friday/shop-bg.jpg);">
-        <div class="container mx-auto">
+    <header class="drum-shop-header" style="background-image:url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://guitareo.s3.amazonaws.com/sales/promos/black-friday/shop-bg.jpg);">
+        <div class="container mx-auto relative z-10">
             <div class="px-2 md:px-3">
                 <img class="logo" src="https://guitareo.s3.amazonaws.com/sales/guitareo-logo-green.png">
                 <h1><strong>SHOP</strong></h1>
-                {{--<p>GET LESSONS, MERCH, GEAR, & MUCH MORE</p>--}}
             </div>
         </div>
     </header>
-
-
 
     @if(Session::has('addedProducts'))
         <section class="py-6 md:py-10">
@@ -163,7 +171,7 @@
                             Cart Subtotal({{ Session::get('cartNumberOfItems') }}):
                             <strong>${{ number_format(Session::get('cartSubTotal'), 2, '.', ',') }}</strong>
                         </p>
-                        <a href="/order" class="join smaller"><i class="fas fa-cart-plus"></i> Proceed to Checkout</a>
+                        <a href="{{ get_musora_brand_base_url() }}/order/{{ $brand }}" class="join smaller"><i class="fas fa-cart-plus"></i> Proceed to Checkout</a>
                     </div>
                 </div>
             </div>
@@ -195,155 +203,60 @@
             </div>
         </div>
     @endif
+
     <div class="white-box">
-        {{--<section class="bundles">--}}
-            {{--<div class="container mx-auto">--}}
-                {{--<div class="float-left w-full px-2 md:px-3 md:w-1/2 card-wrap">--}}
-                    {{--<a href="/beginner-bundle" class="bundle-card">--}}
-                        {{--<span class="top-left-badge"><i class="fas fa-star"></i> Save 80%</span>--}}
-                        {{--<div class="thumb hidden lg:block" style="background-image:url(https://guitareo.s3.amazonaws.com/sales/promos/black-friday/bundles/beginner/card-thumb2.jpg);"></div>--}}
-                        {{--<div class="thumb block lg:hidden" style="background-image:url(https://guitareo.s3.amazonaws.com/sales/promos/black-friday/bundles/beginner/card-thumb.jpg);"></div>--}}
-                        {{--<div class="float-left w-full px-2 md:px-3">--}}
-                            {{--<p><strong>Beginner Quick-Start Bundle</strong><br>--}}
-                                {{--<em>3 Amazing Lesson Packs<br class="inline md:hidden lg:inline">--}}
-                                   {{--&nbsp; </em>--}}
-                                {{--<span class="price"><s class="opacity-30">$491</s> <strong style="color:#fcaf43;">${{ App\Prices::$bundleBeginner }}</strong></span>--}}
-                            {{--</p>--}}
-                            {{--<span class="join max-w-md" style="background-color:#fcaf43;">See The Deal &raquo;</span>--}}
-                        {{--</div>--}}
-                    {{--</a>--}}
-                {{--</div>--}}
-
-                {{--<div class="float-left w-full px-2 md:px-3 md:w-1/2 card-wrap">--}}
-                    {{--<a href="/ultimate-bundle" class="bundle-card">--}}
-                        {{--<span class="top-left-badge"><i class="fas fa-star"></i> 5 FREE GIFTS WORTH $885</span>--}}
-                        {{--<div class="thumb hidden lg:block" style="background-image:url(https://guitareo.s3.amazonaws.com/sales/promos/black-friday/bundles/ultimate/card-thumb2.jpg);"></div>--}}
-                        {{--<div class="thumb block lg:hidden" style="background-image:url(https://guitareo.s3.amazonaws.com/sales/promos/black-friday/bundles/ultimate/card-thumb.jpg);"></div>--}}
-                        {{--<div class="float-left w-full px-2 md:px-3">--}}
-                            {{--<p><strong>Guitareo Discount + 5 Bonuses</strong><br>--}}
-                                {{--<em>Guitareo Annual Membership (Normally $127)<br>--}}
-                                    {{--+ 5 Lesson Packs</em>--}}
-                                {{--<span class="price"><s class="opacity-30">$1012</s> <strong style="color:#f75659;">${{  }}</strong></span>--}}
-                            {{--</p>--}}
-                            {{--<span class="join max-w-md" style="background-color:#f75659;">See The Deal &raquo;</span>--}}
-                        {{--</div>--}}
-                    {{--</a>--}}
-                {{--</div>--}}
-
-                {{--<div class="float-left w-full px-2 md:px-3 md:w-1/2 card-wrap">--}}
-                    {{--<a href="/lifetime-bundle" class="bundle-card">--}}
-                        {{--<span class="top-left-badge">ONLY <span class="tzcd-med">0D 00H 00S</span> LEFT</span>--}}
-                        {{--<div class="thumb hidden lg:block" style="background-image:url(https://guitareo.s3.amazonaws.com/sales/promos/black-friday/bundles/lifetime/card-thumb21-2.jpg);"></div>--}}
-                        {{--<div class="thumb --}}{{----}}{{--block lg:hidden--}}{{----}}{{--" style="background-image:url(https://guitareo.s3.amazonaws.com/sales/promos/black-friday/bundles/lifetime/card-thumb21.jpg);"></div>--}}
-                        {{--<div class="float-left w-full px-2 md:px-3">--}}
-                            {{--<p><strong>The Lifetime Bundle</strong><br>--}}
-                                {{--<em>Guitareo Lifetime Membership <br>--}}
-                                    {{--+ 5 Lesson Packs</em>--}}
-                                {{--<strong class="price"><span style="color:#262163">${{ \App\Prices::$bundleLifetime }}</span></strong>--}}
-                            {{--</p>--}}
-                            {{--<span class="join max-w-md" style="background-color:#262163;color:#fff;">See The Deal &raquo;</span>--}}
-                        {{--</div>--}}
-                    {{--</a>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-        {{--</section>--}}
+{{--        @include('_partials.layout.holiday.bundle-cards')--}}
         <section class="grid-view category-section" data-category="lessons">
-            <ul class="container mx-auto fixed-cards">
-                @include('guitareo.shop.elements._shop-card', [
-                "badgeText" => "SAVE 21% + 2 FREE BONUSES",
-                "itemURL" => "/",
-                "thumbnail" => "https://guitareo.s3.amazonaws.com/sales/2021/header-background.jpg",
-                "packLogo" => "https://guitareo.s3.amazonaws.com/sales/storefront/guitareo-membership-logo-white.svg",
-                "title" => "Guitareo Membership",
-                "packAuthor" => "Ayla Tesler-Mabe",
-                "cardDescription" => "Unlimited guitar lessons, a huge song library, and ongoing support from real teachers.",
-                "fullPrice" => \App\Prices::$guitareoMembershipAnnualFull,
-                "price" => \App\Prices::$guitareoMembershipAnnual,
-                "popularity" => "99",
-                "category" => "lessons",
-                "buttonText" => "See The Deal",
-                ])
-                @include('guitareo.shop.elements._shop-card', [
-                "badgeText" => "LIFETIME ACCESS WITH GUITAREO",
-                "sku" => "GTME-OCT-2018-SEMESTER",
-                "itemURL" => "/guitar-technique-made-easy",
-                "thumbnail" => "https://guitareo.s3.amazonaws.com/sales/storefront/guitar-technique-made-easy-image.jpg",
-                "packLogo" => "https://guitareo.s3.amazonaws.com/gtme/logo-white.png",
-                "title" => "Guitar Technique Made Easy",
-                "packAuthor" => "Nate Savage",
-                "cardDescription" => "Learn the most important guitar techniques and reach total guitar freedom.",
-                "includedEdge" => true,
-                "fullPrice" => \App\Prices::$GTMEFull,
-                "price" => \App\Prices::$GTMERegular,
-                "popularity" => "89",
-                "category" => "lessons",
-                "redirectUrl" => "/shop",
-                ])
-                @include('guitareo.shop.elements._shop-card', [
-                "badgeText" => "LIFETIME ACCESS WITH GUITAREO",
-                "sku" => "GUITAR-SYSTEM",
-                "itemURL" => "/guitar-system",
-                "thumbnail" => "https://guitareo.s3.amazonaws.com/sales/promos/june/guitar-system.jpg",
-                "packLogo" => "https://guitareo.s3.amazonaws.com/tripwire/gs-logo.png",
-                "title" => "The Guitar System",
-                "packAuthor" => "Nate Savage",
-                "cardDescription" => "Transform your guitar playing with the ultimate encyclopedia of guitar lessons.",
-                "includedEdge" => true,
-                "fullPrice" => \App\Prices::$guitarSystemFull,
-                "price" => \App\Prices::$guitarSystemRegular,
-                "popularity" => "89",
-                "category" => "lessons",
-                "redirectUrl" => "/shop",
-                ])
-                @include('guitareo.shop.elements._shop-card', [
-                "sku" => "guitar-quest",
-                "itemURL" => "/guitar-quest",
-                "thumbnail" => "https://guitareo.s3.amazonaws.com/sales/promos/june/guitar-quest.jpg",
-                "packLogo" => "https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/guitar-quest-logo.png",
-                "title" => "GuitarQuest",
-                "packAuthor" => "Rob Scallon",
-                "cardDescription" => "Skip the boring stuff and start having fun! Your journey starts here.",
-                "includedEdge" => true,
-                "fullPrice" => \App\Prices::$guitarQuestFull,
-                "price" => \App\Prices::$guitarQuestRegular,
-                "popularity" => "89",
-                "category" => "lessons",
-                "redirectUrl" => "/shop",
-                ])
-                @include('guitareo.shop.elements._shop-card', [
-                "sku" => "AGME-JAN-2019-SEMESTER",
-                "itemURL" => "/acoustic-guitar-made-easy",
-                "thumbnail" => "https://guitareo.s3.amazonaws.com/sales/storefront/acoustic-guitar-made-easy-image.jpg",
-                "packLogo" => "https://s3.amazonaws.com/guitareo/acoustic-guitar-made-easy/sales/AGME-logo-white.png",
-                "title" => "Acoustic Guitar Made Easy",
-                "packAuthor" => "Nate Savage",
-                "cardDescription" => "Build a rock-solid foundation and get started on the acoustic guitar the right way.",
-                "includedEdge" => true,
-                "fullPrice" => \App\Prices::$AGMEFull,
-                "price" => \App\Prices::$AGMERegular,
-                "popularity" => "89",
-                "category" => "lessons",
-                "redirectUrl" => "/shop",
-                ])
-                @include('guitareo.shop.elements._shop-card', [
-                "sku" => "500-songs-in-5-days-guitareo",
-                "itemURL" => "/500-songs",
-                "thumbnail" => "https://guitareo.s3.amazonaws.com/sales/promos/june/500-songs-card-small.jpg",
-                "packLogo" => "https://guitareo.s3.amazonaws.com/500-songs/logo.svg",
-                "title" => "500 Songs In 5 Days",
-                "packAuthor" => "Nate Savage",
-                "cardDescription" => "Build the skills and knowledge to play 500 songs on the guitar. Comes with downloadable chord charts.",
-                "includedEdge" => true,
-                "fullPrice" => \App\Prices::$songs500Full,
-                "price" => \App\Prices::$songs500Regular,
-                "popularity" => "89",
-                "category" => "lessons",
-                "redirectUrl" => "/shop",
-                ])
+            <ul class="container mx-auto fixed-cards text-center lg:text-left">
+                @foreach($items as $item){
+                    @include('guitareo.shop._partials._shop-card', [
+                        "sku" => $item->sku,
+                        "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $item->slug ),
+                        "thumbnail" => $item->thumbnail,
+                        "packLogo" => $item->thumbnail_logo,
+                        "badgeText" => $item->badge_text,
+                        "title" => $item->name,
+                        "packAuthor" => $item->instructor_name ?? 'Guitareo',
+                        "cardDescription" => $item->short_desc,
+                        "includedEdge" => $item->included_edge,
+                        "fullPrice" => $item->price,
+                        "price" => $item->discounted_price,
+                        "category" => strtolower($item->productType->name),
+                        "sizes" => $item->sizes,
+                        "soldOut" => (!empty($products[$item->sku]) && $item->productType->name !== 'Lessons') ? $products[$item->sku]->getStockAvailability() === 0 : $item->sold_out,
+                        "size_case_sensitive" => $item->size_case_sensitive,
+                    ])
+                }
+                @endforeach
+
             </ul>
         </section>
 
-    </div>
+        </div>
+        <section class="content-section text-white text-center px-6 py-10 sm:py-20" style="background:linear-gradient(to bottom, #01050f, #021225);overflow:visible">
+            <div class="container mx-auto max-w-4xl">
+                <img class="h-28 md:h-32 lazyload" data-src="https://cdn.musora.com/image/fetch/w_250,q_auto:best/https://guitareo.s3.amazonaws.com/sales/2022/guitareo-guarantee.png" alt="guitareo-guarantee">
 
-    @include("guiatreo.sales.partials._footer")
+                <h3 class="leading-tight mt-5 md:mt-8 mb-4 md:mb-6 " data-aos-once="true" data-aos="fade-up" data-aos-offset="150" data-aos-delay="150"><strong>Happy student guarantee. </strong><br>
+                    Test-drive your lessons for 90 days. Zero risk. </h3>
+                <p class=" opacity-60 leading-normal md:leading-loose">Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence on the guitar. </p>
+                <div class="flex flex-wrap items-start justify-center mt-5 md:mt-7">
+                    <div class="w-full sm:w-1/3 px-2 mb-3 sm:mb-0">
+                        <h5 class="text-guitareo border-guitareo border-2 rounded-full inline-block py-2 px-3 mb-1">1</h5>
+                        <h6 class="leading-normal">Start your<br> lessons today.</h6>
+                    </div>
+                    <div class="w-full sm:w-1/3 px-2 mb-3 sm:mb-0">
+                        <h5 class="text-guitareo border-guitareo border-2 rounded-full inline-block py-2 px-3 mb-1">2</h5>
+                        <h6 class="leading-normal">Enjoy them for 90<br> days, risk-free.</h6>
+                    </div>
+                    <div class="w-full sm:w-1/3 px-2">
+                        <h5 class="text-guitareo border-guitareo border-2 rounded-full inline-block py-2 px-3 mb-1">3</h5>
+                        <h6 class="leading-normal">Change your mind?<br> Get a refund. <div class="inline-block tooltip cursor-pointer" tip="If it’s not for you, simply cancel your membership within 90 days and contact us for a full refund. (If your membership includes any bonuses, your refund will deduct the value of hard goods that were shipped to you.)"><i class="fas fa-info-circle"></i></div></h6>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    @include("guitareo.sales.partials._footer")
 @stop
+
