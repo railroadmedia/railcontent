@@ -5,9 +5,9 @@
     <meta property="og:title" content="Terms Of Use">
     <meta name="description" content="Please read this agreement carefully before accessing or using this web site.">
 
-    @include('drumeo._partials._fonts')
+    @include('_partials.layout._fonts')
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"/>
+    @include('_partials.layout._tailwindcdn')
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
 
     <style>

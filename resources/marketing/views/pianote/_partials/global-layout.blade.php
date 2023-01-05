@@ -12,7 +12,7 @@
 
     @yield('global-head')
 
-    @include('pianote._partials._fonts')
+    @include('_partials.layout._fonts')
     @include('_partials.layout.favicons.pianote-favicons')
 
     {!! \App\Analytics\Tracker::headBottom() !!}

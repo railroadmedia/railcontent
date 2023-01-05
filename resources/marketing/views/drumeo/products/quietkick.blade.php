@@ -8,11 +8,10 @@
     <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/drum-shop/quietkick/fb-share-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/drumshop/quietkick/">
 
-    @include('drumeo._partials._fonts')
+    @include('_partials.layout._fonts')
     <?php \App\Analytics\Tracker::trackProductImpression('quietkick'); ?>
 
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"></noscript>
+    @include('_partials.layout._tailwindcdn')
     <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">

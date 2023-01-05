@@ -8,7 +8,7 @@
     <meta property="og:description" content="We’ll be using the responses to create better videos that make a bigger difference to YOU in the future.">
     <meta property="og:url" content="https://www.drumeo.com/quick-drummer-survey/">
 
-    @include('drumeo._partials._fonts')
+    @include('_partials.layout._fonts')
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation-float.min.css"/>
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">

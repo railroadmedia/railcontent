@@ -10,9 +10,9 @@
     <title>9 FREE PLAY-ALONGS | Drumeo</title>
     <meta name="description" content="Add your drumming to nine high-quality drum play-along tracks. (FREE).">
 
-    @include('drumeo._partials._fonts')
+    @include('_partials.layout._fonts')
     <base target="_parent">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
+    @include('_partials.layout._tailwindcdn')
     <link href="{{ asset('marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
     <style>
         body {

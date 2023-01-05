@@ -12,7 +12,7 @@
 
     @yield('global-head')
 
-    @include('drumeo._partials._fonts')
+    @include('_partials.layout._fonts')
     @include('_partials.layout.favicons.drumeo-favicons')
 
     <!-- Begin Inspectlet Embed Code -->

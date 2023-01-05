@@ -20,7 +20,7 @@
     @include('singeo._partials.includes.google-optimize')
 
     @include('_partials.layout.favicons.singeo-favicons')
-    @include('singeo.sales.partials._fonts')
+    @include('_partials.layout._fonts')
 
     {!! \App\Analytics\Tracker::headBottom() !!}
 
