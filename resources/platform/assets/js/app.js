@@ -246,6 +246,13 @@ app.component('AppContainer', AppContainer)
     .component('ContentAssignment', ContentAssignment)
     .component('AddEventModal', AddEventModal)
 
+    .component('MembershipUpdate', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "membership-update-" */
+            `./vue/components/Membership/MembershipUpdate.vue`
+        )
+    ))
+
     .component('Song', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "song" */

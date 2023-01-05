@@ -1,10 +1,11 @@
 {
-    "/platform/js/app.js": "/platform/js/app.js?id=966006846f938e2e24de5c9ce6b3d9bd",
+    "/platform/js/app.js": "/platform/js/app.js?id=b38ab22655f0984ffea4ac8f17bdbb1f",
     "/platform/js/profile.js": "/platform/js/profile.js?id=c7e869f012d1252699ff65de1e5e0547",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=24098ec7990ff98a565fd1e4693746ed",
     "/platform/js/books.js": "/platform/js/books.js?id=d4fa837307a14d7ee0ce9065b5e5e8e0",
-    "/platform/js/manifest.js": "/platform/js/manifest.js?id=ea83657209814fb06eb747685fce1d72",
-    "/platform/js/song.js": "/platform/js/song.js?id=44c979fd3a6583fd68135feff029cc3c",
+    "/platform/js/manifest.js": "/platform/js/manifest.js?id=0db21d1e20873847d0d95a0fb234fe59",
+    "/platform/js/membership-update-banner.js": "/platform/js/membership-update-banner.js?id=1dbf9399522190df06cf11d2a633bc7a",
+    "/platform/js/song.js": "/platform/js/song.js?id=71946a532c7649933de94e9d0198c546",
     "/platform/js/song-request.js": "/platform/js/song-request.js?id=559160bdebb1f2f3ff74379eaf98de32",
     "/platform/js/piano-backing-tracks.js": "/platform/js/piano-backing-tracks.js?id=7fbf8dfd123a4027cfa05515f7665d82",
     "/platform/js/student-review-form-iframe.js": "/platform/js/student-review-form-iframe.js?id=ffad6cfee18112a8e0bb7e04829f0d02",
@@ -26,8 +27,9 @@
     "/platform/js/email-form-component.js": "/platform/js/email-form-component.js?id=cfa09b0b222991cacf388f79469aaec9",
     "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=26d03238e24769866d21704f9c052fd4",
     "/marketing/css/vuesora.css": "/marketing/css/vuesora.css?id=7535f0fd6b7b50898c6d1f0a209f96d2",
-    "/platform/css/app.css": "/platform/css/app.css?id=7d098d7c5e0c6dbb70f53c7adc81dfde",
+    "/platform/css/app.css": "/platform/css/app.css?id=77af1f8582de15c46e81bbbad82a1734",
     "/platform/js/vendor~onboarding.js": "/platform/js/vendor~onboarding.js?id=56868ea369faf90d0978a204535ee2e6",
     "/marketing/css/app.css": "/marketing/css/app.css?id=935d39b006fa8cacd3e47f2b524c3c2c",
-    "/platform/js/vendor.js": "/platform/js/vendor.js?id=05dd83ebb4f3d065d57fc2d6da2069b0"
+    "/platform/js/vendor.js": "/platform/js/vendor.js?id=05dd83ebb4f3d065d57fc2d6da2069b0",
+    "/platform/js/membership-update-.js": "/platform/js/membership-update-.js?id=4a9015aa3149ec198be193f8d621a425"
 }
