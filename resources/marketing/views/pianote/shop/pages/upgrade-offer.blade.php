@@ -4,7 +4,7 @@
     @parent
     <title>Continue your membership</title>
     <meta name="description" content="You’ve come so far, and we’d love you to see what’s possible for your future.">
-    <meta property="og:image" content="https://pianote.s3.amazonaws.com/sales/2023/share-image-pianote.jpg" style="display: none;">
+    <meta property="og:image" content="https://pianote.s3.amazonaws.com/sales/2023/share-image-pianote2.jpg" style="display: none;">
     <meta property="og:description" content="You’ve come so far, and we’d love you to see what’s possible for your future.">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 @stop()
