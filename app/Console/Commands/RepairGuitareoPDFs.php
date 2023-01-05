@@ -40,6 +40,7 @@ class RepairGuitareoPDFs extends Command
             ->where("created_on", ">", "2022-12-30 00:00:00")
             ->where("created_on", "<", "2022-12-31 00:00:00")
             ->where("slug", "!=", "the-kids-aren-t-alright")  //switch has already been done manually for this song
+            ->where("slug", "!=", "three-little-birds")  // the tab pdf is already set correctly; the tab+notation is not working properly
             ->get()
             ->toArray();
 

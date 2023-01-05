@@ -334,6 +334,7 @@ class MusoraApiUserProvider implements UserProviderInterface
 
         ]);
         $user->email = 'musora+deleted_'.Carbon::now()->getTimestamp().'@musora.com';
+        $user->updated_at = Carbon::now()->toDateTimeString();
         $user->save();
 
         return $user;
