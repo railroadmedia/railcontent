@@ -901,7 +901,8 @@ return [
                 'coach_profile_image',
                 'current_user_is_subscribed',
             ],
-            'artist'
+            'artist',
+            'parent'
         ],
         'song' => [
             'ranges',
