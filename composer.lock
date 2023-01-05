@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "07af5cc375d2f035651cf42682e404c6",
+    "content-hash": "c00599ec744de535070d703d0ec999c2",
     "packages": [
         {
             "name": "aporat/store-receipt-validator",
@@ -176,16 +176,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.255.9",
+            "version": "3.255.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "a001ab98b9e76a6f5cae327b3316b08fab37a296"
+                "reference": "5d598491cc62da506082aec8661475d40af24b16"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/a001ab98b9e76a6f5cae327b3316b08fab37a296",
-                "reference": "a001ab98b9e76a6f5cae327b3316b08fab37a296",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/5d598491cc62da506082aec8661475d40af24b16",
+                "reference": "5d598491cc62da506082aec8661475d40af24b16",
                 "shasum": ""
             },
             "require": {
@@ -264,9 +264,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.255.9"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.255.10"
             },
-            "time": "2023-01-04T19:24:09+00:00"
+            "time": "2023-01-05T19:20:51+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -1090,16 +1090,16 @@
         },
         {
             "name": "doctrine/data-fixtures",
-            "version": "1.6.1",
+            "version": "1.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/data-fixtures.git",
-                "reference": "1a4232c15143ca3c127812d19b23a7961c41eeed"
+                "reference": "d52cc6d392717734fac908768a7319f8a417401a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/data-fixtures/zipball/1a4232c15143ca3c127812d19b23a7961c41eeed",
-                "reference": "1a4232c15143ca3c127812d19b23a7961c41eeed",
+                "url": "https://api.github.com/repos/doctrine/data-fixtures/zipball/d52cc6d392717734fac908768a7319f8a417401a",
+                "reference": "d52cc6d392717734fac908768a7319f8a417401a",
                 "shasum": ""
             },
             "require": {
@@ -1152,7 +1152,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/data-fixtures/issues",
-                "source": "https://github.com/doctrine/data-fixtures/tree/1.6.1"
+                "source": "https://github.com/doctrine/data-fixtures/tree/1.6.2"
             },
             "funding": [
                 {
@@ -1168,7 +1168,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-12-23T12:13:51+00:00"
+            "time": "2023-01-05T18:42:27+00:00"
         },
         {
             "name": "doctrine/dbal",
@@ -7984,16 +7984,16 @@
         },
         {
             "name": "railroad/ecommerce",
-            "version": "v5.0.55",
+            "version": "dev-feature-upgrade-rwillems-20221412",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "005738968b2531f18426a9f5f20e7361826b0dd4"
+                "reference": "73cd3e21355b9a57e774104f0c08e08af9ba5c30"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/005738968b2531f18426a9f5f20e7361826b0dd4",
-                "reference": "005738968b2531f18426a9f5f20e7361826b0dd4",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/73cd3e21355b9a57e774104f0c08e08af9ba5c30",
+                "reference": "73cd3e21355b9a57e774104f0c08e08af9ba5c30",
                 "shasum": ""
             },
             "require": {
@@ -8030,9 +8030,9 @@
             "description": "Ecommerce system",
             "support": {
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
-                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.55"
+                "source": "https://github.com/railroadmedia/ecommerce/tree/feature-upgrade-rwillems-20221412"
             },
-            "time": "2023-01-04T22:49:47+00:00"
+            "time": "2023-01-03T18:27:07+00:00"
         },
         {
             "name": "railroad/lead-tracker",
@@ -16648,7 +16648,9 @@
         }
     ],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "railroad/ecommerce": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
@@ -16656,5 +16658,5 @@
         "ext-curl": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
