@@ -1,6 +1,5 @@
 <script setup>
-import axios from 'axios';
-import { ref, onBeforeMount } from 'vue';
+import { ref } from 'vue';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner.vue';
 import MembershipSelectModal from './MembershipSelectModal.vue';
 
@@ -61,8 +60,12 @@ const toggleModal = () => {
             <button @click="toggleModal" class="tw-btn-secondary">
                 {{ hasSongAccess ? 'Update' : 'Upgrade' }}
             </button>
-            <MembershipSelectModal :upgradeCost="upgradeCost" :currentTier="currentTier"
-                v-if="isModalOpen" @onCloseModal="toggleModal" />
+            <MembershipSelectModal
+                v-if="isModalOpen" @onCloseModal="toggleModal"
+                :upgradeCost="upgradeCost"
+                :currentTier="currentTier"
+                :isLifetimeMember="isLifetimeMember"
+            />
         </div>
     </div>
 </template>
