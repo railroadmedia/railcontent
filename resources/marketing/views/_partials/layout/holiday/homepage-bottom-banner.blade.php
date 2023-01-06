@@ -1,7 +1,7 @@
 {{--<section class="big-promo-banner bg-black text-white text-center relative z-10 overflow-hidden px-5 md:px-3 lg:px-5 md:px-8 py-12 sm:py-24 lg:py-36 bg-cover bg-center">--}}
 {{--    <div class="container mx-auto relative z-30 max-w-lg">--}}
-{{--        <a href="@if($theme === 'drumeo') /drumshop @else /shop @endif">--}}
-{{--            @include($theme.'._partials.holiday-logo',[--}}
+{{--        <a href="@if($brand === 'drumeo') /drumshop @else /shop @endif">--}}
+{{--            @include($brand.'._partials.holiday-logo',[--}}
 {{--                'styles' => 'h-10 md:h-14 lg:h-16 mx-auto'--}}
 {{--            ])--}}
 {{--        </a>--}}
@@ -31,7 +31,7 @@
 {{--            </div>--}}
 {{--        </div>--}}
 {{--        <div class="flex flex-wrap items-start justify-center mx-auto max-w-xs md:max-w-none mt-6">--}}
-{{--            <a class="w-full md:w-1/2 join smaller outline md:order-2" href="@if($theme === 'drumeo') /drumshop @else /shop @endif">SHOP ALL DEALS &raquo;</a>--}}
+{{--            <a class="w-full md:w-1/2 join smaller outline md:order-2" href="@if($brand === 'drumeo') /drumshop @else /shop @endif">SHOP ALL DEALS &raquo;</a>--}}
 {{--        </div>--}}
 {{--    </div>--}}
 {{--    <div class="inset-0 block sm:hidden absolute bg-center bg-cover z-0" style="background-image:url(https://cdn.musora.com/image/fetch/w_750,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/november/header-banner-bg-m.jpg);"></div>--}}
