@@ -67,4 +67,29 @@ class ContentVideoRepository extends RepositoryBase
 
         return $results;
     }
+
+    public function getLessonsWithExternalVideoId($videoId)
+    {
+        $videoRows = $this->query()
+            ->select('id')
+            ->whereIn('type', ['vimeo-video','youtube-video'])
+        ->where('status', '=','published')
+            ->where(function ($builder) use ($videoId) {
+            $builder->where(
+                config('railcontent.table_prefix').'content.vimeo_video_id',
+                '=',
+                $videoId
+            )
+                ->orWhere( config('railcontent.table_prefix').'content.youtube_video_id','=',$videoId);
+        })
+        ->get();
+
+        $videoIds = $videoRows->pluck('id')->toArray();
+        $lessonRows = $this->query()
+            ->select('id as content_id')
+            ->whereIn('video', $videoIds)
+            ->get();
+
+        return $lessonRows->toArray();
+    }
 }

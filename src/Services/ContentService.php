@@ -2630,6 +2630,6 @@ class ContentService
      */
     public function getContentWithExternalVideoId($videoId)
     {
-        return $this->contentVideoRepository->getContentWithExternalVideoId($videoId);
+        return $this->contentVideoRepository->getLessonsWithExternalVideoId($videoId);
     }
 }
