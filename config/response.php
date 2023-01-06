@@ -2054,7 +2054,8 @@ return [
             'permission_level',
             'helpscout_beacon_id',
             'cio_id',
-            'customer_io_id'
+            'customer_io_id',
+            'membership_level',
         ],
 
         'quick-tips' => [
