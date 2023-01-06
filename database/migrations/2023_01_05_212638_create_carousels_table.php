@@ -16,12 +16,12 @@ return new class extends Migration
         Schema::create('carousels', function (Blueprint $table) {
             $table->id();
             $table->integer('brand_id');
-            $table->string('name')->nullable();
             $table->string('title');
+            $table->string('subtitle')->nullable();
             $table->longText('description');
-            $table->string('btn_text');
+            $table->string('cta_text');
             $table->string('cta_url');
-            $table->string('thumbnail');
+            $table->string('img');
             $table->integer('display_order');
             $table->timestamps();
         });
