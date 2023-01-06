@@ -3,6 +3,7 @@ import axios from 'axios';
 import { ref, onBeforeMount } from 'vue';
 import { XIcon } from "@heroicons/vue/solid";
 import ModalRenderer from '../Modal/ModalRenderer.vue';
+import MembershipTierSelector from './MembershipTierSelector.vue';
 
 const props = defineProps({
     brand: {
@@ -24,7 +25,8 @@ const props = defineProps({
 });
 
 const buildDescription = (upgradeCost) => {
-    if (upgradeCost&& upgradeCost> 0) {
+    console.log(upgradeCost)
+    if (upgradeCost && upgradeCost > 0) {
         descriptions.value = {
             month: `By clicking "Pay Monthly", I agree to be billed immediately for a prorated upgrade cost of $${upgradeCost}. I understand that my next renewal will be $30 for Musora+ with Songs.`,
             year: `By clicking "Pay Annually", I agree to be billed immediately for a prorated upgrade cost of $${upgradeCost}. I understand that my next renewal will be $240 for Musora+ with Songs.`
@@ -68,6 +70,7 @@ const selectedTier = ref('plus');
 const descriptions = ref({ year: '', month: '' });
 
 const handleSelectedTier = (val) => {
+    console.log(val)
     selectedTier.value = val;
 };
 
@@ -76,7 +79,7 @@ const handleSelectedInterval = (interval) => {
         .then(() => {
             window.shownotification({
                 icon: 'check',
-                message: 'Membership changed.'
+                text: 'Membership changed.'
             })
         })
         .catch(() => {
@@ -88,6 +91,7 @@ const handleSelectedInterval = (interval) => {
 };
 
 onBeforeMount(() => {
+    console.log(props.currentTier)
     buildDescription(props.upgradeCost);
 });
 
@@ -104,53 +108,7 @@ onBeforeMount(() => {
                 </button>
                 <div class="tw-table-row sm:tw-block">
                     <h1 class="tw-mb-[20px] tw-text-[30px] lg:tw-text-[36px]"><strong>Manage Membership</strong></h1>
-                    <div class="tw-flex tw-items-end tw-justify-center">
-                        <button @click="() => handleSelectedTier('plus')" class="tw-px-2 tw-relative">
-                            <strong
-                                class="tw-inline-block tw-w-[115px] tw-absolute tw-mx-auto tw-right-0 tw-left-0 tw-whitespace-nowrap -tw-mt-[10px] tw-px-3 tw-py-0.5 tw-z-10 tw-leading-tight tw-text-black tw-text-xs tw-rounded-full"
-                                style="background-color:#00c9ac;">MOST POPULAR</strong>
-                            <div class="tw-box-border tw-relative tw-flex tw-items-end tw-rounded-xl tw-px-3 tw-py-2 tw-w-[160px] lg:tw-w-[198px] tw-h-[60px]"
-                                :class="`${selectedTier === 'plus' ? 'tw-border-2 tw-border-white' : ''}`"
-                                style="background-color:#273040;">
-                                <div class="tw-text-left">
-                                    <div class="tw-flex tw-flex-row">
-                                        <img class="tw-w-[79px]"
-                                            src="https://dmmior4id2ysr.cloudfront.net/logos/musora-logo-white.png">
-                                        <svg width="13" height="13" viewBox="0 0 13 13" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                d="M8.79437 4.19242V0.484863H4.37239V4.19242H0.601807V8.55161H4.37239V12.2594H8.79437V8.55161H12.565V4.19242H8.79437Z"
-                                                fill="white" />
-                                        </svg>
-                                    </div>
-                                    <p class="tw-opacity-60 tw-text-[10px]"><em>Lessons, songs & support</em></p>
-                                </div>
-                                <div
-                                    class="tw-flex tw-h-full tw-absolute tw-right-0 tw-items-center tw-justify-end -tw-mb-2 tw-mr-2">
-                                    <i
-                                        :class="`${selectedTier === 'plus' ? 'fas fa-check-circle' : 'far fa-circle'} tw-text-2xl`"></i>
-                                </div>
-                            </div>
-                        </button>
-                        <button @click="() => handleSelectedTier('basic')" class="tw-px-2 tw-relative">
-                            <div class="tw-box-border tw-flex tw-items-end tw-rounded-xl tw-px-2 lg:tw-px-3 tw-py-2 tw-w-[160px] lg:tw-w-[198px] tw-h-[60px]"
-                                :class="`${selectedTier === 'basic' ? 'tw-border-2 tw-border-white' : ''}`"
-                                style="background-color:#273040;">
-                                <div class="tw-text-left">
-                                    <img class="tw-w-[79px]"
-                                        src="https://dmmior4id2ysr.cloudfront.net/logos/musora-logo-white.png">
-                                    <p class="tw-opacity-60 tw-text-[10px]"><em>Lesson & support.</em></p>
-                                </div>
-                                <div
-                                    class="tw-flex tw-h-full tw-absolute tw-right-0 tw-items-center tw-justify-end -tw-mb-2 tw-mr-4">
-                                    <i
-                                        :class="`${selectedTier === 'basic' ? 'fas fa-check-circle' : 'far fa-circle'} tw-text-2xl`"></i>
-                                </div>
-                            </div>
-                        </button>
-
-                    </div>
-
+                    <MembershipTierSelector @onTierSelect="handleSelectedTier" :selectedTier="selectedTier" />
                     <div
                         class="tw-flex tw-flex-col md:tw-flex-row tw-items-start tw-justify-center tw-max-w-sm md:tw-max-w-2xl lg:tw-max-w-3xl tw-my-5 sm:tw-my-7 tw-mx-auto">
                         <div class="tw-flex tw-flex-col tw-w-full tw-h-full md:tw-w-1/2 tw-px-2 md:tw-px-3 tw-relative">
@@ -215,64 +173,23 @@ onBeforeMount(() => {
                 </div>
             </div>
             <div v-if="isLifetimeMember"
-                class="tw-table sm:tw-block tw-my-auto tw-text-center tw-text-white tw-mx-2 tw-px-2 sm:tw-px-6 tw-py-10 sm:tw-py-14 lg:tw-py-20 tw-bg-[#081825] tw-border-[#445F74] tw-rounded-[10px] tw-border-[1px] tw-relative md:tw-static">
+                class="tw-table sm:tw-block tw-my-auto tw-text-center tw-text-white tw-mx-2 lg:tw-w-[755px] tw-px-2 sm:tw-px-6 tw-py-10 sm:tw-py-14 tw-bg-[#081825] tw-border-[#445F74] tw-rounded-[10px] tw-border-[1px] tw-relative md:tw-static">
                 <button @click="emit('onCloseModal')"
                     class="tw-text-white tw-absolute lg:tw-top-[32px] tw-top-[12px] tw-right-[12px]  md:tw-right-[32px] md:tw-top-[32px]">
                     <XIcon class="tw-w-[26px] tw-h-[26px] md:tw-w-[48px] md:tw-h-[48px]" />
                 </button>
-                <div class="tw-table-row sm:tw-block">
-                    <p class="tw-mb-[10px]">We're sorry, but your membership level does not include songs. Please upgrade your membership to a Musora+ level membership to access our songs library.</p>
-                    <h1 class="tw-mb-[20px] tw-text-[30px] lg:tw-text-[36px]"><strong>Manage Membership</strong></h1>
-                    <div class="tw-flex tw-items-end tw-justify-center">
-                        <button @click="() => handleSelectedTier('plus')" class="tw-px-2 tw-relative">
-                            <strong
-                                class="tw-inline-block tw-w-[115px] tw-absolute tw-mx-auto tw-right-0 tw-left-0 tw-whitespace-nowrap -tw-mt-[10px] tw-px-3 tw-py-0.5 tw-z-10 tw-leading-tight tw-text-black tw-text-xs tw-rounded-full"
-                                style="background-color:#00c9ac;">MOST POPULAR</strong>
-                            <div class="tw-box-border tw-relative tw-flex tw-items-end tw-rounded-xl tw-px-3 tw-py-2 tw-w-[160px] lg:tw-w-[198px] tw-h-[60px]"
-                                :class="`${selectedTier === 'plus' ? 'tw-border-2 tw-border-white' : ''}`"
-                                style="background-color:#273040;">
-                                <div class="tw-text-left">
-                                    <div class="tw-flex tw-flex-row">
-                                        <img class="tw-w-[79px]"
-                                            src="https://dmmior4id2ysr.cloudfront.net/logos/musora-logo-white.png">
-                                        <svg width="13" height="13" viewBox="0 0 13 13" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                d="M8.79437 4.19242V0.484863H4.37239V4.19242H0.601807V8.55161H4.37239V12.2594H8.79437V8.55161H12.565V4.19242H8.79437Z"
-                                                fill="white" />
-                                        </svg>
-                                    </div>
-                                    <p class="tw-opacity-60 tw-text-[10px]"><em>Lessons, songs & support</em></p>
-                                </div>
-                                <div
-                                    class="tw-flex tw-h-full tw-absolute tw-right-0 tw-items-center tw-justify-end -tw-mb-2 tw-mr-2">
-                                    <i
-                                        :class="`${selectedTier === 'plus' ? 'fas fa-check-circle' : 'far fa-circle'} tw-text-2xl`"></i>
-                                </div>
+                <div class="tw-table-row sm:tw-block tw-w-full">
+                    <p class="tw-mb-[10px] tw-text-[14px]">We're sorry, but your membership level does not include songs.
+                                Please
+                                upgrade your membership to a Musora+ level membership to access our songs library.</p>
+                            <h1 class="tw-mb-[20px] tw-text-[30px] lg:tw-text-[36px]"><strong>Manage Membership</strong>
+                            </h1>
+                            <div class="tw-text-center tw-text-[20px]">
+                                Songs Subscription
                             </div>
-                        </button>
-                        <button @click="() => handleSelectedTier('basic')" class="tw-px-2 tw-relative">
-                            <div class="tw-box-border tw-flex tw-items-end tw-rounded-xl tw-px-2 lg:tw-px-3 tw-py-2 tw-w-[160px] lg:tw-w-[198px] tw-h-[60px]"
-                                :class="`${selectedTier === 'basic' ? 'tw-border-2 tw-border-white' : ''}`"
-                                style="background-color:#273040;">
-                                <div class="tw-text-left">
-                                    <img class="tw-w-[79px]"
-                                        src="https://dmmior4id2ysr.cloudfront.net/logos/musora-logo-white.png">
-                                    <p class="tw-opacity-60 tw-text-[10px]"><em>Lesson & support.</em></p>
-                                </div>
-                                <div
-                                    class="tw-flex tw-h-full tw-absolute tw-right-0 tw-items-center tw-justify-end -tw-mb-2 tw-mr-4">
-                                    <i
-                                        :class="`${selectedTier === 'basic' ? 'fas fa-check-circle' : 'far fa-circle'} tw-text-2xl`"></i>
-                                </div>
-                            </div>
-                        </button>
-
-                    </div>
                     <div
-                        class="tw-flex tw-flex-col md:tw-flex-row tw-items-start tw-justify-center tw-max-w-sm md:tw-max-w-2xl lg:tw-max-w-3xl tw-my-5 sm:tw-my-7 tw-mx-auto">
-                        <div
-                            class="tw-flex tw-flex-col tw-grow tw-w-full tw-h-full md:tw-w-1/2 tw-px-2 md:tw-px-3 tw-relative">
+                        class="tw-flex tw-flex-col md:tw-flex-row tw-items-start tw-justify-center tw-max-w-sm tw-my-5 sm:tw-my-7 tw-mx-auto">
+                        <div class="tw-flex tw-flex-col tw-grow tw-h-full tw-px-2 md:tw-px-3 tw-relative">
                             <div
                                 class="tw-flex tw-flex-col tw-grow tw-text-black tw-overflow-hidden tw-rounded-2xl tw-mx-auto tw-mb-4 md:tw-mb-0 tw-group">
                                 <div class="tw-bg-white tw-px-3 tw-pt-6 md:tw-pt-8 tw-pb-5 md:tw-pb-8">
@@ -284,9 +201,13 @@ onBeforeMount(() => {
                                 </div>
                                 <div class="tw-grow tw-px-3 tw-pt-5 md:tw-pt-6 tw-pb-9 md:tw-pb-10"
                                     style="background: #f1f8ff;border-top: 2px solid #e6f2ff;">
-                                    <p class="tw-mb-1"><strong>This is an annual subscription that adds access to thousands of professionally transcribed songs to your Lifetime Membership.</strong></p>
-                                    <p class="tw-mb-1"><strong>This subscription allows us to officially license work from its creators and compensate them for their work</strong></p>
-                                    <p class="tw-mb-1">You will be immediately charged $40 to your card on file, and your subscription will renew again for $40 in 365 days.</p>
+                                    <p class="tw-mb-1"><strong>This is an annual subscription that adds access to
+                                            thousands of professionally transcribed songs to your Lifetime
+                                            Membership.</strong></p>
+                                    <p class="tw-mb-1"><strong>This subscription allows us to officially license work
+                                            from its creators and compensate them for their work</strong></p>
+                                    <p class="tw-mb-1">You will be immediately charged $40 to your card on file, and
+                                        your subscription will renew again for $40 in 365 days.</p>
                                 </div>
                             </div>
                         </div>
