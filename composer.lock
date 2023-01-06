@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c00599ec744de535070d703d0ec999c2",
+    "content-hash": "2385007d8e3df8977149e79f5a1559b0",
     "packages": [
         {
             "name": "aporat/store-receipt-validator",
@@ -8422,16 +8422,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "v2.0.60",
+            "version": "dev-2.0-video-progress-optimizations",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "5854f5b41f1d98234a49ff728c70104c61f606f8"
+                "reference": "2a374e9168c5e162ace86263d6452bfab7d75e23"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/5854f5b41f1d98234a49ff728c70104c61f606f8",
-                "reference": "5854f5b41f1d98234a49ff728c70104c61f606f8",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/2a374e9168c5e162ace86263d6452bfab7d75e23",
+                "reference": "2a374e9168c5e162ace86263d6452bfab7d75e23",
                 "shasum": ""
             },
             "require": {
@@ -8485,9 +8485,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/v2.0.60"
+                "source": "https://github.com/railroadmedia/railcontent/tree/2.0-video-progress-optimizations"
             },
-            "time": "2023-01-05T15:17:10+00:00"
+            "time": "2023-01-06T13:35:21+00:00"
         },
         {
             "name": "railroad/railforums",
