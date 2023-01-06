@@ -8,32 +8,28 @@ const props = defineProps({
     brand: {
         type: String,
         default: 'drumeo'
-    }
+    },
+    upgradeCost: {
+        type: String,
+        default: null,
+    },
+    currentTier: {
+        type: String,
+        default: 'plus'
+    },
+    isLifetimeMember: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 const isModalOpen = ref(false);
-const infoData = ref({ yearUpgradeCost: null, currentTier: 'plus' });
 const isLoading = ref(false);
 const hasSongAccess = ref(false);
 
 const toggleModal = () => {
     isModalOpen.value = !isModalOpen.value;
 };
-
-onBeforeMount(() => {
-    isLoading.value = true;
-    axios.get('/ecommerce/subscription/change/info').then((r) => {
-        infoData.value = r.data;
-        hasSongAccess.value = r.data.currentTier === 'plus';
-    }).catch(() => {
-        window.shownotification({
-            icon: 'error',
-            text: 'There was an error loading your info'
-        });
-    }).finally(() => {
-        isLoading.value = false;
-    });
-});
 
 </script>
 <template>
@@ -57,7 +53,7 @@ onBeforeMount(() => {
                     Your current Membership does not include access to Songs.
                 </p>
                 <p v-if="hasSongAccess">
-                    Your have Musora Plus Membership until the end of your billing cycle.
+                    You have Musora Plus Membership until the end of your billing cycle.
                 </p>
             </div>
         </div>
@@ -65,7 +61,7 @@ onBeforeMount(() => {
             <button @click="toggleModal" class="tw-btn-secondary">
                 {{ hasSongAccess ? 'Update' : 'Upgrade' }}
             </button>
-            <MembershipSelectModal :yearUpgradeCost="infoData.yearUpgradeCost" :currentTier="infoData.currentTier"
+            <MembershipSelectModal :upgradeCost="upgradeCost" :currentTier="currentTier"
                 v-if="isModalOpen" @onCloseModal="toggleModal" />
         </div>
     </div>
