@@ -33,6 +33,13 @@ class ContentTotalXPListener
         if ($contentFieldCreated->newField['key'] == 'xp' || $contentFieldCreated->newField['key'] == 'difficulty') {
             $this->recursiveCalculateXP($contentFieldCreated->newField['content_id']);
         }
+
+        if ($contentFieldCreated->newField['key'] == 'video' ) {
+            $externalId =$contentFieldCreated->newField['value']->fetch('fields.youtube_video_id', $contentFieldCreated->newField['value']->fetch('fields.vimeo_video_id'));
+            $this->contentService->update($contentFieldCreated->newField['content_id'], [
+                'external_video_id' => $externalId
+            ]);
+        }
     }
 
     /**

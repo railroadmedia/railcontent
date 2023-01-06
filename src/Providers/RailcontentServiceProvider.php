@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Validator;
 use PDO;
 use Railroad\Railcontent\Commands\AddDefaultShowNewField;
+use Railroad\Railcontent\Commands\AddExternalVideoId;
 use Railroad\Railcontent\Commands\CalculateContentPopularity;
 use Railroad\Railcontent\Commands\CalculateTotalXP;
 use Railroad\Railcontent\Commands\CleanContentTopicsAndStyles;
@@ -133,6 +134,7 @@ class RailcontentServiceProvider extends ServiceProvider
                 CleanMetadata::class,
                 CleanContentTopicsAndStyles::class,
                 CalculateContentPopularity::class,
+                AddExternalVideoId::class,
             ]
         );
 
