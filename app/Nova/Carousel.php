@@ -47,12 +47,12 @@ class Carousel extends Resource
         return [
             ID::make()->sortable(),
             BelongsTo::make('1. Brand', 'brand', 'App\Nova\Brand')->sortable(),
-            Text::make('2. Name', 'name')->sortable(),
+            Text::make('2. Subtitle', 'subtitle')->sortable(),
             Text::make('3. Title', 'title')->required()->sortable(),
             Markdown::make('4. Description')->required()->help('If a description exceeds 316 the last three characters will be replaced with an ellipses.'),
-            Text::make('5. CTA Button Text', 'btn_text')->required()->hideFromIndex(),
+            Text::make('5. CTA Button Text', 'cta_text')->required()->hideFromIndex(),
             Text::make('6. CTA URL', 'cta_url')->required(),
-            Image::make('7-1. Thumbnail', 'thumbnail')
+            Image::make('7-1. Image', 'img')
                 ->help('The image should be 1128  x 276px or a comparable aspect ratio.')
                 ->disk('nova_s3')
                 ->prunable()
@@ -81,9 +81,9 @@ class Carousel extends Resource
                 ->preview(function($value){
                     if(empty($value)) return null;
 
-                    return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') || str_contains($value, 'vimeocdn') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
+                    return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') || str_contains($value, 'vimeocdn' || str_contains($value, 'imagedelivery')) ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
                 }),
-            Text::make('7-2. Thumbnail', 'thumbnail')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
+            Text::make('7-2. Image', 'img')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
             Number::make('8. Display order', 'display_order'),
         ];
     }
