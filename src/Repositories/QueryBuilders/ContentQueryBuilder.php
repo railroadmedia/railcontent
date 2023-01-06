@@ -497,9 +497,9 @@ class ContentQueryBuilder extends QueryBuilder
      */
     public function restrictByPermissions()
     {
-//        if (ContentRepository::$bypassPermissions === true) {
-//            return $this;
-//        }
+        if (ContentRepository::$bypassPermissions === true) {
+            return $this;
+        }
 
         // A member for any brand should get access to all brands membership content.
         // If the contents' permission id is any member one and the users permission id is any member one, show all with
