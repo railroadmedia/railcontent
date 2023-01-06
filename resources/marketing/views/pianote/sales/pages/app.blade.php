@@ -10,7 +10,7 @@
     <meta property="og:description" content="Piano Lessons At Your Fingertips Wherever You Go. Whatever You Use.">
     <meta property="og:url" content="https://www.pianote.com/app/">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
+    @include('_partials.layout._tailwindcdn')
     <link href="{{ asset('/marketing/css/pianote/tailwind-helpers.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}">
     <link href="{{ asset('/marketing/parcel/pianote/sales-app.css') }}" rel="stylesheet">

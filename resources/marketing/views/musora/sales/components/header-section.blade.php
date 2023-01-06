@@ -33,7 +33,11 @@
                             @endif
                         >
                             @if(!empty($promoVersion))
-                                Get Started &raquo;
+                                @if(!empty($cta))
+                                    {!! $cta !!}
+                                @else
+                                    Get Started &raquo;
+                                @endif
                             @else
                                 START FOR FREE <i class="fas fa-arrow-right" style="line-height: 0;"></i>
                             @endif

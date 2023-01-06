@@ -3,7 +3,7 @@
 @section('global-head')
     @yield('meta')
 
-    @include('drumeo._partials._fonts')
+    @include('_partials.layout._fonts')
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation-float.min.css"/>
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">

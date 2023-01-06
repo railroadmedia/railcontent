@@ -13,7 +13,7 @@
     <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/lead-gen/metal-playalongs/share-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/metal-playalongs/">
 
-    @include('drumeo._partials._fonts')
+    @include('_partials.layout._fonts')
 
     <link href="{{ asset('/marketing/parcel/drumeo/lead-gen-tw.css') }}" rel="stylesheet">
     <style>

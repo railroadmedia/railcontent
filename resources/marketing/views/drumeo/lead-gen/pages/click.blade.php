@@ -8,7 +8,7 @@
     <meta property="og:description" content="You clicked the link! You'll continue to receive emails from us.">
     <meta property="og:url" content="https://www.drumeo.com/click/">
 
-    @include('drumeo._partials._fonts')
+    @include('_partials.layout._fonts')
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation-float.min.css"/>
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">

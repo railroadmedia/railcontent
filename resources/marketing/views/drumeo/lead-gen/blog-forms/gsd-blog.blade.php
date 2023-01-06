@@ -10,9 +10,9 @@
     <title>Todd Sucherman - How To Become A  Good Sounding Drummer | Drumeo</title>
     <meta name="description" content="Sign up on this page and you’ll get 5 videos with Todd Sucherman that are normally reserved for Drumeo members.">
 
-    @include('drumeo._partials._fonts')
+    @include('_partials.layout._fonts')
     <base target="_parent">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
+    @include('_partials.layout._tailwindcdn')
     <link href="{{ asset('marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
     <style>
         body {

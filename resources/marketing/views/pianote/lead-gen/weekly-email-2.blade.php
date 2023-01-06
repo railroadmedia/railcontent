@@ -10,7 +10,7 @@
     <meta name="description" content="Enter your email to get fresh lessons, interviews, and content delivered to your inbox every week!">
 
     <base target="_parent">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
+    @include('_partials.layout._tailwindcdn')
     <link href="{{ asset('/marketing/css/pianote/tailwind-helpers.css') }}" rel="stylesheet">
     <style>
         body {
@@ -96,7 +96,7 @@
         }
     </style>
 
-    @include('pianote._partials._fonts')
+    @include('_partials.layout._fonts')
     @include('_partials.layout.favicons.pianote-favicons')
 
     {!! \App\Analytics\Tracker::trackPageView() !!}

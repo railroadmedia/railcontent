@@ -102,6 +102,7 @@ class MusoraApiUserProvider implements UserProviderInterface
             'isPackOnlyOwner' => $user->isPackOnlyOwner(),
             'isAppleAppSubscriber' => $isAppleAppSubscriber,
             'isGoogleAppSubscriber' => $isGoogleAppSubscriber,
+            'membership_level' => $user->membership_level
         ];
     }
 

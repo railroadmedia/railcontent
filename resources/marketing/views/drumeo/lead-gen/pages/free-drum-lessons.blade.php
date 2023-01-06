@@ -17,7 +17,7 @@
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('marketing/parcel/drumeo/blog.css')}}" />
 
-    @include('drumeo._partials._fonts')
+    @include('_partials.layout._fonts')
     <style>
         header {
             background:#061221 url(https://dpwjbsxqtam5n.cloudfront.net/beat/free-lessons-header.jpg) center center/cover;

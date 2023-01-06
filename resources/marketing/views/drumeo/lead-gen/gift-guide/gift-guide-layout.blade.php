@@ -7,7 +7,7 @@
     <meta property="og:description" content="Choosing gifts for the drummer in your life can be a tricky task.">
     <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/promos/gift-guide/og-image.jpg" style="display: none;">
 
-    @include('drumeo._partials._fonts')
+    @include('_partials.layout._fonts')
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation-float.min.css"/>
 

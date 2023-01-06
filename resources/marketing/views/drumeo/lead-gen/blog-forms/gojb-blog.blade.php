@@ -10,9 +10,9 @@
     <title>Grooves Of John Bonham | Drumeo</title>
     <meta name="description" content="The ultimate breakdown of Led Zeppelin’s famous drum grooves. (FREE)">
 
-    @include('drumeo._partials._fonts')
+    @include('_partials.layout._fonts')
     <base target="_parent">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
+    @include('_partials.layout._tailwindcdn')
     <link href="{{ asset('marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
     <style>
         body {

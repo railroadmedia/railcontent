@@ -4,16 +4,14 @@
     {!! \App\Analytics\Tracker::headTop() !!}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=5">
-    @include('_partials.layout.favicons.drumeo-favicons')
 
     <meta name="robots" content="noindex">
-    <title>9 FREE PLAY-ALONGS | Drumeo</title>
-    <meta name="description" content="Add your drumming to nine high-quality drum play-along tracks. (FREE).">
+    <title>The Minor Blues Made Easy | Pianote</title>
+    <meta name="description" content="Enter your email to download convenient posters of all 12 minor blues scales.">
 
-    @include('_partials.layout._fonts')
     <base target="_parent">
     @include('_partials.layout._tailwindcdn')
-    <link href="{{ asset('marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/pianote/tailwind-helpers.css') }}" rel="stylesheet">
     <style>
         body {
             height:100vh;
@@ -67,37 +65,64 @@
             width:100%;
             padding:0;
             color:#fff;
-            background:#0b76db
+            background:#f61a30
         }
 
         .infusion-form button:hover {
-            background:#258ff4
+            background:#f73346
+        }
+    </style>
+    <style>
+        form input, form button {
+            line-height:40px;
+            height: 40px;
+        }
+        @media (min-width: 40em) {
+            form input, form button {
+                height: 52px;
+                line-height: 52px;
+            }
+        }
+        .thank-you-box.active {
+            max-height:1000px;
+            visibility:visible;
+            opacity:1;
+            padding:10px;
+        }
+        @media (min-width: 40em) {
+            .thank-you-box.active {
+                padding: 12px;
+            }
         }
     </style>
 
-{!! \App\Analytics\Tracker::trackPageView() !!}
+    @include('_partials.layout._fonts')
+    @include('_partials.layout.favicons.pianote-favicons')
 
-{!! \App\Analytics\Tracker::headBottom() !!}
+    {!! \App\Analytics\Tracker::trackPageView() !!}
+
+    {!! \App\Analytics\Tracker::headBottom() !!}
 </head>
 
 <body>
+
 {!! \App\Analytics\Tracker::bodyTop() !!}
 
 <section class="text-center absolute top-1/2 left-1/2 w-full px-5" style="transform:translate(-50%,-50%)">
-    <form id="DrumeoEngagementTriggerFreePlayAlongsWebForm" accept-charset="UTF-8" action="/laravel/public/customer-io/submit-email-form"
-          method="POST" class="ajax-form clearfix infusion-form max-w-3xl mx-auto" onsubmit="emailSignUpConversionTrackerForImpactProvider()">
-        <input type="hidden" name="form_name" value="Free Play-Alongs">
-
+    <form id="PianoteEngagementTriggerTheMinorBluesMadeEasyWebForm" accept-charset="UTF-8" action="/customer-io/submit-email-form"
+        method="POST" class="ajax-form clearfix infusion-form max-w-3xl mx-auto" onsubmit="emailSignUpConversionTrackerForImpactProvider()">
+        <input type="hidden" name="form_name" value="The Minor Blues Made Easy">
+        <input type="hidden" name="leadtracker_form_name" value="The Minor Blues Made Easy">
         <div class="infusion-field w-full sm:pr-3 float-left sm:w-7/12 md:text-left">
-            <input id="sign-up-email" class="w-full" name="email" type="email" placeholder="ENTER YOUR EMAIL" required/>
+            <input id="inf_field_Email" class="w-full" name="email" type="email" placeholder="Email Address..." required/>
         </div>
         <div class="infusion-submit w-full sm:pl-3 float-left sm:w-5/12">
-            <button class="submit" type="submit">HOOK ME UP</button>
+            <button class="submit" type="submit">Master the Blues</button>
         </div>
-        <input name="inf_form_xid" type="hidden" value="DrumeoEngagementTriggerFreePlayAlongsWebForm">
-        <input name="tag_names_to_add[]" type="hidden" value="Drumeo - Engagement - Trigger - Free Play-Alongs - Web Form">
-        <input name="list_ids_to_subscribe_to[]" type="hidden" value="31">
-        <input name="success_redirect" type="hidden" value="/thankyou">
+        <input name="inf_form_xid" type="hidden" value="PianoteEngagementTriggerWebsiteSignupWebForm">
+        <input name="tag_names_to_add[]" type="hidden" value="Pianote - Engagement - Trigger - The Minor Blues Made Easy - Web Form">
+        <input name="list_ids_to_subscribe_to[]" type="hidden" value="33">
+        <input name="success_redirect" type="hidden" value="/thank-you">
     </form>
     <div class="thank-you-box bg-white rounded-full w-full mx-auto text-center text-green-300 max-w-2xl transition-all duration-700 block overflow-hidden invisible max-h-0 opacity-0">
         <h5 class="mx-auto text-xl font-bold"><strong><i class="fas fa-check"></i> Success, Check your email!</strong></h5>
@@ -107,7 +132,7 @@
 {!! \App\Analytics\Tracker::bodyBottom() !!}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
+<script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 </body>
-@include("drumeo.lead-gen.partials.impact-email-sign-up-tracker")
+@include("pianote.lead-gen.impact-email-sign-up-tracker")
 </html>
