@@ -27,11 +27,12 @@
 @yield('global-body')
 <script type="text/javascript" src="{{ asset('marketing/js/pianote/pre-form-submit-facebook-lead.js') }}"></script>
 
-@include('helpscout::helpscout-tracking-beacon-script', ['email' => !is_null(user()) ? user()->getEmail() : null])
+<script type="text/javascript">!function(e,t,n){function a(){var e=t.getElementsByTagName("script")[0],n=t.createElement("script");n.type="text/javascript",n.async=!0,n.src="https://beacon-v2.helpscout.net",e.parentNode.insertBefore(n,e)}if(e.Beacon=n=function(t,n,a){e.Beacon.readyQueue.push({method:t,options:n,data:a})},n.readyQueue=[],"complete"===t.readyState)return a();e.attachEvent?e.attachEvent("onload",a):e.addEventListener("load",a,!1)}(window,document,window.Beacon||function(){});</script>
 <script type="text/javascript">
+    window.Beacon('init', '8c3ddef4-7a0e-42df-8200-a650c24932ea')
     Beacon('on', 'ready', () => {
-        document.querySelector('.BeaconFabButtonFrame').style.bottom = "50px";
-    });
+        document.querySelector('.BeaconFabButtonFrame').style.bottom ="50px";
+    })
 </script>
 {!! \App\Analytics\Tracker::bodyBottom() !!}
 
