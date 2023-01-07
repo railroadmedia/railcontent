@@ -18,6 +18,33 @@
             <a class="join {{ $theme }} my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>
             <p class="leading-tight text-sm"><em>First year discount: <s class="opacity-40">${{ Prices::$plusSubscriptionAnnualFull }}</s> ${{ Prices::$plusSubscriptionAnnual }}.<br class="inline sm:hidden"> Cancel anytime. 90-day guarantee.</em></p>
             <h3 class="leading-tight mt-8 mb-4 sm:my-8 uppercase">{!!  $subDescription  !!}</h3>
+            @if(!empty($countdown))
+                <div class="rounded-xl px-4 sm:px-6 py-2 inline-flex flex-wrap mx-auto mb-4 sm:mb-8 justify-center items-center" style="background-color:#181515;">
+                    <p class="leading-tight m-0"><strong>
+                            <span class="inline sm:hidden">DEALS END IN:</span>
+                            <span class="hidden sm:inline">{!! $countdown !!}</span>
+                        </strong></p>
+                    <div class="h-12 mx-5 bg-promo" style="width:2px;"></div>
+                    <div class="tzcd-big">
+                        <div class="inline-block">
+                            <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>
+                            <p class="leading-none uppercase font-extrabold text-xs text-promo">days</p>
+                        </div>
+                        <div class="inline-block mx-2">
+                            <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>
+                            <p class="leading-none uppercase font-extrabold text-xs text-promo">hrs</p>
+                        </div>
+                        <div class="inline-block mr-2">
+                            <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>
+                            <p class="leading-none uppercase font-extrabold text-xs text-promo">mins</p>
+                        </div>
+                        <div class="inline-block">
+                            <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>
+                            <p class="leading-none uppercase font-extrabold text-xs text-promo">secs</p>
+                        </div>
+                    </div>
+                </div>
+            @endif
         </div>
         <div style="font-size:0px">
             @foreach($bonuses as $bonus)

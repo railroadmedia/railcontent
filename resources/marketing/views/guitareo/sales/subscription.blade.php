@@ -546,7 +546,8 @@
         'header' => 'Save 17% + get 6 bonuses<br class="inline sm:hidden"> worth $924',
         'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/6',
         'buttonLink' => '/ecommerce/add-to-cart?products[GUITAREO-1-YEAR-MEMBERSHIP]=1&products[guitarists-survival-kit]=1&products[guitar-quest]=1&products[rhythm-and-groove]=1&products[GUITAR-SYSTEM]=1&products[AGME-JAN-2019-SEMESTER]=1&products[GTME-OCT-2018-SEMESTER]=1&redirect=/order&locked=true',
-        'subDescription' => '<strong>6 free bonuses.</strong> <br class="inline sm:hidden"><em>only available until january 31st.</em>',
+        'subDescription' => '<strong>6 free bonuses.</strong> <br class="inline sm:hidden"><em>only available until january 15th.</em>',
+        'countdown' => 'The Guitarist’s Survival Kit <br class="hidden sm:inline">is disappearing in...',
         'altButtonLink' => '/ecommerce/add-to-cart?products[GUITAREO-1-MONTH-MEMBERSHIP]=1&redirect=/order&locked=true',
         ])
     @else
