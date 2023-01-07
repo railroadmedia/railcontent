@@ -22,9 +22,7 @@
 @stop
 
 @section('global-body')
-    @include('pianote._partials._nav', [
-        "subscriptionVersion" => true
-    ])
+    @include('pianote._partials._nav')
 
     <section class="py-3 sm:py-5 bg-center bg-cover bg-no-repeat" style="background-color:#1c0203;background-image:url('https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/quiz/bg.jpg')">
         <div class="container mx-auto text-center text-white">
@@ -32,7 +30,9 @@
         </div>
     </section>
 
-    @include('pianote._partials._footer')
+    @include("pianote._partials._footer", [
+            "minimal" => true
+        ])
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>

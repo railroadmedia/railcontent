@@ -616,5 +616,5 @@
     <script src="{{ mix('/platform/js/vendor.js') }}"></script>
     <script src="{{ mix('/platform/js/app.js') }}"></script>
 
-    @include('pianote._partials.inspectlet')
+
 @stop
