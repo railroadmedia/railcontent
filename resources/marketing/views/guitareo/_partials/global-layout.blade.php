@@ -79,7 +79,7 @@
                 .on('finish.countdown', function (event) {
                     $(this).html('<div class="inline-block"><h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">LIMITED</h2> <p class="leading-none uppercase font-extrabold text-xs text-promo">TIME LEFT</p></div>');
                 });
-            $('.tzcd-smaller').countdown('2022/12/27')
+            $('.tzcd-smaller').countdown('2023/01/16')
                 .on('update.countdown', function (event) {
                     var format = '' + '<div class="inline-block mr-2"><h2 class="font-extrabold leading-none text-lg">%M</h2> <p class="leading-none uppercase font-extrabold text-xs text-promo">min%!M</p></div> ' + '<div class="inline-block"><h2 class="font-extrabold leading-none text-lg">%S</h2> <p class="leading-none uppercase font-extrabold text-xs text-promo">sec%!S</p></div>';
                     if (event.offset.totalHours > 0) {
