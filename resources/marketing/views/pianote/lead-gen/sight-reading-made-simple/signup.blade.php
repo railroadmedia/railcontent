@@ -305,7 +305,9 @@
         </div>
     </section>
 
-    @include('pianote._partials._footer')
+    @include("pianote._partials._footer", [
+            "minimal" => true
+        ])
 
     @include('pianote.lead-gen.partials.video-player',[
         "name" => "trailer",
@@ -325,5 +327,5 @@
             $(document).foundation();
         });
     </script>
-    @include('pianote._partials.inspectlet')
+
 @stop

@@ -1705,6 +1705,6 @@
 
     @yield('scripts')
 
-    @include('pianote._partials.inspectlet')
+
 @stop
 

@@ -43,7 +43,6 @@
     @include('musora.sales.components.card-selection-section', [
         "plusLogo" => "https://singeo.s3.amazonaws.com/sales/2023/singeo-plus-logo-light.svg",
         "logo" => "https://musora-ui.s3.amazonaws.com/logos/singeo-white.svg",
-        "instrument" => "singing",
         "songs" => "1000",
         "firstPoint" => "Unlimited singing lessons",
         "thirdPoint" => "Direct access to vocal coaches.",

@@ -68,7 +68,9 @@
                 Check your inbox soon for great emails from Drumeo.</em></p>
         <a class="join blue smaller" href="https://www.musora.com/drumeo">Members Area</a>
     </div>
-    @include("drumeo.sales.partials._footer")
+    @include("drumeo.sales.partials._footer", [
+            "minimal" => true
+        ])
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
