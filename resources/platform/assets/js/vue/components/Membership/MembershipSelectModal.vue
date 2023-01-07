@@ -83,7 +83,8 @@ const handleSelectedInterval = (interval) => {
             window.shownotification({
                 icon: 'check',
                 text: `Your subscription has been successfully updated to ${selectedTier.value === 'plus' ? 'Musora+' : 'Musora'} (${interval === 'year' ? 'Annually' : 'Monthly'}).`
-            })
+            });
+            emit('onCloseModal');
         })
         .catch(() => {
             window.shownotification({
