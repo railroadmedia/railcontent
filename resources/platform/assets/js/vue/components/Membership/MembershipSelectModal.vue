@@ -99,9 +99,9 @@ onBeforeMount(() => {
 <template>
     <ModalRenderer>
         <section
-            class="tw-relative tw-flex tw-justify-center lg:tw-items-center tw-h-full tw-w-full tw-overflow-auto tw-max-h-[100vh] tw-p-2">
+            class="tw-relative tw-flex tw-justify-center tw-items-start tw-h-full tw-w-full tw-overflow-auto tw-max-h-[100vh] tw-p-2">
             <div v-if="!isLifetimeMember"
-                class="tw-table sm:tw-block tw-my-auto tw-text-center tw-text-white tw-mx-2 tw-px-2 sm:tw-px-6 tw-py-10 sm:tw-py-14 lg:tw-py-20 tw-bg-[#081825] tw-border-[#445F74] tw-rounded-[10px] tw-border-[1px] tw-relative md:tw-static">
+                class="tw-table tw-mt-2 md:tw-mt-4 lg:tw-mt-6 sm:tw-block tw-my-auto tw-text-center tw-text-white tw-mx-2 tw-px-2 sm:tw-px-6 tw-py-10 sm:tw-py-14 lg:tw-py-20 tw-bg-[#081825] tw-border-[#445F74] tw-rounded-[10px] tw-border-[1px] tw-relative md:tw-static">
                 <button @click="emit('onCloseModal')"
                     class="tw-text-white tw-absolute lg:tw-top-[32px] tw-top-[12px] tw-right-[12px]  md:tw-right-[32px] md:tw-top-[32px]">
                     <XIcon class="tw-w-[26px] tw-h-[26px] md:tw-w-[48px] md:tw-h-[48px]" />
