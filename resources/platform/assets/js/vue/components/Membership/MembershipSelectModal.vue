@@ -4,6 +4,7 @@ import { ref, onBeforeMount } from 'vue';
 import { XIcon } from "@heroicons/vue/solid";
 import ModalRenderer from '../Modal/ModalRenderer.vue';
 import MembershipTierSelector from './MembershipTierSelector.vue';
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner.vue';
 
 const props = defineProps({
     brand: {
@@ -68,6 +69,7 @@ const emit = defineEmits(['onCloseModal']);
 
 const selectedTier = ref('plus');
 const descriptions = ref({ year: '', month: '' });
+const isLoading = ref(false);
 
 const handleSelectedTier = (val) => {
     console.log(val)
@@ -75,18 +77,22 @@ const handleSelectedTier = (val) => {
 };
 
 const handleSelectedInterval = (interval) => {
+    isLoading.value = true;
     axios.get(`/ecommerce/subscription/change/${selectedTier.value}/${interval}`)
         .then(() => {
             window.shownotification({
                 icon: 'check',
-                text: 'Membership changed.'
+                text: `Your subscription has been successfully updated to ${selectedTier.value === 'plus' ? 'Musora+' : 'Musora'} (${interval === 'year' ? 'Annually' : 'Monthly'}).`
             })
         })
         .catch(() => {
             window.shownotification({
                 icon: 'error',
-                text: 'Membership change error.'
+                text: 'There was an error updating your suscription, try again later or contact support.'
             })
+        })
+        .finally(() => {
+            isLoading.value = false;
         });
 };
 
@@ -100,6 +106,10 @@ onBeforeMount(() => {
     <ModalRenderer>
         <section
             class="tw-relative tw-flex tw-justify-center tw-items-start tw-h-full tw-w-full tw-overflow-auto tw-max-h-[100vh] tw-p-2">
+            <div v-if="isLoading"
+                class="tw-absolute tw-flex tw-flex-col xl:tw-flex-row tw-justify-center tw-items-center tw-h-full tw-w-full tw-z-30 tw-bg-black tw-opacity-50">
+                <LoadingSpinner classOverride="tw-h-[36px] tw-w-[36px]" />
+            </div>
             <div v-if="!isLifetimeMember"
                 class="tw-table tw-mt-2 md:tw-mt-4 lg:tw-mt-6 sm:tw-block tw-my-auto tw-text-center tw-text-white tw-mx-2 tw-px-2 sm:tw-px-6 tw-py-10 sm:tw-py-14 lg:tw-py-20 tw-bg-[#081825] tw-border-[#445F74] tw-rounded-[10px] tw-border-[1px] tw-relative md:tw-static">
                 <button @click="emit('onCloseModal')"
@@ -179,14 +189,15 @@ onBeforeMount(() => {
                     <XIcon class="tw-w-[26px] tw-h-[26px] md:tw-w-[48px] md:tw-h-[48px]" />
                 </button>
                 <div class="tw-table-row sm:tw-block tw-w-full">
-                    <p class="tw-mb-[10px] tw-text-[14px]">We're sorry, but your membership level does not include songs.
-                                Please
-                                upgrade your membership to a Musora+ level membership to access our songs library.</p>
-                            <h1 class="tw-mb-[20px] tw-text-[30px] lg:tw-text-[36px]"><strong>Manage Membership</strong>
-                            </h1>
-                            <div class="tw-text-center tw-text-[20px]">
-                                Songs Subscription
-                            </div>
+                    <p class="tw-mb-[10px] tw-text-[14px]">We're sorry, but your membership level does not include
+                        songs.
+                        Please
+                        upgrade your membership to a Musora+ level membership to access our songs library.</p>
+                    <h1 class="tw-mb-[20px] tw-text-[30px] lg:tw-text-[36px]"><strong>Manage Membership</strong>
+                    </h1>
+                    <div class="tw-text-center tw-text-[20px]">
+                        Songs Subscription
+                    </div>
                     <div
                         class="tw-flex tw-flex-col md:tw-flex-row tw-items-start tw-justify-center tw-max-w-sm tw-my-5 sm:tw-my-7 tw-mx-auto">
                         <div class="tw-flex tw-flex-col tw-grow tw-h-full tw-px-2 md:tw-px-3 tw-relative">
