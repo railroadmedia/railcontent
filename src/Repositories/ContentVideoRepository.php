@@ -58,6 +58,6 @@ class ContentVideoRepository extends RepositoryBase
             ->where('external_video_id', $videoId)
             ->get();
 
-        return $lessonRows->toArray();
+        return $lessonRows;
     }
 }
