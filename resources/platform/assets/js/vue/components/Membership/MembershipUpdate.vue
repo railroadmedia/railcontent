@@ -1,48 +1,37 @@
 <script setup>
-import axios from 'axios';
-import { ref, onBeforeMount } from 'vue';
-import LoadingSpinner from '../LoadingSpinner/LoadingSpinner.vue';
+import { ref } from 'vue';
 import MembershipSelectModal from './MembershipSelectModal.vue';
 
 const props = defineProps({
     brand: {
         type: String,
         default: 'drumeo'
-    }
+    },
+    upgradeCost: {
+        type: String,
+        default: null,
+    },
+    currentTier: {
+        type: String,
+        default: 'plus'
+    },
+    isLifetimeMember: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 const isModalOpen = ref(false);
-const infoData = ref({ yearUpgradeCost: null, currentTier: 'plus' });
-const isLoading = ref(false);
 const hasSongAccess = ref(false);
 
 const toggleModal = () => {
     isModalOpen.value = !isModalOpen.value;
 };
 
-onBeforeMount(() => {
-    isLoading.value = true;
-    axios.get('/ecommerce/subscription/change/info').then((r) => {
-        infoData.value = r.data;
-        hasSongAccess.value = r.data.currentTier === 'plus';
-    }).catch(() => {
-        window.shownotification({
-            icon: 'error',
-            text: 'There was an error loading your info'
-        });
-    }).finally(() => {
-        isLoading.value = false;
-    });
-});
-
 </script>
 <template>
     <div
         class="tw-mt-[30px] tw-relative tw-flex tw-flex-col xl:tw-flex-row tw-justify-between tw-w-full tw-min-h-[137px] tw-px-[30px] tw-py-[32px] tw-bg-[#002039] tw-border-1 tw-border-[#223F57] tw-rounded-[8px]">
-        <div v-if="isLoading"
-            class="tw-absolute tw-flex tw-flex-col xl:tw-flex-row tw-justify-center tw-items-center tw-h-full tw-w-full tw-z-30 tw-bg-black tw-opacity-50">
-            <LoadingSpinner classOverride="tw-h-[36px] tw-w-[36px]" />
-        </div>
         <div class="tw-flex tw-flex-col tw-text-center xl:tw-text-left tw-text-white">
             <div class="tw-flex tw-justify-center xl:tw-justify-start">
                 <svg width="106" height="25" viewBox="0 0 106 25" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -57,7 +46,7 @@ onBeforeMount(() => {
                     Your current Membership does not include access to Songs.
                 </p>
                 <p v-if="hasSongAccess">
-                    Your have Musora Plus Membership until the end of your billing cycle.
+                    You have Musora Plus Membership until the end of your billing cycle.
                 </p>
             </div>
         </div>
@@ -65,8 +54,12 @@ onBeforeMount(() => {
             <button @click="toggleModal" class="tw-btn-secondary">
                 {{ hasSongAccess ? 'Update' : 'Upgrade' }}
             </button>
-            <MembershipSelectModal :yearUpgradeCost="infoData.yearUpgradeCost" :currentTier="infoData.currentTier"
-                v-if="isModalOpen" @onCloseModal="toggleModal" />
+            <MembershipSelectModal
+                v-if="isModalOpen" @onCloseModal="toggleModal"
+                :upgradeCost="upgradeCost"
+                :currentTier="currentTier"
+                :isLifetimeMember="false"
+            />
         </div>
     </div>
 </template>

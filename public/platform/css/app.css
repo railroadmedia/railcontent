@@ -21782,14 +21782,17 @@ a:visited{
 .-tw-ml-1{
   margin-left: -0.25rem !important;
 }
+.-tw-mt-3{
+  margin-top: -0.75rem !important;
+}
+.tw-mb-\[10px\]{
+  margin-bottom: 10px !important;
+}
 .-tw-mt-\[10px\]{
   margin-top: -10px !important;
 }
 .-tw-mb-2{
   margin-bottom: -0.5rem !important;
-}
-.-tw-mt-3{
-  margin-top: -0.75rem !important;
 }
 .tw-mt-\[30px\]{
   margin-top: 30px !important;
@@ -23599,6 +23602,10 @@ a:visited{
   padding-top: 2.5rem !important;
   padding-bottom: 2.5rem !important;
 }
+.tw-px-5{
+  padding-left: 1.25rem !important;
+  padding-right: 1.25rem !important;
+}
 .tw-py-0\.5{
   padding-top: 0.125rem !important;
   padding-bottom: 0.125rem !important;
@@ -23606,10 +23613,6 @@ a:visited{
 .tw-py-0{
   padding-top: 0px !important;
   padding-bottom: 0px !important;
-}
-.tw-px-5{
-  padding-left: 1.25rem !important;
-  padding-right: 1.25rem !important;
 }
 .tw-px-\[30px\]{
   padding-left: 30px !important;
@@ -24268,11 +24271,11 @@ a:visited{
 .tw-opacity-25{
   opacity: 0.25 !important;
 }
-.tw-opacity-60{
-  opacity: 0.6 !important;
-}
 .tw-opacity-50{
   opacity: 0.5 !important;
+}
+.tw-opacity-60{
+  opacity: 0.6 !important;
 }
 .tw-opacity-30{
   opacity: 0.3 !important;
@@ -25399,6 +25402,9 @@ a:visited{
   .md\:tw-mb-8{
     margin-bottom: 2rem !important;
   }
+  .md\:tw-mt-4{
+    margin-top: 1rem !important;
+  }
   .md\:tw-mb-\[5px\]{
     margin-bottom: 5px !important;
   }
@@ -25854,6 +25860,9 @@ a:visited{
   .lg\:tw-mb-\[20px\]{
     margin-bottom: 20px !important;
   }
+  .lg\:tw-mt-6{
+    margin-top: 1.5rem !important;
+  }
   .lg\:tw-mr-6{
     margin-right: 1.5rem !important;
   }
@@ -25928,6 +25937,9 @@ a:visited{
   }
   .lg\:tw-w-\[10px\]{
     width: 10px !important;
+  }
+  .lg\:tw-w-\[755px\]{
+    width: 755px !important;
   }
   .lg\:tw-w-\[198px\]{
     width: 198px !important;
@@ -26031,9 +26043,6 @@ a:visited{
   }
   .lg\:tw-items-end{
     align-items: flex-end !important;
-  }
-  .lg\:tw-items-center{
-    align-items: center !important;
   }
   .lg\:tw-justify-start{
     justify-content: flex-start !important;

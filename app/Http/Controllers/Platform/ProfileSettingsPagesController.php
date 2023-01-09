@@ -37,6 +37,7 @@ use Railroad\Ecommerce\Repositories\SubscriptionRepository;
 use Railroad\Ecommerce\Services\CartService;
 use Railroad\Ecommerce\Services\InvoiceService;
 use Railroad\Ecommerce\Services\ResponseService;
+use Railroad\Ecommerce\Services\UpgradeService;
 use Railroad\Ecommerce\Services\UserProductService;
 use Railroad\Ecommerce\Transformers\SubscriptionTransformer;
 use Railroad\Location\Services\CountryListService;
@@ -103,6 +104,7 @@ class ProfileSettingsPagesController extends BaseController
     private MembershipActionRepository $membershipActionRepository;
     private CustomerIoService $customerIoService;
     private ProductRepository $productRepository;
+    private UpgradeService $upgradeService;
 
     /**
      * @param NotificationSettingsService $notificationSettingsService
@@ -121,7 +123,8 @@ class ProfileSettingsPagesController extends BaseController
         EcommerceEntityManager $ecommerceEntityManager,
         MembershipActionRepository $membershipActionRepository,
         CustomerIoService $customerIoService,
-        ProductRepository $productRepository
+        ProductRepository $productRepository,
+        UpgradeService $upgradeService
     ) {
         $this->notificationSettingsService = $notificationSettingsService;
         $this->userSignaturesRepository = $userSignaturesRepository;
@@ -137,6 +140,7 @@ class ProfileSettingsPagesController extends BaseController
         $this->membershipActionRepository = $membershipActionRepository;
         $this->customerIoService = $customerIoService;
         $this->productRepository = $productRepository;
+        $this->upgradeService = $upgradeService;
     }
 
     // ------------------------------------------ "top-level" public methods -------------------------------------------
@@ -452,7 +456,7 @@ class ProfileSettingsPagesController extends BaseController
 
             $subscriptionProduct = $subscription->getProduct();
 
-            if($subscriptionProduct){
+            if ($subscriptionProduct) {
                 $subscriptionProductId = $subscriptionProduct->getId();
                 $productsGrantingAllContentAccessIdsOnly = ProductAccessMap::productsGrantingAllContentAccessIdsOnly();
 
@@ -461,7 +465,7 @@ class ProfileSettingsPagesController extends BaseController
                     $membershipSubscriptions[] = $subscription;
                 }
             } else {
-                error_log ('subscription ' . $subscription->getId() . ' doesn\'t have a product attached');
+                error_log('subscription ' . $subscription->getId() . ' doesn\'t have a product attached');
             }
         }
 
@@ -567,6 +571,8 @@ class ProfileSettingsPagesController extends BaseController
 
         // -------------------------------------------------------------------------------------------------------------
 
+        $showManageSongsButton = $isLifetime || $this->upgradeService->getCurrentSubscription() != null;
+
         return view(
             'account.settings.account',
             [
@@ -586,6 +592,9 @@ class ProfileSettingsPagesController extends BaseController
                 'offerUpgradeToAnnualShowToStudent' => $offerUpgradeToAnnualShowToStudent ?? false,
                 'offerUpgradeToAnnualPercentSaved' => $offerUpgradeToAnnualPercentSaved ?? null,
                 'membershipWithoutSubscription' => $membershipWithoutSubscription ?? false,
+                'currentTier' => $this->upgradeService->getCurrentMembershipTier(),
+                'upgradeCost' => $this->upgradeService->getProratedUpgradeCost(),
+                'showSongsUpgradeButton' => $showManageSongsButton,
             ]
         );
     }
@@ -1214,7 +1223,8 @@ class ProfileSettingsPagesController extends BaseController
 
         if (true) {
             return $this->returnRedirect(
-                true, 'Your access has been extended. Your new renewal date is ' . $newRenewalDate
+                true,
+                'Your access has been extended. Your new renewal date is ' . $newRenewalDate
             );
         }
         return $this->returnRedirect(false);
@@ -1495,7 +1505,9 @@ class ProfileSettingsPagesController extends BaseController
             $msg = Collect([$msg ?? self::$generalSuccessMessageToUser]);
             return redirect()->route($route, $routeParams)->with(['successes' => $msg]);
         }
-        return redirect()->route($route, $routeParams)->with(['error-message' => ($msg ?? self::$generalErrorMessageToUser)]);
+        return redirect()->route($route, $routeParams)->with(
+            ['error-message' => ($msg ?? self::$generalErrorMessageToUser)]
+        );
     }
 
     /**
