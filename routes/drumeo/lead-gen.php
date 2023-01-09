@@ -71,9 +71,8 @@ Route::domain('{drumeoDomain}')->group(function () {
                 ]);
         }
     );
-    Route::get('/{page?}', [LeadGenController::class, 'getFaster'])->whereIn('page', [
-        'get-faster', 'get-faster-drums'
-    ]);
+    Route::get('/get-faster', [LeadGenController::class, 'getFaster']);
+    Route::get('/get-faster-drums', [LeadGenController::class, 'getFaster']);
     Route::group(['prefix' => 'getting-started'],
         function () {
             Route::get('/{page?}', LeadGenController::class . '@gstd')
