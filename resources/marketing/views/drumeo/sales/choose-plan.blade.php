@@ -41,7 +41,6 @@
     @include('musora.sales.components.card-selection-section', [
         "plusLogo" => "https://drumeo-assets.s3.amazonaws.com/sales/2023/drumeoplus_logo.svg",
         "logo" => "https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png",
-        "instrument" => "drum",
         "songs" => "5000",
         "firstPoint" => "The world’s best drum lessons.",
         "thirdPoint" => "Unlimited personal support",

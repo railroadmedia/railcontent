@@ -467,7 +467,7 @@
     <script src="{{ asset('marketing/js/pianote/cart-sidebar.js') }}"></script>
     <script src="{{ asset('marketing/js/pianote/app.js') }}"></script>
 
-    @include('pianote._partials.inspectlet')
+
 
     @parent
 @stop

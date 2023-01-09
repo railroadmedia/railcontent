@@ -68,7 +68,9 @@
         <p><em>Your subscription has been confirmed. You've been added to the <br class="show-for-medium">
                 30 Day Drummer email communication list and will hear from us soon.</em></p>
     </div>
-    @include("drumeo.sales.partials._footer")
+    @include("drumeo.sales.partials._footer", [
+            "minimal" => true
+        ])
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>

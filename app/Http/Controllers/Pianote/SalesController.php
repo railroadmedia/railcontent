@@ -130,16 +130,6 @@ class SalesController extends BaseController
         return view('pianote.shop.pages.lifetime');
     }
 
-    public function keeplearning()
-    {
-        return view('pianote.shop.pages.keep-learning');
-    }
-
-    public function upgradeoffer()
-    {
-        return view('pianote.shop.pages.upgrade-offer');
-    }
-
     public function lisarecommends()
     {
         return view('pianote.shop.lisa-recommends');

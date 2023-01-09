@@ -239,7 +239,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 
-    {!! inspectlet_embed_script() !!}
-
     @yield('scripts')
 @stop
