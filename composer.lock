@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "07af5cc375d2f035651cf42682e404c6",
+    "content-hash": "002ca9a2be92c4ca660ecf917cf1e164",
     "packages": [
         {
             "name": "aporat/store-receipt-validator",
@@ -176,16 +176,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.255.9",
+            "version": "3.255.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "a001ab98b9e76a6f5cae327b3316b08fab37a296"
+                "reference": "5d598491cc62da506082aec8661475d40af24b16"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/a001ab98b9e76a6f5cae327b3316b08fab37a296",
-                "reference": "a001ab98b9e76a6f5cae327b3316b08fab37a296",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/5d598491cc62da506082aec8661475d40af24b16",
+                "reference": "5d598491cc62da506082aec8661475d40af24b16",
                 "shasum": ""
             },
             "require": {
@@ -264,9 +264,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.255.9"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.255.10"
             },
-            "time": "2023-01-04T19:24:09+00:00"
+            "time": "2023-01-05T19:20:51+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -1090,16 +1090,16 @@
         },
         {
             "name": "doctrine/data-fixtures",
-            "version": "1.6.1",
+            "version": "1.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/data-fixtures.git",
-                "reference": "1a4232c15143ca3c127812d19b23a7961c41eeed"
+                "reference": "d52cc6d392717734fac908768a7319f8a417401a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/data-fixtures/zipball/1a4232c15143ca3c127812d19b23a7961c41eeed",
-                "reference": "1a4232c15143ca3c127812d19b23a7961c41eeed",
+                "url": "https://api.github.com/repos/doctrine/data-fixtures/zipball/d52cc6d392717734fac908768a7319f8a417401a",
+                "reference": "d52cc6d392717734fac908768a7319f8a417401a",
                 "shasum": ""
             },
             "require": {
@@ -1152,7 +1152,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/data-fixtures/issues",
-                "source": "https://github.com/doctrine/data-fixtures/tree/1.6.1"
+                "source": "https://github.com/doctrine/data-fixtures/tree/1.6.2"
             },
             "funding": [
                 {
@@ -1168,7 +1168,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-12-23T12:13:51+00:00"
+            "time": "2023-01-05T18:42:27+00:00"
         },
         {
             "name": "doctrine/dbal",
@@ -6102,16 +6102,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "2.64.1",
+            "version": "2.65.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "f2e59963f4c4f4fdfb9fcfd752e8d2e2b79a4e2c"
+                "reference": "09acf64155c16dc6f580f36569ae89344e9734a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/f2e59963f4c4f4fdfb9fcfd752e8d2e2b79a4e2c",
-                "reference": "f2e59963f4c4f4fdfb9fcfd752e8d2e2b79a4e2c",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/09acf64155c16dc6f580f36569ae89344e9734a3",
+                "reference": "09acf64155c16dc6f580f36569ae89344e9734a3",
                 "shasum": ""
             },
             "require": {
@@ -6200,7 +6200,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-01-01T23:17:36+00:00"
+            "time": "2023-01-06T15:55:01+00:00"
         },
         {
             "name": "nette/schema",
@@ -8422,16 +8422,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "v2.0.60",
+            "version": "dev-2.0-external_video_id",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "5854f5b41f1d98234a49ff728c70104c61f606f8"
+                "reference": "1bd1ec482a488d6d0ad52adb66a08eace2e6666c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/5854f5b41f1d98234a49ff728c70104c61f606f8",
-                "reference": "5854f5b41f1d98234a49ff728c70104c61f606f8",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/1bd1ec482a488d6d0ad52adb66a08eace2e6666c",
+                "reference": "1bd1ec482a488d6d0ad52adb66a08eace2e6666c",
                 "shasum": ""
             },
             "require": {
@@ -8485,9 +8485,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/v2.0.60"
+                "source": "https://github.com/railroadmedia/railcontent/tree/2.0-external_video_id"
             },
-            "time": "2023-01-05T15:17:10+00:00"
+            "time": "2023-01-06T16:04:41+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -16639,9 +16639,18 @@
             "time": "2021-07-28T10:34:58+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "package": "railroad/railcontent",
+            "version": "dev-2.0-external_video_id",
+            "alias": "v2.0.60",
+            "alias_normalized": "2.0.60.0"
+        }
+    ],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "railroad/railcontent": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
