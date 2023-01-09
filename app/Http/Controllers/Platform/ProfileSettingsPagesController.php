@@ -592,7 +592,7 @@ class ProfileSettingsPagesController extends BaseController
                 'offerUpgradeToAnnualShowToStudent' => $offerUpgradeToAnnualShowToStudent ?? false,
                 'offerUpgradeToAnnualPercentSaved' => $offerUpgradeToAnnualPercentSaved ?? null,
                 'membershipWithoutSubscription' => $membershipWithoutSubscription ?? false,
-                'currentTier' => $this->upgradeService->getCurrentMembershipTier(),
+                'currentTier' => $this->upgradeService->getCurrentMembershipTier()->value,
                 'upgradeCost' => $this->upgradeService->getProratedUpgradeCost(),
                 'showSongsUpgradeButton' => $showManageSongsButton,
             ]

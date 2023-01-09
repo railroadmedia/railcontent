@@ -86,10 +86,10 @@ const handleSelectedInterval = (interval) => {
             });
             emit('onCloseModal');
         })
-        .catch(() => {
+        .catch((error) => {
             window.shownotification({
                 icon: 'error',
-                text: 'There was an error updating your suscription, try again later or contact support.'
+                text: error.response.data.message
             })
         })
         .finally(() => {
