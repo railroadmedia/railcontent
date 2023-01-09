@@ -190,7 +190,7 @@
                 <p class="leading-none text-lg py-1 text-black"><strong class="font-black">16</strong></p>
             </div><br class="inline sm:hidden">
             {{--<a target="_blank" class=" @if(Carbon\Carbon::create(2022, 8, 16, 11, 0, 0, 'America/Vancouver') < Carbon\Carbon::now()) sold-out @endif join medium my-2 sm:my-0" href="https://us06web.zoom.us/j/86046483729?pwd=QVZ4Y0pXMnB0bC9ZTGJiaHBNcGRvZz09">Morning Session - 9am PDT &raquo;</a>--}}
-            <a target="_blank" class=" @if(Carbon\Carbon::create(2023, 1, 16, 9, 0, 0, 'America/Vancouver') < Carbon\Carbon::now()) sold-out @endif join medium" href="https://us06web.zoom.us/j/84488082900?pwd=am1jTk9BOTdlN3hBS1E5YkVyK094dz09">Morning Session - 9am PDT &raquo;</a>
+            <a target="_blank" class=" @if(Carbon\Carbon::create(2023, 1, 16, 9, 0, 0, 'America/Vancouver') < Carbon\Carbon::now()) sold-out @endif join medium" href="https://us06web.zoom.us/j/85045221968?pwd=clJqbXdXcnI0OEViS1FuR2dnRndpdz09">Morning Session - 9am PDT &raquo;</a>
             {{--<hr class="my-7 sm:my-10">--}}
             {{--<div class="bg-white text-center rounded-md inline-block overflow-hidden w-11 mr-2 align-middle">--}}
             {{--<p class="leading-none tracking-tighter text-xs py-0.5 text-white" style="background-color:#bb3744;"><strong>JULY</strong></p>--}}
