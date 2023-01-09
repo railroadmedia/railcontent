@@ -1,4 +1,4 @@
-@extends($theme.'._partials.global-layout')
+@extends($brand.'._partials.global-layout')
 
 @section('global-head')
     @yield('page-meta')
@@ -53,9 +53,9 @@
         <div class="px-4 md:px-0">
             <div class="mb-6">
                 <img
-                    class="h-6 md:h-10 transition-opacity opacity-0 @if($theme !== 'drumeo') mr-2 @endif"
-                    src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/@if($theme === 'drumeo')https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png @elseif($theme === 'pianote')https://pianote.s3.amazonaws.com/logo/pianote-logo-red.png @elseif($theme === 'guitareo')https://guitareo.s3.amazonaws.com/sales/guitareo-logo-green.png @elseif($theme === 'singeo')https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png @endif"
-                    alt="{{$theme}} logo"
+                    class="h-6 md:h-10 transition-opacity opacity-0 @if($brand !== 'drumeo') mr-2 @endif"
+                    src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/@if($brand === 'drumeo')https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png @elseif($brand === 'pianote')https://pianote.s3.amazonaws.com/logo/pianote-logo-red.png @elseif($brand === 'guitareo')https://guitareo.s3.amazonaws.com/sales/guitareo-logo-green.png @elseif($brand === 'singeo')https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png @endif"
+                    alt="{{$brand}} logo"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
                 />
@@ -63,7 +63,7 @@
                     class="h-6 md:h-10 transition-opacity opacity-0"
                     src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/@if($page === 'method')https://dpwjbsxqtam5n.cloudfront.net/sales/2021/method-text.svg @elseif($page === 'coaches')https://dpwjbsxqtam5n.cloudfront.net/sales/2021/coaches-text.svg @elseif($page === 'songs')https://dpwjbsxqtam5n.cloudfront.net/sales/2021/songs-text.svg @endif"
                     alt="{{$page}} logo"
-                    style="filter:@if($theme === 'drumeo')invert(1) brightness(.35) sepia(1) saturate(50) hue-rotate(195deg); @elseif($theme === 'pianote')invert(21%) sepia(91%) saturate(4092%) hue-rotate(344deg) brightness(96%) contrast(102%); @elseif($theme === 'guitareo')invert(55%) sepia(45%) saturate(5847%) hue-rotate(141deg) brightness(110%) contrast(101%); @elseif($theme === 'singeo')invert(24%) sepia(99%) saturate(7465%) hue-rotate(275deg) brightness(85%) contrast(125%); @endif"
+                    style="filter:@if($brand === 'drumeo')invert(1) brightness(.35) sepia(1) saturate(50) hue-rotate(195deg); @elseif($brand === 'pianote')invert(21%) sepia(91%) saturate(4092%) hue-rotate(344deg) brightness(96%) contrast(102%); @elseif($brand === 'guitareo')invert(55%) sepia(45%) saturate(5847%) hue-rotate(141deg) brightness(110%) contrast(101%); @elseif($brand === 'singeo')invert(24%) sepia(99%) saturate(7465%) hue-rotate(275deg) brightness(85%) contrast(125%); @endif"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
                 />
