@@ -78,6 +78,7 @@ class OrderEventListener
             $promoCode = $this->cartService->getCart()->getPromoCode();
 
             Tracker::queue(
+                $orderEvent->getOrder()->getBrand(),
                 function () use ($orderEvent, $promoCode) {
                     $products = [];
                     $order = $orderEvent->getOrder();
