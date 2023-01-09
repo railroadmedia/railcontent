@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, onBeforeUnmount } from 'vue';
+import { onMounted, onBeforeUnmount, ref } from 'vue';
 import LoadingAnimation from '../../vuesora/components/LoadingAnimation/LoadingAnimation.vue';
 
 const props = defineProps({
@@ -33,6 +33,8 @@ const scoreOrSlice = () => {
     }
     return 'slices';
 };
+
+const isPlaying = ref(false);
 
 const spacebarToPlayPause = (event) => {
     const embeddedPlayer = document.getElementById('ssEmbed').contentWindow;
