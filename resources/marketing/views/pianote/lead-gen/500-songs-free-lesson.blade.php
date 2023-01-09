@@ -311,7 +311,9 @@
     </div>
         </div>
 
-    @include('pianote._partials._footer')
+    @include("pianote._partials._footer", [
+            "minimal" => true
+        ])
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script>
@@ -327,5 +329,5 @@
 
     @yield('scripts')
 
-    @include('pianote._partials.inspectlet')
+
 @stop

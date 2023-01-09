@@ -54,13 +54,13 @@
                         <p class="mb-4" style="color:#D0E2E7;">
                             Want a free piano? Simply enter your email address before <span class="text-white font-extrabold">November 21st</span> to secure your chance to win. No purchase necessary. No age restrictions. No location restrictions.
                         </p>
-                        @include('pianote._partials._sign-up-form', [
-                            "formId" => 'Pianote - Engagement - Trigger - FP30 Giveaway - Web Form',
-                            "formName" => 'FP30 Giveaway',
-                            'buttonText' => 'I WANT TO WIN!',
-                            'stacked' => true,
-                            'disclaimerColor' => '#B3B3B9'
-                        ])
+{{--                        @include('pianote._partials._sign-up-form', [--}}
+{{--                            "formId" => 'Pianote - Engagement - Trigger - FP30 Giveaway - Web Form',--}}
+{{--                            "formName" => 'FP30 Giveaway',--}}
+{{--                            'buttonText' => 'I WANT TO WIN!',--}}
+{{--                            'stacked' => true,--}}
+{{--                            'disclaimerColor' => '#B3B3B9'--}}
+{{--                        ])--}}
                     </div>
                 </div>
             </div>
@@ -192,13 +192,13 @@
     <section class="text-center text-white py-8 md:py-16 lg:py-28 px-5 md:px-7 bg-center bg-cover lazyload" data-bg="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://pianote.s3.amazonaws.com/giveaways/footer.jpg">
         <div class="mx-auto max-w-md md:max-w-2xl">
             <img class="h-32 sm:h-36 md:h-44 lg:h-52 lazyload" data-src="https://cdn.musora.com/image/fetch/w_650,q_auto:best/https://pianote.s3.amazonaws.com/giveaways/logo.png" alt="title image">
-            @include("pianote._partials._sign-up-form", [
-                    "formId" => 'Pianote - Engagement - Trigger - FP30 Giveaway - Web Form',
-                    "formName" => 'FP30 Giveaway',
-                "buttonText" => "I WANT TO WIN!",
-                "oneLineLg" => true,
-                'disclaimerColor' => '#B3B3B9'
-            ])
+{{--            @include("pianote._partials._sign-up-form", [--}}
+{{--                    "formId" => 'Pianote - Engagement - Trigger - FP30 Giveaway - Web Form',--}}
+{{--                    "formName" => 'FP30 Giveaway',--}}
+{{--                "buttonText" => "I WANT TO WIN!",--}}
+{{--                "oneLineLg" => true,--}}
+{{--                'disclaimerColor' => '#B3B3B9'--}}
+{{--            ])--}}
         </div>
     </section>
 
@@ -206,7 +206,9 @@
         "name" => "trailer",
         "vimeoId" => "767456067",
     ])
-    @include('pianote._partials._footer')
+    @include("pianote._partials._footer", [
+            "minimal" => true
+        ])
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>

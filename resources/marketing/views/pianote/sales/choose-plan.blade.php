@@ -43,7 +43,6 @@
     @include('musora.sales.components.card-selection-section', [
         "plusLogo" => "https://pianote.s3.amazonaws.com/sales/2023/pianote-plus-logo-light.svg",
         "logo" => "https://pianote.s3.amazonaws.com/logo/pianote-logo-white.png",
-        "instrument" => "piano",
         "songs" => "1000",
         "firstPoint" => "Unlimited piano lessons",
         "thirdPoint" => "Direct access to real teachers.",

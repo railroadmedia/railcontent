@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bb1a726083a8f08537c8442714c50a7e",
+    "content-hash": "002ca9a2be92c4ca660ecf917cf1e164",
     "packages": [
         {
             "name": "aporat/store-receipt-validator",
@@ -6102,16 +6102,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "2.64.1",
+            "version": "2.65.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "f2e59963f4c4f4fdfb9fcfd752e8d2e2b79a4e2c"
+                "reference": "09acf64155c16dc6f580f36569ae89344e9734a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/f2e59963f4c4f4fdfb9fcfd752e8d2e2b79a4e2c",
-                "reference": "f2e59963f4c4f4fdfb9fcfd752e8d2e2b79a4e2c",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/09acf64155c16dc6f580f36569ae89344e9734a3",
+                "reference": "09acf64155c16dc6f580f36569ae89344e9734a3",
                 "shasum": ""
             },
             "require": {
@@ -6200,7 +6200,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-01-01T23:17:36+00:00"
+            "time": "2023-01-06T15:55:01+00:00"
         },
         {
             "name": "nette/schema",
@@ -8422,16 +8422,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "dev-2.0-video-progress-optimizations",
+            "version": "dev-2.0-external_video_id",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "2a374e9168c5e162ace86263d6452bfab7d75e23"
+                "reference": "1bd1ec482a488d6d0ad52adb66a08eace2e6666c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/2a374e9168c5e162ace86263d6452bfab7d75e23",
-                "reference": "2a374e9168c5e162ace86263d6452bfab7d75e23",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/1bd1ec482a488d6d0ad52adb66a08eace2e6666c",
+                "reference": "1bd1ec482a488d6d0ad52adb66a08eace2e6666c",
                 "shasum": ""
             },
             "require": {
@@ -8485,9 +8485,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/2.0-video-progress-optimizations"
+                "source": "https://github.com/railroadmedia/railcontent/tree/2.0-external_video_id"
             },
-            "time": "2023-01-06T13:35:21+00:00"
+            "time": "2023-01-06T16:04:41+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -16641,21 +16641,14 @@
     ],
     "aliases": [
         {
-            "package": "railroad/ecommerce",
-            "version": "dev-feature-upgrade-rwillems-20221412",
-            "alias": "v5.0.53",
-            "alias_normalized": "5.0.53.0"
-        },
-        {
             "package": "railroad/railcontent",
-            "version": "dev-2.0-video-progress-optimizations",
+            "version": "dev-2.0-external_video_id",
             "alias": "v2.0.60",
             "alias_normalized": "2.0.60.0"
         }
     ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "railroad/ecommerce": 20,
         "railroad/railcontent": 20
     },
     "prefer-stable": true,
@@ -16665,5 +16658,5 @@
         "ext-curl": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
