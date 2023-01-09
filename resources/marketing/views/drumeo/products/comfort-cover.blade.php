@@ -8,6 +8,8 @@
     <meta property="og:title" content="Comfort Cover">
     <meta property="og:description" content="Upgrade any round drum throne in seconds.">
     <meta property="og:url" content="https://www.drumeo.com/drumshop/comfort-cover/">
+
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
 @stop()
 
 @section('head')

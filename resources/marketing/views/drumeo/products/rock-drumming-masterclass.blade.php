@@ -8,6 +8,8 @@
     <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/og-image.jpg" style="display: none;">
     <meta property="og:description" content="Unlock your rock drumming potential in this exclusive 26-week masterclass with Todd Sucherman.">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
+
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
 @stop()
 
 @section('head')

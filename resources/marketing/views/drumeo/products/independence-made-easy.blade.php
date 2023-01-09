@@ -9,6 +9,8 @@
     <meta property="og:image" content="https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/thumbnail.jpg" style="display: none;">
     <meta property="og:description" content="Jared Falk's 26-Week Online Course For Building Your Drumming Independence & Becoming A More Musical Drummer">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
+
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
 @stop()
 
 @section('head')

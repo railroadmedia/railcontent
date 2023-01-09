@@ -10,7 +10,7 @@
     <meta property="og:image" content="https://singeo.s3.amazonaws.com/products/singing-starter-kit/share-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.singeo.com/{{ Request::path() }}">
 
-    @include('_partials.layout._tailwindcdn')
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/css/singeo/tailwind-helpers.css') }}">
     <link href="{{ asset('/marketing/css/animate.css') }}" rel="stylesheet">

@@ -9,10 +9,13 @@
     <meta property="og:title" content="The Best Beginner Drum Book">
     <meta property="og:description" content="The simplest guide for beginner drummers to get started on the drums and take their drumming to the next level.">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
+
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
 @stop
 
 @section('head')
     <link href="{{ asset('/marketing/parcel/drumeo/beginner-book.css') }}" rel="stylesheet">
+
 @stop
 
 @section('content')

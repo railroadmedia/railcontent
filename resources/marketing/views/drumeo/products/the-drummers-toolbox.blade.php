@@ -9,6 +9,8 @@
     <meta property="og:title" content="The Drummer’s Toolbox">
     <meta property="og:description" content="The Drummer’s Toolbox presents drummers of all skill levels with the most comprehensive introduction to 101 drumming styles from the past century.">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
+
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
 @stop
 
 @section('head')
@@ -502,7 +504,7 @@
         </div>
     </section>
 
-    <div class="max-w-6xl mx-auto py-12 md:py-20 z-50 relative">
+    <div class="max-w-6xl mx-auto py-12 md:py-20 z-50 relative bg-white">
         <div>
             <h1 class="text-center mb-10">Still Have Questions?</h1>
             {{--@include('_partials.components.question-dropdown', [--}}

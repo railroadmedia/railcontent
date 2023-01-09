@@ -5,7 +5,7 @@
     <meta name="description" content="The Complete Pianote Curriculum At Your Fingertips">
 
     <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/books/foundations/sales/og-image.jpg"
-            style="display: none;">
+          style="display: none;">
     <meta property="og:title" content="Pianote Foundations">
     <meta property="og:description" content="The Complete Pianote Curriculum At Your Fingertips">
     <meta property="og:url" content="https://www.pianote.com/foundations">
@@ -208,13 +208,13 @@
                     <h4 class="font-bold text-base md:text-lg"><strong>BUY NOW: $149 USD</strong></h4>
 
                     @if($products['pianote-foundation']->getStockAvailability() < 1)
-                    <a class="join sold-out mt-3 mb-5 sm:mb-10 w-full max-w-2xl text-lg sm:text-xl md:text-2xl lg:text-3xl">SOLD OUT!</a>
+                        <a class="join sold-out mt-3 mb-5 sm:mb-10 w-full max-w-2xl text-lg sm:text-xl md:text-2xl lg:text-3xl">SOLD OUT!</a>
                     @else
 
                         <a
-                        class="join vue-add-to-cart mt-3 mb-5 sm:mb-10 w-full max-w-2xl text-lg sm:text-xl md:text-2xl lg:text-3xl"
-                        href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['pianote-foundation' => 1,], 'redirect' => '/order', 'locked' => 'false']) }}"
-                        data-product-json='{"pianote-foundation": 1}'
+                            class="join vue-add-to-cart mt-3 mb-5 sm:mb-10 w-full max-w-2xl text-lg sm:text-xl md:text-2xl lg:text-3xl"
+                            href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['pianote-foundation' => 1,], 'redirect' => '/order', 'locked' => 'false']) }}"
+                            data-product-json='{"pianote-foundation": 1}'
                         >CLICK HERE TO ORDER &raquo;</a>
                     @endif
                     <p class=" mx-auto max-w-2xl text-xs sm:text-sm"><strong>Get ready to open up the only piano books you’ll ever need.</strong>
@@ -250,22 +250,22 @@
             <h1 class="font-bold leading-tight text-lg sm:text-2xl md:text-3xl lg:text-4xl"><strong>Everything you need to get inspired,<br class="hidden sm:inline">
                     focused, and better at the piano.</strong></h1>
             <div class="px-6">
-            <div class="relative border-4 border-pred rounded-lg overflow-hidden mt-8 sm:mt-12 mx-auto w-full max-w-2xl">
-                {{--<div class="absolute top-1/2 left-1/2 z-0 font-extrabold transform rotate-20 font-bebas text-shadow-2" style="margin: -40px 50px;">--}}
+                <div class="relative border-4 border-pred rounded-lg overflow-hidden mt-8 sm:mt-12 mx-auto w-full max-w-2xl">
+                    {{--<div class="absolute top-1/2 left-1/2 z-0 font-extrabold transform rotate-20 font-bebas text-shadow-2" style="margin: -40px 50px;">--}}
                     {{--WATCH THE<br>PREVIEW VIDEO--}}
                     {{--<img style="width: 35px; filter:brightness(-50%) invert(1);" src="https://d2vyvo0tyx8ig5.cloudfront.net/books/foundations/sales/click-here-to-see-inside-arrow.png"></div>--}}
-                {{--<img class="absolute top-1/2 left-1/2 z-0 transform" style="width: 70px; margin:-35px;" src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/play-button.png">--}}
-                {{--<img src="https://i.vimeocdn.com/video/843251384-415f254e1a1302f445ade7bdf5b9526c6d35b1f532f50be8544d15592a44ae7b-d_1280">--}}
-                <div class="aspect-16:9 w-full relative">
-                    <iframe src="//player.vimeo.com/video/381240248" class="absolute w-full h-full"></iframe>
+                    {{--<img class="absolute top-1/2 left-1/2 z-0 transform" style="width: 70px; margin:-35px;" src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/play-button.png">--}}
+                    {{--<img src="https://i.vimeocdn.com/video/843251384-415f254e1a1302f445ade7bdf5b9526c6d35b1f532f50be8544d15592a44ae7b-d_1280">--}}
+                    <div class="aspect-16:9 w-full relative">
+                        <iframe src="//player.vimeo.com/video/381240248" class="absolute w-full h-full"></iframe>
+                    </div>
                 </div>
-            </div>
 
-            <p class="w-full max-w-2xl mt-6 mb-12 mx-auto text-xs md:text-sm">Along with your beautiful books, you’ll also get access to a special online resource center full of bonus video lessons, exercises, and downloadable worksheets.
-                <br><br>
-                There, you’ll also have access to REAL teachers who can answer your questions about anything you come across in the books. You’ll never be left alone.
-                <br><br>
-                Click on any of the books to see a preview from Book 2 to see what they’re like inside!</p>
+                <p class="w-full max-w-2xl mt-6 mb-12 mx-auto text-xs md:text-sm">Along with your beautiful books, you’ll also get access to a special online resource center full of bonus video lessons, exercises, and downloadable worksheets.
+                    <br><br>
+                    There, you’ll also have access to REAL teachers who can answer your questions about anything you come across in the books. You’ll never be left alone.
+                    <br><br>
+                    Click on any of the books to see a preview from Book 2 to see what they’re like inside!</p>
             </div>
 
             <div class="flex flex-wrap justify-center">
@@ -487,9 +487,9 @@
                             <a class="join sold-out mt-3 mb-5 sm:mb-10 w-full max-w-2xl text-lg sm:text-xl md:text-2xl lg:text-3xl">SOLD OUT!</a>
                         @else
                             <a
-                                    class="join vue-add-to-cart w-full text-lg sm:text-xl md:text-2xl lg:text-3xl"
-                                    href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['pianote-foundation' => 1,], 'redirect' => '/order', 'locked' => 'false']) }}"
-                                    data-product-json='{"pianote-foundation": 1}'
+                                class="join vue-add-to-cart w-full text-lg sm:text-xl md:text-2xl lg:text-3xl"
+                                href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['pianote-foundation' => 1,], 'redirect' => '/order', 'locked' => 'false']) }}"
+                                data-product-json='{"pianote-foundation": 1}'
                             >CLICK HERE TO ORDER »</a>
                         @endif
 
@@ -504,35 +504,41 @@
         <div class="container mx-auto">
             <h1 class="font-bold mb-8 sm:mb-10 leading-tight text-lg sm:text-2xl md:text-3xl lg:text-4xl"><strong>Still have questions?</strong></h1>
             <div class="px-6 mx-auto max-w-4xl">
-                @include('_partials.components.question-dropdown', [
-                "num" => '?',
+                @include('pianote.products._week-breakdown-2', [
+                "navyBorder" => true,
+                "question" => true,
                 "title" => "Are these books for me?",
-                "desc" => "Yes! Ok, we can’t say for sure. But if you’ve made it this far we’re going to assume you want to learn the piano, and play it beautifully. That’s what these books are designed to help you do."
+                "description" => "Yes! Ok, we can’t say for sure. But if you’ve made it this far we’re going to assume you want to learn the piano, and play it beautifully. That’s what these books are designed to help you do."
                 ])
-                @include('_partials.components.question-dropdown', [
-                "num" => '?',
+                @include('pianote.products._week-breakdown-2', [
+                "navyBorder" => true,
+                "question" => true,
                 "title" => "Do I need to be a Pianote member to buy the books?",
-                "desc" => "No! You can buy and learn from these books on their own. BUT they were designed to work hand-in-hand with a Pianote membership."
+                "description" => "No! You can buy and learn from these books on their own. BUT they were designed to work hand-in-hand with a Pianote membership."
                 ])
-                @include('_partials.components.question-dropdown', [
-                "num" => '?',
+                @include('pianote.products._week-breakdown-2', [
+                "navyBorder" => true,
+                "question" => true,
                 "title" => "How long will it take me to go through all 10 books?",
-                "desc" => "How long is a piece of string? Joking aside, that really depends on how much practice and time you’re able to put in!<br>But if you were able to commit to daily practice and took advantage of all the extra resources you could reasonably expect to go through all books within a year. That means you’re only 12 months (or less) away from playing beautifully the way that you want.<br>Learning the piano is a lifelong process, so you’ll probably want to return to these books, again and again, to keep your skills sharp!<br>"
+                "description" => "How long is a piece of string? Joking aside, that really depends on how much practice and time you’re able to put in!<br>But if you were able to commit to daily practice and took advantage of all the extra resources you could reasonably expect to go through all books within a year. That means you’re only 12 months (or less) away from playing beautifully the way that you want.<br>Learning the piano is a lifelong process, so you’ll probably want to return to these books, again and again, to keep your skills sharp!<br>"
                 ])
-                @include('_partials.components.question-dropdown', [
-                "num" => '?',
+                @include('pianote.products._week-breakdown-2', [
+                "navyBorder" => true,
+                "question" => true,
                 "title" => "Are the books sold separately or together?",
-                "desc" => "These books are presented in a beautiful box-set. The curriculum is designed to be followed from the first page to the last, so all 10 books are included."
+                "description" => "These books are presented in a beautiful box-set. The curriculum is designed to be followed from the first page to the last, so all 10 books are included."
                 ])
-                @include('_partials.components.question-dropdown', [
-                "num" => '?',
+                @include('pianote.products._week-breakdown-2', [
+                "navyBorder" => true,
+                "question" => true,
                 "title" => "How much does shipping cost?",
-                "desc" => "Shipping rates will vary depending on the shipping location. Check to see your location:<br>US - $9<br>Canada, UK, Germany $15<br>Everywhere else $40<br>Unfortunately, international shipping is much higher than we’d like and there’s no quick way for us to lower the cost. We’ll be looking at finding local distribution centers in the future"
+                "description" => "Shipping rates will vary depending on the shipping location. Check to see your location:<br>US - $9<br>Canada, UK, Germany $15<br>Everywhere else $40<br>Unfortunately, international shipping is much higher than we’d like and there’s no quick way for us to lower the cost. We’ll be looking at finding local distribution centers in the future"
                 ])
-                @include('_partials.components.question-dropdown', [
-                "num" => '?',
+                @include('pianote.products._week-breakdown-2', [
+                "navyBorder" => true,
+                "question" => true,
                 "title" => "How long will it take for the books to arrive?",
-                "desc" => "Here are the general shipping guidelines:<br>US 2-10 Business Days<br>Everywhere Else: 7-20 Business Days"
+                "description" => "Here are the general shipping guidelines:<br>US 2-10 Business Days<br>Everywhere Else: 7-20 Business Days"
                 ])
             </div>
         </div>
@@ -579,6 +585,11 @@
                 updateIndex($toggleButton.index($(this)));
                 current = $toggleButton.index($(this));
             });
+
+            $('.dropdown').on('click', function(){
+                $(this).toggleClass('active');
+                $(this).find('i').toggleClass('rotate-180');
+            });
         });
 
         document.addEventListener('click', function (event) {
@@ -604,6 +615,5 @@
     <script src="{{ mix('/platform/js/manifest.js') }}"></script>
     <script src="{{ mix('/platform/js/vendor.js') }}"></script>
     <script src="{{ mix('/platform/js/app.js') }}"></script>
-
 
 @stop

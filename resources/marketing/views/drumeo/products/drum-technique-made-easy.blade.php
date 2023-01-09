@@ -8,6 +8,8 @@
     <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/og-image.jpg" style="display: none;">
     <meta property="og:description" content="Drum Technique Made Easy is a 26-week online course with Bruce Becker.">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
+
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
 @stop()
 
 @section('head')

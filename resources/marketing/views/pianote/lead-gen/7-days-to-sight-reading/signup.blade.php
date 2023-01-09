@@ -59,6 +59,8 @@
 @endsection
 
 @section('head')
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
+
     <style>
         h1 strong, h2 strong, h3 strong, h4 strong, h5 strong, h6 strong {
             font-weight:900
