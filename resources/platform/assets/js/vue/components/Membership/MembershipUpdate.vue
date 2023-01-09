@@ -22,7 +22,6 @@ const props = defineProps({
 });
 
 const isModalOpen = ref(false);
-const hasSongAccess = ref(false);
 
 const toggleModal = () => {
     isModalOpen.value = !isModalOpen.value;
@@ -42,23 +41,23 @@ const toggleModal = () => {
                 </svg>
             </div>
             <div class="tw-pt-[12px] xl:tw-pt-[5px] xl:tw-pr-[30px]">
-                <p v-if="!hasSongAccess">
+                <p v-if="!currentTier === 'plus'">
                     Your current Membership does not include access to Songs.
                 </p>
-                <p v-if="hasSongAccess">
+                <p v-if="currentTier === 'plus'">
                     You have Musora Plus Membership until the end of your billing cycle.
                 </p>
             </div>
         </div>
         <div class="tw-flex tw-justify-center tw-items-center xl:tw-mt-auto tw-mt-[24px]">
             <button @click="toggleModal" class="tw-btn-secondary">
-                {{ hasSongAccess ? 'Update' : 'Upgrade' }}
+                {{ currentTier === 'plus' ? 'Update' : 'Upgrade' }}
             </button>
             <MembershipSelectModal
                 v-if="isModalOpen" @onCloseModal="toggleModal"
                 :upgradeCost="upgradeCost"
                 :currentTier="currentTier"
-                :isLifetimeMember="false"
+                :isLifetimeMember="isLifetimeMember"
             />
         </div>
     </div>
