@@ -107,7 +107,7 @@ class OrderEventListener
                 }
             );
         } catch (Throwable $throwable) {
-            error_log("There is a problem with drumeo ecommerce order syncing to analytics providers.");
+            error_log("There is a problem with musora ecommerce order syncing to analytics providers.");
             error_log($throwable);
         }
 
