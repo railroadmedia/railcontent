@@ -21,7 +21,9 @@
 
     @yield('body-content')
 
-    @include("guitareo.sales.partials._footer")
+    @include("guitareo.sales.partials._footer", [
+            "minimal" => true
+        ])
 @endsection
 
 @section('scripts')

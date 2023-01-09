@@ -68,7 +68,9 @@
         <p><em>You have been successfully unsubscribed from <br class="show-for-medium">
                 30 Day Drummer email communications.</em></p>
     </div>
-    @include("drumeo.sales.partials._footer")
+    @include("drumeo.sales.partials._footer", [
+            "minimal" => true
+        ])
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>

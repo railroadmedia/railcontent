@@ -43,7 +43,6 @@
     @include('musora.sales.components.card-selection-section', [
         "plusLogo" => "https://guitareo.s3.amazonaws.com/sales/2023/guitareo-plus-logo-light.svg",
         "logo" => "https://guitareo.s3.amazonaws.com/sales/guitareo-logo.png",
-        "instrument" => "guitareo",
         "songs" => "1000",
         "firstPoint" => "Unlimited guitar lessons",
         "thirdPoint" => "Direct access to real teachers.",
