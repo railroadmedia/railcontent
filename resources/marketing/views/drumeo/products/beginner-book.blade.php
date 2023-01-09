@@ -448,39 +448,47 @@
     </section>
 
     <div class="questions">
-        <div class="row">
-            <h1 class="columns">Still Have Questions?</h1>
-            {{--@include('drumeo.products.partials.question-dropdown', [--}}
-            {{--"question" => "Why isn’t the book available on Amazon?",--}}
-            {{--"answer" => "Our inventory through Amazon sold out much quicker than expected. We have another shipment on the way to Amazon and we’ll add the link again soon."--}}
+        <div class="max-w-6xl mx-auto">
+            <h1>Still Have Questions?</h1>
+            {{--@include('_partials.components.question-dropdown', [--}}
+{{--            "num" => "?",--}}
+            {{--"title" => "Why isn’t the book available on Amazon?",--}}
+            {{--"desc" => "Our inventory through Amazon sold out much quicker than expected. We have another shipment on the way to Amazon and we’ll add the link again soon."--}}
             {{--])--}}
-            @include('drumeo.products.partials.question-dropdown', [
-            "question" => "How should I order in Canada/UK?",
-            "answer" => "Canadian Drummers: <a target='_blank' href='https://www.amazon.ca/dp/B07G8N348K'>Click here to order through Amazon.ca</a>. <br>UK Drummers: <a target='_blank' href='https://www.amazon.co.uk/dp/B07G8N348K'>Click here to order through Amazon.co.uk</a>."
+            @include('_partials.components.question-dropdown', [
+            "num" => "?",
+            "title" => "How should I order in Canada/UK?",
+            "desc" => "Canadian Drummers: <a target='_blank' href='https://www.amazon.ca/dp/B07G8N348K'>Click here to order through Amazon.ca</a>. <br>UK Drummers: <a target='_blank' href='https://www.amazon.co.uk/dp/B07G8N348K'>Click here to order through Amazon.co.uk</a>."
             ])
-            @include('drumeo.products.partials.question-dropdown', [
-            "question" => "Can I get a discount when ordering the book in bulk?",
-            "answer" => "Yes! We have bulk discounts available for ordering more than 100 copies, as well as shipping discounts. <a href='#bulkOrder' class='anchor-slide open-bulk'>Click here to fill in a short web form to get started.</a>"
+            @include('_partials.components.question-dropdown', [
+            "num" => "?",
+            "title" => "Can I get a discount when ordering the book in bulk?",
+            "desc" => "Yes! We have bulk discounts available for ordering more than 100 copies, as well as shipping discounts. <a href='#bulkOrder' class='anchor-slide open-bulk'>Click here to fill in a short web form to get started.</a>"
             ])
-            @include('drumeo.products.partials.question-dropdown', [
-            "question" => "Should I order through Drumeo or Amazon?",
-            "answer" => "It’s totally up to you! Amazon might be able to save you a couple dollars on shipping rates due to their bulk shipping discounts, but depending on where you live they might not be able to ship to your country."
+            @include('_partials.components.question-dropdown', [
+            "num" => "?",
+            "title" => "Should I order through Drumeo or Amazon?",
+            "desc" => "It’s totally up to you! Amazon might be able to save you a couple dollars on shipping rates due to their bulk shipping discounts, but depending on where you live they might not be able to ship to your country."
             ])
-            @include('drumeo.products.partials.question-dropdown', [
-            "question" => "How much does shipping cost?",
-            "answer" => "If you order through this website (rather than Amazon), the shipping rates for one book are:<br><br>- United States: $9<br>- Canada, United Kingdom, and Germany: $15<br>- Everywhere Else: $40<br><br>Unfortunately, international shipping is much higher than we’d like and there’s no quick way for us to lower the cost. We’ll be looking at finding local distribution centers in the future."
+            @include('_partials.components.question-dropdown', [
+            "num" => "?",
+            "title" => "How much does shipping cost?",
+            "desc" => "If you order through this website (rather than Amazon), the shipping rates for one book are:<br><br>- United States: $9<br>- Canada, United Kingdom, and Germany: $15<br>- Everywhere Else: $40<br><br>Unfortunately, international shipping is much higher than we’d like and there’s no quick way for us to lower the cost. We’ll be looking at finding local distribution centers in the future."
             ])
-            @include('drumeo.products.partials.question-dropdown', [
-            "question" => "How long will it take for the book to arrive?",
-            "answer" => "If you order through this website (rather than Amazon), the shipping should take about this long, depending on your location:<br><br>- United States: 2-10 Business Days<br>- Everywhere Else: 7-20 Business Days"
+            @include('_partials.components.question-dropdown', [
+            "num" => "?",
+            "title" => "How long will it take for the book to arrive?",
+            "desc" => "If you order through this website (rather than Amazon), the shipping should take about this long, depending on your location:<br><br>- United States: 2-10 Business Days<br>- Everywhere Else: 7-20 Business Days"
             ])
-            @include('drumeo.products.partials.question-dropdown', [
-            "question" => "Do you have a digital version available? (e-book or audiobook)",
-            "answer" => "Kindle Version: <a target='_blank' href='https://www.amazon.com/dp/B07TB4SN3V/'>Click here to order through Amazon.com</a>. <br>We'll be adding other digital versions in the future!"
+            @include('_partials.components.question-dropdown', [
+            "num" => "?",
+            "title" => "Do you have a digital version available? (e-book or audiobook)",
+            "desc" => "Kindle Version: <a target='_blank' href='https://www.amazon.com/dp/B07TB4SN3V/'>Click here to order through Amazon.com</a>. <br>We'll be adding other digital versions in the future!"
             ])
-            @include('drumeo.products.partials.question-dropdown', [
-            "question" => "It says there’s a free 30-day membership pass to Drumeo. What’s that?",
-            "answer" => "Drumeo is our award-winning online drum lessons experience, where you’ll get step-by-step video lessons from the best drummers and teachers in the world: <a target='_blank' href='https://www.drumeo.com/'>www.Drumeo.com/</a>.<br><br>We’ve included a free 30-day membership redemption pass inside every copy of The Best Beginner Drum Book, so once your book arrives you’ll get an amazing book PLUS video drum lessons for 30 days ($30 value)."
+            @include('_partials.components.question-dropdown', [
+            "num" => "?",
+            "title" => "It says there’s a free 30-day membership pass to Drumeo. What’s that?",
+            "desc" => "Drumeo is our award-winning online drum lessons experience, where you’ll get step-by-step video lessons from the best drummers and teachers in the world: <a target='_blank' href='https://www.drumeo.com/'>www.Drumeo.com/</a>.<br><br>We’ve included a free 30-day membership redemption pass inside every copy of The Best Beginner Drum Book, so once your book arrives you’ll get an amazing book PLUS video drum lessons for 30 days ($30 value)."
             ])
         </div>
         <div class="row">
@@ -560,14 +568,6 @@
                 $('.tab-switcher').removeClass('active');
                 $('.tab-switcher').eq(currentTab).addClass('active');
             });
-
-            // Dropdown for FAQ section
-            $('.question-dropdown').on('click', questionDropdown);
-
-            function questionDropdown() {
-                $(this).toggleClass('active');
-                $(this).find('.fa-chevron-down').toggleClass('rotated');
-            }
 
             //bulk order display
             $(".open-bulk").click(function (e) {

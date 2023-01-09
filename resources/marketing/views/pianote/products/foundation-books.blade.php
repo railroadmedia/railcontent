@@ -504,41 +504,35 @@
         <div class="container mx-auto">
             <h1 class="font-bold mb-8 sm:mb-10 leading-tight text-lg sm:text-2xl md:text-3xl lg:text-4xl"><strong>Still have questions?</strong></h1>
             <div class="px-6 mx-auto max-w-4xl">
-                @include('pianote.products._week-breakdown-2', [
-                "navyBorder" => true,
-                "question" => true,
+                @include('_partials.components.question-dropdown', [
+                "num" => '?',
                 "title" => "Are these books for me?",
-                "description" => "Yes! Ok, we can’t say for sure. But if you’ve made it this far we’re going to assume you want to learn the piano, and play it beautifully. That’s what these books are designed to help you do."
+                "desc" => "Yes! Ok, we can’t say for sure. But if you’ve made it this far we’re going to assume you want to learn the piano, and play it beautifully. That’s what these books are designed to help you do."
                 ])
-                @include('pianote.products._week-breakdown-2', [
-                "navyBorder" => true,
-                "question" => true,
+                @include('_partials.components.question-dropdown', [
+                "num" => '?',
                 "title" => "Do I need to be a Pianote member to buy the books?",
-                "description" => "No! You can buy and learn from these books on their own. BUT they were designed to work hand-in-hand with a Pianote membership."
+                "desc" => "No! You can buy and learn from these books on their own. BUT they were designed to work hand-in-hand with a Pianote membership."
                 ])
-                @include('pianote.products._week-breakdown-2', [
-                "navyBorder" => true,
-                "question" => true,
+                @include('_partials.components.question-dropdown', [
+                "num" => '?',
                 "title" => "How long will it take me to go through all 10 books?",
-                "description" => "How long is a piece of string? Joking aside, that really depends on how much practice and time you’re able to put in!<br>But if you were able to commit to daily practice and took advantage of all the extra resources you could reasonably expect to go through all books within a year. That means you’re only 12 months (or less) away from playing beautifully the way that you want.<br>Learning the piano is a lifelong process, so you’ll probably want to return to these books, again and again, to keep your skills sharp!<br>"
+                "desc" => "How long is a piece of string? Joking aside, that really depends on how much practice and time you’re able to put in!<br>But if you were able to commit to daily practice and took advantage of all the extra resources you could reasonably expect to go through all books within a year. That means you’re only 12 months (or less) away from playing beautifully the way that you want.<br>Learning the piano is a lifelong process, so you’ll probably want to return to these books, again and again, to keep your skills sharp!<br>"
                 ])
-                @include('pianote.products._week-breakdown-2', [
-                "navyBorder" => true,
-                "question" => true,
+                @include('_partials.components.question-dropdown', [
+                "num" => '?',
                 "title" => "Are the books sold separately or together?",
-                "description" => "These books are presented in a beautiful box-set. The curriculum is designed to be followed from the first page to the last, so all 10 books are included."
+                "desc" => "These books are presented in a beautiful box-set. The curriculum is designed to be followed from the first page to the last, so all 10 books are included."
                 ])
-                @include('pianote.products._week-breakdown-2', [
-                "navyBorder" => true,
-                "question" => true,
+                @include('_partials.components.question-dropdown', [
+                "num" => '?',
                 "title" => "How much does shipping cost?",
-                "description" => "Shipping rates will vary depending on the shipping location. Check to see your location:<br>US - $9<br>Canada, UK, Germany $15<br>Everywhere else $40<br>Unfortunately, international shipping is much higher than we’d like and there’s no quick way for us to lower the cost. We’ll be looking at finding local distribution centers in the future"
+                "desc" => "Shipping rates will vary depending on the shipping location. Check to see your location:<br>US - $9<br>Canada, UK, Germany $15<br>Everywhere else $40<br>Unfortunately, international shipping is much higher than we’d like and there’s no quick way for us to lower the cost. We’ll be looking at finding local distribution centers in the future"
                 ])
-                @include('pianote.products._week-breakdown-2', [
-                "navyBorder" => true,
-                "question" => true,
+                @include('_partials.components.question-dropdown', [
+                "num" => '?',
                 "title" => "How long will it take for the books to arrive?",
-                "description" => "Here are the general shipping guidelines:<br>US 2-10 Business Days<br>Everywhere Else: 7-20 Business Days"
+                "desc" => "Here are the general shipping guidelines:<br>US 2-10 Business Days<br>Everywhere Else: 7-20 Business Days"
                 ])
             </div>
         </div>
@@ -584,11 +578,6 @@
                 e.preventDefault();
                 updateIndex($toggleButton.index($(this)));
                 current = $toggleButton.index($(this));
-            });
-
-            $('.dropdown').on('click', function(){
-                $(this).toggleClass('active');
-                $(this).find('i').toggleClass('rotate-180');
             });
         });
 

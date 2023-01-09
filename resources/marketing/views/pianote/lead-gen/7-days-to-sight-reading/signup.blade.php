@@ -498,20 +498,20 @@
         <div class="max-w-4xl mx-auto px-4 lg:px-0">
             <h3 class="font-extrabold text-center mb-6">Still Have Questions?</h3>
             <div class="dropdowns">
-                @include('pianote.products._week-breakdown-2', [
-                    "question" => true,
+                @include('_partials.components.question-dropdown', [
+                    "num" => "?",
                     "title" => "What happens if I miss a day?",
-                    "description" => "That’s totally ok! Life happens. And while this is designed to be completed in a week, the lessons are yours for life. Simply pick up where you left off -- when it suits you."
+                    "desc" => "That’s totally ok! Life happens. And while this is designed to be completed in a week, the lessons are yours for life. Simply pick up where you left off -- when it suits you."
                 ])
-                @include('pianote.products._week-breakdown-2', [
-                    "question" => true,
+                @include('_partials.components.question-dropdown', [
+                    "num" => "?",
                     "title" => "How long do I need to practice each day?",
-                    "description" => "Just 15 minutes is all you’ll need to notice an improvement. Of course, you can practice a bit more if you like, but 15 minutes should be enough. And we all have 15 minutes, right?"
+                    "desc" => "Just 15 minutes is all you’ll need to notice an improvement. Of course, you can practice a bit more if you like, but 15 minutes should be enough. And we all have 15 minutes, right?"
                 ])
-                @include('pianote.products._week-breakdown-2', [
-                    "question" => true,
+                @include('_partials.components.question-dropdown', [
+                    "num" => "?",
                     "title" => "Why do you need my email?",
-                    "description" => 'We need to know where to send your lessons! Also, we’re (not so) secretly hoping to start a relationship with you. It’s our way of saying, “Hey, we make awesome piano lessons, and we’d love to show you”.'
+                    "desc" => 'We need to know where to send your lessons! Also, we’re (not so) secretly hoping to start a relationship with you. It’s our way of saying, “Hey, we make awesome piano lessons, and we’d love to show you”.'
                 ])
             </div>
             <div class="text-center" style="color:#2A2F34;">
@@ -547,11 +547,6 @@
     <script>
         $(document).ready(function () {
             $(document).foundation();
-
-            $('.dropdown').on('click', function(){
-                $(this).toggleClass('active');
-                $(this).find('i').toggleClass('rotate-180');
-            });
 
             $('.flip-div').click(function (e) {
                 $(this).toggleClass('flipped');
