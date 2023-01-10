@@ -11,7 +11,7 @@
     <meta property="og:image" content="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/giveaway/eikon/share_image.jpg" style="display: none;">
 
     @include('_partials.layout._tailwindcdn')
-    <link rel="stylesheet" href="{{ asset('/marketing/css/singeo/tailwind-helpers.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}">
     <link href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/singeo/lead-gen.css') }}">
 

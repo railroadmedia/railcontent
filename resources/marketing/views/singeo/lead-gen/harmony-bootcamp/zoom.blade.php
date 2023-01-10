@@ -9,7 +9,7 @@
     <meta property="og:url" content="https://www.singeo.com/beginner-vocal-bootcamp/">
 
     @include('_partials.layout._tailwindcdn')
-    <link href="{{ asset('/marketing/css/singeo/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/singeo/lead-gen.css') }}">
 

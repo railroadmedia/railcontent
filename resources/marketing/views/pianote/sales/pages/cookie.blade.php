@@ -8,7 +8,7 @@
     <meta property="og:url" content="https://www.pianote.com/cookie/">
 
     @include('_partials.layout._tailwindcdn')
-    <link href="{{ asset('/marketing/css/pianote/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
 
     <style>

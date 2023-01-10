@@ -12,7 +12,7 @@
     <?php \App\Analytics\Tracker::trackProductImpression('quietkick'); ?>
 
     @include('_partials.layout._tailwindcdn')
-    <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
     <style>

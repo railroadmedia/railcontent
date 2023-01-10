@@ -14,7 +14,7 @@
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}">
-    <link href="{{ asset('/marketing/css/pianote/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/sales.css') }}">
     <style>
         .option-buttons.active {

@@ -12,7 +12,7 @@
     <meta property="og:image" content="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://pianote.s3.amazonaws.com/sales/jesus-molina/fb_share_image.jpg" style="display: none;">
 
     @include('_partials.layout._tailwindcdn')
-    <link href="{{ asset('/marketing/css/pianote/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/sales.css') }}">
     <style>

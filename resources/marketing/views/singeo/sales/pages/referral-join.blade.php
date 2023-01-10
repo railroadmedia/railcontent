@@ -11,7 +11,7 @@
     <meta property="og:url" content="https://www.singeo.com/{{ Request::path() }}">
     <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/sales/2021/fb-share-image.jpg" style="display: none;">
 
-    <link href="{{ asset('/marketing/css/singeo/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}" rel="stylesheet">
 
     <style>

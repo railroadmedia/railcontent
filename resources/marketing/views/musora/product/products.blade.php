@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/css/drumeo/navigation-sales.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/css/shop.css') }}">
-    <script src="https://kit.fontawesome.com/cf2f4c6c71.js" crossorigin="anonymous"></script>
 
     @parent
 @stop

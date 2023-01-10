@@ -4,8 +4,8 @@
     @yield('meta')
     <meta property="fb:app_id" content="1772693566314871" />
     @include('_partials.layout._tailwindcdn')
-    <link rel="preload" href="{{ asset('/marketing/css/pianote/tailwind-helpers.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="{{ asset('/marketing/css/pianote/tailwind-helpers.css') }}"></noscript>
+    <link rel="preload" href="{{ asset('/marketing/css/tailwind-helpers.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}"></noscript>
     <link rel="preload" href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}"></noscript>
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/lead-gen.css') }}">
