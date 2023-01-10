@@ -12,7 +12,7 @@
 
     @include('_partials.layout._fonts')
 
-    <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/assets/members-area/css/gulp/navigation-sales.css') }}" rel="stylesheet">
     <style>
         h1 strong,
@@ -184,7 +184,7 @@
     @include("singeo.sales.partials._footer")
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="{{ asset('/assets/members-area/js/gulp/navigation-sales.js') }}"></script>
+    <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
     <script>
         $(document).ready(function () {

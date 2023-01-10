@@ -46,10 +46,10 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.2.5/polyfill.js"></script>
 
-    <script src="{{ asset('marketing/js/guitareo/manifest.js') }}"></script>
-    <script src="{{ asset('marketing/js/guitareo/vendor.js') }}"></script>
-    <script src="{{ asset('marketing/js/guitareo/cart-sidebar.js') }}"></script>
-    <script src="{{ asset('marketing/js/guitareo/app.js') }}"></script>
+    <script src="{{ asset('/marketing/js/guitareo/manifest.js') }}"></script>
+    <script src="{{ asset('/marketing/js/guitareo/vendor.js') }}"></script>
+    <script src="{{ asset('/marketing/js/guitareo/cart-sidebar.js') }}"></script>
+    <script src="{{ asset('/marketing/js/guitareo/app.js') }}"></script>
 
     {{-- Platform --}}
     <script src="{{ mix('/platform/js/manifest.js') }}"></script>

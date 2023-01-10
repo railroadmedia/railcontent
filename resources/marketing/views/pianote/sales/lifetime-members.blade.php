@@ -10,7 +10,7 @@
     <meta property="og:image" content="https://pianote.s3.amazonaws.com/sales/promos/november/lifetime-fb-share-image-1.jpg" style="display: none;">
 
     @include('_partials.layout._tailwindcdn')
-    <link href="{{ asset('/marketing/css/pianote/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/sales.css') }}">
     <link href="{{ asset('/marketing/css/animate.css') }}" rel="stylesheet">

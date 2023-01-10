@@ -8,7 +8,7 @@
     @include('_partials.layout.favicons.guitareo-favicons')
     @include('_partials.layout._fonts')
     @include('_partials.layout._tailwindcdn')
-    <link href="{{ asset('/marketing/css/guitareo/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <style>
         body {
             text-align:center;

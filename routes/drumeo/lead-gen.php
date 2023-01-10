@@ -228,5 +228,6 @@ Route::domain('{drumeoDomain}')->group(function () {
     Route::get('/gift-guide/', [LeadGenController::class, 'giftGuide']);
     Route::get('/new-years-gift-guide/', [LeadGenController::class, 'newYearGift']);
     Route::get('/teach-a-beginner/lessons/', [LeadGenController::class, 'teachBeginner']);
+    Route::get('/weekly-email/', [LeadGenController::class, 'weeklyEmail']);
     Route::get('/weeklyemail/', [LeadGenController::class, 'weeklyMail']);
 });

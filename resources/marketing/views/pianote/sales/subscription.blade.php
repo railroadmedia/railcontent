@@ -18,7 +18,7 @@
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}">
-    <link href="{{ asset('/marketing/css/pianote/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/sales.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
 

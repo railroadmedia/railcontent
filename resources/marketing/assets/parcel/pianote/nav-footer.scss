@@ -1,4 +1,4 @@
-@import "./_variables";
+@import "../_variables";
 
 [placeholder]:focus::-webkit-input-placeholder {
     color: transparent;
@@ -169,7 +169,7 @@ a {
         @include tablet {
             padding: 15px 0;
         }
-        @include desktop {
+        @include desktopOld {
             padding: 15px;
         }
 
@@ -191,7 +191,7 @@ a {
                 font-size: 16px;
                 margin-left: 15px;
             }
-            @include desktop {
+            @include desktopOld {
                 margin-left: 35px;
             }
 
@@ -495,7 +495,7 @@ a {
     @include tablet {
         padding: 20px;
     }
-    @include desktop {
+    @include desktopOld {
         padding: 27px;
     }
 
@@ -525,7 +525,7 @@ a {
         @include tablet {
             flex-direction: row;
         }
-        @include desktop {
+        @include desktopOld {
             max-width: 860px;
         }
     }
@@ -537,7 +537,7 @@ a {
         @include tablet {
             padding-right: 15px;
         }
-        @include desktop {
+        @include desktopOld {
             line-height: 1.5em;
             padding-right: 20px;
         }
@@ -572,7 +572,7 @@ a {
             margin: 0 auto 2px;
             padding: 15px 20px;
         }
-        @include desktop {
+        @include desktopOld {
             margin: 0 auto;
             padding: 15px 25px;
         }
@@ -619,7 +619,7 @@ a {
             padding: 0 7px;
             margin-bottom: 30px;
         }
-        @include desktop {
+        @include desktopOld {
             padding: 0 40px;
         }
 
@@ -628,19 +628,19 @@ a {
                 width: 30%;
                 margin: 0 auto;
             }
-            @include desktop {
+            @include desktopOld {
                 width: 340px;
             }
 
             .hide-for-desktop {
-                @include desktop {
+                @include desktopOld {
                     display: none;
                 }
             }
 
             .show-for-desktop {
                 display: none;
-                @include desktop {
+                @include desktopOld {
                     display: inline;
                 }
             }
@@ -649,19 +649,19 @@ a {
                 float: left;
                 width: 100%;
                 padding: 0;
-                @include desktop {
+                @include desktopOld {
                     padding: 0 5px 0 0;
 
                 }
 
                 &.col-sm-7 {
-                    @include desktop {
+                    @include desktopOld {
                         width: 58.33%;
                     }
                 }
 
                 &.col-sm-5 {
-                    @include desktop {
+                    @include desktopOld {
                         width: 41.66%;
                     }
                 }
@@ -689,7 +689,7 @@ a {
                     text-align: left;
                     padding: 7px 20px;
                     margin: 0 auto 7px;
-                    @include desktop {
+                    @include desktopOld {
                         margin: 0 auto;
                     }
 

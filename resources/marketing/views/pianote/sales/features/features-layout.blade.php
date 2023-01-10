@@ -2,7 +2,7 @@
 
 @section('page-styles')
     <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/css/pianote/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/pianote/sales.css') }}" rel="stylesheet">
     <style>
         .splide__arrow svg {
