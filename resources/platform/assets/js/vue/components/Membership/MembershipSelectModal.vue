@@ -86,10 +86,14 @@ const handleSelectedInterval = (interval) => {
             });
             emit('onCloseModal');
         })
-        .catch(() => {
+        .catch((error) => {
+            let message = "There was an unexpected error, try again later or contact support."
+            if (error?.response?.data?.exception?.includes("UserFriendlyException")) {
+                message = error.response.data.message;
+            }
             window.shownotification({
                 icon: 'error',
-                text: 'There was an error updating your suscription, try again later or contact support.'
+                text: message
             })
         })
         .finally(() => {
