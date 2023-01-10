@@ -14,7 +14,7 @@
 @section('styles')
     <link href="{{ asset('/marketing/css/guitareo/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation-float.min.css" rel="stylesheet">
-    @include('_partials.layout._tailwindcdn')
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
 
     <style>
         body {
@@ -723,21 +723,25 @@
         <div class="row">
             <h1 class="columns upper">Still Have Questions?</h1>
             <div class="columns">
-                @include('guitareo.products._question-dropdown-alt', [
-                "question" => "Do these lessons work for electric and acoustic guitars?",
-                "answer" => "Yes, the lessons will work on either. Since you’ll be developing your guitar technique, you’ll be gaining skills that will apply to both!"
+                @include('_partials.components.question-dropdown', [
+                "num" => "?",
+                "title" => "Do these lessons work for electric and acoustic guitars?",
+                "desc" => "Yes, the lessons will work on either. Since you’ll be developing your guitar technique, you’ll be gaining skills that will apply to both!"
                 ])
-                @include('guitareo.products._question-dropdown-alt', [
-                "question" => "How much time per week will this course require?",
-                "answer" => "For time invested, obviously the more time you practice the faster you’ll get better. But we recommend investing at least 2-3 hours per week to truly benefit from this course."
+                @include('_partials.components.question-dropdown', [
+                "num" => "?",
+                "title" => "How much time per week will this course require?",
+                "desc" => "For time invested, obviously the more time you practice the faster you’ll get better. But we recommend investing at least 2-3 hours per week to truly benefit from this course."
                 ])
-                @include('guitareo.products._question-dropdown-alt', [
-                "question" => "What if I can’t follow the lessons EVERY week?",
-                "answer" => "You’ll get 26 weekly lessons and exercises. And while they’re intended to be completed week-after-week, we know that everybody’s schedules are different - so we’ve included progress-tracking so you never lose your spot. If you need to miss a week, that’s fine! You might need to review the previous lessons a bit before continuing again, but you’ll never lose your spot and once you’ve registered, you have unlimited access to the entire course for life."
+                @include('_partials.components.question-dropdown', [
+                "num" => "?",
+                "title" => "What if I can’t follow the lessons EVERY week?",
+                "desc" => "You’ll get 26 weekly lessons and exercises. And while they’re intended to be completed week-after-week, we know that everybody’s schedules are different - so we’ve included progress-tracking so you never lose your spot. If you need to miss a week, that’s fine! You might need to review the previous lessons a bit before continuing again, but you’ll never lose your spot and once you’ve registered, you have unlimited access to the entire course for life."
                 ])
-                @include('guitareo.products._question-dropdown-alt', [
-                "question" => "Will I still have full access to the course after 26 weeks?",
-                "answer" => "Yes! Even though it’s a week-by-week course, you’ll have LIFETIME online access to everything inside Guitar Technique Made Easy, so you can review the materials or re-watch the lessons, anytime."
+                @include('_partials.components.question-dropdown', [
+                "num" => "?",
+                "title" => "Will I still have full access to the course after 26 weeks?",
+                "desc" => "Yes! Even though it’s a week-by-week course, you’ll have LIFETIME online access to everything inside Guitar Technique Made Easy, so you can review the materials or re-watch the lessons, anytime."
                 ])
             </div>
         </div>

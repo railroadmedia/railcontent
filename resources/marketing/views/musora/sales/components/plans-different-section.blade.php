@@ -16,10 +16,10 @@
                 <p class="leading-tight text-xs sm:text-sm">10-level step-by-step curriculum</p>
             </div>
             <div class="w-1/4">
-                <i class="fas fa-check text-2xl sm:text-3xl text-{{ $theme }}"></i>
+                <i class="fas fa-check text-2xl sm:text-3xl text-{{ $brand }}"></i>
             </div>
             <div class="w-1/4">
-                <i class="fas fa-check text-2xl sm:text-3xl text-{{ $theme }}"></i>
+                <i class="fas fa-check text-2xl sm:text-3xl text-{{ $brand }}"></i>
             </div>
         </div>
         <div class="flex items-center rounded-xl py-4 px-3 sm:px-6">
@@ -28,10 +28,10 @@
                 <p class="leading-tight text-xs sm:text-sm">{{ $secondPoint }}</p>
             </div>
             <div class="w-1/4">
-                <i class="fas fa-check text-2xl sm:text-3xl text-{{ $theme }}"></i>
+                <i class="fas fa-check text-2xl sm:text-3xl text-{{ $brand }}"></i>
             </div>
             <div class="w-1/4">
-                <i class="fas fa-check text-2xl sm:text-3xl text-{{ $theme }}"></i>
+                <i class="fas fa-check text-2xl sm:text-3xl text-{{ $brand }}"></i>
             </div>
         </div>
         <div class="flex items-center rounded-xl py-4 px-3 sm:px-6" style="background-color:#f5f8fc;">
@@ -40,10 +40,10 @@
                 <p class="leading-tight text-xs sm:text-sm">{{ $thirdPoint }}</p>
             </div>
             <div class="w-1/4">
-                <i class="fas fa-check text-2xl sm:text-3xl text-{{ $theme }}"></i>
+                <i class="fas fa-check text-2xl sm:text-3xl text-{{ $brand }}"></i>
             </div>
             <div class="w-1/4">
-                <i class="fas fa-check text-2xl sm:text-3xl text-{{ $theme }}"></i>
+                <i class="fas fa-check text-2xl sm:text-3xl text-{{ $brand }}"></i>
             </div>
         </div>
         <div class="flex items-center rounded-xl py-4 px-3 sm:px-6">
@@ -52,10 +52,10 @@
                 <p class="leading-tight text-xs sm:text-sm">Student plans, weekly live Q&As, and unlimited personal support</p>
             </div>
             <div class="w-1/4">
-                <i class="fas fa-check text-2xl sm:text-3xl text-{{ $theme }}"></i>
+                <i class="fas fa-check text-2xl sm:text-3xl text-{{ $brand }}"></i>
             </div>
             <div class="w-1/4">
-                <i class="fas fa-check text-2xl sm:text-3xl text-{{ $theme }}"></i>
+                <i class="fas fa-check text-2xl sm:text-3xl text-{{ $brand }}"></i>
             </div>
         </div>
         <div class="flex items-center rounded-xl py-4 px-3 sm:px-6" style="background-color:#f5f8fc;">
@@ -64,7 +64,7 @@
                 <p class="leading-tight text-xs sm:text-sm">{{ $fifthPoint }}</p>
             </div>
             <div class="w-1/4">
-                <i class="fas fa-check text-2xl sm:text-3xl text-{{ $theme }}"></i>
+                <i class="fas fa-check text-2xl sm:text-3xl text-{{ $brand }}"></i>
             </div>
             <div class="w-1/4"></div>
         </div>
