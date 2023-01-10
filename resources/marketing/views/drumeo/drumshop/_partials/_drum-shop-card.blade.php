@@ -100,7 +100,7 @@
                                 @if(!empty($promoCode)) data-promocode="{{ $promoCode }}" @endif
                                 @if(!empty($lockedCart)) data-locked-cart="{{ $lockedCart }}" @endif
                             >
-                                <button class="join {{ $brand === 'singeo' || $brand === 'guitareo' ? 'bg-'.$brand : '' }}">
+                                <button class="join {{ $brand !== 'drumeo' ? 'bg-'.$brand : '' }}">
                                     <span class="initial"><i class="fas fa-cart-plus"></i> Add To Cart</span>
                                     <span class="loading"><i class="fad fa-spinner-third fa-spin"></i> Adding to cart...</span>
                                 </button>
@@ -117,7 +117,7 @@
                         </a>
                     @endif
                     @if(!empty($itemURL))
-                        <a href="{{ ($itemURL === '/drumshop/' || $itemURL === '/shop/') ? '/' : $itemURL }}" class="join outline bg-{{ $brand === 'singeo' || $brand === 'guitareo' ? 'black' : $brand}} transition duration-100" @if(!empty($externalURL)) target="_blank" @endif>
+                        <a href="{{ ($itemURL === '/drumshop/' || $itemURL === '/shop/') ? '/' : $itemURL }}" class="join outline bg-{{ $brand !== 'drumeo' ? 'black' : $brand}} transition duration-100" @if(!empty($externalURL)) target="_blank" @endif>
                             @if(!empty($buttonText)) {!!  $buttonText  !!} @elseif($itemURL === '/drumshop/') See the deal  @else View Product
                             <i class="fas fa-arrow-right"></i> @endif</a>
                     @endif
