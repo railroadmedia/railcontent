@@ -15,3 +15,5 @@ A user will not have the option to change their membership if they have a mobile
 
 ### 2. A lifetime user can choose to add on a songs subscription.
 They will be charged the full subscription cost.
+
+
