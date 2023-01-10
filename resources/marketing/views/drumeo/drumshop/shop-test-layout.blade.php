@@ -9,7 +9,7 @@
     <meta property="og:url" content="https://www.drumeo.com/drumshop/">
 @endsection
 
-@section('body-data')
+@section('x-data')
         filter: '{{ $category !== 'drumshop' ? $category : 'all' }}',
 @endsection
 
@@ -19,7 +19,7 @@
     ])
 @endsection
 
-@section('layout-body')
+@section('body')
     <header class="drum-shop-header" style="background-image:url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/header-background.jpg);">
         <div class="container mx-auto relative z-10">
             <div class="px-2 md:px-3">

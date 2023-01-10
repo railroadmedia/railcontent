@@ -9,26 +9,13 @@
     <meta property="og:url" content="https://www.singeo.com/shop/">
 @endsection
 
-@section('body-data')
-    x-data="{
-        shippingModal: false
-    }"
-@endsection
-
 @section('layout-header')
     @include("singeo.sales.partials._nav", [
         "cartVersion" => true,
     ])
 @endsection
 
-@section('layout-body')
-    <div class="shipping-delay">
-        <div class="delay-bar text-center">
-            <div class="container mx-auto">
-                <p class="shipping-trigger hover:underline" @click="shippingModal = true;"><a class="shipping-trigger"><i class="fas fa-truck"></i> <strong>FREE SHIPPING OVER $100</strong></a> &nbsp; &nbsp;
-            </div>
-        </div>
-    </div>
+@section('body')
     <header class="drum-shop-header" style="background-color:#080e1e;background-image:url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://singeo.s3.amazonaws.com/products/shop-header.jpg);">
         <div class="container mx-auto relative z-10">
             <div class="px-2 md:px-3">
@@ -168,19 +155,6 @@
             </ul>
         </section>
     </div>
-
-    @component('_partials.components.modal', ['name' => 'shippingModal'])
-        @slot('content')
-            <div class="max-w-2xl mx-auto">
-                <div class="info-wrap shipping-info bg-white py-5 px-4 md:px-10 rounded-xl">
-                    <p>
-                        <strong class="font-extrabold">Free Shipping Over $100</strong> <br>
-                        Spend over $100 and you'll unlock free worldwide shipping on any order.
-                    </p>
-                </div>
-            </div>
-        @endslot
-    @endcomponent
 @endsection
 
 @section('layout-footer')
