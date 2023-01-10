@@ -208,7 +208,7 @@
                 {{--<img class="logo" src="https://drumeo-assets.s3.amazonaws.com/promos/november/recital-logo.svg">--}}
                 <p class="leading-none">
                     <strong>Share your progress with the community!</strong> <br>
-                        Submission deadline <strong class="tw-text-guitareo">June 15th, 2022.</strong></p>
+                        Submission deadline <strong class="text-guitareo">June 15th, 2022.</strong></p>
             </div>
         </div>
     </div>

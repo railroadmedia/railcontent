@@ -791,7 +791,7 @@
 
             @foreach($methodLevels as $methodLevel)
                 <div class="dropdown text-center border-2 border-gray-500 rounded-md overflow-hidden flex cursor-pointer mb-3 select-none @if(!empty($methodLevel['defaultOpen'])) active @endif
-                @if(!empty($methodLevel['navyBorder'])) border-navy-600 @endif">
+                @if(!empty($methodLevel['navyBorder'])) border-sky-900 @endif">
                     <div class="bg-singeo py-5 px-2 sm:px-3 ">
                         <h5 class="leading-tight whitespace-nowrap inline-flex items-center">
                             <span class="text-xs hidden md:inline mr-1"> LEVEL</span>
@@ -1248,7 +1248,7 @@
 
             @foreach($questionLevels as $questionLevel)
                 <div class="dropdown text-center border-2 border-gray-500 rounded-md overflow-hidden flex cursor-pointer mb-3 select-none @if(!empty($questionLevel['defaultOpen'])) active @endif
-                @if(!empty($questionLevel['navyBorder'])) border-navy-600 @endif">
+                @if(!empty($questionLevel['navyBorder'])) border-sky-900 @endif">
                     <div class="bg-singeo py-5 px-2 sm:px-3 ">
                         <h5 class="leading-tight whitespace-nowrap inline-flex items-center">
                             <strong><i class="fas fa-question"></i></strong>

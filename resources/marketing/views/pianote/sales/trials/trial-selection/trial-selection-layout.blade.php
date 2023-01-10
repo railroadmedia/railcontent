@@ -78,7 +78,7 @@
                             Most Popular
                         @endif
                     </p>
-                    <a class="card-wrap text-pred"
+                    <a class="card-wrap text-pianote"
                             @hasSection('annual-url')
                                 @yield('annual-url')
                             @else

@@ -510,7 +510,7 @@
                             @endphp
                             @foreach($levels as $level)
                                 <div class="dropdown text-center border-2 border-gray-500 rounded-md overflow-hidden flex cursor-pointer mb-3 select-none @if(!empty($level['defaultOpen'])) active @endif
-                                @if(!empty($level['navyBorder'])) border-navy-600 @endif">
+                                @if(!empty($level['navyBorder'])) border-sky-900 @endif">
                                     <div class="bg-pianote py-5 px-2 sm:px-3 ">
                                         <h5 class="leading-tight whitespace-nowrap inline-flex items-center">
                                             <span class="text-xs hidden md:inline mr-1"> LEVEL</span>
@@ -582,7 +582,7 @@
                             @endphp
                             @foreach($classicalLevels as $level)
                                 <div class="dropdown text-center border-2 border-gray-500 rounded-md overflow-hidden flex cursor-pointer mb-3 select-none @if(!empty($level['defaultOpen'])) active @endif
-                                @if(!empty($level['navyBorder'])) border-navy-600 @endif">
+                                @if(!empty($level['navyBorder'])) border-sky-900 @endif">
                                     <div class="py-5 px-2 sm:px-3 " style="background-color:#ce9432;">
                                         <h5 class="leading-tight whitespace-nowrap inline-flex items-center">
                                             <span class="text-xs hidden md:inline mr-1"> LEVEL</span>

@@ -192,7 +192,6 @@
         <div class="container relative z-10 mx-auto max-w-5xl md:mt-0">
             <div class="flex flex-wrap">
                 <div class="w-full md:w-5/12 lg:w-1/2 pt-48 sm:pt-96 sm:order-1 relative">
-                    {{--<i class="fas fa-play play-button absolute left-1/2 top-3/4 transform translate--1/2 autoplay-video" data-open="trailer"></i>--}}
                 </div>
                 <div class="w-full md:w-7/12 lg:w-1/2 sm:text-left">
                     <img class="h-32 md:h-28 lg:h-40 lazyload" data-src="https://cdn.musora.com/image/fetch/w_650,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/giveaway/eikon/logo_giveaway.png" alt="title image">

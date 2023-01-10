@@ -44,11 +44,11 @@
                 padding: 0 20px;
             }
         }
-        .dropdowns .dropdown .bg-pred {
+        .dropdowns .dropdown .bg-pianote {
             min-width: 32px;
         }
         @media (min-width: 40em) {
-            .dropdowns .dropdown .bg-pred {
+            .dropdowns .dropdown .bg-pianote {
                 min-width: 83px;
             }
         }
