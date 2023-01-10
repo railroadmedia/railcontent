@@ -38,7 +38,7 @@ class ShopController extends BaseController
             'hats' => $hats,
             'shirts' => $shirts,
             'hoodies' => $hoodies,
-            'brand' => 'pianote',
+            'theme' => 'pianote',
             'category' => $request->category
         ]);
     }
@@ -47,6 +47,6 @@ class ShopController extends BaseController
     {
         $product = Product::where('slug', 'Pianote-'.$slug)->firstOrFail();
 
-        return view('pianote.shop.product-layout', [ 'product' => $product, 'brand' => 'pianote' ]);
+        return view('pianote.shop.product-layout', [ 'product' => $product, 'theme' => 'pianote' ]);
     }
 }

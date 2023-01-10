@@ -48,17 +48,17 @@ class SalesController extends BaseController
 
     public function songs()
     {
-        return view('pianote.sales.features.songs', [ 'brand' => 'pianote', 'page' => 'songs']);
+        return view('pianote.sales.features.songs', [ 'theme' => 'pianote', 'page' => 'songs']);
     }
 
     public function method()
     {
-        return view('pianote.sales.features.method', [ 'brand' => 'pianote', 'page' => 'method']);
+        return view('pianote.sales.features.method', [ 'theme' => 'pianote', 'page' => 'method']);
     }
 
     public function coaches()
     {
-        return view('pianote.sales.features.coaches', [ 'brand' => 'pianote', 'page' => 'coaches']);
+        return view('pianote.sales.features.coaches', [ 'theme' => 'pianote', 'page' => 'coaches']);
     }
 
     public function chooseyourtrialmonth()
@@ -142,15 +142,15 @@ class SalesController extends BaseController
 
     public function home()
     {
-        return view('pianote.sales.subscription', ['brand' => 'pianote']);
+        return view('pianote.sales.subscription', ['theme' => 'pianote']);
     }
     public function promo()
     {
-        return view('pianote.sales.subscription', ['brand' => 'pianote', 'promoVersion' => 'true']);
+        return view('pianote.sales.subscription', ['theme' => 'pianote', 'promoVersion' => 'true']);
     }
     public function choosePlan()
     {
-        return view('pianote.sales.choose-plan', ['brand' => 'pianote']);
+        return view('pianote.sales.choose-plan', ['theme' => 'pianote']);
     }
 
     public function jesusMolina()

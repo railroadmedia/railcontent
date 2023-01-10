@@ -1,4 +1,4 @@
-@extends($brand.'._partials.layout')
+@extends($theme.'._partials.layout')
 
 @section('head-includes')
     <title>{{ $product->name }}</title>
@@ -58,7 +58,7 @@
 
                     <p class="mb-4">
                         <strong>Say hello to your free bonuses:</strong><br>
-                        <em style="opacity: 0.5;">All digital bonuses are added to your account instantly with your membership to {{ $brand }}, and they’re yours forever.</em>
+                        <em style="opacity: 0.5;">All digital bonuses are added to your account instantly with your membership to {{ $theme }}, and they’re yours forever.</em>
                     </p>
 
                     @include('musora.product.partials.bonuses')
@@ -99,16 +99,16 @@
     <script>
         $(document).ready(function(){
 
-            $('.slick-current img').addClass('border-{{$brand}}');
+            $('.slick-current img').addClass('border-{{$theme}}');
             $('.slick-current img').removeClass('border-white');
 
             $(".slick-slide").on('click',function(){
                 let slides = $('.slide-img', '.slick-slide');
                 slides.addClass('border-white')
-                slides.removeClass('border-{{$brand}}');
+                slides.removeClass('border-{{$theme}}');
 
                 $('img', this).removeClass('border-white');
-                $('img', this).addClass('border-{{$brand}}');
+                $('img', this).addClass('border-{{$theme}}');
             })
         })
     </script>
