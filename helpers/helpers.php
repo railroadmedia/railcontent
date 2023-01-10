@@ -10,7 +10,7 @@ if (!function_exists('current_user_has_recent_order')) {
             return DB::connection(config('ecommerce.database_connection_name'))
                 ->table('ecommerce_orders')
                 ->where('user_id', user()->id)
-                ->where('created_at', '>', \Carbon\Carbon::now()->subMinute()->toDateTimeString())
+                ->where('created_at', '>', \Carbon\Carbon::now()->subMinutes(1)->toDateTimeString())
                 ->exists();
         }
 

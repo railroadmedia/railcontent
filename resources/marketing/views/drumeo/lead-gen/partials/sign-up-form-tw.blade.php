@@ -18,7 +18,7 @@
     <div class="infusion-submit w-full px-2 md:px-3 float-left {{ (!empty($stacked) && $stacked) ? '' : 'md:w-5/12' }}">
         @if(!empty($submitArrows))
             <img class="form-arrow arrow-left" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/arrow-right-white.png" alt="arrow-right">
-            <img class="form-arrow arrow-right" sSrc="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/arrow-left-white.png" alt="arrow-left">
+            <img class="form-arrow arrow-right" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/arrow-left-white.png" alt="arrow-left">
         @endif
         <button class="submit @if(!empty($outline)) outline @endif" type="submit">
             <span class="pre-add">@if(!empty($buttonText)) {!!  $buttonText  !!} @else Get Started @endif <i class="fad fa-paper-plane"></i></span>
