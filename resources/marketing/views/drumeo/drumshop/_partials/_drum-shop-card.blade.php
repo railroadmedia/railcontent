@@ -117,7 +117,7 @@
                         </a>
                     @endif
                     @if(!empty($itemURL))
-                        <a href="{{ ($itemURL === '/drumshop/' || $itemURL === '/shop/') ? '/' : $itemURL }}" class="join outline bg-{{ $brand !== 'drumeo' ? 'black' : $brand}} transition duration-100" @if(!empty($externalURL)) target="_blank" @endif>
+                        <a href="{{ ($itemURL === '/drumshop/' || $itemURL === '/shop/') ? '/' : $itemURL }}" class="join mb-0 bg-{{ $brand !== 'drumeo' ? 'black' : $brand}} transition duration-100" @if(!empty($externalURL)) target="_blank" @endif>
                             @if(!empty($buttonText)) {!!  $buttonText  !!} @elseif($itemURL === '/drumshop/') See the deal  @else View Product
                             <i class="fas fa-arrow-right"></i> @endif</a>
                     @endif
