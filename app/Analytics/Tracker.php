@@ -22,7 +22,7 @@ use Railroad\Railanalytics\Tracker as TrackerBase;
  * @method static trackTransaction(array $products, $transactionId, $revenue, $tax, $shipping, $currency = 'USD')
  * @method static string trackLead($value = null, $currency = 'USD')
  * @method static trackRegistration()
- * @method static queue(callable $function)
+ * @method static queue($brand, callable $function)
  */
 class Tracker
 {
