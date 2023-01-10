@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import MembershipSelectModal from './MembershipSelectModal.vue';
 
 const props = defineProps({
@@ -19,6 +19,11 @@ const props = defineProps({
         type: Boolean,
         default: false,
     },
+});
+
+onMounted(() => {
+    console.log('mounted')
+    console.log(props.currentTier)
 });
 
 const isModalOpen = ref(false);

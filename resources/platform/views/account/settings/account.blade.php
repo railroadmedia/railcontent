@@ -368,8 +368,8 @@
                         {{-- Song Membership Banner --}}
                         @if($showSongsUpgradeButton)
                             <membership-update
-                                :currentTier="{{ json_encode($currentTier) }}"
-                                :upgradeCost="{{ json_encode($upgradeCost) }}"
+                                :current-tier="{{ json_encode($currentTier) }}"
+                                :upgrade-cost="{{ json_encode($upgradeCost) }}"
                                 :is-lifetime-member="{{ json_encode(boolval($isLifetime)) }}"
                             >
                             </membership-update>
