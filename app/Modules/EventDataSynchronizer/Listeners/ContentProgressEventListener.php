@@ -507,11 +507,17 @@ class ContentProgressEventListener
             ]);
         }
 
+        $pointsPerBrand = $this->userPointsService->countUserPointsPerBrand(
+            $userContentsProgressReset->userId
+        );
+        foreach (config('railcontent.available_brands',[]) as $brand){
+            if(!isset($pointsPerBrand[$brand])){
+                $pointsPerBrand[$brand] = 0;
+            }
+        }
         $this->userProvider->saveExperiencePoints(
             $userContentsProgressReset->userId,
-            $this->userPointsService->countUserPointsPerBrand(
-                $userContentsProgressReset->userId
-            )
+            $pointsPerBrand
         );
     }
 

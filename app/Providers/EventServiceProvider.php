@@ -3,8 +3,10 @@
 namespace App\Providers;
 
 use App\Listeners\Authentication\AuthenticationEventListener;
+use App\Listeners\OrderEventListener;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Modules\UserManagementSystem\Events\UserEvent;
+use Railroad\Ecommerce\Events\OrderEvent;
 use Railroad\Railcontent\Events\CommentCreated;
 use Railroad\Railcontent\Events\CommentLiked;
 use Railroad\Railforums\EventListeners\PostEventListener;
@@ -49,7 +51,10 @@ class EventServiceProvider extends ServiceProvider
         ],
         UserEvent::class => [
             AuthenticationEventListener::class . '@handleUserAuthenticated'
-        ]
+        ],
+        OrderEvent::class => [
+            OrderEventListener::class . '@handleOrderPlaced',
+        ],
     ];
 
     /**
