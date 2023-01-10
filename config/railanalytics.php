@@ -142,7 +142,7 @@ return [
 
     'drumeo' => [
         'local' => [
-            'active-tracking-providers' => ['ga', 'fp',],
+            'active-tracking-providers' => ['ga', 'fp', 'gaw', 'ga4', 'gtm', 'im',],
 
             'providers' => [
                 'google-analytics' =>
