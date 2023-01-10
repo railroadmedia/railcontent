@@ -20,9 +20,9 @@
             </div>
         </div>
         @if(empty($promoVersion))
-            <a href="/songs" class="sm:mx-1 mb-2 sm:mb-0 w-full sm:w-64 join outline text-{{ $brand }} border-{{ $brand }} smaller">SEE SONGS LIST <i class="fas fa-list-music"></i> </a>
+            <a href="/songs" class="sm:mx-1 mb-2 sm:mb-0 w-full sm:w-64 join outline text-{{ $theme }} border-{{ $theme }} smaller">SEE SONGS LIST <i class="fas fa-list-music"></i> </a>
         @endif
-        <a class="sm:mx-1 w-full sm:w-64 join {{ $brand }} smaller @if(!empty($promoVersion)) anchor-slide @endif"
+        <a class="sm:mx-1 w-full sm:w-64 join {{ $theme }} smaller @if(!empty($promoVersion)) anchor-slide @endif"
             @if(!empty($promoVersion))
                 href="#customize-anchor"
             @else

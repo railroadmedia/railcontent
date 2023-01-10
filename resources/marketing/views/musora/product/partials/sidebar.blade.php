@@ -1,16 +1,16 @@
 <?php
     $badge = '';
 
-    if($brand === 'drumeo') {
+    if($theme === 'drumeo') {
         $badge = 'https://dpwjbsxqtam5n.cloudfront.net/sales/guarantee-badge.png';
     }
-    elseif($brand === 'pianote') {
+    elseif($theme === 'pianote') {
         $badge = 'https://pianote.s3.amazonaws.com/sales/guarantee-badge.png';
     }
-    elseif($brand === 'singeo') {
+    elseif($theme === 'singeo') {
         $badge = 'https://singeo.s3.amazonaws.com/sales/2021/guarantee.png';
     }
-    elseif($brand === 'guitareo') {
+    elseif($theme === 'guitareo') {
         $badge = 'https://guitareo.s3.amazonaws.com/sales/guitareo-guarantee.png';
     }
 ?>
@@ -34,13 +34,13 @@
                     <p class="text-center mx-auto mb-1 font-bold text-sm md:text-base" style="color:#10D05F">Save {{ round(100 - (100 * ($price / $fullPrice))) }}%</p>
                     <h1 class="text-center text-3xl uppercase md:text-4xl" style="color:#F71B26;"><s class="opacity-40 text-2xl">${{ floatVal($fullPrice) }}</s>
                         @if(number_format($price, 2) == intval($price))
-                            <strong class="font-black text-{{ $brand }}">$<span class="chosen-variant-price-float">{{  floatVal($price)  }}</span></strong>
+                            <strong class="font-black text-{{ $theme }}">$<span class="chosen-variant-price-float">{{  floatVal($price)  }}</span></strong>
                         @else
-                            <strong class="font-black text-{{ $brand }}">$<span class="chosen-variant-price-float">{{  floatVal(number_format($price, 2))  }}</span></strong>
+                            <strong class="font-black text-{{ $theme }}">$<span class="chosen-variant-price-float">{{  floatVal(number_format($price, 2))  }}</span></strong>
                         @endif
                     </h1>
                 @elseif(isset($price))
-                    <h1 class="text-center text-3xl uppercase md:text-4xl"><strong class="font-black text-{{ $brand }}">Only $<span class="chosen-variant-price-float">{{ floatVal($price) }}</span></strong></h1>
+                    <h1 class="text-center text-3xl uppercase md:text-4xl"><strong class="font-black text-{{ $theme }}">Only $<span class="chosen-variant-price-float">{{ floatVal($price) }}</span></strong></h1>
                 @endif
 
                 @if(!empty($specialText))
@@ -106,14 +106,14 @@
                         <i class="fas fa-truck"></i> <strong>FREE SHIPPING!</strong><br>
                     @endif
                     You can also order by phone toll-free at<br class="hidden sm:inline">
-                    <a class="text-{{ $brand }} text-xs" href="tel:+18004398921">1-800-439-8921</a> or directly at
-                    <a class="text-{{ $brand }} text-xs" href="tel:+16048557605">1-604-855-7605</a>. </p>
+                    <a class="text-{{ $theme }} text-xs" href="tel:+18004398921">1-800-439-8921</a> or directly at
+                    <a class="text-{{ $theme }} text-xs" href="tel:+16048557605">1-604-855-7605</a>. </p>
             </div>
 
             @if($guaranteeBadge)
                 <div class="flex justify-center items-center px-5 pb-5 text-center md:pt-2 md:pt-4 md:pb-6 lg:p-5 lg:-mt-1 lg:mx-auto lg:mb-0 border-t-0 lg:border-t" style="border-color: #CCD3D3; border-top-style: solid;">
                     <img class="w-24 my-0 pr-6" src="https://cdn.musora.com/image/fetch/w_170,q_auto:best/{{ $badge }}">
-                    <p class="text-xs font-bold text-left my-0 text-{{ $brand }}">Your entire order is backed by<br class="lg:hidden" /> our 90-Day Money Back <br class="lg:hidden" /> Guarantee.</p>
+                    <p class="text-xs font-bold text-left my-0 text-{{ $theme }}">Your entire order is backed by<br class="lg:hidden" /> our 90-Day Money Back <br class="lg:hidden" /> Guarantee.</p>
                 </div>
             @endif
         </div>

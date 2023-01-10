@@ -229,4 +229,8 @@ Route::domain('{drumeoDomain}')->group(function () {
     Route::get('/new-years-gift-guide/', [LeadGenController::class, 'newYearGift']);
     Route::get('/teach-a-beginner/lessons/', [LeadGenController::class, 'teachBeginner']);
     Route::get('/weeklyemail/', [LeadGenController::class, 'weeklyMail']);
+    Route::get('/{page?}', LeadGenController::class . '@blogForms')
+        ->whereIn('page', [
+            'fwtgf-blog', '40s-blog', 'gsd-blog', 'gojb-blog', 'fpa-blog'
+        ]);
 });

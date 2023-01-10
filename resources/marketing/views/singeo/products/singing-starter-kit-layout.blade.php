@@ -10,7 +10,7 @@
     <meta property="og:image" content="https://singeo.s3.amazonaws.com/products/singing-starter-kit/share-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.singeo.com/{{ Request::path() }}">
 
-    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
+    @include('_partials.layout._tailwindcdn')
     <link href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/css/singeo/tailwind-helpers.css') }}">
     <link href="{{ asset('/marketing/css/animate.css') }}" rel="stylesheet">
@@ -271,20 +271,23 @@
         <div class="container mx-auto">
             <h2 class="mb-5"><strong>Are There Any Questions? </strong></h2>
             <div class="dropdowns max-w-4xl mx-auto px-4">
-                @include('_partials.components.question-dropdown', [
-                "num" => "?",
+                @include('singeo.sales.partials._dropdown', [
+                "customClass" => "rounded-3xl",
+                "question" => true,
                 "title" => "Is There An Age Limit For Learning To Sing?",
-                "desc" => "If you can speak, you CAN sing.  There’s no age limit for when you can experience the enrichment that singing brings to your life.  Everyone progresses differently, so it’s important to remember to have patience with yourself and celebrate the milestones of your personal singing journey.",
+                "description" => "If you can speak, you CAN sing.  There’s no age limit for when you can experience the enrichment that singing brings to your life.  Everyone progresses differently, so it’s important to remember to have patience with yourself and celebrate the milestones of your personal singing journey.",
                 ])
-                @include('_partials.components.question-dropdown', [
-                "num" => "?",
+                @include('singeo.sales.partials._dropdown', [
+                "customClass" => "rounded-3xl",
+                "question" => true,
                 "title" => "I Have Extreme “Stage Fright”. Can I Still Learn To Sing?",
-                "desc" => "Absolutely! Singing is more than a performance. You don’t have to have an audience to sing. Singing can just be for YOU.  And when you take the time to learn and practice properly you will gain confidence in your singing and, when you’re ready, maybe you WILL take the stage!",
+                "description" => "Absolutely! Singing is more than a performance. You don’t have to have an audience to sing. Singing can just be for YOU.  And when you take the time to learn and practice properly you will gain confidence in your singing and, when you’re ready, maybe you WILL take the stage!",
                 ])
-                @include('_partials.components.question-dropdown', [
-                "num" => "?",
+                @include('singeo.sales.partials._dropdown', [
+                "customClass" => "rounded-3xl",
+                "question" => true,
                 "title" => "Can I Really Learn How To Sing Online?",
-                "desc" => "Great question!  Yes, you absolutely can. Our lessons are specifically designed for at-home learning.  Learning from home, in a space that makes you feel comfortable, helps you progress at your own pace without the intimidation of singing in front of anyone. If you have questions at any time, just reach out to us and get feedback from REAL teachers.",
+                "description" => "Great question!  Yes, you absolutely can. Our lessons are specifically designed for at-home learning.  Learning from home, in a space that makes you feel comfortable, helps you progress at your own pace without the intimidation of singing in front of anyone. If you have questions at any time, just reach out to us and get feedback from REAL teachers.",
                 ])
             </div>
         </div>
@@ -323,6 +326,11 @@
                     }
                 ]
 
+            });
+
+            $('.dropdown').on('click', function(){
+                $(this).toggleClass('active');
+                $(this).find('i').toggleClass('rotate-180');
             });
         });
     </script>
