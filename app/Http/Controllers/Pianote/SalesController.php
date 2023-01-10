@@ -130,6 +130,11 @@ class SalesController extends BaseController
         return view('pianote.shop.pages.lifetime');
     }
 
+    public function lifetimeMembers()
+    {
+        return view('pianote.sales.lifetime-members');
+    }
+
     public function lisarecommends()
     {
         return view('pianote.shop.lisa-recommends');
