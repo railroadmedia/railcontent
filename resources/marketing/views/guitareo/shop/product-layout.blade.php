@@ -106,7 +106,7 @@
 
                     <p class="mb-4">
                         <strong>Say hello to your free bonuses:</strong><br>
-                        <em style="opacity: 0.5;">All digital bonuses are added to your account instantly with your membership to {{ $theme }}, and they’re yours forever.</em>
+                        <em style="opacity: 0.5;">All digital bonuses are added to your account instantly with your membership to {{ $brand }}, and they’re yours forever.</em>
                     </p>
 
                     @include('musora.product.partials.bonuses')

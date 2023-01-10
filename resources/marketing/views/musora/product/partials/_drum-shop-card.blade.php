@@ -8,7 +8,7 @@
                      ;>
                     @if (!empty($badgeText))
                         <span
-                            class="bg-{{ $theme }} text-white rounded-br-md py-1 px-2 font-roboto absolute top-0 left-0 uppercase font-bold text-[11px]">
+                            class="bg-{{ $brand }} text-white rounded-br-md py-1 px-2 font-roboto absolute top-0 left-0 uppercase font-bold text-[11px]">
                             {!! $badgeText !!}
                         </span>
                     @elseif (round(100 - (100 * ($price / $fullPrice))) > 1)
@@ -19,7 +19,7 @@
                     @endif
                     @if (!empty($soldOut) && $soldOut)
                         <span
-                            class="bg-{{ $theme }} text-white rounded-br-md py-1 px-2 font-roboto absolute top-0 left-0 uppercase font-bold text-[11px]">
+                            class="bg-{{ $brand }} text-white rounded-br-md py-1 px-2 font-roboto absolute top-0 left-0 uppercase font-bold text-[11px]">
                                 sold out
                         </span>
                     @endif
@@ -38,12 +38,12 @@
                         <p><em>{{ $packAuthor }}</em></p>
                     @endif
                     @if(!empty($specialPrice))
-                        <p class="text-{{$theme}}"><strong>{{ $specialPrice }}</strong></p>
+                        <p class="text-{{$brand}}"><strong>{{ $specialPrice }}</strong></p>
                     @elseif(!empty($soldOut) && $soldOut)
-                        <p class="text-{{$theme}}"><strong>SOLD OUT</strong></p>
+                        <p class="text-{{$brand}}"><strong>SOLD OUT</strong></p>
                     @elseif (round(100 - (100 * ($price / $fullPrice))) > 1)
                         <p><s class="text-[#9da6a8]">WAS ${{ floatval($fullPrice) }}</s>
-                            <strong class="text-{{$theme}}"> NOW
+                            <strong class="text-{{$brand}}"> NOW
                                 @if(number_format($price, 2) == intval($price))
                                     ${{  floatval($price)  }}
                                 @else
@@ -51,7 +51,7 @@
                                 @endif
                             </strong></p>
                     @else
-                        <p><strong class="text-{{$theme}}">${{  floatval($price)  }}</strong></p>
+                        <p><strong class="text-{{$brand}}">${{  floatval($price)  }}</strong></p>
                     @endif
                 </div>
             </section>
@@ -71,7 +71,7 @@
                     @elseif (round(100 - (100 * ($price / $fullPrice))) > 1)
                         <p class="text-[22px] md:text-[26px] lg:text-3xl mb-3"><s
                                 class="text-[#9da6a8]">${{ floatval($fullPrice) }}</s> <strong
-                                class="text-{{ $theme }}">
+                                class="text-{{ $brand }}">
                                 @if(number_format($price, 2) == intval($price))
                                     ${{  floatVal($price)  }}
                                 @else
@@ -79,12 +79,12 @@
                                 @endif
                             </strong></p>
                     @else
-                        <p class="text-{{ $theme }} text-[22px] md:text-[26px] lg:text-3xl mb-3"><strong>
+                        <p class="text-{{ $brand }} text-[22px] md:text-[26px] lg:text-3xl mb-3"><strong>
                                 ${{  floatVal($price)  }}</strong></p>
                     @endif
                     @if(!empty($includedEdge))
                         <p class="description relative m-0" style="top: -13px;"><em class="text-red">Or free
-                                with {{ ucfirst($theme) }}</em></p>
+                                with {{ ucfirst($brand) }}</em></p>
                     @endif
                     @if(empty($soldOut))
                         @if(!empty($sizes) && count($sizes) > 0)
@@ -141,7 +141,7 @@
                     @endif
                     @if(!empty($itemURL))
                         <a href="{{ $itemURL }}"
-                           class="btn-primary hover:bg-opacity-80 bg-{{$theme}}"
+                           class="btn-primary hover:bg-opacity-80 bg-{{$brand}}"
                            @if(!empty($externalURL)) target="_blank" @endif>
                             @if(!empty($buttonText)) {!!  $buttonText  !!} @else View Product
                             <i class="fas fa-arrow-right"></i> @endif</a>
