@@ -41,7 +41,7 @@ const toggleModal = () => {
                 </svg>
             </div>
             <div class="tw-pt-[12px] xl:tw-pt-[5px] xl:tw-pr-[30px]">
-                <p v-if="!currentTier === 'plus'">
+                <p v-if="currentTier !== 'plus'">
                     Your current Membership does not include access to Songs.
                 </p>
                 <p v-if="currentTier === 'plus'">
