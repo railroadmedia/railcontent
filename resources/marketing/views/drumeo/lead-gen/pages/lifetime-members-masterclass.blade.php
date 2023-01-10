@@ -1,14 +1,14 @@
 @extends('drumeo._partials.global-layout')
 
 @section('global-head')
-    <title>Lifetime Members Masterclass with Jared Falk</title>
-    <meta property="og:title" content="Lifetime Members Masterclass with Jared Falk">
+    <title>Lifetime Members Masterclass with Todd Sucherman</title>
+    <meta property="og:title" content="Lifetime Members Masterclass with Todd Sucherman">
 
-    <meta name="description" content="">
-    <meta property="og:description" content="">
+    <meta name="description" content="Learn the drums faster with organized video lessons, legendary teachers, and better practice tools. 90-Day Guarantee.">
+    <meta property="og:description" content="Learn the drums faster with organized video lessons, legendary teachers, and better practice tools. 90-Day Guarantee.">
 
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
-    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/sales/2022/og-image.jpg" style="display: none;">
+    <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/sales/2023/share-image-drumeo.jpg" style="display: none;">
 
     @include('_partials.layout._fonts')
     @include('_partials.layout._tailwindcdn')
@@ -207,24 +207,24 @@
     <header class="header text-white text-center px-4 sm:px-6 py-14 md:py-20 lg:py-32 relative bg-no-repeat bg-cover bg-top lazyload" style="background-color:#031e3b;" data-bg="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https:/dpwjbsxqtam5n.cloudfront.net/drum-shop/header-background.jpg">
         <div class="mx-auto relative z-10 max-w-md md:max-w-5xl">
                 <h1><strong>Lifetime Members Masterclass</strong></h1>
-                <h3>with Jared Falk</h3>
+                <h3>with Todd Sucherman</h3>
         </div>
     </header>
     <section class="text-center text-white py-8 md:py-24 px-5 md:px-7" style="background:#00101d ;">
         <div class="container mx-auto text-center max-w-2xl">
-            <a href="https://www.addevent.com/event/qM14764665" class="inline-block tooltip group" tip="Add To Calendar">
+            <a href="https://www.addevent.com/event/QB15914968" class="inline-block tooltip group" tip="Add To Calendar">
             <div class="bg-white text-center rounded-md inline-block overflow-hidden w-14 mr-2 align-middle transition-opacity group-hover:opacity-70">
-                <p class="leading-none tracking-tighter text-xs py-1 text-white" style="background-color:#bb3744;"><strong>AUG</strong></p>
-                <p class="leading-none text-lg py-1.5 text-black"><strong class="font-black">27</strong></p>
+                <p class="leading-none tracking-tighter text-xs py-1 text-white" style="background-color:#bb3744;"><strong>JAN</strong></p>
+                <p class="leading-none text-lg py-1.5 text-black"><strong class="font-black">14</strong></p>
             </div></a>
-            <a target="_blank" class=" @if(Carbon\Carbon::create(2022, 8, 27, 14, 0, 0, 'America/Vancouver') < Carbon\Carbon::now()) sold-out @endif join blue smaller" href="/members/drumeo-masterclass-1">Afternoon Session - 12pm PDT</a>
+            <a target="_blank" class=" @if(Carbon\Carbon::create(2023, 1, 14, 12, 0, 0, 'America/Vancouver') < Carbon\Carbon::now()) sold-out @endif join blue smaller" href="/members/drumeo-masterclass-1">Morning Session - 10am PDT</a>
             <hr class="my-7">
-            <a href="https://www.addevent.com/event/cB14764666" class="inline-block tooltip group" tip="Add To Calendar">
+            <a href="https://www.addevent.com/event/Fr15914974" class="inline-block tooltip group" tip="Add To Calendar">
             <div class="bg-white text-center rounded-md inline-block overflow-hidden w-14 mr-2 align-middle transition-opacity group-hover:opacity-70">
-                <p class="leading-none tracking-tighter text-xs py-1 text-white" style="background-color:#bb3744;"><strong>AUG</strong></p>
-                <p class="leading-none text-lg py-1.5 text-black"><strong class="font-black">27</strong></p>
+                <p class="leading-none tracking-tighter text-xs py-1 text-white" style="background-color:#bb3744;"><strong>JAN</strong></p>
+                <p class="leading-none text-lg py-1.5 text-black"><strong class="font-black">14</strong></p>
             </div></a>
-            <a target="_blank" class=" @if(Carbon\Carbon::create(2022, 8, 27, 20, 0, 0, 'America/Vancouver') < Carbon\Carbon::now()) sold-out @endif join blue smaller" href="/members/drumeo-masterclass-2">Evening Session - 6pm PDT</a>
+            <a target="_blank" class=" @if(Carbon\Carbon::create(2023, 1, 14, 18, 0, 0, 'America/Vancouver') < Carbon\Carbon::now()) sold-out @endif join blue smaller" href="/members/drumeo-masterclass-2">Evening Session - 4pm PDT</a>
         </div>
     </section>
 
