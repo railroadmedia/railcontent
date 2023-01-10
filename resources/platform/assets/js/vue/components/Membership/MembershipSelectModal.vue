@@ -88,8 +88,8 @@ const handleSelectedInterval = (interval) => {
         })
         .catch((error) => {
             let message = "There was an unexpected error, try again later or contact support."
-            if (error?.response?.data?.exception?.includes("UserFriendlyException")) {
-                message = error.response.data.message;
+            if (error?.response?.data?.friendlyMessage) {
+                message = error.response.data.friendlyMessage;
             }
             window.shownotification({
                 icon: 'error',
