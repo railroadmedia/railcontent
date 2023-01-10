@@ -19,6 +19,6 @@ class ShopController extends BaseController
     {
         $product = Product::where('slug', 'Singeo-'.$slug)->firstOrFail();
 
-        return view('singeo.shop.product-layout', [ 'product' => $product, 'brand' => 'singeo' ]);
+        return view('singeo.shop.product-test-layout', [ 'product' => $product, 'brand' => 'singeo' ]);
     }
 }

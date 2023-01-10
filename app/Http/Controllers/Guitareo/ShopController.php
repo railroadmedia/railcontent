@@ -19,6 +19,6 @@ class ShopController extends BaseController
     {
         $product = Product::where('slug', 'Guitareo-'.$slug)->firstOrFail();
 
-        return view('guitareo.shop.product-layout', [ 'product' => $product, 'brand' => 'guitareo' ]);
+        return view('guitareo.shop.product-test-layout', [ 'product' => $product, 'brand' => 'guitareo' ]);
     }
 }

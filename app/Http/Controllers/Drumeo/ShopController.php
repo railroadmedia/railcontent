@@ -48,7 +48,7 @@ class ShopController extends BaseController
     {
         $product = Product::where('slug', 'Drumeo-'.$slug)->firstOrFail();
 
-        return view('drumeo.drumshop.product-layout', [ 'product' => $product, 'brand' => 'drumeo' ]);
+        return view('drumeo.drumshop.product-test-layout', [ 'product' => $product, 'brand' => 'drumeo' ]);
     }
 
     public function products(Request $request, $domain, $page = null)

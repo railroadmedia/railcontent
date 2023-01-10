@@ -47,6 +47,6 @@ class ShopController extends BaseController
     {
         $product = Product::where('slug', 'Pianote-'.$slug)->firstOrFail();
 
-        return view('pianote.shop.product-layout', [ 'product' => $product, 'brand' => 'pianote' ]);
+        return view('pianote.shop.product-test-layout', [ 'product' => $product, 'brand' => 'pianote' ]);
     }
 }
