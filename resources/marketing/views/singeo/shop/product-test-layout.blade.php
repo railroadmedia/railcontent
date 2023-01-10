@@ -1,8 +1,8 @@
 @extends('_partials.layout.global-product-layout')
 
 @section('layout-header')
-    @include("drumeo.sales.partials._nav", [
-        "cartVersion" => true
+    @include("singeo.sales.partials._nav", [
+        "cartVersion" => true,
     ])
 @endsection
 
@@ -90,5 +90,5 @@
 @endsection
 
 @section('layout-footer')
-    @include("drumeo.sales.partials._footer")
+    @include("singeo.sales.partials._footer")
 @endsection
