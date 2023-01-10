@@ -543,6 +543,10 @@ class LeadGenController extends BaseController
         return view('drumeo.lead-gen.pages.teach-a-beginner-lessons');
     }
 
+    public function weeklyEmail()
+    {
+        return view('drumeo.lead-gen.blog-forms.weekly-email');
+    }
     public function weeklyMail()
     {
         return view('drumeo.lead-gen.blog-forms.weeklyemail');
