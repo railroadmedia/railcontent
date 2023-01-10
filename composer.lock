@@ -176,16 +176,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.255.11",
+            "version": "3.256.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "e851af4d7d2d95b131db344430384ae7cc04758e"
+                "reference": "99d254413e0b4899feb53d4ad373fc630a9e089a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/e851af4d7d2d95b131db344430384ae7cc04758e",
-                "reference": "e851af4d7d2d95b131db344430384ae7cc04758e",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/99d254413e0b4899feb53d4ad373fc630a9e089a",
+                "reference": "99d254413e0b4899feb53d4ad373fc630a9e089a",
                 "shasum": ""
             },
             "require": {
@@ -264,9 +264,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.255.11"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.256.0"
             },
-            "time": "2023-01-06T19:22:07+00:00"
+            "time": "2023-01-09T19:23:53+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -6620,16 +6620,16 @@
         },
         {
             "name": "openspout/openspout",
-            "version": "v4.11.1",
+            "version": "v4.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/openspout/openspout.git",
-                "reference": "278952f27a3f753b7e2c34928685a411d883bc98"
+                "reference": "3c645504a09c9441ab68068bdfe31eee6d13f086"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/openspout/openspout/zipball/278952f27a3f753b7e2c34928685a411d883bc98",
-                "reference": "278952f27a3f753b7e2c34928685a411d883bc98",
+                "url": "https://api.github.com/repos/openspout/openspout/zipball/3c645504a09c9441ab68068bdfe31eee6d13f086",
+                "reference": "3c645504a09c9441ab68068bdfe31eee6d13f086",
                 "shasum": ""
             },
             "require": {
@@ -6697,7 +6697,7 @@
             ],
             "support": {
                 "issues": "https://github.com/openspout/openspout/issues",
-                "source": "https://github.com/openspout/openspout/tree/v4.11.1"
+                "source": "https://github.com/openspout/openspout/tree/v4.12.0"
             },
             "funding": [
                 {
@@ -6709,7 +6709,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-01-02T09:11:35+00:00"
+            "time": "2023-01-10T07:39:16+00:00"
         },
         {
             "name": "paragonie/constant_time_encoding",
@@ -8188,16 +8188,16 @@
         },
         {
             "name": "railroad/musora-api",
-            "version": "v3.0.2",
+            "version": "v3.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "16b858c7cc4b32a65974fc70655c78fee56d8efd"
+                "reference": "8ec99cc02f6e4d4a6b78c99af718c7d00cfb60e9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/16b858c7cc4b32a65974fc70655c78fee56d8efd",
-                "reference": "16b858c7cc4b32a65974fc70655c78fee56d8efd",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/8ec99cc02f6e4d4a6b78c99af718c7d00cfb60e9",
+                "reference": "8ec99cc02f6e4d4a6b78c99af718c7d00cfb60e9",
                 "shasum": ""
             },
             "require": {
@@ -8227,9 +8227,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
-                "source": "https://github.com/railroadmedia/musora-api/tree/v3.0.2"
+                "source": "https://github.com/railroadmedia/musora-api/tree/v3.0.3"
             },
-            "time": "2023-01-05T11:29:36+00:00"
+            "time": "2023-01-10T12:17:09+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -16649,5 +16649,5 @@
         "ext-curl": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.2.0"
 }
