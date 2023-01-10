@@ -42,7 +42,7 @@ class ProductPagesController extends BaseController
                 'hats' => $hats,
                 'shirts' => $shirts,
                 'hoodies' => $hoodies,
-                'brand' => $brand,
+                'theme' => $brand,
                 'category' => $category
             ]);
         }
@@ -50,7 +50,7 @@ class ProductPagesController extends BaseController
         else {
             return view('musora.product.products',[
                 'products' => $products,
-                'brand' => $brand,
+                'theme' => $brand,
             ]);
         }
     }
@@ -60,7 +60,7 @@ class ProductPagesController extends BaseController
 
         return view('musora.product.product',[
             'product' => $product,
-            'brand' => $brand,
+            'theme' => $brand,
         ]);
     }
 
