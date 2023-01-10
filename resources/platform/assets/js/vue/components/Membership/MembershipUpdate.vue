@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import MembershipSelectModal from './MembershipSelectModal.vue';
 
 const props = defineProps({
@@ -19,6 +19,11 @@ const props = defineProps({
         type: Boolean,
         default: false,
     },
+});
+
+onMounted(() => {
+    console.log('mounted')
+    console.log(props.currentTier)
 });
 
 const isModalOpen = ref(false);
@@ -41,7 +46,7 @@ const toggleModal = () => {
                 </svg>
             </div>
             <div class="tw-pt-[12px] xl:tw-pt-[5px] xl:tw-pr-[30px]">
-                <p v-if="!currentTier === 'plus'">
+                <p v-if="currentTier !== 'plus'">
                     Your current Membership does not include access to Songs.
                 </p>
                 <p v-if="currentTier === 'plus'">
