@@ -87,9 +87,13 @@ const handleSelectedInterval = (interval) => {
             emit('onCloseModal');
         })
         .catch((error) => {
+            let message = "There was an unexpected error, try again later or contact support."
+            if (error?.response?.data?.exception?.includes("UserFriendlyException")) {
+                message = error.response.data.message;
+            }
             window.shownotification({
                 icon: 'error',
-                text: error.response.data.message
+                text: message
             })
         })
         .finally(() => {
