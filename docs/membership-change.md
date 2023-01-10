@@ -11,7 +11,11 @@ The upgrade rate shall be calculated as follows:
 
 ```upgrade  rate = cost of Musora+ annual x remaining months / 12```
 
-A user will not have the option to change their membership if they have a mobile (apple/google) subscription
+Conditions:
+- Their current membership must not be a mobile (apple/google) subscription.
+- A default payment method is required.
+- Cannot change to the same membership
+
 
 ### 2. A lifetime user can choose to add on a songs subscription.
 They will be charged the full subscription cost.
