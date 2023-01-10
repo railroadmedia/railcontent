@@ -1,5 +1,4 @@
-@if(!empty($transparentNav)) <style>body {padding-top:0;}</style> @endif
-<nav id="nav" class="top-bar row expanded @if(!empty($transparentNav)) transparent @endif">
+<nav id="nav" class="top-bar row expanded">
     <div class="logo">
         <a href="/">
             <img src="https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="Drumeo">
@@ -17,14 +16,16 @@
 
             <nav-cart-button
 {{--                cart-data='{{ $cartData }}'--}}
-                checkout-url='{{ get_musora_brand_base_url() }}/order/musora'
-                api-domain-url='{{ get_musora_brand_base_url() }}'
+                cart-data-url=''
+                checkout-url='/order/musora'
+                api-domain-url=''
             ></nav-cart-button>
             <cart-sidebar
                 brand="drumeo"
 {{--                cart-data='{{ $cartData }}'--}}
-                checkout-url='{{ get_musora_brand_base_url() }}/order/musora'
-                api-domain-url='{{ get_musora_brand_base_url() }}'
+                cart-data-url=''
+                checkout-url='/order/musora'
+                api-domain-url=''
             ></cart-sidebar>
         </div>
     @endif
@@ -61,7 +62,7 @@
         @include('musora.product.partials._nav-link', [
             "linkName" => "Member Login",
             "linkIcon" => "fas fa-sign-in",
-            "linkUrl" => "/login"
+            "linkUrl" => get_musora_brand_base_url() . '/login',
         ])
         @include('musora.product.partials._nav-link', [
             "linkName" => "Contact",
@@ -70,7 +71,7 @@
         ])
         @include('musora.product.partials._nav-link', [
             "linkName" => "Drumeo",
-            "linkIcon" => "icon-courses",
+            "linkIcon" => "fas fa-home",
             "linkUrl" => "/",
         ])
         @include('musora.product.partials._nav-link', [
@@ -80,7 +81,7 @@
         ])
         <div class="has-drop-down" target="_parent" rel="">
             <div class="nav-link">
-                <i class="icon-live"></i>
+                <i class="fas fa-circle-play"></i>
                 Free Resources
                 <div class="drop-down-arrow ">
                     <span></span>

@@ -213,6 +213,8 @@ class CmsLessonSeeder extends Seeder
                 "instructor_img" => "",
                 "studyText" => "",
                 "overview" => "",
+                'bundle_img' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/rdm.jpg',
+                'bundle_desc' => 'Rock icon Todd Sucherman is your personal drum coach with a 26-week online course to rapidly improve your rock drumming. You’ll get weekly video lessons and exercises to improve your beats, fills, creativity, solos, bass drum combinations, hand technique, shuffles & variations, musicality, and more.',
             ],
             [
                 "brand" => 1,
@@ -436,6 +438,8 @@ class CmsLessonSeeder extends Seeder
                 "instructor_img" => "",
                 "studyText" => "",
                 "overview" => "",
+                'bundle_img' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/eyd.jpg',
+                'bundle_desc' => 'Electrify Your Drumming will teach you the tools and styles of electronic dance music -- so you can build energy with risers, lock in with the vocals, add power to your beats and fills, create a climax in the music, and ultimately fuel any song with your playing -- giving you valuable skills that will apply to every style of music.'
             ],
             [
                 "brand" => 1,
@@ -470,6 +474,8 @@ class CmsLessonSeeder extends Seeder
                 "instructor_img" => "",
                 "studyText" => "",
                 "overview" => "",
+                'bundle_img' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/sd.jpg',
+                'bundle_desc' => 'Jared Falk’s step-by-step curriculum for building a rock-solid foundation on the drums. This digital training pack includes 18 hours of video lessons and a 274-page workbook -- helping you lock in with other musicians, prepare for gigs, and set yourself up for a successful experience on the drums.'
             ],
             [
                 "brand" => 1,
@@ -1248,7 +1254,7 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                 "instructor_img" => "",
                 "studyText" => "",
                 "overview" => "",
-                'bundle_img' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/piano-technique-made-easy.jpg',
+                'bundle_img' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/pianote-annual.png',
                 "bundle_desc" => "Discover the best online piano lessons experience with Pianote. Your Pianote membership will give you hundreds of expertly designed, step-by-step lessons to guide you along the path to musical freedom. And you don’t need any special cables or software to get started, it works with EVERY piano or keyboard. And you’ll get access to REAL teachers who will be able to answer any questions you have along the way.",
             ],
             [
@@ -1283,7 +1289,8 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                 "instructor_img" => "",
                 "studyText" => "",
                 "overview" => "",
-                "bundle_desc" => "",
+                'bundle_img' => 'https://pianote.s3.amazonaws.com/sales/promos/november/bonuses/power-of-chords.jpg',
+                "bundle_desc" => "Play the music you love on the piano with the awesome Power of Chords. This fun course will demystify chording and show you how chords are the foundation of ALL music (even classical). When you understand and can play chords -- you’ll be able to play the songs you love easier, with more confidence.",
             ],
             [
                 "brand" => 2,
@@ -1317,7 +1324,8 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                 "instructor_img" => "",
                 "studyText" => "",
                 "overview" => "",
-                "bundle_desc" => "",
+                'bundle_img' => 'https://pianote.s3.amazonaws.com/sales/promos/november/bonuses/improv-musical-freedom.jpg',
+                "bundle_desc" => "How do you learn to improvise on the piano? Simple. You learn from the best in the world! Join Jesús Molina as he shows you how to approach improvising in a structured, step-by-step way that’s fun, inspiring, and 100% not scary. It’s rare to get access to teachers of this caliber. But the course is yours for life.",
             ],
             [
                 "brand" => 2,
@@ -1351,7 +1359,7 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                 "studyText" => "",
                 "overview" => "",
                 'bundle_img' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/worship-piano.jpg',
-                "bundle_desc" => "Master the skills to play modern worship songs and learn how to be part of a band. You’ll learn how to read worship chord charts, create beautiful background music and how to be part of a worship team. Plus, this pack comes with your own band as a backing track, so YOU can join the band and play piano with other musicians.",
+                "bundle_desc" => "Master the skills to play modern worship songs and learn how to be part of a band. You’ll learn how to read worship chord charts, create beautiful background music, and how to be part of a worship team. Plus, this pack comes with your own band as a backing track, so YOU can join the band and play piano with other musicians. No prior knowledge or experience necessary. We start from scratch with this one.",
             ],
             [
                 "brand" => 2,
@@ -1385,7 +1393,7 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                 "instructor_img" => "",
                 "studyText" => "",
                 "overview" => "",
-                'bundle_img' => 'https://pianote.s3.amazonaws.com/products/play-beautiful-piano/cart-image.jpg',
+                'bundle_img' => 'https://pianote.s3.amazonaws.com/sales/promos/november/bonuses/TBGTPBP.jpg',
                 "bundle_desc" => "Start playing beautiful piano music from the very first time you touch the keyboard. The Beginner’s Guide To Playing Beautiful Piano is your introduction to the world of stunning melodies and emotional music. Follow along and play beautiful sounds. But you won’t just be copying what you see… You’ll learn WHY certain chords and melodies sound beautiful. So after the course, you can create your own beautiful piano music.",
             ],
             [
@@ -1456,7 +1464,7 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                 "studyText" => "",
                 "overview" => "",
                 'bundle_img' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/piano-technique-made-easy.jpg',
-                "bundle_desc" => "Feeling stuck on the keys? Like you’ve hit a wall you just can’t break through? Chances are your technique is holding you back. Good technique is the FOUNDATION of your piano playing. And without a good foundation -- you’ll never reach the heights you dream of. You’ll get stuck at the same level. Piano Technique Made Easy is your go-to guide to improving your technical skills on the keys, so your songs will be easier to play. Perfect to help you progress through your classical journey with more ease and confidence.",
+                "bundle_desc" => "Piano Technique Made Easy is the comprehensive guide for learning and perfecting your technique. Every scale. Every key signature. Every chord. You’ll learn them all to build a strong piano foundation so you can play faster, learn songs quicker, and express yourself through your playing.",
             ],
             [
                 "brand" => 2,
@@ -1491,7 +1499,7 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                 "studyText" => "",
                 "overview" => "",
                 'bundle_img' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/de-stupefy-your-left-hand.jpg',
-                "bundle_desc" => "Your left hand is weaker. And that’s normal. Most piano players struggle with their left hand, and sadly, most just accept it. De-Stupefy Your Left Hand is your 3-step path to a better left hand. First, you’ll learn how to get your left hand to listen to your brain, so it moves when YOU want it to (and not whenever it feels like it). Then, you’ll start playing faster, more accurately, and with more control, as you put your left hand to work. And finally, you’ll discover how to transform your playing with beautiful and musical left-hand accompaniments that would have seemed out of reach at the beginning of the training pack. Yes, your left hand might be weaker… but it doesn’t have to be.",
+                "bundle_desc" => "Your left hand is weaker. And that’s normal. Most piano players struggle with their left hand, and sadly, most just accept it. De-Stupefy Your Left Hand is your 3-step path to a better left hand. Yes, your left hand might be weaker… but it doesn’t have to be.",
             ],
             [
                 "brand" => 2,
@@ -1526,7 +1534,7 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                 "studyText" => "",
                 "overview" => "",
                 'bundle_img' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/faster-fingers.jpg',
-                "bundle_desc" => "Increase your finger speed, strength, and accuracy with this complete digital training pack. Faster Fingers is your roadmap to success on the piano. You’ll be guided every step of the way with daily practice videos and encouragement, plus you’ll be able to play along with every exercise and record your speed. The metronome doesn’t lie -- you’ll be able to SEE how much faster you’re getting. As a beginner, some of the later exercises may be too difficult, to begin with, but you’ll find immense value in the early exercises, and it will help speed up your learning as well as your fingers."
+                "bundle_desc" => "Increase your finger speed, strength, and accuracy with this complete digital training pack. Faster Fingers is your roadmap to success on the piano. You’ll be guided every step of the way with daily practice videos and encouragement, plus you’ll be able to play along with every exercise and record your speed. The metronome doesn’t lie -- you’ll be able to SEE how much faster you’re getting."
             ],
             [
                 "brand" => 2,
@@ -1595,8 +1603,8 @@ All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the
                 "instructor_img" => "",
                 "studyText" => "",
                 "overview" => "",
-                'bundle_img' => 'https://pianote.s3.amazonaws.com/sales/promos/july/classical_method_card.jpg',
-                "bundle_desc" => "Start playing beautiful classical piano pieces. The Classical Method is the NEW curriculum from Pianote featuring world-class piano player, Victoria Theodore. Victoria has toured with Beyoncé and Stevie Wonder, but classical piano is her passion. In 5 levels, she’ll walk you through the timeless eras of classical music and show you step-by-step how to play beautiful pieces. If you’ve ever dreamed of sitting at the piano playing timeless classics by Beethoven, Chopin, or Bach, this Method is for you.",
+                'bundle_img' => 'https://pianote.s3.amazonaws.com/sales/promos/november/bonuses/TBGTCP.jpg',
+                "bundle_desc" => "Discover the beautiful world of classical piano, without the stuffy reputation. Learn Chopin, Bach, and Beethoven from touring expert Victoria Theodore. This course is your step-by-step introduction to classical music that’s fun and inviting, so you can play beautiful pieces with ease.",
             ],
 
             [
@@ -3170,7 +3178,7 @@ This powerful resource makes it easy to access your lessons anytime from virtual
                             'included_edge' => empty($product['included_edge']) ? false : $product['included_edge'],
                             'guaranteed' => $product['guaranteed'],
                             'visible' => $product['visible'],
-                            'display_order' => empty($product['display_order']) ? $orderNum : $product['display_order'],
+                            'display_order' => $product['visible'] ? $orderNum : 0,
                             'bundle_img' => empty($product['bundle_img']) ? null : $product['bundle_img'],
                             'bundle_desc' => empty($product['bundle_desc']) ? null : $product['bundle_desc'],
                             'created_at' => now(),

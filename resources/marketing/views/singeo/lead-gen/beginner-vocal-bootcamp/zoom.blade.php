@@ -8,7 +8,7 @@
     <meta property="og:image" content="https://singeo.s3.amazonaws.com/lead-gen/beginner-vocal-bootcamp/og_image.jpg">
     <meta property="og:url" content="https://www.singeo.com/beginner-vocal-bootcamp/">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
+    @include('_partials.layout._tailwindcdn')
     <link href="{{ asset('/marketing/css/singeo/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/singeo/lead-gen.css') }}">
@@ -186,11 +186,11 @@
     <section class="text-center text-white py-10 md:py-14 lg:py-24 px-5 md:px-7" style="background:#00101d ;">
         <div class="container mx-auto text-center max-w-2xl">
             <div class="bg-white text-center rounded-md inline-block overflow-hidden w-11 mr-2 align-middle">
-                <p class="leading-none tracking-tighter text-xs py-0.5 text-white" style="background-color:#bb3744;"><strong>OCT</strong></p>
-                <p class="leading-none text-lg py-1 text-black"><strong class="font-black">12</strong></p>
+                <p class="leading-none tracking-tighter text-xs py-0.5 text-white" style="background-color:#bb3744;"><strong>JAN</strong></p>
+                <p class="leading-none text-lg py-1 text-black"><strong class="font-black">16</strong></p>
             </div><br class="inline sm:hidden">
             {{--<a target="_blank" class=" @if(Carbon\Carbon::create(2022, 8, 16, 11, 0, 0, 'America/Vancouver') < Carbon\Carbon::now()) sold-out @endif join medium my-2 sm:my-0" href="https://us06web.zoom.us/j/86046483729?pwd=QVZ4Y0pXMnB0bC9ZTGJiaHBNcGRvZz09">Morning Session - 9am PDT &raquo;</a>--}}
-            <a target="_blank" class=" @if(Carbon\Carbon::create(2022, 10, 12, 17, 0, 0, 'America/Vancouver') < Carbon\Carbon::now()) sold-out @endif join medium" href="https://us06web.zoom.us/j/5246384908?pwd=TjRIbE45N0JqK0lSSUpvUTZ3cCtqZz09">Afternoon Session - 2:30pm PDT &raquo;</a>
+            <a target="_blank" class=" @if(Carbon\Carbon::create(2023, 1, 16, 9, 0, 0, 'America/Vancouver') < Carbon\Carbon::now()) sold-out @endif join medium" href="https://us06web.zoom.us/j/85045221968?pwd=clJqbXdXcnI0OEViS1FuR2dnRndpdz09">Morning Session - 9am PDT &raquo;</a>
             {{--<hr class="my-7 sm:my-10">--}}
             {{--<div class="bg-white text-center rounded-md inline-block overflow-hidden w-11 mr-2 align-middle">--}}
             {{--<p class="leading-none tracking-tighter text-xs py-0.5 text-white" style="background-color:#bb3744;"><strong>JULY</strong></p>--}}
@@ -208,7 +208,9 @@
         </div>
     </section>
 
-    @include("singeo.sales.partials._footer")
+    @include("singeo.sales.partials._footer", [
+            "minimal" => true
+        ])
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="/marketing/parcel/singeo/nav-footer.js"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 @stop

@@ -16,5 +16,5 @@
             color:#f8dea3;
         }
     </style>
-    <link href="/marketing/parcel/pianote/lead-gen-learn-songs.css" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/pianote/lead-gen-learn-songs.css') }}" rel="stylesheet">
 @endsection

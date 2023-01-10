@@ -11,7 +11,7 @@
     <meta property="og:title" content="Play Your First Song On The Guitar | Guitar Chords for Hit Songs">
     <meta property="og:url" content="https://www.guitareo.com/chords-for-hit-songs/thank-you">
 
-    <link rel="stylesheet" href="/marketing/parcel/guitareo/song-in-an-hour.css">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/song-in-an-hour.css') }}">
     <style>
         .hero-header:after {
             content:none;
@@ -24,7 +24,7 @@
         <div class="max-w-2xl mx-auto text-center text-white px-4 md:px-0">
             <img class="h-24 md:h-32 mb-8 inline-block lazyload" data-src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/chords-for-hit-songs/logo.png" alt="logo">
             <h2>
-                <span class="text-guitareo"><i class="fad fa-check-circle" aria-hidden="true"></i></span> 
+                <span class="text-guitareo"><i class="fad fa-check-circle" aria-hidden="true"></i></span>
                 <strong>Success!</strong> <br class="inline md:hidden">Check your email!
             </h2>
             <p class="my-4">You will receive an email shortly from Ayla with your free lessons. Have fun!</p>

@@ -182,7 +182,6 @@
     RewriteRule ^christmasdeals/?$.* /drumshop/ [R=307,L,QSA,NC]
     RewriteRule ^claus-hessler/?$.* /beat/claus-hessler-drum-lessons/ [R=307,L,QSA]
     RewriteRule ^click-here/.* / [R=307,L,QSA]
-    RewriteRule ^coaches/?$.* /#coaches [R=307,L,QSA]
     RewriteRule ^cobus-method.* /drumshop/cobus-method [R=307,L,QSA]
     RewriteRule ^cobus-method/? /drumshop/cobus-method/ [R=301,L,QSA]
     RewriteRule ^cobus/?$.* /beat/make-your-cheap-drums-sound-amazing/ [R=307,L,QSA]
@@ -528,7 +527,6 @@
     RewriteRule ^mercedes-lander/?$.* /beat/mercedes-lander-drum-lessons/ [R=307,L,QSA]
     RewriteRule ^merch/?$.* /clothing/ [R=307,L,QSA]
     RewriteRule ^merchandise/?$.* /clothing/ [R=307,L,QSA]
-    RewriteRule ^method/?$.* /#method [R=307,L,QSA]
     RewriteRule ^mid-year-resolution/.* / [R=307,L,QSA]
     RewriteRule ^mike-cymbal-solo/.* https://www.youtube.com/watch?v=zdh9yQbTp1o [R=307,L,QSA]
     RewriteRule ^moeller-method-secrets.* /drumshop/moeller-method-secrets [R=307,L,QSA]
@@ -794,7 +792,7 @@
     RewriteRule ^vip-for-vipers/?$.* /VIP/ [R=307,L,QSA,NC]
     RewriteRule ^vip/?$.* /VIP/ [R=307,L,QSA]
     RewriteRule ^vip/thank-you.* /VIP/?thankyou [R=307,L,QSA]
-    RewriteRule ^vote/?$.* /beat/drumeo-drummer-of-the-year-awards [R=307,L,QSA]
+    RewriteRule ^vote/?$.* /beat/the-drumeo-drummer-of-the-year-awards-2022 [R=307,L,QSA]
     RewriteRule ^walkthrough.* /members/ [R=307,L,QSA]
     RewriteRule ^watch-the-video/?$.* / [R=307,L,QSA]
     RewriteRule ^we-miss-you/.* https://www.youtube.com/watch?v=VLCUOb3O7LQ [R=307,L,QSA]
@@ -881,7 +879,6 @@
     RewriteRule ^christmasdeals/? /shop [R=307,L,QSA,NC]
     RewriteRule ^click-here/?$ / [R=307,L,QSA]
     RewriteRule ^closing-tomorrow/? / [R=307,L,QSA]
-    RewriteRule ^coaches/?$.* /#coaches [R=307,L,QSA]
     RewriteRule ^come-back/?$ / [R=307,L,QSA]
     RewriteRule ^contact/?$ /support [L,QSA,R=301]
     RewriteRule ^cyber-monday/?$ /shop [R=307,L,QSA,NC]
@@ -1244,6 +1241,7 @@
     RewriteRule ^workshop/?(.*) / [R=307,L,QSA]
     RewriteRule ^your-best-year/?$.* / [R=307,L,QSA]
     RewriteRule ^youtube/?(.*) https://www.youtube.com/user/guitarlessonscom [R=307,L,QSA]
+    RewriteRule ^trial-youtube.* https://www.guitareo.com/trial/?utm_source=YouTube&utm_medium=Social&utm_campaign=trial-youtube [R=307,L,QSA]
 
     #################
     #singeo redirects

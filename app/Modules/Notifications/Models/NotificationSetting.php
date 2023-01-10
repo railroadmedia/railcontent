@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use Modules\UserManagementSystem\Models\User;
 
 /**
+ * App\Modules\Notifications\Models\NotificationSetting
+ *
  * @property integer $id
  * @property integer $user_id
  * @property string $setting_name
@@ -15,6 +17,17 @@ use Modules\UserManagementSystem\Models\User;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property-read User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|NotificationSetting newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|NotificationSetting newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|NotificationSetting query()
+ * @method static \Illuminate\Database\Eloquent\Builder|NotificationSetting whereBrand($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|NotificationSetting whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|NotificationSetting whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|NotificationSetting whereSettingName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|NotificationSetting whereSettingValue($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|NotificationSetting whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|NotificationSetting whereUserId($value)
+ * @mixin \Eloquent
  */
 class NotificationSetting extends Model
 {

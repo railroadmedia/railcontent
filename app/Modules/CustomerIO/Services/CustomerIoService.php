@@ -455,7 +455,7 @@ class CustomerIoService
      */
     public function processForm($email, $formNameToProcess, $requestParams)
     {
-        $allConfiguredForms = config('customer-io.forms', []);
+        $allConfiguredForms = config('customer-io.forms.' . config('customer-io.brand'), []);
 
         $customers = [];
 

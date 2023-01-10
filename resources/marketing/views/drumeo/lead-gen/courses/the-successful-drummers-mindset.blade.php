@@ -24,7 +24,7 @@
 @section('url-slug', 'the-successful-drummers-mindset' )
 
 @section('course-url')
-    /members/lessons/courses/221439
+    {{ get_musora_brand_base_url() }}/drumeo/courses/the-successful-drummer%27s-mindset/221439
 @endsection
 
 @section('biography')

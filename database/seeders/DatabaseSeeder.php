@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
             CmsClothingSeeder::class,
             CmsAccessorySeeder::class,
             CmsBundleSeeder::class,
+            BFUpdates::class
         ]);
     }
 }

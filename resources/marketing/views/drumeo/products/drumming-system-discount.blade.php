@@ -34,8 +34,8 @@
 @section('content')
     @include('drumeo.products.partials.promo-banner', [
                     "name" => "Drumming System",
-                    "fullPrice" => Prices::$dsOnlineFull,
-                    "price" => Prices::$dsOnlineRegular,
+                    "fullPrice" => floatval($productPrices['DSYS2-DIGI']->price),
+                    "price" => floatval($productPrices['DSYS2-DIGI']->discounted_price),
                 "noBreadcrumb" => true
                 ])
     <header class="header stacked">
@@ -51,16 +51,16 @@
                 </div>
                 <p>Turn your drumming goals into reality with <br class="inline sm:hidden">
                     video lessons, practice plans, & play-alongs.</p>
-                <a href="/laravel/public/shopping-cart/api/query?products[DSYS2-DIGI]=1" class="join blue">Get Started &raquo;</a>
+                <a href="/ecommerce/add-to-cart?products[DSYS2-DIGI]=1" class="join blue">Get Started &raquo;</a>
 
 
                 <p class="price-info">
-                    @if(Prices::$dsOnlineFull > Prices::$dsOnlineRegular)
-                        <s>NORMALLY ${{ Prices::$dsOnlineFull }}.</s>
-                        <strong>NOW ${{ Prices::$dsOnlineRegular }}</strong>
-                        (SAVE {{ round(100 - (100 * (Prices::$dsOnlineRegular / Prices::$dsOnlineFull))) }}%).
+                    @if(floatval($productPrices['DSYS2-DIGI']->price) > floatval($productPrices['DSYS2-DIGI']->discounted_price))
+                        <s>NORMALLY ${{ floatval($productPrices['DSYS2-DIGI']->price) }}.</s>
+                        <strong>NOW ${{ floatval($productPrices['DSYS2-DIGI']->discounted_price) }}</strong>
+                        (SAVE {{ round(100 - (100 * (floatval($productPrices['DSYS2-DIGI']->discounted_price) / floatval($productPrices['DSYS2-DIGI']->price)))) }}%).
                     @else
-                        <strong>ONLY ${{ Prices::$dsOnlineRegular }}</strong>
+                        <strong>ONLY ${{ floatval($productPrices['DSYS2-DIGI']->discounted_price) }}</strong>
                     @endif
                     <br> <span class="text-blue">90-DAY GUARANTEE.</span></p>
             </div>
@@ -74,8 +74,8 @@
 
     <section class="lesson-breakdown">
         <div class="container mx-auto clearfix">
-            <h1>Learn Everything On The Drums... <u>For Just ${{ Prices::$dsOnlineRegular }}</u></h1>
-            <h3 class="light"><s>NORMALLY ${{ Prices::$dsOnlineFull }}</s></h3>
+            <h1>Learn Everything On The Drums... <u>For Just ${{ floatval($productPrices['DSYS2-DIGI']->discounted_price) }}</u></h1>
+            <h3 class="light"><s>NORMALLY ${{ floatval($productPrices['DSYS2-DIGI']->price) }}</s></h3>
             <div class="float-left w-full px-3 sm:px-4 tile-wrap grid grid-cols-2 sm:grid-cols-3 gap-4">
                 @include('drumeo.products.partials.lesson-tile2', [
                 "imageURL" => "https://dpwjbsxqtam5n.cloudfront.net/tripwires/ds/thumbnails/1.jpg",
@@ -218,8 +218,8 @@
                 "lessonDuration" => "3 HR 10",
                 ])
             </div>
-            <a class="join blue" href="/laravel/public/shopping-cart/api/query?products[DSYS2-DIGI]=1">Get Everything <span class="show-for-medium">Above </span>For Just ${{ Prices::$dsOnlineRegular }} &raquo;</a>
-            <p class="price-info">{{--SAVE {{ round(100 - (100 * (Prices::$dsOnlineRegular / Prices::$dsOnlineFull))) }}% +--}} 90-DAY MONEY BACK GUARANTEE</p>
+            <a class="join blue" href="/ecommerce/add-to-cart?products[DSYS2-DIGI]=1">Get Everything <span class="show-for-medium">Above </span>For Just ${{ floatval($productPrices['DSYS2-DIGI']->discounted_price) }} &raquo;</a>
+            <p class="price-info">{{--SAVE {{ round(100 - (100 * (floatval($productPrices['DSYS2-DIGI']->discounted_price) / floatval($productPrices['DSYS2-DIGI']->price)))) }}% +--}} 90-DAY MONEY BACK GUARANTEE</p>
         </div>
     </section>
     <section class="three-icon">
@@ -250,7 +250,7 @@
             <div class="float-left w-full px-3 sm:px-4 sm:w-1/2 circle-point">
                 <div class="point-icon"><i class="fal fa-infinity"></i></div>
                 <p><strong>Unlimited Lifetime Access</strong><br>
-                    Get the Drumming System for just ${{ Prices::$dsOnlineRegular }} today to get online access to the entire course - for life.</p>
+                    Get the Drumming System for just ${{ floatval($productPrices['DSYS2-DIGI']->discounted_price) }} today to get online access to the entire course - for life.</p>
             </div>
             <div class="float-left w-full px-3 sm:px-4 sm:w-1/2 circle-point">
                 <div class="point-icon"><i class="fal fa-shield-check"></i></div>
@@ -343,7 +343,7 @@
                 <h1>90-Day Money-Back Guarantee.</h1>
                 <p>More than anything, we want you to enjoy a super-positive experience on the drums. And that means we
                     only want you to pay if you actually LOVE your Drumming System experience. So get started below to
-                    try it out risk-free. If it’s not for you, simply <a class="text-white" href="/support">contact us</a> within 90 days for a full refund.</p>
+                    try it out risk-free. If it’s not for you, simply <a class="text-white" href="{{ get_musora_brand_base_url() }}/contact">contact us</a> within 90 days for a full refund.</p>
             </div>
         </div>
     </section>
@@ -354,17 +354,17 @@
                 <img src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/ds/ds-logo.png">
             </div>
             <h2 class="float-left w-full px-3 sm:px-4">Get the ultimate encyclopedia of drum lessons <br class="inline sm:hidden">
-                                for a one-time payment of just ${{ Prices::$dsOnlineRegular }}.</h2>
-            <div class="float-left w-full px-3 sm:px-4"><a href="/laravel/public/shopping-cart/api/query?products[DSYS2-DIGI]=1" class="join blue">Get Started &raquo;</a></div>
+                                for a one-time payment of just ${{ floatval($productPrices['DSYS2-DIGI']->discounted_price) }}.</h2>
+            <div class="float-left w-full px-3 sm:px-4"><a href="/ecommerce/add-to-cart?products[DSYS2-DIGI]=1" class="join blue">Get Started &raquo;</a></div>
             {{--<a class="join sold-out">Sold Out</a>--}}
 
             <h2 class="float-left w-full px-3 sm:px-4 highlighted">
-                @if(Prices::$dsOnlineFull > Prices::$dsOnlineRegular)
-                    <s>NORMALLY ${{ Prices::$dsOnlineFull }}.</s>
-                    <strong>NOW ${{ Prices::$dsOnlineRegular }}</strong>
-                    (SAVE {{ round(100 - (100 * (Prices::$dsOnlineRegular / Prices::$dsOnlineFull))) }}%).
+                @if(floatval($productPrices['DSYS2-DIGI']->price) > floatval($productPrices['DSYS2-DIGI']->discounted_price))
+                    <s>NORMALLY ${{ floatval($productPrices['DSYS2-DIGI']->price) }}.</s>
+                    <strong>NOW ${{ floatval($productPrices['DSYS2-DIGI']->discounted_price) }}</strong>
+                    (SAVE {{ round(100 - (100 * (floatval($productPrices['DSYS2-DIGI']->discounted_price) / floatval($productPrices['DSYS2-DIGI']->price)))) }}%).
                 @else
-                    <strong>ONLY ${{ Prices::$dsOnlineRegular }}</strong>
+                    <strong>ONLY ${{ floatval($productPrices['DSYS2-DIGI']->discounted_price) }}</strong>
                 @endif
                 <br> <span class="text-blue">90-DAY GUARANTEE.</span>
             </h2>

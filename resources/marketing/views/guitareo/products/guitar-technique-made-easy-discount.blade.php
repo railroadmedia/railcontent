@@ -73,7 +73,7 @@
 @stop
 
 @section('custom-price')
-    <s>NORMALLY ${{ GuitareoPrices::$GTMEFull }}.</s> &nbsp;<strong style="color:#00BC75;"><u>ONLY $97</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (97 / GuitareoPrices::$GTMEFull))) }}%)
+    <s>NORMALLY ${{ floatval($productPrices['GTME-OCT-2018-SEMESTER']->price) }}.</s> &nbsp;<strong style="color:#00BC75;"><u>ONLY $97</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (97 / floatval($productPrices['GTME-OCT-2018-SEMESTER']->price)))) }}%)
 @stop
 
 @section('custom-price-2')
@@ -81,7 +81,7 @@
 @stop
 
 @section('custom-price-3')
-    <s>Was ${{ GuitareoPrices::$GTMEFull }}.</s> <strong>Only $97.</strong>
+    <s>Was ${{ floatval($productPrices['GTME-OCT-2018-SEMESTER']->price) }}.</s> <strong>Only $97.</strong>
 @stop
 
 @section('benefits')

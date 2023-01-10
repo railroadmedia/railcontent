@@ -11,9 +11,9 @@
 
     <link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+    @include('_partials.layout._tailwindcdn')
     <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="/marketing/parcel/pianote/destupefy.css">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/destupefy.css') }}">
 @stop
 
 @section('global-body')
@@ -22,8 +22,8 @@
     ])
     @include('pianote._partials._promo-banner-no-tw', [
                     "name" => "De-Stupefy Your Left Hand",
-                    "fullPrice" => PianotePrices::$destupefyFull,
-                    "price" => PianotePrices::$destupefyRegular,
+                    "fullPrice" => floatval($productPrices['destupefy-your-left-hand']->price),
+                    "price" => floatval($productPrices['destupefy-your-left-hand']->discounted_price),
                     "noBreadcrumb" => true
                 ])
     <header class="header text-center" style="background-image:url(https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/destupefy-your-left-hand/header.jpg);">
@@ -35,11 +35,11 @@
             <a class="join" href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['destupefy-your-left-hand' => 1], 'redirect' => '/order', 'locked' => 'false']) }}">Get Started &raquo;</a>
 
             <p class="breakdown">
-                @if(PianotePrices::$destupefyFull > PianotePrices::$destupefyRegular)
-                    <s>NORMALLY ${{ PianotePrices::$destupefyFull }}.</s> &nbsp;
-                    <strong><u>ONLY ${{ PianotePrices::$destupefyRegular }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (PianotePrices::$destupefyRegular / PianotePrices::$destupefyFull))) }}%)
+                @if(floatval($productPrices['destupefy-your-left-hand']->price) > floatval($productPrices['destupefy-your-left-hand']->discounted_price))
+                    <s>NORMALLY ${{ floatval($productPrices['destupefy-your-left-hand']->price) }}.</s> &nbsp;
+                    <strong><u>ONLY ${{ floatval($productPrices['destupefy-your-left-hand']->discounted_price) }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (floatval($productPrices['destupefy-your-left-hand']->discounted_price) / floatval($productPrices['destupefy-your-left-hand']->price)))) }}%)
                 @else
-                    <strong><u>ONLY ${{ PianotePrices::$destupefyRegular }}</u></strong>
+                    <strong><u>ONLY ${{ floatval($productPrices['destupefy-your-left-hand']->discounted_price) }}</u></strong>
                 @endif
                 <br><a href="/" class="red">(OR FREE WITH A PIANOTE MEMBERSHIP)</a><br>
                     <strong class="yellow">** 90-DAY GUARANTEE **</strong></p>
@@ -326,25 +326,25 @@
         <div class="container">
             <h2><strong>What students <br class="hidden-sm hidden-md hidden-lg"> are saying.</strong></h2>
             <div class="testimonials">
-                @include('pianote.sales.partials._testimonial', [
+                @include('pianote.products.partials._testimonial', [
                 "heading" => "It was like I didn’t know how to play at all...",
                 "testimonial" => "My left hand seemed to have a mind of its own, and I’d get confused with the left-hand notes.<br><br>I had been having difficulty playing a song with both hands. I could play either hand alone, but when I’d try to play them together it was like I didn’t know how to play at all.<br><br>I stopped practicing the song for a few days and just concentrated on the left-hand exercises in De-Stupefy Your Left Hand for about a week.  Then when I went back to my song, I could play it with both hands!<br><br>I was so pleased. It really helped me move forward.<br><br>Now, my playing is more fluid and natural. I found it really helped me progress and overcome a hurdle that was getting me discouraged with my learning.",
                 "name" => "Joanne Dero",
                 "location" => "Ontario, Canada",
                 ])
-                @include('pianote.sales.partials._testimonial', [
+                @include('pianote.products.partials._testimonial', [
                 "heading" => "I noticed it was working when my wife said, ‘Hey that sounds pretty good.",
                 "testimonial" => "I had no variety in my left hand when trying to improvise. I just banged away on the chords. Also, I had very little confidence when sight-reading, constantly slowing down to get lefty in position.<br><br>De-Stupefy Your Left hand gave me (and is still giving me) specific exercises and drills that are fun to play at increasing tempos.<br><br>I noticed it was working when my wife said, “Hey that sounds pretty good.” She was right. I was running through the drills smoothly and with confidence.<br><br>I’d recommend this pack mainly because it’s fun. The lessons are short and well presented, and the exercises are designed so that you can feel yourself improving after just a few sessions. Another great addition to Pianote!",
                 "name" => "Stu Kollar",
                 "location" => "Ohio, USA",
                 ])
-                @include('pianote.sales.partials._testimonial', [
+                @include('pianote.products.partials._testimonial', [
                 "heading" => "(It) taught me things I would not have thought of on my own.",
                 "testimonial" => "I was struggling with my left hand, making mistakes, and having issues with my rhythm and dexterity.<br><br>De-Stupefy Your Left Hand kept my left hand pretty busy and taught me things I would not have thought of on my own.<br><br>I noticed it was making a difference when I played my arpeggios in a song I’m working on and I didn’t fumble as much. My husband said, “Wow!”. That was a great feeling!<br><br>I am more excited about my playing and more confident now. If you want to play with ease and have more dexterity in your left hand try this pack. You won’t regret it.",
                 "name" => "Linda Riddle",
                 "location" => "Missouri, USA",
                 ])
-                @include('pianote.sales.partials._testimonial', [
+                @include('pianote.products.partials._testimonial', [
                 "heading" => "(It feels) as if it was designed especially for my own issues.",
                 "testimonial" => "De-Stupefy Your Left Hand is really easy to follow, and being able to watch and follow along while someone else is playing makes it a lot easier.<br><br>When I started getting more control my left-hand playing became easier and lifted a load off my chest because this has always been a huge problem and frustration of mine.<br><br>De-Stupefy Your Left Hand is a really great presentation and makes a person feel as if it was designed especially for my own issues.<br><br>It was almost as if I was sitting right there!",
                 "name" => "Sean Robert Swart",
@@ -376,11 +376,11 @@
             <h1><strong>It’s time to tame<br class="hidden-sm hidden-md hidden-lg"> your left hand.</strong></h1>
             <a href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['destupefy-your-left-hand' => 1], 'redirect' => '/order', 'locked' => 'false']) }}" class="join">Get Started &raquo;</a>
             <p class="breakdown">
-                @if(PianotePrices::$destupefyFull > PianotePrices::$destupefyRegular)
-                    <s>NORMALLY ${{ PianotePrices::$destupefyFull }}.</s> &nbsp;
-                    <strong><u>ONLY ${{ PianotePrices::$destupefyRegular }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (PianotePrices::$destupefyRegular / PianotePrices::$destupefyFull))) }}%)
+                @if(floatval($productPrices['destupefy-your-left-hand']->price) > floatval($productPrices['destupefy-your-left-hand']->discounted_price))
+                    <s>NORMALLY ${{ floatval($productPrices['destupefy-your-left-hand']->price) }}.</s> &nbsp;
+                    <strong><u>ONLY ${{ floatval($productPrices['destupefy-your-left-hand']->discounted_price) }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (floatval($productPrices['destupefy-your-left-hand']->discounted_price) / floatval($productPrices['destupefy-your-left-hand']->price)))) }}%)
                 @else
-                    <strong><u>ONLY ${{ PianotePrices::$destupefyRegular }}</u></strong>
+                    <strong><u>ONLY ${{ floatval($productPrices['destupefy-your-left-hand']->discounted_price) }}</u></strong>
                 @endif
                 <br><a href="/" class="red">(OR FREE WITH A PIANOTE MEMBERSHIP)</a><br>
                     <strong class="yellow">** 90-DAY GUARANTEE **</strong></p>
@@ -406,22 +406,22 @@
         <div class="container no-padding">
             <h2 class="col-xs-12"><strong>Still Have Questions?</strong></h2>
             <div class="col-xs-12">
-                @include('pianote.sales.partials._week-breakdown', [
+                @include('pianote.products.partials._week-breakdown', [
                 "question" => true,
                 "weekTitle" => "Is this course for beginners?",
                 "weekDescription" => "Yes! This course is designed for beginners to show them the best way to start building a strong left-hand. But if you’re more advanced, that’s ok too. You can skip ahead in the course to the exercises that "
                 ])
-                @include('pianote.sales.partials._week-breakdown', [
+                @include('pianote.products.partials._week-breakdown', [
                 "question" => true,
                 "weekTitle" => "How long until I see results?",
                 "weekDescription" => "You might notice a change after your first lesson! If you commit to putting in the work and following the practice exercises, you’ll see real results in just a few days. With regular practice, it should take about a month to complete the entire course."
                 ])
-                @include('pianote.sales.partials._week-breakdown', [
+                @include('pianote.products.partials._week-breakdown', [
                 "question" => true,
                 "weekTitle" => " Do I need a special keyboard or cables?",
                 "weekDescription" => "No! The lessons and practice exercises work on any computer, smartphone, or tablet with an internet connection. And it works with ANY piano or keyboard. You don’t have to plug anything in."
                 ])
-                @include('pianote.sales.partials._week-breakdown', [
+                @include('pianote.products.partials._week-breakdown', [
                 "question" => true,
                 "weekTitle" => " What about the right hand?",
                 "weekDescription" => "EVERY exercise in this course for the left hand can also be applied to your right hand as well. Just switch up the fingering and you’ll be getting twice the value!"
@@ -434,8 +434,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
-    <script type="text/javascript" src="/marketing/parcel/pianote/nav-footer.js"></script>
-    <script type="text/javascript" src="/marketing/js/modal-autoplay-bootstrap.js"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay-bootstrap.js') }}"></script>
     <script>
         $(document).ready(function () {
             $('.lazy').Lazy({
@@ -452,5 +452,5 @@
         });
     </script>
 
-    @include('pianote._partials.inspectlet')
+
 @stop

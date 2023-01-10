@@ -446,7 +446,7 @@ class ContentProgressEventListener
             $this->contentService->getContentWithExternalVideoId($mediaPlaybackTracked->mediaId)
                 ->toArray();
 
-        $lengthInSeconds = $mediaPlaybackTracked->mediaLengthInSeconds;
+        $lengthInSeconds = (integer)$mediaPlaybackTracked->mediaLengthInSeconds;
 
         foreach ($vimeoIdFields as $content) {
             $totalTimeWatched = (integer)$this->mediaPlaybackRepository->sumTotalPlayed(
@@ -462,7 +462,7 @@ class ContentProgressEventListener
                     $this->userPointsService->setPoints(
                         $mediaPlaybackTracked->userId,
                         [
-                            'content_id' => $content['id'],
+                            'content_id' => $content['content_id'],
                             'minutes_watched' => $minutes,
                         ],
                         'minutes_of_content_watched',

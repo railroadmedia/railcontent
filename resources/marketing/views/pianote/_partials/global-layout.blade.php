@@ -8,15 +8,16 @@
 
     {!! \App\Analytics\Tracker::trackPageView() !!}
 
-    @include('pianote._partials.google-optimize')
+    <script src="https://www.googleoptimize.com/optimize.js?id=GTM-NJR7J6C"></script>
 
     @yield('global-head')
 
-    @include('pianote._partials._fonts')
+    @include('_partials.layout._fonts')
     @include('_partials.layout.favicons.pianote-favicons')
 
     {!! \App\Analytics\Tracker::headBottom() !!}
 
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 
 <body @yield('body-data')>
@@ -26,15 +27,16 @@
 @yield('global-body')
 <script type="text/javascript" src="{{ asset('marketing/js/pianote/pre-form-submit-facebook-lead.js') }}"></script>
 
-@include('helpscout::helpscout-tracking-beacon-script', ['email' => !is_null(user()) ? user()->getEmail() : null])
+<script type="text/javascript">!function(e,t,n){function a(){var e=t.getElementsByTagName("script")[0],n=t.createElement("script");n.type="text/javascript",n.async=!0,n.src="https://beacon-v2.helpscout.net",e.parentNode.insertBefore(n,e)}if(e.Beacon=n=function(t,n,a){e.Beacon.readyQueue.push({method:t,options:n,data:a})},n.readyQueue=[],"complete"===t.readyState)return a();e.attachEvent?e.attachEvent("onload",a):e.addEventListener("load",a,!1)}(window,document,window.Beacon||function(){});</script>
 <script type="text/javascript">
+    window.Beacon('init', '8c3ddef4-7a0e-42df-8200-a650c24932ea')
     Beacon('on', 'ready', () => {
-        document.querySelector('.BeaconFabButtonFrame').style.bottom = "50px";
-    });
+        document.querySelector('.BeaconFabButtonFrame').style.bottom ="50px";
+    })
 </script>
 {!! \App\Analytics\Tracker::bodyBottom() !!}
 
-<script type="text/javascript" src="/marketing/js/jquery.countdown-2.min.js"></script>
+<script type="text/javascript" src={{ asset('/marketing/js/jquery.countdown-2.min.js') }}></script>
 <script>
     $(document).ready(function () {
         $('.tzcd-smaller2').countdown('2022/12/27')
@@ -114,5 +116,28 @@
             });
     });
 </script>
+
+<script type="text/javascript" id="inspectletjs">
+    window.__insp = window.__insp || [];
+    __insp.push(['wid', 563774139]);
+    (function() {
+        function ldinsp(){
+            if(typeof window.__inspld != 'undefined') return;
+            window.__inspld = 1;
+            var insp = document.createElement('script');
+            insp.type = 'text/javascript';
+            insp.async = true;
+            insp.id = 'inspsync';
+            insp.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://cdn.inspectlet.com/inspectlet.js';
+            var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(insp, x); };
+        setTimeout(ldinsp, 500); document.readyState != 'complete' ? (window.attachEvent ? window.attachEvent('onload', ldinsp) : window.addEventListener('load', ldinsp, false)) : ldinsp();
+    })();
+
+    @if(!is_null(user()))
+    __insp.push(['identify', '{{user()->getEmail()}}']);
+    __insp.push(['tagSession', {email: '{{user()->getEmail()}}', userid: '{{user()->getId()}}'}])
+    @endif
+</script>
+
 </body>
 </html>

@@ -37,6 +37,18 @@
     font-family:"Bebas Neue", sans-serif;
 }
 
+.rotate-y-0 {
+    transform: rotateY(0deg);
+}
+
+.-rotate-y-180 {
+    transform: rotateY(-180deg);
+}
+
+.rotate-y-180 {
+    transform: rotateY(180deg);
+}
+
 .clearfix::after {
     content: "";
     display: table;
@@ -85,10 +97,10 @@ h1 sup, h2 sup, h3 sup, h4 sup, h5 sup, h6 sup, li sup, p sup {
 }
 
 h1 {
-    font-sizeize: 24px;
+    font-size: 24px;
 
     @media (min-width: 768px) {
-        font-sizeize: 36px;
+        font-size: 36px;
     }
 
     @media (min-width: 1024px){

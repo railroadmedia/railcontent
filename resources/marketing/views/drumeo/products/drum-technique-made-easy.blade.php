@@ -60,8 +60,8 @@
 @section('content')
     @include('drumeo.products.partials.promo-banner', [
                     "name" => "Drum Technique Made Easy",
-                    "fullPrice" => Prices::$dtmeFull,
-                    "price" => Prices::$dtmeRegular,
+                    "fullPrice" => floatval($productPrices['drum-technique-made-easy-pack']->price),
+                    "price" => floatval($productPrices['drum-technique-made-easy-pack']->discounted_price),
                 "noBreadcrumb" => true
                 ])
     <header class="hero-header">
@@ -73,13 +73,13 @@
             <h3>Drum Technique Made Easy is a 26-week
                 <br class="inline lg:hidden">online course with Bruce Becker & Jared Falk.</h3>
 
-            <div><a href="/laravel/public/shopping-cart/api/query?products[drum-technique-made-easy-pack]=1" class="join">Get Started &raquo;</a></div>
+            <div><a href="/ecommerce/add-to-cart?products[drum-technique-made-easy-pack]=1" class="join">Get Started &raquo;</a></div>
 
             <p class="uppercase price">
-                @if(Prices::$dtmeFull > Prices::$dtmeRegular)
-                    <s>Normally ${{ Prices::$dtmeFull }}.</s> <strong>Only ${{ Prices::$dtmeRegular }}.</strong> (Save {{ round(100 - (100 * (Prices::$dtmeRegular / Prices::$dtmeFull))) }}%)
+                @if(floatval($productPrices['drum-technique-made-easy-pack']->price) > floatval($productPrices['drum-technique-made-easy-pack']->discounted_price))
+                    <s>Normally ${{ floatval($productPrices['drum-technique-made-easy-pack']->price) }}.</s> <strong>Only ${{ floatval($productPrices['drum-technique-made-easy-pack']->discounted_price) }}.</strong> (Save {{ round(100 - (100 * (floatval($productPrices['drum-technique-made-easy-pack']->discounted_price) / floatval($productPrices['drum-technique-made-easy-pack']->price)))) }}%)
                 @else
-                    <strong>Now ${{ Prices::$dtmeRegular }}.</strong>
+                    <strong>Now ${{ floatval($productPrices['drum-technique-made-easy-pack']->discounted_price) }}.</strong>
                 @endif
                 <br>
                 <u class="text-green"><a href="/" style="color:inherit;">(Or get it free with Drumeo)</a></u>
@@ -91,7 +91,7 @@
                     <iframe class="reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/400749789?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
                 </div>
                 <br>
-                <a href="/laravel/public/shopping-cart/api/query?products[drum-technique-made-easy-pack]=1" class="join">Get Started &raquo;</a>
+                <a href="/ecommerce/add-to-cart?products[drum-technique-made-easy-pack]=1" class="join">Get Started &raquo;</a>
             </div>
         </div>
     </header>
@@ -501,7 +501,7 @@
     <section class="compare-table">
         <div class="container clearfix lg:mx-auto max-w-6xl">
             <h1>UNLOCK YOUR UNFAIR ADVANTAGE</h1>
-            <h3>while saving {{ round(100 - (100 * (round(Prices::$dtmeRegular / 26, 2) / 30))) }}% or more <br class="inline sm:inline">
+            <h3>while saving {{ round(100 - (100 * (round(floatval($productPrices['drum-technique-made-easy-pack']->discounted_price) / 26, 2) / 30))) }}% or more <br class="inline sm:inline">
                 compared to private lessons.</h3>
 
             <table>
@@ -571,13 +571,13 @@
                 </tr>
                 <tr class="prices">
                     <td>Your Total Investment</td>
-                    <td>${{ round(Prices::$dtmeRegular / 26, 2) }}/week</td>
+                    <td>${{ round(floatval($productPrices['drum-technique-made-easy-pack']->discounted_price) / 26, 2) }}/week</td>
                     <td>$30-50/week</td>
                 </tr>
                 </tbody>
             </table>
             <p>
-                <strong>You can unlock the full 26-week course today</strong> to get Bruce Becker’s curriculum for improving your technique on the drums -- <u>all for just {{ round(Prices::$dtmeRegular / 26, 2) }} per week</u> (billed at ${{ Prices::$dtmeRegular }} for the entire course).
+                <strong>You can unlock the full 26-week course today</strong> to get Bruce Becker’s curriculum for improving your technique on the drums -- <u>all for just {{ round(floatval($productPrices['drum-technique-made-easy-pack']->discounted_price) / 26, 2) }} per week</u> (billed at ${{ floatval($productPrices['drum-technique-made-easy-pack']->discounted_price) }} for the entire course).
                 <br><br> You can choose a one-time payment, a two-payment plan, or a five-payment plan -- and the entire course is yours for life with no recurring subscription or additional fees.
             </p>
         </div>
@@ -642,7 +642,7 @@
                 <img class="guarantee-badge hidden sm:inline-block" style="filter: hue-rotate(305deg) brightness(1.13);" src="https://dpwjbsxqtam5n.cloudfront.net/sales/guarantee-badge.png">
                 <div class="text-wrap text-left">
                     <h1>90-Day Money-Back Guarantee</h1>
-                    <p><strong>OUR PROMISE TO YOU:</strong> More than anything, we want you to enjoy a super-positive experience on the drums. And that means we only want you to pay if you actually LOVE your Drum Technique Made Easy experience. So click any of the big buttons on this page to get started risk-free. If it’s not for you, simply <a class="text-white" href="/support">contact us</a> within 90 days for a full refund.</p>
+                    <p><strong>OUR PROMISE TO YOU:</strong> More than anything, we want you to enjoy a super-positive experience on the drums. And that means we only want you to pay if you actually LOVE your Drum Technique Made Easy experience. So click any of the big buttons on this page to get started risk-free. If it’s not for you, simply <a class="text-white" href="{{ get_musora_brand_base_url() }}/contact">contact us</a> within 90 days for a full refund.</p>
                 </div>
             </div>
         </div>
@@ -654,15 +654,15 @@
 
             <h1>
                 Bruce Becker’s 26-Week Online <br class="inline lg:hidden">
-                Course For Just ${{ round(Prices::$dtmeRegular / 26, 2) }} Per Week</h1>
+                Course For Just ${{ round(floatval($productPrices['drum-technique-made-easy-pack']->discounted_price) / 26, 2) }} Per Week</h1>
 
-            <div><a href="/laravel/public/shopping-cart/api/query?products[drum-technique-made-easy-pack]=1" class="join">Get Started &raquo;</a></div>
+            <div><a href="/ecommerce/add-to-cart?products[drum-technique-made-easy-pack]=1" class="join">Get Started &raquo;</a></div>
 
             <h2 class="uppercase">
-                @if(Prices::$dtmeFull > Prices::$dtmeRegular)
-                    <s>Normally ${{ Prices::$dtmeFull }}.</s> <strong>Only ${{ Prices::$dtmeRegular }}.</strong> (Save {{ round(100 - (100 * (Prices::$dtmeRegular / Prices::$dtmeFull))) }}%)
+                @if(floatval($productPrices['drum-technique-made-easy-pack']->price) > floatval($productPrices['drum-technique-made-easy-pack']->discounted_price))
+                    <s>Normally ${{ floatval($productPrices['drum-technique-made-easy-pack']->price) }}.</s> <strong>Only ${{ floatval($productPrices['drum-technique-made-easy-pack']->discounted_price) }}.</strong> (Save {{ round(100 - (100 * (floatval($productPrices['drum-technique-made-easy-pack']->discounted_price) / floatval($productPrices['drum-technique-made-easy-pack']->price)))) }}%)
                 @else
-                    <strong>Now ${{ Prices::$dtmeRegular }}.</strong>
+                    <strong>Now ${{ floatval($productPrices['drum-technique-made-easy-pack']->discounted_price) }}.</strong>
                 @endif
                 <br>
                 <u class="text-green"><a href="/" style="color:inherit;">(Or get it free with Drumeo)</a></u>
@@ -677,8 +677,8 @@
             </div>
             <p class="final-questions">
                 <span><strong>Any questions?</strong></span> You can also call us or order by phone<br class="inline lg:hidden"> toll-free at
-                <a href="tel:1-800-439-8921">1-800-439-8921</a><br class="inline sm:hidden"> or directly at
-                <a href="tel:1-604-855-7605">1-604-855-7605</a>.<br> All prices listed in USD.</p>
+                <a href="tel:+18004398921">1-800-439-8921</a><br class="inline sm:hidden"> or directly at
+                <a href="tel:+16048557605">1-604-855-7605</a>.<br> All prices listed in USD.</p>
         </div>
     </section>
 

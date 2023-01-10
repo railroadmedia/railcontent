@@ -10,7 +10,7 @@ if (!function_exists('current_user_has_recent_order')) {
             return DB::connection(config('ecommerce.database_connection_name'))
                 ->table('ecommerce_orders')
                 ->where('user_id', user()->id)
-                ->where('created_at', '>', \Carbon\Carbon::now()->subMinute()->toDateTimeString())
+                ->where('created_at', '>', \Carbon\Carbon::now()->subMinutes(1)->toDateTimeString())
                 ->exists();
         }
 
@@ -26,8 +26,8 @@ if (!function_exists('get_legacy_brand_base_url')) {
 
         if (App::environment() == 'local' || App::environment() == 'development') {
             return 'https://dev.' . $brand . '.com' . ($withPort ? ':8443' : '');
-        } elseif (App::environment() == 'beta-testing' || str_contains(App::environment(), 'staging')) {
-            return 'https://staging.' . $brand . '.com';
+        } elseif (App::environment() != 'production') {
+            return 'https://' . App::environment() . '.' . $brand . '.com';
         }
 
         return 'https://www.' . $brand . '.com';
@@ -271,4 +271,24 @@ function isLive()
     }
 
     return $isLive;
+}
+
+if (!function_exists('array_entity_column')) {
+    /**
+     * @param stdClass[] $arrayOfEntities
+     * @param string $getMethodName
+     * @return array
+     */
+    function array_entity_column(array $arrayOfEntities, $getMethodName)
+    {
+        $arrayOfValues = [];
+
+        foreach ($arrayOfEntities as $entity) {
+            if (method_exists($entity, $getMethodName)) {
+                $arrayOfValues[] = $entity->$getMethodName();
+            }
+        }
+
+        return $arrayOfValues;
+    }
 }

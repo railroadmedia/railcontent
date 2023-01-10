@@ -1,4 +1,4 @@
-@extends('drumeo._partials.layout-template')
+@extends('drumeo._partials.global-layout')
 
 @section('global-head')
     <meta name="robots" content="noindex">
@@ -9,10 +9,10 @@
     <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/og-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/free-playalongs/">
 
-    @include('drumeo._partials._fonts')
+    @include('_partials.layout._fonts')
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link href="/marketing/css/drumeo/tailwind-helpers.css" rel="stylesheet">
+    @include('_partials.layout._tailwindcdn')
+    <link href="{{ asset('marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/lead-gen-tw.css') }}" rel="stylesheet">
     <style>
@@ -29,7 +29,7 @@
         <div class="container mx-auto">
             <div class="text-center sm:text-left inline-block align-middle hover:opacity-90 transition-opacity duration-300">
                 <img class="align-middle w-auto mr-2 h-6 hidden sm:inline-block" src="https://cdn.musora.com/image/fetch/w_300,q_60,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png">
-                <p class="inline-block align-middle mx-auto text-xs leading-tight">Get {{ Prices::$playAlongs }}+ more play-alongs + world-class drum  <br>
+                <p class="inline-block align-middle mx-auto text-xs leading-tight">Get {{ Prices::$drumeoPlayAlongs }}+ more play-alongs + world-class drum  <br>
                     lessons inside Drumeo. Click for a FREE trial.</p>
             </div>
         </div>
@@ -129,14 +129,16 @@
             <div class="w-full px-2 md:px-3 text-center">
                 <h1><strong>Keep the party going.</strong></h1>
                 <h4 class="mt-5 lg:mt-6 mb-6 lg:mb-9 leading-normal px-3">
-                    Get {{ Prices::$playAlongs }}+ play-alongs & world-class drum lessons  <br class="hidden md:inline">
+                    Get {{ Prices::$drumeoPlayAlongs }}+ play-alongs & world-class drum lessons  <br class="hidden md:inline">
                     inside Drumeo. Click below to try a free trial.</h4>
                 <a class="join" href="/choose-your-trial">Free Trial &raquo;</a>
             </div>
         </div>
     </section>
 
-    @include("drumeo.sales.partials._footer")
+    @include("drumeo.sales.partials._footer", [
+            "minimal" => true
+        ])
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script>

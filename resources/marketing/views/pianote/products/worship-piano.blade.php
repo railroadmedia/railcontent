@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="/marketing/parcel/pianote/worship-piano.css">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/worship-piano.css') }}">
 @stop
 
 @section('global-body')
@@ -21,8 +21,8 @@
     ])
     @include('pianote._partials._promo-banner-no-tw', [
                     "name" => "Worship Piano",
-                    "fullPrice" => PianotePrices::$worshipPianoFull,
-                    "price" => PianotePrices::$worshipPianoRegular,
+                    "fullPrice" => floatval($productPrices['worship-piano']->price),
+                    "price" => floatval($productPrices['worship-piano']->discounted_price),
                     "noBreadcrumb" => true
                 ])
 
@@ -43,11 +43,11 @@
             >Get Started &raquo;</a>
 
             <p class="breakdown">
-                @if(PianotePrices::$worshipPianoFull > PianotePrices::$worshipPianoRegular)
-                    <s>NORMALLY ${{ PianotePrices::$worshipPianoFull }}.</s> &nbsp;
-                    <strong><u>ONLY ${{ PianotePrices::$worshipPianoRegular }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (PianotePrices::$worshipPianoRegular / PianotePrices::$worshipPianoFull))) }}%)
+                @if(floatval($productPrices['worship-piano']->price) > floatval($productPrices['worship-piano']->discounted_price))
+                    <s>NORMALLY ${{ floatval($productPrices['worship-piano']->price) }}.</s> &nbsp;
+                    <strong><u>ONLY ${{ floatval($productPrices['worship-piano']->discounted_price) }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (floatval($productPrices['worship-piano']->discounted_price) / floatval($productPrices['worship-piano']->price)))) }}%)
                 @else
-                    <strong><u>ONLY ${{ PianotePrices::$worshipPianoRegular }}</u></strong>
+                    <strong><u>ONLY ${{ floatval($productPrices['worship-piano']->discounted_price) }}</u></strong>
                 @endif
                 <br><a href="/" class="red">(OR FREE WITH A PIANOTE MEMBERSHIP)</a><br> <strong
                         class="yellow">** 90-DAY GUARANTEE **</strong></p>
@@ -520,11 +520,11 @@
                 data-product-json='{"worship-piano": 1}'
             >Get Started &raquo;</a>
             <p class="breakdown">
-                @if(PianotePrices::$worshipPianoFull > PianotePrices::$worshipPianoRegular)
-                    <s>NORMALLY ${{ PianotePrices::$worshipPianoFull }}.</s> &nbsp;
-                    <strong><u>ONLY ${{ PianotePrices::$worshipPianoRegular }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (PianotePrices::$worshipPianoRegular / PianotePrices::$worshipPianoFull))) }}%)
+                @if(floatval($productPrices['worship-piano']->price) > floatval($productPrices['worship-piano']->discounted_price))
+                    <s>NORMALLY ${{ floatval($productPrices['worship-piano']->price) }}.</s> &nbsp;
+                    <strong><u>ONLY ${{ floatval($productPrices['worship-piano']->discounted_price) }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (floatval($productPrices['worship-piano']->discounted_price) / floatval($productPrices['worship-piano']->price)))) }}%)
                 @else
-                    <strong><u>ONLY ${{ PianotePrices::$worshipPianoRegular }}</u></strong>
+                    <strong><u>ONLY ${{ floatval($productPrices['worship-piano']->discounted_price) }}</u></strong>
                 @endif
                 <br><a href="/" class="red">(OR FREE WITH A PIANOTE MEMBERSHIP)</a><br> <strong
                         class="yellow">** 90-DAY GUARANTEE **</strong></p>
@@ -551,8 +551,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
-    <script type="text/javascript" src="/marketing/parcel/pianote/nav-footer.js"></script>
-    <script type="text/javascript" src="/marketing/js/modal-autoplay-bootstrap.js"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay-bootstrap.js') }}"></script>
     <script>
         $(document).ready(function () {
             $('.lazy').Lazy({
@@ -578,5 +578,5 @@
     <script src="{{ asset('marketing/js/pianote/cart-sidebar.js') }}"></script>
     <script src="{{ asset('marketing/js/pianote/app.js') }}"></script>
 
-    @include('pianote._partials.inspectlet')
+
 @stop

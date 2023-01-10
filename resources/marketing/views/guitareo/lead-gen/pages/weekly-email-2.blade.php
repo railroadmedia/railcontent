@@ -10,7 +10,7 @@
     <meta name="description" content="Enter your email to get fresh lessons, interviews, and content delivered to your inbox every week!">
 
     <base target="_parent">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
+    @include('_partials.layout._tailwindcdn')
     <link rel="stylesheet" href="{{ asset('/marketing/css/guitareo/tailwind-helpers.css') }}">
     <style>
         body {
@@ -97,7 +97,7 @@
     </style>
 
     @include('_partials.layout.favicons.guitareo-favicons')
-    @include('guitareo._partials._fonts')
+    @include('_partials.layout._fonts')
 
     {!! \App\Analytics\Tracker::trackPageView() !!}
 
@@ -132,7 +132,7 @@
 {!! \App\Analytics\Tracker::bodyBottom() !!}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="/marketing/parcel/guitareo/nav-footer.js"></script>
+<script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 </body>
 @include("guitareo.lead-gen.partials.impact-email-sign-up-tracker")
 </html>

@@ -31,23 +31,23 @@
             <div class="sm:flex mx-auto items-center text-center" style="max-width: 890px;">
                 <img class="w-full avatar mx-auto mb-3 md:mb-0" src="https://drumeo-assets.s3.amazonaws.com/sales/2021/musora-brands.png">
                 <div class="md:text-left px-2 md:pl-8 lg:pl-10">
-                    <h6 class="leading-normal"><strong>Musora Students</strong> To thank you for already being a Musora student, you’ll save {{ round(100 - (100 * (147 / PianotePrices::$pianoteMembershipAnnualFull))) }}% when you add a Pianote membership to your existing account. (Normally ${{ PianotePrices::$pianoteMembershipAnnualFull }} per year, yours for just $147.)</h6>
+                    <h6 class="leading-normal"><strong>Musora Students</strong> To thank you for already being a Musora student, you’ll save {{ round(100 - (100 * (147 / Prices::$plusSubscriptionAnnualFull))) }}% when you add a Pianote membership to your existing account. (Normally ${{ Prices::$plusSubscriptionAnnualFull }} per year, yours for just $147.)</h6>
                 </div>
             </div>
         </div>
     </div>
-    <a href="#orderNow" style="background:#0c1429;"
+    <a href="#customize-anchor" style="background:#0c1429;"
             class="promo-banner anchor-slide block text-center w-full transition-opacity duration-300 overflow-hidden whitespace-nowrap text-white bg-cover bg-center shadow-md py-1 hover:text-gray-100 z-0 mx-auto -mt-10 text-xs">
         <div class="container mx-auto">
             <div class="text text-center">
-                <p class="leading-tight uppercase"><strong>Musora Students Join Pianote<br> For Just <s class="opacity-60">${{ PianotePrices::$pianoteMembershipAnnualFull }}</s> $147 per year</strong></p>
+                <p class="leading-tight uppercase"><strong>Musora Students Join Pianote<br> For Just <s class="opacity-60">${{ Prices::$plusSubscriptionAnnualFull }}</s> $147 per year</strong></p>
             </div>
         </div>
     </a>
 @endsection
 
 @section('comparison')
-    <td><s>${{ PianotePrices::$pianoteMembershipAnnualFull }}</s> <strong>$147</strong><br>PER YEAR</td>
+    <td><s>${{ Prices::$plusSubscriptionAnnualFull }}</s> <strong>$147</strong><br>PER YEAR</td>
 @endsection
 
 @section('final')
@@ -55,8 +55,8 @@
     <section class="content-section grey text-center customize trial" style="background-color:#000;">
         <div class="container mx-auto">
             <img class="h-5 md:h-7 lg:h-10 mb-2" src="https://cdn.musora.com/image/fetch/w_250,q_auto:best/https://pianote.s3.amazonaws.com/logo/pianote-logo-red.png">
-            <h1 class="font-roboto uppercase text-2xl md:text-4xl lg:text-5xl"><strong>{{ round(100 - (100 * (147 / PianotePrices::$pianoteMembershipAnnualFull))) }}%-OFF MUSORA DISCOUNT</strong></h1>
-            <h2 class="mt-4 md:mt-7"><strong>Join Pianote for just<br class="inline md:hidden"> <s class="opacity-60">${{ PianotePrices::$pianoteMembershipAnnualFull }}</s> <span class="text-pianote">$147</span> per year.</strong></h2>
+            <h1 class="font-roboto uppercase text-2xl md:text-4xl lg:text-5xl"><strong>{{ round(100 - (100 * (147 / Prices::$plusSubscriptionAnnualFull))) }}%-OFF MUSORA DISCOUNT</strong></h1>
+            <h2 class="mt-4 md:mt-7"><strong>Join Pianote for just<br class="inline md:hidden"> <s class="opacity-60">${{ Prices::$plusSubscriptionAnnualFull }}</s> <span class="text-pianote">$147</span> per year.</strong></h2>
             <h5 class="mt-3 mb-4 md:mb-7 text-navy"><em>(90-Day Money Back Guarantee.)</em></h5>
             <a class="join methodcta" href="/ecommerce/add-to-cart?products%5BPIANOTE-MEMBERSHIP-1-YEAR%5D=1&promo-code=student-discount&redirect=%2Forder&locked=true">Get Started &raquo;</a>
             <p class="text-navy my-5"><em>Your discounted rate is conditional on your continuation as a multi-platform student. If you  <br class="hidden md:inline">

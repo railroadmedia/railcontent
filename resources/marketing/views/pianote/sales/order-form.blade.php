@@ -127,8 +127,11 @@
 @stop()
 
 @section('content')
+    {{-- Notifications Container --}}
+    <div id="notifications-container"></div>
+
     <header id="nav" class="bg-black-1 flex flex-row" style="background-color:#00162a;position: relative;padding: 7px 10px;">
-        <a href="/" class="logo flex flex-column align-center ph-1" style="max-width:144px;">
+        <a href="{{ get_legacy_brand_base_url('pianote') }}" class="logo flex flex-column align-center ph-1" style="max-width:144px;">
             <img src="https://cdn.musora.com/image/fetch/w_250,q_auto:best/https://pianote.s3.amazonaws.com/logo/pianote-logo-red.png">
         </a>
         <div class="flex flex-column align-h-right align-v-center ph-2">
@@ -176,6 +179,7 @@
                 theme-color="pianote"
                 brand="pianote"
                 :cart="{{ json_encode($cart) }}"
+                cart-data-url='{{ get_musora_brand_base_url() }}'
                 :billing-address="{{ json_encode($billingAddress) }}"
                 :shipping-address="{{ json_encode($shippingAddress) }}"
                 :user="{{ json_encode($user) }}"

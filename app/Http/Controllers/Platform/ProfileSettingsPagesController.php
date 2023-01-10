@@ -543,7 +543,7 @@ class ProfileSettingsPagesController extends BaseController
         // -------------------------------------------------------------------------------------------------------------
 
         $urlParamsByBrandForTrial = [
-            'drumeo' => 'products[DLM-Trial]=1,month,1&locked=true',
+            'drumeo' => 'products[DLM-Trial-1-month]=1&locked=true',
             'pianote' => 'products[PIANOTE-MEMBERSHIP-TRIAL]=1&redirect=%2Forder&locked=true',
             'guitareo' => 'products[GUITAREO-7-DAY-TRIAL-ONE-TIME]=1&redirect=%2Forder&locked=true',
             'singeo' => 'products[singeo-monthly-recurring-7-day-trial-membership]=1&redirect=%2Forder&locked=true',
@@ -553,7 +553,7 @@ class ProfileSettingsPagesController extends BaseController
             $urlParams = $urlParamsByBrandForTrial[$brand];
             $addToCartUrlTrial = 'https://' . $brand . '.com/ecommerce/add-to-cart?' . $urlParams;
             if ($brand == 'drumeo') {
-                $addToCartUrlTrial = 'https://drumeo.com/laravel/public/shopping-cart/api/query?' . $urlParams;
+                $addToCartUrlTrial = 'https://drumeo.com/ecommerce/add-to-cart?' . $urlParams;
             }
         } else {
             $addToCartUrlTrial = 'https://musora.com/';

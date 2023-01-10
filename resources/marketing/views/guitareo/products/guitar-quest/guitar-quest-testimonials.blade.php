@@ -172,7 +172,7 @@
 
 @section('scripts')
     @parent
-    <script src="{{ asset('marketing/parcel/guitareo/nav-footer.js') }}"></script>
+    <script src="{{ asset('marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             //sub nav sticky function
@@ -214,7 +214,7 @@
     @php
         $orderLink = '/ecommerce/add-to-cart?products[guitar-quest]=1&redirect=/order&payment-plan=1';
         $orderLinkAlt = '/ecommerce/add-to-cart?products[guitar-quest]=1&redirect=/order&payment-plan=5';
-        $productPrice = GuitareoPrices::$guitarQuestRegular
+        $productPrice = floatval($productPrices['guitar-quest']->discounted_price)
     @endphp
 
     <header class="header">

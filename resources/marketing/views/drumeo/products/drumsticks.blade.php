@@ -40,8 +40,8 @@
 
     @include('drumeo.products.partials.promo-banner', [
                 "name" => "Drumeo Drumsticks",
-                "fullPrice" => Prices::$sticksFull,
-                "price" => Prices::$sticksRegular,
+                "fullPrice" => floatval($productPrices['Drumeo-VaterSticks']->price),
+                "price" => floatval($productPrices['Drumeo-VaterSticks']->discounted_price),
                 "noBreadcrumb" => true
             ])
     <header class="header text-center">
@@ -58,15 +58,15 @@
             </div>
             <img data-open="previewModal" class="play-button autoplay-video" src="https://dpwjbsxqtam5n.cloudfront.net/sales/play-button.png">
             <br>
-            <a class="join blue" href="/laravel/public/shopping-cart/api/query?products[Drumeo-VaterSticks]=1">Grab A Pair &raquo;</a>
+            <a class="join blue" href="/ecommerce/add-to-cart?products[Drumeo-VaterSticks]=1">Grab A Pair &raquo;</a>
             {{--<a class="join sold-out">Sold Out</a>--}}
             <p class="dense">
-                @if(Prices::$sticksFull > Prices::$sticksRegular)
-                    <s>${{ Prices::$sticksFull }}</s>
-                    <strong>Only ${{ Prices::$sticksRegular, 2 }}</strong>
-                    (Save {{ round(100 - (100 * (Prices::$sticksRegular / Prices::$sticksFull))) }}%)
+                @if(floatval($productPrices['Drumeo-VaterSticks']->price) > floatval($productPrices['Drumeo-VaterSticks']->discounted_price))
+                    <s>${{ floatval($productPrices['Drumeo-VaterSticks']->price) }}</s>
+                    <strong>Only ${{ floatval($productPrices['Drumeo-VaterSticks']->discounted_price), 2 }}</strong>
+                    (Save {{ round(100 - (100 * (floatval($productPrices['Drumeo-VaterSticks']->discounted_price) / floatval($productPrices['Drumeo-VaterSticks']->price)))) }}%)
                 @else
-                    <strong>Only ${{ Prices::$sticksRegular }}</strong>
+                    <strong>Only ${{ floatval($productPrices['Drumeo-VaterSticks']->discounted_price) }}</strong>
                 @endif
             </p>
         </div>
@@ -75,7 +75,7 @@
                 <iframe class="reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/436834726?autoplay=1"
                         frameborder="0" allowfullscreen allow="autoplay"></iframe>
             </div>
-            <a class="join blue" href="/laravel/public/shopping-cart/api/query?products[Drumeo-VaterSticks]=1">Grab A Pair &raquo;</a>
+            <a class="join blue" href="/ecommerce/add-to-cart?products[Drumeo-VaterSticks]=1">Grab A Pair &raquo;</a>
         </div>
     </header>
 
@@ -268,15 +268,15 @@
             <img class="bubbles" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/vater-sticks/bubbles-vater.png">
             <img class="logo" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/vater-sticks/drumeo-drumsticks-logo.png">
             <br>
-            <a class="join blue" href="/laravel/public/shopping-cart/api/query?products[Drumeo-VaterSticks]=1">Grab A Pair &raquo;</a>
+            <a class="join blue" href="/ecommerce/add-to-cart?products[Drumeo-VaterSticks]=1">Grab A Pair &raquo;</a>
             {{--<a class="join sold-out">Sold Out</a>--}}
             <p class="dense">
-                @if(Prices::$sticksFull > Prices::$sticksRegular)
-                    <s>${{ Prices::$sticksFull }}</s>
-                    <strong>Only ${{ Prices::$sticksRegular, 2 }}</strong>
-                    (Save {{ round(100 - (100 * (Prices::$sticksRegular / Prices::$sticksFull))) }}%)
+                @if(floatval($productPrices['Drumeo-VaterSticks']->price) > floatval($productPrices['Drumeo-VaterSticks']->discounted_price))
+                    <s>${{ floatval($productPrices['Drumeo-VaterSticks']->price) }}</s>
+                    <strong>Only ${{ floatval($productPrices['Drumeo-VaterSticks']->discounted_price), 2 }}</strong>
+                    (Save {{ round(100 - (100 * (floatval($productPrices['Drumeo-VaterSticks']->discounted_price) / floatval($productPrices['Drumeo-VaterSticks']->price)))) }}%)
                 @else
-                    <strong>Only ${{ Prices::$sticksRegular }}</strong>
+                    <strong>Only ${{ floatval($productPrices['Drumeo-VaterSticks']->discounted_price) }}</strong>
                 @endif
             </p>
 

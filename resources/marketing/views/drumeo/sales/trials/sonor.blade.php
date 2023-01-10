@@ -1,21 +1,21 @@
-@extends('drumeo._partials.layout-template')
+@extends('drumeo._partials.global-layout')
 
 @section('global-head')
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=5">
     <title>Sonor Drummers Free Trial</title>
-    <meta name="description" content="You’re eligible for a free 30-day membership to Drumeo (normally $29).">
+    <meta name="description" content="You’re eligible for a free 30-day membership to Drumeo (normally $30).">
 
     <!-- Social Media -->
     <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/promos/sonor-trial/header-background.jpg" style="display: none;">
     <meta property="og:title" content="Sonor Drummers Free Trial">
-    <meta property="og:description" content="You’re eligible for a free 30-day membership to Drumeo (normally $29).">
+    <meta property="og:description" content="You’re eligible for a free 30-day membership to Drumeo (normally $30).">
     <meta property="og:url" content="https://www.drumeo.com/sonor/">
 
     @include('_partials.layout.favicons.drumeo-favicons')
-    @include('drumeo._partials._fonts')
+    @include('_partials.layout._fonts')
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
+    @include('_partials.layout._tailwindcdn')
     <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
@@ -25,7 +25,7 @@
 
 @section('global-body')
     @include("drumeo.sales.partials._nav", [
-        "edgeVersion" => true
+        "subscriptionVersion" => true
     ])
 
     @if(!empty($errors))
@@ -48,7 +48,7 @@
             <h1><strong>The Ultimate Online <br class="inline lg:hidden"> Drum Lessons Experience<sup>&trade;</sup></strong></h1>
             <i class="fas fa-play play-button autoplay-video" data-open="trailer"></i>
             <br>
-            <h4 class="px-2 md:px-3"><strong>Sonor Drummers:</strong> You’re eligible for a free 30-day membership to Drumeo (normally $29).<br class="hidden lg:inline">
+            <h4 class="px-2 md:px-3"><strong>Sonor Drummers:</strong> You’re eligible for a free 30-day membership to Drumeo (normally $30).<br class="hidden lg:inline">
                 Simply use the special access code you received on your flyer to activate your online drum lessons.</h4>
             <a data-open="redeem" class="join blue">REDEEM YOUR FREE LESSONS &raquo;</a>
         </div>
@@ -110,7 +110,7 @@
             <br>
             <h1><strong>The Ultimate Online <br class="inline lg:hidden"> Drum Lessons Experience<sup>&trade;</sup></strong></h1>
             <br>
-            <h4 class="px-2 md:px-3"><strong>Sonor Drummers:</strong> You’re eligible for a free 30-day membership to Drumeo (normally $29).<br class="hidden lg:inline">
+            <h4 class="px-2 md:px-3"><strong>Sonor Drummers:</strong> You’re eligible for a free 30-day membership to Drumeo (normally $30).<br class="hidden lg:inline">
                 Simply use the special access code you received on your flyer to activate your online drum lessons.</h4>
             <a data-open="redeem" class="join blue">REDEEM YOUR FREE LESSONS &raquo;</a>
         </div>
@@ -134,12 +134,12 @@
                     Fill out the form below to start your 30-Day Drumeo Membership.
                 </p>
 
-                <form action="{{ url()->route('access-codes.form-claim') }}" method="POST" novalidate>
+                <form action="{{ get_musora_brand_base_url() }}/ecommerce/access-codes/redeem" method="POST" novalidate>
                     {{ method_field('POST') }}
                     {{ csrf_field() }}
 
                     <input type="hidden" name="credentials_type" value="new">
-                    <input type="hidden" name="redirect" value="/members">
+                    <input type="hidden" name="redirect" value="{{ $redirectUrl ?? '/drumeo' }}">
 
                     <div class="mb-1">
                         @include('partials.bladesora.members.inputs.text-input', [
@@ -201,11 +201,11 @@
                             Fill out the form below to add 30 days to your Drumeo Membership.
                         </p>
 
-                        <form action="{{ url()->route('access-codes.form-claim') }}" method="POST" novalidate>
+                        <form action="{{ get_musora_brand_base_url() }}/ecommerce/access-codes/redeem" method="POST" novalidate>
                             {{ method_field('POST') }}
                             {{ csrf_field() }}
                             <input type="hidden" name="credentials_type" value="existing">
-                            <input type="hidden" name="redirect" value="/members">
+                            <input type="hidden" name="redirect" value="{{ $redirectUrl ?? '/drumeo' }}">
 
                             <div class="mb-1">
                                 @include('partials.bladesora.members.inputs.text-input', [

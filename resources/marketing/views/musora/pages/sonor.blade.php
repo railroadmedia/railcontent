@@ -283,12 +283,12 @@
                     Fill out the form below to start your 30-Day Drumeo Membership.
                 </p>
 
-                <form action="{{ url()->route('access-codes.form-claim') }}" method="POST" novalidate>
+                <form action="{{ get_musora_brand_base_url() }}/ecommerce/access-codes/redeem" method="POST" novalidate>
                     {{ method_field('POST') }}
                     {{ csrf_field() }}
 
                     <input type="hidden" name="credentials_type" value="new">
-                    <input type="hidden" name="redirect" value="/members">
+                    <input type="hidden" name="redirect" value="{{ $redirectUrl ?? '/drumeo' }}">
 
                     <div class="mb-1">
                         @include('partials.bladesora.members.inputs.text-input', [
@@ -350,11 +350,11 @@
                             Fill out the form below to add 30 days to your Drumeo Membership.
                         </p>
 
-                        <form action="{{ url()->route('access-codes.form-claim') }}" method="POST" novalidate>
+                        <form action="{{ get_musora_brand_base_url() }}/ecommerce/access-codes/redeem" method="POST" novalidate>
                             {{ method_field('POST') }}
                             {{ csrf_field() }}
                             <input type="hidden" name="credentials_type" value="existing">
-                            <input type="hidden" name="redirect" value="/members">
+                            <input type="hidden" name="redirect" value="{{ $redirectUrl ?? '/drumeo' }}">
 
                             <div class="mb-1">
                                 @include('partials.bladesora.members.inputs.text-input', [

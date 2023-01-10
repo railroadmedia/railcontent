@@ -3,13 +3,13 @@
 @php
     $orderLink = '/ecommerce/add-to-cart?products[guitar-quest]=1&redirect=/order&payment-plan=1';
     $orderLinkAlt = '/ecommerce/add-to-cart?products[guitar-quest]=1&redirect=/order&payment-plan=5';
-    $productPrice = GuitareoPrices::$guitarQuestRegular
+    $productPrice = floatval($productPrices['guitar-quest']->discounted_price)
 @endphp
 @section('top-promo-banner')
     @include('guitareo._partials.promo-banner', [
                 "name" => "Guitar Quest",
-                "fullPrice" => GuitareoPrices::$guitarQuestFull,
-                "price" => GuitareoPrices::$guitarQuestRegular,
+                "fullPrice" => floatval($productPrices['guitar-quest']->price),
+                "price" => floatval($productPrices['guitar-quest']->discounted_price),
                 "noBreadcrumb" => true
             ])
 @endsection
@@ -26,8 +26,8 @@
                     {{--<h2 class="uppercase font-bison-bold text-3xl md:text-6xl">Rob's <span class="text-goldenrod">32nd </span> Birthday Sale!</h2>--}}
                     {{--<h2 class="uppercase font-primary text-base md:text-md lg:text-lg mt-2 mb-7">--}}
 
-                        {{--Get {{ round(100 - (100 * (GuitareoPrices::$guitarQuestRegular / GuitareoPrices::$guitarQuestFull))) }}% off until Sunday, August 28th at midnight.--}}
-                        {{--SAVE {{ round(100 - (100 * (GuitareoPrices::$guitarQuestRegular / GuitareoPrices::$guitarQuestFull))) }}% + BONUS 1-YEAR GUITAREO  <br>--}}
+                        {{--Get {{ round(100 - (100 * (floatval($productPrices['guitar-quest']->discounted_price) / floatval($productPrices['guitar-quest']->price)))) }}% off until Sunday, August 28th at midnight.--}}
+                        {{--SAVE {{ round(100 - (100 * (floatval($productPrices['guitar-quest']->discounted_price) / floatval($productPrices['guitar-quest']->price)))) }}% + BONUS 1-YEAR GUITAREO  <br>--}}
                         {{--MEMBERSHIP FOR EXTRA LESSONS & SUPPORT--}}
                     {{--</h2>--}}
                     {{--<a title="Go To Order Page" href="{{ $orderLink }}" class="bg-goldenrod-gradient transition duration-500 linear px-8 py-3 w-auto inline-block uppercase text-black font-roboto-condensed-bold rounded-full text-center text-xl mb-5">--}}
@@ -62,7 +62,7 @@
             {{--style="top: 56px;background:linear-gradient(to bottom, #000419, #000f28);"--}}
     {{-->--}}
         {{--<h2 class="uppercase font-bison-bold text-lg md:text-3xl inline-block align-middle m-0 leading-none">Rob's <span class="text-goldenrod">32nd </span> Birthday Sale!</h2>--}}
-        {{--<p class="uppercase my-0 ml-2 inline-block align-middle text-xs md:text-sm text-center leading-none"><strong>Save {{ round(100 - (100 * (GuitareoPrices::$guitarQuestRegular / GuitareoPrices::$guitarQuestFull))) }}%</strong> on GuitarQuest<br> only until Aug 28th.</p>--}}
+        {{--<p class="uppercase my-0 ml-2 inline-block align-middle text-xs md:text-sm text-center leading-none"><strong>Save {{ round(100 - (100 * (floatval($productPrices['guitar-quest']->discounted_price) / floatval($productPrices['guitar-quest']->price)))) }}%</strong> on GuitarQuest<br> only until Aug 28th.</p>--}}
     {{--</a>--}}
 @endsection
 @section('final')

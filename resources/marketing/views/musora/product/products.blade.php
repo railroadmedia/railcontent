@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/css/drumeo/navigation-sales.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/css/shop.css') }}">
-    <link rel="stylesheet" href="https://dpwjbsxqtam5n.cloudfront.net/fonts/font-awesome-5/fontawesome-all.min.css">
+    <script src="https://kit.fontawesome.com/cf2f4c6c71.js" crossorigin="anonymous"></script>
 
     @parent
 @stop
@@ -282,7 +282,7 @@
             });
 
             //customize section pack picker
-            var originalLink = '/laravel/public/shopping-cart/api/query?go-back-to-shop=true';
+            var originalLink = '/ecommerce/add-to-cart?go-back-to-shop=true';
 
             $('select').prop('selectedIndex', 0);
             $(".pack-pick").change(function () {

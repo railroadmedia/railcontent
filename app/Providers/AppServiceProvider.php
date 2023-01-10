@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\ViewComposers\MarketingCartSidebarViewComposer;
+use App\ViewComposers\MarketingPagesProductsViewComposer;
 use App\ViewComposers\NavigationViewComposer;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\ServiceProvider;
@@ -50,6 +51,32 @@ class AppServiceProvider extends ServiceProvider
                 'singeo.sales.partials._nav',
             ],
             MarketingCartSidebarViewComposer::class
+        );
+
+        view()->composer(
+            [
+                'drumeo.drumshop.*',
+                'drumeo.lead-gen.*',
+                'drumeo.pages.*',
+                'drumeo.products.*',
+                'drumeo.sales.*',
+                'guitareo.lead-gen.*',
+                'guitareo.pages.*',
+                'guitareo.products.*',
+                'guitareo.sales.*',
+                'guitareo.shop.*',
+                'pianote.lead-gen.*',
+                'pianote.pages.*',
+                'pianote.products.*',
+                'pianote.sales.*',
+                'pianote.shop.*',
+                'singeo.lead-gen.*',
+                'singeo.pages.*',
+                'singeo.products.*',
+                'singeo.sales.*',
+                'singeo.shop.*',
+            ],
+            MarketingPagesProductsViewComposer::class
         );
 
         //        app()->instance(EcommerceUserProviderInterface::class, app()->make(EcommerceUserProvider::class));

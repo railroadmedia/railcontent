@@ -23,7 +23,7 @@
     @if(strpos(url()->full(), 'thankyou'))
         <div class="thank-you-banner text-center">
             <p><strong>Thanks for contacting us!</strong><br>
-                We'll respond to you soon! If you haven't heard back in the next week, please <a class="text-white" href="/support">contact us</a>.</p>
+                We'll respond to you soon! If you haven't heard back in the next week, please <a class="text-white" href="{{ get_musora_brand_base_url() }}/contact">contact us</a>.</p>
         </div>
     @endif
     @if(strpos(url()->full(), 'error'))
@@ -36,8 +36,8 @@
 
     @include('drumeo.products.partials.promo-banner', [
                     "name" => "The Drummer's Toolbox",
-                    "fullPrice" => Prices::$toolboxBookFull,
-                    "price" => Prices::$toolboxBookRegular,
+                    "fullPrice" => floatval($productPrices['the-drummers-toolbox-book']->price),
+                    "price" => floatval($productPrices['the-drummers-toolbox-book']->discounted_price),
                 "noBreadcrumb" => true
                 ])
     <header class="book-header toolbox text-center">
@@ -51,14 +51,14 @@
     </header>
     <section class="order-buttons text-center">
         <div class="row">
-            @if( Prices::$toolboxBookFull > Prices::$toolboxBookRegular)
-                <p><s>WAS ${{ Prices::$toolboxBookFull }}</s> &nbsp;<strong>NOW ${{ Prices::$toolboxBookRegular }}</strong>&nbsp; (SAVE ${{ (Prices::$toolboxBookFull - Prices::$toolboxBookRegular) }}).
-                    {{--<br>SAVE ${{ (Prices::$toolboxBookFull - Prices::$toolboxBookRegular) }} UNTIL MAY 19TH<br>--}}
+            @if( floatval($productPrices['the-drummers-toolbox-book']->price) > floatval($productPrices['the-drummers-toolbox-book']->discounted_price))
+                <p><s>WAS ${{ floatval($productPrices['the-drummers-toolbox-book']->price) }}</s> &nbsp;<strong>NOW ${{ floatval($productPrices['the-drummers-toolbox-book']->discounted_price) }}</strong>&nbsp; (SAVE ${{ (floatval($productPrices['the-drummers-toolbox-book']->price) - floatval($productPrices['the-drummers-toolbox-book']->discounted_price)) }}).
+                    {{--<br>SAVE ${{ (floatval($productPrices['the-drummers-toolbox-book']->price) - floatval($productPrices['the-drummers-toolbox-book']->discounted_price)) }} UNTIL MAY 19TH<br>--}}
                 </p>
             @else
-                <p><strong>ONLY ${{ Prices::$toolboxBookRegular }}</strong></p>
+                <p><strong>ONLY ${{ floatval($productPrices['the-drummers-toolbox-book']->discounted_price) }}</strong></p>
             @endif
-            <a class="join rounded" href="/laravel/public/shopping-cart/api/query?products[the-drummers-toolbox-book]=1">GET STARTED &raquo;</a>
+            <a class="join rounded" href="/ecommerce/add-to-cart?products[the-drummers-toolbox-book]=1">GET STARTED &raquo;</a>
 
             {{--<a class="join blue outline rounded" href="/">GET FREE WITH <img src="https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png"> &raquo;</a>--}}
                 <p>OR BUY FROM YOUR FAVORITE ONLINE STORES:<br class="hide-for-medium"> <a class="text-blue" target="_blank" href="https://www.amazon.com/dp/1999151933">AMAZON</a> &nbsp;|&nbsp; <a class="text-blue" target="_blank" href="https://www.amazon.com/dp/B07ZTTHK82/">KINDLE</a> &nbsp;|&nbsp; <a class="text-blue" target="_blank" href="https://books.apple.com/ca/book/id1487097588">APPLE</a></p>
@@ -488,13 +488,13 @@
                 </div>
                 <div class="columns medium-6 text-wrap">
                     <img src="https://dpwjbsxqtam5n.cloudfront.net/books/drummers-toolbox/sales/logo-stacked.png">
-                    @if( Prices::$toolboxBookFull > Prices::$toolboxBookRegular)
-                        <p><s>WAS ${{ Prices::$toolboxBookFull }}</s> <strong> NOW ${{ Prices::$toolboxBookRegular }}</strong>.
+                    @if( floatval($productPrices['the-drummers-toolbox-book']->price) > floatval($productPrices['the-drummers-toolbox-book']->discounted_price))
+                        <p><s>WAS ${{ floatval($productPrices['the-drummers-toolbox-book']->price) }}</s> <strong> NOW ${{ floatval($productPrices['the-drummers-toolbox-book']->discounted_price) }}</strong>.
                         </p>
                     @else
-                        <p><strong>ONLY ${{ Prices::$toolboxBookRegular }}.</strong></p>
+                        <p><strong>ONLY ${{ floatval($productPrices['the-drummers-toolbox-book']->discounted_price) }}.</strong></p>
                     @endif
-                    <a class="join rounded" href="/laravel/public/shopping-cart/api/query?products[the-drummers-toolbox-book]=1">CLICK HERE TO ORDER &raquo;</a>
+                    <a class="join rounded" href="/ecommerce/add-to-cart?products[the-drummers-toolbox-book]=1">CLICK HERE TO ORDER &raquo;</a>
                     {{--<a class="join white outline rounded" href="/">GET FREE WITH <img src="https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png"> &raquo;</a>--}}
                     <div class="button-centerer"><p style="max-width:100%">OR BUY FROM YOUR FAVORITE ONLINE STORES:<br class="hide-for-medium"> <a class="or-drumeo" target="_blank" href="https://www.amazon.com/dp/1999151933">AMAZON</a> &nbsp;|&nbsp; <a class="or-drumeo" target="_blank" href="https://www.amazon.com/dp/B07ZTTHK82/">KINDLE</a> &nbsp;|&nbsp; <a class="or-drumeo" target="_blank" href="https://books.apple.com/ca/book/id1487097588">APPLE</a></p></div>
                 </div>
@@ -540,7 +540,7 @@
             ])
             {{--@include('drumeo.products.partials.question-dropdown', [--}}
             {{--"question" => "It says there’s a free 30-day membership pass to Drumeo. What’s that?",--}}
-            {{--"answer" => "Drumeo is our award-winning online drum lessons experience, where you’ll get step-by-step video lessons from the best drummers and teachers in the world: <a target='_blank' href='https://www.drumeo.com/'>www.Drumeo.com/</a>.<br><br>We’ve included a free 30-day membership redemption pass inside every copy of The Best Beginner Drum Book, so once your book arrives you’ll get an amazing book PLUS video drum lessons for 30 days ($29 value)."--}}
+            {{--"answer" => "Drumeo is our award-winning online drum lessons experience, where you’ll get step-by-step video lessons from the best drummers and teachers in the world: <a target='_blank' href='https://www.drumeo.com/'>www.Drumeo.com/</a>.<br><br>We’ve included a free 30-day membership redemption pass inside every copy of The Best Beginner Drum Book, so once your book arrives you’ll get an amazing book PLUS video drum lessons for 30 days ($30 value)."--}}
             {{--])--}}
         </div>
         <div class="row">
@@ -582,7 +582,7 @@
 
                 @include('drumeo.lead-gen.partials.thank-you-box', [
                     "headline" => "SENT",
-                    "body" => "We'll respond to you soon! If you haven't heard back in the next week, please <a class='text-white' href='/support'>contact us</a>."
+                    "body" => "We'll respond to you soon! If you haven't heard back in the next week, please <a class='text-white' href='{{ get_musora_brand_base_url() }}/contact'>contact us</a>."
                 ])
             </div>
         </div>
@@ -590,7 +590,7 @@
 @stop
 @section('scripts')
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <script src="{{ asset('/marketing/js/sliding-anchor.js') }}"></script>
+
     <script>
         $(document).ready(function () {
             // book sticks to nav on scroll

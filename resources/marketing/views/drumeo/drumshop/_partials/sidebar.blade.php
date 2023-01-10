@@ -10,7 +10,7 @@
     <div class="lg:h-0">
     <div id="order" class="anchor"></div>
     <div class="side-slide overflow-hidden rounded border border-solid" style="border-color: #CCD3D3;">
-        @include('_partials.layout.holiday.shop-sidebar-banner')
+{{--        @include('_partials.layout.holiday.shop-sidebar-banner')--}}
 
         <div class="buy-section active px-5 pt-2 pb-6 text-center lg:py-6">
             @if(!empty($instructor))
@@ -42,14 +42,19 @@
                     SOLD OUT
                 </button>
             @else
-                @if($category !== 'bundles' && count($sizes) === 0)
+                @if($category !== 'bundles' && count($sizes) === 0 && !$bundle)
                     <a
                         class="online-atc vue-add-to-cart"
-                        href="/laravel/public/shopping-cart/api/query?go-back-to-shop=true&products[{!! $sku !!}]=1"
-                        data-base-url="/laravel/public/shopping-cart/api/query?go-back-to-shop=true&products[{!! $sku !!}]=1"
+                        href="/ecommerce/add-to-cart?go-back-to-shop=true&products[{!! $sku !!}]=1"
+                        data-base-url="/ecommerce/add-to-cart?go-back-to-shop=true&products[{!! $sku !!}]=1"
                         data-product-json='{"{!! $sku !!}": 1}'
                     >
                         <button class="join border-none"><i class="fas fa-cart-plus text-2xl mr-1"></i> Add To Cart</button>
+                    </a>
+                @elseif(!empty($bundle))
+                    <a class="online-atc" href="/ecommerce/add-to-cart?{!! $sku !!}"
+                       data-base-url="/ecommerce/add-to-cart?{!! $sku !!}">
+                        <button class="join border-none"><i class="fas fa-cart-plus text-2xl mr-1"></i> Order Now</button>
                     </a>
                 @endif
 
@@ -59,8 +64,7 @@
                         @foreach($sizes as $size)
                             <option
                                 class="bg-white text-black"
-                                @if(isset($size->soldOut) && $size->soldOut) disabled @endif
-                                {{-- @if($productStock[$sku.'-'.$size->code]->isProductSoldOut()) disabled @endif --}}
+                                @if($products[$sku.'-'.($size_case_sensitive ? strtolower($size->code) : $size->code)]->getStockAvailability() === 0) disabled @endif
                                 value="@if(!empty($sku)){{$sku}}-@endif{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}"
                                 data-price="{{!empty($size->price) ? $size->price : $price}}"
                                 data-product-json='{"@if(!empty($sku)){{$sku}}-@endif{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}": 1}'
@@ -72,10 +76,10 @@
                         class="online-atc merch vue-add-to-cart selected-pack"
                         href="#"
                         @if(!empty($promoCode))
-                        data-base-url="/laravel/public/shopping-cart/api/query?go-back-to-shop=true&promo-code={{$promoCode}}"
+                        data-base-url="/ecommerce/add-to-cart?go-back-to-shop=true&promo-code={{$promoCode}}"
                         data-promocode="{{ $promoCode }}"
                         @else
-                        data-base-url="/laravel/public/shopping-cart/api/query?go-back-to-shop=true"
+                        data-base-url="/ecommerce/add-to-cart?go-back-to-shop=true"
                         @endif
                         @if(!empty($lockedCart)) data-locked-cart="{{ $lockedCart }}" @endif
                     >
@@ -84,21 +88,14 @@
                         </button>
                     </a>
                 @endif
-
-                @if($category === 'bundles')
-                    <a class="online-atc" href="/laravel/public/shopping-cart/api/query?{!! $sku !!}"
-                       data-base-url="/laravel/public/shopping-cart/api/query?{!! $sku !!}">
-                        <button class="join border-none"><i class="fas fa-cart-plus text-2xl mr-1"></i> Order Now</button>
-                    </a>
-                @endif
             @endif
                 <p class="italic text-center mx-auto my-0 text-xs" style="color:#858c93;">
                     @if(!empty($freeShipping))
                         <i class="fas fa-truck text-drumeo"></i> <strong class="text-drumeo">FREE SHIPPING!</strong><br>
                     @endif
                     You can also order by phone toll-free at<br class="hidden sm:inline">
-                    <a href="tel:1-800-439-8921" class="text-drumeo">1-800-439-8921</a> or directly at
-                    <a href="tel:1-604-855-7605" class="text-drumeo">1-604-855-7605</a>. </p>
+                    <a href="tel:+18004398921" class="text-drumeo">1-800-439-8921</a> or directly at
+                    <a href="tel:+16048557605" class="text-drumeo">1-604-855-7605</a>. </p>
         </div>
         @if(!empty($guaranteeBadge))
             <div class="hidden lg:flex justify-center items-center px-5 pb-5 text-center md:pt-2 md:pt-4 md:pb-6 lg:p-5 lg:-mt-1 lg:mx-auto lg:mb-0 border-t-0 lg:border-t" style="border-color: #CCD3D3; border-top-style: solid;">

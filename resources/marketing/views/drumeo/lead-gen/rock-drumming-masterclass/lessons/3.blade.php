@@ -6,7 +6,7 @@
 
 @section('video', 'https://www.youtube.com/embed/QUKMr0_hVNg?rel=0&amp;showinfo=0')
 
-@section('lesson-number', '2')
+@section('lesson-number', '3')
 
 @section('previous')
     /rock-drumming-masterclass/most-important-rock-drum-tips

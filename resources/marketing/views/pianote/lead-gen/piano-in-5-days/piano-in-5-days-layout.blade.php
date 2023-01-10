@@ -12,6 +12,6 @@
 
 @endsection
 @section('head')
-    <link href="/marketing/parcel/pianote/lead-gen-learn-songs.css" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/pianote/lead-gen-learn-songs.css') }}" rel="stylesheet">
     @yield('extra-style')
 @endsection

@@ -11,7 +11,7 @@
     <meta property="og:url" content="https://www.pianote.com/foundations">
 
     <link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
+    @include('_partials.layout._tailwindcdn')
     <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/css/pianote/tailwind-helpers.css') }}" rel="stylesheet">
     <style>
@@ -188,8 +188,8 @@
     ])
     @include('pianote._partials._promo-banner-no-tw', [
                     "name" => "Pianote Foundations Books",
-                    "fullPrice" => PianotePrices::$foundationBooksFull,
-                    "price" => PianotePrices::$foundationBooksRegular,
+                    "fullPrice" => 149,
+                    "price" => 149,
                     "noBreadcrumb" => true
                 ])
     <header class="bg-navy-800 text-white relative text-center overflow-hidden">
@@ -205,9 +205,9 @@
                 <span class="sticky-trigger"></span>
                 <img class="book absolute z-0 transform -translate-x-1/2 left-1/2 modal-trigger cursor-pointer" src="https://d2vyvo0tyx8ig5.cloudfront.net/books/foundations/sales/pianote-foundations-box-set.png">
                 <div class="relative z-20 pb-12 header-text px-6">
-                    <h4 class="font-bold text-base md:text-lg"><strong>BUY NOW: ${{ PianotePrices::$foundationBooksRegular }} USD</strong></h4>
+                    <h4 class="font-bold text-base md:text-lg"><strong>BUY NOW: $149 USD</strong></h4>
 
-                    @if($products['pianote-foundation']->getStock() < 1)
+                    @if($products['pianote-foundation']->getStockAvailability() < 1)
                     <a class="join sold-out mt-3 mb-5 sm:mb-10 w-full max-w-2xl text-lg sm:text-xl md:text-2xl lg:text-3xl">SOLD OUT!</a>
                     @else
 
@@ -480,10 +480,10 @@
                     <img class="w-1/3 sm:w-1/4 lg:w-1/5 mx-auto sm:mx-0 mb-4 sm:mb-0" src="https://d2vyvo0tyx8ig5.cloudfront.net/books/foundations/sales/pianote-foundations-box-set.png">
                     <div class="sm:pl-12 lg:pl-20">
                         <h1 class="font-extrabold leading-tight text-lg sm:text-2xl md:text-3xl lg:text-4xl"><strong>The Complete Pianote<br> Curriculum At Your Fingertips</strong></h1>
-                        <h4 class="mt-4 sm:mt-6 mb-5 sm:mb-8 text-base md:text-lg">GET THE ENTIRE SET TODAY.<br><strong class="font-bold">JUST ${{ PianotePrices::$foundationBooksRegular }} USD</strong></h4>
+                        <h4 class="mt-4 sm:mt-6 mb-5 sm:mb-8 text-base md:text-lg">GET THE ENTIRE SET TODAY.<br><strong class="font-bold">JUST $149 USD</strong></h4>
 
 
-                        @if($products['pianote-foundation']->getStock() < 1)
+                        @if($products['pianote-foundation']->getStockAvailability() < 1)
                             <a class="join sold-out mt-3 mb-5 sm:mb-10 w-full max-w-2xl text-lg sm:text-xl md:text-2xl lg:text-3xl">SOLD OUT!</a>
                         @else
                             <a
@@ -609,12 +609,12 @@
 
         }, false);
     </script>
-    <script type="text/javascript" src="/marketing/parcel/pianote/nav-footer.js"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 
     {{-- Platform --}}
     <script src="{{ mix('/platform/js/manifest.js') }}"></script>
     <script src="{{ mix('/platform/js/vendor.js') }}"></script>
     <script src="{{ mix('/platform/js/app.js') }}"></script>
 
-    @include('pianote._partials.inspectlet')
+
 @stop

@@ -263,30 +263,28 @@
             @yield('video')
         </div>
         <p class="redeem-switcher text-left"><i class="fal fa-info-circle"></i> Although the card is for Drumeo, this card will give you full access to Drumeo, Pianote, Guitareo, and Singeo.</p>
-        {{-- @if($newAccount)
-            @if(empty($noSwitch))
-                <div class="redeem-switcher text-white rounded-xl py-4" style="background:#00060B;">
-                    <span><b>Existing Member?</b> <br><a class="text-white underline" href="/redeem/existing">Click here to add to your account.</a> </span><br>
-                    (The form below is only for new accounts)
-                </div>
-            @endif
+         @if($newAccount)
+            <div class="redeem-switcher text-white rounded-xl py-4" style="background:#00060B;">
+                <span><b>Existing Member?</b> <br><a class="text-white underline" href="/redeem/existing">Click here to add to your account.</a> </span><br>
+                (The form below is only for new accounts)
+            </div>
 
 
-            @include('musora.pages.redeem.redeem-form-new') --}}
-        {{-- @else --}}
-            {{-- @if(empty($noSwitch)) --}}
-                <div class="redeem-switcher text-white rounded-xl py-4" style="background:#00060B;">
-                    <span> <b>Not already a member?</b> <br><a class="text-white underline" href="/redeem">Click here to redeem on a new account.</a> </span><br>
-                    (The form below is only for existing members)
-                </div>
-            {{-- @endif --}}
+            @include('musora.pages.redeem.redeem-form-new')
+         @else
+            <div class="redeem-switcher text-white rounded-xl py-4" style="background:#00060B;">
+                <span> <b>Not already a member?</b> <br><a class="text-white underline" href="/redeem">Click here to redeem on a new account.</a> </span><br>
+                (The form below is only for existing members)
+            </div>
 
             @include('musora.pages.redeem.redeem-form-existing')
-        {{-- @endif --}}
+         @endif
+
         @foreach ($errors->all() as $error)
             <br>
             <p class="validation-error">{{ $error }}</p>
         @endforeach
+
         <br>
         <p class="help-message">
             ** If you enter the email of an account that already has an existing valid subscription, your subscription will be extended based on the time associated with your card.

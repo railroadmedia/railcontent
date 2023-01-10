@@ -11,9 +11,9 @@
 
     <link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+    @include('_partials.layout._tailwindcdn')
     <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="/marketing/parcel/pianote/ptme.css">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/ptme.css') }}">
 @stop
 
 @section('global-body')
@@ -22,8 +22,8 @@
     ])
     @include('pianote._partials._promo-banner-no-tw', [
                     "name" => "Piano Technique Made Easy",
-                    "fullPrice" => PianotePrices::$PTMEFull,
-                    "price" => PianotePrices::$PTMERegular,
+                    "fullPrice" => floatval($productPrices['piano-technique-made-easy']->price),
+                    "price" => floatval($productPrices['piano-technique-made-easy']->discounted_price),
                     "noBreadcrumb" => true
                 ])
     <header class="header text-center" style="background-image:url(https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/header.jpg);">
@@ -40,11 +40,11 @@
             >Get Started &raquo;</a>
 
             <p class="breakdown">
-                @if(PianotePrices::$PTMEFull > PianotePrices::$PTMERegular)
-                    <s>NORMALLY ${{ PianotePrices::$PTMEFull }}.</s> &nbsp;
-                    <strong><u>ONLY ${{ PianotePrices::$PTMERegular }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (PianotePrices::$PTMERegular / PianotePrices::$PTMEFull))) }}%)
+                @if(floatval($productPrices['piano-technique-made-easy']->price) > floatval($productPrices['piano-technique-made-easy']->discounted_price))
+                    <s>NORMALLY ${{ floatval($productPrices['piano-technique-made-easy']->price) }}.</s> &nbsp;
+                    <strong><u>ONLY ${{ floatval($productPrices['piano-technique-made-easy']->discounted_price) }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (floatval($productPrices['piano-technique-made-easy']->discounted_price) / floatval($productPrices['piano-technique-made-easy']->price)))) }}%)
                 @else
-                    <strong><u>ONLY ${{ PianotePrices::$PTMERegular }}</u></strong>
+                    <strong><u>ONLY ${{ floatval($productPrices['piano-technique-made-easy']->discounted_price) }}</u></strong>
                 @endif
                 <br><a href="/" class="red">(OR FREE WITH A PIANOTE MEMBERSHIP)</a><br> <strong
                         class="yellow">** 90-DAY GUARANTEE **</strong></p>
@@ -528,19 +528,19 @@
         <div class="container">
             <h2><strong>What students <br class="hidden-sm hidden-md hidden-lg"> are saying.</strong></h2>
             <div class="testimonials">
-                @include('pianote.sales.partials._testimonial', [
+                @include('pianote.products.partials._testimonial', [
                 "heading" => "I could learn songs … much easier",
                 "testimonial" => "I was unfamiliar with my scales and wanted to improve.<br><br>Piano Technique Made Easy was well laid out and thoughtful. I just needed to put in the work.<br><br>After starting, I noticed that I could learn songs in the keys I’ve practiced much easier, and it wasn’t tedious like before. It also helped me to doodle in case I forgot a few notes.<br><br>I’d recommend Piano Technique Made Easy because it will increase your familiarity with the piano and help you learn songs much faster.",
                 "name" => "Wasif Farhan",
                 "location" => "Dhaka, BANGLADESH",
                 ])
-                @include('pianote.sales.partials._testimonial', [
+                @include('pianote.products.partials._testimonial', [
                 "heading" => "I got the feeling I was actually improving…",
                 "testimonial" => "Piano Technique Made Easy has taught me the fundamentals and helped me get to playing some of my original songs.<br><br>Soon after starting, I got the feeling that I was actually improving and accomplishing what I set out to do.<br><br>If anyone is motivated to learn the piano, Pano Technique Made Easy is probably the best way to do it.",
                 "name" => "Dennis Inman",
                 "location" => "Washington, USA",
                 ])
-                @include('pianote.sales.partials._testimonial', [
+                @include('pianote.products.partials._testimonial', [
                 "heading" => "I had a hard time trying to remember scales…",
                 "testimonial" => "I had a hard time trying to remember scales. It is so much easier following the techniques on video, and it’s an excellent way of reinforcing memory.<br><br>Piano Technique Made Easy has helped to concentrate my learning. I enjoy a video demonstration that I can return to and find visual demo a good way to learn.<br><br>I REALLY enjoy the presentation of videos. They have a warm and encouraging teaching style. Well done!",
                 "name" => "Chris Fay",
@@ -573,11 +573,11 @@
                 data-product-json='{"piano-technique-made-easy": 1}'
             >Get Started &raquo;</a>
             <p class="breakdown">
-                @if(PianotePrices::$PTMEFull > PianotePrices::$PTMERegular)
-                    <s>NORMALLY ${{ PianotePrices::$PTMEFull }}.</s> &nbsp;
-                    <strong><u>ONLY ${{ PianotePrices::$PTMERegular }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (PianotePrices::$PTMERegular / PianotePrices::$PTMEFull))) }}%)
+                @if(floatval($productPrices['piano-technique-made-easy']->price) > floatval($productPrices['piano-technique-made-easy']->discounted_price))
+                    <s>NORMALLY ${{ floatval($productPrices['piano-technique-made-easy']->price) }}.</s> &nbsp;
+                    <strong><u>ONLY ${{ floatval($productPrices['piano-technique-made-easy']->discounted_price) }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (floatval($productPrices['piano-technique-made-easy']->discounted_price) / floatval($productPrices['piano-technique-made-easy']->price)))) }}%)
                 @else
-                    <strong><u>ONLY ${{ PianotePrices::$PTMERegular }}</u></strong>
+                    <strong><u>ONLY ${{ floatval($productPrices['piano-technique-made-easy']->discounted_price) }}</u></strong>
                 @endif
                 <br><a href="/" class="red">(OR FREE WITH A PIANOTE MEMBERSHIP)</a><br> <strong
                         class="yellow">** 90-DAY GUARANTEE **</strong></p>
@@ -603,8 +603,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
-    <script type="text/javascript" src="/marketing/parcel/pianote/nav-footer.js"></script>
-    <script type="text/javascript" src="/marketing/js/modal-autoplay-bootstrap.js"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay-bootstrap.js') }}"></script>
     <script>
         $(document).ready(function () {
             $('.lazy').Lazy({
@@ -682,5 +682,5 @@
     <script src="{{ asset('marketing/js/pianote/cart-sidebar.js') }}"></script>
     <script src="{{ asset('marketing/js/pianote/app.js') }}"></script>
 
-    @include('pianote._partials.inspectlet')
+
 @stop

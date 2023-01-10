@@ -21,107 +21,6 @@ class CmsBundleSeeder extends Seeder
             [
                 'brand' => 1,
                 'product_type_id' => 6,
-                'name' => 'The Beginner Bundle',
-                'slug' => 'bundle-beginner',
-                'sku' => 'products[DLM]=1,year,1&products[BeginnerBook]=1&products[practicepad]=1&products[Drumeo-VaterSticks]=1&products[independence-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[new-drummers-start-here]=1&products[learn-songs-faster-pack]=1&locked=true',
-                'meta_desc' => 'The perfect bundle to get you started on the drums.',
-                'meta_img' => 'https://drumeo-assets.s3.amazonaws.com/promos/july/beginner_banner.jpg',
-                'price' => 240,
-                'discounted_price' => 200,
-                'special_text' => '+$441.94 In FREE Bonuses',
-                'page_logo' => 'https://drumeo-assets.s3.amazonaws.com/promos/july/beginner_bundle_dark.png',
-                'header_text' => 'The perfect bundle to get you started on the drums.',
-                'video_src' => '',
-                'images' => [
-                    'https://drumeo-assets.s3.amazonaws.com/promos/july/beginner_banner.jpg',
-                ],
-                'sold_out' => true,
-                'guaranteed' => true,
-                'free_shipping' => true,
-                'products' => [
-                    [
-                        'name' => 'Drumeo Membership',
-                        'free_bonus' => false,
-                        'lifetime_access' => false,
-                    ],
-                    [
-                       'name' => 'The P4 Practice Pad',
-                        'free_bonus' => true,
-                        'lifetime_access' => false,
-                    ],
-                    [
-                        'name' => 'Vater Drumeo 5A Drumsticks',
-                        'free_bonus' => true,
-                        'lifetime_access' => false,
-                    ],
-                    [
-                        'name' => 'The Best Beginner Drum Book',
-                        'free_bonus' => true,
-                        'lifetime_access' => false,
-                    ],
-                    [
-                        'name' => 'Independence Made Easy',
-                        'free_bonus' => true,
-                        'lifetime_access' => true,
-                    ],
-                    [
-                        'name' => 'Four Weeks To Better Drum Fills',
-                        'free_bonus' => true,
-                        'lifetime_access' => true,
-                    ],
-                    [
-                        'name' => 'Learn Songs Faster',
-                        'free_bonus' => true,
-                        'lifetime_access' => true,
-                    ],
-                    [
-                        'name' => 'New Drummers Start Here',
-                        'free_bonus' => true,
-                        'lifetime_access' => true,
-                    ],
-                ],
-            ],
-            [
-                'brand' => 1,
-                'product_type_id' => 6,
-                'name' => 'The Hands & Feet Bundle',
-                'slug' => 'bundle-hands-feet',
-                'sku' => 'products[DLM]=1,year,1&products[quietpad]=1&products[quietkick]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[GHFAL-DIGI]=1&locked=true',
-                'meta_desc' => 'Improve your hands & feet anywhere, anytime.',
-                'meta_img' => 'https://drumeo-assets.s3.amazonaws.com/promos/july/hands_feet_bundle.jpg',
-                'price' => 240,
-                'discounted_price' => 200,
-                'special_text' => '+$450.94 In FREE Bonuses',
-                'page_logo' => 'https://drumeo-assets.s3.amazonaws.com/promos/july/hands-feet-bundle-logo-stack-black.png',
-                'header_text' => 'Improve your hands & feet anywhere, anytime.',
-                'video_src' => '',
-                'images' => [
-                    'https://drumeo-assets.s3.amazonaws.com/promos/july/hands_banner.jpg',
-                ],
-                'sold_out' => true,
-                'guaranteed' => true,
-                'free_shipping' => true,
-                'products' => [
-                    [
-                        'name' => 'Drumeo Membership',
-                        'free_bonus' => false,
-                        'lifetime_access' => false,
-                    ],
-                    [
-                        'name' => 'The P4 Practice Pad',
-                        'free_bonus' => true,
-                        'lifetime_access' => false,
-                    ],
-                    [
-                        'name' => 'Vater Drumeo 5A Drumsticks',
-                        'free_bonus' => true,
-                        'lifetime_access' => false,
-                    ],
-                ],
-            ],
-            [
-                'brand' => 1,
-                'product_type_id' => 6,
                 'name' => 'The Perfect Gift Bundle',
                 'slug' => 'bundle-perfect-gift',
                 'sku' => 'products[PASS-12]=1&products[practicepad]=1&products[Drumeo-VaterSticks]=1&locked=true',
@@ -204,7 +103,7 @@ You’ll have everything you need to improve your hands around the drums.',
                 'product_type_id' => 6,
                 'name' => 'The Ultimate Lessons Bundle',
                 'slug' => 'bundle-ultimate-lessons',
-                'sku' => 'products[DLM]=1,year,1&amp;products[quietpad]=1&amp;products[Drumeo-VaterSticks]=1&amp;products[drum-technique-made-easy-pack]=1&amp;products[four-weeks-to-better-drum-fills]=1&amp;products[GHFAL-DIGI]=1&amp;products[SD-DIGI]=1&amp;products[rock-drumming-masterclass-pack]=1&amp;products[independence-made-easy-pack]=1&amp;products[electrify-your-drumming]=1&amp;products[learn-songs-faster-pack]=1&amp;locked=true" data-base-url="/laravel/public/shopping-cart/api/query?products[DLM]=1,year,1&amp;products[quietpad]=1&amp;products[Drumeo-VaterSticks]=1&amp;products[drum-technique-made-easy-pack]=1&amp;products[four-weeks-to-better-drum-fills]=1&amp;products[GHFAL-DIGI]=1&amp;products[SD-DIGI]=1&amp;products[rock-drumming-masterclass-pack]=1&amp;products[independence-made-easy-pack]=1&amp;products[electrify-your-drumming]=1&amp;products[learn-songs-faster-pack]=1&amp;locked=true',
+                'sku' => 'products[DLM-1-year]=1&products[quietpad]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[GHFAL-DIGI]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[learn-songs-faster-pack]=1&locked=true" data-base-url="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[quietpad]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[GHFAL-DIGI]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[learn-songs-faster-pack]=1&locked=true',
                 'meta_desc' => 'The Biggest Drumeo Discount EVER + 10 Free Bonuses',
                 'meta_img' => 'https://drumeo-assets.s3.amazonaws.com/promos/november/ultimate-lessons-fb-share-image.jpg',
                 'price' => 1468.94,
@@ -425,7 +324,7 @@ Pay once and get lifetime access to 9 courses. You’ll learn how to play beauti
                 'free_shipping' => false,
                 'products' => [
                     [
-                        'name' => 'Piano Chords & Scales',
+                        'name' => 'The Power of Chords',
                         'free_bonus' => false,
                         'lifetime_access' => true,
                     ],
@@ -467,6 +366,115 @@ Pay once and get lifetime access to 9 courses. You’ll learn how to play beauti
                     [
                         'name' => 'Faster Fingers',
                         'free_bonus' => false,
+                        'lifetime_access' => true,
+                    ],
+                ],
+            ],
+            [
+                'brand' => 2,
+                'product_type_id' => 6,
+                'name' => 'The Unlimited Lessons Bundle',
+                'slug' => 'bundle-unlimited-lessons',
+                'sku' => 'products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[piano-chords-and-scales-guide]=1&products[pianote-practice-planner]=1&products[christmas-song-book]=1&products[christmas-song-book-digital]=1&products[poster-chords]=1&products[poster-scales]=1&products[the-power-of-chords]=1&products[classical-piano]=1&products[jesus-molina-improvisation-and-musical-freedom-pack]=1&products[play-beautiful-piano]=1&products[piano-riffs-and-fills]=1&products[piano-technique-made-easy]=1&products[destupefy-your-left-hand]=1&products[worship-piano]=1&products[faster-fingers]=1&redirect=/order&locked=true',
+                'meta_desc' => 'UNLIMITED piano lessons you can take anywhere, anytime.',
+                'meta_img' => 'https://pianote.s3.amazonaws.com/sales/promos/november/unlimited-lessons-fb-share-image-1.jpg',
+                'price' => 1101,
+                'discounted_price' => 240,
+                'special_text' => '',
+                'page_logo' => 'https://pianote.s3.amazonaws.com/sales/promos/november/unlimited-lessons-bundle-black.png',
+                'header_text' => 'UNLIMITED piano lessons you can take anywhere, anytime.',
+                'video_src' => '//player.vimeo.com/video/774401622',
+                'spread' => '',
+                'images' => [
+
+                ],
+                'overview' => 'The Unlimited Lessons Bundle gives you just that - unlimited piano lessons. Watch as many as you like, as often as you like.
+
+Learn your favorite songs in the comfort of your own home, whenever you want. Impress your family and friends with your piano playing - for a tiny fraction of the cost of private lessons.
+
+And get the support and feedback from real teachers who will help you every step of the way.',
+                'sold_out' => false,
+                'guaranteed' => true,
+                'free_shipping' => false,
+                'products' => [
+                    [
+                        'name' => 'Pianote Membership',
+                        'free_bonus' => false,
+                        'lifetime_access' => false,
+                    ],
+                    [
+                        'name' => 'Piano Chords & Scales',
+                        'free_bonus' => true,
+                        'lifetime_access' => false,
+                    ],
+                    [
+                        'name' => 'Pianote Practice Planner',
+                        'free_bonus' => true,
+                        'lifetime_access' => false,
+                    ],
+                    [
+                        'name' => 'Pianote Christmas Songbook',
+                        'free_bonus' => true,
+                        'lifetime_access' => false,
+                    ],
+                    [
+                        'name' => 'Pianote Digital Christmas Songbook',
+                        'free_bonus' => true,
+                        'lifetime_access' => true,
+                    ],
+                    [
+                        'name' => 'Chords Poster',
+                        'free_bonus' => true,
+                        'lifetime_access' => false,
+                    ],
+                    [
+                        'name' => 'Scales Poster',
+                        'free_bonus' => true,
+                        'lifetime_access' => false,
+                    ],
+                    [
+                        'name' => 'The Power of Chords',
+                        'free_bonus' => true,
+                        'lifetime_access' => true,
+                    ],
+                    [
+                        'name' => 'Classical Piano',
+                        'free_bonus' => true,
+                        'lifetime_access' => true,
+                    ],
+                    [
+                        'name' => 'Improvisation & Musical Freedom',
+                        'free_bonus' => true,
+                        'lifetime_access' => true,
+                    ],
+                    [
+                        'name' => 'Playing Beautiful Piano',
+                        'free_bonus' => true,
+                        'lifetime_access' => true,
+                    ],
+                    [
+                        'name' => 'Piano Riffs & Fills',
+                        'free_bonus' => true,
+                        'lifetime_access' => true,
+                    ],
+                    [
+                        'name' => 'Piano Technique Made Easy',
+                        'free_bonus' => true,
+                        'lifetime_access' => true,
+                    ],
+                    [
+                        'name' => 'De-Stupefy Your Left Hand',
+                        'free_bonus' => true,
+                        'lifetime_access' => true,
+                    ],
+                    [
+                        'name' => 'Worship Piano',
+                        'free_bonus' => true,
+                        'lifetime_access' => true,
+                    ],
+                    [
+                        'name' => 'Faster Fingers',
+                        'free_bonus' => true,
                         'lifetime_access' => true,
                     ],
                 ],
@@ -529,7 +537,7 @@ Pay once and get lifetime access to 9 courses. You’ll learn how to play beauti
                 'product_type_id' => 6,
                 'name' => 'The Sound Better Bundle',
                 'slug' => 'sound-better-bundle',
-                'sku' => 'products[GUITAREO-1-YEAR-MEMBERSHIP]=1&amp;products[guitarists-survival-kit]=1&amp;products[guitar-quest]=1&amp;products[rhythm-and-groove]=1&amp;products[GUITAR-SYSTEM]=1&amp;products[AGME-JAN-2019-SEMESTER]=1&amp;products[GTME-OCT-2018-SEMESTER]=1&amp;redirect=/order&amp;locked=true" data-base-url="/ecommerce/add-to-cart?redirect=/order&amp;products[GUITAREO-1-YEAR-MEMBERSHIP]=1&amp;products[guitarists-survival-kit]=1&amp;products[guitar-quest]=1&amp;products[rhythm-and-groove]=1&amp;products[GUITAR-SYSTEM]=1&amp;products[AGME-JAN-2019-SEMESTER]=1&amp;products[GTME-OCT-2018-SEMESTER]=1&amp;redirect=/order&amp;locked=true',
+                'sku' => 'products[GUITAREO-1-YEAR-MEMBERSHIP]=1&products[guitarists-survival-kit]=1&products[guitar-quest]=1&products[rhythm-and-groove]=1&products[GUITAR-SYSTEM]=1&products[AGME-JAN-2019-SEMESTER]=1&products[GTME-OCT-2018-SEMESTER]=1&redirect=/order&locked=true',
                 'meta_desc' => 'Get ALL the lessons and gear essentials to sound better on the guitar.',
                 'meta_img' => 'https://guitareo.s3.amazonaws.com/sales/promos/black-friday/sound-better-fb-share-image.jpg',
                 'price' => 491,
@@ -538,7 +546,7 @@ Pay once and get lifetime access to 9 courses. You’ll learn how to play beauti
                 'page_logo' => 'https://guitareo.s3.amazonaws.com/sales/promos/black-friday/the-sound-better-bundle-black.png',
                 'header_text' => 'Get ALL the lessons and gear essentials to start sounding better on the guitar.',
                 'video_src' => '//player.vimeo.com/video/774475126',
-                'spread' => 'src="https://guitareo.s3.amazonaws.com/sales/promos/black-friday/sound-better-bundle-spread-.png"',
+                'spread' => 'https://guitareo.s3.amazonaws.com/sales/promos/black-friday/sound-better-bundle-spread-.png',
                 'images' => [
 
                 ],

@@ -9,7 +9,7 @@
     <meta property="og:description" content="Two, maybe three times per year you get the chance to become a Pianote Lifetime Member.">
     <meta property="og:image" content="https://pianote.s3.amazonaws.com/sales/promos/november/lifetime-fb-share-image-1.jpg" style="display: none;">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
+    @include('_partials.layout._tailwindcdn')
     <link href="{{ asset('/marketing/css/pianote/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/sales.css') }}">
@@ -91,7 +91,7 @@
 
 @section('global-body')
     @include('pianote._partials._nav', [
-    "joinVersion" => true,
+    "subscriptionVersion" => true,
     ])
     {{--<style>--}}
     {{--.promo-banner-shim{display:block;width:100%;height:40px}--}}
@@ -105,8 +105,8 @@
     {{--<img class="logo"--}}
     {{--src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/march/logo.png">--}}
     {{--<p>--}}
-    {{--@if(!empty(App\Prices::$pianoteMembershipLifetime))--}}
-    {{--<strong>ONLY <s class='opacity-60'>50</s> {{ $products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount()}} SPOTS LEFT</strong>--}}
+    {{--@if(!empty(Prices::$lifetimeMembership))--}}
+    {{--<strong>ONLY <s class='opacity-60'>50</s> {{ $products['PIANOTE-MEMBERSHIP-LIFETIME']->getStockAvailability()}} SPOTS LEFT</strong>--}}
     {{--@endif--}}
     {{--</p>--}}
     {{--</div>--}}
@@ -123,7 +123,7 @@
                 </div>
             </div>
 
-            {{--            @if($products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() > 0)--}}
+            {{--            @if($products['PIANOTE-MEMBERSHIP-LIFETIME']->getStockAvailability() > 0)--}}
             {{--<a href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[singeo-1-year-membership-access]=1&products[piano-chords-and-scales-guide]=1&products[pianote-practice-planner]=1&locked=true&redirect=/order"--}}
             {{--class="join methodcta my-4">Lifetime Membership</a>--}}
             {{--@else--}}
@@ -251,14 +251,14 @@
                             'image' => 'https://pianote.s3.amazonaws.com/shop/card-thumbs/headphones-cart.jpg',
                             'title' => 'Pianote Headphones',
                             'description' => 'Hi-end, lightweight over-ear headphones for beautiful private practice sessions.',
-                            'price' => App\Prices::$headphonesFull,
+                            'price' => 189,
                             'feature' => "Free Shipping",
                         ],
                         [
                             'image' => 'https://pianote.s3.amazonaws.com/sales/2022/bonus-chords-scales.jpg',
                             'title' => 'Chords & <br>Scales Book',
                             'description' => 'Your encyclopedia of piano chords & scales.',
-                            'price' => App\Prices::$chordsScalesBookFull,
+                            'price' => 39,
                             'feature' => "Free Shipping",
                         ],
 
@@ -266,35 +266,35 @@
                             'image' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/planner.png',
                             'title' => 'Practice <br>Planner',
                             'description' => 'Always know exactly what to practice.',
-                            'price' => App\Prices::$practicePlannerFull,
+                            'price' => 39,
                             'feature' => "Free Shipping",
                         ],
                         [
                             'image' => 'https://pianote.s3.amazonaws.com/sales/promos/november/bonuses/christmas-book.jpg',
                             'title' => 'Christmas Book',
                             'description' => '14 beautiful Christmas Carols hand-picked and arranged for solo piano.',
-                            'price' => App\Prices::$christmasBookFull,
+                            'price' => 39,
                             'feature' => "Free Shipping",
                         ],
                         [
                             'image' => 'https://pianote.s3.amazonaws.com/sales/promos/november/bonuses/christmas-songbook-card.jpg',
                             'title' => 'Christmas Book',
                             'description' => 'Learn these 10 beautiful Christmas Carols.',
-                            'price' => App\Prices::$christmasBookDigital,
+                            'price' => 10,
                             'feature' => "Instant Access",
                         ],
                         [
                             'image' => 'https://pianote.s3.amazonaws.com/shop/products/2021-merch/card-chords-poster.jpg',
                             'title' => 'Chords Poster',
                             'description' => 'Always know your chord shapes with this helpful poster.',
-                            'price' => App\Prices::$posterFull,
+                            'price' => 9,
                             'feature' => "Free Shipping",
                         ],
                         [
                             'image' => 'https://pianote.s3.amazonaws.com/shop/products/2021-merch/card-scales-poster.jpg',
                             'title' => 'Scales Poster',
                             'description' => 'Never forget the notes of a scale with this easy-to-read poster.',
-                            'price' => App\Prices::$posterFull,
+                            'price' => 9,
                             'feature' => "Free Shipping",
                         ],
                         [
@@ -373,7 +373,7 @@
                 {{--<p style="max-width: 480px;color: #aaa;padding:0 15px;"><em>All digital bonuses are added to your account IMMEDIATELY  with your membership to Pianote, and they’re yours forever. </em></p>--}}
             </div>
 
-            {{--                    @if($products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() > 0)--}}
+            {{--                    @if($products['PIANOTE-MEMBERSHIP-LIFETIME']->getStockAvailability() > 0)--}}
             {{--                        <a  href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[pianote-headphones]=1&products[piano-chords-and-scales-guide]=1&products[pianote-practice-planner]=1&products[christmas-song-book]=1&products[christmas-song-book-digital]=1&products[poster-chords]=1&products[poster-scales]=1&products[the-power-of-chords]=1&products[classical-piano]=1&products[jesus-molina-improvisation-and-musical-freedom-pack]=1&products[play-beautiful-piano]=1&products[piano-riffs-and-fills]=1&products[piano-technique-made-easy]=1&products[destupefy-your-left-hand]=1&products[worship-piano]=1&products[faster-fingers]=1&redirect=/order&locked=true"--}}
             {{--                            class="join methodcta my-4" style="background:#FB0188;">Become A lifetime Member &raquo;</a>--}}
             {{--<p>(Or choose a payment plan on the next page.)</p>--}}
@@ -387,7 +387,7 @@
         <div class="container mx-auto relative z-50 max-w-md">
             <div class="inline-block w-full px-3 md:px-4 mb-5 text-light-navy">
                 <h5 class="mb-2"><strong>Still have questions?</strong></h5>
-                <p>If you need any further information about becoming a Lifetime Member, <a href="/support"><u>contact our amazing support team!</u></a>
+                <p>If you need any further information about becoming a Lifetime Member, <a href="{{ get_musora_brand_base_url() }}/contact"><u>contact our amazing support team!</u></a>
                     <br><br>
                     A friendly and knowledgeable support team member will get back to you right away.</p>
             </div>
@@ -408,10 +408,11 @@
     @include('pianote._partials._footer')
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="/marketing/parcel/pianote/nav-footer.js?v={{ filemtime(__FILE__) }}"></script>
+{{--    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>--}}
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
-    <script type="text/javascript" src="/marketing/js/modal.js"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script>
         $(document).ready(function () {
             $(document).foundation();
@@ -421,5 +422,5 @@
             });
         });
     </script>
-    <script type="text/javascript" src="/marketing/js/modal-autoplay.js"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
 @stop

@@ -14,7 +14,7 @@
 
 @section('styles')
     @parent
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
+    @include('_partials.layout._tailwindcdn')
     <link rel="stylesheet" href="{{ asset('/marketing/css/guitareo/tailwind-helpers.css') }}">
     <link href="{{ asset('/marketing/parcel/guitareo/sales-page.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}" rel="stylesheet">
@@ -27,8 +27,8 @@
     ])
     @include('guitareo._partials.promo-banner', [
                 "name" => "Rhythm & Groove",
-                "fullPrice" => GuitareoPrices::$rhythmAndGrooveFull,
-                "price" => GuitareoPrices::$rhythmAndGroove,
+                "fullPrice" => floatval($productPrices['rhythm-and-groove']->price),
+                "price" => floatval($productPrices['rhythm-and-groove']->discounted_price),
                 "noBreadcrumb" => true
             ])
 
@@ -39,10 +39,10 @@
             <h2><strong>Go beyond simple<br class="inline sm:hidden"> strumming</strong> on the guitar.</h2>
             <a class="join my-3 md:my-4 w-full max-w-xl" href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['rhythm-and-groove' => 1], 'redirect' => '/order']) }}">Start Your Course</a>
             <h3>
-                @if(GuitareoPrices::$rhythmAndGrooveFull > GuitareoPrices::$rhythmAndGroove)
-                    <s class="opacity-60">${{ GuitareoPrices::$rhythmAndGrooveFull }}</s>
+                @if(floatval($productPrices['rhythm-and-groove']->price) > floatval($productPrices['rhythm-and-groove']->discounted_price))
+                    <s class="opacity-60">${{ floatval($productPrices['rhythm-and-groove']->price) }}</s>
                 @endif
-                <strong class="">Only ${{ GuitareoPrices::$rhythmAndGroove }}</strong> {{--<span style="font-size: 75%;"><em>({{ round(100 - (100 * (GuitareoPrices::$rhythmAndGroove / GuitareoPrices::$rhythmAndGrooveFull))) }}% off)</em></span>--}}</h3>
+                <strong class="">Only ${{ floatval($productPrices['rhythm-and-groove']->discounted_price) }}</strong> {{--<span style="font-size: 75%;"><em>({{ round(100 - (100 * (floatval($productPrices['rhythm-and-groove']->discounted_price) / floatval($productPrices['rhythm-and-groove']->price)))) }}% off)</em></span>--}}</h3>
             <p class="leading-tight mt-2"><strong><a href="/" class="text-guitareo">(OR FREE WITH A GUITAREO MEMBERSHIP)</a><br>
                     <span class="text-coaches">** 90-DAY GUARANTEE **</span></strong></p>
         </div>
@@ -218,7 +218,7 @@
                 Our promise to you:
             </h2>
             <p class="text-center mb-8">
-                It’s important to us that you have an AWESOME time learning guitar. That’s why you have a 90-day risk-free guarantee. If this course doesn’t fulfill its promises to you, you’ll be eligible for a full refund by contacting our Student Experience Team <a href="/support"><u>here</u></a>.
+                It’s important to us that you have an AWESOME time learning guitar. That’s why you have a 90-day risk-free guarantee. If this course doesn’t fulfill its promises to you, you’ll be eligible for a full refund by contacting our Student Experience Team <a href="{{ get_musora_brand_base_url() }}/contact"><u>here</u></a>.
             </p>
             <div class="sm:flex lg:gap-6">
                 <div class="w-full sm:w-1/3 px-2 mb-3 sm:mb-0 text-center">
@@ -253,11 +253,11 @@
             {{--<p class="text-coaches tracking-widest">LIMITED TIME OFFER</p>--}}
             <a class="join my-2 md:my-3 w-full max-w-xl" href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['rhythm-and-groove' => 1], 'redirect' => '/order']) }}">Start Your Course</a>
             <h3>
-                @if(GuitareoPrices::$rhythmAndGrooveFull > GuitareoPrices::$rhythmAndGroove)
-                    <s class="opacity-60">${{ GuitareoPrices::$rhythmAndGrooveFull }}</s>
+                @if(floatval($productPrices['rhythm-and-groove']->price) > floatval($productPrices['rhythm-and-groove']->discounted_price))
+                    <s class="opacity-60">${{ floatval($productPrices['rhythm-and-groove']->price) }}</s>
                 @endif
-                <strong class="">Only  ${{ GuitareoPrices::$rhythmAndGroove }}</strong>
-                    {{--<em style="font-size: 70%;">({{ round(100 - (100 * (GuitareoPrices::$rhythmAndGroove / GuitareoPrices::$rhythmAndGrooveFull))) }}% off)</em>--}}
+                <strong class="">Only  ${{ floatval($productPrices['rhythm-and-groove']->discounted_price) }}</strong>
+                    {{--<em style="font-size: 70%;">({{ round(100 - (100 * (floatval($productPrices['rhythm-and-groove']->discounted_price) / floatval($productPrices['rhythm-and-groove']->price)))) }}% off)</em>--}}
             </h3>
             <p class="leading-tight mt-4"><strong><a href="/" class="text-guitareo">(OR FREE WITH A GUITAREO MEMBERSHIP)</a><br>
                 <span class="text-coaches">** 90-DAY GUARANTEE **</span></strong></p>
@@ -306,14 +306,14 @@
 
 @section('scripts')
     @parent
-    <script src="/marketing/js/modal.js"></script>
-    <script src="{{ asset('marketing/parcel/guitareo/nav-footer.js') }}"></script>
+    <script src="{{ asset('/marketing/js/modal.js') }}"></script>
+    <script src="{{ asset('marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $(document).foundation();
         });
     </script>
-    <script src="/marketing/js/modal-autoplay.js"></script>
+    <script src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
 @stop()

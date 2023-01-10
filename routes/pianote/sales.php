@@ -6,64 +6,55 @@ use App\Http\Controllers\Pianote\SalesController;
 Route::domain('{pianoteDomain}')
     ->middleware(['web_public'])
     ->group(function () {
-    Route::get('/', [SalesController::class, 'home']);
-
-    Route::get('/about', function () { return view('pianote.sales.pages.about'); });
-    Route::get('/app', function () { return view('pianote.sales.pages.app'); } );
-    Route::get('/support', function () { return view('pianote.sales.pages.support'); } );
-    Route::get('/cookie', function () { return view('pianote.sales.pages.cookie'); } );
-    Route::get('/terms', function () { return view('pianote.sales.pages.terms'); } );
-    Route::get('/privacy', function () {return view('pianote.sales.pages.privacy'); } );
-
+    Route::get('/', [SalesController::class, 'home'] );
+    Route::get('/new-year', [SalesController::class, 'promo'] );
+    Route::get('/choose-plan', [SalesController::class, 'choosePlan'] );
     Route::get('/shop/improvisation-with-jesus-molina', [SalesController::class, 'jesusMolina'] );
     Route::get('/student-only', [SalesController::class, 'studentOnly'] );
-    Route::get('/2', [SalesController::class, 'home'] );
     Route::get('/roland', [SalesController::class, 'roland'] );
-
-    Route::get('/trial', [SalesController::class, 'trial'] );
+    Route::get('/trial', [SalesController::class, 'home'] );
     Route::get('/trial-month', [SalesController::class, 'trialMonth'] );
-    Route::get('/choose-your-trial', function () { return view('pianote.sales.trials.trial-selection.week'); });
-    Route::get('/choose-your-trial-month', function () { return view('pianote.sales.trials.trial-selection.month'); });
-
-    Route::get('/a/davidbennett', function () { return view('pianote.sales.trials.affiliates.davidbennett'); });
-    Route::get('/affiliate/asobergirlsguide', function () { return view('pianote.sales.trials.affiliates.asobergirlsguide'); });
-    Route::get('/affiliate/keyboardkraze', function () { return view('pianote.sales.trials.affiliates.keyboardkraze'); });
-    Route::get('/affiliate/leviclay', function () { return view('pianote.sales.trials.affiliates.leviclay'); });
-    Route::get('/affiliate/pianodreamers', function () { return view('pianote.sales.trials.affiliates.pianodreamers'); });
-    Route::get('/affiliate-trial', function () { return view('pianote.sales.trials.trial-selection.affiliates'); });
-
     Route::get('/shop/500-songs', [SalesController::class, 'songs500'] );
     Route::get('/the-power-of-chords', [SalesController::class, 'PowerOfChords'] );
     Route::get('/shop/the-power-of-chords', [SalesController::class, 'PowerOfChords'] );
     Route::get('/the-power-of-chords-bootcamp', [SalesController::class, 'PowerOfChordsBootcamp'] );
     Route::get('/the-power-of-chords-giveaway', [SalesController::class, 'PowerOfChordsGiveaway'] );
+    Route::get('/foundations', [SalesController::class, 'foundations'] );
 
-    Route::get('/giveaway', function () { return view('pianote.lead-gen.giveaway'); });
+    Route::get('/about', [SalesController::class, 'about'] );
+    Route::get('/app', [SalesController::class, 'app'] );
+    Route::get('/cookie', [SalesController::class, 'cookie'] );
+    Route::get('/terms', [SalesController::class, 'terms'] );
+    Route::get('/privacy', [SalesController::class, 'privacy'] );
+    Route::get('/songs', [SalesController::class, 'songs'] );
+    Route::get('/method', [SalesController::class, 'method'] );
+    Route::get('/coaches', [SalesController::class, 'coaches'] );
+    Route::get('/choose-your-trial', [SalesController::class, 'choosePlan'] );
+    Route::get('/choose-your-trial-month', [SalesController::class, 'chooseyourtrialmonth'] );
+    Route::get('/a/davidbennett', [SalesController::class, 'davidbennett'] );
+    Route::group(['prefix' => 'affiliate' ],
+        function () {
+            Route::get('/{page?}', SalesController::class . '@affiliates')
+                ->whereIn('page', [
+                    'asobergirlsguide', 'keyboardkraze', 'leviclay', 'pianodreamers'
+                ]);
+        }
+    );
+    Route::get('/affiliate-trial', [SalesController::class, 'affiliatetrial'] );
+    Route::get('/giveaway', [SalesController::class, 'giveaway'] );
+    Route::get('/{page?}', SalesController::class . '@products')
+        ->whereIn('page', [
+            '500-songs-fb', '500-songs-discount', '500-songs-carols-discount', '500-songs-chord-discount', '500-songs-elton-john', '500-songs-alicia-keys', '500-songs-sam-smith', '500-songs-taylor-swift', '500-songs-the-beatles', '500-songs-free-lesson'
+        ]);
+    Route::get('/shop/faster-fingers', [SalesController::class, 'fasterfingers'] );
+    Route::get('/shop/worship-piano', [SalesController::class, 'worshippiano'] );
+    Route::get('/shop/piano-technique-made-easy', [SalesController::class, 'pianotechniquemadeeasy'] );
+    Route::get('/shop/destupefy-your-left-hand', [SalesController::class, 'destupefyyourlefthand'] );
+    Route::get('/shop/play-beautiful-piano', [SalesController::class, 'playbeautifulpiano'] );
+    Route::get('/shop/beginner-classical-piano', [SalesController::class, 'beginnerclassicalpiano'] );
+    Route::get('/lifetime', [SalesController::class, 'lifetime'] );
+    Route::get('/lisa-recommends', [SalesController::class, 'lisarecommends'] );
+    Route::get('/welcome-party', [SalesController::class, 'welcomeparty'] );
+    Route::post('/claim-roland-90-day-access', [SalesController::class, 'claimRoland90DaysAccess'] );
 
-    Route::get('/500-songs-fb', function () { return view('pianote.products.500-songs-fb'); } );
-    Route::get('/500-songs-discount', function () { return view('pianote.products.500-songs-discount'); } );
-    Route::get('/500-songs-carols-discount', function () { return view('pianote.products.500-songs-carols-discount'); } );
-    Route::get('/500-songs-chord-discount', function () { return view('pianote.products.500-songs-chord-discount'); } );
-    Route::get('/500-songs-elton-john', function () { return view('pianote.products.500-songs-elton-john'); } );
-    Route::get('/500-songs-alicia-keys', function () { return view('pianote.products.500-songs-alicia-keys'); } );
-    Route::get('/500-songs-sam-smith', function () { return view('pianote.products.500-songs-sam-smith'); } );
-    Route::get('/500-songs-taylor-swift', function () { return view('pianote.products.500-songs-taylor-swift'); } );
-    Route::get('/500-songs-the-beatles', function () { return view('pianote.products.500-songs-the-beatles'); } );
-    Route::get('/500-songs-free-lesson', function () { return view('pianote.lead-gen.500-songs-free-lesson'); } );
-    Route::get('/shop/faster-fingers', function () { return view('pianote.products.faster-fingers'); } );
-    Route::get('/shop/worship-piano', function () { return view('pianote.products.worship-piano'); } );
-    Route::get('/shop/piano-technique-made-easy', function () { return view('pianote.products.piano-technique-made-easy'); } );
-    Route::get('/shop/destupefy-your-left-hand', function () { return view('pianote.products.destupefy-your-left-hand'); } );
-    Route::get('/shop/play-beautiful-piano', function () { return view('pianote.products.play-beautiful-piano'); } );
-    Route::get('/beginner-classical-piano', function () { return view('pianote.products.beginner-classical-piano'); } );
-        Route::get('/worship-piano', function () { return view('pianote.products.worship-piano', ['theme' => 'pianote']); } );
-
-    Route::get('/lifetime', function () { return view('pianote.shop.pages.lifetime', ['theme' => 'pianote']); } );
-    Route::get('/keep-learning', function () { return view('pianote.shop.pages.keep-learning', ['theme' => 'pianote']); } );
-    Route::get('/upgrade-offer', function () { return view('pianote.shop.pages.upgrade-offer', ['theme' => 'pianote']); } );
-
-    Route::get('/lisa-recommends', function () { return view('pianote.shop.lisa-recommends'); } );
-
-    // lead-gen ARTICLES AND VIDEOS
-    Route::get('/welcome-party', function () { return view('pianote.lead-gen.welcome-party'); } );
 });

@@ -1,4 +1,4 @@
-@extends('drumeo._partials.layout-template')
+@extends('drumeo._partials.global-layout')
 
 @section('global-head')
     <title>Keep your membership + get 9 free bonuses. | Drumeo</title>
@@ -7,11 +7,11 @@
 
     <meta name="description" content="You’ve spent 30-days crushing it with step-by-step drum lessons and we want to help you keep it going! ">
     <meta property="og:description" content="You’ve spent 30-days crushing it with step-by-step drum lessons and we want to help you keep it going! ">
-        <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/sales/2022/og-image.jpg" style="display: none;">
+        <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/sales/2023/share-image-drumeo.jpg" style="display: none;">
 
-    @include('drumeo._partials._fonts')
+    @include('_partials.layout._fonts')
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
+    @include('_partials.layout._tailwindcdn')
     <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
@@ -29,7 +29,7 @@
 
 @section('global-body')
         @include("drumeo.sales.partials._nav", [
-            "edgeVersion" => true,
+            "subscriptionVersion" => true,
             "scrollToJoin" => true
         ])
     <section class="content-section text-center" style="padding-bottom: 0;">
@@ -82,7 +82,7 @@
                                 'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/pad.jpg',
                                 'title' => 'Drumeo QuietPad',
                                 'description' => 'The portable, double-sided practice pad with one traditional side and one quiet side.',
-                                'price' => Prices::$quietPadFull,
+                                'price' => floatval($productPrices['quietpad']->price),
                                 'online-ship' => "Free Shipping",
                                 'shipping' => "no-shipping"
                                 ],
@@ -90,7 +90,7 @@
                                 'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/drumsticks.jpg',
                                 'title' => 'Drumeo Drumsticks',
                                 'description' => 'Drumeo 5A Drumsticks by Vater -- made with hickory and extra moisture to last longer.',
-                                'price' => Prices::$sticksFull,
+                                'price' => floatval($productPrices['Drumeo-VaterSticks']->price),
                                 'online-ship' => "Free Shipping",
                                 'shipping' => "no-shipping"
                                 ],
@@ -98,7 +98,7 @@
                                 'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/tdt.jpg',
                                 'title' => "The Drummer's Toolbox",
                                 'description' => 'Presenting drummers the most comprehensive introduction to 101 drumming styles.',
-                                'price' => Prices::$toolboxBookFull,
+                                'price' => floatval($productPrices['the-drummers-toolbox-book']->price),
                                 'online-ship' => "Free Shipping",
                                 'shipping' => "no-shipping"
                                 ],
@@ -106,42 +106,42 @@
                                 'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/rdm.jpg',
                                 'title' => 'Rock Drumming Masterclass',
                                 'description' => 'Todd Sucherman’s 26-week masterclass to help you improve your rock drumming.',
-                                'price' => Prices::$rdmFull,
+                                'price' => floatval($productPrices['rock-drumming-masterclass-pack']->price),
                                 'online-ship' => "Instant Access"
                                 ],
                                 [
                                 'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/dtme.jpg',
                                 'title' => 'Drum Technique Made Easy',
                                 'description' => 'Bruce Becker’s 26-week masterclass to improve your hand & foot technique.',
-                                'price' => Prices::$dtmeFull,
+                                'price' => floatval($productPrices['drum-technique-made-easy-pack']->price),
                                 'online-ship' => "Instant Access"
                                 ],
                                 [
                                 'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/ime.jpg',
                                 'title' => 'Independence Made Easy',
                                 'description' => 'Jared Falk’s 26-week masterclass to unlock your musicality and freedom on the drums.',
-                                'price' => Prices::$imeFull,
+                                'price' => floatval($productPrices['independence-made-easy-pack']->price),
                                 'online-ship' => "Instant Access"
                                 ],
                                 [
                                 'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/sd.jpg',
                                 'title' => 'Successful Drumming',
                                 'description' => 'Jared Falk’s 18-hour video curriculum for building a solid foundation on the drums.',
-                                'price' => Prices::$sdOnlineFull,
+                                'price' => floatval($productPrices['SD-DIGI']->price),
                                 'online-ship' => "Instant Access"
                                 ],
                                 [
                                 'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/lsf.jpg',
                                 'title' => 'Learn Songs Faster',
                                 'description' => 'This masterclass will give you proven techniques for learning MORE songs in less time.',
-                                'price' => Prices::$learnSongsFasterFull,
+                                'price' => floatval($productPrices['learn-songs-faster-pack']->price),
                                 'online-ship' => "Instant Access"
                                 ],
                                 [
                                 'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/fwtbdf.jpg',
                                 'title' => 'Better Drum Fills',
                                 'description' => 'The ultimate four-week crash course to playing more creative & more musical drum fills.',
-                                'price' => Prices::$bdfFull,
+                                'price' => floatval($productPrices['four-weeks-to-better-drum-fills']->price),
                                 'online-ship' => "Instant Access"
                                 ],
                             ]
@@ -182,10 +182,10 @@
                     <p class="px-2"><strong>Your annual membership will start at the end of your 30-day trial. <br class="hidden md:inline">
                             So you’ll still get the full value of your one dollar purchase.</strong></p>
 
-                    <a class="join blue bigger my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="/laravel/public/shopping-cart/api/query?products[DLM]=1,year,1&products[quietpad]=1&products[Drumeo-VaterSticks]=1&products[the-drummers-toolbox-book]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&bonuses[drum-technique-made-easy-pack]=1&bonuses[independence-made-easy-pack]=1&bonuses[four-weeks-to-better-drum-fills]=1&bonuses[learn-songs-faster-pack]=1&locked=true&promo-code=full-time">Keep My Membership &raquo;</a>
+                    <a class="join blue bigger my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[quietpad]=1&products[Drumeo-VaterSticks]=1&products[the-drummers-toolbox-book]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&bonuses[drum-technique-made-easy-pack]=1&bonuses[independence-made-easy-pack]=1&bonuses[four-weeks-to-better-drum-fills]=1&bonuses[learn-songs-faster-pack]=1&locked=true&promo-code=full-time">Keep My Membership &raquo;</a>
 
                     <br><br class="inline-block md:hidden">
-                    <a class="monthly-alt" href="/laravel/public/shopping-cart/api/query?products[DLM]=1,month,1&locked=true"><p><u><em>Or start a monthly membership for <br class="inline-block md:hidden">${{ Prices::$drumeoEdgeRegular }}/month. (no bonuses)</em></u></p></a>
+                    <a class="monthly-alt" href="/ecommerce/add-to-cart?products[DLM-1-month]=1&locked=true"><p><u><em>Or start a monthly membership for <br class="inline-block md:hidden">${{ Prices::$plusSubscriptionMonthly }}/month. (no bonuses)</em></u></p></a>
                 </div>
         </section>
         <section class="content-section text-center" style="background: #0c1429;">
@@ -218,7 +218,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/js/sliding-anchor.js') }}"></script>
+
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
     <script>

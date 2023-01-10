@@ -30,8 +30,8 @@
 
     @include('drumeo.products.partials.promo-banner', [
                 "name" => "Learn Songs Faster",
-                "fullPrice" => Prices::$learnSongsFasterFull,
-                "price" => Prices::$learnSongsFasterRegular,
+                "fullPrice" => floatval($productPrices['learn-songs-faster-pack']->price),
+                "price" => floatval($productPrices['learn-songs-faster-pack']->discounted_price),
                 "noBreadcrumb" => true
             ])
     <header class="header text-center">
@@ -41,22 +41,22 @@
             <h1><strong>Your guide to learning MORE songs in  <br class="show-for-medium">
                     less time with Jared Falk & Dave Atkinson.</strong></h1>
             <h3 class="dense"><strong>
-                    @if(Prices::$learnSongsFasterFull > Prices::$learnSongsFasterRegular)
-                        <strong class="text-yellow">ONLY <s style="opacity:0.6">${{ Prices::$learnSongsFasterFull }}</s>
-                            @if(number_format(Prices::$learnSongsFasterRegular, 2) == intval(Prices::$learnSongsFasterRegular))
-                                ${{  Prices::$learnSongsFasterRegular  }}
+                    @if(floatval($productPrices['learn-songs-faster-pack']->price) > floatval($productPrices['learn-songs-faster-pack']->discounted_price))
+                        <strong class="text-yellow">ONLY <s style="opacity:0.6">${{ floatval($productPrices['learn-songs-faster-pack']->price) }}</s>
+                            @if(number_format(floatval($productPrices['learn-songs-faster-pack']->discounted_price), 2) == intval(floatval($productPrices['learn-songs-faster-pack']->discounted_price)))
+                                ${{  floatval($productPrices['learn-songs-faster-pack']->discounted_price)  }}
                             @else
-                                ${{  number_format(Prices::$learnSongsFasterRegular, 2)  }}
+                                ${{  number_format(floatval($productPrices['learn-songs-faster-pack']->discounted_price), 2)  }}
                             @endif
-                        </strong> (SAVE {{ round(100 - (100 * (Prices::$learnSongsFasterRegular / Prices::$learnSongsFasterFull))) }}%)
+                        </strong> (SAVE {{ round(100 - (100 * (floatval($productPrices['learn-songs-faster-pack']->discounted_price) / floatval($productPrices['learn-songs-faster-pack']->price)))) }}%)
                     @else
-                        <strong class="text-yellow">ONLY ${{ Prices::$learnSongsFasterRegular }}.</strong>
+                        <strong class="text-yellow">ONLY ${{ floatval($productPrices['learn-songs-faster-pack']->discounted_price) }}.</strong>
                     @endif
                 </strong></h3>
             @if(auth()->check())
-                <a href="/members/packs" class="join blue">View Masterclass &raquo;</a>
+                <a href="{{ get_musora_brand_base_url() }}/drumeo/packs" class="join blue">View Masterclass &raquo;</a>
             @else
-                <a href="/laravel/public/shopping-cart/api/query?products[learn-songs-faster-pack]=1" class="join blue">GET STARTED &raquo;</a>
+                <a href="/ecommerce/add-to-cart?products[learn-songs-faster-pack]=1" class="join blue">GET STARTED &raquo;</a>
             @endif
             <a href="/" style="color:inherit;"><h6>OR click here to get this pack FREE<br class="hide-for-medium"> with a Drumeo membership.</h6></a>
         </div>
@@ -197,22 +197,22 @@
                     less time with Jared Falk & Dave Atkinson</strong></h2>
 
             <h2 class="dense"><strong>
-                    @if(Prices::$learnSongsFasterFull > Prices::$learnSongsFasterRegular)
-                        <strong class="text-yellow">ONLY <s style="opacity:0.6">${{ Prices::$learnSongsFasterFull }}</s>
-                            @if(number_format(Prices::$learnSongsFasterRegular, 2) == intval(Prices::$learnSongsFasterRegular))
-                                ${{  Prices::$learnSongsFasterRegular  }}
+                    @if(floatval($productPrices['learn-songs-faster-pack']->price) > floatval($productPrices['learn-songs-faster-pack']->discounted_price))
+                        <strong class="text-yellow">ONLY <s style="opacity:0.6">${{ floatval($productPrices['learn-songs-faster-pack']->price) }}</s>
+                            @if(number_format(floatval($productPrices['learn-songs-faster-pack']->discounted_price), 2) == intval(floatval($productPrices['learn-songs-faster-pack']->discounted_price)))
+                                ${{  floatval($productPrices['learn-songs-faster-pack']->discounted_price)  }}
                             @else
-                                ${{  number_format(Prices::$learnSongsFasterRegular, 2)  }}
+                                ${{  number_format(floatval($productPrices['learn-songs-faster-pack']->discounted_price), 2)  }}
                             @endif
-                        </strong> (SAVE {{ round(100 - (100 * (Prices::$learnSongsFasterRegular / Prices::$learnSongsFasterFull))) }}%)
+                        </strong> (SAVE {{ round(100 - (100 * (floatval($productPrices['learn-songs-faster-pack']->discounted_price) / floatval($productPrices['learn-songs-faster-pack']->price)))) }}%)
                     @else
-                        <strong class="text-yellow">ONLY ${{ Prices::$learnSongsFasterRegular }}.</strong>
+                        <strong class="text-yellow">ONLY ${{ floatval($productPrices['learn-songs-faster-pack']->discounted_price) }}.</strong>
                     @endif
                 </strong></h2>
             @if(auth()->check())
-                <a href="/members/packs" class="join blue">View Masterclass &raquo;</a>
+                <a href="{{ get_musora_brand_base_url()}}/drumeo/packs" class="join blue">View Masterclass &raquo;</a>
             @else
-                <a href="/laravel/public/shopping-cart/api/query?products[learn-songs-faster-pack]=1" class="join blue">GET STARTED &raquo;</a>
+                <a href="/ecommerce/add-to-cart?products[learn-songs-faster-pack]=1" class="join blue">GET STARTED &raquo;</a>
             @endif
             <a href="/" style="color:inherit;"><h6>OR click here to get this pack FREE<br class="hide-for-medium"> with a Drumeo membership.</h6></a>
 

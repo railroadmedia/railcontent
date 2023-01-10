@@ -7,7 +7,7 @@
 <div class="side-bar sliding-function px-3 md:px-4 lg:px-4 lg:w-1/3 lg:mt-5 lg:h-0 mb-4 lg:mb-0">
     <div id="order" class="anchor"></div>
     <div class="side-slide md:border md:border-solid md:rounded-md" style="border-color: #CCD3D3;">
-        @include('_partials.layout.holiday.shop-sidebar-banner')
+{{--        @include('_partials.layout.holiday.shop-sidebar-banner')--}}
 
         <div class="active pt-2 px-5 pb-6 text-center md:py-6 md:px-4">
             @if(!empty($instructor))
@@ -39,7 +39,7 @@
                     SOLD OUT
                 </button>
             @else
-                @if($category !== 'bundles' && count($sizes) === 0)
+                @if($category !== 'bundles' && count($sizes) === 0 && !$bundle)
                     <a
                         class="online-atc vue-add-to-cart"
                         href="/ecommerce/add-to-cart?redirect=/shop&products[{!! $sku !!}]=1"
@@ -48,6 +48,11 @@
                     >
                         <button class="border-none join"><i class="fas fa-cart-plus"></i> Add To Cart</button>
                     </a>
+                @elseif($bundle)
+                    <a class="online-atc" href="/ecommerce/add-to-cart?redirect=/order&{!! $sku !!}"
+                       data-base-url="/ecommerce/add-to-cart?redirect=/order&{!! $sku !!}">
+                        <button class="border-none join"><i class="fas fa-cart-plus"></i> Order Now</button>
+                    </a>
                 @endif
 
                 @if(!empty($sizes) && count($sizes) > 0)
@@ -55,9 +60,8 @@
                         <option hidden value="">@if(!empty($optionText)) {{ $optionText }} @else Choose Size @endif</option>
                         @foreach($sizes as $size)
                             <option
-                                @if(isset($size->soldOut) && $size->soldOut) disabled @endif
-                            {{-- @if($productStock[$sku.'-'.$size->code]->isProductSoldOut()) disabled @endif --}}
-                            value="@if(!empty($sku)){{$sku}}-@endif{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}"
+                                @if($products[$sku.'-'.($size_case_sensitive ? strtolower($size->code) : $size->code)]->getStockAvailability() === 0) disabled @endif
+                                value="@if(!empty($sku)){{$sku}}-@endif{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}"
                                 data-price="{{!empty($size->price) ? $size->price : $price}}"
                                 data-product-json='{"@if(!empty($sku)){{$sku}}-@endif{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}": 1}'
                             >
@@ -82,21 +86,14 @@
                         </button>
                     </a>
                 @endif
-
-                @if($category === 'bundles')
-                    <a class="online-atc" href="/ecommerce/add-to-cart?redirect=/order&{!! $sku !!}"
-                       data-base-url="/ecommerce/add-to-cart?redirect=/order&{!! $sku !!}">
-                        <button class="border-none join"><i class="fas fa-cart-plus"></i> Order Now</button>
-                    </a>
-                @endif
             @endif
             <p class="italic text-xs leading-normal text-center mx-auto">
                 @if(!empty($freeShipping))
                     <i class="fas fa-truck"></i> <strong>FREE SHIPPING!</strong><br>
                 @endif
                 You can also order by phone toll-free at<br class="hidden sm:inline">
-                <a class="text-singeo" href="tel:1-800-439-8921">1-800-439-8921</a> or directly at
-                <a class="text-singeo" href="tel:1-604-855-7605">1-604-855-7605</a>.
+                <a class="text-singeo" href="tel:+18004398921">1-800-439-8921</a> or directly at
+                <a class="text-singeo" href="tel:+16048557605">1-604-855-7605</a>.
             </p>
         </div>
         @if(!empty($guaranteeBadge))

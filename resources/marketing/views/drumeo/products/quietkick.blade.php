@@ -1,4 +1,4 @@
-@extends('drumeo._partials.layout-template')
+@extends('drumeo._partials.global-layout')
 
 @section('global-head')
     <title>QuietKick | Drumeo</title>
@@ -8,11 +8,10 @@
     <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/drum-shop/quietkick/fb-share-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/drumshop/quietkick/">
 
-    @include('drumeo._partials._fonts')
+    @include('_partials.layout._fonts')
     <?php \App\Analytics\Tracker::trackProductImpression('quietkick'); ?>
 
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"></noscript>
+    @include('_partials.layout._tailwindcdn')
     <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
@@ -76,8 +75,8 @@
     ])
     @include('drumeo.products.partials.promo-banner', [
                 "name" => "QuietKick",
-                "fullPrice" => Prices::$quietKickFull,
-                "price" => Prices::$quietKick,
+                "fullPrice" => floatval($productPrices['quietkick']->price),
+                "price" => floatval($productPrices['quietkick']->discounted_price),
                 "noBreadcrumb" => true
             ])
 
@@ -86,15 +85,15 @@
             <div class="container mx-auto max-w-6xl">
                 <img alt="quietkick" class="h-16 sm:h-24 lg:h-28" src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/quietkick/drumeo-quietkick.png"><br>
                 <h1 class="leading-tight mt-72 sm:mt-96"><strong>Improve your kick<br class="inline sm:hidden"> foot anywhere.</strong></h1>
-                @if( $products['quietkick']->getStock() > 1 && !empty($products['quietkick']->getStock()))
+                @if( $products['quietkick']->getStockAvailability() > 1 && !empty($products['quietkick']->getStockAvailability()))
                     <a class="join blue my-2 sm:my-4 lg:my-6 w-2/3 anchor-slide" href="#customize-anchor">Get Started &raquo;</a>
                 @else
                     <a class="join sold-out my-2 sm:my-4 lg:my-6 w-2/3">SOLD OUT</a>
                 @endif
                 <h6 class="leading-tight">
-                    STARTING AT @if(Prices::$quietKickFull > Prices::$quietKick) <s style="opacity: 0.6;">${{ Prices::$quietKickFull }}</s> @endif
-                    ${{ Prices::$quietKick }}
-                    {{--@if( $products['quietkick']->getStock() > 1 && !empty($products['quietkick']->getStock()))--}}
+                    STARTING AT @if(floatval($productPrices['quietkick']->price) > floatval($productPrices['quietkick']->discounted_price)) <s style="opacity: 0.6;">${{ floatval($productPrices['quietkick']->price) }}</s> @endif
+                    ${{ floatval($productPrices['quietkick']->discounted_price) }}
+                    {{--@if( $products['quietkick']->getStockAvailability() > 1 && !empty($products['quietkick']->getStockAvailability()))--}}
                         {{--<br><strong class="text-yellow-500">LAUNCH SPECIAL</strong>--}}
                     {{--@endif--}}
                 </h6>
@@ -220,18 +219,18 @@
             <h2 class="leading-tight mt-4 mb-2"><strong>Improve your kick foot anywhere.</strong></h2>
             <h6><em>Bass drum pedal not included.</em></h6>
 
-            @if( $products['quietkick']->getStock() > 1 && !empty($products['quietkick']->getStock()))
+            @if( $products['quietkick']->getStockAvailability() > 1 && !empty($products['quietkick']->getStockAvailability()))
                 <div class="flex flex-wrap items-end justify-center 2-full max-w-sm md:max-w-2xl lg:max-w-3xl my-5 sm:my-10 mx-auto">
                     <div class="w-full md:w-1/2 px-2 md:px-3 relative">
                         {{--<p class="w-full px-4 pt-2 pb-4 -mb-3 text-white rounded-t-2xl" style="background:linear-gradient(to bottom, #0a73d8, #10518f);"><strong>LAUNCH SPECIAL</strong></p>--}}
-                        <a href="/laravel/public/shopping-cart/api/query?products[quietkick]=1" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">
+                        <a href="/ecommerce/add-to-cart?products[quietkick]=1" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">
                             <div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">
                                 <h5 class="leading-none mb-3"><strong>Single Kick</strong></h5>
                                 <h1 class="inline-block leading-none">
-                                    @if(Prices::$quietKickFull > Prices::$quietKick)
-                                        <s class="opacity-60">${{ Prices::$quietKickFull }}</s>
+                                    @if(floatval($productPrices['quietkick']->price) > floatval($productPrices['quietkick']->discounted_price))
+                                        <s class="opacity-60">${{ floatval($productPrices['quietkick']->price) }}</s>
                                     @endif
-                                    <strong>${{ Prices::$quietKick }}</strong></h1>
+                                    <strong>${{ floatval($productPrices['quietkick']->discounted_price) }}</strong></h1>
                                 <p class="text-drumeo text-sm my-2 sm:my-4"><em>Plus shipping.</em></p>
                                 <div class="join blue smaller w-full transition-opacity duration-300 group-hover:opacity-80" style="max-width: 230px;">Select</div>
                             </div>
@@ -246,14 +245,14 @@
                     </div>
                     <div class="w-full md:w-1/2 px-2 md:px-3 relative">
                         {{--<p class="w-full px-4 pt-2 pb-4 -mb-3 text-white rounded-t-2xl" style="background:linear-gradient(to bottom, #0a73d8, #10518f);"><strong>LAUNCH SPECIAL</strong></p>--}}
-                        <a href="/laravel/public/shopping-cart/api/query?products[quietkick]=1&products[quietkick-beater]=1" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">
+                        <a href="/ecommerce/add-to-cart?products[quietkick]=1&products[quietkick-beater]=1" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">
                             <div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">
                                 <h5 class="leading-none mb-3"><strong>Double Kick</strong></h5>
                                 <h1 class="inline-block leading-none">
-                                    @if(Prices::$quietKickFull > Prices::$quietKick)
-                                        <s class="opacity-60">${{ Prices::$quietKickFull + 20 }}</s>
+                                    @if(floatval($productPrices['quietkick']->price) > floatval($productPrices['quietkick']->discounted_price))
+                                        <s class="opacity-60">${{ floatval($productPrices['quietkick']->price) + 20 }}</s>
                                     @endif
-                                    <strong>${{ Prices::$quietKick + 20 }}</strong></h1><br>
+                                    <strong>${{ floatval($productPrices['quietkick']->discounted_price) + 20 }}</strong></h1><br>
                                 <p class="text-drumeo text-sm my-2 sm:my-4"><em>Plus shipping.</em></p>
                                 <div class="join blue smaller w-full transition-opacity duration-300 group-hover:opacity-80" style="max-width: 230px;">Select</div>
                             </div>
@@ -267,7 +266,7 @@
                         </a>
                     </div>
                 </div>
-                <a style="color: #00bc75;" class="inline-block cursor-pointer" href="/laravel/public/shopping-cart/api/query?products[DLM]=1,year,1&products[quietkick]=1&locked=true"><h4><strong><u>Or get it FREE when you join Drumeo &raquo;</u></strong></h4></a>
+                <a style="color: #00bc75;" class="inline-block cursor-pointer" href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[quietkick]=1&locked=true"><h4><strong><u>Or get it FREE when you join Drumeo &raquo;</u></strong></h4></a>
             @else
                 <a class="join sold-out mt-5 sm:mt-10">SOLD OUT</a>
             @endif
@@ -296,22 +295,16 @@
             <h2><strong>Still have questions?</strong></h2>
             <div class="dropdowns">
                 @include('drumeo.products.partials.question-dropdown-tw', [
-                "customClass" => "sm:rounded-full",
-                "question" => true,
                 "title" => "Does the QuietKick work with a double bass pedal?",
                 "description" => "Yes! You’ll see the option to add a second beater to your QuietKick. This allows you to attach your double pedal and work out both your feet. The extra beater is the only additional piece you need for this.",
                 ])
                 @include('drumeo.products.partials.question-dropdown-tw', [
-                "customClass" => "sm:rounded-full",
-                "question" => true,
                 "title" => "Does the QuietKick scoot?",
                 "description" => "You know what we mean – when your bass drum goes scooting across the floor everytime you hit it. The QuietKick has little to no scooting – but on a hard floor it will shift a little. For the best results, use your QuietKick on a rug or carpet. If you’re still having trouble add a bit of velcro to the bottom.",
                 ])
                 @include('drumeo.products.partials.question-dropdown-tw', [
-                "customClass" => "sm:rounded-full",
-                "question" => true,
                 "title" => "Will it ship internationally?",
-                "description" => "Yes! Just enter your country upon checkout – you’ll see the shipping tally in your cart. You can also grab the QuietKick with FREE shipping by joining Drumeo. You’ll get a free QuietKick shipped anywhere in the world for the price of your annual membership. <a href='/laravel/public/shopping-cart/api/query?products[DLM]=1,year,1&products[quietkick]=1&locked=true'><u>Click here to see that option.</u></a>",
+                "description" => "Yes! Just enter your country upon checkout – you’ll see the shipping tally in your cart. You can also grab the QuietKick with FREE shipping by joining Drumeo. You’ll get a free QuietKick shipped anywhere in the world for the price of your annual membership. <a href='/ecommerce/add-to-cart?products[DLM-1-year]=1&products[quietkick]=1&locked=true'><u>Click here to see that option.</u></a>",
                 ])
             </div>
         </div>
@@ -338,7 +331,6 @@
         });
     </script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}" defer></script>
-    <script type="text/javascript" src="{{ asset('/marketing/js/sliding-anchor.js') }}" defer></script>
     <script async type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js" defer></script>
     <script async type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js" defer></script>
 @stop

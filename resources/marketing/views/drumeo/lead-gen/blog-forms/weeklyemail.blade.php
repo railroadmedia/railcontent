@@ -10,10 +10,10 @@
     <title>Weekly Email | Drumeo</title>
     <meta name="description" content="Enter your email to get fresh drumming lessons, interviews, and content delivered to your inbox every week!">
 
-    @include('drumeo._partials._fonts')
+    @include('_partials.layout._fonts')
     <base target="_parent">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link href="/marketing/css/drumeo/tailwind-helpers.css" rel="stylesheet">
+    @include('_partials.layout._tailwindcdn')
+    <link href="{{ asset('marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
     <style>
         body {
             height:100vh;

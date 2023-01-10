@@ -4,18 +4,99 @@ namespace App\Http\Controllers\Guitareo;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class SalesController extends BaseController
 {
+
+    public function chooseyourtrialmonth()
+    {
+        return view('guitareo.sales.trials.trial-selection.month');
+    }
+
+    public function cookie()
+    {
+        return view('guitareo.sales.pages.cookie');
+    }
+
+    public function terms()
+    {
+        return view('guitareo.sales.pages.terms');
+    }
+
+    public function privacy()
+    {
+        return view('guitareo.sales.pages.privacy');
+    }
+
+    public function lifetime()
+    {
+        return view('guitareo.shop.pages.lifetime-bundle');
+    }
+
+    public function survivalkitinstructions()
+    {
+        return view('guitareo.shop.pages.survival-kit-tutorial');
+    }
+
+    public function daddariostringsession()
+    {
+        return view('guitareo.sales.trials.daddario-string-session');
+    }
+
+    public function daddariostringsessionga()
+    {
+        return view('guitareo.sales.trials.daddario-string-session');
+    }
+
+    public function asobergirlsguide()
+    {
+        return view('guitareo.sales.trials.affiliates.asobergirlsguide');
+    }
+
+    public function affiliatetrial()
+    {
+        return view('guitareo.sales.trials.trial-selection.affiliates');
+    }
+
+    public function welcome()
+    {
+        return view('guitareo.sales.pages.welcome-1');
+    }
+
+    public function welcome2()
+    {
+        return view('guitareo.sales.pages.welcome-2');
+    }
+
+    public function welcome3()
+    {
+        return view('guitareo.sales.pages.welcome-3');
+    }
+
+    public function aylarecommends()
+    {
+        return view('guitareo.shop.ayla-recommends');
+    }
+
     public function home()
     {
-        return view('guitareo.sales.standard', [ 'theme' => 'guitareo' ]);
+        return view('guitareo.sales.subscription', ['theme' => 'guitareo']);
+    }
+    public function promo()
+    {
+        return view('guitareo.sales.subscription', ['theme' => 'guitareo', 'promoVersion' => 'true']);
+    }
+    public function choosePlan()
+    {
+        return view('guitareo.sales.choose-plan', ['theme' => 'guitareo']);
     }
 
     public function membership()
     {
         return view('guitareo.sales.standard');
     }
+
     public function membershipStudents()
     {
         return view('guitareo.sales.student-only');
@@ -36,19 +117,9 @@ class SalesController extends BaseController
         return view('guitareo.products.500-songs');
     }
 
-    public function songs500Discount()
-    {
-        return view('guitareo.products.500-songs-discount');
-    }
-
     public function acousticGuitarMadeEasy()
     {
         return view('guitareo.products.acoustic-guitar-made-easy');
-    }
-
-    public function lifetime()
-    {
-        return view('guitareo.sales.lifetime');
     }
 
     public function guitarQuest()
@@ -85,28 +156,30 @@ class SalesController extends BaseController
         return view('guitareo.products.guitar-technique-made-easy');
     }
 
-    public function guitarTechniqueMadeEasyBeginner()
-    {
-        return view('guitareo.products.guitar-technique-made-easy-beginner');
-    }
-
-    public function guitarTechniqueMadeEasyDiscount()
-    {
-        return view('guitareo.products.guitar-technique-made-easy-discount');
-    }
-
-    public function guitarTechniqueMadeEasyGSDiscount()
-    {
-        return view('guitareo.products.guitar-technique-made-easy-gs');
-    }
-
-    public function guitarTechniqueMadeEasyPack()
-    {
-        return view('guitareo.products.guitar-technique-made-easy-pack');
-    }
-
     public function rhythmAndGroove()
     {
         return view('guitareo.products.rhythm-and-groove');
+    }
+
+    public function products(Request $request, $domain, $page = null)
+    {
+        return view('guitareo.products.'.$page);
+
+        throw new NotFoundHttpException();
+    }
+
+    public function songs()
+    {
+        return view('guitareo.sales.features.songs', ['theme' => 'guitareo', 'page' => 'songs']);
+    }
+
+    public function coaches()
+    {
+        return view('guitareo.sales.features.coaches', ['theme' => 'guitareo', 'page' => 'coaches']);
+    }
+
+    public function method()
+    {
+        return view('guitareo.sales.features.method', ['theme' => 'guitareo', 'page' => 'method']);
     }
 }

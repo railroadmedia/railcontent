@@ -18,15 +18,15 @@
 @section('content')
     @include('drumeo.products.partials.promo-banner', [
                     "name" => "The Best Beginner Drum Book",
-                    "fullPrice" => Prices::$beginnerBookFull,
-                    "price" => Prices::$beginnerBookRegular,
+                    "fullPrice" => floatval($productPrices['BeginnerBook']->price),
+                    "price" => floatval($productPrices['BeginnerBook']->discounted_price),
                 "noBreadcrumb" => true
                 ])
 
     @if(strpos(url()->full(), 'thankyou'))
         <div class="thank-you-banner text-center">
             <p><strong>Thanks for contacting us!</strong><br>
-                We'll respond to you soon! If you haven't heard back in the next week, please <a class="text-white" href="/support">contact us</a>.</p>
+                We'll respond to you soon! If you haven't heard back in the next week, please <a class="text-white" href="{{ get_musora_brand_base_url() }}/contact">contact us</a>.</p>
         </div>
     @endif
     @if(strpos(url()->full(), 'error'))
@@ -53,13 +53,13 @@
                 <p>The simplest guide for beginner drummers to get started on the drums and take their drumming to the next level.
                     <br><br>
                     Get it today for just
-                    @if(Prices::$beginnerBookFull > Prices::$beginnerBookRegular)
-                        <s style="opacity: 0.6;">${{ Prices::$beginnerBookFull }}</s> ${{ Prices::$beginnerBookRegular }} USD
+                    @if(floatval($productPrices['BeginnerBook']->price) > floatval($productPrices['BeginnerBook']->discounted_price))
+                        <s style="opacity: 0.6;">${{ floatval($productPrices['BeginnerBook']->price) }}</s> ${{ floatval($productPrices['BeginnerBook']->discounted_price) }} USD
                     @else
-                        ${{ Prices::$beginnerBookRegular }} USD
+                        ${{ floatval($productPrices['BeginnerBook']->discounted_price) }} USD
                     @endif
                 </p>
-                <a href="/laravel/public/shopping-cart/api/query?products[BeginnerBook]=1" class="join">Click Here To Order</a>
+                <a href="/ecommerce/add-to-cart?products[BeginnerBook]=1" class="join">Click Here To Order</a>
                 <a target="_blank" href="https://www.amazon.com/dp/B07G8N348K" class="join orange">Get Your Copy On <img class="amazon inline-block" src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/amazon-logo.png"></a>
             </div>
         </div>
@@ -423,7 +423,7 @@
     <div class="edge-banner text-center">
         <div class="row">
             <p><strong> ** Every Book Includes A Drumeo
-                    <br class="hide-for-medium"> 30-Day Membership Pass ($29 Value) ** </strong></p>
+                    <br class="hide-for-medium"> 30-Day Membership Pass (${{ Prices::$plusSubscriptionMonthlyFull }} Value) ** </strong></p>
         </div>
     </div>
 
@@ -435,13 +435,13 @@
             <div class="columns medium-6 text-wrap">
                 <h1>The Best Beginner<br class="show-for-medium"> Drum Book</h1>
                 <p>Get it today for just
-                @if(Prices::$beginnerBookFull > Prices::$beginnerBookRegular)
-                    <s>${{ Prices::$beginnerBookFull }}</s> ${{ Prices::$beginnerBookRegular }} USD
+                @if(floatval($productPrices['BeginnerBook']->price) > floatval($productPrices['BeginnerBook']->discounted_price))
+                    <s>${{ floatval($productPrices['BeginnerBook']->price) }}</s> ${{ floatval($productPrices['BeginnerBook']->discounted_price) }} USD
                 @else
-                    ${{ Prices::$beginnerBookRegular }} USD
+                    ${{ floatval($productPrices['BeginnerBook']->discounted_price) }} USD
                 @endif
                 </p>
-                <a href="/laravel/public/shopping-cart/api/query?products[BeginnerBook]=1" class="join">Click Here To Order</a>
+                <a href="/ecommerce/add-to-cart?products[BeginnerBook]=1" class="join">Click Here To Order</a>
                 <a target="_blank" href="https://www.amazon.com/dp/B07G8N348K" class="join orange">Get Your Copy On <img class="amazon inline-block" src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/amazon-logo.png"></a>
             </div>
         </div>
@@ -480,7 +480,7 @@
             ])
             @include('drumeo.products.partials.question-dropdown', [
             "question" => "It says there’s a free 30-day membership pass to Drumeo. What’s that?",
-            "answer" => "Drumeo is our award-winning online drum lessons experience, where you’ll get step-by-step video lessons from the best drummers and teachers in the world: <a target='_blank' href='https://www.drumeo.com/'>www.Drumeo.com/</a>.<br><br>We’ve included a free 30-day membership redemption pass inside every copy of The Best Beginner Drum Book, so once your book arrives you’ll get an amazing book PLUS video drum lessons for 30 days ($29 value)."
+            "answer" => "Drumeo is our award-winning online drum lessons experience, where you’ll get step-by-step video lessons from the best drummers and teachers in the world: <a target='_blank' href='https://www.drumeo.com/'>www.Drumeo.com/</a>.<br><br>We’ve included a free 30-day membership redemption pass inside every copy of The Best Beginner Drum Book, so once your book arrives you’ll get an amazing book PLUS video drum lessons for 30 days ($30 value)."
             ])
         </div>
         <div class="row">
@@ -522,7 +522,7 @@
 
                 @include('drumeo.lead-gen.partials.thank-you-box', [
                     "headline" => "SENT",
-                    "body" => "We'll respond to you soon! If you haven't heard back in the next week, please <a class='text-white' href='/support'>contact us</a>."
+                    "body" => "We'll respond to you soon! If you haven't heard back in the next week, please <a class='text-white' href='{{ get_musora_brand_base_url() }}/contact'>contact us</a>."
                 ])
             </div>
         </div>
@@ -546,7 +546,7 @@
 @stop
 
 @section('scripts')
-    <script src="{{ asset('/marketing/js/sliding-anchor.js') }}"></script>
+
     <script>
         $(document).ready(function () {
             $(document).foundation();
