@@ -1,18 +1,18 @@
 @extends('drumeo._partials.global-layout')
 
 @section('global-head')
-    <title>30 Day Drummer with Domino Santantonio</title>
-    <meta property="og:title" content="30 Day Drummer with Domino Santantonio">
+    <title>Lifetime Members Masterclass with Jared Falk</title>
+    <meta property="og:title" content="Lifetime Members Masterclass with Jared Falk">
 
     <meta name="description" content="">
     <meta property="og:description" content="">
 
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
-    <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/sales/2023/share-image-drumeo.jpg" style="display: none;">
+    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/sales/2022/og-image.jpg" style="display: none;">
 
     @include('_partials.layout._fonts')
-
     @include('_partials.layout._tailwindcdn')
+
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
 
@@ -146,17 +146,58 @@
         body {
             counter-reset: timeline;
         }
-
-        .join.medium {
-            padding:9px 12px;
-            font-size:15px;
+        .join.smaller {
+            font-size: 18px;
+            padding: 16px 25px;
         }
 
-        @media (min-width:768px) {
-            .join.medium {
-                font-size:18px;
-                padding:15px 25px;
+        @media (min-width: 768px) {
+            .join.smaller {
+                padding: 16px 30px;
             }
+        }
+
+        .tooltip {
+            position: relative;
+        }
+        .tooltip:after, .tooltip:before {
+            position: absolute;
+            transform: translate(-50%, 0);
+            height: auto;
+            max-height: 0;
+            visibility: hidden;
+            opacity: 0;
+            transition: all 0.3s;
+            overflow: hidden;
+        }
+        .tooltip:before {
+            z-index: 100;
+            content: ' ';
+            top: 23px;
+            left: 50%;
+            border-right: 7px transparent solid;
+            border-left: 7px transparent solid;
+            border-bottom: 7px solid #fff;
+        }
+        .tooltip:after {
+            padding: 6px 9px;
+            content: attr(tip);
+            font: 600 12px/1.2em 'Open Sans', sans-serif;
+            color: #000;
+            border-radius: 8px;
+            background: #fff;
+            box-shadow: 0 0 15px #000;
+            top: 30px;
+            left: 50%;
+        }
+        .tooltip:hover, .tooltip:focus {
+            z-index: 100;
+        }
+        .tooltip:hover:after, .tooltip:focus:after, .tooltip:hover:before, .tooltip:focus:before {
+            max-height: 1000px;
+            visibility: visible;
+            opacity: 1;
+            display: block;
         }
     </style>
 @stop
@@ -165,35 +206,25 @@
     @include("drumeo.sales.partials._nav")
     <header class="header text-white text-center px-4 sm:px-6 py-14 md:py-20 lg:py-32 relative bg-no-repeat bg-cover bg-top lazyload" style="background-color:#031e3b;" data-bg="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https:/dpwjbsxqtam5n.cloudfront.net/drum-shop/header-background.jpg">
         <div class="mx-auto relative z-10 max-w-md md:max-w-5xl">
-                <h1><strong>30 Day Drummer</strong></h1>
-                <h4>with Domino Santantonio</h4>
+                <h1><strong>Lifetime Members Masterclass</strong></h1>
+                <h3>with Jared Falk</h3>
         </div>
     </header>
-    <section class="text-center text-white py-8 md:py-10 lg:py-16 px-5 md:px-7" style="background:#00101d ;">
-        <div class="container mx-auto text-center max-w-xl">
-            <div class="bg-white text-center rounded-md inline-block overflow-hidden w-11 mr-2 align-middle">
-                <p class="leading-none tracking-tighter text-xs py-0.5 text-white" style="background-color:#bb3744;"><strong>SEPT</strong></p>
-                <p class="leading-none text-lg py-1 text-black"><strong class="font-black">10</strong></p>
-            </div><br class="inline sm:hidden">
-            <a target="_blank" class=" @if(Carbon\Carbon::create(2022, 9, 10, 17, 0, 0, 'America/Vancouver') < Carbon\Carbon::now()) sold-out @endif join blue medium my-2 sm:my-0" href="{{ get_musora_brand_base_url() }}/drumeo/packs/30-day-drummer/367385/30-day-drummer/367664">Afternoon Session - 3pm PDT</a>
-            <hr class="my-7 sm:my-10">
-            <div class="bg-white text-center rounded-md inline-block overflow-hidden w-11 mr-2 align-middle">
-                <p class="leading-none tracking-tighter text-xs py-0.5 text-white" style="background-color:#bb3744;"><strong>SEPT</strong></p>
-                <p class="leading-none text-lg py-1 text-black"><strong class="font-black">17</strong></p>
-            </div><br class="inline sm:hidden">
-            <a target="_blank" class=" @if(Carbon\Carbon::create(2022, 9, 17, 12, 0, 0, 'America/Vancouver') < Carbon\Carbon::now()) sold-out @endif join blue medium my-2 sm:my-0" href="{{ get_musora_brand_base_url() }}/drumeo/packs/30-day-drummer/367385/30-day-drummer/367664">Morning Session - 10am PDT</a>
-            <hr class="my-7 sm:my-10">
-            <div class="bg-white text-center rounded-md inline-block overflow-hidden w-11 mr-2 align-middle">
-                <p class="leading-none tracking-tighter text-xs py-0.5 text-white" style="background-color:#bb3744;"><strong>SEPT</strong></p>
-                <p class="leading-none text-lg py-1 text-black"><strong class="font-black">24</strong></p>
-            </div><br class="inline sm:hidden">
-            <a target="_blank" class=" @if(Carbon\Carbon::create(2022, 9, 24, 17, 0, 0, 'America/Vancouver') < Carbon\Carbon::now()) sold-out @endif join blue medium my-2 sm:my-0" href="{{ get_musora_brand_base_url() }}/drumeo/packs/30-day-drummer/367385/30-day-drummer/367664">Afternoon Session - 3pm PDT</a>
-            <hr class="my-7 sm:my-10">
-            <div class="bg-white text-center rounded-md inline-block overflow-hidden w-11 mr-2 align-middle">
-                <p class="leading-none tracking-tighter text-xs py-0.5 text-white" style="background-color:#bb3744;"><strong>OCT</strong></p>
-                <p class="leading-none text-lg py-1 text-black"><strong class="font-black">1</strong></p>
-            </div><br class="inline sm:hidden">
-            <a target="_blank" class=" @if(Carbon\Carbon::create(2022, 10, 1, 12, 0, 0, 'America/Vancouver') < Carbon\Carbon::now()) sold-out @endif join blue medium my-2 sm:my-0" href="{{ get_musora_brand_base_url() }}/drumeo/packs/30-day-drummer/367385/30-day-drummer/367664">Morning Session - 10am PDT</a>
+    <section class="text-center text-white py-8 md:py-24 px-5 md:px-7" style="background:#00101d ;">
+        <div class="container mx-auto text-center max-w-2xl">
+            <a href="https://www.addevent.com/event/qM14764665" class="inline-block tooltip group" tip="Add To Calendar">
+            <div class="bg-white text-center rounded-md inline-block overflow-hidden w-14 mr-2 align-middle transition-opacity group-hover:opacity-70">
+                <p class="leading-none tracking-tighter text-xs py-1 text-white" style="background-color:#bb3744;"><strong>AUG</strong></p>
+                <p class="leading-none text-lg py-1.5 text-black"><strong class="font-black">27</strong></p>
+            </div></a>
+            <a target="_blank" class=" @if(Carbon\Carbon::create(2022, 8, 27, 14, 0, 0, 'America/Vancouver') < Carbon\Carbon::now()) sold-out @endif join blue smaller" href="/members/drumeo-masterclass-1">Afternoon Session - 12pm PDT</a>
+            <hr class="my-7">
+            <a href="https://www.addevent.com/event/cB14764666" class="inline-block tooltip group" tip="Add To Calendar">
+            <div class="bg-white text-center rounded-md inline-block overflow-hidden w-14 mr-2 align-middle transition-opacity group-hover:opacity-70">
+                <p class="leading-none tracking-tighter text-xs py-1 text-white" style="background-color:#bb3744;"><strong>AUG</strong></p>
+                <p class="leading-none text-lg py-1.5 text-black"><strong class="font-black">27</strong></p>
+            </div></a>
+            <a target="_blank" class=" @if(Carbon\Carbon::create(2022, 8, 27, 20, 0, 0, 'America/Vancouver') < Carbon\Carbon::now()) sold-out @endif join blue smaller" href="/members/drumeo-masterclass-2">Evening Session - 6pm PDT</a>
         </div>
     </section>
 

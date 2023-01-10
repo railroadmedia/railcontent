@@ -11,7 +11,7 @@
     @include('_partials.layout._fonts')
 
     @include('_partials.layout._tailwindcdn')
-    <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/ndsh.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"/>
@@ -29,11 +29,11 @@
                 padding: 0 20px;
             }
         }
-        .dropdowns .dropdown .bg-pred {
+        .dropdowns .dropdown .bg-pianote {
             min-width: 32px;
         }
         @media (min-width: 40em) {
-            .dropdowns .dropdown .bg-pred {
+            .dropdowns .dropdown .bg-pianote {
                 min-width: 83px;
             }
         }
