@@ -36,6 +36,7 @@ use Railroad\Ecommerce\Repositories\ProductRepository;
 use Railroad\Ecommerce\Repositories\SubscriptionRepository;
 use Railroad\Ecommerce\Services\CartService;
 use Railroad\Ecommerce\Services\InvoiceService;
+use Railroad\Ecommerce\Services\MembershipTier;
 use Railroad\Ecommerce\Services\ResponseService;
 use Railroad\Ecommerce\Services\UpgradeService;
 use Railroad\Ecommerce\Services\UserProductService;
@@ -571,7 +572,10 @@ class ProfileSettingsPagesController extends BaseController
 
         // -------------------------------------------------------------------------------------------------------------
 
-        $showManageSongsButton = $isLifetime || $this->upgradeService->getCurrentSubscription() != null;
+        $currentTier = $this->upgradeService->getCurrentMembershipTier()->value;
+        $proratedUpgradeCost = $this->upgradeService->getProratedUpgradeCost();
+        $showManageSongsButton = ($isLifetime && $currentTier == MembershipTier::Basic)
+            || $this->upgradeService->getCurrentSubscription() != null;
 
         return view(
             'account.settings.account',
@@ -592,8 +596,8 @@ class ProfileSettingsPagesController extends BaseController
                 'offerUpgradeToAnnualShowToStudent' => $offerUpgradeToAnnualShowToStudent ?? false,
                 'offerUpgradeToAnnualPercentSaved' => $offerUpgradeToAnnualPercentSaved ?? null,
                 'membershipWithoutSubscription' => $membershipWithoutSubscription ?? false,
-                'currentTier' => $this->upgradeService->getCurrentMembershipTier()->value,
-                'upgradeCost' => $this->upgradeService->getProratedUpgradeCost(),
+                'currentTier' => $currentTier,
+                'upgradeCost' => $proratedUpgradeCost,
                 'showSongsUpgradeButton' => $showManageSongsButton,
             ]
         );
