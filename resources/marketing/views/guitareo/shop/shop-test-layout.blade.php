@@ -9,6 +9,74 @@
     <meta property="og:url" content="https://www.guitareo.com/shop/">
 @endsection
 
+@section('layout-styles')
+    @parent
+    <style>
+        .tooltip {
+            position: relative;
+        }
+        .tooltip:after, .tooltip:before {
+            position: absolute;
+            transform: translate(-50%, 0);
+            height: auto;
+            max-height: 0;
+            visibility: hidden;
+            opacity: 0;
+            transition: all 0.3s;
+            overflow: hidden;
+        }
+        .tooltip:before {
+            z-index: 100;
+            content: "";
+            bottom: 23px;
+            left: 50%;
+            border-right: 7px transparent solid;
+            border-left: 7px transparent solid;
+            border-top: 7px solid #fff;
+        }
+        .tooltip:after {
+            padding: 5px 8px;
+            content: attr(tip);
+            font: 400 14px/1.4em 'Open Sans', sans-serif;
+            text-align: left;
+            color: #000;
+            width: 220px;
+            border-radius: 8px;
+            background: #fff;
+            box-shadow: 0 0 15px #000;
+            bottom: 30px;
+            left: -300%;
+        }
+        .tooltip:hover, .tooltip:active, .tooltip:focus {
+            z-index: 100;
+        }
+        .tooltip:hover:after, .tooltip:active:after, .tooltip:focus:after, .tooltip:hover:before, .tooltip:active:before, .tooltip:focus:before {
+            max-height: 1000px;
+            visibility: visible;
+            opacity: 1;
+            display: block;
+        }
+
+        .linear-green {
+            background: linear-gradient(180deg, #00C9AC 0%, #16414A 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .linear-rainbow {
+            background: linear-gradient(75.93deg, #00C9AC 0%, #0B76DB 32.62%, #8300E9 65.25%, #F61A30 92.11%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        @media (min-width:1080px) {
+            .padding-per {
+                padding: 60px 8%;
+            }
+        }
+    </style>
+@endsection
+
 @section('layout-header')
     @include("guitareo.sales.partials._nav", [
         "cartVersion" => true
@@ -129,7 +197,7 @@
                 <div class="w-full sm:w-1/3 px-2">
                     <h5 class="text-guitareo border-guitareo border-2 rounded-full inline-block py-2 px-3 mb-1">3</h5>
                     <h6 class="leading-normal">Change your mind?<br> Get a refund.
-{{--                        <div class="inline-block tooltip cursor-pointer" tip="If it’s not for you, simply cancel your membership within 90 days and contact us for a full refund. (If your membership includes any bonuses, your refund will deduct the value of hard goods that were shipped to you.)"><i class="fas fa-info-circle"></i></div>--}}
+{{--                        <div class="inline-block tooltip cursor-pointer bg-white" tip="If it’s not for you, simply cancel your membership within 90 days and contact us for a full refund. (If your membership includes any bonuses, your refund will deduct the value of hard goods that were shipped to you.)"><i class="fas fa-info-circle text-white"></i></div>--}}
                     </h6>
                 </div>
             </div>
