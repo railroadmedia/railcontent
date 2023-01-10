@@ -32,7 +32,7 @@ class ShopController extends BaseController
             return $value->productType->name === 'Hoodies';
         });
 
-        return view('pianote.shop.shop', [
+        return view('pianote.shop.shop-test-layout', [
             'lessons' => $lessons,
             'accessories' => $accessories,
             'hats' => $hats,
