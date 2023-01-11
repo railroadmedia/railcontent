@@ -425,6 +425,7 @@
 
 
     @if(!empty($promoVersion))
+        <div id="headphones" class="anchor"></div>
         <section class="py-12 md:py-20">
             <div class="max-w-4xl mx-auto text-center px-4 lg:px-0">
 
@@ -541,9 +542,9 @@
         'youtubeLink' => 'https://www.youtube.com/pianolessonscom/',
         'youtube' => '1.2M',
         'facebookLink' => 'https://facebook.com/pianoteofficial/',
-        'facebook' => '418K',
+        'facebook' => '422K',
         'instagramLink' => 'https://instagram.com/pianoteofficial/',
-        'instagram' => '171K',
+        'instagram' => '174K',
     ])
     @include('musora.sales.components.guarantee-section', [
         'badge' => 'https://pianote.s3.amazonaws.com/sales/2022/piano-guarantee.png',

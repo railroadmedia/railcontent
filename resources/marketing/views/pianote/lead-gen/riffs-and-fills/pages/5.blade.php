@@ -11,13 +11,13 @@
     <p>Learn how to take what you've learned so far and put it together in the context of a song. This is where all the magic comes to life!
     <br><br>
     <strong>C Chord Inversions</strong><br><br></p>
-    <img style="filter:invert(1)" src="https://d1923uyy6spedc.cloudfront.net/255253-sheet-image-1588760291.svg">
+    <img src="https://d1923uyy6spedc.cloudfront.net/255253-sheet-image-1588760291.svg">
     <p><br><br><strong>G Chord Inversions</strong><br><br></p>
-    <img style="filter:invert(1)" src="https://d1923uyy6spedc.cloudfront.net/255254-sheet-image-1588760839.svg">
+    <img src="https://d1923uyy6spedc.cloudfront.net/255254-sheet-image-1588760839.svg">
     <p><br><br><strong>Am Chord Inversions</strong><br><br></p>
-    <img style="filter:invert(1)" src="https://d1923uyy6spedc.cloudfront.net/255255-sheet-image-1588762212.svg">
+    <img src="https://d1923uyy6spedc.cloudfront.net/255255-sheet-image-1588762212.svg">
     <p><br><br><strong>F Chord Inversions</strong><br><br></p>
-    <img style="filter:invert(1)" src="https://d1923uyy6spedc.cloudfront.net/255256-sheet-image-1588762774.svg">
+    <img src="https://d1923uyy6spedc.cloudfront.net/255256-sheet-image-1588762774.svg">
 @endsection
 
 @section('previous')
