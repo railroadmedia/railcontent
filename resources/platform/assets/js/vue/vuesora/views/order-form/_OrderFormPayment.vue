@@ -50,9 +50,10 @@
             </div>
 
             <!-- v-if is used to keep the stripe elements iframes loaded but hidden, using v-if would require re-initialization -->
+            <!-- Hiding with just CSS, need to investigate why there are problems with Stripe when hiding with v-if (yt) -->
             <div
-                v-if="$_paymentMethod === 'credit_card'"
                 class="flex flex-row flex-wrap"
+                :class="$_paymentMethod !== 'credit_card' ? 'hidden' : ''"
             >
                 <div class="flex flex-column xs-12 sm-6 ph-1 mb-2">
                     <div class="form-group">
@@ -473,7 +474,7 @@ export default {
                 this.$emit('updatePaymentData', {
                     key: 'methodType',
                     value,
-                });
+                });                
             },
         },
 
@@ -531,15 +532,19 @@ export default {
             this.$emit('formSubmit');
         },
 
+        deleteErrors() {
+            Object.keys(this.errors).forEach((error) => {
+                    this.errors[error] = [];
+            });
+        },
+
         cancelForm() {
             this.initStripeElements();
 
             this.$emit('formCancel');
 
             setTimeout(() => {
-                Object.keys(this.errors).forEach((error) => {
-                    this.errors[error] = [];
-                });
+                this.deleteErrors();
 
                 this.$nextTick(() => this.$forceUpdate());
             }, 200);
