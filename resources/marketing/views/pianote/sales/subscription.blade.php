@@ -425,6 +425,7 @@
 
 
     @if(!empty($promoVersion))
+        <div id="headphones" class="anchor"></div>
         <section class="py-12 md:py-20">
             <div class="max-w-4xl mx-auto text-center px-4 lg:px-0">
 
