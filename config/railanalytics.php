@@ -183,12 +183,13 @@ return [
             ]
         ],
         'beta-testing' => [
-            'active-tracking-providers' => ['ga', 'gtm', 'gaw', 'fp', 'im'],
+            'active-tracking-providers' => ['ga', 'fp', 'gaw', 'ga4', 'gtm', 'im',],
 
             'providers' => [
                 'google-analytics' =>
                     [
-                        'tracking-id' => 'UA-96565469-1'
+                        'tracking-id' => 'UA-96565469-1',
+                        'optimise-id' => null
                     ],
                 'google-analytics-v4' =>
                     [
@@ -428,14 +429,11 @@ return [
         ],
         'beta-testing' => [
             'active-tracking-providers' => ['ga', 'gtm', 'gaw', 'fp', 'ga4', 'im'],
+
             'providers' => [
                 'google-analytics' =>
                     [
                         'tracking-id' => 'UA-46498312-13'
-                    ],
-                'google-analytics-v4' =>
-                    [
-                        'tracking-id' => 'G-RD2SJQH0N7'
                     ],
                 'google-tag-manager' =>
                     [

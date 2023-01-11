@@ -5,7 +5,7 @@
                 class="square rounded bg-center"
             >
                 <img
-                    :src="'https://cdn.musora.com/image/fetch/w_200,q_auto:best/' + item.thumbnail_url"
+                    :src="'https://cdn.musora.com/image/fetch/w_290,q_auto:best/' + item.thumbnail_url"
                     class="rounded"
                 >
             </div>
@@ -13,7 +13,7 @@
         <div class="flex flex-column mb-2 pl">
             <div class="flex flex-row flex-wrap align-v-top">
                 <div class="flex flex-column xs-12 sm-8">
-                    <h3 class="title font-bold">
+                    <h3 class="title font-black">
                         {{ item.name }}
                     </h3>
                     <h4 class="body text-grey-4">
@@ -25,7 +25,7 @@
                         class="tw-inline-flex tw-justify-start tw-items-center tw-mr-auto"
                     >
                         <div class="tw-flex tw-items-center tw-mr-2">
-                            <h4 class="quantity-label tw-leading-none tw-mt-1 tw-tracking-normal tw-font-normal tw-text-sm dense tw-uppercase">
+                            <h4 class="quantity-label leading-none font-black text-sm">
                                 Quantity:
                             </h4>
                         </div>
@@ -36,8 +36,8 @@
                                 type="number"
                                 min="1"
                                 max="99"
-                                class="no-label text-center tw-text-sm tw-p-2"
-                                style="border:none;background:none;"
+                                class="no-label text-center text-sm p-1 rounded-full"
+                                style="border: 1px solid #d1d1d1;background:none;"
                             >
                         </div>
 
@@ -58,7 +58,7 @@
                     >
                         <div class="tw-inline-flex tw-flex-col tw-mr-auto">
                             <a
-                                class="text-error tw-text-sm tw-mt-1 tw-tracking-normal dense pointer uppercase"
+                                class="text-error text-xs mt-1 pointer"
                                 title="Remove Item"
                                 @click.stop.prevent="removeCartItem"
                             >
@@ -71,14 +71,14 @@
                     <div class="flex flex-column">
                         <h3
                             v-if="isDiscounted"
-                            class="tw-text-xs font-bold font-strike text-grey-3 mr-1 m-xs-only"
+                            class="tw-text-xs font-normal font-strike text-grey-3 mr-1 m-xs-only"
                         >
                             ${{ Number(item.price_before_discounts).toFixed(2) }}
                         </h3>
 
                         <h2
                             v-if="totalPriceAfterDiscounts > 0"
-                            class="title font-bold"
+                            class="title font-black"
                             :class="themeTextClass"
                         >
                             ${{ totalPriceAfterDiscounts }}
@@ -86,7 +86,7 @@
 
                         <h2
                             v-if="totalPriceAfterDiscounts <= 0"
-                            class="title font-bold"
+                            class="title font-black"
                             :class="themeTextClass"
                         >
                             FREE

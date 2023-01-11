@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c00599ec744de535070d703d0ec999c2",
+    "content-hash": "f3a938580bec7a0f141c73523277e810",
     "packages": [
         {
             "name": "aporat/store-receipt-validator",
@@ -176,16 +176,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.256.1",
+            "version": "3.256.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "d993c3aa72233186375f3ceb5811a30982fbcad8"
+                "reference": "a72094f7d968bdc743839e309087d51f868ba26c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/d993c3aa72233186375f3ceb5811a30982fbcad8",
-                "reference": "d993c3aa72233186375f3ceb5811a30982fbcad8",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/a72094f7d968bdc743839e309087d51f868ba26c",
+                "reference": "a72094f7d968bdc743839e309087d51f868ba26c",
                 "shasum": ""
             },
             "require": {
@@ -264,9 +264,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.256.1"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.256.2"
             },
-            "time": "2023-01-10T19:20:06+00:00"
+            "time": "2023-01-11T20:12:50+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -4444,17 +4444,17 @@
         },
         {
             "name": "laravel/nova",
-            "version": "4.20.0",
+            "version": "4.20.2",
             "source": {
                 "type": "git",
                 "url": "git@github.com:laravel/nova.git",
-                "reference": "6b3fd89927d6c717524fcb2f5a9fbf85613c5dcc"
+                "reference": "a3f041ebe67f82c765255c60dddd52625376bcc8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-6b3fd89927d6c717524fcb2f5a9fbf85613c5dcc-zip-7d7854.zip",
-                "reference": "6b3fd89927d6c717524fcb2f5a9fbf85613c5dcc",
-                "shasum": "9873679e47fbae699df58cef7fd62ae39953ebbf"
+                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-a3f041ebe67f82c765255c60dddd52625376bcc8-zip-93383e.zip",
+                "reference": "a3f041ebe67f82c765255c60dddd52625376bcc8",
+                "shasum": "7b3cf759cf1f7ea76ad91a1d8cacaf93f8253ae4"
             },
             "require": {
                 "brick/money": "^0.5.0|^0.6.0|^0.7.0",
@@ -4549,9 +4549,9 @@
                 "laravel"
             ],
             "support": {
-                "source": "https://github.com/laravel/nova/tree/v4.20.0"
+                "source": "https://github.com/laravel/nova/tree/v4.20.2"
             },
-            "time": "2023-01-10T19:37:55+00:00"
+            "time": "2023-01-11T18:02:31+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -7989,12 +7989,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "b0551a688f2b5cd15aa6b54ec44ead74da66707f"
+                "reference": "f18a9a12e3c4143d25f87497c810e823a1d54703"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/b0551a688f2b5cd15aa6b54ec44ead74da66707f",
-                "reference": "b0551a688f2b5cd15aa6b54ec44ead74da66707f",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/f18a9a12e3c4143d25f87497c810e823a1d54703",
+                "reference": "f18a9a12e3c4143d25f87497c810e823a1d54703",
                 "shasum": ""
             },
             "require": {
@@ -8033,7 +8033,7 @@
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
                 "source": "https://github.com/railroadmedia/ecommerce/tree/feature-upgrade-rwillems-20221412"
             },
-            "time": "2023-01-10T19:23:25+00:00"
+            "time": "2023-01-11T19:24:01+00:00"
         },
         {
             "name": "railroad/lead-tracker",
@@ -8340,16 +8340,16 @@
         },
         {
             "name": "railroad/railanalytics",
-            "version": "v3.0.7",
+            "version": "dev-v3.0-fixing-transaction-tracking",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railanalytics.git",
-                "reference": "c489cc2f3988342131442ac26e18cd76cbb189b0"
+                "reference": "37b7c81061a832f46aea907bd4b21aca9bb521da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railanalytics/zipball/c489cc2f3988342131442ac26e18cd76cbb189b0",
-                "reference": "c489cc2f3988342131442ac26e18cd76cbb189b0",
+                "url": "https://api.github.com/repos/railroadmedia/railanalytics/zipball/37b7c81061a832f46aea907bd4b21aca9bb521da",
+                "reference": "37b7c81061a832f46aea907bd4b21aca9bb521da",
                 "shasum": ""
             },
             "require": {
@@ -8376,9 +8376,9 @@
             "description": "Laravel analytics system for using tracking code in your application for google analytics/adwords, facebook pixel, etc.",
             "support": {
                 "issues": "https://github.com/railroadmedia/railanalytics/issues",
-                "source": "https://github.com/railroadmedia/railanalytics/tree/v3.0.7"
+                "source": "https://github.com/railroadmedia/railanalytics/tree/v3.0-fixing-transaction-tracking"
             },
-            "time": "2023-01-10T17:51:29+00:00"
+            "time": "2023-01-11T21:51:50+00:00"
         },
         {
             "name": "railroad/railchat",
@@ -16646,11 +16646,18 @@
             "version": "dev-feature-upgrade-rwillems-20221412",
             "alias": "v5.0.53",
             "alias_normalized": "5.0.53.0"
+        },
+        {
+            "package": "railroad/railanalytics",
+            "version": "dev-v3.0-fixing-transaction-tracking",
+            "alias": "v3.0.7",
+            "alias_normalized": "3.0.7.0"
         }
     ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "railroad/ecommerce": 20
+        "railroad/ecommerce": 20,
+        "railroad/railanalytics": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
@@ -16659,5 +16666,5 @@
         "ext-curl": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
