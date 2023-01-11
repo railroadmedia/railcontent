@@ -541,9 +541,9 @@
         'youtubeLink' => 'https://www.youtube.com/pianolessonscom/',
         'youtube' => '1.2M',
         'facebookLink' => 'https://facebook.com/pianoteofficial/',
-        'facebook' => '418K',
+        'facebook' => '422K',
         'instagramLink' => 'https://instagram.com/pianoteofficial/',
-        'instagram' => '171K',
+        'instagram' => '174K',
     ])
     @include('musora.sales.components.guarantee-section', [
         'badge' => 'https://pianote.s3.amazonaws.com/sales/2022/piano-guarantee.png',
