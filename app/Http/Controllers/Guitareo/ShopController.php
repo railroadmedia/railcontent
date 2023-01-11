@@ -12,13 +12,13 @@ class ShopController extends BaseController
     {
         $items = Product::whereHas('brand', fn($query) => $query->where('name', 'guitareo'))->where('visible', '=', 1)->where('product_type_id', '!=', 6)->orderBy('display_order')->get();
 
-        return view('guitareo.shop.shop', [ 'items' => $items, 'theme' => 'guitareo' ]);
+        return view('guitareo.shop.shop', [ 'items' => $items, 'brand' => 'guitareo' ]);
     }
 
     public function product($root, $slug)
     {
         $product = Product::where('slug', 'Guitareo-'.$slug)->firstOrFail();
 
-        return view('guitareo.shop.product-layout', [ 'product' => $product, 'theme' => 'guitareo' ]);
+        return view('guitareo.shop.product-layout', [ 'product' => $product, 'brand' => 'guitareo' ]);
     }
 }

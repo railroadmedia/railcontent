@@ -1,4 +1,4 @@
-@import "./_variables";
+@import "../_variables";
 
 h1 strong, h2 strong, h3 strong, h4 strong, h5 strong, h6 strong {
   font-weight: 900;
@@ -22,7 +22,7 @@ h1 {
   @include tablet {
     font-size: 36px;
   }
-  @include desktop {
+  @include desktopOld {
     font-size: 48px;
   }
 }
@@ -33,7 +33,7 @@ h2 {
   @include tablet {
     font-size: 30px;
   }
-  @include desktop {
+  @include desktopOld {
     font-size: 36px;
   }
 }
@@ -43,7 +43,7 @@ h3 {
   @include tablet {
     font-size: 24px;
   }
-  @include desktop {
+  @include desktopOld {
     font-size: 30px;
   }
 }
@@ -53,7 +53,7 @@ h4 {
   @include tablet {
     font-size: 20px;
   }
-  @include desktop {
+  @include desktopOld {
     font-size: 24px;
   }
 }
@@ -63,7 +63,7 @@ h5 {
   @include tablet {
     font-size: 18px;
   }
-  @include desktop {
+  @include desktopOld {
     font-size: 20px;
   }
 }
@@ -73,7 +73,7 @@ h6 {
   @include tablet {
     font-size: 16px;
   }
-  @include desktop {
+  @include desktopOld {
     font-size: 18px;
   }
 }
@@ -81,7 +81,7 @@ h6 {
 p, li {
   line-height: 1.6em;
   font-size: 15px;
-  @include desktop {
+  @include desktopOld {
     font-size: 16px;
   }
 }
@@ -145,7 +145,7 @@ img {
     padding: 22px 27px;
     border-width: 4px;
   }
-  @include desktop {
+  @include desktopOld {
     font-size: 39px;
     padding: 25px 30px;
   }
@@ -171,7 +171,7 @@ img {
     padding: 60px 0;
     background-size: 1050px;
   }
-  @include desktop {
+  @include desktopOld {
     padding: 90px 0;
     background-size: 1550px;
   }

@@ -1,4 +1,4 @@
-@import "./_variables";
+@import "../_variables";
 
 h1 strong, h2 strong, h3 strong, h4 strong, h5 strong, h6 strong {
   font-weight: 900;
@@ -22,7 +22,7 @@ h1 {
   @include tablet {
     font-size: 36px;
   }
-  @include desktop {
+  @include desktopOld {
     font-size: 48px;
   }
 }
@@ -33,7 +33,7 @@ h2 {
   @include tablet {
     font-size: 30px;
   }
-  @include desktop {
+  @include desktopOld {
     font-size: 36px;
   }
 }
@@ -43,7 +43,7 @@ h3 {
   @include tablet {
     font-size: 24px;
   }
-  @include desktop {
+  @include desktopOld {
     font-size: 30px;
   }
 }
@@ -53,7 +53,7 @@ h4 {
   @include tablet {
     font-size: 20px;
   }
-  @include desktop {
+  @include desktopOld {
     font-size: 24px;
   }
 }
@@ -63,7 +63,7 @@ h5 {
   @include tablet {
     font-size: 18px;
   }
-  @include desktop {
+  @include desktopOld {
     font-size: 20px;
   }
 }
@@ -73,7 +73,7 @@ h6 {
   @include tablet {
     font-size: 16px;
   }
-  @include desktop {
+  @include desktopOld {
     font-size: 18px;
   }
 }
@@ -81,7 +81,7 @@ h6 {
 p, li {
   line-height: 1.6em;
   font-size: 15px;
-  @include desktop {
+  @include desktopOld {
     font-size: 16px;
   }
 }
@@ -306,7 +306,7 @@ img {
     line-height: 55px;
     margin: 0 auto 15px;
   }
-  @include desktop {
+  @include desktopOld {
     font-size: 23px;
   }
 }
@@ -349,7 +349,7 @@ img {
     @include tablet {
       padding: 20px;
     }
-    @include desktop {
+    @include desktopOld {
       padding: 30px;
     }
   }
@@ -361,7 +361,7 @@ img {
 
       font-size: 19px;
     }
-    @include desktop {
+    @include desktopOld {
 
       font-size: 23px;
     }
@@ -389,7 +389,7 @@ img {
     height: 50px;
     line-height: 50px;
     font-size: 26px;
-    @include desktop {
+    @include desktopOld {
       width: 70px;
       height: 70px;
       line-height: 70px;

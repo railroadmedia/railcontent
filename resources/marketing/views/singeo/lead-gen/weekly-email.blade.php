@@ -11,7 +11,7 @@
 
     <base target="_parent">
     @include('_partials.layout._tailwindcdn')
-    <link rel="stylesheet" href="{{ asset('/marketing/css/singeo/tailwind-helpers.css') }}" >
+    <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}" >
     <style>
         body {
             height:100vh;

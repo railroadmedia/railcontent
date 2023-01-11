@@ -11,7 +11,7 @@
     @include('_partials.layout._fonts')
 
     @include('_partials.layout._tailwindcdn')
-    <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/ndsh.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"/>
@@ -29,11 +29,11 @@
                 padding: 0 20px;
             }
         }
-        .dropdowns .dropdown .bg-pred {
+        .dropdowns .dropdown .bg-pianote {
             min-width: 32px;
         }
         @media (min-width: 40em) {
-            .dropdowns .dropdown .bg-pred {
+            .dropdowns .dropdown .bg-pianote {
                 min-width: 83px;
             }
         }
@@ -605,17 +605,17 @@
         <div class="container mx-auto">
             <h3 class="text-white"><strong>Still have questions?</strong></h3>
             <div class="dropdowns">
-            @include('drumeo.products.partials.question-dropdown-tw', [
+            @include('_partials.components.question-dropdown', [
                     "title" => "Do I need a full drum set to complete the course?",
-                    "description" => 'The lessons work on both electric and acoustic drum sets. While you can even get value with just a practice pad & sticks, it’s recommended that you have access to a drum set to get the most from this course.',
+                    "desc" => 'The lessons work on both electric and acoustic drum sets. While you can even get value with just a practice pad & sticks, it’s recommended that you have access to a drum set to get the most from this course.',
                     ])
-            @include('drumeo.products.partials.question-dropdown-tw', [
+            @include('_partials.components.question-dropdown', [
                     "title" => "How much time per week will this course require?",
-                    "description" => 'It’s up to you and your schedule! New Drummers Start Here is designed to be flexible so you can work through it at your own pace. Or, if you’re super motivated you could cruise the entire course in a week. Every drummer will be different!',
+                    "desc" => 'It’s up to you and your schedule! New Drummers Start Here is designed to be flexible so you can work through it at your own pace. Or, if you’re super motivated you could cruise the entire course in a week. Every drummer will be different!',
                     ])
-            @include('drumeo.products.partials.question-dropdown-tw', [
+            @include('_partials.components.question-dropdown', [
                     "title" => "What devices can I access the course on?",
-                    "description" => 'New Drummers Start Here is available on your laptop, tablet, or phone. You’ll also have access through the Drumeo app after you’ve completed your purchase of the course.',
+                    "desc" => 'New Drummers Start Here is available on your laptop, tablet, or phone. You’ll also have access through the Drumeo app after you’ve completed your purchase of the course.',
                     ])
             </div>
         </div>
@@ -699,11 +699,6 @@
             });
             $('.compare-table tr td:nth-child(7)').on('click', function(){
                 $(this).parents().find('table').removeClass('ambition udemy masterclass');
-            });
-
-            $('.dropdown').on('click', function(){
-                $(this).toggleClass('active');
-                $(this).find('i').toggleClass('rotate-180');
             });
         });
     </script>

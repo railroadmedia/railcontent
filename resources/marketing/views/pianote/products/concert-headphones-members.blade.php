@@ -94,13 +94,13 @@
             <h6 class="text-yellow italic font-bold">Enhance your playing experience.</h6>
             <i data-open="trailer" class="fas fa-play play-button autoplay-video text-white smaller my-80 mb-10"></i>
             <br>
-            <a class="join w-full" href="#customize-anchor">Grab your pair</a>
+            <a class="join w-full" href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['pianote-headphones' => 1], 'redirect' => '/order', 'locked' => 'true', 'promo-code' => 'members-special']) }}">Grab your pair</a>
             <h4 class="text-white font-extrabold my-4">
                 Only
-                @if((floatval($productPrices['pianote-headphones']->price) -floatval($productPrices['pianote-headphones']->discounted_price)) > 0)
+                @if((floatval($productPrices['pianote-headphones']->price) - 149) > 0)
                     <s class="font-normal">${{floatval($productPrices['pianote-headphones']->price) }}</s>
                 @endif
-                ${{floatval($productPrices['pianote-headphones']->discounted_price) }}
+                ${{149}}
             </h4>
             <p class="text-yellow italic font-bold leading-tight">LIMITED EDITION.</p>
 
@@ -241,17 +241,17 @@
         <p class="text-white">LIMITED EDITION.</p>
         <div class="flex flex-wrap justify-center 2-full max-w-sm md:max-w-2xl lg:max-w-3xl my-5 sm:my-7 mx-auto text-center">
             <div class="w-full md:w-1/2 px-2 md:px-3 relative">
-                <a href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['pianote-headphones' => 1], 'redirect' => '/order', 'locked' => 'false']) }}" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">
+                <a href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['pianote-headphones' => 1], 'redirect' => '/order', 'locked' => 'true', 'promo-code' => 'members-special']) }}" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">
                     <p class="w-full px-4 pt-2 pb-4 -mb-3 text-white rounded-t-2xl font-extrabold uppercase" style="background: linear-gradient(180deg, #F51A30 0%, #9A1120 64.29%);">
-                        LAUNCH SPECIAL
+                        MEMBERS SPECIAL
                     </p>
                     <div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">
                         <h6 class="leading-none mb-3 md:mb-8">Concert Series Headphones</h6>
                         <h1 class="inline-block leading-none">
-                            @if((floatval($productPrices['pianote-headphones']->price) -floatval($productPrices['pianote-headphones']->discounted_price)) > 0)
+                            @if((floatval($productPrices['pianote-headphones']->price) - 149) > 0)
                                 <s style="color:#BBBBBF;">${{ floatval($productPrices['pianote-headphones']->price) }}</s>
-                                <strong>${{ floatval($productPrices['pianote-headphones']->discounted_price) }}</strong>
-                                <p class="text-sm my-4"><em>Save {{ round(100 - (100 * (floatval($productPrices['pianote-headphones']->discounted_price) / floatval($productPrices['pianote-headphones']->price)))) }}% for a limited time.</em></p>
+                                <strong>${{ 149}}</strong>
+                                <p class="text-sm my-4"><em>Save {{ round(100 - (100 * (149/ floatval($productPrices['pianote-headphones']->price)))) }}% for a limited time.</em></p>
                             @else
                                 <strong>${{ floatval($productPrices['pianote-headphones']->price) }}</strong>
                                 <br/><br/>

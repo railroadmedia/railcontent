@@ -12,11 +12,11 @@
 
 @section('styles')
     @parent
-    <link href="{{ asset('/marketing/css/guitareo/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation-float.min.css" rel="stylesheet">
     @include('_partials.layout._tailwindcdn')
-    <link href="{{ asset('marketing/parcel/guitareo/gs.css') }}" rel="stylesheet">
-    <link href="{{ asset('marketing/parcel/guitareo/nav-footer.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/guitareo/gs.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}" rel="stylesheet">
     <style>
         .text-yellow {
             color: #ffe200;
@@ -27,7 +27,7 @@
 @section('scripts')
     @parent
     <script src="{{ asset('/marketing/js/modal.js') }}"></script>
-    <script src="{{ asset('marketing/parcel/drumeo/navigation-sales.js') }}"></script>
+    <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $(document).foundation();

@@ -61,7 +61,7 @@
         document.querySelector('.BeaconFabButtonFrame').style.bottom = "50px";
     });
 </script>
-<script type="text/javascript" src="{{ asset('marketing/js/jquery.countdown-2.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('/marketing/js/jquery.countdown-2.min.js') }}"></script>
 
 <script>
     $(document).ready(function () {

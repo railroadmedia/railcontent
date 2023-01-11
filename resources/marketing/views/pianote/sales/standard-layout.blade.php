@@ -15,7 +15,7 @@
     @include('_partials.layout._tailwindcdn')
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css"/>
-    <link href="{{ asset('/marketing/css/pianote/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/sales.css') }}">
     {{--<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">--}}
@@ -510,7 +510,7 @@
                             @endphp
                             @foreach($levels as $level)
                                 <div class="dropdown text-center border-2 border-gray-500 rounded-md overflow-hidden flex cursor-pointer mb-3 select-none @if(!empty($level['defaultOpen'])) active @endif
-                                @if(!empty($level['navyBorder'])) border-navy-600 @endif">
+                                @if(!empty($level['navyBorder'])) border-sky-900 @endif">
                                     <div class="bg-pianote py-5 px-2 sm:px-3 ">
                                         <h5 class="leading-tight whitespace-nowrap inline-flex items-center">
                                             <span class="text-xs hidden md:inline mr-1"> LEVEL</span>
@@ -582,7 +582,7 @@
                             @endphp
                             @foreach($classicalLevels as $level)
                                 <div class="dropdown text-center border-2 border-gray-500 rounded-md overflow-hidden flex cursor-pointer mb-3 select-none @if(!empty($level['defaultOpen'])) active @endif
-                                @if(!empty($level['navyBorder'])) border-navy-600 @endif">
+                                @if(!empty($level['navyBorder'])) border-sky-900 @endif">
                                     <div class="py-5 px-2 sm:px-3 " style="background-color:#ce9432;">
                                         <h5 class="leading-tight whitespace-nowrap inline-flex items-center">
                                             <span class="text-xs hidden md:inline mr-1"> LEVEL</span>
@@ -1696,7 +1696,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/1.9.3/countUp.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/parcel/pianote/sales.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/sales-page.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>

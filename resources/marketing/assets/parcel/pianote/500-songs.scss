@@ -1,4 +1,4 @@
-@import "./_variables";
+@import "../_variables";
 
 html {
     height: 100%;
@@ -54,7 +54,7 @@ h1 {
     @include tablet {
         font-size: 30px;
     }
-    @include desktop {
+    @include desktopOld {
         font-size: 40px;
     }
 }
@@ -65,7 +65,7 @@ h2 {
     @include tablet {
         font-size: 25px;
     }
-    @include desktop {
+    @include desktopOld {
         font-size: 30px;
     }
 }
@@ -79,7 +79,7 @@ h3 {
         font-size: 18px;
         margin: 0 auto 40px;
     }
-    @include desktop {
+    @include desktopOld {
         font-size: 21px;
         margin: 0 auto 55px;
     }
@@ -90,7 +90,7 @@ h4 {
     @include tablet {
         font-size: 16px;
     }
-    @include desktop {
+    @include desktopOld {
         font-size: 18px;
     }
 }
@@ -212,7 +212,7 @@ button {
             background: #141416 url("https://d2vyvo0tyx8ig5.cloudfront.net/500-songs/sales/header.jpg") 53% center/cover no-repeat;
             padding: 40px 15px;
         }
-        @include desktop {
+        @include desktopOld {
             padding: 50px 15px;
         }
         @include xl {
@@ -226,7 +226,7 @@ button {
         @include tablet {
             max-width: 350px;
         }
-        @include desktop {
+        @include desktopOld {
             max-width: 460px;
         }
     }
@@ -248,7 +248,7 @@ button {
             border-width: 4px;
             margin: 270px auto 140px;
         }
-        @include desktop {
+        @include desktopOld {
             font-size: 39px;
             padding: 29px 30px;
         }
@@ -301,7 +301,7 @@ button {
         @include tablet {
             width: 200px;
         }
-        @include desktop {
+        @include desktopOld {
             width: 250px;
             left: 65%;
         }
@@ -364,7 +364,7 @@ button {
         @include tablet {
             padding: 40px 0;
         }
-        @include desktop {
+        @include desktopOld {
             padding: 50px 0;
         }
     }
@@ -383,7 +383,7 @@ button {
             font-size: 17px;
             max-width: 550px;
         }
-        @include desktop {
+        @include desktopOld {
             max-width: 620px;
             font-size: 19px;
         }
@@ -393,7 +393,7 @@ button {
         @include tablet {
             width: 150px;
         }
-        @include desktop {
+        @include desktopOld {
             width: 190px;
         }
     }
@@ -427,7 +427,7 @@ button {
             //max-width: 620px;
             padding: 40px 30px;
         }
-        @include desktop {
+        @include desktopOld {
             padding: 50px 30px;
         }
     }
@@ -444,20 +444,20 @@ button {
         @include tablet {
             max-width: 300px;
         }
-        @include desktop {
+        @include desktopOld {
             max-width: 410px;
         }
     }
 
     h2 {
         margin: 25px auto 10px;
-        @include desktop {
+        @include desktopOld {
             margin: 30px auto 13px;
         }
     }
     h3 {
         margin: 0 auto 30px;
-        @include desktop {
+        @include desktopOld {
             margin: 0 auto 40px;
         }
     }
@@ -471,7 +471,7 @@ button {
             column-count: 2;
             column-gap: 50px;
         }
-        @include desktop {
+        @include desktopOld {
             margin: 0 auto 25px;
         }
     }
@@ -512,7 +512,7 @@ button {
                     margin: 0 auto;
                     width: 161px;
                 }
-                @include desktop {
+                @include desktopOld {
                     width: 257px;
                 }
             }
@@ -522,7 +522,7 @@ button {
                     padding-left: 25px;
                     text-align: left;
                 }
-                @include desktop {
+                @include desktopOld {
                     padding-left: 5%;
                 }
 
@@ -551,7 +551,7 @@ button {
     h3 {
         color: #8c9697;
         margin: 20px auto 30px;
-        @include desktop {
+        @include desktopOld {
             margin: 30px auto 40px;
         }
     }
@@ -586,7 +586,7 @@ button {
                 margin: 0;
                 max-width: 230px;
             }
-            @include desktop {
+            @include desktopOld {
                 max-width: 310px;
             }
 
@@ -648,7 +648,7 @@ button {
                 margin: 0;
                 padding: 0 15px 0 25px;
             }
-            @include desktop {
+            @include desktopOld {
                 font-size: 15px;
             }
 
@@ -658,7 +658,7 @@ button {
                 @include tablet {
                     font-size: 18px;
                 }
-                @include desktop {
+                @include desktopOld {
                     font-size: 23px;
                 }
             }
@@ -692,7 +692,7 @@ button {
         @include tablet {
             width: 210px;
         }
-        @include desktop {
+        @include desktopOld {
             width: 260px;
             padding: 0 0 0 40px;
         }
@@ -725,7 +725,7 @@ button {
         @include tablet {
             margin: 35px auto;
         }
-        @include desktop {
+        @include desktopOld {
             max-height: 840px;
         }
 
@@ -746,7 +746,7 @@ button {
             @include tablet {
                 width: 33.33%;
             }
-            @include desktop {
+            @include desktopOld {
                 font-size: 13px;
             }
 
@@ -761,7 +761,7 @@ button {
                 text-overflow: ellipsis;
                 overflow: hidden;
                 font-size: 12px;
-                @include desktop {
+                @include desktopOld {
                     font-size: 14px;
 
                 }
@@ -823,7 +823,7 @@ button {
                 height: 70px;
                 width: 70px;
                 margin: 0 auto 15px;
-                @include desktop {
+                @include desktopOld {
                     margin: 0;
                     line-height: 76px;
                     height: 80px;
@@ -837,7 +837,7 @@ button {
                 font: 400 13px/1.5em $opensans;
                 margin: 0 auto;
                 max-width: 250px;
-                @include desktop {
+                @include desktopOld {
                     width: calc(100% - 80px);
                     text-align: left;
                     padding-left: 20px;
@@ -955,7 +955,7 @@ button {
                 @include tablet {
                     font-size: 15px;
                 }
-                @include desktop {
+                @include desktopOld {
                     margin: 15px auto 7px;
                     font-size: 18px;
                 }
@@ -1056,7 +1056,7 @@ button {
             column-gap: 40px;
             font-size: 14px;
         }
-        @include desktop {
+        @include desktopOld {
             font-size: 16px;
         }
     }
@@ -1065,7 +1065,7 @@ button {
         float: left;
         padding-right: 7px;
         width: 51px;
-        @include desktop {
+        @include desktopOld {
             width: 57px;
         }
     }
@@ -1094,7 +1094,7 @@ button {
                 font-size: 27px;
                 margin: 0 auto 15px;
             }
-            @include desktop {
+            @include desktopOld {
                 font-size: 39px;
                 margin: 5px auto 10px;
             }
@@ -1127,7 +1127,7 @@ button {
                 width: 100%;
                 max-width: 290px;
             }
-            @include desktop {
+            @include desktopOld {
                 width: 100%;
                 max-width: 100%;
             }
@@ -1152,7 +1152,7 @@ button {
         @include tablet {
             max-width: 350px;
         }
-        @include desktop {
+        @include desktopOld {
             max-width: 500px;
         }
 
@@ -1163,7 +1163,7 @@ button {
             @include tablet {
                 max-width: 160px;
             }
-            @include desktop {
+            @include desktopOld {
                 max-width: 210px;
             }
         }
@@ -1181,7 +1181,7 @@ button {
                 font-size: 15px;
                 margin: 35px auto 0;
             }
-            @include desktop {
+            @include desktopOld {
                 font-size: 18px;
             }
 
@@ -1210,7 +1210,7 @@ button {
             padding: 17px 0;
             max-width: 630px;
         }
-        @include desktop {
+        @include desktopOld {
             max-width: 750px;
         }
     }
@@ -1253,7 +1253,7 @@ button {
             @include tablet {
                 max-width: 480px;
             }
-            @include desktop {
+            @include desktopOld {
                 max-width: 550px;
             }
         }

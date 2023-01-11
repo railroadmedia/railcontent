@@ -14,7 +14,7 @@
 
     @include('_partials.layout._tailwindcdn')
     <script type="text/javascript" src="https://addevent.com/libs/atc/1.6.1/atc.min.js"></script>
-    <link href="{{ asset('marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/lead-gen.css') }}" rel="stylesheet">
 

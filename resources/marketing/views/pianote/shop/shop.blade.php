@@ -13,7 +13,7 @@
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
 
-    <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
 
     <link href="{{ asset('/marketing/parcel/pianote/shop.css') }}" rel="stylesheet">
