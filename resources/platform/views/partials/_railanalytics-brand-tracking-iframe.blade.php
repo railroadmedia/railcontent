@@ -2,11 +2,11 @@
     @php
         $queueData = \App\Analytics\Tracker::getQueueForBrand('drumeo');
 
-        cache()->set(auth()->id() . '_recent_order_analytics_data_drumeo', $queueData, 600);
+        cache('redis')->set(auth()->id() . '_recent_order_analytics_data_drumeo', $queueData, 600);
 
         \Illuminate\Support\Facades\Log::info('--- KEY SET: ' . auth()->id() . '_recent_order_analytics_data_drumeo');
         \Illuminate\Support\Facades\Log::info('--- $queueData: ' . var_export($queueData, true));
-        \Illuminate\Support\Facades\Log::info('--- $queueDataFROMCACHEINITAL: ' . var_export(cache()->get(auth()->id() . '_recent_order_analytics_data_drumeo'), true));
+        \Illuminate\Support\Facades\Log::info('--- $queueDataFROMCACHEINITAL: ' . var_export(cache('redis')->get(auth()->id() . '_recent_order_analytics_data_drumeo'), true));
     @endphp
 
     <iframe src="{{ get_legacy_brand_base_url('drumeo') . '/railanalytics/blank-tracking-page?cache_key=' . auth()->id() . '_recent_order_analytics_data_drumeo' }}"
