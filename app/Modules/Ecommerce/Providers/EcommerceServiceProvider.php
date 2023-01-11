@@ -2,6 +2,7 @@
 
 namespace App\Modules\Ecommerce\Providers;
 
+use App\Modules\Ecommerce\Console\Commands\ProcessAppleExpiredSubscriptions;
 use App\Modules\Ecommerce\Console\Commands\UnifySubscriptions;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
@@ -28,8 +29,11 @@ class EcommerceServiceProvider extends ServiceProvider
         $this->commands(
             [
                 UnifySubscriptions::class,
+                ProcessAppleExpiredSubscriptions::class
             ]
         );
+
+        $this->loadRoutesFrom(__DIR__ . '/../routes/routes.php');
     }
 
     /**

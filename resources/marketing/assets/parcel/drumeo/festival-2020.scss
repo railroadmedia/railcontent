@@ -1,0 +1,713 @@
+@import "../_variables";
+
+h1, h2, h3, h4, h5, h6, p, li {
+  font-family: $opensans;
+}
+
+h1 {
+  font: 900 25px/1.1em $opensans;
+  margin: 0 auto;
+  @include tablet {
+    font-size: 38px;
+  }
+  @include desktop {
+    font-size: 52px;
+  }
+
+  strong {
+    font-weight: 900;
+  }
+}
+
+h2 {
+  font: 900 19px/1em $opensans;
+  margin: 0 auto;
+  @include tablet {
+    font-size: 24px;
+  }
+  @include desktop {
+    font-size: 35px;
+  }
+}
+
+h3 {
+  font: 400 18px/1em $opensans;
+  margin: 0 auto;
+  @include tablet {
+    font-size: 20px;
+  }
+  @include desktop {
+    font-size: 24px;
+  }
+
+  strong {
+    font-weight: 900;
+  }
+}
+
+h4 {
+  font: 400 15px/1em $opensans;
+  margin: 0 auto;
+  @include tablet {
+    font-size: 18px;
+  }
+  @include desktop {
+    font-size: 24px;
+  }
+
+  strong {
+    font-weight: 900;
+  }
+}
+
+p {
+  font: 400 13px/1.7em $opensans;
+  margin: 0 auto;
+  @include tablet {
+    font-size: 14px;
+  }
+  @include desktop {
+    font-size: 16px;
+  }
+}
+
+.half-padding {
+  padding-left: 7px;
+  padding-right: 7px;
+}
+
+.text-blue {
+  color: $drumeoBlue;
+}
+
+.text-yellow {
+  color: #f7d100;
+}
+
+.text-red {
+  color: #ef1931;
+}
+
+.text-grey {
+  color: #838d8f;
+}
+
+.text-white {
+  color: #fff;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.dense {
+  font-family: $robotocondensed;
+  text-transform: uppercase;
+}
+
+.header {
+  position: relative;
+  color: #fff;
+  overflow: hidden;
+  padding: 20px 10px;
+  @include tablet {
+    padding: 35px 0;
+  }
+
+  video {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+  }
+
+  .overlay {
+    background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(11,118,219,0.5) 100%);
+    background: linear-gradient(to bottom, rgba(11,118,219,0.5) 0%,rgba(11,118,219,0.5) 70%, #000c17 100%);
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+  }
+
+  .row {
+    position: relative;
+    z-index: 3;
+  }
+
+  .logo {
+    width: 210px;
+    margin: 0 auto;
+    margin-bottom: 310px;
+    @include tablet {
+      width: 300px;
+      margin-bottom: 360px;
+    }
+    @include desktop {
+      width: 360px;
+      margin-bottom: 410px;
+    }
+  }
+
+  h1 {
+    line-height: 1.2em;
+    font-size: 22px;
+    @include tablet {
+      font-size: 32px;
+    }
+    @include desktop {
+      font-size: 43px;
+    }
+
+  }
+
+  h3 {
+    margin: 10px auto 5px;
+    font-size: 22px;
+    line-height: 1em;
+    @include tablet {
+      font-size: 23px;
+      margin: 20px auto 5px;
+    }
+    @include desktop {
+      font-size: 31px;
+    }
+  }
+
+  h6 {
+    font-size: 13px;
+    @include tablet {
+
+      font-size: 16px;
+    }
+    @include desktop {
+      font-size: 19px;
+    }
+  }
+
+  .join {
+    width: 95%;
+    margin: 20px auto 10px;
+    @include tablet {
+      margin: 30px auto 20px;
+      font-size: 35px;
+      width: 100%;
+      max-width: 620px;
+    }
+    @include desktop {
+      margin: 45px auto 20px;
+      font-size: 40px;
+      padding: 20px;
+      max-width: 1000px;
+
+    }
+  }
+
+}
+
+.content-section {
+  background: #000c17;
+  position: relative;
+  color: #fff;
+  padding: 30px 0;
+  @include tablet {
+    padding: 40px 0;
+  }
+  @include desktop {
+    padding: 60px 0;
+  }
+
+  h2 {
+    margin: 0 auto;
+    line-height: 1.2em;
+    font-size: 22px;
+    @include tablet {
+      margin: 0 auto 10px;
+      font-size: 30px;
+    }
+    @include desktop {
+      font-size: 40px;
+    }
+
+    strong {
+      font-weight: 900;
+    }
+  }
+
+  h3 {
+    font-size: 22px;
+    @include tablet {
+      font-size: 23px;
+    }
+    @include desktop {
+      font-size: 31px;
+    }
+
+  }
+
+  h4 {
+    font-size: 17px;
+    @include tablet {
+      font-size: 20px;
+    }
+    @include desktop {
+      font-size: 27px;
+    }
+  }
+
+  h5 {
+    font-size: 14px;
+    @include tablet {
+      font-size: 16px;
+    }
+    @include desktop {
+      font-size: 19px;
+    }
+
+    strong {
+      font-weight: 900;
+    }
+  }
+
+  p {
+    font-size: 13px;
+    @include desktop {
+      font-size: 15px;
+    }
+  }
+}
+
+.benefits {
+
+  .columns {
+    @include tablet {
+      padding: 0 10px;
+    }
+    @include desktop {
+      padding: 0 25px;
+    }
+
+    &:nth-child(1) i {
+      margin-top: 0;
+    }
+  }
+
+  i {
+    font-size: 40px;
+    margin: 30px auto 10px;
+    @include tablet {
+      font-size: 45px;
+      margin: 0 auto 15px;
+    }
+    @include desktop {
+      font-size: 55px;
+      margin: 0 auto 20px;
+    }
+  }
+
+  h4 {
+    margin: 0 auto;
+  }
+
+  p {
+    line-height: 1.7em;
+    margin: 0 auto;
+    padding: 0 15px;
+    @include tablet {
+      padding: 0;
+    }
+
+    em {
+      display: inline-block;
+      margin: 10px auto;
+    }
+  }
+}
+
+.detail-video {
+  h2 {
+    margin: 10px auto 30px;
+    @include tablet {
+      margin: 15px auto 50px;
+    }
+  }
+
+  .vid-container {
+    border: 5px solid #f2efef;
+    border-radius: 15px;
+    margin: 0 auto;
+    position: relative;
+    max-width: 330px;
+    @include tablet {
+      max-width: 660px;
+      border-width: 8px;
+    }
+    @include desktop {
+
+      max-width: 750px;
+    }
+
+    .flex-video {
+      margin: 0 auto;
+    }
+
+    .watch-text {
+      position: absolute;
+      right: -135px;
+      top: 25%;
+      font-size: 19px;
+      line-height: 1em;
+      color: #ffdb00;
+      transform: translate(0, -50%) rotate(15deg);
+      width: auto;
+      display: inline-block;
+
+      img {
+        height: 35px;
+        display: block;
+        margin: 10px 10px 0;
+      }
+    }
+  }
+}
+
+.artist-wrappers {
+  .banner-image {
+    background: #000 center top/cover;
+    margin-bottom: -20px;
+    position: relative;
+    height: 340px;
+    @include tablet {
+      height: 430px;
+    }
+    @include desktop {
+
+      height: 500px;
+    }
+
+    &:after {
+      content: ' ';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(180deg, #000c17, transparent 10%, transparent 75%, #000c17);
+    }
+  }
+  h1 {
+    position: relative;
+  }
+
+  .text-blue {
+    margin-bottom: 30px;
+    @include tablet {
+      margin-bottom: 70px;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.warning-section {
+  background: #9b1a1e;
+  color: #fff;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  padding: 45px 0;
+  @include tablet {
+    padding: 60px 15px;
+  }
+  @include desktop {
+    padding: 70px 15px;
+  }
+
+  .bg-icon {
+    position: absolute;
+    transform: translate(0, -50%);
+    opacity: 0.15;
+    filter: brightness(0%);
+    z-index: 1;
+    top: 15%;
+    height: 100px;
+    @include tablet {
+      top: 25%;
+      height: 200px;
+    }
+    @include desktop {
+      top: 45%;
+      height: 400px;
+    }
+
+    &.sign {
+      left: -30px;
+      @include tablet {
+        left: -20px;
+      }
+      @include desktop {
+        left: -110px;
+      }
+    }
+
+    &.cal {
+      right: -50px;
+      @include tablet {
+        right: -70px;
+      }
+      @include desktop {
+        right: -230px;
+      }
+    }
+  }
+
+  h1 {
+    position: relative;
+    z-index: 2;
+    text-transform: uppercase;
+    margin: 0 auto;
+  }
+
+  .sticks {
+    position: relative;
+    z-index: 2;
+    opacity: 0.15;
+    filter: brightness(0%);
+    margin: 17px auto;
+    width: 70px;
+    @include tablet {
+      margin: 20px auto;
+      width: 80px;
+    }
+    @include desktop {
+      margin: 25px auto;
+      width: 90px;
+    }
+  }
+
+  p {
+    position: relative;
+    z-index: 2;
+    font: 400 13px/1.7em $opensans;
+    display: inline-block;
+    max-width: inherit;
+    padding: 0 10px;
+    margin: 0 auto;
+    @include tablet {
+      font-size: 15px;
+      max-width: 620px;
+    }
+    @include desktop {
+      font-size: 16px;
+      max-width: 660px;
+    }
+
+    strong {
+      color: #FDCE02;
+    }
+  }
+}
+
+.final {
+  background: #060e19 center center/cover;
+  padding: 40px 0;
+  @include tablet {
+    padding: 60px 0;
+  }
+  @include desktop {
+    padding: 70px 0;
+  }
+
+  .logo {
+    width: 250px;
+    @include tablet {
+      width: 400px;
+    }
+    @include desktop {
+      width: 530px;
+    }
+  }
+
+  h1 {
+    line-height: 1.2em;
+    font-size: 22px;
+    margin: 40px auto 7px;
+    @include tablet {
+      font-size: 32px;
+    }
+    @include desktop {
+      font-size: 43px;
+      margin: 50px auto 10px;
+    }
+  }
+
+  h4 {
+    margin: 0 auto;
+    font-size: 14px;
+    @include tablet {
+      font-size: 17px;
+    }
+    @include desktop {
+      font-size: 24px;
+    }
+  }
+
+  h6 {
+    font-size: 13px;
+    margin: 0 auto 20px;
+    @include tablet {
+      margin: 0 auto 30px;
+      font-size: 16px;
+    }
+    @include desktop {
+      font-size: 19px;
+      margin: 0 auto 40px;
+    }
+  }
+
+  .join {
+    width: 95%;
+    margin: 20px auto 10px;
+    @include tablet {
+      margin: 30px auto 15px;
+      width: 100%;
+      max-width: 670px;
+    }
+    @include desktop {
+      margin: 40px auto 15px;
+      font-size: 40px;
+      padding: 20px;
+      max-width: 1000px;
+    }
+  }
+
+  .credit-cards {
+    i {
+      opacity: 0.7;
+      margin: 0 3px;
+      font-size: 45px;
+      @include tablet {
+        font-size: 50px;
+      }
+    }
+
+    img {
+      width: 100%;
+      max-width: 340px;
+      @include tablet {
+        max-width: 480px;
+      }
+      @include desktop {
+        max-width: 550px;
+      }
+    }
+  }
+
+  .questions {
+    margin: 15px 0 0;
+
+    p {
+      margin: 0;
+      opacity: 0.7;
+      max-width: 100%;
+      font-size: 13px;
+
+      a {
+        color: inherit;
+        display: inline-block;
+      }
+    }
+  }
+}
+
+.reveal-overlay {
+  background-color: rgba(0, 0, 0, 0.8);
+
+  &:after {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-family: "Font Awesome 5 Pro";
+    font-weight: 900;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    content: "\f00d";
+    color: #fff;
+    z-index: 1;
+    opacity: 0.8;
+    position: absolute;
+    margin: 0;
+    line-height: 1em;
+    text-align: center;
+    display: inline-block;
+    outline: none;
+    top: 0;
+    right: 0;
+    font-size: 35px;
+    width: 35px;
+    @include tablet {
+      top: 7px;
+      right: 7px;
+      font-size: 50px;
+      width: 50px;
+    }
+  }
+
+  .reveal {
+    height: inherit;
+    min-height: 0;
+    outline: none;
+    padding: 0;
+    border: none;
+    border-radius: 5px;
+
+    .flex-video {
+      margin: 0 auto;
+    }
+
+    p {
+      margin: 5px auto;
+    }
+
+    .join {
+      margin: 10px auto;
+    }
+
+    &#closed {
+      max-width: 630px;
+      padding: 20px;
+      @include tablet {
+        padding: 30px;
+      }
+
+      h3 {
+        font-size: 22px;
+        @include tablet {
+          font-size: 23px;
+        }
+        @include desktop {
+          font-size: 31px;
+        }
+
+      }
+
+      p {
+        font-size: 13px;
+        @include desktop {
+          font-size: 15px;
+        }
+      }
+    }
+  }
+}

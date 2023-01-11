@@ -1,15 +1,15 @@
 <template>
     <div class="flex flex-row mb-2">
         <div class="flex flex-column corners-10 ba-black-1 pa-2">
-            <div class="flex flex-row mb-1">
-                <p class="flex flex-column body text-left">
+            <div class="flex flex-row mb-2">
+                <p class="flex flex-column body text-left text-base">
                     Subtotal
                 </p>
                 <p
                    v-if="subTotalBeforeDiscounts !== subTotalAfterDiscounts"
                    class="flex flex-column body text-right"
                 >
-                    <span><s style="font-weight: normal; color: #666;">${{ parseTotal(subTotalBeforeDiscounts) }}</s><span class="font-bold">&nbsp;&nbsp; ${{ parseTotal(subTotalAfterDiscounts) }}</span></span>
+                    <span><s style="font-weight: normal; color: #666;">${{ parseTotal(subTotalBeforeDiscounts) }}</s><span class="font-black">&nbsp;&nbsp; ${{ parseTotal(subTotalAfterDiscounts) }}</span></span>
                 </p>
                 <p
                    v-if="subTotalBeforeDiscounts === subTotalAfterDiscounts"
@@ -19,8 +19,8 @@
                 </p>
             </div>
 
-            <div class="flex flex-row mb-1">
-                <p class="flex flex-column body text-left">
+            <div class="flex flex-row mb-2">
+                <p class="flex flex-column body text-left text-base">
                     Shipping
                 </p>
                 <p class="flex flex-column body text-right">
@@ -30,9 +30,9 @@
 
             <div
                 v-if="sumOfDiscounts > 0"
-                class="flex flex-row mb-1"
+                class="flex flex-row mb-2"
             >
-                <p class="flex flex-column body text-left">
+                <p class="flex flex-column body text-left text-base">
                     My Savings
                 </p>
                 <p class="flex flex-column body text-right text-error">
@@ -40,8 +40,8 @@
                 </p>
             </div>
 
-            <div class="flex flex-row mb-1">
-                <p class="flex flex-column body text-left">
+            <div class="flex flex-row mb-2">
+                <p class="flex flex-column body text-left text-base">
                     Tax
                 </p>
                 <p class="flex flex-column body text-right">
@@ -49,8 +49,8 @@
                 </p>
             </div>
 
-            <div class="flex flex-row mb-1" v-if="totals.shipping_taxes > 0 && cartData.number_of_payments > 1">
-                <p class="flex flex-column body text-left">
+            <div class="flex flex-row mb-2" v-if="totals.shipping_taxes > 0 && cartData.number_of_payments > 1">
+                <p class="flex flex-column body text-left text-base">
                     Shipping Tax
                 </p>
                 <p class="flex flex-column body text-right">
@@ -58,8 +58,8 @@
                 </p>
             </div>
 
-            <div class="flex flex-row mb-1" v-if="financeLabel">
-                <p class="flex flex-column body text-left">
+            <div class="flex flex-row mb-2" v-if="financeLabel">
+                <p class="flex flex-column body text-left text-base">
                     Finance Charges
                 </p>
                 <p class="flex flex-column body text-right">
@@ -67,8 +67,8 @@
                 </p>
             </div>
 
-            <div class="flex flex-row mb-1" v-if="totals.order_total">
-                <p class="flex flex-column body text-left">
+            <div class="flex flex-row mb-2" v-if="totals.order_total">
+                <p class="flex flex-column body text-left text-base">
                     Total
                 </p>
                 <p class="flex flex-column body text-right">
@@ -76,11 +76,11 @@
                 </p>
             </div>
 
-            <div class="flex flex-row mb-1 bt-grey-1-1 pt-1">
-                <p class="flex flex-column title font-bold text-left">
+            <div class="flex flex-row mb-2 bt-grey-1-1 pt-1">
+                <p class="flex flex-column text-lg font-black text-left">
                     Due Today
                 </p>
-                <p class="flex flex-column title font-bold text-right">
+                <p class="flex flex-column text-lg font-black text-right">
                     USD ${{ parseTotal(totals.due) }}
                     <template v-if="totals.shipping > 0">
                         <br>
@@ -93,11 +93,11 @@
 
             <template v-if="totals.monthly_payments && totals.monthly_payments.length">
                 <div
-                    class="flex flex-row mb-1"
+                    class="flex flex-row mb-2"
                     v-for="(monthlyPayment, i) in totals.monthly_payments"
                     :class="{'bt-grey-1-1 pt-1': i === 0}"
                 >
-                    <p class="flex flex-column body text-left">
+                    <p class="flex flex-column body text-left text-base">
                         {{ monthlyPayment.month }}
                     </p>
                     <p class="flex flex-column body text-right">

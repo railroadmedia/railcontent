@@ -1,0 +1,1608 @@
+@import "../_variables";
+
+h1, h2, h3, h4, h5, h6, p, li {
+  font-family: $opensans;
+}
+
+.text-blue {
+  color: $drumeoBlue;
+}
+
+.text-yellow {
+  color: #fbf802;
+}
+
+.join {
+  &.smaller {
+    padding: 15px 7%;
+    font-size: 17px;
+    @include tablet {
+      font-size: 19px;
+    }
+  }
+}
+
+.course-logo {
+  margin: 0 auto 20px;
+  @include tablet {
+    margin: 0 auto 40px;
+  }
+  @include desktop {
+    margin: 0 auto 50px;
+  }
+
+  .text-blue {
+    color: lighten($drumeoBlue, 10%);
+  }
+
+  h2 {
+    font: 700 36px/1em $robotocondensed;
+    margin: 0 auto;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    @include tablet {
+      font-size: 62px;
+      letter-spacing: 8px;
+    }
+    @include desktop {
+      font-size: 90px;
+      letter-spacing: 10px;
+    }
+  }
+
+  h3 {
+    font: 300 19px/1em $robotocondensed;
+    margin: 0 auto;
+    text-transform: uppercase;
+    @include tablet {
+      font-size: 25px;
+      letter-spacing: 3px;
+    }
+    @include desktop {
+      font-size: 37px;
+    }
+  }
+
+  h4 {
+    font: 400 14px/1em $robotocondensed;
+    margin: 0 auto;
+    text-transform: uppercase;
+    @include tablet {
+      font-size: 18px;
+    }
+    @include desktop {
+      font-size: 21px;
+    }
+  }
+
+  &.rich {
+    h2 {
+      letter-spacing: 0;
+    }
+
+    h3 {
+      font-size: 22px;
+      @include tablet {
+        font-size: 33px;
+      }
+      @include desktop {
+        font-size: 48px;
+      }
+    }
+
+  }
+
+  &.anika {
+    h2 {
+      font-family: $opensans;
+      letter-spacing: 0;
+      font-weight: 800;
+    }
+
+    h3 {
+      font-family: $opensans;
+      font-size: 22px;
+      @include tablet {
+        font-size: 33px;
+      }
+      @include desktop {
+        font-size: 48px;
+      }
+    }
+
+    h4 {
+      font-size: 16px;
+      @include tablet {
+        font-size: 21px;
+      }
+      @include desktop {
+        font-size: 27px;
+      }
+    }
+
+  }
+
+  &.sugarfoot {
+    h2 {
+      letter-spacing: 0;
+    }
+
+    h3 {
+      font-size: 18px;
+      @include tablet {
+        font-size: 25px;
+      }
+      @include desktop {
+        font-size: 32px;
+      }
+    }
+
+  }
+}
+
+.reveal-overlay {
+  background-color: rgba(0, 0, 0, 0.8);
+
+  .reveal {
+    .gavin-sign-up {
+      text-align: center;
+      max-width: 850px;
+      margin: 0 auto;
+
+      .drumeo-free {
+        font: 300 17px/1em $robotocondensed;
+        margin: 0 auto 15px;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        @include desktop {
+          font-size: 23px;
+          margin: 0 auto 20px;
+        }
+
+        img {
+          width: 210px;
+          margin: 0 auto 5px;
+          @include desktop {
+            width: 270px;
+          }
+        }
+      }
+
+      h2 {
+        font: 700 30px/1em $robotocondensed;
+        margin: 0 auto;
+        text-transform: uppercase;
+        color: $drumeoBlue;
+        letter-spacing: 2px;
+        @include tablet {
+          font-size: 50px;
+          letter-spacing: 6px;
+        }
+        @include desktop {
+          font-size: 75px;
+          letter-spacing: 8px;
+        }
+      }
+
+      p {
+        font: 400 15px/1.4em $opensans;
+        margin: 13px auto 25px;
+        @include tablet {
+          font-size: 18px;
+        }
+        @include desktop {
+          font-size: 23px;
+          margin: 18px auto 30px;
+        }
+
+        em {
+          line-height: 1.4em;
+          max-width: 500px;
+          display: inline-block;
+          font-size: 12px;
+          @include tablet {
+            font-size: 14px;
+          }
+        }
+      }
+
+      .social-links a {
+        background: #000;
+        color: #FFF;
+        border-radius: 50%;
+        display: inline-block;
+        text-align: center;
+        margin: 0 10px;
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+        font-size: 26px;
+        @include tablet {
+          width: 70px;
+          height: 70px;
+          line-height: 70px;
+          font-size: 35px;
+        }
+        @include desktop {
+          width: 90px;
+          height: 90px;
+          line-height: 90px;
+          font-size: 45px;
+        }
+
+        &:hover {
+          background: #222;
+        }
+      }
+    }
+
+    &.show-modal {
+      width: 95%;
+      margin: 0 auto;
+      max-width: 430px;
+      padding: 20px;
+      @include tablet {
+        padding: 30px;
+      }
+
+      img {
+        width: 100%;
+        border-radius: 10px;
+      }
+
+      h5 {
+        margin: 15px auto 10px;
+      }
+
+      p {
+        margin: 0 auto 15px;
+      }
+    }
+
+    &#previewModal {
+      padding: 0;
+    }
+  }
+}
+
+.header {
+  padding: 0;
+  text-align: center;
+  background-image: none;
+  background-color: #000;
+  @include tablet {
+    text-align: left;
+  }
+
+  .container {
+    position: relative;
+    color: #FFF;
+    margin: 0 auto;
+    text-align: center;
+    background: #000 center top/cover no-repeat;
+    padding: 20px 0 35px;
+    @include tablet {
+      padding: 30px 0 50px;
+    }
+    @include desktop {
+      padding: 50px 0 60px;
+    }
+
+    .drumeo-free {
+      font: 300 17px/1em $robotocondensed;
+      margin: 0 auto;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      @include tablet {
+        font-size: 23px;
+      }
+      @include desktop {
+        font-size: 29px;
+      }
+
+      img {
+        width: 210px;
+        margin: 0 auto 5px;
+        @include tablet {
+          width: 270px;
+        }
+        @include desktop {
+          width: 360px;
+        }
+      }
+    }
+
+    .autoplay-video {
+      transition: opacity .3s;
+      outline: none;
+      cursor: pointer;
+      width: 70px;
+      margin: 130px auto 30px;
+      @include tablet {
+        width: 80px;
+        margin: 170px auto 30px;
+      }
+      @include desktop {
+        width: 110px;
+        margin: 220px auto 40px;
+      }
+
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+
+    .course-logo.rich,
+    .course-logo.sugarfoot,
+    .course-logo.anika {
+      margin: 320px auto 10px;
+      @include tablet {
+        margin: 290px auto 10px;
+      }
+    }
+
+    .course-logo.raouf {
+      margin: 280px auto 10px;
+      @include tablet {
+        margin: 360px auto 10px;
+      }
+    }
+
+    p {
+      margin: 0 auto 15px;
+    }
+
+    .disclaimer p {
+      margin: 0 auto;
+    }
+
+    .join {
+      width: 100%;
+      max-width: 1200px;
+    }
+
+    form {
+      max-width: 700px;
+
+      input,
+      button {
+        font-size: 18px;
+        line-height: 50px;
+        height: 50px;
+      }
+    }
+
+  }
+
+  &.catalogue {
+    .container {
+      padding: 15px 0 20px;
+      @include tablet {
+        padding: 20px 0 30px;
+      }
+      @include desktop {
+        padding: 30px 0 40px;
+      }
+    }
+
+    .course-logo {
+      margin: 180px auto 0;
+      @include tablet {
+        margin: 220px auto 0;
+      }
+      @include desktop {
+        margin: 230px auto 0;
+      }
+    }
+
+    &.slim .course-logo h2 {
+      letter-spacing: 0;
+    }
+
+    &.shadow {
+      position: relative;
+
+      .row:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 0;
+        background: linear-gradient(0deg, #000 20%, transparent 55%);
+        @include tablet {
+          background: linear-gradient(0deg, #000 15%, transparent 50%);
+        }
+      }
+    }
+
+    &.hide-free .drumeo-free {
+      display: none;
+    }
+  }
+
+}
+
+.three-benefits {
+  background: #FFF;
+  padding: 40px 0;
+  @include tablet {
+    padding: 60px 0;
+  }
+  @include desktop {
+    padding: 80px 0;
+  }
+
+  .benefit-row {
+    margin: 0 auto 25px;
+    @include tablet {
+      margin: 0 auto 90px;
+    }
+    @include desktop {
+      margin: 0 auto 150px;
+    }
+
+    &:last-child {
+      margin: 0 auto;
+    }
+
+    .arrow-outline {
+      border-radius: 50%;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      position: relative;
+      margin: 0 auto;
+      border: 9px solid #FFF;
+      width: 100%;
+      max-width: 240px;
+      @include tablet {
+        border: 18px solid #FFF;
+        max-width: 350px;
+      }
+      @include desktop {
+        max-width: 410px;
+      }
+
+      &:after {
+        content: "";
+        position: absolute;
+        height: 0;
+        width: 0;
+        border: 20px solid #000;
+        border-color: transparent transparent #FFF #FFF;
+        transform-origin: 0 0;
+        box-shadow: -3px 3px 7px 0 rgba(0, 0, 0, 0.1);
+        margin: 3px -8px 0 0;
+        top: 100%;
+        right: 50%;
+        -webkit-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+        @include tablet {
+          margin: -28px -28px 0 0;
+          top: 50%;
+          right: 100%;
+          -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+        }
+      }
+
+      &.right:after {
+        @include tablet {
+          right: -23px;
+          margin: 28px -28px 0 0;
+          -webkit-transform: rotate(-135deg);
+          transform: rotate(-135deg);
+        }
+      }
+
+      img {
+        border-radius: 50%;
+      }
+    }
+
+    .text-wrap {
+      margin: 35px 0 0;
+      padding: 0 25px;
+      @include tablet {
+        margin: 0;
+        padding: 0 15px;
+      }
+
+      h1 {
+        font: 700 18px/1.1em $robotocondensed;
+        text-transform: uppercase;
+        margin: 0 auto 15px;
+        @include tablet {
+          font-size: 27px;
+        }
+        @include desktop {
+          font-size: 36px;
+        }
+      }
+
+      p {
+        font: 400 14px/1.6em $opensans;
+        margin: 0 auto 15px;
+        @include desktop {
+          font-size: 16px;
+          margin: 0 auto 30px;
+        }
+      }
+    }
+  }
+}
+
+.three-icon {
+  background: #E5E8E8;
+  text-align: center;
+  padding: 40px 0;
+  @include tablet {
+    padding: 70px 0;
+  }
+  @include desktop {
+    padding: 100px 0;
+  }
+
+  h1 {
+    font: 700 29px/1em $robotocondensed;
+    margin: 0 auto 10px;
+    color: $drumeoBlue;
+    text-transform: uppercase;
+    @include tablet {
+      font-size: 35px;
+    }
+    @include desktop {
+      font-size: 50px;
+      margin: 0 auto 15px;
+    }
+  }
+
+  h3 {
+    font: 400 15px/1.4em $opensans;
+    margin: 0 auto 35px;
+    @include tablet {
+      font-size: 19px;
+    }
+    @include desktop {
+      font-size: 25px;
+      margin: 0 auto 45px;
+    }
+  }
+
+  .point-icon {
+    border: 2px solid $drumeoBlue;
+    color: $drumeoBlue;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 35px;
+    line-height: 66px;
+    height: 70px;
+    width: 70px;
+    margin: 0 auto 10px;
+    @include tablet {
+      margin: 0 auto 25px;
+      line-height: 96px;
+      height: 100px;
+      width: 100px;
+      font-size: 55px;
+    }
+
+    .fa-music {
+      top: -3px;
+      position: relative;
+    }
+  }
+
+  p {
+    font: 400 14px/1.5em $opensans;
+    margin: 0 auto 20px;
+    width: 100%;
+    max-width: 300px;
+    @include tablet {
+      margin: 0 auto;
+      max-width: 100%;
+    }
+    @include desktop {
+      font-size: 16px;
+    }
+
+    strong {
+      font: 700 17px/1em $robotocondensed;
+      margin: 0 auto 5px;
+      color: $drumeoBlue;
+      text-transform: uppercase;
+      display: inline-block;
+      @include desktop {
+        font-size: 23px;
+        margin: 0 auto 10px;
+      }
+    }
+  }
+}
+
+.quick-questions {
+  padding: 40px 15px 20px;
+  @include tablet {
+    padding: 70px 0;
+  }
+  @include desktop {
+    padding: 100px 0;
+  }
+
+  h2 {
+    font: 700 21px/1.2em $opensans;
+    margin: 0 auto 15px;
+    @include desktop {
+      font-size: 27px;
+      margin: 0 auto 25px;
+    }
+  }
+
+  p {
+    font: 400 15px/1.5em $opensans;
+    margin: 0 auto 20px;
+    @include tablet {
+      margin: 0 auto;
+    }
+    @include desktop {
+      font-size: 17px;
+    }
+  }
+}
+
+.final {
+  overflow: hidden;
+  background: #000 url("https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gavins-grooves/bg-customize.jpg") center top/cover;
+  text-align: center;
+  padding: 50px 10px;
+  color: #FFF;
+  @include tablet {
+    padding: 100px 20px;
+  }
+  @include desktop {
+    padding: 130px 20px;
+  }
+
+  p {
+    font: 400 14px/1em $opensans;
+    margin: 0 auto;
+    @include tablet {
+      font-size: 19px;
+    }
+    @include desktop {
+      font-size: 26px;
+    }
+
+    &.yellow {
+      text-transform: uppercase;
+      color: #FFDB01;
+      font-style: normal;
+      margin: 15px auto 0;
+      @include tablet {
+        margin: 20px auto 5px;
+      }
+
+      strong {
+        display: inline-block;
+      }
+    }
+  }
+
+  .join {
+    width: 100%;
+    max-width: 1200px;
+    font-size: 25px;
+    margin: 20px auto;
+    @include tablet {
+      font-size: 31px;
+      margin: 25px auto;
+    }
+    @include desktop {
+      margin: 30px auto;
+    }
+  }
+
+  .awards {
+    text-align: center;
+    padding: 0 10px;
+    @include tablet {
+      padding: 0 15%;
+    }
+    @include desktop {
+      padding: 0 20%;
+    }
+
+    img {
+      width: 100%;
+      max-width: 180px;
+    }
+
+  }
+
+  form {
+    position: relative;
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+    @include tablet {
+      margin: 0 auto 10px;
+      max-width: 640px;
+    }
+    @include desktop {
+      max-width: 900px;
+    }
+
+    .form-arrow {
+      position: absolute;
+      top: 65%;
+      width: 25px;
+
+      &.arrow-right {
+        left: -30px;
+        transform: translate(0, -50%);
+        @include tablet {
+          left: -25px;
+        }
+        @include desktop {
+          left: -30px;
+        }
+      }
+
+      &.arrow-left {
+        right: -30px;
+        transform: translate(0, -50%);
+        @include tablet {
+          right: -25px;
+        }
+        @include desktop {
+          right: -30px;
+        }
+      }
+    }
+
+    .medium-5 {
+      .form-arrow {
+        @include tablet {
+          top: 40%;
+        }
+      }
+    }
+
+    input,
+    button {
+      font: 400 18px/50px $opensans;
+      height: 50px;
+      color: #999;
+      border-radius: 100px;
+      text-align: left;
+      padding: 7px 20px;
+      margin: 0 auto 15px;
+
+      &[type="submit"],
+      button {
+        font-family: $robotocondensed;
+        font-weight: 700;
+        color: #FFF;
+        background: $drumeoBlue;
+        text-transform: uppercase;
+        margin: 0 auto 15px;
+        display: block;
+        cursor: pointer;
+        border: none;
+        width: 100%;
+        text-align: center;
+        padding: 0;
+
+        &:hover {
+          background: lighten($drumeoBlue, 10%);
+        }
+      }
+    }
+  }
+
+  .disclaimer {
+    i {
+      font-size: 29px;
+      line-height: 1em;
+    }
+
+    p {
+      font: 400 12px/1.4em $opensans;
+      margin: 0 auto;
+      width: calc(100% - 40px);
+      float: left;
+      text-align: left;
+    }
+  }
+}
+
+.row.xlarge {
+  max-width: 90.625em;
+}
+
+.lesson-breakdown {
+  padding: 40px 0 20px;
+  @include tablet {
+    padding: 60px 0;
+  }
+  @include desktop {
+    padding: 80px 0;
+  }
+
+  h1 {
+    font: 700 27px/1em $robotocondensed;
+    text-transform: uppercase;
+    margin: 0 auto 20px;
+    @include tablet {
+      font-size: 35px;
+      margin: 0 auto 30px;
+    }
+    @include desktop {
+      font-size: 50px;
+      margin: 0 auto 40px;
+    }
+
+    &.opensans {
+      text-transform: none;
+      font-family: $opensans;
+      line-height: 1.2em;
+      @include desktop {
+        font-size: 40px;
+      }
+
+      strong {
+        font-weight: 800;
+      }
+    }
+  }
+
+  .tile {
+    overflow: hidden;
+    border-radius: 5px;
+    margin: 0 auto 20px;
+    @include tablet {
+      margin: 0 auto 30px;
+    }
+    @include tablet {
+      &:nth-last-child(-n+3) {
+        margin-bottom: 0;
+      }
+    }
+
+    .thumb {
+      position: relative;
+      padding-bottom: 56.25%;
+      background: #000 center center/cover no-repeat;
+      border-radius: 10px;
+      box-shadow: 0 -20px 20px #000 inset;
+      @include tablet {
+        box-shadow: 0 -30px 30px #000 inset;
+      }
+      @include desktop {
+        box-shadow: 0 -50px 50px #000 inset;
+      }
+    }
+
+    p {
+      text-transform: uppercase;
+      margin: 0 auto;
+      position: absolute;
+      bottom: 0;
+      color: #fff;
+      width: 100%;
+      left: 0;
+      right: 0;
+      text-align: center;
+      text-shadow: 0 0 15px #000;
+      padding: 6% 9%;
+      font: 700 14px/0.9em $robotocondensed;
+      @include tablet {
+        font-size: 20px;
+      }
+      @include desktop {
+        font-size: 32px;
+      }
+
+      &.description {
+        font: 400 13px/1.5em $opensans;
+        text-align: left;
+        text-shadow: none;
+        text-transform: none;
+        color: #000;
+        position: relative;
+        margin: 7px auto 0;
+        padding: 0;
+        @include tablet {
+          font-size: 14px;
+          margin: 10px auto 0;
+        }
+      }
+    }
+  }
+
+  .left-right-thumbs {
+    margin: 30px auto 0;
+    @include tablet {
+      margin: 50px auto 0;
+    }
+
+    .thumb-wrap {
+      width: 100%;
+      max-width: 1040px;
+      margin: 0 auto 30px;
+      padding: 0 15px;
+      @include tablet {
+        display: flex;
+        align-items: flex-start;
+        margin: 0 auto 60px;
+        padding: 0 20px;
+      }
+      @include desktop {
+        margin: 0 auto 50px;
+        align-items: center;
+      }
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      &:nth-child(even) {
+        img {
+          order: 1;
+        }
+
+        .text {
+          @include tablet {
+            padding-left: 0;
+            padding-right: 30px;
+          }
+        }
+      }
+
+      img {
+        border-radius: 10px;
+        width: 100%;
+        @include tablet {
+          width: 40%;
+          max-width: 40%;
+        }
+        @include desktop {
+          width: 50%;
+          max-width: 50%;
+        }
+      }
+
+      .text {
+        text-align: left;
+        @include tablet {
+          padding-left: 30px;
+          display: flex;
+          justify-content: center;
+          flex-direction: column;
+        }
+
+        h4 {
+          margin: 10px auto;
+          @include tablet {
+            margin: 0 0 10px;
+          }
+
+          strong {
+            font-weight: 800;
+          }
+        }
+        p {
+          font-size: 13px;
+          @include tablet {
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.lesson-catalogue {
+  background: #fff;
+  padding: 30px 0 50px;
+  @include tablet {
+    padding: 50px 0 100px;
+  }
+
+  .list-wrapper {
+
+    h1 {
+      font: 700 21px/1em $opensans;
+      padding: 0 15px 20px;
+      border-bottom: 1px solid #DBDCDC;
+      margin: 0 auto;
+      @include tablet {
+        padding: 0 25px 30px;
+        font-size: 31px;
+      }
+      @include desktop {
+        padding: 0 25px 40px;
+      }
+    }
+
+    .lesson-row {
+      border-bottom: 1px solid #DBDCDC;
+      padding: 10px 0;
+      color: #000;
+      height: 50px;
+      font: 700 12px/30px $opensans;
+      @include tablet {
+        line-height: 60px;
+        font-size: 15px;
+        height: 80px;
+      }
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      &:hover {
+        .duration,
+        .status-icon {
+          color: #000;
+        }
+      }
+
+      .lesson-number {
+        font-size: 17px;
+        width: 40px;
+        @include tablet {
+          font-size: 22px;
+          width: 60px;
+        }
+        @include desktop {
+          width: 75px;
+        }
+      }
+
+      .lesson-thumb {
+        font-size: 0;
+        width: 110px;
+
+        img {
+          border-radius: 5px;
+          max-height: 60px;
+        }
+      }
+
+      .lesson-name {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 50%;
+        width: calc(100% - 110px);
+        @include tablet {
+          width: calc(100% - 360px);
+        }
+        @include desktop {
+          width: calc(100% - 420px);
+        }
+      }
+
+      .duration {
+        font-style: italic;
+        font-weight: 400;
+        color: #CCD3D3;
+        width: 70px;
+        font-size: 11px;
+        @include tablet {
+          width: 110px;
+          font-size: 12px;
+        }
+        @include desktop {
+          width: 135px;
+        }
+      }
+
+      .status-icon {
+        width: 80px;
+        color: #CCD3D3;
+        font-size: 38px;
+        @include desktop {
+          width: 100px;
+        }
+
+      }
+    }
+  }
+}
+
+.video-interaction {
+  background: #191B1C;
+  padding: 20px 5px;
+  @include tablet {
+    padding: 30px 10px;
+  }
+  @include desktop {
+    padding: 30px 40px;
+  }
+
+  .title-header-interaction {
+    color: #FFF;
+
+    h1 {
+      font: 700 21px/1.2em $opensans;
+      margin: 0 auto 5px;
+      @include tablet {
+        font-size: 28px;
+        margin: 0 auto 10px;
+      }
+      @include desktop {
+        font-size: 38px;
+      }
+    }
+
+    h2 {
+      font: 400 16px/1.2em $opensans;
+      margin: 0 auto;
+      text-transform: uppercase;
+      @include tablet {
+        font-size: 18px;
+      }
+      @include desktop {
+        font-size: 20px;
+      }
+
+      a,
+      strong {
+        color: $drumeoBlue;
+      }
+    }
+
+    .title-buttons {
+      text-align: right;
+      padding-left: 0;
+      font-size: 0;
+
+      .event-toggle {
+        margin: 0 0 3px;
+        text-align: center;
+        font-size: 0;
+        line-height: 0;
+        float: none;
+        vertical-align: text-bottom;
+        max-width: 45px;
+        @include tablet {
+          width: 47%;
+          max-width: 45px;
+          margin: 0 0 0 3px;
+        }
+      }
+
+      .download-button {
+        border: 2px solid $drumeoBlue;
+        border-radius: 5px;
+        color: $drumeoBlue;
+        background: transparent;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        font: 700 18px/1em $opensans;
+        margin: 0 0 3px;
+        width: 100%;
+        display: inline-block;
+        padding: 11px 0;
+        transition: background .2s linear;
+        position: relative;
+        @include tablet {
+          margin: 0 0 0 3px;
+        }
+
+        a {
+          color: inherit;
+        }
+
+        i {
+          transition: all .2s linear;
+        }
+
+        &:hover {
+          background: #4B4F52;
+        }
+
+        &.active {
+          color: #FFF;
+          background: $drumeoBlue;
+        }
+      }
+    }
+  }
+
+  .flex-video {
+    margin: 15px auto;
+    @include desktop {
+      margin: 25px auto;
+    }
+  }
+
+  .lesson-navigation {
+    a {
+      display: inline-block;
+      border: 2px solid $drumeoBlue;
+      border-radius: 100px;
+      color: $drumeoBlue;
+      background: transparent;
+      cursor: pointer;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      font: 700 15px/1em $robotocondensed;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding: 11px 25px;
+      width: auto;
+      @include tablet {
+        font-size: 18px;
+      }
+
+      &:hover {
+        background: #4B4F52;
+      }
+    }
+
+  }
+
+}
+
+.resource-sidebar {
+  background: #fff;
+  padding: 20px 0 30px;
+  @include tablet {
+    padding: 30px 0 60px;
+  }
+  @include desktop {
+    padding: 40px 1% 70px;
+  }
+
+  .resources {
+    text-align: center;
+    margin: 0 auto 20px;
+    padding: 20px 10px;
+    @include tablet {
+      padding: 30px 20px;
+      margin: 0 auto;
+    }
+    @include desktop {
+      padding: 30px;
+    }
+
+    img {
+      margin: 0 auto 30px;
+    }
+
+    h1 {
+      font: 700 17px/1em $opensans;
+      margin: 0 auto 5px;
+      @include desktop {
+        font-size: 25px;
+        margin: 0 auto 15px;
+      }
+    }
+
+    p {
+      font: 400 12px/1.3em $opensans;
+      margin: 0 auto 15px;
+      @include tablet {
+        font-size: 13px;
+      }
+    }
+  }
+
+  .sidebar {
+    background: #FFF;
+    border-radius: 5px;
+    border: 1px solid #DBDCDC;
+    padding: 15px 0;
+    @include desktop {
+      padding: 20px 0;
+    }
+
+    h1 {
+      font: 700 17px/1em $opensans;
+      margin: 0 auto 5px;
+      @include desktop {
+        font-size: 25px;
+        margin: 0 auto 15px;
+      }
+    }
+
+    p {
+      font: 400 12px/1.3em $opensans;
+      margin: 0 auto 15px;
+      @include tablet {
+        font-size: 13px;
+      }
+    }
+
+    .lesson-row {
+      border-bottom: 1px solid #DBDCDC;
+      padding: 10px 0;
+      color: #000;
+      height: 50px;
+      font: 700 12px/30px $opensans;
+      cursor: pointer;
+      position: relative;
+      @include tablet {
+        line-height: 60px;
+        font-size: 12px;
+        height: 80px;
+      }
+
+      &:hover {
+        .status-icon {
+          color: #000;
+        }
+      }
+
+      &:nth-child(2) {
+        border-top: 1px solid #DBDCDC;
+      }
+
+      .lesson-thumb {
+        font-size: 0;
+        text-align: center;
+        padding-right: 0;
+        width: 62px;
+
+        img {
+          border-radius: 5px;
+          max-height: 60px;
+        }
+      }
+
+      .lesson-name {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 50%;
+        width: calc(100% - 43px);
+        line-height: 15px;
+        @include tablet {
+          line-height: 18px;
+          padding: 12px 15px;
+        }
+        @include desktop {
+          width: calc(100% - 105px);
+        }
+
+        .artist {
+          text-transform: uppercase;
+          color: $drumeoBlue;
+          font-weight: 400;
+        }
+      }
+
+      .status-icon {
+        text-align: center;
+        width: 43px;
+        color: #CCD3D3;
+        padding-left: 0;
+        font-size: 28px;
+      }
+
+      .more-info {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: #FFF;
+        z-index: 2;
+        padding: 0;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+        transition: opacity .3s ease-in-out;
+        height: 0;
+        max-height: 0;
+        visibility: hidden;
+        opacity: 0;
+
+        strong {
+          display: inline-block;
+          margin: 0 auto 5px;
+        }
+
+        &.active {
+          height: auto;
+          max-height: 1000px;
+          visibility: visible;
+          opacity: 1;
+          padding: 10px 0;
+        }
+      }
+
+      .lesson-description {
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 1.4em;
+        width: calc(100% - 43px);
+        @include desktop {
+          width: calc(100% - 51px);
+        }
+      }
+    }
+
+    .join {
+      width: 100%;
+      margin: 15px auto 0;
+      font-size: 18px;
+      @include tablet {
+        font-size: 14px;
+      }
+      @include desktop {
+        margin: 20px auto 0;
+        font-size: 17px;
+      }
+    }
+  }
+}
+
+.related-courses {
+  padding: 30px 15px;
+
+  h2 {
+    padding: 0 .625rem;
+  }
+
+  .flex {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    display: flex;
+    box-sizing: border-box;
+    -webkit-box-flex: 1;
+    flex: 1 1 auto;
+    outline: none;
+  }
+
+  .card-grid {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    -webkit-box-align: stretch;
+    align-items: stretch;
+    font-size: 0;
+    flex-wrap: wrap;
+
+    .card-wrap {
+      padding: .625rem;
+      -webkit-box-flex: 0;
+      flex: 0 0 50%;
+      max-width: 50%;
+      @include tablet {
+        flex: 0 0 25%;
+        max-width: 25%;
+      }
+      @include desktop {
+        flex: 0 0 20%;
+        max-width: 20%;
+      }
+
+      &:hover {
+        .card-media .thumb-hover {
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+    }
+
+
+    .card-media {
+      position: relative;
+      overflow: hidden;
+      -webkit-backface-visibility: hidden;
+      -moz-backface-visibility: hidden;
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+      height: 0;
+      padding-bottom: 56.25%;
+      border-radius: 10px;
+      margin-bottom: 10px;
+
+      img {
+        -o-object-fit: cover;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        max-width: 100%;
+        min-height: 1px;
+      }
+
+      i.fa-info-circle {
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 35px;
+        width: 35px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        flex-direction: column;
+        -webkit-box-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        align-items: center;
+        font-size: 16px;
+        -webkit-transition: color .1s ease-in-out, -webkit-transform .1s ease-in-out;
+        transition: color .1s ease-in-out, -webkit-transform .1s ease-in-out;
+        transition: color .1s ease-in-out, transform .1s ease-in-out;
+        transition: color .1s ease-in-out, transform .1s ease-in-out, -webkit-transform .1s ease-in-out;
+        will-change: color, transform;
+        text-shadow: 0 0 2px rgba(0, 0, 0, .8);
+        z-index: 3;
+        color: #fff;
+      }
+
+      .thumbnail-title {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 1.875rem .625rem .625rem;
+        background: -webkit-gradient(linear, left top, left bottom, from(transparent), to(#000));
+        background: linear-gradient(180deg, transparent 0, #000);
+        color: #fff;
+        font: 700 13px/1.25em $robotocondensed;
+        text-transform: uppercase;
+        margin: 0;
+
+      }
+
+      .thumb-hover {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        flex-direction: column;
+        -webkit-box-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        align-items: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, .4);
+        z-index: 2;
+        opacity: 0;
+        visibility: hidden;
+        -webkit-transition: all .2s ease-in-out;
+        transition: all .2s ease-in-out;
+        will-change: opacity, visibility;
+
+        i {
+          font-size: 32px;
+          color: #fff;
+        }
+      }
+    }
+
+
+    .card-info {
+      h5 {
+        color: #565d5f;
+        font: 400 10px/1.5em $opensans;
+        text-transform: uppercase;
+        margin: 0;
+      }
+
+      h4 {
+        word-wrap: break-word;
+        font: 700 13px/1.25em Open Sans, sans-serif;
+        text-transform: capitalize;
+        margin-bottom: 15px;
+        color: #000;
+      }
+    }
+  }
+}

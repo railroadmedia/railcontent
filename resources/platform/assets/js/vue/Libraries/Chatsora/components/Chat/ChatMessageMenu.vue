@@ -175,7 +175,7 @@ export default {
         },
     },
     mounted() {
-        this.chatEventBus
+        this.eventBus
             .on(
                 'messageMenuToggled',
                 ({ message }) => {
@@ -186,7 +186,7 @@ export default {
                 }
             );
 
-        this.chatEventBus
+        this.eventBus
             .on(
                 'messageThread',
                 () => {
@@ -195,12 +195,12 @@ export default {
                 }
             );
 
-        this.chatEventBus
+        this.eventBus
             .on(
                 'closeMessageMenus',
                 () => {
                     if (this.messageReact || this.messageMenu) {
-                        this.chatEventBus.emit('messageMenuToggled', { message: this.message, value: false });
+                        this.eventBus.emit('messageMenuToggled', { message: this.message, value: false });
                     }
 
                     this.messageReact = false;
@@ -213,45 +213,45 @@ export default {
             this.messageMenu = !this.messageMenu;
             this.messageReact = false;
 
-            this.chatEventBus.emit('messageMenuToggled', { message: this.message, value: this.messageMenu });
+            this.eventBus.emit('messageMenuToggled', { message: this.message, value: this.messageMenu });
         },
 
         toggleMessageReact() {
             this.messageReact = !this.messageReact;
             this.messageMenu = false;
 
-            this.chatEventBus.emit('messageMenuToggled', { message: this.message, value: this.messageReact });
+            this.eventBus.emit('messageMenuToggled', { message: this.message, value: this.messageReact });
         },
 
         messageThread() {
-            this.chatEventBus.emit('messageThread', { message: this.message });
+            this.eventBus.emit('messageThread', { message: this.message });
 
             this.messageReact = false;
             this.messageMenu = false;
 
-            this.chatEventBus.emit('messageMenuToggled', { message: this.message, value: this.messageMenu });
+            this.eventBus.emit('messageMenuToggled', { message: this.message, value: this.messageMenu });
         },
 
         editMessage() {
-            this.chatEventBus.emit('editMessage', { message: this.message, pinnedMessage: this.pinnedMessage });
+            this.eventBus.emit('editMessage', { message: this.message, pinnedMessage: this.pinnedMessage });
         },
 
         removeMessage() {
-            this.chatEventBus.emit('removeMessage', { message: this.message });
+            this.eventBus.emit('removeMessage', { message: this.message });
         },
 
         removeAllMessages() {
-            this.chatEventBus.emit('removeAllMessages', { user: this.message.user });
+            this.eventBus.emit('removeAllMessages', { user: this.message.user });
         },
 
         blockUser() {
-            this.chatEventBus.emit('blockUser', { user: this.message.user });
+            this.eventBus.emit('blockUser', { user: this.message.user });
         },
 
         reactToMessage(reaction) {
             this.messageReact = false;
-            this.chatEventBus.emit('messageMenuToggled', { message: this.message, value: this.messageReact });
-            this.chatEventBus.emit(
+            this.eventBus.emit('messageMenuToggled', { message: this.message, value: this.messageReact });
+            this.eventBus.emit(
                 'toggleMessageReaction',
                 {
                     message: this.message,
@@ -261,15 +261,15 @@ export default {
         },
 
         pinMessage() {
-            this.chatEventBus.emit('pinMessage', { message: this.message });
+            this.eventBus.emit('pinMessage', { message: this.message });
         },
 
         unpinMessage() {
-            this.chatEventBus.emit('unpinMessage', { message: this.message });
+            this.eventBus.emit('unpinMessage', { message: this.message });
         },
 
         markAsAnswered() {
-            this.chatEventBus.emit('markAsAnswered', { message: this.message });
+            this.eventBus.emit('markAsAnswered', { message: this.message });
         },
     },
 }

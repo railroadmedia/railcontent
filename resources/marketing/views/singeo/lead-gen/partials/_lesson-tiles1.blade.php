@@ -4,7 +4,7 @@
             @isset($lesson['playButton'])
                 <i class="fas fa-play absolute left-1/2 top-1/2 text-5xl animated infinite pulse" style="margin: -21px -24px;"></i>
             @else
-                <i class="fas fa-lock absolute left-1/2 top-1/2 translate--1/2 opacity-40 text-4xl"></i>
+                <i class="fas fa-lock absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-40 text-4xl"></i>
             @endisset
         <img class="rounded-3xl border-4" style="border-color:#15283a;" src="https://cdn.musora.com/image/fetch/w_800,q_auto:best/{{ $lesson['img'] }}">
         </div>

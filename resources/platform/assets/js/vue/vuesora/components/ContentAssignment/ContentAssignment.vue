@@ -5,47 +5,44 @@
                 <div class="flex flex-row align-v-center">
                     <div class="flex flex-column arrow-column hide-xs-only">
                         <button class="btn collapse-square" @click="openAssignment">
-                                <span
-                                    class="bg-grey-3"
-                                    :class="accordionButtonClasses"
-                                >
-                                    <i
-                                        class="fas"
-                                        :class="accordionButtonIconClasses"
-                                    ></i>
-                                </span>
-                            </button>
+                            <span class="bg-grey-3" :class="accordionButtonClasses">
+                                <i class="fas" :class="accordionButtonIconClasses"></i>
+                            </span>
+                        </button>
                     </div>
                     <div class="flex flex-column">
                         <div class="flex flex-row align-v-center">
                             <div class="flex flex-column pointer" @click="openAssignment">
                                 <h3 class="title noselect tw-text-[#00101D] dark:tw-text-white md:tw-mr-4">
-                                    {{ title }} 
+                                    {{ title }}
                                 </h3>
                             </div>
                             <div v-if="timecode != 0" class="flex flex-column flex-auto">
-                                <a class="flex flex-column flex-auto tw-text-xs font-bold font-underline hide-xs-only ph-2" :class="brandTextColor" :data-jump-to-time="timecode">
-                                        {{ formattedTimecode }} 
-                                    </a>
+                                <a class="flex flex-column flex-auto tw-text-xs font-bold font-underline hide-xs-only ph-2"
+                                    :class="brandTextColor" :data-jump-to-time="timecode">
+                                    {{ formattedTimecode }}
+                                </a>
                             </div>
                         </div>
                     </div>
-                    <div class="flex flex-column flex-auto body ph-2 hide-sm-up pointer dark:tw-text-white" @click="openAssignment">
+                    <div class="flex flex-column flex-auto body ph-2 hide-sm-up pointer dark:tw-text-white"
+                        @click="openAssignment">
                         <i class="fas" :class="accordionButtonIconClasses"></i>
                     </div>
                 </div>
             </div>
             <div class="flex flex-column tw-ml-auto complete-column tw-items-start">
                 <div class="flex flex-row tw-justify-end tw-flex-wrap md:tw-flex-nowrap tw-w-full">
-                    
-                    <button id="open-exercise-button" 
-                            v-if="soundsliceSlug" 
-                            class="tw-btn-secondary dark:tw-text-white tw-text-[#00101D] tw-mb-2 md:tw-mb-0 md:tw-mr-2 tw-w-full md:tw-w-[250px]" 
-                            @click="openExercise">
+
+                    <button id="open-exercise-button" v-if="soundsliceSlug"
+                        class="tw-btn-secondary dark:tw-text-white tw-text-[#00101D] tw-mb-2 md:tw-mb-0 md:tw-mr-2 tw-w-full md:tw-w-[250px]"
+                        @click="openExercise">
                         <i class="fas fa-play mr-1"></i> Practice
                     </button>
-    
-                    <button class="tw-w-full md:tw-w-[250px]" :class="isComplete ? `tw-btn-primary ${brandBgColor}` : `tw-btn-secondary ${brandTextColor}`" :disabled="isRequesting" @click.stop="markAsComplete">
+
+                    <button class="tw-w-full md:tw-w-[250px]"
+                        :class="isComplete ? `tw-btn-primary ${brandBgColor}` : `tw-btn-secondary ${brandTextColor}`"
+                        :disabled="isRequesting" @click.stop="markAsComplete">
                         <i class="fas fa-check mr-1"></i>
                         {{ isComplete ? 'Completed' : 'Complete' }}
                     </button>
@@ -61,35 +58,38 @@
                 <div v-show="$_totalPages > 0" class="flex flex-row tw-pb-6">
                     <div ref="carouselWrap" class="flex flex-column grow">
                         <div class="flex flex-column">
-                            <div ref="carouselContainer" class="flex flex-row carousel tw-bg-white overflow tw-mb-3 tw-p-3 tw-rounded">
+                            <div ref="carouselContainer"
+                                class="flex flex-row carousel tw-bg-white overflow tw-mb-3 tw-p-3 tw-rounded">
                                 <div class="flex flex-row">
-                                    <div v-for="(page, i) in $_sheet_music_pages" :key="'page' + (i + 1)" class="flex flex-column xs-12 grow page" :style="pageScrollPosition">
+                                    <div v-for="(page, i) in $_sheet_music_pages" :key="'page' + (i + 1)"
+                                        class="flex flex-column xs-12 grow page" :style="pageScrollPosition">
                                         <img class="sheet-music-image" :src="page">
                                     </div>
                                 </div>
-    
-                                <div v-if="currentPage > 1" 
-                                     class="side-button prev flex-center tw-rounded-md dark:hover:tw-bg-gray-300/40" 
-                                     @click="scrollToPage(currentPage - 1)"
-                                >
+
+                                <div v-if="currentPage > 1"
+                                    class="side-button prev flex-center tw-rounded-md dark:hover:tw-bg-gray-300/40"
+                                    @click="scrollToPage(currentPage - 1)">
                                     <i class="fas fa-chevron-left"></i>
                                 </div>
-                                
-                                <div v-if="currentPage < $_totalPages" 
-                                     class="side-button next flex-center tw-rounded-md dark:hover:tw-bg-gray-300/40" 
-                                     @click="scrollToPage(currentPage + 1)"
-                                >
+
+                                <div v-if="currentPage < $_totalPages"
+                                    class="side-button next flex-center tw-rounded-md dark:hover:tw-bg-gray-300/40"
+                                    @click="scrollToPage(currentPage + 1)">
                                     <i class="fas fa-chevron-right"></i>
                                 </div>
-    
+
                                 <div v-if="$_totalPages > 1" class="page-buttons">
-                                    <div v-for="(page, i) in pages" :key="'pageButton' + (i + 1)" class="page-button mh-1 rounded bg-black" :class="currentPageClass(i + 1)" @click="scrollToPage(i + 1)"></div>
+                                    <div v-for="(page, i) in pages" :key="'pageButton' + (i + 1)"
+                                        class="page-button mh-1 rounded bg-black" :class="currentPageClass(i + 1)"
+                                        @click="scrollToPage(i + 1)"></div>
                                 </div>
                             </div>
                             <div v-if="timecode != 0" class="flex flex-row hide-sm-up">
-                                <a class="tiny font-bold font-underline" :class="brandTextColor" :data-jump-to-time="timecode">
-                                        {{ formattedTimecode }}
-                                    </a>
+                                <a class="tiny font-bold font-underline" :class="brandTextColor"
+                                    :data-jump-to-time="timecode">
+                                    {{ formattedTimecode }}
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -98,48 +98,17 @@
                 </div>
             </div>
         </transition>
-    
+
         <transition name="show-from-bottom">
             <div v-if="open" id="practiceOverlay" class="bg-white">
-                <div class="flex flex-column embed-column">
-                    <div class="tw-flex tw-flex-row bb-grey-4-1 bg-grey-5 ph tw-relative tw-h-12 tw-items-center">
-                        <div v-if="!disableNext || !disablePrev" class="self-start">
-                            <button v-if="disablePrev" class="tw-text-sm sm:tw-text-md tw-text-white  tw-opacity-30 tw-text-left tw-bg-transparent tw-border-none">
-                                <i class="fas fa-chevron-left ml-1"></i> <span class="tw-hidden sm:tw-inline-block tw-pl-2">Previous</span>
-                            </button>
-                            <button v-else class="tw-text-sm sm:tw-text-md tw-text-white tw-text-left tw-bg-transparent tw-border-none pointer" @click="goToPrevious">
-                                <i class="fas fa-chevron-left ml-1"></i> <span class="tw-hidden sm:tw-inline-block tw-pl-2">Previous</span>
-                            </button>
-                        </div>
-                        <div class="tw-flex tw-flex-column self-center tw-text-center tw-flex-grow">
-                            <h2 class="tw-text-sm sm:tw-text-xl tw-text-white text-truncate-1-line tw-text-center tw-px-2 tw-w-full">
-                                {{ title }}
-                            </h2>
-                        </div>
-                        <div v-if="!disableNext || !disablePrev" class="self-end tw-mr-12">
-                            <button v-if="disableNext" class="tw-text-sm sm:tw-text-md tw-text-white tw-opacity-30 tw-text-right tw-bg-transparent tw-border-none">
-                                <span class="tw-hidden sm:tw-inline-block tw-pr-2">Next</span> <i class="fas fa-chevron-right tw-mr-2"></i>
-                            </button>
-                            <button v-else class="tw-text-sm sm:tw-text-md tw-text-white tw-text-right tw-bg-transparent tw-border-none pointer" @click="goToNext">
-                                <span class="tw-hidden sm:tw-inline-block tw-pr-2">Next</span> <i class="fas fa-chevron-right tw-mr-2"></i>
-                            </button>
-                        </div>
-                        <div class="tw-flex tw-flex-row close-exercise uppercase tw-text-white tw-items-center pointer flex-auto self-end" @click="closeExercise">
-                            <div class="tw-flex tw-flex-row tw-items-center title bg-error tw-absolute tw-right-0 tw-top-0 tw-w-12 tw-h-full">
-                                <i class="fas fa-times tw-text-center tw-w-full"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex flex-row grow">
-                        <div class="flex flex-column relative">
-                            <iframe id="ssEmbed" :src="'https://www.soundslice.com/' + scoreOrSlice() + '/' + soundsliceSlug + '/embed/?api=1&scroll_type=2&branding=0&top_controls=1&u=' + userId" frameBorder="0" allowfullscreen @load="loading = false"></iframe>
-                        </div>
-                    </div>
-                </div>
-    
-                <div v-if="loading" class="loading-exercise heading ph-4 pv-2">
-                    <loading-animation :theme-color="themeColor" />
-                </div>
+                <SoundSlice :user-id="userId" :theme-color="themeColor" :additional-params="additionalParams"
+                    :soundslice-slug="soundsliceSlug" :loading="loading" @onLoad="loading = false" @onPlay="handlePlay"
+                    @onPause="handlePause">
+                    <template v-slot:soundsliceControls>
+                        <SoundSliceControls :title="title" :disable-next="disableNext" :disable-prev="disablePrev"
+                            @onGoToPrevious="goToPrevious" @onGoToNext="goToNext" @onClose="closeExercise" />
+                    </template>
+                </SoundSlice>
             </div>
         </transition>
     </div>
@@ -151,15 +120,17 @@ import ContentService from '../../assets/js/services/content';
 import Utils from '../../assets/js/classes/utils';
 import Toasts from '../../assets/js/classes/toasts';
 import ProgressTracker from '../../assets/js/classes/progress-tracker';
-import LoadingAnimation from '../LoadingAnimation/LoadingAnimation';
 import Intercom from "../../assets/js/services/intercom"
 import Helpscout from "../../assets/js/services/helpscout"
 import { bgColor, textColor } from "../../../../constants/brands";
+import SoundSlice from '../../../components/SoundSlice/SoundSlice.vue'
+import SoundSliceControls from '../../../components/SoundSlice/SoundSliceControls.vue';
 
 export default {
     name: 'ContentAssignment',
     components: {
-        'loading-animation': LoadingAnimation,
+        SoundSlice,
+        SoundSliceControls,
     },
     props: {
         brand: {
@@ -185,6 +156,10 @@ export default {
         description: {
             type: String,
             default: () => '',
+        },
+        additionalParams: {
+            type: String,
+            default: '',
         },
         pages: {
             type: Array,
@@ -224,7 +199,7 @@ export default {
         },
         disableNext: {
             type: Boolean,
-            default: true, 
+            default: true,
         },
         userId: {
             type: [Number, String],
@@ -343,12 +318,9 @@ export default {
         },
     },
     mounted() {
-        // console.log(this.soundsliceSlug)
         if (this.position < 3) {
             this.openAssignment();
         }
-
-        const vm = this;
 
         window.addEventListener('requesting-completion', this.setIsRequesting);
         window.addEventListener('lesson-complete', this.syncCompleteState);
@@ -358,34 +330,12 @@ export default {
         window.removeEventListener('lesson-complete', this.syncCompleteState);
     },
     methods: {
-        scoreOrSlice() {
-            if (/^\d+$/.test(this.soundsliceSlug)) {
-                return 'scores';
-            }
-
-            return 'slices';
-        },
-
         scrollToPage(page) {
             this.currentPage = page;
         },
 
         currentPageClass(page) {
             return page !== this.currentPage ? 'inverted' : '';
-        },
-
-        spacebarToPlayPause(event) {
-            const embeddedPlayer = document.getElementById('ssEmbed').contentWindow;
-
-            if (event.keyCode === 32) {
-                event.preventDefault();
-
-                if (this.isPlaying) {
-                    embeddedPlayer.postMessage('{"method": "pause"}', 'https://www.soundslice.com');
-                } else {
-                    embeddedPlayer.postMessage('{"method": "play"}', 'https://www.soundslice.com');
-                }
-            }
         },
 
         openAssignment() {
@@ -419,9 +369,6 @@ export default {
 
             this.progressTracker = new ProgressTracker();
 
-            window.addEventListener('message', this.handleSoundsliceEvent);
-            document.addEventListener('keyup', this.spacebarToPlayPause);
-
             Helpscout.hideWidget();
             Intercom.hideWidget();
         },
@@ -450,8 +397,6 @@ export default {
             this.progressTracker = null;
 
             window.removeEventListener('unload', () => this.sendProgressTracking);
-            window.removeEventListener('message', this.handleSoundsliceEvent);
-            document.removeEventListener('keyup', this.spacebarToPlayPause);
 
             Helpscout.showWidget();
             Intercom.showWidget();
@@ -540,8 +485,6 @@ export default {
         },
 
         handlePlay() {
-            this.isPlaying = true;
-
             if (!this.hasBeenPlayed) {
                 this.hasBeenPlayed = true;
                 ContentService.markContentAsStarted(this.id);
@@ -557,33 +500,15 @@ export default {
         },
 
         handlePause() {
-            this.isPlaying = false;
-
             this.progressTracker.stop();
         },
-
-        handleSoundsliceEvent(event) {
-            const vm = this;
-
-            if (event.origin === 'https://www.soundslice.com') {
-                const cmd = JSON.parse(event.data);
-
-                switch (cmd.method) {
-                    case 'ssPlay':
-                        vm.handlePlay();
-                        break;
-                    case 'ssPause':
-                        vm.handlePause();
-                        break;
-                }
-            }
-        }
     },
 };
 </script>
 
 <style lang="scss">
 @import '../../assets/sass/partials/variables';
+
 .flex.arrow-column {
     display: flex;
     flex: 0 0 60px;
@@ -592,6 +517,7 @@ export default {
 
 .complete-column {
     margin-top: $gutterWidth / 2;
+
     @include medium {
         margin-top: 0;
     }
@@ -633,14 +559,17 @@ export default {
 
 .carousel {
     position: relative;
+
     .page {
         transform: translateX(0);
         will-change: transform;
         transition: transform .4s ease-in-out;
+
         img {
             width: 100%;
         }
     }
+
     .side-button {
         position: absolute;
         top: 0;
@@ -650,25 +579,31 @@ export default {
         transition: background-color .2s ease-in-out;
         cursor: pointer;
         width: $gutterWidth;
+
         i {
             font-size: 20px;
         }
+
         &:hover {
             background-color: #f2f2f2;
         }
+
         &.prev {
             left: 0;
         }
+
         &.next {
             right: 0;
         }
     }
+
     .page-buttons {
         position: absolute;
         bottom: 0;
         left: 50%;
         transform: translateX(-50%);
         white-space: nowrap;
+
         .page-button {
             height: 12px;
             width: 12px;

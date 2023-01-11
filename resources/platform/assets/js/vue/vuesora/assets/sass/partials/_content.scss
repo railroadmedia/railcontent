@@ -284,14 +284,14 @@
     .completed {
       opacity:1;
       visibility:visible;
-      display:flex;
+      display:block;
     }
   }
 
   .incompleted {
     opacity:1;
     visibility:visible;
-    display:flex;
+    display:block;
   }
   .completed {
     opacity:0;
@@ -483,9 +483,9 @@
   }
 
   .thumbnail-col {
-    flex: 0 0 175px;
-    max-width:175px;
-    min-width:175px;
+    flex: 0 0 125px;
+    max-width:125px;
+    min-width:125px;
 
     @include small {
       flex: 0 0 125px;
@@ -494,9 +494,9 @@
     }
 
     @include medium {
-      flex: 0 0 175px;
-      max-width:175px;
-      min-width:175px;
+      flex: 0 0 125px;
+      max-width:125px;
+      min-width:125px;
     }
   }
 

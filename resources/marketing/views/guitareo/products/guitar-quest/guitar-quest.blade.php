@@ -1,37 +1,45 @@
 @extends('guitareo.products.guitar-quest.guitar-quest-sales-layout')
 
 @php
-    $orderLink = '/ecommerce/add-to-cart?products[guitar-quest]=1&redirect=/shop&payment-plan=1';
-    $orderLinkAlt = '/ecommerce/add-to-cart?products[guitar-quest]=1&redirect=/shop&payment-plan=5';
-    $productPrice = \App\Prices::$guitarQuestRegular
+    $orderLink = '/ecommerce/add-to-cart?products[guitar-quest]=1&redirect=/order&payment-plan=1';
+    $orderLinkAlt = '/ecommerce/add-to-cart?products[guitar-quest]=1&redirect=/order&payment-plan=5';
+    $productPrice = floatval($productPrices['guitar-quest']->discounted_price)
 @endphp
 @section('top-promo-banner')
-    @include('shop.elements.promo-banner', [
+    @include('guitareo._partials.promo-banner', [
                 "name" => "Guitar Quest",
-                "fullPrice" => App\Prices::$guitarQuestFull,
-                "price" => App\Prices::$guitarQuestRegular,
+                "fullPrice" => floatval($productPrices['guitar-quest']->price),
+                "price" => floatval($productPrices['guitar-quest']->discounted_price),
                 "noBreadcrumb" => true
             ])
 @endsection
-@section('promo-banner')
 
-    {{--<section class="tw-py-8 tw-bg-black md:tw-py-12 tw-relative" style="z-index: 51;margin: 0 auto -50px;background:linear-gradient(to bottom, #000419, #000f28);">--}}
-        {{--<div class="tw-max-w-screen-xl tw-m-auto tw-px-3 md:tw-px-6 tw-flex">--}}
-            {{--<div class="tw-w-full tw-m-auto tw-text-white tw-text-center md:tw-text-left">--}}
-                {{--<div class="tw-text-center tw-mx-auto" style="max-width: 900px;">--}}
-                    {{--<h2 class="tw-uppercase font-bison-bold tw-text-3xl md:tw-text-6xl">THE <span class="text-goldenrod">BURST</span> OF OCTOBER</h2>--}}
-                    {{--<h2 class="tw-uppercase font-primary tw-text-base md:tw-text-md lg:tw-text-lg tw-mt-2 tw-mb-7">--}}
-                        {{--SAVE {{ round(100 - (100 * (\App\Prices::$guitarQuestRegular / \App\Prices::$guitarQuestFull))) }}% + BONUS 1-YEAR GUITAREO  <br>--}}
+@section('quest-section')
+    @include("guitareo.products.guitar-quest.partials.sections._your-quest")
+@endsection
+
+@section('promo-banner')
+    {{--<section class="py-8 bg-black md:py-12 relative" style="z-index: 51;margin: 0 auto -50px;background:linear-gradient(to bottom, #000419, #000f28);">--}}
+        {{--<div class="max-w-screen-xl m-auto px-3 md:px-6 flex">--}}
+            {{--<div class="w-full m-auto text-white text-center md:text-left">--}}
+                {{--<div class="text-center mx-auto" style="max-width: 900px;">--}}
+                    {{--<h2 class="uppercase font-bison-bold text-3xl md:text-6xl">Rob's <span class="text-goldenrod">32nd </span> Birthday Sale!</h2>--}}
+                    {{--<h2 class="uppercase font-primary text-base md:text-md lg:text-lg mt-2 mb-7">--}}
+
+                        {{--Get {{ round(100 - (100 * (floatval($productPrices['guitar-quest']->discounted_price) / floatval($productPrices['guitar-quest']->price)))) }}% off until Sunday, August 28th at midnight.--}}
+                        {{--SAVE {{ round(100 - (100 * (floatval($productPrices['guitar-quest']->discounted_price) / floatval($productPrices['guitar-quest']->price)))) }}% + BONUS 1-YEAR GUITAREO  <br>--}}
                         {{--MEMBERSHIP FOR EXTRA LESSONS & SUPPORT--}}
-                        {{--<br><strong class="text-goldenrod">ONLY <span class="tzcd-small tw-inline md:tw-hidden">A LIMITED TIME</span> <span class="tzcd-full tw-hidden md:tw-inline">A LIMITED TIME</span> LEFT!</strong>--}}
                     {{--</h2>--}}
+                    {{--<a title="Go To Order Page" href="{{ $orderLink }}" class="bg-goldenrod-gradient transition duration-500 linear px-8 py-3 w-auto inline-block uppercase text-black font-roboto-condensed-bold rounded-full text-center text-xl mb-5">--}}
+                        {{--GET STARTED »--}}
+                    {{--</a>--}}
                 {{--</div>--}}
-                {{--<div class="tw-flex tw-flex-wrap tw-items-center tw-justify-center tw-mx-auto" style="max-width: 900px;">--}}
-                    {{--<div class="tw-mx-auto tw-mb-4 md:tw-mb-0 tw-w-2/3 md:tw-w-1/3 lg:tw-w-4/12 md:tw-order-1">--}}
-                        {{--<img class="tw-mx-auto" src="https://guitareo.s3.amazonaws.com/sales/promos/october/gq-spread.png">--}}
+                {{--<div class="flex flex-wrap items-center justify-center mx-auto" style="max-width: 900px;">--}}
+                    {{--<div class="mx-auto mb-4 md:mb-0 w-2/3 md:w-1/3 lg:w-4/12 md:order-1">--}}
+                        {{--<img class="mx-auto" src="https://guitareo.s3.amazonaws.com/sales/promos/october/gq-spread.png">--}}
                     {{--</div>--}}
-                    {{--<div class="tw-text-left md:tw-pr-6 lg:tw-pr-8 tw-w-full md:tw-w-2/3 lg:tw-w-8/12">--}}
-                        {{--<p class="font-primary tw-text-base tw-my-4" style="max-width: 550px;">--}}
+                    {{--<div class="text-left md:pr-6 lg:pr-8 w-full md:w-2/3 lg:w-8/12">--}}
+                        {{--<p class="font-primary text-base my-4" style="max-width: 550px;">--}}
                             {{--Hey it’s Rob here. You might know my band <a href="https://en.wikipedia.org/wiki/First_of_October_(band)"><u>First of October</u></a> where every year, for one day, I jump into a recording studio with my buddy Andrew Huang to write & record an entire 10-track album in a single session.--}}
                             {{--<br><br>--}}
                             {{--And I do that because playing music should be about making cool projects happen & expressing yourself!--}}
@@ -40,7 +48,7 @@
                             {{--<br><br>--}}
                             {{--So to celebrate my October tradition, this month you’ll save a bunch of money and get a free bonus. I’m calling it The <strong>Burst</strong> of October, to give you the extra push you need towards your musical goals. Enjoy!--}}
                         {{--</p>--}}
-                        {{--<a title="Go To Order Page" href="{{ $orderLink }}" class="bg-goldenrod-gradient tw-transition tw-duration-500 tw-linear tw-px-4 tw-py-3 tw-w-full tw-inline-block tw-uppercase tw-text-black font-roboto-condensed-bold tw-rounded-full tw-text-center tw-text-xl tw-mb-5 md:tw-w-3/4">--}}
+                        {{--<a title="Go To Order Page" href="{{ $orderLink }}" class="bg-goldenrod-gradient transition duration-500 linear px-4 py-3 w-full inline-block uppercase text-black font-roboto-condensed-bold rounded-full text-center text-xl mb-5 md:w-3/4">--}}
                             {{--GET STARTED »--}}
                         {{--</a>--}}
                     {{--</div>--}}
@@ -50,14 +58,13 @@
         {{--</div>--}}
     {{--</section>--}}
     {{--<!-- Banner -->--}}
-    {{--<a href="{{ $orderLink }}" class="tw-w-full tw-py-1 tw-text-center tw-sticky tw-z-50 tw-block tw-text-white"--}}
+    {{--<a href="{{ $orderLink }}" class="w-full py-1 text-center sticky z-50 block text-white"--}}
             {{--style="top: 56px;background:linear-gradient(to bottom, #000419, #000f28);"--}}
     {{-->--}}
-        {{--<h2 class="tw-uppercase font-bison-bold tw-text-lg md:tw-text-3xl tw-inline-block tw-align-middle tw-m-0 tw-leading-none">THE <span class="text-goldenrod">BURST</span> OF OCTOBER</h2>--}}
-        {{--<p class="tw-uppercase tw-my-0 tw-ml-2 tw-inline-block tw-align-middle tw-text-xs md:tw-text-sm tw-text-left tw-leading-none"><strong>Save {{ round(100 - (100 * (\App\Prices::$guitarQuestRegular / \App\Prices::$guitarQuestFull))) }}%</strong> + BONUS 1-YEAR<br>  GUITAREO MEMBERSHIP</p>--}}
+        {{--<h2 class="uppercase font-bison-bold text-lg md:text-3xl inline-block align-middle m-0 leading-none">Rob's <span class="text-goldenrod">32nd </span> Birthday Sale!</h2>--}}
+        {{--<p class="uppercase my-0 ml-2 inline-block align-middle text-xs md:text-sm text-center leading-none"><strong>Save {{ round(100 - (100 * (floatval($productPrices['guitar-quest']->discounted_price) / floatval($productPrices['guitar-quest']->price)))) }}%</strong> on GuitarQuest<br> only until Aug 28th.</p>--}}
     {{--</a>--}}
 @endsection
 @section('final')
-
-    @include("products.guitar-quest.partials.sections._start-here")
+    @include("guitareo.products.guitar-quest.partials.sections._start-here")
 @endsection

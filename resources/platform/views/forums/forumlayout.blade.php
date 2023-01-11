@@ -71,7 +71,6 @@
             @include('partials._review-modal')
         </div>
 
-
         {{-- Scripts --}}
         <script src="{{ mix('platform/js/manifest.js') }}"></script>
         <script src="{{ mix('platform/js/vendor.js') }}"></script>

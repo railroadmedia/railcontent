@@ -1,13 +1,7 @@
 @extends('_partials.layout.global-layout')
 
 @section('head-includes')
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <!-- Icons -->
-    <link rel="stylesheet" href="https://dpwjbsxqtam5n.cloudfront.net/fonts/font-awesome-5/fontawesome-all.min.css">
-    <link rel="stylesheet" href="https://d1prhhmg8i11jr.cloudfront.net/v1.0.3/dist/icons.css">
+    @include('_partials.layout._fonts')
     <!-- Favicons -->
     @include('_partials.layout.favicons.drumeo-favicons')
 @stop
@@ -21,14 +15,14 @@
         "links" => [
             "Member Login" => [
                 "iconClass" => "fas fa-sign-in",
-                "url" => "/members",
+                "url" => get_musora_brand_base_url() . '/login',
             ],
             "Contact" => [
                 "iconClass" => "fas fa-phone",
-                "url" => get_legacy_brand_base_url("musora").'/contact',
+                "url" => get_musora_brand_base_url().'/contact',
             ],
             "Drumeo" => [
-                "iconClass" => "icon-courses",
+                "iconClass" => "fas fa-home",
                 "url" => '/',
             ],
             "Drum Shop" => [
@@ -59,8 +53,8 @@
                     "How To Play Drums"=> [
                         "url" => "/beat/how-to-play-drums/",
                     ],
-                    "40 Free Songs"=> [
-                        "url" => "/40-songs",
+                    "100 Free Songs"=> [
+                        "url" => "/100-songs",
                     ],
                 ],
             ],
@@ -92,7 +86,7 @@
 @stop
 
 <!-- Global Wrapper -->
-@section('global-layout-body') 
+@section('global-layout-body')
     <!-- Brand Specific Content -->
     @yield('layout-body')
 @stop
@@ -158,7 +152,7 @@
                 "links" => [
                     [
                         "name" => "Musora",
-                        "url" => get_legacy_brand_base_url("musora")
+                        "url" => get_musora_brand_base_url()
                     ],
                     [
                         "name" => "Guitareo",

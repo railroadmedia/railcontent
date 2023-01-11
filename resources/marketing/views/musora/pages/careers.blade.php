@@ -13,23 +13,26 @@
     <meta property="og:image" content="https://musora-center.s3.amazonaws.com/homepage/2021/share-image.jpg">
 
     <style>
-        /* .join.gradient-outline.fill-white {
-            background: white;
-            background-clip: padding-box;
-            color: #0b76db;
+         .join.gradient-outline.fill-white {
+            /*background: white;*/
+            /*background-clip: padding-box;*/
+            color: #0b76db!important;
         }
-        .join.gradient-outline:before {
-            content:' ';
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            z-index: -1;
-            border-radius: inherit;
-            background: linear-gradient(90deg,#03c8ac, #0976db, #9a01ee, #f61a30) no-repeat;
-            margin: -2px;
-        } */
+         .join.gradient-outline.fill-white:hover {
+            color: #fff!important;
+        }
+        /*.join.gradient-outline:before {*/
+        /*    content:' ';*/
+        /*    position: absolute;*/
+        /*    top: 0;*/
+        /*    right: 0;*/
+        /*    bottom: 0;*/
+        /*    left: 0;*/
+        /*    z-index: -1;*/
+        /*    border-radius: inherit;*/
+        /*    background: linear-gradient(90deg,#03c8ac, #0976db, #9a01ee, #f61a30) no-repeat;*/
+        /*    margin: -2px;*/
+        /*}*/
     </style>
 @endsection
 
@@ -323,7 +326,7 @@
                         [
                         "icon" => "https://musora-center.s3.amazonaws.com/careers/events-icon.svg",
                         "title" => "FUN Company Events",
-                        "description" => "Golf tournaments, warehouse jam nights, LEGENDARY Christmas party and more!",
+                        "description" => "Golf tournaments, warehouse jam nights, LEGENDARY Holiday party and more!",
                         ],
                         [
                         "icon" => "https://musora-center.s3.amazonaws.com/careers/remote-icon.svg",

@@ -28,6 +28,7 @@ class ImpactTrackConversion implements ShouldQueue
             $order = $this->order;
 
             Tracker::queue(
+                $order->getBrand(),
                 function () use ($order, $promoCode) {
                     $products = [];
 

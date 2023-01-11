@@ -289,7 +289,7 @@ class ProfileSettingsPagesController extends BaseController
             }
         }
 
-        $payments = $this->paymentRepository->getAllUsersPayments($user->id, false, 'drumeo');
+        $payments = $this->paymentRepository->getAllUsersPayments($user->id, false, brand());
 
         // sort by date
         usort(
@@ -450,12 +450,18 @@ class ProfileSettingsPagesController extends BaseController
         foreach ($subscriptions as $subscription) {
             $isCorrectType = $subscription->getType() == 'subscription';
 
-            $subscriptionProductId = $subscription->getProduct()->getId();
-            $productsGrantingAllContentAccessIdsOnly = ProductAccessMap::productsGrantingAllContentAccessIdsOnly();
+            $subscriptionProduct = $subscription->getProduct();
 
-            if ($isCorrectType && in_array($subscriptionProductId, $productsGrantingAllContentAccessIdsOnly)) {
-                $hasHadMembership = true;
-                $membershipSubscriptions[] = $subscription;
+            if($subscriptionProduct){
+                $subscriptionProductId = $subscriptionProduct->getId();
+                $productsGrantingAllContentAccessIdsOnly = ProductAccessMap::productsGrantingAllContentAccessIdsOnly();
+
+                if ($isCorrectType && in_array($subscriptionProductId, $productsGrantingAllContentAccessIdsOnly)) {
+                    $hasHadMembership = true;
+                    $membershipSubscriptions[] = $subscription;
+                }
+            } else {
+                error_log ('subscription ' . $subscription->getId() . ' doesn\'t have a product attached');
             }
         }
 
@@ -537,7 +543,7 @@ class ProfileSettingsPagesController extends BaseController
         // -------------------------------------------------------------------------------------------------------------
 
         $urlParamsByBrandForTrial = [
-            'drumeo' => 'products[DLM-Trial]=1,month,1&locked=true',
+            'drumeo' => 'products[DLM-Trial-1-month]=1&locked=true',
             'pianote' => 'products[PIANOTE-MEMBERSHIP-TRIAL]=1&redirect=%2Forder&locked=true',
             'guitareo' => 'products[GUITAREO-7-DAY-TRIAL-ONE-TIME]=1&redirect=%2Forder&locked=true',
             'singeo' => 'products[singeo-monthly-recurring-7-day-trial-membership]=1&redirect=%2Forder&locked=true',
@@ -547,7 +553,7 @@ class ProfileSettingsPagesController extends BaseController
             $urlParams = $urlParamsByBrandForTrial[$brand];
             $addToCartUrlTrial = 'https://' . $brand . '.com/ecommerce/add-to-cart?' . $urlParams;
             if ($brand == 'drumeo') {
-                $addToCartUrlTrial = 'https://drumeo.com/laravel/public/shopping-cart/api/query?' . $urlParams;
+                $addToCartUrlTrial = 'https://drumeo.com/ecommerce/add-to-cart?' . $urlParams;
             }
         } else {
             $addToCartUrlTrial = 'https://musora.com/';

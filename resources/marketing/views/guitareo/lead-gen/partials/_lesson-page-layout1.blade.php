@@ -3,7 +3,7 @@
         <div class="title-header-interaction text-white">
             <div class="w-5/6">
                 <h1 class="font-bold text-xl leading-tight mx-auto mb-1 md:text-3xl md:mb-3 lg:text-4xl">{{ $title }}</h1>
-                <h2 class="leading-tight mx-auto uppercase md:text-lg lg:text-xl">from <strong><a href="/acoustic-guitar-jumpstart/course-index/" style="color:{{ $themeColor }};">{{ $fromText }}</a></strong></h2>
+                <h2 class="leading-tight mx-auto uppercase md:text-lg lg:text-xl">from <strong><a href="/acoustic-guitar-jumpstart/course-index/" style="color:{{ $brandColor }};">{{ $fromText }}</a></strong></h2>
             </div>
         </div>
         <div class="aspect-16:9 w-full relative my-4 mx-auto md:my-6">
@@ -12,19 +12,19 @@
         <div class="user-interaction flex justify-between flex-col sm:flex-row">
             <div class="mb-2 sm:mb-0 w-full sm:w-1/6 lesson-navigator previous-lesson">
                 @isset($previous)
-                    <a href="{{ $previous }}" style="color:{{ $themeColor }}; border-color:{{ $themeColor }};">
+                    <a href="{{ $previous }}" style="color:{{ $brandColor }}; border-color:{{ $brandColor }};">
                         <i class="fas fa-chevron-left"></i> PREV
                     </a>
                 @endisset
             </div>
             <div class="mb-2 sm:mb-0 w-full sm:w-1/2 lesson-navigator">
-                <a href="{{ $allLessons }}" style="color:{{ $themeColor }}; border-color:{{ $themeColor }};">
+                <a href="{{ $allLessons }}" style="color:{{ $brandColor }}; border-color:{{ $brandColor }};">
                     <i class="fas fa-chevron-up"></i>&nbsp; All Lessons</span>
                 </a>
             </div>
             <div class="w-full sm:w-1/6 lesson-navigator next-lesson">
                 @isset($next)
-                    <a href="{{ $next }}" style="color:{{ $themeColor }}; border-color:{{ $themeColor }};">
+                    <a href="{{ $next }}" style="color:{{ $brandColor }}; border-color:{{ $brandColor }};">
                     NEXT <i class="fas fa-chevron-right"></i>
                 </a>
                 @endisset
@@ -54,12 +54,12 @@
                 @yield('assets')
                 <div class="mb-10"></div>
             @endif
-            
+
             @isset($PDF)
                 <div class="px-3 md:px-4">
                     <a target="_blank" href="{{ $PDF }}" class="download-button big w-full"><i class="fas fa-download"></i> Download PDF</a>
                 </div>
-                <br><br>                        
+                <br><br>
             @endisset
 
             <div class="text-left">

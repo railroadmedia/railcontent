@@ -1,0 +1,421 @@
+@import "../_variables";
+
+h1 strong, h2 strong, h3 strong, h4 strong, h5 strong, h6 strong {
+  font-weight: 900;
+}
+
+h1, h2, h3, h4, h5, h6, li, p {
+  font-weight: 400;
+  line-height: 1em;
+  font-family: $opensans;
+  margin: 0 auto;
+
+  sup {
+    font-size: 50%;
+    top: -0.75em;
+  }
+}
+
+h1 {
+  line-height: 1.2em;
+  font-size: 24px;
+  @include tablet {
+    font-size: 36px;
+  }
+  @include desktopOld {
+    font-size: 48px;
+  }
+}
+
+h2 {
+  line-height: 1.2em;
+  font-size: 20px;
+  @include tablet {
+    font-size: 30px;
+  }
+  @include desktopOld {
+    font-size: 36px;
+  }
+}
+
+h3 {
+  font-size: 18px;
+  @include tablet {
+    font-size: 24px;
+  }
+  @include desktopOld {
+    font-size: 30px;
+  }
+}
+
+h4 {
+  font-size: 16px;
+  @include tablet {
+    font-size: 20px;
+  }
+  @include desktopOld {
+    font-size: 24px;
+  }
+}
+
+h5 {
+  font-size: 15px;
+  @include tablet {
+    font-size: 18px;
+  }
+  @include desktopOld {
+    font-size: 20px;
+  }
+}
+
+h6 {
+  font-size: 15px;
+  @include tablet {
+    font-size: 16px;
+  }
+  @include desktopOld {
+    font-size: 18px;
+  }
+}
+
+p, li {
+  line-height: 1.6em;
+  font-size: 15px;
+  @include desktopOld {
+    font-size: 16px;
+  }
+}
+
+img {
+  max-width: 100%;
+  display: inline-block;
+}
+
+.join {
+
+  &.smaller {
+    padding: 7px 10px;
+    font-size: 13px;
+    @include tablet {
+      font-size: 14px;
+      padding: 13px 30px;
+    }
+  }
+
+  &.promo {
+    font-family: $opensans;
+    font-weight: 900;
+    color: $promoColor;
+
+    &:hover {
+      background: lighten($promoColor, 10%);
+    }
+  }
+
+  &.outline {
+    background: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+
+    &:hover,
+    &:focus {
+      background: #fff;
+      color: #000;
+    }
+
+    &.red {
+      border-color: $pianoteRed;
+      color: $pianoteRed;
+
+      &:hover {
+        background: $pianoteRed;
+        color: #000;
+      }
+    }
+  }
+}
+
+.play-button {
+  cursor: pointer;
+  outline: none;
+  transition: opacity .3s;
+  background: rgba(0, 0, 0, 0.6);
+  border: 3px solid #fff;
+  border-radius: 200px;
+  line-height: 1em;
+  font-size: 29px;
+  padding: 18px 22px;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.reveal-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2147483001;
+  display: none;
+  overflow-y: auto;
+  background-color: rgba(0, 0, 0, 0.8);
+
+  &:after {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-family: "Font Awesome 5 Pro";
+    font-weight: 900;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    content: "\f00d";
+    color: #fff;
+    z-index: 1;
+    opacity: 0.8;
+    position: absolute;
+    margin: 0;
+    line-height: 1em;
+    text-align: center;
+    display: inline-block;
+    outline: none;
+    top: 0;
+    right: 0;
+    font-size: 35px;
+    width: 35px;
+    @include tablet {
+      top: 7px;
+      right: 7px;
+      font-size: 50px;
+      width: 50px;
+    }
+  }
+
+  .reveal {
+    z-index: 1006;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    display: none;
+    background-color: #fefefe;
+    position: relative;
+    top: 100px;
+    margin-right: auto;
+    margin-left: auto;
+    overflow-y: auto;
+
+    width: 90%;
+    max-width: 75rem;
+    height: inherit;
+    min-height: 0;
+    outline: none;
+    padding: 0;
+    border: none;
+    border-radius: 7px;
+    @include tablet {
+      right: auto;
+      left: auto;
+      margin: 0 auto;
+    }
+  }
+}
+
+.text-navy {
+  color: #a1afc9;
+}
+
+.header {
+  background-size: 610px;
+  @include tablet {
+    background-size: cover;
+  }
+}
+
+.button {
+  user-select: none;
+  border-radius: 900px;
+  background: linear-gradient(to bottom, #df2a70, #fe5031);
+  color: #fff;
+  font: 700 15px/1em $robotocondensed;
+  transition: background-color .3s;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 13px 0;
+
+  &:hover {
+    background: linear-gradient(to bottom, lighten(#df2a70, 10%), lighten(#fe5031, 10%));
+    color: #fff;
+  }
+
+  &.complete,
+  &.outline.complete {
+    background: #00f677;
+    color: #000718;
+    border-color: #00f677;
+  }
+
+  &.outline {
+    background: transparent;
+    color: $pianoteRed;
+
+    &:hover {
+      background: lighten($pianoteRed, 10%);
+      color: #fff;
+    }
+
+    &.inactive {
+      color: #2e4153;
+      border-color: #2e4153;
+
+      &:hover {
+        background: #2e4153;
+        color: #000718;
+      }
+    }
+
+    &.white {
+      color: #fff;
+      border-color: #fff;
+
+      &:hover {
+        background: #fff;
+        border-color: #fff;
+        color: #000718;
+      }
+    }
+  }
+}
+
+.infusion-form input,
+.infusion-form button {
+  font: 400 18px/45px $opensans;
+  height: 45px;
+  color: #999;
+  border-radius: 100px;
+  padding: 7px 20px;
+  margin: 0 auto 10px;
+  transition: all .2s ease-in;
+  box-shadow: none;
+  text-align: inherit;
+  border: none;
+  @include tablet {
+    font-size: 19px;
+    height: 55px;
+    line-height: 55px;
+    margin: 0 auto 15px;
+  }
+  @include desktopOld {
+    font-size: 23px;
+  }
+}
+
+.infusion-form button {
+  font-family: $robotocondensed;
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: background-color .3s;
+  margin: 0 auto 15px;
+  text-align: center;
+  display: block;
+  cursor: pointer;
+  border: none;
+  width: 100%;
+  padding: 0;
+  color: #fff;
+  background: linear-gradient(to bottom, #df2a70, #fe5031);
+
+  &:hover {
+    background: linear-gradient(to bottom, lighten(#df2a70, 5%), lighten(#fe5031, 5%));
+  }
+}
+
+
+.thank-you-box {
+  height: auto;
+  max-height: 0;
+  visibility: hidden;
+  opacity: 0;
+  transition: all .4s ease-in;
+  display: block;
+  overflow: hidden;
+
+  &.active {
+    max-height: 1000px;
+    visibility: visible;
+    opacity: 1;
+    padding: 15px;
+    @include tablet {
+      padding: 20px;
+    }
+    @include desktopOld {
+      padding: 30px;
+    }
+  }
+
+  p {
+    font: 400 15px/1.4em $opensans;
+    margin: 0 auto;
+    @include tablet {
+
+      font-size: 19px;
+    }
+    @include desktopOld {
+
+      font-size: 23px;
+    }
+
+    em {
+      line-height: 1.4em;
+      max-width: 550px;
+      display: inline-block;
+      font-size: 12px;
+      @include tablet {
+
+        font-size: 14px;
+      }
+    }
+  }
+
+  .social-media a {
+    background: #000;
+    color: #fff;
+    border-radius: 50%;
+    display: inline-block;
+    text-align: center;
+    margin: 20px 3px 0;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 26px;
+    @include desktopOld {
+      width: 70px;
+      height: 70px;
+      line-height: 70px;
+      font-size: 35px;
+      margin: 25px 10px 0;
+    }
+  }
+}
+
+.disclaimer {
+  max-width: 470px;
+
+  i {
+    width: 40px;
+    font-size: 21px;
+    @include tablet {
+      font-size: 29px;
+    }
+  }
+
+  span {
+    font: italic 400 12px/1.4em $opensans;
+    width: calc(100% - 40px);
+  }
+}
+
+.album-grid .autoplay-video:hover .play-button {
+  opacity: 1;
+}

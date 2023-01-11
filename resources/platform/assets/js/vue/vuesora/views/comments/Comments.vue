@@ -185,7 +185,7 @@ export default {
     mixins: [ThemeClasses, CommentMixin],
     props: {
         contentId: {
-            type: String,
+            type: Number,
             default: () => '',
         },
     },

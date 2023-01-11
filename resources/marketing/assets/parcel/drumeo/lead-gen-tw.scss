@@ -1,0 +1,468 @@
+@import "../_variables";
+
+h1 strong, h2 strong, h3 strong, h4 strong, h5 strong, h6 strong {
+  font-weight: 900;
+}
+
+h1, h2, h3, h4, h5, h6, li, p {
+  font-weight: 400;
+  line-height: 1em;
+  font-family: $opensans;
+  margin: 0 auto;
+
+  sup {
+    font-size: 50%;
+    top: -0.75em;
+  }
+}
+
+h1 {
+  line-height: 1.2em;
+  font-size: 24px;
+  @include tablet {
+    font-size: 36px;
+  }
+  @include desktop {
+    font-size: 48px;
+  }
+}
+
+h2 {
+  line-height: 1.2em;
+  font-size: 20px;
+  @include tablet {
+    font-size: 30px;
+  }
+  @include desktop {
+    font-size: 36px;
+  }
+}
+
+h3 {
+  font-size: 18px;
+  @include tablet {
+    font-size: 24px;
+  }
+  @include desktop {
+    font-size: 30px;
+  }
+}
+
+h4 {
+  font-size: 16px;
+  @include tablet {
+    font-size: 20px;
+  }
+  @include desktop {
+    font-size: 24px;
+  }
+}
+
+h5 {
+  font-size: 15px;
+  @include tablet {
+    font-size: 18px;
+  }
+  @include desktop {
+    font-size: 20px;
+  }
+}
+
+h6 {
+  font-size: 15px;
+  @include tablet {
+    font-size: 16px;
+  }
+  @include desktop {
+    font-size: 18px;
+  }
+}
+
+p, li {
+  line-height: 1.6em;
+  font-size: 15px;
+  @include desktop {
+    font-size: 16px;
+  }
+}
+
+img {
+  display: inline-block;
+}
+
+[placeholder]:focus::-webkit-input-placeholder {
+  color: transparent;
+}
+
+form ::-webkit-input-placeholder,
+form ::-moz-placeholder,
+form :-ms-input-placeholder,
+form :-moz-placeholder {
+  color: #777;
+}
+
+
+.text-songs {
+  color: $songsPink;
+}
+
+.text-light-navy {
+  color: #a1afc9;
+}
+
+.play-button {
+  cursor: pointer;
+  outline: none;
+  transition: opacity .3s;
+  background: rgba(0, 0, 0, 0.6);
+  border: 3px solid #fff;
+  color: #fff;
+  border-radius: 200px;
+  line-height: 1em;
+  font-size: 29px;
+  padding: 18px 22px;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.infusion-form input,
+.infusion-form button {
+  font: 400 18px/45px $opensans;
+  height: 45px;
+  color: #999;
+  border-radius: 100px;
+  padding: 7px 20px;
+  margin: 0 auto 10px;
+  transition: all .2s ease-in;
+  box-shadow: none;
+  text-align: inherit;
+  border: none;
+  @include tablet {
+    font-size: 19px;
+    height: 55px;
+    line-height: 55px;
+    margin: 0 auto 15px;
+  }
+  @include desktop {
+    font-size: 23px;
+  }
+}
+
+.infusion-form button {
+  font-family: $bebas;
+  text-transform: uppercase;
+  margin: 0 auto 15px;
+  text-align: center;
+  display: block;
+  cursor: pointer;
+  border: none;
+  width: 100%;
+  padding: 0;
+  color: #fff;
+  background: $drumeoBlue;
+
+  &:hover {
+    background: lighten($drumeoBlue, 10%);
+  }
+}
+
+
+.thank-you-box {
+  height: auto;
+  max-height: 0;
+  visibility: hidden;
+  opacity: 0;
+  transition: all .4s ease-in;
+  display: block;
+  overflow: hidden;
+
+  &.active {
+    max-height: 1000px;
+    visibility: visible;
+    opacity: 1;
+    padding: 15px;
+    @include tablet {
+      padding: 20px;
+    }
+    @include desktop {
+      padding: 30px;
+    }
+  }
+
+  p {
+    font: 400 15px/1.4em $opensans;
+    margin: 0 auto;
+    @include tablet {
+
+      font-size: 19px;
+    }
+    @include desktop {
+
+      font-size: 23px;
+    }
+
+    em {
+      line-height: 1.4em;
+      max-width: 550px;
+      display: inline-block;
+      font-size: 12px;
+      @include tablet {
+
+        font-size: 14px;
+      }
+    }
+  }
+
+  .social-media a {
+    background: #000;
+    color: #fff;
+    border-radius: 50%;
+    display: inline-block;
+    text-align: center;
+    margin: 20px 3px 0;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 26px;
+    @include desktop {
+      width: 70px;
+      height: 70px;
+      line-height: 70px;
+      font-size: 35px;
+      margin: 25px 10px 0;
+    }
+  }
+}
+
+.disclaimer {
+  max-width: 470px;
+
+  i {
+    width: 40px;
+    font-size: 21px;
+    @include tablet {
+      font-size: 29px;
+    }
+  }
+
+  span {
+    font: italic 400 12px/1.4em $opensans;
+    width: calc(100% - 40px);
+  }
+}
+
+.reveal-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2147483002;
+  display: none;
+  overflow-y: auto;
+  background-color: rgba(0, 0, 0, 0.8);
+
+  &:after {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-family: "Font Awesome 5 Pro";
+    font-weight: 900;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    content: "\f00d";
+    color: #fff;
+    z-index: 1;
+    opacity: 0.8;
+    position: absolute;
+    margin: 0;
+    line-height: 1em;
+    text-align: center;
+    display: inline-block;
+    outline: none;
+    top: 0;
+    right: 0;
+    font-size: 35px;
+    width: 35px;
+    @include tablet {
+      top: 7px;
+      right: 7px;
+      font-size: 50px;
+      width: 50px;
+    }
+  }
+
+  .reveal {
+    z-index: 1006;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    display: none;
+    background-color: #fefefe;
+    position: relative;
+    top: 100px;
+    margin-right: auto;
+    margin-left: auto;
+    overflow-y: auto;
+    width: 95%;
+    height: inherit;
+    min-height: 0;
+    outline: none;
+    padding: 0;
+    border: none;
+    border-radius: 7px;
+    @include tablet {
+      right: auto;
+      left: auto;
+      margin: 0 auto;
+    }
+  }
+}
+
+
+.songs-info {
+  .pic-wrap {
+    margin: 20px auto;
+    min-height: 386px;
+    width: 220px;
+    min-width: 220px;
+    @include tablet {
+      order: 1;
+      margin: 0;
+      min-height: 457px;
+      width: 290px;
+      min-width: 290px;
+      padding-left: 30px;
+    }
+    @include desktop {
+      min-height: 665px;
+      width: 430px;
+      min-width: 430px;
+      padding-left: 50px;
+    }
+
+  }
+
+  .side-pic {
+    display: none;
+    width: 100%;
+
+    &.mobile-feature {
+      display: block;
+      @include tablet {
+        display: none;
+      }
+    }
+
+    &.active {
+      @include tablet {
+        display: block;
+      }
+    }
+  }
+
+  .text-icon-wrap {
+    display: flex;
+    margin: 0 auto 20px;
+    @include tablet {
+      cursor: pointer;
+      opacity: 0.4;
+      margin: 0 auto 35px;
+    }
+    @include desktop {
+      margin: 0 auto 60px;
+    }
+
+    &:hover {
+      @include tablet {
+        opacity: 0.6;
+      }
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &.active,
+    &.active:hover {
+      opacity: 1;
+
+      p {
+        display: inline-block;
+      }
+    }
+
+    i {
+      font-size: 25px;
+      padding-right: 15px;
+      min-width: 45px;
+      @include tablet {
+        font-size: 35px;
+        min-width: 55px;
+      }
+      @include desktop {
+        font-size: 40px;
+        min-width: 80px;
+      }
+    }
+
+    h3 {
+      margin: 0 auto 10px;
+      @include tablet {
+
+        margin: 0 auto 15px;
+      }
+    }
+
+    p {
+      display: none;
+      line-height: 1.4em;
+    }
+  }
+}
+
+.album-grid .autoplay-video {
+  .play-button {
+    opacity: 0;
+    transition: opacity .3s;
+  }
+
+  &:hover .play-button {
+    opacity: 1;
+  }
+}
+
+.lesson-buttons {
+  .button {
+    user-select: none;
+    border-radius: 900px;
+    background: $drumeoBlue;
+    color: #fff;
+    font: 400 15px/1em $bebas;
+    transition-property: background-color, border-color, color, fill, stroke;
+    transition-duration: 300ms;
+    text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 13px 0;
+
+    &:hover {
+      background: lighten($drumeoBlue, 10%);
+      color: #fff;
+    }
+  }
+}
+
+.assignment-row.active {
+  i.fa-angle-down {
+    transform: rotate(180deg);
+  }
+
+  .dropdown {
+    opacity: 1 !important;
+    visibility: visible !important;
+    max-height: 1500px !important;
+  }
+}

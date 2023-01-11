@@ -1,0 +1,338 @@
+@import "../_variables";
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.learn-play-watch {
+  padding: 40px 15px;
+  @include tablet {
+    padding: 80px 15px;
+  }
+  @include desktop {
+    padding: 115px 20px;
+  }
+
+  .row {
+    max-width: 770px;
+    @include desktop {
+      max-width: 1040px;
+    }
+  }
+
+  .medium-4 {
+    @include desktop {
+      padding-left: 7px;
+      padding-right: 7px;
+    }
+
+    i {
+      margin: 0 auto 10px;
+      color: $drumeoBlue;
+      font-size: 35px;
+      @include desktop {
+        font-size: 40px;
+      }
+    }
+
+    p {
+      margin: 0 auto 30px;
+      @include tablet {
+        margin: 0 auto;
+      }
+    }
+  }
+
+  h1 {
+    font: 800 30px/1em $opensans;
+    margin: 0 auto 10px;
+    @include tablet {
+      font-size: 46px;
+      margin: 0 auto 15px;
+    }
+    @include desktop {
+      font-size: 64px;
+    }
+  }
+
+  h2 {
+    font: 400 18px/1.3em $opensans;
+    margin: 0 auto;
+    @include tablet {
+      font-size: 24px;
+    }
+    @include desktop {
+      font-size: 31px;
+    }
+  }
+
+  img {
+    width: 100%;
+    max-width: 330px;
+    margin: 25px auto;
+    @include tablet {
+      max-width: 630px;
+      margin: 35px auto;
+    }
+    @include desktop {
+      max-width: 760px;
+      margin: 45px auto 35px;
+    }
+  }
+
+  p {
+    font: 400 13px/1.7em $opensans;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 330px;
+    @include tablet {
+      line-height: 2em;
+      max-width: 100%;
+    }
+    @include desktop {
+      font-size: 14px;
+    }
+
+    strong {
+      line-height: 1.2em;
+      display: inline-block;
+      font-size: 14px;
+      @include tablet {
+        font-size: 16px;
+      }
+      @include desktop {
+        font-size: 19px;
+      }
+    }
+  }
+
+  .topic-wrap {
+    margin: 0 auto 60px;
+    @include tablet {
+      margin: 0 auto 110px;
+    }
+
+    &:last-child {
+      margin: 0 auto;
+    }
+
+    &.play img {
+      @include tablet {
+        max-width: 720px;
+      }
+      @include desktop {
+        max-width: 860px;
+      }
+    }
+
+    &.watch img {
+      margin-bottom: 5px;
+      @include desktop {
+        max-width: 920px;
+      }
+    }
+  }
+}
+
+.content-section.sonor-header {
+  background-size: cover;
+  color: #fff;
+  @include desktop {
+    padding: 60px 0;
+  }
+
+  img.logo {
+    height: 20px;
+    margin: 0 10px 20px;
+    @include tablet {
+      height: 25px;
+      margin: 0 13px 25px;
+    }
+    @include desktop {
+      height: 33px;
+      margin: 0 22px 30px;
+    }
+  }
+
+  h1 {
+    @include desktop {
+      font-size: 42px;
+    }
+  }
+
+  .play-button {
+    margin: 100px auto;
+    @include tablet {
+      margin: 145px auto;
+    }
+  }
+
+  h4 {
+    line-height: 1.7em;
+    margin: 0 auto 20px;
+    @include tablet {
+      margin: 0 auto 25px;
+    }
+    @include desktop {
+      margin: 0 auto 30px;
+    }
+  }
+
+  .join {
+    width: 90%;
+  }
+}
+
+.content-section.sonor-footer {
+  background: #e5e7e8;
+  color: #000;
+  padding: 50px 0;
+  @include tablet {
+    padding: 70px 0;
+
+  }
+  @include desktop {
+    padding: 90px 0;
+  }
+
+  img.logo {
+    filter: invert(1);
+    height: 20px;
+    margin: 0 10px 20px;
+    @include tablet {
+      height: 25px;
+      margin: 0 13px 25px;
+    }
+    @include desktop {
+      height: 33px;
+      margin: 0 22px 30px;
+    }
+  }
+
+  h1 {
+    @include desktop {
+      font-size: 42px;
+    }
+  }
+
+  h4 {
+    line-height: 1.7em;
+    margin: 0 auto 20px;
+    @include tablet {
+      margin: 0 auto 25px;
+    }
+    @include desktop {
+      margin: 0 auto 30px;
+    }
+  }
+
+  .join {
+    width: 90%;
+  }
+}
+
+.reveal#redeem {
+  padding: 20px;
+  max-width: 580px;
+  @include tablet {
+    padding: 30px;
+  }
+
+  .mb-1 {
+    margin-bottom: 10px;
+  }
+
+  .mr-2 {
+    margin-right: 20px;
+  }
+
+  p.change-form {
+    display: inline-block;
+    color: #666;
+    cursor: pointer;
+
+    &.active {
+      color: $drumeoBlue;
+      font-weight: 700;
+      border-bottom: 1px solid $drumeoBlue;
+    }
+  }
+  ul.errors {
+    margin: 5px 25px;
+    list-style: none;
+    color: red;
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  input[type=date],
+  input[type=email],
+  input[type=number],
+  input[type=password],
+  input[type=text],
+  select,
+  textarea {
+    height: 50px;
+    border-radius: 25px;
+    background: #fff;
+    color: #000;
+    box-shadow: none;
+    border: 1px solid #d1d1d1;
+    outline: none;
+    width: 100%;
+    padding-top: 12px;
+    font: 400 16px/1.5em Open Sans, sans-serif;
+    padding-left: 25px;
+    padding-right: 25px;
+    margin: 0 auto;
+    &.has-error {
+      background: rgba(255, 0, 0, 0.15);
+    }
+    &.has-input ~ label,
+    &:focus ~ label {
+      -webkit-transform: scale(.7) translateY(-8px) translateX(15px) !important;
+      transform: scale(.7) translateY(-8px) translateX(15px) !important;
+      color: $drumeoBlue;
+    }
+  }
+
+  .form-group {
+    position: relative;
+
+    label:not(.toggle-label) {
+      position: absolute;
+      left: .625rem;
+      top: 0;
+      height: 50px;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      flex-direction: column;
+      -webkit-box-pack: center;
+      justify-content: center;
+      will-change: transform, color;
+      -webkit-transition: color .1s ease-in-out, -webkit-transform .2s ease-in-out;
+      transition: color .1s ease-in-out, -webkit-transform .2s ease-in-out;
+      transition: transform .2s ease-in-out, color .1s ease-in-out;
+      transition: transform .2s ease-in-out, color .1s ease-in-out, -webkit-transform .2s ease-in-out;
+      -webkit-transform-origin: 0 0;
+      transform-origin: 0 0;
+      color: #8c9698;
+      pointer-events: none;
+      font: 400 16px/1.5em Open Sans, sans-serif;
+      -webkit-transform: scale(1) translateY(0) translateX(15px);
+      transform: scale(1) translateY(0) translateX(15px);
+      @include desktop {
+        left: .9375rem;
+      }
+    }
+  }
+
+  input[type=submit] {
+    border: none;
+    width: 100%;
+    font-size: 16px;
+  }
+}

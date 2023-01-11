@@ -2,16 +2,21 @@
 
 namespace App\Console;
 
-use App\Console\Commands\MigrateCoachesToInstructors;
-use App\Console\Commands\MigrateGuitareoUserXP;
+use App\Console\Commands\AssignSongsPermissionsToAllUsers;
+use App\Console\Commands\AssignSongsPermissionsToContent;
+use App\Console\Commands\AssignSongsPermissionsToProducts;
+use App\Console\Commands\CreateSongsDecember2022;
+use App\Console\Commands\FixSongsTemp;
+use App\Console\Commands\MigratePianoteSongTutorial;
+use App\Console\Commands\SoftDeleteOldSingeoSongs;
 use App\Console\Commands\PopulateNewRolesAndPermissionsTables;
 use App\Console\Commands\PopulateUserBrandLevel;
 use App\Console\Commands\PopulateUserMinutesPracticedPerBrand;
 use App\Console\Commands\PopulateUserRolesTable;
 use App\Console\Commands\PopulateUserTotalXpPerBrand;
-use App\Console\Commands\RepairUserProductsFromReferral;
+use App\Console\Commands\RepairGuitareoPDFs;
+use App\Console\Commands\RepairUserProgressStartedOn;
 use App\Console\Commands\RepairVimeoDurations;
-use App\Console\Commands\RunMWPPhaseOneLaunchMigrations;
 use App\Console\Commands\SeedLiveAndScheduledContent;
 use App\Console\Commands\SeedUserContentData;
 use App\Console\Commands\TestLessonsDescriptionUrls;
@@ -31,16 +36,21 @@ class Kernel extends ConsoleKernel
         SeedLiveAndScheduledContent::class,
         PopulateNewRolesAndPermissionsTables::class,
         PopulateUserRolesTable::class,
-        RunMWPPhaseOneLaunchMigrations::class,
-        MigrateCoachesToInstructors::class,
         PopulateUserBrandLevel::class,
         RepairVimeoDurations::class,
         PopulateUserTotalXpPerBrand::class,
         PopulateUserMinutesPracticedPerBrand::class,
         VaporEnvManager::class,
         TestLessonsDescriptionUrls::class,
-        MigrateGuitareoUserXP::class,
-        RepairUserProductsFromReferral::class
+        MigratePianoteSongTutorial::class,
+        CreateSongsDecember2022::class,
+        RepairUserProgressStartedOn::class,
+        RepairGuitareoPDFs::class,
+        AssignSongsPermissionsToContent::class,
+        AssignSongsPermissionsToProducts::class,
+        AssignSongsPermissionsToAllUsers::class,
+        FixSongsTemp::class,
+        SoftDeleteOldSingeoSongs::class,
     ];
 
     /**
@@ -61,6 +71,9 @@ class Kernel extends ConsoleKernel
         $schedule->command('content:updatePopularity')->cron('0 */8 * * *'); //every 8 hours
         $schedule->command('content:CreateVimeoVideoContentRecords', [50])->everyThirtyMinutes();
         $schedule->command('content:CreateYoutubeVideoContentRecordsViaClientAPI', [1])->cron("0 */6 * * *");
+
+        $schedule->command('ecommerce:renewalDueSubscriptions')->cron("15 */8 * * *"); // every 8 hours
+        $schedule->command('ecommerce:ProcessAppleExpiredSubscriptionsQueued')->cron("30 */8 * * *"); // every 8 hours
 
         $schedule->command('mentors:verify')->daily();
         //temporary measure to assign mentors until ecommerce is integrated with MWP

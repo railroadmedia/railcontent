@@ -7,6 +7,7 @@ use App\Modules\Brand\Services\BrandService;
 use Closure;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Str;
 use Railroad\Railtracker\Services\ConfigService;
 
 use function user;
@@ -41,8 +42,26 @@ class SetLastUsedBrand
             $this->brandService->setLastUsedBrand(user(), Brand::from($request->get('brand')));
         }
 
-        if (!empty(user())) {
+        // check the domain, all brand domains should always have the brand set to that domain regardless of the user
+        // or cookie values
+        if (Str::endsWith(request()->getHost(), 'drumeo.com')) {
+            $brand = 'drumeo';
+        } elseif (Str::endsWith(request()->getHost(), 'pianote.com')) {
+            $brand = 'pianote';
+        } elseif (Str::endsWith(request()->getHost(), 'guitareo.com')) {
+            $brand = 'guitareo';
+        } elseif (Str::endsWith(request()->getHost(), 'singeo.com')) {
+            $brand = 'singeo';
+        }
+
+        if (empty($brand) && !empty(user())) {
             $brand = BrandService::getLastUsedBrand(user());
+        }
+
+        if (!empty($brand)) {
+            if (!empty(user())) {
+                $this->brandService->setLastUsedBrand(user(), Brand::from($brand));
+            }
 
             // set railforums brand and DB connection
             $railforumsConnectionName = config('railforums.brand_database_connection_names')[$brand];
@@ -56,8 +75,9 @@ class SetLastUsedBrand
 
             config()->set('railcontent.brand', $brand);
             config()->set('points.brand', $brand);
-
             config()->set('railnotifications.brand', $brand);
+            config()->set('lead-tracker.brand', $brand);
+            config()->set('customer-io.brand', $brand);
 
             config()->set('event-data-synchronizer.customer_io_brand_activity_event', $brand);
             config()->set('event-data-synchronizer.brand', $brand);

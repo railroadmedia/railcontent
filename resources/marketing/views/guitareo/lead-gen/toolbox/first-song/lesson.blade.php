@@ -1,13 +1,16 @@
-@extends('guitareo.lead-gen.starter-kit.starter-kit-layout')
+@extends('guitareo.lead-gen.partials._lesson-page-layout')
 
-@section('head-includes')
-    <title>Playing Your First Song</title>
-@endsection
+@section('title', 'Tool Box | Guitareo')
 
-@section('body-content')
-    @include('guitareo.lead-gen.toolbox._header')
+@section('meta-description', "Get instant-access to over 50 step-by-step guitar lessons covering nine essential topics. These exclusive video lessons are provided by Nate Savage of Guitareo.com.")
 
-    @include('guitareo.lead-gen.partials.lesson-page1')
+@section('image', 'https://guitarlessons-com-public.s3.amazonaws.com/images/guitar-toolbox-og.jpg')
 
-    @include('guitareo.lead-gen.toolbox.first-song._lesson-grid')
-@endsection
+@section('url', 'https://www.guitareo.com/toolbox')
+
+@section('all-lesson-link', '/toolbox/lessons')
+
+@extends('guitareo.lead-gen.starter-kit.partials._lesson-page-layout')
+
+@section('lesson-total-number', 9)
+

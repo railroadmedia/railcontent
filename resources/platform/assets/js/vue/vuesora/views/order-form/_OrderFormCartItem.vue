@@ -1,11 +1,11 @@
 <template>
     <div class="cart-item-row flex flex-row ph-2 pt-2">
-        <div class="flex flex-column rounded cart-thumbnail mb-2">
+        <div class="flex flex-column rounded-full overflow-hidden cart-thumbnail mb-2">
             <div
                 class="square rounded bg-center"
             >
                 <img
-                    :src="item.thumbnail_url"
+                    :src="'https://cdn.musora.com/image/fetch/w_290,q_auto:best/' + item.thumbnail_url"
                     class="rounded"
                 >
             </div>
@@ -13,7 +13,7 @@
         <div class="flex flex-column mb-2 pl">
             <div class="flex flex-row flex-wrap align-v-top">
                 <div class="flex flex-column xs-12 sm-8">
-                    <h3 class="title font-bold">
+                    <h3 class="title font-black">
                         {{ item.name }}
                     </h3>
                     <h4 class="body text-grey-4">
@@ -22,31 +22,31 @@
 
                     <div
                         v-if="item.requires_shipping && !isCartLocked"
-                        class="flex flex-row align-h-left align-v-center"
+                        class="tw-inline-flex tw-justify-start tw-items-center tw-mr-auto"
                     >
-                        <div class="flex flex-column flex-auto">
-                            <h4 class="quantity-label tw-text-xs dense font-bold uppercase">
+                        <div class="tw-flex tw-items-center tw-mr-2">
+                            <h4 class="quantity-label leading-none font-black text-sm">
                                 Quantity:
                             </h4>
                         </div>
 
-                        <div class="flex flex-column flex-auto quantity-column">
+                        <div class="flex flex-column flex-auto quantity-column tw-mr-2">
                             <input
                                 v-model="$_itemQuantity"
                                 type="number"
                                 min="1"
                                 max="99"
-                                class="no-label text-center"
-                                style="border:none;background:none;padding: 0px 15px 0px 15px"
+                                class="no-label text-center text-sm p-1 rounded-full"
+                                style="border: 1px solid #d1d1d1;background:none;"
                             >
                         </div>
 
                         <div
-                            v-show="loading"
-                            class="flex flex-column flex-auto body"
+                            v-if="loading"
+                            class="flex flex-column flex-auto body "
                         >
                             <i
-                                class="fas fa-spin fa-spinner"
+                                class="fas fa-spin fa-spinner tw-inline-flex tw-justify-center"
                                 :class="themeTextClass"
                             ></i>
                         </div>
@@ -56,9 +56,9 @@
                         v-if="!isCartLocked"
                         class="flex flex-row"
                     >
-                        <div class="flex flex-column flex-auto">
+                        <div class="tw-inline-flex tw-flex-col tw-mr-auto">
                             <a
-                                class="text-error tw-text-xs dense font-bold pointer uppercase"
+                                class="text-error text-xs mt-1 pointer"
                                 title="Remove Item"
                                 @click.stop.prevent="removeCartItem"
                             >
@@ -71,14 +71,14 @@
                     <div class="flex flex-column">
                         <h3
                             v-if="isDiscounted"
-                            class="tw-text-xs font-bold font-strike text-grey-3 mr-1 m-xs-only"
+                            class="tw-text-xs font-normal font-strike text-grey-3 mr-1 m-xs-only"
                         >
                             ${{ Number(item.price_before_discounts).toFixed(2) }}
                         </h3>
 
                         <h2
                             v-if="totalPriceAfterDiscounts > 0"
-                            class="title font-bold"
+                            class="title font-black"
                             :class="themeTextClass"
                         >
                             ${{ totalPriceAfterDiscounts }}
@@ -86,7 +86,7 @@
 
                         <h2
                             v-if="totalPriceAfterDiscounts <= 0"
-                            class="title font-bold"
+                            class="title font-black"
                             :class="themeTextClass"
                         >
                             FREE
@@ -122,6 +122,10 @@ export default {
     props: {
         item: {
             type: Object,
+        },
+
+        cartDataUrl: {
+            type: String,
         },
 
         isCartLocked: {
@@ -169,17 +173,23 @@ export default {
         },
     },
     mounted() {
+        // console.log(this.itemQuantity)
     },
     methods: {
         updateCartItemQuantity(quantity) {
             this.loading = true;
-
-            EcommerceService.updateCartItemQuantity({
-                productSku: this.item.sku,
-                quantity,
-            })
-                .then(this.handleResponse)
+            EcommerceService.updateCartItemQuantity(
+                this.cartDataUrl,
+                {
+                    productSku: this.item.sku,
+                    quantity,
+                }
+            )
+                .then((response) => {
+                    this.handleResponse(response)
+                })
                 .catch(() => {
+                    console.log('ERROR')
                     this.showErrorToast();
                     this.loading = false;
                 });
@@ -188,10 +198,12 @@ export default {
         removeCartItem() {
             this.loading = true;
 
-            EcommerceService.removeCartItem({
-                productSku: this.item.sku,
-            })
-                .then(this.handleResponse);
+            EcommerceService.removeCartItem(
+                this.cartDataUrl,
+                {
+                    productSku: this.item.sku,
+                }
+            ).then(this.handleResponse);
         },
 
         handleResponse(response) {
@@ -203,8 +215,9 @@ export default {
 
             this.loading = false;
         },
+
         showErrorToast() {
-                            Toasts.push({
+                Toasts.push({
                     icon: 'disappointed',
                     title: 'Something went wrong!',
                     themeColor: this.themeColor,

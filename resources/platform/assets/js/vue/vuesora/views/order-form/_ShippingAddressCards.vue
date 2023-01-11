@@ -8,7 +8,7 @@
                     :class="{ 'card-selected': newAddress }"
                 >
                     <div class="flex flex-column xs-1 align-center align-v-center">
-                        <input  
+                        <input
                             id="address-0"
                             type="radio"
                             name="shippingAddressOption"
@@ -18,7 +18,7 @@
                     </div>
                     <div class="flex flex-column xs-11 align-left align-v-center text-left">
                         <p class="tiny">
-                            <span class="font-bold">
+                            <span class="font-black">
                                 Create a new shipping address.
                             </span>
                         </p>
@@ -50,7 +50,7 @@
 
                     <div class="flex flex-column xs-7 align-left text-left pr-1 border-gray-right">
                         <p class="tiny">
-                            <span class="font-bold">
+                            <span class="font-black">
                                 {{ thisShippingAddress.attributes.first_name }}
                                 {{ thisShippingAddress.attributes.last_name }}
                             </span>
@@ -70,7 +70,7 @@
                         class="flex flex-column xs-4 align-left text-left pl-2"
                     >
                         <p class="tiny">
-                            <span class="font-bold">
+                            <span class="font-black">
                                 {{ thisShippingAddress.attributes.city }}
                             </span>
                         </p>
@@ -89,7 +89,7 @@
 <script>
 export default {
     name: 'ShippingAddressCards',
-    
+
     props: {
         shippingAddresses: {
             type: Object,
@@ -121,7 +121,7 @@ export default {
                     return true;
                 }
 
-                this.shippingAddresses.data.some((address) => { 
+                this.shippingAddresses.data.some((address) => {
                     if (address.id === localStorage.getItem('lastAddressId')) {
                         this.updateSelectedAddress(address);
                         return true;
@@ -156,7 +156,7 @@ export default {
     },
 };
 </script>
-<style lang="scss"> 
+<style lang="scss">
     .card-selected {
         background-color: #efefef;
         box-shadow: 2px 5px 10px rgba(100,100,100,.5);

@@ -4,8 +4,9 @@ namespace Modules\UserManagementSystem\Models;
 
 use App\Modules\Ecommerce\Models\Subscription;
 use App\Modules\Mentor\Models\MentorStudent;
+use App\Modules\Notifications\Models\NotificationSetting;
+use App\Modules\Notifications\Models\NotificationSettings;
 use Barryvdh\LaravelIdeHelper\Eloquent;
-use DateTimeZone;
 use Exception;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable;
@@ -211,6 +212,13 @@ use Spatie\Permission\Traits\HasRoles;
  * @property mixed|null $brand_total_xp
  * @property Collection $subscriptions
  * @property mixed|null $brand_minutes_practiced
+ * @property Collection $notificationSettings
+ * @property string|null $membership_level // can be 'basic' or 'plus'
+ * @property-read int|null $notification_settings_count
+ * @property-read int|null $subscriptions_count
+ * @method static Builder|User whereBrandMinutesPracticed($value)
+ * @method static Builder|User whereBrandTotalXp($value)
+ * @method static Builder|User whereMembershipLevel($value)
  */
 class User extends Model implements Authenticatable, CanResetPassword, AuthorizableContract
 {
@@ -218,6 +226,8 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     use HasApiTokens;
     use HasRoles;
     use Authorizable;
+
+    private ?NotificationSettings $notificationSettingsLookup = null;
 
     protected $hidden = ['password', 'session_salt'];
     protected $table = 'usora_users';
@@ -299,6 +309,19 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         return $this->hasMany(Subscription::class, 'user_id');
     }
 
+    public function notificationSettings(): HasMany
+    {
+        return $this->hasMany(NotificationSetting::class, 'user_id');
+    }
+
+    public function getNotificationSetting(string $brand, string $settingName): bool
+    {
+        if (!$this->notificationSettingsLookup) {
+            $this->notificationSettingsLookup = new NotificationSettings($this->notificationSettings);
+        }
+        return $this->notificationSettingsLookup->getSetting($brand, $settingName);
+    }
+
     /**
      * @return int
      */
@@ -356,6 +379,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
 
         return 0;
     }
+
     /**
      * @return Attribute
      */
@@ -397,8 +421,6 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     }
 
     /**
-     * Values: pack, member, lifetime, coach, house-coach, team
-     *
      * @return Attribute
      */
     public function timezone(): Attribute
@@ -761,6 +783,18 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
             !empty($this->membership_expiration_date) && $this->membership_expiration_date < Carbon::now();
     }
 
+    public function isABasicMember()
+    {
+        return $this->isAMember() && $this->membership_level == 'basic';
+    }
+
+    public function isAPlusMember()
+    {
+        return true; // todo: remove when permissions are live
+
+        return ($this->isAMember() && $this->membership_level == 'plus') || $this->isAdmin();
+    }
+
     public function getTotalXp()
     {
         return $this->total_xp ?? 0;
@@ -770,7 +804,9 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     {
         return !$this->isAdmin()
             && !empty($this->membership_expiration_date)
-            && $this->membership_expiration_date >= Carbon::now()->addDays(-config('mentor.active_after_membership_expired_days'));
+            && $this->membership_expiration_date >= Carbon::now()->addDays(
+                -config('mentor.active_after_membership_expired_days')
+            );
     }
 
     /**

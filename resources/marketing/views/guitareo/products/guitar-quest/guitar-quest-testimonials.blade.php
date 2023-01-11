@@ -1,20 +1,21 @@
-@extends('guitareo._partials.layout')
+@extends('guitareo.products.guitar-quest.guitar-quest-layout')
 
-@section('head-includes')
+@section('meta')
     @parent
-
     <title>GuitarQuest | Your Guitar Journey Starts Here</title>
     <meta name="description" content="Rob Scallon’s online guitar lessons for getting started on the guitar and making your favorite musical projects come to life."/>
 
     <meta property="og:url" content="https://www.guitareo.com/guitar-quest/testimonials"/>
     <meta property="og:title" content="GuitarQuest | Your Guitar Journey Starts Here"/>
     <meta property="og:description" content="Rob Scallon’s online guitar lessons for getting started on the guitar and making your favorite musical projects come to life."/>
-    <meta property="og:image" content="{{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/share-image.png", ["auto" => "format", "w" => 1500]) }}"/>
+    <meta property="og:image" content="https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Fshare-image.png?auto=format&ixlib=php-1.2.1&w=1500&s=4294b260a12b5d809a9b8182414e2312"/>
+@stop()
 
-    <link href="{{ asset('assets/marketing/nav-footer.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/marketing/fonts.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/marketing/guitar-quest.css') }}" rel="stylesheet">
-
+@section('styles')
+    @parent
+    <link href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/guitareo/fonts.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/guitareo/guitar-quest.css') }}" rel="stylesheet">
     <style>
         h1 strong, h2 strong, h3 strong, h4 strong, h5 strong, h6 strong {
             font-weight: 900;
@@ -169,9 +170,9 @@
     </style>
 @stop()
 
-@section('layout-scripts')
+@section('scripts')
     @parent
-    <script src="{{ asset('assets/marketing/nav-footer.js') }}"></script>
+    <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             //sub nav sticky function
@@ -182,7 +183,7 @@
                 var header = $(".topic-link-wrap-shim").offset().top;
                 var motivated = $('#motivated').offset().top - 50;
                 var faster = $('#faster').offset().top - 150;
-                var order = $('.py-24.bg-top.bg-cover').offset().top - 150;
+                var order = $('.tw-py-24.tw-bg-top.tw-bg-cover').offset().top - 150;
 
                 if ($(this).scrollTop() > (header - 50) && $(this).scrollTop() < order) {
                     navigation.addClass('stick-to-top');
@@ -208,44 +209,43 @@
     </script>
 @stop()
 
-@section('layout-body')
+@section('content')
     @include("guitareo.sales.partials._nav")
-
     @php
-        $orderLink = '/ecommerce/add-to-cart?products[guitar-quest]=1&redirect=/shop&payment-plan=1';
-        $orderLinkAlt = '/ecommerce/add-to-cart?products[guitar-quest]=1&redirect=/shop&payment-plan=5';
-        $productPrice = \App\Prices::$guitarQuestRegular
+        $orderLink = '/ecommerce/add-to-cart?products[guitar-quest]=1&redirect=/order&payment-plan=1';
+        $orderLinkAlt = '/ecommerce/add-to-cart?products[guitar-quest]=1&redirect=/order&payment-plan=5';
+        $productPrice = floatval($productPrices['guitar-quest']->discounted_price)
     @endphp
 
     <header class="header">
-        <div class="container mx-auto"></div>
+        <div class="tw-container tw-mx-auto"></div>
     </header>
 
-    <section class="py-8 md:py-12 lg:py-14 text-center text-white" style="background-color:#000512;">
-        <div class="container mx-auto" style="max-width: 870px;">
-            <div class="w-full px-3 md:px-4 ">
-                <img class="max-w-xs md:max-w-sm lg:max-w-md mb-2 md:mb-3" src="https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/guitar-quest-logo.png"><br>
-                <h4 class="mb-4 md:mb-6"><em>What are new guitarists saying?</em></h4>
+    <section class="tw-py-8 md:tw-py-12 lg:tw-py-14 tw-text-center tw-text-white" style="background-color:#000512;">
+        <div class="tw-container tw-mx-auto" style="max-width: 870px;">
+            <div class="tw-w-full tw-px-3 md:tw-px-4 ">
+                <img class="tw-max-w-xs md:tw-max-w-sm lg:tw-max-w-md tw-mb-2 md:tw-mb-3" src="https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/guitar-quest-logo.png"><br>
+                <h4 class="tw-mb-4 md:tw-mb-6"><em>What are new guitarists saying?</em></h4>
             </div>
-            <div class="topic-link-wrap-shim px-3 md:px-4 w-full hidden md:inline-block"></div>
-            <div class="topic-link-wrap w-full z-50 p-2 md:p-3 w-full clearfix">
-                <div class="mx-auto flex" style="max-width:560px">
-                    <div class="px-2 w-full md:w-1/2">
-                        <a class="button outline mb-3 md:mb-0 w-full block anchor-slide topic-link motivated" href="#motivated">Stay <br class="hidden sm:inline md:hidden"> Motivated</a>
+            <div class="topic-link-wrap-shim tw-px-3 md:tw-px-4 tw-w-full tw-hidden md:tw-inline-block"></div>
+            <div class="topic-link-wrap tw-w-full tw-z-50 tw-p-2 md:tw-p-3 tw-w-full clearfix">
+                <div class="tw-mx-auto tw-flex" style="max-width:560px">
+                    <div class="tw-px-2 tw-w-full md:tw-w-1/2">
+                        <a class="button outline tw-mb-3 md:tw-mb-0 tw-w-full tw-block anchor-slide topic-link motivated" href="#motivated">Stay <br class="tw-hidden sm:tw-inline md:tw-hidden"> Motivated</a>
                     </div>
-                    <div class="px-2 w-full md:w-1/2">
-                        <a class="button outline mb-3 md:mb-0 w-full block anchor-slide topic-link faster" href="#faster">Learn<br class="hidden sm:inline md:hidden"> Faster</a>
+                    <div class="tw-px-2 tw-w-full md:tw-w-1/2">
+                        <a class="button outline tw-mb-3 md:tw-mb-0 tw-w-full tw-block anchor-slide topic-link faster" href="#faster">Learn<br class="tw-hidden sm:tw-inline md:tw-hidden"> Faster</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="text-center px-4 md:px-8 text-white" style="background-color:#000512;">
+    <section class="tw-text-center tw-px-4 md:tw-px-8 tw-text-white" style="background-color:#000512;">
         <div id="motivated" class="anchor"></div>
-        <div class="container mx-auto" style="max-width: 850px;">
-            <h1 class="font-bison-bold leading-none text-3xl md:text-6xl lg:text-7xl mb-12 md:mb-20 lg:mb-28"><strong>STAY MOTIVATED <br class="inline md:hidden"> & HAVE FUN</strong></h1>
-            <div class="flex flex-wrap">
+        <div class="tw-container tw-mx-auto" style="max-width: 850px;">
+            <h1 class="font-bison-bold tw-leading-none tw-text-3xl md:tw-text-6xl lg:tw-text-7xl tw-mb-12 md:tw-mb-20 lg:tw-mb-28"><strong>STAY MOTIVATED <br class="tw-inline md:tw-hidden"> & HAVE FUN</strong></h1>
+            <div class="tw-flex tw-flex-wrap">
                 @php
                     $testimonials = [
                         [
@@ -328,13 +328,13 @@
                     ]
                 @endphp
                 @foreach($testimonials as $testimonial)
-                    <div class="text-white text-center pb-12 md:pb-24">
-                        <img class="float-left rounded-full overflow-hidden hidden md:inline-block md:w-32 lg:w-44" src="{{ $testimonial['image'] }}">
-                        <div class="quote-wrap md:pl-5 lg:pl-10 float-left text-center md:text-left">
-                            <h4 class="text-left leading-none mb-3 md:mb-4 lg:mb-5"><em>"{!! $testimonial['highlight'] !!}"</em></h4>
-                            <p class="text-left leading-relaxed mx-auto">{!! $testimonial['testimonial'] !!}</p>
-                            <img class="w-28 rounded-full inline md:hidden mt-4" src="{{ $testimonial['image'] }}">
-                            <p class="text-goldenrod leading-none mx-auto mt-4 lg:mt-5"><strong>{{ $testimonial['name'] }}</strong><br class="inline md:hidden"><span class="hidden md:inline"> - </span><span>{{ $testimonial['location'] }}</span></p>
+                    <div class="tw-text-white tw-text-center tw-pb-12 md:tw-pb-24">
+                        <img class="tw-float-left tw-rounded-full tw-overflow-hidden tw-hidden md:tw-inline-block md:tw-w-32 lg:tw-w-44" src="{{ $testimonial['image'] }}">
+                        <div class="quote-wrap md:tw-pl-5 lg:tw-pl-10 tw-float-left tw-text-center md:tw-text-left">
+                            <h4 class="tw-text-left tw-leading-none tw-mb-3 md:tw-mb-4 lg:tw-mb-5"><em>"{!! $testimonial['highlight'] !!}"</em></h4>
+                            <p class="tw-text-left tw-leading-relaxed tw-mx-auto">{!! $testimonial['testimonial'] !!}</p>
+                            <img class="tw-w-28 tw-rounded-full tw-inline md:tw-hidden tw-mt-4" src="{{ $testimonial['image'] }}">
+                            <p class="text-goldenrod tw-leading-none tw-mx-auto tw-mt-4 lg:tw-mt-5"><strong>{{ $testimonial['name'] }}</strong><br class="tw-inline md:tw-hidden"><span class="tw-hidden md:tw-inline"> - </span><span>{{ $testimonial['location'] }}</span></p>
                         </div>
                     </div>
                 @endforeach
@@ -342,11 +342,11 @@
         </div>
     </section>
 
-    <section class="text-center px-4 md:px-8 text-white" style="background-color:#000512;">
+    <section class="tw-text-center tw-px-4 md:tw-px-8 tw-text-white" style="background-color:#000512;">
         <div id="faster" class="anchor"></div>
-        <div class="container mx-auto" style="max-width: 850px;">
-            <h1 class="font-bison-bold leading-none text-3xl md:text-6xl lg:text-7xl pt-12 md:pt-16 lg:pt-18 mb-12 md:mb-20 lg:mb-28"><strong>LEARN FASTER <br class="inline md:hidden"> & PLAY SONGS</strong></h1>
-            <div class="flex flex-wrap">
+        <div class="tw-container tw-mx-auto" style="max-width: 850px;">
+            <h1 class="font-bison-bold tw-leading-none tw-text-3xl md:tw-text-6xl lg:tw-text-7xl tw-pt-12 md:tw-pt-16 lg:tw-pt-18 tw-mb-12 md:tw-mb-20 lg:tw-mb-28"><strong>LEARN FASTER <br class="tw-inline md:tw-hidden"> & PLAY SONGS</strong></h1>
+            <div class="tw-flex tw-flex-wrap">
                 @php
                     $testimonials = [
                         [
@@ -422,13 +422,13 @@
                     ]
                 @endphp
                 @foreach($testimonials as $testimonial)
-                    <div class="text-white text-center pb-12 md:pb-24">
-                        <img class="float-left rounded-full overflow-hidden hidden md:inline-block md:w-32 lg:w-44" src="{{ $testimonial['image'] }}">
-                        <div class="quote-wrap md:pl-5 lg:pl-10 float-left text-center md:text-left">
-                            <h4 class="text-left leading-none mb-3 md:mb-4 lg:mb-5"><em>"{!! $testimonial['highlight'] !!}"</em></h4>
-                            <p class="text-left leading-relaxed mx-auto">{!! $testimonial['testimonial'] !!}</p>
-                            <img class="w-28 rounded-full inline md:hidden mt-4" src="{{ $testimonial['image'] }}">
-                            <p class="text-goldenrod leading-none mx-auto mt-4 lg:mt-5"><strong>{{ $testimonial['name'] }}</strong><br class="inline md:hidden"><span class="hidden md:inline"> - </span><span>{{ $testimonial['location'] }}</span></p>
+                    <div class="tw-text-white tw-text-center tw-pb-12 md:tw-pb-24">
+                        <img class="tw-float-left tw-rounded-full tw-overflow-hidden tw-hidden md:tw-inline-block md:tw-w-32 lg:tw-w-44" src="{{ $testimonial['image'] }}">
+                        <div class="quote-wrap md:tw-pl-5 lg:tw-pl-10 tw-float-left tw-text-center md:tw-text-left">
+                            <h4 class="tw-text-left tw-leading-none tw-mb-3 md:tw-mb-4 lg:tw-mb-5"><em>"{!! $testimonial['highlight'] !!}"</em></h4>
+                            <p class="tw-text-left tw-leading-relaxed tw-mx-auto">{!! $testimonial['testimonial'] !!}</p>
+                            <img class="tw-w-28 tw-rounded-full tw-inline md:tw-hidden tw-mt-4" src="{{ $testimonial['image'] }}">
+                            <p class="text-goldenrod tw-leading-none tw-mx-auto tw-mt-4 lg:tw-mt-5"><strong>{{ $testimonial['name'] }}</strong><br class="tw-inline md:tw-hidden"><span class="tw-hidden md:tw-inline"> - </span><span>{{ $testimonial['location'] }}</span></p>
                         </div>
                     </div>
                 @endforeach

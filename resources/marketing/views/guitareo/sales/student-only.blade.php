@@ -1,14 +1,13 @@
 @extends('guitareo.sales.standard-layout', [
-    "openVersion" => true
+"openVersion" => true
 ])
 
-@section('head-includes')
-    @parent
-
+@section('meta')
     <meta name="robots" content="noindex">
-    <title>Online Beginner Guitar Lessons | Guitareo.com</title>
+    <title>Learn to play guitar anytime with real teachers. | Guitareo.com</title>
     <meta property="og:url" content="https://www.guitareo.com"/>
-    <meta property="og:title" content="Guitareo.com: Online Beginner Guitar Lessons"/>
+    <meta property="og:title" content="Guitareo.com: Learn to play guitar anytime with real teachers."/>
+    @parent
 @endsection
 
 @section('promo-banner')
@@ -32,7 +31,7 @@
             <div class="sm:flex mx-auto items-center text-center" style="max-width: 890px;">
                 <img class="w-full avatar mx-auto mb-3 md:mb-0" src="https://drumeo-assets.s3.amazonaws.com/sales/2021/musora-brands.png">
                 <div class="md:text-left px-2 md:pl-8 lg:pl-10">
-                    <h6 class="leading-normal"><strong>Musora Students</strong> To thank you for already being a Musora student, you’ll save {{ round(100 - (100 * (77 / \App\Prices::$guitareoMembershipAnnualFull))) }}% when you add a Guitareo membership to your existing account. (Normally ${{ \App\Prices::$guitareoMembershipAnnualFull }} per year, yours for just $77.)</h6>
+                    <h6 class="leading-normal"><strong>Musora Students</strong> To thank you for already being a Musora student, you’ll save {{ round(100 - (100 * (77 / Prices::$plusSubscriptionAnnualFull))) }}% when you add a Guitareo membership to your existing account. (Normally ${{ Prices::$plusSubscriptionAnnualFull }} per year, yours for just $77.)</h6>
                 </div>
             </div>
         </div>
@@ -40,14 +39,14 @@
     <a href="#customize-anchor" class="promo-banner anchor-slide methodcta text-white" style="background-color:#000318;">
         <div class="container mx-auto">
             <div class="text text-center">
-                <p class="uppercase"><strong>Musora Students Join Guitareo<br> For Just <s class="opacity-60">${{ \App\Prices::$guitareoMembershipAnnualFull }}</s> $77 per year</strong></p>
+                <p class="uppercase"><strong>Musora Students Join Guitareo<br> For Just <s class="opacity-60">${{ Prices::$plusSubscriptionAnnualFull }}</s> $77 per year</strong></p>
             </div>
         </div>
     </a>
 @endsection
 
 @section('comparison')
-    <td><s>${{ \App\Prices::$guitareoMembershipAnnualFull }}</s> <strong>$77</strong><br>PER YEAR</td>
+    <td><s>${{ Prices::$plusSubscriptionAnnualFull }}</s> <strong>$77</strong><br>PER YEAR</td>
 @endsection
 
 @section('final')
@@ -55,8 +54,8 @@
     <section class="content-section relative overflow-hidden text-white grey text-center customize py-8 md:py-12 lg:py-20" style="background-color:#000;">
         <div class="container mx-auto">
             <img class="h-5 md:h-7 lg:h-10 mb-2" src="https://guitareo.s3.amazonaws.com/sales/guitareo-logo-green.png">
-            <h1 class="tw-font-roboto uppercase text-2xl md:text-4xl lg:text-5xl"><strong>{{ round(100 - (100 * (77 / \App\Prices::$guitareoMembershipAnnualFull))) }}%-OFF MUSORA DISCOUNT</strong></h1>
-            <h2 class="mt-4 md:mt-7"><strong>Join Guitareo for just<br class="inline md:hidden"> <s class="opacity-60">${{ \App\Prices::$guitareoMembershipAnnualFull }}</s> <span class="text-guitareo">$77</span> per year.</strong></h2>
+            <h1 class="font-roboto uppercase text-2xl md:text-4xl lg:text-5xl"><strong>{{ round(100 - (100 * (77 / Prices::$plusSubscriptionAnnualFull))) }}%-OFF MUSORA DISCOUNT</strong></h1>
+            <h2 class="mt-4 md:mt-7"><strong>Join Guitareo for just<br class="inline md:hidden"> <s class="opacity-60">${{ Prices::$plusSubscriptionAnnualFull }}</s> <span class="text-guitareo">$77</span> per year.</strong></h2>
             <h5 class="mt-3 mb-4 md:mb-7 text-navy"> (90-Day Money Back Guarantee.)</h5>
             <a class="join blue methodcta" href="/ecommerce/add-to-cart?products[GUITAREO-1-YEAR-MEMBERSHIP]=1&redirect=/order&promo-code=student-discount&locked=true">Get Started &raquo;</a>
             <p class="text-navy my-5"><em>Your discounted rate is conditional on your continuation as a multi-platform student. If you  <br class="hidden md:inline">

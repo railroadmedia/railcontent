@@ -1,4 +1,4 @@
-@extends('layouts.global-layout')
+@extends('guitareo._partials.global-layout')
 
 @section('meta')
     @parent
@@ -9,21 +9,21 @@
     <meta name="description" content="You can peruse Ayla’s top gear recommendations with confidence, knowing they’ve passed the test of millions of YouTube views -- and gotten the Guitareo stamp of approval!">
     <meta property="og:description" content="You can peruse Ayla’s top gear recommendations with confidence, knowing they’ve passed the test of millions of YouTube views -- and gotten the Guitareo stamp of approval!">
 
-    <meta property="og:image" content="https://d122ay5chh2hr5.cloudfront.net/sales/2022/og-image.jpg">
+    <meta property="og:image" content="https://guitareo.s3.amazonaws.com/sales/2023/share-image-guitareo.jpg">
     <meta property="og:url" content="https://www.guitareo.com/{{ Request::path() }}">
 @stop()
 
 @section('styles')
     @parent
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
-    <link href="{{ asset('/assets/css/tailwind-helpers.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/marketing/nav-footer.css') }}" rel="stylesheet">
-    <link href="{{ asset('/assets/marketing/shop.css') }}" rel="stylesheet">
+    @include('_partials.layout._tailwindcdn')
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/guitareo/shop.css') }}" rel="stylesheet">
 @stop()
 
 @section('scripts')
     @parent
-    <script type="text/javascript" src="/assets/marketing/nav-footer.js"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 
     <script>
         $(function () {
@@ -39,7 +39,7 @@
 @stop()
 
 @section('content')
-    @include('sales.partials._nav')
+    @include('guitareo.sales.partials._nav')
 
     <header class="relative text-white text-center bg-cover bg-top pb-8 md:pb-12 lg:pb-16 pt-40 md:pt-64 lg:pt-96 px-4" style="background-color:#000c18;background-image:url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://guitareo.s3.amazonaws.com/shop/affiliate-header.jpg);">
         <div class="container mx-auto relative z-10">
@@ -194,5 +194,5 @@
         </div>
     </section>
 
-    @include('sales.partials._footer')
+    @include('guitareo.sales.partials._footer')
 @stop

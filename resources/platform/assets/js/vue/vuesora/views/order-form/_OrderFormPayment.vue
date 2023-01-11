@@ -29,19 +29,19 @@
                 </div>
 
                 <div class="flex flex-column xs-12 sm-6 ph-1 pr-2 mb-1">
-                    <div 
+                    <div
                         class="flex flex-row payment-types flex-wrap"
                         :class="{ 'payment-selected': paymentSelected }"
                     >
-                        <div 
+                        <div
                             v-for="(type,i) in paymentTypes"
                             :key="i"
                             class="mr-1 payment-type"
                             :class="{ 'type-selected': type.selected }"
                             @click="selectPaymentType(i)"
                         >
-                            <svg-icon 
-                                :icon-name="type.name" 
+                            <svg-icon
+                                :icon-name="type.name"
                                 width="60px"
                             ></svg-icon>
                         </div>
@@ -49,10 +49,11 @@
                 </div>
             </div>
 
-            <!-- v-show is used to keep the stripe elements iframes loaded but hidden, using v-if would require re-initialization -->
+            <!-- v-if is used to keep the stripe elements iframes loaded but hidden, using v-if would require re-initialization -->
+            <!-- Hiding with just CSS, need to investigate why there are problems with Stripe when hiding with v-if (yt) -->
             <div
-                v-show="$_paymentMethod === 'credit_card'"
                 class="flex flex-row flex-wrap"
+                :class="$_paymentMethod !== 'credit_card' ? 'hidden' : ''"
             >
                 <div class="flex flex-column xs-12 sm-6 ph-1 mb-2">
                     <div class="form-group">
@@ -229,7 +230,7 @@
                                 name="update-active-subscriptions"
                                 type="checkbox"
                             >
-  
+
                             <span class="toggle">
                                 <span class="handle"></span>
                             </span>
@@ -237,7 +238,7 @@
 
                         <label
                             for="updateActiveSubscriptions"
-                            class="toggle-label font-bold"
+                            class="toggle-label font-black"
                         >
                             Update my existing active subscriptions to use this payment method.
                         </label>
@@ -263,7 +264,7 @@
 
                         <label
                             for="renewDueSubscription"
-                            class="toggle-label font-bold"
+                            class="toggle-label font-black"
                         >
                             Renew my subscription now.
                         </label>
@@ -289,20 +290,20 @@
                             <div class="flex flex-column xs-12 sm-12 ph-1 align-h-right mb-2">
                                 <div
                                     v-if="totals.shipping"
-                                    class="body font-bold"
+                                    class="body font-black"
                                 >
                                     Shipping: ${{ totalShipping }}
                                 </div>
 
-                                <div class="body font-bold">
+                                <div class="body font-black">
                                     Tax: ${{ totalTax }}
                                 </div>
 
-                                <div class="body font-bold">
+                                <div class="body font-black">
                                     <span class="display">${{ totalDue }}</span> USD
                                 </div>
 
-                                <div class="body font-bold">
+                                <div class="body font-black">
                                     Due Today
                                 </div>
                             </div>
@@ -531,15 +532,19 @@ export default {
             this.$emit('formSubmit');
         },
 
+        deleteErrors() {
+            Object.keys(this.errors).forEach((error) => {
+                    this.errors[error] = [];
+            });
+        },
+
         cancelForm() {
             this.initStripeElements();
 
             this.$emit('formCancel');
 
             setTimeout(() => {
-                Object.keys(this.errors).forEach((error) => {
-                    this.errors[error] = [];
-                });
+                this.deleteErrors();
 
                 this.$nextTick(() => this.$forceUpdate());
             }, 200);
@@ -613,8 +618,8 @@ export default {
 </script>
 <style lang="scss">
     .payment-type {
-      cursor: pointer; 
-      transition: .1s linear opacity; 
+      cursor: pointer;
+      transition: .1s linear opacity;
     }
     .payment-types.payment-selected .payment-type,
     .payment-types:hover .payment-type {

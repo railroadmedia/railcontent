@@ -1,0 +1,625 @@
+@import "../_variables";
+
+body {
+  color: #000;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $opensans;
+  strong {
+    font-weight: 800;
+  }
+}
+
+.text-blue {
+  color: $drumeoBlue;
+}
+
+img {
+  width: auto;
+  max-width: 100%;
+  display: inline-block;
+}
+
+.join {
+
+  &.smaller {
+    padding: 13px 7%;
+    font-size: 17px;
+    @include tablet {
+      font-size: 19px;
+      padding: 15px 7%;
+    }
+  }
+
+  &.bigger {
+    @include desktopOld {
+      font-size: 34px;
+    }
+  }
+
+  &.outline {
+    background: transparent;
+    border: 2px solid #000;
+    color: #000;
+
+    &:hover {
+      background: #000;
+      color: #fff;
+    }
+
+    &.white {
+      border-color: #fff;
+      color: #fff;
+
+      &:hover {
+        background: #fff;
+        color: #000;
+      }
+    }
+  }
+}
+
+.trailer-section {
+  background: #00182d;
+  color: #FFF;
+  padding: 40px 0 0;
+  @include tablet {
+    padding: 50px 0 0;
+  }
+
+  p {
+    text-transform: uppercase;
+    color: #525963;
+    font-size: 14px;
+    margin: 0 auto 15px;
+    @include tablet {
+      font-size: 16px;
+      margin: 0 auto 20px;
+
+    }
+
+    img {
+      margin: 0 5px 0 0;
+      height: 25px;
+      vertical-align: bottom;
+      @include tablet {
+        margin: 0 7px 0 0;
+        height: 30px;
+      }
+    }
+  }
+
+  h1 {
+    font: 400 19px/1.2em $opensans;
+    margin: 0 auto 25px;
+    @include tablet {
+      font-size: 25px;
+      margin: 0 auto 35px;
+    }
+    @include desktopOld {
+      font-size: 32px;
+      margin: 0 auto 45px;
+    }
+
+    strong {
+      font-size: 28px;
+      line-height: 1.2em;
+      @include tablet {
+        font-size: 38px;
+      }
+      @include desktopOld {
+        font-size: 48px;
+      }
+    }
+  }
+
+  .ipad-phone {
+    position: relative;
+    margin: 0 auto -10px;
+    width: 100%;
+    max-width: 330px;
+    @include tablet {
+      max-width: 600px;
+      margin: 0 auto -20px;
+    }
+    @include desktopOld {
+      max-width: 800px;
+      margin: 0 auto -25px;
+    }
+
+    .preview {
+      position: absolute;
+      margin: 0;
+      transform: translate(-50%, -50%);
+      top: 35%;
+      left: 27%;
+      width: 110px;
+      @include tablet {
+        left: 31%;
+        width: 130px;
+      }
+      @include desktopOld {
+        top: 37%;
+        left: 32%;
+        width: 140px;
+      }
+    }
+
+    i {
+      position: absolute;
+      top: 48%;
+      left: 42%;
+      transform: translate(-50%, -50%);
+      background: $pianoteRed;
+      border-radius: 50%;
+      text-align: center;
+      text-indent: 5px;
+      border: 3px solid #fff;
+      outline: none;
+      cursor: pointer;
+      font-size: 25px;
+      line-height: 52px;
+      width: 58px;
+      height: 58px;
+      @include tablet {
+        font-size: 35px;
+        line-height: 72px;
+        width: 78px;
+        height: 78px;
+      }
+
+      &:hover {
+        background: lighten($pianoteRed, 10%);
+      }
+    }
+  }
+}
+
+.download-pitch {
+  background: #eff0f1;
+  padding: 30px 15px 40px;
+  @include tablet {
+    padding: 40px 0;
+  }
+
+  p {
+    font: 400 14px/1.6em $opensans;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 270px;
+    @include tablet {
+      font-size: 17px;
+      max-width: 100%;
+    }
+    @include desktopOld {
+      font-size: 19px;
+    }
+
+    &.small {
+      font-size: 12px;
+    }
+  }
+
+  .download-badge img {
+    margin: 20px 4px;
+    width: 145px;
+    @include tablet {
+      width: 160px;
+      margin: 30px 15px;
+    }
+    @include desktopOld {
+      width: 180px;
+    }
+  }
+
+}
+
+.learn-play-watch {
+  padding: 40px 0;
+  @include tablet {
+    padding: 80px 15px;
+  }
+  @include desktopOld {
+    padding: 115px 20px;
+  }
+
+  .container {
+    max-width: 770px;
+    @include desktopOld {
+      max-width: 1040px;
+    }
+  }
+
+  h1 {
+    font: 800 30px/1em $opensans;
+    margin: 0 auto 10px;
+    @include tablet {
+      font-size: 50px;
+      margin: 0 auto 15px;
+    }
+    @include desktopOld {
+      font-size: 64px;
+    }
+  }
+
+  h2 {
+    font: 400 15px/1.5em $opensans;
+    margin: 0 auto;
+    @include tablet {
+      font-size: 22px;
+    }
+    @include desktopOld {
+      font-size: 26px;
+    }
+  }
+
+  img {
+    width: 100%;
+    max-width: 330px;
+    margin: 25px auto;
+    @include tablet {
+      max-width: 630px;
+      margin: 35px auto;
+    }
+    @include desktopOld {
+      max-width: 760px;
+      margin: 45px auto 35px;
+    }
+  }
+
+  .topic-wrap {
+    margin: 0 auto 60px;
+    @include tablet {
+      margin: 0 auto 110px;
+    }
+
+    &:last-child {
+      margin: 0 auto;
+    }
+
+    &.play img {
+      @include tablet {
+        max-width: 660px;
+      }
+      @include desktopOld {
+        max-width: 860px;
+      }
+    }
+
+    &.connection img {
+      @include tablet {
+        max-width: 720px;
+      }
+      @include desktopOld {
+        max-width: 940px;
+      }
+    }
+
+    &.watch img {
+      @include desktopOld {
+        max-width: 940px;
+      }
+    }
+  }
+}
+
+.final-pitch {
+  background: #eff0f1;
+  padding: 40px 15px 50px;
+  @include tablet {
+    padding: 60px 0 80px;
+  }
+  @include desktopOld {
+    padding: 75px 0 95px;
+  }
+
+  .container {
+    max-width: 1100px;
+  }
+
+  h1 {
+    font: 800 23px/1.3em $opensans;
+    margin: 0 auto 5px;
+    @include tablet {
+      font-size: 31px;
+      margin: 0 auto 45px;
+    }
+    @include desktopOld {
+      font-size: 39px;
+    }
+
+    sup {
+      font-size: 50%;
+      top: -0.8em;
+    }
+  }
+
+  p {
+    font: 400 14px/1.6em $opensans;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 270px;
+    @include tablet {
+      font-size: 17px;
+      max-width: 100%;
+    }
+    @include desktopOld {
+      font-size: 19px;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    &.small {
+      font-size: 12px;
+    }
+  }
+
+  .download-badge img {
+    margin: 0 4px 20px;
+    width: 150px;
+    @include tablet {
+      width: 160px;
+      margin: 0 15px 30px;
+    }
+    @include desktopOld {
+      width: 180px;
+    }
+  }
+
+  .option-wrap {
+    padding: 30px 0;
+    border: 2px solid #fff;
+    border-width: 0 0 2px;
+    @include tablet {
+      border-width: 0 2px 0 0;
+      padding: 27px 0;
+    }
+
+    &:last-child {
+      border: none;
+      padding-bottom: 0;
+    }
+
+    p {
+      margin: 0 auto 27px;
+      color: #666;
+      font: 400 14px/1em $opensans;
+      @include tablet {
+        font-size: 16px;
+      }
+    }
+
+    h4 {
+      font: 400 16px/1.4em $opensans;
+      margin: 0 auto;
+      @include tablet {
+        font-size: 17px;
+      }
+      @include desktopOld {
+        font-size: 19px;
+      }
+    }
+
+    .download-badge img {
+      margin: 30px 3px 0;
+      width: 145px;
+      @include tablet {
+        width: 160px;
+      }
+      @include desktopOld {
+        margin: 30px 7px 0;
+        width: 180px;
+      }
+    }
+
+    .join {
+      margin: 30px 0 0;
+      font-size: 16px;
+      padding: 16px 30px;
+      @include desktopOld {
+        font-size: 20px;
+        padding: 17px 30px;
+      }
+    }
+  }
+}
+
+.reveal-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2147483001;
+  display: none;
+  overflow-y: auto;
+  background-color: rgba(0, 0, 0, 0.8);
+
+  &:after {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-family: "Font Awesome 5 Pro";
+    font-weight: 900;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    content: "\f00d";
+    color: #fff;
+    z-index: 1;
+    opacity: 0.8;
+    position: absolute;
+    margin: 0;
+    line-height: 1em;
+    text-align: center;
+    display: inline-block;
+    outline: none;
+    top: 0;
+    right: 0;
+    font-size: 35px;
+    width: 35px;
+    @include tablet {
+      top: 7px;
+      right: 7px;
+      font-size: 50px;
+      width: 50px;
+    }
+  }
+
+  .reveal {
+    z-index: 1006;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    display: none;
+    background-color: #fefefe;
+    position: relative;
+    top: 100px;
+    margin-right: auto;
+    margin-left: auto;
+    overflow-y: auto;
+
+    width: 90%;
+    max-width: 75rem;
+    height: inherit;
+    min-height: 0;
+    outline: none;
+    padding: 0;
+    border: none;
+    border-radius: 7px;
+    @include tablet {
+      right: auto;
+      left: auto;
+      margin: 0 auto;
+    }
+
+    .flex-video {
+      margin: 0 auto;
+    }
+
+    p {
+      margin: 5px auto;
+    }
+
+    .join {
+      margin: 10px auto;
+    }
+
+    &.annual-pitch {
+      max-width: 740px;
+      padding: 15px 20px;
+      @include tablet {
+        padding: 15px 30px;
+      }
+      @include desktopOld {
+        padding: 15px 50px;
+      }
+
+      h3 {
+        line-height: 1.3em;
+      }
+
+      .flex-video {
+        margin: 20px auto;
+        border-radius: 7px;
+      }
+
+      .join {
+        margin: 0 auto;
+        @include tablet {
+          width: 75%;
+        }
+      }
+
+      p {
+        font-size: 13px;
+      }
+    }
+
+    &.coach-wrap {
+      border-radius: 10px;
+      text-align: center;
+      overflow: visible;
+      max-width: 330px;
+      @include tablet {
+
+        max-width: 450px;
+      }
+
+      .top-image {
+        position: relative;
+        background: #333 center top/cover no-repeat;
+        padding-bottom: 75%;
+        border-radius: 10px 10px 0 0;
+      }
+
+      .bottom-details {
+        user-select: none;
+        padding: 15px;
+        @include tablet {
+
+          padding: 20px;
+        }
+
+        h3 {
+          text-transform: uppercase;
+        }
+
+        p {
+          margin: 0 auto 3px;
+          @include tablet {
+
+            margin: 7px auto;
+          }
+
+          strong {
+            font-weight: 900;
+          }
+
+          .text-red {
+            text-transform: uppercase;
+          }
+        }
+
+        .bio {
+          margin: 0 auto;
+          text-align: left;
+          line-height: 1.3em;
+          @include tablet {
+
+            line-height: 1.5em;
+          }
+        }
+      }
+
+      .next-prev {
+        position: absolute;
+        top: 270px;
+        color: #fff;
+        cursor: pointer;
+        font-size: 40px;
+        @include tablet {
+
+          font-size: 70px;
+        }
+
+        &.fa-angle-left {
+          left: -21px;
+          @include tablet {
+
+            left: -50px;
+          }
+
+        }
+
+        &.fa-angle-right {
+          right: -21px;
+          @include tablet {
+            right: -50px;
+          }
+        }
+      }
+    }
+  }
+}
