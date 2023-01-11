@@ -1,7 +1,7 @@
-@extends($theme.'._partials.layout')
+@extends($brand.'._partials.layout')
 
 @section('head-includes')
-    <title>{{ ucfirst($theme) }} Shop - Get Lessons, T-Shirts, Gear, & Much More!</title>
+    <title>{{ ucfirst($brand) }} Shop - Get Lessons, T-Shirts, Gear, & Much More!</title>
     <meta name="description" content="Take your drumming to the next level with the largest collection of drum lessons in the world - or gear up for success with a selection of drum gear, t-shirts, sticks, and other cool drum swag.">
     <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/drum-shop/og-image.jpg">
     <meta property="og:title" content="Drumeo Drum Shop - Get Lessons, T-Shirts, Gear, & Much More!">
@@ -9,9 +9,8 @@
     <meta property="og:url" content="https://www.drumeo.com/drumshop/">
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/css/drumeo/navigation-sales.css') }}">
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/css/shop.css') }}">
-    <script src="https://kit.fontawesome.com/cf2f4c6c71.js" crossorigin="anonymous"></script>
+    <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/pianote/shop.css') }}" rel="stylesheet">
 
     @parent
 @stop
@@ -21,10 +20,10 @@
 
     <div class="container mx-auto px-4 py-10" x-data="{ filter: '{{ !empty($category) && $category !== 'shop' ? $category : 'all' }}' }">
 
-        @if($theme === 'drumeo' || $theme === 'pianote')
+        @if($brand === 'drumeo' || $brand === 'pianote')
             <div class="px-2 md:px-3 md:text-2xl lg:text-3xl mb-10">
                 <span
-                    class="mr-4 cursor-pointer border-{{ $theme }} border-solid"
+                    class="mr-4 cursor-pointer border-{{ $brand }} border-solid"
                     x-on:click="filter = 'all'"
                     x-bind:class="filter === 'all' ? 'border-b-2 font-bold' : 'text-gray-400'"
                 >
@@ -32,7 +31,7 @@
                 </span>
                 @if(count($lessons) > 0)
                     <span
-                        class="mr-4 cursor-pointer border-{{ $theme }} border-solid"
+                        class="mr-4 cursor-pointer border-{{ $brand }} border-solid"
                         x-on:click="filter = 'lessons'"
                         x-bind:class="filter === 'lessons' ? 'border-b-2 font-bold' : 'text-gray-400'"
                     >
@@ -41,7 +40,7 @@
                 @endif
                 @if(count($accessories) > 0)
                     <span
-                        class="mr-4 cursor-pointer border-{{ $theme }} border-solid"
+                        class="mr-4 cursor-pointer border-{{ $brand }} border-solid"
                         x-on:click="filter = 'accessories'"
                         x-bind:class="filter === 'accessories' ? 'border-b-2 font-bold' : 'text-gray-400'"
                     >
@@ -50,7 +49,7 @@
                 @endif
                 @if(count($hats) > 0 || count($hats) > 0 || count($hoodies) > 0)
                     <span
-                        class="mr-4 cursor-pointer border-{{ $theme }} border-solid"
+                        class="mr-4 cursor-pointer border-{{ $brand }} border-solid"
                         x-on:click="filter = 'clothing'"
                         x-bind:class="filter === 'clothing' ? 'border-b-2 font-bold' : 'text-gray-400'"
                     >
@@ -64,15 +63,15 @@
                     <ul class="fixed-cards">
                         <li>
                             <h5 class="px-2 md:px-3 mb-4 md:mb-7 flex items-center">
-                                <div class="inline-block heading-icon text-{{ $theme }} text-3xl mr-4"><i class="fas fa-video"></i></div>
-                                Online @if($theme === 'drumeo') Drum @else Piano @endif Lessons
+                                <div class="inline-block heading-icon text-{{ $brand }} text-3xl mr-4"><i class="fas fa-video"></i></div>
+                                Online @if($brand === 'drumeo') Drum @else Piano @endif Lessons
                             </h5>
                         </li>
 
                         @foreach($lessons as $lesson){
                             @include('musora.product.partials._drum-shop-card', [
                                 "sku" => $lesson->sku === 'drumeo' || $lesson->sku === 'pianote' || $lesson->sku === 'singeo' || $lesson->sku === 'guitareo' ? null : $lesson->sku,
-                                "itemURL" => '/'.$theme.'/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $lesson->slug ),
+                                "itemURL" => '/'.$brand.'/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $lesson->slug ),
                                 "thumbnail" => $lesson->thumbnail,
                                 "badgeText" => $lesson->badge_text,
                                 "thumbnail_logo" => $lesson->thumbnail_logo,
@@ -99,14 +98,14 @@
                     <ul class="fixed-cards">
                         <li>
                             <h5 class="px-2 md:px-3 mb-4 md:mb-7 flex items-center">
-                                <div class="inline-block heading-icon text-{{ $theme }} text-3xl mr-4"><i class="fas fa-suitcase"></i></div>
+                                <div class="inline-block heading-icon text-{{ $brand }} text-3xl mr-4"><i class="fas fa-suitcase"></i></div>
                                 Accessories
                             </h5>
                         </li>
                         @foreach($accessories as $accessory){
                             @include('musora.product.partials._drum-shop-card', [
                                 "sku" => $accessory->sku,
-                                "itemURL" => '/'.$theme.'/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $accessory->slug ),
+                                "itemURL" => '/'.$brand.'/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $accessory->slug ),
                                 "thumbnail" => $accessory->thumbnail,
                                 "badgeText" => $accessory->badge_text,
                                 "title" => $accessory->name,
@@ -129,12 +128,12 @@
                     <ul class="fixed-cards">
                         <li>
                             <h5 class="px-2 md:px-3 mb-4 md:mb-7 flex items-center">
-                                <div class="heading-icon text-{{ $theme }}">
+                                <div class="heading-icon text-{{ $brand }}">
                                     <img
                                         class="h-10 mr-4"
                                         src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/hat.svg"
                                         alt="hat icon"
-                                        style="@if($theme === 'pianote') filter: invert(1) sepia(1) brightness(.5) hue-rotate(-70deg) saturate(37); @elseif($theme === 'drumeo') filter: invert(1) sepia(1) brightness(.35) hue-rotate(140deg) saturate(37); @endif"
+                                        style="@if($brand === 'pianote') filter: invert(1) sepia(1) brightness(.5) hue-rotate(-70deg) saturate(37); @elseif($brand === 'drumeo') filter: invert(1) sepia(1) brightness(.35) hue-rotate(140deg) saturate(37); @endif"
                                     />
                                 </div>
                                 Hats
@@ -143,7 +142,7 @@
                         @foreach($hats as $hat){
                             @include('musora.product.partials._drum-shop-card', [
                                 "sku" => $hat->sku,
-                                "itemURL" => '/'.$theme.'/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hat->slug ),
+                                "itemURL" => '/'.$brand.'/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hat->slug ),
                                 "thumbnail" => $hat->thumbnail,
                                 "badgeText" => $hat->badge_text,
                                 "title" => $hat->name,
@@ -166,14 +165,14 @@
                     <ul class="fixed-cards">
                         <li>
                             <h5 class="px-2 md:px-3 mb-4 md:mb-7 flex items-center">
-                                <div class="inline-block heading-icon text-{{ $theme }} text-3xl mr-4"><i class="fas fa-tshirt"></i></div>
+                                <div class="inline-block heading-icon text-{{ $brand }} text-3xl mr-4"><i class="fas fa-tshirt"></i></div>
                                 Shirts
                             </h5>
                         </li>
                         @foreach($shirts as $shirt){
                             @include('musora.product.partials._drum-shop-card', [
                                 "sku" => $shirt->sku,
-                                "itemURL" => '/'.$theme.'/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $shirt->slug ),
+                                "itemURL" => '/'.$brand.'/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $shirt->slug ),
                                 "thumbnail" => $shirt->thumbnail,
                                 "badgeText" => $shirt->badge_text,
                                 "title" => $shirt->name,
@@ -188,7 +187,7 @@
                             ])
                         }
                         @endforeach
-                        @if($theme === 'drumeo')
+                        @if($brand === 'drumeo')
                             @include('musora.product.partials._drum-shop-card', [
                                  "badgeText" => "SEE MORE ON TEESPRING",
                                  "itemURL" => "https://teespring.com/stores/drumeo",
@@ -216,7 +215,7 @@
                                         class="h-8 mr-4"
                                         src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/hoodie.svg"
                                         alt="hoodie icon"
-                                        style="@if($theme === 'pianote') filter: invert(1) sepia(1) brightness(.5) hue-rotate(-70deg) saturate(37); @elseif($theme === 'drumeo') filter: invert(1) sepia(1) brightness(.35) hue-rotate(140deg) saturate(37); @endif"
+                                        style="@if($brand === 'pianote') filter: invert(1) sepia(1) brightness(.5) hue-rotate(-70deg) saturate(37); @elseif($brand === 'drumeo') filter: invert(1) sepia(1) brightness(.35) hue-rotate(140deg) saturate(37); @endif"
                                     />
                                 </div>
                                 Hoodies
@@ -225,7 +224,7 @@
                         @foreach($hoodies as $hoodie){
                             @include('musora.product.partials._drum-shop-card', [
                                 "sku" => $hoodie->sku,
-                                "itemURL" => '/'.$theme.'/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hoodie->slug ),
+                                "itemURL" => '/'.$brand.'/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hoodie->slug ),
                                 "thumbnail" => $hoodie->thumbnail,
                                 "badgeText" => $hoodie->badge_text,
                                 "title" => $hoodie->name,
@@ -248,7 +247,7 @@
                     @foreach($products as $product){
                         @include('musora.product.partials._drum-shop-card', [
                             "sku" => $product->sku,
-                            "itemURL" => '/'.$theme.'/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $product->slug ),
+                            "itemURL" => '/'.$brand.'/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $product->slug ),
                             "thumbnail" => $product->thumbnail,
                             "thumbnail_logo" => $product->thumbnail_logo,
                             "badgeText" => $product->badge_text,

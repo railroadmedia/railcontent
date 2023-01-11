@@ -27,8 +27,15 @@
     "/platform/js/email-form-component.js": "/platform/js/email-form-component.js?id=6a2c51699bce35f9f2370ad3d5a1691f",
     "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=09903bb6c8a5633f9a2f593d996f848f",
     "/marketing/css/vuesora.css": "/marketing/css/vuesora.css?id=39de52086a9c6bfbeabc595ee9a371f2",
+<<<<<<< HEAD
     "/platform/css/app.css": "/platform/css/app.css?id=608c814bb506cff5ec3ca00710d69460",
     "/platform/js/vendor~onboarding.js": "/platform/js/vendor~onboarding.js?id=95b61f73a67fc65546a81e742dda8905",
     "/marketing/css/app.css": "/marketing/css/app.css?id=b15a520a14143c80a22a5329cc26237e",
     "/platform/js/vendor.js": "/platform/js/vendor.js?id=49f0817b99cd1af9df9cbd7fcee415f7"
+=======
+    "/platform/css/app.css": "/platform/css/app.css?id=d38d53cd6c62a0dcb61dfe25c870aa3b",
+    "/platform/js/vendor~onboarding.js": "/platform/js/vendor~onboarding.js?id=b0559936a7adfc81befda85c26501bb0",
+    "/marketing/css/app.css": "/marketing/css/app.css?id=147d522dddacf47e09a46cbe70829cc6",
+    "/platform/js/vendor.js": "/platform/js/vendor.js?id=4e6aac0e17e080d886e44cb9292b2012"
+>>>>>>> master
 }

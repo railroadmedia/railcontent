@@ -6,7 +6,7 @@
     @include('_partials.layout._fonts')
 
     @include('_partials.layout._tailwindcdn')
-    <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
 
     @yield('styles')

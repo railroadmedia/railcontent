@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
     {{--<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">--}}
 @stop
@@ -613,7 +613,7 @@
             @endphp
             @foreach($levels as $level)
                     <div class="dropdown text-center border-2 border-gray-500 rounded-md overflow-hidden flex cursor-pointer mb-3 select-none @if(!empty($level['defaultOpen'])) active @endif
-                    @if(!empty($level['navyBorder'])) border-navy-600 @endif">
+                    @if(!empty($level['navyBorder'])) border-sky-900 @endif">
                         <div class="bg-drumeo py-5 px-2 sm:px-3 ">
                             <h5 class="leading-tight whitespace-nowrap inline-flex items-center">
                                 <span class="text-xs hidden md:inline mr-1"> LEVEL</span>

@@ -54,7 +54,7 @@
     <section class="content-section relative overflow-hidden text-white grey text-center customize py-8 md:py-12 lg:py-20" style="background-color:#000;">
         <div class="container mx-auto">
             <img class="h-5 md:h-7 lg:h-10 mb-2" src="https://guitareo.s3.amazonaws.com/sales/guitareo-logo-green.png">
-            <h1 class="tw-font-roboto uppercase text-2xl md:text-4xl lg:text-5xl"><strong>{{ round(100 - (100 * (77 / Prices::$plusSubscriptionAnnualFull))) }}%-OFF MUSORA DISCOUNT</strong></h1>
+            <h1 class="font-roboto uppercase text-2xl md:text-4xl lg:text-5xl"><strong>{{ round(100 - (100 * (77 / Prices::$plusSubscriptionAnnualFull))) }}%-OFF MUSORA DISCOUNT</strong></h1>
             <h2 class="mt-4 md:mt-7"><strong>Join Guitareo for just<br class="inline md:hidden"> <s class="opacity-60">${{ Prices::$plusSubscriptionAnnualFull }}</s> <span class="text-guitareo">$77</span> per year.</strong></h2>
             <h5 class="mt-3 mb-4 md:mb-7 text-navy"> (90-Day Money Back Guarantee.)</h5>
             <a class="join blue methodcta" href="/ecommerce/add-to-cart?products[GUITAREO-1-YEAR-MEMBERSHIP]=1&redirect=/order&promo-code=student-discount&locked=true">Get Started &raquo;</a>

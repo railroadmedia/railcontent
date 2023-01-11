@@ -1,4 +1,4 @@
-@import "./_variables";
+@import "../_variables";
 
 html {
     height: 100%;
@@ -58,7 +58,7 @@ h1 {
     @include tablet {
         font-size: 30px;
     }
-    @include desktop {
+    @include desktopOld {
         font-size: 39px;
     }
 }
@@ -69,7 +69,7 @@ h2 {
     @include tablet {
         font-size: 25px;
     }
-    @include desktop {
+    @include desktopOld {
         font-size: 30px;
     }
 }
@@ -81,7 +81,7 @@ h3 {
     @include tablet {
         font-size: 18px;
     }
-    @include desktop {
+    @include desktopOld {
         font-size: 21px;
     }
 }
@@ -91,7 +91,7 @@ h4 {
     @include tablet {
         font-size: 16px;
     }
-    @include desktop {
+    @include desktopOld {
         font-size: 18px;
     }
 }
@@ -142,7 +142,7 @@ button {
             background-position: 40% top;
             padding: 40px 20px 30px;
         }
-        @include desktop {
+        @include desktopOld {
             background-position: center top;
             padding: 50px 15px 40px;
         }
@@ -154,7 +154,7 @@ button {
         @include tablet {
             max-width: 350px;
         }
-        @include desktop {
+        @include desktopOld {
             max-width: 430px;
         }
     }
@@ -177,7 +177,7 @@ button {
             border-width: 4px;
             margin: 160px auto;
         }
-        @include desktop {
+        @include desktopOld {
             font-size: 39px;
             padding: 29px 30px;
             margin: 170px auto;
@@ -211,7 +211,7 @@ button {
             font-size: 16px;
             margin: 10px auto 0;
         }
-        @include desktop {
+        @include desktopOld {
             font-size: 18px;
         }
 
@@ -249,7 +249,7 @@ button {
             width: 270px;
             padding: 0 0 0 30px;
         }
-        @include desktop {
+        @include desktopOld {
             width: 350px;
             padding: 0 0 0 40px;
         }
@@ -261,7 +261,7 @@ button {
         @include tablet {
             font-size: 15px;
         }
-        @include desktop {
+        @include desktopOld {
             font-size: 17px;
         }
     }
@@ -274,7 +274,7 @@ button {
     @include tablet {
         padding: 40px 0;
     }
-    @include desktop {
+    @include desktopOld {
         padding: 50px 0;
     }
 
@@ -336,7 +336,7 @@ button {
             @include tablet {
                 margin: 0 auto;
             }
-            @include desktop {
+            @include desktopOld {
                 font-size: 15px;
             }
 
@@ -355,7 +355,7 @@ button {
     @include tablet {
         padding: 40px 0;
     }
-    @include desktop {
+    @include desktopOld {
         padding: 50px 0;
     }
 
@@ -369,7 +369,7 @@ button {
         padding: 20px 10px 0;
         text-align: left;
 
-        @include desktop {
+        @include desktopOld {
             padding: 20px 15px 0;
         }
 
@@ -393,7 +393,7 @@ button {
     @include tablet {
         padding: 40px 0;
     }
-    @include desktop {
+    @include desktopOld {
         padding: 50px 0;
     }
 
@@ -402,7 +402,7 @@ button {
         @include tablet {
             margin: 0 auto 50px;
         }
-        @include desktop {
+        @include desktopOld {
             margin: 0 auto 60px;
         }
     }
@@ -413,7 +413,7 @@ button {
         @include tablet {
             margin: 0 auto 20px;
         }
-        @include desktop {
+        @include desktopOld {
             margin: 0 auto 30px;
         }
 
@@ -428,7 +428,7 @@ button {
             height: 70px;
             width: 70px;
             margin: 0 auto 5px;
-            @include desktop {
+            @include desktopOld {
                 margin: 0;
                 line-height: 76px;
                 height: 80px;
@@ -442,7 +442,7 @@ button {
             font: 400 13px/1.5em $opensans;
             margin: 0 auto;
             max-width: 250px;
-            @include desktop {
+            @include desktopOld {
                 width: calc(100% - 80px);
                 text-align: left;
                 padding-left: 20px;
@@ -472,7 +472,7 @@ button {
         padding: 150px 0 50px;
         background-size: 1100px;
     }
-    @include desktop {
+    @include desktopOld {
         padding: 180px 0 80px;
         background-size: 1600px;
     }
@@ -484,7 +484,7 @@ button {
         @include tablet {
             font-size: 70px;
         }
-        @include desktop {
+        @include desktopOld {
             font-size: 90px;
         }
     }
@@ -495,7 +495,7 @@ button {
         @include tablet {
             font-size: 18px;
         }
-        @include desktop {
+        @include desktopOld {
             font-size: 23px;
         }
     }
@@ -505,7 +505,7 @@ button {
         text-align: left;
         line-height: 1.6em;
         margin: 60px auto 0;
-        @include desktop {
+        @include desktopOld {
 
             margin: 130px auto 0;
         }
@@ -531,7 +531,7 @@ button {
             width: 140px;
             order: 1;
         }
-        @include desktop {
+        @include desktopOld {
             width: 250px;
         }
     }
@@ -551,7 +551,7 @@ button {
             width: 100%;
             max-width: 640px;
         }
-        @include desktop {
+        @include desktopOld {
             margin: 30px auto 0;
             max-width: 970px;
         }
@@ -562,7 +562,7 @@ button {
                 margin: 0;
                 padding-right: 15px;
             }
-            @include desktop {
+            @include desktopOld {
                 padding-right: 30px;
             }
 
@@ -582,7 +582,7 @@ button {
                 @include tablet {
                     margin: 0 auto 20px;
                 }
-                @include desktop {
+                @include desktopOld {
                     margin: 0 auto 25px;
                 }
             }
@@ -609,7 +609,7 @@ button {
         @include tablet {
             max-width: 340px;
         }
-        @include desktop {
+        @include desktopOld {
             max-width: 440px;
         }
 
@@ -620,7 +620,7 @@ button {
             @include tablet {
                 max-width: 160px;
             }
-            @include desktop {
+            @include desktopOld {
                 max-width: 220px;
             }
         }
@@ -638,7 +638,7 @@ button {
                 font-size: 15px;
                 margin: 35px auto 0;
             }
-            @include desktop {
+            @include desktopOld {
                 font-size: 18px;
             }
 
@@ -660,7 +660,7 @@ button {
         @include tablet {
             max-width: 550px;
         }
-        @include desktop {
+        @include desktopOld {
             max-width: 640px;
         }
     }
@@ -703,7 +703,7 @@ button {
             @include tablet {
                 max-width: 480px;
             }
-            @include desktop {
+            @include desktopOld {
                 max-width: 550px;
             }
         }
@@ -813,7 +813,7 @@ button {
             @include tablet {
                 padding: 15px 30px;
             }
-            @include desktop {
+            @include desktopOld {
                 padding: 15px 50px;
             }
 
@@ -1002,7 +1002,7 @@ button {
         line-height: 55px;
         margin: 0 auto 15px;
     }
-    @include desktop {
+    @include desktopOld {
         font-size: 23px;
     }
 }
@@ -1044,7 +1044,7 @@ button {
         @include tablet {
             padding: 20px;
         }
-        @include desktop {
+        @include desktopOld {
             padding: 30px;
         }
     }
@@ -1056,7 +1056,7 @@ button {
 
             font-size: 19px;
         }
-        @include desktop {
+        @include desktopOld {
 
             font-size: 23px;
         }
@@ -1084,7 +1084,7 @@ button {
         height: 50px;
         line-height: 50px;
         font-size: 26px;
-        @include desktop {
+        @include desktopOld {
             width: 70px;
             height: 70px;
             line-height: 70px;

@@ -11,7 +11,7 @@
 
     @include('_partials.layout._fonts')
     @include('_partials.layout._tailwindcdn')
-    <link href="{{ asset('marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/css/animate.css') }}">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
 
@@ -383,10 +383,10 @@
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 
-    <script src="{{ asset('marketing/js/drumeo/manifest.js') }}"></script>
-    <script src="{{ asset('marketing/js/drumeo/vendor.js') }}"></script>
-    <script src="{{ asset('marketing/js/drumeo/cart-sidebar.js') }}"></script>
-    <script src="{{ asset('marketing/js/drumeo/app.js') }}"></script>
+    <script src="{{ asset('/marketing/js/drumeo/manifest.js') }}"></script>
+    <script src="{{ asset('/marketing/js/drumeo/vendor.js') }}"></script>
+    <script src="{{ asset('/marketing/js/drumeo/cart-sidebar.js') }}"></script>
+    <script src="{{ asset('/marketing/js/drumeo/app.js') }}"></script>
 
     <script>
         $(document).ready(function () {

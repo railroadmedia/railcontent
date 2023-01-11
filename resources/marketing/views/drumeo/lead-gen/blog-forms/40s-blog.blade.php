@@ -13,7 +13,7 @@
     @include('_partials.layout._fonts')
     <base target="_parent">
     @include('_partials.layout._tailwindcdn')
-    <link href="{{ asset('marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <style>
         body {
             height:100vh;

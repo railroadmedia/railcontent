@@ -11,7 +11,7 @@
 
 
     @include('_partials.layout._tailwindcdn')
-    <link href="{{ asset('/marketing/css/pianote/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/sales.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/lead-gen.css') }}">

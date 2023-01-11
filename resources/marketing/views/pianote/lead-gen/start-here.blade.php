@@ -670,5 +670,5 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('marketing/js/app.js') }}"></script>
+    <script src="{{ asset('/marketing/js/app.js') }}"></script>
 @endsection
