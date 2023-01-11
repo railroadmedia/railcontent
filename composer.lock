@@ -8344,12 +8344,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railanalytics.git",
-                "reference": "fe7922f0122b431833eebd4451c6b031d379e775"
+                "reference": "7beb2fb48b30e17b7df98bd95f269ae48996f110"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railanalytics/zipball/fe7922f0122b431833eebd4451c6b031d379e775",
-                "reference": "fe7922f0122b431833eebd4451c6b031d379e775",
+                "url": "https://api.github.com/repos/railroadmedia/railanalytics/zipball/7beb2fb48b30e17b7df98bd95f269ae48996f110",
+                "reference": "7beb2fb48b30e17b7df98bd95f269ae48996f110",
                 "shasum": ""
             },
             "require": {
@@ -8378,7 +8378,7 @@
                 "issues": "https://github.com/railroadmedia/railanalytics/issues",
                 "source": "https://github.com/railroadmedia/railanalytics/tree/v3.0-fixing-transaction-tracking"
             },
-            "time": "2023-01-11T23:42:39+00:00"
+            "time": "2023-01-11T23:53:42+00:00"
         },
         {
             "name": "railroad/railchat",
