@@ -125,7 +125,7 @@
                 @foreach($lessons as $lesson){
                 @include('drumeo.drumshop._partials._drum-shop-card', [
                     "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $lesson->slug ),
-                    "sku" => $lesson->sku === 'drumeo' || $lesson->sku === 'pianote' || $lesson->sku === 'singeo' || $lesson->sku === 'guitareo' ? null : $lesson->sku,
+                    "sku" => $lesson->sku === 'drumeo' ? null : $lesson->sku,
                     "badgeText" => $lesson->badge_text,
                     "thumbnail" => $lesson->thumbnail,
                     "packLogo" => $lesson->thumbnail_logo,
