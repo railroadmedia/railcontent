@@ -289,7 +289,7 @@ class ProfileSettingsPagesController extends BaseController
             }
         }
 
-        $payments = $this->paymentRepository->getAllUsersPayments($user->id, false, 'drumeo');
+        $payments = $this->paymentRepository->getAllUsersPayments($user->id, false, brand());
 
         // sort by date
         usort(
