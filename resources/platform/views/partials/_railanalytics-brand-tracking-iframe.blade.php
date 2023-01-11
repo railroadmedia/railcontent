@@ -1,6 +1,11 @@
 @if(current_user_has_recent_order())
     @php
-        cache()->set(auth()->id() . '_recent_order_analytics_data_drumeo', \App\Analytics\Tracker::getQueueForBrand('drumeo'), 60)
+        $queueData = \App\Analytics\Tracker::getQueueForBrand('drumeo');
+
+        cache()->set(auth()->id() . '_recent_order_analytics_data_drumeo', $queueData, 60);
+
+        \Illuminate\Support\Facades\Log::info('--- KEY SET: ' . auth()->id() . '_recent_order_analytics_data_drumeo');
+        \Illuminate\Support\Facades\Log::info('--- $queueData: ' . var_export($queueData, true));
     @endphp
 
     <iframe src="{{ get_legacy_brand_base_url('drumeo') . '/railanalytics/blank-tracking-page?cache_key=' . auth()->id() . '_recent_order_analytics_data_drumeo' }}"
