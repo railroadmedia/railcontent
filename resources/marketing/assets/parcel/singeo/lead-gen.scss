@@ -480,7 +480,7 @@ $grad: ();
   content: "";
 }
 .snow:after {
-  margin-left: calc(-$w / 3) + px;
+  margin-left: -$w/3 + px;
   opacity: .4;
   animation-duration: $s*2;
   animation-direction: reverse;
@@ -489,7 +489,7 @@ $grad: ();
 .snow:before {
   animation-duration: $s*3;
   animation-direction: reverse;
-  margin-left: calc(-$w / 2) + px;
+  margin-left: -$w/2 + px;
   opacity: .65;
   filter: blur(1.5px);
 }
