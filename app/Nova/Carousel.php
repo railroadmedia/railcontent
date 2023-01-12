@@ -46,13 +46,13 @@ class Carousel extends Resource
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make('1. Brand', 'brand', 'App\Nova\Brand')->sortable(),
-            Text::make('2. Subtitle', 'subtitle')->sortable(),
-            Text::make('3. Title', 'title')->required()->sortable(),
-            Markdown::make('4. Description')->required()->help('If a description exceeds 316 the last three characters will be replaced with an ellipses.'),
-            Text::make('5. CTA Button Text', 'cta_text')->required()->hideFromIndex(),
-            Text::make('6. CTA URL', 'cta_url')->required(),
-            Image::make('7-1. Image', 'img')
+            BelongsTo::make('Brand', 'brand', 'App\Nova\Brand')->sortable(),
+            Text::make('Subtitle', 'subtitle')->sortable(),
+            Text::make('Title', 'title')->required()->sortable(),
+            Markdown::make('Description')->required()->help('If a description exceeds 316 the last three characters will be replaced with an ellipses.'),
+            Text::make('CTA Button Text', 'cta_text')->required()->hideFromIndex(),
+            Text::make('CTA URL', 'cta_url')->required(),
+            Image::make('Image', 'img')
                 ->help('The image should be 1128  x 276px or a comparable aspect ratio.')
                 ->disk('nova_s3')
                 ->prunable()
