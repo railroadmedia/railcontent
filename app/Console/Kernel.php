@@ -8,6 +8,7 @@ use App\Console\Commands\AssignSongsPermissionsToProducts;
 use App\Console\Commands\CreateSongsDecember2022;
 use App\Console\Commands\FixSongsTemp;
 use App\Console\Commands\MigratePianoteSongTutorial;
+use App\Console\Commands\SoftDeleteOldGuitareoSongs;
 use App\Console\Commands\SoftDeleteOldSingeoSongs;
 use App\Console\Commands\PopulateNewRolesAndPermissionsTables;
 use App\Console\Commands\PopulateUserBrandLevel;
@@ -52,7 +53,8 @@ class Kernel extends ConsoleKernel
         AssignSongsPermissionsToAllUsers::class,
         FixSongsTemp::class,
         SoftDeleteOldSingeoSongs::class,
-        UpdateRoutines::class,
+        SoftDeleteOldGuitareoSongs::class,
+	UpdateRoutines::class,
     ];
 
     /**
