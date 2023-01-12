@@ -17,7 +17,7 @@
         .edge-pitch {top:40px;}
         @media (min-width: 768px) {  .edge-pitch {top:56px;}  }
     </style>
-    <link href="/marketing/parcel/pianote/lead-gen-50-charts.css" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/pianote/lead-gen-50-charts.css') }}" rel="stylesheet">
 @endsection
 @section('scripts')
     @parent
@@ -26,8 +26,8 @@
             $(document).foundation();
         });
     </script>
-    <script type="text/javascript" src="/marketing/js/modal.js"></script>
-    <script type="text/javascript" src="/marketing/js/modal-autoplay.js"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
 @endsection
 
 @section('page-body')
@@ -374,7 +374,7 @@
                             with 500 Songs in 5 Days.</strong><br>
                         <span class="opacity-70">Get your exclusive discount here:</span></em></h4>
                 <a class="join my-5 md:my-7" href="/500-songs-chord-discount">500 SONGS IN 5 DAYS &raquo;</a>
-                <h4>Just <s class="opacity-70">${{ PianotePrices::$songs500Full }}</s> <strong>$39</strong></h4>
+                <h4>Just <s class="opacity-70">${{ floatval($productPrices['500-songs-in-5-days']->price) }}</s> <strong>$39</strong></h4>
             </div>
         </div>
     </section>

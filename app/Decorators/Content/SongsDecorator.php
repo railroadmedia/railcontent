@@ -12,7 +12,7 @@ class SongsDecorator extends TypeDecoratorBase
      */
     public function decorate(Collection $contents)
     {
-        $contentsOfType = $contents->where('type', 'song');
+        $contentsOfType = $contents->where('type', 'song-tutorial');
 
         if ($contentsOfType->isEmpty()) {
             return $contents;

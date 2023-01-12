@@ -8,9 +8,9 @@
                     :class="{ 'card-selected': newPayment }"
                 >
                     <div class="flex flex-column xs-1 align-center align-v-center">
-                        <input 
+                        <input
                             id="paymentMethod-0"
-                            type="radio" 
+                            type="radio"
                             name="paymentMethods"
                             :checked="newPayment"
                             @change.stop="emitNewPayment()"
@@ -18,7 +18,7 @@
                     </div>
                     <div class="flex flex-column xs-11 align-left align-v-center text-left">
                         <p class="tiny">
-                            <span class="font-bold">
+                            <span class="font-black">
                                 Create a new payment method.
                             </span>
                         </p>
@@ -38,17 +38,17 @@
                     :for="`paymentMethod-${index + 1}`"
                 >
                     <div class="flex flex-column xs-1 align-center align-v-center">
-                        <input 
+                        <input
                             :id="`paymentMethod-${index + 1}`"
-                            type="radio" 
+                            type="radio"
                             name="paymentMethods"
                             :checked="isSelectedPayment(paymentMethod)"
                             @change.stop="emitSelectPayment(paymentMethod)"
                         >
                     </div>
 
-                    <div class="pr-2">   
-                        <svg-icon 
+                    <div class="pr-2">
+                        <svg-icon
                             :icon-name="getPaymentMethodIcon(paymentMethod)"
                             width="78px"
                         />
@@ -59,18 +59,18 @@
                         class="flex flex-column xs-8 align-v-center"
                     >
                         <p class="tiny">
-                            <span class="font-bold">
+                            <span class="font-black">
                                 {{ getRelatedAttributesByTypeAndId(paymentMethod.relationships.method.data).attributes.company_name || 'N/A' }}
                                 {{ getPaymentMethodType(paymentMethod) }}
                             </span>
                         </p>
                         <p class="tiny">
-                            Last Four: <span class="font-bold">{{
+                            Last Four: <span class="font-black">{{
                                 getRelatedAttributesByTypeAndId(paymentMethod.relationships.method.data).attributes.last_four_digits || 'N/A'
                             }}</span>
                         </p>
                         <p class="tiny">
-                            Expires: <span class="font-bold">{{ getExpirationDate(paymentMethod) }}</span>
+                            Expires: <span class="font-black">{{ getExpirationDate(paymentMethod) }}</span>
                         </p>
                     </div>
 
@@ -79,11 +79,11 @@
                         class="flex flex-column xs-8 align-v-center"
                     >
                         <p class="tiny">
-                            <span class="font-bold">{{ getPaymentMethodType(paymentMethod) }}</span>
+                            <span class="font-black">{{ getPaymentMethodType(paymentMethod) }}</span>
                         </p>
 
                         <p class="tiny">
-                            Billing Agreement ID: <span class="font-bold">{{
+                            Billing Agreement ID: <span class="font-black">{{
                                 getRelatedAttributesByTypeAndId(paymentMethod.relationships.method.data).attributes.external_id || 'N/A'
                             }}</span>
                         </p>
@@ -233,7 +233,7 @@ export default {
     },
 };
 </script>
-<style lang="scss"> 
+<style lang="scss">
     .card-selected {
         background-color: #efefef;
         box-shadow: 2px 5px 10px rgba(100,100,100,.5);

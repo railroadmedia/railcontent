@@ -9,13 +9,13 @@
     @hasSection('share-image')
         @yield('share-image')
     @else
-        <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/og-image.jpg" style="display: none;">
+        <meta property="og:image" content="https://pianote.s3.amazonaws.com/sales/2023/share-image-pianote2.jpg" style="display: none;">
     @endif
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
+    @include('_partials.layout._tailwindcdn')
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css"/>
-    <link href="{{ asset('/marketing/css/pianote/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/sales.css') }}">
     {{--<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">--}}
@@ -24,7 +24,7 @@
 @section('global-body')
     @if(empty($rolandVersion))
         @include('pianote._partials._nav', [
-        "joinVersion" => true,
+        "subscriptionVersion" => true,
         "scrollToJoin" => true,
         "homepageVersion" => true,
         ])
@@ -52,7 +52,7 @@
                         @hasSection('start-button')
                             href="@yield('start-button')" class="join blue smaller w-1/2 md:w-1/3 lg:w-1/4"
                         @else
-                            href="#orderNow" class="join blue smaller anchor-slide w-1/2 md:w-1/3 lg:w-1/4 anchor-slide"
+                            href="#customize-anchor" class="join blue smaller anchor-slide w-1/2 md:w-1/3 lg:w-1/4 anchor-slide"
                         @endif
                     >
                         @if(!empty($trialVersion) && $trialVersion)
@@ -116,7 +116,7 @@
                 @hasSection('start-button')
                     href="@yield('start-button')" class="join smaller blue mt-12 mb-2 lg:w-1/3"
                 @else
-                    href="#orderNow" class="join smaller blue anchor-slide mt-9 md:mt-12 mb-2 lg:w-1/3"
+                    href="#customize-anchor" class="join smaller blue anchor-slide mt-9 md:mt-12 mb-2 lg:w-1/3"
                 @endif
             >
                 @if(!empty($trialVersion) && $trialVersion)
@@ -388,7 +388,7 @@
                 @hasSection('start-button')
                     href="@yield('start-button')" class="join smaller blue md:mt-6 mb-2 md:w-1/3"
                 @else
-                    href="#orderNow" class="join smaller blue anchor-slide md:mt-6 mb-2 md:w-1/3"
+                    href="#customize-anchor" class="join smaller blue anchor-slide md:mt-6 mb-2 md:w-1/3"
                 @endif
             >
                 @if(!empty($trialVersion) && $trialVersion)
@@ -510,7 +510,7 @@
                             @endphp
                             @foreach($levels as $level)
                                 <div class="dropdown text-center border-2 border-gray-500 rounded-md overflow-hidden flex cursor-pointer mb-3 select-none @if(!empty($level['defaultOpen'])) active @endif
-                                @if(!empty($level['navyBorder'])) border-navy-600 @endif">
+                                @if(!empty($level['navyBorder'])) border-sky-900 @endif">
                                     <div class="bg-pianote py-5 px-2 sm:px-3 ">
                                         <h5 class="leading-tight whitespace-nowrap inline-flex items-center">
                                             <span class="text-xs hidden md:inline mr-1"> LEVEL</span>
@@ -582,7 +582,7 @@
                             @endphp
                             @foreach($classicalLevels as $level)
                                 <div class="dropdown text-center border-2 border-gray-500 rounded-md overflow-hidden flex cursor-pointer mb-3 select-none @if(!empty($level['defaultOpen'])) active @endif
-                                @if(!empty($level['navyBorder'])) border-navy-600 @endif">
+                                @if(!empty($level['navyBorder'])) border-sky-900 @endif">
                                     <div class="py-5 px-2 sm:px-3 " style="background-color:#ce9432;">
                                         <h5 class="leading-tight whitespace-nowrap inline-flex items-center">
                                             <span class="text-xs hidden md:inline mr-1"> LEVEL</span>
@@ -620,8 +620,8 @@
                         <strong class="inline-block mr-1 bg-pianote px-1 md:px-3 md:py-1 rounded-md md:rounded-lg leading-none" style="color: #000a1e;">PLUS</strong>
                         <em>
 
-                            On-demand access to <strong class="text-pianote">{{ PianotePrices::$courses }}+<br class="inline md:hidden"> comprehensive piano courses</strong> <br>
-                            and <strong class="text-pianote">{{ PianotePrices::$lessons }}+ lessons</strong> to focus on <br class="inline md:hidden">specific skills, styles, and techniques.</em></h4>
+                            On-demand access to <strong class="text-pianote">{{ Prices::$pianoteCourses }}+<br class="inline md:hidden"> comprehensive piano courses</strong> <br>
+                            and <strong class="text-pianote">{{ Prices::$pianoteLessons }}+ lessons</strong> to focus on <br class="inline md:hidden">specific skills, styles, and techniques.</em></h4>
 
                     <div class="course-tiles w-full flex flex-wrap justify-center md:mb-2 mx-auto max-w-xs md:max-w-full">
                         @php
@@ -770,7 +770,7 @@
                         {{--@hasSection('start-button')--}}
                             {{--href="@yield('start-button')" class="join blue smaller"--}}
                         {{--@else--}}
-                            {{--href="#orderNow" class="join blue smaller anchor-slide"--}}
+                            {{--href="#customize-anchor" class="join blue smaller anchor-slide"--}}
                         {{--@endif--}}
                     {{-->--}}
                         {{--@if(!empty($trialVersion) && $trialVersion)--}}
@@ -947,7 +947,7 @@
                             @hasSection('start-button')
                                 href="@yield('start-button')" class="join blue smaller"
                             @else
-                                href="#orderNow" class="join blue smaller anchor-slide"
+                                href="#customize-anchor" class="join blue smaller anchor-slide"
                             @endif
                         >
                             @if(!empty($trialVersion) && $trialVersion)
@@ -1071,7 +1071,7 @@
                         @hasSection('start-button')
                             href="@yield('start-button')" class="join blue smaller"
                         @else
-                            href="#orderNow" class="join blue smaller anchor-slide"
+                            href="#customize-anchor" class="join blue smaller anchor-slide"
                         @endif
                     >
                         @if(!empty($trialVersion) && $trialVersion)
@@ -1197,12 +1197,12 @@
                             @else
                                 <td class="rounded-b-xl">
                                     @if(empty($trialVersion))
-                                        @if(number_format(PianotePrices::$pianoteMembershipAnnualRegular, 2) == intval(PianotePrices::$pianoteMembershipAnnualRegular))
-                                            <strong>${{  round(PianotePrices::$pianoteMembershipAnnualRegular / 12, 2) }}</strong>/mo<br>
+                                        @if(number_format(Prices::$plusSubscriptionAnnual, 2) == intval(Prices::$plusSubscriptionAnnual))
+                                            <strong>${{  round(Prices::$plusSubscriptionAnnual / 12, 2) }}</strong>/mo<br>
                                         @else
-                                            <strong>${{  number_format(PianotePrices::$pianoteMembershipAnnualRegular / 12, 2)  }}</strong>/mo<br>
+                                            <strong>${{  number_format(Prices::$plusSubscriptionAnnual / 12, 2)  }}</strong>/mo<br>
                                         @endif
-                                        <em>Billed annually at ${{  PianotePrices::$pianoteMembershipAnnualRegular }}</em><br><br>
+                                        <em>Billed annually at ${{  Prices::$plusSubscriptionAnnual }}</em><br><br>
                                         Unlimited lessons & support.
                                     @else
                                         <strong>Free Trial</strong><br>&nbsp;
@@ -1570,7 +1570,7 @@
     </section>
 
 
-    <div id="orderNow" class="anchor"></div>
+    <div id="customize-anchor" class="anchor"></div>
     @yield('final')
     <div class="unstick-trigger block"></div>
 
@@ -1691,19 +1691,20 @@
 
     @include('pianote._partials._footer')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="/marketing/parcel/pianote/nav-footer.js?v={{ filemtime(__FILE__) }}"></script>
+{{--    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>--}}
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/1.9.3/countUp.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script type="text/javascript" src="/marketing/parcel/pianote/sales.js?v={{ filemtime(__FILE__) }}"></script>
-    <script type="text/javascript" src="/marketing/js/modal.js"></script>
-    <script type="text/javascript" src="/marketing/js/modal-autoplay.js"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/sales-page.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
 
 
     @yield('scripts')
 
-    @include('pianote._partials.inspectlet')
+
 @stop
 

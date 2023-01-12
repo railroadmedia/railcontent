@@ -10,9 +10,9 @@
     <meta property="og:url" content="https://www.pianote.com/riffs-and-fills">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+    @include('_partials.layout._tailwindcdn')
     <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="/marketing/parcel/pianote/riffs-and-fills.css">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/riffs-and-fills.css') }}">
 @stop
 
 @section('global-body')
@@ -22,8 +22,8 @@
 
     @include('pianote._partials._promo-banner-no-tw', [
                     "name" => "Piano Riffs & Fills",
-                    "fullPrice" => PianotePrices::$pianoRiffsAndFillsFull,
-                    "price" => PianotePrices::$pianoRiffsAndFillsRegular,
+                    "fullPrice" => floatval($productPrices['piano-riffs-and-fills']->price),
+                    "price" => floatval($productPrices['piano-riffs-and-fills']->discounted_price),
                     "noBreadcrumb" => true
                 ])
 
@@ -41,11 +41,11 @@
             >Get Started &raquo;</a>
 
             <p class="breakdown">
-                @if(PianotePrices::$pianoRiffsAndFillsFull > PianotePrices::$pianoRiffsAndFillsRegular)
-                    <s>NORMALLY ${{ PianotePrices::$pianoRiffsAndFillsFull }}.</s> &nbsp;
-                    <strong><u>ONLY ${{ PianotePrices::$pianoRiffsAndFillsRegular }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (PianotePrices::$pianoRiffsAndFillsRegular / PianotePrices::$pianoRiffsAndFillsFull))) }}%)
+                @if(floatval($productPrices['piano-riffs-and-fills']->price) > floatval($productPrices['piano-riffs-and-fills']->discounted_price))
+                    <s>NORMALLY ${{ floatval($productPrices['piano-riffs-and-fills']->price) }}.</s> &nbsp;
+                    <strong><u>ONLY ${{ floatval($productPrices['piano-riffs-and-fills']->discounted_price) }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (floatval($productPrices['piano-riffs-and-fills']->discounted_price) / floatval($productPrices['piano-riffs-and-fills']->price)))) }}%)
                 @else
-                    <strong><u>ONLY ${{ PianotePrices::$pianoRiffsAndFillsRegular }}</u></strong>
+                    <strong><u>ONLY ${{ floatval($productPrices['piano-riffs-and-fills']->discounted_price) }}</u></strong>
                 @endif
 
                 <br><a href="/" class="red">(OR FREE WITH A PIANOTE MEMBERSHIP)</a><br>
@@ -253,11 +253,11 @@ Connect every riff, fill and tip you’ve learned and see how to apply it to pre
                 data-product-json='{"piano-riffs-and-fills": 1}'
             >Get Started &raquo;</a>
             <p class="breakdown">
-                @if(PianotePrices::$pianoRiffsAndFillsFull > PianotePrices::$pianoRiffsAndFillsRegular)
-                    <s>NORMALLY ${{ PianotePrices::$pianoRiffsAndFillsFull }}.</s> &nbsp;
-                    <strong><u>ONLY ${{ PianotePrices::$pianoRiffsAndFillsRegular }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (PianotePrices::$pianoRiffsAndFillsRegular / PianotePrices::$pianoRiffsAndFillsFull))) }}%)
+                @if(floatval($productPrices['piano-riffs-and-fills']->price) > floatval($productPrices['piano-riffs-and-fills']->discounted_price))
+                    <s>NORMALLY ${{ floatval($productPrices['piano-riffs-and-fills']->price) }}.</s> &nbsp;
+                    <strong><u>ONLY ${{ floatval($productPrices['piano-riffs-and-fills']->discounted_price) }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (floatval($productPrices['piano-riffs-and-fills']->discounted_price) / floatval($productPrices['piano-riffs-and-fills']->price)))) }}%)
                 @else
-                    <strong><u>ONLY ${{ PianotePrices::$pianoRiffsAndFillsRegular }}</u></strong>
+                    <strong><u>ONLY ${{ floatval($productPrices['piano-riffs-and-fills']->discounted_price) }}</u></strong>
                 @endif
                 <br><a href="/" class="red">(OR FREE WITH A PIANOTE MEMBERSHIP)</a><br>
                     <strong class="yellow">** 90-DAY GUARANTEE **</strong></p>
@@ -283,7 +283,7 @@ Connect every riff, fill and tip you’ve learned and see how to apply it to pre
     @include('pianote._partials._footer')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/marketing/parcel/pianote/nav-footer.js"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script>
         $(function() {
             // sticky topbar before orderSection
@@ -331,10 +331,10 @@ Connect every riff, fill and tip you’ve learned and see how to apply it to pre
             });
         });
     </script>
-    <script src="{{ asset('marketing/js/pianote/manifest.js') }}"></script>
-    <script src="{{ asset('marketing/js/pianote/vendor.js') }}"></script>
-    <script src="{{ asset('marketing/js/pianote/cart-sidebar.js') }}"></script>
-    <script src="{{ asset('marketing/js/pianote/app.js') }}"></script>
+    <script src="{{ asset('/marketing/js/pianote/manifest.js') }}"></script>
+    <script src="{{ asset('/marketing/js/pianote/vendor.js') }}"></script>
+    <script src="{{ asset('/marketing/js/pianote/cart-sidebar.js') }}"></script>
+    <script src="{{ asset('/marketing/js/pianote/app.js') }}"></script>
 
-    @include('pianote._partials.inspectlet')
+
 @stop

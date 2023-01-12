@@ -1,4 +1,4 @@
-@import "_variables";
+@import "../_variables";
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
 h1 {
@@ -107,10 +107,6 @@ h3 {
     cursor: pointer;
     height: initial;
     position: relative;
-
-    &.slick-current img {
-      border-color: $drumeoBlue !important;
-    }
   }
 
   .drumshop-accordion {

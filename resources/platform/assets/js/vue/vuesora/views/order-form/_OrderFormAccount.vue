@@ -5,7 +5,7 @@
             <div v-if="!requiresAccountInfo">
                 <div class="flex flex-row align-v-center mb-2">
                     <div class="flex flex-column">
-                        <h3 class="heading">Billing Email</h3>
+                        <h3 class="title font-black">Billing Email</h3>
 
                         <span class="flex flex-auto">
                             <a :href="loginUrl"
@@ -44,7 +44,7 @@
             <div v-if="requiresAccountInfo">
                 <div class="flex flex-row align-v-center pb-2">
                     <div class="flex flex-column">
-                        <h3 class="title uppercase font-bold">
+                        <h3 class="title font-black">
                             Create Your Account
                         </h3>
 
@@ -104,7 +104,7 @@
                                 name="account-creation-password"
                                 class="order-form-input"
                                 :class="{ 'has-error': errors.accountPassword.length,
-                                          'has-input': $_accountPassword != null, 
+                                          'has-input': $_accountPassword != null,
                                           'soft-error': password_focussed }"
                                 @focus="password_focussed = true"
                                 @blur="password_focussed = false"
@@ -132,7 +132,7 @@
         <div v-if="isSignedIn">
             <div class="flex flex-row align-v-center mb-1">
                 <div class="flex flex-column">
-                    <h3 class="title uppercase font-bold">
+                    <h3 class="title font-black">
                         Add To Existing Account
                     </h3>
 
@@ -147,17 +147,13 @@
                 </div>
             </div>
 
-            <div class="flex flex-row pa-3">
-                <div class="flex flex-column text-center">
-                    <h4 class="body tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] mb-1">
-                        You are currently logged in as:
+            <div class="flex flex-row py-4">
+                <div class="flex flex-column">
+                    <h4 class="text-base mb-2">
+                        You are currently logged in as: <span class="inline-block font-black text-xl">{{ currentUser.email }}</span>
                     </h4>
 
-                    <h4 class="subheading mb-2">
-                        {{ currentUser.email }}
-                    </h4>
-
-                    <h4 class="tw-text-sm tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] font-italic">
+                    <h4 class="text-sm text-[#3F3F46] dark:text-[#9EC0DC] font-italic">
                         Your products will be added to the account you are currently logged in with.
                     </h4>
                 </div>
@@ -208,7 +204,7 @@ export default {
     },
     data() {
         return {
-            password_focussed: false, 
+            password_focussed: false,
             rules: {
                 accountEmail: [
                     v => !!v || 'Email is required.',
@@ -264,7 +260,7 @@ export default {
             },
             set(value) {
                 this.validateInput('accountPassword', value);
-                    
+
                 this.$emit('updateAccountData', {
                     key: 'accountPassword',
                     value,
@@ -274,7 +270,7 @@ export default {
     },
 };
 </script>
-<style lang="scss"> 
+<style lang="scss">
     input[type='password'].has-error.soft-error,
     input[type='password'].has-error.soft-error ~ .errors {
         border-color: #0B76DB;

@@ -85,12 +85,8 @@ class OrderController extends Controller
         );
     }
 
-    public function showOrderForm(Request $request, $domain, $brand)
+    public function showOrderForm(Request $request, $domain, $brand = null)
     {
-        $currentUrl = route('order-form', ['brand' => $brand]);
-        $loginUrl = route('login', ['redirect_to' => $currentUrl]);
-        $logoutUrl = route('user_management_system.logout.cookie', ['redirect_to' => $currentUrl]);
-
         $user = user();
 
         $billingAddress = $this->cartAddressService->getBillingAddress();
@@ -101,6 +97,47 @@ class OrderController extends Controller
 
         $cart = $this->cartService->getCart();
         $cartDataArray = $this->cartService->toArray();
+
+        // if it's a brand domain, redirect to musora with the current cart items
+        if (Str::endsWith($domain, 'drumeo.com') ||
+            Str::endsWith($domain, 'pianote.com') ||
+            Str::endsWith($domain, 'guitareo.com') ||
+            Str::endsWith($domain, 'singeo.com')) {
+
+            if (Str::endsWith($domain, 'drumeo.com')) {
+                $brand = 'drumeo';
+            } elseif (Str::endsWith($domain, 'pianote.com')) {
+                $brand = 'pianote';
+            } elseif (Str::endsWith($domain, 'guitareo.com')) {
+                $brand = 'guitareo';
+            } elseif (Str::endsWith($domain, 'singeo.com')) {
+                $brand = 'singeo';
+            } else {
+                $brand = 'drumeo';
+            }
+
+            $urlParams = [];
+
+            foreach ($cartDataArray['items'] ?? [] as $cartItem) {
+                $urlParams['products'][$cartItem['sku']] = $cartItem['quantity'];
+            }
+
+            foreach ($cartDataArray['bonuses'] ?? [] as $bonusItem) {
+                $urlParams['bonuses'][$bonusItem['sku']] = $bonusItem['quantity'];
+            }
+
+            $urlParams['locked'] = $cartDataArray['locked'] ?? false;
+            $urlParams['number_of_payments'] = $cartDataArray['number_of_payments'] ?? false;
+            $urlParams['redirect'] = $cartDataArray['redirect'] ?? ('/order/' . $brand);
+
+            $queryString = http_build_query($urlParams);
+
+            return redirect()->away(get_musora_brand_base_url() . '/ecommerce/add-to-cart?' . $queryString);
+        }
+
+        $currentUrl = get_musora_brand_base_url() . '/order/' . $brand;
+        $loginUrl = route('login', ['redirect_to' => $currentUrl]);
+        $logoutUrl = route('user_management_system.logout.cookie', ['redirect_to' => $currentUrl]);
 
         // this is likely no longer needed
 //        if (!empty($user) &&
@@ -117,6 +154,7 @@ class OrderController extends Controller
         }
 
         Tracker::queue(
+            'musora',
             function () use ($cartDataArray) {
                 $trackerProducts = [];
                 foreach ($cartDataArray['items'] as $cartItemData) {
@@ -287,7 +325,7 @@ class OrderController extends Controller
 
     public function thankYouPageForCustomerOrder()
     {
-        return view('order-form.order-thankyou-physical');
+        return view('musora.pages.order-thankyou');
     }
 
     public function redirectToMusoraOrderForm(Request $request)
@@ -295,17 +333,17 @@ class OrderController extends Controller
         $parse = parse_url($request->url());
 
         if (Str::endsWith($parse['host'], 'drumeo.com')) {
-            return redirect()->away(get_musora_brand_base_url() . '/order/drumeo');
+            return redirect()->to('/order/drumeo');
         } elseif (Str::endsWith($parse['host'], 'pianote.com')) {
-            return redirect()->away(get_musora_brand_base_url() . '/order/pianote');
+            return redirect()->to('/order/pianote');
         } elseif (Str::endsWith($parse['host'], 'guitareo.com')) {
-            return redirect()->away(get_musora_brand_base_url() . '/order/guitareo');
+            return redirect()->to('/order/guitareo');
         } elseif (Str::endsWith($parse['host'], 'singeo.com')) {
-            return redirect()->away(get_musora_brand_base_url() . '/order/singeo');
+            return redirect()->to('/order/singeo');
         }
 
         // default
-        return redirect()->away(get_musora_brand_base_url() . '/order/drumeo');
+        return redirect()->to('/order/drumeo');
     }
 
     public function redirectLegacyDrumeoAddToCartUrl(Request $request)
@@ -347,7 +385,7 @@ class OrderController extends Controller
         $input['products'] = $products; // rebuilt products array to maintain cart items order for the subscriptions sku remap case
 
         // route from ecommerce package
-        return redirect()->away(get_musora_brand_base_url() . '/ecommerce/add-to-cart?' . http_build_query($input));
+        return redirect()->to('/ecommerce/add-to-cart?' . http_build_query($input));
 
     }
 }

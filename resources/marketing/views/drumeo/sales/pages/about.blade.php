@@ -1,4 +1,4 @@
-@extends('drumeo._partials.layout-template')
+@extends('drumeo._partials.global-layout')
 
 @section('global-head')
     <title>Drumeo | Reach your drumming goals.</title>
@@ -7,15 +7,14 @@
     <meta name="description" content="Learn the drums faster with organized video lessons, legendary teachers, and better practice tools. 90-Day Guarantee.">
     <meta property="og:description" content="Learn the drums faster with organized video lessons, legendary teachers, and better practice tools. 90-Day Guarantee.">
 
-    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/sales/2022/og-image.jpg" style="display: none;">
+    <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/sales/2023/share-image-drumeo.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/">
 
-    @include('drumeo._partials._fonts')
+    @include('_partials.layout._fonts')
 
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"></noscript>
+    @include('_partials.layout._tailwindcdn')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
-    <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <style>
@@ -88,7 +87,8 @@
 
 @section('global-body')
     @include("drumeo.sales.partials._nav", [
-        "edgeVersion" => true,
+        "subscriptionVersion" => true,
+        "fullSubscriptionVersion" => true,
     ])
 
     <section class="text-white relative z-10 overflow-hidden px-4 md:px-8 py-8 md:py-40 lg:py-52 bg-cover bg-center lazyload" style="background-color:#163146;" data-bg="https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://drumeo-assets.s3.amazonaws.com/sales/about/Header_BG.jpg">
@@ -98,7 +98,7 @@
             <p class="text-light-navy my-2 sm:my-4 lg:my-7 mx-0 max-w-xs sm:max-w-sm lg:max-w-lg pr-6 sm:pr-0">Get online drum lessons, step-by-step video courses, and an awesome community you can access from anywhere, anytime.</p>
             <a class="join blue smaller mb-2 sm:mb-3 lg:mb-0" href="/">How It Works</a><br class="inline lg:hidden">
             <a class="join smaller outline mb-2 sm:mb-0" href="https://www.musora.com/careers">JOIN OUR TEAM</a><br class="inline sm:hidden">
-            <a class="join smaller outline" href="/support">CONTACT US</a>
+            <a class="join smaller outline" href="{{ get_musora_brand_base_url() }}/contact">CONTACT US</a>
         </div>
     </section>
     <section class="text-white relative z-10 overflow-hidden px-4 md:px-8 py-8 md:py-14 bg-cover bg-center" style="background:#000c17;">
@@ -420,7 +420,7 @@
                 </div>
                 <div class="w-full sm:w-1/3 px-2">
                     <p class="leading-tight mb-4">Still have<br class="hidden sm:inline lg:hidden"> questions?</p>
-                    <a class="w-full join smaller outline" href="/support">CONTACT US</a>
+                    <a class="w-full join smaller outline" href="{{ get_musora_brand_base_url() }}/contact">CONTACT US</a>
                 </div>
             </div>
         </div>
@@ -432,7 +432,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/js/sliding-anchor.js') }}"></script>
+
     <script async type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script async type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
     <script>

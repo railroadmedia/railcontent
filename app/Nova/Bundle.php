@@ -43,7 +43,7 @@ class Bundle extends Resource
             Text::make('Name')->required()->sortable(),
             //slug field for displaying to use a tag
             Text::make('Slug', function(){
-                return '<a class="link-default" target="_blank" href="/'.strtolower($this->brand->name).'/shop/'.$this->slug.'">'.$this->slug.'</a>';
+                return '<a class="link-default" target="_blank" href="'.get_legacy_brand_base_url(strtolower($this->brand->name)).($this->brand->name === 'Drumeo' ? '/drumshop/' : '/shop/').$this->slug.'">'.$this->slug.'</a>';
             })->asHtml(),
             //slug field for saving
             Text::make('Slug')->hideFromDetail()->hideFromIndex(),
@@ -77,7 +77,7 @@ class Bundle extends Resource
                 ->preview(function($value){
                     if(empty($value)) return null;
 
-                    return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
+                    return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') || str_contains($value, 'vimeocdn') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
                 }),
             Text::make('Meta Image', 'meta_img')->hideFromIndex()->hideFromDetail(),
             Currency::make('Price')->required(),
@@ -110,7 +110,7 @@ class Bundle extends Resource
                 ->preview(function($value){
                     if(empty($value)) return null;
 
-                    return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
+                    return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') || str_contains($value, 'vimeocdn') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
                 }),
             Text::make('Page Logo', 'page_logo')->hideFromIndex()->hideFromDetail(),
             Text::make('Header Text', 'header_text')->hideFromIndex(),
@@ -149,7 +149,7 @@ class Bundle extends Resource
                 ->preview(function($value){
                     if(empty($value)) return null;
 
-                    return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
+                    return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') || str_contains($value, 'vimeocdn') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
                 }),
             Markdown::make('Overview')
                 ->hideFromIndex(),

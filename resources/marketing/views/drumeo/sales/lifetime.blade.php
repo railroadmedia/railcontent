@@ -1,4 +1,4 @@
-@extends('drumeo._partials.layout-template')
+@extends('drumeo._partials.global-layout')
 
 @section('global-head')
     <title>Lifetime Membership | Drumeo</title>
@@ -9,10 +9,10 @@
     <meta property="og:description" content="Drum lessons for LIFE. (+20 FREE bonuses)">
     <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/promos/november/lifetime-fb-share-image.jpg" style="display: none;">
 
-    @include('drumeo._partials._fonts')
+    @include('_partials.layout._fonts')
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
+    @include('_partials.layout._tailwindcdn')
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <style>
@@ -55,7 +55,7 @@
 
 @section('global-body')
         @include("drumeo.sales.partials._nav", [
-            "edgeVersion" => true,
+            "subscriptionVersion" => true,
             "scrollToJoin" => true
         ])
         <section class="content-section text-center" style="padding-bottom: 0; background:linear-gradient(to bottom, #01050f 70%, #020c1a);">
@@ -155,7 +155,7 @@
         <div class="container mx-auto relative z-50">
             <div class="mx-auto max-w-xs sm:max-w-md md:max-w-xl lg:max-w-5xl" style="font-size: 0;">
                 {{--<h1 data-aos="fade-down" class="font-bebas leading-none mt-3 md:mt-5 text-5xl md:text-6xl">REACH YOUR  <br class="inline md:hidden"> <span class="text-coaches">DRUMMING GOALS.</span></h1>--}}
-                {{--<h2 data-aos-once="true" data-aos="fade-up" class="my-3 md:my-5 leading-normal"><strong>Improve your drumming for<br> just <span class="text-drumeo">${{ round((Prices::$drumeoEdgeAnnual / 12), 2) }}</span> per month.</strong></h2>--}}
+                {{--<h2 data-aos-once="true" data-aos="fade-up" class="my-3 md:my-5 leading-normal"><strong>Improve your drumming for<br> just <span class="text-drumeo">${{ round((Prices::$plusSubscriptionAnnual / 12), 2) }}</span> per month.</strong></h2>--}}
                 <h3 class="mb-5 md:mb-7 lg:mb-10" style="line-height: 1.4em;"><strong>Become a Lifetime Member<br class="inline sm:hidden"> today and get:</strong></h3>
                 <div class="bonus-wrap relative inline-block align-top mx-auto mb-3 px-1 md:px-3 w-full max-w-sm">
                     <div class="flip-div inline-block relative w-full group" style="padding-bottom: 70%;perspective: 1000px;">
@@ -177,7 +177,7 @@
 
                     <p class="uppercase w-full leading-normal mt-2">
                         <strong class="font-black leading-tight inline-block mb-1">Drumeo Lifetime Membership</strong><br>
-                        <span class="text-gradient" style="text-transform:uppercase; display:inline-block;"><strong>${{ Prices::$drumeoEdgeLifetime }}</strong><br>
+                        <span class="text-gradient" style="text-transform:uppercase; display:inline-block;"><strong>${{ Prices::$lifetimeMembership }}</strong><br>
                                 Instant Access</span>
                     </p>
                 </div>
@@ -189,7 +189,7 @@
                         'image' => 'https://cdn.musora.com/image/fetch/c_fill,w_300,q_auto:good/https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/eardrums.jpg',
                         'title' => 'Drumeo EarDrums',
                         'description' => 'Drumeo EarDrums reduce external volume by up to -29dB. That means you can play hard while protecting your ears.',
-                        'price' => Prices::$earDrumsFull,
+                        'price' => floatval($productPrices['drumeo-eardrums']->price),
                         'online-ship' => "Free Shipping",
                         'shipping' => "no-shipping"
                         ],
@@ -254,7 +254,7 @@
                 @endforeach
             </div>
 
-            {{--            @if($products['DLM-Lifetime']->getPublicStockCount() > 0)--}}
+            {{--            @if($products['DLM-Lifetime']->getStockAvailability() > 0)--}}
             {{--                <a class="join blue bigger my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ URL::Route('shopping-cart.to-cart.api') }}?products[DLM-Lifetime]=1&products[drumeo-eardrums]=1&products[Drumeo-VaterSticks]=12&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[learn-songs-faster-pack]=1&products[TLOD-DIGI]=1&products[MAM-DIGI]=1&products[GHFAL-DIGI]=1&products[HGAF-DIGI]=1&products[AOADS-DIGI]=1&products[ICM-DIGI]=1&products[BTC-DIGI]=1&products[CC-DIGI]=1&products[TG-DIGI]=1&locked=true">BECOME A LIFETIME MEMBER &raquo;</a>--}}
             {{--            @else--}}
             <a class="join sold-out my-4">Sold Out</a>
@@ -300,7 +300,7 @@
             });
         </script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/js/sliding-anchor.js') }}"></script>
+
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>

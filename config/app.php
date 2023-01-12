@@ -180,6 +180,7 @@ return [
         \Railroad\Railanalytics\AnalyticsServiceProvider::class,
         \Railroad\Location\Providers\LocationServiceProvider::class,
         \Railroad\RemoteStorage\Providers\RemoteStorageServiceProvider::class,
+        \Railroad\LeadTracker\Providers\LeadTrackerServiceProvider::class,
 
         /*
          * Module Service Providers
@@ -206,6 +207,8 @@ return [
         App\Providers\VaporUiServiceProvider::class,
 
         Venturecraft\Revisionable\RevisionableServiceProvider::class,
+
+        LaravelFCM\FCMServiceProvider::class,
     ],
 
     /*
@@ -236,6 +239,7 @@ return [
         'DB' => Illuminate\Support\Facades\DB::class,
         'Eloquent' => Illuminate\Database\Eloquent\Model::class,
         'Event' => Illuminate\Support\Facades\Event::class,
+        'FCM' => LaravelFCM\Facades\FCM::class,
         'File' => Illuminate\Support\Facades\File::class,
         'Gate' => Illuminate\Support\Facades\Gate::class,
         'Hash' => Illuminate\Support\Facades\Hash::class,

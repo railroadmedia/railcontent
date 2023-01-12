@@ -1,4 +1,4 @@
-@extends('drumeo._partials.layout-template')
+@extends('drumeo._partials.global-layout')
 
 @section('global-head')
     <title>100 Drumming Anthems | Drumeo</title>
@@ -9,11 +9,10 @@
     <meta property="og:description" content="Get expertly transcribed sheet music for 100 of drumming’s biggest songs (FREE).">
     <meta property="og:url" content="https://www.drumeo.com/100-songs/">
 
-    @include('drumeo._partials._fonts')
+    @include('_partials.layout._fonts')
 
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"></noscript>
-    <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
+    @include('_partials.layout._tailwindcdn')
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/lead-gen-tw.css') }}" rel="stylesheet">
     <style>
@@ -77,7 +76,7 @@
                 <strong>All the hits.</strong>
             </h2>
             <h6 class="leading-normal mb-6 md:mb-12 lg:mb-16 sm:px-4">
-                Out of {{ Prices::$songs }}+ songs inside Drumeo, these are the <s class="opacity-50">40</s> <strong>100</strong> songs drummers love to play the most– and now <br class="hidden lg:inline">
+                Out of {{ Prices::$drumeoSongs }}+ songs inside Drumeo, these are the <s class="opacity-50">40</s> <strong>100</strong> songs drummers love to play the most– and now <br class="hidden lg:inline">
                 it’s your turn. Scroll down to find your favorites and enter your email to get ALL the songs totally free.
             </h6>
             <div class="relative">
@@ -187,7 +186,9 @@
             ])
         </div>
     </div>
-    @include("drumeo.sales.partials._footer")
+    @include("drumeo.sales.partials._footer", [
+            "minimal" => true
+        ])
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script>

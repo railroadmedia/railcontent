@@ -9,23 +9,28 @@
           content="width=device-width, height=device-height, initial-scale=1, maximum-scale=5">
 
     @yield('meta')
+    @yield('global-head')
 
     {!! \App\Analytics\Tracker::trackPageView() !!}
 
-    @include('guitareo._partials.includes.google-optimize')
+    @include('guitareo._partials.google-optimize')
     @include('guitareo._partials.inspectlet')
 
     @include('_partials.layout.favicons.guitareo-favicons')
-    @include('guitareo._partials._fonts')
+    @include('_partials.layout._fonts')
 
     @yield('styles')
+    @yield('page-styles')
 
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     {!! \App\Analytics\Tracker::headBottom() !!}
 </head>
 
-<body class="@yield('body-class')">
+<body class="@yield('body-class')" @yield('body-data')>
 
 {!! \App\Analytics\Tracker::bodyTop() !!}
+
+    @yield('global-body')
 
     @yield('navigation')
 
@@ -35,8 +40,9 @@
 
     @yield('scripts')
 
-    @include('helpscout::helpscout-tracking-beacon-script', ['email' => !is_null(user()) ? user()->getEmail() : null])
+    <script type="text/javascript">!function(e,t,n){function a(){var e=t.getElementsByTagName("script")[0],n=t.createElement("script");n.type="text/javascript",n.async=!0,n.src="https://beacon-v2.helpscout.net",e.parentNode.insertBefore(n,e)}if(e.Beacon=n=function(t,n,a){e.Beacon.readyQueue.push({method:t,options:n,data:a})},n.readyQueue=[],"complete"===t.readyState)return a();e.attachEvent?e.attachEvent("onload",a):e.addEventListener("load",a,!1)}(window,document,window.Beacon||function(){});</script>
     <script type="text/javascript">
+        window.Beacon('init', '157f182f-3d4d-4cb7-8f8d-805f0b3e4fa4')
         Beacon('on', 'ready', () => {
             document.querySelector('.BeaconFabButtonFrame').style.bottom ="50px";
         })
@@ -59,7 +65,7 @@
                 .on('finish.countdown', function (event) {
                     $(this).html('<div class="tw-inline-block"><h2 class="tw-font-extrabold tw-leading-none tw-text-2xl md:tw-text-3xl lg:tw-text-4xl">LIMITED</h2> <p class="tw-leading-none tw-uppercase tw-font-extrabold tw-text-xs text-promo">TIME LEFT</p></div>');
                 });
-            $('.tzcd-big').countdown('2022/12/27')
+            $('.tzcd-big').countdown('2023/01/16')
                 .on('update.countdown', function (event) {
                     var format = '' + '<div class="inline-block mr-2"><h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">%M</h2> <p class="leading-none uppercase font-extrabold text-xs text-promo">min%!M</p></div> ' + '<div class="inline-block"><h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">%S</h2> <p class="leading-none uppercase font-extrabold text-xs text-promo">sec%!S</p></div>';
                     if (event.offset.totalHours > 0) {
@@ -73,7 +79,7 @@
                 .on('finish.countdown', function (event) {
                     $(this).html('<div class="inline-block"><h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">LIMITED</h2> <p class="leading-none uppercase font-extrabold text-xs text-promo">TIME LEFT</p></div>');
                 });
-            $('.tzcd-smaller').countdown('2022/12/27')
+            $('.tzcd-smaller').countdown('2023/01/16')
                 .on('update.countdown', function (event) {
                     var format = '' + '<div class="inline-block mr-2"><h2 class="font-extrabold leading-none text-lg">%M</h2> <p class="leading-none uppercase font-extrabold text-xs text-promo">min%!M</p></div> ' + '<div class="inline-block"><h2 class="font-extrabold leading-none text-lg">%S</h2> <p class="leading-none uppercase font-extrabold text-xs text-promo">sec%!S</p></div>';
                     if (event.offset.totalHours > 0) {

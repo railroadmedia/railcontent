@@ -30,6 +30,8 @@ use Illuminate\Support\Carbon;
  * @method static Builder|OnboardingAnswerHistory whereUpdatedAt($value)
  * @mixin Eloquent
  * @property-read User $user
+ * @property string|null $coach_name
+ * @method static Builder|OnboardingAnswerHistory whereCoachName($value)
  */
 class OnboardingAnswerHistory extends Model
 {

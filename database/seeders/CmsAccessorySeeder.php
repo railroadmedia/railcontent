@@ -1757,7 +1757,8 @@ The Guitareo Survival Guide is perfect for adding a little fun while navigating 
 
             ],
             'bundle_img' => 'https://singeo.s3.amazonaws.com/sales/promos/november/poster2.png',
-            'bundle_desc' => 'Knowing how to style and pronounce your vowels will have instant effects on your singing. This poster will be your new favorite practice tool - and your ticket to hitting higher notes with ease and confidence.'
+            'bundle_desc' => 'Knowing how to style and pronounce your vowels will have instant effects on your singing. This poster will be your new favorite practice tool - and your ticket to hitting higher notes with ease and confidence.',
+            'bundle_free_shipping' => true,
         ],
         [
             "brand" => 4,

@@ -10,9 +10,9 @@
     <meta property="og:url" content="https://www.pianote.com/500-songs">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+    @include('_partials.layout._tailwindcdn')
     <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="/marketing/parcel/pianote/500-songs.css">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/500-songs.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap" rel="stylesheet">
 @stop
 
@@ -56,8 +56,8 @@
                 @hasSection('badge')
                     @yield('badge')
                 @endif
-                @if(PianotePrices::$songs500Full > $productPrice)
-                        <s>NORMALLY ${{ PianotePrices::$songs500Full }}.</s> &nbsp;<strong><u>ONLY ${{ $productPrice }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * ($productPrice / PianotePrices::$songs500Full))) }}%)
+                @if(floatval($productPrices['500-songs-in-5-days']->price) > $productPrice)
+                        <s>NORMALLY ${{ floatval($productPrices['500-songs-in-5-days']->price) }}.</s> &nbsp;<strong><u>ONLY ${{ $productPrice }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * ($productPrice / floatval($productPrices['500-songs-in-5-days']->price)))) }}%)
                 @else
                     <strong><u>ONLY ${{ $productPrice }}</u></strong>
                 @endif
@@ -105,8 +105,8 @@
                     The Fastest Way To Learn How<br class="hidden-xs"> To Play Songs -- <u>For Just ${{ $productPrice }}</u>
                 @endif
             </h1>
-            @if(PianotePrices::$songs500Full > $productPrice)
-                <h3><em><s>NORMALLY ${{ PianotePrices::$songs500Full }}</s></em></h3>
+            @if(floatval($productPrices['500-songs-in-5-days']->price) > $productPrice)
+                <h3><em><s>NORMALLY ${{ floatval($productPrices['500-songs-in-5-days']->price) }}</s></em></h3>
                 @else
 
                 <h3>&nbsp;</h3>
@@ -372,8 +372,8 @@
                 @endif
                     payment of just
 
-                @if(PianotePrices::$songs500Full > $productPrice)
-                    <s>${{ PianotePrices::$songs500Full }}</s> <strong>${{ $productPrice }}</strong>
+                @if(floatval($productPrices['500-songs-in-5-days']->price) > $productPrice)
+                    <s>${{ floatval($productPrices['500-songs-in-5-days']->price) }}</s> <strong>${{ $productPrice }}</strong>
                 @else
                     <strong>${{ $productPrice }}</strong>
                 @endif
@@ -387,8 +387,8 @@
                 @hasSection('badge')
                     @yield('badge')
                 @endif
-                @if(PianotePrices::$songs500Full > $productPrice)
-                    <s>NORMALLY ${{ PianotePrices::$songs500Full }}.</s> &nbsp;<strong><u>ONLY ${{ $productPrice }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * ($productPrice / PianotePrices::$songs500Full))) }}%)
+                @if(floatval($productPrices['500-songs-in-5-days']->price) > $productPrice)
+                    <s>NORMALLY ${{ floatval($productPrices['500-songs-in-5-days']->price) }}.</s> &nbsp;<strong><u>ONLY ${{ $productPrice }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * ($productPrice / floatval($productPrices['500-songs-in-5-days']->price)))) }}%)
                 @else
                     <strong><u>ONLY ${{ $productPrice }}</u></strong>
                 @endif
@@ -433,8 +433,8 @@
             }
         });
     </script>
-    <script type="text/javascript" src="/marketing/parcel/pianote/nav-footer.js"></script>
-    <script type="text/javascript" src="/marketing/js/modal-autoplay-bootstrap.js"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay-bootstrap.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/1.9.3/countUp.min.js"></script>
     <script>
         $(function() {
@@ -476,12 +476,12 @@
             $(window).trigger('scroll');
         });
     </script>
-    <script src="{{ asset('marketing/js/pianote/manifest.js') }}"></script>
-    <script src="{{ asset('marketing/js/pianote/vendor.js') }}"></script>
-    <script src="{{ asset('marketing/js/pianote/cart-sidebar.js') }}"></script>
-    <script src="{{ asset('marketing/js/pianote/app.js') }}"></script>
+    <script src="{{ asset('/marketing/js/pianote/manifest.js') }}"></script>
+    <script src="{{ asset('/marketing/js/pianote/vendor.js') }}"></script>
+    <script src="{{ asset('/marketing/js/pianote/cart-sidebar.js') }}"></script>
+    <script src="{{ asset('/marketing/js/pianote/app.js') }}"></script>
 
     @yield('scripts')
 
-    @include('pianote._partials.inspectlet')
+
 @stop

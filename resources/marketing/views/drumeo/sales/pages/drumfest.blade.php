@@ -1,4 +1,4 @@
-@extends('drumeo._partials.layout-template')
+@extends('drumeo._partials.global-layout')
 
 @section('global-head')
     <title>Quebec Drum Festival | Drumeo</title>
@@ -10,18 +10,17 @@
     <meta property="og:image" content="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://drumeo-assets.s3.amazonaws.com/festival/quebec-festival-header-bg.jpg">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
-    @include('drumeo._partials._fonts')
+    @include('_partials.layout._fonts')
 
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"></noscript>
-    <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
+    @include('_partials.layout._tailwindcdn')
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
 @endsection
 
 @section('global-body')
     @include("drumeo.sales.partials._nav", [
-        "edgeVersion" => true,
+        "subscriptionVersion" => true,
         "scrollToJoin" => true,
     ])
 
@@ -80,7 +79,7 @@
         <div class="flex flex-wrap items-end justify-center 2-full max-w-md md:max-w-3xl my-5 sm:my-7 mx-auto px-4 lg:px-0">
             <div class="w-full md:w-1/2 px-2 md:px-3 relative">
                 <p class="w-full px-4 pt-2 pb-4 -mb-3 text-white rounded-t-2xl bg-drumeo"><strong>LIMITED TIME DEAL</strong></p>
-                <a href="/laravel/public/shopping-cart/api/query?products[DLM]=1,year,1&products[quietkick]=1&products[quietpad]=1&products[Drumeo-VaterSticks]=1&locked=true&promo-code=drumfest" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">
+                <a href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[quietkick]=1&products[quietpad]=1&products[Drumeo-VaterSticks]=1&locked=true&promo-code=drumfest" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">
                     <div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">
                         <h5 class="leading-none mb-3">Better Practice Bundle</h5>
                         <h1 class="inline-block leading-none">
@@ -102,7 +101,7 @@
             <div class="w-full md:w-1/2 px-2 md:px-3 relative">
                 <p class="w-full px-4 pt-2 pb-4 -mb-3 text-white rounded-t-2xl" style="background:
                 #FFAE00;"><strong>LIMITED TIME DEAL</strong></p>
-                <a href="/laravel/public/shopping-cart/api/query?products[DLM]=1,year,1&products[drumeo-eardrums]=1&products[Drumeo-VaterSticks]=1&locked=true&promo-code=drumfest" class="text-black overflow-hidden rounded-2xl block mx-auto group">
+                <a href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[drumeo-eardrums]=1&products[Drumeo-VaterSticks]=1&locked=true&promo-code=drumfest" class="text-black overflow-hidden rounded-2xl block mx-auto group">
                     <div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">
                         <h5 class="leading-none mb-3">Sound Better Bundle</h5>
                         <h1 class="inline-block leading-none">

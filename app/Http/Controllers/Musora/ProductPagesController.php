@@ -42,7 +42,7 @@ class ProductPagesController extends BaseController
                 'hats' => $hats,
                 'shirts' => $shirts,
                 'hoodies' => $hoodies,
-                'theme' => $brand,
+                'brand' => $brand,
                 'category' => $category
             ]);
         }
@@ -50,7 +50,7 @@ class ProductPagesController extends BaseController
         else {
             return view('musora.product.products',[
                 'products' => $products,
-                'theme' => $brand,
+                'brand' => $brand,
             ]);
         }
     }
@@ -60,7 +60,188 @@ class ProductPagesController extends BaseController
 
         return view('musora.product.product',[
             'product' => $product,
-            'theme' => $brand,
+            'brand' => $brand,
         ]);
     }
+
+public function newdrummers()
+    {
+        return view('drumeo.products.new-drummers');
+    }
+
+public function rockdrummingmasterclass()
+    {
+        return view('drumeo.products.rock-drumming-masterclass');
+    }
+
+public function drumtechniquemadeeasy()
+    {
+        return view('drumeo.products.drum-technique-made-easy');
+    }
+
+public function beyondbeginnerdrumming()
+    {
+        return view('drumeo.products.beyond-beginner-drumming');
+    }
+
+public function independencemadeeasy()
+    {
+        return view('drumeo.products.independence-made-easy');
+    }
+
+public function learnsongsfaster()
+    {
+        return view('drumeo.products.learn-songs-faster');
+    }
+
+public function betterdrumfills()
+    {
+        return view('drumeo.products.better-drum-fills');
+    }
+
+public function electrifyyourdrumming()
+    {
+        return view('drumeo.products.electrify-your-drumming');
+    }
+
+public function successfuldrummingdiscount()
+    {
+        return view('drumeo.products.successful-drumming-discount');
+    }
+
+public function drummingsystemdiscount()
+    {
+        return view('drumeo.products.drumming-system-discount');
+    }
+
+public function quietkick()
+    {
+        return view('drumeo.products.quietkick');
+    }
+
+public function eardrums()
+    {
+        return view('drumeo.products.eardrums');
+    }
+
+public function tonecontrolkit()
+    {
+        return view('drumeo.products.tone-control-kit');
+    }
+
+public function drumsticks()
+    {
+        return view('drumeo.products.drumsticks');
+    }
+
+public function practicepadfull()
+    {
+        return view('drumeo.products.practice-pad-full');
+    }
+
+public function quietpad()
+    {
+        return view('drumeo.products.quietpad');
+    }
+
+public function thedrummerstoolbox()
+    {
+        return view('drumeo.products.the-drummers-toolbox');
+    }
+
+public function beginnerbook()
+    {
+        return view('drumeo.products.beginner-book');
+    }
+
+public function thirtydaydrummer()
+    {
+        return view('drumeo.products.30-day-drummer');
+    }
+
+public function playbeautifulpiano()
+    {
+        return view('pianote.products.play-beautiful-piano');
+    }
+
+public function songs500()
+    {
+        return view('pianote.products.500-songs');
+    }
+
+public function worshippiano()
+    {
+        return view('pianote.products.worship-piano');
+    }
+
+public function pianotechniquemadeeasy()
+    {
+        return view('pianote.products.piano-technique-made-easy');
+    }
+
+public function destupefyyourlefthand()
+    {
+        return view('pianote.products.destupefy-your-left-hand');
+    }
+
+public function fasterfingers()
+    {
+        return view('pianote.products.faster-fingers');
+    }
+
+public function riffsandfills()
+    {
+        return view('pianote.products.riffs-and-fills');
+    }
+
+public function beginnerclassicalpiano()
+    {
+        return view('pianote.products.beginner-classical-piano.beginner-classical-piano');
+    }
+
+public function thepowerofchords()
+    {
+        return view('pianote.products.the-power-of-chords');
+    }
+
+public function thepowerofchordsbootcamp()
+    {
+        return view('pianote.products.the-power-of-chords-bootcamp');
+    }
+
+public function rhythmandgroove()
+    {
+        return view('guitareo.products.rhythm-and-groove');
+    }
+
+public function guitartechniquemadeeasy()
+    {
+        return view('guitareo.products.guitar-technique-made-easy');
+    }
+
+public function acousticguitarmadeeasy()
+    {
+        return view('guitareo.products.acoustic-guitar-made-easy');
+    }
+
+public function guitarsystem()
+    {
+        return view('guitareo.products.guitar-system');
+    }
+
+public function guitarquest()
+    {
+        return view('guitareo.products.guitar-quest.guitar-quest');
+    }
+
+public function guitareosongs500()
+    {
+        return view('guitareo.products.500-songs');
+    }
+
+public function singingstarterkit()
+    {
+        return view('singeo.products.singing-starter-kit');
+    }
+
 }

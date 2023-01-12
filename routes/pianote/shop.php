@@ -10,12 +10,14 @@ Route::domain('{pianoteDomain}')
     Route::group(['prefix' => 'shop' ],
         function () {
             Route::get('/concert-headphones', [SalesController::class, 'concertHeadphones']);
+            Route::get('/concert-headphones-members', [SalesController::class, 'concertHeadphonesMembers']);
         }
     );
-
 
     Route::get('/{category}', [ShopController::class, 'shop'])
         ->whereIn('category', ['shop', 'lessons', 'accessories', 'clothing']);;
 
     Route::get('/shop/{productslug}', [ShopController::class, 'product']);
+
+
 });

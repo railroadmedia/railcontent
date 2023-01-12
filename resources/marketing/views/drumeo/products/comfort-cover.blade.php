@@ -8,6 +8,8 @@
     <meta property="og:title" content="Comfort Cover">
     <meta property="og:description" content="Upgrade any round drum throne in seconds.">
     <meta property="og:url" content="https://www.drumeo.com/drumshop/comfort-cover/">
+
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
 @stop()
 
 @section('head')
@@ -160,8 +162,8 @@
 @section('content')
     @include('drumeo.products.partials.promo-banner', [
                 "name" => "Comfort Cover",
-                "fullPrice" => Prices::$comfortCoverFull,
-                "price" => Prices::$comfortCoverRegular,
+                "fullPrice" => floatval($productPrices['comfort-cover']->price),
+                "price" => floatval($productPrices['comfort-cover']->discounted_price),
                 "noBreadcrumb" => true
             ])
 
@@ -177,19 +179,19 @@
             <i data-open="previewModal" class="fas fa-play play-button autoplay-video"></i>
             <br>
             <h1><strong>Upgrade your drum<br class="hide-for-medium"> throne in seconds.</strong></h1>
-            {{--            @if($products['comfort-cover']->getStock() > 0)--}}
-            <a class="join blue" href="/laravel/public/shopping-cart/api/query?products[comfort-cover]=1">Get Comfy &raquo;</a>
+            {{--            @if($products['comfort-cover']->getStockAvailability() > 0)--}}
+            <a class="join blue" href="/ecommerce/add-to-cart?products[comfort-cover]=1">Get Comfy &raquo;</a>
             {{--@else--}}
             {{--<a class="join blue sold-out">Sold Out</a>--}}
             {{--@endif--}}
             <p>
-                @if(Prices::$comfortCoverFull > Prices::$comfortCoverRegular)
-                    <s style="opacity: 0.6;">NORMALLY ${{ Prices::$comfortCoverFull }}</s>
+                @if(floatval($productPrices['comfort-cover']->price) > floatval($productPrices['comfort-cover']->discounted_price))
+                    <s style="opacity: 0.6;">NORMALLY ${{ floatval($productPrices['comfort-cover']->price) }}</s>
                     <strong class="text-yellow">
-                        ONLY ${{ number_format(Prices::$comfortCoverRegular, 2) }}
+                        ONLY ${{ number_format(floatval($productPrices['comfort-cover']->discounted_price), 2) }}
                     </strong>
                 @else
-                    <strong class="text-yellow">ONLY ${{ number_format(Prices::$comfortCoverRegular, 2) }}.</strong>
+                    <strong class="text-yellow">ONLY ${{ number_format(floatval($productPrices['comfort-cover']->discounted_price), 2) }}.</strong>
                 @endif
             </p>
         </div>
@@ -198,8 +200,8 @@
                 <iframe class="reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/510872818?autoplay=1"
                     frameborder="0" allowfullscreen allow="autoplay"></iframe>
             </div>
-            {{--            @if($products['comfort-cover']->getStock() > 0)--}}
-            <a href="/laravel/public/shopping-cart/api/query?products[comfort-cover]=1" class="join blue">Get Comfy &raquo;</a>
+            {{--            @if($products['comfort-cover']->getStockAvailability() > 0)--}}
+            <a href="/ecommerce/add-to-cart?products[comfort-cover]=1" class="join blue">Get Comfy &raquo;</a>
             {{--@endif--}}
         </div>
     </header>
@@ -302,10 +304,10 @@
                         </tr>
                         <tr>
                             <td>Cost</td>
-                            <td> @if(Prices::$comfortCoverFull > Prices::$comfortCoverRegular)
-                                    <s>${{ Prices::$comfortCoverFull }}</s><br>
+                            <td> @if(floatval($productPrices['comfort-cover']->price) > floatval($productPrices['comfort-cover']->discounted_price))
+                                    <s>${{ floatval($productPrices['comfort-cover']->price) }}</s><br>
                                 @endif
-                                ${{ number_format(Prices::$comfortCoverRegular, 2) }}</td>
+                                ${{ number_format(floatval($productPrices['comfort-cover']->discounted_price), 2) }}</td>
                         </tr>
                     </table>
                 </div>
@@ -342,18 +344,18 @@
         <div class="row">
             <img class="logo" src="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/comfort-cover/comfort-cover-logo-w-drumart.png"><br>
             <h1><strong>Upgrade your drum<br class="hide-for-medium"> throne in seconds.</strong></h1>
-            {{--            @if($products['comfort-cover']->getStock() > 0)--}}
-            <a href="/laravel/public/shopping-cart/api/query?products[comfort-cover]=1" class="join blue">Get Comfy &raquo;</a>
+            {{--            @if($products['comfort-cover']->getStockAvailability() > 0)--}}
+            <a href="/ecommerce/add-to-cart?products[comfort-cover]=1" class="join blue">Get Comfy &raquo;</a>
             {{--@else--}}
             {{--<a class="join blue sold-out">Sold Out</a>--}}
             {{--@endif--}}
-            <p>@if(Prices::$comfortCoverFull > Prices::$comfortCoverRegular)
-                    <s style="opacity: 0.6;">NORMALLY ${{ Prices::$comfortCoverFull }}</s>
+            <p>@if(floatval($productPrices['comfort-cover']->price) > floatval($productPrices['comfort-cover']->discounted_price))
+                    <s style="opacity: 0.6;">NORMALLY ${{ floatval($productPrices['comfort-cover']->price) }}</s>
                     <strong class="text-yellow">
-                        ONLY ${{ number_format(Prices::$comfortCoverRegular, 2) }}
+                        ONLY ${{ number_format(floatval($productPrices['comfort-cover']->discounted_price), 2) }}
                     </strong>
                 @else
-                    <strong class="text-yellow">ONLY ${{ number_format(Prices::$comfortCoverRegular, 2) }}.</strong>
+                    <strong class="text-yellow">ONLY ${{ number_format(floatval($productPrices['comfort-cover']->discounted_price), 2) }}.</strong>
                 @endif
             </p>
 
@@ -372,22 +374,25 @@
         </div>
     </section>
 
-    <section class="faqs text-center">
+    <section class="py-8 md:py-15 lg:py-16 px-4 lg:px-0 text-center">
         <div class="noise-wrap">
             <div class="row">
-                <h2><strong>Still have questions?</strong></h2>
+                <h2 class="mb-10"><strong>Still have questions?</strong></h2>
 
-                @include('drumeo.products.partials.question-dropdown', [
-                "question" => "Does the Comfort Cover fit a tractor style seat?",
-                "answer" => "No. The Comfort Cover slides over any <strong>round</strong> drum throne, but unfortunately no other shapes at this time. ",
+                @include('_partials.components.question-dropdown', [
+                "num" => "?",
+                "title" => "Does the Comfort Cover fit a tractor style seat?",
+                "desc" => "No. The Comfort Cover slides over any <strong>round</strong> drum throne, but unfortunately no other shapes at this time. ",
                 ])
-                @include('drumeo.products.partials.question-dropdown', [
-                "question" => "Can I get a Comfort Cover shipped to [ <em>insert country other than USA</em> ]?",
-                "answer" => "Yes. The Comfort Cover is changing the world one cushier tushy at a time. International shipping is available with varying rates by region. You will see your total shipping charge listed upon checkout.",
+                @include('_partials.components.question-dropdown', [
+                "num" => "?",
+                "title" => "Can I get a Comfort Cover shipped to [ <em>insert country other than USA</em> ]?",
+                "desc" => "Yes. The Comfort Cover is changing the world one cushier tushy at a time. International shipping is available with varying rates by region. You will see your total shipping charge listed upon checkout.",
                 ])
-                @include('drumeo.products.partials.question-dropdown', [
-                "question" => "Will the Comfort Cover replace my existing throne?",
-                "answer" => "No! The Comfort Cover upgrades your existing round drum throne to a more comfortable drumming experience. Just slide it over top and start playing -- you’re ready to go in seconds.",
+                @include('_partials.components.question-dropdown', [
+                "num" => "?",
+                "title" => "Will the Comfort Cover replace my existing throne?",
+                "desc" => "No! The Comfort Cover upgrades your existing round drum throne to a more comfortable drumming experience. Just slide it over top and start playing -- you’re ready to go in seconds.",
                 ])
             </div>
         </div>

@@ -14,120 +14,48 @@ Route::middleware(['web_public'])
 
         /*---- CUSTOM PRODUCT PAGE ----*/
 //Drumeo
-        Route::get('drumeo/shop/new-drummers', function () {
-            return view('drumeo.products.new-drummers');
-        });
-        Route::get('drumeo/shop/rock-drumming-masterclass', function () {
-            return view('drumeo.products.rock-drumming-masterclass');
-        });
-        Route::get('drumeo/shop/drum-technique-made-easy', function () {
-            return view('drumeo.products.drum-technique-made-easy');
-        });
-        Route::get('drumeo/shop/beyond-beginner-drumming', function () {
-            return view('drumeo.products.beyond-beginner-drumming');
-        });
-        Route::get('drumeo/shop/independence-made-easy', function () {
-            return view('drumeo.products.independence-made-easy');
-        });
-        Route::get('drumeo/shop/learn-songs-faster', function () {
-            return view('drumeo.products.learn-songs-faster');
-        });
-        Route::get('drumeo/shop/better-drum-fills', function () {
-            return view('drumeo.products.better-drum-fills');
-        });
-        Route::get('drumeo/shop/electrify-your-drumming', function () {
-            return view('drumeo.products.electrify-your-drumming');
-        });
-        Route::get('drumeo/shop/successful-drumming-discount', function () {
-            return view('drumeo.products.successful-drumming-discount');
-        });
-        Route::get('drumeo/shop/drumming-system-discount', function () {
-            return view('drumeo.products.drumming-system-discount');
-        });
-        Route::get('drumeo/shop/quietkick', function () {
-            return view('drumeo.products.quietkick');
-        });
-        Route::get('drumeo/shop/eardrums', function () {
-            return view('drumeo.products.eardrums');
-        });
-        Route::get('drumeo/shop/tone-control-kit', function () {
-            return view('drumeo.products.tone-control-kit');
-        });
-        Route::get('drumeo/shop/drumsticks', function () {
-            return view('drumeo.products.drumsticks');
-        });
-        Route::get('drumeo/shop/practice-pad-full', function () {
-            return view('drumeo.products.practice-pad-full');
-        });
-        Route::get('drumeo/shop/quietpad', function () {
-            return view('drumeo.products.quietpad');
-        });
-        Route::get('drumeo/shop/the-drummers-toolbox', function () {
-            return view('drumeo.products.the-drummers-toolbox');
-        });
-        Route::get('drumeo/shop/beginner-book', function () {
-            return view('drumeo.products.beginner-book');
-        });
-        Route::get('drumeo/shop/30-day-drummer', function () {
-            return view('drumeo.products.30-day-drummer');
-        });
+        Route::get('drumeo/shop/new-drummers', [ProductPagesController::class, 'newdrummers'] );
+        Route::get('drumeo/shop/rock-drumming-masterclass', [ProductPagesController::class, 'rockdrummingmasterclass'] );
+        Route::get('drumeo/shop/drum-technique-made-easy', [ProductPagesController::class, 'drumtechniquemadeeasy'] );
+        Route::get('drumeo/shop/beyond-beginner-drumming', [ProductPagesController::class, 'beyondbeginnerdrumming'] );
+        Route::get('drumeo/shop/independence-made-easy', [ProductPagesController::class, 'independencemadeeasy'] );
+        Route::get('drumeo/shop/learn-songs-faster', [ProductPagesController::class, 'learnsongsfaster'] );
+        Route::get('drumeo/shop/better-drum-fills', [ProductPagesController::class, 'betterdrumfills'] );
+        Route::get('drumeo/shop/electrify-your-drumming', [ProductPagesController::class, 'electrifyyourdrumming'] );
+        Route::get('drumeo/shop/successful-drumming-discount', [ProductPagesController::class, 'successfuldrummingdiscount'] );
+        Route::get('drumeo/shop/drumming-system-discount', [ProductPagesController::class, 'drummingsystemdiscount'] );
+        Route::get('drumeo/shop/quietkick', [ProductPagesController::class, 'quietkick'] );
+        Route::get('drumeo/shop/eardrums', [ProductPagesController::class, 'eardrums'] );
+        Route::get('drumeo/shop/tone-control-kit', [ProductPagesController::class, 'tonecontrolkit'] );
+        Route::get('drumeo/shop/drumsticks', [ProductPagesController::class, 'drumsticks'] );
+        Route::get('drumeo/shop/practice-pad-full', [ProductPagesController::class, 'practicepadfull'] );
+        Route::get('drumeo/shop/quietpad', [ProductPagesController::class, 'quietpad'] );
+        Route::get('drumeo/shop/the-drummers-toolbox', [ProductPagesController::class, 'thedrummerstoolbox'] );
+        Route::get('drumeo/shop/beginner-book', [ProductPagesController::class, 'beginnerbook'] );
+        Route::get('drumeo/shop/30-day-drummer', [ProductPagesController::class, 'thirtydaydrummer'] );
 
 //Pianote
-        Route::get('pianote/shop/play-beautiful-piano', function () {
-            return view('pianote.products.play-beautiful-piano');
-        });
-        Route::get('pianote/shop/500-songs', function () {
-            return view('pianote.products.500-songs');
-        });
-        Route::get('pianote/shop/worship-piano', function () {
-            return view('pianote.products.worship-piano');
-        });
-        Route::get('pianote/shop/piano-technique-made-easy', function () {
-            return view('pianote.products.piano-technique-made-easy');
-        });
-        Route::get('pianote/shop/destupefy-your-left-hand', function () {
-            return view('pianote.products.destupefy-your-left-hand');
-        });
-        Route::get('pianote/shop/faster-fingers', function () {
-            return view('pianote.products.faster-fingers');
-        });
-        Route::get('pianote/shop/riffs-and-fills', function () {
-            return view('pianote.products.riffs-and-fills');
-        });
-        Route::get('pianote/shop/beginner-classical-piano', function () {
-            return view('pianote.products.beginner-classical-piano.beginner-classical-piano');
-        });
-        Route::get('pianote/shop/the-power-of-chords', function () {
-            return view('pianote.products.the-power-of-chords');
-        });
-        Route::get('pianote/shop/the-power-of-chords-bootcamp', function () {
-            return view('pianote.products.the-power-of-chords-bootcamp');
-        });
+        Route::get('pianote/shop/play-beautiful-piano', [ProductPagesController::class, 'playbeautifulpiano'] );
+        Route::get('pianote/shop/500-songs', [ProductPagesController::class, 'songs500'] );
+        Route::get('pianote/shop/worship-piano', [ProductPagesController::class, 'worshippiano'] );
+        Route::get('pianote/shop/piano-technique-made-easy', [ProductPagesController::class, 'pianotechniquemadeeasy'] );
+        Route::get('pianote/shop/destupefy-your-left-hand', [ProductPagesController::class, 'destupefyyourlefthand'] );
+        Route::get('pianote/shop/faster-fingers', [ProductPagesController::class, 'fasterfingers'] );
+        Route::get('pianote/shop/riffs-and-fills', [ProductPagesController::class, 'riffsandfills'] );
+        Route::get('pianote/shop/beginner-classical-piano', [ProductPagesController::class, 'beginnerclassicalpiano'] );
+        Route::get('pianote/shop/the-power-of-chords', [ProductPagesController::class, 'thepowerofchords'] );
+        Route::get('pianote/shop/the-power-of-chords-bootcamp', [ProductPagesController::class, 'thepowerofchordsbootcamp'] );
 
 //Guitareo
-        Route::get('guitareo/shop/rhythm-and-groove', function () {
-            return view('guitareo.products.rhythm-and-groove');
-        });
-        Route::get('guitareo/shop/guitar-technique-made-easy', function () {
-            return view('guitareo.products.guitar-technique-made-easy');
-        });
-        Route::get('guitareo/shop/acoustic-guitar-made-easy', function () {
-            return view('guitareo.products.acoustic-guitar-made-easy');
-        });
-        Route::get('guitareo/shop/guitar-system', function () {
-            return view('guitareo.products.guitar-system');
-        });
-        Route::get('guitareo/shop/guitar-quest', function () {
-            return view('guitareo.products.guitar-quest.guitar-quest');
-        });
-        Route::get('guitareo/shop/500-songs', function () {
-            return view('guitareo.products.500-songs');
-        });
+        Route::get('guitareo/shop/rhythm-and-groove', [ProductPagesController::class, 'rhythmandgroove'] );
+        Route::get('guitareo/shop/guitar-technique-made-easy', [ProductPagesController::class, 'guitartechniquemadeeasy'] );
+        Route::get('guitareo/shop/acoustic-guitar-made-easy', [ProductPagesController::class, 'acousticguitarmadeeasy'] );
+        Route::get('guitareo/shop/guitar-system', [ProductPagesController::class, 'guitarsystem'] );
+        Route::get('guitareo/shop/guitar-quest', [ProductPagesController::class, 'guitarquest'] );
+        Route::get('guitareo/shop/500-songs', [ProductPagesController::class, 'guitareosongs500'] );
 
 //Singeo
-        Route::get('singeo/shop/singing-starter-kit', function () {
-            return view('singeo.products.singing-starter-kit');
-        });
+        Route::get('singeo/shop/singing-starter-kit', [ProductPagesController::class, 'singingstarterkit'] );
 
         Route::get('{brand}/shop/{product:slug}', [ProductPagesController::class, 'product'])
             ->whereIn('brand', all_brands())

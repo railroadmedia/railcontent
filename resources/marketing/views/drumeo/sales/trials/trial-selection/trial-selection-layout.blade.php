@@ -1,27 +1,27 @@
-@extends('drumeo._partials.layout-template')
+@extends('drumeo._partials.global-layout')
 
 @section('global-head')
     <title>Drumeo Trial</title>
     <meta property="og:title" content="Drumeo Trial">
     <meta property="og:url" content="https://www.drumeo.com/trial/">
     <meta name="description" content="Learn the drums faster with organized video lessons, legendary teachers, and better practice tools. 90-Day Guarantee. ">
-    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/sales/2022/og-image.jpg" style="display: none;">
+    <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/sales/2023/share-image-drumeo.jpg" style="display: none;">
     <meta property="og:description" content="Reach your drumming goals with organized video lessons, legendary teachers, and better practice tools. 90-Day Guarantee.">
     @if(empty($weekly))
         <meta name="robots" content="noindex">
     @endif
 
-    @include('drumeo._partials._fonts')
+    @include('_partials.layout._fonts')
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
+    @include('_partials.layout._tailwindcdn')
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
 @stop
 
 @section('global-body')
     @include("drumeo.sales.partials._nav", [
-            "edgeVersion" => true
+            "subscriptionVersion" => true
         ])
 
     <style>
@@ -63,11 +63,11 @@
                             @hasSection('month-url')
                                 @yield('month-url')
                             @else
-                                href="/laravel/public/shopping-cart/api/query?products[DLM-Trial-30-Day]=1&promo-code=melodics-special-offer&locked=true"
+                                href="/ecommerce/add-to-cart?products[DLM-Trial-30-Day]=1&promo-code=melodics-special-offer&locked=true"
                             @endif
                     >
                         <h2><strong>MONTHLY</strong></h2>
-                        <h1 class="my-2 md:my-4"><strong>$29</strong><sub class="bottom-0 text-xs -mr-10" st>/month</sub></h1>
+                        <h1 class="my-2 md:my-4"><strong>$30</strong><sub class="bottom-0 text-xs -mr-10" st>/month</sub></h1>
                         <p class="mb-3 text-light-navy"><em>If you're just giving it a test-drive.</em></p>
                         <ul class="fa-ul text-left my-4 md:my-6">
                             <li><i class="fa-li fal fa-check"></i> DrumeoMETHOD</li>
@@ -92,7 +92,7 @@
                             @hasSection('annual-url')
                                 @yield('annual-url')
                             @else
-                                href="/laravel/public/shopping-cart/api/query?products[DLM-Trial-Annual-30-Day]=1&locked=true"
+                                href="/ecommerce/add-to-cart?products[DLM-Trial-Annual-30-Day]=1&locked=true"
                             @endif
                     >
                         <h2><strong>ANNUAL</strong></h2>

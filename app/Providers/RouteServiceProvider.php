@@ -63,7 +63,6 @@ class RouteServiceProvider extends ServiceProvider
             Route::group([], base_path('routes/musora/marketing/homepage.php'));
             Route::group([], base_path('routes/musora/marketing/order-form.php'));
             Route::group([], base_path('routes/musora/marketing/login.php'));
-            Route::group([], base_path('routes/musora/marketing/product.php'));
             Route::group([], base_path('routes/musora/marketing/other.php'));
             Route::group([], base_path('routes/musora/platform/home.php'));
             Route::group([], base_path('routes/musora/platform/search.php'));
@@ -79,12 +78,13 @@ class RouteServiceProvider extends ServiceProvider
             Route::group([], base_path('routes/pianote/sales.php'));
             Route::group([], base_path('routes/pianote/lead-gen.php'));
             Route::group([], base_path('routes/pianote/shop.php'));
-            Route::group([], base_path('routes/pianote/access-code-redeem.php'));
 
             Route::group([], base_path('routes/singeo/sales.php'));
             Route::group([], base_path('routes/singeo/shop.php'));
 
             Route::group([], base_path('routes/misc/http_error_code_routes.php'));
+
+            Route::group([], base_path('routes/misc/legacy_brand_members_redirects_to_up.php'));
         });
     }
 }

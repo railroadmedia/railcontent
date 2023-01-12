@@ -13,7 +13,7 @@
             ],
             "Member Login" => [
                 "iconClass" => "fas fa-sign-in",
-                "url" => "/members",
+                "url" => get_musora_brand_base_url() . '/login',
             ],
             "Contact" => [
                 "iconClass" => "fas fa-phone",

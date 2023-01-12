@@ -1,13 +1,13 @@
-@extends('drumeo._partials.layout-template')
+@extends('drumeo._partials.global-layout')
 
 @section('global-head')
     <title>Cookie Policy | Drumeo</title>
     <meta property="og:title" content="Cookie Policy">
     <meta name="description" content="When you visit or access Musora Media, Inc websites, we may use web beacons, cookies, pixel tags, scripts, tags, API and other technologies.">
 
-    @include('drumeo._partials._fonts')
+    @include('_partials.layout._fonts')
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"/>
+    @include('_partials.layout._tailwindcdn')
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
 
     <style>
@@ -19,7 +19,7 @@
 
 @section('global-body')
     @include("drumeo.sales.partials._nav", [
-            "edgeVersion" => true
+            "subscriptionVersion" => true
         ])
 
     <div class="hero-header px-4 py-12 md:py-20 lg:py-32 bg-black bg-center bg-cover" style="background-image:url(https://dpwjbsxqtam5n.cloudfront.net/sales/sub-options-bg.jpg);">
@@ -54,7 +54,7 @@
 
         <h3 class="font-bold md:text-2xl mt-10 mb-4">Contact Us</h3>
 
-        <p class="py-2">If you have any questions about these Terms, please <a class="text-blue-600" href="/support">contact us</a>.</p>
+        <p class="py-2">If you have any questions about these Terms, please <a class="text-blue-600" href="{{ get_musora_brand_base_url() }}/contact">contact us</a>.</p>
     </div>
 
 

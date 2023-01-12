@@ -7,8 +7,8 @@
     <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/og-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.pianote.com/cookie/">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link href="{{ asset('/marketing/css/singeo/tailwind-helpers.css') }}" rel="stylesheet">
+    @include('_partials.layout._tailwindcdn')
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}" rel="stylesheet">
 
     <style>
@@ -57,12 +57,12 @@
         {{-- Contact Us --}}
         <h3 class="font-bold md:text-2xl mt-10 mb-4">Contact Us</h3>
 
-        <p class="py-2">If you have any questions about these Terms, please <a href="/support" class="text-blue-600">contact us</a>.</p>
+        <p class="py-2">If you have any questions about these Terms, please <a href="{{ get_musora_brand_base_url() }}/contact" class="text-blue-600">contact us</a>.</p>
     </div>
 
 
     @include('singeo.sales.partials._footer')
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="/marketing/parcel/singeo/nav-footer.js"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 @stop

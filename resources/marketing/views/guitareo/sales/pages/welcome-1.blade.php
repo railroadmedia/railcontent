@@ -13,9 +13,9 @@
 
 @section('styles')
     @parent
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('/marketing/css/guitareo/tailwind-helpers.css') }}">
-    <link href="{{ asset('marketing/parcel/guitareo/nav-footer.css') }}" rel="stylesheet">
+    @include('_partials.layout._tailwindcdn')
+    <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}">
+    <link href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}" rel="stylesheet">
     <style>
         .expired {
             padding:30px 0 70px;
@@ -87,7 +87,7 @@
 
 @section('scripts')
     @parent
-    <script src="{{ asset('marketin/parcel/guitareo/gnav-footer.js') }}"></script>
+    <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 @stop()
 
 @section('content')
@@ -99,7 +99,9 @@
             <div class="tw-aspect-16:9 w-full relative mt-5 mb-7">
                 <iframe class="absolute w-full h-full" src="//player.vimeo.com/video/282033524" frameborder="0" allowfullscreen allow="autoplay"></iframe>
             </div>
-            <a href="/members/lesson-plans" class="join">Choose A Lesson Plan  &raquo;</a>
+            <a href="{{ get_musora_brand_base_url() }}/guitareo" class="join">
+                Choose A Lesson Plan  &raquo;
+            </a>
         </div>
     </section>
 

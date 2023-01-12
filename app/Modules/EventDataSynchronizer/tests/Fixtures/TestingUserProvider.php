@@ -29,7 +29,8 @@ class TestingUserProvider implements UserProviderInterface
         ?Carbon $membershipExpirationDate,
         bool $isLifetimeMember,
         string $accessLevel,
-        bool $isPackOwner
+        bool $isPackOwner,
+        ?string $membershipLevel
     ): bool {
         return $this->databaseManager->connection(config('event-data-synchronizer.users_database_connection_name'))
                 ->table('usora_users')
@@ -44,7 +45,7 @@ class TestingUserProvider implements UserProviderInterface
                 ) > 0;
     }
 
-    public function saveExperiencePoints(int $userId, int $totalXp): bool
+    public function saveExperiencePoints(int $userId, array $totalXp, $shouldRevert = false): bool
     {
         // TODO: Implement saveExperiencePoints() method.
     }

@@ -45,7 +45,7 @@
         // redirect to members area when cart complete
         function checkUrl() {
             if($('iframe.trial').contents().get(0).location.href.indexOf('members') > -1) {
-                window.location.href = "https://www.drumeo.com/members/lessons/courses";
+                window.location.href = "https://www.musora.com/drumeo/courses";
             }
         }
     </script>
@@ -112,10 +112,10 @@
             </div>
             <a class="join blue start-trial">Start Free Trial &raquo;</a>
             <p class="disclaimer">Credit card required. You’ll get unlimited access FREE for 7 days before continuing with<br class="show-for-large">
-                a monthly membership for $29/month. Cancel anytime during or after your trial.</p>
+                a monthly membership for ${{ Prices::$plusSubscriptionMonthlyFull }}/month. Cancel anytime during or after your trial.</p>
         </div>
 
-        <iframe class="trial" name="cartIframe" onload="checkUrl();" src="/laravel/public/shopping-cart/api/query?products[DLM-Trial]=1,month,1&locked=true" frameborder="none"></iframe>
+        <iframe class="trial" name="cartIframe" onload="checkUrl();" src="/ecommerce/add-to-cart?products[DLM-Trial-1-month]=1&locked=true" frameborder="none"></iframe>
     </div>
 
     <section class="lesson-breakdown shows text-center">
@@ -138,9 +138,9 @@
                 event footage, gear guides, drum solos, performances, video podcasts, and more!</h3>
 
             <div class="columns medium-4">
-                <div class="point-icon"><i class="icon-courses"></i></div>
+                <div class="point-icon"><i class="fas fa-graduation-cap"></i></div>
                 <p><strong>Award-Winning<br> Drum Lessons</strong><br>
-                    {{ Prices::$courses }}+ step-by-step courses from the
+                    {{ Prices::$drumeoCourses }}+ step-by-step courses from the
                     world’s best drummers and teachers.</p>
             </div>
             <div class="columns medium-4">

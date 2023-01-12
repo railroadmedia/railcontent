@@ -5,11 +5,11 @@
     <meta property="og:title" content="Pianote Trial">
     <meta property="og:url" content="https://www.pianote.com/trial/">
     <meta name="description" content="Perfectly structured step by step lessons, with teachers that are fun to watch, and unlimited support - 100% guaranteed. Learn piano online the easy way.">
-    <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/og-image.jpg" style="display: none;">
+    <meta property="og:image" content="https://pianote.s3.amazonaws.com/sales/2023/share-image-pianote2.jpg" style="display: none;">
     <meta property="og:description" content="Perfectly Structured Lessons, Insanely Engaging Teachers, and Unlimited Support - 100% Guaranteed.">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link href="{{ asset('/marketing/css/pianote/tailwind-helpers.css') }}" rel="stylesheet">
+    @include('_partials.layout._tailwindcdn')
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/sales.css') }}">
 @stop
@@ -59,7 +59,7 @@
                             @endif
                     >
                         <h2><strong>MONTHLY</strong></h2>
-                        <h1 class="my-2 md:my-4"><strong>${{ PianotePrices::$pianoteMembershipMonthlyFull }}</strong><sub>/month</sub></h1>
+                        <h1 class="my-2 md:my-4"><strong>${{ Prices::$plusSubscriptionMonthlyFull }}</strong><sub>/month</sub></h1>
                         <p class="text-navy"><em>If you're just giving it a test-drive.</em></p>
                         <ul class="fa-ul text-left my-4 md:my-6">
                             <li><i class="fa-li fal fa-check"></i> Unlimited access to every lesson.</li>
@@ -78,7 +78,7 @@
                             Most Popular
                         @endif
                     </p>
-                    <a class="card-wrap text-pred"
+                    <a class="card-wrap text-pianote"
                             @hasSection('annual-url')
                                 @yield('annual-url')
                             @else
@@ -90,8 +90,8 @@
                             <h1 class="my-2 md:my-4"><strong>@yield('extra-savings-divided')</strong><sub>/month</sub></h1>
                             <p class="text-yellow"><em>Billed as @yield('extra-savings') per year. </em></p>
                         @else
-                            <h1 class="my-2 md:my-4"><strong>${{ number_format(PianotePrices::$pianoteMembershipAnnualFull / 12, 2) }}</strong><sub>/month</sub></h1>
-                            <p class="text-yellow"><em>Billed as ${{ PianotePrices::$pianoteMembershipAnnualFull }} per year. </em></p>
+                            <h1 class="my-2 md:my-4"><strong>${{ number_format(Prices::$plusSubscriptionAnnualFull / 12, 2) }}</strong><sub>/month</sub></h1>
+                            <p class="text-yellow"><em>Billed as ${{ Prices::$plusSubscriptionAnnualFull }} per year. </em></p>
                         @endif
                         <ul class="fa-ul text-left my-4 md:my-6">
                             <li><i class="fa-li fal fa-check"></i> Unlimited access to every lesson.</li>
@@ -139,5 +139,6 @@
     @include('pianote._partials._footer')
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="/marketing/parcel/pianote/nav-footer.js?v={{ filemtime(__FILE__) }}"></script>
+{{--    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>--}}
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 @stop

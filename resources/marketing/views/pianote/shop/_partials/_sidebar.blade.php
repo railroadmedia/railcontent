@@ -10,7 +10,7 @@
     <div class="lg:h-0">
     <div id="order" class="anchor"></div>
     <div class="side-slide md:border md:border-solid md:rounded-md" style="border-color: #CCD3D3;">
-        @include('_partials.layout.holiday.shop-sidebar-banner')
+{{--        @include('_partials.layout.holiday.shop-sidebar-banner')--}}
 
         <div class="pt-2 px-5 pb-6 text-center md:py-6 md:px-4">
             @if(!empty($newOnly))
@@ -56,7 +56,7 @@
                         <option hidden value="">Choose Size</option>
                         @foreach($sizes as $size)
                             <option
-                                @if($products[$sku.'-'.($size_case_sensitive ? strtolower($size->code) : $size->code)]->getPublicStockCount() === 0) disabled @endif
+                                @if($products[$sku.'-'.($size_case_sensitive ? strtolower($size->code) : $size->code)]->getStockAvailability() === 0) disabled @endif
                                 value="{{$product->sku}}-{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}"
                                 data-price="{{floatVal($product->price) ?? 0}}"
                                 data-product-json='{"{{$product->sku}}-{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}": 1}'
@@ -88,8 +88,8 @@
                 <p class="mt-0 text-xs">{!! $shippingdelay !!}</p>
             @endif
             <p class="text-black italic text-xs leading-normal text-center mx-auto">You can also order by phone toll-free at<br class="hidden sm:inline">
-                    <a class="text-pianote" href="tel:1-800-439-8921">1-800-439-8921</a> or directly at
-                    <a class="text-pianote" href="tel:1-604-855-7605">1-604-855-7605</a>. </p>
+                    <a class="text-pianote" href="tel:+18004398921">1-800-439-8921</a> or directly at
+                    <a class="text-pianote" href="tel:+16048557605">1-604-855-7605</a>. </p>
         </div>
         @if(!empty($guaranteeBadge))
             <div class="flex justify-center items-center px-5 pb-5 text-center md:pt-2 md:pt-4 md:pb-6 lg:p-5 lg:-mt-1 lg:mx-auto lg:mb-0 border-t-0 lg:border-t" style="border-color: #CCD3D3; border-top-style: solid;">

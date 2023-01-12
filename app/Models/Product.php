@@ -9,6 +9,111 @@ use Illuminate\Support\Facades\Storage;
 use Venturecraft\Revisionable\RevisionableTrait;
 
 
+/**
+ * App\Models\Product
+ *
+ * @property int $id
+ * @property int $brand_id
+ * @property int $product_type_id
+ * @property string $name
+ * @property string|null $slug
+ * @property string $sku
+ * @property string|null $promo_code
+ * @property string|null $thumbnail
+ * @property string|null $badge_text
+ * @property string|null $header_text
+ * @property string|null $subheader_text
+ * @property string|null $short_desc
+ * @property string|null $meta_desc
+ * @property string|null $meta_img
+ * @property string|null $special_text
+ * @property string|null $thumbnail_logo
+ * @property string|null $page_logo
+ * @property string $price
+ * @property string|null $discounted_price
+ * @property string|null $spread_img
+ * @property string|null $overview
+ * @property string|null $study_text
+ * @property string|null $video_src
+ * @property string|null $product_img
+ * @property string|null $instructor_name
+ * @property string|null $instructor_desc
+ * @property int|null $size_chart_id
+ * @property int $sold_out
+ * @property int $guaranteed
+ * @property int $visible
+ * @property int $free_shipping
+ * @property int $included_edge
+ * @property int $size_case_sensitive
+ * @property int $bundle_free_shipping
+ * @property string|null $bundle_img
+ * @property string|null $bundle_desc
+ * @property int $display_order
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Benefit[] $benefits
+ * @property-read int|null $benefits_count
+ * @property-read \App\Models\Brand|null $brand
+ * @property-read \Illuminate\Database\Eloquent\Collection|Product[] $bundles
+ * @property-read int|null $bundles_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Feature[] $features
+ * @property-read int|null $features_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Image[] $images
+ * @property-read int|null $images_count
+ * @property-read \App\Models\ProductType|null $productType
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ProductSize[] $product_size
+ * @property-read int|null $product_size_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Venturecraft\Revisionable\Revision[] $revisionHistory
+ * @property-read int|null $revision_history_count
+ * @property-read \App\Models\SizeChart|null $sizeChart
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Size[] $sizes
+ * @property-read int|null $sizes_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Spec[] $specs
+ * @property-read int|null $specs_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Product newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Product newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Product query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereBadgeText($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereBrandId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereBundleDesc($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereBundleFreeShipping($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereBundleImg($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereDiscountedPrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereDisplayOrder($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereFreeShipping($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereGuaranteed($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereHeaderText($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereIncludedEdge($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereInstructorDesc($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereInstructorName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereMetaDesc($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereMetaImg($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereOverview($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product wherePageLogo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product wherePrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereProductImg($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereProductTypeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product wherePromoCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereShortDesc($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereSizeCaseSensitive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereSizeChartId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereSku($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereSoldOut($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereSpecialText($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereSpreadImg($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereStudyText($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereSubheaderText($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereThumbnail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereThumbnailLogo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereVideoSrc($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereVisible($value)
+ * @mixin \Eloquent
+ */
 class Product extends Model
 {
     use HasFactory;
@@ -16,6 +121,7 @@ class Product extends Model
 
     protected $with = ["brand", "productType"];
     protected $dontKeepRevisionOf = ['uuid'];
+
     protected $revisionForceDeleteEnabled = true;
 
     public function brand()

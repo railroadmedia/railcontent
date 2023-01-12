@@ -1,20 +1,20 @@
-@extends('drumeo._partials.layout-template')
+@extends('drumeo._partials.global-layout')
 
 @section('global-head')
     <title>The Drumeo Awards | Drumeo</title>
     <meta property="og:title" content="The Drumeo Awards LIVE Show">
 
-    <meta name="description" content="Celebrate your favorite drummers on February 4, 2022.">
-    <meta property="og:description" content="Celebrate your favorite drummers on February 4, 2022.">
+    <meta name="description" content="Drumeo Awards Live Show Presented By Yamaha">
+    <meta property="og:description" content="Drumeo Awards Live Show Presented By Yamaha">
 
     <meta property="og:url" content="https://www.drumeo.com/awards-giveaway/">
      <meta property="og:image" content="https://cdn.musora.com/image/fetch/w_1300,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/january/awards.jpg" style="display: none;">
 
-    @include('drumeo._partials._fonts')
+    @include('_partials.layout._fonts')
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
+    @include('_partials.layout._tailwindcdn')
     <script type="text/javascript" src="https://addevent.com/libs/atc/1.6.1/atc.min.js"></script>
-    <link href="/marketing/css/drumeo/tailwind-helpers.css" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/lead-gen.css') }}" rel="stylesheet">
 
@@ -219,17 +219,6 @@
             text-align: left;
         }
 
-        .join.smaller {
-            font-size: 13px;
-            padding: 7px 12px;
-        }
-
-        @media (min-width: 768px) {
-            .join.smaller {
-                font-size: 14px;
-                padding: 13px 30px;
-            }
-        }
     </style>
 @stop
 
@@ -237,96 +226,95 @@
     @include("drumeo.sales.partials._nav")
     <section class="text-center text-white pb-5 md:pb-10 px-3 md:px-4" style="background:linear-gradient(to bottom, #000 65%, #06488F);">
         <div class="container mx-auto max-w-5xl">
-            <a href="todo" target="_blank"><img class="inline-block h-48 md:h-96" src="https://cdn.musora.com/image/fetch/w_1300,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/january/awards.jpg"></a>
-            {{--<h1 class="md:tracking-widest -mt-4 md:-mt-8 lg:-mt-12">The Drumeo Awards LIVE Show</h1>--}}
+            <a href="https://www.youtube.com/watch?v=p2FVUMYO-6k" target="_blank"><img class="inline-block h-48 md:h-96" src="https://cdn.musora.com/image/fetch/w_1300,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/january/awards.jpg"></a>
+{{--            <h1 class="md:tracking-widest -mt-4 md:-mt-8 lg:-mt-12">The Drumeo Awards LIVE Show</h1>--}}
             <h6 class="leading-normal my-3 md:my-5 lg:my-8">
-                Enter your email for your chance to win<br class="hidden md:inline lg:hidden">
-                a prize LIVE at the February 4th awards celebration.</h6>
-            {{--<form id="ajaxForm1" accept-charset="UTF-8" action="/laravel/public/customer-io/submit-email-form" class="ajax-form clearfix infusion-form facebook-track-lead mx-auto" method="POST">--}}
-                {{--<div class="infusion-field w-full px-2 float-left md:w-7/12 md:text-left">--}}
-                    {{--<input class="w-full" name="email" type="email" placeholder="Email Address..." required="">--}}
-                {{--</div>--}}
-                {{--<div class="infusion-submit w-full px-2 float-left md:w-5/12">--}}
-                    {{--<button class="submit " type="submit">--}}
-                        {{--<span class="pre-add"> Enter Now <i class="fad fa-paper-plane"></i></span>--}}
-                        {{--<span class="pending hidden">Sending <i class="fad fa-spinner-third fa-spin"></i></span>--}}
-                        {{--<span class="success hidden">Sent <i class="fad fa-thumbs-up"></i></span>--}}
-                        {{--<span class="fail hidden">Try Again <i class="fad fa-exclamation-triangle"></i></span>--}}
-                    {{--</button>--}}
-                {{--</div>--}}
-                {{--<input name="form_name" type="hidden" value="Drumeo Awards Giveaway">--}}
-                {{--<input name="inf_form_xid" type="hidden" value="DrumeoEngagementTriggerDrumeoAwardsGiveawayWebForm">--}}
-                {{--<input name="tag_names_to_add[]" type="hidden" value="Drumeo - Engagement - Trigger - Drumeo Awards Giveaway - Web Form">--}}
-                {{--<input name="list_ids_to_subscribe_to[]" type="hidden" value="31">--}}
-                {{--<input name="success_redirect" type="hidden" value="/thankyou">--}}
-            {{--</form>--}}
-            {{--<div class="disclaimer opacity-70 mx-auto inline-block">--}}
-                {{--<i class="fal fa-info-circle float-left leading-none"></i>--}}
-                {{--<span class="mx-auto text-left float-left leading-tight">By signing up you’ll also receive our ongoing free lessons and special offers. Don’t worry, we value your privacy and you can unsubscribe at any time.</span>--}}
-            {{--</div>--}}
-            {{--<div class="thank-you-box w-full rounded-lg mx-auto bg-white text-center text-black max-w-2xl">--}}
-                {{--<p><strong><i class="fas fa-check"></i> Success!</strong></p>--}}
-                {{--<h2 class="text-guitareo my-4 md:my-5"><strong> CHECK YOUR EMAIL </strong></h2>--}}
-                {{--<p><em> You should receive an email from team@drumeo.com within 10 minutes.--}}
-                        {{--If you don’t, then check your spam folder or re-enter your email address again. </em>--}}
-                {{--</p>--}}
-                {{--<div class="social-media">--}}
-                    {{--<a href="https://www.youtube.com/freedrumlessons/" target="_blank" class="youtube"><i class="fab fa-youtube"></i></a>--}}
-                    {{--<a href="https://facebook.com/drumeo/" target="_blank" class="facebook"><i class="fab fa-facebook-f"></i></a>--}}
-                    {{--<a href="https://instagram.com/drumeoofficial/" target="_blank" class="instagram"><i class="fab fa-instagram"></i></a>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-            <h5 class="leading-normal text-yellow-400"><strong>Drumeo Awards Live Show</strong><br>
-                February 4, 2022<br>
-                <a target="_blank" href="https://www.google.com/search?q=1+pm+pdt">1 PM (PT) / 4 PM (ET) <i class="fas fa-info-circle"></i></a> </h5>
+                Enter your email for your chance to win a prize <br class="hidden md:inline lg:hidden">
+                during the Drumeo Awards live stream celebration.</h6>
+            <form id="ajaxForm1" accept-charset="UTF-8" action="/customer-io/submit-email-form" class="ajax-form clearfix infusion-form facebook-track-lead mx-auto" method="POST">
+                <div class="infusion-field w-full px-2 float-left md:w-7/12 md:text-left">
+                    <input class="w-full" name="email" type="email" placeholder="Email Address..." required="">
+                </div>
+                <div class="infusion-submit w-full px-2 float-left md:w-5/12">
+                    <button class="submit " type="submit">
+                        <span class="pre-add"> Enter Now <i class="fad fa-paper-plane"></i></span>
+                        <span class="pending hidden">Sending <i class="fad fa-spinner-third fa-spin"></i></span>
+                        <span class="success hidden">Sent <i class="fad fa-thumbs-up"></i></span>
+                        <span class="fail hidden">Try Again <i class="fad fa-exclamation-triangle"></i></span>
+                    </button>
+                </div>
+                <input name="form_name" type="hidden" value="Drumeo Awards Giveaway 2">
+                <input name="inf_form_xid" type="hidden" value="DrumeoEngagementTriggerDrumeoAwardsGiveaway2WebForm">
+                <input name="tag_names_to_add[]" type="hidden" value="Drumeo - Engagement - Trigger - Drumeo Awards Giveaway 2 - Web Form">
+                <input name="list_ids_to_subscribe_to[]" type="hidden" value="31">
+                <input name="success_redirect" type="hidden" value="/thankyou">
+            </form>
+            <div class="disclaimer opacity-70 mx-auto inline-block">
+                <i class="fal fa-info-circle float-left leading-none"></i>
+                <span class="mx-auto text-left float-left leading-tight">By signing up you’ll also receive our ongoing free lessons and special offers. Don’t worry, we value your privacy and you can unsubscribe at any time.</span>
+            </div>
+            <div class="thank-you-box w-full rounded-lg mx-auto bg-white text-center text-black max-w-2xl">
+                <p><strong><i class="fas fa-check"></i> Success!</strong></p>
+                <h2 class="text-guitareo my-4 md:my-5"><strong> CHECK YOUR EMAIL </strong></h2>
+                <p><em> You should receive an email from team@drumeo.com within 10 minutes.
+                        If you don’t, then check your spam folder or re-enter your email address again. </em>
+                </p>
+                <div class="social-media">
+                    <a href="https://www.youtube.com/freedrumlessons/" target="_blank" class="youtube"><i class="fab fa-youtube"></i></a>
+                    <a href="https://facebook.com/drumeo/" target="_blank" class="facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://instagram.com/drumeoofficial/" target="_blank" class="instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <h5 class="leading-normal text-yellow-400"><strong>Drumeo Awards Live Show Presented By Yamaha</strong><br>
+                January 27, 2023<br>
+                <a target="_blank" href="https://www.google.com/search?q=1:30+pm+pdt">1:30 PM (PT) / 4:30 PM (ET) <i class="fas fa-info-circle"></i></a> </h5>
         </div>
     </section>
     <section class="py-8 px-3">
         <div class="container mx-auto max-w-2xl">
             <h2 class="leading-normal mb-4 md:mb-7" style="background: linear-gradient(to bottom, #007aff, #014590);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"><strong>Drum roll, please...</strong></h2>
-            <p>The votes have been tallied.
+            <p>You voted for your favorite drummers.
                 <br><br>
-                And the winners of the first-ever Drumeo Awards will be announced LIVE on February 4th.</p>
-
-                {{--<div class="my-2 mx-1 addeventatc" id="addeventatc1" style="z-index: 50 !important;">--}}
-                    {{--ADD TO CALENDAR <i class="fas fa-caret-down"></i>--}}
-                    {{--<span class="hide start">2022/02/04 13:00:00</span>--}}
-                    {{--<span class="hide end">2022/02/04 14:00:00</span>--}}
-                    {{--<span class="hide timezone">America/Vancouver</span>--}}
-                    {{--<span class="hide title">Drumeo Awards Live Show</span>--}}
-                    {{--<span class="hide description">Celebrate your favorite drummers on February 4, 2022. </span>--}}
-                    {{--<span class="hide location">--}}{{-- todo --}}{{--</span>--}}
-                    {{--<span class="hide all_day_event">false</span>--}}
-                    {{--<span class="hide date_format">MM/DD/YYYY</span>--}}
-                    {{--<span class="hide alarm_reminder">15</span>--}}
-                    {{--<span class="addeventatc_icon atc_node notranslate"></span>--}}
-                {{--</div>--}}
-
-                <p>You won’t want to miss this for TWO reasons:
+                And you’re about to find out who the winners are.
                 <br><br>
-                Firstly, drummers don’t always get the recognition they deserve. The Drumeo Awards hopes to change that by celebrating outstanding performances & recordings by drummers of all styles in 2021.
+                During the Drumeo Awards live stream on January 27, we’ll be announcing your Drummer Of The Year, along with 19 other category winners.
                 <br><br>
-                And secondly… YOU can win free stuff!
+                Not only is it important to recognize drummers’ accomplishments, but we want to recognize YOU for taking the time to vote and share.
                 <br><br>
-                <strong>We’ll be giving away prizes during the show, including:</strong></p>
-                <ul class="list-disc ml-10 my-4">
-                    <li>Drumeo memberships</li>
-                    <li>A Roland SPD-20 Pro </li>
-                    <li>A Yamaha bass drum pedal</li>
-                    <li>2 Pairs of the NEW Drumeo EarDrums</li>
-                </ul>
-                <p>And a grand prize Dunnett snare drum in custom Drumeo blue!
+                Thanks to our generous sponsors, <strong>we’re giving away over $10,000 in prizes</strong> during the live awards show this year, including:</p>
+            <ul class="list-disc ml-10 my-4">
+                <li>A Yamaha Tour Custom acoustic drum kit</li>
+                <li>A GEWA electronic drum kit</li>
+                <li>A full set of Earthworks DK7 drum mics</li>
+                <li>A Roland SPD-SX Pro sample pad (courtesy of Sweetwater)</li>
+                <li>A Sabian AAX cymbal set</li>
+                <li>A 5-piece set of Gator drum cases</li>
+                <li>A DW 5000 double kick pedal</li>
+                <li>5 Vater drumstick packs</li>
+                <li>And your favorite Drumeo products, including memberships, practice pads and in-ear monitors.</li>
+            </ul>
+            <div class="flex flex-wrap">
+                <div class="w-full sm:w-1/2">
+                    <img src="https://cdn.musora.com/image/fetch/w_700,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/january/prizesyamaha.jpg">
+                </div>
+                <div class="w-full sm:w-1/2">
+                    <img src="https://cdn.musora.com/image/fetch/w_700,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/january/prizesall.jpg">
+                </div>
+            </div>
+            <p>Drop your email address at the top of this page to be entered into the random draws we’ll be doing throughout the live stream.
                 <br><br>
-                Drop your email address at the top of this page to be entered into the random draws we’ll be doing throughout the live stream. The winners will be contacted immediately after -- it’s that simple.
+                If you win, we’ll contact you within 72 hours. Make sure you check your junk folder - you’ll have a week to get back to us to collect your prize!
                 <br><br>
-                Click the big button at the bottom of this page to join the party on February 4 and we’ll see you there!
-                {{--<br><br>--}}
-                {{--<a target="_blank" href="todo" class="join blue smaller">DRUMEO AWARDS LIVE</a>--}}
+                Click the big button at the bottom of this page to join the party on January 27. See you there!
+                <br><br>
+                <a target="_blank" href="https://www.youtube.com/watch?v=p2FVUMYO-6k" class="join blue smaller">WATCH NOW &raquo;</a>
             </p>
         </div>
     </section>
 
-    @include("drumeo.sales.partials._footer")
+    @include("drumeo.sales.partials._footer", [
+            "minimal" => true
+        ])
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script src="{{ asset('/marketing/js/drumeo/pre-form-submit-facebook-lead.js') }}"></script>

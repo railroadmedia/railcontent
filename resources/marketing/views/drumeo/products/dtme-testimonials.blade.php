@@ -18,7 +18,7 @@
 
 @section('scripts')
     @parent
-    <script src="{{ asset('/marketing/js/sliding-anchor.js') }}"></script>
+
     <script type="text/javascript">
         $(document).ready(function () {
             //sub nav sticky function
@@ -450,11 +450,11 @@
     <section class="final">
         <div class="row">
             <div class="columns logo"><img src="https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/logo-white.png"></div>
-            <h1 class="columns">26-Week Online Course <br class="hide-for-medium"> For Just ${{ round(Prices::$dtmeRegular / 26, 2) }} Per Week
+            <h1 class="columns">26-Week Online Course <br class="hide-for-medium"> For Just ${{ round(floatval($productPrices['drum-technique-made-easy-pack']->discounted_price) / 26, 2) }} Per Week
             </h1>
-            <h2 class="columns">(${{ Prices::$dtmeRegular }} one-time payment. Or choose a<br class="hide-for-medium"> 2-pay or 5-pay plan on the next page.)
+            <h2 class="columns">(${{ floatval($productPrices['drum-technique-made-easy-pack']->discounted_price) }} one-time payment. Or choose a<br class="hide-for-medium"> 2-pay or 5-pay plan on the next page.)
             </h2>
-            <div class="columns"><a href="/laravel/public/shopping-cart/api/query?products[drum-technique-made-easy-pack]=1" class="join">Get Started &raquo;</a></div>
+            <div class="columns"><a href="/ecommerce/add-to-cart?products[drum-technique-made-easy-pack]=1" class="join">Get Started &raquo;</a></div>
             {{--<div class="columns"><a class="join sold-out">Closed</a></div>--}}
             {{--<h2 class="columns yellow">Registration Extended Until <strong>May 6th At Midnight</strong>.</h2>--}}
             <div class="columns cards">
@@ -464,8 +464,8 @@
             </div>
             <p class="columns final-questions">
                 <span><strong>Any questions?</strong></span> You can also call us or order by phone<br class="hide-for-large"> toll-free at
-                <a href="tel:1-800-439-8921">1-800-439-8921</a><br class="hide-for-medium"> or directly at
-                <a href="tel:1-604-855-7605">1-604-855-7605</a>.<br> All prices listed in USD.</p>
+                <a href="tel:+18004398921">1-800-439-8921</a><br class="hide-for-medium"> or directly at
+                <a href="tel:+16048557605">1-604-855-7605</a>.<br> All prices listed in USD.</p>
         </div>
     </section>
 @stop

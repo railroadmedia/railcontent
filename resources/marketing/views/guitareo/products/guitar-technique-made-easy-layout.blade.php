@@ -12,9 +12,9 @@
 @stop()
 
 @section('styles')
-    <link href="{{ asset('/marketing/css/guitareo/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation-float.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
 
     <style>
         body {
@@ -30,9 +30,9 @@
 @stop()
 
 @section('scripts')
-    <script src="/marketing/js/modal.js"></script>
+    <script src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/1.9.3/countUp.min.js"></script>
-    <script src="/marketing/parcel/guitareo/nav-footer.js"></script>
+    <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $(document).foundation();
@@ -93,8 +93,8 @@
     ])
     @include('guitareo._partials.promo-banner', [
                 "name" => "Guitar Technique Made Easy",
-                "fullPrice" => GuitareoPrices::$GTMEFull,
-                "price" => GuitareoPrices::$GTMERegular,
+                "fullPrice" => floatval($productPrices['GTME-OCT-2018-SEMESTER']->price),
+                "price" => floatval($productPrices['GTME-OCT-2018-SEMESTER']->discounted_price),
                 "noBreadcrumb" => true
             ])
     @hasSection('topbar')
@@ -126,10 +126,10 @@
                     @hasSection('custom-price')
                         @yield('custom-price')
                     @else
-                        @if(GuitareoPrices::$GTMEFull > GuitareoPrices::$GTMERegular)
-                            <s>NORMALLY ${{ GuitareoPrices::$GTMEFull }}.</s> &nbsp;<strong style="color:#00BC75;"><u>ONLY ${{ GuitareoPrices::$GTMERegular }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (GuitareoPrices::$GTMERegular / GuitareoPrices::$GTMEFull))) }}%)
+                        @if(floatval($productPrices['GTME-OCT-2018-SEMESTER']->price) > floatval($productPrices['GTME-OCT-2018-SEMESTER']->discounted_price))
+                            <s>NORMALLY ${{ floatval($productPrices['GTME-OCT-2018-SEMESTER']->price) }}.</s> &nbsp;<strong style="color:#00BC75;"><u>ONLY ${{ floatval($productPrices['GTME-OCT-2018-SEMESTER']->discounted_price) }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (floatval($productPrices['GTME-OCT-2018-SEMESTER']->discounted_price) / floatval($productPrices['GTME-OCT-2018-SEMESTER']->price)))) }}%)
                         @else
-                            <strong><u>ONLY ${{ GuitareoPrices::$GTMERegular }}</u></strong>
+                            <strong><u>ONLY ${{ floatval($productPrices['GTME-OCT-2018-SEMESTER']->discounted_price) }}</u></strong>
                         @endif
                     @endif
 
@@ -155,7 +155,7 @@
                     {{--<div class="text">--}}
                         {{--<p class="text-left" style="max-width:510px">Celebrate Guitar Month right and brush up on your techniques.--}}
                             {{--<br><br>--}}
-                            {{--Guitar Technique Made Easy will improve your existing skills and help you master new ones, for only <s>${{ GuitareoPrices::$GTMEFull }}</s> ${{ GuitareoPrices::$GTMERegular }}! (Save {{ round(100 - (100 * (GuitareoPrices::$GTMERegular / GuitareoPrices::$GTMEFull))) }}%)--}}
+                            {{--Guitar Technique Made Easy will improve your existing skills and help you master new ones, for only <s>${{ floatval($productPrices['GTME-OCT-2018-SEMESTER']->price) }}</s> ${{ floatval($productPrices['GTME-OCT-2018-SEMESTER']->discounted_price) }}! (Save {{ round(100 - (100 * (floatval($productPrices['GTME-OCT-2018-SEMESTER']->discounted_price) / floatval($productPrices['GTME-OCT-2018-SEMESTER']->price)))) }}%)--}}
                             {{--<br><br>--}}
                             {{--Your guitar deserves to be played freely and effectively, and especially during its own dedicated month!--}}
                             {{--<br></p>--}}
@@ -616,7 +616,7 @@
                         @hasSection('custom-price')
                             @yield('custom-price-2')
                         @else
-                            ${{ number_format((GuitareoPrices::$GTMERegular / 26), 2, '.', ',') }}
+                            ${{ number_format((floatval($productPrices['GTME-OCT-2018-SEMESTER']->discounted_price) / 26), 2, '.', ',') }}
                         @endif
                             /week
                         </td>
@@ -631,7 +631,7 @@
                 @hasSection('custom-price-2')
                     @yield('custom-price-2')
                 @else
-                    ${{ number_format((GuitareoPrices::$GTMERegular / 26), 2, '.', ',') }}
+                    ${{ number_format((floatval($productPrices['GTME-OCT-2018-SEMESTER']->discounted_price) / 26), 2, '.', ',') }}
                 @endif
                  per week.</u>
                 <br><br>
@@ -647,7 +647,7 @@
             </div>
             <div class="large-8 medium-7 columns text-center medium-text-left">
                 <h1>90-Day Money-Back Guarantee.</h1>
-                <p>We love our students. More than anything, we want you to enjoy a super-positive experience playing guitar. And that means we only want you to pay if you actually LOVE your Guitareo experience! So join below to try it out totally risk-free. If it’s not for you, simply <a class="text-white" href="/support">contact us</a> within 90 days to request a full refund.</p>
+                <p>We love our students. More than anything, we want you to enjoy a super-positive experience playing guitar. And that means we only want you to pay if you actually LOVE your Guitareo experience! So join below to try it out totally risk-free. If it’s not for you, simply <a class="text-white" href="{{ get_musora_brand_base_url() }}/contact">contact us</a> within 90 days to request a full refund.</p>
             </div>
         </div>
     </section>
@@ -672,10 +672,10 @@
                 @hasSection('custom-price-3')
                     @yield('custom-price-3')
                 @else
-                    @if(GuitareoPrices::$GTMEFull > GuitareoPrices::$GTMERegular)
-                        <s>Was ${{ GuitareoPrices::$GTMEFull }}.</s> <strong>Only ${{ GuitareoPrices::$GTMERegular }}.</strong>
+                    @if(floatval($productPrices['GTME-OCT-2018-SEMESTER']->price) > floatval($productPrices['GTME-OCT-2018-SEMESTER']->discounted_price))
+                        <s>Was ${{ floatval($productPrices['GTME-OCT-2018-SEMESTER']->price) }}.</s> <strong>Only ${{ floatval($productPrices['GTME-OCT-2018-SEMESTER']->discounted_price) }}.</strong>
                     @else
-                        <strong>Only ${{ GuitareoPrices::$GTMERegular }}.</strong>
+                        <strong>Only ${{ floatval($productPrices['GTME-OCT-2018-SEMESTER']->discounted_price) }}.</strong>
                     @endif
                 @endif
 
@@ -693,10 +693,10 @@
                     @hasSection('custom-price')
                         @yield('custom-price')
                     @else
-                        @if(GuitareoPrices::$GTMEFull > GuitareoPrices::$GTMERegular)
-                            <s>NORMALLY ${{ GuitareoPrices::$GTMEFull }}.</s> &nbsp;<strong style="color:#00BC75;"><u>ONLY ${{ GuitareoPrices::$GTMERegular }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (GuitareoPrices::$GTMERegular / GuitareoPrices::$GTMEFull))) }}%)
+                        @if(floatval($productPrices['GTME-OCT-2018-SEMESTER']->price) > floatval($productPrices['GTME-OCT-2018-SEMESTER']->discounted_price))
+                            <s>NORMALLY ${{ floatval($productPrices['GTME-OCT-2018-SEMESTER']->price) }}.</s> &nbsp;<strong style="color:#00BC75;"><u>ONLY ${{ floatval($productPrices['GTME-OCT-2018-SEMESTER']->discounted_price) }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * (floatval($productPrices['GTME-OCT-2018-SEMESTER']->discounted_price) / floatval($productPrices['GTME-OCT-2018-SEMESTER']->price)))) }}%)
                         @else
-                            <strong><u>ONLY ${{ GuitareoPrices::$GTMERegular }}</u></strong>
+                            <strong><u>ONLY ${{ floatval($productPrices['GTME-OCT-2018-SEMESTER']->discounted_price) }}</u></strong>
                         @endif
                     @endif
 
@@ -713,8 +713,8 @@
             <p class="columns final-questions">
                 <span><strong>Any questions?</strong></span>
                 You can also call us or order by phone<br class="hide-for-large"> toll-free at
-                <a href="tel:1-800-439-8921">1-800-439-8921</a><br class="hide-for-medium"> or directly at
-                <a href="tel:1-604-855-7605">1-604-855-7605</a>. <br>
+                <a href="tel:+18004398921">1-800-439-8921</a><br class="hide-for-medium"> or directly at
+                <a href="tel:+16048557605">1-604-855-7605</a>. <br>
                 All prices listed in USD.</p>
         </div>
     </section>
@@ -723,21 +723,25 @@
         <div class="row">
             <h1 class="columns upper">Still Have Questions?</h1>
             <div class="columns">
-                @include('guitareo.products._question-dropdown-alt', [
-                "question" => "Do these lessons work for electric and acoustic guitars?",
-                "answer" => "Yes, the lessons will work on either. Since you’ll be developing your guitar technique, you’ll be gaining skills that will apply to both!"
+                @include('_partials.components.question-dropdown', [
+                "num" => "?",
+                "title" => "Do these lessons work for electric and acoustic guitars?",
+                "desc" => "Yes, the lessons will work on either. Since you’ll be developing your guitar technique, you’ll be gaining skills that will apply to both!"
                 ])
-                @include('guitareo.products._question-dropdown-alt', [
-                "question" => "How much time per week will this course require?",
-                "answer" => "For time invested, obviously the more time you practice the faster you’ll get better. But we recommend investing at least 2-3 hours per week to truly benefit from this course."
+                @include('_partials.components.question-dropdown', [
+                "num" => "?",
+                "title" => "How much time per week will this course require?",
+                "desc" => "For time invested, obviously the more time you practice the faster you’ll get better. But we recommend investing at least 2-3 hours per week to truly benefit from this course."
                 ])
-                @include('guitareo.products._question-dropdown-alt', [
-                "question" => "What if I can’t follow the lessons EVERY week?",
-                "answer" => "You’ll get 26 weekly lessons and exercises. And while they’re intended to be completed week-after-week, we know that everybody’s schedules are different - so we’ve included progress-tracking so you never lose your spot. If you need to miss a week, that’s fine! You might need to review the previous lessons a bit before continuing again, but you’ll never lose your spot and once you’ve registered, you have unlimited access to the entire course for life."
+                @include('_partials.components.question-dropdown', [
+                "num" => "?",
+                "title" => "What if I can’t follow the lessons EVERY week?",
+                "desc" => "You’ll get 26 weekly lessons and exercises. And while they’re intended to be completed week-after-week, we know that everybody’s schedules are different - so we’ve included progress-tracking so you never lose your spot. If you need to miss a week, that’s fine! You might need to review the previous lessons a bit before continuing again, but you’ll never lose your spot and once you’ve registered, you have unlimited access to the entire course for life."
                 ])
-                @include('guitareo.products._question-dropdown-alt', [
-                "question" => "Will I still have full access to the course after 26 weeks?",
-                "answer" => "Yes! Even though it’s a week-by-week course, you’ll have LIFETIME online access to everything inside Guitar Technique Made Easy, so you can review the materials or re-watch the lessons, anytime."
+                @include('_partials.components.question-dropdown', [
+                "num" => "?",
+                "title" => "Will I still have full access to the course after 26 weeks?",
+                "desc" => "Yes! Even though it’s a week-by-week course, you’ll have LIFETIME online access to everything inside Guitar Technique Made Easy, so you can review the materials or re-watch the lessons, anytime."
                 ])
             </div>
         </div>

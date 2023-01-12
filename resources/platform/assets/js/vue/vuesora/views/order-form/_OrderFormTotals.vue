@@ -9,7 +9,7 @@
                    v-if="subTotalBeforeDiscounts !== subTotalAfterDiscounts"
                    class="flex flex-column body text-right"
                 >
-                    <span><s style="font-weight: normal; color: #666;">${{ parseTotal(subTotalBeforeDiscounts) }}</s><span class="font-bold">&nbsp;&nbsp; ${{ parseTotal(subTotalAfterDiscounts) }}</span></span>
+                    <span><s style="font-weight: normal; color: #666;">${{ parseTotal(subTotalBeforeDiscounts) }}</s><span class="font-black">&nbsp;&nbsp; ${{ parseTotal(subTotalAfterDiscounts) }}</span></span>
                 </p>
                 <p
                    v-if="subTotalBeforeDiscounts === subTotalAfterDiscounts"
@@ -77,10 +77,10 @@
             </div>
 
             <div class="flex flex-row mb-2 bt-grey-1-1 pt-1">
-                <p class="flex flex-column title font-bold text-left">
+                <p class="flex flex-column text-lg font-black text-left">
                     Due Today
                 </p>
-                <p class="flex flex-column title font-bold text-right">
+                <p class="flex flex-column text-lg font-black text-right">
                     USD ${{ parseTotal(totals.due) }}
                     <template v-if="totals.shipping > 0">
                         <br>

@@ -305,8 +305,8 @@
 @section('content')
     @include('drumeo.products.partials.promo-banner', [
                 "name" => "Tone Control Kit",
-                "fullPrice" => Prices::$toneControlKitFull,
-                "price" => Prices::$toneControlKitRegular,
+                "fullPrice" => floatval($productPrices['tone-control-kit']->price),
+                "price" => floatval($productPrices['tone-control-kit']->discounted_price),
                 "noBreadcrumb" => true
             ])
 
@@ -324,24 +324,24 @@
             <br>
             <h1><strong>Better drum sounds<br class="hide-for-medium"> in seconds.</strong></h1>
 
-            @if( $products['tone-control-kit']->getStock() > 1 && !empty($products['tone-control-kit']->getStock()))
-                <a class="join blue" href="/laravel/public/shopping-cart/api/query?products[tone-control-kit]=1">Buy Now &raquo;</a>
+            @if( $products['tone-control-kit']->getStockAvailability() > 1 && !empty($products['tone-control-kit']->getStockAvailability()))
+                <a class="join blue" href="/ecommerce/add-to-cart?products[tone-control-kit]=1">Buy Now &raquo;</a>
             @else
                 <a class="join sold-out">SOLD OUT</a>
             @endif
 
             <p>GET A 4-PACK FOR
-                @if(Prices::$toneControlKitFull > Prices::$toneControlKitRegular)
-                    ONLY <s style="opacity:0.6">${{ Prices::$toneControlKitFull }}</s>
+                @if(floatval($productPrices['tone-control-kit']->price) > floatval($productPrices['tone-control-kit']->discounted_price))
+                    ONLY <s style="opacity:0.6">${{ floatval($productPrices['tone-control-kit']->price) }}</s>
                     <strong class="text-yellow">
-                        @if(number_format(Prices::$toneControlKitRegular, 2) == intval(Prices::$toneControlKitRegular))
-                            ${{  Prices::$toneControlKitRegular  }}
+                        @if(number_format(floatval($productPrices['tone-control-kit']->discounted_price), 2) == intval(floatval($productPrices['tone-control-kit']->discounted_price)))
+                            ${{  floatval($productPrices['tone-control-kit']->discounted_price)  }}
                         @else
-                            ${{  number_format(Prices::$toneControlKitRegular, 2)  }}
+                            ${{  number_format(floatval($productPrices['tone-control-kit']->discounted_price), 2)  }}
                         @endif
-                    </strong> (SAVE {{ round(100 - (100 * (Prices::$toneControlKitRegular / Prices::$toneControlKitFull))) }}%)
+                    </strong> (SAVE {{ round(100 - (100 * (floatval($productPrices['tone-control-kit']->discounted_price) / floatval($productPrices['tone-control-kit']->price)))) }}%)
                 @else
-                    <strong class="text-yellow">ONLY ${{ Prices::$toneControlKitRegular }}.</strong>
+                    <strong class="text-yellow">ONLY ${{ floatval($productPrices['tone-control-kit']->discounted_price) }}.</strong>
                 @endif
                 {{--<br>LIMITED QUANTITIES--}}
             </p>
@@ -446,10 +446,10 @@
                         <tr>
                             <td>Cost</td>
                             <td>
-                                @if(Prices::$toneControlKitFull > Prices::$toneControlKitRegular)
-                                    <s>${{ Prices::$toneControlKitFull }}</s><br>
+                                @if(floatval($productPrices['tone-control-kit']->price) > floatval($productPrices['tone-control-kit']->discounted_price))
+                                    <s>${{ floatval($productPrices['tone-control-kit']->price) }}</s><br>
                                 @endif
-                                ${{ Prices::$toneControlKitRegular }}</td>
+                                ${{ floatval($productPrices['tone-control-kit']->discounted_price) }}</td>
                         </tr>
                     </table>
                 </div>
@@ -490,23 +490,23 @@
 
                 <h2 class="uppercase">
                     GET A 4-PACK FOR
-                    @if(Prices::$toneControlKitFull > Prices::$toneControlKitRegular)
-                        ONLY <s style="opacity:0.6">${{ Prices::$toneControlKitFull }}</s>
+                    @if(floatval($productPrices['tone-control-kit']->price) > floatval($productPrices['tone-control-kit']->discounted_price))
+                        ONLY <s style="opacity:0.6">${{ floatval($productPrices['tone-control-kit']->price) }}</s>
                         <strong class="text-yellow">
-                            @if(number_format(Prices::$toneControlKitRegular, 2) == intval(Prices::$toneControlKitRegular))
-                                ${{  Prices::$toneControlKitRegular  }}
+                            @if(number_format(floatval($productPrices['tone-control-kit']->discounted_price), 2) == intval(floatval($productPrices['tone-control-kit']->discounted_price)))
+                                ${{  floatval($productPrices['tone-control-kit']->discounted_price)  }}
                             @else
-                                ${{  number_format(Prices::$toneControlKitRegular, 2)  }}
+                                ${{  number_format(floatval($productPrices['tone-control-kit']->discounted_price), 2)  }}
                             @endif
-                        </strong> (SAVE {{ round(100 - (100 * (Prices::$toneControlKitRegular / Prices::$toneControlKitFull))) }}%)
+                        </strong> (SAVE {{ round(100 - (100 * (floatval($productPrices['tone-control-kit']->discounted_price) / floatval($productPrices['tone-control-kit']->price)))) }}%)
                     @else
-                        <strong class="text-yellow">ONLY ${{ Prices::$toneControlKitRegular }}.</strong>
+                        <strong class="text-yellow">ONLY ${{ floatval($productPrices['tone-control-kit']->discounted_price) }}.</strong>
                     @endif
                     {{--<br>LIMITED QUANTITIES--}}
                 </h2>
                 <div class="columns">
-                    @if( $products['tone-control-kit']->getStock() > 1 && !empty($products['tone-control-kit']->getStock()))
-                        <a class="join blue" href="/laravel/public/shopping-cart/api/query?products[tone-control-kit]=1">Buy Now &raquo;</a>
+                    @if( $products['tone-control-kit']->getStockAvailability() > 1 && !empty($products['tone-control-kit']->getStockAvailability()))
+                        <a class="join blue" href="/ecommerce/add-to-cart?products[tone-control-kit]=1">Buy Now &raquo;</a>
                     @else
                         <a class="join sold-out">SOLD OUT</a>
                     @endif

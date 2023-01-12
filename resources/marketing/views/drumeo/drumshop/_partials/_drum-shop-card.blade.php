@@ -2,7 +2,7 @@
     <div class="flip-card-inner">
         <div class="flip-card-front card-inside">
             <section class="drum-shop">
-                <div class="top-image @if(!empty($packLogo)) with-logo @endif" style="background-image:url(https://cdn.musora.com/image/fetch/w_600,q_auto:best/{{ $thumbnail }});">
+                <div class="top-image @if(!empty($packLogo)) with-logo @endif" style="background-image:url('https://cdn.musora.com/image/fetch/w_600,q_auto:best/@if(str_contains($thumbnail, 'amazonaws') || str_contains($thumbnail, 'cloudfront')){{$thumbnail}}@else{{'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$thumbnail}}@endif')">
                     @if (!empty($badgeText))
                         <span class="top-left-badge text-white bg-promo">
                             {!! $badgeText !!}
@@ -14,7 +14,7 @@
                     @endif
                     @if(!empty($packLogo))
                         <div class="logo">
-                            <img src="{{ $packLogo }}" alt="{{ $title }} logo">
+                            <img src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/@if(str_contains($packLogo, 'amazonaws') || str_contains($packLogo, 'cloudfront')){{$packLogo}}@else{{'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$packLogo}}@endif" alt="{{ $title }} logo">
                         </div>
                     @endif
                     <i class="fas fa-arrow-right hover-icon"></i>
@@ -65,7 +65,7 @@
                         <p class="price"><strong class="text-promo"> ${{  floatVal($price)  }}</strong></p>
                     @endif
                     @if(!empty($includedEdge))
-                        <p class="description" style="top: -13px;position: relative;margin: 0;"><em class="text-red">Or free with Drumeo</em></p>
+                        <p class="description" style="top: -13px;position: relative;margin: 0;"><em class="text-red">Or free with {{ ucfirst($brand) }}</em></p>
                     @endif
                     @if(!$soldOut)
                         @if(!empty($sizes) && count($sizes) > 0)
@@ -73,7 +73,7 @@
                                 <option hidden value="">Choose Size</option>
                                 @foreach($sizes as $size)
                                     <option
-                                        @if($products[$sku.'-'.($size_case_sensitive ? strtolower($size->code) : $size->code)]->getPublicStockCount() === 0) disabled @endif
+                                        @if($products[$sku.'-'.($size_case_sensitive ? strtolower($size->code) : $size->code)]->getStockAvailability() === 0) disabled @endif
                                         value="?products[{!! $sku !!}-{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}]=1"
                                         data-product-json='{ "{!! $sku !!}-{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}": 1 }'
                                     >
@@ -84,7 +84,7 @@
 
                             <a
                                 class="online-atc selected-pack vue-add-to-cart"
-                                href="/laravel/public/shopping-cart/api/query?go-back-to-shop=true"
+                                href="/ecommerce/add-to-cart?go-back-to-shop=true"
                                 @if(!empty($promoCode)) data-promocode="{{ $promoCode }}" @endif
                                 @if(!empty($lockedCart)) data-locked-cart="{{ $lockedCart }}" @endif
                             >
@@ -93,14 +93,14 @@
                                     <span class="loading"><i class="fad fa-spinner-third fa-spin"></i> Adding to cart...</span>
                                 </button>
                             </a>
-                        @elseif(!empty($sku) && count($sizes) === 0)
+                        @elseif(!empty($sku) && (empty($sizes) || count($sizes) === 0))
                             <a
-                                class="online-atc vue-add-to-cart" href="/laravel/public/shopping-cart/api/query?go-back-to-shop=true&products[{!! $sku !!}]=1"   data-base-url="/laravel/public/shopping-cart/api/query?go-back-to-shop=true&products[{!! $sku !!}]=1"
+                                class="online-atc vue-add-to-cart" href="/ecommerce/add-to-cart?go-back-to-shop=true&products[{!! $sku !!}]=1"   data-base-url="/ecommerce/add-to-cart?go-back-to-shop=true&products[{!! $sku !!}]=1"
                                 data-product-json='{ "{{$sku}}": 1 }'
                                 @if(!empty($promoCode)) data-promocode="{{ $promoCode }}" @endif
                                 @if(!empty($lockedCart)) data-locked-cart="{{ $lockedCart }}" @endif
                             >
-                                <button class="join">
+                                <button class="join {{ $brand !== 'drumeo' ? 'bg-'.$brand : '' }}">
                                     <span class="initial"><i class="fas fa-cart-plus"></i> Add To Cart</span>
                                     <span class="loading"><i class="fad fa-spinner-third fa-spin"></i> Adding to cart...</span>
                                 </button>
@@ -117,7 +117,7 @@
                         </a>
                     @endif
                     @if(!empty($itemURL))
-                        <a href="{{ ($itemURL === '/drumshop/') ? '/' : $itemURL }}" class="join outline" @if(!empty($externalURL)) target="_blank" @endif>
+                        <a href="{{ ($itemURL === '/drumshop/' || $itemURL === '/shop/') ? '/' : $itemURL }}" class="join mb-0 bg-{{ $brand !== 'drumeo' ? 'black' : $brand}} transition duration-100" @if(!empty($externalURL)) target="_blank" @endif>
                             @if(!empty($buttonText)) {!!  $buttonText  !!} @elseif($itemURL === '/drumshop/') See the deal  @else View Product
                             <i class="fas fa-arrow-right"></i> @endif</a>
                     @endif

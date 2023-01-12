@@ -15,7 +15,7 @@
 {{--                            {!!  $specialText  !!}--}}
 {{--                        @endif--}}
 {{--                    @endif--}}
-{{--                    --}}{{--                    Until July 31st--}}
+{{--                                        Until July 31st--}}
 {{--                </p>--}}
 {{--                @if(empty($noCountdown))--}}
 {{--                <div class="tzcd-big inline-block text-center mx-auto sm:mx-0">--}}

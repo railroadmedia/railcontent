@@ -1,4 +1,4 @@
-@extends('drumeo._partials.layout-template')
+@extends('drumeo._partials.global-layout')
 
 @section('global-head')
     <title>Thank You | Drumeo</title>
@@ -8,7 +8,7 @@
     <meta property="og:description" content="We’ll be using the responses to create better videos that make a bigger difference to YOU in the future.">
     <meta property="og:url" content="https://www.drumeo.com/quick-drummer-survey/">
 
-    @include('drumeo._partials._fonts')
+    @include('_partials.layout._fonts')
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation-float.min.css"/>
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
@@ -115,9 +115,11 @@
         </div>
     </div>
 
-    @include("drumeo.sales.partials._footer")
+    @include("drumeo.sales.partials._footer", [
+            "minimal" => true
+        ])
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/js/foundation.min.js"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 @stop

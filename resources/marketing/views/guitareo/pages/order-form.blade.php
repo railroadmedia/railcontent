@@ -2,14 +2,11 @@
 
 @section('meta')
 
-    <meta name="description" content="Learn the drums faster with organized video lessons, legendary teachers, and better practice tools. 90-Day Guarantee.">
-    <meta property="og:description" content="Learn the drums faster with organized video lessons, legendary teachers, and better practice tools. 90-Day Guarantee.">
+    <title>Join Guitareo</title>
+    <meta name="description" content="Play guitar like you've always wanted with step-by-step video lessons, world-class teachers, and unlimited personal support. 90-Day Guarantee." />
+    <meta property="og:description" content="Play guitar like you've always wanted with step-by-step video lessons, world-class teachers, and unlimited personal support. 90-Day Guarantee."/>
 
-    @hasSection('share-image')
-        @yield('share-image')
-    @else
-        <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/sales/2022/og-image.jpg" style="display: none;">
-    @endif
+        <meta property="og:image" content="https://guitareo.s3.amazonaws.com/sales/2023/share-image-guitareo.jpg"/>
 
     <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
 
@@ -22,6 +19,9 @@
 @stop
 
 @section('content')
+    {{-- Notifications Container --}}
+    <div id="notifications-container"></div>
+
     @include("guitareo.sales.partials._nav", [
         "checkoutVersion" => true
     ])
@@ -111,10 +111,13 @@
             </div>
         </div>
     </div>
+
     @include("guitareo.sales.partials._footer")
 
+    @include('partials._brand-set-authentication-cookies-iframe')
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="{{ asset('/marketing/parcel/guitareo/nav-footer.js') }}"></script>
+    <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script src="{{ mix('/platform/js/manifest.js') }}"></script>
     <script src="{{ mix('/platform/js/vendor.js') }}"></script>
     <script src="{{ mix('/platform/js/app.js') }}"></script>

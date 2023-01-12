@@ -3,18 +3,18 @@
 @section('global-head')
     @parent
     <title>{{ $product->name }}</title>
-    <meta property="og:description" content="{{ $product->meta_desc  }}}">
+    <meta property="og:description" content="{{ $product->meta_desc  }}">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
     @if(!empty($product->meta_img))
-        <meta property="og:image" content="@if(str_contains($product->meta_img, 'amazonaws') || str_contains($product->meta_img, 'cloudfront')) {{$product->meta_img}} @else https://laravel-nova.s3.us-east-2.amazonaws.com/{{ $product->meta_img  }}@endif">
+        <meta property="og:image" content="@if(str_contains($product->meta_img, 'amazonaws') || str_contains($product->meta_img, 'cloudfront') || str_contains($product->meta_img, 'vimeocdn')) {{$product->meta_img}} @else https://laravel-nova.s3.us-east-2.amazonaws.com/{{ $product->meta_img  }}@endif">
     @endif
 
     <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css"/>
-    <link href="/marketing/parcel/pianote/shop-product.css" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/pianote/shop-product.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/tailwind-helpers.css') }}">
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
 
     <?php
         if(count($product->sizes) > 0){
@@ -60,15 +60,15 @@
                 "sku" => $product->sku,
                 "logo" => $product->page_logo,
                 "fullPrice" => $product->price,
-                "price"=> $product->discounted_price === '0.00' || empty($product->discounted_price) ? $product->price : $product->discounted_price,
+                "price"=> $product->discounted_price,
                 "guaranteeBadge" => $product->guaranteed,
                 "sizes" => $product->sizes,
-                "soldOut" => !empty($products[$product->sku]) ? $products[$product->sku]->getPublicStockCount() === 0 : $product->sold_out,
+                "soldOut" => !empty($products[$product->sku]) ? $products[$product->sku]->getStockAvailability() === 0 : $product->sold_out,
                 "specialText" => $product->special_text,
                 "freeShipping" => $product->free_shipping,
                 "size_case_sensitive" => $product->size_case_sensitive,
                 "category" => strtolower($product->productType->name),
-                'bundle' => $product->productType->name === 'Bundles' || str_contains($product->sku, 'member') || str_contains($product->sku, 'products')? true : false,
+                'bundle' => $product->productType->name === 'Bundles' || str_contains($product->sku, 'member') || str_contains($product->sku, 'products') ? true : false,
             ])
         </div>
 
@@ -98,7 +98,7 @@
 
                     <p class="mb-4">
                         <strong>Say hello to your free bonuses:</strong><br>
-                        <em style="opacity: 0.5;">All digital bonuses are added to your account instantly with your membership to {{ $theme }}, and they’re yours forever.</em>
+                        <em style="opacity: 0.5;">All digital bonuses are added to your account instantly with your membership to {{ $brand }}, and they’re yours forever.</em>
                     </p>
 
                     @include('musora.product.partials.bonuses')
@@ -134,12 +134,13 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/marketing/parcel/pianote/nav-footer.js"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
-    <script type="text/javascript" src="/marketing/parcel/pianote/shop-product.js"></script>
-    <script src="{{ asset('marketing/parcel/pianote/manifest.js') }}"></script>
-    <script src="{{ asset('marketing/parcel/pianote/vendor.js') }}"></script>
-    <script src="{{ asset('marketing/parcel/pianote/app.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/shop-product.js') }}"></script>
+    {{-- Platform --}}
+    <script src="{{ mix('/platform/js/manifest.js') }}"></script>
+    <script src="{{ mix('/platform/js/vendor.js') }}"></script>
+    <script src="{{ mix('/platform/js/app.js') }}"></script>
 
     @include('pianote.shop._partials._promo-countdown')
 @stop

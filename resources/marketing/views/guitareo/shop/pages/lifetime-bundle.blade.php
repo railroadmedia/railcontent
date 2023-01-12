@@ -83,9 +83,9 @@
         ],
         [
             'name' => '(NEW) The Guitarist’s Survival Kit',
-            'price' => 'Normally $' . GuitareoPrices::$survivalKitFull,
+            'price' => 'Normally $' . floatval($productPrices['guitarists-survival-kit']->price),
             'priceColor' => 'black',
-            'fullPrice' => GuitareoPrices::$survivalKitFull,
+            'fullPrice' => floatval($productPrices['guitarists-survival-kit']->price),
             'discountedPrice' => 0,
             'desc' => "Be prepared for any musical jam with the guitar gear essentials. Inside this kit, you'll discover every component your guitar needs to stay in tune, sound crisp and clean, and look refreshed. The kit also comes with the Survival Guide, so you can carry the essential chords, scales, and licks in your guitar case.",
             'freeBonus' => true,
@@ -96,7 +96,7 @@
         ],
         [
             'name' => 'GuitarQuest',
-            'price' => 'Normally $' . GuitareoPrices::$guitarQuestFull,
+            'price' => 'Normally $' . floatval($productPrices['guitar-quest']->price),
             'priceColor' => 'black',
             'fullPrice' => 0,
             'discountedPrice' => 0,
@@ -109,7 +109,7 @@
         ],
         [
             'name' => 'The Guitar System',
-            'price' => 'Normally $' . GuitareoPrices::$guitarSystemFull,
+            'price' => 'Normally $' . floatval($productPrices['GUITAR-SYSTEM']->price),
             'priceColor' => 'black',
             'fullPrice' => 0,
             'discountedPrice' => 0,
@@ -122,7 +122,7 @@
         ],
         [
             'name' => 'Guitar Technique Made Easy',
-            'price' => 'Normally $' . GuitareoPrices::$GTMEFull,
+            'price' => 'Normally $' . floatval($productPrices['GTME-OCT-2018-SEMESTER']->price),
             'priceColor' => 'black',
             'fullPrice' => 0,
             'discountedPrice' => 0,
@@ -135,7 +135,7 @@
         ],
         [
             'name' => 'Acoustic Guitar Made Easy',
-            'price' => 'Normally $' . GuitareoPrices::$AGMEFull,
+            'price' => 'Normally $' . floatval($productPrices['AGME-JAN-2019-SEMESTER']->price),
             'priceColor' => 'black',
             'fullPrice' => 0,
             'discountedPrice' => 0,
@@ -148,7 +148,7 @@
         ],
         [
             'name' => 'Rhythm & Groove',
-            'price' => 'Normally $' . GuitareoPrices::$rhythmAndGrooveFull,
+            'price' => 'Normally $' . floatval($productPrices['rhythm-and-groove']->price),
             'priceColor' => 'black',
             'fullPrice' => 0,
             'discountedPrice' => 0,

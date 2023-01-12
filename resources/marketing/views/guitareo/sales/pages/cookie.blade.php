@@ -5,13 +5,13 @@
     <meta name="description" content="When you visit or access Musora Media, Inc websites, we may use web beacons, cookies, pixel tags, scripts, tags, API and other technologies.">
 
     <meta property="og:title" content="Cookie Policy">
-    <meta property="og:image" content="https://d122ay5chh2hr5.cloudfront.net/sales/2022/og-image.jpg"/>
+    <meta property="og:image" content="https://guitareo.s3.amazonaws.com/sales/2023/share-image-guitareo.jpg"/>
     <meta property="og:url" content="https://www.guitareo.com/cookie/">
 
 @endsection
 
 @section('styles')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
+    @include('_partials.layout._tailwindcdn')
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}">
 
     <style>
@@ -23,7 +23,7 @@
 @endsection
 
 @section('scripts')
-    <script type="text/javascript" src="/marketing/parcel/guitareo/nav-footer.js"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 @endsection
 
 @section('content')
@@ -65,7 +65,7 @@
         {{-- Contact Us --}}
         <h3 class="font-bold md:text-2xl mt-10 mb-4">Contact Us</h3>
 
-        <p class="py-2">If you have any questions about these Terms, please <a class="text-blue-600" href="/support">contact us</a>.</p>
+        <p class="py-2">If you have any questions about these Terms, please <a class="text-blue-600" href="{{ get_musora_brand_base_url() }}/contact">contact us</a>.</p>
     </div>
 
     @include("guitareo.sales.partials._footer")

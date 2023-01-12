@@ -192,13 +192,7 @@ class PostUrlsDecorator
             ConfigService::$availableBrands = $availableBrands;
 
             return $content['url'] ?? '';
-        } elseif (in_array('packs', $segments) && !is_numeric($lastSegment)) {
-            $content =
-                $this->contentService->getBySlugAndType($lastSegment, 'pack')
-                    ->first();
-            ConfigService::$availableBrands = $availableBrands;
 
-            return $content['url'];
         } elseif ($numberOfSegments == 3 && $segments[1] == 'semester-packs') {
             $content =
                 $this->contentService->getBySlugAndType($lastSegment, 'semester-pack')
@@ -248,6 +242,13 @@ class PostUrlsDecorator
             ConfigService::$availableBrands = $availableBrands;
 
             return $content['url'];
+        } elseif (in_array('packs', $segments) && !is_numeric($lastSegment)) {
+            $content =
+                $this->contentService->getBySlugAndType($lastSegment, 'pack')
+                    ->first();
+            ConfigService::$availableBrands = $availableBrands;
+
+            return $content['url'];
         } elseif ($lastSegment == 'loops') {
             $url = str_replace(
                 [
@@ -287,6 +288,10 @@ class PostUrlsDecorator
 
         foreach ($matches as $match) {
             $url = $match;
+            //check if the url is valid
+            if (!filter_var($url, FILTER_VALIDATE_URL)) {
+                continue;
+            }
 
             $initialRequest = \Request::create($url);
 

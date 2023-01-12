@@ -10,7 +10,7 @@
     <div class="lg:h-0">
     <div id="order" class="anchor"></div>
     <div class="side-slide overflow-hidden md:rounded border border-solid" style="border-color: #CCD3D3;">
-        @include('_partials.layout.holiday.shop-sidebar-banner')
+{{--        @include('_partials.layout.holiday.shop-sidebar-banner')--}}
         <div class="buy-section active px-5 pt-2 pb-6 text-center lg:py-6">
             @if(!empty($instructor))
                 <p class="text-center text-sm uppercase mx-auto mb-1 hidden lg:block"><em>{{ $instructor }}</em></p>
@@ -63,7 +63,7 @@
                         @foreach($sizes as $size)
                             <option
                                 class="bg-white text-black"
-                                @if($products[$sku.'-'.($size_case_sensitive ? strtolower($size->code) : $size->code)]->getPublicStockCount() === 0) disabled @endif
+                                @if($products[$sku.'-'.($size_case_sensitive ? strtolower($size->code) : $size->code)]->getStockAvailability() === 0) disabled @endif
                                 value="@if(!empty($sku)){{$sku}}-@endif{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}"
                                 data-price="{{!empty($size->price) ? $size->price : $price}}"
                                 data-product-json='{"@if(!empty($sku)){{$sku}}-@endif{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}": 1}'
@@ -95,8 +95,8 @@
                     <i class="fas fa-truck"></i> <strong>FREE SHIPPING!</strong><br>
                 @endif
                 You can also order by phone toll-free at<br class="hidden sm:inline">
-                <a class="text-guitareo" href="tel:1-800-439-8921">1-800-439-8921</a> or directly at
-                <a class="text-guitareo" href="tel:1-604-855-7605">1-604-855-7605</a>. </p>
+                <a class="text-guitareo" href="tel:+18004398921">1-800-439-8921</a> or directly at
+                <a class="text-guitareo" href="tel:+16048557605">1-604-855-7605</a>. </p>
         </div>
         @if($guaranteeBadge)
             <div class="flex justify-center items-center px-5 py-2 text-center md:pt-2 md:pt-4 md:pb-6 lg:p-5 lg:-mt-1 lg:mx-auto border-t" style="border-color: #CCD3D3; border-top-style: solid;">

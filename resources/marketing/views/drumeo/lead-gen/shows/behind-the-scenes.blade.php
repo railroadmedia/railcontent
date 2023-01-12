@@ -19,7 +19,7 @@
 @section('url-slug', 'behind-the-scenes' )
 
 @section('show-url')
-    /members/lessons/behind-the-scenes
+    {{ get_musora_brand_base_url() }}/drumeo/behind-the-scenes
 @endsection
 
 @section('grid-title')

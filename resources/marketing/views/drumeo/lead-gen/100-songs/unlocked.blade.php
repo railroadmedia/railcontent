@@ -1,4 +1,4 @@
-@extends('drumeo._partials.layout-template')
+@extends('drumeo._partials.global-layout')
 
 @section('global-head')
     <meta name="robots" content="noindex">
@@ -10,10 +10,10 @@
     <meta property="og:description" content="Get expertly transcribed sheet music for 100 of drumming’s biggest songs (FREE).">
     <meta property="og:url" content="https://www.drumeo.com/100-songs/">
 
-    @include('drumeo._partials._fonts')
+    @include('_partials.layout._fonts')
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
+    @include('_partials.layout._tailwindcdn')
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/lead-gen-tw.css') }}" rel="stylesheet">
     <style>
@@ -30,13 +30,13 @@
         <div class="container mx-auto">
             <div class="text-center sm:text-left inline-block align-middle hover:opacity-90 transition-opacity duration-300">
                 <img class="align-middle w-auto mr-2 h-6 hidden sm:inline-block" src="https://cdn.musora.com/image/fetch/w_1500,q_60,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png">
-                <p class="inline-block align-middle mx-auto text-xs leading-tight">Get {{ Prices::$songs }}+ more songs + world-class drum lessons <br>
+                <p class="inline-block align-middle mx-auto text-xs leading-tight">Get {{ Prices::$drumeoSongs }}+ more songs + world-class drum lessons <br>
                     inside Drumeo. Click for a FREE trial.</p>
             </div>
         </div>
     </a>
 
-    <section class="text-center relative py-8 md:py-10 lg:py-16 px-4" style="background-color:#010a2b;">
+    <section class="text-center relative text-white py-8 md:py-10 lg:py-16 px-4" style="background-color:#010a2b;">
         <div class="container mx-auto">
             <h3 class="mb-4 md:mb-5">
                 <strong>100 Drumming Anthems<br> Every. Single. Note.</strong>
@@ -56,14 +56,16 @@
             <div class="w-full px-2 md:px-3 text-center">
                 <h1><strong>Keep the party going.</strong></h1>
                 <h4 class="mt-5 lg:mt-6 mb-6 lg:mb-9 leading-normal px-3">
-                    Get {{ Prices::$songs }}+ songs & world-class drum lessons inside <br class="hidden md:inline">
+                    Get {{ Prices::$drumeoSongs }}+ songs & world-class drum lessons inside <br class="hidden md:inline">
                     Drumeo. Click below to try a free trial.</h4>
                 <a class="join" href="/choose-your-trial">Free Trial &raquo;</a>
             </div>
         </div>
     </section>
 
-    @include("drumeo.sales.partials._footer")
+    @include("drumeo.sales.partials._footer", [
+            "minimal" => true
+        ])
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script>

@@ -289,7 +289,7 @@ class ProfileSettingsPagesController extends BaseController
             }
         }
 
-        $payments = $this->paymentRepository->getAllUsersPayments($user->id, false, 'drumeo');
+        $payments = $this->paymentRepository->getAllUsersPayments($user->id, false, brand());
 
         // sort by date
         usort(
@@ -543,7 +543,7 @@ class ProfileSettingsPagesController extends BaseController
         // -------------------------------------------------------------------------------------------------------------
 
         $urlParamsByBrandForTrial = [
-            'drumeo' => 'products[DLM-Trial]=1,month,1&locked=true',
+            'drumeo' => 'products[DLM-Trial-1-month]=1&locked=true',
             'pianote' => 'products[PIANOTE-MEMBERSHIP-TRIAL]=1&redirect=%2Forder&locked=true',
             'guitareo' => 'products[GUITAREO-7-DAY-TRIAL-ONE-TIME]=1&redirect=%2Forder&locked=true',
             'singeo' => 'products[singeo-monthly-recurring-7-day-trial-membership]=1&redirect=%2Forder&locked=true',
@@ -553,7 +553,7 @@ class ProfileSettingsPagesController extends BaseController
             $urlParams = $urlParamsByBrandForTrial[$brand];
             $addToCartUrlTrial = 'https://' . $brand . '.com/ecommerce/add-to-cart?' . $urlParams;
             if ($brand == 'drumeo') {
-                $addToCartUrlTrial = 'https://drumeo.com/laravel/public/shopping-cart/api/query?' . $urlParams;
+                $addToCartUrlTrial = 'https://drumeo.com/ecommerce/add-to-cart?' . $urlParams;
             }
         } else {
             $addToCartUrlTrial = 'https://musora.com/';
@@ -801,10 +801,9 @@ class ProfileSettingsPagesController extends BaseController
         session()->put('additional-feedback', $additionalFeedback);
 
         // TEMPORARY version that immediately cancels instead of offering a retention offer.
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        return $this->cancel($request);
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        //return $this->cancel($request);
         // TEMPORARY version that immediately cancels instead of offering a retention offer.
+
 
         // if they claimed retention(win-back) offer recently don't offer it again, instead go right to cancelling
         if (ProductAccessMap::hasClaimedRetentionOfferWithin(user()) || $isTrial) {

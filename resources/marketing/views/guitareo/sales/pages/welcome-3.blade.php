@@ -13,9 +13,9 @@
 
 @section('styles')
     @parent
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('/marketing/css/guitareo/tailwind-helpers.css') }}">
-    <link href="{{ asset('marketing/parcel/guitareo/nav-footer.css') }}" rel="stylesheet">
+    @include('_partials.layout._tailwindcdn')
+    <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}">
+    <link href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}" rel="stylesheet">
     <style>
         .expired {
             padding:30px 0 70px;
@@ -89,7 +89,7 @@
 
 @section('scripts')
     @parent
-    <script src="{{ asset('marketing/parcel/guitareo/nav-footer.js') }}"></script>
+    <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 @stop()
 
 @section('content')
@@ -113,7 +113,7 @@
             </ol>
                 <p>That's it! The mobile site will now be listed on your iOS home screen, so you can quickly access it anytime.  We hope to add a mobile app in the future, but until then this is the best way to use the site on iOS.<br><br></p>
             </div>
-            <a href="/members/guitar-forum/how-to-add-gl-to-your-phone-or-tablet" class="join">Ask A Question On The Forums &raquo;</a>
+            <a href="{{ get_musora_brand_base_url() }}/guitareo/forums" class="join">Ask A Question On The Forums &raquo;</a>
         </div>
     </section>
 

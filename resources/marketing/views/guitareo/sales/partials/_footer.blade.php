@@ -8,21 +8,22 @@
     </div>
 </div>
 <footer class="bottom-footer clearfix">
+    @if(empty($minimal))
     <div class="container">
         <div class="footer-link-wrap footer-sign-up">
             <h1>Stay Connected</h1>
             <p class="show-for-desktop">Join thousands of guitarists who get free weekly guitar lessons.</p>
             <p class="hide-for-desktop">Receive free weekly lessons.</p>
             <form id="GuitareoEngagementTriggerWebsiteSignupWebForm" accept-charset="UTF-8" action="/customer-io/submit-email-form" method="POST"
-                    class="ajax-form clearfix infusion-form facebook-track-lead" onsubmit="emailSignUpConversionTrackerForImpactProvider()">
+                    class="ajax-form clearfix infusion-form facebook-track-lead lg:flex" onsubmit="emailSignUpConversionTrackerForImpactProvider()">
                 <input type="hidden" name="form_name" value="Blog Signup">
 
                 <input type="hidden" name="leadtracker_form_name" value="Blog Signup">
-                <div class="infusion-field col-xs-12 form-group text-center medium-text-left col-sm-7">
+                <div class="infusion-field col-xs-12 form-group text-center medium-text-left lg:w-7/12 lg:pr-1">
                     <input class="medium-body infusion-field-input-container" id="inf_field_Email" name="email" type="email" placeholder="Email Address..." required="">
                 </div>
-                <div class="infusion-submit col-xs-12 form-group col-sm-5">
-                    <button class="submit button-red infusion-recaptcha join-form-button " type="submit">
+                <div class="infusion-submit col-xs-12 form-group lg:w-5/12">
+                    <button class="submit button-red infusion-recaptcha join-form-button border-guitareo text-guitareo hover:bg-guitareo hover:text-black" type="submit">
                         <span class="pre-add"> Sign up <i class="fas fa-paper-plane"></i></span>
                         <span class="pending hide hidden">Sending <i class="fas fa-spinner-third fa-spin"></i></span>
                         <span class="success hide hidden">Sent <i class="fas fa-thumbs-up"></i></span>
@@ -37,6 +38,15 @@
             <div class="thank-you-box">
                 <p><em>You should receive an email from team@guitareo.com within 10 minutes.</em></p>
             </div>
+            <a style="width: 48%;max-width:130px;
+        display: inline-block;
+        margin-right: 2%;
+        margin-top: 10px;" href="https://itunes.apple.com/us/app/musora/id1619053766?ls=1" target="_blank">
+                <img src="https://cdn.musora.com/image/fetch/w_260,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/app/download-on-app-store-button.png" alt="app store icon"></a>
+            <a style="width: 48%;max-width:130px;
+        display: inline-block;
+        margin-top: 10px;" href="https://play.google.com/store/apps/details?id=com.musoraapp" target="_blank">
+                <img src="https://cdn.musora.com/image/fetch/w_260,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/app/google-play-button.png" alt="google play icon"></a>
         </div>
         <div class="footer-link-wrap">
             <h1>Resources</h1>
@@ -50,9 +60,9 @@
             <h1><a href="/shop/">GUITAREO Shop</a></h1>
             <p><a href="/">Guitareo Membership</a><br>
                 <a href="/guitar-quest">GuitarQuest</a><br>
-                <a href="/500-songs">500 Songs In 5 Days</a><br>
+                <a href="/shop/500-songs">500 Songs In 5 Days</a><br>
                 <a href="/shop/survival-guide">Guitareo Survival Guide</a><br>
-                <a href="/acoustic-guitar-made-easy">Acoustic Guitar Made Easy</a></p>
+                <a href="/shop/acoustic-guitar-made-easy">Acoustic Guitar Made Easy</a></p>
         </div>
         <div class="footer-link-wrap">
             <h1>Other Sites</h1>
@@ -60,17 +70,19 @@
                 <a rel="noopener" href="{{ get_legacy_brand_base_url("drumeo") }}">Drumeo</a><br>
                 <a rel="noopener" href="{{ get_legacy_brand_base_url("pianote") }}">Pianote</a><br>
                 <a rel="noopener" href="{{ get_legacy_brand_base_url("singeo") }}">Singeo</a><br>
-                <a rel="noopener" href="{{ get_musora_brand_base_url() }}">Recordeo</a></p>
         </div>
     </div>
-    <div class="footer-bottom">
+    @endif
+    <div class="footer-bottom" @if(!empty($minimal)) style="border-top: 0;padding-top: 0;" @endif>
         <div class="container">
             <img class="logo" src="https://guitareo.s3.amazonaws.com/sales/guitareo-logo.png" alt="Guitareo">
+            @if(empty($minimal))
             <p><a rel="noopener" href="https://goo.gl/maps/c4JxakSmnjB2" target="_blank">107-31265 Wheel Ave. Abbotsford,<br class="mobile-only"> BC, V2T 6H2 Canada</a><br>
-                <a href="tel:+18004398921">Toll Free: 1-800-439-8921</a> / <br class="mobile-only"><a href="tel:+16048557605">Direct: 1-604-855-7605</a> / <br class="mobile-only"><a class="text-white" href="/support">Contact Us</a></p>
-            <a rel="noopener" href="https://www.youtube.com/user/guitarlessonscom" target="_blank" class="social-media youtube"><i class="fab fa-youtube"></i></a>
-            <a rel="noopener" href="https://www.facebook.com/guitareoofficial" target="_blank" class="social-media facebook"><i class="fab fa-facebook-f"></i></a>
-            <a rel="noopener" href="https://www.instagram.com/guitareoofficial/" target="_blank" class="social-media instagram"><i class="fab fa-instagram"></i></a>
+                <a href="tel:+18004398921">Toll Free: 1-800-439-8921</a> / <br class="mobile-only"><a href="tel:+16048557605">Direct: 1-604-855-7605</a> / <br class="mobile-only"><a href="{{ get_musora_brand_base_url() }}/contact">Contact Us</a></p>
+            <a rel="noopener" href="https://www.youtube.com/user/guitarlessonscom" target="_blank" class="inline-flex items-center justify-center social-media youtube"><i class="fab fa-youtube"></i></a>
+            <a rel="noopener" href="https://www.facebook.com/guitareoofficial" target="_blank" class="inline-flex items-center justify-center social-media facebook"><i class="fab fa-facebook-f"></i></a>
+            <a rel="noopener" href="https://www.instagram.com/guitareoofficial/" target="_blank" class="inline-flex items-center justify-center social-media instagram"><i class="fab fa-instagram"></i></a>
+            @endif
             <p class="tiny">Musora Media, Inc. &copy; {{ date('Y') }} - &nbsp; <a href="/terms">Terms</a>&nbsp;&nbsp;/&nbsp;&nbsp;<a href="/privacy">Privacy</a>&nbsp;&nbsp;/&nbsp;&nbsp;<a rel="noopener" href="https://www.musora.com/careers">Careers</a>&nbsp;&nbsp;/&nbsp;&nbsp;<a rel="noopener" href="https://www.musora.com/brand">Brand Guide</a></p>
         </div>
     </div>

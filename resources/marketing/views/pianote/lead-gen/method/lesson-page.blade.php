@@ -10,12 +10,12 @@
     <meta property="og:url" content="https://www.pianote.com/method">
 
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
-    <link href="{{ asset('/marketing/css/pianote/tailwind-helpers.css') }}" rel="stylesheet">
+    @include('_partials.layout._tailwindcdn')
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/sales.css') }}">
-    <link rel="stylesheet" href="/marketing/parcel/pianote/lead-gen.css">
-    <link rel="stylesheet" href="https://www.drumeo.com/laravel/public/assets/members-area/css/gulp/lead-gen.css">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/lead-gen.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/lead-gen.css') }}">
 
     <style>
         a:hover {
@@ -142,10 +142,12 @@
         </div>
     </section>
 
-    @include('pianote._partials._footer')
+    @include("pianote._partials._footer", [
+            "minimal" => true
+        ])
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="/marketing/parcel/pianote/nav-footer.js"></script>
-    <script type="text/javascript" src="/marketing/js/modal-autoplay-bootstrap.js"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay-bootstrap.js') }}"></script>
     @yield('scripts')
 @stop

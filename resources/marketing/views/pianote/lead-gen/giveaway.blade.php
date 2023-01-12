@@ -10,9 +10,9 @@
     <meta property="og:image" content="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://pianote.s3.amazonaws.com/giveaways/roland-share.jpg" style="display: none;">
     <meta property="og:url" content="https://www.pianote.com/giveaway">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link href="{{ asset('/marketing/css/pianote/tailwind-helpers.css') }}" rel="stylesheet">
-    <link href="/marketing/parcel/pianote/lead-gen-learn-songs.css" rel="stylesheet">
+    @include('_partials.layout._tailwindcdn')
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/pianote/lead-gen-learn-songs.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/sales.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}">
     <style>
@@ -54,13 +54,13 @@
                         <p class="mb-4" style="color:#D0E2E7;">
                             Want a free piano? Simply enter your email address before <span class="text-white font-extrabold">November 21st</span> to secure your chance to win. No purchase necessary. No age restrictions. No location restrictions.
                         </p>
-                        @include('pianote._partials._sign-up-form', [
-                            "formId" => 'Pianote - Engagement - Trigger - FP30 Giveaway - Web Form',
-                            "formName" => 'FP30 Giveaway',
-                            'buttonText' => 'I WANT TO WIN!',
-                            'stacked' => true,
-                            'disclaimerColor' => '#B3B3B9'
-                        ])
+{{--                        @include('pianote._partials._sign-up-form', [--}}
+{{--                            "formId" => 'Pianote - Engagement - Trigger - FP30 Giveaway - Web Form',--}}
+{{--                            "formName" => 'FP30 Giveaway',--}}
+{{--                            'buttonText' => 'I WANT TO WIN!',--}}
+{{--                            'stacked' => true,--}}
+{{--                            'disclaimerColor' => '#B3B3B9'--}}
+{{--                        ])--}}
                     </div>
                 </div>
             </div>
@@ -192,14 +192,13 @@
     <section class="text-center text-white py-8 md:py-16 lg:py-28 px-5 md:px-7 bg-center bg-cover lazyload" data-bg="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://pianote.s3.amazonaws.com/giveaways/footer.jpg">
         <div class="mx-auto max-w-md md:max-w-2xl">
             <img class="h-32 sm:h-36 md:h-44 lg:h-52 lazyload" data-src="https://cdn.musora.com/image/fetch/w_650,q_auto:best/https://pianote.s3.amazonaws.com/giveaways/logo.png" alt="title image">
-            <h6 class="my-4 sm:my-6 uppercase text-pianote"><strong>ONLY <span class="tzcd-full">A LIMITED TIME</span> LEFT</strong></h6>
-            @include("pianote._partials._sign-up-form", [
-                    "formId" => 'Pianote - Engagement - Trigger - FP30 Giveaway - Web Form',
-                    "formName" => 'FP30 Giveaway',
-                "buttonText" => "I WANT TO WIN!",
-                "oneLineLg" => true,
-                'disclaimerColor' => '#B3B3B9'
-            ])
+{{--            @include("pianote._partials._sign-up-form", [--}}
+{{--                    "formId" => 'Pianote - Engagement - Trigger - FP30 Giveaway - Web Form',--}}
+{{--                    "formName" => 'FP30 Giveaway',--}}
+{{--                "buttonText" => "I WANT TO WIN!",--}}
+{{--                "oneLineLg" => true,--}}
+{{--                'disclaimerColor' => '#B3B3B9'--}}
+{{--            ])--}}
         </div>
     </section>
 
@@ -207,17 +206,19 @@
         "name" => "trailer",
         "vimeoId" => "767456067",
     ])
-    @include('pianote._partials._footer')
+    @include("pianote._partials._footer", [
+            "minimal" => true
+        ])
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="/marketing/parcel/pianote/nav-footer.js"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script>
         $(document).ready(function () {
             $(document).foundation();
         });
     </script>
-    <script type="text/javascript" src="/marketing/js/modal.js"></script>
-    <script type="text/javascript" src="/marketing/js/modal-autoplay.js"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
 @endsection

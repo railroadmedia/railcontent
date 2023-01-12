@@ -27,8 +27,8 @@
         "sku" => "DSYS2-DIGI",
         "instructor" => "Mike Michalkow's",
         "logo" => "https://dpwjbsxqtam5n.cloudfront.net/pack-logos/drumming-system-2-black.png",
-        "fullPrice" => Prices::$dsOnlineFull,
-        "price" => Prices::$dsOnlineRegular,
+        "fullPrice" => floatval($productPrices['DSYS2-DIGI']->price),
+        "price" => floatval($productPrices['DSYS2-DIGI']->discounted_price),
         "guaranteeBadge" => true,
         "soldOut" => true
     ])

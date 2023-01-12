@@ -7,17 +7,16 @@
     @hasSection('share-image')
         @yield('share-image')
     @else
-        <meta property="og:image" content="https://d122ay5chh2hr5.cloudfront.net/sales/2022/og-image.jpg"/>
+        <meta property="og:image" content="https://guitareo.s3.amazonaws.com/sales/2023/share-image-guitareo.jpg"/>
     @endif
 
 @endsection
 
 @section('styles')
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"></noscript>
+    @include('_partials.layout._tailwindcdn')
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css"/>
-    <link href="{{ asset('/marketing/css/guitareo/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/guitareo/sales-page.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}" rel="stylesheet">
     {{--<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">--}}
@@ -74,7 +73,7 @@
 
 @section('content')
     @include("guitareo.sales.partials._nav", [
-        "homepageVersion" => true,
+        "subscriptionVersion" => true,
         "scrollToJoin" => true,
         "mcVersion" => true
     ])
@@ -167,7 +166,7 @@
 {{--            <p class="text-light-navy text-sm">--}}
 {{--                <em>--}}
 {{--                        @if(empty($trialVersion))--}}
-{{--                            Just ${{ number_format(GuitareoPrices::$guitareoMembershipAnnual / 12, 2) }} per month, 90-day guarantee.--}}
+{{--                            Just ${{ number_format(Prices::$plusSubscriptionAnnual / 12, 2) }} per month, 90-day guarantee.--}}
 {{--                        @else--}}
 {{--                            Try it for free now--}}
 {{--                        @endif--}}
@@ -665,7 +664,7 @@
             @endphp
             @foreach($levels as $level)
                 <div class="dropdown text-center border-2 border-gray-500 rounded-md overflow-hidden flex cursor-pointer mb-3 select-none @if(!empty($level['defaultOpen'])) active @endif
-                @if(!empty($level['navyBorder'])) border-navy-600 @endif">
+                @if(!empty($level['navyBorder'])) border-sky-900 @endif">
                     <div class="bg-guitareo py-5 px-2 sm:px-3 ">
                         <h5 class="leading-tight whitespace-nowrap inline-flex items-center">
                             <span class="text-xs hidden md:inline mr-1"> LEVEL</span>
@@ -703,8 +702,8 @@
 
             <h4 class="mb-6 md:mb-7 lg:mb-10 mt-8 md:mt-10 lg:mt-14 leading-normal">
                 <strong class="inline-block mr-1 bg-guitareo px-1 md:px-3 md:py-1 rounded-md md:rounded-lg leading-none" style="color: #000a1e;">PLUS</strong>
-                <em>On-demand access to <strong class="text-guitareo">{{ GuitareoPrices::$courses }}+<br class="inline md:hidden"> courses</strong> and<br class="hidden md:inline">
-                    <strong class="text-guitareo">{{ GuitareoPrices::$lessons }}+ lessons</strong> to <br class="inline md:hidden">improve any skill, anytime.</em></h4>
+                <em>On-demand access to <strong class="text-guitareo">{{ Prices::$guitareoCourses }}+<br class="inline md:hidden"> courses</strong> and<br class="hidden md:inline">
+                    <strong class="text-guitareo">{{ Prices::$guitareoLessons }}+ lessons</strong> to <br class="inline md:hidden">improve any skill, anytime.</em></h4>
 
             <div class="testimonials w-full flex flex-wrap justify-center md:mb-2 mx-auto md:max-w-full">
 
@@ -1294,12 +1293,12 @@
                     @else
                         <td class="rounded-b-xl">
                             @if(empty($trialVersion))
-                                @if(number_format(GuitareoPrices::$guitareoMembershipAnnual, 2) == intval(GuitareoPrices::$guitareoMembershipAnnual))
-                                    <strong>${{  round(GuitareoPrices::$guitareoMembershipAnnual / 12, 2) }}</strong>/mo<br>
+                                @if(number_format(Prices::$plusSubscriptionAnnual, 2) == intval(Prices::$plusSubscriptionAnnual))
+                                    <strong>${{  round(Prices::$plusSubscriptionAnnual / 12, 2) }}</strong>/mo<br>
                                 @else
-                                    <strong>${{  number_format(GuitareoPrices::$guitareoMembershipAnnual / 12, 2)  }}</strong>/mo<br>
+                                    <strong>${{  number_format(Prices::$plusSubscriptionAnnual / 12, 2)  }}</strong>/mo<br>
                                 @endif
-                                <em>Billed annually at ${{  GuitareoPrices::$guitareoMembershipAnnual }}</em><br><br>
+                                <em>Billed annually at ${{  Prices::$plusSubscriptionAnnual }}</em><br><br>
                                 Unlimited lessons & support.
                             @else
                                 <strong>Free Trial</strong><br>&nbsp;
@@ -1432,13 +1431,13 @@
 
 @section('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="/marketing/parcel/guitareo/nav-footer.js"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/1.9.3/countUp.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script type="text/javascript" src="/marketing/parcel/guitareo/sales-page.js"></script>
-    <script type="text/javascript" src="/marketing/js/modal.js"></script>
-    <script type="text/javascript" src="/marketing/js/modal-autoplay.js"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/sales-page.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
     <script>

@@ -12,5 +12,5 @@
     <meta property="og:url" content="https://www.pianote.com/riffs-and-fills">
 @endsection
 @section('head')
-    <link rel="stylesheet" href="/marketing/parcel/pianote/riffs-and-fills.css">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/riffs-and-fills.css') }}">
 @endsection

@@ -1,4 +1,4 @@
-@extends('drumeo._partials.layout-template')
+@extends('drumeo._partials.global-layout')
 
 @section('global-head')
     <title>New Drummers Start Here | Drumeo</title>
@@ -8,15 +8,15 @@
     <meta property="og:description" content="The ultimate guide to getting started on the drums and playing the songs you love.">
     <meta property="og:url" content="https://www.drumeo.com/new-drummers/">
 
-    @include('drumeo._partials._fonts')
+    @include('_partials.layout._fonts')
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
+    @include('_partials.layout._tailwindcdn')
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/ndsh.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css"/>
-    <link rel="stylesheet" href="/marketing/css/animate.css">
+    <link rel="stylesheet" href="{{ asset('/marketing/css/animate.css') }}">
     <style>
         .dropdowns {
             max-width: 1100px;
@@ -29,11 +29,11 @@
                 padding: 0 20px;
             }
         }
-        .dropdowns .dropdown .bg-pred {
+        .dropdowns .dropdown .bg-pianote {
             min-width: 32px;
         }
         @media (min-width: 40em) {
-            .dropdowns .dropdown .bg-pred {
+            .dropdowns .dropdown .bg-pianote {
                 min-width: 83px;
             }
         }
@@ -60,8 +60,8 @@
     ])
     @include('drumeo.products.partials.promo-banner', [
                     "name" => "New Drummers Start Here",
-                    "fullPrice" => Prices::$ndshFull,
-                    "price" => Prices::$ndshRegular,
+                    "fullPrice" => floatval($productPrices['new-drummers-start-here']->price),
+                    "price" => floatval($productPrices['new-drummers-start-here']->discounted_price),
                 "noBreadcrumb" => true
                 ])
 
@@ -72,9 +72,9 @@
             <h2><strong>Crush your first 90 days<br class="inline md:hidden"> on the drums.</strong></h2>
             <h5 class="my-3">Go from a total beginner to <br class="inline md:hidden"> playing drums with real music.</h5>
             <h4 class="text-yellow-400 mb-3 md:mb-5"><strong>ONLY
-                    @if(Prices::$ndshFull > Prices::$ndshRegular) <s class="opacity-60">${{ Prices::$ndshFull }}</s> @endif
-                    ${{ Prices::$ndshRegular }}</strong></h4>
-            <a class="join ndsh" href="/laravel/public/shopping-cart/api/query?products[new-drummers-start-here]=1">Start Drumming &raquo;</a>
+                    @if(floatval($productPrices['new-drummers-start-here']->price) > floatval($productPrices['new-drummers-start-here']->discounted_price)) <s class="opacity-60">${{ floatval($productPrices['new-drummers-start-here']->price) }}</s> @endif
+                    ${{ floatval($productPrices['new-drummers-start-here']->discounted_price) }}</strong></h4>
+            <a class="join ndsh" href="/ecommerce/add-to-cart?products[new-drummers-start-here]=1">Start Drumming &raquo;</a>
         </div>
     </header>
 
@@ -529,16 +529,16 @@
                     </tr>
                     <tr style="background-color:transparent!important;">
                         <td>TOTAL INVESTMENT</td>
-                        <td>@if(Prices::$ndshFull > Prices::$ndshRegular)
-                                <s>${{ Prices::$ndshFull }}</s>
+                        <td>@if(floatval($productPrices['new-drummers-start-here']->price) > floatval($productPrices['new-drummers-start-here']->discounted_price))
+                                <s>${{ floatval($productPrices['new-drummers-start-here']->price) }}</s>
                             @endif
-                            @if(Prices::$ndshRegular == 0)
+                            @if(floatval($productPrices['new-drummers-start-here']->discounted_price) == 0)
                                 FREE
                             @else
-                                ${{ Prices::$ndshRegular }}
+                                ${{ floatval($productPrices['new-drummers-start-here']->discounted_price) }}
                             @endif
                         </td>
-                        <td>${{ Prices::$drumeoEdgeAnnual }}/yr</td>
+                        <td>${{ Prices::$plusSubscriptionAnnual }}/yr</td>
                         <td>$89-$270</td>
                         <td>$89.99</td>
                         <td>$240/yr</td>
@@ -581,10 +581,10 @@
 
             <h5 class="my-3 leading-normal px-3">Go from a total beginner to <br class="inline md:hidden"> playing drums with real music.</h5>
             <h4 class="text-yellow-400 mb-10 md:mb-14"><strong>ONLY
-                    @if(Prices::$ndshFull > Prices::$ndshRegular) <s class="opacity-60">${{ Prices::$ndshFull }}</s> @endif
-                    ${{ Prices::$ndshRegular }}</strong></h4>
+                    @if(floatval($productPrices['new-drummers-start-here']->price) > floatval($productPrices['new-drummers-start-here']->discounted_price)) <s class="opacity-60">${{ floatval($productPrices['new-drummers-start-here']->price) }}</s> @endif
+                    ${{ floatval($productPrices['new-drummers-start-here']->discounted_price) }}</strong></h4>
 
-            <a href="/laravel/public/shopping-cart/api/query?products[new-drummers-start-here]=1" class="join ndsh w-2/3 md:-mt-4">START DRUMMING &raquo;</a>
+            <a href="/ecommerce/add-to-cart?products[new-drummers-start-here]=1" class="join ndsh w-2/3 md:-mt-4">START DRUMMING &raquo;</a>
 
             <div class="inline-block w-full px-3 md:px-4 mt-5 md:mt-8 text-light-navy text-4xl md:text-5xl">
                 <i class="fab mx-1 fa-cc-visa"></i>
@@ -601,30 +601,21 @@
         </div>
     </section>
 
-    <section class="text-center text-white py-10 md:py-20 lg:py-24" style="background:#000a1e;">
+    <section class="text-center py-10 md:py-20 lg:py-24" style="background:#000a1e;">
         <div class="container mx-auto">
-            <h3><strong>Still have questions?</strong></h3>
+            <h3 class="text-white"><strong>Still have questions?</strong></h3>
             <div class="dropdowns">
-            @include('drumeo.products.partials.question-dropdown-tw', [
-                    "customClass" => "border-blue md:rounded-full",
-                    "customArrow" => "text-blue",
-                    "question" => true,
+            @include('_partials.components.question-dropdown', [
                     "title" => "Do I need a full drum set to complete the course?",
-                    "description" => 'The lessons work on both electric and acoustic drum sets. While you can even get value with just a practice pad & sticks, it’s recommended that you have access to a drum set to get the most from this course.',
+                    "desc" => 'The lessons work on both electric and acoustic drum sets. While you can even get value with just a practice pad & sticks, it’s recommended that you have access to a drum set to get the most from this course.',
                     ])
-            @include('drumeo.products.partials.question-dropdown-tw', [
-                    "customClass" => "border-blue md:rounded-full",
-                    "customArrow" => "text-blue",
-                    "question" => true,
+            @include('_partials.components.question-dropdown', [
                     "title" => "How much time per week will this course require?",
-                    "description" => 'It’s up to you and your schedule! New Drummers Start Here is designed to be flexible so you can work through it at your own pace. Or, if you’re super motivated you could cruise the entire course in a week. Every drummer will be different!',
+                    "desc" => 'It’s up to you and your schedule! New Drummers Start Here is designed to be flexible so you can work through it at your own pace. Or, if you’re super motivated you could cruise the entire course in a week. Every drummer will be different!',
                     ])
-            @include('drumeo.products.partials.question-dropdown-tw', [
-                    "customClass" => "border-blue md:rounded-full",
-                    "customArrow" => "text-blue",
-                    "question" => true,
+            @include('_partials.components.question-dropdown', [
                     "title" => "What devices can I access the course on?",
-                    "description" => 'New Drummers Start Here is available on your laptop, tablet, or phone. You’ll also have access through the Drumeo app after you’ve completed your purchase of the course.',
+                    "desc" => 'New Drummers Start Here is available on your laptop, tablet, or phone. You’ll also have access through the Drumeo app after you’ve completed your purchase of the course.',
                     ])
             </div>
         </div>
@@ -635,7 +626,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/js/sliding-anchor.js') }}"></script>
+
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/1.9.3/countUp.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
@@ -708,11 +699,6 @@
             });
             $('.compare-table tr td:nth-child(7)').on('click', function(){
                 $(this).parents().find('table').removeClass('ambition udemy masterclass');
-            });
-
-            $('.dropdown').on('click', function(){
-                $(this).toggleClass('active');
-                $(this).find('i').toggleClass('rotate-180');
             });
         });
     </script>

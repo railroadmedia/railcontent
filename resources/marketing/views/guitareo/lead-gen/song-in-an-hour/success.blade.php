@@ -12,7 +12,7 @@
     <meta property="og:description" content="Play your first song on the guitar, start to finish, in an hour -- even if you’ve never played before.">
     <meta property="og:url" content="https://www.guitareo.com/song-in-an-hour/">
 
-    <link rel="stylesheet" href="/marketing/parcel/guitareo/song-in-an-hour.css">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/song-in-an-hour.css') }}">
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <style>
         .hero-header:after {
@@ -31,11 +31,11 @@
                     <iframe class="absolute w-full h-full rounded-lg inset-0" src="//player.vimeo.com/video/522493783" frameborder="0" allowfullscreen allow="autoplay"></iframe>
                 </div>
             </div>
-            <h5 class="leading-tight"><strong>CONTINUE YOUR JOURNEY <i class="fas fa-long-arrow-right mx-1 text-purple"></i> <br class="inline sm:hidden"> SAVE {{ round(100 - (100 * (GuitareoPrices::$guitarQuestSpecial / GuitareoPrices::$guitarQuestFull))) }}% ON GUITARQUEST</strong></h5>
+            <h5 class="leading-tight"><strong>CONTINUE YOUR JOURNEY <i class="fas fa-long-arrow-right mx-1 text-purple"></i> <br class="inline sm:hidden"> SAVE {{ round(100 - (100 * (47 / floatval($productPrices['guitar-quest']->price)))) }}% ON GUITARQUEST</strong></h5>
             <p class="mt-4 mb-8 leading-relaxed md:leading-loose text-left mx-auto" style="max-width: 590px;">
                 Congratulations on taking the <em>Song In An Hour Challenge</em>. We’re so excited that you’ve started your guitar journey and we’re here to support you the rest of the way.
                 <br><br>
-                <em>Song In An Hour</em> is actually the FIRST level of GuitarQuest. And because we hope you’ll keep learning with us, we’re giving you a {{ round(100 - (100 * (GuitareoPrices::$guitarQuestSpecial / GuitareoPrices::$guitarQuestFull))) }}% discount to make things a little easier. Just click any of the big buttons on this page to continue your journey.
+                <em>Song In An Hour</em> is actually the FIRST level of GuitarQuest. And because we hope you’ll keep learning with us, we’re giving you a {{ round(100 - (100 * (47 / floatval($productPrices['guitar-quest']->price)))) }}% discount to make things a little easier. Just click any of the big buttons on this page to continue your journey.
             </p>
             <a class="join px-16 sm:px-16" href="/guitar-quest-discount">Get My Discount &raquo;</a>
         </div>

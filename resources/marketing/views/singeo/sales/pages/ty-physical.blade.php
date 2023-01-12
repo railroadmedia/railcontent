@@ -10,7 +10,7 @@
     <meta property="og:url" content="https://www.singeo.com/thank-you-physical" style="display: none;">
     <meta property="og:image" content="https://singeo.s3.amazonaws.com/sales/2022/og-image.jpg" style="display: none;">
 
-    <link rel="stylesheet" href="{{ asset('/marketing/css/singeo/tailwind-helpers.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}">
     <link href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}" rel="stylesheet">
 
     <style>
@@ -219,7 +219,7 @@
             <div class="phone-email w-full">
                 <div class="md:w-1/3 float-left px-3 md:px-4 w-full">
                     <p><strong>Contact Us</strong><br>
-                        <a class="text-blue-600" href="/support">here</a></p>
+                        <a class="text-blue-600" href="{{ get_musora_brand_base_url() }}/contact">here</a></p>
                 </div>
                 <div class="md:w-1/3 float-left px-3 md:px-4 w-full">
                     <p><strong>International</strong><br>
@@ -237,9 +237,7 @@
     @include("singeo.sales.partials._footer")
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="/marketing/parcel/singeo/nav-footer.js"></script>
-
-    {!! inspectlet_embed_script() !!}
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 
     @yield('scripts')
 @stop

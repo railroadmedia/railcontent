@@ -6,6 +6,8 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
+ * App\Modules\Content\Models\SearchIndex
+ *
  * @property integer $id
  * @property integer $content_id
  * @property string $high_value
@@ -18,6 +20,11 @@ use Illuminate\Database\Eloquent\Model;
  * @property Carbon $content_published_on
  * @property Carbon $created_at
  * @property Carbon $updated_at
+ * @property-read \App\Modules\Content\Models\Content|null $content
+ * @method static \Illuminate\Database\Eloquent\Builder|SearchIndex newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|SearchIndex newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|SearchIndex query()
+ * @mixin \Eloquent
  */
 class SearchIndex extends Model
 {

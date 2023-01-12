@@ -51,7 +51,7 @@ class NavigationService
         }
 
         if (brand() === 'drumeo') {
-            return [
+            $navData = [
                 [ // section
                     [
                         'name' => 'Home',
@@ -63,7 +63,7 @@ class NavigationService
                         'path' => '/'.brand().'/method/drumeo-method/241247',
                         'icon' => 'method',
                     ],
-                    [
+                    'songs' => [
                         'name' => 'Songs',
                         'path' => '/'.brand().'/songs',
                         'icon' => 'headphones',
@@ -139,8 +139,14 @@ class NavigationService
                     ]
                 ],
             ];
+
+            if (!empty(user()) && !user()->isAPlusMember()) {
+                unset($navData[0]['songs']);
+            }
+
+            return $navData;
         } elseif (brand() === 'pianote') {
-            return [
+            $navData = [
                 [ // section
                     [
                         'name' => 'Home',
@@ -152,7 +158,7 @@ class NavigationService
                         'path' => '/'.brand().'/method/pianote-method/276693',
                         'icon' => 'method',
                     ],
-                    [
+                    'songs' => [
                         'name' => 'Songs',
                         'path' => '/'.brand().'/songs',
                         'icon' => 'headphones',
@@ -204,6 +210,11 @@ class NavigationService
                         'path' => '/'.brand().'/bootcamps',
                         'icon' => 'keys',
                     ],
+                    [
+                        'name' => 'Song Tutorial',
+                        'path' => '/'.brand().'/song-tutorials',
+                        'icon' => 'keys',
+                    ],
                 ],
                 [ // section
                     [
@@ -223,8 +234,14 @@ class NavigationService
                     ]
                 ],
             ];
+
+            if (!empty(user()) && !user()->isAPlusMember()) {
+                unset($navData[0]['songs']);
+            }
+
+            return $navData;
         } elseif (brand() === 'guitareo') {
-            return [
+            $navData = [
                 [ // section
                     [
                         'name' => 'Home',
@@ -236,7 +253,7 @@ class NavigationService
                         'path' => '/'.brand().'/method/guitareo-method/333652',
                         'icon' => 'method',
                     ],
-                    [
+                    'songs' => [
                         'name' => 'Songs',
                         'path' => '/'.brand().'/songs',
                         'icon' => 'headphones',
@@ -322,8 +339,14 @@ class NavigationService
                     ]
                 ],
             ];
+
+            if (!empty(user()) && !user()->isAPlusMember()) {
+                unset($navData[0]['songs']);
+            }
+
+            return $navData;
         } elseif (brand() === 'singeo') {
-            return [
+            $navData = [
                 [ // section
                     [
                         'name' => 'Home',
@@ -335,7 +358,7 @@ class NavigationService
                         'path' => '/'.brand().'/method/singeo-method/308514',
                         'icon' => 'method',
                     ],
-                    [
+                    'songs' => [
                         'name' => 'Songs',
                         'path' => '/'.brand().'/songs',
                         'icon' => 'headphones',
@@ -396,6 +419,12 @@ class NavigationService
                     ]
                 ],
             ];
+
+            if (!empty(user()) && !user()->isAPlusMember()) {
+                unset($navData[0]['songs']);
+            }
+
+            return $navData;
         }
 
         return [];

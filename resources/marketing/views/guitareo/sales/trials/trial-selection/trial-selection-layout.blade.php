@@ -9,12 +9,12 @@
     <meta property="og:description" content="Say goodbye to “do it yourself” guitar lessons."/>
 
     <meta property="og:url" content="https://www.guitareo.com"/>
-    <meta property="og:image" content="https://d122ay5chh2hr5.cloudfront.net/sales/2022/og-image.jpg"/>
+    <meta property="og:image" content="https://guitareo.s3.amazonaws.com/sales/2023/share-image-guitareo.jpg"/>
 
 @stop
 @section('styles')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link href="{{ asset('/marketing/css/guitareo/tailwind-helpers.css') }}" rel="stylesheet">
+    @include('_partials.layout._tailwindcdn')
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/guitareo/sales-page.css') }}" rel="stylesheet">
     <style>
@@ -36,12 +36,12 @@
 
 @section('scripts')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script type="text/javascript" src="/marketing/parcel/guitareo/nav-footer.js"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 @endsection
 
 @section('content')
     @include("guitareo.sales.partials._nav", [
-        "homepageVersion" => true
+        "subscriptionVersion" => true
     ])
 
 
@@ -77,7 +77,7 @@
                             @endif
                     >
                         <h2><strong>MONTHLY</strong></h2>
-                        <h1 class="my-2 md:my-4"><strong>${{ GuitareoPrices::$guitareoMembershipMonthlyFull }}</strong><sub>/month</sub></h1>
+                        <h1 class="my-2 md:my-4"><strong>${{ Prices::$plusSubscriptionMonthlyFull }}</strong><sub>/month</sub></h1>
                         <p class="text-navy"><em>Pay each month, with no commitment.</em></p>
                         <ul class="fa-ul text-left my-4 md:my-6">
                             <li><i class="fa-li fal fa-check"></i> Unlimited access to every lesson.</li>
@@ -110,11 +110,11 @@
                             <h1 class="my-2 md:my-4"><strong>@yield('extra-savings-divided')</strong><sub>/month</sub></h1>
                             <p class="text-yellow"><em>Billed as @yield('extra-savings') per year. </em></p>
                         @else
-                            <h1 class="my-2 md:my-4"><strong>${{ number_format(GuitareoPrices::$guitareoMembershipAnnualFull / 12, 2) }}</strong><sub>/month</sub></h1>
+                            <h1 class="my-2 md:my-4"><strong>${{ number_format(Prices::$plusSubscriptionAnnualFull / 12, 2) }}</strong><sub>/month</sub></h1>
                             <p class="text-yellow">
                                 <em>
-                                    {{-- Billed as ${{ GuitareoPrices::$guitareoMembershipAnnualFull }} per year.  --}}
-                                    Pay annually + save {{ round(100 - (100 * (GuitareoPrices::$guitareoMembershipAnnualFull / (GuitareoPrices::$guitareoMembershipMonthlyFull * 12)))) }}% on your membership
+                                    {{-- Billed as ${{ Prices::$plusSubscriptionAnnualFull }} per year.  --}}
+                                    Pay annually + save {{ round(100 - (100 * (Prices::$plusSubscriptionAnnualFull / (Prices::$plusSubscriptionMonthlyFull * 12)))) }}% on your membership
                                 </em>
                             </p>
                         @endif

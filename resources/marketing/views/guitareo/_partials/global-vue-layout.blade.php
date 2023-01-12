@@ -12,11 +12,11 @@
 
     {!! \App\Analytics\Tracker::trackPageView() !!}
 
-    @include('guitareo._partials.includes.google-optimize')
+    @include('guitareo._partials.google-optimize')
     @include('guitareo._partials.inspectlet')
 
     @include('_partials.layout.favicons.guitareo-favicons')
-    @include('guitareo._partials._fonts')
+    @include('_partials.layout._fonts')
 
     @yield('styles')
 
@@ -28,6 +28,8 @@
     </style>
 
     {!! \App\Analytics\Tracker::headBottom() !!}
+
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 
 <body>
@@ -44,10 +46,15 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.2.5/polyfill.js"></script>
 
-    <script src="{{ asset('marketing/js/guitareo/manifest.js') }}"></script>
-    <script src="{{ asset('marketing/js/guitareo/vendor.js') }}"></script>
-    <script src="{{ asset('marketing/js/guitareo/cart-sidebar.js') }}"></script>
-    <script src="{{ asset('marketing/js/guitareo/app.js') }}"></script>
+    <script src="{{ asset('/marketing/js/guitareo/manifest.js') }}"></script>
+    <script src="{{ asset('/marketing/js/guitareo/vendor.js') }}"></script>
+    <script src="{{ asset('/marketing/js/guitareo/cart-sidebar.js') }}"></script>
+    <script src="{{ asset('/marketing/js/guitareo/app.js') }}"></script>
+
+    {{-- Platform --}}
+    <script src="{{ mix('/platform/js/manifest.js') }}"></script>
+    <script src="{{ mix('/platform/js/vendor.js') }}"></script>
+    <script src="{{ mix('/platform/js/app.js') }}"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
@@ -61,7 +68,7 @@
         })
     </script>
 {!! \App\Analytics\Tracker::bodyBottom() !!}
-<script src="/marketing/js/jquery.countdown-2.min.js"></script>
+<script src={{ asset('/marketing/js/jquery.countdown-2.min.js') }}></script>
 <script>
     $(document).ready(function () {
         $('.tzcd-bigtw').countdown('2022/12/27')

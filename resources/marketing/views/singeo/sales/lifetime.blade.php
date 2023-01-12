@@ -9,8 +9,8 @@
     <meta property="og:image" content="https://singeo.s3.amazonaws.com/sales/promos/august/lifetime_bundle.jpg" style="display: none;">
     <meta property="og:url" content="https://www.singeo.com/{{ Request::path() }}">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link rel="stylesheet" href="{{ asset('/marketing/css/singeo/tailwind-helpers.css') }}">
+    @include('_partials.layout._tailwindcdn')
+    <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}">
     <link href="{{ asset('/marketing/parcel/singeo/sales-page.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/css/animate.css') }}" rel="stylesheet">
@@ -45,7 +45,7 @@
         <div class="container mx-auto">
             <h1 class="uppercase font-bebas">Get a <span style="color:#FFAE00;">LIFETIME Singeo Membership</span></h1>
             <p class="font-extrabold">& GET EXCLUSIVE PRODUCTS, A PRIVATE MASTERCLASS… FOR FREE</p>
-            <p class="uppercase" style="color:#FFAE00;">ONLY <s>100</s> {{ $products['singeo-lifetime-membership-access']->getPublicStockCount() }} spots available</p>
+            <p class="uppercase" style="color:#FFAE00;">ONLY <s>100</s> {{ $products['singeo-lifetime-membership-access']->getStockAvailability() }} spots available</p>
             <div class="w-full mx-auto my-10 px-3" style="max-width:920px;">
                 <div class="overflow-hidden relative w-full" style="padding-bottom: 56.25%;">
                     <iframe class="absolute w-full h-full inset-0" src="//player.vimeo.com/video/774399848" frameborder="0" allowfullscreen id="videoPlayer"></iframe>
@@ -201,7 +201,7 @@
                             'title' => 'Vowel Practice Poster',
                             'badge' => 'Vowel Practice Poster',
                             'description' => 'Your new favorite practice tool - and your ticket hitting higher notes with ease and confidence.',
-                            'price' => SingeoPrices::$posterFull,
+                            'price' => floatval($productPrices['vowel-sounds-poster']->price),
                             'online-ship' => "Free Shipping",
                         ],
                         [
@@ -292,7 +292,7 @@
             </div>
             {{-- <div class="inline-block w-full px-3 md:px-4 questions max-w-2xl"> --}}
             {{-- <h4><strong>Still have questions?</strong></h4> --}}
-            {{-- <p>If you need any further information about becoming a Lifetime Member, contact our amazing support team <a class="text-white" href="/support">here</a> --}}
+            {{-- <p>If you need any further information about becoming a Lifetime Member, contact our amazing support team <a class="text-white" href="{{ get_musora_brand_base_url() }}/contact">here</a> --}}
             {{-- <br><br> --}}
             {{-- A friendly and knowledgeable support team member will get back to you right away. --}}
             {{-- <br> All prices listed in USD.</p> --}}
@@ -324,11 +324,11 @@
     @include("singeo.sales.partials._footer")
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="/marketing/parcel/singeo/nav-footer.js"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
-    <script type="text/javascript" src="/marketing/js/modal.js"></script>
-    <script type="text/javascript" src="/marketing/js/modal-autoplay.js"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
     <script>
         $(document).ready(function () {
             $('.flip-div').click(function (e) {

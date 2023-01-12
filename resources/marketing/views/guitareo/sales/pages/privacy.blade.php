@@ -5,13 +5,13 @@
     <meta name="description" content="Below is a list of the standard policies we use on this website.">
 
     <meta property="og:title" content="Privacy Policy">
-    <meta property="og:image" content="https://d122ay5chh2hr5.cloudfront.net/sales/2022/og-image.jpg"/>
+    <meta property="og:image" content="https://guitareo.s3.amazonaws.com/sales/2023/share-image-guitareo.jpg"/>
     <meta property="og:url" content="https://www.guitareo.com/privacy/">
 
 @endsection
 
 @section('styles')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
+    @include('_partials.layout._tailwindcdn')
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}">
 
     <style>
@@ -23,7 +23,7 @@
 @endsection
 
 @section('scripts')
-    <script type="text/javascript" src="/marketing/parcel/guitareo/nav-footer.js"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 @endsection
 
 @section('content')
@@ -277,7 +277,7 @@
         <p class="py-2">We will let you know via email and/or a prominent notice on our Service, prior to the change becoming effective and update the "effective date" at the top of this Privacy Policy.</p>
         <p class="py-2">You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.</p>
         <h2 class="font-bold md:text-2xl mt-10 mb-4">Contact Us</h2>
-        <p class="py-2">If you have any questions about this Privacy Policy, please <a class="text-blue-600" href="/support">contact us</a>.</p>
+        <p class="py-2">If you have any questions about this Privacy Policy, please <a class="text-blue-600" href="{{ get_musora_brand_base_url() }}/contact">contact us</a>.</p>
     </div>
 
     @include("guitareo.sales.partials._footer")
