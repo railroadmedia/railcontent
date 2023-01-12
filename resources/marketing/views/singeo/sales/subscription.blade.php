@@ -458,7 +458,7 @@
         'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Singeo+Membership/79348458',
         'reviewText' => 'Rated 5 stars by Singeo students from around the world!',
         'youtubeLink' => 'https://www.youtube.com/singeoofficial/',
-        'youtube' => '28,000',
+        'youtube' => '29,000',
         'facebookLink' => 'https://facebook.com/singeoofficial/',
         'facebook' => '23,000',
         'instagramLink' => 'https://instagram.com/singeoofficial/',
