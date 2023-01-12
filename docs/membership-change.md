@@ -12,6 +12,9 @@ The upgrade rate shall be calculated as follows:
 
 ```upgrade  rate = cost of Musora+ annual x remaining months / 12```
 
+Any membership change shall be processed as a new order with the new product, therefore a valid payment method
+is required.
+
 The current subscription will be cancelled and replace with a new subscription with the same paid until date.
 
 Conditions:
