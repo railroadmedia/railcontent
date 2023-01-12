@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3854bb7334b6dc98969c2fd562e942bb",
+    "content-hash": "3569001627edfe63eae3547f7e162844",
     "packages": [
         {
             "name": "aporat/store-receipt-validator",
@@ -7989,12 +7989,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "fa57cddf87023fc6799f31aca0a9436da742dea2"
+                "reference": "24232c16b7b60fd8472a188834bfde9a27a1105d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/fa57cddf87023fc6799f31aca0a9436da742dea2",
-                "reference": "fa57cddf87023fc6799f31aca0a9436da742dea2",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/24232c16b7b60fd8472a188834bfde9a27a1105d",
+                "reference": "24232c16b7b60fd8472a188834bfde9a27a1105d",
                 "shasum": ""
             },
             "require": {
@@ -8033,7 +8033,7 @@
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
                 "source": "https://github.com/railroadmedia/ecommerce/tree/feature-upgrade-rwillems-20221412"
             },
-            "time": "2023-01-11T22:34:31+00:00"
+            "time": "2023-01-12T17:34:07+00:00"
         },
         {
             "name": "railroad/lead-tracker",
@@ -16575,5 +16575,5 @@
         "ext-curl": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
