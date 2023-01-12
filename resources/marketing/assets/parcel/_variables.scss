@@ -1,25 +1,23 @@
-$opensans: 'Open Sans', sans-serif;
-$robotocondensed: 'Roboto Condensed', sans-serif;
+$opensans:'Open Sans', sans-serif;
+$robotocondensed:'Roboto Condensed', sans-serif;
 $bebas:'Bebas Neue', sans-serif;
 
+$drumeoBlue:#0b76db;
+$pianoteRed: #F61A30;
 $guitareoGreen: #00C9AC;
-$drumeoBlue: #0b76db;
-$pianoteRed: #ff383f;
 $recordeoYellow:#ffae00;
 $singeoPurple:#8300E9;
 
-$youtube: #cd201f;
-$facebook: #3b5998;
-$instagram: #e1306c;
+$youtube:#cd201f;
+$facebook:#3b5998;
+$instagram:#e1306c;
 
-$altGuitareoGreen: #00BC75;
-$methodGreen:#00d6af;
+$meGreen:#00BC75;
 $songsPink:#ec0061;
+$songsBlue:#17d1fa;
 $coachesOrange:#fe9f13;
-$jumpStartOrange: #FF8C00;
-$guitareoGuitarQuestYellow: #FFB500;
 
-$promoColor:#00C9AC;
+$promoColor:#ffac00;
 
 @mixin sm {
   @media (min-width: 640px) {
@@ -32,13 +30,22 @@ $promoColor:#00C9AC;
     @content;
   }
 }
+
 @mixin desktop {
   @media (min-width: 1024px) {
     @content;
   }
 }
+
 @mixin xl {
   @media (min-width: 1280px) {
     @content;
   }
+}
+
+//todo remove from pianote scss
+@mixin desktopOld {
+    @media (min-width: 991px) {
+        @content;
+    }
 }

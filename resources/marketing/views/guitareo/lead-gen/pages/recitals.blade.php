@@ -11,7 +11,7 @@
     <meta property="og:image" content="https://guitareo.s3.amazonaws.com/sales/2023/share-image-guitareo.jpg" style="display: none;">
 
     @include('_partials.layout._tailwindcdn')
-    <link rel="stylesheet" href="{{ asset('/marketing/css/guitareo/tailwind-helpers.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}">
 
     <style>
@@ -208,7 +208,7 @@
                 {{--<img class="logo" src="https://drumeo-assets.s3.amazonaws.com/promos/november/recital-logo.svg">--}}
                 <p class="leading-none">
                     <strong>Share your progress with the community!</strong> <br>
-                        Submission deadline <strong class="tw-text-guitareo">June 15th, 2022.</strong></p>
+                        Submission deadline <strong class="text-guitareo">June 15th, 2022.</strong></p>
             </div>
         </div>
     </div>

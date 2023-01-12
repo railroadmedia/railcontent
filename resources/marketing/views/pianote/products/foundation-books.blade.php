@@ -5,7 +5,7 @@
     <meta name="description" content="The Complete Pianote Curriculum At Your Fingertips">
 
     <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/books/foundations/sales/og-image.jpg"
-            style="display: none;">
+          style="display: none;">
     <meta property="og:title" content="Pianote Foundations">
     <meta property="og:description" content="The Complete Pianote Curriculum At Your Fingertips">
     <meta property="og:url" content="https://www.pianote.com/foundations">
@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap" rel="stylesheet">
     @include('_partials.layout._tailwindcdn')
     <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/css/pianote/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <style>
         body.modal-open {
             overflow-y:hidden;
@@ -179,6 +179,20 @@
             }
 
         }
+        .bg-navy-800 {
+            background:#001429;
+        }
+
+        .bg-navy-900 {
+            background:#000C18;
+        }
+
+        .border-navy-700 {
+            border-color:#04203C;
+        }
+        .rotate-20 {
+            --transform-rotate:20deg;
+        }
     </style>
 @stop
 
@@ -208,13 +222,13 @@
                     <h4 class="font-bold text-base md:text-lg"><strong>BUY NOW: $149 USD</strong></h4>
 
                     @if($products['pianote-foundation']->getStockAvailability() < 1)
-                    <a class="join sold-out mt-3 mb-5 sm:mb-10 w-full max-w-2xl text-lg sm:text-xl md:text-2xl lg:text-3xl">SOLD OUT!</a>
+                        <a class="join sold-out mt-3 mb-5 sm:mb-10 w-full max-w-2xl text-lg sm:text-xl md:text-2xl lg:text-3xl">SOLD OUT!</a>
                     @else
 
                         <a
-                        class="join vue-add-to-cart mt-3 mb-5 sm:mb-10 w-full max-w-2xl text-lg sm:text-xl md:text-2xl lg:text-3xl"
-                        href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['pianote-foundation' => 1,], 'redirect' => '/order', 'locked' => 'false']) }}"
-                        data-product-json='{"pianote-foundation": 1}'
+                            class="join vue-add-to-cart mt-3 mb-5 sm:mb-10 w-full max-w-2xl text-lg sm:text-xl md:text-2xl lg:text-3xl"
+                            href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['pianote-foundation' => 1,], 'redirect' => '/order', 'locked' => 'false']) }}"
+                            data-product-json='{"pianote-foundation": 1}'
                         >CLICK HERE TO ORDER &raquo;</a>
                     @endif
                     <p class=" mx-auto max-w-2xl text-xs sm:text-sm"><strong>Get ready to open up the only piano books you’ll ever need.</strong>
@@ -250,73 +264,68 @@
             <h1 class="font-bold leading-tight text-lg sm:text-2xl md:text-3xl lg:text-4xl"><strong>Everything you need to get inspired,<br class="hidden sm:inline">
                     focused, and better at the piano.</strong></h1>
             <div class="px-6">
-            <div class="relative border-4 border-pred rounded-lg overflow-hidden mt-8 sm:mt-12 mx-auto w-full max-w-2xl">
-                {{--<div class="absolute top-1/2 left-1/2 z-0 font-extrabold transform rotate-20 font-bebas text-shadow-2" style="margin: -40px 50px;">--}}
-                    {{--WATCH THE<br>PREVIEW VIDEO--}}
-                    {{--<img style="width: 35px; filter:brightness(-50%) invert(1);" src="https://d2vyvo0tyx8ig5.cloudfront.net/books/foundations/sales/click-here-to-see-inside-arrow.png"></div>--}}
-                {{--<img class="absolute top-1/2 left-1/2 z-0 transform" style="width: 70px; margin:-35px;" src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/play-button.png">--}}
-                {{--<img src="https://i.vimeocdn.com/video/843251384-415f254e1a1302f445ade7bdf5b9526c6d35b1f532f50be8544d15592a44ae7b-d_1280">--}}
-                <div class="aspect-16:9 w-full relative">
-                    <iframe src="//player.vimeo.com/video/381240248" class="absolute w-full h-full"></iframe>
+                <div class="relative border-4 border-pianote rounded-lg overflow-hidden mt-8 sm:mt-12 mx-auto w-full max-w-2xl">
+                    <div class="aspect-16:9 w-full relative">
+                        <iframe src="//player.vimeo.com/video/381240248" class="absolute w-full h-full"></iframe>
+                    </div>
                 </div>
-            </div>
 
-            <p class="w-full max-w-2xl mt-6 mb-12 mx-auto text-xs md:text-sm">Along with your beautiful books, you’ll also get access to a special online resource center full of bonus video lessons, exercises, and downloadable worksheets.
-                <br><br>
-                There, you’ll also have access to REAL teachers who can answer your questions about anything you come across in the books. You’ll never be left alone.
-                <br><br>
-                Click on any of the books to see a preview from Book 2 to see what they’re like inside!</p>
+                <p class="w-full max-w-2xl mt-6 mb-12 mx-auto text-xs md:text-sm">Along with your beautiful books, you’ll also get access to a special online resource center full of bonus video lessons, exercises, and downloadable worksheets.
+                    <br><br>
+                    There, you’ll also have access to REAL teachers who can answer your questions about anything you come across in the books. You’ll never be left alone.
+                    <br><br>
+                    Click on any of the books to see a preview from Book 2 to see what they’re like inside!</p>
             </div>
 
             <div class="flex flex-wrap justify-center">
                 <div class="w-1/2 md:w-1/3 lg:w-1/4 p-4 md:p-8">
                     <img class="mx-auto mb-5 w-1/2 border-4 border-navy-700 rounded-lg modal-trigger cursor-pointer" src="https://d2vyvo0tyx8ig5.cloudfront.net/books/foundations/sales/level-1-x2.jpg">
-                    <p class="text-xs leading-relaxed"><span class="font-extrabold text-pred text-sm leading-snug inline-block">Welcome To The Keyboard</span><br>
+                    <p class="text-xs leading-relaxed"><span class="font-extrabold text-pianote text-sm leading-snug inline-block">Welcome To The Keyboard</span><br>
                         Get to know the keyboard and learn all the notes. You’ll be playing your first scale in no time.</p>
                 </div>
                 <div class="w-1/2 md:w-1/3 lg:w-1/4 p-4 md:p-8">
                     <img class="mx-auto mb-5 w-1/2 border-4 border-navy-700 rounded-lg modal-trigger cursor-pointer" src="https://d2vyvo0tyx8ig5.cloudfront.net/books/foundations/sales/level-2-x2.jpg">
-                    <p class="text-xs leading-relaxed"><span class="font-extrabold text-pred text-sm leading-snug inline-block">The Staff & Sight-Reading</span><br>
+                    <p class="text-xs leading-relaxed"><span class="font-extrabold text-pianote text-sm leading-snug inline-block">The Staff & Sight-Reading</span><br>
                         Read music so you can play music. You’ll find loads of tips and practice resources to help you remember the notes.</p>
                 </div>
                 <div class="w-1/2 md:w-1/3 lg:w-1/4 p-4 md:p-8">
                     <img class="mx-auto mb-5 w-1/2 border-4 border-navy-700 rounded-lg modal-trigger cursor-pointer" src="https://d2vyvo0tyx8ig5.cloudfront.net/books/foundations/sales/level-3-x2.jpg">
-                    <p class="text-xs leading-relaxed"><span class="font-extrabold text-pred text-sm leading-snug inline-block">Diving Deeper Into Core Skills</span><br>
+                    <p class="text-xs leading-relaxed"><span class="font-extrabold text-pianote text-sm leading-snug inline-block">Diving Deeper Into Core Skills</span><br>
                         Take your skills up a notch with more advanced chording, chord progressions, and dynamics.</p>
                 </div>
                 <div class="w-1/2 md:w-1/3 lg:w-1/4 p-4 md:p-8">
                     <img class="mx-auto mb-5 w-1/2 border-4 border-navy-700 rounded-lg modal-trigger cursor-pointer" src="https://d2vyvo0tyx8ig5.cloudfront.net/books/foundations/sales/level-4-x2.jpg">
-                    <p class="text-xs leading-relaxed"><span class="font-extrabold text-pred text-sm leading-snug inline-block">Key Signatures & Inversions</span><br>
+                    <p class="text-xs leading-relaxed"><span class="font-extrabold text-pianote text-sm leading-snug inline-block">Key Signatures & Inversions</span><br>
                         Start making your songs sound more musical with chord inversions. You’ll also learn new key signatures and ‘accidentals’.</p>
                 </div>
                 <div class="w-1/2 md:w-1/3 lg:w-1/4 p-4 md:p-8">
                     <img class="mx-auto mb-5 w-1/2 border-4 border-navy-700 rounded-lg modal-trigger cursor-pointer" src="https://d2vyvo0tyx8ig5.cloudfront.net/books/foundations/sales/level-5-x2.jpg">
-                    <p class="text-xs leading-relaxed"><span class="font-extrabold text-pred text-sm leading-snug inline-block">Flats & Chord Shortcuts</span><br>
+                    <p class="text-xs leading-relaxed"><span class="font-extrabold text-pianote text-sm leading-snug inline-block">Flats & Chord Shortcuts</span><br>
                         Take those chords from bland to impressive with shortcuts to boost your chord transitions.</p>
                 </div>
                 <div class="w-1/2 md:w-1/3 lg:w-1/4 p-4 md:p-8">
                     <img class="mx-auto mb-5 w-1/2 border-4 border-navy-700 rounded-lg modal-trigger cursor-pointer" src="https://d2vyvo0tyx8ig5.cloudfront.net/books/foundations/sales/level-6-x2.jpg">
-                    <p class="text-xs leading-relaxed"><span class="font-extrabold text-pred text-sm leading-snug inline-block">Understanding Minor Keys</span><br>
+                    <p class="text-xs leading-relaxed"><span class="font-extrabold text-pianote text-sm leading-snug inline-block">Understanding Minor Keys</span><br>
                         Take the step towards becoming an intermediate pianist. You’ll learn the minor scales and some new rhythmic patterns.</p>
                 </div>
                 <div class="w-1/2 md:w-1/3 lg:w-1/4 p-4 md:p-8">
                     <img class="mx-auto mb-5 w-1/2 border-4 border-navy-700 rounded-lg modal-trigger cursor-pointer" src="https://d2vyvo0tyx8ig5.cloudfront.net/books/foundations/sales/level-7-x2.jpg">
-                    <p class="text-xs leading-relaxed"><span class="font-extrabold text-pred text-sm leading-snug inline-block">The Circle Of 5ths</span><br>
+                    <p class="text-xs leading-relaxed"><span class="font-extrabold text-pianote text-sm leading-snug inline-block">The Circle Of 5ths</span><br>
                         Unlock the secrets of the circle of 5ths to be able to figure out EVERY major and minor scale that there is.</p>
                 </div>
                 <div class="w-1/2 md:w-1/3 lg:w-1/4 p-4 md:p-8">
                     <img class="mx-auto mb-5 w-1/2 border-4 border-navy-700 rounded-lg modal-trigger cursor-pointer" src="https://d2vyvo0tyx8ig5.cloudfront.net/books/foundations/sales/level-8-x2.jpg">
-                    <p class="text-xs leading-relaxed"><span class="font-extrabold text-pred text-sm leading-snug inline-block">Learning To Improvise</span><br>
+                    <p class="text-xs leading-relaxed"><span class="font-extrabold text-pianote text-sm leading-snug inline-block">Learning To Improvise</span><br>
                         Learn how to take the fear and guessing out of improvisation and feel confident in your skills.</p>
                 </div>
                 <div class="w-1/2 md:w-1/3 lg:w-1/4 p-4 md:p-8">
                     <img class="mx-auto mb-5 w-1/2 border-4 border-navy-700 rounded-lg modal-trigger cursor-pointer" src="https://d2vyvo0tyx8ig5.cloudfront.net/books/foundations/sales/level-9-x2.jpg">
-                    <p class="text-xs leading-relaxed"><span class="font-extrabold text-pred text-sm leading-snug inline-block">7th Chords & The Blues</span><br>
+                    <p class="text-xs leading-relaxed"><span class="font-extrabold text-pianote text-sm leading-snug inline-block">7th Chords & The Blues</span><br>
                         The doorway to true musical freedom. Express yourself with the blues and learn how to improvise using the blues scale.</p>
                 </div>
                 <div class="w-1/2 md:w-1/3 lg:w-1/4 p-4 md:p-8">
                     <img class="mx-auto mb-5 w-1/2 border-4 border-navy-700 rounded-lg modal-trigger cursor-pointer" src="https://d2vyvo0tyx8ig5.cloudfront.net/books/foundations/sales/level-10-x2.jpg">
-                    <p class="text-xs leading-relaxed"><span class="font-extrabold text-pred text-sm leading-snug inline-block">Intro To Jazz</span><br>
+                    <p class="text-xs leading-relaxed"><span class="font-extrabold text-pianote text-sm leading-snug inline-block">Intro To Jazz</span><br>
                         Explore the world of Jazz with a popular jazz standard, and find out how to use jazz chords and modes to play your first solo.</p>
                 </div>
             </div>
@@ -327,24 +336,24 @@
         <div class="container mx-auto">
             <div class="flex text-center">
                 <div class="w-1/3 font-extrabold px-1 sm:px-3">
-                    <div class="tab-switcher active border-2 border-navy-600 text-navy-600 rounded-full p-2 cursor-pointer relative mb-10 sm:mb-20 select-none text-sm md:text-base lg:text-lg">AUTHOR
+                    <div class="tab-switcher active border-2 border-sky-900 text-sky-900 rounded-full p-2 cursor-pointer relative mb-10 sm:mb-20 select-none text-sm md:text-base lg:text-lg">AUTHOR
                         <div class="bottom-arrow absolute transition-all duration-300 border-solid transform -translate-x-1/2 translate-y-0 opacity-0 left-1/2"></div></div>
                 </div>
                 <div class="w-1/3 font-extrabold px-1 sm:px-3">
-                    <div class="tab-switcher border-2 border-navy-600 text-navy-600 rounded-full p-2 cursor-pointer relative mb-10 sm:mb-20 select-none text-sm md:text-base lg:text-lg">INTRO<span class="hidden sm:inline">DUCTION</span>
+                    <div class="tab-switcher border-2 border-sky-900 text-sky-900 rounded-full p-2 cursor-pointer relative mb-10 sm:mb-20 select-none text-sm md:text-base lg:text-lg">INTRO<span class="hidden sm:inline">DUCTION</span>
                         <div class="bottom-arrow absolute transition-all duration-300 border-solid transform -translate-x-1/2 translate-y-0 opacity-0 left-1/2"></div></div>
                 </div>
                 <div class="w-1/3 font-extrabold px-1 sm:px-3">
-                    <div class="tab-switcher border-2 border-navy-600 text-navy-600 rounded-full p-2 cursor-pointer relative mb-10 sm:mb-20 select-none text-sm md:text-base lg:text-lg"><span class="hidden sm:inline">TABLE OF </span>CONTENTS
+                    <div class="tab-switcher border-2 border-sky-900 text-sky-900 rounded-full p-2 cursor-pointer relative mb-10 sm:mb-20 select-none text-sm md:text-base lg:text-lg"><span class="hidden sm:inline">TABLE OF </span>CONTENTS
                         <div class="bottom-arrow absolute transition-all duration-300 border-solid transform -translate-x-1/2 translate-y-0 opacity-0 left-1/2"></div></div>
                 </div>
             </div>
 
             <div class="tab-content active opacity-0 invisible transition-opacity duration-1000 h-0">
                 <div class="sm:flex items-start md:items-center justify-center px-6">
-                    <img class="rounded-full border-4 sm:border-8 border-pred w-1/3 order-2" src="https://d2vyvo0tyx8ig5.cloudfront.net/faster-fingers/sales/lisa.jpg">
+                    <img class="rounded-full border-4 sm:border-8 border-pianote w-1/3 order-2" src="https://d2vyvo0tyx8ig5.cloudfront.net/faster-fingers/sales/lisa.jpg">
                     <div class="text-left sm:pr-8 lg:pr-20">
-                        <div class="w-32 bg-pred rounded-full h-2 hidden sm:block mb-4"></div>
+                        <div class="w-32 bg-pianote rounded-full h-2 hidden sm:block mb-4"></div>
                         <h1 class="font-bold font-roboto text-3xl sm:text-4xl md:text-5xl lg:text-6xl">LISA WITT</h1>
                         <p class="leading-loose max-w-2xl text-xs sm:text-sm">Lisa Witt has taught in a variety of settings from beginners just getting started to recording artists preparing their songs for the road.
                             <br><br>
@@ -356,7 +365,7 @@
             </div>
             <div class="tab-content opacity-0 invisible transition-opacity duration-1000 h-0 text-left">
                 <div class="sm:flex items-start justify-center px-6">
-                    <img class="bg-white border-4 sm:border-8 rounded-lg border-pred w-1/3 p-2 md:p-4 pb-0 md:pb-0 mb-4 sm:mb-0" src="https://d2vyvo0tyx8ig5.cloudfront.net/books/foundations/sales/lisa-cutout.jpg">
+                    <img class="bg-white border-4 sm:border-8 rounded-lg border-pianote w-1/3 p-2 md:p-4 pb-0 md:pb-0 mb-4 sm:mb-0" src="https://d2vyvo0tyx8ig5.cloudfront.net/books/foundations/sales/lisa-cutout.jpg">
                     <div class="text-left sm:pl-8 lg:pl-20 max-w-2xl">
                         <p class="leading-loose text-xs sm:text-sm">Nat King Cole, one of the most beloved popular pianists of the twentieth century, said that when he performed, it was “like sitting down at my piano and telling fairy stories.” Maybe you’d like to tell musical stories too. Or maybe you’ve wanted to learn a song like Beethoven’s “Moonlight Sonata” or “Bohemian Rhapsody” by Queen since they first gave you goosebumps. Maybe you’d love to accom- pany yourself while you sing, or even hope to write your own songs on the piano, just like Elton John, Tori Amos, and Billy Joel. Whatever your piano goals, you need to start at the beginning—right here!
                             <br><br> Welcome to Level 1 in the Pianote Foundations. You can think of this book as the perfect combination of having a private teacher to guide you and a workbook that allows you to take your time and learn at your own pace. With a carefully designed curriculum that corresponds to the Pianote Foundations video lessons, this book contains everything you need to keep you engaged, inspired, and focused on the first steps of your journey towards playing the music you love. With the Pianote Foundations, you have ALL the information you need to be successful in reaching your musical goals. These books allow you to learn in the comfort of your own home, at your own pace.
@@ -487,9 +496,9 @@
                             <a class="join sold-out mt-3 mb-5 sm:mb-10 w-full max-w-2xl text-lg sm:text-xl md:text-2xl lg:text-3xl">SOLD OUT!</a>
                         @else
                             <a
-                                    class="join vue-add-to-cart w-full text-lg sm:text-xl md:text-2xl lg:text-3xl"
-                                    href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['pianote-foundation' => 1,], 'redirect' => '/order', 'locked' => 'false']) }}"
-                                    data-product-json='{"pianote-foundation": 1}'
+                                class="join vue-add-to-cart w-full text-lg sm:text-xl md:text-2xl lg:text-3xl"
+                                href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['pianote-foundation' => 1,], 'redirect' => '/order', 'locked' => 'false']) }}"
+                                data-product-json='{"pianote-foundation": 1}'
                             >CLICK HERE TO ORDER »</a>
                         @endif
 
@@ -500,7 +509,7 @@
             <div class="absolute top-0 left-0 right-0 z-10 h-1/2" style="background: linear-gradient(180deg, #000c18 60%, transparent);"></div>
         </div>
     </section>
-    <section class="bg-navy-900 text-white py-8 sm:py-12 relative z-20 text-center border-t-4 border-pred">
+    <section class="bg-navy-900 text-white py-8 sm:py-12 relative z-20 text-center border-t-4 border-pianote">
         <div class="container mx-auto">
             <h1 class="font-bold mb-8 sm:mb-10 leading-tight text-lg sm:text-2xl md:text-3xl lg:text-4xl"><strong>Still have questions?</strong></h1>
             <div class="px-6 mx-auto max-w-4xl">
@@ -615,6 +624,5 @@
     <script src="{{ mix('/platform/js/manifest.js') }}"></script>
     <script src="{{ mix('/platform/js/vendor.js') }}"></script>
     <script src="{{ mix('/platform/js/app.js') }}"></script>
-
 
 @stop

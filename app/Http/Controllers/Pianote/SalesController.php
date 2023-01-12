@@ -48,17 +48,17 @@ class SalesController extends BaseController
 
     public function songs()
     {
-        return view('pianote.sales.features.songs', [ 'theme' => 'pianote', 'page' => 'songs']);
+        return view('pianote.sales.features.songs', [ 'brand' => 'pianote', 'page' => 'songs']);
     }
 
     public function method()
     {
-        return view('pianote.sales.features.method', [ 'theme' => 'pianote', 'page' => 'method']);
+        return view('pianote.sales.features.method', [ 'brand' => 'pianote', 'page' => 'method']);
     }
 
     public function coaches()
     {
-        return view('pianote.sales.features.coaches', [ 'theme' => 'pianote', 'page' => 'coaches']);
+        return view('pianote.sales.features.coaches', [ 'brand' => 'pianote', 'page' => 'coaches']);
     }
 
     public function chooseyourtrialmonth()
@@ -130,6 +130,11 @@ class SalesController extends BaseController
         return view('pianote.shop.pages.lifetime');
     }
 
+    public function lifetimeMembers()
+    {
+        return view('pianote.sales.lifetime-members');
+    }
+
     public function lisarecommends()
     {
         return view('pianote.shop.lisa-recommends');
@@ -142,15 +147,15 @@ class SalesController extends BaseController
 
     public function home()
     {
-        return view('pianote.sales.subscription', ['theme' => 'pianote']);
+        return view('pianote.sales.subscription', ['brand' => 'pianote']);
     }
     public function promo()
     {
-        return view('pianote.sales.subscription', ['theme' => 'pianote', 'promoVersion' => 'true']);
+        return view('pianote.sales.subscription', ['brand' => 'pianote', 'promoVersion' => 'true']);
     }
     public function choosePlan()
     {
-        return view('pianote.sales.choose-plan', ['theme' => 'pianote']);
+        return view('pianote.sales.choose-plan', ['brand' => 'pianote']);
     }
 
     public function jesusMolina()
@@ -201,6 +206,11 @@ class SalesController extends BaseController
     public function concertHeadphones()
     {
         return view('pianote.products.concert-headphones');
+    }
+
+    public function concertHeadphonesMembers()
+    {
+        return view('pianote.products.concert-headphones-members');
     }
 
     public function foundations()

@@ -415,6 +415,24 @@ return [
                 'customer_io_event_name' => 'leadtracker_customer_io_event_name',
             ],
         ],
+        // Drumeo Awards Giveaway 2
+        [
+            'path' => '/customer-io/submit-email-form',
+            'method' => 'post',
+            'form_name' => 'Drumeo Awards Giveaway 2',
+            'brand' => 'drumeo',
+
+            'input_data_map' => [
+                'email' => 'email',
+                'form_name' => 'form_name',
+                'utm_source' => 'leadtracker_utm_source',
+                'utm_medium' => 'leadtracker_utm_medium',
+                'utm_campaign' => 'leadtracker_utm_campaign',
+                'utm_term' => 'leadtracker_utm_term',
+                'customer_io_customer_id' => 'leadtracker_customer_io_customer_id',
+                'customer_io_event_name' => 'leadtracker_customer_io_event_name',
+            ],
+        ],
         // 30 Day Drummer Waitlist
         [
             'path' => '/customer-io/submit-email-form',

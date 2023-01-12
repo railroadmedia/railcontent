@@ -17,7 +17,7 @@
     @include('_partials.layout._fonts')
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
-    <link href="{{ asset('/marketing/css/guitareo/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/guitareo/sales-page.css') }}" rel="stylesheet">
 
@@ -483,7 +483,7 @@
         'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Guitareo+Membership/79348454',
         'reviewText' => 'Rated 5 stars by Guitareo students from around the world!',
         'youtubeLink' => 'https://www.youtube.com/guitarlessonscom/',
-        'youtube' => '991K',
+        'youtube' => '1M',
         'facebookLink' => 'https://facebook.com/guitareoofficial/',
         'facebook' => '333K',
         'instagramLink' => 'https://instagram.com/guitareoofficial/',

@@ -121,6 +121,7 @@ class Product extends Model
 
     protected $with = ["brand", "productType"];
     protected $dontKeepRevisionOf = ['uuid'];
+
     protected $revisionForceDeleteEnabled = true;
 
     public function brand()

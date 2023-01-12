@@ -2,8 +2,8 @@
 
 @section('meta')
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
-    <link rel="preload" href="{{ asset('/marketing/css/guitareo/tailwind-helpers.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="{{ asset('/marketing/css/guitareo/tailwind-helpers.css') }}"></noscript>
+    <link rel="preload" href="{{ asset('/marketing/css/tailwind-helpers.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}"></noscript>
     <link rel="preload" href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}"></noscript>
     <style>

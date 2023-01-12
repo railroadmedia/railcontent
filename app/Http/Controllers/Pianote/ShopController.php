@@ -32,13 +32,13 @@ class ShopController extends BaseController
             return $value->productType->name === 'Hoodies';
         });
 
-        return view('pianote.shop.shop', [
+        return view('pianote.shop.shop-test-layout', [
             'lessons' => $lessons,
             'accessories' => $accessories,
             'hats' => $hats,
             'shirts' => $shirts,
             'hoodies' => $hoodies,
-            'theme' => 'pianote',
+            'brand' => 'pianote',
             'category' => $request->category
         ]);
     }
@@ -47,6 +47,6 @@ class ShopController extends BaseController
     {
         $product = Product::where('slug', 'Pianote-'.$slug)->firstOrFail();
 
-        return view('pianote.shop.product-layout', [ 'product' => $product, 'theme' => 'pianote' ]);
+        return view('pianote.shop.product-test-layout', [ 'product' => $product, 'brand' => 'pianote' ]);
     }
 }

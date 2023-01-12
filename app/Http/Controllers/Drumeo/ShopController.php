@@ -33,13 +33,13 @@ class ShopController extends BaseController
             return $value->productType->name === 'Hoodies';
         });
 
-        return view('drumeo.drumshop.shop', [
+        return view('drumeo.drumshop.shop-test-layout', [
             'lessons' => $lessons,
             'accessories' => $accessories,
             'hats' => $hats,
             'shirts' => $shirts,
             'hoodies' => $hoodies,
-            'theme' => 'drumeo',
+            'brand' => 'drumeo',
             'category' => $request->category
         ]);
     }
@@ -48,12 +48,12 @@ class ShopController extends BaseController
     {
         $product = Product::where('slug', 'Drumeo-'.$slug)->firstOrFail();
 
-        return view('drumeo.drumshop.product-layout', [ 'product' => $product, 'theme' => 'drumeo' ]);
+        return view('drumeo.drumshop.product-test-layout', [ 'product' => $product, 'brand' => 'drumeo' ]);
     }
 
     public function products(Request $request, $domain, $page = null)
     {
-        return view('drumeo.products.'.$page);
+        return view('drumeo.products.'.$page, [ 'brand' => 'drumeo' ]);
 
         throw new NotFoundHttpException();
     }

@@ -331,10 +331,10 @@ Connect every riff, fill and tip you’ve learned and see how to apply it to pre
             });
         });
     </script>
-    <script src="{{ asset('marketing/js/pianote/manifest.js') }}"></script>
-    <script src="{{ asset('marketing/js/pianote/vendor.js') }}"></script>
-    <script src="{{ asset('marketing/js/pianote/cart-sidebar.js') }}"></script>
-    <script src="{{ asset('marketing/js/pianote/app.js') }}"></script>
+    <script src="{{ asset('/marketing/js/pianote/manifest.js') }}"></script>
+    <script src="{{ asset('/marketing/js/pianote/vendor.js') }}"></script>
+    <script src="{{ asset('/marketing/js/pianote/cart-sidebar.js') }}"></script>
+    <script src="{{ asset('/marketing/js/pianote/app.js') }}"></script>
 
 
 @stop

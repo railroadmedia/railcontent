@@ -42,12 +42,19 @@ class RailnotificationsUserProvider implements UserProviderInterface
 
     public function deleteUserFirebaseTokens(int $userId, array $tokens)
     {
-        // TODO: Implement deleteUserFirebaseTokens() method.
+        foreach ($tokens as $oldToken) {
+            FirebaseToken::whereToken($oldToken)
+                ->delete();
+        }
+
+        return true;
     }
 
     public function updateUserFirebaseToken($userId, $oldToken, $newToken)
     {
-        // TODO: Implement updateUserFirebaseToken() method.
+        FirebaseToken::whereToken($oldToken)->update(['token' => $newToken]);
+
+        return true;
     }
 
     /**

@@ -8,7 +8,7 @@
     <meta property="og:url" content="https://www.singeo.com/privacy/">
 
     @include('_partials.layout._tailwindcdn')
-    <link rel="stylesheet" href="{{ asset('/marketing/css/singeo/tailwind-helpers.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}">
     <link href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}" rel="stylesheet">
 
     <style>

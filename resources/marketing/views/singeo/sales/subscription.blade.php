@@ -17,7 +17,7 @@
     @include('_partials.layout._fonts')
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('/marketing/css/singeo/tailwind-helpers.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}">
     <link href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/singeo/sales-page.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
@@ -458,7 +458,7 @@
         'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Singeo+Membership/79348458',
         'reviewText' => 'Rated 5 stars by Singeo students from around the world!',
         'youtubeLink' => 'https://www.youtube.com/singeoofficial/',
-        'youtube' => '28,000',
+        'youtube' => '29,000',
         'facebookLink' => 'https://facebook.com/singeoofficial/',
         'facebook' => '23,000',
         'instagramLink' => 'https://instagram.com/singeoofficial/',

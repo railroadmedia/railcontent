@@ -1,13 +1,17 @@
 .bg-promo {
-    background-color:#ffac00;
+    background-color:#FFAC00;
 }
+
 .text-promo {
-    color:#ffac00;
+    color:#FFAC00;
 }
+
 .border-promo {
-    border-color:#ffac00;
+    border-color:#FFAC00;
 }
+
 /*spacing*/
+
 .tw-aspect-1\:1,
 .aspect-1\:1 {
     padding-bottom:100%;
@@ -18,34 +22,53 @@
     padding-bottom:56.25%;
 }
 
-.tw-clearfix::after {
+.clearfix::after {
     content:"";
     display:table;
     clear:both;
 }
 
 /*backgrounds*/
-.tw-bg-guitareo,
+
+.bg-drumeo {
+    background-color:#0B76DB;
+}
+
 .bg-guitareo {
     background-color:#00C9AC;
 }
 
+.bg-pianote {
+    background-color:#F61A30;
+}
+
+.bg-singeo {
+    background-color:#8300E9;
+}
+
 /*borders*/
-.tw-border-guitareo,
+.border-drumeo {
+    border-color:#0B76DB;
+}
+
 .border-guitareo {
     border-color:#00C9AC;
 }
-.border-navy-700 {
-    border-color:#04203C;
+
+.border-pianote {
+    border-color:#F61A30;
 }
 
-.border-navy-600 {
-    border-color:#204261;
+.border-singeo {
+    border-color:#8300E9;
+}
+
+.border-sky-900 {
+    border-color:#0c4a6e;
 }
 
 /*typography*/
 
-.tw-font-roboto,
 .font-roboto {
     font-family:"Roboto Condensed", sans-serif;
 }
@@ -54,9 +77,24 @@
     font-family:"Bebas Neue", sans-serif;
 }
 
-.tw-text-guitareo,
+.text-drumeo {
+    color:#0B76DB;
+}
+
 .text-guitareo {
     color:#00C9AC;
+}
+
+.text-pianote {
+    color:#F61A30;
+}
+
+.text-singeo {
+    color:#8300E9;
+}
+
+.text-sky-900 {
+    color:#0c4a6e;
 }
 
 .text-shadow-1 {
@@ -76,7 +114,7 @@
 }
 
 img {
-    display: inline-block;
-    max-width: 100%;
-    height: auto;
+    display:inline-block;
+    max-width:100%;
+    height:auto;
 }
