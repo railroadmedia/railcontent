@@ -31,9 +31,10 @@ They will be charged the full subscription cost.
 ### 3. Orders made through Musora Center will process membership changes automatically
 
 In Musora Center, any subscription membership products (not just Musora) added to a cart for a user with an active
-subscription will
-have a discounted rate applied by default. Most membership change cases will be discounted to $0,
-however an upgrade from basic to plus will charge a prorated monthly upgrade rate calculated as follows:
+subscription will have a discounted rate applied by default. Most membership change cases will be discounted to $0,
+however an upgrade from basic to plus will charge a prorated monthly upgrade rate if they have more than a month
+remaining on their basic subscription.
+The upgrade rate shall be calculated as follows:
 
 ```upgrade  rate = cost of Musora+ annual x remaining months / 12```
 
