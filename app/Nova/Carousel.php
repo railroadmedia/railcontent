@@ -47,9 +47,9 @@ class Carousel extends Resource
         return [
             ID::make()->sortable(),
             BelongsTo::make('Brand', 'brand', 'App\Nova\Brand')->sortable(),
-            Text::make('Subtitle', 'subtitle')->sortable(),
-            Text::make('Title', 'title')->required()->sortable(),
-            Markdown::make('Description')->required()->help('If a description exceeds 316 the last three characters will be replaced with an ellipses.'),
+            Text::make('Subtitle')->sortable(),
+            Text::make('Title')->required()->sortable(),
+            Markdown::make('Description')->required()->help('If a description exceeds 316 the last three characters will be replaced with an ellipses.<br> Use &lt;br&gt; for a line break.'),
             Text::make('CTA Button Text', 'cta_text')->required()->hideFromIndex(),
             Text::make('CTA URL', 'cta_url')->required(),
             Image::make('Image', 'img')
@@ -83,8 +83,8 @@ class Carousel extends Resource
 
                     return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') || str_contains($value, 'vimeocdn' || str_contains($value, 'imagedelivery')) ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
                 }),
-            Text::make('7-2. Image', 'img')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
-            Number::make('8. Display order', 'display_order'),
+            Text::make('Image', 'img')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
+            Number::make('Display order', 'display_order'),
         ];
     }
 
