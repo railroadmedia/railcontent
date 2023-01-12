@@ -2,7 +2,7 @@
     @php
         $queueData = \App\Analytics\Tracker::getQueueForBrand('drumeo');
 
-        cache()->store('redis')->put(auth()->id() . '_recent_order_analytics_data_drumeo', $queueData, 600);
+        cache()->store('redis')->put(auth()->id() . '_recent_order_analytics_data_drumeo', $queueData, 6000);
 
         \Illuminate\Support\Facades\Log::info('--- KEY SET: ' . auth()->id() . '_recent_order_analytics_data_drumeo');
         \Illuminate\Support\Facades\Log::info('--- $queueData: ' . var_export($queueData, true));
