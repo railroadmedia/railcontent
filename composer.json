@@ -46,7 +46,8 @@
         "symfony/http-client": "^6.0",
         "symfony/mailgun-mailer": "^6.0",
         "venturecraft/revisionable": "1.*",
-        "whitecube/nova-flexible-content": "^1.0"
+        "whitecube/nova-flexible-content": "^1.0",
+        "code-lts/laravel-fcm": "1.7.*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",

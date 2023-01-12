@@ -219,17 +219,6 @@
             text-align: left;
         }
 
-        .join.smaller {
-            font-size: 13px;
-            padding: 7px 12px;
-        }
-
-        @media (min-width: 768px) {
-            .join.smaller {
-                font-size: 14px;
-                padding: 13px 30px;
-            }
-        }
     </style>
 @stop
 
@@ -237,7 +226,7 @@
     @include("drumeo.sales.partials._nav")
     <section class="text-center text-white pb-5 md:pb-10 px-3 md:px-4" style="background:linear-gradient(to bottom, #000 65%, #06488F);">
         <div class="container mx-auto max-w-5xl">
-            <a href="todo" target="_blank"><img class="inline-block h-48 md:h-96" src="https://cdn.musora.com/image/fetch/w_1300,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/january/awards.jpg"></a>
+            <a href="https://www.youtube.com/watch?v=p2FVUMYO-6k" target="_blank"><img class="inline-block h-48 md:h-96" src="https://cdn.musora.com/image/fetch/w_1300,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/january/awards.jpg"></a>
 {{--            <h1 class="md:tracking-widest -mt-4 md:-mt-8 lg:-mt-12">The Drumeo Awards LIVE Show</h1>--}}
             <h6 class="leading-normal my-3 md:my-5 lg:my-8">
                 Enter your email for your chance to win a prize <br class="hidden md:inline lg:hidden">
@@ -318,7 +307,7 @@
                 <br><br>
                 Click the big button at the bottom of this page to join the party on January 27. See you there!
                 <br><br>
-                <a target="_blank" href="todo" class="join blue smaller">DRUMEO AWARDS LIVE</a>
+                <a target="_blank" href="https://www.youtube.com/watch?v=p2FVUMYO-6k" class="join blue smaller">WATCH NOW &raquo;</a>
             </p>
         </div>
     </section>
