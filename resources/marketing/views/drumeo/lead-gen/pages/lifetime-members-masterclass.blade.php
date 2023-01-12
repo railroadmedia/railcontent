@@ -217,14 +217,14 @@
                 <p class="leading-none tracking-tighter text-xs py-1 text-white" style="background-color:#bb3744;"><strong>JAN</strong></p>
                 <p class="leading-none text-lg py-1.5 text-black"><strong class="font-black">14</strong></p>
             </div></a>
-            <a target="_blank" class=" @if(Carbon\Carbon::create(2023, 1, 14, 12, 0, 0, 'America/Vancouver') < Carbon\Carbon::now()) sold-out @endif join blue smaller" href="/members/drumeo-masterclass-1">Morning Session - 10am PDT</a>
+            <a target="_blank" class=" @if(Carbon\Carbon::create(2023, 1, 14, 12, 0, 0, 'America/Vancouver') < Carbon\Carbon::now()) sold-out @endif join blue smaller" href="https://www.musora.com/drumeo/packs/lifetime-members-masterclass/353337/todd-sucherman-masterclass/381679/session-1/381680">Morning Session - 10am PDT</a>
             <hr class="my-7">
             <a href="https://www.addevent.com/event/Fr15914974" class="inline-block tooltip group" tip="Add To Calendar">
             <div class="bg-white text-center rounded-md inline-block overflow-hidden w-14 mr-2 align-middle transition-opacity group-hover:opacity-70">
                 <p class="leading-none tracking-tighter text-xs py-1 text-white" style="background-color:#bb3744;"><strong>JAN</strong></p>
                 <p class="leading-none text-lg py-1.5 text-black"><strong class="font-black">14</strong></p>
             </div></a>
-            <a target="_blank" class=" @if(Carbon\Carbon::create(2023, 1, 14, 18, 0, 0, 'America/Vancouver') < Carbon\Carbon::now()) sold-out @endif join blue smaller" href="/members/drumeo-masterclass-2">Evening Session - 4pm PDT</a>
+            <a target="_blank" class=" @if(Carbon\Carbon::create(2023, 1, 14, 18, 0, 0, 'America/Vancouver') < Carbon\Carbon::now()) sold-out @endif join blue smaller" href="https://www.musora.com/drumeo/packs/lifetime-members-masterclass/353337/todd-sucherman-masterclass/381679/session-2/381681">Evening Session - 4pm PDT</a>
         </div>
     </section>
 
