@@ -75,7 +75,7 @@ onUnmounted(() => {
             tw-relative
           "
         >
-          <h3 class="tw-text-center tw-w-full tw-text-black dark:tw-text-white">{{ title }}</h3>
+          <h3 class="tw-text-center tw-w-full tw-text-black dark:tw-text-white tw-font-bold">{{ title }}</h3>
           <button @click="onClose" class="tw-absolute tw-right-[24px] tw-top-0 tw-text-[#E5E5E5] hover:tw-text-black dark:hover:tw-text-white">
             <XIcon class="tw-h-[30px] tw-w-[30px]" />
           </button>
