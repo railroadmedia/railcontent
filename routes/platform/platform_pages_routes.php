@@ -616,6 +616,11 @@ Route::domain('{musoraDomain}')
         )
             ->whereIn('brand', all_brands())
             ->name('platform.request-song');
+
+        // New playlists
+        Route::get('/{brand}/playlists', [\App\Http\Controllers\Platform\UserPlaylistsController::class, 'index'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.user.playlists');
     });
 
 /*

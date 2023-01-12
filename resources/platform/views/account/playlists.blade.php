@@ -17,29 +17,32 @@
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white tw-pb-14">
         <div class="tw-flex tw-flex-col">
             <div class="tw-flex tw-flex-row">
-                <content-catalogue
-                    catalogue-type="list"
-                    brand="{{ $brand }}"
-                    theme-color="{{ $brand }}"
-                    limit="20"
-                    :included-types="{{ json_encode($allowedTypes) }}"
-                    :use-theme-color="true"
-                    :pre-loaded-content="{{ $listLessons }}"
-                    user-id="{{ auth()->id() }}"
-                    :is-playlists="true"
-                    :paginate="true"
-                    no-results-message="{{ $noResultsMessage }}"
-                    no-results-icon="happy"
-                    :destroy-on-list-removal="true"
-                    initial-page="{{ $initialPage }}"
-                    :force-wide-thumbs="true"
-                    :lock-unowned="true"
-                    :is-admin="<?php echo e(json_encode(user()->isAdmin())); ?>"
-                    @if($resetProgress)
-                    :reset-progress="true"
-                    @endif
-                    :show-loading-animation="true"
-                />
+                <?php foreach ($playlists as $playlist){  var_export($playlist);  ?>
+
+                    <?php } ?>
+{{--                <content-catalogue--}}
+{{--                    catalogue-type="coaches-grid"--}}
+{{--                    brand="{{ $brand }}"--}}
+{{--                    theme-color="{{ $brand }}"--}}
+{{--                    limit="20"--}}
+{{--                    :included-types="{{ json_encode($allowedTypes) }}"--}}
+{{--                    :use-theme-color="true"--}}
+{{--                    :pre-loaded-content="{{ $listLessons }}"--}}
+{{--                    user-id="{{ auth()->id() }}"--}}
+{{--                    :is-playlists="true"--}}
+{{--                    :paginate="true"--}}
+{{--                    no-results-message="{{ $noResultsMessage }}"--}}
+{{--                    no-results-icon="happy"--}}
+{{--                    :destroy-on-list-removal="true"--}}
+{{--                    initial-page="{{ $initialPage }}"--}}
+{{--                    :force-wide-thumbs="true"--}}
+{{--                    :lock-unowned="true"--}}
+{{--                    :is-admin="<?php echo e(json_encode(user()->isAdmin())); ?>"--}}
+{{--                    @if($resetProgress)--}}
+{{--                    :reset-progress="true"--}}
+{{--                    @endif--}}
+{{--                    :show-loading-animation="true"--}}
+{{--                />--}}
             </div>
         </div>
     </div>
