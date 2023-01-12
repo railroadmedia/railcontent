@@ -546,7 +546,7 @@ class HomePageController extends BaseController
                 $this->userPlaylistsService->getUserPlaylist(
                     user()->id,
                     'primary-playlist',
-                    brand()
+                    brand(), 1, 10
                 )
             );
         if (empty($userPrimaryPlaylist)) {
