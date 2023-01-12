@@ -219,17 +219,6 @@
             text-align: left;
         }
 
-        .join.smaller {
-            font-size: 13px;
-            padding: 7px 12px;
-        }
-
-        @media (min-width: 768px) {
-            .join.smaller {
-                font-size: 14px;
-                padding: 13px 30px;
-            }
-        }
     </style>
 @stop
 
@@ -318,7 +307,7 @@
                 <br><br>
                 Click the big button at the bottom of this page to join the party on January 27. See you there!
                 <br><br>
-                <a target="_blank" href="https://www.youtube.com/watch?v=p2FVUMYO-6k" class="join blue smaller">DRUMEO AWARDS LIVE</a>
+                <a target="_blank" href="https://www.youtube.com/watch?v=p2FVUMYO-6k" class="join blue smaller">WATCH NOW &raquo;</a>
             </p>
         </div>
     </section>
