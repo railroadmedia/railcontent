@@ -1,6 +1,12 @@
 @if(current_user_has_recent_order())
     @php
-        cache()->set(auth()->id() . '_recent_order_analytics_data_drumeo', \App\Analytics\Tracker::getQueueForBrand('drumeo'), 60)
+        $queueData = \App\Analytics\Tracker::getQueueForBrand('drumeo');
+
+        cache()->store('redis')->put(auth()->id() . '_recent_order_analytics_data_drumeo', $queueData, 6000);
+
+        \Illuminate\Support\Facades\Log::info('--- KEY SET: ' . auth()->id() . '_recent_order_analytics_data_drumeo');
+        \Illuminate\Support\Facades\Log::info('--- $queueData: ' . var_export($queueData, true));
+        \Illuminate\Support\Facades\Log::info('--- $queueDataFROMCACHEINITAL: ' . var_export(cache()->store('redis')->get(auth()->id() . '_recent_order_analytics_data_drumeo'), true));
     @endphp
 
     <iframe src="{{ get_legacy_brand_base_url('drumeo') . '/railanalytics/blank-tracking-page?cache_key=' . auth()->id() . '_recent_order_analytics_data_drumeo' }}"
@@ -9,7 +15,7 @@
     </iframe>
 
     @php
-        cache()->set(auth()->id() . '_recent_order_analytics_data_pianote', \App\Analytics\Tracker::getQueueForBrand('pianote'), 60)
+        cache()->store('redis')->put(auth()->id() . '_recent_order_analytics_data_pianote', \App\Analytics\Tracker::getQueueForBrand('pianote'), 60)
     @endphp
 
     <iframe src="{{ get_legacy_brand_base_url('pianote') . '/railanalytics/blank-tracking-page?cache_key=' . auth()->id() . '_recent_order_analytics_data_pianote' }}"
@@ -18,7 +24,7 @@
     </iframe>
 
     @php
-        cache()->set(auth()->id() . '_recent_order_analytics_data_guitareo', \App\Analytics\Tracker::getQueueForBrand('guitareo'), 60)
+        cache()->store('redis')->put(auth()->id() . '_recent_order_analytics_data_guitareo', \App\Analytics\Tracker::getQueueForBrand('guitareo'), 60)
     @endphp
 
     <iframe src="{{ get_legacy_brand_base_url('guitareo') . '/railanalytics/blank-tracking-page?cache_key=' . auth()->id() . '_recent_order_analytics_data_guitareo' }}"
@@ -27,7 +33,7 @@
     </iframe>
 
     @php
-        cache()->set(auth()->id() . '_recent_order_analytics_data_singeo', \App\Analytics\Tracker::getQueueForBrand('singeo'), 60)
+        cache()->store('redis')->put(auth()->id() . '_recent_order_analytics_data_singeo', \App\Analytics\Tracker::getQueueForBrand('singeo'), 60)
     @endphp
 
     <iframe src="{{ get_legacy_brand_base_url('singeo') . '/railanalytics/blank-tracking-page?cache_key=' . auth()->id() . '_recent_order_analytics_data_singeo' }}"
