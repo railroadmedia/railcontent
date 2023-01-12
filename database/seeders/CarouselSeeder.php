@@ -41,9 +41,7 @@ class CarouselSeeder extends Seeder
                 'brand_id' => 1,
                 'subtitle' => '',
                 'title' => 'NEW SONG RELEASES',
-                'description' => 'January 11th - Student Request - 15 New Songs
-January 18th - Songs Lottery - 50 New Songs
-January 25th - Drumeo\'s Choice - 25 New Songs',
+                'description' => 'January 11th - Student Request - 15 New Songs <br>January 18th - Songs Lottery - 50 New Songs <br>January 25th - Drumeo\'s Choice - 25 New Songs',
                 'cta_text' => 'GO TO SONGS',
                 'cta_url' => 'https://www.musora.com/drumeo/songs',
                 'img' => 'https://musora-web-platform.s3.amazonaws.com/carousel/Songs-banner.jpg',
