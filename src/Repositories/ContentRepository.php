@@ -203,6 +203,7 @@ class ContentRepository extends RepositoryBase
                 ->selectPrimaryColumns()
                 ->restrictByUserAccess()
                 ->whereIn(ConfigService::$tableContent . '.id', $ids)
+                ->distinct()
                 ->getToArray();
 
         // restore order of ids passed in
