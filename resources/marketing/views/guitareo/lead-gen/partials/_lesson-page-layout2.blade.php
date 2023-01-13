@@ -22,14 +22,14 @@
             <div class="px-2 md:px-3">
                 <h3><strong>@yield('title')</strong></h3>
                 @hasSection('lesson-number')
-                    <p class="@if($brandColor === 'guitareo')text-guitareo @endif mt-1 sm:mt-2" @if($brandColor === 'yellow') style="color:#F8C849;" @endif>@yield('lesson-number')</p>
+                    <p class="@if($themeColor === 'guitareo')text-guitareo @endif mt-1 sm:mt-2" @if($themeColor === 'yellow') style="color:#F8C849;" @endif>@yield('lesson-number')</p>
                 @endif
             </div>
         </div>
         <div class="text-center mt-3 sm:mt-7 clearfix lesson-buttons">
             <div class="mb-2 sm:mb-0 w-full sm:w-1/4 float-left px-2 md:px-3">
                 @hasSection('previous')
-                    <a class="button outline @if($brandColor == 'yellow') yellow @else guitareo @endif block" href="@yield('previous')">
+                    <a class="button outline @if($themeColor == 'yellow') yellow @else guitareo @endif block" href="@yield('previous')">
                         <i class="fas fa-chevron-left"></i> Prev
                     </a>
                 @else
@@ -38,14 +38,14 @@
             </div>
 
             <div class="mb-2 sm:mb-0 w-full sm:w-2/4 float-left px-2 md:px-3">
-                <a class="button outline @if($brandColor == 'yellow') yellow @else guitareo @endif block" href="{{ $allLessons }}">
+                <a class="button outline @if($themeColor == 'yellow') yellow @else guitareo @endif block" href="{{ $allLessons }}">
                     All Lessons
                     <i class="fas fa-chevron-up"></i>
                 </a>
             </div>
             <div class="w-full sm:w-1/4 float-left px-2 md:px-3 next-lesson-button">
                 @hasSection('next')
-                    <a class="button outline @if($brandColor == 'yellow') yellow @else guitareo @endif block" href="@yield('next')">
+                    <a class="button outline @if($themeColor == 'yellow') yellow @else guitareo @endif block" href="@yield('next')">
                         @hasSection('next-text')
                             @yield('next-text')
                         @else

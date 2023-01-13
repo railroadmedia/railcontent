@@ -15,7 +15,7 @@
             <img class="hidden sm:inline-block h-7 lg:h-8 mt-5" alt="promo logo" src="{{ $promoLogo }}">
             <img class="inline-block sm:hidden h-12 mt-4" alt="mobile promo logo" src="{{ $promoLogoM }}">
             <h4 class="leading-tight my-2 uppercase">{!! $header !!}</h4>
-            <a class="join {{ $brand }} my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>
+            <a class="join {{ $theme }} my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>
             <p class="leading-tight text-sm"><em>First year discount: <s class="opacity-40">${{ Prices::$plusSubscriptionAnnualFull }}</s> ${{ Prices::$plusSubscriptionAnnual }}.<br class="inline sm:hidden"> Cancel anytime. 90-day guarantee.</em></p>
             <h3 class="leading-tight mt-8 mb-4 sm:my-8 uppercase">{!!  $subDescription  !!}</h3>
             @if(!empty($countdown))
@@ -74,7 +74,7 @@
                                 class="border-2 border-promo front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700"
                                 style="@if(!empty($bonus['special'])) overflow: visible;border-color: #cda880; @endif backface-visibility: hidden;">
                                 @if(!empty($bonus['badge']))
-                                    <h6 class="absolute text-white top-0 left-0 w-full py-0.5 bg-{{ $brand }} rounded-t-xl font-bebas uppercase">{{ $bonus['badge'] }}</h6>
+                                    <h6 class="absolute text-white top-0 left-0 w-full py-0.5 bg-{{ $theme }} rounded-t-xl font-bebas uppercase">{{ $bonus['badge'] }}</h6>
                                     {{--                                        <h4 class="absolute text-white -top-3 -left-3  py-3 px-2.5 rounded-full transform -rotate-12" style="    line-height: 0.6;background-color:#cda880;"><strong>6<br><span class="leading-none" style="font-size: 50%;">PAIRS</span></strong></h4>--}}
                                 @endif
                                 <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url(https://cdn.musora.com/image/fetch/w_460,q_auto:best/{{ $bonus['image'] }});"></div>
@@ -109,7 +109,7 @@
                 </div>
             @endforeach
             <div class="flex flex-wrap sm:flex-nowrap justify-center items-start my-2 sm:my-4">
-                @if($brand !== 'drumeo')
+                @if($theme !== 'drumeo')
                     <div class="relative mb-3 sm:mb-0 mx-1 sm:mx-2 lg:mx-3">
                         <img alt="brand tile" class="hidden sm:inline-block sm:h-24 md:h-28 lg:h-36 rounded-xl"
                             src="https://drumeo-assets.s3.amazonaws.com/sales/2023/drumeo-bonus.jpg">
@@ -118,7 +118,7 @@
                         <p class="absolute w-full text-sm lg:text-base uppercase font-bebas" style="bottom: 20%;">DRUM LESSONS INCLUDED</p>
                     </div>
                 @endif
-                @if($brand !== 'pianote')
+                @if($theme !== 'pianote')
                     <div class="relative mb-3 sm:mb-0 mx-1 sm:mx-2 lg:mx-3">
                         <img alt="brand tile" class="hidden sm:inline-block sm:h-24 md:h-28 lg:h-36 rounded-xl"
                             src="https://drumeo-assets.s3.amazonaws.com/sales/2023/pianote-bonus.jpg">
@@ -127,7 +127,7 @@
                         <p class="absolute w-full text-sm lg:text-base uppercase font-bebas" style="bottom: 20%;">PIANO LESSONS INCLUDED</p>
                     </div>
                 @endif
-                @if($brand !== 'guitareo')
+                @if($theme !== 'guitareo')
                     <div class="relative mb-3 sm:mb-0 mx-1 sm:mx-2 lg:mx-3">
                         <img alt="brand tile" class="hidden sm:inline-block sm:h-24 md:h-28 lg:h-36 rounded-xl"
                             src="https://drumeo-assets.s3.amazonaws.com/sales/2023/guitareo-bonus.jpg">
@@ -136,7 +136,7 @@
                         <p class="absolute w-full text-sm lg:text-base uppercase font-bebas" style="bottom: 20%;">GUITAR LESSONS INCLUDED</p>
                     </div>
                 @endif
-                @if($brand !== 'singeo')
+                @if($theme !== 'singeo')
                     <div class="relative mb-3 sm:mb-0 mx-1 sm:mx-2 lg:mx-3">
                         <img alt="brand tile" class="hidden sm:inline-block sm:h-24 md:h-28 lg:h-36 rounded-xl"
                             src="https://drumeo-assets.s3.amazonaws.com/sales/2023/singeo-bonus.jpg">
@@ -147,7 +147,7 @@
                 @endif
             </div>
         </div>
-        <a class="join {{ $brand }} my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>
+        <a class="join {{ $theme }} my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>
         <br>
         <a class="inline-block text-light-navy mt-2" href="{{ $altButtonLink }}"><p><u><em>Or start a monthly membership for <br class="inline-block md:hidden">${{ Prices::$plusSubscriptionMonthly }}/month. (no bonuses)</em></u></p></a>
     </div>
