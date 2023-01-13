@@ -102,11 +102,11 @@
         ])
         <div class="has-drop-down" target="_parent" rel="">
             <div class="nav-link">
-                <i class="fas fa-star text-singeo"></i>
+                <i class="fas fa-star"></i>
                 Features
                 <div class="drop-down-arrow ">
-                    <span class="bg-singeo"></span>
-                    <span class="bg-singeo"></span>
+                    <span></span>
+                    <span></span>
                 </div>
             </div>
         </div>
@@ -129,11 +129,11 @@
         </div>
         <div class="has-drop-down" target="_parent" rel="">
             <div class="nav-link">
-                <i class="fas fa-piano-keyboard text-singeo"></i>
+                <i class="fas fa-piano-keyboard"></i>
                 Instruments
                 <div class="drop-down-arrow ">
-                    <span class="bg-singeo"></span>
-                    <span class="bg-singeo"></span>
+                    <span></span>
+                    <span></span>
                 </div>
             </div>
         </div>
