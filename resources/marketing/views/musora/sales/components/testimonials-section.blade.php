@@ -1,13 +1,4 @@
-
-{{--    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>--}}
-{{--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">--}}
-{{--    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>--}}
-{{--    <style>--}}
-{{--        .splide__pagination__page.is-active {--}}
-{{--            background: #01050F;--}}
-{{--        }--}}
-{{--    </style>--}}
-
+<div id="testimonials" class="anchor"></div>
 <section class="py-10 sm:py-14 lg:py-20 relative overflow-hidden text-center px-3 lg:px-5" x-data="{
         @foreach($testimonials as $testimonial)
             {{ str_replace(' ', '', $testimonial['name']) }} : false,
@@ -98,7 +89,7 @@
                                     <div class="font-bold text-sm leading-snug mb-2">{!! $testimonial['title'] !!}</div>
                                     <p class="text-sm">{{ $testimonial['name'] }}</p>
 
-                                        <p class="mt-1 text-xs text-{{ $theme }} cursor-pointer" x-on:click="{{str_replace(' ', '', $testimonial['name'])}} = true;">
+                                        <p class="mt-1 text-xs text-{{ $brand }} cursor-pointer" x-on:click="{{str_replace(' ', '', $testimonial['name'])}} = true;">
                                             @if(!empty($testimonial['video']))
                                                 Watch video
                                             @else

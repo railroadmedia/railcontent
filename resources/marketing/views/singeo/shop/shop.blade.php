@@ -9,11 +9,11 @@
     <meta property="og:url" content="https://www.singeo.com/shop/">
 
 
-    <link rel="stylesheet" href="{{ asset('/marketing/css/singeo/tailwind-helpers.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}">
     <link href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}" rel="stylesheet">
 
     <link href="{{ asset('/marketing/parcel/singeo/shop.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
+    @include('_partials.layout._tailwindcdn')
 
     <link href="{{ asset('/marketing/css/vuesora.css') }}" rel="stylesheet">
 @stop
@@ -255,7 +255,7 @@
 {{--                        <div class="float-left w-full px-2 md:px-3">--}}
 {{--                            <p><strong>Singeo Membership + 5 Bonuses </strong><br>--}}
 {{--                                <em>Singeo Annual Membership<br class="hidden lg:inline"> + Starter Kit + Practice Poster + Guitar/Piano Lessons & More!</em>--}}
-{{--                                <span class="price"><s class="opacity-30">$778</s> <strong class="linear-purple">${{ SingeoPrices::$singeoMembershipAnnual }}</strong></span>--}}
+{{--                                <span class="price"><s class="opacity-30">$778</s> <strong class="linear-purple">${{ Prices::$plusSubscriptionAnnual }}</strong></span>--}}
 {{--                            </p>--}}
 {{--                            <span class="join" style="background:linear-gradient(180deg, #8300E9 0%, #03017C 100%);">See The Deal &raquo;</span>--}}
 {{--                        </div>--}}
@@ -268,7 +268,7 @@
                             <p class="leading-tight mt-2 mb-2 lg:mb-3 lg:mt-5 text-sm">
                                 Everything you need to <b>start singing now.</b>
                             </p>
-                            <div class="join white smaller w-full" style="background:#D46A7D;color:white;">only <s style="color:#C4C4C4;">${{ SingeoPrices::$singingStarterKitFull }}</s> ${{ SingeoPrices::$singingStarterKit }} &raquo;</div><br>
+                            <div class="join white smaller w-full" style="background:#D46A7D;color:white;">only <!--<s style="color:#C4C4C4;">${{ floatval($productPrices['singing-starter-kit']->price) }}</s>--> ${{ floatval($productPrices['singing-starter-kit']->discounted_price) }} &raquo;</div><br>
                         </div>
                         <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover" style="background-position:60% 0;background-color:#0d1d3f;background-image:url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://singeo.s3.amazonaws.com/sales/promos/black-friday/singing-starter-kit-banner.jpg);"></div>
                         <div class="inline-block sm:hidden absolute inset-0 z-0" style="background-color:#293239;"></div>
@@ -282,7 +282,7 @@
                             <p class="leading-tight mt-4 mb-2 lg:mb-3 lg:mt-5 text-sm">
                                 Take your singing skills to the <b>next level.</b>
                             </p>
-                            <div class="join white smaller w-full" style="background:white;color:#2B384D;">only <s style="color:#C4C4C4;">${{ SingeoPrices::$beautifulHarmoniesFull }}</s> ${{ SingeoPrices::$beautifulHarmonies }} &raquo;</div><br>
+                            <div class="join white smaller w-full" style="background:white;color:#2B384D;">only <!--<s style="color:#C4C4C4;">${{ floatval($productPrices['the-essential-guide-to-beautiful-harmonies']->price) }}</s>--> ${{ floatval($productPrices['the-essential-guide-to-beautiful-harmonies']->discounted_price) }} &raquo;</div><br>
                         </div>
                         <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover bg-center" style="background-color:#0d1d3f;background-image:url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://singeo.s3.amazonaws.com/sales/promos/black-friday/beautiful-harmonies-banner.jpg);"></div>
                         <div class="inline-block sm:hidden absolute inset-0 z-0" style="background-color:#293239;"></div>
@@ -305,7 +305,7 @@
                             "packAuthor" => $item->instructor_name ?? 'Singeo',
                             "cardDescription" => $item->short_desc,
                             "fullPrice" => $item->price,
-                            "price" => $item->discounted_price === '0.00' || empty($item->discounted_price) ? $item->price : $item->discounted_price,
+                            "price" => $item->discounted_price,
                             "category" => strtolower($item->productType->name),
                             "includedEdge" => $item->included_edge,
                             "sizes" => $item->sizes,
@@ -327,7 +327,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.3/moment-timezone-with-data.min.js"></script>
 
     <script src="{{ asset('/marketing/js/modal.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/parcel/singeo/nav-footer.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 
     <script>
         $(document).ready(function () {
@@ -390,8 +390,8 @@
         });
     </script>
 
-    <script src="{{ asset('marketing/js/singeo/manifest.js') }}"></script>
-    <script src="{{ asset('marketing/js/singeo/vendor.js') }}"></script>
+    <script src="{{ asset('/marketing/js/singeo/manifest.js') }}"></script>
+    <script src="{{ asset('/marketing/js/singeo/vendor.js') }}"></script>
     <script src="{{ asset('/marketing/js/singeo/app.js') }}"></script>
     {{-- Platform --}}
     <script src="{{ mix('/platform/js/manifest.js') }}"></script>

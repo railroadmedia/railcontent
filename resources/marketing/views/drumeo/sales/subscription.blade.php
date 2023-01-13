@@ -14,11 +14,11 @@
         <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/sales/2023/share-image-drumeo.jpg" style="display: none;">
     @endif
 
-    @include('drumeo._partials._fonts')
+    @include('_partials.layout._fonts')
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
 
@@ -182,7 +182,7 @@
            'promoLogoM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs-m.png',
         'desc' => 'Loop, learn, and remove the drums from 5,000+ drumming anthems. ',
            'text' => 'The NEW Drumeo Songs is here.<br><br>You can now magically remove the drums from 5,000+ popular drumming anthems. And with note-for-note sheet music, tempo adjustment, and a looping feature you’ll have <strong>the ultimate tool for learning songs on the drums.</strong> <br><br>And to make your goals easier in 2023 – you’ll also get a FREE pair of Drumeo’s in-ear headphones when you join Drumeo. So you can enjoy unlimited drum lessons, note-for-note song breakdowns, AND protect your ears while playing your favorite songs.<br><br>Click below to grab the deal – or scroll down to try a demo of the NEW Drumeo Songs.',
-           'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/collage-promo.png',
+           'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/collage3.png',
            'belowButton' => 'SAVE 17% + GET 10 BONUSES WORTH $1342.94',
        ])
     @else
@@ -483,7 +483,6 @@
             ],
         ]
     @endphp
-    <div id="testimonials" class="anchor"></div>
     @include('musora.sales.components.testimonials-section', [
         'header' => 'Trusted by drummers<br class="inline-block sm:hidden">  everywhere.',
         'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738',
@@ -493,7 +492,7 @@
         'facebookLink' => 'https://facebook.com/drumeo/',
         'facebook' => '1.2M',
         'instagramLink' => 'https://instagram.com/drumeoofficial/',
-        'instagram' => '950K',
+        'instagram' => '966K',
     ])
     @include('musora.sales.components.guarantee-section', [
         'badge' => 'https://drumeo-assets.s3.amazonaws.com/sales/2022/guarantee.png',
@@ -502,6 +501,7 @@
     ])
     <div class="unstick-trigger block"></div>
     <div id="customize-anchor" class="anchor"></div>
+    <div id="order" class="anchor"></div>
     @if(!empty($promoVersion))
 
         @php
@@ -510,63 +510,63 @@
                 'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/eardrums.jpg',
                 'title' => 'EarDrums',
                 'description' => 'Drumeo EarDrums reduce external volume by up to -29dB. That means you can play hard while protecting your ears.',
-                'price' => Prices::$earDrumsFull,
+                'price' => floatval($productPrices['drumeo-eardrums']->price),
                 'shipping' => true,
                 ],
                 [
                 'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/drumsticks.jpg',
                 'title' => 'Drumeo Drumsticks',
                 'description' => 'Drumeo 5A Drumsticks by Vater -- made with hickory and extra moisture to last longer.',
-                'price' => Prices::$sticksFull,
+                'price' => floatval($productPrices['Drumeo-VaterSticks']->price),
                 'shipping' => true,
                 ],
                 [
                 'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/rdm.jpg',
                 'title' => 'Rock Drumming Masterclass',
                 'description' => 'Todd Sucherman’s 26-week masterclass to help you improve your rock drumming.',
-                'price' => Prices::$rdmFull,
+                'price' => floatval($productPrices['rock-drumming-masterclass-pack']->price),
                 ],
                 [
                 'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/dtme.jpg',
                 'title' => 'Drum Technique Made Easy',
                 'description' => 'Bruce Becker’s 26-week masterclass to improve your hand & foot technique.',
-                'price' => Prices::$dtmeFull,
+                'price' => floatval($productPrices['drum-technique-made-easy-pack']->price),
                 ],
                 [
                 'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/ime.jpg',
                 'title' => 'Independence Made Easy',
                 'description' => 'Jared Falk’s 26-week masterclass to unlock your musicality and freedom on the drums.',
-                'price' => Prices::$imeFull,
+                'price' => floatval($productPrices['independence-made-easy-pack']->price),
                 ],
                 [
                 'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/eyd.jpg',
                 'title' => 'Electrify Your Drumming',
                 'description' => 'Your guide to playing 10 styles of electronic dance music - includes 23 play-alongs!',
-                'price' => Prices::$eydFull,
+                'price' => floatval($productPrices['electrify-your-drumming']->price),
                 ],
                 [
                 'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/fwtbdf.jpg',
                 'title' => 'Better Drum Fills',
                 'description' => 'The ultimate four-week crash course to playing more creative & musical drum fills.',
-                'price' => Prices::$bdfFull,
+                'price' => floatval($productPrices['four-weeks-to-better-drum-fills']->price),
                 ],
                 [
                 'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/sd.jpg',
                 'title' => 'Successful Drumming',
                 'description' => 'Jared Falk’s step-by-step curriculum for building a rock-solid foundation on the drums.',
-                'price' => Prices::$sdOnlineFull,
+                'price' => floatval($productPrices['SD-DIGI']->price),
                 ],
                 [
                 'image' => 'https://cdn.musora.com/image/fetch/c_fill,w_300,q_auto:good/https://drumeo-assets.s3.amazonaws.com/promos/july/tommy_card.jpg',
                 'title' => 'Great Hands For A Lifetime',
                 'description' => 'Tommy Igoe helps you improve your hand strength, speed, stamina, comfort, and control in the drums in four hours of video lessons.',
-                'price' => Prices::$ghfalFull,
+                'price' => floatval($productPrices['GHFAL-DIGI']->price),
                 ],
                 [
                 'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/lsf.jpg',
                 'title' => 'Learn Songs Faster',
                 'description' => 'This masterclass will give you proven techniques for learning MORE songs in less time.',
-                'price' => Prices::$learnSongsFasterFull,
+                'price' => floatval($productPrices['learn-songs-faster-pack']->price),
                 ],
             ]
         @endphp
@@ -615,7 +615,7 @@
     @endif
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/js/sliding-anchor.js') }}"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
     @yield('scripts')
 @stop

@@ -13,8 +13,8 @@
 @section('styles')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation-float.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('/marketing/css/guitareo/tailwind-helpers.css') }}">
+    @include('_partials.layout._tailwindcdn')
+    <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/500-songs.css') }}">
     <style>
 
@@ -35,7 +35,7 @@
 
 @section('scripts')
     <script src="{{ asset('/marketing/js/modal.js') }}"></script>
-    <script src="{{ asset('/marketing/parcel/guitareo/nav-footer.js') }}"></script>
+    <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script>
         $(document).ready(function () {
             $(document).foundation();
@@ -81,8 +81,8 @@
                 <strong>500 Songs On The Guitar</strong> In 5 Days</h2>
             <a class="join" href="@yield('order-link')" @yield('product-json')>Get Started &raquo;</a>
             <p class="breakdown">
-                @if(GuitareoPrices::$songs500Full > $productPrice)
-                    <s>NORMALLY ${{ GuitareoPrices::$songs500Full }}.</s> &nbsp;<strong class="text-guitareo"><u>ONLY ${{ $productPrice }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * ($productPrice / GuitareoPrices::$songs500Full))) }}%)
+                @if(floatval($productPrices['500-songs-in-5-days-guitareo']->price) > $productPrice)
+                    <s>NORMALLY ${{ floatval($productPrices['500-songs-in-5-days-guitareo']->price) }}.</s> &nbsp;<strong class="text-guitareo"><u>ONLY ${{ $productPrice }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * ($productPrice / floatval($productPrices['500-songs-in-5-days-guitareo']->price)))) }}%)
                 @else
                     <strong class="text-guitareo"><u>ONLY ${{ $productPrice }}</u></strong>
                 @endif
@@ -104,8 +104,8 @@
     <section class="day-breakdown text-center">
         <div class="row">
             <h1>The Fastest Way To Playing Your<br class="show-for-medium"> Favorite Songs... <u class="text-guitareo">For Just ${{ $productPrice }}</u></h1>
-            @if(GuitareoPrices::$songs500Full > $productPrice)
-                <h3><em><s>NORMALLY ${{ GuitareoPrices::$songs500Full }}</s></em></h3>
+            @if(floatval($productPrices['500-songs-in-5-days-guitareo']->price) > $productPrice)
+                <h3><em><s>NORMALLY ${{ floatval($productPrices['500-songs-in-5-days-guitareo']->price) }}</s></em></h3>
             @else
                 <h3>&nbsp;</h3>
             @endif
@@ -311,8 +311,8 @@
 
             <a href="@yield('order-link')" class="join tracking-normal my-2 md:my-4" @yield('product-json')>Get Started &raquo;</a>
             <p class="breakdown">
-                @if(GuitareoPrices::$songs500Full > $productPrice)
-                    <s>NORMALLY ${{ GuitareoPrices::$songs500Full }}.</s> &nbsp;<strong class="text-guitareo"><u>ONLY ${{ $productPrice }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * ($productPrice / GuitareoPrices::$songs500Full))) }}%)
+                @if(floatval($productPrices['500-songs-in-5-days-guitareo']->price) > $productPrice)
+                    <s>NORMALLY ${{ floatval($productPrices['500-songs-in-5-days-guitareo']->price) }}.</s> &nbsp;<strong class="text-guitareo"><u>ONLY ${{ $productPrice }}</u></strong>&nbsp; (SAVE {{ round(100 - (100 * ($productPrice / floatval($productPrices['500-songs-in-5-days-guitareo']->price)))) }}%)
                 @else
                     <strong class="text-guitareo"><u>ONLY ${{ $productPrice }}</u></strong>
                 @endif

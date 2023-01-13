@@ -595,7 +595,7 @@
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css"/>
-    <link rel="stylesheet" href="{{ asset('/marketing/css/singeo/tailwind-helpers.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}">
     <link href="{{ asset('/marketing/parcel/singeo/sales-page.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}" rel="stylesheet">
     {{--<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">--}}
@@ -668,7 +668,7 @@
                         <i class="text-4xl align-middle icon-songs text-songs"></i>
                         <img class="h-5 ml-2 imgfilter-songs lazyload" data-src="https://cdn.musora.com/image/fetch/q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/songs-text.svg">
                         <h4 class="leading-tight my-3"><strong>Sing Your <br class="hidden md:inline">  Favorite Songs</strong></h4>
-                        <p class="leading-normal text-light-navy mb-10 md:mb-14">Practice has never been so fun with the Singeo Songs library. Work on all the new singing techniques you’re learning in your lessons by applying them to your favorite songs. Choose from over {{ SingeoPrices::$songs }} songs to practice with karaoke-style.</p>
+                        <p class="leading-normal text-light-navy mb-10 md:mb-14">Practice has never been so fun with the Singeo Songs library. Work on all the new singing techniques you’re learning in your lessons by applying them to your favorite songs. Choose from over {{ Prices::$singeoSongs }} songs to practice with karaoke-style.</p>
                         <a class="absolute bottom-4 lg:bottom-6 left-0 right-0 join smaller songs outline anchor-slide w-2/3 md:w-5/6 lg:w-2/3 mx-auto" href="#songs">Learn More</a>
                     </div>
                 </div>
@@ -692,7 +692,7 @@
                     @endif
             >Get The Singeo Advantage</a>
 {{--            @if(empty($trialVersion))--}}
-{{--                <p class="text-light-navy text-sm"><em>Just ${{ number_format(SingeoPrices::$singeoMembershipAnnual / 12, 2) }} per month, 90-day guarantee.</em></p>--}}
+{{--                <p class="text-light-navy text-sm"><em>Just ${{ number_format(Prices::$plusSubscriptionAnnual / 12, 2) }} per month, 90-day guarantee.</em></p>--}}
 {{--            @endif--}}
 
             <div class="slick mx-auto max-w-xs md:max-w-xl lg:max-w-4xl my-9 md:mb-0 h-44 sm:h-24 lg:h-20">
@@ -791,7 +791,7 @@
 
             @foreach($methodLevels as $methodLevel)
                 <div class="dropdown text-center border-2 border-gray-500 rounded-md overflow-hidden flex cursor-pointer mb-3 select-none @if(!empty($methodLevel['defaultOpen'])) active @endif
-                @if(!empty($methodLevel['navyBorder'])) border-navy-600 @endif">
+                @if(!empty($methodLevel['navyBorder'])) border-sky-900 @endif">
                     <div class="bg-singeo py-5 px-2 sm:px-3 ">
                         <h5 class="leading-tight whitespace-nowrap inline-flex items-center">
                             <span class="text-xs hidden md:inline mr-1"> LEVEL</span>
@@ -936,7 +936,7 @@
                 <h3 class="" data-aos-once="true" data-aos="fade-up" data-aos-offset="150" data-aos-delay="150"><strong>Sing your favorite songs!</strong></h3>
                 <h6 class="leading-normal max-w-2xl lg:max-w-3xl text-light-navy mt-3 md:mt-5 mb-64 md:mb-96 md:pb-20 text-shadow-4">Singing songs is the best way to practice what you’re learning in your lessons.  And with the Singeo Songs library, you can choose your favorite songs to practice with karaoke-style.  It’s so fun that you don’t even feel like it’s “practice”!</h6>
                 <h4 class="mb-6 md:mb-7 lg:mb-10 leading-normal"><strong class="inline-block mr-1 bg-songs px-3 py-1 rounded-md md:rounded-lg leading-none" style="color: #000a1e;">PRACTICE HAS NEVER  <br class="inline sm:hidden"> BEEN SO FUN</strong><br>
-                    <em class="text-shadow-4">Sing along to <strong class="text-songs">{{ SingeoPrices::$songs }}+ popular songs</strong> with built-in practice<br class="hidden md:inline">
+                    <em class="text-shadow-4">Sing along to <strong class="text-songs">{{ Prices::$singeoSongs }}+ popular songs</strong> with built-in practice<br class="hidden md:inline">
                         tools -- so you can karaoke anywhere, anytime.</em></h4>
                 <div class="feature-rotater w-full max-w-md md:max-w-full flex flex-wrap md:flex-nowrap items-center mx-auto mt-4 md:mt-14 lg:mt-20 mb-8 md:mb-10 px-2">
                     <div class="pic-wrap md:order-1 mx-auto my-5 md:my-0 pl-0 md:pl-5 lg:pl-10 flex-shrink-0">
@@ -1157,12 +1157,12 @@
                     @else
                         <td class="rounded-b-xl">
                             @if(empty($trialVersion))
-                                @if(number_format(SingeoPrices::$singeoMembershipAnnual, 2) == intval(SingeoPrices::$singeoMembershipAnnual))
-                                    <strong>${{  round(SingeoPrices::$singeoMembershipAnnual / 12, 2) }}</strong>/mo<br>
+                                @if(number_format(Prices::$plusSubscriptionAnnual, 2) == intval(Prices::$plusSubscriptionAnnual))
+                                    <strong>${{  round(Prices::$plusSubscriptionAnnual / 12, 2) }}</strong>/mo<br>
                                 @else
-                                    <strong>${{  number_format(SingeoPrices::$singeoMembershipAnnual / 12, 2)  }}</strong>/mo<br>
+                                    <strong>${{  number_format(Prices::$plusSubscriptionAnnual / 12, 2)  }}</strong>/mo<br>
                                 @endif
-                                <em>Billed annually at ${{  SingeoPrices::$singeoMembershipAnnual }}</em><br><br>
+                                <em>Billed annually at ${{  Prices::$plusSubscriptionAnnual }}</em><br><br>
                                 Unlimited lessons & support.
                             @else
                                 <strong>Free Trial</strong><br>&nbsp;
@@ -1248,7 +1248,7 @@
 
             @foreach($questionLevels as $questionLevel)
                 <div class="dropdown text-center border-2 border-gray-500 rounded-md overflow-hidden flex cursor-pointer mb-3 select-none @if(!empty($questionLevel['defaultOpen'])) active @endif
-                @if(!empty($questionLevel['navyBorder'])) border-navy-600 @endif">
+                @if(!empty($questionLevel['navyBorder'])) border-sky-900 @endif">
                     <div class="bg-singeo py-5 px-2 sm:px-3 ">
                         <h5 class="leading-tight whitespace-nowrap inline-flex items-center">
                             <strong><i class="fas fa-question"></i></strong>
@@ -1345,16 +1345,16 @@
     @include("singeo.sales.partials._footer")
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/parcel/singeo/nav-footer.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     {{--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/1.9.3/countUp.min.js"></script>--}}
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/parcel/singeo/sales-page.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/sales-page.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/js/sliding-anchor.js') }}"></script>
+
 
     @yield('additional-scripts')
 @endsection

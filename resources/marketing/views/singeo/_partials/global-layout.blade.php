@@ -17,10 +17,10 @@
 
     {!! \App\Analytics\Tracker::trackPageView() !!}
 
-    @include('singeo._partials.includes.google-optimize')
+    <script src="https://www.googleoptimize.com/optimize.js?id=OPT-NV2LHJP"></script>
 
     @include('_partials.layout.favicons.singeo-favicons')
-    @include('singeo.sales.partials._fonts')
+    @include('_partials.layout._fonts')
 
     {!! \App\Analytics\Tracker::headBottom() !!}
 
@@ -40,8 +40,9 @@
     <!-- End Google Tag Manager (noscript) -->
 
     @yield('global-body')
-    @include('helpscout::helpscout-tracking-beacon-script', ['email' => !is_null(user()) ? user()->getEmail() : null])
+    <script type="text/javascript">!function(e,t,n){function a(){var e=t.getElementsByTagName("script")[0],n=t.createElement("script");n.type="text/javascript",n.async=!0,n.src="https://beacon-v2.helpscout.net",e.parentNode.insertBefore(n,e)}if(e.Beacon=n=function(t,n,a){e.Beacon.readyQueue.push({method:t,options:n,data:a})},n.readyQueue=[],"complete"===t.readyState)return a();e.attachEvent?e.attachEvent("onload",a):e.addEventListener("load",a,!1)}(window,document,window.Beacon||function(){});</script>
     <script type="text/javascript">
+        window.Beacon('init', '82b3c165-0840-4f45-aaeb-4775857c4b91')
         Beacon('on', 'ready', () => {
             document.querySelector('.BeaconFabButtonFrame').style.bottom ="50px";
         })

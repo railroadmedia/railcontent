@@ -53,6 +53,7 @@
                 <div class="instruments-dd hidden shadow-md bg-white rounded-xl p-2 absolute flex flex-col left-72 lg:left-80 -ml-3 top-10 lg:top-12 w-44">
                     <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full" href="{{ get_legacy_brand_base_url('drumeo') }}" ><i class="mr-1 text-lg fa-fw far fa-drum"></i> Drums</a>
                     <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full" href="{{ get_legacy_brand_base_url('pianote') }}" ><i class="mr-1 text-lg fa-fw far fa-piano-keyboard"></i> Piano</a>
+                    <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full text-guitareo" href="{{ get_legacy_brand_base_url('guitareo') }}" ><i class="mr-1 text-lg fa-fw far fa-guitar"></i> Guitar</a>
                     <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full" href="{{ get_legacy_brand_base_url('singeo') }}" ><i class="mr-1 text-lg fa-fw far fa-microphone-stand"></i> Singing</a>
                 </div>
             </div>
@@ -79,13 +80,13 @@
 
 <div class="nav-side-bar" style="z-index: 2147483003;">
     <div class="bottom-section">
-        @include('guitareo.sales.partials._nav-link', [
+        @include('drumeo.sales.partials._nav-link', [
             "linkName" => "Member Login",
             "linkIcon" => "fas fa-sign-in",
             "linkUrl" => get_musora_brand_base_url() . '/login',
         ])
 
-        @include('guitareo.sales.partials._nav-link', [
+        @include('drumeo.sales.partials._nav-link', [
             "linkName" => "Home",
             "linkIcon" => "fas fa-home",
             "linkUrl" => "/",
@@ -101,17 +102,17 @@
             </div>
         </div>
         <div class="lesson-links dropdown">
-            @include('guitareo.sales.partials._nav-link', [
+            @include('drumeo.sales.partials._nav-link', [
                 "linkName" => "Method",
                 "linkUrl" => "/method/",
                 "linkIcon" => ''
             ])
-            @include('guitareo.sales.partials._nav-link', [
+            @include('drumeo.sales.partials._nav-link', [
                 "linkName" => "Songs",
                 "linkUrl" => "/songs/",
                 "linkIcon" => ''
             ])
-            @include('guitareo.sales.partials._nav-link', [
+            @include('drumeo.sales.partials._nav-link', [
                 "linkName" => "Coaches",
                 "linkUrl" => "/coaches/",
                 "linkIcon" => ''
@@ -128,34 +129,34 @@
             </div>
         </div>
         <div class="lesson-links dropdown">
-            @include('guitareo.sales.partials._nav-link', [
+            @include('drumeo.sales.partials._nav-link', [
                 "linkName" => "Drums",
                 "linkUrl" => "https://www.drumeo.com/",
                 "linkIcon" => ''
             ])
-            @include('guitareo.sales.partials._nav-link', [
+            @include('drumeo.sales.partials._nav-link', [
                 "linkName" => "Piano",
                 "linkUrl" => "https://www.pianote.com/",
                 "linkIcon" => ''
             ])
-            @include('guitareo.sales.partials._nav-link', [
+            @include('drumeo.sales.partials._nav-link', [
                 "linkName" => "Singing",
                 "linkUrl" => "https://www.singeo.com/",
                 "linkIcon" => ''
             ])
         </div>
 
-        @include('guitareo.sales.partials._nav-link', [
+        @include('drumeo.sales.partials._nav-link', [
             "linkName" => "Pricing",
             "linkIcon" => "fas fa-money-bill-wave",
             "linkUrl" => "/choose-plan",
         ])
-        @include('guitareo.sales.partials._nav-link', [
+        @include('drumeo.sales.partials._nav-link', [
             "linkName" => "Shop",
             "linkIcon" => "fas fa-tag",
             "linkUrl" => '/shop',
         ])
-        @include('guitareo.sales.partials._nav-link', [
+        @include('drumeo.sales.partials._nav-link', [
             "linkName" => "Blog",
             "linkUrl" => "/riff/",
             "linkIcon" => 'fas fa-comment-alt-edit'
@@ -174,37 +175,37 @@
 
 
         <div class="lesson-links dropdown">
-            @include('guitareo.sales.partials._nav-link', [
+            @include('drumeo.sales.partials._nav-link', [
                 "linkName" => "Getting Started On The Acoustic Guitar",
                 "linkUrl" => "/free-acoustic-guitar-lessons/",
                 "linkIcon" => ''
             ])
-            {{--@include('guitareo.sales.partials._nav-link', [--}}
+            {{--@include('drumeo.sales.partials._nav-link', [--}}
                 {{--"linkName" => "Getting Started On The Electric Guitar",--}}
                 {{--"linkUrl" => "/free-electric-guitar-lessons/",--}}
                 {{--"linkIcon" => ''--}}
             {{--])--}}
-            @include('guitareo.sales.partials._nav-link', [
+            @include('drumeo.sales.partials._nav-link', [
                 "linkName" => "Learn to Solo In An Hour",
                 "linkUrl" => "/solo-in-an-hour/",
                 "linkIcon" => ''
             ])
-            @include('guitareo.sales.partials._nav-link', [
+            @include('drumeo.sales.partials._nav-link', [
                 "linkName" => "Fretboard Cheatsheet",
                 "linkUrl" => "/fretboard-cheatsheet/",
                 "linkIcon" => ''
             ])
-            @include('guitareo.sales.partials._nav-link', [
+            @include('drumeo.sales.partials._nav-link', [
                 "linkName" => "Song In An Hour Challenge",
                 "linkUrl" => "/song-in-an-hour/",
                 "linkIcon" => ''
             ])
-            @include('guitareo.sales.partials._nav-link', [
+            @include('drumeo.sales.partials._nav-link', [
                 "linkName" => "2 Simple Guitar Tricks",
                 "linkUrl" => "/guitar-tricks/",
                 "linkIcon" => ''
             ])
-            @include('guitareo.sales.partials._nav-link', [
+            @include('drumeo.sales.partials._nav-link', [
                 "linkName" => "The Guitarist's Toolbox",
                 "linkUrl" => "/toolbox/",
                 "linkIcon" => ''
@@ -213,32 +214,32 @@
 
 
         <span class="shim"></span>
-        @include('guitareo.sales.partials._nav-secondary-link', [
+        @include('drumeo.sales.partials._secondary-nav-link', [
             "linkName" => "<i class='fab fa-fw fa-youtube'></i>&nbsp; YouTube",
             "linkUrl" => "https://www.youtube.com/user/guitarlessonscom",
             "externalLink" => true
         ])
-        @include('guitareo.sales.partials._nav-secondary-link', [
+        @include('drumeo.sales.partials._secondary-nav-link', [
             "linkName" => "<i class='fab fa-fw fa-facebook'></i>&nbsp; Facebook",
             "linkUrl" => "https://www.facebook.com/guitareoofficial",
             "externalLink" => true
         ])
-        @include('guitareo.sales.partials._nav-secondary-link', [
+        @include('drumeo.sales.partials._secondary-nav-link', [
             "linkName" => "<i class='fab fa-fw fa-instagram'></i>&nbsp; Instagram",
             "linkUrl" => "https://www.instagram.com/guitareoofficial/",
             "externalLink" => true
         ])
-        @include('guitareo.sales.partials._nav-secondary-link', [
+        @include('drumeo.sales.partials._secondary-nav-link', [
             "linkName" => "<i class='fab fa-fw fa-tiktok'></i>&nbsp; TikTok",
             "linkUrl" => "https://www.tiktok.com/@guitareoofficial",
             "externalLink" => true
         ])
-        @include('guitareo.sales.partials._nav-secondary-link', [
+        @include('drumeo.sales.partials._secondary-nav-link', [
             "linkName" => "<i class='fas fa-fw fa-question'></i>&nbsp; FAQs",
             "linkUrl" => "https://help.guitareo.com/",
             "externalLink" => false
         ])
-        @include('guitareo.sales.partials._nav-secondary-link', [
+        @include('drumeo.sales.partials._secondary-nav-link', [
             "linkName" => "<i class='fas fa-fw fa-phone'></i>&nbsp; Contact",
             "linkUrl" => get_musora_brand_base_url().'/contact',
             "externalLink" => false

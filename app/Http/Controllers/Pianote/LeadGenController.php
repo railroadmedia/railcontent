@@ -44,6 +44,11 @@ class LeadGenController extends BaseController
         return view('pianote.lead-gen.weekly-email-2');
     }
 
+    public function minorBlues()
+    {
+        return view('pianote.lead-gen.minor-blues');
+    }
+
     public function recitals()
     {
         return view('pianote.lead-gen.recitals');

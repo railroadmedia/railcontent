@@ -9,9 +9,9 @@
     <meta property="og:image" content="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/og-image.png" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
-    @include('drumeo._partials._fonts')
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-    <link href="{{ asset('marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
+    @include('_partials.layout._fonts')
+    @include('_partials.layout._tailwindcdn')
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/30dd.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/css/animate.css') }}">
@@ -195,8 +195,8 @@
     ])
     @include('drumeo.products.partials.promo-banner', [
                 "name" => "Drumeo EarDrums",
-                "fullPrice" => Prices::$earDrumsFull,
-                "price" => Prices::$earDrums,
+                "fullPrice" => floatval($productPrices['drumeo-eardrums']->price),
+                "price" => floatval($productPrices['drumeo-eardrums']->discounted_price),
                 "noBreadcrumb" => true
             ])
 
@@ -568,7 +568,7 @@
 {{--                        @if(is_current_user_a_member())--}}
 {{--                            <td class="rounded-b-xl"><strong>FREE</strong><br> for Drumeo<br class="inline lg:hidden"> Members</td>--}}
 {{--                        @else--}}
-{{--                            <td class="rounded-b-xl"><strong>${{ Prices::$thirtyDayDrummer }}</strong></td>--}}
+                            <td class="rounded-b-xl"><strong>${{ 97 }}</strong></td>
 {{--                        @endif--}}
                         <td class="rounded-bl-xl"><strong>$50-$100</strong><br> per lesson</td>
                         <td><strong>$89-$270+</strong><br>&nbsp;</td>
@@ -747,9 +747,9 @@
                                 {{--@endif--}}
 
                                 {{--@if(is_current_user_a_member())--}}
-                                    {{--<h1 class="inline-block mr-4 align-middle text-4xl sm:text-5xl"><s class="opacity-60">${{ Prices::$thirtyDayDrummerFull }}</s> <strong>FREE</strong></h1>--}}
+                                    {{--<h1 class="inline-block mr-4 align-middle text-4xl sm:text-5xl"><s class="opacity-60">${{ 97 }}</s> <strong>FREE</strong></h1>--}}
                                 {{--@else--}}
-                                    {{--<h1 class="inline-block mr-4 align-middle text-4xl sm:text-5xl"><strong>${{ Prices::$thirtyDayDrummer }}</strong></h1>--}}
+                                    {{--<h1 class="inline-block mr-4 align-middle text-4xl sm:text-5xl"><strong>${{ 97 }}</strong></h1>--}}
                                 {{--@endif--}}
 
                                 {{--@if($isUserAlreadyRegistered)--}}
@@ -760,7 +760,7 @@
                                 <a class="join blue medium w-1/2 align-middle" data-open="waitlistModal">JOIN THE WAITLIST</a>
 
                                 <p class="text-sm mt-1">Enrollment is now closed.</p>
-                                {{--<p class="text-sm mt-1 --}}{{--mb-5--}}{{--"><em>One-Time Payment. (Just ${{ round((Prices::$thirtyDayDrummer / 30), 2) }} per day.)</em></p>--}}
+                                {{--<p class="text-sm mt-1 --}}{{--mb-5--}}{{--"><em>One-Time Payment. (Just ${{ round((97 / 30), 2) }} per day.)</em></p>--}}
 
                                 {{--<p class="text-sm text-drumeo">--}}
                                     {{--<em><a class="cursor-pointer" data-open="bundle">Need a practice pad & drumsticks?<br class="inline lg:hidden"> Click <strong>here</strong> for a special offer.</a></em>--}}
@@ -773,7 +773,7 @@
                             {{--<a href="/ecommerce/add-to-cart?products[30-day-drummer]=1&products[Drumeo-VaterSticks]=1&products[drumeo_access_30-days]=1&locked=true" class="px-5 sm:px-7 lg:px-9 py-7 sm:py-9 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-1/2" style="background-color:#d4eaff;">--}}
                                 {{--<h3><strong>30-Day Drummer</strong></h3>--}}
                                 {{--<p class="text-sm mt-2 mb-5">Just The Course + 2 Bonuses worth $42.94.</p>--}}
-                                {{--<h2 class="inline-block"><strong class="text-4xl">${{ Prices::$thirtyDayDrummer }}</strong></h2> <p class="inline-block text-xs">one time payment.</p><br>--}}
+                                {{--<h2 class="inline-block"><strong class="text-4xl">${{ 97 }}</strong></h2> <p class="inline-block text-xs">one time payment.</p><br>--}}
                                 {{--<div class="join blue smaller my-4">ENROLL NOW</div>--}}
                                 {{--<ul class="list-disc ml-10">--}}
                                     {{--<li class="text-sm relaxed"><span class="text-drumeo">Free</span> Drumsticks</li>--}}
@@ -822,32 +822,31 @@
             <h2><strong>Still have questions?</strong></h2>
             <div class="max-w-6xl mt-4 sm:mt-10 px-4">
 {{--                @if(is_current_user_a_member())--}}
-{{--                    @include('drumeo.products.partials.question-dropdown-tw', [--}}
-{{--                    "customClass" => "sm:rounded-full",--}}
-{{--                    "question" => true,--}}
+{{--                    @include('_partials.components.question-dropdown', [--}}
+{{--                    "num" => "?",--}}
 {{--                    "title" => "Why do I need to register if I get it for free as a member?",--}}
-{{--                    "description" => "It’s a 30-day course and it only works if you’re actively participating. So we wanted to make sure you raised your hand to enroll in the journey.<br><br>This isn’t a “watch a lesson, go do something else for 10 days, watch another” type of routine. So we’re asking for a commitment from anybody who participates.",--}}
+{{--                    "desc" => "It’s a 30-day course and it only works if you’re actively participating. So we wanted to make sure you raised your hand to enroll in the journey.<br><br>This isn’t a “watch a lesson, go do something else for 10 days, watch another” type of routine. So we’re asking for a commitment from anybody who participates.",--}}
 {{--                    ])--}}
 {{--                @endif--}}
-                @include('drumeo.products.partials.question-dropdown-tw', [
+                @include('_partials.components.question-dropdown', [
                 "title" => "Do I need to attend the lessons live?",
-                "description" => "The weekday workouts are pre-recorded videos you can access on your own schedule – and the weekly live Q&A sessions are totally optional, and they’ll also include a recording that you can watch or re-watch anytime.",
+                "desc" => "The weekday workouts are pre-recorded videos you can access on your own schedule – and the weekly live Q&A sessions are totally optional, and they’ll also include a recording that you can watch or re-watch anytime.",
                 ])
-                @include('drumeo.products.partials.question-dropdown-tw', [
+                @include('_partials.components.question-dropdown', [
                 "title" => "What if I’m going to miss a day (or two, or more)?",
-                "description" => "That’s totally fine. The course is meant to be flexible if you miss a day here or there. There are a few buffer days mixed in PLUS the lessons are short enough that you could watch 2-3 in a single session if you ever need to catch up.",
+                "desc" => "That’s totally fine. The course is meant to be flexible if you miss a day here or there. There are a few buffer days mixed in PLUS the lessons are short enough that you could watch 2-3 in a single session if you ever need to catch up.",
                 ])
-                @include('drumeo.products.partials.question-dropdown-tw', [
+                @include('_partials.components.question-dropdown', [
                 "title" => "Do I need a full drum set to complete the course?",
-                "description" => "The lessons work on both electric and acoustic drum sets. While you can even get value with just a practice pad & sticks, it’s recommended that you have access to a drum set to get the most from this course.",
+                "desc" => "The lessons work on both electric and acoustic drum sets. While you can even get value with just a practice pad & sticks, it’s recommended that you have access to a drum set to get the most from this course.",
                 ])
-                @include('drumeo.products.partials.question-dropdown-tw', [
+                @include('_partials.components.question-dropdown', [
                 "title" => "How much time per week will this course require?",
-                "description" => "30-Day Drummer gives you guided daily drum workouts for thirty days – with flex days built in for when life happens. With each workout being 10-15 minutes, you can miss a workout and make it up the next day or later in the week.",
+                "desc" => "30-Day Drummer gives you guided daily drum workouts for thirty days – with flex days built in for when life happens. With each workout being 10-15 minutes, you can miss a workout and make it up the next day or later in the week.",
                 ])
-                @include('drumeo.products.partials.question-dropdown-tw', [
+                @include('_partials.components.question-dropdown', [
                 "title" => "What devices can I access the course on?",
-                "description" => "30-Day Drummer is available on your laptop, tablet, or phone. You’ll also have access through the Drumeo app after you’ve completed your purchase of the course.",
+                "desc" => "30-Day Drummer is available on your laptop, tablet, or phone. You’ll also have access through the Drumeo app after you’ve completed your purchase of the course.",
                 ])
             </div>
             <div class="inline-block w-full px-3 md:px-4 my-5" style="color:#2a2f34;">
@@ -909,20 +908,15 @@
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 
-    <script src="{{ asset('marketing/js/drumeo/manifest.js') }}"></script>
-    <script src="{{ asset('marketing/js/drumeo/vendor.js') }}"></script>
-    <script src="{{ asset('marketing/js/drumeo/cart-sidebar.js') }}"></script>
-    <script src="{{ asset('marketing/js/drumeo/app.js') }}"></script>
+    <script src="{{ asset('/marketing/js/drumeo/manifest.js') }}"></script>
+    <script src="{{ asset('/marketing/js/drumeo/vendor.js') }}"></script>
+    <script src="{{ asset('/marketing/js/drumeo/cart-sidebar.js') }}"></script>
+    <script src="{{ asset('/marketing/js/drumeo/app.js') }}"></script>
 
 
     <script>
         $(document).ready(function () {
             $(document).foundation();
-            $('.dropdown').on('click', function(){
-                $(this).toggleClass('active');
-                $(this).find('i').toggleClass('rotate-180');
-            });
-
             $('.comparison tr td:nth-child(3)').on('click', function(){
                 $(this).parents().find('table').removeClass('private books online');
                 $(this).parents().find('table').addClass('online');
@@ -946,5 +940,5 @@
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/js/sliding-anchor.js') }}"></script>
+
 @stop

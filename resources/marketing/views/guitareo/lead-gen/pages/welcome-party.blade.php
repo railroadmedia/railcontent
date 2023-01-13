@@ -11,7 +11,7 @@
     <meta property="og:url" content="https://www.guitareo.com/welcome-party/">
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('/marketing/css/guitareo/tailwind-helpers.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}">
 
     <style>
@@ -111,9 +111,11 @@
         </div>
     </div>
 
-    @include("guitareo.sales.partials._footer")
+    @include("guitareo.sales.partials._footer", [
+            "minimal" => true
+        ])
 @stop
 
 @section('scripts')
-    <script type="text/javascript" src="{{ asset('/marketing/parcel/guitareo/nav-footer.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 @stop

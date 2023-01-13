@@ -171,7 +171,7 @@
 
     <section class="day-breakdown text-center container mx-auto py-12 px-4 md:py-14 lg:max-w-5xl">
         <div class="font-bold text-2xl mb-12 md:text-3xl lg:text-4xl">
-            Learning To Read Music Doesn’t<br class="hidden md:inline"> Have To Be Hard -- <s style="opacity:0.4">Only ${{ PianotePrices::$sightReadingMadeSimpleFull }}</s> <u>FREE!</u>
+            Learning To Read Music Doesn’t<br class="hidden md:inline"> Have To Be Hard -- <s style="opacity:0.4">Only $19</s> <u>FREE!</u>
         </div>
 
         @foreach ($learnings as $learning)
@@ -274,7 +274,7 @@
             <div class="w-full md:w-1/3 px-4">
                 <div class="font-bold mb-4 md:mb-6 md:tex-lg lg:text-2xl">Is this really free?</div>
                 <p class="text-sm lg:text-base">
-                    Yes! This 4-video training pack sold for ${{ PianotePrices::$sightReadingMadeSimpleFull }} but we’re now making it free. We love sharing lessons and videos to help piano players, and reading music is a great skill to develop. We hope you’ll see some of the value we provide inside Pianote juuuust in case you ever want to consider joining!
+                    Yes! This 4-video training pack sold for $19 but we’re now making it free. We love sharing lessons and videos to help piano players, and reading music is a great skill to develop. We hope you’ll see some of the value we provide inside Pianote juuuust in case you ever want to consider joining!
                 </p>
             </div>
             <div class="w-full md:w-2/3 px-4">
@@ -305,7 +305,9 @@
         </div>
     </section>
 
-    @include('pianote._partials._footer')
+    @include("pianote._partials._footer", [
+            "minimal" => true
+        ])
 
     @include('pianote.lead-gen.partials.video-player',[
         "name" => "trailer",
@@ -325,5 +327,5 @@
             $(document).foundation();
         });
     </script>
-    @include('pianote._partials.inspectlet')
+
 @stop

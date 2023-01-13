@@ -13,10 +13,10 @@
     <meta property="og:url" content="https://www.drumeo.com/sonor/">
 
     @include('_partials.layout.favicons.drumeo-favicons')
-    @include('drumeo._partials._fonts')
+    @include('_partials.layout._fonts')
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
+    @include('_partials.layout._tailwindcdn')
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/sales-sonor.css') }}" rel="stylesheet">
@@ -139,7 +139,7 @@
                     {{ csrf_field() }}
 
                     <input type="hidden" name="credentials_type" value="new">
-                    <input type="hidden" name="redirect" value="/members">
+                    <input type="hidden" name="redirect" value="{{ $redirectUrl ?? '/drumeo' }}">
 
                     <div class="mb-1">
                         @include('partials.bladesora.members.inputs.text-input', [
@@ -205,7 +205,7 @@
                             {{ method_field('POST') }}
                             {{ csrf_field() }}
                             <input type="hidden" name="credentials_type" value="existing">
-                            <input type="hidden" name="redirect" value="/members">
+                            <input type="hidden" name="redirect" value="{{ $redirectUrl ?? '/drumeo' }}">
 
                             <div class="mb-1">
                                 @include('partials.bladesora.members.inputs.text-input', [

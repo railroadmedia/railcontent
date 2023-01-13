@@ -858,12 +858,12 @@
                         <a class="join sold-out w-full">Closed Down</a>
                         <h6 class="text-center py-3 md:py-4">
                             <strong>ONLY</strong>
-                            @if(PianotePrices::$classicalPianoFull > PianotePrices::$classicalPiano)
-                                <s class="text-gray-400">${{ PianotePrices::$classicalPianoFull }}</s>
-                                <strong>${{ PianotePrices::$classicalPiano }}</strong>
-                                <em>({{ round(100 - (100 * (PianotePrices::$classicalPiano / PianotePrices::$classicalPianoFull))) }}% Off)</em>
+                            @if(floatval($productPrices['classical-piano']->price) > floatval($productPrices['classical-piano']->discounted_price))
+                                <s class="text-gray-400">${{ floatval($productPrices['classical-piano']->price) }}</s>
+                                <strong>${{ floatval($productPrices['classical-piano']->discounted_price) }}</strong>
+                                <em>({{ round(100 - (100 * (floatval($productPrices['classical-piano']->discounted_price) / floatval($productPrices['classical-piano']->price)))) }}% Off)</em>
                             @else
-                                <strong>${{ PianotePrices::$classicalPiano }}</strong>
+                                <strong>${{ floatval($productPrices['classical-piano']->discounted_price) }}</strong>
                             @endif
                         </h6>
                         <p class="text-center text-gray-400">
@@ -958,5 +958,5 @@
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
-    @include('pianote._partials.inspectlet')
+
 @endsection

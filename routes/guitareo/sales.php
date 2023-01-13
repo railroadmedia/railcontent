@@ -10,9 +10,9 @@ Route::domain('{guitareoDomain}')
     Route::get('/new-year', [SalesController::class, 'promo'] );
     Route::get('/choose-plan', [SalesController::class, 'choosePlan'] );
     Route::get('/student-only', [SalesController::class, 'membershipStudents']);
-    Route::get('/trial', [SalesController::class, 'trial']);
+    Route::get('/trial', [SalesController::class, 'home']);
     Route::get('/trial-month', [SalesController::class, 'trial30']);
-    Route::get('/choose-your-trial', [SalesController::class, 'chooseyourtrial']);
+    Route::get('/choose-your-trial', [SalesController::class, 'choosePlan']);
     Route::get('/choose-your-trial-month', [SalesController::class, 'chooseyourtrialmonth']);
 
     Route::get('/cookie', [SalesController::class, 'cookie']);

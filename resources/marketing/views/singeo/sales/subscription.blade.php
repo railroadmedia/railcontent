@@ -14,10 +14,10 @@
         <meta property="og:image" content="https://singeo.s3.amazonaws.com/sales/2023/share-image-singeo.jpg"/>
     @endif
 
-    @include('singeo.sales.partials._fonts')
+    @include('_partials.layout._fonts')
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('/marketing/css/singeo/tailwind-helpers.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}">
     <link href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/singeo/sales-page.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
@@ -453,15 +453,12 @@
             ],
         ]
     @endphp
-
-    <div id="testimonials" class="anchor"></div>
-
     @include('musora.sales.components.testimonials-section', [
         'header' => 'Trusted by singers everywhere.',
         'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Singeo+Membership/79348458',
         'reviewText' => 'Rated 5 stars by Singeo students from around the world!',
         'youtubeLink' => 'https://www.youtube.com/singeoofficial/',
-        'youtube' => '28,000',
+        'youtube' => '29,000',
         'facebookLink' => 'https://facebook.com/singeoofficial/',
         'facebook' => '23,000',
         'instagramLink' => 'https://instagram.com/singeoofficial/',
@@ -476,6 +473,7 @@
 
     <div class="unstick-trigger block"></div>
     <div id="customize-anchor" class="anchor"></div>
+    <div id="order" class="anchor"></div>
 
     @if(!empty($promoVersion))
 
@@ -485,19 +483,19 @@
                     'image' => 'https://singeo.s3.amazonaws.com/sales/promos/november/singing-starter-kit.jpg',
                     'title' => 'Singing<br> Starter Kit',
                     'description' => 'Get everything you need to start singing now. In just 7 hands-on lessons, you’ll overcome the challenges most beginner singers face and will instantly sound better.',
-                    'price' => SingeoPrices::$singingStarterKitFull,
+                    'price' => floatval($productPrices['singing-starter-kit']->price),
                 ],
                 [
                     'image' => 'https://singeo.s3.amazonaws.com/sales/promos/october/Beautiful_harmonies_card.jpg',
                     'title' => 'Harmony',
                     'description' => 'In just 8, short, sing-a-long lessons, you’ll learn how to elevate any vocal performance with incredible harmonies. Even if you’re a total beginner, you’ll be singing your first harmony within the first 10 minutes of this course.',
-                    'price' => SingeoPrices::$beautifulHarmoniesFull,
+                    'price' => floatval($productPrices['the-essential-guide-to-beautiful-harmonies']->price),
                 ],
                 [
                     'image' => 'https://singeo.s3.amazonaws.com/sales/promos/november/poster2.png',
                     'title' => 'Vowel Practice<br> Poster',
                     'description' => 'Your new favorite practice tool - and your ticket hitting higher notes with ease and confidence.',
-                    'price' => SingeoPrices::$posterFull,
+                    'price' => floatval($productPrices['vowel-sounds-poster']->price),
                     'shipping' => true
 
                 ],
@@ -549,6 +547,6 @@
     @endif
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/js/sliding-anchor.js') }}"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
 @stop

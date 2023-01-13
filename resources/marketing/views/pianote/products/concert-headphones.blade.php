@@ -9,10 +9,10 @@
     <meta property="og:image" content="https://pianote.s3.amazonaws.com/products/concert-headphones/fb-share-image.jpg">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
+    @include('_partials.layout._tailwindcdn')
     <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/pianote/play-beautiful-piano.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/css/pianote/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <style>
         .text-yellow {
             color: #EAB308;
@@ -97,10 +97,10 @@
             <a class="join w-full" href="#customize-anchor">Grab your pair</a>
             <h4 class="text-white font-extrabold my-4">
                 Only
-                @if((PianotePrices::$headphonesFull -PianotePrices::$headphonesRegular) > 0)
-                    <s class="font-normal">${{PianotePrices::$headphonesFull }}</s>
+                @if((floatval($productPrices['pianote-headphones']->price) -floatval($productPrices['pianote-headphones']->discounted_price)) > 0)
+                    <s class="font-normal">${{floatval($productPrices['pianote-headphones']->price) }}</s>
                 @endif
-                ${{PianotePrices::$headphonesRegular }}
+                ${{floatval($productPrices['pianote-headphones']->discounted_price) }}
             </h4>
             <p class="text-yellow italic font-bold leading-tight">LIMITED EDITION.</p>
 
@@ -248,9 +248,16 @@
                     <div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">
                         <h6 class="leading-none mb-3 md:mb-8">Concert Series Headphones</h6>
                         <h1 class="inline-block leading-none">
-                            <s style="color:#BBBBBF;">${{ PianotePrices::$headphonesFull }}</s> <strong>${{ PianotePrices::$headphonesRegular }}</strong>
+                            @if((floatval($productPrices['pianote-headphones']->price) -floatval($productPrices['pianote-headphones']->discounted_price)) > 0)
+                                <s style="color:#BBBBBF;">${{ floatval($productPrices['pianote-headphones']->price) }}</s>
+                                <strong>${{ floatval($productPrices['pianote-headphones']->discounted_price) }}</strong>
+                                <p class="text-sm my-4"><em>Save {{ round(100 - (100 * (floatval($productPrices['pianote-headphones']->discounted_price) / floatval($productPrices['pianote-headphones']->price)))) }}% for a limited time.</em></p>
+                            @else
+                                <strong>${{ floatval($productPrices['pianote-headphones']->price) }}</strong>
+                                <br/><br/>
+                            @endif
                         </h1>
-                        <p class="text-sm my-4"><em>Save {{ round(100 - (100 * (PianotePrices::$headphonesRegular / PianotePrices::$headphonesFull))) }}% for a limited time.</em></p>
+
                         <div class="join smaller w-full transition-opacity duration-300 group-hover:opacity-80" style="max-width: 230px;">Grab your pair</div>
                     </div>
                     <div class="px-3 pt-5 md:pt-6 pb-9 md:pb-10" style="background: #f1f8ff;border-top: 2px solid #e6f2ff;">
@@ -270,7 +277,7 @@
 {{--                    <div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">--}}
 {{--                        <h6 class="leading-none mb-3">Get a LIFETIME Pianote membership <br class="hidden lg:inline">& Get Your Headphones FREE</h6>--}}
 {{--                        <h1 class="inline-block leading-none">--}}
-{{--                            <strong>${{ PianotePrices::$pianoteMembershipLifetime }}</strong>--}}
+{{--                            <strong>${{  }}</strong>--}}
 {{--                        </h1>--}}
 {{--                        <p class="text-sm my-4"><em>LIMITED EDITION.</em></p>--}}
 {{--                        <div class="join smaller w-full transition-opacity duration-300 group-hover:opacity-80" style="max-width: 230px;">Learn more</div>--}}
@@ -284,6 +291,7 @@
 {{--                </a>--}}
 {{--            </div>--}}
         </div>
+        <a href="/new-year#customize-anchor" class="text-pianote"><h6><strong><u>OR FREE WITH A PIANOTE MEMBERSHIP</u></strong></h6></a>
     </section>
     <section class="content-section text-center" style="background: #00101D;">
         <div class="container mx-auto relative z-50">
@@ -336,7 +344,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/parcel/pianote/nav-footer.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
     <script>

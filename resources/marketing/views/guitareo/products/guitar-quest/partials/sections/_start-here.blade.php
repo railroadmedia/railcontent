@@ -6,10 +6,10 @@
             <h2 class="uppercase text-3xl font-bison-bold sm:text-5xl md:text-6xl mb-2">Your Guitar Journey<br class="inline xl:hidden"> Starts Here.</h2>
 
             <h4 class="text-xl mb-2 md:mb-10 font-primary sm:text-2xl md:text-3xl">
-                @if($productPrice < GuitareoPrices::$guitarQuestFull)
+                @if($productPrice < floatval($productPrices['guitar-quest']->price))
                     <span class="text-gray-500 line-through">Normally&nbsp;$197</span>
                     <span class="font-bold text-goldenrod uppercase font-extrabold">Only&nbsp;${{ $productPrice }}</span>
-                    <span>(Save&nbsp;{{ round(100 - (100 * ($productPrice / GuitareoPrices::$guitarQuestFull))) }}%)</span>
+                    <span>(Save&nbsp;{{ round(100 - (100 * ($productPrice / floatval($productPrices['guitar-quest']->price)))) }}%)</span>
                 @else
                     <span class="text-goldenrod uppercase">
                         Reach your goals on the <br class="inline xl:hidden">

@@ -268,6 +268,16 @@ return [
                     'drumeo',
                 ],
             ],
+            'Drumeo Awards Giveaway 2' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'drumeo_prospect_awards-giveaway-2023',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+            ],
             '30 Day Drummer Waitlist' => [
                 'custom_attributes' => [
                 ],
@@ -355,6 +365,16 @@ return [
                 ],
                 'events' => [
                     'pianote_prospect_blog-signup',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
+            'The Minor Blues Made Easy' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_minor-blues',
                 ],
                 'accounts_to_sync' => [
                     'pianote',

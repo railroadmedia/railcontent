@@ -25,7 +25,7 @@
                         <p><em>{{ $packAuthor }}</em></p>
                     @endif
                     @if(!empty($specialPrice))
-                        <p><strong>{{ $specialPrice }}</strong></p>
+                        <p><strong class="text-promo">{{ $specialPrice }}</strong></p>
                     @elseif (round(100 - (100 * ($price / $fullPrice))) > 1)
                         <p><s>WAS ${{ floatval($fullPrice) }}</s>
                             <strong class="text-promo"> NOW
@@ -36,7 +36,7 @@
                                 @endif
                             </strong></p>
                     @else
-                        <p><strong>${{  floatval($price)  }}</strong></p>
+                        <p><strong class="text-promo">${{  floatval($price)  }}</strong></p>
                     @endif
                 </div>
             </section>
@@ -52,9 +52,9 @@
                         <p class="description">{!! $cardDescription  !!}</p>
                     @endif
                     @if(!empty($specialPrice))
-                        <p><strong class="text-promo">{{  $specialPrice  }}</strong><br><br></p>
+                        <p><strong>{{  $specialPrice  }}</strong><br><br></p>
                     @elseif (round(100 - (100 * ($price / $fullPrice))) > 1)
-                        <p class="price"><s>${{ floatval($fullPrice) }}</s> <strong class="text-promo">
+                        <p class="price"><s>${{ floatval($fullPrice) }}</s> <strong>
                                 @if(number_format($price, 2) == intval($price))
                                     ${{  floatval($price)  }}
                                 @else
@@ -62,7 +62,7 @@
                                 @endif
                             </strong></p>
                     @else
-                        <p class="price"><strong class="text-promo"> ${{  floatval($price)  }}</strong></p>
+                        <p class="price"><strong> ${{  floatval($price ) }}</strong></p>
                     @endif
                     @if(!empty($includedEdge))
                         <p class="description" style="top: -13px;position: relative;margin: 0;"><em class="text-red">Or free with Guitareo</em></p>
@@ -73,24 +73,23 @@
                                 <option hidden value="">Choose Size</option>
                                 @foreach($sizes as $size)
                                     <option
-                                         @if($products[$sku.'-'.($size_case_sensitive ? strtolower($size->code) : $size->code)]->getStockAvailability() === 0) disabled @endif
-                                        value="&products[{{$sku}}-{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}]=1"
+                                        @if($products[$sku.'-'.($size_case_sensitive ? strtolower($size->code) : $size->code)]->getStockAvailability() === 0) disabled @endif
+                                    value="&products[{{$sku}}-{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}]=1"
                                         data-product-json='{ "{{$sku}}-{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}": 1 }'
                                     >
                                         {{ $size->name }}
                                     </option>
                                 @endforeach
                             </select>
-
                             <a
                                 class="online-atc selected-pack vue-add-to-cart"
                                 href="/ecommerce/add-to-cart?redirect=/shop"
                                 @if(!empty($promoCode)) data-promocode="{{ $promoCode }}" @endif
-                                @if(!empty($lockedCart)) data-locked-cart="{{ $lockedCart }}" @endif
+                            @if(!empty($lockedCart)) data-locked-cart="{{ $lockedCart }}" @endif
                             >
                                 <button class="join">
                                     <span class="initial"><i class="fas fa-cart-plus"></i> Add To Cart</span>
-                                    <span class="loading"><i class="fad fa-spinner-third fa-spin"></i> Adding to cart...</span>
+                                    {{-- <span class="loading"><i class="fad fa-spinner-third fa-spin"></i> Adding to cart...</span> --}}
                                 </button>
                             </a>
                         @endif
@@ -101,7 +100,7 @@
                                 data-base-url="/ecommerce/add-to-cart?redirect=/shop&products[{!! $sku !!}]=1&redirect={{ $redirectUrl ?? '/shop' }}"
                                 data-product-json='{ "{!! $sku !!}": 1}'
                                 @if(!empty($promoCode)) data-promocode="{{ $promoCode }}" @endif
-                                @if(!empty($lockedCart)) data-locked-cart="{{ $lockedCart }}" @endif
+                            @if(!empty($lockedCart)) data-locked-cart="{{ $lockedCart }}" @endif
                             >
                                 <button class="join">
                                     <span class="initial"><i class="fas fa-cart-plus"></i> Add To Cart</span>

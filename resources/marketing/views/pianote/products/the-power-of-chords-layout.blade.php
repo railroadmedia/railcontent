@@ -81,10 +81,10 @@
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
+    @include('_partials.layout._tailwindcdn')
     <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/pianote/play-beautiful-piano.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/css/pianote/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css"/>
 
@@ -355,7 +355,7 @@
                         <div class="flex-1 relative">
                             <a class="join small w-full text-base" href="@yield('order-link')">get started</a>
                             {{--<div class="text-pianote absolute -bottom-6 left-0 right-0 text-xs text-center">--}}
-                                {{--LAUNCH SPECIAL - SAVE {{ round(100 - (100 * (PianotePrices::$powerOfChords / PianotePrices::$powerOfChordsFull))) }}%--}}
+                                {{--LAUNCH SPECIAL - SAVE {{ round(100 - (100 * (floatval($productPrices['the-power-of-chords']->discounted_price) / floatval($productPrices['the-power-of-chords']->price)))) }}%--}}
                             {{--</div>--}}
                         </div>
                         <div class="flex-1 flex items-center pl-2">
@@ -381,7 +381,7 @@
                 <div class="relative mb-6">
                     <a class="join small w-full text-base" href="@yield('order-link')">get started</a>
                     {{--<div class="text-pianote text-xs text-center mt-2">--}}
-                        {{--LAUNCH SPECIAL - SAVE {{ round(100 - (100 * (PianotePrices::$powerOfChords / PianotePrices::$powerOfChordsFull))) }}%--}}
+                        {{--LAUNCH SPECIAL - SAVE {{ round(100 - (100 * (floatval($productPrices['the-power-of-chords']->discounted_price) / floatval($productPrices['the-power-of-chords']->price)))) }}%--}}
                     {{--</div>--}}
                 </div>
                 <div class="flex-1 flex items-center md:pl-2 justify-center">
@@ -520,7 +520,7 @@
                 {{--<p>--}}
                     {{--<span class="font-extrabold">Every Chord. Every Scale. Every Key.</span> <br><br>--}}
                     {{--This essential resource will help you learn the most important chord shapes, chord variations, and scales in EVERY key. <br><br>--}}
-                    {{--Regular ${{ PianotePrices::$chordsScalesBookFull }}. It’s yours FREE when you get The Power of Chords. (And we’ll cover the shipping.) <br><br>--}}
+                    {{--It’s yours FREE when you get The Power of Chords. (And we’ll cover the shipping.) <br><br>--}}
                 {{--</p>--}}
             {{--</div>--}}
             {{--<div class="flex-1 relative sm:w-2/3 md:w-auto mx-auto text-center sm:pl-10">--}}
@@ -604,10 +604,10 @@
                         {{--<div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">--}}
                             {{--<h5 class="leading-none mb-3">Power Of Chords</h5>--}}
                             {{--<h1 class="inline-block leading-none text-4xl lg:text-5xl">--}}
-                                {{--<s style="color:#BBBBBF;">${{ PianotePrices::$powerOfChordsFull }}</s>--}}
+                                {{--<s style="color:#BBBBBF;">${{ floatval($productPrices['the-power-of-chords']->price) }}</s>--}}
                                 {{--<strong>${{ $productPrice }}</strong></h1>--}}
                             {{--<p class="text-sm my-4">--}}
-                                {{--<em>Save {{ round(100 - (100 * (PianotePrices::$powerOfChords / PianotePrices::$powerOfChordsFull))) }}% for a limited time.</em>--}}
+                                {{--<em>Save {{ round(100 - (100 * (floatval($productPrices['the-power-of-chords']->discounted_price) / floatval($productPrices['the-power-of-chords']->price)))) }}% for a limited time.</em>--}}
                             {{--</p>--}}
                             {{--<div class="mt-4 join smaller w-full transition-opacity duration-300 group-hover:opacity-80"--}}
                                     {{--style="max-width: 230px;">Get Started--}}
@@ -632,7 +632,7 @@
                         {{--<div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">--}}
                             {{--<h5 class="leading-none mb-3">Power Of Chords + Pianote</h5>--}}
                             {{--<h1 class="inline-block leading-none text-4xl lg:text-5xl">--}}
-                                {{--<strong>${{ PianotePrices::$pianoteMembershipAnnualRegular }}</strong>--}}
+                                {{--<strong>${{ Prices::$plusSubscriptionAnnual }}</strong>--}}
                             {{--</h1><p class="inline-block">/yr</p>--}}
                             {{--<p class="text-coaches text-sm my-4"><em>Annual Pianote Membership included.</em></p>--}}
                             {{--<div class="join smaller coaches w-full transition-opacity duration-300 group-hover:opacity-80"--}}
@@ -654,10 +654,10 @@
             <h6 class="leading-tight text-center mb-1 md:mb-2">
 
                 <strong>ONLY</strong>
-                @if(PianotePrices::$powerOfChordsFull > $productPrice)
-                    <s class="text-gray-400">${{ PianotePrices::$powerOfChordsFull }}</s>
+                @if(floatval($productPrices['the-power-of-chords']->price) > $productPrice)
+                    <s class="text-gray-400">${{ floatval($productPrices['the-power-of-chords']->price) }}</s>
                     <strong>${{ $productPrice }}</strong>
-                    <em>({{ round(100 - (100 * ($productPrice / PianotePrices::$powerOfChordsFull))) }}% Off)</em>
+                    <em>({{ round(100 - (100 * ($productPrice / floatval($productPrices['the-power-of-chords']->price)))) }}% Off)</em>
                 @else
                     <strong>${{ $productPrice }}</strong>
                 @endif
@@ -746,7 +746,7 @@
     </script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/parcel/pianote/nav-footer.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
 
@@ -755,5 +755,5 @@
     <script src="{{ mix('/platform/js/vendor.js') }}"></script>
     <script src="{{ mix('/platform/js/app.js') }}"></script>
 
-    @include('pianote._partials.inspectlet')
+
 @endsection

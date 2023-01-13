@@ -6,6 +6,7 @@ return [
             'id',
             'data.thumbnail_url',
             'data.sheet_music_thumbnail_url',
+            'difficulty_string',
             'type',
             'instrument',
             'published_on',
@@ -900,9 +901,9 @@ return [
                 'coach_profile_image',
                 'current_user_is_subscribed',
             ],
-            'artist'
+            'artist',
+            'parent'
         ],
-
         'song' => [
             'ranges',
             'id',
@@ -917,6 +918,7 @@ return [
             'fields.title',
             'fields.video.fields.length_in_seconds',
             'data.thumbnail_url',
+            'difficulty_string',
             'total_comments',
             'comments',
             'xp',
@@ -954,6 +956,7 @@ return [
                 'fields.title',
                 'length_in_seconds',
                 'data.thumbnail_url',
+                'difficulty_string',
                 'fields.artist',
                 'fields.style',
                 'lesson_count',
@@ -1066,6 +1069,7 @@ return [
             'fields.title',
             'fields.video.fields.length_in_seconds',
             'data.thumbnail_url',
+            'difficulty_string',
             'total_comments',
             'comments',
             'xp',
@@ -2050,7 +2054,8 @@ return [
             'permission_level',
             'helpscout_beacon_id',
             'cio_id',
-            'customer_io_id'
+            'customer_io_id',
+            'membership_level',
         ],
 
         'quick-tips' => [

@@ -8,10 +8,10 @@
     <meta property="og:description" content="Take your drumming to the next level with the largest collection of drum lessons in the world - or gear up for success with a selection of drum gear, t-shirts, sticks, and other cool drum swag.">
     <meta property="og:url" content="https://www.drumeo.com/drumshop/">
 
-    @include('drumeo._partials._fonts')
+    @include('_partials.layout._fonts')
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
-    <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
 
     <link href="{{ asset('/marketing/parcel/drumeo/drum-shop.css') }}" rel="stylesheet">
@@ -281,7 +281,7 @@
                         "packAuthor" => $lesson->instructor_name,
                         "cardDescription" => $lesson->short_desc,
                         "fullPrice" => $lesson->price,
-                        "price" => $lesson->discounted_price === '0.00' || empty($lesson->discounted_price) ? $lesson->price : $lesson->discounted_price,
+                        "price" => $lesson->discounted_price,
                         "category" => strtolower($lesson->productType->name),
                         "buttonText" => $lesson->sku === 'drumeo' || $lesson->sku === 'pianote' || $lesson->sku === 'singeo' || $lesson->sku === 'guitareo' ? 'see the deal' : null,
                         "soldOut" => $lesson->sold_out,
@@ -321,7 +321,7 @@
                         "title" => $accessory->name,
                         "cardDescription" => $accessory->short_desc,
                         "fullPrice" => $accessory->price,
-                        "price" => $accessory->discounted_price === '0.00' || empty($accessory->discounted_price) ? $accessory->price : $accessory->discounted_price,
+                        "price" => $accessory->discounted_price,
                         "sizes" => $accessory->sizes,
                         "soldOut" => !empty($products[$accessory->sku]) ? $products[$accessory->sku]->getStockAvailability() === 0 : $accessory->sold_out,
                         "category" => strtolower($accessory->productType->name),
@@ -351,7 +351,7 @@
                          "title" => $hat->name,
                          "cardDescription" => $hat->short_desc,
                          "fullPrice" => $hat->price,
-                         "price" => $hat->discounted_price === '0.00' || empty($hat->discounted_price) ? $hat->price : $hat->discounted_price,
+                         "price" => $hat->discounted_price,
                          "sizes" => $hat->sizes,
                          "soldOut" => !empty($products[$hat->sku]) ? $products[$hat->sku]->getStockAvailability() === 0 : $hat->sold_out,
                          "category" => strtolower($hat->productType->name),
@@ -382,7 +382,7 @@
                          "title" => $shirt->name,
                          "cardDescription" => $shirt->short_desc,
                          "fullPrice" => $shirt->price,
-                         "price" => $shirt->discounted_price === '0.00' || empty($shirt->discounted_price) ? $shirt->price : $shirt->discounted_price,
+                         "price" => $shirt->discounted_price,
                          "sizes" => $shirt->sizes,
                          "soldOut" => !empty($products[$shirt->sku]) ? $products[$shirt->sku]->getStockAvailability() === 0 : $shirt->sold_out,
                          "size_case_sensitive" => $shirt->size_case_sensitive,

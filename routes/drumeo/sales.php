@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Musora\CodeRedemptionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Drumeo\SalesController;
 
@@ -9,7 +8,7 @@ Route::domain('{drumeoDomain}')
     ->group(function () {
     Route::get('/referral-join', [
         'as' => 'referral.invite-a-friend-landing',
-        'uses' => App\Http\Controllers\Profiles\ReferralController::class . '@join',
+        'uses' => \App\Http\Controllers\Musora\ReferralJoinController::class . '@join',
     ]);
     Route::get('/', [SalesController::class, 'home'] );
     Route::get('/new-year', [SalesController::class, 'promo'] );
@@ -37,7 +36,7 @@ Route::domain('{drumeoDomain}')
     Route::get('/drumfest', [SalesController::class, 'drumFest']);
     Route::get('/awards/', [SalesController::class, 'awards']);
 
-    Route::get('/trial', [SalesController::class, 'trial']);
+    Route::get('/trial', [SalesController::class, 'home']);
     Route::get('/earthworks', [SalesController::class, 'earthWorks']);
     Route::get('/coaches-quiz', [SalesController::class, 'coachesQuiz']);
     Route::get('/30-day-trial', [SalesController::class, 'thirtyDayTrial']);
@@ -49,7 +48,7 @@ Route::domain('{drumeoDomain}')
     Route::get('/vdrums', [SalesController::class, 'vDrums']);
     Route::get('/sonor/', [SalesController::class, 'sonor']);
     Route::get('/coach-trial', [SalesController::class, 'coachTrial']);
-    Route::get('/choose-your-trial', [SalesController::class, 'chooseTrial']);
+    Route::get('/choose-your-trial', [SalesController::class, 'choosePlan']);
     Route::get('/earthworks-trial', [SalesController::class, 'earthWorksTrial']);
     Route::get('/coaches-quiz-trial', [SalesController::class, 'coachQuizTrial']);
     Route::get('/choose-your-trial-month', [SalesController::class, 'chooseTrialMonth']);
@@ -90,6 +89,4 @@ Route::domain('{drumeoDomain}')
     Route::get('/30-day-drummer-register-endpoint', [SalesController::class, 'registerFor30DayDrummer'] );
     Route::get('/pro/', [SalesController::class, 'pro']);
     Route::get('/jared-recommends', [SalesController::class, 'jaredRecommends']);
-
-    Route::get('redeem-thomann', [CodeRedemptionController::class, 'renderNewAccountThomannRedeemPage']);
 });

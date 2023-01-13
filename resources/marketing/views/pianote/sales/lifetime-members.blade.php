@@ -9,8 +9,8 @@
     <meta property="og:description" content="Two, maybe three times per year you get the chance to become a Pianote Lifetime Member.">
     <meta property="og:image" content="https://pianote.s3.amazonaws.com/sales/promos/november/lifetime-fb-share-image-1.jpg" style="display: none;">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link href="{{ asset('/marketing/css/pianote/tailwind-helpers.css') }}" rel="stylesheet">
+    @include('_partials.layout._tailwindcdn')
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/sales.css') }}">
     <link href="{{ asset('/marketing/css/animate.css') }}" rel="stylesheet">
@@ -105,7 +105,7 @@
     {{--<img class="logo"--}}
     {{--src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/march/logo.png">--}}
     {{--<p>--}}
-    {{--@if(!empty(PianotePrices::$pianoteMembershipLifetime))--}}
+    {{--@if(!empty(Prices::$lifetimeMembership))--}}
     {{--<strong>ONLY <s class='opacity-60'>50</s> {{ $products['PIANOTE-MEMBERSHIP-LIFETIME']->getStockAvailability()}} SPOTS LEFT</strong>--}}
     {{--@endif--}}
     {{--</p>--}}
@@ -251,14 +251,14 @@
                             'image' => 'https://pianote.s3.amazonaws.com/shop/card-thumbs/headphones-cart.jpg',
                             'title' => 'Pianote Headphones',
                             'description' => 'Hi-end, lightweight over-ear headphones for beautiful private practice sessions.',
-                            'price' => PianotePrices::$headphonesFull,
+                            'price' => 189,
                             'feature' => "Free Shipping",
                         ],
                         [
                             'image' => 'https://pianote.s3.amazonaws.com/sales/2022/bonus-chords-scales.jpg',
                             'title' => 'Chords & <br>Scales Book',
                             'description' => 'Your encyclopedia of piano chords & scales.',
-                            'price' => PianotePrices::$chordsScalesBookFull,
+                            'price' => 39,
                             'feature' => "Free Shipping",
                         ],
 
@@ -266,35 +266,35 @@
                             'image' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/planner.png',
                             'title' => 'Practice <br>Planner',
                             'description' => 'Always know exactly what to practice.',
-                            'price' => PianotePrices::$practicePlannerFull,
+                            'price' => 39,
                             'feature' => "Free Shipping",
                         ],
                         [
                             'image' => 'https://pianote.s3.amazonaws.com/sales/promos/november/bonuses/christmas-book.jpg',
                             'title' => 'Christmas Book',
                             'description' => '14 beautiful Christmas Carols hand-picked and arranged for solo piano.',
-                            'price' => PianotePrices::$christmasBookFull,
+                            'price' => 39,
                             'feature' => "Free Shipping",
                         ],
                         [
                             'image' => 'https://pianote.s3.amazonaws.com/sales/promos/november/bonuses/christmas-songbook-card.jpg',
                             'title' => 'Christmas Book',
                             'description' => 'Learn these 10 beautiful Christmas Carols.',
-                            'price' => PianotePrices::$christmasBookDigital,
+                            'price' => 10,
                             'feature' => "Instant Access",
                         ],
                         [
                             'image' => 'https://pianote.s3.amazonaws.com/shop/products/2021-merch/card-chords-poster.jpg',
                             'title' => 'Chords Poster',
                             'description' => 'Always know your chord shapes with this helpful poster.',
-                            'price' => PianotePrices::$posterFull,
+                            'price' => 9,
                             'feature' => "Free Shipping",
                         ],
                         [
                             'image' => 'https://pianote.s3.amazonaws.com/shop/products/2021-merch/card-scales-poster.jpg',
                             'title' => 'Scales Poster',
                             'description' => 'Never forget the notes of a scale with this easy-to-read poster.',
-                            'price' => PianotePrices::$posterFull,
+                            'price' => 9,
                             'feature' => "Free Shipping",
                         ],
                         [
@@ -408,8 +408,8 @@
     @include('pianote._partials._footer')
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-{{--    <script type="text/javascript" src="{{ asset('/marketing/parcel/pianote/nav-footer.js') }}"></script>--}}
-    <script type="text/javascript" src="{{ asset('/marketing/parcel/pianote/nav-footer.js') }}"></script>
+{{--    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>--}}
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>

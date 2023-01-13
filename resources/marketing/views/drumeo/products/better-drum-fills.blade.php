@@ -41,8 +41,8 @@
 
     @include('drumeo.products.partials.promo-banner', [
                 "name" => "Four Weeks To Better Drum Fills",
-                "fullPrice" => Prices::$bdfFull,
-                "price" => Prices::$bdfRegular,
+                "fullPrice" => floatval($productPrices['four-weeks-to-better-drum-fills']->price),
+                "price" => floatval($productPrices['four-weeks-to-better-drum-fills']->discounted_price),
                 "noBreadcrumb" => true
             ])
 
@@ -58,16 +58,16 @@
             <h1>The ultimate crash course to playing <strong>more creative &<br class="show-for-medium"> more musical drum fills</strong> your audience will love!</h1>
             <a href="/ecommerce/add-to-cart?products[four-weeks-to-better-drum-fills]=1" class="join blue">Get Started &raquo;</a>
             <p>
-                @if(Prices::$bdfFull > Prices::$bdfRegular)
-                    <strong>ONLY <s>${{ Prices::$bdfFull }}</s>
-                        @if(number_format(Prices::$bdfRegular, 2) == intval(Prices::$bdfRegular))
-                            ${{  Prices::$bdfRegular  }}.
+                @if(floatval($productPrices['four-weeks-to-better-drum-fills']->price) > floatval($productPrices['four-weeks-to-better-drum-fills']->discounted_price))
+                    <strong>ONLY <s>${{ floatval($productPrices['four-weeks-to-better-drum-fills']->price) }}</s>
+                        @if(number_format(floatval($productPrices['four-weeks-to-better-drum-fills']->discounted_price), 2) == intval(floatval($productPrices['four-weeks-to-better-drum-fills']->discounted_price)))
+                            ${{  floatval($productPrices['four-weeks-to-better-drum-fills']->discounted_price)  }}.
                         @else
-                            ${{  number_format(Prices::$bdfRegular, 2)  }}.
+                            ${{  number_format(floatval($productPrices['four-weeks-to-better-drum-fills']->discounted_price), 2)  }}.
                         @endif
-                    </strong> (SAVE {{ round(100 - (100 * (Prices::$bdfRegular / Prices::$bdfFull))) }}%)
+                    </strong> (SAVE {{ round(100 - (100 * (floatval($productPrices['four-weeks-to-better-drum-fills']->discounted_price) / floatval($productPrices['four-weeks-to-better-drum-fills']->price)))) }}%)
                 @else
-                    <strong>ONLY ${{ Prices::$bdfRegular }}.</strong>
+                    <strong>ONLY ${{ floatval($productPrices['four-weeks-to-better-drum-fills']->discounted_price) }}.</strong>
                 @endif
                 90-DAY GUARANTEE <br><a href="/" class="text-blue smaller">(OR FREE WITH A DRUMEO MEMBERSHIP)</a>
             </p>
@@ -298,16 +298,16 @@
             <div class="columns"><a href="/ecommerce/add-to-cart?products[four-weeks-to-better-drum-fills]=1" class="join blue">Get Started &raquo;</a></div>
 
             <h4 class="columns uppercase">
-                @if(Prices::$bdfFull > Prices::$bdfRegular)
-                    <strong>ONLY <s>${{ Prices::$bdfFull }}</s>
-                        @if(number_format(Prices::$bdfRegular, 2) == intval(Prices::$bdfRegular))
-                            ${{  Prices::$bdfRegular  }}.
+                @if(floatval($productPrices['four-weeks-to-better-drum-fills']->price) > floatval($productPrices['four-weeks-to-better-drum-fills']->discounted_price))
+                    <strong>ONLY <s>${{ floatval($productPrices['four-weeks-to-better-drum-fills']->price) }}</s>
+                        @if(number_format(floatval($productPrices['four-weeks-to-better-drum-fills']->discounted_price), 2) == intval(floatval($productPrices['four-weeks-to-better-drum-fills']->discounted_price)))
+                            ${{  floatval($productPrices['four-weeks-to-better-drum-fills']->discounted_price)  }}.
                         @else
-                            ${{  number_format(Prices::$bdfRegular, 2)  }}.
+                            ${{  number_format(floatval($productPrices['four-weeks-to-better-drum-fills']->discounted_price), 2)  }}.
                         @endif
-                    </strong> (SAVE {{ round(100 - (100 * (Prices::$bdfRegular / Prices::$bdfFull))) }}%)
+                    </strong> (SAVE {{ round(100 - (100 * (floatval($productPrices['four-weeks-to-better-drum-fills']->discounted_price) / floatval($productPrices['four-weeks-to-better-drum-fills']->price)))) }}%)
                 @else
-                    <strong>ONLY ${{ Prices::$bdfRegular }}.</strong>
+                    <strong>ONLY ${{ floatval($productPrices['four-weeks-to-better-drum-fills']->discounted_price) }}.</strong>
                 @endif
                 90-DAY GUARANTEE <br><a href="/" class="text-blue smaller">(OR FREE WITH A DRUMEO MEMBERSHIP)</a>
             </h4>

@@ -10,8 +10,8 @@
     <meta property="og:url" content="https://www.singeo.com/{{ Request::path() }}">
     <meta property="og:image" content="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/giveaway/eikon/share_image.jpg" style="display: none;">
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('/marketing/css/singeo/tailwind-helpers.css') }}">
+    @include('_partials.layout._tailwindcdn')
+    <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}">
     <link href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/singeo/lead-gen.css') }}">
 
@@ -192,7 +192,6 @@
         <div class="container relative z-10 mx-auto max-w-5xl md:mt-0">
             <div class="flex flex-wrap">
                 <div class="w-full md:w-5/12 lg:w-1/2 pt-48 sm:pt-96 sm:order-1 relative">
-                    {{--<i class="fas fa-play play-button absolute left-1/2 top-3/4 transform translate--1/2 autoplay-video" data-open="trailer"></i>--}}
                 </div>
                 <div class="w-full md:w-7/12 lg:w-1/2 sm:text-left">
                     <img class="h-32 md:h-28 lg:h-40 lazyload" data-src="https://cdn.musora.com/image/fetch/w_650,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/giveaway/eikon/logo_giveaway.png" alt="title image">
@@ -397,7 +396,9 @@
         </div>
     @endforeach
 
-    @include("singeo.sales.partials._footer")
+    @include("singeo.sales.partials._footer", [
+            "minimal" => true
+        ])
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -423,7 +424,7 @@
             });
         });
     </script>
-    <script type="text/javascript" src="{{ asset('/marketing/parcel/singeo/nav-footer.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
 @stop

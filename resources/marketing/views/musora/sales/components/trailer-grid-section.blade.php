@@ -1,4 +1,5 @@
 <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #f4f8fb calc(50% + 1px));"></div>
+<div id="method" class="anchor"></div>
 <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f4f8fb;">
     <div class="container max-w-6xl mx-auto">
         <div class="aspect-16:9 cursor-hover rounded-xl autoplay-video overflow-hidden w-full relative -mt-36 sm:-mt-64 lg:-mt-96 mb-6 sm:mb-20" x-on:click="trailer = true;">
@@ -24,9 +25,9 @@
             @endforeach
         </div>
         @if(empty($promoVersion))
-            <a href="/method" class="sm:mx-1 mb-2 sm:mb-0 w-full sm:w-64 join outline text-{{ $theme }} border-{{ $theme }} smaller">EXPLORE THE METHOD <i class="fas fa-info-circle"></i> </a>
+            <a href="/method" class="sm:mx-1 mb-2 sm:mb-0 w-full sm:w-64 join outline text-{{ $brand }} border-{{ $brand }} smaller">EXPLORE THE METHOD <i class="fas fa-info-circle"></i> </a>
         @endif
-        <a class="sm:mx-1 w-full sm:w-64 join {{ $theme }} smaller @if(!empty($promoVersion)) anchor-slide @endif"
+        <a class="sm:mx-1 w-full sm:w-64 join {{ $brand }} smaller @if(!empty($promoVersion)) anchor-slide @endif"
             @if(!empty($promoVersion))
                 href="#customize-anchor"
             @else

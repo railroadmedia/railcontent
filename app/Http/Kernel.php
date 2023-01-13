@@ -7,6 +7,7 @@ use App\Http\Middleware\DynamicWebOrAppMiddlewareGroupsPublic;
 use App\Http\Middleware\ExpiredMemberRedirect;
 use App\Http\Middleware\RedirectIfMobileRequest;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use Railroad\LeadTracker\Middleware\LeadTrackerMiddleware;
 use Railroad\MusoraApi\Middleware\BrandMiddleware;
 
 class Kernel extends HttpKernel
@@ -50,6 +51,7 @@ class Kernel extends HttpKernel
             \Railroad\Railtracker\Middleware\RailtrackerMiddleware::class,
             \App\Http\Middleware\SetContentPermissions::class,
             RedirectIfMobileRequest::class,
+            LeadTrackerMiddleware::class,
         ],
 
         'web_authenticated' => [
@@ -66,6 +68,7 @@ class Kernel extends HttpKernel
             \Railroad\Railtracker\Middleware\RailtrackerMiddleware::class,
             \App\Http\Middleware\SetContentPermissions::class,
             RedirectIfMobileRequest::class,
+            LeadTrackerMiddleware::class,
         ],
 
         'web_member_only' => [

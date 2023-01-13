@@ -7,7 +7,7 @@
     <meta property="og:description" content="Lock in a lifetime of piano lessons!">
     <meta property="og:image" content="https://pianote.s3.amazonaws.com/sales/promos/november/lifetime-fb-share-image-1.jpg" style="display: none;">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+    @include('_partials.layout._tailwindcdn')
 @stop()
 
 @php
@@ -297,8 +297,8 @@
             "logo" => "https://drumeo-assets.s3.amazonaws.com/promos/november/lifetime-bundle-white.png",
             "invert" => true,
             "sku" => "products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[pianote-headphones]=1&products[piano-chords-and-scales-guide]=1&products[pianote-practice-planner]=1&products[christmas-song-book]=1&products[christmas-song-book-digital]=1&products[poster-chords]=1&products[poster-scales]=1&products[the-power-of-chords]=1&products[classical-piano]=1&products[jesus-molina-improvisation-and-musical-freedom-pack]=1&products[play-beautiful-piano]=1&products[piano-riffs-and-fills]=1&products[piano-technique-made-easy]=1&products[destupefy-your-left-hand]=1&products[worship-piano]=1&products[faster-fingers]=1&redirect=/order&locked=true",
-            "fullPrice" => PianotePrices::$pianoteMembershipLifetimeFull,
-            "price" => PianotePrices::$pianoteMembershipLifetime,
+            "fullPrice" => Prices::$lifetimeMembership,
+            "price" => Prices::$lifetimeMembership,
             "specialText" => "+$1050 in FREE Bonuses",
             "soldOut" => true,
     ])

@@ -11,14 +11,14 @@
     @hasSection('share-image')
         @yield('share-image')
     @else
-        <meta property="og:image" content="https://pianote.s3.amazonaws.com/sales/2023/share-image-pianote.jpg" style="display: none;">
+        <meta property="og:image" content="https://pianote.s3.amazonaws.com/sales/2023/share-image-pianote2.jpg" style="display: none;">
     @endif
 
-    @include('pianote._partials._fonts')
+    @include('_partials.layout._fonts')
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}">
-    <link href="{{ asset('/marketing/css/pianote/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/sales.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
 
@@ -98,7 +98,8 @@
 @section('body-data')
     x-data ='{
         soundslice : false,
-        trailer : false
+        trailer : false,
+        unbox : false
     }'
 @endsection
 
@@ -166,9 +167,9 @@
     @include('musora.sales.components.header-section', [
         'header' => 'Online piano lessons for all skill levels.',
         'desc' => 'Learn the piano faster with step-by-step lessons, a thousand songs, and unlimited personal support. ',
-        'thumb' => 'https://pianote.s3.amazonaws.com/sales/2023/header-thumb.jpg',
-        'promoThumb' => 'https://pianote.s3.amazonaws.com/sales/2023/jan-thumb.png',
-        'promoThumbM' => 'https://pianote.s3.amazonaws.com/sales/2023/jan-thumb-m.jpg',
+        'thumb' => 'https://pianote.s3.amazonaws.com/sales/2023/header-thumb2.jpg',
+        'promoThumb' => 'https://pianote.s3.amazonaws.com/sales/2023/jan-thumb2.png',
+        'promoThumbM' => 'https://pianote.s3.amazonaws.com/sales/2023/jan-thumb-m2.jpg',
         'pointOne' => 'Improve Your Skills',
         'pointTwo' => 'World-Class Teachers',
         'pointThree' => 'Play More<br class="inline lg:hidden"> Songs',
@@ -182,7 +183,7 @@
            'promoLogoM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs-m.png',
         'desc' => 'One membership. All instruments. 1000s of songs.',
            'text' => 'This is your year.<br><br>Experience the NEW Pianote membership in 2023 and make the best investment in yourself. You’ll get guided lessons from world-class piano teachers to help you reach any goal this year.<br><br>And best of all…<br><br>You’ll have unlimited access to our brand new song library, complete with 1000 note-for-note transcriptions from our partners at Hal Leonard. Play your favorite songs the way they were written, complete with professional backing tracks so you’ll feel like a star.<br><br>And it gets better.<br><br>Because your Pianote membership now comes fully-loaded with all instruments. You can learn to sing, play guitar, or even rock out on the drums. All for no extra cost.<br><br>Join today and you’ll also get a set of Pianote professional over-ear headphones. Valued at $189, they’re yours free. Start the year off right. Click below to begin.',
-           'img' => 'https://pianote.s3.amazonaws.com/sales/2023/jan-launch-collage.png',
+           'img' => 'https://pianote.s3.amazonaws.com/sales/promos/january/jan-launch-collage.png',
            'belowButton' => 'SAVE 17% + GET 10 BONUSES WORTH $905',
        ])
     @else
@@ -422,6 +423,54 @@
         'bannerDesc' => 'Powered by Musora, Pianote includes full access to our communities for drums, guitar, and voice.',
     ])
 
+
+    @if(!empty($promoVersion))
+        <div id="headphones" class="anchor"></div>
+        <section class="py-12 md:py-20">
+            <div class="max-w-4xl mx-auto text-center px-4 lg:px-0">
+
+                <h2><strong>Hear your piano the way it<br class="hidden sm:inline"> was meant to sound.</strong></h2>
+                <div class="flex flex-wrap sm:flex-nowrap items-center justify-center text-left my-6 sm:my-8">
+                    <div class="block rounded-xl bg-cover bg-center w-full sm:w-1/2 pb-72 sm:pb-96 lg:py-48 mb-4 sm:mb-0" style="background-image:url(https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://pianote.s3.amazonaws.com/products/concert-headphones/feature-01.jpg);"></div>
+                    <p class="w-full sm:w-1/2 sm:pl-7">Introducing the NEW Pianote Concert Series over-ear headphones.
+                        <br><br>
+                        These beautifully designed hi-end headphones are designed by piano players for piano players. Lightweight with comfortable ear padding for extended playing sessions and unrivaled sound definition and bass response.
+                        <br><br>
+                        Your piano has never sounded so good.
+                        <br><br>
+                        Valued at $189, these headphones are FREE with your Pianote Membership.</p>
+                </div>
+                <h2><strong>What's in the box?</strong></h2>
+                <p class="leading-tight mt-2 sm:mt-3 mb-6">Scroll down to see everything that’s included.</p>
+                <img class="rounded-xl mb-2 cursor-pointer autoplay-video" src="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://pianote.s3.amazonaws.com/products/concert-headphones/montage-04.png" alt="montage 4"
+                    x-on:click="unbox = true;"
+                >
+                <div class="flex flex-wrap mb-2">
+                    <img class="w-full md:w-2/3 rounded-xl md:pr-1 mb-2" src="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://pianote.s3.amazonaws.com/products/concert-headphones/montage-01.jpg" alt="montage 1">
+                    <img class="w-1/2 md:w-1/3 rounded-xl md:pl-1 mb-2 pr-1 md:pr-0" src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://pianote.s3.amazonaws.com/products/concert-headphones/montage-05.jpg" alt="montage 5">
+                    <img class="w-1/2 md:w-1/3 rounded-xl md:pr-1 mb-2 md:mb-0 pl-1 md:pl-0" src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://pianote.s3.amazonaws.com/products/concert-headphones/montage-06.jpg" alt="montage 6">
+                    <img class="w-full md:w-2/3 rounded-xl md:pl-1" src="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://pianote.s3.amazonaws.com/products/concert-headphones/montage-02.jpg" alt="montage 2">
+                </div>
+                <div class="relative">
+                    <img class="rounded-xl" src="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://pianote.s3.amazonaws.com/products/concert-headphones/montage-03.png" alt="montage 3">
+                    <div class="hidden md:block">
+                        <div class="tool absolute cursor-pointer bg-white rounded-full w-7 h-7 flex items-center justify-center" style="top: 18%;left: 34%; box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);" tip="Padded headband for extra comfort">
+                            <span class="text-2xl">+</span>
+                        </div>
+                        <div class="tool absolute cursor-pointer bg-white rounded-full w-7 h-7 flex items-center justify-center" style="top: 24%;left: 68%; box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);" tip="3-meter coiled cable">
+                            <span class="text-2xl">+</span>
+                        </div>
+                        <div class="tool absolute cursor-pointer bg-white rounded-full w-7 h-7 flex items-center justify-center" style="top: 56%;left: 62%; box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);" tip="3-meter straight cable">
+                            <span class="text-2xl">+</span>
+                        </div>
+                        <div class="tool absolute cursor-pointer bg-white rounded-full w-7 h-7 flex items-center justify-center" style="top: 68%;left: 78%; box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);" tip="¼” Adapter">
+                            <span class="text-2xl">+</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    @endif
     @php
         $testimonials = [
             [
@@ -486,7 +535,6 @@
             ],
         ]
     @endphp
-    <div id="testimonials" class="anchor"></div>
     @include('musora.sales.components.testimonials-section', [
         'header' => 'Trusted by pianists<br class="inline-block sm:hidden">  everywhere.',
         'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Pianote+Membership/79348450',
@@ -494,9 +542,9 @@
         'youtubeLink' => 'https://www.youtube.com/pianolessonscom/',
         'youtube' => '1.2M',
         'facebookLink' => 'https://facebook.com/pianoteofficial/',
-        'facebook' => '418K',
+        'facebook' => '422K',
         'instagramLink' => 'https://instagram.com/pianoteofficial/',
-        'instagram' => '171K',
+        'instagram' => '174K',
     ])
     @include('musora.sales.components.guarantee-section', [
         'badge' => 'https://pianote.s3.amazonaws.com/sales/2022/piano-guarantee.png',
@@ -505,6 +553,7 @@
     ])
     <div class="unstick-trigger block"></div>
     <div id="customize-anchor" class="anchor"></div>
+    <div id="order" class="anchor"></div>
     @if(!empty($promoVersion))
 
         @php
@@ -513,62 +562,62 @@
                     'image' => 'https://pianote.s3.amazonaws.com/sales/2023/concert-series-headphones.jpg',
                     'title' => 'Pianote Headphones',
                     'description' => 'Hi-end, lightweight over-ear headphones for beautiful private practice sessions.',
-                    'price' => PianotePrices::$headphonesFull,
+                    'price' => 189,
                     'shipping' => true
                 ],
                 [
                     'image' => 'https://pianote.s3.amazonaws.com/sales/promos/october/power_of_chords_card.jpg',
                     'title' => '',
                     'description' => 'Play the music you love using the power of chords.',
-                    'price' => PianotePrices::$powerOfChordsFull,
+                    'price' => floatval($productPrices['the-power-of-chords']->price),
                 ],
                 [
                 'image' => 'https://pianote.s3.amazonaws.com/sales/promos/november/bonuses/TBGTCP.jpg',
                 'title' => '',
                 'description' => 'Pieces you can actually play, with lessons that are actually fun.',
-                'price' => PianotePrices::$classicalPianoFull,
+                'price' => floatval($productPrices['classical-piano']->price),
                 ],
                 [
                 'image' => 'https://pianote.s3.amazonaws.com/sales/promos/november/bonuses/improv-musical-freedom.jpg',
                 'title' => '',
                 'description' => 'Learn to improvise from one of the best piano players in the world, Jesús Molina',
-                'price' => PianotePrices::$improvisationAndMusicalFreedomFull,
+                'price' => floatval($productPrices['the-power-of-chords']->price),
                 ],
                 [
                 'image' => 'https://pianote.s3.amazonaws.com/sales/promos/november/bonuses/TBGTPBP.jpg',
                 'title' => '',
                 'description' => 'Start playing beautiful music from your very 1st lesson',
-                'price' => PianotePrices::$playBeautifulPianoFull,
+                'price' => floatval($productPrices['play-beautiful-piano']->price),
                 ],
                 [
                 'image' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/piano-riffs-and-fills.jpg',
                 'title' => 'Piano Riffs<br> & Fills',
                 'description' => 'Learn the secrets and tips to play fills that sound complicated and advanced, but are simple to learn.',
-                'price' => PianotePrices::$pianoRiffsAndFillsFull,
+                'price' => floatval($productPrices['piano-riffs-and-fills']->price),
                 ],
                 [
                 'image' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/piano-technique-made-easy.jpg',
                 'title' => 'Piano Technique<br> Made Easy',
                 'description' => 'Your ultimate guide to learning the piano. Learn EVERY scale, chord, arpeggio, and key signature.',
-                'price' => PianotePrices::$PTMEFull,
+                'price' => floatval($productPrices['piano-technique-made-easy']->price),
                 ],
                 [
                 'image' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/de-stupefy-your-left-hand.jpg',
                 'title' => 'De-Stupefy Your<br> Left Hand',
                 'description' => 'Most piano players find their left-hand is weaker. Fix those weaknesses and “de-stupefy” that left hand.',
-                'price' => PianotePrices::$destupefyFull,
+                'price' => floatval($productPrices['destupefy-your-left-hand']->price),
                 ],
                 [
                 'image' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/worship-piano.jpg',
                 'title' => 'Worship<br> Piano',
                 'description' => 'Learn hundreds of worship songs and get the skills to start playing in a worship band.',
-                'price' => PianotePrices::$worshipPianoFull,
+                'price' => floatval($productPrices['worship-piano']->price),
                 ],
                 [
                     'image' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/faster-fingers.jpg',
                     'title' => '',
                     'description' => 'Boost your speed and confidence with this guided practice course.',
-                    'price' => PianotePrices::$fasterFingersFull,
+                    'price' => floatval($productPrices['faster-fingers']->price),
                 ],
             ]
         @endphp
@@ -607,6 +656,10 @@
         'name' => 'trailer',
         'video' => '785314388'
     ])
+    @include('_partials.components.video-modal',[
+        'name' => 'unbox',
+        'video' => '774408046'
+    ])
 
     @if(!empty($promoVersion))
         @include("pianote._partials._footer", [
@@ -617,7 +670,7 @@
     @endif
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/js/sliding-anchor.js') }}"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
     @yield('scripts')
 @stop

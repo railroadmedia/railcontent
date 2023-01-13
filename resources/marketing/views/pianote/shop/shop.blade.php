@@ -6,14 +6,14 @@
     <meta property="og:title" content="Pianote Shop">
     <meta name="description" content="Get Lessons, T-Shirts, & Much More!">
     <meta property="og:description" content="Get Lessons, T-Shirts, & Much More!">
-    <meta property="og:image" content="https://pianote.s3.amazonaws.com/sales/2023/share-image-pianote.jpg">
+    <meta property="og:image" content="https://pianote.s3.amazonaws.com/sales/2023/share-image-pianote2.jpg">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 
     <link href="https://fonts.googleapis.com/css?family=Oswald:500" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
 
-    <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
 
     <link href="{{ asset('/marketing/parcel/pianote/shop.css') }}" rel="stylesheet">
@@ -210,7 +210,7 @@
 {{--                                Chords & Scales Book + Practice Planner + Christmas<br class="hidden sm:inline">--}}
 {{--                                Songbook + Chords Poster + Scales Poster</p>--}}
 {{--                            <h4 class="inline-block leading-none"><strong>--}}
-{{--                                    <s class="opacity-60">$145</s>&nbsp; ${{ PianotePrices::$bundleBook }}</strong></h4><br>--}}
+{{--                                    <s class="opacity-60">$145</s>&nbsp; ${{  }}</strong></h4><br>--}}
 {{--                            <span class="join smaller mt-2 lg:mt-3" style="background-color:#000;">See The Deal &raquo;</span>--}}
 {{--                        </div>--}}
 {{--                        --}}{{--                <div class="absolute top-0 left-0 right-0 bottom-0 z-0 hidden md:block" style="background:linear-gradient(to right, rgba(18,139,165,0.4) 25%, #003643);"></div>--}}
@@ -240,7 +240,7 @@
                             "packAuthor" => $lesson->instructor_name,
                             "cardDescription" => $lesson->short_desc,
                             "fullPrice" => $lesson->price,
-                            "price" => $lesson->discounted_price === '0.00' || empty($lesson->discounted_price) ? $lesson->price : $lesson->discounted_price,
+                            "price" => $lesson->discounted_price,
                             "category" => strtolower($lesson->productType->name),
                             "soldOut" => $lesson->sold_out,
                             "includedMembership" => $lesson->included_edge,
@@ -270,7 +270,7 @@
                             "cardDescription" => $accessory->short_desc,
                             "fullPrice" => $accessory->price,
                             "sizes" => $accessory->sizes,
-                            "price" => $accessory->discounted_price === '0.00' || empty($accessory->discounted_price) ? $accessory->price : $accessory->discounted_price,
+                            "price" => $accessory->discounted_price,
                             "category" => strtolower($accessory->productType->name),
                             "soldOut" => !empty($products[$accessory->sku]) ? $products[$accessory->sku]->getStockAvailability() === 0 : $accessory->sold_out,
                             "size_case_sensitive" => $accessory->size_case_sensitive,
@@ -298,7 +298,7 @@
                         "title" => $shirt->name,
                         "cardDescription" => $shirt->short_desc,
                         "fullPrice" => $shirt->price,
-                        "price" => $shirt->discounted_price === '0.00' || empty($shirt->discounted_price) ? $shirt->price : $shirt->discounted_price,
+                        "price" => $shirt->discounted_price,
                         "category" => strtolower($shirt->productType->name),
                         "sizes" => $shirt->sizes,
                         "soldOut" => !empty($products[$shirt->sku]) ? $products[$shirt->sku]->getStockAvailability() === 0 : $shirt->sold_out,
@@ -327,7 +327,7 @@
                         "title" => $hoodie->name,
                         "cardDescription" => $hoodie->short_desc,
                         "fullPrice" => $hoodie->price,
-                        "price" => $hoodie->discounted_price === '0.00' || empty($hoodie->discounted_price) ? $hoodie->price : $hoodie->discounted_price,
+                        "price" => $hoodie->discounted_price,
                         "category" => strtolower($hoodie->productType->name),
                         "sizes" => $hoodie->sizes,
                         "soldOut" => !empty($products[$hoodie->sku]) ? $products[$hoodie->sku]->getStockAvailability() === 0 :$hoodie->sold_out,
@@ -347,7 +347,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.3/moment-timezone-with-data.min.js"></script>
 
     <script src="{{ asset('/marketing/js/modal.js') }}"></script>
-    <script src="{{asset('/marketing/parcel/pianote/nav-footer.js') }}"></script>
+    <script src="{{asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     {{-- <script src="{{ asset('/marketing/js/jquery.countdown-2.min.js') }}"></script> --}}
 
     <script>

@@ -1,4 +1,5 @@
 <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #0c1524 calc(50% + 1px));"></div>
+<div id="songs" class="anchor"></div>
 <section class="text-center text-white px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#0c1524;">
     <div class="container max-w-6xl mx-auto">
         <h2><strong>{!! $header !!}</strong></h2>
@@ -19,9 +20,9 @@
             </div>
         </div>
         @if(empty($promoVersion))
-            <a href="/songs" class="sm:mx-1 mb-2 sm:mb-0 w-full sm:w-64 join outline text-{{ $theme }} border-{{ $theme }} smaller">SEE SONGS LIST <i class="fas fa-list-music"></i> </a>
+            <a href="/songs" class="sm:mx-1 mb-2 sm:mb-0 w-full sm:w-64 join outline text-{{ $brand }} border-{{ $brand }} smaller">SEE SONGS LIST <i class="fas fa-list-music"></i> </a>
         @endif
-        <a class="sm:mx-1 w-full sm:w-64 join {{ $theme }} smaller @if(!empty($promoVersion)) anchor-slide @endif"
+        <a class="sm:mx-1 w-full sm:w-64 join {{ $brand }} smaller @if(!empty($promoVersion)) anchor-slide @endif"
             @if(!empty($promoVersion))
                 href="#customize-anchor"
             @else

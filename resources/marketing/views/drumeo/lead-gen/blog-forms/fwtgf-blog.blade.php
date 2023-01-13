@@ -10,10 +10,10 @@
     <title>Fastest Way To Get Faster | Drumeo</title>
     <meta name="description" content="Jared Falk's 10-day routine that will help you rapidly improve your speed around the kit.">
 
-    @include('drumeo._partials._fonts')
+    @include('_partials.layout._fonts')
     <base target="_parent">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link href="{{ asset('marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
+    @include('_partials.layout._tailwindcdn')
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <style>
         body {
             height:100vh;

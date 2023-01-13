@@ -1,32 +1,4 @@
-{{--<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>--}}
-{{--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">--}}
-{{--<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>--}}
-
-{{--<style>--}}
-{{--    .splide__pagination__page.is-active {--}}
-{{--        background: #01050F;--}}
-{{--    }--}}
-
-{{--    .splide__arrow svg {--}}
-{{--        fill: #0B76DB !important;--}}
-{{--    }--}}
-
-{{--    .bubble:after {--}}
-{{--        content: '';--}}
-{{--        position: absolute;--}}
-{{--        bottom: 0;--}}
-{{--        left: 50%;--}}
-{{--        width: 0;--}}
-{{--        height: 0;--}}
-{{--        border: 5px solid transparent;--}}
-{{--        border-top-color: black;--}}
-{{--        border-bottom: 0;--}}
-{{--        margin-left: -5px;--}}
-{{--        margin-bottom: -5px;--}}
-{{--    }--}}
-{{--</style>--}}
-
-
+<div id="coaches" class="anchor"></div>
 <section class="py-12 md:py-20 text-center">
     <div class="max-w-3xl mx-auto">
         <h2 class="font-extrabold">{!! $header !!}</h2>
@@ -144,9 +116,9 @@
 
     <div class="text-center my-10 px-4 sm:px-0">
         @if(empty($promoVersion))
-            <a href="/coaches" class="sm:mx-1 mb-2 sm:mb-0 w-full sm:w-64 join outline text-{{ $theme }} border-{{ $theme }} smaller">EXPLORE THE COURSES <i class="fas fa-info-circle"></i> </a>
+            <a href="/coaches" class="sm:mx-1 mb-2 sm:mb-0 w-full sm:w-64 join outline text-{{ $brand }} border-{{ $brand }} smaller">EXPLORE THE COURSES <i class="fas fa-info-circle"></i> </a>
         @endif
-        <a class="sm:mx-1 w-full sm:w-64 join {{ $theme }} smaller @if(!empty($promoVersion)) anchor-slide @endif"
+        <a class="sm:mx-1 w-full sm:w-64 join {{ $brand }} smaller @if(!empty($promoVersion)) anchor-slide @endif"
             @if(!empty($promoVersion))
                 href="#customize-anchor"
             @else

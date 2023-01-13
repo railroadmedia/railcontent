@@ -64,6 +64,7 @@
                     <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full" href="{{ get_legacy_brand_base_url('drumeo') }}" ><i class="mr-1 text-lg fa-fw far fa-microphone-stand"></i> Drums</a>
                     <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full" href="{{ get_legacy_brand_base_url('pianote') }}" ><i class="mr-1 text-lg fa-fw far fa-piano-keyboard"></i> Piano</a>
                     <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full" href="{{ get_legacy_brand_base_url('guitareo') }}" ><i class="mr-1 text-lg fa-fw far fa-guitar"></i> Guitar</a>
+                    <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full text-singeo" href="{{ get_legacy_brand_base_url('singeo') }}" ><i class="mr-1 text-lg fa-fw far fa-microphone-stand"></i> Singing</a>
                 </div>
             </div>
         @endif
@@ -89,12 +90,12 @@
 
 <div class="nav-side-bar">
     <div class="bottom-section">
-        @include('singeo.sales.partials._nav-link', [
+        @include('drumeo.sales.partials._nav-link', [
             "linkName" => "Member Login",
             "linkIcon" => "fas fa-sign-in",
             "linkUrl" => get_musora_brand_base_url() . '/login',
         ])
-        @include('singeo.sales.partials._nav-link', [
+        @include('drumeo.sales.partials._nav-link', [
             "linkName" => "Home",
             "linkIcon" => "fas fa-home",
             "linkUrl" => "/",
@@ -110,17 +111,17 @@
             </div>
         </div>
         <div class="lesson-links dropdown">
-            @include('singeo.sales.partials._nav-link', [
+            @include('drumeo.sales.partials._nav-link', [
                 "linkName" => "Method",
                 "linkUrl" => "/method/",
                 "linkIcon" => ''
             ])
-            @include('singeo.sales.partials._nav-link', [
+            @include('drumeo.sales.partials._nav-link', [
                 "linkName" => "Songs",
                 "linkUrl" => "/songs/",
                 "linkIcon" => ''
             ])
-            @include('singeo.sales.partials._nav-link', [
+            @include('drumeo.sales.partials._nav-link', [
                 "linkName" => "Coaches",
                 "linkUrl" => "/coaches/",
                 "linkIcon" => ''
@@ -137,69 +138,69 @@
             </div>
         </div>
         <div class="lesson-links dropdown">
-            @include('singeo.sales.partials._nav-link', [
+            @include('drumeo.sales.partials._nav-link', [
                 "linkName" => "Drums",
                 "linkUrl" => "https://www.drumeo.com/",
                 "linkIcon" => ''
             ])
-            @include('singeo.sales.partials._nav-link', [
+            @include('drumeo.sales.partials._nav-link', [
                 "linkName" => "Piano",
                 "linkUrl" => "https://www.pianote.com/",
                 "linkIcon" => ''
             ])
-            @include('singeo.sales.partials._nav-link', [
+            @include('drumeo.sales.partials._nav-link', [
                 "linkName" => "Guitar",
                 "linkUrl" => "https://www.guitareo.com/",
                 "linkIcon" => ''
             ])
         </div>
-        @include('singeo.sales.partials._nav-link', [
+        @include('drumeo.sales.partials._nav-link', [
             "linkName" => "Pricing",
             "linkIcon" => "fas fa-money-bill-wave",
             "linkUrl" => "/choose-plan",
         ])
-        @include('singeo.sales.partials._nav-link', [
+        @include('drumeo.sales.partials._nav-link', [
             "linkName" => "Shop",
             "linkIcon" => "fas fa-tag",
             "linkUrl" => '/shop',
         ])
-        @include('singeo.sales.partials._nav-link', [
+        @include('drumeo.sales.partials._nav-link', [
             "linkName" => "Blog",
             "linkIcon" => "fas fa-comment-alt-edit",
             "linkUrl" => "/chorus",
         ])
-        @include('singeo.sales.partials._nav-link', [
+        @include('drumeo.sales.partials._nav-link', [
             "linkName" => "4 Vocal Exercises",
             "linkIcon" => "fas fa-microphone-alt",
             "linkUrl" => "/improve-any-voice",
         ])
         <span class="shim"></span>
-        @include('singeo.sales.partials._secondary-nav-link', [
+        @include('drumeo.sales.partials._secondary-nav-link', [
             "linkName" => "<i class='fab fa-fw fa-youtube'></i>&nbsp; YouTube",
             "linkUrl" => "https://www.youtube.com/c/singeoofficial",
             "externalLink" => true
         ])
-        @include('singeo.sales.partials._secondary-nav-link', [
+        @include('drumeo.sales.partials._secondary-nav-link', [
             "linkName" => "<i class='fab fa-fw fa-facebook'></i>&nbsp; Facebook",
             "linkUrl" => "https://www.facebook.com/singeoofficial/",
             "externalLink" => true
         ])
-        @include('singeo.sales.partials._secondary-nav-link', [
+        @include('drumeo.sales.partials._secondary-nav-link', [
             "linkName" => "<i class='fab fa-fw fa-instagram'></i>&nbsp; Instagram",
             "linkUrl" => "https://www.instagram.com/singeoofficial/",
             "externalLink" => true
         ])
-        @include('singeo.sales.partials._secondary-nav-link', [
+        @include('drumeo.sales.partials._secondary-nav-link', [
             "linkName" => "<i class='fab fa-fw fa-tiktok'></i>&nbsp; TikTok",
             "linkUrl" => "https://www.tiktok.com/@singeoofficial",
             "externalLink" => true
         ])
-        @include('singeo.sales.partials._secondary-nav-link', [
+        @include('drumeo.sales.partials._secondary-nav-link', [
             "linkName" => "<i class='fas fa-fw fa-question'></i>&nbsp; FAQs",
             "linkUrl" => "https://help.singeo.com/",
             "externalLink" => false
         ])
-        @include('singeo.sales.partials._secondary-nav-link', [
+        @include('drumeo.sales.partials._secondary-nav-link', [
             "linkName" => "<i class='fas fa-fw fa-phone'></i>&nbsp; Contact",
             "linkUrl" => get_musora_brand_base_url().'/contact',
             "externalLink" => false

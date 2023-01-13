@@ -13,9 +13,9 @@
 
 @section('styles')
     @parent
-    <link href="{{ asset('marketing/parcel/guitareo/nav-footer.css') }}" rel="stylesheet">
-    <link href="{{ asset('marketing/parcel/guitareo/fonts.css') }}" rel="stylesheet">
-    <link href="{{ asset('marketing/parcel/guitareo/guitar-quest.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/guitareo/fonts.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/guitareo/guitar-quest.css') }}" rel="stylesheet">
     <style>
         h1 strong, h2 strong, h3 strong, h4 strong, h5 strong, h6 strong {
             font-weight: 900;
@@ -172,7 +172,7 @@
 
 @section('scripts')
     @parent
-    <script src="{{ asset('marketing/parcel/guitareo/nav-footer.js') }}"></script>
+    <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             //sub nav sticky function
@@ -214,7 +214,7 @@
     @php
         $orderLink = '/ecommerce/add-to-cart?products[guitar-quest]=1&redirect=/order&payment-plan=1';
         $orderLinkAlt = '/ecommerce/add-to-cart?products[guitar-quest]=1&redirect=/order&payment-plan=5';
-        $productPrice = GuitareoPrices::$guitarQuestRegular
+        $productPrice = floatval($productPrices['guitar-quest']->discounted_price)
     @endphp
 
     <header class="header">

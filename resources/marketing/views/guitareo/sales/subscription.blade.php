@@ -14,10 +14,10 @@
         <meta property="og:image" content="https://guitareo.s3.amazonaws.com/sales/2023/share-image-guitareo.jpg"/>
     @endif
 
-    @include('guitareo._partials._fonts')
+    @include('_partials.layout._fonts')
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
-    <link href="{{ asset('/marketing/css/guitareo/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/guitareo/sales-page.css') }}" rel="stylesheet">
 
@@ -165,6 +165,7 @@
         'pointOne' => 'Improve Your Skills',
         'pointTwo' => 'World-Class Teachers',
         'pointThree' => 'Play More<br class="inline lg:hidden"> Songs',
+        'cta' => 'SEE YOUR DEAL &raquo',
         'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Guitareo+Membership/79348454',
         'students' => number_format(Prices::$students),
     ])
@@ -177,6 +178,7 @@
            'text' => 'Learning songs has <u>never</u> been easier.<br><br>Introducing NEW Guitareo Songs – <strong>the ultimate tool for learning songs faster and better</strong> with note-for-note sheet music, tempo adjustments, and a looping feature.<br><br>And unlike other song tools, every song is perfectly transcribed and professionally proofed to guarantee its accuracy. Because playing songs should be fun, not frustrating.<br><br>PLUS you’ll have access to step-by-step video lessons on every topic, artist courses and exclusive events, and unlimited personal support to reach all of your guitar goals in 2023.<br><br>When you join today, you\'ll receive a Guitarist\'s Survival Kit for free (valued at $89) to help you sound even better on guitar.<br><br>Click below to grab the deal – or scroll down to try a demo of the NEW Guitareo Songs.',
            'img' => 'https://guitareo.s3.amazonaws.com/sales/2023/jan-launch-collage.png',
            'belowButton' => 'SAVE 17% + GET 6 BONUSES WORTH $924',
+           'countdown' => 'Get 6 free bonuses until January 15th.',
        ])
     @else
         @include('musora.sales.components.learn-by-playing-section', [
@@ -476,13 +478,12 @@
             ],
         ]
     @endphp
-    <div id="testimonials" class="anchor"></div>
     @include('musora.sales.components.testimonials-section', [
         'header' => 'Trusted by guitarists<br class="inline-block sm:hidden">  everywhere.',
         'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Guitareo+Membership/79348454',
         'reviewText' => 'Rated 5 stars by Guitareo students from around the world!',
         'youtubeLink' => 'https://www.youtube.com/guitarlessonscom/',
-        'youtube' => '991K',
+        'youtube' => '1M',
         'facebookLink' => 'https://facebook.com/guitareoofficial/',
         'facebook' => '333K',
         'instagramLink' => 'https://instagram.com/guitareoofficial/',
@@ -495,6 +496,7 @@
     ])
     <div class="unstick-trigger block"></div>
     <div id="customize-anchor" class="anchor"></div>
+    <div id="order" class="anchor"></div>
     @if(!empty($promoVersion))
 
         @php
@@ -503,38 +505,38 @@
                     'image' => 'https://guitareo.s3.amazonaws.com/sales/2023/guitarits-survival-kit.jpg',
                     'title' => 'Survival Kit',
                     'description' => 'Electric Strings, Acoustic Strings, String Pro-Winder, 10 Assorted Picks, Tuner, Chord & Scales Book, and more!',
-                    'price' => GuitareoPrices::$survivalKitFull,
+                    'price' => floatval($productPrices['guitarists-survival-kit']->price),
                     'shipping' => true
                 ],
                 [
                     'image' => 'https://guitareo.s3.amazonaws.com/sales/promos/black-friday/bundles/ultimate/gq.jpg',
                     'title' => 'GuitarQuest',
                     'description' => 'Skip the boring stuff and start having fun! Your journey starts here.',
-                    'price' => GuitareoPrices::$guitarQuestFull,
+                    'price' => floatval($productPrices['guitar-quest']->price),
                 ],
                 [
                     'image' => 'https://guitareo.s3.amazonaws.com/sales/promos/black-friday/bundles/ultimate/gs.jpg',
                     'title' => 'The Guitar System',
                     'description' => 'Transform your guitar playing with the ultimate encyclopedia of guitar lessons.',
-                    'price' => GuitareoPrices::$guitarSystemFull,
+                    'price' => floatval($productPrices['GUITAR-SYSTEM']->price),
                 ],
                 [
                     'image' => 'https://guitareo.s3.amazonaws.com/sales/promos/black-friday/bundles/ultimate/agme.jpg',
                     'title' => 'Acoustic Guitar Made Easy',
                     'description' => 'Build a rock-solid foundation and get started on the acoustic guitar the right way.',
-                    'price' => GuitareoPrices::$AGMEFull,
+                    'price' => floatval($productPrices['AGME-JAN-2019-SEMESTER']->price),
                 ],
                 [
                     'image' => 'https://guitareo.s3.amazonaws.com/sales/promos/black-friday/bundles/ultimate/gtme.jpg',
                     'title' => 'Guitar Technique Made Easy',
                     'description' => 'Learn the most important guitar techniques and reach total guitar freedom.',
-                    'price' => GuitareoPrices::$GTMEFull,
+                    'price' => floatval($productPrices['GTME-OCT-2018-SEMESTER']->price),
                 ],
                 [
                     'image' => 'https://guitareo.s3.amazonaws.com/sales/promos/black-friday/rhythm_groove_cart.jpg',
                     'title' => 'Rhythm & Groove',
                     'description' => 'Go beyond simple strumming on the guitar.',
-                    'price' => GuitareoPrices::$rhythmAndGrooveFull,
+                    'price' => floatval($productPrices['rhythm-and-groove']->price),
                 ],
             ]
         @endphp
@@ -545,7 +547,8 @@
         'header' => 'Save 17% + get 6 bonuses<br class="inline sm:hidden"> worth $924',
         'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/6',
         'buttonLink' => '/ecommerce/add-to-cart?products[GUITAREO-1-YEAR-MEMBERSHIP]=1&products[guitarists-survival-kit]=1&products[guitar-quest]=1&products[rhythm-and-groove]=1&products[GUITAR-SYSTEM]=1&products[AGME-JAN-2019-SEMESTER]=1&products[GTME-OCT-2018-SEMESTER]=1&redirect=/order&locked=true',
-        'subDescription' => '<strong>6 free bonuses.</strong> <br class="inline sm:hidden"><em>only available until january 31st.</em>',
+        'subDescription' => '<strong>6 free bonuses.</strong> <br class="inline sm:hidden"><em>only available until january 15th.</em>',
+        'countdown' => 'The Guitarist’s Survival Kit <br class="hidden sm:inline">is disappearing in...',
         'altButtonLink' => '/ecommerce/add-to-cart?products[GUITAREO-1-MONTH-MEMBERSHIP]=1&redirect=/order&locked=true',
         ])
     @else
@@ -586,7 +589,25 @@
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/js/sliding-anchor.js') }}"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var stickyBar = $('.promo-banner');
+            $(window).scroll(function () {
+                var stickTrigger = $('.sticky-trigger').offset().top;
+                var unstickTrigger = $('.unstick-trigger').offset().top;
+                if ($(this).scrollTop() > (unstickTrigger - 115)) {
+                    stickyBar.removeClass('fixed mt-0');
+                }
+                if ($(this).scrollTop() < stickTrigger - 115) {
+                    stickyBar.removeClass('fixed mt-0');
+                }
+                if ($(this).scrollTop() < unstickTrigger - 115 && $(this).scrollTop() > stickTrigger - 115) {
+                    stickyBar.addClass('fixed mt-0');
+                }
+            });
+        });
+    </script>
     @yield('scripts')
 @stop

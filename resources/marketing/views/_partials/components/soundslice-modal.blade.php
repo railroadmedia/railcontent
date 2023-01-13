@@ -30,9 +30,9 @@
                 <iframe class="z-10 absolute w-full h-full reset-on-close" frameborder="0" allowfullscreen allow="autoplay" title="{{ $name }}"
                     @if(!empty($slices))
 
-                        x-bind:src="{{ $name }} && 'https://www.soundslice.com/slices/{{ $video }}/embed/?api=1&scroll_type=2&branding=0&top_controls=1&show_chords=0&layout=3&scroll_type=1&recording_idx=1&enable_metronome=0'"
+                        x-bind:src="{{ $name }} && 'https://www.soundslice.com/slices/{{ $video }}/embed/?api=1&scroll_type=2&branding=0&top_controls=1&show_chords=0&layout=3&recording_idx=1&enable_metronome=0'"
                     @else
-                        x-bind:src="{{ $name }} && 'https://www.soundslice.com/scores/{{ $video }}/embed/?api=1&scroll_type=2&branding=0&top_controls=1&show_chords=0&layout=3&scroll_type=1&recording_idx=1&enable_metronome=0'"
+                        x-bind:src="{{ $name }} && 'https://www.soundslice.com/scores/{{ $video }}/embed/?api=1&scroll_type=2&branding=0&top_controls=1&show_chords=0&layout=3&recording_idx=1&enable_metronome=0'"
                     @endif
                     ></iframe>
             </div>
