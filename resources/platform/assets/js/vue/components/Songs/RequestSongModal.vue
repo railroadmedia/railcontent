@@ -58,8 +58,13 @@ const handleArtistName = (value) => {
                         placeholder="Enter the artist name..." :inputErrors="[]" @onChange="handleArtistName" />
                 </div>
                 <div class="tw-flex tw-flex-col tw-justify-center tw-items-center">
-                    <button :disabled="!formData.song_name.length || !formData.artist_name.length" class="tw-btn-primary tw-max-w-[351px]" :class="`tw-bg-${brand}`" type="submit">SUBMIT SONG
-                        REQUEST</button>
+                    <button
+                        :disabled="!formData.song_name.length || !formData.artist_name.length" type="submit"
+                        class="tw-mb-[20px] tw-mx-4"
+                        :class="!formData.song_name.length || !formData.artist_name.length ? 'tw-btn-secondary tw-text-[#445F74]' : 'tw-btn-primary dark:tw-bg-white tw-bg-black dark:tw-text-[#00101D] tw-text-white'"
+                    >
+                        SUBMIT SONG REQUEST
+                    </button>
                 </div>
             </form>
         </div>

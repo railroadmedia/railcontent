@@ -22452,9 +22452,6 @@ a:visited{
 .tw-max-w-\[575px\]{
   max-width: 575px !important;
 }
-.tw-max-w-\[351px\]{
-  max-width: 351px !important;
-}
 .tw-max-w-screen-2xl{
   max-width: 1536px !important;
 }
@@ -24784,13 +24781,13 @@ a:visited{
 .tw-dark .dark\:tw-bg-\[\#445F74\]\/50{
   background-color: rgb(68 95 116 / 0.5) !important;
 }
-.tw-dark .dark\:tw-bg-\[\#191b1c\]{
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(25 27 28 / var(--tw-bg-opacity)) !important;
-}
 .tw-dark .dark\:tw-bg-black{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(0 0 0 / var(--tw-bg-opacity)) !important;
+}
+.tw-dark .dark\:tw-bg-\[\#191b1c\]{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(25 27 28 / var(--tw-bg-opacity)) !important;
 }
 .tw-dark .dark\:tw-bg-\[\#081f35\]{
   --tw-bg-opacity: 1 !important;
