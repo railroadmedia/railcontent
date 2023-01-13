@@ -102,6 +102,9 @@ class ContentPagesController extends BaseController
             [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED];
         ContentRepository::$pullFutureContent = true;
 
+        // make sure we only show scheduled content if it is set in the future
+        $futureScheduledContentOnly = true;
+
         if (user()->isAdmin()) {
             ContentRepository::$availableContentStatues =
                 [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED, ContentService::STATUS_DRAFT];
@@ -122,21 +125,12 @@ class ContentPagesController extends BaseController
             [],
             [],
             [],
-            false
+            false,
+            false,
+            true,
+            false,
+            $futureScheduledContentOnly
         );
-
-        foreach ($futureLessons['results'] as $futureLessonIndex => $futureLesson) {
-            if (Carbon::parse($futureLesson['published_on']) < Carbon::now()) {
-                unset($futureLessons['results'][$futureLessonIndex]);
-            }
-        }
-
-        if (user()->permission_level === 'administrator') {
-            ContentRepository::$availableContentStatues =
-                [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED, ContentService::STATUS_DRAFT];
-        } else {
-            ContentRepository::$availableContentStatues = [ContentService::STATUS_PUBLISHED];
-        }
 
         ContentRepository::$pullFutureContent = false;
 
@@ -185,7 +179,11 @@ class ContentPagesController extends BaseController
                 $request->get('included_fields', []),
                 $request->get('required_user_states', []),
                 $request->get('included_user_states', []),
-                true
+                true,
+                false,
+                true,
+                false,
+                $futureScheduledContentOnly
             );
         }
 
@@ -232,7 +230,6 @@ class ContentPagesController extends BaseController
             $hasStartedLessons = false;
         }
 
-
         if ($contentTypeName == 'songs') {
             return view('content.songs-catalogue', [
                 "listLessons" => $listLessons->toResponseRawJson(),
@@ -247,6 +244,8 @@ class ContentPagesController extends BaseController
                 "artistsNumber" => count($listLessons->filterOptions()['artist']??[]),
                 "songsNumber" => $listLessons->totalResults(),
                 "searchTerm" => $searchTerm,
+                "statuses" => ContentRepository::$availableContentStatues,
+                "futureScheduledContentOnly" => $futureScheduledContentOnly
             ]);
         } else {
             return view('content.catalogue', [
@@ -260,6 +259,8 @@ class ContentPagesController extends BaseController
                 "routinesCount" => $routinesCount,
                 "catalogueMeta" => $catalogueMeta,
                 "searchTerm" => $searchTerm,
+                "statuses" => ContentRepository::$availableContentStatues,
+                "futureScheduledContentOnly" => $futureScheduledContentOnly
             ]);
         }
     }

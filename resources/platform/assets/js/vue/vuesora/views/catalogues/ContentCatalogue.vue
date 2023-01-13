@@ -484,6 +484,10 @@ export default {
         type: String,
         default: () => undefined,
     },
+    includeFutureScheduledContentOnly: {
+      type: Boolean,
+      default: () => false,
+    },
   },
   data() {
     return {
@@ -596,6 +600,7 @@ export default {
           required_user_states: this.required_user_states,
           [this.isCoach ? 'title' : 'term']: this.search_term,
           included_types: this.selectedTypes,
+          include_future_scheduled_content_only: this.includeFutureScheduledContentOnly,
           page: this.page,
           included_fields: this.included_fields,
         };
