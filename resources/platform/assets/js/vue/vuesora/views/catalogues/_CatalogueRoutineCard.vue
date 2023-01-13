@@ -36,18 +36,18 @@ export default {
     >
         <div class="tw-flex tw-flex-col md:tw-flex-row">
             <div
-                class="tw-flex tw-flex-col tw-rounded-lg tw-overflow-hidden tw-w-full md:tw-h-[280px] md:tw-w-[280px] tw-mb-4 md:tw-mb-0 tw-flex-shrink-0"
+                class="tw-flex tw-flex-col tw-rounded-lg tw-overflow-hidden tw-w-full tw-aspect-square tw-relative md:tw-h-[280px] md:tw-w-[280px] tw-mb-4 md:tw-mb-0 tw-flex-shrink-0"
                 :class="[item.type + '-thumbnail']"
+                style="aspect-ratio: 1 / 1" 
             >
                 <div
-                    class="card-media bg-grey-2 active corners-10 dark:tw-bg-[#081825] tw-h-full tw-w-full"
-                    :class="[thumbnailType]"
+                    class="bg-grey-2 active corners-10 dark:tw-bg-[#081825] tw-h-full tw-w-full tw-relative"
                 >
 
                     <img
                         :src="mappedData.thumbnail"
                         alt="thumbnail"
-                        class="tw-transition-opacity tw-duration-500 tw-absolute tw-object-cover tw-object-left "
+                        class="tw-transition-opacity tw-duration-500 tw-absolute tw-object-cover tw-object-left tw-h-full tw-w-full"
                         loading="lazy"
                         :class="mappedData.imageLoaded ? 'tw-opacity-1' : 'tw-opacity-0'"
                         @load="mappedData.imageLoaded = true"
