@@ -8,7 +8,7 @@
                     <br @if(!$bundle['bundle_free_shipping'] && !$bundle['lifetime_access'] && !$bundle['free_bonus']) class="hidden" @endif>
 
                     @if($bundle['free_bonus'])
-                        <span class="text-{{$brand}}">*FREE BONUS*</span>
+                        <span class="text-{{$theme}}">*FREE BONUS*</span>
                     @endif
 
                     @if($bundle['lifetime_access'])

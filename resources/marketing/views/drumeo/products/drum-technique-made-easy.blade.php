@@ -8,8 +8,6 @@
     <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/og-image.jpg" style="display: none;">
     <meta property="og:description" content="Drum Technique Made Easy is a 26-week online course with Bruce Becker.">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
-
-    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
 @stop()
 
 @section('head')
@@ -688,30 +686,25 @@
         <div class="container clearfix lg:mx-auto max-w-6xl">
             <h1 class="upper">Still Have Questions?</h1>
             <div>
-                @include('_partials.components.question-dropdown', [
-                "num" => "?",
-                "title" => "When does the course officially start?",
-                "desc" => "You’ll get the entire 26-week course immediately, so you can start on your own schedule."
+                @include('drumeo.products.partials.question-dropdown', [
+                "question" => "When does the course officially start?",
+                "answer" => "You’ll get the entire 26-week course immediately, so you can start on your own schedule."
                 ])
-                @include('_partials.components.question-dropdown', [
-                "num" => "?",
-                "title" => "Do these lessons work for electronic and acoustic drum-sets?",
-                "desc" => "Yes, the lessons will work on both electric and acoustic drum-sets. Since you'll be developing your drum technique, you can even use a practice pad."
+                @include('drumeo.products.partials.question-dropdown', [
+                "question" => "Do these lessons work for electronic and acoustic drum-sets?",
+                "answer" => "Yes, the lessons will work on both electric and acoustic drum-sets. Since you'll be developing your drum technique, you can even use a practice pad."
                 ])
-                @include('_partials.components.question-dropdown', [
-                "num" => "?",
-                "title" => "How much time per week will this course require?",
-                "desc" => "For time invested, obviously the more time you practice the faster you’ll get better. But we recommend investing at least 2-3 hours per week to truly benefit from this course."
+                @include('drumeo.products.partials.question-dropdown', [
+                "question" => "How much time per week will this course require?",
+                "answer" => "For time invested, obviously the more time you practice the faster you’ll get better. But we recommend investing at least 2-3 hours per week to truly benefit from this course."
                 ])
-                @include('_partials.components.question-dropdown', [
-                "num" => "?",
-                "title" => "Will I still have full access to the course after 26 weeks?",
-                "desc" => "Yes! Even though it’s a week-by-week course, you’ll have LIFETIME online access to everything inside Drum Technique Made Easy, so you can review the materials or re-watch the lessons, anytime."
+                @include('drumeo.products.partials.question-dropdown', [
+                "question" => "Will I still have full access to the course after 26 weeks?",
+                "answer" => "Yes! Even though it’s a week-by-week course, you’ll have LIFETIME online access to everything inside Drum Technique Made Easy, so you can review the materials or re-watch the lessons, anytime."
                 ])
-                @include('_partials.components.question-dropdown', [
-                "num" => "?",
-                "title" => "What if I can’t follow the lessons EVERY week?",
-                "desc" => "You’ll get 26 weekly lessons and exercises. And while they’re intended to be completed week-after-week, we know that everybody’s schedules are different - so we’ve included progress-tracking so you never lose your spot. If you need to miss a week, that’s fine! You might need to review the previous lessons a bit before continuing again, but you’ll never lose your spot and once you’ve registered, you have unlimited access to the entire course for life."
+                @include('drumeo.products.partials.question-dropdown', [
+                "question" => "What if I can’t follow the lessons EVERY week?",
+                "answer" => "You’ll get 26 weekly lessons and exercises. And while they’re intended to be completed week-after-week, we know that everybody’s schedules are different - so we’ve included progress-tracking so you never lose your spot. If you need to miss a week, that’s fine! You might need to review the previous lessons a bit before continuing again, but you’ll never lose your spot and once you’ve registered, you have unlimited access to the entire course for life."
                 ])
             </div>
         </div>

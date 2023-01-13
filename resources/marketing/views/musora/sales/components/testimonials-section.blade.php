@@ -89,7 +89,7 @@
                                     <div class="font-bold text-sm leading-snug mb-2">{!! $testimonial['title'] !!}</div>
                                     <p class="text-sm">{{ $testimonial['name'] }}</p>
 
-                                        <p class="mt-1 text-xs text-{{ $brand }} cursor-pointer" x-on:click="{{str_replace(' ', '', $testimonial['name'])}} = true;">
+                                        <p class="mt-1 text-xs text-{{ $theme }} cursor-pointer" x-on:click="{{str_replace(' ', '', $testimonial['name'])}} = true;">
                                             @if(!empty($testimonial['video']))
                                                 Watch video
                                             @else
