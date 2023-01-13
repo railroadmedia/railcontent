@@ -1,6 +1,6 @@
 <section class="content-section relative overflow-hidden text-white grey text-center customize trial" style="background-color:#000;">
     <div class="row">
-        <img class="mb-3 md:mb-5 h-12 md:h-20 lg:h-28 lazyload" data-src="https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png">
+        <img class="mb-3 md:mb-5 h-12 md:h-20 lg:h-28" src="https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png">
         <br>
         <h1 style="margin:0 auto"><strong>Start your free <br class="inline sm:hidden">
                 @if(!empty($sevenDay))

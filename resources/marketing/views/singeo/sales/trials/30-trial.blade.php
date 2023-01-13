@@ -1,6 +1,4 @@
-@extends('singeo.sales.standard-layout', [
-"trialVersion" => true
-])
+@extends('singeo.sales.subscription')
 
 @section('global-head')
     <title>Your start-to-finish guide to confident singing | Singeo.com</title>
