@@ -97,11 +97,6 @@ class SalesController extends BaseController
         return view('guitareo.sales.standard');
     }
 
-    public function membershipStudents()
-    {
-        return view('guitareo.sales.student-only');
-    }
-
     public function trial()
     {
         return view('guitareo.sales.trials.trial');

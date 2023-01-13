@@ -10,7 +10,7 @@ Route::domain('{singeoDomain}')
     Route::get('/', [SalesController::class, 'home'] );
     Route::get('/new-year', [SalesController::class, 'promo'] );
     Route::get('/choose-plan', [SalesController::class, 'choosePlan'] );
-    Route::get('/student-only', [SalesController::class, 'studentOnly']);
+    Route::get('/student-only', [SalesController::class, 'promo']);
     Route::get('/privacy', [SalesController::class, 'privacy']);
     Route::get('/terms', [SalesController::class, 'terms']);
     Route::get('/trial', [SalesController::class, 'home']);

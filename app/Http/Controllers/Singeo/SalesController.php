@@ -19,10 +19,6 @@ class SalesController extends BaseController
     {
         return view('singeo.sales.choose-plan', ['brand' => 'singeo']);
     }
-    public function studentOnly()
-    {
-        return view('singeo.sales.student-only');
-    }
     public function privacy()
     {
         return view('singeo.sales.pages.privacy');
