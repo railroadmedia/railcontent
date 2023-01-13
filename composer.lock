@@ -3614,16 +3614,16 @@
         },
         {
             "name": "inertiajs/inertia-laravel",
-            "version": "v0.6.6",
+            "version": "v0.6.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/inertiajs/inertia-laravel.git",
-                "reference": "5b413b2fa90aa65177692b2d4a410c3cbbceb7bf"
+                "reference": "4e5bf5c254d8a6fb8a1049293fb415945c280213"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/inertiajs/inertia-laravel/zipball/5b413b2fa90aa65177692b2d4a410c3cbbceb7bf",
-                "reference": "5b413b2fa90aa65177692b2d4a410c3cbbceb7bf",
+                "url": "https://api.github.com/repos/inertiajs/inertia-laravel/zipball/4e5bf5c254d8a6fb8a1049293fb415945c280213",
+                "reference": "4e5bf5c254d8a6fb8a1049293fb415945c280213",
                 "shasum": ""
             },
             "require": {
@@ -3671,7 +3671,7 @@
             ],
             "support": {
                 "issues": "https://github.com/inertiajs/inertia-laravel/issues",
-                "source": "https://github.com/inertiajs/inertia-laravel/tree/v0.6.6"
+                "source": "https://github.com/inertiajs/inertia-laravel/tree/v0.6.7"
             },
             "funding": [
                 {
@@ -3679,7 +3679,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-01-12T03:46:20+00:00"
+            "time": "2023-01-13T02:28:35+00:00"
         },
         {
             "name": "intervention/image",
@@ -8423,16 +8423,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "v2.0.62",
+            "version": "v2.0.63",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "b3355c9305aeb51488f8054d49b2964d82996e10"
+                "reference": "9b544a3fc5bb2647d93c4a2bd89dc35b7d8ea3c3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/b3355c9305aeb51488f8054d49b2964d82996e10",
-                "reference": "b3355c9305aeb51488f8054d49b2964d82996e10",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/9b544a3fc5bb2647d93c4a2bd89dc35b7d8ea3c3",
+                "reference": "9b544a3fc5bb2647d93c4a2bd89dc35b7d8ea3c3",
                 "shasum": ""
             },
             "require": {
@@ -8486,9 +8486,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/v2.0.62"
+                "source": "https://github.com/railroadmedia/railcontent/tree/v2.0.63"
             },
-            "time": "2023-01-09T12:28:12+00:00"
+            "time": "2023-01-13T16:05:21+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -16659,5 +16659,5 @@
         "ext-curl": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.2.0"
 }
