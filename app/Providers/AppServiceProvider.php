@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\ViewComposers\MarketingCartSidebarViewComposer;
 use App\ViewComposers\MarketingPagesProductsViewComposer;
 use App\ViewComposers\NavigationViewComposer;
+use App\ViewComposers\RailanalyticsIframeTrackingViewComposer;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\ServiceProvider;
 use Railroad\Ecommerce\Contracts\UserProviderInterface as EcommerceUserProviderInterface;
@@ -77,6 +78,13 @@ class AppServiceProvider extends ServiceProvider
                 'singeo.shop.*',
             ],
             MarketingPagesProductsViewComposer::class
+        );
+
+        view()->composer(
+            [
+                'partials._railanalytics-brand-tracking-iframe',
+            ],
+            RailanalyticsIframeTrackingViewComposer::class
         );
 
         //        app()->instance(EcommerceUserProviderInterface::class, app()->make(EcommerceUserProvider::class));
