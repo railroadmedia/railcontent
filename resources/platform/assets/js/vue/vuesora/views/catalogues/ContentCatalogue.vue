@@ -576,6 +576,9 @@ export default {
     isCoachesGrid() {
       return this.catalogueType === 'coaches-grid';
     },
+      isSongsCatalogue() {
+          return this.catalogueName === 'Songs';
+      },
     selectedTypes() {
       if (this.searchBar) {
         return this.selected_types ? [this.selected_types] : this.includedTypes;
@@ -594,7 +597,7 @@ export default {
           required_fields: this.required_fields.concat(this.requiredFields),
           statuses: this.statuses,
           required_user_states: this.required_user_states,
-          [this.isCoach ? 'title' : 'term']: this.search_term,
+          [(this.isCoach || this.isSongsCatalogue) ? 'title' : 'term']: this.search_term,
           included_types: this.selectedTypes,
           page: this.page,
           included_fields: this.included_fields,
@@ -603,7 +606,7 @@ export default {
     },
 
     $_contentEndpoint() {
-      if (this.search_term && !this.isCoach) {
+      if (this.search_term && !this.isCoach && !this.isSongsCatalogue) {
         return this.searchEndpoint;
       }
 
@@ -611,7 +614,7 @@ export default {
     },
 
     sortBy() {
-      if (this.search_term && !this.isCoach) {
+      if (this.search_term && !this.isCoach && !this.isSongsCatalogue) {
         return "-score";
       }
       return this.sort || this.sortOverride || "-published_on";
