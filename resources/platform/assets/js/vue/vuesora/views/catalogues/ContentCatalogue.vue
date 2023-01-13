@@ -51,6 +51,7 @@
             :isCoachesGrid="isCoachesGrid"
             :total-results="total_results"
             :catalogueType="catalogueType"
+            :search-bar-title="searchBarTitle"
             @typeChange="handleTypeChange"
             @searchChange="handleSearch"
         />
@@ -283,6 +284,10 @@ export default {
   },
   mixins: [UserCatalogueEvents, ThemeClasses],
   props: {
+    searchBarTitle: {
+      type: String,
+      default: '',
+    },
     catalogueType: {
       type: String,
       default: () => "grid",

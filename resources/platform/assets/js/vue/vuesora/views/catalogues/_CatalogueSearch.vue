@@ -1,54 +1,36 @@
 <template>
-    <div class="flex flex-column"
-         :class="[isCoachesGrid ? 'tw-mr-4 tw-w-full xl:tw-w-1/4' : '']"
-    >
+    <div class="flex flex-column" :class="[isCoachesGrid ? 'tw-mr-4 tw-w-full xl:tw-w-1/4' : '']">
         <div class="flex flex-row flex-wrap mb nmh-1">
-            <div
-                v-if="includedTypes.length"
-                class="flex flex-column xs-12 sm-4"
-                :class="[isCoachesGrid ? 'tw-hidden' : '']"
-            >
-                <catalogue-filter
-                    filter-name="type"
-                    :item="parsedTypes"
-                    :theme-color="themeColor"
-                    :loading="loading"
-                    :initial-value="selectedTypes"
-                    @filterChange="changeFilter"
-                />
+            <div v-if="searchBarTitle.length" class="tw-flex tw-flex-col tw-mb-3 tw-mr-auto ph-1">
+                <h1 class="tw-text-[#00101D] dark:tw-text-white heading tw-capitalize tw-mr-2">
+                    {{ searchBarTitle }}
+                </h1>
+            </div>
+            <div v-if="includedTypes.length" class="flex flex-column xs-12 sm-4"
+                :class="[isCoachesGrid ? 'tw-hidden' : '']">
+                <catalogue-filter filter-name="type" :item="parsedTypes" :theme-color="themeColor" :loading="loading"
+                    :initial-value="selectedTypes" @filterChange="changeFilter" />
             </div>
 
             <div class="flex flex-column ph-1">
-                <div class="flex flex-row">
-                    <div class="flex flex-column grow pr-2">
-                        <input
-                            id="catalogueSearch"
-                            v-model="searchTermInterface"
-                            ref="searchInput"
-                            type="text"
-                            name="search"
-                            autocomplete="off"
-                            placeholder="Search..."
+                <div class="tw-flex tw-flex-row tw-justify-end">
+                    <div class="flex flex-column grow pr-2 tw-w-full md:tw-max-w-[455px]">
+                        <input id="catalogueSearch" v-model="searchTermInterface" ref="searchInput" type="text"
+                            name="search" autocomplete="off" placeholder="Search..."
                             class="no-label dark:placeholder:tw-text-white tw-bg-white dark:tw-bg-transparent tw-py-0 tw-h-[50px] tw-px-[25px] tw-rounded-full tw-border focus:tw-ring-0 focus:tw-outline-none tw-text-[#00101D] tw-border-[#D4D4D8] dark:tw-border-[#445F74] dark:tw-text-white"
-                            @keydown.enter="submitSearch($event)"
-                        >
+                            @keydown.enter="submitSearch($event)">
                     </div>
 
-                    <button
-                        class="tw-btn-primary tw-btn-circle tw-flex-shrink-0"
-                        :class="`tw-bg-${themeColor} hover:tw-bg-${themeColor}-600`"
-                        title="Search"
-                        @click="submitSearch"
-                    >
+                    <button class="tw-btn-primary tw-btn-circle tw-flex-shrink-0"
+                        :class="`tw-bg-${themeColor} hover:tw-bg-${themeColor}-600`" title="Search"
+                        @click="submitSearch">
                         <i class="fas fa-search"></i>
                     </button>
                 </div>
 
             </div>
         </div>
-        <div v-if="catalogueType !== 'coaches-grid'" 
-             class="flex flex-row pb-1"
-        >
+        <div v-if="catalogueType !== 'coaches-grid'" class="flex flex-row pb-1">
             <p class="tw-text-sm tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] font-italic">
                 Displaying <span v-if="totalResults > 0">{{ currentResults }} of</span> {{ totalResults }} results.
             </p>
@@ -64,6 +46,10 @@ export default {
         'catalogue-filter': CatalogueFilter,
     },
     props: {
+        searchBarTitle: {
+            type: String,
+            default: '',
+        },
         themeColor: {
             type: String,
             default: () => '',
@@ -155,7 +141,7 @@ export default {
             });
             //only blur the input on mobile (up to Tailwind sm breakpoint)
             let isMobile = window.matchMedia('(max-width: 639px)');
-            if( isMobile.matches ) {
+            if (isMobile.matches) {
                 e.target.blur()
             }
         },
@@ -163,11 +149,11 @@ export default {
 };
 </script>
 <style lang="scss">
-    @import '../../assets/sass/partials/variables';
+@import '../../assets/sass/partials/variables';
 
-    .search-button-col {
-        flex: 0 0 50px;
-        max-width:50px;
-        min-width:50px;
-    }
+.search-button-col {
+    flex: 0 0 50px;
+    max-width: 50px;
+    min-width: 50px;
+}
 </style>
