@@ -79,42 +79,36 @@ class LeadgenLessonResolver implements ResolverInterface
                 }
                 //update
                 else {
-                    $updated = false;
                     $dbLesson = LeadgenLesson::find($lesson['id']);
 
                     if($dbLesson['title'] !== $lesson['title']){
                         $dbLesson->title = $lesson['title'];
-                        $updated = true;
                     }
 
                     if($dbLesson['desc'] !== $lesson['desc']){
                         $dbLesson->desc = $lesson['desc'];
-                        $updated = true;
                     }
 
                     if($dbLesson['thumbnail'] !== $lesson['thumbnail']){
                         $dbLesson->thumbnail = $lesson['thumbnail'];
-                        $updated = true;
                     }
 
                     if($dbLesson['video_src'] !== $lesson['video_src']){
                         $dbLesson->video_src = $lesson['video_src'];
-                        $updated = true;
                     }
 
                     if($dbLesson['display_order'] !== $lesson['display_order']){
                         $dbLesson->display_order = $key;
-                        $updated = true;
                     }
 
                     $dbLesson->save();
-                    if($updated === true) $updatedIds[] = $lesson['id'];
+                    $updatedIds[] = $lesson['id'];
                 }
             }
 
             //delete items
-            if(isset($updatedIds) || count($lessons) !== $total){
-                $deleteLessons = LeadgenLesson::select('id')->where('leadgen_id', $model['id'])->whereNotIn('id', isset($updatedIds) ? $updatedIds : []);
+            if(isset($updatedIds)){
+                $deleteLessons = LeadgenLesson::select('id')->where('leadgen_id', $model['id'])->whereNotIn('id', $updatedIds);
                 if(count($deleteLessons->get()) > 0){
                     foreach($deleteLessons->get() as $id){
                         $assetIds[] = $id->id;
