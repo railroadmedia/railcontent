@@ -219,21 +219,7 @@ class Product extends Model
 
     public function delete()
     {
-        Feature::where('product_id', '=', $this->id)->delete();
-        ProductSize::where('product_id', '=', $this->id)->delete();
-        Spec::where('product_id', '=', $this->id)->delete();
-
-        $imgs = Image::where('product_id', '=', $this->id)->get();
-
-        foreach($imgs as $img){
-            Storage::disk('nova_s3')->delete($img->path);
-        }
-
-        Image::where('product_id', '=', $this->id)->delete();
-
-        Bundle::where('bundle_id', '=', $this->id)->delete();
-
-        Product::where('id', '=', $this->id)->delete();
+        Product::where('id', '=', $this->id)->update(['deleted' => 1]);
     }
 
     protected $guarded = [
