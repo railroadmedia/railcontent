@@ -892,10 +892,6 @@ class AddTimeToUsersAccountsJan2023 extends Command
         $duration = floor ($timeEnd - $timeStart);
         $this->info('Fetched ' . count($userProducts) . ' user_product records in ~' . $duration . 'ms');
 
-        for($i=0; $i<=100; $i++){
-            $this->info('');
-        }
-
         $this->info('============================ START OF TABLE ============================');
         $this->info('');
 
