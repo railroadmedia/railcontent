@@ -163,11 +163,6 @@ class SalesController extends BaseController
         return view('pianote.products.improvisation-with-jesus-molina');
     }
 
-    public function studentOnly()
-    {
-        return view('pianote.sales.student-only');
-    }
-
     public function roland()
     {
         return view('pianote.sales.roland');
