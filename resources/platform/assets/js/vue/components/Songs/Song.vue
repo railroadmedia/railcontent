@@ -174,7 +174,7 @@ const getInstrumentlessLabel = () => {
 const getBrandSpecificParams = () => {
     return ({
         drumeo: '&show_chords=0',
-        singeo: '&show_staff_t1=0&show_staff_t2=0',
+        singeo: '&show_staff_t1=0&show_staff_t2=0&show_chords=0',
         guitareo: '',
         pianote: '&show_chords=1'
     }[props.brand]);
