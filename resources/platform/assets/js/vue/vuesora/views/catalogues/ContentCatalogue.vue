@@ -76,6 +76,7 @@
             :theme-color="themeColor"
             :content-types="selectedTypes"
             :brand="brand"
+            :init-sort="sortBy"
             @filterChange="handleFilterChange"
             @progressChange="handleProgressChange"
             @handleContentSort="handleContentSort"
