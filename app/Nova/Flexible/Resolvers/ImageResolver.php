@@ -27,6 +27,7 @@ class ImageResolver implements ResolverInterface
 
             return $layout->duplicateAndHydrate($image->id, [
                 'path_file' => $image->path,
+                'path_text' => $image->path,
                 'id' => $image->id
             ],
             );
@@ -47,8 +48,6 @@ class ImageResolver implements ResolverInterface
 
         $class::saved(function ($model) use ($groups){
             $images = $groups->map(function($group, $index) use($model){
-
-
                 return [
                     'path' => !empty($group->getAttributes()['path_file']) ? $group->getAttributes()['path_file'] : $group->getAttributes()['path_text'],
                     'id' => isset($group->getAttributes()['id']) ? $group->getAttributes()['id'] : null,
