@@ -33,7 +33,7 @@ class ShopController extends BaseController
             return $value->productType->name === 'Hoodies';
         });
 
-        return view('drumeo.drumshop.shop-test-layout', [
+        return view('drumeo.drumshop.shop', [
             'lessons' => $lessons,
             'accessories' => $accessories,
             'hats' => $hats,
