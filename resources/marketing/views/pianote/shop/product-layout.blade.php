@@ -1,62 +1,22 @@
-@extends('pianote._partials.global-layout')
+@extends('_partials.layout.global-product-layout')
 
-@section('global-head')
-    @parent
-    <title>{{ $product->name }}</title>
-    <meta property="og:description" content="{{ $product->meta_desc  }}">
-    <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
-    @if(!empty($product->meta_img))
-        <meta property="og:image" content="@if(str_contains($product->meta_img, 'amazonaws') || str_contains($product->meta_img, 'cloudfront') || str_contains($product->meta_img, 'vimeocdn')) {{$product->meta_img}} @else https://laravel-nova.s3.us-east-2.amazonaws.com/{{ $product->meta_img  }}@endif">
-    @endif
-
-    <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"/>
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css"/>
-    <link href="{{ asset('/marketing/parcel/pianote/shop-product.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
-    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
-
-    <?php
-        if(count($product->sizes) > 0){
-            foreach($product->sizes as $size){
-                \App\Analytics\Tracker::trackProductImpression($product->sku.'-'.(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code);
-            }
-        }
-        else {
-            \App\Analytics\Tracker::trackProductImpression($product->sku);
-        }
-    ?>
-
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-        body {
-            margin: 0;
-        }
-    </style>
-    @yield('head')
-@stop
-
-@section('global-body')
+@section('layout-header')
     @include('pianote._partials._nav',[
          "cartVersion" => true
     ])
+@endsection
 
-{{--    @include('pianote._partials._nav', [--}}
-{{--        "cartVersion" => true--}}
-{{--    ])--}}
-
+@section('layout-body')
     <div class="clearfix container mx-auto max-w-6xl">
         <div class="lg:flex">
-            @include('pianote.shop._partials._slider',[
+            @include('drumeo.drumshop._partials.slider',[
                 "headerText" => $product->header_text,
                 "specialText" => $product->subheader_text,
                 "videoSrc" => $product->video_src,
                 "images" => $product->images,
             ])
 
-            @include('pianote.shop._partials._sidebar',[
+            @include('drumeo.drumshop._partials.sidebar',[
                 "sku" => $product->sku,
                 "logo" => $product->page_logo,
                 "fullPrice" => $product->price,
@@ -68,11 +28,11 @@
                 "freeShipping" => $product->free_shipping,
                 "size_case_sensitive" => $product->size_case_sensitive,
                 "category" => strtolower($product->productType->name),
-                'bundle' => $product->productType->name === 'Bundles' || str_contains($product->sku, 'member') || str_contains($product->sku, 'products') ? true : false,
+                'promoCode' => $product->promo_code,
+                'bundle' => $product->productType->name === 'Bundles' || str_contains($product->sku, 'member') || str_contains($product->sku, 'products')? true : false,
             ])
         </div>
-
-        <div class="product-wrap px-3 md:px-4 lg:w-2/3">
+        <div class="product-wrap lg:w-2/3 px-3 md:px-4">
             <div class="pack-details mx-auto mb-7 pb-5 sm:pb-9 lg:pb-11">
                 @if($product->productType->name === 'Lessons' && count($product->benefits) > 0)
                     @include('musora.product.partials.benefits',[
@@ -105,7 +65,7 @@
                 @else
                     @include('musora.product.partials.specs',[
                         'specList'=> $product->specs,
-                        'featureList' => $product->productType->name !== 'Bundles' && $product->productType->name !== 'Lessons' ? $product->features : [],
+                        'featureList' => $product->features,
                     ])
                 @endif
 
@@ -127,20 +87,8 @@
             </div>
         </div>
     </div>
+@endsection
 
-
+@section('layout-footer')
     @include('pianote._partials._footer')
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/shop-product.js') }}"></script>
-    {{-- Platform --}}
-    <script src="{{ mix('/platform/js/manifest.js') }}"></script>
-    <script src="{{ mix('/platform/js/vendor.js') }}"></script>
-    <script src="{{ mix('/platform/js/app.js') }}"></script>
-
-    @include('pianote.shop._partials._promo-countdown')
-@stop
+@endsection
