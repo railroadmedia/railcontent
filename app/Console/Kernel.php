@@ -2,7 +2,6 @@
 
 namespace App\Console;
 
-use App\Console\Commands\AddTimeToUsersAccountsJan2023;
 use App\Console\Commands\AssignSongsPermissionsToAllUsers;
 use App\Console\Commands\AssignSongsPermissionsToContent;
 use App\Console\Commands\AssignSongsPermissionsToProducts;
@@ -54,7 +53,6 @@ class Kernel extends ConsoleKernel
         FixSongsTemp::class,
         SoftDeleteOldSingeoSongs::class,
         SoftDeleteOldGuitareoSongs::class,
-        AddTimeToUsersAccountsJan2023::class,
     ];
 
     /**
