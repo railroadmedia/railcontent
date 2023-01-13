@@ -1,4 +1,4 @@
-@extends('_partials.layout.global-shop-layout')
+@extends('guitareo._partials.global-layout')
 
 @section('meta')
     <title>Guitareo Shop</title>
@@ -7,10 +7,16 @@
     <meta property="og:description" content="Say goodbye to “do it yourself” guitar lessons.">
     <meta property="og:image" content="https://guitareo.s3.amazonaws.com/sales/2023/share-image-guitareo.jpg">
     <meta property="og:url" content="https://www.guitareo.com/shop/">
-@endsection
 
-@section('layout-styles')
-    @parent
+    @include('_partials.layout.favicons.guitareo-favicons')
+    @include('_partials.layout._fonts')
+
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}" rel="stylesheet">
+
+    <link href="{{ asset('/marketing/parcel/guitareo/shop.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/vuesora.css') }}" rel="stylesheet">
     <style>
         .tooltip {
             position: relative;
@@ -75,15 +81,64 @@
             }
         }
     </style>
-@endsection
+@stop
 
-@section('layout-header')
+@section('scripts')
+    @parent
+    {{--<script src="{{ asset('/marketing/js/modal.js') }}"></script>--}}
+    {{--<script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>--}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.3/moment-timezone-with-data.min.js"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
+    {{-- Platform --}}
+    <script src="{{ mix('/platform/js/manifest.js') }}"></script>
+    <script src="{{ mix('/platform/js/vendor.js') }}"></script>
+    <script src="{{ mix('/platform/js/app.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            $(function () {
+                $('.scalable-card').click(function (e) {
+                    e.stopPropagation();
+                    if (!$(e.target).is('.pack-pick') && !$(e.target).is('option') && !$(e.target).is('a') && !$(e.target).is('button')) {
+                        $(this).toggleClass('flipped');
+                    }
+
+                });
+
+                //customize section pack picker
+                var originalLink = '/ecommerce/add-to-cart?redirect=/shop';
+
+                $('select').prop('selectedIndex', 0);
+                $(".pack-pick").change(function () {
+                    var orderButton = $(this).parent().find(".selected-pack");
+                    var selectedOption = $(this).find("option:selected");
+                    $(this).removeClass('error');
+                    orderButton.addClass('active');
+                    orderButton.attr('href', originalLink);
+                    orderButton.attr('href', orderButton.attr('href') + selectedOption.val());
+                    orderButton.attr('data-product-json', selectedOption.attr('data-product-json'));
+                });
+
+                $(".selected-pack").on('click', function (ev) {
+                    if (!$(this).hasClass('active')) {
+                        ev.preventDefault();
+                        ev.stopPropagation();
+                        var selecter = $(this).parent().find(".pack-pick");
+                        selecter.addClass('error');
+                    }
+                });
+            });
+        });
+    </script>
+@stop
+
+@section('content')
     @include("guitareo.sales.partials._nav", [
         "cartVersion" => true
     ])
-@endsection
 
-@section('body')
     <header class="drum-shop-header" style="background-image:url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://guitareo.s3.amazonaws.com/sales/promos/black-friday/shop-bg.jpg);">
         <div class="container mx-auto relative z-10">
             <div class="px-2 md:px-3">
@@ -150,61 +205,58 @@
     @endif
 
     <div class="white-box">
-        {{--        @include('_partials.layout.holiday.bundle-cards')--}}
+{{--        @include('_partials.layout.holiday.bundle-cards')--}}
         <section class="grid-view category-section" data-category="lessons">
             <ul class="container mx-auto fixed-cards text-center lg:text-left">
                 @foreach($items as $item){
-                @include('drumeo.drumshop._partials._drum-shop-card', [
-                    "sku" => $item->sku,
-                    "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $item->slug ),
-                    "thumbnail" => $item->thumbnail,
-                    "packLogo" => $item->thumbnail_logo,
-                    "badgeText" => $item->badge_text,
-                    "title" => $item->name,
-                    "packAuthor" => $item->instructor_name ?? 'Guitareo',
-                    "cardDescription" => $item->short_desc,
-                    "includedEdge" => $item->included_edge,
-                    "fullPrice" => $item->price,
-                    "price" => $item->discounted_price,
-                    "category" => strtolower($item->productType->name),
-                    "sizes" => $item->sizes,
-                    "soldOut" => (!empty($products[$item->sku]) && $item->productType->name !== 'Lessons') ? $products[$item->sku]->getStockAvailability() === 0 : $item->sold_out,
-                    "size_case_sensitive" => $item->size_case_sensitive,
-                ])
+                    @include('guitareo.shop._partials._shop-card', [
+                        "sku" => $item->sku,
+                        "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $item->slug ),
+                        "thumbnail" => $item->thumbnail,
+                        "packLogo" => $item->thumbnail_logo,
+                        "badgeText" => $item->badge_text,
+                        "title" => $item->name,
+                        "packAuthor" => $item->instructor_name ?? 'Guitareo',
+                        "cardDescription" => $item->short_desc,
+                        "includedEdge" => $item->included_edge,
+                        "fullPrice" => $item->price,
+                        "price" => $item->discounted_price,
+                        "category" => strtolower($item->productType->name),
+                        "sizes" => $item->sizes,
+                        "soldOut" => (!empty($products[$item->sku]) && $item->productType->name !== 'Lessons') ? $products[$item->sku]->getStockAvailability() === 0 : $item->sold_out,
+                        "size_case_sensitive" => $item->size_case_sensitive,
+                    ])
                 }
                 @endforeach
 
             </ul>
         </section>
 
-    </div>
-    <section class="content-section text-white text-center px-6 py-10 sm:py-20" style="background:linear-gradient(to bottom, #01050f, #021225);overflow:visible">
-        <div class="container mx-auto max-w-4xl">
-            <img class="h-28 md:h-32 lazyload" src="https://cdn.musora.com/image/fetch/w_250,q_auto:best/https://guitareo.s3.amazonaws.com/sales/2022/guitareo-guarantee.png" alt="guitareo-guarantee">
+        </div>
+        <section class="content-section text-white text-center px-6 py-10 sm:py-20" style="background:linear-gradient(to bottom, #01050f, #021225);overflow:visible">
+            <div class="container mx-auto max-w-4xl">
+                <img class="h-28 md:h-32 lazyload" data-src="https://cdn.musora.com/image/fetch/w_250,q_auto:best/https://guitareo.s3.amazonaws.com/sales/2022/guitareo-guarantee.png" alt="guitareo-guarantee">
 
-            <h3 class="leading-tight mt-5 md:mt-8 mb-4 md:mb-6 " data-aos-once="true" data-aos="fade-up" data-aos-offset="150" data-aos-delay="150"><strong>Happy student guarantee. </strong><br>
-                Test-drive your lessons for 90 days. Zero risk. </h3>
-            <p class=" opacity-60 leading-normal md:leading-loose">Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence on the guitar. </p>
-            <div class="flex flex-wrap items-start justify-center mt-5 md:mt-7">
-                <div class="w-full sm:w-1/3 px-2 mb-3 sm:mb-0">
-                    <h5 class="text-guitareo border-guitareo border-2 rounded-full inline-block py-2 px-3 mb-1">1</h5>
-                    <h6 class="leading-normal">Start your<br> lessons today.</h6>
-                </div>
-                <div class="w-full sm:w-1/3 px-2 mb-3 sm:mb-0">
-                    <h5 class="text-guitareo border-guitareo border-2 rounded-full inline-block py-2 px-3 mb-1">2</h5>
-                    <h6 class="leading-normal">Enjoy them for 90<br> days, risk-free.</h6>
-                </div>
-                <div class="w-full sm:w-1/3 px-2">
-                    <h5 class="text-guitareo border-guitareo border-2 rounded-full inline-block py-2 px-3 mb-1">3</h5>
-                    <h6 class="leading-normal">Change your mind?<br> Get a refund.
-{{--                        <div class="inline-block tooltip cursor-pointer bg-white" tip="If it’s not for you, simply cancel your membership within 90 days and contact us for a full refund. (If your membership includes any bonuses, your refund will deduct the value of hard goods that were shipped to you.)"><i class="fas fa-info-circle text-white"></i></div>--}}
-                    </h6>
+                <h3 class="leading-tight mt-5 md:mt-8 mb-4 md:mb-6 " data-aos-once="true" data-aos="fade-up" data-aos-offset="150" data-aos-delay="150"><strong>Happy student guarantee. </strong><br>
+                    Test-drive your lessons for 90 days. Zero risk. </h3>
+                <p class=" opacity-60 leading-normal md:leading-loose">Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence on the guitar. </p>
+                <div class="flex flex-wrap items-start justify-center mt-5 md:mt-7">
+                    <div class="w-full sm:w-1/3 px-2 mb-3 sm:mb-0">
+                        <h5 class="text-guitareo border-guitareo border-2 rounded-full inline-block py-2 px-3 mb-1">1</h5>
+                        <h6 class="leading-normal">Start your<br> lessons today.</h6>
+                    </div>
+                    <div class="w-full sm:w-1/3 px-2 mb-3 sm:mb-0">
+                        <h5 class="text-guitareo border-guitareo border-2 rounded-full inline-block py-2 px-3 mb-1">2</h5>
+                        <h6 class="leading-normal">Enjoy them for 90<br> days, risk-free.</h6>
+                    </div>
+                    <div class="w-full sm:w-1/3 px-2">
+                        <h5 class="text-guitareo border-guitareo border-2 rounded-full inline-block py-2 px-3 mb-1">3</h5>
+                        <h6 class="leading-normal">Change your mind?<br> Get a refund. <div class="inline-block tooltip cursor-pointer" tip="If it’s not for you, simply cancel your membership within 90 days and contact us for a full refund. (If your membership includes any bonuses, your refund will deduct the value of hard goods that were shipped to you.)"><i class="fas fa-info-circle"></i></div></h6>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-@endsection
+        </section>
 
-@section('layout-footer')
     @include("guitareo.sales.partials._footer")
-@endsection
+@stop
+

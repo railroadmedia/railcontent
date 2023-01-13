@@ -5,7 +5,7 @@
     <meta name="description" content="The Complete Pianote Curriculum At Your Fingertips">
 
     <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/books/foundations/sales/og-image.jpg"
-          style="display: none;">
+            style="display: none;">
     <meta property="og:title" content="Pianote Foundations">
     <meta property="og:description" content="The Complete Pianote Curriculum At Your Fingertips">
     <meta property="og:url" content="https://www.pianote.com/foundations">
@@ -222,13 +222,13 @@
                     <h4 class="font-bold text-base md:text-lg"><strong>BUY NOW: $149 USD</strong></h4>
 
                     @if($products['pianote-foundation']->getStockAvailability() < 1)
-                        <a class="join sold-out mt-3 mb-5 sm:mb-10 w-full max-w-2xl text-lg sm:text-xl md:text-2xl lg:text-3xl">SOLD OUT!</a>
+                    <a class="join sold-out mt-3 mb-5 sm:mb-10 w-full max-w-2xl text-lg sm:text-xl md:text-2xl lg:text-3xl">SOLD OUT!</a>
                     @else
 
                         <a
-                            class="join vue-add-to-cart mt-3 mb-5 sm:mb-10 w-full max-w-2xl text-lg sm:text-xl md:text-2xl lg:text-3xl"
-                            href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['pianote-foundation' => 1,], 'redirect' => '/order', 'locked' => 'false']) }}"
-                            data-product-json='{"pianote-foundation": 1}'
+                        class="join vue-add-to-cart mt-3 mb-5 sm:mb-10 w-full max-w-2xl text-lg sm:text-xl md:text-2xl lg:text-3xl"
+                        href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['pianote-foundation' => 1,], 'redirect' => '/order', 'locked' => 'false']) }}"
+                        data-product-json='{"pianote-foundation": 1}'
                         >CLICK HERE TO ORDER &raquo;</a>
                     @endif
                     <p class=" mx-auto max-w-2xl text-xs sm:text-sm"><strong>Get ready to open up the only piano books you’ll ever need.</strong>
@@ -496,9 +496,9 @@
                             <a class="join sold-out mt-3 mb-5 sm:mb-10 w-full max-w-2xl text-lg sm:text-xl md:text-2xl lg:text-3xl">SOLD OUT!</a>
                         @else
                             <a
-                                class="join vue-add-to-cart w-full text-lg sm:text-xl md:text-2xl lg:text-3xl"
-                                href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['pianote-foundation' => 1,], 'redirect' => '/order', 'locked' => 'false']) }}"
-                                data-product-json='{"pianote-foundation": 1}'
+                                    class="join vue-add-to-cart w-full text-lg sm:text-xl md:text-2xl lg:text-3xl"
+                                    href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['pianote-foundation' => 1,], 'redirect' => '/order', 'locked' => 'false']) }}"
+                                    data-product-json='{"pianote-foundation": 1}'
                             >CLICK HERE TO ORDER »</a>
                         @endif
 
@@ -624,5 +624,6 @@
     <script src="{{ mix('/platform/js/manifest.js') }}"></script>
     <script src="{{ mix('/platform/js/vendor.js') }}"></script>
     <script src="{{ mix('/platform/js/app.js') }}"></script>
+
 
 @stop

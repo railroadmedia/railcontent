@@ -2,7 +2,7 @@
 {{--   class="anchor-slide promo-banner block text-center w-full transition-opacity duration-300 overflow-hidden whitespace-nowrap bg-cover bg-center shadow-md py-1 z-0 mx-auto -mt-10 text-xs">--}}
 {{--    <div class="container mx-auto relative">--}}
 {{--        <div class="inline-block align-middle text-center">--}}
-{{--            @include($brand.'._partials.holiday-logo',[--}}
+{{--            @include($theme.'._partials.holiday-logo',[--}}
 {{--                'styles' => 'inline-block align-middle mr-2 h-8'--}}
 {{--            ])--}}
 

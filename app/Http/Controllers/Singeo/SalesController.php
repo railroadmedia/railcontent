@@ -9,15 +9,15 @@ class SalesController extends BaseController
 {
     public function home()
     {
-        return view('singeo.sales.subscription', ['brand' => 'singeo']);
+        return view('singeo.sales.subscription', ['theme' => 'singeo']);
     }
     public function promo()
     {
-        return view('singeo.sales.subscription', ['brand' => 'singeo', 'promoVersion' => 'true']);
+        return view('singeo.sales.subscription', ['theme' => 'singeo', 'promoVersion' => 'true']);
     }
     public function choosePlan()
     {
-        return view('singeo.sales.choose-plan', ['brand' => 'singeo']);
+        return view('singeo.sales.choose-plan', ['theme' => 'singeo']);
     }
     public function privacy()
     {
@@ -113,14 +113,14 @@ class SalesController extends BaseController
     }
     public function method()
     {
-        return view('singeo.sales.features.method', ['brand' => 'singeo', 'page' => 'method']);
+        return view('singeo.sales.features.method', ['theme' => 'singeo', 'page' => 'method']);
     }
     public function coaches()
     {
-        return view('singeo.sales.features.coaches', ['brand' => 'singeo', 'page' => 'coaches']);
+        return view('singeo.sales.features.coaches', ['theme' => 'singeo', 'page' => 'coaches']);
     }
     public function songs()
     {
-        return view('singeo.sales.features.songs', ['brand' => 'singeo', 'page' => 'songs']);
+        return view('singeo.sales.features.songs', ['theme' => 'singeo', 'page' => 'songs']);
     }
 }

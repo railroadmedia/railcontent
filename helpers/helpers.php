@@ -231,13 +231,6 @@ if (!function_exists('parse_xp_value')) {
 
 function isLive()
 {
-    $cacheStore = cache()->store(config('cache.default'))->getStore();
-
-    if (method_exists($cacheStore, 'setPrefix')) {
-        $oldPrefix = $cacheStore->getPrefix();
-        $cacheStore->setPrefix(config('cache.prefix'));
-    }
-
     $cacheName = brand() . '_is_live';
 
     if (cache()->has($cacheName)) {
@@ -264,10 +257,6 @@ function isLive()
             false,
             1
         );
-    }
-
-    if (method_exists($cacheStore, 'setPrefix')) {
-        $cacheStore->setPrefix($oldPrefix);
     }
 
     return $isLive;
