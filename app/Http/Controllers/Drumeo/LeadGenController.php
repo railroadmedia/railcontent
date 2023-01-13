@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Drumeo;
 
+use App\Models\Leadgen;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -550,5 +551,13 @@ class LeadGenController extends BaseController
     public function weeklyMail()
     {
         return view('drumeo.lead-gen.blog-forms.weeklyemail');
+    }
+
+    public function test($root, $slug)
+    {
+        $leadgen = Leadgen::where('brand_id', 1)->first();
+        $lessons = $leadgen->lessons;
+
+        return view('_partials.layout.global-lead-gen-lesson-layout', ['theme' => 'drumeo', 'leadgen' => $leadgen]);
     }
 }
