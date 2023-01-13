@@ -29,15 +29,15 @@ class RailanalyticsIframeTrackingViewComposer
             $drumeoCacheKey = auth()->id() . '_recent_order_analytics_data_drumeo';
             Cache::store('redis')->put($drumeoCacheKey, $drumeoQueueData, 60);
 
-            $pianoteQueueData = Tracker::getQueueForBrand('drumeo');
+            $pianoteQueueData = Tracker::getQueueForBrand('pianote');
             $pianoteCacheKey = auth()->id() . '_recent_order_analytics_data_pianote';
             Cache::store('redis')->put($pianoteCacheKey, $pianoteQueueData, 60);
 
-            $guitareoQueueData = Tracker::getQueueForBrand('drumeo');
+            $guitareoQueueData = Tracker::getQueueForBrand('guitareo');
             $guitareoCacheKey = auth()->id() . '_recent_order_analytics_data_guitareo';
             Cache::store('redis')->put($guitareoCacheKey, $guitareoQueueData, 60);
 
-            $singeoQueueData = Tracker::getQueueForBrand('drumeo');
+            $singeoQueueData = Tracker::getQueueForBrand('singeo');
             $singeoCacheKey = auth()->id() . '_recent_order_analytics_data_singeo';
             Cache::store('redis')->put($singeoCacheKey, $singeoQueueData, 60);
         }
