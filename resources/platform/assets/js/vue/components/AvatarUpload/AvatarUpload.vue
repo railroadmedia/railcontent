@@ -60,7 +60,6 @@ function handleUploadDone(imgUrl) {
 }
 
 function handleUploadError() {
-  console.log('handle upload error')
   window.shownotification({
     icon: 'error',
     text: 'There was an error uploading this image, please try again later.'
@@ -71,7 +70,7 @@ function handleUploadError() {
 
 <template>
   <div class="">
-    <InfoModal v-if="showUploadForm" modalId="upload-modal" @onClose="openUploadForm" :title="title[uploadStep]">
+    <InfoModal v-if="showUploadForm" modalId="upload-modal" @onClose="openUploadForm" :title="title[uploadStep]" classOverride="tw-border-[#223F57] tw-border-[1px] tw-bg-white dark:tw-bg-[#081825] md:tw-max-w-xl xl:tw-max-w-2xl">
       <ImageDropzone v-if="uploadStep === 'dropzone'" @onImageSelected="handleImage" />
       <ImageCropper v-if="uploadStep === 'crop'" @onCrop="handleCrop" :selectedImage="selectedImage" />
       <ImageUploadProgress v-if="uploadStep === 'upload'" :image="croppedImage" :userId="userId"
