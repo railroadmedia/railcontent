@@ -10,7 +10,7 @@ Route::domain('{pianoteDomain}')
     Route::get('/new-year', [SalesController::class, 'promo'] );
     Route::get('/choose-plan', [SalesController::class, 'choosePlan'] );
     Route::get('/shop/improvisation-with-jesus-molina', [SalesController::class, 'jesusMolina'] );
-    Route::get('/student-only', [SalesController::class, 'studentOnly'] );
+    Route::get('/student-only', [SalesController::class, 'promo'] );
     Route::get('/roland', [SalesController::class, 'roland'] );
     Route::get('/trial', [SalesController::class, 'home'] );
     Route::get('/trial-month', [SalesController::class, 'trialMonth'] );

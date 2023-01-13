@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3854bb7334b6dc98969c2fd562e942bb",
+    "content-hash": "541b69672aa5a4c7c2d7ebccd66c9c0a",
     "packages": [
         {
             "name": "aporat/store-receipt-validator",
@@ -8340,16 +8340,16 @@
         },
         {
             "name": "railroad/railanalytics",
-            "version": "v3.0.7",
+            "version": "dev-v3.0-fixing-transaction-tracking",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railanalytics.git",
-                "reference": "c489cc2f3988342131442ac26e18cd76cbb189b0"
+                "reference": "f42ec35eff16db58b6e942b14061089df93a8fa1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railanalytics/zipball/c489cc2f3988342131442ac26e18cd76cbb189b0",
-                "reference": "c489cc2f3988342131442ac26e18cd76cbb189b0",
+                "url": "https://api.github.com/repos/railroadmedia/railanalytics/zipball/f42ec35eff16db58b6e942b14061089df93a8fa1",
+                "reference": "f42ec35eff16db58b6e942b14061089df93a8fa1",
                 "shasum": ""
             },
             "require": {
@@ -8376,9 +8376,9 @@
             "description": "Laravel analytics system for using tracking code in your application for google analytics/adwords, facebook pixel, etc.",
             "support": {
                 "issues": "https://github.com/railroadmedia/railanalytics/issues",
-                "source": "https://github.com/railroadmedia/railanalytics/tree/v3.0.7"
+                "source": "https://github.com/railroadmedia/railanalytics/tree/v3.0-fixing-transaction-tracking"
             },
-            "time": "2023-01-10T17:51:29+00:00"
+            "time": "2023-01-13T01:16:57+00:00"
         },
         {
             "name": "railroad/railchat",
@@ -16640,9 +16640,18 @@
             "time": "2021-07-28T10:34:58+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "package": "railroad/railanalytics",
+            "version": "dev-v3.0-fixing-transaction-tracking",
+            "alias": "v3.0.7",
+            "alias_normalized": "3.0.7.0"
+        }
+    ],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "railroad/railanalytics": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
@@ -16650,5 +16659,5 @@
         "ext-curl": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }

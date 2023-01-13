@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
     "/platform/js/app.js": "/platform/js/app.js?id=ba544b8088f1e01b1caafc45a4af3176",
     "/platform/js/profile.js": "/platform/js/profile.js?id=c7e869f012d1252699ff65de1e5e0547",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=24098ec7990ff98a565fd1e4693746ed",
@@ -30,4 +31,37 @@
     "/platform/js/vendor~onboarding.js": "/platform/js/vendor~onboarding.js?id=56868ea369faf90d0978a204535ee2e6",
     "/marketing/css/app.css": "/marketing/css/app.css?id=02834e6859e7fd0c72f01c626d6486c7",
     "/platform/js/vendor.js": "/platform/js/vendor.js?id=05dd83ebb4f3d065d57fc2d6da2069b0"
+=======
+    "/platform/js/app.js": "/platform/js/app.js?id=4074221fc535d2457da623bf30a6f30e",
+    "/platform/js/profile.js": "/platform/js/profile.js?id=a13ed5f750a89e00edbe84934bd56773",
+    "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=9b1b997eda2b5545804b8d7649790e48",
+    "/platform/js/books.js": "/platform/js/books.js?id=bd6874db5faa8414cda38fb1fa497d2c",
+    "/platform/js/manifest.js": "/platform/js/manifest.js?id=021a618bed4cc7e83303745b9c8f0ac0",
+    "/platform/js/song.js": "/platform/js/song.js?id=ea2f5ae144e900e6b1eebe2f99e3b3f9",
+    "/platform/js/song-request.js": "/platform/js/song-request.js?id=f5d4d12aded67dfb0453f5dae3a8ea8e",
+    "/platform/js/piano-backing-tracks.js": "/platform/js/piano-backing-tracks.js?id=d1eba1355e67f9daf178af304ebf9066",
+    "/platform/js/student-review-form-iframe.js": "/platform/js/student-review-form-iframe.js?id=7d0fc16c09e2a2e52f4ecbb423033346",
+    "/platform/js/comments-catalogue-component.js": "/platform/js/comments-catalogue-component.js?id=bd59fa3eaeb429c1c58472fa494a6461",
+    "/platform/js/order-form.js": "/platform/js/order-form.js?id=3dfa9aa7b08142d0b6341cfa0a2a9eb4",
+    "/platform/js/forum-thread-component.js": "/platform/js/forum-thread-component.js?id=7ddae04a2c09282be339f35cd0d6dc82",
+    "/platform/js/text-editor-component.js": "/platform/js/text-editor-component.js?id=cea2bc4dc4dda95920a97bcbc4396a08",
+    "/platform/js/contact-member-form.js": "/platform/js/contact-member-form.js?id=deda3b2b58d7e89df5a9bf53fdb2438d",
+    "/platform/js/cart-sidebar.js": "/platform/js/cart-sidebar.js?id=c0ecfcf61e86ed6450e406643d4c349d",
+    "/platform/js/nav-cart-button.js": "/platform/js/nav-cart-button.js?id=0cb051970fe896cfbf67da472b663abd",
+    "/platform/js/contact-email-form-marketing.js": "/platform/js/contact-email-form-marketing.js?id=1653ae9e326faf69ed4179b23d823bfa",
+    "/platform/js/contact-email-form.js": "/platform/js/contact-email-form.js?id=2841c194e39c2079a83e28ecb40704e2",
+    "/platform/js/youtube-player-component.js": "/platform/js/youtube-player-component.js?id=842ce07fa977b6d5819c084d9fcbc1f7",
+    "/platform/js/onboarding-component.js": "/platform/js/onboarding-component.js?id=2e4f8b28ebd45c0cb990c50b09a32ac0",
+    "/platform/js/video-player-component.js": "/platform/js/video-player-component.js?id=cddeddc2e371e47151a872a1569e59de",
+    "/platform/js/video-media-element-component.js": "/platform/js/video-media-element-component.js?id=9c4ac28b83a1dc2d9878049576d4ebd1",
+    "/platform/js/image-cropper-component.js": "/platform/js/image-cropper-component.js?id=d96aae0fe3ca453c5e919c6ee6bb6128",
+    "/platform/js/comments-component.js": "/platform/js/comments-component.js?id=e201eb14142a9f35e66db5d1ecf2f893",
+    "/platform/js/email-form-component.js": "/platform/js/email-form-component.js?id=00a4f660c086eaeb78e11e887b7ccedf",
+    "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=09903bb6c8a5633f9a2f593d996f848f",
+    "/marketing/css/vuesora.css": "/marketing/css/vuesora.css?id=39de52086a9c6bfbeabc595ee9a371f2",
+    "/platform/css/app.css": "/platform/css/app.css?id=14e21012f868b9eba948daeedac89087",
+    "/platform/js/vendor~onboarding.js": "/platform/js/vendor~onboarding.js?id=b0559936a7adfc81befda85c26501bb0",
+    "/marketing/css/app.css": "/marketing/css/app.css?id=46487673e632e67987958923378437c7",
+    "/platform/js/vendor.js": "/platform/js/vendor.js?id=4e6aac0e17e080d886e44cb9292b2012"
+>>>>>>> master
 }

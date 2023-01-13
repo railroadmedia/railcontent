@@ -1,6 +1,5 @@
-@extends('singeo.sales.standard-layout', [
-    "trialVersion" => true
-])
+@extends('singeo.sales.subscription')
+
 @section('global-head')
     <title>@yield('name') | Singeo Trial</title>
     <meta property="og:title" content="@yield('name') | Singeo Trial">
@@ -28,17 +27,8 @@
             </div>
         </div>
     </div>
-    <a href="/affiliate-trial/" class="promo-banner bg-black font-roboto w-full py-1 mx-auto -mt-10 block methodcta z-10 whitespace-nowrap shadow-md overflow-hidden relative leading-none text-xs transition-colors duration-300 text-center text-white hover:text-gray-50">
-        <div class="container mx-auto">
-            <div class="text text-center">
-                <p class="uppercase"><strong>@yield('name') FANS</strong><br>
-                    <span class="text-singeo">YOUR FIRST MONTH IS FREE!</span></p>
-            </div>
-        </div>
-    </a>
 @endsection
 
 @section('final')
-    <div id="customize-anchor" class="anchor"></div>
     @include('singeo.sales.partials._final-trial', [ "url" => "/affiliate-trial/" ])
 @stop

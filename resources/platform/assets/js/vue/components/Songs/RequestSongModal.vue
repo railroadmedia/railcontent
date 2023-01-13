@@ -44,7 +44,7 @@ const handleArtistName = (value) => {
 </script>
 <template>
     <InfoModal title="Request A Song" modalId="request-a-song-modal" @onClose="emit('onCloseModal')"
-        :selfContained="true" classOverride="tw-bg-white dark:tw-bg-[#081825] tw-max-w-[575px]">
+        :selfContained="true" classOverride="tw-bg-white dark:tw-bg-[#081825] tw-max-w-[575px] tw-border-[1px] dark:tw-border-[#445F74]">
         <div class="tw-px-[25px] tw-bg-white dark:tw-bg-[#081825]">
             <form accept-charset="UTF-8" method="POST" @submit.prevent="submitForm">
                 <div class="tw-flex tw-flex-col tw-mb-[20px]">
