@@ -2,6 +2,14 @@
     @php
         $queueData = \App\Analytics\Tracker::getQueueForBrand('drumeo');
 
+        function getProtectedValue($obj, $name) {
+            $array = (array)$obj;
+            $prefix = chr(0).'*'.chr(0);
+            return $array[$prefix.$name];
+        }
+
+        var_dump(getProtectedValue(getProtectedValue(Cache::store('redis'), 'store'), 'prefix'));
+
         cache()->store('redis')->put(auth()->id() . '_recent_order_analytics_data_drumeo', $queueData, 6000);
 
         \Illuminate\Support\Facades\Log::info('--- KEY SET: ' . auth()->id() . '_recent_order_analytics_data_drumeo');
