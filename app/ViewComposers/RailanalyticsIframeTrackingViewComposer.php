@@ -2,8 +2,8 @@
 
 namespace App\ViewComposers;
 
+use App\Analytics\Tracker;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 
 class RailanalyticsIframeTrackingViewComposer
@@ -16,39 +16,39 @@ class RailanalyticsIframeTrackingViewComposer
      */
     public function compose(View $view)
     {
-        function getProtectedValue($obj, $name) {
-            $array = (array)$obj;
-            $prefix = chr(0).'*'.chr(0);
-            return $array[$prefix.$name];
-        }
-
         $currentUserHasRecentOrder = false;
-        $cacheKey = null;
-        $brand = 'drumeo'; // todo
+        $drumeoCacheKey = null;
+        $pianoteCacheKey = null;
+        $guitareoCacheKey = null;
+        $singeoCacheKey = null;
 
         if (current_user_has_recent_order()) {
             $currentUserHasRecentOrder = true;
 
-            // todo: add other brands
+            $drumeoQueueData = Tracker::getQueueForBrand('drumeo');
+            $drumeoCacheKey = auth()->id() . '_recent_order_analytics_data_drumeo';
+            Cache::store('redis')->put($drumeoCacheKey, $drumeoQueueData, 60);
 
-            $queueData = \App\Analytics\Tracker::getQueueForBrand('drumeo');
-            $cacheKey = auth()->id() . '_recent_order_analytics_data_drumeo';
+            $pianoteQueueData = Tracker::getQueueForBrand('drumeo');
+            $pianoteCacheKey = auth()->id() . '_recent_order_analytics_data_pianote';
+            Cache::store('redis')->put($pianoteCacheKey, $pianoteQueueData, 60);
 
-            Log::info('RailanalyticsIframeTrackingViewComposer cacheKey: ' . $cacheKey);
+            $guitareoQueueData = Tracker::getQueueForBrand('drumeo');
+            $guitareoCacheKey = auth()->id() . '_recent_order_analytics_data_guitareo';
+            Cache::store('redis')->put($guitareoCacheKey, $guitareoQueueData, 60);
 
-            Log::info('RailanalyticsIframeTrackingViewComposer prefix: ' . getProtectedValue(getProtectedValue(Cache::store('redis'), 'store'), 'prefix'));
-
-            cache()->store('redis')->put($cacheKey, $queueData, 6000);
-            cache()->store('redis')->set($cacheKey . '1', $queueData, 6000);
-            Cache::store('redis')->put($cacheKey . '3', $queueData, 6000);
-            Cache::store('redis')->set($cacheKey . '4', $queueData, 6000);
+            $singeoQueueData = Tracker::getQueueForBrand('drumeo');
+            $singeoCacheKey = auth()->id() . '_recent_order_analytics_data_singeo';
+            Cache::store('redis')->put($singeoCacheKey, $singeoQueueData, 60);
         }
 
 
         $view->with([
             'currentUserHasRecentOrder' => $currentUserHasRecentOrder,
-            'cacheKey' => $cacheKey,
-            'brand' => $brand,
+            'drumeoCacheKey' => $drumeoCacheKey,
+            'pianoteCacheKey' => $pianoteCacheKey,
+            'guitareoCacheKey' => $guitareoCacheKey,
+            'singeoCacheKey' => $singeoCacheKey,
         ]);
     }
 }
