@@ -11,7 +11,7 @@ class ShopController extends BaseController
 {
     public function shop(Request $request)
     {
-        $products = Product::whereHas('brand', fn($query) => $query->where('name', 'drumeo'))->where('visible', '=', 1)->where('product_type_id', '!=', 6)->orderBy('display_order')->get();
+        $products = Product::whereHas('brand', fn($query) => $query->where('name', 'drumeo'))->where('visible', '=', 1)->where('product_type_id', '!=', 6)->where('deleted', 0)->orderBy('display_order')->get();
 
         $lessons = $products->filter(function($value, $key){
             return $value->productType->name === 'Lessons';
@@ -46,7 +46,7 @@ class ShopController extends BaseController
 
     public function product($root, $slug)
     {
-        $product = Product::where('slug', 'Drumeo-'.$slug)->firstOrFail();
+        $product = Product::where('slug', 'Drumeo-'.$slug)->where('deleted', 0)->firstOrFail();
 
         return view('drumeo.drumshop.product-layout', [ 'product' => $product, 'theme' => 'drumeo' ]);
     }
