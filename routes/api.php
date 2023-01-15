@@ -189,6 +189,11 @@ Route::group(
             Railroad\Railcontent\Controllers\ContentFollowsJsonController::class . '@getLatestLessonsForFollowedContentByType'
         )->name('api.followed.lessons');
 
+        Route::post(
+            '/request-song',
+            Railroad\Railcontent\Controllers\RequestedSongsJsonController::class . '@requestSong'
+        )->name('api.request.song');
+
         Route::post('/playlist', MyListJsonController::class . '@createPlaylist');
 
         Route::get('/playlists', MyListJsonController::class . '@getUserPlaylists');
@@ -226,5 +231,6 @@ Route::group(
 //        Route::put('/remove-from-my-list', MyListJsonController::class . '@removeFromPrimaryPlaylist');
 //        Route::get('/my-list', MyListJsonController::class . '@getMyLists');
         //addItemToPlaylist
+
     }
 );

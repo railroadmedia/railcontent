@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Repositories;
 
 use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Transformers\ContentTransformer;
+use Railroad\Railcontent\Repositories\ContentRepository;
 
 class UserPlaylistContentRepository extends RepositoryBase
 {
@@ -60,6 +61,10 @@ class UserPlaylistContentRepository extends RepositoryBase
             $query->whereIn(config('railcontent.table_prefix').'content.type', $contentType);
         }
 
+        if (is_array(ContentRepository::$availableContentStatues)) {
+            $query->whereIn(config('railcontent.table_prefix').'content.status',  ContentRepository::$availableContentStatues);
+        }
+
         if ($limit) {
             $query->limit($limit)
                 ->skip(($page - 1) * $limit);
@@ -87,15 +92,18 @@ class UserPlaylistContentRepository extends RepositoryBase
     {
         $query =
             $this->query()
+                ->join(
+                    config('railcontent.table_prefix').'content',
+                    config('railcontent.table_prefix').'user_playlist_content.content_id',
+                    '=',
+                    config('railcontent.table_prefix').'content.id'
+                )
                 ->where('user_playlist_id', $playlistId);
         if (!empty($contentType)) {
-            $query->join(
-                config('railcontent.table_prefix').'content',
-                config('railcontent.table_prefix').'user_playlist_content.content_id',
-                '=',
-                config('railcontent.table_prefix').'content.id'
-            )
-                ->whereIn(config('railcontent.table_prefix').'content.type', $contentType);
+            $query->whereIn(config('railcontent.table_prefix').'content.type', $contentType);
+        }
+        if (is_array(ContentRepository::$availableContentStatues)) {
+            $query->whereIn(config('railcontent.table_prefix').'content.status',  ContentRepository::$availableContentStatues);
         }
 
         return $query->count();
