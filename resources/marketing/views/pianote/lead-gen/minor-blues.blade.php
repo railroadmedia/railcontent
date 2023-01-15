@@ -119,7 +119,7 @@
         <div class="infusion-submit w-full sm:pl-3 float-left sm:w-5/12">
             <button class="submit" type="submit">Master the Blues</button>
         </div>
-        <input name="inf_form_xid" type="hidden" value="PianoteEngagementTriggerWebsiteSignupWebForm">
+        <input name="inf_form_xid" type="hidden" value="PianoteEngagementTriggerTheMinorBluesMadeEasyWebForm">
         <input name="tag_names_to_add[]" type="hidden" value="Pianote - Engagement - Trigger - The Minor Blues Made Easy - Web Form">
         <input name="list_ids_to_subscribe_to[]" type="hidden" value="33">
         <input name="success_redirect" type="hidden" value="/thank-you">

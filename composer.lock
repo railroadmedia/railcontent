@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1bc8a5e0f69bccb6aa050de4f0e8ff74",
+    "content-hash": "541b69672aa5a4c7c2d7ebccd66c9c0a",
     "packages": [
         {
             "name": "aporat/store-receipt-validator",

@@ -175,7 +175,9 @@
         'students' => number_format(Prices::$students),
     ])
 
-    @if(!empty($promoVersion))
+    @hasSection('promo-banner')
+        @yield('promo-banner')
+    @elseif(!empty($promoVersion))
         @include('musora.sales.components.promo-section', [
         'promoLogo' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs.svg',
            'promoLogoM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs-m.png',
@@ -458,7 +460,7 @@
         'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Singeo+Membership/79348458',
         'reviewText' => 'Rated 5 stars by Singeo students from around the world!',
         'youtubeLink' => 'https://www.youtube.com/singeoofficial/',
-        'youtube' => '28,000',
+        'youtube' => '29,000',
         'facebookLink' => 'https://facebook.com/singeoofficial/',
         'facebook' => '23,000',
         'instagramLink' => 'https://instagram.com/singeoofficial/',
@@ -474,8 +476,9 @@
     <div class="unstick-trigger block"></div>
     <div id="customize-anchor" class="anchor"></div>
     <div id="order" class="anchor"></div>
-
-    @if(!empty($promoVersion))
+    @hasSection('final')
+        @yield('final')
+    @elseif(!empty($promoVersion))
 
         @php
             $bonuses = [

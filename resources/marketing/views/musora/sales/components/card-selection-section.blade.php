@@ -102,7 +102,7 @@
                     <p class="text-sm mb-1">Join a community of {{ number_format(Prices::$students) }} students.</p>
                     <p class="text-sm mb-1">{{ $fifthPoint }}</p>
                     <p class="text-sm mb-2">90-day money back guarantee.</p>
-                    <a class="cursor-pointer" x-on:click="plusMembershipSelected = true"><p class="text-sm text-{{ $brand }}">You can add {{ $songs }}+ popular songs<br> for just $40/year. <u>Click Here.</u></p></a>
+                    <a class="cursor-pointer" x-on:click="plusMembershipSelected = true"><p class="text-sm text-{{ $theme }}">You can add {{ $songs }}+ popular songs<br> for just $40/year. <u>Click Here.</u></p></a>
                 </div>
             </div>
             <div class="w-full md:w-1/2 px-2 md:px-3 mb-4 md:mb-0 relative">
@@ -119,7 +119,7 @@
                     <p class="text-sm mb-1">Join a community of {{ number_format(Prices::$students) }} students.</p>
                     <p class="text-sm mb-1">{{ $fifthPoint }}</p>
                     <p class="text-sm mb-2">90-day money back guarantee.</p>
-                    <a class="cursor-pointer" x-on:click="plusMembershipSelected = true"><p class="text-sm text-{{ $brand }}">You can add {{ $songs }}+ popular songs<br> for just $40/year. <u>Click Here.</u></p></a>
+                    <a class="cursor-pointer" x-on:click="plusMembershipSelected = true"><p class="text-sm text-{{ $theme }}">You can add {{ $songs }}+ popular songs<br> for just $40/year. <u>Click Here.</u></p></a>
                 </div>
             </div>
         </div>

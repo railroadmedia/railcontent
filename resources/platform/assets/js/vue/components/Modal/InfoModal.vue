@@ -49,8 +49,6 @@ onUnmounted(() => {
         tw-w-full
         tw-items-center
         tw-justify-center
-        tw-px-[16px]
-        md:tw-px-[28px]
       "
     >
       <div
@@ -61,6 +59,8 @@ onUnmounted(() => {
           tw-py-[30px]
           tw-flex
           tw-flex-col
+          tw-mx-[16px]
+          md:tw-mx-[28px]
         "
         :class="classOverride ? classOverride : 'tw-border-[#223F57] tw-border-[1px] tw-bg-white dark:tw-bg-[#081825]'"
       >
@@ -72,11 +72,10 @@ onUnmounted(() => {
             tw-text-white
             tw-mb-[24px]
             tw-px-[40px]
-            tw-relative
           "
         >
-          <h3 class="tw-text-center tw-w-full tw-text-black dark:tw-text-white">{{ title }}</h3>
-          <button @click="onClose" class="tw-absolute tw-right-[24px] tw-top-0 tw-text-[#E5E5E5] hover:tw-text-black dark:hover:tw-text-white">
+          <h3 class="tw-text-center tw-w-full tw-text-black dark:tw-text-white tw-font-bold">{{ title }}</h3>
+          <button @click="onClose" class="tw-absolute tw-right-[2px] tw-top-[12px] lg:tw-top-[24px] lg:tw-right-[24px] tw-text-[#E5E5E5] hover:tw-text-black dark:hover:tw-text-white">
             <XIcon class="tw-h-[30px] tw-w-[30px]" />
           </button>
         </div>

@@ -357,6 +357,14 @@ header {
 .dropdown {
   border-color: #fff;
 
+  .bg-singeo {
+    background: transparent;
+    min-width: 32px;
+    @include tablet {
+      min-width: 83px;
+    }
+  }
+
   .description {
     height: 0;
     max-height: 0;

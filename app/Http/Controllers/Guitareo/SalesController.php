@@ -81,25 +81,20 @@ class SalesController extends BaseController
 
     public function home()
     {
-        return view('guitareo.sales.subscription', ['brand' => 'guitareo']);
+        return view('guitareo.sales.subscription', ['theme' => 'guitareo']);
     }
     public function promo()
     {
-        return view('guitareo.sales.subscription', ['brand' => 'guitareo', 'promoVersion' => 'true']);
+        return view('guitareo.sales.subscription', ['theme' => 'guitareo', 'promoVersion' => 'true']);
     }
     public function choosePlan()
     {
-        return view('guitareo.sales.choose-plan', ['brand' => 'guitareo']);
+        return view('guitareo.sales.choose-plan', ['theme' => 'guitareo']);
     }
 
     public function membership()
     {
         return view('guitareo.sales.standard');
-    }
-
-    public function membershipStudents()
-    {
-        return view('guitareo.sales.student-only');
     }
 
     public function trial()
@@ -170,16 +165,16 @@ class SalesController extends BaseController
 
     public function songs()
     {
-        return view('guitareo.sales.features.songs', ['brand' => 'guitareo', 'page' => 'songs']);
+        return view('guitareo.sales.features.songs', ['theme' => 'guitareo', 'page' => 'songs']);
     }
 
     public function coaches()
     {
-        return view('guitareo.sales.features.coaches', ['brand' => 'guitareo', 'page' => 'coaches']);
+        return view('guitareo.sales.features.coaches', ['theme' => 'guitareo', 'page' => 'coaches']);
     }
 
     public function method()
     {
-        return view('guitareo.sales.features.method', ['brand' => 'guitareo', 'page' => 'method']);
+        return view('guitareo.sales.features.method', ['theme' => 'guitareo', 'page' => 'method']);
     }
 }

@@ -44,7 +44,7 @@ const handleArtistName = (value) => {
 </script>
 <template>
     <InfoModal title="Request A Song" modalId="request-a-song-modal" @onClose="emit('onCloseModal')"
-        :selfContained="true" classOverride="tw-bg-white dark:tw-bg-[#081825] tw-max-w-[575px]">
+        :selfContained="true" classOverride="tw-bg-white dark:tw-bg-[#081825] tw-max-w-[575px] tw-border-[1px] dark:tw-border-[#445F74]">
         <div class="tw-px-[25px] tw-bg-white dark:tw-bg-[#081825]">
             <form accept-charset="UTF-8" method="POST" @submit.prevent="submitForm">
                 <div class="tw-flex tw-flex-col tw-mb-[20px]">
@@ -58,8 +58,13 @@ const handleArtistName = (value) => {
                         placeholder="Enter the artist name..." :inputErrors="[]" @onChange="handleArtistName" />
                 </div>
                 <div class="tw-flex tw-flex-col tw-justify-center tw-items-center">
-                    <button :disabled="!formData.song_name.length || !formData.artist_name.length" class="tw-btn-primary tw-max-w-[351px]" :class="`tw-bg-${brand}`" type="submit">SUBMIT SONG
-                        REQUEST</button>
+                    <button
+                        :disabled="!formData.song_name.length || !formData.artist_name.length" type="submit"
+                        class="tw-mb-[20px] tw-mx-4"
+                        :class="!formData.song_name.length || !formData.artist_name.length ? 'tw-btn-secondary tw-text-[#445F74]' : 'tw-btn-primary dark:tw-bg-white tw-bg-black dark:tw-text-[#00101D] tw-text-white'"
+                    >
+                        SUBMIT SONG REQUEST
+                    </button>
                 </div>
             </form>
         </div>
