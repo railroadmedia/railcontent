@@ -192,4 +192,6 @@ Route::domain('{pianoteDomain}')
                 ]);
         }
     );
+
+    Route::get('/leadgen-lesson-test/{slug}', [LeadGenController::class, 'test']);
 });

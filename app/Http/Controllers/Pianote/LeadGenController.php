@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Pianote;
 
+use App\Models\Leadgen;
+use App\Models\LeadgenLesson;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -323,5 +325,27 @@ class LeadGenController extends BaseController
         }
 
         throw new NotFoundHttpException();
+    }
+
+    public function test($root, $slug)
+    {
+        $currentLesson = LeadgenLesson::where('slug', $slug)->first();
+        $lessons = LeadgenLesson::where('leadgen_id', $currentLesson->leadgen_id)->get();
+        $currentLessonIndex = $lessons->search(function($item) use($slug){
+            return $item['slug'] === $slug;
+        });
+
+        $prevLesson = $currentLessonIndex === 0 ? null : $lessons[$currentLessonIndex - 1];
+        $nextLesson = $currentLessonIndex === count($lessons) - 1 ? null : $lessons[$currentLessonIndex + 1];
+
+        $leadgen = Leadgen::where('id', $currentLesson->leadgen_id)->first();
+
+        return view('_partials.layout.global-lead-gen-lesson-layout', [
+            'theme' => 'pianote',
+            'leadgen' => $leadgen,
+            'prevLesson' => $prevLesson,
+            'currentLesson' => $currentLesson,
+            'nextLesson' => $nextLesson,
+        ]);
     }
 }
