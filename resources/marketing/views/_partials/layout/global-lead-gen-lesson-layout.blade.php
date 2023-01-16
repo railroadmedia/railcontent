@@ -1,8 +1,3 @@
-<?php
-    $lessons = $leadgen->lessons;
-    $currentLesson =
-?>
-
 @extends('drumeo._partials.global-layout')
 
 @section('global-head')
@@ -20,23 +15,22 @@
 @stop
 
 @section('global-body')
-
     @include("drumeo.sales.partials._nav")
 
     <div class="overflow-hidden text-white px-3 py-5 sm:py-7" style="background-color:#000a1e;">
         <div class="container mx-auto clearfix" style="max-width:940px">
             <div class="text-center sm:px-3">
                 <div class="video-row relative mb-4 sm:mb-7">
-                    @hasSection('prev-thumb')
-                        <img class="hidden lg:block absolute top-1/2 opacity-30" style="transform: translate(-100%, -50%); left: -5%;width: @hasSection('thumb-width') @yield('thumb-width') @else 80% @endif;" src="https://cdn.musora.com/image/fetch/w_800,q_auto:best/@yield('prev-thumb')" alt="pre-thumb">
+                    @if(!is_null($prevLesson))
+                        <img class="hidden lg:block absolute top-1/2 opacity-30" style="transform: translate(-100%, -50%); left: -5%;width: @hasSection('thumb-width') @yield('thumb-width') @else 80% @endif;" src="https://cdn.musora.com/image/fetch/w_800,q_auto:best/{{ $prevLesson->thumbnail }}" alt="pre-thumb">
                     @endif
 
                     <div class="aspect-16:9 w-full relative">
-                        <iframe class="absolute w-full h-full" src="@yield('video')" frameborder="0" allowfullscreen></iframe>
+                        <iframe class="absolute w-full h-full" src="{{ $currentLesson->video_src }}" frameborder="0" allowfullscreen></iframe>
                     </div>
 
-                    @hasSection('next-thumb')
-                        <img class="hidden lg:block absolute top-1/2 opacity-30" style="transform: translateY(-50%);left: 105%;width: @hasSection('thumb-width') @yield('thumb-width') @else 80% @endif;" src="https://cdn.musora.com/image/fetch/w_800,q_auto:best/@yield('next-thumb')" alt="next-thumb">
+                    @if(!is_null($nextLesson))
+                        <img class="hidden lg:block absolute top-1/2 opacity-30" style="transform: translateY(-50%);left: 105%;width: @hasSection('thumb-width') @yield('thumb-width') @else 80% @endif;" src="https://cdn.musora.com/image/fetch/w_800,q_auto:best/{{ $nextLesson->thumbnail }}" alt="next-thumb">
                     @endif
                 </div>
             </div>
@@ -50,36 +44,36 @@
             </div>
             <div class="text-center mt-3 sm:mt-7 clearfix lesson-buttons flex justify-between">
                 <div class="mb-2 sm:mb-0 w-1/2 sm:w-1/3 px-2 md:px-3">
-{{--                    @hasSection('previous')--}}
-                        <a class="button block bg-{{ $theme }} hover:brightness-110 cursor-pointer" href="@yield('previous')">
+                    @if(!is_null($prevLesson))
+                        <a class="button block bg-{{ $theme }} hover:brightness-110 cursor-pointer" href="{{ $prevLesson->slug }}">
                             <i class="fas fa-chevron-left"></i> @hasSection('prev-text') @yield('prev-text') @else Prev @endif
                         </a>
-{{--                    @else--}}
-{{--                        <span class="hidden sm:inline">&nbsp;</span>--}}
-{{--                    @endif--}}
+                    @else
+                        <span class="hidden sm:inline">&nbsp;</span>
+                    @endif
                 </div>
 
                 <div class="complete-lesson mb-2 sm:mb-0 w-full sm:w-1/3 px-2 md:px-3 hidden sm:block next-lesson-button">
-{{--                    @hasSection('lesson-index')--}}
+                    @hasSection('lesson-index')
                         <a class="button block bg-{{ $theme }} hover:brightness-110 cursor-pointer" href="@yield('lesson-index')">
                             <i class="fas fa-chevron-up"></i> Lesson Index
                         </a>
-{{--                    @endif--}}
+                    @endif
                 </div>
                 <div class="w-1/2 sm:w-1/3 px-2 md:px-3 next-lesson-button">
-{{--                    @hasSection('next')--}}
-                        <a class="button block bg-{{ $theme }} hover:brightness-110 cursor-pointer" href="@yield('next')">
+                    @if(!is_null($nextLesson))
+                        <a class="button block bg-{{ $theme }} hover:brightness-110 cursor-pointer" href="{{ $nextLesson->slug }}">
                             @hasSection('next-text') @yield('next-text') @else Next @endif <i class="fas fa-chevron-right"></i>
                         </a>
-{{--                    @else--}}
-{{--                        <span class="hidden sm:inline">&nbsp;</span>--}}
-{{--                    @endif--}}
+                    @else
+                        <span class="hidden sm:inline">&nbsp;</span>
+                    @endif
                 </div>
             </div>
         </div>
     </div>
 
-    @hasSection ('assets')
+    @if(count($currentLesson->assets) > 0)
         <div class="px-3 py-6 sm:py-10">
             <div class="container mx-auto clearfix" style="max-width:920px">
                 <div class="text-left lesson-text">
