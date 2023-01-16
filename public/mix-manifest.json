@@ -1,10 +1,10 @@
 {
-    "/platform/js/app.js": "/platform/js/app.js?id=b9516735212a76a08b3a5d7747d0dbec",
+    "/platform/js/app.js": "/platform/js/app.js?id=b38ab22655f0984ffea4ac8f17bdbb1f",
     "/platform/js/profile.js": "/platform/js/profile.js?id=c7e869f012d1252699ff65de1e5e0547",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=24098ec7990ff98a565fd1e4693746ed",
     "/platform/js/books.js": "/platform/js/books.js?id=d4fa837307a14d7ee0ce9065b5e5e8e0",
     "/platform/js/manifest.js": "/platform/js/manifest.js?id=0db21d1e20873847d0d95a0fb234fe59",
-    "/platform/js/membership-update-.js": "/platform/js/membership-update-.js?id=3fce617a18cb13ef3c8dd9178e20abbf",
+    "/platform/js/membership-update-.js": "/platform/js/membership-update-.js?id=3f734c0c92847a6bb20df3948d208065",
     "/platform/js/song.js": "/platform/js/song.js?id=71946a532c7649933de94e9d0198c546",
     "/platform/js/song-request.js": "/platform/js/song-request.js?id=559160bdebb1f2f3ff74379eaf98de32",
     "/platform/js/piano-backing-tracks.js": "/platform/js/piano-backing-tracks.js?id=7fbf8dfd123a4027cfa05515f7665d82",
@@ -29,6 +29,6 @@
     "/marketing/css/vuesora.css": "/marketing/css/vuesora.css?id=7535f0fd6b7b50898c6d1f0a209f96d2",
     "/platform/css/app.css": "/platform/css/app.css?id=cbfe735849b5b4377494d8ebfb7c3d42",
     "/platform/js/vendor~onboarding.js": "/platform/js/vendor~onboarding.js?id=56868ea369faf90d0978a204535ee2e6",
-    "/marketing/css/app.css": "/marketing/css/app.css?id=88e5e005c160490f9409c56e85fe7383",
+    "/marketing/css/app.css": "/marketing/css/app.css?id=935d39b006fa8cacd3e47f2b524c3c2c",
     "/platform/js/vendor.js": "/platform/js/vendor.js?id=05dd83ebb4f3d065d57fc2d6da2069b0"
 }
