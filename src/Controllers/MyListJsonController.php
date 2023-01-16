@@ -7,6 +7,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Arr;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Repositories\ContentRepository;
+use Railroad\Railcontent\Requests\PlaylistCreateRequest;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentHierarchyService;
 use Railroad\Railcontent\Services\ContentService;
@@ -221,7 +222,7 @@ class MyListJsonController extends Controller
      * @param Request $request
      * @return array
      */
-    public function createPlaylist(Request $request)
+    public function createPlaylist(PlaylistCreateRequest $request)
     {
         $playlist = $this->userPlaylistsService->create([
                                                             'user_id' => auth()->id(),
