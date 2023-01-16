@@ -574,7 +574,7 @@ class ProfileSettingsPagesController extends BaseController
 
         $currentTier = $this->upgradeService->getCurrentMembershipTier()->value;
         $proratedUpgradeCost = $this->upgradeService->getProratedUpgradeCost();
-        $showManageSongsButton = ($isLifetime && $currentTier == MembershipTier::Basic)
+        $showManageSongsButton = ($isLifetime && $currentTier == MembershipTier::Basic->value)
             || $this->upgradeService->getCurrentSubscription() != null;
 
         return view(
@@ -1468,8 +1468,9 @@ class ProfileSettingsPagesController extends BaseController
             }
             $expired = $userProduct->getExpirationDate() ? $userProduct->getExpirationDate()->lt(Carbon::now()) : null;
 
-            $isAllContentAccessProduct = $userProduct->getProduct()->getDigitalAccessType() == 'all content access';
-            if ($isAllContentAccessProduct) {
+            $isMembershipProduct = $userProduct->getProduct()->getDigitalAccessType() == 'all content access' ||
+                $userProduct->getProduct()->getDigitalAccessType() == 'basic content access';
+            if ($isMembershipProduct) {
                 $allContentAccessProduct = $userProduct;
                 $paused = $userProduct->getStartDate() && $userProduct->getStartDate()->gt(Carbon::now());
                 if (!$expired) {
