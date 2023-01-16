@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Drumeo;
 
 use App\Models\Leadgen;
+use App\Models\LeadgenLesson;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -555,9 +556,23 @@ class LeadGenController extends BaseController
 
     public function test($root, $slug)
     {
-        $leadgen = Leadgen::where('brand_id', 1)->first();
-        $lessons = $leadgen->lessons;
+        $currentLesson = LeadgenLesson::where('slug', $slug)->first();
+        $lessons = LeadgenLesson::where('leadgen_id', $currentLesson->leadgen_id)->get();
+        $currentLessonIndex = $lessons->search(function($item) use($slug){
+            return $item['slug'] === $slug;
+        });
 
-        return view('_partials.layout.global-lead-gen-lesson-layout', ['theme' => 'drumeo', 'leadgen' => $leadgen]);
+        $prevLesson = $currentLessonIndex === 0 ? null : $lessons[$currentLessonIndex - 1];
+        $nextLesson = $currentLessonIndex === count($lessons) - 1 ? null : $lessons[$currentLessonIndex + 1];
+
+        $leadgen = Leadgen::where('id', $currentLesson->leadgen_id)->first();
+
+        return view('_partials.layout.global-lead-gen-lesson-layout', [
+            'theme' => 'drumeo',
+            'leadgen' => $leadgen,
+            'prevLesson' => $prevLesson,
+            'currentLesson' => $currentLesson,
+            'nextLesson' => $nextLesson,
+        ]);
     }
 }
