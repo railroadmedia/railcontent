@@ -5,14 +5,14 @@
    target="{{ !empty($externalLink)? '_blank' : '_parent' }}" rel="{{ !empty($externalLink)? 'noopener' : '' }}">
     <div class="nav-link">
         @if(!empty($linkIcon))
-            <i class="{{ $linkIcon }}"></i>
+            <i class="{{ $linkIcon }} text-{{ $theme }}"></i>
         @endif
         {!! $linkName !!}
 
         @if(!empty($hasDropdown))
             <div class="drop-down-arrow {{ !empty($defaultOpen)? 'active' : '' }}">
-                <span></span>
-                <span></span>
+                <span class="bg-{{ $theme }}"></span>
+                <span class="bg-{{ $theme }}"></span>
             </div>
         @endif
     </div>

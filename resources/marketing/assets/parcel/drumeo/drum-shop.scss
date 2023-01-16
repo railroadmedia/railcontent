@@ -1030,7 +1030,6 @@ img {
       position: relative;
       padding-left: 7px;
       padding-right: 7px;
-      max-width: 320px;
       width: 100%;
       margin: 0 auto 15px;
       text-align: left;
@@ -1038,7 +1037,6 @@ img {
       perspective: 1000px;
       height: 340px;
       @include tablet {
-        max-width: none;
         width: 50%;
         height: 395px;
       }
@@ -1366,9 +1364,9 @@ img {
             color: #FFF;
             margin: 0 auto;
 
-            &:hover {
-              background: lighten($drumeoBlue, 10%);
-            }
+            //&:hover {
+            //  background: lighten($drumeoBlue, 10%);
+            //}
           }
 
           &.amazon {

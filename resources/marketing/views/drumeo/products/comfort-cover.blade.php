@@ -8,6 +8,8 @@
     <meta property="og:title" content="Comfort Cover">
     <meta property="og:description" content="Upgrade any round drum throne in seconds.">
     <meta property="og:url" content="https://www.drumeo.com/drumshop/comfort-cover/">
+
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
 @stop()
 
 @section('head')
@@ -372,22 +374,25 @@
         </div>
     </section>
 
-    <section class="faqs text-center">
+    <section class="py-8 md:py-15 lg:py-16 px-4 lg:px-0 text-center">
         <div class="noise-wrap">
             <div class="row">
-                <h2><strong>Still have questions?</strong></h2>
+                <h2 class="mb-10"><strong>Still have questions?</strong></h2>
 
-                @include('drumeo.products.partials.question-dropdown', [
-                "question" => "Does the Comfort Cover fit a tractor style seat?",
-                "answer" => "No. The Comfort Cover slides over any <strong>round</strong> drum throne, but unfortunately no other shapes at this time. ",
+                @include('_partials.components.question-dropdown', [
+                "num" => "?",
+                "title" => "Does the Comfort Cover fit a tractor style seat?",
+                "desc" => "No. The Comfort Cover slides over any <strong>round</strong> drum throne, but unfortunately no other shapes at this time. ",
                 ])
-                @include('drumeo.products.partials.question-dropdown', [
-                "question" => "Can I get a Comfort Cover shipped to [ <em>insert country other than USA</em> ]?",
-                "answer" => "Yes. The Comfort Cover is changing the world one cushier tushy at a time. International shipping is available with varying rates by region. You will see your total shipping charge listed upon checkout.",
+                @include('_partials.components.question-dropdown', [
+                "num" => "?",
+                "title" => "Can I get a Comfort Cover shipped to [ <em>insert country other than USA</em> ]?",
+                "desc" => "Yes. The Comfort Cover is changing the world one cushier tushy at a time. International shipping is available with varying rates by region. You will see your total shipping charge listed upon checkout.",
                 ])
-                @include('drumeo.products.partials.question-dropdown', [
-                "question" => "Will the Comfort Cover replace my existing throne?",
-                "answer" => "No! The Comfort Cover upgrades your existing round drum throne to a more comfortable drumming experience. Just slide it over top and start playing -- you’re ready to go in seconds.",
+                @include('_partials.components.question-dropdown', [
+                "num" => "?",
+                "title" => "Will the Comfort Cover replace my existing throne?",
+                "desc" => "No! The Comfort Cover upgrades your existing round drum throne to a more comfortable drumming experience. Just slide it over top and start playing -- you’re ready to go in seconds.",
                 ])
             </div>
         </div>
