@@ -49,52 +49,50 @@ class LeadgenLessonAssetResolver implements ResolverInterface
      */
     public function set($model, $attribute, $groups)
     {
-        LeadgenLesson::saved(function($model) use($groups){
-           $assets = $groups->map(function($group, $index){
-             return [
-                 'title' => $group->getAttributes()['title'],
-                 'src' => $group->getAttributes()['src'],
-                 'soundslice' => $group->getAttributes()['soundslice'],
-                 'id' => !empty($group->getAttributes()['id']) ? $group->getAttributes()['id'] : null,
-             ];
-           });
+       $assets = $groups->map(function($group, $index){
+         return [
+             'title' => $group->getAttributes()['title'],
+             'src' => $group->getAttributes()['src'],
+             'soundslice' => $group->getAttributes()['soundslice'],
+             'id' => !empty($group->getAttributes()['id']) ? $group->getAttributes()['id'] : null,
+         ];
+       });
 
-           foreach($assets as $asset){
-               //insert
-               if(is_null($asset['id'])){
-                   $addAsset = new LeadgenLessonAsset();
-                   $addAsset->leadgen_lesson_id = $model['id'];
-                   $addAsset->title = $asset['title'];
-                   $addAsset->src = $asset['src'];
-                   $addAsset->soundslice = $asset['soundslice'];
-                   $addAsset->save();
-                   $updatedIds[] = $addAsset->id;
-               }
-               //update
-               else {
-                   $dbAsset = LeadgenLessonAsset::find($asset['id']);
-
-                   if($dbAsset['title'] !== $asset['title']){
-                       $dbAsset->title = $asset['title'];
-                   }
-
-                   if($dbAsset['src'] !== $asset['src']){
-                       $dbAsset->src = $asset['src'];
-                   }
-
-                   if($dbAsset['soundslice'] !== $asset['soundslice']){
-                       $dbAsset->soundslice = $asset['soundslice'];
-                   }
-
-                   $dbAsset->save();
-                   $updatedIds[] = $asset['id'];
-               }
+       foreach($assets as $asset){
+           //insert
+           if(is_null($asset['id'])){
+               $addAsset = new LeadgenLessonAsset();
+               $addAsset->leadgen_lesson_id = $model['id'];
+               $addAsset->title = $asset['title'];
+               $addAsset->src = $asset['src'];
+               $addAsset->soundslice = $asset['soundslice'];
+               $addAsset->save();
+               $updatedIds[] = $addAsset->id;
            }
+           //update
+           else {
+               $dbAsset = LeadgenLessonAsset::find($asset['id']);
 
-           //delete
-            if(isset($updatedIds)){
-                $deleteAssets = LeadgenLessonAsset::where('leadgen_lesson_id', $model['id'])->whereNotIn('id', $updatedIds)->delete();
-            }
-        });
+               if($dbAsset['title'] !== $asset['title']){
+                   $dbAsset->title = $asset['title'];
+               }
+
+               if($dbAsset['src'] !== $asset['src']){
+                   $dbAsset->src = $asset['src'];
+               }
+
+               if($dbAsset['soundslice'] !== $asset['soundslice']){
+                   $dbAsset->soundslice = $asset['soundslice'];
+               }
+
+               $dbAsset->save();
+               $updatedIds[] = $asset['id'];
+           }
+       }
+
+       //delete
+        if(isset($updatedIds)){
+            $deleteAssets = LeadgenLessonAsset::where('leadgen_lesson_id', $model['id'])->whereNotIn('id', $updatedIds)->delete();
+        }
     }
 }
