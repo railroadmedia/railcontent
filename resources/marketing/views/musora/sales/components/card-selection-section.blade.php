@@ -2,9 +2,9 @@
     x-data="{ plusMembershipSelected: true }"
 >
     <div class="container max-w-6xl mx-auto">
-        <h1><strong>Your first week<br class="inline sm:hidden"> is free.</strong></h1>
+        <h1><strong>Your first @if(empty($month)) week @else month @endif <br class="inline sm:hidden"> is free.</strong></h1>
         <h5 class="mt-2 md:mt-4">Choose the plan that will continue on <br class="inline lg:hidden">
-            {{ Carbon\Carbon::now()->addDays(7)->format('F jS') }} (after your free trial). Cancel anytime.</h5>
+            @if(empty($month)) {{ Carbon\Carbon::now()->addDays(7)->format('F jS') }} @else {{ Carbon\Carbon::now()->addDays(30)->format('F jS') }} @endif  (after your free trial). Cancel anytime.</h5>
 
         <div class="flex items-end justify-center my-5">
             <div class="px-1 sm:px-2">
