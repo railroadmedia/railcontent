@@ -10,6 +10,7 @@
     <meta property="og:image" content="https://musora-center.s3.amazonaws.com/homepage/2021/share-image.jpg">
     <!-- Scripts -->
     <script src="https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit" async defer></script>
+    <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
 @endsection
 
 <!-- Main -->
@@ -17,7 +18,7 @@
 
 @section('layout-body')
     <section class="py-24 md:py-40 text-white text-center relative">
-        <img 
+        <img
             src="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/header-about.jpg"
             class="absolute object-cover w-full h-full top-0 left-0 z-[-2] transition-opacity opacity-0"
             loading="lazy"
@@ -39,7 +40,7 @@
 
     <section class="bg-[#000c17]">
         <div class="max-w-3xl mx-auto px-4 lg:px-8" id="contactPageApp">
-            <contact-email-form-marketing 
+            <contact-email-form-marketing
                 brand="drumeo"
                 captchakey="6LfwMZ4dAAAAALEGLsEUwAqrJLLnec_sSbl72Oqx"
                 email-subject="Support Request From Musora"
@@ -52,7 +53,7 @@
             />
         </div>
     </section>
-    
+
     <div class="pt-16 text-white bg-[#000c17]">
         <div class="container mx-auto text-center max-w-3xl">
             <div class="flex flex-wrap items-center">
@@ -80,13 +81,11 @@
     @include('musora._partials._lets-chat', [
         'onContact' => true
     ])
+@endsection
 
-    @section('layout-scripts')
-        @parent
-        <script src="{{ mix('platform/js/manifest.js') }}"></script>
-        <script src="{{ mix('platform/js/vendor.js') }}"></script>
-        <script src="{{ mix('platform/js/app.js') }}"></script>
-    @endsection
-
-@stop
-
+@section('layout-scripts')
+    @parent
+    <script src="{{ mix('platform/js/manifest.js') }}"></script>
+    <script src="{{ mix('platform/js/vendor.js') }}"></script>
+    <script src="{{ mix('platform/js/app.js') }}"></script>
+@endsection

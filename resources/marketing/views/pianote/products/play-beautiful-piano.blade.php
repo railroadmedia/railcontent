@@ -10,10 +10,10 @@
     <meta property="og:image" content="https://pianote.s3.amazonaws.com/products/play-beautiful-piano/share-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
+    @include('_partials.layout._tailwindcdn')
     <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/pianote/play-beautiful-piano.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/css/pianote/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/css/animate.css') }}" rel="stylesheet">
     <style>
         body.modal-open {
@@ -462,5 +462,5 @@
     <script src="{{ mix('/platform/js/vendor.js') }}"></script>
     <script src="{{ mix('/platform/js/app.js') }}"></script>
 
-    @include('pianote._partials.inspectlet')
+
 @stop

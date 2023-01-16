@@ -6,9 +6,9 @@
     <title>Success! | Guitareo</title>
     <meta property="og:image" content="https://guitareo.s3.amazonaws.com/sales/2023/share-image-guitareo.jpg" style="display: none;">
     @include('_partials.layout.favicons.guitareo-favicons')
-    @include('guitareo._partials._fonts')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link href="{{ asset('/marketing/css/guitareo/tailwind-helpers.css') }}" rel="stylesheet">
+    @include('_partials.layout._fonts')
+    @include('_partials.layout._tailwindcdn')
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <style>
         body {
             text-align:center;

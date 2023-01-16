@@ -4,7 +4,6 @@ namespace App\Console\Commands;
 
 use Carbon\Carbon;
 use Illuminate\Console\Command;
-use Illuminate\Database\DatabaseManager;
 use Illuminate\Support\Facades\DB;
 use Railroad\Railcontent\Events\ContentCreated;
 use Railroad\Railcontent\Helpers\ContentHelper;
@@ -30,9 +29,6 @@ class CreateSongsDecember2022 extends Command
 
     /**
      * Create a new command instance.
-     *
-     * @param DatabaseManager $databaseManager
-     * @param ContentRepository $contentRepository
      */
     public function __construct()
     {
@@ -47,16 +43,11 @@ class CreateSongsDecember2022 extends Command
     public function handle(ContentRepository $contentRepository)
     {
         $this->info('Starting CreateSongsDecember2022...');
-
-        $csv = array_map(function($v){return str_getcsv($v, ";");}, file(base_path('december_30_songs_import.csv')));
-//        $csv = array_map(function($v){return str_getcsv($v, ";");}, file(base_path('december_29_songs_import.csv')));
-//        $csv = array_map(function($v){return str_getcsv($v, ";");}, file(base_path('december_28_songs_import.csv')));
-//        $csv = array_map(function($v){return str_getcsv($v, ";");}, file(base_path('december_19_songs_import_semi.csv')));
-
+        $csv = array_map(function($v){return str_getcsv($v, ";");}, file(base_path('csv_songs_imports/january_5_drumless_songs_update.csv')));
         unset($csv[0]);
 
         // to be updated in case the csv has more than 2000 songs
-        $csv = array_slice($csv, 0, 2000);
+        $csv = array_slice($csv, 0, 4000);
 
         foreach ($csv as $rowIndex => $row) {
             $brand = lcfirst($row[0]);
@@ -222,7 +213,6 @@ class CreateSongsDecember2022 extends Command
                 );
             }
 
-            // todo: uncomment once we have proper pdfs links
             // pdf download
             if ($brand == 'guitareo') {
                 $pdfUrlPrefix = 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/pdfs/guitareo/';

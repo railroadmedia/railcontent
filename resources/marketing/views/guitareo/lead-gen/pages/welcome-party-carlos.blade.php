@@ -10,9 +10,9 @@
     <meta property="og:image" content="https://cdn.musora.com/image/fetch/w_1400,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/welcome-party-carlos.jpg"/>
     <meta property="og:url" content="https://www.guitareo.com/welcome-party-carlos/">
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    @include('_partials.layout._tailwindcdn')
     <link href="{{ asset('/tailwindcss/tailwind.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('/marketing/css/guitareo/tailwind-helpers.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}">
 
     <style>
@@ -112,7 +112,9 @@
         </div>
     </div>
 
-    @include("guitareo.sales.partials._footer")
+    @include("guitareo.sales.partials._footer", [
+            "minimal" => true
+        ])
 @stop
 
 @section('scripts')

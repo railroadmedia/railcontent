@@ -14,8 +14,8 @@
 
 @section('styles')
     @parent
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link rel="stylesheet" href="{{ asset('/marketing/css/guitareo/tailwind-helpers.css') }}">
+    @include('_partials.layout._tailwindcdn')
+    <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}">
     <link href="{{ asset('/marketing/parcel/guitareo/sales-page.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}" rel="stylesheet">
 @stop()
@@ -307,7 +307,7 @@
 @section('scripts')
     @parent
     <script src="{{ asset('/marketing/js/modal.js') }}"></script>
-    <script src="{{ asset('marketing/parcel/drumeo/navigation-sales.js') }}"></script>
+    <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $(document).foundation();

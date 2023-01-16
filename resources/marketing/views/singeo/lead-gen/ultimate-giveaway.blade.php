@@ -10,8 +10,8 @@
     <meta property="og:url" content="https://www.singeo.com/{{ Request::path() }}">
     <meta property="og:image" content="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/giveaway/ultimate/header_bg.jpg" style="display: none;">
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('/assets/css/tailwind-helpers.css') }}">
+    @include('_partials.layout._tailwindcdn')
+    <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}">
     <link href="{{ asset('/assets/marketing/nav-footer.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/assets/marketing/lead-gen.css') }}">
 
@@ -198,7 +198,6 @@
         <div class="container relative z-10 mx-auto max-w-5xl md:mt-0">
             <div class="flex flex-wrap">
                 <div class="w-full md:w-5/12 lg:w-1/2 pt-48 sm:pt-96 sm:order-1 relative">
-                    {{--<i class="fas fa-play play-button absolute left-1/2 top-3/4 transform translate--1/2 autoplay-video" data-open="trailer"></i>--}}
                 </div>
                 <div class="w-full md:w-7/12 lg:w-1/2 sm:text-left">
                     <img class="inline-block sm:hidden h-32  lazyload" data-src="https://cdn.musora.com/image/fetch/w_650,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/giveaway/ultimate/logo_center_align.svg" alt="title image">
@@ -382,7 +381,9 @@
     @endforeach
 
 
-    @include("singeo.sales.partials._footer")
+    @include("singeo.sales.partials._footer", [
+            "minimal" => true
+        ])
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

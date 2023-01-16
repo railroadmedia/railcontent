@@ -9,11 +9,11 @@
     <meta property="og:url" content="https://www.singeo.com/shop/">
 
 
-    <link rel="stylesheet" href="{{ asset('/marketing/css/singeo/tailwind-helpers.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}">
     <link href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}" rel="stylesheet">
 
     <link href="{{ asset('/marketing/parcel/singeo/shop.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
+    @include('_partials.layout._tailwindcdn')
 
     <link href="{{ asset('/marketing/css/vuesora.css') }}" rel="stylesheet">
 @stop
@@ -390,8 +390,8 @@
         });
     </script>
 
-    <script src="{{ asset('marketing/js/singeo/manifest.js') }}"></script>
-    <script src="{{ asset('marketing/js/singeo/vendor.js') }}"></script>
+    <script src="{{ asset('/marketing/js/singeo/manifest.js') }}"></script>
+    <script src="{{ asset('/marketing/js/singeo/vendor.js') }}"></script>
     <script src="{{ asset('/marketing/js/singeo/app.js') }}"></script>
     {{-- Platform --}}
     <script src="{{ mix('/platform/js/manifest.js') }}"></script>

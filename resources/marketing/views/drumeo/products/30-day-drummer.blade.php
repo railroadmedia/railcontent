@@ -9,9 +9,9 @@
     <meta property="og:image" content="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/og-image.png" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
-    @include('drumeo._partials._fonts')
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-    <link href="{{ asset('marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
+    @include('_partials.layout._fonts')
+    @include('_partials.layout._tailwindcdn')
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/30dd.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/css/animate.css') }}">
@@ -568,7 +568,7 @@
 {{--                        @if(is_current_user_a_member())--}}
 {{--                            <td class="rounded-b-xl"><strong>FREE</strong><br> for Drumeo<br class="inline lg:hidden"> Members</td>--}}
 {{--                        @else--}}
-{{--                            <td class="rounded-b-xl"><strong>${{ 97 }}</strong></td>--}}
+                            <td class="rounded-b-xl"><strong>${{ 97 }}</strong></td>
 {{--                        @endif--}}
                         <td class="rounded-bl-xl"><strong>$50-$100</strong><br> per lesson</td>
                         <td><strong>$89-$270+</strong><br>&nbsp;</td>
@@ -909,10 +909,10 @@
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 
-    <script src="{{ asset('marketing/js/drumeo/manifest.js') }}"></script>
-    <script src="{{ asset('marketing/js/drumeo/vendor.js') }}"></script>
-    <script src="{{ asset('marketing/js/drumeo/cart-sidebar.js') }}"></script>
-    <script src="{{ asset('marketing/js/drumeo/app.js') }}"></script>
+    <script src="{{ asset('/marketing/js/drumeo/manifest.js') }}"></script>
+    <script src="{{ asset('/marketing/js/drumeo/vendor.js') }}"></script>
+    <script src="{{ asset('/marketing/js/drumeo/cart-sidebar.js') }}"></script>
+    <script src="{{ asset('/marketing/js/drumeo/app.js') }}"></script>
 
 
     <script>

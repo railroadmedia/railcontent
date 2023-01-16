@@ -8,10 +8,10 @@
     <meta property="og:description" content="The ultimate guide to getting started on the drums and playing the songs you love.">
     <meta property="og:url" content="https://www.drumeo.com/new-drummers/">
 
-    @include('drumeo._partials._fonts')
+    @include('_partials.layout._fonts')
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
+    @include('_partials.layout._tailwindcdn')
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/ndsh.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"/>
@@ -29,11 +29,11 @@
                 padding: 0 20px;
             }
         }
-        .dropdowns .dropdown .bg-pred {
+        .dropdowns .dropdown .bg-pianote {
             min-width: 32px;
         }
         @media (min-width: 40em) {
-            .dropdowns .dropdown .bg-pred {
+            .dropdowns .dropdown .bg-pianote {
                 min-width: 83px;
             }
         }

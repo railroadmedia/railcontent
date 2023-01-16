@@ -10,8 +10,8 @@
     <meta name="description" content="Enter your email to get fresh lessons, interviews, and content delivered to your inbox every week!">
 
     <base target="_parent">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link rel="stylesheet" href="{{ asset('/marketing/css/guitareo/tailwind-helpers.css') }}">
+    @include('_partials.layout._tailwindcdn')
+    <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}">
     <style>
         body {
             height:100vh;
@@ -122,7 +122,7 @@
     </style>
 
     @include('_partials.layout.favicons.guitareo-favicons')
-    @include('guitareo._partials._fonts')
+    @include('_partials.layout._fonts')
 
     {!! \App\Analytics\Tracker::trackPageView() !!}
 

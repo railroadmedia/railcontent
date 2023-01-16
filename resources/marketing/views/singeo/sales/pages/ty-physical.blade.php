@@ -10,7 +10,7 @@
     <meta property="og:url" content="https://www.singeo.com/thank-you-physical" style="display: none;">
     <meta property="og:image" content="https://singeo.s3.amazonaws.com/sales/2022/og-image.jpg" style="display: none;">
 
-    <link rel="stylesheet" href="{{ asset('/marketing/css/singeo/tailwind-helpers.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}">
     <link href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}" rel="stylesheet">
 
     <style>
@@ -238,8 +238,6 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-
-    {!! inspectlet_embed_script() !!}
 
     @yield('scripts')
 @stop

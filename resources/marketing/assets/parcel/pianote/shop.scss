@@ -1,4 +1,4 @@
-@import "./_variables";
+@import "../_variables";
 
 
 h1 strong, h2 strong, h3 strong, h4 strong, h5 strong, h6 strong {
@@ -23,7 +23,7 @@ h1 {
     @include tablet {
         font-size: 36px;
     }
-    @include desktop {
+    @include desktopOld {
         font-size: 48px;
     }
 }
@@ -34,7 +34,7 @@ h2 {
     @include tablet {
         font-size: 30px;
     }
-    @include desktop {
+    @include desktopOld {
         font-size: 36px;
     }
 }
@@ -44,7 +44,7 @@ h3 {
     @include tablet {
         font-size: 24px;
     }
-    @include desktop {
+    @include desktopOld {
         font-size: 30px;
     }
 }
@@ -54,7 +54,7 @@ h4 {
     @include tablet {
         font-size: 20px;
     }
-    @include desktop {
+    @include desktopOld {
         font-size: 24px;
     }
 }
@@ -64,7 +64,7 @@ h5 {
     @include tablet {
         font-size: 18px;
     }
-    @include desktop {
+    @include desktopOld {
         font-size: 20px;
     }
 }
@@ -74,7 +74,7 @@ h6 {
     @include tablet {
         font-size: 16px;
     }
-    @include desktop {
+    @include desktopOld {
         font-size: 18px;
     }
 }
@@ -82,10 +82,10 @@ h6 {
 p, li {
     line-height: 1.6em;
     font-size: 15px;
-    @include desktop {
+    @include desktopOld {
         font-size: 16px;
     }
-    //@include desktop {
+    //@include desktopOld {
     //  font-size: 15px;
     //}
 }
@@ -189,7 +189,7 @@ img {
             @include tablet {
                 padding: 15px 30px;
             }
-            @include desktop {
+            @include desktopOld {
                 padding: 15px 50px;
             }
 
@@ -422,7 +422,7 @@ img {
     @include tablet {
         padding: 30px 15px;
     }
-    @include desktop {
+    @include desktopOld {
         padding: 40px 15px;
 
     }
@@ -431,7 +431,7 @@ img {
         width: 100%;
         max-width: 100%;
         margin: 0 auto;
-        @include desktop {
+        @include desktopOld {
             max-width: 1070px;
         }
     }
@@ -445,7 +445,7 @@ img {
             font-size: 14px;
             margin-top: 45px;
         }
-        @include desktop {
+        @include desktopOld {
             font-size: 22px;
             margin-top: 50px;
         }
@@ -457,7 +457,7 @@ img {
         @include tablet {
             max-width: 190px;
         }
-        @include desktop {
+        @include desktopOld {
             max-width: 210px;
         }
     }
@@ -482,7 +482,7 @@ img {
             font-size: 18px;
             padding: 13px 10%;
         }
-        @include desktop {
+        @include desktopOld {
             font-size: 21px;
         }
     }
@@ -493,7 +493,7 @@ img {
     @include tablet {
         padding: 30px 10px 0;
     }
-    @include desktop {
+    @include desktopOld {
         padding: 50px 20px 0;
     }
 
@@ -507,7 +507,7 @@ img {
         @include tablet {
             padding: 0 7px;
         }
-        @include desktop {
+        @include desktopOld {
             padding: 0 15px;
         }
 
@@ -545,7 +545,7 @@ img {
         @include tablet {
             font-size: 18px;
         }
-        @include desktop {
+        @include desktopOld {
             font-size: 21px;
             padding: 19px 12%;
         }
@@ -563,7 +563,7 @@ img {
                 font-size: 17px;
                 padding: 13px 9%;
             }
-            @include desktop {
+            @include desktopOld {
                 font-size: 21px;
             }
         }
@@ -591,7 +591,7 @@ img {
             border: 2px solid $pianoteRed;
             color: $pianoteRed;
             padding: 15px 25px;
-            @include desktop {
+            @include desktopOld {
                 padding: 17px 12%;
             }
 
@@ -633,7 +633,7 @@ img {
         @include tablet {
             padding: 52px 0;
         }
-        @include desktop {
+        @include desktopOld {
             padding: 56px 15px;
         }
 
@@ -648,7 +648,7 @@ img {
             @include tablet {
                 max-width: 100%;
             }
-            @include desktop {
+            @include desktopOld {
                 max-width: 1100px;
             }
         }
@@ -661,7 +661,7 @@ img {
                 max-width: 325px;
                 margin: 5px auto 0;
             }
-            @include desktop {
+            @include desktopOld {
                 max-width: 483px;
                 margin: 0 auto;
             }
@@ -674,7 +674,7 @@ img {
             @include tablet {
                 font-size: 27px;
             }
-            @include desktop {
+            @include desktopOld {
                 font-size: 34px;
             }
 
@@ -686,7 +686,7 @@ img {
             @include tablet {
                 font-size: 20px;
             }
-            @include desktop {
+            @include desktopOld {
                 font-size: 23px;
                 margin: 17px auto;
             }
@@ -698,7 +698,7 @@ img {
             @include tablet {
                 max-width: 250px;
             }
-            @include desktop {
+            @include desktopOld {
                 max-width: 310px;
             }
         }
@@ -716,7 +716,7 @@ img {
         @include tablet {
             padding: 44px 0;
         }
-        @include desktop {
+        @include desktopOld {
             padding: 62px 0;
         }
 
@@ -727,7 +727,7 @@ img {
             @include tablet {
                 max-width: 180px;
             }
-            @include desktop {
+            @include desktopOld {
                 max-width: 229px;
             }
         }
@@ -738,7 +738,7 @@ img {
             @include tablet {
                 max-width: 152px;
             }
-            @include desktop {
+            @include desktopOld {
                 max-width: 163px;
             }
         }
@@ -749,7 +749,7 @@ img {
             @include tablet {
                 font-size: 20px;
             }
-            @include desktop {
+            @include desktopOld {
                 font-size: 23px;
                 margin: 17px auto;
             }
@@ -772,7 +772,7 @@ img {
         @include tablet {
             padding: 29px 0;
         }
-        @include desktop {
+        @include desktopOld {
             padding: 33px 0;
         }
 
@@ -783,7 +783,7 @@ img {
             @include tablet {
                 max-width: 233px;
             }
-            @include desktop {
+            @include desktopOld {
                 max-width: 350px;
             }
         }
@@ -794,7 +794,7 @@ img {
             @include tablet {
                 font-size: 20px;
             }
-            @include desktop {
+            @include desktopOld {
                 font-size: 23px;
                 margin: 17px auto;
             }
@@ -824,7 +824,7 @@ img {
         @include tablet {
             max-width: 540px;
         }
-        @include desktop {
+        @include desktopOld {
             max-width: 670px;
         }
 
@@ -840,7 +840,7 @@ img {
             @include tablet {
                 max-width: 700px;
             }
-            @include desktop {
+            @include desktopOld {
                 max-width: 850px;
             }
         }
@@ -877,7 +877,7 @@ img {
     //  @include tablet {
     //    font-size: 36px;
     //  }
-    //  @include desktop {
+    //  @include desktopOld {
     //    font-size: 48px;
     //  }
     //
@@ -889,7 +889,7 @@ img {
     //      font-size: 63px;
     //      margin: 10px auto;
     //    }
-    //    @include desktop {
+    //    @include desktopOld {
     //      font-size: 82px;
     //    }
     //  }
@@ -897,7 +897,7 @@ img {
     //  img {
     //    height: 63px;
     //    vertical-align: top;
-    //    @include desktop {
+    //    @include desktopOld {
     //      height: 100px;
     //      vertical-align: sub;
     //    }
@@ -910,7 +910,7 @@ img {
     //  @include tablet {
     //    font-size: 30px;
     //  }
-    //  @include desktop {
+    //  @include desktopOld {
     //    font-size: 36px;
     //  }
     //}
@@ -920,7 +920,7 @@ img {
     //  @include tablet {
     //    font-size: 24px;
     //  }
-    //  @include desktop {
+    //  @include desktopOld {
     //    font-size: 30px;
     //  }
     //}
@@ -930,7 +930,7 @@ img {
     //  @include tablet {
     //    font-size: 20px;
     //  }
-    //  @include desktop {
+    //  @include desktopOld {
     //    font-size: 24px;
     //  }
     //}
@@ -940,7 +940,7 @@ img {
     //  @include tablet {
     //    font-size: 18px;
     //  }
-    //  @include desktop {
+    //  @include desktopOld {
     //    font-size: 20px;
     //  }
     //}
@@ -950,7 +950,7 @@ img {
     //  @include tablet {
     //    font-size: 16px;
     //  }
-    //  @include desktop {
+    //  @include desktopOld {
     //    font-size: 18px;
     //  }
     //}
@@ -958,7 +958,7 @@ img {
     //p, li {
     //  line-height: 1.6em;
     //  font-size: 15px;
-    //  @include desktop {
+    //  @include desktopOld {
     //    font-size: 16px;
     //  }
     //}
@@ -971,7 +971,7 @@ img {
     @include tablet {
         padding: 30px 20px;
     }
-    @include desktop {
+    @include desktopOld {
         padding: 40px 20px;
     }
 }
@@ -983,7 +983,7 @@ img {
     @include tablet {
         padding: 40px 20px 5px;
     }
-    @include desktop {
+    @include desktopOld {
         padding: 60px 30px 5px;
     }
 
@@ -991,7 +991,7 @@ img {
         @include tablet {
             padding: 0 7px;
         }
-        @include desktop {
+        @include desktopOld {
             padding: 0 10px;
         }
     }
@@ -1027,7 +1027,7 @@ img {
                 color: #8B929A;
                 text-transform: none;
             }
-            @include desktop {
+            @include desktopOld {
                 margin-right: 25px;
                 padding: 0 0 7px;
                 font-size: 30px;
@@ -1183,7 +1183,7 @@ img {
 
     .join {
         font-size: 15px;
-        @include desktop {
+        @include desktopOld {
             font-size: 20px;
         }
     }
@@ -1204,7 +1204,7 @@ img {
 
     .card-wrap {
         padding: 0 7px;
-        @include desktop {
+        @include desktopOld {
             padding: 0 10px;
         }
     }
@@ -1264,7 +1264,7 @@ img {
         .thumb {
             background: #fff center center/cover;
             padding-bottom: 80%;
-            @include desktop {
+            @include desktopOld {
                 padding-bottom: 40%;
                 background-size: contain;
             }
@@ -1273,7 +1273,7 @@ img {
         .float-left {
             text-align: center;
             padding: 20px 15px;
-            @include desktop {
+            @include desktopOld {
                 padding: 30px 20px;
             }
 
@@ -1285,7 +1285,7 @@ img {
                 padding: 0;
                 position: relative;
                 float: left;
-                @include desktop {
+                @include desktopOld {
                     font-size: 17px;
                 }
 
@@ -1297,7 +1297,7 @@ img {
                     display: inline-block;
                     user-select: none;
                     line-height: 1.4em;
-                    @include desktop {
+                    @include desktopOld {
                         font-size: 13px;
                     }
                 }
@@ -1314,7 +1314,7 @@ img {
                 width: 100%;
                 padding: 10px;
                 font-size: 15px;
-                @include desktop {
+                @include desktopOld {
                     font-size: 17px;
                 }
             }
@@ -1353,7 +1353,7 @@ img {
                 font-size: 17px;
                 margin: 0 auto 10px;
             }
-            @include desktop {
+            @include desktopOld {
                 font-size: 23px;
                 margin: 0 auto 15px;
             }
@@ -1363,7 +1363,7 @@ img {
                 @include tablet {
                     font-size: 16px;
                 }
-                @include desktop {
+                @include desktopOld {
                     font-size: 19px;
                 }
             }
@@ -1374,7 +1374,7 @@ img {
             @include tablet {
                 font-size: 15px;
             }
-            @include desktop {
+            @include desktopOld {
                 font-size: 16px;
             }
         }
@@ -1393,7 +1393,7 @@ img {
                 width: 200px;
 
             }
-            @include desktop {
+            @include desktopOld {
                 width: 220px;
 
             }
@@ -1423,7 +1423,7 @@ img {
             margin: 0 auto 25px;
             text-align: left;
         }
-        @include desktop {
+        @include desktopOld {
             margin: 0 auto 40px;
         }
 
@@ -1433,7 +1433,7 @@ img {
             text-align: left;
             padding-left: 7px;
             padding-right: 7px;
-            @include desktop {
+            @include desktopOld {
                 padding-left: 10px;
                 padding-right: 10px;
             }
@@ -1501,7 +1501,7 @@ img {
                 width: 50%;
                 height: 395px;
             }
-            @include desktop {
+            @include desktopOld {
                 padding-left: 10px;
                 padding-right: 10px;
                 margin: 0 auto 20px;
@@ -1512,7 +1512,7 @@ img {
                 max-width: 25%;
                 width: 25%;
             }
-            @include desktop {
+            @include desktopOld {
                 .card-inside:hover {
                     opacity: 0.7;
                     section .top-image .hover-icon {
@@ -1726,7 +1726,7 @@ img {
                     left: 50%;
                     transform: translate(-50%, -50%);
                     padding: 15px;
-                    @include desktop {
+                    @include desktopOld {
                         padding: 20px;
                     }
                 }
@@ -1756,7 +1756,7 @@ img {
                         @include tablet {
                             font-size: 26px;
                         }
-                        @include desktop {
+                        @include desktopOld {
                             font-size: 30px;
                         }
 
@@ -1831,7 +1831,7 @@ img {
                     padding: 12px;
                     border: none;
 
-                    @include desktop {
+                    @include desktopOld {
                         font-size: 17px;
                         padding: 13px;
                     }

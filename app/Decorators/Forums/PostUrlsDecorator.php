@@ -288,6 +288,10 @@ class PostUrlsDecorator
 
         foreach ($matches as $match) {
             $url = $match;
+            //check if the url is valid
+            if (!filter_var($url, FILTER_VALIDATE_URL)) {
+                continue;
+            }
 
             $initialRequest = \Request::create($url);
 

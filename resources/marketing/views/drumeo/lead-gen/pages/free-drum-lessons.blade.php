@@ -15,9 +15,9 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation-float.min.css"/>
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('marketing/parcel/drumeo/blog.css')}}" />
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/blog.css')}}" />
 
-    @include('drumeo._partials._fonts')
+    @include('_partials.layout._fonts')
     <style>
         header {
             background:#061221 url(https://dpwjbsxqtam5n.cloudfront.net/beat/free-lessons-header.jpg) center center/cover;
@@ -439,7 +439,9 @@
     </div>
 
 
-    @include("drumeo.sales.partials._footer")
+    @include("drumeo.sales.partials._footer", [
+            "minimal" => true
+        ])
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 

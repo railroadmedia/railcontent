@@ -130,14 +130,9 @@ class SalesController extends BaseController
         return view('pianote.shop.pages.lifetime');
     }
 
-    public function keeplearning()
+    public function lifetimeMembers()
     {
-        return view('pianote.shop.pages.keep-learning');
-    }
-
-    public function upgradeoffer()
-    {
-        return view('pianote.shop.pages.upgrade-offer');
+        return view('pianote.sales.lifetime-members');
     }
 
     public function lisarecommends()
@@ -166,11 +161,6 @@ class SalesController extends BaseController
     public function jesusMolina()
     {
         return view('pianote.products.improvisation-with-jesus-molina');
-    }
-
-    public function studentOnly()
-    {
-        return view('pianote.sales.student-only');
     }
 
     public function roland()
@@ -211,6 +201,11 @@ class SalesController extends BaseController
     public function concertHeadphones()
     {
         return view('pianote.products.concert-headphones');
+    }
+
+    public function concertHeadphonesMembers()
+    {
+        return view('pianote.products.concert-headphones-members');
     }
 
     public function foundations()

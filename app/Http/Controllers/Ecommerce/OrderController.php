@@ -154,6 +154,7 @@ class OrderController extends Controller
         }
 
         Tracker::queue(
+            'musora',
             function () use ($cartDataArray) {
                 $trackerProducts = [];
                 foreach ($cartDataArray['items'] as $cartItemData) {

@@ -10,7 +10,7 @@ if (!function_exists('current_user_has_recent_order')) {
             return DB::connection(config('ecommerce.database_connection_name'))
                 ->table('ecommerce_orders')
                 ->where('user_id', user()->id)
-                ->where('created_at', '>', \Carbon\Carbon::now()->subMinute()->toDateTimeString())
+                ->where('created_at', '>', \Carbon\Carbon::now()->subMinutes(1)->toDateTimeString())
                 ->exists();
         }
 
@@ -231,13 +231,6 @@ if (!function_exists('parse_xp_value')) {
 
 function isLive()
 {
-    $cacheStore = cache()->store(config('cache.default'))->getStore();
-
-    if (method_exists($cacheStore, 'setPrefix')) {
-        $oldPrefix = $cacheStore->getPrefix();
-        $cacheStore->setPrefix(config('cache.prefix'));
-    }
-
     $cacheName = brand() . '_is_live';
 
     if (cache()->has($cacheName)) {
@@ -264,10 +257,6 @@ function isLive()
             false,
             1
         );
-    }
-
-    if (method_exists($cacheStore, 'setPrefix')) {
-        $cacheStore->setPrefix($oldPrefix);
     }
 
     return $isLive;

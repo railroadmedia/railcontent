@@ -9,8 +9,8 @@
     <meta property="og:description" content="Develop The Skills To Play 500+ Songs On The Piano In 5 Days">
     <meta property="og:url" content="https://www.pianote.com/500-songs">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link href="{{ asset('/marketing/css/pianote/tailwind-helpers.css') }}" rel="stylesheet">
+    @include('_partials.layout._tailwindcdn')
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
     <style>
         h1, h2, h3, h4, h5, h6 {
@@ -311,7 +311,9 @@
     </div>
         </div>
 
-    @include('pianote._partials._footer')
+    @include("pianote._partials._footer", [
+            "minimal" => true
+        ])
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script>
@@ -327,5 +329,5 @@
 
     @yield('scripts')
 
-    @include('pianote._partials.inspectlet')
+
 @stop

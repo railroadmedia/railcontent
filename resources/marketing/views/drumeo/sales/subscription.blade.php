@@ -14,11 +14,11 @@
         <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/sales/2023/share-image-drumeo.jpg" style="display: none;">
     @endif
 
-    @include('drumeo._partials._fonts')
+    @include('_partials.layout._fonts')
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
 
@@ -492,7 +492,7 @@
         'facebookLink' => 'https://facebook.com/drumeo/',
         'facebook' => '1.2M',
         'instagramLink' => 'https://instagram.com/drumeoofficial/',
-        'instagram' => '950K',
+        'instagram' => '966K',
     ])
     @include('musora.sales.components.guarantee-section', [
         'badge' => 'https://drumeo-assets.s3.amazonaws.com/sales/2022/guarantee.png',

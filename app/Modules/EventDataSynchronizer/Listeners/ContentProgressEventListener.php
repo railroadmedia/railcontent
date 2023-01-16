@@ -462,7 +462,7 @@ class ContentProgressEventListener
                     $this->userPointsService->setPoints(
                         $mediaPlaybackTracked->userId,
                         [
-                            'content_id' => $content['id'],
+                            'content_id' => $content['content_id'],
                             'minutes_watched' => $minutes,
                         ],
                         'minutes_of_content_watched',
@@ -507,11 +507,17 @@ class ContentProgressEventListener
             ]);
         }
 
+        $pointsPerBrand = $this->userPointsService->countUserPointsPerBrand(
+            $userContentsProgressReset->userId
+        );
+        foreach (config('railcontent.available_brands',[]) as $brand){
+            if(!isset($pointsPerBrand[$brand])){
+                $pointsPerBrand[$brand] = 0;
+            }
+        }
         $this->userProvider->saveExperiencePoints(
             $userContentsProgressReset->userId,
-            $this->userPointsService->countUserPointsPerBrand(
-                $userContentsProgressReset->userId
-            )
+            $pointsPerBrand
         );
     }
 

@@ -122,13 +122,6 @@ class SalesController extends BaseController
 
         return view('drumeo.sales.features.coaches', ['products' => $products, 'theme' => 'drumeo', 'page' => 'coaches']);
     }
-    public function salesStudents()
-    {
-        $products = $this->productRepository->all();
-        $products = array_combine(array_entity_column($products, 'getSku'), $products);
-
-        return view('drumeo.sales.student-only', ['products' => $products]);
-    }
     public function salesUpgrade()
     {
         $products = $this->productRepository->all();

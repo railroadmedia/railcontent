@@ -9,8 +9,8 @@
     <meta property="og:description" content="Two, maybe three times per year you get the chance to become a Pianote Lifetime Member.">
     <meta property="og:image" content="https://pianote.s3.amazonaws.com/sales/promos/november/lifetime-fb-share-image-1.jpg" style="display: none;">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link href="{{ asset('/marketing/css/pianote/tailwind-helpers.css') }}" rel="stylesheet">
+    @include('_partials.layout._tailwindcdn')
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/sales.css') }}">
     <link href="{{ asset('/marketing/css/animate.css') }}" rel="stylesheet">

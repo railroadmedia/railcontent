@@ -5,9 +5,9 @@
     <meta property="og:title" content="Cookie Policy">
     <meta name="description" content="When you visit or access Musora Media, Inc websites, we may use web beacons, cookies, pixel tags, scripts, tags, API and other technologies.">
 
-    @include('drumeo._partials._fonts')
+    @include('_partials.layout._fonts')
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"/>
+    @include('_partials.layout._tailwindcdn')
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
 
     <style>

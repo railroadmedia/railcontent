@@ -8,8 +8,8 @@
     <meta property="og:image" content="https://pianote.s3.amazonaws.com/sales/2023/share-image-pianote2.jpg" style="display: none;">
     <meta property="og:description" content="Perfectly Structured Lessons, Insanely Engaging Teachers, and Unlimited Support - 100% Guaranteed.">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link href="{{ asset('/marketing/css/pianote/tailwind-helpers.css') }}" rel="stylesheet">
+    @include('_partials.layout._tailwindcdn')
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/sales.css') }}">
 @stop
@@ -78,7 +78,7 @@
                             Most Popular
                         @endif
                     </p>
-                    <a class="card-wrap text-pred"
+                    <a class="card-wrap text-pianote"
                             @hasSection('annual-url')
                                 @yield('annual-url')
                             @else

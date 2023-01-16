@@ -8,10 +8,10 @@
     <meta property="og:image" content="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/beyond-beginner-drummer/Title+Banner.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
-    @include('drumeo._partials._fonts')
+    @include('_partials.layout._fonts')
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
-    <link href="{{ asset('/marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
+    @include('_partials.layout._tailwindcdn')
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/ndsh.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"/>
@@ -37,11 +37,11 @@
             }
 
         }
-        .dropdown .bg-pred {
+        .dropdown .bg-pianote {
             min-width: 32px;
         }
         @media (min-width: 40em) {
-            .dropdown .bg-pred {
+            .dropdown .bg-pianote {
                 min-width: 83px;
             }
         }
@@ -212,7 +212,7 @@
             @endphp
             @foreach($levels as $level)
                 <div class="dropdown text-center border-2 border-gray-500 rounded-md overflow-hidden flex cursor-pointer mb-3 select-none @if(!empty($level['defaultOpen'])) active @endif
-                @if(!empty($level['navyBorder'])) border-navy-600 @endif">
+                @if(!empty($level['navyBorder'])) border-sky-900 @endif">
                     <div class="bg-drumeo py-5 px-2 sm:px-3 ">
                         <h5 class="leading-tight whitespace-nowrap inline-flex items-center">
                             <span class="text-xs hidden md:inline mr-1"> LEVEL</span>

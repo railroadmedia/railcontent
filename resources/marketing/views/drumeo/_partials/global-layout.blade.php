@@ -12,19 +12,30 @@
 
     @yield('global-head')
 
-    @include('drumeo._partials._fonts')
+    @include('_partials.layout._fonts')
     @include('_partials.layout.favicons.drumeo-favicons')
 
-    <!-- Begin Inspectlet Embed Code -->
     <script type="text/javascript" id="inspectletjs">
+        window.__insp = window.__insp || [];
+        __insp.push(['wid', 1103167167]);
         (function() {
-            window.__insp = window.__insp || [];
-            __insp.push(['wid', 1103167167]);
-            var ldinsp = function(){ if(typeof window.__inspld != "undefined") return; window.__inspld = 1; var insp = document.createElement('script'); insp.type = 'text/javascript'; insp.async = true; insp.id = "inspsync"; insp.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://cdn.inspectlet.com/inspectlet.js?wid=1103167167&r=' + Math.floor(new Date().getTime()/3600000); var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(insp, x); };
-            setTimeout(ldinsp, 0);
+            function ldinsp(){
+                if(typeof window.__inspld != 'undefined') return;
+                window.__inspld = 1;
+                var insp = document.createElement('script');
+                insp.type = 'text/javascript';
+                insp.async = true;
+                insp.id = 'inspsync';
+                insp.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://cdn.inspectlet.com/inspectlet.js';
+                var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(insp, x); };
+            setTimeout(ldinsp, 500); document.readyState != 'complete' ? (window.attachEvent ? window.attachEvent('onload', ldinsp) : window.addEventListener('load', ldinsp, false)) : ldinsp();
         })();
+
+        @if(!is_null(user()))
+        __insp.push(['identify', '{{user()->getEmail()}}']);
+        __insp.push(['tagSession', {email: '{{user()->getEmail()}}', userid: '{{user()->getId()}}'}])
+        @endif
     </script>
-    <!-- End Inspectlet Embed Code -->
 
     {!! \App\Analytics\Tracker::headBottom() !!}
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -50,7 +61,7 @@
         document.querySelector('.BeaconFabButtonFrame').style.bottom = "50px";
     });
 </script>
-<script type="text/javascript" src="{{ asset('marketing/js/jquery.countdown-2.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('/marketing/js/jquery.countdown-2.min.js') }}"></script>
 
 <script>
     $(document).ready(function () {

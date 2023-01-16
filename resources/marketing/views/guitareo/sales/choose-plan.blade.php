@@ -10,10 +10,10 @@
 
         <meta property="og:image" content="https://guitareo.s3.amazonaws.com/sales/2023/share-image-guitareo.jpg"/>
 
-    @include('guitareo._partials._fonts')
+    @include('_partials.layout._fonts')
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
-    <link href="{{ asset('/marketing/css/guitareo/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/guitareo/sales-page.css') }}" rel="stylesheet">
     <style>
@@ -43,7 +43,6 @@
     @include('musora.sales.components.card-selection-section', [
         "plusLogo" => "https://guitareo.s3.amazonaws.com/sales/2023/guitareo-plus-logo-light.svg",
         "logo" => "https://guitareo.s3.amazonaws.com/sales/guitareo-logo.png",
-        "instrument" => "guitareo",
         "songs" => "1000",
         "firstPoint" => "Unlimited guitar lessons",
         "thirdPoint" => "Direct access to real teachers.",

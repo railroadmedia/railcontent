@@ -10,7 +10,7 @@
     <meta property="og:url" content="https://www.pianote.com/riffs-and-fills">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+    @include('_partials.layout._tailwindcdn')
     <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/riffs-and-fills.css') }}">
 @stop
@@ -331,10 +331,10 @@ Connect every riff, fill and tip you’ve learned and see how to apply it to pre
             });
         });
     </script>
-    <script src="{{ asset('marketing/js/pianote/manifest.js') }}"></script>
-    <script src="{{ asset('marketing/js/pianote/vendor.js') }}"></script>
-    <script src="{{ asset('marketing/js/pianote/cart-sidebar.js') }}"></script>
-    <script src="{{ asset('marketing/js/pianote/app.js') }}"></script>
+    <script src="{{ asset('/marketing/js/pianote/manifest.js') }}"></script>
+    <script src="{{ asset('/marketing/js/pianote/vendor.js') }}"></script>
+    <script src="{{ asset('/marketing/js/pianote/cart-sidebar.js') }}"></script>
+    <script src="{{ asset('/marketing/js/pianote/app.js') }}"></script>
 
-    @include('pianote._partials.inspectlet')
+
 @stop

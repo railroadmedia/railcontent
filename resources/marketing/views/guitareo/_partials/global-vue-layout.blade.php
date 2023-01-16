@@ -12,11 +12,11 @@
 
     {!! \App\Analytics\Tracker::trackPageView() !!}
 
-    @include('guitareo._partials.includes.google-optimize')
+    @include('guitareo._partials.google-optimize')
     @include('guitareo._partials.inspectlet')
 
     @include('_partials.layout.favicons.guitareo-favicons')
-    @include('guitareo._partials._fonts')
+    @include('_partials.layout._fonts')
 
     @yield('styles')
 
@@ -44,10 +44,10 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.2.5/polyfill.js"></script>
 
-    <script src="{{ asset('marketing/js/guitareo/manifest.js') }}"></script>
-    <script src="{{ asset('marketing/js/guitareo/vendor.js') }}"></script>
-    <script src="{{ asset('marketing/js/guitareo/cart-sidebar.js') }}"></script>
-    <script src="{{ asset('marketing/js/guitareo/app.js') }}"></script>
+    <script src="{{ asset('/marketing/js/guitareo/manifest.js') }}"></script>
+    <script src="{{ asset('/marketing/js/guitareo/vendor.js') }}"></script>
+    <script src="{{ asset('/marketing/js/guitareo/cart-sidebar.js') }}"></script>
+    <script src="{{ asset('/marketing/js/guitareo/app.js') }}"></script>
 
     {{-- Platform --}}
     <script src="{{ mix('/platform/js/manifest.js') }}"></script>

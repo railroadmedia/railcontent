@@ -40,7 +40,7 @@
             >
                 <!-- Section Heading -->
                 <div class="flex flex-row mb-1">
-                    <h3 class="title uppercase font-bold">
+                    <h3 class="title font-black">
                         Shipping Information
                     </h3>
                 </div>
@@ -60,9 +60,9 @@
                 <template v-if="newAddress || shippingAddresses.data.length === 0">
                     <p
                         v-if="shippingAddresses.data.length > 0"
-                        class="body font-bold uppercase pt-4"
+                        class="body font-black pt-4"
                     >
-                        create a new shipping address
+                        Create a new shipping address
                     </p>
 
                     <order-form-shipping
@@ -81,7 +81,7 @@
             <section v-if="canAcceptPaymentPlans">
                 <!-- Section Heading -->
                 <div class="flex flex-row mb-1 pt-4 section-border">
-                    <h3 class="title uppercase font-bold">
+                    <h3 class="title font-black">
                         Payment Plan
                     </h3>
                 </div>
@@ -102,7 +102,7 @@
             >
                 <!-- Section Heading -->
                 <div class="flex flex-row mb-1 pt-4 section-border">
-                    <h3 class="title uppercase font-bold">
+                    <h3 class="title font-black">
                         Payment Details
                     </h3>
                 </div>
@@ -121,9 +121,9 @@
                 <template v-if="newPayment || paymentMethods.data.length === 0">
                     <p
                         v-if="paymentMethods.data.length > 0"
-                        class="body font-bold uppercase mb-1 pt-3"
+                        class="body font-black mb-1 pt-3"
                     >
-                        create a new payment method
+                        Create a new payment method
                     </p>
 
                     <!-- Order Component -->

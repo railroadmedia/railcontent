@@ -10,8 +10,8 @@
     <meta property="og:url" content="https://www.singeo.com/recitals/">
     <meta property="og:image" content="https://singeo.s3.amazonaws.com/sales/2022/og-image.jpg" style="display: none;">
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('/marketing/css/singeo/tailwind-helpers.css') }}">
+    @include('_partials.layout._tailwindcdn')
+    <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}">
     <link href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}" rel="stylesheet">
 
     <style>
@@ -254,7 +254,9 @@
         </div>
     </section>
 
-    @include("singeo.sales.partials._footer")
+    @include("singeo.sales.partials._footer", [
+            "minimal" => true
+        ])
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 @stop

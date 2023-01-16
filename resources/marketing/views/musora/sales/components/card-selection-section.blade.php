@@ -2,9 +2,9 @@
     x-data="{ plusMembershipSelected: true }"
 >
     <div class="container max-w-6xl mx-auto">
-        <h1><strong>Your first week<br class="inline sm:hidden"> is free.</strong></h1>
+        <h1><strong>Your first @if(empty($month)) week @else month @endif <br class="inline sm:hidden"> is free.</strong></h1>
         <h5 class="mt-2 md:mt-4">Choose the plan that will continue on <br class="inline lg:hidden">
-            {{ Carbon\Carbon::now()->addDays(7)->format('F jS') }} (after your free trial). Cancel anytime.</h5>
+            @if(empty($month)) {{ Carbon\Carbon::now()->addDays(7)->format('F jS') }} @else {{ Carbon\Carbon::now()->addDays(30)->format('F jS') }} @endif  (after your free trial). Cancel anytime.</h5>
 
         <div class="flex items-end justify-center my-5">
             <div class="px-1 sm:px-2">
@@ -57,7 +57,7 @@
                         <p class="text-sm mb-1"><strong>{{ $firstPoint }}</strong></p>
                         <p class="text-sm mb-1"><strong>{{ $songs }}+ popular songs.</strong></p>
                         <p class="text-sm mb-1"><strong>{{ $thirdPoint }}.</strong></p>
-                        <p class="text-sm mb-1">Join a community of {{ number_format(Prices::$students) }} {{ $instrument }} students.</p>
+                        <p class="text-sm mb-1">Join a community of {{ number_format(Prices::$students) }} students.</p>
                         <p class="text-sm mb-1">{{ $fifthPoint }}</p>
                         <p class="text-sm">90-day money back guarantee.</p>
                     </div>
@@ -75,7 +75,7 @@
                         <p class="text-sm mb-1"><strong>{{ $firstPoint }}</strong></p>
                         <p class="text-sm mb-1"><strong>{{ $songs }}+ popular songs.</strong></p>
                         <p class="text-sm mb-1"><strong>{{ $thirdPoint }}</strong></p>
-                        <p class="text-sm mb-1">Join a community of {{ number_format(Prices::$students) }} {{ $instrument }} students.</p>
+                        <p class="text-sm mb-1">Join a community of {{ number_format(Prices::$students) }} students.</p>
                         <p class="text-sm mb-1">{{ $fifthPoint }}</p>
                         <p class="text-sm">90-day money back guarantee.</p>
                     </div>
@@ -99,7 +99,7 @@
                 </a>
                 <div class="text-black overflow-hidden rounded-b-2xl block mx-auto group px-3 pt-5 md:pt-6 pb-9 md:pb-10 bg-[#e7edf4]">
                     <p class="text-sm mb-1"><strong>{{ $firstPoint }}</strong></p>
-                    <p class="text-sm mb-1">Join a community of {{ number_format(Prices::$students) }} {{ $instrument }} students.</p>
+                    <p class="text-sm mb-1">Join a community of {{ number_format(Prices::$students) }} students.</p>
                     <p class="text-sm mb-1">{{ $fifthPoint }}</p>
                     <p class="text-sm mb-2">90-day money back guarantee.</p>
                     <a class="cursor-pointer" x-on:click="plusMembershipSelected = true"><p class="text-sm text-{{ $theme }}">You can add {{ $songs }}+ popular songs<br> for just $40/year. <u>Click Here.</u></p></a>
@@ -116,7 +116,7 @@
                 </a>
                 <div class="text-black overflow-hidden rounded-b-2xl block mx-auto group px-3 pt-5 md:pt-6 pb-9 md:pb-10 bg-[#e7edf4]">
                     <p class="text-sm mb-1"><strong>{{ $firstPoint }}</strong></p>
-                    <p class="text-sm mb-1">Join a community of {{ number_format(Prices::$students) }} {{ $instrument }} students.</p>
+                    <p class="text-sm mb-1">Join a community of {{ number_format(Prices::$students) }} students.</p>
                     <p class="text-sm mb-1">{{ $fifthPoint }}</p>
                     <p class="text-sm mb-2">90-day money back guarantee.</p>
                     <a class="cursor-pointer" x-on:click="plusMembershipSelected = true"><p class="text-sm text-{{ $theme }}">You can add {{ $songs }}+ popular songs<br> for just $40/year. <u>Click Here.</u></p></a>
