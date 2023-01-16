@@ -1129,6 +1129,7 @@ Ensure the default browser behavior of the `hidden` attribute.
   transition-duration: 150ms;
   transition-property: opacity;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
   white-space: normal;
@@ -1233,6 +1234,7 @@ Ensure the default browser behavior of the `hidden` attribute.
   position: relative !important;
 }
 .sticky {
+  position: -webkit-sticky !important;
   position: sticky !important;
 }
 .inset-0 {
@@ -2309,6 +2311,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .max-w-\[77px\] {
   max-width: 77px !important;
 }
+.max-w-2xl {
+  max-width: 42rem !important;
+}
 .max-w-5xl {
   max-width: 64rem !important;
 }
@@ -2323,9 +2328,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .max-w-sm {
   max-width: 24rem !important;
-}
-.max-w-2xl {
-  max-width: 42rem !important;
 }
 .max-w-xl {
   max-width: 36rem !important;
@@ -2344,6 +2346,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .max-w-\[230px\] {
   max-width: 230px !important;
+}
+.max-w-\[75rem\] {
+  max-width: 75rem !important;
 }
 .max-w-none {
   max-width: none !important;
@@ -3171,6 +3176,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-left: 1.75rem !important;
   padding-right: 1.75rem !important;
 }
+.py-5 {
+  padding-top: 1.25rem !important;
+  padding-bottom: 1.25rem !important;
+}
 .px-2\.5 {
   padding-left: 0.625rem !important;
   padding-right: 0.625rem !important;
@@ -3190,10 +3199,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .py-7 {
   padding-top: 1.75rem !important;
   padding-bottom: 1.75rem !important;
-}
-.py-5 {
-  padding-top: 1.25rem !important;
-  padding-bottom: 1.25rem !important;
 }
 .py-8 {
   padding-top: 2rem !important;
@@ -4038,8 +4043,27 @@ img {
   content: var(--tw-content) !important;
   margin: -1px !important;
 }
+.btn-primary.after\:bg-pianote:hover::after, .btn-primary.bg-pianote:focus-visible {
+  content: var(--tw-content);
+  background-color: #FA7683;
+}
+.btn-primary.after\:bg-pianote:active::after {
+  content: var(--tw-content);
+  background-color: #AC1222;
+}
+.after\:bg-pianote::after {
+  content: var(--tw-content) !important;
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(246 26 48 / var(--tw-bg-opacity)) !important;
+}
 .even\:pb-4:nth-child(even) {
   padding-bottom: 1rem !important;
+}
+.btn-primary.hover\:bg-singeo:hover:hover, .btn-primary.bg-singeo:focus-visible {
+  background-color: #9C33ED;
+}
+.btn-primary.hover\:bg-singeo:hover:active {
+  background-color: #6900BA;
 }
 .btn-secondary.hover\:text-drumeo:hover:hover, .btn-secondary.text-drumeo:focus-visible {
   color: #3C91E2;
@@ -4080,6 +4104,10 @@ img {
 .hover\:bg-white:hover {
   --tw-bg-opacity: 1 !important;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
+}
+.hover\:bg-singeo:hover {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(131 0 233 / var(--tw-bg-opacity)) !important;
 }
 .hover\:bg-opacity-80:hover {
   --tw-bg-opacity: 0.8 !important;
@@ -4714,6 +4742,7 @@ img {
     width: 75% !important;
   }
   .sm\:w-min {
+    width: -webkit-min-content !important;
     width: -moz-min-content !important;
     width: min-content !important;
   }
@@ -6018,6 +6047,10 @@ img {
     padding-top: 1.5rem !important;
     padding-bottom: 1.5rem !important;
   }
+  .md\:px-10 {
+    padding-left: 2.5rem !important;
+    padding-right: 2.5rem !important;
+  }
   .md\:px-3 {
     padding-left: 0.75rem !important;
     padding-right: 0.75rem !important;
@@ -6053,10 +6086,6 @@ img {
   .md\:py-1 {
     padding-top: 0.25rem !important;
     padding-bottom: 0.25rem !important;
-  }
-  .md\:px-10 {
-    padding-left: 2.5rem !important;
-    padding-right: 2.5rem !important;
   }
   .md\:py-12 {
     padding-top: 3rem !important;
@@ -7423,6 +7452,9 @@ img {
   }
   .lg\:pt-12 {
     padding-top: 3rem !important;
+  }
+  .lg\:pr-1 {
+    padding-right: 0.25rem !important;
   }
   .lg\:pb-0 {
     padding-bottom: 0px !important;

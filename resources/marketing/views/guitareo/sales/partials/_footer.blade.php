@@ -15,15 +15,15 @@
             <p class="show-for-desktop">Join thousands of guitarists who get free weekly guitar lessons.</p>
             <p class="hide-for-desktop">Receive free weekly lessons.</p>
             <form id="GuitareoEngagementTriggerWebsiteSignupWebForm" accept-charset="UTF-8" action="/customer-io/submit-email-form" method="POST"
-                    class="ajax-form clearfix infusion-form facebook-track-lead" onsubmit="emailSignUpConversionTrackerForImpactProvider()">
+                    class="ajax-form clearfix infusion-form facebook-track-lead lg:flex" onsubmit="emailSignUpConversionTrackerForImpactProvider()">
                 <input type="hidden" name="form_name" value="Blog Signup">
 
                 <input type="hidden" name="leadtracker_form_name" value="Blog Signup">
-                <div class="infusion-field col-xs-12 form-group text-center medium-text-left col-sm-7">
+                <div class="infusion-field col-xs-12 form-group text-center medium-text-left lg:w-7/12 lg:pr-1">
                     <input class="medium-body infusion-field-input-container" id="inf_field_Email" name="email" type="email" placeholder="Email Address..." required="">
                 </div>
-                <div class="infusion-submit col-xs-12 form-group col-sm-5">
-                    <button class="submit button-red infusion-recaptcha join-form-button " type="submit">
+                <div class="infusion-submit col-xs-12 form-group lg:w-5/12">
+                    <button class="submit button-red infusion-recaptcha join-form-button border-guitareo text-guitareo hover:bg-guitareo hover:text-black" type="submit">
                         <span class="pre-add"> Sign up <i class="fas fa-paper-plane"></i></span>
                         <span class="pending hide hidden">Sending <i class="fas fa-spinner-third fa-spin"></i></span>
                         <span class="success hide hidden">Sent <i class="fas fa-thumbs-up"></i></span>
