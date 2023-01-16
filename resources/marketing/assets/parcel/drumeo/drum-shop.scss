@@ -1038,7 +1038,7 @@ img {
       perspective: 1000px;
       height: 340px;
       @include tablet {
-        max-width: 360px;
+        max-width: none;
         width: 50%;
         height: 395px;
       }
@@ -1046,7 +1046,6 @@ img {
         padding-left: 10px;
         padding-right: 10px;
         margin: 0 auto 20px;
-        max-width: 33.33%;
         width: 33.33%;
       }
       @media (min-width: 75em) {
