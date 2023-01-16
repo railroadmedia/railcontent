@@ -56,7 +56,7 @@ const toggleModal = () => {
         </div>
         <div class="tw-flex tw-justify-center tw-items-center xl:tw-mt-auto tw-mt-[24px]">
             <button @click="toggleModal" class="tw-btn-secondary">
-                {{ currentTier === 'plus' ? 'Update' : 'Upgrade' }}
+                {{ currentTier === 'plus' ? 'Manage' : 'Upgrade' }}
             </button>
             <MembershipSelectModal
                 v-if="isModalOpen" @onCloseModal="toggleModal"

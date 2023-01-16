@@ -72,7 +72,6 @@ const descriptions = ref({ year: '', month: '' });
 const isLoading = ref(false);
 
 const handleSelectedTier = (val) => {
-    console.log(val)
     selectedTier.value = val;
 };
 
@@ -102,7 +101,6 @@ const handleSelectedInterval = (interval) => {
 };
 
 onBeforeMount(() => {
-    console.log(props.currentTier)
     buildDescription(props.upgradeCost);
 });
 
@@ -187,7 +185,7 @@ onBeforeMount(() => {
                     <p><em>All prices listed in USD.</em></p>
                 </div>
             </div>
-            <div v-if="isLifetimeMember"
+            <div v-if="isLifetimeMember && currentTier !== 'plus'"
                 class="tw-table sm:tw-block tw-my-auto tw-text-center tw-text-white tw-mx-2 lg:tw-w-[755px] tw-px-2 sm:tw-px-6 tw-py-10 sm:tw-py-14 tw-bg-[#081825] tw-border-[#445F74] tw-rounded-[10px] tw-border-[1px] tw-relative md:tw-static">
                 <button @click="emit('onCloseModal')"
                     class="tw-text-white tw-absolute lg:tw-top-[32px] tw-top-[12px] tw-right-[12px]  md:tw-right-[32px] md:tw-top-[32px]">
@@ -224,6 +222,40 @@ onBeforeMount(() => {
                                             from its creators and compensate them for their work</strong></p>
                                     <p class="tw-mb-1">You will be immediately charged $40 to your card on file, and
                                         your subscription will renew again for $40 in 365 days.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p><em>All prices listed in USD.</em></p>
+                </div>
+            </div>
+            <div v-if="isLifetimeMember && currentTier === 'plus'"
+                class="tw-table sm:tw-block tw-my-auto tw-text-center tw-text-white tw-mx-2 lg:tw-w-[755px] tw-px-2 sm:tw-px-6 tw-py-10 sm:tw-py-14 tw-bg-[#081825] tw-border-[#445F74] tw-rounded-[10px] tw-border-[1px] tw-relative md:tw-static">
+                <button @click="emit('onCloseModal')"
+                    class="tw-text-white tw-absolute lg:tw-top-[32px] tw-top-[12px] tw-right-[12px]  md:tw-right-[32px] md:tw-top-[32px]">
+                    <XIcon class="tw-w-[26px] tw-h-[26px] md:tw-w-[48px] md:tw-h-[48px]" />
+                </button>
+                <div class="tw-table-row sm:tw-block tw-w-full">
+                    <h1 class="tw-mb-[20px] tw-text-[30px] lg:tw-text-[36px]"><strong>Manage Membership</strong>
+                    </h1>
+                    <div class="tw-text-center tw-text-[20px]">
+                        Songs Subscription
+                    </div>
+                    <div
+                        class="tw-flex tw-flex-col md:tw-flex-row tw-items-start tw-justify-center tw-max-w-sm tw-my-5 sm:tw-my-7 tw-mx-auto">
+                        <div class="tw-flex tw-flex-col tw-grow tw-h-full tw-px-2 md:tw-px-3 tw-relative">
+                            <div
+                                class="tw-flex tw-flex-col tw-grow tw-text-black tw-overflow-hidden tw-rounded-2xl tw-mx-auto tw-mb-4 md:tw-mb-0 tw-group">
+                                <div class="tw-bg-white tw-px-3 tw-pt-6 md:tw-pt-8 tw-pb-5 md:tw-pb-8">
+                                    <h2 class="tw-leading-none tw-mb-3"><strong>Songs Subscription</strong></h2>
+                                    <button @click="() => handleSelectedInterval('year')"
+                                        class="tw-btn-primary tw-bg-[#00101D]">CANCEL SUBSCRIPTION</button>
+                                </div>
+                                <div class="tw-grow tw-px-3 tw-pt-5 md:tw-pt-6 tw-pb-9 md:tw-pb-10"
+                                    style="background: #f1f8ff;border-top: 2px solid #e6f2ff;">
+                                    <p class="tw-mb-1"><strong>Your Songs subscription gives you access to thousands of professionally transcribed songs alongside your Lifetime Membership.</strong></p>
+                                    <p class="tw-mb-1"><strong> We’ve partnered with a top music licensing company, and annual subscription allows us to officially license work from creators and to compensate them for their work.</strong></p>
+                                    <p class="tw-mb-1">If you cancel your Songs subscription, it will not continue to renew. You will have Musora Songs access until your current subscription period ends.</p>
                                 </div>
                             </div>
                         </div>
