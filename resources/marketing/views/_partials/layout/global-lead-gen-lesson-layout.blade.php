@@ -78,9 +78,27 @@
             <div class="container mx-auto clearfix" style="max-width:920px">
                 <div class="text-left lesson-text">
                     <h4 class="mb-1 sm:mb-3"><strong>Assets</strong></h4>
-                    @hasSection('assets')
-                        @yield('assets')
-                    @endif
+                    @foreach($currentLesson->assets as $asset)
+                        @php
+                            $resourceName = '';
+
+                            if(str_contains($asset->src, 'mp3')){
+                                $resourceName = 'mp3URL';
+                            }
+                            elseif(str_contains($asset->src, 'svg') || str_contains($asset->src, 'jpg') || str_contains($asset->src, 'png') || str_contains($asset->src, 'jpeg')){
+                                $resourceName = 'imgURL';
+                            }
+                            elseif(str_contains($asset->src, 'pdf')){
+                                $resourceName = 'pdfURL';
+                            }
+                        @endphp
+
+                        @include('drumeo.lead-gen.partials._assignment-resources', [
+                            "title" => $asset->title,
+                            $resourceName => $asset->src,
+                            "soundslice" => $asset->soundslice,
+                        ])
+                    @endforeach
 
                     @hasSection ('all-course-resource')
                         @yield('all-course-resource')
