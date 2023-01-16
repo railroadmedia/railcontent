@@ -574,7 +574,7 @@ class ProfileSettingsPagesController extends BaseController
 
         $currentTier = $this->upgradeService->getCurrentMembershipTier()->value;
         $proratedUpgradeCost = $this->upgradeService->getProratedUpgradeCost();
-        $showManageSongsButton = ($isLifetime && $currentTier == MembershipTier::Basic)
+        $showManageSongsButton = ($isLifetime && $currentTier == MembershipTier::Basic->value)
             || $this->upgradeService->getCurrentSubscription() != null;
 
         return view(
