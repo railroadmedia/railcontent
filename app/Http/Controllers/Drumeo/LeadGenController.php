@@ -574,5 +574,6 @@ class LeadGenController extends BaseController
             'currentLesson' => $currentLesson,
             'nextLesson' => $nextLesson,
         ]);
+
     }
 }

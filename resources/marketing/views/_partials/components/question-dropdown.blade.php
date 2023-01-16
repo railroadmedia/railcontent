@@ -1,34 +1,27 @@
 <div
-    class="dropdown text-center rounded-xl mb-3 select-none text-black border-2 border-[#EFF3F5] bg-white"
+    class="dropdown text-center rounded-xl mb-3 select-none text-black border-2 border-[#EFF3F5]"
     x-data="{ open: @if(!empty($open) && $open) true @else false @endif }"
 >
     <div class="flex">
-        <div class="text-left flex-grow relative">
-            <div
-                class="pt-4 sm:pt-6 pr-4 sm:pr-5 pl-8 sm:pl-12 cursor-pointer"
-                x-on:click="open = !open;"
+        <div
+            class="py-4 sm:py-6 pr-4 sm:pr-5 pl-8 sm:pl-12 text-left flex-grow relative cursor-pointer"
+            x-on:click="open = !open;"
+        >
+            <h5 class="leading-tight sm:leading-loose font-black relative" :class="open && 'mb-2'">
+                @if(!empty($num))<span class="text-white rounded-full py-1 px-2 md:px-2.5 text-xs md:text-sm absolute -left-11 md:-left-16 -top-0.5 md:top-0.5" :class="open ? 'bg-{{$theme}}' : 'bg-[#838C98]'">{{$num}}</span>@endif
+                {!! $title !!}
+            </h5>
+            <p
+                x-cloak
+                class="transition-all duration-100 leading-relaxed sm:leading-relaxed overflow-hidden"
+                x-bind:class="{ 'max-h-0': !open, 'max-h-[2000px]': open  }"
             >
-                <h5
-                    class="leading-tight sm:leading-loose font-black relative"
-                    x-bind:class="open && 'mb-2'"
-                >
-                    @if(!empty($num))<span class="text-white rounded-full py-1 px-2 md:px-2.5 text-xs md:text-sm absolute -left-11 md:-left-16 -top-0.5 md:top-0.5" :class="open ? 'bg-{{$brand}}' : 'bg-[#838C98]'">{{$num}}</span>@endif
-                    {!! $title !!}
-                </h5>
-            </div>
-            <div class="pb-4 sm:pb-6 pr-4 sm:pr-5 pl-8 sm:pl-12">
-                <p
-                    x-cloak
-                    class="transition-all duration-100 leading-relaxed sm:leading-relaxed overflow-hidden"
-                    x-bind:class="{ 'max-h-0': !open, 'max-h-[2000px]': open  }"
-                >
-                    {!! nl2br( $desc) !!}
-                    @if(!empty($detail))<br><span class="block mt-4 text-[#838C98]">{{$detail}}</span>@endif
-                </p>
-            </div>
+                {!! nl2br( $desc) !!}
+                @if(!empty($detail))<br><span class="block mt-4 text-[#838C98]">{{$detail}}</span>@endif
+            </p>
         </div>
         <div
-            class="ml-auto text-{{$brand}} pt-3 sm:pt-6 pr-4 sm:pr-5 cursor-pointer @if(!empty($customArrow)) {{ $customArrow }} @endif"
+            class="ml-auto text-{{$theme}} pt-3 sm:pt-6 pr-4 sm:pr-5 cursor-pointer @if(!empty($customArrow)) {{ $customArrow }} @endif"
             x-on:click="open = !open"
         >
             <i class="fas fa-plus transform transition-all duration-300 text-lg md:text-2xl lg:text-3xl" x-bind:class="{ 'rotate-45': open }"></i>

@@ -183,12 +183,54 @@ return [
             ]
         ],
         'beta-testing' => [
-            'active-tracking-providers' => ['ga', 'gtm', 'gaw', 'fp', 'im'],
+            'active-tracking-providers' => ['ga', 'fp', 'gaw', 'ga4', 'gtm', 'im',],
 
             'providers' => [
                 'google-analytics' =>
                     [
-                        'tracking-id' => 'UA-96565469-1'
+                        'tracking-id' => 'UA-96565469-1',
+                        'optimise-id' => null
+                    ],
+                'google-analytics-v4' =>
+                    [
+                        'tracking-id' => 'G-RD2SJQH0N7'
+                    ],
+                'google-tag-manager' =>
+                    [
+                        'tracking-id' => 'GTM-5CQBWGQ'
+                    ],
+                'google-adwords' =>
+                    [
+                        'google-conversion-id' => '1071462884',
+                        'google-conversion-language' => 'en',
+                        'google-conversion-format' => '3',
+                        'google-conversion-color' => 'ffffff',
+                        'google-conversion-label' => 'Uf7cCNeQgHAQ5PP0_gM',
+                    ],
+                'facebook-pixel' =>
+                    [
+                        'pixel-id' => '1303177136444246'
+                    ],
+                'impact' =>
+                    [
+                        'utt-link' => 'A3032697-2ca8-4ba5-9bad-ee08c4a7d1ca1',
+                        'sid' => 'IRzxwmnLNaMN3032697tSVoYihcdj3Qop1',
+                        'auth-token' => 'Dnetdodz2rgZeU.ECRcMmu9heSt_rhwk',
+                        'campaign-id' => '14652',
+                        'tag-action-tracker-id' => '27554',
+                        'api-action-tracker-id' => '27555',
+                        'sign-up-action-tracker-id' => '28350'
+                    ]
+            ]
+        ],
+        'web-staging-one' => [
+            'active-tracking-providers' => ['ga', 'fp', 'gaw', 'ga4', 'gtm', 'im',],
+
+            'providers' => [
+                'google-analytics' =>
+                    [
+                        'tracking-id' => 'UA-96565469-1',
+                        'optimise-id' => null
                     ],
                 'google-analytics-v4' =>
                     [
@@ -428,14 +470,11 @@ return [
         ],
         'beta-testing' => [
             'active-tracking-providers' => ['ga', 'gtm', 'gaw', 'fp', 'ga4', 'im'],
+
             'providers' => [
                 'google-analytics' =>
                     [
                         'tracking-id' => 'UA-46498312-13'
-                    ],
-                'google-analytics-v4' =>
-                    [
-                        'tracking-id' => 'G-RD2SJQH0N7'
                     ],
                 'google-tag-manager' =>
                     [
