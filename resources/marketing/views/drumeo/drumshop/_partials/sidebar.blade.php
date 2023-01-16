@@ -24,13 +24,13 @@
                 <p class="text-center mx-auto mb-1 font-bold text-sm md:text-base" style="color:#10D05F">Save {{ round(100 - (100 * ($price / $fullPrice))) }}%</p>
                 <h1 class="text-center text-3xl uppercase md:text-4xl" style="color:#F71B26;"><s class="opacity-40 text-2xl">${{ floatVal($fullPrice) }}</s>
                     @if(number_format($price, 2) == intval($price))
-                        <strong class="font-black text-drumeo">$<span class="chosen-variant-price-float">{{  floatVal($price)  }}</span></strong>
+                        <strong class="font-black text-{{ $theme }}">$<span class="chosen-variant-price-float">{{  floatVal($price)  }}</span></strong>
                     @else
-                        <strong class="font-black text-drumeo">$<span class="chosen-variant-price-float">{{  floatVal(number_format($price, 2))  }}</span></strong>
+                        <strong class="font-black text-{{ $theme }}">$<span class="chosen-variant-price-float">{{  floatVal(number_format($price, 2))  }}</span></strong>
                     @endif
                 </h1>
             @elseif(isset($price))
-                <h1 class="text-center text-3xl uppercase md:text-4xl"><strong class="font-black text-drumeo">Only $<span class="chosen-variant-price-float">{{ floatVal($price) }}</span></strong></h1>
+                <h1 class="text-center text-3xl uppercase md:text-4xl"><strong class="font-black text-{{ $theme }}">Only $<span class="chosen-variant-price-float">{{ floatVal($price) }}</span></strong></h1>
             @endif
 
             @if(!empty($specialText))
@@ -49,7 +49,7 @@
                         data-base-url="/ecommerce/add-to-cart?go-back-to-shop=true&products[{!! $sku !!}]=1"
                         data-product-json='{"{!! $sku !!}": 1}'
                     >
-                        <button class="join border-none"><i class="fas fa-cart-plus text-2xl mr-1"></i> Add To Cart</button>
+                        <button class="join border-none {{ $theme !== 'drumeo' ? 'bg-'.$theme : '' }}"><i class="fas fa-cart-plus text-2xl mr-1"></i> Add To Cart</button>
                     </a>
                 @elseif(!empty($bundle))
                     <a class="online-atc" href="/ecommerce/add-to-cart?{!! $sku !!}"
@@ -91,16 +91,16 @@
             @endif
                 <p class="italic text-center mx-auto my-0 text-xs" style="color:#858c93;">
                     @if(!empty($freeShipping))
-                        <i class="fas fa-truck text-drumeo"></i> <strong class="text-drumeo">FREE SHIPPING!</strong><br>
+                        <i class="fas fa-truck text-{{ $theme }}"></i> <strong class="text-{{ $theme }}">FREE SHIPPING!</strong><br>
                     @endif
                     You can also order by phone toll-free at<br class="hidden sm:inline">
-                    <a href="tel:+18004398921" class="text-drumeo">1-800-439-8921</a> or directly at
-                    <a href="tel:+16048557605" class="text-drumeo">1-604-855-7605</a>. </p>
+                    <a href="tel:+18004398921" class="text-{{ $theme }}">1-800-439-8921</a> or directly at
+                    <a href="tel:+16048557605" class="text-{{ $theme }}">1-604-855-7605</a>. </p>
         </div>
         @if(!empty($guaranteeBadge))
             <div class="hidden lg:flex justify-center items-center px-5 pb-5 text-center md:pt-2 md:pt-4 md:pb-6 lg:p-5 lg:-mt-1 lg:mx-auto lg:mb-0 border-t-0 lg:border-t" style="border-color: #CCD3D3; border-top-style: solid;">
                 <img class="w-24 my-0 pr-6" src="https://cdn.musora.com/image/fetch/w_170,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/sales/guarantee-badge.png">
-                <p class="text-sm text-left my-0 text-drumeo"><em>Your entire order is backed by<br class="lg:hidden" /> our 90-Day Money Back <br class="lg:hidden" /> Guarantee.</em></p>
+                <p class="text-sm text-left my-0 text-{{ $theme }}"><em>Your entire order is backed by<br class="lg:hidden" /> our 90-Day Money Back <br class="lg:hidden" /> Guarantee.</em></p>
             </div>
         @endif
     </div>
