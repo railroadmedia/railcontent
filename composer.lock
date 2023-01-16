@@ -7989,12 +7989,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "24232c16b7b60fd8472a188834bfde9a27a1105d"
+                "reference": "e3fe232f8d6719afbe59688aeb8dd36e3a664c5f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/24232c16b7b60fd8472a188834bfde9a27a1105d",
-                "reference": "24232c16b7b60fd8472a188834bfde9a27a1105d",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/e3fe232f8d6719afbe59688aeb8dd36e3a664c5f",
+                "reference": "e3fe232f8d6719afbe59688aeb8dd36e3a664c5f",
                 "shasum": ""
             },
             "require": {
@@ -8033,7 +8033,7 @@
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
                 "source": "https://github.com/railroadmedia/ecommerce/tree/feature-upgrade-rwillems-20221412"
             },
-            "time": "2023-01-12T17:34:07+00:00"
+            "time": "2023-01-16T19:50:23+00:00"
         },
         {
             "name": "railroad/lead-tracker",
@@ -16673,5 +16673,5 @@
         "ext-curl": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
