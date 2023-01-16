@@ -201,7 +201,7 @@
                         <i class="fas fa-check" style="color:#eb4ef7"></i> No purchase necessary. <br class="inline sm:hidden"> &nbsp; <i class="fas fa-check" style="color:#eb4ef7"></i> No age restrictions. <br>
                         <i class="fas fa-check" style="color:#eb4ef7"></i> No location restrictions.<br class="inline sm:hidden"> &nbsp; <i class="fas fa-check" style="color:#eb4ef7"></i> No sneaky shipping fees.
                             <br><br>
-                            <strong>The winner will be announced<br class="inline sm:hidden"> on October the 10th!</strong></p>
+                            <strong>The winner will be announced<br class="inline sm:hidden"> on February 1st!</strong></p>
                     @include("singeo._partials._sign-up-form", [
                     "formId" => "Singeo - Engagement - Trigger - Eikon Giveaway - Web Form",
                     "formName" => 'Eikon Giveaway',
@@ -225,7 +225,7 @@
 
                     <p class="my-3 sm:my-4">This Vocal Studio Kit includes every bit of gear you need to dive into home recording and live streaming with professional studio quality.
                         <br><br>
-                        The Eikon Studio Box 3 retails for $215, and it can be yours <strong>FOR FREE. Just sign up with your email below.</strong>
+                        The Eikon Studio Box 3 retails for $399, and it can be yours <strong>FOR FREE. Just sign up with your email below.</strong>
                     </p>
                     <a href="#final" class="anchor-slide join smaller w-full sm:w-2/3">Sign Up</a>
                 </div>
@@ -360,7 +360,7 @@
             [
             'modalImage' => 'https://singeo.s3.amazonaws.com/lead-gen/giveaway/eikon/intro_giveaway.jpg',
             'name' => 'EIKON STUDIO BOX 3',
-            'subtitle' => 'Retail price: $215 USD',
+            'subtitle' => 'Retail price: $399 USD',
             'info' => '<ul class="list-disc ml-10">
     <li>CM14USB microphone equipped with a 96 Khz 24 bit USB audio interface for plug-and-play simplicity.</li>
     <li>Small-diaphragm condenser capsule captures lifelike vocals</li>
