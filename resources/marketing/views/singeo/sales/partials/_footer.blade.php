@@ -9,7 +9,7 @@
 </div>
 <footer id="footer" class="bottom-footer clearfix relative bg-[#111729]">
     @if(empty($minimal))
-    <div class="container">
+    <div class="container mx-auto max-w-[75rem]">
         <div class="footer-link-wrap footer-sign-up">
             <h1>Stay Connected</h1>
             <p class="show-for-desktop">Join thousands of singers who get free weekly vocal lessons.</p>
