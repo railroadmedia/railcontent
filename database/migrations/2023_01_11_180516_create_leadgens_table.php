@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('meta_desc');
             $table->string('meta_img');
-            $table->string('index_slug')->nullable();
+            $table->string('slug')->nullable();
             $table->timestamps();
         });
     }
