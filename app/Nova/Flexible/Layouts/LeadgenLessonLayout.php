@@ -42,6 +42,7 @@ class LeadgenLessonLayout extends Layout
 
         return [
             // Define the layout's fields.
+            Text::make('slug')->required(),
             Text::make('title')->required(),
             Text::make('Description', 'desc'),
             Image::make('thumbnail')
