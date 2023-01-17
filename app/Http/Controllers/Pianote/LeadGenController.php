@@ -327,25 +327,43 @@ class LeadGenController extends BaseController
         throw new NotFoundHttpException();
     }
 
-    public function test($root, $slug)
+    public function test2(Request $request, $domain, $leadgenSlug = null)
     {
-        $currentLesson = LeadgenLesson::where('slug', $slug)->first();
-        $lessons = LeadgenLesson::where('leadgen_id', $currentLesson->leadgen_id)->get();
-        $currentLessonIndex = $lessons->search(function($item) use($slug){
-            return $item['slug'] === $slug;
-        });
+        $currentLesson = LeadgenLesson::where('slug', $leadgenSlug)->first();
+        if(!is_null($currentLesson)){
+            $lessons = LeadgenLesson::where('leadgen_id', $currentLesson->leadgen_id)->get();
+            $currentLessonIndex = $lessons->search(function($item) use($leadgenSlug){
+                return $item['slug'] === $leadgenSlug;
+            });
 
-        $prevLesson = $currentLessonIndex === 0 ? null : $lessons[$currentLessonIndex - 1];
-        $nextLesson = $currentLessonIndex === count($lessons) - 1 ? null : $lessons[$currentLessonIndex + 1];
+            $prevLesson = $currentLessonIndex === 0 ? null : $lessons[$currentLessonIndex - 1];
+            $nextLesson = $currentLessonIndex === count($lessons) - 1 ? null : $lessons[$currentLessonIndex + 1];
 
-        $leadgen = Leadgen::where('id', $currentLesson->leadgen_id)->first();
+            $leadgen = Leadgen::where('id', $currentLesson->leadgen_id)->first();
 
-        return view('_partials.layout.global-lead-gen-lesson-layout', [
-            'theme' => 'pianote',
-            'leadgen' => $leadgen,
-            'prevLesson' => $prevLesson,
-            'currentLesson' => $currentLesson,
-            'nextLesson' => $nextLesson,
-        ]);
+            return view('_partials.layout.global-lead-gen-lesson-layout', [
+                'theme' => 'pianote',
+                'leadgen' => $leadgen,
+                'prevLesson' => $prevLesson,
+                'currentLesson' => $currentLesson,
+                'nextLesson' => $nextLesson,
+                'totalLessonNum' => count($lessons),
+                'currentLessonNum' => $currentLessonIndex+1
+            ]);
+        }
+        else {
+            $leadgen = Leadgen::where('slug', $leadgenSlug)->first();
+            if(!is_null($leadgen)){
+                $lessons = LeadgenLesson::where('leadgen_id', $leadgen->id)->get();
+
+                return view('_partials.layout.global-lead-gen-index-layout',[
+                    'theme' => 'drumeo'
+                ]);
+            }
+            else {
+                throw new NotFoundHttpException();
+            }
+        }
+
     }
 }
