@@ -20,15 +20,16 @@ class AddPlaylistsDataToPlaylistsTable extends Migration
                 $table->string('thumbnail_url')->nullable();
                 $table->string('category')->index();
                 $table->integer('private')->index()->default(true);
+                $table->string('duration')->nullable();
             });
 
         Schema::connection(config('railcontent.database_connection_name'))
             ->table(config('railcontent.table_prefix') . 'user_playlist_content', function (Blueprint $table) {
                 $table->integer('position')->index();
-                $table->boolean('includes_assignments')
+                $table->json('extra_data')
                     ->after('position')
-                    ->default(true);
-                $table->integer('start_second')->after('includes_assignments')
+                    ->nullable();
+                $table->integer('start_second')->after('extra_data')
                     ->nullable();
                 $table->integer('end_second')->after('start_second')
                     ->nullable();
@@ -69,12 +70,13 @@ class AddPlaylistsDataToPlaylistsTable extends Migration
                 $table->dropColumn('thumbnail_url');
                 $table->dropColumn('category');
                 $table->dropColumn('private');
+                $table->dropColumn('duration');
             });
 
         Schema::connection(config('railcontent.database_connection_name'))
             ->table(config('railcontent.table_prefix') . 'user_playlist_content', function (Blueprint $table) {
                 $table->dropColumn('position');
-                $table->dropColumn('includes_assignments');
+                $table->dropColumn('extra_data');
                 $table->dropColumn('start_second');
                 $table->dropColumn('end_second');
             });
