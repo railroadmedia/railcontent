@@ -230,5 +230,7 @@ Route::domain('{drumeoDomain}')->group(function () {
     Route::get('/teach-a-beginner/lessons/', [LeadGenController::class, 'teachBeginner']);
     Route::get('/weekly-email/', [LeadGenController::class, 'weeklyEmail']);
     Route::get('/weeklyemail/', [LeadGenController::class, 'weeklyMail']);
-    Route::get('/leadgen-lesson-test/{slug}', [LeadGenController::class, 'test']);
+//    Route::get('/leadgen-lesson-test/{slug}', [LeadGenController::class, 'test']);
+    Route::get('/{leadgenSlug?}', LeadGenController::class.'@test2')
+    ->where('leadgenSlug', '(.*)');
 });
