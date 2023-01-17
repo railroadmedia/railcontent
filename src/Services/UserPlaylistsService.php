@@ -165,6 +165,19 @@ class UserPlaylistsService
 
     public function addItemToPlaylist($userPlaylistId, $contentId, $position = null)
     {
+        //TODO
+        return $this->userPlaylistContentRepository->updateOrCreate([
+                                                                        'user_playlist_id' => $userPlaylistId,
+                                                                        'content_id' => $contentId,
+                                                                    ], [
+                                                                        'user_playlist_id' => $userPlaylistId,
+                                                                        'content_id' => $contentId,
+                                                                        'position' => $position ?? 1,
+                                                                        'created_at' => Carbon::now()
+                                                                            ->toDateTimeString(),
+                                                                        'updated_at' => Carbon::now()
+                                                                            ->toDateTimeString(),
+                                                                    ]);
     }
 
     /**
@@ -255,6 +268,11 @@ class UserPlaylistsService
     public function getPinnedPlaylists()
     {
         return $this->pinnedPlaylistsRepository->getMyPinnedPlaylists();
+    }
+
+    public function getByPlaylistId($playlistId)
+    {
+        return $this->userPlaylistContentRepository->getByPlaylistId($playlistId);
     }
 
 }

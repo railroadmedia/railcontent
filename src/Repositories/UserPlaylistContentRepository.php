@@ -151,4 +151,12 @@ class UserPlaylistContentRepository extends RepositoryBase
 
         return $contentIdsInPlaylistBooleans;
     }
+
+    public function getByPlaylistId($playlistId)
+    {
+        return $this->query()
+            ->where('user_playlist_id', $playlistId)
+            ->get()
+            ->toArray();
+    }
 }

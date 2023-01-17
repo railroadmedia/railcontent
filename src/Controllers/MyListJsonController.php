@@ -272,6 +272,16 @@ class MyListJsonController extends Controller
                                                                 ->toDateTimeString(),
                                                         ]);
 
+        $playlistLessons = $this->userPlaylistsService->getByPlaylistId($request->get('playlist_id'));
+
+        foreach($playlistLessons as $playlistLesson){
+            $res = $this->userPlaylistsService->addItemToPlaylist(
+                $playlist['id'],
+                $playlistLesson['content_id'],
+                $playlistLesson['position']
+            );
+        }
+
         return $playlist;
     }
 
