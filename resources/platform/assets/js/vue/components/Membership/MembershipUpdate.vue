@@ -45,7 +45,7 @@ const toggleModal = () => {
                     Your current Membership does not include access to Songs.
                 </p>
                 <p v-if="currentTier === 'plus'">
-                    You have Musora Plus Membership until the end of your billing cycle.
+                    Your current Membership includes access to Songs.
                 </p>
             </div>
         </div>
