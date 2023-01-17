@@ -78,24 +78,26 @@ class LeadgenSeeder extends Seeder
                 'slug' => $leadgen['slug'],
             ]);
 
-            foreach($leadgens['lessons'] as $lesson){
+            foreach($leadgen['lessons'] as $key => $lesson){
                 $newLesson = LeadgenLesson::create([
                     'leadgen_id' => $newLeadgen->id,
                     'title' => $lesson['title'],
                     'desc' => !empty($lesson['desc']) ? $lesson['desc'] : null,
                     'thumbnail' => $lesson['thumbnail'],
                     'video_src' => $lesson['video_src'],
+                    'slug' => $lesson['slug'],
+                    'display_order' => $key + 1,
                 ]);
-            }
 
-            if(count($leadgen['lessons']['assets']) > 0){
-                foreach($leadgen['lessons']['assets'] as $asset){
-                    LeadgenLessonAsset::create([
-                        'leadgen_lesson_id' => $newLesson->id,
-                        'title' => $asset['title'],
-                        'src' => $asset['src'],
-                        'soundslice' => !empty($asset['soundslice']) ? $asset['soundslice'] : null,
-                    ]);
+                if(count($lesson['assets']) > 0){
+                    foreach($lesson['assets'] as $asset){
+                        LeadgenLessonAsset::create([
+                            'leadgen_lesson_id' => $newLesson->id,
+                            'title' => $asset['title'],
+                            'src' => $asset['src'],
+                            'soundslice' => !empty($asset['soundslice']) ? $asset['soundslice'] : null,
+                        ]);
+                    }
                 }
             }
         }
