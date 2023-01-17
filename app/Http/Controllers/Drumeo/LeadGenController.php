@@ -513,7 +513,12 @@ class LeadGenController extends BaseController
 
     public function pages(Request $request, $domain, $page = null)
     {
-        return view('drumeo.lead-gen.pages.'.$page);
+        if(str_contains($page, 'blog')){
+            return view('drumeo.lead-gen.blog-forms.'.$page);
+        }
+        else {
+            return view('drumeo.lead-gen.pages.'.$page);
+        }
 
         throw new NotFoundHttpException();
     }
@@ -545,12 +550,5 @@ class LeadGenController extends BaseController
     public function weeklyMail()
     {
         return view('drumeo.lead-gen.blog-forms.weeklyemail');
-    }
-
-    public function blogForms(Request $request, $domain, $page = null)
-    {
-        return view('drumeo.lead-gen.blog-forms.'.$page);
-
-        throw new NotFoundHttpException();
     }
 }

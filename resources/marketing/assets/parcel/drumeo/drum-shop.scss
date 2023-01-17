@@ -1030,7 +1030,6 @@ img {
       position: relative;
       padding-left: 7px;
       padding-right: 7px;
-      max-width: 320px;
       width: 100%;
       margin: 0 auto 15px;
       text-align: left;
@@ -1038,7 +1037,6 @@ img {
       perspective: 1000px;
       height: 340px;
       @include tablet {
-        max-width: 360px;
         width: 50%;
         height: 395px;
       }
@@ -1046,7 +1044,6 @@ img {
         padding-left: 10px;
         padding-right: 10px;
         margin: 0 auto 20px;
-        max-width: 33.33%;
         width: 33.33%;
       }
       @media (min-width: 75em) {
@@ -1367,9 +1364,9 @@ img {
             color: #FFF;
             margin: 0 auto;
 
-            &:hover {
-              background: lighten($drumeoBlue, 10%);
-            }
+            //&:hover {
+            //  background: lighten($drumeoBlue, 10%);
+            //}
           }
 
           &.amazon {

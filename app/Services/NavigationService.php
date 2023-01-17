@@ -203,7 +203,7 @@ class NavigationService
                         'icon' => 'keys',
                     ],
                     [
-                        'name' => 'Song Tutorial',
+                        'name' => 'Song Tutorials',
                         'path' => '/'.brand().'/song-tutorials',
                         'icon' => 'keys',
                     ],

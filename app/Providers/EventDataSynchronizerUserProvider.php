@@ -22,13 +22,24 @@ class EventDataSynchronizerUserProvider implements UserProviderInterface
         return !empty($user) && $user->isAdmin();
     }
 
+    /**
+     * @param int $userId
+     * @param Carbon|null $membershipExpirationDate
+     * @param bool $isLifetimeMember
+     * @param string $accessLevel
+     * @param bool $isPackOwner
+     * @param string|null $membershipLevel
+     * @param bool $isDrumeoLifetimeMember
+     * @return bool
+     */
     public function saveMembershipData(
         int $userId,
         ?Carbon $membershipExpirationDate,
         bool $isLifetimeMember,
         string $accessLevel,
         bool $isPackOwner,
-        ?string $membershipLevel
+        ?string $membershipLevel,
+        bool $isDrumeoLifetimeMember
     )
     : bool {
         $user =
@@ -44,6 +55,7 @@ class EventDataSynchronizerUserProvider implements UserProviderInterface
             $user->membership_expiration_date =
                 !empty($membershipExpirationDate) ? $membershipExpirationDate->toDateTimeString() : null;
             $user->is_lifetime_member = $isLifetimeMember;
+            $user->is_drumeo_lifetime_member = $isDrumeoLifetimeMember;
             $user->access_level = $accessLevel;
             $user->is_pack_owner = $isPackOwner;
             $user->membership_level = $membershipLevel;

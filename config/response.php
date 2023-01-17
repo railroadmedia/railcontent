@@ -2056,6 +2056,8 @@ return [
             'cio_id',
             'customer_io_id',
             'membership_level',
+            'is_lifetime_member',
+            'is_drumeo_lifetime_member',
         ],
 
         'quick-tips' => [
