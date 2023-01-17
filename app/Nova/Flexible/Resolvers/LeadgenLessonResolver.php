@@ -58,7 +58,7 @@ class LeadgenLessonResolver implements ResolverInterface
                    'thumbnail' => $group->getAttributes()['thumbnail'],
                    'video_src' => $group->getAttributes()['video_src'],
                    'slug' => $group->getAttributes()['slug'],
-                   'display_order' => $index,
+                   'display_order' => $index+1,
                    'id' => isset($group->getAttributes()['id']) ? $group->getAttributes()['id'] : null,
                 ];
             });
@@ -75,7 +75,7 @@ class LeadgenLessonResolver implements ResolverInterface
                     $addLesson->slug = $lesson['slug'];
                     $addLesson->thumbnail = $lesson['thumbnail'];
                     $addLesson->video_src = $lesson['video_src'];
-                    $addLesson->display_order = $key;
+                    $addLesson->display_order = $lesson['display_order'];
                     $addLesson->save();
 
                     $updatedIds[] = $addLesson->id;
@@ -105,7 +105,7 @@ class LeadgenLessonResolver implements ResolverInterface
                     }
 
                     if($dbLesson['display_order'] !== $lesson['display_order']){
-                        $dbLesson->display_order = $key;
+                        $dbLesson->display_order = $lesson['display_order'];
                     }
 
                     $dbLesson->save();
