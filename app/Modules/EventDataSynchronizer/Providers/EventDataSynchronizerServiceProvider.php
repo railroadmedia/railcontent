@@ -30,6 +30,7 @@ use App\Modules\EventDataSynchronizer\Console\Commands\SyncHelpScout;
 use App\Modules\EventDataSynchronizer\Console\Commands\SyncHelpScoutAsync;
 use App\Modules\EventDataSynchronizer\Console\Commands\UserContentPermissionsResyncTool;
 use App\Modules\EventDataSynchronizer\Console\Commands\UserMembershipFieldsResyncTool;
+use App\Modules\EventDataSynchronizer\Console\Commands\IsDrumeoLifetimeUserFieldResyncTool;
 use App\Modules\EventDataSynchronizer\Events\FirstActivityPerDay;
 use App\Modules\EventDataSynchronizer\Events\LiveStreamEventAttended;
 use App\Modules\EventDataSynchronizer\Events\UTMLinks;
@@ -208,6 +209,7 @@ class EventDataSynchronizerServiceProvider extends EventServiceProvider
                 UserMembershipFieldsResyncTool::class,
                 PackOwnerUserFieldResyncTool::class,
                 SyncUserTotalXp::class,
+                IsDrumeoLifetimeUserFieldResyncTool::class,
             ]
         );
         $this->mergeConfigFrom(
