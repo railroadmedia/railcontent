@@ -1,8 +1,8 @@
 @extends('_partials.layout.global-template')
 
 @section('meta')
-    <title>{{ $leadgen->title }}</title>
-    <meta property="og:title" content="{{ $leadgen->title }}"/>
+    <title>{{ $currentLesson->title }} | {{ $leadgen->title }}</title>
+    <meta property="og:title" content="{{ $currentLesson->title }} | {{ $leadgen->title }}"/>
     <meta name="description" content="{{ $leadgen->meta_desc }}">
     <meta property="og:description" content="{{ $leadgen->meta_desc }}"/>
 {{--    <meta property="og:url" content="https://www.drumeo.com/drum-fills/"/>--}}
@@ -16,9 +16,12 @@
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/lead-gen-tw.css') }}">
 @endsection
 
-@section('layout-body')
-    @include($theme.".sales.partials._nav")
 
+@section('layout-header')
+    @include($theme.".sales.partials._nav")
+@endsection
+
+@section('layout-body')
     <div class="overflow-hidden text-white px-3 py-10 sm:pb-16 sm:pt-24" style="background-color:#000a1e;">
         <div class="container mx-auto clearfix" style="max-width:940px">
             <div class="text-center sm:px-3">
@@ -139,9 +142,7 @@
         </section>
     @endif
 
-    @include($theme.".sales.partials._footer", [
-            "minimal" => true
-    ])
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
@@ -165,3 +166,9 @@
         });
     </script>
 @stop
+
+@section('layout-footer')
+    @include($theme.".sales.partials._footer", [
+            "minimal" => true
+    ])
+@endsection
