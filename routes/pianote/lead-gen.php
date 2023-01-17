@@ -193,5 +193,6 @@ Route::domain('{pianoteDomain}')
         }
     );
 
-    Route::get('/leadgen-lesson-test/{slug}', [LeadGenController::class, 'test']);
+    Route::get('/{leadgenSlug?}', LeadGenController::class.'@test2')
+        ->where('leadgenSlug', '(.*)');
 });
