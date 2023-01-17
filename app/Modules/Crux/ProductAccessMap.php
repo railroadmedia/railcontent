@@ -22,7 +22,7 @@ class ProductAccessMap
 
         $results = DB::connection(config('ecommerce.database_connection_name'))
             ->table('ecommerce_products')
-            ->where('digital_access_type', 'all content access')
+            ->whereIn('digital_access_type', ['all content access', 'basic content access'])
             ->get(['id', 'sku'])
             ;//->toArray();
 
