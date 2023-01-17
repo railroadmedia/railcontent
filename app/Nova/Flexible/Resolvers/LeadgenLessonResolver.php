@@ -32,6 +32,7 @@ class LeadgenLessonResolver implements ResolverInterface
                 'video_src' => $lesson->video_src,
                 'display_order' => $lesson->display_order,
                 'slug' => $lesson->slug,
+                'duration' => $lesson->duration,
                 'id' => $lesson->id,
             ],
             );
@@ -59,6 +60,7 @@ class LeadgenLessonResolver implements ResolverInterface
                    'video_src' => $group->getAttributes()['video_src'],
                    'slug' => $group->getAttributes()['slug'],
                    'display_order' => $index+1,
+                   'duration' => $group->getAttributes()['duration'],
                    'id' => isset($group->getAttributes()['id']) ? $group->getAttributes()['id'] : null,
                 ];
             });
@@ -75,6 +77,7 @@ class LeadgenLessonResolver implements ResolverInterface
                     $addLesson->slug = $lesson['slug'];
                     $addLesson->thumbnail = $lesson['thumbnail'];
                     $addLesson->video_src = $lesson['video_src'];
+                    $addLesson->duration = $lesson['duration'];
                     $addLesson->display_order = $lesson['display_order'];
                     $addLesson->save();
 
@@ -102,6 +105,10 @@ class LeadgenLessonResolver implements ResolverInterface
 
                     if($dbLesson['slug'] !== $lesson['slug']){
                         $dbLesson->slug = $lesson['slug'];
+                    }
+
+                    if($dbLesson['duration'] !== $lesson['duration']){
+                        $dbLesson->duration = $lesson['duration'];
                     }
 
                     if($dbLesson['display_order'] !== $lesson['display_order']){
