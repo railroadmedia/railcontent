@@ -217,7 +217,7 @@
 
                             @if($activeAllContentAccessExpiryDate)
                                 {{-- access from non-recurring product --}}
-                                Your access is ending on {{ $activeAllContentAccessExpiryDate->format('F j, Y') }}.
+                                <span class="dark:tw-text-white">Your access is ending on {{ $activeAllContentAccessExpiryDate->format('F j, Y') }}.</span>
                             @else
                                 {{-- todo: what to put here? --}}
                             @endif
@@ -301,7 +301,7 @@
                             @if(!$isLifetime)
                                 @if($accessIsFromAppPurchase)
                                     <div class="tw-flex tw-flex-col">
-                                        <p class="tw-mb-2">To edit your membership please use the following guides:</p>
+                                        <p class="tw-mb-2 dark:tw-text-white">To edit your membership please use the following guides:</p>
                                         <a href="https://support.apple.com/en-us/HT202039" class="body tw-mb-2" target="_blank">
                                             For Apple users</a>
                                         <a href="https://support.google.com/googleplay/answer/7018481?co=GENIE.Platform%3DAndroid&hl=en"
