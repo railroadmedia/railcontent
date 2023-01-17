@@ -365,7 +365,9 @@
                                 @endif
                             @endif
                         </div>
-
+                        @php
+                        //dd($currentTier)
+                        @endphp
                         {{-- Song Membership Banner --}}
                         @if(true)
                             <membership-update

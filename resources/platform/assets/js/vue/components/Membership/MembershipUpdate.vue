@@ -21,11 +21,6 @@ const props = defineProps({
     },
 });
 
-onMounted(() => {
-    console.log('mounted')
-    console.log(props.currentTier)
-});
-
 const isModalOpen = ref(false);
 
 const toggleModal = () => {
