@@ -29,15 +29,15 @@ class SalesController extends BaseController
     }
     public function trial()
     {
-        return view('singeo.sales.trials.trial');
+        return view('singeo.sales.trials.trial', ['theme' => 'singeo']);
     }
     public function trialMonth()
     {
-        return view('singeo.sales.trials.30-trial');
+        return view('singeo.sales.trials.30-trial', ['theme' => 'singeo']);
     }
     public function chooseYourTrialMonth()
     {
-        return view('singeo.sales.trials.trial-selection.month');
+        return view('singeo.sales.choose-plan', ['theme' => 'singeo', 'month' => true]);
     }
     public function cookie()
     {
@@ -45,11 +45,11 @@ class SalesController extends BaseController
     }
     public function asobergirlsguide()
     {
-        return view('singeo.sales.trials.affiliates.asobergirlsguide');
+        return view('singeo.sales.trials.affiliates.asobergirlsguide', ['theme' => 'singeo']);
     }
     public function affiliateTrial()
     {
-        return view('singeo.sales.trials.trial-selection.affiliates');
+        return view('singeo.sales.trials.trial-selection.affiliates', ['theme' => 'singeo']);
     }
     public function prefBeginner()
     {

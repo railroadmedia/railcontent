@@ -12,7 +12,7 @@
 @endsection
 
 @section('promo-banner')
-    <div class="text-white px-4 py-8 md:py-16 relative z-10" style="background-color:#000318;">
+    <div class="text-white px-4 py-8 md:py-16" style="background-color:#000318;">
         <div class="container mx-auto">
             <div class="sm:flex mx-auto items-start text-center" style="max-width: 1050px;">
                 <img class="avatar rounded-full border-4 lg:border-8 mx-auto mb-3 sm:mb-0 w-36 md:w-48 lg:w-72" style="border-color:#8300e9; background-color:#8300e9;" src="https://cdn.musora.com/image/fetch/w_540,q_auto:best/https://singeo.s3.amazonaws.com/sales/trials/@yield('url').jpg">
@@ -22,7 +22,7 @@
                     <h6 class="leading-normal my-3 md:my-5">
                         <em>@yield('text')</em>
                     </h6>
-                    <a href="/affiliate-trial/" class="join smaller coaches methodcta">START MY FREE TRIAL</a>
+                    <a href="/affiliate-trial/" class="join smaller methodcta">START MY FREE TRIAL</a>
                 </div>
             </div>
         </div>

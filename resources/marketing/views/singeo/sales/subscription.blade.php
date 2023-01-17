@@ -174,10 +174,10 @@
         'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738',
         'students' => number_format(Prices::$students),
     ])
-
     @hasSection('promo-banner')
         @yield('promo-banner')
-    @elseif(!empty($promoVersion))
+    @endif
+    @if(!empty($promoVersion))
         @include('musora.sales.components.promo-section', [
         'promoLogo' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs.svg',
            'promoLogoM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs-m.png',
