@@ -90,7 +90,10 @@ const handleSelectedInterval = (interval) => {
                     text: `Your subscription has been successfully updated to ${selectedTier.value === 'plus' ? 'Musora+' : 'Musora'} (${interval === 'year' ? 'Annually' : 'Monthly'}).`
                 });
             }
-            emit('onCloseModal');
+            setTimeout(() => {
+                emit('onCloseModal');
+                location.reload();
+            }, 3000);
         })
         .catch((error) => {
             let message = "There was an unexpected error, try again later or contact support."
