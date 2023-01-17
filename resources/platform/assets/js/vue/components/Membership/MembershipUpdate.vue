@@ -21,11 +21,6 @@ const props = defineProps({
     },
 });
 
-onMounted(() => {
-    console.log('mounted')
-    console.log(props.currentTier)
-});
-
 const isModalOpen = ref(false);
 
 const toggleModal = () => {
@@ -50,13 +45,13 @@ const toggleModal = () => {
                     Your current Membership does not include access to Songs.
                 </p>
                 <p v-if="currentTier === 'plus'">
-                    You have Musora Plus Membership until the end of your billing cycle.
+                    Your current Membership includes access to Songs.
                 </p>
             </div>
         </div>
         <div class="tw-flex tw-justify-center tw-items-center xl:tw-mt-auto tw-mt-[24px]">
             <button @click="toggleModal" class="tw-btn-secondary">
-                {{ currentTier === 'plus' ? 'Update' : 'Upgrade' }}
+                {{ currentTier === 'plus' ? 'Manage' : 'Upgrade' }}
             </button>
             <MembershipSelectModal
                 v-if="isModalOpen" @onCloseModal="toggleModal"

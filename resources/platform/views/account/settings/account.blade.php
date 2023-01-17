@@ -217,7 +217,7 @@
 
                             @if($activeAllContentAccessExpiryDate)
                                 {{-- access from non-recurring product --}}
-                                Your access is ending on {{ $activeAllContentAccessExpiryDate->format('F j, Y') }}.
+                                <span class="dark:tw-text-white">Your access is ending on {{ $activeAllContentAccessExpiryDate->format('F j, Y') }}.</span>
                             @else
                                 {{-- todo: what to put here? --}}
                             @endif
@@ -298,73 +298,73 @@
 
                         {{-- Call To Action Buttons --}}
                         <div class="body tw-mt-4">
-                            @if($accessIsFromAppPurchase)
-                                <div class="tw-flex tw-flex-col">
-                                    <p class="tw-mb-2">To edit your membership please use the following guides:</p>
-                                    <a href="https://support.apple.com/en-us/HT202039" class="body tw-mb-2" target="_blank">
-                                        For Apple users</a>
-                                    <a href="https://support.google.com/googleplay/answer/7018481?co=GENIE.Platform%3DAndroid&hl=en"
-                                       class="body tw-mb-1" target="_blank">
-                                        For Google users
-                                    </a>
-                                </div>
+                            @if(!$isLifetime)
+                                @if($accessIsFromAppPurchase)
+                                    <div class="tw-flex tw-flex-col">
+                                        <p class="tw-mb-2 dark:tw-text-white">To edit your membership please use the following guides:</p>
+                                        <a href="https://support.apple.com/en-us/HT202039" class="body tw-mb-2" target="_blank">
+                                            For Apple users</a>
+                                        <a href="https://support.google.com/googleplay/answer/7018481?co=GENIE.Platform%3DAndroid&hl=en"
+                                           class="body tw-mb-1" target="_blank">
+                                            For Google users
+                                        </a>
+                                    </div>
 
-                            @elseif($pausedSubscriptionStartDate)
-                                <form method="post"
-                                     action="{{ url()->route('platform.profile.settings.resume-paused') }}"  >
+                                @elseif($pausedSubscriptionStartDate)
+                                    <form method="post"
+                                         action="{{ url()->route('platform.profile.settings.resume-paused') }}"  >
 
-                                    {{ csrf_field() }}
+                                        {{ csrf_field() }}
 
-                                    <a href="#"
-                                       onclick="this.parentNode.submit(); return false;"
+                                        <a href="#"
+                                           onclick="this.parentNode.submit(); return false;"
+                                           class="tw-btn-primary tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600 visited:tw-text-white">
+                                            Continue Your Membership
+                                        </a>
+                                    </form>
+
+                                @elseif(!$hasHadMembership)
+
+                                    <a href="{{ $addToCartUrlTrial }}"
                                        class="tw-btn-primary tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600 visited:tw-text-white">
-                                        Continue Your Membership
+                                        Start Free Trial
                                     </a>
-                                </form>
 
-                            @elseif(!$hasHadMembership)
+                                @elseif(!$subscription) {{-- apparently same as if($mostRecentSubscriptionCancelledOn && $activeAllContentAccessExpiryDate) --}}
 
-                                <a href="{{ $addToCartUrlTrial }}"
-                                   class="tw-btn-primary tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600 visited:tw-text-white">
-                                    Start Free Trial
-                                </a>
+                                    <p class="tw-text-[#00101D] dark:tw-text-white">This link will take you to reorder on <a href="https://www.{{ $brand }}.com">www.{{
+                                        $brand }}.com</a>. Any purchased access will be added to your existing
+                                        time.</p>
+                                    <p class="tw-text-[#00101D] dark:tw-text-white tw-mb-6">If you’d prefer, you can <a href="/{{ $brand }}/support">click here</a> to contact Support
+                                        to restart your membership.</p>
 
-                            @elseif(!$subscription) {{-- apparently same as if($mostRecentSubscriptionCancelledOn && $activeAllContentAccessExpiryDate) --}}
+                                    <a class="tw-btn-primary tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600 visited:tw-text-white" href="{{ get_legacy_brand_base_url() . '/' }}">
+                                        RENEW YOUR MEMBERSHIP
+                                    </a>
 
-                                <p class="tw-text-[#00101D] dark:tw-text-white">This link will take you to reorder on <a href="https://www.{{ $brand }}.com">www.{{
-                                    $brand }}.com</a>. Any purchased access will be added to your existing
-                                    time.</p>
-                                <p class="tw-text-[#00101D] dark:tw-text-white tw-mb-6">If you’d prefer, you can <a href="/{{ $brand }}/support">click here</a> to contact Support
-                                    to restart your membership.</p>
+                                @elseif($offerUpgradeToAnnualShowToStudent)
 
-                                <a class="tw-btn-primary tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600 visited:tw-text-white" href="{{ get_legacy_brand_base_url() . '/' }}">
-                                    RENEW YOUR MEMBERSHIP
-                                </a>
+                                    <div>
+                                        <button
+                                            class="tw-btn-primary tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600 tw-my-3 mu-modal-open"
+                                            id="modal-upgrade"
+                                        >
+                                            Upgrade Membership to Annual
+                                        </button>
+                                    </div>
+                                    <p class="tw-text-xs tw-italic tw-mt-1 tw-mb-3 tw-text-[#00101D] dark:tw-text-white tw-tracking-wide">Save 37% with an annual plan</p>
 
-                            @elseif($offerUpgradeToAnnualShowToStudent)
+                                    <div>
+                                        @include('account.settings.partials.cancellation.cancel-btn')
+                                    </div>
 
-                                <div>
-                                    <button
-                                        class="tw-btn-primary tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600 tw-my-3 mu-modal-open"
-                                        id="modal-upgrade"
-                                    >
-                                        Upgrade Membership to Annual
-                                    </button>
-                                </div>
-                                <p class="tw-text-xs tw-italic tw-mt-1 tw-mb-3 tw-text-[#00101D] dark:tw-text-white tw-tracking-wide">Save 37% with an annual plan</p>
-
-                                <div>
-                                    @include('account.settings.partials.cancellation.cancel-btn')
-                                </div>
-
-                            @elseif(!$isLifetime)
-                                <div>
-                                    @include('account.settings.partials.cancellation.cancel-btn')
-                                </div>
+                                @else
+                                    <div>
+                                        @include('account.settings.partials.cancellation.cancel-btn')
+                                    </div>
+                                @endif
                             @endif
-
                         </div>
-                        
                         {{-- Song Membership Banner --}}
                         @if($showSongsUpgradeButton)
                             <membership-update
@@ -457,7 +457,7 @@
                     </h1>
 
                     <div class="tw-grid tw-grid-cols-1 sm:tw-grid-cols-2 tw-gap-4 tw-mb-8">
-                        
+
                         {{-- Upgrade Card: Keep Plan --}}
                         <div class="tw-p-6 tw-rounded-lg tw-border-2 tw-text-center tw-bg-[#e5e7eb]">
                             <h2 class="tw-font-black tw-leading-none tw-mb-4 tw-text-4xl">YOUR<br>PLAN</h2>
