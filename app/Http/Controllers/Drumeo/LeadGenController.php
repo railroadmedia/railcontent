@@ -606,13 +606,13 @@ class LeadGenController extends BaseController
                 $lessons = LeadgenLesson::where('leadgen_id', $leadgen->id)->get();
 
                 return view('_partials.layout.global-lead-gen-index-layout',[
-                    'theme' => 'drumeo'
+                    'theme' => 'drumeo',
+                    'leadgen' => $leadgen,
+                    'lessons' => $lessons
                 ]);
-            }
-            else {
-                throw new NotFoundHttpException();
             }
         }
 
+        throw new NotFoundHttpException();
     }
 }
