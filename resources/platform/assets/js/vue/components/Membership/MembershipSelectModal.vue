@@ -79,10 +79,17 @@ const handleSelectedInterval = (interval) => {
     isLoading.value = true;
     axios.get(`/ecommerce/subscription/change/${selectedTier.value}/${interval}`)
         .then(() => {
-            window.shownotification({
-                icon: 'check',
-                text: `Your subscription has been successfully updated to ${selectedTier.value === 'plus' ? 'Musora+' : 'Musora'} (${interval === 'year' ? 'Annually' : 'Monthly'}).`
-            });
+            if (props.currentTier === 'plus' && props.isLifetimeMember) {
+                window.shownotification({
+                    icon: 'check',
+                    text: `Your subscription to songs has been canceled.`
+                });
+            } else {
+                window.shownotification({
+                    icon: 'check',
+                    text: `Your subscription has been successfully updated to ${selectedTier.value === 'plus' ? 'Musora+' : 'Musora'} (${interval === 'year' ? 'Annually' : 'Monthly'}).`
+                });
+            }
             emit('onCloseModal');
         })
         .catch((error) => {
@@ -101,6 +108,9 @@ const handleSelectedInterval = (interval) => {
 };
 
 onBeforeMount(() => {
+    if (props.currentTier === 'plus' && props.isLifetimeMember) {
+        selectedTier.value = 'basic';
+    }
     buildDescription(props.upgradeCost);
 });
 
@@ -132,11 +142,11 @@ onBeforeMount(() => {
                                 <div class="tw-bg-white tw-px-3 tw-pt-6 md:tw-pt-8 tw-pb-5 md:tw-pb-8">
                                     <h2 class="tw-leading-none tw-mb-3"><strong>Annual</strong></h2>
                                     <h4 class="tw-inline-block tw-leading-none"><strong>{{
-        intervalTierPrices[selectedTier].year.title
-}}</strong></h4>
+                                        intervalTierPrices[selectedTier].year.title
+                                    }}</strong></h4>
                                     <p class="tw-text-sm tw-mb-4"><em>{{
-        intervalTierPrices[selectedTier].year.description
-}}</em></p>
+                                        intervalTierPrices[selectedTier].year.description
+                                    }}</em></p>
                                     <button @click="() => handleSelectedInterval('year')"
                                         class="tw-btn-primary tw-bg-[#00101D]">PAY ANNUALLY</button>
                                 </div>
@@ -148,8 +158,8 @@ onBeforeMount(() => {
                                     <p class="tw-mb-2" v-if="selectedTier === 'plus'"><strong>Thousands of popular
                                             songs.</strong></p>
                                     <p class="tw-mb-1">{{ selectedTier === 'plus' ? descriptions.year :
-        DEFAULT_DESCRIPTION
-}}</p>
+                                        DEFAULT_DESCRIPTION
+                                    }}</p>
                                 </div>
                             </div>
                         </div>
@@ -160,11 +170,11 @@ onBeforeMount(() => {
                                 <div class="tw-bg-white tw-px-3 tw-pt-6 md:tw-pt-8 tw-pb-5 md:tw-pb-8">
                                     <h2 class="tw-leading-none tw-mb-3"><strong>Monthly</strong></h2>
                                     <h4 class="tw-inline-block tw-leading-none"><strong>{{
-        intervalTierPrices[selectedTier].month.title
-}}</strong></h4>
+                                        intervalTierPrices[selectedTier].month.title
+                                    }}</strong></h4>
                                     <p class="tw-text-sm tw-mb-4"><em>{{
-        intervalTierPrices[selectedTier].month.description
-}}</em></p>
+                                        intervalTierPrices[selectedTier].month.description
+                                    }}</em></p>
                                     <button @click="() => handleSelectedInterval('month')"
                                         class="tw-btn-primary tw-bg-[#00101D]">PAY MONTHLY</button>
                                 </div>
@@ -176,8 +186,8 @@ onBeforeMount(() => {
                                     <p class="tw-mb-2" v-if="selectedTier === 'plus'"><strong>Thousands of popular
                                             songs.</strong></p>
                                     <p class="tw-mb-1">{{ selectedTier === 'plus' ? descriptions.month :
-        DEFAULT_DESCRIPTION
-}}</p>
+                                        DEFAULT_DESCRIPTION
+                                    }}</p>
                                 </div>
                             </div>
                         </div>
@@ -236,6 +246,7 @@ onBeforeMount(() => {
                     <XIcon class="tw-w-[26px] tw-h-[26px] md:tw-w-[48px] md:tw-h-[48px]" />
                 </button>
                 <div class="tw-table-row sm:tw-block tw-w-full">
+                    <p class="tw-mb-[10px] tw-text-[14px]">Your current Membership includes Songs.</p>
                     <h1 class="tw-mb-[20px] tw-text-[30px] lg:tw-text-[36px]"><strong>Manage Membership</strong>
                     </h1>
                     <div class="tw-text-center tw-text-[20px]">
@@ -247,15 +258,21 @@ onBeforeMount(() => {
                             <div
                                 class="tw-flex tw-flex-col tw-grow tw-text-black tw-overflow-hidden tw-rounded-2xl tw-mx-auto tw-mb-4 md:tw-mb-0 tw-group">
                                 <div class="tw-bg-white tw-px-3 tw-pt-6 md:tw-pt-8 tw-pb-5 md:tw-pb-8">
-                                    <h2 class="tw-leading-none tw-mb-3"><strong>Songs Subscription</strong></h2>
+                                    <h2 class="tw-leading-none tw-mb-3"><strong>Annual</strong></h2>
+                                    <h4 class="tw-inline-block tw-leading-none"><strong>$3.33/month</strong></h4>
+                                    <p class="tw-text-sm tw-mb-4"><em>Billed at $40 per year.</em></p>
                                     <button @click="() => handleSelectedInterval('year')"
-                                        class="tw-btn-primary tw-bg-[#00101D]">CANCEL SUBSCRIPTION</button>
+                                        class="tw-btn-primary tw-bg-[#00101D]">CANCEL SONGS</button>
                                 </div>
                                 <div class="tw-grow tw-px-3 tw-pt-5 md:tw-pt-6 tw-pb-9 md:tw-pb-10"
                                     style="background: #f1f8ff;border-top: 2px solid #e6f2ff;">
-                                    <p class="tw-mb-1"><strong>Your Songs subscription gives you access to thousands of professionally transcribed songs alongside your Lifetime Membership.</strong></p>
-                                    <p class="tw-mb-1"><strong> We’ve partnered with a top music licensing company, and annual subscription allows us to officially license work from creators and to compensate them for their work.</strong></p>
-                                    <p class="tw-mb-1">If you cancel your Songs subscription, it will not continue to renew. You will have Musora Songs access until your current subscription period ends.</p>
+                                    <p class="tw-mb-1"><strong>Your Songs subscription gives you access to thousands of
+                                            professionally transcribed songs alongside your Lifetime Membership. Annual
+                                            subscription allows us to compensate creators for their work through
+                                            official licensing.</strong></p>
+                                    <p class="tw-mb-1">If you cancel your Songs subscription, it will not continue to
+                                        renew. You will have Musora Songs access until your current subscription period
+                                        ends.</p>
                                 </div>
                             </div>
                         </div>
