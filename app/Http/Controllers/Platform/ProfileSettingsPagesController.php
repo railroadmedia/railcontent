@@ -572,7 +572,7 @@ class ProfileSettingsPagesController extends BaseController
 
         // -------------------------------------------------------------------------------------------------------------
 
-        $currentTier = $this->upgradeService->getSubscriptionMembershipTier()->value;
+        $currentTier = $this->upgradeService->getSubscriptionMembershipTier($isLifetime)->value;
         $proratedUpgradeCost = $this->upgradeService->getProratedUpgradeCost();
         $showManageSongsButton = $isLifetime || $this->upgradeService->getCurrentSubscription() != null;
 
