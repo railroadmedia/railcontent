@@ -15,6 +15,7 @@
     @include('_partials.layout._fonts')
     @include('_partials.layout.favicons.'.$theme.'-favicons')
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
 
     @yield('layout-styles')
 
