@@ -398,4 +398,19 @@ class MyListJsonController extends Controller
 
         return response()->json(['success']);
     }
+
+    public function getPlaylistLessons(Request $request){
+        $page = $request->get('page', 1);
+        $limit = $request->get('limit', null);
+        $contentTypes = array_merge(
+            config('railcontent.appUserListContentTypes', []),
+            array_values(config('railcontent.showTypes', [])[config('railcontent.brand')] ?? [])
+        );
+
+        $lessons = new ContentFilterResultsEntity([
+                                                      'results' => $this->userPlaylistsService->getUserPlaylistContents($request->get('playlist_id'), $contentTypes,$limit, $page),
+                                                      'total_results' => $this->userPlaylistsService->countUserPlaylistContents($request->get('playlist_id')),
+                                                  ]);
+        return $lessons;
+    }
 }

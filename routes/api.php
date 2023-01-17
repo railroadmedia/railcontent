@@ -228,6 +228,9 @@ Route::group(
             '/like-playlist',
             MyListJsonController::class . '@likePlaylist'
         )->name('api.like.playlist');
+
+        Route::get('/playlist-lessons', MyListJsonController::class . '@getPlaylistLessons');
+
 //        Route::put('/remove-from-my-list', MyListJsonController::class . '@removeFromPrimaryPlaylist');
 //        Route::get('/my-list', MyListJsonController::class . '@getMyLists');
         //addItemToPlaylist
