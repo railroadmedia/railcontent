@@ -1,7 +1,13 @@
-@extends('drumeo._partials.global-layout')
+@extends('_partials.layout.global-template')
 
 @section('global-head')
-    @yield('meta')
+    <title>{{ $leadgen->title }}</title>
+    <meta property="og:title" content="{{ $leadgen->title }}"/>
+    <meta name="description" content="{{ $leadgen->meta_desc }}">
+    <meta property="og:description" content="{{ $leadgen->meta_desc }}"/>
+{{--    <meta property="og:url" content="https://www.drumeo.com/drum-fills/"/>--}}
+    <meta property="og:image" content="{{ $leadgen->meta_img }}"/>
+    <meta name="robots" content="noindex">
 
     @include('_partials.layout._fonts')
 
@@ -45,7 +51,7 @@
             <div class="text-center mt-3 sm:mt-7 clearfix lesson-buttons flex justify-between">
                 <div class="mb-2 sm:mb-0 w-1/2 sm:w-1/3 px-2 md:px-3">
                     @if(!is_null($prevLesson))
-                        <a class="button block bg-{{ $theme }} hover:brightness-110 cursor-pointer" href="{{ $prevLesson->slug }}">
+                        <a class="button block bg-{{ $theme }} hover:brightness-110 cursor-pointer" href="/{{ $prevLesson->slug }}">
                             <i class="fas fa-chevron-left"></i> @hasSection('prev-text') @yield('prev-text') @else Prev @endif
                         </a>
                     @else
@@ -62,7 +68,7 @@
                 </div>
                 <div class="w-1/2 sm:w-1/3 px-2 md:px-3 next-lesson-button">
                     @if(!is_null($nextLesson))
-                        <a class="button block bg-{{ $theme }} hover:brightness-110 cursor-pointer" href="{{ $nextLesson->slug }}">
+                        <a class="button block bg-{{ $theme }} hover:brightness-110 cursor-pointer" href="/{{ $nextLesson->slug }}">
                             @hasSection('next-text') @yield('next-text') @else Next @endif <i class="fas fa-chevron-right"></i>
                         </a>
                     @else
