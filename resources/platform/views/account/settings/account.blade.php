@@ -369,7 +369,7 @@
                         //dd($currentTier)
                         @endphp
                         {{-- Song Membership Banner --}}
-                        @if(true)
+                        @if($showSongsUpgradeButton)
                             <membership-update
                                 :current-tier="{{ json_encode($currentTier) }}"
                                 :upgrade-cost="{{ json_encode($upgradeCost) }}"
