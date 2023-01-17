@@ -23,13 +23,13 @@
 
 @section('global-body')
     @if(empty($rolandVersion))
-        @include('pianote._partials._nav', [
+        @include('pianote.sales.partials._nav', [
         "subscriptionVersion" => true,
         "scrollToJoin" => true,
         "homepageVersion" => true,
         ])
     @else
-        @include('pianote._partials._nav')
+        @include('pianote.sales.partials._nav')
     @endif
 
     @yield('top-promo-bar')
@@ -1689,7 +1689,7 @@
         </div>
     @endforeach
 
-    @include('pianote._partials._footer')
+    @include('pianote.sales.partials._footer')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 {{--    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>--}}
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>

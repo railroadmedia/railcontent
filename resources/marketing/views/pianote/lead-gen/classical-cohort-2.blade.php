@@ -141,7 +141,7 @@
     </style>
 @stop()
 @section('global-body')
-    @include('pianote._partials._nav')
+    @include('pianote.sales.partials._nav')
     <section class="text-center text-white py-5 md:py-10 lg:py-16 px-5 md:px-7" style="background:#00101d ;">
         <div class="container mx-auto text-center">
             <h2><strong>Classical Cohort - <br class="inline sm:hidden">Week 2 - Classical</strong></h2>
@@ -161,7 +161,7 @@
         </div>
     </section>
 
-    @include("pianote._partials._footer", [
+    @include("pianote.sales.partials._footer", [
             "minimal" => true
         ])
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

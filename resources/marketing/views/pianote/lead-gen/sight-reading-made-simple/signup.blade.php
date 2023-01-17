@@ -305,7 +305,7 @@
         </div>
     </section>
 
-    @include("pianote._partials._footer", [
+    @include("pianote.sales.partials._footer", [
             "minimal" => true
         ])
 

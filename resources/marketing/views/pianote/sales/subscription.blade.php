@@ -105,13 +105,13 @@
 
 @section('global-body')
     @if(!empty($promoVersion))
-        @include("pianote._partials._nav", [
+        @include("pianote.sales.partials._nav", [
             "subscriptionVersion" => true,
             "scrollToJoin" => true,
             "hideMenu" => true,
         ])
     @else
-        @include("pianote._partials._nav", [
+        @include("pianote.sales.partials._nav", [
             "subscriptionVersion" => true,
             "fullSubscriptionVersion" => true,
             "trialVersion" => true,
@@ -662,11 +662,11 @@
     ])
 
     @if(!empty($promoVersion))
-        @include("pianote._partials._footer", [
+        @include("pianote.sales.partials._footer", [
             "minimal" => true
         ])
     @else
-        @include("pianote._partials._footer")
+        @include("pianote.sales.partials._footer")
     @endif
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>

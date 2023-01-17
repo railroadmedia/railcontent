@@ -32,7 +32,7 @@
 @stop
 
 @section('global-body')
-    @include("pianote._partials._nav", [
+    @include("pianote.sales.partials._nav", [
             "hideJoin" => true,
             "subscriptionVersion" => true,
             "fullSubscriptionVersion" => true,
@@ -62,7 +62,7 @@
     ])
     @include('pianote._partials.faq')
 
-    @include("pianote._partials._footer")
+    @include("pianote.sales.partials._footer")
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
