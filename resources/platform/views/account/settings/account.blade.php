@@ -386,7 +386,7 @@
                             <li>Step-by-step curriculum.</li>
                             <li>Courses from legendary teachers.</li>
                             <li>Entertaining shows and documentaries.</li>
-                            <li>Song breakdowns & Play-Alongs.</li>
+                            <li>Song breakdowns & play-alongs</li>
                             <li>Live lessons and personal support.</li>
                         </ul>
 
