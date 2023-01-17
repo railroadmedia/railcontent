@@ -167,6 +167,21 @@ class ContentPagesController extends BaseController
                 'total_results' => $searchResults['total_results'],
                 'filter_options' => [],
             ]);
+        }
+        if ($contentTypeName == 'songs' && $brand == 'singeo') {
+            $listLessons = $this->contentService->getFiltered(
+                $request->get('page', 1),
+                $request->get('limit', $defaultPage),
+                $sortOverride ?? $request->get('sort', '-popularity'),
+                [$lessonType],
+                $request->get('slug_hierarchy', []),
+                $request->get('required_parent_ids', []),
+                $request->get('required_fields', []),
+                $request->get('included_fields', []),
+                $request->get('required_user_states', []),
+                $request->get('included_user_states', []),
+                true
+            );
         } else {
             $listLessons = $this->contentService->getFiltered(
                 $request->get('page', 1),
@@ -236,7 +251,7 @@ class ContentPagesController extends BaseController
                 "startedLessons" => $startedListLessons,
                 "hasStartedLessons" => $hasStartedLessons,
                 "lessonType" => $lessonType,
-                "sortOverride" => $sortOverride,
+                "sortOverride" => '-popularity',
                 "isStudentFocus" => $isStudentFocus,
                 "hasRecentRoutines" => $hasRecentRoutines,
                 "routinesCount" => $routinesCount,

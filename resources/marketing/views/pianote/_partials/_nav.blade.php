@@ -94,11 +94,11 @@
         ])
         <div class="has-drop-down" target="_parent" rel="">
             <div class="nav-link">
-                <i class="fas fa-star"></i>
+                <i class="fas fa-star text-pianote"></i>
                 Features
                 <div class="drop-down-arrow ">
-                    <span></span>
-                    <span></span>
+                    <span class="bg-pianote"></span>
+                    <span class="bg-pianote"></span>
                 </div>
             </div>
         </div>
@@ -121,11 +121,11 @@
         </div>
         <div class="has-drop-down" target="_parent" rel="">
             <div class="nav-link">
-                <i class="fas fa-piano-keyboard"></i>
+                <i class="fas fa-piano-keyboard text-pianote"></i>
                 Instruments
                 <div class="drop-down-arrow ">
-                    <span></span>
-                    <span></span>
+                    <span class="bg-pianote"></span>
+                    <span class="bg-pianote"></span>
                 </div>
             </div>
         </div>
@@ -163,12 +163,12 @@
         ])
         <div class="has-drop-down cursor-pointer">
             <div class="nav-link">
-                <i class="fas fa-circle-play"></i>
+                <i class="fas fa-circle-play text-pianote"></i>
                 Free Resources
 
                 <div class="drop-down-arrow ">
-                    <span></span>
-                    <span></span>
+                    <span class="bg-pianote"></span>
+                    <span class="bg-pianote"></span>
                 </div>
             </div>
         </div>

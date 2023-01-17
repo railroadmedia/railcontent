@@ -1,4 +1,4 @@
-<section class="catalogue-filters clearfix">
+<section class="catalogue-filters clearfix w-full">
     <div class="container mx-auto">
         <div class="md:flex justify-between md:px-3 lg:px-2">
             <div class="filter-wrap clearfix">
