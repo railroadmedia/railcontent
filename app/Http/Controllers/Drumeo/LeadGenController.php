@@ -551,11 +551,4 @@ class LeadGenController extends BaseController
     {
         return view('drumeo.lead-gen.blog-forms.weeklyemail');
     }
-
-    public function blogForms(Request $request, $domain, $page = null)
-    {
-        return view('drumeo.lead-gen.blog-forms.'.$page);
-
-        throw new NotFoundHttpException();
-    }
 }

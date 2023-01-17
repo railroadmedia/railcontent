@@ -14,8 +14,9 @@
 
         {{-- Carousel --}}
         <header-carousel
-            :preloaded-carousel="[]"
-            brand="{{ $brand }}">
+            :preloaded-carousel="{{ $carousel }}"
+            brand="{{ $brand }}"
+        >
         </header-carousel>
 
         {{-- Invite Email Message --}}

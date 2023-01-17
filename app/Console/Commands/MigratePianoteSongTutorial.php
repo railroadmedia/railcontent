@@ -25,7 +25,7 @@ class MigratePianoteSongTutorial extends Command
      *
      * @var string
      */
-    protected $description = 'Migrate Pianote songs to song tutorial.';
+    protected $description = 'Migrate Pianote songs to song tutorials.';
 
     /**
      * Execute the console command.
