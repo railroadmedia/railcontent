@@ -31,6 +31,7 @@ class LeadgenSeeder extends Seeder
                         'desc' => '',
                         'thumbnail' => 'https://img.youtube.com/vi/O6Yd7XnYcPU/sddefault.jpg',
                         'video_src' => 'https://www.youtube.com/embed/O6Yd7XnYcPU',
+                        'duration' => 12,
                         'assets' => [],
                     ],
                     [
@@ -39,6 +40,7 @@ class LeadgenSeeder extends Seeder
                         'desc' => '',
                         'thumbnail' => 'https://img.youtube.com/vi/0JOnroNveHw/sddefault.jpg',
                         'video_src' => 'https://www.youtube.com/embed/0JOnroNveHw',
+                        'duration' => 13,
                         'assets' => [],
                     ],
                     [
@@ -47,6 +49,7 @@ class LeadgenSeeder extends Seeder
                         'desc' => '',
                         'thumbnail' => 'https://img.youtube.com/vi/_QrSJbBzZwk/sddefault.jpg',
                         'video_src' => 'https://www.youtube.com/embed/_QrSJbBzZwk',
+                        'duration' => 15,
                         'assets' => [],
                     ],
                     [
@@ -55,6 +58,7 @@ class LeadgenSeeder extends Seeder
                         'desc' => '',
                         'thumbnail' => 'https://img.youtube.com/vi/9DETi6s4zD0/sddefault.jpg',
                         'video_src' => 'https://www.youtube.com/embed/9DETi6s4zD0',
+                        'duration' => 13,
                         'assets' => [],
                     ],
                     [
@@ -63,6 +67,7 @@ class LeadgenSeeder extends Seeder
                         'desc' => '',
                         'thumbnail' => 'https://img.youtube.com/vi/vG5EKqx8MhU/sddefault.jpg',
                         'video_src' => 'https://www.youtube.com/embed/vG5EKqx8MhU',
+                        'duration' => 5,
                         'assets' => [],
                     ],
                 ],
@@ -86,6 +91,7 @@ class LeadgenSeeder extends Seeder
                     'thumbnail' => $lesson['thumbnail'],
                     'video_src' => $lesson['video_src'],
                     'slug' => $lesson['slug'],
+                    'duration' => $lesson['duration'],
                     'display_order' => $key + 1,
                 ]);
 
