@@ -41,7 +41,7 @@
 
 @yield('layout-header')
 
-<main class="flex flex-col w-full min-h-screen" @yield('body-data')>
+<main class="flex flex-col w-full" @yield('body-data')>
     @yield('layout-body')
 </main>
 
