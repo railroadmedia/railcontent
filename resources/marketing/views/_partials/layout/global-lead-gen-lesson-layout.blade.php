@@ -1,6 +1,6 @@
 @extends('_partials.layout.global-template')
 
-@section('global-head')
+@section('meta')
     <title>{{ $leadgen->title }}</title>
     <meta property="og:title" content="{{ $leadgen->title }}"/>
     <meta name="description" content="{{ $leadgen->meta_desc }}">
@@ -8,22 +8,18 @@
 {{--    <meta property="og:url" content="https://www.drumeo.com/drum-fills/"/>--}}
     <meta property="og:image" content="{{ $leadgen->meta_img }}"/>
     <meta name="robots" content="noindex">
+@stop
 
-    @include('_partials.layout._fonts')
-
-    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
-    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
+@section('layout-styles')
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/lead-gen.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/lead-gen-tw.css') }}">
+@endsection
 
-    @yield('styles')
-@stop
+@section('layout-body')
+    @include($theme.".sales.partials._nav")
 
-@section('global-body')
-    @include("drumeo.sales.partials._nav")
-
-    <div class="overflow-hidden text-white px-3 py-5 sm:py-7" style="background-color:#000a1e;">
+    <div class="overflow-hidden text-white px-3 py-10 sm:pb-16 sm:pt-24" style="background-color:#000a1e;">
         <div class="container mx-auto clearfix" style="max-width:940px">
             <div class="text-center sm:px-3">
                 <div class="video-row relative mb-4 sm:mb-7">
@@ -42,16 +38,14 @@
             </div>
             <div class="title-header-interaction text-center">
                 <div class="px-2 md:px-3">
-                    <h3><strong>@yield('title')</strong></h3>
-                    @hasSection('lesson-number')
-                        <p class="text-light-navy mt-1 sm:mt-2">Lesson @yield('lesson-number') of @yield('total-lesson')</p>
-                    @endif
+                    <h3><strong>{{ $currentLesson->title }}</strong></h3>
+                    <p class="text-light-navy mt-1 sm:mt-2">Lesson {{ $currentLessonNum }} of {{ $totalLessonNum }}</p>
                 </div>
             </div>
             <div class="text-center mt-3 sm:mt-7 clearfix lesson-buttons flex justify-between">
                 <div class="mb-2 sm:mb-0 w-1/2 sm:w-1/3 px-2 md:px-3">
                     @if(!is_null($prevLesson))
-                        <a class="button block bg-{{ $theme }} hover:brightness-110 cursor-pointer" href="/{{ $prevLesson->slug }}">
+                        <a class="button block bg-{{ $theme }} hover:brightness-125 cursor-pointer" href="/{{ $prevLesson->slug }}">
                             <i class="fas fa-chevron-left"></i> @hasSection('prev-text') @yield('prev-text') @else Prev @endif
                         </a>
                     @else
@@ -61,14 +55,14 @@
 
                 <div class="complete-lesson mb-2 sm:mb-0 w-full sm:w-1/3 px-2 md:px-3 hidden sm:block next-lesson-button">
                     @hasSection('lesson-index')
-                        <a class="button block bg-{{ $theme }} hover:brightness-110 cursor-pointer" href="@yield('lesson-index')">
+                        <a class="button block bg-{{ $theme }} hover:brightness-125 cursor-pointer" href="@yield('lesson-index')">
                             <i class="fas fa-chevron-up"></i> Lesson Index
                         </a>
                     @endif
                 </div>
                 <div class="w-1/2 sm:w-1/3 px-2 md:px-3 next-lesson-button">
                     @if(!is_null($nextLesson))
-                        <a class="button block bg-{{ $theme }} hover:brightness-110 cursor-pointer" href="/{{ $nextLesson->slug }}">
+                        <a class="button block bg-{{ $theme }} hover:brightness-125 cursor-pointer" href="/{{ $nextLesson->slug }}">
                             @hasSection('next-text') @yield('next-text') @else Next @endif <i class="fas fa-chevron-right"></i>
                         </a>
                     @else
@@ -145,9 +139,9 @@
         </section>
     @endif
 
-    @include("drumeo.sales.partials._footer", [
+    @include($theme.".sales.partials._footer", [
             "minimal" => true
-        ])
+    ])
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
