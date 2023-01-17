@@ -355,12 +355,31 @@ class MyListJsonController extends Controller
      */
     public function pinPlaylist(Request $request)
     {
-        $pin = $this->userPlaylistsService->pinPlaylist($request->get('user_playlist_id'));
+        $allowedPinNumber = config('railcontent.pinned_playlists_nr', 5);
+        $myPinnedPlaylists = $this->userPlaylistsService->getPinnedPlaylists();
 
-        return reply()->json([$pin], [
-            'code' => $pin ? 200 : 500,
-            'transformer' => DataTransformer::class,
-        ]);
+        if(count($myPinnedPlaylists) < $allowedPinNumber) {
+            $pin = $this->userPlaylistsService->pinPlaylist($request->get('user_playlist_id'));
+
+            return reply()->json([$pin], [
+                'code' => $pin ? 200 : 500,
+                'transformer' => DataTransformer::class,
+            ]);
+        }
+
+        return response()->json(
+            [
+                'success' => false,
+                'errors' => [
+                    [
+                        'detail' => 'You can only pin five playlists to the menu. To add or remove a playlist, toggle 
+the pin icon on or off.',
+                    ],
+                ],
+            ],
+            422
+        );
+
     }
 
     /**
