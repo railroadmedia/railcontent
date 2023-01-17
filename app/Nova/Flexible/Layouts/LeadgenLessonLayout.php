@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 use Laravel\Nova\Fields\Hidden;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Number;
 use Whitecube\NovaFlexibleContent\Flexible;
 use Whitecube\NovaFlexibleContent\Layouts\Layout;
 
@@ -77,6 +78,7 @@ class LeadgenLessonLayout extends Layout
                 }),
             Text::make('thumbnail')->hideFromIndex()->hideFromDetail()->required(),
             Text::make('Video Src', 'video_src')->hideFromIndex()->required(),
+            Number::make('duration')->help('In minutes'),
             Flexible::make('Assets')
                 ->addLayout(LeadgenLessonAssetLayout::class)
                 ->preset(LeadgenLessonAssetPreset::class),
