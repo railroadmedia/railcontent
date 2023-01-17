@@ -37,7 +37,12 @@ return [
             'live_event_end_time_in_timezone',
             'published_on_in_timezone',
             'lesson_count',
-            'lessons'
+            'lessons',
+            'coach_card_image',
+            'coach_bottom_banner_image',
+            'coach_top_banner_image',
+            'coach_profile_image',
+            'coach_featured_image',
         ],
 
         'instructor' => [
