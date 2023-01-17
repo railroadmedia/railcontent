@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
 use Railroad\Railcontent\Decorators\Decorator;
+use Railroad\Railcontent\Repositories\PlaylistLikeRepository;
 use Railroad\Railcontent\Repositories\UserPlaylistContentRepository;
 use Railroad\Railcontent\Repositories\UserPlaylistsRepository;
 use Railroad\Railcontent\Repositories\PinnedPlaylistsRepository;
@@ -20,6 +21,7 @@ class UserPlaylistsService
     private $userPlaylistContentRepository;
 
     private PinnedPlaylistsRepository $pinnedPlaylistsRepository;
+    private PlaylistLikeRepository $playlistLikeRepository;
 
     /**
      * @param UserPlaylistsRepository $userPlaylistRepository
@@ -28,11 +30,13 @@ class UserPlaylistsService
     public function __construct(
         UserPlaylistsRepository $userPlaylistRepository,
         UserPlaylistContentRepository $userPlaylistContentRepository,
-        PinnedPlaylistsRepository $pinnedPlaylistsRepository
+        PinnedPlaylistsRepository $pinnedPlaylistsRepository,
+        PlaylistLikeRepository $playlistLikeRepository
     ) {
         $this->userPlaylistsRepository = $userPlaylistRepository;
         $this->userPlaylistContentRepository = $userPlaylistContentRepository;
         $this->pinnedPlaylistsRepository = $pinnedPlaylistsRepository;
+        $this->playlistLikeRepository = $playlistLikeRepository;
     }
 
     /**
@@ -180,7 +184,12 @@ class UserPlaylistsService
      */
     public function getPlaylist($playlistId)
     {
-        return $this->userPlaylistsRepository->getById($playlistId);
+        $playlist = $this->userPlaylistsRepository->getById($playlistId);
+        $playlist['like_count'] = $this->playlistLikeRepository->query()->where('playlist_id', $playlistId)->count();
+        $playlist['is_liked_by_current_user'] = $this->playlistLikeRepository->query()->where('playlist_id', $playlistId)->where('user_id', auth()->id())->count() > 0;
+        $playlist['pinned'] = $this->pinnedPlaylistsRepository->query()->where('playlist_id', $playlistId)->count() > 0;
+
+        return $playlist;
     }
 
     /**
