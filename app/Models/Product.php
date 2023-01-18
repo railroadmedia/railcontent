@@ -195,23 +195,31 @@ class Product extends Model
             }
 
             if(gettype($model['meta_img']) === 'object'){
-                $model['meta_img'] = $model->brand->name.'/'.$uuid.'-'.$model['meta_img']->getClientOriginalName();
+                $model['meta_img'] = 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$model->brand->name.'/Meta-images/'.$uuid.'-'.$model['meta_img']->getClientOriginalName();
+            }
+
+            if(gettype($model['spread_img']) === 'object'){
+                $model['spread_img'] = 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$model->brand->name.'/Spread-images/'.$uuid.'-'.$model['spread_img']->getClientOriginalName();
             }
 
             if(gettype($model['thumbnail']) === 'object'){
-                $model['thumbnail'] = $model->brand->name.'/'.$uuid.'-'.$model['thumbnail']->getClientOriginalName();
+                $model['thumbnail'] = 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$model->brand->name.'/Thumbnails/'.$uuid.'-'.$model['thumbnail']->getClientOriginalName();
             }
 
             if(gettype($model['thumbnail_logo']) === 'object'){
-                $model['thumbnail_logo'] = $model->brand->name.'/'.$uuid.'-'.$model['thumbnail_logo']->getClientOriginalName();
+                $model['thumbnail_logo'] = 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$model->brand->name.'/Thumbnail-logos/'.$uuid.'-'.$model['thumbnail_logo']->getClientOriginalName();
             }
 
             if(gettype($model['page_logo']) === 'object'){
-                $model['page_logo'] = $model->brand->name.'/'.$uuid.'-'.$model['page_logo']->getClientOriginalName();
+                $model['page_logo'] = 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$model->brand->name.'/Page-logos/'.$uuid.'-'.$model['page_logo']->getClientOriginalName();
             }
 
             if(gettype($model['product_img']) === 'object'){
-                $model['product_img'] = $model->brand->name.'/'.$uuid.'-'.$model['product_img']->getClientOriginalName();
+                $model['product_img'] = 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$model->brand->name.'/Product-images/'.$uuid.'-'.$model['product_img']->getClientOriginalName();
+            }
+
+            if(gettype($model['bundle_img']) === 'object'){
+                $model['bundle_img'] = 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$model->brand->name.'/Bundle-images/'.$uuid.'-'.$model['bundle_img']->getClientOriginalName();
             }
         });
 
