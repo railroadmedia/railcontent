@@ -103,34 +103,22 @@ class HomePageController extends BaseController
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
         ContentLikesDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
 
-        function mapCarousel($data){
-            $data->map(function($item, $key){
-                if(!str_contains($item['img'], 'imagedelivery') && !str_contains($item['img'], 'amazonaws') && !str_contains($item['img'], 'cloudfront') && !str_contains($item['img'], 'vimeocdn')){
-                    return $item['img'] = 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$item['img'];
-                }
-            });
-        }
-
         switch (brand()) {
             case 'drumeo':
                 $methodSlug = 'drumeo-method';
                 $carousel = Carousel::query()->where('brand_id', 1)->orderBy('display_order')->get();
-                mapCarousel($carousel);
                 break;
             case 'pianote':
                 $methodSlug = 'pianote-method';
                 $carousel = Carousel::query()->where('brand_id', 2)->orderBy('display_order')->get();
-                mapCarousel($carousel);
                 break;
             case 'guitareo':
                 $methodSlug = 'guitareo-method';
                 $carousel = Carousel::query()->where('brand_id', 3)->orderBy('display_order')->get();
-                mapCarousel($carousel);
                 break;
             case 'singeo':
                 $methodSlug = 'singeo-method';
                 $carousel = Carousel::query()->where('brand_id', 4)->orderBy('display_order')->get();
-                mapCarousel($carousel);
                 break;
             default:
                 throw new NotFoundHttpException();
