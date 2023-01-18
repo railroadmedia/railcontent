@@ -330,12 +330,15 @@ class MyListJsonController extends Controller
     public function addItemToPlaylist(Request $request)
     {
         $this->userPlaylistsService->addItemToPlaylist(
-            $request->get('user_playlist_id'),
+            $request->get('playlist_id'),
             $request->get('content_id'),
-            $request->get('position')
+            $request->get('position'),
+            $request->get('extra_data'),
+            $request->get('start_second'),
+            $request->get('end_second')
         );
 
-        return response()->json(['success']);
+        return $this->getPlaylistLessons($request);
     }
 
     /**
@@ -372,7 +375,7 @@ class MyListJsonController extends Controller
         $myPinnedPlaylists = $this->userPlaylistsService->getPinnedPlaylists();
 
         if(count($myPinnedPlaylists) < $allowedPinNumber) {
-            $pin = $this->userPlaylistsService->pinPlaylist($request->get('user_playlist_id'));
+            $pin = $this->userPlaylistsService->pinPlaylist($request->get('playlist_id'));
 
             return reply()->json([$pin], [
                 'code' => $pin ? 200 : 500,
@@ -401,7 +404,7 @@ the pin icon on or off.',
      */
     public function unpinPlaylist(Request $request)
     {
-        $deleted =$this->userPlaylistsService->unpinPlaylist($request->get('user_playlist_id'));
+        $deleted =$this->userPlaylistsService->unpinPlaylist($request->get('playlist_id'));
 
         return reply()->json([[$deleted>0]], [
             'code' => $deleted ? 200 : 500,
@@ -426,7 +429,7 @@ the pin icon on or off.',
      */
     public function likePlaylist(Request $request)
     {
-        $this->userPlaylistsService->pinPlaylist($request->get('user_playlist_id'));
+        $this->userPlaylistsService->pinPlaylist($request->get('playlist_id'));
 
         return response()->json(['success']);
     }
@@ -444,5 +447,23 @@ the pin icon on or off.',
                                                       'total_results' => $this->userPlaylistsService->countUserPlaylistContents($request->get('playlist_id')),
                                                   ]);
         return $lessons;
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function changePlaylistContent(Request $request){
+
+        $this->userPlaylistsService->changePlaylistContent(
+            $request->get('playlist_id'),
+            $request->get('content_id'),
+            $request->get('position'),
+            $request->get('extra_data'),
+            $request->get('start_second'),
+            $request->get('end_second')
+        );
+
+        return $this->getPlaylistLessons($request);
     }
 }

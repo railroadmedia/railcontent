@@ -163,24 +163,29 @@ class UserPlaylistsService
         return $this->userPlaylistsRepository->getPublicPlaylists($type, $brand);
     }
 
-    public function addItemToPlaylist($userPlaylistId, $contentId, $position = null, $extraData = [], $startSecond = null, $endSecond = null)
-    {
-        //TODO: reposition 
-        return $this->userPlaylistContentRepository->updateOrCreate([
-                                                                        'user_playlist_id' => $userPlaylistId,
-                                                                        'content_id' => $contentId,
-                                                                    ], [
-                                                                        'user_playlist_id' => $userPlaylistId,
-                                                                        'content_id' => $contentId,
-                                                                        'position' => $position ?? 1,
-                                                                        'extra_data'=> $extraData,
-                                                                        'start_second' =>  $startSecond,
-                                                                        'end_second' => $endSecond,
-                                                                        'created_at' => Carbon::now()
-                                                                            ->toDateTimeString(),
-                                                                        'updated_at' => Carbon::now()
-                                                                            ->toDateTimeString(),
-                                                                    ]);
+    /**
+     * @param $userPlaylistId
+     * @param $contentId
+     * @param null $position
+     * @param array $extraData
+     * @param null $startSecond
+     * @param null $endSecond
+     * @return bool
+     */
+    public function addItemToPlaylist($userPlaylistId, $contentId, $position = null, $extraData = [], $startSecond = null, $endSecond = null){
+        $input = [
+            'content_id' => $contentId,
+            'user_playlist_id' => $userPlaylistId,
+            'position' => $position,
+            'extra_data' => $extraData,
+            'start_second' => $startSecond,
+            'end_second' => $endSecond,
+            'created_at' => Carbon::now()->toDateTimeString()
+        ];
+
+        $this->userPlaylistContentRepository->createOrUpdatePlaylistContentAndReposition(null, $input);
+
+        return $this->getUserPlaylistContents($userPlaylistId);
     }
 
     /**
@@ -276,6 +281,35 @@ class UserPlaylistsService
     public function getByPlaylistId($playlistId)
     {
         return $this->userPlaylistContentRepository->getByPlaylistId($playlistId);
+    }
+
+    /**
+     * @param $userPlaylistId
+     * @param $contentId
+     * @param null $position
+     * @param array $extraData
+     * @param null $startSecond
+     * @param null $endSecond
+     * @return mixed|\Railroad\Railcontent\Support\Collection|null
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
+    public function changePlaylistContent($userPlaylistId, $contentId, $position = null, $extraData = [], $startSecond = null, $endSecond = null){
+
+        $playlistContent = \Arr::first($this->userPlaylistContentRepository->getByPlaylistIdAndContentId($userPlaylistId, $contentId));
+
+        $input = [
+            'content_id' => $contentId,
+            'user_playlist_id' => $userPlaylistId,
+            'position' => $position,
+            'extra_data' => $extraData,
+            'start_second' => $startSecond,
+            'end_second' => $endSecond,
+            'updated_at' => Carbon::now()->toDateTimeString()
+        ];
+
+        $this->userPlaylistContentRepository->createOrUpdatePlaylistContentAndReposition($playlistContent['id'], $input);
+
+        return $this->getUserPlaylistContents($userPlaylistId);
     }
 
 }

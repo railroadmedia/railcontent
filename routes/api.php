@@ -231,6 +231,8 @@ Route::group(
 
         Route::get('/playlist-lessons', MyListJsonController::class . '@getPlaylistLessons');
 
+        Route::put('/change-playlist-content', MyListJsonController::class . '@changePlaylistContent');
+
 //        Route::put('/remove-from-my-list', MyListJsonController::class . '@removeFromPrimaryPlaylist');
 //        Route::get('/my-list', MyListJsonController::class . '@getMyLists');
         //addItemToPlaylist
