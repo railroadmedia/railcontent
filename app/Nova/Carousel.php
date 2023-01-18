@@ -86,7 +86,7 @@ class Carousel extends Resource
                 ->preview(function($value){
                     if(empty($value)) return null;
 
-                    return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') || str_contains($value, 'vimeocdn') || str_contains($value, 'imagedelivery') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
+                    return $value;
                 }),
             Text::make('Image', 'img')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
             Number::make('Display order', 'display_order'),
