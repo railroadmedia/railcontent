@@ -29,7 +29,7 @@ const emit = defineEmits(['onTierSelect']);
                                     fill="white" />
                             </svg>
                         </div>
-                        <p class="tw-opacity-60 tw-text-[10px]"><em>Lessons, songs & support</em></p>
+                        <p class="tw-opacity-60 tw-text-[10px]"><em>Lessons, songs & support.</em></p>
                     </div>
                     <div
                         class="tw-flex tw-h-full tw-absolute tw-right-0 tw-items-center tw-justify-end -tw-mb-2 tw-mr-2">
@@ -47,7 +47,7 @@ const emit = defineEmits(['onTierSelect']);
                     :class="`${selectedTier === 'basic' ? 'tw-bg-[#082b4a]' : 'tw-bg-[#273040]'}`">
                     <div class="tw-text-left">
                         <img class="tw-w-[79px]" src="https://dmmior4id2ysr.cloudfront.net/logos/musora-logo-white.png">
-                        <p class="tw-opacity-60 tw-text-[10px]"><em>Lesson & support.</em></p>
+                        <p class="tw-opacity-60 tw-text-[10px]"><em>Lessons & support.</em></p>
                     </div>
                     <div
                         class="tw-flex tw-h-full tw-absolute tw-right-0 tw-items-center tw-justify-end -tw-mb-2 tw-mr-4">
