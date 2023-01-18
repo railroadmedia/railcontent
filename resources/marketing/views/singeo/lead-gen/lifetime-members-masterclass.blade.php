@@ -160,20 +160,20 @@
 @stop
 
 @section('global-body')
-    @include("drumeo.sales.partials._nav")
+    @include("singeo.sales.partials._nav")
     <header class="header text-white text-center px-4 sm:px-6 py-14 md:py-20 lg:py-32 relative bg-no-repeat bg-cover bg-top lazyload" style="background-color:#031e3b;" data-bg="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://singeo.s3.amazonaws.com/products/shop-header.jpg">
         <div class="mx-auto relative z-10 max-w-md md:max-w-5xl">
                 <h1><strong>Lifetime Members Masterclass</strong></h1>
                 <h3>with Lisa Witt</h3>
         </div>
     </header>
-    <section class="text-center text-white py-8 md:py-24 px-5 md:px-7" style="background:#00101d ;">
+    <section class="text-center text-white py-8 md:py-32 px-5 md:px-7" style="background:#00101d ;">
         <div class="container mx-auto text-center max-w-2xl">
-            <div class="bg-white text-center rounded-md inline-block overflow-hidden w-14 mr-2 align-middle transition-opacity group-hover:opacity-70">
+            <div class="bg-white text-center rounded-md inline-block overflow-hidden w-12 sm:w-14 mr-2 align-middle transition-opacity group-hover:opacity-70">
                 <p class="leading-none tracking-tighter text-xs py-1 text-white" style="background-color:#bb3744;"><strong>JAN</strong></p>
                 <p class="leading-none text-lg py-1.5 text-black"><strong class="font-black">31</strong></p>
             </div>
-            <a target="_blank" class=" @if(Carbon\Carbon::create(2023, 1, 31, 16, 0, 0, 'America/Vancouver') < Carbon\Carbon::now()) sold-out @endif join blue smaller" href="https://us06web.zoom.us/j/82096873355?pwd=Wmdjb25Bc0psRFZQaTV4RTQ2aVNhUT09">Livestream Access - 2 PM PST</a>
+            <a target="_blank" class=" @if(Carbon\Carbon::create(2023, 1, 31, 16, 0, 0, 'America/Vancouver') < Carbon\Carbon::now()) sold-out @endif join blue smaller" href="https://us06web.zoom.us/j/82096873355?pwd=Wmdjb25Bc0psRFZQaTV4RTQ2aVNhUT09">Livestream Access - 2PM PST</a>
         </div>
     </section>
 
