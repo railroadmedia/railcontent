@@ -71,7 +71,7 @@ class UserPlaylistContentRepository extends RepositoryBase
         }
 
         $contentRows =
-            $query->orderBy(config('railcontent.table_prefix').'user_playlist_content.id', 'desc')
+            $query->orderBy(config('railcontent.table_prefix').'user_playlist_content.position', 'asc')
                 ->get()
                 ->toArray();
 
