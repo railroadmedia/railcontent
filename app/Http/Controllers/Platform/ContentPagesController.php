@@ -89,7 +89,9 @@ class ContentPagesController extends BaseController
             return $this->guitareoLessonsPage($request, $domain, $brand);
         }
 
-        if ($contentTypeName == 'songs' && !user()->isAPlusMember()) {
+
+
+        if ($contentTypeName == 'songs' && !user()->hasSongsAccess($brand)) {
             return redirect()->away(get_legacy_brand_base_url()); // todo: send to songs upgrade page
         }
 
