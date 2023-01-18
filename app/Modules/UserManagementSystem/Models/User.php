@@ -824,8 +824,11 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     }
 
 
-    public function hasSongsAccess(string $brand): bool
+    public function hasSongsAccess(?string $brand = null): bool
     {
+        if (!$brand) {
+            $brand = brand();
+        }
         return $this->isAPlusMember() ||
             ($brand == 'drumeo' && $this->is_drumeo_lifetime_member);
     }
