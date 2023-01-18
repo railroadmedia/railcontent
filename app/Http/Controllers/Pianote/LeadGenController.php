@@ -79,6 +79,11 @@ class LeadGenController extends BaseController
         return view('pianote.lead-gen.one-million');
     }
 
+    public function lifetimeMasterclass()
+    {
+        return view('pianote.lead-gen.lifetime-members-masterclass');
+    }
+
     public function beginnerBootcamp(Request $request, $domain, $page = null)
     {
         if(is_null($page)){
