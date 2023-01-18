@@ -27,6 +27,7 @@ class ImageResolver implements ResolverInterface
 
             return $layout->duplicateAndHydrate($image->id, [
                 'path_file' => $image->path,
+                'path_text' => $image->path,
                 'id' => $image->id
             ],
             );
@@ -71,7 +72,7 @@ class ImageResolver implements ResolverInterface
 
                     $dbImg->save();
 
-                    $updateIds[] = $image['id'];
+                     $updatedIds[] = $image['id'];
                 }
 
                 elseif(!empty($image['path'])) {
@@ -81,13 +82,20 @@ class ImageResolver implements ResolverInterface
                     $addImg->order_number = $image['order_number'];
                     $addImg->save();
 
-                    $updateIds[] = $addImg->id;
+                    $updatedIds[] = $addImg->id;
                 }
             }
 
             //delete items
-            if(isset($updateIds)){
-                $deleteImgs = Image::where('product_id', '=', $model['id'])->whereNotIn('id', $updateIds)->delete();
+            if(isset($updatedIds)){
+                $imgs = Image::where('product_id', $model['id'])->whereNotIn('id', $updatedIds);
+                if(count($imgs->get()) > 0){
+                    foreach($imgs->get() as $img){
+                        Storage::disk('nova_s3')->delete($img->path);
+                    }
+
+                    $imgs->delete();
+                }
             }
         });
     }
