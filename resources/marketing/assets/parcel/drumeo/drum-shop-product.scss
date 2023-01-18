@@ -107,10 +107,6 @@ h3 {
     cursor: pointer;
     height: initial;
     position: relative;
-
-    &.slick-current img {
-      border-color: $drumeoBlue !important;
-    }
   }
 
   .drumshop-accordion {

@@ -77,12 +77,12 @@ class Accessory extends Resource
                         $brand = 'Singeo';
                     }
 
-                    return '/'.$brand.'/'.$request->uuid.'-'.$request->file('meta_img')->getClientOriginalName();
+                    return '/'.$brand.'/Meta-images/'.$request->uuid.'-'.$request->file('meta_img')->getClientOriginalName();
                 })
                 ->preview(function($value){
                     if(empty($value)) return null;
 
-                    return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') || str_contains($value, 'vimeocdn') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
+                    return $value;
                 }),
             Text::make('Meta Image', 'meta_img')->hideFromIndex()->hideFromDetail(),
             Text::make('Promo Code', 'promo_code')->hideFromIndex(),
@@ -114,12 +114,12 @@ class Accessory extends Resource
                         $brand = 'Singeo';
                     }
 
-                    return '/'.$brand.'/'.$request->uuid.'-'.$request->file('thumbnail')->getClientOriginalName();
+                    return '/'.$brand.'/Thumbnails/'.$request->uuid.'-'.$request->file('thumbnail')->getClientOriginalName();
                 })
                 ->preview(function($value){
                     if(empty($value)) return null;
 
-                    return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') || str_contains($value, 'vimeocdn') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
+                    return $value;
                 }),
             Text::make('Shop Card Thumbnail', 'thumbnail')->hideFromIndex()->hideFromDetail(),
             Text::make('Shop Card Description', 'short_desc')->hideFromIndex(),
@@ -165,12 +165,12 @@ class Accessory extends Resource
                         $brand = 'Singeo';
                     }
 
-                    return '/'.$brand.'/bundle-image'.$request->uuid.'-'.$request->file('bundle_img')->getClientOriginalName();
+                    return '/'.$brand.'/Bundle-images'.$request->uuid.'-'.$request->file('bundle_img')->getClientOriginalName();
                 })
                 ->preview(function($value){
                     if(empty($value)) return null;
 
-                    return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') || str_contains($value, 'vimeocdn') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
+                    return $value;
                 }),
             Text::make('Bundle Image', 'bundle_img')->hideFromIndex()->hideFromDetail(),
             Text::make('Bundle Description', 'bundle_desc')->hideFromIndex(),

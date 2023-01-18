@@ -143,11 +143,15 @@ export default {
             type: String,
             default: () => 'drumeo',
         },
+        initSort: {
+            type: String,
+            default: '-published_on'
+        }
     },
     data() {
         return {
             eventTypeValue: this.eventType,
-            sort: "-published_on",
+            sort: this.initSort,
         };
     },
     watch: {
