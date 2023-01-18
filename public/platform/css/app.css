@@ -16403,6 +16403,11 @@ content-catalogue, transition {
     padding-bottom: 50%;
   }
 }
+@media screen and (max-width: 767px) {
+  .gq-large-thumb {
+    display: none;
+  }
+}
 /**
 * Make a horizontal gradient with 2 colors
 *
@@ -16865,7 +16870,7 @@ content-catalogue, transition {
 }
 
 .sheet-music-col {
-  flex: 0 0 250px;
+  flex: 0 0 200px;
 }
 
 .login-col {
@@ -21408,14 +21413,17 @@ a:visited{
 .tw-right-3{
   right: 0.75rem !important;
 }
+.tw-top-\[12px\]{
+  top: 12px !important;
+}
+.tw-right-\[12px\]{
+  right: 12px !important;
+}
 .tw-top-3{
   top: 0.75rem !important;
 }
 .tw-right-\[2px\]{
   right: 2px !important;
-}
-.tw-top-\[12px\]{
-  top: 12px !important;
 }
 .tw-right-2{
   right: 0.5rem !important;
@@ -21431,9 +21439,6 @@ a:visited{
 }
 .tw-top-\[14px\]{
   top: 14px !important;
-}
-.tw-right-\[12px\]{
-  right: 12px !important;
 }
 .tw-right-auto{
   right: auto !important;
@@ -21593,6 +21598,10 @@ a:visited{
 .tw-mx-\[12px\]{
   margin-left: 12px !important;
   margin-right: 12px !important;
+}
+.tw-my-auto{
+  margin-top: auto !important;
+  margin-bottom: auto !important;
 }
 .tw-my-5{
   margin-top: 1.25rem !important;
@@ -21781,14 +21790,23 @@ a:visited{
 .-tw-ml-1{
   margin-left: -0.25rem !important;
 }
+.-tw-mt-3{
+  margin-top: -0.75rem !important;
+}
+.tw-mb-\[10px\]{
+  margin-bottom: 10px !important;
+}
 .-tw-mt-\[10px\]{
   margin-top: -10px !important;
 }
 .-tw-mb-2{
   margin-bottom: -0.5rem !important;
 }
-.-tw-mt-3{
-  margin-top: -0.75rem !important;
+.tw-mt-\[30px\]{
+  margin-top: 30px !important;
+}
+.tw-mt-\[24px\]{
+  margin-top: 24px !important;
 }
 .tw-ml-\[16px\]{
   margin-left: 16px !important;
@@ -21835,9 +21853,6 @@ a:visited{
 .tw-mr-0{
   margin-right: 0px !important;
 }
-.tw-mt-\[30px\]{
-  margin-top: 30px !important;
-}
 .tw-mb-\[-20px\]{
   margin-bottom: -20px !important;
 }
@@ -21849,9 +21864,6 @@ a:visited{
 }
 .tw-mt-\[40px\]{
   margin-top: 40px !important;
-}
-.tw-mt-\[24px\]{
-  margin-top: 24px !important;
 }
 .tw-mr-1\.5{
   margin-right: 0.375rem !important;
@@ -21921,6 +21933,12 @@ a:visited{
 }
 .tw-inline-flex{
   display: inline-flex !important;
+}
+.tw-table{
+  display: table !important;
+}
+.tw-table-row{
+  display: table-row !important;
 }
 .tw-grid{
   display: grid !important;
@@ -22129,6 +22147,9 @@ a:visited{
 .tw-h-52{
   height: 13rem !important;
 }
+.tw-max-h-\[100vh\]{
+  max-height: 100vh !important;
+}
 .tw-max-h-8{
   max-height: 2rem !important;
 }
@@ -22161,6 +22182,9 @@ a:visited{
 }
 .tw-min-h-\[369px\]{
   min-height: 369px !important;
+}
+.tw-min-h-\[137px\]{
+  min-height: 137px !important;
 }
 .tw-min-h-\[105px\]{
   min-height: 105px !important;
@@ -22283,14 +22307,20 @@ a:visited{
 .tw-w-\[24px\]{
   width: 24px !important;
 }
+.tw-w-\[26px\]{
+  width: 26px !important;
+}
 .tw-w-\[115px\]{
   width: 115px !important;
 }
-.tw-w-\[198px\]{
-  width: 198px !important;
+.tw-w-\[160px\]{
+  width: 160px !important;
 }
 .tw-w-\[79px\]{
   width: 79px !important;
+}
+.tw-w-\[106px\]{
+  width: 106px !important;
 }
 .tw-w-\[30px\]{
   width: 30px !important;
@@ -22300,9 +22330,6 @@ a:visited{
 }
 .tw-w-\[42\%\]{
   width: 42% !important;
-}
-.tw-w-\[26px\]{
-  width: 26px !important;
 }
 .tw-w-5{
   width: 1.25rem !important;
@@ -22892,6 +22919,9 @@ a:visited{
 .tw-border-t{
   border-top-width: 1px !important;
 }
+.tw-border-b-\[3px\]{
+  border-bottom-width: 3px !important;
+}
 .tw-border-t-\[1px\]{
   border-top-width: 1px !important;
 }
@@ -23174,6 +23204,14 @@ a:visited{
 .tw-bg-\[\#00101D\]{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(0 16 29 / var(--tw-bg-opacity)) !important;
+}
+.tw-bg-\[\#082b4a\]{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(8 43 74 / var(--tw-bg-opacity)) !important;
+}
+.tw-bg-\[\#273040\]{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(39 48 64 / var(--tw-bg-opacity)) !important;
 }
 .tw-bg-\[\#000000\]{
   --tw-bg-opacity: 1 !important;
@@ -23573,17 +23611,17 @@ a:visited{
   padding-top: 42px !important;
   padding-bottom: 42px !important;
 }
-.tw-px-5{
-  padding-left: 1.25rem !important;
-  padding-right: 1.25rem !important;
+.tw-px-2{
+  padding-left: 0.5rem !important;
+  padding-right: 0.5rem !important;
 }
 .tw-py-10{
   padding-top: 2.5rem !important;
   padding-bottom: 2.5rem !important;
 }
-.tw-px-2{
-  padding-left: 0.5rem !important;
-  padding-right: 0.5rem !important;
+.tw-px-5{
+  padding-left: 1.25rem !important;
+  padding-right: 1.25rem !important;
 }
 .tw-py-0\.5{
   padding-top: 0.125rem !important;
@@ -23592,6 +23630,10 @@ a:visited{
 .tw-py-0{
   padding-top: 0px !important;
   padding-bottom: 0px !important;
+}
+.tw-px-\[30px\]{
+  padding-left: 30px !important;
+  padding-right: 30px !important;
 }
 .tw-py-\[32px\]{
   padding-top: 32px !important;
@@ -23727,6 +23769,9 @@ a:visited{
 }
 .tw-pb-9{
   padding-bottom: 2.25rem !important;
+}
+.tw-pt-\[12px\]{
+  padding-top: 12px !important;
 }
 .tw-pb-\[42px\]{
   padding-bottom: 42px !important;
@@ -24249,6 +24294,9 @@ a:visited{
 .tw-opacity-25{
   opacity: 0.25 !important;
 }
+.tw-opacity-50{
+  opacity: 0.5 !important;
+}
 .tw-opacity-60{
   opacity: 0.6 !important;
 }
@@ -24572,13 +24620,13 @@ a:visited{
   --tw-text-opacity: 1 !important;
   color: rgb(0 16 23 / var(--tw-text-opacity)) !important;
 }
-.hover\:tw-text-black:hover{
-  --tw-text-opacity: 1 !important;
-  color: rgb(0 0 0 / var(--tw-text-opacity)) !important;
-}
 .hover\:tw-text-gray-500:hover{
   --tw-text-opacity: 1 !important;
   color: rgb(107 114 128 / var(--tw-text-opacity)) !important;
+}
+.hover\:tw-text-black:hover{
+  --tw-text-opacity: 1 !important;
+  color: rgb(0 0 0 / var(--tw-text-opacity)) !important;
 }
 .hover\:tw-text-\[\#0B76DB\]:hover{
   --tw-text-opacity: 1 !important;
@@ -25280,11 +25328,17 @@ a:visited{
   .tw-btn-primary.md\:tw-bg-singeo:active{
     background-color: #6900BA;
   }
+  .md\:tw-static{
+    position: static !important;
+  }
   .md\:tw-absolute{
     position: absolute !important;
   }
   .md\:tw-relative{
     position: relative !important;
+  }
+  .md\:tw-right-\[32px\]{
+    right: 32px !important;
   }
   .md\:tw-top-\[32px\]{
     top: 32px !important;
@@ -25294,9 +25348,6 @@ a:visited{
   }
   .md\:tw-left-\[32px\]{
     left: 32px !important;
-  }
-  .md\:tw-right-\[32px\]{
-    right: 32px !important;
   }
   .md\:tw-top-\[9px\]{
     top: 9px !important;
@@ -25380,6 +25431,9 @@ a:visited{
   .md\:tw-mb-8{
     margin-bottom: 2rem !important;
   }
+  .md\:tw-mt-4{
+    margin-top: 1rem !important;
+  }
   .md\:tw-mb-\[5px\]{
     margin-bottom: 5px !important;
   }
@@ -25433,9 +25487,6 @@ a:visited{
   }
   .md\:tw-h-60{
     height: 15rem !important;
-  }
-  .md\:tw-h-\[276px\]{
-    height: 276px !important;
   }
   .md\:tw-h-full{
     height: 100% !important;
@@ -25500,11 +25551,11 @@ a:visited{
   .md\:tw-w-44{
     width: 11rem !important;
   }
-  .md\:tw-w-\[620px\]{
-    width: 620px !important;
-  }
   .md\:tw-w-\[48px\]{
     width: 48px !important;
+  }
+  .md\:tw-w-\[620px\]{
+    width: 620px !important;
   }
   .md\:tw-w-\[54px\]{
     width: 54px !important;
@@ -25758,10 +25809,6 @@ a:visited{
     font-size: 1rem !important;
     line-height: 1.5rem !important;
   }
-  .md\:tw-text-xl{
-    font-size: 1.25rem !important;
-    line-height: 1.75rem !important;
-  }
   .md\:tw-text-\[16px\]{
     font-size: 16px !important;
   }
@@ -25779,6 +25826,10 @@ a:visited{
   .md\:tw-text-sm{
     font-size: 0.875rem !important;
     line-height: 1.25rem !important;
+  }
+  .md\:tw-text-xl{
+    font-size: 1.25rem !important;
+    line-height: 1.75rem !important;
   }
   .md\:tw-leading-none{
     line-height: 1 !important;
@@ -25816,14 +25867,14 @@ a:visited{
   .lg\:tw-left-2\/4{
     left: 50% !important;
   }
+  .lg\:tw-top-\[32px\]{
+    top: 32px !important;
+  }
   .lg\:tw-top-\[24px\]{
     top: 24px !important;
   }
   .lg\:tw-right-\[24px\]{
     right: 24px !important;
-  }
-  .lg\:tw-top-\[32px\]{
-    top: 32px !important;
   }
   .lg\:tw-left-0{
     left: 0px !important;
@@ -25858,6 +25909,9 @@ a:visited{
   }
   .lg\:tw-mb-\[20px\]{
     margin-bottom: 20px !important;
+  }
+  .lg\:tw-mt-6{
+    margin-top: 1.5rem !important;
   }
   .lg\:tw-mr-6{
     margin-right: 1.5rem !important;
@@ -25933,6 +25987,12 @@ a:visited{
   }
   .lg\:tw-w-\[10px\]{
     width: 10px !important;
+  }
+  .lg\:tw-w-\[755px\]{
+    width: 755px !important;
+  }
+  .lg\:tw-w-\[198px\]{
+    width: 198px !important;
   }
   .lg\:tw-w-\[750px\]{
     width: 750px !important;
@@ -26063,6 +26123,10 @@ a:visited{
     padding-top: 5rem !important;
     padding-bottom: 5rem !important;
   }
+  .lg\:tw-px-3{
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+  }
   .lg\:tw-px-\[12px\]{
     padding-left: 12px !important;
     padding-right: 12px !important;
@@ -26115,6 +26179,9 @@ a:visited{
     font-size: 3.75rem !important;
     line-height: 1 !important;
   }
+  .lg\:tw-text-\[36px\]{
+    font-size: 36px !important;
+  }
   .lg\:tw-text-\[24px\]{
     font-size: 24px !important;
   }
@@ -26149,6 +26216,9 @@ a:visited{
   }
   .xl\:tw-ml-\[36px\]{
     margin-left: 36px !important;
+  }
+  .xl\:tw-mt-auto{
+    margin-top: auto !important;
   }
   .xl\:tw-mb-0{
     margin-bottom: 0px !important;
@@ -26216,6 +26286,9 @@ a:visited{
   .xl\:tw-items-center{
     align-items: center !important;
   }
+  .xl\:tw-justify-start{
+    justify-content: flex-start !important;
+  }
   .xl\:tw-justify-end{
     justify-content: flex-end !important;
   }
@@ -26245,6 +26318,12 @@ a:visited{
     padding-left: 16px !important;
     padding-right: 16px !important;
   }
+  .xl\:tw-pt-\[5px\]{
+    padding-top: 5px !important;
+  }
+  .xl\:tw-pr-\[30px\]{
+    padding-right: 30px !important;
+  }
   .xl\:tw-pr-8{
     padding-right: 2rem !important;
   }
@@ -26253,6 +26332,9 @@ a:visited{
   }
   .xl\:tw-pt-0{
     padding-top: 0px !important;
+  }
+  .xl\:tw-text-left{
+    text-align: left !important;
   }
   .xl\:tw-text-center{
     text-align: center !important;
@@ -26267,10 +26349,6 @@ a:visited{
   .xl\:tw-text-xl{
     font-size: 1.25rem !important;
     line-height: 1.75rem !important;
-  }
-  .xl\:tw-text-4xl{
-    font-size: 2.25rem !important;
-    line-height: 2.5rem !important;
   }
   .xl\:tw-text-\[30px\]{
     font-size: 30px !important;
