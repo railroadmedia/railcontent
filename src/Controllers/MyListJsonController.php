@@ -263,10 +263,10 @@ class MyListJsonController extends Controller
                                                             'user_id' => auth()->id(),
                                                             'type' => 'user-playlist',
                                                             'brand' => $playlist['brand'],
-                                                            'name' => $playlist['name'],
-                                                            'description' => $playlist['description'],
-                                                            'thumbnail_url' => $playlist['thumbnail_url'],
-                                                            'category' => $playlist['category'],
+                                                            'name' => $request->get('name', $playlist['name']),
+                                                            'description' => $request->get('description',$playlist['description']),
+                                                            'thumbnail_url' => $request->get('thumbnail_url',$playlist['thumbnail_url']),
+                                                            'category' => $request->get('category',$playlist['category']),
                                                             'private' => $playlist['private'],
                                                             'created_at' => Carbon::now()
                                                                 ->toDateTimeString(),
@@ -278,7 +278,10 @@ class MyListJsonController extends Controller
             $res = $this->userPlaylistsService->addItemToPlaylist(
                 $playlist['id'],
                 $playlistLesson['content_id'],
-                $playlistLesson['position']
+                $playlistLesson['position'],
+                $playlistLesson['extra_data'],
+                $playlistLesson['start_second'],
+                $playlistLesson['end_second']
             );
         }
 

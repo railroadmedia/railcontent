@@ -163,9 +163,9 @@ class UserPlaylistsService
         return $this->userPlaylistsRepository->getPublicPlaylists($type, $brand);
     }
 
-    public function addItemToPlaylist($userPlaylistId, $contentId, $position = null)
+    public function addItemToPlaylist($userPlaylistId, $contentId, $position = null, $extraData = [], $startSecond = null, $endSecond = null)
     {
-        //TODO
+        //TODO: reposition 
         return $this->userPlaylistContentRepository->updateOrCreate([
                                                                         'user_playlist_id' => $userPlaylistId,
                                                                         'content_id' => $contentId,
@@ -173,6 +173,9 @@ class UserPlaylistsService
                                                                         'user_playlist_id' => $userPlaylistId,
                                                                         'content_id' => $contentId,
                                                                         'position' => $position ?? 1,
+                                                                        'extra_data'=> $extraData,
+                                                                        'start_second' =>  $startSecond,
+                                                                        'end_second' => $endSecond,
                                                                         'created_at' => Carbon::now()
                                                                             ->toDateTimeString(),
                                                                         'updated_at' => Carbon::now()
