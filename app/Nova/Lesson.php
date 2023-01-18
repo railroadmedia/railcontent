@@ -159,7 +159,7 @@ class Lesson extends Resource
             Boolean::make('Visible On Shop Page','visible')->default(true)->hideFromIndex(),
             Boolean::make('Included Edge', 'included_edge')->default(false)->hideFromIndex(),
             Number::make('Display order', 'display_order')->sortable()
-                ->help('Display order should be 0 if invisible on shop page.')
+                ->help('Display order should be 0 if set to invisible on shop page.')
                 ->dependsOn(
                     ['brand'],
                     function (Text $field, NovaRequest $request, FormData $formData) {
