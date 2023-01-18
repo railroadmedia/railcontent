@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Models\Product;
 use App\Models\ProductType;
 use App\Models\SizeChart;
 use App\Nova\Flexible\Layouts\FeatureLayout;
@@ -17,6 +18,7 @@ use Illuminate\Support\Str;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Currency;
+use Laravel\Nova\Fields\FormData;
 use Laravel\Nova\Fields\Heading;
 use Laravel\Nova\Fields\Hidden;
 use Laravel\Nova\Fields\ID;
@@ -133,7 +135,22 @@ class Clothing extends Resource
             Text::make('Shop Card Thumbnail', 'thumbnail')->hideFromIndex()->hideFromDetail(),
             Text::make('Shop Card Description', 'short_desc')->hideFromIndex(),
             Boolean::make('Visible On Shop Page','visible')->default(true)->hideFromIndex(),
-            Number::make('Display order', 'display_order')->default(0)->sortable(),
+            Number::make('Display order', 'display_order')->sortable()
+                ->dependsOn(
+                    ['brand'],
+                    function (Text $field, NovaRequest $request, FormData $formData) {
+                        if($formData->brand === '1' || $formData->brand === '2'){
+                            $display_num = Product::where('brand_id', $formData->brand)->whereIn('product_type_id',[3, 4, 5])->orderBy('display_order', 'DESC')->first();
+                        }
+                        else {
+                            $display_num = Product::where('brand_id', $formData->brand)->orderBy('display_order', 'DESC')->first();
+                        }
+
+                        if(!is_null($display_num)){
+                            $display_num = $display_num->display_order;
+                            $field->default($display_num+1);
+                        }
+                }),
             Heading::make('Product page'),
             Text::make('Header Text', 'header_text')->hideFromIndex(),
             Text::make('Subheader Text', 'subheader_text')->hideFromIndex(),
