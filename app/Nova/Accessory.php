@@ -128,6 +128,7 @@ class Accessory extends Resource
             Boolean::make('Visible On Shop Page','visible')->default(true)->hideFromIndex(),
             Number::make('Display order', 'display_order')->sortable()
                 ->help('Display order should be 0 if set to invisible on shop page.')
+                ->required()
                 ->dependsOn(
                     ['brand'],
                     function (Text $field, NovaRequest $request, FormData $formData) {
