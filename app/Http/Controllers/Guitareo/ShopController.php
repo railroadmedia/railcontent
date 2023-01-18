@@ -10,14 +10,14 @@ class ShopController extends BaseController
 {
     public function shop()
     {
-        $items = Product::whereHas('brand', fn($query) => $query->where('name', 'guitareo'))->where('visible', '=', 1)->where('product_type_id', '!=', 6)->where('deleted', 0)->orderBy('display_order')->get();
+        $items = Product::whereHas('brand', fn($query) => $query->where('name', 'guitareo'))->where('visible', '=', 1)->where('product_type_id', '!=', 6)->where('deleted_at', null)->orderBy('display_order')->get();
 
         return view('guitareo.shop.shop', [ 'items' => $items, 'theme' => 'guitareo' ]);
     }
 
     public function product($root, $slug)
     {
-        $product = Product::where('slug', 'Guitareo-'.$slug)->where('deleted', 0)->firstOrFail();
+        $product = Product::where('slug', 'Guitareo-'.$slug)->where('deleted_at', null)->firstOrFail();
 
         return view('guitareo.shop.product-layout', [ 'product' => $product, 'theme' => 'guitareo' ]);
     }
