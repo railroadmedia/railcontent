@@ -177,8 +177,7 @@
         'desc' => 'Unlock step-by-step lessons & 1000+ songs to reach your guitar goals in 2023. ',
            'text' => 'Learning songs has <u>never</u> been easier.<br><br>Introducing NEW Guitareo Songs – <strong>the ultimate tool for learning songs faster and better</strong> with note-for-note sheet music, tempo adjustments, and a looping feature.<br><br>And unlike other song tools, every song is perfectly transcribed and professionally proofed to guarantee its accuracy. Because playing songs should be fun, not frustrating.<br><br>PLUS you’ll have access to step-by-step video lessons on every topic, artist courses and exclusive events, and unlimited personal support to reach all of your guitar goals in 2023.<br><br>When you join today, you\'ll receive a Guitarist\'s Survival Kit for free (valued at $89) to help you sound even better on guitar.<br><br>Click below to grab the deal – or scroll down to try a demo of the NEW Guitareo Songs.',
            'img' => 'https://guitareo.s3.amazonaws.com/sales/2023/jan-launch-collage.png',
-           'belowButton' => 'SAVE 17% + GET 6 BONUSES WORTH $924',
-           'countdown' => 'Get 6 free bonuses until January 15th.',
+           'belowButton' => 'SAVE 17% + GET 5 BONUSES WORTH $835',
        ])
     @else
         @include('musora.sales.components.learn-by-playing-section', [
@@ -502,13 +501,6 @@
         @php
             $bonuses = [
                 [
-                    'image' => 'https://guitareo.s3.amazonaws.com/sales/2023/guitarits-survival-kit.jpg',
-                    'title' => 'Survival Kit',
-                    'description' => 'Electric Strings, Acoustic Strings, String Pro-Winder, 10 Assorted Picks, Tuner, Chord & Scales Book, and more!',
-                    'price' => floatval($productPrices['guitarists-survival-kit']->price),
-                    'shipping' => true
-                ],
-                [
                     'image' => 'https://guitareo.s3.amazonaws.com/sales/promos/black-friday/bundles/ultimate/gq.jpg',
                     'title' => 'GuitarQuest',
                     'description' => 'Skip the boring stuff and start having fun! Your journey starts here.',
@@ -544,11 +536,10 @@
         'topImage' => 'https://guitareo.s3.amazonaws.com/sales/2023/guitareo-annual-2w-card.png',
         'promoLogo' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs.svg',
        'promoLogoM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs-m.png',
-        'header' => 'Save 17% + get 6 bonuses<br class="inline sm:hidden"> worth $924',
-        'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/6',
-        'buttonLink' => '/ecommerce/add-to-cart?products[GUITAREO-1-YEAR-MEMBERSHIP]=1&products[guitarists-survival-kit]=1&products[guitar-quest]=1&products[rhythm-and-groove]=1&products[GUITAR-SYSTEM]=1&products[AGME-JAN-2019-SEMESTER]=1&products[GTME-OCT-2018-SEMESTER]=1&redirect=/order&locked=true',
-        'subDescription' => '<strong>6 free bonuses.</strong> <br class="inline sm:hidden"><em>only available until january 15th.</em>',
-        'countdown' => 'The Guitarist’s Survival Kit <br class="hidden sm:inline">is disappearing in...',
+        'header' => 'Save 17% + get 5 bonuses<br class="inline sm:hidden"> worth $835',
+        'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
+        'buttonLink' => '/ecommerce/add-to-cart?products[GUITAREO-1-YEAR-MEMBERSHIP]=1&products[guitar-quest]=1&products[rhythm-and-groove]=1&products[GUITAR-SYSTEM]=1&products[AGME-JAN-2019-SEMESTER]=1&products[GTME-OCT-2018-SEMESTER]=1&redirect=/order&locked=true',
+        'subDescription' => '<strong>5 free bonuses.</strong> <br class="inline sm:hidden"><em>only available until january 31st.</em>',
         'altButtonLink' => '/ecommerce/add-to-cart?products[GUITAREO-1-MONTH-MEMBERSHIP]=1&redirect=/order&locked=true',
         ])
     @else
