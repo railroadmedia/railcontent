@@ -29,7 +29,7 @@ class Bundle extends Resource
     public static function indexQuery(NovaRequest $request, $query)
     {
         return $query->join('product_types', 'products.product_type_id', '=', 'product_types.id')
-            ->where('product_types.name', 'Bundles')->select('products.*')->where('deleted_at', null);
+            ->where('product_types.name', 'Bundles')->select('products.*');
     }
 
     public function fields(NovaRequest $request)

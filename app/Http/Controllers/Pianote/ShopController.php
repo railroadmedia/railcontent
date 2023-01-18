@@ -10,7 +10,7 @@ class ShopController extends BaseController
 {
     public function shop(Request $request)
     {
-        $products = Product::whereHas('brand', fn($query) => $query->where('name', 'pianote'))->where('visible', '=', 1)->where('product_type_id', '!=', 6)->where('deleted_at', null)->orderBy('display_order')->get();
+        $products = Product::whereHas('brand', fn($query) => $query->where('name', 'pianote'))->where('visible', '=', 1)->where('product_type_id', '!=', 6)->orderBy('display_order')->get();
 
         $lessons = $products->filter(function($value, $key){
             return $value->productType->name === 'Lessons';
@@ -45,7 +45,7 @@ class ShopController extends BaseController
 
     public function product($root, $slug)
     {
-        $product = Product::where('slug', 'Pianote-'.$slug)->where('deleted_at', null)->firstOrFail();
+        $product = Product::where('slug', 'Pianote-'.$slug)->firstOrFail();
 
         return view('pianote.shop.product-layout', [ 'product' => $product, 'theme' => 'pianote' ]);
     }

@@ -33,7 +33,7 @@ class Accessory extends Resource
     public static function indexQuery(NovaRequest $request, $query)
     {
         return $query->join('product_types', 'products.product_type_id', '=', 'product_types.id')
-            ->where('product_types.name', 'Accessories')->where('deleted_at', null)->select('products.*');
+            ->where('product_types.name', 'Accessories')->select('products.*');
     }
 
     public function fields(NovaRequest $request)
