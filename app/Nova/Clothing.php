@@ -138,10 +138,10 @@ class Clothing extends Resource
             Number::make('Display order', 'display_order')->sortable()
                 ->help('Display order should be 0 if set to invisible on shop page.')
                 ->dependsOn(
-                    ['brand'],
+                    ['brand', 'product_type_id'],
                     function (Text $field, NovaRequest $request, FormData $formData) {
                         if($formData->brand === '1' || $formData->brand === '2'){
-                            $display_num = Product::where('brand_id', $formData->brand)->whereIn('product_type_id',[3, 4, 5])->orderBy('display_order', 'DESC')->first();
+                            $display_num = Product::where([['brand_id', $formData->brand],['product_type_id', $formData->product_type_id]])->orderBy('display_order', 'DESC')->first();
                         }
                         else {
                             $display_num = Product::where('brand_id', $formData->brand)->orderBy('display_order', 'DESC')->first();
