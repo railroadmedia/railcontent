@@ -47,10 +47,8 @@ class ImageResolver implements ResolverInterface
 
         $class::saved(function ($model) use ($groups){
             $images = $groups->map(function($group, $index) use($model){
-
-
                 return [
-                    'path' => !empty($group->getAttributes()['path_file']) ? $group->getAttributes()['path_file'] : $group->getAttributes()['path_text'],
+                    'path' => !empty($group->getAttributes()['path_text']) ? $group->getAttributes()['path_text'] : $group->getAttributes()['path_file'],
                     'id' => isset($group->getAttributes()['id']) ? $group->getAttributes()['id'] : null,
                     'order_number' => $index
                 ];
