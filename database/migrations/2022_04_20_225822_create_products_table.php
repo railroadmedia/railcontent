@@ -51,7 +51,6 @@ return new class extends Migration
             $table->string('bundle_img')->nullable();
             $table->longText('bundle_desc')->nullable();
             $table->integer('display_order')->default(0);
-            $table->boolean('deleted')->default(false);
             $table->timestamps();
         });
     }
