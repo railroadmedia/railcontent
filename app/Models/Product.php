@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 use Venturecraft\Revisionable\RevisionableTrait;
 
@@ -118,6 +119,7 @@ class Product extends Model
 {
     use HasFactory;
     use RevisionableTrait;
+    use SoftDeletes;
 
     protected $with = ["brand", "productType"];
     protected $dontKeepRevisionOf = ['uuid'];
@@ -215,11 +217,6 @@ class Product extends Model
             }
         });
 
-    }
-
-    public function delete()
-    {
-        Product::where('id', '=', $this->id)->update(['deleted' => 1]);
     }
 
     protected $guarded = [
