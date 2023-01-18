@@ -1,20 +1,20 @@
-@extends('singeo._partials.global-layout')
+@extends('pianote._partials.global-layout')
 
 @section('global-head')
     <title>Lifetime Members Masterclass with Lisa Witt</title>
     <meta property="og:title" content="Lifetime Members Masterclass with Lisa Witt">
 
-    <meta name="description" content="Online singing lessons for any voice & vocal coaches to support you every step of the way. 90-Day Guarantee." />
-    <meta property="og:description" content="Online singing lessons for any voice & vocal coaches to support you every step of the way. 90-Day Guarantee."/>
+    <meta name="description" content="Learn the piano anytime with step-by-step video lessons, world-class teachers, and unlimited personal support. 90-Day Guarantee.">
+    <meta property="og:description" content="Learn the piano anytime with step-by-step video lessons, world-class teachers, and unlimited personal support. 90-Day Guarantee.">
 
-    <meta property="og:url" content="https://www.singeo.com/{{ Request::path() }}">
-    <meta property="og:image" content="https://singeo.s3.amazonaws.com/sales/2023/share-image-singeo.jpg"/>
+    <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
+    <meta property="og:image" content="https://pianote.s3.amazonaws.com/sales/2023/share-image-pianote2.jpg" style="display: none;">
 
     @include('_partials.layout._fonts')
     @include('_partials.layout._tailwindcdn')
 
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}">
 
     <style>
 
@@ -160,8 +160,8 @@
 @stop
 
 @section('global-body')
-    @include("singeo.sales.partials._nav")
-    <header class="header text-white text-center px-4 sm:px-6 py-14 md:py-20 lg:py-32 relative bg-no-repeat bg-cover bg-top lazyload" style="background-color:#031e3b;" data-bg="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://singeo.s3.amazonaws.com/products/shop-header.jpg">
+    @include("pianote._partials._nav")
+    <header class="header text-white text-center px-4 sm:px-6 py-14 md:py-20 lg:py-32 relative bg-no-repeat bg-cover bg-top lazyload" style="background-color:#031e3b;" data-bg="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://pianote.s3.amazonaws.com/shop/header-background.jpg">
         <div class="mx-auto relative z-10 max-w-md md:max-w-5xl">
                 <h1><strong>Lifetime Members Masterclass</strong></h1>
                 <h3>with Lisa Witt</h3>
@@ -171,13 +171,13 @@
         <div class="container mx-auto text-center max-w-2xl">
             <div class="bg-white text-center rounded-md inline-block overflow-hidden w-12 sm:w-14 mr-2 align-middle transition-opacity group-hover:opacity-70">
                 <p class="leading-none tracking-tighter text-xs py-1 text-white" style="background-color:#bb3744;"><strong>JAN</strong></p>
-                <p class="leading-none text-lg py-1.5 text-black"><strong class="font-black">31</strong></p>
+                <p class="leading-none text-lg py-1.5 text-black"><strong class="font-black">23</strong></p>
             </div>
-            <a target="_blank" class=" @if(Carbon\Carbon::create(2023, 1, 31, 16, 0, 0, 'America/Vancouver') < Carbon\Carbon::now()) sold-out @endif join blue smaller" href="https://us06web.zoom.us/j/82096873355?pwd=Wmdjb25Bc0psRFZQaTV4RTQ2aVNhUT09">Livestream Access - 2PM PST</a>
+            <a target="_blank" class=" @if(Carbon\Carbon::create(2023, 1, 23, 13, 0, 0, 'America/Vancouver') < Carbon\Carbon::now()) sold-out @endif join blue smaller" href="https://us06web.zoom.us/j/89720053377?pwd=K2RlNitBSzV0bjlkTVJ6eWNRT01NUT09">Livestream Access - 11AM PST</a>
         </div>
     </section>
 
-    @include("singeo.sales.partials._footer", [
+    @include("pianote._partials._footer", [
             "minimal" => true
         ])
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
