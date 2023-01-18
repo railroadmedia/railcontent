@@ -205,7 +205,7 @@ class NavigationService
                     [
                         'name' => 'Song Tutorials',
                         'path' => '/'.brand().'/song-tutorials',
-                        'icon' => 'keys',
+                        'icon' => 'play-progress',
                     ],
                 ],
                 [ // section
