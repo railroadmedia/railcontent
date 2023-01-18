@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 use Venturecraft\Revisionable\RevisionableTrait;
 
@@ -118,6 +119,7 @@ class Product extends Model
 {
     use HasFactory;
     use RevisionableTrait;
+    use SoftDeletes;
 
     protected $with = ["brand", "productType"];
     protected $dontKeepRevisionOf = ['uuid'];
@@ -223,25 +225,6 @@ class Product extends Model
             }
         });
 
-    }
-
-    public function delete()
-    {
-        Feature::where('product_id', '=', $this->id)->delete();
-        ProductSize::where('product_id', '=', $this->id)->delete();
-        Spec::where('product_id', '=', $this->id)->delete();
-
-        $imgs = Image::where('product_id', '=', $this->id)->get();
-
-        foreach($imgs as $img){
-            Storage::disk('nova_s3')->delete($img->path);
-        }
-
-        Image::where('product_id', '=', $this->id)->delete();
-
-        Bundle::where('bundle_id', '=', $this->id)->delete();
-
-        Product::where('id', '=', $this->id)->delete();
     }
 
     protected $guarded = [
