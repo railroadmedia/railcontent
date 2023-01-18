@@ -42,6 +42,7 @@ Route::domain('{singeoDomain}')
     Route::get('/giveaway', [SalesController::class, 'giveaway']);
     Route::get('/ultimate-giveaway', [SalesController::class, 'ultimategiveaway']);
     Route::get('/beautiful-harmonies', [SalesController::class, 'beautifulharmonies']);
+    Route::get('/lifetime-members-masterclass', [SalesController::class, 'lifetimeMasterclass']);
 
     Route::group(['prefix' => 'beginner-vocal-bootcamp'],
         function () {
