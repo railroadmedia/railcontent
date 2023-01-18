@@ -180,28 +180,35 @@
                 font-size:30px;
             }
         }
+        .play-button.smaller {
+            border-width: 2px;
+            font-size: 24px;
+            padding: 14px 17px;
+        }
     </style>
 @endsection
 
 @section('page-body')
-    <header class="py-6 md:py-24 bg-center md:bg-top bg-no-repeat text-white" style="background-color:#021536;">
-        <div class="max-w-4xl mx-auto px-2 md:px-4 lg:px-0">
-            <div class="flex items-center">
-                <div class="w-full mb-5 md:mb-0 md:w-2/5 md:order-1 text-center">
-                    <i class="fas fa-play play-button autoplay-video" data-open="trailer"></i>
+    <header class="py-6 sm:py-24 bg-center sm:bg-top bg-no-repeat text-white" style="background-color:#021536;">
+        <div class="max-w-4xl mx-auto px-2 sm:px-4 lg:px-0">
+            <div class="flex flex-wrap items-center">
+                <div class="w-full mb-5 sm:mb-0 sm:w-2/5 sm:order-1 text-center">
+                    <img class="inline-block sm:hidden h-20 lazyload" data-src="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/logo.png" alt="logo white"><br>
+                    <i class="fas fa-play mt-36 mb-14 sm:my-0 play-button autoplay-video" data-open="trailer"></i>
                 </div>
-                <div class="w-full md:w-3/5 text-center md:text-left">
+                <div class="w-full sm:w-3/5 text-center sm:text-left">
                     <div class="px-1">
-                        <img class="h-14 sm:h-16 lg:h-24 lazyload" data-src="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/logo.png" alt="logo white">
-                        <h3 class="font-extrabold leading-tight mt-80 md:mt-4">
-                            Start playing the piano <br class="hidden sm:inline">
+                        <img class="hidden sm:inline-block sm:h-20 lg:h-24 lazyload" data-src="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/logo.png" alt="logo white">
+                        <h3 class="font-extrabold leading-tight sm:mt-4">
+                            Start playing the piano <br>
                             in just 5 Days!
                         </h3>
-                        <h6 class="my-4" style="color: rgba(208, 226, 231, 0.8);">
-                            Enter your email below for your first week<br class="hidden sm:inline"> of piano lessons -- for free.
+                        <h6 class="my-3 sm:my-4" style="color: rgba(208, 226, 231, 0.8);">
+                            Enter your email below for your first <br>
+                            week of piano lessons -- for free.
                         </h6>
                     </div>
-                    <div class="md:pr-20">
+                    <div class="sm:pr-20">
                         @include("pianote._partials._sign-up-form", [
                             "formId" => "Pianote - Engagement - Trigger - Piano In 5 Days - Web Form",
                             "formName" => 'Piano In 5 Days',
@@ -269,8 +276,10 @@
             </h3>
             <div class="flex flex-wrap justify-center mb-14">
                 <div class="w-full sm:w-1/3 px-4 sm:px-2 mb-6">
-                    <div class="relative mb-4">
-                        <img class="relative z-0 rounded-lg lazyload" data-src="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/day-1.jpg" alt="lesson-1">
+                    <div class="relative mb-4 autoplay-video cursor-pointer text-white" data-open="lesson">
+                        <p class="text-xs bg-pianote rounded-full py-0.5 px-2 absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 mt-0.5"><strong>Click to see the first lesson!</strong></p>
+                        <i class="fas fa-play play-button smaller z-10 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></i>
+                        <img class="relative z-0 rounded-lg border-4 border-pianote lazyload" data-src="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/day-1.jpg" alt="lesson-1">
                     </div>
                     <p>
                         Day one starts off with the basics! You’ll learn the layout of the keyboard, the musical alphabet, your first scale, and the super easy and fun concept of power chords.
@@ -354,16 +363,16 @@
         </div>
     </section>
     <section class="px-4 sm:px-6 py-10 sm:py-20 relative">
-        <div class="max-w-4xl mx-auto text-center">
-            <h3 class="font-extrabold mb-10">
-                Learn the piano by <u>playing the piano</u>.
+        <div class="max-w-2xl mx-auto text-center">
+            <h3 class="font-extrabold mb-7">
+                Learn the piano by<br class="inline sm:hidden"> <u>playing the piano</u>.
             </h3>
-            <div class="flex text-left">
-                <picture class="mb-10 md:mb-0 sm:order-1">
+            <div class="flex flex-wrap sm:flex-nowrap items-center text-left">
+                <picture class="mb-5 md:mb-0 sm:order-1">
                     <source media="(min-width:768px)" srcset="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/3-image.png">
-                    <img class="h-72 md:h-96 lg:h-full lazyload" data-src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/3-image-m.png" alt="3-image">
+                    <img class="h-56 md:h-72 lg:h-80 lazyload" data-src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/3-image-m.png" alt="3-image">
                 </picture>
-                <p class="sm:pr-6">
+                <p class="w-full sm:w-auto sm:pr-6 max-w-sm">
                     Practice makes piano players.
                     <br><br>
                     But if you don’t know what to practice, you won’t see the results. That’s why you’ll get daily guided practice routines. Play along WITH Lisa each day to reinforce the skills from your lesson.
@@ -376,7 +385,7 @@
         </div>
     </section>
 
-    <section class="py-20" style="background:#01050F;">
+    <section class="py-20 relative" style="background:#01050F;">
         <div class="h-10 absolute left-0 right-0" style="background: linear-gradient(to top left, #01050F calc(50% - 1px), #01050F, #fff calc(50% + 1px)); top: -1px;"></div>
         <div class="max-w-sm md:max-w-4xl mx-auto px-4 sm:px-0 text-white lg:gap-10 relative flex flex-col md:flex-row lg:block items-center justify-center text-right">
             <picture>
@@ -525,21 +534,21 @@
     <div id="final" class="anchor"></div>
     <section class="text-center customize px-4 lg:px-6 relative z-50 overflow-hidden text-white py-20" style="background:#01050F;">
         <div class="max-w-5xl mx-auto flex flex-wrap flex-col md:flex-row md:items-center">
-            <div class="max-w-lg mx-auto text-center sm:text-left w-full md:w-1/2 sm:pl-5">
-                <img class="h-16 lazyload" data-src="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/logo.png" alt="logo">
-                <h3 class="pt-4 md:pt-5 leading-7 md:leading-9 font-extrabold mb-6">
+            <div class="max-w-lg mx-auto text-center sm:text-left w-full sm:w-7/12 lg:w-1/2 sm:pl-5">
+                <img class="h-16 sm:h-20 lg:h-24 lazyload" data-src="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/logo.png" alt="logo">
+                <h4 class="pt-3 md:pt-4 leading-tight font-extrabold mb-4">
                     5 beginner piano lessons.<br>
                     Daily play-along practice routines.<br>
                     Play your first song on the piano.<br>
                     Study at your own pace.
-                </h3>
-                <p class="text-left mb-4 sm:mb-5 mx-auto inline-block sm:leading-loose">
+                </h4>
+                <p class="text-left mb-3 sm:mb-4 mx-auto inline-block sm:leading-loose">
                     <i class="fas fa-check sm:mr-2 text-xl" style="color:#FF0000;"></i> Unlock the piano keyboard.<br>
                     <i class="fas fa-check sm:mr-2 text-xl" style="color:#FF0000;"></i> Play your first song on the piano.<br>
                     <i class="fas fa-check sm:mr-2 text-xl" style="color:#FF0000;"></i> 100% free -- lifetime access!<br>
                 </p>
                 <div class="max-w-md md:max-w-auto lg:w-96 mx-auto md:mx-0">
-                    <p>
+                    <p class="mb-2">
                         Enter your email below for your 5 free lessons.
                     </p>
                     @include("pianote._partials._sign-up-form", [
@@ -552,7 +561,7 @@
                     ])
                 </div>
             </div>
-            <div class="flex justify-center md:justify-start w-full md:w-1/2 sm:order-1 md:pl-6 mt-7 md:mt-0 relative">
+            <div class="flex justify-center md:justify-start w-full sm:w-5/12 lg:w-1/2 sm:order-1 md:pl-6 mt-7 md:mt-0 relative">
                 <img class="max-w-2xl md:max-w-md lg:max-w-2xl lazyload" data-src="https://cdn.musora.com/image/fetch/w_800,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/collage.png" alt="collage">
             </div>
         </div>
@@ -578,6 +587,10 @@
     @include('pianote.lead-gen.partials.video-player',[
         "name" => "trailer",
         "vimeoId" => "669994283"
+    ])
+    @include('pianote.lead-gen.partials.video-player',[
+        "name" => "lesson",
+        "vimeoId" => "664409925"
     ])
 @stop
 
