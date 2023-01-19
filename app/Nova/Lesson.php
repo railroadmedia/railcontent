@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Models\Product;
 use App\Nova\Flexible\Layouts\BenefitLayout;
 use App\Nova\Flexible\Layouts\FeatureLayout;
 use App\Nova\Flexible\Layouts\SpectLayout;
@@ -13,6 +14,7 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Currency;
+use Laravel\Nova\Fields\FormData;
 use Laravel\Nova\Fields\Heading;
 use Laravel\Nova\Fields\Hidden;
 use Laravel\Nova\Fields\ID;
@@ -156,7 +158,24 @@ class Lesson extends Resource
             Text::make('Shop Card Description', 'short_desc')->hideFromIndex(),
             Boolean::make('Visible On Shop Page','visible')->default(true)->hideFromIndex(),
             Boolean::make('Included Edge', 'included_edge')->default(false)->hideFromIndex(),
-            Number::make('Display order', 'display_order')->default(0)->sortable(),
+            Number::make('Display order', 'display_order')->sortable()
+                ->help('Display order should be 0 if set to invisible on shop page.')
+                ->required()
+                ->dependsOn(
+                    ['brand'],
+                    function (Text $field, NovaRequest $request, FormData $formData) {
+                        if($formData->brand === '1' || $formData->brand === '2'){
+                            $display_num = Product::where([['product_type_id', 1], ['brand_id', $formData->brand]])->orderBy('display_order', 'DESC')->first();
+                        }
+                        else {
+                            $display_num = Product::where('brand_id', $formData->brand)->orderBy('display_order', 'DESC')->first();
+                        }
+
+                        if(!is_null($display_num)){
+                            $display_num = $display_num->display_order;
+                            $field->default($display_num+1);
+                        }
+                }),
             Heading::make('Product page'),
             Text::make('Header Text', 'header_text')->hideFromIndex(),
             Text::make('Subheader Text', 'subheader_text')->hideFromIndex(),

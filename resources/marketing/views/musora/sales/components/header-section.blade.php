@@ -28,6 +28,8 @@
                         <a class="w-full join bg-{{ $theme }} smaller mb-2 @if(!empty($promoVersion)) anchor-slide @endif"
                             @if(!empty($promoVersion))
                                 href="#customize-anchor"
+                            @elseif(!empty($month))
+                                href="/choose-your-trial-month"
                             @else
                                 href="/choose-plan"
                             @endif
