@@ -109,6 +109,14 @@
             "scrollToJoin" => true,
             "hideMenu" => true,
         ])
+    @elseif(!empty($month))
+        @include("singeo.sales.partials._nav", [
+            "subscriptionVersion" => true,
+            "fullSubscriptionVersion" => true,
+            "trialVersion" => true,
+            "joinUrl" => '/choose-your-trial-month',
+        ])
+
     @else
         @include("singeo.sales.partials._nav", [
             "subscriptionVersion" => true,
@@ -476,9 +484,7 @@
     <div class="unstick-trigger block"></div>
     <div id="customize-anchor" class="anchor"></div>
     <div id="order" class="anchor"></div>
-    @hasSection('final')
-        @yield('final')
-    @elseif(!empty($promoVersion))
+    @if(!empty($promoVersion))
 
         @php
             $bonuses = [

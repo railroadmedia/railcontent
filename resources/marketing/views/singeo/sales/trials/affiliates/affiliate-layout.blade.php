@@ -28,7 +28,3 @@
         </div>
     </div>
 @endsection
-
-@section('final')
-    @include('singeo.sales.partials._final-trial', [ "url" => "/affiliate-trial/" ])
-@stop
