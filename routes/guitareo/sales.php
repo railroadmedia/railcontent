@@ -7,15 +7,18 @@ Route::domain('{guitareoDomain}')
     ->middleware(['web_public'])
     ->group(function () {
     Route::get('/', [SalesController::class, 'home'] );
-    Route::get('/new-year', [SalesController::class, 'promo'] );
-    Route::get('/choose-plan', [SalesController::class, 'choosePlan'] );
-    Route::get('/student-only', [SalesController::class, 'promo']);
     Route::get('/trial', [SalesController::class, 'home']);
-    Route::get('/trial-month', [SalesController::class, 'trial30']);
+    Route::get('/trial-month', [SalesController::class, 'homeMonth']);
+    Route::get('/new-year', [SalesController::class, 'promo'] );
+    Route::get('/student-only', [SalesController::class, 'promo']);
+    Route::get('/choose-plan', [SalesController::class, 'choosePlan'] );
     Route::get('/choose-your-trial', [SalesController::class, 'choosePlan']);
-    Route::get('/choose-your-trial-month', [SalesController::class, 'chooseyourtrialmonth']);
 
-    Route::get('/cookie', [SalesController::class, 'cookie']);
+        Route::get('/choose-your-trial-month', [SalesController::class, 'choosePlanMonth']);
+        Route::get('/affiliate-trial', [SalesController::class, 'choosePlanMonth']);
+        Route::get('/affiliate/asobergirlsguide', [SalesController::class, 'asobergirlsguide']);
+
+        Route::get('/cookie', [SalesController::class, 'cookie']);
     Route::get('/terms', [SalesController::class, 'terms']);
     Route::get('/privacy', [SalesController::class, 'privacy']);
 
@@ -29,8 +32,6 @@ Route::domain('{guitareoDomain}')
     Route::get('/daddario-string-session', [SalesController::class, 'daddariostringsession']);
     Route::get('/daddario-string-session-ga ', [SalesController::class, 'daddariostringsessionga']);
 
-    Route::get('/affiliate/asobergirlsguide', [SalesController::class, 'asobergirlsguide']);
-    Route::get('/affiliate-trial', [SalesController::class, 'affiliatetrial']);
 
     Route::get('/welcome', [SalesController::class, 'welcome']);
     Route::get('/welcome/2', [SalesController::class, 'welcome2']);

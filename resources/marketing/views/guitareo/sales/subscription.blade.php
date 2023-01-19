@@ -114,6 +114,15 @@
             "scrollToJoin" => true,
             "hideMenu" => true,
         ])
+
+    @elseif(!empty($month))
+        @include("guitareo.sales.partials._nav", [
+            "subscriptionVersion" => true,
+            "fullSubscriptionVersion" => true,
+            "trialVersion" => true,
+            "joinUrl" => '/choose-your-trial-month',
+        ])
+
     @else
         @include("guitareo.sales.partials._nav", [
             "subscriptionVersion" => true,
@@ -169,6 +178,9 @@
         'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Guitareo+Membership/79348454',
         'students' => number_format(Prices::$students),
     ])
+    @hasSection('promo-banner')
+        @yield('promo-banner')
+    @endif
 
     @if(!empty($promoVersion))
         @include('musora.sales.components.promo-section', [

@@ -1,6 +1,5 @@
-@extends('guitareo.sales.standard-layout', [
-    "trialVersion" => true
-])
+@extends('guitareo.sales.subscription')
+
 @section('global-head')
     <title>@yield('name') | Guitareo Trial</title>
     <meta property="og:title" content="@yield('name') | Guitareo Trial">
@@ -28,18 +27,4 @@
             </div>
         </div>
     </div>
-
-    <a href="/affiliate-trial/" class="promo-banner bg-black w-full py-1 mx-auto -mt-10 block z-10 whitespace-nowrap shadow-md overflow-hidden leading-none text-xs transition-colors duration-300 text-center text-white hover:text-gray-50 bg-black text-white">
-        <div class="container mx-auto">
-            <div class="text text-center">
-                <p class="leading-tight uppercase"><strong>@yield('name') FANS</strong><br>
-                    <span class="text-coaches">YOUR FIRST MONTH IS FREE!</span></p>
-            </div>
-        </div>
-    </a>
 @endsection
-
-@section('final')
-    <div id="customize-anchor" class="anchor"></div>
-    @include('guitareo.sales.partials._final-trial', [ "url" => "/affiliate-trial/" ])
-@stop

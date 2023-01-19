@@ -22,7 +22,7 @@
                     <h6 class="leading-normal my-3 md:my-5">
                         <em>@yield('text')</em>
                     </h6>
-                    <a href="/affiliate-trial/" class="join smaller methodcta">START MY FREE TRIAL</a>
+                    <a href="/choose-your-trial-month/" class="join smaller methodcta">START MY FREE TRIAL</a>
                 </div>
             </div>
         </div>
