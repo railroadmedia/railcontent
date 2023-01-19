@@ -92,7 +92,7 @@ class ContentPagesController extends BaseController
 
 
         if ($contentTypeName == 'songs' && !user()->hasSongsAccess($brand)) {
-            return redirect()->away(get_legacy_brand_base_url()); // todo: send to songs upgrade page
+            return redirect()->route('platform.songs-upgrade');
         }
 
         $lessonType = PrimaryURLSlugToContentTypeMap::$map[$contentTypeName];
