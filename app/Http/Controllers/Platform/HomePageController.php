@@ -106,19 +106,19 @@ class HomePageController extends BaseController
         switch (brand()) {
             case 'drumeo':
                 $methodSlug = 'drumeo-method';
-                $carousel = Carousel::query()->where('brand_id', 1)->orderBy('display_order')->get();
+                $carousel = Carousel::query()->where([['brand_id', 1], ['visible', 1]])->orderBy('display_order')->get();
                 break;
             case 'pianote':
                 $methodSlug = 'pianote-method';
-                $carousel = Carousel::query()->where('brand_id', 2)->orderBy('display_order')->get();
+                $carousel = Carousel::query()->where([['brand_id', 2], ['visible', 1]])->orderBy('display_order')->get();
                 break;
             case 'guitareo':
                 $methodSlug = 'guitareo-method';
-                $carousel = Carousel::query()->where('brand_id', 3)->orderBy('display_order')->get();
+                $carousel = Carousel::query()->where([['brand_id', 3], ['visible', 1]])->orderBy('display_order')->get();
                 break;
             case 'singeo':
                 $methodSlug = 'singeo-method';
-                $carousel = Carousel::query()->where('brand_id', 4)->orderBy('display_order')->get();
+                $carousel = Carousel::query()->where([['brand_id', 4], ['visible', 1]])->orderBy('display_order')->get();
                 break;
             default:
                 throw new NotFoundHttpException();
