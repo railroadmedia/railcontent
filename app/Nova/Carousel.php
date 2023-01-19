@@ -92,6 +92,7 @@ class Carousel extends Resource
                 }),
             Text::make('Image', 'img')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
             Number::make('Display order', 'display_order'),
+            Boolean::make('visible')->hideFromIndex()->default(true),
             Boolean::make('Featured product?', 'is_featured')->hideFromIndex()->default(false),
             Text::make('Product ID', 'product_id')->hideFromIndex()
                 ->hide()
