@@ -13,30 +13,30 @@ Route::domain('{drumeoDomain}')->group(function () {
 
         }
     );
-    Route::group(['prefix' => 'coop3rdrumm3r'],
-        function () {
-            Route::get('/{page?}', LeadGenController::class . '@coop3rdrumm3r')
-                ->whereIn('page', [
-                    null,
-                    'lessons',
-                    '1-the-drum-set',
-                    '2-drum-theory',
-                    '3-practice',
-                    '4-grooves',
-                    '5-drum-fills',
-                    'keep-getting-better',
-                ]);
-        }
-    );
+//    Route::group(['prefix' => 'coop3rdrumm3r'],
+//        function () {
+//            Route::get('/{page?}', LeadGenController::class . '@coop3rdrumm3r')
+//                ->whereIn('page', [
+//                    null,
+//                    'lessons',
+//                    '1-the-drum-set',
+//                    '2-drum-theory',
+//                    '3-practice',
+//                    '4-grooves',
+//                    '5-drum-fills',
+//                    'keep-getting-better',
+//                ]);
+//        }
+//    );
     Route::get('/destupefying-your-weak-hand', [LeadGenController::class, 'destupefy'] );
-    Route::group(['prefix' => 'drum-fills'],
-        function () {
-            Route::get('/{page?}', LeadGenController::class . '@drumFills')
-                ->whereIn('page', [
-                    null, '1', '2', '3', '4', '5',
-                ]);
-        }
-    );
+//    Route::group(['prefix' => 'drum-fills'],
+//        function () {
+//            Route::get('/{page?}', LeadGenController::class . '@drumFills')
+//                ->whereIn('page', [
+//                    null, '1', '2', '3', '4', '5',
+//                ]);
+//        }
+//    );
     Route::group(['prefix' => 'drum-set-maintenance'],
         function () {
             Route::get('/{prefix?}/{page?}', LeadGenController::class . '@drumSetMaintenance')
