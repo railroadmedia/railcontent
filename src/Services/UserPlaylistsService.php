@@ -79,7 +79,9 @@ class UserPlaylistsService
      */
     public function getUserPlaylist($userId, $playlistType, $brand = null, $limit, $page)
     {
-        return $this->userPlaylistsRepository->getUserPlaylist($userId, $playlistType, $brand, $limit, $page);
+        $playlists = $this->userPlaylistsRepository->getUserPlaylist($userId, $playlistType, $brand, $limit, $page);
+
+        return Decorator::decorate($playlists, 'playlist');
     }
 
     /**
