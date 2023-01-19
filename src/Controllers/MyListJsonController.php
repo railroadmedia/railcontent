@@ -375,7 +375,7 @@ class MyListJsonController extends Controller
         $myPinnedPlaylists = $this->userPlaylistsService->getPinnedPlaylists();
 
         if(count($myPinnedPlaylists) < $allowedPinNumber) {
-            $pin = $this->userPlaylistsService->pinPlaylist($request->get('playlist_id'));
+            $pin = $this->userPlaylistsService->pinPlaylist($request->get('playlist_id'), $request->get('brand', config('railcontent.brand')));
 
             return reply()->json([$pin], [
                 'code' => $pin ? 200 : 500,

@@ -231,7 +231,7 @@ class UserPlaylistsService
      * @param $playlistId
      * @return bool
      */
-    public function pinPlaylist($playlistId)
+    public function pinPlaylist($playlistId, $brand)
     {
         $stored =
             $this->pinnedPlaylistsRepository->query()
@@ -239,6 +239,7 @@ class UserPlaylistsService
                     [
                         'user_id' => auth()->id(),
                         'playlist_id' => $playlistId,
+                        'brand' => $brand
                     ],
                     [
                         'created_at' => Carbon::now()
@@ -251,6 +252,7 @@ class UserPlaylistsService
                 [
                     'user_id' => auth()->id(),
                     'playlist_id' => $playlistId,
+                    'brand' => $brand
                 ]
             )
             ->first();
