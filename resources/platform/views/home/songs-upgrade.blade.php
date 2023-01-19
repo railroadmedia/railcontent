@@ -1,9 +1,3 @@
-@php
-$currentTier = json_decode('plus');
-$upgradeCost = json_decode(null);
-$isLifetime = json_decode(true);
-@endphp
-
 @extends('partials.layout')
 
 @section('meta')
