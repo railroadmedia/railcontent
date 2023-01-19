@@ -11,6 +11,10 @@ class SalesController extends BaseController
     {
         return view('singeo.sales.subscription', ['theme' => 'singeo']);
     }
+    public function homeMonth()
+    {
+        return view('singeo.sales.subscription', ['theme' => 'singeo', 'month' => true]);
+    }
     public function promo()
     {
         return view('singeo.sales.subscription', ['theme' => 'singeo', 'promoVersion' => 'true']);
@@ -18,6 +22,10 @@ class SalesController extends BaseController
     public function choosePlan()
     {
         return view('singeo.sales.choose-plan', ['theme' => 'singeo']);
+    }
+    public function choosePlanMonth()
+    {
+        return view('singeo.sales.choose-plan', ['theme' => 'singeo', 'month' => true]);
     }
     public function privacy()
     {
@@ -27,29 +35,13 @@ class SalesController extends BaseController
     {
         return view('singeo.sales.pages.terms');
     }
-    public function trial()
-    {
-        return view('singeo.sales.trials.trial', ['theme' => 'singeo']);
-    }
-    public function trialMonth()
-    {
-        return view('singeo.sales.trials.30-trial', ['theme' => 'singeo']);
-    }
-    public function chooseYourTrialMonth()
-    {
-        return view('singeo.sales.trials.trial-selection.month', ['theme' => 'singeo']);
-    }
     public function cookie()
     {
         return view('singeo.sales.pages.cookie');
     }
     public function asobergirlsguide()
     {
-        return view('singeo.sales.trials.affiliates.asobergirlsguide', ['theme' => 'singeo']);
-    }
-    public function affiliateTrial()
-    {
-        return view('singeo.sales.trials.trial-selection.affiliates', ['theme' => 'singeo']);
+        return view('singeo.sales.trials.affiliates.asobergirlsguide', ['theme' => 'singeo', 'month' => true]);
     }
     public function prefBeginner()
     {
