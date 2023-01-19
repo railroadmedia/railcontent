@@ -43,6 +43,8 @@ return [
             'coach_top_banner_image',
             'coach_profile_image',
             'coach_featured_image',
+            'start_second',
+            'end_second'
         ],
 
         'instructor' => [
@@ -992,6 +994,8 @@ return [
                 'coach_profile_image',
                 'current_user_is_subscribed',
             ],
+            'start_second',
+            'end_second'
         ],
         'song-part' => [
             'ranges',
