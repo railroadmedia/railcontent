@@ -72,7 +72,89 @@ class LeadgenSeeder extends Seeder
                     ],
                 ],
             ],
+            [
+                'brand_id' => 1,
+                'title' => 'How To Start Playing Drums',
+                'meta_desc' => 'Get 5 free video lessons with YouTube-star COOP3RDRUMM3R, covering everything you need to start learning the drums for the very first time!',
+                'meta_img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/share-image-drumeo.jpg',
+                'slug' => 'coop3rdrumm3r/lessons',
+                'lessons' => [
+                    [
+                        'slug' => 'coop3rdrumm3r/1-the-drum-set',
+                        'title' => 'Understanding The Drum Set',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/551839388-a432e655008cce35ee73cec69639b3c801281023879f6a54a323f112782e7ef3-d?mw=1200&mh=675',
+                        'video_src' => '//player.vimeo.com/video/149674625',
+                        'duration' => 8,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'coop3rdrumm3r/2-drum-theory',
+                        'title' => 'Drum Theory',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/548962045-245c563e3dc6c0dfc39ffcd73ea0818c46579c70cf31b71c5f5ddf969b23580e-d?mw=1200&mh=675',
+                        'video_src' => '//player.vimeo.com/video/149674628',
+                        'duration' => 8,
+                        'assets' => [
+                            [
+                                'title' => 'Drum theory',
+                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/cooperdrummer/2-drum-theory.pdf',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'coop3rdrumm3r/3-practice',
+                        'title' => 'How To Practice',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/551839496-2316746236b066eb501ca6b120f2afb0e5d1a77dab1ee4902541021bbf2ebf79-d?mw=1200&mh=675',
+                        'video_src' => '//player.vimeo.com/video/149675118',
+                        'duration' => 10,
+                        'assets' => [
+                            [
+                                'title' => 'How to practicey',
+                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/cooperdrummer/3-how-to-practice.pdf',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'coop3rdrumm3r/4-grooves',
+                        'title' => 'Starter Grooves',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/548963870-f2b45bc2cf148787602cd2dd0cd604ee6df16a75b28d4b303eb01ff3e5a77c53-d?mw=1200&mh=675',
+                        'video_src' => '//player.vimeo.com/video/149674627',
+                        'duration' => 10,
+                        'assets' => [
+                            [
+                                'title' => 'Starter grooves',
+                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/cooperdrummer/4-starter-grooves.pdf',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'coop3rdrumm3r/5-drum-fills',
+                        'title' => 'Starter Fills',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/551839554-da5d348f09ac3cc5864cc2a4d0651e216216127609a1e657d1e2ba932f673eff-d?mw=1200&mh=675',
+                        'video_src' => '//player.vimeo.com/video/149674630',
+                        'duration' => 10,
+                        'assets' => [
+                            [
+                                'title' => 'Starter fills',
+                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/cooperdrummer/5-starter-fills.pdf',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                ],
+            ],
         ];
+
+        Leadgen::truncate();
+        LeadgenLesson::truncate();
+        LeadgenLessonAsset::truncate();
 
         foreach($leadgens as $leadgen){
             $newLeadgen = Leadgen::create([
