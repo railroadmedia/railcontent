@@ -57,8 +57,8 @@
                 </div>
 
                 <div class="complete-lesson mb-2 sm:mb-0 w-full sm:w-1/3 px-2 md:px-3 hidden sm:block next-lesson-button">
-                    @hasSection('lesson-index')
-                        <a class="button block bg-{{ $theme }} hover:brightness-125 cursor-pointer" href="@yield('lesson-index')">
+                    @if(!empty($leadgen->slug))
+                        <a class="button block bg-{{ $theme }} hover:brightness-125 cursor-pointer" href="/{{$leadgen->slug}}">
                             <i class="fas fa-chevron-up"></i> Lesson Index
                         </a>
                     @endif
