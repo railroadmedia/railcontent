@@ -23,6 +23,6 @@ const props = defineProps({
 
 </script>
 <template>
-    <MembershipSelectModal @onCloseModal="() => window.location = '/'" :upgradeCost="upgradeCost" :currentTier="currentTier"
+    <MembershipSelectModal @onCloseModal="() => location.reload()" :upgradeCost="upgradeCost" :currentTier="currentTier"
         :isLifetimeMember="isLifetimeMember" />
 </template>
