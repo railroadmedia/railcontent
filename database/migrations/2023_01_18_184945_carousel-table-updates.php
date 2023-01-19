@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('product_id')->nullable();
             $table->string('product_url')->nullable();
             $table->string('endpoint')->nullable();
+            $table->string('video_src')->nullable();
         });
     }
 
@@ -34,9 +35,10 @@ return new class extends Migration
         Schema::table('carousels', function (Blueprint $table) {
             $table->dropColumn('visible');
             $table->dropColumn('is_featured');
-            $table->dropColumn('product_id')->nullable();
-            $table->dropColumn('product_url')->nullable();
-            $table->dropColumn('endpoint')->nullable();
+            $table->dropColumn('product_id');
+            $table->dropColumn('product_url');
+            $table->dropColumn('endpoint');
+            $table->dropColumn('video_src');
         });
     }
 };

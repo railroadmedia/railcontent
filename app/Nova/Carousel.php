@@ -127,6 +127,17 @@ class Carousel extends Resource
                         if ($formData->is_featured) $field->show()->rules(['required']);
                     }
                 ),
+            Text::make('Video Src', 'video_src')->hideFromIndex()
+                ->hide()
+                ->hideFromDetail(function (NovaRequest $request, $resource) {
+                    return !$this->is_featured;
+                })
+                ->dependsOn(
+                    ['is_featured'],
+                    function (Text $field, NovaRequest $request, FormData $formData) {
+                        if ($formData->is_featured) $field->show()->rules(['required']);
+                    }
+                ),
         ];
     }
 
