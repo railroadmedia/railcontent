@@ -253,6 +253,13 @@ app.component('AppContainer', AppContainer)
         )
     ))
 
+    .component('MembershipUpdatePage', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "membership-update-page" */
+            `./vue/components/Membership/MembershipUpdatePage.vue`
+        )
+    ))
+
     .component('Song', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "song" */
