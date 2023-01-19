@@ -814,7 +814,7 @@ return [
                 "allowableFilters" => ['difficulty', 'style', 'artist', 'progress'],
                 'sortBy' => '-published_on',
                 'shortname' => 'song tutorials',
-                "icon" => "icon-songs",
+                "icon" => "play-progress",
                 "description" => "",
                 'amountOfFutureLessonsToShow' => 3,
                 'showFutureLessonAtTopOrBottom' => 'bottom',

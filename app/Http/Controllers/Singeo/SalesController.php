@@ -111,6 +111,10 @@ class SalesController extends BaseController
     {
         return view('singeo.products.beautiful-harmonies');
     }
+    public function lifetimeMasterclass()
+    {
+        return view('singeo.lead-gen.lifetime-members-masterclass');
+    }
     public function method()
     {
         return view('singeo.sales.features.method', ['theme' => 'singeo', 'page' => 'method']);

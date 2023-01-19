@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Models\Product;
 use App\Nova\Flexible\Layouts\FeatureLayout;
 use App\Nova\Flexible\Layouts\ImageLayout;
 use App\Nova\Flexible\Layouts\SpectLayout;
@@ -14,6 +15,7 @@ use Illuminate\Support\Str;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Currency;
+use Laravel\Nova\Fields\FormData;
 use Laravel\Nova\Fields\Heading;
 use Laravel\Nova\Fields\Hidden;
 use Laravel\Nova\Fields\ID;
@@ -77,12 +79,12 @@ class Accessory extends Resource
                         $brand = 'Singeo';
                     }
 
-                    return '/'.$brand.'/'.$request->uuid.'-'.$request->file('meta_img')->getClientOriginalName();
+                    return '/'.$brand.'/Meta-images/'.$request->uuid.'-'.$request->file('meta_img')->getClientOriginalName();
                 })
                 ->preview(function($value){
                     if(empty($value)) return null;
 
-                    return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') || str_contains($value, 'vimeocdn') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
+                    return $value;
                 }),
             Text::make('Meta Image', 'meta_img')->hideFromIndex()->hideFromDetail(),
             Text::make('Promo Code', 'promo_code')->hideFromIndex(),
@@ -114,17 +116,34 @@ class Accessory extends Resource
                         $brand = 'Singeo';
                     }
 
-                    return '/'.$brand.'/'.$request->uuid.'-'.$request->file('thumbnail')->getClientOriginalName();
+                    return '/'.$brand.'/Thumbnails/'.$request->uuid.'-'.$request->file('thumbnail')->getClientOriginalName();
                 })
                 ->preview(function($value){
                     if(empty($value)) return null;
 
-                    return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') || str_contains($value, 'vimeocdn') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
+                    return $value;
                 }),
             Text::make('Shop Card Thumbnail', 'thumbnail')->hideFromIndex()->hideFromDetail(),
             Text::make('Shop Card Description', 'short_desc')->hideFromIndex(),
             Boolean::make('Visible On Shop Page','visible')->default(true)->hideFromIndex(),
-            Number::make('Display order', 'display_order')->default(0)->sortable(),
+            Number::make('Display order', 'display_order')->sortable()
+                ->help('Display order should be 0 if set to invisible on shop page.')
+                ->required()
+                ->dependsOn(
+                    ['brand'],
+                    function (Text $field, NovaRequest $request, FormData $formData) {
+                        if($formData->brand === '1' || $formData->brand === '2'){
+                            $display_num = Product::where([['product_type_id', 2], ['brand_id', $formData->brand]])->orderBy('display_order', 'DESC')->first();
+                        }
+                        else {
+                            $display_num = Product::where('brand_id', $formData->brand)->orderBy('display_order', 'DESC')->first();
+                        }
+
+                        if(!is_null($display_num)){
+                            $display_num = $display_num->display_order;
+                            $field->default($display_num+1);
+                        }
+                }),
             Heading::make('Product page'),
             Text::make('Header Text', 'header_text')->hideFromIndex(),
             Text::make('Subheader Text', 'subheader_text')->hideFromIndex(),
@@ -165,12 +184,12 @@ class Accessory extends Resource
                         $brand = 'Singeo';
                     }
 
-                    return '/'.$brand.'/bundle-image'.$request->uuid.'-'.$request->file('bundle_img')->getClientOriginalName();
+                    return '/'.$brand.'/Bundle-images'.$request->uuid.'-'.$request->file('bundle_img')->getClientOriginalName();
                 })
                 ->preview(function($value){
                     if(empty($value)) return null;
 
-                    return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') || str_contains($value, 'vimeocdn') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
+                    return $value;
                 }),
             Text::make('Bundle Image', 'bundle_img')->hideFromIndex()->hideFromDetail(),
             Text::make('Bundle Description', 'bundle_desc')->hideFromIndex(),

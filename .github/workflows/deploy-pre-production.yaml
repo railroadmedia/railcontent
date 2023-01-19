@@ -2,12 +2,12 @@ name: Deploy
 
 on:
   push:
-    branches: [ pre-production ]
+    branches: [ master ]
 
 jobs:
   deploy-pre-production:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/pre-production'
+    if: github.ref == 'refs/heads/master'
     steps:
       - name: Checkout code
         uses: actions/checkout@v2

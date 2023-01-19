@@ -12,7 +12,7 @@
                     class="leading-tight sm:leading-loose font-black relative"
                     x-bind:class="open && 'mb-2'"
                 >
-                    @if(!empty($num))<span class="text-white rounded-full py-1 px-2 md:px-2.5 text-xs md:text-sm absolute -left-11 md:-left-16 -top-0.5 md:top-0.5" :class="open ? 'bg-{{$theme}}' : 'bg-[#838C98]'">{{$num}}</span>@endif
+                    @if(!empty($num))<span class="text-white rounded-full py-1 px-2 md:px-2.5 text-xs md:text-sm absolute -left-11 md:-left-16 -top-0.5 md:top-0.5" :class="open ? 'bg-{{$brand}}' : 'bg-[#838C98]'">{{$num}}</span>@endif
                     {!! $title !!}
                 </h5>
             </div>
@@ -28,7 +28,7 @@
             </div>
         </div>
         <div
-            class="ml-auto text-{{$theme}} pt-3 sm:pt-6 pr-4 sm:pr-5 cursor-pointer @if(!empty($customArrow)) {{ $customArrow }} @endif"
+            class="ml-auto text-{{$brand}} pt-3 sm:pt-6 pr-4 sm:pr-5 cursor-pointer @if(!empty($customArrow)) {{ $customArrow }} @endif"
             x-on:click="open = !open"
         >
             <i class="fas fa-plus transform transition-all duration-300 text-lg md:text-2xl lg:text-3xl" x-bind:class="{ 'rotate-45': open }"></i>

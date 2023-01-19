@@ -4,12 +4,14 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\Hidden;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Markdown;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Illuminate\Support\Str;
 
 class Carousel extends Resource
 {
@@ -44,8 +46,11 @@ class Carousel extends Resource
      */
     public function fields(NovaRequest $request)
     {
+        $uuid  = Str::uuid();
+
         return [
             ID::make()->sortable(),
+            Hidden::make('Uuid')->withMeta(["value" => $uuid]),
             BelongsTo::make('Brand', 'brand', 'App\Nova\Brand')->sortable(),
             Text::make('Subtitle')->sortable(),
             Text::make('Title')->required()->sortable(),
@@ -76,12 +81,12 @@ class Carousel extends Resource
                         $brand = 'Singeo';
                     }
 
-                    return '/'.$brand.'/carousels/'.$request->uuid.'-'.$request->file('thumbnail')->getClientOriginalName();
+                    return '/'.$brand.'/carousels/'.$request->uuid.'-'.$request->file('img')->getClientOriginalName();
                 })
                 ->preview(function($value){
                     if(empty($value)) return null;
 
-                    return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') || str_contains($value, 'vimeocdn' || str_contains($value, 'imagedelivery')) ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
+                    return $value;
                 }),
             Text::make('Image', 'img')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
             Number::make('Display order', 'display_order'),
