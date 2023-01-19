@@ -3,7 +3,9 @@
 namespace App\Modules\UserManagementSystem\Console\Commands;
 
 use App\Console\Commands\Infrastructure\Command;
+use App\Modules\Ecommerce\database\factories\PaymentMethodFactory;
 use App\Modules\Ecommerce\database\factories\SubscriptionFactory;
+use App\Modules\Ecommerce\database\factories\UserPaymentMethodFactory;
 use App\Modules\Ecommerce\database\factories\UserProductFactory;
 use App\Modules\Ecommerce\Models\Product;
 use App\Modules\EventDataSynchronizer\Services\UserMembershipFieldsService;
@@ -28,8 +30,6 @@ class CreateUser extends Command
 
         $email = "test+user$i@musora.com";
         $start = Carbon::today();
-        $endMonth = $start->addMonth();
-        $endYear = $start->addYear();
 
         $user = User::factory()->create([
             'email' => $email,
@@ -38,7 +38,11 @@ class CreateUser extends Command
             'first_name' => 'test',
             'last_name' => "user$i"
         ]);
-        $this->info("Created user: $email password: $email");
+        $this->info("Created user id:$user->id email: $email password: $email");
+        $this->info("Dev Logout https://dev.musora.com:8443/user-management-system/logout/cookie");
+
+        UserPaymentMethodFactory::createPrimarySuccessfulPaymentMethod($user);
+
         $productId = $this->argument('productId');
         $product = Product::find($productId); // musora basic annual
         UserProductFactory::createUserProduct($user, $product);
