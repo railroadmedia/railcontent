@@ -85,7 +85,7 @@
                     brand="{{ $brand }}"
                     :is-live="{{ isLive() ? 'true':'false' }}"
                     search-url=""
-                    :playlists="{{ json_encode($playlists) }}"
+                    :playlists="{{ json_encode($playlists) }}" {{-- Preloaded Content --}}
                     @if(!empty( user() ))
                         user-name="{{ user()->display_name }}"
                         user-avatar="{{ user()->profile_picture_url }}"

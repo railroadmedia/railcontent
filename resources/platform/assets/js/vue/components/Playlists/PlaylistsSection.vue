@@ -36,7 +36,7 @@ const handleCreatePlaylist = () => {
 <template>
     <section>
         <div class="tw-h-[42px] tw-flex tw-items-center tw-w-full">
-            <a :href="`/${brand}/lists/my-list`" :title="[isSidebarCollapsed ? 'Playlists' : '']"
+            <a :href="`/${brand}/playlists`" :title="[isSidebarCollapsed ? 'Playlists' : '']"
                 class="tw-text-sm tw-h-[42px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-w-full"
                 :class="[isActivePath ? `tw-font-bold ${textColor[brand]} ${borderColor[brand]}` : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white']">
                 <musora-icon icon-name="playlist" class="tw-w-[24px] tw-mx-4" />

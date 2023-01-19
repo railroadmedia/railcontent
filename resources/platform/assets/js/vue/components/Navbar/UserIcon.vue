@@ -125,7 +125,7 @@ export default {
           Playlists
         </OptionElement> -->
 
-        <OptionElement :href="`/${ brand }/lists/my-list`">
+        <OptionElement :href="`/${ brand }/playlists`">
           <musora-icon icon-name="playlist" class="tw-w-[20px] tw-mr-2"/>
           Playlists
         </OptionElement>
