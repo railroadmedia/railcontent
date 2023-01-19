@@ -357,6 +357,9 @@ return [
         'content_likes' => [
             \App\Decorators\Content\ContentLikesUserDecorator::class,
         ],
+        'playlist' => [
+           \App\Decorators\Playlist\PlaylistDecorator::class,
+        ],
     ],
 
     // specific decorator configs
