@@ -157,7 +157,7 @@ class ContentFollowsService
                 $includedFields,
                 [],
                 [],
-                false,
+                true,
                 false,
                 false
             );
