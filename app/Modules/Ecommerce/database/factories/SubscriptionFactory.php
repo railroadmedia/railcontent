@@ -2,6 +2,7 @@
 
 namespace App\Modules\Ecommerce\database\factories;
 
+use App\Enums\Interval;
 use App\Modules\Ecommerce\Models\Product;
 use App\Modules\Ecommerce\Models\Subscription;
 use Carbon\Carbon;
@@ -15,10 +16,23 @@ class SubscriptionFactory extends Factory
     public static function createWith(
         User $user,
         Product $product,
-        Carbon $startTime,
-        Carbon $paidUntil,
+        Carbon $startTime = null,
+        Carbon $paidUntil = null,
         array $attributes = []
     ) {
+        if (!$startTime) {
+            $startTime = Carbon::today();
+        }
+        if (!$paidUntil) {
+            switch ($product->digital_access_time_interval_type) {
+                case Interval::Year->value:
+                    $paidUntil = $startTime->addYear();
+                    break;
+                case Interval::Month->value:
+                    $paidUntil = $startTime->addMonth();
+                    break;
+            }
+        }
         $attributes = array_merge($attributes, [
             'user_id' => $user,
             'product_id' => $product,
