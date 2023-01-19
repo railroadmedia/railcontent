@@ -32,9 +32,9 @@ class PlaylistDecorator extends ModeDecoratorBase
             $playlists[$index]['url'] = url()->route('platform.user.playlists');
             $playlists[$index]['pinned'] = array_key_exists($playlist['id'], $pinnedPlaylists);
             if(!$playlist['thumbnail_url']){
-                $firstLesson = $this->userPlaylistsService->getUserPlaylistContents($playlist['id'],[],1);
-                if(!empty($firstLesson)){
-                    $playlists[$index]['thumbnail_url'] = $firstLesson->first()->fetch('data.thumbnail_url');
+                $lessons = $this->userPlaylistsService->getUserPlaylistContents($playlist['id'],[],1);
+                if($lessons->isNotEmpty()){
+                    $playlists[$index]['thumbnail_url'] = $lessons->first()->fetch('data.thumbnail_url');
                 }
             }
         }
