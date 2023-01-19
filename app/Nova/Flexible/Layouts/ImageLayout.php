@@ -41,8 +41,7 @@ class ImageLayout extends Layout
                 ->deletable(false)
                 ->disableDownload()
                 ->storeAs(function (Request $request){
-
-                    return $request->uuid.'-'.$request->file('path_file')->getClientOriginalName();
+                    return '/ImageSlides/'.$request->uuid.'-'.$request->file('path_file')->getClientOriginalName();
                 })
                 ->preview(function($value){
                     return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;

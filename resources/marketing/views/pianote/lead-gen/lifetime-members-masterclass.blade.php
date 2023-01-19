@@ -169,10 +169,11 @@
     </header>
     <section class="text-center text-white py-8 md:py-32 px-5 md:px-7" style="background:#00101d ;">
         <div class="container mx-auto text-center max-w-2xl">
-            <div class="bg-white text-center rounded-md inline-block overflow-hidden w-12 sm:w-14 mr-2 align-middle transition-opacity group-hover:opacity-70">
-                <p class="leading-none tracking-tighter text-xs py-1 text-white" style="background-color:#bb3744;"><strong>JAN</strong></p>
-                <p class="leading-none text-lg py-1.5 text-black"><strong class="font-black">23</strong></p>
-            </div>
+            <a href="https://www.addevent.com/event/us15966699" class="inline-block tooltip group" tip="Add To Calendar">
+                <div class="bg-white text-center rounded-md inline-block overflow-hidden w-12 sm:w-14 mr-2 align-middle transition-opacity group-hover:opacity-70">
+                    <p class="leading-none tracking-tighter text-xs py-1 text-white" style="background-color:#bb3744;"><strong>JAN</strong></p>
+                    <p class="leading-none text-lg py-1.5 text-black"><strong class="font-black">23</strong></p>
+                </div></a>
             <a target="_blank" class=" @if(Carbon\Carbon::create(2023, 1, 23, 13, 0, 0, 'America/Vancouver') < Carbon\Carbon::now()) sold-out @endif join blue smaller" href="https://us06web.zoom.us/j/89720053377?pwd=K2RlNitBSzV0bjlkTVJ6eWNRT01NUT09">Livestream Access - 11AM PST</a>
         </div>
     </section>
