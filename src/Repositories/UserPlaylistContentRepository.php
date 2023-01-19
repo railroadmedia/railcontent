@@ -49,7 +49,7 @@ class UserPlaylistContentRepository extends RepositoryBase
     {
         $query =
             $this->query()
-                ->select(config('railcontent.table_prefix').'content.*')
+                ->select(config('railcontent.table_prefix').'content.*', config('railcontent.table_prefix').'user_playlist_content.start_second', config('railcontent.table_prefix').'user_playlist_content.end_second' )
                 ->join(
                     config('railcontent.table_prefix').'content',
                     config('railcontent.table_prefix').'user_playlist_content.content_id',
@@ -78,6 +78,7 @@ class UserPlaylistContentRepository extends RepositoryBase
         $extraData = $this->geExtraDataInOldStyle(['data', 'instructor', 'video'], $contentRows);
 
         $parser = $this->setPresenter(ContentTransformer::class);
+
         $parser->presenter->addParam($extraData);
 
         return $this->parserResult($contentRows);

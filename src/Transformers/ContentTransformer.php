@@ -232,6 +232,9 @@ class ContentTransformer
 
 
                 }
+
+                $content[$row['id']]['start_second'] = $row['start_second'] ?? null;
+                $content[$row['id']]['end_second'] = $row['end_second'] ?? null;
             }
             $results = array_values($content);
         }
