@@ -78,15 +78,15 @@ class Leadgen extends Resource
                         $brand = 'Singeo';
                     }
 
-                    return '/'.$brand.'/lead-gen/'.$request->uuid.'-'.$request->file('meta_img')->getClientOriginalName();
+                    return '/'.$brand.'/Lead-gens/Meta-images'.$request->uuid.'-'.$request->file('meta_img')->getClientOriginalName();
                 })
                 ->preview(function($value){
                     if(empty($value)) return null;
 
-                    return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') || str_contains($value, 'vimeocdn') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
+                    return $value;
                 }),
             Text::make('Meta Image', 'meta_img')->hideFromIndex()->hideFromDetail(),
-            Text::make('Index Slug', 'index_slug')->hideFromIndex(),
+            Text::make('Index Slug', 'slug')->hideFromIndex(),
             Flexible::make('Lessons')
                 ->addLayout(LeadgenLessonLayout::class)
                 ->preset(LeadgenLessonPreset::class),
