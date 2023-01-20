@@ -8,6 +8,7 @@ use Railroad\Railcontent\Repositories\PlaylistLikeRepository;
 use Railroad\Railcontent\Repositories\UserPlaylistContentRepository;
 use Railroad\Railcontent\Repositories\UserPlaylistsRepository;
 use Railroad\Railcontent\Repositories\PinnedPlaylistsRepository;
+use Railroad\Railcontent\Support\Collection;
 
 class UserPlaylistsService
 {
@@ -22,6 +23,7 @@ class UserPlaylistsService
 
     private PinnedPlaylistsRepository $pinnedPlaylistsRepository;
     private PlaylistLikeRepository $playlistLikeRepository;
+    private ContentService $contentService;
 
     /**
      * @param UserPlaylistsRepository $userPlaylistRepository
@@ -31,12 +33,14 @@ class UserPlaylistsService
         UserPlaylistsRepository $userPlaylistRepository,
         UserPlaylistContentRepository $userPlaylistContentRepository,
         PinnedPlaylistsRepository $pinnedPlaylistsRepository,
-        PlaylistLikeRepository $playlistLikeRepository
+        PlaylistLikeRepository $playlistLikeRepository,
+        ContentService $contentService
     ) {
         $this->userPlaylistsRepository = $userPlaylistRepository;
         $this->userPlaylistContentRepository = $userPlaylistContentRepository;
         $this->pinnedPlaylistsRepository = $pinnedPlaylistsRepository;
         $this->playlistLikeRepository = $playlistLikeRepository;
+        $this->contentService = $contentService;
     }
 
     /**
@@ -162,7 +166,9 @@ class UserPlaylistsService
 
     public function getPublicPlaylists($type = 'user-playlist', $brand)
     {
-        return $this->userPlaylistsRepository->getPublicPlaylists($type, $brand);
+        $playlists = $this->userPlaylistsRepository->getPublicPlaylists($type, $brand);
+
+        return Decorator::decorate($playlists, 'playlist');
     }
 
     /**
@@ -174,7 +180,7 @@ class UserPlaylistsService
      * @param null $endSecond
      * @return bool
      */
-    public function addItemToPlaylist($userPlaylistId, $contentId, $position = null, $extraData = [], $startSecond = null, $endSecond = null){
+    public function addItemToPlaylist($userPlaylistId, $contentId, $position = null, $extraData = [], $startSecond = null, $endSecond = null, $importAllAssignments=false){
         $input = [
             'content_id' => $contentId,
             'user_playlist_id' => $userPlaylistId,
@@ -187,6 +193,17 @@ class UserPlaylistsService
 
         $this->userPlaylistContentRepository->createOrUpdatePlaylistContentAndReposition(null, $input);
 
+        if($importAllAssignments){
+            $assignments = $this->contentService->countLessonsAndAssignments($contentId);
+            foreach($assignments['soundslice_assignments']??[] as $assignment){
+                $assignmentInput = [
+                    'content_id' => $assignment['id'],
+                    'user_playlist_id' => $userPlaylistId,
+                    'created_at' => Carbon::now()->toDateTimeString()
+                ];
+                $this->userPlaylistContentRepository->createOrUpdatePlaylistContentAndReposition(null, $assignmentInput);
+            }
+        }
         return $this->getUserPlaylistContents($userPlaylistId);
     }
 
@@ -212,7 +229,7 @@ class UserPlaylistsService
         $playlist['is_liked_by_current_user'] = $this->playlistLikeRepository->query()->where('playlist_id', $playlistId)->where('user_id', auth()->id())->count() > 0;
         $playlist['pinned'] = $this->pinnedPlaylistsRepository->query()->where('playlist_id', $playlistId)->count() > 0;
 
-        return $playlist;
+        return \Arr::first(Decorator::decorate([$playlist], 'playlist'));
     }
 
     /**

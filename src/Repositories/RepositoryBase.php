@@ -672,7 +672,7 @@ abstract class RepositoryBase
                 ->count();
 
         $data['position'] = $this->recalculatePosition(
-            $data['position'] ?? $existingData['position'],
+            $data['position'] ?? $existingData['position'] ?? null,
             $dataCount,
             $existingData
         );

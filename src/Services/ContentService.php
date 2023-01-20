@@ -8,6 +8,7 @@ use Illuminate\Database\Query\JoinClause;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Railroad\Railcontent\Decorators\Decorator;
+use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Entities\ContentEntity;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Events\ContentCreated;
@@ -2631,5 +2632,65 @@ class ContentService
     public function getContentWithExternalVideoId($videoId)
     {
         return $this->contentVideoRepository->getContentWithExternalVideoId($videoId);
+    }
+
+    public function countLessonsAndAssignments($contentId)
+    {
+        $singularContentTypes = array_merge(
+            config('railcontent.showTypes')[config('railcontent.brand')] ?? [],
+            config('railcontent.singularContentTypes')
+        );
+        $results = [];
+
+        $content = $this->getById($contentId);
+        if(in_array($content['type'], $singularContentTypes)) {
+            $soundsliceAssingment = 0;
+            $assign = [];
+            $assignments = $content['assignments'];
+            foreach($assignments as $assignment){
+                if($assignment->fetch('soundslice_slug')){
+                    $soundsliceAssingment++;
+                    $assign[] = $assignment;
+                }
+            }
+            $results['soundslice_assignments_count'] = $soundsliceAssingment;
+        } elseif(in_array($content['type'], ['course','learning-path-course',])) {
+            ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MAXIMUM;
+            $lessons = $this->getByParentId($content['id']);
+
+            $soundsliceAssingment = 0;
+            $assign = [];
+            $lessonsCount = 0;
+            foreach($lessons as $lesson){
+                foreach ($lesson['assignments']??[] as $assignment){
+                    if($assignment->fetch('soundslice_slug')){
+                        $soundsliceAssingment++;
+                        $assign[] = $assignment;
+                    }
+                }
+                if($lesson['type'] == 'learning-path-course'){
+
+                    $lessonLessons = $this->getByParentId($lesson['id']);
+
+                    foreach($lessonLessons as $lessonLesson) {
+                        $lessonsCount++;
+                        foreach ($lessonLesson['assignments'] ?? [] as $lessonAssignment) {
+                            if ($lessonAssignment->fetch('soundslice_slug')) {
+                                $soundsliceAssingment++;
+                                $assign[] = $lessonAssignment;
+                            }
+                        }
+                    }
+                } else {
+                    $lessonsCount++;
+                }
+            }
+
+            $results['lessons_count'] = $lessonsCount;
+            $results['soundslice_assignments_count'] = $soundsliceAssingment;
+            $results['soundslice_assignments'] = $assign;
+        }
+
+        return $results;
     }
 }

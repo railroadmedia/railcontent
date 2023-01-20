@@ -233,6 +233,8 @@ Route::group(
 
         Route::put('/change-playlist-content', MyListJsonController::class . '@changePlaylistContent');
 
+        Route::get('/lessons-and-assignments-count/{contentId}', ContentJsonController::class . '@countLessonsAndAssignments');
+
 //        Route::put('/remove-from-my-list', MyListJsonController::class . '@removeFromPrimaryPlaylist');
 //        Route::get('/my-list', MyListJsonController::class . '@getMyLists');
         //addItemToPlaylist
