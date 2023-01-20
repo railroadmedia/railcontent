@@ -38,45 +38,6 @@
 
         {{-- App Container --}}
         <div id="app" class="flex-1">
-            @php
-                $playlists = [
-                    [
-                        'id' => '1',
-                        'title' => 'Practice playlist',
-                        'isPinned' => false
-                    ],
-                    [
-                        'id' => '2',
-                        'title' => 'Lorem Ipsum Playlist very long long long long long',
-                        'isPinned' => true
-                    ],
-                    [
-                        'id' => '3',
-                        'title' => 'Interesting playlist',
-                        'isPinned' => false
-                    ],
-                    [
-                        'id' => '4',
-                        'title' => 'Interesting playlist',
-                        'isPinned' => false
-                    ],
-                    [
-                        'id' => '5',
-                        'title' => 'Interesting playlist',
-                        'isPinned' => false
-                    ],
-                    [
-                        'id' => '6',
-                        'title' => 'Interesting playlist',
-                        'isPinned' => false
-                    ],
-                    [
-                        'id' => '7',
-                        'title' => 'Interesting playlist',
-                        'isPinned' => false
-                    ],
-                ];
-            @endphp
             <app-container
                 :vue-router="false"
                 brand="{{ $brand }}"
@@ -85,7 +46,7 @@
                     brand="{{ $brand }}"
                     :is-live="{{ isLive() ? 'true':'false' }}"
                     search-url=""
-                    :playlists="{{ json_encode($playlists) }}" {{-- Preloaded Content --}}
+                    :playlists="{{ json_encode($pinnedPlaylists) }}" {{-- Preloaded Content --}}
                     @if(!empty( user() ))
                         user-name="{{ user()->display_name }}"
                         user-avatar="{{ user()->profile_picture_url }}"
