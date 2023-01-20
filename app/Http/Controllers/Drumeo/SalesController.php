@@ -173,6 +173,13 @@ class SalesController extends BaseController
 
         return view('drumeo.products.30-day-drummer', ['products' => $products]);
     }
+    public function thirtyDayDrummerDeal()
+    {
+        $products = $this->productRepository->all();
+        $products = array_combine(array_entity_column($products, 'getSku'), $products);
+
+        return view('drumeo.lead-gen.pages.30-day-drummer-deal', ['products' => $products]);
+    }
 
     public function hitLikeAGirlSubmission(Request $request)
     {

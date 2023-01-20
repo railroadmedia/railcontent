@@ -1454,7 +1454,9 @@ class ProfileSettingsPagesController extends BaseController
             }
             $expired = $userProduct->getExpirationDate() ? $userProduct->getExpirationDate()->lt(Carbon::now()) : null;
 
-            $isAllContentAccessProduct = $userProduct->getProduct()->getDigitalAccessType() == 'all content access';
+            $isAllContentAccessProduct = $userProduct->getProduct()->getDigitalAccessType() == 'all content access' ||
+                $userProduct->getProduct()->getDigitalAccessType() == 'basic content access';
+            
             if ($isAllContentAccessProduct) {
                 $allContentAccessProduct = $userProduct;
                 $paused = $userProduct->getStartDate() && $userProduct->getStartDate()->gt(Carbon::now());

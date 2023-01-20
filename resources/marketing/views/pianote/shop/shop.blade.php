@@ -144,6 +144,37 @@
             </ul>
         </section>
 
+        {{--   HATS     --}}
+        <section class="grid-view category-section" data-category="hats" x-show="filter === 'clothing' || filter === 'all'">
+            <ul class="container mx-auto fixed-cards">
+                <li>
+                    <h1 class="px-2 md:px-3">
+                        <div class="heading-icon"><img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/hat.svg" alt="hat icon" style="filter: invert()sepia()brightness(.5)hue-rotate(-70deg)saturate(37);"></div>
+                        Hats
+                    </h1>
+                </li>
+
+                @foreach($hats as $hat){
+                @include('drumeo.drumshop._partials._drum-shop-card', [
+                     "sku" => $hat->sku,
+                     "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hat->slug ),
+                     "badgeText" => $hat->badge_text,
+                     "thumbnail" => $hat->thumbnail,
+                     "title" => $hat->name,
+                     "cardDescription" => $hat->short_desc,
+                     "fullPrice" => $hat->price,
+                     "price" => $hat->discounted_price,
+                     "sizes" => $hat->sizes,
+                     "soldOut" => !empty($products[$hat->sku]) ? $products[$hat->sku]->getStockAvailability() === 0 : $hat->sold_out,
+                     "category" => strtolower($hat->productType->name),
+                     "size_case_sensitive" => $hat->size_case_sensitive,
+                ])
+                }
+                @endforeach
+
+            </ul>
+        </section>
+
         {{--   SHIRTS     --}}
         <section class="grid-view category-section" data-category="shirts" x-show="filter === 'clothing' || filter === 'all'">
             <ul class="container mx-auto fixed-cards">

@@ -14,11 +14,12 @@ interface UserProviderInterface
 
     /**
      * @param int $userId
-     * @param Carbon $membershipExpirationDate
+     * @param Carbon|null $membershipExpirationDate
      * @param bool $isLifetimeMember
      * @param string $accessLevel
      * @param bool $isPackOwner
      * @param string|null $membershipLevel
+     * @param bool $isDrumeoLifetimeMember
      * @return bool
      */
     public function saveMembershipData(
@@ -27,7 +28,8 @@ interface UserProviderInterface
         bool $isLifetimeMember,
         string $accessLevel,
         bool $isPackOwner,
-        ?string $membershipLevel
+        ?string $membershipLevel,
+        bool $isDrumeoLifetimeMember
     ): bool;
 
     /**

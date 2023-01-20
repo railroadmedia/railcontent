@@ -46,7 +46,7 @@ class LeadgenLessonLayout extends Layout
             Text::make('slug')->required(),
             Text::make('title')->required(),
             Text::make('Description', 'desc'),
-            Image::make('thumbnail')
+            Image::make('thumbnail_path')
                 ->disk('nova_s3')
                 ->prunable()
                 ->hideFromIndex()
@@ -69,14 +69,14 @@ class LeadgenLessonLayout extends Layout
                         $brand = 'Singeo';
                     }
 
-                    return '/'.$brand.'/'.$request->uuid.'-'.$request->file('thumbnail')->getClientOriginalName();
+                    return '/'.$brand.'/Lead-gens/Thumbnails/'.$request->uuid.'-'.$request->file('thumbnail')->getClientOriginalName();
                 })
                 ->preview(function($value){
                     if(empty($value)) return null;
 
-                    return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') || str_contains($value, 'vimeocdn') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
+                    return $value;
                 }),
-            Text::make('thumbnail')->hideFromIndex()->hideFromDetail()->required(),
+            Text::make('thumbnail_text')->hideFromIndex()->hideFromDetail()->required(),
             Text::make('Video Src', 'video_src')->hideFromIndex()->required(),
             Number::make('duration')->help('In minutes'),
             Flexible::make('Assets')

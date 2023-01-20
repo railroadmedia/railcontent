@@ -93,11 +93,11 @@
         ])
         <div class="has-drop-down" target="_parent" rel="">
             <div class="nav-link">
-                <i class="fas fa-star"></i>
+                <i class="fas fa-star text-guitareo"></i>
                 Features
                 <div class="drop-down-arrow ">
-                    <span></span>
-                    <span></span>
+                    <span class="bg-guitareo"></span>
+                    <span class="bg-guitareo"></span>
                 </div>
             </div>
         </div>
@@ -120,11 +120,11 @@
         </div>
         <div class="has-drop-down" target="_parent" rel="">
             <div class="nav-link">
-                <i class="fas fa-piano-keyboard"></i>
+                <i class="fas fa-piano-keyboard text-guitareo"></i>
                 Instruments
                 <div class="drop-down-arrow ">
-                    <span></span>
-                    <span></span>
+                    <span class="bg-guitareo"></span>
+                    <span class="bg-guitareo"></span>
                 </div>
             </div>
         </div>
@@ -164,11 +164,11 @@
 
         <div class="has-drop-down" target="_parent" rel="">
             <div class="nav-link">
-                <i class="fas fa-circle-play"></i>
+                <i class="fas fa-circle-play text-guitareo"></i>
                 Free Resources
                 <div class="drop-down-arrow ">
-                    <span></span>
-                    <span></span>
+                    <span class="bg-guitareo"></span>
+                    <span class="bg-guitareo"></span>
                 </div>
             </div>
         </div>

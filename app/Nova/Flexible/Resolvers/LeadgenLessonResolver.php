@@ -28,7 +28,8 @@ class LeadgenLessonResolver implements ResolverInterface
             return $layout->duplicateAndHydrate($lesson->id, [
                 'title' => $lesson->title,
                 'desc' => $lesson->desc,
-                'thumbnail' => $lesson->thumbnail,
+                'thumbnail_text' => $lesson->thumbnail,
+                'thumbnail_path' => $lesson->thumbnail,
                 'video_src' => $lesson->video_src,
                 'display_order' => $lesson->display_order,
                 'slug' => $lesson->slug,
@@ -56,7 +57,7 @@ class LeadgenLessonResolver implements ResolverInterface
                return [
                    'title' => $group->getAttributes()['title'],
                    'desc' => $group->getAttributes()['desc'],
-                   'thumbnail' => $group->getAttributes()['thumbnail'],
+                   'thumbnail' => !empty($group->getAttributes()['thumbnail_text']) ? $group->getAttributes()['thumbnail_text'] : $group->getAttributes()['thumbnail_path'],
                    'video_src' => $group->getAttributes()['video_src'],
                    'slug' => $group->getAttributes()['slug'],
                    'display_order' => $index+1,
