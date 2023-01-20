@@ -37,7 +37,6 @@ const props = defineProps({
   }
 });
 
-
 const sidebarNavigationLinks = inject('sidebarNavigationLinks');
 
 const activePath = (path) => {
