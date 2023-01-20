@@ -94,6 +94,9 @@
                             elseif(str_contains($asset->src, 'pdf')){
                                 $resourceName = 'pdfURL';
                             }
+                            elseif(str_contains($asset->src, 'zip')){
+                                $resourceName = 'zipURL';
+                            }
                         @endphp
 
                         @include('drumeo.lead-gen.partials._assignment-resources', [
@@ -111,11 +114,13 @@
         </div>
     @endif
 
-    @hasSection ('lesson-description')
+    @if(!empty($currentLesson->desc))
         <div class="px-3 py-6 sm:py-10">
             <div class="container mx-auto clearfix" style="max-width:920px">
                 <div class="text-left lesson-text">
-                    @yield('lesson-description')
+                    <p>
+                        <x-markdown>{!! nl2br($currentLesson->desc) !!}</x-markdown>
+                    </p>
                 </div>
             </div>
         </div>
