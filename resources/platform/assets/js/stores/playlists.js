@@ -21,7 +21,6 @@ export const usePlaylistsStore = defineStore({
       });
     },
     modalReset() {
-      console.log('reset called');
       this.$patch({
         modalType: null,
       });
