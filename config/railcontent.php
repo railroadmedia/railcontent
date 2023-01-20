@@ -1183,7 +1183,8 @@ return [
         'semester-pack',
         'quick-tips',
         'song-tutorial',
-        'song-tutorial-children'
+        'song-tutorial-children',
+        "assignment"
     ],
     'hiddenContentTypes' => [
         'ha-oemurd-pmac',

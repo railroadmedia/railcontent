@@ -69,4 +69,29 @@ class UserPlaylistsController extends BaseController
             "noResultsMessage" => 'no results',
         ]);
     }
+
+    public function playlist(Request $request, $domain, $brand, $playlistId){
+        $playlist = $this->userPlaylistsService->getPlaylist($playlistId);
+
+        $page = $request->get('page', 1);
+        $limit = $request->get('limit', null);
+
+        $contentTypes = array_merge(
+            config('railcontent.appUserListContentTypes', []),
+            array_values(config('railcontent.showTypes', [])[config('railcontent.brand')] ?? [])
+        );
+
+        $items = new ContentFilterResultsEntity([
+                                                      'results' => $this->userPlaylistsService->getUserPlaylistContents($playlistId, $contentTypes,$limit, $page),
+                                                      'total_results' => $this->userPlaylistsService->countUserPlaylistContents($playlistId),
+                                                  ]);
+
+        return view('account.playlist', [
+            "listLessons" => $items->toResponseRawJson(),
+            "playlist" => $playlist,
+            'currentUser' => user(),
+            "noResultsMessage" => 'Nothing here yet! Start adding videos',
+            "brand" => brand()
+        ]);
+    }
 }
