@@ -110,18 +110,7 @@ class LeadGenController extends BaseController
 
     public function freePlayalongs(Request $request, $domain, $prefix = null, $page = null)
     {
-        if(is_null($prefix) && is_null($page)) {
-            return view('drumeo.lead-gen.free-playalongs.signup');
-        } else {
-            switch ($page) {
-                case null:
-                    return view('drumeo.lead-gen.free-playalongs.unlocked');
-                default:
-                    return view('drumeo.lead-gen.free-playalongs.songs.'.$page);
-            }
-        }
-
-        throw new NotFoundHttpException();
+        return view('drumeo.lead-gen.free-playalongs.signup');
     }
 
     public function metalPlayalongs(Request $request, $domain, $prefix = null, $page = null)
@@ -493,30 +482,31 @@ class LeadGenController extends BaseController
     {
         $currentLesson = LeadgenLesson::where('slug', $leadgenSlug)->first();
         if(!is_null($currentLesson)){
-            $lessons = LeadgenLesson::where('leadgen_id', $currentLesson->leadgen_id)->get();
-            $currentLessonIndex = $lessons->search(function($item) use($leadgenSlug){
-                return $item['slug'] === $leadgenSlug;
-            });
-
-            $prevLesson = $currentLessonIndex === 0 ? null : $lessons[$currentLessonIndex - 1];
-            $nextLesson = $currentLessonIndex === count($lessons) - 1 ? null : $lessons[$currentLessonIndex + 1];
+            if(!$currentLesson->one_off){
+                $lessons = LeadgenLesson::where([['leadgen_id', $currentLesson->leadgen_id], ['one_off', 0]])->get();
+                $currentLessonIndex = $lessons->search(function($item) use($leadgenSlug){
+                    return $item['slug'] === $leadgenSlug;
+                });
+                $prevLesson = $currentLessonIndex === 0 ? null : $lessons[$currentLessonIndex - 1];
+                $nextLesson = $currentLessonIndex === count($lessons) - 1 ? null : $lessons[$currentLessonIndex + 1];
+            }
 
             $leadgen = Leadgen::where('id', $currentLesson->leadgen_id)->first();
 
             return view('_partials.layout.global-lead-gen-lesson-layout', [
                 'theme' => 'drumeo',
                 'leadgen' => $leadgen,
-                'prevLesson' => $prevLesson,
+                'prevLesson' => $prevLesson ?? null,
                 'currentLesson' => $currentLesson,
-                'nextLesson' => $nextLesson,
-                'totalLessonNum' => count($lessons),
-                'currentLessonNum' => $currentLessonIndex+1
+                'nextLesson' => $nextLesson ?? null,
+                'totalLessonNum' => !empty($lessons) ? count($lessons) : null,
+                'currentLessonNum' => !empty($currentLessonIndex) ? $currentLessonIndex+1 : null
             ]);
         }
         else {
             $leadgen = Leadgen::where('slug', $leadgenSlug)->first();
             if(!is_null($leadgen)){
-                $lessons = LeadgenLesson::where('leadgen_id', $leadgen->id)->get();
+                $lessons = LeadgenLesson::where([['leadgen_id', $leadgen->id], ['one_off', 0]])->get();
 
                 return view('_partials.layout.global-lead-gen-index-layout',[
                     'theme' => 'drumeo',
