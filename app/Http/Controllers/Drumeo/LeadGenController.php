@@ -22,28 +22,9 @@ class LeadGenController extends BaseController
         throw new NotFoundHttpException();
     }
 
-    public function coop3rdrumm3r(Request $request, $domain, $page = null)
+    public function coop3rdrumm3r()
     {
-        switch ($page) {
-            case null:
-                return view('drumeo.lead-gen.coop3rdrumm3r.signup');
-            case 'lessons':
-                return view('drumeo.lead-gen.coop3rdrumm3r.lesson-grid');
-            case '1-the-drum-set':
-                return view('drumeo.lead-gen.coop3rdrumm3r.lessons.1');
-            case '2-drum-theory':
-                return view('drumeo.lead-gen.coop3rdrumm3r.lessons.2');
-            case '3-practice':
-                return view('drumeo.lead-gen.coop3rdrumm3r.lessons.3');
-            case '4-grooves':
-                return view('drumeo.lead-gen.coop3rdrumm3r.lessons.4');
-            case '5-drum-fills':
-                return view('drumeo.lead-gen.coop3rdrumm3r.lessons.5');
-            case 'keep-getting-better':
-                return view('drumeo.lead-gen.coop3rdrumm3r.lessons.get-better');
-        }
-
-        throw new NotFoundHttpException();
+        return view('drumeo.lead-gen.coop3rdrumm3r.signup');
     }
 
     public function destupefy()
@@ -53,92 +34,24 @@ class LeadGenController extends BaseController
         throw new NotFoundHttpException();
     }
 
-    public function drumFills(Request $request, $domain, $page = null)
+    public function drumSetMaintenance()
     {
-        switch ($page) {
-            case null:
-                return view('drumeo.lead-gen.drum-fills.index');
-            default:
-                return view('drumeo.lead-gen.drum-fills.lessons.'.$page);
-        }
-
-        throw new NotFoundHttpException();
+        return view('drumeo.lead-gen.courses.full.drum-set-maintenance.signup');
     }
 
-    public function drumSetMaintenance(Request $request, $domain, $prefix =null, $page = null)
+    public function dtmeTestimonials(Request $request, $domain, $page = null)
     {
-        if(is_null($prefix) && is_null($page)) {
-            return view('drumeo.lead-gen.courses.full.drum-set-maintenance.signup');
-        } else {
-            switch ($page) {
-                case null:
-                    return view('drumeo.lead-gen.courses.full.drum-set-maintenance.lesson-index');
-                default:
-                    return view('drumeo.lead-gen.courses.full.drum-set-maintenance.'.$page);
-            }
-        }
-
-        throw new NotFoundHttpException();
+        return view('drumeo.products.dtme-testimonials');
     }
 
-    public function dtme(Request $request, $domain, $page = null)
+    public function faster()
     {
-        switch ($page) {
-            case '1-five-technique-myths':
-                return view('drumeo.lead-gen.drum-technique-made-easy.lessons.1');
-            case '2-massive-technique-fails':
-                return view('drumeo.lead-gen.drum-technique-made-easy.lessons.2');
-            case '3-the-most-important-technique':
-                return view('drumeo.lead-gen.drum-technique-made-easy.lessons.3');
-            case 'testimonials':
-                return view('drum-technique-made-easy-testimonials');
-        }
-
-        throw new NotFoundHttpException();
+        return view('drumeo.lead-gen.faster.signup');
     }
 
-    public function faster(Request $request, $domain, $page = null)
+    public function gavinsGrooves()
     {
-        switch ($page) {
-            case null:
-                return view('drumeo.lead-gen.faster.signup');
-            case 'lessons':
-                return view('drumeo.lead-gen.faster.lesson-grid');
-            default:
-                return view('drumeo.lead-gen.faster.lessons.'.$page);
-        }
-
-        throw new NotFoundHttpException();
-    }
-
-    public function gavinsGrooves(Request $request, $domain, $prefix =null, $page = null)
-    {
-        if(is_null($prefix) && is_null($page)) {
-            return view('drumeo.lead-gen.courses.full.gavins-grooves.signup');
-        } else {
-            switch ($page) {
-                case null:
-                    return view('drumeo.lead-gen.courses.full.gavins-grooves.lesson-index');
-                case '1-intro':
-                    return view('drumeo.lead-gen.courses.full.gavins-grooves.1');
-                case '2-mother-child-divided':
-                    return view('drumeo.lead-gen.courses.full.gavins-grooves.2');
-                case '3-halo':
-                    return view('drumeo.lead-gen.courses.full.gavins-grooves.3');
-                case '4-sound-of-muzak':
-                    return view('drumeo.lead-gen.courses.full.gavins-grooves.4');
-                case '5-futile':
-                    return view('drumeo.lead-gen.courses.full.gavins-grooves.5');
-                case '6-anesthetize':
-                    return view('drumeo.lead-gen.courses.full.gavins-grooves.6');
-                case '7-life':
-                    return view('drumeo.lead-gen.courses.full.gavins-grooves.7');
-                case '8-conclusion':
-                    return view('drumeo.lead-gen.courses.full.gavins-grooves.8');
-            }
-        }
-
-        throw new NotFoundHttpException();
+        return view('drumeo.lead-gen.courses.full.gavins-grooves.signup');
     }
 
     public function getFaster()
