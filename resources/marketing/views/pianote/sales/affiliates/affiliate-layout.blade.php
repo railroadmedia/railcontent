@@ -1,27 +1,14 @@
-@extends('pianote.sales.standard-layout', [
-    "trialVersion" => true
-])
-@section('meta')
+@extends('pianote.sales.subscription')
+
+@section('global-head')
     <title>@yield('name') | Pianote Trial</title>
     <meta property="og:title" content="@yield('name') | Pianote Trial">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}/">
+    @parent
 @endsection
 
 @section('share-image')
     <meta property="og:image" content="https://cdn.musora.com/image/fetch/w_540,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/sales/trials/@yield('url').jpg" style="display: none;">
-@endsection
-
-@section('sticky-bar')
-    <div class="h-10 relative w-full block bg-black"></div>
-    <a href="/affiliate-trial/"
-            class="promo-banner bg-black block text-center w-full transition-opacity duration-300 overflow-hidden whitespace-nowrap text-white bg-cover bg-center shadow-md py-1 hover:text-gray-100 z-0 mx-auto -mt-10 text-xs">
-        <div class="container mx-auto relative">
-            <div class="inline-block align-middle text-center">
-                <p class="uppercase leading-none"><strong>@yield('name') FANS</strong><br>
-                    <span class="text-pianote">YOUR FIRST MONTH IS FREE!</span></p>
-            </div>
-        </div>
-    </a>
 @endsection
 
 @section('promo-banner')
@@ -35,13 +22,9 @@
                     <h6 class="leading-normal my-3 md:my-5">
                         <em>@yield('text')</em>
                     </h6>
-                    <a href="/affiliate-trial/" class="join smaller coaches methodcta">START MY FREE TRIAL</a>
+                    <a href="/choose-your-trial-month/" class="join smaller methodcta">START MY FREE TRIAL</a>
                 </div>
             </div>
         </div>
     </div>
 @endsection
-
-@section('final')
-    @include('pianote.sales.trials._final-trial', [ "url" => "/affiliate-trial/" ])
-@stop

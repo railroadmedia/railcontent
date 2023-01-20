@@ -29,10 +29,6 @@ Route::domain('{guitareoDomain}')
     Route::get('/lifetime', [SalesController::class, 'lifetime']);
     Route::get('/survival-kit-instructions', [SalesController::class, 'survivalkitinstructions']);
 
-    Route::get('/daddario-string-session', [SalesController::class, 'daddariostringsession']);
-    Route::get('/daddario-string-session-ga ', [SalesController::class, 'daddariostringsessionga']);
-
-
     Route::get('/welcome', [SalesController::class, 'welcome']);
     Route::get('/welcome/2', [SalesController::class, 'welcome2']);
     Route::get('/welcome/3', [SalesController::class, 'welcome3']);

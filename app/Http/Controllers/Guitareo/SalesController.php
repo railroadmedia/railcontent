@@ -35,7 +35,7 @@ class SalesController extends BaseController
 
     public function asobergirlsguide()
     {
-        return view('guitareo.sales.trials.affiliates.asobergirlsguide', ['theme' => 'guitareo', 'month' => true]);
+        return view('guitareo.sales.affiliates.asobergirlsguide', ['theme' => 'guitareo', 'month' => true]);
     }
 
     public function cookie()
@@ -82,16 +82,6 @@ class SalesController extends BaseController
     public function survivalkitinstructions()
     {
         return view('guitareo.shop.pages.survival-kit-tutorial');
-    }
-
-    public function daddariostringsession()
-    {
-        return view('guitareo.sales.trials.daddario-string-session');
-    }
-
-    public function daddariostringsessionga()
-    {
-        return view('guitareo.sales.trials.daddario-string-session');
     }
 
     public function songs500()

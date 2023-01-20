@@ -49,7 +49,7 @@ class SalesController extends BaseController
 
     public function asobergirlsguide()
     {
-        return view('singeo.sales.trials.affiliates.asobergirlsguide', ['theme' => 'singeo', 'month' => true]);
+        return view('singeo.sales.affiliates.asobergirlsguide', ['theme' => 'singeo', 'month' => true]);
     }
 
     public function prefBeginner()
