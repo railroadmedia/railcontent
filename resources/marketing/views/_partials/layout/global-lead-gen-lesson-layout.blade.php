@@ -42,7 +42,7 @@
             <div class="title-header-interaction text-center">
                 <div class="px-2 md:px-3">
                     <h3><strong>{{ $currentLesson->title }}</strong></h3>
-                    <p class="text-light-navy mt-1 sm:mt-2">Lesson {{ $currentLessonNum }} of {{ $totalLessonNum }}</p>
+                    @if(!empty($totalLessonNum) && !empty($currentLessonNum))<p class="text-light-navy mt-1 sm:mt-2">Lesson {{ $currentLessonNum }} of {{ $totalLessonNum }}</p>@endif
                 </div>
             </div>
             <div class="text-center mt-3 sm:mt-7 clearfix lesson-buttons flex justify-between">
