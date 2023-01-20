@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('thumbnail');
             $table->string('video_src');
             $table->integer('duration');
+            $table->boolean('one_off');
             $table->integer('display_order');
             $table->timestamps();
         });
