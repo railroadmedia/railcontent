@@ -4,6 +4,7 @@ namespace App\Nova\Flexible\Resolvers;
 
 use App\Models\LeadgenLesson;
 use App\Models\LeadgenLessonAsset;
+use Illuminate\Support\Facades\Storage;
 use Whitecube\NovaFlexibleContent\Value\ResolverInterface;
 
 class LeadgenLessonResolver implements ResolverInterface
@@ -71,6 +72,8 @@ class LeadgenLessonResolver implements ResolverInterface
             foreach($lessons as $key => $lesson){
                 //insert
                 if(is_null($lesson['id'])){
+                    if(!str_contains($lesson['thumbnail'], 'https')) $lesson['thumbnail'] = 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$lesson['thumbnail'];
+
                     $addLesson = new LeadgenLesson();
                     $addLesson->leadgen_id = $model['id'];
                     $addLesson->title = $lesson['title'];
@@ -123,9 +126,10 @@ class LeadgenLessonResolver implements ResolverInterface
 
             //delete items
             if(isset($updatedIds)){
-                $deleteLessons = LeadgenLesson::select('id')->where('leadgen_id', $model['id'])->whereNotIn('id', $updatedIds);
+                $deleteLessons = LeadgenLesson::where('leadgen_id', $model['id'])->whereNotIn('id', $updatedIds);
                 if(count($deleteLessons->get()) > 0){
                     foreach($deleteLessons->get() as $id){
+                        Storage::disk('nova_s3')->delete(str_replace('https://laravel-nova.s3.us-east-2.amazonaws.com/','',$id->thumbnail));
                         $assetIds[] = $id->id;
                     }
                     $deleteAssets = LeadgenLessonAsset::where('leadgen_lesson_id', $assetIds)->delete();
