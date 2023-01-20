@@ -30,15 +30,7 @@ Route::domain('{drumeoDomain}')->group(function () {
         }
     );
     Route::get('/getting-started-drums', [LeadGenController::class, 'gtsdAlt'] );
-    Route::group(['prefix' => 'free-playalongs'],
-        function () {
-            Route::get('/{prefix?}/{page?}', LeadGenController::class . '@freePlayalongs')
-                ->whereIn('prefix', [null, 'songs'])
-                ->whereIn('page', [
-                    null, '1', '2', '3', '4', '5', '6', '7', '8', '9'
-                ]);
-        }
-    );
+    Route::get('free-playalongs', [LeadGenController::class, 'freePlayalongs']);
     Route::group(['prefix' => 'metal-playalongs'],
         function () {
             Route::get('/{prefix?}/{page?}', LeadGenController::class . '@metalPlayalongs')
