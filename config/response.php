@@ -1469,6 +1469,7 @@ return [
             'data.description',
             '*data.sheet_music_image_url',
             'data.timecode',
+            'parent',
         ],
 
         'comment' => [
