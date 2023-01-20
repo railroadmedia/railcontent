@@ -13,64 +13,12 @@ Route::domain('{drumeoDomain}')->group(function () {
 
         }
     );
-//    Route::group(['prefix' => 'coop3rdrumm3r'],
-//        function () {
-//            Route::get('/{page?}', LeadGenController::class . '@coop3rdrumm3r')
-//                ->whereIn('page', [
-//                    null,
-//                    'lessons',
-//                    '1-the-drum-set',
-//                    '2-drum-theory',
-//                    '3-practice',
-//                    '4-grooves',
-//                    '5-drum-fills',
-//                    'keep-getting-better',
-//                ]);
-//        }
-//    );
+    Route::get('/coop3rdrumm3r', [LeadGenController::class, 'coop3rdrumm3r']);
     Route::get('/destupefying-your-weak-hand', [LeadGenController::class, 'destupefy'] );
-//    Route::group(['prefix' => 'drum-fills'],
-//        function () {
-//            Route::get('/{page?}', LeadGenController::class . '@drumFills')
-//                ->whereIn('page', [
-//                    null, '1', '2', '3', '4', '5',
-//                ]);
-//        }
-//    );
-    Route::group(['prefix' => 'drum-set-maintenance'],
-        function () {
-            Route::get('/{prefix?}/{page?}', LeadGenController::class . '@drumSetMaintenance')
-                ->whereIn('prefix', [null, 'course-index'])
-                ->whereIn('page', [
-                    null, '1', '2', '3', '4', '5', '6', '7'
-                ]);
-        }
-    );
-    Route::group(['prefix' => 'drum-technique-made-easy'],
-        function () {
-            Route::get('/{page?}', LeadGenController::class . '@dtme')
-                ->whereIn('page', [
-                    '1-five-technique-myths', '2-massive-technique-fails', '3-the-most-important-technique', 'testimonials',
-                ]);
-        }
-    );
-    Route::group(['prefix' => 'faster'],
-        function () {
-            Route::get('/{page?}', LeadGenController::class . '@faster')
-                ->whereIn('page', [
-                    null, 'lessons', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'
-                ]);
-        }
-    );
-    Route::group(['prefix' => 'gavins-grooves'],
-        function () {
-            Route::get('/{prefix?}/{page?}', LeadGenController::class . '@gavinsGrooves')
-                ->whereIn('prefix', [null, 'course-index'])
-                ->whereIn('page', [
-                    null, '1-intro', '2-mother-child-divided', '3-halo', '4-sound-of-muzak', '5-futile', '6-anesthetize', '7-life', '8-conclusion'
-                ]);
-        }
-    );
+    Route::get('/drum-set-maintenance', [LeadGenController::class, 'drumSetMaintenance']);
+    Route::get('/drum-technique-made-easy/testimonials', [LeadGenController::class, 'dtmeTestimonials']);
+    Route::get('/faster', [LeadGenController::class, 'faster']);
+    Route::get('/gavins-grooves', [LeadGenController::class, 'gavinsGrooves']);
     Route::get('/get-faster', [LeadGenController::class, 'getFaster']);
     Route::get('/get-faster-drums', [LeadGenController::class, 'getFaster']);
     Route::group(['prefix' => 'getting-started'],
