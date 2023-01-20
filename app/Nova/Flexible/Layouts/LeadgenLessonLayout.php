@@ -46,7 +46,7 @@ class LeadgenLessonLayout extends Layout
             Text::make('slug')->required(),
             Text::make('title')->required(),
             Text::make('Description', 'desc'),
-            Image::make('thumbnail', 'thumbnail_path')
+            Image::make('thumbnail')
                 ->disk('nova_s3')
                 ->prunable()
                 ->hideFromIndex()
@@ -74,9 +74,9 @@ class LeadgenLessonLayout extends Layout
                 ->preview(function($value){
                     if(empty($value)) return null;
 
-                    return $value;
+                    return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') || str_contains($value, 'vimeocdn') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
                 }),
-            Text::make('thumbnail', 'thumbnail_text')->hideFromIndex()->hideFromDetail()->required(),
+            Text::make('thumbnail')->hideFromIndex()->hideFromDetail()->required(),
             Text::make('Video Src', 'video_src')->hideFromIndex()->required(),
             Number::make('duration')->help('In minutes'),
             Flexible::make('Assets')

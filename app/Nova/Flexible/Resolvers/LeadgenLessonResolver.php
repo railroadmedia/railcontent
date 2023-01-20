@@ -28,8 +28,7 @@ class LeadgenLessonResolver implements ResolverInterface
             return $layout->duplicateAndHydrate($lesson->id, [
                 'title' => $lesson->title,
                 'desc' => $lesson->desc,
-                'thumbnail_path' => $lesson->thumbnail,
-                'thumbnail_text' => $lesson->thumbnail,
+                'thumbnail' => $lesson->thumbnail,
                 'video_src' => $lesson->video_src,
                 'display_order' => $lesson->display_order,
                 'slug' => $lesson->slug,
@@ -50,11 +49,14 @@ class LeadgenLessonResolver implements ResolverInterface
      */
     public function set($model, $attribute, $groups)
     {
-        $lessons = $groups->map(function($group, $index) use($model){
+        $class = get_class($model);
+
+        $class::saved(function ($model) use ($groups){
+            $lessons = $groups->map(function($group, $index) use($model){
                return [
                    'title' => $group->getAttributes()['title'],
                    'desc' => $group->getAttributes()['desc'],
-                   'thumbnail' => !empty($group->getAttributes()['thumbnail_text']) ? $group->getAttributes()['thumbnail_text'] : $group->getAttributes()['thumbnail_path'],
+                   'thumbnail' => $group->getAttributes()['thumbnail'],
                    'video_src' => $group->getAttributes()['video_src'],
                    'slug' => $group->getAttributes()['slug'],
                    'display_order' => $index+1,
@@ -63,11 +65,11 @@ class LeadgenLessonResolver implements ResolverInterface
                 ];
             });
 
+            $total = count(LeadgenLesson::where('leadgen_id', $model['id'])->get());
+
             foreach($lessons as $key => $lesson){
                 //insert
                 if(is_null($lesson['id'])){
-                    if(!str_contains($lesson['thumbnail'], 'https')) $lessons['thumbnail'] = 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$lessons['thumbnail'];
-
                     $addLesson = new LeadgenLesson();
                     $addLesson->leadgen_id = $model['id'];
                     $addLesson->title = $lesson['title'];
@@ -129,6 +131,7 @@ class LeadgenLessonResolver implements ResolverInterface
                     $deleteLessons->delete();
                 }
 
-            };
+            }
+        });
     }
 }
