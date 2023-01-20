@@ -156,6 +156,7 @@ class LeadgenSeeder extends Seeder
                         'video_src' => '//player.vimeo.com/video/149674633',
                         'duration' => 2,
                         'assets' => [],
+                        'one_off' => true,
                     ],
                 ],
             ],
@@ -568,238 +569,339 @@ The second exercise is similar, but this time we’re playing longer groups of u
             ],
             [
                 'brand_id' => 1,
-                'title' => 'Getting Started On The Drums',
-                'meta_desc' => 'Just starting out on the drums? Want to rebuild your foundation? Try Jared Falk\'s free video series!',
-                'meta_img' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/og-image.jpg',
-                'slug' => 'getting-started/lessons',
+                'title' => '9 FREE PLAY-ALONGS',
+                'meta_desc' => 'Add your drumming to nine high-quality drum play-along tracks. (FREE).',
+                'meta_img' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/og-image.jpg',
+                'slug' => 'free-playalongs/songs',
                 'lessons' => [
                     [
-                        'slug' => 'getting-started/1-setting-up-your-drums',
-                        'title' => 'Setting Up Your Drums',
+                        'slug' => 'free-playalongs/songs/1',
+                        'title' => 'The Check In (Jost Nickel)',
                         'desc' => '',
-                        'thumbnail' => '',
-                        'video_src' => '//player.vimeo.com/video/100332067',
-                        'duration' => 20,
-                        'assets' => [
-                            [
-                                'title' => 'All Course PDFs',
-                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/getting-started-resources.zip',
-                                'soundslice' => ''
-                            ],
-                        ],
-                    ],
-                    [
-                        'slug' => 'getting-started/2-tuning-your-drums',
-                        'title' => 'Tuning Your Drums',
-                        'desc' => '',
-                        'thumbnail' => 'https://i.vimeocdn.com/video/469168227-d41168d949f436a688503c73880282804b41bce62adbc5b3ef641eab341ee202-d?mw=1000&mh=563',
-                        'video_src' => '//player.vimeo.com/video/90129042',
-                        'duration' => 40,
-                        'assets' => [
-                            [
-                                'title' => 'All Course PDFs',
-                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/getting-started-resources.zip',
-                                'soundslice' => ''
-                            ],
-                        ],
-                    ],
-                    [
-                        'slug' => 'getting-started/3-holding-your-drumsticks',
-                        'title' => 'Holding Your Drumsticks',
-                        'desc' => '',
-                        'thumbnail' => 'https://i.vimeocdn.com/video/469051158-bcdcf0b70b3c56a5e418d027490b82f58ad935e92f87d6f1f76f204643783623-d?mw=1000&mh=563',
-                        'video_src' => '//player.vimeo.com/video/90056794',
+                        'thumbnail' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/jost-nickel-the-check-in.png',
+                        'video_src' => '//player.vimeo.com/video/541721200',
                         'duration' => 6,
                         'assets' => [
                             [
-                                'title' => 'All Course PDFs',
-                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/getting-started-resources.zip',
+                                'title' => 'Song Chart',
+                                'src' => 'https://d1923uyy6spedc.cloudfront.net/301539-sheet-image-1619782863.svg',
+                                'soundslice' => 'WR3Dc'
+                            ],
+                            [
+                                'title' => 'MP3',
+                                'src' => 'https://s3.amazonaws.com/drumeo/play-along-resources/the-check-in/the-check-in-drums-false-click-false.mp3',
                                 'soundslice' => ''
                             ],
                         ],
                     ],
                     [
-                        'slug' => 'getting-started/4-reading-drum-notation',
-                        'title' => 'Reading Drum Notation',
+                        'slug' => 'free-playalongs/songs/2',
+                        'title' => 'Rock Out (Rashid Williams)',
                         'desc' => '',
-                        'thumbnail' => 'https://i.vimeocdn.com/video/469050062-930904bdcfd1f34a6b5d2a0264cfe3a81b7deac917bcf6b785e5dfe66460532a-d?mw=1000&mh=563',
-                        'video_src' => '//player.vimeo.com/video/90056795',
+                        'thumbnail' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/Rashid-williams-Rock-out.png',
+                        'video_src' => '//player.vimeo.com/video/370373250',
+                        'duration' => 4,
+                        'assets' => [
+                            [
+                                'title' => 'Song Chart',
+                                'src' => 'https://d1923uyy6spedc.cloudfront.net/236722-sheet-image-1573314094.svg',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'MP3',
+                                'src' => 'https://s3.amazonaws.com/drumeo/play-along-resources/rock-out/rock-out-drums-false-click-false.mp3',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'MP3 With Metronome',
+                                'src' => 'https://s3.amazonaws.com/drumeo/play-along-resources/rock-out/rock-out-drums-false-click-true.mp3',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'free-playalongs/songs/3',
+                        'title' => 'Funky NASA (Raghav Mehrotra)',
+                        'desc' => '',
+                        'thumbnail' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/Raghav-mehrotra-funky-nasa.png',
+                        'video_src' => '//player.vimeo.com/video/371460235',
+                        'duration' => 2,
+                        'assets' => [
+                            [
+                                'title' => 'Song Chart',
+                                'src' => 'https://d1923uyy6spedc.cloudfront.net/236722-sheet-image-1573314094.svg',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'MP3',
+                                'src' => 'https://s3.amazonaws.com/drumeo/play-along-resources/rock-out/rock-out-drums-false-click-false.mp3',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'MP3 With Metronome',
+                                'src' => 'https://s3.amazonaws.com/drumeo/play-along-resources/rock-out/rock-out-drums-false-click-true.mp3',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'free-playalongs/songs/4',
+                        'title' => 'Hypnotized (Thomas Pridgen)',
+                        'desc' => '',
+                        'thumbnail' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/thomas-pridgen-hypnotized.png',
+                        'video_src' => '//player.vimeo.com/video/266779491',
+                        'duration' => 4,
+                        'assets' => [
+                            [
+                                'title' => 'Song Chart',
+                                'src' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-pa224-hypnotized.png',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'MP3',
+                                'src' => 'https://s3.amazonaws.com/drumeo/play-along-resources/hypnotized/hypnotized-drums-false-click-false.mp3',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'MP3 With Metronome',
+                                'src' => 'https://s3.amazonaws.com/drumeo/play-along-resources/hypnotized/hypnotized-drums-false-click-true.mp3',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'free-playalongs/songs/5',
+                        'title' => 'Drum-E-O (Kaz Rodriguez)',
+                        'desc' => '',
+                        'thumbnail' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/kaz-rodriguez-drum-e-o.png',
+                        'video_src' => '//player.vimeo.com/video/558181220',
+                        'duration' => 4,
+                        'assets' => [
+                            [
+                                'title' => 'Song Chart',
+                                'src' => 'https://d1923uyy6spedc.cloudfront.net/306212-sheet-image-1623079844.svg',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'MP3',
+                                'src' => 'https://s3.amazonaws.com/drumeo/play-along-resources/drum-e-o/drum-e-o-drums-false-click-false.mp3',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'MP3 With Metronome',
+                                'src' => 'https://s3.amazonaws.com/drumeo/play-along-resources/drum-e-o/drum-e-o-drums-false-click-true.mp3',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'free-playalongs/songs/6',
+                        'title' => '7/8 Rock (Glen Sobel)',
+                        'desc' => '',
+                        'thumbnail' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/glen-sobel-7-8-rock.png',
+                        'video_src' => '//player.vimeo.com/video/546105932',
+                        'duration' => 3,
+                        'assets' => [
+                            [
+                                'title' => 'Song Chart',
+                                'src' => 'https://d1923uyy6spedc.cloudfront.net/play-alongs-aug-2021/drumeo-pa-7-8-rock-01.svg',
+                                'soundslice' => '3x-Dc'
+                            ],
+                            [
+                                'title' => 'MP3',
+                                'src' => 'https://d1923uyy6spedc.cloudfront.net/play-alongs-aug-2021/7-8-rock-pa-no-drums-no-click.mp3',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'MP3 With Metronome',
+                                'src' => 'https://d1923uyy6spedc.cloudfront.net/play-alongs-aug-2021/7-8-rock-pa-no-drums-click.mp3',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'free-playalongs/songs/7',
+                        'title' => 'Straight Reggae (Sarah Thawer)',
+                        'desc' => '',
+                        'thumbnail' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/sarah-thawer-straight-reggae.png',
+                        'video_src' => '//player.vimeo.com/video/471541648',
+                        'duration' => 3,
+                        'assets' => [
+                            [
+                                'title' => 'Song Chart',
+                                'src' => 'https://d1923uyy6spedc.cloudfront.net/play-alongs-aug-2021/drumeo-pa-reggae-02.svg',
+                                'soundslice' => '9s-Dc'
+                            ],
+                            [
+                                'title' => 'MP3',
+                                'src' => 'https://d1923uyy6spedc.cloudfront.net/play-alongs-aug-2021/reggae-straight-pa-no-drums-no-click.mp3',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'MP3 With Metronome',
+                                'src' => 'https://d1923uyy6spedc.cloudfront.net/play-alongs-aug-2021/reggae-straight-pa-no-drums-click.mp3',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'MP3 (Swung)',
+                                'src' => 'https://d1923uyy6spedc.cloudfront.net/reggae-swing-pa-no-drums-no-click-1630077317.mp3',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'MP3 (Swung) With Metronome',
+                                'src' => 'https://d1923uyy6spedc.cloudfront.net/reggae-swing-pa-no-drums-click-1630077276.mp3',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'free-playalongs/songs/8',
+                        'title' => 'Tony Coleman Shuffle (Tony Coleman)',
+                        'desc' => '',
+                        'thumbnail' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/tony-coleman-shuffle.png',
+                        'video_src' => '//player.vimeo.com/video/342294294',
                         'duration' => 5,
                         'assets' => [
                             [
-                                'title' => 'All Course PDFs',
-                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/getting-started-resources.zip',
+                                'title' => 'Song Chart',
+                                'src' => 'https://d1923uyy6spedc.cloudfront.net/226671-sheet-image-1560530045.svg',
                                 'soundslice' => ''
                             ],
                             [
-                                'title' => 'Reading Drum Notation',
-                                'src' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/getting-started/4-reading-drum-notation.jpg',
-                                'soundslice' => ''
-                            ],
-                        ],
-                    ],
-                    [
-                        'slug' => 'getting-started/5-basic-counting',
-                        'title' => 'Basic Counting',
-                        'desc' => '',
-                        'thumbnail' => 'https://i.vimeocdn.com/video/470777467-95f29a8b2d8d254c258715092af748a95cc20e933239e63dd10280948d0c1807-d?mw=1000&mh=563',
-                        'video_src' => '//player.vimeo.com/video/91367890',
-                        'duration' => 9,
-                        'assets' => [
-                            [
-                                'title' => 'All Course PDFs',
-                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/getting-started-resources.zip',
+                                'title' => 'MP3',
+                                'src' => 'https://s3.amazonaws.com/drumeo/play-along-resources/tony-coleman-shuffle/tony-coleman-shuffle-drums-false-click-false.mp3',
                                 'soundslice' => ''
                             ],
                             [
-                                'title' => 'Basic Counting',
-                                'src' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/getting-started/5-basic-counting.jpg',
+                                'title' => 'MP3 With Metronome',
+                                'src' => 'https://s3.amazonaws.com/drumeo/play-along-resources/tony-coleman-shuffle/tony-coleman-shuffle-drums-false-click-true.mp3',
                                 'soundslice' => ''
                             ],
                         ],
                     ],
                     [
-                        'slug' => 'getting-started/6-your-first-beat',
-                        'title' => 'Your First Drum Beats',
+                        'slug' => 'free-playalongs/songs/9',
+                        'title' => 'Just A Second (Todd Sucherman)',
                         'desc' => '',
-                        'thumbnail' => 'https://i.vimeocdn.com/video/469052552-33deecae0570b09577411a972fa6f80334c930dd68b498e57f1509505b3b3f4b-d?mw=1000&mh=563',
-                        'video_src' => '//player.vimeo.com/video/90056797',
-                        'duration' => 8,
+                        'thumbnail' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/todd-sucherman-just-a-second.png',
+                        'video_src' => '//player.vimeo.com/video/534524172',
+                        'duration' => 4,
                         'assets' => [
                             [
-                                'title' => 'All Course PDFs',
-                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/getting-started-resources.zip',
+                                'title' => 'Song Chart',
+                                'src' => 'https://d1923uyy6spedc.cloudfront.net/play-alongs-aug-2021/drumeo-pa-just-a-second-01.svg',
+                                'soundslice' => 'thQDc'
+                            ],
+                            [
+                                'title' => 'MP3',
+                                'src' => 'https://d1923uyy6spedc.cloudfront.net/play-alongs-aug-2021/just-a-second-pa-no-drums-no-click.mp3',
                                 'soundslice' => ''
                             ],
                             [
-                                'title' => 'Playing Your First Beat',
-                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/6-playing-your-first-beat.zip',
-                                'soundslice' => ''
-                            ],
-                        ],
-                    ],
-                    [
-                        'slug' => 'getting-started/7-your-first-fill',
-                        'title' => 'Your First Drum Fills',
-                        'desc' => '',
-                        'thumbnail' => 'https://i.vimeocdn.com/video/469067095-0284183a7b530d903528db71ba826503cddfe27567da138ac67ff1e29f9f8e21-d?mw=1000&mh=563',
-                        'video_src' => '//player.vimeo.com/video/90068631',
-                        'duration' => 11,
-                        'assets' => [
-                            [
-                                'title' => 'All Course PDFs',
-                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/getting-started-resources.zip',
-                                'soundslice' => ''
-                            ],
-                            [
-                                'title' => 'Playing Your First Fill',
-                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/7-playing-your-first-fill.zip',
-                                'soundslice' => ''
-                            ],
-                        ],
-                    ],
-                    [
-                        'slug' => 'getting-started/8-using-a-metronome',
-                        'title' => 'Using A Metronome',
-                        'desc' => '',
-                        'thumbnail' => 'https://i.vimeocdn.com/video/469065379-b1df7a24a11a3150f8ecb85f6db3f8fdd5d582223be3121de116b464590aab2e-d?mw=1000&mh=563',
-                        'video_src' => '//player.vimeo.com/video/90068632',
-                        'duration' => 7,
-                        'assets' => [
-                            [
-                                'title' => 'All Course PDFs',
-                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/getting-started-resources.zip',
-                                'soundslice' => ''
-                            ],
-                        ],
-                    ],
-                    [
-                        'slug' => 'getting-started/9-your-first-song',
-                        'title' => 'Playing Your First Song',
-                        'desc' => '',
-                        'thumbnail' => 'https://i.vimeocdn.com/video/469064749-45eff4eb5b9f1b79db2ad813ae966cd1139460c5fbf0610ae28a277a6a9b1416-d?mw=1000&mh=563',
-                        'video_src' => '//player.vimeo.com/video/90068633',
-                        'duration' => 5,
-                        'assets' => [
-                            [
-                                'title' => 'All Course PDFs',
-                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/getting-started-resources.zip',
-                                'soundslice' => ''
-                            ],
-                            [
-                                'title' => 'Playing Your First Song',
-                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/9-playing-your-first-song.zip',
-                                'soundslice' => ''
-                            ],
-                        ],
-                    ],
-                    [
-                        'slug' => 'getting-started/10-practice-routine',
-                        'title' => 'Building Your Practice Routine',
-                        'desc' => '',
-                        'thumbnail' => 'https://i.vimeocdn.com/video/469066472-bc5480a2b6ba3652fc1c3c8ebc87096ddbabbe423cf22670c5ea3ab3f1933c27-d?mw=1000&mh=563',
-                        'video_src' => '',
-                        'duration' => 8,
-                        'assets' => [
-                            [
-                                'title' => 'All Course PDFs',
-                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/getting-started-resources.zip',
-                                'soundslice' => ''
-                            ],
-                            [
-                                'title' => 'Developing a Practice Routine',
-                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/10-developing-a-practice-routine.pdf',
-                                'soundslice' => ''
-                            ],
-                        ],
-                    ],
-                    [
-                        'slug' => '',
-                        'title' => '',
-                        'desc' => '',
-                        'thumbnail' => '',
-                        'video_src' => '',
-                        'duration' => 1,
-                        'assets' => [
-                            [
-                                'title' => 'All Course PDFs',
-                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/getting-started-resources.zip',
-                                'soundslice' => ''
-                            ],
-                        ],
-                    ],
-                    [
-                        'slug' => '',
-                        'title' => '',
-                        'desc' => '',
-                        'thumbnail' => '',
-                        'video_src' => '',
-                        'duration' => 1,
-                        'assets' => [
-                            [
-                                'title' => 'All Course PDFs',
-                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/getting-started-resources.zip',
-                                'soundslice' => ''
-                            ],
-                        ],
-                    ],
-                    [
-                        'slug' => '',
-                        'title' => '',
-                        'desc' => '',
-                        'thumbnail' => '',
-                        'video_src' => '',
-                        'duration' => 1,
-                        'assets' => [
-                            [
-                                'title' => 'All Course PDFs',
-                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/getting-started-resources.zip',
+                                'title' => 'MP3 With Metronome',
+                                'src' => 'https://d1923uyy6spedc.cloudfront.net/play-alongs-aug-2021/just-a-second-pa-no-drums-click.mp3',
                                 'soundslice' => ''
                             ],
                         ],
                     ],
                 ],
             ],
+//            [
+//                'brand_id' => 1,
+//                'title' => '9 Metal Play-Alongs',
+//                'meta_desc' => 'Add your drumming to nine heavy drum play-along tracks. (FREE).',
+//                'meta_img' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/metal-playalongs/share-image.jpg',
+//                'slug' => 'metal-playalongs/songs',
+//                'lessons' => [
+//                    [
+//                        'slug' => 'metal-playalongs/songs/1',
+//                        'title' => 'The Marzear Labyrinth (Derek Roddy)',
+//                        'desc' => '',
+//                        'thumbnail' => '',
+//                        'video_src' => '//player.vimeo.com/video/201214928',
+//                        'duration' => 5,
+//                        'assets' => [
+//                            [
+//                                'title' => 'Song Chart',
+//                                'src' => 'https://dz5i3s4prcfun.cloudfront.net/00-archive/jpegs/drumeo-pa206-the-marzear-labyrinth.png',
+//                                'soundslice' => ''
+//                            ],
+//                        ],
+//                    ],
+//                    [
+//                        'slug' => 'metal-playalongs/songs/2',
+//                        'title' => 'Nightmares (Jared Falk)',
+//                        'desc' => '',
+//                        'thumbnail' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/metal-playalongs/Nightmares.jpg',
+//                        'video_src' => '',
+//                        'duration' => 4,
+//                        'assets' => [],
+//                    ],
+//                    [
+//                        'slug' => 'metal-playalongs/songs/1',
+//                        'title' => '',
+//                        'desc' => '',
+//                        'thumbnail' => '',
+//                        'video_src' => '',
+//                        'duration' => 1,
+//                        'assets' => [],
+//                    ],
+//                    [
+//                        'slug' => 'metal-playalongs/songs/1',
+//                        'title' => '',
+//                        'desc' => '',
+//                        'thumbnail' => '',
+//                        'video_src' => '',
+//                        'duration' => 1,
+//                        'assets' => [],
+//                    ],
+//                    [
+//                        'slug' => 'metal-playalongs/songs/1',
+//                        'title' => '',
+//                        'desc' => '',
+//                        'thumbnail' => '',
+//                        'video_src' => '',
+//                        'duration' => 1,
+//                        'assets' => [],
+//                    ],
+//                    [
+//                        'slug' => 'metal-playalongs/songs/1',
+//                        'title' => '',
+//                        'desc' => '',
+//                        'thumbnail' => '',
+//                        'video_src' => '',
+//                        'duration' => 1,
+//                        'assets' => [],
+//                    ],
+//                    [
+//                        'slug' => 'metal-playalongs/songs/1',
+//                        'title' => '',
+//                        'desc' => '',
+//                        'thumbnail' => '',
+//                        'video_src' => '',
+//                        'duration' => 1,
+//                        'assets' => [],
+//                    ],
+//                    [
+//                        'slug' => 'metal-playalongs/songs/1',
+//                        'title' => '',
+//                        'desc' => '',
+//                        'thumbnail' => '',
+//                        'video_src' => '',
+//                        'duration' => 1,
+//                        'assets' => [],
+//                    ],
+//                    [
+//                        'slug' => 'metal-playalongs/songs/1',
+//                        'title' => '',
+//                        'desc' => '',
+//                        'thumbnail' => '',
+//                        'video_src' => '',
+//                        'duration' => 1,
+//                        'assets' => [],
+//                    ],
+//                ],
+//            ],
 //            [
 //                'brand_id' => 1,
 //                'title' => '',
@@ -815,6 +917,240 @@ The second exercise is similar, but this time we’re playing longer groups of u
 //                        'video_src' => '',
 //                        'duration' => 1,
 //                        'assets' => [],
+//                    ],
+//                ],
+//            ],
+//            [
+//                'brand_id' => 1,
+//                'title' => 'Getting Started On The Drums',
+//                'meta_desc' => 'Just starting out on the drums? Want to rebuild your foundation? Try Jared Falk\'s free video series!',
+//                'meta_img' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/og-image.jpg',
+//                'slug' => 'getting-started/lessons',
+//                'lessons' => [
+//                    [
+//                        'slug' => 'getting-started/1-setting-up-your-drums',
+//                        'title' => 'Setting Up Your Drums',
+//                        'desc' => '',
+//                        'thumbnail' => '',
+//                        'video_src' => '//player.vimeo.com/video/100332067',
+//                        'duration' => 20,
+//                        'assets' => [
+//                            [
+//                                'title' => 'All Course PDFs',
+//                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/getting-started-resources.zip',
+//                                'soundslice' => ''
+//                            ],
+//                        ],
+//                    ],
+//                    [
+//                        'slug' => 'getting-started/2-tuning-your-drums',
+//                        'title' => 'Tuning Your Drums',
+//                        'desc' => '',
+//                        'thumbnail' => 'https://i.vimeocdn.com/video/469168227-d41168d949f436a688503c73880282804b41bce62adbc5b3ef641eab341ee202-d?mw=1000&mh=563',
+//                        'video_src' => '//player.vimeo.com/video/90129042',
+//                        'duration' => 40,
+//                        'assets' => [
+//                            [
+//                                'title' => 'All Course PDFs',
+//                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/getting-started-resources.zip',
+//                                'soundslice' => ''
+//                            ],
+//                        ],
+//                    ],
+//                    [
+//                        'slug' => 'getting-started/3-holding-your-drumsticks',
+//                        'title' => 'Holding Your Drumsticks',
+//                        'desc' => '',
+//                        'thumbnail' => 'https://i.vimeocdn.com/video/469051158-bcdcf0b70b3c56a5e418d027490b82f58ad935e92f87d6f1f76f204643783623-d?mw=1000&mh=563',
+//                        'video_src' => '//player.vimeo.com/video/90056794',
+//                        'duration' => 6,
+//                        'assets' => [
+//                            [
+//                                'title' => 'All Course PDFs',
+//                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/getting-started-resources.zip',
+//                                'soundslice' => ''
+//                            ],
+//                        ],
+//                    ],
+//                    [
+//                        'slug' => 'getting-started/4-reading-drum-notation',
+//                        'title' => 'Reading Drum Notation',
+//                        'desc' => '',
+//                        'thumbnail' => 'https://i.vimeocdn.com/video/469050062-930904bdcfd1f34a6b5d2a0264cfe3a81b7deac917bcf6b785e5dfe66460532a-d?mw=1000&mh=563',
+//                        'video_src' => '//player.vimeo.com/video/90056795',
+//                        'duration' => 5,
+//                        'assets' => [
+//                            [
+//                                'title' => 'All Course PDFs',
+//                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/getting-started-resources.zip',
+//                                'soundslice' => ''
+//                            ],
+//                            [
+//                                'title' => 'Reading Drum Notation',
+//                                'src' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/getting-started/4-reading-drum-notation.jpg',
+//                                'soundslice' => ''
+//                            ],
+//                        ],
+//                    ],
+//                    [
+//                        'slug' => 'getting-started/5-basic-counting',
+//                        'title' => 'Basic Counting',
+//                        'desc' => '',
+//                        'thumbnail' => 'https://i.vimeocdn.com/video/470777467-95f29a8b2d8d254c258715092af748a95cc20e933239e63dd10280948d0c1807-d?mw=1000&mh=563',
+//                        'video_src' => '//player.vimeo.com/video/91367890',
+//                        'duration' => 9,
+//                        'assets' => [
+//                            [
+//                                'title' => 'All Course PDFs',
+//                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/getting-started-resources.zip',
+//                                'soundslice' => ''
+//                            ],
+//                            [
+//                                'title' => 'Basic Counting',
+//                                'src' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/getting-started/5-basic-counting.jpg',
+//                                'soundslice' => ''
+//                            ],
+//                        ],
+//                    ],
+//                    [
+//                        'slug' => 'getting-started/6-your-first-beat',
+//                        'title' => 'Your First Drum Beats',
+//                        'desc' => '',
+//                        'thumbnail' => 'https://i.vimeocdn.com/video/469052552-33deecae0570b09577411a972fa6f80334c930dd68b498e57f1509505b3b3f4b-d?mw=1000&mh=563',
+//                        'video_src' => '//player.vimeo.com/video/90056797',
+//                        'duration' => 8,
+//                        'assets' => [
+//                            [
+//                                'title' => 'All Course PDFs',
+//                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/getting-started-resources.zip',
+//                                'soundslice' => ''
+//                            ],
+//                            [
+//                                'title' => 'Playing Your First Beat',
+//                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/6-playing-your-first-beat.zip',
+//                                'soundslice' => ''
+//                            ],
+//                        ],
+//                    ],
+//                    [
+//                        'slug' => 'getting-started/7-your-first-fill',
+//                        'title' => 'Your First Drum Fills',
+//                        'desc' => '',
+//                        'thumbnail' => 'https://i.vimeocdn.com/video/469067095-0284183a7b530d903528db71ba826503cddfe27567da138ac67ff1e29f9f8e21-d?mw=1000&mh=563',
+//                        'video_src' => '//player.vimeo.com/video/90068631',
+//                        'duration' => 11,
+//                        'assets' => [
+//                            [
+//                                'title' => 'All Course PDFs',
+//                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/getting-started-resources.zip',
+//                                'soundslice' => ''
+//                            ],
+//                            [
+//                                'title' => 'Playing Your First Fill',
+//                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/7-playing-your-first-fill.zip',
+//                                'soundslice' => ''
+//                            ],
+//                        ],
+//                    ],
+//                    [
+//                        'slug' => 'getting-started/8-using-a-metronome',
+//                        'title' => 'Using A Metronome',
+//                        'desc' => '',
+//                        'thumbnail' => 'https://i.vimeocdn.com/video/469065379-b1df7a24a11a3150f8ecb85f6db3f8fdd5d582223be3121de116b464590aab2e-d?mw=1000&mh=563',
+//                        'video_src' => '//player.vimeo.com/video/90068632',
+//                        'duration' => 7,
+//                        'assets' => [
+//                            [
+//                                'title' => 'All Course PDFs',
+//                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/getting-started-resources.zip',
+//                                'soundslice' => ''
+//                            ],
+//                        ],
+//                    ],
+//                    [
+//                        'slug' => 'getting-started/9-your-first-song',
+//                        'title' => 'Playing Your First Song',
+//                        'desc' => '',
+//                        'thumbnail' => 'https://i.vimeocdn.com/video/469064749-45eff4eb5b9f1b79db2ad813ae966cd1139460c5fbf0610ae28a277a6a9b1416-d?mw=1000&mh=563',
+//                        'video_src' => '//player.vimeo.com/video/90068633',
+//                        'duration' => 5,
+//                        'assets' => [
+//                            [
+//                                'title' => 'All Course PDFs',
+//                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/getting-started-resources.zip',
+//                                'soundslice' => ''
+//                            ],
+//                            [
+//                                'title' => 'Playing Your First Song',
+//                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/9-playing-your-first-song.zip',
+//                                'soundslice' => ''
+//                            ],
+//                        ],
+//                    ],
+//                    [
+//                        'slug' => 'getting-started/10-practice-routine',
+//                        'title' => 'Building Your Practice Routine',
+//                        'desc' => '',
+//                        'thumbnail' => 'https://i.vimeocdn.com/video/469066472-bc5480a2b6ba3652fc1c3c8ebc87096ddbabbe423cf22670c5ea3ab3f1933c27-d?mw=1000&mh=563',
+//                        'video_src' => '',
+//                        'duration' => 8,
+//                        'assets' => [
+//                            [
+//                                'title' => 'All Course PDFs',
+//                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/getting-started-resources.zip',
+//                                'soundslice' => ''
+//                            ],
+//                            [
+//                                'title' => 'Developing a Practice Routine',
+//                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/10-developing-a-practice-routine.pdf',
+//                                'soundslice' => ''
+//                            ],
+//                        ],
+//                    ],
+//                    [
+//                        'slug' => '',
+//                        'title' => '',
+//                        'desc' => '',
+//                        'thumbnail' => '',
+//                        'video_src' => '',
+//                        'duration' => 1,
+//                        'assets' => [
+//                            [
+//                                'title' => 'All Course PDFs',
+//                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/getting-started-resources.zip',
+//                                'soundslice' => ''
+//                            ],
+//                        ],
+//                    ],
+//                    [
+//                        'slug' => '',
+//                        'title' => '',
+//                        'desc' => '',
+//                        'thumbnail' => '',
+//                        'video_src' => '',
+//                        'duration' => 1,
+//                        'assets' => [
+//                            [
+//                                'title' => 'All Course PDFs',
+//                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/getting-started-resources.zip',
+//                                'soundslice' => ''
+//                            ],
+//                        ],
+//                    ],
+//                    [
+//                        'slug' => '',
+//                        'title' => '',
+//                        'desc' => '',
+//                        'thumbnail' => '',
+//                        'video_src' => '',
+//                        'duration' => 1,
+//                        'assets' => [
+//                            [
+//                                'title' => 'All Course PDFs',
+//                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/getting-started-resources.zip',
+//                                'soundslice' => ''
+//                            ],
+//                        ],
 //                    ],
 //                ],
 //            ],
@@ -843,6 +1179,7 @@ The second exercise is similar, but this time we’re playing longer groups of u
                     'slug' => $lesson['slug'],
                     'duration' => $lesson['duration'],
                     'display_order' => $key + 1,
+                    'one_off' => !empty($lesson['one_off']) ? $lesson['one_off'] : false,
                 ]);
 
                 if(count($lesson['assets']) > 0){
