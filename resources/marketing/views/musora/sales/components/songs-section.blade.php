@@ -25,6 +25,8 @@
         <a class="sm:mx-1 w-full sm:w-64 join {{ $theme }} smaller @if(!empty($promoVersion)) anchor-slide @endif"
             @if(!empty($promoVersion))
                 href="#customize-anchor"
+            @elseif(!empty($month))
+                href="/choose-your-trial-month"
             @else
                 href="/choose-plan"
             @endif
