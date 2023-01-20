@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('leadgen_id');
             $table->string('slug')->unique();
             $table->string('title');
-            $table->string('desc')->nullable();
+            $table->longText('desc')->nullable();
             $table->string('thumbnail');
             $table->string('video_src');
             $table->integer('duration');
