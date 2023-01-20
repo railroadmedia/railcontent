@@ -46,44 +46,28 @@ class LeadgenLessonLayout extends Layout
             Text::make('slug')->required(),
             Text::make('title')->required(),
             Text::make('Description', 'desc'),
-            Image::make('thumbnail_path')
+            Image::make('Thumbnail','thumbnail_path')
                 ->disk('nova_s3')
                 ->prunable()
                 ->hideFromIndex()
                 ->deletable(false)
                 ->disableDownload()
                 ->storeAs(function (Request $request){
-                    $brandId = $request->brand;
-                    $brand = '';
-
-                    if($brandId === "1") {
-                        $brand = 'Drumeo';
-                    }
-                    elseif($brandId === "2"){
-                        $brand = 'Pianote';
-                    }
-                    elseif($brandId === "3"){
-                        $brand = 'Guitareo';
-                    }
-                    elseif($brandId === "4"){
-                        $brand = 'Singeo';
-                    }
-
-                    return '/'.$brand.'/Lead-gens/Thumbnails/'.$request->uuid.'-'.$request->file('thumbnail')->getClientOriginalName();
+                    return '/Lead-gens/Thumbnails/'.$request->uuid.'-'.$request->file('thumbnail_path')->getClientOriginalName();
                 })
                 ->preview(function($value){
                     if(empty($value)) return null;
 
                     return $value;
                 }),
-            Text::make('thumbnail_text')->hideFromIndex()->hideFromDetail()->required(),
+            Text::make('Thumbnail','thumbnail_text')->hideFromIndex()->hideFromDetail(),
             Text::make('Video Src', 'video_src')->hideFromIndex()->required(),
-            Number::make('duration')->help('In minutes'),
+            Number::make('duration')->help('In minutes')->required(),
             Flexible::make('Assets')
                 ->addLayout(LeadgenLessonAssetLayout::class)
                 ->preset(LeadgenLessonAssetPreset::class),
             Hidden::make('id', 'id'),
-//            Hidden::make('uuid')->withMeta(["value" => $uuid]),
+            Hidden::make('uuid')->withMeta(["value" => $uuid]),
         ];
     }
 
