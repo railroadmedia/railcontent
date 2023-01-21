@@ -157,7 +157,7 @@
                 @foreach($hats as $hat){
                 @include('drumeo.drumshop._partials._drum-shop-card', [
                      "sku" => $hat->sku,
-                     "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hat->slug ),
+                     "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hat->slug ),
                      "badgeText" => $hat->badge_text,
                      "thumbnail" => $hat->thumbnail,
                      "title" => $hat->name,
