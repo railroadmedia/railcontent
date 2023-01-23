@@ -42,8 +42,8 @@
         <div class="container mx-auto clearfix">
             <p>Drumeo just got better. Take your video lessons, <br class="hidden sm:inline">
                 play-alongs, and exclusive shows anywhere you go.</p>
-            <a class="download-badge" href="https://itunes.apple.com/us/app/drumeo/id1460388277?ls=1" target="_blank"><img src="https://dpwjbsxqtam5n.cloudfront.net/app/download-on-app-store-button.png"></a>
-            <a class="download-badge" href="https://play.google.com/store/apps/details?id=com.drumeo" target="_blank"><img src="https://dpwjbsxqtam5n.cloudfront.net/app/google-play-button.png"></a>
+            <a class="download-badge" href="https://apps.apple.com/us/app/musora/id1619053766?platform=iphone&ppid=d63c2cf3-274f-4441-8444-a5f547b1b4b6" target="_blank"><img src="https://dpwjbsxqtam5n.cloudfront.net/app/download-on-app-store-button.png"></a>
+            <a class="download-badge" href="https://play.google.com/store/apps/details?id=com.musoraapp&listing=drumeo_previews" target="_blank"><img src="https://dpwjbsxqtam5n.cloudfront.net/app/google-play-button.png"></a>
             <p class="small">Not a member? <a href="/">Click here to join Drumeo</a>.</p>
         </div>
     </section>
@@ -93,8 +93,8 @@
             <div class="float-left w-full px-3 sm:px-4 sm:w-1/2 option-wrap">
                 <p>MEMBERS</p>
                 <h4>Take your membership everywhere<br> with the Drumeo app.</h4>
-                <a class="download-badge" href="https://itunes.apple.com/us/app/drumeo/id1460388277?ls=1" target="_blank"><img src="https://dpwjbsxqtam5n.cloudfront.net/app/download-on-app-store-button.png"></a>
-                <a class="download-badge" href="https://play.google.com/store/apps/details?id=com.drumeo" target="_blank"><img src="https://dpwjbsxqtam5n.cloudfront.net/app/google-play-button.png"></a>
+                <a class="download-badge" href="https://apps.apple.com/us/app/musora/id1619053766?platform=iphone&ppid=d63c2cf3-274f-4441-8444-a5f547b1b4b6" target="_blank"><img src="https://dpwjbsxqtam5n.cloudfront.net/app/download-on-app-store-button.png"></a>
+                <a class="download-badge" href="https://play.google.com/store/apps/details?id=com.musoraapp&listing=drumeo_previews" target="_blank"><img src="https://dpwjbsxqtam5n.cloudfront.net/app/google-play-button.png"></a>
             </div>
             <div class="float-left w-full px-3 sm:px-4 sm:w-1/2 option-wrap">
                 <p>NOT A MEMBER?</p>
