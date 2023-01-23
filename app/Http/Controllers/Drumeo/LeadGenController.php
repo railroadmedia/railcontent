@@ -68,34 +68,39 @@ class LeadGenController extends BaseController
                 return view('drumeo.lead-gen.getting-started.signup');
             case 'thank-you':
                 return view('drumeo.lead-gen.getting-started.thank-you');
-            case 'lessons':
-                return view('drumeo.lead-gen.getting-started.lesson-grid');
-            case 'checking-in':
-                return view('drumeo.lead-gen.getting-started.lessons.checking-in');
-            case 'great-news':
-                return view('drumeo.lead-gen.getting-started.lessons.great-news');
-            case '1-setting-up-your-drums':
-                return view('drumeo.lead-gen.getting-started.lessons.1');
-            case '2-tuning-your-drums':
-                return view('drumeo.lead-gen.getting-started.lessons.2');
-            case '3-holding-your-drumsticks':
-                return view('drumeo.lead-gen.getting-started.lessons.3');
-            case '4-reading-drum-notation':
-                return view('drumeo.lead-gen.getting-started.lessons.4');
-            case '5-basic-counting':
-                return view('drumeo.lead-gen.getting-started.lessons.5');
-            case '6-your-first-beat':
-                return view('drumeo.lead-gen.getting-started.lessons.6');
-            case '7-your-first-fill':
-                return view('drumeo.lead-gen.getting-started.lessons.7');
-            case '8-using-a-metronome':
-                return view('drumeo.lead-gen.getting-started.lessons.8');
-            case '9-your-first-song':
-                return view('drumeo.lead-gen.getting-started.lessons.9');
-            case '10-practice-routine':
-                return view('drumeo.lead-gen.getting-started.lessons.10');
             case '10-practice':
-                return view('drumeo.lead-gen.getting-started.lessons.10-alt');
+                $currentLesson = (object) array(
+                    'title' => 'Building Your Practice Routine',
+                    'video_src' => '//player.vimeo.com/video/98739417',
+                    'assets' => [
+                        (object) array(
+                            'title' => 'All Course PDFs',
+                            'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/getting-started-resources.zip',
+                            'soundslice' => ''
+                        ),
+                        (object) array(
+                            'title' => 'Developing a Practice Routine',
+                            'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/10-developing-a-practice-routine.pdf',
+                            'soundslice' => ''
+                        ),
+                    ],
+                );
+
+                $lessons = LeadgenLesson::where([['leadgen_id', 9], ['one_off', 0]])->get();
+                $currentLessonIndex = 10;
+                $prevLesson = $currentLessonIndex === 1 ? null : $lessons[$currentLessonIndex - 2];
+
+                $leadgen = Leadgen::where('id', 9)->first();
+
+                return view('_partials.layout.global-lead-gen-lesson-layout', [
+                    'theme' => 'drumeo',
+                    'leadgen' => $leadgen,
+                    'prevLesson' => $prevLesson ,
+                    'currentLesson' => $currentLesson,
+                    'nextLesson' => null,
+                    'totalLessonNum' => 10,
+                    'currentLessonNum' => 10,
+                ]);
         }
 
         throw new NotFoundHttpException();
@@ -113,20 +118,9 @@ class LeadGenController extends BaseController
         return view('drumeo.lead-gen.free-playalongs.signup');
     }
 
-    public function metalPlayalongs(Request $request, $domain, $prefix = null, $page = null)
+    public function metalPlayalongs()
     {
-        if(is_null($prefix) && is_null($page)) {
-            return view('drumeo.lead-gen.metal-playalongs.signup');
-        } else {
-            switch ($page) {
-                case null:
-                    return view('drumeo.lead-gen.metal-playalongs.unlocked');
-                default:
-                    return view('drumeo.lead-gen.metal-playalongs.songs.'.$page);
-            }
-        }
-
-        throw new NotFoundHttpException();
+        return view('drumeo.lead-gen.metal-playalongs.signup');
     }
 
     public function johnGrooves(Request $request, $domain, $prefix = null, $page = null)
@@ -485,10 +479,10 @@ class LeadGenController extends BaseController
             if(!$currentLesson->one_off){
                 $lessons = LeadgenLesson::where([['leadgen_id', $currentLesson->leadgen_id], ['one_off', 0]])->get();
                 $currentLessonIndex = $lessons->search(function($item) use($leadgenSlug){
-                    return $item['slug'] === $leadgenSlug;
-                });
-                $prevLesson = $currentLessonIndex === 0 ? null : $lessons[$currentLessonIndex - 1];
-                $nextLesson = $currentLessonIndex === count($lessons) - 1 ? null : $lessons[$currentLessonIndex + 1];
+                    return $item->slug === $leadgenSlug;
+                }) + 1;
+                $prevLesson = $currentLessonIndex === 1 ? null : $lessons[$currentLessonIndex - 2];
+                $nextLesson = $currentLessonIndex === count($lessons) ? null : $lessons[$currentLessonIndex];
             }
 
             $leadgen = Leadgen::where('id', $currentLesson->leadgen_id)->first();
@@ -500,7 +494,7 @@ class LeadGenController extends BaseController
                 'currentLesson' => $currentLesson,
                 'nextLesson' => $nextLesson ?? null,
                 'totalLessonNum' => !empty($lessons) ? count($lessons) : null,
-                'currentLessonNum' => !empty($currentLessonIndex) ? $currentLessonIndex+1 : null
+                'currentLessonNum' => $currentLessonIndex ?? null,
             ]);
         }
         else {
