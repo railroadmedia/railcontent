@@ -16,7 +16,6 @@
             <span class="opacity-70">Enter your email below for<br class="inline sm:hidden"> your free song tutorials.</span></em></h4>
             <div class="max-w-3xl mx-auto">
                 @include('pianote._partials._sign-up-form', [
-                    "redirect" => true,
                     "formId" => "Pianote - Engagement - Trigger - Learn 3 Songs - Web Form",
                     "formName" => 'Learn 3 Songs On Piano',
                 ])
@@ -125,7 +124,6 @@
                         <span class="opacity-70">Enter your email below<br class="inline sm:hidden"> for your free song tutorials.</span></em></h4>
                 <div class="mx-auto" style="max-width:700px">
                     @include('pianote._partials._sign-up-form', [
-                        "redirect" => true,
                         "formId" => "Pianote - Engagement - Trigger - Learn 3 Songs - Web Form",
                         "formName" => 'Learn 3 Songs On Piano',
                     ])

@@ -12,7 +12,6 @@
         @endif
         <div class="max-w-3xl mx-auto">
             @include('pianote._partials._sign-up-form', [
-                "redirect" => true,
                 "formId" => $formId,
                 "formName" => $formName,
             ])
