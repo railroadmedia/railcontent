@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('src');
             $table->string('soundslice')->nullable();
+            $table->boolean('score')->default(false);
             $table->timestamps();
         });
     }

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->string('title');
             $table->longText('desc')->nullable();
-            $table->string('thumbnail');
+            $table->string('thumbnail')->nullable();
             $table->string('video_src');
             $table->integer('duration');
             $table->boolean('one_off');
