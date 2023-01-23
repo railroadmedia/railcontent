@@ -487,8 +487,8 @@
             </p>
             <div class="max-w-2xl mx-auto">
                 @include('pianote._partials._sign-up-form', [
-                    "formId" => '{{-- HERE --}}',
-                    "formName" => '{{-- HERE --}}',
+                    "formId" => 'Pianote - Engagement - Trigger - 7 Days To Sight Reading - Web Form',
+                    "formName" => '7 Days To Sight Reading',
                     "buttonText" => "Get it now",
                     'disclaimerColor' => '#B3B3B9',
                 ])
