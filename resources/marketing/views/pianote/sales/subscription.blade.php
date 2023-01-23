@@ -647,18 +647,20 @@
 
     @include('pianote._partials.faq')
 
-    @include('_partials.components.soundslice-modal',[
+    @include('_partials.components.video-modal',[
         'name' => 'soundslice',
         'video' => '77f4c',
-        'slices' => true,
+        'soundslice' => true,
     ])
     @include('_partials.components.video-modal',[
         'name' => 'trailer',
-        'video' => '785314388'
+        'video' => '785314388',
+        'vimeo' => true,
     ])
     @include('_partials.components.video-modal',[
         'name' => 'unbox',
-        'video' => '774408046'
+        'video' => '774408046',
+        'vimeo' => true,
     ])
 
     @if(!empty($promoVersion))

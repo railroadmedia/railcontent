@@ -559,14 +559,15 @@
 
     @include('guitareo._partials.faq')
 
-    @include('_partials.components.soundslice-modal',[
+    @include('_partials.components.video-modal',[
         'name' => 'soundslice',
         'video' => 'Mnmkc',
-        'slices' => true,
+        'soundslice' => true,
     ])
     @include('_partials.components.video-modal',[
         'name' => 'trailer',
-        'video' => '785314408'
+        'video' => '785314408',
+        'vimeo' => true,
     ])
 
     @if(!empty($promoVersion))
