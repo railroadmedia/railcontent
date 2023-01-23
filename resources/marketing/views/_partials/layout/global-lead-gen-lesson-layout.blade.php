@@ -81,8 +81,10 @@
             <div class="container mx-auto clearfix" style="max-width:920px">
                 <div class="text-left lesson-text">
                     <h4 class="mb-1 sm:mb-3"><strong>Assets</strong></h4>
-                    @foreach($currentLesson->assets as $asset)
+                    @php $bodyData = ''; @endphp
+                    @foreach($currentLesson->assets as $key => $asset)
                         @php
+                            $bodyData = $bodyData.'soundsliceModal'.($key+1).': false,';
                             $resourceName = '';
 
                             if(str_contains($asset->src, 'mp3')){
@@ -99,10 +101,11 @@
                             }
                         @endphp
 
-                        @include('drumeo.lead-gen.partials._assignment-resources', [
+                        @include('_partials.components.leadgen-assignment-resources', [
                             "title" => $asset->title,
                             $resourceName => $asset->src,
                             "soundslice" => $asset->soundslice,
+                            'num' => $key+1
                         ])
                     @endforeach
 
@@ -171,6 +174,10 @@
         });
     </script>
 @stop
+
+@section('body-data')
+    x-data = '{ {{ $bodyData }} }'
+@endsection
 
 @section('layout-footer')
     @include($theme.".sales.partials._footer", [
