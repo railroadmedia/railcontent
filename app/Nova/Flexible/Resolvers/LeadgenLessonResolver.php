@@ -35,6 +35,7 @@ class LeadgenLessonResolver implements ResolverInterface
                 'display_order' => $lesson->display_order,
                 'slug' => $lesson->slug,
                 'duration' => $lesson->duration,
+                'one_off' => $lesson->one_off,
                 'id' => $lesson->id,
             ],
             );
@@ -63,6 +64,7 @@ class LeadgenLessonResolver implements ResolverInterface
                    'slug' => $group->getAttributes()['slug'],
                    'display_order' => $index+1,
                    'duration' => $group->getAttributes()['duration'],
+                   'one_of' => $group->getAttributes()['one_of'],
                    'id' => isset($group->getAttributes()['id']) ? $group->getAttributes()['id'] : null,
                 ];
             });
@@ -119,23 +121,24 @@ class LeadgenLessonResolver implements ResolverInterface
                         $dbLesson->display_order = $lesson['display_order'];
                     }
 
+                    if($dbLesson['one_off'] !== $lesson['one_off']){
+                        $dbLesson->one_off = $lesson['one_off'];
+                    }
+
                     $dbLesson->save();
                     $updatedIds[] = $lesson['id'];
                 }
             }
 
             //delete items
-            if(isset($updatedIds)){
-                $deleteLessons = LeadgenLesson::where('leadgen_id', $model['id'])->whereNotIn('id', $updatedIds);
-                if(count($deleteLessons->get()) > 0){
-                    foreach($deleteLessons->get() as $id){
-                        Storage::disk('nova_s3')->delete(str_replace('https://laravel-nova.s3.us-east-2.amazonaws.com/','',$id->thumbnail));
-                        $assetIds[] = $id->id;
-                    }
-                    $deleteAssets = LeadgenLessonAsset::where('leadgen_lesson_id', $assetIds)->delete();
-                    $deleteLessons->delete();
+            $deleteLessons = LeadgenLesson::where('leadgen_id', $model['id'])->whereNotIn('id', $updatedIds ?? []);
+            if(count($deleteLessons->get()) > 0){
+                foreach($deleteLessons->get() as $id){
+                    Storage::disk('nova_s3')->delete(str_replace('https://laravel-nova.s3.us-east-2.amazonaws.com/','',$id->thumbnail));
+                    $assetIds[] = $id->id;
                 }
-
+                $deleteAssets = LeadgenLessonAsset::where('leadgen_lesson_id', $assetIds)->delete();
+                $deleteLessons->delete();
             }
         });
     }

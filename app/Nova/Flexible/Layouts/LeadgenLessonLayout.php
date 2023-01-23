@@ -7,6 +7,7 @@ use App\Models\LeadgenLessonAsset;
 use App\Nova\Flexible\Presets\LeadgenLessonAssetPreset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Hidden;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Text;
@@ -66,6 +67,7 @@ class LeadgenLessonLayout extends Layout
             Flexible::make('Assets')
                 ->addLayout(LeadgenLessonAssetLayout::class)
                 ->preset(LeadgenLessonAssetPreset::class),
+            Boolean::make('One off page', 'one_off')->default(false)->hideFromIndex(),
             Hidden::make('id', 'id'),
             Hidden::make('uuid')->withMeta(["value" => $uuid]),
         ];
