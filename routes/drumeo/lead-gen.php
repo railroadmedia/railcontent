@@ -93,14 +93,6 @@ Route::domain('{drumeoDomain}')->group(function () {
                 ]);
         }
     );
-    Route::group(['prefix' => 'shows' ],
-        function () {
-            Route::get('/{page?}', LeadGenController::class . '@shows')
-                ->whereIn('page', [
-                    'behind-the-scenes', 'in-rhythm', 'sonor', 'study-the-greats'
-                ]);
-        }
-    );
     Route::get('/birthday-gifts/', [LeadGenController::class, 'birthdayGifts']);
     Route::get('/christmas-gift-guide/', [LeadGenController::class, 'christmasGift']);
     Route::get('/{page?}', LeadGenController::class . '@pages')
