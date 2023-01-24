@@ -2,11 +2,14 @@
 
 namespace App\Nova;
 
+use App\Nova\Flexible\Layouts\LeadgenLessonAssetLayout;
 use App\Nova\Flexible\Layouts\LeadgenLessonLayout;
+use App\Nova\Flexible\Presets\LeadgenLessonAssetPreset;
 use App\Nova\Flexible\Presets\LeadgenLessonPreset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Hidden;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Image;
@@ -87,6 +90,9 @@ class Leadgen extends Resource
                 }),
             Text::make('Meta Image', 'meta_img')->hideFromIndex()->hideFromDetail(),
             Text::make('Index Slug', 'slug')->hideFromIndex(),
+            Flexible::make('Assets')
+                ->addLayout(LeadgenLessonAssetLayout::class)
+                ->preset(LeadgenLessonAssetPreset::class),
             Flexible::make('Lessons')
                 ->addLayout(LeadgenLessonLayout::class)
                 ->preset(LeadgenLessonPreset::class),
