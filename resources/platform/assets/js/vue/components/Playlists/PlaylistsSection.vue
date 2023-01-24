@@ -54,7 +54,7 @@ const handleCreatePlaylist = () => {
         </div>
 
         <Transition name="fade">
-            <div v-if="!isSidebarCollapsed" class="tw-text-sm tw-transition tw-pb-8">
+            <div v-if="!isSidebarCollapsed" class="tw-text-sm tw-transition tw-pb-2">
                 <ul class="tw-font-open-sans tw-text-[#00101D] dark:tw-text-white tw-text-[14px] tw-overflow-hidden"
                     v-if="formattedPlaylists.length > 0">
                     <!-- Loop through User Playlists -->
@@ -71,17 +71,9 @@ const handleCreatePlaylist = () => {
                     </li>
                 </ul>
 
-                <div v-else class="tw-mt-8 tw-flex tw-flex-col tw-items-center">
-                    <div
-                        class="tw-h-[50px] tw-w-[50px] tw-flex tw-items-center tw-justify-center tw-rounded-full tw-mb-2 tw-bg-[#3f3f46]/20 dark:tw-bg-[#445F74]/50 tw-text-[#111827] dark:tw-text-[#9EC0DC]">
-                        <musora-icon icon-name="playlist" class="tw-mx-4 tw-mt-1" />
-                    </div>
-
-                    <span class="tw-font-bold tw-text-[#00101D] dark:tw-text-white tw-whitespace-nowrap">No Playlist
-                        yet</span>
-                    <a class="tw-text-sm tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-whitespace-nowrap hover:tw-underline"
-                        :href="`/playlists/create`">Create a playlist now</a>
-                </div>
+                <!-- <div v-else class="tw-flex tw-flex-col tw-items-center">
+                    <p class="tw-text-xs tw-italic tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]">Your pinned playlists will show up here.</p>
+                </div> -->
             </div>
         </Transition>
 
