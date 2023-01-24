@@ -15,6 +15,8 @@ return new class extends Migration
     {
         //
         Schema::table('carousels', function (Blueprint $table) {
+            $table->timestamp('start_date')->nullable();
+            $table->timestamp('end_date')->nullable();
             $table->boolean('visible')->default(true);
             $table->boolean('is_featured');
             $table->integer('product_id')->nullable();
@@ -33,6 +35,8 @@ return new class extends Migration
     {
         //
         Schema::table('carousels', function (Blueprint $table) {
+            $table->dropColumn('start_date');
+            $table->dropColumn('end_date');
             $table->dropColumn('visible');
             $table->dropColumn('is_featured');
             $table->dropColumn('product_id');
