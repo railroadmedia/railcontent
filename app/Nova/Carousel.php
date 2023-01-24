@@ -14,6 +14,7 @@ use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\FormData;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Illuminate\Support\Str;
+use Laravel\Nova\Fields\DateTime;
 
 class Carousel extends Resource
 {
@@ -91,6 +92,8 @@ class Carousel extends Resource
                     return $value;
                 }),
             Text::make('Image', 'img')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
+            DateTime::make(__('Start Date'), 'start_date')->hideFromIndex(),
+            DateTime::make(__('End Date'), 'end_date')->hideFromIndex(),
             Number::make('Display order', 'display_order'),
             Boolean::make('visible')->hideFromIndex()->default(true),
             Boolean::make('Featured product?', 'is_featured')->hideFromIndex()->default(false),
