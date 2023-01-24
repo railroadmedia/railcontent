@@ -17,10 +17,9 @@
     @include('_partials.layout._fonts')
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
-    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/guitareo/sales-page.css') }}" rel="stylesheet">
-
+    <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/sales-page.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
 
     <style>
@@ -114,6 +113,15 @@
             "scrollToJoin" => true,
             "hideMenu" => true,
         ])
+
+    @elseif(!empty($month))
+        @include("guitareo.sales.partials._nav", [
+            "subscriptionVersion" => true,
+            "fullSubscriptionVersion" => true,
+            "trialVersion" => true,
+            "joinUrl" => '/choose-your-trial-month',
+        ])
+
     @else
         @include("guitareo.sales.partials._nav", [
             "subscriptionVersion" => true,
@@ -169,6 +177,9 @@
         'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Guitareo+Membership/79348454',
         'students' => number_format(Prices::$students),
     ])
+    @hasSection('promo-banner')
+        @yield('promo-banner')
+    @endif
 
     @if(!empty($promoVersion))
         @include('musora.sales.components.promo-section', [
