@@ -164,44 +164,14 @@ class LeadGenController extends BaseController
         return view('drumeo.products.rdm-testimonials');
     }
 
-    public function subdivision(Request $request, $domain, $prefix = null, $page = null)
+    public function subdivision()
     {
-        if(is_null($prefix) && is_null($page)) {
-            return view('drumeo.lead-gen.courses.full.subdivision-challenge.signup');
-        } else {
-            switch ($page) {
-                case null:
-                    return view('drumeo.lead-gen.courses.full.subdivision-challenge.lesson-index');
-                default:
-                    return view('drumeo.lead-gen.courses.full.subdivision-challenge.'.$page);
-            }
-        }
-
-        throw new NotFoundHttpException();
+        return view('drumeo.lead-gen.courses.full.subdivision-challenge.signup');
     }
 
-    public function sucherman(Request $request, $domain, $prefix = null, $page = null)
+    public function sucherman()
     {
-        if(is_null($prefix) && is_null($page)) {
-            return view('drumeo.lead-gen.courses.full.sucherman-sound.signup');
-        } else {
-            switch ($page) {
-                case null:
-                    return view('drumeo.lead-gen.courses.full.sucherman-sound.lesson-index');
-                case '1-good-sounding':
-                    return view('drumeo.lead-gen.courses.full.sucherman-sound.1');
-                case '2-hi-hats':
-                    return view('drumeo.lead-gen.courses.full.sucherman-sound.2');
-                case '3-bass-snare':
-                    return view('drumeo.lead-gen.courses.full.sucherman-sound.3');
-                case '4-elevating-sound':
-                    return view('drumeo.lead-gen.courses.full.sucherman-sound.4');
-                case '5-shift-focus':
-                    return view('drumeo.lead-gen.courses.full.sucherman-sound.5');
-            }
-        }
-
-        throw new NotFoundHttpException();
+        return view('drumeo.lead-gen.courses.full.sucherman-sound.signup');
     }
 
     public function toolbox(Request $request, $domain, $page = null)
