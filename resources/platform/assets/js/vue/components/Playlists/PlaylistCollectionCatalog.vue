@@ -8,6 +8,8 @@
             default: []
         },
     })
+    //Reactive Data
+
 
     onBeforeMount(() => {
         fetch('/railcontent/playlists')
@@ -16,5 +18,31 @@
     })
 </script>
 <template>
-    
+    <section>
+        <!-- Controls -->
+        <div class="tw-flex tw-my-4">
+            <!--Filters -->
+
+            <!-- Search -->
+            <div class="">
+                <input type="search" class="" placeholder="Search">
+            </div>
+
+            <!-- List/Grid Toggle -->
+            <div>
+                <button>
+                    <p class="tw-flex"></p>
+                </button>
+                <button>
+
+                </button>
+            </div>
+        </div>
+
+        <!-- Cards -->
+        <div class="tw-grid ">
+            <!-- Print Each Card -->
+            
+        </div>
+    </section>
 </template>
