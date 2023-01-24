@@ -134,11 +134,11 @@
 @endsection
 @section('scripts')
     @parent
+    <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script>
         $(document).ready(function () {
             $(document).foundation();
         });
     </script>
-    <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
 @endsection
