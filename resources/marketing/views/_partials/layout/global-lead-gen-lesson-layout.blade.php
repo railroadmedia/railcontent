@@ -76,15 +76,41 @@
         </div>
     </div>
 
-    @if(count($currentLesson->assets) > 0)
+    @php $bodyData = ''; @endphp
+    @if(count($currentLesson->assets) > 0 || count($leadgen->assets))
         <div class="px-3 py-6 sm:py-10">
             <div class="container mx-auto clearfix" style="max-width:920px">
                 <div class="text-left lesson-text">
                     <h4 class="mb-1 sm:mb-3"><strong>Assets</strong></h4>
-                    @php $bodyData = ''; @endphp
-                    @foreach($currentLesson->assets as $key => $asset)
+                    @foreach($leadgen->assets as $key => $asset)
                         @php
                             $bodyData = $bodyData.'soundsliceModal'.($key+1).': false,';
+                            $resourceName = '';
+
+                            if(str_contains($asset->src, 'mp3')){
+                                $resourceName = 'mp3URL';
+                            }
+                            elseif(str_contains($asset->src, 'svg') || str_contains($asset->src, 'jpg') || str_contains($asset->src, 'png') || str_contains($asset->src, 'jpeg')){
+                                $resourceName = 'imgURL';
+                            }
+                            elseif(str_contains($asset->src, 'pdf')){
+                                $resourceName = 'pdfURL';
+                            }
+                            elseif(str_contains($asset->src, 'zip')){
+                                $resourceName = 'zipURL';
+                            }
+                        @endphp
+
+                        @include('_partials.components.leadgen-assignment-resources', [
+                            "title" => $asset->title,
+                            $resourceName => $asset->src,
+                            "soundslice" => $asset->soundslice,
+                            'num' => $key+1
+                        ])
+                    @endforeach
+                    @foreach($currentLesson->assets as $key => $asset)
+                        @php
+                            $bodyData = $bodyData.'soundsliceModal'.($key+11).': false,';
                             $resourceName = '';
 
                             if(str_contains($asset->src, 'mp3')){
