@@ -246,6 +246,13 @@ app.component('AppContainer', AppContainer)
     .component('ContentAssignment', ContentAssignment)
     .component('AddEventModal', AddEventModal)
 
+    .component('PlatformHeader', defineAsyncComponent(() => 
+        import(
+            /* webpackChunkName: "platform-header" */
+            `./vue/components/PlatformHeader/platform-header.vue`
+        )
+    ))
+
     .component('Song', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "song" */
@@ -337,7 +344,6 @@ app.component('AppContainer', AppContainer)
         )
     ))
 
-
     .component('ContactEmailFormMarketing', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "contact-email-form-marketing" */
@@ -398,6 +404,13 @@ app.component('AppContainer', AppContainer)
         import(
             /* webpackChunkName: "email-form-component" */
             './vue/vuesora/components/EmailForm/EmailForm.vue'
+        )
+    ))
+
+    .component('PlaylistHeader', defineAsyncComponent(() => 
+        import(
+            /* webpackChunkName: "playlist-header" */
+            `./vue/components/Playlists/PlaylistHeader.vue`
         )
     ))
 
