@@ -19,7 +19,7 @@
 @stop()
 
 @section('top')
-    @include('drumeo.drumshop._partials.slider', [
+    @include('_partials.components.shop.slider', [
         "headerText" => "<strong>The perfect gift for ANY drummer!</strong>",
         "videoSrc" => "//player.vimeo.com/video/495414119",
         "videoThumb" => "https://s3.amazonaws.com/drumeo-packs/Merch/pass.jpg",
