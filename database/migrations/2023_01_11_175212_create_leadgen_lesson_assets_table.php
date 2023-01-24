@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('leadgen_lesson_assets', function (Blueprint $table) {
             $table->id();
-            $table->integer('leadgen_lesson_id');
+            $table->integer('leadgen_id')->nullable();
+            $table->integer('leadgen_lesson_id')->nullable();
             $table->string('title');
             $table->string('src');
             $table->string('soundslice')->nullable();
