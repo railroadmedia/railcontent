@@ -2,6 +2,7 @@
 
 namespace App\Nova\Flexible\Resolvers;
 
+use App\Models\Leadgen;
 use App\Models\LeadgenLesson;
 use App\Models\LeadgenLessonAsset;
 use Whitecube\NovaFlexibleContent\Value\ResolverInterface;
@@ -18,10 +19,19 @@ class LeadgenLessonAssetResolver implements ResolverInterface
      */
     public function get($resource, $attribute, $layouts)
     {
-        $lesson = LeadgenLesson::where('id', $resource['id'])->find($resource['id']);
-        if(!$lesson) return collect([]);
+        $assets = [];
+        if(!empty($resource['meta_desc'])){
+            $leadgen = Leadgen::where('id', $resource['id'])->find($resource['id']);
+            if(!$leadgen) return collect([]);
+            $assets = $leadgen->assets()->get();
+        }
+        else {
+            $lesson = LeadgenLesson::where('id', $resource['id'])->find($resource['id']);
+            if(!$lesson) return collect([]);
+            $assets = $lesson->assets()->get();
+        }
 
-        $assets = $lesson->assets()->get();
+        $assets = !empty($lesson) ? $lesson->assets()->get() : $leadgen->assets()->get();
 
         return $assets->map(function($asset) use ($layouts) {
             $layout = $layouts->find('leadgen-lesson-asset-layout');

@@ -64,7 +64,7 @@ class LeadgenLessonResolver implements ResolverInterface
                    'slug' => $group->getAttributes()['slug'],
                    'display_order' => $index+1,
                    'duration' => $group->getAttributes()['duration'],
-                   'one_of' => $group->getAttributes()['one_of'],
+                   'one_off' => $group->getAttributes()['one_off'],
                    'id' => isset($group->getAttributes()['id']) ? $group->getAttributes()['id'] : null,
                 ];
             });
@@ -85,6 +85,7 @@ class LeadgenLessonResolver implements ResolverInterface
                     $addLesson->video_src = $lesson['video_src'];
                     $addLesson->duration = $lesson['duration'];
                     $addLesson->display_order = $lesson['display_order'];
+                    $addLesson->one_off = $lesson['one_off'];
                     $addLesson->save();
 
                     $updatedIds[] = $addLesson->id;
