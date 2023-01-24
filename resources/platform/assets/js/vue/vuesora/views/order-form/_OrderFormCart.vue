@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-column pv-2 mb-1">
+    <div class="flex flex-column py-2">
 
         <order-form-cart-item
             v-for="item in cartItems"

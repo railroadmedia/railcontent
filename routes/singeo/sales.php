@@ -8,23 +8,24 @@ Route::domain('{singeoDomain}')
     ->middleware(['web_public'])
     ->group(function () {
     Route::get('/', [SalesController::class, 'home'] );
+    Route::get('/trial', [SalesController::class, 'home']);
+    Route::get('/trial-month', [SalesController::class, 'homeMonth']);
     Route::get('/new-year', [SalesController::class, 'promo'] );
-    Route::get('/choose-plan', [SalesController::class, 'choosePlan'] );
     Route::get('/student-only', [SalesController::class, 'promo']);
+    Route::get('/choose-plan', [SalesController::class, 'choosePlan'] );
+    Route::get('/choose-your-trial', [SalesController::class, 'choosePlan']);
+
+    Route::get('/choose-your-trial-month', [SalesController::class, 'choosePlanMonth']);
+    Route::get('/affiliate-trial', [SalesController::class, 'choosePlanMonth']);
+    Route::get('/affiliate/asobergirlsguide', [SalesController::class, 'asobergirlsguide']);
+
     Route::get('/privacy', [SalesController::class, 'privacy']);
     Route::get('/terms', [SalesController::class, 'terms']);
-    Route::get('/trial', [SalesController::class, 'home']);
-    Route::get('/trial-month', [SalesController::class, 'trialMonth']);
-    Route::get('/choose-your-trial', [SalesController::class, 'choosePlan']);
-    Route::get('/choose-your-trial-month', [SalesController::class, 'chooseYourTrialMonth']);
     Route::get('/cookie', [SalesController::class, 'cookie']);
 
     Route::get('/method', [SalesController::class, 'method']);
     Route::get('/coaches', [SalesController::class, 'coaches']);
     Route::get('/songs', [SalesController::class, 'songs']);
-
-    Route::get('/affiliate/asobergirlsguide', [SalesController::class, 'asobergirlsguide']);
-    Route::get('/affiliate-trial', [SalesController::class, 'affiliateTrial']);
 
     Route::get('/preferences/beginner', [SalesController::class, 'prefBeginner']);
     Route::get('/preferences/intermediate', [SalesController::class, 'prefIntermediate']);

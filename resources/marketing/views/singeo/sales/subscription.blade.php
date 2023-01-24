@@ -18,8 +18,8 @@
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}">
-    <link href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/singeo/sales-page.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/singeo/sales-page.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
 
     <style>
@@ -109,6 +109,14 @@
             "scrollToJoin" => true,
             "hideMenu" => true,
         ])
+    @elseif(!empty($month))
+        @include("singeo.sales.partials._nav", [
+            "subscriptionVersion" => true,
+            "fullSubscriptionVersion" => true,
+            "trialVersion" => true,
+            "joinUrl" => '/choose-your-trial-month',
+        ])
+
     @else
         @include("singeo.sales.partials._nav", [
             "subscriptionVersion" => true,
@@ -174,10 +182,10 @@
         'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738',
         'students' => number_format(Prices::$students),
     ])
-
     @hasSection('promo-banner')
         @yield('promo-banner')
-    @elseif(!empty($promoVersion))
+    @endif
+    @if(!empty($promoVersion))
         @include('musora.sales.components.promo-section', [
         'promoLogo' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs.svg',
            'promoLogoM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs-m.png',
@@ -476,9 +484,7 @@
     <div class="unstick-trigger block"></div>
     <div id="customize-anchor" class="anchor"></div>
     <div id="order" class="anchor"></div>
-    @hasSection('final')
-        @yield('final')
-    @elseif(!empty($promoVersion))
+    @if(!empty($promoVersion))
 
         @php
             $bonuses = [
@@ -527,6 +533,8 @@
 
     @include('musora.sales.components.app-section', [
         'image' => 'https://singeo.s3.amazonaws.com/sales/2023/devices.png',
+        'appleUrl' => 'https://apps.apple.com/us/app/musora/id1619053766?ppid=101a6930-1058-4aae-9584-1a25cec367a0',
+        'googleUrl' => 'https://play.google.com/store/apps/details?id=com.musoraapp&listing=singeo_previews',
     ])
 
     @include('singeo._partials.faq')

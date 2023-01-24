@@ -233,6 +233,15 @@
             </div>
         </div>
     </section>
+    <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #f6f7f9 calc(50% + 1px));"></div>
+    <section class="py-6 md:py-8" style="background-color:#f6f7f9;">
+        <div class="max-w-xl mx-auto text-center px-4 lg:px-0">
+            <h3 class="leading-tight font-extrabold">“Do people know how good these <br class="hidden sm:inline"> Pianote headphones are?”</h3>
+            <img class="w-full rounded-xl my-3 sm:my-5 lazyload" data-src="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://pianote.s3.amazonaws.com/products/concert-headphones/estyschmitz.jpg" alt="Testimonial">
+            <p class="">“They're incredible. The sound is MUCH richer and clearer on the Pianote headphones compared to the built-in keyboard speakers (Yamaha P515). The Pianote headphones are much closer to sounding like my acoustic Yamaha and make me want to play more. They're SO comfortable too: loose but secure, perfect for wearing for a long time without discomfort. Do people know how good these Pianote headphones are?”
+                <br><strong  style="color:#AC2134;">ESTY SCHMITZ, MARYLAND USA</strong></p>
+        </div>
+    </section>
 
     <div id="customize-anchor" class="anchor"></div>
     <section class="py-12 md:py-20 text-center" style="background: linear-gradient(180deg, #010101 0%, #330606 43.19%)">

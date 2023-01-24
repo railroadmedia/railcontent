@@ -109,6 +109,14 @@
             "scrollToJoin" => true,
             "hideMenu" => true,
         ])
+    @elseif(!empty($month))
+        @include("drumeo.sales.partials._nav", [
+            "subscriptionVersion" => true,
+            "fullSubscriptionVersion" => true,
+            "trialVersion" => true,
+            "joinUrl" => '/choose-your-trial-month',
+        ])
+
     @else
         @include("drumeo.sales.partials._nav", [
             "subscriptionVersion" => true,
@@ -176,6 +184,9 @@
         'students' => number_format(Prices::$students),
     ])
 
+    @hasSection('promo-banner')
+        @yield('promo-banner')
+    @endif
     @if(!empty($promoVersion))
         @include('musora.sales.components.promo-section', [
         'promoLogo' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs.svg',
@@ -502,7 +513,9 @@
     <div class="unstick-trigger block"></div>
     <div id="customize-anchor" class="anchor"></div>
     <div id="order" class="anchor"></div>
-    @if(!empty($promoVersion))
+    @hasSection('final')
+        @yield('final')
+    @elseif(!empty($promoVersion))
 
         @php
             $bonuses = [
@@ -592,6 +605,8 @@
 
     @include('musora.sales.components.app-section', [
         'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/devices.png',
+        'appleUrl' => 'https://apps.apple.com/us/app/musora/id1619053766?platform=iphone&ppid=d63c2cf3-274f-4441-8444-a5f547b1b4b6',
+        'googleUrl' => 'https://play.google.com/store/apps/details?id=com.musoraapp&listing=drumeo_previews',
     ])
 
     @include('drumeo._partials.faq')

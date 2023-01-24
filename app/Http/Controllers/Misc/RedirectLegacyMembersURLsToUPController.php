@@ -45,7 +45,7 @@ class RedirectLegacyMembersURLsToUPController extends BaseController
         }
 
         /* here we treat all the routes that are similar */
-        if (in_array($segment1, ['forums','referral', 'support', 'live', 'schedule', 'legacy-resources', 'search'])) {
+        if (in_array($segment1, ['forums','referral', 'support', 'live', 'schedule', 'legacy-resources', 'search', 'content'])) {
             $forumUrl = $unifiedUrl . $segment1 . "/";
             foreach ([$segment2, $segment3, $segment4, $segment5] as $segment) {
                 if ($segment) {
@@ -283,7 +283,8 @@ class RedirectLegacyMembersURLsToUPController extends BaseController
             'student-reviews',
             'question-and-answer',
             'podcasts',
-            'boot-camps'
+            'boot-camps',
+            'content'
         ])) {
             $segment1 = ($segment1 == 'boot-camps') ? "bootcamps" : $segment1;
 
@@ -435,7 +436,7 @@ class RedirectLegacyMembersURLsToUPController extends BaseController
             return redirect()->to($unifiedUrl . $authParams);
         }
 
-        if (in_array($segment1, ['forums', 'referral', 'support', 'live', 'schedule', 'legacy-resources', 'search'])) {
+        if (in_array($segment1, ['forums', 'referral', 'support', 'live', 'schedule', 'legacy-resources', 'search', 'content'])) {
             /* here we treat all the routes that are similar */
             $unifiedUrl = $unifiedUrl . $segment1 . "/";
             foreach ([$segment2, $segment3, $segment4, $segment5] as $segment) {
@@ -732,7 +733,8 @@ class RedirectLegacyMembersURLsToUPController extends BaseController
             'courses',
             'songs',
             'student-reviews',
-            'question-and-answer'
+            'question-and-answer',
+            'content'
         ])) {
             /* here we treat all the routes that are similar */
             $unifiedUrl = $unifiedUrl . $segment1 . "/";

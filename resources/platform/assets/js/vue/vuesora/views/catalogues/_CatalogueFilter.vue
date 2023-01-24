@@ -1,12 +1,12 @@
 <template>
-    <div class="flex flex-column ph-1 catalogue-filter" 
+    <div class="flex flex-column tw-px-[3px] lg:tw-px-[4px] xl:tw-px-[5px] catalogue-filter" 
          :class="{'short-filter-container': shortFilterContainer, 'tw-w-full md:tw-w-1/4': isCoachesGrid, [`${filterName}FilterContainer`]: true}"
     >
         <div class="form-group">
             <select
                 :id="filterName + 'Filter'"
                 v-model="valueInterface"
-                class="tw-pb-0 tw-text-[#00101D] dark:tw-text-[#9EC0DC] no-label tw-bg-white dark:tw-bg-transparent dark:tw-border-[1px] dark:tw-border-[#445F74]"
+                class="tw-pb-0 tw-text-[#00101D] dark:tw-text-[#9EC0DC] no-label tw-bg-white dark:tw-bg-transparent dark:tw-border-[1px] dark:tw-border-[#445F74] tw-px-[12px] lg:tw-px-[18px] xl:tw-px-[25px] tw-text-[14px] lg:tw-text-[16px]"
                 :class="{'is-clearable': valueInterface}"
                 :disabled="valueInterface"
                 @keydown.prevent

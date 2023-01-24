@@ -21,6 +21,27 @@ class SalesController extends BaseController
     }
 
 
+    public function home()
+    {
+        return view('pianote.sales.subscription', ['theme' => 'pianote']);
+    }
+    public function homeMonth()
+    {
+        return view('pianote.sales.subscription', ['theme' => 'pianote', 'month' => true]);
+    }
+    public function promo()
+    {
+        return view('pianote.sales.subscription', ['theme' => 'pianote', 'promoVersion' => 'true']);
+    }
+    public function choosePlan()
+    {
+        return view('pianote.sales.choose-plan', ['theme' => 'pianote']);
+    }
+    public function choosePlanMonth()
+    {
+        return view('pianote.sales.choose-plan', ['theme' => 'pianote', 'month' => true]);
+    }
+
     public function about()
     {
         return view('pianote.sales.pages.about');
@@ -61,26 +82,16 @@ class SalesController extends BaseController
         return view('pianote.sales.features.coaches', [ 'theme' => 'pianote', 'page' => 'coaches']);
     }
 
-    public function chooseyourtrialmonth()
-    {
-        return view('pianote.sales.trials.trial-selection.month');
-    }
-
     public function davidbennett()
     {
-        return view('pianote.sales.trials.affiliates.davidbennett');
+        return view('pianote.sales.affiliates.davidbennett', ['theme' => 'pianote', 'month' => true]);
     }
 
     public function affiliates(Request $request, $domain, $page = null)
     {
-        return view('pianote.sales.trials.affiliates.'.$page);
+        return view('pianote.sales.affiliates.'.$page, ['theme' => 'pianote', 'month' => true]);
 
         throw new NotFoundHttpException();
-    }
-
-    public function affiliatetrial()
-    {
-        return view('pianote.sales.trials.trial-selection.affiliates');
     }
 
     public function giveaway()
@@ -132,7 +143,7 @@ class SalesController extends BaseController
 
     public function lifetimeMembers()
     {
-        return view('pianote.sales.lifetime-members');
+        return view('pianote.sales.pages.lifetime-members');
     }
 
     public function lisarecommends()
@@ -145,19 +156,6 @@ class SalesController extends BaseController
         return view('pianote.lead-gen.welcome-party');
     }
 
-    public function home()
-    {
-        return view('pianote.sales.subscription', ['theme' => 'pianote']);
-    }
-    public function promo()
-    {
-        return view('pianote.sales.subscription', ['theme' => 'pianote', 'promoVersion' => 'true']);
-    }
-    public function choosePlan()
-    {
-        return view('pianote.sales.choose-plan', ['theme' => 'pianote']);
-    }
-
     public function jesusMolina()
     {
         return view('pianote.products.improvisation-with-jesus-molina');
@@ -165,17 +163,7 @@ class SalesController extends BaseController
 
     public function roland()
     {
-        return view('pianote.sales.roland');
-    }
-
-    public function trial()
-    {
-        return view('pianote.sales.trials.trial');
-    }
-
-    public function trialMonth()
-    {
-        return view('pianote.sales.trials.30-trial');
+        return view('pianote.sales.pages.roland', ['theme' => 'pianote']);
     }
 
     public function songs500()

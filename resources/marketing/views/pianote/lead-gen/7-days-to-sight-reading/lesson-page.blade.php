@@ -49,7 +49,7 @@
             <div class="w-full px-2 md:px-3 text-center">
                 <h3 class="mb-6"><strong>Ready for the next step?</strong></h3>
                 <p style="color:#D0E2E7;">Get unlimited lessons, detailed song tutorials, and personal support from real teachers with a Pianote membership. Try it free for 7 days.</p>
-                <a class="join my-5 md:my-7" href="/choose-your-trial">Start a free trial &raquo;</a>
+                <a class="join my-5 md:my-7" href="/choose-plan">Start a free trial &raquo;</a>
             </div>
         </div>
     </section>
