@@ -950,6 +950,13 @@ The second exercise is similar, but this time we’re playing longer groups of u
                 'meta_desc' => 'Just starting out on the drums? Want to rebuild your foundation? Try Jared Falk\'s free video series!',
                 'meta_img' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/og-image.jpg',
                 'slug' => 'getting-started/lessons',
+                'assets' => [
+                    [
+                        'title' => 'All Course PDFs',
+                        'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/getting-started-resources.zip',
+                        'soundslice' => ''
+                    ],
+                ],
                 'lessons' => [
                     [
                         'slug' => 'getting-started/1-setting-up-your-drums',
@@ -958,13 +965,7 @@ The second exercise is similar, but this time we’re playing longer groups of u
                         'thumbnail' => 'https://i.vimeocdn.com/video/481788468-e2ab307642602c8f591214d3f50c15a8f791268676105605927c5f5bd932b7ec-d?mw=1000&mh=563',
                         'video_src' => '//player.vimeo.com/video/100332067',
                         'duration' => 20,
-                        'assets' => [
-                            [
-                                'title' => 'All Course PDFs',
-                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/getting-started-resources.zip',
-                                'soundslice' => ''
-                            ],
-                        ],
+                        'assets' => [],
                     ],
                     [
                         'slug' => 'getting-started/2-tuning-your-drums',
@@ -973,13 +974,7 @@ The second exercise is similar, but this time we’re playing longer groups of u
                         'thumbnail' => 'https://i.vimeocdn.com/video/469168227-d41168d949f436a688503c73880282804b41bce62adbc5b3ef641eab341ee202-d?mw=1000&mh=563',
                         'video_src' => '//player.vimeo.com/video/90129042',
                         'duration' => 40,
-                        'assets' => [
-                            [
-                                'title' => 'All Course PDFs',
-                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/getting-started-resources.zip',
-                                'soundslice' => ''
-                            ],
-                        ],
+                        'assets' => [],
                     ],
                     [
                         'slug' => 'getting-started/3-holding-your-drumsticks',
@@ -988,13 +983,7 @@ The second exercise is similar, but this time we’re playing longer groups of u
                         'thumbnail' => 'https://i.vimeocdn.com/video/469051158-bcdcf0b70b3c56a5e418d027490b82f58ad935e92f87d6f1f76f204643783623-d?mw=1000&mh=563',
                         'video_src' => '//player.vimeo.com/video/90056794',
                         'duration' => 6,
-                        'assets' => [
-                            [
-                                'title' => 'All Course PDFs',
-                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/getting-started-resources.zip',
-                                'soundslice' => ''
-                            ],
-                        ],
+                        'assets' => [],
                     ],
                     [
                         'slug' => 'getting-started/4-reading-drum-notation',
@@ -1004,11 +993,6 @@ The second exercise is similar, but this time we’re playing longer groups of u
                         'video_src' => '//player.vimeo.com/video/90056795',
                         'duration' => 5,
                         'assets' => [
-                            [
-                                'title' => 'All Course PDFs',
-                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/getting-started-resources.zip',
-                                'soundslice' => ''
-                            ],
                             [
                                 'title' => 'Reading Drum Notation',
                                 'src' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/getting-started/4-reading-drum-notation.jpg',
@@ -1025,11 +1009,6 @@ The second exercise is similar, but this time we’re playing longer groups of u
                         'duration' => 9,
                         'assets' => [
                             [
-                                'title' => 'All Course PDFs',
-                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/getting-started-resources.zip',
-                                'soundslice' => ''
-                            ],
-                            [
                                 'title' => 'Basic Counting',
                                 'src' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/getting-started/5-basic-counting.jpg',
                                 'soundslice' => ''
@@ -1044,11 +1023,6 @@ The second exercise is similar, but this time we’re playing longer groups of u
                         'video_src' => '//player.vimeo.com/video/90056797',
                         'duration' => 8,
                         'assets' => [
-                            [
-                                'title' => 'All Course PDFs',
-                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/getting-started-resources.zip',
-                                'soundslice' => ''
-                            ],
                             [
                                 'title' => 'Playing Your First Beat',
                                 'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/6-playing-your-first-beat.zip',
@@ -1065,11 +1039,6 @@ The second exercise is similar, but this time we’re playing longer groups of u
                         'duration' => 11,
                         'assets' => [
                             [
-                                'title' => 'All Course PDFs',
-                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/getting-started-resources.zip',
-                                'soundslice' => ''
-                            ],
-                            [
                                 'title' => 'Playing Your First Fill',
                                 'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/7-playing-your-first-fill.zip',
                                 'soundslice' => ''
@@ -1083,13 +1052,7 @@ The second exercise is similar, but this time we’re playing longer groups of u
                         'thumbnail' => 'https://i.vimeocdn.com/video/469065379-b1df7a24a11a3150f8ecb85f6db3f8fdd5d582223be3121de116b464590aab2e-d?mw=1000&mh=563',
                         'video_src' => '//player.vimeo.com/video/90068632',
                         'duration' => 7,
-                        'assets' => [
-                            [
-                                'title' => 'All Course PDFs',
-                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/getting-started-resources.zip',
-                                'soundslice' => ''
-                            ],
-                        ],
+                        'assets' => [],
                     ],
                     [
                         'slug' => 'getting-started/9-your-first-song',
@@ -1099,11 +1062,6 @@ The second exercise is similar, but this time we’re playing longer groups of u
                         'video_src' => '//player.vimeo.com/video/90068633',
                         'duration' => 5,
                         'assets' => [
-                            [
-                                'title' => 'All Course PDFs',
-                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/getting-started-resources.zip',
-                                'soundslice' => ''
-                            ],
                             [
                                 'title' => 'Playing Your First Song',
                                 'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/9-playing-your-first-song.zip',
@@ -1120,11 +1078,6 @@ The second exercise is similar, but this time we’re playing longer groups of u
                         'duration' => 8,
                         'assets' => [
                             [
-                                'title' => 'All Course PDFs',
-                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/getting-started-resources.zip',
-                                'soundslice' => ''
-                            ],
-                            [
                                 'title' => 'Developing a Practice Routine',
                                 'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/10-developing-a-practice-routine.pdf',
                                 'soundslice' => ''
@@ -1138,13 +1091,7 @@ The second exercise is similar, but this time we’re playing longer groups of u
                         'thumbnail' => '',
                         'video_src' => '//player.vimeo.com/video/98685191',
                         'duration' => 2,
-                        'assets' => [
-                            [
-                                'title' => 'All Course PDFs',
-                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/getting-started-resources.zip',
-                                'soundslice' => ''
-                            ],
-                        ],
+                        'assets' => [],
                         'one_off' => true,
                     ],
                     [
@@ -1154,13 +1101,7 @@ The second exercise is similar, but this time we’re playing longer groups of u
                         'thumbnail' => '',
                         'video_src' => '//player.vimeo.com/video/98685192',
                         'duration' => 2,
-                        'assets' => [
-                            [
-                                'title' => 'All Course PDFs',
-                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/getting-started-resources.zip',
-                                'soundslice' => ''
-                            ],
-                        ],
+                        'assets' => [],
                         'one_off' => true,
                     ],
                 ],
@@ -1346,7 +1287,416 @@ The second exercise is similar, but this time we’re playing longer groups of u
                         'assets' => [],
                     ],
                 ],
-            ]
+            ],
+            [
+                'brand_id' => 1,
+                'title' => 'Hand Technique - The Motions Of Drumming',
+                'meta_desc' => 'Learn drumming\'s 3 hand techniques in this FREE series.',
+                'meta_img' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/hand-technique/share-image.jpg',
+                'slug' => 'hand-technique/lessons',
+                'assets' => [
+                    [
+                        'title' => 'Lesson Resources',
+                        'src' => 'https://dzryyo1we6bm3.cloudfront.net/courses/pdf/dcb-34.pdf',
+                        'soundslice' => '',
+                    ],
+                ],
+                'lessons' => [
+                    [
+                        'slug' => 'hand-technique/lessons/1',
+                        'title' => 'Introduction',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/623662001-6670b0b644776c95b6ed1ce97c005c22b0fe568ee5225de3d83409d8f04e77b4-d_640',
+                        'video_src' => '//player.vimeo.com/video/208363526',
+                        'duration' => 1,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'hand-technique/lessons/2',
+                        'title' => 'The Motions In French Grip',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/623668805-0397615e9c33e5e4ae1bb8f7896ec06f02fd171a584d980c9dbda70d6513bac7-d_640',
+                        'video_src' => '//player.vimeo.com/video/208364706',
+                        'duration' => 3,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'hand-technique/lessons/3',
+                        'title' => 'The Motions In German Grip',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/623675350-f559455aae45948e23f25dc59495f86126ef1cc564e2a7208e1a157e50c58108-d_640',
+                        'video_src' => '//player.vimeo.com/video/208370136',
+                        'duration' => 4,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'hand-technique/lessons/4',
+                        'title' => 'The Motions In Traditional Grip',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/623682435-7d053de096d78221d9dbce6d036bfc2493a55fd0731408b65745901dd56387d6-d_640',
+                        'video_src' => '//player.vimeo.com/video/208375473',
+                        'duration' => 4,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'hand-technique/lessons/5',
+                        'title' => 'How To Apply The Motions',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/623694516-8be0d21532e9385c94a633f75f5211f44cd097a3c792108fd2d621fdb54ea8e2-d_640',
+                        'video_src' => '//player.vimeo.com/video/208381114',
+                        'duration' => 8,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'hand-technique/lessons/6',
+                        'title' => 'Applying The Motions To The Drumset',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/625581492-1d00b9fd5975cc94f21c13baf2208d673b9c57a72f63ec30173fba6efe88ba96-d_640',
+                        'video_src' => '//player.vimeo.com/video/208390763',
+                        'duration' => 5,
+                        'assets' => [],
+                    ],
+                ],
+            ],
+            [
+                'brand_id' => 1,
+                'title' => 'Linear Drumming',
+                'meta_desc' => 'In this exclusive video series, you\'ll get his best tips on linear drumming and how to apply it to a range of fills, grooves, and styles of music!',
+                'meta_img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/share-image-drumeo.jpg',
+                'slug' => 'linear-drumming/lessons',
+                'lessons' => [
+                    [
+                        'slug' => 'linear-drumming/1-about',
+                        'title' => 'What Is Linear Drumming?',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/560726784-7f2c75c0dbb17e9ae0fceb339df0fd6b681c626b3401fd46d7c9b06dadae617d-d_640',
+                        'video_src' => '//player.vimeo.com/video/158554609',
+                        'duration' => 4,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'linear-drumming/2-dance-pop',
+                        'title' => 'Dance Pop Grooves',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/560726966-41e3db31ccbccda9d6a259160f07ed51c064dbbfb09a3e56a12e9065b9043655-d_640',
+                        'video_src' => '//player.vimeo.com/video/158554566',
+                        'duration' => 6,
+                        'assets' => [
+                            [
+                                'title' => 'Dance Pop Grooves',
+                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/cooperdrummer/02-dance-pop-grooves.pdf',
+                                'soundslice' => '',
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'linear-drumming/3-rock-tom',
+                        'title' => 'Rock Tom Grooves',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/560727218-21ae1bae198ad6c555b15363f351ba618f2846e2efbdf98a2480cba5ed7648e7-d_640',
+                        'video_src' => '//player.vimeo.com/video/158554381',
+                        'duration' => 6,
+                        'assets' => [
+                            [
+                                'title' => 'Rock Tom Grooves',
+                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/cooperdrummer/03-rock-tom-grooves.pdf',
+                                'soundslice' => '',
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'linear-drumming/4-gospel',
+                        'title' => 'Gospel Grooves',
+                        'desc' => '//player.vimeo.com/video/158554374',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/560727540-477b10caa006c5bd1c67b666ca5ff8408b56e302acfdeffc32513f649aa716bb-d_640',
+                        'video_src' => '//player.vimeo.com/video/158554374',
+                        'duration' => 8,
+                        'assets' => [
+                            [
+                                'title' => 'Gospel Grooves',
+                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/cooperdrummer/04-gospel-grooves.pdf',
+                                'soundslice' => '',
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'linear-drumming/5-metal',
+                        'title' => 'Metal Fills',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/560727679-c21a30b3084fcaf2a799dbd465d526ed48cdfba97e436f6a209f8bc332e30ca6-d_640',
+                        'video_src' => '//player.vimeo.com/video/158554402',
+                        'duration' => 7,
+                        'assets' => [
+                            [
+                                'title' => 'Metal Fills',
+                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/cooperdrummer/05-metal-fills.pdf',
+                                'soundslice' => '',
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'linear-drumming/next-level',
+                        'title' => 'Take Your Drumming To The Next Level',
+                        'desc' => '',
+                        'thumbnail' => '',
+                        'video_src' => '//player.vimeo.com/video/158554433',
+                        'duration' => 1,
+                        'assets' => [],
+                        'one_off' => true,
+                    ],
+                ],
+            ],
+            [
+                'brand_id' => 1,
+                'title' => 'The Grooves Of Michael Jackson',
+                'meta_desc' => 'In this 10-video series, you’ll learn Michael Jackson’s most iconic drum grooves firsthand from the man who brought them to life in arenas around the world.',
+                'meta_img' => 'https://s3.amazonaws.com/drumeoblog/beat/wp-content/uploads/2019/10/24202002/IMG_0237-1-2400x1260.jpg',
+                'slug' => 'michael-jackson-grooves/course-index',
+                'lessons' => [
+                    [
+                        'slug' => 'michael-jackson-grooves/course-index/1-intro',
+                        'title' => 'Introduction',
+                        'desc' => '',
+                        'thumbnail' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/michael-jackson-grooves/jonathan-moffett-grooves-1.jpg',
+                        'video_src' => '//player.vimeo.com/video/280980075',
+                        'duration' => 1,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'michael-jackson-grooves/course-index/2-wannabestartin',
+                        'title' => 'Wanna Be Startin\' Somethin\'',
+                        'desc' => '',
+                        'thumbnail' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/michael-jackson-grooves/jonathan-moffett-grooves-2.jpg',
+                        'video_src' => '//player.vimeo.com/video/280980137',
+                        'duration' => 15,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'michael-jackson-grooves/course-index/3-smoothcriminal',
+                        'title' => 'Smooth Criminal',
+                        'desc' => '',
+                        'thumbnail' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/michael-jackson-grooves/jonathan-moffett-grooves-3.jpg',
+                        'video_src' => '//player.vimeo.com/video/280980619',
+                        'duration' => 7,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'michael-jackson-grooves/course-index/4-billiejean',
+                        'title' => 'Billie Jean',
+                        'desc' => '',
+                        'thumbnail' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/michael-jackson-grooves/jonathan-moffett-grooves-4.jpg',
+                        'video_src' => '//player.vimeo.com/video/280980926',
+                        'duration' => 11,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'michael-jackson-grooves/course-index/5-humannature',
+                        'title' => 'Human Nature',
+                        'desc' => '',
+                        'thumbnail' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/michael-jackson-grooves/jonathan-moffett-grooves-5.jpg',
+                        'video_src' => '//player.vimeo.com/video/280981370',
+                        'duration' => 8,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'michael-jackson-grooves/course-index/6-beatit',
+                        'title' => 'Beat It',
+                        'desc' => '',
+                        'thumbnail' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/michael-jackson-grooves/jonathan-moffett-grooves-6.jpg',
+                        'video_src' => '//player.vimeo.com/video/280981718',
+                        'duration' => 10,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'michael-jackson-grooves/course-index/7-threatened',
+                        'title' => 'Threatened',
+                        'desc' => '',
+                        'thumbnail' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/michael-jackson-grooves/jonathan-moffett-grooves-7.jpg',
+                        'video_src' => '//player.vimeo.com/video/280982101',
+                        'duration' => 12,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'michael-jackson-grooves/course-index/8-thriller',
+                        'title' => 'Thriller',
+                        'desc' => '',
+                        'thumbnail' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/michael-jackson-grooves/jonathan-moffett-grooves-8.jpg',
+                        'video_src' => '//player.vimeo.com/video/280983066',
+                        'duration' => 16,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'michael-jackson-grooves/course-index/9-workingdayandnight',
+                        'title' => 'Working Day And Night',
+                        'desc' => '',
+                        'thumbnail' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/michael-jackson-grooves/jonathan-moffett-grooves-9.jpg',
+                        'video_src' => '//player.vimeo.com/video/280983690',
+                        'duration' => 15,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'michael-jackson-grooves/course-index/10-ontheroad',
+                        'title' => 'On The Road With Michael Jackson',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/714610295-2802ea17cef756eee35fc25d8f66b51fd10b556a306dc00c96fe7471b804d24e-d?mw=1200&mh=675',
+                        'video_src' => '//player.vimeo.com/video/280984349',
+                        'duration' => 13,
+                        'assets' => [],
+                    ],
+                ],
+            ],
+            [
+                'brand_id' => 1,
+                'title' => 'Rich Redmond - Must-Know Drum Grooves',
+                'meta_desc' => 'Sign up on this page and you’ll get 9 videos with Rich Redmond that are normally reserved for Drumeo members.',
+                'meta_img' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/must-know-grooves/og-image.jpg',
+                'slug' => 'must-know-grooves/course-index',
+                'lessons' => [
+                    [
+                        'slug' => 'must-know-grooves/course-index/1-intro',
+                        'title' => 'Getting Started',
+                        'desc' => '',
+                        'thumbnail' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/must-know-grooves/thumb-getting-started.jpg',
+                        'video_src' => '//player.vimeo.com/video/145688805',
+                        'duration' => 4,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'must-know-grooves/course-index/2-shuffle',
+                        'title' => 'Shuffle',
+                        'desc' => '',
+                        'thumbnail' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/must-know-grooves/thumb-shuffle.jpg',
+                        'video_src' => '//player.vimeo.com/video/145688990',
+                        'duration' => 6,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'must-know-grooves/course-index/3-lindybeat',
+                        'title' => 'Lindy Beat',
+                        'desc' => '',
+                        'thumbnail' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/must-know-grooves/thumb-lindy-beat.jpg',
+                        'video_src' => '//player.vimeo.com/video/145688808',
+                        'duration' => 9,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'must-know-grooves/course-index/4-motown',
+                        'title' => 'Motown Beat',
+                        'desc' => '',
+                        'thumbnail' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/must-know-grooves/thumb-motown-beat.jpg',
+                        'video_src' => '//player.vimeo.com/video/145688803',
+                        'duration' => 5,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'must-know-grooves/course-index/5-latin',
+                        'title' => 'Latin Beats',
+                        'desc' => '',
+                        'thumbnail' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/must-know-grooves/thumb-latin-beats.jpg',
+                        'video_src' => '//player.vimeo.com/video/145689024',
+                        'duration' => 13,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'must-know-grooves/course-index/6-vacationrhythms',
+                        'title' => 'Vacation Rhythms',
+                        'desc' => '',
+                        'thumbnail' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/must-know-grooves/thumb-vacation-rhythms.jpg',
+                        'video_src' => '//player.vimeo.com/video/145688809',
+                        'duration' => 8,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'must-know-grooves/course-index/7-secondline',
+                        'title' => 'Second Line',
+                        'desc' => '',
+                        'thumbnail' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/must-know-grooves/thumb-second-line.jpg',
+                        'video_src' => '//player.vimeo.com/video/145688807',
+                        'duration' => 5,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'must-know-grooves/course-index/8-socalpunk',
+                        'title' => 'SoCal Punk',
+                        'desc' => '',
+                        'thumbnail' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/must-know-grooves/thumb-social-punk.jpg',
+                        'video_src' => '//player.vimeo.com/video/145688810',
+                        'duration' => 5,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'must-know-grooves/course-index/9-mozambiquesongo',
+                        'title' => 'Mozambique & Songo',
+                        'desc' => '',
+                        'thumbnail' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/must-know-grooves/thumb-mozambique-songo.jpg',
+                        'video_src' => '//player.vimeo.com/video/145688811',
+                        'duration' => 11,
+                        'assets' => [],
+                    ],
+                ],
+            ],
+            [
+                'brand_id' => 1,
+                'title' => 'Rock Drumming Masterclass',
+                'meta_desc' => 'The Rock Drumming Masterclass is a 26-week online course with Todd Sucherman.',
+                'meta_img' => 'https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/og-image.jpg',
+                'slug' => '',
+                'lessons' => [
+                    [
+                        'slug' => 'rock-drumming-masterclass/most-underrated-drummer',
+                        'title' => 'Most Underated Drummer',
+                        'desc' => 'Recently we had Todd Sucherman (drummer for the band Styx, Brian Wilson, Spinal Tap, and more) out to Drumeo to create a very special project that we can\'t wait to share with you on January 1st. During filming one day, the topic of underrated drummers came up in conversation. I\'m sure each one of you has one or two drummers you think don\'t get enough appreciation or recognition from the industry. Today, Todd\'s here to talk about one particular drummer that he thinks deserves a little more credit for his accomplishments.
+
+    Who do you think is an underrated drummer? Why? Leave a comment below. Todd and I want to know!
+
+    - Jared Falk
+
+<div class="text-center mt-8">
+    <a class="rounded-md border-2 font-bold border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white py-2 px-4 md:px-10 lg:px-12" href="/rock-drumming-masterclass">Rock Drumming Masterclass</a>
+</div>',
+                        'thumbnail' => '',
+                        'video_src' => 'https://www.youtube.com/embed/Yr8BE1M7qPc?rel=0&amp;showinfo=0',
+                        'duration' => 4,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'rock-drumming-masterclass/most-important-rock-drum-tips',
+                        'title' => 'Most Important Tips For Rock Drummers',
+                        'desc' => '    Todd Sucherman has been playing with the famous rock band Styx for 23 years, so it\'s safe to say he\'s more than qualified to come up with FIVE essential tips for aspiring rock drummers (or drummers of any genre, to be honest). He\'ll covers topics from certain stick techniques you should be practicing to your general mindset you should have when playing this genre of music.
+
+    If you\'re looking to drastically improve your rock drumming in 2019, stay tuned for a special announcement on January 1st. We can\'t wait to show you what we\'ve been working on with Todd.
+
+    - Jared Falk
+
+<div class="text-center mt-8">
+    <a class="rounded-md border-2 font-bold border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white py-2 px-4 md:px-10 lg:px-12" href="/rock-drumming-masterclass">Rock Drumming Masterclass</a>
+</div>',
+                        'thumbnail' => 'https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/prelaunch/5-myths.jpg',
+                        'video_src' => 'https://www.youtube.com/embed/Xs2nGgnL0Nw?rel=0&amp;showinfo=0',
+                        'duration' => 9,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'rock-drumming-masterclass/epic-drum-video',
+                        'title' => 'The Most Epic Drum Video We’ve Ever Made (Todd Sucherman)',
+                        'desc' => 'In the most EPIC drum video we\'ve ever filmed, we took two helicopters, a beautiful Pearl kit, and one of the best rock drummers of all time into the mountains of British Columbia - in the pouring rain!
+
+    This video is a tribute to drummers around the world. Drummers are a rare and amazing breed. We dedicate entire rooms of our homes to our passion, we buy vehicles based on how our drums will fit, and we set up our kits in the craziest of situations all because of our LOVE for music.
+
+    We\'re so thankful for the drum companies who supported this ambitious project including <a href="https://pearldrum.com/">Pearl</a>, <a href="https://remo.com/" target="_blank">Remo</a>, <a href="http://www.promark.com/" target="_blank">Pro-Mark</a>, <a href="https://audixusa.com/" target="_blank">Audix</a>, and <a href="https://sabian.com/" target="_blank">Sabian</a>.
+
+    And a huge thank you to Mischa Gelb and <a href="https://www.bchelicopters.com/" target="_blank">BC Helicopters</a> for making this video possible. If you\'d like to follow their incredible adventures (including a helicopter trip around the world), make sure to check out Mischa\'s YouTube channel here: <a href="https://www.youtube.com/user/mischagelb" target="_blank">www.YouTube.com/user/mischagelb</a>.
+
+<div class="text-center mt-8">
+    <a class="rounded-md border-2 font-bold border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white py-2 px-4 md:px-10 lg:px-12" href="/rock-drumming-masterclass">Rock Drumming Masterclass</a>
+</div>',
+                        'thumbnail' => 'https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/prelaunch/important-technique.jpg',
+                        'video_src' => 'https://www.youtube.com/embed/QUKMr0_hVNg?rel=0&amp;showinfo=0',
+                        'duration' => 10,
+                        'assets' => [],
+                    ],
+                ],
+            ],
 //            [
 //                'brand_id' => 1,
 //                'title' => '',
@@ -1379,6 +1729,17 @@ The second exercise is similar, but this time we’re playing longer groups of u
                 'meta_img' => $leadgen['meta_img'],
                 'slug' => $leadgen['slug'],
             ]);
+
+            if(!empty($leadgen['assets']) && count($leadgen['assets']) > 0){
+                foreach($leadgen['assets'] as $asset){
+                    LeadgenLessonAsset::create([
+                        'leadgen_id' => $newLeadgen->id,
+                        'title' => $asset['title'],
+                        'src' => $asset['src'],
+                        'soundslice' => $asset['soundslice'] ??  null,
+                    ]);
+                }
+            }
 
             foreach($leadgen['lessons'] as $key => $lesson){
                 $newLesson = LeadgenLesson::create([
