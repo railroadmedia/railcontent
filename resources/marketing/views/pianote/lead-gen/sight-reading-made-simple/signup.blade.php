@@ -296,7 +296,6 @@
             </div>
             <div class="max-w-lg px-4 mx-auto">
                 @include('pianote._partials._sign-up-form', [
-                    "redirect" => true,
                     "stacked" => true,
                     "formId" => "Pianote - Engagement - Trigger - Sight Reading - Web Form",
                     "formName" => 'Sight Reading Made Simple',

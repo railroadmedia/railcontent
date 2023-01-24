@@ -32,6 +32,8 @@
 
     @include('musora.sales.components.app-section', [
         'image' => 'https://pianote.s3.amazonaws.com/sales/2023/devices.png',
+        'appleUrl' => 'https://apps.apple.com/us/app/musora/id1619053766?ppid=afddd5f6-fbc3-46c9-b6e4-6c9e6a6936af',
+        'googleUrl' => 'https://play.google.com/store/apps/details?id=com.musoraapp&listing=pianote_previews',
     ])
 
     @include('pianote._partials.faq')

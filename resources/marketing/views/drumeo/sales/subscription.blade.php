@@ -592,6 +592,8 @@
 
     @include('musora.sales.components.app-section', [
         'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/devices.png',
+        'appleUrl' => 'https://apps.apple.com/us/app/musora/id1619053766?platform=iphone&ppid=d63c2cf3-274f-4441-8444-a5f547b1b4b6',
+        'googleUrl' => 'https://play.google.com/store/apps/details?id=com.musoraapp&listing=drumeo_previews',
     ])
 
     @include('drumeo._partials.faq')

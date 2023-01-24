@@ -37,7 +37,6 @@
                 "formName" => 'Personality Quiz Academic',
                 "formId" => "Pianote - Engagement - Trigger - Personality Quiz Academic - Web Form",
                 'buttonText' => 'Show my results',
-                'redirect' => true,
                 'redirectURL' => '/personality-quiz/academic',
                 'disclaimerColor' => '#D0E2E7'
             ])
