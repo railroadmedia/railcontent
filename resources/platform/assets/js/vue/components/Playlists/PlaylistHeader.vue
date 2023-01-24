@@ -1,15 +1,20 @@
 <script setup>
     import platformHeader from "../PlatformHeader/platform-header.vue";
+
     //Props
-    const props = defineProps([
-        'playlists'
-    ])
+    const props = defineProps({
+        playlistsCount: {
+            type: Number,
+            default: 0
+        },
+    })
     //Methods
     const handleCreatePlaylist = () => {
         window.openplaylistmodal({ modalType: 'create' });
     };
     //TODO
     // Listen to Playlist PUT event to update count
+    
 </script>
 <template>
     <platform-header
@@ -19,7 +24,7 @@
     >
         <template v-slot:content> 
             <p class="tw-uppercase tw-text-sm tw-font-bold tw-text-[#7E9AB1]">
-                {{ playlists.length }} Playlists    
+                {{ playlistsCount }} Playlists    
             </p> 
         </template>
         <template v-slot:ctas> 

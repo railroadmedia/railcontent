@@ -8,14 +8,19 @@
 
     {{-- Playlist Header --}}
     <playlist-header
-        playlists="{{ json_encode($playlists) }}"
-    ></playlist-header>
+        :playlistsCount="{{ json_encode(count($playlists)) }}"
+    /></playlist-header>
 
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white tw-pb-14">
         <div class="tw-flex tw-flex-col">
             <div class="tw-flex tw-flex-row">
+                
                 {{-- Playlist Catalog --}}
-                {{ json_encode($playlists) }}
+                <playlist-collection-catalog
+                    :playlists="{{ json_encode($playlists) }}"
+                
+                ></playlist-collection-catalog>
+
             </div>
         </div>
     </div>

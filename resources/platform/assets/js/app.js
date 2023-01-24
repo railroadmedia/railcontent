@@ -414,6 +414,13 @@ app.component('AppContainer', AppContainer)
         )
     ))
 
+    .component('PlaylistCollectionCatalog', defineAsyncComponent(() => 
+        import(
+            /* webpackChunkName: "playlist-collection-catalog" */
+            `./vue/components/Playlists/PlaylistCollectionCatalog.vue`
+        )
+    ))
+
 app.directive('click-outside', {
     mounted(el, binding, vnode) {
         setTimeout(() => {

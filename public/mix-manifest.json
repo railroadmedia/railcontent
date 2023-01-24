@@ -1,10 +1,10 @@
 {
-    "/platform/js/app.js": "/platform/js/app.js?id=942f9963eacbe59b02144cee7307b073",
+    "/platform/js/app.js": "/platform/js/app.js?id=4bddd604b89b868c0b68a6ab5678cda9",
     "/platform/js/profile.js": "/platform/js/profile.js?id=c7e869f012d1252699ff65de1e5e0547",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=24098ec7990ff98a565fd1e4693746ed",
     "/platform/js/books.js": "/platform/js/books.js?id=d4fa837307a14d7ee0ce9065b5e5e8e0",
-    "/platform/js/manifest.js": "/platform/js/manifest.js?id=cc1b098fc5b9cefcd1e0cb03ed60ffab",
-    "/platform/js/platform-header.js": "/platform/js/platform-header.js?id=5bf2d973a430b620bf3a3f1eb08f6e29",
+    "/platform/js/manifest.js": "/platform/js/manifest.js?id=013b6c05fa9cd2d133740a1ea6c85d0d",
+    "/platform/js/platform-header.js": "/platform/js/platform-header.js?id=fc130e4e79ad3ba175a424ad70e6d641",
     "/platform/js/song.js": "/platform/js/song.js?id=03c4fad275d6834abc7e103d822fcc00",
     "/platform/js/song-request.js": "/platform/js/song-request.js?id=f9543f936080d1925940e54bcab73ddb",
     "/platform/js/piano-backing-tracks.js": "/platform/js/piano-backing-tracks.js?id=7fbf8dfd123a4027cfa05515f7665d82",
@@ -25,11 +25,12 @@
     "/platform/js/image-cropper-component.js": "/platform/js/image-cropper-component.js?id=d8e4ffb070f05d53478bd161da77aaef",
     "/platform/js/comments-component.js": "/platform/js/comments-component.js?id=462ad24ce5379399a0f2911c3908b0e9",
     "/platform/js/email-form-component.js": "/platform/js/email-form-component.js?id=cfa09b0b222991cacf388f79469aaec9",
-    "/platform/js/playlist-header.js": "/platform/js/playlist-header.js?id=b2f0630962b31127b2eca46cb7716c49",
+    "/platform/js/playlist-header.js": "/platform/js/playlist-header.js?id=a3d9887d8f8cc9986423bc12451dc3ce",
     "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=a19c4008bbad6ab6a42e8f607e9d9570",
     "/marketing/css/vuesora.css": "/marketing/css/vuesora.css?id=3b83ad5374c6153b9a8bcb59a2f6b02f",
-    "/platform/css/app.css": "/platform/css/app.css?id=11bf6d27cb10dbab2e90f0dd553b88d0",
+    "/platform/css/app.css": "/platform/css/app.css?id=90e4f332a4554dc80f2ef7e8045b471d",
     "/platform/js/vendor~onboarding.js": "/platform/js/vendor~onboarding.js?id=56868ea369faf90d0978a204535ee2e6",
     "/marketing/css/app.css": "/marketing/css/app.css?id=e70258e5a4aa0222fa0a4b6893c3482e",
-    "/platform/js/vendor.js": "/platform/js/vendor.js?id=05dd83ebb4f3d065d57fc2d6da2069b0"
+    "/platform/js/vendor.js": "/platform/js/vendor.js?id=05dd83ebb4f3d065d57fc2d6da2069b0",
+    "/platform/js/playlist-collection-catalog.js": "/platform/js/playlist-collection-catalog.js?id=aa5702ca7b7afe8955fb56bca07a52e2"
 }
