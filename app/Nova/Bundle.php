@@ -151,6 +151,7 @@ class Bundle extends Resource
 
                     return $value;
                 }),
+            Text::make('Spread Image', 'spread_img')->hideFromIndex()->hideFromDetail(),
             Markdown::make('Overview')
                 ->hideFromIndex(),
             Boolean::make('Visible On Shop Page')->default(false)->hideFromIndex()->hideFromDetail()->hideWhenCreating()->hideWhenUpdating(),

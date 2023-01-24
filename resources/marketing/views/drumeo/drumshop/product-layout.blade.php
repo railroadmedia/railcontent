@@ -9,14 +9,14 @@
 @section('layout-body')
     <div class="clearfix container mx-auto max-w-6xl">
         <div class="lg:flex">
-            @include('drumeo.drumshop._partials.slider',[
+            @include('_partials.components.shop.slider',[
                 "headerText" => $product->header_text,
                 "specialText" => $product->subheader_text,
                 "videoSrc" => $product->video_src,
                 "images" => $product->images,
             ])
 
-            @include('drumeo.drumshop._partials.sidebar',[
+            @include('_partials.components.shop.sidebar',[
                 "sku" => $product->sku,
                 "logo" => $product->page_logo,
                 "fullPrice" => $product->price,
@@ -35,7 +35,7 @@
         <div class="product-wrap lg:w-2/3 px-3 md:px-4">
             <div class="pack-details mx-auto mb-7 pb-5 sm:pb-9 lg:pb-11">
                 @if($product->productType->name === 'Lessons' && count($product->benefits) > 0)
-                    @include('musora.product.partials.benefits',[
+                    @include('_partials.components.shop.benefits',[
                         'benefits' => $product->benefits
                     ])
                 @endif
@@ -48,7 +48,7 @@
                 @endif
 
                 @if(!empty($product->overview))
-                    @include('musora.product.partials.overview',[
+                    @include('_partials.components.shop.overview',[
                         "overview" => $product->overview,
                     ])
                 @endif
@@ -61,22 +61,22 @@
                         <em style="opacity: 0.5;">All digital bonuses are added to your account instantly with your membership to {{ $brand }}, and they’re yours forever.</em>
                     </p>
 
-                    @include('musora.product.partials.bonuses')
+                    @include('_partials.components.shop.bonuses')
                 @else
-                    @include('musora.product.partials.specs',[
+                    @include('_partials.components.shop.specs',[
                         'specList'=> $product->specs,
-                        'featureList' => $product->features,
+                        'featureList' => $product->productType->name !== 'Lessons' ? $product->features : [],
                     ])
                 @endif
 
 
                 @if($product->productType->name === 'Lessons' && !empty($product->instructor_desc))
-                    @include('musora.product.partials.instructor',[
+                    @include('_partials.components.shop.instructor',[
                         "instructorPhoto" => $product->product_img,
                         "instructorBio" => $product->instructor_desc
                     ])
 
-                    @include('musora.product.partials.topics',[
+                    @include('_partials.components.shop.topics',[
                         "topicList" => $product->features
                     ])
                 @endif
