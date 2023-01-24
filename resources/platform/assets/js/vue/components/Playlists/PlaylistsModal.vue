@@ -33,8 +33,8 @@ const { modalType, imgSrc } = props.modalProps;
 
 const sortedOptions = [
     {
-        value: '',
-        label: ''
+        value: '1',
+        label: 'Test 1'
     },
 ];
 </script>
@@ -58,7 +58,7 @@ const sortedOptions = [
                             <button tw- v-if="(imgSrc && imgSrc.length)" class="tw-ml-[3px]"><XCircleIcon class="tw-text-[#7E9AB1] tw-w-[14px] tw-h-[14px]" /></button>
                         </div>
                     </div>
-                    <div class="tw-flex tw-flex-col tw-w-full">
+                    <div class="tw-flex tw-flex-col tw-w-full tw-dark">
                         <InputLabel
                             placeholder="Playlist Title"
                             inputOverride="tw-text-white tw-w-full tw-bg-[#002039]/90 tw-px-[14px] tw-box-border tw-border-[#445F74]"
@@ -66,6 +66,7 @@ const sortedOptions = [
                         />
                         <Dropdown
                             :sortedOptions="sortedOptions"
+                            placeholderLabel="Playlist Category"
                         />
                     </div>
                 </div>

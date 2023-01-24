@@ -29,11 +29,11 @@ const handleChange = (val) => {
 </script>
 <template>
     <select :id="dropdownId" @change="handleChange"
-        class="tw-pb-0 tw-text-[#00101D] dark:tw-text-[#9EC0DC] no-label tw-bg-white dark:tw-bg-transparent dark:tw-border-[1px] dark:tw-border-[#445F74] tw-px-[12px] lg:tw-px-[18px] xl:tw-px-[25px] tw-text-[14px] lg:tw-text-[16px]" :disabled="valueInterface" @keydown.prevent>
-        <option class="tw-text-[#00101D]" selected disabled :value="null">
+        class="tw-text-[#00101D] tw-border-[#D1D5DB] dark:tw-bg-[#00101D] dark:tw-border-[#445F74] dark:tw-text-white dark:placeholder:tw-text-[#9EC0DC] tw-h-[42px] tw-rounded-[63px] tw-py-[9px] tw-px-[13px] tw-text-[14px] focus:tw-border-none focus:tw-outline-none tw-text-white tw-w-full tw-bg-[#002039]/90 tw-px-[14px] tw-box-border tw-border-[#445F74]" :disabled="valueInterface" @keydown.prevent>
+        <option selected disabled :value="null">
             {{ placeholderLabel }}
         </option>
-        <option class="tw-text-[#00101D]" v-for="filter in sortedOptions" :key="filter.key" :value="selectedValue">
+        <option v-for="filter in sortedOptions" :key="filter.key" :value="selectedValue">
             {{ filter.key }}
         </option>
     </select>
