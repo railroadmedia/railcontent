@@ -30,52 +30,14 @@ Route::domain('{drumeoDomain}')->group(function () {
         }
     );
     Route::get('/getting-started-drums', [LeadGenController::class, 'gtsdAlt']);
-    Route::get('free-playalongs', [LeadGenController::class, 'freePlayalongs']);
-    Route::get('metal-playalongs', [LeadGenController::class, 'metalPlayalongs']);
-    Route::get('grooves-of-john-bonham', [LeadGenController::class, 'johnGrooves']);
-    Route::group(['prefix' => 'hand-technique'],
-        function () {
-            Route::get('/{prefix?}/{page?}', LeadGenController::class . '@handTechnique')
-                ->whereIn('prefix', [null, 'lessons'])
-                ->whereIn('page', [
-                    null, '1', '2', '3', '4', '5', '6'
-                ]);
-        }
-    );
-    Route::group(['prefix' => 'linear-drumming'],
-        function () {
-            Route::get('/{page?}', LeadGenController::class . '@linearDrumming')
-                ->whereIn('page', [
-                    null, 'lessons', '1-about', '2-dance-pop', '3-rock-tom', '4-gospel', '5-metal', 'next-level'
-                ]);
-        }
-    );
-    Route::group(['prefix' => 'michael-jackson-grooves'],
-        function () {
-            Route::get('/{prefix?}/{page?}', LeadGenController::class . '@jacksonGrooves')
-                ->whereIn('prefix', [null, 'course-index'])
-                ->whereIn('page', [
-                    null, '1-intro', '2-wannabestartin', '3-smoothcriminal', '4-billiejean', '5-humannature', '6-beatit', '7-threatened', '8-thriller', '9-workingdayandnight', '10-ontheroad'
-                ]);
-        }
-    );
-    Route::group(['prefix' => 'must-know-grooves'],
-        function () {
-            Route::get('/{prefix?}/{page?}', LeadGenController::class . '@mustKnowGrooves')
-                ->whereIn('prefix', [null, 'course-index'])
-                ->whereIn('page', [
-                    null, '1-intro', '2-shuffle', '3-lindybeat', '4-motown', '5-latin', '6-vacationrhythms', '7-secondline', '8-socalpunk', '9-mozambiquesongo'
-                ]);
-        }
-    );
-    Route::group(['prefix' => 'rock-drumming-masterclass'],
-        function () {
-            Route::get('/{page?}', LeadGenController::class . '@rockDrumming')
-                ->whereIn('page', [
-                    'most-underrated-drummer', 'most-important-rock-drum-tips', 'epic-drum-video', 'testimonials'
-                ]);
-        }
-    );
+    Route::get('/free-playalongs', [LeadGenController::class, 'freePlayalongs']);
+    Route::get('/metal-playalongs', [LeadGenController::class, 'metalPlayalongs']);
+    Route::get('/grooves-of-john-bonham', [LeadGenController::class, 'johnGrooves']);
+    Route::get('/hand-technique', [LeadGenController::class, 'handTechnique']);
+    Route::get('/linear-drumming', [LeadGenController::class, 'linearDrumming']);
+    Route::get('michael-jackson-grooves', [LeadGenController::class, 'jacksonGrooves']);
+    Route::get('must-know-grooves', [LeadGenController::class, 'mustKnowGrooves']);
+    Route::get('rock-drumming-masterclass/testimonials', [LeadGenController::class, 'rockDrumming']);
     Route::group(['prefix' => 'subdivision-challenge'],
         function () {
             Route::get('/{prefix?}/{page?}', LeadGenController::class . '@subdivision')
