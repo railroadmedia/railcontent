@@ -251,6 +251,7 @@ class FullTextSearchRepository extends RepositoryBase
                 ->restrictByPermissions()
                 ->restrictBrand()
                 ->restrictByTerm($term)
+                ->distinct()
                 ->order($orderByColumn, $orderByDirection)
                 ->directPaginate($page, $limit);
 
