@@ -186,30 +186,6 @@ class LeadGenController extends BaseController
         throw new NotFoundHttpException();
     }
 
-    public function toolboxGsotd(Request $request, $domain, $page = null)
-    {
-        switch ($page) {
-            case null:
-                return view('drumeo.lead-gen.ultimate-toolbox.getting-started.lesson-grid');
-            default:
-                return view('drumeo.lead-gen.ultimate-toolbox.getting-started.lessons.'.$page);
-        }
-
-        throw new NotFoundHttpException();
-    }
-
-    public function toolbox5pa(Request $request, $domain, $page = null)
-    {
-        switch ($page) {
-            case null:
-                return view('drumeo.lead-gen.ultimate-toolbox.5-play-alongs.lesson-grid');
-            default:
-                return view('drumeo.lead-gen.ultimate-toolbox.5-play-alongs.lessons.'.$page);
-        }
-
-        throw new NotFoundHttpException();
-    }
-
     public function toolboxBdbc(Request $request, $domain, $page = null)
     {
         switch ($page) {

@@ -46,15 +46,7 @@ Route::domain('{drumeoDomain}')->group(function () {
                 ->whereIn('page', [
                     null, 'catalogue'
                 ]);
-            Route::get('/gsotd/{page1?}', LeadGenController::class . '@toolboxGsotd')
-                ->whereIn('page1', [
-                    null, '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'
-                ]);
-            Route::get('/5pa/{page2?}', LeadGenController::class . '@toolbox5pa')
-                ->whereIn('page2', [
-                    null, '1', '2', '3', '4', '5'
-                ]);
-            Route::get('/bdbc/{page3?}', LeadGenController::class . '@toolbox5pa')
+            Route::get('/bdbc/{page3?}', LeadGenController::class . '@toolboxBdbc')
                 ->whereIn('page3', [
                     null, '1', '2', '3', '4', '5', '6', '7'
                 ]);
