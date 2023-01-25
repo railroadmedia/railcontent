@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5af8ca5856145d6e91779ca91b7d69e8",
+    "content-hash": "9f34a874a709716c3e9b921a41c5c25e",
     "packages": [
         {
             "name": "aporat/store-receipt-validator",
@@ -8433,12 +8433,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "b306013099cb8793f7cee2470a0245722f9fede8"
+                "reference": "e471569cdf0b41500caa4120bb8db91afcfa410e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/b306013099cb8793f7cee2470a0245722f9fede8",
-                "reference": "b306013099cb8793f7cee2470a0245722f9fede8",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/e471569cdf0b41500caa4120bb8db91afcfa410e",
+                "reference": "e471569cdf0b41500caa4120bb8db91afcfa410e",
                 "shasum": ""
             },
             "require": {
@@ -8494,7 +8494,7 @@
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
                 "source": "https://github.com/railroadmedia/railcontent/tree/v2.0-fix-content-list-bug-BR-458"
             },
-            "time": "2023-01-13T12:56:55+00:00"
+            "time": "2023-01-25T08:44:51+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -16653,6 +16653,12 @@
             "alias_normalized": "5.0.53.0"
         },
         {
+            "package": "railroad/musora-api",
+            "version": "dev-v2.0-carousel-CMS",
+            "alias": "v3.0.5",
+            "alias_normalized": "3.0.5.0"
+        },
+        {
             "package": "railroad/railanalytics",
             "version": "dev-v3.0-fixing-transaction-tracking",
             "alias": "v3.0.7",
@@ -16668,6 +16674,7 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "railroad/ecommerce": 20,
+        "railroad/musora-api": 20,
         "railroad/railanalytics": 20,
         "railroad/railcontent": 20
     },
