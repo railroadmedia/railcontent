@@ -132,6 +132,17 @@ class ContentPagesController extends BaseController
             $futureScheduledContentOnly
         );
 
+        foreach ($futureLessons['results'] as $futureLessonIndex => $futureLesson) {
+            if (Carbon::parse($futureLesson['published_on']) < Carbon::now()) {
+                unset($futureLessons['results'][$futureLessonIndex]);
+            }
+        }
+
+        if (user()->permission_level === 'administrator') {
+            ContentRepository::$availableContentStatues =
+                [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED, ContentService::STATUS_DRAFT];
+        }
+
         ContentRepository::$pullFutureContent = false;
 
         $sortOverride = $lessonType === 'chord-and-scale' ? 'slug' : null;
