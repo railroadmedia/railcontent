@@ -26,7 +26,7 @@
 @section('global-body')
     @include("drumeo.sales.partials._nav")
     <div class="shim w-full block h-11 sm:h-9" style="background-color:#010a2b;"></div>
-    <a href="/choose-your-trial" class="edge-pitch block text-center w-full whitespace-nowrap z-10 py-2 sm:py-1 fixed mx-auto bg-black text-white">
+    <a href="/choose-plan" class="edge-pitch block text-center w-full whitespace-nowrap z-10 py-2 sm:py-1 fixed mx-auto bg-black text-white">
         <div class="container mx-auto">
             <div class="text-center sm:text-left inline-block align-middle hover:opacity-90 transition-opacity duration-300">
                 <img class="align-middle w-auto mr-2 h-6 hidden sm:inline-block" src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png">
@@ -65,7 +65,7 @@
                 <h4 class="mt-5 lg:mt-6 mb-6 lg:mb-9 leading-normal px-3 md:text-xl lg:text-2xl">
                     Get {{ Prices::$drumeoPlayAlongs }}+ play-alongs & world-class drum lessons  <br class="hidden md:inline">
                     inside Drumeo. Click below to try a free trial.</h4>
-                <a class="join" href="/choose-your-trial">Free Trial &raquo;</a>
+                <a class="join" href="/choose-plan">Free Trial &raquo;</a>
             </div>
         </div>
     </section>

@@ -2,12 +2,15 @@
 
 namespace App\Console;
 
+use App\Console\Commands\AddTimeToUsersAccountsJan2023;
 use App\Console\Commands\AssignSongsPermissionsToAllUsers;
 use App\Console\Commands\AssignSongsPermissionsToContent;
 use App\Console\Commands\AssignSongsPermissionsToProducts;
+use App\Console\Commands\CreateSongs24Jan2022;
 use App\Console\Commands\CreateSongsDecember2022;
 use App\Console\Commands\FixSongsTemp;
 use App\Console\Commands\MigratePianoteSongTutorial;
+use App\Console\Commands\SoftDeleteOldGuitareoSongs;
 use App\Console\Commands\SoftDeleteOldSingeoSongs;
 use App\Console\Commands\PopulateNewRolesAndPermissionsTables;
 use App\Console\Commands\PopulateUserBrandLevel;
@@ -21,6 +24,7 @@ use App\Console\Commands\SeedLiveAndScheduledContent;
 use App\Console\Commands\SeedUserContentData;
 use App\Console\Commands\TestLessonsDescriptionUrls;
 use App\Console\Commands\VaporEnvManager;
+use App\Console\Commands\UpdateRoutines;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -51,6 +55,10 @@ class Kernel extends ConsoleKernel
         AssignSongsPermissionsToAllUsers::class,
         FixSongsTemp::class,
         SoftDeleteOldSingeoSongs::class,
+        SoftDeleteOldGuitareoSongs::class,
+        AddTimeToUsersAccountsJan2023::class,
+        UpdateRoutines::class,
+        CreateSongs24Jan2022::class,
     ];
 
     /**

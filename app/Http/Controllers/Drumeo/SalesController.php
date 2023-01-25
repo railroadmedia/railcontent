@@ -85,63 +85,70 @@ class SalesController extends BaseController
         $products = $this->productRepository->all();
         $products = array_combine(array_entity_column($products, 'getSku'), $products);
 
-        return view('drumeo.sales.subscription', ['products' => $products, 'brand' => 'drumeo']);
+        return view('drumeo.sales.subscription', ['products' => $products, 'theme' => 'drumeo']);
+    }
+    public function homeMonth()
+    {
+        $products = $this->productRepository->all();
+        $products = array_combine(array_entity_column($products, 'getSku'), $products);
+
+        return view('drumeo.sales.subscription', ['products' => $products, 'theme' => 'drumeo', 'month' => true]);
     }
     public function promo()
     {
         $products = $this->productRepository->all();
         $products = array_combine(array_entity_column($products, 'getSku'), $products);
 
-        return view('drumeo.sales.subscription', ['products' => $products, 'brand' => 'drumeo', 'promoVersion' => 'true']);
+        return view('drumeo.sales.subscription', ['products' => $products, 'theme' => 'drumeo', 'promoVersion' => 'true']);
     }
     public function choosePlan()
     {
         $products = $this->productRepository->all();
         $products = array_combine(array_entity_column($products, 'getSku'), $products);
 
-        return view('drumeo.sales.choose-plan', ['products' => $products, 'brand' => 'drumeo']);
+        return view('drumeo.sales.choose-plan', ['products' => $products, 'theme' => 'drumeo']);
+    }
+    public function choosePlanMonth()
+    {
+        $products = $this->productRepository->all();
+        $products = array_combine(array_entity_column($products, 'getSku'), $products);
+
+        return view('drumeo.sales.choose-plan', ['products' => $products, 'theme' => 'drumeo', 'month' => true]);
     }
     public function method()
     {
         $products = $this->productRepository->all();
         $products = array_combine(array_entity_column($products, 'getSku'), $products);
 
-        return view('drumeo.sales.features.method', ['products' => $products, 'brand' => 'drumeo', 'page' => 'method']);
+        return view('drumeo.sales.features.method', ['products' => $products, 'theme' => 'drumeo', 'page' => 'method']);
     }
     public function songs()
     {
         $products = $this->productRepository->all();
         $products = array_combine(array_entity_column($products, 'getSku'), $products);
 
-        return view('drumeo.sales.features.songs', ['products' => $products, 'brand' => 'drumeo', 'page' => 'songs']);
+        return view('drumeo.sales.features.songs', ['products' => $products, 'theme' => 'drumeo', 'page' => 'songs']);
     }
     public function coaches()
     {
         $products = $this->productRepository->all();
         $products = array_combine(array_entity_column($products, 'getSku'), $products);
 
-        return view('drumeo.sales.features.coaches', ['products' => $products, 'brand' => 'drumeo', 'page' => 'coaches']);
-    }
-    public function salesStudents()
-    {
-        $products = $this->productRepository->all();
-        $products = array_combine(array_entity_column($products, 'getSku'), $products);
-
-        return view('drumeo.sales.student-only', ['products' => $products]);
+        return view('drumeo.sales.features.coaches', ['products' => $products, 'theme' => 'drumeo', 'page' => 'coaches']);
     }
     public function salesUpgrade()
     {
         $products = $this->productRepository->all();
         $products = array_combine(array_entity_column($products, 'getSku'), $products);
 
-        return view('drumeo.sales.upgrade-offer', ['products' => $products]);
+        return view('drumeo.sales.pages.upgrade-offer', ['products' => $products]);
     }
     public function salesUpgradeLifetime()
     {
         $products = $this->productRepository->all();
         $products = array_combine(array_entity_column($products, 'getSku'), $products);
 
-        return view('drumeo.sales.lifetime', ['products' => $products]);
+        return view('drumeo.sales.pages.lifetime', ['products' => $products]);
     }
 
     public function Festival()
@@ -180,70 +187,14 @@ class SalesController extends BaseController
 
         return view('drumeo.products.30-day-drummer', ['products' => $products]);
     }
-
-    public function hitLikeAGirlSubmission(Request $request)
+    public function thirtyDayDrummerDeal()
     {
-        $code = false;
+        $products = $this->productRepository->all();
+        $products = array_combine(array_entity_column($products, 'getSku'), $products);
 
-        if (session()->has('claimed_hlag')) {
-            return redirect()
-                ->away('/power-pack#customize-anchor')
-                ->withErrors(['You cannot claim another code']);
-        }
-
-        $request->validate(
-            [
-                'email' => 'email',
-            ]
-        );
-
-        // todo: better way to prevent abuse?
-        session()->push('claimed_hlag', true);
-
-        // todo: orderEventListener::generateAccessCode method was changed to from private to pubilc for use here - refactor it
-        try{
-            $code = $this->orderEventListener->generateAccessCode(124); // 124 is id for "Drumeo Edge Membership - Monthly" (sku: DLM-1-month)
-        }catch(\Exception $e){
-            error_log($e);
-        }
-
-        if(!$code){
-            Mail::send(
-                'emails.general',
-                [
-                    'user' => ['email' => 'The Drumeo server'],
-                    'message' => 'An error occurred for a user tying to get a Hit-Like-A-Girl promo 1-month ' .
-                        'access code. Please look up info about the user to see if maybe they\'ve tried again ' .
-                        'successfully. If they haven\'t, please email them informing help on the way and then ' .
-                        'development asking for a code to send them. The user\'s email is: ' .
-                        $request->get('email') . ' (name: '  . $request->get('first_name')  . ' ' .
-                        $request->get('last_name') . ')'],
-                function (\Illuminate\Mail\Message $message) use ($request) {
-                    $message->from('system@drumeo.com', 'Drumeo');
-                    $message->to('support@drumeo.com')->subject('[Drumeo Edge] Your Free 30-Day Access Code');
-                }
-            );
-            return redirect()->away('/power-pack#customize-anchor')->with(['error' => true]);
-        }
-
-        Mail::send(
-            'emails.hit-like-a-girl-free-code-delivery',
-            [
-                'code' => $code,
-                'firstName' => $request->get('first_name'),
-                'lastName' => $request->get('last_name'),
-            ],
-            function (\Illuminate\Mail\Message $message) use ($request) {
-                $message->from('support@drumeo.com', 'Drumeo');
-                $message->to($request->get('email'))
-                    ->subject('[Drumeo Edge] Your Free 30-Day Access Code');
-            }
-        );
-
-        return redirect()
-            ->away('/power-pack#customize-anchor')
-            ->with(['success' => 'Your code has been sent to your email!']);
+        return view('drumeo.lead-gen.pages.30-day-drummer-deal', ['products' => $products]);
     }
+
 
 
     /**
@@ -262,11 +213,6 @@ class SalesController extends BaseController
         }
 
         return redirect()->away(url()->route('shopping-cart.to-cart.api') . "?products[30-day-drummer]=1");
-    }
-
-    public function beginner()
-    {
-        return view('drumeo.sales.pages.beginner');
     }
 
     public function impact()
@@ -324,171 +270,40 @@ class SalesController extends BaseController
         return view('drumeo.lead-gen.pages.awards');
     }
 
-    public function trial()
-    {
-        return view('drumeo.sales.trials.trial');
-    }
-
-    public function earthWorks()
-    {
-        return view('drumeo.sales.trials.earthworks');
-    }
-
-    public function coachesQuiz()
-    {
-        return view('drumeo.sales.trials.coaches-quiz');
-    }
-
-    public function thirtyDayTrial()
-    {
-        return view('drumeo.sales.trials.30-day-trial');
-    }
-
-    public function melodics()
-    {
-        return view('drumeo.sales.trials.melodics');
-    }
-
-    public function newDrummerTrial()
-    {
-        return view('drumeo.sales.trials.new-drummers-trial');
-    }
-
-    public function powerPack()
-    {
-        return view('drumeo.sales.trials.power-pack');
-    }
-
-    public function bestBookTrial()
-    {
-        return view('drumeo.sales.trials.bestbook-trial');
-    }
-
-    public function toolBoxTrial()
-    {
-        return view('drumeo.sales.trials.toolbox-trial');
-    }
-
-    public function vDrums()
-    {
-        return view('drumeo.sales.trials.vdrums');
-    }
 
     public function sonor()
     {
-        return view('drumeo.sales.trials.sonor');
+        return view('drumeo.sales.pages.sonor');
     }
 
-    public function coachTrial()
+    public function coachTrial(Request $request, $domain, $pageC = null)
     {
-        return view('drumeo.sales.trials.trial-selection.coach-trial');
-    }
+        return view('drumeo.sales.affiliate.coaches.'.$pageC, ['theme' => 'drumeo', 'month' => true]);
 
-    public function earthWorksTrial()
-    {
-        return view('drumeo.sales.trials.trial-selection.earthworks-trial');
+        throw new NotFoundHttpException();
     }
-
-    public function coachQuizTrial()
+    public function trialPages(Request $request, $domain, $pageT = null)
     {
-        return view('drumeo.sales.trials.trial-selection.coaches-quiz-trial');
-    }
+        return view('drumeo.sales.trials.'.$pageT, ['theme' => 'drumeo', 'month' => true]);
 
-    public function chooseTrialMonth()
-    {
-        return view('drumeo.sales.trials.trial-selection.choose-your-trial-month');
-    }
-
-    public function melodicTrial()
-    {
-        return view('drumeo.sales.trials.trial-selection.melodics-trial');
-    }
-
-    public function newDrummerTrialMonth()
-    {
-        return view('drumeo.sales.trials.trial-selection.new-drummers-trial-month');
-    }
-
-    public function affiliateTrial()
-    {
-        return view('drumeo.sales.trials.trial-selection.affiliate-trial');
-    }
-
-    public function aric()
-    {
-        return view('drumeo.sales.trials.coaches.aric');
-    }
-
-    public function domino()
-    {
-        return view('drumeo.sales.trials.coaches.domino');
-    }
-
-    public function dorothea()
-    {
-        return view('drumeo.sales.trials.coaches.dorothea');
-    }
-
-    public function jared()
-    {
-        return view('drumeo.sales.trials.coaches.jared');
-    }
-
-    public function john()
-    {
-        return view('drumeo.sales.trials.coaches.john');
-    }
-
-    public function kaz()
-    {
-        return view('drumeo.sales.trials.coaches.kaz');
-    }
-
-    public function larnell()
-    {
-        return view('drumeo.sales.trials.coaches.larnell');
-    }
-
-    public function matt()
-    {
-        return view('drumeo.sales.trials.coaches.matt');
-    }
-
-    public function sarah()
-    {
-        return view('drumeo.sales.trials.coaches.sarah');
-    }
-
-    public function schack()
-    {
-        return view('drumeo.sales.trials.coaches.schack');
-    }
-
-    public function sharon()
-    {
-        return view('drumeo.sales.trials.coaches.sharon');
-    }
-
-    public function todd()
-    {
-        return view('drumeo.sales.trials.coaches.todd');
+        throw new NotFoundHttpException();
     }
 
     public function estepario()
     {
-        return view('drumeo.sales.trials.affiliate.estepario');
+        return view('drumeo.sales.affiliate.estepario', ['theme' => 'drumeo', 'month' => true]);
     }
 
     public function a(Request $request, $domain, $page = null)
     {
-        return view('drumeo.sales.trials.affiliate.'.$page);
+        return view('drumeo.sales.affiliate.'.$page, ['theme' => 'drumeo', 'month' => true]);
 
         throw new NotFoundHttpException();
     }
 
     public function affiliates(Request $request, $domain, $page = null)
     {
-        return view('drumeo.sales.trials.affiliate.'.$page);
+        return view('drumeo.sales.affiliate.'.$page, ['theme' => 'drumeo', 'month' => true]);
 
         throw new NotFoundHttpException();
     }
@@ -505,11 +320,11 @@ class SalesController extends BaseController
 
     public function giftCard()
     {
-        return view('drumeo.drumshop.pages.gift-card', ['brand' => 'drumeo']);
+        return view('drumeo.drumshop.pages.gift-card', ['theme' => 'drumeo']);
     }
 
     public function drummingSystem()
     {
-        return view('drumeo.drumshop.pages.drumming-system', ['brand' => 'drumeo']);
+        return view('drumeo.drumshop.pages.drumming-system', ['theme' => 'drumeo']);
     }
 }

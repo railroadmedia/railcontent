@@ -28,6 +28,7 @@ use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\UserPlaylistsService;
 use Railroad\Railcontent\Support\Collection as RailcontentCollection;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use App\Models\Carousel;
 
 class HomePageController extends BaseController
 {
@@ -105,15 +106,19 @@ class HomePageController extends BaseController
         switch (brand()) {
             case 'drumeo':
                 $methodSlug = 'drumeo-method';
+                $carousel = Carousel::query()->where('brand_id', 1)->orderBy('display_order')->get();
                 break;
             case 'pianote':
                 $methodSlug = 'pianote-method';
+                $carousel = Carousel::query()->where('brand_id', 2)->orderBy('display_order')->get();
                 break;
             case 'guitareo':
                 $methodSlug = 'guitareo-method';
+                $carousel = Carousel::query()->where('brand_id', 3)->orderBy('display_order')->get();
                 break;
             case 'singeo':
                 $methodSlug = 'singeo-method';
+                $carousel = Carousel::query()->where('brand_id', 4)->orderBy('display_order')->get();
                 break;
             default:
                 throw new NotFoundHttpException();
@@ -304,6 +309,7 @@ class HomePageController extends BaseController
             'hasExperience' => $hasExperience,
             'methodUrl' => url()->route('platform.content.jump-to-continue-content', $methodContent['id']),
             'completedLevelsUrl' => $methodContent['url'] ?? '',
+            'carousel' => $carousel,
         ]);
     }
 

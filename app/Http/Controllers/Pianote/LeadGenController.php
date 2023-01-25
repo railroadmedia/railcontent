@@ -49,6 +49,11 @@ class LeadGenController extends BaseController
         return view('pianote.lead-gen.minor-blues');
     }
 
+    public function pentatonicScale()
+    {
+        return view('pianote.lead-gen.pentatonic-scale');
+    }
+
     public function recitals()
     {
         return view('pianote.lead-gen.recitals');
@@ -77,6 +82,11 @@ class LeadGenController extends BaseController
     public function onemillion()
     {
         return view('pianote.lead-gen.one-million');
+    }
+
+    public function lifetimeMasterclass()
+    {
+        return view('pianote.lead-gen.lifetime-members-masterclass');
     }
 
     public function beginnerBootcamp(Request $request, $domain, $page = null)

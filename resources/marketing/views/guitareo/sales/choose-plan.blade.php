@@ -40,26 +40,39 @@
 
 
     <div id="customize-anchor" class="anchor anchor-slide"></div>
-    @include('musora.sales.components.card-selection-section', [
-        "plusLogo" => "https://guitareo.s3.amazonaws.com/sales/2023/guitareo-plus-logo-light.svg",
-        "logo" => "https://guitareo.s3.amazonaws.com/sales/guitareo-logo.png",
-        "songs" => "1000",
-        "firstPoint" => "Unlimited guitar lessons",
-        "thirdPoint" => "Direct access to real teachers.",
-        "fifthPoint" => "Lesson access for singing, piano, and drums.",
-        "plusAnnualLink" => "/ecommerce/add-to-cart?products[guitareo-annual-recurring-7-day-trial-membership]=1&redirect=/order&locked=true&promo-code=annual-trial",
-        "plusMonthlyLink" => "/ecommerce/add-to-cart?products[GUITAREO-7-DAY-TRIAL-ONE-TIME]=1&redirect=/order&locked=true",
-        "annualLink" => "/ecommerce/add-to-cart?products[guitareo-base-annual-recurring-7-day-trial-membership]=1&redirect=/order&locked=true&promo-code=annual-trial",
-        "monthlyLink" => "/ecommerce/add-to-cart?products[guitareo-base-monthly-recurring-7-day-trial-membership]=1&redirect=/order&locked=true",
-    ])
+    @if(empty($month))
+        @include('musora.sales.components.card-selection-section', [
+            "plusLogo" => "https://guitareo.s3.amazonaws.com/sales/2023/guitareo-plus-logo-light.svg",
+            "logo" => "https://guitareo.s3.amazonaws.com/sales/guitareo-logo.png",
+            "songs" => "1000",
+            "firstPoint" => "Unlimited guitar lessons",
+            "thirdPoint" => "Direct access to real teachers.",
+            "fifthPoint" => "Lesson access for singing, piano, and drums.",
+            "plusAnnualLink" => "/ecommerce/add-to-cart?products[guitareo-annual-recurring-7-day-trial-membership]=1&redirect=/order&locked=true&promo-code=annual-trial",
+            "plusMonthlyLink" => "/ecommerce/add-to-cart?products[GUITAREO-7-DAY-TRIAL-ONE-TIME]=1&redirect=/order&locked=true",
+            "annualLink" => "/ecommerce/add-to-cart?products[guitareo-base-annual-recurring-7-day-trial-membership]=1&redirect=/order&locked=true&promo-code=annual-trial",
+            "monthlyLink" => "/ecommerce/add-to-cart?products[guitareo-base-monthly-recurring-7-day-trial-membership]=1&redirect=/order&locked=true",
+        ])
+        @include('musora.sales.components.plans-different-section', [
+            "plusLogo" => "https://guitareo.s3.amazonaws.com/sales/2023/guitareo-plus-logo.svg",
+            "logo" => "https://musora-center.s3.amazonaws.com/logos/guitareo-logo.png",
+            "secondPoint" => "Artist courses and exclusive events with special guests.",
+            "thirdPoint" => "Go beyond guitar with lessons for singing, piano, and drums.",
+            "fifthPoint" => "1000+ songs transcribed w/ playback tools for all instruments.",
+        ])
+    @else
+        @include('musora.sales.components.card-selection-section', [
+            "plusLogo" => "https://guitareo.s3.amazonaws.com/sales/2023/guitareo-plus-logo-light.svg",
+            "logo" => "https://guitareo.s3.amazonaws.com/sales/guitareo-logo.png",
+            "songs" => "1000",
+            "firstPoint" => "Unlimited guitar lessons",
+            "thirdPoint" => "Direct access to real teachers.",
+            "fifthPoint" => "Lesson access for singing, piano, and drums.",
+            "plusAnnualLink" => "/ecommerce/add-to-cart?products[guitareo-annual-recurring-30-day-trial-membership]=1&redirect=/order&locked=true&promo-code=annual-trial",
+            "plusMonthlyLink" => "/ecommerce/add-to-cart?products[guitareo-monthly-recurring-30-day-trial-membership]=1&redirect=/order&locked=true",
+        ])
+    @endif
 
-    @include('musora.sales.components.plans-different-section', [
-        "plusLogo" => "https://guitareo.s3.amazonaws.com/sales/2023/guitareo-plus-logo.svg",
-        "logo" => "https://musora-center.s3.amazonaws.com/logos/guitareo-logo.png",
-        "secondPoint" => "Artist courses and exclusive events with special guests.",
-        "thirdPoint" => "Go beyond guitar with lessons for singing, piano, and drums.",
-        "fifthPoint" => "1000+ songs transcribed w/ playback tools for all instruments.",
-    ])
     @include('guitareo._partials.faq')
 
     @include("guitareo.sales.partials._footer")

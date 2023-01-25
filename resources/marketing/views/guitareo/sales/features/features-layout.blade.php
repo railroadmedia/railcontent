@@ -32,6 +32,8 @@
 
     @include('musora.sales.components.app-section', [
         'image' => 'https://guitareo.s3.amazonaws.com/sales/2023/devices.png',
+        'appleUrl' => 'https://apps.apple.com/us/app/musora/id1619053766?ppid=e92a296a-7aeb-40ec-85eb-aaf891c3e6c1',
+        'googleUrl' => 'https://play.google.com/store/apps/details?id=com.musoraapp&listing=guitareo_previews',
     ])
 
     @include('guitareo._partials.faq')

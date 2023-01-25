@@ -91,22 +91,11 @@
         </section>
     @endif
 
-    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
-        <div class="tw-flex tw-flex-col mt-3">
-            <div class="tw-flex tw-flex-row tw-flex-wrap tw-items-center">
-                <div class="tw-flex tw-flex-col tw-mb-3 tw-mr-auto">
-                    <h1 class="tw-text-[#00101D] dark:tw-text-white heading tw-capitalize tw-mr-2">
-                        All Songs
-                    </h1>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-[10px] dark:tw-text-white songs-catalogue-container">
+    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-[10px] dark:tw-text-white songs-catalogue-container tw-pt-[30px]">
         <transition appear name="fade">
             <content-catalogue dusk="content-catalogue" brand="{{ $brand }}" theme-color="{{ $brand }}"
                 user-id="{{ auth()->id() }}" :search-bar="true"
+                search-bar-title="All Songs"
                 subscription-calendar-id="{{ config('addevent.' . $brand)['uniquekeys']['brand-overview'] ?? null }}"
                 catalogue-name="Songs" :filterable-values="{{ json_encode($catalogueMeta['allowableFilters']) }}"
                 content-endpoint="{{ $endpointOverride ?? '/railcontent/content' }}" :use-theme-color="true"

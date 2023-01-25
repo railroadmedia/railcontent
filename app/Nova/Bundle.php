@@ -72,12 +72,12 @@ class Bundle extends Resource
                         $brand = 'Singeo';
                     }
 
-                    return '/'.$brand.'/bundles/'.$request->uuid.'-'.$request->file('meta_img')->getClientOriginalName();
+                    return '/'.$brand.'/Meta-images/'.$request->uuid.'-'.$request->file('meta_img')->getClientOriginalName();
                 })
                 ->preview(function($value){
                     if(empty($value)) return null;
 
-                    return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') || str_contains($value, 'vimeocdn') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
+                    return $value;
                 }),
             Text::make('Meta Image', 'meta_img')->hideFromIndex()->hideFromDetail(),
             Currency::make('Price')->required(),
@@ -105,12 +105,12 @@ class Bundle extends Resource
                         $brand = 'Singeo';
                     }
 
-                    return '/'.$brand.'/bundles/'.$request->uuid.'-'.$request->file('page_logo')->getClientOriginalName();
+                    return '/'.$brand.'/Page-logos/'.$request->uuid.'-'.$request->file('page_logo')->getClientOriginalName();
                 })
                 ->preview(function($value){
                     if(empty($value)) return null;
 
-                    return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') || str_contains($value, 'vimeocdn') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
+                    return $value;
                 }),
             Text::make('Page Logo', 'page_logo')->hideFromIndex()->hideFromDetail(),
             Text::make('Header Text', 'header_text')->hideFromIndex(),
@@ -144,13 +144,14 @@ class Bundle extends Resource
                         $brand = 'Singeo';
                     }
 
-                    return '/'.$brand.'/bundles/'.$request->uuid.'-'.$request->file('page_logo')->getClientOriginalName();
+                    return '/'.$brand.'/Spread-images/'.$request->uuid.'-'.$request->file('page_logo')->getClientOriginalName();
                 })
                 ->preview(function($value){
                     if(empty($value)) return null;
 
-                    return str_contains($value, 'amazonaws') || str_contains($value, 'cloudfront') || str_contains($value, 'vimeocdn') ? $value : 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$value;
+                    return $value;
                 }),
+            Text::make('Spread Image', 'spread_img')->hideFromIndex()->hideFromDetail(),
             Markdown::make('Overview')
                 ->hideFromIndex(),
             Boolean::make('Visible On Shop Page')->default(false)->hideFromIndex()->hideFromDetail()->hideWhenCreating()->hideWhenUpdating(),

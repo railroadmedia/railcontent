@@ -15,7 +15,7 @@
 @stop()
 
 @section('top')
-    @include('drumeo.drumshop._partials.slider', [
+    @include('_partials.components.shop.slider', [
         "headerText" => "The <strong>ultimate encyclopedia</strong> of video drum lessons",
         "instructorName" => "Mike Michalkow",
         "videoSrc" => "//player.vimeo.com/video/93153615",
@@ -23,7 +23,7 @@
         "packBanner" => "https://s3.amazonaws.com/drumeo-packs/Pack%20Images/Drumming%20System/spread.png"
     ])
 
-    @include('drumeo.drumshop._partials.sidebar', [
+    @include('_partials.components.shop.sidebar', [
         "sku" => "DSYS2-DIGI",
         "instructor" => "Mike Michalkow's",
         "logo" => "https://dpwjbsxqtam5n.cloudfront.net/pack-logos/drumming-system-2-black.png",

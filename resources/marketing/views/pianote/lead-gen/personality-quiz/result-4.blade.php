@@ -37,7 +37,6 @@
                 "formName" => 'Personality Quiz Scientist',
                 "formId" => "Pianote - Engagement - Trigger - Personality Quiz Scientist - Web Form",
                 'buttonText' => 'Show my results',
-                'redirect' => true,
                 'redirectURL' => '/personality-quiz/scientist',
                 'disclaimerColor' => '#D0E2E7'
             ])

@@ -13,7 +13,7 @@
     <script src="https://www.googleoptimize.com/optimize.js?id=GTM-WP9MPV8"></script>
 
     @include('_partials.layout._fonts')
-    @include('_partials.layout.favicons.'.$brand.'-favicons')
+    @include('_partials.layout.favicons.'.$theme.'-favicons')
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
 
     @yield('layout-styles')
@@ -58,10 +58,10 @@
 
 <script type="text/javascript">
     window.Beacon('init', '@php
-        if($brand === 'drumeo'){ echo '14d9d94c-d89d-42e7-93ad-15ff13964974'; }
-        elseif($brand === 'pianote'){ echo '8c3ddef4-7a0e-42df-8200-a650c24932ea'; }
-        elseif($brand === 'guitareo'){ echo '157f182f-3d4d-4cb7-8f8d-805f0b3e4fa4'; }
-        elseif($brand === 'guitareo'){ echo '82b3c165-0840-4f45-aaeb-4775857c4b91'; }
+        if($theme === 'drumeo'){ echo '14d9d94c-d89d-42e7-93ad-15ff13964974'; }
+        elseif($theme === 'pianote'){ echo '8c3ddef4-7a0e-42df-8200-a650c24932ea'; }
+        elseif($theme === 'guitareo'){ echo '157f182f-3d4d-4cb7-8f8d-805f0b3e4fa4'; }
+        elseif($theme === 'guitareo'){ echo '82b3c165-0840-4f45-aaeb-4775857c4b91'; }
     @endphp')
     Beacon('on', 'ready', () => {
         document.querySelector('.BeaconFabButtonFrame').style.bottom = "50px";

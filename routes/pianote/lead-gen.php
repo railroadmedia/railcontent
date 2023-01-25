@@ -16,12 +16,14 @@ Route::domain('{pianoteDomain}')
     Route::get('/weekly-email', [LeadGenController::class, 'weeklyemail']);
     Route::get('/weeklyemail', [LeadGenController::class, 'weeklyemail2']);
     Route::get('/minor-blues', [LeadGenController::class, 'minorBlues']);
+    Route::get('/pentatonic-scale', [LeadGenController::class, 'pentatonicScale']);
     Route::get('/recitals', [LeadGenController::class, 'recitals']);
     Route::get('/classical-cohort-1', [LeadGenController::class, 'classicalcohort1']);
     Route::get('/classical-cohort-2', [LeadGenController::class, 'classicalcohort2']);
     Route::get('/classical-cohort-3', [LeadGenController::class, 'classicalcohort3']);
     Route::get('/classical-cohort-4', [LeadGenController::class, 'classicalcohort4']);
     Route::get('/one-million', [LeadGenController::class, 'onemillion']);
+    Route::get('/lifetime-members-masterclass', [LeadGenController::class, 'lifetimeMasterclass']);
 
     Route::group(['prefix' => 'piano-complete-beginners-bootcamp'],
         function () {

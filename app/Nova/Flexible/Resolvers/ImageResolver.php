@@ -27,6 +27,7 @@ class ImageResolver implements ResolverInterface
 
             return $layout->duplicateAndHydrate($image->id, [
                 'path_file' => $image->path,
+                'path_text' => $image->path,
                 'id' => $image->id
             ],
             );
@@ -47,10 +48,8 @@ class ImageResolver implements ResolverInterface
 
         $class::saved(function ($model) use ($groups){
             $images = $groups->map(function($group, $index) use($model){
-
-
                 return [
-                    'path' => !empty($group->getAttributes()['path_file']) ? $group->getAttributes()['path_file'] : $group->getAttributes()['path_text'],
+                    'path' => !empty($group->getAttributes()['path_text']) ? $group->getAttributes()['path_text'] : $group->getAttributes()['path_file'],
                     'id' => isset($group->getAttributes()['id']) ? $group->getAttributes()['id'] : null,
                     'order_number' => $index
                 ];
@@ -73,23 +72,30 @@ class ImageResolver implements ResolverInterface
 
                     $dbImg->save();
 
-                    $updateIds[] = $image['id'];
+                    $updatedIds[] = $image['id'];
                 }
 
                 elseif(!empty($image['path'])) {
+                    if(!str_contains($image['path'], 'https')) $image['path'] = 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$image['path'];
+
                     $addImg = new Image();
                     $addImg->path = $image['path'];
                     $addImg->product_id = $model['id'];
                     $addImg->order_number = $image['order_number'];
                     $addImg->save();
 
-                    $updateIds[] = $addImg->id;
+                    $updatedIds[] = $addImg->id;
                 }
             }
 
             //delete items
-            if(isset($updateIds)){
-                $deleteImgs = Image::where('product_id', '=', $model['id'])->whereNotIn('id', $updateIds)->delete();
+            $imgs = Image::where('product_id', $model['id'])->whereNotIn('id', $updatedIds ?? []);
+            if(count($imgs->get()) > 0){
+                foreach($imgs->get() as $img){
+                    Storage::disk('nova_s3')->delete(str_replace('https://laravel-nova.s3.us-east-2.amazonaws.com/','',$img->path));
+                }
+
+                $imgs->delete();
             }
         });
     }
