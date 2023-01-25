@@ -186,18 +186,6 @@ class LeadGenController extends BaseController
         throw new NotFoundHttpException();
     }
 
-    public function toolboxBdbc(Request $request, $domain, $page = null)
-    {
-        switch ($page) {
-            case null:
-                return view('drumeo.lead-gen.ultimate-toolbox.bass-drum-bootcamp.lesson-grid');
-            default:
-                return view('drumeo.lead-gen.ultimate-toolbox.bass-drum-bootcamp.lessons.'.$page);
-        }
-
-        throw new NotFoundHttpException();
-    }
-
     public function toolboxFwtgf(Request $request, $domain, $page = null)
     {
         switch ($page) {
