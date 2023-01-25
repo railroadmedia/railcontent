@@ -91,7 +91,6 @@ const handleSelectedInterval = (interval) => {
                 });
             }
             setTimeout(() => {
-                emit('onCloseModal');
                 location.reload();
             }, 3000);
         })
