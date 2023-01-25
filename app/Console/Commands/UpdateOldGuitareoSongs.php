@@ -54,8 +54,7 @@ class UpdateOldGuitareoSongs extends Command
             $dbConn->table('railcontent_content')
                 ->whereIn('id', $rows->pluck('id'))
                 ->update([
-                    'status' => 'draft',
-                    'type' => 'course-part'
+                    'status' => 'draft'
                          ]);
             $contentService->fillCompiledViewContentDataColumnForContentIds(
                 $rows->pluck('id')
