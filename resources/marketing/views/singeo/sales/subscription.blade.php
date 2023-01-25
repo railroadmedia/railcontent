@@ -179,7 +179,7 @@
         'pointOne' => 'Improve Your Voice',
         'pointTwo' => 'Helpful Vocal Coaches',
         'pointThree' => 'Sing Popular Songs',
-        'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738',
+        'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Singeo+Membership/79348458',
         'students' => number_format(Prices::$students),
     ])
     @hasSection('promo-banner')
