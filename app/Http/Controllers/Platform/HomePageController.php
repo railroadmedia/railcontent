@@ -103,22 +103,34 @@ class HomePageController extends BaseController
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
         ContentLikesDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
 
+        function filterCarousel($q){
+            return $q->filter(function($item){
+               if((is_null($item['start_date']) && is_null($item['end_date'])) || ($item['start_date'] <= now() && is_null($item['end_date'])) || (is_null($item['start_date']) && $item['end_date'] >= now()) || ($item['start_date'] <= now() && $item['end_date'] >= now())){
+                   return true;
+               }
+            });
+        }
+
         switch (brand()) {
             case 'drumeo':
                 $methodSlug = 'drumeo-method';
                 $carousel = Carousel::query()->where([['brand_id', 1], ['visible', 1]])->orderBy('display_order')->get();
+                $carousel = filterCarousel($carousel);
                 break;
             case 'pianote':
                 $methodSlug = 'pianote-method';
                 $carousel = Carousel::query()->where([['brand_id', 2], ['visible', 1]])->orderBy('display_order')->get();
+                $carousel = filterCarousel($carousel);
                 break;
             case 'guitareo':
                 $methodSlug = 'guitareo-method';
                 $carousel = Carousel::query()->where([['brand_id', 3], ['visible', 1]])->orderBy('display_order')->get();
+                $carousel = filterCarousel($carousel);
                 break;
             case 'singeo':
                 $methodSlug = 'singeo-method';
                 $carousel = Carousel::query()->where([['brand_id', 4], ['visible', 1]])->orderBy('display_order')->get();
+                $carousel = filterCarousel($carousel);
                 break;
             default:
                 throw new NotFoundHttpException();
