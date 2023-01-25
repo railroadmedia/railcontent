@@ -8199,12 +8199,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "88967723b469a54b07e5401e4cd51c2836200f42"
+                "reference": "4504b70639cb05b983977619321d23f7e6d9c2ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/88967723b469a54b07e5401e4cd51c2836200f42",
-                "reference": "88967723b469a54b07e5401e4cd51c2836200f42",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/4504b70639cb05b983977619321d23f7e6d9c2ce",
+                "reference": "4504b70639cb05b983977619321d23f7e6d9c2ce",
                 "shasum": ""
             },
             "require": {
@@ -8236,7 +8236,7 @@
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
                 "source": "https://github.com/railroadmedia/musora-api/tree/v2.0-carousel-CMS"
             },
-            "time": "2023-01-25T11:55:26+00:00"
+            "time": "2023-01-25T12:36:54+00:00"
         },
         {
             "name": "railroad/permissions",
