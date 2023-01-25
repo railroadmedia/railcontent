@@ -89,7 +89,7 @@ class UserFactory extends Factory
             'created_at' => $this->faker->dateTime,
             'membership_expiration_date' => null,
             'is_lifetime_member' => rand(0, 1),
-            'singing_since_year' => rand(1950, 2022),
+            'singing_since_year' => strval(rand(1950, 2022)),
             'singing_gear_mic_brands' => $this->faker->words(3, true),
             'singing_gear_photo' => $this->faker->imageUrl,
             'is_pack_owner' => rand(0, 1),
@@ -98,7 +98,9 @@ class UserFactory extends Factory
             'pianote_onboarding_skip_setup' => 0,
             'drumeo_onboarding_skip_setup' => 0,
             'brand_total_xp' => null,
-            'brand_minutes_practiced' => null
+            'brand_minutes_practiced' => null,
+            'membership_level' => null,
+            'is_drumeo_lifetime_member' => 0,
         ];
     }
 
