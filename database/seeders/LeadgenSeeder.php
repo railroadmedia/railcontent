@@ -2079,16 +2079,177 @@ The second exercise is similar, but this time we’re playing longer groups of u
                 'title' => 'The Ultimate Drumming Toolbox - Bass Drum Bootcamp',
                 'meta_desc' => 'Discover powerful techniques that the worlds fastest drummers are using to achieve maximum speed, power, and control!',
                 'meta_img' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/tudt/og-image.jpg',
-                'slug' => '',
+                'slug' => 'ultimate-toolbox/bdbc',
                 'lessons' => [
                     [
-                        'slug' => '',
-                        'title' => '',
+                        'slug' => 'ultimate-toolbox/bdbc/1',
+                        'title' => 'The Slide Technique',
                         'desc' => '',
-                        'thumbnail' => '',
-                        'video_src' => '',
-                        'duration' => 1,
-                        'assets' => [],
+                        'thumbnail' => 'https://i.vimeocdn.com/video/468224350-8ddf62e2d85fa0184fd2f9fbbb3bc934a3e391fa18a5081d7273d93a922c6083-d_640',
+                        'video_src' => '//player.vimeo.com/video/89463440',
+                        'duration' => 60,
+                        'assets' => [
+                            [
+                                'title' => 'MP3',
+                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/ultimate-toolbox/bdbc/the-slide-technique.pdf',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'MP3s',
+                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/ultimate-toolbox/bdbc/the-slide-technique.zip',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'ultimate-toolbox/bdbc/2',
+                        'title' => 'The Heel-Toe Technique',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/466887795-041cbe3b0281e34f89d71e308ab681f62eacf14b61d16c63eedb7e544a282df0-d_640',
+                        'video_src' => '//player.vimeo.com/video/88432225',
+                        'duration' => 55,
+                        'assets' => [
+                            [
+                                'title' => 'MP3',
+                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/ultimate-toolbox/bdbc/the-heel-toe-technique.pdf',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'MP3s',
+                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/ultimate-toolbox/bdbc/the-heel-toe-technique.zip',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'ultimate-toolbox/bdbc/3',
+                        'title' => 'The Swivel Technique',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/466686932-1de2b64a078a0c807f3423041290adb5bbed3b89f5dde67ef3a94b9080afbe21-d_640',
+                        'video_src' => '//player.vimeo.com/video/88288483',
+                        'duration' => 48,
+                        'assets' => [
+                            [
+                                'title' => 'MP3',
+                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/ultimate-toolbox/bdbc/the-swivel-technique.pdf',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'MP3s',
+                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/ultimate-toolbox/bdbc/the-swivel-technique.zip',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'ultimate-toolbox/bdbc/4',
+                        'title' => 'The Constant-Release Technique',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/513296207-2dbe056a4adb4245aaa999da6f7b169fad09f5fc8364e1d5d6b659822c54245e-d_640',
+                        'video_src' => '//player.vimeo.com/video/123788412',
+                        'duration' => 52,
+                        'assets' => [
+                            [
+                                'title' => 'MP3',
+                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/ultimate-toolbox/bdbc/the-constant-release-technique.pdf',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'MP3s',
+                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/ultimate-toolbox/bdbc/the-constant-release-technique.zip',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'ultimate-toolbox/bdbc/5',
+                        'title' => 'The Flat Foot Technique',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/468377892-aa6914b6db45909c1b9d7376ee57730c611cb0667e3d1b716bfb7d1be4eea510-d_640',
+                        'video_src' => '//player.vimeo.com/video/89575436',
+                        'duration' => 58,
+                        'assets' => [
+                            [
+                                'title' => 'MP3',
+                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/ultimate-toolbox/bdbc/the-flat-foot-technique.pdf',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'MP3s',
+                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/ultimate-toolbox/bdbc/the-flat-foot-technique.zip',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'ultimate-toolbox/bdbc/6',
+                        'title' => 'Single Bass Drum Bootcamp',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/460642069-7ec02f90f4f1aac27bfac4c189f22b6f7b677ae8a368e23477102b8016dc6526-d_640',
+                        'video_src' => '//player.vimeo.com/video/83974109',
+                        'duration' => 60,
+                        'assets' => [
+                            [
+                                'title' => 'MP3',
+                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/ultimate-toolbox/bdbc/single-bass-drum-bootcamp.pdf',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'MP3s',
+                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/ultimate-toolbox/bdbc/single-bass-drum-bootcamp.zip',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => '80 BPM Play-Along',
+                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/ultimate-toolbox/bdbc/single-bass-drum-bootcamp-pa-80bpm.mp3',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => '120 BPM Play-Along',
+                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/ultimate-toolbox/bdbc/single-bass-drum-bootcamp-pa-120bpm.mp3',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => '160 BPM Play-Along',
+                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/ultimate-toolbox/bdbc/single-bass-drum-bootcamp-pa-160bpm.mp3',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'ultimate-toolbox/bdbc/7',
+                        'title' => 'Double Bass Drum Bootcamp',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/466608062-1fc2a1569c4a22326ecb0bc22d19b6848a0450f1b48a339e8f46dbc891eaf7e0-d_640',
+                        'video_src' => '//player.vimeo.com/video/88231176',
+                        'duration' => 65,
+                        'assets' => [
+                            [
+                                'title' => 'MP3',
+                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/ultimate-toolbox/bdbc/double-bass-drum-bootcamp.pdf',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'MP3s',
+                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/ultimate-toolbox/bdbc/double-bass-drum-bootcamp.zip',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => '80 BPM Play-Along',
+                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/ultimate-toolbox/bdbc/double-bass-drum-bootcamp-pa-80bpm.mp3',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => '120 BPM Play-Along',
+                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/ultimate-toolbox/bdbc/double-bass-drum-bootcamp-pa-120bpm.mp3',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => '160 BPM Play-Along',
+                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/ultimate-toolbox/bdbc/double-bass-drum-bootcamp-pa-160bpm.mp3',
+                                'soundslice' => ''
+                            ],
+                        ],
                     ],
                 ],
             ],
