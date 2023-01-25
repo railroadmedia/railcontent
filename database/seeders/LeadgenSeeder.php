@@ -1805,9 +1805,296 @@ The second exercise is similar, but this time we’re playing longer groups of u
                     ],
                 ],
             ],
+            [
+                'brand_id' => 1,
+                'title' => 'The Ultimate Drumming Toolbox - Getting Started On The Drums',
+                'meta_desc' => 'In this free video course, you’ll get the detailed video training you need to set up your drum kit, learn your first drum beats and fills, and play your very first song!',
+                'meta_img' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/og-image.jpg',
+                'slug' => 'ultimate-toolbox/gsotd',
+                'lessons' => [
+                    [
+                        'slug' => 'ultimate-toolbox/gsotd/1',
+                        'title' => 'Setting Up Your Drums',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/481788468-e2ab307642602c8f591214d3f50c15a8f791268676105605927c5f5bd932b7ec-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/100332067',
+                        'duration' => 20,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'ultimate-toolbox/gsotd/2',
+                        'title' => 'Tuning Your Drums',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/469168227-d41168d949f436a688503c73880282804b41bce62adbc5b3ef641eab341ee202-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/90129042',
+                        'duration' => 40,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'ultimate-toolbox/gsotd/3',
+                        'title' => 'Holding Your Drumsticks',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/469051158-bcdcf0b70b3c56a5e418d027490b82f58ad935e92f87d6f1f76f204643783623-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/90056794',
+                        'duration' => 6,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'ultimate-toolbox/gsotd/4',
+                        'title' => 'Reading Drum Notation',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/469050062-930904bdcfd1f34a6b5d2a0264cfe3a81b7deac917bcf6b785e5dfe66460532a-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/90056795',
+                        'duration' => 5,
+                        'assets' => [
+                            [
+                                'title' => 'Reading Drum Notation',
+                                'src' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/getting-started/4-reading-drum-notation.jpg',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'ultimate-toolbox/gsotd/5',
+                        'title' => 'Basic Counting',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/470777467-95f29a8b2d8d254c258715092af748a95cc20e933239e63dd10280948d0c1807-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/91367890',
+                        'duration' => 9,
+                        'assets' => [
+                            [
+                                'title' => 'Basic Counting',
+                                'src' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/getting-started/5-basic-counting.jpg',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'ultimate-toolbox/gsotd/6',
+                        'title' => 'Your First Drum Beats',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/469052552-33deecae0570b09577411a972fa6f80334c930dd68b498e57f1509505b3b3f4b-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/90056797',
+                        'duration' => 8,
+                        'assets' => [
+                            [
+                                'title' => 'Playing Your First Beat',
+                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/6-playing-your-first-beat.zip',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'ultimate-toolbox/gsotd/7',
+                        'title' => 'Your First Drum Fills',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/469067095-0284183a7b530d903528db71ba826503cddfe27567da138ac67ff1e29f9f8e21-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/90068631',
+                        'duration' => 11,
+                        'assets' => [
+                            [
+                                'title' => 'Playing Your First Fill',
+                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/7-playing-your-first-fill.zip',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'ultimate-toolbox/gsotd/8',
+                        'title' => 'Using A Metronome',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/469065379-b1df7a24a11a3150f8ecb85f6db3f8fdd5d582223be3121de116b464590aab2e-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/90068632',
+                        'duration' => 7,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'ultimate-toolbox/gsotd/9',
+                        'title' => 'Playing Your First Song',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/469064749-45eff4eb5b9f1b79db2ad813ae966cd1139460c5fbf0610ae28a277a6a9b1416-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/90068633',
+                        'duration' => 5,
+                        'assets' => [
+                            [
+                                'title' => 'Playing Your First Song',
+                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/9-playing-your-first-song.zip',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'ultimate-toolbox/gsotd/10',
+                        'title' => 'Building Your Practice Routine',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/469066472-bc5480a2b6ba3652fc1c3c8ebc87096ddbabbe423cf22670c5ea3ab3f1933c27-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/90068634',
+                        'duration' => 8,
+                        'assets' => [
+                            [
+                                'title' => 'Developing a Practice Routine',
+                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/gsotd/10-developing-a-practice-routine.pdf',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            [
+                'brand_id' => 1,
+                'title' => 'The Ultimate Drumming Toolbox - 5 Play Alongs',
+                'meta_desc' => 'The ultimate toolbox to jump start your drumming! Sign up for these free resources to expand your drumming education today.',
+                'meta_img' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/tudt/og-image.jpg',
+                'slug' => 'ultimate-toolbox/5pa',
+                'lessons' => [
+                    [
+                        'slug' => 'ultimate-toolbox/5pa/1',
+                        'title' => 'Eighth Note Rock',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/460798010-b37892e3ec70357cd0f9902725cdba330edd4c533f3ad4b0d4df10d68d14de1a-d_640',
+                        'video_src' => '//player.vimeo.com/video/84085314',
+                        'duration' => 2,
+                        'assets' => [
+                            [
+                                'title' => 'PDF',
+                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/ultimate-toolbox/5pa/eighth-note-rock.pdf',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'MP3',
+                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/ultimate-toolbox/5pa/eighth-note-rock-no-click.mp3',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'MP3 with click',
+                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/ultimate-toolbox/5pa/eighth-note-rock-click.mp3',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'ultimate-toolbox/5pa/2',
+                        'title' => 'Happy Hour',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/460793418-c4cac00025167cd090a51782db07373164b0dd549ace26dd30e222d8f2a4fd7f-d_640',
+                        'video_src' => '//player.vimeo.com/video/84082165',
+                        'duration' => 4,
+                        'assets' => [
+                            [
+                                'title' => 'PDF',
+                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/ultimate-toolbox/5pa/happy-hour.pdf',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'MP3',
+                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/ultimate-toolbox/5pa/happy-hour-no-click.mp3',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'MP3 with click',
+                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/ultimate-toolbox/5pa/happy-hour-click.mp3',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'ultimate-toolbox/5pa/3',
+                        'title' => 'Bossa Nova',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/469179675-82ad83f9ecd4ae8b97645ea1c37c4034c30df5cda4bc4979350949f3d0a11258-d_640',
+                        'video_src' => '//player.vimeo.com/video/90152319',
+                        'duration' => 4,
+                        'assets' => [
+                            [
+                                'title' => 'PDF',
+                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/ultimate-toolbox/5pa/bossa-nova.pdf',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'MP3',
+                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/ultimate-toolbox/5pa/bossa-nova-no-click.mp3',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'MP3 with click',
+                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/ultimate-toolbox/5pa/bossa-nova-click.mp3',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'ultimate-toolbox/5pa/4',
+                        'title' => 'Country Train',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/460801706-c1b2d2bcbaa562b61c4920d519e77bb0377a18e5c63fa573b3067132304b968f-d_640',
+                        'video_src' => '//player.vimeo.com/video/84087719',
+                        'duration' => 3,
+                        'assets' => [
+                            [
+                                'title' => 'PDF',
+                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/ultimate-toolbox/5pa/country-train.pdf',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'MP3',
+                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/ultimate-toolbox/5pa/country-train-no-click.mp3',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'MP3 with click',
+                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/ultimate-toolbox/5pa/country-train-click.mp3',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'ultimate-toolbox/5pa/5',
+                        'title' => 'The Ancient Forest',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/460792882-40214b37f07201e61b443e0497c0daecb067f0fcaa825fe17ffc9dd23f0a020d-d_640',
+                        'video_src' => '//player.vimeo.com/video/84081827',
+                        'duration' => 4,
+                        'assets' => [
+                            [
+                                'title' => 'PDF',
+                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/ultimate-toolbox/5pa/the-ancient-forest.pdf',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'MP3',
+                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/ultimate-toolbox/5pa/the-ancient-forest-no-click.mp3',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'MP3 with click',
+                                'src' => 'https://dzryyo1we6bm3.cloudfront.net/ultimate-toolbox/5pa/the-ancient-forest-click.mp3',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            [
+                'brand_id' => 1,
+                'title' => 'The Ultimate Drumming Toolbox - Bass Drum Bootcamp',
+                'meta_desc' => 'Discover powerful techniques that the worlds fastest drummers are using to achieve maximum speed, power, and control!',
+                'meta_img' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/tudt/og-image.jpg',
+                'slug' => '',
+                'lessons' => [
+                    [
+                        'slug' => '',
+                        'title' => '',
+                        'desc' => '',
+                        'thumbnail' => '',
+                        'video_src' => '',
+                        'duration' => 1,
+                        'assets' => [],
+                    ],
+                ],
+            ],
 //            [
 //                'brand_id' => 1,
-//                'title' => '',
+//                'title' => 'The Ultimate Drumming Toolbox - ',
 //                'meta_desc' => '',
 //                'meta_img' => '',
 //                'slug' => '',
