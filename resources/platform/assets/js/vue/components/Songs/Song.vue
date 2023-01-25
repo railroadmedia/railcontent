@@ -11,9 +11,7 @@ import ContentLessonActionButtons from '../../vuesora/components/VideoResources/
 import SoundSlice from "../SoundSlice/SoundSlice.vue"
 import SoundSliceControls from "../SoundSlice/SoundSliceControls.vue";
 import ContentService from "../../vuesora/assets/js/services/content";
-import LoadingSpinner from '../LoadingSpinner/LoadingSpinner.vue';
 import { ArrowSmLeftIcon } from '@heroicons/vue/solid';
-//import SelectModal from '../Membership/SelectModal.vue';
 
 const props = defineProps({
     brand: {
@@ -97,10 +95,6 @@ const props = defineProps({
         type: Boolean,
     }
 });
-
-onMounted(() => {
-    console.log(props.hasInstrumentless)
-})
 
 const soundsliceObject = ref(props.assignments.length ? props.assignments[0] : {});
 const openSoundslice = ref(null);

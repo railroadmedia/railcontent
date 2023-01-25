@@ -2,6 +2,7 @@
 
 namespace App\Modules\Ecommerce\database\factories;
 
+use App\Enums\Interval;
 use App\Modules\Ecommerce\Models\Product;
 use App\Modules\Ecommerce\Models\UserProduct;
 use Carbon\Carbon;
@@ -25,4 +26,32 @@ class UserProductFactory extends Factory
         ];
     }
 
+    public static function createUserProduct(
+        User $user,
+        Product $product,
+        Carbon $startTime = null,
+        Carbon $expirationDate = null,
+        array $attributes = []
+    ) {
+        if (!$startTime) {
+            $startTime = Carbon::today();
+        }
+        if (!$expirationDate) {
+            switch ($product->digital_access_time_interval_type) {
+                case Interval::Year->value:
+                    $expirationDate = $startTime->addYear();
+                    break;
+                case Interval::Month->value:
+                    $expirationDate = $startTime->addMonth();
+                    break;
+            }
+        }
+        $attributes = array_merge($attributes, [
+            'product_id' => $product,
+            'user_id' => $user,
+            'created_at' => $startTime,
+            'expiration_date' => $expirationDate,
+        ]);
+        return UserProduct::factory()->create($attributes);
+    }
 }

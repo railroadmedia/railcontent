@@ -2,6 +2,7 @@
 
 namespace Modules\UserManagementSystem\Providers;
 
+use App\Modules\UserManagementSystem\Console\Commands\CreateUser;
 use App\Modules\UserManagementSystem\Policies\UserPolicy;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -28,6 +29,11 @@ class UserManagementSystemServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->commands(
+            [
+                CreateUser::class,
+            ]
+        );
         // publish config file
         $this->mergeConfigFrom(
             __DIR__ . '/../config/user_management_system.php',
