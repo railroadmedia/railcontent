@@ -897,7 +897,8 @@ class ContentService
         $pullFilterFields = true,
         $getFutureContentOnly = false,
         $pullPagination = true,
-        $getFollowedContentOnly = false
+        $getFollowedContentOnly = false,
+        $getFutureScheduledContentOnly = false
     ) {
         $results = null;
         if ($limit == 'null') {
@@ -939,7 +940,8 @@ class ContentService
                 $slugHierarchy,
                 $requiredParentIds,
                 $getFutureContentOnly,
-                $getFollowedContentOnly
+                $getFollowedContentOnly,
+                $getFutureScheduledContentOnly
             );
 
             foreach ($requiredFields as $requiredField) {
