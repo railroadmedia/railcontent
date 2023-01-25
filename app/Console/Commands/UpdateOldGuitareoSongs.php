@@ -42,28 +42,43 @@ class UpdateOldGuitareoSongs extends Command
         $query =
             $dbConn->table('railcontent_content')
                 ->select('railcontent_content.id', 'railcontent_content.type')
-                ->join('railcontent_content_instructors','railcontent_content.id','=','railcontent_content_instructors.content_id')
+                ->join(
+                    'railcontent_content_instructors',
+                    'railcontent_content.id',
+                    '=',
+                    'railcontent_content_instructors.content_id'
+                )
                 ->where('brand', 'guitareo')
                 ->where('type', 'song')
-                ->where('railcontent_content.id','<',377661)
-                ->where('railcontent_content_instructors.instructor_id','=',191339)
-              //  ->where('status','=','deleted')
+                ->where('railcontent_content.id', '<', 377661)
+                ->where('railcontent_content_instructors.instructor_id', '=', 191339)
+                ->where('status', '=', 'deleted')
                 ->orderBy('railcontent_content.id', 'asc');
 
         $query->chunk(200, function (Collection $rows) use ($dbConn, $contentService) {
-            $dbConn->table('railcontent_content')
-                ->whereIn('id', $rows->pluck('id'))
-                ->update([
-                    'status' => 'draft'
-                         ]);
-            $contentService->fillCompiledViewContentDataColumnForContentIds(
+            $ids =
                 $rows->pluck('id')
-                    ->toArray()
+                    ->toArray();
+
+            $dbConn->table('railcontent_content')
+                ->whereIn('id', $ids)
+                ->update(['status' => 'draft']);
+            $contentService->fillCompiledViewContentDataColumnForContentIds(
+                $ids
             );
             $contentService->fillParentContentDataColumnForContentIds(
-                $rows->pluck('id')
-                    ->toArray()
+                $ids
             );
+            foreach ($ids as $id) {
+                $this->info('Song: https://staging.musora.com/admin#/content/guitareo/'.$id);
+                $hierarchies =
+                    $dbConn->table('railcontent_content_hierarchy')
+                        ->where('parent_id', '=', $id)
+                        ->get();
+                foreach ($hierarchies as $hierarchy) {
+                    $this->info('https://staging.musora.com/admin#/content/guitareo/'.$hierarchy->child_id);
+                }
+            }
         });
 
         $this->info("UpdateOldGuitareoSongs command has finished");
