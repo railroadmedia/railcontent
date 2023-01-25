@@ -1,5 +1,5 @@
 {
-    "/platform/js/app.js": "/platform/js/app.js?id=4bddd604b89b868c0b68a6ab5678cda9",
+    "/platform/js/app.js": "/platform/js/app.js?id=0a6d6397ff38b900fe73dc79c2787643",
     "/platform/js/profile.js": "/platform/js/profile.js?id=c7e869f012d1252699ff65de1e5e0547",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=24098ec7990ff98a565fd1e4693746ed",
     "/platform/js/books.js": "/platform/js/books.js?id=d4fa837307a14d7ee0ce9065b5e5e8e0",
@@ -25,12 +25,12 @@
     "/platform/js/image-cropper-component.js": "/platform/js/image-cropper-component.js?id=d8e4ffb070f05d53478bd161da77aaef",
     "/platform/js/comments-component.js": "/platform/js/comments-component.js?id=462ad24ce5379399a0f2911c3908b0e9",
     "/platform/js/email-form-component.js": "/platform/js/email-form-component.js?id=cfa09b0b222991cacf388f79469aaec9",
-    "/platform/js/playlist-header.js": "/platform/js/playlist-header.js?id=a3d9887d8f8cc9986423bc12451dc3ce",
+    "/platform/js/playlist-header.js": "/platform/js/playlist-header.js?id=b3758a1fcf8352e76f49479c439d6e7d",
+    "/platform/js/playlist-collection-catalog.js": "/platform/js/playlist-collection-catalog.js?id=22b4d517f731e5815b0256c74e02092e",
     "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=a19c4008bbad6ab6a42e8f607e9d9570",
     "/marketing/css/vuesora.css": "/marketing/css/vuesora.css?id=3b83ad5374c6153b9a8bcb59a2f6b02f",
-    "/platform/css/app.css": "/platform/css/app.css?id=90e4f332a4554dc80f2ef7e8045b471d",
+    "/platform/css/app.css": "/platform/css/app.css?id=a559aacdc19158f2aecc160752700174",
     "/platform/js/vendor~onboarding.js": "/platform/js/vendor~onboarding.js?id=56868ea369faf90d0978a204535ee2e6",
     "/marketing/css/app.css": "/marketing/css/app.css?id=e70258e5a4aa0222fa0a4b6893c3482e",
-    "/platform/js/vendor.js": "/platform/js/vendor.js?id=05dd83ebb4f3d065d57fc2d6da2069b0",
-    "/platform/js/playlist-collection-catalog.js": "/platform/js/playlist-collection-catalog.js?id=aa5702ca7b7afe8955fb56bca07a52e2"
+    "/platform/js/vendor.js": "/platform/js/vendor.js?id=05dd83ebb4f3d065d57fc2d6da2069b0"
 }
