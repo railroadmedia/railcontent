@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-column my-6">
+    <div class="flex flex-column my-4 sm:my-6">
         <div v-if="!isSignedIn">
 
             <div v-if="!requiresAccountInfo">

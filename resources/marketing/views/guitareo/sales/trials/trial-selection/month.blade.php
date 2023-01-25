@@ -1,1 +1,0 @@
-@extends('guitareo.sales.trials.trial-selection.trial-selection-layout')
