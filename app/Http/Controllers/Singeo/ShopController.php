@@ -10,15 +10,15 @@ class ShopController extends BaseController
 {
     public function shop()
     {
-        $items = Product::whereHas('brand', fn($query) => $query->where('name', 'singeo'))->where('visible', '=', 1)->where('product_type_id', '!=', 6)->orderBy('display_order')->get();
+        $items = Product::whereHas('brand', fn($query) => $query->where('name', 'singeo'))->where([['visible', 1], ['product_type_id', '!=', 6], ['is_seasonal', 0]])->orderBy('display_order')->get();
 
-        return view('singeo.shop.shop-test-layout', [ 'items' => $items, 'brand' => 'singeo' ]);
+        return view('singeo.shop.shop', [ 'items' => $items, 'theme' => 'singeo' ]);
     }
 
     public function product($root, $slug)
     {
         $product = Product::where('slug', 'Singeo-'.$slug)->firstOrFail();
 
-        return view('singeo.shop.product-test-layout', [ 'product' => $product, 'brand' => 'singeo' ]);
+        return view('singeo.shop.product-layout', [ 'product' => $product, 'theme' => 'singeo' ]);
     }
 }

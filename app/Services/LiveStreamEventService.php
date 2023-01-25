@@ -208,13 +208,6 @@ class LiveStreamEventService
         }
 
         try {
-            $cacheStore = cache()->store(config('cache.default'))->getStore();
-
-            if (method_exists($cacheStore, 'setPrefix')) {
-                $oldPrefix = $cacheStore->getPrefix();
-                $cacheStore->setPrefix(config('cache.prefix'));
-            }
-
             if (cache()->has($brand .'_next_youtube_live_embed_id')) {
                 return cache()->get($brand .'_next_youtube_live_embed_id');
             }
@@ -296,10 +289,6 @@ class LiveStreamEventService
                     $broadcastToRender->id ?? null,
                     2
                 );
-            }
-
-            if (method_exists($cacheStore, 'setPrefix')) {
-                $cacheStore->setPrefix($oldPrefix);
             }
 
             return $broadcastToRender->id ?? null;

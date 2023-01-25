@@ -1,7 +1,7 @@
 @extends('_partials.layout.global-template')
 
 @section('meta')
-    <title>{{ $product->name }} || {{ ucfirst($brand) }}</title>
+    <title>{{ $product->name }} || {{ ucfirst($theme) }}</title>
     <meta property="og:description" content="{{ $product->meta_desc }}}">
     @if(!empty($product->meta_img))
         <meta property="og:image" content="@if(str_contains($product->meta_img, 'amazonaws') || str_contains($product->meta_img, 'cloudfront') || str_contains($product->meta_img, 'vimeocdn')) {{$product->meta_img}} @else https://laravel-nova.s3.us-east-2.amazonaws.com/{{ $product->meta_img  }}@endif">
@@ -18,16 +18,16 @@
     <style>
         .pack-details .slider-container .slider-nav .slick-slide.slick-current img {
             border-color: @php
-                            if($brand === 'drumeo'){
+                            if($theme === 'drumeo'){
                                 echo '#0b76db';
                             }
-                            elseif($brand === 'pianote'){
+                            elseif($theme === 'pianote'){
                                 echo '#f61a30';
                             }
-                            elseif($brand === 'guitareo'){
+                            elseif($theme === 'guitareo'){
                                 echo '#00c9ac';
                             }
-                            elseif($brand === 'singeo'){
+                            elseif($theme === 'singeo'){
                                 echo '#8300e9';
                             }
                           @endphp

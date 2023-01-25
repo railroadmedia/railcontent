@@ -8,7 +8,6 @@
         @if(!empty($form) && $form)
             <div class="email-form">
                 @include('pianote._partials._sign-up-form', [
-                    "redirect" => true,
                     "formId" => $formId,
                     "formName" => $formName,
                 ])

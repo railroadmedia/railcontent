@@ -10,15 +10,15 @@ class ShopController extends BaseController
 {
     public function shop()
     {
-        $items = Product::whereHas('brand', fn($query) => $query->where('name', 'guitareo'))->where('visible', '=', 1)->where('product_type_id', '!=', 6)->orderBy('display_order')->get();
+        $items = Product::whereHas('brand', fn($query) => $query->where('name', 'guitareo'))->where([['visible', 1], ['product_type_id', '!=', 6], ['is_seasonal', 0]])->orderBy('display_order')->get();
 
-        return view('guitareo.shop.shop-test-layout', [ 'items' => $items, 'brand' => 'guitareo' ]);
+        return view('guitareo.shop.shop', [ 'items' => $items, 'theme' => 'guitareo' ]);
     }
 
     public function product($root, $slug)
     {
         $product = Product::where('slug', 'Guitareo-'.$slug)->firstOrFail();
 
-        return view('guitareo.shop.product-test-layout', [ 'product' => $product, 'brand' => 'guitareo' ]);
+        return view('guitareo.shop.product-layout', [ 'product' => $product, 'theme' => 'guitareo' ]);
     }
 }

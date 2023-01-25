@@ -2,6 +2,7 @@
 
 namespace App\Nova\Flexible\Layouts;
 
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Whitecube\NovaFlexibleContent\Layouts\Layout;
 
@@ -29,7 +30,39 @@ class SpectLayout extends Layout
     public function fields()
     {
         return [
-            Text::make('Title', 'title'),
+            Select::make('title')->options([
+                'Audio' => 'Audio',
+                'Binding' => 'Binding',
+                'Books' => 'Books',
+                'Color' => 'Color',
+                'Diameter' => 'Diameter',
+                'Dimensions' => 'Dimensions',
+                'Fabric' => 'Fabric',
+                'Finish' => 'Finish',
+                'Format' => 'Format',
+                'Height' => 'Height',
+                'Hoodie' => 'Hoodie',
+                'Logo' => 'Logo',
+                'Materials' => 'Materials',
+                'Manufacturer' => 'Manufacturer',
+                'Membership' => 'Membership',
+                'Microwave' => 'Microwave',
+                'Online' => 'Online',
+                'Pages' => 'Pages',
+                'Page Material' => 'Page Material',
+                'Publisher' => 'Publisher',
+                'Redeem' => 'Redeem',
+                'Shirt' => 'Shirt',
+                'Size' => 'Size',
+                'Sizing' => 'Sizing',
+                'Style' => 'Style',
+                'Skill' => 'Skill',
+                'Sweatshirt' => 'Sweatshirt',
+                'Video' => 'Video',
+                'Volume' => 'Volume',
+                'Washing' => 'Washing',
+                'Weight' => 'Weight',
+            ])->displayUsingLabels()->sortable(),
             Text::make('Description', 'desc'),
             Text::make('Id', 'id')->hide()->hideFromDetail(),
         ];

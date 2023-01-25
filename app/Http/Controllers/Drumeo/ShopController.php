@@ -11,7 +11,7 @@ class ShopController extends BaseController
 {
     public function shop(Request $request)
     {
-        $products = Product::whereHas('brand', fn($query) => $query->where('name', 'drumeo'))->where('visible', '=', 1)->where('product_type_id', '!=', 6)->orderBy('display_order')->get();
+        $products = Product::whereHas('brand', fn($query) => $query->where('name', 'drumeo'))->where([['visible', 1], ['product_type_id', '!=', 6], ['is_seasonal', 0]])->orderBy('display_order')->get();
 
         $lessons = $products->filter(function($value, $key){
             return $value->productType->name === 'Lessons';
@@ -33,13 +33,13 @@ class ShopController extends BaseController
             return $value->productType->name === 'Hoodies';
         });
 
-        return view('drumeo.drumshop.shop-test-layout', [
+        return view('drumeo.drumshop.shop', [
             'lessons' => $lessons,
             'accessories' => $accessories,
             'hats' => $hats,
             'shirts' => $shirts,
             'hoodies' => $hoodies,
-            'brand' => 'drumeo',
+            'theme' => 'drumeo',
             'category' => $request->category
         ]);
     }
@@ -48,12 +48,12 @@ class ShopController extends BaseController
     {
         $product = Product::where('slug', 'Drumeo-'.$slug)->firstOrFail();
 
-        return view('drumeo.drumshop.product-test-layout', [ 'product' => $product, 'brand' => 'drumeo' ]);
+        return view('drumeo.drumshop.product-layout', [ 'product' => $product, 'theme' => 'drumeo' ]);
     }
 
     public function products(Request $request, $domain, $page = null)
     {
-        return view('drumeo.products.'.$page, [ 'brand' => 'drumeo' ]);
+        return view('drumeo.products.'.$page);
 
         throw new NotFoundHttpException();
     }

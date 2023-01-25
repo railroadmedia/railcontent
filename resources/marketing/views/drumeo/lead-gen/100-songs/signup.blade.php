@@ -27,7 +27,7 @@
     @include("drumeo.sales.partials._nav")
 
     <div class="shim w-full block h-11 sm:h-9" style="background-color:#010a2b;"></div>
-    <a href="/choose-your-trial" class="edge-pitch block text-center w-full whitespace-nowrap z-20 py-2 sm:py-1 fixed mx-auto bg-black text-white">
+    <a href="/choose-plan" class="edge-pitch block text-center w-full whitespace-nowrap z-20 py-2 sm:py-1 fixed mx-auto bg-black text-white">
         <div class="container mx-auto">
             <div class="text-center sm:text-left inline-block align-middle hover:opacity-90 transition-opacity duration-300">
                 <h3 class="inline-block align-middle mr-2 leading-none font-bebas text-coaches">100 SONGS</h3>
@@ -227,7 +227,7 @@
         });
     </script>
     <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-    <script src="{{ asset('/marketing/js/drumeo/pre-form-submit-facebook-lead.js') }}"></script>
+    <script src="{{ asset('/marketing/js/pre-form-submit-facebook-lead.js') }}"></script>
     <script src="{{ asset('/marketing/js/drumeo/infusionsoft-tracking.js') }}"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>

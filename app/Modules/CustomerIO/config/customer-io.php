@@ -380,6 +380,16 @@ return [
                     'pianote',
                 ],
             ],
+            'Pentatonic Scale' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_pentatonic-scale',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
             'Riffs And Fills' => [
                 'custom_attributes' => [
                 ],

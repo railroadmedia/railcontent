@@ -8,10 +8,34 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class SalesController extends BaseController
 {
-
-    public function chooseyourtrialmonth()
+    public function home()
     {
-        return view('guitareo.sales.trials.trial-selection.month');
+        return view('guitareo.sales.subscription', ['theme' => 'guitareo']);
+    }
+
+    public function homeMonth()
+    {
+        return view('guitareo.sales.subscription', ['theme' => 'guitareo', 'month' => true]);
+    }
+
+    public function promo()
+    {
+        return view('guitareo.sales.subscription', ['theme' => 'guitareo', 'promoVersion' => 'true']);
+    }
+
+    public function choosePlan()
+    {
+        return view('guitareo.sales.choose-plan', ['theme' => 'guitareo']);
+    }
+
+    public function choosePlanMonth()
+    {
+        return view('guitareo.sales.choose-plan', ['theme' => 'guitareo', 'month' => true]);
+    }
+
+    public function asobergirlsguide()
+    {
+        return view('guitareo.sales.affiliates.asobergirlsguide', ['theme' => 'guitareo', 'month' => true]);
     }
 
     public function cookie()
@@ -34,30 +58,6 @@ class SalesController extends BaseController
         return view('guitareo.shop.pages.lifetime-bundle');
     }
 
-    public function survivalkitinstructions()
-    {
-        return view('guitareo.shop.pages.survival-kit-tutorial');
-    }
-
-    public function daddariostringsession()
-    {
-        return view('guitareo.sales.trials.daddario-string-session');
-    }
-
-    public function daddariostringsessionga()
-    {
-        return view('guitareo.sales.trials.daddario-string-session');
-    }
-
-    public function asobergirlsguide()
-    {
-        return view('guitareo.sales.trials.affiliates.asobergirlsguide');
-    }
-
-    public function affiliatetrial()
-    {
-        return view('guitareo.sales.trials.trial-selection.affiliates');
-    }
 
     public function welcome()
     {
@@ -79,37 +79,9 @@ class SalesController extends BaseController
         return view('guitareo.shop.ayla-recommends');
     }
 
-    public function home()
+    public function survivalkitinstructions()
     {
-        return view('guitareo.sales.subscription', ['brand' => 'guitareo']);
-    }
-    public function promo()
-    {
-        return view('guitareo.sales.subscription', ['brand' => 'guitareo', 'promoVersion' => 'true']);
-    }
-    public function choosePlan()
-    {
-        return view('guitareo.sales.choose-plan', ['brand' => 'guitareo']);
-    }
-
-    public function membership()
-    {
-        return view('guitareo.sales.standard');
-    }
-
-    public function membershipStudents()
-    {
-        return view('guitareo.sales.student-only');
-    }
-
-    public function trial()
-    {
-        return view('guitareo.sales.trials.trial');
-    }
-
-    public function trial30()
-    {
-        return view('guitareo.sales.trials.30-trial');
+        return view('guitareo.shop.pages.survival-kit-tutorial');
     }
 
     public function songs500()
@@ -163,23 +135,23 @@ class SalesController extends BaseController
 
     public function products(Request $request, $domain, $page = null)
     {
-        return view('guitareo.products.'.$page);
+        return view('guitareo.products.' . $page);
 
         throw new NotFoundHttpException();
     }
 
     public function songs()
     {
-        return view('guitareo.sales.features.songs', ['brand' => 'guitareo', 'page' => 'songs']);
+        return view('guitareo.sales.features.songs', ['theme' => 'guitareo', 'page' => 'songs']);
     }
 
     public function coaches()
     {
-        return view('guitareo.sales.features.coaches', ['brand' => 'guitareo', 'page' => 'coaches']);
+        return view('guitareo.sales.features.coaches', ['theme' => 'guitareo', 'page' => 'coaches']);
     }
 
     public function method()
     {
-        return view('guitareo.sales.features.method', ['brand' => 'guitareo', 'page' => 'method']);
+        return view('guitareo.sales.features.method', ['theme' => 'guitareo', 'page' => 'method']);
     }
 }
