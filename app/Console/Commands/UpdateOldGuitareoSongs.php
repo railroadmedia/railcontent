@@ -43,15 +43,16 @@ class UpdateOldGuitareoSongs extends Command
             $dbConn->table('railcontent_content')
                 ->select('railcontent_content.id', 'railcontent_content.type')
                 ->join(
-                    'railcontent_content_instructors',
+                    'railcontent_content_fields',
                     'railcontent_content.id',
                     '=',
-                    'railcontent_content_instructors.content_id'
+                    'railcontent_content_fields.content_id'
                 )
                 ->where('brand', 'guitareo')
-                ->where('type', 'song')
+                ->where('railcontent_content.type', 'song')
                 ->where('railcontent_content.id', '<', 377661)
-                ->where('railcontent_content_instructors.instructor_id', '=', 191339)
+                ->where('railcontent_content_fields.value', '=', 191339)
+                ->where('railcontent_content_fields.key', '=', 'instructor')
                 ->where('status', '=', 'deleted')
                 ->orderBy('railcontent_content.id', 'asc');
 
