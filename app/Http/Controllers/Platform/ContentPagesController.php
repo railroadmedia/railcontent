@@ -818,7 +818,8 @@ class ContentPagesController extends BaseController
                 $sort == 'sort' ? $contentToRenderAsLesson['sort'] : $contentToRenderAsLesson['published_on'],
                 1,
                 $sort,
-                'desc'
+                'desc',
+                $contentToRenderAsLesson['id']
             );
 
             // Revert to previous state
