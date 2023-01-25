@@ -25,8 +25,17 @@ const handleClose = () => {
     emit('onClosePlaylistsModal');
 };
 
-const handleInputChange = (val) => {
+const handleTitleChange = (val) => {
     title.value = val;
+};
+
+const handleCategoryChange = (e) => {
+    category.value = e.target.value;
+};
+
+const handleDescriptionChange = (e) => {
+    console.log(e.target.value);
+    description.value = e.target.value;
 };
 
 const { modalType, imgSrc } = props.modalProps;
@@ -40,7 +49,7 @@ const sortedOptions = [
 </script>
 
 <template>
-    <InfoModal classOverride="tw-bg-[#081825] tw-max-w-[654px]" key="create-playlist-modal-instance" modalId="create-playlist-modal"
+    <InfoModal classOverride="tw-bg-[#081825] tw-max-w-[654px] tw-border-[1px] tw-border-[#445F74]" key="create-playlist-modal-instance" modalId="create-playlist-modal"
         @onClose="handleClose" :selfContained="true">
         <div class="tw-px-[64px] tw-pt-[12px]">
             <div class="tw-flex tw-flex-col tw-justify-center tw-text-white" v-if="modalType === 'create'">
@@ -61,13 +70,17 @@ const sortedOptions = [
                     <div class="tw-flex tw-flex-col tw-w-full tw-dark">
                         <InputLabel
                             placeholder="Playlist Title"
-                            inputOverride="tw-text-white tw-w-full tw-bg-[#002039]/90 tw-px-[14px] tw-box-border tw-border-[#445F74]"
-                            @onChange="handleInputChange"
+                            :remove-default-input-styles="true"
+                            inputOverride="tw-mb-[20px] tw-text-white placeholder:tw-text-white tw-w-full tw-bg-[#002039]/90 tw-px-[14px] tw-box-border tw-border-[#445F74] tw-h-[42px] tw-rounded-[63px] tw-py-[9px] tw-px-[13px] tw-text-[14px] focus:tw-border-none focus:tw-outline-none"
+                            @onChange="handleTitleChange"
                         />
                         <Dropdown
                             :sortedOptions="sortedOptions"
                             placeholderLabel="Playlist Category"
+                            @onChange="handleCategoryChange"
+                            :selected-value="category"
                         />
+                        <textarea @change="handleDescriptionChange" id="playlist-description" name="playlistDescription" placeholder="Playlist Description" class="tw-rounded-[6px] placeholder:tw-text-white tw-text-white tw-bg-[#002039]/90 tw-mt-[20px] tw-box-border tw-border-[#445F74]"></textarea>
                     </div>
                 </div>
             </div>
