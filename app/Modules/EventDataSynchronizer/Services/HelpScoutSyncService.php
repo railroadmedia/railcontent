@@ -2,6 +2,7 @@
 
 namespace App\Modules\EventDataSynchronizer\Services;
 
+use Railroad\Ecommerce\Entities\Product;
 use Railroad\Ecommerce\Entities\Subscription;
 use Railroad\Ecommerce\Repositories\OrderRepository;
 use Railroad\Ecommerce\Repositories\SubscriptionRepository;
@@ -123,18 +124,9 @@ class HelpScoutSyncService
             $eligibleUserProducts = [];
 
             foreach ($userProducts as $userProductIndex => $userProduct) {
-                if ($userProduct->getProduct()->getBrand() !== $brand) {
+                if (!$this->isEligibleMembershipProduct($brand, $userProduct->getProduct())) {
                     continue;
                 }
-
-                // make sure the subscriptions product is in this brands pre-configured products that represent a membership
-                if (!in_array(
-                    $userProduct->getProduct()->getSku(),
-                    config('event-data-synchronizer.' . $brand . '_membership_product_skus', [])
-                )) {
-                    continue;
-                }
-
                 $eligibleUserProducts[] = $userProduct;
             }
 
@@ -337,5 +329,12 @@ class HelpScoutSyncService
         }
 
         return $attributesKeys;
+    }
+
+    private function isEligibleMembershipProduct(string $brand, Product $product): bool
+    {
+        return !empty($product)
+            && $product->getBrand() == $brand
+            && $product->isMembershipProduct();
     }
 }
