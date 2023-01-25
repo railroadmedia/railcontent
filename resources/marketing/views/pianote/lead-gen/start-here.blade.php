@@ -261,36 +261,37 @@
                 margin:0 auto 3px
             }
         }
+        .beat-navigation.drumeo .nav-item img{height:29px}.beat-navigation.drumeo .nav-item{text-transform:uppercase;font-weight:600;padding:5px 5px 6px}@media(min-width:640px){.beat-navigation.drumeo .nav-item{font-size:12px;padding:8px 6px}}@media(min-width:768px){.beat-navigation.drumeo .nav-item{font-size:13px;padding:13px 12px}}@media(min-width:1024px){.beat-navigation.drumeo .nav-item{font-size:15px;padding:13px 22px}}
     </style>
 @endsection
 
 
 @section('page-body')
-    <div class="beat-navigation">
+    <div class="beat-navigation drumeo">
         <div class="row">
             <a href="/blog/" class="nav-item active">
                 <img alt="The Note" src="https://pianote.s3.amazonaws.com/blog/the-note-logo.svg">
             </a>
-            <a href="/start-here" class="nav-item">
-                <i class="fas fa-location-dot" aria-hidden="true"></i> START HERE</a>
-            <a href="https://www.pianote.com/blog/chording/" class="nav-item chording
+            <a href="/start-here" class="nav-item show-for-medium">
+                START HERE</a>
+            <a href="https://www.pianote.com/blog/chording/" class="nav-item show-for-medium
         ">
-                <i class="icon-chords"></i> CHORDING</a>
-            <a href="https://www.pianote.com/blog/song-tutorials/" class="nav-item song-tutorials
+                CHORDING</a>
+            <a href="https://www.pianote.com/blog/song-tutorials/" class="nav-item show-for-medium
         ">
-                <i class="fas fa-music" aria-hidden="true"></i> SONG TUTORIALS</a>
-            <a href="https://www.pianote.com/blog/technique/" class="nav-item technique
+                SONG TUTORIALS</a>
+            <a href="https://www.pianote.com/blog/theory/" class="nav-item show-for-medium
         ">
-                <i class="fas fa-hand-paper" aria-hidden="true"></i> TECHNIQUE</a>
-            <a href="https://www.pianote.com/blog/theory/" class="nav-item theory
+                THEORY</a>
+            <a href="https://www.pianote.com/blog/technique/" class="nav-item show-for-medium
         ">
-                <i class="fas fa-list-music" aria-hidden="true"></i> THEORY</a>
-            <a href="https://www.pianote.com/blog/vlog/" class="nav-item vlog
+                TECHNIQUE</a>
+            <a href="https://www.pianote.com/blog/musicianship/" class="nav-item show-for-medium
         ">
-                <i class="fas fa-webcam" aria-hidden="true"></i> VLOG</a>
-            <a href="https://www.pianote.com/blog/articles/" class="nav-item articles
+                MUSICIANSHIP</a>
+            <a href="https://www.pianote.com/blog/articles/" class="nav-item show-for-medium
         ">
-                <i class="fas fa-comment-alt-edit" aria-hidden="true"></i> ARTICLES</a>
+                ARTICLES</a>
         </div>
     </div>
     <header class="text-center sm:text-left relative bg-cover px-6 md:px-10 pt-72 pb-8 md:py-36 lg:py-40 bg-cover bg-right sm:bg-left lazyload" style="background-color:#00101D;" data-bg="https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/start-here/header2.jpg">
