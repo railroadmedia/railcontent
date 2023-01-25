@@ -4,7 +4,8 @@
     <div class="container max-w-6xl mx-auto">
         <h1><strong>Your first @if(empty($month)) week @else month @endif <br class="inline sm:hidden"> is free.</strong></h1>
         <h5 class="mt-2 md:mt-4 mb-5">Choose the plan that will continue on <br class="inline lg:hidden">
-            @if(empty($month)) {{ Carbon\Carbon::now()->addDays(7)->format('F jS') }} @else {{ Carbon\Carbon::now()->addDays(30)->format('F jS') }} @endif  (after your free trial). Cancel anytime.</h5>
+            @if(empty($month)) {{ Carbon\Carbon::now()->addDays(7)->format('F jS') }} @else {{ Carbon\Carbon::now()->addDays(30)->format('F jS') }} @endif
+            (after your free trial). Cancel anytime.</h5>
 
         @if(empty($month))
             <div class="flex items-end justify-center mb-5">
@@ -52,7 +53,7 @@
                         <h2 class="leading-none mb-6"><strong>Annual</strong></h2>
                         <h4 class="inline-block leading-none"><strong>${{ number_format(Prices::$plusSubscriptionAnnualFull / 12) }}/month</strong></h4>
                         <p class="text-sm mb-6"><em>Billed at ${{Prices::$plusSubscriptionAnnualFull}} per year.</em></p>
-                        <div class="join blue smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Free for 7 days</div>
+                        <div class="join blue smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Free for @if(!empty($month)) 1 Month @else 7 days @endif </div>
                     </div>
                     <div class="px-3 pt-5 md:pt-6 pb-9 md:pb-10 bg-[#e7edf4]">
                         <p class="text-sm mb-1"><strong>{{ $firstPoint }}</strong></p>
@@ -70,7 +71,7 @@
                         <h2 class="leading-none mb-6"><strong>Monthly</strong></h2>
                         <h4 class="inline-block leading-none"><strong>${{ Prices::$plusSubscriptionMonthly }}/month</strong></h4>
                         <p class="text-sm mb-6"><em>Pay as you go.</em></p>
-                        <div class="join blue smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Free for 7 days</div>
+                        <div class="join blue smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Free for @if(!empty($month)) 1 Month @else 7 days @endif </div>
                     </div>
                     <div class="px-3 pt-5 md:pt-6 pb-9 md:pb-10 bg-[#e7edf4]">
                         <p class="text-sm mb-1"><strong>{{ $firstPoint }}</strong></p>

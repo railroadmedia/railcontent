@@ -11,7 +11,6 @@
 
             <div class="form-wrap max-w-4xl mx-auto">
                 @include('pianote._partials._sign-up-form', [
-                    "redirect" => true,
                     "formId" => "Pianote - Engagement - Trigger - Riffs And Fills - Web Form",
                     "formName" => 'Riffs And Fills',
                 ])
@@ -186,7 +185,6 @@
             <h2>The shortcuts to <strong>sounding great</strong> on the piano.</h2>
             <div class="form-wrap max-w-4xl mx-auto">
                 @include('pianote._partials._sign-up-form', [
-                    "redirect" => true,
                     "formId" => "Pianote - Engagement - Trigger - Riffs And Fills - Web Form",
                     "formName" => 'Riffs And Fills',
                 ])

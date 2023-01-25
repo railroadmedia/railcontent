@@ -10,8 +10,11 @@ use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Markdown;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\FormData;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Illuminate\Support\Str;
+use Laravel\Nova\Fields\DateTime;
 
 class Carousel extends Resource
 {
@@ -89,7 +92,55 @@ class Carousel extends Resource
                     return $value;
                 }),
             Text::make('Image', 'img')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
+            DateTime::make(__('Start Date'), 'start_date')->hideFromIndex(),
+            DateTime::make(__('End Date'), 'end_date')->hideFromIndex(),
             Number::make('Display order', 'display_order'),
+            Boolean::make('visible')->hideFromIndex()->default(true),
+            Boolean::make('Featured product?', 'is_featured')->hideFromIndex()->default(false),
+            Text::make('Product ID', 'product_id')->hideFromIndex()
+                ->hide()
+                ->hideFromDetail(function (NovaRequest $request, $resource) {
+                    return !$this->is_featured;
+                })
+                ->dependsOn(
+                    ['is_featured'],
+                    function (Text $field, NovaRequest $request, FormData $formData) {
+                        if ($formData->is_featured) $field->show()->rules(['required']);
+                    }
+                ),
+            Text::make('Product URL', 'product_url')->hideFromIndex()
+                ->hide()
+                ->hideFromDetail(function (NovaRequest $request, $resource) {
+                    return !$this->is_featured;
+                })
+                ->dependsOn(
+                    ['is_featured'],
+                    function (Text $field, NovaRequest $request, FormData $formData) {
+                        if ($formData->is_featured) $field->show()->rules(['required']);
+                    }
+                ),
+            Text::make('Registration URL / Endpoint', 'endpoint')->hideFromIndex()
+                ->hide()
+                ->hideFromDetail(function (NovaRequest $request, $resource) {
+                    return !$this->is_featured;
+                })
+                ->dependsOn(
+                    ['is_featured'],
+                    function (Text $field, NovaRequest $request, FormData $formData) {
+                        if ($formData->is_featured) $field->show()->rules(['required']);
+                    }
+                ),
+            Text::make('Video Src', 'video_src')->hideFromIndex()
+                ->hide()
+                ->hideFromDetail(function (NovaRequest $request, $resource) {
+                    return !$this->is_featured;
+                })
+                ->dependsOn(
+                    ['is_featured'],
+                    function (Text $field, NovaRequest $request, FormData $formData) {
+                        if ($formData->is_featured) $field->show()->rules(['required']);
+                    }
+                ),
         ];
     }
 

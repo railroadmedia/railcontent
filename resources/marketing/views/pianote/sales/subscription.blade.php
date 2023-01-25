@@ -17,8 +17,8 @@
     @include('_partials.layout._fonts')
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}">
-    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/sales.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
 
@@ -99,7 +99,8 @@
     x-data ='{
         soundslice : false,
         trailer : false,
-        unbox : false
+        unbox : false,
+        rolandTrailer : false
     }'
 @endsection
 
@@ -110,6 +111,14 @@
             "scrollToJoin" => true,
             "hideMenu" => true,
         ])
+    @elseif(!empty($month))
+        @include("pianote._partials._nav", [
+            "subscriptionVersion" => true,
+            "fullSubscriptionVersion" => true,
+            "trialVersion" => true,
+            "joinUrl" => '/choose-your-trial-month',
+        ])
+
     @else
         @include("pianote._partials._nav", [
             "subscriptionVersion" => true,
@@ -177,6 +186,9 @@
         'students' => number_format(Prices::$students),
     ])
 
+    @hasSection('promo-banner')
+        @yield('promo-banner')
+    @endif
     @if(!empty($promoVersion))
         @include('musora.sales.components.promo-section', [
         'promoLogo' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs.svg',
@@ -554,8 +566,9 @@
     <div class="unstick-trigger block"></div>
     <div id="customize-anchor" class="anchor"></div>
     <div id="order" class="anchor"></div>
-    @if(!empty($promoVersion))
-
+    @hasSection('final')
+        @yield('final')
+    @elseif(!empty($promoVersion))
         @php
             $bonuses = [
                 [
@@ -643,6 +656,8 @@
 
     @include('musora.sales.components.app-section', [
         'image' => 'https://pianote.s3.amazonaws.com/sales/2023/devices.png',
+        'appleUrl' => 'https://apps.apple.com/us/app/musora/id1619053766?ppid=afddd5f6-fbc3-46c9-b6e4-6c9e6a6936af',
+        'googleUrl' => 'https://play.google.com/store/apps/details?id=com.musoraapp&listing=pianote_previews',
     ])
 
     @include('pianote._partials.faq')

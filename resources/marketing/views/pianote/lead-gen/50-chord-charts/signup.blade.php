@@ -42,7 +42,6 @@
                     <h6 class="my-3 md:my-4 lg:my-6 leading-tight">Enter your email to get 50 chord charts<br> delivered to your inbox for FREE.</h6>
                     <div class="mx-auto sm:mx-0 text-center" style="max-width:470px">
                         @include("pianote._partials._sign-up-form", [
-                            "redirect" => true,
                             "formName" => '50 Chord Charts',
                             "formId" => "Pianote - Engagement - Trigger - 50 Chord Charts - Web Form",
                             "buttonText" => "Send My Charts ",
@@ -395,7 +394,6 @@
                 <h6 class="my-5 lg:my-6 leading-normal">Enter your email to get 50 chord charts<br> delivered to your inbox for FREE.</h6>
                 <div class="mx-auto" style="max-width:700px">
                     @include("pianote._partials._sign-up-form", [
-                        "redirect" => true,
                         "formId" => "Pianote - Engagement - Trigger - 50 Chord Charts - Web Form",
                         "formName" => '50 Chord Charts',
                         "buttonText" => 'Send My Charts '
@@ -409,7 +407,6 @@
         <div class="py-5 px-3 md:px-9 md:py-9">
             <h4 class="leading-normal mb-4"><strong>Enter your email to get 50 chord charts<br class="hidden md:inline"> delivered to your inbox for FREE.</strong></h4>
             @include("pianote._partials._sign-up-form", [
-                "redirect" => true,
                 "formId" => "Pianote - Engagement - Trigger - 50 Chord Charts - Web Form",
                 "formName" => '50 Chord Charts',
                 "stacked" => true

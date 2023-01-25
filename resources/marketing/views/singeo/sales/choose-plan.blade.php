@@ -53,6 +53,13 @@
             "annualLink" => "/ecommerce/add-to-cart?products[singeo-base-annual-recurring-7-day-trial-membership]=1&redirect=/order&locked=true&promo-code=annual-trial",
             "monthlyLink" => "/ecommerce/add-to-cart?products[singeo-base-monthly-recurring-7-day-trial-membership]=1&redirect=/order&locked=true",
         ])
+        @include('musora.sales.components.plans-different-section', [
+            "plusLogo" => "https://singeo.s3.amazonaws.com/sales/2023/singeo-plus-logo.svg",
+            "logo" => "https://musora-center.s3.amazonaws.com/logos/singeo-logo-black.png",
+            "secondPoint" => "Artist courses and exclusive events with special guests.",
+            "thirdPoint" => "Go beyond singing with lessons for guitar, piano, and drums.",
+            "fifthPoint" => "1000+ songs transcribed w/ playback tools for all instruments.",
+        ])
     @else
         @include('musora.sales.components.card-selection-section', [
             "plusLogo" => "https://singeo.s3.amazonaws.com/sales/2023/singeo-plus-logo-light.svg",
@@ -66,15 +73,6 @@
         ])
     @endif
 
-    @if(empty($month))
-        @include('musora.sales.components.plans-different-section', [
-            "plusLogo" => "https://singeo.s3.amazonaws.com/sales/2023/singeo-plus-logo.svg",
-            "logo" => "https://musora-center.s3.amazonaws.com/logos/singeo-logo-black.png",
-            "secondPoint" => "Artist courses and exclusive events with special guests.",
-            "thirdPoint" => "Go beyond singing with lessons for guitar, piano, and drums.",
-            "fifthPoint" => "1000+ songs transcribed w/ playback tools for all instruments.",
-        ])
-    @endif
     @include('singeo._partials.faq')
 
     @include("singeo.sales.partials._footer")

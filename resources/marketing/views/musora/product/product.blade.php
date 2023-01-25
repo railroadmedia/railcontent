@@ -41,13 +41,13 @@
         <div class="product-wrap lg:w-2/3 px-3 md:px-4">
             <div class="pack-details mx-auto mb-7 pb-5 sm:pb-9 lg:pb-11">
                 @if($product->productType->name === 'Lessons')
-                    @include('musora.product.partials.benefits',[
+                    @include('_partials.components.shop.benefits',[
                         'benefits' => $product->benefits
                     ])
                 @endif
 
                 @if(!empty($product->overview))
-                    @include('musora.product.partials.overview',[
+                    @include('_partials.components.shop.overview',[
                         "overview" => $product->overview,
                     ])
                 @endif
@@ -60,9 +60,9 @@
                         <em style="opacity: 0.5;">All digital bonuses are added to your account instantly with your membership to {{ $theme }}, and they’re yours forever.</em>
                     </p>
 
-                    @include('musora.product.partials.bonuses')
+                    @include('_partials.components.shop.bonuses')
                 @else
-                   @include('musora.product.partials.specs',[
+                   @include('_partials.components.shop.specs',[
                        'specList'=> $product->specs,
                        'featureList' => $product->productType->name !== 'Bundles' && $product->productType->name !== 'Lessons' ? $product->features : [],
                    ])
@@ -70,12 +70,12 @@
 
 
                 @if($product->productType->name === 'Lessons')
-                    @include('musora.product.partials.instructor',[
+                    @include('_partials.components.shop.instructor',[
                         "instructorPhoto" => $product->product_img,
                         "instructorBio" => $product->instructor_desc
                     ])
 
-                    @include('musora.product.partials.topics',[
+                    @include('_partials.components.shop.topics',[
                         "topicList" => $product->features
                     ])
                 @endif

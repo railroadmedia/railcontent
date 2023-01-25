@@ -91,6 +91,7 @@ class Lesson extends Resource
             Currency::make('Price')->required(),
             Currency::make('Discounted Price', 'discounted_price')->help('If discounted price is the same as the price, no discount will show on the sales page.'),
             Boolean::make('Sold Out', 'sold_out')->default(false)->hideFromIndex(),
+            Boolean::make('Is Seasonal ?', 'is_seasonal')->default(false)->hideFromIndex(),
             Heading::make('Shop Card'),
             Text::make('Badge Text', 'badge_text')->hideFromIndex(),
             Image::make('Shop Card Thumbnail', 'thumbnail')
