@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9f34a874a709716c3e9b921a41c5c25e",
+    "content-hash": "e9fc5f0056a5f516870d056f540f2648",
     "packages": [
         {
             "name": "aporat/store-receipt-validator",
@@ -8429,16 +8429,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "dev-v2.0-fix-content-list-bug-BR-458",
+            "version": "dev-beta-testing-BR334-BR458",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "e471569cdf0b41500caa4120bb8db91afcfa410e"
+                "reference": "42e4b6f0dfdbacb949fdcf3a5384499f450b74d4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/e471569cdf0b41500caa4120bb8db91afcfa410e",
-                "reference": "e471569cdf0b41500caa4120bb8db91afcfa410e",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/42e4b6f0dfdbacb949fdcf3a5384499f450b74d4",
+                "reference": "42e4b6f0dfdbacb949fdcf3a5384499f450b74d4",
                 "shasum": ""
             },
             "require": {
@@ -8492,9 +8492,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/v2.0-fix-content-list-bug-BR-458"
+                "source": "https://github.com/railroadmedia/railcontent/tree/beta-testing-BR334-BR458"
             },
-            "time": "2023-01-25T08:44:51+00:00"
+            "time": "2023-01-25T09:52:47+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -16666,7 +16666,7 @@
         },
         {
             "package": "railroad/railcontent",
-            "version": "dev-v2.0-fix-content-list-bug-BR-458",
+            "version": "dev-beta-testing-BR334-BR458",
             "alias": "v2.0.62",
             "alias_normalized": "2.0.62.0"
         }

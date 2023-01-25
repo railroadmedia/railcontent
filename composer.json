@@ -34,7 +34,7 @@
         "railroad/points": "1.0.*",
         "railroad/railanalytics": "dev-v3.0-fixing-transaction-tracking as v3.0.7",
         "railroad/railchat": "2.0.*",
-        "railroad/railcontent": "dev-v2.0-fix-content-list-bug-BR-458 as v2.0.62",
+        "railroad/railcontent": "dev-beta-testing-BR334-BR458 as v2.0.62",
         "railroad/railforums": "2.0.*",
         "railroad/railnotifications": "3.0.*",
         "railroad/railtracker": "4.0.*",
