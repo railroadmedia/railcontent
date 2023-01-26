@@ -46,12 +46,8 @@ Route::domain('{drumeoDomain}')->group(function () {
                 ->whereIn('page', [
                     null, 'catalogue'
                 ]);
-            Route::get('/fwtgf/{page4?}', LeadGenController::class . '@toolboxFwtgf')
-                ->whereIn('page4', [
-                    null, '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19'
-                ]);
-            Route::get('/{page5?}', LeadGenController::class . '@toolboxRest')
-                ->whereIn('page5', [
+            Route::get('/{page1?}', LeadGenController::class . '@toolboxRest')
+                ->whereIn('page1', [
                     'mcsa', 'urfd', 'htls', 'dodt',
                 ]);
 
@@ -80,7 +76,6 @@ Route::domain('{drumeoDomain}')->group(function () {
     Route::get('/teach-a-beginner/lessons/', [LeadGenController::class, 'teachBeginner']);
     Route::get('/weekly-email/', [LeadGenController::class, 'weeklyEmail']);
     Route::get('/weeklyemail/', [LeadGenController::class, 'weeklyMail']);
-//    Route::get('/leadgen-lesson-test/{slug}', [LeadGenController::class, 'test']);
-    Route::get('/{leadgenSlug?}', LeadGenController::class.'@test2')
+    Route::get('/{leadgenSlug?}', LeadGenController::class.'@leadgen')
     ->where('leadgenSlug', '(.*)');
 });

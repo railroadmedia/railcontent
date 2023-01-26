@@ -186,18 +186,6 @@ class LeadGenController extends BaseController
         throw new NotFoundHttpException();
     }
 
-    public function toolboxFwtgf(Request $request, $domain, $page = null)
-    {
-        switch ($page) {
-            case null:
-                return view('drumeo.lead-gen.ultimate-toolbox.fastest-way-to-get-faster.lesson-grid');
-            default:
-                return view('drumeo.lead-gen.ultimate-toolbox.fastest-way-to-get-faster.lessons.'.$page);
-        }
-
-        throw new NotFoundHttpException();
-    }
-
     public function toolboxRest(Request $request, $domain, $page = null)
     {
         switch ($page) {
@@ -287,31 +275,9 @@ class LeadGenController extends BaseController
         return view('drumeo.lead-gen.blog-forms.weeklyemail');
     }
 
-    public function test($root, $slug)
+    public function leadgen(Request $request, $domain, $leadgenSlug = null)
     {
-        $currentLesson = LeadgenLesson::where('slug', $slug)->first();
-        $lessons = LeadgenLesson::where('leadgen_id', $currentLesson->leadgen_id)->get();
-        $currentLessonIndex = $lessons->search(function($item) use($slug){
-            return $item['slug'] === $slug;
-        });
-
-        $prevLesson = $currentLessonIndex === 0 ? null : $lessons[$currentLessonIndex - 1];
-        $nextLesson = $currentLessonIndex === count($lessons) - 1 ? null : $lessons[$currentLessonIndex + 1];
-
-        $leadgen = Leadgen::where('id', $currentLesson->leadgen_id)->first();
-
-        return view('_partials.layout.global-lead-gen-lesson-layout', [
-            'theme' => 'drumeo',
-            'leadgen' => $leadgen,
-            'prevLesson' => $prevLesson,
-            'currentLesson' => $currentLesson,
-            'nextLesson' => $nextLesson,
-        ]);
-    }
-
-    public function test2(Request $request, $domain, $leadgenSlug = null)
-    {
-        $currentLesson = LeadgenLesson::where('slug', $leadgenSlug)->first();
+        $currentLesson = LeadgenLesson::join('leadgens', 'leadgens.id', '=', 'leadgen_lessons.leadgen_id')->join('brands', 'leadgens.brand_id', '=', 'brands.id')->where('brands.name', 'Drumeo')->where('leadgen_lessons.slug', $leadgenSlug)->select('leadgen_lessons.*', 'brand_id')->first();
         if(!is_null($currentLesson)){
             if(!$currentLesson->one_off){
                 $lessons = LeadgenLesson::where([['leadgen_id', $currentLesson->leadgen_id], ['one_off', 0]])->get();
@@ -322,7 +288,7 @@ class LeadGenController extends BaseController
                 $nextLesson = $currentLessonIndex === count($lessons) ? null : $lessons[$currentLessonIndex];
             }
 
-            $leadgen = Leadgen::where('id', $currentLesson->leadgen_id)->first();
+            $leadgen = Leadgen::join('brands', 'brands.id', '=', 'leadgens.brand_id')->where('brands.name', 'Drumeo')->where('leadgens.id', $currentLesson->leadgen_id)->select('leadgens.*')->first();
 
             return view('_partials.layout.global-lead-gen-lesson-layout', [
                 'theme' => 'drumeo',
