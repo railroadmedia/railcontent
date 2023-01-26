@@ -23,17 +23,27 @@ export default {
     },
 
     //PIN Playlist 
-    pinPlaylist() {
+    pinPlaylist(id) {
 
     },
 
     //UNPIN Playlist
-    unpinPlaylist() {
+    unpinPlaylist(id) {
+
+    },
+
+    //COPY Playlist
+    copyPlaylist(id) {
+
+    },
+
+    //UPDATE Playlist
+    updatePlaylist(id) {
 
     },
 
     //DELETE Playlist
-    deletePlaylist() {
+    deletePlaylist(id) {
 
     }
 

@@ -76,6 +76,7 @@ class PlaylistDecorator extends ModeDecoratorBase
             $playlistAuthor = $keyedUsers[$playlist['user_id']];
 
             $playlists[$index]['user'] = [];
+            $playlists[$index]['user']['id'] = $playlistAuthor['id'];
             $playlists[$index]['user']['display_name'] = $playlistAuthor['display_name'];
             $playlists[$index]['user']['fields.profile_picture_image_url'] =
                 $playlistAuthor['profile_picture_url'];
