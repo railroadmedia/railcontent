@@ -1,6 +1,5 @@
 <script setup>
-import { ref } from 'vue';
-import MembershipSelectModal from './MembershipSelectModal.vue';
+import MembershipSelect from './MembershipSelect.vue';
 
 const props = defineProps({
     brand: {
@@ -27,6 +26,8 @@ const handleModalClose = () => {
 
 </script>
 <template>
-    <MembershipSelectModal @onCloseModal="handleModalClose" :upgradeCost="upgradeCost" :currentTier="currentTier"
-        :isLifetimeMember="isLifetimeMember" />
+    <div class="tw-text-center tw-text-white">
+        <MembershipSelect @onCloseModal="handleModalClose" :upgradeCost="upgradeCost" :currentTier="currentTier"
+            :isLifetimeMember="isLifetimeMember" />
+    </div>
 </template>

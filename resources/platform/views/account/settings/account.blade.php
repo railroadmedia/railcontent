@@ -366,7 +366,7 @@
                             @endif
                         </div>
                         {{-- Song Membership Banner --}}
-                        @if($showSongsUpgradeButton)
+                        @if(true)
                             <membership-update
                                 :current-tier="{{ json_encode($currentTier) }}"
                                 :upgrade-cost="{{ json_encode($upgradeCost) }}"

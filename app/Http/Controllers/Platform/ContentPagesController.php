@@ -91,7 +91,7 @@ class ContentPagesController extends BaseController
 
 
 
-        if ($contentTypeName == 'songs' && !user()->hasSongsAccess($brand)) {
+        if ($contentTypeName == 'songs') {
             return redirect()->route('platform.songs-upgrade');
         }
 
