@@ -21,6 +21,10 @@ class LeadgenLessonAssetLayout extends Layout
      */
     protected $title = 'Leadgen Lesson Asset';
 
+    protected $casts = [
+        'leadgen-lesson-assignment-layout' => LeadgenLessonAssignmentLayout::class
+    ];
+
     /**
      * Get the fields displayed by the layout.
      *
@@ -31,7 +35,7 @@ class LeadgenLessonAssetLayout extends Layout
         return [
             // Define the layout's fields.
             Text::make('title')->required(),
-            Text::make('Source', 'src')->required(),
+            Text::make('Source', 'src'),
             Text::make('Sound Slice', 'soundslice'),
         ];
     }
