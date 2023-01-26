@@ -281,13 +281,20 @@ class HomePageController extends BaseController
         $carousel = Carousel::query()
                         ->where('brand_id', $brandId)
                         ->where('visible', true)
+                        ->where(
+                            function($query) {
+                                return $query
+                                    ->whereNull('start_date')
+                                    ->orWhere('start_date', '<=', Carbon::now()->toDateTimeString());
+                            })
+                        ->where(
+                            function($query) {
+                                return $query
+                                    ->whereNull('end_date')
+                                    ->orWhere('end_date', '>', Carbon::now()->toDateTimeString());
+                            })
                         ->orderBy('display_order')
                         ->get();
-        $carousel = $carousel->filter(function($item) {
-            if ((is_null($item['start_date']) && is_null($item['end_date'])) || ($item['start_date'] <= now() && is_null($item['end_date'])) || (is_null($item['start_date']) && $item['end_date'] >= now()) || ($item['start_date'] <= now() && $item['end_date'] >= now())) {
-                return true;
-            }
-        });
 
         return view('home.index', [
             'brand' => $brand,
