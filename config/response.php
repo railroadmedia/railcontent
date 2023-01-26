@@ -1463,6 +1463,7 @@ return [
         'assignment' => [
             'id',
             'xp',
+            'type',
             'user_progress',
             'fields.title',
             'fields.soundslice_slug',
