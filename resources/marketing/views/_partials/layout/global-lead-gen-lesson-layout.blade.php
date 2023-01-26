@@ -76,8 +76,35 @@
         </div>
     </div>
 
+    @if(!empty($currentLesson->desc))
+        <div class="px-3 py-6 sm:py-10">
+            <div class="container mx-auto clearfix" style="max-width:920px">
+                <div class="text-left lesson-text">
+                    <p>
+                        <x-markdown>{!! nl2br($currentLesson->desc) !!}</x-markdown>
+                    </p>
+                </div>
+            </div>
+        </div>
+    @endif
+
+    @if(count($currentLesson->assignments) > 0)
+        <div class="px-3 pt-6 sm:pt-10">
+            <div class="container mx-auto clearfix" style="max-width:920px">
+                <div class="text-left lesson-text">
+                    <h4 class="mb-1 sm:mb-3"><strong>Assignments</strong></h4>
+                    @foreach($currentLesson->assignments as $assignment)
+                        @include('_partials.components.leadgen-assignment-resources', [
+                            "title" => $assignment->assignment,
+                        ])
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    @endif
+
     @php $bodyData = ''; @endphp
-    @if(count($currentLesson->assets) > 0 || count($leadgen->assets))
+    @if(count($currentLesson->assets) > 0)
         <div class="px-3 py-6 sm:py-10">
             <div class="container mx-auto clearfix" style="max-width:920px">
                 <div class="text-left lesson-text">
@@ -138,18 +165,6 @@
                     @hasSection ('all-course-resource')
                         @yield('all-course-resource')
                     @endif
-                </div>
-            </div>
-        </div>
-    @endif
-
-    @if(!empty($currentLesson->desc))
-        <div class="px-3 py-6 sm:py-10">
-            <div class="container mx-auto clearfix" style="max-width:920px">
-                <div class="text-left lesson-text">
-                    <p>
-                        <x-markdown>{!! nl2br($currentLesson->desc) !!}</x-markdown>
-                    </p>
                 </div>
             </div>
         </div>
