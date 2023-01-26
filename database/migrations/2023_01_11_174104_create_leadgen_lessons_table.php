@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('leadgen_lessons', function (Blueprint $table) {
             $table->id();
             $table->integer('leadgen_id');
-            $table->string('slug')->unique();
+            $table->string('slug');
             $table->string('title');
             $table->longText('desc')->nullable();
             $table->string('thumbnail')->nullable();
