@@ -59,7 +59,8 @@ class LeadgenLessonResolver implements ResolverInterface
                return [
                    'title' => $group->getAttributes()['title'],
                    'desc' => $group->getAttributes()['desc'],
-                   'thumbnail' => !empty($group->getAttributes()['thumbnail_text']) ? $group->getAttributes()['thumbnail_text'] : $group->getAttributes()['thumbnail_path'],
+                   'thumbnail_text' => $group->getAttributes()['thumbnail_text'] ?? null,
+                   'thumbnail_path' => $group->getAttributes()['thumbnail_path'] ?? null,
                    'video_src' => $group->getAttributes()['video_src'],
                    'slug' => $group->getAttributes()['slug'],
                    'display_order' => $index+1,
@@ -69,9 +70,15 @@ class LeadgenLessonResolver implements ResolverInterface
                 ];
             });
 
-            $total = count(LeadgenLesson::where('leadgen_id', $model['id'])->get());
-
             foreach($lessons as $key => $lesson){
+                $lesson['thumbnail'] = null;
+                if(!empty($lesson['thumbnail_text'])){
+                    $lesson['thumbnail'] = $lesson['thumbnail_text'];
+                } elseif(!empty($lesson['thumbnail_path'])){
+                    $lesson['thumbnail'] = $lesson['thumbnail_path'];
+                }
+
+
                 //insert
                 if(is_null($lesson['id'])){
                     if(!str_contains($lesson['thumbnail'], 'https')) $lesson['thumbnail'] = 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$lesson['thumbnail'];
