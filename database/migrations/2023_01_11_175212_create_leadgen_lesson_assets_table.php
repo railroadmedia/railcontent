@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('leadgen_id')->nullable();
             $table->integer('leadgen_lesson_id')->nullable();
             $table->string('title');
-            $table->string('src');
+            $table->string('src')->nullable();
             $table->string('soundslice')->nullable();
             $table->boolean('score')->default(false);
             $table->timestamps();
