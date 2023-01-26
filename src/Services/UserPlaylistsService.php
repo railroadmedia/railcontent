@@ -264,15 +264,7 @@ class UserPlaylistsService
                     ]
                 );
 
-        return $this->pinnedPlaylistsRepository->query()
-            ->where(
-                [
-                    'user_id' => auth()->id(),
-                    'playlist_id' => $playlistId,
-                    'brand' => $brand
-                ]
-            )
-            ->first();
+        return $this->pinnedPlaylistsRepository->getMyPinnedPlaylists();
     }
 
     /**
@@ -333,4 +325,37 @@ class UserPlaylistsService
         return $this->getUserPlaylistContents($userPlaylistId);
     }
 
+    /**
+     * @param $userPlaylistId
+     */
+    public function deletePlaylist($userPlaylistId)
+    {
+        //delete items from playlists
+        $this->userPlaylistContentRepository->query()
+            ->where(
+                [
+                    'user_playlist_id' => $userPlaylistId
+                ]
+            )
+            ->delete();
+
+        //delete playlists from pinned playlists
+        $this->pinnedPlaylistsRepository->query()
+            ->where(
+                [
+                    'playlist_id' => $userPlaylistId
+                ]
+            )
+            ->delete();
+
+        //delete playlist
+        return $this->userPlaylistsRepository->query()
+            ->where(
+                [
+                    'id' => $userPlaylistId,
+                    'user_id' => auth()->id(),
+                ]
+            )
+            ->delete();
+    }
 }

@@ -217,6 +217,7 @@ Route::group(
                 Route::get('/playlist-lessons', MyListJsonController::class . '@getPlaylistLessons')->name('playlist.items');
                 Route::put('/change-playlist-content', MyListJsonController::class . '@changePlaylistContent')->name('update.playlist.item');
                 Route::get('/lessons-and-assignments-count/{contentId}', \Railroad\Railcontent\Controllers\ContentJsonController::class . '@countLessonsAndAssignments')->name('content.assignments.count');
+                Route::delete('/playlist',MyListJsonController::class . '@deletePlaylist')->name('delete.playlist');
             }
         );
 

@@ -467,4 +467,18 @@ the pin icon on or off.',
 
         return $this->getPlaylistLessons($request);
     }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function deletePlaylist(Request $request)
+    {
+        $deleted =$this->userPlaylistsService->deletePlaylist($request->get('playlist_id'));
+
+        return reply()->json([[$deleted>0]], [
+            'code' => $deleted ? 200 : 500,
+            'transformer' => DataTransformer::class,
+        ]);
+    }
 }
