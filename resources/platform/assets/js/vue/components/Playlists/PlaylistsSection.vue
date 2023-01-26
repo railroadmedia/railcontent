@@ -59,10 +59,10 @@ const handleCreatePlaylist = () => {
                     v-if="formattedPlaylists.length > 0">
                     <!-- Loop through User Playlists -->
                     <li class="tw-w-full tw-flex tw-flex-wrap tw-overflow-hidden"
-                        v-for="({ url, id, title }) in formattedPlaylists" :key="id + '-playlist-li'">
+                        v-for="({ url, id, name }) in formattedPlaylists" :key="id + '-playlist-li'">
                         <a :href="url"
                             class="tw-flex tw-flex-wrap tw-px-[25px] tw-w-full tw-no-underline tw-text-inherit tw-py-[12px] dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]">
-                            <span class="tw-min-w-0 tw-truncate">{{ title }}</span>
+                            <span class="tw-min-w-0 tw-truncate">{{ name }}</span>
                         </a>
                     </li>
                     <li class="tw-flex tw-w-full tw-pt-[4px]" v-if="playlists.length > 5">
