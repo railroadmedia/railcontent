@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Leadgen;
 use App\Models\LeadgenLesson;
 use App\Models\LeadgenLessonAsset;
+use App\Models\LeadgenLessonAssignment;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -2253,9 +2254,337 @@ The second exercise is similar, but this time we’re playing longer groups of u
                     ],
                 ],
             ],
+            [
+                'brand_id' => 1,
+                'title' => 'The Ultimate Drumming Toolbox - Fastest Way To Get Faster',
+                'meta_desc' => 'The ultimate toolbox to jump start your drumming! Sign up for these free resources to expand your drumming education today.',
+                'meta_img' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/tudt/og-image.jpg',
+                'slug' => 'ultimate-toolbox/fwtgf',
+                'lessons' => [
+                    [
+                        'slug' => 'ultimate-toolbox/fwtgf/1',
+                        'title' => 'Introduction',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/468462591-0591247a658a222a1451ddba9374e9825368731349ef1978c2d4ab94290dcc33-d?mw=1200&mh=675',
+                        'video_src' => '//player.vimeo.com/video/89637098',
+                        'duration' => 4,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'ultimate-toolbox/fwtgf/2',
+                        'title' => 'Exercise 1',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/468462922-4e60de18d43a40d3d449d8b56735e01b60494d619cf2a1bbd422d1c7e35dcdd3-d?mw=1200&mh=675',
+                        'video_src' => '//player.vimeo.com/video/89637353',
+                        'duration' => 3,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'ultimate-toolbox/fwtgf/3',
+                        'title' => 'Exercise 2',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/468463206-70e2ae1aff12b5b73b2675bdb2f39aa9b47fe4b6b063c16262c84ae7d76d154f-d?mw=1200&mh=675',
+                        'video_src' => '//player.vimeo.com/video/89637543',
+                        'duration' => 2,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'ultimate-toolbox/fwtgf/4',
+                        'title' => 'Exercise 3',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/468463619-751c666bf20b290baedbd20b81cc5f68e696df01af2e0c790f36b41e2153844c-d?mw=1200&mh=675',
+                        'video_src' => '//player.vimeo.com/video/89637866',
+                        'duration' => 3,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'ultimate-toolbox/fwtgf/5',
+                        'title' => 'Exercise 4',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/468463970-f53c0f17d09c71453503ab638a3c6708cc424874bce5f877ad9df11ac97fa6c9-d?mw=1200&mh=675',
+                        'video_src' => '//player.vimeo.com/video/89638178',
+                        'duration' => 3,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'ultimate-toolbox/fwtgf/6',
+                        'title' => 'Exercise 5',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/468463959-b15f743f876736499972705d6fd975620d97ba6e6cc91b2d1648e2962349009c-d?mw=1200&mh=675',
+                        'video_src' => '//player.vimeo.com/video/89638137',
+                        'duration' => 2,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'ultimate-toolbox/fwtgf/7',
+                        'title' => 'Introduction',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/468463970-f53c0f17d09c71453503ab638a3c6708cc424874bce5f877ad9df11ac97fa6c9-d?mw=1200&mh=675',
+                        'video_src' => '//player.vimeo.com/video/89638324',
+                        'duration' => 1,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'ultimate-toolbox/fwtgf/8',
+                        'title' => 'Exercise 1',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/468464558-8ab3abdf097c6d07c260fb3a6069f914a26a619b16aff7bf2f8c2105351fdb4b-d?mw=1200&mh=675',
+                        'video_src' => '//player.vimeo.com/video/89638542',
+                        'duration' => 3,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'ultimate-toolbox/fwtgf/9',
+                        'title' => 'Exercise 2',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/468464697-c789c4f1e95ad173da4eb0acb177c3b8640174230433021132e84e7f27fae524-d?mw=1200&mh=675',
+                        'video_src' => '//player.vimeo.com/video/89638625',
+                        'duration' => 2,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'ultimate-toolbox/fwtgf/10',
+                        'title' => 'Exercise 3',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/468465312-3bc75a3cb1fff8da83c97c0ad3fa6feeeea7161412bf4a2cd3014b3140c41d25-d?mw=1200&mh=675',
+                        'video_src' => '//player.vimeo.com/video/89639083',
+                        'duration' => 2,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'ultimate-toolbox/fwtgf/11',
+                        'title' => 'Exercise 4',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/468465007-d931b0fb1564d04666c21897fcfb3258a8f67668f8df2be39ab0ff2086702a32-d?mw=1200&mh=675',
+                        'video_src' => '//player.vimeo.com/video/89638875',
+                        'duration' => 2,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'ultimate-toolbox/fwtgf/12',
+                        'title' => 'Exercise 5',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/468465317-36b42df8d9585ede4560350d2529469c3fde6d81e6a43558b4d3ae54260a3b01-d?mw=1200&mh=675',
+                        'video_src' => '//player.vimeo.com/video/89639098',
+                        'duration' => 3,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'ultimate-toolbox/fwtgf/13',
+                        'title' => 'Introduction',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/468465007-d931b0fb1564d04666c21897fcfb3258a8f67668f8df2be39ab0ff2086702a32-d?mw=1200&mh=675',
+                        'video_src' => '//player.vimeo.com/video/89639076',
+                        'duration' => 3,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'ultimate-toolbox/fwtgf/14',
+                        'title' => 'Exercise 1',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/468465837-a713fe204be18020e4dd63d5b70b6554c3b04efdd6443f754f47f9742e58d9b4-d?mw=1200&mh=675',
+                        'video_src' => '//player.vimeo.com/video/89639473',
+                        'duration' => 3,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'ultimate-toolbox/fwtgf/15',
+                        'title' => 'Exercise 2',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/468465825-1ae84191e678505bb3867eb7d224d1b380c11261d4dd530affce1dc169cd4d46-d?mw=1200&mh=675',
+                        'video_src' => '//player.vimeo.com/video/89639448',
+                        'duration' => 3,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'ultimate-toolbox/fwtgf/16',
+                        'title' => 'Exercise 3',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/468466472-cafd2faf42e3c0d925a881856a6a012b51cd600e879b82626e3b5da272fc8b3f-d?mw=1200&mh=675',
+                        'video_src' => '//player.vimeo.com/video/89639941',
+                        'duration' => 3,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'ultimate-toolbox/fwtgf/17',
+                        'title' => 'Exercise 4',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/468466651-c5db0822c030c82859d7c766965e4db86ba37af00c78e52fe25639f5742ae00f-d?mw=1200&mh=675',
+                        'video_src' => '//player.vimeo.com/video/89640060',
+                        'duration' => 2,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'ultimate-toolbox/fwtgf/18',
+                        'title' => 'Exercise 5',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/468466646-4e47a36cb4b8058d59b98cf9b05d25184d7b00a5913b16fc2575d1a576571582-d?mw=1200&mh=675',
+                        'video_src' => '//player.vimeo.com/video/89640056',
+                        'duration' => 2,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'ultimate-toolbox/fwtgf/19',
+                        'title' => 'Conclusion',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/468466881-30ddd2f68277c803b48b5012f17cba6bf7136c8805b22b6b806f6edf45b1fd56-d?mw=1200&mh=675',
+                        'video_src' => '//player.vimeo.com/video/89640228',
+                        'duration' => 2,
+                        'assets' => [],
+                    ],
+                ],
+            ],
+            [
+                'brand_id' => 3,
+                'title' => 'Getting Started On The Acoustic Guitar',
+                'meta_desc' => 'Pick up your guitar and start playing today!',
+                'meta_img' => 'https://guitareo.s3.amazonaws.com/lead-gen/free-acoustic-guitar-lessons/og-image.jpg',
+                'slug' => 'free-acoustic-guitar-lessons/lessons',
+                'assets' => [
+                    [
+                        'title' => 'Course Resources',
+                        'src' => 'https://guitareo.s3.amazonaws.com/lead-gen/free-acoustic-guitar-lessons/getting-started-on-the-acoustic-guitar.zip',
+                        'soundslice' => ''
+                    ],
+                ],
+                'lessons' => [
+                    [
+                        'slug' => 'free-acoustic-guitar-lessons/lessons/1',
+                        'title' => 'Becoming Familiar With Your Acoustic Guitar',
+                        'desc' => 'Ayla goes over each part of the guitar that’s important to know and what its purpose is. She’ll go over how to tune your guitar by using various different methods. Lastly, she explains the name of each string by using a fun trick to help you memorize their names.',
+                        'thumbnail' => 'https://guitareo.s3.amazonaws.com/lead-gen/free-acoustic-guitar-lessons/thumbs-acoustic-01.jpg',
+                        'video_src' => '//player.vimeo.com/video/531010732',
+                        'duration' => 9,
+                        'assets' => [],
+                        'assignments' => [
+                            [
+                                'title' => 'Hold your guitar comfortably',
+                            ],
+                            [
+                                'title' => 'Tune your guitar',
+                            ],
+                            [
+                                'title' => 'Memorize the strings',
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'free-acoustic-guitar-lessons/lessons/2',
+                        'title' => 'Sounding Good',
+                        'desc' => 'In this lesson, you’ll learn your first chord, the E minor chord, and play each string one by one to make sure it sounds clean and clear. You’ll learn how to apply the right amount of pressure to the string to prevent string-buzz  without straining your hand. Then you’ll move onto your next chord, the C major7 chord, and practice playing each string.',
+                        'thumbnail' => 'https://guitareo.s3.amazonaws.com/lead-gen/free-acoustic-guitar-lessons/thumbs-acoustic-02.jpg',
+                        'video_src' => '//player.vimeo.com/video/531010850',
+                        'duration' => 9,
+                        'assets' => [
+                            [
+                                'title' => 'Chord Charts',
+                                'src' => 'https://guitareo.s3.amazonaws.com/lead-gen/free-acoustic-guitar-lessons/strumming-basics.pdf',
+                                'soundslice' => ''
+                            ],
+                        ],
+                        'assignments' => [
+                            [
+                                'title' => 'Go through each chord string by string',
+                            ],
+                            [
+                                'title' => 'Play each chord back to back',
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'free-acoustic-guitar-lessons/lessons/3',
+                        'title' => 'Strumming Basics',
+                        'desc' => 'Learn the correct motion of your wrist to strum the guitar. You’ll go over downstrokes, upstrokes, and a bonus strumming pattern if you’re feeling up for it.',
+                        'thumbnail' => 'https://guitareo.s3.amazonaws.com/lead-gen/free-acoustic-guitar-lessons/thumbs-acoustic-03.jpg',
+                        'video_src' => '//player.vimeo.com/video/531010974',
+                        'duration' => 9,
+                        'assets' => [
+                            [
+                                'title' => 'Chord Charts',
+                                'src' => 'https://guitareo.s3.amazonaws.com/lead-gen/free-acoustic-guitar-lessons/strumming-basics.pdf',
+                                'soundslice' => ''
+                            ],
+                        ],
+                        'assignments' => [
+                            [
+                                'title' => 'Practice downstrokes',
+                            ],
+                            [
+                                'title' => 'Practice upstrokes',
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'free-acoustic-guitar-lessons/lessons/4',
+                        'title' => 'Start Making Music',
+                        'desc' => 'Ayla teaches you how to play five more essential chords every guitar player should know. You’ll learn a simplified and full version of each chord. The chords are C major, Dsus2, D major, G major, full G major. Once you have these chords under your belt, you can play hundreds and hundreds of your favorite songs.',
+                        'thumbnail' => 'https://guitareo.s3.amazonaws.com/lead-gen/free-acoustic-guitar-lessons/thumbs-acoustic-04.jpg',
+                        'video_src' => '//player.vimeo.com/video/531011075',
+                        'duration' => 11,
+                        'assets' => [
+                            [
+                                'title' => 'Chord Charts',
+                                'src' => 'https://guitareo.s3.amazonaws.com/lead-gen/free-acoustic-guitar-lessons/strumming-basics.pdf',
+                                'soundslice' => ''
+                            ],
+                        ],
+                        'assignments' => [
+                            [
+                                'title' => 'Play each chord shape one at a time',
+                            ],
+                            [
+                                'title' => 'Get comfortable switching chords',
+                            ],
+                            [
+                                'title' => 'Learn the simplified chords then learn the full chords',
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'free-acoustic-guitar-lessons/lessons/5',
+                        'title' => 'Play a Song',
+                        'desc' => 'Now that we know a handful of chords, what do we do with them? You’ll learn how to put the chords together in a progression to play a song. We’ll recap on what your strumming hand will be doing during the song and play in time to the right beat of the backing track. We’ll switch different strumming patterns to play along with the backing track.',
+                        'thumbnail' => 'https://guitareo.s3.amazonaws.com/lead-gen/free-acoustic-guitar-lessons/thumbs-acoustic-05.jpg',
+                        'video_src' => '//player.vimeo.com/video/531040914',
+                        'duration' => 8,
+                        'assets' => [
+                            [
+                                'title' => 'Chord Charts',
+                                'src' => 'https://guitareo.s3.amazonaws.com/lead-gen/free-acoustic-guitar-lessons/play-a-song.pdf',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'MP3',
+                                'src' => 'https://guitareo.s3.amazonaws.com/lead-gen/free-acoustic-guitar-lessons/play-a-song.mp3',
+                                'soundslice' => ''
+                            ],
+                        ],
+                        'assignments' => [
+                            [
+                                'title' => 'Play along to the track with the first strumming pattern',
+                            ],
+                            [
+                                'title' => 'Play along to the track with the second strumming pattern',
+                            ],
+                            [
+                                'title' => 'Play along to the track with the bonus strumming pattern (OPTIONAL)',
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'free-acoustic-guitar-lessons/lessons/6',
+                        'title' => 'Pave Your Own Path',
+                        'desc' => 'This is a quick recap of how much you’ve accomplished in just a few short lessons. You already know WAY more than when you began and can play a bunch of songs with the chords and strumming patterns you learned. Even though your guitar journey is just beginning, make sure to keep practicing at your own pace until you feel comfortable and ready to move onto the next steps of your journey.',
+                        'thumbnail' => 'https://guitareo.s3.amazonaws.com/lead-gen/free-acoustic-guitar-lessons/thumbs-acoustic-06.jpg',
+                        'video_src' => '//player.vimeo.com/video/531041006',
+                        'duration' => 2,
+                        'assets' => [],
+                    ],
+                ],
+            ],
 //            [
-//                'brand_id' => 1,
-//                'title' => 'The Ultimate Drumming Toolbox - ',
+//                'brand_id' => 3,
+//                'title' => '',
 //                'meta_desc' => '',
 //                'meta_img' => '',
 //                'slug' => '',
@@ -2317,6 +2646,15 @@ The second exercise is similar, but this time we’re playing longer groups of u
                             'title' => $asset['title'],
                             'src' => $asset['src'],
                             'soundslice' => $asset['soundslice'] ??  null,
+                        ]);
+                    }
+                }
+
+                if(!empty($lesson['assignments']) && count($lesson['assignments']) > 0){
+                    foreach($lesson['assignments'] as $asset){
+                        LeadgenLessonAssignment::create([
+                            'leadgen_lesson_id' => $newLesson->id,
+                            'title' => $asset['title'],
                         ]);
                     }
                 }
