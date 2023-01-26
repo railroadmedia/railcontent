@@ -2654,6 +2654,7 @@ class ContentService
                 }
             }
             $results['soundslice_assignments_count'] = $soundsliceAssingment;
+            $results['soundslice_assignments'] = $assign;
         } elseif(in_array($content['type'], ['course','learning-path-course',])) {
             ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MAXIMUM;
             $lessons = $this->getByParentId($content['id']);
