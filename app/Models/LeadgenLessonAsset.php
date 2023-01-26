@@ -13,4 +13,8 @@ class LeadgenLessonAsset extends Model
     {
         return $this->belongsTo(LeadgenLesson::class, 'lesson_id');
     }
+
+    protected $guarded = [
+        'id'
+    ];
 }

@@ -5,6 +5,7 @@ namespace App\Nova\Flexible\Layouts;
 use App\Models\LeadgenLesson;
 use App\Models\LeadgenLessonAsset;
 use App\Nova\Flexible\Presets\LeadgenLessonAssetPreset;
+use App\Nova\Flexible\Presets\LeadgenLessonAssignmentPreset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Laravel\Nova\Fields\Boolean;
@@ -64,6 +65,9 @@ class LeadgenLessonLayout extends Layout
             Text::make('Thumbnail','thumbnail_text')->hideFromIndex()->hideFromDetail(),
             Text::make('Video Src', 'video_src')->hideFromIndex()->required(),
             Number::make('duration')->help('In minutes')->required(),
+//            Flexible::make('Assignments')
+//                ->addLayout(LeadgenLessonAssignmentLayout::class)
+//                ->preset(LeadgenLessonAssignmentPreset::class),
             Flexible::make('Assets')
                 ->addLayout(LeadgenLessonAssetLayout::class)
                 ->preset(LeadgenLessonAssetPreset::class),
