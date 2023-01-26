@@ -234,7 +234,7 @@ onUpdated(() => {
       @onCancel="handleCloseConfirmationModal"
       @onSubmit="handleSubmit"
     />
-    <PlaylistsModal @onClosePlaylistsModal="handleClosePlaylistModal" key="playlists-modal-key" v-if="isPlaylistModalOpen" :modalProps="playlistModalProps"></PlaylistsModal>
+    <PlaylistsModal @onClosePlaylistsModal="handleClosePlaylistModal" key="playlists-modal-key" v-if="isPlaylistModalOpen" :modalProps="playlistModalProps" :brand="brand"></PlaylistsModal>
 
     <Navbar :forceSidebarHidden="forceSidebarHidden" :brand="brand" :has-notifications="hasNotifications"
       :user-name="userName" :userAvatar="userAvatar" :account-url="accountUrl" :isSidebarHidden="isSidebarHidden"
