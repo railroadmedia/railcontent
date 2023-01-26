@@ -44,7 +44,8 @@ return [
             'coach_profile_image',
             'coach_featured_image',
             'start_second',
-            'end_second'
+            'end_second',
+            'thumbnail_url',
         ],
 
         'instructor' => [
