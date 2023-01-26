@@ -6,6 +6,7 @@ use App\Maps\ProductAccessMap;
 use App\Models\Brand;
 use App\Models\Carousel;
 use App\Services\User\UserAccessService;
+use Carbon\Carbon;
 use Railroad\MusoraApi\Contracts\ProductProviderInterface;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\UserPermissionsService;
@@ -63,6 +64,18 @@ class MusoraApiProductProvider implements ProductProviderInterface
         return Carousel::query()
             ->where('brand_id', $brandId)
             ->where('visible', true)
+            ->where(
+                function($query) {
+                    return $query
+                        ->whereNull('start_date')
+                        ->orWhere('start_date', '<=', Carbon::now()->toDateTimeString());
+                })
+            ->where(
+                function($query) {
+                    return $query
+                        ->whereNull('end_date')
+                        ->orWhere('end_date', '>', Carbon::now()->toDateTimeString());
+                })
             ->orderBy('display_order')
             ->get()
             ->toArray();
