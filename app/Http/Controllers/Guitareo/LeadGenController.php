@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Guitareo;
 
+use App\Models\Leadgen;
+use App\Models\LeadgenLesson;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -354,6 +356,47 @@ class LeadGenController extends BaseController
                 return view('guitareo.lead-gen.toolbox.soloing-pentatonic.overview');
             default:
                 return view('guitareo.lead-gen.toolbox.soloing-pentatonic.'.$num);
+        }
+
+        throw new NotFoundHttpException();
+    }
+
+    public function leadgen(Request $request, $domain, $leadgenSlug = null)
+    {
+        $currentLesson = LeadgenLesson::join('leadgens', 'leadgens.id', '=', 'leadgen_lessons.leadgen_id')->join('brands', 'leadgens.brand_id', '=', 'brands.id')->where('brands.name', 'Guitareo')->where('leadgen_lessons.slug', $leadgenSlug)->select('leadgen_lessons.*', 'brand_id')->first();
+        if(!is_null($currentLesson)){
+            if(!$currentLesson->one_off){
+                $lessons = LeadgenLesson::where([['leadgen_id', $currentLesson->leadgen_id], ['one_off', 0]])->get();
+                $currentLessonIndex = $lessons->search(function($item) use($leadgenSlug){
+                        return $item->slug === $leadgenSlug;
+                    }) + 1;
+                $prevLesson = $currentLessonIndex === 1 ? null : $lessons[$currentLessonIndex - 2];
+                $nextLesson = $currentLessonIndex === count($lessons) ? null : $lessons[$currentLessonIndex];
+            }
+
+            $leadgen = Leadgen::join('brands', 'brands.id', '=', 'leadgens.brand_id')->where('brands.name', 'Guitareo')->where('leadgens.id', $currentLesson->leadgen_id)->select('leadgens.*')->first();
+
+            return view('_partials.layout.global-lead-gen-lesson-layout', [
+                'theme' => 'guitareo',
+                'leadgen' => $leadgen,
+                'prevLesson' => $prevLesson ?? null,
+                'currentLesson' => $currentLesson,
+                'nextLesson' => $nextLesson ?? null,
+                'totalLessonNum' => !empty($lessons) ? count($lessons) : null,
+                'currentLessonNum' => $currentLessonIndex ?? null,
+            ]);
+        }
+        else {
+            $leadgen = Leadgen::where('slug', $leadgenSlug)->first();
+            if(!is_null($leadgen)){
+                $lessons = LeadgenLesson::where([['leadgen_id', $leadgen->id], ['one_off', 0]])->get();
+
+                return view('_partials.layout.global-lead-gen-index-layout',[
+                    'theme' => 'guitareo',
+                    'leadgen' => $leadgen,
+                    'lessons' => $lessons
+                ]);
+            }
         }
 
         throw new NotFoundHttpException();

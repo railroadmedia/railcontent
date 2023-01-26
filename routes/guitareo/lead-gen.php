@@ -49,17 +49,17 @@ Route::domain('{guitareoDomain}')
                 ]);
         }
     );
-    Route::group(['prefix' => 'free-acoustic-guitar-lessons'],
-        function () {
-            Route::get('/{page?}/{lesson?}', LeadGenController::class . '@fagl')
-                ->whereIn('page', [
-                    null, 'lessons'
-                ])
-                ->whereIn('lesson', [
-                    null, '1', '2', '3', '4', '5', '6'
-                ]);
-        }
-    );
+//    Route::group(['prefix' => 'free-acoustic-guitar-lessons'],
+//        function () {
+//            Route::get('/{page?}/{lesson?}', LeadGenController::class . '@fagl')
+//                ->whereIn('page', [
+//                    null, 'lessons'
+//                ])
+//                ->whereIn('lesson', [
+//                    null, '1', '2', '3', '4', '5', '6'
+//                ]);
+//        }
+//    );
     Route::group(['prefix' => 'free-electric-guitar-lessons'],
         function () {
             Route::get('/{page?}/{lesson?}', LeadGenController::class . '@fegl')
@@ -177,4 +177,7 @@ Route::domain('{guitareoDomain}')
                 ]);
         }
     );
+
+    Route::get('/{leadgenSlug?}', LeadGenController::class.'@leadgen')
+        ->where('leadgenSlug', '(.*)');
 });
