@@ -791,7 +791,8 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
 
     public function isAPlusMember()
     {
-        return ($this->isAMember() && $this->membership_level == 'plus') || $this->isAdmin();
+        return true;
+        //return ($this->isAMember() && $this->membership_level == 'plus') || $this->isAdmin();
     }
 
     public function getTotalXp()
