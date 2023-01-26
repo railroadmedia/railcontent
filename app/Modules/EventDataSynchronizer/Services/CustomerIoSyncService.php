@@ -99,7 +99,7 @@ class CustomerIoSyncService
             'musora_profile_birthday' => $user->birthday,
             'musora_phone-number' => $user->phone_number,
             'musora_timezone' => $user->timezone,
-            'musora_notify_of_weekly_updates' => $user->notify_weekly_update,
+            'musora_notify_of_weekly_updates' => $user->notify_weekly_update > 0,
         ];
     }
 
