@@ -331,7 +331,7 @@ class HelpScoutSyncService
         return $attributesKeys;
     }
 
-    private function isEligibleMembershipProduct(string $brand, Product $product): bool
+    private function isEligibleMembershipProduct(?string $brand, ?Product $product): bool
     {
         return !empty($product)
             && $product->getBrand() == $brand
