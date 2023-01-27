@@ -21594,13 +21594,13 @@ a:visited{
   margin-left: 12px !important;
   margin-right: 12px !important;
 }
-.tw-my-auto{
-  margin-top: auto !important;
-  margin-bottom: auto !important;
-}
 .tw-my-5{
   margin-top: 1.25rem !important;
   margin-bottom: 1.25rem !important;
+}
+.tw-my-auto{
+  margin-top: auto !important;
+  margin-bottom: auto !important;
 }
 .tw-mx-\[16px\]{
   margin-left: 16px !important;
@@ -22410,6 +22410,9 @@ a:visited{
 .tw-w-9\/12{
   width: 75% !important;
 }
+.tw-w-full{
+  width: 100% !important;
+}
 .tw-min-w-\[232px\]{
   min-width: 232px !important;
 }
@@ -22499,6 +22502,9 @@ a:visited{
 }
 .tw-max-w-full{
   max-width: 100% !important;
+}
+.tw-max-w-\[754px\]{
+  max-width: 754px !important;
 }
 .tw-flex-1{
   flex: 1 1 0% !important;
@@ -23607,13 +23613,13 @@ a:visited{
   padding-left: 0.5rem !important;
   padding-right: 0.5rem !important;
 }
-.tw-py-10{
-  padding-top: 2.5rem !important;
-  padding-bottom: 2.5rem !important;
-}
 .tw-px-5{
   padding-left: 1.25rem !important;
   padding-right: 1.25rem !important;
+}
+.tw-py-10{
+  padding-top: 2.5rem !important;
+  padding-bottom: 2.5rem !important;
 }
 .tw-py-0\.5{
   padding-top: 0.125rem !important;
@@ -23662,6 +23668,14 @@ a:visited{
 .tw-py-5{
   padding-top: 1.25rem !important;
   padding-bottom: 1.25rem !important;
+}
+.tw-py-\[36px\]{
+  padding-top: 36px !important;
+  padding-bottom: 36px !important;
+}
+.tw-py-\[40px\]{
+  padding-top: 40px !important;
+  padding-bottom: 40px !important;
 }
 .tw-pt-8{
   padding-top: 2rem !important;
@@ -23846,6 +23860,15 @@ a:visited{
 .tw-pl-5{
   padding-left: 1.25rem !important;
 }
+.tw-pb-\[36px\]{
+  padding-bottom: 36px !important;
+}
+.tw-pt-\[36px\]{
+  padding-top: 36px !important;
+}
+.tw-pb-\[36px\]{
+  padding-bottom: 36px !important;
+}
 .tw-text-left{
   text-align: left !important;
 }
@@ -23959,6 +23982,30 @@ a:visited{
 .tw-text-\[22px\]{
   font-size: 22px !important;
 }
+.tw-text-\[24px\]{
+  font-size: 24px !important;
+}
+.tw-text-\[16px\]{
+  font-size: 16px !important;
+}
+.tw-text-\[24px\]{
+  font-size: 24px !important;
+}
+.tw-text-\[16px\]{
+  font-size: 16px !important;
+}
+.tw-text-\[24px\]{
+  font-size: 24px !important;
+}
+.tw-text-\[16px\]{
+  font-size: 16px !important;
+}
+.tw-text-\[24px\]{
+  font-size: 24px !important;
+}
+.tw-text-\[16px\]{
+  font-size: 16px !important;
+}
 .tw-font-bold{
   font-weight: 700 !important;
 }
@@ -23976,6 +24023,9 @@ a:visited{
 }
 .tw-font-semibold{
   font-weight: 600 !important;
+}
+.tw-font-bold{
+  font-weight: 700 !important;
 }
 .tw-uppercase{
   text-transform: uppercase !important;
@@ -24262,6 +24312,10 @@ a:visited{
 .tw-text-\[\#002039\]{
   --tw-text-opacity: 1 !important;
   color: rgb(0 32 57 / var(--tw-text-opacity)) !important;
+}
+.tw-text-white{
+  --tw-text-opacity: 1 !important;
+  color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
 }
 .tw-underline{
   -webkit-text-decoration-line: underline !important;
