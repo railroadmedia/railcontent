@@ -15974,12 +15974,12 @@ a {
 .completeButton.is-complete .completed {
   opacity: 1;
   visibility: visible;
-  display: block;
+  display: inline-flex;
 }
 .completeButton .incompleted {
   opacity: 1;
   visibility: visible;
-  display: block;
+  display: inline-flex;
 }
 .completeButton .completed {
   opacity: 0;
