@@ -5,18 +5,20 @@
 ])
     @slot('content')
         <div class="flex flex-column pr-1 align-center">
-            <div
+            @if( !empty($parentContent['video_playback_endpoints'])) )
+                <div
                     class="flex flex-column mb-5 rounded ba-grey-1-2 hover-border-{{ $brand }} text-white hover-text-{{ $brand }} pointer"
                     data-open-modal="previewModal"
                     style="width:80px;"
-            >
-                <div class="square heading">
-                    <i
-                        class="fas fa-play absolute-center"
-                        style="margin-left:2px"
-                    ></i>
+                >
+                    <div class="square heading">
+                        <i
+                            class="fas fa-play absolute-center"
+                            style="margin-left:2px"
+                        ></i>
+                    </div>
                 </div>
-            </div>
+            @endif
 
             <div class="flex flex-row align-center mb-2">
                 <img

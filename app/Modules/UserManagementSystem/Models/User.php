@@ -791,8 +791,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
 
     public function isAPlusMember()
     {
-        return true;
-        //return ($this->isAMember() && $this->membership_level == 'plus') || $this->isAdmin();
+        return ($this->isAMember() && $this->membership_level == 'plus') || $this->isAdmin();
     }
 
     public function getTotalXp()
@@ -827,11 +826,10 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
 
     public function hasSongsAccess(?string $brand = null): bool
     {
-        return true;
-//        if (!$brand) {
-//            $brand = brand();
-//        }
-//        return $this->isAPlusMember() ||
-//            ($brand == 'drumeo' && $this->is_drumeo_lifetime_member);
+        if (!$brand) {
+            $brand = brand();
+        }
+        return $this->isAPlusMember() ||
+            ($brand == 'drumeo' && $this->is_drumeo_lifetime_member);
     }
 }

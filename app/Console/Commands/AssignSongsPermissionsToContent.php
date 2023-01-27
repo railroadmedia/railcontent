@@ -110,10 +110,50 @@ class AssignSongsPermissionsToContent extends Command
                 ->first()
                 ->id;
 
+        $legacyDrumeoBrandPermission =
+            $this->musoraDB()->from('railcontent_permissions')
+                ->where([
+                    'name' => 'Drumeo Edge',
+                    'brand' => 'drumeo',
+                ])
+                ->first()
+                ->id;
+
+        $legacyPianoteBrandPermission =
+            $this->musoraDB()->from('railcontent_permissions')
+                ->where([
+                    'name' => 'Pianote Membership',
+                    'brand' => 'pianote',
+                ])
+                ->first()
+                ->id;
+
+        $legacyGuitareoBrandPermission =
+            $this->musoraDB()->from('railcontent_permissions')
+                ->where([
+                    'name' => 'Guitareo Membership',
+                    'brand' => 'guitareo',
+                ])
+                ->first()
+                ->id;
+
+        $legacySingeoBrandPermission =
+            $this->musoraDB()->from('railcontent_permissions')
+                ->where([
+                    'name' => 'Singeo Membership',
+                    'brand' => 'singeo',
+                ])
+                ->first()
+                ->id;
+
         $this->info("musoraBasicMembershipPermissionId: $musoraBasicMembershipPermissionId");
         $this->info("musoraPlusMembershipPermissionId: $musoraPlusMembershipPermissionId");
         $this->info("musoraOnlySongsMembershipPermissionId: $musoraOnlySongsMembershipPermissionId");
         $this->info("drumeoLifetimeMembershipPermissionId: $drumeoLifetimeMembershipPermissionId");
+        $this->info("legacyDrumeoBrandPermission: $legacyDrumeoBrandPermission");
+        $this->info("legacyPianoteBrandPermission: $legacyPianoteBrandPermission");
+        $this->info("legacyGuitareoBrandPermission: $legacyGuitareoBrandPermission");
+        $this->info("legacySingeoBrandPermission: $legacySingeoBrandPermission");
 
         $this->info('Permissions created successfully. Adding to content...');
         $this->info('Starting to add permissions to content...');
@@ -129,6 +169,10 @@ class AssignSongsPermissionsToContent extends Command
             ->chunk(
                 250,
                 function (Collection $songContentIdRows) use (
+                    $legacySingeoBrandPermission,
+                    $legacyGuitareoBrandPermission,
+                    $legacyPianoteBrandPermission,
+                    $legacyDrumeoBrandPermission,
                     $musoraOnlySongsMembershipPermissionId,
                     $musoraPlusMembershipPermissionId,
                     &$createdCount,
@@ -203,6 +247,27 @@ class AssignSongsPermissionsToContent extends Command
                                     ]);
                             }
                         }
+
+                        // add legacy brand permission for free 30 days of access (todo: remove for next run)
+                        $legacyBrandPermissionToAdd = 'drumeo';
+
+                        if ($songContentIdRow->brand == 'drumeo') {
+                            $legacyBrandPermissionToAdd = $legacyDrumeoBrandPermission;
+                        } elseif ($songContentIdRow->brand == 'pianote') {
+                            $legacyBrandPermissionToAdd = $legacyPianoteBrandPermission;
+                        } elseif ($songContentIdRow->brand == 'guitareo') {
+                            $legacyBrandPermissionToAdd = $legacyGuitareoBrandPermission;
+                        } elseif ($songContentIdRow->brand == 'singeo') {
+                            $legacyBrandPermissionToAdd = $legacySingeoBrandPermission;
+                        }
+
+                        $this->musoraDB()->from('railcontent_content_permissions')
+                            ->updateOrInsert([
+                                'content_id' => $songContentId,
+                                'content_type' => null,
+                                'permission_id' => $legacyBrandPermissionToAdd,
+                                'brand' => $songContentIdRow->brand,
+                            ]);
                     }
 
                     $createdCount += 250;
