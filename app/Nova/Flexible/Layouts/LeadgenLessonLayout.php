@@ -34,6 +34,10 @@ class LeadgenLessonLayout extends Layout
      */
     protected $title = 'Leadgen Lesson';
 
+    protected $casts = [
+        'leadgen_lesson_asset_layout' => LeadgenLessonAssetLayout::class
+    ];
+
     /**
      * Get the fields displayed by the layout.
      *
@@ -47,6 +51,7 @@ class LeadgenLessonLayout extends Layout
             // Define the layout's fields.
             Text::make('slug')->required(),
             Text::make('title')->required(),
+            Text::make('caption'),
             Text::make('Description', 'desc'),
             Image::make('Thumbnail','thumbnail_path')
                 ->disk('nova_s3')
@@ -65,9 +70,9 @@ class LeadgenLessonLayout extends Layout
             Text::make('Thumbnail','thumbnail_text')->hideFromIndex()->hideFromDetail(),
             Text::make('Video Src', 'video_src')->hideFromIndex()->required(),
             Number::make('duration')->help('In minutes')->required(),
-//            Flexible::make('Assignments')
-//                ->addLayout(LeadgenLessonAssignmentLayout::class)
-//                ->preset(LeadgenLessonAssignmentPreset::class),
+            Flexible::make('Assignments')
+                ->addLayout(LeadgenLessonAssignmentLayout::class)
+                ->preset(LeadgenLessonAssignmentPreset::class),
             Flexible::make('Assets')
                 ->addLayout(LeadgenLessonAssetLayout::class)
                 ->preset(LeadgenLessonAssetPreset::class),
@@ -77,8 +82,8 @@ class LeadgenLessonLayout extends Layout
         ];
     }
 
-    public function assets(){
-        return $this->model;
+    public function getAssetAttribute()
+    {
+        return $this->flexible('leadgen_lesson_asset_layout');
     }
-
 }

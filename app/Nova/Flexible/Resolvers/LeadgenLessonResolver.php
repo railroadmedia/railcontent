@@ -58,6 +58,7 @@ class LeadgenLessonResolver implements ResolverInterface
             $lessons = $groups->map(function($group, $index) use($model){
                return [
                    'title' => $group->getAttributes()['title'],
+                   'caption' => $group->getAttributes()['caption'],
                    'desc' => $group->getAttributes()['desc'],
                    'thumbnail_text' => $group->getAttributes()['thumbnail_text'] ?? null,
                    'thumbnail_path' => $group->getAttributes()['thumbnail_path'] ?? null,
@@ -86,6 +87,7 @@ class LeadgenLessonResolver implements ResolverInterface
                     $addLesson = new LeadgenLesson();
                     $addLesson->leadgen_id = $model['id'];
                     $addLesson->title = $lesson['title'];
+                    $addLesson->caption = $lesson['caption'];
                     $addLesson->desc = $lesson['desc'];
                     $addLesson->slug = $lesson['slug'];
                     $addLesson->thumbnail = $lesson['thumbnail'];
@@ -103,6 +105,10 @@ class LeadgenLessonResolver implements ResolverInterface
 
                     if($dbLesson['title'] !== $lesson['title']){
                         $dbLesson->title = $lesson['title'];
+                    }
+
+                    if($dbLesson['caption'] !== $lesson['caption']){
+                        $dbLesson->caption = $lesson['caption'];
                     }
 
                     if($dbLesson['desc'] !== $lesson['desc']){
