@@ -2,9 +2,7 @@
 
 namespace Railroad\Railcontent\Repositories;
 
-use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Transformers\ContentTransformer;
-use Railroad\Railcontent\Repositories\ContentRepository;
 
 class UserPlaylistContentRepository extends RepositoryBase
 {
@@ -31,6 +29,9 @@ class UserPlaylistContentRepository extends RepositoryBase
         $this->contentInstructorRepository = $contentInstructorRepository;
     }
 
+    /**
+     * @return \Illuminate\Database\Query\Builder
+     */
     public function query()
     {
         return $this->connection()
@@ -49,7 +50,13 @@ class UserPlaylistContentRepository extends RepositoryBase
     {
         $query =
             $this->query()
-                ->select(config('railcontent.table_prefix').'content.*', config('railcontent.table_prefix').'user_playlist_content.start_second', config('railcontent.table_prefix').'user_playlist_content.end_second' )
+                ->select(
+                    config('railcontent.table_prefix').'content.*',
+                    config('railcontent.table_prefix').'user_playlist_content.start_second',
+                    config('railcontent.table_prefix').'user_playlist_content.end_second',
+                    config('railcontent.table_prefix').'user_playlist_content.position as user_playlist_item_position',
+                    config('railcontent.table_prefix').'user_playlist_content.id as user_playlist_item_id'
+                )
                 ->join(
                     config('railcontent.table_prefix').'content',
                     config('railcontent.table_prefix').'user_playlist_content.content_id',
@@ -62,7 +69,10 @@ class UserPlaylistContentRepository extends RepositoryBase
         }
 
         if (is_array(ContentRepository::$availableContentStatues)) {
-            $query->whereIn(config('railcontent.table_prefix').'content.status',  ContentRepository::$availableContentStatues);
+            $query->whereIn(
+                config('railcontent.table_prefix').'content.status',
+                ContentRepository::$availableContentStatues
+            );
         }
 
         if ($limit) {
@@ -104,7 +114,10 @@ class UserPlaylistContentRepository extends RepositoryBase
             $query->whereIn(config('railcontent.table_prefix').'content.type', $contentType);
         }
         if (is_array(ContentRepository::$availableContentStatues)) {
-            $query->whereIn(config('railcontent.table_prefix').'content.status',  ContentRepository::$availableContentStatues);
+            $query->whereIn(
+                config('railcontent.table_prefix').'content.status',
+                ContentRepository::$availableContentStatues
+            );
         }
 
         return $query->count();
@@ -130,19 +143,21 @@ class UserPlaylistContentRepository extends RepositoryBase
      *    content_id_2 => true/false,
      *    etc...
      * ]
-     * @param  array  $contentIds
+     *
+     * @param array $contentIds
      * @param $playlistId
      * @return array
      */
     public function areContentIdsInPlaylist(array $contentIds, $playlistId)
     {
-        $playlistContentIdLinkRows = $this->query()
-            ->select(['content_id'])
-            ->where('user_playlist_id', $playlistId)
-            ->whereIn('content_id', $contentIds)
-            ->get()
-            ->pluck('content_id')
-            ->toArray();
+        $playlistContentIdLinkRows =
+            $this->query()
+                ->select(['content_id'])
+                ->where('user_playlist_id', $playlistId)
+                ->whereIn('content_id', $contentIds)
+                ->get()
+                ->pluck('content_id')
+                ->toArray();
 
         $contentIdsInPlaylistBooleans = [];
 
@@ -153,11 +168,170 @@ class UserPlaylistContentRepository extends RepositoryBase
         return $contentIdsInPlaylistBooleans;
     }
 
+    /**
+     * @param $playlistId
+     * @return array|mixed[]
+     */
     public function getByPlaylistId($playlistId)
     {
         return $this->query()
             ->where('user_playlist_id', $playlistId)
             ->get()
             ->toArray();
+    }
+
+    /**
+     * @param null $dataId
+     * @param $data
+     * @return bool|int
+     */
+    public function createOrUpdatePlaylistContentAndReposition($dataId = null, $data)
+    {
+        $existingData =
+            $this->query()
+                ->where('id', $dataId)
+                ->get()
+                ->first();
+
+        $userPlaylistId = $existingData['user_playlist_id'] ?? $data['user_playlist_id'];
+
+        $dataCount =
+            $this->query()
+                ->where([
+                            'user_playlist_id' => $userPlaylistId,
+                        ])
+                ->count();
+
+        $data['position'] = $this->recalculatePosition(
+            $data['position'] ?? $existingData['position'] ?? null,
+            $dataCount,
+            $existingData
+        );
+
+        if (empty($existingData)) {
+            $this->incrementOtherPlaylistItemsPosition(
+                null,
+                $userPlaylistId,
+                $data['position'],
+                null
+            );
+
+            return $this->query()
+                ->insertGetId($data);
+        } elseif ($data['position'] > $existingData['position']) {
+            $this->query()
+                ->where('id', $dataId)
+                ->update($data);
+
+            return $this->decrementOtherPlaylistItemsPosition(
+                $dataId,
+                $userPlaylistId,
+                $existingData['position'],
+                $data['position']
+            );
+        } elseif ($data['position'] < $existingData['position']) {
+            $updated =
+                $this->query()
+                    ->where('id', $dataId)
+                    ->update($data);
+
+            $this->incrementOtherPlaylistItemsPosition(
+                $dataId,
+                $userPlaylistId,
+                $data['position'],
+                $existingData['position']
+            );
+
+            return $updated;
+        } else {
+            return $this->query()
+                ->where('id', $dataId)
+                ->update($data);
+        }
+    }
+
+    /**
+     * @param null $excludedEntityId
+     * @param $playlistId
+     * @param $startPosition
+     * @param null $endPosition
+     * @return bool
+     */
+    private function incrementOtherPlaylistItemsPosition(
+        $excludedEntityId = null,
+        $playlistId,
+        $startPosition,
+        $endPosition = null
+    ) {
+        $query =
+            $this->query()
+                ->where('user_playlist_id', $playlistId)
+                ->where('position', '>=', $startPosition);
+
+        if ($excludedEntityId) {
+            $query->where('id', '!=', $excludedEntityId);
+        }
+
+        if ($endPosition) {
+            $query->where('position', '<', $endPosition);
+        }
+
+        return $query->increment('position') > 0;
+    }
+
+    /**
+     * @param $excludedEntityId
+     * @param $playlistId
+     * @param $startPosition
+     * @param $endPosition
+     * @return bool
+     */
+    private function decrementOtherPlaylistItemsPosition(
+        $excludedEntityId,
+        $playlistId,
+        $startPosition,
+        $endPosition
+    ) {
+        return $this->query()
+                ->where('user_playlist_id', $playlistId)
+                ->where('id', '!=', $excludedEntityId)
+                ->where('position', '>', $startPosition)
+                ->where('position', '<=', $endPosition)
+                ->decrement('position') > 0;
+    }
+
+    /**
+     * @param $entity
+     * @param string $positionColumnPrefix
+     * @return bool
+     */
+    public function deletePlaylistItemAndReposition($entity, $positionColumnPrefix = '')
+    {
+        $existingLink =
+            $this->query()
+                ->where($entity)
+                ->first();
+
+        if (empty($existingLink)) {
+            return true;
+        }
+
+        $query =
+            $this->query()
+                ->where('user_playlist_id', $existingLink['id']);
+
+        $query->where(
+            $positionColumnPrefix.'position',
+            '>',
+            $existingLink[$positionColumnPrefix."position"]
+        )
+            ->decrement($positionColumnPrefix.'position');
+
+        $deleted =
+            $this->query()
+                ->where(['id' => $existingLink['id']])
+                ->delete();
+
+        return $deleted > 0;
     }
 }

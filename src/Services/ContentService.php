@@ -2643,6 +2643,9 @@ class ContentService
         $results = [];
 
         $content = $this->getById($contentId);
+        if(!$content){
+            return $results;
+        }
         if(in_array($content['type'], $singularContentTypes)) {
             $soundsliceAssingment = 0;
             $assign = [];

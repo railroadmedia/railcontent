@@ -194,50 +194,25 @@ Route::group(
             Railroad\Railcontent\Controllers\RequestedSongsJsonController::class . '@requestSong'
         )->name('api.request.song');
 
-        Route::post('/playlist', MyListJsonController::class . '@createPlaylist');
-
-        Route::get('/playlists', MyListJsonController::class . '@getUserPlaylists');
-
-        Route::get('/playlist', MyListJsonController::class . '@getPlaylist');
-
+        /**
+         * Playlists v2 routes
+         */
+        Route::post('/playlist', MyListJsonController::class . '@createPlaylist')->name('api.create.playlist');
+        Route::get('/playlists', MyListJsonController::class . '@getUserPlaylists')->name('api.user.playlists');
+        Route::get('/playlist', MyListJsonController::class . '@getPlaylist')->name('api.playlist.show');
         Route::put('/copy-playlist', MyListJsonController::class . '@copyPlaylist')->name('api.copy.playlist');
-
-        Route::patch(
-            '/playlist/{id}',
-            MyListJsonController::class . '@updatePlaylist'
-        )
-            ->name('api.update.playlist');
-
-        Route::get('/public-playlists', MyListJsonController::class . '@getPublicPlaylists');
-
-
-        Route::put('/add-item-to-list', MyListJsonController::class . '@addItemToPlaylist');
-        Route::put(
-            '/pin-playlist',
-            MyListJsonController::class . '@pinPlaylist'
-        )->name('api.pin.playlist');
-
-        Route::get('/my-pinned-playlists', MyListJsonController::class . '@getPinnedPlaylists');
-
-        Route::put(
-            '/unpin-playlist',
-            MyListJsonController::class . '@unpinPlaylist'
-        )->name('api.unpin.playlist');
-
-        Route::put(
-            '/like-playlist',
-            MyListJsonController::class . '@likePlaylist'
-        )->name('api.like.playlist');
-
-        Route::get('/playlist-lessons', MyListJsonController::class . '@getPlaylistLessons');
-
-        Route::put('/change-playlist-content', MyListJsonController::class . '@changePlaylistContent');
-
-        Route::get('/lessons-and-assignments-count/{contentId}', ContentJsonController::class . '@countLessonsAndAssignments');
+        Route::patch('/playlist/{id}',MyListJsonController::class . '@updatePlaylist')->name('api.update.playlist');
+        Route::get('/public-playlists', MyListJsonController::class . '@getPublicPlaylists')->name('api.public.playlists');
+        Route::put('/add-item-to-list', MyListJsonController::class . '@addItemToPlaylist')->name('api.add.item.to.playlist');
+        Route::put('/pin-playlist',MyListJsonController::class . '@pinPlaylist')->name('api.pin.playlist');
+        Route::get('/my-pinned-playlists', MyListJsonController::class . '@getPinnedPlaylists')->name('api.pinned.playlists');
+        Route::put('/unpin-playlist',MyListJsonController::class . '@unpinPlaylist')->name('api.unpin.playlist');
+        Route::put('/like-playlist',MyListJsonController::class . '@likePlaylist')->name('api.like.playlist');
+        Route::get('/playlist-lessons', MyListJsonController::class . '@getPlaylistLessons')->name('api.playlist.lessons');
+        Route::put('/change-playlist-content', MyListJsonController::class . '@changePlaylistContent')->name('api.change.playlist.item');
+        Route::get('/lessons-and-assignments-count/{contentId}', ContentJsonController::class . '@countLessonsAndAssignments')->name('api.count.lessons.and.assignments');
         Route::delete('/playlist',MyListJsonController::class . '@deletePlaylist')->name('api.delete.playlist');
-//        Route::put('/remove-from-my-list', MyListJsonController::class . '@removeFromPrimaryPlaylist');
-//        Route::get('/my-list', MyListJsonController::class . '@getMyLists');
-        //addItemToPlaylist
-
+        Route::get('/search-playlist',MyListJsonController::class . '@searchPlaylist')->name('api.search.playlist');
+        Route::delete('/remove-item-from-list', MyListJsonController::class . '@removeItemFromPlaylist')->name('api.remove.playlist.item');
     }
 );

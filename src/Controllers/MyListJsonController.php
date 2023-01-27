@@ -13,7 +13,6 @@ use Railroad\Railcontent\Services\ContentHierarchyService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\UserPlaylistsService;
 use Railroad\Railcontent\Support\Collection;
-use Railroad\Railcontent\Transformers\ArrayTransformer;
 use Railroad\Railcontent\Transformers\DataTransformer;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -40,11 +39,10 @@ class MyListJsonController extends Controller
     private $userPlaylistsService;
 
     /**
-     * MyListJsonController constructor.
-     *
      * @param ContentService $contentService
      * @param ContentHierarchyService $contentHierarchyService
      * @param ContentRepository $contentRepository
+     * @param UserPlaylistsService $userPlaylistsService
      */
     public function __construct(
         ContentService $contentService,
@@ -219,7 +217,7 @@ class MyListJsonController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param PlaylistCreateRequest $request
      * @return array
      */
     public function createPlaylist(PlaylistCreateRequest $request)
@@ -264,9 +262,18 @@ class MyListJsonController extends Controller
                                                             'type' => 'user-playlist',
                                                             'brand' => $playlist['brand'],
                                                             'name' => $request->get('name', $playlist['name']),
-                                                            'description' => $request->get('description',$playlist['description']),
-                                                            'thumbnail_url' => $request->get('thumbnail_url',$playlist['thumbnail_url']),
-                                                            'category' => $request->get('category',$playlist['category']),
+                                                            'description' => $request->get(
+                                                                'description',
+                                                                $playlist['description']
+                                                            ),
+                                                            'thumbnail_url' => $request->get(
+                                                                'thumbnail_url',
+                                                                $playlist['thumbnail_url']
+                                                            ),
+                                                            'category' => $request->get(
+                                                                'category',
+                                                                $playlist['category']
+                                                            ),
                                                             'private' => $playlist['private'],
                                                             'created_at' => Carbon::now()
                                                                 ->toDateTimeString(),
@@ -274,7 +281,7 @@ class MyListJsonController extends Controller
 
         $playlistLessons = $this->userPlaylistsService->getByPlaylistId($request->get('playlist_id'));
 
-        foreach($playlistLessons as $playlistLesson){
+        foreach ($playlistLessons as $playlistLesson) {
             $res = $this->userPlaylistsService->addItemToPlaylist(
                 $playlist['id'],
                 $playlistLesson['content_id'],
@@ -375,8 +382,11 @@ class MyListJsonController extends Controller
         $allowedPinNumber = config('railcontent.pinned_playlists_nr', 5);
         $myPinnedPlaylists = $this->userPlaylistsService->getPinnedPlaylists();
 
-        if(count($myPinnedPlaylists) < $allowedPinNumber) {
-            $pin = $this->userPlaylistsService->pinPlaylist($request->get('playlist_id'), $request->get('brand', config('railcontent.brand')));
+        if (count($myPinnedPlaylists) < $allowedPinNumber) {
+            $pin = $this->userPlaylistsService->pinPlaylist(
+                $request->get('playlist_id'),
+                $request->get('brand', config('railcontent.brand'))
+            );
 
             return reply()->json([$pin], [
                 'code' => $pin ? 200 : 500,
@@ -396,7 +406,6 @@ the pin icon on or off.',
             ],
             422
         );
-
     }
 
     /**
@@ -405,9 +414,9 @@ the pin icon on or off.',
      */
     public function unpinPlaylist(Request $request)
     {
-        $deleted =$this->userPlaylistsService->unpinPlaylist($request->get('playlist_id'));
+        $deleted = $this->userPlaylistsService->unpinPlaylist($request->get('playlist_id'));
 
-        return reply()->json([[$deleted>0]], [
+        return reply()->json([[$deleted > 0]], [
             'code' => $deleted ? 200 : 500,
             'transformer' => DataTransformer::class,
         ]);
@@ -423,7 +432,6 @@ the pin icon on or off.',
         return $playlists;
     }
 
-    //likePlaylist
     /**
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
@@ -435,7 +443,13 @@ the pin icon on or off.',
         return response()->json(['success']);
     }
 
-    public function getPlaylistLessons(Request $request){
+    /**
+     * @param Request $request
+     * @return ContentFilterResultsEntity
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
+    public function getPlaylistLessons(Request $request)
+    {
         $page = $request->get('page', 1);
         $limit = $request->get('limit', null);
         $contentTypes = array_merge(
@@ -444,18 +458,27 @@ the pin icon on or off.',
         );
 
         $lessons = new ContentFilterResultsEntity([
-                                                      'results' => $this->userPlaylistsService->getUserPlaylistContents($request->get('playlist_id'), $contentTypes,$limit, $page),
-                                                      'total_results' => $this->userPlaylistsService->countUserPlaylistContents($request->get('playlist_id')),
+                                                      'results' => $this->userPlaylistsService->getUserPlaylistContents(
+                                                          $request->get('playlist_id'),
+                                                          $contentTypes,
+                                                          $limit,
+                                                          $page
+                                                      ),
+                                                      'total_results' => $this->userPlaylistsService->countUserPlaylistContents(
+                                                          $request->get('playlist_id')
+                                                      ),
                                                   ]);
+
         return $lessons;
     }
 
     /**
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return ContentFilterResultsEntity
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
-    public function changePlaylistContent(Request $request){
-
+    public function changePlaylistContent(Request $request)
+    {
         $this->userPlaylistsService->changePlaylistContent(
             $request->get('playlist_id'),
             $request->get('content_id'),
@@ -470,13 +493,49 @@ the pin icon on or off.',
 
     /**
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return mixed
      */
     public function deletePlaylist(Request $request)
     {
-        $deleted =$this->userPlaylistsService->deletePlaylist($request->get('playlist_id'));
+        $deleted = $this->userPlaylistsService->deletePlaylist($request->get('playlist_id'));
 
-        return reply()->json([[$deleted>0]], [
+        return reply()->json([[$deleted > 0]], [
+            'code' => $deleted ? 200 : 500,
+            'transformer' => DataTransformer::class,
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function searchPlaylist(Request $request)
+    {
+        $page = $request->get('page', 1);
+        $limit = $request->get('limit', null);
+        $term = $request->get('term', '');
+
+        return (new ContentFilterResultsEntity([
+                                                   'results' => $this->userPlaylistsService->searchPlaylist(
+                                                       $term,
+                                                       $page,
+                                                       $limit
+                                                   ),
+                                                   'total_results' => $this->userPlaylistsService->countTotalSearchResults(
+                                                       $term
+                                                   ),
+                                               ]))->toJsonResponse();
+    }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function removeItemFromPlaylist(Request $request)
+    {
+        $deleted = $this->userPlaylistsService->removeItemFromPlaylist($request->get('user_playlist_item_id'));
+
+        return reply()->json([[$deleted > 0]], [
             'code' => $deleted ? 200 : 500,
             'transformer' => DataTransformer::class,
         ]);

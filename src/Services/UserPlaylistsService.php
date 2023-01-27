@@ -4,23 +4,16 @@ namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
 use Railroad\Railcontent\Decorators\Decorator;
+use Railroad\Railcontent\Repositories\PinnedPlaylistsRepository;
 use Railroad\Railcontent\Repositories\PlaylistLikeRepository;
 use Railroad\Railcontent\Repositories\UserPlaylistContentRepository;
 use Railroad\Railcontent\Repositories\UserPlaylistsRepository;
-use Railroad\Railcontent\Repositories\PinnedPlaylistsRepository;
-use Railroad\Railcontent\Support\Collection;
 
 class UserPlaylistsService
 {
-    /**
-     * @var UserPlaylistsRepository
-     */
-    private $userPlaylistsRepository;
-    /**
-     * @var UserPlaylistContentRepository
-     */
-    private $userPlaylistContentRepository;
 
+    private UserPlaylistsRepository $userPlaylistsRepository;
+    private UserPlaylistContentRepository $userPlaylistContentRepository;
     private PinnedPlaylistsRepository $pinnedPlaylistsRepository;
     private PlaylistLikeRepository $playlistLikeRepository;
     private ContentService $contentService;
@@ -28,6 +21,9 @@ class UserPlaylistsService
     /**
      * @param UserPlaylistsRepository $userPlaylistRepository
      * @param UserPlaylistContentRepository $userPlaylistContentRepository
+     * @param PinnedPlaylistsRepository $pinnedPlaylistsRepository
+     * @param PlaylistLikeRepository $playlistLikeRepository
+     * @param ContentService $contentService
      */
     public function __construct(
         UserPlaylistsRepository $userPlaylistRepository,
@@ -157,6 +153,10 @@ class UserPlaylistsService
         return $this->userPlaylistContentRepository->delete($userPlaylistContent[0]['id']);
     }
 
+    /**
+     * @param $attributes
+     * @return array
+     */
     public function create($attributes)
     {
         $userPlaylist = $this->userPlaylistsRepository->create($attributes);
@@ -164,6 +164,11 @@ class UserPlaylistsService
         return $this->userPlaylistsRepository->getById($userPlaylist);
     }
 
+    /**
+     * @param string $type
+     * @param $brand
+     * @return mixed|\Railroad\Railcontent\Support\Collection|null
+     */
     public function getPublicPlaylists($type = 'user-playlist', $brand)
     {
         $playlists = $this->userPlaylistsRepository->getPublicPlaylists($type, $brand);
@@ -178,9 +183,19 @@ class UserPlaylistsService
      * @param array $extraData
      * @param null $startSecond
      * @param null $endSecond
-     * @return bool
+     * @param false $importAllAssignments
+     * @return mixed|\Railroad\Railcontent\Support\Collection|null
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
-    public function addItemToPlaylist($userPlaylistId, $contentId, $position = null, $extraData = [], $startSecond = null, $endSecond = null, $importAllAssignments=false){
+    public function addItemToPlaylist(
+        $userPlaylistId,
+        $contentId,
+        $position = null,
+        $extraData = [],
+        $startSecond = null,
+        $endSecond = null,
+        $importAllAssignments = false
+    ) {
         $input = [
             'content_id' => $contentId,
             'user_playlist_id' => $userPlaylistId,
@@ -188,22 +203,28 @@ class UserPlaylistsService
             'extra_data' => $extraData,
             'start_second' => $startSecond,
             'end_second' => $endSecond,
-            'created_at' => Carbon::now()->toDateTimeString()
+            'created_at' => Carbon::now()
+                ->toDateTimeString(),
         ];
 
         $this->userPlaylistContentRepository->createOrUpdatePlaylistContentAndReposition(null, $input);
 
-        if($importAllAssignments){
+        if ($importAllAssignments) {
             $assignments = $this->contentService->countLessonsAndAssignments($contentId);
-            foreach($assignments['soundslice_assignments']??[] as $assignment){
+            foreach ($assignments['soundslice_assignments'] ?? [] as $assignment) {
                 $assignmentInput = [
                     'content_id' => $assignment['id'],
                     'user_playlist_id' => $userPlaylistId,
-                    'created_at' => Carbon::now()->toDateTimeString()
+                    'created_at' => Carbon::now()
+                        ->toDateTimeString(),
                 ];
-                $this->userPlaylistContentRepository->createOrUpdatePlaylistContentAndReposition(null, $assignmentInput);
+                $this->userPlaylistContentRepository->createOrUpdatePlaylistContentAndReposition(
+                    null,
+                    $assignmentInput
+                );
             }
         }
+
         return $this->getUserPlaylistContents($userPlaylistId);
     }
 
@@ -225,9 +246,19 @@ class UserPlaylistsService
     public function getPlaylist($playlistId)
     {
         $playlist = $this->userPlaylistsRepository->getById($playlistId);
-        $playlist['like_count'] = $this->playlistLikeRepository->query()->where('playlist_id', $playlistId)->count();
-        $playlist['is_liked_by_current_user'] = $this->playlistLikeRepository->query()->where('playlist_id', $playlistId)->where('user_id', auth()->id())->count() > 0;
-        $playlist['pinned'] = $this->pinnedPlaylistsRepository->query()->where('playlist_id', $playlistId)->count() > 0;
+        $playlist['like_count'] =
+            $this->playlistLikeRepository->query()
+                ->where('playlist_id', $playlistId)
+                ->count();
+        $playlist['is_liked_by_current_user'] =
+            $this->playlistLikeRepository->query()
+                ->where('playlist_id', $playlistId)
+                ->where('user_id', auth()->id())
+                ->count() > 0;
+        $playlist['pinned'] =
+            $this->pinnedPlaylistsRepository->query()
+                ->where('playlist_id', $playlistId)
+                ->count() > 0;
 
         return \Arr::first(Decorator::decorate([$playlist], 'playlist'));
     }
@@ -246,40 +277,36 @@ class UserPlaylistsService
 
     /**
      * @param $playlistId
-     * @return bool
+     * @param $brand
+     * @return array|mixed[]
      */
     public function pinPlaylist($playlistId, $brand)
     {
         $stored =
             $this->pinnedPlaylistsRepository->query()
-                ->updateOrInsert(
-                    [
-                        'user_id' => auth()->id(),
-                        'playlist_id' => $playlistId,
-                        'brand' => $brand
-                    ],
-                    [
-                        'created_at' => Carbon::now()
-                            ->toDateTimeString(),
-                    ]
-                );
+                ->updateOrInsert([
+                                     'user_id' => auth()->id(),
+                                     'playlist_id' => $playlistId,
+                                     'brand' => $brand,
+                                 ], [
+                                     'created_at' => Carbon::now()
+                                         ->toDateTimeString(),
+                                 ]);
 
         return $this->pinnedPlaylistsRepository->getMyPinnedPlaylists();
     }
 
     /**
      * @param $playlistId
-     * @return bool
+     * @return int
      */
     public function unpinPlaylist($playlistId)
     {
         return $this->pinnedPlaylistsRepository->query()
-            ->where(
-                [
-                    'playlist_id' => $playlistId,
-                    'user_id' => auth()->id(),
-                ]
-            )
+            ->where([
+                        'playlist_id' => $playlistId,
+                        'user_id' => auth()->id(),
+                    ])
             ->delete();
     }
 
@@ -291,6 +318,10 @@ class UserPlaylistsService
         return $this->pinnedPlaylistsRepository->getMyPinnedPlaylists();
     }
 
+    /**
+     * @param $playlistId
+     * @return array|mixed[]
+     */
     public function getByPlaylistId($playlistId)
     {
         return $this->userPlaylistContentRepository->getByPlaylistId($playlistId);
@@ -306,9 +337,16 @@ class UserPlaylistsService
      * @return mixed|\Railroad\Railcontent\Support\Collection|null
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
-    public function changePlaylistContent($userPlaylistId, $contentId, $position = null, $extraData = [], $startSecond = null, $endSecond = null){
-
-        $playlistContent = \Arr::first($this->userPlaylistContentRepository->getByPlaylistIdAndContentId($userPlaylistId, $contentId));
+    public function changePlaylistContent(
+        $userPlaylistId,
+        $contentId,
+        $position = null,
+        $extraData = [],
+        $startSecond = null,
+        $endSecond = null
+    ) {
+        $playlistContent =
+            \Arr::first($this->userPlaylistContentRepository->getByPlaylistIdAndContentId($userPlaylistId, $contentId));
 
         $input = [
             'content_id' => $contentId,
@@ -317,45 +355,79 @@ class UserPlaylistsService
             'extra_data' => $extraData,
             'start_second' => $startSecond,
             'end_second' => $endSecond,
-            'updated_at' => Carbon::now()->toDateTimeString()
+            'updated_at' => Carbon::now()
+                ->toDateTimeString(),
         ];
 
-        $this->userPlaylistContentRepository->createOrUpdatePlaylistContentAndReposition($playlistContent['id'], $input);
+        $this->userPlaylistContentRepository->createOrUpdatePlaylistContentAndReposition(
+            $playlistContent['id'],
+            $input
+        );
 
         return $this->getUserPlaylistContents($userPlaylistId);
     }
 
     /**
      * @param $userPlaylistId
+     * @return int
      */
     public function deletePlaylist($userPlaylistId)
     {
         //delete items from playlists
         $this->userPlaylistContentRepository->query()
-            ->where(
-                [
-                    'user_playlist_id' => $userPlaylistId
-                ]
-            )
+            ->where([
+                        'user_playlist_id' => $userPlaylistId,
+                    ])
             ->delete();
 
         //delete playlists from pinned playlists
         $this->pinnedPlaylistsRepository->query()
-            ->where(
-                [
-                    'playlist_id' => $userPlaylistId
-                ]
-            )
+            ->where([
+                        'playlist_id' => $userPlaylistId,
+                    ])
             ->delete();
 
         //delete playlist
         return $this->userPlaylistsRepository->query()
-            ->where(
-                [
-                    'id' => $userPlaylistId,
-                    'user_id' => auth()->id(),
-                ]
-            )
+            ->where([
+                        'id' => $userPlaylistId,
+                        'user_id' => auth()->id(),
+                    ])
             ->delete();
+    }
+
+    /**
+     * @param $term
+     * @param $page
+     * @param null $limit
+     * @return array|mixed[]
+     */
+    public function searchPlaylist($term, $page, $limit = null)
+    {
+        return $this->userPlaylistsRepository->searchPlaylist($term, $page, $limit);
+    }
+
+    /**
+     * @param $term
+     * @return int
+     */
+    public function countTotalSearchResults($term)
+    {
+        return $this->userPlaylistsRepository->countTotalSearchResults($term);
+    }
+
+    /**
+     * @param $itemPlaylistId
+     * @return bool|null
+     */
+    public function removeItemFromPlaylist($itemPlaylistId)
+    {
+        $itemPlaylist = $this->userPlaylistContentRepository->getById($itemPlaylistId);
+
+        if (is_null($itemPlaylist)) {
+            return $itemPlaylist;
+        }
+
+        return $this->userPlaylistContentRepository->deletePlaylistItemAndReposition($itemPlaylist);
     }
 }
