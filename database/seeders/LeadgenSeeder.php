@@ -586,7 +586,7 @@ The second exercise is similar, but this time we’re playing longer groups of u
                             [
                                 'title' => 'Song Chart',
                                 'src' => 'https://d1923uyy6spedc.cloudfront.net/301539-sheet-image-1619782863.svg',
-                                'soundslice' => 'WR3Dc'
+                                'soundslice' => 'https://www.soundslice.com/slices/WR3Dc/embed/?api=1&amp;scroll_type=2&amp;branding=0'
                             ],
                             [
                                 'title' => 'MP3',
@@ -2582,8 +2582,2395 @@ The second exercise is similar, but this time we’re playing longer groups of u
                     ],
                 ],
             ],
+            [
+                'brand_id' => 3,
+                'title' => 'Getting Started On The Electric Guitar',
+                'meta_desc' => 'Pick up your guitar and start playing today!',
+                'meta_img' => 'https://guitareo.s3.amazonaws.com/lead-gen/free-electric-guitar-lessons/og-image.jpg',
+                'slug' => 'free-electric-guitar-lessons/lessons',
+                'assets' => [
+                    [
+                        'title' => 'Course Resources',
+                        'src' => 'https://guitareo.s3.amazonaws.com/lead-gen/free-electric-guitar-lessons/free-electric-guitar-lessons.zip',
+                        'soundslice' => ''
+                    ],
+                ],
+                'lessons' => [
+                    [
+                        'slug' => 'free-electric-guitar-lessons/lessons/1',
+                        'title' => 'Electric 101',
+                        'desc' => 'Ayla goes over each part of the guitar that’s important to know and what its purpose is. She also goes over how to tune your guitar by using various different methods. Lastly, she explains the name of each string by using a fun trick to help you memorize their names.',
+                        'thumbnail' => 'https://guitareo.s3.amazonaws.com/lead-gen/free-electric-guitar-lessons/thumbs-electric-01.jpg',
+                        'video_src' => '//player.vimeo.com/video/519278952',
+                        'duration' => 9,
+                        'assignments' => [
+                            [
+                                'title' => 'Get comfortable with the guitar in your lap',
+                            ],
+                            [
+                                'title' => 'Tune your guitar',
+                            ],
+                            [
+                                'title' => 'Go through each string one by one and say their name out loud',
+                            ],
+                        ],
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'free-electric-guitar-lessons/lessons/2',
+                        'title' => 'Sounding Good',
+                        'desc' => 'Plug in your guitar and start exploring the tone of your guitar through the different knobs and switches. Ayla explains how finding your tone can come from playing around with your guitar and amplifier settings to find what you like the most. You’ll also play your first chord, E Minor.',
+                        'thumbnail' => 'https://guitareo.s3.amazonaws.com/lead-gen/free-electric-guitar-lessons/thumbs-electric-02.jpg',
+                        'video_src' => '//player.vimeo.com/video/519279105',
+                        'duration' => 9,
+                        'assignments' => [
+                            [
+                                'title' => 'Spend time exploring your guitar',
+                            ],
+                            [
+                                'title' => 'Play the E minor chord cleanly',
+                            ],
+                            [
+                                'title' => 'Play the E minor chord one string at a time',
+                            ],
+                        ],
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'free-electric-guitar-lessons/lessons/3',
+                        'title' => 'Strumming Basics',
+                        'desc' => 'Learn the correct motion of your wrist to strum the guitar. You’ll go over downstrokes in a whole note and quarter note pattern and then add in upstrokes. Play another new chord shape, the A Minor chord.',
+                        'thumbnail' => 'https://guitareo.s3.amazonaws.com/lead-gen/free-electric-guitar-lessons/thumbs-electric-03.jpg',
+                        'video_src' => '//player.vimeo.com/video/519279207',
+                        'duration' => 9,
+                        'assignments' => [
+                            [
+                                'title' => 'Practice downstrokes',
+                            ],
+                            [
+                                'title' => 'Practice upstrokes',
+                            ],
+                        ],
+                        'assets' => [
+                            [
+                                'title' => 'MP3',
+                                'src' => 'https://guitareo.s3.amazonaws.com/lead-gen/free-electric-guitar-lessons/strumming-basics.mp3',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'free-electric-guitar-lessons/lessons/4',
+                        'title' => 'Start Making Music',
+                        'desc' => 'Now it’s time to learn four new chords: the G Major special chord, C Major special, D Major chord, and G power chord. You’ll learn how the chords can be played together in a chord progression and how to create your own chord progression with these chords.',
+                        'thumbnail' => 'https://guitareo.s3.amazonaws.com/lead-gen/free-electric-guitar-lessons/thumbs-electric-04.jpg',
+                        'video_src' => '//player.vimeo.com/video/519279301',
+                        'duration' => 11,
+                        'assignments' => [
+                            [
+                                'title' => 'Play through each chord comfortably',
+                            ],
+                            [
+                                'title' => 'Use these chords to play a chord progression',
+                            ],
+                            [
+                                'title' => 'Create your OWN progression',
+                            ],
+                        ],
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'free-electric-guitar-lessons/lessons/5',
+                        'title' => 'Play a Song',
+                        'desc' => 'It’s the moment you’ve been waiting for! Put together everything you’ve learned to play “Aint No Sunshine.” You’ll be playing two chords for two bars each as well as an easy lead guitar line.',
+                        'thumbnail' => 'https://guitareo.s3.amazonaws.com/lead-gen/free-electric-guitar-lessons/thumbs-electric-05.jpg',
+                        'video_src' => '//player.vimeo.com/video/531040914',
+                        'duration' => 8,
+                        'assignments' => [
+                            [
+                                'title' => 'Download the track and play along',
+                            ],
+                        ],
+                        'assets' => [
+                            [
+                                'title' => 'MP3',
+                                'src' => 'https://guitareo.s3.amazonaws.com/lead-gen/free-electric-guitar-lessons/play-along-no-guitar.mp3',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'MP3',
+                                'src' => 'https://guitareo.s3.amazonaws.com/lead-gen/free-electric-guitar-lessons/play-along-with-guitar.mp3',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'free-electric-guitar-lessons/lessons/6',
+                        'title' => 'Pave Your Own Path',
+                        'desc' => 'Here’s a quick recap of how much you’ve accomplished in just a few short lessons. You already know way more than when you began and can play hundreds of songs with the chords and strumming patterns you learned. Even though your guitar journey is just beginning, make sure to keep practicing at your own pace until you feel comfortable and ready to move onto the next steps of your journey.',
+                        'thumbnail' => 'https://guitareo.s3.amazonaws.com/lead-gen/free-electric-guitar-lessons/thumbs-electric-06.jpg',
+                        'video_src' => '//player.vimeo.com/video/519279477',
+                        'duration' => 2,
+                        'assets' => [],
+                    ],
+                ],
+            ],
+            [
+                'brand_id' => 3,
+                'title' => 'Guitar Chords for Hit Songs',
+                'meta_desc' => 'Gain the skills to play guitar chords used in thousands of hit songs with Ayla Tesler-Mabe.',
+                'meta_img' => 'https://guitareo.s3.amazonaws.com/lead-gen/chords-for-hit-songs/fb-share-image.jpg',
+                'slug' => 'chords-for-hit-songs/lessons',
+                'lessons' => [
+                    [
+                        'slug' => 'chords-for-hit-songs/lessons/1',
+                        'title' => 'Meet your instructor Ayla',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/1540842009-552c59e720c8073bc3ebd61b5b314a1c2540ae1eb8e700eb69e308a85fff1a49-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/767472595',
+                        'duration' => 1,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'chords-for-hit-songs/lessons/2',
+                        'title' => 'Master G and Em guitar chords',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.ytimg.com/vi_webp/loHMELy5o18/maxresdefault.webp',
+                        'video_src' => '//player.vimeo.com/video/768670165',
+                        'duration' => 11,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'chords-for-hit-songs/lessons/3',
+                        'title' => 'Link Em and C chords together',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/1506332098-fd854496821e35a9d8be15a757df7ba8acda9180adb550b6fa35f8d299e88164-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/747766620',
+                        'duration' => 11,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'chords-for-hit-songs/lessons/4',
+                        'title' => 'Switch between chords C and D',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/1506332274-205ed5d0c3036afcd11585649df1339a79706fd1f590ec9a5573dede5119f0e7-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/748994985',
+                        'duration' => 14,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'chords-for-hit-songs/lessons/5',
+                        'title' => 'Nail down the D and G chord transition',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/1511650271-4937cec726d4692df296826f8c4de1480d9910ac9c3f2bab4048d4f10adad867-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/751835669',
+                        'duration' => 10,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'chords-for-hit-songs/lessons/6',
+                        'title' => 'Play these four chords altogether',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/1516159925-b4d1b05c63f5463ea705031b8881abe2ffd3c88aac94274096f325678d7f2ae2-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/754484207',
+                        'duration' => 10,
+                        'assets' => [],
+                    ],
+                ],
+            ],
+            [
+                'brand_id' => 3,
+                'title' => '2 Simple Guitar Tricks',
+                'meta_desc' => 'How to use vibrato & palm muting to unlock new possibilities on the guitar.',
+                'meta_img' => 'https://guitareo.s3.amazonaws.com/lead-gen/guitar-tricks/og-image.jpg',
+                'slug' => 'guitar-tricks/your-videos',
+                'lessons' => [
+                    [
+                        'slug' => 'guitar-tricks/your-videos/1-intro',
+                        'title' => 'Introduction',
+                        'desc' => '**Thank goodness you’re here! We have a mission.**
+
+    You’ve been learning to play guitar, and now your band has to sell-out in order to afford some new gear.
+
+    We’ve got two things to do:
+      1. Sell Trucks
+      2. Sell Shampoo
+
+    But first we’ll need to learn some guitar techniques to create the ultimate sales jingles.
+
+    Today we’ll learn to use **vibrato** and **palm muting** in a musical way to get those trucks off the lot and the shampoo off the shelves.
+
+    Onwards, to vibrato.',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/997054724-4d463ff2db28c0ea62592effdb7f09a1df500854a839741b2a5caacecae484f6-d?mw=1200&mh=675',
+                        'video_src' => '//player.vimeo.com/video/476482334',
+                        'duration' => 1,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'guitar-tricks/your-videos/2-vibrato',
+                        'title' => 'Skill #1 - Vibrato',
+                        'desc' => '**Skill 1: Vibrato**
+
+Vibrato is your new secret weapon. It’s going to be unique to you, and you need to lovingly hone your skills with it over time.
+
+But we don’t have that kind of time.
+
+We’ve got a commercial soundtrack to add audio to!
+
+Here’s your quick reference guide to vibrato:
+      1. Grab a guitar
+      2. Put your fingers on the strings
+      3. Hit a note
+      4. Shake the note (from the wrist)
+
+We’re ready to go.
+
+Add some delay and reverb to your guitar sound if you have it, and let’s go make this commercial.',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/997055252-6a79e3c18f41a2299a119f47d4cdd239280dfaaf6c0a60c358aa47f2542c3c2c-d?mw=1200&mh=675',
+                        'video_src' => '//player.vimeo.com/video/476482371',
+                        'duration' => 6,
+                        'assets' => [
+                            [
+                                'title' => 'Playthrough MP3',
+                                'src' => 'https://guitareo.s3.amazonaws.com/guitarquest/2-Simple-Guitar-Tricks/ShampooJingle-Playthrough.mp3',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'Full Ad MP3',
+                                'src' => 'https://guitareo.s3.amazonaws.com/guitarquest/2-Simple-Guitar-Tricks/ShampooJingle-FullAd.mp3',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'Sheet Music PDF',
+                                'src' => 'https://guitareo.s3.amazonaws.com/guitarquest/2-Simple-Guitar-Tricks/ShampooJingle-SheetMusic.pdf',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'guitar-tricks/your-videos/3-shampoo',
+                        'title' => 'Shampoo Jingle',
+                        'desc' => '**Mission 1: Shampoo Ad Performance**
+
+This is it! The moment you’ve been waiting for -- all of your hard work pays off and the advertisement comes to life.
+
+Use the technique we studied in painstaking depth in the last video, and put it to work now. Your wallet depends on it!
+
+**Quick Tip:** The note you are performing the vibrato on is on the 11th fret of the G string. Which one is the G string? The 3rd from the bottom!
+
+Once you’ve locked in the best vibrato performance of your life carry on to the next video to learn trick #2.',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/997056488-b8a318adb6981c3394bb2cc8ca65108ddafb390dec5f63c2fb4c058b0d7a97c8-d?mw=1000&mh=562',
+                        'video_src' => '//player.vimeo.com/video/476482393',
+                        'duration' => 1,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'guitar-tricks/your-videos/4-palm-muting',
+                        'title' => 'Skill #2 - Palm Muting',
+                        'desc' => '**Skill 2: Palm Muting**
+
+Palm muting is a cross-genre skill, but today we need you to put it to work in a country themed truck commercial. To get yourself in the mood for this skill you’ll need to imagine a dusty porch, a rocking chair, and some tumbleweeds rolling across your homestead.
+
+Y’all ready?
+      1. Learn the E Major Chord
+      2. Practice the placement of your palm for ultimate chunky muting
+      3. Practice alternating between strumming and palm muting
+      4. Wait for checks in the mail
+
+When you’re ready to perform, it’s time to make the jingle:
+      1. Download the full truck ad MP3 to hear what the jingle track sounds like with guitar.
+      2. Download the Playthrough MP3 where YOU will play the guitar part.
+      3. Click through to the <a href="/guitar-tricks/your-videos/5-truck">next video</a> to see the advertisement come to life!',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/997057305-44a6271229a63cf48cabd949ec2d8edd6d7bbb4af54f38c38236b0fc9f55e80f-d?mw=1000&mh=562',
+                        'video_src' => '//player.vimeo.com/video/476482409',
+                        'duration' => 7,
+                        'assets' => [
+                            [
+                                'title' => 'Playthrough MP3',
+                                'src' => 'https://guitareo.s3.amazonaws.com/guitarquest/2-Simple-Guitar-Tricks/TruckJingle-Playthrough.mp3',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'Full Ad MP3',
+                                'src' => 'https://guitareo.s3.amazonaws.com/guitarquest/2-Simple-Guitar-Tricks/TruckJingle-FullAd.mp3',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'Sheet Music PDF',
+                                'src' => 'https://guitareo.s3.amazonaws.com/guitarquest/2-Simple-Guitar-Tricks/TruckJingle-SheetMusic.pdf',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'guitar-tricks/your-videos/5-truck',
+                        'title' => 'Truck Jingle',
+                        'desc' => '**Alright Partner,**
+
+Grab your boots, your cowboy hat, and your chaps, because we’re about to pull a comically large trailer full of hay bales off the ranch with a Truckeo truck.
+
+Let’s get on the road.',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/997057977-34a12c51aaa79cda646d8186793fcf677beb1610e4801404fc2e49247f4221d2-d?mw=1000&mh=562',
+                        'video_src' => '//player.vimeo.com/video/476482485',
+                        'duration' => 1,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'guitar-tricks/your-videos/6-whats-next',
+                        'title' => 'What’s Next...',
+                        'desc' => '**Mission Complete. You’ve done it!**
+
+You’ve learned vibrato & palm muting.
+You’ve sold shampoo & trucks.
+
+But you know there’s more…
+
+So if you’ve enjoyed this journey, then check out Rob’s FULL guitar course, GuitarQuest.
+
+Take the skills you’ve just learned, and add to them as you:
+ • Join a band
+ • Realize you should probably know how to play guitar if you’re going to be the guitarist in the band
+ • Play your first show at an empty bar gig
+ • Develop your musical career
+ • Sell out!
+
+Claim your exclusive GuitarQuest discount below, and continue the Quest today.
+
+<a href="/guitar-quest-discount-tricks">www.Guitareo.com/guitar-quest-discount-tricks</a>',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/997058436-babe1561549ca8e8b548cf70d98ff35cc84abc56ad6be9bfa00e911ffb0394d2-d?mw=1000&mh=562',
+                        'video_src' => '//player.vimeo.com/video/476482505',
+                        'duration' => 1,
+                        'assets' => [],
+                    ],
+                ],
+            ],
+            [
+                'brand_id' => 3,
+                'title' => 'Solo In An Hour',
+                'meta_desc' => 'Play your first solo in less than 60 minutes.',
+                'meta_img' => 'https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/og-image.jpg',
+                'slug' => 'solo-in-an-hour/lessons',
+                'lessons' => [
+                    [
+                        'slug' => 'solo-in-an-hour/lessons/1',
+                        'title' => 'Yes, You Can Solo In An Hour!',
+                        'desc' => 'Soloing doesn\'t need to be scary! In this course, Ayla will walk you through a few simple steps to have you soloing in under an hour!
+
+The sooner you start to learn these skills, the sooner you’ll be able to express yourself and understand the instrument better.',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/1301279869-7bd9d86ad2f6e5b64479fc42feeff3f1337f412ce97a66145?mw=1000&mh=562',
+                        'video_src' => '//player.vimeo.com/video/552497276',
+                        'duration' => 2,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'solo-in-an-hour/lessons/2',
+                        'title' => 'The Most Important Scale For Soloing',
+                        'desc' => ' In this lesson, Ayla’s going to show you the most important scale for learning how to solo.
+
+With even just a few of these notes, you’ll see how quickly it is to solo over all types of different music.',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/1301279139-beeb14b2d730ba66abb4126de072ea23de0c18c9805e0ca24?mw=1000&mh=562',
+                        'video_src' => '//player.vimeo.com/video/551517629',
+                        'duration' => 7,
+                        'assignments' => [
+                            [
+                                'title' => 'Practice With A Jam Track',
+                                'subtitle' => 'Use Soundslice to work on the exercises from this lesson in a musical setting.',
+                                'soundslice' => 'https://www.soundslice.com/slices/zwTDc/embed/?api=1&amp;scroll_type=2&amp;branding=0',
+                            ],
+                        ],
+                        'assets' => [
+                            [
+                                'title' => 'Jam Track',
+                                'src' => 'https://d1923uyy6spedc.cloudfront.net/303786-resource-1621453970.mp3',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'solo-in-an-hour/lessons/3',
+                        'title' => 'What Makes A Good Solo?',
+                        'desc' => 'Now that you’ve got the most important scale for soloing in your back pocket, it’s time to ask the serious question - what makes a good solo?
+
+In this lesson, we’re going to dive into some classic guitar solos and uncover the secrets of what makes them so great.',
+                        'thumbnail' => 'https://guitareo.s3.amazonaws.com/courses/Learn%20To%20Solo%20In%20An%20Hour/3-what-makes-a-good-solo.png',
+                        'video_src' => '//player.vimeo.com/video/551517661',
+                        'duration' => 10,
+                        'assignments' => [
+                            [
+                                'title' => 'Explore with the minor pentatonic',
+                                'subtitle' => 'Play the minor pentatonic scale over the jam track and see what happens when you try to play different melodies over it.',
+                                'soundslice' => 'https://www.soundslice.com/slices/zwTDc/embed/?api=1&amp;scroll_type=2&amp;branding=0',
+                            ],
+                        ],
+                        'assets' => [
+                            [
+                                'title' => 'Jam Track',
+                                'src' => 'https://d1923uyy6spedc.cloudfront.net/303786-resource-1621453970.mp3',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'solo-in-an-hour/lessons/4',
+                        'title' => 'Building A Lick Vocabulary',
+                        'desc' => 'Now that you’ve gotten comfortable with the minor pentatonic scale, it’s time to start exploring and discovering your own melodies.
+
+With these 3 boxed and ready licks, you’ll start to build momentum towards creating your very own solo.',
+                        'thumbnail' => 'https://guitareo.s3.amazonaws.com/courses/Learn%20To%20Solo%20In%20An%20Hour/4-building-lick-library.png',
+                        'video_src' => '//player.vimeo.com/video/551517691',
+                        'duration' => 1,
+                        'assignments' => [
+                            [
+                                'title' => 'Build a lick vocabulary',
+                                'subtitle' => 'Play each lick on their own. Play each lick to the backing track. Play each lick to the backing track but try adding some extra notes.',
+                                'soundslice' => 'https://www.soundslice.com/slices/zwTDc/embed/?api=1&amp;scroll_type=2&amp;branding=0',
+                            ],
+                            [
+                                'title' => 'Lick #1',
+                                'src' => 'https://d1923uyy6spedc.cloudfront.net/303809-sheet-image-1621355502.svg',
+                                'soundslice' => 'https://www.soundslice.com/slices/HzTDc/embed/?api=1&amp;scroll_type=2&amp;branding=0',
+                            ],
+                            [
+                                'title' => 'Lick #2',
+                                'src' => 'https://d1923uyy6spedc.cloudfront.net/303810-sheet-image-1621355918.svg',
+                                'soundslice' => 'https://www.soundslice.com/slices/TzTDc/embed/?api=1&amp;scroll_type=2&amp;branding=0',
+                            ],
+                            [
+                                'title' => 'Lick #3',
+                                'src' => 'https://d1923uyy6spedc.cloudfront.net/303811-sheet-image-1621355953.svg',
+                                'soundslice' => 'https://www.soundslice.com/slices/GzTDc/embed/?api=1&amp;scroll_type=2&amp;branding=0',
+                            ],
+                        ],
+                        'assets' => [
+                            [
+                                'title' => 'Sheet Music',
+                                'src' => 'https://d1923uyy6spedc.cloudfront.net/303808-resource-1621447122.pdf',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'Jam Track',
+                                'src' => 'https://d1923uyy6spedc.cloudfront.net/303786-resource-1621453970.mp3',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'solo-in-an-hour/lessons/5',
+                        'title' => 'Playing Your First Solo',
+                        'desc' => 'It’s time to take the fragments of licks that you’ve learned and tie them all together to create your very first solo!
+
+This is what we’ve been working towards, and here we are. All in less than an hour!',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/1301277567-c7534c605249a9a84856d69ca7222a8a9bb5dd3b1e066643c?mw=1000&mh=562',
+                        'video_src' => '//player.vimeo.com/video/551517718',
+                        'duration' => 8,
+                        'assignments' => [
+                            [
+                                'title' => 'Getting some inspiration',
+                                'subtitle' => 'Take everything you learned so far and practice soloing over the jam track.',
+                                'soundslice' => 'https://www.soundslice.com/slices/zwTDc/embed/?api=1&amp;scroll_type=2&amp;branding=0',
+                            ],
+                        ],
+                        'assets' => [
+                            [
+                                'title' => 'Jam Track',
+                                'src' => 'https://d1923uyy6spedc.cloudfront.net/303786-resource-1621453970.mp3',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'solo-in-an-hour/lessons/6',
+                        'title' => 'What About Soloing In Other Keys?',
+                        'desc' => 'In case you haven’t realized... not all music is in the same key.
+
+But once you know how to solo in one key, you’ll know how to solo in any key. Ayla will show you how.',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/1301276875-aabf62485e6cd3b785ee36d6f1a797bd74d9b1f60b9ddad48?mw=1000&mh=562',
+                        'video_src' => '//player.vimeo.com/video/551517736',
+                        'duration' => 5,
+                        'assignments' => [
+                            [
+                                'title' => 'Soloing in different keys',
+                                'subtitle' => 'Apply everything you learned so far about soloing to these new keys.',
+                                'soundslice' => 'https://www.soundslice.com/slices/1HTDc/embed/?api=1&amp;scroll_type=2&amp;branding=0',
+                            ],
+                        ],
+                        'assets' => [
+                            [
+                                'title' => 'Jam Track - Key of C',
+                                'src' => 'https://d1923uyy6spedc.cloudfront.net/303786-resource-1621453970.mp3',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'Jam Track - Key of E',
+                                'src' => 'https://d1923uyy6spedc.cloudfront.net/303787-resource-1621453625.mp3',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'solo-in-an-hour/lessons/7',
+                        'title' => 'Where To Go From Here',
+                        'desc' => 'Thank you so much, and congratulations on learning to Solo In An Hour!
+
+In this last video, Ayla will show you the techniques that separate a good guitar player from a great guitar player and will help you find your own artistic identity on the guitar.
+
+And now that you’re well on your way, you might be wondering where do you go from here?
+
+Well, we’d love to show you!
+
+So if you enjoyed this series, come and check out <a href="/trial" target="_blank">a 7-day free trial</a> to Guitareo and keep learning from Ayla.',
+                        'thumbnail' => 'https://guitareo.s3.amazonaws.com/courses/Learn%20To%20Solo%20In%20An%20Hour/7-where-to-go.png',
+                        'video_src' => '//player.vimeo.com/video/552498302',
+                        'duration' => 6,
+                        'assets' => [],
+                    ],
+                ],
+            ],
+            [
+                'brand_id' => 3,
+                'title' => 'Acoustic Guitar Jumpstart',
+                'meta_desc' => 'Sign up on this page and you\'ll get a guided beginner guitar course with Nate Savage designed specifically for acoustic guitarists.',
+                'meta_img' => 'https://s3.amazonaws.com/guitareo/acoustic-jump-start/6.jpg',
+                'slug' => 'acoustic-guitar-jumpstart/course-index',
+                'assets' => [
+                    [
+                        'title' => 'Course Resources',
+                        'src' => 'https://s3.amazonaws.com/guitareo/acoustic-jump-start/acoustic-guitar-jump-start.pdf',
+                        'soundslice' => ''
+                    ],
+                ],
+                'lessons' => [
+                    [
+                        'slug' => 'acoustic-guitar-jumpstart/course-index/1',
+                        'title' => 'Intro',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/737347927-166fded238067fc2a7d6aa90afe324b554e915a363323dac7e7af24088d6a5e1-d?mw=1200&mh=675',
+                        'video_src' => '//player.vimeo.com/video/299263691',
+                        'duration' => 4,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'acoustic-guitar-jumpstart/course-index/2',
+                        'title' => 'Tuning',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/737351519-edb6fe14faf06d481ce60340492a4660f73710f0e560fe8823881435e70593f4-d?mw=1200&mh=675',
+                        'video_src' => '//player.vimeo.com/video/299266556',
+                        'duration' => 8,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'acoustic-guitar-jumpstart/course-index/3',
+                        'title' => 'Strumming',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/737353109-d7bce4b404daad0181add03b7e6a816d89bfa2f7f39bf484cfcb9c9625398107-d?mw=1200&mh=675',
+                        'video_src' => '//player.vimeo.com/video/299267918',
+                        'duration' => 6,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'acoustic-guitar-jumpstart/course-index/4',
+                        'title' => 'Clean Chords',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/737358341-89fed9172f16b88c85ee9363bec9ee5f252d903e4c803f0c8f96c6c7e61dc29a-d?mw=1200&mh=675',
+                        'video_src' => '//player.vimeo.com/video/299271710',
+                        'duration' => 13,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'acoustic-guitar-jumpstart/course-index/5',
+                        'title' => 'Changing Chords Smoothly',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/737361727-b7002ed2a132f4e6138eec3b90a47314ca7d82d31a24908b40c9e13330b07721-d?mw=1200&mh=675',
+                        'video_src' => '//player.vimeo.com/video/299274819',
+                        'duration' => 9,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'acoustic-guitar-jumpstart/course-index/6',
+                        'title' => 'Learning Songs',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/737367207-d7dbd393d9685a942edb102941f0a8818ba52f23a8ade866325b1c0e0283d6db-d?mw=1200&mh=675',
+                        'video_src' => '//player.vimeo.com/video/299279143',
+                        'duration' => 9,
+                        'assets' => [
+                            [
+                                'title' => 'Full Speed',
+                                'src' => 'https://s3.amazonaws.com/guitareo/acoustic-jump-start/jambalaya.mp3',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'Slow Speed',
+                                'src' => 'https://s3.amazonaws.com/guitareo/acoustic-jump-start/jambalaya-slow.mp3',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'acoustic-guitar-jumpstart/course-index/7',
+                        'title' => 'Music Theory',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/737368212-33be88307072a4bca4a01b530a7f00ac433097e6ea49da74bbf90d3fc9340fe6-d?mw=1200&mh=675',
+                        'video_src' => '//player.vimeo.com/video/299279896',
+                        'duration' => 8,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'acoustic-guitar-jumpstart/course-index/8',
+                        'title' => 'What To Do Next',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/737368608-605f4aa55b2fbd21dc573f4dc9e5f0e90f4e0f15f5171c0916b4d1b430f737ab-d?mw=1200&mh=675',
+                        'video_src' => '//player.vimeo.com/video/299280602',
+                        'duration' => 3,
+                        'assets' => [],
+                    ],
+                ],
+            ],
+            [
+                'brand_id' => 3,
+                'title' => 'Starter Kit - Guitar Fundamentals',
+                'meta_desc' => 'Get instant-access to over 50 step-by-step guitar lessons covering nine essential topics. These exclusive video lessons are provided by Nate Savage of Guitareo.com.',
+                'meta_img' => 'https://guitarlessons-com-public.s3.amazonaws.com/images/guitar-toolbox-og.jpg',
+                'slug' => 'starter-kit/lessons/fundamentals',
+                'lessons' => [
+                    [
+                        'slug' => 'starter-kit/lessons/fundamentals/1',
+                        'title' => 'Series Overview',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/571188524-98c535b638996563106961fda5ff9e7ee3865921ab525e814acae6f434acdeba-d?mw=1000&mh=56',
+                        'video_src' => '//player.vimeo.com/video/166972298',
+                        'duration' => 1,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'starter-kit/lessons/fundamentals/2',
+                        'title' => 'Parts Of The Acoustic Guitar',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/571218190-fb3ecc2a5e81f487639300198f87de642e67edcba794bf7207d4b794d8b8847f-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/166972304',
+                        'duration' => 3,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'starter-kit/lessons/fundamentals/3',
+                        'title' => 'Parts Of The Electric Guitar',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/571233289-a77ed408eb0822dfd011ea13d86936f26f498ae3e90c56d8c1ede089cba7ee8b-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/166972302',
+                        'duration' => 5,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'starter-kit/lessons/fundamentals/4',
+                        'title' => 'How To Hold The Guitar',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/571218082-55852ebead9fe86fb81958eecc5528408c3cf2a3a40ff207c98e10ef4dae866a-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/166972303',
+                        'duration' => 3,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'starter-kit/lessons/fundamentals/5',
+                        'title' => 'Numbering Systems',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/571209737-9e4e24322d0b19fa74b699abb2081f6bc14a749020dbac34b9da30cdd1c89b92-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/166972299',
+                        'duration' => 2,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'starter-kit/lessons/fundamentals/6',
+                        'title' => 'Names Of The Open Strings',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/571204819-c37cf7a6891d853c7f55017e3445148e0b14b46c34fec46847a3d08ac42fe3b0-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/166972300',
+                        'duration' => 2,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'starter-kit/lessons/fundamentals/7',
+                        'title' => 'Series Review',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/571200203-8fe04f6092b3012d2776866063d57319e03b7e8968945202f9edfe08a440bd81-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/166972305',
+                        'duration' => 1,
+                        'assets' => [],
+                    ],
+                ],
+            ],
+            [
+                'brand_id' => 3,
+                'title' => 'Starter Kit - Open Chords',
+                'meta_desc' => 'Get instant-access to over 50 step-by-step guitar lessons covering nine essential topics. These exclusive video lessons are provided by Nate Savage of Guitareo.com.',
+                'meta_img' => 'https://guitarlessons-com-public.s3.amazonaws.com/images/guitar-toolbox-og.jpg',
+                'slug' => 'starter-kit/lessons/open-chords',
+                'lessons' => [
+                    [
+                        'slug' => 'starter-kit/lessons/open-chords/1',
+                        'title' => 'Series Overview',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/589593047-4a148264b860a4e19d36f24ad68b407f7321b5433591c7db0a823a3321e5b527-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/181099081',
+                        'duration' => 2,
+                        'assets' => [
+                            [
+                                'title' => 'Open Chords Resources',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/zips/open-chords-1.zip',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'starter-kit/lessons/open-chords/2',
+                        'title' => 'Basic Chording Technique',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/589622533-6c155ed671dfc5c0391c5a82888729703d4223e538866d144d56a35ddd67b58d-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/181099098',
+                        'duration' => 6,
+                        'assets' => [
+                            [
+                                'title' => 'Basic Chording Technique PNG',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/graphics/open-chords-1/open-a-d-e-major-chords.png',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'starter-kit/lessons/open-chords/3',
+                        'title' => 'Open A, D, & E Major Chords',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/589656864-fef38a0f9706127ed6364a8f7f6d9d8a1efe4dd0ce82dc16f320c7571fcb503d-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/181099143',
+                        'duration' => 10,
+                        'assets' => [
+                            [
+                                'title' => 'Basic Chording Technique PNG',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/graphics/open-chords-1/open-a-d-e-major-chords.png',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'starter-kit/lessons/open-chords/4',
+                        'title' => 'Changing Between A, D, & E Major',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/589685775-3bc41ce35ee43cff9978895b721468ec236ede3df7367f7ca3c345f24875ae8c-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/181099154',
+                        'duration' => 8,
+                        'assets' => [
+                            [
+                                'title' => 'Changing Between A, D, & E Major PDF',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/pdfs/open-chords-1-examples.pdf',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'starter-kit/lessons/open-chords/5',
+                        'title' => 'Practice Along',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/589652608-7c69bd63e5ef49d7062cb87520fe4827e27025ea50d753320066755b74c65508-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/181099162',
+                        'duration' => 6,
+                        'assets' => [
+                            [
+                                'title' => 'Practice Along PNG 1',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/graphics/open-chords-1/open-a-d-e-major-chords.png',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'Practice Along PNG 2',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/graphics/open-chords-1/open-chords-1-examples.png',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'starter-kit/lessons/open-chords/6',
+                        'title' => 'Musical Application',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/589632976-327c955a812ac3fe56effaa3de65a9f9559282a813e1254b212ccd4f6f294fa0-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/181099168',
+                        'duration' => 4,
+                        'assets' => [
+                            [
+                                'title' => 'Musical Application PNG',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/graphics/open-chords-1/open-a-d-e-major-chords.png',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'Musical Application PDF',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/pdfs/open-chords-1-examples.pdf',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'Musical Application MP3',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/mp3s/open-chords-1-no-click.mp3',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'Musical Application MP3 w/ Click',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/mp3s/open-chords-1-click.mp3',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            [
+                'brand_id' => 3,
+                'title' => 'Starter Kit - Heartbreak Avenue',
+                'meta_desc' => 'Get instant-access to over 50 step-by-step guitar lessons covering nine essential topics. These exclusive video lessons are provided by Nate Savage of Guitareo.com.',
+                'meta_img' => 'https://guitarlessons-com-public.s3.amazonaws.com/images/guitar-toolbox-og.jpg',
+                'slug' => 'starter-kit/lessons/heartbreak-avenue',
+                'assets' => [
+                    [
+                        'title' => 'All Lesson Resources',
+                        'src' => 'https://guitarskillaccelerator-com.s3.amazonaws.com/media/zip/heartbreak-avenue.zip',
+                        'soundslice' => ''
+                    ],
+                    [
+                        'title' => 'Jam Track w/ Click',
+                        'src' => 'https://guitarskillaccelerator-com.s3.amazonaws.com/media/mp3/heartbreak-avenue-no-rhythm-guitar-click.mp3',
+                        'soundslice' => ''
+                    ],
+                    [
+                        'title' => 'Jam Track No Click',
+                        'src' => 'https://guitarskillaccelerator-com.s3.amazonaws.com/media/mp3/heartbreak-avenue-no-rhythm-guitar-no-click.mp3',
+                        'soundslice' => ''
+                    ],
+                ],
+                'lessons' => [
+                    [
+                        'slug' => 'starter-kit/lessons/heartbreak-avenue/1',
+                        'title' => 'Series Overview',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/579719510-d42a7ccc8fdc9225fe0761fa316407cb177b0bc0c1c55587ffcf07c0c12984f9-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/173407382',
+                        'duration' => 2,
+                        'assets' => [
+                            [
+                                'title' => 'Full Band Jam Track',
+                                'src' => 'https://guitarskillaccelerator-com.s3.amazonaws.com/media/mp3/heartbreak-avenue-full-band.mp3',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'Tabs & Sheet Music',
+                                'src' => 'https://guitarskillaccelerator-com.s3.amazonaws.com/media/pdf/heartbreak-avenue.pdf',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'starter-kit/lessons/heartbreak-avenue/2',
+                        'title' => 'The Chords',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/579726452-3957b8d94ea37643c56fd5306813c081d39ea1ce489a3da42fa62485d20d5296-d_1280x720?r=pad',
+                        'video_src' => '//player.vimeo.com/video/173407380',
+                        'duration' => 5,
+                        'assets' => [
+                            [
+                                'title' => 'The Chords PNG',
+                                'src' => 'https://guitarskillaccelerator-com.s3.amazonaws.com/media/images/heartbreak-chords.png',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'starter-kit/lessons/heartbreak-avenue/3',
+                        'title' => 'Strumming Patterns',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/579721441-172eae1d0cc0194ce02060afa04d49cb39af77e4f8b4cd811555bc037dfd3637-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/173407384',
+                        'duration' => 2,
+                        'assets' => [
+                            [
+                                'title' => 'The Chords PNG',
+                                'src' => 'https://guitarskillaccelerator-com.s3.amazonaws.com/media/images/heartbreak-chords.png',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'starter-kit/lessons/heartbreak-avenue/4',
+                        'title' => 'Song A Section',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/579718599-099c8d821bbd6f38cb7aa55f7b3c50ea2e990489f903a6821a2e7653f6049f1d-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/173407381',
+                        'duration' => 2,
+                        'assets' => [
+                            [
+                                'title' => 'Tabs & Sheet Music',
+                                'src' => 'https://guitarskillaccelerator-com.s3.amazonaws.com/media/pdf/heartbreak-avenue.pdf',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'starter-kit/lessons/heartbreak-avenue/5',
+                        'title' => 'Song B Section',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/579717931-3018a79aef1565ee77392ce824cf987f56fc0b69c9a84809197e886dbaba2a1b-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/173407383',
+                        'duration' => 2,
+                        'assets' => [
+                            [
+                                'title' => 'Tabs & Sheet Music',
+                                'src' => 'https://guitarskillaccelerator-com.s3.amazonaws.com/media/pdf/heartbreak-avenue.pdf',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'starter-kit/lessons/heartbreak-avenue/6',
+                        'title' => 'Song Structure',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/579711765-2decd6304436925813433c7bec1f5dba5e6b0297bee4e4a3d0326bb72f97dc6d-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/173407385',
+                        'duration' => 1,
+                        'assets' => [
+                            [
+                                'title' => 'Full Band Jam Track',
+                                'src' => 'https://guitarskillaccelerator-com.s3.amazonaws.com/media/mp3/heartbreak-avenue-full-band.mp3',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'Tabs & Sheet Music',
+                                'src' => 'https://guitarskillaccelerator-com.s3.amazonaws.com/media/pdf/heartbreak-avenue.pdf',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'starter-kit/lessons/heartbreak-avenue/7',
+                        'title' => 'Performance',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/579725313-42acb2d2bae42d6ed67e86fdaad705aded0de5412035e9721862d66e7cd7e71d-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/173407378',
+                        'duration' => 3,
+                        'assets' => [
+                            [
+                                'title' => 'Full Band Jam Track',
+                                'src' => 'https://guitarskillaccelerator-com.s3.amazonaws.com/media/mp3/heartbreak-avenue-full-band.mp3',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'Tabs & Sheet Music',
+                                'src' => 'https://guitarskillaccelerator-com.s3.amazonaws.com/media/pdf/heartbreak-avenue.pdf',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            [
+                'brand_id' => 3,
+                'title' => 'Starter Kit - Strumming',
+                'meta_desc' => 'Get instant-access to over 50 step-by-step guitar lessons covering nine essential topics. These exclusive video lessons are provided by Nate Savage of Guitareo.com.',
+                'meta_img' => 'https://guitarlessons-com-public.s3.amazonaws.com/images/guitar-toolbox-og.jpg',
+                'slug' => 'starter-kit/lessons/strumming',
+                'lessons' => [
+                    [
+                        'slug' => 'starter-kit/lessons/strumming/1',
+                        'title' => 'Series Overview',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/592824329-4d66f633b42b4292a17a4fcf52996e43fe8abcc8070c63aef6e087086c097161-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/182874374',
+                        'duration' => 2,
+                        'assets' => [
+                            [
+                                'title' => 'Strumming Resources',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/zips/strumming-1.zip',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'starter-kit/lessons/strumming/2',
+                        'title' => 'Basic Strumming Technique',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/592099106-ea1574b1f75a519a835317488b9b42387ff9ce1b5585bdc433e3c769f97bd324-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/182874370',
+                        'duration' => 7,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'starter-kit/lessons/strumming/3',
+                        'title' => 'Downstrokes',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/592844038-489afcf8b1244ee2e12f4a540354127044ece36d8be1a560759ca3bc41eb62da-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/182874375',
+                        'duration' => 4,
+                        'assets' => [
+                            [
+                                'title' => 'Strumming Examples 1-4 PDF',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/pdfs/strumming-1-examples.pdf',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'starter-kit/lessons/strumming/4',
+                        'title' => 'Upstrokes',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/591974884-50339e825985ece7d67531d673aea30011d7f17386a7c3ab466c480d5790110a-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/182874372',
+                        'duration' => 3,
+                        'assets' => [
+                            [
+                                'title' => 'Strumming Examples 1-4 PDF',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/pdfs/strumming-1-examples.pdf',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'starter-kit/lessons/strumming/5',
+                        'title' => 'Downstrokes & Upstrokes Together',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/591974785-81125dcce7f73d7cbb21e43caebbf61d4116f251993562206e35f328203681f9-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/182874373',
+                        'duration' => 3,
+                        'assets' => [
+                            [
+                                'title' => 'Strumming Examples 1-4 PDF',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/pdfs/strumming-1-examples.pdf',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'starter-kit/lessons/strumming/6',
+                        'title' => 'Practice Along',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/591974955-505af73ef5c1deeae618d697e0e9caa7acf1e47392596a7d863fc1c4cae5b3ed-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/182874376',
+                        'duration' => 3,
+                        'assets' => [
+                            [
+                                'title' => 'Strumming Examples 1-4 PDF',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/pdfs/strumming-1-examples.pdf',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'starter-kit/lessons/strumming/7',
+                        'title' => 'Musical Application',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/591975257-b4d7193d3e95396cc398aab2a0514cc96265797f5e44e2ac59fd9b3f81a9c15b-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/182874369',
+                        'duration' => 3,
+                        'assets' => [
+                            [
+                                'title' => 'Strumming Examples 1-4 PDF',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/pdfs/strumming-1-examples.pdf',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'MP3 No Click',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/mp3s/strumming-1-no-click.mp3',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'MP3 With Click',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/mp3s/strumming-1-click.mp3',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            [
+                'brand_id' => 3,
+                'title' => 'Toolbox - Changing Chords Smoothly',
+                'meta_desc' => 'Get instant-access to over 50 step-by-step guitar lessons covering nine essential topics. These exclusive video lessons are provided by Nate Savage of Guitareo.com.',
+                'meta_img' => 'https://guitarlessons-com-public.s3.amazonaws.com/images/guitar-toolbox-og.jpg',
+                'slug' => 'toolbox/lessons/changing-chords-smoothly',
+
+                'lessons' => [
+                    [
+                        'slug' => 'toolbox/lessons/changing-chords-smoothly/1',
+                        'title' => 'Series Overview',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/571265065-b747144fc7799529acc354d0fbdf9cd137fbe8f458191f6e2b96eeee40fb4c47-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/167037192',
+                        'duration' => 1,
+                        'assets' => [
+                            [
+                                'title' => 'Changing Chords Smoothly Resources',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/zips/changing-chords-smoothly.zip',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/changing-chords-smoothly/2',
+                        'title' => 'Chording Technique',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/571269669-6d043dd73cc383be25744e4aed12c6ad20f1a94fc0aebf3f0cca4de9ff5f3154-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/167037193',
+                        'duration' => 4,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/changing-chords-smoothly/3',
+                        'title' => 'Knowing The Chords First',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/571427895-fb8cffb35cb1596dcabaaf2a8bb9e50481522ce8c04cf0d2acf687462dc12edd-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/167037191',
+                        'duration' => 4,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/changing-chords-smoothly/4',
+                        'title' => 'Tips For Changing Chords',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/571272562-73a38cc6da4faceb8a78f8bdbda040d61cb1f21dd19842b43d2d5017ea9f44b5-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/167037189',
+                        'duration' => 4,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/changing-chords-smoothly/5',
+                        'title' => 'The Open G & C Chords',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/571415213-aaf612b98f9a302879c01369167af3b6ef322bace5d9888c1fc86bcbd969f3dd-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/167037190',
+                        'duration' => 4,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/changing-chords-smoothly/6',
+                        'title' => 'Practice Along',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/571437697-d7fee13565686039492c607d16cc960019c795b46934079c42c5b10c6ac346e8-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/167037188',
+                        'duration' => 4,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/changing-chords-smoothly/7',
+                        'title' => 'Musical Application',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/571437697-d7fee13565686039492c607d16cc960019c795b46934079c42c5b10c6ac346e8-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/167037188',
+                        'duration' => 4,
+                        'assets' => [
+                            [
+                                'title' => 'Changing Chords A To D No Click - MP3',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/mp3s/changing-chords-smoothly-a-d-no-click.mp3',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'Changing Chords A To D Click - MP3',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/mp3s/changing-chords-smoothly-a-d-click.mp3',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'Changing Chords G To C No Click - MP3',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/mp3s/changing-chords-smoothly-g-c-no-click.mp3',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'Changing Chords G To C Click - MP3',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/mp3s/changing-chords-smoothly-g-c-click.mp3',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            [
+                'brand_id' => 3,
+                'title' => 'Toolbox - Exploring Guitar Rhythms',
+                'meta_desc' => 'Get instant-access to over 50 step-by-step guitar lessons covering nine essential topics. These exclusive video lessons are provided by Nate Savage of Guitareo.com.',
+                'meta_img' => 'https://guitarlessons-com-public.s3.amazonaws.com/images/guitar-toolbox-og.jpg',
+                'slug' => 'toolbox/lessons/exploring-guitar-rhythms',
+                'lessons' => [
+                    [
+                        'slug' => 'toolbox/lessons/exploring-guitar-rhythms/1',
+                        'title' => 'Series Overview',
+                        'desc' => '',
+                        'thumbnail' => '',
+                        'video_src' => '//player.vimeo.com/video/179472223',
+                        'duration' => 2,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/exploring-guitar-rhythms/2',
+                        'title' => 'How Rhythm Works',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/587459414-b15d0999348fb4ebc25467d8289ab0e162b6c66767eab2697c9edb2787c71290-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/179472224',
+                        'duration' => 5,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/exploring-guitar-rhythms/3',
+                        'title' => 'Whole & Half Note Exercises 1',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/588524938-7cb7cd4f02d4a50be81b94f5822b510367f04aed9ec0f2703631fd4dfa2bc07b-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/180326078',
+                        'duration' => 4,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/exploring-guitar-rhythms/4',
+                        'title' => 'Whole & Half Note Exercises 2',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/587460114-787126431e0e99a3bc61d5818287119e9a12dc17f28ce98c8bdc291f38bb8731-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/179472230',
+                        'duration' => 4,
+                        'assets' => [
+                            [
+                                'title' => 'Reading Rhythm Examples 1-10 - PNG',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/graphics/reading-rhythms-1/reading-rhythms-1-10.png',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/exploring-guitar-rhythms/5',
+                        'title' => 'Musical Application',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/587449342-817583dd41b64204a4d0825b54404bbfce3a890636df031759353638a5913b3d-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/179472228',
+                        'duration' => 2,
+                        'assets' => [
+                            [
+                                'title' => 'Reading Rhythm Examples 1-10 - PNG',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/graphics/reading-rhythms-1/reading-rhythms-1-10.png',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'Whole & Half Note Song No Click - MP3',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/mp3s/whole-and-half-note-song-no-click.mp3',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'Whole & Half Note Song Click - MP3',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/mp3s/whole-and-half-note-song-click.mp3',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            [
+                'brand_id' => 3,
+                'title' => 'Toolbox - How To Tune A Guitar',
+                'meta_desc' => 'Get instant-access to over 50 step-by-step guitar lessons covering nine essential topics. These exclusive video lessons are provided by Nate Savage of Guitareo.com.',
+                'meta_img' => 'https://guitarlessons-com-public.s3.amazonaws.com/images/guitar-toolbox-og.jpg',
+                'slug' => 'toolbox/lessons/how-to-tune-a-guitar',
+                'lessons' => [
+                    [
+                        'slug' => 'toolbox/lessons/how-to-tune-a-guitar/1',
+                        'title' => 'Series Overview',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/572984065-e3b791a5ee5a8450a97eecc0fb10e5a319e36174895648d5234fd6469b1f282b-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/168467649',
+                        'duration' => 1,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/how-to-tune-a-guitar/2',
+                        'title' => 'Open String Names',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/572987993-b9fefaefa895a248c7dbf0e0c75befccc3b826e42425e2d06c5afd4d4bba6570-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/168467656',
+                        'duration' => 2,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/how-to-tune-a-guitar/3',
+                        'title' => 'Naturals, Sharps & Flats',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/572988689-4ff5237b89335bcee4f3cc47205626f15c7c03ba8d9ec6809d19b5085e5736c4-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/168467654',
+                        'duration' => 3,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/how-to-tune-a-guitar/4',
+                        'title' => 'Using An Electronic Tuner',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/572994177-64fd71ec6704a15777f951d08c7de0bfc41928ec4c6f98525d68e93a3fd2eae8-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/168467651',
+                        'duration' => 8,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/how-to-tune-a-guitar/5',
+                        'title' => 'Developing Your Ear',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/572985760-35eb1eb5b63eec5a987d90d6fd679771733a098ce0fbf035d18aa569081ca155-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/168467653',
+                        'duration' => 2,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/how-to-tune-a-guitar/6',
+                        'title' => 'Tuning By Ear',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/572994644-7d4b1d7ddc8ef3504e9ac3880cef201e433e0592383717eb71eb35402f6c683b-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/168467655',
+                        'duration' => 7,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/how-to-tune-a-guitar/7',
+                        'title' => 'Practice Along',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/572993726-558588ee14f6da1fe7fe392222f628a59f425f815e0dfd3d77b6b0a9002f2636-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/168467652',
+                        'duration' => 7,
+                        'assets' => [],
+                    ],
+                ],
+            ],
+            [
+                'brand_id' => 3,
+                'title' => 'Toolbox - Legato Hammer Ons & Pull Offs',
+                'meta_desc' => 'Get instant-access to over 50 step-by-step guitar lessons covering nine essential topics. These exclusive video lessons are provided by Nate Savage of Guitareo.com.',
+                'meta_img' => 'https://guitarlessons-com-public.s3.amazonaws.com/images/guitar-toolbox-og.jpg',
+                'slug' => 'toolbox/lessons/legato-hammer-ons-pull-offs',
+                'assets' => [
+                    [
+                        'title' => 'Legato Hammer Ons &amp; Pull Offs Examples',
+                        'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/pdfs/legato-technique-1-examples.pdf',
+                        'soundslice' => ''
+                    ],
+                ],
+                'lessons' => [
+                    [
+                        'slug' => 'toolbox/lessons/legato-hammer-ons-pull-offs/1',
+                        'title' => 'Series Overview',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/605954515-8460b046e67ce64de625ab015601321a274fd4a6ceb569bc05b1351d55fc0e4b-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/193950412',
+                        'duration' => 2,
+                        'assets' => [
+                            [
+                                'title' => 'Legato Hammer Ons &amp; Pull Offs Resources',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/zips/legato-technique-1.zip',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/legato-hammer-ons-pull-offs/2',
+                        'title' => 'Hammer-On Technique',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/606309781-e7ed5d98eb34e3c52e0a6b033d40bc15808ea1109437421b0c2132b6ef28c78e-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/193950419',
+                        'duration' => 3,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/legato-hammer-ons-pull-offs/3',
+                        'title' => 'Pull-Off Technique',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/606328591-a4116810a5e6ef3a23755c7e7459dafe45d7bf9eba8bec3c353cef5f38a05432-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/193950443',
+                        'duration' => 4,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/legato-hammer-ons-pull-offs/4',
+                        'title' => 'Legato Technique',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/606328591-a4116810a5e6ef3a23755c7e7459dafe45d7bf9eba8bec3c353cef5f38a05432-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/193950460',
+                        'duration' => 8,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/legato-hammer-ons-pull-offs/5',
+                        'title' => 'Legato With Minor Pentatonic',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/606400202-100554e74a515b9f15d8320d4fcdce79bdfede001feb3a862ec731b4762525d3-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/193950467',
+                        'duration' => 8,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/legato-hammer-ons-pull-offs/6',
+                        'title' => 'Legato Licks',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/606422010-628455cdba8278305bd023fd5115e9ba1a87e3f042aac650ab41db56c7ba77b4-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/193950483',
+                        'duration' => 6,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/legato-hammer-ons-pull-offs/7',
+                        'title' => 'Practice Along',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/606426087-990a8b74c5f261003e19880e932252fda8aa0041844cd4a9404b7c2e1f14e67a-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/193950490',
+                        'duration' => 10,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/legato-hammer-ons-pull-offs/8',
+                        'title' => 'Musical Application',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/606426087-990a8b74c5f261003e19880e932252fda8aa0041844cd4a9404b7c2e1f14e67a-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/193949188',
+                        'duration' => 2,
+                        'assets' => [
+                            [
+                                'title' => 'Jam Track No Click - MP3',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/mp3s/legato-technique-1-no-click.mp3',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'Jam Track With Click - MP3',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/mp3s/legato-technique-1-click.mp3',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            [
+                'brand_id' => 3,
+                'title' => 'Toolbox - Making Chords Sound Clean',
+                'meta_desc' => 'Get instant-access to over 50 step-by-step guitar lessons covering nine essential topics. These exclusive video lessons are provided by Nate Savage of Guitareo.com.',
+                'meta_img' => 'https://guitarlessons-com-public.s3.amazonaws.com/images/guitar-toolbox-og.jpg',
+                'slug' => 'toolbox/lessons/making-chords-sound-clean',
+                'lessons' => [
+                    [
+                        'slug' => 'toolbox/lessons/making-chords-sound-clean/1',
+                        'title' => 'Series Overview',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/571577345-734265fee12b59155896757b23ea7260d37920079cb4f24ebcab9fc65d49213a-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/167285840',
+                        'duration' => 1,
+                        'assets' => [
+                            [
+                                'title' => 'Making Chords Sounds Clean Resources',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/zips/making-chords-sound-clean.zip',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/making-chords-sound-clean/2',
+                        'title' => 'Clean Chord Technique Tips',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/571588650-226d0470ef0933e688d23f1eeea79a05ef7c716af832f9b2e1cfb4df736ef306-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/167285844',
+                        'duration' => 4,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/making-chords-sound-clean/3',
+                        'title' => 'Remembering Chord Shapes',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/571587616-a1f2c609ad5ddd494c0cc94140bc9988e1e102e6884270e40ac169e6333e598d-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/167285842',
+                        'duration' => 3,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/making-chords-sound-clean/4',
+                        'title' => 'Practice Along',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/571585436-7f56a0936ae732e6997b639e7a453360dad62d8c5f795221863d689f04e7142e-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/167285841',
+                        'duration' => 4,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/making-chords-sound-clean/5',
+                        'title' => 'Musical Application',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/571583098-85e81d1d244a23fff3c12b498d2096e3750327d42fed41e96e714c9254e99aba-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/167285843',
+                        'duration' => 3,
+                        'assets' => [
+                            [
+                                'title' => 'Making Chords Sound Clean No Click - MP3',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/mp3s/making-chords-sound-clean-no-click.mp3',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'Making Chords Sound Clean Click - MP3',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/mp3s/making-chords-sound-clean-click.mp3',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            [
+                'brand_id' => 3,
+                'title' => 'Toolbox - Playing Your First Guitar Solo',
+                'meta_desc' => 'Get instant-access to over 50 step-by-step guitar lessons covering nine essential topics. These exclusive video lessons are provided by Nate Savage of Guitareo.com.',
+                'meta_img' => 'https://guitarlessons-com-public.s3.amazonaws.com/images/guitar-toolbox-og.jpg',
+                'slug' => 'toolbox/lessons/playing-your-first-guitar-solo',
+                'lessons' => [
+                    [
+                        'slug' => 'toolbox/lessons/playing-your-first-guitar-solo/1',
+                        'title' => 'Series Overview',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/573436992-1d32a8fc54c477bfca8bffa1402b767127338314d594e51631c56decb1418e6f-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/168665897',
+                        'duration' => 1,
+                        'assets' => [
+                            [
+                                'title' => 'Playing Your First Solo Resources',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/zips/playing-your-first-solo.zip',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/playing-your-first-guitar-solo/2',
+                        'title' => 'How Rhythm Works',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/573424079-03d9c9c82cacf53aa89ad3affcc9722701ea257d7e5570f97e69db94e2e92ef4-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/168665889',
+                        'duration' => 3,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/playing-your-first-guitar-solo/3',
+                        'title' => 'Basic Picking Technique',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/573461282-a587064b57e9fb1ca2035255205b3a8d7a7b0d4bc0e9fd33503b19e6255b45b5-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/168665896',
+                        'duration' => 5,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/playing-your-first-guitar-solo/4',
+                        'title' => 'Basic Fretting Technique',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/573447761-569a0f2d70854a26c16e77100417704473a86ea5c672142c48c8627a63863c9f-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/168665891',
+                        'duration' => 4,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/playing-your-first-guitar-solo/5',
+                        'title' => 'A2 D2 Melody #1',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/573456972-5b91585fa6aec5296239f8a92b28f02f9e159de69e89cb4111ba5d5749fd0c8a-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/168665892',
+                        'duration' => 3,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/playing-your-first-guitar-solo/6',
+                        'title' => 'A2 D2 Melody #2',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/573466232-e25e3a45dd395c5331500e947d38e0ed209bc2ad3b8af6ac47c1fb23e75db4e2-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/168665890',
+                        'duration' => 5,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/playing-your-first-guitar-solo/7',
+                        'title' => 'Practice Along',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/573460326-6d78bdb725f89ef8a9cf9bbe8198380174563a28bb4134b01a022964fa2262df-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/168665893',
+                        'duration' => 3,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/playing-your-first-guitar-solo/8',
+                        'title' => 'Musical Application',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/573465243-2c4ea7e279e75941149685f8af3b1fa23e3e86c812c6891af061023c8cec72d3-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/168665894',
+                        'duration' => 4,
+                        'assets' => [
+                            [
+                                'title' => 'A2 D2 Progression No Click - MP3',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/mp3s/a2-d2-progression-no-click.mp3',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'A2 D2 Progression Click - MP3',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/mp3s/a2-d2-progression-click.mp3',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'Examples 1 &amp; 2 - PDF',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/pdfs/exercises-1-and-2.pdf',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            [
+                'brand_id' => 3,
+                'title' => 'Toolbox - Playing Your First Song',
+                'meta_desc' => 'Get instant-access to over 50 step-by-step guitar lessons covering nine essential topics. These exclusive video lessons are provided by Nate Savage of Guitareo.com.',
+                'meta_img' => 'https://guitarlessons-com-public.s3.amazonaws.com/images/guitar-toolbox-og.jpg',
+                'slug' => 'toolbox/lessons/playing-your-first-song',
+                'lessons' => [
+                    [
+                        'slug' => 'toolbox/lessons/playing-your-first-song/1',
+                        'title' => 'Series Overview',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/629673925-ddf79e971be15e929aaa4bfdcc8aa727eb922ebddb54925a319d35394948a1e0-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/167499055',
+                        'duration' => 1,
+                        'assets' => [
+                            [
+                                'title' => 'Playing Your First Song Resources',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/zips/playing-your-first-song.zip',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/playing-your-first-song/2',
+                        'title' => 'The Open A2 Chord',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/571838353-d17d268e6a4c50464e5b0dc79411f4e2c9d9558898cf0313639f116551ea8135-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/167499053',
+                        'duration' => 4,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/playing-your-first-song/3',
+                        'title' => 'The Open D2 Chord',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/571834737-527a2d4d6d51498cf3fb449cee23691b2e498e5bbf8e0ce29149110d4544c414-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/167499057',
+                        'duration' => 3,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/playing-your-first-song/4',
+                        'title' => 'How Rhythm Works',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/571832944-e2afa09511286fe5588a3e619b2d6e328eabdd18590d4a954766ee71f62678de-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/167499056',
+                        'duration' => 3,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/playing-your-first-song/5',
+                        'title' => 'Simple Strumming',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/571843620-151b3f7185b96824036539c3fc62a290a7763dab661ab93f1e3e290dd1a7f573-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/167499058',
+                        'duration' => 8,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/playing-your-first-song/6',
+                        'title' => 'Changing Chords',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/571839768-deea88f19579268887f9fcaa955d1999383d09549eda7d8c408f822d1364efec-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/167499059',
+                        'duration' => 3,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/playing-your-first-song/7',
+                        'title' => 'Dress Up Your Strumming',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/571842111-16c9f1f825970e3764ba64bf3dd21c205b87ffe2ab20a3ad44fc843cff20ab49-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/167499061',
+                        'duration' => 6,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/playing-your-first-song/8',
+                        'title' => 'Practice Along',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/571840719-d07290be5f2f6cb056a8927a8d305a86f13c61126443f419bafa49e78a0b1a14-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/167499054',
+                        'duration' => 5,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/playing-your-first-song/9',
+                        'title' => 'Musical Application',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/571839944-375950379f97a45476e3c223857fed86e97bb2bc853889cf422589330156d016-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/167499060',
+                        'duration' => 4,
+                        'assets' => [
+                            [
+                                'title' => 'A2 D2 Groove No Click - MP3',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/mp3s/a2-d2-groove-no-click.mp3',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'A2 D2 Groove Click - MP3',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/mp3s/a2-d2-groove-click.mp3',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'A2 D2 Groove Notation - PDF',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/pdfs/a2-d2-groove.pdf',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            [
+                'brand_id' => 3,
+                'title' => 'Toolbox - Sight Reading Essentials',
+                'meta_desc' => 'Get instant-access to over 50 step-by-step guitar lessons covering nine essential topics. These exclusive video lessons are provided by Nate Savage of Guitareo.com.',
+                'meta_img' => 'https://guitarlessons-com-public.s3.amazonaws.com/images/guitar-toolbox-og.jpg',
+                'slug' => 'toolbox/lessons/sight-reading-essentials',
+                'lessons' => [
+                    [
+                        'slug' => 'toolbox/lessons/sight-reading-essentials/1',
+                        'title' => 'Series Overview',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/587125268-11061a71943b8b670c2b1070ec2615297590f4d18a3c8df120f61debe85bece7-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/179247804',
+                        'duration' => 2,
+                        'assets' => [
+                            [
+                                'title' => 'Sight Reading Essentials Resources',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/zips/reading-music-1.zip',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/sight-reading-essentials/2',
+                        'title' => 'Reading Basics',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/587139107-0fce8f93d6b6bc4cb60da70ccefccbe74cde43f6e71dd0cbad5999ece1b5a76b-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/179247808',
+                        'duration' => 6,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/sight-reading-essentials/3',
+                        'title' => 'Natural Notes On The E & B Strings',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/587145380-4cb9fb9ab5d26f73538e55f7b4d4ea82131b48b864d39a7383e963c803e06df6-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/179247809',
+                        'duration' => 7,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/sight-reading-essentials/4',
+                        'title' => 'Whole & Half Note Exercises 1',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/587146392-6842aed594f959ca1fd60565f6eb283973aa8cfd0ce83f8c770f3fb834dac58f-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/179247806',
+                        'duration' => 9,
+                        'assets' => [
+                            [
+                                'title' => 'Reading Music 1 Examples 1-12',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/pdfs/reading-music-1-examples-1-12.pdf',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/sight-reading-essentials/5',
+                        'title' => 'Whole & Half Note Exercises 2',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/587134161-bb709c3f2912d7d80963d37fa3147e00f05d31f90b3bfcd7cdb9c089682da8e1-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/179247807',
+                        'duration' => 3,
+                        'assets' => [
+                            [
+                                'title' => 'Reading Music 1 Examples 1-12',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/pdfs/reading-music-1-examples-1-12.pdf',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/sight-reading-essentials/6',
+                        'title' => 'Musical Application',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/587133642-19b52faf6290df95551fc796bc5de172dc19b38e4a0361cebad079376cd891ca-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/179247814',
+                        'duration' => 2,
+                        'assets' => [
+                            [
+                                'title' => 'Reading Music 1 Song - PDF',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/pdfs/reading-music-1-song.pdf',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'Reading Music 1 Song No Click - MP3',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/mp3s/reading-music-1-song-no-click.mp3',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'Reading Music 1 Song Click - MP3',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/mp3s/reading-music-1-song-click.mp3',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            [
+                'brand_id' => 3,
+                'title' => 'Toolbox - Soloing With Minor Pentatonic Scales',
+                'meta_desc' => 'Get instant-access to over 50 step-by-step guitar lessons covering nine essential topics. These exclusive video lessons are provided by Nate Savage of Guitareo.com.',
+                'meta_img' => 'https://guitarlessons-com-public.s3.amazonaws.com/images/guitar-toolbox-og.jpg',
+                'slug' => 'toolbox/lessons/soloing-with-minor-pentatonic-scales',
+                'assets' => [
+                    [
+                        'title' => 'Soloing With Pentatonic Scales Examples',
+                        'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/pdfs/minor-pentatonic-scales-1-examples.pdf',
+                        'soundslice' => ''
+                    ],
+                ],
+                'lessons' => [
+                    [
+                        'slug' => 'toolbox/lessons/soloing-with-minor-pentatonic-scales/1',
+                        'title' => 'Series Overview',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/603714108-3d03776e227a32e94cc075dfa461c7fce9329a86edbee72605bdda40aa3ad15a-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/192367837',
+                        'duration' => 2,
+                        'assets' => [
+                            [
+                                'title' => 'Soloing With Pentatonic Scales Resources',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/zips/minor-pentatonic-scales-1.zip',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/soloing-with-minor-pentatonic-scales/2',
+                        'title' => 'How It\'s Made',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/604214743-a2a2d2dbf71c181a78cc689f15a40e4a9b2db6ebd36d2fb89494c7424105e737-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/192367838',
+                        'duration' => 8,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/soloing-with-minor-pentatonic-scales/3',
+                        'title' => 'Scale Shape 6 1',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/603758552-1d739849b6b194737f20e972373c0e90721a612513975a6d087cd6b7b38607e4-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/192367841',
+                        'duration' => 18,
+                        'assets' => [
+                            [
+                                'title' => 'Jam Track No Click - MP3',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/mp3s/e-minor-pentatonic-static-no-click.mp3',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'Jam Track With Click - MP3',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/mp3s/e-minor-pentatonic-static-click.mp3',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/soloing-with-minor-pentatonic-scales/4',
+                        'title' => 'Emphasizing The Root Notes',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/603725009-e8f7427a7000b2f90a75fbeba662dcb8055c81c920ed9819670307ab6bd41a97-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/192367842',
+                        'duration' => 1,
+                        'assets' => [
+                            [
+                                'title' => 'Jam Track No Click - MP3',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/mp3s/e-minor-pentatonic-static-no-click.mp3',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'Jam Track With Click - MP3',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/mp3s/e-minor-pentatonic-static-click.mp3',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/soloing-with-minor-pentatonic-scales/5',
+                        'title' => 'Sing The Notes',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/603734323-e525808dc95e402526d3659bc06bbb42af04eec843597f20bbdbfa1884f79f61-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/192367848',
+                        'duration' => 6,
+                        'assets' => [
+                            [
+                                'title' => 'Jam Track No Click - MP3',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/mp3s/e-minor-pentatonic-static-no-click.mp3',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'Jam Track With Click - MP3',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/mp3s/e-minor-pentatonic-static-click.mp3',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/soloing-with-minor-pentatonic-scales/6',
+                        'title' => 'How To Use The Scale',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/603752760-ded001121e940d534ce72d84aef1a8de95456371579c0bef56b137e5856db00b-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/192367844',
+                        'duration' => 13,
+                        'assets' => [
+                            [
+                                'title' => 'Jam Track No Click - MP3',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/mp3s/e-minor-pentatonic-static-no-click.mp3',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'Jam Track With Click - MP3',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/mp3s/e-minor-pentatonic-static-click.mp3',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/soloing-with-minor-pentatonic-scales/7',
+                        'title' => 'Minor Pentatonic Scale Licks',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/603745117-48a05225c9818977bbe6ec88e43e738093f9881fffef99337e75a9b08e337d99-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/192367840',
+                        'duration' => 9,
+                        'assets' => [
+                            [
+                                'title' => 'Jam Track No Click - MP3',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/mp3s/e-minor-pentatonic-static-no-click.mp3',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'Jam Track With Click - MP3',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/mp3s/e-minor-pentatonic-static-click.mp3',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'toolbox/lessons/soloing-with-minor-pentatonic-scales/8',
+                        'title' => 'Practice Along',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/603732916-b6c37cba3ed9f5399e25f43eaa155ccd7639863e02f5f5495c0a1b2a90053964-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/192367843',
+                        'duration' => 5,
+                        'assets' => [
+                            [
+                                'title' => 'Jam Track No Click - MP3',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/mp3s/e-minor-pentatonic-static-no-click.mp3',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'Jam Track With Click - MP3',
+                                'src' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons-resources/mp3s/e-minor-pentatonic-static-click.mp3',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            [
+                'brand_id' => 2,
+                'title' => 'Chord Hacks',
+                'meta_desc' => 'The easier way to learn piano chords so you can play popular songs!',
+                'meta_img' => 'https://pianote.s3.amazonaws.com/chord-hacks/og-image.jpg',
+                'slug' => 'chord-hacks/lessons',
+                'lessons' => [
+                    [
+                        'slug' => 'chord-hacks/lessons/chord-hacking',
+                        'title' => 'Intro To Chord Hacking',
+                        'desc' => 'No piano player is gonna get very far without learning about chords. Luckily, chords are pretty simple and
+<em>highly </em>addictive to learn, so it shouldn’t be too hard for you to get started.
+
+The first question you might be asking is...what
+<em>is </em>a chord? You can think of a chord as a collection of notes sounding in unison of each other.
+<em>Technically </em> you can make a chord out of any combo of three or more notes, but since you’re just starting out you should stick to creating simple chords called
+<em>triads. </em>They’re really easy to make. The first chord you can make is called the C major triad. This chord is formed of three notes: a root note, a third, and a fifth note. So what does that look like applied to the key of C major? It looks like the notes C - E - G.
+
+Making a single major triad is one thing, but what makes chords really shine is when you play multiple chords together. This is called a
+<em>chord progression. </em> The easiest way to make chord progressions is to base them off of the key that you’re playing in. There are a few chords in every key that go great together, so let’s have a look at those.
+
+<img src="https://d2vyvo0tyx8ig5.cloudfront.net/cms-uploaded/rsz_lisa_smile_pic__file_1496167589.jpeg" alt="lisa-smile">
+
+Every major scale has seven notes, plus an eighth note (the octave) on top. You can make chords off of every note in this scale. The next logical note to make a chord off of is the fifth note of the scale. In the case of C major, that note will be G. The G chord looks a lot like the C chord, except the notes are now G - B - D.
+
+The next chord after that is going to sound quite a bit different. Take the notes that make up the G chord, and move each note up one white key to the right. Now you’ve got the A minor triad, and it’s made up of A - C - E. Even though it looks/feels like a similar chord to your C and G chords, it
+<em>sounds </em>way different. We’ll save why that is for a later lesson. For now just listen to the difference between the C major chord and the A minor chord.
+
+The final chord to look at is the F major chord. To make this chord, base it off of the fourth note in the C major scale. The notes are F - A - C.
+
+So, now you’ve learned how to make a simple triad and apply that chord shape to several points in the C major scale, creating different chords. You learned the C major triad, along with G, A minor and F major. Countless songs have been written using these four chords alone! Go ahead and try em out in any combination you like.',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/902167102-c92046bc9bbb9c4e996021294d014330cbca50d5947d89174c4a9c1f707057b1-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/424943799',
+                        'duration' => 8,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'chord-hacks/lessons/inversions',
+                        'title' => 'All About Inversions',
+                        'desc' => 'Chord hacks depend
+<em>hugely</em> on inversions. So in this lesson, you’re going to learn how to take simple triads and reorder how the notes are stacked to make new chord inversions!
+
+The best way to learn chord inversions is to take a chord you already know very well, like the C major triad. The C major triad is made of the notes C - E and G. Those are the notes you need to make the chord,
+<em>but </em>those chords don’t necessarily need to be spelled out in that order. You can actually take the three notes of this chord and reorder them in three different ways! These alternate chord reorderings are called
+<em>inversions</em>.  <br><br>
+To make the first inversion of the C major triad, take the C note off the bottom of the chord instead play the C on the octave above. This makes the chord spelled out E - G - C, also known as
+<em>C first inversion. </em>
+
+Now that you know how to make a C major chord in first inversion, you can take the E off the bottom of the chord and put it one octave higher on top. This makes the chord G - C - E, or
+<em>C second inversion. </em>
+
+If you do this inversion trick one more time, you’ll find that you end up on the original form of the C chord, just an octave above. Practicing all the inversions in one fluid motion is a great way to familiarize yourself with the keyboard and gain some essential muscle memory as well.
+
+Once you’ve learned the C major chord in all its inversions, try taking the same concept and applying it to the other chords that you’ve learned so far, the V chord, the minor vi chord and the IV chord. You can make a root position chord, a first inversion and a second inversion out of each triad!',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/902167370-e996b0b99b3110cc1f122622478fca336db140ccb257ef05363e02622befdf34-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/424943879',
+                        'duration' => 8,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'chord-hacks/lessons/adding-rhythm',
+                        'title' => 'Adding Rhythm With Your Left Hand',
+                        'desc' => 'So now that you know some amazing chords in all of their inversions, you’re going to want to find some great ways to play them in the left hand. It\'ll make learning songs and cool keyboard patterns so much more fun! Here’s how to add some magic to your left hand accompaniment.
+
+The simplest way to add magic to your left hand chord progression is to actually strip them
+<em>right back </em>to just their root notes. If you play them a few octaves below middle C, you’ll have a deep, rich, open sound that won’t get in the way of your right hand chords and melodies. Wanna make that bass sound even deeper? Add an octave note to the bass notes.
+
+If you want to
+<em>hint </em>at the chord progression in the left hand without voicing all the notes in the chord, try simply playing just the 5th intervals of the chord, leaving the 3rd to be played in the right hand. Most times the best approach for the left hand is to keep it simple. The last thing you want is to cover all your beautiful melody playing with some muddy chords down below.
+
+Once you get good at all of that, you can combine some of these skills and play broken arpeggios in the left hand consisting of the root, the fifth and the octave. Before long, you’ll have developed your instincts in the left hand to create your own patterns on the fly!',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/902167277-cf096acfc9146f9f1db5cfd60e96f2da205448c5d4279b7e0f477ce573aa90f0-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/424943981',
+                        'duration' => 6,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'chord-hacks/lessons/two-hands',
+                        'title' => 'Two Hands More Fun',
+                        'desc' => 'Have you ever wanted to put both hands on the piano and just play without worrying about missing notes or screwing up? Then this lesson is for you.
+
+Now that you’ve learned about chord inversions and left hand patterns, it’s time to put both hands together. You’re gonna be moving between chords and their inversions in the right hand, while the left uses some of the magic accompaniment patterns.
+
+<img src="https://d2vyvo0tyx8ig5.cloudfront.net/cms-uploaded/Lisa Pose_file_1496175211.jpeg" alt="lisa-pose-file">
+
+In your last chord hack lesson, you learned a few ways to make your left hand move within the chords. You learned how to use root notes to give the chords some depth, and you learned how to play octaves to give the chords and even
+<em>deeper, richer </em>sound. You learned about the importance of the 5th interval for creating a subtle, open framework that will let the right hand chords and melodies really shine, and you learned about using arpeggio patterns to create some rhythmic movement.
+
+So with all of these different rhythmic variations, you’re probably gonna want to work in your right hand as well, including those sweet chord inversions! One of the most difficult barriers that a lot of students struggle with is understanding where the root is when you’ve made chord inversions. That’s why it’s important to follow the name or number in the chord, especially when you’re just starting out. Remember, the chords used in this song are the I, V, vi, IV. Start out with the I chord in root position, then move to the V chord in 1st inversion before moving that chord shape up one white key to the right and making the vi chord in 1st inversion. Your final chord movement of the progression will be the IV chord, but in 2nd inversion. When changing from chord to chord using these inversion, you’ll notice that it’s really easy to hear
+<em>exactly </em>what chord you’re playing when you play the root notes in the left hand.
+
+So go ahead and create your own left handed patterns using these examples. Don’t be afraid to experiment, and keep your ears open! You never know what you can come up with until you try!',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/902167411-a901220a513f3647a8f56b9e7345340b19a6e6a3337a8b5113c00f5fb3b54eca-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/424944086',
+                        'duration' => 7,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'chord-hacks/lessons/chord-progressions',
+                        'title' => 'Fancy Chord Progressions',
+                        'desc' => 'It’s time to make things fancy! Inversions and left hand patterns are awesome ways to sound pretty darn good at the piano, but there’s even more you can do to really make things sound awesome!
+
+The first fancy trick you can learn...we’ll call the
+<em>twinkle</em>. You can call it whatever you like, but it goes like this. Make a simple C major triad. That means the notes C - E - G. But instead of playing them all at once, use finger 2 to really quickly throw in a D note in there before landing on the E. This sound adds a
+<em>tiny </em>about of additional texture to the chord.
+
+If you’re still new to piano, this might feel a little weird to move your fingering quite this fast. So try making a simple exercise out of it. Just move nice and slow, transferring between the default triad and the ‘twinkled’ version. Try to think of this twinkle note as outside of rhythmic time, visualize the note bending or gliding up into the third.
+
+You can also use the notes above and below the major third to create a gentle tension in your chords. These are called
+<em>suspended chords. </em>If you voice a chord with the I, II, and V, you’ve created something called the sus2 chord, named because you’re creating this suspended sound by holding the 2nd note before resolving into the major 3rd, creating a major triad. Or you can create a suspended 4th sound by making a chord with a I, IV, and V. This time the suspended note hovers just
+<em>above </em>the triad shape, wanting to resolve down into the major triad.
+
+<img src="https://d2vyvo0tyx8ig5.cloudfront.net/cms-uploaded/Lisa Action Shot_file_1496177093.jpeg" alt="lisa-action-shot-file">
+
+Of course, you don’t have to stick to just one chord to try all of this out. You can try this technique with any triad chord, be it a major chord or a minor chord. Try this motion on all the big chords you’ve learned in this chord hacks series. Suspended 2nd and 4th chords sound
+<em>way </em>different when they’re resolving to a minor chord vs a major chord, so listen out for that big change when you get to the minor vi chord.
+
+The next thing you can do to make things fancy is to use passing notes in the left hand. This smooths out your chord movements as you jump from chord to chord. An example of the passing note in action can be shown when moving from the minor vi chord to the IV chord. Starting on A in the left hand, stop by the G note just before landing again on the F note in the bass. This creates an awesome sense of motion as you gently step down to the next chord.
+
+Once you’ve mastered the twinkles and the passing notes in isolation, it’s time to put your own musical spin on them. So play through this progression that you’ve been learning and experiment with different combinations of these techniques!',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/902167575-11ca75a2d533545f3f73b69704b5838beb61d66a55b58055482fec30768e57b5-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/424944168',
+                        'duration' => 10,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'chord-hacks/lessons/popular-songs',
+                        'title' => 'Big Chords For Popular Songs',
+                        'desc' => 'Now that you’ve become so familiar with the BIG CHORDS in pop music (the I, V, vi, IV chord progression), you might start to hear it everywhere. That’s because it’s one of the most popular chord progressions ever, found in anything from classical to synthpop. ‘Let It Be’ by the Beatles, ‘I’m Yours’ by Jason Mraz, ‘Don’t Stop Believin’ by Journey...this ever-growing list goes on and on!
+
+<img src="https://d2vyvo0tyx8ig5.cloudfront.net/cms-uploaded/Lisa Witt at Piano_file_1496179806.jpeg" alt="lisa-at-piano-profile">
+
+So why not add a few songs yourself to this list? I hope that these chords have inspired you to create your own musical compositions, whether you use these chords to accompany a new vocal melody, or create some instrumental music from these chords.
+
+You can use the exercise in this video to get inspired, or you can create your own exercises out of these chords. If you’re looking for more advice on creating your own music, arranging your favourite songs for the piano, and other practice tips, we’ve got plenty more to teach you in the pianote foundations lesson series!',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/902167640-2332f8dc3b5d83f2c49ccd764b1a6e30965e58c84eb273fb81a2fa4c42b094f7-d?mw=1100&mh=619',
+                        'video_src' => '//player.vimeo.com/video/424944241',
+                        'duration' => 4,
+                        'assets' => [],
+                    ],
+                ],
+            ],
+            [
+                'brand_id' => 2,
+                'title' => 'Piano Riffs & Fills',
+                'meta_desc' => 'The Shortcuts To Sounding Great On The Piano',
+                'meta_img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-riffs-and-fills/og-image.jpg',
+                'slug' => 'riffs-and-fills/lessons',
+                'lessons' => [
+                    [
+                        'slug' => 'riffs-and-fills/lessons/1',
+                        'title' => 'Introduction',
+                        'desc' => 'Welcome to Riffs & Fills. The shortcuts to sounding great on the piano.',
+                        'thumbnail' => 'https://d1923uyy6spedc.cloudfront.net/255245-card-thumbnail-maxres-1588770771.jpg',
+                        'video_src' => '//player.vimeo.com/video/415195718',
+                        'duration' => 1,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'riffs-and-fills/lessons/2',
+                        'title' => 'Building Your Foundation With Chord Inversions',
+                        'desc' => '<a class="join smaller mb-4 bg-pianote" target="_blank" href="https://d1923uyy6spedc.cloudfront.net/255246-resource-1588931722.pdf">DOWNLOAD PDF</a>
+Before you can become amazing at riffs and fills you need to have a strong understanding of chords and their inversions. This lesson will teach you the chord notes and inversions for the chords you will be working with in this course.',
+                        'thumbnail' => 'https://d1923uyy6spedc.cloudfront.net/255246-card-thumbnail-maxres-1588770808.jpg',
+                        'video_src' => '//player.vimeo.com/video/415196064',
+                        'duration' => 7,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'riffs-and-fills/lessons/3',
+                        'title' => 'Chord Note Fills',
+                        'desc' => 'In this lesson you will learn your first fills! These fills use chord tones (notes you already know!) to create a full and rich sound.',
+                        'thumbnail' => 'https://d1923uyy6spedc.cloudfront.net/255247-card-thumbnail-maxres-1588770990.jpg',
+                        'video_src' => '//player.vimeo.com/video/415196611',
+                        'duration' => 6,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'riffs-and-fills/lessons/4',
+                        'title' => 'Sus Chord Fills',
+                        'desc' => 'Learn how to use the notes of a sus chord to add some sparkle to your playing!',
+                        'thumbnail' => 'https://d1923uyy6spedc.cloudfront.net/255248-card-thumbnail-maxres-1588771051.jpg',
+                        'video_src' => '//player.vimeo.com/video/415196416',
+                        'duration' => 7,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'riffs-and-fills/lessons/5',
+                        'title' => 'Combining And Applying Your Skills',
+                        'desc' => '<a class="join smaller mb-4 bg-pianote" target="_blank" href="https://d1923uyy6spedc.cloudfront.net/255250-resource-1588935038.pdf">DOWNLOAD PDF</a>
+Learn how to take what you\'ve learned so far and put it together in the context of a song. This is where all the magic comes to life!
+
+**C Chord Inversions**
+
+<img src="https://d1923uyy6spedc.cloudfront.net/255253-sheet-image-1588760291.svg" alt="sheet image 1">
+
+**G Chord Inversions**
+
+<img src="https://d1923uyy6spedc.cloudfront.net/255254-sheet-image-1588760839.svg" alt="sheet image 2">
+
+**Am Chord Inversions**
+
+<img src="https://d1923uyy6spedc.cloudfront.net/255255-sheet-image-1588762212.svg" alt="sheet image 3">
+
+**F Chord Inversions**
+
+<img src="https://d1923uyy6spedc.cloudfront.net/255256-sheet-image-1588762774.svg" alt="sheet image 4">',
+                        'thumbnail' => 'https://d1923uyy6spedc.cloudfront.net/255249-card-thumbnail-maxres-1588771102.jpg',
+                        'video_src' => '//player.vimeo.com/video/415195897',
+                        'duration' => 6,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'riffs-and-fills/lessons/6',
+                        'title' => 'Left Hand Accompaniment Rhythms',
+                        'desc' => 'Believe it or not, the left hand plays a VERY important role when it comes to sounding amazing BUT it doesn\'t have to be fancy to sound fancy. What it really comes down to is the RHYTHM with which you play the left hand notes.',
+                        'thumbnail' => 'https://d1923uyy6spedc.cloudfront.net/255250-card-thumbnail-maxres-1588771138.jpg',
+                        'video_src' => '//player.vimeo.com/video/415195748',
+                        'duration' => 6,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'riffs-and-fills/lessons/7',
+                        'title' => 'Advanced Fills & Riffs',
+                        'desc' => 'Now that you are playing fills, riffs and rhythms like a pro it is time to take things up a little and experiment with some more melodic sounding fills. These concepts are a little bit more advanced so be sure to get lots of practice in on the previous lessons first.',
+                        'thumbnail' => 'https://d1923uyy6spedc.cloudfront.net/255251-card-thumbnail-maxres-1588771189.jpg',
+                        'video_src' => '//player.vimeo.com/video/415196214',
+                        'duration' => 7,
+                        'assets' => [],
+                    ],
+                ],
+            ],
+            [
+                'brand_id' => 2,
+                'title' => 'Piano Technique Made Easy',
+                'meta_desc' => 'Master the fundamentals -- so you can play anything you want on the piano.',
+                'meta_img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/og-image.jpg',
+                'slug' => '',
+                'lessons' => [
+                    [
+                        'slug' => 'piano-technique-made-easy/10-min',
+                        'title' => '10 Minute Practice Routine',
+                        'desc' => 'With busy being the new norm, finding time to practice can be both overwhelming and difficult!
+
+The good news is that you can accomplish a whole lot in a short amount of time if you know what to practice and if you are consistent.
+
+This lesson shows you how to take 10 minutes and turn it into a super-effective practice session.
+
+<a class="join smaller w-full sm:w-1/2 mx-auto bg-pianote" href="/piano-technique-made-easy/">Piano Technique Made Easy &raquo;</a>',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/970519590-02c3469fee10abaefebaf395ad82c03fc01be5e271f911f728f8e6632217c460-d_480',
+                        'video_src' => '//player.vimeo.com/video/342788953',
+                        'duration' => 7,
+                        'assets' => [
+                            [
+                                'title' => 'Download Sheet Music',
+                                'src' => 'https://d1923uyy6spedc.cloudfront.net/226214-resource-1560970072.pdf',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'piano-technique-made-easy/4-exercises',
+                        'title' => '4 Exercises for Beginners',
+                        'desc' => 'This one is for the beginners out there who want to wake up the hands and build up some speed, dexterity, and hand independence.
+
+Some of these will be easier than others, so take your time and focus on playing the exercises correctly!
+
+You can practice all three at once or pick a favorite to work on as a part of your daily routine.
+
+<a class="join smaller w-full sm:w-1/2 mx-auto bg-pianote" href="/piano-technique-made-easy/">Piano Technique Made Easy &raquo;</a>',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/970520513-9f0a9d7c9b8c035c33e2143a2ef034fc0755753f3139c1408dce79f5bf0eba9a-d_480',
+                        'video_src' => '//player.vimeo.com/video/332085926',
+                        'duration' => 9,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'piano-technique-made-easy/scales-sound',
+                        'title' => 'I Bet You Didn’t Know Scales Could Sound Like This',
+                        'desc' => '    Scales are super important for your development as a pianist. If you want to develop a better understanding of the piano and be able to play faster, scales are a must.
+
+But ... they can be boring to practice.
+
+Here’s the good news…
+
+Scale practice does NOT have to be traditional. In this lesson, Lisa shows you how you can take a basic scale and practice it in a way that is beautifully musical and creative!
+
+<a class="join smaller w-full sm:w-1/2 mx-auto bg-pianote" href="/piano-technique-made-easy/">Piano Technique Made Easy &raquo;</a>',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/970521117-99c32e89bb3a03e212e134a2559045ecf1c485292ebc849f41a6d88ec8b17023-d_480',
+                        'video_src' => '//player.vimeo.com/video/373204131',
+                        'duration' => 5,
+                        'assets' => [],
+                    ],
+                ],
+            ],
+            [
+                'brand_id' => 2,
+                'title' => 'Learn-To-Play-Piano',
+                'meta_desc' => 'Ever wanted to learn the piano?  This video series will get you playing in no time!',
+                'meta_img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/learn-piano.jpg',
+                'slug' => 'my-lessons',
+                'lessons' => [
+                    [
+                        'slug' => 'my-lessons/how-to-play-piano',
+                        'title' => 'How to Play Piano',
+                        'desc' => '',
+                        'thumbnail' => '',
+                        'video_src' => '',
+                        'duration' => 7,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => '',
+                        'title' => '',
+                        'desc' => '',
+                        'thumbnail' => '',
+                        'video_src' => '',
+                        'duration' => 1,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => '',
+                        'title' => '',
+                        'desc' => '',
+                        'thumbnail' => '',
+                        'video_src' => '',
+                        'duration' => 1,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => '',
+                        'title' => '',
+                        'desc' => '',
+                        'thumbnail' => '',
+                        'video_src' => '',
+                        'duration' => 1,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => '',
+                        'title' => '',
+                        'desc' => '',
+                        'thumbnail' => '',
+                        'video_src' => '',
+                        'duration' => 1,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => '',
+                        'title' => '',
+                        'desc' => '',
+                        'thumbnail' => '',
+                        'video_src' => '',
+                        'duration' => 1,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => '',
+                        'title' => '',
+                        'desc' => '',
+                        'thumbnail' => '',
+                        'video_src' => '',
+                        'duration' => 1,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => '',
+                        'title' => '',
+                        'desc' => '',
+                        'thumbnail' => '',
+                        'video_src' => '',
+                        'duration' => 1,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => '',
+                        'title' => '',
+                        'desc' => '',
+                        'thumbnail' => '',
+                        'video_src' => '',
+                        'duration' => 1,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => '',
+                        'title' => '',
+                        'desc' => '',
+                        'thumbnail' => '',
+                        'video_src' => '',
+                        'duration' => 1,
+                        'assets' => [],
+                    ],
+                ],
+            ],
 //            [
-//                'brand_id' => 3,
+//                'brand_id' => 2,
 //                'title' => '',
 //                'meta_desc' => '',
 //                'meta_img' => '',
@@ -2605,6 +4992,7 @@ The second exercise is similar, but this time we’re playing longer groups of u
         Leadgen::truncate();
         LeadgenLesson::truncate();
         LeadgenLessonAsset::truncate();
+        LeadgenLessonAssignment::truncate();
 
         foreach($leadgens as $leadgen){
             $newLeadgen = Leadgen::create([
@@ -2630,7 +5018,8 @@ The second exercise is similar, but this time we’re playing longer groups of u
                 $newLesson = LeadgenLesson::create([
                     'leadgen_id' => $newLeadgen->id,
                     'title' => $lesson['title'],
-                    'desc' => !empty($lesson['desc']) ? $lesson['desc'] : null,
+                    'caption' => $lesson['caption'] ?? null,
+                    'desc' => $lesson['desc'] ?? null,
                     'thumbnail' => $lesson['thumbnail'],
                     'video_src' => $lesson['video_src'],
                     'slug' => $lesson['slug'],
@@ -2655,6 +5044,9 @@ The second exercise is similar, but this time we’re playing longer groups of u
                         LeadgenLessonAssignment::create([
                             'leadgen_lesson_id' => $newLesson->id,
                             'title' => $asset['title'],
+                            'subtitle' => $asset['subtitle'] ?? null,
+                            'src' => $asset['src'] ?? null,
+                            'soundslice' => $asset['soundslice'] ?? null,
                         ]);
                     }
                 }
