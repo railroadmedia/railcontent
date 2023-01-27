@@ -17,6 +17,9 @@ return new class extends Migration
             $table->id();
             $table->integer('leadgen_lesson_id');
             $table->string('title');
+            $table->string('subtitle')->nullable();
+            $table->string('src')->nullable();
+            $table->string('soundslice')->nullable();
             $table->timestamps();
         });
     }
