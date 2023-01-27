@@ -4,6 +4,7 @@ namespace App\Nova\Flexible\Layouts;
 
 use Laravel\Nova\Fields\Text;
 use Whitecube\NovaFlexibleContent\Layouts\Layout;
+use Whitecube\NovaFlexibleContent\Value\FlexibleCast;
 
 class LeadgenLessonAssetLayout extends Layout
 {
@@ -21,10 +22,6 @@ class LeadgenLessonAssetLayout extends Layout
      */
     protected $title = 'Leadgen Lesson Asset';
 
-    protected $casts = [
-        'leadgen-lesson-assignment-layout' => LeadgenLessonAssignmentLayout::class
-    ];
-
     /**
      * Get the fields displayed by the layout.
      *
@@ -39,5 +36,6 @@ class LeadgenLessonAssetLayout extends Layout
             Text::make('Sound Slice', 'soundslice'),
         ];
     }
+
 
 }
