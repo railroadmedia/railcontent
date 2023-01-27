@@ -46,6 +46,8 @@ return [
             'start_second',
             'end_second',
             'thumbnail_url',
+            'user_playlist_item_id',
+            'user_playlist_item_position'
         ],
 
         'instructor' => [
