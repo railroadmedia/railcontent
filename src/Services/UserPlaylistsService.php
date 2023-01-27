@@ -430,4 +430,13 @@ class UserPlaylistsService
 
         return $this->userPlaylistContentRepository->deletePlaylistItemAndReposition($itemPlaylist);
     }
+
+    /**
+     * @param $playlistId
+     * @param $contentId
+     * @return bool
+     */
+    public function existsContentIdInPlaylist($playlistId, $contentId){
+        return !empty($this->userPlaylistContentRepository->getByPlaylistIdAndContentId($playlistId, $contentId));
+    }
 }

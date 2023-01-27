@@ -303,15 +303,24 @@ class MyListJsonController extends Controller
     {
         $page = $request->get('page', 1);
         $limit = $request->get('limit', 10);
+        $playlists = $this->userPlaylistsService->getUserPlaylist(
+            auth()->id(),
+            'user-playlist',
+            config('railcontent.brand'),
+            $limit,
+            $page
+        );
+
+        $itemId = $request->get('content_id');
+        if ($itemId) {
+            foreach ($playlists as $index => $playlist) {
+                $playlists[$index]['is_added_to_playlist'] =
+                    $this->userPlaylistsService->existsContentIdInPlaylist($playlist['id'], $itemId);
+            }
+        }
 
         return (new ContentFilterResultsEntity([
-                                                   'results' => $this->userPlaylistsService->getUserPlaylist(
-                                                       auth()->id(),
-                                                       'user-playlist',
-                                                       config('railcontent.brand'),
-                                                       $limit,
-                                                       $page
-                                                   ),
+                                                   'results' => $playlists,
                                                    'total_results' => $this->userPlaylistsService->countUserPlaylists(
                                                        auth()->id(),
                                                        'user-playlist',
