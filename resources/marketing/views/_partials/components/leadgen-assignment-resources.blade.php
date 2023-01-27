@@ -39,6 +39,10 @@ class="assignment-row border-gray-100 border-b-2 py-4 sm:px-3 @if(!empty($defaul
                 <i class="fas fa-fw fa-play pl-2 mr-2 sm:mr-6 ml-auto text-xl outline-none cursor-pointer text-yellow relative z-10 autoplay-video flex-shrink-0" x-on:click="soundsliceModal{{$num}} = true"></i>
             @endif
             <i class="fal fa-fw fa-angle-down transition-all duration-300 @if(empty($soundslice) && empty($vimeo)) ml-auto  @endif @if(!empty($pdfURL) || !empty($mp3URL)) cursor-pointer @endif text-4xl flex-shrink-0 w-9"></i>
+        @else
+            @if(!empty($soundslice))
+                <i class="fas fa-fw fa-play pl-2 mr-2 sm:mr-6 ml-auto text-xl outline-none cursor-pointer text-yellow relative z-10 autoplay-video flex-shrink-0" x-on:click="soundsliceModal{{$num}} = true"></i>
+            @endif
         @endif
     </div>
 
