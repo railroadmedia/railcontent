@@ -176,24 +176,24 @@ Route::domain('{drumeoDomain}')->group(function () {
                 ->whereIn('page', [
                     null, 'catalogue'
                 ]);
-            Route::get('/gsotd/{page?}', LeadGenController::class . '@toolboxGsotd')
-                ->whereIn('page', [
+            Route::get('/gsotd/{page1?}', LeadGenController::class . '@toolboxGsotd')
+                ->whereIn('page1', [
                     null, '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'
                 ]);
-            Route::get('/5pa/{page?}', LeadGenController::class . '@toolbox5pa')
-                ->whereIn('page', [
+            Route::get('/5pa/{page2?}', LeadGenController::class . '@toolbox5pa')
+                ->whereIn('page2', [
                     null, '1', '2', '3', '4', '5'
                 ]);
-            Route::get('/bdbc/{page?}', LeadGenController::class . '@toolbox5pa')
-                ->whereIn('page', [
+            Route::get('/bdbc/{page3?}', LeadGenController::class . '@toolboxBdbc')
+                ->whereIn('page3', [
                     null, '1', '2', '3', '4', '5', '6', '7'
                 ]);
-            Route::get('/fwtgf/{page?}', LeadGenController::class . '@toolboxFwtgf')
-                ->whereIn('page', [
+            Route::get('/fwtgf/{page4?}', LeadGenController::class . '@toolboxFwtgf')
+                ->whereIn('page4', [
                     null, '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19'
                 ]);
-            Route::get('/{page?}', LeadGenController::class . '@toolboxRest')
-                ->whereIn('page', [
+            Route::get('/{page5?}', LeadGenController::class . '@toolboxRest')
+                ->whereIn('page5', [
                     'mcsa', 'urfd', 'htls', 'dodt',
                 ]);
 

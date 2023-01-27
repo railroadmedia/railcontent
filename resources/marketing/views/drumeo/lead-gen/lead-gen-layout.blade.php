@@ -30,7 +30,7 @@
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
     @yield('scripts')
     <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-    <script src="{{ asset('/marketing/js/drumeo/pre-form-submit-facebook-lead.js') }}"></script>
+    <script src="{{ asset('/marketing/js/pre-form-submit-facebook-lead.js') }}"></script>
 
     <script src="{{ asset('/marketing/js/drumeo/infusionsoft-tracking.js') }}"></script>
 @stop

@@ -188,6 +188,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static Builder|User whereTotalXp($value)
  * @property string|null $membership_expiration_date
  * @property int $is_lifetime_member
+ * @property int $is_drumeo_lifetime_member
  * @method static Builder|User whereIsLifetimeMember($value)
  * @method static Builder|User whereMembershipExpirationDate($value)
  * @property int $is_pack_owner
@@ -790,8 +791,6 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
 
     public function isAPlusMember()
     {
-        return true; // todo: remove when permissions are live
-
         return ($this->isAMember() && $this->membership_level == 'plus') || $this->isAdmin();
     }
 
@@ -822,5 +821,15 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
             }
         }
         return (!$annualSubscription && !$this->is_lifetime_member && $this->isAMember());
+    }
+
+
+    public function hasSongsAccess(?string $brand = null): bool
+    {
+        if (!$brand) {
+            $brand = brand();
+        }
+        return $this->isAPlusMember() ||
+            ($brand == 'drumeo' && $this->is_drumeo_lifetime_member);
     }
 }

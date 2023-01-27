@@ -4,6 +4,7 @@ namespace App\Modules\EventDataSynchronizer\Providers;
 
 use App\Modules\EventDataSynchronizer\Console\Commands\CustomerIOSyncUser;
 use App\Modules\EventDataSynchronizer\Console\Commands\SyncUserTotalXp;
+use App\Modules\EventDataSynchronizer\Jobs\CustomerIoSyncUserByUserId;
 use App\Modules\Mentor\Events\StudentMentorsUpdated;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider;
 use Railroad\Ecommerce\Events\AppSignupFinishedEvent;
@@ -210,6 +211,7 @@ class EventDataSynchronizerServiceProvider extends EventServiceProvider
                 PackOwnerUserFieldResyncTool::class,
                 SyncUserTotalXp::class,
                 IsDrumeoLifetimeUserFieldResyncTool::class,
+                CustomerIOSyncUser::class
             ]
         );
         $this->mergeConfigFrom(

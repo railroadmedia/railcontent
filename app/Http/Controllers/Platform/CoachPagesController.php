@@ -392,7 +392,8 @@ class CoachPagesController extends Controller
             $sort == 'sort' ? $lessonContent['sort'] : $lessonContent['published_on'],
             1,
             $sort,
-            'desc'
+            'desc',
+            $lessonContent['id']
         );
 
         // Revert to previous state

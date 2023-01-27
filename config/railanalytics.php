@@ -407,11 +407,11 @@ return [
                     ],
                 'google-adwords' =>
                     [
-                        'google-conversion-id' => '1071462884',
+                        'google-conversion-id' => '845037222',
                         'google-conversion-language' => 'en',
                         'google-conversion-format' => '3',
                         'google-conversion-color' => 'ffffff',
-                        'google-conversion-label' => 'fylwCIDGlXAQ5PP0_gM',
+                        'google-conversion-label' => 'ErWUCNLA3IgYEKb9-JID',
                     ],
                 'facebook-pixel' =>
                     [

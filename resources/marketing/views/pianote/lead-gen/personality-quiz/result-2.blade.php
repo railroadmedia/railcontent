@@ -37,7 +37,6 @@
                 "formName" => 'Personality Quiz Entertainer',
                 "formId" => "Pianote - Engagement - Trigger - Personality Quiz Entertainer - Web Form",
                 'buttonText' => 'Show my results',
-                'redirect' => true,
                 'redirectURL' => '/personality-quiz/entertainer',
                 'disclaimerColor' => '#D0E2E7'
             ])

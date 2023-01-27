@@ -12,9 +12,9 @@ Route::domain('{singeoDomain}')
     Route::get('/trial-month', [SalesController::class, 'homeMonth']);
     Route::get('/new-year', [SalesController::class, 'promo'] );
     Route::get('/student-only', [SalesController::class, 'promo']);
-
     Route::get('/choose-plan', [SalesController::class, 'choosePlan'] );
     Route::get('/choose-your-trial', [SalesController::class, 'choosePlan']);
+
     Route::get('/choose-your-trial-month', [SalesController::class, 'choosePlanMonth']);
     Route::get('/affiliate-trial', [SalesController::class, 'choosePlanMonth']);
     Route::get('/affiliate/asobergirlsguide', [SalesController::class, 'asobergirlsguide']);
@@ -22,7 +22,7 @@ Route::domain('{singeoDomain}')
     Route::get('/privacy', [SalesController::class, 'privacy']);
     Route::get('/terms', [SalesController::class, 'terms']);
     Route::get('/cookie', [SalesController::class, 'cookie']);
-    
+
     Route::get('/method', [SalesController::class, 'method']);
     Route::get('/coaches', [SalesController::class, 'coaches']);
     Route::get('/songs', [SalesController::class, 'songs']);

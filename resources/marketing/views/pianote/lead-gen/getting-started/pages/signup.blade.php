@@ -512,7 +512,7 @@
                         'stacked' => true,
                         'inputBorder' => '1px solid #7A8491',
                         'disclaimerColor' => 'rgba(208, 226, 231, 0.8)',
-                        "redirectURL" => ""
+                    "redirectURL" => "/getting-started/thank-you/"
                     ])
                 </div>
             </div>

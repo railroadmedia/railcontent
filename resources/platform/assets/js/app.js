@@ -252,6 +252,20 @@ app.component('AppContainer', AppContainer)
             `./vue/components/PlatformHeader/platform-header.vue`
         )
     ))
+    
+    .component('MembershipUpdate', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "membership-update-" */
+            `./vue/components/Membership/MembershipUpdate.vue`
+        )
+    ))
+
+    .component('MembershipUpdatePage', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "membership-update-page" */
+            `./vue/components/Membership/MembershipUpdatePage.vue`
+        )
+    ))
 
     .component('Song', defineAsyncComponent(() =>
         import(

@@ -131,11 +131,6 @@ class NavigationService
                     ]
                 ],
             ];
-
-            if (!empty(user()) && !user()->isAPlusMember()) {
-                unset($navData[0]['songs']);
-            }
-
             return $navData;
         } elseif (brand() === 'pianote') {
             $navData = [
@@ -222,11 +217,6 @@ class NavigationService
                     ]
                 ],
             ];
-
-            if (!empty(user()) && !user()->isAPlusMember()) {
-                unset($navData[0]['songs']);
-            }
-
             return $navData;
         } elseif (brand() === 'guitareo') {
             $navData = [
@@ -323,11 +313,6 @@ class NavigationService
                     ]
                 ],
             ];
-
-            if (!empty(user()) && !user()->isAPlusMember()) {
-                unset($navData[0]['songs']);
-            }
-
             return $navData;
         } elseif (brand() === 'singeo') {
             $navData = [
@@ -399,11 +384,6 @@ class NavigationService
                     ]
                 ],
             ];
-
-            if (!empty(user()) && !user()->isAPlusMember()) {
-                unset($navData[0]['songs']);
-            }
-
             return $navData;
         }
 
