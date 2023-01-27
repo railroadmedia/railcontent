@@ -40,54 +40,15 @@ Route::domain('{pianoteDomain}')
                 ]);
         }
     );
-    Route::group(['prefix' => 'chord-hacks'],
-        function () {
-            Route::get('/{page?}/{lesson?}', LeadGenController::class . '@chordHacks')
-                ->whereIn('page', [
-                    null, 'lessons'
-                ])
-                ->whereIn('lesson', [
-                    null, 'chord-hacking', 'inversions', 'adding-rhythm', 'two-hands', 'chord-progressions', 'popular-songs'
-                ]);
-        }
-    );
-    Route::group(['prefix' => 'riffs-and-fills'],
-        function () {
-            Route::get('/{page?}/{lesson?}', LeadGenController::class . '@riffsAndFills')
-                ->whereIn('page', [
-                    null, 'lessons'
-                ])
-                ->whereIn('lesson', [
-                    null, '1', '2', '3', '4', '5', '6', '7'
-                ]);
-        }
-    );
-
-    Route::group(['prefix' => '/shop/riffs-and-fills'],
-        function () {
-            Route::get('/{page?}/{lesson?}', LeadGenController::class . '@riffsAndFills')
-                ->whereIn('page', [
-                    null, 'lessons'
-                ])
-                ->whereIn('lesson', [
-                    null, '1', '2', '3', '4', '5', '6', '7'
-                ]);
-        }
-    );
+    Route::get('/chord-hacks', [LeadGenController::class, 'chordHacks']);
+    Route::get('/riffs-and-fills', [LeadGenController::class, 'riffsAndFills']);
+    Route::get('/shop/riffs-and-fills', [LeadGenController::class, 'riffsAndFills']);
 
     Route::group(['prefix' => 'method'],
         function () {
             Route::get('/{page?}', LeadGenController::class . '@method')
                 ->whereIn('page', [
                     'why-people-fail', 'play-a-song', 'guarantee-success'
-                ]);
-        }
-    );
-    Route::group(['prefix' => 'piano-technique-made-easy'],
-        function () {
-            Route::get('/{page?}', LeadGenController::class . '@pianoTechnique')
-                ->whereIn('page', [
-                    '10-min', '4-exercises', 'scales-sound'
                 ]);
         }
     );
@@ -194,6 +155,6 @@ Route::domain('{pianoteDomain}')
         }
     );
 
-    Route::get('/{leadgenSlug?}', LeadGenController::class.'@test2')
+    Route::get('/{leadgenSlug?}', LeadGenController::class.'@leadgen')
         ->where('leadgenSlug', '(.*)');
 });

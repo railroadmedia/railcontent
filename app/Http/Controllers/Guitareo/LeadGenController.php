@@ -91,32 +91,14 @@ class LeadGenController extends BaseController
         throw new NotFoundHttpException();
     }
 
-    public function fagl(Request $request, $domain, $page = null, $lesson = null)
+    public function fagl()
     {
-        switch ($page) {
-            case null:
-                return view('guitareo.lead-gen.free-acoustic-guitar-lessons.signup');
-            case 'lessons' && is_null($lesson):
-                return view('guitareo.lead-gen.free-acoustic-guitar-lessons.lesson-index');
-            case 'lessons' && !is_null($lesson):
-                return view('guitareo.lead-gen.free-acoustic-guitar-lessons.lessons.'.$lesson);
-        }
-
-        throw new NotFoundHttpException();
+        return view('guitareo.lead-gen.free-acoustic-guitar-lessons.signup');
     }
 
-    public function fegl(Request $request, $domain, $page = null, $lesson = null)
+    public function fegl()
     {
-        switch ($page) {
-            case null:
-                return view('guitareo.lead-gen.free-electric-guitar-lessons.signup');
-            case 'lessons' && is_null($lesson):
-                return view('guitareo.lead-gen.free-electric-guitar-lessons.lesson-index');
-            case 'lessons' && !is_null($lesson):
-                return view('guitareo.lead-gen.free-electric-guitar-lessons.lessons.'.$lesson);
-        }
-
-        throw new NotFoundHttpException();
+        return view('guitareo.lead-gen.free-electric-guitar-lessons.signup');
     }
 
     public function hitSongs(Request $request, $domain, $page = null, $lesson = null)
@@ -126,55 +108,24 @@ class LeadGenController extends BaseController
                 return view('guitareo.lead-gen.chords-for-hit-songs.signup');
             case 'thank-you':
                 return view('guitareo.lead-gen.chords-for-hit-songs.thank-you');
-            case 'lessons' && is_null($lesson):
-                return view('guitareo.lead-gen.chords-for-hit-songs.lessons');
-            case 'lessons' && !is_null($lesson):
-                return view('guitareo.lead-gen.chords-for-hit-songs.lessons.'.$lesson);
         }
 
         throw new NotFoundHttpException();
     }
 
-    public function tricks(Request $request, $domain, $page = null, $lesson = null)
+    public function tricks()
     {
-        switch ($page) {
-            case null:
-                return view('guitareo.lead-gen.guitar-tricks.signup');
-            case 'your-videos' && is_null($lesson):
-                return view('guitareo.lead-gen.guitar-tricks.lesson-index');
-            default:
-                return view('guitareo.lead-gen.guitar-tricks.lessons.'.$lesson[0]);
-        }
-
-        throw new NotFoundHttpException();
+        return view('guitareo.lead-gen.guitar-tricks.signup');
     }
 
-    public function soloInAnHour(Request $request, $domain, $page = null, $lesson = null)
+    public function soloInAnHour()
     {
-        switch ($page) {
-            case null:
-                return view('guitareo.lead-gen.solo-in-an-hour.signup');
-            case 'lessons' && is_null($lesson):
-                return view('guitareo.lead-gen.solo-in-an-hour.lesson-index');
-            case 'lessons' && !is_null($lesson):
-                return view('guitareo.lead-gen.solo-in-an-hour.lessons.'.$lesson);
-        }
-
-        throw new NotFoundHttpException();
+        return view('guitareo.lead-gen.solo-in-an-hour.signup');
     }
 
-    public function jumpstart(Request $request, $domain, $page = null, $lesson = null)
+    public function jumpstart()
     {
-        switch ($page) {
-            case null:
-                return view('guitareo.lead-gen.acoustic-guitar-jumpstart.signup');
-            case 'lessons' && is_null($lesson):
-                return view('guitareo.lead-gen.acoustic-guitar-jumpstart.lesson-index');
-            case 'lessons' && !is_null($lesson):
-                return view('guitareo.lead-gen.acoustic-guitar-jumpstart.'.$lesson);
-        }
-
-        throw new NotFoundHttpException();
+        return view('guitareo.lead-gen.acoustic-guitar-jumpstart.signup');
     }
 
     public function starterKit(Request $request, $domain, $page = null, $lesson = null, $num = null)
@@ -193,37 +144,17 @@ class LeadGenController extends BaseController
         throw new NotFoundHttpException();
     }
 
-    public function openChords(Request $request, $domain, $num = null)
+    public function starterKitPages(Request $request, $domain, $page = null)
     {
-        switch ($num){
-            case null:
-                return view('guitareo.lead-gen.starter-kit.open-chords.overview');
-            default:
-                return view('guitareo.lead-gen.starter-kit.open-chords.'.$num);
-        }
-
-        throw new NotFoundHttpException();
-    }
-
-    public function fundamentals(Request $request, $domain, $num = null)
-    {
-        switch ($num){
-            case null:
+        switch ($page) {
+            case 'fundamentals':
                 return view('guitareo.lead-gen.starter-kit.fundamentals.overview');
-            default:
-                return view('guitareo.lead-gen.starter-kit.fundamentals.'.$num);
-        }
-
-        throw new NotFoundHttpException();
-    }
-
-    public function heartbreak(Request $request, $domain, $num = null)
-    {
-        switch ($num){
-            case null:
+            case 'open-chords':
+                return view('guitareo.lead-gen.starter-kit.open-chords.overview');
+            case 'heartbreak-avenue':
                 return view('guitareo.lead-gen.starter-kit.heartbreak.overview');
-            default:
-                return view('guitareo.lead-gen.starter-kit.heartbreak.'.$num);
+            case 'strumming':
+                return view('guitareo.lead-gen.starter-kit.strumming.overview');
         }
 
         throw new NotFoundHttpException();
@@ -253,97 +184,27 @@ class LeadGenController extends BaseController
         throw new NotFoundHttpException();
     }
 
-    public function changingChords(Request $request, $domain, $num = null)
+    public function toolboxPages(Request $request, $domain, $page = null)
     {
-        switch ($num){
-            case null:
+        switch ($page){
+            case 'changing-chords-smoothly':
                 return view('guitareo.lead-gen.toolbox.changing-chords.overview');
-            default:
-                return view('guitareo.lead-gen.toolbox.changing-chords.'.$num);
-        }
-
-        throw new NotFoundHttpException();
-    }
-
-    public function exploreRhythms(Request $request, $domain, $num = null)
-    {
-        switch ($num){
-            case null:
+            case 'exploring-guitar-rhythms':
                 return view('guitareo.lead-gen.toolbox.exploring-rhythms.overview');
-            default:
-                return view('guitareo.lead-gen.toolbox.exploring-rhythms.'.$num);
-        }
-
-        throw new NotFoundHttpException();
-    }
-
-    public function tuneGuitar(Request $request, $domain, $num = null)
-    {
-        switch ($num){
-            case null:
+            case 'how-to-tune-a-guitar':
                 return view('guitareo.lead-gen.toolbox.tune-guitar.overview');
-            default:
-                return view('guitareo.lead-gen.toolbox.tune-guitar.'.$num);
-        }
-
-        throw new NotFoundHttpException();
-    }
-
-    public function legato(Request $request, $domain, $num = null)
-    {
-        switch ($num){
-            case null:
+            case 'legato-hammer-ons-pull-offs':
                 return view('guitareo.lead-gen.toolbox.legato.overview');
-            default:
-                return view('guitareo.lead-gen.toolbox.legato.'.$num);
-        }
-
-        throw new NotFoundHttpException();
-    }
-
-    public function cleanChords(Request $request, $domain, $num = null)
-    {
-        switch ($num){
-            case null:
+            case 'making-chords-sound-clean':
                 return view('guitareo.lead-gen.toolbox.clean-chords.overview');
-            default:
-                return view('guitareo.lead-gen.toolbox.clean-chords.'.$num);
-        }
-
-        throw new NotFoundHttpException();
-    }
-
-    public function firstSolo(Request $request, $domain, $num = null)
-    {
-        switch ($num){
-            case null:
+            case 'playing-your-first-guitar-solo':
                 return view('guitareo.lead-gen.toolbox.first-solo.overview');
-            default:
-                return view('guitareo.lead-gen.toolbox.first-solo.'.$num);
-        }
-
-        throw new NotFoundHttpException();
-    }
-
-    public function firstSong(Request $request, $domain, $num = null)
-    {
-        switch ($num){
-            case null:
+            case 'playing-your-first-song':
                 return view('guitareo.lead-gen.toolbox.first-song.overview');
-            default:
-                return view('guitareo.lead-gen.toolbox.first-song.'.$num);
-        }
-
-        throw new NotFoundHttpException();
-    }
-
-    public function sightReading(Request $request, $domain, $num = null)
-    {
-        switch ($num){
-            case null:
+            case 'sight-reading-essentials':
                 return view('guitareo.lead-gen.toolbox.sight-reading.overview');
-            default:
-                return view('guitareo.lead-gen.toolbox.sight-reading.'.$num);
+            case 'soloing-with-minor-pentatonic-scales':
+                return view('guitareo.lead-gen.toolbox.soloing-pentatonic.overview');
         }
 
         throw new NotFoundHttpException();
