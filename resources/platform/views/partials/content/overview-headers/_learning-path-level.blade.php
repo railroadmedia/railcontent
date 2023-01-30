@@ -27,7 +27,7 @@
                     style="width:200px;height:auto;"
                 >
                 <h2 class="subheading uppercase text-white">
-                    &nbsp;- Level {{ $parentContent->fetch('sort', 0) + 1 }}
+                    &nbsp;- Level {{ $parentContent->fetch('level_number', 1)  }}
                 </h2>
             </div>
 
