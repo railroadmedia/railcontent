@@ -509,6 +509,10 @@ class ContentPagesController extends BaseController
             "url" => url()->route('platform.content.first-level', [$primaryPage, $firstSlug, $firstId]),
         ];
 
+        $secondContent =
+            $this->vimeoVideoSourcesDecorator->decorate(new Collection([$secondContent]))
+                ->first();
+
         return view('content.overview', [
             'primaryPage' => $primaryPage,
             'firstSlug' => $firstSlug,

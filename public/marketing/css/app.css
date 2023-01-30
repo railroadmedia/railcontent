@@ -6915,14 +6915,14 @@ img {
   .lg\:w-3\/12 {
     width: 25% !important;
   }
-  .lg\:w-1\/5 {
-    width: 20% !important;
-  }
   .lg\:w-16 {
     width: 4rem !important;
   }
   .lg\:w-auto {
     width: auto !important;
+  }
+  .lg\:w-1\/5 {
+    width: 20% !important;
   }
   .lg\:w-60 {
     width: 15rem !important;
