@@ -54,12 +54,9 @@ Route::domain('{pianoteDomain}')
     );
     Route::group(['prefix' => 'getting-started'],
         function () {
-            Route::get('/{page?}/{lesson?}', LeadGenController::class . '@gstd')
+            Route::get('/{page?}', LeadGenController::class . '@gstd')
                 ->whereIn('page', [
-                    null, 'lessons', 'thank-you'
-                ])
-                ->whereIn('lesson', [
-                    null, 'now-what', 'scales', 'minor-scale', 'first-song',
+                    null,'thank-you'
                 ]);
         }
     );
