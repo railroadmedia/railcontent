@@ -79,13 +79,15 @@
                                 </transition>
                             @else
                                 <transition appear name="fade">
-                                    <video-player ref="mediaElementVueInstance" theme-color="{{ $brand }}"
+                                    <video-player 
+                                        ref="mediaElementVueInstance" 
+                                        theme-color="{{ $brand }}"
                                         brand="{{ $brand }}"
                                         poster="{{ $lessonContent['video_poster_image_url'] ?? '' }}"
                                         :sources="{{ json_encode($lessonContent['video_playback_endpoints'] ?? []) }}"
                                         @if ($lessonType == 'song') :ranges="{{ json_encode($lessonContent['ranges'] ?? []) }}"
-                                                    :ranges-video-ids="{{ json_encode($rangesVideoIds ?? []) }}"
-                                                    :show-range-buttons="true" @endif
+                                            :ranges-video-ids="{{ json_encode($rangesVideoIds ?? []) }}"
+                                            :show-range-buttons="true" @endif
                                         hls-manifest-url="{{ $lessonContent['hlsManifestUrl'] ?? '' }}"
                                         captions="{{ $lessonContent->fetch('fields.video.data.captions', $lessonContent['captions'][0] ?? null) }}"
                                         :chapters="{{ json_encode($lessonContent['chapters'] ?? []) }}"
@@ -95,7 +97,8 @@
                                         video-length="{{ $lessonContent->fetch('fields.video.fields.length_in_seconds') }}"
                                         :total-duration="{{ $lessonContent->fetch('fields.video.fields.length_in_seconds', 0) }}"
                                         cast-title="{{ $lessonContent->fetch('fields.title') }}"
-                                        :use-intersection-observer="true" @play="handleVideoPlay"
+                                        :use-intersection-observer="true" 
+                                        @play="handleVideoPlay"
                                         @pause="handleVideoPause">
                                         <div class="widescreen title tw-text-{{ $brand }} tw-mb-2"></div>
                                     </video-player>
