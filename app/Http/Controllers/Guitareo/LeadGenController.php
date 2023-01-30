@@ -248,7 +248,7 @@ class LeadGenController extends BaseController
             ]);
         }
         else {
-            $leadgen = Leadgen::where('slug', $leadgenSlug)->first();
+            $leadgen = Leadgen::join('brands', 'brands.id', '=', 'leadgens.brand_id')->where('brands.name', 'Guitareo')->where('slug', $leadgenSlug)->select('leadgens.*')->first();
             if(!is_null($leadgen)){
                 $lessons = LeadgenLesson::where([['leadgen_id', $leadgen->id], ['one_off', 0]])->get();
 

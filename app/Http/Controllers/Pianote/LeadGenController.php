@@ -155,10 +155,6 @@ class LeadGenController extends BaseController
                 return view('pianote.lead-gen.getting-started.pages.signup');
             case 'thank-you':
                 return view('pianote.lead-gen.getting-started.thank-you');
-            case 'lessons' && is_null($lesson):
-                return view('pianote.lead-gen.getting-started.pages.lessons');
-            default:
-                return view('pianote.lead-gen.getting-started.pages.'.$lesson);
         }
 
         throw new NotFoundHttpException();
@@ -328,7 +324,7 @@ class LeadGenController extends BaseController
             ]);
         }
         else {
-            $leadgen = Leadgen::where('slug', $leadgenSlug)->first();
+            $leadgen = Leadgen::join('brands', 'brands.id', '=', 'leadgens.brand_id')->where('brands.name', 'Pianote')->where('slug', $leadgenSlug)->select('leadgens.*')->first();
             if(!is_null($leadgen)){
                 $lessons = LeadgenLesson::where([['leadgen_id', $leadgen->id], ['one_off', 0]])->get();
 
