@@ -2641,6 +2641,7 @@ class ContentService
             config('railcontent.singularContentTypes')
         );
         $results = [];
+        $lessons = [];
 
         $content = $this->getById($contentId);
         if(!$content){
@@ -2658,10 +2659,9 @@ class ContentService
             }
             $results['soundslice_assignments_count'] = $soundsliceAssingment;
             $results['soundslice_assignments'] = $assign;
-        } elseif(in_array($content['type'], ['course','learning-path-course',])) {
+        } elseif(in_array($content['type'], ['course','learning-path-course','semester-pack', 'pack-bundle'])) {
             ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MAXIMUM;
             $lessons = $this->getByParentId($content['id']);
-
             $soundsliceAssingment = 0;
             $assign = [];
             $lessonsCount = 0;
@@ -2691,6 +2691,7 @@ class ContentService
             }
 
             $results['lessons_count'] = $lessonsCount;
+            $results['lessons'] = $lessons;
             $results['soundslice_assignments_count'] = $soundsliceAssingment;
             $results['soundslice_assignments'] = $assign;
         }

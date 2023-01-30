@@ -196,21 +196,23 @@ class UserPlaylistsService
         $endSecond = null,
         $importAllAssignments = false
     ) {
-        $input = [
-            'content_id' => $contentId,
-            'user_playlist_id' => $userPlaylistId,
-            'position' => $position,
-            'extra_data' => $extraData,
-            'start_second' => $startSecond,
-            'end_second' => $endSecond,
-            'created_at' => Carbon::now()
-                ->toDateTimeString(),
-        ];
+        $assignments = $this->contentService->countLessonsAndAssignments($contentId);
+        foreach ($assignments['lessons']??[] as $lesson) {
+            $input = [
+                'content_id' => $lesson['id'],
+                'user_playlist_id' => $userPlaylistId,
+                'position' => $position,
+                'extra_data' => $extraData,
+                'start_second' => $startSecond,
+                'end_second' => $endSecond,
+                'created_at' => Carbon::now()
+                    ->toDateTimeString(),
+            ];
 
-        $this->userPlaylistContentRepository->createOrUpdatePlaylistContentAndReposition(null, $input);
+            $this->userPlaylistContentRepository->createOrUpdatePlaylistContentAndReposition(null, $input);
+        }
 
         if ($importAllAssignments) {
-            $assignments = $this->contentService->countLessonsAndAssignments($contentId);
             foreach ($assignments['soundslice_assignments'] ?? [] as $assignment) {
                 $assignmentInput = [
                     'content_id' => $assignment['id'],
