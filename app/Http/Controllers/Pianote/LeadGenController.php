@@ -148,18 +148,6 @@ class LeadGenController extends BaseController
         throw new NotFoundHttpException();
     }
 
-    public function learnToPlay(Request $request, $domain, $page = null)
-    {
-        switch($page){
-            case null:
-                return view('pianote.lead-gen.learn-to-play.pages.index');
-            default:
-                return view('pianote.lead-gen.learn-to-play.pages.'.$page);
-        }
-
-        throw new NotFoundHttpException();
-    }
-
     public function gstd(Request $request, $domain, $page = null, $lesson = null)
     {
         switch($page){

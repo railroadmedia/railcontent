@@ -52,14 +52,6 @@ Route::domain('{pianoteDomain}')
                 ]);
         }
     );
-    Route::group(['prefix' => 'my-lessons'],
-        function () {
-            Route::get('/{page?}', LeadGenController::class . '@learnToPlay')
-                ->whereIn('page', [
-                    null, 'how-to-play-piano', 'how-to-play-chords', 'strengthening-your-hands', 'play-g-major', 'play-f-major', 'minor-keys', 'chord-inversions', 'other-chords', 'all-about-arpeggios', 'how-to-write-a-song'
-                ]);
-        }
-    );
     Route::group(['prefix' => 'getting-started'],
         function () {
             Route::get('/{page?}/{lesson?}', LeadGenController::class . '@gstd')
