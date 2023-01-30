@@ -77,9 +77,9 @@ class UserPlaylistsService
      * @param null $brand
      * @return array|mixed[]
      */
-    public function getUserPlaylist($userId, $playlistType, $brand = null, $limit, $page)
+    public function getUserPlaylist($userId, $playlistType, $brand = null, $limit, $page, $term = null)
     {
-        $playlists = $this->userPlaylistsRepository->getUserPlaylist($userId, $playlistType, $brand, $limit, $page);
+        $playlists = $this->userPlaylistsRepository->getUserPlaylist($userId, $playlistType, $brand, $limit, $page, $term);
 
         return Decorator::decorate($playlists, 'playlist');
     }
@@ -234,9 +234,9 @@ class UserPlaylistsService
      * @param $brand
      * @return int
      */
-    public function countUserPlaylists($userId, $type, $brand)
+    public function countUserPlaylists($userId, $type, $brand, $term = null)
     {
-        return $this->userPlaylistsRepository->countUserPlaylists($userId, $type, $brand);
+        return $this->userPlaylistsRepository->countUserPlaylists($userId, $type, $brand, $term);
     }
 
     /**
@@ -437,6 +437,6 @@ class UserPlaylistsService
      * @return bool
      */
     public function existsContentIdInPlaylist($playlistId, $contentId){
-        return !empty($this->userPlaylistContentRepository->getByPlaylistIdAndContentId($playlistId, $contentId));
+        return $this->userPlaylistContentRepository->getByPlaylistIdAndContentId($playlistId, $contentId);
     }
 }

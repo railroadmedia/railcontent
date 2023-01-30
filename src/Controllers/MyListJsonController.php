@@ -308,14 +308,16 @@ class MyListJsonController extends Controller
             'user-playlist',
             config('railcontent.brand'),
             $limit,
-            $page
+            $page,
+            $request->get('term')
         );
 
         $itemId = $request->get('content_id');
         if ($itemId) {
             foreach ($playlists as $index => $playlist) {
-                $playlists[$index]['is_added_to_playlist'] =
-                    $this->userPlaylistsService->existsContentIdInPlaylist($playlist['id'], $itemId);
+                $playlistItem = $this->userPlaylistsService->existsContentIdInPlaylist($playlist['id'], $itemId);
+                $playlists[$index]['is_added_to_playlist'] = !empty($playlistItem);
+                $playlists[$index]['user_playlist_item_id'] = $playlistItem[0]['id'] ?? null;
             }
         }
 
@@ -324,7 +326,8 @@ class MyListJsonController extends Controller
                                                    'total_results' => $this->userPlaylistsService->countUserPlaylists(
                                                        auth()->id(),
                                                        'user-playlist',
-                                                       config('railcontent.brand')
+                                                       config('railcontent.brand'),
+                                                       $request->get('term')
                                                    ),
                                                ]))->toJsonResponse();
     }

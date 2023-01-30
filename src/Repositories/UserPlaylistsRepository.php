@@ -21,7 +21,7 @@ class UserPlaylistsRepository extends RepositoryBase
      * @param int $page
      * @return array|mixed[]
      */
-    public function getUserPlaylist($userId, $playlistType, $brand = null, $limit = null, $page = 1)
+    public function getUserPlaylist($userId, $playlistType, $brand = null, $limit = null, $page = 1, $term = null)
     {
         if (!$brand) {
             $brand = config('railcontent.brand');
@@ -31,16 +31,18 @@ class UserPlaylistsRepository extends RepositoryBase
             $this->query()
                 ->where('user_id', $userId)
                 ->where('brand', $brand)
-                ->where('type', $playlistType)
-                ->orderBy('id', 'desc');
-
+                ->where('type', $playlistType);
+        if ($term) {
+            $query->where('name', 'LIKE', '%'.$term.'%');
+        }
         if ($limit) {
             $query->limit($limit)
                 ->skip(($page - 1) * $limit);
         }
 
         $data =
-            $query->get()
+            $query->orderBy('id', 'desc')
+                ->get()
                 ->toArray();
 
         return $data;
@@ -75,17 +77,23 @@ class UserPlaylistsRepository extends RepositoryBase
      * @param null $brand
      * @return int
      */
-    public function countUserPlaylists($userId, $playlistType, $brand = null)
+    public function countUserPlaylists($userId, $playlistType, $brand = null, $term = null)
     {
         if (!$brand) {
             $brand = config('railcontent.brand');
         }
 
-        return $this->query()
-            ->where('user_id', $userId)
-            ->where('brand', $brand)
-            ->where('type', $playlistType)
-            ->count();
+        $query =
+            $this->query()
+                ->where('user_id', $userId)
+                ->where('brand', $brand)
+                ->where('type', $playlistType);
+
+        if ($term) {
+            $query->where('name', 'LIKE', '%'.$term.'%');
+        }
+
+        return $query->count();
     }
 
     /**
