@@ -4,6 +4,8 @@
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=24098ec7990ff98a565fd1e4693746ed",
     "/platform/js/books.js": "/platform/js/books.js?id=d4fa837307a14d7ee0ce9065b5e5e8e0",
     "/platform/js/manifest.js": "/platform/js/manifest.js?id=ea83657209814fb06eb747685fce1d72",
+    "/platform/js/membership-update-.js": "/platform/js/membership-update-.js?id=38c7383dbe623cdd0af0497f5c390276",
+    "/platform/js/membership-update-page.js": "/platform/js/membership-update-page.js?id=96a0d92499a63b7edb121e170fb0c00b",
     "/platform/js/song.js": "/platform/js/song.js?id=03c4fad275d6834abc7e103d822fcc00",
     "/platform/js/song-request.js": "/platform/js/song-request.js?id=f9543f936080d1925940e54bcab73ddb",
     "/platform/js/piano-backing-tracks.js": "/platform/js/piano-backing-tracks.js?id=7fbf8dfd123a4027cfa05515f7665d82",
@@ -26,8 +28,8 @@
     "/platform/js/email-form-component.js": "/platform/js/email-form-component.js?id=cfa09b0b222991cacf388f79469aaec9",
     "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=26d03238e24769866d21704f9c052fd4",
     "/marketing/css/vuesora.css": "/marketing/css/vuesora.css?id=7535f0fd6b7b50898c6d1f0a209f96d2",
-    "/platform/css/app.css": "/platform/css/app.css?id=2f3bf73fcf595a3462ea7cf8c990fcbb",
+    "/platform/css/app.css": "/platform/css/app.css?id=6ef0e97d6a98b96632425a9f254ae1ff",
     "/platform/js/vendor~onboarding.js": "/platform/js/vendor~onboarding.js?id=56868ea369faf90d0978a204535ee2e6",
-    "/marketing/css/app.css": "/marketing/css/app.css?id=43f6f71b1b39fcc8aba4847cbd95a5c9",
+    "/marketing/css/app.css": "/marketing/css/app.css?id=c9f2c2da25b88432cd3e49aa057f3eba",
     "/platform/js/vendor.js": "/platform/js/vendor.js?id=05dd83ebb4f3d065d57fc2d6da2069b0"
 }
