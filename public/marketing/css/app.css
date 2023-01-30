@@ -1156,7 +1156,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   transition-duration: 150ms;
   transition-property: opacity;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
   white-space: normal;
@@ -1262,7 +1261,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   position: relative !important;
 }
 .sticky {
-  position: -webkit-sticky !important;
   position: sticky !important;
 }
 .inset-0 {
@@ -4774,7 +4772,6 @@ img {
     width: 75% !important;
   }
   .sm\:w-min {
-    width: -webkit-min-content !important;
     width: -moz-min-content !important;
     width: min-content !important;
   }
@@ -6918,14 +6915,14 @@ img {
   .lg\:w-3\/12 {
     width: 25% !important;
   }
-  .lg\:w-1\/5 {
-    width: 20% !important;
-  }
   .lg\:w-16 {
     width: 4rem !important;
   }
   .lg\:w-auto {
     width: auto !important;
+  }
+  .lg\:w-1\/5 {
+    width: 20% !important;
   }
   .lg\:w-60 {
     width: 15rem !important;
