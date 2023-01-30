@@ -24,11 +24,18 @@ Conditions:
 - A default payment method is required.
 - Cannot change to the same membership
 
-### 2. A lifetime user can choose to add on a songs subscription.
-
+### 2. A lifetime user can choose to add on a songs subscription on the Account Details page.
+Lifetime members do not have access to songs and need to purchase the songs add on.
 They will be charged the full subscription cost.
 
-### 3. Orders made through Musora Center will process membership changes automatically
+There is one exceptional case where Drumeo lifetime members are still able to access drumeo songs without the songs add on.
+They still require the add on to access other brand songs.
+
+### 3. Users without songs access will be redirected to the songs upgrade page
+From the upgrade page they can perform any of the membership changes as described in the two previous requirements.
+Once they confirm their upgrade membership they will be automatically redirected to the songs page.
+
+### 4. (Not live yet)Orders made through Musora Center will process membership changes automatically
 
 In Musora Center, any subscription membership products (not just Musora) added to a cart for a user with an active
 subscription will have a discounted rate applied by default. Most membership change cases will be discounted to $0,

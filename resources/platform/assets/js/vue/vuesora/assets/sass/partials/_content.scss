@@ -284,14 +284,14 @@
     .completed {
       opacity:1;
       visibility:visible;
-      display:block;
+      display:inline-flex;
     }
   }
 
   .incompleted {
     opacity:1;
     visibility:visible;
-    display:block;
+    display:inline-flex;
   }
   .completed {
     opacity:0;

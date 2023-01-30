@@ -574,7 +574,8 @@ class ProfileSettingsPagesController extends BaseController
 
         $currentTier = $this->upgradeService->getSubscriptionMembershipTier($isLifetime)->value;
         $proratedUpgradeCost = $this->upgradeService->getProratedUpgradeCost();
-        $showManageSongsButton = $isLifetime || $this->upgradeService->getCurrentSubscription() != null;
+        $showManageSongsButton = !user()->isAdmin()
+            && ($isLifetime || $this->upgradeService->getCurrentSubscription() != null);
 
         return view(
             'account.settings.account',
@@ -1469,7 +1470,7 @@ class ProfileSettingsPagesController extends BaseController
 
             $isAllContentAccessProduct = $userProduct->getProduct()->getDigitalAccessType() == 'all content access' ||
                 $userProduct->getProduct()->getDigitalAccessType() == 'basic content access';
-            
+
             if ($isAllContentAccessProduct) {
                 $allContentAccessProduct = $userProduct;
                 $paused = $userProduct->getStartDate() && $userProduct->getStartDate()->gt(Carbon::now());

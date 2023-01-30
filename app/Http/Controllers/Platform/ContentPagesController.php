@@ -90,7 +90,6 @@ class ContentPagesController extends BaseController
         }
 
 
-
         if ($contentTypeName == 'songs' && !user()->hasSongsAccess($brand)) {
             return redirect()->route('platform.songs-upgrade');
         }
@@ -269,7 +268,7 @@ class ContentPagesController extends BaseController
                 "hasRecentRoutines" => $hasRecentRoutines,
                 "routinesCount" => $routinesCount,
                 "catalogueMeta" => $catalogueMeta,
-                "artistsNumber" => count($listLessons->filterOptions()['artist']??[]),
+                "artistsNumber" => count($listLessons->filterOptions()['artist'] ?? []),
                 "songsNumber" => $listLessons->totalResults(),
                 "searchTerm" => $searchTerm,
                 "statuses" => ContentRepository::$availableContentStatues,
@@ -295,8 +294,8 @@ class ContentPagesController extends BaseController
 
     public function firstLevel(Request $request, $domain, $brand, $primaryPage, $firstSlug, $firstId)
     {
-        if ($primaryPage == 'songs' && !user()->isAPlusMember()) {
-            return redirect()->away(get_legacy_brand_base_url()); // todo: send to songs upgrade page
+        if ($primaryPage == 'songs' && !user()->hasSongsAccess($brand)) {
+            return redirect()->route('platform.songs-upgrade');
         }
 
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
@@ -452,8 +451,8 @@ class ContentPagesController extends BaseController
         $secondSlug,
         $secondId
     ) {
-        if ($primaryPage == 'songs' && !user()->isAPlusMember()) {
-            return redirect()->away(get_legacy_brand_base_url()); // todo: send to songs upgrade page
+        if ($primaryPage == 'songs' && !user()->hasSongsAccess($brand)) {
+            return redirect()->route('platform.songs-upgrade');
         }
 
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
@@ -521,6 +520,10 @@ class ContentPagesController extends BaseController
             "text" => "&laquo; Learning Paths",
             "url" => url()->route('platform.content.first-level', [$primaryPage, $firstSlug, $firstId]),
         ];
+
+        $secondContent =
+            $this->vimeoVideoSourcesDecorator->decorate(new Collection([$secondContent]))
+                ->first();
 
         return view('content.overview', [
             'primaryPage' => $primaryPage,
@@ -736,9 +739,12 @@ class ContentPagesController extends BaseController
         }
 
         if ((
-              empty($contentToRenderAsLesson['published_on']) ||
-              Carbon::parse($contentToRenderAsLesson['published_on']) > Carbon::now() ||
-              !in_array($contentToRenderAsLesson['status'],[ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED]))
+                empty($contentToRenderAsLesson['published_on']) ||
+                Carbon::parse($contentToRenderAsLesson['published_on']) > Carbon::now() ||
+                !in_array(
+                    $contentToRenderAsLesson['status'],
+                    [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED]
+                ))
             && !(user()->isAdmin())) {
             throw new NotFoundHttpException();
         }
@@ -1593,8 +1599,11 @@ class ContentPagesController extends BaseController
      */
     public function jumpToContentComment(
         Request $request,
-        $domain, $brand,
-        $contentId, $commentId){
+        $domain,
+        $brand,
+        $contentId,
+        $commentId
+    ) {
         ContentRepository::$availableContentStatues = false;
         ContentRepository::$pullFutureContent = true;
 
@@ -1622,8 +1631,7 @@ class ContentPagesController extends BaseController
                         $published_on .
                         '")';
                 }
-            }
-            else{
+            } else {
                 return 'ADMIN PREVIEW (Draft)';
             }
         }

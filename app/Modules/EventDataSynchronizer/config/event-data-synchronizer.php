@@ -23,7 +23,7 @@ return [
     // only the brands set for a given customer.io account will have their info synced
     // see customer-io.php accounts config value
     'customer_io_account_name_brands_to_sync' => [
-        'musora' => ['drumeo', 'pianote', 'guitareo', 'singeo'],
+        'musora' => ['drumeo', 'pianote', 'guitareo', 'singeo', 'musora'],
         'drumeo' => ['drumeo',],
         'pianote' => ['pianote',],
         'guitareo' => ['guitareo',],

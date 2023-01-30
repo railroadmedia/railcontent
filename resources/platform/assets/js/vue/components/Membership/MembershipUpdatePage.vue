@@ -21,8 +21,12 @@ const props = defineProps({
     },
 });
 
+const handleModalClose = () => {
+    history.back();
+};
+
 </script>
 <template>
-    <MembershipSelectModal @onCloseModal="() => location.reload()" :upgradeCost="upgradeCost" :currentTier="currentTier"
+    <MembershipSelectModal @onCloseModal="handleModalClose" :upgradeCost="upgradeCost" :currentTier="currentTier"
         :isLifetimeMember="isLifetimeMember" />
 </template>
