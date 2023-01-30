@@ -4979,6 +4979,213 @@ Scale practice does NOT have to be traditional. In this lesson, Lisa shows you h
                     ],
                 ],
             ],
+            [
+                'brand_id' => 2,
+                'title' => 'Getting Started On The Piano',
+                'meta_desc' => 'Go from absolute beginner to playing your first song in four easy lessons!',
+                'meta_img' => 'https://pianote.s3.amazonaws.com/lead-gen/getting-started-2022/share-image.jpg',
+                'slug' => 'getting-started/lessons',
+                'lessons' => [
+                    [
+                        'slug' => 'getting-started/lessons/now-what',
+                        'title' => 'What To Play First',
+                        'caption' => 'Your first lesson',
+                        'desc' => 'Welcome to the piano! If you’re here it is likely because you want to learn how to play but just aren’t quite sure where to begin. We’ve got you covered! By the end of this series, you will understand how the piano works, how to play scales, chords, and even SONGS!
+
+So let’s begin!
+
+We’ll start with the keyboard. I want you to first notice that we’ve got black keys and white keys. The black keys work in a pattern. We’ve got two, three, two three. Etc etc. While we aren’t going to use these black keys in the early stage of learning, we are going to use them as landmarks to help us understand the layout of the keyboard.
+
+Attached to each white key is a note name which corresponds to the letters of the alphabet.
+
+The musical alphabet is special. It goes from A-G. Like this:
+
+
+<img src="https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/lesson-1-keyboard-layout.png" alt="keyboard-layout">
+
+When you get to G, you head back to A and repeat it all over again.
+
+Those black keys will work as landmarks to help us find these notes. If you find a group of 2 black keys and then look down and to the left, you will find C! Go ahead- find and play all the C’s on your piano. Logically after C, we have D after D we have E, after E we have F, then G then A then B, and we find ourselves back at C.
+
+These little tricks will help you to learn how to make your way around the keyboard as quickly as possible. One of the first things you can practice is finding and saying out loud all the note names on the keyboard!
+
+Now let\'s come back to C. C is the easiest place to begin learning so we are going to use C as our home base.
+
+Firstly, sit nice and tall at your bench- feet on the floor, back straight, shoulders relaxed. Now, look at your hand. Your fingers are number 1-5 with your thumbs being your 1.
+
+<img src="https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/lesson-1-finger-numbering.png" alt="finger-numbering">
+
+We’re going to start by placing the thumb (or the 1 finger) of our right hand on C. Now, notice how nicely each finger rests above the notes?
+
+It’s the same with our left hand. We’ll place our pinky (or the 5 finger) on C, and the rest of our fingers just rest on top of the notes. This is the five finger scale!
+
+We’ll practice by playing each note with each finger, going up and down the scale.
+
+And that’s the first lesson! Your homework is to practice and master that five finger C scale. Remember to practice at a speed that feels comfortable to you. And practice right hand, left hand and hands together!
+
+Have fun, and I’ll see you in the next lesson!',
+                        'thumbnail' => 'https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/sit-down-now-what.png',
+                        'video_src' => '//player.vimeo.com/video/296037713',
+                        'duration' => 9,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'getting-started/lessons/scales',
+                        'title' => 'How To Play Your First Scales',
+                        'caption' => 'The C Major Scale',
+                        'desc' => 'Welcome back!
+
+In this lesson we are going to learn to play your first real scales. In the previous lesson we learned how to play a 5 finger scale. Now, we are going to look at a complete 8 tone scale.
+
+Scales are important for a variety of reasons. For now, they will help you to become more comfortable moving around the piano and help you to develop the fine motor skills in your hands to be able to play the music you want to play.
+
+So let\'s begin with C scale. We have 8 notes in total. Now you might be thinking “eight notes?! But I only have 5 fingers” and you are correct! We are going to learn a fancy way of tucking our thumb so that you can play the full scale without any problem. It looks like this:
+
+<img src="https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/lesson-2-thumb-tuck-1.jpg" alt="thumb-tuck-1">
+
+As you can see, when I get to the E, I keep my third finger pressed down, and then rotate our thumb UNDER our finger to play the F. Then we reset our hand and finish the scale with our five fingers.
+
+Now that thumb tuck is going to take some practice! So don’t feel discouraged if you don’t get it right away.
+
+
+We start at the top on C with our 5 finger (remember, the pinky!), then play down the five fingers until we reach the F with our thumb. Then, instead of tucking, we rotate OVER the thumb to land on the E with our 3 finger. I call this a Fly Over!
+
+<img src="https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/lesson-2-fly-over-1.jpg" alt="fly-over-1">
+
+Ok! Now it’s time for the left hand! We’ll start with our pinky on the C below the C we were just using.
+
+We begin by playing a five finger scale. When the thumb lands on the G, we do the Fly Over to bring our 3 finger to the A, then finish the scale up to C.
+
+<img src="https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/lesson-2-fly-over-2.jpg" alt="fly-over-2">
+
+Now you may have noticed that this is the opposite of our right hand. And that’s true! So on our way down, we will use the thumb tuck technique!
+
+<img src="https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/lesson-2-thumb-tuck-2.jpg" alt="thumb-tuck-2">
+
+So when we get to the A we need to tuck our thumb UNDER our 3 finger to land on the G. We then reset our hand and play the five finger scale down to C.
+
+We made it! That’s the C major scale. Now we need to PRACTICE! And I just want to give you a word of encouragement. Playing this scale, especially hands together can be difficult for beginners. So don’t get discouraged if it takes a bit of time! It can take days, sometimes weeks to master this.
+
+The reason it is difficult is because we are changing fingering at different times. But with practice and time, it becomes easier.
+
+So your homework for this lesson is to practice the C major scale. With your right hand, left hand and hands together. Remember to start at a nice easy pace that is comfortable for you.
+
+Have fun, and I’ll see you in the next lesson!',
+                        'thumbnail' => 'https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/scales.png',
+                        'video_src' => '//player.vimeo.com/video/292382335',
+                        'duration' => 8,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'getting-started/lessons/minor-scale',
+                        'title' => 'How To Play The A Minor Scale',
+                        'caption' => 'Adding Emotion To Your Playing',
+                        'desc' => 'Welcome back! So far we have learned the keyboard geography, how to play a five-finger scale and how to play a C major scale.
+
+Today we are going to learn the A minor scale. So what is a minor scale? Well, in music every major scale has a relative minor scale. Think if it like a brother or sister scale. They have the same traits, but they sound different.
+
+To find the relative minor scale, simply count up six notes from the note you’re starting on. We are in C, so we will start on C. If we count up six notes we get to A.
+
+<img src="https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/lesson-3-relative-minor.png" alt="relative-minor">
+
+So A is the relative minor of C!
+
+So what does this have to do with playing scales? Well, remember when we played the C scale, there were NO black keys in the scale? The same is true of A minor. Both scales have exactly the SAME notes!
+
+So why do they sound so different? Well, it’s all about where you start.
+
+The A minor scale starts on (you guessed it!) A! Pay attention when you play it to see how different it sounds from the C scale. It sounds much ‘sadder’ I think. That is a common theme with minor scales. They sound ‘sad’ in relation to their relative majors.
+
+But don’t feel too sad, because I have some good news! Because you already know how to play a C major scale, you can already play the A minor scale!
+
+The finger patterns are EXACTLY the same. The only difference is the starting note.
+
+So for the right hand, we will start on A. We play the first three notes, A B C and then TUCK our thumb UNDER the 3 finger to land on the D. Then reset and finish with a five finger scale.
+
+Going back down we start with the 5 finger (remember, the pinky?) on A. We play DOWN five notes until we get to the D with our thumb, and then FLY OVER with our 3 finger to land on the C, and then finish the scale.
+
+<img src="https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/lesson-3-c-scale.jpg" alt="c-scale">
+
+For our left hand, we start on the lower A. We play the first FIVE notes until we land on the E with our thumb, and then FLY OVER to land on the F with our 3 finger and finish the scale up to A.
+
+On the way down we play the first THREE notes until we get to the F, and then we TUCK our thumb UNDER the 3 finger so that it lands on E. We reset and finish with the five finger scale.
+
+And that is the A minor scale!!
+
+Like I said in the last lesson, this can take a while to learn and master. So practice along with the video, and at home at your own tempo!
+
+Have fun, and I’ll see you in the next (and LAST!) lesson!',
+                        'thumbnail' => 'https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/minor-scale.png',
+                        'video_src' => '//player.vimeo.com/video/292385224',
+                        'duration' => 6,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'getting-started/lessons/first-song',
+                        'title' => 'Play Your First Song!',
+                        'caption' => 'Putting It All Together',
+                        'desc' => 'Welcome back! And welcome to your FINAL lesson in this Getting Started On The Piano series. This is my absolute favorite lesson the whole series because today we are going to learn CHORDS!!
+
+And the reason I love chords so much? Is because with chords we can start playing SONGS!!
+
+So what is a chord?! A chord is a collection of three notes played together. That’s it!
+
+So let’s learn our first chord. The C chord:
+
+<img src="https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/lesson-4-c-chord.jpg" alt="c-chord">
+
+The C chord has three notes: C, E and G. And the fingers we use to play them are the 1, the 3 and the 5.
+
+In this lesson, we are going to learn four chords that are used in literally HUNDREDS of popular songs. We’ve already learned the C chord, so we only need to learn three more!
+
+And the good news is that the fingering for ALL of the chords is exactly the SAME! For each chord, we will use the 1, 3 and 5 fingers.
+
+So let’s learn the next one! The G chord:
+
+<img src="https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/lesson-4-g-chord.jpg" alt="g-chord">
+
+So the notes of the G chord are G, B and D. Try it out!
+
+Our next chord is the A minor chord. Remember that A is the relative minor of C, so the chord is a minor chord:
+
+<img src="https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/lesson-4-a-chord.jpg" alt="a-chord">
+
+ Play it, and notice how it sounds ‘sadder’ than the other chords? That’s because it’s a minor chord.
+
+And finally, we will learn an F chord:
+
+<img src="https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/lesson-4-f-chord.jpg" alt="f-chord">
+
+So those are the four chords that make-up so many popular songs! You can play them in ANY order and they will always sound great together.
+
+And that’s it! I really, really hope you’ve enjoyed this series and found it useful. You can watch any of the lessons again at any time.
+
+And finally, have fun playing the piano!',
+                        'thumbnail' => 'https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/your-first-song.png',
+                        'video_src' => '//player.vimeo.com/video/296461777',
+                        'duration' => 8,
+                        'assets' => [],
+                    ],
+                ],
+            ],
+            [
+                'brand_id' => 2,
+                'title' => 'Sight Reading Made Simple',
+                'meta_desc' => 'If you’ve ever struggled through a music class or felt daunted by the notes on the page -- let us show you how easy reading music can be.',
+                'meta_img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sight-reading-made-simple/og-image.jpg',
+                'slug' => '',
+                'lessons' => [
+                    [
+                        'slug' => '',
+                        'title' => '',
+                        'desc' => '',
+                        'thumbnail' => '',
+                        'video_src' => '',
+                        'duration' => 1,
+                        'assets' => [],
+                    ],
+                ],
+            ],
 //            [
 //                'brand_id' => 2,
 //                'title' => '',
