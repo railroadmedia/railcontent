@@ -80,8 +80,8 @@ class RouteServiceProvider extends ServiceProvider
             Route::group([], base_path('routes/pianote/shop.php'));
             Route::group([], base_path('routes/pianote/lead-gen.php'));
 
-            Route::group([], base_path('routes/singeo/sales.php'));
             Route::group([], base_path('routes/singeo/shop.php'));
+            Route::group([], base_path('routes/singeo/sales.php'));
 
             Route::group([], base_path('routes/misc/http_error_code_routes.php'));
 
