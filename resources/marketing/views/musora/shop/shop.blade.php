@@ -159,124 +159,130 @@
 
 
     <div class="white-box">
-        {{--   HOODIES & SWEATERS    --}}
-        <section class="grid-view category-section" data-category="hoodies" x-show="filter === 'type'">
-            <ul class="container mx-auto fixed-cards">
-                <li>
-                    <h1 class="px-2 md:px-3">
-                        <div class="heading-icon"><img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/hoodie.svg" style="filter: invert(0%) sepia(4%) saturate(0%) hue-rotate(309deg) brightness(93%) contrast(107%);"></div>
-                        Hoodies & Sweaters
-                    </h1>
-                </li>
-                @foreach($hoodies as $hoodie){
-                @include('drumeo.drumshop._partials._drum-shop-card', [
-                     "sku" => $hoodie->sku,
-                     "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hoodie->slug ),
-                     "badgeText" => $hoodie->badge_text,
-                     "thumbnail" => $hoodie->thumbnail,
-                     "title" => $hoodie->name,
-                     "cardDescription" => $hoodie->short_desc,
-                     "fullPrice" => $hoodie->price,
-                     "price" => $hoodie->discounted_price === '0.00' || empty($hoodie->discounted_price) ? $hoodie->price : $hoodie->discounted_price,
-                     "sizes" => $hoodie->sizes,
-                     "soldOut" => !empty($products[$hoodie->sku]) ? $products[$hoodie->sku]->getStockAvailability() === 0 : $hoodie->sold_out,
-                     "category" => strtolower($hoodie->productType->name),
-                     "size_case_sensitive" => $hoodie->size_case_sensitive,
-                ])
-                }
-                @endforeach
-            </ul>
-        </section>
+        <div x-cloak x-show="filter === 'brand'">
 
-        {{--   SHIRTS     --}}
-        <section class="grid-view category-section" data-category="shirts" x-show="filter === 'type'">
-            <ul class="container mx-auto fixed-cards">
-                <li>
-                    <h1 class="px-2 md:px-3">
-                        <div class="heading-icon text-black"><i class="fas fa-tshirt"></i></div>
-                        T-shirts
-                    </h1>
-                </li>
+        </div>
 
-                @foreach($shirts as $shirt){
-                @include('drumeo.drumshop._partials._drum-shop-card', [
-                     "sku" => $shirt->sku,
-                     "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $shirt->slug ),
-                     "badgeText" => $shirt->badge_text,
-                     "thumbnail" => $shirt->thumbnail,
-                     "title" => $shirt->name,
-                     "cardDescription" => $shirt->short_desc,
-                     "fullPrice" => $shirt->price,
-                     "price" => $shirt->discounted_price,
-                     "sizes" => $shirt->sizes,
-                     "soldOut" => !empty($products[$shirt->sku]) ? $products[$shirt->sku]->getStockAvailability() === 0 : $shirt->sold_out,
-                     "size_case_sensitive" => $shirt->size_case_sensitive,
-                     "category" => strtolower($shirt->productType->name),
-                ])
-                }
-                @endforeach
-            </ul>
-        </section>
+        <div x-cloak x-show="filter === 'type'">
+            {{--   HOODIES & SWEATERS    --}}
+            <section class="grid-view category-section" data-category="hoodies">
+                <ul class="container mx-auto fixed-cards">
+                    <li>
+                        <h1 class="px-2 md:px-3">
+                            <div class="heading-icon"><img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/hoodie.svg" style="filter: invert(0%) sepia(4%) saturate(0%) hue-rotate(309deg) brightness(93%) contrast(107%);"></div>
+                            Hoodies & Sweaters
+                        </h1>
+                    </li>
+                    @foreach($hoodies as $hoodie){
+                    @include('drumeo.drumshop._partials._drum-shop-card', [
+                         "sku" => $hoodie->sku,
+                         "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hoodie->slug ),
+                         "badgeText" => $hoodie->badge_text,
+                         "thumbnail" => $hoodie->thumbnail,
+                         "title" => $hoodie->name,
+                         "cardDescription" => $hoodie->short_desc,
+                         "fullPrice" => $hoodie->price,
+                         "price" => $hoodie->discounted_price === '0.00' || empty($hoodie->discounted_price) ? $hoodie->price : $hoodie->discounted_price,
+                         "sizes" => $hoodie->sizes,
+                         "soldOut" => !empty($products[$hoodie->sku]) ? $products[$hoodie->sku]->getStockAvailability() === 0 : $hoodie->sold_out,
+                         "category" => strtolower($hoodie->productType->name),
+                         "size_case_sensitive" => $hoodie->size_case_sensitive,
+                    ])
+                    }
+                    @endforeach
+                </ul>
+            </section>
 
-        {{--   HATS     --}}
-        <section class="grid-view category-section" data-category="hats" x-show="filter === 'type'">
-            <ul class="container mx-auto fixed-cards">
-                <li>
-                    <h1 class="px-2 md:px-3">
-                        <div class="heading-icon"><img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/hat.svg" alt="hat icon" style="filter: invert(0%) sepia(4%) saturate(0%) hue-rotate(309deg) brightness(93%) contrast(107%);"></div>
-                        Hats
-                    </h1>
-                </li>
+            {{--   SHIRTS     --}}
+            <section class="grid-view category-section" data-category="shirts">
+                <ul class="container mx-auto fixed-cards">
+                    <li>
+                        <h1 class="px-2 md:px-3">
+                            <div class="heading-icon text-black"><i class="fas fa-tshirt"></i></div>
+                            T-shirts
+                        </h1>
+                    </li>
 
-                @foreach($hats as $hat){
-                @include('drumeo.drumshop._partials._drum-shop-card', [
-                     "sku" => $hat->sku,
-                     "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hat->slug ),
-                     "badgeText" => $hat->badge_text,
-                     "thumbnail" => $hat->thumbnail,
-                     "title" => $hat->name,
-                     "cardDescription" => $hat->short_desc,
-                     "fullPrice" => $hat->price,
-                     "price" => $hat->discounted_price,
-                     "sizes" => $hat->sizes,
-                     "soldOut" => !empty($products[$hat->sku]) ? $products[$hat->sku]->getStockAvailability() === 0 : $hat->sold_out,
-                     "category" => strtolower($hat->productType->name),
-                     "size_case_sensitive" => $hat->size_case_sensitive,
-                ])
-                }
-                @endforeach
+                    @foreach($shirts as $shirt){
+                    @include('drumeo.drumshop._partials._drum-shop-card', [
+                         "sku" => $shirt->sku,
+                         "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $shirt->slug ),
+                         "badgeText" => $shirt->badge_text,
+                         "thumbnail" => $shirt->thumbnail,
+                         "title" => $shirt->name,
+                         "cardDescription" => $shirt->short_desc,
+                         "fullPrice" => $shirt->price,
+                         "price" => $shirt->discounted_price,
+                         "sizes" => $shirt->sizes,
+                         "soldOut" => !empty($products[$shirt->sku]) ? $products[$shirt->sku]->getStockAvailability() === 0 : $shirt->sold_out,
+                         "size_case_sensitive" => $shirt->size_case_sensitive,
+                         "category" => strtolower($shirt->productType->name),
+                    ])
+                    }
+                    @endforeach
+                </ul>
+            </section>
 
-            </ul>
-        </section>
+            {{--   HATS     --}}
+            <section class="grid-view category-section" data-category="hats">
+                <ul class="container mx-auto fixed-cards">
+                    <li>
+                        <h1 class="px-2 md:px-3">
+                            <div class="heading-icon"><img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/hat.svg" alt="hat icon" style="filter: invert(0%) sepia(4%) saturate(0%) hue-rotate(309deg) brightness(93%) contrast(107%);"></div>
+                            Hats
+                        </h1>
+                    </li>
 
-        {{--   ACCESSORIES     --}}
-        <section class="grid-view category-section" data-category="accessories" x-show="filter === 'type'">
-            <ul class="container mx-auto fixed-cards">
-                <li>
-                    <h1 class="px-2 md:px-3">
-                        <div class="heading-icon text-black"><i class="fas fa-suitcase"></i></div>
-                        Accessories
-                    </h1>
-                </li>
-                @foreach($accessories as $accessory){
-                @include('drumeo.drumshop._partials._drum-shop-card', [
-                    "sku" => $accessory->sku,
-                    "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $accessory->slug ),
-                    "badgeText" => $accessory->badge_text,
-                    "thumbnail" => $accessory->thumbnail,
-                    "title" => $accessory->name,
-                    "cardDescription" => $accessory->short_desc,
-                    "fullPrice" => $accessory->price,
-                    "price" => $accessory->discounted_price,
-                    "sizes" => $accessory->sizes,
-                    "soldOut" => !empty($products[$accessory->sku]) ? $products[$accessory->sku]->getStockAvailability() === 0 : $accessory->sold_out,
-                    "category" => strtolower($accessory->productType->name),
-                    "size_case_sensitive" => $accessory->size_case_sensitive,
-                ])
-                }
-                @endforeach
-            </ul>
-        </section>
+                    @foreach($hats as $hat){
+                    @include('drumeo.drumshop._partials._drum-shop-card', [
+                         "sku" => $hat->sku,
+                         "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hat->slug ),
+                         "badgeText" => $hat->badge_text,
+                         "thumbnail" => $hat->thumbnail,
+                         "title" => $hat->name,
+                         "cardDescription" => $hat->short_desc,
+                         "fullPrice" => $hat->price,
+                         "price" => $hat->discounted_price,
+                         "sizes" => $hat->sizes,
+                         "soldOut" => !empty($products[$hat->sku]) ? $products[$hat->sku]->getStockAvailability() === 0 : $hat->sold_out,
+                         "category" => strtolower($hat->productType->name),
+                         "size_case_sensitive" => $hat->size_case_sensitive,
+                    ])
+                    }
+                    @endforeach
+
+                </ul>
+            </section>
+
+            {{--   ACCESSORIES     --}}
+            <section class="grid-view category-section" data-category="accessories">
+                <ul class="container mx-auto fixed-cards">
+                    <li>
+                        <h1 class="px-2 md:px-3">
+                            <div class="heading-icon text-black"><i class="fas fa-suitcase"></i></div>
+                            Accessories
+                        </h1>
+                    </li>
+                    @foreach($accessories as $accessory){
+                    @include('drumeo.drumshop._partials._drum-shop-card', [
+                        "sku" => $accessory->sku,
+                        "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $accessory->slug ),
+                        "badgeText" => $accessory->badge_text,
+                        "thumbnail" => $accessory->thumbnail,
+                        "title" => $accessory->name,
+                        "cardDescription" => $accessory->short_desc,
+                        "fullPrice" => $accessory->price,
+                        "price" => $accessory->discounted_price,
+                        "sizes" => $accessory->sizes,
+                        "soldOut" => !empty($products[$accessory->sku]) ? $products[$accessory->sku]->getStockAvailability() === 0 : $accessory->sold_out,
+                        "category" => strtolower($accessory->productType->name),
+                        "size_case_sensitive" => $accessory->size_case_sensitive,
+                    ])
+                    }
+                    @endforeach
+                </ul>
+            </section>
+        </div>
     </div>
 
     @component('_partials.components.modal', ['name' => 'shippingModal'])
