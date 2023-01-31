@@ -6024,8 +6024,221 @@ Thank you so much for being part of this journey, and I hope you enjoy learning 
                     ],
                 ],
             ],
+            [
+                'brand_id' => 4,
+                'title' => '4 Exercises Guaranteed To Improve ANY Voice!',
+                'meta_desc' => 'Anyone can sing! Singeo is here to show you how in this free mini lesson series.',
+                'meta_img' => 'https://singeo.s3.amazonaws.com/lead-gen/4-exercises/og-image.jpg',
+                'slug' => '',
+                'assets' => [
+                    [
+                        'title' => 'Download All MP3 Exercises',
+                        'src' => 'https://singeo.s3.amazonaws.com/lead-gen/4-exercises/4-exercises.zip',
+                        'soundslice' => ''
+                    ],
+                ],
+                'lessons' => [
+                    [
+                        'slug' => 'improve-any-voice/lessons/1',
+                        'title' => 'Why You Need To Exercise Your Voice',
+                        'desc' => '',
+                        'thumbnail' => 'https://singeo.s3.amazonaws.com/lead-gen/4-exercises/thumb-1.png',
+                        'video_src' => '//player.vimeo.com/video/543823396',
+                        'duration' => 2,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'improve-any-voice/lessons/2',
+                        'title' => 'The Most Useful Vocal Exercise',
+                        'desc' => '',
+                        'thumbnail' => 'https://singeo.s3.amazonaws.com/lead-gen/4-exercises/thumb-2.png',
+                        'video_src' => '//player.vimeo.com/video/543823457',
+                        'duration' => 7,
+                        'assets' => [
+                            [
+                                'title' => 'Bubble Exercise (Lower Octave)',
+                                'src' => 'https://singeo.s3.amazonaws.com/lead-gen/4-exercises/1-bubble-lower.mp3',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'Bubble Exercise (Higher Octave)',
+                                'src' => 'https://singeo.s3.amazonaws.com/lead-gen/4-exercises/1-bubble-higher.mp3',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'improve-any-voice/lessons/3',
+                        'title' => 'The Perfect Balance Exercise',
+                        'desc' => '',
+                        'thumbnail' => 'https://singeo.s3.amazonaws.com/lead-gen/4-exercises/thumb-3.png',
+                        'video_src' => '//player.vimeo.com/video/543823544',
+                        'duration' => 5,
+                        'assets' => [
+                            [
+                                'title' => 'VVV Exercise (Lower Octave)',
+                                'src' => 'https://singeo.s3.amazonaws.com/lead-gen/4-exercises/2-vvv-lower.mp3',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'VVV Exercise (Higher Octave)',
+                                'src' => 'https://singeo.s3.amazonaws.com/lead-gen/4-exercises/2-vvv-higher.mp3',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'improve-any-voice/lessons/4',
+                        'title' => 'The Strength Building, Pitch Accuracy Exercise',
+                        'desc' => '',
+                        'thumbnail' => 'https://singeo.s3.amazonaws.com/lead-gen/4-exercises/thumb-4.png',
+                        'video_src' => '//player.vimeo.com/video/543823601',
+                        'duration' => 4,
+                        'assets' => [
+                            [
+                                'title' => 'Creaky Door Exercise (Lower Octave)',
+                                'src' => 'https://singeo.s3.amazonaws.com/lead-gen/4-exercises/3-creaky-door-lower.mp3',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'Creaky Door Exercise (Higher Octave)',
+                                'src' => 'https://singeo.s3.amazonaws.com/lead-gen/4-exercises/3-creaky-door-higher.mp3',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'improve-any-voice/lessons/5',
+                        'title' => 'The Range Builder Exercise',
+                        'desc' => '',
+                        'thumbnail' => 'https://singeo.s3.amazonaws.com/lead-gen/4-exercises/thumb-5.png',
+                        'video_src' => '//player.vimeo.com/video/543823668',
+                        'duration' => 4,
+                        'assets' => [
+                            [
+                                'title' => 'Nay Exercise (Lower Octave)',
+                                'src' => 'https://singeo.s3.amazonaws.com/lead-gen/4-exercises/4-nay-lower.mp3',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'Nay Exercise (Higher Octave)',
+                                'src' => 'https://singeo.s3.amazonaws.com/lead-gen/4-exercises/4-nay-higher.mp3',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'improve-any-voice/lessons/6',
+                        'title' => 'The Full Vocal Routine',
+                        'desc' => '',
+                        'thumbnail' => 'https://singeo.s3.amazonaws.com/lead-gen/4-exercises/thumb-6.png',
+                        'video_src' => '//player.vimeo.com/video/543823702',
+                        'duration' => 1,
+                        'assets' => [
+                            [
+                                'title' => 'Full Routine (Lower Octave)',
+                                'src' => 'https://singeo.s3.amazonaws.com/lead-gen/4-exercises/full-routine-lower.mp3',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'Full Routine (Higher Octave)',
+                                'src' => 'https://singeo.s3.amazonaws.com/lead-gen/4-exercises/full-routine-higher.mp3',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'improve-any-voice/lessons/7',
+                        'title' => 'Outro',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/1125685312-50e2683c4aae37fd0bde953dcd962a8ec505a43e31c100ab92f3fb258424342c-d_800',
+                        'video_src' => '//player.vimeo.com/video/543823720',
+                        'duration' => 2,
+                        'assignments' => [
+                            [
+                                'title' => 'Practice both chords.',
+                                'subtitle' => 'Practice going back and forth between both chords, sounding clean, without hurting your fingers.',
+                                'src' => 'https://guitareo.s3.amazonaws.com/lead-gen/song-in-an-hour/6a.svg',
+                                'soundslice' => 'https://www.soundslice.com/slices/jBjfc/embed/?api=1&amp;scroll_type=2&amp;branding=0'
+                            ],
+                            [
+                                'title' => 'Practice both chords in time with the jam track.',
+                                'subtitle' => 'Practice going back and forth between both chords IN TIME along with the drum track.',
+                                'src' => 'https://guitareo.s3.amazonaws.com/lead-gen/song-in-an-hour/6b.svg',
+                                'soundslice' => 'https://www.soundslice.com/slices/zWSfc/embed/?api=1&amp;scroll_type=2&amp;branding=0'
+                            ],
+                        ],
+                        'assets' => [
+                            [
+                                'title' => 'Sheet Music',
+                                'src' => 'https://guitareo.s3.amazonaws.com/lead-gen/song-in-an-hour/6.png',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'Practice Both Chords In Time',
+                                'src' => 'https://d1923uyy6spedc.cloudfront.net/Practice%20Both%20Chords%20In%20Time%20-%20Full.mp3',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            [
+                'brand_id' => 4,
+                'title' => 'How To Stop Hating Your Voice',
+                'meta_desc' => 'Learn to love your voice in 3 easy lessons!',
+                'meta_img' => 'https://singeo.s3.amazonaws.com/lead-gen/stop-hating-your-voice/fb-share-image.jpg',
+                'slug' => 'stop-hating-your-voice/lessons',
+                'assets' => [
+                    [
+                        'title' => 'Download All MP3 Exercises',
+                        'src' => 'https://singeo.s3.amazonaws.com/lead-gen/stop-hating-your-voice/mp3s.zip',
+                        'soundslice' => ''
+                    ],
+                ],
+                'lessons' => [
+                    [
+                        'slug' => 'stop-hating-your-voice/lessons/1',
+                        'title' => 'It\'s Normal!',
+                        'desc' => 'One of the biggest misconceptions about singing is that the voice you are born with is the voice you have forever. In this very first lesson we’ll bust that myth.',
+                        'thumbnail' => 'https://singeo.s3.amazonaws.com/lead-gen/stop-hating-your-voice/thumb-1.png',
+                        'video_src' => 'https://www.youtube.com/embed/bNpiCbY2y0c?rel=0&showinfo=0',
+                        'duration' => 4,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'stop-hating-your-voice/lessons/2',
+                        'title' => 'Get Control',
+                        'desc' => 'You’ll get control of your voice after this lesson. Follow along with these exercises to build a stronger voice you can be proud of.',
+                        'thumbnail' => 'https://singeo.s3.amazonaws.com/lead-gen/stop-hating-your-voice/thumb-2.png',
+                        'video_src' => 'https://www.youtube.com/embed/MY-9Svljta0?rel=0&showinfo=0',
+                        'duration' => 6,
+                        'assets' => [
+                            [
+                                'title' => 'Practice Along (Lower Octave)',
+                                'src' => 'https://singeo.s3.amazonaws.com/lead-gen/stop-hating-your-voice/practice-along-lower.mp3',
+                                'soundslice' => ''
+                            ],
+                            [
+                                'title' => 'Practice Along (Higher Octave)',
+                                'src' => 'https://singeo.s3.amazonaws.com/lead-gen/stop-hating-your-voice/practice-along-higher.mp3',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'stop-hating-your-voice/lessons/3',
+                        'title' => 'Find Your New Voice',
+                        'desc' => 'We’ll dive deeper into exactly how you can sound better. And what better way to do that than with a beautiful song! Sing this Adele ballad and sound more beautiful.',
+                        'thumbnail' => 'https://singeo.s3.amazonaws.com/lead-gen/stop-hating-your-voice/thumb-3.png',
+                        'video_src' => 'https://www.youtube.com/embed/jxtgOO5z7SI?rel=0&showinfo=0',
+                        'duration' => 8,
+                        'assets' => [],
+                    ],
+                ],
+            ],
 //            [
-//                'brand_id' => 2,
+//                'brand_id' => 4,
 //                'title' => '',
 //                'meta_desc' => '',
 //                'meta_img' => '',
