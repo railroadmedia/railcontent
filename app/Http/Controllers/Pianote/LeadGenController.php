@@ -165,83 +165,31 @@ class LeadGenController extends BaseController
         throw new NotFoundHttpException();
     }
 
-    public function sightReading(Request $request, $domain, $page = null, $lesson = null)
+    public function sightReading()
     {
-        switch($page){
-            case null:
-                return view('pianote.lead-gen.sight-reading-made-simple.signup');
-            case 'lessons' && is_null($lesson):
-                return view('pianote.lead-gen.sight-reading-made-simple.pages.lesson-index');
-            default:
-                return view('pianote.lead-gen.sight-reading-made-simple.pages.'.$lesson);
-        }
-
-        throw new NotFoundHttpException();
+        return view('pianote.lead-gen.sight-reading-made-simple.signup');
     }
 
-    public function learnSongs(Request $request, $domain, $page = null, $lesson = null)
+    public function learnSongs(Request $request, $domain, $page = null,)
     {
         switch($page){
             case null:
                 return view('pianote.lead-gen.learn-songs.signup');
             case 'thank-you':
                 return view('pianote.lead-gen.learn-songs.thank-you');
-            case 'lessons' && is_null($lesson):
-                return view('pianote.lead-gen.learn-songs.pages.lesson-index');
-            default:
-                switch ($lesson){
-                    case 'intro':
-                        return view('pianote.lead-gen.learn-songs.pages.1');
-                    case 'someone-you-loved':
-                        return view('pianote.lead-gen.learn-songs.pages.2');
-                    case 'hallelujah':
-                        return view('pianote.lead-gen.learn-songs.pages.3');
-                    case 'love-story':
-                        return view('pianote.lead-gen.learn-songs.pages.4');
-                }
         }
 
         throw new NotFoundHttpException();
     }
 
-    public function carols(Request $request, $domain, $page = null, $lesson = null)
+    public function carols()
     {
-        if(is_null($page) && is_null($lesson)){
-            return view('pianote.lead-gen.christmas-carols.signup');
-        }
-        elseif($page === 'songs' && is_null($lesson)) {
-            return view('pianote.lead-gen.christmas-carols.pages.lesson-index');
-        }
-        else {
-            switch ($lesson){
-                case 'deck-the-halls':
-                    return view('pianote.lead-gen.christmas-carols.pages.1');
-                case 'joy-to-the-world':
-                    return view('pianote.lead-gen.christmas-carols.pages.2');
-                case 'o-holy-night':
-                    return view('pianote.lead-gen.christmas-carols.pages.3');
-                case 'silent-night':
-                    return view('pianote.lead-gen.christmas-carols.pages.4');
-                case 'jingle-bells':
-                    return view('pianote.lead-gen.christmas-carols.pages.5');
-            }
-        }
-
-        throw new NotFoundHttpException();
+        return view('pianote.lead-gen.christmas-carols.signup');
     }
 
-    public function classicalPiano(Request $request, $domain, $page = null, $lesson = null)
+    public function classicalPiano()
     {
-        switch($page){
-            case null:
-                return view('pianote.lead-gen.classical-piano.signup');
-            case 'lessons' && is_null($lesson):
-                return view('pianote.lead-gen.classical-piano.pages.lesson-index');
-            default:
-                return view('pianote.lead-gen.classical-piano.pages.'.$lesson);
-        }
-
-        throw new NotFoundHttpException();
+        return view('pianote.lead-gen.classical-piano.signup');
     }
 
     public function chordCharts(Request $request, $domain, $page = null)
@@ -256,18 +204,9 @@ class LeadGenController extends BaseController
         throw new NotFoundHttpException();
     }
 
-    public function fiveDays(Request $request, $domain, $page = null, $lesson = null)
+    public function fiveDays()
     {
-        switch($page){
-            case null:
-                return view('pianote.lead-gen.piano-in-5-days.signup');
-            case 'lessons' && is_null($lesson):
-                return view('pianote.lead-gen.piano-in-5-days.pages.lesson-index');
-            default:
-                return view('pianote.lead-gen.piano-in-5-days.pages.'.$lesson);
-        }
-
-        throw new NotFoundHttpException();
+        return view('pianote.lead-gen.piano-in-5-days.signup');
     }
 
     public function startHere(Request $request, $domain)
@@ -277,18 +216,9 @@ class LeadGenController extends BaseController
         throw new NotFoundHttpException();
     }
 
-    public function sevenDaysSightReading(Request $request, $domain, $page = null, $lesson = null)
+    public function sevenDaysSightReading()
     {
-        switch($page){
-            case null:
-                return view('pianote.lead-gen.7-days-to-sight-reading.signup');
-            case 'lessons' && is_null($lesson):
-                return view('pianote.lead-gen.7-days-to-sight-reading.lesson-index');
-            default:
-                return view('pianote.lead-gen.7-days-to-sight-reading.lessons.'.str_replace('day-','',$lesson));
-        }
-
-        throw new NotFoundHttpException();
+        return view('pianote.lead-gen.7-days-to-sight-reading.signup');
     }
 
     public function personalityQuiz(Request $request, $domain, $page = null)

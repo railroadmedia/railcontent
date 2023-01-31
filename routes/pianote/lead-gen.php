@@ -61,50 +61,17 @@ Route::domain('{pianoteDomain}')
                 ]);
         }
     );
-    Route::group(['prefix' => 'sight-reading-made-simple'],
-        function () {
-            Route::get('/{page?}/{lesson?}', LeadGenController::class . '@sightReading')
-                ->whereIn('page', [
-                    null, 'lessons'
-                ])
-                ->whereIn('lesson', [
-                    null, '1', '2', '3', '4'
-                ]);
-        }
-    );
+    Route::get('/sight-reading-made-simple', [LeadGenController::class, 'sightReading']);
     Route::group(['prefix' => 'learn-songs'],
         function () {
-            Route::get('/{page?}/{lesson?}', LeadGenController::class . '@learnSongs')
+            Route::get('/{page?}', LeadGenController::class . '@learnSongs')
                 ->whereIn('page', [
-                    null, 'thank-you', 'lessons'
-                ])
-                ->whereIn('lesson', [
-                    null, 'intro', 'someone-you-loved', 'hallelujah', 'love-story'
+                    null, 'thank-you',
                 ]);
         }
     );
-    Route::group(['prefix' => 'christmas-carols'],
-        function () {
-            Route::get('/{page?}/{lesson?}', LeadGenController::class . '@carols')
-                ->whereIn('page', [
-                    null, 'songs'
-                ])
-                ->whereIn('lesson', [
-                    null, 'deck-the-halls', 'joy-to-the-world', 'o-holy-night', 'silent-night', 'jingle-bells'
-                ]);
-        }
-    );
-    Route::group(['prefix' => 'classical-piano'],
-        function () {
-            Route::get('/{page?}/{lesson?}', LeadGenController::class . '@classicalPiano')
-                ->whereIn('page', [
-                    null, 'lessons'
-                ])
-                ->whereIn('lesson', [
-                    null, '1', '2', '3', '4'
-                ]);
-        }
-    );
+    Route::get('/christmas-carols', [LeadGenController::class, 'carols']);
+    Route::get('/classical-piano', [LeadGenController::class, 'classicalPiano']);
     Route::group(['prefix' => '50-chord-charts'],
         function () {
             Route::get('/{page?}', LeadGenController::class . '@chordCharts')
@@ -113,29 +80,9 @@ Route::domain('{pianoteDomain}')
                 ]);
         }
     );
-    Route::group(['prefix' => 'piano-in-5-days'],
-        function () {
-            Route::get('/{page?}/{lesson?}', LeadGenController::class . '@fiveDays')
-                ->whereIn('page', [
-                    null, 'lessons'
-                ])
-                ->whereIn('lesson', [
-                    null, 'day-1-welcome-to-the-piano', 'day-1-practice-video-1', 'day-1-practice-video-2', 'day-2-you-can-play-a-melody', 'day-2-practice-video-1', 'day-3-you-can-use-both-hands', 'day-3-practice-video-1', 'day-3-practice-video-2', 'day-4-reading-music', 'day-4-practice-video-1', 'day-4-practice-video-2', 'day-4-practice-video-3', 'day-5-you-can-play-piano', 'day-5-practice-video-1', 'day-5-practice-video-2', 'day-5-practice-video-3', 'tips-for-success'
-                ]);
-        }
-    );
-    Route::get('/start-here', [LeadGenController::class, 'startHere'] );
-    Route::group(['prefix' => '7-days-to-sight-reading'],
-        function () {
-            Route::get('/{page?}/{lesson?}', LeadGenController::class . '@sevenDaysSightReading')
-                ->whereIn('page', [
-                    null, 'lessons'
-                ])
-                ->whereIn('lesson', [
-                    null, 'day-1', 'day-2', 'day-3', 'day-4', 'day-5', 'day-6', 'day-7'
-                ]);
-        }
-    );
+    Route::get('/piano-in-5-days', [LeadGenController::class, 'fiveDays']);
+    Route::get('/start-here', [LeadGenController::class, 'startHere']);
+    Route::get('/7-days-to-sight-reading', [LeadGenController::class, 'sevenDaysSightReading']);
     Route::group(['prefix' => 'personality-quiz'],
         function () {
             Route::get('/{page?}', LeadGenController::class . '@personalityQuiz')
