@@ -142,7 +142,7 @@
                     x-bind:class="filter === 'type' && 'active'"
                     x-on:click="filter = 'type'"
                 >
-                    Clothing
+                    Type
                 </span>
                 </div>
                 <div class="select-wrap relative px-3 md:px-0">
@@ -160,11 +160,11 @@
 
     <div class="white-box">
         {{--   ACCESSORIES     --}}
-        <section class="grid-view category-section" data-category="accessories" x-show="filter === 'accessories' || filter === 'all'">
+        <section class="grid-view category-section" data-category="accessories" x-show="filter === 'type'">
             <ul class="container mx-auto fixed-cards">
                 <li>
                     <h1 class="px-2 md:px-3">
-                        <div class="heading-icon"><i class="fas fa-suitcase"></i></div>
+                        <div class="heading-icon text-black"><i class="fas fa-suitcase"></i></div>
                         Accessories
                     </h1>
                 </li>
@@ -189,11 +189,11 @@
         </section>
 
         {{--   HATS     --}}
-        <section class="grid-view category-section" data-category="hats" x-show="filter === 'clothing' || filter === 'all'">
+        <section class="grid-view category-section" data-category="hats" x-show="filter === 'type'">
             <ul class="container mx-auto fixed-cards">
                 <li>
                     <h1 class="px-2 md:px-3">
-                        <div class="heading-icon"><img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/hat.svg" alt="hat icon"></div>
+                        <div class="heading-icon"><img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/hat.svg" alt="hat icon" style="filter: invert(0%) sepia(4%) saturate(0%) hue-rotate(309deg) brightness(93%) contrast(107%);"></div>
                         Hats
                     </h1>
                 </li>
@@ -220,11 +220,11 @@
         </section>
 
         {{--   SHIRTS     --}}
-        <section class="grid-view category-section" data-category="shirts" x-show="filter === 'clothing' || filter === 'all'">
+        <section class="grid-view category-section" data-category="shirts" x-show="filter === 'type'">
             <ul class="container mx-auto fixed-cards">
                 <li>
                     <h1 class="px-2 md:px-3">
-                        <div class="heading-icon"><i class="fas fa-tshirt"></i></div>
+                        <div class="heading-icon text-black"><i class="fas fa-tshirt"></i></div>
                         Shirts
                     </h1>
                 </li>
@@ -250,11 +250,11 @@
         </section>
 
         {{--   HOODIES     --}}
-        <section class="grid-view category-section" data-category="hoodies" x-show="filter === 'clothing' || filter === 'all'">
+        <section class="grid-view category-section" data-category="hoodies" x-show="filter === 'type'">
             <ul class="container mx-auto fixed-cards">
                 <li>
                     <h1 class="px-2 md:px-3">
-                        <div class="heading-icon"><img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/hoodie.svg"></div>
+                        <div class="heading-icon"><img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/hoodie.svg" style="filter: invert(0%) sepia(4%) saturate(0%) hue-rotate(309deg) brightness(93%) contrast(107%);"></div>
                         Hoodies
                     </h1>
                 </li>
