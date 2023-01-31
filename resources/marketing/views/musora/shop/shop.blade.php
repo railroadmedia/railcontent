@@ -21,7 +21,7 @@
     x-data="{
         shippingModal: false,
         orderModal: false,
-        filter: 'all',
+        filter: 'brand',
     }"
 @endsection
 
@@ -131,24 +131,17 @@
             <div class="md:flex justify-between md:px-3 lg:px-2">
                 <div class="filter-wrap clearfix">
                 <span
-                    class="filter float-left px-2 md:px-3 w-1/2 md:w-auto"
-                    x-bind:class="filter === 'all' && 'active'"
-                    x-on:click="filter = 'all'"
+                    class="filter float-left px-2 md:px-3 w-1/2 md:w-auto border-black"
+                    x-bind:class="filter === 'brand' && 'active'"
+                    x-on:click="filter = 'brand'"
                 >
                     All
                 </span>
-                    <span
-                        class="filter float-left px-2 md:px-3 w-1/2 md:w-auto"
-                        x-bind:class="filter === 'accessories' && 'active'"
-                        x-on:click="filter = 'accessories'"
-                    >
-                    Accessories
-                </span>
-                    <span
-                        class="filter float-left px-2 md:px-3 w-1/2 md:w-auto"
-                        x-bind:class="filter === 'clothing' && 'active'"
-                        x-on:click="filter = 'clothing'"
-                    >
+                <span
+                    class="filter float-left px-2 md:px-3 w-1/2 md:w-auto border-black"
+                    x-bind:class="filter === 'type' && 'active'"
+                    x-on:click="filter = 'type'"
+                >
                     Clothing
                 </span>
                 </div>
