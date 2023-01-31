@@ -5173,15 +5173,853 @@ And finally, have fun playing the piano!',
                 'title' => 'Sight Reading Made Simple',
                 'meta_desc' => 'If you’ve ever struggled through a music class or felt daunted by the notes on the page -- let us show you how easy reading music can be.',
                 'meta_img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sight-reading-made-simple/og-image.jpg',
-                'slug' => '',
+                'slug' => 'sight-reading-made-simple/lessons',
                 'lessons' => [
                     [
-                        'slug' => '',
-                        'title' => '',
+                        'slug' => 'sight-reading-made-simple/lessons/1',
+                        'title' => 'Getting Started With Sight-Reading',
+                        'caption' => 'Learning the notes of the keyboard',
+                        'desc' => 'Welcome to Sight-Reading Made Simple - A Beginner\'s Guide To Reading Music! In this series, you’ll learn how the notes on the piano are represented on a musical score. Even better, you’ll get some great tips and techniques to read music on a score quickly, so you can play music you may not have seen before.
+
+I often say learning to sight-read music is like learning to read a foreign language while riding a bike and juggling. It’s NO SMALL TASK! But it can be done, and in this series, I am going to take you through step-by-step the best way to learn how to read music, without the confusion.
+
+Now, you might already know some of the concepts I’m about to explain. If you do, that’s awesome! Feel free to skip ahead. But before we can learn what the notes are on a page, we need to know what they are on the keyboard.<div class="text-3xl mt-5 mb-2"><strong>Naming the notes</strong></div><p class="mb-4">Every key on the keyboard has a letter name attached to it. That letter is from the musical alphabet, which goes from A-G. Like this:</p><img class="mb-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/sight-reading-made-simple/assets/1-keyboard-notes-A-G-1.png" alt="keyboard-notes-A-G-1">
+When you get to G, you head back to A and repeat it all over again.<div class="text-3xl mt-5 mb-2"><strong>Your fingers are numbered</strong></div><p class="mb-4">Your fingers have numbers. Each finger (and thumb) has a different number. As you can see below, your thumbs are number 1 and your pinkies are number 5:</p><img class="mb-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/sight-reading-made-simple/assets/1-finger-numbers-1.png" alt="finger-numbers">
+Our ‘home base’ on the piano for this lesson will be Middle C. Middle C is the C note that is located nearest to the middle of your piano. (It’s not actually the middle note of the piano, but it is pretty close!)
+
+We’ll start by putting our right-hand thumb (or number 1 finger) on Middle C. Your left-hand pinky (number 5) goes on the C BELOW Middle C. We call that Low C. This position is called C Position.
+
+To warm up, try playing the five notes that lie under your fingers up and down a few times.<div class="text-3xl mt-5 mb-2"><strong>Let’s talk about rhythm</strong></div><p class="mb-4">We can’t learn how to read music without first understanding rhythm! Notated music is shown in rhythmic groupings. On a piece of music you will see vertical lines. These are called bar lines. The space between the lines is called a bar, or measure:</p><img class="mb-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/sight-reading-made-simple/assets/ZZ-blank-staff-1.png" alt="ZZ-blank-staff"><p class="mb-4">Inside each bar, we have a certain number of notes. So how do we know how many notes we can fit inside each bar? Well, that’s the job of the Time Signature:</p><img class="mb-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/sight-reading-made-simple/assets/trebleclef-time-signature-1.png" alt="trebleclef-time-signature"><p class="mb-4">The Time Signature is what tells us how many beats each bar gets. The time signature above is called Four-Four. It means that we can have four beats in each bar, and each beat = 1 quarter note.
+
+This is a quarter note:</p><img class="mb-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/sight-reading-made-simple/assets/zz-quarter-note-1.png" alt="zz-quarter-note"><p class="mb-4">It equals one beat. So we can fit four of these inside our bar.
+
+There are other notes as well. This is a half note:</p><img class="mb-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/sight-reading-made-simple/assets/zz-half-note-1.png" alt="zz-half-note"><p class="mb-4">A half note equals two beats. It is twice as long as a quarter note. So we could fit two half notes in our bar next to the quarter notes, like this:</p><img class="mb-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/sight-reading-made-simple/assets/3h-quarter-notes-half-notes-numbers-nocount-1.png" alt="3h-quarter-notes-half-notes-numbers-nocount"><p class="mb-4">If we have a half note, that means we can have a whole note, right? Correct! This is a whole note:</p><img class="mb-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/sight-reading-made-simple/assets/zz-whole-note-1.png" alt="zz-whole-note"><p class="mb-4">A whole note is twice as long as a half note, and four times as long as a quarter note. So it takes up the whole of our bar.
+
+There is one more note we are going to learn, and it’s my personal favorite. It’s called an eighth note, and it looks like this:</p><img class="mb-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/sight-reading-made-simple/assets/zz-eighth-note-1.png" alt="zz-eighth-note"><p class="mb-4">You might be able to guess how long an eighth note is. It is half the length of a quarter note. You can fit eight eighth notes in one bar. Make sense?
+
+As you can see eighth notes have a little flag coming off their stem. That’s when they are on their own. When they are next to each other, they hold hands and connect, like a little bridge: Eighth notes are often grouped in two’s because two eighth notes equal 1 beat.</p><img class="mb-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/sight-reading-made-simple/assets/zz-eighth-notes-1.png" alt="zz-eighth-notes"><p>And that is your introduction to rhythm! Make sure you watch the lesson to practice along at the piano. In our next lesson, we are going to look at the musical staff and move the notes from the keys to the page.</p>',
+                        'thumbnail' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sight-reading-made-simple/thumb1.jpg',
+                        'video_src' => '//player.vimeo.com/video/333189064',
+                        'duration' => 7,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'sight-reading-made-simple/lessons/2',
+                        'title' => 'The Treble Clef',
+                        'caption' => 'What to play with your right hand',
+                        'desc' => '<p class="mb-4">Welcome to lesson two in our Sight-Reading Made Simple series! Today, we are going to be looking at the Treble Clef and how to read the notes on the lines and spaces.
+
+This is the Treble Clef:</p><img class="mb-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/sight-reading-made-simple/assets/trebleclef-symbol-1.png" alt="trebleclef-symbol"><p class="mb-4">This symbol tells us that we are going to be playing with our right hand. The treble clef lives on something called the staff, which is just a fancy name for five lines and four spaces:</p><img class="mb-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/sight-reading-made-simple/assets/trebleclef-time-signature-1.png" alt="trebleclef-time-signature">
+Each one of these lines and spaces represents a letter of the musical alphabet.<div class="text-3xl mt-5 mb-2"><strong>Every Good Boy Does Fine</strong></div><p class="mb-4">Now that’s a lot to remember! Fortunately, there are some easy ways to remember the note names. To do this, it can be helpful to think of an easy-to-remember phrase. For example, the lines on the treble staff represent the notes E, G, B, D, and F. To remember this, teachers often use the phrase: Every Good Boy Deserves Fudge. It’s a silly phrase, but it’s easy to remember and that’s the whole point.
+
+You can also use the phrase: Every Good Boy Does Fine. It’s really up to you for whatever is easiest to remember!</p><img class="mb-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/sight-reading-made-simple/assets/trebleclef-egbdf-1.png" alt="trebleclef-egbdf"><p class="mb-4">Remembering the spaces is even easier! From the bottom, the notes are F, A, C, and E. They spell the word FACE!</p><img class="mb-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/sight-reading-made-simple/assets/trebleclef-face-1.png" alt="trebleclef-face">
+As you can see, the order of the notes on the staff is the same as the order of the notes of the actual keys on the piano. So F comes after E, and before G etc.<div class="text-3xl mt-5 mb-2"><strong>Middle C: A Line Of Its Own</strong></div><p class="mb-4">So where is Middle C in all this? Remember Middle C is our ‘home base’. Well, Middle C is actually BELOW the staff, on a separate little line all of its own. We’ll talk about why that is later in the series, but for now, you just need to know that’s where it is:</p><img class="mb-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/sight-reading-made-simple/assets/trebleclef-middle-c-1.png" alt="trebleclef-middle-c"><p class="mb-4">So if that is C, then the space above the Middle C line but below the E line would be D! So going up from C we have C, D, E, F, G, A, B, C, D, E, and F on the top line. And that’s as far as we will go:</p><img class="mb-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/sight-reading-made-simple/assets/trebleclef-all-notes-1.png" alt="trebleclef-all-notes"><div class="text-3xl mt-5 mb-2"><strong>Speeding It up</strong></div><p class="mb-4">So now we know what all the notes are, how do we get better at reading them quickly? We don’t want to stop at each note to figure out which one it is!
+
+I find the easiest way to read notes, especially if you are reading them for the first time, is to combine knowing a few ‘landmark’ notes and then looking for patterns in the music.
+
+For example. We know that notes that go from a line to a space, or from a space to a line are just one step apart. This means if we have Middle C, which is a line and D, which is a space, we can READ the C and the look at the next note and know it’s a D based on how far away it is from the C. If that pattern continues from line to space to line, we know we are just stepping up one note at a time:</p><img class="mb-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/sight-reading-made-simple/assets/trebleclef-staff-eighth-notes-1.png" alt="trebleclef-staff-eighth-notes"><p class="mb-4">The more you practice and play, the more you will remember and get comfortable with all the notes on the staff, but this is a great way to increase the speed of your reading as you practice.
+
+We can also use the same logic for what I like to call jumps (or skips). That’s where you have a line note going to the next line note. Or a space going to the next space. It’s jumping or skipping over the line or space in between.
+
+So let’s start on Middle C again. We know this is C, as it is our landmark note. Just from that, we can tell that the next line up will be E, because it is two steps away from C on the keyboard. And the next line is G, which is two steps up from E.</p><img class="mb-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/sight-reading-made-simple/assets/trebleclef-staff-half-notes-1.png" alt="trebleclef-staff-half-notes">
+This technique is really useful when we are playing phrases of music we haven’t seen before. To put it into practice, we only really need to know the first note of the phrase, and we can look at the pattern to figure out the rest really quickly!
+
+In the next lesson, we’ll take a look at the Bass Clef, which is where our left-hand comes into play.
+
+See you then!',
+                        'thumbnail' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sight-reading-made-simple/thumb2.jpg',
+                        'video_src' => '//player.vimeo.com/video/333194948',
+                        'duration' => 10,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'sight-reading-made-simple/lessons/3',
+                        'title' => 'The Bass Clef',
+                        'caption' => 'What to play with your left hand',
+                        'desc' => '<p class="mb-4">Welcome to lesson three! It’s time to use our left hand and learn the Bass Clef. This is the Bass Clef:</p><img class="mb-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/sight-reading-made-simple/assets/bass-clef-symbol-1.png" alt="bass-clef-symbol">
+It tells us to play with our left hand. Just like the Treble Clef, the Bass Clef lives on a staff, with five lines and four spaces. And just like the Treble Clef, those lines and spaces each represent one note on the keyboard.
+
+But here is where things get different. The lines and spaces are NOT the same notes as the treble clef.<div class="text-3xl mt-5 mb-2"><strong>All Cows Eat Grass</strong></div><p class="mb-4">Again, we can use some easy-to-remember phrases to learn what the lines and spaces are. For the lines, we can say Good Boys Deserve Fun Always to remember that it’s G, B, D, F, and A.</p><img class="mb-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/sight-reading-made-simple/assets/bassclef-gbdfa-fun-1.png" alt="bassclef-gbdfa-fun"><p class="mb-4">For the spaces, we can use the phrase All Cows Eat Grass to remember that the notes are A, C, E, and G.</p><img class="mb-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/sight-reading-made-simple/assets/bassclef-aceg-1.png" alt="bassclef-aceg">
+So if we start at the bottom line of the staff, the notes are G, A, B, C, D, E, F, G, and then we land back on A.<div class="text-3xl mt-5 mb-2"><strong>Finding Low C</strong></div>
+Just like we used Middle C in the Treble Clef as our home base, we will need a home base for our left hand. Remember in lesson one, that was Low C?
+
+On the keyboard, Low C is the C below Middle C. On the bass staff Low C is the second space from the bottom. It is the ‘Cow’ in the phrase we just learned.<div class="text-3xl mt-5 mb-2"><strong>Time To Practice</strong></div>
+Now that we understand which notes are which and we have found our home base, it’s time to explore the patterns we learned in the Treble Clef lesson, but with our left hand! Remember to look for the patterns: if a line moves to a space, it’s going up one step. If it ‘skips’, then we’re going up two steps!
+
+This might take some time to get your head around, and that’s ok! It might help when you see the Treble and Bass Clefs together on one piece of music.
+
+That’s what we’ll look at in the next lesson when we introduce the Grand Staff.',
+                        'thumbnail' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sight-reading-made-simple/thumb3.jpg',
+                        'video_src' => '//player.vimeo.com/video/333199433',
+                        'duration' => 9,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'sight-reading-made-simple/lessons/4',
+                        'title' => 'The Grand Staff',
+                        'caption' => 'Putting it all together',
+                        'desc' => '<p class="mb-4">Welcome to the final lesson in this series on Sight-Reading Made Simple.
+
+In this lesson, we are going to combine everything we have learned up until now, and hopefully explain some things that might have been confusing earlier.
+
+To do that, we need to use the Grand Staff:</p><img class="mb-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/sight-reading-made-simple/assets/grand-staff-blank-1.png" alt="grand-staff-blank">
+The Grand Staff is what we use when we play both hands at the same time. Simply put, it’s both the treble and bass staffs joined together.<div class="text-3xl mt-5 mb-2"><strong>It All Makes Sense</strong></div><p class="mb-4">A lot of people ask - why are the notes different in the treble and bass staffs when all the lines and spaces look the same? I mentioned this in the last lesson.
+
+Well, this is why - the Treble and Bass Staffs are not their own separate entities - they are connected in the Grand Staff.
+
+And it all comes back to Middle C. Remember how Middle C is not the actual middle note on the piano? Well, it IS the middle note on the Grand Staff:</p><img class="mb-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/sight-reading-made-simple/assets/grand-staff-treble-bass-middle-c-1.png" alt="grand-staff-treble-bass-middle-c"><p class="mb-4">This is where we get the note names for the lines and spaces. From Middle C, when you move up in the treble you get D, then E, F, G, A, and so on.
+
+When you move down in the bass, it goes from C to B, A, G, F, E, D, C and so on</p><img class="mb-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/sight-reading-made-simple/assets/grand-staff-all-notes-1.png" alt="grand-staff-all-notes">
+So you can see how the musical alphabet moves up and down from the middle! And that is how each line and space gets its note, and why the treble and bass are different.
+
+I do have some practice tips that I think are REALLY important in setting you up for success:<div class="text-3xl mt-5 mb-2"><strong>Go Slow</strong></div>
+This is so important. Especially for new concepts. We want to make sure we are learning things CORRECTLY. Going slow allows us to do that, and to master the concepts. Going slow now will pay off BIG TIME in the future. Otherwise, you risk developing bad habits, and if you go too fast too soon, you might hit a wall and get discouraged.<div class="text-3xl mt-5 mb-2"><strong>Hands Separately</strong></div>
+Another big tip. NEVER practice anything hands together until you can play each hand by itself. This allows you to get comfortable and focus on one thing at a time, so you don’t get overwhelmed and frustrated.<div class="text-3xl mt-5 mb-2"><strong>Take It In Small Chunks</strong></div>
+And finally, take it in small chunks. Don’t try to play the ENTIRE song the first time. Take it one bar at a time. Play the right hand, then the left hand, and then hands together. Then move on to the next bar. Once you get more comfortable start putting whole lines together. By taking it piece-by-piece you won’t get overwhelmed and you will really get to know the song.
+
+And that’s it! The course is over. Hopefully, by now you understand the basics of rhythm and how to read notes on the staff in both the treble and bass! Now you can read a foreign language while riding a bike and juggling. NO SMALL TASK remember?!
+
+But this is just the start. Hopefully, this has given you a good introduction to these very important concepts. If you’re wondering what to do now, then I cannot speak highly enough of a Pianote membership. Our structured lessons (similar to these) will guide you step-by-step so you always know exactly what to learn, and have FUN doing it.
+
+Thanks again, I truly hope you enjoyed the course!
+
+Have fun and good luck!',
+                        'thumbnail' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sight-reading-made-simple/thumb4.jpg',
+                        'video_src' => '//player.vimeo.com/video/303793096',
+                        'duration' => 10,
+                        'assets' => [],
+                    ],
+                ],
+            ],
+            [
+                'brand_id' => 2,
+                'title' => 'earn 3 Songs On Piano',
+                'meta_desc' => 'Start playing REAL songs today!',
+                'meta_img' => 'https://pianote.s3.amazonaws.com/lead-gen/learn-3-songs/share-image.jpg',
+                'slug' => 'learn-songs/lessons',
+                'lessons' => [
+                    [
+                        'slug' => 'learn-songs/lessons/intro',
+                        'title' => 'Introduction - The Musical Alphabet',
+                        'caption' => 'Learn the note names on your piano to start playing real songs.',
+                        'desc' => 'Hello and welcome to this free series that will give you the skills and confidence to start playing REAL songs on the piano.
+
+Even if this is your very first time sitting down at the keys.
+
+Just a couple of small things before you start…
+
+These lessons are designed to be taken in order, as they build on skills that you’ll learn along the way. However, if you’re feeling comfortable (or brave), feel free to skip ahead to the song you want to learn the most.
+
+And speaking of songs, <a href="https://pianote.s3.amazonaws.com/lead-gen/learn-3-songs/lessons/learn-3-songs.zip"><u>here is the link</u></a> to download your resources pack.
+
+Inside, you’ll find chord charts for all the songs, as well as a handy <a href="https://pianote.s3.amazonaws.com/lead-gen/learn-3-songs/lessons/chord-chart.pdf"><u>chord reference poster</u></a> - so you can see ALL the chords on the piano that you’ll need for these songs.
+
+And one thing that’s SUPER useful to know before you start playing your first song is…
+
+        <strong>The Musical Alphabet</strong>
+
+Just like English, music uses an alphabet, and while it’s similar…
+
+There are some differences.
+
+Every single key on the piano has a note name. Here are all the notes you’ll need to know right now:
+<img class="my-7" src="https://pianote.s3.amazonaws.com/lead-gen/learn-3-songs/lessons/all-keys.png" alt="all keys">
+The great thing about the piano is that the note names simply repeat up and down the keyboard. So you start with A and work your way up to G. Once you get to G, you simply start over again.
+
+Finding and remembering all the names of the notes can be tricky, so it’s helpful to identify some “Landmark” notes. These are notes that you can use to quickly find your spot on the keyboard.
+
+The first is the most common: C
+
+To find C, simply find a group of 2 black keys on the piano. The white note immediately to the left of that group of 2 is C.
+<video class="rounded-xl my-7" src="https://pianote.s3.amazonaws.com/lead-gen/learn-3-songs/lessons/finding-c.mp4" autoplay muted playsinline loop></video>
+The next landmark note to learn is F. To find F, simply look for a group of 3 black keys anywhere on the piano. The white note immediately to the left of that group of 3 is F.
+
+Once you get comfortable finding C and F, it becomes a lot easier to move to any other note on the piano.
+
+So your homework is to spend some time familiarizing yourself with the musical alphabet.
+
+Once you can quickly find your landmark notes, you’re ready to learn your first song.
+
+Just <a href="/learn-songs/lessons/someone-you-loved"><u>click here</u></a> to get started.',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/1123530929-9b5a5f5ff1cb24ce4a8fd6e1685a7fdc75112b59178a8510c861e933896aa9f0-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/542728954',
+                        'duration' => 2,
+                        'assets' => [
+                            [
+                                'title' => 'Download All PDFs',
+                                'src' => 'https://pianote.s3.amazonaws.com/lead-gen/learn-3-songs/lessons/learn-3-songs.zip',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'learn-songs/lessons/someone-you-loved',
+                        'title' => 'Lewis Capaldi - Someone You Loved',
+                        'caption' => 'Start with this beautiful 4-chord ballad',
+                        'desc' => 'We’ll be starting with a beautiful song that’s wildly popular, fun to play, super simple!
+
+In fact, there are really only 4 chords you’ll need to know for this one.
+
+<strong>How to play a “power chord”</strong>
+
+If you’re a complete beginner, it might be challenging to play a chord with 3 notes, so we’ll start by playing what I like to call a “power chord”. This chord has only 2 notes, a bottom note (which is also called the root note) and a top note.
+
+Remember your musical alphabet? Because you’ll need it to find the notes that you’ll be using for your chords.
+
+Let’s look at the first line of the song.
+
+This is called a chord chart. It contains the lyrics to the song and the chords written above the lyrics.
+<img class="my-7" src="https://pianote.s3.amazonaws.com/lead-gen/learn-3-songs/lessons/chords.jpg" alt="chords">
+When you see a chord written above a word - that’s when you play it.
+
+So let’s learn the 4 chords that make up 99% of this song. The first one is C.
+
+As you’ll remember from the musical alphabet, you can find C immediately to the left of a group of 2 black notes.
+
+Put your right-hand thumb on C. And then notice how your fingers rest on top of the other white notes.
+
+Now, with your pinky, play the G note. That is a C power chord. You can use this shape on ANY of the white notes in the musical alphabet to play a power chord on that note.
+
+Let’s put that to work.
+
+The next chord is a G. So find G on the keyboard (It’s under your pinky, remember?).
+
+Now, put your thumb on G and let your fingers rest on the white notes. You’ll notice your pinky is sitting on the note D.
+
+So play it.
+
+That’s a G power chord. You can repeat this for all the chords in the first line.
+
+And here’s the good news…
+
+hey simply repeat over and over again!
+
+
+<strong>The Bridge. And a new chord</strong>
+
+When you get to the bridge, you’ll notice something.
+<img class="my-7" src="https://pianote.s3.amazonaws.com/lead-gen/learn-3-songs/lessons/bridge-chords.png" alt="bridge-chords">
+Dm?!
+
+What the heck is that?! It’s a new chord! But don’t worry, because you’ll simply use the exact same process you’ve already learned.
+
+So all you need to do is find D. It’s one up from C, remember?
+
+Then let your fingers rest on the notes so your pinky will be over the note A. That’s your power chord.
+
+Simple!
+
+<strong>A note on minor chords</strong>
+
+You’ll see the little “m” next to chords like Am and Dm.
+
+That means it’s a minor chord. In music, there are 2 main types of chords: major and minor. The difference between them is the middle note.
+
+You don’t need to know too much more about that here, but it helps to think of major chords as the “happier” sounding chords, while minor chords are more “sad” sounding.
+
+If you’d like to hear the difference, you can refer to <a href="https://pianote.s3.amazonaws.com/lead-gen/learn-3-songs/lessons/chord-chart.pdf"><u>the chord reference guide</u></a>. Try playing a C major chord, then play a C minor chord.
+
+Notice the difference?
+
+We’ll explore those types of chords a little bit more in the coming lessons, but for now it’s just something to be aware of.
+
+So there you go! You’ve learned your first song and it’s a beautiful one.
+
+Now go practice, and I’ll see you in the <a href="/learn-songs/lessons/hallelujah"><u>next lesson</u></a>.',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/1123526113-47c61468e59a55845cd1f63aeb12a4297016220b45b8b68d1f49cccf20e9bf0a-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/542728989',
+                        'duration' => 8,
+                        'assets' => [
+                            [
+                                'title' => 'PDF',
+                                'src' => 'https://pianote.s3.amazonaws.com/lead-gen/learn-3-songs/lessons/lewis-capaldi-someone-you-loved.pdf',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'learn-songs/lessons/hallelujah',
+                        'title' => 'Leonard Cohen - Hallelujah',
+                        'caption' => 'A new rhythm, and some fancy techniques',
+                        'desc' => 'Hallelujah!
+
+You’re ready to learn your next song. And it’s a classic.
+
+Hallelujah by Leonard Cohen is one of the most famous songs in the world and has been covered by so many musicians over the years.
+
+There are only 5 chords in this song, and the best news is…
+
+You already know 4 of them! The chords of C, Am, G, and F will be familiar because you learned those in “Someone You Loved”.
+
+So let’s start with the new chord you’ll need to know for this song.
+
+It’s Em.
+
+That means E minor (because of the little “m” remember?).
+
+So the power chord for E minor can be played by putting your thumb on E, and your pinky finger on B.
+
+<strong>Beyond power chords. The middle note</strong>
+
+Power chords are great. And if that’s all you feel up to right now, keep playing them.
+
+But I want to talk quickly about adding the middle note. This is the note that determines whether the chord is major or minor.
+
+In the next lesson, I’ll teach you the formula to figure that out so you can play a major or minor chord on ANY note on the piano (even the black ones).
+
+But for now, I’d like you to just practice adding in the middle note if you can. The good news is, this song is in the key of C - so EVERY note will be a white note.
+
+Here is how to play all of the chords you’ll need for this song.
+<div class="flex flex-wrap justify-center my-2">
+        <img class="w-full sm:w-1/2" src="https://pianote.s3.amazonaws.com/lead-gen/learn-3-songs/lessons/c-maj.png" alt="c-maj">
+        <img class="w-full sm:w-1/2" src="https://pianote.s3.amazonaws.com/lead-gen/learn-3-songs/lessons/a-min.png" alt="a-min">
+        <img class="w-full sm:w-1/2" src="https://pianote.s3.amazonaws.com/lead-gen/learn-3-songs/lessons/f-maj.png" alt="f-maj">
+        <img class="w-full sm:w-1/2" src="https://pianote.s3.amazonaws.com/lead-gen/learn-3-songs/lessons/g-maj.png" alt="g-maj">
+        <img class="w-full sm:w-1/2" src="https://pianote.s3.amazonaws.com/lead-gen/learn-3-songs/lessons/e-min.png" alt="e-min">
+</div>
+For all of these chords, you’ll use your thumb for the bottom note, your pinky for the top note, and your middle finger for the middle note.
+
+<strong>A quick note on rhythm</strong>
+
+As you learn this song, you’ll notice that it has a different rhythm than “Someone You Loved”.
+
+This is because it has a different “Time Signature”.
+
+That’s a musical concept we won’t go into here, but if you’d like to learn more about it, you can <a target="_blank" href="/trial"><u>start a free 7-day trial with Pianote</u></a>.
+
+Basically, the rhythm is the “feel” of the song. It can be hard to figure that out from a chord chart, so I recommend listening to the song before you try and learn it. That way you know when the chord changes are happening and how the song is supposed to sound!
+
+<strong>If you’re feeling brave…</strong>
+
+This last part is much more challenging, so don’t feel like it’s something you “should” be able to do (at least not at this early stage).
+
+But if you’re finding the chords a little “easy” and are looking for an added challenge, you could try playing each chord as a “broken” chord. This means instead of playing all the notes at the same time, you play them one at a time, going up and down.
+
+The musical term for this is an “arpeggio”. Here’s what it looks like for the C chord:
+<video class="rounded-xl my-7" src="https://pianote.s3.amazonaws.com/lead-gen/learn-3-songs/lessons/c-arpeggio.mp4" autoplay muted playsinline loop></video>
+It sounds amazing, but it takes practice!
+
+Make sure you watch the lesson to see how to play these arpeggios for all the chords in this song.
+
+We have one more song to go, and this time we’ll get using some black notes! So when you’re ready,
+        <a href="/learn-songs/lessons/love-story"><u>click here to start learning “Love Story” by Taylor Swift</u></a>.',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/1123533706-a2a3b17fca5f8a71d1ea803cb4ade2f72ff45d92a60826da1e4a3b1c6d0ea7ed-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/542733159',
+                        'duration' => 10,
+                        'assets' => [
+                            [
+                                'title' => 'PDF',
+                                'src' => 'https://pianote.s3.amazonaws.com/lead-gen/learn-3-songs/lessons/leonard-cohen-hallelujah.pdf',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'learn-songs/lessons/love-story',
+                        'title' => 'Taylor Swift - Love Story',
+                        'caption' => 'A new twist on Shakespeare’s classic tale',
+                        'desc' => 'Welcome to the final song in this series, and welcome to a new key signature!
+
+This song is in the key of D, which means it uses 2 black notes!
+
+But don’t worry…
+
+You don’t need to memorize which ones, because I’ll show you the special formula that will allow you to play a major or minor chord on ANY note on the keyboard.
+
+<strong>The Chord Formula</strong>
+
+This is a super simple, easy-to-remember formula that you can learn in seconds and start using right away.
+
+The first thing you need to do is pick a note.
+
+Any note…
+<img class="my-7" src="https://pianote.s3.amazonaws.com/lead-gen/learn-3-songs/lessons/all-keys.png" alt="all-keys">
+That’s the root note. We’re going to build a major and minor chord on top of it.
+
+<strong>Building a major chord</strong>
+
+From your root note (the bottom note), count up 4 half-steps.
+
+A half-step is the smallest distance between notes on the piano. Here’s what it looks like:
+<img class="my-7" src="https://pianote.s3.amazonaws.com/lead-gen/learn-3-songs/lessons/half-step.png" alt="half-step">
+So count up 4 half-steps from the bottom note and you’ll find the middle note. This note is what makes this a major chord.
+
+Then, from the middle note count up another 3 half-steps to find the top note.
+
+So the chord formula for a major chord is 4 half-steps, then 3 half-steps.
+
+Try it!
+
+We’ll use G as an example.
+
+Start on G and count up 4 half-steps:
+<img class="my-7" src="https://pianote.s3.amazonaws.com/lead-gen/learn-3-songs/lessons/major-chord-1.png" alt="major-chord-1">
+The note is B. Now to find the top note, count up another 3 half-steps:
+<img class="my-7" src="https://pianote.s3.amazonaws.com/lead-gen/learn-3-songs/lessons/major-chord-2.png" alt="major-chord-2">
+Now you’re on D. So your G chord has the notes G-B-D.
+
+Try it again...
+
+Choose a random note on the keyboard and count up 4 half-steps, then 3 half-steps. You’ve just built a major chord!
+
+<strong>Building a minor chord</strong>
+
+This is very similar to the major chord, but the numbers are reversed.
+
+So from the bottom note, you count up 3 half-steps to find the middle note. Then count up another 4 half-steps to find the top note.
+
+Let’s use B as an example. Count up 3 half-steps from B:
+<img class="my-7" src="https://pianote.s3.amazonaws.com/lead-gen/learn-3-songs/lessons/minor-chord-1.png" alt="minor-chord-1">
+Now, count up 4 half-steps to find the top note:
+<img class="my-7" src="https://pianote.s3.amazonaws.com/lead-gen/learn-3-songs/lessons/minor-chord-2.png" alt="minor-chord-2">
+That’s it.
+
+That’s the formula that will allow you to play any major or minor on the piano!
+
+<strong>You’ve got this!</strong>
+
+It can be a little daunting seeing new chords, but with the chord formula, you are now well-equipped to play any major or minor chord on the piano.
+
+And don’t forget, you also have <a href="https://pianote.s3.amazonaws.com/lead-gen/learn-3-songs/lessons/chord-chart.pdf"><u>the chord reference guide</u></a> that you can download and print out. It has every note on the piano, and all the major and minor chords.
+
+Thank you so much for being part of this journey, and I hope you enjoy learning (and playing) these beautiful songs!',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/1123576828-d4d2a0ec2867d0d6579ed0a02f62fc5ba567b42e73eb9c30d9292be5080d89b0-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/542742250',
+                        'duration' => 8,
+                        'assets' => [
+                            [
+                                'title' => 'PDF',
+                                'src' => 'https://pianote.s3.amazonaws.com/lead-gen/learn-3-songs/lessons/taylor-swift-love-story.pdf',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            [
+                'brand_id' => 2,
+                'title' => 'Beginner Piano Christmas Carols',
+                'meta_desc' => 'Play these beautiful carols for your loved ones this holiday season.',
+                'meta_img' => 'https://pianote.s3.amazonaws.com/lead-gen/christmas-carols/og-image.jpg',
+                'slug' => 'christmas-carols/songs',
+                'lessons' => [
+                    [
+                        'slug' => 'christmas-carols/songs/deck-the-halls',
+                        'title' => 'Deck the Halls',
                         'desc' => '',
-                        'thumbnail' => '',
-                        'video_src' => '',
+                        'thumbnail' => 'https://pianote.s3.amazonaws.com/lead-gen/christmas-carols/albumcover01.jpg',
+                        'video_src' => '//player.vimeo.com/video/376204427',
+                        'duration' => 5,
+                        'assets' => [
+                            [
+                                'title' => 'The Music Sheet',
+                                'src' => 'https://pianote.s3.amazonaws.com/lead-gen/christmas-carols/sheet-music/deck-the-halls.pdf',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'christmas-carols/songs/joy-to-the-world',
+                        'title' => 'Joy To The World',
+                        'desc' => '',
+                        'thumbnail' => 'https://pianote.s3.amazonaws.com/lead-gen/christmas-carols/albumcover02.jpg',
+                        'video_src' => '//player.vimeo.com/video/301298460',
+                        'duration' => 7,
+                        'assets' => [
+                            [
+                                'title' => 'The Music Sheet',
+                                'src' => 'https://pianote.s3.amazonaws.com/lead-gen/christmas-carols/sheet-music/joy-to-the-world.pdf',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'christmas-carols/songs/o-holy-night',
+                        'title' => 'O Holy Night',
+                        'desc' => '',
+                        'thumbnail' => 'https://pianote.s3.amazonaws.com/lead-gen/christmas-carols/albumcover03.jpg',
+                        'video_src' => '//player.vimeo.com/video/305099707',
+                        'duration' => 6,
+                        'assets' => [
+                            [
+                                'title' => 'The Music Sheet',
+                                'src' => 'https://pianote.s3.amazonaws.com/lead-gen/christmas-carols/sheet-music/o-holy-night.pdf',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'christmas-carols/songs/silent-night',
+                        'title' => 'Silent Night',
+                        'desc' => '',
+                        'thumbnail' => 'https://pianote.s3.amazonaws.com/lead-gen/christmas-carols/albumcover04.jpg',
+                        'video_src' => '//player.vimeo.com/video/647941747',
+                        'duration' => 8,
+                        'assets' => [
+                            [
+                                'title' => 'The Music Sheet',
+                                'src' => 'https://pianote.s3.amazonaws.com/lead-gen/christmas-carols/sheet-music/silent-night.pdf',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'christmas-carols/songs/jingle-bells',
+                        'title' => 'Jingle Bells',
+                        'desc' => '',
+                        'thumbnail' => 'https://pianote.s3.amazonaws.com/lead-gen/christmas-carols/albumcover05.jpg',
+                        'video_src' => '//player.vimeo.com/video/647939618',
+                        'duration' => 8,
+                        'assets' => [
+                            [
+                                'title' => 'The Music Sheet',
+                                'src' => 'https://pianote.s3.amazonaws.com/lead-gen/christmas-carols/sheet-music/jingle-bells.pdf',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            [
+                'brand_id' => 2,
+                'title' => 'Classical Piano Quick Start',
+                'meta_desc' => 'Start playing beautiful classical piano with 4 easy lessons.',
+                'meta_img' => 'https://pianote.s3.amazonaws.com/lead-gen/classical-piano/og-image2.jpg',
+                'slug' => 'classical-piano/lessons',
+                'lessons' => [
+                    [
+                        'slug' => 'classical-piano/lessons/1',
+                        'title' => '5 Classical Piano Tips',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/1348484700-f1676cc5d71f95c91af4359c80dd48f31d8459d6d2e424ea221682a7da1e3624-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/659807663',
+                        'duration' => 2,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'classical-piano/lessons/2',
+                        'title' => 'Hand Positioning & Exercises',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/1348485549-add695e75f60eedd07eec845c0e07a8e9468795b94d2400bcc4f3288db9bb0db-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/659806997',
+                        'duration' => 4,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'classical-piano/lessons/3',
+                        'title' => 'Playing Your First Classical Piece',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/1348486156-e5fd383daef14bde0507d3485eb4935b1457be075f4546b3debca6f2d5c80be5-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/659807253',
+                        'duration' => 9,
+                        'assets' => [
+                            [
+                                'title' => 'The Music Sheet',
+                                'src' => 'https://d1923uyy6spedc.cloudfront.net/1-3-1%20Raindrop%20Prelude%20-%20Score-1640988541.pdf',
+                                'soundslice' => ''
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => 'classical-piano/lessons/4',
+                        'title' => 'Playing With Expression',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/1348487138-78a002bff259c65a103bb4a45a97021e03eba1da366155a554ba74b3a38a6da2-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/659808017',
+                        'duration' => 6,
+                        'assets' => [],
+                    ],
+                ],
+            ],
+            [
+                'brand_id' => 2,
+                'title' => '7 Days to Sight Reading',
+                'meta_desc' => 'Learn to read music. Play your favorite songs. Have more fun.',
+                'meta_img' => 'https://pianote.s3.amazonaws.com/lead-gen/7-days-to-sight-reading/share_image.jpg',
+                'slug' => '7-days-to-sight-reading/lessons',
+                'assets' => [
+                    [
+                        'title' => 'Days 1-7 Exercises',
+                        'src' => 'https://d1923uyy6spedc.cloudfront.net/7%20Days%20To%20SIght%20Reading%20-%20QT%20-%20Score-1664655069.pdf',
+                        'soundslice' => ''
+                    ],
+                    [
+                        'title' => 'Note Values PDFs',
+                        'src' => 'https://d1923uyy6spedc.cloudfront.net/note-values-sheet-1664816317.pdf',
+                        'soundslice' => ''
+                    ],
+                    [
+                        'title' => 'Grand Staff Cheat Sheet PDF',
+                        'src' => 'https://d1923uyy6spedc.cloudfront.net/TheGrandStaff-1664821463.pdf',
+                        'soundslice' => ''
+                    ],
+                ],
+                'lessons' => [
+                    [
+                        'slug' => '7-days-to-sight-reading/lessons/day-1',
+                        'title' => 'The Basics',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/1514990478-1456b975745f9f80d5f75f3eca5d0d5b24930da81e55f26d553518f58ced95e7-d?mw=700&mh=393',
+                        'video_src' => '//player.vimeo.com/video/753899485',
+                        'duration' => 10,
+                        'assets' => [
+                            [
+                                'title' => 'Day 1 Exercise',
+                                'src' => 'https://d1923uyy6spedc.cloudfront.net/7%20Days%20To%20SIght%20Reading%20-%201001-1664655393.svg',
+                                'soundslice' => 'https://www.soundslice.com/scores/955555/embed/?api=1&scroll_type=2&branding=0'
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => '7-days-to-sight-reading/lessons/day-2',
+                        'title' => 'Musical Patterns',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/1514991832-c6408142816720371226a0e44c32cc5048dc1af7241b408f5d3d30b096b75dcc-d?mw=700&mh=393',
+                        'video_src' => '//player.vimeo.com/video/753900349',
+                        'duration' => 9,
+                        'assets' => [
+                            [
+                                'title' => 'Day 2 Exercise',
+                                'src' => 'https://d1923uyy6spedc.cloudfront.net/7%20Days%20To%20SIght%20Reading%20-%202001-1664655543.svg',
+                                'soundslice' => 'https://www.soundslice.com/scores/955562/embed/?api=1&scroll_type=2&branding=0'
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => '7-days-to-sight-reading/lessons/day-3',
+                        'title' => 'Intervals',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/1514994059-2e6973658803a10097d0352b6243bd708a7e4d39146a679b9016cf79132d67a3-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/753902457',
+                        'duration' => 9,
+                        'assets' => [
+                            [
+                                'title' => 'Day 3 Exercise',
+                                'src' => 'https://d1923uyy6spedc.cloudfront.net/7%20Days%20To%20SIght%20Reading%20-%203001-1664655618.svg',
+                                'soundslice' => 'https://www.soundslice.com/scores/955569/embed/?api=1&scroll_type=2&branding=0'
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => '7-days-to-sight-reading/lessons/day-4',
+                        'title' => 'Play a Song',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/1515022546-b4bbbf0ece20333790cb8151f2c395c255825aebaa02b871cbeaaf53046e19ff-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/753917225',
+                        'duration' => 4,
+                        'assets' => [
+                            [
+                                'title' => 'Day 4 Exercise',
+                                'src' => 'https://d1923uyy6spedc.cloudfront.net/7%20Days%20To%20SIght%20Reading%20-%204001-1664655669.svg',
+                                'soundslice' => 'https://www.soundslice.com/scores/955570/embed/?api=1&scroll_type=2&branding=0'
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => '7-days-to-sight-reading/lessons/day-5',
+                        'title' => 'Chords & Arpeggios',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/1515026590-10472ccad6746bedd5723115849cd66091c9570505f00d57b58e54bcb9ba2730-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/753922961',
+                        'duration' => 7,
+                        'assets' => [
+                            [
+                                'title' => 'Day 5 Exercise',
+                                'src' => 'https://d1923uyy6spedc.cloudfront.net/7%20Days%20To%20SIght%20Reading%20-%204001-1664655669.svg',
+                                'soundslice' => 'https://www.soundslice.com/scores/955570/embed/?api=1&scroll_type=2&branding=0'
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => '7-days-to-sight-reading/lessons/day-6',
+                        'title' => 'Understanding Rhythm',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/1515029395-1756cc1c94bc47e78f4cd3249b0ac33a05b5eca857bc64ace7374eee99741f18-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/753925248',
+                        'duration' => 10,
+                        'assets' => [
+                            [
+                                'title' => 'Day 6 Exercise',
+                                'src' => 'https://d1923uyy6spedc.cloudfront.net/7%20Days%20To%20SIght%20Reading%20-%206001-1664655781.svg',
+                                'soundslice' => 'https://www.soundslice.com/scores/955573/embed/?api=1&scroll_type=2&branding=0'
+                            ],
+                        ],
+                    ],
+                    [
+                        'slug' => '7-days-to-sight-reading/lessons/day-7',
+                        'title' => 'Putting it All Together',
+                        'desc' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/1515033645-4566ef735c380776158a57e4a67a136cdd43f98667b8c102edf237d7fd3eecb8-d?mw=1000&mh=563',
+                        'video_src' => '//player.vimeo.com/video/753928040',
+                        'duration' => 8,
+                        'assets' => [
+                            [
+                                'title' => 'Day 7 Exercise',
+                                'src' => 'https://d1923uyy6spedc.cloudfront.net/7%20Days%20To%20SIght%20Reading%20-%207001-1664655908.svg',
+                                'soundslice' => 'https://www.soundslice.com/scores/955575/embed/?api=1&scroll_type=2&branding=0'
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            [
+                'brand_id' => 2,
+                'title' => '5 Days to Playing Piano',
+                'meta_desc' => 'Start learning how to play the piano in just 5 days!',
+                'meta_img' => 'https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/og-image.jpg',
+                'slug' => 'piano-in-5-days/lessons',
+                'lessons' => [
+                    [
+                        'slug' => 'piano-in-5-days/lessons/day-1-welcome-to-the-piano',
+                        'title' => 'Day 1: Welcome To The Piano',
+                        'desc' => '',
+                        'thumbnail' => 'https://d1923uyy6spedc.cloudfront.net/5DaysToPlayingPiano-01-1643338235.jpg',
+                        'video_src' => '//player.vimeo.com/video/664409925',
+                        'duration' => 13,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'piano-in-5-days/lessons/day-1-practice-video-1',
+                        'title' => 'Day 1: Practice Video 1',
+                        'desc' => '',
+                        'thumbnail' => 'https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/day1-1.jpg',
+                        'video_src' => '//player.vimeo.com/video/664410112',
+                        'duration' => 4,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'piano-in-5-days/lessons/day-1-practice-video-2',
+                        'title' => 'Day 1: Practice Video 2',
+                        'desc' => '',
+                        'thumbnail' => 'https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/day1-2.jpg',
+                        'video_src' => '//player.vimeo.com/video/664410180',
+                        'duration' => 3,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'piano-in-5-days/lessons/day-2-you-can-play-a-melody',
+                        'title' => 'Day 2: You Can Play A Melody',
+                        'desc' => '',
+                        'thumbnail' => 'https://d1923uyy6spedc.cloudfront.net/5DaysToPlayingPiano-04-1643338334.jpg',
+                        'video_src' => '//player.vimeo.com/video/664410235',
+                        'duration' => 7,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'piano-in-5-days/lessons/day-2-practice-video-1',
+                        'title' => 'Day 2: Practice Video 1',
+                        'desc' => '',
+                        'thumbnail' => 'https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/day2-1.jpg',
+                        'video_src' => '//player.vimeo.com/video/664410311',
+                        'duration' => 3,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'piano-in-5-days/lessons/day-3-you-can-use-both-hands',
+                        'title' => 'Day 3: Using Both Hands',
+                        'desc' => '',
+                        'thumbnail' => 'https://d1923uyy6spedc.cloudfront.net/5DaysToPlayingPiano-06-1643338374.jpg',
+                        'video_src' => '//player.vimeo.com/video/664410345',
+                        'duration' => 6,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'piano-in-5-days/lessons/day-3-practice-video-1',
+                        'title' => 'Day 3: Practice Video 1',
+                        'desc' => '',
+                        'thumbnail' => 'https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/day3-1.jpg',
+                        'video_src' => '//player.vimeo.com/video/664410459',
+                        'duration' => 2,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'piano-in-5-days/lessons/day-3-practice-video-2',
+                        'title' => 'Day 3: Practice Video 2',
+                        'desc' => '',
+                        'thumbnail' => 'https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/day3-2.jpg',
+                        'video_src' => '//player.vimeo.com/video/664410507',
+                        'duration' => 2,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'piano-in-5-days/lessons/day-4-reading-music',
+                        'title' => 'Day 4: Reading Music',
+                        'desc' => '',
+                        'thumbnail' => 'https://d1923uyy6spedc.cloudfront.net/5DaysToPlayingPiano-09-1643338442.jpg',
+                        'video_src' => '//player.vimeo.com/video/664410545',
+                        'duration' => 11,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'piano-in-5-days/lessons/day-4-practice-video-1',
+                        'title' => 'Day 4: Practice Video 1',
+                        'desc' => '',
+                        'thumbnail' => 'https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/day4-1.jpg',
+                        'video_src' => '//player.vimeo.com/video/664410689',
+                        'duration' => 2,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'piano-in-5-days/lessons/day-4-practice-video-2',
+                        'title' => 'Day 4: Practice Video 2',
+                        'desc' => '',
+                        'thumbnail' => 'https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/day4-2.jpg',
+                        'video_src' => '//player.vimeo.com/video/664410713',
+                        'duration' => 3,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'piano-in-5-days/lessons/day-4-practice-video-3',
+                        'title' => 'Day 4: Practice Video 3',
+                        'desc' => '',
+                        'thumbnail' => 'https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/day4-3.jpg',
+                        'video_src' => '//player.vimeo.com/video/664410774',
                         'duration' => 1,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'piano-in-5-days/lessons/day-5-you-can-play-piano',
+                        'title' => 'Day 5: You Can Play Piano',
+                        'desc' => '',
+                        'thumbnail' => 'https://d1923uyy6spedc.cloudfront.net/5DaysToPlayingPiano-13-1643338576.jpg',
+                        'video_src' => '//player.vimeo.com/video/664410799',
+                        'duration' => 10,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'piano-in-5-days/lessons/day-5-practice-video-1',
+                        'title' => 'Day 5: Practice Video 1',
+                        'desc' => '',
+                        'thumbnail' => 'https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/day5-1.jpg',
+                        'video_src' => '//player.vimeo.com/video/664410951',
+                        'duration' => 2,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'piano-in-5-days/lessons/day-5-practice-video-2',
+                        'title' => 'Day 5: Practice Video 2',
+                        'desc' => '',
+                        'thumbnail' => 'https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/day5-2.jpg',
+                        'video_src' => '//player.vimeo.com/video/664410994',
+                        'duration' => 2,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'piano-in-5-days/lessons/day-5-practice-video-3',
+                        'title' => 'Day 5: Practice Video 3',
+                        'desc' => '',
+                        'thumbnail' => 'https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/day5-3.jpg',
+                        'video_src' => '//player.vimeo.com/video/664411032',
+                        'duration' => 2,
+                        'assets' => [],
+                    ],
+                    [
+                        'slug' => 'piano-in-5-days/lessons/tips-for-success',
+                        'title' => 'Tips For Success',
+                        'desc' => '',
+                        'thumbnail' => 'https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/benefit.jpg',
+                        'video_src' => '//player.vimeo.com/video/664409852',
+                        'duration' => 6,
                         'assets' => [],
                     ],
                 ],
