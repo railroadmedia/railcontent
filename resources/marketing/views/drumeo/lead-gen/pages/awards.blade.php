@@ -5,8 +5,8 @@
 @extends('drumeo._partials.global-layout')
 
 @section('global-head')
-    <title>Drumeo Awards 2021 Winners | Drumeo</title>
-    <meta property="og:title" content="Drumeo Awards 2021 Winners">
+    <title>Drumeo Awards 2022 Winners | Drumeo</title>
+    <meta property="og:title" content="Drumeo Awards 2022 Winners">
 
     <meta name="description" content="The Drumeo Awards highlights inspirational drummers at the top of their game.">
     <meta property="og:description" content="The Drumeo Awards highlights inspirational drummers at the top of their game.">
@@ -182,7 +182,7 @@
     x-data="{
         year: 2022,
         yearOpen: true,
-        legacyOpen: false,
+        legacyOpen: true,
     }"
 @endsection
 
@@ -210,7 +210,7 @@
         <div class="container mx-auto max-w-5xl">
             <div class="py-4 text-right">
                 <select class="bg-transparent rounded-full w-auto border-white border py-2 px-6 year-select" x-on:change="year = Number($event.target.value)">
-                    <option class="bg-black text-white selectable-option" disabled selected>Change Awards Year...</option>
+                    <option class="bg-black text-white selectable-option" disabled selected>Select Year...</option>
                     <option class="bg-black text-white" value="2022">2022 Winners</option>
                     <option class="bg-black text-white" value="2021">2021 Winners</option>
                 </select>

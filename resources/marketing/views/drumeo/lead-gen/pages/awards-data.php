@@ -17,7 +17,7 @@ $yearAwards2022 = [
         "image" => "https://drumeo-assets.s3.amazonaws.com/lead-gen/awards/Shane-Hawkins-1000x1000.jpg",
         "award" => "Drum Performance Of The Year",
         "winner" => "Shane Hawkins",
-        "description" => "The winner of this award put on a legendary, must-watch performance during 2022, either with a full band at an event or in a solo studio video.<br><br>16-year-old Shane Hawkins did just that, pouring his heart and soul into a live performance of “My Hero” at a tribute concert dedicated to his late father and Foo Fighters drummer, Taylor Hawkins. It touched millions of people and showed how much love, energy, and spirit can come out on the drum kit.",
+        "description" => "The winner of this award put on a legendary, must-watch performance during 2022, either with a full band at an event or in a solo studio video.<br><br>16-year-old Shane Hawkins <a class='underline' href='https://www.youtube.com/watch?v=P2KnD7sfpoA' target='_blank'>did just that</a>, pouring his heart and soul into a live performance of “My Hero” at a tribute concert dedicated to his late father and Foo Fighters drummer, Taylor Hawkins. It touched millions of people and showed how much love, energy, and spirit can come out on the drum kit.",
     ],
     [
         "image" => "https://drumeo-assets.s3.amazonaws.com/lead-gen/awards/Sarah-Jones-1000x1000.jpg",
@@ -178,9 +178,9 @@ $yearAwards2021 = [
 
 $legacyAwards2022 = [
     [
-        "image" => "https://drumeo-assets.s3.amazonaws.com/beat/awards/steve-gadd.jpg",
+        "image" => "https://drumeo-assets.s3.amazonaws.com/lead-gen/awards/Phil-Colins-1000x1000.jpg",
         "award" => "The Buddy Rich Award",
-        "winner" => "Steve Gadd",
+        "winner" => "Phil Collins",
         "description" => "One of the most accomplished and well-known drummers of the 20th century, Buddy Rich is still a household name because of his virtuosic talents and his accomplishments as a bandleader. The recipient of this ‘hall of fame’ award has made their name synonymous with drumming over decades of excellence. This may be through any combination of performance, recording, teaching, or all of the above.<br><br>We chose this year’s award winner based on his incredible legacy and ability to deeply reach people, even those outside of the drumming world. He composed some of the most recognizable drum parts of the 20th century, inspiring drummers with his technical and musical approach to playing the drums and innovating with electronic sounds and finding ways to incorporate them into his music.<br><br>This drumming legend officially announced his retirement in 2022.",
     ],
     [
