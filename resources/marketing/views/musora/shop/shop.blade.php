@@ -19,8 +19,9 @@
 
 @section('body-data')
     x-data="{
-    shippingModal: false,
-    filter: 'all',
+        shippingModal: false,
+        orderModal: false,
+        filter: 'all',
     }"
 @endsection
 
@@ -293,6 +294,28 @@
                         <strong class="font-extrabold">Free Shipping Over $100</strong> <br>
                         Spend over $100 and you'll unlock free worldwide shipping on any order.
                     </p>
+                </div>
+            </div>
+        @endslot
+    @endcomponent
+
+    @component('_partials.components.modal', ['name' => 'orderModal'])
+        @slot('content')
+            <div class="max-w-2xl mx-auto">
+                <div class="info-wrap shipping-info bg-white rounded-xl overflow-hidden text-center">
+                    <div class="bg-drumeo py-10">
+                        <img class="h-16" src="https://musora.s3.us-east-2.amazonaws.com/shipping-icon.svg" alt="shoppping icon" />
+                    </div>
+                    <div class="py-10 px-4 md:px-20">
+                        <h4 class="font-bold mb-2">Just a heads up!</h4>
+                        <p class="mb-4">
+                            I understand that these items are preorders<br class="hidden md:inline-block"> and will not ship until <b>[date]</b>.
+                        </p>
+                        <div class="flex gap-2">
+                            <a class="flex-1 rounded-full border-2 border-black uppercase text-black py-2 font-bold uppercase text-sm md:text-base" @click="orderModal = false">Cancel</a>
+                            <a class="flex-1 rounded-full border-2 border-drumeo bg-drumeo uppercase text-white py-2 font-bold uppercase text-sm md:text-base" href="">I understand</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         @endslot
