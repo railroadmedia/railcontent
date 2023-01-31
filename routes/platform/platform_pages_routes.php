@@ -14,6 +14,7 @@ use App\Http\Controllers\Platform\PaymentMethodUpdateController;
 use App\Http\Controllers\Platform\ProfilePublicPagesController;
 use App\Http\Controllers\Platform\ProfileSettingsPagesController;
 use App\Http\Controllers\Platform\ReferralPagesController;
+use App\Http\Controllers\Platform\SongsUpgradeController;
 use App\Http\Controllers\Platform\SupportController;
 use App\Http\Controllers\Platform\UserListPagesController;
 use App\Modules\Brand\Enums\Brand;
@@ -201,6 +202,10 @@ Route::domain('{musoraDomain}')
                         ]
                     )
                     ->name('platform.content.first-level');
+
+                Route::get('/{brand}/songs-upgrade',
+                    [SongsUpgradeController::class, 'index']
+                )->name('platform.songs-upgrade');
 
                 Route::get(
                     '/{brand}/{primaryPage}/{firstContentSlug}/{firstContentId}/{secondContentSlug}/{secondContentId}',

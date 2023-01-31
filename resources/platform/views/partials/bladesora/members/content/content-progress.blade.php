@@ -59,11 +59,11 @@
                         data-brand="{{ $brand }}"
                         data-content-id="{{ $contentId }}">
 
-                    <span class="incompleted bg-white inverted text-white tw-px-6">
+                    <span class="incompleted bg-white inverted text-white tw-px-6 tw-items-center">
                         <i class="fas fa-check mr-1"></i> Mark as Complete
                     </span>
 
-                    <span class="completed bg-white text-{{ $brand }} tw-px-6">
+                    <span class="completed bg-white text-{{ $brand }} tw-px-6 tw-items-center">
                         <i class="fas fa-check mr-1"></i>Completed
                     </span>
                 </button>
