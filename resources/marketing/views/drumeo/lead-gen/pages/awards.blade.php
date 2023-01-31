@@ -189,7 +189,7 @@
 @section('global-body')
     @include("drumeo.sales.partials._nav")
 
-    <section class="text-white pt-8 pb-14 sm:pt-14 sm:pb-32 lg:pt-16 lg:pb-32 px-4 bg-cover bg-top lazyload" style="background-color:#000;" data-bg="https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://drumeo-assets.s3.amazonaws.com/beat/awards/header-bg.jpg">
+    <section class="text-white py-8 sm:py-14 lg:py-16 px-4 bg-cover bg-top lazyload" style="background-color:#000;" data-bg="https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://drumeo-assets.s3.amazonaws.com/beat/awards/header-bg.jpg">
         <div class="container mx-auto max-w-5xl">
             <div class="flex flex-wrap items-center">
                 <div class="w-full sm:w-1/2 lg:w-5/12 text-center">
@@ -229,7 +229,7 @@
                     <div class="py-8 sm:py-14 px-4 sm:px-8 lg:px-12 ">
                         @foreach($yearAwards2022 as $videoModal)
                             <div class="flex items-start {{--award-container cursor-pointer--}} relative @if(empty($videoModal['last-child'])) border-b pb-7 sm:pb-10 mb-7 sm:mb-10 @endif" style="border-color:#404040">
-                                <img class="hidden sm:block h-52 lg:h-72 {{--transition duration-500 filter blur brightness-75--}} lazyload" data-src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/{{ $videoModal['image'] }}" alt="{{ $videoModal['winner'] }}">
+                                <img class="hidden sm:block h-52 lg:h-72 rounded-xl {{--transition duration-500 filter blur brightness-75--}} lazyload" data-src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/{{ $videoModal['image'] }}" alt="{{ $videoModal['winner'] }}">
                                 <div class="sm:pl-6">
                                     <h3 class="text-center sm:text-left uppercase font-bebas chrome" {{--style="color: #fcd05b;"--}}>{{ $videoModal['award'] }}</h3>
                                     <img class="block sm:hidden h-52 mx-auto my-3 {{--transition duration-500 filter blur brightness-75--}} lazyload" data-src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/{{ $videoModal['image'] }}">
@@ -250,7 +250,7 @@
                     <div class="py-8 sm:py-14 px-4 sm:px-8 lg:px-12 ">
                         @foreach($yearAwards2021 as $videoModal)
                             <div class="flex items-start {{--award-container cursor-pointer--}} relative @if(empty($videoModal['last-child'])) border-b pb-7 sm:pb-10 mb-7 sm:mb-10 @endif" style="border-color:#404040">
-                                <img class="hidden sm:block h-52 lg:h-72 {{--transition duration-500 filter blur brightness-75--}} lazyload" data-src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/{{ $videoModal['image'] }}" alt="{{ $videoModal['winner'] }}" alt="{{ $videoModal['winner'] }}">
+                                <img class="hidden sm:block h-52 lg:h-72 rounded-xl {{--transition duration-500 filter blur brightness-75--}} lazyload" data-src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/{{ $videoModal['image'] }}" alt="{{ $videoModal['winner'] }}" alt="{{ $videoModal['winner'] }}">
                                 <div class="sm:pl-6">
                                     <h3 class="text-center sm:text-left uppercase font-bebas chrome" {{--style="color: #fcd05b;"--}}>{{ $videoModal['award'] }}</h3>
                                     <img class="block sm:hidden h-52 mx-auto my-3 {{--transition duration-500 filter blur brightness-75--}} lazyload" data-src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/{{ $videoModal['image'] }}" alt="{{ $videoModal['winner'] }}" alt="{{ $videoModal['winner'] }}">
@@ -282,7 +282,7 @@
                     <div class="py-8 sm:py-14 px-4 sm:px-8 lg:px-12">
                         @foreach($legacyAwards2022 as $videoModal)
                             <div class="flex items-start {{--award-container cursor-pointer--}} relative @if(empty($videoModal['last-child'])) border-b pb-7 sm:pb-10 mb-7 sm:mb-10 @endif" style="border-color:#404040">
-                                <img class="hidden sm:block h-52 lg:h-72 {{--transition duration-500 filter blur brightness-75--}} lazyload" data-src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/{{ $videoModal['image'] }}" alt="{{ $videoModal['winner'] }}">
+                                <img class="hidden sm:block h-52 lg:h-72 rounded-xl {{--transition duration-500 filter blur brightness-75--}} lazyload" data-src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/{{ $videoModal['image'] }}" alt="{{ $videoModal['winner'] }}">
                                 <div class="sm:pl-6">
                                     <h3 class="text-center sm:text-left uppercase font-bebas chrome" {{--style="color: #fcd05b;"--}}>{{ $videoModal['award'] }}</h3>
                                     <img class="block sm:hidden h-52 mx-auto my-3 {{--transition duration-500 filter blur brightness-75--}} lazyload" data-src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/{{ $videoModal['image'] }}" alt="{{ $videoModal['winner'] }}">
@@ -303,7 +303,7 @@
                     <div class="py-8 sm:py-14 px-4 sm:px-8 lg:px-12">
                         @foreach($legacyAwards2021 as $videoModal)
                             <div class="flex items-start {{--award-container cursor-pointer--}} relative @if(empty($videoModal['last-child'])) border-b pb-7 sm:pb-10 mb-7 sm:mb-10 @endif" style="border-color:#404040">
-                                <img class="hidden sm:block h-52 lg:h-72 {{--transition duration-500 filter blur brightness-75--}} lazyload" data-src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/{{ $videoModal['image'] }}" alt="{{ $videoModal['winner'] }}">
+                                <img class="hidden sm:block h-52 lg:h-72 rounded-xl {{--transition duration-500 filter blur brightness-75--}} lazyload" data-src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/{{ $videoModal['image'] }}" alt="{{ $videoModal['winner'] }}">
                                 <div class="sm:pl-6">
                                     <h3 class="text-center sm:text-left uppercase font-bebas chrome" {{--style="color: #fcd05b;"--}}>{{ $videoModal['award'] }}</h3>
                                     <img class="block sm:hidden h-52 mx-auto my-3 {{--transition duration-500 filter blur brightness-75--}} lazyload" data-src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/{{ $videoModal['image'] }}" alt="{{ $videoModal['winner'] }}">
