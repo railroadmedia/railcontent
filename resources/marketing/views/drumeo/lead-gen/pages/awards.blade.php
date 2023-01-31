@@ -209,9 +209,10 @@
     <section class="text-white pb-20 sm:px-5" style="background-color:#02050e;">
         <div class="container mx-auto max-w-5xl">
             <div class="py-4 text-right">
-                <select class="bg-transparent rounded-full w-1/3 border-white border py-2 px-6 year-select" x-on:change="year = Number($event.target.value)">
-                    <option selected class="text-black" value="2022">2022</option>
-                    <option class="text-black" value="2021">2021</option>
+                <select class="bg-transparent rounded-full w-auto border-white border py-2 px-6 year-select" x-on:change="year = Number($event.target.value)">
+                    <option class="bg-black text-white selectable-option" disabled selected>Change Awards Year...</option>
+                    <option class="bg-black text-white" value="2022">2022 Winners</option>
+                    <option class="bg-black text-white" value="2021">2021 Winners</option>
                 </select>
             </div>
             <div class="py-6 sm:py-8 px-4 sm:px-8 lg:px-12" style="background-color:#272727;">
