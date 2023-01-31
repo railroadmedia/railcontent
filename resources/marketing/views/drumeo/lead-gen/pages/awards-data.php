@@ -80,7 +80,7 @@ $yearAwards2022 = [
         "description" => "This award goes to a drummer who has built their profile independently, has created a strong online community on YouTube, and is constantly inspiring or entertaining people with their drum videos, playing, and/or personality.<br><br>Educational, skilled and hilarious, 66Samus is a staple in the metal community and knows what drummers find both entertaining and useful. He added 240k new subscribers to his channel in 2022, with a jaw-dropping 38.7M views across 44 brand new videos (the top one earning almost 2M views). Samus also hit over one hundred million views on YouTube in 2022.",
     ],
     [
-        "image" => "",
+        "image" => "https://drumeo-assets.s3.amazonaws.com/lead-gen/awards/Krystina-Rybalchenko-1000x1000.jpg",
         "award" => "Instagram Drummer Of The Year",
         "winner" => "Kriss Drummer",
         "description" => "This award goes to a drummer who’s built a strong online community on Instagram, has created a strong brand for themselves, and constantly inspires, educates, or entertains.<br><br>An active content creator on the platform, Kriss Drummer regularly posts fun covers of popular rock songs. In 2022 she launched her signature sticks with Meinl, collaborated with Matt McGuire, and had several videos exceed 3 million views as her page grew to 650 thousand followers.",
@@ -178,7 +178,7 @@ $yearAwards2021 = [
 
 $legacyAwards2022 = [
     [
-        "image" => "",
+        "image" => "https://drumeo-assets.s3.amazonaws.com/beat/awards/steve-gadd.jpg",
         "award" => "The Buddy Rich Award",
         "winner" => "Steve Gadd",
         "description" => "One of the most accomplished and well-known drummers of the 20th century, Buddy Rich is still a household name because of his virtuosic talents and his accomplishments as a bandleader. The recipient of this ‘hall of fame’ award has made their name synonymous with drumming over decades of excellence. This may be through any combination of performance, recording, teaching, or all of the above.<br><br>We chose this year’s award winner based on his incredible legacy and ability to deeply reach people, even those outside of the drumming world. He composed some of the most recognizable drum parts of the 20th century, inspiring drummers with his technical and musical approach to playing the drums and innovating with electronic sounds and finding ways to incorporate them into his music.<br><br>This drumming legend officially announced his retirement in 2022.",
