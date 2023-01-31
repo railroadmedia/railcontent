@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Exception;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Ecommerce\Entities\PaymentMethod;
+use Railroad\Ecommerce\Entities\Product;
 use Railroad\Ecommerce\Entities\Subscription;
 use Railroad\Ecommerce\Entities\UserProduct;
 use Railroad\Ecommerce\Repositories\ProductRepository;
@@ -98,7 +99,7 @@ class CustomerIoSyncService
             'musora_profile_birthday' => $user->birthday,
             'musora_phone-number' => $user->phone_number,
             'musora_timezone' => $user->timezone,
-            'musora_notify_of_weekly_updates' => $user->notify_weekly_update,
+            'musora_notify_of_weekly_updates' => $user->notify_weekly_update > 0,
         ];
     }
 
@@ -128,15 +129,7 @@ class CustomerIoSyncService
             $eligibleUserProducts = [];
 
             foreach ($userProducts as $userProductIndex => $userProduct) {
-                if ($userProduct->getProduct()->getBrand() !== $brand) {
-                    continue;
-                }
-
-                // make sure the subscriptions product is in this brands pre-configured products that represent a membership
-                if (!in_array(
-                    $userProduct->getProduct()->getSku(),
-                    config('event-data-synchronizer.' . $brand . '_membership_product_skus', [])
-                )) {
+                if (!$this->isEligibleMembershipProduct($brand, $userProduct->getProduct())) {
                     continue;
                 }
 
@@ -308,31 +301,12 @@ class CustomerIoSyncService
             // If there are multiple active membership subs we will always sync the one with the further paid_until
             // in the future.
             foreach ($userSubscriptions as $userSubscription) {
-                // make sure this subscription is for a single membership product and its the right brand
-                if (empty($userSubscription->getProduct()) ||
-                    $userSubscription->getProduct()
-                        ->getBrand() != $brand) {
-                    continue;
-                }
-
-                // make sure the subscriptions product is in this brands pre-configured products that represent a membership
-                if (!in_array(
-                    $userSubscription->getProduct()
-                        ->getSku(),
-                    config(
-                        'event-data-synchronizer.' .
-                        $userSubscription->getProduct()
-                            ->getBrand() .
-                        '_membership_product_skus',
-                        []
-                    )
-                )) {
+                if (!$this->isEligibleMembershipProduct($brand, $userSubscription->getProduct())) {
                     continue;
                 }
 
                 if (empty($latestSubscriptionToSync)) {
                     $latestSubscriptionToSync = $userSubscription;
-
                     continue;
                 }
 
@@ -347,25 +321,7 @@ class CustomerIoSyncService
             }
 
             foreach ($userSubscriptions as $userSubscription) {
-                // make sure this subscription is for a single membership product and its the right brand
-                if (empty($userSubscription->getProduct()) ||
-                    $userSubscription->getProduct()
-                        ->getBrand() != $brand) {
-                    continue;
-                }
-
-                // make sure the subscriptions product is in this brands pre-configured products that represent a membership
-                if (!in_array(
-                    $userSubscription->getProduct()
-                        ->getSku(),
-                    config(
-                        'event-data-synchronizer.' .
-                        $userSubscription->getProduct()
-                            ->getBrand() .
-                        '_membership_product_skus',
-                        []
-                    )
-                )) {
+                if (!$this->isEligibleMembershipProduct($brand, $userSubscription->getProduct())) {
                     continue;
                 }
 
@@ -566,5 +522,12 @@ class CustomerIoSyncService
         }
 
         return $finalArray;
+    }
+
+    private function isEligibleMembershipProduct(?string $brand, ?Product $product): bool
+    {
+        return !empty($product)
+            && $product->getBrand() == $brand
+            && $product->isMembershipProduct();
     }
 }

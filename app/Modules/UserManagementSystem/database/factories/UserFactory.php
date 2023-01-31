@@ -38,7 +38,7 @@ class UserFactory extends Factory
             'region' => $this->faker->randomElement(['British Columbia', 'Alberta', 'Washington', 'California']),
             'city' => $this->faker->city,
             'birthday' => $this->faker->date,
-            'phone_number' => $this->faker->phoneNumber,
+            'phone_number' => $this->faker->numberBetween(1000000, 19999999999),
             'profile_picture_url' => $this->faker->imageUrl,
             'timezone' => $this->faker->timezone,
             'last_used_brand' => $this->faker->randomElement(['drumeo', 'pianote', 'singeo', 'guitareo']),
@@ -75,9 +75,9 @@ class UserFactory extends Factory
             'notify_weekly_update' => 1,
             'notify_on_lesson_comment_reply' => 1,
             'use_legacy_video_player' => 0,
-            'drums_skill_level' => $this->faker->randomElement(['beginner', 'intermediate', 'advanced', null]),
-            'guitar_skill_level' => $this->faker->randomElement(['beginner', 'intermediate', 'advanced', null]),
-            'piano_skill_level' => $this->faker->randomElement(['beginner', 'intermediate', 'advanced', null]),
+            'drums_skill_level' => $this->faker->randomElement([100, 150, 200, null]),
+            'guitar_skill_level' => $this->faker->randomElement([100, 150, 200, null]),
+            'piano_skill_level' => $this->faker->randomElement([100, 150, 200, null]),
             'drumeo_ship_magazine' => null,
             'magazine_shipping_address_id' => null,
             'ios_latest_review_display_date' => null,
@@ -89,7 +89,7 @@ class UserFactory extends Factory
             'created_at' => $this->faker->dateTime,
             'membership_expiration_date' => null,
             'is_lifetime_member' => rand(0, 1),
-            'singing_since_year' => rand(1950, 2022),
+            'singing_since_year' => strval(rand(1950, 2022)),
             'singing_gear_mic_brands' => $this->faker->words(3, true),
             'singing_gear_photo' => $this->faker->imageUrl,
             'is_pack_owner' => rand(0, 1),
@@ -98,7 +98,9 @@ class UserFactory extends Factory
             'pianote_onboarding_skip_setup' => 0,
             'drumeo_onboarding_skip_setup' => 0,
             'brand_total_xp' => null,
-            'brand_minutes_practiced' => null
+            'brand_minutes_practiced' => null,
+            'membership_level' => null,
+            'is_drumeo_lifetime_member' => 0,
         ];
     }
 

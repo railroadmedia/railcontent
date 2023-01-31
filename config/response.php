@@ -1977,6 +1977,7 @@ return [
                     'data.timecode',
                 ],
                 'comments',
+                'total_comments',
                 'related_lessons' => [
                     'id',
                     'type',

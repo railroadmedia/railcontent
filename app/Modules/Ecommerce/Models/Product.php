@@ -3,6 +3,7 @@
 namespace App\Modules\Ecommerce\Models;
 
 use App\Modules\Ecommerce\database\factories\ProductFactory;
+use App\Modules\Ecommerce\Enums\DigitalAccessType;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -11,6 +12,8 @@ use Illuminate\Database\Eloquent\Model;
  * Class Product
  *
  * @package App\Modules\Ecommerce\Models
+ *
+ * @property integer id
  * @property string brand
  * @property string name
  * @property string sku
@@ -113,15 +116,16 @@ class Product extends Model
     const TYPE_PHYSICAL_ONE_TIME = 'physical one time';
 
     const DIGITAL_ACCESS_TYPE_ALL_CONTENT_ACCESS = 'all content access';
+    const DIGITAL_ACCESS_TYPE_BASIC_CONTENT_ACCESS = 'basic content access';
     const DIGITAL_ACCESS_TYPE_SPECIFIC_CONTENT_ACCESS = 'specific content access';
 
     const DIGITAL_ACCESS_TIME_TYPE_RECURRING = 'recurring';
     const DIGITAL_ACCESS_TIME_TYPE_ONE_TIME = 'one time';
     const DIGITAL_ACCESS_TIME_TYPE_LIFETIME = 'lifetime';
 
-    const DIGITAL_ACCESS_TIME_INTERVAL_TYPE_DAY = 'day';
-    const DIGITAL_ACCESS_TIME_INTERVAL_TYPE_MONTH = 'month';
-    const DIGITAL_ACCESS_TIME_INTERVAL_TYPE_YEAR = 'year';
+
+
+    const MEMBERSHIP_DIGITAL_ACCESS_TYPES = [DigitalAccessType::Plus, DigitalAccessType::Basic];
 
     protected $table = 'ecommerce_products';
 
@@ -134,6 +138,6 @@ class Product extends Model
 
     public function isMembershipProduct(): bool
     {
-        return $this->digital_access_type == Product::DIGITAL_ACCESS_TYPE_ALL_CONTENT_ACCESS;
+        return in_array($this->digital_access_type, Product::MEMBERSHIP_DIGITAL_ACCESS_TYPES);
     }
 }

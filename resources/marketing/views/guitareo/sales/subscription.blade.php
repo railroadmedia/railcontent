@@ -17,10 +17,9 @@
     @include('_partials.layout._fonts')
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
-    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/guitareo/sales-page.css') }}" rel="stylesheet">
-
+    <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/sales-page.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
 
     <style>
@@ -114,6 +113,15 @@
             "scrollToJoin" => true,
             "hideMenu" => true,
         ])
+
+    @elseif(!empty($month))
+        @include("guitareo.sales.partials._nav", [
+            "subscriptionVersion" => true,
+            "fullSubscriptionVersion" => true,
+            "trialVersion" => true,
+            "joinUrl" => '/choose-your-trial-month',
+        ])
+
     @else
         @include("guitareo.sales.partials._nav", [
             "subscriptionVersion" => true,
@@ -169,15 +177,19 @@
         'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Guitareo+Membership/79348454',
         'students' => number_format(Prices::$students),
     ])
+    @hasSection('promo-banner')
+        @yield('promo-banner')
+    @endif
 
     @if(!empty($promoVersion))
         @include('musora.sales.components.promo-section', [
         'promoLogo' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs.svg',
            'promoLogoM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs-m.png',
         'desc' => 'Unlock step-by-step lessons & 1000+ songs to reach your guitar goals in 2023. ',
-           'text' => 'Learning songs has <u>never</u> been easier.<br><br>Introducing NEW Guitareo Songs – <strong>the ultimate tool for learning songs faster and better</strong> with note-for-note sheet music, tempo adjustments, and a looping feature.<br><br>And unlike other song tools, every song is perfectly transcribed and professionally proofed to guarantee its accuracy. Because playing songs should be fun, not frustrating.<br><br>PLUS you’ll have access to step-by-step video lessons on every topic, artist courses and exclusive events, and unlimited personal support to reach all of your guitar goals in 2023.<br><br>When you join today, you\'ll receive a Guitarist\'s Survival Kit for free (valued at $89) to help you sound even better on guitar.<br><br>Click below to grab the deal – or scroll down to try a demo of the NEW Guitareo Songs.',
+           'text' => 'Learning songs has <u>never</u> been easier.<br><br>Introducing NEW Guitareo Songs – <strong>the ultimate tool for learning songs faster and better</strong> with note-for-note sheet music, tempo adjustments, and a looping feature.<br><br>And unlike other song tools, every song is perfectly transcribed and professionally proofed to guarantee its accuracy. Because playing songs should be fun, not frustrating.<br><br>PLUS you’ll have access to step-by-step video lessons on every topic, artist courses and exclusive events, and unlimited personal support to reach all of your guitar goals in 2023.<br><br>When you join today, you\'ll receive a Guitareo Chords and Scales poster for free to help you sound even better on guitar.<br><br>Click below to grab the deal – or scroll down to try a demo of the NEW Guitareo Songs.',
            'img' => 'https://guitareo.s3.amazonaws.com/sales/2023/jan-launch-collage.png',
-           'belowButton' => 'SAVE 17% + GET 5 BONUSES WORTH $835',
+           'belowButton' => 'SAVE 17% + GET 6 BONUSES WORTH $847',
+           'countdown' => 'Get 6 free bonuses until January 31st.',
        ])
     @else
         @include('musora.sales.components.learn-by-playing-section', [
@@ -501,6 +513,13 @@
         @php
             $bonuses = [
                 [
+                    'image' => 'https://laravel-nova.s3.us-east-2.amazonaws.com/Guitareo/Thumbnails/5bd94363-e9f4-46c3-a602-d8c7c39bbeea-f2efb356-6d7e-451b-a087-e90c06cefa40-cart-image.jpg',
+                    'title' => 'Chords & Scales Poster',
+                    'description' => 'When you need an instant refresher on a chord in a song or want to improvise with your own solo or chord progression, this poster has you covered.',
+                    'price' => floatval($productPrices['chords-scales-poster']->price),
+                    'shipping' => true,
+                ],
+                [
                     'image' => 'https://guitareo.s3.amazonaws.com/sales/promos/black-friday/bundles/ultimate/gq.jpg',
                     'title' => 'GuitarQuest',
                     'description' => 'Skip the boring stuff and start having fun! Your journey starts here.',
@@ -536,10 +555,11 @@
         'topImage' => 'https://guitareo.s3.amazonaws.com/sales/2023/guitareo-annual-2w-card.png',
         'promoLogo' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs.svg',
        'promoLogoM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs-m.png',
-        'header' => 'Save 17% + get 5 bonuses<br class="inline sm:hidden"> worth $835',
-        'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
-        'buttonLink' => '/ecommerce/add-to-cart?products[GUITAREO-1-YEAR-MEMBERSHIP]=1&products[guitar-quest]=1&products[rhythm-and-groove]=1&products[GUITAR-SYSTEM]=1&products[AGME-JAN-2019-SEMESTER]=1&products[GTME-OCT-2018-SEMESTER]=1&redirect=/order&locked=true',
-        'subDescription' => '<strong>5 free bonuses.</strong> <br class="inline sm:hidden"><em>only available until january 31st.</em>',
+        'header' => 'Save 17% + get 6 bonuses<br class="inline sm:hidden"> worth $847',
+        'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/6',
+        'buttonLink' => '/ecommerce/add-to-cart?products[GUITAREO-1-YEAR-MEMBERSHIP]=1&products[chords-scales-poster]=1&products[guitar-quest]=1&products[rhythm-and-groove]=1&products[GUITAR-SYSTEM]=1&products[AGME-JAN-2019-SEMESTER]=1&products[GTME-OCT-2018-SEMESTER]=1&redirect=/order&locked=true',
+        'subDescription' => '<strong>6 free bonuses.</strong> <br class="inline sm:hidden"><em>only available until january 31st.</em>',
+        'countdown' => 'The Chords & Scales Poster <br class="hidden sm:inline">is disappearing in...',
         'altButtonLink' => '/ecommerce/add-to-cart?products[GUITAREO-1-MONTH-MEMBERSHIP]=1&redirect=/order&locked=true',
         ])
     @else

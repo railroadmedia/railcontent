@@ -7,30 +7,15 @@ Route::domain('{pianoteDomain}')
     ->middleware(['web_public'])
     ->group(function () {
     Route::get('/', [SalesController::class, 'home'] );
-    Route::get('/new-year', [SalesController::class, 'promo'] );
-    Route::get('/choose-plan', [SalesController::class, 'choosePlan'] );
-    Route::get('/shop/improvisation-with-jesus-molina', [SalesController::class, 'jesusMolina'] );
-    Route::get('/student-only', [SalesController::class, 'promo'] );
-    Route::get('/roland', [SalesController::class, 'roland'] );
     Route::get('/trial', [SalesController::class, 'home'] );
-    Route::get('/trial-month', [SalesController::class, 'trialMonth'] );
-    Route::get('/shop/500-songs', [SalesController::class, 'songs500'] );
-    Route::get('/the-power-of-chords', [SalesController::class, 'PowerOfChords'] );
-    Route::get('/shop/the-power-of-chords', [SalesController::class, 'PowerOfChords'] );
-    Route::get('/the-power-of-chords-bootcamp', [SalesController::class, 'PowerOfChordsBootcamp'] );
-    Route::get('/the-power-of-chords-giveaway', [SalesController::class, 'PowerOfChordsGiveaway'] );
-    Route::get('/foundations', [SalesController::class, 'foundations'] );
-
-    Route::get('/about', [SalesController::class, 'about'] );
-    Route::get('/app', [SalesController::class, 'app'] );
-    Route::get('/cookie', [SalesController::class, 'cookie'] );
-    Route::get('/terms', [SalesController::class, 'terms'] );
-    Route::get('/privacy', [SalesController::class, 'privacy'] );
-    Route::get('/songs', [SalesController::class, 'songs'] );
-    Route::get('/method', [SalesController::class, 'method'] );
-    Route::get('/coaches', [SalesController::class, 'coaches'] );
+    Route::get('/trial-month', [SalesController::class, 'homeMonth'] );
+    Route::get('/new-year', [SalesController::class, 'promo'] );
+    Route::get('/student-only', [SalesController::class, 'promo'] );
+    Route::get('/choose-plan', [SalesController::class, 'choosePlan'] );
     Route::get('/choose-your-trial', [SalesController::class, 'choosePlan'] );
-    Route::get('/choose-your-trial-month', [SalesController::class, 'chooseyourtrialmonth'] );
+
+    Route::get('/choose-your-trial-month', [SalesController::class, 'choosePlanMonth'] );
+    Route::get('/affiliate-trial', [SalesController::class, 'choosePlanMonth'] );
     Route::get('/a/davidbennett', [SalesController::class, 'davidbennett'] );
     Route::group(['prefix' => 'affiliate' ],
         function () {
@@ -40,7 +25,27 @@ Route::domain('{pianoteDomain}')
                 ]);
         }
     );
-    Route::get('/affiliate-trial', [SalesController::class, 'affiliatetrial'] );
+
+    Route::get('/privacy', [SalesController::class, 'privacy'] );
+    Route::get('/terms', [SalesController::class, 'terms'] );
+    Route::get('/cookie', [SalesController::class, 'cookie'] );
+
+        Route::get('/method', [SalesController::class, 'method'] );
+        Route::get('/songs', [SalesController::class, 'songs'] );
+        Route::get('/coaches', [SalesController::class, 'coaches'] );
+
+
+        Route::get('/shop/improvisation-with-jesus-molina', [SalesController::class, 'jesusMolina'] );
+    Route::get('/roland', [SalesController::class, 'roland'] );
+    Route::get('/shop/500-songs', [SalesController::class, 'songs500'] );
+    Route::get('/the-power-of-chords', [SalesController::class, 'PowerOfChords'] );
+    Route::get('/shop/the-power-of-chords', [SalesController::class, 'PowerOfChords'] );
+    Route::get('/the-power-of-chords-bootcamp', [SalesController::class, 'PowerOfChordsBootcamp'] );
+    Route::get('/the-power-of-chords-giveaway', [SalesController::class, 'PowerOfChordsGiveaway'] );
+    Route::get('/foundations', [SalesController::class, 'foundations'] );
+
+    Route::get('/about', [SalesController::class, 'about'] );
+    Route::get('/app', [SalesController::class, 'app'] );
     Route::get('/giveaway', [SalesController::class, 'giveaway'] );
     Route::get('/{page?}', SalesController::class . '@products')
         ->whereIn('page', [

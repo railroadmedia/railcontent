@@ -10,7 +10,7 @@ class ShopController extends BaseController
 {
     public function shop()
     {
-        $items = Product::whereHas('brand', fn($query) => $query->where('name', 'guitareo'))->where('visible', '=', 1)->where('product_type_id', '!=', 6)->orderBy('display_order')->get();
+        $items = Product::whereHas('brand', fn($query) => $query->where('name', 'guitareo'))->where([['visible', 1], ['product_type_id', '!=', 6], ['is_seasonal', 0]])->orderBy('display_order')->get();
 
         return view('guitareo.shop.shop', [ 'items' => $items, 'theme' => 'guitareo' ]);
     }
