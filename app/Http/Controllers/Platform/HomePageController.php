@@ -11,6 +11,7 @@ use App\Maps\ContentTypes;
 use App\Services\LiveStreamEventService;
 use App\Services\PackService;
 use App\Services\UserMetricsService;
+use Railroad\Ecommerce\Services\UserProductService;
 use Railroad\Railcontent\Services\UserContentProgressService;
 use Carbon\Carbon;
 use Illuminate\Database\DatabaseManager;
@@ -41,6 +42,7 @@ class HomePageController extends BaseController
     private PackService $packService;
     private DatabaseManager $databaseManager;
     private UserContentProgressService $userContentProgressService;
+    private UserProductService $userProductService;
 
     /**
      * @param ContentService $contentService
@@ -60,7 +62,8 @@ class HomePageController extends BaseController
         UserPlaylistsService $userPlaylistsService,
         PackService $packService,
         DatabaseManager $databaseManager,
-        UserContentProgressService $userContentProgressService
+        UserContentProgressService $userContentProgressService,
+        UserProductService $userProductService
     ) {
         $this->contentService = $contentService;
         $this->contentFollowService = $contentFollowsService;
@@ -70,6 +73,7 @@ class HomePageController extends BaseController
         $this->packService = $packService;
         $this->databaseManager = $databaseManager;
         $this->userContentProgressService = $userContentProgressService;
+        $this->userProductService = $userProductService;
     }
 
     public function homeRedirect()
@@ -295,6 +299,16 @@ class HomePageController extends BaseController
                             })
                         ->orderBy('display_order')
                         ->get();
+
+        foreach ($carousel as $slide){
+            if($slide['is_featured'] ?? false){
+                if($this->userProductService->hasProduct(\user()->id, $slide['product_id'])){
+                    $slide['cta_url'] = $slide['product_url'];
+                }else{
+                    $slide['cta_url'] = $slide['endpoint'];
+                }
+            }
+        }
 
         return view('home.index', [
             'brand' => $brand,

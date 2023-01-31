@@ -7,12 +7,23 @@ use App\Models\Brand;
 use App\Models\Carousel;
 use App\Services\User\UserAccessService;
 use Carbon\Carbon;
+use Railroad\Ecommerce\Services\UserProductService;
 use Railroad\MusoraApi\Contracts\ProductProviderInterface;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\UserPermissionsService;
 
 class MusoraApiProductProvider implements ProductProviderInterface
 {
+
+    private UserProductService $userProductService;
+
+    /**
+     * @param UserProductService $userProductService
+     */
+    public function __construct(UserProductService $userProductService)
+    {
+        $this->userProductService = $userProductService;
+    }
 
     public function getPackPrice($slug)
     : array {
@@ -61,7 +72,7 @@ class MusoraApiProductProvider implements ProductProviderInterface
                 ->where('name', ucfirst(config('railcontent.brand')))
                 ->first()->id;
 
-        return Carousel::query()
+        $carousel = Carousel::query()
             ->where('brand_id', $brandId)
             ->where('visible', true)
             ->where(
@@ -79,5 +90,17 @@ class MusoraApiProductProvider implements ProductProviderInterface
             ->orderBy('display_order')
             ->get()
             ->toArray();
+
+        foreach ($carousel as $slide){
+            if($slide['is_featured'] ?? false){
+                if($this->userProductService->hasProduct(\user()->id, $slide['product_id'])){
+                    $slide['cta_url'] = $slide['product_url'];
+                }else{
+                    $slide['cta_url'] = $slide['endpoint'];
+                }
+            }
+        }
+
+        return $carousel;
     }
 }
