@@ -15,6 +15,16 @@
 
     <link href="{{ asset('/marketing/parcel/drumeo/drum-shop.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/css/vuesora.css') }}" rel="stylesheet">
+    <style>
+        .shop-header {
+            background-image:url(https://cdn.musora.com/image/fetch/w_800,q_auto:best/https://musora-center.s3.amazonaws.com/shop/header-m.jpg);
+        }
+        @media (min-width: 768px) {
+            .shop-header {
+                background-image:url(https://cdn.musora.com/image/fetch/w_2500,q_auto:best/https://musora-center.s3.amazonaws.com/shop/header.jpg);
+            }
+        }
+    </style>
 @endsection
 
 @section('body-data')
@@ -36,19 +46,19 @@
         <div class="delay-bar text-center">
             <div class="container mx-auto">
                 <p class="inline-block cursor-pointer hover:underline" @click="shippingModal = true;"><i class="fas fa-truck"></i> <strong>FREE SHIPPING OVER $100</strong></p>
-                <p class="inline-block cursor-pointer"><strong> | All items are pre-order only and ship within 2-4 weeks of purchase date.</strong></p>
+                <p class="inline-block uppercase"><strong> | All items are pre-order only and ship within 2-4 weeks of purchase date.</strong></p>
             </div>
         </div>
     </div>
 
-    <header class="drum-shop-header" style="background-image:url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/todo);background-color:#140c08;">
+    <header class="shop-header text-center text-white relative py-7 sm:py-10 bg-cover bg-center" style="background-color:#140c08;">
         <div class="container mx-auto relative z-10">
             <div class="px-2 md:px-3">
-                <img class="h-6 md:h-9" src="https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="drumeo logo">
-                <p>As a Musora Member you’re getting exclusive access to <strong>NEW</strong><br> limited edition merch designed for musicians – by musicians.</p>
-                <div class="rounded-xl px-6 py-2 inline-flex flex-wrap mx-auto mt-5 justify-center items-center text-black" style="background-color:#fff;">
+                <img class="h-10 md:h-16 mb-2 sm:mb-4" src="https://musora-center.s3.amazonaws.com/shop/musora-member-logo.svg" alt="drumeo logo">
+                <p>As a Musora Member you’re getting exclusive access to <strong>NEW</strong><br class="hidden sm:inline-block"> limited edition merch designed for musicians – by musicians.</p>
+                <div class="rounded-xl px-6 py-2 inline-flex flex-wrap mx-auto my-2 sm:my-4 justify-center items-center text-black" style="background-color:#fff;">
                     <p class="leading-none m-0"><strong>SALE ENDS IN:</strong></p>
-                    <div class="h-12 mx-5 bg-black" style="width:2px;"></div>
+                    <div class="h-12 mx-3 bg-black" style="width:2px;"></div>
                     <div class="tzcd-big">
                         <div class="inline-block">
                             <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>
