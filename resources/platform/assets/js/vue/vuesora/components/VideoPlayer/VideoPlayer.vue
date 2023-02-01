@@ -573,6 +573,7 @@ function enableAirplay() {
 function keyboardControlEventHandler(event) {
     if (
         !event.ctrlKey
+        && !event.metaKey
         && keyboardEventHandlers[event.code]
         && (!keyboardEventHandlersShift[event.code] || event.shiftKey)
     ) {
@@ -1069,7 +1070,8 @@ const {
         <div ref="videoWrap" class="video-wrap" :class="{ 'picture-in-picture': isPipEnabled }">
             <div class="widescreen bg-black">
                 <div ref="container" class="flex flex-column video-player"
-                    :class="{ 'user-active': userActive || !isPlaying }" @contextmenu.stop.prevent="toggleContextMenu"
+                    :class="{ 'user-active': userActive || !isPlaying }" 
+                    @contextmenu.stop.prevent="toggleContextMenu"
                     @mousemove="trackMousePosition" @touchmove="trackMousePosition">
                     <!--                    <transition name="grow-fade">-->
                     <!--                        <PlayerStats-->
@@ -1134,8 +1136,7 @@ const {
                         </div>
                     </transition>
 
-                    <video id="video-component-id" ref="player" playsinline preload="metadata" :poster="poster">
-
+                    <video id="video-component-id" ref="player" playsinline preload="metadata" :poster="poster" controlsList="nodownload">
                         <track v-if="captions" :src="captions" label="English" kind="subtitles" srclang="en" default>
                     </video>
 
