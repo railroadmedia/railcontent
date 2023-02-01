@@ -1,20 +1,21 @@
 @extends('_partials.layout.global-template')
 
 @section('meta')
-    <title>Drumeo Drum Shop - Get Lessons, T-Shirts, Gear, & Much More!</title>
-    <meta name="description" content="Take your drumming to the next level with the largest collection of drum lessons in the world - or gear up for success with a selection of drum gear, t-shirts, sticks, and other cool drum swag.">
-    <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/drum-shop/og-image.jpg">
-    <meta property="og:title" content="Drumeo Drum Shop - Get Lessons, T-Shirts, Gear, & Much More!">
-    <meta property="og:description" content="Take your drumming to the next level with the largest collection of drum lessons in the world - or gear up for success with a selection of drum gear, t-shirts, sticks, and other cool drum swag.">
-    <meta property="og:url" content="https://www.drumeo.com/drumshop/">
+    <title></title>
+    <meta property="og:title" content="">
+    <meta name="description" content="">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="">
+    <meta property="og:url" content="https://www.musora.com/merch/">
+    <meta name="robots" content="noindex">
 @endsection
 
 @section('layout-styles')
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
+{{--    <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">--}}
 
     <link href="{{ asset('/marketing/parcel/drumeo/drum-shop.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/css/vuesora.css') }}" rel="stylesheet">
+{{--    <link href="{{ asset('/marketing/css/vuesora.css') }}" rel="stylesheet">--}}
     <style>
         .shop-header {
             background-image:url(https://cdn.musora.com/image/fetch/w_800,q_auto:best/https://musora-center.s3.amazonaws.com/shop/header-m.jpg);
@@ -23,6 +24,13 @@
             .shop-header {
                 background-image:url(https://cdn.musora.com/image/fetch/w_2500,q_auto:best/https://musora-center.s3.amazonaws.com/shop/header.jpg);
             }
+        }
+        footer a {
+            color: #879097;
+        }
+
+        footer a:hover {
+            color: #a2a9af;
         }
     </style>
 @endsection
@@ -36,10 +44,66 @@
 @endsection
 
 @section('layout-header')
-    @include("drumeo.sales.partials._nav", [
-        "cartVersion" => true
+    @include('_partials.layout.global-header', [
+        "theme_bg" => "bg-musora",
+        "theme_text" => "text-musora",
+        "logo" => "https://musora-ui.s3.amazonaws.com/logos/musora-white.svg",
+        "links" => [
+            "Home" => [
+                "iconClass" => "fas fa-home",
+                "url" => "/",
+            ],
+            "Member Login" => [
+                "iconClass" => "fas fa-sign-in",
+                "url" => get_musora_brand_base_url() . '/login',
+            ],
+            "Contact" => [
+                "iconClass" => "fas fa-phone",
+                "url" => get_musora_brand_base_url().'/contact',
+            ],
+            "Careers" => [
+                "iconClass" => "fas fa-users",
+                "url" => '/careers',
+            ],
+            "About" => [
+                "iconClass" => "fas fa-question",
+                "url" => '/about',
+            ],
+            "Ambassador Program" => [
+                "iconClass" => "fas fa-comment-dollar",
+                "url" => '/ambassador',
+            ],
+            "Brand Guides" => [
+                "iconClass" => "fas fa-pencil-paintbrush",
+                "url" => '/brand',
+            ],
+        ],
+        "external_links" => [
+            "Drumeo" => [
+                "iconClass" => "fas fa-external-link",
+                "themeClass" => "text-musora",
+                "url" => get_legacy_brand_base_url("drumeo")
+            ],
+            "Pianote" => [
+                "iconClass" => "fas fa-external-link",
+                "themeClass" => "text-musora",
+                "url" => get_legacy_brand_base_url("pianote")
+            ],
+            "Guitareo" => [
+                "iconClass" => "fas fa-external-link",
+                "themeClass" => "text-musora",
+                "url" => get_legacy_brand_base_url("guitareo")
+            ],
+            "Singeo" => [
+                "iconClass" => "fas fa-external-link",
+                "themeClass" => "text-musora",
+                "url" => get_legacy_brand_base_url("singeo")
+            ]
+        ]
     ])
 @endsection
+
+@section('main-class', 'pt-10 md:pt-14')
 
 @section('layout-body')
     <div class="shipping-delay p-2">
@@ -480,7 +544,10 @@
 @endsection
 
 @section('layout-footer')
-    @include("drumeo.sales.partials._footer")
+    @include('_partials.layout.global-footer', [
+    "brand" => "musora",
+    "logo" => "https://musora-ui.s3.amazonaws.com/logos/musora-white.svg"
+])
 @endsection
 
 @section('layout-scripts')
