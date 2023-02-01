@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Repositories;
 
 use Carbon\Carbon;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Query\JoinClause;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
@@ -60,6 +61,7 @@ class ContentRepository extends RepositoryBase
 
     public static $getFutureContentOnly = false;
     public static $getFollowedContentOnly = false;
+    public static $getFutureScheduledContentOnly = false;
 
     private $page;
     private $limit;
@@ -696,27 +698,84 @@ class ContentRepository extends RepositoryBase
         $columnValue,
         $siblingPairLimit = 1,
         $orderColumn = 'published_on',
-        $orderDirection = 'desc'
+        $orderDirection = 'desc',
+        $contentId = null
     ) {
-        $beforeContents =
-            $this->query()
-                ->selectPrimaryColumns()
-                ->restrictByUserAccess()
-                ->where(ConfigService::$tableContent . '.type', $type)
-                ->where(ConfigService::$tableContent . '.' . $columnName, '<', $columnValue)
-                ->orderBy($orderColumn, 'desc')
-                ->limit($siblingPairLimit)
-                ->getToArray();
 
-        $afterContents =
-            $this->query()
+        if ($contentId) {
+            $beforeSubqueryOne = $this
+                ->query()
+                ->selectRaw(DB::raw(
+                    'ROW_NUMBER() OVER (order by railcontent_content.' . $orderColumn . ' desc, railcontent_content.id desc) AS rowNumber'
+                ))
                 ->selectPrimaryColumns()
                 ->restrictByUserAccess()
                 ->where(ConfigService::$tableContent . '.type', $type)
-                ->where(ConfigService::$tableContent . '.' . $columnName, '>', $columnValue)
-                ->orderBy($orderColumn, 'asc')
-                ->limit($siblingPairLimit)
-                ->getToArray();
+                ->where(ConfigService::$tableContent . '.' . $columnName, '<=', $columnValue)
+                ->limit(50);
+
+            $beforeSubqueryTwo = $this->query()
+                ->selectRaw(DB::raw('rowNumber'))
+                ->fromSub($beforeSubqueryOne, 'sub')
+                ->where('id', $contentId)
+                ->get()
+                ->value('rowNumber');
+
+            $beforeContents =
+                $this->query()
+                    ->select('*')
+                    ->fromSub($beforeSubqueryOne, 'sub')
+                    ->where('rowNumber', '>', $beforeSubqueryTwo)
+                    ->limit($siblingPairLimit)
+                    ->getToArray();
+
+            $afterSubqueryOne = $this
+                ->query()
+                ->selectRaw(DB::raw(
+                    'ROW_NUMBER() OVER (order by railcontent_content.' . $orderColumn . ' asc, railcontent_content.id asc) AS rowNumber'
+                ))
+                ->selectPrimaryColumns()
+                ->restrictByUserAccess()
+                ->where(ConfigService::$tableContent . '.type', $type)
+                ->where(ConfigService::$tableContent . '.' . $columnName, '>=', $columnValue)
+                ->limit(50)
+            ;
+
+            $afterSubqueryTwo = $this->query()
+                ->selectRaw(DB::raw('rowNumber'))
+                ->fromSub($afterSubqueryOne, 'sub')
+                ->where('id', $contentId)
+                ->get()
+                ->value('rowNumber');
+
+            $afterContents =
+                $this->query()
+                    ->select('*')
+                    ->fromSub($afterSubqueryOne, 'sub')
+                    ->where('rowNumber', '>', $afterSubqueryTwo)
+                    ->limit($siblingPairLimit)
+                    ->getToArray();
+        } else {
+            $beforeContents =
+                $this->query()
+                    ->selectPrimaryColumns()
+                    ->restrictByUserAccess()
+                    ->where(ConfigService::$tableContent . '.type', $type)
+                    ->where(ConfigService::$tableContent . '.' . $columnName, '<', $columnValue)
+                    ->orderBy($orderColumn, 'desc')
+                    ->limit($siblingPairLimit)
+                    ->getToArray();
+
+            $afterContents =
+                $this->query()
+                    ->selectPrimaryColumns()
+                    ->restrictByUserAccess()
+                    ->where(ConfigService::$tableContent . '.type', $type)
+                    ->where(ConfigService::$tableContent . '.' . $columnName, '>', $columnValue)
+                    ->orderBy($orderColumn, 'asc')
+                    ->limit($siblingPairLimit)
+                    ->getToArray();
+        }
 
         $merged = array_merge($beforeContents, $afterContents);
 
@@ -1194,7 +1253,8 @@ class ContentRepository extends RepositoryBase
         array $slugHierarchy,
         array $requiredParentIds,
         $getFutureContentOnly = false,
-        $getFollowedContentOnly = false
+        $getFollowedContentOnly = false,
+        $getFutureScheduledContentOnly = false
     ) {
         $this->page = $page;
         $this->limit = $limit;
@@ -1206,6 +1266,7 @@ class ContentRepository extends RepositoryBase
 
         self::$getFutureContentOnly = $getFutureContentOnly;
         self::$getFollowedContentOnly = $getFollowedContentOnly;
+        self::$getFutureScheduledContentOnly = $getFutureScheduledContentOnly;
 
         // reset all the filters for the new query
         $this->requiredFields = [];

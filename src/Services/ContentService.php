@@ -799,7 +799,8 @@ class ContentService
         $columnValue,
         $siblingPairLimit = 1,
         $orderColumn = 'published_on',
-        $orderDirection = 'desc'
+        $orderDirection = 'desc',
+        $contentId = null
     ) {
         $hash = 'contents_type_neighbouring_siblings_'.CacheHelper::getKey(
                 $type,
@@ -817,7 +818,8 @@ class ContentService
             $columnValue,
             $siblingPairLimit,
             $orderColumn,
-            $orderDirection
+            $orderDirection,
+            $contentId
         );
         $results = CacheHelper::getCachedResultsForKey($hash);
 
@@ -830,7 +832,8 @@ class ContentService
                     $columnValue,
                     $siblingPairLimit,
                     $orderColumn,
-                    $orderDirection
+                    $orderDirection,
+                    $contentId
                 )
             );
         }
@@ -895,7 +898,8 @@ class ContentService
         $pullFilterFields = true,
         $getFutureContentOnly = false,
         $pullPagination = true,
-        $getFollowedContentOnly = false
+        $getFollowedContentOnly = false,
+        $getFutureScheduledContentOnly = false
     ) {
         $results = null;
         if ($limit == 'null') {
@@ -937,7 +941,8 @@ class ContentService
                 $slugHierarchy,
                 $requiredParentIds,
                 $getFutureContentOnly,
-                $getFollowedContentOnly
+                $getFollowedContentOnly,
+                $getFutureScheduledContentOnly
             );
 
             foreach ($requiredFields as $requiredField) {

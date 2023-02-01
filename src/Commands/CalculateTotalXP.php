@@ -86,6 +86,8 @@ class CalculateTotalXP extends Command
             "pack",
             "recording",
             "student-review",
+            "song-tutorial",
+            "song-tutorial-children"
         ];
 
         if (Schema::connection(config('railcontent.database_connection_name'))->hasColumn(

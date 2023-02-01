@@ -58,6 +58,7 @@ class ContentJsonController extends Controller
      */
     public function index(Request $request)
     {
+
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
         if ($request->has('statuses')) {
             ContentRepository::$availableContentStatues = $request->get('statuses');
@@ -65,6 +66,12 @@ class ContentJsonController extends Controller
 
         if ($request->has('include_future_content')) {
             ContentRepository::$pullFutureContent = $request->has('include_future_content');
+        }
+
+        $futureScheduledContentOnly = false;
+        if ($request->has('include_future_scheduled_content_only') && $request->get('include_future_scheduled_content_only') != 'false') {
+            ContentRepository::$pullFutureContent = true;
+            $futureScheduledContentOnly = true;
         }
 
         if ($request->has('only_from_my_list') && ($request->get('only_from_my_list') == "true")) {
@@ -109,7 +116,8 @@ class ContentJsonController extends Controller
             $request->get('include_filters', true),
             false,
             true,
-            $request->get('only_subscribed', false)
+            $request->get('only_subscribed', false),
+            $futureScheduledContentOnly
         );
 
         $filters = $contentData['filter_options'];
