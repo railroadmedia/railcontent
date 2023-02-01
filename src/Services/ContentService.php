@@ -2664,6 +2664,12 @@ class ContentService
             }
             $results['soundslice_assignments_count'] = $soundsliceAssingment;
             $results['soundslice_assignments'] = $assign;
+            if($content['type'] == 'song'){
+                if($content['instrumentless']){
+                    $results['song_instrumentless_assignment'] = $assign;
+                }
+                $results['song_full_assignment'] = $assign;
+            }
         } elseif(in_array($content['type'], ['course','learning-path-course','semester-pack', 'pack-bundle'])) {
             ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MAXIMUM;
             $lessons = $this->getByParentId($content['id']);

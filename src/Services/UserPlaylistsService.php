@@ -196,6 +196,28 @@ class UserPlaylistsService
         $endSecond = null,
         $importAllAssignments = false
     ) {
+        $content = $this->contentService->getById($contentId);
+
+        $singularContentTypes = array_merge(
+            config('railcontent.showTypes')[config('railcontent.brand')] ?? [],
+            config('railcontent.singularContentTypes')
+        );
+
+        if(in_array($content['type'], $singularContentTypes)){
+            $input = [
+                'content_id' => $contentId,
+                'user_playlist_id' => $userPlaylistId,
+                'position' => $position,
+                'extra_data' => $extraData,
+                'start_second' => $startSecond,
+                'end_second' => $endSecond,
+                'created_at' => Carbon::now()
+                    ->toDateTimeString(),
+            ];
+
+            $this->userPlaylistContentRepository->createOrUpdatePlaylistContentAndReposition(null, $input);
+        }
+
         $assignments = $this->contentService->countLessonsAndAssignments($contentId);
         foreach ($assignments['lessons']??[] as $lesson) {
             $input = [
