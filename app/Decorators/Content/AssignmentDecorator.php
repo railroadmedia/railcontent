@@ -23,7 +23,7 @@ class AssignmentDecorator extends TypeDecoratorBase
             $parents = $content->getParentContentData();
             if (!empty($parents)) {
                 $parent = $this->contentService->getById($parents[0]->id);
-                $contentsOfType[$contentIndex]['thumbnail_url'] = $parent->fetch('data.thumbnail_url');
+                $contentsOfType[$contentIndex]['thumbnail_url'] = $parent ? $parent->fetch('data.thumbnail_url') : '';
             }
         }
 
