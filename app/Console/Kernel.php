@@ -61,14 +61,10 @@ class Kernel extends ConsoleKernel
         SoftDeleteOldGuitareoSongs::class,
         AddTimeToUsersAccountsJan2023::class,
         UpdateRoutines::class,
-<<<<<<< HEAD
         CreateSongs24Jan2023::class,
-=======
-        CreateSongs24Jan2022::class,
         UpdateOldGuitareoSongs::class,
         RemoveTemporarySongsAccessForLifetimeMembersJanuary2023::class,
         MembershipFieldsSync::class,
->>>>>>> 1c2949cae9ec48193a62c19b7f684b0aa8b23d81
     ];
 
     /**
