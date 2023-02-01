@@ -2,7 +2,7 @@
     <div class="flex flex-column">
         <schedule-item
             v-for="(item, i) in content"
-            :key="'schedule-item-' + item.id"
+            :key="`schedule-item-'-${item.id}`"
             :item="item"
             :timezone="timezone"
             :theme-color="themeColor"

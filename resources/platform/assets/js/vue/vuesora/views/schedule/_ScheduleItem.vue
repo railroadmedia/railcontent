@@ -1,77 +1,58 @@
 <template>
-    <div
-        class="flex tw-w-full flex-row tw-items-center scheduled tw-px-0 pa-1 tw-border-t tw-border-[#E4E4E7] dark:tw-border-[#223457]"
-        :class="month"
-    >
-            <!-- <div class="month-col body bg-grey-2 dark:tw-text-white tw-text-[#00101D]">
-                {{ month }}
-            </div> -->
-
-            <div class="tw-flex tw-flex-col tw-justify-center tw-w-[116px] md:tw-w-[143px] tw-shrink-0">
-                <div class="thumb-wrap corners-10">
+    <div class="flex tw-w-full flex-row tw-items-center scheduled tw-px-0 pa-1 tw-border-t tw-border-[#E4E4E7] dark:tw-border-[#223457]"
+        :class="month">
+        <div class="tw-flex tw-flex-col tw-justify-center tw-w-[116px] md:tw-w-[143px] tw-shrink-0">
+            <div class="thumb-wrap corners-10">
+                <div class="thumb-img corners-10 widescreen text-center"
+                    :style="`background-image: url( ${item.original_thumbnail_url} )`">
                     <div
-                        class="thumb-img corners-10 widescreen text-center"
-                        :style="`background-image: url( ${ item.original_thumbnail_url } )`"
-                    >
-                        <div class="tw-absolute tw-top-0 tw-w-full tw-h-full tw-left-0 tw-bg-black/80 tw-flex tw-flex-col tw-items-center tw-justify-center">
-                            <p class="tw-text-xs text-white font-bold">
-                                {{ day }},
-                                <span class="tw-capitalize">{{ month }}</span> <span class="">{{ dayNumber }}/{{ yearNumber }}</span>
-                            </p>
-                            <p class="tw-text-xs text-white">
-                                {{ time }}
-                            </p>
-                        </div>
+                        class="tw-absolute tw-top-0 tw-w-full tw-h-full tw-left-0 tw-bg-black/80 tw-flex tw-flex-col tw-items-center tw-justify-center">
+                        <p class="tw-text-xs text-white font-bold">
+                            {{ day }},
+                            <span class="tw-capitalize">{{ month }}</span> <span class="">{{ dayNumber }}/{{
+                                yearNumber
+                            }}</span>
+                        </p>
+                        <p class="tw-text-xs text-white">
+                            {{ time }}
+                        </p>
                     </div>
                 </div>
-            </div>
-
-            <div class="tw-mr-auto tw-flex tw-w-full tw-flex-col xl:tw-flex-row xl:tw-justify-center">
-                <!-- Schedule Item Title -->
-                <div class="tw-flex tw-flex-col tw-justify-center ph-1 title-column overflow tw-mr-auto tw-mb-1 xl:tw-mb-0">
-                    <p class="tw-text-sm uppercase text-truncate tw-text-[#52525A] dark:tw-text-[#9EC0DC]">
-                        {{ mappedData.color_title }}
-                    </p>
-                    <p class="tw-text-sm tw-text-[#00101D] dark:tw-text-white tw-font-bold item-title">
-                        {{ mappedData.black_title }}
-                    </p>
-                </div>
-                <!-- Schedule Item Data -->
-                <div class="ph-1 tw-hidden sm:tw-flex">
-                    <div class="tw-flex tw-flex-col uppercase tw-justify-center tw-pr-2 sm:tw-w-[116px] md:tw-w-[143px] tw-text-[#52525A] dark:tw-text-[#9EC0DC] tw-text-xs hide-sm-down xl:tw-text-center">
-                        {{ releaseType }}
-                    </div>
-                    <div v-for="(item, i) in mappedData.column_data"
-                        :key="i"
-                        class="tw-flex tw-flex-col uppercase tw-justify-center tw-pr-2 sm:tw-w-[116px] md:tw-w-[143px] tw-text-[#52525A] dark:tw-text-[#9EC0DC] tw-text-xs xl:tw-text-center"
-                    >
-                        {{ item }}
-                    </div>
-                </div>
-            </div>
-
-        <!-- ADD TO LIST OR RESET PROGRESS BUTTONS -->
-        <div class="tw-hidden md:tw-flex tw-flex-col icon-col tw-justify-center hide-xs-only">
-            <div class="body">
-                <i
-                    class="add-to-list fas fa-plus flex-center pointer"
-                    :class="is_added ? 'is-added ' + themeTextClass : 'tw-text-[#52525A] dark:tw-text-[#9EC0DC]'"
-                    :title="is_added ? 'Remove from My List' : 'Add to My List'"
-                    @click.stop.prevent="addToList"
-                ></i>
             </div>
         </div>
 
-        <div
-            class="tw-flex tw-flex-col icon-col tw-justify-center"
-            style="position:relative;"
-        >
-            <div
-                class="body pointer add-to"
-                title="Add to Calendar"
-                data-open-modal="scheduleAddToCalendarModal"
-                @click="addEvent"
-            >
+        <div class="tw-mr-auto tw-flex tw-w-full tw-flex-col xl:tw-flex-row xl:tw-justify-center">
+            <div class="tw-flex tw-flex-col tw-justify-center ph-1 title-column overflow tw-mr-auto tw-mb-1 xl:tw-mb-0">
+                <p class="tw-text-sm uppercase text-truncate tw-text-[#52525A] dark:tw-text-[#9EC0DC]">
+                    {{ mappedData.color_title }}
+                </p>
+                <p class="tw-text-sm tw-text-[#00101D] dark:tw-text-white tw-font-bold item-title">
+                    {{ mappedData.black_title }}
+                </p>
+            </div>
+            <div class="ph-1 tw-hidden sm:tw-flex">
+                <div
+                    class="tw-flex tw-flex-col uppercase tw-justify-center tw-pr-2 sm:tw-w-[116px] md:tw-w-[143px] tw-text-[#52525A] dark:tw-text-[#9EC0DC] tw-text-xs hide-sm-down xl:tw-text-center">
+                    {{ releaseType }}
+                </div>
+                <div v-for="(item, i) in mappedData.column_data" :key="i"
+                    class="tw-flex tw-flex-col uppercase tw-justify-center tw-pr-2 sm:tw-w-[116px] md:tw-w-[143px] tw-text-[#52525A] dark:tw-text-[#9EC0DC] tw-text-xs xl:tw-text-center">
+                    {{ item }}
+                </div>
+            </div>
+        </div>
+
+        <div class="tw-hidden md:tw-flex tw-flex-col icon-col tw-justify-center hide-xs-only">
+            <div class="body">
+                <i class="add-to-list fas fa-plus flex-center pointer"
+                    :class="is_added ? 'is-added ' + themeTextClass : 'tw-text-[#52525A] dark:tw-text-[#9EC0DC]'"
+                    :title="is_added ? 'Remove from My List' : 'Add to My List'" @click.stop.prevent="addToList"></i>
+            </div>
+        </div>
+
+        <div class="tw-flex tw-flex-col icon-col tw-justify-center" style="position:relative;">
+            <div class="body pointer add-to" title="Add to Calendar" data-open-modal="scheduleAddToCalendarModal"
+                @click="addEvent">
                 <i class="fas fa-calendar-plus flex-center tw-text-[#52525A] dark:tw-text-[#9EC0DC] rounded"></i>
             </div>
         </div>
