@@ -8,6 +8,7 @@ use App\Decorators\Content\LessonAssignmentDecorator;
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Content\CoachesController;
 use App\Maps\ContentTypes;
+use App\Modules\Content\Services\CarouselService;
 use App\Services\LiveStreamEventService;
 use App\Services\PackService;
 use App\Services\UserMetricsService;
@@ -42,7 +43,7 @@ class HomePageController extends BaseController
     private PackService $packService;
     private DatabaseManager $databaseManager;
     private UserContentProgressService $userContentProgressService;
-    private UserProductService $userProductService;
+    private CarouselService $carouselService;
 
     /**
      * @param ContentService $contentService
@@ -63,7 +64,7 @@ class HomePageController extends BaseController
         PackService $packService,
         DatabaseManager $databaseManager,
         UserContentProgressService $userContentProgressService,
-        UserProductService $userProductService
+        CarouselService $carouselService
     ) {
         $this->contentService = $contentService;
         $this->contentFollowService = $contentFollowsService;
@@ -73,7 +74,7 @@ class HomePageController extends BaseController
         $this->packService = $packService;
         $this->databaseManager = $databaseManager;
         $this->userContentProgressService = $userContentProgressService;
-        $this->userProductService = $userProductService;
+        $this->carouselService = $carouselService;
     }
 
     public function homeRedirect()
@@ -277,38 +278,7 @@ class HomePageController extends BaseController
             }
         }
 
-        $brandId =
-            Brand::query()
-                ->where('name', ucfirst(config('railcontent.brand')))
-                ->first()->id;
-
-        $carousel = Carousel::query()
-                        ->where('brand_id', $brandId)
-                        ->where('visible', true)
-                        ->where(
-                            function($query) {
-                                return $query
-                                    ->whereNull('start_date')
-                                    ->orWhere('start_date', '<=', Carbon::now()->toDateTimeString());
-                            })
-                        ->where(
-                            function($query) {
-                                return $query
-                                    ->whereNull('end_date')
-                                    ->orWhere('end_date', '>', Carbon::now()->toDateTimeString());
-                            })
-                        ->orderBy('display_order')
-                        ->get();
-
-        foreach ($carousel as $slide){
-            if($slide['is_featured'] ?? false){
-                if($this->userProductService->hasProduct(\user()->id, $slide['product_id'])){
-                    $slide['cta_url'] = $slide['product_url'];
-                }else{
-                    $slide['cta_url'] = $slide['endpoint'];
-                }
-            }
-        }
+        $carousel = $this->carouselService->getCarouselSlides();
 
         return view('home.index', [
             'brand' => $brand,
