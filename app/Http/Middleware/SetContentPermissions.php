@@ -42,6 +42,9 @@ class SetContentPermissions
                 // admins can see drafts, archived lessons, and future content by default
                 ContentRepository::$bypassPermissions = true;
 
+                // if there is a 'scheduled' content, but from a past date, the admins ca still see the content's page, but they will not see it catalogue's content list
+                ContentRepository::$getFutureScheduledContentOnly = false;
+
                 ContentRepository::$availableContentStatues = $request->get(
                     'statuses',
                     [
