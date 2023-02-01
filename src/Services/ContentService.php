@@ -2650,7 +2650,7 @@ class ContentService
         if(in_array($content['type'], $singularContentTypes)) {
             $soundsliceAssingment = 0;
             $assign = [];
-            $assignments = $content['assignments'];
+            $assignments = $content['assignments'] ?? [];
             foreach($assignments as $assignment){
                 if($assignment->fetch('soundslice_slug')){
                     $soundsliceAssingment++;
