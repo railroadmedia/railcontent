@@ -218,7 +218,8 @@ class Lesson extends Resource
             Flexible::make('Benefits')
                 ->addLayout(BenefitLayout::class)
                 ->preset(BenefitPreset::class)
-                ->help('There has to be 2 benefits or leave it blank.'),
+                ->help('There has to be 2 benefits or leave it blank.')
+                ->limit(2),
             Text::make('Instructor Name', 'instructor_name')
                 ->hideFromIndex(),
             Image::make('Instructor Image', 'product_img')
