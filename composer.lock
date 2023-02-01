@@ -4261,16 +4261,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v9.49.0",
+            "version": "v9.50.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "e02d9453442ad0a6a2f5dc9df96ea0319d218026"
+                "reference": "2ec7083834563e2bb1003ab50d2b6071f3418e75"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/e02d9453442ad0a6a2f5dc9df96ea0319d218026",
-                "reference": "e02d9453442ad0a6a2f5dc9df96ea0319d218026",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/2ec7083834563e2bb1003ab50d2b6071f3418e75",
+                "reference": "2ec7083834563e2bb1003ab50d2b6071f3418e75",
                 "shasum": ""
             },
             "require": {
@@ -4445,7 +4445,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2023-01-31T14:36:47+00:00"
+            "time": "2023-02-01T14:04:34+00:00"
         },
         {
             "name": "laravel/nova",
@@ -8433,12 +8433,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "f0b89cb14fcbcd8c38337208459df56c1d706ad3"
+                "reference": "b9fc211e948a8a3caeb838c160e7d22d3e2803e9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/f0b89cb14fcbcd8c38337208459df56c1d706ad3",
-                "reference": "f0b89cb14fcbcd8c38337208459df56c1d706ad3",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/b9fc211e948a8a3caeb838c160e7d22d3e2803e9",
+                "reference": "b9fc211e948a8a3caeb838c160e7d22d3e2803e9",
                 "shasum": ""
             },
             "require": {
@@ -8494,7 +8494,7 @@
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
                 "source": "https://github.com/railroadmedia/railcontent/tree/2.0-playlists"
             },
-            "time": "2023-02-01T12:10:24+00:00"
+            "time": "2023-02-01T14:17:41+00:00"
         },
         {
             "name": "railroad/railforums",
