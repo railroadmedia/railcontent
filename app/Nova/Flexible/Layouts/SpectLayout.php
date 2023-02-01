@@ -32,6 +32,7 @@ class SpectLayout extends Layout
         return [
             Select::make('title')->options([
                 'Audio' => 'Audio',
+                'Accessory' => 'Accessory',
                 'Binding' => 'Binding',
                 'Books' => 'Books',
                 'Color' => 'Color',
@@ -40,6 +41,7 @@ class SpectLayout extends Layout
                 'Fabric' => 'Fabric',
                 'Finish' => 'Finish',
                 'Format' => 'Format',
+                'Hat' => 'Hat',
                 'Height' => 'Height',
                 'Hoodie' => 'Hoodie',
                 'Logo' => 'Logo',
@@ -57,6 +59,7 @@ class SpectLayout extends Layout
                 'Sizing' => 'Sizing',
                 'Style' => 'Style',
                 'Skill' => 'Skill',
+                'Sweater' => 'Sweater',
                 'Sweatshirt' => 'Sweatshirt',
                 'Video' => 'Video',
                 'Volume' => 'Volume',
