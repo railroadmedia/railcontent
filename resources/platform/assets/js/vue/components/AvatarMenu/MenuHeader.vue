@@ -26,7 +26,7 @@ const onButtonClick = () => {
     </div>
 
     <div class="tw-flex tw-grow tw-flex-col tw-justify-center tw-pl-[10px]">
-      <div class="tw-text-[14px] tw-font-bold tw-mb-1">{{ name }}</div>
+      <div class="tw-text-[14px] tw-font-bold tw-mb-1 tw-break-all">{{ name }}</div>
       <span class="tw-text-[12px] tw-text-[#00101D] dark:tw-text-white hover:tw-underline">
         View Dashboard
       </span>

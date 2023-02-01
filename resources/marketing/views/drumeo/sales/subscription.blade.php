@@ -187,23 +187,22 @@
     @hasSection('promo-banner')
         @yield('promo-banner')
     @endif
-    @if(!empty($promoVersion))
-        @include('musora.sales.components.promo-section', [
-        'promoLogo' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs.svg',
-           'promoLogoM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs-m.png',
-        'desc' => 'Loop, learn, and remove the drums from 5,000+ drumming anthems. ',
-           'text' => 'The NEW Drumeo Songs is here.<br><br>You can now magically remove the drums from 5,000+ popular drumming anthems. And with note-for-note sheet music, tempo adjustment, and a looping feature you’ll have <strong>the ultimate tool for learning songs on the drums.</strong> <br><br>And to make your goals easier in 2023 – you’ll also get a FREE pair of Drumeo’s in-ear headphones when you join Drumeo. So you can enjoy unlimited drum lessons, note-for-note song breakdowns, AND protect your ears while playing your favorite songs.<br><br>Click below to grab the deal – or scroll down to try a demo of the NEW Drumeo Songs.',
-           'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/collage3.png',
-           'belowButton' => 'SAVE 17% + GET 10 BONUSES WORTH $1342.94',
-       ])
-    @else
+{{--    @if(!empty($promoVersion))--}}
+{{--        @include('musora.sales.components.promo-section', [--}}
+{{--        'promoLogo' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs.svg',--}}
+{{--           'promoLogoM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs-m.png',--}}
+{{--        'desc' => 'Loop, learn, and remove the drums from 5,000+ drumming anthems. ',--}}
+{{--           'text' => 'The NEW Drumeo Songs is here.<br><br>You can now magically remove the drums from 5,000+ popular drumming anthems. And with note-for-note sheet music, tempo adjustment, and a looping feature you’ll have <strong>the ultimate tool for learning songs on the drums.</strong> <br><br>And to make your goals easier in 2023 – you’ll also get a FREE pair of Drumeo’s in-ear headphones when you join Drumeo. So you can enjoy unlimited drum lessons, note-for-note song breakdowns, AND protect your ears while playing your favorite songs.<br><br>Click below to grab the deal – or scroll down to try a demo of the NEW Drumeo Songs.',--}}
+{{--           'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/collage3.png',--}}
+{{--           'belowButton' => 'SAVE 17% + GET 10 BONUSES WORTH $1342.94',--}}
+{{--       ])--}}
+{{--    @else--}}
         @include('musora.sales.components.learn-by-playing-section', [
             'header' => 'Learn the drums by<br class="inline sm:hidden"> <u>playing the drums</u>.',
             'desc' => 'It’s the best feeling in the world –<br><br>Nailing that fill in your favorite song, slamming out the chorus of an all-time classic, or writing your own drum part that locks in with the music… but it’s a process.<br><br>And it starts with learning the skills & techniques you need to play the drums.<br><br>Drumeo makes learning the drums easier by giving you step-by-step lessons anytime & anywhere it fits your schedule. Plus, the groundbreaking NEW Drumeo Songs tool makes playing your favorite songs a reality – with note-for-note breakdowns of 5,000 popular songs.<br><br>You’ll play more. You’ll fall in love with your progress. And you’ll have personalized support every step of the way.<br><br>Scroll down to watch the trailer, see more details, and learn to play like you’ve always wanted!',
             'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/collage2.png',
         ])
-
-    @endif
+{{--    @endif--}}
 
     @php
         $gridItems = [
@@ -520,13 +519,6 @@
         @php
             $bonuses = [
                 [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/eardrums.jpg',
-                'title' => 'EarDrums',
-                'description' => 'Drumeo EarDrums reduce external volume by up to -29dB. That means you can play hard while protecting your ears.',
-                'price' => floatval($productPrices['drumeo-eardrums']->price),
-                'shipping' => true,
-                ],
-                [
                 'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/drumsticks.jpg',
                 'title' => 'Drumeo Drumsticks',
                 'description' => 'Drumeo 5A Drumsticks by Vater -- made with hickory and extra moisture to last longer.',
@@ -551,45 +543,15 @@
                 'description' => 'Jared Falk’s 26-week masterclass to unlock your musicality and freedom on the drums.',
                 'price' => floatval($productPrices['independence-made-easy-pack']->price),
                 ],
-                [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/eyd.jpg',
-                'title' => 'Electrify Your Drumming',
-                'description' => 'Your guide to playing 10 styles of electronic dance music - includes 23 play-alongs!',
-                'price' => floatval($productPrices['electrify-your-drumming']->price),
-                ],
-                [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/fwtbdf.jpg',
-                'title' => 'Better Drum Fills',
-                'description' => 'The ultimate four-week crash course to playing more creative & musical drum fills.',
-                'price' => floatval($productPrices['four-weeks-to-better-drum-fills']->price),
-                ],
-                [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/sd.jpg',
-                'title' => 'Successful Drumming',
-                'description' => 'Jared Falk’s step-by-step curriculum for building a rock-solid foundation on the drums.',
-                'price' => floatval($productPrices['SD-DIGI']->price),
-                ],
-                [
-                'image' => 'https://cdn.musora.com/image/fetch/c_fill,w_300,q_auto:good/https://drumeo-assets.s3.amazonaws.com/promos/july/tommy_card.jpg',
-                'title' => 'Great Hands For A Lifetime',
-                'description' => 'Tommy Igoe helps you improve your hand strength, speed, stamina, comfort, and control in the drums in four hours of video lessons.',
-                'price' => floatval($productPrices['GHFAL-DIGI']->price),
-                ],
-                [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/lsf.jpg',
-                'title' => 'Learn Songs Faster',
-                'description' => 'This masterclass will give you proven techniques for learning MORE songs in less time.',
-                'price' => floatval($productPrices['learn-songs-faster-pack']->price),
-                ],
             ]
         @endphp
         @include('musora.sales.components.order-section-bonuses', [
         'topImage' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drumeo-annual-2w-card.png',
         'promoLogo' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs.svg',
        'promoLogoM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs-m.png',
-        'header' => 'Save 17% + get 10 bonuses<br class="inline sm:hidden"> worth $1342.94',
-        'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[drumeo-eardrums]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[GHFAL-DIGI]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[learn-songs-faster-pack]=1&locked=true',
-        'subDescription' => '<strong>10 free bonuses.</strong> <br class="inline sm:hidden"><em>only available until january 31st.</em>',
+        'header' => 'Online drum lessons for all skill levels.',
+        'subDescription' => 'Save 17% + get 4 bonuses<br class="inline sm:hidden"> worth $603.95',
+        'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&locked=true',
         'altButtonLink' => '/ecommerce/add-to-cart?products[DLM-1-month]=1&locked=true',
         ])
     @else

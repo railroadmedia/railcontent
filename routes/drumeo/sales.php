@@ -12,6 +12,7 @@ Route::domain('{drumeoDomain}')
     ]);
     Route::get('/', [SalesController::class, 'home'] );
     Route::get('/new-year', [SalesController::class, 'promo'] );
+    Route::get('/lp', [SalesController::class, 'promo'] );
         Route::get('/beginner', [SalesController::class, 'promo']);
     Route::get('/choose-plan', [SalesController::class, 'choosePlan'] );
     Route::get('/student-only', [SalesController::class, 'promo'] );
@@ -57,7 +58,7 @@ Route::domain('{drumeoDomain}')
         function () {
             Route::get('/{page?}', SalesController::class . '@a')
                 ->whereIn('page', [
-                    '66samus', 'adriendrums', 'alejandrosifuentes', 'brandonscott', 'cooperdrummer', 'davidcola', 'drumhelper', 'joshcrawford', 'leviclay', 'linaanderberg', 'rdavidr', 'robbrown', 'the8bitdrummer', 'worshipdrummer', 'wyattstav', 'zackgrooves'
+                    '66samus', 'adriendrums', 'kristina-rybalchenko', 'alejandrosifuentes', 'brandonscott', 'cooperdrummer', 'davidcola', 'drumhelper', 'joshcrawford', 'leviclay', 'linaanderberg', 'rdavidr', 'robbrown', 'the8bitdrummer', 'worshipdrummer', 'wyattstav', 'zackgrooves'
                 ]);
         }
     );
