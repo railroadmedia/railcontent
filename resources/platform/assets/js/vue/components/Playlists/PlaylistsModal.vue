@@ -1,6 +1,7 @@
 <script setup>
 import InfoModal from '../Modal/InfoModal.vue';
 import CreatePlaylist from './CreatePlaylist.vue';
+import AddItem from './AddItem.vue'
 
 const props = defineProps({
     modalProps: {
@@ -18,12 +19,21 @@ const props = defineProps({
 
 const emit = defineEmits(['onClosePlaylistsModal']);
 
+const modalContainerProps = {
+    create: 'tw-max-w-[654px] tw-px-[64px]',
+    edit: 'tw-max-w-[654px] tw-px-[64px]',
+    remove: '',
+    startEnd: '',
+    addItem: 'tw-max-w-[917px] tw-px-[32px]',
+    alreadyAddedItem: ''
+};
+
 </script>
 
 <template>
-    <InfoModal classOverride="tw-bg-[#081825] tw-max-w-[654px] tw-border-[1px] tw-border-[#445F74]" key="create-playlist-modal-instance" modalId="create-playlist-modal"
+    <InfoModal :classOverride="`tw-bg-[#081825] ${modalContainerProps[modalProps.modalType]} tw-border-[1px] tw-border-[#445F74]`" key="create-playlist-modal-instance" modalId="create-playlist-modal"
         @onClose="handleClose" :selfContained="true">
-        <div class="tw-px-[64px] tw-pt-[12px]">
+        <div class="tw-pt-[12px]">
             <CreatePlaylist mode="create" @onCancel="() => emit('onClosePlaylistsModal')" :modalProps="modalProps" v-if="modalProps.modalType === 'create'"  />
             <CreatePlaylist mode="edit" @onCancel="() => emit('onClosePlaylistsModal')" :modalProps="modalProps" v-if="modalProps.modalType === 'edit'"  />
             <div v-if="modalProps.modalType === 'remove'">
@@ -33,7 +43,7 @@ const emit = defineEmits(['onClosePlaylistsModal']);
                 START END MODAL
             </div>
             <div v-if="modalProps.modalType === 'addItem'">
-                ADD ITEM MODAL
+                <AddItem />
             </div>
             <div v-if="modalProps.modalType === 'alreadyAddedItem'">
                 ALREADY ADDED MODAL
