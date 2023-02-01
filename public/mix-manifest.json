@@ -1,5 +1,5 @@
 {
-    "/platform/js/app.js": "/platform/js/app.js?id=216ecd89b8358dba4ad8029f17ef6308",
+    "/platform/js/app.js": "/platform/js/app.js?id=197021289b1b0cf3009013bcf35ada0d",
     "/platform/js/profile.js": "/platform/js/profile.js?id=a13ed5f750a89e00edbe84934bd56773",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=9b1b997eda2b5545804b8d7649790e48",
     "/platform/js/books.js": "/platform/js/books.js?id=bd6874db5faa8414cda38fb1fa497d2c",
@@ -21,7 +21,7 @@
     "/platform/js/contact-email-form.js": "/platform/js/contact-email-form.js?id=8c42a7f79169d75d784b0afc1471daba",
     "/platform/js/youtube-player-component.js": "/platform/js/youtube-player-component.js?id=fa034becc87a52ea151b981f707363b1",
     "/platform/js/onboarding-component.js": "/platform/js/onboarding-component.js?id=9eb718200a0335e57e8474b8233f4cc9",
-    "/platform/js/video-player-component.js": "/platform/js/video-player-component.js?id=a71d67d114fe1689f87560a98d07e09b",
+    "/platform/js/video-player-component.js": "/platform/js/video-player-component.js?id=886938c4c27c2ed5bca044e159618b72",
     "/platform/js/video-media-element-component.js": "/platform/js/video-media-element-component.js?id=316ae4561a831312b3fe669d0bb920d9",
     "/platform/js/image-cropper-component.js": "/platform/js/image-cropper-component.js?id=3b29eed954db900d64bb3ede3bdb26cc",
     "/platform/js/comments-component.js": "/platform/js/comments-component.js?id=903f5217f6976246beddaab38d7a16e1",
@@ -30,6 +30,6 @@
     "/marketing/css/vuesora.css": "/marketing/css/vuesora.css?id=39de52086a9c6bfbeabc595ee9a371f2",
     "/platform/css/app.css": "/platform/css/app.css?id=afba9f79dbdffbfb82fd4117ae3673f7",
     "/platform/js/vendor~onboarding.js": "/platform/js/vendor~onboarding.js?id=95b61f73a67fc65546a81e742dda8905",
-    "/marketing/css/app.css": "/marketing/css/app.css?id=eaca58c79f3041ad56c44c76a8fa7216",
+    "/marketing/css/app.css": "/marketing/css/app.css?id=31aa0bc655fad5f4d53556b885b8a17f",
     "/platform/js/vendor.js": "/platform/js/vendor.js?id=49f0817b99cd1af9df9cbd7fcee415f7"
 }
