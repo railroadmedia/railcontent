@@ -12,7 +12,7 @@
 
 @section('layout-styles')
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
-{{--    <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">--}}
+    <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
 
     <link href="{{ asset('/marketing/parcel/drumeo/drum-shop.css') }}" rel="stylesheet">
 {{--    <link href="{{ asset('/marketing/css/vuesora.css') }}" rel="stylesheet">--}}
@@ -102,8 +102,6 @@
         ]
     ])
 @endsection
-
-@section('main-class', 'pt-10 md:pt-14')
 
 @section('layout-body')
     <div class="shipping-delay p-2">
@@ -534,7 +532,7 @@
                         </p>
                         <div class="flex gap-2">
                             <a class="flex-1 rounded-full border-2 border-black uppercase text-black py-2 font-bold uppercase text-sm md:text-base" @click="orderModal = false">Cancel</a>
-                            <a class="flex-1 rounded-full border-2 border-drumeo bg-drumeo uppercase text-white py-2 font-bold uppercase text-sm md:text-base" href="">I understand</a>
+                            <a class="understand-button flex-1 rounded-full border-2 border-drumeo bg-drumeo uppercase text-white py-2 font-bold uppercase text-sm md:text-base" href="">I understand</a>
                         </div>
                     </div>
                 </div>
@@ -578,17 +576,34 @@
 
             //customize section pack picker
             var originalLink = '/ecommerce/add-to-cart?go-back-to-shop=true';
+            let understandbutton = $('.understand-button');
 
             $('select').prop('selectedIndex', 0);
             $(".pack-pick").change(function () {
                 var orderButton = $(this).parent().find(".selected-pack");
                 var selectedOption = $(this).find("option:selected");
                 $(this).removeClass('error');
+
                 orderButton.addClass('active');
-                orderButton.attr('href', originalLink);
-                orderButton.attr('href', orderButton.attr('href') + selectedOption.val());
-                orderButton.attr('data-product-json', selectedOption.attr('data-product-json'));
+                orderButton.attr('x-on:click', 'orderModal = true')
+                orderButton.attr('href-value', originalLink + selectedOption.val());
+
+                // orderButton.attr('href', originalLink);
+                // orderButton.attr('href', orderButton.attr('href') + selectedOption.val());
+                // orderButton.attr('data-product-json', selectedOption.attr('data-product-json'));
             });
+
+            $(".selected-pack").click(function(){
+                console.log($(this).attr('x-on:click'))
+                if($(this).attr('x-on:click')){
+                    console.log($(this).attr('href-value'))
+                    understandbutton.attr('href', $(this).attr('href-value'));
+                }
+            })
+
+            $(".add-to-cart-button").click(function(e){
+                understandbutton.attr('href', originalLink + $(this).attr('value'));
+            })
 
             $(".selected-pack").on('click', function (ev) {
                 if (!$(this).hasClass('active')) {
