@@ -38,7 +38,7 @@
 
 <!-- Main -->
 @section('layout-body')
-    <div class="white-bar flex items-center justify-between w-full bg-white py-1 lg:py-2 px-2 sm:px-4 fixed shadow-md" style="z-index: 98;">
+    <div class="white-bar flex items-center justify-between w-full bg-white py-1 lg:py-2 px-2 sm:px-4 fixed shadow-md z-30">
         <div class="text-center flex justify-center w-full flex-grow">
             <a href="#values" class="anchor-slide"><h6 class="font-bebas mr-3 sm:mr-8 lg:mr-12">OUR CORE VALUES</h6></a>
             <a href="#mission" class="anchor-slide"><h6 class="font-bebas mr-3 sm:mr-8 lg:mr-12">OUR MISSION</h6></a>
