@@ -1791,5 +1791,18 @@ return [
         'singeo' => 'You\'ll be hearing from us soon!',
     ],
 
-    'routine_trailer' => 318971
+    'routine_trailer' => 318971,
+
+    'pageTypeMapping' => [
+        'songs' => 'Songs',
+        'courses' => 'Courses',
+        'student-focus' => 'StudentFocus',
+        'play-alongs' => 'PlayAlongs',
+        'live' => 'Live',
+        'rudiments' => 'Rudiments',
+        'routines' => 'Routines',
+        'archives' => 'Archives',
+        'song-tutorials' => 'SongTutorials',
+        'schedule' => 'Schedule'
+    ]
 ];

@@ -1,4 +1,4 @@
-brand;artist;title;album;style;difficulty;total_xp;artwork_filename;pdf_filename;assignment_title;assignment_xp;soundslice_slug;publishing_status;instrument_removed;pdf_filename_tabs_and_notation
+brand;artist;title;album;style;difficulty;total_xp;artwork_filename;pdf_filename;assignment_title;assignment_xp;soundslice_slug;publishing_status;instrument_removed;pdf_filename_tabs_and_notation;content_id
 Guitareo;AC/DC;Back in Black;Back In Black;Rock;9;200;acdc-back-in-black.jpg;acdc-back-in-black-tab.pdf;Back in Black;25;8fGkc;Published;0;acdc-back-in-black-tab-standard.pdf
 Guitareo;AC/DC;Meanstreak;Blow Up Your Video;Rock;8;200;acdc-blow-up-your-video.jpg;acdc-meanstreak-tab.pdf;Meanstreak;25;ZCD4c;Published;0;acdc-meanstreak-tab-standard.pdf
 Guitareo;AC/DC;Shoot To Thrill;Back In Black;Rock;9;200;acdc-back-in-black.jpg;acdc-shoot-to-thrill-tab.pdf;Shoot To Thrill;25;pzf4c;Published;0;acdc-shoot-to-thrill-tab-standard.pdf
