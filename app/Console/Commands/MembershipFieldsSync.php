@@ -66,25 +66,8 @@ class MembershipFieldsSync extends Command
             ->where('product_id', $productId)
             ->pluck('user_id');
 
-        // ----------------------------------------------------------------
-        // this is basically fluff
-        // ----------------------------------------------------------------
-
         $this->info('Number of users to process here: ' . count($userIds));
-
-        $answer = $this->ask('If this is correct enter "y" to continue');
-
-        $continue = in_array($answer, ['y', 'yes', 'Y', 'YES']);
-
-        if(!$continue){
-            $this->info('Ok fine be like that. Exiting now.');
-            return true;
-        }
-
-        // ----------------------------------------------------------------
-        // this matters
-        // ----------------------------------------------------------------
-
+        
         $chunkCounter = 0;
 
         foreach($userIds->chunk($chunkSize) as $chunk){
