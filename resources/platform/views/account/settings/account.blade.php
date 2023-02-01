@@ -415,7 +415,7 @@
         <div class="pa-3 tw-border-0 tw-border-b tw-border-gray-300 dark:tw-border-[#223F57] tw-border-solid tw-w-full">
             <h3 class="tw-text-[#00101D] dark:tw-text-white tw-mb-2 tw-text-lg tw-font-bold">Would you like to use our legacy video player?</h3>
             <p class="tw-text-[#00101D] dark:tw-text-white tw-mb-2 lg:tw-max-w-[50%]">
-                Our video player may have compatibility issues with older devices and operationg systems. We recommend
+                Our video player may have compatibility issues with older devices and operating systems. We recommend
                 switching to our legacy video player if you are experiencing playback issues.
             </p>
             {{-- Legacy Player Toggle --}}
