@@ -11,6 +11,7 @@ Route::middleware(['web_public'])
             ->whereIn('category', ['shop', 'lessons', 'accessories', 'clothing'])
             ->name('marketing.products');
 
+        Route::get('/merch', [ProductPagesController::class, 'shopAlt']);
 
         /*---- CUSTOM PRODUCT PAGE ----*/
 //Drumeo

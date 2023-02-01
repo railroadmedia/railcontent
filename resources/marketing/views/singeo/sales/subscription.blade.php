@@ -185,23 +185,23 @@
     @hasSection('promo-banner')
         @yield('promo-banner')
     @endif
-    @if(!empty($promoVersion))
-        @include('musora.sales.components.promo-section', [
-        'promoLogo' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs.svg',
-           'promoLogoM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs-m.png',
-        'desc' => 'Vocal lessons, personal coaches, and 1000+ songs to reach your singing goals.',
-           'text' => 'If you’ve tried online singing lessons, you know the struggle: spending months, even years, going around in circles – never <em>actually</em> singing like you’ve wished.<br><br>With videos alone, you’re all alone.<br><br>And that’s why Singeo doubles down on the personal touch – with direct and unlimited access to vocal coaches to give you personal feedback, tailored for your voice.<br><br>You’ll boost your skills with step-by-step video lessons, warmups, artist courses, video reviews, live Q&A sessions with real vocal coaches, and 1000+ songs with playback tools to help you practice and hit every note! PLUS you’ll get unlimited access to our communities for guitar lessons, piano lessons, and drum lessons to reach all of your musical goals.<br><br>Just click the link to make 2023 the year you FINALLY sing like you’ve always wanted.',
-           'img' => 'https://singeo.s3.amazonaws.com/sales/2023/jan-launch-collage2.png',
-           'belowButton' => 'SAVE 17% + GET 3 BONUSES WORTH $58',
-       ])
-    @else
+{{--    @if(!empty($promoVersion))--}}
+{{--        @include('musora.sales.components.promo-section', [--}}
+{{--        'promoLogo' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs.svg',--}}
+{{--           'promoLogoM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs-m.png',--}}
+{{--        'desc' => 'Vocal lessons, personal coaches, and 1000+ songs to reach your singing goals.',--}}
+{{--           'text' => 'If you’ve tried online singing lessons, you know the struggle: spending months, even years, going around in circles – never <em>actually</em> singing like you’ve wished.<br><br>With videos alone, you’re all alone.<br><br>And that’s why Singeo doubles down on the personal touch – with direct and unlimited access to vocal coaches to give you personal feedback, tailored for your voice.<br><br>You’ll boost your skills with step-by-step video lessons, warmups, artist courses, video reviews, live Q&A sessions with real vocal coaches, and 1000+ songs with playback tools to help you practice and hit every note! PLUS you’ll get unlimited access to our communities for guitar lessons, piano lessons, and drum lessons to reach all of your musical goals.<br><br>Just click the link to make 2023 the year you FINALLY sing like you’ve always wanted.',--}}
+{{--           'img' => 'https://singeo.s3.amazonaws.com/sales/2023/jan-launch-collage2.png',--}}
+{{--           'belowButton' => 'SAVE 17% + GET 3 BONUSES WORTH $58',--}}
+{{--       ])--}}
+{{--    @else--}}
         @include('musora.sales.components.learn-by-playing-section', [
             'header' => 'Learning to sing made easy with <u>personal coaching</u>.',
             'desc' => 'If you’ve tried online singing lessons, you know the struggle: spending months, even years, going around in circles – never actually singing like you’ve wished.<br><br>With videos alone, you’re all alone.<br><br>And that’s why Singeo doubles down on the personal touch – with direct and unlimited access to vocal coaches to give you personal feedback, tailored for your voice.<br><br>You’ll get the convenience of step-by-step video lessons, warmups, artist courses, and song tools so you can improve your vocals anywhere, anytime. PLUS you’ll also enjoy personalized video reviews, live Q&A sessions, community recitals, and technique-boosting bootcamps.<br><br>If you’ve dreamed of hitting higher notes, finding the perfect pitch, and delivering confident performances – we’d love to help. Click any of the big buttons to try Singeo risk-free and start your journey to becoming the singer you’ve always wanted to be.',
             'img' => 'https://singeo.s3.amazonaws.com/sales/2023/collage-evergreen.png',
         ])
 
-    @endif
+{{--    @endif--}}
 
 
     @php
@@ -500,14 +500,6 @@
                     'description' => 'In just 8, short, sing-a-long lessons, you’ll learn how to elevate any vocal performance with incredible harmonies. Even if you’re a total beginner, you’ll be singing your first harmony within the first 10 minutes of this course.',
                     'price' => floatval($productPrices['the-essential-guide-to-beautiful-harmonies']->price),
                 ],
-                [
-                    'image' => 'https://singeo.s3.amazonaws.com/sales/promos/november/poster2.png',
-                    'title' => 'Vowel Practice<br> Poster',
-                    'description' => 'Your new favorite practice tool - and your ticket hitting higher notes with ease and confidence.',
-                    'price' => floatval($productPrices['vowel-sounds-poster']->price),
-                    'shipping' => true
-
-                ],
             ]
         @endphp
 
@@ -515,9 +507,9 @@
         'topImage' => 'https://singeo.s3.amazonaws.com/sales/2023/singeo-annual-2w-card.png',
         'promoLogo' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs.svg',
        'promoLogoM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs-m.png',
-        'header' => 'Save 17% + get 3 bonuses<br class="inline sm:hidden"> worth $58',
-        'buttonLink' => '/ecommerce/add-to-cart?products[singeo-annual-recurring-membership]=1&products[singing-starter-kit]=1&products[the-essential-guide-to-beautiful-harmonies]=1&products[vowel-sounds-poster]=1&locked=true&redirect=/order',
-        'subDescription' => '<strong>3 free bonuses.</strong> <br class="inline sm:hidden"><em>only available until january 31st.</em>',
+        'header' => '<strong>3 free bonuses.</strong> <br class="inline sm:hidden"><em>only available until january 31st.</em>',
+        'subDescription' => 'Save 17% + get 2 bonuses<br class="inline sm:hidden"> worth $46',
+        'buttonLink' => '/ecommerce/add-to-cart?products[singeo-annual-recurring-membership]=1&products[singing-starter-kit]=1&products[the-essential-guide-to-beautiful-harmonies]=1&locked=true&redirect=/order',
         'altButtonLink' => '/ecommerce/add-to-cart?products[singeo-monthly-recurring-membership]=1&redirect=/order&locked=true',
         ])
     @else
