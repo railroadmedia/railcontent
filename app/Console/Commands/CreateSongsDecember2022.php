@@ -43,7 +43,8 @@ class CreateSongsDecember2022 extends Command
     public function handle(ContentRepository $contentRepository)
     {
         $this->info('Starting CreateSongsDecember2022...');
-        $csv = array_map(function($v){return str_getcsv($v, ";");}, file(base_path('csv_songs_imports/january_5_drumless_songs_update.csv')));
+//        $csv = array_map(function($v){return str_getcsv($v, ";");}, file(base_path('csv_songs_imports/december_30_songs_import.csv')));
+        $csv = array_map(function($v){return str_getcsv($v, ";");}, file(base_path('csv_songs_imports/december_19_songs_import_semi.csv')));
         unset($csv[0]);
 
         // to be updated in case the csv has more than 2000 songs
@@ -52,7 +53,7 @@ class CreateSongsDecember2022 extends Command
         foreach ($csv as $rowIndex => $row) {
             $brand = lcfirst($row[0]);
 
-            $searchAttributes = array_key_exists(15, $row) ? ['id' => $row[15]] : [
+            $searchAttributes = (array_key_exists(15, $row) && $row[15] !== "") ? ['id' => $row[15]] : [
                 'slug' => ContentHelper::slugify($row[2]),
                 'type' => 'song',
                 'status' => 'published',
@@ -100,35 +101,32 @@ class CreateSongsDecember2022 extends Command
             }
 
             if (!empty($existingContent)) {
-                $this->musoraDB()->from('railcontent_content')->where('id', $existingContent->id)
+                $content = $existingContent;
+                $this->musoraDB()->from('railcontent_content')->where('id', $content->id)
                     ->update([
-                        'slug' => $existingContent ? $existingContent->slug : ContentHelper::slugify($row[2]),
+                        'slug' => $content->slug,
                         'brand' => $brand,
                         'type' => 'song',
                         'status' => 'published',
                         'album' => $row[3],
                         'language' => 'en-US',
                         'instrumentless' => boolval($row[13]),
-                        'published_on' => $existingContent ? $existingContent->published_on : Carbon::now(
-                        )->toDateTimeString(),
-                        'created_on' => $existingContent ? $existingContent->created_on : Carbon::now(
-                        )->toDateTimeString(),
+                        'published_on' => $content->published_on,
+                        'created_on' => $content->created_on
                     ]);
             } else {
                 $contentId = $this->musoraDB()->from('railcontent_content')
                     ->insertGetId(
                     [
-                        'slug' => $existingContent ? $existingContent->slug : ContentHelper::slugify($row[2]),
+                        'slug' => ContentHelper::slugify($row[2]),
                         'brand' => $brand,
                         'type' => 'song',
                         'status' => 'published',
                         'album' => $row[3],
                         'language' => 'en-US',
                         'instrumentless' => boolval($row[13]),
-                        'published_on' => $existingContent ? $existingContent->published_on : Carbon::now(
-                        )->toDateTimeString(),
-                        'created_on' => $existingContent ? $existingContent->created_on : Carbon::now(
-                        )->toDateTimeString(),
+                        'published_on' => Carbon::now()->toDateTimeString(),
+                        'created_on' => Carbon::now()->toDateTimeString(),
                     ]
                 );
 
@@ -227,9 +225,9 @@ class CreateSongsDecember2022 extends Command
             $pdfFileName = $row[8];
             $guitareoPdfFileName = ((array_key_exists(14, $row) && $brand == 'guitareo')) ? $row[14] : null;
 
-            $this->info('-------------------------------');
-            $this->info($row[0] . $row[1] . $row[2]);
-            $this->info($pdfFileName);
+//            $this->info('-------------------------------');
+//            $this->info($row[0] . $row[1] . $row[2]);
+//            $this->info($pdfFileName);
 
             if (!empty($pdfFileName) && !empty($pdfUrlPrefix) && !empty($pdfResourceName1)) {
                 // here it overrides resource_name and resource_url values, if it already finds something on this position and key name
@@ -323,33 +321,39 @@ class CreateSongsDecember2022 extends Command
             // assignment
             $assignmentChildren = $contentRepository->getByParentIdWhereTypeIn($content->id, ['assignment']);
 
-            $assignmentSearchAttributes = [
-                'title' => $row[9],
-                'type' => 'assignment',
-                'sort' => 0,
-                'status' => 'published',
-                'brand' => $brand,
-            ];
+            $existingAssignment = null;
+            if ($assignmentChildren) {
+                $existingAssignment = $assignmentChildren[0];
+                if (count($assignmentChildren) > 1) {
+                    $this->info('For content id ' . $content->id . " more than 1 child has been found in railcontent_content_hierarchy. Please investigate.");
+                }
+            }
 
-            $existingAssignment = (count($assignmentChildren) == 1) ? $assignmentChildren[0] :
-                (array)$this->getFirst('railcontent_content', $assignmentSearchAttributes);
-
-            $assignment = $this->updateOrInsertAndGetFirst(
-                'railcontent_content',
-                [
-                    'slug' => $existingAssignment ? $existingAssignment['slug'] : ContentHelper::slugify($row[2]),
+            /* if assignment already exists, update just title and published_on value;
+                else create new assignment with all the necessary values */
+            if ($existingAssignment) {
+                $attributes = ['id' => $existingAssignment['id']];
+                $values = [
                     'title' => $row[9],
+                    'published_on' => Carbon::now()->toDateTimeString()
+                ];
+            } else {
+                $attributes = [
+                    'slug' => ContentHelper::slugify($row[2]),
                     'type' => 'assignment',
+                    'published_on' => Carbon::now()->toDateTimeString(),
+                    'created_on' => Carbon::now()->toDateTimeString(),
+                ];
+                $values =                 [
+                    'title' => $row[9],
                     'sort' => 0,
                     'status' => 'published',
                     'brand' => $brand,
-                ],
-                [
-                    'published_on' => ($existingContent && $existingAssignment) ? $existingContent->published_on : Carbon::now()->toDateTimeString(),
-                    'created_on' => ($existingContent && $existingAssignment) ? $existingContent->created_on : Carbon::now()->toDateTimeString(),
                     'language' => 'en-US'
-                ]
-            );
+                ];
+            }
+
+            $assignment = $this->updateOrInsertAndGetFirst('railcontent_content', $attributes, $values);
 
             $this->updateOrInsertAndGetFirst(
                 'railcontent_content_fields',

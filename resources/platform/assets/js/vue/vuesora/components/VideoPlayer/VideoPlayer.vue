@@ -573,6 +573,7 @@ function enableAirplay() {
 function keyboardControlEventHandler(event) {
     if (
         !event.ctrlKey
+        && !event.metaKey
         && keyboardEventHandlers[event.code]
         && (!keyboardEventHandlersShift[event.code] || event.shiftKey)
     ) {

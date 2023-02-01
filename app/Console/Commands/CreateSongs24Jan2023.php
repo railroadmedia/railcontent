@@ -10,21 +10,21 @@ use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Repositories\ContentRepository;
 
 
-class CreateSongs24Jan2022 extends Command
+class CreateSongs24Jan2023 extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'CreateSongs24Jan2022';
+    protected $signature = 'CreateSongs24Jan2023';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'CreateSongs24Jan2022';
+    protected $description = 'CreateSongs24Jan2023';
 
 
     /**
@@ -42,8 +42,8 @@ class CreateSongs24Jan2022 extends Command
      */
     public function handle(ContentRepository $contentRepository)
     {
-        $this->info('Starting CreateSongs24Jan2022...');
-        $csv = array_map(function($v){return str_getcsv($v, ",");}, file(base_path('Jan 18th - Songs Import - Import.csv')));
+        $this->info('Starting CreateSongs24Jan2023...');
+        $csv = array_map(function($v){return str_getcsv($v, ",");}, file(base_path('csv_songs_imports/Jan 18th - Songs Import - Import.csv')));
         unset($csv[0]);
 
         // to be updated in case the csv has more than 2000 songs
@@ -52,7 +52,7 @@ class CreateSongs24Jan2022 extends Command
         foreach ($csv as $rowIndex => $row) {
             $brand = lcfirst($row[0]);
 
-            $searchAttributes = array_key_exists(15, $row) ? ['id' => $row[15]] : [
+            $searchAttributes = (array_key_exists(15, $row) && $row[15] !== "") ? ['id' => $row[15]] : [
                 'slug' => ContentHelper::slugify($row[2]),
                 'type' => 'song',
                 'status' => 'published',
@@ -105,7 +105,6 @@ class CreateSongs24Jan2022 extends Command
                 ->first();
 
             // fields
-            var_dump(boolval($row[13]));
             if (boolval($row[13]) && $brand == 'drumeo') {
                 $this->updateOrInsertAndGetFirst(
                     'railcontent_content_fields',
@@ -215,9 +214,9 @@ class CreateSongs24Jan2022 extends Command
             $pdfFileName = $row[8];
             $guitareoPdfFileName = ((array_key_exists(14, $row) && $brand == 'guitareo')) ? $row[14] : null;
 
-            $this->info('-------------------------------');
-            $this->info($row[0] . $row[1] . $row[2]);
-            $this->info($pdfFileName);
+//            $this->info('-------------------------------');
+//            $this->info($row[0] . $row[1] . $row[2]);
+//            $this->info($pdfFileName);
 
             if (!empty($pdfFileName) && !empty($pdfUrlPrefix) && !empty($pdfResourceName1)) {
                 // here it overrides resource_name and resource_url values, if it already finds something on this position and key name
@@ -276,10 +275,6 @@ class CreateSongs24Jan2022 extends Command
             $albumArtUrlPrefix = 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/';
             $albumArtFileName = $row[7];
 
-            //            $this->info('-------------------------------');
-            //            $this->info($row[0] . $row[1] . $row[2]);
-            //            $this->info($albumArtFileName);
-
             if (!empty($albumArtFileName)) {
                 $this->updateOrInsertAndGetFirst(
                     'railcontent_content_data',
@@ -311,33 +306,39 @@ class CreateSongs24Jan2022 extends Command
             // assignment
             $assignmentChildren = $contentRepository->getByParentIdWhereTypeIn($content->id, ['assignment']);
 
-            $assignmentSearchAttributes = [
-                'title' => $row[9],
-                'type' => 'assignment',
-                'sort' => 0,
-                'status' => 'published',
-                'brand' => $brand,
-            ];
+            $existingAssignment = null;
+            if ($assignmentChildren) {
+                $existingAssignment = $assignmentChildren[0];
+                if (count($assignmentChildren) > 1) {
+                    $this->info('For content id ' . $content->id . " more than 1 child has been found in railcontent_content_hierarchy. Please investigate.");
+                }
+            }
 
-            $existingAssignment = (count($assignmentChildren) == 1) ? $assignmentChildren[0] :
-                (array)$this->getFirst('railcontent_content', $assignmentSearchAttributes);
-
-            $assignment = $this->updateOrInsertAndGetFirst(
-                'railcontent_content',
-                [
-                    'slug' => $existingAssignment ? $existingAssignment['slug'] : ContentHelper::slugify($row[2]),
+            /* if assignment already exists, update just title and published_on value;
+                else create new assignment with all the necessary values */
+            if ($existingAssignment) {
+                $attributes = ['id' => $existingAssignment['id']];
+                $values = [
                     'title' => $row[9],
+                    'published_on' => Carbon::now()->toDateTimeString()
+                ];
+            } else {
+                $attributes = [
+                    'slug' => ContentHelper::slugify($row[2]),
                     'type' => 'assignment',
+                    'published_on' => Carbon::now()->toDateTimeString(),
+                    'created_on' => Carbon::now()->toDateTimeString(),
+                ];
+                $values =                 [
+                    'title' => $row[9],
                     'sort' => 0,
                     'status' => 'published',
                     'brand' => $brand,
-                ],
-                [
-                    'published_on' => ($existingContent && $existingAssignment) ? $existingContent->published_on : Carbon::now()->toDateTimeString(),
-                    'created_on' => ($existingContent && $existingAssignment) ? $existingContent->created_on : Carbon::now()->toDateTimeString(),
                     'language' => 'en-US'
-                ]
-            );
+                ];
+            }
+
+            $assignment = $this->updateOrInsertAndGetFirst('railcontent_content', $attributes, $values);
 
             $this->updateOrInsertAndGetFirst(
                 'railcontent_content_fields',
@@ -403,6 +404,7 @@ class CreateSongs24Jan2022 extends Command
         $this->musoraDB()->from($table)->updateOrInsert($attributes, $values);
         return $this->getFirst($table, $attributes);
     }
+
 
     /**
      * @param array $attributes
