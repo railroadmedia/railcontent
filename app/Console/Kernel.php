@@ -10,6 +10,7 @@ use App\Console\Commands\CreateSongs24Jan2023;
 use App\Console\Commands\CreateSongsDecember2022;
 use App\Console\Commands\FixSongsTemp;
 use App\Console\Commands\MigratePianoteSongTutorial;
+use App\Console\Commands\RemoveTemporarySongsAccessForLifetimeMembersJanuary2023;
 use App\Console\Commands\SoftDeleteOldGuitareoSongs;
 use App\Console\Commands\SoftDeleteOldSingeoSongs;
 use App\Console\Commands\PopulateNewRolesAndPermissionsTables;
@@ -24,6 +25,7 @@ use App\Console\Commands\SeedLiveAndScheduledContent;
 use App\Console\Commands\SeedUserContentData;
 use App\Console\Commands\TestLessonsDescriptionUrls;
 use App\Console\Commands\UpdateOldGuitareoSongs;
+use App\Console\Commands\MembershipFieldsSync;
 use App\Console\Commands\VaporEnvManager;
 use App\Console\Commands\UpdateRoutines;
 use Illuminate\Console\Scheduling\Schedule;
@@ -59,7 +61,14 @@ class Kernel extends ConsoleKernel
         SoftDeleteOldGuitareoSongs::class,
         AddTimeToUsersAccountsJan2023::class,
         UpdateRoutines::class,
+<<<<<<< HEAD
         CreateSongs24Jan2023::class,
+=======
+        CreateSongs24Jan2022::class,
+        UpdateOldGuitareoSongs::class,
+        RemoveTemporarySongsAccessForLifetimeMembersJanuary2023::class,
+        MembershipFieldsSync::class,
+>>>>>>> 1c2949cae9ec48193a62c19b7f684b0aa8b23d81
     ];
 
     /**
