@@ -3,11 +3,11 @@
         <div class="flex flex-wrap sm:flex-nowrap items-center">
             <div class="w-full sm:w-7/12 sm:pr-8 text-center lg:text-left">
                 <div x-on:click="trailer = true;" alt="header image" class="mb-5 overflow-hidden relative block sm:hidden bg-cover bg-top cursor-hover autoplay-video"
-                    @if(!empty($promoVersion))
-                        style="background-image:url(https://cdn.musora.com/image/fetch/w_850,q_auto:best/{!! $promoThumbM !!});padding-bottom: 60%;"
-                    @else
-                        style="background-image:url(https://cdn.musora.com/image/fetch/w_850,q_auto:best/{!! $thumb !!});padding-bottom: 75%;"
-                    @endif
+{{--                    @if(!empty($promoVersion))--}}
+{{--                        style="background-image:url(https://cdn.musora.com/image/fetch/w_850,q_auto:best/{!! $promoThumbM !!});padding-bottom: 60%;"--}}
+{{--                    @else--}}
+{{--                        style="background-image:url(https://cdn.musora.com/image/fetch/w_850,q_auto:best/{!! $thumb !!});padding-bottom: 75%;"--}}
+{{--                    @endif--}}
                 >
                     <div class="join white smaller absolute bottom-1 left-1"><i class="fas fa-play"></i> Watch Trailer</div>
                 </div>
@@ -57,11 +57,11 @@
             </div>
             <div class="w-full sm:w-5/12 hidden sm:block">
                     <div x-on:click="trailer = true;"
-                        @if(!empty($promoVersion))
-                            class="relative bg-contain bg-top bg-no-repeat cursor-pointer autoplay-video" style="background-image:url(https://cdn.musora.com/image/fetch/w_850,q_auto:best/{!! $promoThumb !!});padding-bottom: 108%;"
-                        @else
+{{--                        @if(!empty($promoVersion))--}}
+{{--                            class="relative bg-contain bg-top bg-no-repeat cursor-pointer autoplay-video" style="background-image:url(https://cdn.musora.com/image/fetch/w_850,q_auto:best/{!! $promoThumb !!});padding-bottom: 108%;"--}}
+{{--                        @else--}}
                             class="shadow-2xl rounded-xl aspect-1:1 overflow-hidden relative bg-cover bg-top cursor-pointer autoplay-video" style="background-image:url(https://cdn.musora.com/image/fetch/w_850,q_auto:best/{!! $thumb !!});"
-                        @endif
+{{--                        @endif--}}
                         >
                         <div class="join white smaller absolute bottom-2 left-2"><i class="fas fa-play"></i> Watch Trailer</div>
                     </div>

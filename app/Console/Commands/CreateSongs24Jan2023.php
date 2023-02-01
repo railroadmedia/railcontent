@@ -10,21 +10,21 @@ use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Repositories\ContentRepository;
 
 
-class CreateSongsDecember2022 extends Command
+class CreateSongs24Jan2023 extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'CreateSongsDecember2022';
+    protected $signature = 'CreateSongs24Jan2023';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'CreateSongsDecember2022';
+    protected $description = 'CreateSongs24Jan2023';
 
 
     /**
@@ -42,9 +42,8 @@ class CreateSongsDecember2022 extends Command
      */
     public function handle(ContentRepository $contentRepository)
     {
-        $this->info('Starting CreateSongsDecember2022...');
-//        $csv = array_map(function($v){return str_getcsv($v, ";");}, file(base_path('csv_songs_imports/december_30_songs_import.csv')));
-        $csv = array_map(function($v){return str_getcsv($v, ";");}, file(base_path('csv_songs_imports/december_19_songs_import_semi.csv')));
+        $this->info('Starting CreateSongs24Jan2023...');
+        $csv = array_map(function($v){return str_getcsv($v, ",");}, file(base_path('csv_songs_imports/Jan 18th - Songs Import - Import.csv')));
         unset($csv[0]);
 
         // to be updated in case the csv has more than 2000 songs
@@ -67,19 +66,50 @@ class CreateSongsDecember2022 extends Command
                 $this->info("Song <" . $existingContent->slug . "> with id " . $existingContent->id . " exists and will be updated.");
             }
 
-            if (!empty($existingContent) && !empty($existingContent->id) && $brand == 'drumeo') {
+            if (!empty($existingContent)) {
+                $contentId = $existingContent->id;
+                $this->musoraDB()->from('railcontent_content')->where('id', $existingContent->id)
+                    ->update([
+                        'slug' => $existingContent ? $existingContent->slug : ContentHelper::slugify($row[2]),
+                        'brand' => $brand,
+                        'type' => 'song',
+                        'status' => 'published',
+                        'album' => $row[3],
+                        'language' => 'en-US',
+                        'instrumentless' => boolval($row[13]),
+                        'published_on' => $existingContent ? $existingContent->published_on : Carbon::now(
+                        )->toDateTimeString(),
+                        'created_on' => $existingContent ? $existingContent->created_on : Carbon::now(
+                        )->toDateTimeString(),
+                    ]);
+            } else {
+                $contentId = $this->musoraDB()->from('railcontent_content')
+                    ->insertGetId(
+                    [
+                        'slug' => $existingContent ? $existingContent->slug : ContentHelper::slugify($row[2]),
+                        'brand' => $brand,
+                        'type' => 'song',
+                        'status' => 'published',
+                        'album' => $row[3],
+                        'language' => 'en-US',
+                        'instrumentless' => boolval($row[13]),
+                        'published_on' => $existingContent ? $existingContent->published_on : Carbon::now(
+                        )->toDateTimeString(),
+                        'created_on' => $existingContent ? $existingContent->created_on : Carbon::now(
+                        )->toDateTimeString(),
+                    ]
+                );
+            }
 
-                // for drumeo, we only need to add update instrumentless flag to true, nothing else should be updated
-                $this->info('Setting instrumentless flag for existing drumeo content ' . $existingContent->id);
+            $content = $this->musoraDB()->from('railcontent_content')->where('id', $contentId)
+                ->first();
 
-                $this->musoraDB()->from('railcontent_content')
-                    ->where('id', $existingContent->id)
-                    ->update(['instrumentless' => true,]);
-
+            // fields
+            if (boolval($row[13]) && $brand == 'drumeo') {
                 $this->updateOrInsertAndGetFirst(
                     'railcontent_content_fields',
                     [
-                        'content_id' => $existingContent->id,
+                        'content_id' => $content->id,
                         'key' => 'style',
                         'type' => 'string',
                         'position' => 5,
@@ -88,53 +118,8 @@ class CreateSongsDecember2022 extends Command
                         'value' => 'Drums-Removed',
                     ]
                 );
-
-                event(new ContentCreated($existingContent->id));
-
-                continue;
             }
 
-            if (!$existingContent && $brand == 'drumeo') {
-                $this->info('Failed to find existing drumeo song for row, skipping: ');
-                var_dump($searchAttributes);
-                continue;
-            }
-
-            if (!empty($existingContent)) {
-                $content = $existingContent;
-                $this->musoraDB()->from('railcontent_content')->where('id', $content->id)
-                    ->update([
-                        'slug' => $content->slug,
-                        'brand' => $brand,
-                        'type' => 'song',
-                        'status' => 'published',
-                        'album' => $row[3],
-                        'language' => 'en-US',
-                        'instrumentless' => boolval($row[13]),
-                        'published_on' => $content->published_on,
-                        'created_on' => $content->created_on
-                    ]);
-            } else {
-                $contentId = $this->musoraDB()->from('railcontent_content')
-                    ->insertGetId(
-                    [
-                        'slug' => ContentHelper::slugify($row[2]),
-                        'brand' => $brand,
-                        'type' => 'song',
-                        'status' => 'published',
-                        'album' => $row[3],
-                        'language' => 'en-US',
-                        'instrumentless' => boolval($row[13]),
-                        'published_on' => Carbon::now()->toDateTimeString(),
-                        'created_on' => Carbon::now()->toDateTimeString(),
-                    ]
-                );
-
-                $content = $this->musoraDB()->from('railcontent_content')->where('id', $contentId)
-                    ->first();
-            }
-
-            // fields
             $this->updateOrInsertAndGetFirst(
                 'railcontent_content_fields',
                 [
@@ -220,6 +205,10 @@ class CreateSongsDecember2022 extends Command
                 $pdfUrlPrefix = 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/pdfs/pianote/';
                 $pdfResourceName1 = 'PDF Sheet Music';
                 $pdfResourceName2 = 'PDF Sheet Music';
+            } elseif ($brand == 'drumeo') {
+                $pdfUrlPrefix = 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/pdfs/drumeo/';
+                $pdfResourceName1 = 'PDF Sheet Music';
+                $pdfResourceName2 = 'PDF Sheet Music';
             }
 
             $pdfFileName = $row[8];
@@ -285,10 +274,6 @@ class CreateSongsDecember2022 extends Command
             // album art thumbnail
             $albumArtUrlPrefix = 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/';
             $albumArtFileName = $row[7];
-
-            //            $this->info('-------------------------------');
-            //            $this->info($row[0] . $row[1] . $row[2]);
-            //            $this->info($albumArtFileName);
 
             if (!empty($albumArtFileName)) {
                 $this->updateOrInsertAndGetFirst(
@@ -419,6 +404,7 @@ class CreateSongsDecember2022 extends Command
         $this->musoraDB()->from($table)->updateOrInsert($attributes, $values);
         return $this->getFirst($table, $attributes);
     }
+
 
     /**
      * @param array $attributes

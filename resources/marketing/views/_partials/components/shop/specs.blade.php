@@ -6,6 +6,7 @@
         "skill" => "fa-user",
         "sizing" => "fa-expand-arrows-alt",
         "shirt" => "fa-tshirt",
+        "sweater" => "fa-tshirt",
         "hoodie" => "fa-tshirt",
         "fabric" => "fa-blanket",
         "color" => "fa-palette",
@@ -30,7 +31,9 @@
         "sweatshirt" => "fa-tshirt",
         'format' => 'fa-file-pdf',
         'redeem' => 'fa-check',
-        'membership' => 'fa-calendar'
+        'membership' => 'fa-calendar',
+        'accessory' => 'fa-suitcase',
+        'hat' => 'fa-hat-cowboy',
     ];
 ?>
 

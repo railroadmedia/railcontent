@@ -8,6 +8,43 @@ use App\Http\Controllers\BaseController;
 
 class ProductPagesController extends BaseController
 {
+
+
+    public function shopAlt(Request $request)
+    {
+        $products = Product::where([['visible', 1], ['product_type_id', '!=', 6], ['is_seasonal', 1]])->orderBy('display_order')->get();
+
+        $lessons = $products->filter(function($value, $key){
+            return $value->productType->name === 'Lessons';
+        });
+
+        $accessories = $products->filter(function($value, $key){
+            return $value->productType->name === 'Accessories';
+        });
+
+        $hats = $products->filter(function($value, $key){
+            return $value->productType->name === 'Hats';
+        });
+
+        $shirts = $products->filter(function($value, $key){
+            return $value->productType->name === 'Shirts';
+        });
+
+        $hoodies = $products->filter(function($value, $key){
+            return $value->productType->name === 'Hoodies';
+        });
+
+        return view('musora.shop.shop', [
+            'lessons' => $lessons,
+            'accessories' => $accessories,
+            'hats' => $hats,
+            'shirts' => $shirts,
+            'hoodies' => $hoodies,
+            'theme' => 'drumeo',
+            'category' => $request->category
+        ]);
+    }
+
     public function products(Request $request)
     {
         $brand = $request->brand;
