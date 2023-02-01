@@ -3,6 +3,9 @@
 namespace App\Providers;
 
 use App\Maps\ProductAccessMap;
+use App\Models\Brand;
+use App\Models\Carousel;
+use Carbon\Carbon;
 use App\Services\User\UserAccessService;
 use Railroad\MusoraApi\Contracts\ProductProviderInterface;
 use Railroad\Railcontent\Services\ContentService;
@@ -44,5 +47,22 @@ class MusoraApiProductProvider implements ProductProviderInterface
     {
         return [];
         // TODO: Implement getMembershipProductIds() method.
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public function carousel()
+    {
+        $brandId =
+            Brand::query()
+                ->where('name', ucfirst(config('railcontent.brand')))
+                ->first()->id;
+
+        return Carousel::query()
+            ->where('brand_id', $brandId)
+            ->orderBy('display_order')
+            ->get()
+            ->toArray();
     }
 }

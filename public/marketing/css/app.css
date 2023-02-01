@@ -1156,6 +1156,7 @@ Ensure the default browser behavior of the `hidden` attribute.
   transition-duration: 150ms;
   transition-property: opacity;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
   white-space: normal;
@@ -1261,6 +1262,7 @@ Ensure the default browser behavior of the `hidden` attribute.
   position: relative !important;
 }
 .sticky {
+  position: -webkit-sticky !important;
   position: sticky !important;
 }
 .inset-0 {
@@ -1611,6 +1613,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-top: 0px !important;
   margin-bottom: 0px !important;
 }
+.mx-3 {
+  margin-left: 0.75rem !important;
+  margin-right: 0.75rem !important;
+}
 .my-20 {
   margin-top: 5rem !important;
   margin-bottom: 5rem !important;
@@ -1634,10 +1640,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .my-10 {
   margin-top: 2.5rem !important;
   margin-bottom: 2.5rem !important;
-}
-.mx-3 {
-  margin-left: 0.75rem !important;
-  margin-right: 0.75rem !important;
 }
 .mx-5 {
   margin-left: 1.25rem !important;
@@ -2577,14 +2579,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 .gap-4 {
   gap: 1rem !important;
 }
+.gap-2 {
+  gap: 0.5rem !important;
+}
 .gap-6 {
   gap: 1.5rem !important;
 }
 .gap-5 {
   gap: 1.25rem !important;
-}
-.gap-2 {
-  gap: 0.5rem !important;
 }
 .gap-14 {
   gap: 3.5rem !important;
@@ -2832,6 +2834,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .border-gray-400 {
   --tw-border-opacity: 1 !important;
   border-color: rgb(156 163 175 / var(--tw-border-opacity)) !important;
+}
+.border-black {
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(0 0 0 / var(--tw-border-opacity)) !important;
 }
 .border-pianote {
   --tw-border-opacity: 1 !important;
@@ -4772,6 +4778,7 @@ img {
     width: 75% !important;
   }
   .sm\:w-min {
+    width: -webkit-min-content !important;
     width: -moz-min-content !important;
     width: min-content !important;
   }
@@ -5920,6 +5927,9 @@ img {
   .md\:justify-start {
     justify-content: flex-start !important;
   }
+  .md\:justify-between {
+    justify-content: space-between !important;
+  }
   .md\:gap-14 {
     gap: 3.5rem !important;
   }
@@ -6128,6 +6138,10 @@ img {
   .md\:px-1 {
     padding-left: 0.25rem !important;
     padding-right: 0.25rem !important;
+  }
+  .md\:px-20 {
+    padding-left: 5rem !important;
+    padding-right: 5rem !important;
   }
   .md\:py-36 {
     padding-top: 9rem !important;
@@ -7200,6 +7214,10 @@ img {
     padding-left: 2.5rem !important;
     padding-right: 2.5rem !important;
   }
+  .lg\:px-2 {
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+  }
   .lg\:py-32 {
     padding-top: 8rem !important;
     padding-bottom: 8rem !important;
@@ -7231,10 +7249,6 @@ img {
   .lg\:px-16 {
     padding-left: 4rem !important;
     padding-right: 4rem !important;
-  }
-  .lg\:px-2 {
-    padding-left: 0.5rem !important;
-    padding-right: 0.5rem !important;
   }
   .lg\:py-44 {
     padding-top: 11rem !important;
