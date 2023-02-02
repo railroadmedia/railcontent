@@ -45,7 +45,7 @@ class Clothing extends Resource
 
     public function fields(NovaRequest $request)
     {
-        $types = ProductType::whereIn('name', ['Hats', 'Shirts', 'Hoodies'])->get();
+        $types = ProductType::whereIn('name', ['Hats', 'Shirts', 'Hoodies', 'Sweaters'])->get();
         $uuid  = Str::uuid();
 
         return [
@@ -54,7 +54,8 @@ class Clothing extends Resource
             Select::make('Product Type', 'product_type_id')->options([
                 $types->where('name', 'Hats')->first()->id => 'Hats',
                 $types->where('name', 'Shirts')->first()->id => 'Shirts',
-                $types->where('name', 'Hoodies')->first()->id => 'Hoodies'
+                $types->where('name', 'Hoodies')->first()->id => 'Hoodies',
+                $types->where('name', 'Sweaters')->first()->id => 'Sweaters'
             ])->displayUsingLabels()->sortable(),
             Hidden::make('Uuid')->withMeta(["value" => $uuid]),
             Text::make('Name')->required()->sortable(),
@@ -178,20 +179,10 @@ class Clothing extends Resource
                 ->disableDownload()
                 ->nullable()
                 ->storeAs(function (Request $request){
-                    $brandId = $request->brand;
-                    $brand = '';
-
-                    if($brandId === "1") {
-                        $brand = 'Drumeo';
-                    }
-                    elseif($brandId === "2"){
-                        $brand = 'Pianote';
-                    }
-                    elseif($brandId === "3"){
-                        $brand = 'Guitareo';
-                    }
-                    elseif($brandId === "4"){
-                        $brand = 'Singeo';
+                    if(!empty($request->brand)){
+                        $brand = Brand::query()->where('id', $request->brand)->first()->name;
+                    }else{
+                        abort(500, 'Please select a brand');
                     }
 
                     return '/'.$brand.'/Bundle-images/'.$request->uuid.'-'.$request->file('bundle_img')->getClientOriginalName();
