@@ -48,6 +48,9 @@ class UserPlaylistsController extends BaseController
             brand()
         );
 
+        //TODO: connect with RC method
+        $likedPlaylists = [];
+
         $currentUser = [
             "avatar" => user()->profile_picture_url,
             "xp" => user()->totalXp(),
@@ -62,6 +65,7 @@ class UserPlaylistsController extends BaseController
         return view('account.playlists', [
             "listLessons" => $listLessons,
             "playlists" => $lessons,
+            "likedPlaylists" => $likedPlaylists,
             "allowedTypes" => [],
             "resetProgress" => false,
             "initialPage" => $initialPage,

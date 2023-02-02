@@ -176,16 +176,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.258.0",
+            "version": "3.258.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "96ed88ca45e54f74a158002411966a92891e8ead"
+                "reference": "7d7c4f89d2d0bd77c36cb8f3c8cd20b5aa8c0e6d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/96ed88ca45e54f74a158002411966a92891e8ead",
-                "reference": "96ed88ca45e54f74a158002411966a92891e8ead",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/7d7c4f89d2d0bd77c36cb8f3c8cd20b5aa8c0e6d",
+                "reference": "7d7c4f89d2d0bd77c36cb8f3c8cd20b5aa8c0e6d",
                 "shasum": ""
             },
             "require": {
@@ -264,9 +264,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.258.0"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.258.1"
             },
-            "time": "2023-01-31T19:33:16+00:00"
+            "time": "2023-02-01T19:22:26+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -3558,30 +3558,30 @@
         },
         {
             "name": "iksaku/laravel-mass-update",
-            "version": "1.0.4",
+            "version": "1.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/iksaku/laravel-mass-update.git",
-                "reference": "5a8bda6739b83903070f5ee9643fc88de370b886"
+                "reference": "b67922a1975a41742416902fa8ecd146059166fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/iksaku/laravel-mass-update/zipball/5a8bda6739b83903070f5ee9643fc88de370b886",
-                "reference": "5a8bda6739b83903070f5ee9643fc88de370b886",
+                "url": "https://api.github.com/repos/iksaku/laravel-mass-update/zipball/b67922a1975a41742416902fa8ecd146059166fa",
+                "reference": "b67922a1975a41742416902fa8ecd146059166fa",
                 "shasum": ""
             },
             "require": {
-                "illuminate/database": "^8.71|^9.0",
-                "illuminate/support": "^8.71|^9.0",
+                "illuminate/database": "^8.71|^9.0|^10.0",
+                "illuminate/support": "^8.71|^9.0|^10.0",
                 "php": "^8.0"
             },
             "require-dev": {
                 "brianium/paratest": "^6.4",
-                "orchestra/testbench": "^6.15|^7.0",
+                "orchestra/testbench": "^6.15|^7.0|^8.0",
                 "pestphp/pest": "^1.19",
-                "pestphp/pest-plugin-parallel": "^0.3.1",
+                "pestphp/pest-plugin-parallel": "^0.3.1|^1.2",
                 "phpunit/phpunit": "^9.5",
-                "vimeo/psalm": "^4.18"
+                "vimeo/psalm": "^4.18|^5.6"
             },
             "type": "library",
             "autoload": {
@@ -3609,9 +3609,9 @@
             ],
             "support": {
                 "issues": "https://github.com/iksaku/laravel-mass-update/issues",
-                "source": "https://github.com/iksaku/laravel-mass-update/tree/1.0.4"
+                "source": "https://github.com/iksaku/laravel-mass-update/tree/1.0.5"
             },
-            "time": "2022-01-22T01:05:11+00:00"
+            "time": "2023-02-02T14:46:52+00:00"
         },
         {
             "name": "inertiajs/inertia-laravel",
@@ -6272,29 +6272,30 @@
         },
         {
             "name": "nette/utils",
-            "version": "v3.2.9",
+            "version": "v4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/utils.git",
-                "reference": "c91bac3470c34b2ecd5400f6e6fdf0b64a836a5c"
+                "reference": "cacdbf5a91a657ede665c541eda28941d4b09c1e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/utils/zipball/c91bac3470c34b2ecd5400f6e6fdf0b64a836a5c",
-                "reference": "c91bac3470c34b2ecd5400f6e6fdf0b64a836a5c",
+                "url": "https://api.github.com/repos/nette/utils/zipball/cacdbf5a91a657ede665c541eda28941d4b09c1e",
+                "reference": "cacdbf5a91a657ede665c541eda28941d4b09c1e",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.2 <8.3"
+                "php": ">=8.0 <8.3"
             },
             "conflict": {
-                "nette/di": "<3.0.6"
+                "nette/finder": "<3",
+                "nette/schema": "<1.2.2"
             },
             "require-dev": {
                 "jetbrains/phpstorm-attributes": "dev-master",
-                "nette/tester": "~2.0",
+                "nette/tester": "^2.4",
                 "phpstan/phpstan": "^1.0",
-                "tracy/tracy": "^2.3"
+                "tracy/tracy": "^2.9"
             },
             "suggest": {
                 "ext-gd": "to use Image",
@@ -6308,7 +6309,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.2-dev"
+                    "dev-master": "4.0-dev"
                 }
             },
             "autoload": {
@@ -6352,9 +6353,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nette/utils/issues",
-                "source": "https://github.com/nette/utils/tree/v3.2.9"
+                "source": "https://github.com/nette/utils/tree/v4.0.0"
             },
-            "time": "2023-01-18T03:26:20+00:00"
+            "time": "2023-02-02T10:41:53+00:00"
         },
         {
             "name": "nikic/php-parser",
@@ -8199,12 +8200,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "47a8b707adec17945f732ca929b7c9f28d3f10c2"
+                "reference": "217fefad84ea33e8df24e7e3b134fd36f7ecde4c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/47a8b707adec17945f732ca929b7c9f28d3f10c2",
-                "reference": "47a8b707adec17945f732ca929b7c9f28d3f10c2",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/217fefad84ea33e8df24e7e3b134fd36f7ecde4c",
+                "reference": "217fefad84ea33e8df24e7e3b134fd36f7ecde4c",
                 "shasum": ""
             },
             "require": {
@@ -8236,7 +8237,7 @@
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
                 "source": "https://github.com/railroadmedia/musora-api/tree/v2.0-playlists"
             },
-            "time": "2023-01-27T13:27:40+00:00"
+            "time": "2023-02-02T15:51:49+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -8433,12 +8434,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "b9fc211e948a8a3caeb838c160e7d22d3e2803e9"
+                "reference": "706e680988c6bd510a6643b6b85139345ba915cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/b9fc211e948a8a3caeb838c160e7d22d3e2803e9",
-                "reference": "b9fc211e948a8a3caeb838c160e7d22d3e2803e9",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/706e680988c6bd510a6643b6b85139345ba915cb",
+                "reference": "706e680988c6bd510a6643b6b85139345ba915cb",
                 "shasum": ""
             },
             "require": {
@@ -8494,7 +8495,7 @@
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
                 "source": "https://github.com/railroadmedia/railcontent/tree/2.0-playlists"
             },
-            "time": "2023-02-01T14:17:41+00:00"
+            "time": "2023-02-02T16:15:13+00:00"
         },
         {
             "name": "railroad/railforums",

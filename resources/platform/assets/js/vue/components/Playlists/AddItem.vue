@@ -2,9 +2,12 @@
 import { ref } from 'vue';
 import Toggle from '../Toggle/Toggle.vue'
 import Table from '../Table/Table.vue'
-import { PlusCircleIcon } from '@heroicons/vue/outline';
+import { PlusCircleIcon, PlusIcon } from '@heroicons/vue/outline';
 const props = defineProps({
-
+    brand: {
+        type: String,
+        default: 'drumeo'
+    }
 });
 
 
@@ -28,7 +31,7 @@ const handleActionClick = (payload) => {
         <div class="tw-flex tw-w-full">
             <fieldset class="tw-flex tw-flex-row tw-items-center tw-w-full">
                 <p class="tw-text-left tw-text-[14px] tw-pr-[16px]">Your selected videos contain 7 additional assignment items. Would you like to also import them into your playlist?</p>
-                <Toggle @onToggle="handleOnToggle" :value="toggleValue" />
+                <Toggle @onToggle="handleOnToggle" />
             </fieldset>
         </div>
         <Table @onActionClick="handleActionClick" classOverride="tw-mt-[24px]">
@@ -36,5 +39,15 @@ const handleActionClick = (payload) => {
                 <PlusCircleIcon class="tw-w-[23px] tw-h-[23px] tw-text-[#7E9AB1]"  />
             </template>
         </Table>
+        <div class="tw-w-full tw-flex tw-justify-between tw-pt-[25px]">
+            <button class="tw-btn-secondary tw-uppercase tw-text-[#9EC0DC] tw-min-w-[167px] tw-h-[35px]">
+                <PlusIcon class="tw-w-[12px] tw-h-[12px]" />
+                <span class="tw-pl-[6px]">CREATE NEW LIST</span>
+            </button>
+            <div class="tw-flex">
+                <button class="tw-btn-primary tw-uppercase tw-text-white tw-h-[35px]">CANCEL</button>
+                <button :class="`tw-btn-primary tw-uppercase tw-text-white tw-bg-${brand} tw-h-[35px]`">CONFIRM</button>
+            </div>
+        </div>
     </div>
 </template>
