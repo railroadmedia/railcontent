@@ -40,7 +40,7 @@ class Clothing extends Resource
     public static function indexQuery(NovaRequest $request, $query)
     {
         return $query->join('product_types', 'products.product_type_id', '=', 'product_types.id')
-            ->whereIn('product_types.name', ['Hats', 'Shirts', 'Hoodies'])->select('products.*');
+            ->whereIn('product_types.name', ['Hats', 'Shirts', 'Hoodies', 'Sweaters'])->select('products.*');
     }
 
     public function fields(NovaRequest $request)
@@ -124,10 +124,11 @@ class Clothing extends Resource
                     ['brand', 'product_type_id', 'is_seasonal'],
                     function (Text $field, NovaRequest $request, FormData $formData) {
                         if($formData->brand === '1' || $formData->brand === '2'){
-                            $display_num = Product::where([['brand_id', $formData->brand],['product_type_id', $formData->product_type_id], ['is_seasonal', $formData->is_seasonal]])->orderBy('display_order', 'DESC')->first();
+                            $display_num = Product::where([['brand_id', $formData->brand],['product_type_id', $formData->product_type_id], ['is_seasonal', ['is_seasonal', !empty($formData->is_seasonal) ? 1 : 0]]])->orderBy('display_order', 'DESC')->first();
+                            abort(500, $display_num);
                         }
                         else {
-                            $display_num = Product::where([['brand_id', $formData->brand], ['is_seasonal', $formData->is_seasonal]])->orderBy('display_order', 'DESC')->first();
+                            $display_num = Product::where([['brand_id', $formData->brand], ['is_seasonal', ['is_seasonal', !empty($formData->is_seasonal) ? 1 : 0]]])->orderBy('display_order', 'DESC')->first();
                         }
 
                         if(!is_null($display_num)){
