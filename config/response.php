@@ -9,6 +9,7 @@ return [
             'difficulty_string',
             'type',
             'instrument',
+            'instrumentless',
             'published_on',
             'status',
             'fields.title',
