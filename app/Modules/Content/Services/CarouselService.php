@@ -17,7 +17,7 @@ class CarouselService
         $this->userProductService = $userProductService;
     }
 
-    public function getCarouselSlides(): Collection
+    public function getCarouselSlides()
     {
         $brandId = Brand::query()
             ->where('name', brand())
@@ -43,19 +43,25 @@ class CarouselService
             ->orderBy('display_order')
             ->get();
 
-        $carousel = $this->filterByOwnedProducts($carousel);
-
-        $carousel->each(function (Carousel $slide, int $key) {
-            $slide->display_order = $key;
-        });
+        //$carousel = $this->filterCarousel($carousel);
+        //$carousel = collect($carousel->values());
         return $carousel;
     }
 
-    private function filterByOwnedProducts(Collection $carousel): Collection
+    private function filterCarousel(Collection $carousel)
     {
-        return $carousel->reject(function (Carousel $slide) {
-            return $slide->is_featured && $slide->product_id
-                && $this->userProductService->hasProductNotCached(user()->id, $slide->product_id);
-        });
+        $data = [];
+        foreach ($carousel as $slide) {
+            if (!$this->userHasFeaturedProduct($slide)) {
+                $data[] = $slide;
+            }
+        }
+        return $data;
+    }
+
+    private function userHasFeaturedProduct(Carousel $slide)
+    {
+        return $slide->is_featured && $slide->product_id
+            && $this->userProductService->hasProductNotCached(user()->id, $slide->product_id);
     }
 }
