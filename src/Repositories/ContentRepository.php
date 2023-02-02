@@ -2356,9 +2356,9 @@ class ContentRepository extends RepositoryBase
                 ->toArray();
 
             foreach ($filterOptionsArray[$filterOptionName] as $filterOptionIndexToClean => $filterOptionValueToClean) {
-                $filterOptionsArray[$filterOptionName][$filterOptionIndexToClean] = ucwords(
+                $filterOptionsArray[$filterOptionName][$filterOptionIndexToClean] = trim(ucwords(
                     $filterOptionValueToClean
-                );
+                ));
             }
 
             $filterOptionsArray[$filterOptionName] = array_unique($filterOptionsArray[$filterOptionName]);
