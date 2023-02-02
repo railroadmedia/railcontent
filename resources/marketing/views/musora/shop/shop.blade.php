@@ -575,7 +575,7 @@
             });
 
             //customize section pack picker
-            var originalLink = '/ecommerce/add-to-cart?go-back-to-shop=true';
+            var originalLink = '/ecommerce/add-to-cart';
             let understandbutton = $('.understand-button');
 
             $('select').prop('selectedIndex', 0);
@@ -597,12 +597,12 @@
                 console.log($(this).attr('x-on:click'))
                 if($(this).attr('x-on:click')){
                     console.log($(this).attr('href-value'))
-                    understandbutton.attr('href', $(this).attr('href-value'));
+                    understandbutton.attr('href', $(this).attr('href-value') + '&locked=true');
                 }
             })
 
             $(".add-to-cart-button").click(function(e){
-                understandbutton.attr('href', originalLink + $(this).attr('value'));
+                understandbutton.attr('href', originalLink + $(this).attr('value') + '&locked=true');
             })
 
             $(".selected-pack").on('click', function (ev) {
