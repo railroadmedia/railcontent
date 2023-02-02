@@ -40,7 +40,7 @@ class Clothing extends Resource
     public static function indexQuery(NovaRequest $request, $query)
     {
         return $query->join('product_types', 'products.product_type_id', '=', 'product_types.id')
-            ->whereIn('product_types.name', ['Hats', 'Shirts', 'Hoodies'])->select('products.*');
+            ->whereIn('product_types.name', ['Hats', 'Shirts', 'Hoodies', 'Sweaters'])->select('products.*');
     }
 
     public function fields(NovaRequest $request)
