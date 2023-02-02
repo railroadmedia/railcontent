@@ -472,4 +472,39 @@ class UserPlaylistsService
     {
         return $this->userPlaylistContentRepository->getById($itemPlaylistId);
     }
+
+    /**
+     * @param $playlistId
+     * @param $brand
+     * @return array|mixed[]
+     */
+    public function likePlaylist($playlistId, $brand)
+    {
+        $stored =
+            $this->playlistLikeRepository->query()
+                ->updateOrInsert([
+                                     'user_id' => auth()->id(),
+                                     'playlist_id' => $playlistId,
+                                     'brand' => $brand,
+                                 ], [
+                                     'created_at' => Carbon::now()
+                                         ->toDateTimeString(),
+                                 ]);
+
+        return $this->pinnedPlaylistsRepository->getMyPinnedPlaylists();
+    }
+
+    /**
+     * @param $playlistId
+     * @return int
+     */
+    public function deletePlaylistLike($playlistId)
+    {
+        return $this->playlistLikeRepository->query()
+            ->where([
+                        'playlist_id' => $playlistId,
+                        'user_id' => auth()->id(),
+                    ])
+            ->delete();
+    }
 }

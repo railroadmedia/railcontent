@@ -246,7 +246,10 @@ class MyListJsonController extends Controller
                                                                 ->toDateTimeString(),
                                                         ]);
 
-        return $playlist;
+        return reply()->json([$playlist], [
+            'transformer' => DataTransformer::class,
+            'code' => 201,
+        ]);
     }
 
     /**
@@ -301,7 +304,10 @@ class MyListJsonController extends Controller
             );
         }
 
-        return $playlist;
+        return reply()->json([$playlist], [
+            'transformer' => DataTransformer::class,
+            'code' => 201,
+        ]);
     }
 
     /**
@@ -459,9 +465,23 @@ the pin icon on or off.',
      */
     public function likePlaylist(Request $request)
     {
-        $this->userPlaylistsService->pinPlaylist($request->get('playlist_id'));
+        $like = $this->userPlaylistsService->likePlaylist( $request->get('playlist_id'),
+                                                   $request->get('brand', config('railcontent.brand')));
 
-        return response()->json(['success']);
+        return reply()->json([[$like > 0]], [
+            'code' => $like ? 200 : 500,
+            'transformer' => DataTransformer::class,
+        ]);
+    }
+
+    public function deletePlaylistLike(Request $request)
+    {
+        $like = $this->userPlaylistsService->deletePlaylistLike($request->get('playlist_id'));
+
+        return reply()->json([[$like > 0]], [
+            'code' => $like ? 200 : 500,
+            'transformer' => DataTransformer::class,
+        ]);
     }
 
     /**
