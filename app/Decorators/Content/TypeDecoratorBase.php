@@ -52,7 +52,12 @@ abstract class TypeDecoratorBase extends ModeDecoratorBase
     {
         foreach ($originalContents as $originalContentIndex => $originalContent) {
             foreach ($decoratedContents as $decoratedContent) {
-                if ($decoratedContent['id'] == $originalContent['id']) {
+                if(isset($decoratedContent['user_playlist_item_id']) && isset($originalContent['user_playlist_item_id'])){
+                    if ($decoratedContent['user_playlist_item_id'] == $originalContent['user_playlist_item_id']) {
+                        $originalContents[$originalContentIndex] = $decoratedContent;
+                    }
+                }
+                elseif ($decoratedContent['id'] == $originalContent['id']) {
                     $originalContents[$originalContentIndex] = $decoratedContent;
                 }
             }
