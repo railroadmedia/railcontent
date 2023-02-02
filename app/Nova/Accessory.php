@@ -131,19 +131,20 @@ class Accessory extends Resource
                 ->help('Display order should be 0 if set to invisible on shop page.')
                 ->required()
                 ->dependsOn(
-                    ['brand', 'is_seasonal'],
+                    [['brand', 'is_seasonal']],
                     function (Text $field, NovaRequest $request, FormData $formData) {
-
                         if($formData->brand === '1' || $formData->brand === '2'){
-                            $display_num = Product::where([['product_type_id', 2], ['brand_id', $formData->brand], ['is_seasonal', $formData->is_seasonal]])->orderBy('display_order', 'DESC')->first();
+                            $display_num = Product::where([['product_type_id', 2], ['brand_id', $formData->brand], ['is_seasonal', !empty($formData->is_seasonal) ? 1 : 0]])->orderBy('display_order', 'DESC')->first();
                         }
                         else {
-                            $display_num = Product::where([['brand_id', $formData->brand], ['is_seasonal', $formData->is_seasonal]])->orderBy('display_order', 'DESC')->first();
+                            $display_num = Product::where([['brand_id', $formData->brand], ['is_seasonal', !empty($formData->is_seasonal) ? 1 : 0]])->orderBy('display_order', 'DESC')->first();
                         }
 
                         if(!is_null($display_num)){
                             $display_num = $display_num->display_order;
                             $field->default($display_num+1);
+                        } else {
+                            $field->default(1);
                         }
                 }),
             Heading::make('Product page'),

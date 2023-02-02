@@ -152,6 +152,8 @@ class Clothing extends Resource
                         if(!is_null($display_num)){
                             $display_num = $display_num->display_order;
                             $field->default($display_num+1);
+                        } else {
+                            $field->default(1);
                         }
                 }),
             Heading::make('Product page'),
