@@ -79,7 +79,8 @@ class UserPlaylistsService
      */
     public function getUserPlaylist($userId, $playlistType, $brand = null, $limit, $page, $term = null)
     {
-        $playlists = $this->userPlaylistsRepository->getUserPlaylist($userId, $playlistType, $brand, $limit, $page, $term);
+        $playlists =
+            $this->userPlaylistsRepository->getUserPlaylist($userId, $playlistType, $brand, $limit, $page, $term);
 
         return Decorator::decorate($playlists, 'playlist');
     }
@@ -203,7 +204,7 @@ class UserPlaylistsService
             config('railcontent.singularContentTypes')
         );
 
-        if(in_array($content['type'], $singularContentTypes)){
+        if (in_array($content['type'], $singularContentTypes)) {
             $input = [
                 'content_id' => $contentId,
                 'user_playlist_id' => $userPlaylistId,
@@ -219,7 +220,7 @@ class UserPlaylistsService
         }
 
         $assignments = $this->contentService->countLessonsAndAssignments($contentId);
-        foreach ($assignments['lessons']??[] as $lesson) {
+        foreach ($assignments['lessons'] ?? [] as $lesson) {
             $input = [
                 'content_id' => $lesson['id'],
                 'user_playlist_id' => $userPlaylistId,
@@ -362,19 +363,17 @@ class UserPlaylistsService
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function changePlaylistContent(
-        $userPlaylistId,
-        $contentId,
+        $playlistItemId,
         $position = null,
         $extraData = [],
         $startSecond = null,
         $endSecond = null
     ) {
-        $playlistContent =
-            \Arr::first($this->userPlaylistContentRepository->getByPlaylistIdAndContentId($userPlaylistId, $contentId));
+        $playlistContent = $this->getPlaylistItemById($playlistItemId);
 
         $input = [
-            'content_id' => $contentId,
-            'user_playlist_id' => $userPlaylistId,
+            'content_id' => $playlistContent['content_id'],
+            'user_playlist_id' => $playlistContent['user_playlist_id'],
             'position' => $position,
             'extra_data' => $extraData,
             'start_second' => $startSecond,
@@ -384,11 +383,11 @@ class UserPlaylistsService
         ];
 
         $this->userPlaylistContentRepository->createOrUpdatePlaylistContentAndReposition(
-            $playlistContent['id'],
+            $playlistItemId,
             $input
         );
 
-        return $this->getUserPlaylistContents($userPlaylistId);
+        return $this->getUserPlaylistContents($playlistContent['user_playlist_id']);
     }
 
     /**
@@ -460,7 +459,17 @@ class UserPlaylistsService
      * @param $contentId
      * @return bool
      */
-    public function existsContentIdInPlaylist($playlistId, $contentId){
+    public function existsContentIdInPlaylist($playlistId, $contentId)
+    {
         return $this->userPlaylistContentRepository->getByPlaylistIdAndContentId($playlistId, $contentId);
+    }
+
+    /**
+     * @param $itemPlaylistId
+     * @return array
+     */
+    public function getPlaylistItemById($itemPlaylistId)
+    {
+        return $this->userPlaylistContentRepository->getById($itemPlaylistId);
     }
 }

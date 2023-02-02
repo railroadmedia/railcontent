@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Repositories;
 
 use Railroad\Railcontent\Transformers\ContentTransformer;
+use Railroad\Railcontent\Transformers\PlaylistItemTransformer;
 
 class UserPlaylistContentRepository extends RepositoryBase
 {
@@ -87,7 +88,7 @@ class UserPlaylistContentRepository extends RepositoryBase
 
         $extraData = $this->geExtraDataInOldStyle(['data', 'instructor', 'video'], $contentRows);
 
-        $parser = $this->setPresenter(ContentTransformer::class);
+        $parser = $this->setPresenter(PlaylistItemTransformer::class);
 
         $parser->presenter->addParam($extraData);
 

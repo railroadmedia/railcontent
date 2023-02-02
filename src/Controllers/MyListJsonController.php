@@ -491,16 +491,18 @@ the pin icon on or off.',
      */
     public function changePlaylistContent(Request $request)
     {
-        $this->userPlaylistsService->changePlaylistContent(
-            $request->get('playlist_id'),
-            $request->get('content_id'),
+        $playlistContent =
+            $this->userPlaylistsService->getPlaylistItemById($request->get('user_playlist_item_id'));
+
+        return $this->userPlaylistsService->changePlaylistContent(
+            $request->get('user_playlist_item_id'),
             $request->get('position'),
             $request->get('extra_data'),
             $request->get('start_second'),
             $request->get('end_second')
         );
 
-        return $this->getPlaylistLessons($request);
+        return $this->getPlaylistLessons($playlistContent['user_playlist_id']);
     }
 
     /**
