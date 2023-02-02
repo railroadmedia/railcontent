@@ -7,7 +7,6 @@ use App\Models\Brand;
 use App\Models\Carousel;
 use Carbon\Carbon;
 use App\Services\User\UserAccessService;
-use Carbon\Carbon;
 use Railroad\MusoraApi\Contracts\ProductProviderInterface;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\UserPermissionsService;
