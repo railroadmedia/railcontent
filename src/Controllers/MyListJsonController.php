@@ -5,6 +5,8 @@ namespace Railroad\Railcontent\Controllers;
 use Carbon\Carbon;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManager;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Requests\PlaylistCreateRequest;
@@ -39,6 +41,11 @@ class MyListJsonController extends Controller
     private $userPlaylistsService;
 
     /**
+     * @var ImageManager
+     */
+    private $imageManager;
+
+    /**
      * @param ContentService $contentService
      * @param ContentHierarchyService $contentHierarchyService
      * @param ContentRepository $contentRepository
@@ -48,12 +55,14 @@ class MyListJsonController extends Controller
         ContentService $contentService,
         ContentHierarchyService $contentHierarchyService,
         ContentRepository $contentRepository,
-        UserPlaylistsService $userPlaylistsService
+        UserPlaylistsService $userPlaylistsService,
+        ImageManager $imageManager
     ) {
         $this->contentHierarchyService = $contentHierarchyService;
         $this->contentService = $contentService;
         $this->contentRepository = $contentRepository;
         $this->userPlaylistsService = $userPlaylistsService;
+        $this->imageManager = $imageManager;
 
         $this->middleware(ConfigService::$controllerMiddleware);
     }
@@ -553,5 +562,27 @@ the pin icon on or off.',
             'code' => $deleted ? 200 : 500,
             'transformer' => DataTransformer::class,
         ]);
+    }
+
+    public function uploadPlaylistThumbnail(\Illuminate\Http\Request $request)
+    {
+        throw_if(!$request->file('file'), new \Railroad\Railcontent\Exceptions\NotFoundException('File not found.'));
+
+        $image = $this->imageManager->make($request->file('file'));
+
+        $image
+            ->interlace()
+            ->encode('jpg', 75)
+            ->save();
+
+        $target = 'playlists_thumbnails/' . pathinfo($request->get('target'))['filename'] . '-' . time() . '-' . auth()->id() . '.jpg';
+
+        $success = Storage::disk('musora_web_platform_s3')->put($target, $request->file('file')->getContent());
+
+        if ($success) {
+            return response()->json(['thumbnail_url' => config('filesystems.disks.musora_web_platform_s3.cloudfront_access_url').$target], 200);
+        }
+
+        return response()->json(['error' => 'Failed to upload playlist thumbnail.'], 400);
     }
 }
