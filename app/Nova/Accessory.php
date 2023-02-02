@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use App\Models\Product;
+use App\Models\Brand;
 use App\Nova\Flexible\Layouts\FeatureLayout;
 use App\Nova\Flexible\Layouts\ImageLayout;
 use App\Nova\Flexible\Layouts\SpectLayout;
@@ -63,20 +64,10 @@ class Accessory extends Resource
                 ->disableDownload()
                 ->deletable(false)
                 ->storeAs(function (Request $request){
-                    $brandId = $request->brand;
-                    $brand = '';
-
-                    if($brandId === "1") {
-                        $brand = 'Drumeo';
-                    }
-                    elseif($brandId === "2"){
-                        $brand = 'Pianote';
-                    }
-                    elseif($brandId === "3"){
-                        $brand = 'Guitareo';
-                    }
-                    elseif($brandId === "4"){
-                        $brand = 'Singeo';
+                    if(!empty($request->brand)){
+                        $brand = Brand::query()->where('id', $request->brand)->first()->name;
+                    }else{
+                        abort(500, 'Please select a brand');
                     }
 
                     return '/'.$brand.'/Meta-images/'.$request->uuid.'-'.$request->file('meta_img')->getClientOriginalName();
@@ -101,20 +92,10 @@ class Accessory extends Resource
                 ->deletable(false)
                 ->disableDownload()
                 ->storeAs(function (Request $request){
-                    $brandId = $request->brand;
-                    $brand = '';
-
-                    if($brandId === "1") {
-                        $brand = 'Drumeo';
-                    }
-                    elseif($brandId === "2"){
-                        $brand = 'Pianote';
-                    }
-                    elseif($brandId === "3"){
-                        $brand = 'Guitareo';
-                    }
-                    elseif($brandId === "4"){
-                        $brand = 'Singeo';
+                    if(!empty($request->brand)){
+                        $brand = Brand::query()->where('id', $request->brand)->first()->name;
+                    }else{
+                        abort(500, 'Please select a brand');
                     }
 
                     return '/'.$brand.'/Thumbnails/'.$request->uuid.'-'.$request->file('thumbnail')->getClientOriginalName();
@@ -131,19 +112,20 @@ class Accessory extends Resource
                 ->help('Display order should be 0 if set to invisible on shop page.')
                 ->required()
                 ->dependsOn(
-                    ['brand', 'is_seasonal'],
+                    [['brand', 'is_seasonal']],
                     function (Text $field, NovaRequest $request, FormData $formData) {
-
                         if($formData->brand === '1' || $formData->brand === '2'){
-                            $display_num = Product::where([['product_type_id', 2], ['brand_id', $formData->brand], ['is_seasonal', $formData->is_seasonal]])->orderBy('display_order', 'DESC')->first();
+                            $display_num = Product::where([['product_type_id', 2], ['brand_id', $formData->brand], ['is_seasonal', !empty($formData->is_seasonal) ? 1 : 0]])->orderBy('display_order', 'DESC')->first();
                         }
                         else {
-                            $display_num = Product::where([['brand_id', $formData->brand], ['is_seasonal', $formData->is_seasonal]])->orderBy('display_order', 'DESC')->first();
+                            $display_num = Product::where([['brand_id', $formData->brand], ['is_seasonal', !empty($formData->is_seasonal) ? 1 : 0]])->orderBy('display_order', 'DESC')->first();
                         }
 
                         if(!is_null($display_num)){
                             $display_num = $display_num->display_order;
                             $field->default($display_num+1);
+                        } else {
+                            $field->default(1);
                         }
                 }),
             Heading::make('Product page'),
@@ -170,20 +152,10 @@ class Accessory extends Resource
                 ->disableDownload()
                 ->nullable()
                 ->storeAs(function (Request $request){
-                    $brandId = $request->brand;
-                    $brand = '';
-
-                    if($brandId === "1") {
-                        $brand = 'Drumeo';
-                    }
-                    elseif($brandId === "2"){
-                        $brand = 'Pianote';
-                    }
-                    elseif($brandId === "3"){
-                        $brand = 'Guitareo';
-                    }
-                    elseif($brandId === "4"){
-                        $brand = 'Singeo';
+                    if(!empty($request->brand)){
+                        $brand = Brand::query()->where('id', $request->brand)->first()->name;
+                    }else{
+                        abort(500, 'Please select a brand');
                     }
 
                     return '/'.$brand.'/Bundle-images'.$request->uuid.'-'.$request->file('bundle_img')->getClientOriginalName();
