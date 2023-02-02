@@ -41,7 +41,8 @@ class Brand extends Filter
             'Drumeo' => 'Drumeo',
             'Pianote' => 'Pianote',
             'Guitareo' => 'Guitareo',
-            'Singeo' => 'Singeo'
+            'Singeo' => 'Singeo',
+            'Musora' => 'Musora',
         ];
     }
 }
