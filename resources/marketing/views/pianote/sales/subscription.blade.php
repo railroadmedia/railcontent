@@ -189,22 +189,22 @@
     @hasSection('promo-banner')
         @yield('promo-banner')
     @endif
-    @if(!empty($promoVersion))
-        @include('musora.sales.components.promo-section', [
-        'promoLogo' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs.svg',
-           'promoLogoM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs-m.png',
-        'desc' => 'One membership. All instruments. 1000s of songs.',
-           'text' => 'This is your year.<br><br>Experience the NEW Pianote membership in 2023 and make the best investment in yourself. You’ll get guided lessons from world-class piano teachers to help you reach any goal this year.<br><br>And best of all…<br><br>You’ll have unlimited access to our brand new song library, complete with 1000 note-for-note transcriptions from our partners at Hal Leonard. Play your favorite songs the way they were written, complete with professional backing tracks so you’ll feel like a star.<br><br>And it gets better.<br><br>Because your Pianote membership now comes fully-loaded with all instruments. You can learn to sing, play guitar, or even rock out on the drums. All for no extra cost.<br><br>Join today and you’ll also get a set of Pianote professional over-ear headphones. Valued at $189, they’re yours free. Start the year off right. Click below to begin.',
-           'img' => 'https://pianote.s3.amazonaws.com/sales/promos/january/jan-launch-collage.png',
-           'belowButton' => 'SAVE 17% + GET 10 BONUSES WORTH $905',
-       ])
-    @else
+{{--    @if(!empty($promoVersion))--}}
+{{--        @include('musora.sales.components.promo-section', [--}}
+{{--        'promoLogo' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs.svg',--}}
+{{--           'promoLogoM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs-m.png',--}}
+{{--        'desc' => 'One membership. All instruments. 1000s of songs.',--}}
+{{--           'text' => 'This is your year.<br><br>Experience the NEW Pianote membership in 2023 and make the best investment in yourself. You’ll get guided lessons from world-class piano teachers to help you reach any goal this year.<br><br>And best of all…<br><br>You’ll have unlimited access to our brand new song library, complete with 1000 note-for-note transcriptions from our partners at Hal Leonard. Play your favorite songs the way they were written, complete with professional backing tracks so you’ll feel like a star.<br><br>And it gets better.<br><br>Because your Pianote membership now comes fully-loaded with all instruments. You can learn to sing, play guitar, or even rock out on the drums. All for no extra cost.<br><br>Join today and you’ll also get a set of Pianote professional over-ear headphones. Valued at $189, they’re yours free. Start the year off right. Click below to begin.',--}}
+{{--           'img' => 'https://pianote.s3.amazonaws.com/sales/promos/january/jan-launch-collage.png',--}}
+{{--           'belowButton' => 'SAVE 17% + GET 10 BONUSES WORTH $905',--}}
+{{--       ])--}}
+{{--    @else--}}
         @include('musora.sales.components.learn-by-playing-section', [
             'header' => 'Learn the piano by<br class="inline sm:hidden"> <u>playing the piano</u>.',
             'desc' => 'It’s not rocket science.<br><br>If you don’t play your piano, you won’t get better. At Pianote, our mission is to get you playing more so you get better, faster (while having FUN!).<br><br>In short, you’ll learn piano <u>by playing piano</u>.<br><br>These are short, fun lessons from world-class teachers. But the real magic happens when you practice ALONG with your coaches.<br><br>You’ll play more, you’ll get better faster, and you’ll fall in love with your progress. Plus you’ll have access to a library of thousands of popular songs with sheet music and backing tracks.<br><br>Scroll down to watch the trailer, see more details, and start playing like you’ve always wanted!',
             'img' => 'https://pianote.s3.amazonaws.com/sales/2023/collage-evergreen.png',
         ])
-    @endif
+{{--    @endif--}}
 
     @php
         $gridItems = [
@@ -435,54 +435,8 @@
         'bannerDesc' => 'Powered by Musora, Pianote includes full access to our communities for drums, guitar, and voice.',
     ])
 
+{{--    @include('pianote.sales.headphones-section')--}}
 
-    @if(!empty($promoVersion))
-        <div id="headphones" class="anchor"></div>
-        <section class="py-12 md:py-20">
-            <div class="max-w-4xl mx-auto text-center px-4 lg:px-0">
-
-                <h2><strong>Hear your piano the way it<br class="hidden sm:inline"> was meant to sound.</strong></h2>
-                <div class="flex flex-wrap sm:flex-nowrap items-center justify-center text-left my-6 sm:my-8">
-                    <div class="block rounded-xl bg-cover bg-center w-full sm:w-1/2 pb-72 sm:pb-96 lg:py-48 mb-4 sm:mb-0" style="background-image:url(https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://pianote.s3.amazonaws.com/products/concert-headphones/feature-01.jpg);"></div>
-                    <p class="w-full sm:w-1/2 sm:pl-7">Introducing the NEW Pianote Concert Series over-ear headphones.
-                        <br><br>
-                        These beautifully designed hi-end headphones are designed by piano players for piano players. Lightweight with comfortable ear padding for extended playing sessions and unrivaled sound definition and bass response.
-                        <br><br>
-                        Your piano has never sounded so good.
-                        <br><br>
-                        Valued at $189, these headphones are FREE with your Pianote Membership.</p>
-                </div>
-                <h2><strong>What's in the box?</strong></h2>
-                <p class="leading-tight mt-2 sm:mt-3 mb-6">Scroll down to see everything that’s included.</p>
-                <img class="rounded-xl mb-2 cursor-pointer autoplay-video" src="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://pianote.s3.amazonaws.com/products/concert-headphones/montage-04.png" alt="montage 4"
-                    x-on:click="unbox = true;"
-                >
-                <div class="flex flex-wrap mb-2">
-                    <img class="w-full md:w-2/3 rounded-xl md:pr-1 mb-2" src="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://pianote.s3.amazonaws.com/products/concert-headphones/montage-01.jpg" alt="montage 1">
-                    <img class="w-1/2 md:w-1/3 rounded-xl md:pl-1 mb-2 pr-1 md:pr-0" src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://pianote.s3.amazonaws.com/products/concert-headphones/montage-05.jpg" alt="montage 5">
-                    <img class="w-1/2 md:w-1/3 rounded-xl md:pr-1 mb-2 md:mb-0 pl-1 md:pl-0" src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://pianote.s3.amazonaws.com/products/concert-headphones/montage-06.jpg" alt="montage 6">
-                    <img class="w-full md:w-2/3 rounded-xl md:pl-1" src="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://pianote.s3.amazonaws.com/products/concert-headphones/montage-02.jpg" alt="montage 2">
-                </div>
-                <div class="relative">
-                    <img class="rounded-xl" src="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://pianote.s3.amazonaws.com/products/concert-headphones/montage-03.png" alt="montage 3">
-                    <div class="hidden md:block">
-                        <div class="tool absolute cursor-pointer bg-white rounded-full w-7 h-7 flex items-center justify-center" style="top: 18%;left: 34%; box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);" tip="Padded headband for extra comfort">
-                            <span class="text-2xl">+</span>
-                        </div>
-                        <div class="tool absolute cursor-pointer bg-white rounded-full w-7 h-7 flex items-center justify-center" style="top: 24%;left: 68%; box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);" tip="3-meter coiled cable">
-                            <span class="text-2xl">+</span>
-                        </div>
-                        <div class="tool absolute cursor-pointer bg-white rounded-full w-7 h-7 flex items-center justify-center" style="top: 56%;left: 62%; box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);" tip="3-meter straight cable">
-                            <span class="text-2xl">+</span>
-                        </div>
-                        <div class="tool absolute cursor-pointer bg-white rounded-full w-7 h-7 flex items-center justify-center" style="top: 68%;left: 78%; box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);" tip="¼” Adapter">
-                            <span class="text-2xl">+</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    @endif
     @php
         $testimonials = [
             [
@@ -572,41 +526,11 @@
         @php
             $bonuses = [
                 [
-                    'image' => 'https://pianote.s3.amazonaws.com/sales/2023/concert-series-headphones.jpg',
-                    'title' => 'Pianote Headphones',
-                    'description' => 'Hi-end, lightweight over-ear headphones for beautiful private practice sessions.',
-                    'price' => 189,
-                    'shipping' => true
-                ],
-                [
-                    'image' => 'https://pianote.s3.amazonaws.com/sales/promos/october/power_of_chords_card.jpg',
-                    'title' => '',
-                    'description' => 'Play the music you love using the power of chords.',
-                    'price' => floatval($productPrices['the-power-of-chords']->price),
-                ],
-                [
-                'image' => 'https://pianote.s3.amazonaws.com/sales/promos/november/bonuses/TBGTCP.jpg',
-                'title' => '',
-                'description' => 'Pieces you can actually play, with lessons that are actually fun.',
-                'price' => floatval($productPrices['classical-piano']->price),
-                ],
-                [
-                'image' => 'https://pianote.s3.amazonaws.com/sales/promos/november/bonuses/improv-musical-freedom.jpg',
-                'title' => '',
-                'description' => 'Learn to improvise from one of the best piano players in the world, Jesús Molina',
-                'price' => floatval($productPrices['the-power-of-chords']->price),
-                ],
-                [
-                'image' => 'https://pianote.s3.amazonaws.com/sales/promos/november/bonuses/TBGTPBP.jpg',
-                'title' => '',
-                'description' => 'Start playing beautiful music from your very 1st lesson',
-                'price' => floatval($productPrices['play-beautiful-piano']->price),
-                ],
-                [
-                'image' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/piano-riffs-and-fills.jpg',
-                'title' => 'Piano Riffs<br> & Fills',
-                'description' => 'Learn the secrets and tips to play fills that sound complicated and advanced, but are simple to learn.',
-                'price' => floatval($productPrices['piano-riffs-and-fills']->price),
+                    'image' => 'https://pianote.s3.amazonaws.com/sales/2022/bonus-chords-scales.jpg',
+                    'title' => 'Chords & <br>Scales Book',
+                    'description' => 'Your encyclopedia of piano chords & scales.',
+                    'price' => floatval($productPrices['piano-chords-and-scales-guide']->price),
+                    'feature' => "Free Shipping",
                 ],
                 [
                 'image' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/piano-technique-made-easy.jpg',
@@ -615,16 +539,10 @@
                 'price' => floatval($productPrices['piano-technique-made-easy']->price),
                 ],
                 [
-                'image' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/de-stupefy-your-left-hand.jpg',
-                'title' => 'De-Stupefy Your<br> Left Hand',
-                'description' => 'Most piano players find their left-hand is weaker. Fix those weaknesses and “de-stupefy” that left hand.',
-                'price' => floatval($productPrices['destupefy-your-left-hand']->price),
-                ],
-                [
-                'image' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/worship-piano.jpg',
-                'title' => 'Worship<br> Piano',
-                'description' => 'Learn hundreds of worship songs and get the skills to start playing in a worship band.',
-                'price' => floatval($productPrices['worship-piano']->price),
+                'image' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/piano-riffs-and-fills.jpg',
+                'title' => 'Piano Riffs<br> & Fills',
+                'description' => 'Learn the secrets and tips to play fills that sound complicated and advanced, but are simple to learn.',
+                'price' => floatval($productPrices['piano-riffs-and-fills']->price),
                 ],
                 [
                     'image' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/faster-fingers.jpg',
@@ -638,9 +556,9 @@
         'topImage' => 'https://pianote.s3.amazonaws.com/sales/2023/pianote-annual-2w-card.png',
         'promoLogo' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs.svg',
        'promoLogoM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs-m.png',
-        'header' => 'Save 17% + get 10 bonuses<br class="inline sm:hidden"> worth $905',
-        'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[pianote-headphones]=1&products[the-power-of-chords]=1&products[classical-piano]=1&products[jesus-molina-improvisation-and-musical-freedom-pack]=1&products[play-beautiful-piano]=1&products[piano-riffs-and-fills]=1&products[piano-technique-made-easy]=1&products[destupefy-your-left-hand]=1&products[worship-piano]=1&products[faster-fingers]=1&redirect=/order&locked=true',
-        'subDescription' => '<strong>10 free bonuses.</strong> <br class="inline sm:hidden"><em>only available until january 31st.</em>',
+        'header' => 'Online piano lessons for all skill levels.',
+        'subDescription' => 'Save 17% + get 4 bonuses<br class="inline sm:hidden"> worth $357',
+        'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[piano-chords-and-scales-guide]=1&products[piano-technique-made-easy]=1&products[piano-riffs-and-fills]=1&products[faster-fingers]=1&redirect=/order&locked=true',
         'altButtonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-MONTH]=1&redirect=%2Forder',
         ])
     @else

@@ -12,12 +12,10 @@
                 </div>
             </div>
             <br>
-            <img class="hidden sm:inline-block h-7 lg:h-8 mt-5" alt="promo logo" src="{{ $promoLogo }}">
-            <img class="inline-block sm:hidden h-12 mt-4" alt="mobile promo logo" src="{{ $promoLogoM }}">
-            <h4 class="leading-tight my-2 uppercase">{!! $header !!}</h4>
+            <h3 class="leading-tight mt-4 sm:mt-5 mb-2"><strong>{!! $header !!}</strong></h3>
             <a class="join {{ $theme }} my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>
             <p class="leading-tight text-sm"><em>First year discount: <s class="opacity-40">${{ Prices::$plusSubscriptionAnnualFull }}</s> ${{ Prices::$plusSubscriptionAnnual }}.<br class="inline sm:hidden"> Cancel anytime. 90-day guarantee.</em></p>
-            <h3 class="leading-tight mt-8 mb-4 sm:my-8 uppercase">{!!  $subDescription  !!}</h3>
+            <h4 class="leading-tight mt-8 mb-4 sm:my-8 uppercase text-coaches"><strong>{!!  $subDescription  !!}</strong></h4>
             @if(!empty($countdown))
                 <div class="rounded-xl px-4 sm:px-6 py-2 inline-flex flex-wrap mx-auto mb-4 sm:mb-8 justify-center items-center" style="background-color:#181515;">
                     <p class="leading-tight m-0"><strong>
@@ -71,7 +69,7 @@
                         <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
                             <div
                                 x-ref="front"
-                                class="border-2 border-promo front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700"
+                                class="border-2 border-{{ $theme }} front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700"
                                 style="@if(!empty($bonus['special'])) overflow: visible;border-color: #cda880; @endif backface-visibility: hidden;">
                                 @if(!empty($bonus['badge']))
                                     <h6 class="absolute text-white top-0 left-0 w-full py-0.5 bg-{{ $theme }} rounded-t-xl font-bebas uppercase">{{ $bonus['badge'] }}</h6>
@@ -85,7 +83,7 @@
                             </div>
                             <div
                                 x-ref="back"
-                                class="back border-2 border-promo absolute z-40 overflow-hidden rounded-xl w-full h-full transition-transform duration-700 -rotate-y-180"
+                                class="back border-2 border-{{ $theme }} absolute z-40 overflow-hidden rounded-xl w-full h-full transition-transform duration-700 -rotate-y-180"
                                 style="backface-visibility: hidden;"
                             >
                                 <div class="w-full h-full mx-auto text-center text-white flex flex-wrap justify-center items-center content-center p-2 md:p-3" style="background:linear-gradient(to bottom, #01050f, #021225);">
@@ -97,7 +95,7 @@
 
                     <p class="w-full leading-normal mt-2">
                         {{--<strong class="font-black leading-tight inline-block mb-1">{!!  $bonus['title']  !!}</strong><br>--}}
-                        <span style="text-transform:uppercase; display:inline-block;"><s class="opacity-40">${{ $bonus['price'] }}</s> <strong class="text-promo">FREE</strong></span><br>
+                        <span style="text-transform:uppercase; display:inline-block;"><s class="opacity-40">${{ $bonus['price'] }}</s> <strong class="text-{{ $theme }}">FREE</strong></span><br>
                         <em>
                             @if(!empty($bonus['shipping']))
                                 Free Shipping
