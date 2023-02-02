@@ -146,7 +146,7 @@ class Clothing extends Resource
                             $display_num = Product::where([['brand_id', $formData->brand],['product_type_id', $formData->product_type_id], ['is_seasonal', $formData->is_seasonal]])->orderBy('display_order', 'DESC')->first();
                         }
                         else {
-                            $display_num = Product::where(['brand_id', $formData->brand], ['is_seasonal', $formData->is_seasonal])->orderBy('display_order', 'DESC')->first();
+                            $display_num = Product::where([['brand_id', $formData->brand], ['is_seasonal', $formData->is_seasonal]])->orderBy('display_order', 'DESC')->first();
                         }
 
                         if(!is_null($display_num)){
