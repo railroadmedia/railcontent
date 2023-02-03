@@ -245,7 +245,7 @@
                     @foreach($drumeo as $item){
                         @include('drumeo.drumshop._partials._drum-shop-card', [
                              "sku" => $item->sku,
-                             "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $item->slug ),
+                             "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $item->slug ),
                              "badgeText" => $item->badge_text,
                              "thumbnail" => $item->thumbnail,
                              "title" => $item->name,
@@ -275,7 +275,7 @@
                     @foreach($pianote as $item){
                         @include('drumeo.drumshop._partials._drum-shop-card', [
                              "sku" => $item->sku,
-                             "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $item->slug ),
+                             "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $item->slug ),
                              "badgeText" => $item->badge_text,
                              "thumbnail" => $item->thumbnail,
                              "title" => $item->name,
@@ -305,7 +305,7 @@
                     @foreach($guitareo as $item){
                         @include('drumeo.drumshop._partials._drum-shop-card', [
                              "sku" => $item->sku,
-                             "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $item->slug ),
+                             "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $item->slug ),
                              "badgeText" => $item->badge_text,
                              "thumbnail" => $item->thumbnail,
                              "title" => $item->name,
@@ -335,7 +335,7 @@
                     @foreach($singeo as $item){
                         @include('drumeo.drumshop._partials._drum-shop-card', [
                              "sku" => $item->sku,
-                             "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $item->slug ),
+                             "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $item->slug ),
                              "badgeText" => $item->badge_text,
                              "thumbnail" => $item->thumbnail,
                              "title" => $item->name,
@@ -365,7 +365,7 @@
                     @foreach($musora as $item){
                         @include('drumeo.drumshop._partials._drum-shop-card', [
                              "sku" => $item->sku,
-                             "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $item->slug ),
+                             "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $item->slug ),
                              "badgeText" => $item->badge_text,
                              "thumbnail" => $item->thumbnail,
                              "title" => $item->name,
@@ -396,7 +396,7 @@
                     @foreach($hoodies as $hoodie){
                         @include('drumeo.drumshop._partials._drum-shop-card', [
                              "sku" => $hoodie->sku,
-                             "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hoodie->slug ),
+                             "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hoodie->slug ),
                              "badgeText" => $hoodie->badge_text,
                              "thumbnail" => $hoodie->thumbnail,
                              "title" => $hoodie->name,
@@ -426,7 +426,7 @@
                     @foreach($shirts as $shirt){
                     @include('drumeo.drumshop._partials._drum-shop-card', [
                          "sku" => $shirt->sku,
-                         "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $shirt->slug ),
+                         "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $shirt->slug ),
                          "badgeText" => $shirt->badge_text,
                          "thumbnail" => $shirt->thumbnail,
                          "title" => $shirt->name,
@@ -456,7 +456,7 @@
                     @foreach($hats as $hat){
                     @include('drumeo.drumshop._partials._drum-shop-card', [
                          "sku" => $hat->sku,
-                         "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hat->slug ),
+                         "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hat->slug ),
                          "badgeText" => $hat->badge_text,
                          "thumbnail" => $hat->thumbnail,
                          "title" => $hat->name,
@@ -486,7 +486,7 @@
                     @foreach($accessories as $accessory){
                     @include('drumeo.drumshop._partials._drum-shop-card', [
                         "sku" => $accessory->sku,
-                        "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $accessory->slug ),
+                        "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $accessory->slug ),
                         "badgeText" => $accessory->badge_text,
                         "thumbnail" => $accessory->thumbnail,
                         "title" => $accessory->name,
