@@ -528,7 +528,7 @@
                     <div class="py-10 px-4 md:px-20">
                         <h4 class="font-bold mb-2">Just a heads up!</h4>
                         <p class="mb-4">
-                            I understand that these items are preorders<br class="hidden md:inline-block"> and will not ship until <b>[date]</b>.
+                            I understand that these items are preorders<br class="hidden md:inline-block"> and will not ship until <b>March 1st, 2023</b>.
                         </p>
                         <div class="flex gap-2">
                             <a class="flex-1 rounded-full border-2 border-black uppercase text-black py-2 font-bold uppercase text-sm md:text-base" @click="orderModal = false">Cancel</a>
