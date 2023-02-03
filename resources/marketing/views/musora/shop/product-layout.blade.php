@@ -155,6 +155,8 @@
             </div>
         </div>
     </div>
+
+    @parent
 @endsection
 
 @section('layout-footer')
