@@ -12,7 +12,7 @@ class ProductPagesController extends BaseController
 
     public function shopAlt(Request $request)
     {
-        $products = Product::where([['visible', 1], ['product_type_id', '!=', 6], ['is_seasonal', 1]])->orderBy('display_order')->get();
+        $products = Product::where([['visible', 1], ['product_type_id', '!=', 6], ['is_seasonal', 0]])->orderBy('display_order')->get();
 
         $lessons = $products->filter(function($value, $key){
             return $value->productType->name === 'Lessons';
@@ -40,7 +40,7 @@ class ProductPagesController extends BaseController
             'hats' => $hats,
             'shirts' => $shirts,
             'hoodies' => $hoodies,
-            'theme' => 'drumeo',
+            'theme' => 'musora',
             'category' => $request->category
         ]);
     }
