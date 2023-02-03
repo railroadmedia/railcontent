@@ -386,6 +386,7 @@
             {{--   HOODIES & SWEATERS    --}}
             <section class="grid-view category-section" data-category="hoodies">
                 <ul class="container mx-auto fixed-cards">
+                    <div id="hoodiessweaters"></div>
                     <li>
                         <h1 class="px-2 md:px-3">
                             <div class="heading-icon"><img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/hoodie.svg" style="filter: invert(0%) sepia(4%) saturate(0%) hue-rotate(309deg) brightness(93%) contrast(107%);"></div>
@@ -415,6 +416,7 @@
             {{--   SHIRTS     --}}
             <section class="grid-view category-section" data-category="shirts">
                 <ul class="container mx-auto fixed-cards">
+                    <div id="shirts"></div>
                     <li>
                         <h1 class="px-2 md:px-3">
                             <div class="heading-icon text-black"><i class="fas fa-tshirt"></i></div>
@@ -445,6 +447,7 @@
             {{--   HATS     --}}
             <section class="grid-view category-section" data-category="hats">
                 <ul class="container mx-auto fixed-cards">
+                    <div id="hats"></div>
                     <li>
                         <h1 class="px-2 md:px-3">
                             <div class="heading-icon"><img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/hat.svg" alt="hat icon" style="filter: invert(0%) sepia(4%) saturate(0%) hue-rotate(309deg) brightness(93%) contrast(107%);"></div>
@@ -476,6 +479,7 @@
             {{--   ACCESSORIES     --}}
             <section class="grid-view category-section" data-category="accessories">
                 <ul class="container mx-auto fixed-cards">
+                    <div id="accessories"></div>
                     <li>
                         <h1 class="px-2 md:px-3">
                             <div class="heading-icon text-black"><i class="fas fa-suitcase"></i></div>
