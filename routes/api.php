@@ -209,6 +209,7 @@ Route::group(
         Route::put('/unpin-playlist',MyListJsonController::class . '@unpinPlaylist')->name('api.unpin.playlist');
         Route::put('/like-playlist',MyListJsonController::class . '@likePlaylist')->name('api.like.playlist');
         Route::delete('/like-playlist',MyListJsonController::class . '@deletePlaylistLike')->name('api.delete.playlist.like');
+        Route::get('/liked-playlists', MyListJsonController::class . '@getLikedPlaylists')->name('user.liked.playlists');
         Route::get('/playlist-lessons', MyListJsonController::class . '@getPlaylistLessons')->name('api.playlist.lessons');
         Route::put('/change-playlist-content', MyListJsonController::class . '@changePlaylistContent')->name('api.change.playlist.item');
         Route::get('/lessons-and-assignments-count/{contentId}', ContentJsonController::class . '@countLessonsAndAssignments')->name('api.count.lessons.and.assignments');

@@ -170,11 +170,21 @@ class UserPlaylistsService
      * @param $brand
      * @return mixed|\Railroad\Railcontent\Support\Collection|null
      */
-    public function getPublicPlaylists($type = 'user-playlist', $brand)
+    public function getPublicPlaylists($type = 'user-playlist', $brand, $page = 1, $limit = null)
     {
-        $playlists = $this->userPlaylistsRepository->getPublicPlaylists($type, $brand);
+        $playlists = $this->userPlaylistsRepository->getPublicPlaylists($type, $brand, $page, $limit);
 
         return Decorator::decorate($playlists, 'playlist');
+    }
+
+    /**
+     * @param string $type
+     * @param $brand
+     * @return mixed|\Railroad\Railcontent\Support\Collection|null
+     */
+    public function countPublicPlaylists($type = 'user-playlist', $brand)
+    {
+        return $this->userPlaylistsRepository->countPublicPlaylists($type, $brand);
     }
 
     /**
@@ -195,14 +205,16 @@ class UserPlaylistsService
         $extraData = [],
         $startSecond = null,
         $endSecond = null,
-        $importAllAssignments = false
+        $importAllAssignments = false,
+        $importFullSoundsliceAssignment = false,
+        $importInstrumentlessSoundsliceAssignment = false
     ) {
         $content = $this->contentService->getById($contentId);
 
-        $singularContentTypes = array_merge(
+        $singularContentTypes = array_diff(array_merge(
             config('railcontent.showTypes')[config('railcontent.brand')] ?? [],
             config('railcontent.singularContentTypes')
-        );
+        ),['song']);
 
         if (in_array($content['type'], $singularContentTypes)) {
             $input = [
@@ -220,6 +232,7 @@ class UserPlaylistsService
         }
 
         $assignments = $this->contentService->countLessonsAndAssignments($contentId);
+
         foreach ($assignments['lessons'] ?? [] as $lesson) {
             $input = [
                 'content_id' => $lesson['id'],
@@ -242,6 +255,38 @@ class UserPlaylistsService
                     'user_playlist_id' => $userPlaylistId,
                     'created_at' => Carbon::now()
                         ->toDateTimeString(),
+                ];
+                $this->userPlaylistContentRepository->createOrUpdatePlaylistContentAndReposition(
+                    null,
+                    $assignmentInput
+                );
+            }
+        }
+
+        if ($importFullSoundsliceAssignment) {
+            foreach ($assignments['soundslice_assignments'] ?? [] as $assignment) {
+                $assignmentInput = [
+                    'content_id' => $assignment['id'],
+                    'user_playlist_id' => $userPlaylistId,
+                    'created_at' => Carbon::now()
+                        ->toDateTimeString(),
+                    'extra_data' => json_encode(['is_full_track' => true])
+                ];
+                $this->userPlaylistContentRepository->createOrUpdatePlaylistContentAndReposition(
+                    null,
+                    $assignmentInput
+                );
+            }
+        }
+
+        if ($importInstrumentlessSoundsliceAssignment) {
+            foreach ($assignments['soundslice_assignments'] ?? [] as $assignment) {
+                $assignmentInput = [
+                    'content_id' => $assignment['id'],
+                    'user_playlist_id' => $userPlaylistId,
+                    'created_at' => Carbon::now()
+                        ->toDateTimeString(),
+                    'extra_data' => json_encode(['is_instrumentless_track' => true])
                 ];
                 $this->userPlaylistContentRepository->createOrUpdatePlaylistContentAndReposition(
                     null,
@@ -506,5 +551,28 @@ class UserPlaylistsService
                         'user_id' => auth()->id(),
                     ])
             ->delete();
+    }
+
+    /**
+     * @param null $brand
+     * @param null $limit
+     * @param int $page
+     * @return mixed|\Railroad\Railcontent\Support\Collection|null
+     */
+    public function getLikedPlaylists($brand = null, $limit = null, $page = 1)
+    {
+        $playlists =
+            $this->playlistLikeRepository->getLikedPlaylist(auth()->id(),$brand, $limit, $page);
+
+        return Decorator::decorate($playlists, 'playlist');
+    }
+
+    /**
+     * @param null $brand
+     * @return int
+     */
+    public function countLikedPlaylist($brand = null)
+    {
+        return $this->playlistLikeRepository->countLikedPlaylist(auth()->id(),$brand);
     }
 }

@@ -231,6 +231,12 @@ class PlaylistItemTransformer
                     $content[$itemId]['end_second'] = $row['end_second'] ?? null;
                     $content[$itemId]['user_playlist_item_id'] = $row['user_playlist_item_id'] ?? null;
                     $content[$itemId]['user_playlist_item_position'] = $row['user_playlist_item_position'] ?? null;
+                    $content[$itemId]['user_playlist_item_extra_data'] = $row['user_playlist_item_extra_data'] ?? null;
+                    if (!empty($row['user_playlist_item_extra_data'])) {
+                        foreach (json_decode($row['user_playlist_item_extra_data'], true) as $key => $value) {
+                            $content[$itemId][$key] = $value;
+                        }
+                    }
                 }
             }
             $results = array_values($content);

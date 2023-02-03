@@ -350,11 +350,21 @@ class MyListJsonController extends Controller
     /**
      * @return array|mixed[]
      */
-    public function getPublicPlaylists()
+    public function getPublicPlaylists(Request $request)
     {
-        $playlists = $this->userPlaylistsService->getPublicPlaylists('user-playlist', config('railcontent.brand'));
+        $page = $request->get('page', 1);
+        $limit = $request->get('limit', 10);
+        $brand = $request->get('brand', config('railcontent.brand'));
 
-        return $playlists;
+        $playlists = $this->userPlaylistsService->getPublicPlaylists('user-playlist', $brand, $page, $limit);
+
+        return (new ContentFilterResultsEntity([
+                                                   'results' => $playlists,
+                                                   'total_results' => $this->userPlaylistsService->countPublicPlaylists(
+                                                       'user-playlist',
+                                                       $brand
+                                                   ),
+                                               ]))->toJsonResponse();
     }
 
     /**
@@ -370,7 +380,9 @@ class MyListJsonController extends Controller
             $request->get('extra_data'),
             $request->get('start_second'),
             $request->get('end_second'),
-            $request->get('import_all_assignments', false)
+            $request->get('import_all_assignments', false),
+            $request->get('import_full_soundslice_assignment', false),
+            $request->get('import_instrumentless_soundslice_assignment', false)
         );
 
         return $this->getPlaylistLessons($request);
@@ -465,8 +477,10 @@ the pin icon on or off.',
      */
     public function likePlaylist(Request $request)
     {
-        $like = $this->userPlaylistsService->likePlaylist( $request->get('playlist_id'),
-                                                   $request->get('brand', config('railcontent.brand')));
+        $like = $this->userPlaylistsService->likePlaylist(
+            $request->get('playlist_id'),
+            $request->get('brand', config('railcontent.brand'))
+        );
 
         return reply()->json([[$like > 0]], [
             'code' => $like ? 200 : 500,
@@ -520,8 +534,7 @@ the pin icon on or off.',
      */
     public function changePlaylistContent(Request $request)
     {
-        $playlistContent =
-            $this->userPlaylistsService->getPlaylistItemById($request->get('user_playlist_item_id'));
+        $playlistContent = $this->userPlaylistsService->getPlaylistItemById($request->get('user_playlist_item_id'));
 
         return $this->userPlaylistsService->changePlaylistContent(
             $request->get('user_playlist_item_id'),
@@ -590,19 +603,50 @@ the pin icon on or off.',
 
         $image = $this->imageManager->make($request->file('file'));
 
-        $image
-            ->interlace()
+        $image->interlace()
             ->encode('jpg', 75)
             ->save();
 
-        $target = 'playlists_thumbnails/' . pathinfo($request->get('target'))['filename'] . '-' . time() . '-' . auth()->id() . '.jpg';
+        $target =
+            'playlists_thumbnails/'.pathinfo($request->get('target'))['filename'].'-'.time().'-'.auth()->id().'.jpg';
 
-        $success = Storage::disk('musora_web_platform_s3')->put($target, $request->file('file')->getContent());
+        $success =
+            Storage::disk('musora_web_platform_s3')
+                ->put(
+                    $target,
+                    $request->file('file')
+                        ->getContent()
+                );
 
         if ($success) {
-            return response()->json(['thumbnail_url' => config('filesystems.disks.musora_web_platform_s3.cloudfront_access_url').$target], 200);
+            return response()->json(
+                ['thumbnail_url' => config('filesystems.disks.musora_web_platform_s3.cloudfront_access_url').$target],
+                200
+            );
         }
 
         return response()->json(['error' => 'Failed to upload playlist thumbnail.'], 400);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getLikedPlaylists(Request $request)
+    {
+        $page = $request->get('page', 1);
+        $limit = $request->get('limit', 10);
+        $playlists = $this->userPlaylistsService->getLikedPlaylists(
+            $request->get('brand', config('railcontent.brand')),
+            $limit,
+            $page
+        );
+
+        return (new ContentFilterResultsEntity([
+                                                   'results' => $playlists,
+                                                   'total_results' => $this->userPlaylistsService->countLikedPlaylist(
+                                                       $request->get('brand', config('railcontent.brand'))
+                                                   ),
+                                               ]))->toJsonResponse();
     }
 }

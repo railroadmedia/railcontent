@@ -215,6 +215,7 @@ Route::group(
                 Route::put('/unpin-playlist',MyListJsonController::class . '@unpinPlaylist')->name('unpin.playlist');
                 Route::put('/like-playlist', MyListJsonController::class . '@likePlaylist')->name('like.playlist');
                 Route::delete('/like-playlist',MyListJsonController::class . '@deletePlaylistLike')->name('delete.playlist.like');
+                Route::get('/liked-playlists', MyListJsonController::class . '@getLikedPlaylists')->name('user.liked.playlists');
                 Route::get('/playlist-lessons', MyListJsonController::class . '@getPlaylistLessons')->name('playlist.items');
                 Route::put('/change-playlist-content', MyListJsonController::class . '@changePlaylistContent')->name('update.playlist.item');
                 Route::get('/lessons-and-assignments-count/{contentId}', \Railroad\Railcontent\Controllers\ContentJsonController::class . '@countLessonsAndAssignments')->name('content.assignments.count');

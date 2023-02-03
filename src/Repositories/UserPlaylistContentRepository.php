@@ -56,7 +56,8 @@ class UserPlaylistContentRepository extends RepositoryBase
                     config('railcontent.table_prefix').'user_playlist_content.start_second',
                     config('railcontent.table_prefix').'user_playlist_content.end_second',
                     config('railcontent.table_prefix').'user_playlist_content.position as user_playlist_item_position',
-                    config('railcontent.table_prefix').'user_playlist_content.id as user_playlist_item_id'
+                    config('railcontent.table_prefix').'user_playlist_content.id as user_playlist_item_id',
+                    config('railcontent.table_prefix').'user_playlist_content.extra_data as user_playlist_item_extra_data'
                 )
                 ->join(
                     config('railcontent.table_prefix').'content',
