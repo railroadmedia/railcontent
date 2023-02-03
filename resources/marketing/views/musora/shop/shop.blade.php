@@ -38,7 +38,7 @@
     x-data="{
         shippingModal: false,
         orderModal: false,
-        filter: 'brand',
+        filter: 'type',
     }"
 @endsection
 
@@ -203,17 +203,17 @@
                 <div class="filter-wrap clearfix">
                 <span
                     class="filter float-left px-2 md:px-3 w-1/2 md:w-auto border-black"
-                    x-bind:class="filter === 'brand' && 'active'"
-                    x-on:click="filter = 'brand'"
-                >
-                    All
-                </span>
-                <span
-                    class="filter float-left px-2 md:px-3 w-1/2 md:w-auto border-black"
                     x-bind:class="filter === 'type' && 'active'"
                     x-on:click="filter = 'type'"
                 >
                     Type
+                </span>
+                <span
+                    class="filter float-left px-2 md:px-3 w-1/2 md:w-auto border-black"
+                    x-bind:class="filter === 'brand' && 'active'"
+                    x-on:click="filter = 'brand'"
+                >
+                    Brand
                 </span>
                 </div>
                 <div class="select-wrap relative px-3 md:px-0">
