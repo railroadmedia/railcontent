@@ -100,7 +100,7 @@
                                 @if(!empty($promoCode)) data-promocode="{{ $promoCode }}" @endif
                                 @if(!empty($lockedCart)) data-locked-cart="{{ $lockedCart }}" @endif
                             >
-                                <button class="join {{ $theme !== 'drumeo' ? 'bg-'.$theme : '' }}">
+                                <button class="join {{ ($theme !== 'drumeo' && $theme !== 'musora') ? 'bg-'.$theme : '' }}">
                                     <span class="initial"><i class="fas fa-cart-plus"></i> Add To Cart</span>
                                     <span class="loading"><i class="fad fa-spinner-third fa-spin"></i> Adding to cart...</span>
                                 </button>
