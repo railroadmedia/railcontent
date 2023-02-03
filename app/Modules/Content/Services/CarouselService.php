@@ -43,20 +43,11 @@ class CarouselService
             ->orderBy('display_order')
             ->get();
 
-        //$carousel = $this->filterCarousel($carousel);
-        //$carousel = collect($carousel->values());
+        $carousel = $carousel->where(function (Carousel $slide) {
+            return !$this->userHasFeaturedProduct($slide);
+        });
+        $carousel = collect($carousel->values()); //fixes indexes which cause data not to load properly
         return $carousel;
-    }
-
-    private function filterCarousel(Collection $carousel)
-    {
-        $data = [];
-        foreach ($carousel as $slide) {
-            if (!$this->userHasFeaturedProduct($slide)) {
-                $data[] = $slide;
-            }
-        }
-        return $data;
     }
 
     private function userHasFeaturedProduct(Carousel $slide)
