@@ -12,11 +12,8 @@ class ProductPagesController extends BaseController
 
     public function shopAlt(Request $request)
     {
-        $products = Product::where([['visible', 1], ['product_type_id', '!=', 6], ['is_seasonal', 0]])->orderBy('display_order')->get();
+        $products = Product::where([['visible', 1], ['is_seasonal', 1]])->whereNotIn('product_type_id', [1, 6])->orderBy('display_order')->get();
 
-        $lessons = $products->filter(function($value, $key){
-            return $value->productType->name === 'Lessons';
-        });
 
         $accessories = $products->filter(function($value, $key){
             return $value->productType->name === 'Accessories';
@@ -31,18 +28,49 @@ class ProductPagesController extends BaseController
         });
 
         $hoodies = $products->filter(function($value, $key){
-            return $value->productType->name === 'Hoodies';
+            return $value->productType->name === 'Hoodies' || $value->productType->name === 'Sweaters';;
+        });
+
+        $drumeo = $products->filter(function($value, $key){
+            return $value->brand->name === 'Drumeo';
+        });
+
+        $pianote = $products->filter(function($value, $key){
+            return $value->brand->name === 'Pianote';
+        });
+
+        $guitareo = $products->filter(function($value, $key){
+            return $value->brand->name === 'Guitareo';
+        });
+
+        $singeo = $products->filter(function($value, $key){
+            return $value->brand->name === 'Singeo';
+        });
+
+        $musora = $products->filter(function($value, $key){
+            return $value->brand->name === 'Musora';
         });
 
         return view('musora.shop.shop', [
-            'lessons' => $lessons,
             'accessories' => $accessories,
             'hats' => $hats,
             'shirts' => $shirts,
             'hoodies' => $hoodies,
             'theme' => 'musora',
-            'category' => $request->category
+            'category' => $request->category,
+            'drumeo' => $drumeo,
+            'pianote' => $pianote,
+            'guitareo' => $guitareo,
+            'singeo' => $singeo,
+            'musora' => $musora,
         ]);
+    }
+
+    public function productAlt(Request $request)
+    {
+        $product = Product::where('slug', 'Musora-'.$request->slug)->firstOrFail();
+
+        return view('musora.shop.product-layout', [ 'product' => $product, 'theme' => 'musora' ]);
     }
 
     public function products(Request $request)
