@@ -2,7 +2,8 @@
 
 @section('layout-header')
     @include("guitareo.sales.partials._nav", [
-        "cartVersion" => true
+        "cartVersion" => true,
+        'shopToMusora' => $product->is_seasonal,
     ])
 @endsection
 
@@ -87,6 +88,8 @@
             </div>
         </div>
     </div>
+
+    @parent
 @endsection
 
 @section('layout-footer')
