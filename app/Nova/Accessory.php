@@ -55,7 +55,7 @@ class Accessory extends Resource
             })->asHtml()->hideWhenUpdating()->hideWhenCreating(),
             //slug field for saving
             Text::make('Slug')->hideFromDetail()->hideFromIndex(),
-            Text::make('Sku')->hideFromIndex(),
+            Text::make('Sku'),
             Text::make('Meta Description', 'meta_desc')->hideFromIndex(),
             Image::make('Meta Image', 'meta_img')
                 ->disk('nova_s3')
