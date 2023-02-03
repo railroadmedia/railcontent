@@ -35,7 +35,7 @@ They still require the add on to access other brand songs.
 From the upgrade page they can perform any of the membership changes as described in the two previous requirements.
 Once they confirm their upgrade membership they will be automatically redirected to the songs page.
 
-### 4. (Not live yet)Orders made through Musora Center will process membership changes automatically
+### 4. Orders made through Musora Center will process membership changes automatically
 
 In Musora Center, any subscription membership products (not just Musora) added to a cart for a user with an active
 subscription will have a discounted rate applied by default. Most membership change cases will be discounted to $0,

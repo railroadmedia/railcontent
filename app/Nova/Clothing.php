@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Models\Brand;
 use App\Models\Product;
 use App\Models\ProductType;
 use App\Models\SizeChart;
@@ -39,12 +40,12 @@ class Clothing extends Resource
     public static function indexQuery(NovaRequest $request, $query)
     {
         return $query->join('product_types', 'products.product_type_id', '=', 'product_types.id')
-            ->whereIn('product_types.name', ['Hats', 'Shirts', 'Hoodies'])->select('products.*');
+            ->whereIn('product_types.name', ['Hats', 'Shirts', 'Hoodies', 'Sweaters'])->select('products.*');
     }
 
     public function fields(NovaRequest $request)
     {
-        $types = ProductType::whereIn('name', ['Hats', 'Shirts', 'Hoodies'])->get();
+        $types = ProductType::whereIn('name', ['Hats', 'Shirts', 'Hoodies', 'Sweaters'])->get();
         $uuid  = Str::uuid();
 
         return [
@@ -53,7 +54,8 @@ class Clothing extends Resource
             Select::make('Product Type', 'product_type_id')->options([
                 $types->where('name', 'Hats')->first()->id => 'Hats',
                 $types->where('name', 'Shirts')->first()->id => 'Shirts',
-                $types->where('name', 'Hoodies')->first()->id => 'Hoodies'
+                $types->where('name', 'Hoodies')->first()->id => 'Hoodies',
+                $types->where('name', 'Sweaters')->first()->id => 'Sweaters'
             ])->displayUsingLabels()->sortable(),
             Hidden::make('Uuid')->withMeta(["value" => $uuid]),
             Text::make('Name')->required()->sortable(),
@@ -72,20 +74,10 @@ class Clothing extends Resource
                 ->disableDownload()
                 ->deletable(false)
                 ->storeAs(function (Request $request){
-                    $brandId = $request->brand;
-                    $brand = '';
-
-                    if($brandId === "1") {
-                        $brand = 'Drumeo';
-                    }
-                    elseif($brandId === "2"){
-                        $brand = 'Pianote';
-                    }
-                    elseif($brandId === "3"){
-                        $brand = 'Guitareo';
-                    }
-                    elseif($brandId === "4"){
-                        $brand = 'Singeo';
+                    if(!empty($request->brand)){
+                        $brand = Brand::query()->where('id', $request->brand)->first()->name;
+                    }else{
+                        abort(500, 'Please select a brand');
                     }
 
                     return '/'.$brand.'/Meta-images/'.$request->uuid.'-'.$request->file('meta_img')->getClientOriginalName();
@@ -110,20 +102,10 @@ class Clothing extends Resource
                 ->deletable(false)
                 ->disableDownload()
                 ->storeAs(function (Request $request){
-                    $brandId = $request->brand;
-                    $brand = '';
-
-                    if($brandId === "1") {
-                        $brand = 'Drumeo';
-                    }
-                    elseif($brandId === "2"){
-                        $brand = 'Pianote';
-                    }
-                    elseif($brandId === "3"){
-                        $brand = 'Guitareo';
-                    }
-                    elseif($brandId === "4"){
-                        $brand = 'Singeo';
+                    if(!empty($request->brand)){
+                        $brand = Brand::query()->where('id', $request->brand)->first()->name;
+                    }else{
+                        abort(500, 'Please select a brand');
                     }
 
                     return '/'.$brand.'/Thumbnails/'.$request->uuid.'-'.$request->file('thumbnail')->getClientOriginalName();
@@ -140,18 +122,20 @@ class Clothing extends Resource
                 ->help('Display order should be 0 if set to invisible on shop page.')
                 ->required()
                 ->dependsOn(
-                    ['brand', 'product_type_id'],
+                    ['brand', 'product_type_id', 'is_seasonal'],
                     function (Text $field, NovaRequest $request, FormData $formData) {
                         if($formData->brand === '1' || $formData->brand === '2'){
-                            $display_num = Product::where([['brand_id', $formData->brand],['product_type_id', $formData->product_type_id]])->orderBy('display_order', 'DESC')->first();
+                            $display_num = Product::where([['brand_id', $formData->brand],['product_type_id', $formData->product_type_id], ['is_seasonal', ['is_seasonal', !empty($formData->is_seasonal) ? 1 : 0]]])->orderBy('display_order', 'DESC')->first();
                         }
                         else {
-                            $display_num = Product::where('brand_id', $formData->brand)->orderBy('display_order', 'DESC')->first();
+                            $display_num = Product::where([['brand_id', $formData->brand], ['is_seasonal', ['is_seasonal', !empty($formData->is_seasonal) ? 1 : 0]]])->orderBy('display_order', 'DESC')->first();
                         }
 
                         if(!is_null($display_num)){
                             $display_num = $display_num->display_order;
                             $field->default($display_num+1);
+                        } else {
+                            $field->default(1);
                         }
                 }),
             Heading::make('Product page'),
@@ -194,20 +178,10 @@ class Clothing extends Resource
                 ->disableDownload()
                 ->nullable()
                 ->storeAs(function (Request $request){
-                    $brandId = $request->brand;
-                    $brand = '';
-
-                    if($brandId === "1") {
-                        $brand = 'Drumeo';
-                    }
-                    elseif($brandId === "2"){
-                        $brand = 'Pianote';
-                    }
-                    elseif($brandId === "3"){
-                        $brand = 'Guitareo';
-                    }
-                    elseif($brandId === "4"){
-                        $brand = 'Singeo';
+                    if(!empty($request->brand)){
+                        $brand = Brand::query()->where('id', $request->brand)->first()->name;
+                    }else{
+                        abort(500, 'Please select a brand');
                     }
 
                     return '/'.$brand.'/Bundle-images/'.$request->uuid.'-'.$request->file('bundle_img')->getClientOriginalName();

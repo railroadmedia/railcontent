@@ -103,6 +103,9 @@ class ContentPagesController extends BaseController
             [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED];
         ContentRepository::$pullFutureContent = true;
 
+        // make sure we only show scheduled content if it is set in the future
+        $futureScheduledContentOnly = true;
+
         if (user()->isAdmin()) {
             ContentRepository::$availableContentStatues =
                 [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED, ContentService::STATUS_DRAFT];
@@ -112,31 +115,9 @@ class ContentPagesController extends BaseController
             throw new NotFoundHttpException();
         }
 
-        $futureLessons = $this->contentService->getFiltered(
-            1,
-            10,
-            '-published_on',
-            [$lessonType],
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
-            false
-        );
-
-        foreach ($futureLessons['results'] as $futureLessonIndex => $futureLesson) {
-            if (Carbon::parse($futureLesson['published_on']) < Carbon::now()) {
-                unset($futureLessons['results'][$futureLessonIndex]);
-            }
-        }
-
         if (user()->permission_level === 'administrator') {
             ContentRepository::$availableContentStatues =
                 [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED, ContentService::STATUS_DRAFT];
-        } else {
-            ContentRepository::$availableContentStatues = [ContentService::STATUS_PUBLISHED];
         }
 
         ContentRepository::$pullFutureContent = false;
@@ -144,9 +125,6 @@ class ContentPagesController extends BaseController
         $sortOverride = $lessonType === 'chord-and-scale' ? 'slug' : null;
 
         $defaultPage = $lessonType === 'routine' ? 12 : 20;
-        if ($request->get('page', 1) == 1) {
-            $defaultPage = $defaultPage - count($futureLessons['results']);
-        }
 
         ContentRepository::$pullFilterResultsOptionsAndCount = true;
 
@@ -175,6 +153,7 @@ class ContentPagesController extends BaseController
                 'filter_options' => [],
             ]);
         }
+
         if ($contentTypeName == 'songs' && $brand == 'singeo') {
             $listLessons = $this->contentService->getFiltered(
                 $request->get('page', 1),
@@ -190,6 +169,8 @@ class ContentPagesController extends BaseController
                 true
             );
         } else {
+            ContentRepository::$pullFutureContent = true;
+
             $listLessons = $this->contentService->getFiltered(
                 $request->get('page', 1),
                 $request->get('limit', $defaultPage),
@@ -201,8 +182,13 @@ class ContentPagesController extends BaseController
                 $request->get('included_fields', []),
                 $request->get('required_user_states', []),
                 $request->get('included_user_states', []),
-                true
+                true,
+                false,
+                true,
+                false,
+                $futureScheduledContentOnly
             );
+
         }
 
         ContentRepository::$pullFilterResultsOptionsAndCount = false;
@@ -219,8 +205,6 @@ class ContentPagesController extends BaseController
 
             $routinesCount = $listLessons['total_results'];
         }
-
-        $listLessons['results'] = $futureLessons['results']->merge($listLessons['results']);
 
         $isStudentFocus = in_array($lessonType, ['student-review', 'question-and-answer']);
 
@@ -247,8 +231,6 @@ class ContentPagesController extends BaseController
         if ($lessonType === 'routine') {
             $hasStartedLessons = false;
         }
-
-
         if ($contentTypeName == 'songs') {
             return view('content.songs-catalogue', [
                 "listLessons" => $listLessons->toResponseRawJson(),
@@ -263,6 +245,8 @@ class ContentPagesController extends BaseController
                 "artistsNumber" => count($listLessons->filterOptions()['artist'] ?? []),
                 "songsNumber" => $listLessons->totalResults(),
                 "searchTerm" => $searchTerm,
+                "statuses" => ContentRepository::$availableContentStatues,
+                "futureScheduledContentOnly" => $futureScheduledContentOnly
             ]);
         } else {
             return view('content.catalogue', [
@@ -276,6 +260,8 @@ class ContentPagesController extends BaseController
                 "routinesCount" => $routinesCount,
                 "catalogueMeta" => $catalogueMeta,
                 "searchTerm" => $searchTerm,
+                "statuses" => ContentRepository::$availableContentStatues,
+                "futureScheduledContentOnly" => $futureScheduledContentOnly
             ]);
         }
     }
