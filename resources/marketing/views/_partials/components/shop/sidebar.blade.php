@@ -44,7 +44,7 @@
             @else
                 @if($category !== 'bundles' && count($sizes) === 0 && !$bundle)
                     <a
-                        class="online-atc @if($theme !== 'musora') vue-add-to-cart @endif"
+                        class="online-atc @if(!$product->is_seasonal) vue-add-to-cart @endif"
                         href="/ecommerce/add-to-cart?go-back-to-shop=true&products[{!! $sku !!}]=1"
                         data-base-url="/ecommerce/add-to-cart?go-back-to-shop=true&products[{!! $sku !!}]=1"
                         data-product-json='{"{!! $sku !!}": 1}'
@@ -73,8 +73,9 @@
                     </select>
 
                     <a
-                        class="online-atc merch @if($theme !== 'musora') vue-add-to-cart @endif selected-pack"
-                        href="#"
+                        x-ref="addButton"
+                        class="online-atc merch @if(!$product->is_seasonal) vue-add-to-cart @endif selected-pack"
+                        @if(!$product->is_seasonal) href="#" @else @click=" $refs.addButton.classList.contains('active') ? orderModal = true : null" @endif
                         @if(!empty($promoCode))
                         data-base-url="/ecommerce/add-to-cart?go-back-to-shop=true&promo-code={{$promoCode}}"
                         data-promocode="{{ $promoCode }}"
