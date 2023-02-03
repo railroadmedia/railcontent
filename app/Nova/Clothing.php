@@ -150,7 +150,7 @@ class Clothing extends Resource
             Flexible::make('Sizes')
                 ->addLayout(SizeLayout::class)
                 ->preset(SizePreset::class),
-            Boolean::make('Size Case Sensitive', 'size_case_sensitive')->default(false)->hideFromIndex()->help('Size codes are uppercases by default and will be lowercases if checked'),
+            Boolean::make('Size Case Sensitive', 'size_case_sensitive')->default(false)->hideFromIndex()->help('Size codes are lowercases by default and will be uppercases if checked'),
             Boolean::make('Guarantee Badge', 'guaranteed')->default(false)->hideFromIndex(),
             Boolean::make('Free Shipping', 'free_shipping')->default(false)->hideFromIndex(),
             Heading::make('Bundle'),
