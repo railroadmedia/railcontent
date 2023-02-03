@@ -28,7 +28,7 @@ class ProductPagesController extends BaseController
         });
 
         $hoodies = $products->filter(function($value, $key){
-            return $value->productType->name === 'Hoodies';
+            return $value->productType->name === 'Hoodies' || $value->productType->name === 'Sweaters';;
         });
 
         $drumeo = $products->filter(function($value, $key){
