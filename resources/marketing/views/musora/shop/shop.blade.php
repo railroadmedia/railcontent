@@ -1,13 +1,12 @@
 @extends('_partials.layout.global-template')
 
 @section('meta')
-    <title></title>
-    <meta property="og:title" content="">
+    <title>Musora Shop</title>
+    <meta property="og:title" content="Musora Shop">
     <meta name="description" content="">
     <meta property="og:description" content="">
-    <meta property="og:image" content="">
-    <meta property="og:url" content="https://www.musora.com/merch/">
-    <meta name="robots" content="noindex">
+    <meta property="og:image" content="https://musora-center.s3.amazonaws.com/shop/header-m.jpg">
+    <meta property="og:url" content="https://www.musora.com/merch">
 @endsection
 
 @section('layout-styles')
@@ -39,7 +38,7 @@
     x-data="{
         shippingModal: false,
         orderModal: false,
-        filter: 'brand',
+        filter: 'type',
     }"
 @endsection
 
@@ -204,17 +203,17 @@
                 <div class="filter-wrap clearfix">
                 <span
                     class="filter float-left px-2 md:px-3 w-1/2 md:w-auto border-black"
-                    x-bind:class="filter === 'brand' && 'active'"
-                    x-on:click="filter = 'brand'"
-                >
-                    All
-                </span>
-                <span
-                    class="filter float-left px-2 md:px-3 w-1/2 md:w-auto border-black"
                     x-bind:class="filter === 'type' && 'active'"
                     x-on:click="filter = 'type'"
                 >
                     Type
+                </span>
+                <span
+                    class="filter float-left px-2 md:px-3 w-1/2 md:w-auto border-black"
+                    x-bind:class="filter === 'brand' && 'active'"
+                    x-on:click="filter = 'brand'"
+                >
+                    Brand
                 </span>
                 </div>
                 <div class="select-wrap relative px-3 md:px-0">
@@ -528,7 +527,7 @@
                     <div class="py-10 px-4 md:px-20">
                         <h4 class="font-bold mb-2">Just a heads up!</h4>
                         <p class="mb-4">
-                            I understand that these items are preorders<br class="hidden md:inline-block"> and will not ship until <b>March 1st, 2023</b>.
+                            I understand that these items are preorders<br class="hidden md:inline-block"> and will not ship until after <b>March 1st, 2023</b>.
                         </p>
                         <div class="flex gap-2">
                             <a class="flex-1 rounded-full border-2 border-black uppercase text-black py-2 font-bold uppercase text-sm md:text-base" @click="orderModal = false">Cancel</a>
