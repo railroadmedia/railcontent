@@ -1,9 +1,77 @@
 @extends('_partials.layout.global-product-layout')
 
 @section('layout-header')
-    @include("drumeo.sales.partials._nav", [
-        "cartVersion" => true
+    @include('_partials.layout.global-header', [
+        "theme_bg" => "bg-musora",
+        "theme_text" => "text-musora",
+        "logo" => "https://musora-ui.s3.amazonaws.com/logos/musora-white.svg",
+        "links" => [
+            "Home" => [
+                "iconClass" => "fas fa-home",
+                "url" => "/",
+            ],
+            "Member Login" => [
+                "iconClass" => "fas fa-sign-in",
+                "url" => get_musora_brand_base_url() . '/login',
+            ],
+            "Contact" => [
+                "iconClass" => "fas fa-phone",
+                "url" => get_musora_brand_base_url().'/contact',
+            ],
+            "Careers" => [
+                "iconClass" => "fas fa-users",
+                "url" => '/careers',
+            ],
+            "About" => [
+                "iconClass" => "fas fa-question",
+                "url" => '/about',
+            ],
+            "Ambassador Program" => [
+                "iconClass" => "fas fa-comment-dollar",
+                "url" => '/ambassador',
+            ],
+            "Brand Guides" => [
+                "iconClass" => "fas fa-pencil-paintbrush",
+                "url" => '/brand',
+            ],
+        ],
+        "external_links" => [
+            "Drumeo" => [
+                "iconClass" => "fas fa-external-link",
+                "themeClass" => "text-musora",
+                "url" => get_legacy_brand_base_url("drumeo")
+            ],
+            "Pianote" => [
+                "iconClass" => "fas fa-external-link",
+                "themeClass" => "text-musora",
+                "url" => get_legacy_brand_base_url("pianote")
+            ],
+            "Guitareo" => [
+                "iconClass" => "fas fa-external-link",
+                "themeClass" => "text-musora",
+                "url" => get_legacy_brand_base_url("guitareo")
+            ],
+            "Singeo" => [
+                "iconClass" => "fas fa-external-link",
+                "themeClass" => "text-musora",
+                "url" => get_legacy_brand_base_url("singeo")
+            ]
+        ]
     ])
+@endsection
+
+@section('layout-styles')
+    @parent
+
+    <style>
+        footer a {
+            color: #879097;
+        }
+
+        footer a:hover {
+            color: #a2a9af;
+        }
+    </style>
 @endsection
 
 @section('layout-body')
@@ -90,5 +158,8 @@
 @endsection
 
 @section('layout-footer')
-    @include("drumeo.sales.partials._footer")
+    @include('_partials.layout.global-footer', [
+        "brand" => "musora",
+        "logo" => "https://musora-ui.s3.amazonaws.com/logos/musora-white.svg"
+    ])
 @endsection
