@@ -65,7 +65,7 @@ class Clothing extends Resource
             })->asHtml(),
             //slug field for saving
             Text::make('Slug')->hideFromDetail()->hideFromIndex(),
-            Text::make('Sku'),
+            Text::make('Sku')->hideFromIndex(),
             Text::make('Meta Description', 'meta_desc')->hideFromIndex(),
             Image::make('Meta Image', 'meta_img')
                 ->disk('nova_s3')
@@ -120,24 +120,7 @@ class Clothing extends Resource
             Boolean::make('Visible On Shop Page','visible')->default(true)->hideFromIndex(),
             Number::make('Display order', 'display_order')->sortable()
                 ->help('Display order should be 0 if set to invisible on shop page.')
-                ->required()
-                ->dependsOn(
-                    ['brand', 'product_type_id', 'is_seasonal'],
-                    function (Text $field, NovaRequest $request, FormData $formData) {
-                        if($formData->brand === '1' || $formData->brand === '2'){
-                            $display_num = Product::where([['brand_id', $formData->brand],['product_type_id', $formData->product_type_id], ['is_seasonal', ['is_seasonal', !empty($formData->is_seasonal) ? 1 : 0]]])->orderBy('display_order', 'DESC')->first();
-                        }
-                        else {
-                            $display_num = Product::where([['brand_id', $formData->brand], ['is_seasonal', ['is_seasonal', !empty($formData->is_seasonal) ? 1 : 0]]])->orderBy('display_order', 'DESC')->first();
-                        }
-
-                        if(!is_null($display_num)){
-                            $display_num = $display_num->display_order;
-                            $field->default($display_num+1);
-                        } else {
-                            $field->default(1);
-                        }
-                }),
+                ->required(),
             Heading::make('Product page'),
             Text::make('Header Text', 'header_text')->hideFromIndex(),
             Text::make('Subheader Text', 'subheader_text')->hideFromIndex(),
