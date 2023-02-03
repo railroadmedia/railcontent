@@ -14,6 +14,9 @@
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white tw-pb-14">
         <div class="tw-flex tw-flex-col">
             <div class="tw-flex tw-flex-row">
+
+                <?php if(!empty($likedPlaylists)) { echo 'Liked playlists <br/>'; var_dump($likedPlaylists); }?>
+
                 {{-- Playlist Catalog --}}
                 <playlist-collection-catalog
                     :playlists="{{ json_encode($playlists) }}"

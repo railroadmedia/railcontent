@@ -48,8 +48,7 @@ class UserPlaylistsController extends BaseController
             brand()
         );
 
-        //TODO: connect with RC method
-        $likedPlaylists = [];
+        $likedPlaylists = $this->userPlaylistsService->getLikedPlaylists(brand(), 5, 1);
 
         $currentUser = [
             "avatar" => user()->profile_picture_url,
