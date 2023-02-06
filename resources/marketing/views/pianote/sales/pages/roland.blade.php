@@ -1,4 +1,6 @@
-@extends('pianote.sales.subscription')
+@extends('pianote.sales.subscription', [
+    "promoVersion" => true
+])
 
 @section('global-head')
     <title>Learn Piano with Step by Step Online Lessons | Pianote</title>
