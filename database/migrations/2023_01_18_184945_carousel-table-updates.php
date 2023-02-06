@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamp('start_date')->nullable();
             $table->timestamp('end_date')->nullable();
             $table->boolean('visible')->default(true);
-            $table->boolean('is_featured');
+            $table->boolean('is_featured')->default(false);
             $table->integer('product_id')->nullable();
             $table->string('product_url')->nullable();
             $table->string('endpoint')->nullable();
