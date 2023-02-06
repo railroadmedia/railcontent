@@ -294,13 +294,9 @@ class MyListJsonController extends Controller
         $playlistLessons = $this->userPlaylistsService->getByPlaylistId($request->get('playlist_id'));
 
         foreach ($playlistLessons as $playlistLesson) {
-            $res = $this->userPlaylistsService->addItemToPlaylist(
+            $this->userPlaylistsService->duplicatePlaylistItem(
                 $playlist['id'],
-                $playlistLesson['content_id'],
-                $playlistLesson['position'],
-                $playlistLesson['extra_data'],
-                $playlistLesson['start_second'],
-                $playlistLesson['end_second']
+                $playlistLesson
             );
         }
 

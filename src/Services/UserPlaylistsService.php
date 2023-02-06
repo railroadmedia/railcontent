@@ -602,4 +602,25 @@ class UserPlaylistsService
 
         return $assignments;
     }
+
+    /**
+     * @param $playlistId
+     * @param $data
+     * @return int
+     */
+    public function duplicatePlaylistItem($playlistId, $data){
+        $input = [
+            'content_id' => $data['content_id'],
+            'user_playlist_id' => $playlistId,
+            'position' => $data['position'],
+            'extra_data' => $data['extra_data'],
+            'start_second' => $data['start_second'],
+            'end_second' => $data['end_second'],
+            'created_at' => Carbon::now()
+                ->toDateTimeString(),
+        ];
+
+        return $this->userPlaylistContentRepository->create($input);
+
+    }
 }
