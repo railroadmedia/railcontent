@@ -43,16 +43,17 @@ class CarouselService
             ->orderBy('display_order')
             ->get();
 
-        $carousel = $carousel->where(function (Carousel $slide) {
-            return !$this->userHasFeaturedProduct($slide);
+        $carousel->each(function (Carousel $slide) {
+            if ($slide->is_featured) {
+                if ($slide->product_id &&
+                    $this->userProductService->hasProductNotCached(user()->id, $slide->product_id)) {
+                    $slide->cta_url = $slide->product_url;
+                    $slide->registered = true;
+                } else {
+                    $slide->cta_url = $slide->endpoint;
+                }
+            }
         });
-        $carousel = collect($carousel->values()); //fixes indexes which cause data not to load properly
         return $carousel;
-    }
-
-    private function userHasFeaturedProduct(Carousel $slide)
-    {
-        return $slide->is_featured && $slide->product_id
-            && $this->userProductService->hasProductNotCached(user()->id, $slide->product_id);
     }
 }
