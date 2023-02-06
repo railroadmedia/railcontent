@@ -58,7 +58,6 @@ class Carousel extends Resource
             Text::make('Subtitle')->sortable(),
             Text::make('Title')->sortable(),
             Image::make('logo')
-                ->help('The image should be 1128  x 276px or a comparable aspect ratio.')
                 ->disk('nova_s3')
                 ->prunable()
                 ->hideFromIndex()
@@ -90,8 +89,8 @@ class Carousel extends Resource
                 }),
             Text::make('logo')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
             Markdown::make('Description')->required()->help('If a description exceeds 316 the last three characters will be replaced with an ellipses.<br> Use &lt;br&gt; for a line break.'),
-            Text::make('CTA Button Text', 'cta_text')->required()->hideFromIndex(),
-            Text::make('CTA URL', 'cta_url')->required(),
+            Text::make('CTA Button Text', 'cta_text')->hideFromIndex(),
+            Text::make('CTA URL', 'cta_url'),
             Image::make('Image', 'img')
                 ->help('The image should be 1128  x 276px or a comparable aspect ratio.')
                 ->disk('nova_s3')
