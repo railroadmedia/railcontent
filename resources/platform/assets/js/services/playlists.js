@@ -1,50 +1,99 @@
 //Playlists Services
 
 export default {
+    //------------CREATE-------------//
 
-    //GET Playlists
-    getCurrentUserPlaylists() {
-
+    /**
+     * CREATE Playlist
+     *
+     * @param {string} brand
+     * @param {number} page - 
+     * @param {number} limit - 
+     */
+    getCurrentUserPlaylists(brand = "drumeo", page = 1, limit = 10) {
+        let payload = {
+            "brand": brand,
+            "limit":limit,
+            "page":page
+        }
+        let playlists = fetch('/railcontent/playlists', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            // body: payload,
+        })
+        return playlists;
     },
 
-    //GET Pinned Playlists
-    getPinnedPlaylists() {
 
+    //-------------READ--------------//
+
+    /**
+     * GET Playlists
+     *
+     * @param {string} brand
+     * @param {number} page - 
+     * @param {number} limit - 
+     */
+    getCurrentUserPlaylists(brand = "drumeo", page = 1, limit = 10) {
+        let payload = {
+            "brand": brand,
+            "limit":limit,
+            "page":page
+        }
+        let playlists = fetch('/railcontent/playlists', {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            // body: payload,
+        })
+        return playlists;
     },
 
-    //GET Public Playlists
-    getPublicPlaylists() {
 
+    //-------------UPDATE--------------//
+
+    /**
+     * Pin Playlists
+     *
+     * @param {string} brand
+     * @param {number} id - 
+     */
+    pinPlaylist(id, brand = "drumeo") {
+        let payload = {
+            "brand": brand,
+            "playlist_id":id,
+        }
+        let pinRequest = fetch('/railcontent/pin-playlist', {
+            method: 'PUT',
+            headers: {'Content-Type': 'application/json',},
+            body: JSON.stringify(payload),
+        })
+        return pinRequest;
     },
 
-    //CREATE Playlist
-    createPlaylist() {
-
+    /**
+     * Unpin Playlists
+     *
+     * @param {string} brand
+     * @param {number} id - 
+     */
+    unpinPlaylist(id, brand = "drumeo") {
+        let payload = {
+            "brand": brand,
+            "playlist_id":id,
+        }
+        let unpinRequest = fetch('/railcontent/unpin-playlist', {
+            method: 'PUT',
+            headers: {'Content-Type': 'application/json',},
+            body: JSON.stringify(payload),
+        })
+        return unpinRequest;
     },
 
-    //PIN Playlist 
-    pinPlaylist(id) {
+    //-------------DELETE--------------//
 
-    },
-
-    //UNPIN Playlist
-    unpinPlaylist(id) {
-
-    },
-
-    //COPY Playlist
-    copyPlaylist(id) {
-
-    },
-
-    //UPDATE Playlist
-    updatePlaylist(id) {
-
-    },
-
-    //DELETE Playlist
-    deletePlaylist(id) {
-
-    }
 
 };

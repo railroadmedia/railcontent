@@ -26,9 +26,18 @@
     {{-- Notifications Container --}}
     <div id="notifications-container"></div>
 
-    @include("drumeo.sales.partials._nav", [
-        "checkoutVersion" => true,
-    ])
+    <nav id="nav" class="top-bar row expanded">
+        <div class="logo">
+            <a href="">
+                <img src="https://musora-ui.s3.amazonaws.com/logos/musora-white.svg" alt="Drumeo">
+            </a>
+        </div>
+
+
+        <div class="button-wrap">
+            <a href="/merch" class="join outline-button">Shop</a>
+        </div>
+    </nav>
 
     <div id="app">
         @if(!empty(user()))

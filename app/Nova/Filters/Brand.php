@@ -37,11 +37,11 @@ class Brand extends Filter
      */
     public function options(NovaRequest $request)
     {
-        return [
-            'Drumeo' => 'Drumeo',
-            'Pianote' => 'Pianote',
-            'Guitareo' => 'Guitareo',
-            'Singeo' => 'Singeo'
-        ];
+        $brands = \App\Models\Brand::get();
+        $brands = $brands->mapWithKeys(function($item){
+            return [$item['name'] => $item['name']];
+        });
+
+        return $brands;
     }
 }

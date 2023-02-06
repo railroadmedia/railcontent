@@ -21468,6 +21468,9 @@ a:visited{
 .tw-top-full{
   top: 100% !important;
 }
+.tw-top-\[100\%\]{
+  top: 100% !important;
+}
 .tw-left-8{
   left: 2rem !important;
 }
@@ -22419,6 +22422,9 @@ a:visited{
 .tw-w-\[90vw\]{
   width: 90vw !important;
 }
+.tw-w-\[157px\]{
+  width: 157px !important;
+}
 .tw-w-52{
   width: 13rem !important;
 }
@@ -22532,6 +22538,15 @@ a:visited{
 }
 .tw-max-w-6xl{
   max-width: 72rem !important;
+}
+.tw-max-w-\[48px\]{
+  max-width: 48px !important;
+}
+.tw-max-w-\[300px\]{
+  max-width: 300px !important;
+}
+.tw-max-w-\[512px\]{
+  max-width: 512px !important;
 }
 .tw-max-w-full{
   max-width: 100% !important;
@@ -22903,11 +22918,11 @@ a:visited{
 .tw-rounded-\[9px\]{
   border-radius: 9px !important;
 }
-.tw-rounded-3xl{
-  border-radius: 1.5rem !important;
-}
 .tw-rounded-\[5px\]{
   border-radius: 5px !important;
+}
+.tw-rounded-3xl{
+  border-radius: 1.5rem !important;
 }
 .tw-rounded-none{
   border-radius: 0px !important;
@@ -22919,6 +22934,10 @@ a:visited{
 .tw-rounded-b-lg{
   border-bottom-right-radius: 0.5rem !important;
   border-bottom-left-radius: 0.5rem !important;
+}
+.tw-rounded-t-md{
+  border-top-left-radius: 0.375rem !important;
+  border-top-right-radius: 0.375rem !important;
 }
 .tw-rounded-t-lg{
   border-top-left-radius: 0.5rem !important;

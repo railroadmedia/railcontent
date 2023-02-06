@@ -38,16 +38,19 @@ class PlaylistDecorator extends ModeDecoratorBase
                 url()->route('platform.user.playlist', ["id" => $playlist['id'], "brand" => brand()]);
             $playlists[$index]['pinned'] = array_key_exists($playlist['id'], $pinnedPlaylists);
             if (!$playlist['thumbnail_url']) {
+                $playlists[$index]['uploaded_thumbnail'] = false;
                 $lessons = $this->userPlaylistsService->getUserPlaylistContents($playlist['id'], [], 1);
                 if ($lessons->isNotEmpty()) {
                     $playlists[$index]['thumbnail_url'] =
                         $lessons->first()
                             ->fetch('data.thumbnail_url');
                 }
+            }else{
+                $playlists[$index]['uploaded_thumbnail'] = true;
             }
 
             //TODO: Delete next line when the event/listener that sync playlist duration is functional
-            $playlists[$index]['duration'] = 47;
+            $playlists[$index]['duration'] = $playlists[$index]['duration'] ?? 0;
         }
 
         $userIds = array_unique($userIds);

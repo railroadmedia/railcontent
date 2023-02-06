@@ -84,7 +84,7 @@
 
                             <a
                                 class="online-atc selected-pack vue-add-to-cart"
-                                href="/ecommerce/add-to-cart?go-back-to-shop=true"
+                                @if($theme !== 'musora') href="/ecommerce/add-to-cart?go-back-to-shop=true" @endif
                                 @if(!empty($promoCode)) data-promocode="{{ $promoCode }}" @endif
                                 @if(!empty($lockedCart)) data-locked-cart="{{ $lockedCart }}" @endif
                             >
@@ -95,12 +95,12 @@
                             </a>
                         @elseif(!empty($sku) && (empty($sizes) || count($sizes) === 0))
                             <a
-                                class="online-atc vue-add-to-cart" href="/ecommerce/add-to-cart?go-back-to-shop=true&products[{!! $sku !!}]=1"   data-base-url="/ecommerce/add-to-cart?go-back-to-shop=true&products[{!! $sku !!}]=1"
+                                class="online-atc vue-add-to-cart add-to-cart-button" @if($theme !== 'musora')href="/ecommerce/add-to-cart?go-back-to-shop=true&products[{!! $sku !!}]=1" @else @click="orderModal = true" @endif   data-base-url="/ecommerce/add-to-cart?go-back-to-shop=true&products[{!! $sku !!}]=1" value="?products[{{ $sku }}]=1"
                                 data-product-json='{ "{{$sku}}": 1 }'
                                 @if(!empty($promoCode)) data-promocode="{{ $promoCode }}" @endif
                                 @if(!empty($lockedCart)) data-locked-cart="{{ $lockedCart }}" @endif
                             >
-                                <button class="join {{ $theme !== 'drumeo' ? 'bg-'.$theme : '' }}">
+                                <button class="join {{ ($theme !== 'drumeo' && $theme !== 'musora') ? 'bg-'.$theme : '' }}">
                                     <span class="initial"><i class="fas fa-cart-plus"></i> Add To Cart</span>
                                     <span class="loading"><i class="fad fa-spinner-third fa-spin"></i> Adding to cart...</span>
                                 </button>
