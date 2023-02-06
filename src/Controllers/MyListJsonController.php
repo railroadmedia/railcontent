@@ -385,7 +385,7 @@ class MyListJsonController extends Controller
             $request->get('import_instrumentless_soundslice_assignment', false)
         );
 
-        return $this->getPlaylistLessons($request);
+        return response()->json(['success']);
     }
 
     /**

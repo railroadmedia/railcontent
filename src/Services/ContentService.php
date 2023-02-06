@@ -2710,15 +2710,15 @@ class ContentService
             $assign = [];
             $lessonsCount = 0;
             $allLessons = [];
-            $bundles = $this->getByParentId($content['id']);
+            $bundles = $this->contentRepository->getByParentId($content['id']);
             foreach ($bundles as $bundle){
-                $lessons = $this->getByParentId($bundle['id']);
+                $lessons = $this->contentRepository->getByParentId($bundle['id']);
                 foreach($lessons as $lesson){
                     $lessonsCount++;
                     array_push($allLessons, $lesson);
-                    $assignments = $this->getByParentId($lesson['id']);
+                    $assignments = $this->contentRepository->getByParentId($lesson['id']);
                     foreach ($assignments ?? [] as $lessonAssignment) {
-                        if ($lessonAssignment->fetch('soundslice_slug')) {
+                        if (isset($lessonAssignment['soundslice_slug'])) {
                             $soundsliceAssingment++;
                             $assign[$lesson['id']][] = $lessonAssignment;
                         }
