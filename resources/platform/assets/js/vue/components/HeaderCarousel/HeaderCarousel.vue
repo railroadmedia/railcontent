@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onBeforeMount, onMounted } from "vue";
-import { testCarousel } from '../../../constants/carousel_data.js';
+import { testCarousel, thirtyDD, nppsh } from '../../../constants/carousel_data.js';
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
@@ -72,7 +72,14 @@ const handleNavClick = (index) => {
 
 onBeforeMount(() => {
   if (props.preloadedCarousel.length > 0) {
-    slides.value = props.preloadedCarousel;
+      let carousel = props.preloadedCarousel;
+      if(props.brand === 'drumeo') {
+          carousel = thirtyDD.concat(carousel);
+      } else if(props.brand === 'pianote') {
+          carousel = nppsh.concat(carousel);
+      }
+    slides.value = carousel;
+
   } else {
     slides.value = testCarousel.find(({ brand: iBrand }) => iBrand === props.brand).slides;
   }
@@ -95,12 +102,16 @@ onMounted(() => {
       :isPrevSlide="i === prevSlide"
       :key="slide.title"
       :animateDirection="animateDirection"
+      :brand="brand"
       :topSubtitle="slide.subtitle"
       :title="slide.title"
       :titleClasses="slide.titleClasses"
+      :logo="slide.logo ? slide.logo : null"
       :ctaText="slide.cta_text"
       :description="slide.description"
       :ctaUrl="slide.cta_url"
+      :registerUrl="slide.registerUrl ? slide.registerUrl : null"
+      :learnMore="slide.learnMore ? slide.learnMore : null"
       :img="slide.img"
       @mouseover="removeInterval"
       @mouseout="resetInterval"
