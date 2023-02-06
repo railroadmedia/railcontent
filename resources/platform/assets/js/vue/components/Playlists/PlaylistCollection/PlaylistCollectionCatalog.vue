@@ -13,6 +13,10 @@
             type: Array,
             default: []
         },
+        token: {
+            type: String,
+            required: true, 
+        }
     })
     //Reactive Data
     const state = reactive({ 
@@ -124,6 +128,7 @@
                 :key="list.id" 
                 :list="list"
                 :isListView="state.isListView"
+                :token="token"
             />
             
         </div>
