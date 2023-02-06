@@ -1,24 +1,46 @@
 <script setup>
-    import { onBeforeMount, reactive } from 'vue';
+    import { onBeforeMount, onMounted, onUnmounted, watch, reactive } from 'vue';
+    import PlaylistService from '../../../../services/playlists.js';
     import PlaylistCollectionCard from './PlaylistCollectionCard.vue';
 
     //Props
     const props = defineProps({
+        brand: {
+            type: String,
+            default: "drumeo"
+        },
         playlists: {
             type: Array,
             default: []
-        }
+        },
     })
     //Reactive Data
     const state = reactive({ 
-            isListView: false }
-        )
-
-    onBeforeMount(() => {
-        fetch('/railcontent/playlists')
-            .then((res) => res.json() )
-            .then((json) => console.log(json.data) )
+        isListView: false 
     })
+
+    //Methods
+
+    //Lifecycle Hooks
+    onBeforeMount(() => {
+        //Get Current User's Playlists
+        PlaylistService.getCurrentUserPlaylists(brand)            
+            .then((res) => res.json() )
+            .then((json) => console.log(json.data) );
+
+        //Get Local Storage Value
+        if(localStorage.getItem('playlistIsListView')) {
+            state.isListView = JSON.parse(localStorage.getItem('playlistIsListView'));
+        }
+    });
+
+    //Watchers
+
+    //Store ListView to Local Storage
+    watch(state, async () => {
+        localStorage.setItem('playlistIsListView', state.isListView);
+    })
+
 </script>
 <template>
     <section class="tw-w-full">
@@ -50,7 +72,10 @@
 
             <!-- List/Grid Toggle -->
             <div class="tw-px-1">
-                <button class="tw-text-xs tw-uppercase tw-px-1 tw-font-bebas-neue">
+                <button class="tw-text-xs tw-uppercase tw-px-1 tw-font-bebas-neue"
+                        :class="[state.isListView ? 'dark:tw-text-white' : 'dark:tw-text-[#7E9AB1]']"
+                        @click="state.isListView = true"
+                >
                     <svg width="36" height="35" viewBox="0 0 36 35" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5.5 6.5625C5.5 5.69956 6.19956 5 7.0625 5H9.14583C10.0088 5 10.7083 5.69956 10.7083 6.5625C10.7083 7.42544 10.0088 8.125 9.14583 8.125H7.0625C6.19956 8.125 5.5 7.42544 5.5 6.5625Z" fill="currentColor"/>
                         <path d="M12.7917 6.5625C12.7917 5.69956 13.4912 5 14.3542 5H28.9375C29.8004 5 30.5 5.69956 30.5 6.5625C30.5 7.42544 29.8004 8.125 28.9375 8.125H14.3542C13.4912 8.125 12.7917 7.42544 12.7917 6.5625Z" fill="currentColor"/>
@@ -63,7 +88,10 @@
                     </svg>
                     <span>List</span>
                 </button>
-                <button class="tw-text-xs tw-uppercase tw-px-1 tw-font-bebas-neue">
+                <button class="tw-text-xs tw-uppercase tw-px-1 tw-font-bebas-neue"
+                        :class="[state.isListView ? 'dark:tw-text-[#7E9AB1]' : 'dark:tw-text-white']"
+                        @click="state.isListView = false"
+                >
                     <svg width="36" height="35" viewBox="0 0 36 35" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M9.25 5.25C7.317 5.25 5.75 6.817 5.75 8.75V12.25C5.75 14.183 7.317 15.75 9.25 15.75H12.75C14.683 15.75 16.25 14.183 16.25 12.25V8.75C16.25 6.817 14.683 5.25 12.75 5.25H9.25Z" fill="currentColor"/>
                         <path d="M9.25 19.25C7.317 19.25 5.75 20.817 5.75 22.75V26.25C5.75 28.183 7.317 29.75 9.25 29.75H12.75C14.683 29.75 16.25 28.183 16.25 26.25V22.75C16.25 20.817 14.683 19.25 12.75 19.25H9.25Z" fill="currentColor"/>
@@ -75,9 +103,21 @@
             </div>
         </div>
 
+        <!-- List View Header -->
+        <header class="tw-w-full tw-font-bold tw-items-center tw-p-4 dark:tw-bg-[#002039] dark:tw-text-white tw-mb-2 tw-rounded-t-md"
+                :class="state.isListView ? 'tw-flex' : 'tw-hidden'"
+        >
+            <p>Name</p>
+            <p>Description</p>
+            <p>Category</p>
+            <p>Time</p>
+            <p>Options</p>
+        </header>
+
         <!-- Cards -->
-        <div class="tw-grid tw-grid-cols-5 tw-gap-4 ">
-            
+        <div class="tw-w-full tw-relative"
+             :class="state.isListView ? 'tw-flex tw-flex-col' : 'tw-grid tw-grid-cols-2 sm:tw-grid-cols-3 lg:tw-grid-cols-4 xl:tw-grid-cols-5 tw-gap-4' "
+        >
             <!-- Print Each Card -->
             <playlist-collection-card 
                 v-for="list in playlists" 

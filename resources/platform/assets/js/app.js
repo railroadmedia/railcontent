@@ -431,7 +431,7 @@ app.component('AppContainer', AppContainer)
     .component('PlaylistCollectionCatalog', defineAsyncComponent(() => 
         import(
             /* webpackChunkName: "playlist-collection-catalog" */
-            `./vue/components/Playlists/PlaylistCollectionCatalog.vue`
+            `./vue/components/Playlists/PlaylistCollection/PlaylistCollectionCatalog.vue`
         )
     ))
 
