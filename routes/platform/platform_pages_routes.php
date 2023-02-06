@@ -35,6 +35,8 @@ Route::domain('{musoraDomain}')
                     ->whereIn('brand', all_brands())
                     ->name('platform.home');
 
+                Route::get('/test/email', [HomePageController::class, 'testemail']);
+
                 /*
                  * Primary Content Pages
                  */

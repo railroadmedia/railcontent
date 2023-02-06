@@ -76,6 +76,7 @@ class AppServiceProvider extends ServiceProvider
                 'singeo.products.*',
                 'singeo.sales.*',
                 'singeo.shop.*',
+                'musora.shop.*',
             ],
             MarketingPagesProductsViewComposer::class
         );

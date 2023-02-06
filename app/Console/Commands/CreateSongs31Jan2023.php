@@ -76,7 +76,7 @@ class CreateSongs31Jan2023 extends Command
                         'status' => 'published',
                         'album' => $row[3],
                         'language' => 'en-US',
-                        'instrumentless' => boolval($row[13]),
+                        'instrumentless' => $this->convertToBool($row[13]),
                         'published_on' => $existingContent ? $existingContent->published_on : Carbon::now(
                         )->toDateTimeString(),
                         'created_on' => $existingContent ? $existingContent->created_on : Carbon::now(
@@ -92,7 +92,7 @@ class CreateSongs31Jan2023 extends Command
                         'status' => 'published',
                         'album' => $row[3],
                         'language' => 'en-US',
-                        'instrumentless' => boolval($row[13]),
+                        'instrumentless' => $this->convertToBool($row[13]),
                         'published_on' => $existingContent ? $existingContent->published_on : Carbon::now(
                         )->toDateTimeString(),
                         'created_on' => $existingContent ? $existingContent->created_on : Carbon::now(
@@ -105,7 +105,7 @@ class CreateSongs31Jan2023 extends Command
                 ->first();
 
             // fields
-            if (boolval($row[13]) && $brand == 'drumeo') {
+            if ($this->convertToBool($row[13]) && $brand == 'drumeo') {
                 $this->updateOrInsertAndGetFirst(
                     'railcontent_content_fields',
                     [
@@ -393,6 +393,21 @@ class CreateSongs31Jan2023 extends Command
             $this->info('Done ' . $rowIndex);
         }
     }
+
+    private function convertToBool($instrumentlessValue) {
+        if (is_numeric($instrumentlessValue)) {
+            return boolval($instrumentlessValue);
+        } elseif (strtolower($instrumentlessValue) === 'false' || $instrumentlessValue === "") {
+            return 0;
+        } elseif (strtolower($instrumentlessValue) === 'true') {
+            return 1;
+        } else {
+            $this->info('Invalid value for instrumentless. Please check the data');
+            return 0;
+        }
+    }
+
+
 
     /**
      * @param array $attributes
