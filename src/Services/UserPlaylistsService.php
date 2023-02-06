@@ -216,6 +216,8 @@ class UserPlaylistsService
             config('railcontent.singularContentTypes')
         ),['song']);
 
+        $assignments = $this->contentService->countLessonsAndAssignments($contentId);
+
         if (in_array($content['type'], $singularContentTypes)) {
             $input = [
                 'content_id' => $contentId,
@@ -229,9 +231,11 @@ class UserPlaylistsService
             ];
 
             $this->userPlaylistContentRepository->createOrUpdatePlaylistContentAndReposition(null, $input);
-        }
 
-        $assignments = $this->contentService->countLessonsAndAssignments($contentId);
+            if ($importAllAssignments) {
+                    $this->addSounsliceAssignments($assignments['soundslice_assignments'][$contentId] ??[], $userPlaylistId);
+            }
+        }
 
         foreach ($assignments['lessons'] ?? [] as $lesson) {
             $input = [
@@ -246,20 +250,8 @@ class UserPlaylistsService
             ];
 
             $this->userPlaylistContentRepository->createOrUpdatePlaylistContentAndReposition(null, $input);
-        }
-
-        if ($importAllAssignments) {
-            foreach ($assignments['soundslice_assignments'] ?? [] as $assignment) {
-                $assignmentInput = [
-                    'content_id' => $assignment['id'],
-                    'user_playlist_id' => $userPlaylistId,
-                    'created_at' => Carbon::now()
-                        ->toDateTimeString(),
-                ];
-                $this->userPlaylistContentRepository->createOrUpdatePlaylistContentAndReposition(
-                    null,
-                    $assignmentInput
-                );
+            if ($importAllAssignments) {
+                $this->addSounsliceAssignments($assignments['soundslice_assignments'][$lesson['id']] ??[], $userPlaylistId);
             }
         }
 
@@ -574,5 +566,26 @@ class UserPlaylistsService
     public function countLikedPlaylist($brand = null)
     {
         return $this->playlistLikeRepository->countLikedPlaylist(auth()->id(),$brand);
+    }/**
+ * @param $assignments
+ * @param $userPlaylistId
+ * @return array
+ */
+    private function addSounsliceAssignments($assignments, $userPlaylistId)
+    : array {
+        foreach ($assignments ?? [] as $assignment) {
+            $assignmentInput = [
+                'content_id' => $assignment['id'],
+                'user_playlist_id' => $userPlaylistId,
+                'created_at' => Carbon::now()
+                    ->toDateTimeString(),
+            ];
+            $this->userPlaylistContentRepository->createOrUpdatePlaylistContentAndReposition(
+                null,
+                $assignmentInput
+            );
+        }
+
+        return $assignments;
     }
 }

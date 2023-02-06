@@ -2663,7 +2663,7 @@ class ContentService
                 }
             }
             $results['soundslice_assignments_count'] = $soundsliceAssingment;
-            $results['soundslice_assignments'] = $assign;
+            $results['soundslice_assignments'][$content['id']] = $assign;
             if($content['type'] == 'song'){
                 if($content['instrumentless']){
                     $results['song_instrumentless_assignment'] = $assign;
@@ -2692,7 +2692,7 @@ class ContentService
                         foreach ($lessonLesson['assignments'] ?? [] as $lessonAssignment) {
                             if ($lessonAssignment->fetch('soundslice_slug')) {
                                 $soundsliceAssingment++;
-                                $assign[] = $lessonAssignment;
+                                $assign[$lesson['id']][] = $lessonAssignment;
                             }
                         }
                     }
@@ -2703,6 +2703,31 @@ class ContentService
 
             $results['lessons_count'] = $lessonsCount;
             $results['lessons'] = $lessons;
+            $results['soundslice_assignments_count'] = $soundsliceAssingment;
+            $results['soundslice_assignments'] = $assign;
+        }elseif(in_array($content['type'], ['pack'])) {
+            $soundsliceAssingment = 0;
+            $assign = [];
+            $lessonsCount = 0;
+            $allLessons = [];
+            $bundles = $this->getByParentId($content['id']);
+            foreach ($bundles as $bundle){
+                $lessons = $this->getByParentId($bundle['id']);
+                foreach($lessons as $lesson){
+                    $lessonsCount++;
+                    array_push($allLessons, $lesson);
+                    $assignments = $this->getByParentId($lesson['id']);
+                    foreach ($assignments ?? [] as $lessonAssignment) {
+                        if ($lessonAssignment->fetch('soundslice_slug')) {
+                            $soundsliceAssingment++;
+                            $assign[$lesson['id']][] = $lessonAssignment;
+                        }
+                    }
+                }
+
+            }
+            $results['lessons_count'] = $lessonsCount;
+            $results['lessons'] = $allLessons;
             $results['soundslice_assignments_count'] = $soundsliceAssingment;
             $results['soundslice_assignments'] = $assign;
         }
