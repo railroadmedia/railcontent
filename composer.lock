@@ -5878,16 +5878,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "2.9.0",
+            "version": "2.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "e1c0ae1528ce313a450e5e1ad782765c4a8dd3cb"
+                "reference": "f259e2b15fb95494c83f52d3caad003bbf5ffaa1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/e1c0ae1528ce313a450e5e1ad782765c4a8dd3cb",
-                "reference": "e1c0ae1528ce313a450e5e1ad782765c4a8dd3cb",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/f259e2b15fb95494c83f52d3caad003bbf5ffaa1",
+                "reference": "f259e2b15fb95494c83f52d3caad003bbf5ffaa1",
                 "shasum": ""
             },
             "require": {
@@ -5964,7 +5964,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Seldaek/monolog/issues",
-                "source": "https://github.com/Seldaek/monolog/tree/2.9.0"
+                "source": "https://github.com/Seldaek/monolog/tree/2.9.1"
             },
             "funding": [
                 {
@@ -5976,7 +5976,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-02-05T13:07:32+00:00"
+            "time": "2023-02-06T13:44:46+00:00"
         },
         {
             "name": "mtdowling/jmespath.php",
@@ -8200,12 +8200,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "a9e696f5f0b4463c3897595714055728011d9931"
+                "reference": "45efb4e2223b40877e10837097981832c3834c3b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/a9e696f5f0b4463c3897595714055728011d9931",
-                "reference": "a9e696f5f0b4463c3897595714055728011d9931",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/45efb4e2223b40877e10837097981832c3834c3b",
+                "reference": "45efb4e2223b40877e10837097981832c3834c3b",
                 "shasum": ""
             },
             "require": {
@@ -8237,7 +8237,7 @@
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
                 "source": "https://github.com/railroadmedia/musora-api/tree/v2.0-playlists"
             },
-            "time": "2023-02-06T12:03:53+00:00"
+            "time": "2023-02-06T14:30:02+00:00"
         },
         {
             "name": "railroad/permissions",
