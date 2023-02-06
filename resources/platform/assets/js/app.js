@@ -4,6 +4,7 @@ import { createApp, defineAsyncComponent } from 'vue';
 
 //Libraries
 import axios from 'axios'
+import { vMaska } from "maska"
 import VueAxios from 'vue-axios'
 import 'simplebar';
 import 'simplebar/dist/simplebar.css';
@@ -450,6 +451,8 @@ app.directive('click-outside', {
         document.body.removeEventListener('click', el.clickOutsideEvent)
     }
 })
+
+app.directive("maska", vMaska)
 
 const pinia = createPinia();
 // app.use(router);
