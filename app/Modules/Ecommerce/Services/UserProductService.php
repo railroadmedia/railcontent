@@ -18,5 +18,13 @@ class UserProductService
         return $result['brand'] ?? '';
     }
 
+    public function hasProductNotCached(int $userId, int $productId): bool
+    {
+        $product = UserProduct::query()->where('user_id', '=', $userId)
+            ->where('product_id', '=', $productId)
+            ->first();
+        return $product && $product->isValid();
+    }
+
 
 }
