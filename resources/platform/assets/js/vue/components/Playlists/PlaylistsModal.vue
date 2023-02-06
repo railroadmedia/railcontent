@@ -2,6 +2,7 @@
 import InfoModal from '../Modal/InfoModal.vue';
 import CreatePlaylist from './CreatePlaylist.vue';
 import AddItem from './AddItem.vue'
+import StartEnd from './StartEnd.vue';
 
 const props = defineProps({
     modalProps: {
@@ -23,7 +24,7 @@ const modalContainerProps = {
     create: 'tw-max-w-[654px] tw-px-[64px]',
     edit: 'tw-max-w-[654px] tw-px-[64px]',
     remove: '',
-    startEnd: '',
+    startEnd: 'tw-max-w-[589px] tw-px-[48px]',
     addItem: 'tw-max-w-[917px] tw-px-[32px]',
     alreadyAddedItem: ''
 };
@@ -40,7 +41,7 @@ const modalContainerProps = {
                 REMOVE MODAL
             </div>
             <div v-if="modalProps.modalType === 'startEnd'">
-                START END MODAL
+                <StartEnd :brand="brand" />
             </div>
             <div v-if="modalProps.modalType === 'addItem'">
                 <AddItem :brand="brand" />

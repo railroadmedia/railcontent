@@ -30,7 +30,7 @@ const formattedPlaylists = computed(() => {
 });
 
 const handleCreatePlaylist = () => {
-    window.openplaylistmodal({ modalType: 'addItem' });
+    window.openplaylistmodal({ modalType: 'startEnd' });
 };
 </script>
 <template>
