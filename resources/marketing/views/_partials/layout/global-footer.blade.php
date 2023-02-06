@@ -1,10 +1,10 @@
-<footer id="publicFooter" class="flex-none bg-[#111729] pt-10 pb-9 sales-footer">
+<footer id="publicFooter" class="flex-none bg-[#111729] pt-10 pb-9 sales-footer bottom-footer">
 
     {{-- Footer Top --}}
     @if( @isset($sections) )
         <div class="py-3 md:py-6 border-b border-zinc-700">
             <div class="container mx-auto px-4 flex justify-center flex-col md:flex-row">
-                
+
                 {{-- If Stay Conected Section --}}
                 <div class="flex flex-col xs-12 text-gray-500 mb-6 md:mb-2 align-h-left px-7 text-center md:text-left">
                     <h5 class="text-gray-100 uppercase mb-2 text-lg font-bebas-neue mx-0">

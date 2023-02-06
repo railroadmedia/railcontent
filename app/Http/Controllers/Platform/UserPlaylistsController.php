@@ -77,7 +77,7 @@ class UserPlaylistsController extends BaseController
         $playlist = $this->userPlaylistsService->getPlaylist($playlistId);
 
         $page = $request->get('page', 1);
-        $limit = $request->get('limit', null);
+        $limit = $request->get('limit', 20);
 
         $contentTypes = array_merge(
             config('railcontent.appUserListContentTypes', []),
