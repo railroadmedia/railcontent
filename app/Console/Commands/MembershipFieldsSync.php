@@ -67,7 +67,7 @@ class MembershipFieldsSync extends Command
             ->pluck('user_id');
 
         $this->info('Number of users to process here: ' . count($userIds));
-        
+
         $chunkCounter = 0;
 
         foreach($userIds->chunk($chunkSize) as $chunk){

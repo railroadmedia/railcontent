@@ -10,13 +10,13 @@
               "quote" => "Delivering information <br class='lg:hidden'>that is proven <br class='hidden lg:inline-block'>to work<br class='lg:hidden'> and helps the student grow.",
               "name" => "https://drumeo-assets.s3.amazonaws.com/sales/social-proof/todd-sucherman.svg",
               "title" => "STYX, Award-Winning Rock Drummer",
-              "bg" => "https://drumeo-assets.s3.amazonaws.com/sales/social-proof/Todd_Sucherman.jpg",
+              "bg" => "https://drumeo-assets.s3.amazonaws.com/sales/social-proof/Todd--Sucherman.jpg",
           ],
           [
               "quote" => "THE place to go for <br>the best in drum education.",
               "name" => "https://drumeo-assets.s3.amazonaws.com/sales/social-proof/david-garibaldi.svg",
               "title" => "RollingStone Top 100 Drummer",
-              "bg" => "https://drumeo-assets.s3.amazonaws.com/sales/social-proof/David_Garibaldi.jpg",
+              "bg" => "https://drumeo-assets.s3.amazonaws.com/sales/social-proof/David--Garibaldi.jpg",
           ],
       ];
 
@@ -646,7 +646,7 @@
             <div class="flex-1 sm:w-1/2 relative slick-1" style="background-color:#00101d;">
                 @foreach ($headerSliders as $key => $slider)
                     <div class="relative h-full w-full" style="display:none;">
-                        <img class="lazyload sm:hidden" data-src="{{ $slider['bg'] }}" alt="Bill Cobham">
+                        <img class="lazyload sm:hidden" data-src="{{ $slider['bg'] }}" alt="{{ $slider['name'] }}">
                         <div class="absolute inset-0 hidden sm:block bg-cover bg-top" style="background-color:#00101d;background-image:url('{{ $slider['bg'] }}');"></div>
                         <div class="absolute inset-0" style="background: linear-gradient(360deg, #00101D 0%, rgba(0, 16, 29, 0) 100%);"></div>
                         <div class="absolute bottom-4 md:bottom-8 left-8 sm:left-6 md:left-11 lg:left-14 text-white">

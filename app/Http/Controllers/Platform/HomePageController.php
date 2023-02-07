@@ -11,6 +11,7 @@ use App\Maps\ContentTypes;
 use App\Services\LiveStreamEventService;
 use App\Services\PackService;
 use App\Services\UserMetricsService;
+use Illuminate\Support\Facades\Mail;
 use Railroad\Railcontent\Services\UserContentProgressService;
 use Carbon\Carbon;
 use Illuminate\Database\DatabaseManager;
@@ -780,5 +781,10 @@ class HomePageController extends BaseController
         }
 
         return $parsedTypes;
+    }
+
+    public function testemail()
+    {
+        Mail::raw('Hello World!', function($msg) {$msg->to('robert@musora.com')->subject('Test Email'); });
     }
 }
