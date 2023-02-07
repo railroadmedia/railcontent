@@ -1,7 +1,7 @@
 <script setup>
-import useInputValidator from "./useInputValidator";
-import { minLength } from "./validators";
 import { XIcon } from "@heroicons/vue/solid";
+import { vMaska } from 'maska';
+import { reactive, ref, onUpdated } from 'vue';
 const props = defineProps({
   initialValue: {
     type: String,
@@ -62,20 +62,36 @@ const props = defineProps({
   disabled: {
     type: Boolean,
     default: false,
+  },
+  maskProps: {
+    type: Object,
+    default: {
+      mask: "#-#",
+      eager: true
+    }
+  },
+  minLength: {
+    type: Number,
+    default: 3
+  },
+  maskaConfig: {
+    type: Object,
+    default: {
+      dataMaska: '',
+      maskaTokens: ''
+    }
   }
 });
-const emit = defineEmits(["onChange", "onFocus"]);
 
-const { input, errors } = useInputValidator(
-  props.initialValue,
-  [minLength(3)],
-  (value) => emit("onChange", value)
-);
+const maskedValue = ref('');
+const bindedObject = reactive({});
+
+const emit = defineEmits(["onChange", "onFocus"]);
 
 const onClear = (e) => {
   e.preventDefault();
   emit("onChange", '');
-  input.value = '';
+  maskedValue.value = '';
 };
 
 const onEnter = (e) => {
@@ -91,6 +107,10 @@ const getBaseInputStyles = () => `
     'tw-text-[#00101D] tw-border-[#D1D5DB] dark:tw-bg-[#00101D] dark:tw-border-[#445F74] dark:tw-text-white dark:placeholder:tw-text-[#9EC0DC] tw-h-[42px] tw-rounded-[63px] tw-py-[9px] tw-px-[13px] tw-text-[14px] focus:tw-border-none focus:tw-outline-none'
   }
   `
+
+onUpdated(() => {
+  emit('onChange', bindedObject.unmasked);
+})
 </script>
 
 <template>
@@ -101,18 +121,18 @@ const getBaseInputStyles = () => `
         labelValue
       }}</label>
     <div class="tw-flex tw-relative">
-      <input :placeholder="placeholder" :id="id"
+      <input :data-maska="maskaConfig.dataMaska" :data-maska-tokens="maskaConfig.maskaTokens" :placeholder="placeholder" :id="id"
         :class="`${inputOverride ? inputOverride + getBaseInputStyles() + (disabled ? ' tw-bg-[#D3D3D3] dark:tw-bg-transparent dark:tw-opacity-20' : '') : getBaseInputStyles() + (disabled ? ' tw-bg-[#D3D3D3] dark:tw-bg-transparent dark:tw-opacity-20' : '')}`"
-        v-model="input" v-on:keypress.enter.prevent="onEnter" @focus="() => emit('onFocus')" autocomplete="off"
+        v-model="maskedValue" v-maska="bindedObject" v-on:keypress.enter.prevent="onEnter" @focus="() => emit('onFocus')" autocomplete="off"
         :name="inputName" :type="inputType" :disabled="disabled" />
       <div v-if="showClearButton"
-        :class="`tw-absolute tw-right-0 tw-h-full tw-flex tw-items-center tw-justify-center ${input ? 'tw-flex' : 'tw-hidden'} ${clearButtonOverride}`">
+        :class="`tw-absolute tw-right-0 tw-h-full tw-flex tw-items-center tw-justify-center ${maskedValue.length ? 'tw-flex' : 'tw-hidden'} ${clearButtonOverride}`">
         <button class="tw-h-[16px] tw-w-[16px] tw-mx-[12px] tw-z-10" @click="onClear">
           <XIcon class="tw-h-full tw-w-full dark:tw-text-white" />
         </button>
       </div>
       <div v-if="showCustomButton"
-        :class="`tw-absolute tw-right-0 tw-h-full tw-flex tw-items-center tw-justify-center ${input ? 'tw-flex' : 'tw-hidden'} ${clearButtonOverride}`">
+        :class="`tw-absolute tw-right-0 tw-h-full tw-flex tw-items-center tw-justify-center ${maskedValue.length ? 'tw-flex' : 'tw-hidden'} ${clearButtonOverride}`">
         <slot name="custom-btn"></slot>
       </div>
     </div>

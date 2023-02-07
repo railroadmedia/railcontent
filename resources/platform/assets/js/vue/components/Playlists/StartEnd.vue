@@ -13,8 +13,8 @@ const props = defineProps({
     <div class="tw-h-full tw-w-full">
         <h2 class="tw-text-[24px] tw-font-bold tw-w-full tw-text-white tw-text-center">Set Start/End Time</h2>
         <div class="tw-flex tw-pt-[29px]">
-            <InputLabel labelValue="Start Time" placeholder="00:00" inputOverride="tw-rounded-[8px] tw-mr-[20px] tw-w-full" />
-            <InputLabel labelValue="End Time" placeholder="00:00" inputOverride="tw-rounded-[8px] tw-ml-[20px] tw-w-full" />
+            <InputLabel :maskaConfig="{  dataMaska: 'T#:T#', maskaTokens: 'T:[0-5]' }" labelValue="Start Time" placeholder="00:00" inputOverride="tw-rounded-[8px] tw-mr-[20px] tw-w-full" />
+            <InputLabel :maskaConfig="{  dataMaska: 'T#:T#', maskaTokens: 'T:[0-5]' }" labelValue="End Time" placeholder="00:00" inputOverride="tw-rounded-[8px] tw-ml-[20px] tw-w-full" />
         </div>
         <div class="tw-pt-[30px] tw-flex tw-justify-end tw-w-full">
             <button @click="() => emit('onCancel')"
