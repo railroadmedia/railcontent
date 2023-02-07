@@ -6,7 +6,7 @@
     <meta property="og:title" content="30 Day Drummer | Drumeo">
     <meta name="description" content="Learn the drums with daily guided workouts.">
     <meta property="og:description" content="Learn the drums with daily guided workouts.">
-    <meta property="og:image" content="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/og-image.png" style="display: none;">
+    <meta property="og:image" content="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/30DD2-share-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
     @include('_partials.layout._fonts')
@@ -244,9 +244,9 @@
                         </strong></h1>
                     <h2 class="-mt-3 sm:-mt-1 lg:mt-0">with daily guided workouts.</h2>
 
-                    <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>Save your seat in the first-ever <br class="inline lg:hidden">class starting September 5th.</strong></h6>
+                    <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>Save your seat in Season 2 <br class="inline lg:hidden">starting February 27th.</strong></h6>
 
-                    <div class="mt-6 mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top cursor-hover autoplay-video lazyload" style="padding-bottom: 75%;" data-bg="https://cdn.musora.com/image/fetch/w_850,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/header_thumb.png" data-open="trailer">
+                    <div class="mt-6 mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top cursor-hover autoplay-video lazyload" style="padding-bottom: 75%;" data-bg="https://cdn.musora.com/image/fetch/w_850,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/30DD2_header_thumb.png" data-open="trailer">
                         {{--<video class="object-cover w-full h-full absolute z-0 lazyload" data-src="https://player.vimeo.com/progressive_redirect/download/738758998/rendition/source/video-reel2.mp4%20%28Original%29.mp4?loc=external&signature=323bf87c6c208cda28dd99180b56fbc7238cd98d3ca6b60dba352659187783ff" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>--}}
                         <div class="join white smaller absolute bottom-5 left-5"><i class="fas fa-play"></i> Watch Trailer</div>
                     </div>
@@ -265,8 +265,8 @@
                     {{--@endif--}}
                     <div class="flex flex-wrap sm:flex-nowrap items-center mt-6 sm:mt-5 lg:mt-10">
                         <div class="w-full sm:w-1/2 text-center sm:pr-2">
-                            <a class="join blue medium w-full" data-open="waitlistModal">JOIN THE WAITLIST</a>
-                            <p class="opacity-50 text-sm mt-1 mb-5 sm:mb-0">Enrollment is now closed.</p>
+                            <a class="join blue medium w-full" data-open="waitlistModal">ENROLL NOW</a>
+                            <p class="opacity-50 text-sm mt-1 mb-5 sm:mb-0">For just $1/day.</p>
 
                             {{--@if($isUserAlreadyRegistered)--}}
                                 {{--<a class="join sold-out medium w-full">YOU'RE ENROLLED</a>--}}
@@ -286,7 +286,7 @@
                     </div>
                 </div>
                 <div class="w-full sm:w-5/12 hidden sm:block">
-                    <div class="rounded-xl aspect-1:1 overflow-hidden relative bg-cover bg-center cursor-hover autoplay-video lazyload" data-bg="https://cdn.musora.com/image/fetch/w_850,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/header_thumb.png" data-open="trailer">
+                    <div class="rounded-xl aspect-1:1 overflow-hidden relative bg-cover bg-center cursor-hover autoplay-video lazyload" data-bg="https://cdn.musora.com/image/fetch/w_850,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/30DD2_header_thumb.png" data-open="trailer">
                         {{--<video class="object-cover w-full h-full absolute z-0 lazyload" data-src="https://player.vimeo.com/progressive_redirect/download/738758998/rendition/source/video-reel2.mp4%20%28Original%29.mp4?loc=external&signature=323bf87c6c208cda28dd99180b56fbc7238cd98d3ca6b60dba352659187783ff" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>--}}
                         <div class="join white smaller absolute bottom-5 left-5"><i class="fas fa-play"></i> Watch Trailer</div>
                     </div>
@@ -336,7 +336,7 @@
                     Plus, you’ll have a weekly LIVE session with your instructor, Domino Santantonio – to ask your questions, stay motivated, and make sure you’re having FUN playing the drums.
                     <br><br>
                     Scroll down to watch the trailer and save your seat in the first-ever 30-Day Drummer class.</h6>
-                <img class="h-96 hidden sm:inline lazyload" data-src="https://cdn.musora.com/image/fetch/w_690,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/Collage_intro.png">
+                <img class="h-96 hidden sm:inline lazyload" data-src="https://cdn.musora.com/image/fetch/w_690,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/30DD2_Collage_intro.png">
             </div>
         </div>
     </section>
