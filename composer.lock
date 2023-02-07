@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e262dcc4863e3243689f00f616debe1c",
+    "content-hash": "a74807b6ebb7afa32a236c6bdaa78c3c",
     "packages": [
         {
             "name": "aporat/store-receipt-validator",
@@ -16869,19 +16869,12 @@
             "version": "dev-v3.0-fixing-transaction-tracking",
             "alias": "v3.0.7",
             "alias_normalized": "3.0.7.0"
-        },
-        {
-            "package": "railroad/railcontent",
-            "version": "dev-beta-testing-BR334-BR458",
-            "alias": "v2.0.62",
-            "alias_normalized": "2.0.62.0"
         }
     ],
     "minimum-stability": "dev",
     "stability-flags": {
         "railroad/musora-api": 20,
-        "railroad/railanalytics": 20,
-        "railroad/railcontent": 20
+        "railroad/railanalytics": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
