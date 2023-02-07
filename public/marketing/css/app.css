@@ -4340,10 +4340,6 @@ img {
   .sm\:float-left {
     float: left !important;
   }
-  .sm\:my-2 {
-    margin-top: 0.5rem !important;
-    margin-bottom: 0.5rem !important;
-  }
   .sm\:my-6 {
     margin-top: 1.5rem !important;
     margin-bottom: 1.5rem !important;
@@ -4399,6 +4395,10 @@ img {
   .sm\:mx-2 {
     margin-left: 0.5rem !important;
     margin-right: 0.5rem !important;
+  }
+  .sm\:my-2 {
+    margin-top: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
   }
   .sm\:mx-auto {
     margin-left: auto !important;
@@ -4947,14 +4947,6 @@ img {
     padding-top: 3.5rem !important;
     padding-bottom: 3.5rem !important;
   }
-  .sm\:py-3 {
-    padding-top: 0.75rem !important;
-    padding-bottom: 0.75rem !important;
-  }
-  .sm\:px-3 {
-    padding-left: 0.75rem !important;
-    padding-right: 0.75rem !important;
-  }
   .sm\:py-10 {
     padding-top: 2.5rem !important;
     padding-bottom: 2.5rem !important;
@@ -4987,9 +4979,17 @@ img {
     padding-left: 1.25rem !important;
     padding-right: 1.25rem !important;
   }
+  .sm\:px-3 {
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+  }
   .sm\:px-4 {
     padding-left: 1rem !important;
     padding-right: 1rem !important;
+  }
+  .sm\:py-3 {
+    padding-top: 0.75rem !important;
+    padding-bottom: 0.75rem !important;
   }
   .sm\:py-20 {
     padding-top: 5rem !important;
@@ -5375,6 +5375,10 @@ img {
     margin-left: 0.75rem !important;
     margin-right: 0.75rem !important;
   }
+  .md\:my-2 {
+    margin-top: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+  }
   .md\:my-4 {
     margin-top: 1rem !important;
     margin-bottom: 1rem !important;
@@ -5480,6 +5484,9 @@ img {
   .md\:mb-8 {
     margin-bottom: 2rem !important;
   }
+  .md\:mr-0 {
+    margin-right: 0px !important;
+  }
   .md\:mb-28 {
     margin-bottom: 7rem !important;
   }
@@ -5545,9 +5552,6 @@ img {
   }
   .md\:mt-28 {
     margin-top: 7rem !important;
-  }
-  .md\:mr-0 {
-    margin-right: 0px !important;
   }
   .md\:mt-3 {
     margin-top: 0.75rem !important;
@@ -5890,6 +5894,9 @@ img {
   }
   .md\:flex-shrink-0 {
     flex-shrink: 0 !important;
+  }
+  .md\:flex-grow {
+    flex-grow: 1 !important;
   }
   .md\:rotate-0 {
     --tw-rotate: 0deg !important;
