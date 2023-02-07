@@ -1311,11 +1311,17 @@ Ensure the default browser behavior of the `hidden` attribute.
 .top-24 {
   top: 6rem !important;
 }
-.bottom-5 {
-  bottom: 5rem !important;
+.bottom-1 {
+  bottom: 1rem !important;
+}
+.left-1 {
+  left: 1rem !important;
 }
 .left-5 {
   left: 5rem !important;
+}
+.bottom-5 {
+  bottom: 5rem !important;
 }
 .bottom-3 {
   bottom: 3rem !important;
@@ -1425,9 +1431,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .-right-6 {
   right: -1.5rem !important;
 }
-.bottom-1 {
-  bottom: 1rem !important;
-}
 .-left-8 {
   left: -2rem !important;
 }
@@ -1451,9 +1454,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .-bottom-1 {
   bottom: -1rem !important;
-}
-.left-1 {
-  left: 1rem !important;
 }
 .top-4 {
   top: 4rem !important;
@@ -1485,6 +1485,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .z-\[1000\] {
   z-index: 1000 !important;
 }
+.z-50 {
+  z-index: 50 !important;
+}
 .z-40 {
   z-index: 40 !important;
 }
@@ -1493,9 +1496,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .z-20 {
   z-index: 20 !important;
-}
-.z-50 {
-  z-index: 50 !important;
 }
 .z-\[-2\] {
   z-index: -2 !important;
@@ -2051,6 +2051,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .h-screen {
   height: 100vh !important;
 }
+.h-16 {
+  height: 4rem !important;
+}
 .h-14 {
   height: 3.5rem !important;
 }
@@ -2065,9 +2068,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .h-96 {
   height: 24rem !important;
-}
-.h-16 {
-  height: 4rem !important;
 }
 .h-28 {
   height: 7rem !important;
@@ -2574,11 +2574,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .justify-evenly {
   justify-content: space-evenly !important;
 }
-.gap-4 {
-  gap: 1rem !important;
-}
 .gap-2 {
   gap: 0.5rem !important;
+}
+.gap-4 {
+  gap: 1rem !important;
 }
 .gap-6 {
   gap: 1.5rem !important;
@@ -2809,6 +2809,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-border-opacity: 1 !important;
   border-color: rgb(107 114 128 / var(--tw-border-opacity)) !important;
 }
+.border-black {
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(0 0 0 / var(--tw-border-opacity)) !important;
+}
+.border-drumeo {
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(11 118 219 / var(--tw-border-opacity)) !important;
+}
 .border-gray-300 {
   --tw-border-opacity: 1 !important;
   border-color: rgb(209 213 219 / var(--tw-border-opacity)) !important;
@@ -2821,10 +2829,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-border-opacity: 1 !important;
   border-color: rgb(12 74 110 / var(--tw-border-opacity)) !important;
 }
-.border-drumeo {
-  --tw-border-opacity: 1 !important;
-  border-color: rgb(11 118 219 / var(--tw-border-opacity)) !important;
-}
 .border-guitareo {
   --tw-border-opacity: 1 !important;
   border-color: rgb(0 201 172 / var(--tw-border-opacity)) !important;
@@ -2832,10 +2836,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .border-gray-400 {
   --tw-border-opacity: 1 !important;
   border-color: rgb(156 163 175 / var(--tw-border-opacity)) !important;
-}
-.border-black {
-  --tw-border-opacity: 1 !important;
-  border-color: rgb(0 0 0 / var(--tw-border-opacity)) !important;
 }
 .border-pianote {
   --tw-border-opacity: 1 !important;
@@ -2922,6 +2922,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .bg-drumeo {
   --tw-bg-opacity: 1 !important;
   background-color: rgb(11 118 219 / var(--tw-bg-opacity)) !important;
+}
+.bg-\[\#DEEFFF\] {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(222 239 255 / var(--tw-bg-opacity)) !important;
 }
 .bg-\[\#031627\] {
   --tw-bg-opacity: 1 !important;
@@ -3198,6 +3202,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-left: 1.75rem !important;
   padding-right: 1.75rem !important;
 }
+.py-10 {
+  padding-top: 2.5rem !important;
+  padding-bottom: 2.5rem !important;
+}
 .py-5 {
   padding-top: 1.25rem !important;
   padding-bottom: 1.25rem !important;
@@ -3205,10 +3213,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .px-1 {
   padding-left: 0.25rem !important;
   padding-right: 0.25rem !important;
-}
-.py-10 {
-  padding-top: 2.5rem !important;
-  padding-bottom: 2.5rem !important;
 }
 .py-8 {
   padding-top: 2rem !important;
@@ -6060,6 +6064,10 @@ img {
     padding-top: 1.5rem !important;
     padding-bottom: 1.5rem !important;
   }
+  .md\:px-20 {
+    padding-left: 5rem !important;
+    padding-right: 5rem !important;
+  }
   .md\:px-10 {
     padding-left: 2.5rem !important;
     padding-right: 2.5rem !important;
@@ -6135,10 +6143,6 @@ img {
   .md\:px-1 {
     padding-left: 0.25rem !important;
     padding-right: 0.25rem !important;
-  }
-  .md\:px-20 {
-    padding-left: 5rem !important;
-    padding-right: 5rem !important;
   }
   .md\:py-36 {
     padding-top: 9rem !important;
@@ -6396,13 +6400,13 @@ img {
   .md\:text-\[17px\] {
     font-size: 17px !important;
   }
-  .md\:text-6xl {
-    font-size: 3.75rem !important;
-    line-height: 1 !important;
-  }
   .md\:text-base {
     font-size: 1rem !important;
     line-height: 1.5rem !important;
+  }
+  .md\:text-6xl {
+    font-size: 3.75rem !important;
+    line-height: 1 !important;
   }
   .md\:text-lg {
     font-size: 1.125rem !important;
