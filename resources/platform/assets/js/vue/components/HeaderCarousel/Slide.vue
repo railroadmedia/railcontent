@@ -2,7 +2,8 @@
 import { ArrowSmRightIcon } from "@heroicons/vue/solid";
 import ModalRenderer from "../Modal/ModalRenderer";
 import { XIcon } from "@heroicons/vue/solid";
-import {ref} from "vue";
+import { onMounted, ref } from "vue";
+import {testCarousel} from "../../../constants/carousel_data";
 const props = defineProps({
   brand: {
     type: String,
@@ -67,20 +68,32 @@ const props = defineProps({
 });
 
 const learnMoreModal = ref(false);
+const screenSize = ref(window.innerWidth);
 
 const goToUrl = (url) => {
   if (url) {
-    window.location.href = url;
+      if(props.video && screenSize.value > 1279) return;
+      window.location.href = url;
   }
-}
+};
+
+const detectScreenSize = () => {
+    window.addEventListener("resize", ()=>{
+        screenSize.value = window.innerWidth;
+    });
+};
 
 const openModal = () => {
     learnMoreModal.value = true;
-}
+};
 
 const closeModal = () => {
     learnMoreModal.value = false;
-}
+};
+
+onMounted(() => {
+    detectScreenSize();
+});
 </script>
 
 <template>
@@ -113,7 +126,7 @@ const closeModal = () => {
             {{ title }}
           </h2>
             <!-- Logo -->
-            <img v-if="logo" class="tw-h-24 mb-1 tw-object-contain tw-object-left" :src="`${logo}`" alt="pack logo" />
+            <img v-if="logo" class="tw-h-24 mb-1 tw-mr-auto" :src="`${logo}`" alt="pack logo" />
           <p class="tw-text-sm tw-mb-3 tw-hidden xl:tw-block xl:tw-line-clamp-3" v-html="description"></p>
           <!-- CTA -->
           <span
