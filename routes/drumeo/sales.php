@@ -71,9 +71,6 @@ Route::domain('{drumeoDomain}')
         }
     );
 
-
-    Route::get('/register/30-day-drummer-2', [SalesController::class, 'registerFor30DayDrummer2'] );
-    Route::get('/register/new-piano-players-start-here', [SalesController::class, 'registerNewPianoPlayersStartHere'] );
     Route::get('/pro/', [SalesController::class, 'pro']);
     Route::get('/jared-recommends', [SalesController::class, 'jaredRecommends']);
 });
