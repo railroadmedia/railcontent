@@ -61,14 +61,18 @@ export default {
      * @param {string} brand
      * @param {number} id - 
      */
-    pinPlaylist(id, brand = "drumeo") {
+    pinPlaylist(id, brand = "drumeo", csrf_token) {
         let payload = {
             "brand": brand,
             "playlist_id":id,
         }
         let pinRequest = fetch('/railcontent/pin-playlist', {
             method: 'PUT',
-            headers: {'Content-Type': 'application/json',},
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': csrf_token
+            },
+            referrerPolicy: 'no-referrer',
             body: JSON.stringify(payload),
         })
         return pinRequest;
