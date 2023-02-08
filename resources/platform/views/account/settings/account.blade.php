@@ -131,8 +131,7 @@
 
                 {{-- ================================= Owned products ================================= --}}
 
-                @if( !empty($userProductsDigitalAccessTypeSpecific) || $isLifetime || $subscription || $membershipWithoutSubscription)
-
+                @if( !empty($userProductsDigitalAccessTypeSpecific) || $subscription || $membershipWithoutSubscription)
                     <div class="tw-flex tw-flex-col body tw-pt-0 pa-3">
                         <div class="tw-flex tw-flex-row tw-flex-auto tw-py-2 tw-text-[#00101D] dark:tw-text-white tw-text-[#00101D]">
                             <h2 class="tw-font-bold tw-text-lg dark:tw-text-white">Your Access Levels</h2>
@@ -141,22 +140,8 @@
                         <div class="tw-flex tw-flex-row tw-flex-auto tw-text-[#00101D] dark:tw-text-white tw-text-[#00101D]">
                             <div class="tw-flex tw-flex-col">
                                 <ul class="tw-mt-3 tw-space-y-1 tw-list-disc tw-ml-6">
-                                    @if($isLifetime)
-                                        <li>Lifetime Membership</li>
-                                    @elseif($subscription || $membershipWithoutSubscription)
-                                        <li>Membership</li>
-                                    @endif
-
-                                    @foreach($userProductsDigitalAccessTypeSpecific as $userProduct)
-                                        @php
-                                            /** @var $product \Railroad\Ecommerce\Entities\UserProduct */
-                                            $product = $userProduct->getProduct();
-                                        @endphp
-
-                                        @if($product->getType() !== 'physical one time')
-                                            <li>{{ $product->getName() }}</li>
-                                        @endif
-
+                                    @foreach($userProductsDigitalAccessTypeSpecific as $product)
+                                        <li>{{ $product->getName() }}</li>
                                     @endforeach
                                 </ul>
                             </div>
@@ -209,11 +194,15 @@
                             </svg>
                         </div>
 
-                        @if($isLifetime)
-                            <h2 class="tw-text-lg tw-mt-3 tw-mb-3 dark:tw-text-white tw-text-[#00101D]">Lifetime Member</h2>
-                        @elseif(!$hasHadMembership) {{-- has never had a membership --}}
+                        <div class="tw-mt-3 tw-space-y-1 tw-list-disc tw-ml-6 tw-py-3">
+                            @foreach($activeMembershipProducts as $product)
+                                <div>
+                                    {{ $product->getName() }}
+                                </div>
+                            @endforeach
+                        </div>
 
-                        @elseif(!$subscription)
+                        @if(!$subscription)
 
                             @if($activeAllContentAccessExpiryDate)
                                 {{-- access from non-recurring product --}}
