@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('cta_text')->nullable()->change();
             $table->string('cta_url')->nullable()->change();
             $table->string('cta_text')->nullable()->change();
+            $table->string('description')->nullable()->change();
             $table->string('logo')->nullable();
         });
     }
@@ -34,6 +35,7 @@ return new class extends Migration
             $table->string('title')->change();
             $table->string('cta_url')->change();
             $table->string('cta_text')->change();
+            $table->string('description')->change();
             $table->dropColumn('logo');
         });
     }
