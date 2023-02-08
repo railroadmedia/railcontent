@@ -212,9 +212,6 @@ class UserPlaylistsService
         $importInstrumentlessSoundsliceAssignment = false
     ) {
         $content = $this->contentService->getById($contentId);
-        if (empty($content)) {
-            return null;
-        }
 
         $singularContentTypes = array_diff(
             array_merge(
@@ -226,7 +223,7 @@ class UserPlaylistsService
 
         $assignments = $this->contentService->countLessonsAndAssignments($contentId);
 
-        if (in_array($content['type'], $singularContentTypes)) {
+        if ($content && (in_array($content['type'], $singularContentTypes))) {
             $input = [
                 'content_id' => $contentId,
                 'user_playlist_id' => $userPlaylistId,
