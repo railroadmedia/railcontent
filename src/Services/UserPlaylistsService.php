@@ -211,6 +211,7 @@ class UserPlaylistsService
         $importFullSoundsliceAssignment = false,
         $importInstrumentlessSoundsliceAssignment = false
     ) {
+        error_log('Add item to playlist - playlistId :::'.$userPlaylistId.'     contentId:::'.$contentId.'   import all assignments::'.$importAllAssignments.'  import full::'.$importFullSoundsliceAssignment.'  import instrumentless:::'.$importInstrumentlessSoundsliceAssignment);
         $content = $this->contentService->getById($contentId);
 
         $singularContentTypes = array_diff(
@@ -224,6 +225,7 @@ class UserPlaylistsService
         $assignments = $this->contentService->countLessonsAndAssignments($contentId);
 
         if ($content && (in_array($content['type'], $singularContentTypes))) {
+            error_log('Singular content type');
             $input = [
                 'content_id' => $contentId,
                 'user_playlist_id' => $userPlaylistId,
@@ -247,6 +249,7 @@ class UserPlaylistsService
 
         if (!empty($assignments['lessons'])) {
             foreach ($assignments['lessons'] ?? [] as $lesson) {
+                error_log('Add lesson with id:::: '.$lesson['id']);
                 $input = [
                     'content_id' => $lesson['id'],
                     'user_playlist_id' => $userPlaylistId,
@@ -270,6 +273,7 @@ class UserPlaylistsService
 
         if ($importFullSoundsliceAssignment) {
             foreach ($assignments['soundslice_assignments'][$contentId] ?? [] as $assignment) {
+                error_log('Add full soundslice with id:::: '.$assignment['id']);
                 $assignmentInput = [
                     'content_id' => $assignment['id'],
                     'user_playlist_id' => $userPlaylistId,
@@ -286,6 +290,7 @@ class UserPlaylistsService
 
         if ($importInstrumentlessSoundsliceAssignment) {
             foreach ($assignments['soundslice_assignments'][$contentId] ?? [] as $assignment) {
+                error_log('Add instrumentless soundslice with id:::: '.$assignment['id']);
                 $assignmentInput = [
                     'content_id' => $assignment['id'],
                     'user_playlist_id' => $userPlaylistId,
