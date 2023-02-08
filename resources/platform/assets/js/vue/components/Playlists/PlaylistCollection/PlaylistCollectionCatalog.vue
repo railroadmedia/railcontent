@@ -108,7 +108,7 @@
         </div>
 
         <!-- List View Header -->
-        <header class="tw-w-full tw-font-bold tw-items-center tw-bg-[#E6E7E9] dark:tw-bg-[#002039] tw-text-[#0D0D0D] dark:tw-text-white tw-mb-1 tw-rounded-t-md tw-py-4 tw-pl-[48px]"
+        <header class="tw-w-full tw-font-bold tw-items-center tw-transition-colors tw-bg-[#E6E7E9] dark:tw-bg-[#002039] tw-text-[#0D0D0D] dark:tw-text-white tw-mb-1 tw-rounded-t-md tw-py-4 tw-pl-[48px]"
                 :class="state.isListView ? 'tw-hidden md:tw-flex' : 'tw-hidden'"
         >
             <div class="tw-grid tw-grid-cols-10 tw-w-full">
@@ -123,7 +123,7 @@
                     </p>
                 </div>
             </div>
-            <div class="tw-inline-flex tw-w-[24px] tw-mx-4 xl:tw-mx-8"><!-- For Pin Icon --></div>
+            <div class="tw-inline-flex tw-px-4 xl:tw-px-8"><span class="tw-w-[24px] tw-h-[24px]"></span></div> <!-- Spacer for Pin Icon -->
             <p class="tw-pr-[22px] tw-w-[100px] tw-text-center">Options</p>
         </header>
 

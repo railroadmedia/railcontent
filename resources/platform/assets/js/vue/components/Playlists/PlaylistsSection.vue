@@ -58,16 +58,15 @@ const handleCreatePlaylist = () => {
                 <ul class="tw-font-open-sans tw-text-[#00101D] dark:tw-text-white tw-text-[14px] tw-overflow-hidden"
                     v-if="formattedPlaylists.length > 0">
                     <!-- Loop through User Playlists -->
-                    <li class="tw-w-full tw-flex tw-flex-wrap tw-overflow-hidden"
+                    <li class="tw-group tw-w-full tw-flex tw-overflow-hidden dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
                         v-for="({ url, id, name }) in formattedPlaylists" :key="id + '-playlist-li'">
                         <a :href="url"
-                            class="tw-flex tw-flex-wrap tw-px-[25px] tw-w-full tw-no-underline tw-text-inherit tw-py-[12px] dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]">
-                            <span class="tw-min-w-0 tw-truncate">{{ name }}</span>
+                            class="tw-flex tw-flex-wrap tw-px-[25px] tw-w-full tw-no-underline tw-text-inherit tw-h-[42px] tw-items-center">
+                            <span class="tw-min-w-0 tw-truncate tw-capitalize tw-text-sm">{{ name }}</span>
                         </a>
-                    </li>
-                    <li class="tw-flex tw-w-full tw-pt-[4px]" v-if="playlists.length > 5">
-                        <a class="hover:tw-underline tw-px-[25px] tw-py-[12px] tw-flex tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-[14px]"
-                            :href="`/playlists/all/${userId}`">See all</a>
+                        <a href="" class="tw-hidden group-hover:tw-inline-flex dark:tw-text-white tw-w-[42px] tw-shrink-0 tw-items-center tw-justify-center">
+                            <musora-icon icon-name="play-circle-filled" class="tw-w-[24px]" />
+                        </a>
                     </li>
                 </ul>
 
