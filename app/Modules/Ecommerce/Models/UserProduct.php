@@ -54,4 +54,15 @@ class UserProduct extends Model
     {
         return UserProductFactory::new();
     }
+
+    public function isValid(): bool
+    {
+        if ((empty($this->expiration_date) || $this->expiration_date > Carbon::now()) &&
+            (empty($this->start_date) || $this->start_date < Carbon::now()) &&
+            empty($this->deleted_at)) {
+            return true;
+        }
+
+        return false;
+    }
 }

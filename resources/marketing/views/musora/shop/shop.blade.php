@@ -234,6 +234,7 @@
             {{--   DRUMEO     --}}
             <section class="grid-view category-section" data-category="drumeo">
                 <ul class="container mx-auto fixed-cards">
+                    <div id="drumeo"></div>
                     <li>
                         <h1 class="px-2 md:px-3">
                             <div class="heading-icon text-drumeo"><i class="fas fa-drum"></i></div>
@@ -264,6 +265,7 @@
             {{--   Pianote     --}}
             <section class="grid-view category-section" data-category="pianote">
                 <ul class="container mx-auto fixed-cards">
+                    <div id="pianote"></div>
                     <li>
                         <h1 class="px-2 md:px-3">
                             <div class="heading-icon text-pianote"><i class="fas fa-piano-keyboard"></i></div>
@@ -294,6 +296,7 @@
             {{--   Guitareo     --}}
             <section class="grid-view category-section" data-category="guitareo">
                 <ul class="container mx-auto fixed-cards">
+                    <div id="guitareo"></div>
                     <li>
                         <h1 class="px-2 md:px-3">
                             <div class="heading-icon text-guitareo"><i class="fas fa-guitar"></i></div>
@@ -324,6 +327,7 @@
             {{--   Singeo     --}}
             <section class="grid-view category-section" data-category="singeo">
                 <ul class="container mx-auto fixed-cards">
+                    <div id="singeo"></div>
                     <li>
                         <h1 class="px-2 md:px-3">
                             <div class="heading-icon text-singeo"><i class="fas fa-microphone-stand"></i></div>
@@ -354,6 +358,7 @@
             {{--   Musora     --}}
             <section class="grid-view category-section" data-category="musora">
                 <ul class="container mx-auto fixed-cards">
+                    <div id="musora"></div>
                     <li>
                         <h1 class="px-2 md:px-3">
                             <div class="heading-icon text-black"><i class="fas fa-music"></i></div>
