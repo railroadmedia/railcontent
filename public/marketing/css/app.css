@@ -533,11 +533,6 @@ input::-moz-placeholder, textarea::-moz-placeholder {
   color: #9ca3af; /* 2 */
 }
 
-input:-ms-input-placeholder, textarea:-ms-input-placeholder {
-  opacity: 1; /* 1 */
-  color: #9ca3af; /* 2 */
-}
-
 input::placeholder,
 textarea::placeholder {
   opacity: 1; /* 1 */
@@ -720,7 +715,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   -webkit-user-select: none;
      -moz-user-select: none;
-      -ms-user-select: none;
           user-select: none;
   white-space: nowrap;
 }
@@ -897,7 +891,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   position: relative;
   -webkit-user-select: none;
      -moz-user-select: none;
-      -ms-user-select: none;
           user-select: none;
 }
 .input-field ul.dropdown li a, .input-field ul.dropdown li .option {
@@ -2483,7 +2476,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .select-none {
   -webkit-user-select: none !important;
      -moz-user-select: none !important;
-      -ms-user-select: none !important;
           user-select: none !important;
 }
 .resize {
@@ -2493,8 +2485,7 @@ Ensure the default browser behavior of the `hidden` attribute.
   resize: both !important;
 }
 .snap-x {
-  -ms-scroll-snap-type: x var(--tw-scroll-snap-strictness) !important;
-      scroll-snap-type: x var(--tw-scroll-snap-strictness) !important;
+  scroll-snap-type: x var(--tw-scroll-snap-strictness) !important;
 }
 .snap-mandatory {
   --tw-scroll-snap-strictness: mandatory !important;
@@ -4254,10 +4245,6 @@ img {
   color: rgb(158 192 220 / var(--tw-text-opacity)) !important;
 }
 .dark .dark\:placeholder\:text-\[\#9EC0DC\]::-moz-placeholder {
-  --tw-text-opacity: 1 !important;
-  color: rgb(158 192 220 / var(--tw-text-opacity)) !important;
-}
-.dark .dark\:placeholder\:text-\[\#9EC0DC\]:-ms-input-placeholder {
   --tw-text-opacity: 1 !important;
   color: rgb(158 192 220 / var(--tw-text-opacity)) !important;
 }
