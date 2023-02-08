@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Services;
 use Carbon\Carbon;
 use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
+use Railroad\Railcontent\Events\PlaylistItemsUpdated;
 use Railroad\Railcontent\Repositories\PinnedPlaylistsRepository;
 use Railroad\Railcontent\Repositories\PlaylistLikeRepository;
 use Railroad\Railcontent\Repositories\UserPlaylistContentRepository;
@@ -210,8 +211,10 @@ class UserPlaylistsService
         $importFullSoundsliceAssignment = false,
         $importInstrumentlessSoundsliceAssignment = false
     ) {
-        ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
         $content = $this->contentService->getById($contentId);
+        if (empty($content)) {
+            return null;
+        }
 
         $singularContentTypes = array_diff(
             array_merge(
@@ -269,7 +272,7 @@ class UserPlaylistsService
         }
 
         if ($importFullSoundsliceAssignment) {
-            foreach ($assignments['soundslice_assignments'] ?? [] as $assignment) {
+            foreach ($assignments['soundslice_assignments'][$contentId] ?? [] as $assignment) {
                 $assignmentInput = [
                     'content_id' => $assignment['id'],
                     'user_playlist_id' => $userPlaylistId,
@@ -285,7 +288,7 @@ class UserPlaylistsService
         }
 
         if ($importInstrumentlessSoundsliceAssignment) {
-            foreach ($assignments['soundslice_assignments'] ?? [] as $assignment) {
+            foreach ($assignments['soundslice_assignments'][$contentId] ?? [] as $assignment) {
                 $assignmentInput = [
                     'content_id' => $assignment['id'],
                     'user_playlist_id' => $userPlaylistId,
@@ -299,6 +302,8 @@ class UserPlaylistsService
                 );
             }
         }
+
+        event(new PlaylistItemsUpdated($userPlaylistId));
 
         return true;
     }
@@ -501,7 +506,11 @@ class UserPlaylistsService
             return $itemPlaylist;
         }
 
-        return $this->userPlaylistContentRepository->deletePlaylistItemAndReposition($itemPlaylist);
+        $deleted =  $this->userPlaylistContentRepository->deletePlaylistItemAndReposition($itemPlaylist);
+
+        event(new PlaylistItemsUpdated($itemPlaylist['user_playlist_id']));
+
+        return $deleted;
     }
 
     /**
