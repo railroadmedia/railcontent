@@ -829,6 +829,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         if (!$brand) {
             $brand = brand();
         }
-        return $this->isAPlusMember();
+        return $this->isAPlusMember() ||
+            ($brand == 'drumeo' && $this->is_drumeo_lifetime_member);
     }
 }
