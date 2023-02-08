@@ -178,7 +178,8 @@ class CarouselSeeder extends Seeder
                 'cta_text' => $carousel['cta_text'],
                 'cta_url' => $carousel['cta_url'],
                 'img' => $carousel['img'],
-                'display_order' => $carousel['display_order']
+                'display_order' => $carousel['display_order'],
+                'is_featured' => 0
             ]);
         }
     }
