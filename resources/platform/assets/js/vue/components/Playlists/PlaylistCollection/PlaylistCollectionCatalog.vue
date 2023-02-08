@@ -108,14 +108,23 @@
         </div>
 
         <!-- List View Header -->
-        <header class="tw-w-full tw-font-bold tw-items-center tw-p-4 dark:tw-bg-[#002039] dark:tw-text-white tw-mb-2 tw-rounded-t-md"
-                :class="state.isListView ? 'tw-flex' : 'tw-hidden'"
+        <header class="tw-w-full tw-font-bold tw-items-center dark:tw-bg-[#002039] dark:tw-text-white tw-mb-1 tw-rounded-t-md tw-py-4 tw-pl-[48px]"
+                :class="state.isListView ? 'tw-hidden md:tw-flex' : 'tw-hidden'"
         >
-            <p>Name</p>
-            <p>Description</p>
-            <p>Category</p>
-            <p>Time</p>
-            <p>Options</p>
+            <div class="tw-grid tw-grid-cols-10 tw-w-full">
+                <p class="tw-col-span-2 tw-relative">
+                    <span class="tw-ml-[-24px] tw-inline-block">Name</span>
+                </p>
+                <p class="tw-col-span-5 tw-pl-2">Description</p>
+                <div class="tw-col-span-3 tw-w-full tw-flex">
+                    <p class="tw-w-1/2 tw-text-center">Category</p>
+                    <p class="tw-w-1/2 tw-text-center">
+                        Time
+                    </p>
+                </div>
+            </div>
+            <div class="tw-inline-flex tw-w-[24px] tw-mx-4 xl:tw-mx-8"><!-- For Pin Icon --></div>
+            <p class="tw-pr-[22px] tw-w-[100px] tw-text-center">Options</p>
         </header>
 
         <!-- Cards -->
