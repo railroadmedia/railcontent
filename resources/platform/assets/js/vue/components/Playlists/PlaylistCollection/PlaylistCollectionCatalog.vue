@@ -77,7 +77,7 @@
             <!-- List/Grid Toggle -->
             <div class="tw-px-1">
                 <button class="tw-text-xs tw-uppercase tw-px-1 tw-font-bebas-neue"
-                        :class="[state.isListView ? 'dark:tw-text-white' : 'dark:tw-text-[#7E9AB1]']"
+                        :class="[state.isListView ? 'dark:tw-text-white' : 'tw-text-[#D4D4D8] dark:tw-text-[#7E9AB1]']"
                         @click="state.isListView = true"
                 >
                     <svg width="36" height="35" viewBox="0 0 36 35" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -93,7 +93,7 @@
                     <span>List</span>
                 </button>
                 <button class="tw-text-xs tw-uppercase tw-px-1 tw-font-bebas-neue"
-                        :class="[state.isListView ? 'dark:tw-text-[#7E9AB1]' : 'dark:tw-text-white']"
+                        :class="[state.isListView ? 'tw-text-[#D4D4D8] dark:tw-text-[#7E9AB1]' : 'dark:tw-text-white']"
                         @click="state.isListView = false"
                 >
                     <svg width="36" height="35" viewBox="0 0 36 35" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -108,7 +108,7 @@
         </div>
 
         <!-- List View Header -->
-        <header class="tw-w-full tw-font-bold tw-items-center dark:tw-bg-[#002039] dark:tw-text-white tw-mb-1 tw-rounded-t-md tw-py-4 tw-pl-[48px]"
+        <header class="tw-w-full tw-font-bold tw-items-center tw-bg-[#E6E7E9] dark:tw-bg-[#002039] tw-text-[#0D0D0D] dark:tw-text-white tw-mb-1 tw-rounded-t-md tw-py-4 tw-pl-[48px]"
                 :class="state.isListView ? 'tw-hidden md:tw-flex' : 'tw-hidden'"
         >
             <div class="tw-grid tw-grid-cols-10 tw-w-full">
