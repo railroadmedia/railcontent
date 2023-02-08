@@ -185,6 +185,19 @@
                 margin:25px 10px 0
             }
         }
+        .timeline-container .timeline:after,
+        .timeline-container:after {
+            background-color: #f61a30;
+        }
+        table.comparison tr td:nth-child(2) {
+            background-color: #f61a30;
+            text-shadow: 3px 3px #f61a30;
+        }
+        table.comparison tr:hover td:nth-child(2),
+        table.comparison tr:nth-child(2n):hover td:nth-child(2) {
+            background-color:#eb1a2f;
+
+        }
     </style>
 @stop()
 
@@ -218,28 +231,28 @@
     <header class="px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:#eff7ff;">
         <div class="container max-w-5xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center">
-                <div class="w-full sm:w-3/5 text-center lg:text-left">
+                <div class="w-full sm:w-7/12 text-center lg:text-left">
                     <img class="h-20 sm:h-24 lg:h-28 -mb-3 sm:mb-0 lg:mb-3 lazyload" data-src="https://cdn.musora.com/image/fetch/w_440,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/new-piano-players-start-here-logo-2+1.png">
                     <h1 class="rotater-text overflow-hidden"><strong>
                             <span class="relative whitespace-nowrap top-0 delay-1000 ease-in-out">Learn the piano</span><br>
-                            <span class="relative whitespace-nowrap top-0 delay-1000 ease-in-out">Play your favorite songs</span><br>
-                            <span class="relative whitespace-nowrap top-0 delay-1000 ease-in-out">Start sounding beautiful</span><br>
+                            <span class="relative whitespace-nowrap top-0 delay-1000 ease-in-out">Play real songs </span><br>
+                            <span class="relative whitespace-nowrap top-0 delay-1000 ease-in-out">Sound beautiful</span><br>
 
                             <span class="relative whitespace-nowrap top-0 delay-1000 ease-in-out">Learn the piano</span><br>
-                            <span class="relative whitespace-nowrap top-0 delay-1000 ease-in-out">Play your favorite songs</span><br>
-                            <span class="relative whitespace-nowrap top-0 delay-1000 ease-in-out">Start sounding beautiful</span><br>
+                            <span class="relative whitespace-nowrap top-0 delay-1000 ease-in-out">Play real songs </span><br>
+                            <span class="relative whitespace-nowrap top-0 delay-1000 ease-in-out">Sound beautiful</span><br>
 
                             <span class="relative whitespace-nowrap top-0 delay-1000 ease-in-out">Learn the piano</span><br>
-                            <span class="relative whitespace-nowrap top-0 delay-1000 ease-in-out">Play your favorite songs</span><br>
-                            <span class="relative whitespace-nowrap top-0 delay-1000 ease-in-out">Start sounding beautiful</span><br>
+                            <span class="relative whitespace-nowrap top-0 delay-1000 ease-in-out">Play real songs </span><br>
+                            <span class="relative whitespace-nowrap top-0 delay-1000 ease-in-out">Sound beautiful</span><br>
 
                             <span class="relative whitespace-nowrap top-0 delay-1000 ease-in-out">Learn the piano</span><br>
-                            <span class="relative whitespace-nowrap top-0 delay-1000 ease-in-out">Play your favorite songs</span><br>
-                            <span class="relative whitespace-nowrap top-0 delay-1000 ease-in-out">Start sounding beautiful</span><br>
+                            <span class="relative whitespace-nowrap top-0 delay-1000 ease-in-out">Play real songs </span><br>
+                            <span class="relative whitespace-nowrap top-0 delay-1000 ease-in-out">Sound beautiful</span><br>
 
                             <span class="relative whitespace-nowrap top-0 delay-1000 ease-in-out">Learn the piano</span><br>
-                            <span class="relative whitespace-nowrap top-0 delay-1000 ease-in-out">Play your favorite songs</span><br>
-                            <span class="relative whitespace-nowrap top-0 delay-1000 ease-in-out">Start sounding beautiful</span><br>
+                            <span class="relative whitespace-nowrap top-0 delay-1000 ease-in-out">Play real songs </span><br>
+                            <span class="relative whitespace-nowrap top-0 delay-1000 ease-in-out">Sound beautiful</span><br>
                         </strong></h1>
                     <h2 class="-mt-3 sm:-mt-1 lg:mt-0">in just 30 days.</h2>
 
@@ -251,13 +264,13 @@
                     </div>
 
                     <p class="hidden lg:inline">
-                        <i class="fas fa-check text-pianote"></i> Improve Your Skills
-                        <i class="ml-2 fas fa-check text-pianote"></i> Drum Every Day
-                        <i class="ml-2 fas fa-check text-pianote"></i> Learn By Doing</p>
+                        <i class="fas fa-check text-pianote"></i> Learn by doing
+                        <i class="ml-2 fas fa-check text-pianote"></i> Play every day
+                        <i class="ml-2 fas fa-check text-pianote"></i> No theory required</p>
                     <div class="flex inline lg:hidden">
-                        <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-pianote"></i><br> Improve<br> Your Skills</p>
-                        <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-pianote"></i><br> Drum<br> Every Day</p>
-                        <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-pianote"></i><br> Learn<br> By Doing</p>
+                        <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-pianote"></i><br> Learn  <br> by doing</p>
+                        <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-pianote"></i><br> Play  <br>every day</p>
+                        <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-pianote"></i><br> No theory <br> required</p>
                     </div>
                     {{--@if(session()->has('success-message'))--}}
                         {{--<p class="mb-3 lg:-mb-7 mt-3 text-pianote text-center"><strong>Congrats! You have registered for 30-Day Drummer.<br class="hidden md:inline"> Check your email for the details.</strong></p>--}}
@@ -284,7 +297,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="w-full sm:w-2/5 hidden sm:block">
+                <div class="w-full sm:w-5/12 hidden sm:block">
                     <div class="rounded-xl aspect-1:1 overflow-hidden relative bg-cover bg-center cursor-hover autoplay-video lazyload" data-bg="https://cdn.musora.com/image/fetch/w_850,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/header-thumb.jpg" data-open="trailer">
                         {{--<video class="object-cover w-full h-full absolute z-0 lazyload" data-src="https://player.vimeo.com/progressive_redirect/download/738758998/rendition/source/video-reel2.mp4%20%28Original%29.mp4?loc=external&signature=323bf87c6c208cda28dd99180b56fbc7238cd98d3ca6b60dba352659187783ff" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>--}}
                         <div class="join white smaller absolute bottom-5 left-5"><i class="fas fa-play"></i> Watch Trailer</div>
@@ -298,7 +311,7 @@
                     <h4 class="px-3 lg:px-5"><strong>February 27</strong></h4>
                     <hr class="border-gray-300 my-4 sm:my-2 lg:my-4">
                     <p class="text-sm px-3 lg:px-5">
-                        Enrollment is closed.
+                        Enrollment closes in<br class="inline lg:hidden"> <span class="tzcd-medium text-pianote">a limited time</span>.
                     </p>
                 </div>
                 <div class="flex flex-wrap sm:flex-nowrap items-center justify-evenly w-full sm:w-auto sm:flex-grow py-4 sm:py-3 lg:py-4 text-left sm:text-center">
@@ -330,7 +343,7 @@
             <div class="text-left flex flex-wrap sm:flex-nowrap mb-32 sm:mb-56 lg:mb-72">
                 <h6 class="leading-normal max-w-lg pr-7">You don’t learn by watching. You learn by doing.
                     <br><br>
-                    Start the year off right and learn the piano by <u>playing the piano</u>. You’ll be playing a song from the very first lessons and you’ll follow along with 10-minute daily guided sessions that show you exactly what to play.
+                    Start the year off right and learn the piano <strong>by playing the piano</strong>. You’ll be playing a song from the very first lessons and you’ll follow along with 10-minute daily guided sessions that show you exactly what to play.
                     <br><br>
                     No complicated theory. No need to read music. No frustration.
                     <br><br>
@@ -435,9 +448,9 @@
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
         <div class="container max-w-4xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center justify-center">
-                <img class="h-28 sm:h-36 lg:h-48 lazyload" data-src="https://cdn.musora.com/image/fetch/w_760,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/new-piano-players-start-here-logo-stacked.svg">
+                <img class="h-20 sm:h-28 lg:h-32 lazyload" data-src="https://cdn.musora.com/image/fetch/w_760,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/new-piano-players-start-here-logo-stacked.svg">
                 <h4 class="leading-loose text-left">
-                    <i class="fas fa-check text-pianote mr-5"></i> Daily guided drum workouts<br>
+                    <i class="fas fa-check text-pianote mr-5"></i> Daily guided piano workouts<br>
                     <i class="fas fa-check text-pianote mr-5"></i> Weekly LIVE Q&A workshops<br>
                     <i class="fas fa-check text-pianote mr-5"></i> Flexible weekly schedule<br>
                     <i class="fas fa-check text-pianote mr-5"></i> Ongoing motivation & support<br>
@@ -452,7 +465,7 @@
                 <a href="{{ $registerButtonUrl }}" class="join blue medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 {{--@if(!is_current_user_a_member()) anchor-slide @endif--}}">ENROLL NOW</a><br>
             {{--@endif--}}
             <img class="h-7 mr-1 mb-5 sm:mb-10 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/Joined_profiles.png">
-            <p class="inline-block leading-tight text-sm align-middle mb-5 sm:mb-10">Join {{ $students ?? 0 }} drummers who<br> have already registered.</p>
+            <p class="inline-block leading-tight text-sm align-middle mb-5 sm:mb-10">Join {{ $students ?? 0 }} piano players who<br> have already registered.</p>
 
         </div>
     </section>
@@ -627,44 +640,54 @@
                 </div>
             </div>
 
-            <h3 class="mt-12 sm:mt-16 lg:mt-20 mb-5 sm:mb-8 lg:mb-10"><strong>What piano players are saying:</strong></h3>
+            <h3 class="mt-12 sm:mt-16 lg:mt-20 mb-5 sm:mb-8 lg:mb-10"><strong>What students are saying about Lisa and her teaching style</strong></h3>
             <div class="flex flex-wrap text-left">
-                <div class="w-full lg:w-1/2 py-2 sm:px-2 lg:p-3">
-                    <div class="flex items-start p-5 bg-white rounded-lg">
-                        <img class="h-16 lg:h-20 rounded-full lazyload" data-src="https://cdn.musora.com/image/fetch/w_160,q_auto:best/https://d1923uyy6spedc.cloudfront.net/LARNELL-LEWIS-HEAD-1641315158.jpg">
-                        <p class="pl-4"><strong>Larnell Lewis</strong><br>
-                            <em class="leading-tight inline-block mb-1 opacity-60">Grammy-winner, Snarky Puppy</em><br>
-                            “Domino’s passion for drumming is infectious! It’s a great reminder that all we need is a love for music and drums to get started!”
-                        </p>
+
+                @php
+                    $testimonials = [
+                        [
+                        'image' => 'https://pianote.s3.amazonaws.com/sales/2022/testimonials/jessripley.jpg',
+                        'title' => "I’m blown away by the program you’ve created.",
+                        'description' => "Pianote is an insanely encouraging and supportive community run by an insanely encouraging and supportive team. Sincerely, I’m blown away by the program you’ve created.<br><br>I sat down one day and it just clicked. From then on, I’ve felt VERY encouraged to keep learning and practicing. It’s fulfilling and fun to see myself progress and achieve goals. Now I’m playing with both hands at the same time with confidence – and I’ve started playing along with more backing tracks and making up my own songs.",
+                        'name' => 'Jess Ripley',
+                        'location' => 'California, USA',
+                        ],
+                        [
+                        'image' => 'https://pianote.s3.amazonaws.com/sales/2022/testimonials/serenadorward.jpg',
+                        'title' => "If I was taught this way as a child, I would have never quit.",
+                        'description' => "I decided to sign up with Pianote not only to re-learn how to play the piano, but also because my mental health was really suffering and I needed something positive to focus on that was just for ME. I knew almost immediately that this was the answer I had been looking for. It felt like the heaviness on my shoulders got a bit lighter after every piano session.  And even though the lessons are virtual, it was like Lisa was right there beside me cheering me on.<br><br>I was blown away by how quickly I progressed with a few tutorials from Lisa. My overall confidence improved, especially with improvisation. Now I know all these little tricks (fills & riffs) and how to play inversions and practice chords in ways that sound so lovely.  If I had been taught this way as a child, I probably never would have quit.",
+                        'name' => 'Serena Dorward',
+                        'location' => 'Ontario, Canada',
+                        ],
+                        [
+                        'image' => 'https://pianote.s3.amazonaws.com/sales/2022/testimonials/jaydemcintosh.jpg',
+                        'title' => "I’ve had to give up on a lot of my dreams. Then I discovered Pianote.",
+                        'description' => "I’ve been chronically ill for the last six years, which means I’ve had to give up on a lot of my dreams and goals.<br><br>During my health journey, my interest in piano and my connection to music really arose – but it also seemed impossible. I had no prior music knowledge and couldn’t even get out of bed some days. This is when I discovered Pianote and they’ve been amazing.<br><br>I have to work at a very slow pace due to my health, but I’ve already learned so many basics. I can play some of my all-time favorite songs – and it’s just so awesome to know I can learn from home and accomplish one of my dreams. I’m so excited to keep learning and I recommend Pianote so much.",
+                        'name' => 'Jayde McIntosh',
+                        'video' => '660596722',
+                        'location' => 'Australia',
+                        ],
+                        [
+                        'image' => 'https://pianote.s3.amazonaws.com/sales/2022/testimonials/iankershaw.jpg',
+                        'title' => "Such a fantastic and welcoming student community.",
+                        'description' => "When I signed up for Pianote, I knew I was going to get Lisa’s great energy, the Method, the courses, the bootcamps, and the student reviews.<br><br>But my breakthrough came when I realized that sitting behind all of this is such a fantastic and welcoming, supportive student community. It’s this community – as well as the teachers and the rest of the Pianote team – that really actively encourages you to share your progress and practice. And it doesn’t have to be perfect. And that really does encourage you to practice more. And it’s in that sharing and practice that the real breakthroughs come. Thank you!",
+                        'name' => 'Ian Kershaw',
+                        'video' => '660596700',
+                        'location' => 'United Kingdom',
+                        ],
+                    ]
+                @endphp
+                @foreach ($testimonials as $testimonial)
+                    <div class="w-full lg:w-1/2 py-2 sm:px-2 lg:p-3">
+                        <div class="flex items-start p-5 bg-white rounded-lg">
+                            <img class="h-16 lg:h-20 rounded-full lazyload" data-src="https://cdn.musora.com/image/fetch/w_160,q_auto:best/{{ $testimonial['image'] }}">
+                            <p class="pl-4"><strong>{{ $testimonial['name'] }}</strong><br>
+                                <em class="leading-tight inline-block mb-1 opacity-60">{{ $testimonial['location'] }}</em><br>
+                                “{!! $testimonial['description']  !!}”
+                            </p>
+                        </div>
                     </div>
-                </div>
-                <div class="w-full lg:w-1/2 py-2 sm:px-2 lg:p-3">
-                    <div class="flex items-start p-5 bg-white rounded-lg">
-                        <img class="h-16 lg:h-20 rounded-full lazyload" data-src="https://cdn.musora.com/image/fetch/w_160,q_auto:best/https://d1923uyy6spedc.cloudfront.net/281911-avatar-1609277722.png">
-                        <p class="pl-4"><strong>Matt McGuire</strong><br>
-                            <em class="leading-tight inline-block mb-1 opacity-60">The Chainsmokers</em><br>
-                            “I genuinely enjoy watching Domino play, you can see the pure love for what she does. This program not only provides education, I'm sure you'll be entertained throughout the process.”
-                        </p>
-                    </div>
-                </div>
-                <div class="w-full lg:w-1/2 py-2 sm:px-2 lg:p-3">
-                    <div class="flex items-start p-5 bg-white rounded-lg">
-                        <img class="h-16 lg:h-20 rounded-full lazyload" data-src="https://cdn.musora.com/image/fetch/w_160,q_auto:best/https://d1923uyy6spedc.cloudfront.net/dorothea-thumb-1656515788.jpg">
-                        <p class="pl-4"><strong>Dorothea Taylor</strong><br>
-                            <em class="leading-tight inline-block mb-1 opacity-60">The Godmother Of Drumming,<br> Educator for 50+ years</em><br>
-                            “Domino plays drums with high energy & passion which shows how much fun playing drums can be.”
-                        </p>
-                    </div>
-                </div>
-                <div class="w-full lg:w-1/2 py-2 sm:px-2 lg:p-3">
-                    <div class="flex items-start p-5 bg-white rounded-lg">
-                        <img class="h-16 lg:h-20 rounded-full lazyload" data-src="https://cdn.musora.com/image/fetch/w_160,q_auto:best/https://d1923uyy6spedc.cloudfront.net/31880-avatar-1557351774.jpg">
-                        <p class="pl-4"><strong>Jared Falk</strong><br>
-                            <em class="leading-tight inline-block mb-1 opacity-60">Drumeo Co-Founder</em><br>
-                            “Every-time I watch and listen to Domino Santantonio play drums I smile. She plays with joy, teaches with passion, and inspires drummers to take action.”
-                        </p>
-                    </div>
-                </div>
+                @endforeach
             </div>
 
 
@@ -678,7 +701,7 @@
                 {{--<a href="{{ $registerButtonUrl }}" class="join blue medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 @if(!is_current_user_a_member()) anchor-slide @endif">ENROLL NOW</a><br>--}}
             {{--@endif--}}
             {{--<img class="h-7 mr-1 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/Joined_profiles.png">--}}
-            {{--<p class="inline-block leading-tight text-sm align-middle">Join {{ $students ?? 0 }} drummers who<br> have already registered.</p>--}}
+            {{--<p class="inline-block leading-tight text-sm align-middle">Join {{ $students ?? 0 }} piano players who<br> have already registered.</p>--}}
         </div>
     </section>
 {{--    <section class="text-white text-center px-5 sm:px-6 py-10 sm:py-16 lg:py-20" style="background:linear-gradient(to bottom, #0b76db, #074c8e);">--}}
@@ -743,7 +766,7 @@
                             <div class="w-full mx-auto sm:mx-0">
 
                                 <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Learn drums by playing drums with Domino Santantonio</p>
-                                <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Join {{ $students ?? 0 }} drummers who’ve already registered.</p>
+                                <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Join {{ $students ?? 0 }} piano players who have already registered.</p>
                                 <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Course runs February 27 to March 25, 2023.</p>
                                 <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i>  Click below to join the next edition of 30-Day Drummer</p>
 
