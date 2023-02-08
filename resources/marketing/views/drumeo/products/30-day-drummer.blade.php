@@ -727,19 +727,16 @@
 
     <div id="final" class="anchor"></div>
     <section class="text-center relative z-50 overflow-hidden px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#eff7ff;">
-        <div class="text-center">
-            <img class="h-20 sm:h-24 lg:h-28 mb-2" src="https://cdn.musora.com/image/fetch/w_440,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/30_day_drummer2_logo.png" alt="30DD season 2" />
-            <h2 class="mb-4"><strong>Learn the drums with daily guided workouts.</strong></h2>
-            <h6 class="mb-4"><b>EARLY BIRD SPECIAL:</b> Get a free practice & sticks when you enroll before February 19th.</h6>
-            <h6 class="tzcd-text text-drumeo hidden sm:block"></h6>
-            <h6 class="tzcd-text-smaller text-drumeo sm:hidden"></h6>
-        </div>
         <div class="container mx-auto relative z-50">
             {{--@if(!is_current_user_a_member())--}}
-            {{--<img class="h-20 sm:h-28 lazyload" data-src="https://cdn.musora.com/image/fetch/w_380,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/30_day_drummer_logo.png">--}}
-            {{--<h2 class="leading-tight mt-2 mb-3 sm:my-3 lg:my-4"><strong>Learn the drums with daily guided workouts.</strong></h2>--}}
+            <img class="h-20 sm:h-28 lazyload" data-src="https://cdn.musora.com/image/fetch/w_380,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/30_day_drummer2_logo.png" alt="30DD season 2">
+            <h2 class="leading-tight mt-2 mb-3 sm:my-3 lg:my-4"><strong>Learn the drums with daily guided workouts.</strong></h2>
 
-                {{--<h6 class="leading-normal"><strong>Launch Special:</strong> Get a FREE pair of Drumeo 5A Drumsticks + <br class="hidden sm:inline">one-month Drumeo membership with your enrollment.--}}
+                <h6 class="leading-normal mb-4">
+                    <strong>EARLY BIRD SPECIAL:</strong> Get a free practice & sticks <br class="hidden sm:inline">when you enroll before February 19th.
+                </h6>
+                <h6 class="tzcd-text text-drumeo hidden sm:block"></h6>
+                <h6 class="tzcd-text-smaller text-drumeo sm:hidden"></h6>
             {{--@endif--}}
 
             <div class="flex flex-wrap items-center mt-7 sm:mt-10">
@@ -785,6 +782,7 @@
 {{--                            </div>--}}
 {{--                        </div>--}}
                     {{--@else--}}
+
                         <div class="flex flex-wrap sm:flex-nowrap items-center text-left w-full max-w-3xl mx-auto xl:w-7/12">
                             <a href="/ecommerce/add-to-cart?products[30-day-drummer]=1&products[Drumeo-VaterSticks]=1&products[drumeo_access_30-days]=1&locked=true" class="px-5 sm:px-7 lg:px-9 py-7 sm:py-9 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-1/2" style="background-color:#d4eaff;">
                                 <h3><strong>30-Day Drummer</strong></h3>
@@ -823,6 +821,7 @@
                                 <i class="fas fa-check text-drumeo mr-1"></i> 90-Day Money Back Guarantee</p>
                             </a>
                         </div>
+
                     {{--@endif--}}
 
 
