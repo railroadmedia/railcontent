@@ -73,6 +73,7 @@ provide('isDarkModeSelected', isDarkModeSelected);
 provide('userAvatar', props.userAvatar);
 provide('userName', props.userName);
 provide('userId', props.userId);
+provide('token', props.token);
 provide('isSidebarCollapsed', isSidebarCollapsed);
 
 const setDarkMode = (isSelected) => {

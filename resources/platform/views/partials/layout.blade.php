@@ -43,6 +43,7 @@
                 brand="{{ $brand }}"
             >
                 <page-container
+                    token="{{ csrf_token() }}"
                     brand="{{ $brand }}"
                     :is-live="{{ isLive() ? 'true':'false' }}"
                     search-url=""
