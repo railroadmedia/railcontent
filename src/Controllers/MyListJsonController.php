@@ -287,6 +287,7 @@ class MyListJsonController extends Controller
                                                                 $playlist['category']
                                                             ),
                                                             'private' => $playlist['private'],
+                                                            'duration' => $playlist['duration'],
                                                             'created_at' => Carbon::now()
                                                                 ->toDateTimeString(),
                                                         ]);

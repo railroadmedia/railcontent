@@ -45,10 +45,12 @@ use Railroad\Railcontent\Events\ContentSoftDeleted;
 use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Events\ElasticDataShouldUpdate;
 use Railroad\Railcontent\Events\HierarchyUpdated;
+use Railroad\Railcontent\Events\PlaylistItemsUpdated;
 use Railroad\Railcontent\Events\UserContentProgressSaved;
 use Railroad\Railcontent\Listeners\AssignCommentEventListener;
 use Railroad\Railcontent\Listeners\ContentEventListener;
 use Railroad\Railcontent\Listeners\ContentTotalXPListener;
+use Railroad\Railcontent\Listeners\PlaylistListener;
 use Railroad\Railcontent\Listeners\RailcontentV2DataSyncingEventListener;
 use Railroad\Railcontent\Listeners\SyncElasticsearchListener;
 use Railroad\Railcontent\Listeners\UnassignCommentEventListener;
@@ -107,7 +109,8 @@ class RailcontentServiceProvider extends ServiceProvider
             ContentTotalXPListener::class . '@handleHierarchyUpdated',
             RailcontentV2DataSyncingEventListener::class . '@handleHierarchyUpdated',
         ],
-        ElasticDataShouldUpdate::class => [SyncElasticsearchListener::class . '@handleSync']
+        ElasticDataShouldUpdate::class => [SyncElasticsearchListener::class . '@handleSync'],
+        PlaylistItemsUpdated::class => [PlaylistListener::class.'@handlePlaylistItemsUpdated']
     ];
 
     /**
