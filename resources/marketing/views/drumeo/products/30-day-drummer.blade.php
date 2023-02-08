@@ -853,22 +853,27 @@
                 @include('_partials.components.question-dropdown', [
                 "title" => "Do I need to attend the lessons live?",
                 "desc" => "The weekday workouts are pre-recorded videos you can access on your own schedule – and the weekly live Q&A sessions are totally optional, and they’ll also include a recording that you can watch or re-watch anytime.",
+                'num' => '?'
                 ])
                 @include('_partials.components.question-dropdown', [
                 "title" => "What if I’m going to miss a day (or two, or more)?",
                 "desc" => "That’s totally fine. The course is meant to be flexible if you miss a day here or there. There are a few buffer days mixed in PLUS the lessons are short enough that you could watch 2-3 in a single session if you ever need to catch up.",
+                'num' => '?'
                 ])
                 @include('_partials.components.question-dropdown', [
                 "title" => "Do I need a full drum set to complete the course?",
                 "desc" => "The lessons work on both electric and acoustic drum sets. While you can even get value with just a practice pad & sticks, it’s recommended that you have access to a drum set to get the most from this course.",
+                'num' => '?'
                 ])
                 @include('_partials.components.question-dropdown', [
                 "title" => "How much time per week will this course require?",
                 "desc" => "30-Day Drummer gives you guided daily drum workouts for thirty days – with flex days built in for when life happens. With each workout being 10-15 minutes, you can miss a workout and make it up the next day or later in the week.",
+                'num' => '?'
                 ])
                 @include('_partials.components.question-dropdown', [
                 "title" => "What devices can I access the course on?",
                 "desc" => "30-Day Drummer is available on your laptop, tablet, or phone. You’ll also have access through the Drumeo app after you’ve completed your purchase of the course.",
+                'num' => '?'
                 ])
             </div>
             <div class="inline-block w-full px-3 md:px-4 my-5" style="color:#2a2f34;">
