@@ -790,12 +790,13 @@
                                 <h2 class="inline-block"><strong class="text-4xl">${{ 97 }}</strong></h2> <p class="inline-block text-xs">one time payment.</p><br>
                                 <div class="join blue smaller my-4">ENROLL NOW</div>
                                 <ul class="list-disc ml-10">
+                                    <li class="text-sm relaxed"><span class="text-drumeo">Free</span> P4 Practice Pad</li>
                                     <li class="text-sm relaxed"><span class="text-drumeo">Free</span> Drumsticks</li>
                                     <li class="text-sm relaxed"><span class="text-drumeo">Free</span> 1-Month Drumeo Access</li>
                                 </ul>
                                 <hr class="w-full my-5" style="border-color:#b2cae1">
                                 <p class="leading-loose text-sm"><strong>Key Features</strong><br>
-                                <i class="fas fa-check text-drumeo mr-1"></i> Runs September 5 to October 5<br>
+                                <i class="fas fa-check text-drumeo mr-1"></i> Runs February 27 to March 28<br>
                                 <i class="fas fa-check text-drumeo mr-1"></i> 24 Guided Workouts<br>
                                 <i class="fas fa-check text-drumeo mr-1"></i> 4 Live Q&A Sessions<br>
                                 <i class="fas fa-check text-drumeo mr-1"></i> Lifetime Course Access<br>
@@ -816,8 +817,8 @@
                                 <hr class="w-full my-5" style="border-color:#ebf2f8">
                                 <p class="leading-loose text-sm"><strong>Drumeo Membership includes:</strong><br>
                                 <i class="fas fa-check text-drumeo mr-1"></i> 10-Level Drumeo Method Curriculum<br>
-                                <i class="fas fa-check text-drumeo mr-1"></i> Play Along To 3000+ Popular Songs.<br>
-                                <i class="fas fa-check text-drumeo mr-1"></i> Study With 100+ World-Class Drummers.<br>
+                                <i class="fas fa-check text-drumeo mr-1"></i> Play Along To 5000+ Popular Songs.<br>
+                                <i class="fas fa-check text-drumeo mr-1"></i> Study With 300+ World-Class Drummers.<br>
                                 <i class="fas fa-check text-drumeo mr-1"></i> 90-Day Money Back Guarantee</p>
                             </a>
                         </div>
