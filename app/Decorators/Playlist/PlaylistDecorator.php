@@ -3,6 +3,7 @@
 namespace App\Decorators\Playlist;
 
 use Carbon\Carbon;
+use Carbon\CarbonInterval;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Repositories\PinnedPlaylistsRepository;
@@ -50,7 +51,7 @@ class PlaylistDecorator extends ModeDecoratorBase
             }
 
             //TODO: Delete next line when the event/listener that sync playlist duration is functional
-            $playlists[$index]['duration'] = $playlists[$index]['duration'] ?? 0;
+            $playlists[$index]['duration_formated'] = gmdate('H:i:s', $playlists[$index]['duration'] ?? 0);
         }
 
         $userIds = array_unique($userIds);
