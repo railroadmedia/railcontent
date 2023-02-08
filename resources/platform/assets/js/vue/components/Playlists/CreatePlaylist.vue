@@ -3,6 +3,7 @@
     import { XCircleIcon } from '@heroicons/vue/outline'
     import InputLabel from '../InputLabel/InputLabel.vue';
     import Dropdown from '../Dropdown/Dropdown.vue';
+    import PlaylistService from '../../../services/playlists';
 
     const props = defineProps({
         modalProps: {
@@ -28,6 +29,10 @@
     const category = ref(null);
     const description = ref('');
 
+    const token = inject('token');
+
+    const { imgSrc } = props.modalProps;
+
     const handleTitleChange = (val) => {
         title.value = val;
     };
@@ -37,11 +42,19 @@
     };
 
     const handleDescriptionChange = (e) => {
-        console.log(e.target.value);
         description.value = e.target.value;
     };
 
-    const { modalType, imgSrc } = props.modalProps;
+    const handleConfirm = () => {
+        const payload = {
+            brand: props.brand,
+
+        };
+        PlaylistService.createUserPlaylist({
+            token,
+            payload
+        });
+    };
 
     const sortedOptions = [
         {
@@ -82,7 +95,7 @@
                     class="tw-h-[93px] tw-rounded-[6px] placeholder:tw-text-white tw-text-white tw-bg-[#002039]/90 tw-mt-[20px] tw-box-border tw-border-[#445F74]"></textarea>
                 <div class="tw-pt-[30px] tw-flex">
                     <button @click="() => emit('onCancel')" class="tw-btn-primary tw-text-center tw-justify-center tw-items-center">CANCEL</button>
-                    <button :class="`tw-ml-[20px] tw-btn-primary tw-bg-${brand} tw-text-center tw-flex tw-justify-center tw-items-center tw-p-0 tw-px-[30px]`"><span>CONFIRM</span></button>
+                    <button @click="handleConfirm" :class="`tw-ml-[20px] tw-btn-primary tw-bg-${brand} tw-text-center tw-flex tw-justify-center tw-items-center tw-p-0 tw-px-[30px]`"><span>CONFIRM</span></button>
                 </div>
             </div>
         </div>

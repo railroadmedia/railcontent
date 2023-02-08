@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 //Playlists Services
 
 export default {
@@ -6,24 +8,21 @@ export default {
     /**
      * CREATE Playlist
      *
-     * @param {string} brand
-     * @param {number} page - 
-     * @param {number} limit - 
+     * @param {string} token
+     * @param {object} payload - 
      */
-    getCurrentUserPlaylists(brand = "drumeo", page = 1, limit = 10) {
-        let payload = {
-            "brand": brand,
-            "limit":limit,
-            "page":page
-        }
-        let playlists = fetch('/railcontent/playlists', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            // body: payload,
-        })
-        return playlists;
+    
+    createUserPlaylist({ token, payload }) {
+        const headers = {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': token
+        };
+        return axios({
+            method: 'POST',
+            url: '/railcontent/playlists',
+            data: payload,
+            headers
+        });
     },
 
 
@@ -35,21 +34,24 @@ export default {
      * @param {string} brand
      * @param {number} page - 
      * @param {number} limit - 
+     * @param {string} token
      */
-    getCurrentUserPlaylists(brand = "drumeo", page = 1, limit = 10) {
-        let payload = {
+    getCurrentUserPlaylists({ brand = "drumeo", page = 1, limit = 10, token }) {
+        const payload = {
             "brand": brand,
             "limit":limit,
             "page":page
         }
-        let playlists = fetch('/railcontent/playlists', {
+        const headers = {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': token
+        };
+        return axios({
             method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            // body: payload,
-        })
-        return playlists;
+            url: '/railcontent/playlists',
+            params: payload,
+            headers
+        });
     },
 
 
