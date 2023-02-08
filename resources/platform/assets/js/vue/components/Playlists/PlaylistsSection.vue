@@ -64,12 +64,18 @@ const handleCreatePlaylist = () => {
                             class="tw-flex tw-flex-wrap tw-px-[25px] tw-w-full tw-no-underline tw-text-inherit tw-h-[42px] tw-items-center">
                             <span class="tw-min-w-0 tw-truncate tw-capitalize tw-text-sm">{{ name }}</span>
                         </a>
-                        <a href="" class="tw-hidden group-hover:tw-inline-flex dark:tw-text-white tw-w-[42px] tw-shrink-0 tw-items-center tw-justify-center">
-                            <musora-icon icon-name="play-circle-filled" class="tw-w-[24px]" />
-                        </a>
+                        <div class="md:tw-hidden group-hover:tw-inline-flex tw-w-[30px] tw-shrink-0 tw-items-center tw-justify-center" :class="`tw-text-${brand}`">
+                            <button title="Unpin Playlist" @click="console.log()">
+                                <musora-icon icon-name="tack" class="tw-w-[24px] tw-h-[24px] tw-mx-auto"  />
+                            </button>
+                        </div>
+                        <div class="md:tw-hidden group-hover:tw-inline-flex dark:tw-text-white tw-w-[42px] tw-shrink-0 tw-items-center tw-justify-center">
+                            <a href="" class="" :title="`Go To Player`">
+                                <musora-icon icon-name="play-circle-filled" class="tw-w-[24px]" />
+                            </a>
+                        </div>
                     </li>
                 </ul>
-
                 <!-- <div v-else class="tw-flex tw-flex-col tw-items-center">
                     <p class="tw-text-xs tw-italic tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]">Your pinned playlists will show up here.</p>
                 </div> -->
