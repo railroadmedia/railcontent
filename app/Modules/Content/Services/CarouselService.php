@@ -30,14 +30,14 @@ class CarouselService
                 function ($query) {
                     return $query
                         ->whereNull('start_date')
-                        ->orWhere('start_date', '<=', Carbon::now()->toDateTimeString());
+                        ->orWhere('start_date', '<=', Carbon::now('PST')->toDateTimeString());
                 }
             )
             ->where(
                 function ($query) {
                     return $query
                         ->whereNull('end_date')
-                        ->orWhere('end_date', '>', Carbon::now()->toDateTimeString());
+                        ->orWhere('end_date', '>', Carbon::now('PST')->toDateTimeString());
                 }
             )
             ->orderBy('display_order')
