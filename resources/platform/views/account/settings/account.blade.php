@@ -196,7 +196,7 @@
 
                         <div class="tw-mt-3 tw-space-y-1 tw-list-disc tw-ml-6 tw-py-3">
                             @foreach($activeMembershipProducts as $product)
-                                <div>
+                                <div class="tw-font-bold">
                                     {{ $product->getName() }}
                                 </div>
                             @endforeach
