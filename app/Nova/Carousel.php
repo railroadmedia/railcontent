@@ -123,8 +123,8 @@ class Carousel extends Resource
                     return $value;
                 }),
             Text::make('Image', 'img')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
-            DateTime::make(__('Start Date'), 'start_date')->hideFromIndex(),
-            DateTime::make(__('End Date'), 'end_date')->hideFromIndex(),
+            DateTime::make(__('Start Date'), 'start_date')->hideFromIndex()->help('Ignore UTC. It is actually PST.'),
+            DateTime::make(__('End Date'), 'end_date')->hideFromIndex()->help('Ignore UTC. It is actually PST.'),
             Number::make('Display order', 'display_order'),
             Boolean::make('visible')->hideFromIndex()->default(true),
             Boolean::make('Featured product?', 'is_featured')->hideFromIndex()->default(false),
