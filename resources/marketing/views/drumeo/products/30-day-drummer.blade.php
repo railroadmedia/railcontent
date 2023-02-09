@@ -212,7 +212,7 @@
         @endphp
     @endif
     @php
-        if (is_current_user_an_annual_or_lifetime_member()) {
+        if (is_current_user_a_member()) {
             $registerButtonUrl = '/cohort-packs/register/30-day-drummer-2';
         } else {
             $registerButtonUrl = "#final";
@@ -270,9 +270,9 @@
                             @if($hasProduct)
                                 <a class="join sold-out medium w-full">YOU'RE ENROLLED</a>
                             @else
-                                <a href="{{ $registerButtonUrl }}" class="join blue medium w-full @if(!is_current_user_an_annual_or_lifetime_member()) anchor-slide @endif">ENROLL NOW</a>
+                                <a href="{{ $registerButtonUrl }}" class="join blue medium w-full @if(!is_current_user_a_member()) anchor-slide @endif">ENROLL NOW</a>
                             @endif
-                            @if(is_current_user_an_annual_or_lifetime_member())
+                            @if(is_current_user_a_member())
                                 <p class="opacity-50 text-sm mt-1 mb-5 sm:mb-0">Registration is FREE for Drumeo Members.</p>
                             @else
                                 <p class="opacity-50 text-sm mt-1 mb-5 sm:mb-0">For just $1/day.</p>
@@ -440,7 +440,7 @@
             @else
                 <a
                     href="{{ $registerButtonUrl }}"
-                    class="join blue medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 @if(!is_current_user_an_annual_or_lifetime_member()) anchor-slide @endif">ENROLL NOW</a><br>
+                    class="join blue medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 @if(!is_current_user_a_member()) anchor-slide @endif">ENROLL NOW</a><br>
             @endif
             <img class="h-7 mr-1 mb-5 sm:mb-10 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/Joined_profiles.png" alt="joined profiles">
             <p class="inline-block leading-tight text-sm align-middle mb-5 sm:mb-10">Join {{ $students ?? 0 }} drummers who<br> have already registered.</p>
@@ -565,7 +565,7 @@
                     </tr>
                     <tr>
                         <td>Investment</td>
-                        @if(is_current_user_an_annual_or_lifetime_member())
+                        @if(is_current_user_a_member())
                             <td class="rounded-b-xl"><strong>FREE</strong><br> for Drumeo<br class="inline lg:hidden"> Members</td>
                         @else
                             <td class="rounded-b-xl"><strong>${{ floatval($productPrices['30-day-drummer-2']->discounted_price) }}</strong></td>
@@ -676,7 +676,7 @@
             @else
                 <a
                     href="{{ $registerButtonUrl }}"
-                    class="join blue medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 @if(!is_current_user_an_annual_or_lifetime_member()) anchor-slide @endif">ENROLL NOW</a><br>
+                    class="join blue medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 @if(!is_current_user_a_member()) anchor-slide @endif">ENROLL NOW</a><br>
             @endif
             <img class="h-7 mr-1 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/Joined_profiles.png">
             <p class="inline-block leading-tight text-sm align-middle">Join {{ $students ?? 0 }} drummers who<br> have already registered.</p>
@@ -722,7 +722,7 @@
     <div id="final" class="anchor"></div>
     <section class="text-center relative z-50 overflow-hidden px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#eff7ff;">
         <div class="container mx-auto relative z-50">
-            @if(!is_current_user_an_annual_or_lifetime_member())
+            @if(!is_current_user_a_member())
             <img class="h-20 sm:h-28 lazyload" data-src="https://cdn.musora.com/image/fetch/w_380,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/30_day_drummer2_logo.png" alt="30DD season 2">
             <h2 class="leading-tight mt-2 mb-3 sm:my-3 lg:my-4"><strong>Learn the drums with daily guided workouts.</strong></h2>
 
@@ -734,7 +734,7 @@
             @endif
 
             <div class="flex flex-wrap items-center mt-7 sm:mt-10">
-                    @if(is_current_user_an_annual_or_lifetime_member())
+                    @if(is_current_user_a_member())
                         <div class="text-left w-full sm:w-1/2 xl:w-5/12 lg:pl-5">
                             <img class="h-20 md:h-20 lg:h-24 lazyload" data-src="https://cdn.musora.com/image/fetch/w_380,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/30_day_drummer_logo.png">
                             <h2 class="leading-tight mt-2 mb-4 sm:my-4 lg:my-5"><strong>
@@ -753,7 +753,7 @@
                                     <p class="mb-3 text-drumeo text-center"><strong>Congrats! You have registered for 30-Day Drummer.<br class="hidden md:inline"> Check your email for the details.</strong></p>
                                 @endif
 
-                                @if(is_current_user_an_annual_or_lifetime_member())
+                                @if(is_current_user_a_member())
                                     <h1 class="inline-block mr-4 align-middle text-4xl sm:text-5xl"><s class="opacity-60">${{ 97 }}</s> <strong>FREE</strong></h1>
                                 @else
                                     <h1 class="inline-block mr-4 align-middle text-4xl sm:text-5xl"><strong>${{ 97 }}</strong></h1>
@@ -819,7 +819,7 @@
                     @endif
 
 
-                <div class="flex w-full justify-center @if(is_current_user_an_annual_or_lifetime_member()) sm:justify-start sm:order-1 sm:w-1/2 xl:w-7/12 sm:pl-5 lg:pl-7  mt-10 sm:mt-0 @else  xl:justify-start xl:order-1 xl:w-5/12 xl:pl-4  mt-10 xl:mt-0 @endif">
+                <div class="flex w-full justify-center @if(is_current_user_a_member()) sm:justify-start sm:order-1 sm:w-1/2 xl:w-7/12 sm:pl-5 lg:pl-7  mt-10 sm:mt-0 @else  xl:justify-start xl:order-1 xl:w-5/12 xl:pl-4  mt-10 xl:mt-0 @endif">
                     <img class="max-w-lg sm:max-w-2xl lg:max-w-4xl lazyload" data-src="https://cdn.musora.com/image/fetch/w_1800,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/collage.png" alt="order collage image">
                 </div>
             </div>
@@ -836,7 +836,7 @@
         <div class="container mx-auto relative z-10 max-w-5xl">
             <h2><strong>Still have questions?</strong></h2>
             <div class="max-w-6xl mt-4 sm:mt-10 px-4">
-                @if(is_current_user_an_annual_or_lifetime_member())
+                @if(is_current_user_a_member())
                     @include('_partials.components.question-dropdown', [
                     "num" => "?",
                     "title" => "Why do I need to register if I get it for free as a member?",
@@ -885,7 +885,7 @@
     </section>
 
 
-    @if(!is_current_user_an_annual_or_lifetime_member())
+    @if(!is_current_user_a_member())
         <div class="reveal coach-wrap relative rounded-xl text-center overflow-visible select-none max-w-xs md:max-w-md" id="loginModal" style="max-width: 530px;" data-reveal data-reset-on-close="false">
             <div class="p-5 sm:p-7">
                 <img class="h-24 sm:h-32 lazyload" data-src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/30_day_drummer_logo.png">

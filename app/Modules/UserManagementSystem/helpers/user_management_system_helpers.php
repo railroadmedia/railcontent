@@ -41,3 +41,10 @@ if (!function_exists('is_current_user_an_annual_or_lifetime_member')) {
         return UserAccessService::isAnnualOrLifetimeMember();
     }
 }
+
+if (!function_exists('is_current_user_a_member')) {
+    function is_current_user_a_member()
+    {
+        return user()?->isAMember() ?? false;
+    }
+}
