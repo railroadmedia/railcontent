@@ -1,5 +1,6 @@
 <script setup>
-    import { ref } from 'vue';
+    // TODO: Add Upload Modal for thumbnail add/change
+    import { ref, inject } from 'vue';
     import { XCircleIcon } from '@heroicons/vue/outline'
     import InputLabel from '../InputLabel/InputLabel.vue';
     import Dropdown from '../Dropdown/Dropdown.vue';
@@ -48,7 +49,10 @@
     const handleConfirm = () => {
         const payload = {
             brand: props.brand,
-
+            description: description.value,
+            category: category.value,
+            private: true,
+            thumbnail_url: thumb.value,
         };
         PlaylistService.createUserPlaylist({
             token,
@@ -58,8 +62,44 @@
 
     const sortedOptions = [
         {
-            value: '1',
-            label: 'Test 1'
+            value: 'Rock',
+            label: 'Rock'
+        },
+        {
+            value: 'Pop',
+            label: 'Pop'
+        },
+        {
+            value: 'Jazz',
+            label: 'Jazz'
+        },
+        {
+            value: 'Blues',
+            label: 'Blues'
+        },
+        {
+            value: 'Country',
+            label: 'Country'
+        },
+        {
+            value: 'Metal',
+            label: 'Metal'
+        },
+        {
+            value: 'Funk',
+            label: 'Funk'
+        },
+        {
+            value: 'Soul',
+            label: 'Soul'
+        },
+        {
+            value: 'CCM/Worship',
+            label: 'CCM/Worship'
+        },
+        {
+            value: 'Hip-Hop/Rap',
+            label: 'Hip-Hop/Rap'
         },
     ];
 </script>
