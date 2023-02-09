@@ -232,7 +232,7 @@
         <div class="container max-w-5xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center">
                 <div class="w-full sm:w-7/12 text-center lg:text-left">
-                    <img class="h-20 sm:h-24 lg:h-28 -mb-3 sm:mb-0 lg:mb-3 lazyload" data-src="https://cdn.musora.com/image/fetch/w_440,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/new-piano-players-start-here-logo-2+1.png">
+                    <img class="h-20 sm:h-24 lg:h-28 -mb-3 sm:mb-0 lg:mb-3 lazyload" data-src="https://cdn.musora.com/image/fetch/w_440,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/new-piano-players-start-here-logo-2+1.png" alt="new piano players start here logo">
                     <h1 class="rotater-text overflow-hidden"><strong>
                             <span class="relative whitespace-nowrap top-0 delay-1000 ease-in-out">Learn the piano</span><br>
                             <span class="relative whitespace-nowrap top-0 delay-1000 ease-in-out">Play real songs </span><br>
@@ -338,7 +338,7 @@
 
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
         <div class="container max-w-4xl mx-auto">
-            <img class="h-56 inline sm:hidden lazyload" data-src="https://cdn.musora.com/image/fetch/w_690,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/collage-intro-m.png">
+            <img class="h-56 inline sm:hidden lazyload" data-src="https://cdn.musora.com/image/fetch/w_690,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/collage-intro-m.png" alt="collage intro">
             <h2 class="text-center my-5 sm:mt-0 sm:mb-7"><strong>Learn the piano<br class="inline sm:hidden"> in 30 days.</strong></h2>
             <div class="text-left flex flex-wrap sm:flex-nowrap mb-32 sm:mb-56 lg:mb-72">
                 <h6 class="leading-normal max-w-lg pr-7">You don’t learn by watching. You learn by doing.
@@ -354,7 +354,7 @@
                     Start here.
                     <br><br>
                     Scroll down to save your seat.</h6>
-                <img class="h-96 hidden sm:inline lazyload" data-src="https://cdn.musora.com/image/fetch/w_690,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/collage-intro-desktop.png">
+                <img class="h-96 hidden sm:inline lazyload" data-src="https://cdn.musora.com/image/fetch/w_690,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/collage-intro-desktop.png" alt="collage intro">
             </div>
         </div>
     </section>
@@ -368,7 +368,7 @@
                 {{--<iframe class="absolute w-full h-full" src="//player.vimeo.com/video/738385463" frameborder="0" allowfullscreen allow="autoplay" title="10year-video"></iframe>--}}
             </div>
 
-            <img class="h-10 sm:h-20 mt-10 sm:mt-16 lg:mt-24 mb-8 lazyload" data-src="https://cdn.musora.com/image/fetch/w_1220,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/Just_Press_Play_logo.png">
+            <img class="h-10 sm:h-20 mt-10 sm:mt-16 lg:mt-24 mb-8 lazyload" data-src="https://cdn.musora.com/image/fetch/w_1220,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/Just_Press_Play_logo.png" alt="just play logo">
             <h6 class="leading-normal mb-20 lg:mb-28">New Piano Players Start Here is unlike any other way to learn the piano. From day 1 you’ll be playing a REAL song by following guided play-along lessons with your instructor, Lisa Witt.
                 <br><br>
                 This isn’t a video game. You’ll be building your skills every single day. And the best part…
@@ -448,7 +448,7 @@
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
         <div class="container max-w-4xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center justify-center">
-                <img class="h-20 sm:h-28 lg:h-32 lazyload" data-src="https://cdn.musora.com/image/fetch/w_760,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/new-piano-players-start-here-logo-stacked.svg">
+                <img class="h-20 sm:h-28 lg:h-32 lazyload" data-src="https://cdn.musora.com/image/fetch/w_760,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/new-piano-players-start-here-logo-stacked.svg" alt="new piano players start here logo">
                 <h4 class="leading-loose text-left">
                     <i class="fas fa-check text-pianote mr-5"></i> Daily guided piano workouts<br>
                     <i class="fas fa-check text-pianote mr-5"></i> Weekly LIVE Q&A workshops<br>
@@ -464,7 +464,7 @@
             {{--@else--}}
                 <a href="{{ $registerButtonUrl }}" class="join blue medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 {{--@if(!is_current_user_a_member()) anchor-slide @endif--}}">ENROLL NOW</a><br>
             {{--@endif--}}
-            <img class="h-7 mr-1 mb-5 sm:mb-10 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/Joined_profiles.png">
+            <img class="h-7 mr-1 mb-5 sm:mb-10 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/Joined_profiles.png" alt="joined profiles">
             <p class="inline-block leading-tight text-sm align-middle mb-5 sm:mb-10">Join {{ $students ?? 0 }} piano players who<br> have already registered.</p>
 
         </div>
@@ -473,7 +473,7 @@
     <section class="text-white px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#2a2f34;">
         <div class="container max-w-4xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap justify-center items-center">
-                <img class="w-48 sm:w-64 lg:w-80 -mt-12 mb-4 sm:-mb-24 lazyload" data-src="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/Screen.png">
+                <img class="w-48 sm:w-64 lg:w-80 -mt-12 mb-4 sm:-mb-24 lazyload" data-src="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/Screen.png" alt="screen">
                 <div class="flex-grow sm:pl-7">
                     <h3 class="leading-tight text-center sm:text-left"><strong>Get LIVE support<br> every step of the way.</strong></h3>
                     <h6 class="leading-normal mt-3 sm:mt-5 lg:mt-7 {{--mb-5 sm:mb-7 lg:mb-10--}}">If you have questions about your lessons, you can ask your instructor at each week’s LIVE Q&A event. Lisa will be there to answer your questions, help you through any sticking points, and keep you motivated to complete the full course.</h6>
@@ -609,7 +609,7 @@
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f4f8fb;">
         <div class="container max-w-5xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-start justify-center sm:mt-8">
-                <img class="border-8 border-white rounded-3xl shadow-xl w-52 sm:w-72 lg:w-96 relative -mb-8 sm:mb-0 sm:-mt-8 sm:-mr-8 z-10 lazyload" data-src="https://cdn.musora.com/image/fetch/w_550,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/profile_picture.jpg">
+                <img class="border-8 border-white rounded-3xl shadow-xl w-52 sm:w-72 lg:w-96 relative -mb-8 sm:mb-0 sm:-mt-8 sm:-mr-8 z-10 lazyload" data-src="https://cdn.musora.com/image/fetch/w_550,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/profile_picture.jpg" alt="profile picture">
 
                 <div class="text-white text-left rounded-xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-24 max-w-xl sm:mt-8 w-full sm:w-auto sm:flex-grow" style="background-color:#00101d;">
                     <h6 class="uppercase text-pianote leading-normal text-center sm:text-left">MEET YOUR TEACHER</h6>
@@ -624,17 +624,17 @@
                     </h6>
                     <div class="flex justify-between text-center mt-7 lg:mt-10">
                         <div class="">
-                            <img class="h-6 sm:h-8 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/Youtube_Icon.svg">
+                            <img class="h-6 sm:h-8 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/Youtube_Icon.svg" alt="youtube icon">
                             <h3 class="mt-2"><strong>103M</strong></h3>
                             <p class="uppercase opacity-70 text-sm">views</p>
                         </div>
                         <div class="">
-                            <img class="h-6 sm:h-8 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/Insta_Icon.svg">
+                            <img class="h-6 sm:h-8 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/Insta_Icon.svg" alt="insta icon">
                             <h3 class="mt-2"><strong>175k</strong></h3>
                             <p class="uppercase opacity-70 text-sm">followers</p>
                         </div>
                         <div class="">
-                            <img class="h-6 sm:h-8 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/TikTok_Icon.svg">
+                            <img class="h-6 sm:h-8 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/TikTok_Icon.svg" alt="tiktok icon">
                             <h3 class="mt-2"><strong>55.8K</strong></h3>
                             <p class="uppercase opacity-70 text-sm">Followers</p>
                         </div>
@@ -679,10 +679,10 @@
                         ],
                     ]
                 @endphp
-                @foreach ($testimonials as $testimonial)
+                @foreach ($testimonials as $key => $testimonial)
                     <div class="w-full lg:w-1/2 py-2 sm:px-2 lg:p-3">
                         <div class="flex items-start p-5 bg-white rounded-lg">
-                            <img class="h-16 lg:h-20 rounded-full lazyload" data-src="https://cdn.musora.com/image/fetch/w_160,q_auto:best/{{ $testimonial['image'] }}">
+                            <img class="h-16 lg:h-20 rounded-full lazyload" data-src="https://cdn.musora.com/image/fetch/w_160,q_auto:best/{{ $testimonial['image'] }}" alt="testimonial {{ $key }}">
                             <p class="pl-4"><strong>{{ $testimonial['name'] }}</strong><br>
                                 <em class="leading-tight inline-block mb-1 opacity-60">{{ $testimonial['location'] }}</em><br>
                                 “{!! $testimonial['description']  !!}”
@@ -731,7 +731,7 @@
     <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #2a2f34 calc(50% + 1px));"></div>
     <section class="text-white text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#2a2f34;">
         <div class="container max-w-4xl mx-auto">
-            <img class="h-28 sm:h-40 lg:h-52 block mx-auto -mt-24 sm:-mt-36 lg:-mt-48 lazyload" data-src="https://cdn.musora.com/image/fetch/w_410,q_auto:best/https://pianote.s3.amazonaws.com/sales/2022/piano-guarantee.png">
+            <img class="h-28 sm:h-40 lg:h-52 block mx-auto -mt-24 sm:-mt-36 lg:-mt-48 lazyload" data-src="https://cdn.musora.com/image/fetch/w_410,q_auto:best/https://pianote.s3.amazonaws.com/sales/2022/piano-guarantee.png" alt="guarantee badge">
             <h2 class="my-4 sm:my-6 lg:my-8"><strong>The guarantee that lasts<br class="inline sm:hidden"> longer than the course</strong></h2>
 
             <h6 class="leading-normal">New Piano Players Start Here is all about getting you playing beautiful piano in the shortest amount of time. For less than the cost of just 2 private lessons, you’ll have a guided path to improve your playing, build your confidence, and start your journey on the piano.
@@ -759,7 +759,7 @@
             <div class="flex flex-wrap items-center mt-7 sm:mt-10">
 {{--                    @if(is_current_user_a_member())--}}
                         <div class="text-left w-full sm:w-1/2 xl:w-5/12 lg:pl-5">
-                            <img class="h-20 md:h-20 lg:h-24 lazyload" data-src="https://cdn.musora.com/image/fetch/w_380,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/new-piano-players-start-here-logo-2+1.png">
+                            <img class="h-20 md:h-20 lg:h-24 lazyload" data-src="https://cdn.musora.com/image/fetch/w_380,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/new-piano-players-start-here-logo-2+1.png" alt="new piano players start here logo">
                             <h2 class="leading-tight mt-2 mb-4 sm:my-4 lg:my-5"><strong>
                                     20 Guided Play-Along Lessons<br>
                                     4 Live Q&A Sessions<br>
@@ -841,7 +841,7 @@
 
 
                 <div class="flex w-full justify-center {{--@if(is_current_user_a_member()) sm:justify-start sm:order-1 sm:w-1/2 xl:w-7/12 sm:pl-5 lg:pl-7  mt-10 sm:mt-0 @else --}} xl:justify-start xl:order-1 xl:w-5/12 xl:pl-4  mt-10 xl:mt-0 {{--@endif--}}">
-                    <img class="max-w-lg sm:max-w-2xl lg:max-w-4xl lazyload" data-src="https://cdn.musora.com/image/fetch/w_1800,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/collage.png">
+                    <img class="max-w-lg sm:max-w-2xl lg:max-w-4xl lazyload" data-src="https://cdn.musora.com/image/fetch/w_1800,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/collage.png" alt="collage">
                 </div>
             </div>
         </div>
