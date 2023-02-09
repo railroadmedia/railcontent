@@ -21838,9 +21838,6 @@ a:visited{
 .tw-mr-8{
   margin-right: 2rem !important;
 }
-.tw-ml-\[3px\]{
-  margin-left: 3px !important;
-}
 .tw-ml-\[20px\]{
   margin-left: 20px !important;
 }
@@ -21868,6 +21865,9 @@ a:visited{
 .tw-mr-12{
   margin-right: 3rem !important;
 }
+.tw-ml-\[3px\]{
+  margin-left: 3px !important;
+}
 .tw-mr-0\.5{
   margin-right: 0.125rem !important;
 }
@@ -21885,6 +21885,9 @@ a:visited{
 }
 .tw-mt-\[40px\]{
   margin-top: 40px !important;
+}
+.tw-mr-\[9px\]{
+  margin-right: 9px !important;
 }
 .tw-ml-\[-24px\]{
   margin-left: -24px !important;
@@ -21933,15 +21936,6 @@ a:visited{
 }
 .tw-ml-1\.5{
   margin-left: 0.375rem !important;
-}
-.tw-mr-\[20px\]{
-  margin-right: 20px !important;
-}
-.tw-mr-\[9px\]{
-  margin-right: 9px !important;
-}
-.tw-mb-2{
-  margin-bottom: 0.5rem !important;
 }
 .tw-box-border{
   box-sizing: border-box !important;
@@ -22126,12 +22120,6 @@ a:visited{
 .tw-h-\[35px\]{
   height: 35px !important;
 }
-.tw-h-\[158px\]{
-  height: 158px !important;
-}
-.tw-h-\[14px\]{
-  height: 14px !important;
-}
 .tw-h-\[93px\]{
   height: 93px !important;
 }
@@ -22159,6 +22147,12 @@ a:visited{
 .tw-h-\[128px\]{
   height: 128px !important;
 }
+.tw-h-\[158px\]{
+  height: 158px !important;
+}
+.tw-h-\[14px\]{
+  height: 14px !important;
+}
 .tw-h-\[52px\]{
   height: 52px !important;
 }
@@ -22180,6 +22174,9 @@ a:visited{
 .tw-h-1\.5{
   height: 0.375rem !important;
 }
+.tw-h-\[198px\]{
+  height: 198px !important;
+}
 .tw-h-\[40px\]{
   height: 40px !important;
 }
@@ -22191,12 +22188,6 @@ a:visited{
 }
 .tw-h-52{
   height: 13rem !important;
-}
-.tw-h-\[198px\]{
-  height: 198px !important;
-}
-.tw-h-\[40px\]{
-  height: 40px !important;
 }
 .tw-max-h-\[100vh\]{
   max-height: 100vh !important;
@@ -22403,12 +22394,6 @@ a:visited{
 .tw-w-\[12px\]{
   width: 12px !important;
 }
-.tw-w-\[158px\]{
-  width: 158px !important;
-}
-.tw-w-\[14px\]{
-  width: 14px !important;
-}
 .tw-w-\[150px\]{
   width: 150px !important;
 }
@@ -22432,6 +22417,12 @@ a:visited{
 }
 .tw-w-\[22px\]{
   width: 22px !important;
+}
+.tw-w-\[158px\]{
+  width: 158px !important;
+}
+.tw-w-\[14px\]{
+  width: 14px !important;
 }
 .tw-w-48{
   width: 12rem !important;
@@ -22457,6 +22448,12 @@ a:visited{
 .tw-w-\[90vw\]{
   width: 90vw !important;
 }
+.tw-w-\[198px\]{
+  width: 198px !important;
+}
+.tw-w-\[50px\]{
+  width: 50px !important;
+}
 .tw-w-\[162px\]{
   width: 162px !important;
 }
@@ -22469,9 +22466,6 @@ a:visited{
 .tw-w-\[82px\]{
   width: 82px !important;
 }
-.tw-w-\[50px\]{
-  width: 50px !important;
-}
 .tw-w-\[116px\]{
   width: 116px !important;
 }
@@ -22480,12 +22474,6 @@ a:visited{
 }
 .tw-w-9\/12{
   width: 75% !important;
-}
-.tw-w-\[198px\]{
-  width: 198px !important;
-}
-.tw-w-\[40px\]{
-  width: 40px !important;
 }
 .tw-min-w-\[232px\]{
   min-width: 232px !important;
@@ -22964,23 +22952,17 @@ a:visited{
 .tw-rounded-\[8px\]{
   border-radius: 8px !important;
 }
-.tw-rounded-\[9px\]{
-  border-radius: 9px !important;
-}
 .tw-rounded-\[5px\]{
   border-radius: 5px !important;
+}
+.tw-rounded-\[9px\]{
+  border-radius: 9px !important;
 }
 .tw-rounded-3xl{
   border-radius: 1.5rem !important;
 }
 .tw-rounded-none{
   border-radius: 0px !important;
-}
-.tw-rounded{
-  border-radius: 0.25rem !important;
-}
-.tw-rounded-full{
-  border-radius: 9999px !important;
 }
 .tw-rounded-t{
   border-top-left-radius: 0.25rem !important;
@@ -24013,9 +23995,6 @@ a:visited{
 .tw-font-primary{
   font-family: "Open Sans", Century Gothic, sans-serif !important;
 }
-.tw-font-bebas-neue{
-  font-family: Bebas Neue, cursive !important;
-}
 .tw-text-xs{
   font-size: 0.75rem !important;
   line-height: 1rem !important;
@@ -24096,14 +24075,14 @@ a:visited{
 .tw-text-\[10px\]{
   font-size: 10px !important;
 }
-.tw-text-\[13px\]{
-  font-size: 13px !important;
-}
 .tw-text-\[8px\]{
   font-size: 8px !important;
 }
 .tw-text-\[75px\]{
   font-size: 75px !important;
+}
+.tw-text-\[13px\]{
+  font-size: 13px !important;
 }
 .tw-text-\[40px\]{
   font-size: 40px !important;
@@ -24420,10 +24399,6 @@ a:visited{
 .tw-text-\[\#002039\]{
   --tw-text-opacity: 1 !important;
   color: rgb(0 32 57 / var(--tw-text-opacity)) !important;
-}
-.tw-text-white{
-  --tw-text-opacity: 1 !important;
-  color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
 }
 .tw-underline{
   -webkit-text-decoration-line: underline !important;
@@ -26339,11 +26314,11 @@ a:visited{
   .lg\:tw-pb-0{
     padding-bottom: 0px !important;
   }
-  .lg\:tw-pr-\[42px\]{
-    padding-right: 42px !important;
-  }
   .lg\:tw-pt-0{
     padding-top: 0px !important;
+  }
+  .lg\:tw-pr-\[42px\]{
+    padding-right: 42px !important;
   }
   .lg\:tw-pl-6{
     padding-left: 1.5rem !important;

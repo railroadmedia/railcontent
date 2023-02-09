@@ -1,16 +1,18 @@
 <script setup>
+    // TODO: Add Upload Modal for thumbnail add/change
     import { ref, inject } from 'vue';
     import { XCircleIcon } from '@heroicons/vue/outline'
     import InputLabel from '../InputLabel/InputLabel.vue';
     import Dropdown from '../Dropdown/Dropdown.vue';
     import PlaylistService from '../../../services/playlists';
+    import ThumbnailUpload from '../ThumbnailUpload/ThumbnailUpload.vue';
 
     const props = defineProps({
         modalProps: {
             type: Object,
             default: () => ({
                 modalType: null,
-                imgSrc: 'asdasdsad',
+                imgUrl: 'asdasdsad',
             })
         },
         mode: {
@@ -31,7 +33,7 @@
 
     const token = inject('csrf_token');
 
-    const { imgSrc } = props.modalProps;
+    const { imgUrl } = props.modalProps;
 
     const handleTitleChange = (val) => {
         title.value = val;
@@ -48,7 +50,10 @@
     const handleConfirm = () => {
         const payload = {
             brand: props.brand,
-
+            description: description.value,
+            category: category.value,
+            private: true,
+            thumbnail_url: thumb.value,
         };
         PlaylistService.createUserPlaylist({
             token,
@@ -58,8 +63,44 @@
 
     const sortedOptions = [
         {
-            value: '1',
-            label: 'Test 1'
+            value: 'Rock',
+            label: 'Rock'
+        },
+        {
+            value: 'Pop',
+            label: 'Pop'
+        },
+        {
+            value: 'Jazz',
+            label: 'Jazz'
+        },
+        {
+            value: 'Blues',
+            label: 'Blues'
+        },
+        {
+            value: 'Country',
+            label: 'Country'
+        },
+        {
+            value: 'Metal',
+            label: 'Metal'
+        },
+        {
+            value: 'Funk',
+            label: 'Funk'
+        },
+        {
+            value: 'Soul',
+            label: 'Soul'
+        },
+        {
+            value: 'CCM/Worship',
+            label: 'CCM/Worship'
+        },
+        {
+            value: 'Hip-Hop/Rap',
+            label: 'Hip-Hop/Rap'
         },
     ];
 </script>
@@ -71,19 +112,7 @@
             <span v-if="mode === 'edit'">Edit Playlist</span>
         </h2>
         <div class="tw-flex tw-pt-[24px]">
-            <div class="tw-flex tw-flex-col lg:tw-pr-[42px] tw-w-[200px] tw-shrink-0">
-                <img class="tw-w-[158px] tw-h-[158px] tw-rounded-[9px]"
-                    :src="`${imgSrc ? imgSrc : 'https://placehold.jp/158x158.png'}`" />
-                <div class="tw-flex tw-pt-[12px] tw-justify-center tw-items-center">
-                    <button class="tw-underline tw-text-[#7E9AB1] tw-italic tw-text-[13px]">
-                        <span v-if="!(imgSrc && imgSrc.length)">Upload Playlist Image</span>
-                        <span v-if="(imgSrc && imgSrc.length)">Change Image</span>
-                    </button>
-                    <button tw- v-if="(imgSrc && imgSrc.length)" class="tw-ml-[3px]">
-                        <XCircleIcon class="tw-text-[#7E9AB1] tw-w-[14px] tw-h-[14px]" />
-                    </button>
-                </div>
-            </div>
+            <ThumbnailUpload />
             <div class="tw-flex tw-flex-col tw-w-full tw-dark">
                 <InputLabel placeholder="Playlist Title" :remove-default-input-styles="true"
                     inputOverride="tw-mb-[20px] tw-text-white placeholder:tw-text-white tw-w-full tw-bg-[#002039]/90 tw-px-[14px] tw-box-border tw-border-[#445F74] tw-h-[42px] tw-rounded-[63px] tw-py-[9px] tw-px-[13px] tw-text-[14px] focus:tw-border-none focus:tw-outline-none"
