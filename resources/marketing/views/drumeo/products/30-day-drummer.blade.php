@@ -213,7 +213,7 @@
     @endif
     @php
         if (is_current_user_an_annual_or_lifetime_member()) {
-            $registerButtonUrl = '/laravel/public/30-day-drummer-register-endpoint';
+            $registerButtonUrl = '/cohort-packs/register/30-day-drummer-2';
         } else {
             $registerButtonUrl = "#final";
         }
