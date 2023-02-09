@@ -36,10 +36,10 @@
 
     //Handle Pin/Unpin Request
     const pinHandler = (id, brand) => {
-        if(!state.isPinned) { //If not pinned
+        if(!state.isPinned) { //PIN
             PlaylistService.pinPlaylist(id, brand, token)
                 .then((response) => {
-                    if(response.ok) { 
+                    if(response.status === 200) { 
                         //handle pin
                         state.isPinned = true;
                         //emit event or update pinia
@@ -48,10 +48,10 @@
                         //handle error  
                     }
                 })
-        } else { //if pinned
+        } else { //UNPIN
             PlaylistService.unpinPlaylist(id, brand, token)
                 .then((response) => {
-                    if(response.ok) { 
+                    if(response.status === 200) { 
                         //handle unpin
                         state.isPinned = false;
                         //emit event or update pinia
@@ -60,6 +60,8 @@
                     }
                 })
         }
+        //close after click
+        state.dropdownOpen = false;
     }
 
     //Check Dropdown Distance
@@ -169,24 +171,28 @@
                      :class="state.dropdownTop ? 'tw-bottom-[100%]' : 'tw-top-[100%]'"
                 >
                     <span class="tw-absolute tw-w-3 tw-h-3 tw-bg-white dark:tw-bg-[#081825] tw-rotate-45 tw-right-[11px]" :class="state.dropdownTop ? 'tw-bottom-[-4px]' : 'tw-top-[-4px]' "></span>
-                    <ul class="tw-text-sm">
-                        <li class=" tw-px-4 tw-py-2">
-                            <button>Share</button>
+                    <ul class="tw-text-sm tw-w-full">
+                        <li class="tw-w-full tw-flex">
+                            <button class="tw-flex tw-w-full tw-itemx-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-black/20">Share</button>
                         </li>
-                        <li class=" tw-px-4 tw-py-2">
-                            <button>Edit</button>
+                        <li class="tw-w-full tw-flex">
+                            <button class="tw-flex tw-w-full tw-itemx-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-black/20">Edit</button>
                         </li>
-                        <li class=" tw-px-4 tw-py-2">
-                            <button>Delete</button>
+                        <li class="tw-w-full tw-flex">
+                            <button class="tw-flex tw-w-full tw-itemx-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-black/20">Delete</button>
                         </li>
-                        <li class=" tw-px-4 tw-py-2">
-                            <button>Duplicate</button>
+                        <li class="tw-w-full tw-flex">
+                            <button class="tw-flex tw-w-full tw-itemx-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-black/20">Duplicate</button>
                         </li>
-                        <li class=" tw-px-4 tw-py-2">
-                            <button @click.prevent="pinHandler(list.id)">{{ list.pinned ? 'Unpin from Sidebar' : 'Pin to Sidebar' }} </button>
+                        <li class="tw-w-full tw-flex">
+                            <button class="tw-flex tw-w-full tw-itemx-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-black/20"
+                                    @click.prevent="pinHandler(list.id)"
+                            >
+                                {{ state.isPinned ? 'Unpin from Sidebar' : 'Pin to Sidebar' }} 
+                            </button>
                         </li>
                         <!-- If not public -->
-                        <li class=" tw-px-4 tw-py-2">Private</li>
+                        <li class="tw-w-full tw-w-full tw-flex tw-px-4 tw-py-2">Private</li>
                     </ul>
                 </div>
             </div>

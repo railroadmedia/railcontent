@@ -26,7 +26,6 @@
 
     //Lifecycle Hooks
     onBeforeMount(() => {
-        console.log(token)
         //Get Current User's Playlists
 
         //Get Local Storage Value
