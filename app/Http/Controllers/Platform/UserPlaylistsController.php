@@ -95,7 +95,7 @@ class UserPlaylistsController extends BaseController
                 'playlistItemId' => $item['user_playlist_item_id']]);
         }
         $items = new ContentFilterResultsEntity([
-                                                      'results' => $item,
+                                                      'results' => $items,
                                                       'total_results' => $this->userPlaylistsService->countUserPlaylistContents($playlistId),
                                                   ]);
 
