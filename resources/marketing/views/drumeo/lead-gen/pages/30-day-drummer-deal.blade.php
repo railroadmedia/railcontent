@@ -450,7 +450,7 @@
                 <img class="mx-auto h-10 mb-6 lazyload" data-src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://drumeo-assets.s3.amazonaws.com/sales/social-proof/shopper-approved-logo.png" alt="shopper approved logo">
             </a>
             <h4 class="font-extrabold leading-tight {{--mb-2 sm:mb-4--}} mb-14">
-                Trusted by 33,696 students<br class="inline sm:hidden"> from around the world.
+                Trusted by {{ number_format(Prices::$students) }} students<br class="inline sm:hidden"> from around the world.
             </h4>
             {{--<p class="mb-14 leading-tight">--}}
             {{--Sub-headline explaining what<br class="inline sm:hidden"> the reviews below are.--}}
