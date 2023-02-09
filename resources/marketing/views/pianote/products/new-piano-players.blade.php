@@ -10,7 +10,7 @@
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 
     @include('_partials.layout._fonts')
-    @include('_partials.layout._tailwindcdn')
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/30dd.css') }}" rel="stylesheet">
@@ -419,7 +419,7 @@
             <div class="timeline-container max-w-3xl lg:max-w-4xl mx-auto relative px-4 mt-5">
                 @foreach ($gettings as $key => $getting)
                     @if($getting['position'] === 'right')
-                        <div class="timeline relative flex flex-col-reverse md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 mb-16 md:mb-0 @if($key !== 3) md:mb-28 @endif">
+                        <div class="timeline relative flex flex-col-reverse md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 mb-16 md:mb-0 @if($key !== 5) md:mb-28 @endif">
                             <div class="content relative text-left sm:pl-10 md:pl-0">
                                 <h4 class="mb-2 md:mb-5 mt-1 md:mt-0"><strong>{{ $getting['title'] }}</strong></h4>
                                 <p>{{ $getting['desc'] }}</p>
@@ -503,25 +503,25 @@
     </section>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
         <div class="container max-w-6xl mx-auto">
-            <h2 class="mb-6 sm:mb-10 lg:mb-14"><img class="h-16 sm:h-24 -mb-2 sm:-mb-4 align-bottom  lazyload" data-src="https://cdn.musora.com/image/fetch/w_380,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/new-piano-players-start-here-logo-2+1.png"> <strong>...is designed for:</strong></h2>
+            <h2 class="mb-6 sm:mb-10 lg:mb-14"><img class="h-16 sm:h-24 -mb-2 sm:-mb-4 align-bottom  lazyload" data-src="https://cdn.musora.com/image/fetch/w_380,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/new-piano-players-start-here-logo-2+1.png"> <strong>...is perfect for:</strong></h2>
             <div class="flex flex-wrap text-left">
                 <div class="w-full sm:w-1/3 px-2 mb-6 sm:mb-0">
                     <div class="pb-44 sm:pb-36 lg:pb-52 text-center text-white bg-cover bg-center relative overflow-hidden rounded-xl lazyload" data-bg="https://cdn.musora.com/image/fetch/w_530,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/new-piano-player.jpg">
-                        <h6 class="leading-tight lg:leading-relaxed absolute bottom-3 w-full z-10"><strong><img class="h-8 lazyload" data-src="https://cdn.musora.com/image/fetch/w_150,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/plus.svg"><br>New Piano<br class="hidden sm:inline lg:hidden"> Players</strong></h6>
+                        <h6 class="leading-tight lg:leading-relaxed absolute bottom-3 w-full z-10"><strong><img class="h-8 lazyload" data-src="https://cdn.musora.com/image/fetch/w_150,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/plus.svg"><br>New Piano<br class="hidden sm:inline lg:hidden"> Players</strong></h6>
                         <div class="absolute inset-0 z-0" style="background:linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.8));"></div>
                     </div>
                     <p class="leading-normal mt-3">It’s right there in the name! If you’re just getting started, New Piano Players Start Here is perfect. From the very first lesson, you’ll be playing real music that sounds GOOD. </p>
                 </div>
                 <div class="w-full sm:w-1/3 px-2 mb-6 sm:mb-0">
                     <div class="pb-44 sm:pb-36 lg:pb-52 text-center text-white bg-cover bg-center relative overflow-hidden rounded-xl lazyload" data-bg="https://cdn.musora.com/image/fetch/w_530,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/returning-piano-player.jpg">
-                        <h6 class="leading-tight lg:leading-relaxed absolute bottom-3 w-full z-10"><strong><img class="h-8 lazyload" data-src="https://cdn.musora.com/image/fetch/w_150,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/plus.svg"><br>Returning<br class="hidden sm:inline lg:hidden"> Piano Players</strong></h6>
+                        <h6 class="leading-tight lg:leading-relaxed absolute bottom-3 w-full z-10"><strong><img class="h-8 lazyload" data-src="https://cdn.musora.com/image/fetch/w_150,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/plus.svg"><br>Returning<br class="hidden sm:inline lg:hidden"> Piano Players</strong></h6>
                         <div class="absolute inset-0 z-0" style="background:linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.8));"></div>
                     </div>
                     <p class="leading-normal mt-3">Been away a while? Come back to the piano and have FUN. Brush up on the foundations and play with confidence.</p>
                 </div>
                 <div class="w-full sm:w-1/3 px-2">
                     <div class="pb-44 sm:pb-36 lg:pb-52 text-center text-white bg-cover bg-center relative overflow-hidden rounded-xl lazyload" data-bg="https://cdn.musora.com/image/fetch/w_530,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/classically-trained-player.jpg">
-                        <h6 class="leading-tight lg:leading-relaxed absolute bottom-3 w-full z-10"><strong><img class="h-8 lazyload" data-src="https://cdn.musora.com/image/fetch/w_150,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/plus.svg"><br> Classically-Trained<br class="hidden sm:inline lg:hidden"> Piano Players</strong></h6>
+                        <h6 class="leading-tight lg:leading-relaxed absolute bottom-3 w-full z-10"><strong><img class="h-8 lazyload" data-src="https://cdn.musora.com/image/fetch/w_150,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/plus.svg"><br> Classically-Trained<br class="hidden sm:inline lg:hidden"> Piano Players</strong></h6>
                         <div class="absolute inset-0 z-0" style="background:linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.8));"></div>
                     </div>
                     <p class="leading-normal mt-3">Scared to break away from the safety of sheet music? New Piano Players Start Here will give you the confidence to trust your ear.</p>
@@ -538,7 +538,7 @@
                     <tbody>
                     <tr style="background-color:transparent!important;">
                         <td></td>
-                        <td class="rounded-t-xl"><img class="h-8 sm:h-14 lazyload" data-src="https://cdn.musora.com/image/fetch/w_220,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/Logo_white.png"></td>
+                        <td class="rounded-t-xl"><img class="h-8 sm:h-14 lazyload" data-src="https://cdn.musora.com/image/fetch/w_220,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/new-piano-players-start-here-logo-white.png"></td>
                         <td class="cursor-pointer sm:cursor-default rounded-tl-xl"><strong>Private<br> Lessons</strong></td>
                         <td class="cursor-pointer sm:cursor-default"><strong>Online<br> Courses</strong></td>
                         <td class="cursor-pointer sm:cursor-default rounded-tr-xl"><strong>Piano<br> Books</strong></td>
@@ -583,9 +583,11 @@
 {{--                        @if(is_current_user_a_member())--}}
 {{--                            <td class="rounded-b-xl"><strong>FREE</strong><br> for Drumeo<br class="inline lg:hidden"> Members</td>--}}
 {{--                        @else--}}
-                            <td class="rounded-b-xl"><strong>${{ 97 }}</strong></td>
+                            <td class="rounded-b-xl">
+                                <strong>${{ 97 }}</strong>
+                            </td>
 {{--                        @endif--}}
-                        <td class="rounded-bl-xl"><strong>$50-$100</strong><br> per lesson</td>
+                        <td class="rounded-bl-xl"><strong>$50-$100</strong><br> For a Single Lesson</td>
                         <td><strong>$89-$270+</strong><br>&nbsp;</td>
                         <td class="rounded-br-xl"><strong>$19-$49</strong><br>&nbsp;</td>
                     </tr>
@@ -633,7 +635,7 @@
                         </div>
                         <div class="">
                             <img class="h-6 sm:h-8 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/TikTok_Icon.svg">
-                            <h3 class="mt-2"><strong>55K</strong></h3>
+                            <h3 class="mt-2"><strong>55.8K</strong></h3>
                             <p class="uppercase opacity-70 text-sm">Followers</p>
                         </div>
                     </div>
@@ -757,18 +759,18 @@
             <div class="flex flex-wrap items-center mt-7 sm:mt-10">
 {{--                    @if(is_current_user_a_member())--}}
                         <div class="text-left w-full sm:w-1/2 xl:w-5/12 lg:pl-5">
-                            <img class="h-20 md:h-20 lg:h-24 lazyload" data-src="https://cdn.musora.com/image/fetch/w_380,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/30_day_drummer_logo.png">
+                            <img class="h-20 md:h-20 lg:h-24 lazyload" data-src="https://cdn.musora.com/image/fetch/w_380,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/new-piano-players-start-here-logo-2+1.png">
                             <h2 class="leading-tight mt-2 mb-4 sm:my-4 lg:my-5"><strong>
-                                    24 Guided Workouts<br>
+                                    20 Guided Play-Along Lessons<br>
                                     4 Live Q&A Sessions<br>
                                     Lifetime Course Access
                                 </strong></h2>
                             <div class="w-full mx-auto sm:mx-0">
 
-                                <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Learn drums by playing drums with Domino Santantonio</p>
+                                <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Learn piano the easy & fun way.</p>
                                 <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Join {{ $students ?? 0 }} piano players who have already registered.</p>
-                                <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Course runs February 27 to March 25, 2023.</p>
-                                <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i>  Click below to join the next edition of 30-Day Drummer</p>
+                                <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Click below to get started.</p>
+                                <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Countdown here.</p>
 
                                 {{--@if(session()->has('success-message'))--}}
                                     {{--<p class="mb-3 text-pianote text-center"><strong>Congrats! You have registered for 30-Day Drummer.<br class="hidden md:inline"> Check your email for the details.</strong></p>--}}
@@ -857,24 +859,24 @@
 {{--                    ])--}}
 {{--                @endif--}}
                 @include('_partials.components.question-dropdown', [
-                "title" => "Do I need to attend the lessons live?",
-                "desc" => "The weekday workouts are pre-recorded videos you can access on your own schedule – and the weekly live Q&A sessions are totally optional, and they’ll also include a recording that you can watch or re-watch anytime.",
-                ])
-                @include('_partials.components.question-dropdown', [
-                "title" => "What if I’m going to miss a day (or two, or more)?",
+                "title" => "What if I miss a day (or two)?",
                 "desc" => "That’s totally fine. The course is meant to be flexible if you miss a day here or there. There are a few buffer days mixed in PLUS the lessons are short enough that you could watch 2-3 in a single session if you ever need to catch up.",
+                "num" => '?',
                 ])
                 @include('_partials.components.question-dropdown', [
-                "title" => "Do I need a full drum set to complete the course?",
-                "desc" => "The lessons work on both electric and acoustic drum sets. While you can even get value with just a practice pad & sticks, it’s recommended that you have access to a drum set to get the most from this course.",
+                "title" => "Do I need a digital piano or software?",
+                "desc" => "No! This course works with all pianos and keyboards. You don’t have to plug anything or need any fancy plugins or software. Simply click play on your lesson, and follow along!",
+                "num" => '?',
                 ])
                 @include('_partials.components.question-dropdown', [
                 "title" => "How much time per week will this course require?",
-                "desc" => "30-Day Drummer gives you guided daily drum workouts for thirty days – with flex days built in for when life happens. With each workout being 10-15 minutes, you can miss a workout and make it up the next day or later in the week.",
+                "desc" => "New Piano Players Start Here gives you guided daily piano lessons for thirty days – with a few flex days built in for when life happens. Each lesson is only 10 minutes. We’ve made it short so you’re more likely to keep playing!",
+                "num" => '?',
                 ])
                 @include('_partials.components.question-dropdown', [
                 "title" => "What devices can I access the course on?",
-                "desc" => "30-Day Drummer is available on your laptop, tablet, or phone. You’ll also have access through the Drumeo app after you’ve completed your purchase of the course.",
+                "desc" => "New Piano Players Start Here is available on your laptop, tablet, or phone. You’ll also have access through the Pianote App after you’ve completed your purchase of the course.",
+                "num" => '?',
                 ])
             </div>
             <div class="inline-block w-full px-3 md:px-4 my-5" style="color:#2a2f34;">
