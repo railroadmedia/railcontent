@@ -217,9 +217,6 @@
         } else {
             $registerButtonUrl = "#final";
         }
-
-        // how to check if the logged in user is already registered (already has the pack)
-        $isUserAlreadyRegistered = !empty(auth()->id()) && \App\Services\User\UserAccessService::ownsPack(auth()->id(), '30-day-drummer-2');
     @endphp
 
     <header class="px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:#eff7ff;">
@@ -270,7 +267,7 @@
                     @endif
                     <div class="flex flex-wrap sm:flex-nowrap items-center mt-6 sm:mt-5 lg:mt-10">
                         <div class="w-full sm:w-1/2 text-center sm:pr-2">
-                            @if($isUserAlreadyRegistered)
+                            @if($hasProduct)
                                 <a class="join sold-out medium w-full">YOU'RE ENROLLED</a>
                             @else
                                 <a href="{{ $registerButtonUrl }}" class="join blue medium w-full @if(!is_current_user_an_annual_or_lifetime_member()) anchor-slide @endif">ENROLL NOW</a>
@@ -438,7 +435,7 @@
             @if(session()->has('success-message'))
                 <p class="-mb-2 sm:-mb-8 mt-5 text-drumeo text-center"><strong>Congrats! You have registered for 30-Day Drummer.<br class="hidden md:inline"> Check your email for the details.</strong></p>
             @endif
-            @if($isUserAlreadyRegistered)
+            @if($hasProduct)
                 <a class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3">YOU'RE ENROLLED</a><br>
             @else
                 <a
@@ -674,7 +671,7 @@
                 <p class="-mb-2 sm:-mb-8 mt-5 text-drumeo text-center"><strong>Congrats! You have registered for 30-Day Drummer.<br class="hidden md:inline"> Check your email for the details.</strong></p>
             @endif
 
-            @if($isUserAlreadyRegistered)
+            @if($hasProduct)
                 <a class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3">YOU'RE ENROLLED</a><br>
             @else
                 <a
@@ -762,7 +759,7 @@
                                     <h1 class="inline-block mr-4 align-middle text-4xl sm:text-5xl"><strong>${{ 97 }}</strong></h1>
                                 @endif
 
-                                @if($isUserAlreadyRegistered)
+                                @if($hasProduct)
                                     <a class="join sold-out medium w-1/2 align-middle">YOU'RE ENROLLED</a>
                                 @else
                                     <a class="join blue medium w-1/2 align-middle" href="{{ $registerButtonUrl }}">ENROLL NOW</a>
