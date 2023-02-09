@@ -21405,6 +21405,12 @@ a:visited{
 .tw-right-\[calc\(100\%-22px\)\]{
   right: calc(100% - 22px) !important;
 }
+.tw-right-2{
+  right: 0.5rem !important;
+}
+.tw-top-2{
+  top: 0.5rem !important;
+}
 .tw-right-3{
   right: 0.75rem !important;
 }
@@ -21419,12 +21425,6 @@ a:visited{
 }
 .tw-right-\[2px\]{
   right: 2px !important;
-}
-.tw-right-2{
-  right: 0.5rem !important;
-}
-.tw-top-2{
-  top: 0.5rem !important;
 }
 .tw-left-1\/2{
   left: 50% !important;
@@ -21586,6 +21586,10 @@ a:visited{
   margin-left: 0.25rem !important;
   margin-right: 0.25rem !important;
 }
+.tw-mx-6{
+  margin-left: 1.5rem !important;
+  margin-right: 1.5rem !important;
+}
 .tw-mx-\[40px\]{
   margin-left: 40px !important;
   margin-right: 40px !important;
@@ -21617,10 +21621,6 @@ a:visited{
 .tw-my-1{
   margin-top: 0.25rem !important;
   margin-bottom: 0.25rem !important;
-}
-.tw-mx-6{
-  margin-left: 1.5rem !important;
-  margin-right: 1.5rem !important;
 }
 .tw-mx-8{
   margin-left: 2rem !important;
@@ -21968,6 +21968,9 @@ a:visited{
 .tw-h-auto{
   height: auto !important;
 }
+.tw-h-24{
+  height: 6rem !important;
+}
 .tw-h-\[165px\]{
   height: 165px !important;
 }
@@ -22281,6 +22284,9 @@ a:visited{
 .tw-w-\[6px\]{
   width: 6px !important;
 }
+.tw-w-\[26px\]{
+  width: 26px !important;
+}
 .tw-w-4{
   width: 1rem !important;
 }
@@ -22301,9 +22307,6 @@ a:visited{
 }
 .tw-w-\[24px\]{
   width: 24px !important;
-}
-.tw-w-\[26px\]{
-  width: 26px !important;
 }
 .tw-w-\[115px\]{
   width: 115px !important;
@@ -23398,6 +23401,10 @@ a:visited{
 }
 .tw-fill-current{
   fill: currentColor !important;
+}
+.tw-object-contain{
+  -o-object-fit: contain !important;
+     object-fit: contain !important;
 }
 .tw-object-cover{
   -o-object-fit: cover !important;
@@ -25329,14 +25336,14 @@ a:visited{
   .md\:tw-relative{
     position: relative !important;
   }
-  .md\:tw-right-\[32px\]{
-    right: 32px !important;
-  }
   .md\:tw-top-\[32px\]{
     top: 32px !important;
   }
   .md\:tw-right-\[48px\]{
     right: 48px !important;
+  }
+  .md\:tw-right-\[32px\]{
+    right: 32px !important;
   }
   .md\:tw-left-\[32px\]{
     left: 32px !important;

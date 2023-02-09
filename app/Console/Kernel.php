@@ -25,6 +25,7 @@ use App\Console\Commands\SeedLiveAndScheduledContent;
 use App\Console\Commands\SeedUserContentData;
 use App\Console\Commands\TestLessonsDescriptionUrls;
 use App\Console\Commands\MembershipFieldsSync;
+use App\Console\Commands\UpdateRoutinesFebruary2023;
 use App\Console\Commands\VaporEnvManager;
 use App\Console\Commands\UpdateRoutines;
 use Illuminate\Console\Scheduling\Schedule;
@@ -63,6 +64,7 @@ class Kernel extends ConsoleKernel
         CreateSongs24Jan2023::class,
         RemoveTemporarySongsAccessForLifetimeMembersJanuary2023::class,
         MembershipFieldsSync::class,
+        UpdateRoutinesFebruary2023::class,
     ];
 
     /**
