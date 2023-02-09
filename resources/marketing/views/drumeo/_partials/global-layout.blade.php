@@ -114,7 +114,7 @@
             });
         $('.tzcd-text').countdown('2023/2/27')
             .on('update.countdown', function (event) {
-                var format = '' + '%M minute%!M ' + '%S second%!S';
+                var format = '' + '%M minute%!M';
                 if (event.offset.totalHours > 0) {
                     format = '' + '%H hour%!H ' + format;
                 }
@@ -128,7 +128,7 @@
             });
         $('.tzcd-text-smaller').countdown('2023/2/27')
             .on('update.countdown', function (event) {
-                var format = '' + '%M min%!M ' + '%S sec%!S';
+                var format = '' + '%M min%!M';
                 if (event.offset.totalHours > 0) {
                     format = '' + '%H hr%!H ' + format;
                 }
