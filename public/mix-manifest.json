@@ -1,5 +1,6 @@
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     "/platform/js/app.js": "/platform/js/app.js?id=68434624f5686b3b290b5c74ab6efa1e",
     "/platform/js/profile.js": "/platform/js/profile.js?id=a13ed5f750a89e00edbe84934bd56773",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=9b1b997eda2b5545804b8d7649790e48",
@@ -35,12 +36,15 @@
     "/platform/js/vendor.js": "/platform/js/vendor.js?id=49f0817b99cd1af9df9cbd7fcee415f7"
 =======
     "/platform/js/app.js": "/platform/js/app.js?id=633429955249c3329aeeb78ec89318dc",
+=======
+    "/platform/js/app.js": "/platform/js/app.js?id=f78327403d25ad089bde7df17ecdc420",
+>>>>>>> master
     "/platform/js/profile.js": "/platform/js/profile.js?id=c7e869f012d1252699ff65de1e5e0547",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=24098ec7990ff98a565fd1e4693746ed",
     "/platform/js/books.js": "/platform/js/books.js?id=d4fa837307a14d7ee0ce9065b5e5e8e0",
     "/platform/js/manifest.js": "/platform/js/manifest.js?id=be70658ef6cc1d6f5105ed7227231451",
-    "/platform/js/membership-update-.js": "/platform/js/membership-update-.js?id=38c7383dbe623cdd0af0497f5c390276",
-    "/platform/js/membership-update-page.js": "/platform/js/membership-update-page.js?id=96a0d92499a63b7edb121e170fb0c00b",
+    "/platform/js/membership-update-.js": "/platform/js/membership-update-.js?id=47963e36ebd057dd76d6483c3f9b9152",
+    "/platform/js/membership-update-page.js": "/platform/js/membership-update-page.js?id=9947140a8d3bf9ab7451f186415ca1ec",
     "/platform/js/song.js": "/platform/js/song.js?id=06ed130d7a3a25ef64877d529911ef75",
     "/platform/js/song-request.js": "/platform/js/song-request.js?id=f9543f936080d1925940e54bcab73ddb",
     "/platform/js/piano-backing-tracks.js": "/platform/js/piano-backing-tracks.js?id=7fbf8dfd123a4027cfa05515f7665d82",
@@ -63,9 +67,12 @@
     "/platform/js/email-form-component.js": "/platform/js/email-form-component.js?id=cfa09b0b222991cacf388f79469aaec9",
     "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=26d03238e24769866d21704f9c052fd4",
     "/marketing/css/vuesora.css": "/marketing/css/vuesora.css?id=7535f0fd6b7b50898c6d1f0a209f96d2",
-    "/platform/css/app.css": "/platform/css/app.css?id=509d5c59d50c67244bd8c15d342fb4fa",
+    "/platform/css/app.css": "/platform/css/app.css?id=0221f88cd6f45df6637438964b5ceff7",
     "/platform/js/vendor~onboarding.js": "/platform/js/vendor~onboarding.js?id=56868ea369faf90d0978a204535ee2e6",
-    "/marketing/css/app.css": "/marketing/css/app.css?id=cf99ec8d11bc618ad426ef76015c84b3",
+    "/marketing/css/app.css": "/marketing/css/app.css?id=03f8306af4c41bed19af3970b0bbac59",
     "/platform/js/vendor.js": "/platform/js/vendor.js?id=05dd83ebb4f3d065d57fc2d6da2069b0"
+<<<<<<< HEAD
+>>>>>>> master
+=======
 >>>>>>> master
 }

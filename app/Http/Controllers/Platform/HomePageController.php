@@ -29,8 +29,7 @@ use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\UserPlaylistsService;
 use Railroad\Railcontent\Support\Collection as RailcontentCollection;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use App\Models\Brand;
-use App\Models\Carousel;
+use App\Modules\Content\Services\CarouselService;
 
 class HomePageController extends BaseController
 {
@@ -42,6 +41,7 @@ class HomePageController extends BaseController
     private PackService $packService;
     private DatabaseManager $databaseManager;
     private UserContentProgressService $userContentProgressService;
+    private CarouselService $carouselService;
 
     /**
      * @param ContentService $contentService
@@ -61,7 +61,8 @@ class HomePageController extends BaseController
         UserPlaylistsService $userPlaylistsService,
         PackService $packService,
         DatabaseManager $databaseManager,
-        UserContentProgressService $userContentProgressService
+        UserContentProgressService $userContentProgressService,
+        CarouselService $carouselService
     ) {
         $this->contentService = $contentService;
         $this->contentFollowService = $contentFollowsService;
@@ -71,6 +72,7 @@ class HomePageController extends BaseController
         $this->packService = $packService;
         $this->databaseManager = $databaseManager;
         $this->userContentProgressService = $userContentProgressService;
+        $this->carouselService = $carouselService;
     }
 
     public function homeRedirect()
@@ -274,28 +276,7 @@ class HomePageController extends BaseController
             }
         }
 
-        $brandId =
-            Brand::query()
-                ->where('name', ucfirst(config('railcontent.brand')))
-                ->first()->id;
-
-        $carousel = Carousel::query()
-                        ->where('brand_id', $brandId)
-                        ->where('visible', true)
-                        ->where(
-                            function($query) {
-                                return $query
-                                    ->whereNull('start_date')
-                                    ->orWhere('start_date', '<=', Carbon::now()->toDateTimeString());
-                            })
-                        ->where(
-                            function($query) {
-                                return $query
-                                    ->whereNull('end_date')
-                                    ->orWhere('end_date', '>', Carbon::now()->toDateTimeString());
-                            })
-                        ->orderBy('display_order')
-                        ->get();
+        $carousel = $this->carouselService->getCarouselSlides();
 
         return view('home.index', [
             'brand' => $brand,
