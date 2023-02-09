@@ -18,7 +18,6 @@
                 {{-- Playlist Catalog --}}
                 <playlist-collection-catalog
                     :playlists="{{ json_encode($playlists) }}"
-                    token="{{ csrf_token() }}"
                 ></playlist-collection-catalog>
 
             </div>

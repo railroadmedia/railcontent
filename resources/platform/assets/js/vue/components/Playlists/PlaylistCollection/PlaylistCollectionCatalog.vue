@@ -1,5 +1,5 @@
 <script setup>
-    import { onBeforeMount, onMounted, onUnmounted, watch, reactive } from 'vue';
+    import { onBeforeMount, watch, inject, reactive } from 'vue';
     import PlaylistService from '../../../../services/playlists.js';
     import PlaylistCollectionCard from './PlaylistCollectionCard.vue';
 
@@ -12,10 +12,6 @@
         playlists: {
             type: Array,
             default: []
-        },
-        token: {
-            type: String,
-            required: true, 
         }
     })
     //Reactive Data
@@ -23,14 +19,15 @@
         isListView: false 
     })
 
+    //Inject
+    const token = inject('token');
+
     //Methods
 
     //Lifecycle Hooks
     onBeforeMount(() => {
+        console.log(token)
         //Get Current User's Playlists
-        PlaylistService.getCurrentUserPlaylists(brand)            
-            .then((res) => res.json() )
-            .then((json) => console.log(json.data) );
 
         //Get Local Storage Value
         if(localStorage.getItem('playlistIsListView')) {
