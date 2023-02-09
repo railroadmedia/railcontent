@@ -184,9 +184,17 @@ class SalesController extends BaseController
     {
         $products = $this->productRepository->all();
         $products = array_combine(array_entity_column($products, 'getSku'), $products);
+        /** @var \App\Modules\Ecommerce\Services\UserProductService $userProductService */
+        $userProductService = app(\App\Modules\Ecommerce\Services\UserProductService::class);
+        $hasProduct = user() && $userProductService->hasProductNotCached(user()?->id, 516);
 
-        return view('drumeo.products.30-day-drummer', ['products' => $products, 'theme' => 'drumeo']);
+        return view('drumeo.products.30-day-drummer', [
+            'products' => $products,
+            'theme' => 'drumeo',
+            'hasProduct' => $hasProduct
+        ]);
     }
+
     public function thirtyDayDrummerDeal()
     {
         $products = $this->productRepository->all();
