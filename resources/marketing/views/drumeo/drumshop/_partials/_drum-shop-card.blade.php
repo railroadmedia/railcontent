@@ -14,7 +14,7 @@
                     @endif
                     @if(!empty($packLogo))
                         <div class="logo">
-                            <img src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/{{ $packLogo }}" alt="{{ $title }} logo">
+                            <img @if($sku === '30-day-drummer-2') class="max-h-full h-24" @endif src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/{{ $packLogo }}" alt="{{ $title }} logo">
                         </div>
                     @endif
                     <i class="fas fa-arrow-right hover-icon"></i>
