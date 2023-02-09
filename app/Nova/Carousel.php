@@ -80,7 +80,7 @@ class Carousel extends Resource
                         $brand = 'Singeo';
                     }
 
-                    return '/'.$brand.'/carousels/'.$request->uuid.'-'.$request->file('img')->getClientOriginalName();
+                    return '/'.$brand.'/carousels/'.$request->uuid.'-'.$request->file('logo')->getClientOriginalName();
                 })
                 ->preview(function($value){
                     if(empty($value)) return null;
