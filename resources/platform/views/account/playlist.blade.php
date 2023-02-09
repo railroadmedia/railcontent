@@ -6,18 +6,13 @@
 
 @section('content')
 
-
+    {{-- Playlist Header --}}
+    <playlist-header
+        :playlist="{{ json_encode($playlist) }}"
+        :brand="{{ $brand }}"
+    /></playlist-header>
 
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white tw-pb-14">
-        <div class="tw-flex tw-flex-col">
-            <div class="tw-flex tw-flex-row">
-                Playlist name - {{$playlist['name']}} <br/>
-                Playlist description - {{$playlist['description']}}<br/>
-                Playlist thumbnail url - {{$playlist['thumbnail_url']}} <br/>
-                Is liked by current user - {{$playlist['is_liked_by_current_user']}} <br/>
-            </div>
-        </div>
-
         <div class="tw-flex tw-flex-col">
             <div class="tw-flex tw-flex-row">
                 <content-catalogue

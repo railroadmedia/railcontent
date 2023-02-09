@@ -1,5 +1,5 @@
 <script setup>
-    import platformHeader from "../PlatformHeader/platform-header.vue";
+    import platformHeader from "../../PlatformHeader/platform-header.vue";
 
     //Props
     const props = defineProps([
