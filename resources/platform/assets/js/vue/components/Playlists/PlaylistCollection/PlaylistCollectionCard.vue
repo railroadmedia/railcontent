@@ -23,7 +23,7 @@
     const dropdownTarget = ref(null)
 
     //Inject
-    const token = inject('token');
+    const token = inject('csrf_token');
 
     //-----------Reactive Data-----------//
     const state = reactive({ 

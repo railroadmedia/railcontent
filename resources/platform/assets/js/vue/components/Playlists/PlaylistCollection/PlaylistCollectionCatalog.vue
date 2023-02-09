@@ -20,7 +20,7 @@
     })
 
     //Inject
-    const token = inject('token');
+    const token = inject('csrf_token');
 
     //Methods
 

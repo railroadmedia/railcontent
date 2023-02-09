@@ -29,7 +29,7 @@
     const category = ref(null);
     const description = ref('');
 
-    const token = inject('token');
+    const token = inject('csrf_token');
 
     const { imgSrc } = props.modalProps;
 
