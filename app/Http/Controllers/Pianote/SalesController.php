@@ -198,7 +198,7 @@ class SalesController extends BaseController
 
     public function newPianoPlayers()
     {
-        return view('pianote.products.new-piano-players');
+        return view('pianote.products.new-piano-players', ['theme' => 'pianote']);
     }
     public function newPianoPlayersDeal()
     {
