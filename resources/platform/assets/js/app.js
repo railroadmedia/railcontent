@@ -22,6 +22,7 @@ import LoginForm from './vue/components/LoginForm/LoginForm.vue';
 import ResetPassForm from './vue/components/ResetPassForm/ResetPassForm.vue';
 import MusoraIcon from './vue/components/MusoraIcons/MusoraIcon.vue'
 import GearCarousel from './vue/components/GearCarousel/GearCarousel.vue';
+import InfoModal from './vue/components/Modal/InfoModal';
 
 //Vuesora Assets
 import Forms from './vue/vuesora/assets/js/classes/forms';
@@ -246,6 +247,7 @@ app.component('AppContainer', AppContainer)
     .component('AssignmentsContainer', AssignmentsContainer)
     .component('ContentAssignment', ContentAssignment)
     .component('AddEventModal', AddEventModal)
+    .component('InfoModal', InfoModal)
 
     .component('PlatformHeader', defineAsyncComponent(() => 
         import(
@@ -425,10 +427,15 @@ app.component('AppContainer', AppContainer)
     .component('PlaylistHeader', defineAsyncComponent(() => 
         import(
             /* webpackChunkName: "playlist-header" */
-            `./vue/components/Playlists/PlaylistHeader.vue`
+            `./vue/components/Playlists/Playlist/PlaylistHeader.vue`
         )
     ))
-
+    .component('PlaylistCollectionHeader', defineAsyncComponent(() => 
+        import(
+            /* webpackChunkName: "playlist-collection-header" */
+            `./vue/components/Playlists/PlaylistCollection/PlaylistCollectionHeader.vue`
+        )
+    ))
     .component('PlaylistCollectionCatalog', defineAsyncComponent(() => 
         import(
             /* webpackChunkName: "playlist-collection-catalog" */

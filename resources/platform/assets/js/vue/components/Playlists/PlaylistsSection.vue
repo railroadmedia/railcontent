@@ -1,9 +1,9 @@
 <!-- Playlists -->
 <script setup>
 //Icons
-import { computed } from 'vue'
-import MusoraIcon from '../MusoraIcons/MusoraIcon.vue'
-import { textColor, borderColor } from '../../../constants/brands.js'
+import { computed } from 'vue';
+import MusoraIcon from '../MusoraIcons/MusoraIcon.vue';
+import { textColor, borderColor } from '../../../constants/brands.js';
 
 const props = defineProps({
     isSidebarCollapsed: Boolean,

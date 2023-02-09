@@ -2,6 +2,7 @@
     import { onBeforeMount, ref, inject, reactive } from 'vue';
     import MusoraIcon from '../../MusoraIcons/MusoraIcon.vue';
     import PlaylistService from '../../../../services/playlists.js';
+    import { usePlaylistsStore } from '../../../../stores/playlists';
 
     //-----------Props-----------//
     const props = defineProps({
@@ -24,6 +25,8 @@
 
     //Inject
     const token = inject('csrf_token');
+    //Pinia Stores
+    const playlistsStore = usePlaylistsStore();
 
     //-----------Reactive Data-----------//
     const state = reactive({ 
@@ -43,6 +46,7 @@
                         //handle pin
                         state.isPinned = true;
                         //emit event or update pinia
+                        playlistsStore.update({ playlists: props.playlists });
                         //show success message
                     } else {
                         //handle error  
@@ -55,6 +59,7 @@
                         //handle unpin
                         state.isPinned = false;
                         //emit event or update pinia
+                        playlistsStore.update({ playlists: props.playlists });
                     } else {
                         //handle error
                     }
@@ -86,6 +91,8 @@
     onBeforeMount(() => {
         //check if it's pinned with request? Or prerender?
         state.isPinned = props.list.pinned;
+
+        console.log('pinia playlist', playlistsStore.playlists[0])
     }); 
     
     
@@ -125,9 +132,9 @@
                 </p>
                 <!--description-->
                 <p class="tw-capitalize tw-truncate tw-hidden"
-                    :class=" props.isListView ? 'tw-flex tw-pl-2 tw-col-span-5 md:tw-inline-flex' : '' " 
+                    :class=" props.isListView ? 'tw-flex tw-col-span-5 md:tw-inline-flex' : '' " 
                 > 
-                    <span class="tw-truncate tw-max-w-[512px] tw-pr-4">{{ list.description }}</span>
+                    <span class="tw-truncate tw-max-w-[512px] tw-pl-2 tw-pr-4">{{ list.description }}</span>
                 </p>
                 <!--category / duration -->
                 <div class="tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-sm tw-flex" 

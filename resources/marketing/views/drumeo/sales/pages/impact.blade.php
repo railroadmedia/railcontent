@@ -324,8 +324,8 @@
     <title>The World’s Largest Online Drum Lessons Community. | Drumeo</title>
     <meta property="og:title" content="The World’s Largest Online Drum Lessons Community. | Drumeo">
 
-    <meta name="description" content="Trusted by 33,696 active students from 116 countries.">
-    <meta property="og:description" content="Trusted by 33,696 active students from 116 countries.">
+    <meta name="description" content="Trusted by {{ number_format(Prices::$students) }} active students from 116 countries.">
+    <meta property="og:description" content="Trusted by {{ number_format(Prices::$students) }} active students from 116 countries.">
 
     <meta property="og:image" content="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://drumeo-assets.s3.amazonaws.com/sales/social-proof/share_image.png" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}/">
@@ -639,7 +639,7 @@
                         The world’s <br class="hidden sm:inline">largest online <br class="hidden sm:inline">drum lessons <br class="hidden sm:inline">community.
                     </h1>
                     <p>
-                        Trusted by <strong>33,696</strong> active students <br class="lg:hidden">from <strong>116</strong> countries.
+                        Trusted by <strong>{{ number_format(Prices::$students) }}</strong> active students <br class="lg:hidden">from <strong>116</strong> countries.
                     </p>
                 </div>
             </div>
@@ -853,7 +853,7 @@
                 <img class="mx-auto h-10 mb-6" src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://drumeo-assets.s3.amazonaws.com/sales/social-proof/shopper-approved-logo.png" alt="shopper approved logo">
             </a>
             <h4 class="font-extrabold leading-tight {{--mb-2 sm:mb-4--}} mb-14">
-                Trusted by 33,696 students<br class="inline sm:hidden"> from around the world.
+                Trusted by {{ number_format(Prices::$students) }} students<br class="inline sm:hidden"> from around the world.
             </h4>
             {{--<p class="mb-14 leading-tight">--}}
                 {{--Sub-headline explaining what<br class="inline sm:hidden"> the reviews below are.--}}

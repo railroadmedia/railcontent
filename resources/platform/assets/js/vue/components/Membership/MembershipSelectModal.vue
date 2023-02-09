@@ -283,5 +283,5 @@ onBeforeMount(() => {
                 </div>
             </div>
         </section>
-    </ModalRenderer>>
+    </ModalRenderer>
 </template>
