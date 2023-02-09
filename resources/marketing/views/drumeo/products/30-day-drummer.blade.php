@@ -746,7 +746,7 @@
 
                                 <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-drumeo mr-1"></i> Learn drums by playing drums with Domino Santantonio</p>
                                 <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-drumeo mr-1"></i> Join {{ $students ?? 0 }} drummers who’ve already registered.</p>
-                                <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-drumeo mr-1"></i> Course runs September 5 to October 5, 2022.</p>
+                                <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-drumeo mr-1"></i> Course runs February 27 to March 28.</p>
                                 <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-drumeo mr-1"></i>  Click below to join the next edition of 30-Day Drummer</p>
 
                                 @if(session()->has('success-message'))
@@ -765,12 +765,11 @@
                                     <a class="join blue medium w-1/2 align-middle" href="{{ $registerButtonUrl }}">ENROLL NOW</a>
                                 @endif
 
-                                <p class="text-sm mt-1">Enrollment is now closed.</p>
                                 <p class="text-sm mt-1 mb-5"><em>One-Time Payment. (Just ${{ round((97 / 30), 2) }} per day.)</em></p>
 
-                                <p class="text-sm text-drumeo">
-                                    <em><a class="cursor-pointer" data-open="bundle">Need a practice pad & drumsticks?<br class="inline lg:hidden"> Click <strong>here</strong> for a special offer.</a></em>
-                                </p>
+{{--                                <p class="text-sm text-drumeo">--}}
+{{--                                    <em><a class="cursor-pointer" data-open="bundle">Need a practice pad & drumsticks?<br class="inline lg:hidden"> Click <strong>here</strong> for a special offer.</a></em>--}}
+{{--                                </p>--}}
 
                             </div>
                         </div>
