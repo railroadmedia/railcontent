@@ -131,7 +131,7 @@
 
                 {{-- ================================= Owned products ================================= --}}
 
-                @if( !empty($userProductsDigitalAccessTypeSpecific) || $subscription || $membershipWithoutSubscription)
+                @if( !empty($userProductsDigitalAccessTypeSpecific))
                     <div class="tw-flex tw-flex-col body tw-pt-0 pa-3">
                         <div class="tw-flex tw-flex-row tw-flex-auto tw-py-2 tw-text-[#00101D] dark:tw-text-white tw-text-[#00101D]">
                             <h2 class="tw-font-bold tw-text-lg dark:tw-text-white">Your Access Levels</h2>
@@ -196,7 +196,7 @@
 
                         <div class="tw-mt-3 tw-space-y-1 tw-list-disc tw-ml-6 tw-py-3">
                             @foreach($activeMembershipProducts as $product)
-                                <div class="tw-font-bold">
+                                <div class="tw-font-bold dark:tw-text-white">
                                     {{ $product->getName() }}
                                 </div>
                             @endforeach
