@@ -41,7 +41,8 @@ class UserAccessService
         $user = auth()->user();
 
         if (!empty($user)) {
-            if ($user->isALifetimeMember() ||
+            if ($user->isAdmin()
+                || $user->isALifetimeMember() ||
                 UserAccessService::isActiveAnnualRecurringMember($user->id)) {
                 return true;
             }
