@@ -247,11 +247,8 @@ app.component('AppContainer', AppContainer)
     .component('AssignmentsContainer', AssignmentsContainer)
     .component('ContentAssignment', ContentAssignment)
     .component('AddEventModal', AddEventModal)
-<<<<<<< HEAD
     .component('ContentSchedule', ContentSchedule)
-=======
     .component('InfoModal', InfoModal)
->>>>>>> master
 
     .component('MembershipUpdate', defineAsyncComponent(() =>
         import(
