@@ -6,6 +6,7 @@ use App\Modules\Brand\Enums\Brand;
 use App\Http\Controllers\Drumeo\SalesController;
 
 Route::domain('{musoraDomain}')
+    ->middleware(['web_public'])
     ->group(function () {
 //        Route::get('{brand}/{category}', [ProductPagesController::class, 'products'])
 //            ->whereIn('brand', ['pianote', 'drumeo', 'singeo', 'guitareo'])
