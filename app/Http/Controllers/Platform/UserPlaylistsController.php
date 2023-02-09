@@ -2,18 +2,21 @@
 
 namespace App\Http\Controllers\Platform;
 
+use App\Decorators\Content\VimeoVideoSourcesDecorator;
 use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Repositories\UserContentProgressRepository;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\UserPlaylistsService;
+use Railroad\Railcontent\Support\Collection;
 
 class UserPlaylistsController extends BaseController
 {
     private UserPlaylistsService $userPlaylistsService;
     private ContentService $contentService;
     private UserContentProgressRepository $userContentRepository;
+    private VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator;
 
     /**
      * @param UserPlaylistsService $userPlaylistsService
@@ -23,11 +26,13 @@ class UserPlaylistsController extends BaseController
     public function __construct(
         UserPlaylistsService $userPlaylistsService,
         ContentService $contentService,
-        UserContentProgressRepository $userContentProgressRepository
+        UserContentProgressRepository $userContentProgressRepository,
+        VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator
     ) {
         $this->userPlaylistsService = $userPlaylistsService;
         $this->contentService = $contentService;
         $this->userContentRepository = $userContentProgressRepository;
+        $this->vimeoVideoSourcesDecorator = $vimeoVideoSourcesDecorator;
     }
 
     public function index(Request $request)
@@ -84,8 +89,13 @@ class UserPlaylistsController extends BaseController
             array_values(config('railcontent.showTypes', [])[config('railcontent.brand')] ?? [])
         );
 
+        $items = $this->userPlaylistsService->getUserPlaylistContents($playlistId, $contentTypes,$limit, $page);
+        foreach($items as $index=>$item){
+            $items[$index]['url'] = url()->route('platform.user.playlist-item',['playlistId' => $playlistId,
+                'playlistItemId' => $item['user_playlist_item_id']]);
+        }
         $items = new ContentFilterResultsEntity([
-                                                      'results' => $this->userPlaylistsService->getUserPlaylistContents($playlistId, $contentTypes,$limit, $page),
+                                                      'results' => $items,
                                                       'total_results' => $this->userPlaylistsService->countUserPlaylistContents($playlistId),
                                                   ]);
 
@@ -96,5 +106,29 @@ class UserPlaylistsController extends BaseController
             "noResultsMessage" => 'Nothing here yet! Start adding videos',
             "brand" => brand()
         ]);
+
+    }
+
+    public function playlistItem(Request $request, $domain, $brand, $playlistId, $playlistItemId){
+        $playlist = $this->userPlaylistsService->getPlaylist($playlistId);
+        $playlistItem = $this->userPlaylistsService->getPlaylistItemById($playlistItemId);
+        $contentToRenderAsLesson = $this->contentService->getById($playlistItem['content_id']);
+
+        $contentToRenderAsLesson =
+            $this->vimeoVideoSourcesDecorator->decorate(new Collection([$contentToRenderAsLesson]))
+                ->first();
+
+        $relatedLessons = (new ContentFilterResultsEntity(['results' => []]))->toResponseRawJson();
+
+        return view('account.playlist-item', [
+            "lessonContent" => $contentToRenderAsLesson,
+            "playlist" => $playlist,
+            "playlistItem" => $playlistItem,
+            "lessonType" => $contentToRenderAsLesson['type'],
+            "relatedLessons" => $relatedLessons,
+            'currentUser' => user(),
+            "brand" => brand()
+        ]);
+
     }
 }

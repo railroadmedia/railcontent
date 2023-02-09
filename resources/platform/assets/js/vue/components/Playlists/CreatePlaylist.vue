@@ -1,6 +1,7 @@
 <script setup>
     // TODO: Add Upload Modal for thumbnail add/change
     import { ref, inject } from 'vue';
+    import { XCircleIcon } from '@heroicons/vue/outline'
     import InputLabel from '../InputLabel/InputLabel.vue';
     import Dropdown from '../Dropdown/Dropdown.vue';
     import PlaylistService from '../../../services/playlists';
@@ -30,7 +31,7 @@
     const category = ref(null);
     const description = ref('');
 
-    const token = inject('token');
+    const token = inject('csrf_token');
 
     const { imgUrl } = props.modalProps;
 

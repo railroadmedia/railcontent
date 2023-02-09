@@ -629,9 +629,16 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('platform.user.playlists');
 
+        Route::get('/{brand}/playlist/{playlistId}/playlist-item/{playlistItemId}', [\App\Http\Controllers\Platform\UserPlaylistsController::class, 'playlistItem'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.user.playlist-item');
+
         Route::get('/{brand}/playlist/{id}', [\App\Http\Controllers\Platform\UserPlaylistsController::class, 'playlist'])
             ->whereIn('brand', all_brands())
             ->name('platform.user.playlist');
+
+
+
     });
 
 /*

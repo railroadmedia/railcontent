@@ -56,6 +56,10 @@ const props = defineProps({
   playlists: {
     type: Array,
     default: [],
+  },
+  csrf_token: {
+      type: String,
+      required: true
   }
 });
 
@@ -73,7 +77,7 @@ provide('isDarkModeSelected', isDarkModeSelected);
 provide('userAvatar', props.userAvatar);
 provide('userName', props.userName);
 provide('userId', props.userId);
-provide('token', props.token);
+provide('csrf_token', props.csrf_token);
 provide('isSidebarCollapsed', isSidebarCollapsed);
 
 const setDarkMode = (isSelected) => {

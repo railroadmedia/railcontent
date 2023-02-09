@@ -60,43 +60,51 @@ export default {
     /**
      * Pin Playlists
      *
-     * @param {string} brand
      * @param {number} id - 
+     * @param {string} brand
+     * @param {string} csrf_token 
+     * 
      */
     pinPlaylist(id, brand = "drumeo", csrf_token) {
-        let payload = {
-            "brand": brand,
-            "playlist_id":id,
-        }
-        let pinRequest = fetch('/railcontent/pin-playlist', {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': csrf_token
+        console.log('call pistPlaylist')
+        return axios.put(
+            '/railcontent/pin-playlist',
+            {
+                "brand": brand,
+                "playlist_id":id,
             },
-            referrerPolicy: 'no-referrer',
-            body: JSON.stringify(payload),
-        })
-        return pinRequest;
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': csrf_token
+                }
+            }
+        )
     },
 
     /**
      * Unpin Playlists
      *
-     * @param {string} brand
      * @param {number} id - 
+     * @param {string} brand
+     * @param {string} csrf_token 
+     * 
      */
-    unpinPlaylist(id, brand = "drumeo") {
-        let payload = {
-            "brand": brand,
-            "playlist_id":id,
-        }
-        let unpinRequest = fetch('/railcontent/unpin-playlist', {
-            method: 'PUT',
-            headers: {'Content-Type': 'application/json',},
-            body: JSON.stringify(payload),
-        })
-        return unpinRequest;
+    unpinPlaylist(id, brand = "drumeo", csrf_token) {
+        console.log('call unpistPlaylist')
+        return axios.put(
+            '/railcontent/unpin-playlist',
+            {
+                "brand": brand,
+                "playlist_id":id,
+            },
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': csrf_token
+                }
+            }
+        )
     },
 
     //-------------DELETE--------------//
