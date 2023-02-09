@@ -7,7 +7,7 @@ on:
 jobs:
   deploy-beta-testing:
     runs-on:
-      labels: ubuntu-20.04-16core
+      labels: ubuntu-20.04-64core
     if: github.ref == 'refs/heads/beta-testing'
     steps:
       - name: Checkout code
