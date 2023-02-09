@@ -1,5 +1,6 @@
 <script setup>
     // TODO: Add Upload Modal for thumbnail add/change
+    // TODO: Consider edit mode in the avatar upload process
     import { ref, inject } from 'vue';
     import { XCircleIcon } from '@heroicons/vue/outline'
     import InputLabel from '../InputLabel/InputLabel.vue';
