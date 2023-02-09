@@ -8,7 +8,7 @@ jobs:
   deploy-beta-testing:
     runs-on:
       group: Default Larger Runners
-      labels: ubuntu-latest-16-cores
+      labels: ubuntu-latest-32-cores
     if: github.ref == 'refs/heads/beta-testing'
     steps:
       - name: Checkout code
