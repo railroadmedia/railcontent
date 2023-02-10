@@ -34,6 +34,8 @@ return [
 
     'customer_io_pack_skus_to_sync_ownership' => [
         '30-day-drummer',
+        '30-day-drummer-2',
+        'new-piano-players-start-here',
         'beyond-beginner-drumming',
         'festival-2020',
         'electrify-your-drumming',
