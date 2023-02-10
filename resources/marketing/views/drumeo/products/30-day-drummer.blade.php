@@ -195,6 +195,12 @@
     <?php \App\Analytics\Tracker::trackProductImpression('30-day-drummer-2'); ?>
 @stop()
 
+@section('body-data')
+    x-data="{
+        modal: {{ empty(user()) ? true : false }},
+    }"
+@endsection
+
 @section('global-body')
     @include("drumeo.sales.partials._nav", [
         "cartVersion" => true
@@ -920,6 +926,17 @@
         "video" => '//player.vimeo.com/video/796456383?autoplay=1',
         "title" => 'trailer'
     ])
+    @component('_partials.components.modal', ['name' => 'modal'])
+        @slot('content')
+            <div class="max-w-xl mx-auto bg-white text-center p-10 rounded-xl">
+                <img class="h-24" src="https://cdn.musora.com/image/fetch/w_440,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/30_day_drummer2_logo.png" alt="30DD season 2 logo" />
+                <h4 class="mb-4"><strong>Are you an existing member?</strong></h4>
+                <p class="mb-6">All existing members will get this course for free! Make sure to login before proceeding.</p>
+                <a href="{{get_musora_brand_base_url()}}/login" class="join blue medium w-full max-w-md mb-2">Login</a><br>
+                <p class="text-drumeo font-bebas cursor-pointer tracking-widest" @click="modal = false;">NO THANKS</p>
+            </div>
+        @endslot
+    @endcomponent
 
 
     @include("drumeo.sales.partials._footer")
