@@ -355,7 +355,7 @@
                 $gettings = [
                     [
                     'position' => 'left',
-                    'img' => 'https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/calendar.jpg',
+                    'img' => 'https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/30DD2-calendar.jpg',
                     'title' => 'Know exactly what to practice.',
                     'desc' => '30-Day Drummer gives you guided play-along workouts every day for thirty days. You’ll know exactly what to work on every time you sit at the drums or practice pad.',
                     'special' => true,
