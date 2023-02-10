@@ -3,8 +3,6 @@ import UploadProgress from "../UploadProgress/UploadProgress.vue";
 import axios from "axios";
 import { onMounted, ref } from "vue";
 
-const FILE_UPLOAD_SERVICE = "/user-management-system/picture/upload-from-s3-front-end";
-
 const props = defineProps({
   image: {
     type: Blob,
@@ -12,6 +10,10 @@ const props = defineProps({
   userId: {
     type: String,
     default: 'random-uuid'
+  },
+  uploadService: {
+    type: String,
+    default: ''
   },
 });
 
@@ -55,12 +57,17 @@ onMounted(() => {
       percentCompleted.value = progress * 100;
     }
   }).then(response => {
-    axios.post(FILE_UPLOAD_SERVICE, {
+    const options = props.token ? {
+      headers: {
+        'X-CSRF-TOKEN': props.token
+      }
+    } : {};
+    axios.post(props.uploadService, {
       uuid: response.uuid,
       s3_bucket_path: response.key,
       bucket: response.bucket,
       fieldKey: 'profile_picture_url'
-    }).then((resolved) => {
+    }, options).then((resolved) => {
       if (resolved) {
         emit('onUploadDone', resolved.data.profile_picture_url);
       }
