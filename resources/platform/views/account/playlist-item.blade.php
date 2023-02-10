@@ -150,6 +150,20 @@
             <div id="lessonInfo" class="tw-flex tw-flex-row reverse tw-items-start">
                 <div class="tw-flex tw-flex-col tw-w-full 2xl:tw-w-[420px] tw-my-4 2xl:tw-mt-0 2xl:tw-ml-4 ">
                     <div class="tw-flex tw-flex-col tw-mb-5">
+                        <h6 class="tw-text-2xl tw-leading-none tw-font-bold tw-text-[#00101D] dark:tw-text-white">
+                            {{ $playlist['name'] }}
+                        </h6>
+                    </div>
+
+                    <content-catalogue catalogue-type="grid" theme-color="{{ $brand }}" :use-theme-color="true"
+                                       brand="{{ brand() }}" :pre-loaded-content="{{ $playlistItems }}"
+                                       @if (!empty($lockUnowned)) :lock-unowned="true" @endif :display-inline="true"
+                                       user-id="{{ auth()->id() }}"></content-catalogue>
+                </div>
+            </div>
+            <div id="lessonInfo" class="tw-flex tw-flex-row reverse tw-items-start">
+                <div class="tw-flex tw-flex-col tw-w-full 2xl:tw-w-[420px] tw-my-4 2xl:tw-mt-0 2xl:tw-ml-4 ">
+                    <div class="tw-flex tw-flex-col tw-mb-5">
                             <h6 class="tw-text-2xl tw-leading-none tw-font-bold tw-text-[#00101D] dark:tw-text-white">
                                 Related Lessons
                             </h6>
