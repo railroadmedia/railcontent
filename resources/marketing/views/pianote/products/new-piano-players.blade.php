@@ -207,25 +207,22 @@
     ])
     @include('pianote._partials._promo-banner-no-tw', [
         "name" => "New Piano Players Start Here",
-        "fullPrice" => floatval($productPrices['the-power-of-chords']->price),
-        "price" => floatval($productPrices['the-power-of-chords']->discounted_price),
+        "fullPrice" => floatval($productPrices['new-piano-players-start-here']->price),
+        "price" => floatval($productPrices['new-piano-players-start-here']->discounted_price),
                     "noBreadcrumb" => true
     ])
 
-    @if(!empty($products['30-day-drummer']->getPublicStockCount()))
+    @if(!empty($products['new-piano-players-start-here']->getPublicStockCount()))
         @php
-        $students = number_format($products['30-day-drummer']->getPublicStockCount())
+        $students = number_format($products['new-piano-players-start-here']->getPublicStockCount())
         @endphp
     @endif
     @php
-//        if (is_current_user_a_member()) {
-            $registerButtonUrl = '/laravel/public/30-day-drummer-register-endpoint';
-//        } else {
-//            $registerButtonUrl = "#final";
-//        }
-
-        // how to check if the logged in user is already registered (already has the pack)
-        $isUserAlreadyRegistered = !empty(auth()->id()) && \App\Services\User\UserAccessService::ownsPack(auth()->id(), '30-day-drummer');
+        if (is_current_user_a_member()) {
+            $registerButtonUrl = '/cohort-packs/register/new-piano-players-start-here';
+        } else {
+            $registerButtonUrl = "#final";
+        }
     @endphp
 
     <header class="px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:#eff7ff;">
@@ -259,7 +256,6 @@
                     <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>Save your seat in the first-ever <br class="inline lg:hidden">class starting February 27.</strong></h6>
 
                     <div class="mt-6 mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top cursor-hover autoplay-video lazyload" style="padding-bottom: 75%;" data-bg="https://cdn.musora.com/image/fetch/w_850,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/header-thumb.jpg" data-open="trailer">
-                        {{--<video class="object-cover w-full h-full absolute z-0 lazyload" data-src="https://player.vimeo.com/progressive_redirect/download/738758998/rendition/source/video-reel2.mp4%20%28Original%29.mp4?loc=external&signature=323bf87c6c208cda28dd99180b56fbc7238cd98d3ca6b60dba352659187783ff" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>--}}
                         <div class="join white smaller absolute bottom-5 left-5"><i class="fas fa-play"></i> Watch Trailer</div>
                     </div>
 
@@ -272,24 +268,21 @@
                         <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-pianote"></i><br> Play  <br>every day</p>
                         <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-pianote"></i><br> No theory <br> required</p>
                     </div>
-                    {{--@if(session()->has('success-message'))--}}
-                        {{--<p class="mb-3 lg:-mb-7 mt-3 text-pianote text-center"><strong>Congrats! You have registered for 30-Day Drummer.<br class="hidden md:inline"> Check your email for the details.</strong></p>--}}
-                    {{--@endif--}}
+                    @if(session()->has('success-message'))
+                        <p class="mb-3 lg:-mb-7 mt-3 text-pianote text-center"><strong>Congrats! You have registered for New Piano Players Start Here.<br class="hidden md:inline"> Check your email for the details.</strong></p>
+                    @endif
                     <div class="flex flex-wrap sm:flex-nowrap items-center mt-6 sm:mt-5 lg:mt-10">
                         <div class="w-full sm:w-1/2 text-center sm:pr-2">
-                            <a class="join medium w-full" data-open="waitlistModal">JOIN THE WAITLIST</a>
-                            <p class="opacity-50 text-sm mt-1 mb-5 sm:mb-0">Enrollment is now closed.</p>
-
-                            {{--@if($isUserAlreadyRegistered)--}}
-                                {{--<a class="join sold-out medium w-full">YOU'RE ENROLLED</a>--}}
-                            {{--@else--}}
-                                <a href="{{ $registerButtonUrl }}" class="join medium w-full {{--@if(!is_current_user_a_member()) anchor-slide @endif--}}">ENROLL NOW</a>
-                            {{--@endif--}}
-                            {{--@if(is_current_user_a_member())--}}
-                                <p class="opacity-50 text-sm mt-1 mb-5 sm:mb-0">Registration is FREE for Members.</p>
-                            {{--@else--}}
-                                {{--<p class="opacity-50 text-sm mt-1 mb-5 sm:mb-0">&nbsp;</p>--}}
-                            {{--@endif--}}
+                            @if($hasProduct)
+                                <a class="join sold-out medium w-full">YOU'RE ENROLLED</a>
+                            @else
+                                <a href="{{ $registerButtonUrl }}" class="join medium w-full @if(!is_current_user_a_member()) anchor-slide @endif">ENROLL NOW</a>
+                            @endif
+                            @if(is_current_user_a_member())
+                                <p class="opacity-50 text-sm mt-1 mb-5 sm:mb-0">Registration is FREE for Pianote Members.</p>
+                            @else
+                                <p class="opacity-50 text-sm mt-1 mb-5 sm:mb-0">For just $1/day.</p>
+                            @endif
                         </div>
                         <div class="w-full sm:w-1/2 lg:pb-5">
                             <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/Joined_profiles.png">
@@ -299,7 +292,6 @@
                 </div>
                 <div class="w-full sm:w-5/12 hidden sm:block">
                     <div class="rounded-xl aspect-1:1 overflow-hidden relative bg-cover bg-center cursor-hover autoplay-video lazyload" data-bg="https://cdn.musora.com/image/fetch/w_850,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/header-thumb.jpg" data-open="trailer">
-                        {{--<video class="object-cover w-full h-full absolute z-0 lazyload" data-src="https://player.vimeo.com/progressive_redirect/download/738758998/rendition/source/video-reel2.mp4%20%28Original%29.mp4?loc=external&signature=323bf87c6c208cda28dd99180b56fbc7238cd98d3ca6b60dba352659187783ff" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>--}}
                         <div class="join white smaller absolute bottom-5 left-5"><i class="fas fa-play"></i> Watch Trailer</div>
                     </div>
                 </div>
@@ -365,7 +357,6 @@
             <div class="aspect-16:9 cursor-hover rounded-xl autoplay-video overflow-hidden w-full relative -mt-36 sm:-mt-64 lg:-mt-96" data-open="trailer">
                 <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
                 <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0 lazyload" poster="https://i.vimeocdn.com/video/1488646391-d2694ba3d38847b00d9fcd70c946d3c45efe1202cedf305361a253a275ef5f90-d_890" data-src="https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/video-reel.mp4" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
-                {{--<iframe class="absolute w-full h-full" src="//player.vimeo.com/video/738385463" frameborder="0" allowfullscreen allow="autoplay" title="10year-video"></iframe>--}}
             </div>
 
             <img class="h-10 sm:h-20 mt-10 sm:mt-16 lg:mt-24 mb-8 lazyload" data-src="https://cdn.musora.com/image/fetch/w_1220,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/Just_Press_Play_logo.png" alt="just play logo">
@@ -431,9 +422,7 @@
                             @if(empty($getting['special']))
                                 <img class="-mt-7 rounded-lg lazyload" data-src="https://cdn.musora.com/image/fetch/w_800,q_auto:best/{{ $getting['img'] }}" alt="{{ $getting['title'] }}" />
                             @else
-                                <div class="-mt-7 rounded-lg bg-cover bg-center relative aspect-16:9 {{--cursor-pointer--}} lazyload" {{--data-open="todo"--}} data-bg="https://cdn.musora.com/image/fetch/w_800,q_auto:best/{{ $getting['img'] }}">
-                                    {{--<div class="join white smaller absolute left-5 bottom-5"><i class="far fa-calendar-day"></i> SEE YOUR PRACTICE PLAN</div>--}}
-                                </div>
+                                <div class="-mt-7 rounded-lg bg-cover bg-center relative aspect-16:9 lazyload" data-bg="https://cdn.musora.com/image/fetch/w_800,q_auto:best/{{ $getting['img'] }}"></div>
                             @endif
                             <div class="content relative text-left sm:pl-10 md:pl-0">
                                 <h4 class="mb-2 md:mb-5 mt-1 md:mt-0"><strong>{{ $getting['title'] }}</strong></h4>
@@ -456,14 +445,16 @@
                     <i class="fas fa-check text-pianote mr-5"></i> Ongoing motivation & support<br>
                     <i class="fas fa-check text-pianote mr-5"></i> Guaranteed results</h4>
             </div>
-            {{--@if(session()->has('success-message'))--}}
-                {{--<p class="-mb-2 sm:-mb-8 mt-5 text-pianote text-center"><strong>Congrats! You have registered for 30-Day Drummer.<br class="hidden md:inline"> Check your email for the details.</strong></p>--}}
-            {{--@endif--}}
-            {{--@if($isUserAlreadyRegistered)--}}
-                {{--<a class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3">YOU'RE ENROLLED</a><br>--}}
-            {{--@else--}}
-                <a href="{{ $registerButtonUrl }}" class="join blue medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 {{--@if(!is_current_user_a_member()) anchor-slide @endif--}}">ENROLL NOW</a><br>
-            {{--@endif--}}
+            @if(session()->has('success-message'))
+                <p class="-mb-2 sm:-mb-8 mt-5 text-pianote text-center"><strong>Congrats! You have registered for New Piano Players Start Here.<br class="hidden md:inline"> Check your email for the details.</strong></p>
+            @endif
+            @if($isUserAlreadyRegistered)
+                <a class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3">YOU'RE ENROLLED</a><br>
+            @else
+                <a
+                    href="{{ $registerButtonUrl }}"
+                    class="join medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 @if(!is_current_user_a_member()) anchor-slide @endif">ENROLL NOW</a><br>
+            @endif
             <img class="h-7 mr-1 mb-5 sm:mb-10 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/Joined_profiles.png" alt="joined profiles">
             <p class="inline-block leading-tight text-sm align-middle mb-5 sm:mb-10">Join {{ $students ?? 0 }} piano players who<br> have already registered.</p>
 
@@ -476,7 +467,7 @@
                 <img class="w-48 sm:w-64 lg:w-80 -mt-12 mb-4 sm:-mb-24 lazyload" data-src="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/Screen.png" alt="screen">
                 <div class="flex-grow sm:pl-7">
                     <h3 class="leading-tight text-center sm:text-left"><strong>Get LIVE support<br> every step of the way.</strong></h3>
-                    <h6 class="leading-normal mt-3 sm:mt-5 lg:mt-7 {{--mb-5 sm:mb-7 lg:mb-10--}}">If you have questions about your lessons, you can ask your instructor at each week’s LIVE Q&A event. Lisa will be there to answer your questions, help you through any sticking points, and keep you motivated to complete the full course.</h6>
+                    <h6 class="leading-normal mt-3 sm:mt-5 lg:mt-7 mb-5 sm:mb-7 lg:mb-10">If you have questions about your lessons, you can ask your instructor at each week’s LIVE Q&A event. Lisa will be there to answer your questions, help you through any sticking points, and keep you motivated to complete the full course.</h6>
                     <div class=" text-center sm:text-left">
                         <h6 class="inline-block uppercase mb-2 lg:mb-0"><strong>Join Lisa LIVE: <i class="fas fa-arrow-down text-pianote mx-2 inline lg:hidden"></i> <i class="fas fa-arrow-right text-pianote mx-2 hidden lg:inline"></i></strong></h6><br class="inline lg:hidden">
 
@@ -580,14 +571,12 @@
                     </tr>
                     <tr>
                         <td>Investment</td>
-{{--                        @if(is_current_user_a_member())--}}
-{{--                            <td class="rounded-b-xl"><strong>FREE</strong><br> for Drumeo<br class="inline lg:hidden"> Members</td>--}}
-{{--                        @else--}}
-                            <td class="rounded-b-xl">
-                                <strong>${{ 97 }}</strong>
-                            </td>
-{{--                        @endif--}}
-                        <td class="rounded-bl-xl"><strong>$50-$100</strong><br> For a Single Lesson</td>
+                        @if(is_current_user_a_member())
+                            <td class="rounded-b-xl"><strong>FREE</strong><br> for Pianote<br class="inline lg:hidden"> Members</td>
+                        @else
+                            <td class="rounded-b-xl"><strong>${{ floatval($productPrices['new-piano-players-start-here']->discounted_price) }}</strong></td>
+                        @endif
+                        <td class="rounded-bl-xl"><strong>$30-$100</strong><br> per lesson</td>
                         <td><strong>$89-$270+</strong><br>&nbsp;</td>
                         <td class="rounded-br-xl"><strong>$19-$49</strong><br>&nbsp;</td>
                     </tr>
@@ -693,17 +682,19 @@
             </div>
 
 
-            {{--@if(session()->has('success-message'))--}}
-                {{--<p class="-mb-2 sm:-mb-8 mt-5 text-pianote text-center"><strong>Congrats! You have registered for 30-Day Drummer.<br class="hidden md:inline"> Check your email for the details.</strong></p>--}}
-            {{--@endif--}}
+            @if(session()->has('success-message'))
+                <p class="-mb-2 sm:-mb-8 mt-5 text-pianote text-center"><strong>Congrats! You have registered for New Piano Players Start Here.<br class="hidden md:inline"> Check your email for the details.</strong></p>
+            @endif
 
-            {{--@if($isUserAlreadyRegistered)--}}
-                {{--<a class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3">YOU'RE ENROLLED</a><br>--}}
-            {{--@else--}}
-                {{--<a href="{{ $registerButtonUrl }}" class="join blue medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 @if(!is_current_user_a_member()) anchor-slide @endif">ENROLL NOW</a><br>--}}
-            {{--@endif--}}
-            {{--<img class="h-7 mr-1 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/Joined_profiles.png">--}}
-            {{--<p class="inline-block leading-tight text-sm align-middle">Join {{ $students ?? 0 }} piano players who<br> have already registered.</p>--}}
+            @if($hasProduct)
+                <a class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3">YOU'RE ENROLLED</a><br>
+            @else
+                <a
+                    href="{{ $registerButtonUrl }}"
+                    class="join medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 @if(!is_current_user_a_member()) anchor-slide @endif">ENROLL NOW</a><br>
+            @endif
+            <img class="h-7 mr-1 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/Joined_profiles.png">
+            <p class="inline-block leading-tight text-sm align-middle">Join {{ $students ?? 0 }} piano players who<br> have already registered.</p>
         </div>
     </section>
 {{--    <section class="text-white text-center px-5 sm:px-6 py-10 sm:py-16 lg:py-20" style="background:linear-gradient(to bottom, #0b76db, #074c8e);">--}}
@@ -749,13 +740,6 @@
     <div id="final" class="anchor"></div>
     <section class="text-center relative z-50 overflow-hidden px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#eff7ff;">
         <div class="container mx-auto relative z-50">
-            {{--@if(!is_current_user_a_member())--}}
-            {{--<img class="h-20 sm:h-28 lazyload" data-src="https://cdn.musora.com/image/fetch/w_380,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/30_day_drummer_logo.png">--}}
-            {{--<h2 class="leading-tight mt-2 mb-3 sm:my-3 lg:my-4"><strong>Learn the drums with daily guided workouts.</strong></h2>--}}
-
-                {{--<h6 class="leading-normal"><strong>Launch Special:</strong> Get a FREE pair of Drumeo 5A Drumsticks + <br class="hidden sm:inline">one-month Drumeo membership with your enrollment.--}}
-            {{--@endif--}}
-
             <div class="flex flex-wrap items-center mt-7 sm:mt-10">
 {{--                    @if(is_current_user_a_member())--}}
                         <div class="text-left w-full sm:w-1/2 xl:w-5/12 lg:pl-5">
@@ -770,77 +754,70 @@
                                 <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Learn piano the easy & fun way.</p>
                                 <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Join {{ $students ?? 0 }} piano players who have already registered.</p>
                                 <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Click below to get started.</p>
-                                <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Countdown here.</p>
+                                <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Enrollment closes in<br class="inline lg:hidden"> <span class="tzcd-medium text-pianote">a limited time</span>.</p>
 
-                                {{--@if(session()->has('success-message'))--}}
-                                    {{--<p class="mb-3 text-pianote text-center"><strong>Congrats! You have registered for 30-Day Drummer.<br class="hidden md:inline"> Check your email for the details.</strong></p>--}}
-                                {{--@endif--}}
+                                @if(session()->has('success-message'))
+                                    <p class="mb-3 text-pianote text-center"><strong>Congrats! You have registered for New Piano Players Start Here.<br class="hidden md:inline"> Check your email for the details.</strong></p>
+                                @endif
 
-                                {{--@if(is_current_user_a_member())--}}
-                                    {{--<h1 class="inline-block mr-4 align-middle text-4xl sm:text-5xl"><s class="opacity-60">${{ 97 }}</s> <strong>FREE</strong></h1>--}}
-                                {{--@else--}}
-                                    {{--<h1 class="inline-block mr-4 align-middle text-4xl sm:text-5xl"><strong>${{ 97 }}</strong></h1>--}}
-                                {{--@endif--}}
+                                @if(is_current_user_a_member())
+                                    <h1 class="inline-block mr-4 align-middle text-4xl sm:text-5xl"><s class="opacity-60">${{ 97 }}</s> <strong>FREE</strong></h1>
+                                @else
+                                    <h1 class="inline-block mr-4 align-middle text-4xl sm:text-5xl"><strong>${{ 97 }}</strong></h1>
+                                @endif
 
-                                {{--@if($isUserAlreadyRegistered)--}}
-                                    {{--<a class="join sold-out medium w-1/2 align-middle">YOU'RE ENROLLED</a>--}}
-                                {{--@else--}}
-                                    {{--<a class="join blue medium w-1/2 align-middle" href="{{ $registerButtonUrl }}">ENROLL NOW</a>--}}
-                                {{--@endif--}}
-                                <a class="join blue medium w-1/2 align-middle" data-open="waitlistModal">JOIN THE WAITLIST</a>
+                                @if($hasProduct)
+                                    <a class="join sold-out medium w-1/2 align-middle">YOU'RE ENROLLED</a>
+                                @else
+                                    <a class="join medium w-1/2 align-middle" href="{{ $registerButtonUrl }}">ENROLL NOW</a>
+                                @endif
 
-                                <p class="text-sm mt-1">Enrollment is now closed.</p>
-                                {{--<p class="text-sm mt-1 --}}{{--mb-5--}}{{--"><em>One-Time Payment. (Just ${{ round((97 / 30), 2) }} per day.)</em></p>--}}
-
-                                {{--<p class="text-sm text-pianote">--}}
-                                    {{--<em><a class="cursor-pointer" data-open="bundle">Need a practice pad & drumsticks?<br class="inline lg:hidden"> Click <strong>here</strong> for a special offer.</a></em>--}}
-                                {{--</p>--}}
-
+                                <p class="text-sm mt-1 mb-5"><em>One-Time Payment. (Just ${{ round((97 / 30), 2) }} per day.)</em></p>
                             </div>
                         </div>
-                    {{--@else--}}
-                        <div class="flex flex-wrap sm:flex-nowrap items-center text-left w-full max-w-3xl mx-auto xl:w-7/12">
-                            <a href="/ecommerce/add-to-cart?products[30-day-drummer]=1&products[Drumeo-VaterSticks]=1&products[drumeo_access_30-days]=1&locked=true" class="px-5 sm:px-7 lg:px-9 py-7 sm:py-9 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-1/2" style="background-color:#d4eaff;">
-                                <h3><strong>30-Day Drummer</strong></h3>
-                                <p class="text-sm mt-2 mb-5">Just The Course + 2 Bonuses worth $42.94.</p>
-                                <h2 class="inline-block"><strong class="text-4xl">${{ 97 }}</strong></h2> <p class="inline-block text-xs">one time payment.</p><br>
-                                <div class="join blue smaller my-4">ENROLL NOW</div>
-                                <ul class="list-disc ml-10">
-                                    <li class="text-sm relaxed"><span class="text-pianote">Free</span> Drumsticks</li>
-                                    <li class="text-sm relaxed"><span class="text-pianote">Free</span> 1-Month Drumeo Access</li>
-                                </ul>
-                                <hr class="w-full my-5" style="border-color:#b2cae1">
-                                <p class="leading-loose text-sm"><strong>Key Features</strong><br>
-                                <i class="fas fa-check text-pianote mr-1"></i> Runs February 27 to March 25<br>
-                                <i class="fas fa-check text-pianote mr-1"></i> 24 Guided Workouts<br>
-                                <i class="fas fa-check text-pianote mr-1"></i> 4 Live Q&A Sessions<br>
-                                <i class="fas fa-check text-pianote mr-1"></i> Lifetime Course Access<br>
-                                <i class="fas fa-check text-pianote mr-1"></i> 90-Day Money Back Guarantee</p>
-                            </a>
-                            <a href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-drummer]=1&products[practicepad]=1&products[Drumeo-VaterSticks]=2&products[BeginnerBook]=1&locked=true" class="px-5 sm:px-7 lg:px-9 py-7 sm:py-11 sm:-ml-5 z-10 relative rounded-xl bg-white shadow-lg w-full sm:w-1/2">
-                                <h3><strong>Unlimited Lessons</strong></h3>
-                                <p class="text-sm mt-2 mb-5">1 Year of Drumeo + 5 Bonuses worth $231.89.</p>
-                                <h2 class="inline-block"><strong class="text-4xl">$20</strong>/mo</h2> <p class="inline-block text-xs">Billed annually at $240/yr.</p><br>
-                                <div class="join blue smaller my-4">GET EVERYTHING</div>
-                                <ul class="list-disc ml-10">
-                                    <li class="text-sm leading-relaxed">Drumeo Annual Membership</li>
-                                    <li class="text-sm leading-relaxed"><span class="text-pianote">Free</span> 30-Day Drummer</li>
-                                    <li class="text-sm leading-relaxed"><span class="text-pianote">Free</span> P4 Practice Pad</li>
-                                    <li class="text-sm leading-relaxed"><span class="text-pianote">Free</span> 2 Pairs of Drumsticks</li>
-                                    <li class="text-sm leading-relaxed"><span class="text-pianote">Free</span> Best Beginner Drum Book</li>
-                                </ul>
-                                <hr class="w-full my-5" style="border-color:#ebf2f8">
-                                <p class="leading-loose text-sm"><strong>Drumeo Membership includes:</strong><br>
-                                <i class="fas fa-check text-pianote mr-1"></i> 10-Level Drumeo Method Curriculum<br>
-                                <i class="fas fa-check text-pianote mr-1"></i> Play Along To 3000+ Popular Songs.<br>
-                                <i class="fas fa-check text-pianote mr-1"></i> Study With 100+ World-Class Drummers.<br>
-                                <i class="fas fa-check text-pianote mr-1"></i> 90-Day Money Back Guarantee</p>
-                            </a>
-                        </div>
-                    {{--@endif--}}
+{{--                    @else--}}
+{{--                        <div class="flex flex-wrap sm:flex-nowrap items-center text-left w-full max-w-3xl mx-auto xl:w-7/12">--}}
+{{--                            <a href="/ecommerce/add-to-cart?products[30-day-drummer]=1&products[Drumeo-VaterSticks]=1&products[drumeo_access_30-days]=1&locked=true" class="px-5 sm:px-7 lg:px-9 py-7 sm:py-9 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-1/2" style="background-color:#d4eaff;">--}}
+{{--                                <h3><strong>30-Day Drummer</strong></h3>--}}
+{{--                                <p class="text-sm mt-2 mb-5">Just The Course + 2 Bonuses worth $42.94.</p>--}}
+{{--                                <h2 class="inline-block"><strong class="text-4xl">${{ 97 }}</strong></h2> <p class="inline-block text-xs">one time payment.</p><br>--}}
+{{--                                <div class="join smaller my-4">ENROLL NOW</div>--}}
+{{--                                <ul class="list-disc ml-10">--}}
+{{--                                    <li class="text-sm relaxed"><span class="text-pianote">Free</span> Drumsticks</li>--}}
+{{--                                    <li class="text-sm relaxed"><span class="text-pianote">Free</span> 1-Month Drumeo Access</li>--}}
+{{--                                </ul>--}}
+{{--                                <hr class="w-full my-5" style="border-color:#b2cae1">--}}
+{{--                                <p class="leading-loose text-sm"><strong>Key Features</strong><br>--}}
+{{--                                <i class="fas fa-check text-pianote mr-1"></i> Runs February 27 to March 25<br>--}}
+{{--                                <i class="fas fa-check text-pianote mr-1"></i> 24 Guided Workouts<br>--}}
+{{--                                <i class="fas fa-check text-pianote mr-1"></i> 4 Live Q&A Sessions<br>--}}
+{{--                                <i class="fas fa-check text-pianote mr-1"></i> Lifetime Course Access<br>--}}
+{{--                                <i class="fas fa-check text-pianote mr-1"></i> 90-Day Money Back Guarantee</p>--}}
+{{--                            </a>--}}
+{{--                            <a href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-drummer]=1&products[practicepad]=1&products[Drumeo-VaterSticks]=2&products[BeginnerBook]=1&locked=true" class="px-5 sm:px-7 lg:px-9 py-7 sm:py-11 sm:-ml-5 z-10 relative rounded-xl bg-white shadow-lg w-full sm:w-1/2">--}}
+{{--                                <h3><strong>Unlimited Lessons</strong></h3>--}}
+{{--                                <p class="text-sm mt-2 mb-5">1 Year of Drumeo + 5 Bonuses worth $231.89.</p>--}}
+{{--                                <h2 class="inline-block"><strong class="text-4xl">$20</strong>/mo</h2> <p class="inline-block text-xs">Billed annually at $240/yr.</p><br>--}}
+{{--                                <div class="join smaller my-4">GET EVERYTHING</div>--}}
+{{--                                <ul class="list-disc ml-10">--}}
+{{--                                    <li class="text-sm leading-relaxed">Drumeo Annual Membership</li>--}}
+{{--                                    <li class="text-sm leading-relaxed"><span class="text-pianote">Free</span> 30-Day Drummer</li>--}}
+{{--                                    <li class="text-sm leading-relaxed"><span class="text-pianote">Free</span> P4 Practice Pad</li>--}}
+{{--                                    <li class="text-sm leading-relaxed"><span class="text-pianote">Free</span> 2 Pairs of Drumsticks</li>--}}
+{{--                                    <li class="text-sm leading-relaxed"><span class="text-pianote">Free</span> Best Beginner Drum Book</li>--}}
+{{--                                </ul>--}}
+{{--                                <hr class="w-full my-5" style="border-color:#ebf2f8">--}}
+{{--                                <p class="leading-loose text-sm"><strong>Drumeo Membership includes:</strong><br>--}}
+{{--                                <i class="fas fa-check text-pianote mr-1"></i> 10-Level Drumeo Method Curriculum<br>--}}
+{{--                                <i class="fas fa-check text-pianote mr-1"></i> Play Along To 3000+ Popular Songs.<br>--}}
+{{--                                <i class="fas fa-check text-pianote mr-1"></i> Study With 100+ World-Class Drummers.<br>--}}
+{{--                                <i class="fas fa-check text-pianote mr-1"></i> 90-Day Money Back Guarantee</p>--}}
+{{--                            </a>--}}
+{{--                        </div>--}}
+{{--                    @endif--}}
 
 
-                <div class="flex w-full justify-center {{--@if(is_current_user_a_member()) sm:justify-start sm:order-1 sm:w-1/2 xl:w-7/12 sm:pl-5 lg:pl-7  mt-10 sm:mt-0 @else --}} xl:justify-start xl:order-1 xl:w-5/12 xl:pl-4  mt-10 xl:mt-0 {{--@endif--}}">
+                <div class="flex w-full justify-center @if(is_current_user_a_member()) sm:justify-start sm:order-1 sm:w-1/2 xl:w-7/12 sm:pl-5 lg:pl-7  mt-10 sm:mt-0 @else  xl:justify-start xl:order-1 xl:w-5/12 xl:pl-4  mt-10 xl:mt-0 @endif">
                     <img class="max-w-lg sm:max-w-2xl lg:max-w-4xl lazyload" data-src="https://cdn.musora.com/image/fetch/w_1800,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/collage.png" alt="collage">
                 </div>
             </div>
@@ -851,13 +828,13 @@
         <div class="container mx-auto relative z-10 max-w-5xl">
             <h2><strong>Still have questions?</strong></h2>
             <div class="max-w-6xl mt-4 sm:mt-10 px-4">
-{{--                @if(is_current_user_a_member())--}}
-{{--                    @include('_partials.components.question-dropdown', [--}}
-{{--                    "num" => "?",--}}
-{{--                    "title" => "Why do I need to register if I get it for free as a member?",--}}
-{{--                    "desc" => "It’s a 30-day course and it only works if you’re actively participating. So we wanted to make sure you raised your hand to enroll in the journey.<br><br>This isn’t a “watch a lesson, go do something else for 10 days, watch another” type of routine. So we’re asking for a commitment from anybody who participates.",--}}
-{{--                    ])--}}
-{{--                @endif--}}
+                @if(is_current_user_a_member())
+                    @include('_partials.components.question-dropdown', [
+                    "num" => "?",
+                    "title" => "Why do I need to register if I get it for free as a member?",
+                    "desc" => "It’s a 30-day course and it only works if you’re actively participating. So we wanted to make sure you raised your hand to enroll in the journey.<br><br>This isn’t a “watch a lesson, go do something else for 10 days, watch another” type of routine. So we’re asking for a commitment from anybody who participates.",
+                    ])
+                @endif
                 @include('_partials.components.question-dropdown', [
                 "title" => "What if I miss a day (or two)?",
                 "desc" => "That’s totally fine. The course is meant to be flexible if you miss a day here or there. There are a few buffer days mixed in PLUS the lessons are short enough that you could watch 2-3 in a single session if you ever need to catch up.",
@@ -895,35 +872,35 @@
     </section>
 
 
-{{--    @if(!is_current_user_a_member())--}}
-{{--        <div class="reveal coach-wrap relative rounded-xl text-center overflow-visible select-none max-w-xs md:max-w-md" id="loginModal" style="max-width: 530px;" data-reveal data-reset-on-close="false">--}}
-{{--            <div class="p-5 sm:p-7">--}}
-{{--                <img class="h-24 sm:h-32 lazyload" data-src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/30_day_drummer_logo.png">--}}
-{{--                <h3 class="leading-tight mb-4"><strong>Wait a sec...</strong></h3>--}}
-{{--                <p class="leading-normal">--}}
-{{--                    You must be logged into your Drumeo <br>--}}
-{{--                    account to register for free.--}}
-{{--                    <br><br> Click below to log in:</p>--}}
-{{--                <a href="/login" class="join blue medium w-full max-w-xs my-5">Login Here</a>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    @endif--}}
-
-    <div class="reveal coach-wrap relative rounded-xl text-center overflow-visible select-none max-w-xs md:max-w-md" id="waitlistModal" style="max-width: 530px;" data-reveal data-reset-on-close="false">
-        <div class="p-5 sm:p-7">
-            <img class="h-24 sm:h-32 lazyload" data-src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/30_day_drummer_logo.png">
-            <h3 class="leading-tight mb-4"><strong>Join The Waitlist!</strong></h3>
-            <p class="mb-4">Enter your email below to get notified when the <br class="hidden sm:inline">
-                next edition of 30-Day Drummer is announced. </p>
-            @include("drumeo.lead-gen.partials.sign-up-form-tw", [
-                "formName" => '30 Day Drummer Waitlist',
-                "formId" => "Drumeo - Engagement - Trigger - 30 Day Drummer Waitlist - Web Form",
-                "buttonText" => "Let Me Know ",
-                "stacked" => true,
-                "noSocial" => true,
-            ])
+    @if(!is_current_user_a_member())
+        <div class="reveal coach-wrap relative rounded-xl text-center overflow-visible select-none max-w-xs md:max-w-md" id="loginModal" style="max-width: 530px;" data-reveal data-reset-on-close="false">
+            <div class="p-5 sm:p-7">
+                <img class="h-24 sm:h-32 lazyload" data-src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/new-piano-players-start-here-logo-2+1.png">
+                <h3 class="leading-tight mb-4"><strong>Wait a sec...</strong></h3>
+                <p class="leading-normal">
+                    You must be logged into your Pianote <br>
+                    account to register for free.
+                    <br><br> Click below to log in:</p>
+                <a href="/login" class="join medium w-full max-w-xs my-5">Login Here</a>
+            </div>
         </div>
-    </div>
+    @endif
+
+{{--    <div class="reveal coach-wrap relative rounded-xl text-center overflow-visible select-none max-w-xs md:max-w-md" id="waitlistModal" style="max-width: 530px;" data-reveal data-reset-on-close="false">--}}
+{{--        <div class="p-5 sm:p-7">--}}
+{{--            <img class="h-24 sm:h-32 lazyload" data-src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/30_day_drummer_logo.png">--}}
+{{--            <h3 class="leading-tight mb-4"><strong>Join The Waitlist!</strong></h3>--}}
+{{--            <p class="mb-4">Enter your email below to get notified when the <br class="hidden sm:inline">--}}
+{{--                next edition of 30-Day Drummer is announced. </p>--}}
+{{--            @include("drumeo.lead-gen.partials.sign-up-form-tw", [--}}
+{{--                "formName" => '30 Day Drummer Waitlist',--}}
+{{--                "formId" => "Drumeo - Engagement - Trigger - 30 Day Drummer Waitlist - Web Form",--}}
+{{--                "buttonText" => "Let Me Know ",--}}
+{{--                "stacked" => true,--}}
+{{--                "noSocial" => true,--}}
+{{--            ])--}}
+{{--        </div>--}}
+{{--    </div>--}}
 
     @include('drumeo.sales.partials._video-modal',[
         'modalId' => "trailer",
