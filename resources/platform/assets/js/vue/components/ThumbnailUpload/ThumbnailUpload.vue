@@ -32,6 +32,10 @@ const props = defineProps({
     userId: {
         type: String,
         default: null
+    },
+    fileServiceRoute: {
+        type: String,
+        default: null  
     }
 });
 

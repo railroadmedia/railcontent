@@ -1,10 +1,14 @@
 <script setup>
 import { ref } from "vue";
+import {
+  CheckIcon,
+  PlusCircleIcon,
+  MinusCircleIcon,
+} from "@heroicons/vue/solid";
+import { Cropper } from "vue-advanced-cropper";
+import "vue-advanced-cropper/dist/style.css";
 import MusoraIcon from "../../components/MusoraIcons/MusoraIcon.vue"
-import { CheckIcon, PlusCircleIcon, MinusCircleIcon } from "@heroicons/vue/solid";
 
-import { Cropper } from 'vue-advanced-cropper'
-import 'vue-advanced-cropper/dist/style.css';
 import Stencil from "./Stencil.vue";
 
 const props = defineProps({
@@ -50,12 +54,12 @@ function rotate() {
 
 <template>
   <div class="tw-w-full tw-h-full">
-    <cropper
+    <Cropper
       ref="cropper"
       class="musora-cropper"
       :src="selectedImage"
       :stencil-component="Stencil"
-    ></cropper>
+    />
     <div
       class="
         tw-w-full
