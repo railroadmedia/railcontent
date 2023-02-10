@@ -182,14 +182,14 @@ class SalesController extends BaseController
     }
     public function thirtyDayDrummer()
     {
-        $products = $this->productRepository->all();
-        $products = array_combine(array_entity_column($products, 'getSku'), $products);
+        $productId = 516;
         /** @var \App\Modules\Ecommerce\Services\UserProductService $userProductService */
         $userProductService = app(\App\Modules\Ecommerce\Services\UserProductService::class);
-        $hasProduct = user() && $userProductService->hasProductNotCached(user()?->id, 516);
+        $hasProduct = user() && $userProductService->hasProductNotCached(user()?->id, $productId);
+        $nPackOwners = $userProductService->getNumberProductOwners($productId);
 
         return view('drumeo.products.30-day-drummer', [
-            'products' => $products,
+            'nPackOwners' => $nPackOwners,
             'theme' => 'drumeo',
             'hasProduct' => $hasProduct
         ]);

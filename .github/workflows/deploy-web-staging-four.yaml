@@ -6,7 +6,9 @@ on:
 
 jobs:
   deploy-web-staging-four:
-    runs-on: ubuntu-latest
+    runs-on:
+      group: Default Larger Runners
+      labels: ubuntu-latest-16-cores
     timeout-minutes: 1000
     if: github.ref == 'refs/heads/web-staging-four'
     steps:

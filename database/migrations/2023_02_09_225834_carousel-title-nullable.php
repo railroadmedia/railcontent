@@ -15,11 +15,7 @@ return new class extends Migration
     {
         //
         Schema::table('carousels', function (Blueprint $table) {
-            $table->string('cta_text')->nullable()->change();
-            $table->string('cta_url')->nullable()->change();
-            $table->string('cta_text')->nullable()->change();
-            $table->longText('description')->nullable()->change();
-            $table->string('logo')->nullable();
+            $table->string('title')->nullable()->change();
         });
     }
 
@@ -32,10 +28,7 @@ return new class extends Migration
     {
         //
         Schema::table('carousels', function (Blueprint $table) {
-            $table->string('cta_url')->change();
-            $table->string('cta_text')->change();
-            $table->string('description')->change();
-            $table->dropColumn('logo');
+            $table->string('title')->change();
         });
     }
 };
