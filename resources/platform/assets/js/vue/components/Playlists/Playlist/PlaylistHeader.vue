@@ -44,7 +44,7 @@
                         <h1 class="tw-capitalize tw-leading-none tw-mb-1">{{ playlist.name }}</h1>
                         <p>{{ playlist.description }}</p>
                     </div>
-                    <a href="" class="tw-w-[50px] tw-inline-flex" :class="`tw-text-${brand}`" :title="`Go To Player`">
+                    <a :href="playlist.playback_url" class="tw-w-[50px] tw-inline-flex" :class="`tw-text-${brand}`" :title="`Go To Player`">
                         <i class="tw-text-[50px] fas fa-play-circle"></i>
                     </a>
                 </div>

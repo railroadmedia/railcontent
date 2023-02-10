@@ -59,7 +59,7 @@ const handleCreatePlaylist = () => {
                     v-if="formattedPlaylists.length > 0">
                     <!-- Loop through User Playlists -->
                     <li class="tw-group tw-w-full tw-flex tw-overflow-hidden dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
-                        v-for="({ url, id, name }) in formattedPlaylists" :key="id + '-playlist-li'">
+                        v-for="({ url, id, name, playback_url }) in formattedPlaylists" :key="id + '-playlist-li'">
                         <a :href="url"
                             class="tw-flex tw-flex-wrap tw-px-[25px] tw-w-full tw-no-underline tw-text-inherit tw-h-[42px] tw-items-center">
                             <span class="tw-min-w-0 tw-truncate tw-capitalize tw-text-sm">{{ name }}</span>
@@ -70,7 +70,7 @@ const handleCreatePlaylist = () => {
                             </button>
                         </div>
                         <div class="md:tw-hidden group-hover:tw-inline-flex dark:tw-text-white tw-w-[42px] tw-shrink-0 tw-items-center tw-justify-center">
-                            <a href="" class="" :title="`Go To Player`">
+                            <a :href="playback_url" class="" :title="`Go To Player`">
                                 <musora-icon icon-name="play-circle-filled" class="tw-w-[24px]" />
                             </a>
                         </div>

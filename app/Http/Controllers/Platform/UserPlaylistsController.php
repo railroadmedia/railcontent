@@ -10,6 +10,7 @@ use Railroad\Railcontent\Repositories\UserContentProgressRepository;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\UserPlaylistsService;
 use Railroad\Railcontent\Support\Collection;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class UserPlaylistsController extends BaseController
 {
@@ -78,8 +79,10 @@ class UserPlaylistsController extends BaseController
         ]);
     }
 
-    public function playlist(Request $request, $domain, $brand, $playlistId){
+    public function playlist(Request $request, $domain, $brand, $playlistId)
+    {
         $playlist = $this->userPlaylistsService->getPlaylist($playlistId);
+        throw_if(empty($playlist), new NotFoundHttpException());
 
         $page = $request->get('page', 1);
         $limit = $request->get('limit', 20);
@@ -89,46 +92,104 @@ class UserPlaylistsController extends BaseController
             array_values(config('railcontent.showTypes', [])[config('railcontent.brand')] ?? [])
         );
 
-        $items = $this->userPlaylistsService->getUserPlaylistContents($playlistId, $contentTypes,$limit, $page);
-        foreach($items as $index=>$item){
-            $items[$index]['url'] = url()->route('platform.user.playlist-item',['playlistId' => $playlistId,
-                'playlistItemId' => $item['user_playlist_item_id']]);
+        $items = $this->userPlaylistsService->getUserPlaylistContents($playlistId, $contentTypes, $limit, $page);
+        foreach ($items as $index => $item) {
+            $items[$index]['url'] = url()->route('platform.user.playlist-item', [
+                'playlistId' => $playlistId,
+                'playlistItemId' => $item['user_playlist_item_id'],
+            ]);
         }
         $items = new ContentFilterResultsEntity([
-                                                      'results' => $items,
-                                                      'total_results' => $this->userPlaylistsService->countUserPlaylistContents($playlistId),
-                                                  ]);
+                                                    'results' => $items,
+                                                    'total_results' => $this->userPlaylistsService->countUserPlaylistContents(
+                                                        $playlistId
+                                                    ),
+                                                ]);
 
         return view('account.playlist', [
             "listLessons" => $items->toResponseRawJson(),
             "playlist" => $playlist,
             'currentUser' => user(),
             "noResultsMessage" => 'Nothing here yet! Start adding videos',
-            "brand" => brand()
+            "brand" => brand(),
         ]);
-
     }
 
-    public function playlistItem(Request $request, $domain, $brand, $playlistId, $playlistItemId){
+    public function playlistItem(Request $request, $domain, $brand, $playlistId, $playlistItemId)
+    {
         $playlist = $this->userPlaylistsService->getPlaylist($playlistId);
-        $playlistItem = $this->userPlaylistsService->getPlaylistItemById($playlistItemId);
-        $contentToRenderAsLesson = $this->contentService->getById($playlistItem['content_id']);
+        throw_if(empty($playlist), new NotFoundHttpException());
 
-        $contentToRenderAsLesson =
-            $this->vimeoVideoSourcesDecorator->decorate(new Collection([$contentToRenderAsLesson]))
+        $playlistItems = $this->userPlaylistsService->getUserPlaylistContents($playlist['id']);
+        foreach($playlistItems as $item){
+            $item['url'] = url()->route('platform.user.playlist-item', [
+                'playlistId' => $playlistId,
+                'playlistItemId' => $playlistItemId
+            ]);
+        }
+        $playlistItem =
+            $playlistItems->where('user_playlist_item_id', $playlistItemId)
                 ->first();
+        throw_if(empty($playlistItem), new NotFoundHttpException());
 
-        $relatedLessons = (new ContentFilterResultsEntity(['results' => []]))->toResponseRawJson();
+        $playlistItem =
+            $this->vimeoVideoSourcesDecorator->decorate(new Collection([$playlistItem]))
+                ->first();
+        $parent = \Arr::last($playlistItem->getParentContentData());
+
+//        if($playlistItem['type'] == 'assignment'){
+//            $assignment = $playlistItem;
+//            $playlistItem = $this->contentService->getById($parent->id);
+//            $playlistItem['assignments'] = [$assignment];
+//        }
+
+        if ($parent) {
+            $parentChildren = $this->contentService->getByParentId($parent->id);
+        } else {
+            $sort = $playlistItem['published_on'] ? 'published_on' : 'sort';
+
+            if ($playlistItem['type'] == 'rhythmic-adventures-of-captain-carson' ||
+                $playlistItem['type'] == 'diy-drum-experiments' ||
+                $playlistItem['type'] == 'in-rhythm') {
+                $sort = 'sort';
+            }
+
+            $parentChildren =
+                $this->contentService->getFiltered($request->get('page', 1),
+                                                   $request->get('limit', 10),
+                                                   '-'.$sort,
+                                                   [$playlistItem['type']])['results'];
+        }
+
+        $parentChildrenTrimmed = [];
+        $matched = false;
+
+        foreach ($parentChildren as $parentChildIndex => $parentChild) {
+            if ((count($parentChildren) - $parentChildIndex) <= 10 && count($parentChildrenTrimmed) < 10) {
+                $parentChildrenTrimmed[] = $parentChild;
+            } elseif ($matched && count($parentChildrenTrimmed) < 10) {
+                $parentChildrenTrimmed[] = $parentChild;
+            }
+
+            if ($parentChild['id'] == $playlistItem['id']) {
+                $matched = true;
+            }
+        }
+
+        $relatedLessons = (new ContentFilterResultsEntity(['results' => $parentChildren]))->toResponseRawJson();
+        $playlistLessons = (new ContentFilterResultsEntity(['results' => $playlistItems]))->toResponseRawJson();
+
+
 
         return view('account.playlist-item', [
-            "lessonContent" => $contentToRenderAsLesson,
+            "lessonContent" => $playlistItem,
             "playlist" => $playlist,
             "playlistItem" => $playlistItem,
-            "lessonType" => $contentToRenderAsLesson['type'],
+            "lessonType" => $playlistItem['type'],
             "relatedLessons" => $relatedLessons,
-            'currentUser' => user(),
-            "brand" => brand()
+            "playlistItems" => $playlistLessons,
+            //            'currentUser' => user(),
+            "brand" => brand(),
         ]);
-
     }
 }
