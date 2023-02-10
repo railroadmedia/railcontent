@@ -131,8 +131,7 @@ onMounted(() => {
           <p class="tw-text-sm tw-mb-3 tw-hidden xl:tw-block xl:tw-line-clamp-3" v-html="description"></p>
           <!-- CTA -->
           <span
-              class="tw-text-white tw-font-bebas-neue tw-text-lg tw-hidden xl:tw-block"
-              v-if="ctaText && !logo"
+              :class="`tw-text-white tw-font-bebas-neue tw-text-lg ${ctaText && !logo && 'xl:tw-hidden'}`"
           >{{ ctaText }}
             <ArrowSmRightIcon class="tw-inline tw-w-[20px] tw-h-[18px]" />
           </span>
