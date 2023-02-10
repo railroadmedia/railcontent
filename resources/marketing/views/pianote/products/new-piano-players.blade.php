@@ -255,8 +255,8 @@
 
                     <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>Save your seat in the first-ever <br class="inline lg:hidden">class starting February 27.</strong></h6>
 
-                    <div class="mt-6 mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top cursor-hover autoplay-video lazyload" style="padding-bottom: 75%;" data-bg="https://cdn.musora.com/image/fetch/w_850,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/header-thumb.jpg" data-open="trailer">
-                        <div class="join white smaller absolute bottom-5 left-5"><i class="fas fa-play"></i> Watch Trailer</div>
+                    <div class="mt-6 mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top cursor-hover autoplay-video lazyload" style="padding-bottom: 75%;" data-bg="https://cdn.musora.com/image/fetch/w_850,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/header-thumb-m2.jpg" data-open="trailer">
+                        <div class="join white smaller absolute bottom-1 left-1"><i class="fas fa-play"></i> Watch Trailer</div>
                     </div>
 
                     <p class="hidden lg:inline">
@@ -291,8 +291,8 @@
                     </div>
                 </div>
                 <div class="w-full sm:w-5/12 hidden sm:block">
-                    <div class="rounded-xl aspect-1:1 overflow-hidden relative bg-cover bg-center cursor-hover autoplay-video lazyload" data-bg="https://cdn.musora.com/image/fetch/w_850,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/header-thumb.jpg" data-open="trailer">
-                        <div class="join white smaller absolute bottom-5 left-5"><i class="fas fa-play"></i> Watch Trailer</div>
+                    <div class="rounded-xl aspect-1:1 overflow-hidden relative bg-cover bg-center cursor-hover autoplay-video lazyload" data-bg="https://cdn.musora.com/image/fetch/w_850,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/header-thumb2.jpg" data-open="trailer">
+                        <div class="join white smaller absolute bottom-1 left-1"><i class="fas fa-play"></i> Watch Trailer</div>
                     </div>
                 </div>
             </div>
@@ -448,7 +448,7 @@
             @if(session()->has('success-message'))
                 <p class="-mb-2 sm:-mb-8 mt-5 text-pianote text-center"><strong>Congrats! You have registered for New Piano Players Start Here.<br class="hidden md:inline"> Check your email for the details.</strong></p>
             @endif
-            @if($isUserAlreadyRegistered)
+            @if($hasProduct)
                 <a class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3">YOU'RE ENROLLED</a><br>
             @else
                 <a
@@ -769,7 +769,7 @@
                                 @if($hasProduct)
                                     <a class="join sold-out medium w-1/2 align-middle">YOU'RE ENROLLED</a>
                                 @else
-                                    <a class="join medium w-1/2 align-middle" href="{{ $registerButtonUrl }}">ENROLL NOW</a>
+                                    <a class="join medium w-1/2 align-middle" href="{-- TODO --}">ENROLL NOW</a>
                                 @endif
 
                                 <p class="text-sm mt-1 mb-5"><em>One-Time Payment. (Just ${{ round((97 / 30), 2) }} per day.)</em></p>
