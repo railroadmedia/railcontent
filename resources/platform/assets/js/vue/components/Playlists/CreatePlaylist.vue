@@ -25,7 +25,7 @@
         },
     });
 
-    const emit = defineEmits(['onClose']);
+    const emit = defineEmits(['onCancel']);
 
     const title = ref('');
     const category = ref(null);

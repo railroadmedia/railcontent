@@ -33,7 +33,7 @@ const modalContainerProps = {
 
 <template>
     <InfoModal :classOverride="`tw-bg-[#081825] ${modalContainerProps[modalProps.modalType]} tw-border-[1px] tw-border-[#445F74]`" key="create-playlist-modal-instance" modalId="create-playlist-modal"
-        @onClose="handleClose" :selfContained="true">
+        @onClose="() => emit('onClosePlaylistsModal')" :selfContained="true">
         <div class="tw-pt-[12px]">
             <CreatePlaylist mode="create" @onCancel="() => emit('onClosePlaylistsModal')" :modalProps="modalProps" v-if="modalProps.modalType === 'create'"  />
             <CreatePlaylist mode="edit" @onCancel="() => emit('onClosePlaylistsModal')" :modalProps="modalProps" v-if="modalProps.modalType === 'edit'"  />
