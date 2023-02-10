@@ -1,15 +1,11 @@
 <script setup>
 import { ref } from "vue";
-import {
-  CheckIcon,
-  PlusCircleIcon,
-  MinusCircleIcon,
-} from "@heroicons/vue/solid";
-import { Cropper } from "vue-advanced-cropper";
-import "vue-advanced-cropper/dist/style.css";
 import MusoraIcon from "../../components/MusoraIcons/MusoraIcon.vue"
+import { CheckIcon, PlusCircleIcon, MinusCircleIcon } from "@heroicons/vue/solid";
 
-import Stencil from "./Stencil.vue";
+// import { Cropper } from "vue-advanced-cropper";
+// import "vue-advanced-cropper/dist/style.css";
+// import Stencil from "./Stencil.vue";
 
 const props = defineProps({
   selectedImage: {
