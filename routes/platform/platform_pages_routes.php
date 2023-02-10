@@ -643,18 +643,6 @@ Route::get(
     ->name('platform.apple-association-file');
 
 
-
-    Route::domain('{musoraDomain}')
-    ->middleware(['web_authenticated'])
-    ->group(function () {
-        /*
-         * Home Page
-         */
-        Route::get('/{brand}/comments', [ContentPagesController::class, 'comments'])
-            ->whereIn('brand', all_brands())
-            ->name('platform.members-area.comments');
-    });
-
 Route::domain('{musoraDomain}')
     ->middleware(['web_public'])
     ->group(function () {
@@ -723,4 +711,15 @@ Route::domain('{musoraDomain}')
         )
             ->whereIn('brand', ['drumeo'])
             ->name('books.drummers-toolbox.chapter');
+    });
+
+   Route::domain('{musoraDomain}')
+    ->middleware(['web_authenticated'])
+    ->group(function () {
+        /*
+         * Home Page
+         */
+        Route::get('/{brand}/comments', [ContentPagesController::class, 'comments'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.members-area.comments');
     });

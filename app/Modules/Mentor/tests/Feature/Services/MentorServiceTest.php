@@ -143,6 +143,7 @@ class MentorServiceTest extends TestCase
     {
         $brand = 'drumeo';
         $mentor = $this->createMentor($brand);
+
         $this->mentorService->updateMentor($mentor->user_id, 'test', 4);
         $this->assertDatabaseHas('mentors', [
             'user_id' => $mentor->user_id,

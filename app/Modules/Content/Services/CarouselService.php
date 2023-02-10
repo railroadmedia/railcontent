@@ -48,6 +48,7 @@ class CarouselService
                 if ($slide->product_id &&
                     $this->userProductService->hasProductNotCached(user()->id, $slide->product_id)) {
                     $slide->cta_url = $slide->product_url;
+                    $slide->cta_text = "Go to course"; //todo: added for 30-day-drummer remove once CMS handles this case
                 } else {
                     $slide->cta_url = $slide->endpoint;
                 }

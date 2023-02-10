@@ -196,7 +196,7 @@ onUnmounted(() => {
 <template>
   <main class="tw-min-h-screen tw-w-screen">
     <sprite-sheet></sprite-sheet>
-    <NotificationToasts :icon="notification.icon" :text="notification.text" :isError="notification.isError" :slideClass="notification.slideClass" @onClose="handleNotificationClear" />
+    <NotificationToasts :icon="notification.icon" :text="notification.text" :isError="notification.isError" @onClose="handleNotificationClear" />
     <ConfirmationModal
       v-if="confirmation.title"
       :brand="brand"
