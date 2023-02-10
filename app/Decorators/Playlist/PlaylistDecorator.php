@@ -30,7 +30,7 @@ class PlaylistDecorator extends ModeDecoratorBase
     {
         $playlists = $playlists->toArray();
         $pinnedPlaylists = $this->pinnedPlaylistsRepository->getMyPinnedPlaylists();
-        $pinnedPlaylists = array_combine(array_column($pinnedPlaylists, 'playlist_id'), $pinnedPlaylists);
+        //$pinnedPlaylists = array_combine(array_column($pinnedPlaylists, 'playlist_id'), $pinnedPlaylists);
         $userIds = [];
 
         foreach ($playlists as $index => $playlist) {
@@ -50,8 +50,12 @@ class PlaylistDecorator extends ModeDecoratorBase
                 $playlists[$index]['uploaded_thumbnail'] = true;
             }
 
-            //TODO: Delete next line when the event/listener that sync playlist duration is functional
             $playlists[$index]['duration_formated'] = gmdate('H:i:s', $playlists[$index]['duration'] ?? 0);
+
+            if(isset($playlist['user_playlist_item_id'])){
+                $playlists[$index]['playback_url'] = url()->route('platform.user.playlist-item',['playlistId' => $playlist['id'],
+                    'playlistItemId' => $playlist['user_playlist_item_id']]);
+            }
         }
 
         $userIds = array_unique($userIds);
