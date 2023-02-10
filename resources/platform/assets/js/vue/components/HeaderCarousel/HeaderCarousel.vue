@@ -104,7 +104,6 @@ onMounted(() => {
       :description="slide.description"
       :ctaUrl="slide.cta_url"
       :registerUrl="slide.endpoint"
-      :productUrl="slide.product_url"
       :video="slide.video_src"
       :img="slide.img"
       @mouseover="removeInterval"

@@ -122,6 +122,7 @@ onMounted(() => {
               tw-leading-none
             "
             :class="titleClasses"
+              v-if="title && !logo"
             >
             {{ title }}
           </h2>
@@ -131,7 +132,7 @@ onMounted(() => {
           <!-- CTA -->
           <span
               class="tw-text-white tw-font-bebas-neue tw-text-lg tw-hidden xl:tw-block"
-              v-if="ctaText"
+              v-if="ctaText && !logo"
           >{{ ctaText }}
             <ArrowSmRightIcon class="tw-inline tw-w-[20px] tw-h-[18px]" />
           </span>
