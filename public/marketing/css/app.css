@@ -3144,6 +3144,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .p-6 {
   padding: 1.5rem !important;
 }
+.p-10 {
+  padding: 2.5rem !important;
+}
 .p-8 {
   padding: 2rem !important;
 }
