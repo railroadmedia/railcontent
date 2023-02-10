@@ -6,7 +6,7 @@
     import InputLabel from '../InputLabel/InputLabel.vue';
     import Dropdown from '../Dropdown/Dropdown.vue';
     import PlaylistService from '../../../services/playlists';
-    import ThumbnailUpload from '../ThumbnailUpload/ThumbnailUpload.vue';
+    //import ThumbnailUpload from '../ThumbnailUpload/ThumbnailUpload.vue';
 
     const props = defineProps({
         modalProps: {
@@ -113,7 +113,6 @@
             <span v-if="mode === 'edit'">Edit Playlist</span>
         </h2>
         <div class="tw-flex tw-pt-[24px]">
-            <ThumbnailUpload />
             <div class="tw-flex tw-flex-col tw-w-full tw-dark">
                 <InputLabel placeholder="Playlist Title" :remove-default-input-styles="true"
                     inputOverride="tw-mb-[20px] tw-text-white placeholder:tw-text-white tw-w-full tw-bg-[#002039]/90 tw-px-[14px] tw-box-border tw-border-[#445F74] tw-h-[42px] tw-rounded-[63px] tw-py-[9px] tw-px-[13px] tw-text-[14px] focus:tw-border-none focus:tw-outline-none"

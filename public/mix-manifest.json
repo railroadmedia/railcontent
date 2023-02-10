@@ -1,9 +1,9 @@
 {
-    "/platform/js/app.js": "/platform/js/app.js?id=45c9bb36430dbdad15986af9d1880a30",
+    "/platform/js/app.js": "/platform/js/app.js?id=792de4f988de3dfb398bee3d03ab8652",
     "/platform/js/profile.js": "/platform/js/profile.js?id=c7e869f012d1252699ff65de1e5e0547",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=24098ec7990ff98a565fd1e4693746ed",
     "/platform/js/books.js": "/platform/js/books.js?id=d4fa837307a14d7ee0ce9065b5e5e8e0",
-    "/platform/js/manifest.js": "/platform/js/manifest.js?id=bdc03877f3d2f8011492acff6698920e",
+    "/platform/js/manifest.js": "/platform/js/manifest.js?id=a54563d4d1eed6ca48d54ea0cb086ac5",
     "/platform/js/platform-header.js": "/platform/js/platform-header.js?id=f85e47e1c8f0725bf107dcdcf406ad5b",
     "/platform/js/membership-update-.js": "/platform/js/membership-update-.js?id=47963e36ebd057dd76d6483c3f9b9152",
     "/platform/js/membership-update-page.js": "/platform/js/membership-update-page.js?id=9947140a8d3bf9ab7451f186415ca1ec",
@@ -21,7 +21,7 @@
     "/platform/js/contact-email-form-marketing.js": "/platform/js/contact-email-form-marketing.js?id=c283c0743f8ef717ba74412588d0f066",
     "/platform/js/contact-email-form.js": "/platform/js/contact-email-form.js?id=642b3b300df0895ccc45c393a32cced3",
     "/platform/js/youtube-player-component.js": "/platform/js/youtube-player-component.js?id=b5d474a024f0422948fbee3748f1c852",
-    "/platform/js/onboarding-component.js": "/platform/js/onboarding-component.js?id=1a5f5ebc4d88db80cd2bf406013c174c",
+    "/platform/js/onboarding-component.js": "/platform/js/onboarding-component.js?id=5c7cb7bda5a2c73c79bdfe13a20046b0",
     "/platform/js/video-player-component.js": "/platform/js/video-player-component.js?id=f4f51ccf332a4f1740a26ef7b90ed17e",
     "/platform/js/video-media-element-component.js": "/platform/js/video-media-element-component.js?id=81ae53c4bc6c08628d7c2b6710c14975",
     "/platform/js/image-cropper-component.js": "/platform/js/image-cropper-component.js?id=d8e4ffb070f05d53478bd161da77aaef",
@@ -33,7 +33,7 @@
     "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=26d03238e24769866d21704f9c052fd4",
     "/marketing/css/vuesora.css": "/marketing/css/vuesora.css?id=3f4fff42a4cb240bdb8b91b949042aca",
     "/platform/css/app.css": "/platform/css/app.css?id=26f2a9bbaef0cc05c6255fa5c0ad1b85",
-    "/vendor~onboarding.js": "/vendor~onboarding.js?id=78853aea81176c45be05ad9c4492d68c",
+    "/platform/js/vendor~onboarding.js": "/platform/js/vendor~onboarding.js?id=78853aea81176c45be05ad9c4492d68c",
     "/marketing/css/app.css": "/marketing/css/app.css?id=6a1ae3c296967e32a30f0aa16bf26aed",
     "/platform/js/vendor.js": "/platform/js/vendor.js?id=14869a1ee258dc414fd2268efdeee4e3"
 }
