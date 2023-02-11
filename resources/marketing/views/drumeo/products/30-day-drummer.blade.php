@@ -679,7 +679,7 @@
                     class="join blue medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 @if(!is_current_user_a_member()) anchor-slide @endif">ENROLL NOW</a><br>
             @endif
             <img class="h-7 mr-1 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/Joined_profiles.png">
-            <p class="inline-block leading-tight text-sm align-middle">Join {{ $students ?? 0 }} drummers who<br> have already registered.</p>
+            <p class="inline-block leading-tight text-sm align-middle">Join {{ $nPackOwners ?? 0 }} drummers who<br> have already registered.</p>
         </div>
     </section>
     <section class="text-white text-center px-5 sm:px-6 py-10 sm:py-16 lg:py-20" style="background:linear-gradient(to bottom, #0b76db, #074c8e);">
