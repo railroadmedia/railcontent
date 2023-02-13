@@ -355,9 +355,10 @@
     <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #f4f8fb calc(50% + 1px));"></div>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f4f8fb;">
         <div class="container max-w-4xl mx-auto">
-            <div class="aspect-16:9 cursor-hover rounded-xl autoplay-video overflow-hidden w-full relative -mt-36 sm:-mt-64 lg:-mt-96" data-open="trailer">
+            <div class="{{-- aspect-16:9 --}} cursor-hover rounded-xl autoplay-video overflow-hidden w-full relative -mt-36 sm:-mt-64 lg:-mt-96" data-open="trailer">
                 <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
-                <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0 lazyload" poster="https://i.vimeocdn.com/video/1488646391-d2694ba3d38847b00d9fcd70c946d3c45efe1202cedf305361a253a275ef5f90-d_890" data-src="https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/video-reel.mp4" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
+                <img class="rounded-2xl" src="https://i.vimeocdn.com/video/1610056241-6f3a44242b7f8e6ad0efc4198852ecb68d7a13b06afae5524b6fccfee7f2c2e6-d_1500" alt="trailer image" />
+{{--                <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0 lazyload" poster="https://i.vimeocdn.com/video/1488646391-d2694ba3d38847b00d9fcd70c946d3c45efe1202cedf305361a253a275ef5f90-d_890" data-src="https://pianote.s3.amazonaws.com/products/new-piano-players/trailer.mp4" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>--}}
             </div>
 
             <img class="h-10 sm:h-20 mt-10 sm:mt-16 lg:mt-24 mb-8 lazyload" data-src="https://cdn.musora.com/image/fetch/w_1220,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/Just_Press_Play_logo.png" alt="just play logo">
@@ -486,7 +487,7 @@
                         </div>
                         <div class="align-middle bg-white text-center rounded-lg inline-block overflow-hidden w-11 mr-2">
                             <p class="leading-none tracking-tighter text-xs py-0.5 text-white bg-pianote"><strong>MAR</strong></p>
-                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">28</strong></p>
+                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">25</strong></p>
                         </div>
                     </div>
                 </div>
