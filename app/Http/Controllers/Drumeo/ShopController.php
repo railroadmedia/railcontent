@@ -53,7 +53,7 @@ class ShopController extends BaseController
 
     public function products(Request $request, $domain, $page = null)
     {
-        return view('drumeo.products.'.$page);
+        return view('drumeo.products.'.$page, ['theme' => 'drumeo']);
 
         throw new NotFoundHttpException();
     }

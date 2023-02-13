@@ -7992,16 +7992,16 @@
         },
         {
             "name": "railroad/ecommerce",
-            "version": "v5.0.59",
+            "version": "v5.0.60",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "0c31d15414ac590b0ae7c65c83f4da687ec6045e"
+                "reference": "aa87e41734e63ddd455e3d2eb902843c0fe723ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/0c31d15414ac590b0ae7c65c83f4da687ec6045e",
-                "reference": "0c31d15414ac590b0ae7c65c83f4da687ec6045e",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/aa87e41734e63ddd455e3d2eb902843c0fe723ef",
+                "reference": "aa87e41734e63ddd455e3d2eb902843c0fe723ef",
                 "shasum": ""
             },
             "require": {
@@ -8038,9 +8038,9 @@
             "description": "Ecommerce system",
             "support": {
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
-                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.59"
+                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.60"
             },
-            "time": "2023-02-02T22:29:42+00:00"
+            "time": "2023-02-07T22:23:16+00:00"
         },
         {
             "name": "railroad/lead-tracker",
@@ -8196,16 +8196,16 @@
         },
         {
             "name": "railroad/musora-api",
-            "version": "v3.0.7",
+            "version": "v3.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "c1e03feeba8cf3ccaf70ff2ef0f3ac5da1aefb20"
+                "reference": "90d87d12d7b293fced2af5966b1bbb08b2cf6e90"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/c1e03feeba8cf3ccaf70ff2ef0f3ac5da1aefb20",
-                "reference": "c1e03feeba8cf3ccaf70ff2ef0f3ac5da1aefb20",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/90d87d12d7b293fced2af5966b1bbb08b2cf6e90",
+                "reference": "90d87d12d7b293fced2af5966b1bbb08b2cf6e90",
                 "shasum": ""
             },
             "require": {
@@ -8235,9 +8235,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
-                "source": "https://github.com/railroadmedia/musora-api/tree/v3.0.7"
+                "source": "https://github.com/railroadmedia/musora-api/tree/v3.0.8"
             },
-            "time": "2023-01-31T12:22:06+00:00"
+            "time": "2023-02-10T21:25:54+00:00"
         },
         {
             "name": "railroad/permissions",

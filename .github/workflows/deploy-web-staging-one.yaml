@@ -6,7 +6,9 @@ on:
 
 jobs:
   deploy-web-staging-one:
-    runs-on: ubuntu-latest
+    runs-on:
+      group: Default Larger Runners
+      labels: ubuntu-latest-16-cores
     if: github.ref == 'refs/heads/web-staging-one'
     steps:
       - name: Checkout code
