@@ -514,6 +514,7 @@ the pin icon on or off.',
     {
         $page = $request->get('page', 1);
         $limit = $request->get('limit', null);
+        $sort = $request->get('sort','position');
         $contentTypes = array_merge(
             config('railcontent.appUserListContentTypes', []),
             array_values(config('railcontent.showTypes', [])[config('railcontent.brand')] ?? [])
@@ -524,7 +525,8 @@ the pin icon on or off.',
                                                           $request->get('playlist_id'),
                                                           $contentTypes,
                                                           $limit,
-                                                          $page
+                                                          $page,
+                                                          $sort
                                                       ),
                                                       'total_results' => $this->userPlaylistsService->countUserPlaylistContents(
                                                           $request->get('playlist_id')

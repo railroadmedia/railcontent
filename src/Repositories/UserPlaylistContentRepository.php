@@ -47,8 +47,11 @@ class UserPlaylistContentRepository extends RepositoryBase
      * @return mixed
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
-    public function getUserPlaylistContents($playlistId, $contentType = [], $limit = null, $page = 1)
+    public function getUserPlaylistContents($playlistId, $contentType = [], $limit = null, $page = 1, $sort = "position")
     {
+        $orderByDirection = substr($sort, 0, 1) !== '-' ? 'asc' : 'desc';
+        $orderByColumn = trim($sort, '-');
+
         $query =
             $this->query()
                 ->select(
@@ -82,9 +85,15 @@ class UserPlaylistContentRepository extends RepositoryBase
                 ->skip(($page - 1) * $limit);
         }
 
+        if($orderByColumn == 'random'){
+            $query =
+                $query->inRandomOrder();
+        }else {
+            $query = $query->orderBy(config('railcontent.table_prefix').'user_playlist_content.position', 'asc');
+        }
+
         $contentRows =
-            $query->orderBy(config('railcontent.table_prefix').'user_playlist_content.position', 'asc')
-                ->get()
+            $query->get()
                 ->toArray();
 
         $extraData = $this->geExtraDataInOldStyle(['data', 'instructor', 'video'], $contentRows);

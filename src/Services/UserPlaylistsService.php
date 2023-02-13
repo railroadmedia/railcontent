@@ -115,13 +115,14 @@ class UserPlaylistsService
      * @return mixed|\Railroad\Railcontent\Support\Collection|null
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
-    public function getUserPlaylistContents($playlistId, $contentType = [], $limit = null, $page = 1)
+    public function getUserPlaylistContents($playlistId, $contentType = [], $limit = null, $page = 1, $sort = "position")
     {
         $results = $this->userPlaylistContentRepository->getUserPlaylistContents(
             $playlistId,
             $contentType,
             $limit,
-            $page
+            $page,
+            $sort
         );
 
         return Decorator::decorate($results, 'content');
