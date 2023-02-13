@@ -267,7 +267,7 @@
                     @endif
 
                     @if(!$hasProduct && is_current_user_a_member())
-                        <p class="mb-3 lg:-mb-7 mt-5 mb-2 text-drumeo text-left"><strong>You are a drumeo member! <br>Enroll for free by clicking on the button below.</strong></p>
+                        <p class="mb-3 lg:-mb-7 mt-5 mb-2 text-drumeo text-left"><strong>You are a Drumeo member! <br>Enroll for free by clicking on the button below.</strong></p>
                     @endif
 
                     <div class="flex flex-wrap sm:flex-nowrap items-center mt-6 sm:mt-5 lg:mt-10">
