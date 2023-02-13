@@ -770,7 +770,7 @@
                                 @if($hasProduct)
                                     <a class="join sold-out medium w-1/2 align-middle">YOU'RE ENROLLED</a>
                                 @else
-                                    <a class="join medium w-1/2 align-middle" href="{-- TODO --}">ENROLL NOW</a>
+                                    <a class="join medium w-1/2 align-middle" href="/cohort-packs/register/new-piano-players-start-here">ENROLL NOW</a>
                                 @endif
 
                                 <p class="text-sm mt-1 mb-5"><em>One-Time Payment. (Just ${{ round((97 / 30), 2) }} per day.)</em></p>
