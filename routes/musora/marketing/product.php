@@ -24,4 +24,5 @@ Route::domain('{musoraDomain}')
     ->group(function () {
         Route::get('/30-day-drummer', [SalesController::class, 'thirtyDayDrummer']);
         Route::get('/new-piano-players', [\App\Http\Controllers\Pianote\SalesController::class, 'newPianoPlayers'] );
+
     });
