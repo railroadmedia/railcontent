@@ -313,7 +313,7 @@
                     <div class="flex md:block w-full md:w-auto px-4 md:px-3 mb-4 md:mb-0 justify-center">
                         <i class="far fa-fw mr-3 md:mr-0 fa-calendar-day text-drumeo text-2xl"></i>
                         <p class="leading-tight mx-0"><strong class="font-black">Course Dates</strong><br>
-                            <span class="text-sm"> February 27th to<br class="hidden md:inline"> March 28th</span></p>
+                            <span class="text-sm"> February 27th to<br class="hidden md:inline"> March 27th</span></p>
                     </div>
                     <div class="flex md:block w-full md:w-auto px-4 md:px-3 mb-4 md:mb-0 justify-center">
                         <i class="far fa-fw mr-3 md:mr-0 fa-clock text-drumeo text-2xl"></i>
@@ -752,7 +752,7 @@
 
                             <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-drumeo mr-1"></i> Learn drums by playing drums with Domino Santantonio</p>
                             <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-drumeo mr-1"></i> Join {{ $nPackOwners ?? 0 }} drummers who’ve already registered.</p>
-                            <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-drumeo mr-1"></i> Course runs February 27 to March 28.</p>
+                            <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-drumeo mr-1"></i> Course runs February 27 to March 27.</p>
                             <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-drumeo mr-1"></i>  Click below to join the next edition of 30-Day Drummer</p>
 
                             @if(session()->has('success-message'))
@@ -794,7 +794,7 @@
                             </ul>
                             <hr class="w-full my-5" style="border-color:#b2cae1">
                             <p class="leading-loose text-sm"><strong>Key Features</strong><br>
-                                <i class="fas fa-check text-drumeo mr-1"></i> Runs February 27 to March 28<br>
+                                <i class="fas fa-check text-drumeo mr-1"></i> Runs February 27 to March 27<br>
                                 <i class="fas fa-check text-drumeo mr-1"></i> 24 Guided Workouts<br>
                                 <i class="fas fa-check text-drumeo mr-1"></i> 4 Live Q&A Sessions<br>
                                 <i class="fas fa-check text-drumeo mr-1"></i> Lifetime Course Access<br>
