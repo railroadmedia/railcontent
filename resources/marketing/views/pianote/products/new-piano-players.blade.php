@@ -487,7 +487,7 @@
                         </div>
                         <div class="align-middle bg-white text-center rounded-lg inline-block overflow-hidden w-11 mr-2">
                             <p class="leading-none tracking-tighter text-xs py-0.5 text-white bg-pianote"><strong>MAR</strong></p>
-                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">28</strong></p>
+                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">25</strong></p>
                         </div>
                     </div>
                 </div>
