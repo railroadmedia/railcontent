@@ -9,9 +9,9 @@ export default {
      * CREATE Playlist
      *
      * @param {string} token
-     * @param {object} payload - 
+     * @param {object} payload -
      */
-    
+
     createUserPlaylist({ token, payload }) {
         const headers = {
             'Content-Type': 'application/json',
@@ -19,7 +19,7 @@ export default {
         };
         return axios({
             method: 'POST',
-            url: '/railcontent/playlists',
+            url: '/railcontent/playlist',
             data: payload,
             headers
         });
@@ -32,8 +32,8 @@ export default {
      * GET Playlists
      *
      * @param {string} brand
-     * @param {number} page - 
-     * @param {number} limit - 
+     * @param {number} page -
+     * @param {number} limit -
      * @param {string} token
      */
     getCurrentUserPlaylists({ brand = "drumeo", page = 1, limit = 10, token }) {
@@ -60,10 +60,10 @@ export default {
     /**
      * Pin Playlists
      *
-     * @param {number} id - 
+     * @param {number} id -
      * @param {string} brand
-     * @param {string} csrf_token 
-     * 
+     * @param {string} csrf_token
+     *
      */
     pinPlaylist(id, brand = "drumeo", csrf_token) {
         console.log('call pistPlaylist')
@@ -85,10 +85,10 @@ export default {
     /**
      * Unpin Playlists
      *
-     * @param {number} id - 
+     * @param {number} id -
      * @param {string} brand
-     * @param {string} csrf_token 
-     * 
+     * @param {string} csrf_token
+     *
      */
     unpinPlaylist(id, brand = "drumeo", csrf_token) {
         console.log('call unpistPlaylist')
