@@ -196,6 +196,18 @@ class SalesController extends BaseController
         return view('pianote.products.foundation-books');
     }
 
+    public function newPianoPlayers()
+    {
+        /** @var \App\Modules\Ecommerce\Services\UserProductService $userProductService */
+        $userProductService = app(\App\Modules\Ecommerce\Services\UserProductService::class);
+        $hasProduct = user() && $userProductService->hasProductNotCached(user()?->id, 517);
+        return view('pianote.products.new-piano-players', ['theme' => 'pianote', 'hasProduct' => $hasProduct]);
+    }
+    public function newPianoPlayersDeal()
+    {
+        return view('pianote.products.30-day-drummer-deal');
+    }
+
 
     // 408 is the 3 month access code product
     // 2 is the customer.io email ID from their system
