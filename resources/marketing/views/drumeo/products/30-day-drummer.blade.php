@@ -273,10 +273,10 @@
                                 <a href="{{ $registerButtonUrl }}" class="join blue medium w-full @if(!is_current_user_a_member()) anchor-slide @endif">ENROLL NOW</a>
                             @endif
 
-                            @if(!is_current_user_a_member())
-                                <p class="opacity-50 text-sm mt-1 mb-5 sm:mb-0">For just $1/day.</p>
-                            @else
-                                <p class="opacity-50 text-sm mt-1 mb-5 sm:mb-0">Registration is FREE for Drumeo Members.</p>
+                            @if(!auth()->check())
+                                <p class="opacity-50 text-sm mt-2 mb-5 sm:mb-0 underline hover:text-drumeo">
+                                    <a href="{{ get_musora_brand_base_url() }}/30-day-drummer">Drumeo Members register for free here.</a>
+                                </p>
                             @endif
                         </div>
                         <div class="w-full sm:w-1/2 lg:pb-5">
@@ -284,19 +284,6 @@
                             <p class="inline-block leading-tight text-sm align-middle">Join {{ $nPackOwners ?? 0 }} drummers who<br> have already registered.</p>
                         </div>
                     </div>
-
-                    @if(!auth()->check())
-                        <div class="flex flex-wrap sm:flex-nowrap items-center mt-3 sm:mt-2 lg:mt-4">
-                            <div class="w-full sm:w-1/2 text-center sm:pr-2">
-                                <p class="opacity-50 text-sm mt-1 mb-1 sm:mb-0 hover:underline">
-                                    <a href="{{ get_musora_brand_base_url() }}/30-day-drummer">Registration is FREE for Drumeo Members. <br>
-                                        <strong>Click here if you are a member.</strong></a>
-                                </p>
-                            </div>
-                            <div class="w-full sm:w-1/2 lg:pb-5">
-                            </div>
-                        </div>
-                    @endif
                 </div>
                 <div class="w-full sm:w-5/12 hidden sm:block">
                     <div class="rounded-xl overflow-hidden relative bg-cover bg-center cursor-hover autoplay-video lazyload" style="padding-bottom: 105%;" data-bg="https://cdn.musora.com/image/fetch/w_850,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/30DD2_header_no_badge_thumb.jpg" data-open="trailer">
@@ -321,7 +308,7 @@
                     <div class="flex md:block w-full md:w-auto px-4 md:px-3 mb-4 md:mb-0 justify-center">
                         <i class="far fa-fw mr-3 md:mr-0 fa-calendar-day text-drumeo text-2xl"></i>
                         <p class="leading-tight mx-0"><strong class="font-black">Course Dates</strong><br>
-                            <span class="text-sm"> February 27th to<br class="hidden md:inline"> March 27th</span></p>
+                            <span class="text-sm"> February 27th to<br class="hidden md:inline"> March 28th</span></p>
                     </div>
                     <div class="flex md:block w-full md:w-auto px-4 md:px-3 mb-4 md:mb-0 justify-center">
                         <i class="far fa-fw mr-3 md:mr-0 fa-clock text-drumeo text-2xl"></i>
@@ -474,19 +461,19 @@
 
                         <div class="align-middle bg-white text-center rounded-lg inline-block overflow-hidden w-11 mr-2">
                             <p class="leading-none tracking-tighter text-xs py-0.5 text-white bg-drumeo"><strong>MAR</strong></p>
-                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">1</strong></p>
+                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">4</strong></p>
                         </div>
                         <div class="align-middle bg-white text-center rounded-lg inline-block overflow-hidden w-11 mr-2">
                             <p class="leading-none tracking-tighter text-xs py-0.5 text-white bg-drumeo"><strong>MAR</strong></p>
-                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">8</strong></p>
+                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">11</strong></p>
                         </div>
                         <div class="align-middle bg-white text-center rounded-lg inline-block overflow-hidden w-11 mr-2">
                             <p class="leading-none tracking-tighter text-xs py-0.5 text-white bg-drumeo"><strong>MAR</strong></p>
-                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">15</strong></p>
+                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">18</strong></p>
                         </div>
                         <div class="align-middle bg-white text-center rounded-lg inline-block overflow-hidden w-11 mr-2">
                             <p class="leading-none tracking-tighter text-xs py-0.5 text-white bg-drumeo"><strong>MAR</strong></p>
-                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">22</strong></p>
+                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">25</strong></p>
                         </div>
                     </div>
                 </div>
@@ -802,7 +789,7 @@
                             </ul>
                             <hr class="w-full my-5" style="border-color:#b2cae1">
                             <p class="leading-loose text-sm"><strong>Key Features</strong><br>
-                                <i class="fas fa-check text-drumeo mr-1"></i> Runs February 27 to March 27<br>
+                                <i class="fas fa-check text-drumeo mr-1"></i> Runs February 27 to March 28<br>
                                 <i class="fas fa-check text-drumeo mr-1"></i> 24 Guided Workouts<br>
                                 <i class="fas fa-check text-drumeo mr-1"></i> 4 Live Q&A Sessions<br>
                                 <i class="fas fa-check text-drumeo mr-1"></i> Lifetime Course Access<br>
