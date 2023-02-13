@@ -897,21 +897,6 @@
         </div>
     </section>
 
-
-    @if(!is_current_user_a_member())
-        <div class="reveal coach-wrap relative rounded-xl text-center overflow-visible select-none max-w-xs md:max-w-md" id="loginModal" style="max-width: 530px;" data-reveal data-reset-on-close="false">
-            <div class="p-5 sm:p-7">
-                <img class="h-24 sm:h-32 lazyload" data-src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/30_day_drummer_logo.png">
-                <h3 class="leading-tight mb-4"><strong>Wait a sec...</strong></h3>
-                <p class="leading-normal">
-                    You must be logged into your Drumeo <br>
-                    account to register for free.
-                    <br><br> Click below to log in:</p>
-                <a href="/login" class="join blue medium w-full max-w-xs my-5">Login Here</a>
-            </div>
-        </div>
-    @endif
-
     {{--    <div class="reveal coach-wrap relative rounded-xl text-center overflow-visible select-none max-w-xs md:max-w-md" id="waitlistModal" style="max-width: 530px;" data-reveal data-reset-on-close="false">--}}
     {{--        <div class="p-5 sm:p-7">--}}
     {{--            <img class="h-24 sm:h-32 lazyload" data-src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/30_day_drummer_logo.png" alt="30DD logo">--}}
