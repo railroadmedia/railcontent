@@ -265,6 +265,11 @@
                     @if(session()->has('success-message'))
                         <p class="mb-3 lg:-mb-7 mt-3 text-drumeo text-center"><strong>Congrats! You have registered for 30-Day Drummer.<br class="hidden md:inline"> Check your email for the details.</strong></p>
                     @endif
+
+                    @if(!$hasProduct && is_current_user_a_member())
+                        <p class="mb-3 lg:-mb-7 mt-5 mb-2 text-drumeo text-left"><strong>You are a Drumeo member! <br>Enroll for free by clicking on the button below.</strong></p>
+                    @endif
+
                     <div class="flex flex-wrap sm:flex-nowrap items-center mt-6 sm:mt-5 lg:mt-10">
                         <div class="w-full sm:w-1/2 text-center sm:pr-2">
                             @if($hasProduct)
@@ -273,30 +278,17 @@
                                 <a href="{{ $registerButtonUrl }}" class="join blue medium w-full @if(!is_current_user_a_member()) anchor-slide @endif">ENROLL NOW</a>
                             @endif
 
-                            @if(!is_current_user_a_member())
-                                <p class="opacity-50 text-sm mt-1 mb-5 sm:mb-0">Free practice pad + drumsticks.</p>
-                            @else
-                                <p class="opacity-50 text-sm mt-1 mb-5 sm:mb-0">Registration is FREE for Drumeo Members.</p>
+                            @if(!auth()->check())
+                                <p class="opacity-50 text-sm mt-2 mb-5 sm:mb-0 underline hover:text-drumeo">
+                                    <a href="{{ get_musora_brand_base_url() }}/30-day-drummer">Drumeo Members register for free here.</a>
+                                </p>
                             @endif
                         </div>
-                        <div class="w-full sm:w-1/2 lg:pb-5">
+                        <div class="w-full sm:w-1/2 pt-4 lg:pb-5">
                             <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/Joined_profiles.png" al="joined profiles">
                             <p class="inline-block leading-tight text-sm align-middle">Join {{ $nPackOwners ?? 0 }} drummers who<br> have already registered.</p>
                         </div>
                     </div>
-
-                    @if(!auth()->check())
-                        <div class="flex flex-wrap sm:flex-nowrap items-center mt-3 sm:mt-2 lg:mt-4">
-                            <div class="w-full sm:w-1/2 text-center sm:pr-2">
-                                <p class="opacity-50 text-sm mt-1 mb-1 sm:mb-0 hover:underline">
-                                    <a href="{{ get_musora_brand_base_url() }}/30-day-drummer">Registration is FREE for Drumeo Members. <br>
-                                        <strong>Click here if you are a member.</strong></a>
-                                </p>
-                            </div>
-                            <div class="w-full sm:w-1/2 lg:pb-5">
-                            </div>
-                        </div>
-                    @endif
                 </div>
                 <div class="w-full sm:w-5/12 hidden sm:block">
                     <div class="rounded-xl overflow-hidden relative bg-cover bg-center cursor-hover autoplay-video lazyload" style="padding-bottom: 105%;" data-bg="https://cdn.musora.com/image/fetch/w_850,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/30DD2_header_no_badge_thumb.jpg" data-open="trailer">
@@ -321,7 +313,7 @@
                     <div class="flex md:block w-full md:w-auto px-4 md:px-3 mb-4 md:mb-0 justify-center">
                         <i class="far fa-fw mr-3 md:mr-0 fa-calendar-day text-drumeo text-2xl"></i>
                         <p class="leading-tight mx-0"><strong class="font-black">Course Dates</strong><br>
-                            <span class="text-sm"> February 27th to<br class="hidden md:inline"> March 28th</span></p>
+                            <span class="text-sm"> February 27th to<br class="hidden md:inline"> March 27th</span></p>
                     </div>
                     <div class="flex md:block w-full md:w-auto px-4 md:px-3 mb-4 md:mb-0 justify-center">
                         <i class="far fa-fw mr-3 md:mr-0 fa-clock text-drumeo text-2xl"></i>
@@ -760,7 +752,7 @@
 
                             <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-drumeo mr-1"></i> Learn drums by playing drums with Domino Santantonio</p>
                             <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-drumeo mr-1"></i> Join {{ $nPackOwners ?? 0 }} drummers who’ve already registered.</p>
-                            <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-drumeo mr-1"></i> Course runs February 27 to March 28.</p>
+                            <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-drumeo mr-1"></i> Course runs February 27 to March 27.</p>
                             <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-drumeo mr-1"></i>  Click below to join the next edition of 30-Day Drummer</p>
 
                             @if(session()->has('success-message'))
@@ -802,7 +794,7 @@
                             </ul>
                             <hr class="w-full my-5" style="border-color:#b2cae1">
                             <p class="leading-loose text-sm"><strong>Key Features</strong><br>
-                                <i class="fas fa-check text-drumeo mr-1"></i> Runs February 27 to March 28<br>
+                                <i class="fas fa-check text-drumeo mr-1"></i> Runs February 27 to March 27<br>
                                 <i class="fas fa-check text-drumeo mr-1"></i> 24 Guided Workouts<br>
                                 <i class="fas fa-check text-drumeo mr-1"></i> 4 Live Q&A Sessions<br>
                                 <i class="fas fa-check text-drumeo mr-1"></i> Lifetime Course Access<br>
