@@ -79,10 +79,10 @@ class UserPlaylistsService
      * @param null $brand
      * @return array|mixed[]
      */
-    public function getUserPlaylist($userId, $playlistType, $brand = null, $limit, $page, $term = null)
+    public function getUserPlaylist($userId, $playlistType, $brand = null, $limit, $page, $term = null, $sort = '-created_at')
     {
         $playlists =
-            $this->userPlaylistsRepository->getUserPlaylist($userId, $playlistType, $brand, $limit, $page, $term);
+            $this->userPlaylistsRepository->getUserPlaylist($userId, $playlistType, $brand, $limit, $page, $term, $sort);
 
         return Decorator::decorate($playlists, 'playlist');
     }
@@ -328,6 +328,10 @@ class UserPlaylistsService
     public function getPlaylist($playlistId)
     {
         $playlist = $this->userPlaylistsRepository->getById($playlistId);
+        if(!$playlist || ($playlist['user_id']!= auth()->id() && $playlist['private'] == 1)){
+            return null;
+        }
+
         $playlist['like_count'] =
             $this->playlistLikeRepository->query()
                 ->where('playlist_id', $playlistId)
@@ -341,6 +345,8 @@ class UserPlaylistsService
             $this->pinnedPlaylistsRepository->query()
                 ->where('playlist_id', $playlistId)
                 ->count() > 0;
+
+        $playlist['user_playlist_item_id'] = $this->userPlaylistContentRepository->getFirstContentByPlaylistId($playlistId)['id'] ?? null;
 
         return \Arr::first(Decorator::decorate([$playlist], 'playlist'));
     }
@@ -397,7 +403,9 @@ class UserPlaylistsService
      */
     public function getPinnedPlaylists()
     {
-        return $this->pinnedPlaylistsRepository->getMyPinnedPlaylists();
+        $playlists = $this->pinnedPlaylistsRepository->getMyPinnedPlaylists();
+
+        return Decorator::decorate($playlists, 'playlist');
     }
 
     /**

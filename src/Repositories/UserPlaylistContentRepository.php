@@ -336,4 +336,11 @@ class UserPlaylistContentRepository extends RepositoryBase
 
         return $deleted > 0;
     }
+
+    public function getFirstContentByPlaylistId($playlistId)
+    {
+        return $this->query()
+            ->where('user_playlist_id', $playlistId)
+            ->first();
+    }
 }

@@ -21,11 +21,14 @@ class UserPlaylistsRepository extends RepositoryBase
      * @param int $page
      * @return array|mixed[]
      */
-    public function getUserPlaylist($userId, $playlistType, $brand = null, $limit = null, $page = 1, $term = null)
+    public function getUserPlaylist($userId, $playlistType, $brand = null, $limit = null, $page = 1, $term = null, $sort = '-created_at')
     {
         if (!$brand) {
             $brand = config('railcontent.brand');
         }
+
+        $orderByDirection = substr($sort, 0, 1) !== '-' ? 'asc' : 'desc';
+        $orderByColumn = trim($sort, '-');
 
         $query =
             $this->query()
@@ -39,9 +42,18 @@ class UserPlaylistsRepository extends RepositoryBase
             $query->limit($limit)
                 ->skip(($page - 1) * $limit);
         }
-
+        if($orderByColumn == 'random'){
+            $query =
+                $query->inRandomOrder();
+        }else {
+            if (!in_array($orderByColumn, ['name', 'id', 'created_at'])) {
+                $orderByColumn = 'id';
+            }
+            $query =
+                $query->orderBy($orderByColumn, $orderByDirection);
+        }
         $data =
-            $query->orderBy('id', 'desc')
+            $query
                 ->get()
                 ->toArray();
 

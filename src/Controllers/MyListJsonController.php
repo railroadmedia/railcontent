@@ -8,6 +8,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
+use Railroad\Railcontent\Exceptions\NotFoundException;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Requests\PlaylistCreateRequest;
 use Railroad\Railcontent\Services\ConfigService;
@@ -258,7 +259,13 @@ class MyListJsonController extends Controller
      */
     public function getPlaylist(Request $request)
     {
-        return $this->userPlaylistsService->getPlaylist($request->get('playlist_id'));
+        $playlist =  $this->userPlaylistsService->getPlaylist($request->get('playlist_id'));
+        throw_if(!$playlist, new NotFoundException('Playlist not exists.'));
+
+        return reply()->json([$playlist], [
+            'transformer' => DataTransformer::class,
+        ]);
+
     }
 
     /**
@@ -315,13 +322,16 @@ class MyListJsonController extends Controller
     {
         $page = $request->get('page', 1);
         $limit = $request->get('limit', 10);
+        $sort = $request->get('sort', '-created_at');
+
         $playlists = $this->userPlaylistsService->getUserPlaylist(
             auth()->id(),
             'user-playlist',
             config('railcontent.brand'),
             $limit,
             $page,
-            $request->get('term')
+            $request->get('term'),
+            $sort
         );
 
         $itemId = $request->get('content_id');
