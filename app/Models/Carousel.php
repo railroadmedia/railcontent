@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $title
  * @property string $subtitle
  * @property string $description
- * @property string $cta_test
+ * @property string $cta_text
  * @property string $cta_url
  * @property string $img
  * @property integer $display_order

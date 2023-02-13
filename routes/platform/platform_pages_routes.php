@@ -37,6 +37,11 @@ Route::domain('{musoraDomain}')
 
                 Route::get('/test/email', [HomePageController::class, 'testemail']);
 
+                Route::get(
+                    '/redirect30day',
+                    [\App\Http\Controllers\Platform\HomePageController::class, 'redirect30day']
+                );
+                
                 /*
                  * Primary Content Pages
                  */

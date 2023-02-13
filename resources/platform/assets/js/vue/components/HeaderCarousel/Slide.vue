@@ -122,6 +122,7 @@ onMounted(() => {
               tw-leading-none
             "
             :class="titleClasses"
+              v-if="title && !logo"
             >
             {{ title }}
           </h2>
@@ -130,14 +131,13 @@ onMounted(() => {
           <p class="tw-text-sm tw-mb-3 tw-hidden xl:tw-block xl:tw-line-clamp-3" v-html="description"></p>
           <!-- CTA -->
           <span
-              class="tw-text-white tw-font-bebas-neue tw-text-lg tw-hidden xl:tw-block"
-              v-if="ctaText"
+              :class="`tw-text-white tw-font-bebas-neue tw-text-lg ${(ctaText && logo) && 'xl:tw-hidden'}`"
           >{{ ctaText }}
             <ArrowSmRightIcon class="tw-inline tw-w-[20px] tw-h-[18px]" />
           </span>
             <div v-if="registerUrl || video" class="tw-gap-2 tw-mt-2 tw-hidden xl:tw-flex tw-flex-wrap">
                 <a v-if="registerUrl" :href="ctaUrl" :class="`tw-btn-primary tw-bg-${brand} tw-text-xl go-to-button tw-w-[200px]`">
-                    {{ registerUrl === ctaUrl ? 'Register Now' : 'Go To Course' }}
+                    {{ registerUrl === ctaUrl ? 'Enroll Now' : 'Go To Course' }}
                 </a>
                 <span v-if="video && registerUrl === ctaUrl" @click="openModal()" class="tw-btn-secondary tw-text-white tw-text-xl tw-w-[200px] tw-z-100 tw-relative">Learn More</span>
             </div>
@@ -157,7 +157,7 @@ onMounted(() => {
             <XIcon class="tw-w-[26px] tw-h-[26px] md:tw-w-[48px] md:tw-h-[48px]" />
         </button>
         <div class="tw-w-full tw-mx-6 lg:tw-mx-0 lg:tw-w-1/2 tw-relative" style="padding-bottom: 56.25%;">
-            <iframe class="tw-absolute tw-w-full tw-h-full reset-on-close" src="//player.vimeo.com/video/738385463?autoplay=1" frameborder="0" allowfullscreen allow="autoplay" title="learn more video"></iframe>
+            <iframe class="tw-absolute tw-w-full tw-h-full reset-on-close" :src="video" frameborder="0" allowfullscreen allow="autoplay" title="learn more video"></iframe>
         </div>
     </ModalRenderer>
 </template>
