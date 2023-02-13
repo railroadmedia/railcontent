@@ -13,10 +13,14 @@ Route::domain('{musoraDomain}')
 //            ->whereIn('category', ['shop', 'lessons', 'accessories', 'clothing'])
 //            ->name('marketing.products');
 
-        Route::get('/30-day-drummer', [SalesController::class, 'thirtyDayDrummer']);
 
         Route::get('/merch', [ProductPagesController::class, 'shopAlt']);
         Route::get('/shop/{slug}', [ProductPagesController::class, 'productAlt']);
 
     });
 
+Route::domain('{musoraDomain}')
+    ->middleware(['web_authenticated'])
+    ->group(function () {
+        Route::get('/30-day-drummer', [SalesController::class, 'thirtyDayDrummer']);
+    });
