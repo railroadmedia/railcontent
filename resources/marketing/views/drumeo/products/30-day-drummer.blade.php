@@ -273,10 +273,10 @@
                                 <a href="{{ $registerButtonUrl }}" class="join blue medium w-full @if(!is_current_user_a_member()) anchor-slide @endif">ENROLL NOW</a>
                             @endif
 
-                            @if(!is_current_user_a_member())
-                                <p class="opacity-50 text-sm mt-1 mb-5 sm:mb-0">Free practice pad + drumsticks.</p>
-                            @else
-                                <p class="opacity-50 text-sm mt-1 mb-5 sm:mb-0">Registration is FREE for Drumeo Members.</p>
+                            @if(!auth()->check())
+                                <p class="opacity-50 text-sm mt-2 mb-5 sm:mb-0 underline hover:text-drumeo">
+                                    <a href="{{ get_musora_brand_base_url() }}/30-day-drummer">Drumeo Members register for free here.</a>
+                                </p>
                             @endif
                         </div>
                         <div class="w-full sm:w-1/2 lg:pb-5">
@@ -284,19 +284,6 @@
                             <p class="inline-block leading-tight text-sm align-middle">Join {{ $nPackOwners ?? 0 }} drummers who<br> have already registered.</p>
                         </div>
                     </div>
-
-                    @if(!auth()->check())
-                        <div class="flex flex-wrap sm:flex-nowrap items-center mt-3 sm:mt-2 lg:mt-4">
-                            <div class="w-full sm:w-1/2 text-center sm:pr-2">
-                                <p class="opacity-50 text-sm mt-1 mb-1 sm:mb-0 hover:underline">
-                                    <a href="{{ get_musora_brand_base_url() }}/30-day-drummer">Registration is FREE for Drumeo Members. <br>
-                                        <strong>Click here if you are a member.</strong></a>
-                                </p>
-                            </div>
-                            <div class="w-full sm:w-1/2 lg:pb-5">
-                            </div>
-                        </div>
-                    @endif
                 </div>
                 <div class="w-full sm:w-5/12 hidden sm:block">
                     <div class="rounded-xl overflow-hidden relative bg-cover bg-center cursor-hover autoplay-video lazyload" style="padding-bottom: 105%;" data-bg="https://cdn.musora.com/image/fetch/w_850,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/30DD2_header_no_badge_thumb.jpg" data-open="trailer">
