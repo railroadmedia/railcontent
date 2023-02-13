@@ -768,4 +768,8 @@ class HomePageController extends BaseController
     {
         Mail::raw('Hello World!', function($msg) {$msg->to('robert@musora.com')->subject('Test Email'); });
     }
+
+    public function redirect30day(){
+        return view('pages.redirect30day');
+    }
 }

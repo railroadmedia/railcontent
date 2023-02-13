@@ -90,7 +90,7 @@
             </div>
         </section>
     @endif
-
+    
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-[10px] dark:tw-text-white songs-catalogue-container tw-pt-[30px]">
         <transition appear name="fade">
             <content-catalogue dusk="content-catalogue" brand="{{ $brand }}" theme-color="{{ $brand }}"
@@ -100,8 +100,8 @@
                 catalogue-name="Songs" :filterable-values="{{ json_encode($catalogueMeta['allowableFilters']) }}"
                 content-endpoint="{{ $endpointOverride ?? '/railcontent/content' }}" :use-theme-color="true"
                 :pre-loaded-content="{{ $listLessons }}" :is-admin="{{ json_encode(user()->isAdmin()) }}"
-                :statuses="{{ json_encode($statuses) }}"
-                :include-future-scheduled-content-only = "{{ $futureScheduledContentOnly }}"
+                :statuses="{{ json_encode($statuses ?? ['published']) }}"
+                :include-future-scheduled-content-only = "{{ $futureScheduledContentOnly ?? true }}"
                 :use-url-params="true" :lock-unowned="true" :show-loading-animation="true"
                 no-results-message="There are no songs that match those filters. Please remove some filters."
                 catalogue-type="list" :infinite-scroll="true" limit="20"

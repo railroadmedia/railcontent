@@ -26,5 +26,11 @@ class UserProductService
         return $product && $product->isValid();
     }
 
+    public function getNumberProductOwners(int $productId): int
+    {
+        $count = UserProduct::query()->where('product_id', '=', $productId)->count();
+        return $count;
+    }
+
 
 }

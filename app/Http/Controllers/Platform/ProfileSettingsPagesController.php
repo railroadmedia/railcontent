@@ -393,7 +393,6 @@ class ProfileSettingsPagesController extends BaseController
     {
         $userId = auth()->id();
         $ecommerceUser = $this->userProvider->getCurrentUser();
-
         $now = Carbon::now();
         $accessIsFromAppPurchase = false;
         $isLifetime = false;
@@ -407,6 +406,7 @@ class ProfileSettingsPagesController extends BaseController
         $activeAllContentAccessExpiryDate = $subscriptionInfo['activeAllContentAccessExpiryDate'];
         $hasHadMembership = $subscriptionInfo['hasHadMembership'];
         $userProducts = $subscriptionInfo['userProducts'];
+        $activeMembershipProducts = $subscriptionInfo['activeMembershipProducts'];
 
         // --------------------------------------- get the active subscription -----------------------------------------
 
@@ -588,6 +588,7 @@ class ProfileSettingsPagesController extends BaseController
                 'pausedSubscriptionStartDate' => $pausedSubscriptionStartDate,
                 'accessIsFromAppPurchase' => $accessIsFromAppPurchase,
                 'subscription' => $activeSubscription,
+                'activeMembershipProducts' => $activeMembershipProducts,
                 'hasHadMembership' => $hasHadMembership,
                 'now' => $now,
                 'addToCartUrlTrial' => $addToCartUrlTrial,
@@ -1461,16 +1462,17 @@ class ProfileSettingsPagesController extends BaseController
     private function subscriptionInfo($userId)
     {
         $userProducts = $this->userProductService->getAllUsersProducts($userId);
+        $activeMembershipProducts = [];
 
         foreach ($userProducts as $userProduct) {
-            if ($userProduct->getProduct()->getDigitalAccessType() == 'specific content access') {
-                $userProductsDigitalAccessTypeSpecific[] = $userProduct;
+            if ($userProduct->getProduct()->getDigitalAccessType() === 'specific content access' &&
+                $userProduct->getProduct()->getType() !== 'physical one time') {
+                $userProductsDigitalAccessTypeSpecific[] = $userProduct->getProduct();
             }
             $expired = $userProduct->getExpirationDate() ? $userProduct->getExpirationDate()->lt(Carbon::now()) : null;
 
             $isAllContentAccessProduct = $userProduct->getProduct()->getDigitalAccessType() == 'all content access' ||
                 $userProduct->getProduct()->getDigitalAccessType() == 'basic content access';
-
             if ($isAllContentAccessProduct) {
                 $allContentAccessProduct = $userProduct;
                 $paused = $userProduct->getStartDate() && $userProduct->getStartDate()->gt(Carbon::now());
@@ -1479,6 +1481,7 @@ class ProfileSettingsPagesController extends BaseController
                         $pausedSubscriptionStartDate = $userProduct->getStartDate();
                     } else {
                         $activeAllContentAccessExpiryDate = $userProduct->getExpirationDate();
+                        $activeMembershipProducts[] = $userProduct->getProduct();
                     }
                 }
                 $hasHadMembership = true;
@@ -1489,6 +1492,7 @@ class ProfileSettingsPagesController extends BaseController
             'userProductsDigitalAccessTypeSpecific' => $userProductsDigitalAccessTypeSpecific ?? [],
             'pausedSubscriptionStartDate' => $pausedSubscriptionStartDate ?? null,
             'activeAllContentAccessExpiryDate' => $activeAllContentAccessExpiryDate ?? null,
+            'activeMembershipProducts' => $activeMembershipProducts ?? [],
             'hasHadMembership' => $hasHadMembership ?? false,
             'userProducts' => $userProducts,
             'allContentAccessProduct' => $allContentAccessProduct ?? null
