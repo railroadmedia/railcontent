@@ -100,7 +100,7 @@ const getBaseInputStyles = () => `
       :class="`tw-px-[13px] tw-pb-[5px] ${id + '-label'} ${labelOverride ? labelOverride : 'dark:tw-text-[#9EC0DC]'}`">{{
         labelValue
       }}</label>
-    <div class="tw-flex tw-relative">
+    <div class="tw-flex tw-relative tw-w-full">
       <input :placeholder="placeholder" :id="id"
         :class="`${inputOverride ? inputOverride + getBaseInputStyles() + (disabled ? ' tw-bg-[#D3D3D3] dark:tw-bg-transparent dark:tw-opacity-20' : '') : getBaseInputStyles() + (disabled ? ' tw-bg-[#D3D3D3] dark:tw-bg-transparent dark:tw-opacity-20' : '')}`"
         v-model="input" v-on:keypress.enter.prevent="onEnter" @focus="() => emit('onFocus')" autocomplete="off"

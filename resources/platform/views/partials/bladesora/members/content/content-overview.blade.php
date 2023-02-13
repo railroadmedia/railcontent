@@ -1,4 +1,4 @@
-<div class="flex flex-row pv-3 content-overview {{ !empty($hideBorder) && $hideBorder ? '' : 'tw-border-b tw-border-[#D4D4D8] dark:tw-border-[#223F57]' }}">
+<div class="flex flex-row pv-3 content-overview {{ !empty($hideBorder) && $hideBorder ? '' : 'tw-border-t tw-border-[#D4D4D8] dark:tw-border-[#223F57]' }}">
     <div class="flex flex-column align-v-center large-thumbnail {{ !empty($showBackgroundCards) && $showBackgroundCards === true ? 'background-cards' : '' }} {{ $themeColor }} {{ !empty($releaseDate) && \Carbon\Carbon::parse($releaseDate) > \Carbon\Carbon::now() ? 'desaturate' : '' }}">
         <div class="thumb-wrap corners-10">
             <a @if((empty($noLink) || $noLink === false) && $isOwned) href="{{ $lessonsUrl }}" @endif>

@@ -5,7 +5,6 @@ namespace App\Modules\EventDataSynchronizer\Jobs;
 use App\Modules\CustomerIO\Services\CustomerIoService;
 use App\Modules\EventDataSynchronizer\Services\CustomerIoMentorSyncService;
 use Exception;
-use Illuminate\Support\Facades\Log;
 
 class CustomerIoSyncMentor extends CustomerIoBaseJob
 {
@@ -30,7 +29,7 @@ class CustomerIoSyncMentor extends CustomerIoBaseJob
         CustomerIoService $customerIoService,
         CustomerIoMentorSyncService $customerIoMentorSyncService,
     ) {
-        foreach ($this->mentorStudentData as $mentorStudentDatum) {
+        foreach($this->mentorStudentData as $mentorStudentDatum) {
             try {
                 $accountName = config('event-data-synchronizer.customer_io_account_to_sync_all_brands');
                 $attributes = $customerIoMentorSyncService->getMentorAttributes(
@@ -38,16 +37,10 @@ class CustomerIoSyncMentor extends CustomerIoBaseJob
                     $mentorStudentDatum['primaryBrand']
                 );
 
-                $customerIoService->createOrUpdateCustomerByUserId(
-                    $mentorStudentDatum['userId'],
-                    $accountName,
-                    $mentorStudentDatum['email'],
-                    $attributes
-                );
+                $customerIoService->createOrUpdateCustomerByUserId($mentorStudentDatum['userId'], $accountName, $mentorStudentDatum['email'], $attributes);
                 usleep(100000); //precaution to keep customer.io limit under 100 requests per second
             } catch (Exception $exception) {
-                Log::error("Syncing customer io assigned mentor failed for user {$mentorStudentDatum['mentorUserId']}");
-                Log::error($exception);
+                $this->failed($exception);
             }
         }
     }

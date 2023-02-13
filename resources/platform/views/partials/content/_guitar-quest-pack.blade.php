@@ -1,18 +1,18 @@
 {{-- Featured Pack --}}
-<div class="flex flex-row tw-w-full">
-    <div class="relative gq-container corners-10 bg-grey-2 dark:tw-bg-[#081825] tw-overflow-hidden md:tw-h-[276px] tw-w-full">
-        <a href="{{ $lessonsUrl }}" class="tw-w-full tw-h-full">
+<div class="flex flex-row ">
+    <div class="relative gq-container corners-10 overflow bg-grey-2 dark:tw-bg-[#081825]">
+        <a href="{{ $lessonsUrl }}">
             {{-- Desktop Image --}}
-            <img src="https://musora.com/cdn-cgi/image/width=1600,q_auto:best/https://guitareo.s3.amazonaws.com/shop/card-thumbs/guitar-quest-background.jpg"
+            <img src="https://musora.com/cdn-cgi/image/width=1000,q_auto:best/https://guitareo.s3.amazonaws.com/shop/card-thumbs/guitar-quest-background.jpg"
                 alt="Guitar Quest Lesson Promotional Image"
-                class="tw-w-full tw-hidden md:tw-block tw-transition-opacity tw-opacity-0 tw-h-full tw-object-cover" 
+                class="gq-large-thumb tw-transition-opacity tw-opacity-0" 
                 loading="lazy"
                 onload="this.classList.remove('tw-opacity-0')"
             >
             {{-- Mobile Image --}}
             <img src="https://musora.com/cdn-cgi/image/width=600,q_auto:best/https://guitareo.s3.amazonaws.com/shop/card-thumbs/guitar-quest-background-mobile.jpg"
                 alt="Guitar Quest Lesson Promotional Image"
-                class="gq-small-thumb tw-transition-opacity tw-opacity-0"  
+                class="gq-small-thumb tw-transition-opacity tw-opacity-0" 
                 loading="lazy"
                 onload="this.classList.remove('tw-opacity-0')"
             >
@@ -32,7 +32,8 @@
                              onload="this.classList.remove('tw-opacity-0')"
                         >
                     </div>
-                    <h1 class="display tw-font-bison-bold text-white text-center uppercase tw-font-normal tw-text-2xl lg:tw-text-3xl xl:tw-text-4xl" style="line-height: 0.9em;">Your guitar journey<br>starts here.</h1>
+                    <h1 class="display tw-font-bison-bold text-white text-center uppercase tw-font-normal" style="line-height: 0.9em;">Your guitar journey</h1>
+                    <h1 class="display tw-font-bison-bold text-white text-center uppercase tw-font-normal" style="line-height: 0.9em;">starts here.</h1>
                     <a
                         href="{{ $nextItemUrl }}"
                         class="btn text-black bg-guitareoGuitarQuest tw-text-lg collapse-250 go-to-button mt-1"
