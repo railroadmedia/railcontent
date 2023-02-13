@@ -52,6 +52,7 @@
         console.log('handle confirm')
         const payload = {
             brand: props.brand,
+            name: title.value,
             description: description.value,
             category: category.value,
             private: true,
