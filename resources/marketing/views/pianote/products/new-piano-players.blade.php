@@ -336,7 +336,7 @@
             <div class="text-left flex flex-wrap sm:flex-nowrap mb-32 sm:mb-56 lg:mb-72">
                 <h6 class="leading-normal max-w-lg pr-7">You don’t learn by watching. You learn by doing.
                     <br><br>
-                    Start the year off right and learn the piano <strong>by playing the piano</strong>. You’ll be playing a song from the very first lessons and you’ll follow along with 10-minute daily guided sessions that show you exactly what to play.
+                    Start the year off right and learn the piano <b>by playing the piano</b>. You’ll be playing a song from the very first lessons and you’ll follow along with 10-minute daily guided sessions that show you exactly what to play.
                     <br><br>
                     No complicated theory. No need to read music. No frustration.
                     <br><br>
@@ -721,7 +721,7 @@
 {{--        </div>--}}
 {{--    </section>--}}
     <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #2a2f34 calc(50% + 1px));"></div>
-    <section class="text-white text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#2a2f34;">
+    <section class="text-white text-center px-5 sm:px-6 pb-10 sm:pb-14 lg:pb-20 py-10 sm:py-14 lg:pt-32" style="background-color:#2a2f34;">
         <div class="container max-w-4xl mx-auto">
             <img class="h-28 sm:h-40 lg:h-52 block mx-auto -mt-24 sm:-mt-36 lg:-mt-48 lazyload" data-src="https://cdn.musora.com/image/fetch/w_410,q_auto:best/https://pianote.s3.amazonaws.com/sales/2022/piano-guarantee.png" alt="guarantee badge">
             <h2 class="my-4 sm:my-6 lg:my-8"><strong>The guarantee that lasts<br class="inline sm:hidden"> longer than the course</strong></h2>
@@ -853,7 +853,7 @@
                 ])
                 @include('_partials.components.question-dropdown', [
                 "title" => "What devices can I access the course on?",
-                "desc" => "New Piano Players Start Here is available on your laptop, tablet, or phone. You’ll also have access through the Pianote App after you’ve completed your purchase of the course.",
+                "desc" => "New Piano Players Start Here is available on your laptop, tablet, or phone. You’ll also have access through the Musora App after you’ve completed your purchase of the course.",
                 "num" => '?',
                 ])
             </div>
@@ -909,7 +909,7 @@
         "title" => 'trailer'
     ])
 
-    @include("drumeo.sales.partials._footer")
+    @include("pianote._partials._footer")
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
