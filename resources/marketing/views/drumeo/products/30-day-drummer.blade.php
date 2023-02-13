@@ -274,7 +274,7 @@
                             @endif
 
                             @if(!is_current_user_a_member())
-                                <p class="opacity-50 text-sm mt-1 mb-5 sm:mb-0">For just $1/day.</p>
+                                <p class="opacity-50 text-sm mt-1 mb-5 sm:mb-0">Free practice pad + drumsticks.</p>
                             @else
                                 <p class="opacity-50 text-sm mt-1 mb-5 sm:mb-0">Registration is FREE for Drumeo Members.</p>
                             @endif
