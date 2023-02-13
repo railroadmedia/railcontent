@@ -8295,12 +8295,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "45efb4e2223b40877e10837097981832c3834c3b"
+                "reference": "13bab9bd2bd9cebd65995f877a33437ee7e443bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/45efb4e2223b40877e10837097981832c3834c3b",
-                "reference": "45efb4e2223b40877e10837097981832c3834c3b",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/13bab9bd2bd9cebd65995f877a33437ee7e443bd",
+                "reference": "13bab9bd2bd9cebd65995f877a33437ee7e443bd",
                 "shasum": ""
             },
             "require": {
@@ -8332,7 +8332,7 @@
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
                 "source": "https://github.com/railroadmedia/musora-api/tree/v2.0-playlists"
             },
-            "time": "2023-02-06T14:30:02+00:00"
+            "time": "2023-02-13T13:48:22+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -8529,12 +8529,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "dbba67f7bc80907343a695dd1d40f24347f0a38b"
+                "reference": "4a22344158df445b48ddf0eecf01da5f51ba8693"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/dbba67f7bc80907343a695dd1d40f24347f0a38b",
-                "reference": "dbba67f7bc80907343a695dd1d40f24347f0a38b",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/4a22344158df445b48ddf0eecf01da5f51ba8693",
+                "reference": "4a22344158df445b48ddf0eecf01da5f51ba8693",
                 "shasum": ""
             },
             "require": {
@@ -8590,7 +8590,7 @@
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
                 "source": "https://github.com/railroadmedia/railcontent/tree/2.0-playlists"
             },
-            "time": "2023-02-13T12:20:59+00:00"
+            "time": "2023-02-13T13:47:18+00:00"
         },
         {
             "name": "railroad/railforums",
