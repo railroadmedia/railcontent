@@ -313,7 +313,7 @@ class LeadGenController extends BaseController
     {
         switch($page){
             case null:
-                return view('pianote.lead-gen.7-days-to-sight-reading.signup');
+                return view('pianote.lead-gen.7-days-to-sight-reading.signup', [ 'theme' => 'pianote' ]);
             case 'lessons' && is_null($lesson):
                 return view('pianote.lead-gen.7-days-to-sight-reading.lesson-index');
             default:

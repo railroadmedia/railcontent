@@ -568,16 +568,6 @@ img {
             }
         }
 
-        &.white {
-            color: #000;
-            background: #FFF;
-
-            &:hover {
-                background: #eee;
-                color: #000;
-            }
-        }
-
         &.promo {
             background: $pianoteRed;
 

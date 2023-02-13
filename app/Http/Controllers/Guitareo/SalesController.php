@@ -91,7 +91,7 @@ class SalesController extends BaseController
 
     public function acousticGuitarMadeEasy()
     {
-        return view('guitareo.products.acoustic-guitar-made-easy');
+        return view('guitareo.products.acoustic-guitar-made-easy', [ 'theme' => 'guitareo' ]);
     }
 
     public function guitarQuest()
@@ -125,7 +125,7 @@ class SalesController extends BaseController
 
     public function guitarTechniqueMadeEasy()
     {
-        return view('guitareo.products.guitar-technique-made-easy');
+        return view('guitareo.products.guitar-technique-made-easy', [ 'theme' => 'guitareo' ]);
     }
 
     public function rhythmAndGroove()
