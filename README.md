@@ -219,7 +219,7 @@ We have 11 total environments:
 - **app-staging-three** - for general purpose mobile app API testing, review, etc
 
 Each environment deploys a specific branch in the musora-web-platform repository under the same name as the environment
-**except for 'production' which deploys the 'master' branch**.
+**except for 'production' which deploys the 'production' branch and 'master' which deploys to 'pre-production'**.
 
 ## Web URLs
 
