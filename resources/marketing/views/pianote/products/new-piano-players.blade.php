@@ -381,13 +381,13 @@
                     'position' => 'right',
                     'img' => 'https://pianote.s3.amazonaws.com/products/new-piano-players/practice.jpg',
                     'title' => 'Short, focused practice sessions',
-                    'desc' => 'No wasted time, no distractions. Each session features a countdown timer so you can off the distractions and focus on playing.',
+                    'desc' => 'No wasted time, no distractions. Each session features a countdown timer so you can turn off the distractions and focus on playing.',
                     ],
                     [
                     'position' => 'left',
                     'img' => 'https://pianote.s3.amazonaws.com/products/new-piano-players/progress.jpg',
                     'title' => 'Smile in your first lesson',
-                    'desc' => 'Play along with professional backing tracks so you’ll sound (and feel) incredible as you’re learning. It’s a super motivating way to keep making progress.',
+                    'desc' => 'Play along with a professional backing track so you’ll sound (and feel) incredible as you’re learning. It’s a super motivating way to keep making progress.',
                     ],
                     [
                     'position' => 'right',
