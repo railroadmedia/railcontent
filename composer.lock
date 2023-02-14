@@ -4347,16 +4347,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v9.51.0",
+            "version": "v9.52.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "b81123134349a013a738a9f7f715c6ce99d5a414"
+                "reference": "eb85cd9d72e5bfa54b4d0d9040786f26d6184a9e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/b81123134349a013a738a9f7f715c6ce99d5a414",
-                "reference": "b81123134349a013a738a9f7f715c6ce99d5a414",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/eb85cd9d72e5bfa54b4d0d9040786f26d6184a9e",
+                "reference": "eb85cd9d72e5bfa54b4d0d9040786f26d6184a9e",
                 "shasum": ""
             },
             "require": {
@@ -4541,7 +4541,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2023-02-07T15:37:18+00:00"
+            "time": "2023-02-14T14:51:14+00:00"
         },
         {
             "name": "laravel/nova",
@@ -8529,12 +8529,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "fc5490941c1c09e411c2938e00e0d9b5c286a649"
+                "reference": "024b0fdc672556d96890e0415170d113a8f7883f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/fc5490941c1c09e411c2938e00e0d9b5c286a649",
-                "reference": "fc5490941c1c09e411c2938e00e0d9b5c286a649",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/024b0fdc672556d96890e0415170d113a8f7883f",
+                "reference": "024b0fdc672556d96890e0415170d113a8f7883f",
                 "shasum": ""
             },
             "require": {
@@ -8590,20 +8590,20 @@
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
                 "source": "https://github.com/railroadmedia/railcontent/tree/2.0-playlists"
             },
-            "time": "2023-02-14T07:03:39+00:00"
+            "time": "2023-02-14T15:46:32+00:00"
         },
         {
             "name": "railroad/railforums",
-            "version": "2.0.14",
+            "version": "v2.0.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railforums.git",
-                "reference": "b61aa1365e7d2028a5fded6ca04abd0c3baacdcf"
+                "reference": "84ae3a8f47b2e1cfbdd91045b19dca00ea7f91d6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railforums/zipball/b61aa1365e7d2028a5fded6ca04abd0c3baacdcf",
-                "reference": "b61aa1365e7d2028a5fded6ca04abd0c3baacdcf",
+                "url": "https://api.github.com/repos/railroadmedia/railforums/zipball/84ae3a8f47b2e1cfbdd91045b19dca00ea7f91d6",
+                "reference": "84ae3a8f47b2e1cfbdd91045b19dca00ea7f91d6",
                 "shasum": ""
             },
             "require": {
@@ -8642,9 +8642,9 @@
             "description": "Laravel forum system using entities",
             "support": {
                 "issues": "https://github.com/railroadmedia/railforums/issues",
-                "source": "https://github.com/railroadmedia/railforums/tree/2.0.14"
+                "source": "https://github.com/railroadmedia/railforums/tree/v2.0.15"
             },
-            "time": "2022-11-04T19:00:19+00:00"
+            "time": "2023-02-14T12:15:19+00:00"
         },
         {
             "name": "railroad/railnotifications",
