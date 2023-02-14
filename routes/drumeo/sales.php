@@ -12,6 +12,7 @@ Route::domain('{drumeoDomain}')
     ]);
     Route::get('/', [SalesController::class, 'home'] );
     Route::get('/new-year', [SalesController::class, 'promo'] );
+    Route::get('/lp', [SalesController::class, 'promo'] );
         Route::get('/beginner', [SalesController::class, 'promo']);
     Route::get('/choose-plan', [SalesController::class, 'choosePlan'] );
     Route::get('/student-only', [SalesController::class, 'promo'] );
@@ -40,6 +41,8 @@ Route::domain('{drumeoDomain}')
     Route::get('/30-day-trial', [SalesController::class, 'homeMonth']);
     Route::get('/choose-your-trial', [SalesController::class, 'choosePlan']);
     Route::get('/choose-your-trial-month', [SalesController::class, 'choosePlanMonth']);
+
+    Route::get('/30-day-drummer', [SalesController::class, 'thirtyDayDrummer']);
 
     Route::get('/{pageT?}', SalesController::class . '@trialPages')
         ->whereIn('pageT', [
@@ -70,8 +73,6 @@ Route::domain('{drumeoDomain}')
         }
     );
 
-
-    Route::get('/30-day-drummer-register-endpoint', [SalesController::class, 'registerFor30DayDrummer'] );
     Route::get('/pro/', [SalesController::class, 'pro']);
     Route::get('/jared-recommends', [SalesController::class, 'jaredRecommends']);
 });

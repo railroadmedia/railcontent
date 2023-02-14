@@ -10,6 +10,7 @@ Route::domain('{pianoteDomain}')
     Route::get('/trial', [SalesController::class, 'home'] );
     Route::get('/trial-month', [SalesController::class, 'homeMonth'] );
     Route::get('/new-year', [SalesController::class, 'promo'] );
+    Route::get('/lp', [SalesController::class, 'promo'] );
     Route::get('/student-only', [SalesController::class, 'promo'] );
     Route::get('/choose-plan', [SalesController::class, 'choosePlan'] );
     Route::get('/choose-your-trial', [SalesController::class, 'choosePlan'] );
@@ -43,6 +44,8 @@ Route::domain('{pianoteDomain}')
     Route::get('/the-power-of-chords-bootcamp', [SalesController::class, 'PowerOfChordsBootcamp'] );
     Route::get('/the-power-of-chords-giveaway', [SalesController::class, 'PowerOfChordsGiveaway'] );
     Route::get('/foundations', [SalesController::class, 'foundations'] );
+    Route::get('/new-piano-players', [SalesController::class, 'newPianoPlayers'] );
+    Route::get('/new-piano-players/deal', [SalesController::class, 'newPianoPlayersDeal'] );
 
     Route::get('/about', [SalesController::class, 'about'] );
     Route::get('/app', [SalesController::class, 'app'] );

@@ -337,7 +337,7 @@ return [
 
         'apple_store_kit' => [
             'endpoint' => env('APPLE_VERIFY_RECEIPT_ENDPOINT', 'https://sandbox.itunes.apple.com'),
-            'shared_secret' => env('APPLE_STORE_KIT_SHARED_SECRET'),
+            'shared_secret' => '7e598c622c0a46f49c79c2272bcc2c25',
             'Drumeo' => [
                 'shared_secret' => 'b1ab16b41296400bbf10431d72386f5f',
             ],
@@ -708,7 +708,7 @@ return [
 
     'subscription_renewal_date' => 1,
     'failed_payments_before_de_activation' => 1,
-    'days_before_access_revoked_after_expiry_in_app_purchases_only' => 0,
+    'days_before_access_revoked_after_expiry_in_app_purchases_only' => 7,
     'days_before_access_revoked_after_expiry' => 5,
 
     'password_creation_rules' => 'min:8|max:128', // also defined in usora

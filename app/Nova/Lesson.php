@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Models\Brand;
 use App\Models\Product;
 use App\Nova\Flexible\Layouts\BenefitLayout;
 use App\Nova\Flexible\Layouts\FeatureLayout;
@@ -63,20 +64,10 @@ class Lesson extends Resource
                 ->disableDownload()
                 ->deletable(false)
                 ->storeAs(function (Request $request){
-                    $brandId = $request->brand;
-                    $brand = '';
-
-                    if($brandId === "1") {
-                        $brand = 'Drumeo';
-                    }
-                    elseif($brandId === "2"){
-                        $brand = 'Pianote';
-                    }
-                    elseif($brandId === "3"){
-                        $brand = 'Guitareo';
-                    }
-                    elseif($brandId === "4"){
-                        $brand = 'Singeo';
+                    if(!empty($request->brand)){
+                        $brand = Brand::query()->where('id', $request->brand)->first()->name;
+                    }else{
+                        abort(500, 'Please select a brand');
                     }
 
                     return '/'.$brand.'/Meta-images/'.$request->uuid.'-'.$request->file('meta_img')->getClientOriginalName();
@@ -101,20 +92,10 @@ class Lesson extends Resource
                 ->deletable(false)
                 ->disableDownload()
                 ->storeAs(function (Request $request){
-                    $brandId = $request->brand;
-                    $brand = '';
-
-                    if($brandId === "1") {
-                        $brand = 'Drumeo';
-                    }
-                    elseif($brandId === "2"){
-                        $brand = 'Pianote';
-                    }
-                    elseif($brandId === "3"){
-                        $brand = 'Guitareo';
-                    }
-                    elseif($brandId === "4"){
-                        $brand = 'Singeo';
+                    if(!empty($request->brand)){
+                        $brand = Brand::query()->where('id', $request->brand)->first()->name;
+                    }else{
+                        abort(500, 'Please select a brand');
                     }
 
                     return '/'.$brand.'/Thumbnails/'.$request->uuid.'-'.$request->file('thumbnail')->getClientOriginalName();
@@ -132,20 +113,10 @@ class Lesson extends Resource
                 ->disableDownload()
                 ->nullable()
                 ->storeAs(function (Request $request){
-                    $brandId = $request->brand;
-                    $brand = '';
-
-                    if($brandId === "1") {
-                        $brand = 'Drumeo';
-                    }
-                    elseif($brandId === "2"){
-                        $brand = 'Pianote';
-                    }
-                    elseif($brandId === "3"){
-                        $brand = 'Guitareo';
-                    }
-                    elseif($brandId === "4"){
-                        $brand = 'Singeo';
+                    if(!empty($request->brand)){
+                        $brand = Brand::query()->where('id', $request->brand)->first()->name;
+                    }else{
+                        abort(500, 'Please select a brand');
                     }
 
                     return '/'.$brand.'/Thumbnail-logos/'.$request->uuid.'-'.$request->file('thumbnail_logo')->getClientOriginalName();
@@ -188,20 +159,10 @@ class Lesson extends Resource
                 ->disableDownload()
                 ->nullable()
                 ->storeAs(function (Request $request) {
-                    $brandId = $request->brand;
-                    $brand = '';
-
-                    if($brandId === "1") {
-                        $brand = 'Drumeo';
-                    }
-                    elseif($brandId === "2"){
-                        $brand = 'Pianote';
-                    }
-                    elseif($brandId === "3"){
-                        $brand = 'Guitareo';
-                    }
-                    elseif($brandId === "4"){
-                        $brand = 'Singeo';
+                    if(!empty($request->brand)){
+                        $brand = Brand::query()->where('id', $request->brand)->first()->name;
+                    }else{
+                        abort(500, 'Please select a brand');
                     }
 
                     return '/'.$brand.'/Page-logos/'.$request->uuid.'-'.$request->file('page_logo')->getClientOriginalName();
@@ -218,7 +179,8 @@ class Lesson extends Resource
             Flexible::make('Benefits')
                 ->addLayout(BenefitLayout::class)
                 ->preset(BenefitPreset::class)
-                ->help('There has to be 2 benefits or leave it blank.'),
+                ->help('There has to be 2 benefits or leave it blank.')
+                ->limit(2),
             Text::make('Instructor Name', 'instructor_name')
                 ->hideFromIndex(),
             Image::make('Instructor Image', 'product_img')
@@ -228,20 +190,10 @@ class Lesson extends Resource
                 ->disableDownload()
                 ->nullable()
                 ->storeAs(function (Request $request){
-                    $brandId = $request->brand;
-                    $brand = '';
-
-                    if($brandId === "1") {
-                        $brand = 'Drumeo';
-                    }
-                    elseif($brandId === "2"){
-                        $brand = 'Pianote';
-                    }
-                    elseif($brandId === "3"){
-                        $brand = 'Guitareo';
-                    }
-                    elseif($brandId === "4"){
-                        $brand = 'Singeo';
+                    if(!empty($request->brand)){
+                        $brand = Brand::query()->where('id', $request->brand)->first()->name;
+                    }else{
+                        abort(500, 'Please select a brand');
                     }
 
                     return '/'.$brand.'/Product-images/'.$request->uuid.'-'.$request->file('product_img')->getClientOriginalName();
@@ -270,20 +222,10 @@ class Lesson extends Resource
                 ->disableDownload()
                 ->nullable()
                 ->storeAs(function (Request $request){
-                    $brandId = $request->brand;
-                    $brand = '';
-
-                    if($brandId === "1") {
-                        $brand = 'Drumeo';
-                    }
-                    elseif($brandId === "2"){
-                        $brand = 'Pianote';
-                    }
-                    elseif($brandId === "3"){
-                        $brand = 'Guitareo';
-                    }
-                    elseif($brandId === "4"){
-                        $brand = 'Singeo';
+                    if(!empty($request->brand)){
+                        $brand = Brand::query()->where('id', $request->brand)->first()->name;
+                    }else{
+                        abort(500, 'Please select a brand');
                     }
 
                     return '/'.$brand.'/Bundle-images/'.$request->uuid.'-'.$request->file('bundle_img')->getClientOriginalName();

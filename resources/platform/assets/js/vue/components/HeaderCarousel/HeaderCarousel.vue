@@ -95,12 +95,16 @@ onMounted(() => {
       :isPrevSlide="i === prevSlide"
       :key="slide.title"
       :animateDirection="animateDirection"
+      :brand="brand"
       :topSubtitle="slide.subtitle"
       :title="slide.title"
       :titleClasses="slide.titleClasses"
+      :logo="slide.logo"
       :ctaText="slide.cta_text"
       :description="slide.description"
       :ctaUrl="slide.cta_url"
+      :registerUrl="slide.endpoint"
+      :video="slide.video_src"
       :img="slide.img"
       @mouseover="removeInterval"
       @mouseout="resetInterval"
@@ -109,8 +113,11 @@ onMounted(() => {
     />
 
     <!-- Directional Buttons -->
-    <div :key="`carousel-directional-buttons`"
-      class="tw-absolute tw-bottom-0 tw-right-0 tw-flex tw-justify-end tw-py-[8px] tw-z-30 tw-mr-[21px] tw-mb-[9px] md:tw-mr-[21px] md:tw-mb-[12px] lg:tw-mr-[26px] lg:tw-mb-[20px]">
+    <div
+        :key="`carousel-directional-buttons`"
+        class="tw-absolute tw-bottom-0 tw-right-0 tw-flex tw-justify-end tw-py-[8px] tw-z-30 tw-mr-[21px] tw-mb-[9px] md:tw-mr-[21px] md:tw-mb-[12px] lg:tw-mr-[26px] lg:tw-mb-[20px]"
+        v-if="slides.length > 1"
+    >
 
       <button
         class="tw-rounded-full tw-border-2 tw-border-white tw-text-white tw-h-[23px] tw-w-[23px] lg:tw-h-[26px] lg:tw-w-[26px] hover:tw-text-[#00101D] hover:tw-bg-white hover:tw-border-none"
@@ -126,8 +133,11 @@ onMounted(() => {
     </div>
 
     <!-- Navigation Dots -->
-    <div :key="`carousel-nav`"
-      class="tw-absolute tw-w-auto tw-bottom-0 tw-justify-center tw-py-[15px] lg:tw-py-[25px] tw-z-40 lg:tw-translate-x-[-50%] lg:tw-left-2/4 lg:tw-mx-auto tw-px-[26px] lg:tw-px-0">
+    <div
+        :key="`carousel-nav`"
+        class="tw-absolute tw-w-auto tw-bottom-0 tw-justify-center tw-py-[15px] lg:tw-py-[25px] tw-z-40 lg:tw-translate-x-[-50%] lg:tw-left-2/4 lg:tw-mx-auto tw-px-[26px] lg:tw-px-0"
+        v-if="slides.length > 1"
+    >
       <button v-for="(slide, i) in slides" v-bind:key="slide.title" @click="() => handleNavClick(i)" :class="`tw-h-[6px] tw-w-[6px] tw-mr-[10px] lg:tw-mx-[15px] lg:tw-h-[10px] lg:tw-w-[10px] tw-rounded-full ${i === currentSlide ? 'tw-bg-white' : 'tw-bg-[#c4c4c4]/50'
       }`" />
     </div>

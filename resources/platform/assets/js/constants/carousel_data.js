@@ -139,4 +139,28 @@ export const testCarousel = [
             },
         ]
     }
-]
+];
+
+export const thirtyDD = [{
+    topSubtitle: null,
+    logo: 'https://musora-web-platform.s3.amazonaws.com/carousel/30DDs2_logo.svg',
+    logoClasses: 'tw-h-24',
+    title: null,
+    ctaText: null,
+    description: "Registration is now open for Season 2 of 30-Day Drummer!",
+    registerUrl: 'https://drumeo.com/30-day-drummer',
+    gotoCourse: '',
+    learnMore: '//player.vimeo.com/video/738385463?autoplay=1',
+    img: "https://musora-web-platform.s3.amazonaws.com/carousel/30DDBanner-NoLogo-2+(1).png",
+}]
+
+export const nppsh = [{
+    topSubtitle: null,
+    logo: 'https://musora-web-platform.s3.amazonaws.com/carousel/NPPSH_logo.svg',
+    title: null,
+    ctaText: null,
+    description:"This 30-day guided training pack will help you beautiful piano in the shortest possible time. By the end of this program, you’ll have the skills to play hundreds of popular songs! 10-minute daily workouts that help build your piano skills for life. Registration is required but FREE for members.",
+    registerUrl: 'https://pianote.com/start-here',
+    gotoCourse: '',
+    img: "https://musora-web-platform.s3.amazonaws.com/carousel/NewPianoPlayersStartHere-01+(1).jpg",
+}]

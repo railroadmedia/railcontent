@@ -10,13 +10,13 @@
               "quote" => "Delivering information <br class='lg:hidden'>that is proven <br class='hidden lg:inline-block'>to work<br class='lg:hidden'> and helps the student grow.",
               "name" => "https://drumeo-assets.s3.amazonaws.com/sales/social-proof/todd-sucherman.svg",
               "title" => "STYX, Award-Winning Rock Drummer",
-              "bg" => "https://drumeo-assets.s3.amazonaws.com/sales/social-proof/Todd_Sucherman.jpg",
+              "bg" => "https://drumeo-assets.s3.amazonaws.com/sales/social-proof/Todd--Sucherman.jpg",
           ],
           [
               "quote" => "THE place to go for <br>the best in drum education.",
               "name" => "https://drumeo-assets.s3.amazonaws.com/sales/social-proof/david-garibaldi.svg",
               "title" => "RollingStone Top 100 Drummer",
-              "bg" => "https://drumeo-assets.s3.amazonaws.com/sales/social-proof/David_Garibaldi.jpg",
+              "bg" => "https://drumeo-assets.s3.amazonaws.com/sales/social-proof/David--Garibaldi.jpg",
           ],
       ];
 
@@ -324,8 +324,8 @@
     <title>The World’s Largest Online Drum Lessons Community. | Drumeo</title>
     <meta property="og:title" content="The World’s Largest Online Drum Lessons Community. | Drumeo">
 
-    <meta name="description" content="Trusted by 33,696 active students from 116 countries.">
-    <meta property="og:description" content="Trusted by 33,696 active students from 116 countries.">
+    <meta name="description" content="Trusted by {{ number_format(Prices::$students) }} active students from 116 countries.">
+    <meta property="og:description" content="Trusted by {{ number_format(Prices::$students) }} active students from 116 countries.">
 
     <meta property="og:image" content="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://drumeo-assets.s3.amazonaws.com/sales/social-proof/share_image.png" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}/">
@@ -639,14 +639,14 @@
                         The world’s <br class="hidden sm:inline">largest online <br class="hidden sm:inline">drum lessons <br class="hidden sm:inline">community.
                     </h1>
                     <p>
-                        Trusted by <strong>33,696</strong> active students <br class="lg:hidden">from <strong>116</strong> countries.
+                        Trusted by <strong>{{ number_format(Prices::$students) }}</strong> active students <br class="lg:hidden">from <strong>116</strong> countries.
                     </p>
                 </div>
             </div>
             <div class="flex-1 sm:w-1/2 relative slick-1" style="background-color:#00101d;">
                 @foreach ($headerSliders as $key => $slider)
                     <div class="relative h-full w-full" style="display:none;">
-                        <img class="lazyload sm:hidden" data-src="{{ $slider['bg'] }}" alt="Bill Cobham">
+                        <img class="lazyload sm:hidden" data-src="{{ $slider['bg'] }}" alt="{{ $slider['name'] }}">
                         <div class="absolute inset-0 hidden sm:block bg-cover bg-top" style="background-color:#00101d;background-image:url('{{ $slider['bg'] }}');"></div>
                         <div class="absolute inset-0" style="background: linear-gradient(360deg, #00101D 0%, rgba(0, 16, 29, 0) 100%);"></div>
                         <div class="absolute bottom-4 md:bottom-8 left-8 sm:left-6 md:left-11 lg:left-14 text-white">
@@ -853,7 +853,7 @@
                 <img class="mx-auto h-10 mb-6" src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://drumeo-assets.s3.amazonaws.com/sales/social-proof/shopper-approved-logo.png" alt="shopper approved logo">
             </a>
             <h4 class="font-extrabold leading-tight {{--mb-2 sm:mb-4--}} mb-14">
-                Trusted by 33,696 students<br class="inline sm:hidden"> from around the world.
+                Trusted by {{ number_format(Prices::$students) }} students<br class="inline sm:hidden"> from around the world.
             </h4>
             {{--<p class="mb-14 leading-tight">--}}
                 {{--Sub-headline explaining what<br class="inline sm:hidden"> the reviews below are.--}}

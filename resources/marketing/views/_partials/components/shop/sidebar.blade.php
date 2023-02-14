@@ -44,7 +44,7 @@
             @else
                 @if($category !== 'bundles' && count($sizes) === 0 && !$bundle)
                     <a
-                        class="online-atc vue-add-to-cart"
+                        class="online-atc @if(!$product->is_seasonal) vue-add-to-cart @endif"
                         href="/ecommerce/add-to-cart?go-back-to-shop=true&products[{!! $sku !!}]=1"
                         data-base-url="/ecommerce/add-to-cart?go-back-to-shop=true&products[{!! $sku !!}]=1"
                         data-product-json='{"{!! $sku !!}": 1}'
@@ -64,7 +64,7 @@
                         @foreach($sizes as $size)
                             <option
                                 class="bg-white text-black"
-                                @if($products[$sku.'-'.($size_case_sensitive ? strtolower($size->code) : $size->code)]->getStockAvailability() === 0) disabled @endif
+                                @if(empty($products[$sku.'-'.($size_case_sensitive ? strtolower($size->code) : $size->code)]) || $products[$sku.'-'.($size_case_sensitive ? strtolower($size->code) : $size->code)]->getStockAvailability() === 0) disabled @endif
                                 value="@if(!empty($sku)){{$sku}}-@endif{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}"
                                 data-price="{{!empty($size->price) ? $size->price : $price}}"
                                 data-product-json='{"@if(!empty($sku)){{$sku}}-@endif{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}": 1}'
@@ -73,8 +73,9 @@
                     </select>
 
                     <a
-                        class="online-atc merch vue-add-to-cart selected-pack"
-                        href="#"
+                        x-ref="addButton"
+                        class="online-atc merch @if(!$product->is_seasonal) vue-add-to-cart @endif selected-pack"
+                        @if(!$product->is_seasonal) href="#" @else @click=" $refs.addButton.classList.contains('active') ? orderModal = true : null" @endif
                         @if(!empty($promoCode))
                         data-base-url="/ecommerce/add-to-cart?go-back-to-shop=true&promo-code={{$promoCode}}"
                         data-promocode="{{ $promoCode }}"

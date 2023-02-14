@@ -3,6 +3,7 @@
 @section('layout-header')
     @include("singeo.sales.partials._nav", [
         "cartVersion" => true,
+        'shopToMusora' => $product->is_seasonal,
     ])
 @endsection
 
@@ -87,6 +88,8 @@
             </div>
         </div>
     </div>
+
+    @parent
 @endsection
 
 @section('layout-footer')

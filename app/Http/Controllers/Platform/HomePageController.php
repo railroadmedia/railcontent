@@ -11,6 +11,7 @@ use App\Maps\ContentTypes;
 use App\Services\LiveStreamEventService;
 use App\Services\PackService;
 use App\Services\UserMetricsService;
+use Illuminate\Support\Facades\Mail;
 use Railroad\Railcontent\Services\UserContentProgressService;
 use Carbon\Carbon;
 use Illuminate\Database\DatabaseManager;
@@ -28,7 +29,7 @@ use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\UserPlaylistsService;
 use Railroad\Railcontent\Support\Collection as RailcontentCollection;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use App\Models\Carousel;
+use App\Modules\Content\Services\CarouselService;
 
 class HomePageController extends BaseController
 {
@@ -40,6 +41,7 @@ class HomePageController extends BaseController
     private PackService $packService;
     private DatabaseManager $databaseManager;
     private UserContentProgressService $userContentProgressService;
+    private CarouselService $carouselService;
 
     /**
      * @param ContentService $contentService
@@ -59,7 +61,8 @@ class HomePageController extends BaseController
         UserPlaylistsService $userPlaylistsService,
         PackService $packService,
         DatabaseManager $databaseManager,
-        UserContentProgressService $userContentProgressService
+        UserContentProgressService $userContentProgressService,
+        CarouselService $carouselService
     ) {
         $this->contentService = $contentService;
         $this->contentFollowService = $contentFollowsService;
@@ -69,6 +72,7 @@ class HomePageController extends BaseController
         $this->packService = $packService;
         $this->databaseManager = $databaseManager;
         $this->userContentProgressService = $userContentProgressService;
+        $this->carouselService = $carouselService;
     }
 
     public function homeRedirect()
@@ -106,19 +110,15 @@ class HomePageController extends BaseController
         switch (brand()) {
             case 'drumeo':
                 $methodSlug = 'drumeo-method';
-                $carousel = Carousel::query()->where('brand_id', 1)->orderBy('display_order')->get();
                 break;
             case 'pianote':
                 $methodSlug = 'pianote-method';
-                $carousel = Carousel::query()->where('brand_id', 2)->orderBy('display_order')->get();
                 break;
             case 'guitareo':
                 $methodSlug = 'guitareo-method';
-                $carousel = Carousel::query()->where('brand_id', 3)->orderBy('display_order')->get();
                 break;
             case 'singeo':
                 $methodSlug = 'singeo-method';
-                $carousel = Carousel::query()->where('brand_id', 4)->orderBy('display_order')->get();
                 break;
             default:
                 throw new NotFoundHttpException();
@@ -275,6 +275,8 @@ class HomePageController extends BaseController
                 $currentEvent = null;
             }
         }
+
+        $carousel = $this->carouselService->getCarouselSlides();
 
         return view('home.index', [
             'brand' => $brand,
@@ -760,5 +762,14 @@ class HomePageController extends BaseController
         }
 
         return $parsedTypes;
+    }
+
+    public function testemail()
+    {
+        Mail::raw('Hello World!', function($msg) {$msg->to('robert@musora.com')->subject('Test Email'); });
+    }
+
+    public function redirect30day(){
+        return view('pages.redirect30day');
     }
 }

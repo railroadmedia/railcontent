@@ -14,7 +14,7 @@
                     @endif
                     @if(!empty($packLogo))
                         <div class="logo">
-                            <img src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/{{ $packLogo }}" alt="{{ $title }} logo">
+                            <img @if($sku === '30-day-drummer-2') class="max-h-full h-24" @endif src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/{{ $packLogo }}" alt="{{ $title }} logo">
                         </div>
                     @endif
                     <i class="fas fa-arrow-right hover-icon"></i>
@@ -73,7 +73,7 @@
                                 <option hidden value="">Choose Size</option>
                                 @foreach($sizes as $size)
                                     <option
-                                        @if($products[$sku.'-'.($size_case_sensitive ? strtolower($size->code) : $size->code)]->getStockAvailability() === 0) disabled @endif
+                                        @if(empty($products[$sku.'-'.($size_case_sensitive ? strtolower($size->code) : $size->code)]) || $products[$sku.'-'.($size_case_sensitive ? strtolower($size->code) : $size->code)]->getStockAvailability() === 0) disabled @endif
                                         value="?products[{!! $sku !!}-{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}]=1"
                                         data-product-json='{ "{!! $sku !!}-{{(!empty($size_case_sensitive) && $size_case_sensitive) ? strtolower($size->code) : $size->code}}": 1 }'
                                     >
@@ -84,7 +84,7 @@
 
                             <a
                                 class="online-atc selected-pack vue-add-to-cart"
-                                href="/ecommerce/add-to-cart?go-back-to-shop=true"
+                                @if($theme !== 'musora') href="/ecommerce/add-to-cart?go-back-to-shop=true" @endif
                                 @if(!empty($promoCode)) data-promocode="{{ $promoCode }}" @endif
                                 @if(!empty($lockedCart)) data-locked-cart="{{ $lockedCart }}" @endif
                             >
@@ -95,12 +95,12 @@
                             </a>
                         @elseif(!empty($sku) && (empty($sizes) || count($sizes) === 0))
                             <a
-                                class="online-atc vue-add-to-cart" href="/ecommerce/add-to-cart?go-back-to-shop=true&products[{!! $sku !!}]=1"   data-base-url="/ecommerce/add-to-cart?go-back-to-shop=true&products[{!! $sku !!}]=1"
+                                class="online-atc vue-add-to-cart add-to-cart-button" @if($theme !== 'musora')href="/ecommerce/add-to-cart?go-back-to-shop=true&products[{!! $sku !!}]=1" @else @click="orderModal = true" @endif   data-base-url="/ecommerce/add-to-cart?go-back-to-shop=true&products[{!! $sku !!}]=1" value="?products[{{ $sku }}]=1"
                                 data-product-json='{ "{{$sku}}": 1 }'
                                 @if(!empty($promoCode)) data-promocode="{{ $promoCode }}" @endif
                                 @if(!empty($lockedCart)) data-locked-cart="{{ $lockedCart }}" @endif
                             >
-                                <button class="join {{ $theme !== 'drumeo' ? 'bg-'.$theme : '' }}">
+                                <button class="join {{ ($theme !== 'drumeo' && $theme !== 'musora') ? 'bg-'.$theme : '' }}">
                                     <span class="initial"><i class="fas fa-cart-plus"></i> Add To Cart</span>
                                     <span class="loading"><i class="fad fa-spinner-third fa-spin"></i> Adding to cart...</span>
                                 </button>

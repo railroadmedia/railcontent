@@ -100,6 +100,16 @@ body {
         }
     }
 
+    &.white {
+        background: #fff;
+        color: #000;
+
+        &:hover,
+        &:focus {
+            background: #eee;
+        }
+    }
+
     &.sold-out {
         background: #777;
 
