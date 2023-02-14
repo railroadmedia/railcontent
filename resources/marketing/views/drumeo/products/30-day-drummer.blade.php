@@ -197,7 +197,7 @@
 
 @section('body-data')
     x-data="{
-    modal: {{ empty(user()) ? true : false }},
+        modal: {{ empty(user()) ? true : false }},
     }"
 @endsection
 
@@ -534,7 +534,7 @@
                     <tr>
                         <td>Style</td>
                         <td>24 Play-along Workouts</td>
-                        <td>In-person</td>
+                        <td>In-Person</td>
                         <td>Self-Directed</td>
                         <td>Self-Directed</td>
                     </tr>
@@ -555,7 +555,7 @@
                     <tr>
                         <td>Access</td>
                         <td>Lifetime Access</td>
-                        <td>One-time</td>
+                        <td>One-Time</td>
                         <td>Varies</td>
                         <td>Lifetime</td>
                     </tr>

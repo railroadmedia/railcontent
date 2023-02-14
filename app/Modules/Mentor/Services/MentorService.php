@@ -88,9 +88,7 @@ class MentorService
 
     public function ensureMentorState(User $user): EnsureMentorResult
     {
-        if ($this->disableAssigningOnLaunch) {
-            return EnsureMentorResult::NoChange;
-        }
+        if ($this->disableAssigningOnLaunch) return EnsureMentorResult::NoChange;
 
         $active = $user->isActiveStudent();
         $mentorStudent = $user->mentorStudent;

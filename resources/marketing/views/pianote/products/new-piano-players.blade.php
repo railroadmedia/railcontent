@@ -304,14 +304,14 @@
                     <h4 class="px-3 lg:px-5"><strong>February 27th</strong></h4>
                     <hr class="border-gray-300 my-4 sm:my-2 lg:my-4">
                     <p class="text-sm px-3 lg:px-5">
-                        Enrollment closes in<br class="inline lg:hidden"> <span class="tzcd-medium text-pianote">a limited time</span>.
+                        Enrollment closes in<br class="inline lg:hidden"> <span class="tzcd-nppsh text-pianote">a limited time</span>.
                     </p>
                 </div>
                 <div class="flex flex-wrap sm:flex-nowrap items-center justify-evenly w-full sm:w-auto sm:flex-grow py-4 sm:py-3 lg:py-4 text-left sm:text-center">
                     <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3 mb-4 sm:mb-0">
                         <i class="far fa-fw mr-3 sm:mr-0 fa-calendar-day text-pianote text-2xl"></i>
                         <p class="leading-tight mx-0"><strong class="font-black">Course Dates</strong><br>
-                            <span class="text-sm"> February 27 to<br class="hidden sm:inline"> March 25</span></p>
+                            <span class="text-sm"> February 27 to<br class="hidden sm:inline"> March 28</span></p>
                     </div>
                     <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3 mb-4 sm:mb-0">
                         <i class="far fa-fw mr-3 sm:mr-0 fa-clock text-pianote text-2xl"></i>
@@ -336,7 +336,7 @@
             <div class="text-left flex flex-wrap sm:flex-nowrap mb-32 sm:mb-56 lg:mb-72">
                 <h6 class="leading-normal max-w-lg pr-7">You don’t learn by watching. You learn by doing.
                     <br><br>
-                    Start the year off right and learn the piano <strong>by playing the piano</strong>. You’ll be playing a song from the very first lessons and you’ll follow along with 10-minute daily guided sessions that show you exactly what to play.
+                    Start the year off right and learn the piano <b>by playing the piano</b>. You’ll be playing a song from the very first lessons and you’ll follow along with 10-minute daily guided sessions that show you exactly what to play.
                     <br><br>
                     No complicated theory. No need to read music. No frustration.
                     <br><br>
@@ -355,9 +355,10 @@
     <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #f4f8fb calc(50% + 1px));"></div>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f4f8fb;">
         <div class="container max-w-4xl mx-auto">
-            <div class="aspect-16:9 cursor-hover rounded-xl autoplay-video overflow-hidden w-full relative -mt-36 sm:-mt-64 lg:-mt-96" data-open="trailer">
+            <div class="{{-- aspect-16:9 --}} cursor-hover rounded-xl autoplay-video overflow-hidden w-full relative -mt-36 sm:-mt-64 lg:-mt-96" data-open="trailer">
                 <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
-                <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0 lazyload" poster="https://i.vimeocdn.com/video/1488646391-d2694ba3d38847b00d9fcd70c946d3c45efe1202cedf305361a253a275ef5f90-d_890" data-src="https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/video-reel.mp4" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
+                <img class="rounded-2xl" src="https://i.vimeocdn.com/video/1610056241-6f3a44242b7f8e6ad0efc4198852ecb68d7a13b06afae5524b6fccfee7f2c2e6-d_1500" alt="trailer image" />
+{{--                <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0 lazyload" poster="https://i.vimeocdn.com/video/1488646391-d2694ba3d38847b00d9fcd70c946d3c45efe1202cedf305361a253a275ef5f90-d_890" data-src="https://pianote.s3.amazonaws.com/products/new-piano-players/trailer.mp4" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>--}}
             </div>
 
             <img class="h-10 sm:h-20 mt-10 sm:mt-16 lg:mt-24 mb-8 lazyload" data-src="https://cdn.musora.com/image/fetch/w_1220,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/Just_Press_Play_logo.png" alt="just play logo">
@@ -380,13 +381,13 @@
                     'position' => 'right',
                     'img' => 'https://pianote.s3.amazonaws.com/products/new-piano-players/practice.jpg',
                     'title' => 'Short, focused practice sessions',
-                    'desc' => 'No wasted time, no distractions. Each session features a countdown timer so you can off the distractions and focus on playing.',
+                    'desc' => 'No wasted time, no distractions. Each session features a countdown timer so you can turn off the distractions and focus on playing.',
                     ],
                     [
                     'position' => 'left',
                     'img' => 'https://pianote.s3.amazonaws.com/products/new-piano-players/progress.jpg',
                     'title' => 'Smile in your first lesson',
-                    'desc' => 'Play along with professional backing tracks so you’ll sound (and feel) incredible as you’re learning. It’s a super motivating way to keep making progress.',
+                    'desc' => 'Play along with a professional backing track so you’ll sound (and feel) incredible as you’re learning. It’s a super motivating way to keep making progress.',
                     ],
                     [
                     'position' => 'right',
@@ -486,7 +487,7 @@
                         </div>
                         <div class="align-middle bg-white text-center rounded-lg inline-block overflow-hidden w-11 mr-2">
                             <p class="leading-none tracking-tighter text-xs py-0.5 text-white bg-pianote"><strong>MAR</strong></p>
-                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">28</strong></p>
+                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">25</strong></p>
                         </div>
                     </div>
                 </div>
@@ -537,8 +538,8 @@
                     </tr>
                     <tr>
                         <td>Style</td>
-                        <td>20 Play-along Lessons</td>
-                        <td>In-person</td>
+                        <td>20 Play-Along Lessons</td>
+                        <td>In-Person</td>
                         <td>Self-Directed</td>
                         <td>Self-Directed</td>
                     </tr>
@@ -559,7 +560,7 @@
                     <tr>
                         <td>Access</td>
                         <td>Lifetime Access</td>
-                        <td>One-time</td>
+                        <td>One-Time</td>
                         <td>Varies</td>
                         <td>Lifetime</td>
                     </tr>
@@ -577,7 +578,7 @@
                         @else
                             <td class="rounded-b-xl"><strong>${{ floatval($productPrices['new-piano-players-start-here']->discounted_price) }}</strong></td>
                         @endif
-                        <td class="rounded-bl-xl"><strong>$30-$100</strong><br> per lesson</td>
+                        <td class="rounded-bl-xl"><strong>$50-$100</strong><br> per lesson</td>
                         <td><strong>$89-$270+</strong><br>&nbsp;</td>
                         <td class="rounded-br-xl"><strong>$19-$49</strong><br>&nbsp;</td>
                     </tr>
@@ -721,7 +722,7 @@
 {{--        </div>--}}
 {{--    </section>--}}
     <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #2a2f34 calc(50% + 1px));"></div>
-    <section class="text-white text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#2a2f34;">
+    <section class="text-white text-center px-5 sm:px-6 pb-10 sm:pb-14 lg:pb-20 py-10 sm:py-14 lg:pt-32" style="background-color:#2a2f34;">
         <div class="container max-w-4xl mx-auto">
             <img class="h-28 sm:h-40 lg:h-52 block mx-auto -mt-24 sm:-mt-36 lg:-mt-48 lazyload" data-src="https://cdn.musora.com/image/fetch/w_410,q_auto:best/https://pianote.s3.amazonaws.com/sales/2022/piano-guarantee.png" alt="guarantee badge">
             <h2 class="my-4 sm:my-6 lg:my-8"><strong>The guarantee that lasts<br class="inline sm:hidden"> longer than the course</strong></h2>
@@ -742,7 +743,7 @@
     <section class="text-center relative z-50 overflow-hidden px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#eff7ff;">
         <div class="container mx-auto relative z-50">
             <div class="flex flex-wrap items-center mt-7 sm:mt-10">
-{{--                    @if(is_current_user_a_member())--}}
+                    @if(is_current_user_a_member())
                         <div class="text-left w-full sm:w-1/2 xl:w-5/12 lg:pl-5">
                             <img class="h-20 md:h-20 lg:h-24 lazyload" data-src="https://cdn.musora.com/image/fetch/w_380,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/new-piano-players-start-here-logo-2+1.png" alt="new piano players start here logo">
                             <h2 class="leading-tight mt-2 mb-4 sm:my-4 lg:my-5"><strong>
@@ -755,17 +756,13 @@
                                 <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Learn piano the easy & fun way.</p>
                                 <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Join {{ $nPackOwners ?? 0 }} piano players who have already registered.</p>
                                 <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Click below to get started.</p>
-                                <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Enrollment closes in<br class="inline lg:hidden"> <span class="tzcd-medium text-pianote">a limited time</span>.</p>
+                                <p class="leading-tight mb-3 sm:mb-5"><i class="fas fa-check text-pianote mr-1"></i> Enrollment closes in<br class="inline lg:hidden"> <span class="tzcd-nppsh text-pianote">a limited time</span>.</p>
 
                                 @if(session()->has('success-message'))
                                     <p class="mb-3 text-pianote text-center"><strong>Congrats! You have registered for New Piano Players Start Here.<br class="hidden md:inline"> Check your email for the details.</strong></p>
                                 @endif
 
-                                @if(is_current_user_a_member())
-                                    <h1 class="inline-block mr-4 align-middle text-4xl sm:text-5xl"><s class="opacity-60">${{ 97 }}</s> <strong>FREE</strong></h1>
-                                @else
-                                    <h1 class="inline-block mr-4 align-middle text-4xl sm:text-5xl"><strong>${{ 97 }}</strong></h1>
-                                @endif
+                                <h1 class="inline-block mr-4 align-middle text-4xl sm:text-5xl"><s class="opacity-60">${{ 97 }}</s> <strong>FREE</strong></h1>
 
                                 @if($hasProduct)
                                     <a class="join sold-out medium w-1/2 align-middle">YOU'RE ENROLLED</a>
@@ -773,49 +770,41 @@
                                     <a class="join medium w-1/2 align-middle" href="/cohort-packs/register/new-piano-players-start-here">ENROLL NOW</a>
                                 @endif
 
-                                <p class="text-sm mt-1 mb-5"><em>One-Time Payment. (Just ${{ round((97 / 30), 2) }} per day.)</em></p>
+                                <p class="text-sm mt-2"><em>Free for Pianote members.</em></p>
                             </div>
                         </div>
-{{--                    @else--}}
-{{--                        <div class="flex flex-wrap sm:flex-nowrap items-center text-left w-full max-w-3xl mx-auto xl:w-7/12">--}}
-{{--                            <a href="/ecommerce/add-to-cart?products[30-day-drummer]=1&products[Drumeo-VaterSticks]=1&products[drumeo_access_30-days]=1&locked=true" class="px-5 sm:px-7 lg:px-9 py-7 sm:py-9 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-1/2" style="background-color:#d4eaff;">--}}
-{{--                                <h3><strong>30-Day Drummer</strong></h3>--}}
-{{--                                <p class="text-sm mt-2 mb-5">Just The Course + 2 Bonuses worth $42.94.</p>--}}
-{{--                                <h2 class="inline-block"><strong class="text-4xl">${{ 97 }}</strong></h2> <p class="inline-block text-xs">one time payment.</p><br>--}}
-{{--                                <div class="join smaller my-4">ENROLL NOW</div>--}}
-{{--                                <ul class="list-disc ml-10">--}}
-{{--                                    <li class="text-sm relaxed"><span class="text-pianote">Free</span> Drumsticks</li>--}}
-{{--                                    <li class="text-sm relaxed"><span class="text-pianote">Free</span> 1-Month Drumeo Access</li>--}}
-{{--                                </ul>--}}
-{{--                                <hr class="w-full my-5" style="border-color:#b2cae1">--}}
-{{--                                <p class="leading-loose text-sm"><strong>Key Features</strong><br>--}}
-{{--                                <i class="fas fa-check text-pianote mr-1"></i> Runs February 27 to March 25<br>--}}
-{{--                                <i class="fas fa-check text-pianote mr-1"></i> 24 Guided Workouts<br>--}}
-{{--                                <i class="fas fa-check text-pianote mr-1"></i> 4 Live Q&A Sessions<br>--}}
-{{--                                <i class="fas fa-check text-pianote mr-1"></i> Lifetime Course Access<br>--}}
-{{--                                <i class="fas fa-check text-pianote mr-1"></i> 90-Day Money Back Guarantee</p>--}}
-{{--                            </a>--}}
-{{--                            <a href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-drummer]=1&products[practicepad]=1&products[Drumeo-VaterSticks]=2&products[BeginnerBook]=1&locked=true" class="px-5 sm:px-7 lg:px-9 py-7 sm:py-11 sm:-ml-5 z-10 relative rounded-xl bg-white shadow-lg w-full sm:w-1/2">--}}
-{{--                                <h3><strong>Unlimited Lessons</strong></h3>--}}
-{{--                                <p class="text-sm mt-2 mb-5">1 Year of Drumeo + 5 Bonuses worth $231.89.</p>--}}
-{{--                                <h2 class="inline-block"><strong class="text-4xl">$20</strong>/mo</h2> <p class="inline-block text-xs">Billed annually at $240/yr.</p><br>--}}
-{{--                                <div class="join smaller my-4">GET EVERYTHING</div>--}}
-{{--                                <ul class="list-disc ml-10">--}}
-{{--                                    <li class="text-sm leading-relaxed">Drumeo Annual Membership</li>--}}
-{{--                                    <li class="text-sm leading-relaxed"><span class="text-pianote">Free</span> 30-Day Drummer</li>--}}
-{{--                                    <li class="text-sm leading-relaxed"><span class="text-pianote">Free</span> P4 Practice Pad</li>--}}
-{{--                                    <li class="text-sm leading-relaxed"><span class="text-pianote">Free</span> 2 Pairs of Drumsticks</li>--}}
-{{--                                    <li class="text-sm leading-relaxed"><span class="text-pianote">Free</span> Best Beginner Drum Book</li>--}}
-{{--                                </ul>--}}
-{{--                                <hr class="w-full my-5" style="border-color:#ebf2f8">--}}
-{{--                                <p class="leading-loose text-sm"><strong>Drumeo Membership includes:</strong><br>--}}
-{{--                                <i class="fas fa-check text-pianote mr-1"></i> 10-Level Drumeo Method Curriculum<br>--}}
-{{--                                <i class="fas fa-check text-pianote mr-1"></i> Play Along To 3000+ Popular Songs.<br>--}}
-{{--                                <i class="fas fa-check text-pianote mr-1"></i> Study With 100+ World-Class Drummers.<br>--}}
-{{--                                <i class="fas fa-check text-pianote mr-1"></i> 90-Day Money Back Guarantee</p>--}}
-{{--                            </a>--}}
-{{--                        </div>--}}
-{{--                    @endif--}}
+                    @else
+                    <div class="text-left w-full sm:w-1/2 xl:w-5/12 lg:pl-5">
+                        <img class="h-20 md:h-20 lg:h-24 lazyload" data-src="https://cdn.musora.com/image/fetch/w_380,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/new-piano-players-start-here-logo-2+1.png" alt="new piano players start here logo">
+                        <h2 class="leading-tight mt-2 mb-4 sm:my-4 lg:my-5"><strong>
+                                20 Guided Play-Along Lessons<br>
+                                4 Live Q&A Sessions<br>
+                                Lifetime Course Access
+                            </strong></h2>
+                        <div class="w-full mx-auto sm:mx-0">
+
+                            <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Learn piano the easy & fun way.</p>
+                            <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Join {{ $nPackOwners ?? 0 }} piano players who have already registered.</p>
+                            <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Click below to get started.</p>
+                            <p class="leading-tight mb-3 sm:mb-5"><i class="fas fa-check text-pianote mr-1"></i> Enrollment closes in<br class="inline lg:hidden"> <span class="tzcd-nppsh text-pianote">a limited time</span>.</p>
+
+                            @if(session()->has('success-message'))
+                                <p class="mb-3 text-pianote text-center"><strong>Congrats! You have registered for New Piano Players Start Here.<br class="hidden md:inline"> Check your email for the details.</strong></p>
+                            @endif
+
+                            <h1 class="inline-block mr-4 align-middle text-4xl sm:text-5xl"><strong>${{ 97 }}</strong></h1>
+
+                            @if($hasProduct)
+                                <a class="join sold-out medium w-1/2 align-middle">YOU'RE ENROLLED</a>
+                            @else
+                                <a class="join medium w-1/2 align-middle" href="/ecommerce/add-to-cart?products[new-piano-players-start-here]=1&products[piano-chords-and-scales-guide]=1&locked=true">ENROLL NOW</a>
+                            @endif
+
+                            <p class="text-sm my-2 my-3"><em>One-Time Payment. (Just ${{ round((97 / 30), 2) }} per day.)</em></p>
+                            <p class="text-sm text-pianote"><strong><em>Get the encyclopedia of chords & scales FREE <br class="hidden sm:inline"> when you register before February 20</em></strong></p>
+                        </div>
+                    </div>
+                    @endif
 
 
                 <div class="flex w-full justify-center @if(is_current_user_a_member()) sm:justify-start sm:order-1 sm:w-1/2 xl:w-7/12 sm:pl-5 lg:pl-7  mt-10 sm:mt-0 @else  xl:justify-start xl:order-1 xl:w-5/12 xl:pl-4  mt-10 xl:mt-0 @endif">
@@ -853,7 +842,7 @@
                 ])
                 @include('_partials.components.question-dropdown', [
                 "title" => "What devices can I access the course on?",
-                "desc" => "New Piano Players Start Here is available on your laptop, tablet, or phone. You’ll also have access through the Pianote App after you’ve completed your purchase of the course.",
+                "desc" => "New Piano Players Start Here is available on your laptop, tablet, or phone. You’ll also have access through the Musora App after you’ve completed your purchase of the course.",
                 "num" => '?',
                 ])
             </div>
@@ -909,7 +898,7 @@
         "title" => 'trailer'
     ])
 
-    @include("drumeo.sales.partials._footer")
+    @include("pianote._partials._footer")
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
