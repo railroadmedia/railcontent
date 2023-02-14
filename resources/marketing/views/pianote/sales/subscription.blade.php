@@ -112,7 +112,7 @@
             "hideMenu" => true,
         ])
     @elseif(!empty($month))
-        @include("pianote._partials._nav", [
+        @include("pianote.sales.partials._nav", [
             "subscriptionVersion" => true,
             "fullSubscriptionVersion" => true,
             "trialVersion" => true,
