@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Exceptions\NotAllowedException;
@@ -13,22 +14,22 @@ use Railroad\Railcontent\Requests\ReplyRequest;
 use Railroad\Railcontent\Services\CommentService;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Transformers\DataTransformer;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Railroad\Mailora\Services\MailService;
 
 class CommentJsonController extends Controller
 {
-    /**
-     * @var CommentService
-     */
-    private $commentService;
+    private CommentService $commentService;
+    private MailService $mailService;
 
     /**
-     * CommentJsonController constructor.
-     *
      * @param CommentService $commentService
+     * @param MailService $mailService
      */
-    public function __construct(CommentService $commentService)
+    public function __construct(CommentService $commentService, MailService $mailService)
     {
         $this->commentService = $commentService;
+        $this->mailService = $mailService;
 
         $this->middleware(ConfigService::$controllerMiddleware);
     }
@@ -247,5 +248,60 @@ class CommentJsonController extends Controller
                 'transformer' => DataTransformer::class,
             ]
         );
+    }
+
+    /**
+     * @param $id
+     * @return JsonResponse
+     * @throws \Exception
+     */
+    public function report($id)
+    {
+        $comment = $this->commentService->get($id);
+
+        if (!$comment) {
+            throw new NotFoundHttpException();
+        }
+
+        $currentUser = auth()->user();
+        $brand = config('railcontent.brand');
+
+        $input['subject'] =
+            'Comment reported by '.
+            $currentUser['display_name'].
+            " (".
+            $currentUser['email'].
+            ")";
+        $input['sender-address'] = $currentUser['email'];
+        $input['sender-name'] = $currentUser['display_name'];
+        $input['lines'] = ['The following comment has been reported:'];
+        $input['lines'][] = $comment['comment'];
+        $input['lines'][] = $comment['url'];
+
+        $input['unsubscribeLink'] = '';
+        $input['alert'] =
+            'Comment reported by '.
+            $currentUser['display_name'].
+            " (".
+            $currentUser['email'].
+            ")";
+
+        $input['logo'] = config('mailora.'.$brand.'.logo-link');
+        $input['type'] = 'layouts/inline/alert';
+        $input['recipient'] =  config('mailora.'.$brand.'.report-comment-recipient');
+
+        try {
+            $this->mailService->sendSecure($input);
+        } catch (\Exception $exception) {
+            return response()->json([
+                                        "success" => false,
+                                        "message" => $exception->getMessage()
+                                    ], 500);
+        }
+
+        return response()->json([
+                                 "success" => true,
+                                 "message" => "The comment was reported"
+                             ], 200);
     }
 }
