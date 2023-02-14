@@ -79,10 +79,25 @@ class UserPlaylistsService
      * @param null $brand
      * @return array|mixed[]
      */
-    public function getUserPlaylist($userId, $playlistType, $brand = null, $limit, $page, $term = null, $sort = '-created_at')
-    {
+    public function getUserPlaylist(
+        $userId,
+        $playlistType,
+        $brand = null,
+        $limit,
+        $page,
+        $term = null,
+        $sort = '-created_at'
+    ) {
         $playlists =
-            $this->userPlaylistsRepository->getUserPlaylist($userId, $playlistType, $brand, $limit, $page, $term, $sort);
+            $this->userPlaylistsRepository->getUserPlaylist(
+                $userId,
+                $playlistType,
+                $brand,
+                $limit,
+                $page,
+                $term,
+                $sort
+            );
 
         return Decorator::decorate($playlists, 'playlist');
     }
@@ -115,8 +130,13 @@ class UserPlaylistsService
      * @return mixed|\Railroad\Railcontent\Support\Collection|null
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
-    public function getUserPlaylistContents($playlistId, $contentType = [], $limit = null, $page = 1, $sort = "position")
-    {
+    public function getUserPlaylistContents(
+        $playlistId,
+        $contentType = [],
+        $limit = null,
+        $page = 1,
+        $sort = "position"
+    ) {
         $results = $this->userPlaylistContentRepository->getUserPlaylistContents(
             $playlistId,
             $contentType,
@@ -212,16 +232,24 @@ class UserPlaylistsService
         $importFullSoundsliceAssignment = false,
         $importInstrumentlessSoundsliceAssignment = false
     ) {
-        error_log('Add item to playlist - playlistId :::'.$userPlaylistId.'     contentId:::'.$contentId.'   import all assignments::'.$importAllAssignments.'  import full::'.$importFullSoundsliceAssignment.'  import instrumentless:::'.$importInstrumentlessSoundsliceAssignment);
+        error_log(
+            'Add item to playlist - playlistId :::'.
+            $userPlaylistId.
+            '     contentId:::'.
+            $contentId.
+            '   import all assignments::'.
+            $importAllAssignments.
+            '  import full::'.
+            $importFullSoundsliceAssignment.
+            '  import instrumentless:::'.
+            $importInstrumentlessSoundsliceAssignment
+        );
         $content = $this->contentService->getById($contentId);
 
-        $singularContentTypes = array_diff(
-            array_merge(
-                config('railcontent.showTypes')[config('railcontent.brand')] ?? [],
-                config('railcontent.singularContentTypes')
-            ),
-            ['song']
-        );
+        $singularContentTypes = array_diff(array_merge(
+                                               config('railcontent.showTypes')[config('railcontent.brand')] ?? [],
+                                               config('railcontent.singularContentTypes')
+                                           ), ['song']);
 
         $assignments = $this->contentService->countLessonsAndAssignments($contentId);
 
@@ -329,7 +357,7 @@ class UserPlaylistsService
     public function getPlaylist($playlistId)
     {
         $playlist = $this->userPlaylistsRepository->getById($playlistId);
-        if(!$playlist || ($playlist['user_id']!= auth()->id() && $playlist['private'] == 1)){
+        if (!$playlist || ($playlist['user_id'] != auth()->id() && $playlist['private'] == 1)) {
             return null;
         }
 
@@ -347,7 +375,8 @@ class UserPlaylistsService
                 ->where('playlist_id', $playlistId)
                 ->count() > 0;
 
-        $playlist['user_playlist_item_id'] = $this->userPlaylistContentRepository->getFirstContentByPlaylistId($playlistId)['id'] ?? null;
+        $playlist['user_playlist_item_id'] =
+            $this->userPlaylistContentRepository->getFirstContentByPlaylistId($playlistId)['id'] ?? null;
 
         return \Arr::first(Decorator::decorate([$playlist], 'playlist'));
     }
@@ -517,7 +546,7 @@ class UserPlaylistsService
             return $itemPlaylist;
         }
 
-        $deleted =  $this->userPlaylistContentRepository->deletePlaylistItemAndReposition($itemPlaylist);
+        $deleted = $this->userPlaylistContentRepository->deletePlaylistItemAndReposition($itemPlaylist);
 
         event(new PlaylistItemsUpdated($itemPlaylist['user_playlist_id']));
 
@@ -628,7 +657,8 @@ class UserPlaylistsService
      * @param $data
      * @return int
      */
-    public function duplicatePlaylistItem($playlistId, $data){
+    public function duplicatePlaylistItem($playlistId, $data)
+    {
         $input = [
             'content_id' => $data['content_id'],
             'user_playlist_id' => $playlistId,
@@ -641,6 +671,41 @@ class UserPlaylistsService
         ];
 
         return $this->userPlaylistContentRepository->create($input);
+    }
 
+    /**
+     * @param $contentId
+     * @param $brand
+     * @return bool
+     */
+    public function updatePlaylistsLastProgress($contentId, $brand)
+    {
+        $playlists =
+            $this->userPlaylistsRepository->query()
+                ->select('user_playlist_id')
+                ->join(
+                    'railcontent_user_playlist_content',
+                    'railcontent_user_playlists.id',
+                    '=',
+                    'railcontent_user_playlist_content.user_playlist_id'
+                )
+                ->where('user_id', '=', auth()->id())
+                ->where('type', 'user-playlist')
+                ->where('railcontent_user_playlist_content.content_id', '=', $contentId)
+                ->where('railcontent_user_playlists.brand', '=', $brand)
+                ->get();
+        $playlistIds = $playlists->pluck('user_playlist_id');
+        if (!empty($playlistIds)) {
+            $this->userPlaylistsRepository->query()
+                ->whereIn('id', $playlistIds)
+                ->update(
+                    [
+                        'last_progress' => Carbon::now()
+                            ->toDateTimeString(),
+                    ]
+                );
+        }
+
+        return true;
     }
 }
