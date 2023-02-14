@@ -199,9 +199,16 @@ class SalesController extends BaseController
     public function newPianoPlayers()
     {
         /** @var \App\Modules\Ecommerce\Services\UserProductService $userProductService */
+        $productId = 517;
         $userProductService = app(\App\Modules\Ecommerce\Services\UserProductService::class);
-        $hasProduct = user() && $userProductService->hasProductNotCached(user()?->id, 517);
-        return view('pianote.products.new-piano-players', ['theme' => 'pianote', 'hasProduct' => $hasProduct]);
+        $hasProduct = user() && $userProductService->hasProductNotCached(user()?->id, $productId);
+        $nPackOwners = $userProductService->getNumberProductOwners($productId);
+
+        return view('pianote.products.new-piano-players', [
+            'theme' => 'pianote',
+            'hasProduct' => $hasProduct,
+            'nPackOwners' => $nPackOwners,
+        ]);
     }
     public function newPianoPlayersDeal()
     {

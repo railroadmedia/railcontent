@@ -201,12 +201,6 @@
     </style>
 @stop()
 
-@section('body-data')
-    x-data="{
-    modal: {{ empty(user()) ? true : false }},
-    }"
-@endsection
-
 @section('global-body')
     @include('pianote._partials._nav', [
         "cartVersion" => true
@@ -218,11 +212,6 @@
                     "noBreadcrumb" => true
     ])
 
-    @if(!empty($products['new-piano-players-start-here']->getPublicStockCount()))
-        @php
-        $students = number_format($products['new-piano-players-start-here']->getPublicStockCount())
-        @endphp
-    @endif
     @php
         if (is_current_user_a_member()) {
             $registerButtonUrl = '/cohort-packs/register/new-piano-players-start-here';
@@ -274,9 +263,15 @@
                         <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-pianote"></i><br> Play  <br>every day</p>
                         <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-pianote"></i><br> No theory <br> required</p>
                     </div>
+
                     @if(session()->has('success-message'))
                         <p class="mb-3 lg:-mb-7 mt-3 text-pianote text-center"><strong>Congrats! You have registered for New Piano Players Start Here.<br class="hidden md:inline"> Check your email for the details.</strong></p>
                     @endif
+
+                    @if(!$hasProduct && is_current_user_a_member())
+                        <p class="mb-3 lg:-mb-7 mt-5 mb-2 text-drumeo text-left"><strong>You are a Pianote member! <br>Enroll for free by clicking on the button below.</strong></p>
+                    @endif
+
                     <div class="flex flex-wrap sm:flex-nowrap items-center mt-6 sm:mt-5 lg:mt-10">
                         <div class="w-full sm:w-1/2 text-center sm:pr-2">
                             @if($hasProduct)
@@ -284,15 +279,15 @@
                             @else
                                 <a href="{{ $registerButtonUrl }}" class="join medium w-full @if(!is_current_user_a_member()) anchor-slide @endif">ENROLL NOW</a>
                             @endif
-                            @if(is_current_user_a_member())
-                                <p class="opacity-50 text-sm mt-1 mb-5 sm:mb-0">Registration is FREE for Pianote Members.</p>
-                            @else
-                                <p class="opacity-50 text-sm mt-1 mb-5 sm:mb-0">For just $1/day.</p>
+                            @if(!auth()->check())
+                                <p class="opacity-50 text-sm mt-2 mb-5 sm:mb-0 underline hover:text-pianote">
+                                    <a href="{{ get_musora_brand_base_url() }}/new-piano-players">Pianote Members register for free here.</a>
+                                </p>
                             @endif
                         </div>
                         <div class="w-full sm:w-1/2 lg:pb-5">
                             <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/Joined_profiles.png">
-                            <p class="inline-block leading-tight text-sm align-middle">Join {{ $students ?? 0 }} piano players who<br> have already registered.</p>
+                            <p class="inline-block leading-tight text-sm align-middle">Join {{ $nPackOwners ?? 0 }} piano players who<br> have already registered.</p>
                         </div>
                     </div>
                 </div>
@@ -306,7 +301,7 @@
             <div class="flex flex-wrap sm:flex-nowrap text-center border rounded-lg border-gray-300 mt-8 lg:mt-12 mb-2 lg:mb-4">
                 <div class="w-full sm:w-auto border-b sm:border-b-0 sm:border-r border-gray-300 py-4 sm:py-3 lg:py-4">
                     <p class="tracking-wide opacity-70 text-sm">STARTS ON</p>
-                    <h4 class="px-3 lg:px-5"><strong>February 27</strong></h4>
+                    <h4 class="px-3 lg:px-5"><strong>February 27th</strong></h4>
                     <hr class="border-gray-300 my-4 sm:my-2 lg:my-4">
                     <p class="text-sm px-3 lg:px-5">
                         Enrollment closes in<br class="inline lg:hidden"> <span class="tzcd-medium text-pianote">a limited time</span>.
@@ -462,7 +457,7 @@
                     class="join medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 @if(!is_current_user_a_member()) anchor-slide @endif">ENROLL NOW</a><br>
             @endif
             <img class="h-7 mr-1 mb-5 sm:mb-10 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/Joined_profiles.png" alt="joined profiles">
-            <p class="inline-block leading-tight text-sm align-middle mb-5 sm:mb-10">Join {{ $students ?? 0 }} piano players who<br> have already registered.</p>
+            <p class="inline-block leading-tight text-sm align-middle mb-5 sm:mb-10">Join {{ $nPackOwners ?? 0 }} piano players who<br> have already registered.</p>
 
         </div>
     </section>
@@ -700,7 +695,7 @@
                     class="join medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 @if(!is_current_user_a_member()) anchor-slide @endif">ENROLL NOW</a><br>
             @endif
             <img class="h-7 mr-1 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/Joined_profiles.png">
-            <p class="inline-block leading-tight text-sm align-middle">Join {{ $students ?? 0 }} piano players who<br> have already registered.</p>
+            <p class="inline-block leading-tight text-sm align-middle">Join {{ $nPackOwners ?? 0 }} piano players who<br> have already registered.</p>
         </div>
     </section>
 {{--    <section class="text-white text-center px-5 sm:px-6 py-10 sm:py-16 lg:py-20" style="background:linear-gradient(to bottom, #0b76db, #074c8e);">--}}
@@ -758,7 +753,7 @@
                             <div class="w-full mx-auto sm:mx-0">
 
                                 <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Learn piano the easy & fun way.</p>
-                                <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Join {{ $students ?? 0 }} piano players who have already registered.</p>
+                                <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Join {{ $nPackOwners ?? 0 }} piano players who have already registered.</p>
                                 <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Click below to get started.</p>
                                 <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Enrollment closes in<br class="inline lg:hidden"> <span class="tzcd-medium text-pianote">a limited time</span>.</p>
 
@@ -775,7 +770,7 @@
                                 @if($hasProduct)
                                     <a class="join sold-out medium w-1/2 align-middle">YOU'RE ENROLLED</a>
                                 @else
-                                    <a class="join medium w-1/2 align-middle" href="{-- TODO --}">ENROLL NOW</a>
+                                    <a class="join medium w-1/2 align-middle" href="/cohort-packs/register/new-piano-players-start-here">ENROLL NOW</a>
                                 @endif
 
                                 <p class="text-sm mt-1 mb-5"><em>One-Time Payment. (Just ${{ round((97 / 30), 2) }} per day.)</em></p>
@@ -910,21 +905,9 @@
 
     @include('drumeo.sales.partials._video-modal',[
         'modalId' => "trailer",
-        "video" => '//player.vimeo.com/video/738385463?autoplay=1',
+        "video" => '//player.vimeo.com/video/798501810?autoplay=1',
         "title" => 'trailer'
     ])
-
-    @component('_partials.components.modal', ['name' => 'modal'])
-        @slot('content')
-            <div class="max-w-xl mx-auto bg-white text-center p-10 rounded-xl">
-                <img class="h-24" src="https://cdn.musora.com/image/fetch/w_440,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/new-piano-players-start-here-logo-2+1.png" alt="new piano starts here logo" />
-                <h4 class="my-4"><strong>Are you an existing member?</strong></h4>
-                <p class="mb-6">All existing members will get this course for free! Make sure to login before proceeding.</p>
-                <a href="{{get_musora_brand_base_url()}}/login" class="join medium w-full max-w-md mb-2">Login</a><br>
-                <p class="text-pianote font-bebas cursor-pointer tracking-widest" @click="modal = false;">NO THANKS</p>
-            </div>
-        @endslot
-    @endcomponent
 
     @include("drumeo.sales.partials._footer")
 

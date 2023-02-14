@@ -23,4 +23,6 @@ Route::domain('{musoraDomain}')
     ->middleware(['web_authenticated'])
     ->group(function () {
         Route::get('/30-day-drummer', [SalesController::class, 'thirtyDayDrummer']);
+        Route::get('/new-piano-players', [\App\Http\Controllers\Pianote\SalesController::class, 'newPianoPlayers'] );
+
     });
