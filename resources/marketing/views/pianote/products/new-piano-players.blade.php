@@ -248,7 +248,7 @@
                         </strong></h1>
                     <h2 class="-mt-3 sm:-mt-1 lg:mt-0">in just 30 days.</h2>
 
-                    <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>Save your seat in the first-ever <br class="inline lg:hidden">class starting February 27.</strong></h6>
+                    <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>Save your seat in the first-ever <br class="inline lg:hidden">class starting February 27th.</strong></h6>
 
                     <div class="mt-6 mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top cursor-hover autoplay-video lazyload" style="padding-bottom: 75%;" data-bg="https://cdn.musora.com/image/fetch/w_850,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/header-thumb-m2.jpg" data-open="trailer">
                         <div class="join white smaller absolute bottom-1 left-1"><i class="fas fa-play"></i> Watch Trailer</div>
@@ -311,7 +311,7 @@
                     <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3 mb-4 sm:mb-0">
                         <i class="far fa-fw mr-3 sm:mr-0 fa-calendar-day text-pianote text-2xl"></i>
                         <p class="leading-tight mx-0"><strong class="font-black">Course Dates</strong><br>
-                            <span class="text-sm"> February 27 to<br class="hidden sm:inline"> March 28</span></p>
+                            <span class="text-sm"> February 27th to<br class="hidden sm:inline"> March 28th</span></p>
                     </div>
                     <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3 mb-4 sm:mb-0">
                         <i class="far fa-fw mr-3 sm:mr-0 fa-clock text-pianote text-2xl"></i>
@@ -725,7 +725,7 @@
     <section class="text-white text-center px-5 sm:px-6 pb-10 sm:pb-14 lg:pb-20 py-10 sm:py-14 lg:pt-32" style="background-color:#2a2f34;">
         <div class="container max-w-4xl mx-auto">
             <img class="h-28 sm:h-40 lg:h-52 block mx-auto -mt-24 sm:-mt-36 lg:-mt-48 lazyload" data-src="https://cdn.musora.com/image/fetch/w_410,q_auto:best/https://pianote.s3.amazonaws.com/sales/2022/piano-guarantee.png" alt="guarantee badge">
-            <h2 class="my-4 sm:my-6 lg:my-8"><strong>The guarantee that lasts<br class="inline sm:hidden"> longer than the course.</strong></h2>
+            <h2 class="my-4 sm:my-6 lg:my-8"><strong>The guarantee that lasts<br> longer than the course.</strong></h2>
 
             <h6 class="leading-normal">New Piano Players Start Here is all about getting you playing beautiful piano in the shortest amount of time. For less than the cost of just 2 private lessons, you’ll have a guided path to improve your playing, build your confidence, and start your journey on the piano.
                 <br><br>
@@ -747,9 +747,9 @@
                         <div class="text-left w-full sm:w-1/2 xl:w-5/12 lg:pl-5">
                             <img class="h-20 md:h-20 lg:h-24 lazyload" data-src="https://cdn.musora.com/image/fetch/w_380,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/new-piano-players-start-here-logo-2+1.png" alt="new piano players start here logo">
                             <h2 class="leading-tight mt-2 mb-4 sm:my-4 lg:my-5"><strong>
-                                    20 Guided Play-Along Lessons<br>
-                                    4 Live Q&A Sessions<br>
-                                    Lifetime Course Access
+                                    20 Guided Play-Along Lessons.<br>
+                                    4 Live Q&A Sessions.<br>
+                                    Lifetime Course Access.
                                 </strong></h2>
                             <div class="w-full mx-auto sm:mx-0">
 
@@ -801,7 +801,7 @@
                             @endif
 
                             <p class="text-sm my-2 my-3"><em>One-Time Payment. (Just ${{ round((97 / 30), 2) }} per day.)</em></p>
-                            <p class="text-sm text-pianote"><strong><em>Get the encyclopedia of chords & scales FREE <br class="hidden sm:inline"> when you register before February 20</em></strong></p>
+                            <p class="text-sm text-pianote"><strong><em>Get the encyclopedia of chords & scales FREE <br class="hidden sm:inline"> when you register before February 20th</em></strong></p>
                         </div>
                     </div>
                     @endif
