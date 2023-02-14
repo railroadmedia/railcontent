@@ -756,7 +756,7 @@
                                 <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Learn piano the easy & fun way.</p>
                                 <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Join {{ $nPackOwners ?? 0 }} piano players who have already registered.</p>
                                 <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Click below to get started.</p>
-                                <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Enrollment closes in<br class="inline lg:hidden"> <span class="tzcd-nppsh text-pianote">a limited time</span>.</p>
+                                <p class="leading-tight mb-3 sm:mb-5"><i class="fas fa-check text-pianote mr-1"></i> Enrollment closes in<br class="inline lg:hidden"> <span class="tzcd-nppsh text-pianote">a limited time</span>.</p>
 
                                 @if(session()->has('success-message'))
                                     <p class="mb-3 text-pianote text-center"><strong>Congrats! You have registered for New Piano Players Start Here.<br class="hidden md:inline"> Check your email for the details.</strong></p>
@@ -770,7 +770,7 @@
                                     <a class="join medium w-1/2 align-middle" href="/cohort-packs/register/new-piano-players-start-here">ENROLL NOW</a>
                                 @endif
 
-                                <p class="text-sm mt-1 mb-5"><em>Free for Pianote members.</em></p>
+                                <p class="text-sm mt-2"><em>Free for Pianote members.</em></p>
                             </div>
                         </div>
                     @else
@@ -786,7 +786,7 @@
                             <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Learn piano the easy & fun way.</p>
                             <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Join {{ $nPackOwners ?? 0 }} piano players who have already registered.</p>
                             <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Click below to get started.</p>
-                            <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Enrollment closes in<br class="inline lg:hidden"> <span class="tzcd-nppsh text-pianote">a limited time</span>.</p>
+                            <p class="leading-tight mb-3 sm:mb-5"><i class="fas fa-check text-pianote mr-1"></i> Enrollment closes in<br class="inline lg:hidden"> <span class="tzcd-nppsh text-pianote">a limited time</span>.</p>
 
                             @if(session()->has('success-message'))
                                 <p class="mb-3 text-pianote text-center"><strong>Congrats! You have registered for New Piano Players Start Here.<br class="hidden md:inline"> Check your email for the details.</strong></p>
@@ -797,11 +797,11 @@
                             @if($hasProduct)
                                 <a class="join sold-out medium w-1/2 align-middle">YOU'RE ENROLLED</a>
                             @else
-                                <a class="join medium w-1/2 align-middle" href="/cohort-packs/register/new-piano-players-start-here">ENROLL NOW</a>
+                                <a class="join medium w-1/2 align-middle" href="/ecommerce/add-to-cart?products[new-piano-players-start-here]=1&products[piano-chords-and-scales-guide]=1&locked=true">ENROLL NOW</a>
                             @endif
 
-                            <p class="text-sm mt-1 mb-5"><em>One-Time Payment. (Just ${{ round((97 / 30), 2) }} per day.)</em></p>
-                            <p class="text-sm mt-1 mb-5 text-pianote"><strong><em>Get the encyclopedia of chords & scales FREE when you register before February 20</em></strong></p>
+                            <p class="text-sm my-2 my-3"><em>One-Time Payment. (Just ${{ round((97 / 30), 2) }} per day.)</em></p>
+                            <p class="text-sm text-pianote"><strong><em>Get the encyclopedia of chords & scales FREE <br class="hidden sm:inline"> when you register before February 20</em></strong></p>
                         </div>
                     </div>
                     @endif
