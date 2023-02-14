@@ -304,7 +304,7 @@
                     <h4 class="px-3 lg:px-5"><strong>February 27th</strong></h4>
                     <hr class="border-gray-300 my-4 sm:my-2 lg:my-4">
                     <p class="text-sm px-3 lg:px-5">
-                        Enrollment closes in<br class="inline lg:hidden"> <span class="tzcd-medium text-pianote">a limited time</span>.
+                        Enrollment closes in<br class="inline lg:hidden"> <span class="tzcd-nppsh text-pianote">a limited time</span>.
                     </p>
                 </div>
                 <div class="flex flex-wrap sm:flex-nowrap items-center justify-evenly w-full sm:w-auto sm:flex-grow py-4 sm:py-3 lg:py-4 text-left sm:text-center">
@@ -756,17 +756,13 @@
                                 <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Learn piano the easy & fun way.</p>
                                 <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Join {{ $nPackOwners ?? 0 }} piano players who have already registered.</p>
                                 <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Click below to get started.</p>
-                                <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Enrollment closes in<br class="inline lg:hidden"> <span class="tzcd-medium text-pianote">a limited time</span>.</p>
+                                <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Enrollment closes in<br class="inline lg:hidden"> <span class="tzcd-nppsh text-pianote">a limited time</span>.</p>
 
                                 @if(session()->has('success-message'))
                                     <p class="mb-3 text-pianote text-center"><strong>Congrats! You have registered for New Piano Players Start Here.<br class="hidden md:inline"> Check your email for the details.</strong></p>
                                 @endif
 
-                                @if(is_current_user_a_member())
-                                    <h1 class="inline-block mr-4 align-middle text-4xl sm:text-5xl"><s class="opacity-60">${{ 97 }}</s> <strong>FREE</strong></h1>
-                                @else
-                                    <h1 class="inline-block mr-4 align-middle text-4xl sm:text-5xl"><strong>${{ 97 }}</strong></h1>
-                                @endif
+                                <h1 class="inline-block mr-4 align-middle text-4xl sm:text-5xl"><s class="opacity-60">${{ 97 }}</s> <strong>FREE</strong></h1>
 
                                 @if($hasProduct)
                                     <a class="join sold-out medium w-1/2 align-middle">YOU'RE ENROLLED</a>
@@ -774,48 +770,40 @@
                                     <a class="join medium w-1/2 align-middle" href="/cohort-packs/register/new-piano-players-start-here">ENROLL NOW</a>
                                 @endif
 
-                                <p class="text-sm mt-1 mb-5"><em>One-Time Payment. (Just ${{ round((97 / 30), 2) }} per day.)</em></p>
+                                <p class="text-sm mt-1 mb-5"><em>Free for Pianote members.</em></p>
                             </div>
                         </div>
                     @else
-                        <div class="flex flex-wrap sm:flex-nowrap items-center text-left w-full max-w-3xl mx-auto xl:w-7/12">
-                            <a href="/ecommerce/add-to-cart?products[30-day-drummer]=1&products[Drumeo-VaterSticks]=1&products[drumeo_access_30-days]=1&locked=true" class="px-5 sm:px-7 lg:px-9 py-7 sm:py-9 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-1/2" style="background-color:#d4eaff;">
-                                <h3><strong>Starter Bundle</strong></h3>
-                                <p class="text-sm mt-2 mb-5">New Piano Players Start Here + Chords & Scales Book</p>
-                                <h2 class="inline-block"><strong class="text-4xl">${{ 97 }}</strong></h2> <p class="inline-block text-xs">one time payment.</p><br>
-                                <div class="join smaller my-4">ENROLL NOW</div>
-                                <ul class="list-disc ml-10">
-                                    <li class="text-sm relaxed"><span class="text-pianote">Free</span> Drumsticks</li>
-                                    <li class="text-sm relaxed"><span class="text-pianote">Free</span> 1-Month Drumeo Access</li>
-                                </ul>
-                                <hr class="w-full my-5" style="border-color:#b2cae1">
-                                <p class="leading-loose text-sm"><strong>Key Features</strong><br>
-                                <i class="fas fa-check text-pianote mr-1"></i> Runs February 27 to March 25<br>
-                                <i class="fas fa-check text-pianote mr-1"></i> 24 Guided Workouts<br>
-                                <i class="fas fa-check text-pianote mr-1"></i> 4 Live Q&A Sessions<br>
-                                <i class="fas fa-check text-pianote mr-1"></i> Lifetime Course Access<br>
-                                <i class="fas fa-check text-pianote mr-1"></i> 90-Day Money Back Guarantee</p>
-                            </a>
-                            <a href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-drummer]=1&products[practicepad]=1&products[Drumeo-VaterSticks]=2&products[BeginnerBook]=1&locked=true" class="px-5 sm:px-7 lg:px-9 py-7 sm:py-11 sm:-ml-5 z-10 relative rounded-xl bg-white shadow-lg w-full sm:w-1/2">
-                                <h3><strong>Unlimited Lessons</strong></h3>
-                                <p class="text-sm mt-2 mb-5">1 Year of Drumeo + 5 Bonuses worth $231.89.</p>
-                                <h2 class="inline-block"><strong class="text-4xl">$20</strong>/mo</h2> <p class="inline-block text-xs">Billed annually at $240/yr.</p><br>
-                                <div class="join smaller my-4">GET EVERYTHING</div>
-                                <ul class="list-disc ml-10">
-                                    <li class="text-sm leading-relaxed">Drumeo Annual Membership</li>
-                                    <li class="text-sm leading-relaxed"><span class="text-pianote">Free</span> 30-Day Drummer</li>
-                                    <li class="text-sm leading-relaxed"><span class="text-pianote">Free</span> P4 Practice Pad</li>
-                                    <li class="text-sm leading-relaxed"><span class="text-pianote">Free</span> 2 Pairs of Drumsticks</li>
-                                    <li class="text-sm leading-relaxed"><span class="text-pianote">Free</span> Best Beginner Drum Book</li>
-                                </ul>
-                                <hr class="w-full my-5" style="border-color:#ebf2f8">
-                                <p class="leading-loose text-sm"><strong>Drumeo Membership includes:</strong><br>
-                                <i class="fas fa-check text-pianote mr-1"></i> 10-Level Drumeo Method Curriculum<br>
-                                <i class="fas fa-check text-pianote mr-1"></i> Play Along To 3000+ Popular Songs.<br>
-                                <i class="fas fa-check text-pianote mr-1"></i> Study With 100+ World-Class Drummers.<br>
-                                <i class="fas fa-check text-pianote mr-1"></i> 90-Day Money Back Guarantee</p>
-                            </a>
+                    <div class="text-left w-full sm:w-1/2 xl:w-5/12 lg:pl-5">
+                        <img class="h-20 md:h-20 lg:h-24 lazyload" data-src="https://cdn.musora.com/image/fetch/w_380,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/new-piano-players-start-here-logo-2+1.png" alt="new piano players start here logo">
+                        <h2 class="leading-tight mt-2 mb-4 sm:my-4 lg:my-5"><strong>
+                                20 Guided Play-Along Lessons<br>
+                                4 Live Q&A Sessions<br>
+                                Lifetime Course Access
+                            </strong></h2>
+                        <div class="w-full mx-auto sm:mx-0">
+
+                            <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Learn piano the easy & fun way.</p>
+                            <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Join {{ $nPackOwners ?? 0 }} piano players who have already registered.</p>
+                            <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Click below to get started.</p>
+                            <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Enrollment closes in<br class="inline lg:hidden"> <span class="tzcd-nppsh text-pianote">a limited time</span>.</p>
+
+                            @if(session()->has('success-message'))
+                                <p class="mb-3 text-pianote text-center"><strong>Congrats! You have registered for New Piano Players Start Here.<br class="hidden md:inline"> Check your email for the details.</strong></p>
+                            @endif
+
+                            <h1 class="inline-block mr-4 align-middle text-4xl sm:text-5xl"><strong>${{ 97 }}</strong></h1>
+
+                            @if($hasProduct)
+                                <a class="join sold-out medium w-1/2 align-middle">YOU'RE ENROLLED</a>
+                            @else
+                                <a class="join medium w-1/2 align-middle" href="/cohort-packs/register/new-piano-players-start-here">ENROLL NOW</a>
+                            @endif
+
+                            <p class="text-sm mt-1 mb-5"><em>One-Time Payment. (Just ${{ round((97 / 30), 2) }} per day.)</em></p>
+                            <p class="text-sm mt-1 mb-5 text-pianote"><strong><em>Get the encyclopedia of chords & scales FREE when you register before February 20</em></strong></p>
                         </div>
+                    </div>
                     @endif
 
 
