@@ -538,8 +538,8 @@
                     </tr>
                     <tr>
                         <td>Style</td>
-                        <td>20 Play-along Lessons</td>
-                        <td>In-person</td>
+                        <td>20 Play-Along Lessons</td>
+                        <td>In-Person</td>
                         <td>Self-Directed</td>
                         <td>Self-Directed</td>
                     </tr>
@@ -560,7 +560,7 @@
                     <tr>
                         <td>Access</td>
                         <td>Lifetime Access</td>
-                        <td>One-time</td>
+                        <td>One-Time</td>
                         <td>Varies</td>
                         <td>Lifetime</td>
                     </tr>
@@ -578,7 +578,7 @@
                         @else
                             <td class="rounded-b-xl"><strong>${{ floatval($productPrices['new-piano-players-start-here']->discounted_price) }}</strong></td>
                         @endif
-                        <td class="rounded-bl-xl"><strong>$30-$100</strong><br> per lesson</td>
+                        <td class="rounded-bl-xl"><strong>$50-$100</strong><br> per lesson</td>
                         <td><strong>$89-$270+</strong><br>&nbsp;</td>
                         <td class="rounded-br-xl"><strong>$19-$49</strong><br>&nbsp;</td>
                     </tr>
@@ -743,7 +743,7 @@
     <section class="text-center relative z-50 overflow-hidden px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#eff7ff;">
         <div class="container mx-auto relative z-50">
             <div class="flex flex-wrap items-center mt-7 sm:mt-10">
-{{--                    @if(is_current_user_a_member())--}}
+                    @if(is_current_user_a_member())
                         <div class="text-left w-full sm:w-1/2 xl:w-5/12 lg:pl-5">
                             <img class="h-20 md:h-20 lg:h-24 lazyload" data-src="https://cdn.musora.com/image/fetch/w_380,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/new-piano-players-start-here-logo-2+1.png" alt="new piano players start here logo">
                             <h2 class="leading-tight mt-2 mb-4 sm:my-4 lg:my-5"><strong>
@@ -777,46 +777,46 @@
                                 <p class="text-sm mt-1 mb-5"><em>One-Time Payment. (Just ${{ round((97 / 30), 2) }} per day.)</em></p>
                             </div>
                         </div>
-{{--                    @else--}}
-{{--                        <div class="flex flex-wrap sm:flex-nowrap items-center text-left w-full max-w-3xl mx-auto xl:w-7/12">--}}
-{{--                            <a href="/ecommerce/add-to-cart?products[30-day-drummer]=1&products[Drumeo-VaterSticks]=1&products[drumeo_access_30-days]=1&locked=true" class="px-5 sm:px-7 lg:px-9 py-7 sm:py-9 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-1/2" style="background-color:#d4eaff;">--}}
-{{--                                <h3><strong>30-Day Drummer</strong></h3>--}}
-{{--                                <p class="text-sm mt-2 mb-5">Just The Course + 2 Bonuses worth $42.94.</p>--}}
-{{--                                <h2 class="inline-block"><strong class="text-4xl">${{ 97 }}</strong></h2> <p class="inline-block text-xs">one time payment.</p><br>--}}
-{{--                                <div class="join smaller my-4">ENROLL NOW</div>--}}
-{{--                                <ul class="list-disc ml-10">--}}
-{{--                                    <li class="text-sm relaxed"><span class="text-pianote">Free</span> Drumsticks</li>--}}
-{{--                                    <li class="text-sm relaxed"><span class="text-pianote">Free</span> 1-Month Drumeo Access</li>--}}
-{{--                                </ul>--}}
-{{--                                <hr class="w-full my-5" style="border-color:#b2cae1">--}}
-{{--                                <p class="leading-loose text-sm"><strong>Key Features</strong><br>--}}
-{{--                                <i class="fas fa-check text-pianote mr-1"></i> Runs February 27 to March 25<br>--}}
-{{--                                <i class="fas fa-check text-pianote mr-1"></i> 24 Guided Workouts<br>--}}
-{{--                                <i class="fas fa-check text-pianote mr-1"></i> 4 Live Q&A Sessions<br>--}}
-{{--                                <i class="fas fa-check text-pianote mr-1"></i> Lifetime Course Access<br>--}}
-{{--                                <i class="fas fa-check text-pianote mr-1"></i> 90-Day Money Back Guarantee</p>--}}
-{{--                            </a>--}}
-{{--                            <a href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-drummer]=1&products[practicepad]=1&products[Drumeo-VaterSticks]=2&products[BeginnerBook]=1&locked=true" class="px-5 sm:px-7 lg:px-9 py-7 sm:py-11 sm:-ml-5 z-10 relative rounded-xl bg-white shadow-lg w-full sm:w-1/2">--}}
-{{--                                <h3><strong>Unlimited Lessons</strong></h3>--}}
-{{--                                <p class="text-sm mt-2 mb-5">1 Year of Drumeo + 5 Bonuses worth $231.89.</p>--}}
-{{--                                <h2 class="inline-block"><strong class="text-4xl">$20</strong>/mo</h2> <p class="inline-block text-xs">Billed annually at $240/yr.</p><br>--}}
-{{--                                <div class="join smaller my-4">GET EVERYTHING</div>--}}
-{{--                                <ul class="list-disc ml-10">--}}
-{{--                                    <li class="text-sm leading-relaxed">Drumeo Annual Membership</li>--}}
-{{--                                    <li class="text-sm leading-relaxed"><span class="text-pianote">Free</span> 30-Day Drummer</li>--}}
-{{--                                    <li class="text-sm leading-relaxed"><span class="text-pianote">Free</span> P4 Practice Pad</li>--}}
-{{--                                    <li class="text-sm leading-relaxed"><span class="text-pianote">Free</span> 2 Pairs of Drumsticks</li>--}}
-{{--                                    <li class="text-sm leading-relaxed"><span class="text-pianote">Free</span> Best Beginner Drum Book</li>--}}
-{{--                                </ul>--}}
-{{--                                <hr class="w-full my-5" style="border-color:#ebf2f8">--}}
-{{--                                <p class="leading-loose text-sm"><strong>Drumeo Membership includes:</strong><br>--}}
-{{--                                <i class="fas fa-check text-pianote mr-1"></i> 10-Level Drumeo Method Curriculum<br>--}}
-{{--                                <i class="fas fa-check text-pianote mr-1"></i> Play Along To 3000+ Popular Songs.<br>--}}
-{{--                                <i class="fas fa-check text-pianote mr-1"></i> Study With 100+ World-Class Drummers.<br>--}}
-{{--                                <i class="fas fa-check text-pianote mr-1"></i> 90-Day Money Back Guarantee</p>--}}
-{{--                            </a>--}}
-{{--                        </div>--}}
-{{--                    @endif--}}
+                    @else
+                        <div class="flex flex-wrap sm:flex-nowrap items-center text-left w-full max-w-3xl mx-auto xl:w-7/12">
+                            <a href="/ecommerce/add-to-cart?products[30-day-drummer]=1&products[Drumeo-VaterSticks]=1&products[drumeo_access_30-days]=1&locked=true" class="px-5 sm:px-7 lg:px-9 py-7 sm:py-9 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-1/2" style="background-color:#d4eaff;">
+                                <h3><strong>Starter Bundle</strong></h3>
+                                <p class="text-sm mt-2 mb-5">New Piano Players Start Here + Chords & Scales Book</p>
+                                <h2 class="inline-block"><strong class="text-4xl">${{ 97 }}</strong></h2> <p class="inline-block text-xs">one time payment.</p><br>
+                                <div class="join smaller my-4">ENROLL NOW</div>
+                                <ul class="list-disc ml-10">
+                                    <li class="text-sm relaxed"><span class="text-pianote">Free</span> Drumsticks</li>
+                                    <li class="text-sm relaxed"><span class="text-pianote">Free</span> 1-Month Drumeo Access</li>
+                                </ul>
+                                <hr class="w-full my-5" style="border-color:#b2cae1">
+                                <p class="leading-loose text-sm"><strong>Key Features</strong><br>
+                                <i class="fas fa-check text-pianote mr-1"></i> Runs February 27 to March 25<br>
+                                <i class="fas fa-check text-pianote mr-1"></i> 24 Guided Workouts<br>
+                                <i class="fas fa-check text-pianote mr-1"></i> 4 Live Q&A Sessions<br>
+                                <i class="fas fa-check text-pianote mr-1"></i> Lifetime Course Access<br>
+                                <i class="fas fa-check text-pianote mr-1"></i> 90-Day Money Back Guarantee</p>
+                            </a>
+                            <a href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-drummer]=1&products[practicepad]=1&products[Drumeo-VaterSticks]=2&products[BeginnerBook]=1&locked=true" class="px-5 sm:px-7 lg:px-9 py-7 sm:py-11 sm:-ml-5 z-10 relative rounded-xl bg-white shadow-lg w-full sm:w-1/2">
+                                <h3><strong>Unlimited Lessons</strong></h3>
+                                <p class="text-sm mt-2 mb-5">1 Year of Drumeo + 5 Bonuses worth $231.89.</p>
+                                <h2 class="inline-block"><strong class="text-4xl">$20</strong>/mo</h2> <p class="inline-block text-xs">Billed annually at $240/yr.</p><br>
+                                <div class="join smaller my-4">GET EVERYTHING</div>
+                                <ul class="list-disc ml-10">
+                                    <li class="text-sm leading-relaxed">Drumeo Annual Membership</li>
+                                    <li class="text-sm leading-relaxed"><span class="text-pianote">Free</span> 30-Day Drummer</li>
+                                    <li class="text-sm leading-relaxed"><span class="text-pianote">Free</span> P4 Practice Pad</li>
+                                    <li class="text-sm leading-relaxed"><span class="text-pianote">Free</span> 2 Pairs of Drumsticks</li>
+                                    <li class="text-sm leading-relaxed"><span class="text-pianote">Free</span> Best Beginner Drum Book</li>
+                                </ul>
+                                <hr class="w-full my-5" style="border-color:#ebf2f8">
+                                <p class="leading-loose text-sm"><strong>Drumeo Membership includes:</strong><br>
+                                <i class="fas fa-check text-pianote mr-1"></i> 10-Level Drumeo Method Curriculum<br>
+                                <i class="fas fa-check text-pianote mr-1"></i> Play Along To 3000+ Popular Songs.<br>
+                                <i class="fas fa-check text-pianote mr-1"></i> Study With 100+ World-Class Drummers.<br>
+                                <i class="fas fa-check text-pianote mr-1"></i> 90-Day Money Back Guarantee</p>
+                            </a>
+                        </div>
+                    @endif
 
 
                 <div class="flex w-full justify-center @if(is_current_user_a_member()) sm:justify-start sm:order-1 sm:w-1/2 xl:w-7/12 sm:pl-5 lg:pl-7  mt-10 sm:mt-0 @else  xl:justify-start xl:order-1 xl:w-5/12 xl:pl-4  mt-10 xl:mt-0 @endif">
