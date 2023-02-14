@@ -357,7 +357,7 @@
         <div class="container max-w-4xl mx-auto">
             <div class="{{-- aspect-16:9 --}} cursor-hover rounded-xl autoplay-video overflow-hidden w-full relative -mt-36 sm:-mt-64 lg:-mt-96" data-open="trailer">
                 <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
-                <img class="rounded-2xl" src="https://i.vimeocdn.com/video/1610056241-6f3a44242b7f8e6ad0efc4198852ecb68d7a13b06afae5524b6fccfee7f2c2e6-d_1500" alt="trailer image" />
+                <img class="rounded-2xl" src="https://pianote.s3.amazonaws.com/products/new-piano-players/video-thumb.jpg" alt="trailer image" />
 {{--                <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0 lazyload" poster="https://i.vimeocdn.com/video/1488646391-d2694ba3d38847b00d9fcd70c946d3c45efe1202cedf305361a253a275ef5f90-d_890" data-src="https://pianote.s3.amazonaws.com/products/new-piano-players/trailer.mp4" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>--}}
             </div>
 
@@ -380,13 +380,13 @@
                     [
                     'position' => 'right',
                     'img' => 'https://pianote.s3.amazonaws.com/products/new-piano-players/practice.jpg',
-                    'title' => 'Short, focused practice sessions',
+                    'title' => 'Short, focused practice sessions.',
                     'desc' => 'No wasted time, no distractions. Each session features a countdown timer so you can turn off the distractions and focus on playing.',
                     ],
                     [
                     'position' => 'left',
                     'img' => 'https://pianote.s3.amazonaws.com/products/new-piano-players/progress.jpg',
-                    'title' => 'Smile in your first lesson',
+                    'title' => 'Smile in your first lesson.',
                     'desc' => 'Play along with a professional backing track so you’ll sound (and feel) incredible as you’re learning. It’s a super motivating way to keep making progress.',
                     ],
                     [
@@ -404,7 +404,7 @@
                     [
                     'position' => 'right',
                     'img' => 'https://pianote.s3.amazonaws.com/products/new-piano-players/skills.jpg',
-                    'title' => 'Skills to take you further',
+                    'title' => 'Skills to take you further.',
                     'desc' => 'The skills you learn in New Piano Players Start Here go beyond the course. By the end you’ll have the building blocks to start playing hundreds of popular songs (literally)!',
                     ],
                 ];
@@ -633,7 +633,7 @@
                 </div>
             </div>
 
-            <h3 class="mt-12 sm:mt-16 lg:mt-20 mb-5 sm:mb-8 lg:mb-10"><strong>What students are saying about Lisa and her teaching style</strong></h3>
+            <h3 class="mt-12 sm:mt-16 lg:mt-20 mb-5 sm:mb-8 lg:mb-10"><strong>What students are saying about Lisa and her teaching style.</strong></h3>
             <div class="flex flex-wrap text-left">
 
                 @php
@@ -725,7 +725,7 @@
     <section class="text-white text-center px-5 sm:px-6 pb-10 sm:pb-14 lg:pb-20 py-10 sm:py-14 lg:pt-32" style="background-color:#2a2f34;">
         <div class="container max-w-4xl mx-auto">
             <img class="h-28 sm:h-40 lg:h-52 block mx-auto -mt-24 sm:-mt-36 lg:-mt-48 lazyload" data-src="https://cdn.musora.com/image/fetch/w_410,q_auto:best/https://pianote.s3.amazonaws.com/sales/2022/piano-guarantee.png" alt="guarantee badge">
-            <h2 class="my-4 sm:my-6 lg:my-8"><strong>The guarantee that lasts<br class="inline sm:hidden"> longer than the course</strong></h2>
+            <h2 class="my-4 sm:my-6 lg:my-8"><strong>The guarantee that lasts<br class="inline sm:hidden"> longer than the course.</strong></h2>
 
             <h6 class="leading-normal">New Piano Players Start Here is all about getting you playing beautiful piano in the shortest amount of time. For less than the cost of just 2 private lessons, you’ll have a guided path to improve your playing, build your confidence, and start your journey on the piano.
                 <br><br>
@@ -777,9 +777,9 @@
                     <div class="text-left w-full sm:w-1/2 xl:w-5/12 lg:pl-5">
                         <img class="h-20 md:h-20 lg:h-24 lazyload" data-src="https://cdn.musora.com/image/fetch/w_380,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/new-piano-players-start-here-logo-2+1.png" alt="new piano players start here logo">
                         <h2 class="leading-tight mt-2 mb-4 sm:my-4 lg:my-5"><strong>
-                                20 Guided Play-Along Lessons<br>
-                                4 Live Q&A Sessions<br>
-                                Lifetime Course Access
+                                20 Guided Play-Along Lessons.<br>
+                                4 Live Q&A Sessions.<br>
+                                Lifetime Course Access.
                             </strong></h2>
                         <div class="w-full mx-auto sm:mx-0">
 
