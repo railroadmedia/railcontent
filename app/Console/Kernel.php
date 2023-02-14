@@ -24,6 +24,7 @@ use App\Console\Commands\RepairVimeoDurations;
 use App\Console\Commands\SeedLiveAndScheduledContent;
 use App\Console\Commands\SeedUserContentData;
 use App\Console\Commands\TestLessonsDescriptionUrls;
+use App\Console\Commands\UpdateOldGuitareoSongs;
 use App\Console\Commands\MembershipFieldsSync;
 use App\Console\Commands\UpdateRoutinesFebruary2023;
 use App\Console\Commands\VaporEnvManager;
@@ -62,6 +63,7 @@ class Kernel extends ConsoleKernel
         AddTimeToUsersAccountsJan2023::class,
         UpdateRoutines::class,
         CreateSongs24Jan2023::class,
+        UpdateOldGuitareoSongs::class,
         RemoveTemporarySongsAccessForLifetimeMembersJanuary2023::class,
         MembershipFieldsSync::class,
         UpdateRoutinesFebruary2023::class,

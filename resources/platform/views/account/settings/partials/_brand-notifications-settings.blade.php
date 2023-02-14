@@ -5,7 +5,7 @@
                 :href="'?selected-brand={{ $brand }}'"
              >
                   <h3
-                      class="tw-text-lg md:tw-text-xl tw-uppercase tw-font-bebas-neue"
+                      class="tw-text-lg md:tw-text-2xl tw-capitalize  {{$selectedBrand == $brand ? 'tw-text-[#00101D] dark:tw-text-white tw-border-0 tw-border-solid tw-border-b-[3px]' : 'tw-text-gray-400 hover:tw-text-gray-500'}}"
                   >
                       {{ $brand }}
                   </h3>

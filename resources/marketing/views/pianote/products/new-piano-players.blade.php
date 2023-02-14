@@ -311,7 +311,7 @@
                     <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3 mb-4 sm:mb-0">
                         <i class="far fa-fw mr-3 sm:mr-0 fa-calendar-day text-pianote text-2xl"></i>
                         <p class="leading-tight mx-0"><strong class="font-black">Course Dates</strong><br>
-                            <span class="text-sm"> February 27 to<br class="hidden sm:inline"> March 25</span></p>
+                            <span class="text-sm"> February 27 to<br class="hidden sm:inline"> March 28</span></p>
                     </div>
                     <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3 mb-4 sm:mb-0">
                         <i class="far fa-fw mr-3 sm:mr-0 fa-clock text-pianote text-2xl"></i>
@@ -336,7 +336,7 @@
             <div class="text-left flex flex-wrap sm:flex-nowrap mb-32 sm:mb-56 lg:mb-72">
                 <h6 class="leading-normal max-w-lg pr-7">You don’t learn by watching. You learn by doing.
                     <br><br>
-                    Start the year off right and learn the piano <strong>by playing the piano</strong>. You’ll be playing a song from the very first lessons and you’ll follow along with 10-minute daily guided sessions that show you exactly what to play.
+                    Start the year off right and learn the piano <b>by playing the piano</b>. You’ll be playing a song from the very first lessons and you’ll follow along with 10-minute daily guided sessions that show you exactly what to play.
                     <br><br>
                     No complicated theory. No need to read music. No frustration.
                     <br><br>
@@ -355,9 +355,10 @@
     <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #f4f8fb calc(50% + 1px));"></div>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f4f8fb;">
         <div class="container max-w-4xl mx-auto">
-            <div class="aspect-16:9 cursor-hover rounded-xl autoplay-video overflow-hidden w-full relative -mt-36 sm:-mt-64 lg:-mt-96" data-open="trailer">
+            <div class="{{-- aspect-16:9 --}} cursor-hover rounded-xl autoplay-video overflow-hidden w-full relative -mt-36 sm:-mt-64 lg:-mt-96" data-open="trailer">
                 <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
-                <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0 lazyload" poster="https://i.vimeocdn.com/video/1488646391-d2694ba3d38847b00d9fcd70c946d3c45efe1202cedf305361a253a275ef5f90-d_890" data-src="https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/video-reel.mp4" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
+                <img class="rounded-2xl" src="https://i.vimeocdn.com/video/1610056241-6f3a44242b7f8e6ad0efc4198852ecb68d7a13b06afae5524b6fccfee7f2c2e6-d_1500" alt="trailer image" />
+{{--                <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0 lazyload" poster="https://i.vimeocdn.com/video/1488646391-d2694ba3d38847b00d9fcd70c946d3c45efe1202cedf305361a253a275ef5f90-d_890" data-src="https://pianote.s3.amazonaws.com/products/new-piano-players/trailer.mp4" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>--}}
             </div>
 
             <img class="h-10 sm:h-20 mt-10 sm:mt-16 lg:mt-24 mb-8 lazyload" data-src="https://cdn.musora.com/image/fetch/w_1220,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/Just_Press_Play_logo.png" alt="just play logo">
@@ -486,7 +487,7 @@
                         </div>
                         <div class="align-middle bg-white text-center rounded-lg inline-block overflow-hidden w-11 mr-2">
                             <p class="leading-none tracking-tighter text-xs py-0.5 text-white bg-pianote"><strong>MAR</strong></p>
-                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">28</strong></p>
+                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">25</strong></p>
                         </div>
                     </div>
                 </div>
@@ -721,7 +722,7 @@
 {{--        </div>--}}
 {{--    </section>--}}
     <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #2a2f34 calc(50% + 1px));"></div>
-    <section class="text-white text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#2a2f34;">
+    <section class="text-white text-center px-5 sm:px-6 pb-10 sm:pb-14 lg:pb-20 py-10 sm:py-14 lg:pt-32" style="background-color:#2a2f34;">
         <div class="container max-w-4xl mx-auto">
             <img class="h-28 sm:h-40 lg:h-52 block mx-auto -mt-24 sm:-mt-36 lg:-mt-48 lazyload" data-src="https://cdn.musora.com/image/fetch/w_410,q_auto:best/https://pianote.s3.amazonaws.com/sales/2022/piano-guarantee.png" alt="guarantee badge">
             <h2 class="my-4 sm:my-6 lg:my-8"><strong>The guarantee that lasts<br class="inline sm:hidden"> longer than the course</strong></h2>
@@ -853,7 +854,7 @@
                 ])
                 @include('_partials.components.question-dropdown', [
                 "title" => "What devices can I access the course on?",
-                "desc" => "New Piano Players Start Here is available on your laptop, tablet, or phone. You’ll also have access through the Pianote App after you’ve completed your purchase of the course.",
+                "desc" => "New Piano Players Start Here is available on your laptop, tablet, or phone. You’ll also have access through the Musora App after you’ve completed your purchase of the course.",
                 "num" => '?',
                 ])
             </div>
@@ -909,7 +910,7 @@
         "title" => 'trailer'
     ])
 
-    @include("drumeo.sales.partials._footer")
+    @include("pianote._partials._footer")
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
