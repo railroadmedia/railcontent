@@ -176,16 +176,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.258.6",
+            "version": "3.258.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "5284c04bc409dfafc7751d9b80a8e2217aaca68a"
+                "reference": "1d42f8170ecc775a85e0efa96476caa2d4be13ae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/5284c04bc409dfafc7751d9b80a8e2217aaca68a",
-                "reference": "5284c04bc409dfafc7751d9b80a8e2217aaca68a",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/1d42f8170ecc775a85e0efa96476caa2d4be13ae",
+                "reference": "1d42f8170ecc775a85e0efa96476caa2d4be13ae",
                 "shasum": ""
             },
             "require": {
@@ -264,9 +264,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.258.6"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.258.9"
             },
-            "time": "2023-02-08T19:25:07+00:00"
+            "time": "2023-02-13T19:21:26+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -2339,16 +2339,16 @@
         },
         {
             "name": "firebase/php-jwt",
-            "version": "v6.3.2",
+            "version": "v6.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/firebase/php-jwt.git",
-                "reference": "ea7dda77098b96e666c5ef382452f94841e439cd"
+                "reference": "4dd1e007f22a927ac77da5a3fbb067b42d3bc224"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/firebase/php-jwt/zipball/ea7dda77098b96e666c5ef382452f94841e439cd",
-                "reference": "ea7dda77098b96e666c5ef382452f94841e439cd",
+                "url": "https://api.github.com/repos/firebase/php-jwt/zipball/4dd1e007f22a927ac77da5a3fbb067b42d3bc224",
+                "reference": "4dd1e007f22a927ac77da5a3fbb067b42d3bc224",
                 "shasum": ""
             },
             "require": {
@@ -2363,6 +2363,7 @@
                 "psr/http-factory": "^1.0"
             },
             "suggest": {
+                "ext-sodium": "Support EdDSA (Ed25519) signatures",
                 "paragonie/sodium_compat": "Support EdDSA (Ed25519) signatures when libsodium is not present"
             },
             "type": "library",
@@ -2395,9 +2396,9 @@
             ],
             "support": {
                 "issues": "https://github.com/firebase/php-jwt/issues",
-                "source": "https://github.com/firebase/php-jwt/tree/v6.3.2"
+                "source": "https://github.com/firebase/php-jwt/tree/v6.4.0"
             },
-            "time": "2022-12-19T17:10:46+00:00"
+            "time": "2023-02-09T21:01:23+00:00"
         },
         {
             "name": "fruitcake/laravel-cors",
@@ -2846,16 +2847,16 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.286.0",
+            "version": "v0.287.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client-services.git",
-                "reference": "4a00eb9803e01f97d96e49fd82dbb03802610def"
+                "reference": "ed58596d34272a5cd0dc2c0595d9a678b9834880"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/4a00eb9803e01f97d96e49fd82dbb03802610def",
-                "reference": "4a00eb9803e01f97d96e49fd82dbb03802610def",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/ed58596d34272a5cd0dc2c0595d9a678b9834880",
+                "reference": "ed58596d34272a5cd0dc2c0595d9a678b9834880",
                 "shasum": ""
             },
             "require": {
@@ -2884,9 +2885,9 @@
             ],
             "support": {
                 "issues": "https://github.com/googleapis/google-api-php-client-services/issues",
-                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.286.0"
+                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.287.0"
             },
-            "time": "2023-02-05T01:20:11+00:00"
+            "time": "2023-02-12T01:08:11+00:00"
         },
         {
             "name": "google/auth",
@@ -2948,16 +2949,16 @@
         },
         {
             "name": "google/cloud-core",
-            "version": "v1.49.0",
+            "version": "v1.49.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-core.git",
-                "reference": "5db0d164b61440312e99e4af9b43a59823098a8d"
+                "reference": "aaa1a8d22ff38d0f0ae882ef14377b4c14a65a8f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/5db0d164b61440312e99e4af9b43a59823098a8d",
-                "reference": "5db0d164b61440312e99e4af9b43a59823098a8d",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/aaa1a8d22ff38d0f0ae882ef14377b4c14a65a8f",
+                "reference": "aaa1a8d22ff38d0f0ae882ef14377b4c14a65a8f",
                 "shasum": ""
             },
             "require": {
@@ -3008,9 +3009,9 @@
             ],
             "description": "Google Cloud PHP shared dependency, providing functionality useful to all components.",
             "support": {
-                "source": "https://github.com/googleapis/google-cloud-php-core/tree/v1.49.0"
+                "source": "https://github.com/googleapis/google-cloud-php-core/tree/v1.49.1"
             },
-            "time": "2023-01-27T18:26:22+00:00"
+            "time": "2023-02-10T16:10:50+00:00"
         },
         {
             "name": "google/cloud-storage",
@@ -8524,16 +8525,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "v2.0.69",
+            "version": "v2.0.70",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "ad562891293f1e4671e1f3554b519ea8ad4827f0"
+                "reference": "19e04cfefbee7cfdef3316bf7a541f82f59e6d56"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/ad562891293f1e4671e1f3554b519ea8ad4827f0",
-                "reference": "ad562891293f1e4671e1f3554b519ea8ad4827f0",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/19e04cfefbee7cfdef3316bf7a541f82f59e6d56",
+                "reference": "19e04cfefbee7cfdef3316bf7a541f82f59e6d56",
                 "shasum": ""
             },
             "require": {
@@ -8587,9 +8588,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/v2.0.69"
+                "source": "https://github.com/railroadmedia/railcontent/tree/v2.0.70"
             },
-            "time": "2023-02-02T15:01:12+00:00"
+            "time": "2023-02-14T10:33:23+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -9301,16 +9302,16 @@
         },
         {
             "name": "rap2hpoutre/fast-excel",
-            "version": "v5.1.0",
+            "version": "v5.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rap2hpoutre/fast-excel.git",
-                "reference": "e0a499c4b7942a54fd91d0e1576693b412bd48e0"
+                "reference": "05bc956fa6121b239c98960ea9b551116f20b058"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rap2hpoutre/fast-excel/zipball/e0a499c4b7942a54fd91d0e1576693b412bd48e0",
-                "reference": "e0a499c4b7942a54fd91d0e1576693b412bd48e0",
+                "url": "https://api.github.com/repos/rap2hpoutre/fast-excel/zipball/05bc956fa6121b239c98960ea9b551116f20b058",
+                "reference": "05bc956fa6121b239c98960ea9b551116f20b058",
                 "shasum": ""
             },
             "require": {
@@ -9359,7 +9360,7 @@
             ],
             "support": {
                 "issues": "https://github.com/rap2hpoutre/fast-excel/issues",
-                "source": "https://github.com/rap2hpoutre/fast-excel/tree/v5.1.0"
+                "source": "https://github.com/rap2hpoutre/fast-excel/tree/v5.1.1"
             },
             "funding": [
                 {
@@ -9367,7 +9368,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-02-02T19:26:50+00:00"
+            "time": "2023-02-09T15:13:18+00:00"
         },
         {
             "name": "react/promise",
@@ -16971,5 +16972,5 @@
         "ext-curl": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.2.0"
 }

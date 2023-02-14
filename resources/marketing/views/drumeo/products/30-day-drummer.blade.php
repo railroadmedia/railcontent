@@ -286,7 +286,7 @@
                         </div>
                         <div class="w-full sm:w-1/2 pt-4 lg:pb-5">
                             <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/Joined_profiles.png" al="joined profiles">
-                            <p class="inline-block leading-tight text-sm align-middle">Join {{ $nPackOwners ?? 0 }} drummers who<br> have already registered.</p>
+                            <p class="inline-block leading-tight text-sm align-middle">Join {{ number_format($nPackOwners ?? 0) }} drummers who<br> have already registered.</p>
                         </div>
                     </div>
                 </div>
@@ -302,11 +302,8 @@
                     <p class="tracking-wide opacity-70 text-sm">STARTS ON</p>
                     <h4 class="px-3 lg:px-5"><strong>February 27th</strong></h4>
                     <hr class="border-gray-300 my-4 md:my-2 lg:my-4">
-                    <p class="text-sm px-3 lg:px-5 hidden lg:block">
-                        Enrollment closes in <span class="tzcd-text text-drumeo"></span>
-                    </p>
-                    <p class="text-sm px-3 lg:px-5 lg:hidden">
-                        Enrollment closes in <br><span class="tzcd-text-smaller text-drumeo"></span>
+                    <p class="text-sm px-3 lg:px-5">
+                        Enrollment closes in <span class="tzcd-30DD text-drumeo"></span>
                     </p>
                 </div>
                 <div class="flex flex-wrap md:flex-nowrap items-center justify-evenly w-full md:w-auto md:flex-grow py-4 md:py-3 lg:py-4 text-left md:text-center">
@@ -593,7 +590,7 @@
             </div>
             <h1 class="font-bebas text-5xl sm:text-6xl lg:text-7xl">FAIR WARNING</h1>
             <h6 class="leading-normal  mt-4 mb-8">30-Day Drummer is a daily guided workout program for drummers — where you’ll get a new video each weekday and a live session each weekend throughout the month. Because of this, students will not be able to join midway — and you need to register before the course begins. {{--on September 5th.--}}</h6>
-            <h4 class="py-1.5 w-full font-bebas uppercase inline-block mx-auto bg-white" style="color:#9d1032;">REGISTRATION CLOSES IN<br class="inline sm:hidden"> <span class="tzcd-text">a limited time</span></h4>
+            <h4 class="py-1.5 w-full font-bebas uppercase inline-block mx-auto bg-white" style="color:#9d1032;">REGISTRATION CLOSES IN<br class="inline sm:hidden"> <span class="tzcd-30DD">a limited time</span></h4>
         </div>
     </section>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f4f8fb;">
@@ -735,7 +732,7 @@
                 <h6 class="leading-normal mb-4">
                     <strong>EARLY BIRD SPECIAL:</strong> Get a free practice & sticks <br class="hidden sm:inline md:hidden">when you enroll before February 19th.
                     <br>
-                    <span class="text-drumeo">Only <span class="tzcd-text">a limited time</span> left!</span>
+                    <span class="text-drumeo">Enrollment closes in <span class="tzcd-30DD">a limited time</span>!</span>
                 </h6>
             @endif
 
