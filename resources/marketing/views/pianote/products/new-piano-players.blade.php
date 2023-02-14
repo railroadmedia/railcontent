@@ -336,7 +336,7 @@
             <div class="text-left flex flex-wrap sm:flex-nowrap mb-32 sm:mb-56 lg:mb-72">
                 <h6 class="leading-normal max-w-lg pr-7">You don’t learn by watching. You learn by doing.
                     <br><br>
-                    Start the year off right and learn the piano <b>by playing the piano</b>. You’ll be playing a song from the very first lessons and you’ll follow along with 10-minute daily guided sessions that show you exactly what to play.
+                    Start the year off right and learn the piano <b>by playing the piano</b>. You’ll be playing a song from the very first lesson and you’ll follow along with 10-minute daily guided sessions that show you exactly what to play.
                     <br><br>
                     No complicated theory. No need to read music. No frustration.
                     <br><br>
