@@ -50,7 +50,7 @@ class UserPlaylistsRepository extends RepositoryBase
                 ->skip(($page - 1) * $limit);
         }
 
-        if (!in_array($orderByColumn, ['name', 'id', 'created_at'])) {
+        if (!in_array($orderByColumn, ['name', 'id', 'created_at','last_progress'])) {
             $orderByColumn = 'id';
         }
         $query = $query->orderBy($orderByColumn, $orderByDirection);
