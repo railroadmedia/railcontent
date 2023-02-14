@@ -55,7 +55,7 @@ class Leadgen extends Resource
         return [
             ID::make()->sortable(),
             BelongsTo::make('Brand', 'brand', 'App\Nova\Brand')->sortable(),
-//            Hidden::make('Uuid')->withMeta(["value" => $uuid]),
+            Hidden::make('Uuid')->withMeta(["value" => $uuid]),
             Text::make('title'),
             Text::make('Meta Description', 'meta_desc')->hideFromIndex(),
             Image::make('Meta Image', 'meta_img')
@@ -89,7 +89,10 @@ class Leadgen extends Resource
                     return $value;
                 }),
             Text::make('Meta Image', 'meta_img')->hideFromIndex()->hideFromDetail(),
-            Text::make('Index Slug', 'slug')->hideFromIndex(),
+            Text::make('Index Slug','slug', function(){
+                return '<a class="link-default" target="_blank" href="'.get_legacy_brand_base_url(strtolower($this->brand->name)).'/'.$this->slug.'">'.$this->slug.'</a>';
+            })->asHtml()->hideWhenCreating()->hideWhenUpdating(),
+            Text::make('Index Slug', 'slug')->hideFromIndex()->hideFromDetail(),
             Flexible::make('Assets')
                 ->addLayout(LeadgenLessonAssetLayout::class)
                 ->preset(LeadgenLessonAssetPreset::class),
