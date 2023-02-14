@@ -248,7 +248,7 @@
                         </strong></h1>
                     <h2 class="-mt-3 sm:-mt-1 lg:mt-0">in just 30 days.</h2>
 
-                    <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>Save your seat in the first-ever <br class="inline lg:hidden">class starting February 27.</strong></h6>
+                    <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>Save your seat in the first-ever <br class="inline lg:hidden">class starting February 27th.</strong></h6>
 
                     <div class="mt-6 mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top cursor-hover autoplay-video lazyload" style="padding-bottom: 75%;" data-bg="https://cdn.musora.com/image/fetch/w_850,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/header-thumb-m2.jpg" data-open="trailer">
                         <div class="join white smaller absolute bottom-1 left-1"><i class="fas fa-play"></i> Watch Trailer</div>
@@ -311,7 +311,7 @@
                     <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3 mb-4 sm:mb-0">
                         <i class="far fa-fw mr-3 sm:mr-0 fa-calendar-day text-pianote text-2xl"></i>
                         <p class="leading-tight mx-0"><strong class="font-black">Course Dates</strong><br>
-                            <span class="text-sm"> February 27 to<br class="hidden sm:inline"> March 28</span></p>
+                            <span class="text-sm"> February 27th to<br class="hidden sm:inline"> March 28th</span></p>
                     </div>
                     <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3 mb-4 sm:mb-0">
                         <i class="far fa-fw mr-3 sm:mr-0 fa-clock text-pianote text-2xl"></i>
@@ -357,7 +357,7 @@
         <div class="container max-w-4xl mx-auto">
             <div class="{{-- aspect-16:9 --}} cursor-hover rounded-xl autoplay-video overflow-hidden w-full relative -mt-36 sm:-mt-64 lg:-mt-96" data-open="trailer">
                 <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
-                <img class="rounded-2xl" src="https://i.vimeocdn.com/video/1610056241-6f3a44242b7f8e6ad0efc4198852ecb68d7a13b06afae5524b6fccfee7f2c2e6-d_1500" alt="trailer image" />
+                <img class="rounded-2xl" src="https://pianote.s3.amazonaws.com/products/new-piano-players/video-thumb.jpg" alt="trailer image" />
 {{--                <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0 lazyload" poster="https://i.vimeocdn.com/video/1488646391-d2694ba3d38847b00d9fcd70c946d3c45efe1202cedf305361a253a275ef5f90-d_890" data-src="https://pianote.s3.amazonaws.com/products/new-piano-players/trailer.mp4" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>--}}
             </div>
 
@@ -380,13 +380,13 @@
                     [
                     'position' => 'right',
                     'img' => 'https://pianote.s3.amazonaws.com/products/new-piano-players/practice.jpg',
-                    'title' => 'Short, focused practice sessions',
+                    'title' => 'Short, focused practice sessions.',
                     'desc' => 'No wasted time, no distractions. Each session features a countdown timer so you can turn off the distractions and focus on playing.',
                     ],
                     [
                     'position' => 'left',
                     'img' => 'https://pianote.s3.amazonaws.com/products/new-piano-players/progress.jpg',
-                    'title' => 'Smile in your first lesson',
+                    'title' => 'Smile in your first lesson.',
                     'desc' => 'Play along with a professional backing track so you’ll sound (and feel) incredible as you’re learning. It’s a super motivating way to keep making progress.',
                     ],
                     [
@@ -404,7 +404,7 @@
                     [
                     'position' => 'right',
                     'img' => 'https://pianote.s3.amazonaws.com/products/new-piano-players/skills.jpg',
-                    'title' => 'Skills to take you further',
+                    'title' => 'Skills to take you further.',
                     'desc' => 'The skills you learn in New Piano Players Start Here go beyond the course. By the end you’ll have the building blocks to start playing hundreds of popular songs (literally)!',
                     ],
                 ];
@@ -597,7 +597,7 @@
 {{--            <h6 class="leading-normal  mt-4 --}}{{--mb-8--}}{{--">30-Day Drummer is a daily guided workout program for drummers — where you’ll get a new video each weekday and a live session each weekend throughout the month. Because of this, students will not be able to join midway — and you need to register before the course begins on February 27.</h6>--}}
 {{--        </div>--}}
 {{--    </section>--}}
-    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f4f8fb;">
+    <section class="text-center px-5 sm:px-6 pt-10 sm:pt-14 lg:pt-20 py-16 sm:pb-32 lg:pb-40" style="background-color:#f4f8fb;">
         <div class="container max-w-5xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-start justify-center sm:mt-8">
                 <img class="border-8 border-white rounded-3xl shadow-xl w-52 sm:w-72 lg:w-96 relative -mb-8 sm:mb-0 sm:-mt-8 sm:-mr-8 z-10 lazyload" data-src="https://cdn.musora.com/image/fetch/w_550,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/profile_picture.jpg" alt="profile picture">
@@ -633,7 +633,7 @@
                 </div>
             </div>
 
-            <h3 class="mt-12 sm:mt-16 lg:mt-20 mb-5 sm:mb-8 lg:mb-10"><strong>What students are saying about Lisa and her teaching style</strong></h3>
+            <h3 class="mt-12 sm:mt-16 lg:mt-20 mb-5 sm:mb-8 lg:mb-10"><strong>What students are saying about Lisa and her teaching style.</strong></h3>
             <div class="flex flex-wrap text-left">
 
                 @php
@@ -721,12 +721,11 @@
 {{--            </div>--}}
 {{--        </div>--}}
 {{--    </section>--}}
-    <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #2a2f34 calc(50% + 1px));"></div>
+    <div class="h-10 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #2a2f34 calc(50% + 1px));"></div>
     <section class="text-white text-center px-5 sm:px-6 pb-10 sm:pb-14 lg:pb-20 py-10 sm:py-14 lg:pt-32" style="background-color:#2a2f34;">
         <div class="container max-w-4xl mx-auto">
             <img class="h-28 sm:h-40 lg:h-52 block mx-auto -mt-24 sm:-mt-36 lg:-mt-48 lazyload" data-src="https://cdn.musora.com/image/fetch/w_410,q_auto:best/https://pianote.s3.amazonaws.com/sales/2022/piano-guarantee.png" alt="guarantee badge">
-            <h2 class="my-4 sm:my-6 lg:my-8"><strong>The guarantee that lasts<br class="inline sm:hidden"> longer than the course</strong></h2>
-
+            <h2 class="my-4 sm:my-6 lg:my-8"><strong>The guarantee that lasts<br> longer than the course.</strong></h2>
             <h6 class="leading-normal">New Piano Players Start Here is all about getting you playing beautiful piano in the shortest amount of time. For less than the cost of just 2 private lessons, you’ll have a guided path to improve your playing, build your confidence, and start your journey on the piano.
                 <br><br>
                 You’re going to love it.
@@ -747,9 +746,9 @@
                         <div class="text-left w-full sm:w-1/2 xl:w-5/12 lg:pl-5">
                             <img class="h-20 md:h-20 lg:h-24 lazyload" data-src="https://cdn.musora.com/image/fetch/w_380,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/new-piano-players-start-here-logo-2+1.png" alt="new piano players start here logo">
                             <h2 class="leading-tight mt-2 mb-4 sm:my-4 lg:my-5"><strong>
-                                    20 Guided Play-Along Lessons<br>
-                                    4 Live Q&A Sessions<br>
-                                    Lifetime Course Access
+                                    20 Guided Play-Along Lessons.<br>
+                                    4 Live Q&A Sessions.<br>
+                                    Lifetime Course Access.
                                 </strong></h2>
                             <div class="w-full mx-auto sm:mx-0">
 
@@ -777,9 +776,9 @@
                     <div class="text-left w-full sm:w-1/2 xl:w-5/12 lg:pl-5">
                         <img class="h-20 md:h-20 lg:h-24 lazyload" data-src="https://cdn.musora.com/image/fetch/w_380,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/new-piano-players-start-here-logo-2+1.png" alt="new piano players start here logo">
                         <h2 class="leading-tight mt-2 mb-4 sm:my-4 lg:my-5"><strong>
-                                20 Guided Play-Along Lessons<br>
-                                4 Live Q&A Sessions<br>
-                                Lifetime Course Access
+                                20 Guided Play-Along Lessons.<br>
+                                4 Live Q&A Sessions.<br>
+                                Lifetime Course Access.
                             </strong></h2>
                         <div class="w-full mx-auto sm:mx-0">
 
@@ -801,7 +800,7 @@
                             @endif
 
                             <p class="text-sm my-2 my-3"><em>One-Time Payment. (Just ${{ round((97 / 30), 2) }} per day.)</em></p>
-                            <p class="text-sm text-pianote"><strong><em>Get the encyclopedia of chords & scales FREE <br class="hidden sm:inline"> when you register before February 20</em></strong></p>
+                            <p class="text-sm text-pianote"><strong><em>Get the encyclopedia of chords & scales FREE <br class="hidden sm:inline"> when you register before February 20th</em></strong></p>
                         </div>
                     </div>
                     @endif
