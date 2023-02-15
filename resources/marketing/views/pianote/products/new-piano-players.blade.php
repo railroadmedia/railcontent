@@ -252,6 +252,16 @@
         .image-modal-arrow-right::before {
             content: "\f105";
         }
+
+        .timeline-container .timeline:after {
+            left: -16px !important;
+        }
+
+        @media (min-width: 768px) {
+            .timeline-container .timeline:after {
+                left: 50% !important;
+            }
+        }
     </style>
 @stop()
 
