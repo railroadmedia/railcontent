@@ -37,21 +37,20 @@ class CustomerIoSyncService
      */
     private $contentFollowsRepository;
 
-    /**
-     * @param SubscriptionRepository $subscriptionRepository
-     * @param UserProductRepository $userProductRepository
-     * @param ProductRepository $productRepository
-     */
+    private UserMembershipFieldsService $userMembershipFieldsService;
+
     public function __construct(
         SubscriptionRepository $subscriptionRepository,
         UserProductRepository $userProductRepository,
         ProductRepository $productRepository,
         ContentFollowsRepository $contentFollowsRepository,
+        UserMembershipFieldsService $userMembershipFieldsService,
     ) {
         $this->subscriptionRepository = $subscriptionRepository;
         $this->userProductRepository = $userProductRepository;
         $this->productRepository = $productRepository;
         $this->contentFollowsRepository = $contentFollowsRepository;
+        $this->userMembershipFieldsService = $userMembershipFieldsService;
     }
 
     /**
@@ -122,6 +121,9 @@ class CustomerIoSyncService
 
         $userProducts = $this->userProductRepository->getAllUsersProducts($user->id);
 
+        $membershipProduct = $this->userMembershipFieldsService
+            ->getUserProductThatRepresentsUsersMembership($user->id, $userProducts);
+
         $productAttributes = [];
 
         foreach ($brands as $brand) {
@@ -179,7 +181,7 @@ class CustomerIoSyncService
             }
 
             if (!empty($latestMembershipUserProductToSync) && !empty($firstMembershipUserProductToSync)) {
-                $membershipAccessExpirationDate = $latestMembershipUserProductToSync->getExpirationDate();
+                $membershipAccessExpirationDate = $membershipProduct->getExpirationDate();
                 $membershipLatestAccessStartDate = $latestMembershipUserProductToSync->getCreatedAt();
                 $membershipFirstAccessStartDate = $firstMembershipUserProductToSync->getCreatedAt();
             } else {

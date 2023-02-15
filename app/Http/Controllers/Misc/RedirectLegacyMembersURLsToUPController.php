@@ -45,7 +45,7 @@ class RedirectLegacyMembersURLsToUPController extends BaseController
         }
 
         /* here we treat all the routes that are similar */
-        if (in_array($segment1, ['forums','referral', 'support', 'live', 'schedule', 'legacy-resources', 'search', 'content'])) {
+        if (in_array($segment1, ['forums','referral', 'support', 'schedule', 'legacy-resources', 'search', 'content'])) {
             $forumUrl = $unifiedUrl . $segment1 . "/";
             foreach ([$segment2, $segment3, $segment4, $segment5] as $segment) {
                 if ($segment) {
@@ -58,7 +58,7 @@ class RedirectLegacyMembersURLsToUPController extends BaseController
         }
 
         if ($segment2 == null) {
-            if (in_array($segment1, ['packs', 'coaches'])) {
+            if (in_array($segment1, ['packs', 'coaches', 'live'])) {
                 $unifiedUrl = $unifiedUrl . $segment1;
             }
             if ($segment1 == 'chat') {
@@ -122,6 +122,7 @@ class RedirectLegacyMembersURLsToUPController extends BaseController
         if ($segment4 == null) {
             if ($segment1 == 'lessons') {
                 if (is_numeric($segment3)) {
+                    $segment2 = ($segment2 == 'live') ? 'live-streams' : $segment2;
                     $content = $this->contentService->getById($segment3);
                     if ($content) {
                         $unifiedUrl = $unifiedUrl . $segment2 . '/' . $content['slug'] . '/' . $content['id'];

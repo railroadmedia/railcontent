@@ -1,5 +1,13 @@
 @extends('pianote._partials.global-layout')
 
+@php
+    $modalImages = [
+        "https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-106-Edit.jpg",
+        "https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-107-Edit.jpg",
+        "https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-108-Edit.jpg"
+    ];
+@endphp
+
 @section('global-head')
     @parent
     <title>New Piano Players Start Here | Pianote</title>
@@ -198,6 +206,62 @@
             background-color:#eb1a2f;
 
         }
+
+        .image-modal-arrow-left, .image-modal-arrow-right {
+            font-size: 0;
+            position: absolute;
+            transform: translate(0, -50%);
+            background: #FFF;
+            transition: opacity .3s;
+            border-radius: 100px;
+            height: auto;
+            width: auto;
+            z-index: 10;
+            padding: 3px 10px;
+            margin: 0;
+            bottom: unset;
+            top: 50%;
+        }
+
+        .image-modal-arrow-left {
+            left: 0;
+        }
+
+        .image-modal-arrow-right {
+            right: 0;
+        }
+
+        .image-modal-arrow-left::before, .image-modal-arrow-right::before {
+            -webkit-font-smoothing: antialiased;
+            display: inline-block;
+            font-style: normal;
+            font-variant: normal;
+            text-rendering: auto;
+            opacity: 1;
+            line-height: 1;
+            font-family: "Font Awesome 5 Pro";
+            font-weight: 300;
+            color: #f61a30;
+            font-size: 28px;
+        }
+
+        .image-modal-arrow-left::before {
+            content: "\f104";
+        }
+
+        .image-modal-arrow-right::before {
+            content: "\f105";
+        }
+
+        .timeline-container .timeline:after {
+            left: -16px !important;
+        }
+
+        @media (min-width: 768px) {
+            .timeline-container .timeline:after {
+                left: 50% !important;
+            }
+        }
     </style>
 @stop()
 
@@ -269,7 +333,7 @@
                     @endif
 
                     @if(!$hasProduct && is_current_user_a_member())
-                        <p class="mb-3 lg:-mb-7 mt-5 mb-2 text-drumeo text-left"><strong>You are a Pianote member! <br>Enroll for free by clicking on the button below.</strong></p>
+                        <p class="mb-3 lg:-mb-7 mt-5 mb-2 text-pianote text-left"><strong>You are a Pianote member! <br>Enroll for free by clicking on the button below.</strong></p>
                     @endif
 
                     <div class="flex flex-wrap sm:flex-nowrap items-center mt-6 sm:mt-5 lg:mt-10">
@@ -287,7 +351,7 @@
                         </div>
                         <div class="w-full sm:w-1/2 lg:pb-5">
                             <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/Joined_profiles.png">
-                            <p class="inline-block leading-tight text-sm align-middle">Join {{ $nPackOwners ?? 0 }} piano players who<br> have already registered.</p>
+                            <p class="inline-block leading-tight text-sm align-middle">Join {{ number_format($nPackOwners ?? 0) }} piano players who<br> have already registered.</p>
                         </div>
                     </div>
                 </div>
@@ -311,7 +375,7 @@
                     <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3 mb-4 sm:mb-0">
                         <i class="far fa-fw mr-3 sm:mr-0 fa-calendar-day text-pianote text-2xl"></i>
                         <p class="leading-tight mx-0"><strong class="font-black">Course Dates</strong><br>
-                            <span class="text-sm"> February 27th to<br class="hidden sm:inline"> March 28th</span></p>
+                            <span class="text-sm"> February 27th to<br class="hidden sm:inline"> March 28th.</span></p>
                     </div>
                     <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3 mb-4 sm:mb-0">
                         <i class="far fa-fw mr-3 sm:mr-0 fa-clock text-pianote text-2xl"></i>
@@ -336,7 +400,7 @@
             <div class="text-left flex flex-wrap sm:flex-nowrap mb-32 sm:mb-56 lg:mb-72">
                 <h6 class="leading-normal max-w-lg pr-7">You don’t learn by watching. You learn by doing.
                     <br><br>
-                    Start the year off right and learn the piano <b>by playing the piano</b>. You’ll be playing a song from the very first lessons and you’ll follow along with 10-minute daily guided sessions that show you exactly what to play.
+                    Start the year off right and learn the piano <b>by playing the piano</b>. You’ll be playing a song from the very first lesson and you’ll follow along with 10-minute daily guided sessions that show you exactly what to play.
                     <br><br>
                     No complicated theory. No need to read music. No frustration.
                     <br><br>
@@ -458,7 +522,7 @@
                     class="join medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 @if(!is_current_user_a_member()) anchor-slide @endif">ENROLL NOW</a><br>
             @endif
             <img class="h-7 mr-1 mb-5 sm:mb-10 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/Joined_profiles.png" alt="joined profiles">
-            <p class="inline-block leading-tight text-sm align-middle mb-5 sm:mb-10">Join {{ $nPackOwners ?? 0 }} piano players who<br> have already registered.</p>
+            <p class="inline-block leading-tight text-sm align-middle mb-5 sm:mb-10">Join {{ number_format($nPackOwners ?? 0) }} piano players who<br> have already registered.</p>
 
         </div>
     </section>
@@ -696,7 +760,7 @@
                     class="join medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 @if(!is_current_user_a_member()) anchor-slide @endif">ENROLL NOW</a><br>
             @endif
             <img class="h-7 mr-1 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/Joined_profiles.png">
-            <p class="inline-block leading-tight text-sm align-middle">Join {{ $nPackOwners ?? 0 }} piano players who<br> have already registered.</p>
+            <p class="inline-block leading-tight text-sm align-middle">Join {{ number_format($nPackOwners ?? 0) }} piano players who<br> have already registered.</p>
         </div>
     </section>
 {{--    <section class="text-white text-center px-5 sm:px-6 py-10 sm:py-16 lg:py-20" style="background:linear-gradient(to bottom, #0b76db, #074c8e);">--}}
@@ -738,41 +802,40 @@
         </div>
     </section>
 
+
+    @if(!is_current_user_a_member())
+        <section class="px-4 sm:px-6 py-10 sm:py-20 lg:py-28 relative" style="background: linear-gradient(180deg, #F61A30 0%, #910000 122.85%);">
+            <div class="max-w-5xl mx-auto md:flex relative z-40">
+                <div class="flex-1 text-white md:pr-4 lg:pr-0 mb-3 md:mb-0 max-w-md md:max-w-auto mx-auto">
+
+                    <h2 class="font-extrabold mb-4 text-center md:text-left">
+                        Master every chord & <br class="hidden lg:inline">scale with this guide.
+                    </h2>
+                    <p>
+                        <span class="font-extrabold">Every Chord. Every Scale. Every Key.</span>
+                        <br><br> This essential resource will help you learn the most important chord shapes, chord variations, and scales in EVERY key.
+                        <br><br> Regular ${{ floatval($productPrices['piano-chords-and-scales-guide']->price) }}. It’s yours FREE when you get The Power of Chords. (And we’ll cover the shipping.)
+                        <br><br>
+                    </p>
+                </div>
+                <div class="flex-1 relative sm:w-2/3 md:w-auto mx-auto text-center sm:pl-10">
+                    <div class="relative md:max-w-md mx-auto">
+                        <img
+                            class="md:absolute md:w-full h-80 md:h-auto md:left-0 -top-10 lg:-top-20 scales-book cursor-pointer lazyload"
+                            data-src="https://pianote.s3.amazonaws.com/products/the-power-of-chords/piano_scales_book.png"
+                            alt="scales book" data-open="seeInside1">
+                    </div>
+                </div>
+            </div>
+        </section>
+    @endif
+
+
     <div id="final" class="anchor"></div>
     <section class="text-center relative z-50 overflow-hidden px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#eff7ff;">
         <div class="container mx-auto relative z-50">
             <div class="flex flex-wrap items-center mt-7 sm:mt-10">
-                    @if(is_current_user_a_member())
-                        <div class="text-left w-full sm:w-1/2 xl:w-5/12 lg:pl-5">
-                            <img class="h-20 md:h-20 lg:h-24 lazyload" data-src="https://cdn.musora.com/image/fetch/w_380,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/new-piano-players-start-here-logo-2+1.png" alt="new piano players start here logo">
-                            <h2 class="leading-tight mt-2 mb-4 sm:my-4 lg:my-5"><strong>
-                                    20 Guided Play-Along Lessons.<br>
-                                    4 Live Q&A Sessions.<br>
-                                    Lifetime Course Access.
-                                </strong></h2>
-                            <div class="w-full mx-auto sm:mx-0">
-
-                                <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Learn piano the easy & fun way.</p>
-                                <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Join {{ $nPackOwners ?? 0 }} piano players who have already registered.</p>
-                                <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Click below to get started.</p>
-                                <p class="leading-tight mb-3 sm:mb-5"><i class="fas fa-check text-pianote mr-1"></i> Enrollment closes in<br class="inline lg:hidden"> <span class="tzcd-nppsh text-pianote">a limited time</span>.</p>
-
-                                @if(session()->has('success-message'))
-                                    <p class="mb-3 text-pianote text-center"><strong>Congrats! You have registered for New Piano Players Start Here.<br class="hidden md:inline"> Check your email for the details.</strong></p>
-                                @endif
-
-                                <h1 class="inline-block mr-4 align-middle text-4xl sm:text-5xl"><s class="opacity-60">${{ 97 }}</s> <strong>FREE</strong></h1>
-
-                                @if($hasProduct)
-                                    <a class="join sold-out medium w-1/2 align-middle">YOU'RE ENROLLED</a>
-                                @else
-                                    <a class="join medium w-1/2 align-middle" href="/cohort-packs/register/new-piano-players-start-here">ENROLL NOW</a>
-                                @endif
-
-                                <p class="text-sm mt-2"><em>Free for Pianote members.</em></p>
-                            </div>
-                        </div>
-                    @else
+                @if(is_current_user_a_member())
                     <div class="text-left w-full sm:w-1/2 xl:w-5/12 lg:pl-5">
                         <img class="h-20 md:h-20 lg:h-24 lazyload" data-src="https://cdn.musora.com/image/fetch/w_380,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/new-piano-players-start-here-logo-2+1.png" alt="new piano players start here logo">
                         <h2 class="leading-tight mt-2 mb-4 sm:my-4 lg:my-5"><strong>
@@ -783,7 +846,7 @@
                         <div class="w-full mx-auto sm:mx-0">
 
                             <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Learn piano the easy & fun way.</p>
-                            <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Join {{ $nPackOwners ?? 0 }} piano players who have already registered.</p>
+                            <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Join {{ number_format($nPackOwners ?? 0) }} piano players who have already registered.</p>
                             <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Click below to get started.</p>
                             <p class="leading-tight mb-3 sm:mb-5"><i class="fas fa-check text-pianote mr-1"></i> Enrollment closes in<br class="inline lg:hidden"> <span class="tzcd-nppsh text-pianote">a limited time</span>.</p>
 
@@ -791,22 +854,50 @@
                                 <p class="mb-3 text-pianote text-center"><strong>Congrats! You have registered for New Piano Players Start Here.<br class="hidden md:inline"> Check your email for the details.</strong></p>
                             @endif
 
-                            <h1 class="inline-block mr-4 align-middle text-4xl sm:text-5xl"><strong>${{ 97 }}</strong></h1>
+                            <h1 class="inline-block mr-4 align-middle text-4xl sm:text-5xl"><s class="opacity-60">${{ 97 }}</s> <strong>FREE</strong></h1>
 
                             @if($hasProduct)
                                 <a class="join sold-out medium w-1/2 align-middle">YOU'RE ENROLLED</a>
                             @else
-                                <a class="join medium w-1/2 align-middle" href="/ecommerce/add-to-cart?products[new-piano-players-start-here]=1&products[piano-chords-and-scales-guide]=1&locked=true">ENROLL NOW</a>
+                                <a class="join medium w-1/2 align-middle" href="/cohort-packs/register/new-piano-players-start-here">ENROLL NOW</a>
                             @endif
 
-                            <p class="text-sm my-2 my-3"><em>One-Time Payment. (Just ${{ round((97 / 30), 2) }} per day.)</em></p>
-                            <p class="text-sm text-pianote"><strong><em>Get the encyclopedia of chords & scales FREE <br class="hidden sm:inline"> when you register before February 20th</em></strong></p>
+                            <p class="text-sm mt-2"><em>Free for Pianote members.</em></p>
                         </div>
                     </div>
-                    @endif
+                @else
+
+                    <div class="flex flex-wrap sm:flex-nowrap items-center text-left w-full max-w-3xl mx-auto md:w-7/12 lg:w-5/12">
+                        <a href="/ecommerce/add-to-cart?products[new-piano-players-start-here]=1&products[piano-chords-and-scales-guide]=1&locked=true" class="px-5 sm:px-7 lg:px-9 py-7 sm:py-11 sm:-ml-5 z-10 relative rounded-xl bg-white shadow-lg w-full">
+                            <img class="h-20 md:h-20 lg:h-24 lazyload" data-src="https://cdn.musora.com/image/fetch/w_380,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/new-piano-players-start-here-logo-2+1.png" alt="new piano players start here logo">
+                            <br>
+                            <h2 class="inline-block"><strong class="text-4xl">$97</strong></h2> <p class="inline-block text-xs">One time payment.</p><br>
+
+                            @if(session()->has('success-message'))
+                                <p class="mb-3 text-pianote text-center"><strong>Congrats! You have registered for New Piano Players Start Here.<br class="hidden md:inline"> Check your email for the details.</strong></p>
+                            @endif
+                            @if($hasProduct)
+                                <div class="join sold-out smaller my-4">YOU'RE ENROLLED</div>
+                            @else
+                                <div class="join smaller my-4">ENROLL NOW</div>
+                            @endif
+                            <ul class="list-disc ml-10">
+                                <li class="text-sm leading-relaxed">Get the encyclopedia of chords & scales <strong class="text-pianote">FREE</strong> when you register before February 20th.</li>
+                                <li class="text-sm leading-relaxed text-pianote">Enrollment closes in <span class="tzcd-nppsh text-pianote">a limited time</span></li>
+                            </ul>
+                            <hr class="w-full my-5" style="border-color:#ebf2f8">
+                            <p class="leading-loose text-sm"><strong>Key Features</strong><br>
+                                <i class="fas fa-check text-pianote mr-1"></i> Runs February 27th to March 28th.<br>
+                                <i class="fas fa-check text-pianote mr-1"></i> 20 Guided Play-Along Lessons.<br>
+                                <i class="fas fa-check text-pianote mr-1"></i> 4 Live Q&A Sessions.<br>
+                                <i class="fas fa-check text-pianote mr-1"></i> Lifetime Course Access.<br>
+                                <i class="fas fa-check text-pianote mr-1"></i> 90-Day Money Back Guarantee.</p>
+                        </a>
+                    </div>
+                @endif
 
 
-                <div class="flex w-full justify-center @if(is_current_user_a_member()) sm:justify-start sm:order-1 sm:w-1/2 xl:w-7/12 sm:pl-5 lg:pl-7  mt-10 sm:mt-0 @else  xl:justify-start xl:order-1 xl:w-5/12 xl:pl-4  mt-10 xl:mt-0 @endif">
+                <div class="flex w-full justify-center @if(is_current_user_a_member()) sm:justify-start sm:order-1 sm:w-1/2 xl:w-7/12 sm:pl-5 lg:pl-7  mt-10 sm:mt-0 @else  md:justify-start md:order-1 md:w-5/12 lg:w-7/12 md:pl-4  mt-10 md:mt-0 @endif">
                     <img class="max-w-lg sm:max-w-2xl lg:max-w-4xl lazyload" data-src="https://cdn.musora.com/image/fetch/w_1800,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/collage.png" alt="collage">
                 </div>
             </div>
@@ -860,6 +951,13 @@
         </div>
     </section>
 
+    @foreach ($modalImages as $key => $img)
+        @include('pianote.products.partials.image-modal',[
+            'id' => "seeInside".$key,
+            "image" => $img,
+            "imageName" => "seeInside".$key,
+        ])
+    @endforeach
 
     @if(!is_current_user_a_member())
         <div class="reveal coach-wrap relative rounded-xl text-center overflow-visible select-none max-w-xs md:max-w-md" id="loginModal" style="max-width: 530px;" data-reveal data-reset-on-close="false">
@@ -930,7 +1028,38 @@
             if (showModal) {
                 $('#loginModal').foundation('open');
             }
-        });
+
+
+            let imgNum = 1;
+
+            $('.image-modal-arrow-left').on('click', function(){
+                if(imgNum === 0){
+                    imgNum = 2;
+                }
+                else {
+                    imgNum--;
+                }
+
+                $('#seeInside' + imgNum).find('img').each(function(){
+                    const imgSrc = $(this);
+                    $('#seeInside1').find('img').attr('src', imgSrc.data('src'))
+                })
+            })
+
+            $('.image-modal-arrow-right').on('click', function(){
+                if(imgNum === 2){
+                    imgNum = 0;
+                }
+                else {
+                    imgNum++;
+                }
+
+                $('#seeInside' + imgNum).find('img').each(function(){
+                    const imgSrc = $(this);
+                    $('#seeInside1').find('img').attr('src', imgSrc.data('src'))
+                })
+            })
+        })
     </script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
