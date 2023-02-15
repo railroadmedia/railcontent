@@ -2825,7 +2825,8 @@ return [
             'user_playlist_item_id',
             'user_playlist_item_position',
             'is_full_track',
-            'is_instrumentless_track'
+            'is_instrumentless_track',
+            'route'
         ],
     ],
 ];
