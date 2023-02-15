@@ -113,7 +113,7 @@ class LeadgenSeeder extends Seeder
                         'duration' => 10,
                         'assets' => [
                             [
-                                'title' => 'How to practicey',
+                                'title' => 'How to practice',
                                 'src' => 'https://dzryyo1we6bm3.cloudfront.net/cooperdrummer/3-how-to-practice.pdf',
                                 'soundslice' => ''
                             ],
@@ -630,7 +630,7 @@ The second exercise is similar, but this time we’re playing longer groups of u
                         'assets' => [
                             [
                                 'title' => 'Song Chart',
-                                'src' => 'https://d1923uyy6spedc.cloudfront.net/236722-sheet-image-1573314094.svg',
+                                'src' => 'https://d1923uyy6spedc.cloudfront.net/236563-sheet-image-1573086392.svg',
                                 'soundslice' => ''
                             ],
                             [
@@ -1408,7 +1408,7 @@ The second exercise is similar, but this time we’re playing longer groups of u
                     [
                         'slug' => 'linear-drumming/4-gospel',
                         'title' => 'Gospel Grooves',
-                        'desc' => '//player.vimeo.com/video/158554374',
+                        'desc' => '',
                         'thumbnail' => 'https://i.vimeocdn.com/video/560727540-477b10caa006c5bd1c67b666ca5ff8408b56e302acfdeffc32513f649aa716bb-d_640',
                         'video_src' => '//player.vimeo.com/video/158554374',
                         'duration' => 8,
@@ -1655,7 +1655,7 @@ The second exercise is similar, but this time we’re playing longer groups of u
 <div class="text-center mt-8">
     <a class="rounded-md border-2 font-bold border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white py-2 px-4 md:px-10 lg:px-12" href="/rock-drumming-masterclass">Rock Drumming Masterclass</a>
 </div>',
-                        'thumbnail' => '',
+                        'thumbnail' => 'https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/prelaunch/5-myths.jpg',
                         'video_src' => 'https://www.youtube.com/embed/Yr8BE1M7qPc?rel=0&amp;showinfo=0',
                         'duration' => 4,
                         'assets' => [],
@@ -2091,7 +2091,7 @@ The second exercise is similar, but this time we’re playing longer groups of u
                         'duration' => 60,
                         'assets' => [
                             [
-                                'title' => 'MP3',
+                                'title' => 'PDF',
                                 'src' => 'https://dzryyo1we6bm3.cloudfront.net/ultimate-toolbox/bdbc/the-slide-technique.pdf',
                                 'soundslice' => ''
                             ],
@@ -2111,7 +2111,7 @@ The second exercise is similar, but this time we’re playing longer groups of u
                         'duration' => 55,
                         'assets' => [
                             [
-                                'title' => 'MP3',
+                                'title' => 'PDF',
                                 'src' => 'https://dzryyo1we6bm3.cloudfront.net/ultimate-toolbox/bdbc/the-heel-toe-technique.pdf',
                                 'soundslice' => ''
                             ],
@@ -2131,7 +2131,7 @@ The second exercise is similar, but this time we’re playing longer groups of u
                         'duration' => 48,
                         'assets' => [
                             [
-                                'title' => 'MP3',
+                                'title' => 'PDF',
                                 'src' => 'https://dzryyo1we6bm3.cloudfront.net/ultimate-toolbox/bdbc/the-swivel-technique.pdf',
                                 'soundslice' => ''
                             ],
@@ -2151,7 +2151,7 @@ The second exercise is similar, but this time we’re playing longer groups of u
                         'duration' => 52,
                         'assets' => [
                             [
-                                'title' => 'MP3',
+                                'title' => 'PDF',
                                 'src' => 'https://dzryyo1we6bm3.cloudfront.net/ultimate-toolbox/bdbc/the-constant-release-technique.pdf',
                                 'soundslice' => ''
                             ],
@@ -2171,7 +2171,7 @@ The second exercise is similar, but this time we’re playing longer groups of u
                         'duration' => 58,
                         'assets' => [
                             [
-                                'title' => 'MP3',
+                                'title' => 'PDF',
                                 'src' => 'https://dzryyo1we6bm3.cloudfront.net/ultimate-toolbox/bdbc/the-flat-foot-technique.pdf',
                                 'soundslice' => ''
                             ],
@@ -2191,7 +2191,7 @@ The second exercise is similar, but this time we’re playing longer groups of u
                         'duration' => 60,
                         'assets' => [
                             [
-                                'title' => 'MP3',
+                                'title' => 'PDF',
                                 'src' => 'https://dzryyo1we6bm3.cloudfront.net/ultimate-toolbox/bdbc/single-bass-drum-bootcamp.pdf',
                                 'soundslice' => ''
                             ],
@@ -2226,7 +2226,7 @@ The second exercise is similar, but this time we’re playing longer groups of u
                         'duration' => 65,
                         'assets' => [
                             [
-                                'title' => 'MP3',
+                                'title' => 'PDF',
                                 'src' => 'https://dzryyo1we6bm3.cloudfront.net/ultimate-toolbox/bdbc/double-bass-drum-bootcamp.pdf',
                                 'soundslice' => ''
                             ],
@@ -3753,7 +3753,7 @@ So if you enjoyed this series, come and check out <a href="/trial" target="_blan
                         'title' => 'Musical Application',
                         'desc' => '',
                         'thumbnail' => 'https://i.vimeocdn.com/video/571437697-d7fee13565686039492c607d16cc960019c795b46934079c42c5b10c6ac346e8-d?mw=1100&mh=619',
-                        'video_src' => '//player.vimeo.com/video/167037188',
+                        'video_src' => '//player.vimeo.com/video/167037194',
                         'duration' => 4,
                         'assets' => [
                             [
@@ -3791,7 +3791,7 @@ So if you enjoyed this series, come and check out <a href="/trial" target="_blan
                         'slug' => 'toolbox/lessons/exploring-guitar-rhythms/1',
                         'title' => 'Series Overview',
                         'desc' => '',
-                        'thumbnail' => '',
+                        'thumbnail' => 'https://i.vimeocdn.com/video/587450172-6a683fd27ef68ec34713047ae77b6c121ac34f19cdb6e8189198915fb9138bf6-d?mw=1000&mh=563',
                         'video_src' => '//player.vimeo.com/video/179472223',
                         'duration' => 2,
                         'assets' => [],
