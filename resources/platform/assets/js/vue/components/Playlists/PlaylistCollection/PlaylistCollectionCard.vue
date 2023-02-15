@@ -166,8 +166,8 @@
                 </div>
             </div>
             <!-- Pinned Icon -->
-            <div class="tw-inline-flex tw-items-center" 
-                 :class="[ !props.isListView ? 'tw-absolute tw-top-3 tw-right-3' : 'tw-px-4 xl:tw-px-8',`tw-text-${brand}`, { 'tw-opacity-0' : !list.pinned } ]"
+            <div class="tw-inline-flex tw-items-center tw-transition-colors" 
+                 :class="[ !props.isListView ? 'tw-absolute tw-top-3 tw-right-3' : 'tw-px-4 xl:tw-px-8',`tw-text-${brand}`, { 'tw-opacity-0' : !state.isPinned } ]"
             >
                 <musora-icon icon-name="tack" class="tw-w-[24px] tw-h-[24px] tw-mx-auto tw-hidden md:tw-flex" />
             </div>

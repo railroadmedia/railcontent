@@ -10,7 +10,9 @@ export const usePlaylistsStore = defineStore({
       },
     }
   },
-
+  getters: {
+    pinnedQuantity: (state) => state.playlists.length
+  },
   actions: {
     update({ playlists }) {
       this.$patch({
