@@ -15,6 +15,10 @@ const props = defineProps({
     type: String,
     default: ''
   },
+  token: {
+    type: String,
+    default: null
+  }
 });
 
 const emit = defineEmits(['onUploadDone', 'onUploadError']);
