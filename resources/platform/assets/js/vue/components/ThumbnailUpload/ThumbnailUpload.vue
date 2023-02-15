@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { XCircleIcon } from '@heroicons/vue/outline'
 import ImageDropzone from "../ImageDropzone/ImageDropzone.vue";
 import ImageCropper from "../ImageCropper/ImageCropper.vue";
@@ -11,7 +11,7 @@ import InfoModal from "../Modal/InfoModal.vue";
 
 const title = {
     dropzone: "Upload Image",
-    crop: "Crop your Avatar",
+    crop: "Crop Your Thumbnail",
     upload: "",
 };
 
@@ -82,7 +82,7 @@ function handleUploadError() {
             classOverride="tw-border-[#223F57] tw-border-[1px] tw-bg-white dark:tw-bg-[#081825] md:tw-max-w-xl xl:tw-max-w-2xl">
             <ImageDropzone v-if="uploadStep === 'dropzone'" @onImageSelected="handleImage" />
             <ImageCropper v-if="uploadStep === 'crop'" @onCrop="handleCrop" :selectedImage="selectedImage" />
-            <ImageUploadProgress :token="csrf_token" uploadService="/railcontent/upload-playlist-thumb" v-if="uploadStep === 'upload'" :image="croppedImage" :userId="userId"
+            <ImageUploadProgress :token="token" uploadService="/railcontent/upload-playlist-thumb" v-if="uploadStep === 'upload'" :image="croppedImage" :userId="userId"
                 @onUploadDone="handleUploadDone" @onUploadError="handleUploadError" />
         </InfoModal>
 
