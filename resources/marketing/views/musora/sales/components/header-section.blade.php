@@ -6,7 +6,7 @@
 {{--                    @if(!empty($promoVersion))--}}
 {{--                        style="background-image:url(https://cdn.musora.com/image/fetch/w_850,q_auto:best/{!! $promoThumbM !!});padding-bottom: 60%;"--}}
 {{--                    @else--}}
-{{--                        style="background-image:url(https://cdn.musora.com/image/fetch/w_850,q_auto:best/{!! $thumb !!});padding-bottom: 75%;"--}}
+                        style="background-image:url(https://cdn.musora.com/image/fetch/w_850,q_auto:best/{!! $thumb !!});padding-bottom: 75%;"
 {{--                    @endif--}}
                 >
                     <div class="join white smaller absolute bottom-1 left-1"><i class="fas fa-play"></i> Watch Trailer</div>
