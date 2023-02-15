@@ -37,6 +37,17 @@
 
     //-----------Methods-----------//
 
+    //Handle Share
+    const shareHandler = () => {
+        navigator.clipboard.writeText(props.list.url)
+        window.shownotification({
+            icon: 'fa-link',
+            text: `${ props.list.name } link copied to clipboard.`
+        })
+        //close after click
+        state.dropdownOpen = false;
+    };
+
     //Handle Pin/Unpin Request
     const pinHandler = (id, brand) => {
         if(!state.isPinned) { //PIN
@@ -49,7 +60,7 @@
                         playlistsStore.pinPlaylist(props.list)
                         //show success message
                         window.shownotification({
-                            icon: 'check',
+                            icon: 'playlist',
                             text: `${props.list.name} has been pinned within the sidebar.`
                         })
                     } else {
@@ -70,7 +81,7 @@
                         playlistsStore.unpinPlaylist(props.list)
                         //show success message
                         window.shownotification({
-                            icon: 'check',
+                            icon: 'playlist',
                             text: `${props.list.name} has been unpinned from the sidebar.`
                         })
                     } else {
@@ -108,7 +119,7 @@
     onBeforeMount(() => {
         //check if it's pinned with request? Or prerender?
         state.isPinned = props.list.pinned;
-        console.log('pinia playlists ', playlistsStore.playlists)
+        console.log('pinned playlists ', playlistsStore.pinnedPlaylists)
     }); 
     
     
@@ -197,7 +208,9 @@
                     <span class="tw-absolute tw-w-3 tw-h-3 tw-bg-white dark:tw-bg-[#081825] tw-rotate-45 tw-right-[11px]" :class="state.dropdownTop ? 'tw-bottom-[-4px]' : 'tw-top-[-4px]' "></span>
                     <ul class="tw-text-sm tw-w-full">
                         <li class="tw-w-full tw-flex">
-                            <button class="tw-flex tw-w-full tw-itemx-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-black/20">Share</button>
+                            <button class="tw-flex tw-w-full tw-itemx-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-black/20"
+                                    @click.prevent="shareHandler()"
+                            >Share</button>
                         </li>
                         <li class="tw-w-full tw-flex">
                             <button class="tw-flex tw-w-full tw-itemx-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-black/20">Edit</button>

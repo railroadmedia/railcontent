@@ -23,7 +23,7 @@ const props = defineProps({
     type: Boolean,
     default: false
   },
-  playlists: {
+  pinnedPlaylists: {
     type: Array,
     default: []
   },
@@ -89,7 +89,7 @@ const activePath = (path) => {
     </section>
 
     <!-- Playlists Section -->
-    <playlists-section :isSidebarCollapsed="isSidebarCollapsed" :playlists="playlists"
+    <playlists-section :isSidebarCollapsed="isSidebarCollapsed" :pinnedPlaylists="pinnedPlaylists"
       :isActivePath="activePath(`/${brand}/lists/my-list`)" :brand="brand" :userId="userId"></playlists-section>
 
   </SidebarContainer>

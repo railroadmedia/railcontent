@@ -9,7 +9,7 @@ import { usePlaylistsStore } from '../../../stores/playlists';
 
 const props = defineProps({
     isSidebarCollapsed: Boolean,
-    playlists: Array,
+    pinnedPlaylists: Array,
     brand: String,
     isActivePath: Boolean,
     userId: String,
@@ -22,7 +22,7 @@ const playlistsStore = usePlaylistsStore();
 
 // Format Playlist to add Url and filter it on mount
 const formattedPlaylists = computed(() => {
-    return props.playlists.map(
+    return props.pinnedPlaylists.map(
         ({ id, ...playlist }, index) => {
             if ( index < 5 ) {
                 return ({
@@ -50,7 +50,7 @@ const unpinPlaylist = (item, brand) => {
                 playlistsStore.unpinPlaylist(item)
                 //Confirmation
                 window.shownotification({
-                    icon: 'check',
+                    icon: 'playlist',
                     text: `${item.name} has been unpinned from the sidebar.`
                 })
             } else {
@@ -64,7 +64,7 @@ const unpinPlaylist = (item, brand) => {
 }
 
 onBeforeMount(()=> {
-    console.log('playlists ',props.playlists)
+    console.log('playlists ', props.pinnedPlaylists)
 })
 </script>
 <template>
