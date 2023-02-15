@@ -446,7 +446,7 @@
                     class="join blue medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 @if(!is_current_user_a_member()) anchor-slide @endif">ENROLL NOW</a><br>
             @endif
             <img class="h-7 mr-1 mb-5 sm:mb-10 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/Joined_profiles.png" alt="joined profiles">
-            <p class="inline-block leading-tight text-sm align-middle mb-5 sm:mb-10">Join {{ $nPackOwners ?? 0 }} drummers who<br> have already registered.</p>
+            <p class="inline-block leading-tight text-sm align-middle mb-5 sm:mb-10">Join {{ number_format($nPackOwners ?? 0) }} drummers who<br> have already registered.</p>
 
         </div>
     </section>
@@ -682,7 +682,7 @@
                     class="join blue medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 @if(!is_current_user_a_member()) anchor-slide @endif">ENROLL NOW</a><br>
             @endif
             <img class="h-7 mr-1 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/Joined_profiles.png">
-            <p class="inline-block leading-tight text-sm align-middle">Join {{ $nPackOwners ?? 0 }} drummers who<br> have already registered.</p>
+            <p class="inline-block leading-tight text-sm align-middle">Join {{ number_format($nPackOwners ?? 0) }} drummers who<br> have already registered.</p>
         </div>
     </section>
     <section class="text-white text-center px-5 sm:px-6 py-10 sm:py-16 lg:py-20" style="background:linear-gradient(to bottom, #0b76db, #074c8e);">
@@ -748,7 +748,7 @@
                         <div class="w-full mx-auto sm:mx-0">
 
                             <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-drumeo mr-1"></i> Learn drums by playing drums with Domino Santantonio</p>
-                            <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-drumeo mr-1"></i> Join {{ $nPackOwners ?? 0 }} drummers who’ve already registered.</p>
+                            <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-drumeo mr-1"></i> Join {{ number_format($nPackOwners ?? 0) }} drummers who’ve already registered.</p>
                             <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-drumeo mr-1"></i> Course runs February 27 to March 27.</p>
                             <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-drumeo mr-1"></i>  Click below to join the next edition of 30-Day Drummer</p>
 
