@@ -22,7 +22,7 @@ use Railroad\Ecommerce\Events\UserProducts\UserProductCreated;
 use Railroad\Ecommerce\Events\UserProducts\UserProductDeleted;
 use Railroad\Ecommerce\Events\UserProducts\UserProductUpdated;
 use App\Modules\EventDataSynchronizer\Console\Commands\HelpScoutIndex;
-use App\Modules\EventDataSynchronizer\Console\Commands\PackOwnerUserFieldResyncTool;
+use App\Modules\EventDataSynchronizer\Console\Commands\ProductOwnerUserFieldResyncTool;
 use App\Modules\EventDataSynchronizer\Console\Commands\SyncCustomerIoExistingDevices;
 use App\Modules\EventDataSynchronizer\Console\Commands\SyncCustomerIoForUpdatedUserProductsAndSubscriptions;
 use App\Modules\EventDataSynchronizer\Console\Commands\SyncCustomerIoOldEvents;
@@ -208,7 +208,7 @@ class EventDataSynchronizerServiceProvider extends EventServiceProvider
                 SyncCustomerIoOldEvents::class,
                 SyncCustomerIoExistingDevices::class,
                 UserMembershipFieldsResyncTool::class,
-                PackOwnerUserFieldResyncTool::class,
+                ProductOwnerUserFieldResyncTool::class,
                 SyncUserTotalXp::class,
                 IsDrumeoLifetimeUserFieldResyncTool::class,
                 CustomerIOSyncUser::class
