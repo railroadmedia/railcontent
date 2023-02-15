@@ -108,4 +108,30 @@ export default {
     //-------------DELETE--------------//
 
 
+
+    //-------------READ--------------//
+
+    /**
+     * GET Get Soundslice Assignments for content
+     *
+     * @param {string} brand
+     * @param {number} contentId -
+     * @param {string} token
+     */
+    getAssignmentsForContent({ brand = "drumeo", token, contentId }) {
+        const payload = {
+            "brand": brand,
+        }
+        const headers = {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': token
+        };
+        return axios({
+            method: 'GET',
+            url: `/railcontent/lessons-and-assignments-count/${contentId}`,
+            params: payload,
+            headers
+        });
+    },
+
 };
