@@ -30,14 +30,14 @@ class PlaylistDecorator extends ModeDecoratorBase
     {
         $playlists = $playlists->toArray();
         $pinnedPlaylists = $this->pinnedPlaylistsRepository->getMyPinnedPlaylists();
-        //$pinnedPlaylists = array_combine(array_column($pinnedPlaylists, 'playlist_id'), $pinnedPlaylists);
+        $pinnedPlaylistsd = array_combine(array_column($pinnedPlaylists, 'id'), $pinnedPlaylists);
         $userIds = [];
 
         foreach ($playlists as $index => $playlist) {
             $userIds[] = $playlist['user_id'];
             $playlists[$index]['url'] =
                 url()->route('platform.user.playlist', ["id" => $playlist['id'], "brand" => brand()]);
-            $playlists[$index]['pinned'] = array_key_exists($playlist['id'], $pinnedPlaylists);
+            $playlists[$index]['pinned'] = array_key_exists($playlist['id'], $pinnedPlaylistsd);
             if (!$playlist['thumbnail_url']) {
                 $playlists[$index]['uploaded_thumbnail'] = false;
                 $lessons = $this->userPlaylistsService->getUserPlaylistContents($playlist['id'], [], 1);
