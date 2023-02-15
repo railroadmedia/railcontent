@@ -221,7 +221,7 @@ onUnmounted(() => {
 })
 
 onUpdated(() => {
-  console.log(playlistsStore.modalOpen)
+  // console.log(playlistsStore.modalOpen)
 });
 </script>
 

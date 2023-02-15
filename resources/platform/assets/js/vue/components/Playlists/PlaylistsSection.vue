@@ -1,9 +1,11 @@
 <!-- Playlists -->
 <script setup>
 //Icons
-import { computed } from 'vue';
+import { computed, onBeforeMount, inject } from 'vue';
 import MusoraIcon from '../MusoraIcons/MusoraIcon.vue';
 import { textColor, borderColor } from '../../../constants/brands.js';
+import PlaylistService from '../../../services/playlists.js';
+import { usePlaylistsStore } from '../../../stores/playlists';
 
 const props = defineProps({
     isSidebarCollapsed: Boolean,
@@ -13,13 +15,19 @@ const props = defineProps({
     userId: String,
 });
 
+//Inject
+const token = inject('csrf_token');
+//Pinia Stores
+const playlistsStore = usePlaylistsStore();
+
 // Format Playlist to add Url and filter it on mount
 const formattedPlaylists = computed(() => {
     return props.playlists.map(
         ({ id, ...playlist }, index) => {
-            if (index < 5) {
+            if ( index < 5 ) {
                 return ({
                     ...playlist,
+                    id,
                     url: `/${props.brand}/playlist/${id}`
                 })
             } else {
@@ -32,6 +40,32 @@ const formattedPlaylists = computed(() => {
 const handleCreatePlaylist = () => {
     window.openplaylistmodal({ modalType: 'create' });
 };
+
+const unpinPlaylist = (item, brand) => {
+    console.log('item id', item.id)
+    PlaylistService.unpinPlaylist(item.id, brand, token)
+        .then((response) => {
+            if(response.status === 200) { 
+                //emit event or update pinia
+                playlistsStore.unpinPlaylist(item)
+                //Confirmation
+                window.shownotification({
+                    icon: 'check',
+                    text: `${item.name} has been unpinned from the sidebar.`
+                })
+            } else {
+                //handle error
+                window.shownotification({
+                    icon: 'error',
+                    text: 'Woops! Something wrong happened, please try again later.'
+                })
+            }
+        })
+}
+
+onBeforeMount(()=> {
+    console.log('playlists ',props.playlists)
+})
 </script>
 <template>
     <section>
@@ -57,24 +91,27 @@ const handleCreatePlaylist = () => {
             <div v-if="!isSidebarCollapsed" class="tw-text-sm tw-transition tw-pb-2">
                 <ul class="tw-font-open-sans tw-text-[#00101D] dark:tw-text-white tw-text-[14px] tw-overflow-hidden"
                     v-if="formattedPlaylists.length > 0">
+
                     <!-- Loop through User Playlists -->
                     <li class="tw-group tw-w-full tw-flex tw-overflow-hidden dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
-                        v-for="({ url, id, name, playback_url }) in formattedPlaylists" :key="id + '-playlist-li'">
-                        <a :href="url"
+                        v-for="item in formattedPlaylists" :key="item.id + '-playlist-li'"
+                    >
+                        <a :href="item.url"
                             class="tw-flex tw-flex-wrap tw-px-[25px] tw-w-full tw-no-underline tw-text-inherit tw-h-[42px] tw-items-center">
-                            <span class="tw-min-w-0 tw-truncate tw-capitalize tw-text-sm">{{ name }}</span>
+                            <span class="tw-min-w-0 tw-truncate tw-capitalize tw-text-sm">{{ item.name }}</span>
                         </a>
                         <div class="md:tw-hidden group-hover:tw-inline-flex tw-w-[30px] tw-shrink-0 tw-items-center tw-justify-center" :class="`tw-text-${brand}`">
-                            <button title="Unpin Playlist" @click="console.log()">
+                            <button title="Unpin Playlist" @click="unpinPlaylist(item, brand)">
                                 <musora-icon icon-name="tack" class="tw-w-[24px] tw-h-[24px] tw-mx-auto"  />
                             </button>
                         </div>
                         <div class="md:tw-hidden group-hover:tw-inline-flex dark:tw-text-white tw-w-[42px] tw-shrink-0 tw-items-center tw-justify-center">
-                            <a :href="playback_url" class="" :title="`Go To Player`">
+                            <a :href="item.playback_url" class="tw-text-[#00101D] dark:tw-text-white" :title="`Go To Player`">
                                 <musora-icon icon-name="play-circle-filled" class="tw-w-[24px]" />
                             </a>
                         </div>
                     </li>
+
                 </ul>
                 <!-- <div v-else class="tw-flex tw-flex-col tw-items-center">
                     <p class="tw-text-xs tw-italic tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]">Your pinned playlists will show up here.</p>

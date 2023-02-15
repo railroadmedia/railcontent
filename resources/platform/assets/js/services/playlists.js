@@ -66,7 +66,6 @@ export default {
      *
      */
     pinPlaylist(id, brand = "drumeo", csrf_token) {
-        console.log('call pistPlaylist')
         return axios.put(
             '/railcontent/pin-playlist',
             {
@@ -91,7 +90,6 @@ export default {
      *
      */
     unpinPlaylist(id, brand = "drumeo", csrf_token) {
-        console.log('call unpistPlaylist')
         return axios.put(
             '/railcontent/unpin-playlist',
             {

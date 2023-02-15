@@ -17,11 +17,13 @@ export const usePlaylistsStore = defineStore({
         playlists,
       });
     },
-    pinItem(id) {
-
+    pinPlaylist(playlist) {
+      this.playlists.push(playlist)
     },
-    unpinItem(id) {
-
+    unpinPlaylist(playlist) {
+      this.playlists = this.playlists.filter(p => {
+        return p.id !== playlist.id;
+      })
     },
     openModal(modalOpen) {
       this.$patch({

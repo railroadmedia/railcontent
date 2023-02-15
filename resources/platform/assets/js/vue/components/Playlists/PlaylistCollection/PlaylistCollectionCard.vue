@@ -46,10 +46,18 @@
                         //handle pin
                         state.isPinned = true;
                         //emit event or update pinia
-                        playlistsStore.update({ playlists: props.playlists });
+                        playlistsStore.pinPlaylist(props.list)
                         //show success message
+                        window.shownotification({
+                            icon: 'check',
+                            text: `${props.list.name} has been pinned within the sidebar.`
+                        })
                     } else {
-                        //handle error  
+                        //handle error
+                        window.shownotification({
+                            icon: 'error',
+                            text: 'Woops! Something wrong happened, please try again later.'
+                        })
                     }
                 })
         } else { //UNPIN
@@ -59,9 +67,18 @@
                         //handle unpin
                         state.isPinned = false;
                         //emit event or update pinia
-                        playlistsStore.update({ playlists: props.playlists });
+                        playlistsStore.unpinPlaylist(props.list)
+                        //show success message
+                        window.shownotification({
+                            icon: 'check',
+                            text: `${props.list.name} has been unpinned from the sidebar.`
+                        })
                     } else {
                         //handle error
+                        window.shownotification({
+                            icon: 'error',
+                            text: 'Woops! Something wrong happened, please try again later.'
+                        })
                     }
                 })
         }
@@ -91,8 +108,7 @@
     onBeforeMount(() => {
         //check if it's pinned with request? Or prerender?
         state.isPinned = props.list.pinned;
-
-        console.log('pinia playlist', playlistsStore.playlists[0])
+        console.log('pinia playlists ', playlistsStore.playlists)
     }); 
     
     
