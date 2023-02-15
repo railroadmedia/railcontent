@@ -136,16 +136,16 @@
                             $bodyData = $bodyData.'soundsliceModal'.($key+21).': false,';
                             $resourceName = '';
 
-                            if(str_contains($asset->src, 'mp3')){
+                            if(str_contains($asset->src, '.mp3')){
                                 $resourceName = 'mp3URL';
                             }
-                            elseif(str_contains($asset->src, 'svg') || str_contains($asset->src, 'jpg') || str_contains($asset->src, 'png') || str_contains($asset->src, 'jpeg')){
+                            elseif(str_contains($asset->src, '.svg') || str_contains($asset->src, 'jpg') || str_contains($asset->src, 'png') || str_contains($asset->src, 'jpeg')){
                                 $resourceName = 'imgURL';
                             }
-                            elseif(str_contains($asset->src, 'pdf')){
+                            elseif(str_contains($asset->src, '.pdf')){
                                 $resourceName = 'pdfURL';
                             }
-                            elseif(str_contains($asset->src, 'zip')){
+                            elseif(str_contains($asset->src, '.zip')){
                                 $resourceName = 'zipURL';
                             }
                         @endphp
@@ -162,16 +162,16 @@
                             $bodyData = $bodyData.'soundsliceModal'.($key+41).': false,';
                             $resourceName = '';
 
-                            if(str_contains($asset->src, 'mp3')){
+                            if(str_contains($asset->src, '.mp3')){
                                 $resourceName = 'mp3URL';
                             }
-                            elseif(str_contains($asset->src, 'svg') || str_contains($asset->src, 'jpg') || str_contains($asset->src, 'png') || str_contains($asset->src, 'jpeg')){
+                            elseif(str_contains($asset->src, '.svg') || str_contains($asset->src, 'jpg') || str_contains($asset->src, 'png') || str_contains($asset->src, 'jpeg')){
                                 $resourceName = 'imgURL';
                             }
-                            elseif(str_contains($asset->src, 'pdf')){
+                            elseif(str_contains($asset->src, '.pdf')){
                                 $resourceName = 'pdfURL';
                             }
-                            elseif(str_contains($asset->src, 'zip')){
+                            elseif(str_contains($asset->src, '.zip')){
                                 $resourceName = 'zipURL';
                             }
                         @endphp
