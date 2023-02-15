@@ -4,26 +4,27 @@ export const usePlaylistsStore = defineStore({
   id: 'Playlists',
   state: () => {
     return {
-      playlists: [], // [{ id: '', title: '', isPinned: false}]
+      pinnedPlaylists: [], // [{ id: '', title: '', isPinned: false}]
+      loadedPlaylists: [],
       modalOpen: {
         modalType: null,
       },
     }
   },
   getters: {
-    pinnedQuantity: (state) => state.playlists.length
+    pinnedQuantity: (state) => state.pinnedPlaylists.length
   },
   actions: {
-    update({ playlists }) {
+    update({ pinnedPlaylists }) {
       this.$patch({
-        playlists,
+        pinnedPlaylists,
       });
     },
     pinPlaylist(playlist) {
-      this.playlists.push(playlist)
+      this.pinnedPlaylists.push(playlist)
     },
     unpinPlaylist(playlist) {
-      this.playlists = this.playlists.filter(p => {
+      this.pinnedPlaylists = this.pinnedPlaylists.filter(p => {
         return p.id !== playlist.id;
       })
     },

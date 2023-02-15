@@ -181,7 +181,7 @@ onBeforeMount(() => {
   };
 
   // Initialize playlists pinia store
-  playlistsStore.update({ playlists: props.playlists });
+  playlistsStore.update({ pinnedPlaylists: props.playlists });
 });
 
 const handleCloseConfirmationModal = () => {
@@ -257,7 +257,7 @@ onUpdated(() => {
       <!-- Sidebar -->
       <Sidebar :brand="brand" :isLive="isLive" :isSidebarCollapsed="isSidebarCollapsed"
         :isSidebarHidden="isSidebarHidden" @onCollapseSidebar="onCollapseSidebar"
-        :forceSidebarHidden="forceSidebarHidden" :playlists="playlistsStore.playlists" :user-id="userId" />
+        :forceSidebarHidden="forceSidebarHidden" :pinnedPlaylists="playlistsStore.pinnedPlaylists" :user-id="userId" />
 
       <!-- Content Container -->
       <main class="

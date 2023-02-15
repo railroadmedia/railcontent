@@ -16,10 +16,12 @@
                   tw-bg-[#081825]
                   ${slideClassData}`
         ">
-          <div class="tw-flex tw-justify-between tw-items-center tw-text-small">
+          <div class="tw-flex tw-justify-between tw-items-center tw-text-sm">
             <div>
-              <i class="fas tw-mr-2 tw-text-[22px]" :class="notificationIcon ? notificationIcon : 'fa-bell'"></i>
-              {{ notificationText }}
+              <musora-icon v-if="SVGIcon.length" :icon-name="SVGIcon" class="tw-w-[24px] tw-mr-2 tw-inline-flex" />
+              <i v-else class="fas tw-mr-2 tw-text-[22px]" :class="notificationIcon ? notificationIcon : 'fa-bell'"></i>
+              
+              <span class="tw-font-bold tw-text-sm">{{ notificationText }}</span>
             </div>
             <button class="tw-ml-2 dark:tw-bg-[#E4E4E7] tw-bg-[#223F57] tw-w-[40px] tw-h-[40px] tw-flex-shrink-0 tw-border-none tw-rounded-full"
               v-on:click="handleOnClose">
@@ -33,6 +35,7 @@
 </template>
 
 <script>
+import MusoraIcon from '../../../../vue/components/MusoraIcons/MusoraIcon.vue'
 export default {
   name: "NotificationToasts",
   props: {
@@ -43,6 +46,10 @@ export default {
     text: {
       type: String,
       default: () => "",
+    },
+    isSVGIcon: {
+      type: Boolean, 
+      default: () => false,
     },
     icon: {
       type: String,
@@ -65,11 +72,18 @@ export default {
         this.$emit('onClose');
         this.slideClassData = 'slide-in-bottom';
       }, 500);
+    },
+   
+    //Capitalize Helper
+    capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
     }
+
   },
   data() {
     return {
       showNotification: false,
+      SVGIcon: '', 
       notificationIcon: this.icon,
       notificationText: this.text,
       slideClassData: this.slideClass,
@@ -80,6 +94,13 @@ export default {
       this.slideClassData = val;
     },
     icon(val) {
+      //Check if it's a Musora Icon
+       if (val === 'playlist') {
+        this.SVGIcon = val;
+      } else {
+        this.SVGIcon = '';
+      }
+      //Check Fontawesome Icons
       if (val === 'error') {
         this.notificationIcon = 'fa-exclamation-circle tw-text-[#ef4444]';
       } else if (val === 'warning') {
@@ -90,7 +111,7 @@ export default {
         this.notificationIcon = 'fa-child dark:tw-text-black tw-text-white';
       } else {
         this.notificationIcon = val;
-      }
+      } 
       if (val !== '') {
         this.showNotification = true;
       } else {
@@ -103,7 +124,7 @@ export default {
       } else {
         this.showNotification = false;
       }
-      this.notificationText = val;
+      this.notificationText = this.capitalizeFirstLetter(val);
     },
     isError(val) {
       if (val) {
