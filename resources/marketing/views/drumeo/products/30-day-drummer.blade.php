@@ -685,6 +685,7 @@
             <p class="inline-block leading-tight text-sm align-middle">Join {{ number_format($nPackOwners ?? 0) }} drummers who<br> have already registered.</p>
         </div>
     </section>
+    <div id="healthy" class="anchor"></div>
     <section class="text-white text-center px-5 sm:px-6 py-10 sm:py-16 lg:py-20" style="background:linear-gradient(to bottom, #0b76db, #074c8e);">
         <div class="container max-w-5xl mx-auto">
             <h2><strong>Your brain on drums.</strong></h2>
