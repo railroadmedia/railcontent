@@ -10,6 +10,7 @@ use Railroad\Railcontent\Events\CommentDeleted;
 use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Repositories\CommentRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
+use Railroad\Railcontent\Repositories\ReportedCommentRepository;
 
 class CommentService
 {
@@ -24,6 +25,8 @@ class CommentService
      */
     protected $contentRepository;
 
+    protected ReportedCommentRepository $reportedCommentRepository;
+
     /** The value it's set in ContentPermissionMiddleware;
      * if the user it's an administrator the value it's true and the administrator can update/delete any comment;
      * otherwise the value it's false and the user can update/delete only his own comments
@@ -33,16 +36,18 @@ class CommentService
     public static $canManageOtherComments = false;
 
     /**
-     * CommentService constructor.
-     *
      * @param CommentRepository $commentRepository
+     * @param ContentRepository $contentRepository
+     * @param ReportedCommentRepository $reportedCommentRepository
      */
     public function __construct(
         CommentRepository $commentRepository,
-        ContentRepository $contentRepository
+        ContentRepository $contentRepository,
+        ReportedCommentRepository $reportedCommentRepository
     ) {
         $this->commentRepository = $commentRepository;
         $this->contentRepository = $contentRepository;
+        $this->reportedCommentRepository = $reportedCommentRepository;
     }
 
     /** Call the getById method from repository and return the comment if exist and null otherwise
@@ -360,9 +365,32 @@ class CommentService
         return floor($countLatestComments / $limit) + 1;
     }
 
+    /**
+     * @param $userId
+     * @return int
+     */
     public function markUserCommentsAsDeleted($userId)
     {
         return $this->commentRepository->markUserCommentsAsDeleted($userId);
+    }
+
+    /**
+     * @param $commentId
+     * @return bool
+     */
+    public function reportComment($commentId)
+    {
+        return $this->reportedCommentRepository->query()
+            ->updateOrInsert(
+                [
+                    'comment_id' => $commentId,
+                    'reporter_id' => auth()->id(),
+                ],
+                [
+                    'created_on' => Carbon::now()
+                        ->toDateTimeString(),
+                ]
+            );
     }
 
 }

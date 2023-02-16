@@ -266,6 +266,8 @@ class CommentJsonController extends Controller
         $currentUser = auth()->user();
         $brand = config('railcontent.brand');
 
+        $this->commentService->reportComment($id);
+
         $input['subject'] =
             'Comment reported by '.
             $currentUser['display_name'].
