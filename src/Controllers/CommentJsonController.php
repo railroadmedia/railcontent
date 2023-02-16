@@ -272,8 +272,8 @@ class CommentJsonController extends Controller
             " (".
             $currentUser['email'].
             ")";
-        $input['sender-address'] = $currentUser['email'];
-        $input['sender-name'] = $currentUser['display_name'];
+        $input['sender-address'] = config('mailora.report-sender-address');
+        $input['sender-name'] = config('mailora.report-sender-name');
         $input['lines'] = ['The following comment has been reported:'];
         $input['lines'][] = $comment['comment'];
         $input['lines'][] = $comment['url'];
