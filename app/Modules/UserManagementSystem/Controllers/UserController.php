@@ -2,6 +2,7 @@
 
 namespace Modules\UserManagementSystem\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -13,6 +14,7 @@ use Illuminate\Validation\ValidationException;
 use Modules\UserManagementSystem\Events\User\UserCreated;
 use Modules\UserManagementSystem\Events\User\UserDeleted;
 use Modules\UserManagementSystem\Events\User\UserUpdated;
+use Modules\UserManagementSystem\Models\ReportedUser;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Mailora\Services\MailService;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -318,9 +320,13 @@ class UserController extends Controller
         $currentUser = user();
         $brand = brand();
 
+        ReportedUser::firstOrNew(['user_id' => $id,
+                                     'reporter_id' => $currentUser['id'],
+                                     "created_on" => Carbon::now()->toDateTimeString()])->save();
+
         $input['subject'] = 'User reported by '.$currentUser['display_name']." (".$currentUser['email'].")";
-        $input['sender-address'] = $currentUser['email'];
-        $input['sender-name'] = $currentUser['display_name'];
+        $input['sender-address'] = config('mailora.report-sender-address');
+        $input['sender-name'] = config('mailora.report-sender-name');
         $input['lines'] = ['The following user has been reported:'];
         $input['lines'][] = $user['display_name'];
         $input['lines'][] = $user['email'];

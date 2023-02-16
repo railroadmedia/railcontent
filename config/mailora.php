@@ -19,6 +19,8 @@ return [
     'name-of-production-env' => env('MAILORA_NAME_OF_PROD_ENV', 'production'),
     'public-free-for-all' => env('MAILORA_PUBLIC_FREE_FOR_ALL', false),
     'admin' => env('MAILORA_DEFAULT_ADMIN', null),
+    'report-sender-address' => 'system@musora.com',
+    'report-sender-name' => 'Musora',
 
     // 2. Some required, some optional...
     'defaults' => [
