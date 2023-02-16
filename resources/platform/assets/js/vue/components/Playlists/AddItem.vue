@@ -9,6 +9,7 @@ import PlaylistService from '../../../services/playlists';
 import Toggle from '../Toggle/Toggle.vue'
 import Table from '../Table/Table.vue'
 import { PlusCircleIcon, PlusIcon } from '@heroicons/vue/outline';
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner.vue';
 
 const props = defineProps({
     brand: {
@@ -21,10 +22,13 @@ const props = defineProps({
     }
 });
 
+const emit = defineEmits([]);
 
 const importAll = ref(false);
 const formattedRows = ref([]);
 const additionalItems = ref(0);
+const isLoadingPlaylists = ref(false);
+const isLoadingAssignments = ref(false);
 
 const handleOnToggle = (val) => {
     importAll.value = val;
@@ -35,10 +39,17 @@ const handleActionClick = (payload) => {
 };
 
 onMounted(() => {
+    isLoadingAssignments.value = true;
+    isLoadingPlaylists.value = true;
+
     PlaylistService.getAssignmentsForContent({ token: props.csrf_token, contentId: props.contentId, brand: props.brand }).then((r) => {
-        console.log(r)
+        const { data: { soundslice_assignments_count } } = r;
+        additionalItems.value = soundslice_assignments_count;
+        isLoadingAssignments.value = false;
     });
+
     PlaylistService.getCurrentUserPlaylists({ token: props.csrf_token }).then(r => {
+        isLoadingPlaylists.value = false;
         const { data: { data } } = r;
         const formattedTable = data.map((item) => {
             const { name, thumbnail_url, duration_formated, id, created_at } = item;
@@ -72,17 +83,24 @@ onMounted(() => {
 
 <template>
     <div class="tw-flex tw-flex-col tw-justify-center tw-items-center tw-text-white tw-text-center">
+        <div v-if="isLoadingAssignments || isLoadingPlaylists"
+            class="tw-z-40 tw-flex tw-w-full tw-h-full tw-text-white tw-absolute tw-items-center tw-justify-center tw-bg-black/40">
+            <LoadingSpinner class="tw-w-[40px] tw-h-[40px] tw-text-white" />
+        </div>
         <h2 class="tw-text-[24px] tw-font-bold tw-w-full tw-text-center">Add Item to Playlist</h2>
-        <h4 class="tw-text-[16px] tw-text-left tw-w-full">Additional Playlist Items</h4>
-        <div class="tw-flex tw-w-full">
-            <fieldset class="tw-flex tw-flex-row tw-items-center tw-w-full">
-                <p class="tw-text-left tw-text-[14px] tw-pr-[16px]">Your selected videos contain 7 additional assignment items. Would you like to also import them into your playlist?</p>
-                <Toggle @onToggle="handleOnToggle" />
-            </fieldset>
+        <div class="tw-flex tw-w-full tw-justify-center tw-flex-col" v-if="additionalItems > 0">
+            <h4 class="tw-text-[16px] tw-text-left tw-w-full">Additional Playlist Items</h4>
+            <div class="tw-flex tw-w-full">
+                <fieldset class="tw-flex tw-flex-row tw-items-center tw-w-full">
+                    <p class="tw-text-left tw-text-[14px] tw-pr-[16px]">Your selected videos contain {{ additionalItems }} additional
+                        assignment items. Would you like to also import them into your playlist?</p>
+                    <Toggle @onToggle="handleOnToggle" />
+                </fieldset>
+            </div>
         </div>
         <Table @onActionClick="handleActionClick" classOverride="tw-mt-[24px]" :rows="formattedRows">
             <template v-slot:actionContent>
-                <PlusCircleIcon class="tw-w-[23px] tw-h-[23px] tw-text-[#7E9AB1]"  />
+                <PlusCircleIcon class="tw-w-[23px] tw-h-[23px] tw-text-[#7E9AB1]" />
             </template>
         </Table>
         <div class="tw-w-full tw-flex tw-justify-between tw-pt-[25px]">
@@ -91,7 +109,7 @@ onMounted(() => {
                 <span class="tw-pl-[6px]">CREATE NEW LIST</span>
             </button>
             <div class="tw-flex">
-                <button class="tw-btn-primary tw-uppercase tw-text-white tw-h-[35px]">CANCEL</button>
+                <button @click="" class="tw-btn-primary tw-uppercase tw-text-white tw-h-[35px]">CANCEL</button>
                 <button :class="`tw-btn-primary tw-uppercase tw-text-white tw-bg-${brand} tw-h-[35px]`">CONFIRM</button>
             </div>
         </div>
