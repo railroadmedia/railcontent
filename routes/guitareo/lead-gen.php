@@ -143,7 +143,7 @@ Route::domain('{guitareoDomain}')
                 ->whereIn('page', [null, 'lessons']);
             Route::get('/lessons/changing-chords-smoothly/{num?}', LeadGenController::class . '@changingChords')
                 ->whereIn('num', ['1', '2', '3', '4', '5', '6', '7']);
-            Route::get('/lessons/exploring-guitar-rhythms/{num?}', LeadGenController::class . '@exportRhythms')
+            Route::get('/lessons/exploring-guitar-rhythms/{num?}', LeadGenController::class . '@exploreRhythms')
                 ->whereIn('num', [
                     null, '1', '2', '3', '4', '5', '6', '7'
                 ]);
