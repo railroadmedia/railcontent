@@ -83,8 +83,8 @@ class UserPlaylistsService
         $userId,
         $playlistType,
         $brand = null,
-        $limit,
-        $page,
+        $limit = null,
+        $page = 1,
         $term = null,
         $sort = '-created_at'
     ) {
@@ -222,7 +222,7 @@ class UserPlaylistsService
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function addItemToPlaylist(
-        $userPlaylistId,
+        $userPlaylistIds,
         $contentId,
         $position = null,
         $extraData = [],
@@ -232,19 +232,8 @@ class UserPlaylistsService
         $importFullSoundsliceAssignment = false,
         $importInstrumentlessSoundsliceAssignment = false
     ) {
-        error_log(
-            'Add item to playlist - playlistId :::'.
-            $userPlaylistId.
-            '     contentId:::'.
-            $contentId.
-            '   import all assignments::'.
-            $importAllAssignments.
-            '  import full::'.
-            $importFullSoundsliceAssignment.
-            '  import instrumentless:::'.
-            $importInstrumentlessSoundsliceAssignment
-        );
         $content = $this->contentService->getById($contentId);
+
 
         $singularContentTypes = array_diff(array_merge(
                                                config('railcontent.showTypes')[config('railcontent.brand')] ?? [],
@@ -253,34 +242,24 @@ class UserPlaylistsService
 
         $assignments = $this->contentService->countLessonsAndAssignments($contentId);
 
-        if ($content && (in_array($content['type'], $singularContentTypes))) {
-            error_log('Singular content type');
-            $input = [
-                'content_id' => $contentId,
-                'user_playlist_id' => $userPlaylistId,
-                'position' => $position,
-                'extra_data' => $extraData,
-                'start_second' => $startSecond,
-                'end_second' => $endSecond,
-                'created_at' => Carbon::now()
-                    ->toDateTimeString(),
-            ];
+        foreach ($userPlaylistIds as $userPlaylistId) {
+            error_log(
+                'Add item to playlist - playlistId :::'.
+                $userPlaylistId.
+                '     contentId:::'.
+                $contentId.
+                '   import all assignments::'.
+                $importAllAssignments.
+                '  import full::'.
+                $importFullSoundsliceAssignment.
+                '  import instrumentless:::'.
+                $importInstrumentlessSoundsliceAssignment
+            );
 
-            $this->userPlaylistContentRepository->createOrUpdatePlaylistContentAndReposition(null, $input);
-
-            if ($importAllAssignments) {
-                $this->addSounsliceAssignments(
-                    $assignments['soundslice_assignments'][$contentId] ?? [],
-                    $userPlaylistId
-                );
-            }
-        }
-
-        if (!empty($assignments['lessons'])) {
-            foreach ($assignments['lessons'] ?? [] as $lesson) {
-                error_log('Add lesson with id:::: '.$lesson['id']);
+            if ($content && (in_array($content['type'], $singularContentTypes))) {
+                error_log('Singular content type');
                 $input = [
-                    'content_id' => $lesson['id'],
+                    'content_id' => $contentId,
                     'user_playlist_id' => $userPlaylistId,
                     'position' => $position,
                     'extra_data' => $extraData,
@@ -291,50 +270,75 @@ class UserPlaylistsService
                 ];
 
                 $this->userPlaylistContentRepository->createOrUpdatePlaylistContentAndReposition(null, $input);
+
                 if ($importAllAssignments) {
                     $this->addSounsliceAssignments(
-                        $assignments['soundslice_assignments'][$lesson['id']] ?? [],
+                        $assignments['soundslice_assignments'][$contentId] ?? [],
                         $userPlaylistId
                     );
                 }
             }
-        }
 
-        if ($importFullSoundsliceAssignment) {
-            foreach ($assignments['soundslice_assignments'][$contentId] ?? [] as $assignment) {
-                error_log('Add full soundslice with id:::: '.$assignment['id']);
-                $assignmentInput = [
-                    'content_id' => $assignment['id'],
-                    'user_playlist_id' => $userPlaylistId,
-                    'created_at' => Carbon::now()
-                        ->toDateTimeString(),
-                    'extra_data' => json_encode(['is_full_track' => true]),
-                ];
-                $this->userPlaylistContentRepository->createOrUpdatePlaylistContentAndReposition(
-                    null,
-                    $assignmentInput
-                );
+            if (!empty($assignments['lessons'])) {
+                foreach ($assignments['lessons'] ?? [] as $lesson) {
+                    error_log('Add lesson with id:::: '.$lesson['id']);
+                    $input = [
+                        'content_id' => $lesson['id'],
+                        'user_playlist_id' => $userPlaylistId,
+                        'position' => $position,
+                        'extra_data' => $extraData,
+                        'start_second' => $startSecond,
+                        'end_second' => $endSecond,
+                        'created_at' => Carbon::now()
+                            ->toDateTimeString(),
+                    ];
+
+                    $this->userPlaylistContentRepository->createOrUpdatePlaylistContentAndReposition(null, $input);
+                    if ($importAllAssignments) {
+                        $this->addSounsliceAssignments(
+                            $assignments['soundslice_assignments'][$lesson['id']] ?? [],
+                            $userPlaylistId
+                        );
+                    }
+                }
             }
-        }
 
-        if ($importInstrumentlessSoundsliceAssignment) {
-            foreach ($assignments['soundslice_assignments'][$contentId] ?? [] as $assignment) {
-                error_log('Add instrumentless soundslice with id:::: '.$assignment['id']);
-                $assignmentInput = [
-                    'content_id' => $assignment['id'],
-                    'user_playlist_id' => $userPlaylistId,
-                    'created_at' => Carbon::now()
-                        ->toDateTimeString(),
-                    'extra_data' => json_encode(['is_instrumentless_track' => true]),
-                ];
-                $this->userPlaylistContentRepository->createOrUpdatePlaylistContentAndReposition(
-                    null,
-                    $assignmentInput
-                );
+            if ($importFullSoundsliceAssignment) {
+                foreach ($assignments['soundslice_assignments'][$contentId] ?? [] as $assignment) {
+                    error_log('Add full soundslice with id:::: '.$assignment['id']);
+                    $assignmentInput = [
+                        'content_id' => $assignment['id'],
+                        'user_playlist_id' => $userPlaylistId,
+                        'created_at' => Carbon::now()
+                            ->toDateTimeString(),
+                        'extra_data' => json_encode(['is_full_track' => true]),
+                    ];
+                    $this->userPlaylistContentRepository->createOrUpdatePlaylistContentAndReposition(
+                        null,
+                        $assignmentInput
+                    );
+                }
             }
-        }
 
-        event(new PlaylistItemsUpdated($userPlaylistId));
+            if ($importInstrumentlessSoundsliceAssignment) {
+                foreach ($assignments['soundslice_assignments'][$contentId] ?? [] as $assignment) {
+                    error_log('Add instrumentless soundslice with id:::: '.$assignment['id']);
+                    $assignmentInput = [
+                        'content_id' => $assignment['id'],
+                        'user_playlist_id' => $userPlaylistId,
+                        'created_at' => Carbon::now()
+                            ->toDateTimeString(),
+                        'extra_data' => json_encode(['is_instrumentless_track' => true]),
+                    ];
+                    $this->userPlaylistContentRepository->createOrUpdatePlaylistContentAndReposition(
+                        null,
+                        $assignmentInput
+                    );
+                }
+            }
+
+            event(new PlaylistItemsUpdated($userPlaylistId));
+        }
 
         return true;
     }

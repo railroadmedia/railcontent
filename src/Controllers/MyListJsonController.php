@@ -10,6 +10,7 @@ use Intervention\Image\ImageManager;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Exceptions\NotFoundException;
 use Railroad\Railcontent\Repositories\ContentRepository;
+use Railroad\Railcontent\Requests\AddItemToPlaylistRequest;
 use Railroad\Railcontent\Requests\PlaylistCreateRequest;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentHierarchyService;
@@ -378,7 +379,7 @@ class MyListJsonController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function addItemToPlaylist(Request $request)
+    public function addItemToPlaylist(AddItemToPlaylistRequest $request)
     {
         $this->userPlaylistsService->addItemToPlaylist(
             $request->get('playlist_id'),
