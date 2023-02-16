@@ -137,7 +137,7 @@ onMounted(() => {
           </span>
             <div v-if="registerUrl || video" class="tw-gap-2 tw-mt-2 tw-hidden xl:tw-flex tw-flex-wrap">
                 <a v-if="registerUrl" :href="ctaUrl" :class="`tw-btn-primary tw-bg-${brand} tw-text-xl go-to-button tw-w-[200px]`">
-                    {{ registerUrl === ctaUrl ? 'Enroll Now' : 'Go To Course' }}
+                    {{ ctaText }}
                 </a>
                 <span v-if="video && registerUrl === ctaUrl" @click="openModal()" class="tw-btn-secondary tw-text-white tw-text-xl tw-w-[200px] tw-z-100 tw-relative">Learn More</span>
             </div>
