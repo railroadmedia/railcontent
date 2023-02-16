@@ -6,9 +6,20 @@ use App\Maps\PrimaryURLSlugToContentTypeMap;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Railroad\Railcontent\Services\UserPlaylistsService;
 
 class RedirectIfMobileRequest
 {
+    private UserPlaylistsService $userPlaylistsService;
+
+    /**
+     * @param UserPlaylistsService $userPlaylistsService
+     */
+    public function __construct(UserPlaylistsService $userPlaylistsService)
+    {
+        $this->userPlaylistsService = $userPlaylistsService;
+    }
+
     /**
      * @param Request $request
      * @param Closure $next
@@ -102,6 +113,17 @@ class RedirectIfMobileRequest
                     'brand' => $brand,
                     'id' => last(request()->segments()),
                 ]);
+            } elseif ($request->routeIs('platform.user.playlist-item')) {
+                $playlistItemId = last(request()->segments());
+                $playlistItem = $this->userPlaylistsService->getPlaylistItemById($playlistItemId);
+if($playlistItem) {
+    $route = route('mobile.musora-api.content.show', [
+        'brand' => $brand,
+        'id' => $playlistItem['content_id'],
+        'user_playlist_id' => last(request()->segments()),
+    ]);
+}
+
             }
 
             if ($route) {
