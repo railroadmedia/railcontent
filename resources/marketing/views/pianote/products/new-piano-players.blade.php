@@ -814,7 +814,7 @@
                     <p>
                         <span class="font-extrabold">Every Chord. Every Scale. Every Key.</span>
                         <br><br> This essential resource will help you learn the most important chord shapes, chord variations, and scales in EVERY key.
-                        <br><br> Regular ${{ floatval($productPrices['piano-chords-and-scales-guide']->price) }}. It’s yours FREE when you get The Power of Chords. (And we’ll cover the shipping.)
+                        <br><br> Regular ${{ floatval($productPrices['piano-chords-and-scales-guide']->price) }}. It’s yours FREE when you get New Piano Players Start Here. (And we’ll cover the shipping.)
                         <br><br>
                     </p>
                 </div>
