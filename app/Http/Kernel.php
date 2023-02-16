@@ -9,6 +9,7 @@ use App\Http\Middleware\RedirectIfMobileRequest;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 use Railroad\LeadTracker\Middleware\LeadTrackerMiddleware;
 use Railroad\MusoraApi\Middleware\BrandMiddleware;
+use Railroad\Railforums\Middleware\RailforumsBrandMiddleware;
 
 class Kernel extends HttpKernel
 {
@@ -69,6 +70,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\SetContentPermissions::class,
             RedirectIfMobileRequest::class,
             LeadTrackerMiddleware::class,
+            RailforumsBrandMiddleware::class
         ],
 
         'web_member_only' => [
