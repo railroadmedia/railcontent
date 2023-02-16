@@ -19,6 +19,8 @@ return [
     'name-of-production-env' => env('MAILORA_NAME_OF_PROD_ENV', 'production'),
     'public-free-for-all' => env('MAILORA_PUBLIC_FREE_FOR_ALL', false),
     'admin' => env('MAILORA_DEFAULT_ADMIN', null),
+    'report-sender-address' => 'system@musora.com',
+    'report-sender-name' => 'Musora',
 
     // 2. Some required, some optional...
     'defaults' => [
@@ -43,7 +45,9 @@ return [
         'support-sender-name' => 'Drumeo',
         'submit-student-focus-recipient' => 'support@drumeo.com',
         'ask-question-recipient' => 'support+question-and-answer@drumeo.com',
-        'logo-link' => 'https://dmmior4id2ysr.cloudfront.net/logos/drumeo-logo.png'
+        'logo-link' => 'https://dmmior4id2ysr.cloudfront.net/logos/drumeo-logo.png',
+        'report-comment-recipient' => 'support@musora.com',
+        'report-user-recipient' => 'support@musora.com',
     ],
 
     'pianote' => [
@@ -51,7 +55,9 @@ return [
         'support-sender-name' => 'Pianote System',
         'submit-student-focus-recipient' => 'team+studentreviews@pianote.com',
         'ask-question-recipient' => 'team+question-and-answer@pianote.com',
-        'logo-link' => 'https://dmmior4id2ysr.cloudfront.net/logos/pianote-logo-red.png'
+        'logo-link' => 'https://dmmior4id2ysr.cloudfront.net/logos/pianote-logo-red.png',
+        'report-comment-recipient' => 'support@musora.com',
+        'report-user-recipient' => 'support@musora.com',
     ],
 
     'guitareo' => [
@@ -59,7 +65,9 @@ return [
         'support-sender-name' => 'Guitareo System',
         'submit-student-focus-recipient' => 'support@guitareo.com',
         'ask-question-recipient' => 'support@guitareo.com',
-        'logo-link' => 'https://dmmior4id2ysr.cloudfront.net/logos/guitareo-logo.png'
+        'logo-link' => 'https://dmmior4id2ysr.cloudfront.net/logos/guitareo-logo.png',
+        'report-comment-recipient' => 'support@musora.com',
+        'report-user-recipient' => 'support@musora.com',
     ],
 
     'singeo' => [
@@ -67,7 +75,9 @@ return [
         'support-sender-name' => 'Singeo System',
         'submit-student-focus-recipient' => 'support@singeo.com',
         'ask-question-recipient' => 'team+question-and-answer@singeo.com',
-        'logo-link' => 'https://dmmior4id2ysr.cloudfront.net/logos/singeo-logo-purple.png'
+        'logo-link' => 'https://dmmior4id2ysr.cloudfront.net/logos/singeo-logo-purple.png',
+        'report-comment-recipient' => 'support@musora.com',
+        'report-user-recipient' => 'support@musora.com',
     ]
 
 ];
