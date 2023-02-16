@@ -29,15 +29,15 @@ class MarketingPagesProductsViewComposer
      */
     public function compose(View $view)
     {
-        //$products = $this->productRepository->all();
+        $products = $this->productRepository->all();
 
-        //$products = array_combine(array_entity_column($products, 'getSku'), $products);
+        $products = array_combine(array_entity_column($products, 'getSku'), $products);
 
         $productModel = Product::query()->select(['sku', 'price', 'discounted_price'])->where('sku', '!=', '')->where('sku', 'not like', '%products%')->get();
         $productPrices = $productModel->mapWithKeys(function($item){
             return [$item['sku'] => $item];
         });
 
-        $view->with(['products' => [], 'productPrices' => $productPrices]);
+        $view->with(['products' => $products, 'productPrices' => $productPrices]);
     }
 }

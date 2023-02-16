@@ -50,19 +50,19 @@
         </div>
         <div class="footer-link-wrap">
             <h1>Resources</h1>
-            <p><a href="/blog/">The Pianote Note</a><br>
-                <a href="/chord-hacks">Chord Hacks</a><br>
-                <a href="/getting-started">Getting Started On Piano</a><br>
-                <a href="/piano-in-5-days">5 Days To Playing Piano</a><br>
-                <a href="/learn-songs">Learn 3 Songs On Piano</a></p>
+            <p><a href="{{ get_legacy_brand_base_url('pianote') }}/blog/">The Pianote Note</a><br>
+                <a href="{{ get_legacy_brand_base_url('pianote') }}/chord-hacks">Chord Hacks</a><br>
+                <a href="{{ get_legacy_brand_base_url('pianote') }}/getting-started">Getting Started On Piano</a><br>
+                <a href="{{ get_legacy_brand_base_url('pianote') }}/piano-in-5-days">5 Days To Playing Piano</a><br>
+                <a href="{{ get_legacy_brand_base_url('pianote') }}/learn-songs">Learn 3 Songs On Piano</a></p>
         </div>
         <div class="footer-link-wrap">
-            <h1><a href="/shop/">PIANOTE SHOP</a></h1>
-            <p><a href="/">Pianote Membership</a><br>
-                <a href="/shop/500-songs">500 Songs In 5 Days</a><br>
-                <a href="/shop/play-beautiful-piano">Playing Beautiful Piano</a><br>
-                <a href="/shop/chords-scales-book">Chords & Scales Book</a><br>
-                <a href="/shop/practice-planner">Practice Planner</a></p>
+            <h1><a href="{{ get_legacy_brand_base_url('pianote') }}/shop/">PIANOTE SHOP</a></h1>
+            <p><a href="{{ get_legacy_brand_base_url('pianote') }}/">Pianote Membership</a><br>
+                <a href="{{ get_legacy_brand_base_url('pianote') }}/shop/500-songs">500 Songs In 5 Days</a><br>
+                <a href="{{ get_legacy_brand_base_url('pianote') }}/shop/play-beautiful-piano">Playing Beautiful Piano</a><br>
+                <a href="{{ get_legacy_brand_base_url('pianote') }}/shop/chords-scales-book">Chords & Scales Book</a><br>
+                <a href="{{ get_legacy_brand_base_url('pianote') }}/shop/practice-planner">Practice Planner</a></p>
         </div>
         <div class="footer-link-wrap">
             <h1>Other Sites</h1>
