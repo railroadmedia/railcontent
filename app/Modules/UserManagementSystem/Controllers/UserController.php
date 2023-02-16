@@ -319,8 +319,8 @@ class UserController extends Controller
         $brand = brand();
 
         $input['subject'] = 'User reported by '.$currentUser['display_name']." (".$currentUser['email'].")";
-        $input['sender-address'] = $currentUser['email'];
-        $input['sender-name'] = $currentUser['display_name'];
+        $input['sender-address'] = config('mailora.report-sender-address');
+        $input['sender-name'] = config('mailora.report-sender-name');
         $input['lines'] = ['The following user has been reported:'];
         $input['lines'][] = $user['display_name'];
         $input['lines'][] = $user['email'];
