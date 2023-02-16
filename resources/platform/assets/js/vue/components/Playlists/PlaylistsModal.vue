@@ -50,7 +50,7 @@ const modalContainerProps = {
                 <StartEnd :brand="brand" />
             </div>
             <div v-if="modalProps.modalType === 'addItem'">
-                <AddItem :brand="brand" :contentId="modalProps.contentId" />
+                <AddItem @onCancel="() => emit('onClosePlaylistsModal')" :brand="brand" :contentId="modalProps.contentId" />
             </div>
             <div v-if="modalProps.modalType === 'alreadyAddedItem'">
                 Already Added Item

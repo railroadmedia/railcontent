@@ -70,20 +70,7 @@ export default {
 
         // Used to handle the event when bussed to the top level parent
         addToListEventHandler(payload) {
-            const post_index = this.content.map(post => post.id).indexOf(payload.content_id);
-
-            this.content[post_index].is_added_to_primary_playlist = !this.content[post_index].is_added_to_primary_playlist;
-
-            if (payload.is_added && this.destroyOnListRemoval) {
-                this.content.splice(post_index, 1);
-            }
-
-            ContentService.addOrRemoveContentFromList(payload.content_id, payload.is_added, this.brand)
-                .then((response) => {
-                    if (!response) {
-                        this.content[post_index].is_added_to_primary_playlist = !this.content[post_index].is_added_to_primary_playlist;
-                    }
-                });
+            window.openplaylistmodal({ modalType: 'addItem', contentId: payload.content_id });
         },
 
         resetProgressEventHandler(payload) {
