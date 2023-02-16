@@ -153,9 +153,6 @@ export default {
     //-------------DELETE--------------//
 
 
-
-    //-------------READ--------------//
-
     /**
      * GET Get Soundslice Assignments for content
      *
@@ -175,6 +172,32 @@ export default {
             method: 'GET',
             url: `/railcontent/lessons-and-assignments-count/${contentId}`,
             params: payload,
+            headers
+        });
+    },
+
+    /**
+     * PUT Get Soundslice Assignments for content
+     *
+     * @param {string} brand
+     * @param {number} contentId -
+     * @param {string} token
+     */
+    addToPlaylist({ brand = "drumeo", token, contentId, playlistIds, importAssignments }) {
+        const payload = {
+            brand: brand,
+            playlist_id: playlistIds,
+            content_id: contentId,
+            import_all_assignments: importAssignments,
+        }
+        const headers = {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': token
+        };
+        return axios({
+            method: 'PUT',
+            url: `/railcontent/add-item-to-list`,
+            data: payload,
             headers
         });
     },

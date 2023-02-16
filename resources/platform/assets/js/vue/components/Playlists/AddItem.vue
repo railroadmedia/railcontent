@@ -4,7 +4,7 @@
 TODO: Open Create Playlist and on close open the addItem again with the right props
 
 */
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, inject } from 'vue';
 import PlaylistService from '../../../services/playlists';
 import Toggle from '../Toggle/Toggle.vue'
 import Table from '../Table/Table.vue'
@@ -19,36 +19,55 @@ const props = defineProps({
     contentId: {
         type: String,
         default: null
-    }
+    },
 });
 
 const emit = defineEmits([]);
+
+const token = inject('csrf_token');
 
 const importAll = ref(false);
 const formattedRows = ref([]);
 const additionalItems = ref(0);
 const isLoadingPlaylists = ref(false);
 const isLoadingAssignments = ref(false);
+const selectedPlaylists = ref([])
 
 const handleOnToggle = (val) => {
     importAll.value = val;
 };
 
 const handleActionClick = (payload) => {
-    console.log(payload);
+    selectedPlaylists.value = [...selectedPlaylists.value, String(payload)];
+};
+
+const handleCancel = () => {
+    emit('onCancel');
+};
+
+const handleConfirm = () => {
+    PlaylistService.addToPlaylist({
+        brand: props.brand,
+        contentId: props.contentId,
+        importAssignments: importAll.value,
+        playlistIds: selectedPlaylists.value,
+        token,
+    }).then(() => {
+
+    });
 };
 
 onMounted(() => {
     isLoadingAssignments.value = true;
     isLoadingPlaylists.value = true;
 
-    PlaylistService.getAssignmentsForContent({ token: props.csrf_token, contentId: props.contentId, brand: props.brand }).then((r) => {
+    PlaylistService.getAssignmentsForContent({ token, contentId: props.contentId, brand: props.brand }).then((r) => {
         const { data: { soundslice_assignments_count } } = r;
         additionalItems.value = soundslice_assignments_count;
         isLoadingAssignments.value = false;
     });
 
-    PlaylistService.getCurrentUserPlaylists({ token: props.csrf_token }).then(r => {
+    PlaylistService.getCurrentUserPlaylists({ token }).then(r => {
         isLoadingPlaylists.value = false;
         const { data: { data } } = r;
         const formattedTable = data.map((item) => {
@@ -92,7 +111,9 @@ onMounted(() => {
             <h4 class="tw-text-[16px] tw-text-left tw-w-full">Additional Playlist Items</h4>
             <div class="tw-flex tw-w-full">
                 <fieldset class="tw-flex tw-flex-row tw-items-center tw-w-full">
-                    <p class="tw-text-left tw-text-[14px] tw-pr-[16px]">Your selected videos contain {{ additionalItems }} additional
+                    <p class="tw-text-left tw-text-[14px] tw-pr-[16px]">Your selected videos contain {{
+                        additionalItems
+                    }} additional
                         assignment items. Would you like to also import them into your playlist?</p>
                     <Toggle @onToggle="handleOnToggle" />
                 </fieldset>
@@ -109,8 +130,10 @@ onMounted(() => {
                 <span class="tw-pl-[6px]">CREATE NEW LIST</span>
             </button>
             <div class="tw-flex">
-                <button @click="" class="tw-btn-primary tw-uppercase tw-text-white tw-h-[35px]">CANCEL</button>
-                <button :class="`tw-btn-primary tw-uppercase tw-text-white tw-bg-${brand} tw-h-[35px]`">CONFIRM</button>
+                <button @click="handleCancel"
+                    class="tw-btn-primary tw-uppercase tw-text-white tw-h-[35px]">CANCEL</button>
+                <button @click="handleConfirm"
+                    :class="`tw-btn-primary tw-uppercase tw-text-white tw-bg-${brand} tw-h-[35px]`">CONFIRM</button>
             </div>
         </div>
     </div>
