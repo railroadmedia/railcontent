@@ -135,7 +135,6 @@ export default {
      *
      */
     setToPrivate(id, isPrivate, csrf_token) {
-        console.log('set to private ', isPrivate)
         return axios.patch(
             `/railcontent/playlist/${id}`,
             {

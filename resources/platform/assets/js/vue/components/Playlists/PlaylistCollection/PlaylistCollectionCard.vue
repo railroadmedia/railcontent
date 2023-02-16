@@ -71,7 +71,6 @@
         setTimeout(()=> {
             state.dropdownOpen = false;
         }, "200")
-        
     }
 
     //Handle Pin/Unpin Request
@@ -127,6 +126,27 @@
         //close after click
         state.dropdownOpen = false;
     }
+
+    const duplicatePlaylistHandler = () => {
+        console.log('ran duplicate playlists')
+        window.openplaylistmodal({ modalType: 'duplicate' });
+        state.dropdownOpen = false;
+    };
+
+    const deletePlaylistHandler = () => {
+        window.openplaylistmodal({ modalType: 'remove' });
+        state.dropdownOpen = false;
+    };
+
+    const editPlaylistHandler = () => {
+        window.openplaylistmodal({ modalType: 'edit' });
+        state.dropdownOpen = false;
+    };
+
+    const unpinPlaylistModalHandler = () => {
+        window.openplaylistmodal({ modalType: 'unpinPlaylists' });
+        state.dropdownOpen = false;
+    };
 
     //Check Dropdown Distance
     const GetElementDistance = el => {
@@ -261,13 +281,25 @@
                             >Share</button>
                         </li>
                         <li class="tw-w-full tw-flex">
-                            <button class="tw-flex tw-w-full tw-itemx-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-black/20">Edit</button>
+                            <button class="tw-flex tw-w-full tw-itemx-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-black/20"
+                                    @click.prevent="editPlaylistHandler()"
+                            >
+                                Edit
+                            </button>
                         </li>
                         <li class="tw-w-full tw-flex">
-                            <button class="tw-flex tw-w-full tw-itemx-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-black/20">Delete</button>
+                            <button class="tw-flex tw-w-full tw-itemx-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-black/20"
+                                    @click.prevent="deletePlaylistHandler()"
+                            >
+                                Delete
+                            </button>
                         </li>
                         <li class="tw-w-full tw-flex">
-                            <button class="tw-flex tw-w-full tw-itemx-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-black/20">Duplicate</button>
+                            <button class="tw-flex tw-w-full tw-itemx-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-black/20"
+                                    @click.prevent="duplicatePlaylistHandler()"
+                            >
+                                Duplicate
+                            </button>
                         </li>
                         <li class="tw-w-full tw-flex">
                             <button class="tw-flex tw-w-full tw-itemx-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-black/20"

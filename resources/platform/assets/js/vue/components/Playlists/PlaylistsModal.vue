@@ -3,6 +3,8 @@ import InfoModal from '../Modal/InfoModal.vue';
 import CreatePlaylist from './CreatePlaylist.vue';
 import AddItem from './AddItem.vue'
 import StartEnd from './StartEnd.vue';
+import DeleteModal from './DeleteModal.vue';
+import UnpinModal from './UnpinModal.vue';
 
 const props = defineProps({
     modalProps: {
@@ -22,8 +24,9 @@ const emit = defineEmits(['onClosePlaylistsModal']);
 
 const modalContainerProps = {
     create: 'tw-max-w-[654px] tw-px-[64px]',
+    duplicate: 'tw-max-w-[654px] tw-px-[64px]',
     edit: 'tw-max-w-[654px] tw-px-[64px]',
-    remove: '',
+    remove: 'tw-max-w-[654px] tw-px-[64px]',
     startEnd: 'tw-max-w-[589px] tw-px-[48px]',
     addItem: 'tw-max-w-[917px] tw-px-[32px]',
     alreadyAddedItem: ''
@@ -35,10 +38,13 @@ const modalContainerProps = {
     <InfoModal :classOverride="`tw-bg-[#081825] ${modalContainerProps[modalProps.modalType]} tw-border-[1px] tw-border-[#445F74]`" key="create-playlist-modal-instance" modalId="create-playlist-modal"
         @onClose="() => emit('onClosePlaylistsModal')" :selfContained="true">
         <div class="tw-pt-[12px]">
+            
             <CreatePlaylist mode="create" @onCancel="() => emit('onClosePlaylistsModal')" :modalProps="modalProps" v-if="modalProps.modalType === 'create'"  />
+            <CreatePlaylist mode="duplicate" @onCancel="() => emit('onClosePlaylistsModal')" :modalProps="modalProps" v-if="modalProps.modalType === 'duplicate'"  />
             <CreatePlaylist mode="edit" @onCancel="() => emit('onClosePlaylistsModal')" :modalProps="modalProps" v-if="modalProps.modalType === 'edit'"  />
+            
             <div v-if="modalProps.modalType === 'remove'">
-                REMOVE MODAL
+                <DeleteModal :brand="brand" />
             </div>
             <div v-if="modalProps.modalType === 'startEnd'">
                 <StartEnd :brand="brand" />
@@ -47,7 +53,10 @@ const modalContainerProps = {
                 <AddItem :brand="brand" :contentId="modalProps.contentId" />
             </div>
             <div v-if="modalProps.modalType === 'alreadyAddedItem'">
-                ALREADY ADDED MODAL
+                Already Added Item
+            </div>
+            <div v-if="modalProps.modalType === 'unpinPlaylists'">
+                <UnpinModal :brand="brand" />
             </div>
         </div>
     </InfoModal>
