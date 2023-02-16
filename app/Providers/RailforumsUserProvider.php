@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use DB;
+use Modules\UserManagementSystem\Models\ReportedUser;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railforums\Contracts\UserProviderInterface;
@@ -59,9 +60,11 @@ class RailforumsUserProvider implements UserProviderInterface
         $users = User::query()->whereIn('id', $userIds)->get();
 
         $forumUsers = [];
+        $reported = ReportedUser::query()->whereIn('user_id', $userIds)
+            ->where('reporter_id','=', auth()->id())->get()->groupBy('user_id')->toArray();
 
         foreach ($users as $user) {
-            $forumUsers[$user->id] = $this->forumUserFromUserModel($user);
+                $forumUsers[$user->id] = $this->forumUserFromUserModel($user, $reported);
         }
 
         return $forumUsers;
@@ -152,7 +155,7 @@ class RailforumsUserProvider implements UserProviderInterface
      * @param User $userModel
      * @return ForumUser
      */
-    private function forumUserFromUserModel(User $userModel)
+    private function forumUserFromUserModel(User $userModel, $reportedUsers = [])
     {
 
         return new ForumUser(
@@ -164,7 +167,8 @@ class RailforumsUserProvider implements UserProviderInterface
             $userModel->getBrandTotalXp(),
             $userModel->getXpRank(),
             $userModel->getMethodLevel(),
-           $userModel->getAttributes()['access_level'] ?? ''
+           $userModel->getAttributes()['access_level'] ?? '',
+            array_key_exists($userModel->id, $reportedUsers)
         );
     }
 }
