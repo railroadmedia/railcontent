@@ -177,7 +177,7 @@
 
                     <p class="uppercase w-full leading-normal mt-2">
                         <strong class="font-black leading-tight inline-block mb-1">Drumeo Lifetime Membership</strong><br>
-                        <span class="text-gradient" style="text-transform:uppercase; display:inline-block;"><strong>${{ Prices::$lifetimeMembership }}</strong><br>
+                        <span class="text-gradient" style="text-transform:uppercase; display:inline-block;"><strong>${{ 1200 }}</strong><br>
                                 Instant Access</span>
                     </p>
                 </div>
