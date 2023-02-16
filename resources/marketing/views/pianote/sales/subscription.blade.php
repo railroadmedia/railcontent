@@ -92,6 +92,20 @@
             margin-left: -5px;
             margin-bottom: -5px;
         }
+
+        @if(!empty($trialVersion))
+            .option-buttons.active {
+                border-color:#f61a30!important;
+                background-color:#4a0c12 !important;
+            }
+            .option-buttons.active .radio-check {
+                border-color:#f61a30!important;
+                background-color:#f61a30!important;
+            }
+            .option-buttons.active .radio-check i {
+                display:block!important;
+            }
+        @endif
     </style>
 @stop
 
@@ -560,6 +574,19 @@
         'subDescription' => 'Save 17% + get 4 bonuses<br class="inline sm:hidden"> worth $357',
         'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[piano-chords-and-scales-guide]=1&products[piano-technique-made-easy]=1&products[piano-riffs-and-fills]=1&products[faster-fingers]=1&redirect=/order&locked=true',
         'altButtonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-MONTH]=1&redirect=%2Forder',
+        ])
+    @elseif(!empty($trialVersion))
+        @include('musora.sales.components.card-selection-section', [
+            "plusLogo" => "https://pianote.s3.amazonaws.com/sales/2023/pianote-plus-logo-light.svg",
+            "logo" => "https://pianote.s3.amazonaws.com/logo/pianote-logo-white.png",
+            "songs" => "1000",
+            "firstPoint" => "Unlimited piano lessons",
+            "thirdPoint" => "Direct access to real teachers.",
+            "fifthPoint" => "Lesson access for singing, guitar, and drums.",
+            "plusAnnualLink" => "/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL]=1&promo-code=annual-trial&redirect=/order&locked=true",
+            "plusMonthlyLink" => "/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL]=1&redirect=/order&locked=true",
+            "annualLink" => "/ecommerce/add-to-cart?products[pianote-base-annual-recurring-7-day-trial-membership]=1&promo-code=annual-trial&redirect=/order&locked=true",
+            "monthlyLink" => "/ecommerce/add-to-cart?products[pianote-base-monthly-recurring-7-day-trial-membership]=1&redirect=/order&locked=true",
         ])
     @else
         @include('musora.sales.components.order-section-collage', [

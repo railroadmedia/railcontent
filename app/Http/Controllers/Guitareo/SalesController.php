@@ -18,6 +18,11 @@ class SalesController extends BaseController
         return view('guitareo.sales.subscription', ['theme' => 'guitareo', 'month' => true]);
     }
 
+    public function trial()
+    {
+        return view('guitareo.sales.subscription', ['theme' => 'guitareo', 'trialVersion' => true]);
+    }
+
     public function promo()
     {
         return view('guitareo.sales.subscription', ['theme' => 'guitareo', 'promoVersion' => 'true']);

@@ -7,7 +7,7 @@ Route::domain('{pianoteDomain}')
     ->middleware(['web_public'])
     ->group(function () {
     Route::get('/', [SalesController::class, 'home'] );
-    Route::get('/trial', [SalesController::class, 'home'] );
+    Route::get('/trial', [SalesController::class, 'trial'] );
     Route::get('/trial-month', [SalesController::class, 'homeMonth'] );
     Route::get('/new-year', [SalesController::class, 'promo'] );
     Route::get('/lp', [SalesController::class, 'promo'] );
@@ -31,12 +31,12 @@ Route::domain('{pianoteDomain}')
     Route::get('/terms', [SalesController::class, 'terms'] );
     Route::get('/cookie', [SalesController::class, 'cookie'] );
 
-        Route::get('/method', [SalesController::class, 'method'] );
-        Route::get('/songs', [SalesController::class, 'songs'] );
-        Route::get('/coaches', [SalesController::class, 'coaches'] );
+    Route::get('/method', [SalesController::class, 'method'] );
+    Route::get('/songs', [SalesController::class, 'songs'] );
+    Route::get('/coaches', [SalesController::class, 'coaches'] );
 
 
-        Route::get('/shop/improvisation-with-jesus-molina', [SalesController::class, 'jesusMolina'] );
+    Route::get('/shop/improvisation-with-jesus-molina', [SalesController::class, 'jesusMolina'] );
     Route::get('/roland', [SalesController::class, 'roland'] );
     Route::get('/shop/500-songs', [SalesController::class, 'songs500'] );
     Route::get('/the-power-of-chords', [SalesController::class, 'PowerOfChords'] );
