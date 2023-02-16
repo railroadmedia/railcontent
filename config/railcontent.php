@@ -1186,6 +1186,7 @@ return [
         'quick-tips',
         'song-tutorial',
         'song-tutorial-children',
+        'rudiment',
         "assignment"
     ],
     'hiddenContentTypes' => [

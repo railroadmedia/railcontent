@@ -450,8 +450,7 @@ class ContentProgressEventListener
         }
 
         $vimeoIdFields =
-            $this->contentService->getContentWithExternalVideoId($mediaPlaybackTracked->mediaId)
-                ->toArray();
+            $this->contentService->getContentWithExternalVideoId($mediaPlaybackTracked->mediaId);
 
         $lengthInSeconds = (integer)$mediaPlaybackTracked->mediaLengthInSeconds;
 

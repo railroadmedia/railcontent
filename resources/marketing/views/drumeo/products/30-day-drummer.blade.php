@@ -197,7 +197,7 @@
 
 @section('body-data')
     x-data="{
-    modal: {{ empty(user()) ? true : false }},
+        modal: {{ empty(user()) ? true : false }},
     }"
 @endsection
 
@@ -225,25 +225,25 @@
                 <div class="w-full sm:w-7/12 text-center lg:text-left">
                     <img class="h-20 sm:h-24 lg:h-28 -mb-3 sm:mb-0 lg:mb-3 lazyload" data-src="https://cdn.musora.com/image/fetch/w_440,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/30_day_drummer2_logo.png" alt="30DD logo season2 logo">
                     <h1 class="rotater-text overflow-hidden"><strong>
-                            <span class="relative nowrap top-0 delay-1000 ease-in-out">Learn the drums</span><br>
-                            <span class="relative nowrap top-0 delay-1000 ease-in-out">Improve your timing</span><br>
-                            <span class="relative nowrap top-0 delay-1000 ease-in-out">Boost your creativity</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Learn the drums</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Improve your timing</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Boost your creativity</span><br>
 
-                            <span class="relative nowrap top-0 delay-1000 ease-in-out">Learn the drums</span><br>
-                            <span class="relative nowrap top-0 delay-1000 ease-in-out">Improve your timing</span><br>
-                            <span class="relative nowrap top-0 delay-1000 ease-in-out">Boost your creativity</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Learn the drums</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Improve your timing</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Boost your creativity</span><br>
 
-                            <span class="relative nowrap top-0 delay-1000 ease-in-out">Learn the drums</span><br>
-                            <span class="relative nowrap top-0 delay-1000 ease-in-out">Improve your timing</span><br>
-                            <span class="relative nowrap top-0 delay-1000 ease-in-out">Boost your creativity</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Learn the drums</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Improve your timing</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Boost your creativity</span><br>
 
-                            <span class="relative nowrap top-0 delay-1000 ease-in-out">Learn the drums</span><br>
-                            <span class="relative nowrap top-0 delay-1000 ease-in-out">Improve your timing</span><br>
-                            <span class="relative nowrap top-0 delay-1000 ease-in-out">Boost your creativity</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Learn the drums</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Improve your timing</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Boost your creativity</span><br>
 
-                            <span class="relative nowrap top-0 delay-1000 ease-in-out">Learn the drums</span><br>
-                            <span class="relative nowrap top-0 delay-1000 ease-in-out">Improve your timing</span><br>
-                            <span class="relative nowrap top-0 delay-1000 ease-in-out">Boost your creativity</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Learn the drums</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Improve your timing</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Boost your creativity</span><br>
                         </strong></h1>
                     <h2 class="-mt-3 sm:-mt-1 lg:mt-0">with daily guided workouts.</h2>
 
@@ -265,22 +265,28 @@
                     @if(session()->has('success-message'))
                         <p class="mb-3 lg:-mb-7 mt-3 text-drumeo text-center"><strong>Congrats! You have registered for 30-Day Drummer.<br class="hidden md:inline"> Check your email for the details.</strong></p>
                     @endif
+
+                    @if(!$hasProduct && is_current_user_a_member())
+                        <p class="mb-3 lg:-mb-7 mt-5 mb-2 text-drumeo text-left"><strong>You are a Drumeo member! <br>Enroll for free by clicking on the button below.</strong></p>
+                    @endif
+
                     <div class="flex flex-wrap sm:flex-nowrap items-center mt-6 sm:mt-5 lg:mt-10">
                         <div class="w-full sm:w-1/2 text-center sm:pr-2">
                             @if($hasProduct)
-                                <a class="join sold-out medium w-full">YOU'RE ENROLLED</a>
+                                <a class="join sold-out medium w-full">YOU'RE ENROLLED!</a>
                             @else
                                 <a href="{{ $registerButtonUrl }}" class="join blue medium w-full @if(!is_current_user_a_member()) anchor-slide @endif">ENROLL NOW</a>
                             @endif
-                            @if(is_current_user_a_member())
-                                <p class="opacity-50 text-sm mt-1 mb-5 sm:mb-0">Registration is FREE for Drumeo Members.</p>
-                            @else
-                                <p class="opacity-50 text-sm mt-1 mb-5 sm:mb-0">For just $1/day.</p>
+
+                            @if(!auth()->check())
+                                <p class="opacity-50 text-sm mt-2 mb-5 sm:mb-0 underline hover:text-drumeo">
+                                    <a href="{{ get_musora_brand_base_url() }}/30-day-drummer">Drumeo Members register for free here.</a>
+                                </p>
                             @endif
                         </div>
-                        <div class="w-full sm:w-1/2 lg:pb-5">
+                        <div class="w-full sm:w-1/2 pt-4 lg:pb-5">
                             <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/Joined_profiles.png" al="joined profiles">
-                            <p class="inline-block leading-tight text-sm align-middle">Join {{ $nPackOwners ?? 0 }} drummers who<br> have already registered.</p>
+                            <p class="inline-block leading-tight text-sm align-middle">Join {{ number_format($nPackOwners ?? 0) }} drummers who<br> have already registered.</p>
                         </div>
                     </div>
                 </div>
@@ -291,16 +297,13 @@
                 </div>
             </div>
 
-            <div class="flex flex-wrap md:flex-nowrap text-center border rounded-lg border-gray-300 mt-8 lg:mt-12 mb-2 lg:mb-4">
+            <div class="flex flex-wrap md:flex-nowrap text-center border rounded-lg border-gray-300 mt-6 lg:mt-8 mb-2 lg:mb-4">
                 <div class="w-full md:w-auto border-b sm:border-b-0 sm:border-r border-gray-300 py-4 md:py-3 lg:py-4">
                     <p class="tracking-wide opacity-70 text-sm">STARTS ON</p>
                     <h4 class="px-3 lg:px-5"><strong>February 27th</strong></h4>
                     <hr class="border-gray-300 my-4 md:my-2 lg:my-4">
-                    <p class="text-sm px-3 lg:px-5 hidden lg:block">
-                        Enrollment closes in <span class="tzcd-text text-drumeo"></span>
-                    </p>
-                    <p class="text-sm px-3 lg:px-5 lg:hidden">
-                        Enrollment closes in <br><span class="tzcd-text-smaller text-drumeo"></span>
+                    <p class="text-sm px-3 lg:px-5">
+                        Enrollment closes in <span class="tzcd-30DD text-drumeo"></span>
                     </p>
                 </div>
                 <div class="flex flex-wrap md:flex-nowrap items-center justify-evenly w-full md:w-auto md:flex-grow py-4 md:py-3 lg:py-4 text-left md:text-center">
@@ -443,7 +446,7 @@
                     class="join blue medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 @if(!is_current_user_a_member()) anchor-slide @endif">ENROLL NOW</a><br>
             @endif
             <img class="h-7 mr-1 mb-5 sm:mb-10 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/Joined_profiles.png" alt="joined profiles">
-            <p class="inline-block leading-tight text-sm align-middle mb-5 sm:mb-10">Join {{ $nPackOwners ?? 0 }} drummers who<br> have already registered.</p>
+            <p class="inline-block leading-tight text-sm align-middle mb-5 sm:mb-10">Join {{ number_format($nPackOwners ?? 0) }} drummers who<br> have already registered.</p>
 
         </div>
     </section>
@@ -460,19 +463,19 @@
 
                         <div class="align-middle bg-white text-center rounded-lg inline-block overflow-hidden w-11 mr-2">
                             <p class="leading-none tracking-tighter text-xs py-0.5 text-white bg-drumeo"><strong>MAR</strong></p>
-                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">1</strong></p>
+                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">4</strong></p>
                         </div>
                         <div class="align-middle bg-white text-center rounded-lg inline-block overflow-hidden w-11 mr-2">
                             <p class="leading-none tracking-tighter text-xs py-0.5 text-white bg-drumeo"><strong>MAR</strong></p>
-                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">8</strong></p>
+                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">11</strong></p>
                         </div>
                         <div class="align-middle bg-white text-center rounded-lg inline-block overflow-hidden w-11 mr-2">
                             <p class="leading-none tracking-tighter text-xs py-0.5 text-white bg-drumeo"><strong>MAR</strong></p>
-                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">15</strong></p>
+                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">18</strong></p>
                         </div>
                         <div class="align-middle bg-white text-center rounded-lg inline-block overflow-hidden w-11 mr-2">
                             <p class="leading-none tracking-tighter text-xs py-0.5 text-white bg-drumeo"><strong>MAR</strong></p>
-                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">22</strong></p>
+                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">25</strong></p>
                         </div>
                     </div>
                 </div>
@@ -531,7 +534,7 @@
                     <tr>
                         <td>Style</td>
                         <td>24 Play-along Workouts</td>
-                        <td>In-person</td>
+                        <td>In-Person</td>
                         <td>Self-Directed</td>
                         <td>Self-Directed</td>
                     </tr>
@@ -552,7 +555,7 @@
                     <tr>
                         <td>Access</td>
                         <td>Lifetime Access</td>
-                        <td>One-time</td>
+                        <td>One-Time</td>
                         <td>Varies</td>
                         <td>Lifetime</td>
                     </tr>
@@ -587,7 +590,7 @@
             </div>
             <h1 class="font-bebas text-5xl sm:text-6xl lg:text-7xl">FAIR WARNING</h1>
             <h6 class="leading-normal  mt-4 mb-8">30-Day Drummer is a daily guided workout program for drummers — where you’ll get a new video each weekday and a live session each weekend throughout the month. Because of this, students will not be able to join midway — and you need to register before the course begins. {{--on September 5th.--}}</h6>
-            <h4 class="py-1.5 w-full font-bebas uppercase inline-block mx-auto bg-white" style="color:#9d1032;">REGISTRATION CLOSES IN<br class="inline sm:hidden"> <span class="tzcd-text">a limited time</span></h4>
+            <h4 class="py-1.5 w-full font-bebas uppercase inline-block mx-auto bg-white" style="color:#9d1032;">REGISTRATION CLOSES IN<br class="inline sm:hidden"> <span class="tzcd-30DD">a limited time</span></h4>
         </div>
     </section>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f4f8fb;">
@@ -679,9 +682,10 @@
                     class="join blue medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 @if(!is_current_user_a_member()) anchor-slide @endif">ENROLL NOW</a><br>
             @endif
             <img class="h-7 mr-1 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/Joined_profiles.png">
-            <p class="inline-block leading-tight text-sm align-middle">Join {{ $nPackOwners ?? 0 }} drummers who<br> have already registered.</p>
+            <p class="inline-block leading-tight text-sm align-middle">Join {{ number_format($nPackOwners ?? 0) }} drummers who<br> have already registered.</p>
         </div>
     </section>
+    <div id="healthy" class="anchor"></div>
     <section class="text-white text-center px-5 sm:px-6 py-10 sm:py-16 lg:py-20" style="background:linear-gradient(to bottom, #0b76db, #074c8e);">
         <div class="container max-w-5xl mx-auto">
             <h2><strong>Your brain on drums.</strong></h2>
@@ -729,7 +733,7 @@
                 <h6 class="leading-normal mb-4">
                     <strong>EARLY BIRD SPECIAL:</strong> Get a free practice & sticks <br class="hidden sm:inline md:hidden">when you enroll before February 19th.
                     <br>
-                    <span class="text-drumeo">Only <span class="tzcd-text">a limited time</span> left!</span>
+                    <span class="text-drumeo">Enrollment closes in <span class="tzcd-30DD">a limited time</span>!</span>
                 </h6>
             @endif
 
@@ -745,8 +749,8 @@
                         <div class="w-full mx-auto sm:mx-0">
 
                             <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-drumeo mr-1"></i> Learn drums by playing drums with Domino Santantonio</p>
-                            <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-drumeo mr-1"></i> Join {{ $nPackOwners ?? 0 }} drummers who’ve already registered.</p>
-                            <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-drumeo mr-1"></i> Course runs February 27 to March 28.</p>
+                            <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-drumeo mr-1"></i> Join {{ number_format($nPackOwners ?? 0) }} drummers who’ve already registered.</p>
+                            <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-drumeo mr-1"></i> Course runs February 27 to March 27.</p>
                             <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-drumeo mr-1"></i>  Click below to join the next edition of 30-Day Drummer</p>
 
                             @if(session()->has('success-message'))
@@ -883,21 +887,6 @@
         </div>
     </section>
 
-
-    @if(!is_current_user_a_member())
-        <div class="reveal coach-wrap relative rounded-xl text-center overflow-visible select-none max-w-xs md:max-w-md" id="loginModal" style="max-width: 530px;" data-reveal data-reset-on-close="false">
-            <div class="p-5 sm:p-7">
-                <img class="h-24 sm:h-32 lazyload" data-src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/30_day_drummer_logo.png">
-                <h3 class="leading-tight mb-4"><strong>Wait a sec...</strong></h3>
-                <p class="leading-normal">
-                    You must be logged into your Drumeo <br>
-                    account to register for free.
-                    <br><br> Click below to log in:</p>
-                <a href="/login" class="join blue medium w-full max-w-xs my-5">Login Here</a>
-            </div>
-        </div>
-    @endif
-
     {{--    <div class="reveal coach-wrap relative rounded-xl text-center overflow-visible select-none max-w-xs md:max-w-md" id="waitlistModal" style="max-width: 530px;" data-reveal data-reset-on-close="false">--}}
     {{--        <div class="p-5 sm:p-7">--}}
     {{--            <img class="h-24 sm:h-32 lazyload" data-src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/30_day_drummer_logo.png" alt="30DD logo">--}}
@@ -919,18 +908,6 @@
         "video" => '//player.vimeo.com/video/795382727?autoplay=1',
         "title" => 'trailer'
     ])
-    @component('_partials.components.modal', ['name' => 'modal'])
-        @slot('content')
-            <div class="max-w-xl mx-auto bg-white text-center p-10 rounded-xl">
-                <img class="h-24" src="https://cdn.musora.com/image/fetch/w_440,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/30_day_drummer2_logo.png" alt="30DD season 2 logo" />
-                <h4 class="mb-4"><strong>Are you an existing member?</strong></h4>
-                <p class="mb-6">All existing members will get this course for free! Make sure to login before proceeding.</p>
-                <a href="{{get_musora_brand_base_url()}}/redirect30day" class="join blue medium w-full max-w-md mb-2">Login</a><br>
-                <p class="text-drumeo font-bebas cursor-pointer tracking-widest" @click="modal = false;">NO THANKS</p>
-            </div>
-        @endslot
-    @endcomponent
-
 
     @include("drumeo.sales.partials._footer")
 

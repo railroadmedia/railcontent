@@ -6,7 +6,6 @@ export const useNotificationStore = defineStore({
     isError: false,
     icon: '',
     text: '',
-    slideClass: 'slide-in-bottom',
   }),
 
   actions: {
@@ -30,17 +29,11 @@ export const useNotificationStore = defineStore({
         });
         setTimeout(() => {
           this.$patch({
-            slideClass: 'slide-out-bottom',
+            icon: '',
+            text: '',
+            isError: false,
           });
-          setTimeout(() => {
-            this.$patch({
-              icon: '',
-              text: '',
-              isError: false,
-              slideClass: 'slide-in-bottom',
-            });
-            resolve();
-          }, 500)
+          resolve();
         }, 3000);
       })
     },

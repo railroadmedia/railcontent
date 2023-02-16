@@ -48,19 +48,19 @@
             </div>
             <div class="footer-link-wrap">
                 <h1>Resources</h1>
-                <p><a href="/beat/">The Drumeo Beat</a><br>
-                    <a href="/beat/rudiments/">40 Drum Rudiments</a><br>
-                    <a href="/100-songs/">100 Free Drum Songs</a><br>
-                    <a href="/free-playalongs/">9 Free Play-Alongs</a><br>
-                <a href="/beat/videos/">Video Drum Lessons</a></p>
+                <p><a href="{{ get_legacy_brand_base_url("drumeo") }}/beat/">The Drumeo Beat</a><br>
+                    <a href="{{ get_legacy_brand_base_url("drumeo") }}/beat/rudiments/">40 Drum Rudiments</a><br>
+                    <a href="{{ get_legacy_brand_base_url("drumeo") }}/100-songs/">100 Free Drum Songs</a><br>
+                    <a href="{{ get_legacy_brand_base_url("drumeo") }}/free-playalongs/">9 Free Play-Alongs</a><br>
+                <a href="{{ get_legacy_brand_base_url("drumeo") }}/beat/videos/">Video Drum Lessons</a></p>
             </div>
             <div class="footer-link-wrap">
-                <h1><a href="/drumshop/">Drum Shop</a></h1>
-                <p><a href="/">Drumeo Membership</a><br>
-                    <a href="/drumshop/practice-pad-full/">P4 Practice Pad</a><br>
-                    <a href="/drumshop/quietkick/">Drumeo QuietKick</a><br>
-                    <a href="/drumshop/beginner-book">Beginner Drum Book</a><br>
-                    <a href="/clothing/">Drumeo Merch</a></p>
+                <h1><a href="{{ get_legacy_brand_base_url("drumeo") }}/drumshop/">Drum Shop</a></h1>
+                <p><a href="{{ get_legacy_brand_base_url("drumeo") }}/">Drumeo Membership</a><br>
+                    <a href="{{ get_legacy_brand_base_url("drumeo") }}/drumshop/practice-pad-full/">P4 Practice Pad</a><br>
+                    <a href="{{ get_legacy_brand_base_url("drumeo") }}/drumshop/quietkick/">Drumeo QuietKick</a><br>
+                    <a href="{{ get_legacy_brand_base_url("drumeo") }}/drumshop/beginner-book">Beginner Drum Book</a><br>
+                    <a href="{{ get_legacy_brand_base_url("drumeo") }}/clothing/">Drumeo Merch</a></p>
             </div>
             <div class="footer-link-wrap">
                 <h1>Other Sites</h1>
