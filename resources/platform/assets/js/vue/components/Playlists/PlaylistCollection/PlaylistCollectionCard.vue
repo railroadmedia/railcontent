@@ -50,32 +50,41 @@
     };
 
     const privateToggleHandler = () => {
-        console.log('run private toggle handler')
+        state.isPrivate = !state.isPrivate;
         let isPrivate = props.list.private === 1 ? true : false;
-        PlaylistService.setToPrivate(props.list, isPrivate, token)
+        PlaylistService.setToPrivate(props.list.id, isPrivate, token)
             .then((response) => {
-                if(response.status === 200) {
+                if(response.status === 201) {
                     //set private/public
-                    state.isPrivate = !state.isPrivate;
+                    
                     //show success message
                     window.shownotification({
                         icon: `${props.list.private === 1 ? 'fa-lock-open' : 'fa-lock'}.`,
-                        text: `Your playlist is now ${props.list.private === 1 ? 'public' : 'private'}.`
+                        text: `Your playlist is now ${props.list.private === 1 ? 'private' : 'public'}.`
                     })
+                } else {
+                    //undo private/public change
+                    state.isPrivate = !state.isPrivate;
                 }
             })
+        //close after 200ms
+        setTimeout(()=> {
+            state.dropdownOpen = false;
+        }, "200")
+        
     }
 
     //Handle Pin/Unpin Request
     const pinHandler = (id, brand) => {
         if(!state.isPinned) { //PIN
+            state.isPinned = true;
             PlaylistService.pinPlaylist(id, brand, token)
                 .then((response) => {
                     if(response.status === 200) { 
-                        //handle pin
-                        state.isPinned = true;
+
                         //emit event or update pinia
-                        playlistsStore.getPinnedPlaylists(brand, token)
+                        playlistsStore.pinPlaylist(props.list)
+                            // playlistsStore.getPinnedPlaylists(brand, token)
                         //show success message
                         window.shownotification({
                             icon: 'playlist',
@@ -83,6 +92,7 @@
                         })
                     } else {
                         //handle error
+                        state.isPinned = false;
                         window.shownotification({
                             icon: 'error',
                             text: 'Woops! Something wrong happened, please try again later.'
@@ -90,13 +100,15 @@
                     }
                 })
         } else { //UNPIN
+            state.isPinned = false;
             PlaylistService.unpinPlaylist(id, brand, token)
                 .then((response) => {
                     if(response.status === 200) { 
                         //handle unpin
                         state.isPinned = false;
                         //emit event or update pinia
-                        playlistsStore.getPinnedPlaylists(brand, token)
+                        playlistsStore.unpinPlaylist(props.list)
+                            // playlistsStore.getPinnedPlaylists(brand, token)
                         //show success message
                         window.shownotification({
                             icon: 'playlist',
@@ -104,6 +116,7 @@
                         })
                     } else {
                         //handle error
+                        state.isPinned = true;
                         window.shownotification({
                             icon: 'error',
                             text: 'Woops! Something wrong happened, please try again later.'
@@ -138,8 +151,6 @@
         //check if it's pinned with request? Or prerender?
         state.isPinned = props.list.pinned;
         state.isPrivate = props.list.private; 
-
-        console.log('pinned playlists ', playlistsStore.pinnedPlaylists )
     }); 
     
     
@@ -202,8 +213,11 @@
                     :class="props.isListView ? 'tw-col-span-3 tw-w-full tw-pl-2 md:tw-pl-0 md:tw-text-base' : ''"
                 >
                     <div :class="props.isListView ? 'md:tw-w-1/2 tw-inline-flex tw-items-center tw-justify-center' : '' ">
-                        <span>{{ list.category }}</span>
-                        <span class="tw-mx-1 tw-leading-none" :class="props.isListView ? 'md:tw-hidden' : '' ">|</span>
+                        <span v-if="list.category">
+                            {{ list.category }}
+                            <span class="tw-mx-1 tw-leading-none" :class="props.isListView ? 'md:tw-hidden' : '' ">|</span>
+                        </span>
+                        
                     </div> 
                     <div :class="props.isListView ? 'md:tw-w-1/2 md:tw-w-1/2 tw-text-center' : '' ">
                         {{ list.duration || "0:00" }}
@@ -264,12 +278,18 @@
                         </li>
                         <!-- If not public -->
                         <li class="tw-w-full tw-w-full tw-flex">
-                            <label :for="`private-toggle-${list.id}`" class="tw-relative tw-cursor-pointer tw-flex tw-w-full tw-items-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-black/20">
+                            <button class="tw-relative tw-cursor-pointer tw-flex tw-w-full tw-items-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-black/20"
+                                    @click.prevent="privateToggleHandler()"
+                            >
                                 {{ state.isPrivate ? 'Private' : 'Public' }} 
-                                <input :id="`private-toggle-${list.id}`" type="checkbox" class="tw-ml-auto tw-block tw-right-0 tw-sr-only" @change.prevent="privateToggleHandler()">
                                 <!-- Toggle -->
-                                <div class=""></div>
-                            </label>
+                                <div class="tw-relative tw-inline-flex tw-ml-auto tw-w-[27px] tw-h-[12px] tw-rounded-xl tw-bg-[#445F74]">
+                                    <div class="tw-rounded-full tw-h-[15px] tw-w-[15px] tw-bg-white tw-flex-inline tw-items-center tw-justify-center tw-shadow tw-absolute tw-top-[-1px] tw-transition"
+                                         :class="state.isPrivate ? 'tw-left-0': 'tw-right-0' "
+                                    >
+                                    </div>
+                                </div>
+                            </button>
                         </li>
                     </ul>
                 </div>

@@ -47,7 +47,8 @@ const unpinPlaylist = (item, brand) => {
         .then((response) => {
             if(response.status === 200) { 
                 //emit event or update pinia
-                playlistsStore.getPinnedPlaylists(brand, token)
+                    // playlistsStore.getPinnedPlaylists(brand, token)
+                playlistsStore.unpinPlaylist(item)
                 //Confirmation
                 window.shownotification({
                     icon: 'playlist',
@@ -113,7 +114,7 @@ onBeforeMount(()=> {
                     </li>
                 </ul>
                 <!-- Loading Skeleton -->
-                <div v-else class="tw-flex-col tw-w-full tw-animate-pulse">
+                <div v-if="playlistsStore.loadingPinnedPlaylists" class="tw-flex-col tw-w-full tw-animate-pulse">
                     <div v-for="n in 5" :key="n" class="dark:tw-bg-[#102230] tw-bg-[#F5F5F6] tw-h-[32px] tw-mx-[25px] tw-mb-1 tw-border-rounded"></div>
                 </div>
 
