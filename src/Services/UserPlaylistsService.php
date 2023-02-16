@@ -185,7 +185,7 @@ class UserPlaylistsService
     {
         $userPlaylist = $this->userPlaylistsRepository->create($attributes);
 
-        return $this->userPlaylistsRepository->getById($userPlaylist);
+        return $this->getPlaylist($userPlaylist);
     }
 
     /**

@@ -16,7 +16,8 @@ class PinnedPlaylistsRepository extends RepositoryBase
         $brand = config('railcontent.brand');
 
         $query = $this->query()
-            ->select(config('railcontent.table_prefix').'user_playlists.*', config('railcontent.table_prefix').'user_playlist_content.id as user_playlist_item_id')
+            ->select(config('railcontent.table_prefix').'user_playlists.*',
+                     config('railcontent.table_prefix').'user_playlist_content.id as user_playlist_item_id')
             ->join(
                 config('railcontent.table_prefix').'user_playlists',
                 function (JoinClause $join) {
@@ -27,7 +28,7 @@ class PinnedPlaylistsRepository extends RepositoryBase
                     );
                 }
             )
-            ->join(
+            ->leftjoin(
                 config('railcontent.table_prefix').'user_playlist_content',
                 function (JoinClause $join) {
                     $join->on(
