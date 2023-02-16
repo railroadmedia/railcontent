@@ -10,40 +10,7 @@ const props = defineProps({
     },
     rows: {
         type: Array,
-        default: [
-            [
-                {
-                    thumb: 'https://placehold.jp/48x48.png',
-                    content: 'White Bangers'
-                },
-                {
-                    content: 'May 2, 2020'
-                },
-                {
-                    content: '44:05'
-                },
-                {
-                    showActionSlot: true,
-                    actionPayload: '12345'
-                }
-            ],
-            [
-                {
-                    thumb: 'https://placehold.jp/48x48.png',
-                    content: 'Rock and Metal Inspirations'
-                },
-                {
-                    content: 'May 2, 2020'
-                },
-                {
-                    content: '44:05'
-                },
-                {
-                    showActionSlot: true,
-                    actionPayload: '12345'
-                }
-            ],
-        ]
+        default: []
     }
 });
 const emit = defineEmits(['onActionClick']);

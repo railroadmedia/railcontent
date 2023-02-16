@@ -89,22 +89,22 @@ class SalesController extends BaseController
 
     public function singingstarterkit()
     {
-        return view('singeo.products.singing-starter-kit');
+        return view('singeo.products.singing-starter-kit', [ 'theme' => 'singeo' ]);
     }
 
     public function singingstarterkitalt()
     {
-        return view('singeo.products.singing-starter-kit-alt');
+        return view('singeo.products.singing-starter-kit-alt', [ 'theme' => 'singeo' ]);
     }
 
     public function singingstarterkitdiscount()
     {
-        return view('singeo.products.singing-starter-kit-discount');
+        return view('singeo.products.singing-starter-kit-discount', [ 'theme' => 'singeo' ]);
     }
 
     public function singingstarterkitshyvdiscount()
     {
-        return view('singeo.products.singing-starter-kit-shyv-discount');
+        return view('singeo.products.singing-starter-kit-shyv-discount', [ 'theme' => 'singeo' ]);
     }
 
     public function recitals()

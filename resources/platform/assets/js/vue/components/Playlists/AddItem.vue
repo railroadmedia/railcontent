@@ -1,27 +1,73 @@
 <script setup>
-import { ref } from 'vue';
+/*
+
+TODO: Open Create Playlist and on close open the addItem again with the right props
+
+*/
+import { ref, onMounted } from 'vue';
+import PlaylistService from '../../../services/playlists';
 import Toggle from '../Toggle/Toggle.vue'
 import Table from '../Table/Table.vue'
 import { PlusCircleIcon, PlusIcon } from '@heroicons/vue/outline';
+
 const props = defineProps({
     brand: {
         type: String,
         default: 'drumeo'
+    },
+    contentId: {
+        type: String,
+        default: null
     }
 });
 
 
-const toggleValue = ref(false);
+const importAll = ref(false);
+const formattedRows = ref([]);
+const additionalItems = ref(0);
 
 const handleOnToggle = (val) => {
-    console.log(val);
-    toggleValue.value = val;
+    importAll.value = val;
 };
 
 const handleActionClick = (payload) => {
     console.log(payload);
 };
 
+onMounted(() => {
+    PlaylistService.getAssignmentsForContent({ token: props.csrf_token, contentId: props.contentId, brand: props.brand }).then((r) => {
+        console.log(r)
+    });
+    PlaylistService.getCurrentUserPlaylists({ token: props.csrf_token }).then(r => {
+        const { data: { data } } = r;
+        const formattedTable = data.map((item) => {
+            const { name, thumbnail_url, duration_formated, id, created_at } = item;
+            const dateCreated = new Date(created_at);
+            const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            const month = months[dateCreated.getMonth()];
+            const formattedDate = `${month} ${dateCreated.getDate()}, ${dateCreated.getFullYear()}`;
+
+            return ([
+                {
+                    thumb: thumbnail_url,
+                    content: name
+                },
+                {
+                    content: formattedDate
+                },
+                {
+                    content: duration_formated
+                },
+                {
+                    showActionSlot: true,
+                    actionPayload: id
+                }
+            ])
+        });
+
+        formattedRows.value = formattedTable;
+    });
+});
 </script>
 
 <template>
@@ -34,7 +80,7 @@ const handleActionClick = (payload) => {
                 <Toggle @onToggle="handleOnToggle" />
             </fieldset>
         </div>
-        <Table @onActionClick="handleActionClick" classOverride="tw-mt-[24px]">
+        <Table @onActionClick="handleActionClick" classOverride="tw-mt-[24px]" :rows="formattedRows">
             <template v-slot:actionContent>
                 <PlusCircleIcon class="tw-w-[23px] tw-h-[23px] tw-text-[#7E9AB1]"  />
             </template>

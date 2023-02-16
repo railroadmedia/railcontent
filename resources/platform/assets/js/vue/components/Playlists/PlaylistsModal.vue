@@ -44,7 +44,7 @@ const modalContainerProps = {
                 <StartEnd :brand="brand" />
             </div>
             <div v-if="modalProps.modalType === 'addItem'">
-                <AddItem :brand="brand" />
+                <AddItem :brand="brand" :contentId="modalProps.contentId" />
             </div>
             <div v-if="modalProps.modalType === 'alreadyAddedItem'">
                 ALREADY ADDED MODAL

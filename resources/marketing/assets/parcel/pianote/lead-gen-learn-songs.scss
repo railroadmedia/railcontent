@@ -102,17 +102,6 @@ img {
     }
   }
 
-  &.white {
-    background: #fff;
-    color: #000;
-
-    &:hover,
-    &:focus {
-      background: #eee;
-      color: #000;
-    }
-  }
-
   &.promo {
     font-family: $opensans;
     font-weight: 900;

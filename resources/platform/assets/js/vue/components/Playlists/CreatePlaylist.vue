@@ -1,7 +1,8 @@
 <script setup>
     // TODO: Add Upload Modal for thumbnail add/change
     // TODO: Consider edit mode in the avatar upload process
-    import { ref, inject } from 'vue';
+    // TODO: Close modal after create is 200
+    import { ref, inject, onMounted } from 'vue';
     import InputLabel from '../InputLabel/InputLabel.vue';
     import Dropdown from '../Dropdown/Dropdown.vue';
     import PlaylistService from '../../../services/playlists';
@@ -33,8 +34,6 @@
     const thumb = ref(null);
 
     const token = inject('csrf_token');
-
-    const { imgUrl } = props.modalProps;
 
     const handleTitleChange = (val) => {
         title.value = val;
