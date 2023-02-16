@@ -1494,6 +1494,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .z-40 {
   z-index: 40 !important;
 }
+.z-\[100\] {
+  z-index: 100 !important;
+}
 .z-\[-2\] {
   z-index: -2 !important;
 }
@@ -3210,10 +3213,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-left: 1.75rem !important;
   padding-right: 1.75rem !important;
 }
-.py-16 {
-  padding-top: 4rem !important;
-  padding-bottom: 4rem !important;
-}
 .py-7 {
   padding-top: 1.75rem !important;
   padding-bottom: 1.75rem !important;
@@ -3265,6 +3264,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .py-24 {
   padding-top: 6rem !important;
   padding-bottom: 6rem !important;
+}
+.py-16 {
+  padding-top: 4rem !important;
+  padding-bottom: 4rem !important;
 }
 .px-16 {
   padding-left: 4rem !important;
@@ -4968,6 +4971,10 @@ img {
     padding-top: 1.5rem !important;
     padding-bottom: 1.5rem !important;
   }
+  .sm\:py-1 {
+    padding-top: 0.25rem !important;
+    padding-bottom: 0.25rem !important;
+  }
   .sm\:py-10 {
     padding-top: 2.5rem !important;
     padding-bottom: 2.5rem !important;
@@ -5067,10 +5074,6 @@ img {
   .sm\:py-8 {
     padding-top: 2rem !important;
     padding-bottom: 2rem !important;
-  }
-  .sm\:py-1 {
-    padding-top: 0.25rem !important;
-    padding-bottom: 0.25rem !important;
   }
   .sm\:py-24 {
     padding-top: 6rem !important;
@@ -6107,9 +6110,9 @@ img {
     padding-top: 1.5rem !important;
     padding-bottom: 1.5rem !important;
   }
-  .md\:py-32 {
-    padding-top: 8rem !important;
-    padding-bottom: 8rem !important;
+  .md\:py-24 {
+    padding-top: 6rem !important;
+    padding-bottom: 6rem !important;
   }
   .md\:py-12 {
     padding-top: 3rem !important;
@@ -6147,10 +6150,6 @@ img {
     padding-top: 3.5rem !important;
     padding-bottom: 3.5rem !important;
   }
-  .md\:py-24 {
-    padding-top: 6rem !important;
-    padding-bottom: 6rem !important;
-  }
   .md\:px-6 {
     padding-left: 1.5rem !important;
     padding-right: 1.5rem !important;
@@ -6166,6 +6165,10 @@ img {
   .md\:px-12 {
     padding-left: 3rem !important;
     padding-right: 3rem !important;
+  }
+  .md\:py-32 {
+    padding-top: 8rem !important;
+    padding-bottom: 8rem !important;
   }
   .md\:px-5 {
     padding-left: 1.25rem !important;
@@ -6868,6 +6871,9 @@ img {
   .lg\:h-80 {
     height: 20rem !important;
   }
+  .lg\:h-40 {
+    height: 10rem !important;
+  }
   .lg\:h-28 {
     height: 7rem !important;
   }
@@ -6900,9 +6906,6 @@ img {
   }
   .lg\:h-0 {
     height: 0px !important;
-  }
-  .lg\:h-40 {
-    height: 10rem !important;
   }
   .lg\:h-auto {
     height: auto !important;
