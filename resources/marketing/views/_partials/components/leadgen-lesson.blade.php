@@ -1,4 +1,4 @@
-<a class="flex flex-row relative text-[#3F3F46] border-b border-[#E4E4E7] no-underline hover:bg-[#E7EFF6] content-table-row hover-bg-grey-7 hover-text-black group py-2" href="/{{ $lessonURL }}">
+<a class="flex flex-row relative text-[#3F3F46] border-b border-[#E4E4E7] no-underline hover:bg-[#E7EFF6] content-table-row hover-bg-grey-7 hover-text-black group py-2 px-3" href="/{{ $lessonURL }}">
     <div class="flex flex-col text-[#00101D] align-left justify-center hide-xs-only font-semibold text-lg xl:text-xl" style="flex: 0 0 35px;">{{ $lessonNumber }}</div>
     <div class="flex flex-col justify-center" style="flex: 0 0 142px;">
         <div class="corners-10">
@@ -21,7 +21,7 @@
         </p>
         <!----><!---->
         <p class="text-xs font-compressed text-[#3F3F46] text-truncate uppercase xl:hidden flex flex-wrap sm:flex-nowrap">
-            <span>{{ $duration }} @if($duration > 1) Mis @else Min @endif</span>
+            <span>{{ $duration }} @if($duration > 1) Mins @else Min @endif</span>
         </p>
     </div>
     <!---->
