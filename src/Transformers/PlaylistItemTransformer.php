@@ -2,9 +2,21 @@
 
 namespace Railroad\Railcontent\Transformers;
 
+use Railroad\Railcontent\Services\ContentService;
+
 class PlaylistItemTransformer
 {
     private $params;
+
+    private ContentService $contentService;
+
+    /**
+     * @param ContentService $contentService
+     */
+    public function __construct(ContentService $contentService)
+    {
+        $this->contentService = $contentService;
+    }
 
     /**
      * @param $data
@@ -237,6 +249,28 @@ class PlaylistItemTransformer
                             $content[$itemId][$key] = $value;
                         }
                     }
+
+                    $route = '';
+
+                    if(!empty($row['parent_content_data'])){
+                        $parentContentData = array_reverse(json_decode($row['parent_content_data'], true));
+                        $parentIds = \Arr::pluck($parentContentData,'id');
+                        $parents = $this->contentService->getByIds($parentIds)->keyBy('id');
+                        foreach( $parentContentData as $value){
+                            switch ($value['type']) {
+                                case 'learning-path':
+                                    $route .= 'Method ';
+                                    break;
+                                case 'learning-path-level':
+                                    $route .= 'L'.$value['position'].' - ';
+                                    break;
+                                default:
+                                    $route .= $parents[$value['id']]['title'].' ' ?? '';
+                                    break;
+                            }
+                        }
+                    }
+                    $content[$itemId]['route'] = $route;
                 }
             }
             $results = array_values($content);
