@@ -47,7 +47,7 @@ const unpinPlaylist = (item, brand) => {
         .then((response) => {
             if(response.status === 200) { 
                 //emit event or update pinia
-                playlistsStore.unpinPlaylist(item)
+                playlistsStore.getPinnedPlaylists(brand, token)
                 //Confirmation
                 window.shownotification({
                     icon: 'playlist',
@@ -90,8 +90,8 @@ onBeforeMount(()=> {
         <Transition name="fade">
             <div v-if="!isSidebarCollapsed" class="tw-text-sm tw-transition tw-pb-2">
                 <ul class="tw-font-open-sans tw-text-[#00101D] dark:tw-text-white tw-text-[14px] tw-overflow-hidden"
-                    v-if="formattedPlaylists.length > 0">
-
+                    v-if="formattedPlaylists.length > 0 && !playlistsStore.loadingPinnedPlaylists">
+                
                     <!-- Loop through User Playlists -->
                     <li class="tw-group tw-w-full tw-flex tw-overflow-hidden dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
                         v-for="item in formattedPlaylists" :key="item.id + '-playlist-li'"
@@ -111,8 +111,12 @@ onBeforeMount(()=> {
                             </a>
                         </div>
                     </li>
-
                 </ul>
+                <!-- Loading Skeleton -->
+                <div v-else class="tw-flex-col tw-w-full tw-animate-pulse">
+                    <div v-for="n in 5" :key="n" class="dark:tw-bg-[#102230] tw-bg-[#F5F5F6] tw-h-[32px] tw-mx-[25px] tw-mb-1 tw-border-rounded"></div>
+                </div>
+
                 <!-- <div v-else class="tw-flex tw-flex-col tw-items-center">
                     <p class="tw-text-xs tw-italic tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]">Your pinned playlists will show up here.</p>
                 </div> -->
