@@ -532,6 +532,7 @@ The second exercise is similar, but this time we’re playing longer groups of u
                 'meta_desc' => 'Add your drumming to nine high-quality drum play-along tracks. (FREE).',
                 'meta_img' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/og-image.jpg',
                 'slug' => 'free-playalongs/songs',
+                'logo' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/logo.svg',
                 'lessons' => [
                     [
                         'slug' => 'free-playalongs/songs/1',
@@ -771,6 +772,7 @@ The second exercise is similar, but this time we’re playing longer groups of u
                 'meta_desc' => 'Add your drumming to nine heavy drum play-along tracks. (FREE).',
                 'meta_img' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/metal-playalongs/share-image.jpg',
                 'slug' => 'metal-playalongs/songs',
+                'logo' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/metal-playalongs/Logo.svg',
                 'lessons' => [
                     [
                         'slug' => 'metal-playalongs/songs/1',
@@ -2336,6 +2338,7 @@ The second exercise is similar, but this time we’re playing longer groups of u
                 'meta_desc' => 'Pick up your guitar and start playing today!',
                 'meta_img' => 'https://guitareo.s3.amazonaws.com/lead-gen/free-acoustic-guitar-lessons/og-image.jpg',
                 'slug' => 'free-acoustic-guitar-lessons/lessons',
+                'logo' => 'https://guitareo.s3.amazonaws.com/lead-gen/free-acoustic-guitar-lessons/logo.png',
                 'assets' => [
                     [
                         'title' => 'Course Resources',
@@ -2484,6 +2487,7 @@ The second exercise is similar, but this time we’re playing longer groups of u
                 'meta_desc' => 'Pick up your guitar and start playing today!',
                 'meta_img' => 'https://guitareo.s3.amazonaws.com/lead-gen/free-electric-guitar-lessons/og-image.jpg',
                 'slug' => 'free-electric-guitar-lessons/lessons',
+                'logo' => 'https://guitareo.s3.amazonaws.com/lead-gen/free-electric-guitar-lessons/electric-logo.png',
                 'assets' => [
                     [
                         'title' => 'Course Resources',
@@ -2617,6 +2621,7 @@ The second exercise is similar, but this time we’re playing longer groups of u
                 'meta_desc' => 'Gain the skills to play guitar chords used in thousands of hit songs with Ayla Tesler-Mabe.',
                 'meta_img' => 'https://guitareo.s3.amazonaws.com/lead-gen/chords-for-hit-songs/fb-share-image.jpg',
                 'slug' => 'chords-for-hit-songs/lessons',
+                'logo' => 'https://guitareo.s3.amazonaws.com/lead-gen/chords-for-hit-songs/logo.png',
                 'lessons' => [
                     [
                         'slug' => 'chords-for-hit-songs/lessons/1',
@@ -2680,6 +2685,7 @@ The second exercise is similar, but this time we’re playing longer groups of u
                 'meta_desc' => 'How to use vibrato & palm muting to unlock new possibilities on the guitar.',
                 'meta_img' => 'https://guitareo.s3.amazonaws.com/lead-gen/guitar-tricks/og-image.jpg',
                 'slug' => 'guitar-tricks/your-videos',
+                'logo' => 'https://guitareo.s3.amazonaws.com/lead-gen/guitar-tricks/logo-with.png',
                 'lessons' => [
                     [
                         'slug' => 'guitar-tricks/your-videos/1-intro',
@@ -2846,6 +2852,7 @@ Claim your exclusive GuitarQuest discount below, and continue the Quest today.
                 'meta_desc' => 'Play your first solo in less than 60 minutes.',
                 'meta_img' => 'https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/og-image.jpg',
                 'slug' => 'solo-in-an-hour/lessons',
+                'logo' => 'https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/logo.png',
                 'lessons' => [
                     [
                         'slug' => 'solo-in-an-hour/lessons/1',
@@ -4521,6 +4528,7 @@ You can use the exercise in this video to get inspired, or you can create your o
                 'meta_desc' => 'The Shortcuts To Sounding Great On The Piano',
                 'meta_img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-riffs-and-fills/og-image.jpg',
                 'slug' => 'riffs-and-fills/lessons',
+                'logo' => 'https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-riffs-and-fills/piano-riffs-fills-logo.png',
                 'lessons' => [
                     [
                         'slug' => 'riffs-and-fills/lessons/1',
@@ -4669,7 +4677,7 @@ Scale practice does NOT have to be traditional. In this lesson, Lisa shows you h
             ],
             [
                 'brand_id' => 2,
-                'title' => 'Learn-To-Play-Piano',
+                'title' => 'Learn To Play Piano',
                 'meta_desc' => 'Ever wanted to learn the piano?  This video series will get you playing in no time!',
                 'meta_img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/quick-start/learn-piano.jpg',
                 'slug' => 'my-lessons',
@@ -4971,6 +4979,7 @@ And finally, have fun playing the piano!',
                 'meta_desc' => 'If you’ve ever struggled through a music class or felt daunted by the notes on the page -- let us show you how easy reading music can be.',
                 'meta_img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sight-reading-made-simple/og-image.jpg',
                 'slug' => 'sight-reading-made-simple/lessons',
+                'logo' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sight-reading-made-simple/logo.png',
                 'lessons' => [
                     [
                         'slug' => 'sight-reading-made-simple/lessons/1',
@@ -5090,7 +5099,7 @@ Have fun and good luck!',
             ],
             [
                 'brand_id' => 2,
-                'title' => 'earn 3 Songs On Piano',
+                'title' => 'Learn 3 Songs On Piano',
                 'meta_desc' => 'Start playing REAL songs today!',
                 'meta_img' => 'https://pianote.s3.amazonaws.com/lead-gen/learn-3-songs/share-image.jpg',
                 'slug' => 'learn-songs/lessons',
@@ -5534,6 +5543,7 @@ Thank you so much for being part of this journey, and I hope you enjoy learning 
                 'meta_desc' => 'Learn to read music. Play your favorite songs. Have more fun.',
                 'meta_img' => 'https://pianote.s3.amazonaws.com/lead-gen/7-days-to-sight-reading/share_image.jpg',
                 'slug' => '7-days-to-sight-reading/lessons',
+                'logo' => 'https://pianote.s3.amazonaws.com/lead-gen/7-days-to-sight-reading/logo.png',
                 'assets' => [
                     [
                         'title' => 'Days 1-7 Exercises',
@@ -5665,6 +5675,7 @@ Thank you so much for being part of this journey, and I hope you enjoy learning 
                 'meta_desc' => 'Start learning how to play the piano in just 5 days!',
                 'meta_img' => 'https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/og-image.jpg',
                 'slug' => 'piano-in-5-days/lessons',
+                'logo' => 'https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/logo.png',
                 'lessons' => [
                     [
                         'slug' => 'piano-in-5-days/lessons/day-1-welcome-to-the-piano',
@@ -5986,6 +5997,7 @@ Thank you so much for being part of this journey, and I hope you enjoy learning 
                 'meta_desc' => 'Learn to love your voice in 3 easy lessons!',
                 'meta_img' => 'https://singeo.s3.amazonaws.com/lead-gen/stop-hating-your-voice/fb-share-image.jpg',
                 'slug' => 'stop-hating-your-voice/lessons',
+                'logo' => 'https://singeo.s3.amazonaws.com/lead-gen/stop-hating-your-voice/logo.png',
                 'assets' => [
                     [
                         'title' => 'Download All MP3 Exercises',
@@ -6066,6 +6078,7 @@ Thank you so much for being part of this journey, and I hope you enjoy learning 
                 'meta_desc' => $leadgen['meta_desc'],
                 'meta_img' => $leadgen['meta_img'],
                 'slug' => $leadgen['slug'],
+                'logo' => $leadgen['logo'] ??  null,
             ]);
 
             if(!empty($leadgen['assets']) && count($leadgen['assets']) > 0){
