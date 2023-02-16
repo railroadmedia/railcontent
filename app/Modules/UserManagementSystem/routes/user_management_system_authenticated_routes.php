@@ -140,6 +140,12 @@ Route::group(
             'is-display-name-unique',
             UserController::class . '@isDisplayNameUnique'
         );
+
+        Route::put(
+            'user/report/{id}',
+            UserController::class . '@report'
+        )
+            ->name('user_management_system.user.report');
     }
 );
 

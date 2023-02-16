@@ -10,26 +10,28 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
-use Modules\UserManagementSystem\Events\User\UserUpdated;
-use Modules\UserManagementSystem\Models\User;
 use Modules\UserManagementSystem\Events\User\UserCreated;
 use Modules\UserManagementSystem\Events\User\UserDeleted;
+use Modules\UserManagementSystem\Events\User\UserUpdated;
+use Modules\UserManagementSystem\Models\User;
+use Railroad\Mailora\Services\MailService;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-
 
 class UserController extends Controller
 {
     use ValidatesRequests;
     use AuthorizesRequests;
 
+    private MailService $mailService;
+
     /**
      * UserController constructor.
      */
-    public function __construct()
+    public function __construct(MailService $mailService)
     {
+        $this->mailService = $mailService;
         $this->middleware([ConvertEmptyStringsToNull::class]);
     }
-
 
     /**
      * @param Request $request
@@ -299,5 +301,52 @@ class UserController extends Controller
         }
 
         return response()->json(['unique' => true]);
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     * @throws \Exception
+     */
+    public function report($id)
+    {
+        $user = User::find($id);
+        if (!$user) {
+            throw new NotFoundHttpException();
+        }
+
+        $currentUser = user();
+        $brand = brand();
+
+        $input['subject'] = 'User reported by '.$currentUser['display_name']." (".$currentUser['email'].")";
+        $input['sender-address'] = config('mailora.report-sender-address');
+        $input['sender-name'] = config('mailora.report-sender-name');
+        $input['lines'] = ['The following user has been reported:'];
+        $input['lines'][] = $user['display_name'];
+        $input['lines'][] = $user['email'];
+        $input['lines'][] = url()->route('platform.profile.dashboard', [
+            'brand' => brand(),
+            'userId' => $user['id'],
+        ]);
+
+        $input['alert'] = 'User reported by '.$currentUser['display_name']." (".$currentUser['email'].")";
+
+        $input['logo'] = config('mailora.'.$brand.'.logo-link');
+        $input['type'] = 'layouts/inline/alert';
+        $input['recipient'] = config('mailora.'.$brand.'.report-user-recipient');
+
+        try {
+            $this->mailService->sendSecure($input);
+        } catch (\Exception $exception) {
+            return response()->json([
+                                        "success" => false,
+                                        "message" => $exception->getMessage(),
+                                    ], 500);
+        }
+
+        return response()->json([
+                                    "success" => true,
+                                    "message" => "The user profile was reported",
+                                ], 200);
     }
 }
