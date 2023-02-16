@@ -33,6 +33,7 @@
             dropdownOpen: false,
             dropdownTop: false,
             isPinned: false,
+            isPrivate: false,
         });
 
     //-----------Methods-----------//
@@ -48,6 +49,23 @@
         state.dropdownOpen = false;
     };
 
+    const privateToggleHandler = () => {
+        console.log('run private toggle handler')
+        let isPrivate = props.list.private === 1 ? true : false;
+        PlaylistService.setToPrivate(props.list, isPrivate, token)
+            .then((response) => {
+                if(response.status === 200) {
+                    //set private/public
+                    state.isPrivate = !state.isPrivate;
+                    //show success message
+                    window.shownotification({
+                        icon: `${props.list.private === 1 ? 'fa-lock-open' : 'fa-lock'}.`,
+                        text: `Your playlist is now ${props.list.private === 1 ? 'public' : 'private'}.`
+                    })
+                }
+            })
+    }
+
     //Handle Pin/Unpin Request
     const pinHandler = (id, brand) => {
         if(!state.isPinned) { //PIN
@@ -57,7 +75,7 @@
                         //handle pin
                         state.isPinned = true;
                         //emit event or update pinia
-                        playlistsStore.pinPlaylist(props.list)
+                        playlistsStore.getPinnedPlaylists(brand, token)
                         //show success message
                         window.shownotification({
                             icon: 'playlist',
@@ -78,7 +96,7 @@
                         //handle unpin
                         state.isPinned = false;
                         //emit event or update pinia
-                        playlistsStore.unpinPlaylist(props.list)
+                        playlistsStore.getPinnedPlaylists(brand, token)
                         //show success message
                         window.shownotification({
                             icon: 'playlist',
@@ -119,6 +137,8 @@
     onBeforeMount(() => {
         //check if it's pinned with request? Or prerender?
         state.isPinned = props.list.pinned;
+        state.isPrivate = props.list.private; 
+
         console.log('pinned playlists ', playlistsStore.pinnedPlaylists )
     }); 
     
@@ -243,7 +263,14 @@
                             </button>
                         </li>
                         <!-- If not public -->
-                        <li class="tw-w-full tw-w-full tw-flex tw-px-4 tw-py-2">Private</li>
+                        <li class="tw-w-full tw-w-full tw-flex">
+                            <label :for="`private-toggle-${list.id}`" class="tw-relative tw-cursor-pointer tw-flex tw-w-full tw-items-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-black/20">
+                                {{ state.isPrivate ? 'Private' : 'Public' }} 
+                                <input :id="`private-toggle-${list.id}`" type="checkbox" class="tw-ml-auto tw-block tw-right-0 tw-sr-only" @change.prevent="privateToggleHandler()">
+                                <!-- Toggle -->
+                                <div class=""></div>
+                            </label>
+                        </li>
                     </ul>
                 </div>
             </div>

@@ -54,6 +54,27 @@ export default {
         });
     },
 
+    /**
+     * GET Pinned Playlists
+     *
+     * @param {string} brand
+     * @param {string} token
+     */
+    getPinnedPlaylists(brand, token) {
+        const payload = {
+            "brand": brand,
+        }
+        const headers = {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': token
+        };
+        return axios({
+            method: 'GET',
+            url: '/railcontent/my-pinned-playlists',
+            params: payload,
+            headers
+        })
+    },
 
     //-------------UPDATE--------------//
 
@@ -95,6 +116,30 @@ export default {
             {
                 "brand": brand,
                 "playlist_id":id,
+            },
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': csrf_token
+                }
+            }
+        )
+    },
+
+    /**
+     * Set Playlist to Private/Public
+     *
+     * @param {number} id 
+     * @param {boolean} isPrivate
+     * @param {string} csrf_token
+     *
+     */
+    setToPrivate(id, isPrivate, csrf_token) {
+        console.log('set to private ', isPrivate)
+        return axios.patch(
+            `/railcontent/playlist/${id}`,
+            {
+                "private": isPrivate ? 0 : 1,
             },
             {
                 headers: {

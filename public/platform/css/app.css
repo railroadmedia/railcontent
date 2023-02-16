@@ -21640,6 +21640,10 @@ a:visited{
   margin-top: 7px !important;
   margin-bottom: 7px !important;
 }
+.tw-mx-\[25px\]{
+  margin-left: 25px !important;
+  margin-right: 25px !important;
+}
 .tw-my-1{
   margin-top: 0.25rem !important;
   margin-bottom: 0.25rem !important;
@@ -22708,6 +22712,14 @@ a:visited{
 .tw-animate-ping{
   animation: tw-ping 1s cubic-bezier(0, 0, 0.2, 1) infinite !important;
 }
+@keyframes tw-pulse{
+  50%{
+    opacity: .5;
+  }
+}
+.tw-animate-pulse{
+  animation: tw-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite !important;
+}
 @keyframes tw-grow-shrink{
   0%{
     transform: scale(1);
@@ -23361,6 +23373,10 @@ a:visited{
 .tw-bg-black\/30{
   background-color: rgb(0 0 0 / 0.3) !important;
 }
+.tw-bg-\[\#F5F5F6\]{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(245 245 246 / var(--tw-bg-opacity)) !important;
+}
 .tw-bg-\[\#E6E7E9\]{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(230 231 233 / var(--tw-bg-opacity)) !important;
@@ -23933,11 +23949,11 @@ a:visited{
 .tw-pl-\[6px\]{
   padding-left: 6px !important;
 }
-.tw-pl-1{
-  padding-left: 0.25rem !important;
-}
 .tw-pt-\[29px\]{
   padding-top: 29px !important;
+}
+.tw-pl-1{
+  padding-left: 0.25rem !important;
 }
 .tw-pl-\[48px\]{
   padding-left: 48px !important;
@@ -25009,6 +25025,10 @@ a:visited{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(0 12 23 / var(--tw-bg-opacity)) !important;
 }
+.tw-dark .dark\:tw-bg-\[\#102230\]{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(16 34 48 / var(--tw-bg-opacity)) !important;
+}
 .tw-dark .dark\:tw-bg-\[\#191b1c\]{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(25 27 28 / var(--tw-bg-opacity)) !important;
@@ -25034,10 +25054,6 @@ a:visited{
 }
 .tw-dark .dark\:tw-bg-\[\#000c17\]\/80{
   background-color: rgb(0 12 23 / 0.8) !important;
-}
-.tw-dark .dark\:tw-bg-\[\#102230\]{
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(16 34 48 / var(--tw-bg-opacity)) !important;
 }
 .tw-dark .dark\:tw-text-white{
   --tw-text-opacity: 1 !important;
