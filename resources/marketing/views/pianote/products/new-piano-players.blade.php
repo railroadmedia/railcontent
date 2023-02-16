@@ -290,25 +290,25 @@
                 <div class="w-full sm:w-7/12 text-center lg:text-left">
                     <img class="h-20 sm:h-24 lg:h-28 -mb-3 sm:mb-0 lg:mb-3 lazyload" data-src="https://cdn.musora.com/image/fetch/w_440,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/new-piano-players-start-here-logo-2+1.png" alt="new piano players start here logo">
                     <h1 class="rotater-text overflow-hidden"><strong>
-                            <span class="relative whitespace-nowrap top-0 delay-1000 ease-in-out">Learn the piano</span><br>
-                            <span class="relative whitespace-nowrap top-0 delay-1000 ease-in-out">Play real songs </span><br>
-                            <span class="relative whitespace-nowrap top-0 delay-1000 ease-in-out">Sound beautiful</span><br>
+                            <span class="relative whitespace-nowrap delay-1000 ease-in-out">Learn the piano</span><br>
+                            <span class="relative whitespace-nowrap delay-1000 ease-in-out">Play real songs </span><br>
+                            <span class="relative whitespace-nowrap delay-1000 ease-in-out">Sound beautiful</span><br>
 
-                            <span class="relative whitespace-nowrap top-0 delay-1000 ease-in-out">Learn the piano</span><br>
-                            <span class="relative whitespace-nowrap top-0 delay-1000 ease-in-out">Play real songs </span><br>
-                            <span class="relative whitespace-nowrap top-0 delay-1000 ease-in-out">Sound beautiful</span><br>
+                            <span class="relative whitespace-nowrap delay-1000 ease-in-out">Learn the piano</span><br>
+                            <span class="relative whitespace-nowrap delay-1000 ease-in-out">Play real songs </span><br>
+                            <span class="relative whitespace-nowrap delay-1000 ease-in-out">Sound beautiful</span><br>
 
-                            <span class="relative whitespace-nowrap top-0 delay-1000 ease-in-out">Learn the piano</span><br>
-                            <span class="relative whitespace-nowrap top-0 delay-1000 ease-in-out">Play real songs </span><br>
-                            <span class="relative whitespace-nowrap top-0 delay-1000 ease-in-out">Sound beautiful</span><br>
+                            <span class="relative whitespace-nowrap delay-1000 ease-in-out">Learn the piano</span><br>
+                            <span class="relative whitespace-nowrap delay-1000 ease-in-out">Play real songs </span><br>
+                            <span class="relative whitespace-nowrap delay-1000 ease-in-out">Sound beautiful</span><br>
 
-                            <span class="relative whitespace-nowrap top-0 delay-1000 ease-in-out">Learn the piano</span><br>
-                            <span class="relative whitespace-nowrap top-0 delay-1000 ease-in-out">Play real songs </span><br>
-                            <span class="relative whitespace-nowrap top-0 delay-1000 ease-in-out">Sound beautiful</span><br>
+                            <span class="relative whitespace-nowrap delay-1000 ease-in-out">Learn the piano</span><br>
+                            <span class="relative whitespace-nowrap delay-1000 ease-in-out">Play real songs </span><br>
+                            <span class="relative whitespace-nowrap delay-1000 ease-in-out">Sound beautiful</span><br>
 
-                            <span class="relative whitespace-nowrap top-0 delay-1000 ease-in-out">Learn the piano</span><br>
-                            <span class="relative whitespace-nowrap top-0 delay-1000 ease-in-out">Play real songs </span><br>
-                            <span class="relative whitespace-nowrap top-0 delay-1000 ease-in-out">Sound beautiful</span><br>
+                            <span class="relative whitespace-nowrap delay-1000 ease-in-out">Learn the piano</span><br>
+                            <span class="relative whitespace-nowrap delay-1000 ease-in-out">Play real songs </span><br>
+                            <span class="relative whitespace-nowrap delay-1000 ease-in-out">Sound beautiful</span><br>
                         </strong></h1>
                     <h2 class="-mt-3 sm:-mt-1 lg:mt-0">in just 30 days.</h2>
 
