@@ -250,22 +250,25 @@ class PlaylistItemTransformer
                         }
                     }
 
-                    $route = '';
+                    $route = [];
 
                     if(!empty($row['parent_content_data'])){
                         $parentContentData = array_reverse(json_decode($row['parent_content_data'], true));
                         $parentIds = \Arr::pluck($parentContentData,'id');
                         $parents = $this->contentService->getByIds($parentIds)->keyBy('id');
+
                         foreach( $parentContentData as $value){
+
+                            $parentTitle = (isset($parents[$value['id']]))?$parents[$value['id']]['title']:'';
                             switch ($value['type']) {
                                 case 'learning-path':
-                                    $route .= 'Method ';
+                                    $route[] = 'Method';
                                     break;
                                 case 'learning-path-level':
-                                    $route .= 'L'.$value['position'].' - ';
+                                    $route[] = 'L'.$value['position'];
                                     break;
                                 default:
-                                    $route .= $parents[$value['id']]['title'].' ' ?? '';
+                                    $route[] = $parentTitle;
                                     break;
                             }
                         }
