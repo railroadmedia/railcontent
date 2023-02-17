@@ -152,7 +152,7 @@ export default {
     /**
      * Set Playlist to Private/Public
      *
-     * @param {number} id 
+     * @param {number} id
      * @param {boolean} isPrivate
      * @param {string} csrf_token
      *
@@ -203,7 +203,7 @@ export default {
     /**
      * DELETE Playlist
      *
-     * @param {string} id 
+     * @param {string} id
      * @param {string} token
      */
     deletePlaylist(id, token) {
@@ -215,7 +215,7 @@ export default {
             'X-CSRF-TOKEN': token
         };
         return axios({
-            method: 'DEL',
+            method: 'DELETE',
             url: '/railcontent/playlist',
             params: payload,
             headers
