@@ -17,7 +17,9 @@
 
         {!! \App\Analytics\Tracker::trackPageView() !!}
 
-        {!! \App\Analytics\Tracker::headBottom() !!}
+{{--        {!! \App\Analytics\Tracker::headBottom() !!}--}}
+
+        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     </head>
 
     <body class="flex flex-col w-full min-h-screen pt-[40px] lg:pt-[56px] @yield('body-class')"
@@ -41,8 +43,6 @@
              x-on:click="showOverlay = !showOverlay, sidebarOpen = !sidebarOpen"
              x-bind:class="{ 'fixed h-screen w-screen z-30 bg-black bg-opacity-20': showOverlay }"
         ></div>
-
-        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 
          @yield('layout-scripts')
         {!! \App\Analytics\Tracker::bodyBottom() !!}

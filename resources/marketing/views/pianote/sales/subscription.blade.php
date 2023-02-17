@@ -132,6 +132,12 @@
             "trialVersion" => true,
             "joinUrl" => '/choose-plan',
         ])
+        <a href="https://www.musora.com/new-piano-players" class="flex items-center justify-center py-2 px-2 sm:px-0 w-full z-[100]" style="background: linear-gradient(180deg, #EBF0FF 0%, #DEE6FF 100%);">
+            <img class="h-8 sm:h-10 mr-4" src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/new-piano-players-start-here-logo-2+1.png" alt="30 day drummer logo" />
+            <p class="text-sm sm:text-lg font-bebas uppercase mx-0 leading-tight">
+                Enrollment is open | February 27 - March 28 <span class="hidden sm:inline">|</span> <br class="sm:hidden"><span class="text-pianote underline">Click here to join.</span>
+            </p>
+        </a>
     @endif
 
     @php
