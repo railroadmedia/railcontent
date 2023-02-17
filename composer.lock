@@ -176,16 +176,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.258.11",
+            "version": "3.258.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "5e339f47f86db7ed5f5afcda345d30ac1713aed3"
+                "reference": "43ee875456822ee7772cfc51da57bfa558ccb30c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/5e339f47f86db7ed5f5afcda345d30ac1713aed3",
-                "reference": "5e339f47f86db7ed5f5afcda345d30ac1713aed3",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/43ee875456822ee7772cfc51da57bfa558ccb30c",
+                "reference": "43ee875456822ee7772cfc51da57bfa558ccb30c",
                 "shasum": ""
             },
             "require": {
@@ -264,9 +264,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.258.11"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.258.12"
             },
-            "time": "2023-02-15T20:08:42+00:00"
+            "time": "2023-02-16T19:21:12+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -4849,16 +4849,16 @@
         },
         {
             "name": "laravel/ui",
-            "version": "v4.2.0",
+            "version": "v4.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/ui.git",
-                "reference": "810adddcf4e2538b0d1ed470c3a5220ffe761370"
+                "reference": "05ff7ac1eb55e2dfd10edcfb18c953684d693907"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/ui/zipball/810adddcf4e2538b0d1ed470c3a5220ffe761370",
-                "reference": "810adddcf4e2538b0d1ed470c3a5220ffe761370",
+                "url": "https://api.github.com/repos/laravel/ui/zipball/05ff7ac1eb55e2dfd10edcfb18c953684d693907",
+                "reference": "05ff7ac1eb55e2dfd10edcfb18c953684d693907",
                 "shasum": ""
             },
             "require": {
@@ -4869,7 +4869,8 @@
                 "php": "^8.0"
             },
             "require-dev": {
-                "orchestra/testbench": "^7.0|^8.0"
+                "orchestra/testbench": "^7.0|^8.0",
+                "phpunit/phpunit": "^9.3"
             },
             "type": "library",
             "extra": {
@@ -4904,9 +4905,9 @@
                 "ui"
             ],
             "support": {
-                "source": "https://github.com/laravel/ui/tree/v4.2.0"
+                "source": "https://github.com/laravel/ui/tree/v4.2.1"
             },
-            "time": "2023-01-10T12:13:29+00:00"
+            "time": "2023-02-17T09:17:24+00:00"
         },
         {
             "name": "laravel/vapor-cli",
@@ -8530,12 +8531,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "2a41e589c02157292a3ce2b1abc687c44f87c042"
+                "reference": "6ed93f95aec595de8014deaf73fd6d3ade8585d4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/2a41e589c02157292a3ce2b1abc687c44f87c042",
-                "reference": "2a41e589c02157292a3ce2b1abc687c44f87c042",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/6ed93f95aec595de8014deaf73fd6d3ade8585d4",
+                "reference": "6ed93f95aec595de8014deaf73fd6d3ade8585d4",
                 "shasum": ""
             },
             "require": {
@@ -8591,20 +8592,20 @@
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
                 "source": "https://github.com/railroadmedia/railcontent/tree/2.0-playlists"
             },
-            "time": "2023-02-16T13:41:42+00:00"
+            "time": "2023-02-17T09:59:00+00:00"
         },
         {
             "name": "railroad/railforums",
-            "version": "v2.0.15",
+            "version": "v2.0.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railforums.git",
-                "reference": "84ae3a8f47b2e1cfbdd91045b19dca00ea7f91d6"
+                "reference": "d9af291bc0c1763bd4d9167372ca73550461114c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railforums/zipball/84ae3a8f47b2e1cfbdd91045b19dca00ea7f91d6",
-                "reference": "84ae3a8f47b2e1cfbdd91045b19dca00ea7f91d6",
+                "url": "https://api.github.com/repos/railroadmedia/railforums/zipball/d9af291bc0c1763bd4d9167372ca73550461114c",
+                "reference": "d9af291bc0c1763bd4d9167372ca73550461114c",
                 "shasum": ""
             },
             "require": {
@@ -8643,9 +8644,9 @@
             "description": "Laravel forum system using entities",
             "support": {
                 "issues": "https://github.com/railroadmedia/railforums/issues",
-                "source": "https://github.com/railroadmedia/railforums/tree/v2.0.15"
+                "source": "https://github.com/railroadmedia/railforums/tree/v2.0.16"
             },
-            "time": "2023-02-14T12:15:19+00:00"
+            "time": "2023-02-16T20:37:36+00:00"
         },
         {
             "name": "railroad/railnotifications",
