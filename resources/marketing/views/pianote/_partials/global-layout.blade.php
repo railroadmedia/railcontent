@@ -54,7 +54,7 @@
                 $(this).html('<div class="inline-block"><h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">LIMITED</h2> <p class="leading-none uppercase font-extrabold text-xs text-promo">TIME LEFT</p></div>');
             });
 
-        $('.tzcd-nppsh2').countdown('2023/02/21')
+        $('.tzcd-nppsh2').countdown('2023/02/20')
             .on('update.countdown', function (event) {
                 var format = '' + '%MM %SS ';
                 if (event.offset.totalHours > 0) {
