@@ -49,6 +49,11 @@ class LeadGenController extends BaseController
         return view('pianote.lead-gen.minor-blues');
     }
 
+    public function fSharpMinor()
+    {
+        return view('pianote.lead-gen.f-sharp-minor');
+    }
+
     public function pentatonicScale()
     {
         return view('pianote.lead-gen.pentatonic-scale');
