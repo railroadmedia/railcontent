@@ -284,15 +284,16 @@
         }
     @endphp
 
-    <a href="#final" class="anchor-slide flex items-end justify-center px-2 sm:px-0 fixed w-full z-[100]" style="background: #d6e8fd;">
-        <p class="font-bebas uppercase mx-0 py-2 leading-none">
-            GET A FREE CHORDS & SCALES BOOK UNTIL FEB 20.
-            <br><span class="text-pianote"><span class="tzcd-nppsh2">a limited time</span> left!</span>
-        </p>
-        <img class="h-10 ml-4" src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/sticky_bar_chords_scales.png" alt="30 day drummer logo" />
-    </a>
-    <div class="w-full block h-10 sm:h-11"></div>
-
+    @if(!is_current_user_a_member())
+        <a href="#final" class="anchor-slide flex items-end justify-center px-2 sm:px-0 fixed w-full z-[100]" style="background: #d6e8fd;">
+            <p class="font-bebas uppercase mx-0 py-2 leading-none">
+                GET A FREE CHORDS & SCALES BOOK UNTIL FEB 20.
+                <br><span class="text-pianote"><span class="tzcd-nppsh2">a limited time</span> left!</span>
+            </p>
+            <img class="h-10 ml-4" src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/sticky_bar_chords_scales.png" alt="30 day drummer logo" />
+        </a>
+        <div class="w-full block h-10 sm:h-11"></div>
+    @endif
     <header class="px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:#eff7ff;">
         <div class="container max-w-5xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center">
@@ -817,7 +818,7 @@
             <div class="max-w-5xl mx-auto md:flex relative z-40">
                 <div class="flex-1 text-white md:pr-4 lg:pr-0 mb-3 md:mb-0 max-w-md md:max-w-auto mx-auto">
                     <h5 class="uppercase mb-2 text-center md:text-left" style="color: #FFAE00;">
-                        AVAILABLE UNTIL FEBRUARY<br> only <span class="tzcd-nppsh2">a limited time</span> left!
+                        AVAILABLE UNTIL FEBRUARY 20TH<br> only <span class="tzcd-nppsh2">a limited time</span> left!
                     </h5>
                     <h2 class="font-extrabold mb-4 text-center md:text-left">
                         Master every chord & <br class="hidden lg:inline">scale with this guide.
