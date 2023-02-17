@@ -370,6 +370,16 @@ return [
                     'pianote',
                 ],
             ],
+            'F Sharp Minor' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_f-sharp-minor',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
             'The Minor Blues Made Easy' => [
                 'custom_attributes' => [
                 ],
