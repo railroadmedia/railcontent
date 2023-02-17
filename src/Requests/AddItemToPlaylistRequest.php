@@ -24,10 +24,13 @@ class AddItemToPlaylistRequest extends FormRequest
     public function rules()
     {
         return [
-            'playlist_id' => 'required',
+            'playlist_id' => 'required|array',
             'content_id' => 'required|integer|exists:' . ConfigService::$databaseConnectionName . '.' .
                 ConfigService::$tableContent . ',id',
-            'brand' => 'required'
+            'brand' => 'required',
+            'import_all_assignments' => 'boolean',
+            'import_full_soundslice_assignment' => 'boolean',
+            'import_instrumentless_soundslice_assignment' => 'boolean'
         ];
     }
 
