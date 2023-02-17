@@ -2,13 +2,25 @@
 
 @section('head-includes')
     @parent
+    <title>Musora’s Ambassador Program</title>
+    <meta property="og:title" content="Musora’s Ambassador Program">
+
+    <meta name="description" content="Get paid to promote world-class online music lessons.">
+    <meta property="og:description" content="Get paid to promote world-class online music lessons.">
+
+    <meta property="og:url" content="https://www.musora.com/{{ Request::path() }}">
+    <meta property="og:image" content="https://musora-center.s3.amazonaws.com/homepage/2021/share-image.jpg">
+
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
 @endsection
 
 @section('body-data')
     x-data="{ modal: false }"
+@endsection
+
+@section('layout-scripts')
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
 @endsection
 
 <!-- Main -->

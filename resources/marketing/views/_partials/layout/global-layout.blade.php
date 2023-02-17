@@ -43,7 +43,7 @@
              x-on:click="showOverlay = !showOverlay, sidebarOpen = !sidebarOpen"
              x-bind:class="{ 'fixed h-screen w-screen z-30 bg-black bg-opacity-20': showOverlay }"
         ></div>
-
+        
          @yield('layout-scripts')
         {!! \App\Analytics\Tracker::bodyBottom() !!}
     </body>
