@@ -42,8 +42,8 @@
         @if(!empty($fullSubscriptionVersion))
             <div class="relative">
                 <div class="edge-wrap show-for-medium">
-                    <a class="cursor-pointer features @if(strpos(url()->full(), 'method') || strpos(url()->full(), 'songs') || strpos(url()->full(), 'coaches')) active @endif">Features <i class="fa-solid fa-caret-down"></i></a>
-                    <a class="cursor-pointer instruments">Instruments <i class="fa-solid fa-caret-down"></i></a>
+                    <span class="cursor-pointer features @if(strpos(url()->full(), 'method') || strpos(url()->full(), 'songs') || strpos(url()->full(), 'coaches')) active @endif">Features <i class="fa-solid fa-caret-down"></i></span>
+                    <span class="cursor-pointer instruments">Instruments <i class="fa-solid fa-caret-down"></i></span>
                     <a class=" @if(strpos(url()->full(), 'choose-plan')) active @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/choose-plan" >Pricing</a>
                     <a class=" @if(strpos(url()->full(), 'drumshop')) active @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/drumshop" >Shop</a>
                     <a class="" href="{{ get_legacy_brand_base_url('drumeo') }}/beat" >Blog</a>

@@ -180,12 +180,12 @@ class CustomerIoSyncService
                 }
             }
 
+            $membershipAccessExpirationDate = !empty($membershipProduct) ? $membershipProduct->getExpirationDate() : null;
+
             if (!empty($latestMembershipUserProductToSync) && !empty($firstMembershipUserProductToSync)) {
-                $membershipAccessExpirationDate = $membershipProduct->getExpirationDate();
                 $membershipLatestAccessStartDate = $latestMembershipUserProductToSync->getCreatedAt();
                 $membershipFirstAccessStartDate = $firstMembershipUserProductToSync->getCreatedAt();
             } else {
-                $membershipAccessExpirationDate = null;
                 $membershipLatestAccessStartDate = null;
                 $membershipFirstAccessStartDate = null;
             }

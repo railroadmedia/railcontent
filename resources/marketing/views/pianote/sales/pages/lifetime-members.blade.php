@@ -105,9 +105,7 @@
     {{--<img class="logo"--}}
     {{--src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/march/logo.png">--}}
     {{--<p>--}}
-    {{--@if(!empty(Prices::$lifetimeMembership))--}}
     {{--<strong>ONLY <s class='opacity-60'>50</s> {{ $products['PIANOTE-MEMBERSHIP-LIFETIME']->getStockAvailability()}} SPOTS LEFT</strong>--}}
-    {{--@endif--}}
     {{--</p>--}}
     {{--</div>--}}
     {{--</div>--}}

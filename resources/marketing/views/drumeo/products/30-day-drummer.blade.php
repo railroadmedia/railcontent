@@ -225,25 +225,25 @@
                 <div class="w-full sm:w-7/12 text-center lg:text-left">
                     <img class="h-20 sm:h-24 lg:h-28 -mb-3 sm:mb-0 lg:mb-3 lazyload" data-src="https://cdn.musora.com/image/fetch/w_440,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/30_day_drummer2_logo.png" alt="30DD logo season2 logo">
                     <h1 class="rotater-text overflow-hidden"><strong>
-                            <span class="relative nowrap top-0 delay-1000 ease-in-out">Learn the drums</span><br>
-                            <span class="relative nowrap top-0 delay-1000 ease-in-out">Improve your timing</span><br>
-                            <span class="relative nowrap top-0 delay-1000 ease-in-out">Boost your creativity</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Learn the drums</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Improve your timing</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Boost your creativity</span><br>
 
-                            <span class="relative nowrap top-0 delay-1000 ease-in-out">Learn the drums</span><br>
-                            <span class="relative nowrap top-0 delay-1000 ease-in-out">Improve your timing</span><br>
-                            <span class="relative nowrap top-0 delay-1000 ease-in-out">Boost your creativity</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Learn the drums</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Improve your timing</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Boost your creativity</span><br>
 
-                            <span class="relative nowrap top-0 delay-1000 ease-in-out">Learn the drums</span><br>
-                            <span class="relative nowrap top-0 delay-1000 ease-in-out">Improve your timing</span><br>
-                            <span class="relative nowrap top-0 delay-1000 ease-in-out">Boost your creativity</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Learn the drums</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Improve your timing</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Boost your creativity</span><br>
 
-                            <span class="relative nowrap top-0 delay-1000 ease-in-out">Learn the drums</span><br>
-                            <span class="relative nowrap top-0 delay-1000 ease-in-out">Improve your timing</span><br>
-                            <span class="relative nowrap top-0 delay-1000 ease-in-out">Boost your creativity</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Learn the drums</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Improve your timing</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Boost your creativity</span><br>
 
-                            <span class="relative nowrap top-0 delay-1000 ease-in-out">Learn the drums</span><br>
-                            <span class="relative nowrap top-0 delay-1000 ease-in-out">Improve your timing</span><br>
-                            <span class="relative nowrap top-0 delay-1000 ease-in-out">Boost your creativity</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Learn the drums</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Improve your timing</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Boost your creativity</span><br>
                         </strong></h1>
                     <h2 class="-mt-3 sm:-mt-1 lg:mt-0">with daily guided workouts.</h2>
 
@@ -685,6 +685,7 @@
             <p class="inline-block leading-tight text-sm align-middle">Join {{ number_format($nPackOwners ?? 0) }} drummers who<br> have already registered.</p>
         </div>
     </section>
+    <div id="healthy" class="anchor"></div>
     <section class="text-white text-center px-5 sm:px-6 py-10 sm:py-16 lg:py-20" style="background:linear-gradient(to bottom, #0b76db, #074c8e);">
         <div class="container max-w-5xl mx-auto">
             <h2><strong>Your brain on drums.</strong></h2>

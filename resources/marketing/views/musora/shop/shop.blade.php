@@ -117,29 +117,7 @@
             <div class="px-2 md:px-3">
                 <img class="h-10 md:h-16 mb-2 sm:mb-4" src="https://musora-center.s3.amazonaws.com/shop/musora-member-logo.svg" alt="drumeo logo">
                 <p>As a Musora Member you’re getting exclusive access to <strong>NEW</strong><br class="hidden sm:inline-block"> limited edition merch designed for musicians – by musicians.</p>
-                <div class="rounded-xl px-6 py-2 inline-flex flex-wrap mx-auto my-2 sm:my-4 justify-center items-center text-black" style="background-color:#fff;">
-                    <p class="leading-none m-0"><strong>SALE ENDS IN:</strong></p>
-                    <div class="h-12 mx-3 bg-black" style="width:2px;"></div>
-                    <div class="tzcd-big">
-                        <div class="inline-block">
-                            <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>
-                            <p class="leading-none uppercase font-extrabold text-xs text-promo">days</p>
-                        </div>
-                        <div class="inline-block mx-2">
-                            <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>
-                            <p class="leading-none uppercase font-extrabold text-xs text-promo">hrs</p>
-                        </div>
-                        <div class="inline-block mr-2">
-                            <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>
-                            <p class="leading-none uppercase font-extrabold text-xs text-promo">mins</p>
-                        </div>
-                        <div class="inline-block">
-                            <h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">00</h2>
-                            <p class="leading-none uppercase font-extrabold text-xs text-promo">secs</p>
-                        </div>
-                    </div>
-                </div>
-                <p><strong><em>ONLY AVAILABLE FOR A LIMITED TIME</em></strong></p>
+                <p><strong><em>Pre-orders are now closed</em></strong></p>
             </div>
         </div>
     </header>
@@ -482,34 +460,34 @@
             </section>
 
             {{--   ACCESSORIES     --}}
-            <section class="grid-view category-section" data-category="accessories">
-                <ul class="container mx-auto fixed-cards">
-                    <div id="accessories"></div>
-                    <li>
-                        <h1 class="px-2 md:px-3">
-                            <div class="heading-icon text-black"><i class="fas fa-suitcase"></i></div>
-                            Accessories
-                        </h1>
-                    </li>
-                    @foreach($accessories as $accessory){
-                    @include('drumeo.drumshop._partials._drum-shop-card', [
-                        "sku" => $accessory->sku,
-                        "itemURL" => get_legacy_brand_base_url(strtolower($accessory->brand->name)).($accessory->brand->name === 'Drumeo' ? '/drumshop/' : '/shop/').str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $accessory->slug ),
-                        "badgeText" => $accessory->badge_text,
-                        "thumbnail" => $accessory->thumbnail,
-                        "title" => $accessory->name,
-                        "cardDescription" => $accessory->short_desc,
-                        "fullPrice" => $accessory->price,
-                        "price" => $accessory->discounted_price,
-                        "sizes" => $accessory->sizes,
-                        "soldOut" => !empty($products[$accessory->sku]) ? $products[$accessory->sku]->getStockAvailability() === 0 : $accessory->sold_out,
-                        "category" => strtolower($accessory->productType->name),
-                        "size_case_sensitive" => $accessory->size_case_sensitive,
-                    ])
-                    }
-                    @endforeach
-                </ul>
-            </section>
+{{--            <section class="grid-view category-section" data-category="accessories">--}}
+{{--                <ul class="container mx-auto fixed-cards">--}}
+{{--                    <div id="accessories"></div>--}}
+{{--                    <li>--}}
+{{--                        <h1 class="px-2 md:px-3">--}}
+{{--                            <div class="heading-icon text-black"><i class="fas fa-suitcase"></i></div>--}}
+{{--                            Accessories--}}
+{{--                        </h1>--}}
+{{--                    </li>--}}
+{{--                    @foreach($accessories as $accessory){--}}
+{{--                    @include('drumeo.drumshop._partials._drum-shop-card', [--}}
+{{--                        "sku" => $accessory->sku,--}}
+{{--                        "itemURL" => get_legacy_brand_base_url(strtolower($accessory->brand->name)).($accessory->brand->name === 'Drumeo' ? '/drumshop/' : '/shop/').str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $accessory->slug ),--}}
+{{--                        "badgeText" => $accessory->badge_text,--}}
+{{--                        "thumbnail" => $accessory->thumbnail,--}}
+{{--                        "title" => $accessory->name,--}}
+{{--                        "cardDescription" => $accessory->short_desc,--}}
+{{--                        "fullPrice" => $accessory->price,--}}
+{{--                        "price" => $accessory->discounted_price,--}}
+{{--                        "sizes" => $accessory->sizes,--}}
+{{--                        "soldOut" => !empty($products[$accessory->sku]) ? $products[$accessory->sku]->getStockAvailability() === 0 : $accessory->sold_out,--}}
+{{--                        "category" => strtolower($accessory->productType->name),--}}
+{{--                        "size_case_sensitive" => $accessory->size_case_sensitive,--}}
+{{--                    ])--}}
+{{--                    }--}}
+{{--                    @endforeach--}}
+{{--                </ul>--}}
+{{--            </section>--}}
         </div>
     </div>
 
