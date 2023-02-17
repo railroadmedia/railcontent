@@ -39,12 +39,12 @@
         @if(!empty($fullSubscriptionVersion))
             <div class="relative">
                 <div class="edge-wrap show-for-medium">
-                    <a class="cursor-pointer features  @if(strpos(url()->full(), 'method') || strpos(url()->full(), 'songs') || strpos(url()->full(), 'coaches')) text-singeo @endif">
+                    <span class="cursor-pointer features  @if(strpos(url()->full(), 'method') || strpos(url()->full(), 'songs') || strpos(url()->full(), 'coaches')) text-singeo @endif">
                         Features <i class="fa-solid fa-caret-down"></i>
-                    </a>
-                    <a class="cursor-pointer instruments">
+                    </span>
+                    <span class="cursor-pointer instruments">
                         Instruments <i class="fa-solid fa-caret-down"></i>
-                    </a>
+                    </span>
                     <a class=" @if(strpos(url()->full(), 'choose-plan')) text-singeo @endif" href="{{ get_legacy_brand_base_url('singeo') }}/choose-plan" >Pricing</a>
                     <a class=" @if(strpos(url()->full(), 'shop')) text-singeo @endif" href="{{ get_legacy_brand_base_url('singeo') }}/shop" >Shop</a>
                     <a class="" href="{{ get_legacy_brand_base_url('singeo') }}/chorus" >Blog</a>

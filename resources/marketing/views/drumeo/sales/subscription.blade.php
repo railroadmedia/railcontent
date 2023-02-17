@@ -71,8 +71,14 @@
         }
 
         .splide__pagination__page {
-            margin: 3px 6px !important;
+            margin: 3px 10px !important;
             opacity: 1 !important;
+        }
+
+        @media (min-width: 768px) {
+            .splide__pagination__page {
+                margin: 3px 6px !important;
+            }
         }
 
         .splide__arrow svg {

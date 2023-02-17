@@ -32,7 +32,7 @@
             <div class="guitar"  style="background-image: url(https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://musora-center.s3.amazonaws.com/affiliate/background-guitar.jpg);"></div>
         </div>
         <div class="container mx-auto max-w-6xl relative z-10">
-            <img class="w-full mx-auto max-w-xs md:max-w-sm lg:max-w-md mb-10 md:mb-14 lg:mb-20" src="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://musora-center.s3.amazonaws.com/affiliate/musora-logos.png">
+            <img class="w-full mx-auto max-w-xs md:max-w-sm lg:max-w-md mb-10 md:mb-14 lg:mb-20" src="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://musora-center.s3.amazonaws.com/affiliate/musora-logos.png" alt="musora logos">
 
             <h2><strong>Musora’s<br class="inline sm:hidden"> Ambassador Program</strong></h2>
             <h4 class="mt-3 mb-5 md:mb-10 leading-normal">Get paid to promote world-class<br class="inline md:hidden"> online music lessons.</h4>
@@ -75,6 +75,7 @@
             class="absolute object-cover object-center transition-opacity opacity-0 inset-0 w-full h-full"
             loading="lazy"
             onload="this.classList.remove('opacity-0')"
+             alt="piano background"
         />
         <div class="container mx-auto max-w-6xl relative z-0">
             <h3><strong>How Do I Start?</strong></h3>
@@ -106,7 +107,7 @@
         </div>
     </section>
 
-    <div
+    <section
         x-data="{
             init() {
                 new Splide(this.$refs.splide, {
@@ -131,7 +132,7 @@
         }"
         class="bg-[#000c18]"
     >
-        <section x-ref="splide" class="splide text-white px-7 py-8 md:py-14 lg:py-20 mx-auto max-w-6xl" aria-label="Splide/Alpine.js Carousel Example">
+        <div x-ref="splide" class="splide text-white px-7 py-8 md:py-14 lg:py-20 mx-auto max-w-6xl" aria-label="Splide/Alpine.js Carousel Example">
             <div class="splide__track relative">
                 <ul class="splide__list">
                     <li class="splide__slide flex flex-col items-center justify-center">
@@ -146,6 +147,7 @@
                                         src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://musora-center.s3.amazonaws.com/affiliate/testimonial-alejandro.jpg"
                                         loading="lazy"
                                         onload="this.classList.remove('opacity-0')"
+                                        alt="testimonial alejandro"
                                     >
                                     <div class="text pl-3 md:pl-5">
                                         <h6 class="uppercase"><strong>Alejandro Sifuentes</strong></h6>
@@ -169,6 +171,7 @@
                                         src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://musora-center.s3.amazonaws.com/affiliate/testimonial-piano-dreamers.jpg"
                                         loading="lazy"
                                         onload="this.classList.remove('opacity-0')"
+                                        alt="testimonial piano dreamer"
                                     >
                                     <div class="text pl-3 md:pl-5">
                                         <h6 class="uppercase"><strong>Piano Dreamers</strong></h6>
@@ -192,6 +195,7 @@
                                         src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://musora-center.s3.amazonaws.com/affiliate/testimonial-aguafish.jpg"
                                         loading="lazy"
                                         onload="this.classList.remove('opacity-0')"
+                                        alt="testimonial aguafish"
                                     >
                                     <div class="text pl-3 md:pl-5">
                                         <h6 class="uppercase"><strong>Agufish</strong></h6>
@@ -215,6 +219,7 @@
                                         src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/sales/trials/casey-cooper.jpg"
                                         loading="lazy"
                                         onload="this.classList.remove('opacity-0')"
+                                        alt="casey cooper"
                                     >
                                     <div class="text pl-3 md:pl-5">
                                         <h6 class="uppercase"><strong>Casey Cooper</strong></h6>
@@ -227,14 +232,15 @@
                     </li>
                 </ul>
             </div>
-        </section>
-    </div>
+        </div>
+    </section>
 
     <section class="bg-cover bg-center text-center text-white py-24 md:py-32 lg:py-52 px-4 relative">
         <img src="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://musora-center.s3.amazonaws.com/affiliate/background-guitar.jpg"
             class="absolute object-cover transition-opacity opacity-0 z-[-2] w-full h-full top-0 left-0 object-cover"
             loading="lazy"
             onload="this.classList.remove('opacity-0')"
+             alt="guitar background"
         />
         <div class="container mx-auto max-w-6xl">
             <h2><strong>Musora’s<br class="inline sm:hidden"> Ambassador Program</strong></h2>
@@ -252,7 +258,6 @@
         role="dialog"
         aria-modal="true"
         x-id="['modal-title']"
-        :aria-labelledby="$id('modal-title')"
         class="fixed inset-0 z-10 overflow-y-auto"
     >
         <!-- Overlay -->
