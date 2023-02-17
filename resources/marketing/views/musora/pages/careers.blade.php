@@ -178,7 +178,7 @@
             <h3 class="mb-5 sm:mb-10"><strong>Join our team:</strong></h3>
             <div class="max-w-4xl mx-auto mb-14 sm:mb-20">
                 <div class="w-full relative" style="height:700px;">
-                    <iframe style="filter: invert(1) hue-rotate(200deg);" class="absolute w-full h-full rounded-lg" src="https://musoramediainc.bamboohr.com/jobs/" frameborder="0" allowfullscreen allow="autoplay"></iframe>
+                    <iframe style="filter: invert(1) hue-rotate(200deg);" class="absolute w-full h-full rounded-lg" src="https://musoramediainc.bamboohr.com/jobs/" frameborder="0" allowfullscreen allow="autoplay" title="musora jobs"></iframe>
                 </div>
             </div>
 
@@ -342,7 +342,7 @@
                 @endphp
                 @foreach($points as $point)
                     <div class="flex items-start w-full sm:w-1/2 m:px-2 lg:px-10 mb-6 sm:mb-9 text-left">
-                        <div class="w-12 sm:w-14 lg:w-16 flex-shrink-0"><img class="h-6 sm:h-7" src="{!! $point['icon'] !!}"></div>
+                        <div class="w-12 sm:w-14 lg:w-16 flex-shrink-0"><img class="h-6 sm:h-7" src="{!! $point['icon'] !!}" alt="{{ $point['title'] }} icon"></div>
                         <div>
                             <h5 class="leading-tight mb-2"><strong>{!! $point['title'] !!}</strong></h5>
                             <p class="text-[#a1afc9]">{!! $point['description'] !!}</p>
