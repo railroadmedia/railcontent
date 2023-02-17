@@ -124,7 +124,15 @@
             "trialVersion" => true,
             "joinUrl" => '/choose-plan',
         ])
+        <a href="/30-day-drummer" class="flex items-center justify-center py-2 px-2 sm:px-0 fixed w-full z-[100]" style="background: linear-gradient(180deg, #EBF0FF 0%, #DEE6FF 100%);">
+            <img class="h-8 sm:h-10 mr-4" src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/30_day_drummer_logo.png" alt="30 day drummer logo" />
+            <p class="text-sm sm:text-lg font-bebas uppercase mx-0 leading-tight">
+                Enrollment is open | February 27 - March 28 <span class="hidden sm:inline">|</span> <br class="sm:hidden"><span class="text-drumeo underline">Click here to join season II.</span>
+            </p>
+        </a>
+        <div class="w-full block h-12 sm:h-14"></div>
     @endif
+
 
     @php
         $features = [

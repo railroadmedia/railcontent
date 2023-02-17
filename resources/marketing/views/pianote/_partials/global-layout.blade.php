@@ -54,6 +54,20 @@
                 $(this).html('<div class="inline-block"><h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">LIMITED</h2> <p class="leading-none uppercase font-extrabold text-xs text-promo">TIME LEFT</p></div>');
             });
 
+        $('.tzcd-nppsh2').countdown('2023/02/21')
+            .on('update.countdown', function (event) {
+                var format = '' + '%MM %SS ';
+                if (event.offset.totalHours > 0) {
+                    format = '' + '%HH ' + format;
+                }
+                if (event.offset.totalDays > 0) {
+                    format = '' + '%DD ' + format;
+                }
+                $(this).html(event.strftime(format));
+            })
+            .on('finish.countdown', function (event) {
+                $(this).html('<div class="inline-block"><h2 class="font-extrabold leading-none text-lg">LIMITED</h2> <p class="leading-none uppercase font-extrabold text-xs text-promo">TIME LEFT</p></div>');
+            });
         @if(Carbon\Carbon::create(2023, 2, 24, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
         $('.tzcd-nppsh').countdown('2023/02/27')
             .on('update.countdown', function (event) {
