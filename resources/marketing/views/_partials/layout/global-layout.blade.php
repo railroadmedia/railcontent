@@ -17,9 +17,9 @@
 
         {!! \App\Analytics\Tracker::trackPageView() !!}
 
-{{--        {!! \App\Analytics\Tracker::headBottom() !!}--}}
+        {!! \App\Analytics\Tracker::headBottom() !!}
 
-        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+        <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     </head>
 
     <body class="flex flex-col w-full min-h-screen pt-[40px] lg:pt-[56px] @yield('body-class')"
