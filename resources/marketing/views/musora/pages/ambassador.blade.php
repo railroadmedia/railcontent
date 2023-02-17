@@ -37,7 +37,7 @@
             <h2><strong>Musora’s<br class="inline sm:hidden"> Ambassador Program</strong></h2>
             <h4 class="mt-3 mb-5 md:mb-10 leading-normal">Get paid to promote world-class<br class="inline md:hidden"> online music lessons.</h4>
 
-            <a class="join smaller gradient-outline mb-3 md:mb-0 md:mx-2 cursor-pointer bg-[#031627] border-musora hover:bg-musora" x-on:click="modal = true">Guidelines</a>
+            <span class="join smaller gradient-outline mb-3 md:mb-0 md:mx-2 cursor-pointer bg-[#031627] border-musora hover:bg-musora" x-on:click="modal = true">Guidelines</span>
             <a class="join smaller gradient md:mx-2 bg-musora" href="https://airtable.com/shrmKAXQyoWLbKKW6">APPLY NOW</a>
         </div>
     </header>
@@ -83,7 +83,7 @@
                 <div class="w-full md:w-1/3 px-2 mb-8 md:mb-0">
                     <div class="inline-block rounded-full p-3 text-center border-musora before:m-[-6px] relative" style="background-color:#091724;width: 78px;"><h1 class="text-5xl text-musora"><strong>1</strong></h1></div>
                     <h4 class="leading-normal mt-4 lg:mt-5 mb-2 lg:mb-4"><strong>Read The Guidelines</strong></h4>
-                    <p><em><a class="cursor-pointer" x-on:click="modal = true"><u>Click here to open &raquo;</u></a></em></p>
+                    <p><em><span class="cursor-pointer" x-on:click="modal = true"><u>Click here to open &raquo;</u></span></em></p>
                 </div>
                 <div class="w-full md:w-1/3 px-2 mb-8 md:mb-0">
                     <div class="inline-block rounded-full p-3 text-center border-musora before:m-[-6px] relative" style="background-color:#161e29;width: 78px;"><h1 class="text-5xl text-musora"><strong>2</strong></h1></div>
@@ -246,7 +246,7 @@
             <h2><strong>Musora’s<br class="inline sm:hidden"> Ambassador Program</strong></h2>
             <a class="join bg-musora my-8 md:my-10 inline-block" href="https://airtable.com/shrmKAXQyoWLbKKW6">APPLY NOW</a>
             <p class="leading-normal">Have any questions? Please email <a href="mailto:natalie@musora.com"><u>natalie@musora.com</u></a> after<br class="hidden md:inline">
-                reviewing the <a class="cursor-pointer" x-on:click="modal = true"><u>brand guidelines</u></a> and <a href="https://airtable.com/shrmKAXQyoWLbKKW6"><u>application page</u></a>.</p>
+                reviewing the <span class="cursor-pointer" x-on:click="modal = true"><u>brand guidelines</u></span> and <a href="https://airtable.com/shrmKAXQyoWLbKKW6"><u>application page</u></a>.</p>
         </div>
     </section>
 
