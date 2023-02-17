@@ -53,7 +53,7 @@ const handleConfirm = () => {
         playlistIds: selectedPlaylists.value,
         token,
     }).then(() => {
-
+        emit('onCancel');
     });
 };
 

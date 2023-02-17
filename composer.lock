@@ -176,16 +176,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.258.11",
+            "version": "3.258.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "5e339f47f86db7ed5f5afcda345d30ac1713aed3"
+                "reference": "43ee875456822ee7772cfc51da57bfa558ccb30c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/5e339f47f86db7ed5f5afcda345d30ac1713aed3",
-                "reference": "5e339f47f86db7ed5f5afcda345d30ac1713aed3",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/43ee875456822ee7772cfc51da57bfa558ccb30c",
+                "reference": "43ee875456822ee7772cfc51da57bfa558ccb30c",
                 "shasum": ""
             },
             "require": {
@@ -264,9 +264,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.258.11"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.258.12"
             },
-            "time": "2023-02-15T20:08:42+00:00"
+            "time": "2023-02-16T19:21:12+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -8595,16 +8595,16 @@
         },
         {
             "name": "railroad/railforums",
-            "version": "v2.0.15",
+            "version": "v2.0.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railforums.git",
-                "reference": "84ae3a8f47b2e1cfbdd91045b19dca00ea7f91d6"
+                "reference": "d9af291bc0c1763bd4d9167372ca73550461114c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railforums/zipball/84ae3a8f47b2e1cfbdd91045b19dca00ea7f91d6",
-                "reference": "84ae3a8f47b2e1cfbdd91045b19dca00ea7f91d6",
+                "url": "https://api.github.com/repos/railroadmedia/railforums/zipball/d9af291bc0c1763bd4d9167372ca73550461114c",
+                "reference": "d9af291bc0c1763bd4d9167372ca73550461114c",
                 "shasum": ""
             },
             "require": {
@@ -8643,9 +8643,9 @@
             "description": "Laravel forum system using entities",
             "support": {
                 "issues": "https://github.com/railroadmedia/railforums/issues",
-                "source": "https://github.com/railroadmedia/railforums/tree/v2.0.15"
+                "source": "https://github.com/railroadmedia/railforums/tree/v2.0.16"
             },
-            "time": "2023-02-14T12:15:19+00:00"
+            "time": "2023-02-16T20:37:36+00:00"
         },
         {
             "name": "railroad/railnotifications",
@@ -16990,5 +16990,5 @@
         "ext-curl": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }

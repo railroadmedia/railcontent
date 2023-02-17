@@ -1,13 +1,21 @@
 <script setup>
+import { ref } from 'vue'
 const props = defineProps({
 
 });
 const emit = defineEmits(['onToggle'])
+
+const toggleValue = ref(false);
+
+const handleChange = () => {
+    toggleValue.value = !toggleValue.value;
+    emit('onToggle', toggleValue.value)
+};
 </script>
 
 <template>
     <div class="tw-inline-flex tw-relative tw-w-[48px] mr-1 tw-rounded-full tw-ring-offset-2 focus-within:tw-ring-1 tw-shrink-0">
-        <input @change="val => emit('onToggle', val)" tabindex="0"
+        <input @change="handleChange" tabindex="0"
             type="checkbox" name="send_email" id="sendEmailNotifications"
             class="tw-peer tw-absolute tw-h-0 tw-w-0 tw-top-[10px] tw-left-[10px] has-input"><label tabindex="-1"
             for="sendEmailNotifications"
