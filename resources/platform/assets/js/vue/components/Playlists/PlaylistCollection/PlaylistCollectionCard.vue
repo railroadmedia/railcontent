@@ -55,18 +55,23 @@
         PlaylistService.setToPrivate(props.list.id, isPrivate, token)
             .then((response) => {
                 if(response.status === 201) {
-                    //set private/public
-                    
                     //show success message
                     window.shownotification({
                         icon: `${props.list.private === 1 ? 'fa-lock-open' : 'fa-lock'}.`,
                         text: `Your playlist is now ${props.list.private === 1 ? 'private' : 'public'}.`
                     })
-                } else {
-                    //undo private/public change
-                    state.isPrivate = !state.isPrivate;
                 }
             })
+            .catch(function (error) {
+                if (error.response) {
+                    //undo private/public change
+                    state.isPrivate = !state.isPrivate;
+                    window.shownotification({
+                        icon: 'error',
+                        text: 'Woops! Something wrong happened, please try again later.'
+                    })
+                }
+            });
         //close after 200ms
         setTimeout(()=> {
             state.dropdownOpen = false;
@@ -89,7 +94,10 @@
                             icon: 'playlist',
                             text: `${props.list.name} has been pinned within the sidebar.`
                         })
-                    } else {
+                    }
+                })
+                .catch(function (error) {
+                    if (error.response) {
                         //handle error
                         state.isPinned = false;
                         window.shownotification({
@@ -97,7 +105,7 @@
                             text: 'Woops! Something wrong happened, please try again later.'
                         })
                     }
-                })
+                });
         } else { //UNPIN
             state.isPinned = false;
             PlaylistService.unpinPlaylist(id, brand, token)
@@ -113,7 +121,10 @@
                             icon: 'playlist',
                             text: `${props.list.name} has been unpinned from the sidebar.`
                         })
-                    } else {
+                    }
+                })
+                .catch(function (error) {
+                    if (error.response) {
                         //handle error
                         state.isPinned = true;
                         window.shownotification({
@@ -121,7 +132,7 @@
                             text: 'Woops! Something wrong happened, please try again later.'
                         })
                     }
-                })
+                });
         }
         //close after click
         state.dropdownOpen = false;
@@ -134,7 +145,7 @@
     };
 
     const deletePlaylistHandler = () => {
-        window.openplaylistmodal({ modalType: 'remove' });
+        window.openplaylistmodal({ modalType: 'remove', data: props.list });
         state.dropdownOpen = false;
     };
 
@@ -219,8 +230,10 @@
         >
             <div :class="props.isListView ? 'tw-w-full tw-grid tw-grid-cols-10 tw-items-center' : '' ">
                 <!--name-->
-                <p class="tw-font-bold tw-capitalize" :class="props.isListView ? 'tw-col-span-10 md:tw-col-span-2 tw-pl-2 md:tw-pl-[19px]' : '' ">
-                    <span class="tw-mr-auto">{{ list.name }}</span> 
+                <p class="tw-font-bold tw-capitalize tw-truncate" 
+                   :class="props.isListView ? 'tw-col-span-10 md:tw-col-span-2 tw-pl-2 md:tw-pl-[19px] tw-pr-2' : '' "
+                >
+                    {{ list.name }} 
                 </p>
                 <!--description-->
                 <p class="tw-capitalize tw-truncate tw-hidden"

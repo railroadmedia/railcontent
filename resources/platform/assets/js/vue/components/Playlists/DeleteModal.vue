@@ -1,27 +1,74 @@
 <script setup>
-import InputLabel from '../InputLabel/InputLabel.vue';
+    import { inject } from 'vue';
+    import PlaylistService from '../../../services/playlists';
+    import { usePlaylistsStore } from '../../../stores/playlists';
 
-const props = defineProps({
-    brand: {
-        type: String,
-        default: 'drumeo'
+    //-----------Props-----------//
+    const props = defineProps({
+        brand: {
+            type: String,
+            default: 'drumeo'
+        },
+        playlist: {
+            type: Object,
+            default: {}
+        }
+    });
+
+    //Emits
+    const emit = defineEmits(['onCloseModal']);
+    //Inject
+    const token = inject('csrf_token');
+    //Pinia Stores
+    const playlistsStore = usePlaylistsStore();
+
+    //-----------Methods-----------//
+    const handleDeletePlaylist = () => {
+        PlaylistService.deletePlaylist(props.playlist.id, token)
+            .then((response) => {
+                if(response.status === 200) { 
+                    console.log(`${playlist.name} was removed from your library.`)
+                    //update pinia stores
+                    playlistsStore.unpinPlaylist(props.playlist)
+                        // playlistsStore.getPlaylists(brand, token)
+                    //show success message
+                    window.shownotification({
+                        icon: 'playlist',
+                        text: `${props.playlist.name} was removed from your library.`
+                    })
+                }
+            })
+            .catch(function (error) {
+                if (error.response) {
+                    console.log('did not work')
+                    //handle error
+                    window.shownotification({
+                        icon: 'error',
+                        text: 'Woops! Something wrong happened, please try again later.'
+                    })
+                }
+            });
+        //Close Modal
+        emit('onCloseModal')
     }
-});
-
 </script>
+
 <template>
     <div class="tw-h-full tw-w-full">
-        <h2 class="tw-text-[24px] tw-font-bold tw-w-full tw-text-white tw-text-center">Set Start/End Time</h2>
-        <div class="tw-flex tw-pt-[29px]">
-            
-        </div>
-        <div class="tw-pt-[30px] tw-flex tw-justify-end tw-w-full">
-            <button @click="() => emit('onCancel')"
-                    class="tw-btn-primary tw-text-center tw-justify-center tw-items-center tw-w-[150px]">
-                    CANCEL
+        <h2 class="tw-text-[24px] tw-font-bold tw-w-full tw-text-white tw-text-center tw-mb-4">
+            Delete <span :class="`tw-text-${brand}`" class="tw-mr-0.5">{{ playlist.name }}</span>?
+        </h2>
+        <p class="dark:tw-text-white tw-text-center">This action can not be undone</p>
+
+        <div class="tw-pt-12 tw-flex tw-flex-col tw-items-center tw-justify-center tw-w-full">
+            <button :class="`tw-mb-2 tw-btn-primary tw-btn-small tw-text-base tw-bg-${brand} tw-px-[30px] tw-w-[218px]`"
+                    @click.prevent="handleDeletePlaylist()"
+            >
+                CONFIRM
             </button>
-            <button :class="`tw-ml-[20px] tw-btn-primary tw-bg-${brand} tw-text-center tw-flex tw-justify-center tw-items-center tw-p-0 tw-px-[30px] tw-w-[150px]`">
-                <span>CONFIRM</span>
+            <button @click="() => emit('onCloseModal')"
+                    class="tw-btn-primary tw-btn-small tw-text-base hover:tw-bg-slate-200/50 dark:hover:tw-bg-white/10 tw-w-[218px]">
+                    CANCEL
             </button>
         </div>
     </div>

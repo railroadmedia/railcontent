@@ -54,14 +54,17 @@ const unpinPlaylist = (item, brand) => {
                     icon: 'playlist',
                     text: `${item.name} has been unpinned from the sidebar.`
                 })
-            } else {
+            }
+        })
+        .catch(function (error) {
+            if (error.response) {
                 //handle error
                 window.shownotification({
                     icon: 'error',
                     text: 'Woops! Something wrong happened, please try again later.'
                 })
             }
-        })
+        });
 }
 
 onBeforeMount(()=> {

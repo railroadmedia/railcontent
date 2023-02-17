@@ -12,6 +12,7 @@ const props = defineProps({
         default: () => ({
             modalType: null,
             imgSrc: 'asdasdsad',
+            data: {}
         })
     },
     brand: {
@@ -26,7 +27,7 @@ const modalContainerProps = {
     create: 'tw-max-w-[654px] tw-px-[64px]',
     duplicate: 'tw-max-w-[654px] tw-px-[64px]',
     edit: 'tw-max-w-[654px] tw-px-[64px]',
-    remove: 'tw-max-w-[654px] tw-px-[64px]',
+    remove: 'tw-max-w-[606px] tw-px-[64px]',
     startEnd: 'tw-max-w-[589px] tw-px-[48px]',
     addItem: 'tw-max-w-[917px] tw-px-[32px]',
     alreadyAddedItem: ''
@@ -39,18 +40,24 @@ const modalContainerProps = {
         @onClose="() => emit('onClosePlaylistsModal')" :selfContained="true">
         <div class="tw-pt-[12px]">
             
-            <CreatePlaylist mode="create" @onCancel="() => emit('onClosePlaylistsModal')" :modalProps="modalProps" v-if="modalProps.modalType === 'create'"  />
-            <CreatePlaylist mode="duplicate" @onCancel="() => emit('onClosePlaylistsModal')" :modalProps="modalProps" v-if="modalProps.modalType === 'duplicate'"  />
-            <CreatePlaylist mode="edit" @onCancel="() => emit('onClosePlaylistsModal')" :modalProps="modalProps" v-if="modalProps.modalType === 'edit'"  />
+            <CreatePlaylist mode="create" @onCloseModal="() => emit('onClosePlaylistsModal')" :modalProps="modalProps" v-if="modalProps.modalType === 'create'"  />
+            <CreatePlaylist mode="duplicate" @onCloseModal="() => emit('onClosePlaylistsModal')" :modalProps="modalProps" v-if="modalProps.modalType === 'duplicate'"  />
+            <CreatePlaylist mode="edit" @onCloseModal="() => emit('onClosePlaylistsModal')" :modalProps="modalProps" v-if="modalProps.modalType === 'edit'"  />
             
             <div v-if="modalProps.modalType === 'remove'">
-                <DeleteModal :brand="brand" />
+                <DeleteModal @onCloseModal="() => emit('onClosePlaylistsModal')"
+                             :brand="brand" 
+                             :playlist="modalProps.data"
+                />
             </div>
             <div v-if="modalProps.modalType === 'startEnd'">
                 <StartEnd :brand="brand" />
             </div>
             <div v-if="modalProps.modalType === 'addItem'">
-                <AddItem @onCancel="() => emit('onClosePlaylistsModal')" :brand="brand" :contentId="modalProps.contentId" />
+                <AddItem @onCancel="() => emit('onClosePlaylistsModal')" 
+                         :brand="brand" 
+                         :contentId="modalProps.contentId" 
+                />
             </div>
             <div v-if="modalProps.modalType === 'alreadyAddedItem'">
                 Already Added Item

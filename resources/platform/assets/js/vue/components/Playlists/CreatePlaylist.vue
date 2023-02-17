@@ -26,7 +26,7 @@
         },
     });
 
-    const emit = defineEmits(['onCancel']);
+    const emit = defineEmits(['onCloseModal']);
 
     const title = ref('');
     const category = ref(null);
@@ -48,7 +48,6 @@
     };
 
     const handleConfirm = () => {
-        console.log('handle confirm')
         const payload = {
             brand: props.brand,
             name: title.value,
@@ -61,6 +60,8 @@
             token,
             payload
         });
+        //Close Modal
+        emit('onCloseModal')
     };
 
     const sortedOptions = [
@@ -126,7 +127,7 @@
                     placeholder="Playlist Description"
                     class="tw-h-[93px] tw-rounded-[6px] placeholder:tw-text-white tw-text-white tw-bg-[#002039]/90 tw-mt-[20px] tw-box-border tw-border-[#445F74]"></textarea>
                 <div class="tw-pt-[30px] tw-flex">
-                    <button @click="() => emit('onCancel')" class="tw-btn-primary tw-text-center tw-justify-center tw-items-center">CANCEL</button>
+                    <button @click="() => emit('onCloseModal')" class="tw-btn-primary tw-text-center tw-justify-center tw-items-center">CANCEL</button>
                     <button @click="() => handleConfirm()" :class="`tw-ml-[20px] tw-btn-primary tw-bg-${brand} tw-text-center tw-flex tw-justify-center tw-items-center tw-p-0 tw-px-[30px]`"><span>CONFIRM</span></button>
                 </div>
             </div>

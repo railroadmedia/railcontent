@@ -76,6 +76,29 @@ export default {
         })
     },
 
+    /**
+     * GET Get Soundslice Assignments for content
+     *
+     * @param {string} brand
+     * @param {number} contentId -
+     * @param {string} token
+     */
+    getAssignmentsForContent({ brand = "drumeo", token, contentId }) {
+        const payload = {
+            "brand": brand,
+        }
+        const headers = {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': token
+        };
+        return axios({
+            method: 'GET',
+            url: `/railcontent/lessons-and-assignments-count/${contentId}`,
+            params: payload,
+            headers
+        });
+    },
+
     //-------------UPDATE--------------//
 
     /**
@@ -149,32 +172,6 @@ export default {
         )
     },
 
-    //-------------DELETE--------------//
-
-
-    /**
-     * GET Get Soundslice Assignments for content
-     *
-     * @param {string} brand
-     * @param {number} contentId -
-     * @param {string} token
-     */
-    getAssignmentsForContent({ brand = "drumeo", token, contentId }) {
-        const payload = {
-            "brand": brand,
-        }
-        const headers = {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': token
-        };
-        return axios({
-            method: 'GET',
-            url: `/railcontent/lessons-and-assignments-count/${contentId}`,
-            params: payload,
-            headers
-        });
-    },
-
     /**
      * PUT Get Soundslice Assignments for content
      *
@@ -197,6 +194,30 @@ export default {
             method: 'PUT',
             url: `/railcontent/add-item-to-list`,
             data: payload,
+            headers
+        });
+    },
+
+    //-------------DELETE--------------//
+
+    /**
+     * DELETE Playlist
+     *
+     * @param {string} id 
+     * @param {string} token
+     */
+    deletePlaylist(id, token) {
+        const payload = {
+            "playlist_id": id
+        }
+        const headers = {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': token
+        };
+        return axios({
+            method: 'DEL',
+            url: '/railcontent/playlist',
+            params: payload,
             headers
         });
     },
