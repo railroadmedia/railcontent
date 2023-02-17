@@ -20,7 +20,7 @@
             <div class="guitar"  style="background-image: url(https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://musora-center.s3.amazonaws.com/affiliate/background-guitar.jpg);"></div>
         </div>
         <div class="container mx-auto max-w-6xl relative z-10">
-            <img class="w-full mx-auto max-w-xs md:max-w-sm lg:max-w-md mb-10 md:mb-14 lg:mb-20" src="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://musora-center.s3.amazonaws.com/affiliate/musora-logos.png">
+            <img class="w-full mx-auto max-w-xs md:max-w-sm lg:max-w-md mb-10 md:mb-14 lg:mb-20" src="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://musora-center.s3.amazonaws.com/affiliate/musora-logos.png" alt="musora logos">
 
             <h2><strong>Musora’s<br class="inline sm:hidden"> Ambassador Program</strong></h2>
             <h4 class="mt-3 mb-5 md:mb-10 leading-normal">Get paid to promote world-class<br class="inline md:hidden"> online music lessons.</h4>
@@ -63,6 +63,7 @@
             class="absolute object-cover object-center transition-opacity opacity-0 inset-0 w-full h-full"
             loading="lazy"
             onload="this.classList.remove('opacity-0')"
+             alt="piano background"
         />
         <div class="container mx-auto max-w-6xl relative z-0">
             <h3><strong>How Do I Start?</strong></h3>
@@ -94,7 +95,7 @@
         </div>
     </section>
 
-    <div
+    <section
         x-data="{
             init() {
                 new Splide(this.$refs.splide, {
@@ -119,7 +120,7 @@
         }"
         class="bg-[#000c18]"
     >
-        <section x-ref="splide" class="splide text-white px-7 py-8 md:py-14 lg:py-20 mx-auto max-w-6xl" aria-label="Splide/Alpine.js Carousel Example">
+        <div x-ref="splide" class="splide text-white px-7 py-8 md:py-14 lg:py-20 mx-auto max-w-6xl" aria-label="Splide/Alpine.js Carousel Example">
             <div class="splide__track relative">
                 <ul class="splide__list">
                     <li class="splide__slide flex flex-col items-center justify-center">
@@ -129,11 +130,12 @@
                                     "Drumeo is by far the greatest drum community out there. Literally you can find everything about drums, from lessons, to play alongs, live streams, documentaries, tips, drum sheets. Everything is extremely well organized. It’s amazing!"
                                 </p>
                                 <div class="flex items-center justify-center pt-5 md:pt-8">
-                                    <img 
-                                        class="rounded-full w-1/4 transition-opacity opacity-0" 
+                                    <img
+                                        class="rounded-full w-1/4 transition-opacity opacity-0"
                                         src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://musora-center.s3.amazonaws.com/affiliate/testimonial-alejandro.jpg"
                                         loading="lazy"
                                         onload="this.classList.remove('opacity-0')"
+                                        alt="testimonial"
                                     >
                                     <div class="text pl-3 md:pl-5">
                                         <h6 class="uppercase"><strong>Alejandro Sifuentes</strong></h6>
@@ -144,7 +146,7 @@
                             </div>
                         </div>
                     </li>
-    
+
                     <li class="splide__slide flex flex-col items-center justify-center">
                         <div class="px-3">
                             <div class="rounded-2xl p-3 md:p-8" style="background:linear-gradient(#000c18, #01132b)">
@@ -152,8 +154,8 @@
                                     "Pianote avoids the one-size-fits-all feel that online piano methods can have, and gives in-person piano teachers a run for their money with several instructors with whom students can interact."
                                 </p>
                                 <div class="flex items-center justify-center pt-5 md:pt-8">
-                                    <img 
-                                        class="rounded-full w-1/4 transition-opacity opacity-0" 
+                                    <img
+                                        class="rounded-full w-1/4 transition-opacity opacity-0"
                                         src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://musora-center.s3.amazonaws.com/affiliate/testimonial-piano-dreamers.jpg"
                                         loading="lazy"
                                         onload="this.classList.remove('opacity-0')"
@@ -167,7 +169,7 @@
                             </div>
                         </div>
                     </li>
-    
+
                     <li class="splide__slide flex flex-col items-center justify-center">
                         <div class="px-3">
                             <div class="rounded-2xl p-3 md:p-8" style="background:linear-gradient(#000c18, #01132b)">
@@ -175,8 +177,8 @@
                                     "The reason this approach appeals to me is because it’s kind of a more guided way to how I learned guitar. And that’s just doing the cool stuff! So if you tried the theory and exercise way and it’s just not working or you already play guitar and just want to have fun, check it out!"
                                 </p>
                                 <div class="flex items-center justify-center pt-5 md:pt-8">
-                                    <img 
-                                        class="rounded-full w-1/4 transition-opacity opacity-0" 
+                                    <img
+                                        class="rounded-full w-1/4 transition-opacity opacity-0"
                                         src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://musora-center.s3.amazonaws.com/affiliate/testimonial-aguafish.jpg"
                                         loading="lazy"
                                         onload="this.classList.remove('opacity-0')"
@@ -190,7 +192,7 @@
                             </div>
                         </div>
                     </li>
-    
+
                     <li class="splide__slide flex flex-col items-center justify-center">
                         <div class="px-3">
                             <div class="rounded-2xl p-3 md:p-8" style="background:linear-gradient(#000c18, #01132b)">
@@ -198,8 +200,8 @@
                                     "I always recommend Drumeo because of the absolute wealth of knowledge they offer from so many of the world’s greatest drummers! Not only will you learn just about anything you could desire to learn, but you will be so inspired and entertained by your drum heroes with some of the best production value on the internet!"
                                 </p>
                                 <div class="flex items-center justify-center pt-5 md:pt-8">
-                                    <img 
-                                        class="rounded-full w-1/4 transition-opacity opacity-0" 
+                                    <img
+                                        class="rounded-full w-1/4 transition-opacity opacity-0"
                                         src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/sales/trials/casey-cooper.jpg"
                                         loading="lazy"
                                         onload="this.classList.remove('opacity-0')"
@@ -215,8 +217,8 @@
                     </li>
                 </ul>
             </div>
-        </section>
-    </div>
+        </div>
+    </section>
 
     <section class="bg-cover bg-center text-center text-white py-24 md:py-32 lg:py-52 px-4 relative">
         <img src="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://musora-center.s3.amazonaws.com/affiliate/background-guitar.jpg"
@@ -240,12 +242,11 @@
         role="dialog"
         aria-modal="true"
         x-id="['modal-title']"
-        :aria-labelledby="$id('modal-title')"
         class="fixed inset-0 z-10 overflow-y-auto"
     >
         <!-- Overlay -->
         <div x-show="modal" x-transition.opacity class="fixed inset-0 bg-black bg-opacity-50"></div>
- 
+
         <!-- Panel -->
         <div
             x-show="modal" x-transition
