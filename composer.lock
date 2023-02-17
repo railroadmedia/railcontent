@@ -4849,16 +4849,16 @@
         },
         {
             "name": "laravel/ui",
-            "version": "v4.2.0",
+            "version": "v4.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/ui.git",
-                "reference": "810adddcf4e2538b0d1ed470c3a5220ffe761370"
+                "reference": "05ff7ac1eb55e2dfd10edcfb18c953684d693907"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/ui/zipball/810adddcf4e2538b0d1ed470c3a5220ffe761370",
-                "reference": "810adddcf4e2538b0d1ed470c3a5220ffe761370",
+                "url": "https://api.github.com/repos/laravel/ui/zipball/05ff7ac1eb55e2dfd10edcfb18c953684d693907",
+                "reference": "05ff7ac1eb55e2dfd10edcfb18c953684d693907",
                 "shasum": ""
             },
             "require": {
@@ -4869,7 +4869,8 @@
                 "php": "^8.0"
             },
             "require-dev": {
-                "orchestra/testbench": "^7.0|^8.0"
+                "orchestra/testbench": "^7.0|^8.0",
+                "phpunit/phpunit": "^9.3"
             },
             "type": "library",
             "extra": {
@@ -4904,9 +4905,9 @@
                 "ui"
             ],
             "support": {
-                "source": "https://github.com/laravel/ui/tree/v4.2.0"
+                "source": "https://github.com/laravel/ui/tree/v4.2.1"
             },
-            "time": "2023-01-10T12:13:29+00:00"
+            "time": "2023-02-17T09:17:24+00:00"
         },
         {
             "name": "laravel/vapor-cli",
@@ -8530,12 +8531,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "2a41e589c02157292a3ce2b1abc687c44f87c042"
+                "reference": "6ed93f95aec595de8014deaf73fd6d3ade8585d4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/2a41e589c02157292a3ce2b1abc687c44f87c042",
-                "reference": "2a41e589c02157292a3ce2b1abc687c44f87c042",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/6ed93f95aec595de8014deaf73fd6d3ade8585d4",
+                "reference": "6ed93f95aec595de8014deaf73fd6d3ade8585d4",
                 "shasum": ""
             },
             "require": {
@@ -8591,7 +8592,7 @@
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
                 "source": "https://github.com/railroadmedia/railcontent/tree/2.0-playlists"
             },
-            "time": "2023-02-16T13:41:42+00:00"
+            "time": "2023-02-17T09:59:00+00:00"
         },
         {
             "name": "railroad/railforums",

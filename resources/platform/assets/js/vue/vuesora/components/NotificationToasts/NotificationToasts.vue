@@ -17,10 +17,9 @@
                   ${slideClassData}`
         ">
           <div class="tw-flex tw-justify-between tw-items-center tw-text-sm">
-            <div>
+            <div class="tw-flex tw-items-center">
               <musora-icon v-if="SVGIcon.length" :icon-name="SVGIcon" class="tw-w-[24px] tw-mr-2 tw-inline-flex" />
               <i v-else class="fas tw-mr-2 tw-text-[22px]" :class="notificationIcon ? notificationIcon : 'fa-bell'"></i>
-              
               <span class="tw-font-bold tw-text-sm">{{ notificationText }}</span>
             </div>
             <button class="tw-ml-2 dark:tw-bg-[#E4E4E7] tw-bg-[#223F57] tw-w-[40px] tw-h-[40px] tw-flex-shrink-0 tw-border-none tw-rounded-full"

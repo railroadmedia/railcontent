@@ -55,23 +55,27 @@
         PlaylistService.setToPrivate(props.list.id, isPrivate, token)
             .then((response) => {
                 if(response.status === 201) {
-                    //set private/public
-                    
                     //show success message
                     window.shownotification({
                         icon: `${props.list.private === 1 ? 'fa-lock-open' : 'fa-lock'}.`,
                         text: `Your playlist is now ${props.list.private === 1 ? 'private' : 'public'}.`
                     })
-                } else {
-                    //undo private/public change
-                    state.isPrivate = !state.isPrivate;
                 }
             })
+            .catch(function (error) {
+                if (error.response) {
+                    //undo private/public change
+                    state.isPrivate = !state.isPrivate;
+                    window.shownotification({
+                        icon: 'error',
+                        text: 'Woops! Something wrong happened, please try again later.'
+                    })
+                }
+            });
         //close after 200ms
         setTimeout(()=> {
             state.dropdownOpen = false;
         }, "200")
-        
     }
 
     //Handle Pin/Unpin Request
@@ -90,7 +94,10 @@
                             icon: 'playlist',
                             text: `${props.list.name} has been pinned within the sidebar.`
                         })
-                    } else {
+                    }
+                })
+                .catch(function (error) {
+                    if (error.response) {
                         //handle error
                         state.isPinned = false;
                         window.shownotification({
@@ -98,7 +105,7 @@
                             text: 'Woops! Something wrong happened, please try again later.'
                         })
                     }
-                })
+                });
         } else { //UNPIN
             state.isPinned = false;
             PlaylistService.unpinPlaylist(id, brand, token)
@@ -114,7 +121,10 @@
                             icon: 'playlist',
                             text: `${props.list.name} has been unpinned from the sidebar.`
                         })
-                    } else {
+                    }
+                })
+                .catch(function (error) {
+                    if (error.response) {
                         //handle error
                         state.isPinned = true;
                         window.shownotification({
@@ -122,11 +132,32 @@
                             text: 'Woops! Something wrong happened, please try again later.'
                         })
                     }
-                })
+                });
         }
         //close after click
         state.dropdownOpen = false;
     }
+
+    const duplicatePlaylistHandler = () => {
+        console.log('ran duplicate playlists')
+        window.openplaylistmodal({ modalType: 'duplicate' });
+        state.dropdownOpen = false;
+    };
+
+    const deletePlaylistHandler = () => {
+        window.openplaylistmodal({ modalType: 'remove', data: props.list });
+        state.dropdownOpen = false;
+    };
+
+    const editPlaylistHandler = () => {
+        window.openplaylistmodal({ modalType: 'edit' });
+        state.dropdownOpen = false;
+    };
+
+    const unpinPlaylistModalHandler = () => {
+        window.openplaylistmodal({ modalType: 'unpinPlaylists' });
+        state.dropdownOpen = false;
+    };
 
     //Check Dropdown Distance
     const GetElementDistance = el => {
@@ -199,8 +230,10 @@
         >
             <div :class="props.isListView ? 'tw-w-full tw-grid tw-grid-cols-10 tw-items-center' : '' ">
                 <!--name-->
-                <p class="tw-font-bold tw-capitalize" :class="props.isListView ? 'tw-col-span-10 md:tw-col-span-2 tw-pl-2 md:tw-pl-[19px]' : '' ">
-                    <span class="tw-mr-auto">{{ list.name }}</span> 
+                <p class="tw-font-bold tw-capitalize tw-truncate" 
+                   :class="props.isListView ? 'tw-col-span-10 md:tw-col-span-2 tw-pl-2 md:tw-pl-[19px] tw-pr-2' : '' "
+                >
+                    {{ list.name }} 
                 </p>
                 <!--description-->
                 <p class="tw-capitalize tw-truncate tw-hidden"
@@ -261,13 +294,25 @@
                             >Share</button>
                         </li>
                         <li class="tw-w-full tw-flex">
-                            <button class="tw-flex tw-w-full tw-itemx-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-black/20">Edit</button>
+                            <button class="tw-flex tw-w-full tw-itemx-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-black/20"
+                                    @click.prevent="editPlaylistHandler()"
+                            >
+                                Edit
+                            </button>
                         </li>
                         <li class="tw-w-full tw-flex">
-                            <button class="tw-flex tw-w-full tw-itemx-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-black/20">Delete</button>
+                            <button class="tw-flex tw-w-full tw-itemx-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-black/20"
+                                    @click.prevent="deletePlaylistHandler()"
+                            >
+                                Delete
+                            </button>
                         </li>
                         <li class="tw-w-full tw-flex">
-                            <button class="tw-flex tw-w-full tw-itemx-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-black/20">Duplicate</button>
+                            <button class="tw-flex tw-w-full tw-itemx-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-black/20"
+                                    @click.prevent="duplicatePlaylistHandler()"
+                            >
+                                Duplicate
+                            </button>
                         </li>
                         <li class="tw-w-full tw-flex">
                             <button class="tw-flex tw-w-full tw-itemx-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-black/20"

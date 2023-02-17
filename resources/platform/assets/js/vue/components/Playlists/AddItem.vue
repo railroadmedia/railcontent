@@ -22,7 +22,7 @@ const props = defineProps({
     },
 });
 
-const emit = defineEmits([]);
+const emit = defineEmits(['onCancel']);
 
 const token = inject('csrf_token');
 
