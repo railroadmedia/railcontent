@@ -160,6 +160,7 @@
                     :list="list"
                     :isListView="state.isListView"
                     :token="token"
+                    :brand="brand"
                 />    
             </section>
         </div>

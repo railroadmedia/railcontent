@@ -15,6 +15,7 @@
 
                 {{-- Playlist Catalog --}}
                 <playlist-collection-catalog
+                    {{-- :brand="{{ $brand }}" --}}
                     :playlists="{{ json_encode($playlists) }}"
                 ></playlist-collection-catalog>
 

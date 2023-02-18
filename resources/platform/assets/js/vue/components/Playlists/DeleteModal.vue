@@ -28,8 +28,7 @@
             .then(function(response) {
                 if (response.status === 200) {
                     //update pinia stores (if pinned)
-                    playlistsStore.unpinPlaylist(props.playlist)
-                    
+                    playlistsStore.unpinPlaylist(props.playlist.id)
                     if(playlistsStore.playlists.length <=10) {
                         playlistsStore.deletePlaylist(props.playlist);
                     }

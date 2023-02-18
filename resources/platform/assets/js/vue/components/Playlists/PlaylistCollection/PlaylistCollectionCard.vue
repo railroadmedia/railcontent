@@ -1,5 +1,5 @@
 <script setup>
-    import { onBeforeMount, ref, inject, reactive } from 'vue';
+    import { onBeforeMount, watch, ref, inject, reactive } from 'vue';
     import MusoraIcon from '../../MusoraIcons/MusoraIcon.vue';
     import PlaylistService from '../../../../services/playlists.js';
     import { usePlaylistsStore } from '../../../../stores/playlists';
@@ -32,8 +32,14 @@
     const state = reactive({ 
             dropdownOpen: false,
             dropdownTop: false,
+            isPinned: false,
             isPrivate: false,
         });
+
+    //-----------Watchers-----------//
+    watch(props.list, async (newList) => {
+        state.isPinned = newList.pinned;
+    })
 
     //-----------Methods-----------//
 
@@ -81,6 +87,7 @@
     const pinHandler = (id, brand) => {
         if(!props.list.pinned) { //PIN
             if(playlistsStore.pinnedPlaylists.length !== 5) {
+                state.isPinned = true;
                 PlaylistService.pinPlaylist(id, brand, token)
                     .then((response) => {
                         if(response.status === 200) { 
@@ -108,6 +115,7 @@
                 state.dropdownOpen = false;
             }
         } else { //UNPIN
+            state.isPinned = false;
             PlaylistService.unpinPlaylist(id, brand, token)
                 .then((response) => {
                     if(response.status === 200) { 
@@ -177,6 +185,7 @@
     
     onBeforeMount(() => {
         //check if it's pinned with request? Or prerender?
+        state.isPinned = props.list.pinned;
         state.isPrivate = props.list.private; 
     }); 
     
@@ -255,7 +264,7 @@
             </div>
             <!-- Pinned Icon -->
             <div class="tw-inline-flex tw-items-center tw-transition-colors" 
-                 :class="[ !props.isListView ? 'tw-absolute tw-top-3 tw-right-3' : 'tw-px-4 xl:tw-px-8',`tw-text-${brand}`, { 'tw-opacity-0' : !list.pinned } ]"
+                 :class="[ !props.isListView ? 'tw-absolute tw-top-3 tw-right-3' : 'tw-px-4 xl:tw-px-8',`tw-text-${brand}`, { 'tw-opacity-0' : !state.isPinned } ]"
             >
                 <musora-icon icon-name="tack" class="tw-w-[24px] tw-h-[24px] tw-mx-auto tw-hidden md:tw-flex" />
             </div>
@@ -314,7 +323,7 @@
                             <button class="tw-flex tw-w-full tw-itemx-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-black/20"
                                     @click.prevent="pinHandler(list.id)"
                             >
-                                {{ list.pinned ? 'Unpin from Sidebar' : 'Pin to Sidebar' }} 
+                                {{ state.isPinned ? 'Unpin from Sidebar' : 'Pin to Sidebar' }} 
                             </button>
                         </li>
                         <!-- If not public -->
