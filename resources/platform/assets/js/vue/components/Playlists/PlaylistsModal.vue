@@ -4,7 +4,7 @@ import CreatePlaylist from './CreatePlaylist.vue';
 import AddItem from './AddItem.vue'
 import StartEnd from './StartEnd.vue';
 import DeleteModal from './DeleteModal.vue';
-import UnpinModal from './UnpinModal.vue';
+import UnpinModal from './UnpinModal/UnpinModal.vue';
 
 const props = defineProps({
     modalProps: {
@@ -30,7 +30,8 @@ const modalContainerProps = {
     remove: 'tw-max-w-[606px] tw-px-[64px]',
     startEnd: 'tw-max-w-[589px] tw-px-[48px]',
     addItem: 'tw-max-w-[917px] tw-px-[32px]',
-    alreadyAddedItem: ''
+    unpinPlaylists: 'tw-max-w-[917px] tw-px-[32px]',
+    alreadyAddedItem: '',
 };
 
 </script>
@@ -66,7 +67,10 @@ const modalContainerProps = {
                 Already Added Item
             </div>
             <div v-if="modalProps.modalType === 'unpinPlaylists'">
-                <UnpinModal :brand="brand" />
+                <UnpinModal @onCloseModal="() => emit('onClosePlaylistsModal')" 
+                            :brand="brand"
+                            :playlist="modalProps.data"
+                 />
             </div>
         </div>
     </InfoModal>

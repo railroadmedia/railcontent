@@ -6,6 +6,7 @@
     import InputLabel from '../InputLabel/InputLabel.vue';
     import Dropdown from '../Dropdown/Dropdown.vue';
     import PlaylistService from '../../../services/playlists';
+    import { usePlaylistsStore } from '../../../stores/playlists';
     import ThumbnailUpload from '../ThumbnailUpload/ThumbnailUpload.vue';
 
     const props = defineProps({
@@ -27,6 +28,9 @@
     });
 
     const emit = defineEmits(['onCloseModal']);
+
+    //Pinia Store
+    const playlistsStore = usePlaylistsStore();
 
     const title = ref('');
     const category = ref(null);
@@ -59,7 +63,17 @@
         PlaylistService.createUserPlaylist({
             token,
             payload
-        });
+        }).then(function(response) {
+            if (response.status === 201) {
+                playlistsStore.loadingPlaylists = true;
+                //show success message
+                window.shownotification({
+                    icon: 'playlist',
+                    text: `${title.value} was added to your library.`
+                })
+            }
+        })
+
         //Close Modal
         emit('onCloseModal')
     };
@@ -119,7 +133,7 @@
             <ThumbnailUpload :token="token" type='playlist'/>
             <div class="tw-flex tw-flex-col tw-w-full">
                 <InputLabel placeholder="Playlist Title" :remove-default-input-styles="true"
-                    inputOverride="tw-mb-[20px] placeholder:tw-text-[#0D0D0D] dark:placeholder:tw-text-white tw-text-[#0D0D0D] dark:tw-text-white tw-w-full tw-bg-[#eeeeef] dark:tw-bg-[#002039]/90 tw-px-[14px] tw-box-border tw-border-[#D4D4D8] dark:tw-border-[#445F74] tw-h-[42px] tw-rounded-[63px] tw-py-[9px] tw-px-[13px] tw-text-[14px] focus:tw-border-none focus:tw-outline-none"
+                    inputOverride="tw-mb-[20px] placeholder:tw-text-[#0D0D0D] dark:placeholder:tw-text-white tw-text-[#0D0D0D] dark:tw-text-white tw-w-full tw-bg-[#eeeeef] dark:tw-bg-[#002039]/90 tw-px-[14px] tw-box-border tw-border-[#D4D4D8] dark:tw-border-[#445F74] tw-h-[42px] tw-rounded-[63px] tw-py-[9px] tw-px-[13px] tw-text-[14px]"
                     @onChange="handleTitleChange" />
                 <Dropdown :sortedOptions="sortedOptions" placeholderLabel="Playlist Category"
                     @onChange="handleCategoryChange" :selected-value="category" />

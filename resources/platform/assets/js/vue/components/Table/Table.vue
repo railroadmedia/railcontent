@@ -36,7 +36,7 @@ const emit = defineEmits(['onActionClick']);
                     <td v-for="col in cols" class="tw-px-6 tw-py-4">
                         <span v-if="!col.showActionSlot && col.content">{{ col.content }}</span>
                         <button v-if="col.showActionSlot" @click="() => emit('onActionClick', col.actionPayload)">
-                            <slot name="actionContent"></slot>
+                            <slot :tableIndex="index" :actionPayload="col.actionPayload" name="actionContent"></slot>
                         </button>
                     </td>
                 </tr>

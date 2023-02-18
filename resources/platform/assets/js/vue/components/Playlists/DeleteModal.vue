@@ -62,7 +62,7 @@
 
 <template>
     <div class="tw-h-full tw-w-full">
-        <h2 class="tw-text-[24px] tw-font-bold tw-w-full tw-text-white tw-text-center tw-mb-4">
+        <h2 class="tw-text-[24px] tw-font-bold tw-w-full  tw-text-[#0D0D0D] dark:tw-text-white tw-text-center tw-mb-4">
             Delete <span :class="`tw-text-${brand}`" class="tw-mr-0.5">{{ playlist.name }}</span>?
         </h2>
         <p class="dark:tw-text-white tw-text-center">This action can not be undone</p>
@@ -74,7 +74,7 @@
                 CONFIRM
             </button>
             <button @click="() => emit('onCloseModal')"
-                    class="tw-btn-primary tw-btn-small tw-text-base hover:tw-bg-slate-200/50 dark:hover:tw-bg-white/10 tw-w-[218px]">
+                    class="tw-btn-primary tw-btn-small tw-text-base dark:tw-text-white tw-text-[#0D0D0D] hover:tw-bg-slate-200/50 dark:hover:tw-bg-white/10 tw-w-[218px]">
                     CANCEL
             </button>
         </div>

@@ -8,7 +8,7 @@ import { ref, onMounted, inject } from 'vue';
 import PlaylistService from '../../../services/playlists';
 import Toggle from '../Toggle/Toggle.vue'
 import Table from '../Table/Table.vue'
-import { PlusCircleIcon, PlusIcon } from '@heroicons/vue/outline';
+import { PlusCircleIcon, PlusIcon, CheckCircleIcon } from '@heroicons/vue/outline';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner.vue';
 
 const props = defineProps({
@@ -38,7 +38,15 @@ const handleOnToggle = (val) => {
 };
 
 const handleActionClick = (payload) => {
-    selectedPlaylists.value = [...selectedPlaylists.value, String(payload)];
+    const index = selectedPlaylists.value.indexOf(String(payload));
+    if (index !== -1) {
+        const selectionCopy = [...selectedPlaylists.value];
+        selectionCopy[index] = null;
+        const newSelection = selectionCopy.filter(n=>n);
+        selectedPlaylists.value = newSelection;
+    } else {
+        selectedPlaylists.value = [...selectedPlaylists.value, String(payload)];
+    }
 };
 
 const handleCancel = () => {
@@ -120,8 +128,9 @@ onMounted(() => {
             </div>
         </div>
         <Table @onActionClick="handleActionClick" classOverride="tw-mt-[24px]" :rows="formattedRows">
-            <template v-slot:actionContent>
-                <PlusCircleIcon class="tw-w-[23px] tw-h-[23px] tw-text-[#7E9AB1]" />
+            <template v-slot:actionContent="slotProps">
+                <PlusCircleIcon v-if="!selectedPlaylists.includes(String(slotProps.actionPayload))" class="tw-w-[23px] tw-h-[23px] tw-text-[#7E9AB1]" />
+                <CheckCircleIcon v-if="selectedPlaylists.includes(String(slotProps.actionPayload))" :class="`tw-w-[23px] tw-h-[23px] tw-text-[${brand}]`" />
             </template>
         </Table>
         <div class="tw-w-full tw-flex tw-justify-between tw-pt-[25px]">

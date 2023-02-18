@@ -23,6 +23,13 @@ export const usePlaylistsStore = defineStore({
         pinnedPlaylists,
       })
     },
+
+    updatePlaylists({ playlists }) {
+      this.$patch({
+        playlists,
+      })
+    }, 
+
     //Dynamic Updates
     async getPinnedPlaylists(brand, token) {
       this.loadingPinnedPlaylists = true;
@@ -37,7 +44,6 @@ export const usePlaylistsStore = defineStore({
         })
     },
     async getPlaylists(brand, token) {
-      this.loadingPlaylists = true;
       PlaylistService.getCurrentUserPlaylists(brand, 1, null, token)
         .then((response) => {
           if(response.status === 200) {    
@@ -51,17 +57,26 @@ export const usePlaylistsStore = defineStore({
 
     //Static Updates
     deletePlaylist(playlist) {
-      
       this.playlists = this.playlists.filter(p => {
         return p.id !== playlist.id;
       })
     },
-    pinPlaylist(playlist) {
-      this.pinnedPlaylists.push(playlist)
+    pinPlaylist(list) {
+      //Pin in Catalog      
+      let playlist = this.playlists.find(p => p === list)
+      playlist.pinned = true;
+    
+      //Pin in Sidebar
+      this.pinnedPlaylists.push(list)
     },
-    unpinPlaylist(playlist) {
+    unpinPlaylist(id) {
+      //Unpin from Catalog
+      let playlist = this.playlists.find(p => p.id === id)
+      playlist.pinned = false;
+      
+      //Unpin from Sidebar
       this.pinnedPlaylists = this.pinnedPlaylists.filter(p => {
-        return p.id !== playlist.id;
+        return p.id !== id;
       })
     },
 

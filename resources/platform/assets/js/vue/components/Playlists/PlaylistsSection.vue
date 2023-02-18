@@ -42,13 +42,11 @@ const handleCreatePlaylist = () => {
 };
 
 const unpinPlaylist = (item, brand) => {
-    console.log('item id', item.id)
     PlaylistService.unpinPlaylist(item.id, brand, token)
         .then((response) => {
             if(response.status === 200) { 
                 //emit event or update pinia
-                    // playlistsStore.getPinnedPlaylists(brand, token)
-                playlistsStore.unpinPlaylist(item)
+                playlistsStore.unpinPlaylist(item.id)
                 //Confirmation
                 window.shownotification({
                     icon: 'playlist',
@@ -110,7 +108,11 @@ onBeforeMount(()=> {
                             </button>
                         </div>
                         <div class="md:tw-hidden group-hover:tw-inline-flex dark:tw-text-white tw-w-[42px] tw-shrink-0 tw-items-center tw-justify-center">
-                            <a :href="item.playback_url" class="tw-text-[#00101D] dark:tw-text-white" :title="`Go To Player`">
+                            <a :href="item.playback_url" 
+                                class="tw-text-[#00101D] dark:tw-text-white" 
+                                :class="!item.playback_url ? 'tw-opacity-20 tw-pointer-events-none' : ''"
+                                :title="item.playback_url ? 'Go To Player' : '' "
+                            >
                                 <musora-icon icon-name="play-circle-filled" class="tw-w-[24px]" />
                             </a>
                         </div>

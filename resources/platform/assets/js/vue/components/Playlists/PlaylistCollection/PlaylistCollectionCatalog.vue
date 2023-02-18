@@ -16,7 +16,7 @@
             default: []
         }
     })
-
+    
     //Computed Props
     const hasPlaylists = computed(() => {
         return playlistsStore.playlists.length > 0 ? true : false;
@@ -36,16 +36,18 @@
 
     //Lifecycle Hooks
     onBeforeMount(() => {
-        //Get Current User's Playlists
+        // Initialize playlists pinia store
         if(props.playlists.length <= 10) {
-            playlistsStore.playlists = props.playlists;
+            playlistsStore.updatePlaylists({ playlists: props.playlists });
         } else {
             // get all user playlists
         }
+
         //Get Local Storage Value
         if(localStorage.getItem('playlistIsListView')) {
             state.isListView = JSON.parse(localStorage.getItem('playlistIsListView'));
         }
+        
     });
 
     //Watchers

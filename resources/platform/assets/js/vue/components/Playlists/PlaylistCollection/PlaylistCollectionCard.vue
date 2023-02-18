@@ -32,7 +32,6 @@
     const state = reactive({ 
             dropdownOpen: false,
             dropdownTop: false,
-            isPinned: false,
             isPrivate: false,
         });
 
@@ -80,53 +79,51 @@
 
     //Handle Pin/Unpin Request
     const pinHandler = (id, brand) => {
-        if(!state.isPinned) { //PIN
-            state.isPinned = true;
-            PlaylistService.pinPlaylist(id, brand, token)
-                .then((response) => {
-                    if(response.status === 200) { 
-
-                        //emit event or update pinia
-                        playlistsStore.pinPlaylist(props.list)
-                            // playlistsStore.getPinnedPlaylists(brand, token)
-                        //show success message
-                        window.shownotification({
-                            icon: 'playlist',
-                            text: `${props.list.name} has been pinned within the sidebar.`
-                        })
-                    }
-                })
-                .catch(function (error) {
-                    if (error.response) {
-                        //handle error
-                        state.isPinned = false;
-                        window.shownotification({
-                            icon: 'error',
-                            text: 'Woops! Something wrong happened, please try again later.'
-                        })
-                    }
-                });
+        if(!props.list.pinned) { //PIN
+            if(playlistsStore.pinnedPlaylists.length !== 5) {
+                PlaylistService.pinPlaylist(id, brand, token)
+                    .then((response) => {
+                        if(response.status === 200) { 
+                            //emit event or update pinia
+                            playlistsStore.pinPlaylist(props.list)
+                            //show success message
+                            window.shownotification({
+                                icon: 'playlist',
+                                text: `'${props.list.name}' has been pinned within the sidebar.`
+                            })
+                        }
+                    })
+                    .catch(function (error) {
+                        if (error.response) {
+                            //handle error
+                            window.shownotification({
+                                icon: 'error',
+                                text: 'Woops! Something wrong happened, please try again later.'
+                            })
+                        }
+                    });
+            } else {
+                //Too Many Playlists
+                window.openplaylistmodal({ modalType: 'unpinPlaylists', data: props.list });
+                state.dropdownOpen = false;
+            }
         } else { //UNPIN
-            state.isPinned = false;
             PlaylistService.unpinPlaylist(id, brand, token)
                 .then((response) => {
                     if(response.status === 200) { 
-                        //handle unpin
-                        state.isPinned = false;
                         //emit event or update pinia
-                        playlistsStore.unpinPlaylist(props.list)
-                            // playlistsStore.getPinnedPlaylists(brand, token)
+                        playlistsStore.unpinPlaylist(props.list.id)
                         //show success message
                         window.shownotification({
                             icon: 'playlist',
-                            text: `${props.list.name} has been unpinned from the sidebar.`
+                            text: `'${props.list.name}' has been unpinned from the sidebar.`
                         })
                     }
                 })
                 .catch(function (error) {
                     if (error.response) {
                         //handle error
-                        state.isPinned = true;
+                        
                         window.shownotification({
                             icon: 'error',
                             text: 'Woops! Something wrong happened, please try again later.'
@@ -180,7 +177,6 @@
     
     onBeforeMount(() => {
         //check if it's pinned with request? Or prerender?
-        state.isPinned = props.list.pinned;
         state.isPrivate = props.list.private; 
     }); 
     
@@ -259,7 +255,7 @@
             </div>
             <!-- Pinned Icon -->
             <div class="tw-inline-flex tw-items-center tw-transition-colors" 
-                 :class="[ !props.isListView ? 'tw-absolute tw-top-3 tw-right-3' : 'tw-px-4 xl:tw-px-8',`tw-text-${brand}`, { 'tw-opacity-0' : !state.isPinned } ]"
+                 :class="[ !props.isListView ? 'tw-absolute tw-top-3 tw-right-3' : 'tw-px-4 xl:tw-px-8',`tw-text-${brand}`, { 'tw-opacity-0' : !list.pinned } ]"
             >
                 <musora-icon icon-name="tack" class="tw-w-[24px] tw-h-[24px] tw-mx-auto tw-hidden md:tw-flex" />
             </div>
@@ -318,7 +314,7 @@
                             <button class="tw-flex tw-w-full tw-itemx-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-black/20"
                                     @click.prevent="pinHandler(list.id)"
                             >
-                                {{ state.isPinned ? 'Unpin from Sidebar' : 'Pin to Sidebar' }} 
+                                {{ list.pinned ? 'Unpin from Sidebar' : 'Pin to Sidebar' }} 
                             </button>
                         </li>
                         <!-- If not public -->
@@ -329,8 +325,8 @@
                                 {{ state.isPrivate ? 'Private' : 'Public' }} 
                                 <!-- Toggle -->
                                 <div class="tw-relative tw-inline-flex tw-ml-auto tw-w-[27px] tw-h-[12px] tw-rounded-xl tw-bg-[#445F74]">
-                                    <div class="tw-rounded-full tw-h-[15px] tw-w-[15px] tw-bg-white tw-flex-inline tw-items-center tw-justify-center tw-shadow tw-absolute tw-top-[-1px] tw-transition"
-                                         :class="state.isPrivate ? 'tw-left-0': 'tw-right-0' "
+                                    <div class="tw-rounded-full tw-h-[15px] tw-w-[15px] tw-bg-white tw-flex-inline tw-items-center tw-justify-center tw-shadow tw-absolute tw-top-[-1.5px] tw-transition"
+                                         :class="state.isPrivate ? 'tw-left-[-1px]': 'tw-right-[-1px]' "
                                     >
                                     </div>
                                 </div>
