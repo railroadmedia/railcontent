@@ -36,8 +36,11 @@ const modalContainerProps = {
 </script>
 
 <template>
-    <InfoModal :classOverride="`tw-bg-[#081825] ${modalContainerProps[modalProps.modalType]} tw-border-[1px] tw-border-[#445F74]`" key="create-playlist-modal-instance" modalId="create-playlist-modal"
-        @onClose="() => emit('onClosePlaylistsModal')" :selfContained="true">
+    <InfoModal :classOverride="`tw-bg-white dark:tw-bg-[#081825] ${modalContainerProps[modalProps.modalType]} tw-border tw-border-[#445F74] dark:tw-border-[#445F74]`" 
+               key="create-playlist-modal-instance" 
+               modalId="create-playlist-modal"
+               @onClose="() => emit('onClosePlaylistsModal')" :selfContained="true"
+    >
         <div class="tw-pt-[12px]">
             
             <CreatePlaylist mode="create" @onCloseModal="() => emit('onClosePlaylistsModal')" :modalProps="modalProps" v-if="modalProps.modalType === 'create'"  />

@@ -1,16 +1,14 @@
 <script setup>
     import platformHeader from "../../PlatformHeader/platform-header.vue";
+    import { usePlaylistsStore } from '../../../../stores/playlists';
 
-    //Props
-    const props = defineProps([
-        'playlists'
-    ])
     //Methods
     const handleCreatePlaylist = () => {
         window.openplaylistmodal({ modalType: 'create' });
     };
-    //TODO
-    // Listen to Playlist PUT event to update count
+    
+    //Pinia Stores
+    const playlistsStore = usePlaylistsStore();
 </script>
 <template>
     <platform-header
@@ -19,8 +17,8 @@
         backgroundImage="https://musora-web-platform.s3.amazonaws.com/playlists/playlist-background.png"
     >
         <template v-slot:content> 
-            <p class="tw-uppercase tw-text-sm tw-font-bold tw-text-[#7E9AB1]">
-                {{ playlists.length }} Playlists    
+            <p v-if="playlistsStore.playlists.length" class="tw-uppercase tw-text-sm tw-font-bold tw-text-[#7E9AB1]">
+                {{ playlistsStore.playlists.length }} Playlists    
             </p> 
         </template>
         <template v-slot:ctas> 

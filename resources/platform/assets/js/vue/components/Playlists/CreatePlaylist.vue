@@ -109,7 +109,7 @@
 </script>
 
 <template>
-    <div class="tw-flex tw-flex-col tw-justify-center tw-text-white">
+    <div class="tw-flex tw-flex-col tw-justify-center tw-text-[#0D0D0D] dark:tw-text-white">
         <h2 class="tw-font-bold tw-font-open-sans tw-text-[24px] tw-text-center">
             <span v-if="mode === 'create'">Create Playlist</span>
             <span v-if="mode === 'edit'">Edit Playlist</span>
@@ -117,18 +117,18 @@
         </h2>
         <div class="tw-flex tw-pt-[24px]">
             <ThumbnailUpload :token="token" type='playlist'/>
-            <div class="tw-flex tw-flex-col tw-w-full tw-dark">
+            <div class="tw-flex tw-flex-col tw-w-full">
                 <InputLabel placeholder="Playlist Title" :remove-default-input-styles="true"
-                    inputOverride="tw-mb-[20px] tw-text-white placeholder:tw-text-white tw-w-full tw-bg-[#002039]/90 tw-px-[14px] tw-box-border tw-border-[#445F74] tw-h-[42px] tw-rounded-[63px] tw-py-[9px] tw-px-[13px] tw-text-[14px] focus:tw-border-none focus:tw-outline-none"
+                    inputOverride="tw-mb-[20px] placeholder:tw-text-[#0D0D0D] dark:placeholder:tw-text-white tw-text-[#0D0D0D] dark:tw-text-white tw-w-full tw-bg-[#eeeeef] dark:tw-bg-[#002039]/90 tw-px-[14px] tw-box-border tw-border-[#D4D4D8] dark:tw-border-[#445F74] tw-h-[42px] tw-rounded-[63px] tw-py-[9px] tw-px-[13px] tw-text-[14px] focus:tw-border-none focus:tw-outline-none"
                     @onChange="handleTitleChange" />
                 <Dropdown :sortedOptions="sortedOptions" placeholderLabel="Playlist Category"
                     @onChange="handleCategoryChange" :selected-value="category" />
                 <textarea @change="handleDescriptionChange" id="playlist-description" name="playlistDescription"
                     placeholder="Playlist Description"
-                    class="tw-h-[93px] tw-rounded-[6px] placeholder:tw-text-white tw-text-white tw-bg-[#002039]/90 tw-mt-[20px] tw-box-border tw-border-[#445F74]"></textarea>
-                <div class="tw-pt-[30px] tw-flex">
-                    <button @click="() => emit('onCloseModal')" class="tw-btn-primary tw-text-center tw-justify-center tw-items-center">CANCEL</button>
-                    <button @click="() => handleConfirm()" :class="`tw-ml-[20px] tw-btn-primary tw-bg-${brand} tw-text-center tw-flex tw-justify-center tw-items-center tw-p-0 tw-px-[30px]`"><span>CONFIRM</span></button>
+                    class="tw-text-sm tw-h-[93px] tw-rounded-[6px] placeholder:tw-text-[#0D0D0D] dark:placeholder:tw-text-white tw-text-[#0D0D0D] dark:tw-text-white tw-bg-[#eeeeef] dark:tw-bg-[#002039]/90 tw-mt-[20px] tw-box-border tw-border-[#D4D4D8] dark:tw-border-[#445F74]"></textarea>
+                <div class="tw-pt-[30px] tw-flex tw-justify-end">
+                    <button @click="() => emit('onCloseModal')" class="tw-btn-primary tw-btn-small tw-text-center tw-justify-center tw-items-center dark:tw-text-white tw-text-[#0D0D0D] hover:tw-bg-slate-200/50 dark:hover:tw-bg-white/10">CANCEL</button>
+                    <button @click="() => handleConfirm()" :class="`tw-ml-4 tw-btn-primary tw-btn-small tw-bg-${brand} tw-text-center tw-flex tw-justify-center tw-items-center tw-p-0 tw-px-[30px]`"><span>CONFIRM</span></button>
                 </div>
             </div>
         </div>

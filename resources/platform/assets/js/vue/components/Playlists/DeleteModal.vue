@@ -1,5 +1,5 @@
 <script setup>
-    import { inject } from 'vue';
+    import { inject, onBeforeMount } from 'vue';
     import PlaylistService from '../../../services/playlists';
     import { usePlaylistsStore } from '../../../stores/playlists';
 
@@ -25,32 +25,39 @@
     //-----------Methods-----------//
     const handleDeletePlaylist = () => {
         PlaylistService.deletePlaylist(props.playlist.id, token)
-            .then((response) => {
-                if(response.status === 200) { 
-                    console.log(`${playlist.name} was removed from your library.`)
-                    //update pinia stores
+            .then(function(response) {
+                if (response.status === 200) {
+                    //update pinia stores (if pinned)
                     playlistsStore.unpinPlaylist(props.playlist)
-                        // playlistsStore.getPlaylists(brand, token)
+                    
+                    if(playlistsStore.playlists.length <=10) {
+                        playlistsStore.deletePlaylist(props.playlist);
+                    }
                     //show success message
                     window.shownotification({
-                        icon: 'playlist',
+                        icon: 'fa-not-equal',
                         text: `${props.playlist.name} was removed from your library.`
                     })
+                    //Close Modal
+                    emit('onCloseModal')
                 }
             })
             .catch(function (error) {
                 if (error.response) {
-                    console.log('did not work')
                     //handle error
                     window.shownotification({
                         icon: 'error',
                         text: 'Woops! Something wrong happened, please try again later.'
                     })
+                    //Close Modal
+                    emit('onCloseModal')
                 }
             });
-        //Close Modal
-        emit('onCloseModal')
     }
+
+    onBeforeMount(()=> {
+        // console.log(playlistsStore.playlists.length)
+    })
 </script>
 
 <template>

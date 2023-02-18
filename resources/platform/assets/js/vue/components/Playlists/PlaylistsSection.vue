@@ -68,7 +68,7 @@ const unpinPlaylist = (item, brand) => {
 }
 
 onBeforeMount(()=> {
-    console.log('playlists ', props.pinnedPlaylists)
+    // console.log('playlists ', props.pinnedPlaylists)
 })
 </script>
 <template>
@@ -116,7 +116,7 @@ onBeforeMount(()=> {
                         </div>
                     </li>
                 </ul>
-                <!-- Loading Skeleton -->
+                <!-- Skeleton Loader -->
                 <div v-if="playlistsStore.loadingPinnedPlaylists" class="tw-flex-col tw-w-full tw-animate-pulse">
                     <div v-for="n in 5" :key="n" class="dark:tw-bg-[#102230] tw-bg-[#F5F5F6] tw-h-[32px] tw-mx-[25px] tw-mb-1 tw-border-rounded"></div>
                 </div>
@@ -129,14 +129,3 @@ onBeforeMount(()=> {
 
     </section>
 </template>
-<style scoped>
-.fade-enter-active,
-.fade-leave-active {
-    transition: opacity 150ms ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-    opacity: 0;
-}
-</style>

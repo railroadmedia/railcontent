@@ -18,7 +18,7 @@
     
     //Lifecycle Hooks
     onBeforeMount(() => {
-        console.log(props.playlist)
+        // console.log(props.playlist)
     })
 </script>
 <template>

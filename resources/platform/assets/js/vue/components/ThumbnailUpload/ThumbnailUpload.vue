@@ -104,10 +104,11 @@ function handleUploadError() {
                     </svg>
                 </div>
                 <img v-else class="tw-w-[158px] tw-h-[158px] tw-rounded-[9px]"
-                    :src="`${imgUrlRef ? imgUrlRef : 'https://placehold.jp/158x158.png'}`" />
+                    :src="`${imgUrlRef ? imgUrlRef : 'https://placehold.jp/158x158.png'}`" 
+                />
             </button>
             <div class="tw-flex tw-pt-[12px] tw-justify-center tw-items-center">
-                <button v-on:click="openUploadForm" class="tw-underline tw-text-[#7E9AB1] tw-italic tw-text-[13px]">
+                <button v-on:click="openUploadForm" class="tw-underline tw-text-[#0D0D0D] dark:tw-text-[#7E9AB1] tw-italic tw-text-[13px]">
                     <span v-if="!(imgUrlRef && imgUrlRef.length)">Upload Playlist Image</span>
                     <span v-if="(imgUrlRef && imgUrlRef.length)">Change Image</span>
                 </button>

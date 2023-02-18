@@ -101,7 +101,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="tw-flex tw-flex-col tw-justify-center tw-items-center tw-text-white tw-text-center">
+    <div class="tw-flex tw-flex-col tw-justify-center tw-items-center tw-text-[#0D0D0D] dark:tw-text-white tw-text-center">
         <div v-if="isLoadingAssignments || isLoadingPlaylists"
             class="tw-z-40 tw-flex tw-w-full tw-h-full tw-text-white tw-absolute tw-items-center tw-justify-center tw-bg-black/40">
             <LoadingSpinner class="tw-w-[40px] tw-h-[40px] tw-text-white" />
@@ -131,7 +131,7 @@ onMounted(() => {
             </button>
             <div class="tw-flex">
                 <button @click="handleCancel"
-                    class="tw-btn-primary tw-uppercase tw-text-white tw-h-[35px]">CANCEL</button>
+                    class="tw-btn-primary tw-uppercase dark:tw-text-white tw-h-[35px] tw-text-[#0D0D0D]">CANCEL</button>
                 <button @click="handleConfirm"
                     :class="`tw-btn-primary tw-uppercase tw-text-white tw-bg-${brand} tw-h-[35px]`">CONFIRM</button>
             </div>
