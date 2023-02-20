@@ -217,7 +217,7 @@ export default {
         return axios({
             method: 'DELETE',
             url: '/railcontent/playlist',
-            params: payload,
+            data: payload,
             headers
         });
     },

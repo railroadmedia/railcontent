@@ -91,8 +91,9 @@ function handleUploadError() {
 
         <div class="hover:tw-underline tw-flex tw-flex-col lg:tw-pr-[42px] tw-w-[200px] tw-shrink-0">
             <button v-on:click="openUploadForm" :class="type === 'playlist' ? 'tw-w-[158px] tw-h-[158px] tw-rounded-lg tw-overflow-hidden' : '' ">
+                
                 <!-- placeholder (no image or items) -->
-                <div v-if="type==='playlist'" class="tw-transition tw-flex tw-items-center tw-justify-center tw-w-full tw-h-full tw-bg-[#3F3F46] dark:tw-bg-[#445F74]">
+                <div v-if=" type==='playlist' && !imgUrlRef " class="tw-transition tw-flex tw-items-center tw-justify-center tw-w-full tw-h-full tw-bg-[#3F3F46] dark:tw-bg-[#445F74]">
                     <svg class="tw-w-1/2 tw-h-1/2" width="79" height="79" viewBox="0 0 79 79" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <rect width="79" height="79" fill="url(#pattern0)"/>
                         <defs>
@@ -104,10 +105,11 @@ function handleUploadError() {
                     </svg>
                 </div>
                 <img v-else class="tw-w-[158px] tw-h-[158px] tw-rounded-[9px]"
-                    :src="`${imgUrlRef ? imgUrlRef : 'https://placehold.jp/158x158.png'}`" />
+                    :src="`${imgUrlRef ? imgUrlRef : 'https://placehold.jp/158x158.png'}`" 
+                />
             </button>
             <div class="tw-flex tw-pt-[12px] tw-justify-center tw-items-center">
-                <button v-on:click="openUploadForm" class="tw-underline tw-text-[#7E9AB1] tw-italic tw-text-[13px]">
+                <button v-on:click="openUploadForm" class="tw-underline tw-text-[#0D0D0D] dark:tw-text-[#7E9AB1] tw-italic tw-text-[13px]">
                     <span v-if="!(imgUrlRef && imgUrlRef.length)">Upload Playlist Image</span>
                     <span v-if="(imgUrlRef && imgUrlRef.length)">Change Image</span>
                 </button>
@@ -116,5 +118,6 @@ function handleUploadError() {
                 </button>
             </div>
         </div>
+
     </div>
 </template>

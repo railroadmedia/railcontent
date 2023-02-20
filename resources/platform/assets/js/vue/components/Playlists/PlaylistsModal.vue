@@ -4,7 +4,7 @@ import CreatePlaylist from './CreatePlaylist.vue';
 import AddItem from './AddItem.vue'
 import StartEnd from './StartEnd.vue';
 import DeleteModal from './DeleteModal.vue';
-import UnpinModal from './UnpinModal.vue';
+import UnpinModal from './UnpinModal/UnpinModal.vue';
 
 const props = defineProps({
     modalProps: {
@@ -30,19 +30,23 @@ const modalContainerProps = {
     remove: 'tw-max-w-[606px] tw-px-[64px]',
     startEnd: 'tw-max-w-[589px] tw-px-[48px]',
     addItem: 'tw-max-w-[917px] tw-px-[32px]',
-    alreadyAddedItem: ''
+    unpinPlaylists: 'tw-max-w-[917px] tw-px-[32px]',
+    alreadyAddedItem: '',
 };
 
 </script>
 
 <template>
-    <InfoModal :classOverride="`tw-bg-[#081825] ${modalContainerProps[modalProps.modalType]} tw-border-[1px] tw-border-[#445F74]`" key="create-playlist-modal-instance" modalId="create-playlist-modal"
-        @onClose="() => emit('onClosePlaylistsModal')" :selfContained="true">
+    <InfoModal :classOverride="`tw-bg-white dark:tw-bg-[#081825] ${modalContainerProps[modalProps.modalType]} tw-border tw-border-[#445F74] dark:tw-border-[#445F74]`" 
+               key="create-playlist-modal-instance" 
+               modalId="create-playlist-modal"
+               @onClose="() => emit('onClosePlaylistsModal')" :selfContained="true"
+    >
         <div class="tw-pt-[12px]">
             
             <CreatePlaylist mode="create" @onCloseModal="() => emit('onClosePlaylistsModal')" :modalProps="modalProps" v-if="modalProps.modalType === 'create'"  />
-            <CreatePlaylist mode="duplicate" @onCloseModal="() => emit('onClosePlaylistsModal')" :modalProps="modalProps" v-if="modalProps.modalType === 'duplicate'"  />
-            <CreatePlaylist mode="edit" @onCloseModal="() => emit('onClosePlaylistsModal')" :modalProps="modalProps" v-if="modalProps.modalType === 'edit'"  />
+            <CreatePlaylist mode="duplicate" @onCloseModal="() => emit('onClosePlaylistsModal')" :playlist="modalProps.data" :modalProps="modalProps" v-if="modalProps.modalType === 'duplicate'"  />
+            <CreatePlaylist mode="edit" @onCloseModal="() => emit('onClosePlaylistsModal')" :playlist="modalProps.data" :modalProps="modalProps" v-if="modalProps.modalType === 'edit'"  />
             
             <div v-if="modalProps.modalType === 'remove'">
                 <DeleteModal @onCloseModal="() => emit('onClosePlaylistsModal')"
@@ -63,7 +67,10 @@ const modalContainerProps = {
                 Already Added Item
             </div>
             <div v-if="modalProps.modalType === 'unpinPlaylists'">
-                <UnpinModal :brand="brand" />
+                <UnpinModal @onCloseModal="() => emit('onClosePlaylistsModal')" 
+                            :brand="brand"
+                            :playlist="modalProps.data"
+                 />
             </div>
         </div>
     </InfoModal>

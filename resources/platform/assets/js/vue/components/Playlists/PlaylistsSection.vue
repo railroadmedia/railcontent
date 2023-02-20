@@ -42,13 +42,11 @@ const handleCreatePlaylist = () => {
 };
 
 const unpinPlaylist = (item, brand) => {
-    console.log('item id', item.id)
     PlaylistService.unpinPlaylist(item.id, brand, token)
         .then((response) => {
             if(response.status === 200) { 
                 //emit event or update pinia
-                    // playlistsStore.getPinnedPlaylists(brand, token)
-                playlistsStore.unpinPlaylist(item)
+                playlistsStore.unpinPlaylist(item.id)
                 //Confirmation
                 window.shownotification({
                     icon: 'playlist',
@@ -68,7 +66,7 @@ const unpinPlaylist = (item, brand) => {
 }
 
 onBeforeMount(()=> {
-    console.log('playlists ', props.pinnedPlaylists)
+    // console.log('playlists ', props.pinnedPlaylists)
 })
 </script>
 <template>
@@ -110,13 +108,17 @@ onBeforeMount(()=> {
                             </button>
                         </div>
                         <div class="md:tw-hidden group-hover:tw-inline-flex dark:tw-text-white tw-w-[42px] tw-shrink-0 tw-items-center tw-justify-center">
-                            <a :href="item.playback_url" class="tw-text-[#00101D] dark:tw-text-white" :title="`Go To Player`">
+                            <a :href="item.playback_url" 
+                                class="tw-text-[#00101D] dark:tw-text-white" 
+                                :class="!item.playback_url ? 'tw-opacity-20 tw-pointer-events-none' : ''"
+                                :title="item.playback_url ? 'Go To Player' : '' "
+                            >
                                 <musora-icon icon-name="play-circle-filled" class="tw-w-[24px]" />
                             </a>
                         </div>
                     </li>
                 </ul>
-                <!-- Loading Skeleton -->
+                <!-- Skeleton Loader -->
                 <div v-if="playlistsStore.loadingPinnedPlaylists" class="tw-flex-col tw-w-full tw-animate-pulse">
                     <div v-for="n in 5" :key="n" class="dark:tw-bg-[#102230] tw-bg-[#F5F5F6] tw-h-[32px] tw-mx-[25px] tw-mb-1 tw-border-rounded"></div>
                 </div>
@@ -129,14 +131,3 @@ onBeforeMount(()=> {
 
     </section>
 </template>
-<style scoped>
-.fade-enter-active,
-.fade-leave-active {
-    transition: opacity 150ms ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-    opacity: 0;
-}
-</style>

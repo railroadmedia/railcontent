@@ -5,23 +5,31 @@ export const usePlaylistsStore = defineStore({
   id: 'Playlists',
   state: () => {
     return {
+      playlists: [], // For Collection Page
       pinnedPlaylists: [], // [{ id: '', title: '', isPinned: false}]
-      loadedPlaylists: [],
       modalOpen: {
         modalType: null,
       },
+      loadingPlaylists: false,
       loadingPinnedPlaylists: false,
     }
   },
   getters: {
-    pinnedQuantity: (state) => state.pinnedPlaylists.length
+    pinnedQuantity: (state) => state.pinnedPlaylists.length,
   },
   actions: {
     update({ pinnedPlaylists }) {
       this.$patch({
         pinnedPlaylists,
-      });
+      })
     },
+
+    updatePlaylists({ playlists }) {
+      this.$patch({
+        playlists,
+      })
+    }, 
+
     //Dynamic Updates
     async getPinnedPlaylists(brand, token) {
       this.loadingPinnedPlaylists = true;
@@ -35,13 +43,40 @@ export const usePlaylistsStore = defineStore({
           }
         })
     },
-    //Static Updates
-    pinPlaylist(playlist) {
-      this.pinnedPlaylists.push(playlist)
+    async getPlaylists(brand, token) {
+      PlaylistService.getCurrentUserPlaylists(brand, 1, null, token)
+        .then((response) => {
+          if(response.status === 200) {    
+            this.playlists = response.data;
+            this.loadingPlaylists = false;
+          } else {
+            console.log('there was an error with getPlaylist')
+          }
+        })
     },
-    unpinPlaylist(playlist) {
-      this.pinnedPlaylists = this.pinnedPlaylists.filter(p => {
+
+    //Static Updates
+    deletePlaylist(playlist) {
+      this.playlists = this.playlists.filter(p => {
         return p.id !== playlist.id;
+      })
+    },
+    pinPlaylist(list) {
+      //Pin in Catalog      
+      let playlist = this.playlists.find(p => p === list)
+      playlist.pinned = true;
+    
+      //Pin in Sidebar
+      this.pinnedPlaylists.push(list)
+    },
+    unpinPlaylist(id) {
+      //Unpin from Catalog
+      let playlist = this.playlists.find(p => p.id === id)
+      playlist.pinned = false;
+      
+      //Unpin from Sidebar
+      this.pinnedPlaylists = this.pinnedPlaylists.filter(p => {
+        return p.id !== id;
       })
     },
 

@@ -21466,8 +21466,14 @@ a:visited{
 .tw-top-\[-4px\]{
   top: -4px !important;
 }
-.tw-top-\[-1px\]{
-  top: -1px !important;
+.tw-top-\[-1\.5px\]{
+  top: -1.5px !important;
+}
+.tw-left-\[-1px\]{
+  left: -1px !important;
+}
+.tw-right-\[-1px\]{
+  right: -1px !important;
 }
 .tw-left-8{
   left: 2rem !important;
@@ -21850,14 +21856,17 @@ a:visited{
 .tw-mr-8{
   margin-right: 2rem !important;
 }
-.tw-ml-\[20px\]{
-  margin-left: 20px !important;
+.tw-ml-4{
+  margin-left: 1rem !important;
 }
 .tw-mr-0\.5{
   margin-right: 0.125rem !important;
 }
 .tw-mr-0{
   margin-right: 0px !important;
+}
+.tw-ml-\[20px\]{
+  margin-left: 20px !important;
 }
 .tw-mt-\[36px\]{
   margin-top: 36px !important;
@@ -21909,9 +21918,6 @@ a:visited{
 }
 .tw-mr-6{
   margin-right: 1.5rem !important;
-}
-.tw-ml-4{
-  margin-left: 1rem !important;
 }
 .tw-mr-5{
   margin-right: 1.25rem !important;
@@ -22201,6 +22207,12 @@ a:visited{
 .tw-h-\[15px\]{
   height: 15px !important;
 }
+.tw-h-\[84px\]{
+  height: 84px !important;
+}
+.tw-h-\[44px\]{
+  height: 44px !important;
+}
 .tw-h-\[82px\]{
   height: 82px !important;
 }
@@ -22489,6 +22501,9 @@ a:visited{
 }
 .tw-w-\[15px\]{
   width: 15px !important;
+}
+.tw-w-\[84px\]{
+  width: 84px !important;
 }
 .tw-w-52{
   width: 13rem !important;
@@ -23321,8 +23336,9 @@ a:visited{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(0 16 29 / var(--tw-bg-opacity)) !important;
 }
-.tw-bg-\[\#002039\]\/90{
-  background-color: rgb(0 32 57 / 0.9) !important;
+.tw-bg-\[\#eeeeef\]{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(238 238 239 / var(--tw-bg-opacity)) !important;
 }
 .tw-bg-gray-400{
   --tw-bg-opacity: 1 !important;
@@ -23437,6 +23453,9 @@ a:visited{
 }
 .tw-bg-inherit{
   background-color: inherit !important;
+}
+.tw-bg-\[\#002039\]\/90{
+  background-color: rgb(0 32 57 / 0.9) !important;
 }
 .tw-bg-\[\#F3F4F6\]{
   --tw-bg-opacity: 1 !important;
@@ -24414,6 +24433,9 @@ a:visited{
   --tw-text-opacity: 1 !important;
   color: rgb(229 231 235 / var(--tw-text-opacity)) !important;
 }
+.tw-text-\[\#445F74\]\/50{
+  color: rgb(68 95 116 / 0.5) !important;
+}
 .tw-text-green-600{
   --tw-text-opacity: 1 !important;
   color: rgb(22 163 74 / var(--tw-text-opacity)) !important;
@@ -24490,6 +24512,9 @@ a:visited{
 }
 .tw-opacity-60{
   opacity: 0.6 !important;
+}
+.tw-opacity-20{
+  opacity: 0.2 !important;
 }
 .tw-opacity-30{
   opacity: 0.3 !important;
@@ -24655,13 +24680,13 @@ a:visited{
 .body a:visited, .post-body a:visited {
   color: #0b76db;
 }
-.placeholder\:tw-text-white::-moz-placeholder{
+.placeholder\:tw-text-\[\#0D0D0D\]::-moz-placeholder{
   --tw-text-opacity: 1 !important;
-  color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
+  color: rgb(13 13 13 / var(--tw-text-opacity)) !important;
 }
-.placeholder\:tw-text-white::placeholder{
+.placeholder\:tw-text-\[\#0D0D0D\]::placeholder{
   --tw-text-opacity: 1 !important;
-  color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
+  color: rgb(13 13 13 / var(--tw-text-opacity)) !important;
 }
 .placeholder\:tw-text-transparent::-moz-placeholder{
   color: transparent !important;
@@ -24672,6 +24697,14 @@ a:visited{
 .even\:tw-bg-white:nth-child(even){
   --tw-bg-opacity: 1 !important;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
+}
+.even\:tw-bg-\[\#E6E7E9\]:nth-child(even){
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(230 231 233 / var(--tw-bg-opacity)) !important;
+}
+.even\:tw-bg-\[\#F9F9F9\]:nth-child(even){
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(249 249 249 / var(--tw-bg-opacity)) !important;
 }
 .last-of-type\:tw-inline-block:last-of-type{
   display: inline-block !important;
@@ -25025,6 +25058,9 @@ a:visited{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(0 32 57 / var(--tw-bg-opacity)) !important;
 }
+.tw-dark .dark\:tw-bg-\[\#002039\]\/90{
+  background-color: rgb(0 32 57 / 0.9) !important;
+}
 .tw-dark .dark\:tw-bg-\[\#081825\]\/90{
   background-color: rgb(8 24 37 / 0.9) !important;
 }
@@ -25150,6 +25186,10 @@ a:visited{
 .tw-dark .dark\:even\:tw-bg-\[\#081825\]:nth-child(even){
   --tw-bg-opacity: 1 !important;
   background-color: rgb(8 24 37 / var(--tw-bg-opacity)) !important;
+}
+.tw-dark .dark\:even\:tw-bg-\[\#00101D\]:nth-child(even){
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(0 16 29 / var(--tw-bg-opacity)) !important;
 }
 .tw-dark .hover\:dark\:tw-border-drumeo:hover{
   --tw-border-opacity: 1 !important;

@@ -1,7 +1,7 @@
 <script setup>
 import { XIcon } from "@heroicons/vue/solid";
 import { vMaska } from 'maska';
-import { reactive, ref, onUpdated } from 'vue';
+import { reactive, ref, onUpdated, onBeforeMount } from 'vue';
 const props = defineProps({
   initialValue: {
     type: String,
@@ -110,6 +110,10 @@ const getBaseInputStyles = () => `
 
 onUpdated(() => {
   emit('onChange', bindedObject.unmasked);
+})
+
+onBeforeMount(()=> {
+  maskedValue.value = props.initialValue ? props.initialValue : '';
 })
 </script>
 

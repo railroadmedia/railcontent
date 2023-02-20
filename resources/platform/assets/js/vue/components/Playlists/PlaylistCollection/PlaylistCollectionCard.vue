@@ -1,5 +1,5 @@
 <script setup>
-    import { onBeforeMount, ref, inject, reactive } from 'vue';
+    import { onBeforeMount, watch, ref, inject, reactive } from 'vue';
     import MusoraIcon from '../../MusoraIcons/MusoraIcon.vue';
     import PlaylistService from '../../../../services/playlists.js';
     import { usePlaylistsStore } from '../../../../stores/playlists';
@@ -35,6 +35,11 @@
             isPinned: false,
             isPrivate: false,
         });
+
+    //-----------Watchers-----------//
+    watch(props.list, async (newList) => {
+        state.isPinned = newList.pinned;
+    })
 
     //-----------Methods-----------//
 
@@ -80,53 +85,53 @@
 
     //Handle Pin/Unpin Request
     const pinHandler = (id, brand) => {
-        if(!state.isPinned) { //PIN
-            state.isPinned = true;
-            PlaylistService.pinPlaylist(id, brand, token)
-                .then((response) => {
-                    if(response.status === 200) { 
-
-                        //emit event or update pinia
-                        playlistsStore.pinPlaylist(props.list)
-                            // playlistsStore.getPinnedPlaylists(brand, token)
-                        //show success message
-                        window.shownotification({
-                            icon: 'playlist',
-                            text: `${props.list.name} has been pinned within the sidebar.`
-                        })
-                    }
-                })
-                .catch(function (error) {
-                    if (error.response) {
-                        //handle error
-                        state.isPinned = false;
-                        window.shownotification({
-                            icon: 'error',
-                            text: 'Woops! Something wrong happened, please try again later.'
-                        })
-                    }
-                });
+        if(!props.list.pinned) { //PIN
+            if(playlistsStore.pinnedPlaylists.length !== 5) {
+                state.isPinned = true;
+                PlaylistService.pinPlaylist(id, brand, token)
+                    .then((response) => {
+                        if(response.status === 200) { 
+                            //emit event or update pinia
+                            playlistsStore.pinPlaylist(props.list)
+                            //show success message
+                            window.shownotification({
+                                icon: 'playlist',
+                                text: `'${props.list.name}' has been pinned within the sidebar.`
+                            })
+                        }
+                    })
+                    .catch(function (error) {
+                        if (error.response) {
+                            //handle error
+                            window.shownotification({
+                                icon: 'error',
+                                text: 'Woops! Something wrong happened, please try again later.'
+                            })
+                        }
+                    });
+            } else {
+                //Too Many Playlists
+                window.openplaylistmodal({ modalType: 'unpinPlaylists', data: props.list });
+                state.dropdownOpen = false;
+            }
         } else { //UNPIN
             state.isPinned = false;
             PlaylistService.unpinPlaylist(id, brand, token)
                 .then((response) => {
                     if(response.status === 200) { 
-                        //handle unpin
-                        state.isPinned = false;
                         //emit event or update pinia
-                        playlistsStore.unpinPlaylist(props.list)
-                            // playlistsStore.getPinnedPlaylists(brand, token)
+                        playlistsStore.unpinPlaylist(props.list.id)
                         //show success message
                         window.shownotification({
                             icon: 'playlist',
-                            text: `${props.list.name} has been unpinned from the sidebar.`
+                            text: `'${props.list.name}' has been unpinned from the sidebar.`
                         })
                     }
                 })
                 .catch(function (error) {
                     if (error.response) {
                         //handle error
-                        state.isPinned = true;
+                        
                         window.shownotification({
                             icon: 'error',
                             text: 'Woops! Something wrong happened, please try again later.'
@@ -139,8 +144,7 @@
     }
 
     const duplicatePlaylistHandler = () => {
-        console.log('ran duplicate playlists')
-        window.openplaylistmodal({ modalType: 'duplicate' });
+        window.openplaylistmodal({ modalType: 'duplicate', data: props.list });
         state.dropdownOpen = false;
     };
 
@@ -150,7 +154,7 @@
     };
 
     const editPlaylistHandler = () => {
-        window.openplaylistmodal({ modalType: 'edit' });
+        window.openplaylistmodal({ modalType: 'edit', data: props.list });
         state.dropdownOpen = false;
     };
 
@@ -329,8 +333,8 @@
                                 {{ state.isPrivate ? 'Private' : 'Public' }} 
                                 <!-- Toggle -->
                                 <div class="tw-relative tw-inline-flex tw-ml-auto tw-w-[27px] tw-h-[12px] tw-rounded-xl tw-bg-[#445F74]">
-                                    <div class="tw-rounded-full tw-h-[15px] tw-w-[15px] tw-bg-white tw-flex-inline tw-items-center tw-justify-center tw-shadow tw-absolute tw-top-[-1px] tw-transition"
-                                         :class="state.isPrivate ? 'tw-left-0': 'tw-right-0' "
+                                    <div class="tw-rounded-full tw-h-[15px] tw-w-[15px] tw-bg-white tw-flex-inline tw-items-center tw-justify-center tw-shadow tw-absolute tw-top-[-1.5px] tw-transition"
+                                         :class="state.isPrivate ? 'tw-left-[-1px]': 'tw-right-[-1px]' "
                                     >
                                     </div>
                                 </div>
