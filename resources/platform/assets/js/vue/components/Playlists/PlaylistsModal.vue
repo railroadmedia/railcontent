@@ -45,8 +45,8 @@ const modalContainerProps = {
         <div class="tw-pt-[12px]">
             
             <CreatePlaylist mode="create" @onCloseModal="() => emit('onClosePlaylistsModal')" :modalProps="modalProps" v-if="modalProps.modalType === 'create'"  />
-            <CreatePlaylist mode="duplicate" @onCloseModal="() => emit('onClosePlaylistsModal')" :modalProps="modalProps" v-if="modalProps.modalType === 'duplicate'"  />
-            <CreatePlaylist mode="edit" @onCloseModal="() => emit('onClosePlaylistsModal')" :modalProps="modalProps" v-if="modalProps.modalType === 'edit'"  />
+            <CreatePlaylist mode="duplicate" @onCloseModal="() => emit('onClosePlaylistsModal')" :playlist="modalProps.data" :modalProps="modalProps" v-if="modalProps.modalType === 'duplicate'"  />
+            <CreatePlaylist mode="edit" @onCloseModal="() => emit('onClosePlaylistsModal')" :playlist="modalProps.data" :modalProps="modalProps" v-if="modalProps.modalType === 'edit'"  />
             
             <div v-if="modalProps.modalType === 'remove'">
                 <DeleteModal @onCloseModal="() => emit('onClosePlaylistsModal')"

@@ -25,6 +25,10 @@
             type: String,
             default: 'drumeo'
         },
+        playlist: {
+            type: Object,
+            default: {}
+        }
     });
 
     const emit = defineEmits(['onCloseModal']);
@@ -120,6 +124,10 @@
             label: 'Hip-Hop/Rap'
         },
     ];
+
+    onMounted(()=> {
+        console.log(props.playlist)
+    })
 </script>
 
 <template>
@@ -130,16 +138,27 @@
             <span v-if="mode === 'duplicate'">Duplicate Playlist</span>
         </h2>
         <div class="tw-flex tw-pt-[24px]">
-            <ThumbnailUpload :token="token" type='playlist'/>
+            <ThumbnailUpload :token="token" type='playlist' :initialValue="playlist.thumbnail_url"/>
             <div class="tw-flex tw-flex-col tw-w-full">
-                <InputLabel placeholder="Playlist Title" :remove-default-input-styles="true"
+                <InputLabel 
+                    :initialValue="playlist.name ? playlist.name : ''"
+                    placeholder="Playlist Title" 
+                    :remove-default-input-styles="true"
                     inputOverride="tw-mb-[20px] placeholder:tw-text-[#0D0D0D] dark:placeholder:tw-text-white tw-text-[#0D0D0D] dark:tw-text-white tw-w-full tw-bg-[#eeeeef] dark:tw-bg-[#002039]/90 tw-px-[14px] tw-box-border tw-border-[#D4D4D8] dark:tw-border-[#445F74] tw-h-[42px] tw-rounded-[63px] tw-py-[9px] tw-px-[13px] tw-text-[14px]"
                     @onChange="handleTitleChange" />
-                <Dropdown :sortedOptions="sortedOptions" placeholderLabel="Playlist Category"
-                    @onChange="handleCategoryChange" :selected-value="category" />
-                <textarea @change="handleDescriptionChange" id="playlist-description" name="playlistDescription"
+                <Dropdown :sortedOptions="sortedOptions" 
+                          placeholderLabel="Playlist Category"
+                          @onChange="handleCategoryChange" 
+                          :selected-value="playlist.category ? playlist.category : category" 
+                />
+                <textarea 
+                    @change="handleDescriptionChange" 
+                    id="playlist-description" 
+                    name="playlistDescription"
                     placeholder="Playlist Description"
-                    class="tw-text-sm tw-h-[93px] tw-rounded-[6px] placeholder:tw-text-[#0D0D0D] dark:placeholder:tw-text-white tw-text-[#0D0D0D] dark:tw-text-white tw-bg-[#eeeeef] dark:tw-bg-[#002039]/90 tw-mt-[20px] tw-box-border tw-border-[#D4D4D8] dark:tw-border-[#445F74]"></textarea>
+                    class="tw-text-sm tw-h-[93px] tw-rounded-[6px] placeholder:tw-text-[#0D0D0D] dark:placeholder:tw-text-white tw-text-[#0D0D0D] dark:tw-text-white tw-bg-[#eeeeef] dark:tw-bg-[#002039]/90 tw-mt-[20px] tw-box-border tw-border-[#D4D4D8] dark:tw-border-[#445F74]"
+                    v-model="playlist.description"
+                ></textarea>
                 <div class="tw-pt-[30px] tw-flex tw-justify-end">
                     <button @click="() => emit('onCloseModal')" class="tw-btn-primary tw-btn-small tw-text-center tw-justify-center tw-items-center dark:tw-text-white tw-text-[#0D0D0D] hover:tw-bg-slate-200/50 dark:hover:tw-bg-white/10">CANCEL</button>
                     <button @click="() => handleConfirm()" :class="`tw-ml-4 tw-btn-primary tw-btn-small tw-bg-${brand} tw-text-center tw-flex tw-justify-center tw-items-center tw-p-0 tw-px-[30px]`"><span>CONFIRM</span></button>

@@ -144,8 +144,7 @@
     }
 
     const duplicatePlaylistHandler = () => {
-        console.log('ran duplicate playlists')
-        window.openplaylistmodal({ modalType: 'duplicate' });
+        window.openplaylistmodal({ modalType: 'duplicate', data: props.list });
         state.dropdownOpen = false;
     };
 
@@ -155,7 +154,7 @@
     };
 
     const editPlaylistHandler = () => {
-        window.openplaylistmodal({ modalType: 'edit' });
+        window.openplaylistmodal({ modalType: 'edit', data: props.list });
         state.dropdownOpen = false;
     };
 

@@ -31,10 +31,10 @@ const handleChange = (e) => {
 <template>
     <select :id="dropdownId" @change="handleChange"
         class="tw-text-[#00101D] tw-border-[#D1D5DB] dark:tw-border-[#445F74] tw-h-[42px] tw-rounded-[63px] tw-py-[9px] tw-px-[13px] tw-text-[14px] dark:tw-text-white tw-w-full tw-bg-[#eeeeef] dark:tw-bg-[#002039]/90 tw-px-[14px] tw-box-border" @keydown.prevent>
-        <option selected disabled :value="null">
+        <option :selected="!selectedValue" disabled :value="null">
             {{ placeholderLabel }}
         </option>
-        <option v-for="option in sortedOptions" :key="option.value" :value="selectedValue">
+        <option v-for="option in sortedOptions" :key="option.value" :value="selectedValue" :selected="option.value === selectedValue">
             {{ option.value }}
         </option>
     </select>
