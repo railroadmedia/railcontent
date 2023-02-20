@@ -535,6 +535,8 @@ class ContentQueryBuilder extends QueryBuilder
             return $this;
         }
 
+        $membershipPermissionIds = [1, 52, 73, 77,];
+
         $this->leftJoin(ConfigService::$tableContentPermissions . ' as id_content_permissions',
             function (JoinClause $join) {
                 $join->on(
@@ -542,34 +544,27 @@ class ContentQueryBuilder extends QueryBuilder
                     ConfigService::$tableContent . '.id'
                 );
             })
-            ->leftJoin(ConfigService::$tableContentPermissions . ' as type_content_permissions',
-                function (JoinClause $join) {
-                    $join->on(
-                        'type_content_permissions' . '.content_type',
-                        ConfigService::$tableContent . '.type'
-                    )
-                        ->whereIn('type_content_permissions' . '.brand', ConfigService::$availableBrands);
-                })
-            ->where(function (Builder $builder) {
+            ->where(function (Builder $builder) use ($membershipPermissionIds){
                 return $builder->where(function (Builder $builder) {
                     return $builder->whereNull(
                         'id_content_permissions' . '.permission_id'
-                    )
-                        ->whereNull(
-                            'type_content_permissions' . '.permission_id'
-                        );
+                    );
                 })
-                    ->orWhereExists(function (Builder $builder) {
+                    ->orWhereExists(function (Builder $builder) use ($membershipPermissionIds) {
                         return $builder->select('id')
                             ->from(ConfigService::$tableUserPermissions)
                             ->where('user_id', auth()->id() ?? null)
-                            ->where(function (Builder $builder) {
+                            ->where(function (Builder $builder)  use ($membershipPermissionIds) {
                                 return $builder->whereRaw(
                                     'permission_id = id_content_permissions.permission_id'
-                                )
-                                    ->orWhereRaw(
-                                        'permission_id = type_content_permissions.permission_id'
-                                    );
+                                )->orWhere(function (Builder $builder) use ($membershipPermissionIds) {
+                                    return $builder
+                                        ->whereIn('permission_id', $membershipPermissionIds)
+                                        ->whereIn(
+                                            'id_content_permissions.permission_id',
+                                            $membershipPermissionIds
+                                        );
+                                });
                             })
                             ->where(function (Builder $builder) {
                                 return $builder->where(
