@@ -252,14 +252,16 @@ class PlaylistItemTransformer
 
                     $route = [];
 
-                    if(!empty($row['parent_content_data'])){
+                    if (!empty($row['parent_content_data'])) {
                         $parentContentData = array_reverse(json_decode($row['parent_content_data'], true));
-                        $parentIds = \Arr::pluck($parentContentData,'id');
-                        $parents = $this->contentService->getByIds($parentIds)->keyBy('id');
-
-                        foreach( $parentContentData as $value){
-
-                            $parentTitle = (isset($parents[$value['id']]))?$parents[$value['id']]['title']:'';
+                        $parentIds = \Arr::pluck($parentContentData, 'id');
+                        $parents =
+                            $this->contentService->getByIds($parentIds)
+                                ->keyBy('id');
+                        $isSongAssignment = false;
+                        foreach ($parentContentData as $value) {
+                            $parentTitle = (isset($parents[$value['id']])) ? $parents[$value['id']]['title'] : '';
+                            $parentType = (isset($parents[$value['id']])) ? $parents[$value['id']]['type'] : '';
                             switch ($value['type']) {
                                 case 'learning-path':
                                     $route[] = 'Method';
@@ -267,11 +269,17 @@ class PlaylistItemTransformer
                                 case 'learning-path-level':
                                     $route[] = 'L'.$value['position'];
                                     break;
+                                case 'song':
+                                    $isSongAssignment = true;
+                                    break;
+                                case 'play-along':
+                                    break;
                                 default:
                                     $route[] = $parentTitle;
                                     break;
                             }
                         }
+                        $content[$itemId]['is_song_assignment'] = $isSongAssignment;
                     }
                     $content[$itemId]['route'] = $route;
                 }
