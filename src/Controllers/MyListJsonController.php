@@ -609,6 +609,26 @@ the pin icon on or off.',
 
     public function uploadPlaylistThumbnail(\Illuminate\Http\Request $request)
     {
+        if($request->has('fieldKey')) {
+            $request->validate(['fieldKey' => 'in:playlist_thumbnail']);
+
+            $target = $request->get('fieldKey')."/".'playlists_thumbnails-'.time().'-'.auth()->id().'.jpg';
+
+            $success =
+                Storage::disk('musora_web_platform_s3')
+                    ->copy($request->get('s3_bucket_path'), $target);
+
+            if ($success) {
+                return response()->json(
+                    [
+                        'thumbnail_url' => config('filesystems.disks.musora_web_platform_s3.cloudfront_access_url').
+                            $target
+                    ],
+                    201
+                );
+            }
+        }
+
         throw_if(!$request->file('file'), new \Railroad\Railcontent\Exceptions\NotFoundException('File not found.'));
 
         $image = $this->imageManager->make($request->file('file'));
@@ -618,7 +638,7 @@ the pin icon on or off.',
             ->save();
 
         $target =
-            'playlists_thumbnails/'.pathinfo($request->get('target'))['filename'].'-'.time().'-'.auth()->id().'.jpg';
+            'playlist_thumbnail/'.'playlists_thumbnails-'.time().'-'.auth()->id.'.jpg';
 
         $success =
             Storage::disk('musora_web_platform_s3')
