@@ -138,7 +138,7 @@
             <span v-if="mode === 'duplicate'">Duplicate Playlist</span>
         </h2>
         <div class="tw-flex tw-pt-[24px]">
-            <ThumbnailUpload :token="token" type='playlist' :initialValue="playlist.thumbnail_url"/>
+            <ThumbnailUpload :token="token" type='playlist' :imgUrl="playlist.thumbnail_url ? playlist.thumbnail_url : ''"/>
             <div class="tw-flex tw-flex-col tw-w-full">
                 <InputLabel 
                     :initialValue="playlist.name ? playlist.name : ''"
@@ -156,7 +156,7 @@
                     id="playlist-description" 
                     name="playlistDescription"
                     placeholder="Playlist Description"
-                    class="tw-text-sm tw-h-[93px] tw-rounded-[6px] placeholder:tw-text-[#0D0D0D] dark:placeholder:tw-text-white tw-text-[#0D0D0D] dark:tw-text-white tw-bg-[#eeeeef] dark:tw-bg-[#002039]/90 tw-mt-[20px] tw-box-border tw-border-[#D4D4D8] dark:tw-border-[#445F74]"
+                    class="tw-no-scrollbar tw-text-sm tw-h-[93px] tw-rounded-[6px] placeholder:tw-text-[#0D0D0D] dark:placeholder:tw-text-white tw-text-[#0D0D0D] dark:tw-text-white tw-bg-[#eeeeef] dark:tw-bg-[#002039]/90 tw-mt-[20px] tw-box-border tw-border-[#D4D4D8] dark:tw-border-[#445F74]"
                     v-model="playlist.description"
                 ></textarea>
                 <div class="tw-pt-[30px] tw-flex tw-justify-end">
