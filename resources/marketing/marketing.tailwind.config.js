@@ -1,5 +1,6 @@
 // tailwind.config.js
 const stylesoraTheme = require('stylesora/theme');
+console.log('YT_TEST_PROCESS_V', process.version);
 const plugin = require('tailwindcss/plugin')
 const colors = require("tailwindcss/colors");
 
