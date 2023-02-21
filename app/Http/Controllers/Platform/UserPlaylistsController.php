@@ -76,6 +76,7 @@ class UserPlaylistsController extends BaseController
             "initialPage" => $initialPage,
             'currentUser' => $currentUser,
             "noResultsMessage" => 'no results',
+            "playlistsNumber" => $playlistsNumber
         ]);
     }
 

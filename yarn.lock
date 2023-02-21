@@ -6782,7 +6782,7 @@ stylehacks@^5.1.1:
 
 stylesora@^1.0.102:
   version "1.0.102"
-  resolved "https://registry.npmjs.org/stylesora/-/stylesora-1.0.102.tgz"
+  resolved "https://registry.yarnpkg.com/stylesora/-/stylesora-1.0.102.tgz#21e77c4753d18881f722ed8d779c330ebac28537"
   integrity sha512-W3bn9bF5QUCtcnVCM7j0sYrfoVbCvCjIxblqlHkKWZdeqhA8SPv7zFMcrjHY5xScJHcV14PQjJs8ve0C6DS1cQ==
   dependencies:
     cssnano "^5.0.6"
