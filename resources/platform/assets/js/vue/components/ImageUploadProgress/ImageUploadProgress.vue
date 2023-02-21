@@ -19,6 +19,10 @@ const props = defineProps({
     type: String,
     default: null
   },
+  fieldKey: {
+    type: String,
+    default: null
+  }
 });
 
 const emit = defineEmits(['onUploadDone', 'onUploadError']);
@@ -53,7 +57,7 @@ onMounted(() => {
   formData.append('file', dataURItoBlob(props.image), newFileName);
   formData.append('target', newFileName);
   formData.append('_method', 'POST');
-  formData.append('fieldKey', 'playlist_thumbnail');
+  formData.append('fieldKey', props.fieldKey);
 
   Vapor.store(formData.get('file'), {
     visibility: 'public-read',
@@ -70,10 +74,10 @@ onMounted(() => {
       uuid: response.uuid,
       s3_bucket_path: response.key,
       bucket: response.bucket,
-      fieldKey: 'playlist_thumbnail'
+      fieldKey: props.fieldKey
     }, options).then((resolved) => {
       if (resolved) {
-        emit('onUploadDone', resolved.data.thumbnail_url);
+        emit('onUploadDone', resolved.data[props.fieldKey]);
       }
     }).catch(() => {
       emit('onUploadError');

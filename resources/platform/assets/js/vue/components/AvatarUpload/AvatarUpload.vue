@@ -55,6 +55,7 @@ function openUploadForm() {
 }
 
 function handleUploadDone(imgUrl) {
+  console.log(imgUrl)
   imgUrlRef.value = imgUrl;
   showUploadForm.value = false;
 }
@@ -73,7 +74,7 @@ function handleUploadError() {
     <InfoModal v-if="showUploadForm" modalId="upload-modal" @onClose="openUploadForm" :title="title[uploadStep]" classOverride="tw-border-[#223F57] tw-border-[1px] tw-bg-white dark:tw-bg-[#081825] md:tw-max-w-xl xl:tw-max-w-2xl">
       <ImageDropzone v-if="uploadStep === 'dropzone'" @onImageSelected="handleImage" />
       <ImageCropper v-if="uploadStep === 'crop'" @onCrop="handleCrop" :selectedImage="selectedImage" />
-      <ImageUploadProgress uploadService="/user-management-system/picture/upload-from-s3-front-end" v-if="uploadStep === 'upload'" :image="croppedImage" :userId="userId"
+      <ImageUploadProgress fieldKey="profile_picture_url" uploadService="/user-management-system/picture/upload-from-s3-front-end" v-if="uploadStep === 'upload'" :image="croppedImage" :userId="userId"
         @onUploadDone="handleUploadDone" @onUploadError="handleUploadError" />
     </InfoModal>
 
