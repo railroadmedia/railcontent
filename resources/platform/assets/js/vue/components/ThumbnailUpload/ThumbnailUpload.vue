@@ -65,8 +65,8 @@ function openUploadForm() {
     uploadStep.value = "dropzone";
 }
 
-function handleUploadDone(imgUrl) {
-    imgUrlRef.value = imgUrl;
+function handleUploadDone({ thumbnail_url }) {
+    imgUrlRef.value = thumbnail_url;
     showUploadForm.value = false;
 }
 
@@ -85,7 +85,7 @@ function handleUploadError() {
             classOverride="tw-border-[#223F57] tw-border-[1px] tw-bg-white dark:tw-bg-[#081825] md:tw-max-w-xl xl:tw-max-w-2xl">
             <ImageDropzone v-if="uploadStep === 'dropzone'" @onImageSelected="handleImage" />
             <ImageCropper v-if="uploadStep === 'crop'" @onCrop="handleCrop" :selectedImage="selectedImage" />
-            <ImageUploadProgress fieldKey="playlist_thumbnail" :token="token" uploadService="/railcontent/upload-playlist-thumb" v-if="uploadStep === 'upload'" :image="croppedImage" :userId="userId"
+            <ImageUploadProgress successMessage="Thumbnail uploaded" fieldKey="playlist_thumbnail" :token="token" uploadService="/railcontent/upload-playlist-thumb" v-if="uploadStep === 'upload'" :image="croppedImage" :userId="userId"
                 @onUploadDone="handleUploadDone" @onUploadError="handleUploadError" />
         </InfoModal>
 

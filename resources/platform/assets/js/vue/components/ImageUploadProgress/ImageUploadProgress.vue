@@ -22,6 +22,10 @@ const props = defineProps({
   fieldKey: {
     type: String,
     default: null
+  },
+  successMessage: {
+    type: String,
+    default: null
   }
 });
 
@@ -77,7 +81,7 @@ onMounted(() => {
       fieldKey: props.fieldKey
     }, options).then((resolved) => {
       if (resolved) {
-        emit('onUploadDone', resolved.data[props.fieldKey]);
+        emit('onUploadDone', resolved.data);
       }
     }).catch(() => {
       emit('onUploadError');
@@ -94,7 +98,7 @@ onMounted(() => {
       <img class="tw-w-[100px] tw-h-[100px] tw-rounded-full" :src="image" alty="Profile picture thumbnail" />
       <div class="tw-w-full tw-text-center tw-text-white tw-mt-[20px] tw-pb-[20px]" style="font-family: Open Sans">
         <h2 class="tw-text-bold tw-mb-[12px] tw-text-[16px]">
-          {{ percentCompleted === 100 ? 'Your profile image has successfully uploaded' : 'Uploading in progress' }}
+          {{ percentCompleted === 100 ? props.successMessage : 'Uploading in progress' }}
         </h2>
         <p class="tw-italic tw-text-[14px] tw-text-[#E5E5E5]">
           {{ percentCompleted === 100 ? '' : 'This will take a few short seconds' }}
