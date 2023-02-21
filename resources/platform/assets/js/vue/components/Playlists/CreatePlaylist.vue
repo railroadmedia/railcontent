@@ -2,7 +2,7 @@
     // TODO: Add Upload Modal for thumbnail add/change
     // TODO: Consider edit mode in the avatar upload process
     // TODO: Close modal after create is 200
-    import { reactive, ref, inject, onBeforeMount } from 'vue';
+    import { reactive, ref, inject, onBeforeMount, onBeforeUnmount } from 'vue';
     import InputLabel from '../InputLabel/InputLabel.vue';
     import Dropdown from '../Dropdown/Dropdown.vue';
     import PlaylistService from '../../../services/playlists';
@@ -76,7 +76,7 @@
                     //show success message
                     window.shownotification({
                         icon: 'playlist',
-                        text: `${title.value} was added to your library.`
+                        text: `${state.name} was added to your library.`
                     })
                     //load Playlists
                     playlistsStore.getPlaylists({ brand: brand, page: 1, limit: null }, token);       
@@ -180,6 +180,12 @@
             state.name = props.playlist.name;
             state.description = props.playlist.description;
             state.category = props.playlist.category;
+        }
+    })
+    
+    onBeforeUnmount(() => {
+        if (props.modalProps.nextModal) {
+            window.openplaylistmodal(props.modalProps.nextModal);
         }
     })
 </script>

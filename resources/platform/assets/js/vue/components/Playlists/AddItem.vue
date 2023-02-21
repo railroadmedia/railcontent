@@ -54,6 +54,7 @@ const handleCancel = () => {
 };
 
 const handleConfirm = () => {
+    isLoadingPlaylists.value = true;
     PlaylistService.addToPlaylist({
         brand: props.brand,
         contentId: props.contentId,
@@ -61,9 +62,15 @@ const handleConfirm = () => {
         playlistIds: selectedPlaylists.value,
         token,
     }).then(() => {
+        isLoadingPlaylists.value = false;
         emit('onCancel');
     });
 };
+
+const handleCreate = () => {
+    emit('onCancel');
+    window.openplaylistmodal({ modalType: 'create', nextModal: { modalType: 'addItem', contentId: props.contentId } });
+}
 
 onMounted(() => {
     isLoadingAssignments.value = true;
@@ -134,7 +141,7 @@ onMounted(() => {
             </template>
         </Table>
         <div class="tw-w-full tw-flex tw-justify-between tw-pt-[25px]">
-            <button class="tw-btn-secondary tw-uppercase tw-text-[#9EC0DC] tw-min-w-[167px] tw-h-[35px]">
+            <button @click="handleCreate" class="tw-btn-secondary tw-uppercase tw-text-[#9EC0DC] tw-min-w-[167px] tw-h-[35px]">
                 <PlusIcon class="tw-w-[12px] tw-h-[12px]" />
                 <span class="tw-pl-[6px]">CREATE NEW LIST</span>
             </button>
