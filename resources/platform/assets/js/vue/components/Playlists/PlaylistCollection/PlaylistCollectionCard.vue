@@ -1,5 +1,5 @@
 <script setup>
-    import { onBeforeMount, watch, ref, inject, reactive } from 'vue';
+    import { onBeforeMount, watch, ref, inject, computed, reactive } from 'vue';
     import MusoraIcon from '../../MusoraIcons/MusoraIcon.vue';
     import PlaylistService from '../../../../services/playlists.js';
     import { usePlaylistsStore } from '../../../../stores/playlists';
@@ -20,6 +20,11 @@
         }
     });
 
+    //-----------Computed Props-----------//
+    const duration_formated = computed(()=> {
+        return props.list.duration_formated.replace(/^0(?:0:0?)?/, '');;
+    })
+
     //-----------Refs-----------//
     const dropdownTarget = ref(null)
 
@@ -35,6 +40,7 @@
             isPinned: false,
             isPrivate: false,
         });
+
 
     //-----------Watchers-----------//
     watch(props.list, async (newList) => {
@@ -256,7 +262,7 @@
                         </span>  
                     </div> 
                     <div :class="props.isListView ? 'md:tw-w-1/2 md:tw-w-1/2 tw-inline-flex tw-justify-center tw-items-center' : '' ">
-                        <span>{{ list.duration || "0:00" }}</span>
+                        <span>{{ duration_formated }}</span>
                     </div>
                 </div>
             </div>
