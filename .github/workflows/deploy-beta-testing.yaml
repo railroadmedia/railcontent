@@ -17,6 +17,10 @@ jobs:
           php-version: 8.1
           tools: composer:v2
           coverage: none
+      - name: Use Node.js 16.x
+          uses: actions/setup-node@v1
+          with:
+            node-version: 16.x
       - name: Require Vapor CLI
         run: composer global require laravel/vapor-cli
       - name: Add HTTP basic auth credentials
