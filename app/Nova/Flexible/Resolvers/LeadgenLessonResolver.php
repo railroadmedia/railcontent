@@ -30,7 +30,7 @@ class LeadgenLessonResolver implements ResolverInterface
                 'title' => $lesson->title,
                 'desc' => $lesson->desc,
                 'thumbnail_text' => $lesson->thumbnail,
-                'thumbnail_path' => $lesson->thumbnail,
+                'thumbnail_file' => $lesson->thumbnail,
                 'video_src' => $lesson->video_src,
                 'display_order' => $lesson->display_order,
                 'slug' => $lesson->slug,
@@ -60,8 +60,7 @@ class LeadgenLessonResolver implements ResolverInterface
                    'title' => $group->getAttributes()['title'],
                    'caption' => $group->getAttributes()['caption'],
                    'desc' => $group->getAttributes()['desc'],
-                   'thumbnail_text' => $group->getAttributes()['thumbnail_text'] ?? null,
-                   'thumbnail_path' => $group->getAttributes()['thumbnail_path'] ?? null,
+                   'thumbnail' => !empty($group->getAttributes()['thumbnail_text']) ? $group->getAttributes()['thumbnail_text'] : $group->getAttributes()['thumbnail_file'],
                    'video_src' => $group->getAttributes()['video_src'],
                    'slug' => $group->getAttributes()['slug'],
                    'display_order' => $index+1,
@@ -72,14 +71,6 @@ class LeadgenLessonResolver implements ResolverInterface
             });
 
             foreach($lessons as $key => $lesson){
-                $lesson['thumbnail'] = null;
-                if(!empty($lesson['thumbnail_text'])){
-                    $lesson['thumbnail'] = $lesson['thumbnail_text'];
-                } elseif(!empty($lesson['thumbnail_path'])){
-                    $lesson['thumbnail'] = $lesson['thumbnail_path'];
-                }
-
-
                 //insert
                 if(is_null($lesson['id'])){
                     if(!str_contains($lesson['thumbnail'], 'https')) $lesson['thumbnail'] = 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$lesson['thumbnail'];

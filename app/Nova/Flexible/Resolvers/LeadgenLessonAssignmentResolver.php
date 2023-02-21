@@ -53,8 +53,6 @@ class LeadgenLessonAssignmentResolver implements ResolverInterface
             ];
         });
 
-        abort(500, $model);
-
         foreach($assignments as $assignment){
             //insert
             if(is_null($assignment['id'])){

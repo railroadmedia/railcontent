@@ -53,14 +53,14 @@ class LeadgenLessonLayout extends Layout
             Text::make('title')->required(),
             Text::make('caption'),
             Text::make('Description', 'desc'),
-            Image::make('Thumbnail','thumbnail_path')
+            Image::make('Thumbnail', 'thumbnail_file')
                 ->disk('nova_s3')
                 ->prunable()
                 ->hideFromIndex()
                 ->deletable(false)
                 ->disableDownload()
                 ->storeAs(function (Request $request){
-                    return '/Lead-gens/Thumbnails/'.$request->uuid.'-'.$request->file('thumbnail_path')->getClientOriginalName();
+                    return '/Lead-gens/Thumbnails/'.$request->uuid.'-'.$request->file('thumbnail_file')->getClientOriginalName();
                 })
                 ->preview(function($value){
                     if(empty($value)) return null;

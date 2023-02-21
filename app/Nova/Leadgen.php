@@ -81,7 +81,7 @@ class Leadgen extends Resource
                         $brand = 'Singeo';
                     }
 
-                    return '/'.$brand.'/Lead-gens/Meta-images'.$request->uuid.'-'.$request->file('meta_img')->getClientOriginalName();
+                    return '/'.$brand.'/Lead-gens/Meta-images/'.$request->uuid.'-'.$request->file('meta_img')->getClientOriginalName();
                 })
                 ->preview(function($value){
                     if(empty($value)) return null;
