@@ -60,9 +60,11 @@ class RailforumsUserProvider implements UserProviderInterface
         $users = User::query()->whereIn('id', $userIds)->get();
 
         $forumUsers = [];
+        $reported = ReportedUser::query()->whereIn('user_id', $userIds)
+            ->where('reporter_id','=', auth()->id())->get()->groupBy('user_id')->toArray();
 
         foreach ($users as $user) {
-                $forumUsers[$user->id] = $this->forumUserFromUserModel($user);
+                $forumUsers[$user->id] = $this->forumUserFromUserModel($user, $reported);
         }
 
         return $forumUsers;
@@ -153,10 +155,8 @@ class RailforumsUserProvider implements UserProviderInterface
      * @param User $userModel
      * @return ForumUser
      */
-    private function forumUserFromUserModel(User $userModel)
+    private function forumUserFromUserModel(User $userModel, $reportedUsers = [])
     {
-        $reported = ReportedUser::query()->where('user_id','=', $userModel->id)
-            ->where('reporter_id','=', auth()->id())->first();
 
         return new ForumUser(
             $userModel->id,
@@ -168,7 +168,7 @@ class RailforumsUserProvider implements UserProviderInterface
             $userModel->getXpRank(),
             $userModel->getMethodLevel(),
            $userModel->getAttributes()['access_level'] ?? '',
-            ($reported)?true:false
+            array_key_exists($userModel->id, $reportedUsers)
         );
     }
 }

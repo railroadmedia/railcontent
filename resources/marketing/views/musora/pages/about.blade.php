@@ -71,6 +71,7 @@
                         src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/vater-sticks/signature.png"
                         loading="lazy"
                         onload="this.classList.remove('opacity-0')"
+                        alt="jared falk signature"
                     >
                     <p class="text-[#a1afc9]">Jared Falk</p>
                 </div>
@@ -89,6 +90,7 @@
                 src="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/meet-musora.png"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
+                alt="meet musora diagram"
             >
 
         </div>

@@ -284,11 +284,21 @@
         }
     @endphp
 
+    @if(!is_current_user_a_member())
+        <a href="#final" class="anchor-slide flex items-end justify-center px-2 sm:px-0 fixed w-full z-[100]" style="background: #d6e8fd;">
+            <p class="font-bebas uppercase mx-0 py-2 leading-none">
+                GET A FREE CHORDS & SCALES BOOK UNTIL FEB 20.
+                <br><span class="text-pianote"><span class="tzcd-nppsh2">a limited time</span> left!</span>
+            </p>
+            <img class="h-10 ml-4" src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/sticky_bar_chords_scales.png" alt="30 day drummer logo" />
+        </a>
+        <div class="w-full block h-10 sm:h-11"></div>
+    @endif
     <header class="px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:#eff7ff;">
         <div class="container max-w-5xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center">
                 <div class="w-full sm:w-7/12 text-center lg:text-left">
-                    <img class="h-20 sm:h-24 lg:h-28 -mb-3 sm:mb-0 lg:mb-3 lazyload" data-src="https://cdn.musora.com/image/fetch/w_440,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/new-piano-players-start-here-logo-2+1.png" alt="new piano players start here logo">
+                    <img class="h-14 sm:h-18 lg:h-20 -mb-2 sm:mb-0 lg:mb-3 lazyload" data-src="https://cdn.musora.com/image/fetch/w_440,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/new-piano-players-start-here-logo-2+1.png" alt="new piano players start here logo">
                     <h1 class="rotater-text overflow-hidden"><strong>
                             <span class="relative whitespace-nowrap delay-1000 ease-in-out">Learn the piano</span><br>
                             <span class="relative whitespace-nowrap delay-1000 ease-in-out">Play real songs </span><br>
@@ -350,7 +360,7 @@
                             @endif
                         </div>
                         <div class="w-full sm:w-1/2 lg:pb-5">
-                            <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/Joined_profiles.png">
+                            <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/joined_profiles.png">
                             <p class="inline-block leading-tight text-sm align-middle">Join {{ number_format($nPackOwners ?? 0) }} piano players who<br> have already registered.</p>
                         </div>
                     </div>
@@ -521,7 +531,7 @@
                     href="{{ $registerButtonUrl }}"
                     class="join medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 @if(!is_current_user_a_member()) anchor-slide @endif">ENROLL NOW</a><br>
             @endif
-            <img class="h-7 mr-1 mb-5 sm:mb-10 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/Joined_profiles.png" alt="joined profiles">
+            <img class="h-7 mr-1 mb-5 sm:mb-10 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/joined_profiles.png" alt="joined profiles">
             <p class="inline-block leading-tight text-sm align-middle mb-5 sm:mb-10">Join {{ number_format($nPackOwners ?? 0) }} piano players who<br> have already registered.</p>
 
         </div>
@@ -759,7 +769,7 @@
                     href="{{ $registerButtonUrl }}"
                     class="join medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 @if(!is_current_user_a_member()) anchor-slide @endif">ENROLL NOW</a><br>
             @endif
-            <img class="h-7 mr-1 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/Joined_profiles.png">
+            <img class="h-7 mr-1 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/joined_profiles.png">
             <p class="inline-block leading-tight text-sm align-middle">Join {{ number_format($nPackOwners ?? 0) }} piano players who<br> have already registered.</p>
         </div>
     </section>
@@ -807,14 +817,16 @@
         <section class="px-4 sm:px-6 py-10 sm:py-20 lg:py-28 relative" style="background: linear-gradient(180deg, #F61A30 0%, #910000 122.85%);">
             <div class="max-w-5xl mx-auto md:flex relative z-40">
                 <div class="flex-1 text-white md:pr-4 lg:pr-0 mb-3 md:mb-0 max-w-md md:max-w-auto mx-auto">
-
+                    <h5 class="uppercase mb-2 text-center md:text-left" style="color: #FFAE00;">
+                        AVAILABLE UNTIL FEBRUARY 20TH<br> only <span class="tzcd-nppsh2">a limited time</span> left!
+                    </h5>
                     <h2 class="font-extrabold mb-4 text-center md:text-left">
                         Master every chord & <br class="hidden lg:inline">scale with this guide.
                     </h2>
                     <p>
                         <span class="font-extrabold">Every Chord. Every Scale. Every Key.</span>
                         <br><br> This essential resource will help you learn the most important chord shapes, chord variations, and scales in EVERY key.
-                        <br><br> Regular ${{ floatval($productPrices['piano-chords-and-scales-guide']->price) }}. It’s yours FREE when you get The Power of Chords. (And we’ll cover the shipping.)
+                        <br><br> Regular ${{ floatval($productPrices['piano-chords-and-scales-guide']->price) }}. It’s yours FREE when you get New Piano Players Start Here. (And we’ll cover the shipping.)
                         <br><br>
                     </p>
                 </div>
