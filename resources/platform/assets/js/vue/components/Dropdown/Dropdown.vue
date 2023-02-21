@@ -34,7 +34,11 @@ const handleChange = (e) => {
         <option :selected="!selectedValue" disabled :value="null">
             {{ placeholderLabel }}
         </option>
-        <option v-for="option in sortedOptions" :key="option.value" :value="selectedValue" :selected="option.value === selectedValue">
+        <option v-for="option in sortedOptions" 
+                :key="option.value" 
+                :value="option.value" 
+                :selected="option.value === selectedValue"
+        >
             {{ option.value }}
         </option>
     </select>

@@ -11,7 +11,6 @@ export default {
      * @param {string} token
      * @param {object} payload -
      */
-
     createUserPlaylist({ token, payload }) {
         const headers = {
             'Content-Type': 'application/json',
@@ -25,6 +24,24 @@ export default {
         });
     },
 
+    /**
+     * Duplicate Playlist
+     *
+     * @param {string} token
+     * @param {object} payload -
+     */
+    duplicatePlaylist(payload, token) {
+        const headers = {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': token
+        };
+        return axios({
+            method: 'PUT',
+            url: '/railcontent/copy-playlist',
+            data: payload,
+            headers
+        });
+    },
 
     //-------------READ--------------//
 
@@ -36,11 +53,11 @@ export default {
      * @param {number} limit -
      * @param {string} token
      */
-    getCurrentUserPlaylists({ brand = "drumeo", page = 1, limit = 10, token }) {
-        const payload = {
-            "brand": brand,
-            "limit":limit,
-            "page":page
+    getCurrentUserPlaylists(payload, token) {
+        const playlistParams = {
+            "brand": "drumeo",
+            "limit": null,
+            "page": 1
         }
         const headers = {
             'Content-Type': 'application/json',
@@ -49,7 +66,7 @@ export default {
         return axios({
             method: 'GET',
             url: '/railcontent/playlists',
-            params: payload,
+            params: payload ? payload : playlistParams,
             headers
         });
     },
@@ -163,6 +180,27 @@ export default {
             {
                 "private": isPrivate ? 0 : 1,
             },
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': csrf_token
+                }
+            }
+        )
+    },
+
+    /**
+     * Update Playlist Details
+     *
+     * @param {number} id
+     * @param {object} payload
+     * @param {string} csrf_token
+     *
+     */
+    updatePlaylist(id, payload, csrf_token) {
+        return axios.patch(
+            `/railcontent/playlist/${id}`,
+            payload,
             {
                 headers: {
                     'Content-Type': 'application/json',

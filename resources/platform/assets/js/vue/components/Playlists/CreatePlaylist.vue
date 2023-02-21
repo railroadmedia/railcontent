@@ -2,7 +2,7 @@
     // TODO: Add Upload Modal for thumbnail add/change
     // TODO: Consider edit mode in the avatar upload process
     // TODO: Close modal after create is 200
-    import { ref, inject, onMounted } from 'vue';
+    import { reactive, ref, inject, onBeforeMount } from 'vue';
     import InputLabel from '../InputLabel/InputLabel.vue';
     import Dropdown from '../Dropdown/Dropdown.vue';
     import PlaylistService from '../../../services/playlists';
@@ -36,47 +36,95 @@
     //Pinia Store
     const playlistsStore = usePlaylistsStore();
 
-    const title = ref('');
-    const category = ref(null);
-    const description = ref('');
-    const thumb = ref(null);
+    const state = reactive({
+        name: '',
+        category: null,
+        thumb: null,
+        description: '',
+    })
 
     const token = inject('csrf_token');
 
     const handleTitleChange = (val) => {
-        title.value = val;
+        state.name = val;
     };
 
     const handleCategoryChange = (val) => {
-        category.value = val;
+        state.category = val;
     };
 
     const handleDescriptionChange = (e) => {
-        description.value = e.target.value;
+        state.description = e.target.value;
     };
 
     const handleConfirm = () => {
         const payload = {
             brand: props.brand,
-            name: title.value,
-            description: description.value,
-            category: category.value,
-            private: true,
-            thumbnail_url: thumb.value,
+            name: state.name,
+            description: state.description,
+            category: state.category,
+            private: props.playlist.private,
+            thumbnail_url: state.thumb,
         };
-        PlaylistService.createUserPlaylist({
-            token,
-            payload
-        }).then(function(response) {
-            if (response.status === 201) {
-                playlistsStore.loadingPlaylists = true;
-                //show success message
-                window.shownotification({
-                    icon: 'playlist',
-                    text: `${title.value} was added to your library.`
+        if(props.mode === "create") {
+            PlaylistService.createUserPlaylist({
+                token,
+                payload
+            }).then(function(response) {
+                if (response.status === 201) {
+                    playlistsStore.loadingPlaylists = true;
+                    //show success message
+                    window.shownotification({
+                        icon: 'playlist',
+                        text: `${title.value} was added to your library.`
+                    })
+                    //load Playlists
+                    playlistsStore.getPlaylists({ brand: brand, page: 1, limit: null }, token);       
+                }
+            })
+        }
+        if(props.mode === "edit") {
+            PlaylistService.updatePlaylist(props.playlist.id, payload, token)
+                .then(function(response) {
+                    
+                    if (response.status === 201) {
+                        playlistsStore.loadingPlaylists = true;
+                        //show success message
+                        window.shownotification({
+                            icon: 'fa-pen-to-square',
+                            text: `Your playlist was successfully edited`
+                        })
+                        //load Playlists
+                        playlistsStore.getPlaylists({ brand: brand, page: 1, limit: null }, token);       
+                    } else {
+                        console.log('edit response code', response)
+                    }
                 })
+        }
+        if(props.mode === "duplicate") {
+            const duplicateData = {
+                playlist_id: props.playlist.id,
+                name: state.name,
+                description: state.description,
+                thumbnail_url: state.thumb,
+                category: state.category,
             }
-        })
+            PlaylistService.duplicatePlaylist(duplicateData, token)
+                .then(function(response) {
+                    if (response.status === 201) {
+                        playlistsStore.loadingPlaylists = true;
+                        //show success message
+                        window.shownotification({
+                            icon: 'fa-copy',
+                            text: `The playlist was successfully duplicated.`
+                        })
+                        //load Playlists
+                        playlistsStore.getPlaylists({ brand: brand, page: 1, limit: null }, token);       
+                    } else {
+                        console.log('duplicate response code', response)
+                    }
+                })
+        }
 
         //Close Modal
         emit('onCloseModal')
@@ -125,8 +173,14 @@
         },
     ];
 
-    onMounted(()=> {
-        console.log(props.playlist)
+    onBeforeMount(()=> {
+        //Set Description Value
+        if(props.mode === 'edit' || props.mode === 'duplicate') {
+            state.thumb = props.playlist.thumbnail_url;
+            state.name = props.playlist.name;
+            state.description = props.playlist.description;
+            state.category = props.playlist.category;
+        }
     })
 </script>
 
@@ -141,23 +195,25 @@
             <ThumbnailUpload :token="token" type='playlist' :imgUrl="playlist.thumbnail_url ? playlist.thumbnail_url : ''"/>
             <div class="tw-flex tw-flex-col tw-w-full">
                 <InputLabel 
-                    :initialValue="playlist.name ? playlist.name : ''"
+                    :initialValue="playlist.name ? playlist.name : state.name"
                     placeholder="Playlist Title" 
                     :remove-default-input-styles="true"
                     inputOverride="tw-mb-[20px] placeholder:tw-text-[#0D0D0D] dark:placeholder:tw-text-white tw-text-[#0D0D0D] dark:tw-text-white tw-w-full tw-bg-[#eeeeef] dark:tw-bg-[#002039]/90 tw-px-[14px] tw-box-border tw-border-[#D4D4D8] dark:tw-border-[#445F74] tw-h-[42px] tw-rounded-[63px] tw-py-[9px] tw-px-[13px] tw-text-[14px]"
-                    @onChange="handleTitleChange" />
-                <Dropdown :sortedOptions="sortedOptions" 
-                          placeholderLabel="Playlist Category"
-                          @onChange="handleCategoryChange" 
-                          :selected-value="playlist.category ? playlist.category : category" 
+                    @onChange="handleTitleChange" 
+                />
+                <Dropdown 
+                    :sortedOptions="sortedOptions" 
+                    :selected-value="playlist.category ? playlist.category : state.category" 
+                    placeholderLabel="Playlist Category"
+                    @onChange="handleCategoryChange" 
                 />
                 <textarea 
-                    @change="handleDescriptionChange" 
                     id="playlist-description" 
                     name="playlistDescription"
                     placeholder="Playlist Description"
-                    class="tw-no-scrollbar tw-text-sm tw-h-[93px] tw-rounded-[6px] placeholder:tw-text-[#0D0D0D] dark:placeholder:tw-text-white tw-text-[#0D0D0D] dark:tw-text-white tw-bg-[#eeeeef] dark:tw-bg-[#002039]/90 tw-mt-[20px] tw-box-border tw-border-[#D4D4D8] dark:tw-border-[#445F74]"
-                    v-model="playlist.description"
+                    class="tw-no-scrollbar tw-text-sm tw-h-[93px] tw-rounded-[6px] placeholder:tw-text-[#0D0D0D] dark:placeholder:tw-text-white tw-text-[#0D0D0D] dark:tw-text-white tw-bg-[#eeeeef] dark:tw-bg-[#002039]/90 tw-mt-[20px] tw-box-border tw-border-[#D4D4D8] dark:tw-border-[#445F74] tw-py-[9px]"
+                    v-model="state.description"
+                    @change="handleDescriptionChange" 
                 ></textarea>
                 <div class="tw-pt-[30px] tw-flex tw-justify-end">
                     <button @click="() => emit('onCloseModal')" class="tw-btn-primary tw-btn-small tw-text-center tw-justify-center tw-items-center dark:tw-text-white tw-text-[#0D0D0D] hover:tw-bg-slate-200/50 dark:hover:tw-bg-white/10">CANCEL</button>

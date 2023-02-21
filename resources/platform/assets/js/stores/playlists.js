@@ -12,6 +12,7 @@ export const usePlaylistsStore = defineStore({
       },
       loadingPlaylists: false,
       loadingPinnedPlaylists: false,
+      playlistsQuantity: 0,
     }
   },
   getters: {
@@ -43,16 +44,16 @@ export const usePlaylistsStore = defineStore({
           }
         })
     },
-    async getPlaylists(brand, token) {
-      PlaylistService.getCurrentUserPlaylists(brand, 1, null, token)
-        .then((response) => {
-          if(response.status === 200) {    
-            this.playlists = response.data;
-            this.loadingPlaylists = false;
-          } else {
-            console.log('there was an error with getPlaylist')
-          }
-        })
+    async getPlaylists(payload, token) {
+      const response = await PlaylistService.getCurrentUserPlaylists(payload, token);
+      try {
+        this.loadingPlaylists = false;
+        this.playlists = await response.data.data;
+        this.playlistsQuantity = await response.data.meta.totalResults;
+      } catch {
+        console.log('there was an error with your request');
+        //hard reload?
+      }
     },
 
     //Static Updates
@@ -60,12 +61,12 @@ export const usePlaylistsStore = defineStore({
       this.playlists = this.playlists.filter(p => {
         return p.id !== playlist.id;
       })
+      this.playlistsQuantity--;
     },
     pinPlaylist(list) {
       //Pin in Catalog      
       let playlist = this.playlists.find(p => p === list)
       playlist.pinned = true;
-    
       //Pin in Sidebar
       this.pinnedPlaylists.push(list)
     },
@@ -73,7 +74,6 @@ export const usePlaylistsStore = defineStore({
       //Unpin from Catalog
       let playlist = this.playlists.find(p => p.id === id)
       playlist.pinned = false;
-      
       //Unpin from Sidebar
       this.pinnedPlaylists = this.pinnedPlaylists.filter(p => {
         return p.id !== id;

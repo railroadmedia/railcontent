@@ -34,13 +34,13 @@
 
     const handleUnpinPlaylists = () => {
         if(unpinnedPlaylists.length) {
+
             unpinnedPlaylists.forEach(p => {
-                PlaylistService.unpinPlaylist(p, brand, token)
-                    .then((response) => {
-                        if(response.status === 200) { 
-                            playlistsStore.unpinPlaylist(p)
-                        }
-                    })
+                //Remove Pin First
+                playlistsStore.unpinPlaylist(p)
+                //Then send unpin request
+                PlaylistService.unpinPlaylist(p, brand, token);
+                //fail silently?
             })
             //Confirmation
             window.shownotification({

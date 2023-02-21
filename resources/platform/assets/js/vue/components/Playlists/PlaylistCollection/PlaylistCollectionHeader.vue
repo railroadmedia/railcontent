@@ -17,8 +17,8 @@
         backgroundImage="https://musora-web-platform.s3.amazonaws.com/playlists/playlist-background.png"
     >
         <template v-slot:content> 
-            <p v-if="playlistsStore.playlists.length" class="tw-uppercase tw-text-sm tw-font-bold tw-text-[#7E9AB1]">
-                {{ playlistsStore.playlists.length }} Playlists    
+            <p v-if="playlistsStore.playlistsQuantity" class="tw-uppercase tw-text-sm tw-font-bold tw-text-[#7E9AB1]">
+                {{ playlistsStore.playlistsQuantity }} Playlists    
             </p> 
         </template>
         <template v-slot:ctas> 

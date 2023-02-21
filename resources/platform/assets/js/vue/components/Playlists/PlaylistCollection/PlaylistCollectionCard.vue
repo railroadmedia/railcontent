@@ -247,17 +247,16 @@
                 </p>
                 <!--category / duration -->
                 <div class="tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-sm tw-flex" 
-                    :class="props.isListView ? 'tw-col-span-3 tw-w-full tw-pl-2 md:tw-pl-0 md:tw-text-base' : ''"
+                    :class="props.isListView ? 'tw-col-span-10 md:tw-col-span-3 tw-w-full tw-pl-2 md:tw-pl-0 md:tw-text-base' : ''"
                 >
                     <div :class="props.isListView ? 'md:tw-w-1/2 tw-inline-flex tw-items-center tw-justify-center' : '' ">
-                        <span v-if="list.category">
+                        <span v-if="list.category" :class="{'tw-text-center' : props.isListView}">
                             {{ list.category }}
                             <span class="tw-mx-1 tw-leading-none" :class="props.isListView ? 'md:tw-hidden' : '' ">|</span>
-                        </span>
-                        
+                        </span>  
                     </div> 
-                    <div :class="props.isListView ? 'md:tw-w-1/2 md:tw-w-1/2 tw-text-center' : '' ">
-                        {{ list.duration || "0:00" }}
+                    <div :class="props.isListView ? 'md:tw-w-1/2 md:tw-w-1/2 tw-inline-flex tw-justify-center tw-items-center' : '' ">
+                        <span>{{ list.duration || "0:00" }}</span>
                     </div>
                 </div>
             </div>
