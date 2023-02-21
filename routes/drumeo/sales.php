@@ -64,19 +64,19 @@ Route::domain('{drumeoDomain}')
                 ]);
         }
     );
-    Route::group(['prefix' => 'affiliate' ],
-        function () {
-            Route::get('/{page?}', SalesController::class . '@affiliates')
-                ->whereIn('page', [
-                    'andrewrooney', 'asobergirlsguide', 'bhcollective', 'bryanforcedrums', 'drummingreview', 'drumninja', 'electronicdrumadvisor', 'jessica-burdeaux', 'kylemcgrail', 'leyandrums', 'lindseyward', 'musicindustryhowto', 'rickyficarelli', 'tobines', '66samus', 'adriendrums', 'alejandrosifuentes', 'brandonscott', 'cooperdrummer', 'davidcola', 'drumhelper', 'joshcrawford', 'leviclay', 'linaanderberg', 'rdavidr', 'robbrown', 'the8bitdrummer', 'worshipdrummer', 'wyattstav', 'zackgrooves'
-                ]);
-        }
-    );
     Route::group(['prefix' => 'ambassador' ],
         function () {
             Route::get('/{page?}', SalesController::class . '@ambassador')
                 ->whereIn('page', [
                     'cobus', 'rocker-girl', 'wojtek'
+                ]);
+        }
+    );
+    Route::group(['prefix' => 'affiliate' ],
+        function () {
+            Route::get('/{page?}', SalesController::class . '@affiliates')
+                ->whereIn('page', [
+                    'andrewrooney', 'asobergirlsguide', 'bhcollective', 'bryanforcedrums', 'drummingreview', 'drumninja', 'electronicdrumadvisor', 'jessica-burdeaux', 'kylemcgrail', 'leyandrums', 'lindseyward', 'musicindustryhowto', 'rickyficarelli', 'tobines', '66samus', 'adriendrums', 'alejandrosifuentes', 'brandonscott', 'cooperdrummer', 'davidcola', 'drumhelper', 'joshcrawford', 'leviclay', 'linaanderberg', 'rdavidr', 'robbrown', 'the8bitdrummer', 'worshipdrummer', 'wyattstav', 'zackgrooves'
                 ]);
         }
     );
