@@ -35,7 +35,7 @@
                     //show success message
                     window.shownotification({
                         icon: 'fa-not-equal',
-                        text: `${props.playlist.name} was removed from your library.`
+                        text: `'${props.playlist.name}' was removed from your library.`
                     })
                     //Close Modal
                     emit('onCloseModal')

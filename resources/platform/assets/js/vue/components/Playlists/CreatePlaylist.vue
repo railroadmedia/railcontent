@@ -76,7 +76,7 @@
                     //show success message
                     window.shownotification({
                         icon: 'playlist',
-                        text: `${title.value} was added to your library.`
+                        text: `'${state.name}' was added to your library.`
                     })
                     //load Playlists
                     playlistsStore.getPlaylists({ brand: brand, page: 1, limit: null }, token);       
