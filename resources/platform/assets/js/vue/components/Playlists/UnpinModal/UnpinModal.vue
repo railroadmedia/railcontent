@@ -62,7 +62,7 @@
             <h2 class="tw-text-[24px] tw-font-bold tw-w-full  tw-text-[#0D0D0D] dark:tw-text-white tw-text-center tw-mb-4">
                 You've reached your Pinned Playlist limit
             </h2>
-            <p class="dark:tw-text-white tw-text-center tw-text-sm">You have reached your Sidebar Pinned List Limit. Unpin one or more of your playlists to free up space and pin <span :class="`tw-text-${brand}`" class="tw-font-bold">{{ props.playlist.name }}</span></p>
+            <p class="dark:tw-text-white tw-text-center tw-text-sm">You have reached your Sidebar Pinned List Limit. Unpin one or more of your playlists to free up space and pin <span :class="`tw-text-${brand}`" class="tw-font-bold tw-whitespace-nowrap">{{ props.playlist.name }}</span></p>
         </div>
         <!-- Playlists -->
         <section class="tw-w-full tw-relative tw-flex tw-flex-col">

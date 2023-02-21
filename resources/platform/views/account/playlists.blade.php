@@ -7,7 +7,9 @@
 @section('content')
 
     {{-- Playlist Header --}}
-    <playlist-collection-header/></playlist-collection-header>
+    <playlist-collection-header
+        :playlist-count="{{ $playlistsNumber }}"
+    /></playlist-collection-header>
 
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white tw-pb-14">
         <div class="tw-flex tw-flex-col">
@@ -16,6 +18,7 @@
                 {{-- Playlist Catalog --}}
                 <playlist-collection-catalog
                     {{-- :brand="{{ $brand }}" --}}
+                    :playlist-count="{{ $playlistsNumber }}"
                     :playlists="{{ json_encode($playlists) }}"
                 ></playlist-collection-catalog>
 

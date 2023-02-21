@@ -9,6 +9,7 @@
     {{-- Playlist Header --}}
     <playlist-header
         :playlist="{{ json_encode($playlist) }}"
+        :lessons="{{ $listLessons }}"
         :brand="{{ $brand }}"
     /></playlist-header>
 

@@ -37,7 +37,9 @@
     }
 </script>
 <template>
-    <div class="tw-relative tw-h-[52px] tw-flex tw-flex-row tw-w-full tw-items-center tw-transition-colors tw-py-0.5 even:tw-bg-[#F9F9F9] dark:even:tw-bg-[#00101D] tw-rounded">
+    <div class="tw-relative tw-h-[52px] tw-flex tw-flex-row tw-w-full tw-items-center tw-transition-colors tw-py-0.5 even:tw-bg-[#F9F9F9] dark:even:tw-bg-[#00101D] hover:tw-bg-slate-200/50 dark:hover:tw-bg-white/10 tw-rounded tw-cursor-pointer"
+         @click.prevent="handleUnpin()"
+    >
         <!-- Playlist thumbnail -->
         <div class="tw-relative tw-overflow-hidden tw-bg-white dark:tw-bg-[#081825] tw-aspect-square tw-h-[48px] tw-w-[48px] tw-rounded tw-shrink-0">
             <img
@@ -86,7 +88,6 @@
             <button class="tw-inline-flex tw-items-center tw-transition-colors tw-px-4 xl:tw-px-8" 
                     :class="state.isPinned ? `tw-text-${brand}` : 'dark:tw-text-[#7E9AB1] tw-text-[#445F74]/50'"
                     title="Unpin Playlist"
-                    @click.prevent="handleUnpin()"
             >
                 <musora-icon icon-name="tack" class="tw-w-[24px] tw-h-[24px] tw-mx-auto tw-hidden md:tw-flex" />
             </button>

@@ -1,6 +1,16 @@
 <script setup>
+    import { onBeforeMount, onMounted } from 'vue';
     import platformHeader from "../../PlatformHeader/platform-header.vue";
     import { usePlaylistsStore } from '../../../../stores/playlists';
+
+
+    //-----------Props-----------//
+    const props = defineProps({
+        playlistCount: {
+            type: Number,
+            default: 0
+        },
+    });
 
     //Methods
     const handleCreatePlaylist = () => {
@@ -9,6 +19,14 @@
     
     //Pinia Stores
     const playlistsStore = usePlaylistsStore();
+
+    //lifecycle hooks
+    onBeforeMount(()=> {
+        playlistsStore.playlistsQuantity = props.playlistCount;
+    })
+    onMounted(()=> {
+        console.log(props.playlistCount)
+    })
 </script>
 <template>
     <platform-header

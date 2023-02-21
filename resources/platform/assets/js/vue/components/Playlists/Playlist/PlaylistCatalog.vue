@@ -5,7 +5,6 @@
     import PlaylistCollectionControls from './PlaylistCollectionControls.vue';
     import PlaylistCollectionCard from './PlaylistCollectionCard.vue';
     import MusoraIcon from '../../MusoraIcons/MusoraIcon.vue';
-    import Pagination from '../../Pagination/Pagination.vue';
 
     //Props
     const props = defineProps({
@@ -16,22 +15,17 @@
         playlists: {
             type: Array,
             default: []
-        },
-        playlistCount: {
-            type: Number,
-            default: 0
         }
     })
     
     //Computed Props
     const hasPlaylists = computed(() => {
-        return props.playlistCount && playlistsStore.playlists.length ? true : false;
+        return playlistsStore.playlists.length > 0 ? true : false;
     })
 
     //Reactive Data
     const state = reactive({ 
-        isListView: false,
-        showControls: true, 
+        isListView: false 
     })
 
     //Inject
@@ -47,17 +41,13 @@
         if(localStorage.getItem('playlistIsListView')) {
             state.isListView = JSON.parse(localStorage.getItem('playlistIsListView'));
         }
-        //show/hide controls on load
-        state.showControls = props.playlistCount > 0 ? true : false;
-        console.log(state.showControls)
-        
     });
 
     onMounted(()=> {
         //load Playlists
-        if(props.playlistCount >= 10) {
-            playlistsStore.playlists = props.playlists;
-        } else {
+        console.log(props.playlists);
+        
+        if(props.playlists !== 0) {
             playlistsStore.loadingPlaylists = true;
             playlistsStore.getPlaylists({ brand: brand, page: 1, limit: null }, token); 
         }
@@ -87,7 +77,6 @@
         <div v-if="hasPlaylists" class="tw-w-full">
             <!-- Controls -->
             <PlaylistCollectionControls 
-                v-if="state.showControls"
                 :brand="brand"
                 :isListView="state.isListView"
                 @onUpdateListView="(val) => state.isListView = val"
@@ -127,31 +116,22 @@
                     :brand="brand"
                 />    
             </section>
-
-            <!-- Pagination -->
-            <Pagination 
-                :brand="brand"
-                :item-quantity="playlistsStore.playlistsQuantity"
-                :limit="10"
-                @onPageChange="console.log('New Page is', val)"
-            />
         </div>
         
         <!-- Skeleton Loader -->
         <div v-if="playlistsStore.loadingPlaylists" class="tw-w-full tw-animate-pulse" :class="state.isListView ? 'tw-flex tw-flex-col' : 'tw-grid tw-grid-cols-2 sm:tw-grid-cols-3 lg:tw-grid-cols-4 xl:tw-grid-cols-5 tw-gap-4 tw-mt-4' ">
-            <div v-for="(n, index) in (playlistsStore.playlists.length)" 
+            <div v-for="n in 10" 
                     :key="n" 
                     class="tw-flex tw-w-full "
                     :class="state.isListView ? 'tw-h-[52px] tw-flex-row tw-items-center tw-transition-colors tw-py-0.5 even:tw-bg-[#E6E7E9] dark:even:tw-bg-[#081825]' : 'tw-flex-col'"
             >
-                <template v-if="index <= 10">
-                    <div class="tw-w-full tw-bg-[#E6E7E9] dark:tw-bg-[#081825] tw-aspect-square"
-                         :class="state.isListView ? 'tw-hidden' : 'tw-rounded-lg'"
-                    ></div>
-                    <div :class="state.isListView ? 'tw-hidden' : 'tw-mt-2 tw-w-full tw-bg-[#E6E7E9] dark:tw-bg-[#081825] tw-aspect-square tw-h-[44px] tw-rounded-lg' "></div>
-                </template>
+                <div class="tw-w-full tw-bg-[#E6E7E9] dark:tw-bg-[#081825] tw-aspect-square"
+                        :class="state.isListView ? 'tw-hidden' : 'tw-rounded-lg'"
+                ></div>
+                <div :class="state.isListView ? 'tw-hidden' : 'tw-mt-2 tw-w-full tw-bg-[#E6E7E9] dark:tw-bg-[#081825] tw-aspect-square tw-h-[44px] tw-rounded-lg' "></div>
             </div>
-        </div>       
+        </div>
+        
 
     </main>
 </template>
