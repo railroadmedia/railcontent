@@ -300,7 +300,7 @@
 {{--                </a>--}}
 {{--            </div>--}}
         </div>
-        <a href="/new-year#customize-anchor" class="text-pianote"><h6><strong><u>OR FREE WITH A PIANOTE MEMBERSHIP</u></strong></h6></a>
+{{--        <a href="/new-year#customize-anchor" class="text-pianote"><h6><strong><u>OR FREE WITH A PIANOTE MEMBERSHIP</u></strong></h6></a>--}}
     </section>
     <section class="content-section text-center" style="background: #00101D;">
         <div class="container mx-auto relative z-50">

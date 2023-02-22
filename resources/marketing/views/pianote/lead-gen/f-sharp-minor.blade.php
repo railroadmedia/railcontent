@@ -116,7 +116,7 @@
             <input id="inf_field_Email" class="w-full" name="email" type="email" placeholder="Email Address..." required/>
         </div>
         <div class="infusion-submit w-full sm:pl-3 float-left sm:w-5/12">
-            <button class="submit" type="submit">Send Me Free Content</button>
+            <button class="submit" type="submit">Get Backing Track</button>
         </div>
         <input name="inf_form_xid" type="hidden" value="PianoteEngagementTriggerFSharpMinorWebForm">
         <input name="tag_names_to_add[]" type="hidden" value="Pianote - Engagement - Trigger - F Sharp Minor - Web Form">

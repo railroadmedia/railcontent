@@ -20,7 +20,7 @@
             <div class="tw-flex tw-flex-col">
                 <a :href="settingsUrl" class="tw-btn-secondary tw-text-[#00101D] dark:tw-text-white">
                     <CogIcon class="tw-h-[22px] tw-w-[22px] tw-mr-[12px]" />
-                    My Settings
+                    Notification Settings
                 </a>
             </div>
             </div>
