@@ -15,12 +15,10 @@
             <div class="flex flex-column ph-1">
                 <div class="tw-flex tw-flex-row tw-justify-end">
                     <div class="flex flex-column grow pr-2 tw-w-full md:tw-max-w-[455px]">
-                        <input-label :showClearButton="true" placeholder="Search" inputName="term" id="sidebar-search"
-                            :removeDefaultInputStyles="true" @onChange="handleSearchChange" @onEnter="submitSearch($event)"
-                            :inputOverride="`
-                            tw-w-full no-label dark:placeholder:tw-text-white tw-bg-white dark:tw-bg-transparent tw-py-0 tw-h-[50px] tw-px-[25px] tw-rounded-full tw-border focus:tw-ring-0 focus:tw-outline-none tw-text-[#00101D] tw-border-[#D4D4D8] dark:tw-border-[#445F74] dark:tw-text-white
-                                                            `
-                            " clearButtonOverride="dark:tw-text-white" />
+                        <input id="catalogueSearch" v-model="searchTermInterface" ref="searchInput" type="text"
+                            name="search" autocomplete="off" placeholder="Search..."
+                            class="no-label dark:placeholder:tw-text-white tw-bg-white dark:tw-bg-transparent tw-py-0 tw-h-[50px] tw-px-[25px] tw-rounded-full tw-border focus:tw-ring-0 focus:tw-outline-none tw-text-[#00101D] tw-border-[#D4D4D8] dark:tw-border-[#445F74] dark:tw-text-white"
+                            @keydown.enter="submitSearch($event)">
                     </div>
 
                     <button class="tw-btn-primary tw-btn-circle tw-flex-shrink-0"
@@ -41,13 +39,11 @@
 </template>
 <script>
 import CatalogueFilter from './_CatalogueFilter.vue';
-import InputLabel from '../../../components/InputLabel/InputLabel.vue';
 
 export default {
     name: 'CatalogueSearch',
     components: {
         'catalogue-filter': CatalogueFilter,
-        'input-label': InputLabel,
     },
     props: {
         searchBarTitle: {
@@ -148,10 +144,6 @@ export default {
             if (isMobile.matches) {
                 e.target.blur()
             }
-        },
-        handleSearchChange(val) {
-            this.searchTermInterface = val;
-
         },
     },
 };
