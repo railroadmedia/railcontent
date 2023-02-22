@@ -23,6 +23,7 @@
             class="absolute object-cover w-full h-full top-0 left-0 z-[-2] transition-opacity opacity-0"
             loading="lazy"
             onload="this.classList.remove('opacity-0')"
+            alt="header bg"
         />
         <div class="container mx-auto relative z-0">
             <h1><strong>Contact Us</strong></h1>

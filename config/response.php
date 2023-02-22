@@ -1470,6 +1470,7 @@ return [
         'comment' => [
             'is_liked',
             'like_count',
+            'is_reported_by_viewer',
             'user_id',
             'id',
             'replies',

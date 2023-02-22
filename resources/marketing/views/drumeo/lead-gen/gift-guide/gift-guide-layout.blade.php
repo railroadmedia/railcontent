@@ -121,7 +121,7 @@
 
             @include("drumeo.lead-gen.gift-guide._item-card", [
                         "popularity" => "86",
-                        "price" => Prices::$cardMonth,
+                        "price" => 29,
                         "stockingStuffer" => "TRUE",
                         "itemURL" => "/drumshop/gift-card/",
                         "thumbnail" => "https://cdn.musora.com/image/fetch/w_600,q_auto:best/https:/d1923uyy6spedc.cloudfront.net/Drumeo-cart-2-1643147388.png",

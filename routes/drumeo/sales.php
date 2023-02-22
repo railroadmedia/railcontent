@@ -64,6 +64,14 @@ Route::domain('{drumeoDomain}')
                 ]);
         }
     );
+    Route::group(['prefix' => 'ambassador' ],
+        function () {
+            Route::get('/{page?}', SalesController::class . '@ambassador')
+                ->whereIn('page', [
+                    'cobus', 'rocker-girl', 'wojtek'
+                ]);
+        }
+    );
     Route::group(['prefix' => 'affiliate' ],
         function () {
             Route::get('/{page?}', SalesController::class . '@affiliates')

@@ -24,10 +24,10 @@
                 <p class="mt-4 mb-7">We make it easier to play the songs you love by combining great teachers, organized<br class="hidden md:inline">
                     lessons, and practical technology with student-centered communities.</p>
                 <div class="flex items-center justify-center">
-                    <a href="https://www.drumeo.com/" target="_blank"><img class="h-5 md:h-7 mx-1 md:mx-3 mb-2" data-cfsrc="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png"></a>
-                    <a href="https://www.pianote.com/" target="_blank"><img class="h-5 md:h-7 mx-1 md:mx-3" data-cfsrc="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://pianote.s3.amazonaws.com/logo/pianote-logo-red.png" src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://pianote.s3.amazonaws.com/logo/pianote-logo-red.png"></a>
-                    <a href="https://www.guitareo.com/" target="_blank"><img class="h-5 md:h-7 mx-1 md:mx-3" data-cfsrc="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://guitareo.s3.amazonaws.com/sales/guitareo-logo-green.png" src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://guitareo.s3.amazonaws.com/sales/guitareo-logo-green.png"></a>
-                    <a href="https://www.singeo.com/" target="_blank"><img class="h-5 md:h-7 mx-1 md:mx-3" data-cfsrc="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png" src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png"></a>
+                    <a href="https://www.drumeo.com/" target="_blank"><img class="h-5 md:h-7 mx-1 md:mx-3 mb-2" data-cfsrc="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="drumeo logo"></a>
+                    <a href="https://www.pianote.com/" target="_blank"><img class="h-5 md:h-7 mx-1 md:mx-3" data-cfsrc="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://pianote.s3.amazonaws.com/logo/pianote-logo-red.png" src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://pianote.s3.amazonaws.com/logo/pianote-logo-red.png" alt="pianote logo"></a>
+                    <a href="https://www.guitareo.com/" target="_blank"><img class="h-5 md:h-7 mx-1 md:mx-3" data-cfsrc="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://guitareo.s3.amazonaws.com/sales/guitareo-logo-green.png" src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://guitareo.s3.amazonaws.com/sales/guitareo-logo-green.png" alt="guitareo logo"></a>
+                    <a href="https://www.singeo.com/" target="_blank"><img class="h-5 md:h-7 mx-1 md:mx-3" data-cfsrc="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png" src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png" alt="singeo logo"></a>
                 </div>
             </div>
 
@@ -55,6 +55,7 @@
                         src="https://cdn.musora.com/image/fetch/q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/method-text.svg"
                         loading="lazy"
                         onload="this.classList.remove('opacity-0')"
+                        alt="method"
                     >
                     <h4 class="leading-tight mt-3 md:mt-5 mb-1 md:mb-3"><strong>Step-By-Step<br class="hidden md:inline lg:hidden"> Curriculum</strong></h4>
                     <p class="text-navy leading-normal">We simplify your learning experience with step-by-step video lessons you can trust -- always taught by world-class teachers.<br><br>
@@ -71,6 +72,7 @@
                         src="https://cdn.musora.com/image/fetch/q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/songs-text.svg"
                         loading="lazy"
                         onload="this.classList.remove('opacity-0')"
+                        alt="songs"
                     >
                     <h4 class="leading-tight mt-3 md:mt-5 mb-1 md:mb-3"><strong>Play The Songs<br class="hidden md:inline lg:hidden"> You Love</strong></h4>
                     <p class="text-navy leading-normal">Nothing is better than playing real music. Students gain access to practice tools for playing popular songs from all eras and styles.<br><br>
@@ -86,12 +88,14 @@
                         src="https://musora-center.s3.amazonaws.com/homepage/2021/coaches.png"
                         loading="lazy"
                         onload="this.classList.remove('opacity-0')"
+                        alt="coaches icon"
                     ><br>
                     <img
                         class="filter invert h-4 md:h-6 transition-opacity opacity-0"
                         src="https://cdn.musora.com/image/fetch/q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/coaches-text.svg"
                         loading="lazy"
                         onload="this.classList.remove('opacity-0')"
+                        alt="coaches"
                     >
                     <h4 class="leading-tight mt-3 md:mt-5 mb-1 md:mb-3"><strong>Motivation<br class="hidden md:inline lg:hidden"> &amp; Support</strong></h4>
                     <p class="text-navy leading-normal">Get direct access to reach teachers whenever you have a question -- along with friendly peers and engaging community events.<br><br>
@@ -111,6 +115,7 @@
             class="absolute object-cover object-center transition-opacity opacity-0 inset-0 w-full h-full"
             loading="lazy"
             onload="this.classList.remove('opacity-0')"
+             alt="drumeo bg"
         />
         <div class="container mx-auto relative z-0">
             <img
@@ -118,6 +123,7 @@
                 src="https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
+                alt="drumeo logo"
             >
             <h3 class="mt-3 mb-7 md:mb-10 lg:mb-14 leading-tight"><strong>The world’s largest<br class="inline md:hidden"> drum lessons community.</strong></h3>
             <div class="flex flex-wrap md:flex-nowrap items-center justify-center">
@@ -126,6 +132,7 @@
                     src="https://cdn.musora.com/image/fetch/w_1100,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/drumeo-graphic.png"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
+                    alt="drumeo graphic"
                 >
                 <div class="w-full md:w-auto mt-5 md:mt-0 px-6 md:pr-0 md:pl-10 lg:pl-12">
                     <h6 class="leading-relaxed"><strong class="text-drumeo"><i class="fas fa-trophy"></i></strong> award-winning lessons.<br>
@@ -147,6 +154,7 @@
             class="absolute object-cover object-center transition-opacity opacity-0 inset-0 w-full h-full"
             loading="lazy"
             onload="this.classList.remove('opacity-0')"
+             alt="pianote bg"
         />
         <div class="container mx-auto relative z-0">
             <img
@@ -154,6 +162,7 @@
             src="https://pianote.s3.amazonaws.com/logo/pianote-logo-red.png"
             loading="lazy"
             onload="this.classList.remove('opacity-0')"
+            alt="pianote logo"
         >
             <h3 class="mt-3 mb-7 md:mb-10 lg:mb-14 leading-tight"><strong>Learn the piano anytime<br class="inline md:hidden"> with real teachers.</strong></h3>
             <div class="flex flex-wrap md:flex-nowrap items-center justify-center">
@@ -162,6 +171,7 @@
                     src="https://cdn.musora.com/image/fetch/w_1100,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/pianote-graphic.png"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
+                    alt="pianote graphic"
                 >
                 <div class="w-full md:w-auto mt-5 md:mt-0 px-6 md:pr-0 md:pl-10 lg:pl-12">
                     <h6 class="leading-relaxed"><strong class="text-pianote"><i class="fas fa-heart"></i></strong> technology meets tradition.<br>
@@ -184,6 +194,7 @@
             class="absolute object-cover object-center transition-opacity opacity-0 inset-0 w-full h-full"
             loading="lazy"
             onload="this.classList.remove('opacity-0')"
+            alt="guitareo bg"
         />
         <div class="container mx-auto relative z-0">
             <img
@@ -191,6 +202,7 @@
                 src="https://guitareo.s3.amazonaws.com/sales/guitareo-logo-green.png"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
+                alt="guitareo logo"
             >
             <h3 class="mt-3 mb-7 md:mb-10 lg:mb-14 leading-tight"><strong>The first guitar lessons designed<br class="inline md:hidden"> around real-world missions.</strong></h3>
             <div class="flex flex-wrap md:flex-nowrap items-center justify-center">
@@ -199,6 +211,7 @@
                     src="https://cdn.musora.com/image/fetch/w_1100,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/guitareo-graphic.png"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
+                    alt="guitareo graphic"
                 >
                 <div class="w-full md:w-auto mt-5 md:mt-0 px-6 md:pr-0 md:pl-10 lg:pl-12">
                     <h6 class="leading-relaxed"><strong class="text-guitareo"><i class="fas fa-guitar"></i></strong> just released in 2021.<br>
@@ -220,6 +233,7 @@
                 class="absolute object-cover object-center transition-opacity opacity-0 inset-0 w-full h-full"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
+                alt="singeo bg"
             />
         <div class="container mx-auto relative z-0">
             <img
@@ -227,6 +241,7 @@
                 src="https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
+                alt="singeo logo"
             >
             <h3 class="mt-3 mb-7 md:mb-10 lg:mb-14 leading-tight"><strong>Your start-to-finish guide<br class="inline md:hidden"> to confident singing.</strong></h3>
             <div class="flex flex-wrap md:flex-nowrap items-center justify-center">
@@ -235,6 +250,7 @@
                     src="https://cdn.musora.com/image/fetch/w_1100,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/singeo-graphic.png"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
+                    alt="singeo graphic"
                 >
                 <div class="w-full md:w-auto mt-5 md:mt-0 px-6 md:pr-0 md:pl-10 lg:pl-12">
                     <h6 class="leading-relaxed"><strong class="text-singeo"><i class="fas fa-microphone-stand"></i></strong> just released in 2021.<br>

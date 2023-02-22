@@ -16,6 +16,7 @@ Route::domain('{pianoteDomain}')
     Route::get('/weekly-email', [LeadGenController::class, 'weeklyemail']);
     Route::get('/weeklyemail', [LeadGenController::class, 'weeklyemail2']);
     Route::get('/minor-blues', [LeadGenController::class, 'minorBlues']);
+    Route::get('/f-sharp-minor', [LeadGenController::class, 'fSharpMinor']);
     Route::get('/pentatonic-scale', [LeadGenController::class, 'pentatonicScale']);
     Route::get('/recitals', [LeadGenController::class, 'recitals']);
     Route::get('/classical-cohort-1', [LeadGenController::class, 'classicalcohort1']);

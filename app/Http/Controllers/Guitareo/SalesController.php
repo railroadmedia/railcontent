@@ -135,7 +135,7 @@ class SalesController extends BaseController
 
     public function products(Request $request, $domain, $page = null)
     {
-        return view('guitareo.products.' . $page);
+        return view('guitareo.products.' . $page, [ 'theme' => 'guitareo' ]);
 
         throw new NotFoundHttpException();
     }
