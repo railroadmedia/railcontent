@@ -780,13 +780,12 @@
                 @else
 
                     <div class="flex flex-wrap sm:flex-nowrap items-center text-left w-full max-w-3xl mx-auto xl:w-7/12">
-                        <a href="/ecommerce/add-to-cart?products[30-day-drummer-2]=1&products[practicepad]=1&products[Drumeo-VaterSticks]=1&products[drumeo_access_30-days]=1&locked=true" class="px-5 sm:px-7 lg:px-9 py-7 sm:py-9 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-1/2" style="background-color:#d4eaff;">
+                        <a href="/ecommerce/add-to-cart?products[30-day-drummer-2]=1&products[Drumeo-VaterSticks]=1&products[drumeo_access_30-days]=1&locked=true" class="px-5 sm:px-7 lg:px-9 py-7 sm:py-9 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-1/2" style="background-color:#d4eaff;">
                             <h3><strong>30-Day Drummer</strong></h3>
-                            <p class="text-sm mt-2 mb-5">Just The Course + 3 Bonuses worth $121.95.</p>
+                            <p class="text-sm mt-2 mb-5">Just The Course + 2 Bonuses worth $42.94.</p>
                             <h2 class="inline-block"><strong class="text-4xl">${{ 97 }}</strong></h2> <p class="inline-block text-xs">one time payment.</p><br>
                             <div class="join blue smaller my-4">ENROLL NOW</div>
                             <ul class="list-disc ml-10">
-                                <li class="text-sm relaxed"><span class="text-drumeo">Free</span> P4 Practice Pad</li>
                                 <li class="text-sm relaxed"><span class="text-drumeo">Free</span> Drumsticks</li>
                                 <li class="text-sm relaxed"><span class="text-drumeo">Free</span> 1-Month Drumeo Access</li>
                             </ul>
@@ -831,7 +830,7 @@
 
     <section class="bg-[#DEEFFF] py-6 md:py-10 text-center">
         <p class="max-w-2xl px-4 md:px-2 leading-loose">
-            <i class="fas fa-info-circle text-drumeo" aria-hidden="true"></i> <b>Shipping Disclaimer –</b> Your pad & sticks might not arrive by the course start date. We’ll do everything on our end to make it happen – the rest is up to the shipping gods.
+            <i class="fas fa-info-circle text-drumeo" aria-hidden="true"></i> <b>Shipping Disclaimer –</b> Your sticks might not arrive by the course start date. We’ll do everything on our end to make it happen – the rest is up to the shipping gods.
         </p>
     </section>
 

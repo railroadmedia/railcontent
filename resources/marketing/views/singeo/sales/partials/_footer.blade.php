@@ -42,11 +42,11 @@
         display: inline-block;
         margin-right: 2%;
         margin-top: 10px;" href="https://apps.apple.com/us/app/musora/id1619053766?ppid=101a6930-1058-4aae-9584-1a25cec367a0" target="_blank">
-                <img src="https://cdn.musora.com/image/fetch/w_260,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/app/download-on-app-store-button.png" alt="app store icon"></a>
+                <img src="https://dpwjbsxqtam5n.cloudfront.net/app/download-on-app-store-button.png" alt="app store icon"></a>
             <a style="width: 48%;max-width:130px;
         display: inline-block;
         margin-top: 10px;" href="https://play.google.com/store/apps/details?id=com.musoraapp&listing=singeo_previews" target="_blank">
-                <img src="https://cdn.musora.com/image/fetch/w_260,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/app/google-play-button.png" alt="google play icon"></a>
+                <img src="https://dpwjbsxqtam5n.cloudfront.net/app/google-play-button.png" alt="google play icon"></a>
         </div>
         <div class="footer-link-wrap">
             <h1>Resources</h1>
@@ -79,9 +79,9 @@
             @if(empty($minimal))
                 <p><a href="https://goo.gl/maps/c4JxakSmnjB2" target="_blank">107-31265 Wheel Ave. Abbotsford,<br class="mobile-only"> BC, V2T 6H2 Canada</a><br>
                     <a href="tel:+18004398921">Toll Free: 1-800-439-8921</a> / <br class="mobile-only"><a href="tel:+16048557605">Direct: 1-604-855-7605</a> / <br class="mobile-only"><a href="{{ get_musora_brand_base_url() }}/contact">Contact Us</a></p>
-                <a href="https://www.youtube.com/c/singeoofficial" target="_blank" class="inline-flex items-center justify-center social-media youtube"><i class="fab fa-youtube"></i></a>
-                <a href="https://www.facebook.com/singeoofficial/" target="_blank" class="inline-flex items-center justify-center social-media facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://www.instagram.com/singeoofficial/" target="_blank" class="inline-flex items-center justify-center social-media instagram"><i class="fab fa-instagram"></i></a>
+                <a aria-label="Youtube" href="https://www.youtube.com/c/singeoofficial" target="_blank" class="inline-flex items-center justify-center social-media youtube"><i class="fab fa-youtube"></i></a>
+                <a aria-label="Facebook" href="https://www.facebook.com/singeoofficial/" target="_blank" class="inline-flex items-center justify-center social-media facebook"><i class="fab fa-facebook-f"></i></a>
+                <a aria-label="Instagram" href="https://www.instagram.com/singeoofficial/" target="_blank" class="inline-flex items-center justify-center social-media instagram"><i class="fab fa-instagram"></i></a>
             @endif
 
             <p class="tiny">Musora Media, Inc. © {{ date('Y') }} - &nbsp; <a href="/terms">Terms</a>&nbsp;&nbsp;/&nbsp;&nbsp;<a href="/privacy">Privacy</a>&nbsp;&nbsp;/&nbsp;&nbsp;<a href="https://www.musora.com/careers">Careers</a>&nbsp;&nbsp;/&nbsp;&nbsp;<a href="https://www.musora.com/brand">Brand Guide</a></p>

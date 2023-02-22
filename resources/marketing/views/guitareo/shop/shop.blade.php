@@ -87,7 +87,7 @@
     <header class="drum-shop-header" style="background-image:url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://guitareo.s3.amazonaws.com/sales/promos/black-friday/shop-bg.jpg);">
         <div class="container mx-auto relative z-10">
             <div class="px-2 md:px-3">
-                <img class="logo" src="https://guitareo.s3.amazonaws.com/sales/guitareo-logo-green.png">
+                <img class="logo" src="https://guitareo.s3.amazonaws.com/sales/guitareo-logo-green.png" alt="guitareo logo">
                 <h1><strong>SHOP</strong></h1>
             </div>
         </div>
@@ -153,25 +153,24 @@
         {{--        @include('_partials.layout.holiday.bundle-cards')--}}
         <section class="grid-view category-section" data-category="lessons">
             <ul class="container mx-auto fixed-cards text-center lg:text-left">
-                @foreach($items as $item){
-                @include('drumeo.drumshop._partials._drum-shop-card', [
-                    "sku" => $item->sku,
-                    "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $item->slug ),
-                    "thumbnail" => $item->thumbnail,
-                    "packLogo" => $item->thumbnail_logo,
-                    "badgeText" => $item->badge_text,
-                    "title" => $item->name,
-                    "packAuthor" => $item->instructor_name ?? 'Guitareo',
-                    "cardDescription" => $item->short_desc,
-                    "includedEdge" => $item->included_edge,
-                    "fullPrice" => $item->price,
-                    "price" => $item->discounted_price,
-                    "category" => strtolower($item->productType->name),
-                    "sizes" => $item->sizes,
-                    "soldOut" => (!empty($products[$item->sku]) && $item->productType->name !== 'Lessons') ? $products[$item->sku]->getStockAvailability() === 0 : $item->sold_out,
-                    "size_case_sensitive" => $item->size_case_sensitive,
-                ])
-                }
+                @foreach($items as $item)
+                    @include('drumeo.drumshop._partials._drum-shop-card', [
+                        "sku" => $item->sku,
+                        "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $item->slug ),
+                        "thumbnail" => $item->thumbnail,
+                        "packLogo" => $item->thumbnail_logo,
+                        "badgeText" => $item->badge_text,
+                        "title" => $item->name,
+                        "packAuthor" => $item->instructor_name ?? 'Guitareo',
+                        "cardDescription" => $item->short_desc,
+                        "includedEdge" => $item->included_edge,
+                        "fullPrice" => $item->price,
+                        "price" => $item->discounted_price,
+                        "category" => strtolower($item->productType->name),
+                        "sizes" => $item->sizes,
+                        "soldOut" => (!empty($products[$item->sku]) && $item->productType->name !== 'Lessons') ? $products[$item->sku]->getStockAvailability() === 0 : $item->sold_out,
+                        "size_case_sensitive" => $item->size_case_sensitive,
+                    ])
                 @endforeach
 
             </ul>

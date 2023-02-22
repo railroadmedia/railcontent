@@ -22,7 +22,6 @@
         <i class="fal fa-times fa-2x fixed top-16 right-2 text-white cursor-pointer text-5xl z-150"></i>
         <div
             x-on:click.stop
-            x-trap.noscroll.inert="{{ $name }}"
             class="relative overflow-y-visible"
         >
             <!-- Content -->
