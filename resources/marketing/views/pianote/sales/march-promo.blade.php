@@ -132,13 +132,13 @@
             "trialVersion" => true,
             "joinUrl" => '/choose-plan',
         ])
-        <a href="/new-piano-players" class="flex items-center justify-center py-2 px-2 sm:px-0 w-full z-[100]" style="background: linear-gradient(180deg, #EBF0FF 0%, #DEE6FF 100%);">
-            <img class="h-8 sm:h-10 mr-4" src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/new-piano-players-start-here-logo-2+1.png" alt="30 day drummer logo" />
-            <p class="text-sm sm:text-lg font-bebas uppercase mx-0 leading-tight">
-                Enrollment is open | February 27 - March 28 <span class="hidden sm:inline">|</span> <br class="sm:hidden"><span class="text-pianote underline">Click here to join.</span>
-            </p>
-        </a>
     @endif
+
+    @include('._partials.components.sticky-bar',[
+        'link' => '',
+        'logo' => '',
+        'text' => 'SAVE 17% ON YOUR FIRST YEAR OF <br>LESSONS + GET $962 IN FREE BONUSES',
+    ])
 
     @php
         $features = [
@@ -184,19 +184,29 @@
             ],
         ];
     @endphp
+    <header>
+        <div class="max-w-6xl mx-auto flex">
+            <div>
 
-    @include('musora.sales.components.header-section', [
-        'header' => 'Online piano lessons for all skill levels.',
-        'desc' => 'Learn the piano faster with step-by-step lessons, a thousand songs, and unlimited personal support. ',
-        'thumb' => 'https://pianote.s3.amazonaws.com/sales/2023/header-thumb2.jpg',
-        'promoThumb' => 'https://pianote.s3.amazonaws.com/sales/2023/jan-thumb2.png',
-        'promoThumbM' => 'https://pianote.s3.amazonaws.com/sales/2023/jan-thumb-m2.jpg',
-        'pointOne' => 'Improve Your Skills',
-        'pointTwo' => 'World-Class Teachers',
-        'pointThree' => 'Play More<br class="inline lg:hidden"> Songs',
-        'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Pianote+Membership/79348450',
-        'students' => number_format(Prices::$students),
-    ])
+            </div>
+            <div>
+
+            </div>
+        </div>
+    </header>
+
+{{--    @include('musora.sales.components.header-section', [--}}
+{{--        'header' => 'Online piano lessons for all skill levels.',--}}
+{{--        'desc' => 'Learn the piano faster with step-by-step lessons, a thousand songs, and unlimited personal support. ',--}}
+{{--        'thumb' => 'https://pianote.s3.amazonaws.com/sales/2023/header-thumb2.jpg',--}}
+{{--        'promoThumb' => 'https://pianote.s3.amazonaws.com/sales/2023/jan-thumb2.png',--}}
+{{--        'promoThumbM' => 'https://pianote.s3.amazonaws.com/sales/2023/jan-thumb-m2.jpg',--}}
+{{--        'pointOne' => 'Improve Your Skills',--}}
+{{--        'pointTwo' => 'World-Class Teachers',--}}
+{{--        'pointThree' => 'Play More<br class="inline lg:hidden"> Songs',--}}
+{{--        'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Pianote+Membership/79348450',--}}
+{{--        'students' => number_format(Prices::$students),--}}
+{{--    ])--}}
 
     @hasSection('promo-banner')
         @yield('promo-banner')
@@ -447,7 +457,7 @@
         'bannerDesc' => 'Powered by Musora, Pianote includes full access to our communities for drums, guitar, and voice.',
     ])
 
-{{--    @include('pianote.sales.headphones-section')--}}
+    @include('pianote.sales.headphones-section')
 
     @php
         $testimonials = [
@@ -532,57 +542,47 @@
     <div class="unstick-trigger block"></div>
     <div id="customize-anchor" class="anchor"></div>
     <div id="order" class="anchor"></div>
-    @hasSection('final')
-        @yield('final')
-    @elseif(!empty($promoVersion))
-        @php
-            $bonuses = [
-                [
-                    'image' => 'https://pianote.s3.amazonaws.com/sales/2022/bonus-chords-scales.jpg',
-                    'title' => 'Chords & <br>Scales Book',
-                    'description' => 'Your encyclopedia of piano chords & scales.',
-                    'price' => floatval($productPrices['piano-chords-and-scales-guide']->price),
-                    'feature' => "Free Shipping",
-                ],
-                [
-                'image' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/piano-technique-made-easy.jpg',
-                'title' => 'Piano Technique<br> Made Easy',
-                'description' => 'Your ultimate guide to learning the piano. Learn EVERY scale, chord, arpeggio, and key signature.',
-                'price' => floatval($productPrices['piano-technique-made-easy']->price),
-                ],
-                [
-                'image' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/piano-riffs-and-fills.jpg',
-                'title' => 'Piano Riffs<br> & Fills',
-                'description' => 'Learn the secrets and tips to play fills that sound complicated and advanced, but are simple to learn.',
-                'price' => floatval($productPrices['piano-riffs-and-fills']->price),
-                ],
-                [
-                    'image' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/faster-fingers.jpg',
-                    'title' => '',
-                    'description' => 'Boost your speed and confidence with this guided practice course.',
-                    'price' => floatval($productPrices['faster-fingers']->price),
-                ],
-            ]
-        @endphp
-        @include('musora.sales.components.order-section-bonuses', [
+    @php
+        $bonuses = [
+            [
+                'image' => '',
+                'title' => 'Pianote Headphones',
+                'description' => 'Hear your piano the way it was meant to sound.',
+                'price' => floatval($productPrices['pianote-headphones']->price),
+                'feature' => "Free Shipping",
+            ],
+            [
+                'image' => 'https://pianote.s3.amazonaws.com/sales/2022/bonus-chords-scales.jpg',
+                'title' => 'Chords & <br>Scales Book',
+                'description' => 'Your encyclopedia of piano chords & scales.',
+                'price' => floatval($productPrices['piano-chords-and-scales-guide']->price),
+                'feature' => "Free Shipping",
+            ],
+            [
+                'image' => 'https://pianote.s3.amazonaws.com/sales/promos/may/Piano_Chords_Card.jpg',
+                'title' => 'Chords Poster',
+                'description' => 'Hang these piano chords in your practice space.',
+                'price' => floatval($productPrices['poster-chords']->price),
+                'feature' => "Free Shipping",
+            ],
+            [
+                'image' => 'https://pianote.s3.amazonaws.com/sales/promos/may/Piano_Scales_Card.jpg',
+                'title' => 'Scales Poster',
+                'description' => 'All the major and minor piano scales in one poster.',
+                'price' => floatval($productPrices['poster-scales']->price),
+                'feature' => "Free Shipping",
+            ],
+        ]
+    @endphp
+    @include('musora.sales.components.order-section-bonuses', [
         'topImage' => 'https://pianote.s3.amazonaws.com/sales/2023/pianote-annual-2w-card.png',
         'promoLogo' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs.svg',
-       'promoLogoM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs-m.png',
+        'promoLogoM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs-m.png',
         'header' => 'Online piano lessons for all skill levels.',
-        'subDescription' => 'Save 17% + get 4 bonuses<br class="inline sm:hidden"> worth $357',
-        'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[piano-chords-and-scales-guide]=1&products[piano-technique-made-easy]=1&products[piano-riffs-and-fills]=1&products[faster-fingers]=1&redirect=/order&locked=true',
+        'subDescription' => 'SAVE 17% + GET 13 BONUSES <br class="inline sm:hidden">WORTH $962',
+        'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[pianote-headphones]=1&products[piano-chords-and-scales-guide]=1&products[poster-chords]=1&products[poster-scales]=1&redirect=/order&locked=true',
         'altButtonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-MONTH]=1&redirect=%2Forder',
-        ])
-    @else
-        @include('musora.sales.components.order-section-collage', [
-        'header' => 'Unlimited piano lessons.<br> Direct access to real teachers.<br> 1000+ popular songs.',
-        'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
-                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Online piano lessons on every topic.</li>
-                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Personalized feedback from real teachers.</li>
-                    <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> voice, guitar, and drums lessons with full access to all Musora communities.</li>',
-        'image' => 'https://pianote.s3.amazonaws.com/sales/2023/pianote-spread.png',
-        ])
-    @endif
+    ])
 
     @include('musora.sales.components.app-section', [
         'image' => 'https://pianote.s3.amazonaws.com/sales/2023/devices.png',
