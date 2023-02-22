@@ -215,13 +215,13 @@
         <div class="container mv-3">
             <div class="flex flex-column grow bg-white corners-10">
                 <div class="flex flex-row ph pv-3">
-                    <h1 class="heading">Resources</h1>
+                    <h1 class="heading dark:tw-text-white">Resources</h1>
                 </div>
                 <div class="flex flex-row">
                     <div class="flex flex-column">
                         @foreach($lessonContent->fetch('*data.sheet_music_image_url.value') as $sheetMusicImageUrl)
                             <div class="flex flex-row bb-light-1">
-                                <div class="flex flex-column grow ph pv-3">
+                                <div class="flex flex-column grow ph pv-3 tw-bg-white">
                                     <img src="{{ $sheetMusicImageUrl }}" style="width:100%;">
                                 </div>
                             </div>
