@@ -2659,7 +2659,7 @@ class ContentService
                 }
                 $results['song_full_assignment'] = $assign;
             }
-        } elseif (in_array($content['type'], ['course', 'learning-path-course', 'semester-pack', 'pack-bundle'])) {
+        } elseif (in_array($content['type'], config('railcontent.content_multiple_level_content_depth_playlist_allowed', []))) {
             ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MAXIMUM;
             $lessons = $this->getByParentId($content['id']);
             $soundsliceAssingment = 0;
