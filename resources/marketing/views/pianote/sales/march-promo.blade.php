@@ -184,13 +184,18 @@
             ],
         ];
     @endphp
-    <header>
-        <div class="max-w-6xl mx-auto flex">
-            <div>
-
-            </div>
-            <div>
-
+    <header class="pb-10 sm:py-14 lg:py-20">
+        <div class="max-w-6xl mx-auto">
+            <h3 class="font-extrabold text-center mb-10">Join Pianote + get $962 in FREE bonuses!</h3>
+            <div class="flex justify-center">
+                <div class="max-w-lg">
+                    Time flies when you’re changing the world. <br><br>
+                    This month we’re celebrating 7 years since Pianote began its mission of spreading the joy of music across the globe.<br><br>
+                    <b>And we’re celebrating.</b><br><br>
+                    Join today and save 17% on step-by-step lessons from REAL piano teachers, access to the sheet music for 1000 popular songs, weekly LIVE lessons and personal feedback when you need it! <br><br>
+                    <a class="join pianote smaller w-52 mb-2" href="{-- TODO --}">Get Started &raquo;</a>
+                    <p class="uppercase"><b>GEN IN QUICK!</b> Only <s>500</s> Headphones left!</p>
+                </div>
             </div>
         </div>
     </header>

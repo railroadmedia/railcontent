@@ -61,7 +61,7 @@
         <section class="content-section text-center" style="padding-bottom: 0; background:linear-gradient(to bottom, #01050f 70%, #020c1a);">
             <div class="container mx-auto">
                 <h1 class="font-bebas leading-none mb-1 text-4xl md:text-6xl">GET A <span class="text-gradient">LIFETIME</span> <br class="inline md:hidden">DRUMEO MEMBERSHIP</h1>
-                <h4 class="text-gradient uppercase">+ FREE In-Ear Headphones, An Exclusive Masterclass, And More!</h4>
+                <h4 class="text-gradient uppercase">+ Your Choice of Bonuses & And An Exclusive Masterclass with Anika Nilles!</h4>
 
                 <div class="w-full mx-auto my-10 px-3" style="max-width:920px;">
                     <div class="aspect-16:9 w-full relative">
@@ -71,15 +71,19 @@
                 <p class="leading-relaxed px-3 my-5 text-left text-light-navy" style="width: 100%;max-width: 650px;">
                     <em>“My soul is that of a drummer. I didn’t do it to become rich and famous. I did it because it was the love of my life.” – Ringo Starr</em>
                     <br><br>
-                    If you feel like Ringo, we want to invite you to make a lifelong commitment to your drumming.
+                    Wise words from drumming royalty ^.
                     <br><br>
-                    Drumeo Lifetime Memberships are back – for Cyber Monday ONLY!
+                    If you feel similarly, we want to invite you to make a lifelong commitment to your drumming.
+                    <br><br>
+                    To celebrate 11 years of Drumeo, Lifetime Memberships are back!
                     <br><br>
                     This is your chance to make one final payment for your Drumeo Membership and then enjoy unlimited drum lessons, song breakdowns, and LIVE events with your favorite drummers for years to come.
                     <br><br>
-                    <strong>And heads up:</strong> You can split the payment for 1, 2, or 5 installments. (You’ll see that option upon checkout.)
+                    And heads up: You can split the payment for 1, 2, or 5 installments. (You’ll see that option upon checkout.)
                     <br><br>
-                    You’ll also get FREE bonuses with your membership – including a NEW pair of Drumeo EarDrums + an exclusive masterclass with award-winning Drumeo Coach, Todd Sucherman.
+                    You’ll also get your choice of 3 bonuses. You can select a pile of drumsticks, a new practice pad, or whatever you think will fire up the next stage of your drumming journey. PLUS, you’ll have an exclusive Masterclass to get you inspired.
+                    <br><br>
+                    Anika Nilles has agreed to teach a Masterclass to Drumeo Lifetime Members that will help you become more comfortable in odd time signatures. (Who better to teach that, right?)
                     <br><br>
                     Scroll down to see everything included with your Drumeo Lifetime Membership and we’ll see you with your little infinity badge around your name very soon!
                 </p>
@@ -129,20 +133,20 @@
 
     <section class="text-center text-white py-10 md:py-20 lg:py-24 px-4 md:px-6 relative overflow-hidden" style="background:#01050f;">
         <div class="container mx-auto z-10 relative max-w-4xl">
-            <h3 class="mb-8 sm:mb-12"><strong>Get Timeless Wisdom <br class="inline sm:hidden">From A Drumming Legend</strong></h3>
+            <h3 class="mb-8 sm:mb-12"><strong>Improve Your Odd-Time Feel <br class="inline sm:hidden">With Anika Nilles</strong></h3>
             <div class="flex flex-wrap sm:flex-nowrap items-start lg:items-center justify-center">
                 <div class="order-1 sm:order-0 text-left text-light-navy sm:pr-5 lg:pr-12">
-                    <p>Todd Sucherman can do it all.
+                    <p>
+                        It’s one of the trickiest parts of playing the drums.
                         <br><br>
-                        Technique, musicianship, groove, double bass, multiple styles… You name it, Todd has studied it and thoroughly understands what it takes to be successful. And now he’s going to share it with you.
+                        And to celebrate your Lifetime commitment to drumming, we’ve brought in famed educator & performer, Anika Nilles, to help you conquer the world of odd-time. You’ll get exercises + handy tips & tricks that will help you get more comfortable playing everything from 5/4 to 9/16.
                         <br><br>
-                        In this exclusive Drumeo Lifetime Member Masterclass, Todd Sucherman will impart his wisdom on what it takes to be successful on the drums – no matter what level you’re at or what your goals are.
+                        <b>This Masterclass will ONLY be available to you & your fellow Lifetime Members.</b>
                         <br><br>
-                        This Masterclass will be streamed LIVE in January (date TBD – you’ll be notified by mid-December) and available for on-demand access.
+                        It will be broadcast live in early April (date TBD) in two different time zones and then available for on-demand access to reference anytime you need a refresher.
                         <br><br>
-                        This is your chance to learn directly from a drumming legend & have your questions answered LIVE.
-                        <br><br>
-                        <strong>Masterclass Date:</strong> January 2023 (Exact date to be determined).
+                        See you there!
+
                     </p>
                 </div>
                 <img class="mb-4 sm:mb-0 order-0 sm:order-1 w-36 sm:w-72 lg:w-80 rounded-xl" src="https://cdn.musora.com/image/fetch/w_640,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/november/todd-sucherman-exclusive-lifetime.jpg">
