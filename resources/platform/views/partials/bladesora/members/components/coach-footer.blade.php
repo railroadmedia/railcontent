@@ -41,8 +41,8 @@
                 {{-- {!! $longBio !!} --}}
                 {{-- </div> --}}
                 @if (!empty($bandsArray))
-                    <div class="tw-text-4xl">Bands</div>
-                    <div class="tw-py-4 tw-font-normal">
+                    <h1 class="tw-text-2xl tw-uppercase tw-font-normal">Bands</h1>
+                    <div class="tw-font-normal mt-1 mb-3">
                         @php
                             $lastBand = array_pop($bandsArray);
                         @endphp
@@ -55,8 +55,8 @@
                 @endif
 
                 @if (!empty($endorsementsArray))
-                    <div class="tw-text-4xl">Endorsements</div>
-                    <div class="tw-py-4 tw-font-normal">
+                    <h1 class="tw-text-2xl tw-uppercase tw-font-normal">Endorsements</h1>
+                    <div class="tw-font-normal mt-1">
                         @php
                             foreach ($endorsementsArray as $key => $endorsement) {
                                 if ($key === 0) {
