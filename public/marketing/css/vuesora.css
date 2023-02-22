@@ -13955,10 +13955,6 @@ input[type=text].bg-light.inverted,
 .noselect, .form-group .toggle-label {
   -webkit-user-select: none;
      -moz-user-select: none;
-<<<<<<< HEAD
-=======
-      -ms-user-select: none;
->>>>>>> master
           user-select: none;
 }
 
