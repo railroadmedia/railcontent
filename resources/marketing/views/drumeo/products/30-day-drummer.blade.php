@@ -197,7 +197,7 @@
 
 @section('body-data')
     x-data="{
-        modal: {{ empty(user()) ? true : false }},
+    modal: {{ empty(user()) ? true : false }},
     }"
 @endsection
 
