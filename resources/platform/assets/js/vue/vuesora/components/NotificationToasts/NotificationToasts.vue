@@ -36,6 +36,10 @@
 export default {
   name: "NotificationToasts",
   props: {
+    slideClass: {
+      type: String,
+      default: 'slide-in-bottom'
+    },
     text: {
       type: String,
       default: () => "",

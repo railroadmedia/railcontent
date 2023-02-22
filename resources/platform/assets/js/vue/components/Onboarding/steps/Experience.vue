@@ -78,8 +78,7 @@ function goBack() {
         tw-justify-between
         xl:tw-justify-center
       ">
-      <StepHeader title="What experience level best describes you?" subtitle="Now it’s time to choose your experience level. You can change your
-            experience level at anytime in your profile." @onGoBack="goBack" />
+      <StepHeader title="What experience level best describes you?" subtitle="Now it’s time to choose your experience level. You can update your experience level in your profile at any time." @onGoBack="goBack" />
       <SquaresContainer>
         <SquaredCard type="green" :active="info.experience[brand] === 0" defaultBorderColor="tw-border-[#7E9AB1]"
           @onSelect="() => onExperienceSelection(0)">

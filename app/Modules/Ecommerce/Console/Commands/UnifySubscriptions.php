@@ -30,7 +30,7 @@ class UnifySubscriptions extends Command
     public function handle()
     {
         $this->info("Unify Subscriptions...");
-        $success = $this->withBatched(function (int $skip, int $take) {
+        $success = $this->runBatchQuery(function (int $skip, int $take) {
             return new UnifySubscriptionsJob($skip, $take);
         }, chunks: 1000);
         return $success;
