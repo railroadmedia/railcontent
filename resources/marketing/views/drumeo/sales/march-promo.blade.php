@@ -534,7 +534,7 @@
                 'price' => floatval($productPrices['quietpad']->price),
                 'shipping' => true,
             ],
-                        [
+            [
                 'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/drumsticks.jpg',
                 'title' => 'Drumeo Drumsticks',
                 'description' => 'Drumeo 5A Drumsticks by Vater -- made with hickory and extra moisture to last longer.',
@@ -565,6 +565,36 @@
                 'description' => 'Your guide to playing 10 styles of electronic dance music - includes 23 play-alongs!',
                 'price' => floatval($productPrices['electrify-your-drumming']->price),
             ],
+            [
+                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/sd.jpg',
+                'title' => 'Successful Drumming',
+                'description' => 'Jared Falk’s step-by-step curriculum for building a rock-solid foundation on the drums.',
+                'price' => floatval($productPrices['SD-DIGI']->price),
+            ],
+            [
+                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/fwtbdf.jpg',
+                'title' => 'Better Drum Fills',
+                'description' => 'The ultimate four-week crash course to playing more creative & musical drum fills.',
+                'price' => floatval($productPrices['four-weeks-to-better-drum-fills']->price),
+            ],
+            [
+                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/lsf.jpg',
+                'title' => 'Learn Songs Faster',
+                'description' => 'This masterclass will give you proven techniques for learning MORE songs in less time.',
+                'price' => floatval($productPrices['learn-songs-faster-pack']->price),
+            ],
+            [
+                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/july/tommy_card.jpg',
+                'title' => 'Great Hands For A Lifetime',
+                'description' => 'Tommy Igoe helps you improve your hand strength, speed, stamina, comfort, and control in the drums in four hours of video lessons.',
+                'price' => floatval($productPrices['GHFAL-DIGI']->price),
+            ],
+            [
+                'image' => '{-- TODO --}',
+                'title' => 'Creative Control',
+                'description' => '{-- TODO --}',
+                'price' => floatval($productPrices['CC-DIGI']->price),
+            ],
         ]
     @endphp
 
@@ -574,7 +604,7 @@
         'promoLogoM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs-m.png',
         'header' => 'Online drum lessons for all skill levels.',
         'subDescription' => 'Save 17% + get 11 bonuses<br class="inline sm:hidden"> worth $1198.95',
-        'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&locked=true',
+        'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[quietpad]=1&products[Drumeo-VaterSticks]=1 &products[rock-drumming-masterclass-pack]=1&products[drum-technique-made-easy-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[SD-DIGI]=1&products[four-weeks-to-better-drum-fills]=1&products[learn-songs-faster-pack]=1&products[GHFAL-DIGI]=1&products[CC-DIGI]=1&locked=true',
         'altButtonLink' => '/ecommerce/add-to-cart?products[DLM-1-month]=1&locked=true',
     ])
 
