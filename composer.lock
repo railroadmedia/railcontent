@@ -176,16 +176,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.259.1",
+            "version": "3.260.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "b200fc0a04e904bfc44922767388b279bf90ffe4"
+                "reference": "25a14f63cc927d72adad3cc24d6bcdadfe6e0fc7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/b200fc0a04e904bfc44922767388b279bf90ffe4",
-                "reference": "b200fc0a04e904bfc44922767388b279bf90ffe4",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/25a14f63cc927d72adad3cc24d6bcdadfe6e0fc7",
+                "reference": "25a14f63cc927d72adad3cc24d6bcdadfe6e0fc7",
                 "shasum": ""
             },
             "require": {
@@ -264,9 +264,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.259.1"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.260.0"
             },
-            "time": "2023-02-20T19:21:16+00:00"
+            "time": "2023-02-21T20:26:17+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -4350,16 +4350,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v9.52.1",
+            "version": "v9.52.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "edbc59091ef64e79d2f08e65e3aaf7c766a7acb1"
+                "reference": "7a5774abab6c85e61612427a9385646debd18a25"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/edbc59091ef64e79d2f08e65e3aaf7c766a7acb1",
-                "reference": "edbc59091ef64e79d2f08e65e3aaf7c766a7acb1",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/7a5774abab6c85e61612427a9385646debd18a25",
+                "reference": "7a5774abab6c85e61612427a9385646debd18a25",
                 "shasum": ""
             },
             "require": {
@@ -4544,7 +4544,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2023-02-21T15:37:30+00:00"
+            "time": "2023-02-22T11:33:00+00:00"
         },
         {
             "name": "laravel/nova",
@@ -8450,12 +8450,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railanalytics.git",
-                "reference": "f42ec35eff16db58b6e942b14061089df93a8fa1"
+                "reference": "dbd809c6a61cf8e93416ba4dc00c77ca3c2d2c9a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railanalytics/zipball/f42ec35eff16db58b6e942b14061089df93a8fa1",
-                "reference": "f42ec35eff16db58b6e942b14061089df93a8fa1",
+                "url": "https://api.github.com/repos/railroadmedia/railanalytics/zipball/dbd809c6a61cf8e93416ba4dc00c77ca3c2d2c9a",
+                "reference": "dbd809c6a61cf8e93416ba4dc00c77ca3c2d2c9a",
                 "shasum": ""
             },
             "require": {
@@ -8484,7 +8484,7 @@
                 "issues": "https://github.com/railroadmedia/railanalytics/issues",
                 "source": "https://github.com/railroadmedia/railanalytics/tree/v3.0-fixing-transaction-tracking"
             },
-            "time": "2023-01-13T01:16:57+00:00"
+            "time": "2023-02-21T18:27:34+00:00"
         },
         {
             "name": "railroad/railchat",
@@ -8533,12 +8533,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "66547fcb358746ab3db270fa47aa1e76cb884d47"
+                "reference": "64d39bdfef8c8afba040151fdb9594d01b6424a0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/66547fcb358746ab3db270fa47aa1e76cb884d47",
-                "reference": "66547fcb358746ab3db270fa47aa1e76cb884d47",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/64d39bdfef8c8afba040151fdb9594d01b6424a0",
+                "reference": "64d39bdfef8c8afba040151fdb9594d01b6424a0",
                 "shasum": ""
             },
             "require": {
@@ -8594,7 +8594,7 @@
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
                 "source": "https://github.com/railroadmedia/railcontent/tree/2.0-playlists"
             },
-            "time": "2023-02-20T14:52:10+00:00"
+            "time": "2023-02-22T13:00:47+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -16992,5 +16992,5 @@
         "ext-curl": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.2.0"
 }

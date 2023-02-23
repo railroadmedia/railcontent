@@ -5,7 +5,7 @@ export default {
 
     methods: {
         // Used at the top level to emit the event with a payload
-        addToList() {
+        addToList(e) {
             if (this.destroyOnListRemoval) {
                 Toasts.confirm({
                     title: 'Hold your horses… This will remove this lesson from your list, are you sure about this?',
@@ -14,6 +14,7 @@ export default {
                         callback: () => {
                             this.emitAddToList({
                                 content_id: this.item.id,
+                                type: e.currentTarget.getAttribute('data-content-type'),
                                 is_added: this.item.is_added_to_primary_playlist || false,
                             });
 
@@ -32,6 +33,7 @@ export default {
             } else {
                 this.emitAddToList({
                     content_id: this.item.id,
+                    type: e.currentTarget.getAttribute('data-content-type'),
                     is_added: this.item.is_added_to_primary_playlist || false,
                 });
             }
@@ -70,7 +72,8 @@ export default {
 
         // Used to handle the event when bussed to the top level parent
         addToListEventHandler(payload) {
-            window.openplaylistmodal({ modalType: 'addItem', contentId: payload.content_id });
+            console.log(payload)
+            window.openplaylistmodal({ modalType: 'addItem', contentId: payload.content_id, type: payload.type });
         },
 
         resetProgressEventHandler(payload) {
