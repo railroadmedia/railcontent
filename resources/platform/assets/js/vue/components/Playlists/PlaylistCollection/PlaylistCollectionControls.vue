@@ -16,38 +16,91 @@
         }
     });
 
+    //Inject
+    const token = inject('csrf_token');
+    //Pinia Stores
+    const playlistsStore = usePlaylistsStore();
+
+    //Reactive Data
+    const state = reactive({ 
+        searchTerm: '',
+        sortValue: '-created_at' //Default
+    })
+
+    //Static Data
+    const sortOptions =[
+        { text: 'Newest First', value: '-created_at' },
+        { text: 'Alphabetical', value: 'name' },
+        { text: 'Recently Viewed', value: '-last_progress' }
+    ]
+
+    //Emits
     const emit = defineEmits(['onUpdateListView']);
+
+    //Methods
+    const loadPlaylists = ()=> {
+        const payload = {
+            brand: brand, 
+            page: 1, 
+            limit: 10,
+            term: state.searchTerm,
+            sort: state.sortValue,
+        }
+        //load Playlists
+        playlistsStore.getPlaylists(payload, token);  
+        //Update URL
+        const url = new URL(window.location.href);
+        url.searchParams.set('sortby_val', state.sortValue)
+        if(state.searchTerm.length) url.searchParams.set('search', state.searchTerm)
+        window.history.pushState({}, '', url);
+    };
+
+    //Lifecycle Hooks
+    onBeforeMount(()=> {
+        //get url params
+        const params = new Proxy(new URLSearchParams(window.location.search), {
+            get: (searchParams, prop) => searchParams.get(prop),
+        });
+        //Set state props
+        state.searchTerm = params.search || '';
+        state.sortValue = params.sortby_val || '-created_at';
+    })
 </script>
 <template>
-    <nav  class="tw-flex tw-my-4 tw-w-full tw-items-center">    
-        <!--Filters -->
-        <div class="tw-mr-auto">
+    <nav class="tw-flex tw-my-4 tw-w-full tw-items-center tw-flex-wrap md:tw-flex-nowrap">    
+        <!--Sort -->
+        <div class="tw-w-full tw-max-w-[290px] tw-mr-auto tw-order-2 md:tw-order-1">
             <select name="playlist-sort"
                     id="playlist-sort"
-                    class="tw-bg-transparent tw-rounded-3xl"
+                    class="tw-transition-colors tw-w-full tw-h-[42px] tw-bg-transparent tw-rounded-3xl tw-text-[#00101D] focus:tw-ring-0 dark:tw-text-[#9EC0DC] dark:tw-border-[#445F74] tw-text-sm"
+                    v-model="state.sortValue"
+                    @change="loadPlaylists"
             >
-                <option class="tw-text-black" value="">Filter By:</option>
-                <optgroup class="tw-text-black">
-                    <option value="all">All Playlist</option>
-                    <option value="public">Public Playlists</option>
-                    <option value="mine">My Playlists</option>
-                    <option value="private">Private Playlists</option>
-                    <option value="pinned">Pinned Playlists</option>
-                </optgroup>
+                <option v-for="(option, i) in sortOptions" :key="i" :value="option.value" class="tw-text-[#00101D]">
+                    {{ option.text }}
+                </option>
             </select>
         </div>
         <!-- Search -->
-        <div class="tw-relative">
-            <div></div>
-            <input type="search" class="tw-bg-transparent tw-rounded-lg" placeholder="Search">
+        <div class="tw-relative tw-w-full md:tw-max-w-[465px] md:tw-mx-4 tw-mb-[20px] md:tw-mb-0 xl:tw-ml-[30px] xl:tw-mr-[26px] tw-order-1 md:tw-order-2">
+            <MusoraIcon
+                icon-name="search"
+                class="tw-absolute tw-top-4 tw-left-[26px] dark:tw-text-[#9EC0DC] tw-z-0"
+            />
+            <input type="text" 
+                   class="tw-pl-[50px] tw-w-full focus:tw-ring-0 tw-bg-transparent tw-rounded-lg tw-text-[#00101D] tw-h-[42px] tw-text-sm dark:tw-text-[#9EC0DC] dark:focus:tw-bg-[#00101D] dark:placeholder:tw-text-[#9EC0DC] dark:tw-border-[#445F74]" 
+                   placeholder="Search"
+                   v-model="state.searchTerm"
+                   @keyup.enter="loadPlaylists"
+            >
         </div>
         <!-- List/Grid Toggle -->
-        <div class="tw-px-1">
-            <button class="tw-text-xs tw-uppercase tw-font-bebas-neue"
+        <div class="tw-flex-shrink-0 tw-order-3">
+            <button class="tw-h-[42px] tw-text-xs tw-uppercase tw-font-bebas-neue tw-px-0.5"
                     :class="[isListView ? 'dark:tw-text-white' : 'tw-text-[#D4D4D8] dark:tw-text-[#7E9AB1]']"
                     @click="() => emit('onUpdateListView', true)"
             >
-                <svg width="36" height="35" viewBox="0 0 36 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg class="tw-w-[30px]" width="36" height="35" viewBox="0 0 36 35" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M5.5 6.5625C5.5 5.69956 6.19956 5 7.0625 5H9.14583C10.0088 5 10.7083 5.69956 10.7083 6.5625C10.7083 7.42544 10.0088 8.125 9.14583 8.125H7.0625C6.19956 8.125 5.5 7.42544 5.5 6.5625Z" fill="currentColor"/>
                     <path d="M12.7917 6.5625C12.7917 5.69956 13.4912 5 14.3542 5H28.9375C29.8004 5 30.5 5.69956 30.5 6.5625C30.5 7.42544 29.8004 8.125 28.9375 8.125H14.3542C13.4912 8.125 12.7917 7.42544 12.7917 6.5625Z" fill="currentColor"/>
                     <path d="M12.7917 28.4375C12.7917 27.5746 13.4912 26.875 14.3542 26.875H28.9375C29.8004 26.875 30.5 27.5746 30.5 28.4375C30.5 29.3004 29.8004 30 28.9375 30H14.3542C13.4912 30 12.7917 29.3004 12.7917 28.4375Z" fill="currentColor"/>
@@ -59,11 +112,11 @@
                 </svg>
                 <span>List</span>
             </button>
-            <button class="tw-text-xs tw-uppercase tw-font-bebas-neue"
+            <button class="tw-h-[42px] tw-text-xs tw-uppercase tw-font-bebas-neue tw-px-0.5"
                     :class="[isListView ? 'tw-text-[#D4D4D8] dark:tw-text-[#7E9AB1]' : 'dark:tw-text-white']"
                     @click="() => emit('onUpdateListView', false)"
             >
-                <svg width="36" height="35" viewBox="0 0 36 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg class="tw-w-[30px]" width="36" height="35" viewBox="0 0 36 35" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M9.25 5.25C7.317 5.25 5.75 6.817 5.75 8.75V12.25C5.75 14.183 7.317 15.75 9.25 15.75H12.75C14.683 15.75 16.25 14.183 16.25 12.25V8.75C16.25 6.817 14.683 5.25 12.75 5.25H9.25Z" fill="currentColor"/>
                     <path d="M9.25 19.25C7.317 19.25 5.75 20.817 5.75 22.75V26.25C5.75 28.183 7.317 29.75 9.25 29.75H12.75C14.683 29.75 16.25 28.183 16.25 26.25V22.75C16.25 20.817 14.683 19.25 12.75 19.25H9.25Z" fill="currentColor"/>
                     <path d="M19.75 8.75C19.75 6.817 21.317 5.25 23.25 5.25H26.75C28.683 5.25 30.25 6.817 30.25 8.75V12.25C30.25 14.183 28.683 15.75 26.75 15.75H23.25C21.317 15.75 19.75 14.183 19.75 12.25V8.75Z" fill="currentColor"/>

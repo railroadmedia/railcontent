@@ -2,7 +2,7 @@
 import { defineProps, defineEmits, inject } from 'vue';
 import SidebarContainer from './SidebarContainer.vue';
 import { textColor, borderColor } from '../../../constants/brands.js';
-import PlaylistsSection from '../Playlists/PlaylistsSection.vue';
+import SidebarPlaylists from '../Playlists/SidebarPlaylists.vue';
 //Icons
 import MusoraIcon from '../MusoraIcons/MusoraIcon.vue';
 import SearchInput from './SearchInput.vue';
@@ -89,8 +89,8 @@ const activePath = (path) => {
     </section>
 
     <!-- Playlists Section -->
-    <playlists-section :isSidebarCollapsed="isSidebarCollapsed" :pinnedPlaylists="pinnedPlaylists"
-      :isActivePath="activePath(`/${brand}/lists/my-list`)" :brand="brand" :userId="userId"></playlists-section>
+    <sidebar-playlists :isSidebarCollapsed="isSidebarCollapsed" :pinnedPlaylists="pinnedPlaylists"
+      :isActivePath="activePath(`/${brand}/lists/my-list`)" :brand="brand" :userId="userId"></sidebar-playlists>
 
   </SidebarContainer>
 </template>

@@ -40,7 +40,7 @@
 </script>
 
 <template>
-    <div class="tw-flex tw-flex-row pagination tw-items-center tw-justify-center tw-w-full tw-py-6">
+    <div class="tw-flex tw-flex-row pagination tw-items-center tw-justify-center tw-w-full tw-py-4">
         
         <!-- Left Arrow -->
         <button

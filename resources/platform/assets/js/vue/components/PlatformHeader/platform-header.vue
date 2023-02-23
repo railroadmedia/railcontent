@@ -37,7 +37,7 @@
 
             <div class="tw-flex tw-flex-col tw-mr-8">
                 <!-- Title -->
-                <h1 v-if="title.length" class="tw-text-white tw-flex tw-items-center tw-mb-2">
+                <h1 v-if="title.length" class="tw-text-white tw-flex tw-items-center tw-mb-1">
                     <musora-icon :icon-name="titleIcon" class="tw-w-[36px] tw-mr-2 tw-text-white">
                     </musora-icon>
                     <span class="tw-text-32 tw-font-bold">{{ title }}</span>

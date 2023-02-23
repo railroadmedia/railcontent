@@ -129,7 +129,7 @@
             </header>
 
             <!-- Cards -->
-            <section v-if="!playlistsStore.loadingPlaylists" class="tw-w-full tw-relative"
+            <section v-if="!playlistsStore.loadingPlaylists" class="tw-w-full tw-relative tw-mb-5"
                 :class="state.isListView ? 'tw-flex tw-flex-col' : 'tw-grid tw-grid-cols-2 sm:tw-grid-cols-3 lg:tw-grid-cols-4 xl:tw-grid-cols-5 tw-gap-4' "
             >
                 <!-- Print Each Card -->
@@ -145,7 +145,7 @@
 
             <!-- Pagination -->
             <Pagination 
-                v-if="!playlistsStore.loadingPlaylists"
+                v-if="!playlistsStore.loadingPlaylists && playlistsStore.playlistsQuantity > 10"
                 :currentPage="playlistsStore.resultsPage"
                 :pageQuantity="playlistsStore.playlistsQuantity"
                 :limit="10"
@@ -154,7 +154,10 @@
         </div>
         
         <!-- Skeleton Loader -->
-        <div v-if="playlistsStore.loadingPlaylists" class="tw-w-full tw-animate-pulse" :class="state.isListView ? 'tw-flex tw-flex-col' : 'tw-grid tw-grid-cols-2 sm:tw-grid-cols-3 lg:tw-grid-cols-4 xl:tw-grid-cols-5 tw-gap-4 tw-mt-4' ">
+        <div v-if="playlistsStore.loadingPlaylists" 
+             class="tw-w-full tw-animate-pulse" 
+             :class="state.isListView ? 'tw-flex tw-flex-col' : 'tw-grid tw-grid-cols-2 sm:tw-grid-cols-3 lg:tw-grid-cols-4 xl:tw-grid-cols-5 tw-gap-4 tw-mt-4' "
+        >
             <div v-for="(n, index) in (playlistsStore.playlists.length)" 
                 :key="n" 
                 class="tw-flex tw-w-full "

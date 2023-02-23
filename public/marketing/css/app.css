@@ -2545,6 +2545,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .border-4 {
   border-width: 4px !important;
 }
+.border {
+  border-width: 1px !important;
+}
 .border-b {
   border-bottom-width: 1px !important;
 }
@@ -4232,6 +4235,9 @@ li, p {
 .focus\:outline-none:focus {
   outline: 2px solid transparent !important;
   outline-offset: 2px !important;
+}
+.focus\:outline-0:focus {
+  outline-width: 0px !important;
 }
 .group:hover .group-hover\:opacity-80 {
   opacity: 0.8 !important;

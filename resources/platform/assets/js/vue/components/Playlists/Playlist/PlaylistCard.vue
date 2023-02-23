@@ -205,22 +205,14 @@
             class="tw-relative tw-overflow-hidden tw-bg-white dark:tw-bg-[#081825] tw-aspect-square"
            :class="props.isListView ? 'tw-h-[48px] tw-w-[48px] tw-rounded tw-shrink-0' : 'tw-row-span-5 tw-col-span-5 tw-rounded-lg'"
         >
-            <!-- Image Conatiner -->
-            <div class="tw-relative tw-w-full tw-h-full" v-if="list.thumbnail_url">
-                <img
-                    v-if="list.thumbnail_url"
-                    :src="list.thumbnail_url"
-                    alt="playlist thumbnail"
-                    class="tw-transition-opacity tw-opacity-0 tw-duration-500 tw-object-cover tw-object-center tw-w-full tw-h-full tw-blur-sm"
-                    loading="lazy"
-                    onload="this.classList.remove('tw-opacity-0')"
-                />
-                <!-- Image Mask -->
-                <div class="tw-z-20 tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-black/70 tw-flex tw-justify-center">
-                    <img class="tw-h-full tw-object-contain" :src="list.thumbnail_url" alt="playlist thumbnail">
-                </div>
-            </div>
-
+            <img
+                v-if="list.thumbnail_url"
+                :src="list.thumbnail_url"
+                alt="playlist thumbnail"
+                class="tw-transition-opacity tw-opacity-0 tw-duration-500 tw-object-cover tw-object-center tw-w-full tw-h-full"
+                loading="lazy"
+                onload="this.classList.remove('tw-opacity-0')"
+            />
             <!-- placeholder (no image or items) -->
             <div v-else class="tw-transition tw-flex tw-items-center tw-justify-center tw-w-full tw-h-full tw-bg-[#3F3F46] dark:tw-bg-[#445F74]">
                 <svg class="tw-w-1/2 tw-h-1/2" width="79" height="79" viewBox="0 0 79 79" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -236,7 +228,7 @@
 
             <!-- hover overlay -->
             <div v-if="!props.isListView" 
-                 class="tw-h-full tw-w-full tw-absolute tw-top-0 tw-left-0 tw-transition-colors tw-z-30 group-hover:tw-bg-black/30">
+                 class="tw-h-full tw-w-full tw-absolute tw-top-0 tw-left-0 tw-transition-colors tw-z-10 group-hover:tw-bg-black/30">
             </div>
         </a>  
 
@@ -245,9 +237,9 @@
             class="tw-flex tw-w-full tw-text-[#0D0D0D] dark:tw-text-white"
             :class="props.isListView ? '' : 'tw-col-span-4'"
         >
-            <div class="tw-w-full" :class="props.isListView ? 'tw-grid tw-grid-cols-10 tw-items-center' : '' ">
+            <div :class="props.isListView ? 'tw-w-full tw-grid tw-grid-cols-10 tw-items-center' : '' ">
                 <!--name-->
-                <p class="tw-font-bold tw-capitalize tw-truncate tw-w-full" 
+                <p class="tw-font-bold tw-capitalize tw-truncate" 
                    :class="props.isListView ? 'tw-col-span-10 md:tw-col-span-2 tw-pl-2 md:tw-pl-[19px] tw-pr-2' : '' "
                 >
                     {{ list.name }} 

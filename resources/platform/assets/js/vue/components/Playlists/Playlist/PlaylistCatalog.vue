@@ -104,10 +104,10 @@
 
             <!-- Cards -->
             <section v-if="!playlistsStore.loadingPlaylists" class="tw-w-full tw-relative"
-                :class="state.isListView ? 'tw-flex tw-flex-col' : 'tw-grid tw-grid-cols-2 sm:tw-grid-cols-3 lg:tw-grid-cols-4 xl:tw-grid-cols-5 tw-gap-4' "
+                     :class="state.isListView ? 'tw-flex tw-flex-col' : 'tw-grid tw-grid-cols-2 sm:tw-grid-cols-3 lg:tw-grid-cols-4 xl:tw-grid-cols-5 tw-gap-4' "
             >
                 <!-- Print Each Card -->
-                <playlist-collection-card 
+                <playlist-card 
                     v-for="list in playlistsStore.playlists" 
                     :key="list.id" 
                     :list="list"
