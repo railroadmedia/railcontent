@@ -188,7 +188,13 @@
         <div class="max-w-4xl mx-auto text-center px-4">
             <img class="mt-14 md:mt-0 h-24 md:h-28 lg:h-32 mb-6" src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/anniversary/2023/logo.png" alt="Anniversary logo" />
             <h3 class="font-extrabold mb-10">Join Pianote + get $962 <br class="sm:hidden">in FREE bonuses!</h3>
-            <img class="rounded-xl cursor-pointer" src="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/anniversary/2023/thumb.jpg" alt="Trailer Thumbnail" />
+            <img
+                class="rounded-xl cursor-pointer transition-opacity opacity-0"
+                src="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/anniversary/2023/thumb.jpg"
+                alt="Trailer Thumbnail"
+                loading="lazy"
+                onload="this.classList.remove('opacity-0')"
+            />
         </div>
     </header>
 
@@ -197,7 +203,7 @@
             <div class="max-w-sm md:max-w-none mx-auto md:hidden">
                 <img
                     class="-mt-20 sm:-mt-14 transition-opacity opacity-0"
-                    src="https://cdn.musora.com/image/fetch/w_550,q_auto:besthttps://pianote.s3.amazonaws.com/sales/promos/anniversary/2023/promo-collage-m.png"
+                    src="https://cdn.musora.com/image/fetch/w_550,q_auto:besth/ttps://pianote.s3.amazonaws.com/sales/promos/anniversary/2023/promo-collage-m.png"
                     alt="Promo Collage Image"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
@@ -214,7 +220,7 @@
             </div>
             <img
                 class="hidden md:inline-block md:h-96 lg:h-[450px] md:mt-0 lg:-mt-16 md:ml-6 transition-opacity opacity-0"
-                src="https://cdn.musora.com/image/fetch/w_850,q_auto:besthttps://pianote.s3.amazonaws.com/sales/promos/anniversary/2023/promo-collage.png"
+                src="https://cdn.musora.com/image/fetch/w_850,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/anniversary/2023/promo-collage.png"
                 alt="Promo Collage"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"

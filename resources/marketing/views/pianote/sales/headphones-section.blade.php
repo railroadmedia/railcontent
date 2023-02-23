@@ -18,8 +18,13 @@
             </div>
 {{--            <h2><strong>What's in the box?</strong></h2>--}}
 {{--            <p class="leading-tight mt-2 sm:mt-3 mb-6">Scroll down to see everything that’s included.</p>--}}
-            <img class="rounded-xl mb-2 cursor-pointer autoplay-video mt-16" src="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://pianote.s3.amazonaws.com/products/concert-headphones/montage-04.png" alt="montage 4"
+            <img
+                class="rounded-xl mb-2 cursor-pointer autoplay-video mt-16 transition-opacity opacity-0"
+                src="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://pianote.s3.amazonaws.com/products/concert-headphones/montage-04.png"
+                alt="montage 4"
                 x-on:click="unbox = true;"
+                loading="lazy"
+                onload="this.classList.remove('opacity-0')"
             >
 {{--            <div class="flex flex-wrap mb-2">--}}
 {{--                <img class="w-full md:w-2/3 rounded-xl md:pr-1 mb-2" src="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://pianote.s3.amazonaws.com/products/concert-headphones/montage-01.jpg" alt="montage 1">--}}
