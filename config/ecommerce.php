@@ -357,6 +357,10 @@ return [
             'Pianote' => [
                 'credentials' =>  __DIR__ . '/../pianote-google-play-api.json',
                 'application_name' => 'com.pianote',
+            ],
+            'Musora' => [
+                'credentials' =>  __DIR__ . '/../google-play-api.json',
+                'application_name' => 'com.musoraapp',
             ]
         ],
     ],
