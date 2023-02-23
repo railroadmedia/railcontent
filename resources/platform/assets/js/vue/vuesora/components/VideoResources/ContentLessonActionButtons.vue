@@ -201,6 +201,11 @@ export default {
             default: () => null,
         },
 
+        contentType: {
+            type: String,
+            default: () => 'not-song',
+        },
+
         resources: {
             type: Array,
             default: () => [],
@@ -267,9 +272,8 @@ export default {
         toCapitalCase: string => Utils.toCapitalCase(string),
 
         addToList() {
-            this.hasAdded = !this.hasAdded;
-
-            this.$nextTick(() => { ContentService.addOrRemoveContentFromList(this.contentId, !this.hasAdded); });
+            //this.hasAdded = !this.hasAdded;
+            window.openplaylistmodal({ modalType: 'addItem', contentId: this.contentId, type: this.contentType });
         },
 
         getResourceIcon(resource) {
