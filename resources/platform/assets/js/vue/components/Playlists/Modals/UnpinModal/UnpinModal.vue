@@ -1,7 +1,7 @@
 <script setup>
     import { inject, reactive, onBeforeMount } from 'vue';
-    import PlaylistService from '../../../../services/playlists';
-    import { usePlaylistsStore } from '../../../../stores/playlists';
+    import PlaylistService from '../../../../../services/playlists.js';
+    import { usePlaylistsStore } from '../../../../../stores/playlists.js';
     import UnpinItem from './UnpinItem.vue';
 
     //-----------Props-----------//

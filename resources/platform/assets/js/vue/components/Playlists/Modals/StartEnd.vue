@@ -1,5 +1,5 @@
 <script setup>
-import InputLabel from '../InputLabel/InputLabel.vue';
+import InputLabel from '../../InputLabel/InputLabel.vue';
 
 const props = defineProps({
     brand: {

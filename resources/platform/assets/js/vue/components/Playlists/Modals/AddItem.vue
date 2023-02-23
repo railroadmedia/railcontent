@@ -5,11 +5,11 @@ TODO: Open Create Playlist and on close open the addItem again with the right pr
 
 */
 import { ref, onMounted, inject } from 'vue';
-import PlaylistService from '../../../services/playlists';
-import Toggle from '../Toggle/Toggle.vue'
-import Table from '../Table/Table.vue'
+import PlaylistService from '../../../../services/playlists.js';
+import Toggle from '../../Toggle/Toggle.vue'
+import Table from '../../Table/Table.vue'
 import { PlusCircleIcon, PlusIcon, CheckCircleIcon } from '@heroicons/vue/outline';
-import LoadingSpinner from '../LoadingSpinner/LoadingSpinner.vue';
+import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner.vue';
 
 const props = defineProps({
     brand: {

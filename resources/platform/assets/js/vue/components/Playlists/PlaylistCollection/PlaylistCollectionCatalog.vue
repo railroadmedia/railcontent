@@ -5,7 +5,7 @@
     import PlaylistCollectionControls from './PlaylistCollectionControls.vue';
     import PlaylistCollectionCard from './PlaylistCollectionCard.vue';
     import MusoraIcon from '../../MusoraIcons/MusoraIcon.vue';
-    import Pagination from '../../Pagination/Pagination.vue';
+    import Pagination from '../../../components/Pagination/Pagination.vue';
 
     //Props
     const props = defineProps({
@@ -31,7 +31,7 @@
     //Reactive Data
     const state = reactive({ 
         isListView: false,
-        showControls: true, 
+        showControls: true
     })
 
     //Inject
@@ -40,19 +40,19 @@
     const playlistsStore = usePlaylistsStore();
 
     //Methods
+    const handlePageChange = (pageNumber) => {
+        //load playlists
+        playlistsStore.loadingPlaylists = true;
+        playlistsStore.getPlaylists({ brand: props.brand, page: pageNumber, limit: 10 }, token);
+        //update current page number 
+        playlistsStore.resultsPage = pageNumber;
+        //update url
+        let url = new URL(window.location.href);
+        url.searchParams.set('page', pageNumber)
+        window.history.pushState({}, '', url);
+    }
 
     //Lifecycle Hooks
-    onBeforeMount(() => {      
-        //Get Local Storage Value
-        if(localStorage.getItem('playlistIsListView')) {
-            state.isListView = JSON.parse(localStorage.getItem('playlistIsListView'));
-        }
-        //show/hide controls on load
-        state.showControls = props.playlistCount > 0 ? true : false;
-        console.log(state.showControls)
-        
-    });
-
     onMounted(()=> {
         //load Playlists
         if(props.playlistCount >= 10) {
@@ -62,6 +62,21 @@
             playlistsStore.getPlaylists({ brand: brand, page: 1, limit: null }, token); 
         }
     })
+
+    onBeforeMount(() => {      
+        //Get Local Storage Value
+        if(localStorage.getItem('playlistIsListView')) {
+            state.isListView = JSON.parse(localStorage.getItem('playlistIsListView'));
+        }
+        //show/hide controls on load
+        state.showControls = props.playlistCount > 0 ? true : false;
+        //Get URL Params
+        const params = new Proxy(new URLSearchParams(window.location.search), {
+            get: (searchParams, prop) => searchParams.get(prop),
+        });
+        //Set resultsPage
+        playlistsStore.resultsPage = Number(params.page || 1);
+    });
 
     //Watchers
 
@@ -130,19 +145,20 @@
 
             <!-- Pagination -->
             <Pagination 
-                :brand="brand"
-                :item-quantity="playlistsStore.playlistsQuantity"
+                v-if="!playlistsStore.loadingPlaylists"
+                :currentPage="playlistsStore.resultsPage"
+                :pageQuantity="playlistsStore.playlistsQuantity"
                 :limit="10"
-                @onPageChange="console.log('New Page is', val)"
+                @pageChange="handlePageChange"
             />
         </div>
         
         <!-- Skeleton Loader -->
         <div v-if="playlistsStore.loadingPlaylists" class="tw-w-full tw-animate-pulse" :class="state.isListView ? 'tw-flex tw-flex-col' : 'tw-grid tw-grid-cols-2 sm:tw-grid-cols-3 lg:tw-grid-cols-4 xl:tw-grid-cols-5 tw-gap-4 tw-mt-4' ">
             <div v-for="(n, index) in (playlistsStore.playlists.length)" 
-                    :key="n" 
-                    class="tw-flex tw-w-full "
-                    :class="state.isListView ? 'tw-h-[52px] tw-flex-row tw-items-center tw-transition-colors tw-py-0.5 even:tw-bg-[#E6E7E9] dark:even:tw-bg-[#081825]' : 'tw-flex-col'"
+                :key="n" 
+                class="tw-flex tw-w-full "
+                :class="state.isListView ? 'tw-h-[52px] tw-flex-row tw-items-center tw-transition-colors tw-py-0.5 even:tw-bg-[#E6E7E9] dark:even:tw-bg-[#081825]' : 'tw-flex-col'"
             >
                 <template v-if="index <= 10">
                     <div class="tw-w-full tw-bg-[#E6E7E9] dark:tw-bg-[#081825] tw-aspect-square"

@@ -12,7 +12,7 @@ import Footer from "../Footer/Footer.vue";
 // import { useRouter, useRoute } from "vue-router";
 import SpriteSheet from "../MusoraIcons/SpriteSheet.vue";
 import { setEndpointPrefix } from "../../utils"
-import PlaylistsModal from "../Playlists/PlaylistsModal.vue";
+import PlaylistsModal from "../Playlists/Modals/PlaylistsModal.vue";
 
 const props = defineProps({
   brand: {
@@ -214,6 +214,7 @@ const handleSubmit = () => {
 onMounted(() => {
   //Check if Mobile on Resize
   window.addEventListener("resize", onResize);
+  console.log('pinned playlists', props.playlists)
 })
 
 onUnmounted(() => {

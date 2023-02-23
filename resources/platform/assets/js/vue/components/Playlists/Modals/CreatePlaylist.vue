@@ -3,11 +3,11 @@
     // TODO: Consider edit mode in the avatar upload process
     // TODO: Close modal after create is 200
     import { reactive, ref, inject, onBeforeMount, onBeforeUnmount } from 'vue';
-    import InputLabel from '../InputLabel/InputLabel.vue';
-    import Dropdown from '../Dropdown/Dropdown.vue';
-    import PlaylistService from '../../../services/playlists';
-    import { usePlaylistsStore } from '../../../stores/playlists';
-    import ThumbnailUpload from '../ThumbnailUpload/ThumbnailUpload.vue';
+    import InputLabel from '../../InputLabel/InputLabel.vue';
+    import Dropdown from '../../Dropdown/Dropdown.vue'
+    import PlaylistService from '../../../../services/playlists.js';
+    import { usePlaylistsStore } from '../../../../stores/playlists';
+    import ThumbnailUpload from '../../ThumbnailUpload/ThumbnailUpload.vue';
 
     const props = defineProps({
         modalProps: {
@@ -79,7 +79,7 @@
                         text: `${state.name} was added to your library.`
                     })
                     //load Playlists
-                    playlistsStore.getPlaylists({ brand: brand, page: 1, limit: null }, token);       
+                    playlistsStore.getPlaylists({ brand: brand, page: playlistsStore.resultsPage, limit: null }, token);       
                 }
             })
         }
@@ -95,7 +95,7 @@
                             text: `Your playlist was successfully edited`
                         })
                         //load Playlists
-                        playlistsStore.getPlaylists({ brand: brand, page: 1, limit: null }, token);       
+                        playlistsStore.getPlaylists({ brand: brand, page: playlistsStore.resultsPage, limit: null }, token);       
                     } else {
                         console.log('edit response code', response)
                     }
@@ -119,7 +119,7 @@
                             text: `The playlist was successfully duplicated.`
                         })
                         //load Playlists
-                        playlistsStore.getPlaylists({ brand: brand, page: 1, limit: null }, token);       
+                        playlistsStore.getPlaylists({ brand: brand, page: playlistsStore.resultsPage, limit: null }, token);       
                     } else {
                         console.log('duplicate response code', response)
                     }

@@ -13,6 +13,7 @@ export const usePlaylistsStore = defineStore({
       loadingPlaylists: false,
       loadingPinnedPlaylists: false,
       playlistsQuantity: 0,
+      resultsPage: 1
     }
   },
   getters: {

@@ -1,7 +1,7 @@
 <script setup>
     import { inject, onBeforeMount } from 'vue';
-    import PlaylistService from '../../../services/playlists';
-    import { usePlaylistsStore } from '../../../stores/playlists';
+    import PlaylistService from '../../../../services/playlists.js';
+    import { usePlaylistsStore } from '../../../../stores/playlists';
 
     //-----------Props-----------//
     const props = defineProps({
@@ -29,8 +29,12 @@
                 if (response.status === 200) {
                     //update pinia stores (if pinned)
                     playlistsStore.unpinPlaylist(props.playlist.id)
-                    if(playlistsStore.playlists.length <=10) {
+                    if(playlistsStore.playlistsQuantity <=10) {
                         playlistsStore.deletePlaylist(props.playlist);
+                    } else {
+                        //load
+                        playlistsStore.loadingPlaylists = true;
+                        playlistsStore.getPlaylists({ brand: props.brand, page: playlistsStore.resultsPage, limit: 10 }, token); 
                     }
                     //show success message
                     window.shownotification({

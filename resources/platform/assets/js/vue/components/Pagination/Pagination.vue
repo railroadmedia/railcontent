@@ -1,52 +1,118 @@
 <script setup>
-    import { onBeforeMount, watch, ref, inject, computed, reactive } from 'vue';
-
+    import { onBeforeMount, onMounted, watch, inject, reactive, computed } from 'vue';
+    import Utils from '../../vuesora/assets/js/helper-functions/utils.js';
+    
+    //-----------Emits-----------//
+    const emit = defineEmits(['pageChange']);
+    
     //-----------Props-----------//
     const props = defineProps({
-        brand: {
-            type: String,
-            default: "drumeo"
-        },
-        itemQuantity: {
+        currentPage: {
             type: Number,
-            default: null,
-            required: true,
+            default: () => 1,
+        },
+        pageQuantity: {
+            type: Number,
+            default: () => 0,
         },
         limit: {
             type: Number,
-            default: 10,
-        }
+            default: () => 10,
+        },
+    })
+
+    //-----------Computed-----------//
+    const totalPages = computed(() => {
+        return Math.ceil(props.pageQuantity / props.limit);
+    });
+    const activePages = computed(() => {
+        const pages = range(Math.ceil(props.pageQuantity / props.limit), 1);
+        return pages.filter(page => page < (props.currentPage + 2) && page > (props.currentPage - 2));
     });
 
-    const pageQuantity = computed(()=> {
-        return Math.ceil(props.itemQuantity / props.limit);
-    })
+    //-----------Method-----------//
+    const range = (length, start) => Utils.range(length, start);
 
-    //-----------Refs-----------//
-    let page = ref(1);
-
-    //-----------Emits-----------//
-    const emit = defineEmits(['onPageChange']);
-
-    //-----------Lifecycle Hooks-----------//
-    onBeforeMount(()=> {
-        console.log(props.itemQuantity , props.limit)
-    })
+    const goToPage = (page) => {
+        emit('pageChange', page );
+    }
 
 </script>
+
 <template>
-    <div v-if="pageQuantity !== 1"
-        class="tw-flex tw-items-center tw-justify-center dark:tw-text-white tw-mt-4"
-    >
-        <button class="tw-p-1" @click="backPage">prev</button>
+    <div class="tw-flex tw-flex-row pagination tw-items-center tw-justify-center tw-w-full tw-py-6">
+        
+        <!-- Left Arrow -->
         <button
-            class="tw-p-1"
-            v-for="pageNumber in pageQuantity"
-            :key="pageNumber"
-            @click="() => onPageChange(pageNumber)"
+            v-if="currentPage > 1"
+            class="tw-w-[26px] tw-h-[26px] tw-rounded-full tw-inline-flex tw-items-center tw-justify-center tw-text-lg tw-font-bold tw-mx-1 tw-shadow-none tw-text-[#A1A1A9] dark:tw-text-[#9EC0DC]"
+            @click="goToPage(currentPage - 1)"
         >
-            {{ pageNumber }}
+            <i class="far fa-chevron-left"></i>
         </button>
-        <button class="tw-p-1" @click="nextPage">next</button>
+
+        <!-- Page is greater thatn 2 -->
+        <button
+            v-if="currentPage > 2"
+            class="tw-w-[26px] tw-h-[26px] tw-rounded-full tw-inline-flex tw-items-center tw-justify-center tw-text-lg tw-font-bold tw-mx-1 tw-shadow-none tw-text-[#A1A1A9] dark:tw-text-[#9EC0DC]"
+            @click="goToPage(1)"
+        >
+            1
+        </button>
+
+        <!-- Page is greater thatn 3 -->
+        <button
+            v-if="currentPage > 3"
+            disabled
+            class="tw-w-[26px] tw-h-[26px] tw-rounded-full tw-inline-flex tw-items-center tw-justify-center tw-text-lg tw-font-bold tw-mx-1 tw-shadow-none tw-text-[#A1A1A9] dark:tw-text-[#9EC0DC]"
+        >
+            ...
+        </button>
+
+        <!-- First Set -->
+        <button
+            v-for="i in activePages"
+            :key="`page-${i}`"
+            class="tw-w-[26px] tw-h-[26px] tw-rounded-full tw-inline-flex tw-items-center tw-justify-center tw-text-lg tw-font-bold tw-mx-1"
+            :class="currentPage === i ? 'tw-text-white tw-bg-[#52525A] dark:tw-text-[#223F57] dark:tw-bg-[#9EC0DC]' : 'tw-text-[#A1A1A9] dark:tw-text-[#9EC0DC]'"
+            @click="goToPage(i)"
+        >
+            {{ i }}
+        </button>
+
+        <button
+            v-if="currentPage < totalPages - 2"
+            disabled
+            class="tw-w-[26px] tw-h-[26px] tw-rounded-full tw-inline-flex tw-items-center tw-justify-center tw-text-lg tw-font-bold tw-mx-1 tw-shadow-none tw-text-[#A1A1A9] dark:tw-text-[#9EC0DC]"
+        >
+            ...
+        </button>
+
+        <button
+            v-if="currentPage < totalPages - 1"
+            class="tw-w-[26px] tw-h-[26px] tw-rounded-full tw-inline-flex tw-items-center tw-justify-center tw-text-lg tw-font-bold tw-mx-1 tw-shadow-none tw-text-[#A1A1A9] dark:tw-text-[#9EC0DC]"
+            @click="goToPage(totalPages)"
+        >
+            {{ totalPages }}
+        </button>
+
+        <!-- Right Arrow -->
+        <button
+            v-if="currentPage < totalPages"
+            class="tw-w-[26px] tw-h-[26px] tw-rounded-full tw-inline-flex tw-items-center tw-justify-center tw-text-lg tw-font-bold tw-mx-1 tw-shadow-none tw-text-[#A1A1A9] dark:tw-text-[#9EC0DC]"
+            @click="goToPage(currentPage + 1)"
+        >
+            <i class="far fa-chevron-right"></i>
+        </button>
     </div>
 </template>
+<style lang="scss">
+    button.btn.page-button {
+        margin:0 3px;
+
+        & > span {
+            border-width:1px;
+            font-weight:500;
+        }
+    }
+</style>

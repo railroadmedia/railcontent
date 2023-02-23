@@ -27,6 +27,7 @@
     onMounted(()=> {
         console.log(props.playlistCount)
     })
+
 </script>
 <template>
     <platform-header

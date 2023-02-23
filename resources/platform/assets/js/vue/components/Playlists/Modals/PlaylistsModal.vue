@@ -1,5 +1,5 @@
 <script setup>
-import InfoModal from '../Modal/InfoModal.vue';
+import InfoModal from '../../Modal/InfoModal.vue';
 import CreatePlaylist from './CreatePlaylist.vue';
 import AddItem from './AddItem.vue'
 import StartEnd from './StartEnd.vue';

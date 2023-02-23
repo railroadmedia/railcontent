@@ -41,7 +41,6 @@
             isPrivate: false,
         });
 
-
     //-----------Watchers-----------//
     watch(props.list, async (newList) => {
         state.isPinned = newList.pinned;

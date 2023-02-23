@@ -1,8 +1,8 @@
 <script setup>
     import { onBeforeMount, inject, reactive } from 'vue';
-    import MusoraIcon from '../../MusoraIcons/MusoraIcon.vue';
-    import PlaylistService from '../../../../services/playlists.js';
-    import { usePlaylistsStore } from '../../../../stores/playlists';
+    import MusoraIcon from '../../../MusoraIcons/MusoraIcon.vue';
+    import PlaylistService from '../../../../../services/playlists';
+    import { usePlaylistsStore } from '../../../../../stores/playlists';
 
     //-----------Props-----------//
     const props = defineProps({
