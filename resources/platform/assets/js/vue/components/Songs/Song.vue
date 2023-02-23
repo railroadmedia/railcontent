@@ -255,7 +255,7 @@ const getBrandSpecificParams = () => {
                                 <ContentLessonActionButtons :theme-color="brand" :title="songTitle"
                                     :instructors="instructors" :parent-title="parentTitle" :is-liked="isLiked"
                                     :like-count="likeCount" :is-added="isAdded" :content-id="contentId"
-                                    :user-id="userId" :resources="resources" />
+                                    :user-id="userId" :resources="resources" content-type="song" />
                             </div>
                         </div>
                     </div>

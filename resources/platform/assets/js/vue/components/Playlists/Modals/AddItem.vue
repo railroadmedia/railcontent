@@ -4,7 +4,7 @@
 TODO: Open Create Playlist and on close open the addItem again with the right props
 
 */
-import { ref, onMounted, inject, computed } from 'vue';
+import { ref, onMounted, inject, computed, onUpdated } from 'vue';
 import PlaylistService from '../../../../services/playlists';
 import Toggle from '../../Toggle/Toggle.vue'
 import Table from '../../Table/Table.vue'
@@ -36,7 +36,7 @@ const additionalItems = ref(0);
 const isLoadingPlaylists = ref(false);
 const isLoadingAssignments = ref(false);
 const selectedPlaylists = ref([]);
-const showSongToggle = ref(true);
+const showSongToggle = ref(false);
 const addFullSongToggle = ref(false);
 const addInstrumentlessToggle = ref(false);
 
@@ -61,12 +61,16 @@ const instrumentless = computed(() => {
     }[props.brand];
 })
 
+const playlistsLength = computed(() => {
+    return selectedPlaylists.value.length;
+});
+
 const handleActionClick = (payload) => {
     const index = selectedPlaylists.value.indexOf(String(payload));
     if (index !== -1) {
         const selectionCopy = [...selectedPlaylists.value];
         selectionCopy[index] = null;
-        const newSelection = selectionCopy.filter(n=>n);
+        const newSelection = selectionCopy.filter(n => n);
         selectedPlaylists.value = newSelection;
     } else {
         selectedPlaylists.value = [...selectedPlaylists.value, String(payload)];
@@ -84,10 +88,15 @@ const handleConfirm = () => {
         contentId: props.contentId,
         importAssignments: importAll.value,
         playlistIds: selectedPlaylists.value,
+        addFull: addFullSongToggle.value,
+        addInstrumentless: addInstrumentlessToggle.value,
         token,
     }).then(() => {
         isLoadingPlaylists.value = false;
         emit('onCancel');
+        window.shownotification({ icon: 'check', text: 'The items were added to your selected playlists.' });
+    }).catch(() => {
+        window.shownotification({ icon: 'error', text: 'An error ocurred while saving your changes, please try again later.' });
     });
 };
 
@@ -97,19 +106,20 @@ const handleCreate = () => {
 }
 
 onMounted(() => {
-    isLoadingAssignments.value = true;
     isLoadingPlaylists.value = true;
 
     if (props.type === 'song') {
-        // Add logic code here
-        // ex: showSongToggle.value = true
+        showSongToggle.value = true
+    } else {
+        isLoadingAssignments.value = true;
+        PlaylistService.getAssignmentsForContent({ token, contentId: props.contentId, brand: props.brand }).then((r) => {
+            const { data: { soundslice_assignments_count } } = r;
+            additionalItems.value = soundslice_assignments_count;
+            isLoadingAssignments.value = false;
+        }).catch(() => {
+            window.shownotification({ icon: 'error', text: 'An error ocurred while fetching your data, please try again later.' });
+        });
     }
-
-    PlaylistService.getAssignmentsForContent({ token, contentId: props.contentId, brand: props.brand }).then((r) => {
-        const { data: { soundslice_assignments_count } } = r;
-        additionalItems.value = soundslice_assignments_count;
-        isLoadingAssignments.value = false;
-    });
 
     PlaylistService.getCurrentUserPlaylists({ token }).then(r => {
         isLoadingPlaylists.value = false;
@@ -140,7 +150,9 @@ onMounted(() => {
         });
 
         formattedRows.value = formattedTable;
-    });
+    }).catch(() => {
+            window.shownotification({ icon: 'error', text: 'An error ocurred while fetching your data, please try again later.' });
+        });
 });
 </script>
 
@@ -159,41 +171,47 @@ onMounted(() => {
                         additionalItems
                     }} additional
                         assignment items. Would you like to also import them into your playlist?</p>
-                    <Toggle @onToggle="handleOnToggleAssignments" />
+                    <Toggle id="import-all-toggle" @onToggle="handleOnToggleAssignments" />
                 </fieldset>
             </div>
         </div>
 
-        <div class="tw-flex tw-w-full tw-justify-center tw-flex-col" v-if="showSongToggle">
-            <p class="tw-text-[16px] tw-text-center tw-w-full">This song contains both full and {{ instrumentless }} tracks. Choose which tracks you want to Import into your Playlist.</p>
+        <div class="tw-flex tw-w-full tw-justify-center tw-flex-col tw-pt-[18px]" v-if="showSongToggle">
+            <p class="tw-text-[16px] tw-text-center tw-w-full tw-pb-[20px]">This song contains both full and {{
+                instrumentless }} tracks. Choose which tracks you want to Import into your Playlist.</p>
             <div class="tw-flex tw-justify-around tw-w-full">
                 <fieldset class="tw-flex tw-flex-row tw-items-center">
-                    <p class="tw-text-center tw-text-[14px] tw-pr-[16px]"><strong class="tw-uppercase">FULL TRACK</strong></p>
-                    <Toggle @onToggle="handleOnToggleFullSong" />
+                    <p class="tw-text-center tw-text-[14px] tw-pr-[16px]"><strong class="tw-uppercase">FULL TRACK</strong>
+                    </p>
+                    <Toggle id="toggle-full-song" @onToggle="handleOnToggleFullSong" />
                 </fieldset>
                 <fieldset class="tw-flex tw-flex-row tw-items-center">
-                    <p class="tw-text-center tw-text-[14px] tw-pr-[16px]"><strong class="tw-uppercase">{{ instrumentless }} TRACK</strong></p>
-                    <Toggle @onToggle="handleOnToggleInstrumentlessSong" />
+                    <p class="tw-text-center tw-text-[14px] tw-pr-[16px]"><strong class="tw-uppercase">{{ instrumentless }}
+                            TRACK</strong></p>
+                    <Toggle id="toggle-instrumentless-song" @onToggle="handleOnToggleInstrumentlessSong" />
                 </fieldset>
             </div>
         </div>
-        <Table @onActionClick="handleActionClick" classOverride="tw-mt-[24px] tw-max-h-[350px] tw-overflow-scroll" :rows="formattedRows">
+        <Table @onActionClick="handleActionClick" classOverride="tw-mt-[24px] tw-max-h-[350px] tw-overflow-scroll"
+            :rows="formattedRows">
             <template v-slot:actionContent="slotProps">
-                <PlusCircleIcon v-if="!selectedPlaylists.includes(String(slotProps.actionPayload))" class="tw-w-[23px] tw-h-[23px] tw-text-[#7E9AB1]" />
-                <CheckCircleIcon v-if="selectedPlaylists.includes(String(slotProps.actionPayload))" :class="`tw-w-[23px] tw-h-[23px] tw-text-[${brand}]`" />
+                <PlusCircleIcon v-if="!selectedPlaylists.includes(String(slotProps.actionPayload))"
+                    class="tw-w-[23px] tw-h-[23px] tw-text-[#7E9AB1]" />
+                <CheckCircleIcon v-if="selectedPlaylists.includes(String(slotProps.actionPayload))"
+                    :class="`tw-w-[23px] tw-h-[23px] tw-text-[${brand}]`" />
             </template>
         </Table>
         <div class="tw-w-full tw-flex tw-justify-between tw-pt-[25px]">
-            <button @click="handleCreate" class="tw-btn-secondary tw-uppercase tw-text-[#9EC0DC] tw-min-w-[167px] tw-h-[35px]">
+            <button @click="handleCreate"
+                class="tw-btn-secondary tw-uppercase tw-text-[#9EC0DC] tw-min-w-[167px] tw-h-[35px]">
                 <PlusIcon class="tw-w-[12px] tw-h-[12px]" />
                 <span class="tw-pl-[6px]">CREATE NEW LIST</span>
             </button>
             <div class="tw-flex">
                 <button @click="handleCancel"
                     class="tw-btn-primary tw-uppercase dark:tw-text-white tw-h-[35px] tw-text-[#0D0D0D]">CANCEL</button>
-                <button @click="handleConfirm"
-                    :class="`tw-btn-primary tw-uppercase tw-text-white tw-bg-${brand} tw-h-[35px]`">CONFIRM</button>
-            </div>
+            <button :disabled="!playlistsLength" @click="handleConfirm"
+                :class="`tw-btn-primary tw-uppercase tw-text-white tw-bg-${brand} tw-h-[35px]`">CONFIRM</button>
         </div>
     </div>
-</template>
+</div></template>
