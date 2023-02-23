@@ -4,7 +4,7 @@
 TODO: Open Create Playlist and on close open the addItem again with the right props
 
 */
-import { ref, onMounted, inject } from 'vue';
+import { ref, onMounted, inject, computed } from 'vue';
 import PlaylistService from '../../../services/playlists';
 import Toggle from '../Toggle/Toggle.vue'
 import Table from '../Table/Table.vue'
@@ -20,6 +20,10 @@ const props = defineProps({
         type: String,
         default: null
     },
+    type: {
+        default: String,
+        default: null,
+    }
 });
 
 const emit = defineEmits(['onCancel']);
@@ -31,11 +35,31 @@ const formattedRows = ref([]);
 const additionalItems = ref(0);
 const isLoadingPlaylists = ref(false);
 const isLoadingAssignments = ref(false);
-const selectedPlaylists = ref([])
+const selectedPlaylists = ref([]);
+const showSongToggle = ref(true);
+const addFullSongToggle = ref(false);
+const addInstrumentlessToggle = ref(false);
 
-const handleOnToggle = (val) => {
+const handleOnToggleAssignments = (val) => {
     importAll.value = val;
 };
+
+const handleOnToggleFullSong = (val) => {
+    addFullSongToggle.value = val;
+};
+
+const handleOnToggleInstrumentlessSong = (val) => {
+    addInstrumentlessToggle.value = val;
+};
+
+const instrumentless = computed(() => {
+    return {
+        drumeo: 'drumless',
+        guitareo: 'guitarless',
+        singeo: 'voiceless',
+        pianote: 'pianoless'
+    }[props.brand];
+})
 
 const handleActionClick = (payload) => {
     const index = selectedPlaylists.value.indexOf(String(payload));
@@ -75,6 +99,11 @@ const handleCreate = () => {
 onMounted(() => {
     isLoadingAssignments.value = true;
     isLoadingPlaylists.value = true;
+
+    if (props.type === 'song') {
+        // Add logic code here
+        // ex: showSongToggle.value = true
+    }
 
     PlaylistService.getAssignmentsForContent({ token, contentId: props.contentId, brand: props.brand }).then((r) => {
         const { data: { soundslice_assignments_count } } = r;
@@ -130,11 +159,25 @@ onMounted(() => {
                         additionalItems
                     }} additional
                         assignment items. Would you like to also import them into your playlist?</p>
-                    <Toggle @onToggle="handleOnToggle" />
+                    <Toggle @onToggle="handleOnToggleAssignments" />
                 </fieldset>
             </div>
         </div>
-        <Table @onActionClick="handleActionClick" classOverride="tw-mt-[24px]" :rows="formattedRows">
+
+        <div class="tw-flex tw-w-full tw-justify-center tw-flex-col" v-if="showSongToggle">
+            <p class="tw-text-[16px] tw-text-center tw-w-full">This song contains both full and {{ instrumentless }} tracks. Choose which tracks you want to Import into your Playlist.</p>
+            <div class="tw-flex tw-justify-around tw-w-full">
+                <fieldset class="tw-flex tw-flex-row tw-items-center">
+                    <p class="tw-text-center tw-text-[14px] tw-pr-[16px]"><strong class="tw-uppercase">FULL TRACK</strong></p>
+                    <Toggle @onToggle="handleOnToggleFullSong" />
+                </fieldset>
+                <fieldset class="tw-flex tw-flex-row tw-items-center">
+                    <p class="tw-text-center tw-text-[14px] tw-pr-[16px]"><strong class="tw-uppercase">{{ instrumentless }} TRACK</strong></p>
+                    <Toggle @onToggle="handleOnToggleInstrumentlessSong" />
+                </fieldset>
+            </div>
+        </div>
+        <Table @onActionClick="handleActionClick" classOverride="tw-mt-[24px] tw-max-h-[350px] tw-overflow-scroll" :rows="formattedRows">
             <template v-slot:actionContent="slotProps">
                 <PlusCircleIcon v-if="!selectedPlaylists.includes(String(slotProps.actionPayload))" class="tw-w-[23px] tw-h-[23px] tw-text-[#7E9AB1]" />
                 <CheckCircleIcon v-if="selectedPlaylists.includes(String(slotProps.actionPayload))" :class="`tw-w-[23px] tw-h-[23px] tw-text-[${brand}]`" />
