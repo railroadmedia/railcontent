@@ -6,13 +6,13 @@
 
             <h2><strong>Hear your piano the way <br class="hidden sm:inline">it was meant to sound.</strong></h2>
             <div class="flex flex-wrap sm:flex-nowrap items-center justify-center text-left my-6 sm:my-8">
-                <div class="block rounded-xl bg-cover bg-center w-full sm:w-1/2 pb-72 sm:pb-96 lg:py-48 mb-4 sm:mb-0" style="background-image:url(https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://pianote.s3.amazonaws.com/products/concert-headphones/feature-01.jpg);"></div>
+                <div class="block rounded-xl bg-contain bg-center w-full sm:w-1/2 pb-72 sm:pb-96 lg:py-48 mb-4 sm:mb-0 bg-no-repeat" style="background-image:url(https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/anniversary/2023/headphones-collage.png);"></div>
                 <p class="w-full sm:w-1/2 sm:pl-7">
                     Elevate your practice experience with these beautifully designed hi-end headphones for piano players. <br><br>
-                    They’re lightweight and have super-comfy ear padding for extended playing sessions and unrivalled sound definitition and bass response.
+                    They’re lightweight and have super-comfy ear padding for extended playing sessions and unrivaled sound definition and bass response.
                     Your playing has never sounded so good.<br><br>
                     Valued at $189, these headphones are FREE with your Pianote Membership.<br><br>
-                    But hurry - there are only 500 453 left.<br><br>
+                    But hurry - there are only <s>500</s> {-- TODO --} left.<br><br>
                     And when they’re gone, they’re gone.
                 </p>
             </div>
