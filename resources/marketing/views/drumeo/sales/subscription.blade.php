@@ -71,8 +71,14 @@
         }
 
         .splide__pagination__page {
-            margin: 3px 6px !important;
+            margin: 3px 10px !important;
             opacity: 1 !important;
+        }
+
+        @media (min-width: 768px) {
+            .splide__pagination__page {
+                margin: 3px 6px !important;
+            }
         }
 
         .splide__arrow svg {
@@ -138,7 +144,14 @@
             "trialVersion" => true,
             "joinUrl" => '/choose-plan',
         ])
+        <a href="/30-day-drummer" class="flex items-center justify-center py-2 px-2 sm:px-0 w-full z-[100]" style="background: linear-gradient(180deg, #EBF0FF 0%, #DEE6FF 100%);">
+            <img class="h-8 sm:h-10 mr-4" src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/30_day_drummer_logo.png" alt="30 day drummer logo" />
+            <p class="text-sm sm:text-lg font-bebas uppercase mx-0 leading-tight">
+                Enrollment is open | February 27 - March 28 <span class="hidden sm:inline">|</span> <br class="sm:hidden"><span class="text-drumeo underline">Click here to join season II.</span>
+            </p>
+        </a>
     @endif
+
 
     @php
         $features = [
@@ -599,14 +612,15 @@
 
     @include('drumeo._partials.faq')
 
-    @include('_partials.components.soundslice-modal',[
+    @include('_partials.components.video-modal',[
         'name' => 'soundslice',
         'video' => '1D6Vc',
-        'slices' => true,
+        'soundslice' => true,
     ])
     @include('_partials.components.video-modal',[
         'name' => 'trailer',
-        'video' => '785314424'
+        'video' => '785314424',
+        'vimeo' => true,
     ])
 
     @if(!empty($promoVersion))

@@ -71,8 +71,14 @@
         }
 
         .splide__pagination__page {
-            margin: 3px 6px !important;
+            margin: 3px 10px !important;
             opacity: 1 !important;
+        }
+
+        @media (min-width: 768px) {
+            .splide__pagination__page {
+                margin: 3px 6px !important;
+            }
         }
 
         .splide__arrow svg {
@@ -557,14 +563,15 @@
 
     @include('singeo._partials.faq')
 
-    @include('_partials.components.soundslice-modal',[
+    @include('_partials.components.video-modal',[
         'name' => 'soundslice',
         'video' => 'ZsC4c',
-        'slices' => true
+        'soundslice' => true
     ])
     @include('_partials.components.video-modal',[
         'name' => 'trailer',
-        'video' => '785314379'
+        'video' => '785314379',
+        'vimeo' => true,
     ])
 
     @if(!empty($promoVersion))

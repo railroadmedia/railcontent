@@ -84,7 +84,7 @@
 @endsection
 
 @section('global-body')
-    @include('pianote._partials._nav', [
+    @include('pianote.sales.partials._nav', [
         "cartVersion" => true
     ])
 
@@ -300,7 +300,7 @@
 {{--                </a>--}}
 {{--            </div>--}}
         </div>
-        <a href="/new-year#customize-anchor" class="text-pianote"><h6><strong><u>OR FREE WITH A PIANOTE MEMBERSHIP</u></strong></h6></a>
+{{--        <a href="/new-year#customize-anchor" class="text-pianote"><h6><strong><u>OR FREE WITH A PIANOTE MEMBERSHIP</u></strong></h6></a>--}}
     </section>
     <section class="content-section text-center" style="background: #00101D;">
         <div class="container mx-auto relative z-50">
@@ -349,7 +349,7 @@
         </div>
     </div>
 
-    @include('pianote._partials._footer')
+    @include('pianote.sales.partials._footer')
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>

@@ -62,17 +62,7 @@ Route::domain('{singeoDomain}')
                 ]);
         }
     );
-    Route::group(['prefix' => 'improve-any-voice'],
-        function () {
-            Route::get('/{page?}/{lesson?}', LeadGenController::class . '@improveAnyVoice')
-                ->whereIn('page', [
-                    null, 'lessons'
-                ])
-                ->whereIn('lesson', [
-                    null, '1', '2', '3', '4', '5', '6', '7'
-                ]);
-        }
-    );
+    Route::get('/improve-any-voice', [LeadGenController::class, 'improveAnyVoice']);
     Route::group(['prefix' => 'live-vocal-bootcamp'],
         function () {
             Route::get('/{page?}', LeadGenController::class . '@liveBootcamp')
@@ -81,16 +71,6 @@ Route::domain('{singeoDomain}')
                 ]);
         }
     );
-    Route::group(['prefix' => 'stop-hating-your-voice'],
-        function () {
-            Route::get('/{page?}/{lesson?}', LeadGenController::class . '@stopHatingVoice')
-                ->whereIn('page', [
-                    null, 'lessons'
-                ])
-                ->whereIn('lesson', [
-                    null, '1', '2', '3'
-                ]);
-        }
-    );
+    Route::get('/stop-hating-your-voice', [LeadGenController::class, 'stopHatingVoice']);
 });
 

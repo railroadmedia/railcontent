@@ -160,7 +160,7 @@
 @stop
 
 @section('global-body')
-    @include("pianote._partials._nav")
+    @include("pianote.sales.partials._nav")
     <header class="header text-white text-center px-4 sm:px-6 py-14 md:py-20 lg:py-32 relative bg-no-repeat bg-cover bg-top lazyload" style="background-color:#031e3b;" data-bg="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://pianote.s3.amazonaws.com/shop/header-background.jpg">
         <div class="mx-auto relative z-10 max-w-md md:max-w-5xl">
                 <h1><strong>Lifetime Members Masterclass</strong></h1>
@@ -178,7 +178,7 @@
         </div>
     </section>
 
-    @include("pianote._partials._footer", [
+    @include("pianote.sales.partials._footer", [
             "minimal" => true
         ])
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

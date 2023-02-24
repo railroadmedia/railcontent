@@ -15,6 +15,7 @@
     @include('_partials.layout._fonts')
     @include('_partials.layout.favicons.'.$theme.'-favicons')
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
 
     @yield('layout-styles')
 
@@ -40,7 +41,8 @@
 
 @yield('layout-header')
 
-<main class="flex flex-col w-full min-h-screen @yield('main-class')" @yield('body-data')>
+<main class="flex flex-col w-full @yield('main-class')" @yield('body-data')>
+
     @yield('layout-body')
 </main>
 
@@ -61,7 +63,7 @@
         if($theme === 'drumeo'){ echo '14d9d94c-d89d-42e7-93ad-15ff13964974'; }
         elseif($theme === 'pianote'){ echo '8c3ddef4-7a0e-42df-8200-a650c24932ea'; }
         elseif($theme === 'guitareo'){ echo '157f182f-3d4d-4cb7-8f8d-805f0b3e4fa4'; }
-        elseif($theme === 'guitareo'){ echo '82b3c165-0840-4f45-aaeb-4775857c4b91'; }
+        elseif($theme === 'singeo'){ echo '82b3c165-0840-4f45-aaeb-4775857c4b91'; }
     @endphp')
     Beacon('on', 'ready', () => {
         document.querySelector('.BeaconFabButtonFrame').style.bottom = "50px";
@@ -69,7 +71,7 @@
 </script>
 
 @yield('layout-scripts')
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript" src="{{ asset('marketing/js/jquery.countdown-2.min.js') }}"></script>
 
 <script>

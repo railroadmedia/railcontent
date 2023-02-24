@@ -90,7 +90,7 @@
 @stop
 
 @section('global-body')
-    @include('pianote._partials._nav', [
+    @include('pianote.sales.partials._nav', [
     "subscriptionVersion" => true,
     ])
     {{--<style>--}}
@@ -105,9 +105,7 @@
     {{--<img class="logo"--}}
     {{--src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/march/logo.png">--}}
     {{--<p>--}}
-    {{--@if(!empty(Prices::$lifetimeMembership))--}}
     {{--<strong>ONLY <s class='opacity-60'>50</s> {{ $products['PIANOTE-MEMBERSHIP-LIFETIME']->getStockAvailability()}} SPOTS LEFT</strong>--}}
-    {{--@endif--}}
     {{--</p>--}}
     {{--</div>--}}
     {{--</div>--}}
@@ -405,7 +403,7 @@
         "name" => "unbox",
         "vimeoId" => "774408046",
     ])
-    @include('pianote._partials._footer')
+    @include('pianote.sales.partials._footer')
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 {{--    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>--}}

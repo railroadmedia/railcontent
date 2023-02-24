@@ -26,7 +26,7 @@
 @stop
 
 @section('global-body')
-    @include('pianote._partials._nav')
+    @include('pianote.sales.partials._nav')
 
     <section class="py-12 md:py-20 bg-center bg-cover bg-no-repeat" style="background-color:#1c0203;background-image:url('https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/quiz/bg.jpg')">
         <div class="max-w-2xl lg:max-w-3xl mx-auto text-center text-white px-6 lg:px-0">
@@ -56,7 +56,7 @@
         <h4><strong>Take the Quiz &raquo;</strong></h4>
     </a>
 
-    @include("pianote._partials._footer", [
+    @include("pianote.sales.partials._footer", [
             "minimal" => true
         ])
 

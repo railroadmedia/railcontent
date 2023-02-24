@@ -73,7 +73,7 @@ abstract class Command extends CommandBase
     }
 
     /**
-     * Function for chunking queries into jobs to avoid running into Lambda 15 minute execution limit
+     * Function for chunking queries into a batch of jobs to avoid running into Lambda 15 minute execution limit
      */
     public function runBatchQuery(callable $getJob, $chunks = 1000): bool
     {

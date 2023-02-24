@@ -1,7 +1,7 @@
 @extends('_partials.layout.global-product-layout')
 
 @section('layout-header')
-    @include('pianote._partials._nav',[
+    @include('pianote.sales.partials._nav',[
          "cartVersion" => true,
          'shopToMusora' => $product->is_seasonal,
     ])
@@ -93,5 +93,5 @@
 @endsection
 
 @section('layout-footer')
-    @include('pianote._partials._footer')
+    @include('pianote.sales.partials._footer')
 @endsection
