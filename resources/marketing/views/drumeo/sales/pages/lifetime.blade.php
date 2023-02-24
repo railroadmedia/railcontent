@@ -275,14 +275,18 @@
                             <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
                                 <div
                                     x-ref="front"
-                                    class="hover:border-2 border-drumeo front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700"
-                                    :class="selected && 'border-4'"
+                                    class="border-drumeo front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700"
+                                    :class="selected ? 'border-4' : !selected && bonus !==3 && 'hover:border-2'"
                                     style="@if(!empty($bonus['special'])) overflow: visible;border-color: #cda880; @endif backface-visibility: hidden;">
                                     @if(!empty($bonus['badge']))
                                         <h6 class="absolute text-white top-0 left-0 w-full py-0.5 bg-{{ $theme }} rounded-t-xl font-bebas uppercase">{{ $bonus['badge'] }}</h6>
                                         {{--                                        <h4 class="absolute text-white -top-3 -left-3  py-3 px-2.5 rounded-full transform -rotate-12" style="    line-height: 0.6;background-color:#cda880;"><strong>6<br><span class="leading-none" style="font-size: 50%;">PAIRS</span></strong></h4>--}}
                                     @endif
-                                    <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url(https://cdn.musora.com/image/fetch/w_460,q_auto:best/{{ $bonus['image'] }});"></div>
+                                    <div
+                                        class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover"
+                                        style="background-image:url(https://cdn.musora.com/image/fetch/w_460,q_auto:best/{{ $bonus['image'] }});"
+                                        :class="!selected && bonus === 3 && 'grayscale'"
+                                    ></div>
                                 </div>
                             </div>
                         </div>
