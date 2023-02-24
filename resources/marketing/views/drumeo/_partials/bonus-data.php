@@ -1,10 +1,32 @@
 <?php
     $bonuses = [
         [
+            'image' => 'https://cdn.musora.com/image/fetch/c_fill,w_300,q_auto:good/https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/eardrums.jpg',
+            'title' => 'Drumeo EarDrums',
+            'description' => 'Drumeo EarDrums reduce external volume by up to -29dB. That means you can play hard while protecting your ears.',
+            'price' => floatval($productPrices['drumeo-eardrums']->price),
+            'online-ship' => "Free Shipping",
+            'shipping' => "no-shipping"
+        ],
+        [
             'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/pad.jpg',
             'title' => 'QuietPad',
             'description' => 'Practice anywhere with two full-size playing surfaces.',
             'price' => floatval($productPrices['quietpad']->price),
+            'shipping' => true,
+        ],
+        [
+            'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/p4.jpg',
+            'title' => 'Practice Pad',
+            'description' => '',
+            'price' => floatval($productPrices['practicepad']->price),
+            'shipping' => true,
+        ],
+        [
+            'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/bbdb.jpg',
+            'title' => 'The Best Beginner Drum Book',
+            'description' => '',
+            'price' => floatval($productPrices['BeginnerBook']->price),
             'shipping' => true,
         ],
         [
