@@ -44,17 +44,26 @@ class PlaylistDecorator extends ModeDecoratorBase
                 if ($lessons->isNotEmpty()) {
                     $playlists[$index]['thumbnail_url'] =
                         $lessons->first()
-                            ->fetch('data.thumbnail_url');
+                            ->fetch(
+                                'data.thumbnail_url',
+                                ($lessons->first()
+                                    ->fetch('parent')) ?
+                                    $lessons->first()
+                                        ->fetch('parent')
+                                        ->fetch('data.thumbnail_url') : ''
+                            );
                 }
-            }else{
+            } else {
                 $playlists[$index]['uploaded_thumbnail'] = true;
             }
 
             $playlists[$index]['duration_formated'] = gmdate('H:i:s', $playlists[$index]['duration'] ?? 0);
 
-            if(isset($playlist['user_playlist_item_id'])){
-                $playlists[$index]['playback_url'] = url()->route('platform.user.playlist-item',['playlistId' => $playlist['id'],
-                    'playlistItemId' => $playlist['user_playlist_item_id']]);
+            if (isset($playlist['user_playlist_item_id'])) {
+                $playlists[$index]['playback_url'] = url()->route('platform.user.playlist-item', [
+                    'playlistId' => $playlist['id'],
+                    'playlistItemId' => $playlist['user_playlist_item_id'],
+                ]);
             }
         }
 
@@ -63,7 +72,10 @@ class PlaylistDecorator extends ModeDecoratorBase
         /**
          * @var $users User[]
          */
-        $users = User::query()->whereIn('id', $userIds)->get();
+        $users =
+            User::query()
+                ->whereIn('id', $userIds)
+                ->get();
 
         $keyedUsers = [];
 
@@ -86,8 +98,7 @@ class PlaylistDecorator extends ModeDecoratorBase
             $playlists[$index]['user'] = [];
             $playlists[$index]['user']['id'] = $playlistAuthor['id'];
             $playlists[$index]['user']['display_name'] = $playlistAuthor['display_name'];
-            $playlists[$index]['user']['fields.profile_picture_image_url'] =
-                $playlistAuthor['profile_picture_url'];
+            $playlists[$index]['user']['fields.profile_picture_image_url'] = $playlistAuthor['profile_picture_url'];
         }
 
         return $playlists;
