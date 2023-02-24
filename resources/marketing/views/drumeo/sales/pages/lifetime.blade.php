@@ -344,7 +344,8 @@
                 class="join blue bigger my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl"
                 style="padding: 20px 10px;"
                 :class="bonus !== 3 && 'sold-out'"
-                :href="bonus === 3 ? '/ecommerce/add-to-cart?products[DLM-Lifetime]=1'+query+'&locked=true' : '#customize-anchor'">BECOME A LIFETIME MEMBER &raquo;</a>
+                :href="bonus === 3 ? '/ecommerce/add-to-cart?products[DLM-Lifetime]=1'+query+'&locked=true' : '#customize-anchor'"
+                x-text="bonus === 3 ? 'BECOME A LIFETIME MEMBER &raquo;' : 'Choose 3 products above'"></a>
             {{--            @else--}}
 {{--            <a class="join sold-out my-4">Sold Out</a>--}}
             {{--            @endif--}}
