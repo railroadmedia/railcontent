@@ -167,8 +167,8 @@
             <div class="mx-auto max-w-xs sm:max-w-md md:max-w-xl lg:max-w-5xl" style="font-size: 0;">
                 {{--<h1 data-aos="fade-down" class="font-bebas leading-none mt-3 md:mt-5 text-5xl md:text-6xl">REACH YOUR  <br class="inline md:hidden"> <span class="text-coaches">DRUMMING GOALS.</span></h1>--}}
                 {{--<h2 data-aos-once="true" data-aos="fade-up" class="my-3 md:my-5 leading-normal"><strong>Improve your drumming for<br> just <span class="text-drumeo">${{ round((Prices::$plusSubscriptionAnnual / 12), 2) }}</span> per month.</strong></h2>--}}
-                <h3 class="mb-2" style="line-height: 1.4em;"><strong>Become a Lifetime Member<br class="inline sm:hidden"> today and get:</strong></h3>
-                <div class="text-center mb-6"><p class="inline-block uppercase text-black bg-[#FFA800] py-1 px-4 font-bold rounded-lg">Your choice of any 3 bonus items:</p></div>
+                <h3 class="mb-6" style="line-height: 1.4em;"><strong>Become a Lifetime Member<br class="inline sm:hidden"> today and get:</strong></h3>
+                <div class="text-center mb-2"><p class="inline-block uppercase text-black bg-[#FFA800] py-1 px-4 font-bold rounded-lg">Your choice of any 3 bonus items:</p></div>
                 <div class="bonus-wrap relative inline-block align-top mx-auto mb-3 px-1 md:px-3 w-full max-w-sm">
 
 {{--                    <div class="flip-div inline-block relative w-full group" style="padding-bottom: 70%;perspective: 1000px;">--}}
@@ -339,8 +339,8 @@
             <a
                 class="join blue bigger my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl"
                 style="padding: 20px 10px;"
-                :class="!query && 'sold-out'"
-                :href="query ? '/ecommerce/add-to-cart?products[DLM-Lifetime]=1'+query+'&locked=true' : '#customize-anchor'">BECOME A LIFETIME MEMBER &raquo;</a>
+                :class="bonus !== 3 && 'sold-out'"
+                :href="bonus === 3 ? '/ecommerce/add-to-cart?products[DLM-Lifetime]=1'+query+'&locked=true' : '#customize-anchor'">BECOME A LIFETIME MEMBER &raquo;</a>
             {{--            @else--}}
 {{--            <a class="join sold-out my-4">Sold Out</a>--}}
             {{--            @endif--}}
