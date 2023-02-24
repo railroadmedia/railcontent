@@ -4,6 +4,9 @@ Emails are streamed from AWS Simple Email Service to Open Search using AWS Kines
 View the [OpenSearch Dashboard](https://search-email-log-4bijp3p4noj2rffivy5ae5tnoa.us-east-2.es.amazonaws.com/_dashboards/app/login?nextUrl=%2F_dashboards) to get started.
 The login information is under "OpenSearch Email Log" in 1Password.
 
+Easiest way to search for data is using filters in the [Discover page](https://search-email-log-4bijp3p4noj2rffivy5ae5tnoa.us-east-2.es.amazonaws.com/_dashboards/app/discover#/).
+[Example: filtering on bounced email](https://search-email-log-4bijp3p4noj2rffivy5ae5tnoa.us-east-2.es.amazonaws.com/_dashboards/app/discover#/view/154ce8f0-b462-11ed-8626-a37ca2bcc162).
+
 This was the guide used to configure the system.
 https://aws.amazon.com/premiumsupport/knowledge-center/ses-email-sending-history/
 
