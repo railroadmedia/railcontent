@@ -258,10 +258,9 @@ class PlaylistItemTransformer
                         $parents =
                             $this->contentService->getByIds($parentIds)
                                 ->keyBy('id');
-                        $isSongAssignment = false;
+
                         foreach ($parentContentData as $value) {
                             $parentTitle = (isset($parents[$value['id']])) ? $parents[$value['id']]['title'] : '';
-                            $parentType = (isset($parents[$value['id']])) ? $parents[$value['id']]['type'] : '';
                             switch ($value['type']) {
                                 case 'learning-path':
                                     $route[] = 'Method';
@@ -270,7 +269,6 @@ class PlaylistItemTransformer
                                     $route[] = 'L'.$value['position'];
                                     break;
                                 case 'song':
-                                    $isSongAssignment = true;
                                     break;
                                 case 'play-along':
                                     break;
@@ -279,7 +277,7 @@ class PlaylistItemTransformer
                                     break;
                             }
                         }
-                        $content[$itemId]['is_song_assignment'] = $isSongAssignment;
+                        $content[$itemId]['parent'] = (isset($parents[$value['id']])) ? $parents[$value['id']] : null;
                     }
                     $content[$itemId]['route'] = $route;
                 }
