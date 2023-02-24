@@ -82,10 +82,8 @@
                     })
                 }
             });
-        //close after 200ms
-        setTimeout(()=> {
-            state.dropdownOpen = false;
-        }, "200")
+        //close
+        state.dropdownOpen = false;
     }
 
     //Handle Pin/Unpin Request
@@ -208,8 +206,7 @@
             <!-- Image Conatiner -->
             <div class="tw-relative tw-w-full tw-h-full" v-if="list.thumbnail_url">
                 <img
-                    v-if="list.thumbnail_url"
-                    :src="list.thumbnail_url"
+                    :src="`https://musora.com/cdn-cgi/image/width=200/${list.thumbnail_url}`"
                     alt="playlist thumbnail"
                     class="tw-transition-opacity tw-opacity-0 tw-duration-500 tw-object-cover tw-object-center tw-w-full tw-h-full tw-blur-sm"
                     loading="lazy"
@@ -217,7 +214,7 @@
                 />
                 <!-- Image Mask -->
                 <div class="tw-z-10 tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-black/70 tw-flex tw-justify-center">
-                    <img class="tw-h-full tw-object-contain" :src="list.thumbnail_url" alt="playlist thumbnail">
+                    <img class="tw-h-full tw-object-contain" :src="`https://musora.com/cdn-cgi/image/width=330/${list.thumbnail_url}`" alt="playlist thumbnail">
                 </div>
             </div>
 
@@ -304,7 +301,7 @@
                 >
                     <span class="tw-absolute tw-w-3 tw-h-3 tw-bg-white dark:tw-bg-[#081825] tw-rotate-45 tw-right-[11px]" :class="state.dropdownTop ? 'tw-bottom-[-4px]' : 'tw-top-[-4px]' "></span>
                     <ul class="tw-text-sm tw-w-full">
-                        <li class="tw-w-full tw-flex">
+                        <li class="tw-w-full tw-flex" v-if="!list.private || !state.isPrivate">
                             <button class="tw-flex tw-w-full tw-itemx-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-black/20"
                                     @click.prevent="shareHandler()"
                             >Share</button>

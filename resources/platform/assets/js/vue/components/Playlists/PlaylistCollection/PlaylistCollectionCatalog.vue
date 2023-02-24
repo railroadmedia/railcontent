@@ -55,7 +55,7 @@
     //Lifecycle Hooks
     onMounted(()=> {
         //load Playlists
-        if(props.playlistCount >= 10) {
+        if(props.playlistCount <= 10 && props.playlists.length <= 10) {
             playlistsStore.playlists = props.playlists;
         } else {
             playlistsStore.loadingPlaylists = true;
@@ -130,7 +130,7 @@
 
             <!-- Cards -->
             <section v-if="!playlistsStore.loadingPlaylists" class="tw-w-full tw-relative tw-mb-5"
-                :class="state.isListView ? 'tw-flex tw-flex-col' : 'tw-grid tw-grid-cols-2 sm:tw-grid-cols-3 lg:tw-grid-cols-4 xl:tw-grid-cols-5 tw-gap-4' "
+                :class="state.isListView ? 'tw-flex tw-flex-col' : 'tw-grid tw-grid-cols-2 sm:tw-grid-cols-3 lg:tw-grid-cols-4 xl:tw-grid-cols-5 3xl:tw-grid-cols-6 tw-gap-4' "
             >
                 <!-- Print Each Card -->
                 <playlist-collection-card 

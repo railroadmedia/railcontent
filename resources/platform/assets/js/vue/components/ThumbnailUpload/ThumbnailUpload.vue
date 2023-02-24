@@ -94,7 +94,7 @@ function handleUploadError() {
 
                 <!-- Image Conatiner -->
                 <template v-if="type==='playlist'">
-                    <div v-if="imgUrlRef" class="tw-relative tw-w-full tw-h-full tw-bg-white dark:tw-bg-[#00101D] tw-aspect-square">
+                    <div v-if="imgUrlRef" class="tw-relative tw-w-full tw-h-full tw-aspect-square">
                         <img
                             :src="`https://musora.com/cdn-cgi/image/width=200/${imgUrlRef}`"
                             alt="playlist thumbnail"

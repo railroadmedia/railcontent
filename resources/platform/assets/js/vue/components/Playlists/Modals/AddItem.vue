@@ -109,21 +109,23 @@ const handleCreate = () => {
 }
 
 onMounted(() => {
-    console.log('on mounted ', props.content.type)
     isLoadingPlaylists.value = true;
 
-    if (props.content.type === 'song') {
-        showSongToggle.value = true
-    } else {
-        isLoadingAssignments.value = true;
-        PlaylistService.getAssignmentsForContent({ token, contentId: props.content.id, brand: props.brand }).then((r) => {
-            const { data: { soundslice_assignments_count } } = r;
-            additionalItems.value = soundslice_assignments_count;
-            isLoadingAssignments.value = false;
-        }).catch(() => {
-            window.shownotification({ icon: 'error', text: 'An error ocurred while fetching your data, please try again later.' });
-        });
+    if(props.content) {
+        if (props.content.type === 'song') {
+            showSongToggle.value = true
+        } else {
+            isLoadingAssignments.value = true;
+            PlaylistService.getAssignmentsForContent({ token, contentId: props.content.id, brand: props.brand }).then((r) => {
+                const { data: { soundslice_assignments_count } } = r;
+                additionalItems.value = soundslice_assignments_count;
+                isLoadingAssignments.value = false;
+            }).catch(() => {
+                window.shownotification({ icon: 'error', text: 'An error ocurred while fetching your data, please try again later.' });
+            });
+        }
     }
+
 
     PlaylistService.getCurrentUserPlaylists({ token }).then(r => {
         isLoadingPlaylists.value = false;
@@ -167,7 +169,8 @@ onMounted(() => {
             <LoadingSpinner class="tw-w-[40px] tw-h-[40px] tw-text-white" />
         </div>
         <h2 class="tw-text-[24px] tw-font-bold tw-w-full tw-text-center">Add Item to Playlist</h2>
-        <div class="tw-flex tw-w-full tw-justify-center tw-flex-col" v-if="additionalItems > 0">
+
+        <div class="tw-flex tw-w-full tw-justify-center tw-flex-col tw-mt-4" v-if="additionalItems > 0">
             <h4 class="tw-text-[16px] tw-text-left tw-w-full">Additional Playlist Items</h4>
             <div class="tw-flex tw-w-full">
                 <fieldset class="tw-flex tw-flex-row tw-items-center tw-w-full">
@@ -196,19 +199,22 @@ onMounted(() => {
                 </fieldset>
             </div>
         </div>
-        <Table @onActionClick="handleActionClick" classOverride="tw-mt-[24px] tw-max-h-[350px] tw-overflow-scroll"
-            :rows="formattedRows">
+        <Table  v-if="formattedRows.length"
+                @onActionClick="handleActionClick" 
+                classOverride="tw-mt-[24px] tw-max-h-[350px] tw-overflow-scroll"
+                :rows="formattedRows"
+        >
             <template v-slot:actionContent="slotProps">
                 <PlusCircleIcon v-if="!selectedPlaylists.includes(String(slotProps.actionPayload))"
-                    class="tw-w-[23px] tw-h-[23px] tw-text-[#7E9AB1]" />
+                    class="tw-w-[30px] tw-h-[30px] tw-text-[#3F3F46] dark:tw-text-[#7E9AB1]" />
                 <CheckCircleIcon v-if="selectedPlaylists.includes(String(slotProps.actionPayload))"
-                    :class="`tw-w-[23px] tw-h-[23px] tw-text-[${brand}]`" />
+                    :class="`tw-w-[30px] tw-h-[30px] tw-text-[${brand}]`" />
             </template>
         </Table>
         <div class="tw-w-full tw-flex tw-justify-between tw-pt-[25px]">
             <button @click="handleCreate"
-                class="tw-btn-secondary tw-uppercase tw-text-[#9EC0DC] tw-min-w-[167px] tw-h-[35px]">
-                <PlusIcon class="tw-w-[12px] tw-h-[12px]" />
+                class="tw-btn-secondary tw-uppercase tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-min-w-[167px] tw-h-[35px]">
+                <PlusIcon class="tw-w-[15px] tw-h-[15px]" />
                 <span class="tw-pl-[6px]">CREATE NEW LIST</span>
             </button>
             <div class="tw-flex">
