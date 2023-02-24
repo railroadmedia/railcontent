@@ -5,7 +5,7 @@
     <meta property="og:title" content="{{ $leadgen->title }}"/>
     <meta name="description" content="{{ $leadgen->meta_desc }}">
     <meta property="og:description" content="{{ $leadgen->meta_desc }}"/>
-    {{--    <meta property="og:url" content="https://www.drumeo.com/drum-fills/"/>--}}
+    <meta property="og:url" content="{{ get_legacy_brand_base_url($theme)}}/{{ Request::path() }}"/>
     <meta property="og:image" content="{{ $leadgen->meta_img }}"/>
     <meta name="robots" content="noindex">
 @stop
@@ -21,7 +21,7 @@
 @endsection
 
 @section('layout-body')
-    @if($brand === 'drumeo' && !empty($leadgen->slug) && ($leadgen->slug === 'free-playalongs/songs' || $leadgen->slug === 'metal-playalongs/songs'))
+    @if($theme === 'drumeo' && !empty($leadgen->slug) && ($leadgen->slug === 'free-playalongs/songs' || $leadgen->slug === 'metal-playalongs/songs'))
         <a href="/choose-plan" class="edge-pitch block text-center w-full whitespace-nowrap py-2 sm:py-1 fixed mx-auto bg-black text-white z-[100]">
             <div class="container mx-auto">
                 <div class="text-center sm:text-left inline-block align-middle hover:opacity-90 transition-opacity duration-300">

@@ -5,7 +5,7 @@
     <meta property="og:title" content="{{ $currentLesson->title }} | {{ $leadgen->title }}"/>
     <meta name="description" content="{{ $leadgen->meta_desc }}">
     <meta property="og:description" content="{{ $leadgen->meta_desc }}"/>
-{{--    <meta property="og:url" content="https://www.drumeo.com/drum-fills/"/>--}}
+    <meta property="og:url" content="{{ get_legacy_brand_base_url($theme)}}/{{ Request::path() }}"/>
     <meta property="og:image" content="{{ $leadgen->meta_img }}"/>
     <meta name="robots" content="noindex">
 @stop
@@ -218,11 +218,6 @@
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $(document).foundation();
-        });
-    </script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
     @yield('scripts')
     <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
