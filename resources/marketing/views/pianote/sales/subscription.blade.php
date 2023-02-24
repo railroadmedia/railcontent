@@ -185,18 +185,20 @@
         ];
     @endphp
 
-    @include('musora.sales.components.header-section', [
-        'header' => 'Online piano lessons for all skill levels.',
-        'desc' => 'Learn the piano faster with step-by-step lessons, a thousand songs, and unlimited personal support. ',
-        'thumb' => 'https://pianote.s3.amazonaws.com/sales/2023/header-thumb2.jpg',
-        'promoThumb' => 'https://pianote.s3.amazonaws.com/sales/2023/jan-thumb2.png',
-        'promoThumbM' => 'https://pianote.s3.amazonaws.com/sales/2023/jan-thumb-m2.jpg',
-        'pointOne' => 'Improve Your Skills',
-        'pointTwo' => 'World-Class Teachers',
-        'pointThree' => 'Play More<br class="inline lg:hidden"> Songs',
-        'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Pianote+Membership/79348450',
-        'students' => number_format(Prices::$students),
-    ])
+    @if(empty($hideHeader) || !$hideHeader)
+        @include('musora.sales.components.header-section', [
+            'header' => 'Online piano lessons for all skill levels.',
+            'desc' => 'Learn the piano faster with step-by-step lessons, a thousand songs, and unlimited personal support. ',
+            'thumb' => 'https://pianote.s3.amazonaws.com/sales/2023/header-thumb2.jpg',
+            'promoThumb' => 'https://pianote.s3.amazonaws.com/sales/2023/jan-thumb2.png',
+            'promoThumbM' => 'https://pianote.s3.amazonaws.com/sales/2023/jan-thumb-m2.jpg',
+            'pointOne' => 'Improve Your Skills',
+            'pointTwo' => 'World-Class Teachers',
+            'pointThree' => 'Play More<br class="inline lg:hidden"> Songs',
+            'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Pianote+Membership/79348450',
+            'students' => number_format(Prices::$students),
+        ])
+    @endif
 
     @hasSection('promo-banner')
         @yield('promo-banner')
