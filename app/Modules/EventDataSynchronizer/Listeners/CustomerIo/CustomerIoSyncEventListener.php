@@ -21,6 +21,7 @@ use Modules\UserManagementSystem\Events\User\UserUpdated;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Ecommerce\Entities\Subscription;
 use Railroad\Ecommerce\Entities\User as EcommerceUser;
+use Railroad\Ecommerce\Events\AccessCodeClaimed;
 use Railroad\Ecommerce\Events\AppSignupFinishedEvent;
 use Railroad\Ecommerce\Events\AppSignupStartedEvent;
 use Railroad\Ecommerce\Events\OrderEvent;
@@ -1171,6 +1172,33 @@ class CustomerIoSyncEventListener
         } catch (Throwable $throwable) {
             error_log($throwable);
         }
+    }
+
+
+    /**
+     * @param AccessCodeClaimed $accessCodeClaimed
+     */
+    public function handleAccessCodeClaimed(AccessCodeClaimed $accessCodeClaimed)
+    {
+        $accessCode = $accessCodeClaimed->getAccessCode();
+
+        dispatch(
+            (new CustomerIoCreateEventByUserId(
+                $accessCodeClaimed->getUser()->getId(),
+                $accessCode->getBrand(),
+                $accessCode->getBrand() . '_user_redemption',
+                [
+                    'redemption_source' => $accessCode->getSource(),
+                    'redemption_code' => $accessCode->getCode()
+                ],
+                null,
+                Carbon::now()->timestamp
+            ))
+                ->delay(
+                Carbon::now()
+                    ->addSeconds(3)
+            )
+        );
     }
 
 }
