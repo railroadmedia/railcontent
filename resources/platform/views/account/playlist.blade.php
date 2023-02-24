@@ -10,7 +10,7 @@
     <playlist-header
         :playlist="{{ json_encode($playlist) }}"
         :lessons="{{ $listLessons }}"
-        :brand="{{ $brand }}"
+        brand="{{ $brand }}"
     /></playlist-header>
 
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white tw-pb-14">

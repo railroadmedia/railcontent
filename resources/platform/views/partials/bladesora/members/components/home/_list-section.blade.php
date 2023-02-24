@@ -19,7 +19,7 @@
                 <div class="tw-flex tw-flex-row">
                     {{-- Playlist Catalog --}}
                     <playlist-collection-catalog
-                         :brand="{{ $brand }}"
+                         brand="{{ $brand }}"
                         :playlist-count="{{ $usersList->totalResults() }}"
                         :playlists="{{ json_encode($usersList->results()) }}"
                     ></playlist-collection-catalog>

@@ -57,10 +57,17 @@
         state.description = e.target.value;
     };
 
+    const resetState = () => {
+        state.name = '';
+        state.category = 'My List'; //Default
+        state.thumb = null;
+        state.description = '';
+    }
+
     const handleConfirm = () => {
         const payload = {
             brand: props.brand,
-            name: state.name,
+            name: state.name || 'New Playlist',
             description: state.description,
             category: state.category,
             private: props.playlist.private,
@@ -179,10 +186,12 @@
 
     onBeforeMount(()=> {
         //Set Description Value
-        state.thumb = props.playlist.thumbnail_url;
-        state.name = props.playlist.name;
-        state.description = props.playlist.description;
-        state.category = props.playlist.category || 'My List';
+        if(props.mode !== "create") {
+            state.thumb = props.playlist.thumbnail_url;
+            state.name = props.playlist.name;
+            state.description = props.playlist.description;
+            state.category = props.playlist.category;
+        }
     })
     
     onBeforeUnmount(() => {
@@ -200,10 +209,10 @@
             <span v-if="mode === 'duplicate'">Duplicate Playlist</span>
         </h2>
         <div class="tw-flex tw-pt-[24px]">
-            <ThumbnailUpload :token="token" type='playlist' :imgUrl="playlist.thumbnail_url ? playlist.thumbnail_url : ''"/>
+            <ThumbnailUpload :token="token" type='playlist' :imgUrl="state.thumb"/>
             <div class="tw-flex tw-flex-col tw-w-full">
                 <InputLabel 
-                    :initialValue="playlist.name ? playlist.name : state.name"
+                    :initialValue="state.name"
                     placeholder="Playlist Title" 
                     :remove-default-input-styles="true"
                     inputOverride="tw-mb-[20px] placeholder:tw-text-[#0D0D0D] dark:placeholder:tw-text-white tw-text-[#0D0D0D] dark:tw-text-white tw-w-full tw-bg-[#eeeeef] dark:tw-bg-[#002039]/90 tw-px-[14px] tw-box-border tw-border-[#D4D4D8] dark:tw-border-[#445F74] tw-h-[42px] tw-rounded-[63px] tw-py-[9px] tw-px-[13px] tw-text-[14px]"
@@ -211,7 +220,7 @@
                 />
                 <Dropdown 
                     :sortedOptions="sortedOptions" 
-                    :selected-value="playlist.category ? playlist.category : state.category" 
+                    :selected-value="state.category" 
                     placeholderLabel="Playlist Category"
                     @onChange="handleCategoryChange" 
                 />

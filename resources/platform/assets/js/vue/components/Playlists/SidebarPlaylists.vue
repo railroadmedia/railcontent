@@ -66,7 +66,7 @@ const unpinPlaylist = (item, brand) => {
 }
 
 onBeforeMount(()=> {
-    console.log('playlists ', props.pinnedPlaylists)
+    // console.log('playlists ', props.pinnedPlaylists)
 })
 </script>
 <template>

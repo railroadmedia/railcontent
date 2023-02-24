@@ -27,10 +27,10 @@
 </script>
 <template>
     <platform-header
-        :backgroundImage="playlist.thumbnail_url || 'https://musora-web-platform.s3.amazonaws.com/playlists/playlist-background.png'"
+        :backgroundImage="playlist.thumbnail_url || 'https://musora-web-platform.s3.amazonaws.com/headers/unified_header.jpg'"
     >
         <template v-slot:content> 
-            <div class="tw-flex">
+            <div class="tw-flex tw-items-center">
                 <!-- Thumbnail -->
                 <div class="tw-w-[198px] tw-h-[198px] tw-relative tw-rounded tw-shrink-0 tw-mr-[20px] tw-overflow-hidden">
                     <img v-if="playlist.thumbnail_url" :src="playlist.thumbnail_url" alt="Playlist Thumbnail" class="tw-object-cover tw-h-full tw-w-full">

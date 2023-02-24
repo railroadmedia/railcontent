@@ -47,7 +47,7 @@
 
     onMounted(()=> {
         //load Playlists
-        console.log(props.playlists);
+        // console.log(props.playlists);
         
         if(props.playlists !== 0) {
             playlistsStore.loadingPlaylists = true;

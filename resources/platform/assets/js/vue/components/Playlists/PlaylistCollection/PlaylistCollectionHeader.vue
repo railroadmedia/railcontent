@@ -25,7 +25,7 @@
         playlistsStore.playlistsQuantity = props.playlistCount;
     })
     onMounted(()=> {
-        console.log(props.playlistCount)
+        // console.log(props.playlistCount)
     })
 
 </script>
@@ -33,7 +33,7 @@
     <platform-header
         title="Playlists"
         titleIcon="playlist"
-        backgroundImage="https://musora-web-platform.s3.amazonaws.com/playlists/playlist-background.png"
+        backgroundImage="https://musora-web-platform.s3.amazonaws.com/headers/unified_header.jpg"
     >
         <template v-slot:content> 
             <p v-if="playlistsStore.playlistsQuantity" class="tw-uppercase tw-text-sm tw-font-bold tw-text-[#7E9AB1]">

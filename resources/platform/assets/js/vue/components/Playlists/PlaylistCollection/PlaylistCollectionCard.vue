@@ -68,7 +68,7 @@
                     //show success message
                     window.shownotification({
                         icon: `${props.list.private === 1 ? 'fa-lock-open' : 'fa-lock'}.`,
-                        text: `Your playlist is now ${props.list.private === 1 ? 'private' : 'public'}.`
+                        text: `Your playlist is now ${props.list.private === 0 ? 'private' : 'public'}.`
                     })
                 }
             })
@@ -196,7 +196,7 @@
 </script>
 <template>
     <div class="tw-group tw-relative" 
-         :class="props.isListView ? 'tw-h-[52px] tw-flex tw-flex-row tw-w-full tw-items-center tw-transition-colors tw-py-0.5 hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-[#081825]/50 even:tw-bg-white dark:even:tw-bg-[#081825]' : 'tw-grid tw-grid-rows-5 tw-grid-cols-5 tw-gap-1' "
+         :class="props.isListView ? 'tw-h-[56px] tw-flex tw-flex-row tw-w-full tw-items-center tw-transition-colors tw-py-1 hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-[#081825]/50 even:tw-bg-white dark:even:tw-bg-[#081825]' : 'tw-grid tw-grid-rows-5 tw-grid-cols-5 tw-gap-1' "
     >
         <!-- Playlist thumbnail -->
         <a :href="list.url"

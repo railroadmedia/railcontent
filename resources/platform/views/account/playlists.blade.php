@@ -17,10 +17,10 @@
 
                 {{-- Playlist Catalog --}}
                 <playlist-collection-catalog
-                    {{-- :brand="{{ $brand }}" --}}
-                    :playlist-count="{{ $playlistsNumber }}"
+                    brand="{{ $brand }}"
                     :playlists="{{ json_encode($playlists) }}"
-                    :search-term="{{ $searchTerm }}"
+                    :playlist-count="{{ $playlistsNumber }}"
+                    {{-- :search-term="{{ $searchTerm }}" --}}
                 ></playlist-collection-catalog>
 
             </div>

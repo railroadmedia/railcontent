@@ -214,7 +214,6 @@ const handleSubmit = () => {
 onMounted(() => {
   //Check if Mobile on Resize
   window.addEventListener("resize", onResize);
-  console.log('pinned playlists', props.playlists)
 })
 
 onUnmounted(() => {
