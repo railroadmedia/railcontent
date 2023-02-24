@@ -20,6 +20,7 @@
                     {{-- :brand="{{ $brand }}" --}}
                     :playlist-count="{{ $playlistsNumber }}"
                     :playlists="{{ json_encode($playlists) }}"
+                    :search-term="{{ $searchTerm }}"
                 ></playlist-collection-catalog>
 
             </div>
