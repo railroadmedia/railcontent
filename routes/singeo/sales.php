@@ -72,8 +72,5 @@ Route::domain('{singeoDomain}')
         }
     );
     Route::get('/stop-hating-your-voice', [LeadGenController::class, 'stopHatingVoice']);
-
-    Route::get('/{leadgenSlug?}', LeadGenController::class.'@leadgen')
-        ->where('leadgenSlug', '(.*)');
 });
 
