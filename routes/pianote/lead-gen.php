@@ -43,8 +43,8 @@ Route::domain('{pianoteDomain}')
         }
     );
     Route::get('/chord-hacks', [LeadGenController::class, 'chordHacks']);
+
     Route::get('/riffs-and-fills', [LeadGenController::class, 'riffsAndFills']);
-    Route::get('/shop/riffs-and-fills', [LeadGenController::class, 'riffsAndFills']);
 
     Route::group(['prefix' => 'method'],
         function () {
