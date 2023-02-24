@@ -1,5 +1,6 @@
 @extends('pianote.sales.subscription', [
-    "promoVersion" => true
+    "promoVersion" => true,
+    'hideHeader' => true,
 ])
 
 @section('global-head')
