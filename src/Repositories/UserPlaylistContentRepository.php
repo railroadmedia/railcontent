@@ -2,34 +2,10 @@
 
 namespace Railroad\Railcontent\Repositories;
 
-use Railroad\Railcontent\Transformers\ContentTransformer;
 use Railroad\Railcontent\Transformers\PlaylistItemTransformer;
 
 class UserPlaylistContentRepository extends RepositoryBase
 {
-    /**
-     * @var ContentDatumRepository
-     */
-    private $datumRepository;
-    /**
-     * @var ContentInstructorRepository
-     */
-    private $contentInstructorRepository;
-
-    /**
-     * @param ContentDatumRepository $datumRepository
-     * @param ContentInstructorRepository $contentInstructorRepository
-     */
-    public function __construct(
-        ContentDatumRepository $datumRepository,
-        ContentInstructorRepository $contentInstructorRepository
-    ) {
-        parent::__construct();
-
-        $this->datumRepository = $datumRepository;
-        $this->contentInstructorRepository = $contentInstructorRepository;
-    }
-
     /**
      * @return \Illuminate\Database\Query\Builder
      */
@@ -44,14 +20,17 @@ class UserPlaylistContentRepository extends RepositoryBase
      * @param array $contentType
      * @param null $limit
      * @param int $page
+     * @param string $sort
      * @return mixed
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
-    public function getUserPlaylistContents($playlistId, $contentType = [], $limit = null, $page = 1, $sort = "position")
-    {
-        $orderByDirection = substr($sort, 0, 1) !== '-' ? 'asc' : 'desc';
-        $orderByColumn = trim($sort, '-');
-
+    public function getUserPlaylistContents(
+        $playlistId,
+        $contentType = [],
+        $limit = null,
+        $page = 1,
+        $sort = "position"
+    ) {
         $query =
             $this->query()
                 ->select(
@@ -60,7 +39,8 @@ class UserPlaylistContentRepository extends RepositoryBase
                     config('railcontent.table_prefix').'user_playlist_content.end_second',
                     config('railcontent.table_prefix').'user_playlist_content.position as user_playlist_item_position',
                     config('railcontent.table_prefix').'user_playlist_content.id as user_playlist_item_id',
-                    config('railcontent.table_prefix').'user_playlist_content.extra_data as user_playlist_item_extra_data'
+                    config('railcontent.table_prefix').
+                    'user_playlist_content.extra_data as user_playlist_item_extra_data'
                 )
                 ->join(
                     config('railcontent.table_prefix').'content',
@@ -85,10 +65,10 @@ class UserPlaylistContentRepository extends RepositoryBase
                 ->skip(($page - 1) * $limit);
         }
 
-        if($orderByColumn == 'random'){
-            $query =
-                $query->inRandomOrder();
-        }else {
+        $orderByColumn = trim($sort, '-');
+        if ($orderByColumn == 'random') {
+            $query = $query->inRandomOrder();
+        } else {
             $query = $query->orderBy(config('railcontent.table_prefix').'user_playlist_content.position', 'asc');
         }
 
@@ -346,6 +326,10 @@ class UserPlaylistContentRepository extends RepositoryBase
         return $deleted > 0;
     }
 
+    /**
+     * @param $playlistId
+     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Query\Builder|object|null
+     */
     public function getFirstContentByPlaylistId($playlistId)
     {
         return $this->query()
