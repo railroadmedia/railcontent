@@ -14,11 +14,11 @@
 @stop
 
 @section('global-body')
-    @include('pianote._partials._nav')
+    @include('pianote.sales.partials._nav')
 
     @yield('page-body')
 
-    @include("pianote._partials._footer", [
+    @include("pianote.sales.partials._footer", [
             "minimal" => true
         ])
 

@@ -1,3 +1,16 @@
+@php
+    if(!empty($vimeo)){
+        $video = '//player.vimeo.com/video/'.$video.'?autoplay=1';
+    }
+    elseif(!empty($soundslice)){
+        if(!empty($score)){
+            $video = 'https://www.soundslice.com/scores/'.$video.'/embed/?api=1&scroll_type=2&branding=0&top_controls=1&show_chords=0&layout=3&recording_idx=1&enable_metronome=0';
+        }
+        else{
+            $video = 'https://www.soundslice.com/slices/'.$video.'/embed/?api=1&scroll_type=2&branding=0&top_controls=1&show_chords=0&layout=3&recording_idx=1&enable_metronome=0';
+        }
+    }
+@endphp
 <!-- Modal -->
 <div
     x-show="{{ $name }}"
@@ -25,9 +38,9 @@
         >
             <!-- Content -->
             <div
-                class="aspect-16:9 overflow-hidden rounded-xl w-full relative"
+                class="@if(!empty($styles)) {{ $styles }} @endif overflow-hidden rounded-xl w-full relative @if(!empty($vimeo)) aspect-16:9 @elseif(!empty($soundslice)) pb-[66vh] bg-white @endif"
             >
-                <iframe class="absolute w-full h-full reset-on-close" x-bind:src="{{ $name }} && '//player.vimeo.com/video/{{ $video }}?autoplay=1'" frameborder="0" allowfullscreen allow="autoplay" title="{{ $name }}"></iframe>
+                <iframe class="z-10 absolute w-full h-full reset-on-close" x-bind:src="{{ $name }} && '{{ $video }}'" frameborder="0" allowfullscreen allow="autoplay" title="{{ $name }}"></iframe>
             </div>
         </div>
     </div>

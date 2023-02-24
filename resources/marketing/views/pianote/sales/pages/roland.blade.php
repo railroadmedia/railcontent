@@ -132,6 +132,7 @@
 
     @include('_partials.components.video-modal',[
         'name' => 'rolandTrailer',
-        'video' => '567535328'
+        'video' => '567535328',
+        'vimeo' => true,
     ])
 @endsection

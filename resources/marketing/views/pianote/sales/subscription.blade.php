@@ -112,13 +112,13 @@
 
 @section('global-body')
     @if(!empty($promoVersion))
-        @include("pianote._partials._nav", [
+        @include("pianote.sales.partials._nav", [
             "subscriptionVersion" => true,
             "scrollToJoin" => true,
             "hideMenu" => true,
         ])
     @elseif(!empty($month))
-        @include("pianote._partials._nav", [
+        @include("pianote.sales.partials._nav", [
             "subscriptionVersion" => true,
             "fullSubscriptionVersion" => true,
             "trialVersion" => true,
@@ -126,7 +126,7 @@
         ])
 
     @else
-        @include("pianote._partials._nav", [
+        @include("pianote.sales.partials._nav", [
             "subscriptionVersion" => true,
             "fullSubscriptionVersion" => true,
             "trialVersion" => true,
@@ -592,26 +592,28 @@
 
     @include('pianote._partials.faq')
 
-    @include('_partials.components.soundslice-modal',[
+    @include('_partials.components.video-modal',[
         'name' => 'soundslice',
         'video' => '77f4c',
-        'slices' => true,
+        'soundslice' => true,
     ])
     @include('_partials.components.video-modal',[
         'name' => 'trailer',
-        'video' => '785314388'
+        'video' => '785314388',
+        'vimeo' => true,
     ])
     @include('_partials.components.video-modal',[
         'name' => 'unbox',
-        'video' => '774408046'
+        'video' => '774408046',
+        'vimeo' => true,
     ])
 
     @if(!empty($promoVersion))
-        @include("pianote._partials._footer", [
+        @include("pianote.sales.partials._footer", [
             "minimal" => true
         ])
     @else
-        @include("pianote._partials._footer")
+        @include("pianote.sales.partials._footer")
     @endif
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
