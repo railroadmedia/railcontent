@@ -171,16 +171,18 @@
             value: 'Hip-Hop/Rap',
             label: 'Hip-Hop/Rap'
         },
+        {
+            value: 'My List',
+            label: 'My-List'
+        },
     ];
 
     onBeforeMount(()=> {
         //Set Description Value
-        if(props.mode === 'edit' || props.mode === 'duplicate') {
-            state.thumb = props.playlist.thumbnail_url;
-            state.name = props.playlist.name;
-            state.description = props.playlist.description;
-            state.category = props.playlist.category;
-        }
+        state.thumb = props.playlist.thumbnail_url;
+        state.name = props.playlist.name;
+        state.description = props.playlist.description;
+        state.category = props.playlist.category || 'My List';
     })
     
     onBeforeUnmount(() => {

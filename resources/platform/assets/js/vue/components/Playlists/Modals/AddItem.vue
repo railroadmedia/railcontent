@@ -16,14 +16,10 @@ const props = defineProps({
         type: String,
         default: 'drumeo'
     },
-    contentId: {
-        type: String,
+    content: {
+        type: Object,
         default: null
     },
-    type: {
-        default: String,
-        default: null,
-    }
 });
 
 const emit = defineEmits(['onCancel']);
@@ -85,7 +81,7 @@ const handleConfirm = () => {
     isLoadingPlaylists.value = true;
     PlaylistService.addToPlaylist({
         brand: props.brand,
-        contentId: props.contentId,
+        contentId: props.content.id,
         importAssignments: importAll.value,
         playlistIds: selectedPlaylists.value,
         addFull: addFullSongToggle.value,
@@ -102,17 +98,25 @@ const handleConfirm = () => {
 
 const handleCreate = () => {
     emit('onCancel');
-    window.openplaylistmodal({ modalType: 'create', nextModal: { modalType: 'addItem', contentId: props.contentId } });
+    window.openplaylistmodal({ 
+        modalType: 'create', 
+        data: props.content,
+        nextModal: { 
+            modalType: 'addItem', 
+            contentId: props.content.id 
+        } 
+    });
 }
 
 onMounted(() => {
+    console.log('on mounted ', props.content.type)
     isLoadingPlaylists.value = true;
 
-    if (props.type === 'song') {
+    if (props.content.type === 'song') {
         showSongToggle.value = true
     } else {
         isLoadingAssignments.value = true;
-        PlaylistService.getAssignmentsForContent({ token, contentId: props.contentId, brand: props.brand }).then((r) => {
+        PlaylistService.getAssignmentsForContent({ token, contentId: props.content.id, brand: props.brand }).then((r) => {
             const { data: { soundslice_assignments_count } } = r;
             additionalItems.value = soundslice_assignments_count;
             isLoadingAssignments.value = false;

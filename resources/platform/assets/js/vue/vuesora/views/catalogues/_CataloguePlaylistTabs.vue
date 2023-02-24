@@ -14,7 +14,7 @@
                 </div>
                 <!-- In Progress Tab -->
                 <div class="heading-tab pointer tw-mr-5 tw-mb-2 md:tw-mb-3 tw-flex tw-w-fit">
-                    <a :href="'/' + brand + '/lists/in-progress'">
+                    <a :href="'/' + brand + '/playlists'">
                         <h3 class="tw-text-2xl md:tw-text-3xl tw-font-bold hover:tw-text-[#00101D] dark:hover:tw-text-white tw-leading-none"
                             :class="selected_tab === 'started' ? ('tw-text-[#00101D] dark:tw-text-white') : 'tw-text-[#A1A1A9] dark:tw-text-[#445F74] '"
                         >

@@ -216,7 +216,7 @@
                     onload="this.classList.remove('tw-opacity-0')"
                 />
                 <!-- Image Mask -->
-                <div class="tw-z-20 tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-black/70 tw-flex tw-justify-center">
+                <div class="tw-z-10 tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-black/70 tw-flex tw-justify-center">
                     <img class="tw-h-full tw-object-contain" :src="list.thumbnail_url" alt="playlist thumbnail">
                 </div>
             </div>
@@ -275,7 +275,7 @@
             </div>
             <!-- Pinned Icon -->
             <div class="tw-inline-flex tw-items-center tw-transition-colors" 
-                 :class="[ !props.isListView ? 'tw-absolute tw-top-3 tw-right-3' : 'tw-px-4 xl:tw-px-8',`tw-text-${brand}`, { 'tw-opacity-0' : !state.isPinned } ]"
+                 :class="[ !props.isListView ? 'tw-z-20 tw-absolute tw-top-3 tw-right-3' : 'tw-px-4 xl:tw-px-8',`tw-text-${brand}`, { 'tw-opacity-0' : !state.isPinned } ]"
             >
                 <musora-icon icon-name="tack" class="tw-w-[24px] tw-h-[24px] tw-mx-auto tw-hidden md:tw-flex" />
             </div>
@@ -299,7 +299,7 @@
                 </button>
                 <!-- Dropdown-->
                 <div v-if="state.dropdownOpen" 
-                     class="tw-w-[162px] tw-shadow tw-rounded tw-bg-white tw-text-black dark:tw-bg-[#081825] dark:tw-text-white tw-absolute tw-right-0 tw-py-2 tw-z-20"
+                     class="tw-w-[162px] tw-shadow tw-rounded tw-bg-white tw-text-black dark:tw-bg-[#081825] dark:tw-text-white tw-absolute tw-right-0 tw-py-2 tw-z-50"
                      :class="state.dropdownTop ? 'tw-bottom-[100%]' : 'tw-top-[100%]'"
                 >
                     <span class="tw-absolute tw-w-3 tw-h-3 tw-bg-white dark:tw-bg-[#081825] tw-rotate-45 tw-right-[11px]" :class="state.dropdownTop ? 'tw-bottom-[-4px]' : 'tw-top-[-4px]' "></span>
