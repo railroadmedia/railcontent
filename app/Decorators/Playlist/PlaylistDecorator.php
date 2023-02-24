@@ -42,16 +42,18 @@ class PlaylistDecorator extends ModeDecoratorBase
                 $playlists[$index]['uploaded_thumbnail'] = false;
                 $lessons = $this->userPlaylistsService->getUserPlaylistContents($playlist['id'], [], 1);
                 if ($lessons->isNotEmpty()) {
-                    $playlists[$index]['thumbnail_url'] =
-                        $lessons->first()
-                            ->fetch(
-                                'data.thumbnail_url',
-                                ($lessons->first()
-                                    ->fetch('parent')) ?
-                                    $lessons->first()
-                                        ->fetch('parent')
-                                        ->fetch('data.thumbnail_url') : ''
-                            );
+                    $firstItem = $lessons->first();
+                    $playlists[$index]['square_thumbnail'] =
+                        (($firstItem['type'] == 'assignment' &&
+                                ($firstItem->fetch('parent')) &&
+                                in_array($firstItem->fetch('parent')['type'], ['song', 'song-tutorial-children'])) ||
+                            $firstItem['type'] == 'song-tutorial-children');
+                    $playlists[$index]['thumbnail_url'] = $firstItem->fetch(
+                        'data.thumbnail_url',
+                        ($firstItem->fetch('parent')) ?
+                            $firstItem->fetch('parent')
+                                ->fetch('data.thumbnail_url') : ''
+                    );
                 }
             } else {
                 $playlists[$index]['uploaded_thumbnail'] = true;
