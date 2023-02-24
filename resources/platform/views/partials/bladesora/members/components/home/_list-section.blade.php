@@ -13,19 +13,14 @@
                 See All
             </a>
         </div>
+                    
+        {{-- Playlist Catalog --}}
+        <playlist-collection-catalog
+            brand="{{ $brand }}"
+            :mini-catalog="true"
+            :playlist-count="{{ $usersList->totalResults() }}"
+            :playlists="{{ json_encode($usersList->results()) }}"
+        ></playlist-collection-catalog>
 
-        <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white tw-pb-14">
-            <div class="tw-flex tw-flex-col">
-                <div class="tw-flex tw-flex-row">
-                    {{-- Playlist Catalog --}}
-                    <playlist-collection-catalog
-                         brand="{{ $brand }}"
-                        :playlist-count="{{ $usersList->totalResults() }}"
-                        :playlists="{{ json_encode($usersList->results()) }}"
-                    ></playlist-collection-catalog>
-
-                </div>
-            </div>
-        </div>
     </div>
 </section>

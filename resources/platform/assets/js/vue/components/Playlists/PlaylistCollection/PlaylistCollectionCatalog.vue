@@ -20,6 +20,10 @@
         playlistCount: {
             type: Number,
             default: 0
+        },
+        miniCatalog: {
+            type: Boolean, 
+            default: false,
         }
     })
     
@@ -65,9 +69,14 @@
 
     onBeforeMount(() => {      
         //Get Local Storage Value
-        if(localStorage.getItem('playlistIsListView')) {
-            state.isListView = JSON.parse(localStorage.getItem('playlistIsListView'));
+        if (!props.miniCatalog) {
+            if(localStorage.getItem('playlistIsListView')) {
+                state.isListView = JSON.parse(localStorage.getItem('playlistIsListView'));
+            }
+        } else {
+            state.isListView = !props.miniCatalog;
         }
+
         //show/hide controls on load
         state.showControls = props.playlistCount > 0 ? true : false;
         //Get URL Params
@@ -102,7 +111,7 @@
         <div v-if="hasPlaylists" class="tw-w-full">
             <!-- Controls -->
             <PlaylistCollectionControls 
-                v-if="state.showControls"
+                v-if="state.showControls && !props.miniCatalog"
                 :brand="brand"
                 :isListView="state.isListView"
                 @onUpdateListView="(val) => state.isListView = val"
