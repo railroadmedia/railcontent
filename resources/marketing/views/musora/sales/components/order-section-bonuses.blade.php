@@ -81,7 +81,7 @@
                         <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
                             <div
                                 x-ref="front"
-                                class="border-2 border-{{ $theme }} front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700"
+                                class="border-2 border-promo front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700"
                                 style="@if(!empty($bonus['special'])) overflow: visible;border-color: #cda880; @endif backface-visibility: hidden;">
                                 @if(!empty($bonus['badge']))
                                     <h6 class="absolute text-white top-0 left-0 w-full py-0.5 bg-{{ $theme }} rounded-t-xl font-bebas uppercase">{{ $bonus['badge'] }}</h6>
@@ -95,7 +95,7 @@
                             </div>
                             <div
                                 x-ref="back"
-                                class="back border-2 border-{{ $theme }} absolute z-40 overflow-hidden rounded-xl w-full h-full transition-transform duration-700 -rotate-y-180"
+                                class="back border-2 border-promo absolute z-40 overflow-hidden rounded-xl w-full h-full transition-transform duration-700 -rotate-y-180"
                                 style="backface-visibility: hidden;"
                             >
                                 <div class="w-full h-full mx-auto text-center text-white flex flex-wrap justify-center items-center content-center p-2 md:p-3" style="background:linear-gradient(to bottom, #01050f, #021225);">

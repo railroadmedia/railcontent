@@ -184,22 +184,38 @@
         ];
     @endphp
 
-    @include('musora.sales.components.header-section', [
-        'header' => 'Online drum lessons for all skill levels.',
-        'desc' => 'Learn the drums faster with step-by-step lessons, thousands of songs and unlimited personal support.',
-        'thumb' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/jan-thumb-no-badge.jpg',
-        'promoThumb' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/header-thumb-promo2.png',
-        'promoThumbM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/header-thumb-promo-m2.jpg',
-        'pointOne' => 'Improve Your Skills',
-        'pointTwo' => 'World-Class Teachers',
-        'pointThree' => 'Play More<br class="inline lg:hidden"> Songs',
-        'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738',
-        'students' => number_format(Prices::$students),
-    ])
+    <header class="pb-24 md:py-14 lg:py-20">
+        <div class="max-w-4xl mx-auto text-center px-4">
+            <img class="mt-14 md:mt-0 h-24 md:h-28 lg:h-32 mb-6" src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/anniversary/2023/logo.png" alt="Anniversary logo" />
+            <h3 class="font-extrabold mb-10">Save 18% on your membership <br class="">+ get 11 FREE bonuses worth $1198.95!</h3>
+        </div>
+        <div class="md:flex md:justify-center md:items-center px-4 lg:px-0">
+            <div class="max-w-sm md:max-w-none mx-auto md:hidden">
+                <img
+                    class="-mt-20 sm:-mt-14 transition-opacity opacity-0"
+                    src="https://cdn.musora.com/image/fetch/w_550,q_auto:besth/ttps://pianote.s3.amazonaws.com/sales/promos/anniversary/2023/promo-collage-m.png"
+                    alt="Promo Collage Image"
+                    loading="lazy"
+                    onload="this.classList.remove('opacity-0')"
+                />
+            </div>
+            <div class="max-w-lg mx-auto md:mx-0">
+                Join Drumeo in March and you’ll receive 11 free bonuses with your membership. That’s one bonus for every year we’ve been around – including a QuietPad, drumsticks, and digital packs to help you achieve ALL your goals on the drums. And that’s not all… <br><br>
+                To celebrate 11 years of inspiring & informative drum lessons we’ve dropped the price of Drumeo to our 2012 price!. <br><br>
+                That’s right, you’ll time travel back to 2012 for this deal. <br><br>
+                Scroll down to see all your bonuses and click the button to lock in your discount and grab a year of unlimited drum lessons! <br><br>
+                <a class="join drumeo smaller w-full lg:w-96 mb-2" href="#order">Get Started &raquo;</a>
+            </div>
+            <img
+                class="hidden md:inline-block md:h-96 lg:h-[450px] md:ml-6 transition-opacity opacity-0"
+                src="https://cdn.musora.com/image/fetch/w_850,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/anniversary/2023/promo-collage.png"
+                alt="Promo Collage"
+                loading="lazy"
+                onload="this.classList.remove('opacity-0')"
+            />
+        </div>
+    </header>
 
-    @hasSection('promo-banner')
-        @yield('promo-banner')
-    @endif
 {{--    @if(!empty($promoVersion))--}}
 {{--        @include('musora.sales.components.promo-section', [--}}
 {{--        'promoLogo' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs.svg',--}}
@@ -600,12 +616,11 @@
 
     @include('musora.sales.components.order-section-bonuses', [
         'topImage' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drumeo-annual-2w-card.png',
-        'promoLogo' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs.svg',
-        'promoLogoM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs-m.png',
-        'header' => 'Online drum lessons for all skill levels.',
-        'subDescription' => 'Save 17% + get 11 bonuses<br class="inline sm:hidden"> worth $1198.95',
+        'promoLogo' => 'https://cdn.musora.com/image/fetch/w_650,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/anniversary/2023/logo.png',
+        'promoText' => '<h4 class="leading-tight mt-4 sm:mt-5 mb-2 uppercase text-coaches"><strong>SAVE 18% + GET 11 BONUSES <br class="inline sm:hidden">WORTH $1198.95</strong></h4>',
         'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[quietpad]=1&products[Drumeo-VaterSticks]=1 &products[rock-drumming-masterclass-pack]=1&products[drum-technique-made-easy-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[SD-DIGI]=1&products[four-weeks-to-better-drum-fills]=1&products[learn-songs-faster-pack]=1&products[GHFAL-DIGI]=1&products[CC-DIGI]=1&locked=true',
         'altButtonLink' => '/ecommerce/add-to-cart?products[DLM-1-month]=1&locked=true',
+        'bonusWidth' => 'w-1/2 md:w-1/4 lg:w-[16%]',
     ])
 
     @include('musora.sales.components.app-section', [
