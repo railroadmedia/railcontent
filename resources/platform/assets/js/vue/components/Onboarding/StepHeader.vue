@@ -51,8 +51,7 @@ const goToPrevPage = () => {
     </h2>
     <p
       class="tw-font-open-sans tw-font-normal tw-text-[14px] xl:tw-text-[16px] tw-mb-[40px] tw-max-w-[624px] tw-text-white tw-text-center tw-hidden md:tw-block"
-    >
-      {{ subtitle }}
-    </p>
+      v-html="subtitle"
+    ></p>
   </div>
 </template>

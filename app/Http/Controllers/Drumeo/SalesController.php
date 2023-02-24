@@ -316,6 +316,13 @@ class SalesController extends BaseController
         throw new NotFoundHttpException();
     }
 
+    public function ambassador(Request $request, $domain, $page = null)
+    {
+        return view('drumeo.sales.affiliate.'.$page, ['theme' => 'drumeo', 'month' => true]);
+
+        throw new NotFoundHttpException();
+    }
+
     public function pro()
     {
         return view('drumeo.products.pro');

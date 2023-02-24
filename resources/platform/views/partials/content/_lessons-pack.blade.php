@@ -1,5 +1,5 @@
 <div class="lessons-pack-card flex flex-row ph-1 pt-3">
-    <div class="flex flex-column align-v-center large-thumbnail guitareo">
+    <div class="flex flex-column align-v-center large-thumbnail {{ $brand }}">
         <div class="thumb-wrap corners-10">
             <a href="{{ $lessonsUrl }}">
                 <div class="thumb-img bg-center corners-10 square bg-grey-2 dark:tw-bg-[#081825]">

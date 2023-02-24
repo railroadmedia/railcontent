@@ -108,7 +108,8 @@
         @if(!empty($testimonial['video']))
             @include('_partials.components.video-modal',[
                 'name' => str_replace(' ', '', $testimonial['name']),
-                'video' => $testimonial['video']
+                'video' => $testimonial['video'],
+                'vimeo' => true
             ])
         @else
             @component('_partials.components.modal', ['name' => str_replace(' ', '', $testimonial['name'])])

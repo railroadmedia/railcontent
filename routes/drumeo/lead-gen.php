@@ -13,198 +13,48 @@ Route::domain('{drumeoDomain}')->group(function () {
 
         }
     );
-    Route::group(['prefix' => 'coop3rdrumm3r'],
-        function () {
-            Route::get('/{page?}', LeadGenController::class . '@coop3rdrumm3r')
-                ->whereIn('page', [
-                    null,
-                    'lessons',
-                    '1-the-drum-set',
-                    '2-drum-theory',
-                    '3-practice',
-                    '4-grooves',
-                    '5-drum-fills',
-                    'keep-getting-better',
-                ]);
-        }
-    );
+    Route::get('/coop3rdrumm3r', [LeadGenController::class, 'coop3rdrumm3r']);
     Route::get('/destupefying-your-weak-hand', [LeadGenController::class, 'destupefy'] );
-    Route::group(['prefix' => 'drum-fills'],
-        function () {
-            Route::get('/{page?}', LeadGenController::class . '@drumFills')
-                ->whereIn('page', [
-                    null, '1', '2', '3', '4', '5',
-                ]);
-        }
-    );
-    Route::group(['prefix' => 'drum-set-maintenance'],
-        function () {
-            Route::get('/{prefix?}/{page?}', LeadGenController::class . '@drumSetMaintenance')
-                ->whereIn('prefix', [null, 'course-index'])
-                ->whereIn('page', [
-                    null, '1', '2', '3', '4', '5', '6', '7'
-                ]);
-        }
-    );
-    Route::group(['prefix' => 'drum-technique-made-easy'],
-        function () {
-            Route::get('/{page?}', LeadGenController::class . '@dtme')
-                ->whereIn('page', [
-                    '1-five-technique-myths', '2-massive-technique-fails', '3-the-most-important-technique', 'testimonials',
-                ]);
-        }
-    );
-    Route::group(['prefix' => 'faster'],
-        function () {
-            Route::get('/{page?}', LeadGenController::class . '@faster')
-                ->whereIn('page', [
-                    null, 'lessons', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'
-                ]);
-        }
-    );
-    Route::group(['prefix' => 'gavins-grooves'],
-        function () {
-            Route::get('/{prefix?}/{page?}', LeadGenController::class . '@gavinsGrooves')
-                ->whereIn('prefix', [null, 'course-index'])
-                ->whereIn('page', [
-                    null, '1-intro', '2-mother-child-divided', '3-halo', '4-sound-of-muzak', '5-futile', '6-anesthetize', '7-life', '8-conclusion'
-                ]);
-        }
-    );
+    Route::get('/drum-set-maintenance', [LeadGenController::class, 'drumSetMaintenance']);
+    Route::get('/drum-technique-made-easy/testimonials', [LeadGenController::class, 'dtmeTestimonials']);
+    Route::get('/faster', [LeadGenController::class, 'faster']);
+    Route::get('/gavins-grooves', [LeadGenController::class, 'gavinsGrooves']);
     Route::get('/get-faster', [LeadGenController::class, 'getFaster']);
     Route::get('/get-faster-drums', [LeadGenController::class, 'getFaster']);
     Route::group(['prefix' => 'getting-started'],
         function () {
             Route::get('/{page?}', LeadGenController::class . '@gstd')
                 ->whereIn('page', [
-                    null, 'thank-you', 'lessons', 'checking-in', 'great-news', '1-setting-up-your-drums', '2-tuning-your-drums', '3-holding-your-drumsticks', '4-reading-drum-notation', '5-basic-counting', '6-your-first-beat', '7-your-first-fill', '8-using-a-metronome', '9-your-first-song', '10-practice-routine', '10-practice'
+                    null, 'thank-you', '10-practice'
                 ]);
         }
     );
-    Route::get('/getting-started-drums', [LeadGenController::class, 'gtsdAlt'] );
-    Route::group(['prefix' => 'free-playalongs'],
-        function () {
-            Route::get('/{prefix?}/{page?}', LeadGenController::class . '@freePlayalongs')
-                ->whereIn('prefix', [null, 'songs'])
-                ->whereIn('page', [
-                    null, '1', '2', '3', '4', '5', '6', '7', '8', '9'
-                ]);
-        }
-    );
-    Route::group(['prefix' => 'metal-playalongs'],
-        function () {
-            Route::get('/{prefix?}/{page?}', LeadGenController::class . '@metalPlayalongs')
-                ->whereIn('prefix', [null, 'songs'])
-                ->whereIn('page', [
-                    null, '1', '2', '3', '4', '5', '6', '7', '8', '9'
-                ]);
-        }
-    );
-    Route::group(['prefix' => 'grooves-of-john-bonham'],
-        function () {
-            Route::get('/{prefix?}/{page?}', LeadGenController::class . '@johnGrooves')
-                ->whereIn('prefix', [null, 'lessons'])
-                ->whereIn('page', [
-                    null, '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11'
-                ]);
-        }
-    );
-    Route::group(['prefix' => 'hand-technique'],
-        function () {
-            Route::get('/{prefix?}/{page?}', LeadGenController::class . '@handTechnique')
-                ->whereIn('prefix', [null, 'lessons'])
-                ->whereIn('page', [
-                    null, '1', '2', '3', '4', '5', '6'
-                ]);
-        }
-    );
-    Route::group(['prefix' => 'linear-drumming'],
-        function () {
-            Route::get('/{page?}', LeadGenController::class . '@linearDrumming')
-                ->whereIn('page', [
-                    null, 'lessons', '1-about', '2-dance-pop', '3-rock-tom', '4-gospel', '5-metal', 'next-level'
-                ]);
-        }
-    );
-    Route::group(['prefix' => 'michael-jackson-grooves'],
-        function () {
-            Route::get('/{prefix?}/{page?}', LeadGenController::class . '@jacksonGrooves')
-                ->whereIn('prefix', [null, 'course-index'])
-                ->whereIn('page', [
-                    null, '1-intro', '2-wannabestartin', '3-smoothcriminal', '4-billiejean', '5-humannature', '6-beatit', '7-threatened', '8-thriller', '9-workingdayandnight', '10-ontheroad'
-                ]);
-        }
-    );
-    Route::group(['prefix' => 'must-know-grooves'],
-        function () {
-            Route::get('/{prefix?}/{page?}', LeadGenController::class . '@mustKnowGrooves')
-                ->whereIn('prefix', [null, 'course-index'])
-                ->whereIn('page', [
-                    null, '1-intro', '2-shuffle', '3-lindybeat', '4-motown', '5-latin', '6-vacationrhythms', '7-secondline', '8-socalpunk', '9-mozambiquesongo'
-                ]);
-        }
-    );
-    Route::group(['prefix' => 'rock-drumming-masterclass'],
-        function () {
-            Route::get('/{page?}', LeadGenController::class . '@rockDrumming')
-                ->whereIn('page', [
-                    'most-underrated-drummer', 'most-important-rock-drum-tips', 'epic-drum-video', 'testimonials'
-                ]);
-        }
-    );
-    Route::group(['prefix' => 'subdivision-challenge'],
-        function () {
-            Route::get('/{prefix?}/{page?}', LeadGenController::class . '@subdivision')
-                ->whereIn('prefix', [null, 'course-index'])
-                ->whereIn('page', [
-                    null, '1', '2', '3', '4', '5'
-                ]);
-        }
-    );
-    Route::group(['prefix' => 'sucherman-sound'],
-        function () {
-            Route::get('/{prefix?}/{page?}', LeadGenController::class . '@sucherman')
-                ->whereIn('prefix', [null, 'course-index'])
-                ->whereIn('page', [
-                    null, '1-good-sounding', '2-hi-hats', '3-bass-snare', '4-elevating-sound', '5-shift-focus'
-                ]);
-        }
-    );
-    Route::group(['prefix' => 'ultimate-toolbox'],
+    Route::get('/getting-started-drums', [LeadGenController::class, 'gtsdAlt']);
+    Route::get('/free-playalongs', [LeadGenController::class, 'freePlayalongs']);
+    Route::get('/metal-playalongs', [LeadGenController::class, 'metalPlayalongs']);
+    Route::get('/grooves-of-john-bonham', [LeadGenController::class, 'johnGrooves']);
+    Route::get('/hand-technique', [LeadGenController::class, 'handTechnique']);
+    Route::get('/linear-drumming', [LeadGenController::class, 'linearDrumming']);
+    Route::get('/michael-jackson-grooves', [LeadGenController::class, 'jacksonGrooves']);
+    Route::get('/must-know-grooves', [LeadGenController::class, 'mustKnowGrooves']);
+    Route::get('/rock-drumming-masterclass/testimonials', [LeadGenController::class, 'rockDrumming']);
+    Route::get('/subdivision-challenge', [LeadGenController::class, 'subdivision']);
+    Route::get('/sucherman-sound', [LeadGenController::class, 'sucherman']);
+    Route::group(['prefix' => '/ultimate-toolbox'],
         function () {
             Route::get('/{page?}', LeadGenController::class . '@toolbox')
                 ->whereIn('page', [
                     null, 'catalogue'
                 ]);
-            Route::get('/gsotd/{page1?}', LeadGenController::class . '@toolboxGsotd')
+            Route::get('/{page1?}', LeadGenController::class . '@toolboxIndexs')
                 ->whereIn('page1', [
-                    null, '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'
+                    'gsotd', '5pa', 'bdbc', 'fwtgf',
                 ]);
-            Route::get('/5pa/{page2?}', LeadGenController::class . '@toolbox5pa')
+            Route::get('/{page2?}', LeadGenController::class . '@toolboxRest')
                 ->whereIn('page2', [
-                    null, '1', '2', '3', '4', '5'
-                ]);
-            Route::get('/bdbc/{page3?}', LeadGenController::class . '@toolboxBdbc')
-                ->whereIn('page3', [
-                    null, '1', '2', '3', '4', '5', '6', '7'
-                ]);
-            Route::get('/fwtgf/{page4?}', LeadGenController::class . '@toolboxFwtgf')
-                ->whereIn('page4', [
-                    null, '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19'
-                ]);
-            Route::get('/{page5?}', LeadGenController::class . '@toolboxRest')
-                ->whereIn('page5', [
                     'mcsa', 'urfd', 'htls', 'dodt',
                 ]);
 
-        }
-    );
-    Route::group(['prefix' => 'shows' ],
-        function () {
-            Route::get('/{page?}', LeadGenController::class . '@shows')
-                ->whereIn('page', [
-                    'behind-the-scenes', 'in-rhythm', 'sonor', 'study-the-greats'
-                ]);
         }
     );
     Route::group(['prefix' => 'shows' ],
@@ -230,4 +80,6 @@ Route::domain('{drumeoDomain}')->group(function () {
     Route::get('/teach-a-beginner/lessons/', [LeadGenController::class, 'teachBeginner']);
     Route::get('/weekly-email/', [LeadGenController::class, 'weeklyEmail']);
     Route::get('/weeklyemail/', [LeadGenController::class, 'weeklyMail']);
+    Route::get('/{leadgenSlug?}', LeadGenController::class.'@leadgen')
+    ->where('leadgenSlug', '(.*)');
 });

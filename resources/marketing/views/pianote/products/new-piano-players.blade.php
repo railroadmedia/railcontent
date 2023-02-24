@@ -1,13 +1,5 @@
 @extends('pianote._partials.global-layout')
 
-@php
-    $modalImages = [
-        "https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-106-Edit.jpg",
-        "https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-107-Edit.jpg",
-        "https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-108-Edit.jpg"
-    ];
-@endphp
-
 @section('global-head')
     @parent
     <title>New Piano Players Start Here | Pianote</title>
@@ -207,51 +199,6 @@
 
         }
 
-        .image-modal-arrow-left, .image-modal-arrow-right {
-            font-size: 0;
-            position: absolute;
-            transform: translate(0, -50%);
-            background: #FFF;
-            transition: opacity .3s;
-            border-radius: 100px;
-            height: auto;
-            width: auto;
-            z-index: 10;
-            padding: 3px 10px;
-            margin: 0;
-            bottom: unset;
-            top: 50%;
-        }
-
-        .image-modal-arrow-left {
-            left: 0;
-        }
-
-        .image-modal-arrow-right {
-            right: 0;
-        }
-
-        .image-modal-arrow-left::before, .image-modal-arrow-right::before {
-            -webkit-font-smoothing: antialiased;
-            display: inline-block;
-            font-style: normal;
-            font-variant: normal;
-            text-rendering: auto;
-            opacity: 1;
-            line-height: 1;
-            font-family: "Font Awesome 5 Pro";
-            font-weight: 300;
-            color: #f61a30;
-            font-size: 28px;
-        }
-
-        .image-modal-arrow-left::before {
-            content: "\f104";
-        }
-
-        .image-modal-arrow-right::before {
-            content: "\f105";
-        }
 
         .timeline-container .timeline:after {
             left: -16px !important;
@@ -266,7 +213,7 @@
 @stop()
 
 @section('global-body')
-    @include('pianote._partials._nav', [
+    @include('pianote.sales.partials._nav', [
         "cartVersion" => true
     ])
     @include('pianote._partials._promo-banner-no-tw', [
@@ -284,16 +231,6 @@
         }
     @endphp
 
-{{--    @if(!is_current_user_a_member())--}}
-{{--        <a href="#final" class="anchor-slide flex items-end justify-center px-2 sm:px-0 fixed w-full z-[100]" style="background: #d6e8fd;">--}}
-{{--            <p class="font-bebas uppercase mx-0 py-2 leading-none">--}}
-{{--                GET A FREE CHORDS & SCALES BOOK UNTIL FEB 20.--}}
-{{--                <br><span class="text-pianote"><span class="tzcd-nppsh2">a limited time</span> left!</span>--}}
-{{--            </p>--}}
-{{--            <img class="h-10 ml-4" src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/sticky_bar_chords_scales.png" alt="30 day drummer logo" />--}}
-{{--        </a>--}}
-{{--        <div class="w-full block h-10 sm:h-11"></div>--}}
-{{--    @endif--}}
     <header class="px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:#eff7ff;">
         <div class="container max-w-5xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center">
@@ -812,37 +749,6 @@
         </div>
     </section>
 
-
-{{--    @if(!is_current_user_a_member())--}}
-{{--        <section class="px-4 sm:px-6 py-10 sm:py-20 lg:py-28 relative" style="background: linear-gradient(180deg, #F61A30 0%, #910000 122.85%);">--}}
-{{--            <div class="max-w-5xl mx-auto md:flex relative z-40">--}}
-{{--                <div class="flex-1 text-white md:pr-4 lg:pr-0 mb-3 md:mb-0 max-w-md md:max-w-auto mx-auto">--}}
-{{--                    <h5 class="uppercase mb-2 text-center md:text-left" style="color: #FFAE00;">--}}
-{{--                        AVAILABLE UNTIL FEBRUARY 20TH<br> only <span class="tzcd-nppsh2">a limited time</span> left!--}}
-{{--                    </h5>--}}
-{{--                    <h2 class="font-extrabold mb-4 text-center md:text-left">--}}
-{{--                        Master every chord & <br class="hidden lg:inline">scale with this guide.--}}
-{{--                    </h2>--}}
-{{--                    <p>--}}
-{{--                        <span class="font-extrabold">Every Chord. Every Scale. Every Key.</span>--}}
-{{--                        <br><br> This essential resource will help you learn the most important chord shapes, chord variations, and scales in EVERY key.--}}
-{{--                        <br><br> Regular ${{ floatval($productPrices['piano-chords-and-scales-guide']->price) }}. It’s yours FREE when you get New Piano Players Start Here. (And we’ll cover the shipping.)--}}
-{{--                        <br><br>--}}
-{{--                    </p>--}}
-{{--                </div>--}}
-{{--                <div class="flex-1 relative sm:w-2/3 md:w-auto mx-auto text-center sm:pl-10">--}}
-{{--                    <div class="relative md:max-w-md mx-auto">--}}
-{{--                        <img--}}
-{{--                            class="md:absolute md:w-full h-80 md:h-auto md:left-0 -top-10 lg:-top-20 scales-book cursor-pointer lazyload"--}}
-{{--                            data-src="https://pianote.s3.amazonaws.com/products/the-power-of-chords/piano_scales_book.png"--}}
-{{--                            alt="scales book" data-open="seeInside1">--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </section>--}}
-{{--    @endif--}}
-
-
     <div id="final" class="anchor"></div>
     <section class="text-center relative z-50 overflow-hidden px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#eff7ff;">
         <div class="container mx-auto relative z-50">
@@ -893,10 +799,7 @@
                             @else
                                 <div class="join smaller my-4">ENROLL NOW</div>
                             @endif
-                            <ul class="list-disc ml-10">
-{{--                                <li class="text-sm leading-relaxed">Get the encyclopedia of chords & scales <strong class="text-pianote">FREE</strong> when you register before February 20th.</li>--}}
-                                <li class="text-sm leading-relaxed text-pianote">Enrollment closes in <span class="tzcd-nppsh text-pianote">a limited time</span></li>
-                            </ul>
+                            <p class="text-sm leading-relaxed text-pianote">Enrollment closes in <span class="tzcd-nppsh text-pianote">a limited time</span></p>
                             <hr class="w-full my-5" style="border-color:#ebf2f8">
                             <p class="leading-loose text-sm"><strong>Key Features</strong><br>
                                 <i class="fas fa-check text-pianote mr-1"></i> Runs February 27th to March 28th.<br>
@@ -963,14 +866,6 @@
         </div>
     </section>
 
-    @foreach ($modalImages as $key => $img)
-        @include('pianote.products.partials.image-modal',[
-            'id' => "seeInside".$key,
-            "image" => $img,
-            "imageName" => "seeInside".$key,
-        ])
-    @endforeach
-
     @if(!is_current_user_a_member())
         <div class="reveal coach-wrap relative rounded-xl text-center overflow-visible select-none max-w-xs md:max-w-md" id="loginModal" style="max-width: 530px;" data-reveal data-reset-on-close="false">
             <div class="p-5 sm:p-7">
@@ -1007,7 +902,7 @@
         "title" => 'trailer'
     ])
 
-    @include("pianote._partials._footer")
+    @include("pianote.sales.partials._footer")
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
@@ -1040,37 +935,6 @@
             if (showModal) {
                 $('#loginModal').foundation('open');
             }
-
-
-            let imgNum = 1;
-
-            $('.image-modal-arrow-left').on('click', function(){
-                if(imgNum === 0){
-                    imgNum = 2;
-                }
-                else {
-                    imgNum--;
-                }
-
-                $('#seeInside' + imgNum).find('img').each(function(){
-                    const imgSrc = $(this);
-                    $('#seeInside1').find('img').attr('src', imgSrc.data('src'))
-                })
-            })
-
-            $('.image-modal-arrow-right').on('click', function(){
-                if(imgNum === 2){
-                    imgNum = 0;
-                }
-                else {
-                    imgNum++;
-                }
-
-                $('#seeInside' + imgNum).find('img').each(function(){
-                    const imgSrc = $(this);
-                    $('#seeInside1').find('img').attr('src', imgSrc.data('src'))
-                })
-            })
         })
     </script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>

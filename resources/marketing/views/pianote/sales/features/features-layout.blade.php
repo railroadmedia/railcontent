@@ -12,7 +12,7 @@
 @endsection
 
 @section('page-nav')
-    @include("pianote._partials._nav", [
+    @include("pianote.sales.partials._nav", [
         "subscriptionVersion" => true,
         "fullSubscriptionVersion" => true,
         "trialVersion" => true,
@@ -38,5 +38,5 @@
 
     @include('pianote._partials.faq')
 
-    @include('pianote._partials._footer')
+    @include('pianote.sales.partials._footer')
 @endsection
