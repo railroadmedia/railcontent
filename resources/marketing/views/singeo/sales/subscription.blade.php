@@ -537,14 +537,15 @@
 
     @include('singeo._partials.faq')
 
-    @include('_partials.components.soundslice-modal',[
+    @include('_partials.components.video-modal',[
         'name' => 'soundslice',
         'video' => 'ZsC4c',
-        'slices' => true
+        'soundslice' => true
     ])
     @include('_partials.components.video-modal',[
         'name' => 'trailer',
-        'video' => '785314379'
+        'video' => '785314379',
+        'vimeo' => true,
     ])
 
     @if(!empty($promoVersion))

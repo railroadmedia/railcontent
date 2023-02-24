@@ -40,7 +40,7 @@
 @endsection
 
 @section('global-body')
-    @include('pianote._partials._nav')
+    @include('pianote.sales.partials._nav')
 
     <header class="py-12 sm:py-20 bg-no-repeat" style="background-color:#00101D;">
         <div class="container mx-auto max-w-4xl">
@@ -206,7 +206,7 @@
         "name" => "trailer",
         "vimeoId" => "767456067",
     ])
-    @include("pianote._partials._footer", [
+    @include("pianote.sales.partials._footer", [
             "minimal" => true
         ])
 

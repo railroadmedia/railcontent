@@ -1,0 +1,82 @@
+<?php
+
+namespace App\Nova\Flexible\Resolvers;
+
+use App\Models\LeadgenLesson;
+use App\Models\LeadgenLessonAssignment;
+use Whitecube\NovaFlexibleContent\Value\ResolverInterface;
+use Illuminate\Support\Facades\Storage;
+
+class LeadgenLessonAssignmentResolver implements ResolverInterface
+{
+    /**
+     * get the field's value
+     *
+     * @param  mixed  $resource
+     * @param  string $attribute
+     * @param  \Whitecube\NovaFlexibleContent\Layouts\Collection $layouts
+     * @return \Illuminate\Support\Collection
+     */
+    public function get($resource, $attribute, $layouts)
+    {
+        $lesson = LeadgenLesson::where('id', $resource['id'])->find($resource['id']);
+        if(!$lesson) return collect([]);
+        $assignments = $lesson->assignments()->get();
+
+        return $assignments->map(function($assignment) use ($layouts) {
+            $layout = $layouts->find('leadgen-lesson-assignment-layout');
+
+            if(!$layout) return;
+
+            return $layout->duplicateAndHydrate($assignment->id, [
+                'title' => $assignment->title,
+            ],
+            );
+        })->filter();
+    }
+
+    /**
+     * Set the field's value
+     *
+     * @param  mixed  $model
+     * @param  string $attribute
+     * @param  \Illuminate\Support\Collection $groups
+     * @return string
+     */
+    public function set($model, $attribute, $groups)
+    {
+
+        $assignments = $groups->map(function($group, $index){
+            return [
+                'title' => $group->getAttributes()['title'],
+                'id' => !empty($group->getAttributes()['id']) ? $group->getAttributes()['id'] : null,
+            ];
+        });
+
+        foreach($assignments as $assignment){
+            //insert
+            if(is_null($assignment['id'])){
+                $addAssignment = new LeadgenLessonAssignment();
+                $addAssignment->leadgen_lesson_id = $model->id;
+                $addAssignment->title = $assignment['title'];
+                $addAssignment->save();
+                $updatedIds[] = $addAssignment->id;
+            }
+            //update
+            else {
+                $dbAssignment = LeadgenLessonAssignment::find($assignment['id']);
+
+                if($dbAssignment['title'] !== $assignment['title']){
+                    $dbAssignment->title = $assignment['title'];
+                }
+
+
+                $dbAssignment->save();
+                $updatedIds[] = $assignment['id'];
+            }
+        }
+
+        //delete
+        $deleteAssignments = LeadgenLessonAssignment::where('leadgen_lesson_id', $model['id'])->whereNotIn('id', $updatedIds ?? [])->delete();
+    }
+}

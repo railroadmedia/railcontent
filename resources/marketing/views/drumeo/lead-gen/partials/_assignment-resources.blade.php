@@ -1,16 +1,16 @@
 @php
-if (!isset($assignmentID)) {
-    $assignmentID = '';
+if (empty($soundslice)) {
+    $soundslice = '';
 }
 @endphp
 
-<div @if(!empty($assignmentID)) id="{{ $assignmentID }}" @endif
+<div @if(!empty($soundslice)) id="{{ $soundslice }}" @endif
     class="assignment-row border-gray-100 border-b-2 py-4 sm:px-3 @if(!empty($defaultOpen)) active @endif">
     <div class="w-full flex text-left items-center justify-between">
-        @if(!empty($assignmentID))
+        @if(!empty($soundslice))
             <i class="fal fa-fw fa-file-music text-3xl flex-shrink-0"></i>
-            {{--<i class="complete-button {{ ($songInAnHourProgress->$assignmentID ?? null) == 'completed' ? 'active' : '' }} far fa-check text-center text-2xl text-gray-300 border-4 rounded-full cursor-pointer transition-all duration-300 hover:bg-gray-200 hover:text-white"--}}
-                    {{--data-content-id="{{ $assignmentID }}" style="min-width: 39px;"></i>--}}
+            {{--<i class="complete-button {{ ($songInAnHourProgress->$soundslice ?? null) == 'completed' ? 'active' : '' }} far fa-check text-center text-2xl text-gray-300 border-4 rounded-full cursor-pointer transition-all duration-300 hover:bg-gray-200 hover:text-white"--}}
+                    {{--data-content-id="{{ $soundslice }}" style="min-width: 39px;"></i>--}}
         @elseif(!empty($pdfURL))
             <a href="{{ $pdfURL }}" target="_blank"><i class="fal fa-fw fa-file-music text-3xl flex-shrink-0"></i></a>
         @elseif(!empty($imgURL))
@@ -36,7 +36,7 @@ if (!isset($assignmentID)) {
                 <i class="fas fa-fw fa-play pl-2 mr-2 sm:mr-6 ml-auto text-xl outline-none cursor-pointer text-yellow relative z-10 autoplay-video flex-shrink-0" data-open="{{ $vimeo }}Modal"></i>
             @endif
             @if(!empty($soundslice))
-                <i class="fas fa-fw fa-play pl-2 mr-2 sm:mr-6 ml-auto text-xl outline-none cursor-pointer text-yellow relative z-10 autoplay-video flex-shrink-0" data-open="{{ $assignmentID }}Modal"></i>
+                <i class="fas fa-fw fa-play pl-2 mr-2 sm:mr-6 ml-auto text-xl outline-none cursor-pointer text-yellow relative z-10 autoplay-video flex-shrink-0" data-open="{{ $soundslice }}Modal"></i>
             @endif
             <i class="fal fa-fw fa-angle-down transition-all duration-300 @if(empty($soundslice) && empty($vimeo)) ml-auto  @endif @if(!empty($pdfURL) || !empty($mp3URL)) cursor-pointer @endif text-4xl flex-shrink-0 w-9"></i>
         @endif
@@ -81,7 +81,7 @@ if (!isset($assignmentID)) {
 
 @if(!empty($soundslice))
     <div class="reveal-overlay">
-        <div class="reveal mt-3 sm:mt-6" @if(!empty($assignmentID)) id="{{ $assignmentID }}Modal" @endif data-reveal data-reset-on-close="true">
+        <div class="reveal mt-3 sm:mt-6" @if(!empty($soundslice)) id="{{ $soundslice }}Modal" @endif data-reveal data-reset-on-close="true">
             <div class="w-full relative overflow-hidden" style="padding-bottom: 66vh;">
                 <iframe class="fixed inset-0 h-full w-full absolute reset-on-close"
                         src="" frameborder="0" allowfullscreen="allowfullscreen"

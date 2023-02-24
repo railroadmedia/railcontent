@@ -49,90 +49,27 @@ Route::domain('{guitareoDomain}')
                 ]);
         }
     );
-    Route::group(['prefix' => 'free-acoustic-guitar-lessons'],
-        function () {
-            Route::get('/{page?}/{lesson?}', LeadGenController::class . '@fagl')
-                ->whereIn('page', [
-                    null, 'lessons'
-                ])
-                ->whereIn('lesson', [
-                    null, '1', '2', '3', '4', '5', '6'
-                ]);
-        }
-    );
-    Route::group(['prefix' => 'free-electric-guitar-lessons'],
-        function () {
-            Route::get('/{page?}/{lesson?}', LeadGenController::class . '@fegl')
-                ->whereIn('page', [
-                    null, 'lessons'
-                ])
-                ->whereIn('lesson', [
-                    null, '1', '2', '3', '4', '5', '6'
-                ]);
-        }
-    );
+    Route::get('/free-acoustic-guitar-lessons', [LeadGenController::class, 'fagl']);
+    Route::get('/free-electric-guitar-lessons', [LeadGenController::class, 'fegl']);
     Route::group(['prefix' => 'chords-for-hit-songs'],
         function () {
-            Route::get('/{page?}/{lesson?}', LeadGenController::class . '@hitSongs')
+            Route::get('/{page?}/', LeadGenController::class . '@hitSongs')
                 ->whereIn('page', [
-                    null, 'thank-you', 'lessons'
-                ])
-                ->whereIn('lesson', [
-                    null, '1', '2', '3', '4', '5', '6'
+                    null, 'thank-you',
                 ]);
         }
     );
-    Route::group(['prefix' => 'guitar-tricks'],
-        function () {
-            Route::get('/{page?}/{lesson?}', LeadGenController::class . '@tricks')
-                ->whereIn('page', [
-                    null, 'your-videos'
-                ])
-                ->whereIn('lesson', [
-                    null, '1-intro', '2-vibrato', '3-shampoo', '4-palm-muting', '5-truck', '6-whats-next'
-                ]);
-        }
-    );
-    Route::group(['prefix' => 'solo-in-an-hour'],
-        function () {
-            Route::get('/{page?}/{lesson?}', LeadGenController::class . '@soloInAnHour')
-                ->whereIn('page', [
-                    null, 'lessons'
-                ])
-                ->whereIn('lesson', [
-                    null, '1', '2', '3', '4', '5', '6', '7'
-                ]);
-        }
-    );
-    Route::group(['prefix' => 'acoustic-guitar-jumpstart'],
-        function () {
-            Route::get('/{page?}/{lesson?}', LeadGenController::class . '@jumpstart')
-                ->whereIn('page', [
-                    null, 'course-index'
-                ])
-                ->whereIn('lesson', [
-                    null, '1', '2', '3', '4', '5', '6', '7', '8'
-                ]);
-        }
-    );
+    Route::get('/guitar-tricks', [LeadGenController::class, 'tricks']);
+    Route::get('/solo-in-an-hour', [LeadGenController::class, 'soloInAnHour']);
+    Route::get('/acoustic-guitar-jumpstart', [LeadGenController::class, 'jumpstart']);
     Route::group(['prefix' => 'starter-kit'],
         function () {
             Route::get('/{page?}/{lesson?}', LeadGenController::class . '@starterKit')
                 ->whereIn('page', [null, 'lessons'])
                 ->whereIn('lesson', [null, 'using-a-tuner', 'whats-next']);
-            Route::get('/lessons/open-chords/{num?}', LeadGenController::class . '@openChords')
-                ->whereIn('num', ['1', '2', '3', '4', '5', '6']);
-            Route::get('/lessons/fundamentals/{num?}', LeadGenController::class . '@fundamentals')
-                ->whereIn('num', [
-                    null, '1', '2', '3', '4', '5', '6', '7'
-                ]);
-            Route::get('/lessons/heartbreak-avenue/{num?}', LeadGenController::class . '@heartbreak')
-                ->whereIn('num', [
-                    null, '1', '2', '3', '4', '5', '6', '7'
-                ]);
-            Route::get('/lessons/strumming/{num?}', LeadGenController::class . '@strumming')
-                ->whereIn('num', [
-                    null, '1', '2', '3', '4', '5', '6', '7'
+            Route::get('/lessons/{page?}', LeadGenController::class . '@starterKitPages')
+                ->whereIn('page', [
+                    'fundamentals', 'open-chords', 'heartbreak-avenue', 'strumming'
                 ]);
         }
     );
@@ -141,40 +78,13 @@ Route::domain('{guitareoDomain}')
         function () {
             Route::get('/{page?}', LeadGenController::class . '@toolbox')
                 ->whereIn('page', [null, 'lessons']);
-            Route::get('/lessons/changing-chords-smoothly/{num?}', LeadGenController::class . '@changingChords')
-                ->whereIn('num', ['1', '2', '3', '4', '5', '6', '7']);
-            Route::get('/lessons/exploring-guitar-rhythms/{num?}', LeadGenController::class . '@exploreRhythms')
-                ->whereIn('num', [
-                    null, '1', '2', '3', '4', '5', '6', '7'
-                ]);
-            Route::get('/lessons/how-to-tune-a-guitar/{num?}', LeadGenController::class . '@tuneGuitar')
-                ->whereIn('num', [
-                    null, '1', '2', '3', '4', '5', '6', '7'
-                ]);
-            Route::get('/lessons/legato-hammer-ons-pull-offs/{num?}', LeadGenController::class . '@legato')
-                ->whereIn('num', [
-                    null, '1', '2', '3', '4', '5', '6', '7', '8'
-                ]);
-            Route::get('/lessons/making-chords-sound-clean/{num?}', LeadGenController::class . '@cleanChords')
-                ->whereIn('num', [
-                    null, '1', '2', '3', '4', '5'
-                ]);
-            Route::get('/lessons/playing-your-first-guitar-solo/{num?}', LeadGenController::class . '@firstSolo')
-                ->whereIn('num', [
-                    null, '1', '2', '3', '4', '5', '6', '7', '8'
-                ]);
-            Route::get('/lessons/playing-your-first-song/{num?}', LeadGenController::class . '@firstSong')
-                ->whereIn('num', [
-                    null, '1', '2', '3', '4', '5', '6', '7', '8', '9'
-                ]);
-            Route::get('/lessons/sight-reading-essentials/{num?}', LeadGenController::class . '@sightReading')
-                ->whereIn('num', [
-                    null, '1', '2', '3', '4', '5', '6'
-                ]);
-            Route::get('/lessons/soloing-with-minor-pentatonic-scales/{num?}', LeadGenController::class . '@soloingPentatonic')
-                ->whereIn('num', [
-                    null, '1', '2', '3', '4', '5', '6', '7', '8'
+            Route::get('/lessons/{page?}', LeadGenController::class . '@toolboxPages')
+                ->whereIn('page', [
+                    'changing-chords-smoothly', 'exploring-guitar-rhythms', 'how-to-tune-a-guitar', 'legato-hammer-ons-pull-offs', 'making-chords-sound-clean', 'playing-your-first-guitar-solo', 'playing-your-first-song', 'sight-reading-essentials', 'soloing-with-minor-pentatonic-scales',
                 ]);
         }
     );
+
+    Route::get('/{leadgenSlug?}', LeadGenController::class.'@leadgen')
+        ->where('leadgenSlug', '(.*)');
 });
