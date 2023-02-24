@@ -40,18 +40,22 @@ class UserPlaylistsController extends BaseController
     {
         $page = $request->get('page', 1);
         $limit = $request->get('limit', 10);
+        $term = $request->get('search');
 
         $lessons = $this->userPlaylistsService->getUserPlaylist(
             user()->id,
             'user-playlist',
             brand(),
             $limit,
-            $page
+            $page,
+            $term
         );
+
         $playlistsNumber = $this->userPlaylistsService->countUserPlaylists(
             user()->id,
             'user-playlist',
-            brand()
+            brand(),
+            $term
         );
 
         $likedPlaylists = $this->userPlaylistsService->getLikedPlaylists(brand(), 5, 1);

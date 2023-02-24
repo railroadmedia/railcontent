@@ -55,7 +55,9 @@ class InstructorDecorator extends ModeDecoratorBase
             foreach ($content['fields'] as $field) {
                 if ($field['key'] === 'instructor') {
                     $coachName = $field['value']->fetch('fields.name');
-                    $contents[$contentIndex]['instructors'][] = $coachName;
+                    if(!in_array($coachName, $contents[$contentIndex]['instructors'])) {
+                        $contents[$contentIndex]['instructors'][] = $coachName;
+                    }
 
                     $coach = $field['value']->getArrayCopy();
                     $coach['current_user_is_subscribed'] = in_array($coach['id'], $userSubscribedContents);

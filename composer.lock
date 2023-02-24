@@ -176,16 +176,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.260.0",
+            "version": "3.260.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "25a14f63cc927d72adad3cc24d6bcdadfe6e0fc7"
+                "reference": "de98dc14291ae7f39de5e381ba163c3ba40fd22d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/25a14f63cc927d72adad3cc24d6bcdadfe6e0fc7",
-                "reference": "25a14f63cc927d72adad3cc24d6bcdadfe6e0fc7",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/de98dc14291ae7f39de5e381ba163c3ba40fd22d",
+                "reference": "de98dc14291ae7f39de5e381ba163c3ba40fd22d",
                 "shasum": ""
             },
             "require": {
@@ -264,9 +264,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.260.0"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.260.2"
             },
-            "time": "2023-02-21T20:26:17+00:00"
+            "time": "2023-02-23T19:35:08+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -4350,16 +4350,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v9.52.3",
+            "version": "v9.52.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "7a5774abab6c85e61612427a9385646debd18a25"
+                "reference": "9239128cfb4d22afefb64060dfecf53e82987267"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/7a5774abab6c85e61612427a9385646debd18a25",
-                "reference": "7a5774abab6c85e61612427a9385646debd18a25",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/9239128cfb4d22afefb64060dfecf53e82987267",
+                "reference": "9239128cfb4d22afefb64060dfecf53e82987267",
                 "shasum": ""
             },
             "require": {
@@ -4544,21 +4544,21 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2023-02-22T11:33:00+00:00"
+            "time": "2023-02-22T14:38:06+00:00"
         },
         {
             "name": "laravel/nova",
-            "version": "4.22.0",
+            "version": "4.22.1",
             "source": {
                 "type": "git",
                 "url": "git@github.com:laravel/nova.git",
-                "reference": "eb105414c6dedc3fda8e9ca62bdbe99dec80cd31"
+                "reference": "3daa3889d1bc6687f71282d8079ba174bc2283fe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-eb105414c6dedc3fda8e9ca62bdbe99dec80cd31-zip-668949.zip",
-                "reference": "eb105414c6dedc3fda8e9ca62bdbe99dec80cd31",
-                "shasum": "2557303a3883136630a205c5ad858a7950515333"
+                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-3daa3889d1bc6687f71282d8079ba174bc2283fe-zip-6b73aa.zip",
+                "reference": "3daa3889d1bc6687f71282d8079ba174bc2283fe",
+                "shasum": "6ae486d53c6aa00d16ef36395e1688b0e2e93b67"
             },
             "require": {
                 "brick/money": "^0.5.0|^0.6.0|^0.7.0|^0.8.0",
@@ -4577,7 +4577,6 @@
                 "symfony/process": "^5.4|^6.0"
             },
             "require-dev": {
-                "laravel/framework": "10.x-dev",
                 "laravel/nova-dusk-suite": "8.4.x-dev|9.4.x-dev|10.4.x-dev",
                 "laravel/pint": "^1.4",
                 "laravel/scout": "^9.8",
@@ -4652,9 +4651,9 @@
                 "laravel"
             ],
             "support": {
-                "source": "https://github.com/laravel/nova/tree/v4.22.0"
+                "source": "https://github.com/laravel/nova/tree/v4.22.1"
             },
-            "time": "2023-02-08T20:59:46+00:00"
+            "time": "2023-02-23T23:50:42+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -6514,16 +6513,16 @@
         },
         {
             "name": "nova-kit/nova-packages-tool",
-            "version": "v1.7.0",
+            "version": "v1.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nova-kit/nova-packages-tool.git",
-                "reference": "8d57d348f3779d66a36cfc6c5316e31877a9e781"
+                "reference": "1e6317f9f370ae8e778f147092b8e288171e94e2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nova-kit/nova-packages-tool/zipball/8d57d348f3779d66a36cfc6c5316e31877a9e781",
-                "reference": "8d57d348f3779d66a36cfc6c5316e31877a9e781",
+                "url": "https://api.github.com/repos/nova-kit/nova-packages-tool/zipball/1e6317f9f370ae8e778f147092b8e288171e94e2",
+                "reference": "1e6317f9f370ae8e778f147092b8e288171e94e2",
                 "shasum": ""
             },
             "require": {
@@ -6531,7 +6530,8 @@
                 "php": "^7.3 || ^8.0"
             },
             "require-dev": {
-                "orchestra/testbench": "^6.24 || ^7.0 || ^8.0"
+                "orchestra/testbench": "^6.24 || ^7.0 || ^8.0",
+                "phpunit/phpunit": "^9.6"
             },
             "type": "library",
             "extra": {
@@ -6558,9 +6558,9 @@
             ],
             "description": "Tool for Laravel Nova Packages Development",
             "support": {
-                "source": "https://github.com/nova-kit/nova-packages-tool/tree/v1.7.0"
+                "source": "https://github.com/nova-kit/nova-packages-tool/tree/v1.7.1"
             },
-            "time": "2023-02-08T22:02:49+00:00"
+            "time": "2023-02-23T23:53:41+00:00"
         },
         {
             "name": "nunomaduro/termwind",
@@ -8091,16 +8091,16 @@
         },
         {
             "name": "railroad/ecommerce",
-            "version": "v5.0.60",
+            "version": "v5.0.63",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "aa87e41734e63ddd455e3d2eb902843c0fe723ef"
+                "reference": "75dd9fd18e6639b356be0ca459386d2f2d9dbb00"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/aa87e41734e63ddd455e3d2eb902843c0fe723ef",
-                "reference": "aa87e41734e63ddd455e3d2eb902843c0fe723ef",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/75dd9fd18e6639b356be0ca459386d2f2d9dbb00",
+                "reference": "75dd9fd18e6639b356be0ca459386d2f2d9dbb00",
                 "shasum": ""
             },
             "require": {
@@ -8137,9 +8137,9 @@
             "description": "Ecommerce system",
             "support": {
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
-                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.60"
+                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.63"
             },
-            "time": "2023-02-07T22:23:16+00:00"
+            "time": "2023-02-23T17:44:36+00:00"
         },
         {
             "name": "railroad/lead-tracker",
@@ -8533,12 +8533,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "64d39bdfef8c8afba040151fdb9594d01b6424a0"
+                "reference": "3773e91997e66329f85906f4ce3f9a570fda6cd7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/64d39bdfef8c8afba040151fdb9594d01b6424a0",
-                "reference": "64d39bdfef8c8afba040151fdb9594d01b6424a0",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/3773e91997e66329f85906f4ce3f9a570fda6cd7",
+                "reference": "3773e91997e66329f85906f4ce3f9a570fda6cd7",
                 "shasum": ""
             },
             "require": {
@@ -8594,7 +8594,7 @@
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
                 "source": "https://github.com/railroadmedia/railcontent/tree/2.0-playlists"
             },
-            "time": "2023-02-22T13:00:47+00:00"
+            "time": "2023-02-24T13:20:39+00:00"
         },
         {
             "name": "railroad/railforums",

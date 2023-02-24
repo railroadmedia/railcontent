@@ -2828,7 +2828,8 @@ return [
             'is_full_track',
             'is_instrumentless_track',
             'route',
-            'is_song_assignment'
+            'is_song_assignment',
+            'parent'
         ],
     ],
 ];
