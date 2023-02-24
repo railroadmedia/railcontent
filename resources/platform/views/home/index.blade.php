@@ -104,8 +104,7 @@
         {{-- My Playlists --}}
         @component('partials.bladesora.members.components.home._list-section', [
             'brand' => brand(),
-            'myListUrl' => url()->route('platform.lists.my-list'),
-            'contentEndpoint' => '/railcontent/content',
+            'myListUrl' => url()->route('platform.user.playlists',['brand'=>brand()]),
             'usersList' => $usersList,
             ])
         @endcomponent
