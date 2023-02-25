@@ -365,17 +365,17 @@ Route::domain('{musoraDomain}')
         /*
          * Users Lists Pages
          */
-        Route::get('/{brand}/lists/my-list', [UserListPagesController::class, 'myList'])
+        Route::get('/{brand}/lesson-history', [UserListPagesController::class, 'inProgress'])
             ->whereIn('brand', all_brands())
-            ->name('platform.lists.my-list');
+            ->name('platform.lesson-history.in-progress');
 
-        Route::get('/{brand}/lists/in-progress', [UserListPagesController::class, 'inProgress'])
+        Route::get('/{brand}/lesson-history/in-progress', [UserListPagesController::class, 'inProgress'])
             ->whereIn('brand', all_brands())
-            ->name('platform.lists.in-progress');
+            ->name('platform.lesson-history.in-progress');
 
-        Route::get('/{brand}/lists/completed', [UserListPagesController::class, 'completed'])
+        Route::get('/{brand}/lesson-history/completed', [UserListPagesController::class, 'completed'])
             ->whereIn('brand', all_brands())
-            ->name('platform.lists.completed');
+            ->name('platform.lesson-history.completed');
 
         /*
          * Profile Public Pages

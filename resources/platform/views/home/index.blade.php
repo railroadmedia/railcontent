@@ -53,8 +53,8 @@
                 'brand' => brand(),
                 'hasStartedContent' => $startedContentCount > 0,
                 'contentEndpoint' => '/railcontent/content',
-                'continueUrl' => url()->route('platform.lists.in-progress'),
-                'seeAllUrl' => url()->route('platform.lists.in-progress'),
+                'continueUrl' => url()->route('platform.lesson-history.in-progress'),
+                'seeAllUrl' => url()->route('platform.lesson-history.in-progress'),
                 'startedContentJson' => $startedContentJson,
                 ])
             @endcomponent

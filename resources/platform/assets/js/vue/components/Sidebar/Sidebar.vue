@@ -89,8 +89,14 @@ const activePath = (path) => {
     </section>
 
     <!-- Playlists Section -->
-    <sidebar-playlists :isSidebarCollapsed="isSidebarCollapsed" :pinnedPlaylists="pinnedPlaylists"
-      :isActivePath="activePath(`/${brand}/lists/my-list`)" :brand="brand" :userId="userId"></sidebar-playlists>
+    <sidebar-playlists 
+      :isSidebarCollapsed="isSidebarCollapsed" 
+      :pinnedPlaylists="pinnedPlaylists"
+      :isActivePath="activePath(`/${brand}/playlists`)" 
+      :brand="brand" 
+      :userId="userId"
+    >
+    </sidebar-playlists>
 
   </SidebarContainer>
 </template>
