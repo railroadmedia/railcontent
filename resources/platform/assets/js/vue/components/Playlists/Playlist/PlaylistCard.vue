@@ -10,19 +10,19 @@
             type: String,
             default: "drumeo"
         },
-        list: {
+        lesson: {
             type: Object,
             default: {}
         },
         isListView: {
             type: Boolean,
-            default: false,
+            default: true,
         }
     });
 
     //-----------Computed Props-----------//
     const duration_formated = computed(()=> {
-        return props.list.duration_formated.replace(/^0(?:0:0?)?/, '');;
+        return props.lesson.created_on.replace(/^0(?:0:0?)?/, '');;
     })
 
     //-----------Refs-----------//
@@ -42,7 +42,7 @@
         });
 
     //-----------Watchers-----------//
-    watch(props.list, async (newList) => {
+    watch(props.lesson, async (newList) => {
         state.isPinned = newList.pinned;
     })
 
@@ -50,10 +50,10 @@
 
     //Handle Share
     const shareHandler = () => {
-        navigator.clipboard.writeText(props.list.url)
+        navigator.clipboard.writeText(props.lesson.url)
         window.shownotification({
             icon: 'fa-link',
-            text: `${ props.list.name } link copied to clipboard.`
+            text: `${ props.lesson.name } link copied to clipboard.`
         })
         //close after click
         state.dropdownOpen = false;
@@ -61,14 +61,14 @@
 
     const privateToggleHandler = () => {
         state.isPrivate = !state.isPrivate;
-        let isPrivate = props.list.private === 1 ? true : false;
-        PlaylistService.setToPrivate(props.list.id, isPrivate, token)
+        let isPrivate = props.lesson.private === 1 ? true : false;
+        PlaylistService.setToPrivate(props.lesson.id, isPrivate, token)
             .then((response) => {
                 if(response.status === 201) {
                     //show success message
                     window.shownotification({
-                        icon: `${props.list.private === 1 ? 'fa-lock-open' : 'fa-lock'}.`,
-                        text: `Your playlist is now ${props.list.private === 1 ? 'private' : 'public'}.`
+                        icon: `${props.lesson.private === 1 ? 'fa-lock-open' : 'fa-lock'}.`,
+                        text: `Your playlist is now ${props.lesson.private === 0 ? 'private' : 'public'}.`
                     })
                 }
             })
@@ -82,26 +82,24 @@
                     })
                 }
             });
-        //close after 200ms
-        setTimeout(()=> {
-            state.dropdownOpen = false;
-        }, "200")
+        //close
+        state.dropdownOpen = false;
     }
 
     //Handle Pin/Unpin Request
     const pinHandler = (id, brand) => {
-        if(!props.list.pinned) { //PIN
+        if(!props.lesson.pinned) { //PIN
             if(playlistsStore.pinnedPlaylists.length !== 5) {
                 state.isPinned = true;
                 PlaylistService.pinPlaylist(id, brand, token)
                     .then((response) => {
                         if(response.status === 200) { 
                             //emit event or update pinia
-                            playlistsStore.pinPlaylist(props.list)
+                            playlistsStore.pinPlaylist(props.lesson)
                             //show success message
                             window.shownotification({
                                 icon: 'playlist',
-                                text: `'${props.list.name}' has been pinned within the sidebar.`
+                                text: `'${props.lesson.name}' has been pinned within the sidebar.`
                             })
                         }
                     })
@@ -116,7 +114,7 @@
                     });
             } else {
                 //Too Many Playlists
-                window.openplaylistmodal({ modalType: 'unpinPlaylists', data: props.list });
+                window.openplaylistmodal({ modalType: 'unpinPlaylists', data: props.lesson });
                 state.dropdownOpen = false;
             }
         } else { //UNPIN
@@ -125,11 +123,11 @@
                 .then((response) => {
                     if(response.status === 200) { 
                         //emit event or update pinia
-                        playlistsStore.unpinPlaylist(props.list.id)
+                        playlistsStore.unpinPlaylist(props.lesson.id)
                         //show success message
                         window.shownotification({
                             icon: 'playlist',
-                            text: `'${props.list.name}' has been unpinned from the sidebar.`
+                            text: `'${props.lesson.name}' has been unpinned from the sidebar.`
                         })
                     }
                 })
@@ -149,17 +147,17 @@
     }
 
     const duplicatePlaylistHandler = () => {
-        window.openplaylistmodal({ modalType: 'duplicate', data: props.list });
+        window.openplaylistmodal({ modalType: 'duplicate', data: props.lesson });
         state.dropdownOpen = false;
     };
 
     const deletePlaylistHandler = () => {
-        window.openplaylistmodal({ modalType: 'remove', data: props.list });
+        window.openplaylistmodal({ modalType: 'remove', data: props.lesson });
         state.dropdownOpen = false;
     };
 
     const editPlaylistHandler = () => {
-        window.openplaylistmodal({ modalType: 'edit', data: props.list });
+        window.openplaylistmodal({ modalType: 'edit', data: props.lesson });
         state.dropdownOpen = false;
     };
 
@@ -189,30 +187,36 @@
     
     onBeforeMount(() => {
         //check if it's pinned with request? Or prerender?
-        state.isPinned = props.list.pinned;
-        state.isPrivate = props.list.private; 
+        state.isPinned = props.lesson.pinned;
+        state.isPrivate = props.lesson.private; 
+
+        console.log('lesson', props.lesson)
     }); 
     
     
 
 </script>
 <template>
-    <div class="tw-group tw-relative" 
-         :class="props.isListView ? 'tw-h-[52px] tw-flex tw-flex-row tw-w-full tw-items-center tw-transition-colors tw-py-0.5 hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-[#081825]/50 even:tw-bg-white dark:even:tw-bg-[#081825]' : 'tw-grid tw-grid-rows-5 tw-grid-cols-5 tw-gap-1' "
+    <div class="tw-group tw-relative tw-h-[56px] tw-flex tw-flex-row tw-w-full tw-items-center tw-transition-colors tw-py-1 hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-[#081825]/50 even:tw-bg-white dark:even:tw-bg-[#081825]"
     >
         <!-- Playlist thumbnail -->
-        <a :href="list.url"
-            class="tw-relative tw-overflow-hidden tw-bg-white dark:tw-bg-[#081825] tw-aspect-square"
-           :class="props.isListView ? 'tw-h-[48px] tw-w-[48px] tw-rounded tw-shrink-0' : 'tw-row-span-5 tw-col-span-5 tw-rounded-lg'"
-        >
-            <img
-                v-if="list.thumbnail_url"
-                :src="list.thumbnail_url"
-                alt="playlist thumbnail"
-                class="tw-transition-opacity tw-opacity-0 tw-duration-500 tw-object-cover tw-object-center tw-w-full tw-h-full"
-                loading="lazy"
-                onload="this.classList.remove('tw-opacity-0')"
-            />
+        <a :href="lesson.url"
+            class="tw-relative tw-overflow-hidden tw-bg-white dark:tw-bg-[#081825] tw-aspect-square tw-h-[48px] tw-w-[48px] tw-rounded tw-shrink-0">
+            <!-- Image Conatiner -->
+            <div class="tw-relative tw-w-full tw-h-full" v-if="lesson.thumbnail_url">
+                <img
+                    :src="`https://musora.com/cdn-cgi/image/width=200/${lesson.thumbnail_url}`"
+                    alt="playlist thumbnail"
+                    class="tw-transition-opacity tw-opacity-0 tw-duration-500 tw-object-cover tw-object-center tw-w-full tw-h-full tw-blur-sm"
+                    loading="lazy"
+                    onload="this.classList.remove('tw-opacity-0')"
+                />
+                <!-- Image Mask -->
+                <div class="tw-z-10 tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-black/70 tw-flex tw-justify-center">
+                    <img class="tw-h-full tw-object-contain" :src="`https://musora.com/cdn-cgi/image/width=330/${lesson.thumbnail_url}`" alt="playlist thumbnail">
+                </div>
+            </div>
+
             <!-- placeholder (no image or items) -->
             <div v-else class="tw-transition tw-flex tw-items-center tw-justify-center tw-w-full tw-h-full tw-bg-[#3F3F46] dark:tw-bg-[#445F74]">
                 <svg class="tw-w-1/2 tw-h-1/2" width="79" height="79" viewBox="0 0 79 79" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -228,35 +232,35 @@
 
             <!-- hover overlay -->
             <div v-if="!props.isListView" 
-                 class="tw-h-full tw-w-full tw-absolute tw-top-0 tw-left-0 tw-transition-colors tw-z-10 group-hover:tw-bg-black/30">
+                 class="tw-h-full tw-w-full tw-absolute tw-top-0 tw-left-0 tw-transition-colors tw-z-30 group-hover:tw-bg-black/30">
             </div>
         </a>  
 
         <!-- PLAYLIST INFO: clickable link -->
-        <a  :href="list.url"
+        <a  :href="lesson.url"
             class="tw-flex tw-w-full tw-text-[#0D0D0D] dark:tw-text-white"
             :class="props.isListView ? '' : 'tw-col-span-4'"
         >
-            <div :class="props.isListView ? 'tw-w-full tw-grid tw-grid-cols-10 tw-items-center' : '' ">
+            <div class="tw-w-full" :class="props.isListView ? 'tw-grid tw-grid-cols-10 tw-items-center' : '' ">
                 <!--name-->
-                <p class="tw-font-bold tw-capitalize tw-truncate" 
+                <p class="tw-font-bold tw-capitalize tw-truncate tw-w-full" 
                    :class="props.isListView ? 'tw-col-span-10 md:tw-col-span-2 tw-pl-2 md:tw-pl-[19px] tw-pr-2' : '' "
                 >
-                    {{ list.name }} 
+                    {{ lesson.name }} 
                 </p>
                 <!--description-->
                 <p class="tw-capitalize tw-truncate tw-hidden"
                     :class=" props.isListView ? 'tw-flex tw-col-span-5 md:tw-inline-flex' : '' " 
                 > 
-                    <span class="tw-truncate tw-max-w-[512px] tw-pl-2 tw-pr-4">{{ list.description }}</span>
+                    <span class="tw-truncate tw-max-w-[512px] tw-pl-2 tw-pr-4">{{ lesson.description }}</span>
                 </p>
                 <!--category / duration -->
                 <div class="tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-sm tw-flex" 
                     :class="props.isListView ? 'tw-col-span-10 md:tw-col-span-3 tw-w-full tw-pl-2 md:tw-pl-0 md:tw-text-base' : ''"
                 >
                     <div :class="props.isListView ? 'md:tw-w-1/2 tw-inline-flex tw-items-center tw-justify-center' : '' ">
-                        <span v-if="list.category" :class="{'tw-text-center' : props.isListView}">
-                            {{ list.category }}
+                        <span v-if="lesson.category" :class="{'tw-text-center' : props.isListView}">
+                            {{ lesson.category }}
                             <span class="tw-mx-1 tw-leading-none" :class="props.isListView ? 'md:tw-hidden' : '' ">|</span>
                         </span>  
                     </div> 
@@ -267,7 +271,7 @@
             </div>
             <!-- Pinned Icon -->
             <div class="tw-inline-flex tw-items-center tw-transition-colors" 
-                 :class="[ !props.isListView ? 'tw-absolute tw-top-3 tw-right-3' : 'tw-px-4 xl:tw-px-8',`tw-text-${brand}`, { 'tw-opacity-0' : !state.isPinned } ]"
+                 :class="[ !props.isListView ? 'tw-z-20 tw-absolute tw-top-3 tw-right-3' : 'tw-px-4 xl:tw-px-8',`tw-text-${brand}`, { 'tw-opacity-0' : !state.isPinned } ]"
             >
                 <musora-icon icon-name="tack" class="tw-w-[24px] tw-h-[24px] tw-mx-auto tw-hidden md:tw-flex" />
             </div>
@@ -291,12 +295,12 @@
                 </button>
                 <!-- Dropdown-->
                 <div v-if="state.dropdownOpen" 
-                     class="tw-w-[162px] tw-shadow tw-rounded tw-bg-white tw-text-black dark:tw-bg-[#081825] dark:tw-text-white tw-absolute tw-right-0 tw-py-2 tw-z-20"
+                     class="tw-w-[162px] tw-shadow tw-rounded tw-bg-white tw-text-black dark:tw-bg-[#081825] dark:tw-text-white tw-absolute tw-right-0 tw-py-2 tw-z-50"
                      :class="state.dropdownTop ? 'tw-bottom-[100%]' : 'tw-top-[100%]'"
                 >
                     <span class="tw-absolute tw-w-3 tw-h-3 tw-bg-white dark:tw-bg-[#081825] tw-rotate-45 tw-right-[11px]" :class="state.dropdownTop ? 'tw-bottom-[-4px]' : 'tw-top-[-4px]' "></span>
                     <ul class="tw-text-sm tw-w-full">
-                        <li class="tw-w-full tw-flex">
+                        <li class="tw-w-full tw-flex" v-if="!lesson.private || !state.isPrivate">
                             <button class="tw-flex tw-w-full tw-itemx-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-black/20"
                                     @click.prevent="shareHandler()"
                             >Share</button>
@@ -324,7 +328,7 @@
                         </li>
                         <li class="tw-w-full tw-flex">
                             <button class="tw-flex tw-w-full tw-itemx-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-black/20"
-                                    @click.prevent="pinHandler(list.id)"
+                                    @click.prevent="pinHandler(lesson.id)"
                             >
                                 {{ state.isPinned ? 'Unpin from Sidebar' : 'Pin to Sidebar' }} 
                             </button>

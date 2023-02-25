@@ -28,12 +28,27 @@
 <template>
     <platform-header
         :backgroundImage="playlist.thumbnail_url || 'https://musora-web-platform.s3.amazonaws.com/headers/unified_header.jpg'"
+        :blurBG="true"
     >
         <template v-slot:content> 
             <div class="tw-flex tw-items-center">
-                <!-- Thumbnail -->
-                <div class="tw-w-[198px] tw-h-[198px] tw-relative tw-rounded tw-shrink-0 tw-mr-[20px] tw-overflow-hidden">
-                    <img v-if="playlist.thumbnail_url" :src="playlist.thumbnail_url" alt="Playlist Thumbnail" class="tw-object-cover tw-h-full tw-w-full">
+
+                <!-- Playlist thumbnail -->
+                <div class="tw-h-[198px] tw-w-[198px] tw-relative tw-rounded tw-shrink-0 tw-mr-[20px] tw-overflow-hidden">
+                    <!-- Image Conatiner -->
+                    <div v-if="playlist.thumbnail_url" class="tw-relative tw-w-full tw-h-full">
+                        <img
+                            :src="`https://musora.com/cdn-cgi/image/width=200/${playlist.thumbnail_url}`"
+                            alt="playlist thumbnail"
+                            class="tw-transition-opacity tw-opacity-0 tw-duration-500 tw-object-cover tw-object-center tw-w-full tw-h-full tw-blur-sm"
+                            loading="lazy"
+                            onload="this.classList.remove('tw-opacity-0')"
+                        />
+                        <!-- Image Mask -->
+                        <div class="tw-z-10 tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-black/70 tw-flex tw-justify-center">
+                            <img class="tw-h-full tw-object-contain" :src="`https://musora.com/cdn-cgi/image/width=330/${playlist.thumbnail_url}`" alt="playlist thumbnail">
+                        </div>
+                    </div>
 
                     <!-- placeholder (no image or items) -->
                     <div v-else class="tw-transition tw-flex tw-items-center tw-justify-center tw-w-full tw-h-full tw-bg-[#3F3F46] dark:tw-bg-[#445F74]">
@@ -48,6 +63,7 @@
                         </svg>
                     </div>
                 </div>
+
                 <!-- Content -->
                 <div class="tw-flex-col">
                     <!-- Avatar -->
