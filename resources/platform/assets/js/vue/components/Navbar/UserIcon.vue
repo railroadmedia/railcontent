@@ -129,6 +129,10 @@ export default {
           <musora-icon icon-name="playlist" class="tw-w-[20px] tw-mr-2"/>
           Playlists
         </OptionElement>
+        <OptionElement :href="`/${ brand }/lesson-history`">
+          <musora-icon icon-name="bookmark" class="tw-w-[20px] tw-mr-2"/>
+          Lesson History
+        </OptionElement>
         <OptionElement @onOptionClick="() => handleReviewOpen(true)">
           <musora-icon icon-name="board-complete" class="tw-w-[20px] tw-mr-2"/>
           Apply For Review
