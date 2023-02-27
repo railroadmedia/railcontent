@@ -81,6 +81,11 @@ EOT;
         );
         $databaseManager->statement($statement);
 
+        $sql = "DELETE from musora_laravel.railcontent_user_content_progress where content_id in (
+383635, 383636, 383637, 383638,383639, 383640,383641,383642, 383643, 383645,383646, 383647,383648,383649,383650,383651,383652,
+383653,383655,383657,383658,383659,383660,383662,383663,383664,383666)";
+        $databaseManager->statement($sql);
+
         $finish = microtime(true) - $start;
 
         $format = "Finished processing in total %s seconds\n";
