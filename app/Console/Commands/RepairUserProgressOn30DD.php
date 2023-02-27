@@ -44,7 +44,7 @@ class RepairUserProgressOn30DD extends Command
 
         $sql = <<<'EOT'
 UPDATE railcontent_user_content_progress up
-SET up.state = 'started' and up.progress_percent = 10
+SET up.state = 'started' and up.progress_percent = 2
 WHERE up.content_id = 383627 and up.state = 'completed'
 EOT;
 
@@ -52,7 +52,7 @@ EOT;
 
         $sql = <<<'EOT'
 UPDATE railcontent_user_content_progress up
-SET up.state = 'started' and up.progress_percent = 20
+SET up.state = 'started' and up.progress_percent = 3
 WHERE up.content_id = 383628 and up.state = 'completed'
 EOT;
 
@@ -60,7 +60,7 @@ EOT;
 
         $sql = <<<'EOT'
 UPDATE railcontent_user_content_progress up
-SET up.state = 'started' and up.progress_percent = 20
+SET up.state = 'started' and up.progress_percent = 1
 WHERE up.content_id = 383629 and up.state = 'completed'
 EOT;
 
