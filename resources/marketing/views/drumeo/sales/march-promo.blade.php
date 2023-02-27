@@ -186,14 +186,14 @@
 
     <header class="pb-24 md:py-14 lg:py-20">
         <div class="max-w-4xl mx-auto text-center px-4">
-            <img class="mt-14 md:mt-0 h-24 md:h-28 lg:h-32 mb-6" src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/anniversary/2023/logo.png" alt="Anniversary logo" />
+            <img class="mt-14 md:mt-0 h-24 md:h-28 lg:h-32 mb-6" src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/anniversary/2023/logo.png" alt="Anniversary logo" />
             <h3 class="font-extrabold mb-10">Save 18% on your membership <br class="">+ get 11 FREE bonuses worth $1198.95!</h3>
         </div>
         <div class="md:flex md:justify-center md:items-center px-4 lg:px-0">
             <div class="max-w-sm md:max-w-none mx-auto md:hidden">
                 <img
                     class="-mt-20 sm:-mt-14 transition-opacity opacity-0"
-                    src="https://cdn.musora.com/image/fetch/w_550,q_auto:besth/ttps://pianote.s3.amazonaws.com/sales/promos/anniversary/2023/promo-collage-m.png"
+                    src="https://cdn.musora.com/image/fetch/w_550,q_auto:besth/https://drumeo-assets.s3.amazonaws.com/promos/anniversary/2023/promo-collage-m.png"
                     alt="Promo Collage Image"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
@@ -208,7 +208,7 @@
             </div>
             <img
                 class="hidden md:inline-block md:h-96 lg:h-[450px] md:ml-6 transition-opacity opacity-0"
-                src="https://cdn.musora.com/image/fetch/w_850,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/anniversary/2023/promo-collage.png"
+                src="https://cdn.musora.com/image/fetch/w_850,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/anniversary/2023/promo-collage.png"
                 alt="Promo Collage"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
@@ -616,7 +616,7 @@
 
     @include('musora.sales.components.order-section-bonuses', [
         'topImage' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drumeo-annual-2w-card.png',
-        'promoLogo' => 'https://cdn.musora.com/image/fetch/w_650,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/anniversary/2023/logo.png',
+        'promoLogo' => 'https://cdn.musora.com/image/fetch/w_650,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/anniversary/2023/logo.png',
         'promoText' => '<h4 class="leading-tight mt-4 sm:mt-5 mb-2 uppercase text-coaches"><strong>SAVE 18% + GET 11 BONUSES <br class="inline sm:hidden">WORTH $1198.95</strong></h4>',
         'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[quietpad]=1&products[Drumeo-VaterSticks]=1 &products[rock-drumming-masterclass-pack]=1&products[drum-technique-made-easy-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[SD-DIGI]=1&products[four-weeks-to-better-drum-fills]=1&products[learn-songs-faster-pack]=1&products[GHFAL-DIGI]=1&products[CC-DIGI]=1&locked=true',
         'altButtonLink' => '/ecommerce/add-to-cart?products[DLM-1-month]=1&locked=true',
@@ -631,14 +631,15 @@
 
     @include('drumeo._partials.faq')
 
-    @include('_partials.components.soundslice-modal',[
+    @include('_partials.components.video-modal',[
         'name' => 'soundslice',
         'video' => '1D6Vc',
-        'slices' => true,
+        'soundslice' => true,
     ])
     @include('_partials.components.video-modal',[
         'name' => 'trailer',
-        'video' => '785314424'
+        'video' => '785314424',
+        'vimeo' => true,
     ])
 
     @if(!empty($promoVersion))
@@ -648,9 +649,10 @@
     @else
         @include("drumeo.sales.partials._footer")
     @endif
+
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
-    @yield('scripts')
+
 @stop
