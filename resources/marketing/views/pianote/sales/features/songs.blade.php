@@ -567,9 +567,9 @@
         </div>
     </section>
 
-    @include('_partials.components.soundslice-modal',[
+    @include('_partials.components.video-modal',[
         'name' => 'soundslice',
         'video' => '77f4c',
-        'slices' => true,
+        'soundslice' => true,
     ])
 @stop

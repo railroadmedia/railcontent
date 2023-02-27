@@ -23,7 +23,15 @@ Route::domain('{pianoteDomain}')
         function () {
             Route::get('/{page?}', SalesController::class . '@affiliates')
                 ->whereIn('page', [
-                    'asobergirlsguide', 'keyboardkraze', 'leviclay', 'pianodreamers'
+                    'asobergirlsguide', 'keyboardkraze', 'pianodreamers'
+                ]);
+        }
+    );
+    Route::group(['prefix' => 'a' ],
+        function () {
+            Route::get('/{page?}', SalesController::class . '@affiliates')
+                ->whereIn('page', [
+                    'leviclay'
                 ]);
         }
     );

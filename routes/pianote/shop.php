@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Pianote\ShopController;
 use App\Http\Controllers\Pianote\SalesController;
+use App\Http\Controllers\Pianote\LeadGenController;
 
 Route::domain('{pianoteDomain}')
     ->middleware(['web_public'])
@@ -10,6 +11,7 @@ Route::domain('{pianoteDomain}')
     Route::group(['prefix' => 'shop' ],
         function () {
             Route::get('/concert-headphones', [SalesController::class, 'concertHeadphones']);
+            Route::get('/riffs-and-fills', [LeadGenController::class, 'riffsAndFills']);
         }
     );
 

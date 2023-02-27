@@ -34,14 +34,12 @@ Route::domain('{musoraDomain}')
                 Route::get('/{brand}', [HomePageController::class, 'home'])
                     ->whereIn('brand', all_brands())
                     ->name('platform.home');
-
-                Route::get('/test/email', [HomePageController::class, 'testemail']);
-
+                
                 Route::get(
                     '/redirect30day',
                     [\App\Http\Controllers\Platform\HomePageController::class, 'redirect30day']
                 );
-                
+
                 /*
                  * Primary Content Pages
                  */
@@ -728,4 +726,10 @@ Route::domain('{musoraDomain}')
         )
             ->whereIn('brand', ['drumeo'])
             ->name('books.drummers-toolbox.chapter');
+    });
+
+
+Route::middleware(['web_authenticated'])
+    ->group(function () {
+        Route::get('/test/email', [HomePageController::class, 'testemail']);
     });

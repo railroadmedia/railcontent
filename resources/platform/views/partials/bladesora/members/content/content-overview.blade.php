@@ -10,7 +10,7 @@
                         loading="lazy"
                         onload="this.classList.remove('tw-opacity-0')"
                     >
-                    
+
                     @if(!empty($logoImage))
                         <div class="logo-image pa-1 corners-bottom-3">
                             <img
@@ -49,13 +49,19 @@
                     <p class="tiny tw-uppercase tw-flex tw-items-center tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]" style="margin-bottom: 8px;">
                         <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg" class="tw-mr-1">
                             <path d="M5.80262 0.917433L4.21589 4.02017L0.665805 4.51933C0.0291704 4.60838 -0.225969 5.36532 0.235712 5.79886L2.80412 8.21263L2.19664 11.6224C2.0873 12.2387 2.76038 12.7004 3.32412 12.4121L6.5 10.8021L9.67588 12.4121C10.2396 12.698 10.9127 12.2387 10.8034 11.6224L10.1959 8.21263L12.7643 5.79886C13.226 5.36532 12.9708 4.60838 12.3342 4.51933L8.78411 4.02017L7.19738 0.917433C6.91308 0.364376 6.08935 0.357346 5.80262 0.917433Z" fill="currentColor"/>
-                        </svg> 
+                        </svg>
                         Included With Edge
                     </p>
                 @endif
 
+                @if($itemTitle === '30 Day Drummer: Season 2' || $itemTitle === 'New Piano Players Start Here')<div class="tw-mb-2"><p class="tw-text-white tw-bg-{{ $brand }} tw-uppercase tiny tw-rounded-lg tw-font-bold tw-py-1 tw-px-2.5 tw-inline-block">In Progress</p></div>
+                @endif
+
+                @if($itemTitle === '30-Day Drummer')<div class="tw-mb-2"><p class="tw-uppercase tiny tw-rounded-lg tw-font-bold tw-py-1 tw-px-2.5 tw-inline-block tw-bg-[#000C17] tw-text-white dark:tw-bg-white dark:tw-text-black">September 2022</p></div>
+                @endif
+
                 <a @if((empty($noLink) || $noLink === false) && $isOwned) href="{{ $lessonsUrl }}" @endif
-                   class="tw-font-bold tw-text-[#00101D] dark:tw-text-white no-decoration tw-mb-2 tw-text-xl">                  
+                   class="tw-font-bold tw-text-[#00101D] dark:tw-text-white no-decoration tw-mb-2 tw-text-xl">
                    {{ $itemTitle }}
                 </a>
 
@@ -80,7 +86,7 @@
                         @if(!empty($lessonsUrl))
                             <a href="{{ $lessonsUrl }}"
                                class="tw-btn-secondary tw-text-[#00101D] dark:tw-text-white tw-text-xl go-to-button tw-mr-3">
-                                <i class="fas fa-arrow-circle-right mr-1"></i> 
+                                <i class="fas fa-arrow-circle-right mr-1"></i>
                                 See Lessons
                             </a>
                         @endif

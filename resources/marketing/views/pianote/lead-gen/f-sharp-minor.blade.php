@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    {!! \App\Analytics\Tracker::headTop() !!}
+{{--    {!! \App\Analytics\Tracker::headTop() !!}--}}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=5">
 
@@ -98,14 +98,14 @@
     @include('_partials.layout._fonts')
     @include('_partials.layout.favicons.pianote-favicons')
 
-    {!! \App\Analytics\Tracker::trackPageView() !!}
+{{--    {!! \App\Analytics\Tracker::trackPageView() !!}--}}
 
-    {!! \App\Analytics\Tracker::headBottom() !!}
+{{--    {!! \App\Analytics\Tracker::headBottom() !!}--}}
 </head>
 
 <body>
 
-{!! \App\Analytics\Tracker::bodyTop() !!}
+{{--{!! \App\Analytics\Tracker::bodyTop() !!}--}}
 
 <section class="text-center absolute top-1/2 left-1/2 w-full px-5" style="transform:translate(-50%,-50%)">
     <form id="PianoteEngagementTriggerFSharpMinorWebForm" accept-charset="UTF-8" action="/customer-io/submit-email-form"
@@ -116,7 +116,7 @@
             <input id="inf_field_Email" class="w-full" name="email" type="email" placeholder="Email Address..." required/>
         </div>
         <div class="infusion-submit w-full sm:pl-3 float-left sm:w-5/12">
-            <button class="submit" type="submit">Send Me Free Content</button>
+            <button class="submit" type="submit">Get Backing Track</button>
         </div>
         <input name="inf_form_xid" type="hidden" value="PianoteEngagementTriggerFSharpMinorWebForm">
         <input name="tag_names_to_add[]" type="hidden" value="Pianote - Engagement - Trigger - F Sharp Minor - Web Form">
@@ -128,7 +128,7 @@
     </div>
 </section>
 
-{!! \App\Analytics\Tracker::bodyBottom() !!}
+{{--{!! \App\Analytics\Tracker::bodyBottom() !!}--}}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>

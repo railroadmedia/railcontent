@@ -584,14 +584,15 @@
 
     @include('drumeo._partials.faq')
 
-    @include('_partials.components.soundslice-modal',[
+    @include('_partials.components.video-modal',[
         'name' => 'soundslice',
         'video' => '1D6Vc',
-        'slices' => true,
+        'soundslice' => true,
     ])
     @include('_partials.components.video-modal',[
         'name' => 'trailer',
-        'video' => '785314424'
+        'video' => '785314424',
+        'vimeo' => true,
     ])
 
     @if(!empty($promoVersion))
