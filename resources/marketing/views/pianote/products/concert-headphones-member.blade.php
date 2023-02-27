@@ -97,10 +97,8 @@
             <a class="join w-full" href="#customize-anchor">Grab your pair</a>
             <h4 class="text-white font-extrabold my-4">
                 Only
-                @if((floatval($productPrices['pianote-headphones']->price) -floatval($productPrices['pianote-headphones']->discounted_price)) > 0)
-                    <s class="font-normal">${{floatval($productPrices['pianote-headphones']->price) }}</s>
-                @endif
-                ${{floatval($productPrices['pianote-headphones']->discounted_price) }}
+                <s class="font-normal">${{floatval($productPrices['pianote-headphones']->price) }}</s>
+                $149
             </h4>
             <p class="text-yellow italic font-bold leading-tight">LIMITED EDITION.</p>
 
@@ -257,14 +255,9 @@
                     <div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">
                         <h6 class="leading-none mb-3 md:mb-8">Concert Series Headphones</h6>
                         <h1 class="inline-block leading-none">
-                            @if((floatval($productPrices['pianote-headphones']->price) -floatval($productPrices['pianote-headphones']->discounted_price)) > 0)
-                                <s style="color:#BBBBBF;">${{ floatval($productPrices['pianote-headphones']->price) }}</s>
-                                <strong>${{ floatval($productPrices['pianote-headphones']->discounted_price) }}</strong>
-                                <p class="text-sm my-4"><em>Save {{ round(100 - (100 * (floatval($productPrices['pianote-headphones']->discounted_price) / floatval($productPrices['pianote-headphones']->price)))) }}% for a limited time.</em></p>
-                            @else
-                                <strong>${{ floatval($productPrices['pianote-headphones']->price) }}</strong>
-                                <br/><br/>
-                            @endif
+                            <s style="color:#BBBBBF;">${{ floatval($productPrices['pianote-headphones']->price) }}</s>
+                            <strong>$149</strong>
+                            <p class="text-sm my-4"><em>Save 21% for a limited time.</em></p>
                         </h1>
 
                         <div class="join smaller w-full transition-opacity duration-300 group-hover:opacity-80" style="max-width: 230px;">Grab your pair</div>
