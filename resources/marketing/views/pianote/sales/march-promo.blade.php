@@ -105,6 +105,7 @@
     x-data ='{
         soundslice : false,
         trailer : false,
+        promoTrailer : false,
         unbox : false,
         rolandTrailer : false
     }'
@@ -112,13 +113,13 @@
 
 @section('global-body')
     @if(!empty($promoVersion))
-        @include("pianote._partials._nav", [
+        @include("pianote.sales.partials._nav", [
             "subscriptionVersion" => true,
             "scrollToJoin" => true,
             "hideMenu" => true,
         ])
     @elseif(!empty($month))
-        @include("pianote._partials._nav", [
+        @include("pianote.sales.partials._nav", [
             "subscriptionVersion" => true,
             "fullSubscriptionVersion" => true,
             "trialVersion" => true,
@@ -126,7 +127,7 @@
         ])
 
     @else
-        @include("pianote._partials._nav", [
+        @include("pianote.sales.partials._nav", [
             "subscriptionVersion" => true,
             "fullSubscriptionVersion" => true,
             "trialVersion" => true,
@@ -194,7 +195,7 @@
                 alt="Trailer Thumbnail"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
-                @click="tailer = true"
+                @click="promoTrailer = true"
             />
         </div>
     </header>
@@ -217,7 +218,7 @@
                 Join Pianote today and you’ll save 17% on your first year of lessons PLUS get 13 incredible bonuses. <br><br>
                 So come party with us! <br><br>
                 <a class="join pianote smaller w-full lg:w-96 mb-2" href="#order">Get Started &raquo;</a>
-                <p class="uppercase"><b>GEN IN QUICK!</b> Only <s>500</s> {-- TODO --} Headphones left!</p>
+                <p class="uppercase"><b>GEN IN QUICK!</b> Only @if($products['pianote-headphones']->getPublicStockCount() < 500)<s>500</s>@endif {{ $products['pianote-headphones']->getPublicStockCount() }} Headphones left!</p>
             </div>
             <img
                 class="hidden md:inline-block md:h-96 lg:h-[450px] md:mt-0 lg:-mt-16 md:ml-6 transition-opacity opacity-0"
@@ -652,26 +653,33 @@
 
     @include('pianote._partials.faq')
 
-    @include('_partials.components.soundslice-modal',[
+    @include('_partials.components.video-modal',[
         'name' => 'soundslice',
         'video' => '77f4c',
-        'slices' => true,
+        'soundslice' => true,
     ])
     @include('_partials.components.video-modal',[
         'name' => 'trailer',
-        'video' => '785314388'
+        'video' => '785314388',
+        'vimeo' => true,
     ])
     @include('_partials.components.video-modal',[
+    'name' => 'promoTrailer',
+    'video' => 'TODO',
+    'vimeo' => true,
+])
+    @include('_partials.components.video-modal',[
         'name' => 'unbox',
-        'video' => '774408046'
+        'video' => '774408046',
+        'vimeo' => true,
     ])
 
     @if(!empty($promoVersion))
-        @include("pianote._partials._footer", [
+        @include("pianote.sales.partials._footer", [
             "minimal" => true
         ])
     @else
-        @include("pianote._partials._footer")
+        @include("pianote.sales.partials._footer")
     @endif
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
