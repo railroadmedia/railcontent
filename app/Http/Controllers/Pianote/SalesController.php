@@ -195,6 +195,11 @@ class SalesController extends BaseController
         return view('pianote.products.concert-headphones');
     }
 
+    public function concertHeadphonesMember()
+    {
+        return view('pianote.products.concert-headphones-member');
+    }
+
     public function foundations()
     {
         return view('pianote.products.foundation-books');
