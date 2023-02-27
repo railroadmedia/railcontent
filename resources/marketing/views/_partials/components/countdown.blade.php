@@ -24,7 +24,7 @@
             minuteText: @if(!empty($promoVersion) && $promoVersion) 'MIN' @else 'minutes' @endif,
             second: '00',
             secondText: @if(!empty($promoVersion) && $promoVersion) 'SEC' @else 'seconds' @endif,
-            endTime: new Date('{{ $date }}').getTime(),
+            endTime: new Date('{{ $countdownDate }}').getTime(),
             startTime: new Date().getTime(),
             timeLeft: 0,
             smallScreen: false,
