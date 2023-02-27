@@ -1215,7 +1215,7 @@ class ContentService
                                                    'status' => $status ?? self::STATUS_DRAFT,
                                                    'language' => $language ?? ConfigService::$defaultLanguage,
                                                    'brand' => $brand ?? ConfigService::$brand,
-//                                                   'instrumentless' => ($type === 'song') ? false : null,
+                                                   //                                                   'instrumentless' => ($type === 'song') ? false : null,
                                                    'total_xp' => $this->getDefaultXP($type, 0),
                                                    'user_id' => $userId,
                                                    'published_on' => $publishedOn,
@@ -2113,8 +2113,7 @@ class ContentService
     public function getNextContentForParentContentForUser($parentContentId, $userId)
     {
         $isParentComplete =
-            RepositoryBase::$connectionMask
-                ->table('railcontent_user_content_progress')
+            RepositoryBase::$connectionMask->table('railcontent_user_content_progress')
                 ->where(['content_id' => $parentContentId, 'user_id' => $userId, 'state' => 'complete'])
                 ->exists();
 
@@ -2167,26 +2166,34 @@ class ContentService
                                 ->toDateTimeString()
                         );
                 })
-                ->leftJoin('railcontent_user_content_progress AS ucp_1',
+                ->leftJoin(
+                    'railcontent_user_content_progress AS ucp_1',
                     function (JoinClause $joinClause) use ($userId) {
                         return $joinClause->on('ucp_1.content_id', '=', 'ch_1.child_id')
                             ->where('ucp_1.user_id', $userId);
-                    })
-                ->leftJoin('railcontent_user_content_progress AS ucp_2',
+                    }
+                )
+                ->leftJoin(
+                    'railcontent_user_content_progress AS ucp_2',
                     function (JoinClause $joinClause) use ($userId) {
                         return $joinClause->on('ucp_2.content_id', '=', 'ch_2.child_id')
                             ->where('ucp_2.user_id', $userId);
-                    })
-                ->leftJoin('railcontent_user_content_progress AS ucp_3',
+                    }
+                )
+                ->leftJoin(
+                    'railcontent_user_content_progress AS ucp_3',
                     function (JoinClause $joinClause) use ($userId) {
                         return $joinClause->on('ucp_3.content_id', '=', 'ch_3.child_id')
                             ->where('ucp_3.user_id', $userId);
-                    })
-                ->leftJoin('railcontent_user_content_progress AS ucp_4',
+                    }
+                )
+                ->leftJoin(
+                    'railcontent_user_content_progress AS ucp_4',
                     function (JoinClause $joinClause) use ($userId) {
                         return $joinClause->on('ucp_4.content_id', '=', 'ch_4.child_id')
                             ->where('ucp_4.user_id', $userId);
-                    })
+                    }
+                )
                 ->select([
                              'ch_1.parent_id AS ch_1_parent_id',
                              'ch_2.parent_id AS ch_2_parent_id',
@@ -2543,16 +2550,14 @@ class ContentService
             $limit,
             $page
         );
-        $countEvents = $this->contentRepository->countByTypeInAndStatusInAndPublishedOn(
-            $types,
+        $countEvents = $this->contentRepository->countByTypeInAndStatusInAndPublishedOn($types,
             [ContentService::STATUS_SCHEDULED, ContentService::STATUS_PUBLISHED],
             Carbon::now()
-                ->toDateTimeString(),
+                                                                                            ->toDateTimeString(),
             '>',
             'published_on',
             'asc',
-            []
-        );
+            []);
 
         ContentRepository::$availableContentStatues = $oldStatuses;
         ContentRepository::$pullFutureContent = $oldFutureContent;
@@ -2602,16 +2607,14 @@ class ContentService
             ),
             'content'
         );
-        $countEvents = $this->contentRepository->countByTypeInAndStatusInAndPublishedOn(
-            $types,
+        $countEvents = $this->contentRepository->countByTypeInAndStatusInAndPublishedOn($types,
             [ContentService::STATUS_SCHEDULED],
             Carbon::now()
-                ->toDateTimeString(),
+                                                                                            ->toDateTimeString(),
             '>',
             'published_on',
             'asc',
-            []
-        );
+            []);
 
         return new ContentFilterResultsEntity([
                                                   'results' => $scheduleEvents,
@@ -2628,6 +2631,11 @@ class ContentService
         return $this->contentVideoRepository->getContentWithExternalVideoId($videoId);
     }
 
+    /**
+     * @param $contentId
+     * @return array
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
     public function countLessonsAndAssignments($contentId)
     {
         $singularContentTypes = array_merge(
@@ -2659,7 +2667,10 @@ class ContentService
                 }
                 $results['song_full_assignment'] = $assign;
             }
-        } elseif (in_array($content['type'], config('railcontent.content_multiple_level_content_depth_playlist_allowed', []))) {
+        } elseif (in_array(
+            $content['type'],
+            config('railcontent.content_multiple_level_content_depth_playlist_allowed', [])
+        )) {
             ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MAXIMUM;
             $lessons = $this->getByParentId($content['id']);
             $soundsliceAssingment = 0;

@@ -47,6 +47,11 @@ class PlaylistLikeRepository extends RepositoryBase
         return $data;
     }
 
+    /**
+     * @param $userId
+     * @param null $brand
+     * @return int
+     */
     public function countLikedPlaylist($userId, $brand = null)
     {
         if (!$brand) {

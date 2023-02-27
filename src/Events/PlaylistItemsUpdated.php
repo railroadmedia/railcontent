@@ -9,8 +9,7 @@ class PlaylistItemsUpdated extends Event
     public $playlistId;
 
     /**
-     * @param int $userId
-     * @param array $contentIds
+     * @param $playlistId
      */
     public function __construct($playlistId)
     {

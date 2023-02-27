@@ -19,6 +19,8 @@ class UserPlaylistsRepository extends RepositoryBase
      * @param null $brand
      * @param null $limit
      * @param int $page
+     * @param null $term
+     * @param string $sort
      * @return array|mixed[]
      */
     public function getUserPlaylist(
@@ -50,7 +52,7 @@ class UserPlaylistsRepository extends RepositoryBase
                 ->skip(($page - 1) * $limit);
         }
 
-        if (!in_array($orderByColumn, ['name', 'id', 'created_at','last_progress'])) {
+        if (!in_array($orderByColumn, ['name', 'id', 'created_at', 'last_progress'])) {
             $orderByColumn = 'id';
         }
         $query = $query->orderBy($orderByColumn, $orderByDirection);
@@ -65,6 +67,8 @@ class UserPlaylistsRepository extends RepositoryBase
     /**
      * @param $playlistType
      * @param null $brand
+     * @param int $page
+     * @param null $limit
      * @return array|mixed[]
      */
     public function getPublicPlaylists($playlistType, $brand = null, $page = 1, $limit = null)
@@ -91,6 +95,11 @@ class UserPlaylistsRepository extends RepositoryBase
         return $data;
     }
 
+    /**
+     * @param $playlistType
+     * @param null $brand
+     * @return int
+     */
     public function countPublicPlaylists($playlistType, $brand = null)
     {
         if (!$brand) {
@@ -108,6 +117,7 @@ class UserPlaylistsRepository extends RepositoryBase
      * @param $userId
      * @param $playlistType
      * @param null $brand
+     * @param null $term
      * @return int
      */
     public function countUserPlaylists($userId, $playlistType, $brand = null, $term = null)

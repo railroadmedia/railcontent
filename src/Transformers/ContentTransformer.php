@@ -229,8 +229,6 @@ class ContentTransformer
                         $content[$row['id']]['parent_id'] = $row['parent_id'];
                         $content[$row['id']]['position'] = $row['child_position'] ?? null;
                     }
-
-
                 }
 
                 $content[$row['id']]['start_second'] = $row['start_second'] ?? null;

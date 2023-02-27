@@ -2,11 +2,6 @@
 
 namespace Railroad\Railcontent\Requests;
 
-
-use Illuminate\Validation\Rule;
-use Railroad\Railcontent\Repositories\ContentRepository;
-use Railroad\Railcontent\Services\ConfigService;
-
 class PlaylistCreateRequest extends FormRequest
 {
     /**
@@ -26,7 +21,6 @@ class PlaylistCreateRequest extends FormRequest
      */
     public function rules()
     {
-
         return [
             'name' => 'required|max:10024',
         ];

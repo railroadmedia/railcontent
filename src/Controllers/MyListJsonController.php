@@ -22,36 +22,18 @@ use Symfony\Component\HttpFoundation\Request;
 
 class MyListJsonController extends Controller
 {
-    /**
-     * @var ContentService
-     */
-    private $contentService;
-
-    /**
-     * @var ContentRepository
-     */
-    private $contentRepository;
-
-    /**
-     * @var ContentHierarchyService
-     */
-    private $contentHierarchyService;
-
-    /**
-     * @var UserPlaylistsService
-     */
-    private $userPlaylistsService;
-
-    /**
-     * @var ImageManager
-     */
-    private $imageManager;
+    private ContentService $contentService;
+    private ContentRepository $contentRepository;
+    private ContentHierarchyService $contentHierarchyService;
+    private UserPlaylistsService $userPlaylistsService;
+    private ImageManager $imageManager;
 
     /**
      * @param ContentService $contentService
      * @param ContentHierarchyService $contentHierarchyService
      * @param ContentRepository $contentRepository
      * @param UserPlaylistsService $userPlaylistsService
+     * @param ImageManager $imageManager
      */
     public function __construct(
         ContentService $contentService,
@@ -117,6 +99,7 @@ class MyListJsonController extends Controller
     /**
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
+     * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function removeFromPrimaryPlaylist(Request $request)
     {
@@ -229,7 +212,7 @@ class MyListJsonController extends Controller
 
     /**
      * @param PlaylistCreateRequest $request
-     * @return array
+     * @return mixed
      */
     public function createPlaylist(PlaylistCreateRequest $request)
     {
@@ -256,26 +239,28 @@ class MyListJsonController extends Controller
 
     /**
      * @param Request $request
-     * @return array
+     * @return mixed
+     * @throws \Throwable
      */
     public function getPlaylist(Request $request)
     {
-        $playlist =  $this->userPlaylistsService->getPlaylist($request->get('playlist_id'));
+        $playlist = $this->userPlaylistsService->getPlaylist($request->get('playlist_id'));
         throw_if(!$playlist, new NotFoundException('Playlist not exists.'));
 
         return reply()->json([$playlist], [
             'transformer' => DataTransformer::class,
         ]);
-
     }
 
     /**
      * @param Request $request
-     * @return array
+     * @return mixed
+     * @throws \Throwable
      */
     public function copyPlaylist(Request $request)
     {
         $playlist = $this->userPlaylistsService->getPlaylist($request->get('playlist_id'));
+        throw_if(!$playlist, new NotFoundException('Playlist not exists.'));
 
         $playlist = $this->userPlaylistsService->create([
                                                             'user_id' => auth()->id(),
@@ -356,7 +341,8 @@ class MyListJsonController extends Controller
     }
 
     /**
-     * @return array|mixed[]
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function getPublicPlaylists(Request $request)
     {
@@ -376,11 +362,17 @@ class MyListJsonController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param AddItemToPlaylistRequest $request
      * @return \Illuminate\Http\JsonResponse
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     * @throws \Throwable
      */
     public function addItemToPlaylist(AddItemToPlaylistRequest $request)
     {
+        $playlist = $this->userPlaylistsService->getPlaylist($request->get('playlist_id'));
+        throw_if(!$playlist, new NotFoundException('Playlist not exists.'));
+
         $this->userPlaylistsService->addItemToPlaylist(
             $request->get('playlist_id'),
             $request->get('content_id'),
@@ -400,9 +392,13 @@ class MyListJsonController extends Controller
      * @param Request $request
      * @param $playlistId
      * @return mixed
+     * @throws \Throwable
      */
     public function updatePlaylist(Request $request, $playlistId)
     {
+        $playlist = $this->userPlaylistsService->getPlaylist($playlistId);
+        throw_if(!$playlist, new NotFoundException('Playlist not exists.'));
+
         $playlist = $this->userPlaylistsService->update(
             $playlistId,
             array_intersect_key($request->all(), [
@@ -426,6 +422,9 @@ class MyListJsonController extends Controller
      */
     public function pinPlaylist(Request $request)
     {
+        $playlist = $this->userPlaylistsService->getPlaylist($request->get('playlist_id'));
+        throw_if(!$playlist, new NotFoundException('Playlist not exists.'));
+
         $allowedPinNumber = config('railcontent.pinned_playlists_nr', 5);
         $myPinnedPlaylists = $this->userPlaylistsService->getPinnedPlaylists();
 
@@ -457,7 +456,7 @@ the pin icon on or off.',
 
     /**
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return mixed
      */
     public function unpinPlaylist(Request $request)
     {
@@ -496,6 +495,10 @@ the pin icon on or off.',
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @return mixed
+     */
     public function deletePlaylistLike(Request $request)
     {
         $like = $this->userPlaylistsService->deletePlaylistLike($request->get('playlist_id'));
@@ -515,7 +518,7 @@ the pin icon on or off.',
     {
         $page = $request->get('page', 1);
         $limit = $request->get('limit', null);
-        $sort = $request->get('sort','position');
+        $sort = $request->get('sort', 'position');
         $contentTypes = array_merge(
             config('railcontent.appUserListContentTypes', []),
             array_values(config('railcontent.showTypes', [])[config('railcontent.brand')] ?? [])
@@ -539,12 +542,14 @@ the pin icon on or off.',
 
     /**
      * @param Request $request
-     * @return ContentFilterResultsEntity
+     * @return mixed|Collection|null
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     * @throws \Throwable
      */
     public function changePlaylistContent(Request $request)
     {
         $playlistContent = $this->userPlaylistsService->getPlaylistItemById($request->get('user_playlist_item_id'));
+        throw_if(!$playlistContent, new NotFoundException('Playlist item not exists.'));
 
         return $this->userPlaylistsService->changePlaylistContent(
             $request->get('user_playlist_item_id'),
@@ -553,8 +558,6 @@ the pin icon on or off.',
             $request->get('start_second'),
             $request->get('end_second')
         );
-
-        return $this->getPlaylistLessons($playlistContent['user_playlist_id']);
     }
 
     /**
@@ -607,9 +610,14 @@ the pin icon on or off.',
         ]);
     }
 
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Throwable
+     */
     public function uploadPlaylistThumbnail(\Illuminate\Http\Request $request)
     {
-        if($request->has('fieldKey')) {
+        if ($request->has('fieldKey')) {
             $request->validate(['fieldKey' => 'in:playlist_thumbnail']);
 
             $target = $request->get('fieldKey')."/".'playlists_thumbnails-'.time().'-'.auth()->id().'.jpg';
@@ -622,7 +630,7 @@ the pin icon on or off.',
                 return response()->json(
                     [
                         'thumbnail_url' => config('filesystems.disks.musora_web_platform_s3.cloudfront_access_url').
-                            $target
+                            $target,
                     ],
                     201
                 );
@@ -637,8 +645,7 @@ the pin icon on or off.',
             ->encode('jpg', 75)
             ->save();
 
-        $target =
-            'playlist_thumbnail/'.'playlists_thumbnails-'.time().'-'.auth()->id.'.jpg';
+        $target = 'playlist_thumbnail/'.'playlists_thumbnails-'.time().'-'.auth()->id.'.jpg';
 
         $success =
             Storage::disk('musora_web_platform_s3')

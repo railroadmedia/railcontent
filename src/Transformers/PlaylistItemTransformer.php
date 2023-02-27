@@ -159,7 +159,7 @@ class PlaylistItemTransformer
                     foreach ($parentContentData as $value) {
                         if ((isset($parents[$value['id']]))) {
                             $parentTitle = $parents[$value['id']]['title'];
-                            if($content[$itemId]['type'] == 'assignment') {
+                            if ($content[$itemId]['type'] == 'assignment') {
                                 $content[$itemId]['fields'] =
                                     array_merge($content[$itemId]['fields'], $parents[$value['id']]['fields'] ?? []);
                             }

@@ -50,36 +50,38 @@ class MigrateUserPlaylistToV2 extends Command
      */
     public function handle()
     {
-        $dbConnection = $this->databaseManager->connection(config('railcontent.database_connection_name'));
-        $dbConnection->disableQueryLog();
-        $pdo = $dbConnection->getPdo();
-        $pdo->exec('SET TRANSACTION ISOLATION LEVEL READ COMMITTED');
-
-        $start = microtime(true);
-
-        $this->info(
-            'Migrate user playlists command starting :::: '.
-            Carbon::now()
-                ->toDateTimeString()
-        );
-
-        $sql = <<<'EOT'
-UPDATE `%s` cs
-SET cs.`type` = '%s', cs.name = '%s', cs.thumbnail_url = '%s'
-
-EOT;
-
-        $statement = sprintf(
-            $sql,
-            config('railcontent.table_prefix').'user_playlists',
-            'user-playlist',
-            'My List',
-            'https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/00a9cf48-0bad-4b94-6d6a-d4aa73a63f00/public'
-        );
-        $dbConnection->statement($statement);
-
-        $finish = microtime(true) - $start;
-        $format = "Finished user playlist data migration  in total %s seconds\n ";
-        $this->info(sprintf($format, $finish));
+        //TODO :    UPDATE PLAYLIST ITEMS
+        // SHOULD NOT BE INCLUDED IN CODE REVIEW
+//        $dbConnection = $this->databaseManager->connection(config('railcontent.database_connection_name'));
+//        $dbConnection->disableQueryLog();
+//        $pdo = $dbConnection->getPdo();
+//        $pdo->exec('SET TRANSACTION ISOLATION LEVEL READ COMMITTED');
+//
+//        $start = microtime(true);
+//
+//        $this->info(
+//            'Migrate user playlists command starting :::: '.
+//            Carbon::now()
+//                ->toDateTimeString()
+//        );
+//
+//        $sql = <<<'EOT'
+//UPDATE `%s` cs
+//SET cs.`type` = '%s', cs.name = '%s', cs.thumbnail_url = '%s'
+//
+//EOT;
+//
+//        $statement = sprintf(
+//            $sql,
+//            config('railcontent.table_prefix').'user_playlists',
+//            'user-playlist',
+//            'My List',
+//            'https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/00a9cf48-0bad-4b94-6d6a-d4aa73a63f00/public'
+//        );
+//        $dbConnection->statement($statement);
+//
+//        $finish = microtime(true) - $start;
+//        $format = "Finished user playlist data migration  in total %s seconds\n ";
+//        $this->info(sprintf($format, $finish));
     }
 }

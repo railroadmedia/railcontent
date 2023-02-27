@@ -4,7 +4,6 @@ namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
 use Railroad\Railcontent\Decorators\Decorator;
-use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Events\PlaylistItemsUpdated;
 use Railroad\Railcontent\Repositories\PinnedPlaylistsRepository;
 use Railroad\Railcontent\Repositories\PlaylistLikeRepository;
@@ -77,7 +76,11 @@ class UserPlaylistsService
      * @param $userId
      * @param $playlistType
      * @param null $brand
-     * @return array|mixed[]
+     * @param null $limit
+     * @param int $page
+     * @param null $term
+     * @param string $sort
+     * @return mixed|\Railroad\Railcontent\Support\Collection|null
      */
     public function getUserPlaylist(
         $userId,
@@ -88,16 +91,15 @@ class UserPlaylistsService
         $term = null,
         $sort = '-created_at'
     ) {
-        $playlists =
-            $this->userPlaylistsRepository->getUserPlaylist(
-                $userId,
-                $playlistType,
-                $brand,
-                $limit,
-                $page,
-                $term,
-                $sort
-            );
+        $playlists = $this->userPlaylistsRepository->getUserPlaylist(
+            $userId,
+            $playlistType,
+            $brand,
+            $limit,
+            $page,
+            $term,
+            $sort
+        );
 
         return Decorator::decorate($playlists, 'playlist');
     }
@@ -127,6 +129,7 @@ class UserPlaylistsService
      * @param array $contentType
      * @param null $limit
      * @param int $page
+     * @param string $sort
      * @return mixed|\Railroad\Railcontent\Support\Collection|null
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
@@ -191,6 +194,8 @@ class UserPlaylistsService
     /**
      * @param string $type
      * @param $brand
+     * @param int $page
+     * @param null $limit
      * @return mixed|\Railroad\Railcontent\Support\Collection|null
      */
     public function getPublicPlaylists($type = 'user-playlist', $brand, $page = 1, $limit = null)
@@ -203,7 +208,7 @@ class UserPlaylistsService
     /**
      * @param string $type
      * @param $brand
-     * @return mixed|\Railroad\Railcontent\Support\Collection|null
+     * @return int
      */
     public function countPublicPlaylists($type = 'user-playlist', $brand)
     {
@@ -211,15 +216,17 @@ class UserPlaylistsService
     }
 
     /**
-     * @param $userPlaylistId
+     * @param $userPlaylistIds
      * @param $contentId
      * @param null $position
      * @param array $extraData
      * @param null $startSecond
      * @param null $endSecond
      * @param false $importAllAssignments
-     * @return mixed|\Railroad\Railcontent\Support\Collection|null
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     * @param false $importFullSoundsliceAssignment
+     * @param false $importInstrumentlessSoundsliceAssignment
+     * @return bool
+     * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function addItemToPlaylist(
         $userPlaylistIds,
@@ -233,7 +240,6 @@ class UserPlaylistsService
         $importInstrumentlessSoundsliceAssignment = false
     ) {
         $content = $this->contentService->getById($contentId);
-
 
         $singularContentTypes = array_diff(array_merge(
                                                config('railcontent.showTypes')[config('railcontent.brand')] ?? [],
@@ -257,7 +263,6 @@ class UserPlaylistsService
             );
 
             if ($content && (in_array($content['type'], $singularContentTypes))) {
-                error_log('Singular content type');
                 $input = [
                     'content_id' => $contentId,
                     'user_playlist_id' => $userPlaylistId,
@@ -281,7 +286,6 @@ class UserPlaylistsService
 
             if (!empty($assignments['lessons'])) {
                 foreach ($assignments['lessons'] ?? [] as $lesson) {
-                    error_log('Add lesson with id:::: '.$lesson['id']);
                     $input = [
                         'content_id' => $lesson['id'],
                         'user_playlist_id' => $userPlaylistId,
@@ -305,7 +309,6 @@ class UserPlaylistsService
 
             if ($importFullSoundsliceAssignment) {
                 foreach ($assignments['soundslice_assignments'][$contentId] ?? [] as $assignment) {
-                    error_log('Add full soundslice with id:::: '.$assignment['id']);
                     $assignmentInput = [
                         'content_id' => $assignment['id'],
                         'user_playlist_id' => $userPlaylistId,
@@ -322,7 +325,6 @@ class UserPlaylistsService
 
             if ($importInstrumentlessSoundsliceAssignment) {
                 foreach ($assignments['soundslice_assignments'][$contentId] ?? [] as $assignment) {
-                    error_log('Add instrumentless soundslice with id:::: '.$assignment['id']);
                     $assignmentInput = [
                         'content_id' => $assignment['id'],
                         'user_playlist_id' => $userPlaylistId,
@@ -347,6 +349,7 @@ class UserPlaylistsService
      * @param $userId
      * @param $type
      * @param $brand
+     * @param null $term
      * @return int
      */
     public function countUserPlaylists($userId, $type, $brand, $term = null)
@@ -452,8 +455,7 @@ class UserPlaylistsService
     }
 
     /**
-     * @param $userPlaylistId
-     * @param $contentId
+     * @param $playlistItemId
      * @param null $position
      * @param array $extraData
      * @param null $startSecond
@@ -579,22 +581,19 @@ class UserPlaylistsService
     /**
      * @param $playlistId
      * @param $brand
-     * @return array|mixed[]
+     * @return bool
      */
     public function likePlaylist($playlistId, $brand)
     {
-        $stored =
-            $this->playlistLikeRepository->query()
-                ->updateOrInsert([
-                                     'user_id' => auth()->id(),
-                                     'playlist_id' => $playlistId,
-                                     'brand' => $brand,
-                                 ], [
-                                     'created_at' => Carbon::now()
-                                         ->toDateTimeString(),
-                                 ]);
-
-        return $this->pinnedPlaylistsRepository->getMyPinnedPlaylists();
+        return $this->playlistLikeRepository->query()
+            ->updateOrInsert([
+                                 'user_id' => auth()->id(),
+                                 'playlist_id' => $playlistId,
+                                 'brand' => $brand,
+                             ], [
+                                 'created_at' => Carbon::now()
+                                     ->toDateTimeString(),
+                             ]);
     }
 
     /**
@@ -702,12 +701,10 @@ class UserPlaylistsService
         if (!empty($playlistIds)) {
             $this->userPlaylistsRepository->query()
                 ->whereIn('id', $playlistIds)
-                ->update(
-                    [
-                        'last_progress' => Carbon::now()
-                            ->toDateTimeString(),
-                    ]
-                );
+                ->update([
+                             'last_progress' => Carbon::now()
+                                 ->toDateTimeString(),
+                         ]);
         }
 
         return true;
