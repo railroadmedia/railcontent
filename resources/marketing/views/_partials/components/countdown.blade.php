@@ -88,7 +88,7 @@
     }
 
     function formatText(time, text){
-        if(text === 'minutes' && time === 1) return text.substring(0, text.length - 1);
+        if(text === ' minutes' && time === 1) return text.substring(0, text.length - 1);
         else if(time < 2 ) return text.substring(0, text.length - 1);
 
         return text;
