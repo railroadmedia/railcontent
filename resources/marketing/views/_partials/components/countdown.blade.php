@@ -37,14 +37,16 @@
                         this.hour = this.formatTime(this.timeLeft / (60 * 60)) % 24;
                         this.minute = this.formatTime(this.timeLeft / 60) % 60;
                         this.second = this.formatTime(this.timeLeft % 60);
+
                         @if(empty($promoVersion))
-                        if ( !this.smallScreen ){
-                            this.dayText = formatText(this.day, ' days');
-                            this.hourText = formatText(this.hour, ' hours');
-                            this.minuteText = formatText(this.minute, ' minutes');
-                            this.secondText = formatText(this.second, ' seconds');
-                        }
+                            if ( !this.smallScreen ){
+                                this.dayText = formatText(this.day, ' days');
+                                this.hourText = formatText(this.hour, ' hours');
+                                this.minuteText = formatText(this.minute, ' minutes');
+                                this.secondText = formatText(this.second, ' seconds');
+                            }
                         @endif
+
                     }, 1000);
                 }
 
@@ -86,7 +88,8 @@
     }
 
     function formatText(time, text){
-        if(time < 2 ) return text.substring(0, text.length - 1);
+        if(text === 'minutes' && time === 1) return text.substring(0, text.length - 1);
+        else if(time < 2 ) return text.substring(0, text.length - 1);
 
         return text;
     }
