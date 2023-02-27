@@ -188,7 +188,16 @@
     <header class="pb-24 md:py-14 lg:py-20">
         <div class="max-w-4xl mx-auto text-center px-4">
             <img class="mt-14 md:mt-0 h-24 md:h-28 lg:h-32 mb-6" src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/anniversary/2023/logo.png" alt="Anniversary logo" />
-            <h3 class="font-extrabold mb-10">Join Pianote + get $962 <br class="sm:hidden">in FREE bonuses!</h3>
+            <h3 class="font-extrabold mb-2">Join Pianote + get $962 <br class="sm:hidden">in FREE bonuses!</h3>
+            <p x-cloak class="uppercase mb-10 text-pianote" x-data="timer()" x-init="countdown()">
+                <span x-cloak x-show="timeLeft > 0">Only</span>
+                <span x-cloak x-show="timeLeft > 0 && day !== '00'"><span x-text="day"></span> <span x-text="dayText"></span></span>
+                <span x-cloak x-show="timeLeft > 0"><span x-text="hour"></span> <span x-text="hourText"></span></span>
+                <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span> <span x-text="minuteText"></span></span>
+                <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span> <span x-text="secondText"></span></span>
+                <span x-cloak x-show="timeLeft > 0">Left!</span>
+                <span x-cloak x-show="timeLeft < 0">Limited Time Left</span>
+            </p>
             <img
                 class="rounded-xl cursor-pointer transition-opacity opacity-0"
                 src="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/anniversary/2023/thumb.jpg"
@@ -685,5 +694,8 @@
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
-    @yield('scripts')
+    @include('_partials.components.countdown',[
+        'date' => '2023-03-06',
+        'promoVersion' => false
+    ])
 @stop
