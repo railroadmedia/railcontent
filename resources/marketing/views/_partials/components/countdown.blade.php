@@ -3,11 +3,13 @@
          usage example!
              <section x-data="timer()" x-init="countdown()">
                  <div>
-                     <div x-show="timeLeft > 0 && day !== '00'"><span x-text="day"></span><span x-text="dayText"></span></div>
-                     <div x-show="timeLeft > 0"><span x-text="hour"></span><span x-text="hourText"></span></div>
-                     <div x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></div>
-                     <div x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></div>
-                     <div x-show="timeLeft < 0">Limited Time Left</div>
+                     <span x-cloak x-show="timeLeft > 0">Only</span>
+                     <span x-show="timeLeft > 0 && day !== '00'"><span x-text="day"></span> <span x-text="dayText"></span></span>
+                     <span x-show="timeLeft > 0"><span x-text="hour"></span> <span x-text="hourText"></span></span>
+                     <span x-show="timeLeft > 0"><span x-text="minute"></span> <span x-text="minuteText"></span></span>
+                     <span x-show="timeLeft > 0"><span x-text="second"></span> <span x-text="secondText"></span></span>
+                     <span x-cloak x-show="timeLeft > 0">Left!</span>
+                     <span x-show="timeLeft < 0">Limited Time Left</span>
                  </div>
              </section>
      */
@@ -15,13 +17,13 @@
     function timer(){
         return {
             day: '00',
-            dayText: @if(!empty($promoVersion)) 'DAYS' @else 'days' @endif,
+            dayText: @if(!empty($promoVersion) && $promoVersion) 'DAYS' @else 'days' @endif,
             hour: '00',
-            hourText: @if(!empty($promoVersion)) 'HRS' @else 'hours' @endif,
+            hourText: @if(!empty($promoVersion) && $promoVersion) 'HRS' @else 'hours' @endif,
             minute: '00',
-            minuteText: @if(!empty($promoVersion)) 'MIN' @else 'minutes' @endif,
+            minuteText: @if(!empty($promoVersion) && $promoVersion) 'MIN' @else 'minutes' @endif,
             second: '00',
-            secondText: @if(!empty($promoVersion)) 'SEC' @else 'seconds' @endif,
+            secondText: @if(!empty($promoVersion) && $promoVersion) 'SEC' @else 'seconds' @endif,
             endTime: new Date('{{ $date }}').getTime(),
             startTime: new Date().getTime(),
             timeLeft: 0,
@@ -82,8 +84,6 @@
                 @endif
             },
             formatTime: function (value){
-                if(value < 10) return "0" + Math.floor(value);
-
                 return Math.floor(value);
             },
         }
