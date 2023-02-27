@@ -44,27 +44,42 @@ class RepairUserProgressOn30DD extends Command
 
         $sql = <<<'EOT'
 UPDATE railcontent_user_content_progress up
-SET up.state = 'started' and up.progress_percent = 2
-WHERE up.content_id = 383627 and up.state = 'completed'
+SET up.state = '%s' , up.progress_percent = 2
+WHERE up.content_id = '%s' and up.state = '%s'
 EOT;
-
-        $databaseManager->statement($sql);
+        $statement = sprintf(
+            $sql,
+            'started',
+            383627,
+            'completed'
+        );
+        $databaseManager->statement($statement);
 
         $sql = <<<'EOT'
 UPDATE railcontent_user_content_progress up
-SET up.state = 'started' and up.progress_percent = 3
-WHERE up.content_id = 383628 and up.state = 'completed'
+SET up.state = '%s' , up.progress_percent = 3
+WHERE up.content_id = '%s' and up.state = '%s'
 EOT;
-
-        $databaseManager->statement($sql);
+        $statement = sprintf(
+            $sql,
+            'started',
+            383628,
+            'completed'
+        );
+        $databaseManager->statement($statement);
 
         $sql = <<<'EOT'
 UPDATE railcontent_user_content_progress up
-SET up.state = 'started' and up.progress_percent = 1
-WHERE up.content_id = 383629 and up.state = 'completed'
+SET up.state = '%s' , up.progress_percent = 1
+WHERE up.content_id = '%s' and up.state = '%s'
 EOT;
-
-        $databaseManager->statement($sql);
+        $statement = sprintf(
+            $sql,
+            'started',
+            383628,
+            'completed'
+        );
+        $databaseManager->statement($statement);
 
         $finish = microtime(true) - $start;
 
