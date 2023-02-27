@@ -193,7 +193,13 @@
 
                     </p>
                 </div>
-                <img class="mb-4 sm:mb-0 order-0 sm:order-1 w-52 sm:w-72 lg:w-80 rounded-xl" src="https://cdn.musora.com/image/fetch/w_640,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/anniversary/2023/anika-ui-screen.jpg" alt="Anika">
+                <img
+                    class="mb-4 sm:mb-0 order-0 sm:order-1 w-52 sm:w-72 lg:w-80 rounded-xl transition-opacity opacity-0"
+                    src="https://cdn.musora.com/image/fetch/w_640,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/anniversary/2023/anika-ui-screen.jpg"
+                    alt="Anika"
+                    loading="lazy"
+                    onload="this.classList.remove('opacity-0')"
+                >
             </div>
         </div>
     </section>
