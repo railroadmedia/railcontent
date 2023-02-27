@@ -53,6 +53,12 @@
     </style>
 @stop
 
+@section('body-data')
+    x-data ='{
+        trailer : false,
+    }'
+@endsection
+
 @section('global-body')
         @include("drumeo.sales.partials._nav", [
             "subscriptionVersion" => true,
@@ -60,13 +66,51 @@
         ])
         <section class="content-section text-center" style="padding-bottom: 0; background:linear-gradient(to bottom, #01050f 70%, #020c1a);">
             <div class="container mx-auto">
-                <h1 class="font-bebas leading-none mb-1 text-4xl md:text-6xl">GET A <span class="text-gradient">LIFETIME</span> <br class="inline md:hidden">DRUMEO MEMBERSHIP</h1>
-                <h4 class="text-gradient uppercase">+ Your Choice of Bonuses & And An Exclusive Masterclass with Anika Nilles!</h4>
+                <img
+                    class="hidden md:inline-block md:h-16 lg:h-20 mb-2 transition-opacity opacity-0"
+                    src="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/anniversary/2023/lifetime-title.png"
+                    alt="Lifetime title"
+                    loading="lazy"
+                    onload="this.classList.remove('opacity-0')"
+
+                />
+                <img
+                    class="md:hidden mb-4 px-4 transition-opacity opacity-0"
+                    src="https://cdn.musora.com/image/fetch/w_700,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/anniversary/2023/lifetime-title-m.png"
+                    alt="Lifetime title"
+                    loading="lazy"
+                    onload="this.classList.remove('opacity-0')"
+                />
+{{--                <h1 class="font-bebas leading-none mb-1 text-4xl md:text-6xl">GET A <span class="text-gradient">LIFETIME</span> <br class="inline md:hidden">DRUMEO MEMBERSHIP</h1>--}}
+                <h4 class="text-white uppercase leading-tight mb-4">+ Your Choice of Bonuses & And An Exclusive Masterclass <br class="hidden md:inline lg:hidden">with Anika Nilles!</h4>
+                <p class="uppercase text-promo font-bold">
+                    AVAILABLE UNTIL MARCH 31st AT MIDNIGHT <br>
+                    Only
+                    <span x-cloak x-data="timer()" x-init="countdown()">
+                         <span x-cloak x-show="timeLeft > 0 && day !== '00'"><span x-text="day"></span><span x-text="dayText"></span></span>
+                         <span x-cloak x-show="timeLeft > 0 && hour !== '00'"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                         <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                         <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>
+                         <span x-cloak x-show="timeLeft < 0">Limited Time</span>
+                     </span>
+                    Left!
+                </p>
 
                 <div class="w-full mx-auto my-10 px-3" style="max-width:920px;">
-                    <div class="aspect-16:9 w-full relative">
-                        <iframe class="absolute w-full h-full reset-on-close" src="//player.vimeo.com/video/774477396" frameborder="0" allowfullscreen allow="autoplay" title="Lifetime Video"></iframe>
-                    </div>
+                    <img
+                        class="cursor-pointer"
+                        src="https://cdn.musora.com/image/fetch/w_1300,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/anniversary/2023/thumb.jpg"
+                        alt="Video thumbnail"
+                        loading="lazy"
+                        onload="this.classList.remove('opacity-0')"
+                        @click="trailer = true"
+                    />
+{{--                    <div class="aspect-16:9 w-full relative">--}}
+{{--                        <iframe class="absolute w-full h-full reset-on-close" src="//player.vimeo.com/video/774477396" frameborder="0" allowfullscreen allow="autoplay" title="Lifetime Video"></iframe>--}}
+{{--                    </div>--}}
+                </div>
+                <div class="text-center">
+                    <a class="join smaller drumeo" href="TODO">Lifetime Membership &raquo</a>
                 </div>
                 <p class="leading-relaxed px-3 my-5 text-left text-light-navy" style="width: 100%;max-width: 650px;">
                     <em>“My soul is that of a drummer. I didn’t do it to become rich and famous. I did it because it was the love of my life.” – Ringo Starr</em>
@@ -149,7 +193,7 @@
 
                     </p>
                 </div>
-                <img class="mb-4 sm:mb-0 order-0 sm:order-1 w-36 sm:w-72 lg:w-80 rounded-xl" src="https://cdn.musora.com/image/fetch/w_640,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/november/todd-sucherman-exclusive-lifetime.jpg" alt="Todd Suchermanx">
+                <img class="mb-4 sm:mb-0 order-0 sm:order-1 w-36 sm:w-72 lg:w-80 rounded-xl" src="https://cdn.musora.com/image/fetch/w_640,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/anniversary/2023/anika-ui-screen.jpg" alt="Anika">
             </div>
         </div>
     </section>
@@ -333,19 +377,55 @@
 {{--                        </p>--}}
 {{--                    </div>--}}
 {{--                @endforeach--}}
+
+                <h4 class="text-center py-5">
+                    <i class="text-promo font-bold">PLUS</i> AN EXCLUSIVE MASTERCLASS WITH...
+                </h4>
+
+                <div class="text-center">
+                    <div class="inline-block relative lg:w-4/6 px-3 lg:px-0">
+                        <img
+                            class="border-4 border-drumeo rounded-xl hidden md:inline transition-opacity opacity-0"
+                            src="https://drumeo-assets.s3.amazonaws.com/promos/anniversary/2023/anika-bonus.jpg"
+                            alt="Anika bonus"
+                            loading="lazy"
+                            onload="this.classList.remove('opacity-0')"
+                        />
+                        <img
+                            class="border-4 border-drumeo rounded-xl md:hidden transition-opacity opacity-0"
+                            src="https://drumeo-assets.s3.amazonaws.com/promos/anniversary/2023/anika-bonus-m.jpg"
+                            alt="Anika bonus"
+                            loading="lazy"
+                            onload="this.classList.remove('opacity-0')"
+                        />
+                        <div class="absolute w-full bottom-6 flex justify-center">
+                            <h2 class="uppercase font-bold font-bebas tracking-widest">Anika Nilles</h2>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <p class="text-center py-5">
-                PLUS AN EXCLUSIVE MASTERCLASS <br>
-                <b>With Anika Nilles</b>
-            </p>
 
             {{--            @if($products['DLM-Lifetime']->getStockAvailability() > 0)--}}
             <a
-                class="join blue bigger my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl"
+                class="join blue bigger my-4 md:my-8 w-full max-w-xs md:max-w-lg lg:max-w-3xl"
                 style="padding: 20px 10px;"
                 :class="bonus !== 3 && 'sold-out'"
                 :href="bonus === 3 ? '/ecommerce/add-to-cart?products[DLM-Lifetime]=1'+query+'&locked=true' : '#customize-anchor'"
                 x-text="bonus === 3 ? 'BECOME A LIFETIME MEMBER &raquo;' : 'Choose 3 products above'"></a>
+            <p class="text-promo">
+                AVAILABLE UNTIL MARCH 31st AT MIDNIGHT <br>
+                <b>
+                    Only
+                    <span x-cloak x-data="timer()" x-init="countdown()">
+                         <span x-cloak x-show="timeLeft > 0 && day !== '00'"><span x-text="day"></span><span x-text="dayText"></span></span>
+                         <span x-cloak x-show="timeLeft > 0 && hour !== '00'"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                         <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                         <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>
+                         <span x-cloak x-show="timeLeft < 0">Limited Time</span>
+                     </span>
+                    Left!
+                </b>
+            </p>
             {{--            @else--}}
 {{--            <a class="join sold-out my-4">Sold Out</a>--}}
             {{--            @endif--}}
@@ -379,6 +459,17 @@
     </section>
 
     @include("drumeo.sales.partials._footer")
+
+    @include('_partials.components.video-modal',[
+        'name' => 'trailer',
+        'video' => 'TODO',
+        'vimeo' => true,
+    ])
+
+    @include('_partials.components.countdown',[
+        'countdownDate' => '2023-04-01 10:00:00',
+        'promoVersion' => false
+    ])
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 {{--        <script>--}}

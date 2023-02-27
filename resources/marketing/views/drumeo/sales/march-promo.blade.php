@@ -606,7 +606,7 @@
                 'price' => floatval($productPrices['GHFAL-DIGI']->price),
             ],
             [
-                'image' => '{-- TODO --}',
+                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/creative-control.jpg',
                 'title' => 'Creative Control',
                 'description' => '{-- TODO --}',
                 'price' => floatval($productPrices['CC-DIGI']->price),

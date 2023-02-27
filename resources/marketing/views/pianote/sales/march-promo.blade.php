@@ -696,7 +696,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
     @include('_partials.components.countdown',[
-        'countdownDate' => '2023-03-06',
+        'countdownDate' => '2023-03-31 23:59:59',
         'promoVersion' => false
     ])
 @stop
