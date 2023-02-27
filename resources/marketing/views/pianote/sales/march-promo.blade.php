@@ -135,7 +135,7 @@
     @endif
 
     @include('._partials.components.sticky-bar',[
-        'link' => '',
+        'link' => '#order',
         'logo' => 'https://pianote.s3.amazonaws.com/sales/promos/anniversary/2023/logo.png',
         'text' => 'SAVE 17% ON YOUR FIRST YEAR OF <br>LESSONS + GET $962 IN FREE BONUSES',
     ])
@@ -194,6 +194,7 @@
                 alt="Trailer Thumbnail"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
+                @click="tailer = true"
             />
         </div>
     </header>
@@ -228,35 +229,11 @@
         </div>
     </section>
 
-{{--    @include('musora.sales.components.header-section', [--}}
-{{--        'header' => 'Online piano lessons for all skill levels.',--}}
-{{--        'desc' => 'Learn the piano faster with step-by-step lessons, a thousand songs, and unlimited personal support. ',--}}
-{{--        'thumb' => 'https://pianote.s3.amazonaws.com/sales/2023/header-thumb2.jpg',--}}
-{{--        'promoThumb' => 'https://pianote.s3.amazonaws.com/sales/2023/jan-thumb2.png',--}}
-{{--        'promoThumbM' => 'https://pianote.s3.amazonaws.com/sales/2023/jan-thumb-m2.jpg',--}}
-{{--        'pointOne' => 'Improve Your Skills',--}}
-{{--        'pointTwo' => 'World-Class Teachers',--}}
-{{--        'pointThree' => 'Play More<br class="inline lg:hidden"> Songs',--}}
-{{--        'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Pianote+Membership/79348450',--}}
-{{--        'students' => number_format(Prices::$students),--}}
-{{--    ])--}}
-
-{{--    @if(!empty($promoVersion))--}}
-{{--        @include('musora.sales.components.promo-section', [--}}
-{{--        'promoLogo' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs.svg',--}}
-{{--           'promoLogoM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs-m.png',--}}
-{{--        'desc' => 'One membership. All instruments. 1000s of songs.',--}}
-{{--           'text' => 'This is your year.<br><br>Experience the NEW Pianote membership in 2023 and make the best investment in yourself. You’ll get guided lessons from world-class piano teachers to help you reach any goal this year.<br><br>And best of all…<br><br>You’ll have unlimited access to our brand new song library, complete with 1000 note-for-note transcriptions from our partners at Hal Leonard. Play your favorite songs the way they were written, complete with professional backing tracks so you’ll feel like a star.<br><br>And it gets better.<br><br>Because your Pianote membership now comes fully-loaded with all instruments. You can learn to sing, play guitar, or even rock out on the drums. All for no extra cost.<br><br>Join today and you’ll also get a set of Pianote professional over-ear headphones. Valued at $189, they’re yours free. Start the year off right. Click below to begin.',--}}
-{{--           'img' => 'https://pianote.s3.amazonaws.com/sales/promos/january/jan-launch-collage.png',--}}
-{{--           'belowButton' => 'SAVE 17% + GET 10 BONUSES WORTH $905',--}}
-{{--       ])--}}
-{{--    @else--}}
-        @include('musora.sales.components.learn-by-playing-section', [
-            'header' => 'Learn the piano by<br class="inline sm:hidden"> <u>playing the piano</u>.',
-            'desc' => 'It’s not rocket science.<br><br>If you don’t play your piano, you won’t get better. At Pianote, our mission is to get you playing more so you get better, faster (while having FUN!).<br><br>In short, you’ll learn piano <u>by playing piano</u>.<br><br>These are short, fun lessons from world-class teachers. But the real magic happens when you practice ALONG with your coaches.<br><br>You’ll play more, you’ll get better faster, and you’ll fall in love with your progress. Plus you’ll have access to a library of thousands of popular songs with sheet music and backing tracks.<br><br>Scroll down to watch the trailer, see more details, and start playing like you’ve always wanted!',
-            'img' => 'https://pianote.s3.amazonaws.com/sales/2023/collage-evergreen.png',
-        ])
-{{--    @endif--}}
+    @include('musora.sales.components.learn-by-playing-section', [
+        'header' => 'Learn the piano by<br class="inline sm:hidden"> <u>playing the piano</u>.',
+        'desc' => 'It’s not rocket science.<br><br>If you don’t play your piano, you won’t get better. At Pianote, our mission is to get you playing more so you get better, faster (while having FUN!).<br><br>In short, you’ll learn piano <u>by playing piano</u>.<br><br>These are short, fun lessons from world-class teachers. But the real magic happens when you practice ALONG with your coaches.<br><br>You’ll play more, you’ll get better faster, and you’ll fall in love with your progress. Plus you’ll have access to a library of thousands of popular songs with sheet music and backing tracks.<br><br>Scroll down to watch the trailer, see more details, and start playing like you’ve always wanted!',
+        'img' => 'https://pianote.s3.amazonaws.com/sales/2023/collage-evergreen.png',
+    ])
 
     @php
         $gridItems = [
