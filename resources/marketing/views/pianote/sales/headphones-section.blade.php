@@ -12,7 +12,7 @@
                     They’re lightweight and have super-comfy ear padding for extended playing sessions and unrivaled sound definition and bass response.
                     Your playing has never sounded so good.<br><br>
                     Valued at $189, these headphones are FREE with your Pianote Membership.<br><br>
-                    But hurry - there are only <s>500</s> {-- TODO --} left.<br><br>
+                    But hurry - there are only @if($products['pianote-headphones']->getPublicStockCount() < 500)<s>500</s>@endif {{ $products['pianote-headphones']->getPublicStockCount() }} left.<br><br>
                     And when they’re gone, they’re gone.
                 </p>
             </div>
