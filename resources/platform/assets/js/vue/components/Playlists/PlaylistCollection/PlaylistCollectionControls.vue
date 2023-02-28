@@ -69,7 +69,7 @@
 <template>
     <nav class="tw-flex tw-my-4 tw-w-full tw-items-center tw-flex-wrap md:tw-flex-nowrap">    
         <!--Sort -->
-        <div class="tw-w-full tw-max-w-[290px] tw-mr-auto tw-order-2 md:tw-order-1">
+        <div class="tw-w-full tw-max-w-[calc(100%-68px)] tw-pr-3 md:tw-pr-0 md:tw-max-w-[290px] tw-mr-auto tw-order-2 md:tw-order-1">
             <select name="playlist-sort"
                     id="playlist-sort"
                     class="tw-transition-colors tw-w-full tw-h-[42px] tw-bg-transparent tw-rounded-3xl tw-text-[#00101D] focus:tw-ring-0 dark:tw-text-[#9EC0DC] dark:tw-border-[#445F74] tw-text-sm"
