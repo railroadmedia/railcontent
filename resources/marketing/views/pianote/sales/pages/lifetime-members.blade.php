@@ -378,7 +378,7 @@
 {{--            @else--}}
 {{--                <span class="join sold-out methodcta my-4">Sold Out</span>--}}
 {{--            @endif--}}
-            <p>only <s>500</s> {{ $products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() }} left. </p>
+            <p class="TODO">only <s>500</s> {{ $products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() }} left. </p>
         </div>
     </section>
     <section class="content-section text-center" style="background: #040c1b;">
