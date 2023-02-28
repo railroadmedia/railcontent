@@ -350,6 +350,16 @@ return [
                     'pianote',
                 ],
             ],
+            'NPPSH Waitlist' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_nppsh-waitlist',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
             'Beginner Piano Christmas Carols' => [
                 'custom_attributes' => [
                 ],
