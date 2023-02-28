@@ -31,10 +31,9 @@
         :blurBG="true"
     >
         <template v-slot:content> 
-            <div class="tw-flex tw-items-center">
-
+            <div class="tw-flex tw-flex-col lg:tw-flex-row tw-items-center tw-w-full lg:tw-w-8/12">
                 <!-- Playlist thumbnail -->
-                <div class="tw-h-[198px] tw-w-[198px] tw-relative tw-rounded tw-shrink-0 tw-mr-[20px] tw-overflow-hidden">
+                <div class="tw-h-[198px] tw-w-[198px] tw-relative tw-rounded tw-shrink-0 tw-overflow-hidden tw-mb-[16px] lg:tw-mb-0">
                     <!-- Image Conatiner -->
                     <div v-if="playlist.thumbnail_url" class="tw-relative tw-w-full tw-h-full">
                         <img
@@ -49,7 +48,6 @@
                             <img class="tw-h-full tw-object-contain" :src="`https://musora.com/cdn-cgi/image/width=330/${playlist.thumbnail_url}`" alt="playlist thumbnail">
                         </div>
                     </div>
-
                     <!-- placeholder (no image or items) -->
                     <div v-else class="tw-transition tw-flex tw-items-center tw-justify-center tw-w-full tw-h-full tw-bg-[#3F3F46] dark:tw-bg-[#445F74]">
                         <svg class="tw-w-1/2 tw-h-1/2" width="79" height="79" viewBox="0 0 79 79" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -63,11 +61,10 @@
                         </svg>
                     </div>
                 </div>
-
                 <!-- Content -->
-                <div class="tw-flex-col">
+                <div class="tw-flex-col tw-text-center lg:tw-text-left lg:tw-pl-[20px]">
                     <!-- Avatar -->
-                    <div class="tw-flex tw-items-center tw-mb-2">
+                    <div class="tw-hidden lg:tw-flex tw-items-center tw-mb-2">
                         <div class="tw-h-[40px] tw-w-[40px] tw-rounded-full tw-overflow-hidden tw-mr-[9px]">
                             <img :src="playlist.user['fields.profile_picture_image_url']" alt="">
                         </div>
@@ -75,7 +72,7 @@
                     </div>
                     <div class="tw-text-white tw-flex tw-flex-col tw-mb-3">
                         <h1 class="tw-capitalize tw-leading-none tw-mb-1">{{ playlist.name }}</h1>
-                        <p>{{ playlist.description }}</p>
+                        <p class="lg:tw-line-clamp-2">{{ playlist.description }}</p>
                     </div>
                     <a v-if="lessons.data.length" :href="playlist.playback_url" class="tw-w-[50px] tw-inline-flex" :class="`tw-text-${brand}`" :title="`Go To Player`">
                         <i class="tw-text-[50px] fas fa-play-circle"></i>
@@ -84,25 +81,27 @@
             </div>
         </template>
         <template v-slot:ctas> 
-            <!--Share-->
-            <button class="tw-text-white tw-inline-flex tw-flex-col tw-items-center tw-px-[50px]">
-                <musora-icon icon-name="share" class="tw-mb-1" />       
-                <span class="tw-uppercase tw-font-bebas-neue">Share</span>
-            </button>
-            <!--Like-->
-            <button class="tw-text-white tw-inline-flex tw-flex-col tw-items-center tw-px-[50px]">
-                <musora-icon icon-name="thumb-like" class="tw-mb-1" />       
-                <span class="tw-uppercase tw-font-bebas-neue">Like</span>
-            </button>
-            <!--More-->
-            <button class="tw-text-white tw-inline-flex tw-flex-col tw-items-center tw-px-[50px]">
-                <div class="tw-h-[35px] tw-mb-1">
-                    <svg class="tw-rotate-90" width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12.5 5.20768L12.5 5.2181M12.5 12.4993L12.5 12.5098M12.5 19.791L12.5 19.8014M12.5 6.24935C11.9247 6.24935 11.4583 5.78298 11.4583 5.20768C11.4583 4.63239 11.9247 4.16602 12.5 4.16602C13.0753 4.16602 13.5417 4.63239 13.5417 5.20768C13.5417 5.78298 13.0753 6.24935 12.5 6.24935ZM12.5 13.541C11.9247 13.541 11.4583 13.0746 11.4583 12.4993C11.4583 11.9241 11.9247 11.4577 12.5 11.4577C13.0753 11.4577 13.5417 11.9241 13.5417 12.4993C13.5417 13.0746 13.0753 13.541 12.5 13.541ZM12.5 20.8327C11.9247 20.8327 11.4583 20.3663 11.4583 19.791C11.4583 19.2157 11.9247 18.7493 12.5 18.7493C13.0753 18.7493 13.5417 19.2157 13.5417 19.791C13.5417 20.3663 13.0753 20.8327 12.5 20.8327Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>   
-                </div>  
-                <span class="tw-uppercase tw-font-bebas-neue">More</span>
-            </button>
+            <div class="tw-flex tw-items-center tw-justify-center tw ml-0 lg:tw-w-1/2 lg:tw-ml-auto lg:tw-w-4/12 tw-w-full tw-mt-4 lg:tw-justify-end">
+                <!--Share-->
+                <button class="tw-text-white tw-inline-flex tw-flex-col tw-items-center tw-px-4 tw-w-full tw-max-w-[120px]">
+                    <musora-icon icon-name="share" class="tw-mb-1" />       
+                    <span class="tw-uppercase tw-font-bebas-neue">Share</span>
+                </button>
+                <!--Like-->
+                <button class="tw-text-white tw-inline-flex tw-flex-col tw-items-center tw-px-4 tw-w-full tw-max-w-[120px]">
+                    <musora-icon icon-name="thumb-like" class="tw-mb-1" />       
+                    <span class="tw-uppercase tw-font-bebas-neue">Like</span>
+                </button>
+                <!--More-->
+                <button class="tw-text-white tw-inline-flex tw-flex-col tw-items-center tw-px-4 tw-w-full tw-max-w-[120px]">
+                    <div class="tw-h-[35px] tw-mb-1">
+                        <svg class="tw-rotate-90" width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12.5 5.20768L12.5 5.2181M12.5 12.4993L12.5 12.5098M12.5 19.791L12.5 19.8014M12.5 6.24935C11.9247 6.24935 11.4583 5.78298 11.4583 5.20768C11.4583 4.63239 11.9247 4.16602 12.5 4.16602C13.0753 4.16602 13.5417 4.63239 13.5417 5.20768C13.5417 5.78298 13.0753 6.24935 12.5 6.24935ZM12.5 13.541C11.9247 13.541 11.4583 13.0746 11.4583 12.4993C11.4583 11.9241 11.9247 11.4577 12.5 11.4577C13.0753 11.4577 13.5417 11.9241 13.5417 12.4993C13.5417 13.0746 13.0753 13.541 12.5 13.541ZM12.5 20.8327C11.9247 20.8327 11.4583 20.3663 11.4583 19.791C11.4583 19.2157 11.9247 18.7493 12.5 18.7493C13.0753 18.7493 13.5417 19.2157 13.5417 19.791C13.5417 20.3663 13.0753 20.8327 12.5 20.8327Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>   
+                    </div>  
+                    <span class="tw-uppercase tw-font-bebas-neue">More</span>
+                </button>
+            </div>
         </template>
     </platform-header>
 </template>

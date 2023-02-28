@@ -40,9 +40,9 @@
         
         <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-z-20 tw-w-full tw-h-auto tw-flex tw-flex-wrap">
 
-            <div class="tw-flex tw-flex-col tw-mr-8">
+            <div v-if="title.length" class="tw-flex tw-flex-col tw-mr-8">
                 <!-- Title -->
-                <h1 v-if="title.length" class="tw-text-white tw-flex tw-items-center tw-mb-1">
+                <h1 class="tw-text-white tw-flex tw-items-center tw-mb-1">
                     <musora-icon :icon-name="titleIcon" class="tw-w-[36px] tw-mr-2 tw-text-white">
                     </musora-icon>
                     <span class="tw-text-32 tw-font-bold">{{ title }}</span>
@@ -50,11 +50,12 @@
                 <!-- CONTENT Slot-->
                 <slot name="content" />
             </div>
+            
+            <slot v-else name="content" />
 
             <!-- Header CTA's Slot -->
-            <div class="tw-flex tw-items-center tw-justify-start tw-ml-auto tw-w-full md:tw-w-auto tw-mt-4">
-              <slot name="ctas" />
-            </div>
+            <slot name="ctas" />
+            
 
         </div>
     </div>

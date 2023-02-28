@@ -41,12 +41,14 @@
             </p> 
         </template>
         <template v-slot:ctas> 
-            <button class="tw-btn-secondary tw-text-white"
-                    @click="handleCreatePlaylist"
-            >
-                <musora-icon icon-name="plus" class="tw-w-[30px] tw-mr-1" />
-                Create Playlist
-            </button>
+            <div class="tw-flex tw-items-center tw-justify-start tw-ml-auto tw-w-full md:tw-w-auto tw-mt-4">
+                <button class="tw-btn-secondary tw-text-white"
+                        @click="handleCreatePlaylist"
+                >
+                    <musora-icon icon-name="plus" class="tw-w-[30px] tw-mr-1" />
+                    Create Playlist
+                </button>
+            </div>
         </template>
     </platform-header>
 </template>
