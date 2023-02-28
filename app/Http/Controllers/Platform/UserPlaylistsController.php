@@ -119,6 +119,7 @@ class UserPlaylistsController extends BaseController
             'currentUser' => user(),
             "noResultsMessage" => 'Nothing here yet! Start adding videos',
             "brand" => brand(),
+            'totalItems' => $items->totalResults()
         ]);
     }
 
