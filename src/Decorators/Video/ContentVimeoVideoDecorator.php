@@ -80,7 +80,7 @@ class ContentVimeoVideoDecorator implements DecoratorInterface
                                     if (isset($fileData['height'])) {
                                         $contentResults[$contentIndex]
                                         ['video_playback_endpoints'][] = [
-                                            'file' => $fileData['link_secure'],
+                                            'file' => $fileData['link'],
                                             'width' => $fileData['width'],
                                             'height' => $fileData['height'],
                                         ];
