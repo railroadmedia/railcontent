@@ -1,5 +1,6 @@
 @extends('pianote.sales.subscription', [
-    "promoVersion" => true
+    "promoVersion" => true,
+    'hideHeader' => true,
 ])
 
 @section('global-head')
@@ -132,6 +133,7 @@
 
     @include('_partials.components.video-modal',[
         'name' => 'rolandTrailer',
-        'video' => '567535328'
+        'video' => '567535328',
+        'vimeo' => true,
     ])
 @endsection

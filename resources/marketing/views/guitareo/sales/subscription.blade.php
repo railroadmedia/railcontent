@@ -183,9 +183,6 @@
         'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Guitareo+Membership/79348454',
         'students' => number_format(Prices::$students),
     ])
-    @hasSection('promo-banner')
-        @yield('promo-banner')
-    @endif
 
 {{--    @if(!empty($promoVersion))--}}
 {{--        @include('musora.sales.components.promo-section', [--}}
@@ -566,14 +563,15 @@
 
     @include('guitareo._partials.faq')
 
-    @include('_partials.components.soundslice-modal',[
+    @include('_partials.components.video-modal',[
         'name' => 'soundslice',
         'video' => 'Mnmkc',
-        'slices' => true,
+        'soundslice' => true,
     ])
     @include('_partials.components.video-modal',[
         'name' => 'trailer',
-        'video' => '785314408'
+        'video' => '785314408',
+        'vimeo' => true,
     ])
 
     @if(!empty($promoVersion))
@@ -590,22 +588,22 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
     <script>
-        $(document).ready(function () {
-            var stickyBar = $('.promo-banner');
-            $(window).scroll(function () {
-                var stickTrigger = $('.sticky-trigger').offset().top;
-                var unstickTrigger = $('.unstick-trigger').offset().top;
-                if ($(this).scrollTop() > (unstickTrigger - 115)) {
-                    stickyBar.removeClass('fixed mt-0');
-                }
-                if ($(this).scrollTop() < stickTrigger - 115) {
-                    stickyBar.removeClass('fixed mt-0');
-                }
-                if ($(this).scrollTop() < unstickTrigger - 115 && $(this).scrollTop() > stickTrigger - 115) {
-                    stickyBar.addClass('fixed mt-0');
-                }
-            });
-        });
+        // $(document).ready(function () {
+        //     var stickyBar = $('.promo-banner');
+        //     $(window).scroll(function () {
+        //         var stickTrigger = $('.sticky-trigger').offset().top;
+        //         var unstickTrigger = $('.unstick-trigger').offset().top;
+        //         if ($(this).scrollTop() > (unstickTrigger - 115)) {
+        //             stickyBar.removeClass('fixed mt-0');
+        //         }
+        //         if ($(this).scrollTop() < stickTrigger - 115) {
+        //             stickyBar.removeClass('fixed mt-0');
+        //         }
+        //         if ($(this).scrollTop() < unstickTrigger - 115 && $(this).scrollTop() > stickTrigger - 115) {
+        //             stickyBar.addClass('fixed mt-0');
+        //         }
+        //     });
+        // });
     </script>
     @yield('scripts')
 @stop

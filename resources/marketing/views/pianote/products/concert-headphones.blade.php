@@ -84,7 +84,7 @@
 @endsection
 
 @section('global-body')
-    @include('pianote._partials._nav', [
+    @include('pianote.sales.partials._nav', [
         "cartVersion" => true
     ])
 
@@ -239,7 +239,7 @@
             <h3 class="leading-tight font-extrabold">“Do people know how good these <br class="hidden sm:inline"> Pianote headphones are?”</h3>
             <img class="w-full rounded-xl my-3 sm:my-5 lazyload" data-src="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://pianote.s3.amazonaws.com/products/concert-headphones/estyschmitz.jpg" alt="Testimonial">
             <p class="">“They're incredible. The sound is MUCH richer and clearer on the Pianote headphones compared to the built-in keyboard speakers (Yamaha P515). The Pianote headphones are much closer to sounding like my acoustic Yamaha and make me want to play more. They're SO comfortable too: loose but secure, perfect for wearing for a long time without discomfort. Do people know how good these Pianote headphones are?”
-                <br><strong  style="color:#AC2134;">ESTY SCHMITZ, MARYLAND USA</strong></p>
+                <br><strong  style="color:#AC2134;">E. SCHMITZ, MARYLAND USA</strong></p>
         </div>
     </section>
 
@@ -300,7 +300,7 @@
 {{--                </a>--}}
 {{--            </div>--}}
         </div>
-        <a href="/new-year#customize-anchor" class="text-pianote"><h6><strong><u>OR FREE WITH A PIANOTE MEMBERSHIP</u></strong></h6></a>
+{{--        <a href="/new-year#customize-anchor" class="text-pianote"><h6><strong><u>OR FREE WITH A PIANOTE MEMBERSHIP</u></strong></h6></a>--}}
     </section>
     <section class="content-section text-center" style="background: #00101D;">
         <div class="container mx-auto relative z-50">
@@ -349,7 +349,7 @@
         </div>
     </div>
 
-    @include('pianote._partials._footer')
+    @include('pianote.sales.partials._footer')
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>

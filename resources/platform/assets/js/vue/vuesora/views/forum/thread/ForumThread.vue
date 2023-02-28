@@ -3,25 +3,25 @@
         <div class="tw-flex tw-flex-col">
 
             <div class="tw-flex tw-flex-wrap tw-items-center tw-mb-6 md:tw-mb-8 tw-flex-col md:tw-flex-row">
-                
+
                 <div class="tw-flex tw-w-full tw-mb-5 tw-justify-center md:tw-justify-start tw-items-center md:tw-mb-0 md:tw-w-1/2">
                     <h1 class="heading thread-title dark:tw-text-white">
                         {{ thread.title }}
                     </h1>
                 </div>
-                
+
                 <div class="tw-flex tw-w-full md:tw-w-1/2 tw-justify-end tw-flex-col md:tw-flex-row tw-flex-wrap">
 
                     <div class="tw-flex tw-items-center tw-mb-5 md:tw-mb-1">
                         <!-- Mobile Back Button -->
-                        <a :href="previousPage" 
+                        <a :href="previousPage"
                             class="tw-no-underline tw-transition tw-inline-flex tw-text-[#00101D] dark:tw-text-white tw-items-center md:tw-hidden"
                         >
                             <i class="fas fa-arrow-circle-left tw-text-4xl"></i>
                         </a>
 
                         <div class="tw-flex tw-flex-grow tw-justify-center tw-mr-6 md:tw-mr-0">
-                            
+
                             <!-- Edit or delete the thread -->
                             <button
                                 v-if="currentUser.isAdmin || currentUser.isOwner"
@@ -77,7 +77,7 @@
                     <div class="tw-flex tw-justify-center tw-items-center tw-mb-1">
                         <!-- Follow -->
                         <button
-                            class="tw-btn-primary tw-btn-small tw-w-full tw-mr-2 tw-px-4 tw-h-10 tw-mb-0 tw-text-xl" 
+                            class="tw-btn-primary tw-btn-small tw-w-full tw-mr-2 tw-px-4 tw-h-10 tw-mb-0 tw-text-xl"
                             :class="`tw-bg-${brand} hover:tw-bg-${brand}-600`"
                             @click="followPost"
                         >
@@ -97,7 +97,7 @@
                             </span>
                         </button>
                     </div>
-                    
+
                 </div>
             </div>
 
@@ -189,7 +189,7 @@
             <!-- Thread Reply Section -->
             <section v-if="!thread.isLocked"
                 class="tw-flex tw-flex-row pv-3"
-            >   
+            >
                 <div class="tw-items-center tw-flex-col tw-hidden sm:tw-inline-flex tw-flex-shrink-0">
                     <!-- Avatar -->
                     <div class="tw-inline-flex tw-flex-col">
@@ -199,7 +199,7 @@
                             <img
                                 class="tw-rounded-full"
                                 :src="currentUser.avatar"
-                            >               
+                            >
                         </div>
                     </div>
                     <!-- User Info -->
@@ -218,7 +218,7 @@
                         :action="postStoreFormUrl"
                         @submit="formDisabled = !formDisabled"
                     >
-                        
+
                         <text-editor
                             ref="textEditor"
                             :is-reply-section="true"
@@ -238,14 +238,20 @@
                             :value="this.thread.id"
                         >
 
+                        <input
+                            type="hidden"
+                            name="brand"
+                            :value="this.brand"
+                        >
+
                         <div class="flex tw-flex-col md:tw-flex-row mt-2 tw-justify-center md:tw-justify-between">
-                            <a :href="`/${brand}/profile/${currentUser.id}/settings/profile#signatureForm`" 
+                            <a :href="`/${brand}/profile/${currentUser.id}/settings/profile#signatureForm`"
                                class="tw-btn-primary tw-text-gray-400 dark:tw-text-[#7E9AB1] tw-bg-transparent tw-px-4 hover:tw-bg-gray-100 dark:hover:tw-bg-[#002039] tw-mb-2"
                             >
                                 <i class="fas fa-file-signature tw-mr-1"></i>
                                 Add Signature
                             </a>
-                            
+
                             <button
                                 class="tw-btn-primary thread-reply-button"
                                 :class="`tw-bg-${brand} hover:tw-bg-${brand}-600`"
@@ -283,14 +289,14 @@
                             <p v-if="shareLinkCopied" class="tw-text-sm tw-text-green-400 tw-mb-3">Link copied successfully. You are good to go!</p>
                             <p v-else class="tw-text-sm tw-text-gray-400 tw-mb-3">Click on the button to copy the link to your clipboard.</p>
                         <div class="tw-w-full tw-flex tw-rounded-full tw-bg-gray-100">
-                            <input class="tw-text-base tw-flex-grow tw-border-0 tw-bg-transparent tw-text-gray-400 tw-pl-5 focus:tw-outline-none" 
-                                   :value="sharePostLink" 
+                            <input class="tw-text-base tw-flex-grow tw-border-0 tw-bg-transparent tw-text-gray-400 tw-pl-5 focus:tw-outline-none"
+                                   :value="sharePostLink"
                                    ref="postLinkInput"
                                    readonly
                             >
-                            <button class="tw-btn-primary tw-px-10" 
+                            <button class="tw-btn-primary tw-px-10"
                                     :class="`tw-bg-${brand} hover:tw-bg-${brand}-600`"
-                                    role="button" 
+                                    role="button"
                                     title="copy link to clipboard"
                                     @click="copyShareLink()">
                                 Copy
@@ -417,7 +423,7 @@ export default {
 
         baseProfileRoute() {
             return '/members/profile/';
-        },   
+        },
 
         userAvatarClassObject() {
             return {
@@ -442,7 +448,7 @@ export default {
             },
             set(val) {
                 return val;
-            }  
+            }
         },
         filterInterface: {
             get() {
@@ -456,7 +462,7 @@ export default {
     },
 
     beforeMount() {
-        //check if signature cookie exists 
+        //check if signature cookie exists
         let signatureCookie = this.getCookie('signaturesHidden');
         let signaturesValue = JSON.parse(signatureCookie);
         //If signaturesValue is true set signaturesHidden to true else accept default false
@@ -481,10 +487,10 @@ export default {
     methods: {
         handleFilterChange(value) {
             if (value != 0) {
-                window.location.href = `${location.protocol}//${location.host 
+                window.location.href = `${location.protocol}//${location.host
                 }${location.pathname}?sortby_val=${value}`;
             } else {
-                window.location.href = `${location.protocol}//${location.host 
+                window.location.href = `${location.protocol}//${location.host
                 }${location.pathname}`;
             }
         },
@@ -602,7 +608,7 @@ export default {
         hideSignatures() {
             //add or remove from cookie based on value of signaturesHidden
             if(!this.signaturesHidden) {
-                //Set Cookie    
+                //Set Cookie
                 document.cookie = "signaturesHidden=true;"
                 //Set Value to true
                 this.signaturesHidden = true;
@@ -682,7 +688,7 @@ export default {
             letter-spacing: 1px;
             text-transform: uppercase;
             color: #52525A;
-            font-size: 1rem; 
+            font-size: 1rem;
             margin-bottom: 15px;
 
             strong,b {
@@ -690,7 +696,7 @@ export default {
                 margin-right: 0.25rem;
                 font-family: "Open Sans", sans-serif;
                 text-transform: none;
-                letter-spacing: 0; 
+                letter-spacing: 0;
                 color: #00101D;
             }
 

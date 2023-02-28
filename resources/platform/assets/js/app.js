@@ -52,7 +52,6 @@ import ContentAssignment from './vue/vuesora/components/ContentAssignment/Conten
 import LegacyLoops from './vue/vuesora/components/LegacyLoops/LegacyLoops.vue';
 import VideoResources from './vue/vuesora/components/VideoResources/VideoResources.vue';
 import ContentLessonActionButtons from './vue/vuesora/components/VideoResources/ContentLessonActionButtons.vue';
-import ContentSchedule from './vue/vuesora/views/schedule/Schedule.vue'
 
 //Chatsora
 import mitt from 'mitt'; //Temporary Event Bus library for Chatsora code (need full refactor for vue 3)
@@ -247,7 +246,6 @@ app.component('AppContainer', AppContainer)
     .component('AssignmentsContainer', AssignmentsContainer)
     .component('ContentAssignment', ContentAssignment)
     .component('AddEventModal', AddEventModal)
-    .component('ContentSchedule', ContentSchedule)
     .component('InfoModal', InfoModal)
 
     .component('MembershipUpdate', defineAsyncComponent(() =>
@@ -289,6 +287,13 @@ app.component('AppContainer', AppContainer)
         import(
             /* webpackChunkName: "student-review-form-iframe" */
             './vue/components/IFrames/StudentReviewForm.vue'
+        )
+    ))
+
+    .component('ContentSchedule', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "content-schedule-component" */
+            './vue/vuesora/views/schedule/Schedule.vue'
         )
     ))
 
