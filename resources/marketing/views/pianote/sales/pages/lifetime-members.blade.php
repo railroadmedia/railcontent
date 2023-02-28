@@ -117,7 +117,7 @@
             <h6 class="leading-tight"><strong>PAY ONCE. ENJOY LESSONS FOREVER.</strong></h6>
             <div class="w-full mx-auto mt-10 mb-20 px-3" style="max-width:920px;">
                 <div class="aspect-16:9 w-full relative">
-                    <iframe class="absolute w-full h-full reset-on-close" src="//player.vimeo.com/video/774401520" frameborder="0" allowfullscreen allow="autoplay"></iframe>
+                    <iframe class="absolute w-full h-full reset-on-close" src="//player.vimeo.com/video/774401520" frameborder="0" allowfullscreen allow="autoplay" title="promo video"></iframe>
                 </div>
             </div>
 
@@ -207,7 +207,7 @@
                     Exact dates and times TBD. But we’ll make sure you have plenty of notice.
 
                 </p>
-                <img class="mb-4 sm:mb-0 order-0 sm:order-1 w-36 sm:w-72 lg:w-80" src="https://cdn.musora.com/image/fetch/w_650,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/june/Live_Chat_Screen.png">
+                <img class="mb-4 sm:mb-0 order-0 sm:order-1 w-36 sm:w-72 lg:w-80" src="https://cdn.musora.com/image/fetch/w_650,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/june/Live_Chat_Screen.png" alt="Lisa">
             </div>
         </div>
     </section>
