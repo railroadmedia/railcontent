@@ -96,7 +96,7 @@
                         :title="is_added ? 'Remove from My List' : 'Add to My List'"
                         :data-content-id="item.id"
                         :data-content-type="item.type"
-                        @click.stop.prevent="addToList"
+                        @click.stop.prevent="$emit('addToList', { id: item.id, type: item.type, name: mappedData.color_title, description: mappedData.black_title, thumbnail_url: mappedData.thumbnail })"
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" class="tw-h-7 tw-w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />

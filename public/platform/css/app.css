@@ -23866,6 +23866,10 @@ a:visited{
   padding-left: 48px !important;
   padding-right: 48px !important;
 }
+.tw-py-5{
+  padding-top: 1.25rem !important;
+  padding-bottom: 1.25rem !important;
+}
 .tw-px-\[3px\]{
   padding-left: 3px !important;
   padding-right: 3px !important;
@@ -23877,10 +23881,6 @@ a:visited{
 .tw-px-2\.5{
   padding-left: 0.625rem !important;
   padding-right: 0.625rem !important;
-}
-.tw-py-5{
-  padding-top: 1.25rem !important;
-  padding-bottom: 1.25rem !important;
 }
 .tw-px-\[64px\]{
   padding-left: 64px !important;
