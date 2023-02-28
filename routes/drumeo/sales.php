@@ -60,7 +60,7 @@ Route::domain('{drumeoDomain}')
         function () {
             Route::get('/{page?}', SalesController::class . '@a')
                 ->whereIn('page', [
-                    '66samus', 'adriendrums', 'kristina-rybalchenko', 'alejandrosifuentes', 'brandonscott', 'cooperdrummer', 'davidcola', 'drumhelper', 'joshcrawford', 'leviclay', 'linaanderberg', 'rdavidr', 'robbrown', 'the8bitdrummer', 'worshipdrummer', 'wyattstav', 'zackgrooves'
+                    '66samus', 'adriendrums', 'kristina-rybalchenko', 'alejandrosifuentes', 'brandonscott', 'cooperdrummer', 'davidcola', 'drumhelper', 'joshcrawford', 'leviclay', 'linaanderberg', 'rdavidr', 'robbrown', 'the8bitdrummer', 'wojtek', 'worshipdrummer', 'wyattstav', 'zackgrooves'
                 ]);
         }
     );
@@ -68,7 +68,7 @@ Route::domain('{drumeoDomain}')
         function () {
             Route::get('/{page?}', SalesController::class . '@ambassador')
                 ->whereIn('page', [
-                    'cobus', 'rocker-girl', 'wojtek'
+                    'cobus', 'rocker-girl'
                 ]);
         }
     );
