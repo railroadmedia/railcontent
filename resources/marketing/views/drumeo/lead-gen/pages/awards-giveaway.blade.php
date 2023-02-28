@@ -255,7 +255,7 @@
             </div>
             <div class="thank-you-box w-full rounded-lg mx-auto bg-white text-center text-black max-w-2xl">
                 <p><strong><i class="fas fa-check"></i> Success!</strong></p>
-                <h2 class="text-guitareo my-4 md:my-5"><strong> CHECK YOUR EMAIL </strong></h2>
+                <h2 class="text-drumeo my-4 md:my-5"><strong> CHECK YOUR EMAIL </strong></h2>
                 <p><em> You should receive an email from team@drumeo.com within 10 minutes.
                         If you don’t, then check your spam folder or re-enter your email address again. </em>
                 </p>
