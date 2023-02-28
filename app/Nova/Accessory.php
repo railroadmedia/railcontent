@@ -111,12 +111,17 @@ class Accessory extends Resource
             Number::make('Display order', 'display_order')->sortable()
                 ->help('Display order should be 0 if set to invisible on shop page.')
                 ->required()
-                ->dependsOn(['brand'],function(Text $field, NovaRequest $request, FormData $formData){
+                ->dependsOn(['brand', 'is_seasonal'],function(Text $field, NovaRequest $request, FormData $formData){
                     if ($formData->brand){
-                        $value = Product::where([['brand_id', $formData->brand], ['product_type_id', 2]])->orderByDesc('display_order')->first();
+                        if($formData->brand === '1' || $formData->brand === '2'){
+                            $value = Product::where([['brand_id', $formData->brand], ['product_type_id', 2], ['is_seasonal', $formData->is_seasonal]])->orderByDesc('display_order')->first();
+                        }
+                        else {
+                            $value = Product::where([['brand_id', $formData->brand], ['is_seasonal', $formData->is_seasonal]])->orderByDesc('display_order')->first();
+                        }
 
                         if($value) $field->default($value->display_order + 1);
-                        else $field->default(1)
+                        else $field->default(1);
                     }
                 }),
             Heading::make('Product page'),
