@@ -1468,6 +1468,8 @@ return [
             'id',
             'xp',
             'type',
+            'like_count',
+            'is_liked_by_current_user',
             'user_progress',
             'fields.title',
             'fields.soundslice_slug',
@@ -1475,6 +1477,7 @@ return [
             '*data.sheet_music_image_url',
             'data.timecode',
             'parent',
+            'url',
         ],
 
         'comment' => [
