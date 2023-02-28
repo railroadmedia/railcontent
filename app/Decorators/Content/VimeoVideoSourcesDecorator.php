@@ -88,7 +88,7 @@ class VimeoVideoSourcesDecorator extends ModeDecoratorBase
                                     if (isset($fileData['height'])) {
                                         $contentResults[$contentIndex]
                                         [$prefix . 'video_playback_endpoints'][$fileData['height']] = [
-                                            'file' => $fileData['link_secure'],
+                                            'file' => $fileData['link'],
                                             'width' => $fileData['width'],
                                             'height' => $fileData['height'],
                                         ];
@@ -126,7 +126,7 @@ class VimeoVideoSourcesDecorator extends ModeDecoratorBase
                                     }
 
                                     if($fileData['quality'] === 'hls'){
-                                        $contentResults[$contentIndex]['hlsManifestUrl'] = $fileData['link_secure'];
+                                        $contentResults[$contentIndex]['hlsManifestUrl'] = $fileData['link'];
                                     }
 
                                     $contentResults[$contentIndex]['captions'] = $captions;
