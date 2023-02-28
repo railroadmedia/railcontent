@@ -27,7 +27,7 @@
     //Thumbnail
     const lessonThumnail = computed( () => {
         const thumbnail = props.lesson.data.find(data => data.key === 'original_thumbnail_url');
-        return thumbnail.value;
+        return props.lesson.thumbnail_url || thumbnail.value;
     })
     //Description
     const lessonDescription = computed( () => {
@@ -36,10 +36,11 @@
     })
     //Duration
     const duration = computed( () => {
-        let seconds = props.lesson.fields.find(field => field.key === 'length_in_seconds');
-        const hrs = Math.floor(seconds.value/60/60);
-        const min = Math.floor(seconds.value/60);
-        const sec = Math.floor(seconds.value - (hrs*3600) - (min*60));
+        let seconds = props.lesson.duration;
+            //props.lesson.fields.find(field => field.key === 'length_in_seconds');
+        const hrs = Math.floor(seconds/60/60);
+        const min = Math.floor(seconds/60);
+        const sec = Math.floor(seconds - (hrs*3600) - (min*60));
         const minFormatted = min < 10 ? `0${min}` : min;
         const secFormatted = sec < 10 ? `0${sec}` : sec;
         return `${hrs}:${minFormatted}:${secFormatted}`;
@@ -55,7 +56,7 @@
     const playlistsStore = usePlaylistsStore();
 
     //-----------Reactive Data-----------//
-    const state = reactive({ 
+    const state = reactive({
         dropdownOpen: false,
         dropdownTop: false,
         isPinned: false,
@@ -114,7 +115,7 @@
                 state.isPinned = true;
                 PlaylistService.pinPlaylist(id, brand, token)
                     .then((response) => {
-                        if(response.status === 200) { 
+                        if(response.status === 200) {
                             //emit event or update pinia
                             playlistsStore.pinPlaylist(props.lesson)
                             //show success message
@@ -142,7 +143,7 @@
             state.isPinned = false;
             PlaylistService.unpinPlaylist(id, brand, token)
                 .then((response) => {
-                    if(response.status === 200) { 
+                    if(response.status === 200) {
                         //emit event or update pinia
                         playlistsStore.unpinPlaylist(props.lesson.id)
                         //show success message
@@ -155,7 +156,7 @@
                 .catch(function (error) {
                     if (error.response) {
                         //handle error
-                        
+
                         window.shownotification({
                             icon: 'error',
                             text: 'Woops! Something wrong happened, please try again later.'
@@ -205,16 +206,16 @@
     }
 
     //-----------Lifecycle Methods-----------//
-    
+
     onBeforeMount(() => {
         //check if it's pinned with request? Or prerender?
         state.isPinned = props.lesson.pinned;
-        state.isPrivate = props.lesson.private; 
+        state.isPrivate = props.lesson.private;
 
         console.log('lesson', props.lesson)
-    }); 
-    
-    
+    });
+
+
 
 </script>
 <template>
@@ -223,7 +224,7 @@
         <!-- PLAYLIST INFO: clickable link -->
         <a  :href="lesson.url"
             class="tw-inline-flex tw-items-center tw-flex tw-w-[calc(100%-100px)] tw-text-[#0D0D0D] dark:tw-text-white"
-        >   
+        >
             <div class="tw-inline-flex tw-shrink-0 tw-w-[40px] tw-pl-4"></div>
 
             <!-- Playlist thumbnail -->
@@ -232,13 +233,13 @@
                 <div class="tw-relative tw-w-full tw-h-full" v-if="lessonThumnail">
                     <img :src="`https://musora.com/cdn-cgi/image/width=330/${lessonThumnail}`" alt="playlist thumbnail">
                 </div>
-            </div>  
+            </div>
 
             <div class="tw-truncate tw-w-[calc(100%-350px)] tw-pl-2 md:tw-pl-[15px] tw-pr-2">
                 <!--name-->
                 <p>
-                    <span class="tw-uppercase tw-mr-1 tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-sm" 
-                            v-for="(instructor, i) in lesson.instructors" 
+                    <span class="tw-uppercase tw-mr-1 tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-sm"
+                            v-for="(instructor, i) in lesson.instructors"
                             :key="i">
                             {{ instructor }}
                     </span>
@@ -250,33 +251,33 @@
                     <span>Begins {{ }}</span><span class="tw-mx-0.5">•</span><span>Ends</span>
                 </p>
             </div>
-            
+
             <div class="tw-inline-flex tw-justify-center tw-shrink-0 tw-w-[128px]">
                 <span v-if="lesson.type" class="tw-text-center">
                     {{ lesson.type }}
-                </span>  
-            </div> 
-            
+                </span>
+            </div>
+
             <div class="tw-inline-flex tw-justify-center tw-shrink-0  tw-w-[100px]">
                 <span>{{ duration }}</span>
-            </div>              
+            </div>
         </a>
-        
+
         <!-- PLAYLISTS OPTIONS DROPDOWN -->
         <div class="tw-inline-flex tw-items-center tw-justify-end tw-shrink-0 tw-w-[100px] md:tw-justify-center" >
-            <div class="tw-relative " 
+            <div class="tw-relative "
                     v-click-outside="()=>{ state.dropdownOpen = false }"
             >
-                <button class="tw-btn-primary tw-btn-small tw-btn-circle tw-text-[#445F74] dark:tw-text-[#7E9AB1] tw-bg-transparent dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-transition-colors tw-p-0 tw-mb-0 focus-visible:tw-outline focus-visible:tw-outline-[#111827] dark:focus:tw-outline-[#9EC0DC] focus-visible:tw-outline-2 tw-rotate-0 md:tw-rotate-90" 
+                <button class="tw-btn-primary tw-btn-small tw-btn-circle tw-text-[#445F74] dark:tw-text-[#7E9AB1] tw-bg-transparent dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-transition-colors tw-p-0 tw-mb-0 focus-visible:tw-outline focus-visible:tw-outline-[#111827] dark:focus:tw-outline-[#9EC0DC] focus-visible:tw-outline-2 tw-rotate-0 md:tw-rotate-90"
                         title="Playlist Options"
-                        @click.prevent="dropdownTriggerHandler(this)" 
+                        @click.prevent="dropdownTriggerHandler(this)"
                 >
                     <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12.5 5.20768L12.5 5.2181M12.5 12.4993L12.5 12.5098M12.5 19.791L12.5 19.8014M12.5 6.24935C11.9247 6.24935 11.4583 5.78298 11.4583 5.20768C11.4583 4.63239 11.9247 4.16602 12.5 4.16602C13.0753 4.16602 13.5417 4.63239 13.5417 5.20768C13.5417 5.78298 13.0753 6.24935 12.5 6.24935ZM12.5 13.541C11.9247 13.541 11.4583 13.0746 11.4583 12.4993C11.4583 11.9241 11.9247 11.4577 12.5 11.4577C13.0753 11.4577 13.5417 11.9241 13.5417 12.4993C13.5417 13.0746 13.0753 13.541 12.5 13.541ZM12.5 20.8327C11.9247 20.8327 11.4583 20.3663 11.4583 19.791C11.4583 19.2157 11.9247 18.7493 12.5 18.7493C13.0753 18.7493 13.5417 19.2157 13.5417 19.791C13.5417 20.3663 13.0753 20.8327 12.5 20.8327Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </button>
                 <!-- Dropdown-->
-                <div v-if="state.dropdownOpen" 
+                <div v-if="state.dropdownOpen"
                      class="tw-w-[162px] tw-shadow tw-rounded tw-bg-white tw-text-black dark:tw-bg-[#081825] dark:tw-text-white tw-absolute tw-right-0 tw-py-2 tw-z-50"
                      :class="state.dropdownTop ? 'tw-bottom-[100%]' : 'tw-top-[100%]'"
                 >
@@ -312,7 +313,7 @@
                             <button class="tw-flex tw-w-full tw-itemx-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-black/20"
                                     @click.prevent="pinHandler(lesson.id)"
                             >
-                                {{ state.isPinned ? 'Unpin from Sidebar' : 'Pin to Sidebar' }} 
+                                {{ state.isPinned ? 'Unpin from Sidebar' : 'Pin to Sidebar' }}
                             </button>
                         </li>
                         <!-- If not public -->
@@ -320,7 +321,7 @@
                             <button class="tw-relative tw-cursor-pointer tw-flex tw-w-full tw-items-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-black/20"
                                     @click.prevent="privateToggleHandler()"
                             >
-                                {{ state.isPrivate ? 'Private' : 'Public' }} 
+                                {{ state.isPrivate ? 'Private' : 'Public' }}
                                 <!-- Toggle -->
                                 <div class="tw-relative tw-inline-flex tw-ml-auto tw-w-[27px] tw-h-[12px] tw-rounded-xl tw-bg-[#445F74]">
                                     <div class="tw-rounded-full tw-h-[15px] tw-w-[15px] tw-bg-white tw-flex-inline tw-items-center tw-justify-center tw-shadow tw-absolute tw-top-[-1.5px] tw-transition"

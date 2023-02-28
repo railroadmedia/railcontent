@@ -100,6 +100,7 @@ class UserPlaylistsController extends BaseController
 
         $items = $this->userPlaylistsService->getUserPlaylistContents($playlistId, $contentTypes, $limit, $page);
         foreach ($items as $index => $item) {
+            $items[$index]['duration'] = $item->fetch('fields.video.fields.length_in_seconds', 0);
             $items[$index]['url'] = url()->route('platform.user.playlist-item', [
                 'playlistId' => $playlistId,
                 'playlistItemId' => $item['user_playlist_item_id'],
