@@ -85,21 +85,12 @@
         <div v-if="lessons.data.length" class="tw-w-full">
 
             <!-- List View Header -->
-            <header class="tw-hidden md:tw-flex tw-w-full tw-font-bold tw-items-center tw-transition-colors tw-bg-[#E6E7E9] dark:tw-bg-[#002039] tw-text-[#0D0D0D] dark:tw-text-white tw-mb-1 tw-rounded-t-md tw-py-4 tw-pl-[48px]"
-            >
-                <div class="tw-grid tw-grid-cols-10 tw-w-full">
-                    <p class="tw-col-span-2 tw-relative">
-                        <span class="tw-ml-[-24px] tw-inline-block">Name</span>
-                    </p>
-                    <div class="tw-col-span-3 tw-w-full tw-flex">
-                        <p class="tw-w-1/2 tw-text-center">Type</p>
-                        <p class="tw-w-1/2 tw-text-center">
-                            Time
-                        </p>
-                    </div>
-                </div>
-                <div class="tw-inline-flex tw-px-4 xl:tw-px-8"><span class="tw-w-[24px] tw-h-[24px]"></span></div> <!-- Spacer for Pin Icon -->
-                <p class="tw-pr-[22px] tw-w-[100px] tw-text-center">Actions</p>
+            <header class="tw-hidden md:tw-flex tw-w-full tw-font-bold tw-items-center tw-transition-colors tw-bg-[#E6E7E9] dark:tw-bg-[#002039] tw-text-[#0D0D0D] dark:tw-text-white tw-mb-1 tw-rounded-t-md tw-p-4">
+                <div class="tw-w-[40px]">#</div>
+                <p class="tw-relative tw-inline-block tw-mr-auto tw-w-full">Name</p>
+                <p class="tw-inline-flex tw-shrink-0 tw-justify-center tw-w-[100px]">Type</p>
+                <p class="tw-inline-flex tw-shrink-0 tw-justify-center tw-w-[100px]">Time</p>
+                <p class="tw-inline-flex tw-shrink-0 tw-justify-end tw-w-[100px]">Actions</p>
             </header>
 
             <!-- Cards -->
@@ -111,7 +102,8 @@
                     :lesson="lesson"
                     :token="token"
                     :brand="brand"
-                />    
+                />  
+                  
             </section>
 
         </div>      

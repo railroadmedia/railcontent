@@ -1,5 +1,5 @@
 <script setup>
-    import { onBeforeMount, onMounted, watch, inject, reactive, computed } from 'vue';
+    import { onBeforeMount, onMounted, onUpdated, watch, inject, reactive, computed } from 'vue';
     import PlaylistService from '../../../../services/playlists.js';
     import { usePlaylistsStore } from '../../../../stores/playlists';
     import PlaylistCollectionControls from './PlaylistCollectionControls.vue';
@@ -29,13 +29,14 @@
     
     //Computed Props
     const hasPlaylists = computed(() => {
-        return props.playlistCount && playlistsStore.playlists.length ? true : false;
+        return props.playlistCount ? true : false;
     })
 
     //Reactive Data
     const state = reactive({ 
         isListView: false,
-        showControls: true
+        showControls: true,
+        searchTerm: '',
     })
 
     //Inject
@@ -77,15 +78,22 @@
             state.isListView = !props.miniCatalog;
         }
 
-        //show/hide controls on load
-        state.showControls = props.playlistCount > 0 ? true : false;
         //Get URL Params
         const params = new Proxy(new URLSearchParams(window.location.search), {
             get: (searchParams, prop) => searchParams.get(prop),
         });
         //Set resultsPage
         playlistsStore.resultsPage = Number(params.page || 1);
+        state.searchTerm = params.search || '';
     });
+
+    onUpdated(()=> {
+        //Get URL Params
+        const params = new Proxy(new URLSearchParams(window.location.search), {
+            get: (searchParams, prop) => searchParams.get(prop),
+        });
+        state.searchTerm = params.search || '';
+    })
 
     //Watchers
 
@@ -97,28 +105,34 @@
 </script>
 <template>
     <main class="tw-w-full">
-        
-        <!-- Empty State -->
-        <section v-if="!hasPlaylists && !playlistsStore.loadingPlaylists" class="tw-w-full tw-flex tw-flex-col dark:tw-text-white tw-items-center tw-mt-[58px]">
-            <div class="tw-h-[84px] tw-w-[84px] tw-rounded-full tw-inline-flex tw-items-center tw-justify-center tw-text-white dark:tw-text-[#9EC0DC] tw-transition-colors tw-bg-[#3F3F46] dark:tw-bg-[#445F74] tw-mb-[30px]">
+        <!-- No Playlists -->
+        <section v-if="playlistsStore.playlists.length === 0 && !playlistsStore.loadingPlaylists && !state.searchTerm.length" 
+                 class="tw-w-full tw-flex dark:tw-text-white tw-items-center "
+                 :class="miniCatalog ? 'tw-mt-1' : 'tw-mt-[58px] tw-flex-col'"
+        >
+            <div class="tw-h-[84px] tw-w-[84px] tw-rounded-full tw-inline-flex tw-items-center tw-justify-center tw-text-white dark:tw-text-[#9EC0DC] tw-transition-colors tw-bg-[#3F3F46] dark:tw-bg-[#445F74] "
+                 :class="{'tw-mb-[30px]': !miniCatalog}"   
+            >
                 <musora-icon icon-name="playlist" class="tw-w-[36px]" />
             </div>
-            <h1 class="tw-text-3xl tw-font-bold tw-mb-[15px]">No Playlists here yet</h1>
-            <p>Go ahead and create your first playlist!</p>
+            <div :class="{'tw-ml-4': miniCatalog}">
+                <h1 class="tw-text-3xl tw-font-bold" :class="!miniCatalog ? 'tw-mb-[15px]' : 'tw-mb-2' ">No Playlists here yet</h1>
+                <p>Go ahead and create your first playlist!</p>
+            </div>
         </section>
 
         <!-- Catalog -->
-        <div v-if="hasPlaylists" class="tw-w-full">
+        <div v-if="playlistsStore.playlists.length !== 0 || state.searchTerm.length" class="tw-w-full">
             <!-- Controls -->
             <PlaylistCollectionControls 
-                v-if="state.showControls && !props.miniCatalog"
+                v-if="!props.miniCatalog || state.searchTerm.length"
                 :brand="brand"
                 :isListView="state.isListView"
                 @onUpdateListView="(val) => state.isListView = val"
             />
 
             <!-- List View Header -->
-            <header class="tw-w-full tw-font-bold tw-items-center tw-transition-colors tw-bg-[#E6E7E9] dark:tw-bg-[#002039] tw-text-[#0D0D0D] dark:tw-text-white tw-mb-1 tw-rounded-t-md tw-py-4 tw-pl-[48px]"
+            <header v-if="playlistsStore.playlists.length !== 0" class="tw-w-full tw-font-bold tw-items-center tw-transition-colors tw-bg-[#E6E7E9] dark:tw-bg-[#002039] tw-text-[#0D0D0D] dark:tw-text-white tw-mb-1 tw-rounded-t-md tw-py-4 tw-pl-[48px]"
                     :class="state.isListView ? 'tw-hidden md:tw-flex' : 'tw-hidden'"
             >
                 <div class="tw-grid tw-grid-cols-10 tw-w-full">
@@ -160,6 +174,11 @@
                 :limit="10"
                 @pageChange="handlePageChange"
             />
+
+            <!-- No Playlists -->
+            <section v-if="playlistsStore.playlists.length === 0 && state.searchTerm" class="tw-w-full tw-flex tw-flex-col dark:tw-text-white tw-items-center tw-mt-[58px]">
+                <h2 class="tw-text-3xl tw-font-bold tw-mb-[15px]">No results found for <span :class="`tw-text-${brand}`">{{ state.searchTerm }}</span></h2>
+            </section>
         </div>
         
         <!-- Skeleton Loader -->

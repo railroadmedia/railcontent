@@ -48,10 +48,10 @@
         }
         //load Playlists
         playlistsStore.getPlaylists(payload, token);  
-        //Update URL
+        //Update URL w/ new params
         const url = new URL(window.location.href);
         url.searchParams.set('sortby_val', state.sortValue)
-        if(state.searchTerm.length) url.searchParams.set('search', state.searchTerm)
+        url.searchParams.set('search', state.searchTerm)
         window.history.pushState({}, '', url);
     };
 

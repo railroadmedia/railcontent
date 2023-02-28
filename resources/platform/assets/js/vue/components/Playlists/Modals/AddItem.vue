@@ -208,7 +208,7 @@ onMounted(() => {
                 <PlusCircleIcon v-if="!selectedPlaylists.includes(String(slotProps.actionPayload))"
                     class="tw-w-[30px] tw-h-[30px] tw-text-[#3F3F46] dark:tw-text-[#7E9AB1]" />
                 <CheckCircleIcon v-if="selectedPlaylists.includes(String(slotProps.actionPayload))"
-                    :class="`tw-w-[30px] tw-h-[30px] tw-text-[${brand}]`" />
+                    :class="`tw-w-[30px] tw-h-[30px] tw-text-${brand}`" />
             </template>
         </Table>
         <div class="tw-w-full tw-flex tw-justify-between tw-pt-[25px]">

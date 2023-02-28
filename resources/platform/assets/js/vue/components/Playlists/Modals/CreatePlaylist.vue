@@ -38,7 +38,7 @@
 
     const state = reactive({
         name: '',
-        category: null,
+        category: 'My List',
         thumb: null,
         description: '',
     })
@@ -185,13 +185,11 @@
     ];
 
     onBeforeMount(()=> {
-        //Set Description Value
-        if(props.mode !== "create") {
-            state.thumb = props.playlist.thumbnail_url;
-            state.name = props.playlist.name;
-            state.description = props.playlist.description;
-            state.category = props.playlist.category;
-        }
+        //Load Data        
+        state.thumb = props.playlist.thumbnail_url;
+        state.name = props.playlist.name;
+        state.description = props.playlist.description;
+        state.category = props.playlist.category || 'My List';
     })
     
     onBeforeUnmount(() => {

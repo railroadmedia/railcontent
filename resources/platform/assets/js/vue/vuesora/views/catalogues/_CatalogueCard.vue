@@ -74,7 +74,7 @@
                     </div>
 
                     <!-- Video Title -->
-                    <h4 class="tw-text-sm tw-leading-snug tw-text-[#00101D] font-compressed tw-font-bold tw-capitalize tw-mb-1 dark:tw-text-white"
+                    <h4 class="tw-text-sm tw-leading-snug tw-text-[#00101D] font-compressed tw-font-bold tw-capitalize tw-mb-1 dark:tw-text-white tw-line-clamp-2"
                         :class="{'text-center': isGuitareoChordAndScale}"
                     >
                         {{ mappedData.black_title }}
