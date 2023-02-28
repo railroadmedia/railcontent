@@ -24,7 +24,7 @@
 </script>
 <template>
     <div id="page-header" 
-         class="tw-flex tw-w-full tw-min-h-[240px] tw-relative tw-z-0 tw-items-center tw-justify-center" 
+         class="tw-flex tw-w-full tw-min-h-[240px] tw-py-5 tw-relative tw-z-0 tw-items-center tw-justify-center" 
     >
         <div class="tw-bg-cover tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-bg-top tw-overflow-hidden">
             <img :src="`https://musora.com/cdn-cgi/image/quality=100,width=800,fit=cover,metadata=none/${ backgroundImage }`" 

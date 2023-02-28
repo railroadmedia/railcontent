@@ -34,6 +34,16 @@
         const description = props.lesson.fields.find(field => field.key === 'title');
         return description.value;
     })
+    //Duration
+    const duration = computed( () => {
+        let seconds = props.lesson.fields.find(field => field.key === 'length_in_seconds');
+        const hrs = Math.floor(seconds.value/60/60);
+        const min = Math.floor(seconds.value/60);
+        const sec = Math.floor(seconds.value - (hrs*3600) - (min*60));
+        const minFormatted = min < 10 ? `0${min}` : min;
+        const secFormatted = sec < 10 ? `0${sec}` : sec;
+        return `${hrs}:${minFormatted}:${secFormatted}`;
+    })
 
 
     //-----------Refs-----------//
@@ -241,14 +251,14 @@
                 </p>
             </div>
             
-            <div class="tw-inline-flex tw-justify-center tw-shrink-0 tw-w-[100px]">
+            <div class="tw-inline-flex tw-justify-center tw-shrink-0 tw-w-[128px]">
                 <span v-if="lesson.type" class="tw-text-center">
                     {{ lesson.type }}
                 </span>  
             </div> 
             
             <div class="tw-inline-flex tw-justify-center tw-shrink-0  tw-w-[100px]">
-                <span>{{ duration_formated }}</span>
+                <span>{{ duration }}</span>
             </div>              
         </a>
         
