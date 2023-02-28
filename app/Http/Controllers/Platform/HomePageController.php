@@ -767,9 +767,12 @@ class HomePageController extends BaseController
         return $parsedTypes;
     }
 
-    public function testemail()
+    public function testemail(Request $request)
     {
-        Mail::raw('Hello World!', function($msg) {$msg->to('robert@musora.com')->subject('Test Email'); });
+        $host = $request->host();
+        Mail::raw('Hello World!', function ($msg) use ($host) {
+            $msg->to('robert@musora.com')->subject("Test Email: $host");
+        });
     }
 
     public function redirect30day(){

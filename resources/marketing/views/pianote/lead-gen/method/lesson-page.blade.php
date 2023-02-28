@@ -38,7 +38,7 @@
 @stop
 
 @section('global-body')
-    @include('pianote._partials._nav')
+    @include('pianote.sales.partials._nav')
 
     <div id="fb-root"></div>
     <script>(function (d, s, id) {
@@ -142,7 +142,7 @@
         </div>
     </section>
 
-    @include("pianote._partials._footer", [
+    @include("pianote.sales.partials._footer", [
             "minimal" => true
         ])
 

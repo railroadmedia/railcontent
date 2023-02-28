@@ -12,6 +12,7 @@ use Railroad\Ecommerce\Services\ResponseService;
 class MarketingPagesProductsViewComposer
 {
     private ProductRepository $productRepository;
+    private static $viewDataCache = null;
 
     /**
      * MarketingPagesProductsViewComposer constructor.
@@ -29,6 +30,11 @@ class MarketingPagesProductsViewComposer
      */
     public function compose(View $view)
     {
+        if (!is_null(self::$viewDataCache)) {
+            $view->with(self::$viewDataCache);
+            return;
+        }
+
         $products = $this->productRepository->all();
 
         $products = array_combine(array_entity_column($products, 'getSku'), $products);
@@ -38,6 +44,8 @@ class MarketingPagesProductsViewComposer
             return [$item['sku'] => $item];
         });
 
-        $view->with(['products' => $products, 'productPrices' => $productPrices]);
+        self::$viewDataCache = ['products' => $products, 'productPrices' => $productPrices];
+
+        $view->with(self::$viewDataCache);
     }
 }

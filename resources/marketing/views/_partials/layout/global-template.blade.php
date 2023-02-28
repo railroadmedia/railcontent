@@ -15,6 +15,7 @@
     @include('_partials.layout._fonts')
     @include('_partials.layout.favicons.'.$theme.'-favicons')
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
 
     @yield('layout-styles')
 
@@ -40,7 +41,8 @@
 
 @yield('layout-header')
 
-<main class="flex flex-col w-full min-h-screen @yield('main-class')" @yield('body-data')>
+<main class="flex flex-col w-full @yield('main-class')" @yield('body-data')>
+
     @yield('layout-body')
 </main>
 
@@ -69,7 +71,7 @@
 </script>
 
 @yield('layout-scripts')
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript" src="{{ asset('marketing/js/jquery.countdown-2.min.js') }}"></script>
 
 <script>

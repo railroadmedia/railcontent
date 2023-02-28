@@ -6,12 +6,13 @@ TODO:
 Mark as complete
 
 */
-import { ref, onMounted, onBeforeUnmount } from 'vue';
+import { ref, onMounted, onBeforeUnmount, reactive } from 'vue';
 import ContentLessonActionButtons from '../../vuesora/components/VideoResources/ContentLessonActionButtons.vue';
 import SoundSlice from "../SoundSlice/SoundSlice.vue"
 import SoundSliceControls from "../SoundSlice/SoundSliceControls.vue";
 import ContentService from "../../vuesora/assets/js/services/content";
 import { ArrowSmLeftIcon } from '@heroicons/vue/solid';
+import ProgressTracker from '../../vuesora/assets/js/classes/progress-tracker';
 
 const props = defineProps({
     brand: {
@@ -100,6 +101,9 @@ const soundsliceObject = ref(props.assignments.length ? props.assignments[0] : {
 const openSoundslice = ref(null);
 const loading = ref(true);
 const lessonProgressRef = ref(props.lessonProgress);
+const hasBeenPlayed = ref(false);
+const progressTrackerEventListener = ref(null);
+let progressTracker = new ProgressTracker();
 
 const openInstrumentless = () => {
     openSoundslice.value = 'instrumentless';
@@ -107,11 +111,6 @@ const openInstrumentless = () => {
 
 const openFull = () => {
     openSoundslice.value = 'full';
-};
-
-const handleCloseSoundslice = () => {
-    openSoundslice.value = null;
-    loading.value = true;
 };
 
 const handleOnLoad = () => {
@@ -178,6 +177,53 @@ const getBrandSpecificParams = () => {
         guitareo: '',
         pianote: '&show_chords=1'
     }[props.brand]);
+};
+
+const sendProgressTracking = () => {
+    progressTracker.send({
+        mediaId: props.contentId,
+        mediaType: 'assignment',
+        mediaCategory: 'soundslice',
+    });
+}
+
+const handlePlay = () => {
+    if (!hasBeenPlayed.value) {
+        hasBeenPlayed.value = true;
+        ContentService.markContentAsStarted(props.contentId);
+    }
+
+    progressTracker.start();
+
+    if (!progressTrackerEventListener.value) {
+        progressTrackerEventListener.value = true;
+
+        window.addEventListener('unload', sendProgressTracking);
+    }
+}
+
+const handlePause = () => {
+    progressTracker.stop();
+}
+
+const handleCloseSoundslice = () => {
+    openSoundslice.value = null;
+    loading.value = true;
+
+    document.body.classList.remove('no-scroll', 'dim-sidebar');
+
+    progressTracker.sendAsync({
+        mediaId: props.contentId,
+        mediaType: 'assignment',
+        mediaCategory: 'soundslice',
+    });
+
+    progressTracker = null;
+
+    window.removeEventListener('unload', () => sendProgressTracking);
+
+    Helpscout.showWidget();
+    Intercom.showWidget();
 };
 </script>
 
@@ -276,8 +322,8 @@ const getBrandSpecificParams = () => {
                     <div v-if="openSoundslice === 'instrumentless'" id="practiceOverlay" class="bg-white">
                         <SoundSlice :loading="loading" :user-id="userId" :theme-color="brand"
                             :additional-params="`${getBrandSpecificParams()}&layout=3&recording_idx=2`"
-                            :soundslice-slug="soundsliceObject.soundsliceSlug" @onLoad="handleOnLoad"
-                            @onPlay="handlePlay" @onPause="handlePause">
+                            :soundslice-slug="soundsliceObject.soundsliceSlug" @onLoad="handleOnLoad" @onPlay="handlePlay"
+                            @onPause="handlePause">
                             <template v-slot:soundsliceControls>
                                 <SoundSliceControls :title="`${songTitle} (Instrumentless)`" :disable-next="true"
                                     :disable-prev="true" @onClose="handleCloseSoundslice" />
@@ -290,11 +336,11 @@ const getBrandSpecificParams = () => {
                     <div v-if="openSoundslice === 'full'" id="practiceOverlay" class="bg-white">
                         <SoundSlice :loading="loading" :user-id="userId" :theme-color="brand"
                             :additional-params="`${getBrandSpecificParams()}&layout=3&recording_idx=1`"
-                            :soundslice-slug="soundsliceObject.soundsliceSlug" @onLoad="handleOnLoad"
-                            @onPlay="handlePlay" @onPause="handlePause">
+                            :soundslice-slug="soundsliceObject.soundsliceSlug" @onLoad="handleOnLoad" @onPlay="handlePlay"
+                            @onPause="handlePause">
                             <template v-slot:soundsliceControls>
-                                <SoundSliceControls :title="`${songTitle} (Full)`" :disable-next="true"
-                                    :disable-prev="true" @onClose="handleCloseSoundslice" />
+                                <SoundSliceControls :title="`${songTitle} (Full)`" :disable-next="true" :disable-prev="true"
+                                    @onClose="handleCloseSoundslice" />
                             </template>
                         </SoundSlice>
                     </div>

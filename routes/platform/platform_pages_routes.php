@@ -34,14 +34,12 @@ Route::domain('{musoraDomain}')
                 Route::get('/{brand}', [HomePageController::class, 'home'])
                     ->whereIn('brand', all_brands())
                     ->name('platform.home');
-
-                Route::get('/test/email', [HomePageController::class, 'testemail']);
-
+                
                 Route::get(
                     '/redirect30day',
                     [\App\Http\Controllers\Platform\HomePageController::class, 'redirect30day']
                 );
-                
+
                 /*
                  * Primary Content Pages
                  */
@@ -664,6 +662,18 @@ Route::get(
     ->name('platform.apple-association-file');
 
 
+
+    Route::domain('{musoraDomain}')
+    ->middleware(['web_authenticated'])
+    ->group(function () {
+        /*
+         * Home Page
+         */
+        Route::get('/{brand}/comments', [ContentPagesController::class, 'comments'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.members-area.comments');
+    });
+
 Route::domain('{musoraDomain}')
     ->middleware(['web_public'])
     ->group(function () {
@@ -734,13 +744,8 @@ Route::domain('{musoraDomain}')
             ->name('books.drummers-toolbox.chapter');
     });
 
-   Route::domain('{musoraDomain}')
-    ->middleware(['web_authenticated'])
+
+Route::middleware(['web_authenticated'])
     ->group(function () {
-        /*
-         * Home Page
-         */
-        Route::get('/{brand}/comments', [ContentPagesController::class, 'comments'])
-            ->whereIn('brand', all_brands())
-            ->name('platform.members-area.comments');
+        Route::get('/test/email', [HomePageController::class, 'testemail']);
     });

@@ -25,7 +25,7 @@
     {{-- Notifications Container --}}
     <div id="notifications-container"></div>
 
-    @include('pianote._partials._nav', [
+    @include('pianote.sales.partials._nav', [
         "checkoutVersion" => true
     ])
 
@@ -115,7 +115,7 @@
         </div>
     </div>
 
-    @include('pianote._partials._footer')
+    @include('pianote.sales.partials._footer')
 
     @include('partials._brand-set-authentication-cookies-iframe')
 
