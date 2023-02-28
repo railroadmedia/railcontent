@@ -367,7 +367,7 @@ Route::domain('{musoraDomain}')
          */
         Route::get('/{brand}/lesson-history', [UserListPagesController::class, 'inProgress'])
             ->whereIn('brand', all_brands())
-            ->name('platform.lesson-history.in-progress');
+            ->name('platform.lesson-history');
 
         Route::get('/{brand}/lesson-history/in-progress', [UserListPagesController::class, 'inProgress'])
             ->whereIn('brand', all_brands())

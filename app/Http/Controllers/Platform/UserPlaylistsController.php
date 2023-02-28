@@ -136,7 +136,15 @@ class UserPlaylistsController extends BaseController
         $playlistItem =
             $playlistItems->where('user_playlist_item_id', $playlistItemId)
                 ->first();
+        $content = $this->contentService->getById($playlistItem['id']);
         throw_if(empty($playlistItem), new NotFoundHttpException());
+
+        if(empty($content)){
+            // TODO: Replace with Upgrade to View page
+            return view('pages.upgrade', [
+                "brand" => brand(),
+            ]);
+        }
 
         $playlistItem =
             $this->vimeoVideoSourcesDecorator->decorate(new Collection([$playlistItem]))
