@@ -942,11 +942,11 @@
                 $(this).parents().find('table').addClass('private');
             });
 
-            var showModal = location.search.substr(1).includes('member-email');
-
-            if (showModal) {
-                $('#loginModal').foundation('open');
-            }
+            // var showModal = location.search.substr(1).includes('member-email');
+            //
+            // if (showModal) {
+            //     $('#loginModal').foundation('open');
+            // }
         });
     </script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
