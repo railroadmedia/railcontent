@@ -133,20 +133,18 @@ class Lesson extends Resource
             Number::make('Display order', 'display_order')->sortable()
                 ->help('Display order should be 0 if set to invisible on shop page.')
                 ->required()
-                ->dependsOn(
-                    ['brand'],
-                    function (Text $field, NovaRequest $request, FormData $formData) {
+                ->dependsOn(['brand', 'is_seasonal'],function(Text $field, NovaRequest $request, FormData $formData){
+                    if ($formData->brand){
                         if($formData->brand === '1' || $formData->brand === '2'){
-                            $display_num = Product::where([['product_type_id', 1], ['brand_id', $formData->brand]])->orderBy('display_order', 'DESC')->first();
+                            $value = Product::where([['brand_id', $formData->brand], ['product_type_id', 1]])->orderByDesc('display_order')->first();
                         }
                         else {
-                            $display_num = Product::where('brand_id', $formData->brand)->orderBy('display_order', 'DESC')->first();
+                            $value = Product::where([['brand_id', $formData->brand], ['is_seasonal', 0]])->orderByDesc('display_order')->first();
                         }
 
-                        if(!is_null($display_num)){
-                            $display_num = $display_num->display_order;
-                            $field->default($display_num+1);
-                        }
+                        if($value) $field->default($value->display_order + 1);
+                        else $field->default(1);
+                    }
                 }),
             Heading::make('Product page'),
             Text::make('Header Text', 'header_text')->hideFromIndex(),
