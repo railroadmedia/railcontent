@@ -192,8 +192,8 @@
         <div class="md:flex md:justify-center md:items-center px-4 lg:px-0">
             <div class="max-w-sm md:max-w-none mx-auto md:hidden">
                 <img
-                    class="-mt-20 sm:-mt-14 transition-opacity opacity-0"
-                    src="https://cdn.musora.com/image/fetch/w_550,q_auto:besth/https://drumeo-assets.s3.amazonaws.com/promos/anniversary/2023/promo-collage-m.png"
+                    class="-mt-8 sm:-mt-14 transition-opacity opacity-0"
+                    src="https://cdn.musora.com/image/fetch/w_550,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/anniversary/2023/promo-collage-m.png"
                     alt="Promo Collage Image"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
