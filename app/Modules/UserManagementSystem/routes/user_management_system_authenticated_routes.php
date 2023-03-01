@@ -157,7 +157,7 @@ Route::group(
             'user/unblock/{id}',
             UserController::class . '@unblockUser'
         )
-            ->name('user_management_system.user.block');
+            ->name('user_management_system.user.unblock');
     }
 );
 
