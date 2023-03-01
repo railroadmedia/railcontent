@@ -14,33 +14,27 @@ class FixProgressOnUnpublishedContent extends Command
 
     public function handle()
     {
-        $query = DB::table('railcontent_user_content_progress')
-            ->select('railcontent_user_content_progress.id')
-            ->join(
-                'railcontent_content',
-                'railcontent_content.id',
-                '=',
-                'railcontent_user_content_progress.content_id'
-            )
-            ->where('railcontent_content.published_on', '>', Carbon::now())
-            ->orderBy('id', 'desc');
+        $query = DB::table('railcontent_user_content_progress as p')
+            ->join('railcontent_content as c', 'c.id', '=', 'p.content_id')
+            ->join('railcontent_content_hierarchy as h', 'h.child_id', '=', 'c.id')
+            ->join('railcontent_content as pc', 'pc.id', '=', 'h.parent_id')
+            ->where('c.published_on', '>', Carbon::now());
         $count = $query->count();
         $this->info("$count records found.");
+
         if (!$this->option('delete')) {
-            $this->info("Records need to be deleted.  Verify the data to be deleted using this query against the production read database.");
-            $this->info("\nSELECT c.slug, parent.slug, c.published_on as parent
-                FROM musora_laravel.railcontent_user_content_progress p
-                inner join railcontent_content c on p.content_id = c.id
-                inner join railcontent_content_hierarchy h on h.child_id = c.id
-                inner join railcontent_content parent on parent.id = h.parent_id
-                where c.published_on >= now() "
-            );
+            $contents = $query->select(['c.slug', 'pc.slug as parentslug'])->distinct()->get();
+            $this->info("Records need to be deleted.  Verify the user progress data to be deleted.");
+            $this->info("Data includes the following slugs:");
+            foreach($contents as $content){
+                $this->info("$content->slug parent:$content->parentslug");
+            }
             $this->info("\nRerun the command with --delete to process the delete.");
             return;
         }
 
 
-        $ids = $query->get();
+        $ids = $query->select('p.id')->get();
         $n = 0;
         $ids->each(function ($data) use (&$n) {
             $id = $data->id;
