@@ -30,6 +30,8 @@ class RedirectLegacyMembersURLsToUPController extends BaseController
     public function redirectDrumeo($domain, $segment1 = null, $segment2 = null, $segment3 = null, $segment4 = null,
         $segment5 = null, $segment6 = null, $segment7 = null, $segment8 = null)
     {
+die("debug-beta-testing-drumeo");
+
         $userId = null;
         $authParams = null;
 
@@ -255,6 +257,7 @@ class RedirectLegacyMembersURLsToUPController extends BaseController
         $segment7 = null,
         $segment8 = null
     ) {
+die("debug-beta-testing-pianote");
         $userId = null;
         $authParams = null;
 
