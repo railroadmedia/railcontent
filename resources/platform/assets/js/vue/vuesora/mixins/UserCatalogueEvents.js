@@ -7,6 +7,7 @@ export default {
         // Used at the top level to emit the event with a payload
         addToList(e) {
             if (this.destroyOnListRemoval) {
+                // TODO: CONFIRM IF THIS PART CAN BE DELETED
                 Toasts.confirm({
                     title: 'Hold your horses… This will remove this lesson from your list, are you sure about this?',
                     submitButton: {
@@ -31,10 +32,16 @@ export default {
                     },
                 });
             } else {
+                const formattedFields = {};
+                this.item.fields.forEach((field) => {
+                    formattedFields[field.key] = field.value;
+                });
+
                 this.emitAddToList({
                     content_id: this.item.id,
                     type: e.currentTarget.getAttribute('data-content-type'),
                     is_added: this.item.is_added_to_primary_playlist || false,
+                    fields: formattedFields
                 });
             }
         },
@@ -49,7 +56,7 @@ export default {
                         icon.classList.remove('fa-undo');
                         icon.classList.add('fa-spin', 'fa-spinner');
 
-                        this.emitResetProgress({
+                        this.emitResetProgess({
                             content_id: this.item.id,
                             icon,
                         });
@@ -72,6 +79,7 @@ export default {
 
         // Used to handle the event when bussed to the top level parent
         addToListEventHandler(payload) {
+            console.log('add to list event handler', payload)
             window.openplaylistmodal({ modalType: 'addItem', content: payload });
         },
 
