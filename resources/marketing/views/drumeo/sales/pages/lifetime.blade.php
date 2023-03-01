@@ -468,7 +468,7 @@
 
     @include('_partials.components.video-modal',[
         'name' => 'trailer',
-        'video' => 'TODO',
+        'video' => '803596141',
         'vimeo' => true,
     ])
 
