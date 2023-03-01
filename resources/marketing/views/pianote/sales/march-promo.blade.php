@@ -185,7 +185,7 @@
             ],
         ];
     @endphp
-    <header class="pb-24 md:py-14 lg:py-20">
+    <header class="pb-24 md:py-14 lg:py-20" style="background-color:#F6F8FC;">
         <div class="max-w-4xl mx-auto text-center px-4">
             <img class="mt-14 md:mt-0 h-24 md:h-28 lg:h-32 mb-6" src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/anniversary/2023/logo.png" alt="Anniversary logo" />
             <h3 class="font-extrabold mb-2">Join Pianote + get $962 <br class="sm:hidden">in FREE bonuses!</h3>
