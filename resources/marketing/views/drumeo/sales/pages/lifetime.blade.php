@@ -110,7 +110,7 @@
 {{--                    </div>--}}
                 </div>
                 <div class="text-center">
-                    <a class="join smaller drumeo" href="TODO">Lifetime Membership &raquo</a>
+                    <a class="join smaller drumeo anchor-slide" href="#customize-anchor">Lifetime Membership &raquo</a>
                 </div>
                 <p class="leading-relaxed px-3 my-5 text-left text-light-navy" style="width: 100%;max-width: 650px;">
                     <em>“My soul is that of a drummer. I didn’t do it to become rich and famous. I did it because it was the love of my life.” – Ringo Starr</em>
