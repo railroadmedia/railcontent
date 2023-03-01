@@ -11,6 +11,8 @@ use App\Console\Commands\CreateSongsDecember2022;
 use App\Console\Commands\FixSongsTemp;
 use App\Console\Commands\MigratePianoteSongTutorial;
 use App\Console\Commands\RemoveTemporarySongsAccessForLifetimeMembersJanuary2023;
+use App\Console\Commands\RepairUserProgressOn30DD;
+use App\Console\Commands\RepairUserProgressOnNPPSH;
 use App\Console\Commands\SoftDeleteOldGuitareoSongs;
 use App\Console\Commands\SoftDeleteOldSingeoSongs;
 use App\Console\Commands\PopulateNewRolesAndPermissionsTables;
@@ -65,6 +67,8 @@ class Kernel extends ConsoleKernel
         RemoveTemporarySongsAccessForLifetimeMembersJanuary2023::class,
         MembershipFieldsSync::class,
         UpdateRoutinesFebruary2023::class,
+        RepairUserProgressOn30DD::class,
+        RepairUserProgressOnNPPSH::class,
     ];
 
     /**

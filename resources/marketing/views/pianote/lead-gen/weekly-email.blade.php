@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    {!! \App\Analytics\Tracker::headTop() !!}
+{{--    {!! \App\Analytics\Tracker::headTop() !!}--}}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=5">
 
@@ -124,14 +124,14 @@
     @include('_partials.layout._fonts')
     @include('_partials.layout.favicons.pianote-favicons')
 
-    {!! \App\Analytics\Tracker::trackPageView() !!}
+{{--    {!! \App\Analytics\Tracker::trackPageView() !!}--}}
 
-    {!! \App\Analytics\Tracker::headBottom() !!}
+{{--    {!! \App\Analytics\Tracker::headBottom() !!}--}}
 </head>
 
 <body>
 
-{!! \App\Analytics\Tracker::bodyTop() !!}
+{{--{!! \App\Analytics\Tracker::bodyTop() !!}--}}
 
 <section class="text-center absolute top-1/2 left-1/2 w-full px-5" style="transform:translate(-50%,-50%)">
     <h5 class="leading-normal mb-3 md:mb-4">
@@ -157,7 +157,7 @@
     </div>
 </section>
 
-{!! \App\Analytics\Tracker::bodyBottom() !!}
+{{--{!! \App\Analytics\Tracker::bodyBottom() !!}--}}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>

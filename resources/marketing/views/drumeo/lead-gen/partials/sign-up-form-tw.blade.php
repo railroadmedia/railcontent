@@ -52,7 +52,7 @@
 
 <div class="thank-you-box w-full rounded-lg mx-auto bg-white text-center text-black max-w-2xl">
     <p><strong><i class="fas fa-check"></i> Success!</strong></p>
-    <h2 class="text-guitareo my-4 md:my-5"><strong>@if(!empty($headline)) {{ $headline }} @else CHECK YOUR EMAIL @endif</strong></h2>
+    <h2 class="text-drumeo my-4 md:my-5"><strong>@if(!empty($headline)) {{ $headline }} @else CHECK YOUR EMAIL @endif</strong></h2>
     <p>
         <em>
             @if(!empty($body)) {{ $body }} @else You should receive an email from team@drumeo.com within 10 minutes.

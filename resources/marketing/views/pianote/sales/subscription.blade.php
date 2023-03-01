@@ -112,13 +112,13 @@
 
 @section('global-body')
     @if(!empty($promoVersion))
-        @include("pianote._partials._nav", [
+        @include("pianote.sales.partials._nav", [
             "subscriptionVersion" => true,
             "scrollToJoin" => true,
             "hideMenu" => true,
         ])
     @elseif(!empty($month))
-        @include("pianote._partials._nav", [
+        @include("pianote.sales.partials._nav", [
             "subscriptionVersion" => true,
             "fullSubscriptionVersion" => true,
             "trialVersion" => true,
@@ -126,18 +126,12 @@
         ])
 
     @else
-        @include("pianote._partials._nav", [
+        @include("pianote.sales.partials._nav", [
             "subscriptionVersion" => true,
             "fullSubscriptionVersion" => true,
             "trialVersion" => true,
             "joinUrl" => '/choose-plan',
         ])
-        <a href="/new-piano-players" class="flex items-center justify-center py-2 px-2 sm:px-0 w-full z-[100]" style="background: linear-gradient(180deg, #EBF0FF 0%, #DEE6FF 100%);">
-            <img class="h-8 sm:h-10 mr-4" src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/new-piano-players-start-here-logo-2+1.png" alt="30 day drummer logo" />
-            <p class="text-sm sm:text-lg font-bebas uppercase mx-0 leading-tight">
-                Enrollment is open | February 27 - March 28 <span class="hidden sm:inline">|</span> <br class="sm:hidden"><span class="text-pianote underline">Click here to join.</span>
-            </p>
-        </a>
     @endif
 
     @php
@@ -185,18 +179,20 @@
         ];
     @endphp
 
-    @include('musora.sales.components.header-section', [
-        'header' => 'Online piano lessons for all skill levels.',
-        'desc' => 'Learn the piano faster with step-by-step lessons, a thousand songs, and unlimited personal support. ',
-        'thumb' => 'https://pianote.s3.amazonaws.com/sales/2023/header-thumb2.jpg',
-        'promoThumb' => 'https://pianote.s3.amazonaws.com/sales/2023/jan-thumb2.png',
-        'promoThumbM' => 'https://pianote.s3.amazonaws.com/sales/2023/jan-thumb-m2.jpg',
-        'pointOne' => 'Improve Your Skills',
-        'pointTwo' => 'World-Class Teachers',
-        'pointThree' => 'Play More<br class="inline lg:hidden"> Songs',
-        'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Pianote+Membership/79348450',
-        'students' => number_format(Prices::$students),
-    ])
+    @if(empty($hideHeader) || !$hideHeader)
+        @include('musora.sales.components.header-section', [
+            'header' => 'Online piano lessons for all skill levels.',
+            'desc' => 'Learn the piano faster with step-by-step lessons, a thousand songs, and unlimited personal support. ',
+            'thumb' => 'https://pianote.s3.amazonaws.com/sales/2023/header-thumb2.jpg',
+            'promoThumb' => 'https://pianote.s3.amazonaws.com/sales/2023/jan-thumb2.png',
+            'promoThumbM' => 'https://pianote.s3.amazonaws.com/sales/2023/jan-thumb-m2.jpg',
+            'pointOne' => 'Improve Your Skills',
+            'pointTwo' => 'World-Class Teachers',
+            'pointThree' => 'Play More<br class="inline lg:hidden"> Songs',
+            'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Pianote+Membership/79348450',
+            'students' => number_format(Prices::$students),
+        ])
+    @endif
 
     @hasSection('promo-banner')
         @yield('promo-banner')
@@ -566,8 +562,6 @@
         @endphp
         @include('musora.sales.components.order-section-bonuses', [
         'topImage' => 'https://pianote.s3.amazonaws.com/sales/2023/pianote-annual-2w-card.png',
-        'promoLogo' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs.svg',
-       'promoLogoM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs-m.png',
         'header' => 'Online piano lessons for all skill levels.',
         'subDescription' => 'Save 17% + get 4 bonuses<br class="inline sm:hidden"> worth $357',
         'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[piano-chords-and-scales-guide]=1&products[piano-technique-made-easy]=1&products[piano-riffs-and-fills]=1&products[faster-fingers]=1&redirect=/order&locked=true',
@@ -592,26 +586,28 @@
 
     @include('pianote._partials.faq')
 
-    @include('_partials.components.soundslice-modal',[
+    @include('_partials.components.video-modal',[
         'name' => 'soundslice',
         'video' => '77f4c',
-        'slices' => true,
+        'soundslice' => true,
     ])
     @include('_partials.components.video-modal',[
         'name' => 'trailer',
-        'video' => '785314388'
+        'video' => '785314388',
+        'vimeo' => true,
     ])
     @include('_partials.components.video-modal',[
         'name' => 'unbox',
-        'video' => '774408046'
+        'video' => '774408046',
+        'vimeo' => true,
     ])
 
     @if(!empty($promoVersion))
-        @include("pianote._partials._footer", [
+        @include("pianote.sales.partials._footer", [
             "minimal" => true
         ])
     @else
-        @include("pianote._partials._footer")
+        @include("pianote.sales.partials._footer")
     @endif
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
