@@ -14,6 +14,7 @@ Route::domain('{pianoteDomain}')
     Route::get('/student-only', [SalesController::class, 'promo'] );
     Route::get('/choose-plan', [SalesController::class, 'choosePlan'] );
     Route::get('/choose-your-trial', [SalesController::class, 'choosePlan'] );
+//    Route::get('/anniversary-bundle', [SalesController::class, 'anniversary'] );
 
     Route::get('/choose-your-trial-month', [SalesController::class, 'choosePlanMonth'] );
     Route::get('/affiliate-trial', [SalesController::class, 'choosePlanMonth'] );
@@ -39,12 +40,12 @@ Route::domain('{pianoteDomain}')
     Route::get('/terms', [SalesController::class, 'terms'] );
     Route::get('/cookie', [SalesController::class, 'cookie'] );
 
-        Route::get('/method', [SalesController::class, 'method'] );
-        Route::get('/songs', [SalesController::class, 'songs'] );
-        Route::get('/coaches', [SalesController::class, 'coaches'] );
+    Route::get('/method', [SalesController::class, 'method'] );
+    Route::get('/songs', [SalesController::class, 'songs'] );
+    Route::get('/coaches', [SalesController::class, 'coaches'] );
 
 
-        Route::get('/shop/improvisation-with-jesus-molina', [SalesController::class, 'jesusMolina'] );
+    Route::get('/shop/improvisation-with-jesus-molina', [SalesController::class, 'jesusMolina'] );
     Route::get('/roland', [SalesController::class, 'roland'] );
     Route::get('/shop/500-songs', [SalesController::class, 'songs500'] );
     Route::get('/the-power-of-chords', [SalesController::class, 'PowerOfChords'] );
@@ -55,6 +56,7 @@ Route::domain('{pianoteDomain}')
     Route::get('/new-piano-players', [SalesController::class, 'newPianoPlayers'] );
     Route::get('/shop/new-piano-players', [SalesController::class, 'newPianoPlayers'] );
     Route::get('/new-piano-players/deal', [SalesController::class, 'newPianoPlayersDeal'] );
+    Route::get('/concert-headphones-members', [SalesController::class, 'concertHeadphonesMember']);
 
     Route::get('/about', [SalesController::class, 'about'] );
     Route::get('/app', [SalesController::class, 'app'] );
@@ -74,5 +76,4 @@ Route::domain('{pianoteDomain}')
     Route::get('/lisa-recommends', [SalesController::class, 'lisarecommends'] );
     Route::get('/welcome-party', [SalesController::class, 'welcomeparty'] );
     Route::post('/claim-roland-90-day-access', [SalesController::class, 'claimRoland90DaysAccess'] );
-
 });

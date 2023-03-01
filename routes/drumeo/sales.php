@@ -13,12 +13,13 @@ Route::domain('{drumeoDomain}')
     Route::get('/', [SalesController::class, 'home'] );
     Route::get('/new-year', [SalesController::class, 'promo'] );
     Route::get('/lp', [SalesController::class, 'promo'] );
-        Route::get('/beginner', [SalesController::class, 'promo']);
+    Route::get('/beginner', [SalesController::class, 'promo']);
     Route::get('/choose-plan', [SalesController::class, 'choosePlan'] );
     Route::get('/student-only', [SalesController::class, 'promo'] );
     Route::get('/upgrade-offer', [SalesController::class, 'salesUpgrade'] );
     Route::get('/lifetime', [SalesController::class, 'salesUpgradeLifetime'] );
     Route::get('/festival/', [SalesController::class, 'Festival'] );
+//    Route::get('/anniversary', [SalesController::class, 'anniversary'] );
 
     //    sales pages
     Route::get('/method', [SalesController::class, 'method'] );
