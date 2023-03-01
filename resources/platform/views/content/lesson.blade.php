@@ -248,11 +248,38 @@
                                 $content['position'] = $index;
                                 $formattedAssignments[] = $content;
                             }
+                            // Breadcrumbs
+                            $breadcrumbArray = [];
+                            if($lessonType === 'unit-part') {
+                                $breadcrumbArray = [$firstContent->fetch('fields.title'), $parent->fetch('fields.title')];
+                            } elseif($lessonType === 'learning-path-lesson') {
+                                $breadcrumbArray = [$brand.' Method', $parent->fetch('fields.title')];
+                            } elseif($lessonType === 'coach-stream') {
+                                $breadcrumbArray = ['Coaches', !empty($coach->fetch('fields.title')) ? $coach->fetch('fields.title') : $coach->fetch('fields.name')];
+                            } elseif(!empty($pack)) {
+                                if($theme ?? '' === 'made-easy' || $pack->fetch('bundle_count') <= 1) {
+                                    $breadcrumbArray = ['Packs', $pack->fetch('fields.title')];
+                                } else {
+                                    $breadcrumbArray = ['Packs',$pack->fetch('fields.title'), $parent->fetch('fields.title')];
+                                } 
+                            } else {
+                                if(isset($parent)) {
+                                    if($parent->fetch('type') === 'pack-bundle') {
+                                        $breadcrumbArray = ['Packs',$pack->fetch('fields.title')];
+                                    } else {
+                                        $breadcrumbArray = [parse_lesson_type_readable($parent->fetch('type'), true), $parent->fetch('fields.title')];
+                                    }
+                                } else {
+                                    $breadcrumbArray = [parse_lesson_type_readable($lessonContent->fetch('type'), true)];
+                                }
+                            }    
+                            
                         @endphp
                         <div class="tw-flex tw-flex-row tw-w-full">
                             <assignments-container 
-                                :lesson-thumbnail="{{ $lessonContent['video_poster_image_url'] ?? '' }}"
+                                :lesson-data="{{ json_encode($lessonContent['data']) }}"
                                 :assignments="{{ json_encode($formattedAssignments) }}"
+                                :breadcrumb-array="{{ json_encode($breadcrumbArray) }}"
                             >
                                 <template slot="completion-bonus">
                                     @include('partials.bladesora.members.partials._completion-bonus', [

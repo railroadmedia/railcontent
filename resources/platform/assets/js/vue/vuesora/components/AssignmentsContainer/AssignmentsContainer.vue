@@ -4,6 +4,7 @@
             <div class="flex flex-column grow tw-w-full">
                 <ContentAssignment
                     :lesson-thumbnail="lessonThumbnail"
+                    :breadcrumb-array="breadcrumbs"
                     :theme-color="assignment.themeColor"
                     :brand="assignment.themeColor"
                     :timecode="assignment.timecode"
@@ -40,9 +41,12 @@ export default {
             type: Array,
             default: () => [],
         },
-        lessonThumbnail: {
-            type: String,
-            default: "",
+        lessonData: {
+            type: Object,
+        },
+        breadcrumbArray: {
+            type: Array,
+            defualt: []
         }
     },
     data() {
@@ -50,5 +54,20 @@ export default {
             forceIndex: null,
         };
     },
+    mounted() {
+
+    },
+    computed: {
+        //Thumbnail
+        lessonThumbnail() {
+            const thumbnail = this.lessonData.find(data => data.key === 'thumbnail_url');
+            return thumbnail.value;
+        },
+        breadcrumbs() {
+            const breadcrumbs = this.breadcrumbArray.join(' • ');
+            return breadcrumbs;
+        }
+    }
+
 };
 </script>

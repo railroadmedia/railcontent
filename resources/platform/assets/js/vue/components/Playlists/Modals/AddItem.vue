@@ -109,6 +109,7 @@ const handleCreate = () => {
 }
 
 onMounted(() => {
+    console.log('add to list content ', props.content)
     isLoadingPlaylists.value = true;
 
     if(props.content) {

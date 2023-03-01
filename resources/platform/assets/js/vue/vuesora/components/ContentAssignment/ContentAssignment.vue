@@ -51,7 +51,7 @@
                     <button v-if="soundsliceSlug"
                             title="Add To Playlist" 
                             class="tw-btn-secondary tw-btn-circle dark:tw-text-white tw-text-[#00101D]"
-                            @click.stop.prevent="addToPlaylist({ id: id, type: 'Assignments', name: ['Courses', 'Lesson'], description: title, thumbnail_url: lessonThumbnail })"
+                            @click.stop.prevent="addToPlaylist({ id: id, type: 'Assignments', name: breadcrumbArray, description: title, thumbnail_url: lessonThumbnail })"
                     >
                         <musora-icon icon-name="plus" class="tw-h-7 tw-w-7" />
                     </button>
@@ -142,6 +142,10 @@ export default {
         SoundSliceControls,
     },
     props: {
+        breadcrumbArray: {
+            type: Array,
+            default: [],
+        },
         lessonThumbnail: {
             type: String,
             default: () => '',
@@ -331,6 +335,7 @@ export default {
         },
     },
     mounted() {
+        console.log('thumb prop', this.lessonThumbnail);
         if (this.position < 3) {
             this.openAssignment();
         }
@@ -344,6 +349,7 @@ export default {
     },
     methods: {
         addToPlaylist(data) {
+            console.log(data)
             window.openplaylistmodal({ modalType: 'addItem', content: data });
         },
 

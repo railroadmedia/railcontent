@@ -251,11 +251,18 @@
             <div class="tw-truncate tw-w-full lg:tw-w-[calc(100%-350px)] tw-px-3 lg:tw-pl-[15px]">
                 <!--name-->
                 <p class="tw-truncate">
-                    <span class="tw-uppercase tw-mr-1 tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-sm"
-                            v-for="(instructor, i) in lesson.instructors"
-                            :key="i">
-                            {{ instructor }}<span v-if="i != (lesson.instructors.length - 1)">,</span>
-                    </span>
+                    <template v-if="lesson.type !== 'Assignments'">
+                        <span class="tw-uppercase tw-mr-1 tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-sm"
+                                v-for="(instructor, i) in lesson.instructors"
+                                :key="i">
+                                {{ instructor }}<span v-if="i != (lesson.instructors.length - 1)">,</span>
+                        </span>
+                    </template>
+                    <template v-else>
+                        <span class="tw-uppercase tw-mr-1 tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-sm">
+                            {{ lesson.instructors }}
+                        </span>
+                    </template>
                 </p>
                 <!-- description -->
                 <p class="tw-font-bold tw-truncate">{{ lessonDescription }}</p>
