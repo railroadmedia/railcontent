@@ -4,6 +4,7 @@ namespace App\Modules\Content\Providers;
 
 use App\Modules\Content\Console\Commands\CoachBulkDataUpdate;
 use App\Modules\Content\Console\Commands\CoachBulkImageUpdate;
+use App\Modules\Content\Console\Commands\FixProgressOnUnpublishedContent;
 use App\Modules\Content\Console\Commands\RebuildSearchIndexes;
 use App\Modules\Content\Models\ContentField;
 use App\Modules\Content\Observers\ContentFieldObserver;
@@ -26,7 +27,8 @@ class ContentServiceProvider extends ServiceProvider
         $this->commands([
             CoachBulkDataUpdate::class,
             CoachBulkImageUpdate::class,
-            RebuildSearchIndexes::class
+            RebuildSearchIndexes::class,
+            FixProgressOnUnpublishedContent::class,
         ]);
     }
 }

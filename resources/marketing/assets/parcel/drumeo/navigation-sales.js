@@ -77,17 +77,6 @@ $(document).ready(function (){
         }, 1000);
     });
 
-    $(".infusion-form").submit(function(event) {
-        if(event.originalEvent != null) {
-            var formId = $(this).find("input[name='inf_form_xid']").val();
-
-            dataLayer.push({
-                "event": "gtm.formSubmit",
-                "formId": formId,
-                "formSuccess": true
-            });
-        }
-    });
     $(".ajax-form").submit(function(e) {
         e.preventDefault();
 
@@ -126,5 +115,15 @@ $(document).ready(function (){
                 fail.removeClass("hide hidden");
             }
         });
+
+        if(e.originalEvent != null) {
+            var formId = $(this).find("input[name='inf_form_xid']").val();
+
+            dataLayer.push({
+                "event": "gtm.formSubmit",
+                "formId": formId,
+                "formSuccess": true
+            });
+        }
     });
 });
