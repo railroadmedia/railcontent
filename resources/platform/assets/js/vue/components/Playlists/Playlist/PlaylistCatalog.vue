@@ -38,27 +38,11 @@
     const playlistsStore = usePlaylistsStore();
 
     //Methods
-    // const handlePageChange = (pageNumber) => {
-    //     //load playlists
-    //     playlistsStore.loadingPlaylists = true;
-    //     playlistsStore.getPlaylists({ brand: props.brand, page: pageNumber, limit: 10 }, token);
-    //     //update current page number 
-    //     playlistsStore.resultsPage = pageNumber;
-    //     //update url
-    //     let url = new URL(window.location.href);
-    //     url.searchParams.set('page', pageNumber)
-    //     window.history.pushState({}, '', url);
-    // }
+
 
     //Lifecycle Hooks
     onMounted(()=> {
-        //load Playlists
-        // if(props.playlistCount <= 10 && props.lessons.length <= 10) {
-        //     playlistsStore.playlists = props.lessons;
-        // } else {
-        //     playlistsStore.loadingPlaylists = true;
-        //     playlistsStore.getPlaylists({ brand: brand, page: 1, limit: null }, token); 
-        // }
+
     })
 
     onBeforeMount(() => {      
@@ -99,11 +83,11 @@
                 <playlist-card 
                     v-for="(lesson,i) in lessons.data" 
                     :key="i" 
+                    :index="i"
                     :lesson="lesson"
                     :token="token"
                     :brand="brand"
                 />  
-                  
             </section>
 
         </div>      

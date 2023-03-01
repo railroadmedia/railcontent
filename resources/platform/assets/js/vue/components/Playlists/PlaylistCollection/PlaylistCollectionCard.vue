@@ -2,6 +2,7 @@
     import { onBeforeMount, watch, ref, inject, computed, reactive } from 'vue';
     import MusoraIcon from '../../MusoraIcons/MusoraIcon.vue';
     import PlaylistService from '../../../../services/playlists.js';
+    import PlaylistDropdown from '../PlaylistDropdown.vue';
     import { usePlaylistsStore } from '../../../../stores/playlists';
 
     //-----------Props-----------//
@@ -41,130 +42,40 @@
             isPrivate: false,
         });
 
+    //static data
+    const dropdownOptions = [
+        {
+            name: "Share",
+            action: "sharePlaylist"
+        },
+        {
+            name: "Edit",
+            action: "editPlaylist"
+        },
+        {
+            name: "Delete",
+            action: "deletePlaylist"
+        },
+        {
+            name: "Duplicate",
+            action: "duplicatePlaylist"
+        },
+        {
+            name: "Pin To Sidebar",
+            action: "pinPlaylist"
+        },
+        {
+            name: "Private",
+            action: "privateToggle"
+        },
+    ]
+
     //-----------Watchers-----------//
     watch(props.list, async (newList) => {
         state.isPinned = newList.pinned;
     })
 
     //-----------Methods-----------//
-
-    //Handle Share
-    const shareHandler = () => {
-        navigator.clipboard.writeText(props.list.url)
-        window.shownotification({
-            icon: 'fa-link',
-            text: `${ props.list.name } link copied to clipboard.`
-        })
-        //close after click
-        state.dropdownOpen = false;
-    };
-
-    const privateToggleHandler = () => {
-        state.isPrivate = !state.isPrivate;
-        let isPrivate = props.list.private === 1 ? true : false;
-        PlaylistService.setToPrivate(props.list.id, isPrivate, token)
-            .then((response) => {
-                if(response.status === 201) {
-                    //show success message
-                    window.shownotification({
-                        icon: `${props.list.private === 1 ? 'fa-lock-open' : 'fa-lock'}.`,
-                        text: `Your playlist is now ${props.list.private === 0 ? 'private' : 'public'}.`
-                    })
-                }
-            })
-            .catch(function (error) {
-                if (error.response) {
-                    //undo private/public change
-                    state.isPrivate = !state.isPrivate;
-                    window.shownotification({
-                        icon: 'error',
-                        text: 'Woops! Something wrong happened, please try again later.'
-                    })
-                }
-            });
-        //close
-        state.dropdownOpen = false;
-    }
-
-    //Handle Pin/Unpin Request
-    const pinHandler = (id, brand) => {
-        if(!props.list.pinned) { //PIN
-            if(playlistsStore.pinnedPlaylists.length !== 5) {
-                state.isPinned = true;
-                PlaylistService.pinPlaylist(id, brand, token)
-                    .then((response) => {
-                        if(response.status === 200) { 
-                            //emit event or update pinia
-                            playlistsStore.pinPlaylist(props.list)
-                            //show success message
-                            window.shownotification({
-                                icon: 'playlist',
-                                text: `'${props.list.name}' has been pinned within the sidebar.`
-                            })
-                        }
-                    })
-                    .catch(function (error) {
-                        if (error.response) {
-                            //handle error
-                            window.shownotification({
-                                icon: 'error',
-                                text: 'Woops! Something wrong happened, please try again later.'
-                            })
-                        }
-                    });
-            } else {
-                //Too Many Playlists
-                window.openplaylistmodal({ modalType: 'unpinPlaylists', data: props.list });
-                state.dropdownOpen = false;
-            }
-        } else { //UNPIN
-            state.isPinned = false;
-            PlaylistService.unpinPlaylist(id, brand, token)
-                .then((response) => {
-                    if(response.status === 200) { 
-                        //emit event or update pinia
-                        playlistsStore.unpinPlaylist(props.list.id)
-                        //show success message
-                        window.shownotification({
-                            icon: 'playlist',
-                            text: `'${props.list.name}' has been unpinned from the sidebar.`
-                        })
-                    }
-                })
-                .catch(function (error) {
-                    if (error.response) {
-                        //handle error
-                        
-                        window.shownotification({
-                            icon: 'error',
-                            text: 'Woops! Something wrong happened, please try again later.'
-                        })
-                    }
-                });
-        }
-        //close after click
-        state.dropdownOpen = false;
-    }
-
-    const duplicatePlaylistHandler = () => {
-        window.openplaylistmodal({ modalType: 'duplicate', data: props.list });
-        state.dropdownOpen = false;
-    };
-
-    const deletePlaylistHandler = () => {
-        window.openplaylistmodal({ modalType: 'remove', data: props.list });
-        state.dropdownOpen = false;
-    };
-
-    const editPlaylistHandler = () => {
-        window.openplaylistmodal({ modalType: 'edit', data: props.list });
-        state.dropdownOpen = false;
-    };
-
-    const unpinPlaylistModalHandler = () => {
-        window.openplaylistmodal({ modalType: 'unpinPlaylists' });
-        state.dropdownOpen = false;
-    };
 
     //Check Dropdown Distance
     const GetElementDistance = el => {
@@ -191,8 +102,6 @@
         state.isPrivate = props.list.private; 
     }); 
     
-    
-
 </script>
 <template>
     <div class="tw-group tw-relative" 
@@ -295,62 +204,17 @@
                     </svg>
                 </button>
                 <!-- Dropdown-->
-                <div v-if="state.dropdownOpen" 
-                     class="tw-w-[162px] tw-shadow tw-rounded tw-bg-white tw-text-black dark:tw-bg-[#081825] dark:tw-text-white tw-absolute tw-right-0 tw-py-2 tw-z-50"
-                     :class="state.dropdownTop ? 'tw-bottom-[100%]' : 'tw-top-[100%]'"
-                >
-                    <span class="tw-absolute tw-w-3 tw-h-3 tw-bg-white dark:tw-bg-[#081825] tw-rotate-45 tw-right-[11px]" :class="state.dropdownTop ? 'tw-bottom-[-4px]' : 'tw-top-[-4px]' "></span>
-                    <ul class="tw-text-sm tw-w-full">
-                        <li class="tw-w-full tw-flex" v-if="!list.private || !state.isPrivate">
-                            <button class="tw-flex tw-w-full tw-itemx-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-black/20"
-                                    @click.prevent="shareHandler()"
-                            >Share</button>
-                        </li>
-                        <li class="tw-w-full tw-flex">
-                            <button class="tw-flex tw-w-full tw-itemx-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-black/20"
-                                    @click.prevent="editPlaylistHandler()"
-                            >
-                                Edit
-                            </button>
-                        </li>
-                        <li class="tw-w-full tw-flex">
-                            <button class="tw-flex tw-w-full tw-itemx-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-black/20"
-                                    @click.prevent="deletePlaylistHandler()"
-                            >
-                                Delete
-                            </button>
-                        </li>
-                        <li class="tw-w-full tw-flex">
-                            <button class="tw-flex tw-w-full tw-itemx-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-black/20"
-                                    @click.prevent="duplicatePlaylistHandler()"
-                            >
-                                Duplicate
-                            </button>
-                        </li>
-                        <li class="tw-w-full tw-flex">
-                            <button class="tw-flex tw-w-full tw-itemx-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-black/20"
-                                    @click.prevent="pinHandler(list.id)"
-                            >
-                                {{ state.isPinned ? 'Unpin from Sidebar' : 'Pin to Sidebar' }} 
-                            </button>
-                        </li>
-                        <!-- If not public -->
-                        <li class="tw-w-full tw-w-full tw-flex">
-                            <button class="tw-relative tw-cursor-pointer tw-flex tw-w-full tw-items-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-black/20"
-                                    @click.prevent="privateToggleHandler()"
-                            >
-                                {{ state.isPrivate ? 'Private' : 'Public' }} 
-                                <!-- Toggle -->
-                                <div class="tw-relative tw-inline-flex tw-ml-auto tw-w-[27px] tw-h-[12px] tw-rounded-xl tw-bg-[#445F74]">
-                                    <div class="tw-rounded-full tw-h-[15px] tw-w-[15px] tw-bg-white tw-flex-inline tw-items-center tw-justify-center tw-shadow tw-absolute tw-top-[-1.5px] tw-transition"
-                                         :class="state.isPrivate ? 'tw-left-[-1px]': 'tw-right-[-1px]' "
-                                    >
-                                    </div>
-                                </div>
-                            </button>
-                        </li>
-                    </ul>
-                </div>
+                <PlaylistDropdown
+                    :brand="brand"
+                    :dropdownTop="state.dropdownTop"
+                    :is-private="state.isPrivate"
+                    :dropdownOptions="dropdownOptions"
+                    :data="list"
+                    :is-open="state.dropdownOpen"
+                    type="playlist"
+                    @closeDropdown="state.dropdownOpen = false"
+                    @pinItem="(val) => state.isPinned = val"
+                />
             </div>
         </div>
     </div>

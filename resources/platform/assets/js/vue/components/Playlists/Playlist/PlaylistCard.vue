@@ -2,6 +2,7 @@
     import { onBeforeMount, watch, ref, inject, computed, reactive } from 'vue';
     import MusoraIcon from '../../MusoraIcons/MusoraIcon.vue';
     import PlaylistService from '../../../../services/playlists.js';
+    import PlaylistDropdown from '../PlaylistDropdown.vue';
     import { usePlaylistsStore } from '../../../../stores/playlists';
 
     //-----------Props-----------//
@@ -14,6 +15,9 @@
             type: Object,
             default: {}
         },
+        index: {
+            type: Number,
+        },
         isListView: {
             type: Boolean,
             default: true,
@@ -21,6 +25,7 @@
     });
 
     //-----------Computed Props-----------//
+    
     const duration_formated = computed(()=> {
         return props.lesson.created_on.replace(/^0(?:0:0?)?/, '');;
     })
@@ -36,16 +41,15 @@
     })
     //Duration
     const duration = computed( () => {
-        let seconds = props.lesson.duration;
-            //props.lesson.fields.find(field => field.key === 'length_in_seconds');
-        const hrs = Math.floor(seconds/60/60);
-        const min = Math.floor(seconds/60);
-        const sec = Math.floor(seconds - (hrs*3600) - (min*60));
+        let time = props.lesson.duration;
+        const hrs = Math.floor(time / 3600);
+        const min = Math.floor(time / 60);
+        const sec = time - min * 60;
+        const hrsFormatted = hrs < 10 ? `0${hrs}` : hrs;
         const minFormatted = min < 10 ? `0${min}` : min;
         const secFormatted = sec < 10 ? `0${sec}` : sec;
-        return `${hrs}:${minFormatted}:${secFormatted}`;
+        return `${hrsFormatted}:${minFormatted}:${secFormatted}`;
     })
-
 
     //-----------Refs-----------//
     const dropdownTarget = ref(null)
@@ -59,14 +63,24 @@
     const state = reactive({
         dropdownOpen: false,
         dropdownTop: false,
-        isPinned: false,
-        isPrivate: false,
     });
 
-    //-----------Watchers-----------//
-    watch(props.lesson, async (newList) => {
-        state.isPinned = newList.pinned;
-    })
+    //-----------Static Data-----------//
+    const dropdownOptions = [
+        {
+            name: "Remove",
+            action: "removeLesson"
+        },
+        {
+            name: "Add to List",
+            action: "addToPlaylist"
+        },
+        {
+            name: "Start/End Time",
+            action: "editLessonTime"
+        }
+    ]
+
 
     //-----------Methods-----------//
 
@@ -212,7 +226,7 @@
         state.isPinned = props.lesson.pinned;
         state.isPrivate = props.lesson.private;
 
-        console.log('lesson', props.lesson)
+        // console.log('lesson', props.lesson)
     });
 
 
@@ -225,7 +239,7 @@
         <a  :href="lesson.url"
             class="tw-inline-flex tw-items-center tw-flex tw-w-[calc(100%-100px)] tw-text-[#0D0D0D] dark:tw-text-white"
         >
-            <div class="tw-inline-flex tw-shrink-0 tw-w-[40px] tw-pl-4"></div>
+            <div class="tw-inline-flex tw-items-center tw-font-bold tw-shrink-0 tw-w-[40px] tw-pl-4">{{ props.index + 1 }}</div>
 
             <!-- Playlist thumbnail -->
             <div class="tw-relative tw-inline-flex tw-overflow-hidden tw-bg-white dark:tw-bg-[#081825] tw-h-[61px] tw-w-[110px] tw-rounded tw-shrink-0">
@@ -277,62 +291,16 @@
                     </svg>
                 </button>
                 <!-- Dropdown-->
-                <div v-if="state.dropdownOpen"
-                     class="tw-w-[162px] tw-shadow tw-rounded tw-bg-white tw-text-black dark:tw-bg-[#081825] dark:tw-text-white tw-absolute tw-right-0 tw-py-2 tw-z-50"
-                     :class="state.dropdownTop ? 'tw-bottom-[100%]' : 'tw-top-[100%]'"
-                >
-                    <span class="tw-absolute tw-w-3 tw-h-3 tw-bg-white dark:tw-bg-[#081825] tw-rotate-45 tw-right-[11px]" :class="state.dropdownTop ? 'tw-bottom-[-4px]' : 'tw-top-[-4px]' "></span>
-                    <ul class="tw-text-sm tw-w-full">
-                        <li class="tw-w-full tw-flex" v-if="!lesson.private || !state.isPrivate">
-                            <button class="tw-flex tw-w-full tw-itemx-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-black/20"
-                                    @click.prevent="shareHandler()"
-                            >Share</button>
-                        </li>
-                        <li class="tw-w-full tw-flex">
-                            <button class="tw-flex tw-w-full tw-itemx-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-black/20"
-                                    @click.prevent="editPlaylistHandler()"
-                            >
-                                Edit
-                            </button>
-                        </li>
-                        <li class="tw-w-full tw-flex">
-                            <button class="tw-flex tw-w-full tw-itemx-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-black/20"
-                                    @click.prevent="deletePlaylistHandler()"
-                            >
-                                Delete
-                            </button>
-                        </li>
-                        <li class="tw-w-full tw-flex">
-                            <button class="tw-flex tw-w-full tw-itemx-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-black/20"
-                                    @click.prevent="duplicatePlaylistHandler()"
-                            >
-                                Duplicate
-                            </button>
-                        </li>
-                        <li class="tw-w-full tw-flex">
-                            <button class="tw-flex tw-w-full tw-itemx-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-black/20"
-                                    @click.prevent="pinHandler(lesson.id)"
-                            >
-                                {{ state.isPinned ? 'Unpin from Sidebar' : 'Pin to Sidebar' }}
-                            </button>
-                        </li>
-                        <!-- If not public -->
-                        <li class="tw-w-full tw-w-full tw-flex">
-                            <button class="tw-relative tw-cursor-pointer tw-flex tw-w-full tw-items-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-black/20"
-                                    @click.prevent="privateToggleHandler()"
-                            >
-                                {{ state.isPrivate ? 'Private' : 'Public' }}
-                                <!-- Toggle -->
-                                <div class="tw-relative tw-inline-flex tw-ml-auto tw-w-[27px] tw-h-[12px] tw-rounded-xl tw-bg-[#445F74]">
-                                    <div class="tw-rounded-full tw-h-[15px] tw-w-[15px] tw-bg-white tw-flex-inline tw-items-center tw-justify-center tw-shadow tw-absolute tw-top-[-1.5px] tw-transition"
-                                         :class="state.isPrivate ? 'tw-left-[-1px]': 'tw-right-[-1px]' "
-                                    >
-                                    </div>
-                                </div>
-                            </button>
-                        </li>
-                    </ul>
-                </div>
+                <PlaylistDropdown
+                    :brand="brand"
+                    :dropdownTop="state.dropdownTop"
+                    :is-open="state.dropdownOpen"
+                    :dropdownOptions="dropdownOptions"
+                    :data="lesson"
+                    type="lesson"
+                    @closeDropdown="state.dropdownOpen = false"
+                    @pinItem="(val) => state.isPinned = val"
+                />
             </div>
         </div>
     </div>

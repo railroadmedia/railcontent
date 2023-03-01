@@ -43,6 +43,25 @@ export default {
         });
     },
 
+    /**
+     * Like Playlist
+     *
+     * @param {string} token
+     * @param {object} payload -
+     */
+        likePlaylist(payload, token) {
+            const headers = {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': token
+            };
+            return axios({
+                method: 'PUT',
+                url: '/railcontent/like-playlist',
+                data: payload,
+                headers
+            });
+        },
+
     //-------------READ--------------//
 
     /**
