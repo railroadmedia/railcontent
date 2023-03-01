@@ -70,6 +70,8 @@ class RouteServiceProvider extends ServiceProvider
             Route::group([], base_path('routes/musora/platform/home.php'));
             Route::group([], base_path('routes/musora/platform/search.php'));
 
+            Route::group([], base_path('routes/misc/legacy_brand_members_redirects_to_up.php'));
+
             Route::group([], base_path('routes/drumeo/sales.php'));
             Route::group([], base_path('routes/drumeo/shop.php'));
             Route::group([], base_path('routes/drumeo/lead-gen.php'));
@@ -87,8 +89,6 @@ class RouteServiceProvider extends ServiceProvider
             Route::group([], base_path('routes/singeo/lead-gen.php'));
 
             Route::group([], base_path('routes/misc/http_error_code_routes.php'));
-
-            Route::group([], base_path('routes/misc/legacy_brand_members_redirects_to_up.php'));
         });
     }
 }

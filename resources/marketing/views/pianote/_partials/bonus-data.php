@@ -1,0 +1,107 @@
+<?php
+
+$bonuses = [
+    [
+        'image' => 'https://pianote.s3.amazonaws.com/shop/card-thumbs/headphones-cart.jpg',
+        'title' => 'Pianote Headphones',
+        'description' => 'Hear your piano the way it was meant to sound.',
+        'price' => floatval($productPrices['pianote-headphones']->price),
+        'shipping' => true,
+    ],
+    [
+        'image' => 'https://pianote.s3.amazonaws.com/sales/promos/may/Pianote_Planner_Card.jpg',
+        'title' => 'Practice Planner',
+        'description' => 'Always know exactly what to practice.',
+        'price' => floatval($productPrices['pianote-practice-planner']->price),
+        'shipping' => true,
+    ],
+    [
+        'image' => 'https://pianote.s3.amazonaws.com/sales/2022/bonus-chords-scales.jpg',
+        'title' => 'Chords & <br>Scales Book',
+        'description' => 'Your encyclopedia of piano chords & scales.',
+        'price' => floatval($productPrices['piano-chords-and-scales-guide']->price),
+        'shipping' => true,
+    ],
+    [
+        'image' => 'https://pianote.s3.amazonaws.com/sales/promos/may/Piano_Chords_Card.jpg',
+        'title' => 'Chords Poster',
+        'description' => 'Hang these piano chords in your practice space.',
+        'price' => floatval($productPrices['poster-chords']->price),
+        'shipping' => true,
+    ],
+    [
+        'image' => 'https://pianote.s3.amazonaws.com/sales/promos/may/Piano_Scales_Card.jpg',
+        'title' => 'Scales Poster',
+        'description' => 'All the major and minor piano scales in one poster.',
+        'price' => floatval($productPrices['poster-scales']->price),
+        'shipping' => true,
+    ],
+    [
+        'image' => 'https://pianote.s3.amazonaws.com/sales/promos/november/bonuses/christmas-book.jpg',
+        'title' => 'Christmas Songbook',
+        'description' => '14 beautiful Christmas Carols hand-picked and arranged for solo piano.',
+        'price' => floatval($productPrices['christmas-song-book']->price),
+        'shipping' => true,
+    ],
+    [
+        'image' => 'https://pianote.s3.amazonaws.com/sales/promos/november/bonuses/christmas-songbook-card.jpg',
+        'title' => 'Christmas Songbook Digital',
+        'description' => 'Play Your Favorite Christmas Songs on the Piano.',
+        'price' => floatval($productPrices['christmas-song-book-digital']->price),
+        'shipping' => true,
+    ],
+    [
+        'image' => 'https://pianote.s3.amazonaws.com/sales/promos/october/power_of_chords_card.jpg',
+        'title' => 'The Power of Chords',
+        'description' => 'Play the music you love using the power of chords.',
+        'price' => floatval($productPrices['the-power-of-chords']->price),
+    ],
+    [
+        'image' => 'https://pianote.s3.amazonaws.com/sales/promos/november/bonuses/TBGTCP.jpg',
+        'title' => 'Classical Piano',
+        'description' => 'Pieces you can actually play, with lessons that are actually fun.',
+        'price' => floatval($productPrices['classical-piano']->price),
+    ],
+    [
+        'image' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/piano-technique-made-easy.jpg',
+        'title' => 'Piano Technique<br> Made Easy',
+        'description' => 'Your ultimate guide to learning the piano. Learn EVERY scale, chord, arpeggio, and key signature.',
+        'price' => floatval($productPrices['piano-technique-made-easy']->price),
+    ],
+    [
+        'image' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/piano-riffs-and-fills.jpg',
+        'title' => 'Piano Riffs<br> & Fills',
+        'description' => 'Learn the secrets and tips to play fills that sound complicated and advanced, but are simple to learn.',
+        'price' => floatval($productPrices['piano-riffs-and-fills']->price),
+    ],
+    [
+        'image' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/de-stupefy-your-left-hand.jpg',
+        'title' => 'De-Stupefy Your<br> Left Hand',
+        'description' => 'Most piano players find their left-hand is weaker. Fix those weaknesses and “de-stupefy” that left hand.',
+        'price' => floatval($productPrices['destupefy-your-left-hand']->price),
+    ],
+    [
+        'image' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/worship-piano.jpg',
+        'title' => 'Worship Piano',
+        'description' => 'Learn hundreds of worship songs and get the skills to start playing in a worship band.',
+        'price' => floatval($productPrices['worship-piano']->price),
+    ],
+    [
+        'image' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/faster-fingers.jpg',
+        'title' => 'Faster Fingers',
+        'description' => 'Boost your speed and confidence with this guided practice course.',
+        'price' => floatval($productPrices['faster-fingers']->price),
+    ],
+    [
+        'image' => 'https://pianote.s3.amazonaws.com/sales/promos/november/bonuses/TBGTPBP.jpg',
+        'title' => 'Play Beautiful Piano',
+        'description' => 'Start playing beautiful music from your very 1st lesson.',
+        'price' => floatval($productPrices['play-beautiful-piano']->price),
+    ],
+    [
+        'image' => 'https://pianote.s3.amazonaws.com/sales/promos/november/bonuses/improv-musical-freedom.jpg',
+        'title' => 'Improvisation & Musical Freedom',
+        'description' => 'Learn to improvise from one of the best piano players in the world, Jesús Molina',
+        'price' => floatval($productPrices['jesus-molina-improvisation-and-musical-freedom-pack']->price),
+    ],
+];
