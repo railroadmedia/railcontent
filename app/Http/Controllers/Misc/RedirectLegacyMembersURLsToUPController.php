@@ -255,6 +255,7 @@ class RedirectLegacyMembersURLsToUPController extends BaseController
         $segment7 = null,
         $segment8 = null
     ) {
+die("debug-preproduction");
         $userId = null;
         $authParams = null;
 
