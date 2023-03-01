@@ -55,6 +55,7 @@ class RouteServiceProvider extends ServiceProvider
         });
 
         $this->routes(function () {
+            Route::group([], base_path('routes/misc/legacy_brand_members_redirects_to_up.php'));
             Route::group([], base_path('routes/routes.php')); // not actually needed
             Route::group([], base_path('routes/misc/manifest_files_routes.php'));
             Route::group([], base_path('routes/misc/mobile_app_store_api_keys_json_routes.php'));
@@ -88,7 +89,6 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::group([], base_path('routes/misc/http_error_code_routes.php'));
 
-            Route::group([], base_path('routes/misc/legacy_brand_members_redirects_to_up.php'));
         });
     }
 }
