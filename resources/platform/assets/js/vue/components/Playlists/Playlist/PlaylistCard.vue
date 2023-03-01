@@ -237,7 +237,7 @@
     >
         <!-- PLAYLIST INFO: clickable link -->
         <a  :href="lesson.url"
-            class="tw-inline-flex tw-items-center tw-flex tw-w-[calc(100%-100px)] tw-text-[#0D0D0D] dark:tw-text-white"
+            class="tw-inline-flex tw-items-center tw-flex tw-w-[calc(100%-35px)] lg:tw-w-[calc(100%-100px)] tw-text-[#0D0D0D] dark:tw-text-white"
         >
             <div class="tw-inline-flex tw-items-center tw-font-bold tw-shrink-0 tw-w-[40px] tw-pl-4">{{ props.index + 1 }}</div>
 
@@ -249,7 +249,7 @@
                 </div>
             </div>
 
-            <div class="tw-truncate tw-w-[calc(100%-350px)] tw-pl-2 md:tw-pl-[15px] tw-pr-2">
+            <div class="tw-truncate tw-w-full lg:tw-w-[calc(100%-350px)] tw-px-3 lg:tw-pl-[15px]">
                 <!--name-->
                 <p class="tw-truncate">
                     <span class="tw-uppercase tw-mr-1 tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-sm"
@@ -266,23 +266,25 @@
                 </p>
             </div>
 
-            <div class="tw-inline-flex tw-justify-center tw-shrink-0 tw-w-[128px]">
+            <!-- Lesson Type -->
+            <div class="tw-hidden lg:tw-inline-flex tw-justify-center tw-shrink-0 tw-w-[128px]">
                 <span v-if="lesson.type" class="tw-text-center">
                     {{ lesson.type }}
                 </span>
             </div>
 
-            <div class="tw-inline-flex tw-justify-center tw-shrink-0  tw-w-[100px]">
+            <!-- Lesson Time -->
+            <div class="tw-hidden lg:tw-inline-flex tw-justify-center tw-shrink-0 tw-w-[100px]">
                 <span>{{ duration }}</span>
             </div>
         </a>
 
         <!-- PLAYLISTS OPTIONS DROPDOWN -->
-        <div class="tw-inline-flex tw-items-center tw-justify-end tw-shrink-0 tw-w-[100px] md:tw-justify-center" >
+        <div class="tw-inline-flex tw-items-center tw-justify-end tw-shrink-0 tw-w-[35px] lg:tw-w-[100px] md:tw-justify-center" >
             <div class="tw-relative "
                     v-click-outside="()=>{ state.dropdownOpen = false }"
             >
-                <button class="tw-btn-primary tw-btn-small tw-btn-circle tw-text-[#445F74] dark:tw-text-[#7E9AB1] tw-bg-transparent dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-transition-colors tw-p-0 tw-mb-0 focus-visible:tw-outline focus-visible:tw-outline-[#111827] dark:focus:tw-outline-[#9EC0DC] focus-visible:tw-outline-2 tw-rotate-0 md:tw-rotate-90"
+                <button class="tw-btn-primary tw-btn-small tw-btn-circle tw-text-[#445F74] dark:tw-text-[#7E9AB1] tw-bg-transparent dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-transition-colors tw-p-0 tw-mb-0 focus-visible:tw-outline focus-visible:tw-outline-[#111827] dark:focus:tw-outline-[#9EC0DC] focus-visible:tw-outline-2 tw-rotate-0 lg:tw-rotate-90"
                         title="Playlist Options"
                         @click.prevent="dropdownTriggerHandler(this)"
                 >
