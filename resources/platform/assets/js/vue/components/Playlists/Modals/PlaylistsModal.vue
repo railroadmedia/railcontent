@@ -55,7 +55,9 @@ const modalContainerProps = {
                 />
             </div>
             <div v-if="modalProps.modalType === 'startEnd'">
-                <StartEnd :brand="brand" />
+                <StartEnd @onCloseModal="() => emit('onClosePlaylistsModal')"
+                          :brand="brand" 
+                />
             </div>
             <div v-if="modalProps.modalType === 'addItem'">
                 <AddItem @onCancel="() => emit('onClosePlaylistsModal')" 

@@ -1,13 +1,15 @@
 <script setup>
-import InputLabel from '../../InputLabel/InputLabel.vue';
+    import InputLabel from '../../InputLabel/InputLabel.vue';
 
-const props = defineProps({
-    brand: {
-        type: String,
-        default: 'drumeo'
-    }
-});
+    const props = defineProps({
+        brand: {
+            type: String,
+            default: 'drumeo'
+        }
+    });
 
+    //Emits
+    const emit = defineEmits(['onCloseModal']);
 </script>
 <template>
     <div class="tw-h-full tw-w-full">
@@ -17,9 +19,10 @@ const props = defineProps({
             <InputLabel :maskaConfig="{  dataMaska: 'T#:T#', maskaTokens: 'T:[0-5]' }" labelValue="End Time" placeholder="00:00" inputOverride="tw-rounded-[8px] tw-ml-[20px] tw-w-full" />
         </div>
         <div class="tw-pt-[30px] tw-flex tw-justify-end tw-w-full">
-            <button @click="() => emit('onCancel')"
+            <button @click="() => emit('onCloseModal')"
                 class="tw-btn-primary tw-text-center tw-justify-center tw-items-center tw-w-[150px]">CANCEL</button>
             <button
+                @click="() => handleConfirm()"
                 :class="`tw-ml-[20px] tw-btn-primary tw-bg-${brand} tw-text-center tw-flex tw-justify-center tw-items-center tw-p-0 tw-px-[30px] tw-w-[150px]`"><span>CONFIRM</span></button>
         </div>
     </div>

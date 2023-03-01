@@ -212,9 +212,7 @@
                         />  
                     </div>  
                     <span class="tw-uppercase tw-font-bebas-neue">More</span>
-                </button>
-
-                
+                </button>  
             </div>
         </template>
     </platform-header>

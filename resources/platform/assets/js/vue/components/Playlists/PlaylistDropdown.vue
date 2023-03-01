@@ -91,7 +91,6 @@
 
     //Handle Pin/Unpin Request
     const pinPlaylist = () => {
-        console.log('run pinPlaylist')
         if(!props.data.pinned) { //PIN
             if(playlistsStore.pinnedPlaylists.length !== 5) {
                 emit('pinItem', true)
@@ -160,6 +159,11 @@
         emit('closeDropdown');
     };
 
+    const addToPlaylist = () => {
+        console.log(props.data.id, props.data.type)
+        window.openplaylistmodal({ modalType: 'addItem', contentId: props.data.id, type: props.data.type });
+    }
+
     const editPlaylist = () => {
         window.openplaylistmodal({ modalType: 'edit', data: props.data });
         emit('closeDropdown');
@@ -170,14 +174,21 @@
         emit('closeDropdown');
     };
 
+    const editLessonTime = () => {
+        window.openplaylistmodal({ modalType: 'startEnd' });
+        emit('closeDropdown');
+    };
+
     const clickHandler = (fnstring) => {
         switch (fnstring) {
             case "sharePlaylist": sharePlaylist(); break;
             case "editPlaylist": editPlaylist(); break;
+            case "addToPlaylist": addToPlaylist(); break;
             case "deletePlaylist": deletePlaylist(); break;
             case "duplicatePlaylist": duplicatePlaylist(); break;
             case "pinPlaylist": pinPlaylist(); break;
             case "privateToggle": privateToggle(); break;
+            case "editLessonTime": editLessonTime(); break;
         }
     }
 
