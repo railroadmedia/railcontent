@@ -48,7 +48,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/parcel/pianote/shop-product.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/musora/shop-product.js') }}"></script>
 
     {{-- Platform --}}
     <script src="{{ mix('/platform/js/manifest.js') }}"></script>

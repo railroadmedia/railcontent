@@ -146,6 +146,18 @@ Route::group(
             UserController::class . '@report'
         )
             ->name('user_management_system.user.report');
+
+        Route::put(
+            'user/block/{id}',
+            UserController::class . '@blockUser'
+        )
+            ->name('user_management_system.user.block');
+
+        Route::put(
+            'user/unblock/{id}',
+            UserController::class . '@unblockUser'
+        )
+            ->name('user_management_system.user.block');
     }
 );
 

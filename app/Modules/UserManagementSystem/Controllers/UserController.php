@@ -15,6 +15,7 @@ use Modules\UserManagementSystem\Events\User\UserCreated;
 use Modules\UserManagementSystem\Events\User\UserDeleted;
 use Modules\UserManagementSystem\Events\User\UserUpdated;
 use Modules\UserManagementSystem\Models\ReportedUser;
+use Modules\UserManagementSystem\Models\BlockedUser;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Mailora\Services\MailService;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -353,6 +354,47 @@ class UserController extends Controller
         return response()->json([
                                     "success" => true,
                                     "message" => "The user profile was reported",
+                                ], 200);
+    }
+
+    /**
+     * @param $id
+     * @return JsonResponse
+     */
+    public function blockUser($id)
+    {
+        $user = User::find($id);
+        if (!$user) {
+            throw new NotFoundHttpException();
+        }
+
+        $currentUser = user();
+        $blocked = BlockedUser::firstOrNew(['user_id' => $id,
+                                     'blocker_id' => $currentUser['id'],
+                                     "created_on" => Carbon::now()->toDateTimeString()])->save();
+        return response()->json([
+                                    "success" => $blocked,
+                                    "message" => $user['display_name']." was blocked",
+                                ], 200);
+    }
+
+    /**
+     * @param $id
+     * @return JsonResponse
+     */
+    public function unblockUser($id)
+    {
+        $user = User::find($id);
+        if (!$user) {
+            throw new NotFoundHttpException();
+        }
+
+        $currentUser = user();
+        $unblock = BlockedUser::where('user_id','=',$id)->where('blocker_id', '=',$currentUser['id'])->delete();
+
+        return response()->json([
+                                    "success" => $unblock > 0,
+                                    "message" => $user['display_name']." was unblocked",
                                 ], 200);
     }
 }
