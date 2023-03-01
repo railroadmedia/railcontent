@@ -33,6 +33,10 @@ class SalesController extends BaseController
     {
         return view('pianote.sales.subscription', ['theme' => 'pianote', 'promoVersion' => 'true']);
     }
+    public function anniversary()
+    {
+        return view('pianote.sales.march-promo', ['theme' => 'pianote', 'promoVersion' => 'true']);
+    }
     public function choosePlan()
     {
         return view('pianote.sales.choose-plan', ['theme' => 'pianote']);
@@ -189,6 +193,11 @@ class SalesController extends BaseController
     public function concertHeadphones()
     {
         return view('pianote.products.concert-headphones');
+    }
+
+    public function concertHeadphonesMember()
+    {
+        return view('pianote.products.concert-headphones-member');
     }
 
     public function foundations()
