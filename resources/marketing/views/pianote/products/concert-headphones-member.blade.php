@@ -87,12 +87,12 @@
     @include('pianote.sales.partials._nav', [
         "cartVersion" => true
     ])
-
     <div class="flex items-center justify-center py-2 px-2 sm:px-0 w-full z-50 fixed" style="background: linear-gradient(180deg, #FFAC00 0%, #FF7A00 100%);">
         <p class="text-sm sm:text-lg font-bebas uppercase mx-0 leading-none sm:leading-none">
             SAVE 21% ON PIANOTE HEADPHONES | MEMBERS-ONLY DISCOUNT
         </p>
     </div>
+    <div class="w-full block h-7 sm:h-8"></div>
 
     <section class="py-4 md:py-10 bg-center bg-cover bg-no-repeat header-bg bg-black">
         <div class="max-w-md md:max-w-2xl mx-auto text-center px-2 md:px-0">
@@ -254,7 +254,7 @@
         <p class="text-white">LIMITED EDITION.</p>
         <div class="flex flex-wrap justify-center 2-full max-w-sm md:max-w-2xl lg:max-w-3xl my-5 sm:my-7 mx-auto text-center">
             <div class="w-full md:w-1/2 px-2 md:px-3 relative">
-                <a href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['pianote-headphones' => 1], 'redirect' => '/order', 'locked' => 'false', 'promo-code' => 'members-discount' ]) }}" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">
+                <a href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['pianote-headphones' => 1], 'redirect' => '/order', 'locked' => 'false', 'promo-code' => 'members-special' ]) }}" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">
                     <p class="w-full px-4 pt-2 pb-4 -mb-3 text-white rounded-t-2xl font-extrabold uppercase" style="background: linear-gradient(180deg, #F51A30 0%, #9A1120 64.29%);">
                         LAUNCH SPECIAL
                     </p>

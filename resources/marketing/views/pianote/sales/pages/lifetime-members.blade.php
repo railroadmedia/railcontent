@@ -373,12 +373,12 @@
 
 {{--            @if($products['PIANOTE-MEMBERSHIP-LIFETIME']->getStockAvailability() > 0)--}}
                 <a  href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[pianote-headphones]=1&products[piano-chords-and-scales-guide]=1&products[pianote-practice-planner]=1&products[christmas-song-book]=1&products[christmas-song-book-digital]=1&products[poster-chords]=1&products[poster-scales]=1&products[the-power-of-chords]=1&products[classical-piano]=1&products[jesus-molina-improvisation-and-musical-freedom-pack]=1&products[play-beautiful-piano]=1&products[piano-riffs-and-fills]=1&products[piano-technique-made-easy]=1&products[destupefy-your-left-hand]=1&products[worship-piano]=1&products[faster-fingers]=1&redirect=/order&locked=true"
-                                        class="join methodcta my-4" style="background:#FB0188;">Become A lifetime Member &raquo;</a>
+                                        class="join methodcta my-4">Become A lifetime Member &raquo;</a>
             {{--<p>(Or choose a payment plan on the next page.)</p>--}}
 {{--            @else--}}
 {{--                <span class="join sold-out methodcta my-4">Sold Out</span>--}}
 {{--            @endif--}}
-            <p class="TODO">only <s>500</s> {{ $products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() }} left. </p>
+            <p>Only <s>500</s> {{ $products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() }} spots remaining!</p>
         </div>
     </section>
     <section class="content-section text-center" style="background: #040c1b;">

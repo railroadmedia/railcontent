@@ -85,9 +85,9 @@
             'price' => floatval($productPrices['GHFAL-DIGI']->price),
         ],
         [
-            'image' => '{-- TODO --}',
+            'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/creative-control.jpg',
             'title' => 'Creative Control',
-            'description' => '{-- TODO --}',
+            'description' => 'Thomas Lang’s innovative system for developing technique so you can play more effectively in any style of music. Includes more than four hours of video.',
             'price' => floatval($productPrices['CC-DIGI']->price),
         ],
     ];
