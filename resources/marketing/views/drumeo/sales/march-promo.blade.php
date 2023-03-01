@@ -130,6 +130,12 @@
             "trialVersion" => true,
             "joinUrl" => '/choose-plan',
         ])
+        <a href="/30-day-drummer" class="flex items-center justify-center py-2 px-2 sm:px-0 w-full z-[100]" style="background: linear-gradient(180deg, #EBF0FF 0%, #DEE6FF 100%);">
+            <img class="h-8 sm:h-10 mr-4" src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/30_day_drummer_logo.png" alt="30 day drummer logo" />
+            <p class="text-sm sm:text-lg font-bebas uppercase mx-0 leading-tight">
+                Enrollment is open | February 27 - March 28 <span class="hidden sm:inline">|</span> <br class="sm:hidden"><span class="text-drumeo underline">Click here to join season II.</span>
+            </p>
+        </a>
     @endif
 
 
@@ -178,22 +184,38 @@
         ];
     @endphp
 
-    @include('musora.sales.components.header-section', [
-        'header' => 'Online drum lessons for all skill levels.',
-        'desc' => 'Learn the drums faster with step-by-step lessons, thousands of songs and unlimited personal support.',
-        'thumb' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/jan-thumb-no-badge.jpg',
-        'promoThumb' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/header-thumb-promo2.png',
-        'promoThumbM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/header-thumb-promo-m2.jpg',
-        'pointOne' => 'Improve Your Skills',
-        'pointTwo' => 'World-Class Teachers',
-        'pointThree' => 'Play More<br class="inline lg:hidden"> Songs',
-        'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738',
-        'students' => number_format(Prices::$students),
-    ])
+    <header class="pb-24 md:py-14 lg:py-20">
+        <div class="max-w-4xl mx-auto text-center px-4">
+            <img class="mt-14 md:mt-0 h-24 md:h-28 lg:h-32 mb-6" src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/anniversary/2023/logo.png" alt="Anniversary logo" />
+            <h3 class="font-extrabold mb-10">Save 18% on your membership <br class="">+ get 11 FREE bonuses worth $1198.95!</h3>
+        </div>
+        <div class="md:flex md:justify-center md:items-center px-4 lg:px-0">
+            <div class="max-w-sm md:max-w-none mx-auto md:hidden">
+                <img
+                    class="-mt-8 sm:-mt-14 transition-opacity opacity-0"
+                    src="https://cdn.musora.com/image/fetch/w_550,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/anniversary/2023/promo-collage-m.png"
+                    alt="Promo Collage Image"
+                    loading="lazy"
+                    onload="this.classList.remove('opacity-0')"
+                />
+            </div>
+            <div class="max-w-lg mx-auto md:mx-0">
+                Join Drumeo in March and you’ll receive 11 free bonuses with your membership. That’s one bonus for every year we’ve been around – including a QuietPad, drumsticks, and digital packs to help you achieve ALL your goals on the drums. And that’s not all… <br><br>
+                To celebrate 11 years of inspiring & informative drum lessons we’ve dropped the price of Drumeo to our 2012 price!. <br><br>
+                That’s right, you’ll time travel back to 2012 for this deal. <br><br>
+                Scroll down to see all your bonuses and click the button to lock in your discount and grab a year of unlimited drum lessons! <br><br>
+                <a class="join drumeo smaller w-full lg:w-96 mb-2" href="#order">Get Started &raquo;</a>
+            </div>
+            <img
+                class="hidden md:inline-block md:h-96 lg:h-[450px] md:ml-6 transition-opacity opacity-0"
+                src="https://cdn.musora.com/image/fetch/w_850,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/anniversary/2023/promo-collage.png"
+                alt="Promo Collage"
+                loading="lazy"
+                onload="this.classList.remove('opacity-0')"
+            />
+        </div>
+    </header>
 
-    @hasSection('promo-banner')
-        @yield('promo-banner')
-    @endif
 {{--    @if(!empty($promoVersion))--}}
 {{--        @include('musora.sales.components.promo-section', [--}}
 {{--        'promoLogo' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs.svg',--}}
@@ -519,56 +541,87 @@
     <div class="unstick-trigger block"></div>
     <div id="customize-anchor" class="anchor"></div>
     <div id="order" class="anchor"></div>
-    @hasSection('final')
-        @yield('final')
-    @elseif(!empty($promoVersion))
-
-        @php
-            $bonuses = [
-                [
+    @php
+        $bonuses = [
+            [
+                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/pad.jpg',
+                'title' => 'QuietPad',
+                'description' => 'Practice anywhere with two full-size playing surfaces.',
+                'price' => floatval($productPrices['quietpad']->price),
+                'shipping' => true,
+            ],
+            [
                 'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/drumsticks.jpg',
                 'title' => 'Drumeo Drumsticks',
                 'description' => 'Drumeo 5A Drumsticks by Vater -- made with hickory and extra moisture to last longer.',
                 'price' => floatval($productPrices['Drumeo-VaterSticks']->price),
                 'shipping' => true,
-                ],
-                [
+            ],
+            [
                 'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/rdm.jpg',
                 'title' => 'Rock Drumming Masterclass',
                 'description' => 'Todd Sucherman’s 26-week masterclass to help you improve your rock drumming.',
                 'price' => floatval($productPrices['rock-drumming-masterclass-pack']->price),
-                ],
-                [
+            ],
+            [
                 'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/dtme.jpg',
                 'title' => 'Drum Technique Made Easy',
                 'description' => 'Bruce Becker’s 26-week masterclass to improve your hand & foot technique.',
                 'price' => floatval($productPrices['drum-technique-made-easy-pack']->price),
-                ],
-                [
+            ],
+            [
                 'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/ime.jpg',
                 'title' => 'Independence Made Easy',
                 'description' => 'Jared Falk’s 26-week masterclass to unlock your musicality and freedom on the drums.',
                 'price' => floatval($productPrices['independence-made-easy-pack']->price),
-                ],
-            ]
-        @endphp
-        @include('musora.sales.components.order-section-bonuses', [
+            ],
+            [
+                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/eyd.jpg',
+                'title' => 'Electrify Your Drumming',
+                'description' => 'Your guide to playing 10 styles of electronic dance music - includes 23 play-alongs!',
+                'price' => floatval($productPrices['electrify-your-drumming']->price),
+            ],
+            [
+                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/sd.jpg',
+                'title' => 'Successful Drumming',
+                'description' => 'Jared Falk’s step-by-step curriculum for building a rock-solid foundation on the drums.',
+                'price' => floatval($productPrices['SD-DIGI']->price),
+            ],
+            [
+                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/fwtbdf.jpg',
+                'title' => 'Better Drum Fills',
+                'description' => 'The ultimate four-week crash course to playing more creative & musical drum fills.',
+                'price' => floatval($productPrices['four-weeks-to-better-drum-fills']->price),
+            ],
+            [
+                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/lsf.jpg',
+                'title' => 'Learn Songs Faster',
+                'description' => 'This masterclass will give you proven techniques for learning MORE songs in less time.',
+                'price' => floatval($productPrices['learn-songs-faster-pack']->price),
+            ],
+            [
+                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/july/tommy_card.jpg',
+                'title' => 'Great Hands For A Lifetime',
+                'description' => 'Tommy Igoe helps you improve your hand strength, speed, stamina, comfort, and control in the drums in four hours of video lessons.',
+                'price' => floatval($productPrices['GHFAL-DIGI']->price),
+            ],
+            [
+                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/creative-control.jpg',
+                'title' => 'Creative Control',
+                'description' => '{-- TODO --}',
+                'price' => floatval($productPrices['CC-DIGI']->price),
+            ],
+        ]
+    @endphp
+
+    @include('musora.sales.components.order-section-bonuses', [
         'topImage' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drumeo-annual-2w-card.png',
-        'header' => 'Online drum lessons for all skill levels.',
-        'subDescription' => 'Save 17% + get 4 bonuses<br class="inline sm:hidden"> worth $603.95',
-        'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&locked=true',
+        'promoLogo' => 'https://cdn.musora.com/image/fetch/w_650,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/anniversary/2023/logo.png',
+        'promoText' => '<h4 class="leading-tight mt-4 sm:mt-5 mb-2 uppercase text-coaches"><strong>SAVE 18% + GET 11 BONUSES <br class="inline sm:hidden">WORTH $1198.95</strong></h4>',
+        'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[quietpad]=1&products[Drumeo-VaterSticks]=1 &products[rock-drumming-masterclass-pack]=1&products[drum-technique-made-easy-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[SD-DIGI]=1&products[four-weeks-to-better-drum-fills]=1&products[learn-songs-faster-pack]=1&products[GHFAL-DIGI]=1&products[CC-DIGI]=1&locked=true',
         'altButtonLink' => '/ecommerce/add-to-cart?products[DLM-1-month]=1&locked=true',
-        ])
-    @else
-        @include('musora.sales.components.order-section-collage', [
-        'header' => 'Unlimited drum lessons.<br> The world’s best teachers.<br> 5000+ popular songs.',
-        'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
-                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Online lessons on every topic.</li>
-                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Personalized feedback from real teachers.</li>
-                    <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> piano, guitar, and voice lessons with full access to all Musora communities.</li>',
-        'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drumeo-spread.png',
-        ])
-    @endif
+        'bonusWidth' => 'w-1/2 md:w-1/4 lg:w-[16%]',
+    ])
 
     @include('musora.sales.components.app-section', [
         'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/devices.png',
@@ -596,9 +649,10 @@
     @else
         @include("drumeo.sales.partials._footer")
     @endif
+
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
-    @yield('scripts')
+
 @stop
