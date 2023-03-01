@@ -83,7 +83,7 @@
                     //show success message
                     window.shownotification({
                         icon: 'playlist',
-                        text: `${state.name} was added to your library.`
+                        text: `'${payload.name}' was added to your library.`
                     })
                     //load Playlists
                     playlistsStore.getPlaylists({ brand: brand, page: playlistsStore.resultsPage, limit: null }, token);       
@@ -193,6 +193,9 @@
     })
     
     onBeforeUnmount(() => {
+        //Reset Modal Data
+
+        
         if (props.modalProps.nextModal) {
             window.openplaylistmodal(props.modalProps.nextModal);
         }

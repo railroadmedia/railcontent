@@ -38,7 +38,7 @@ const formattedPlaylists = computed(() => {
 });
 
 const handleCreatePlaylist = () => {
-    window.openplaylistmodal({ modalType: 'create' });
+    window.openplaylistmodal({ modalType: 'create', data: { name: '', category: 'My List', thumbnail_url: null, description: ''} });
 };
 
 const unpinPlaylist = (item, brand) => {
