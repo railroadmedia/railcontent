@@ -44,6 +44,13 @@ class CommentRepository extends RepositoryBase
     public static $availableUserId = false;
 
     /**
+     * If this is empty comment for any content will be pulled. If its defined, the users comments will not be pulled.
+     *
+     * @var integer|bool
+     */
+    public static $blockedUserIds = [];
+
+    /**
      * If this is false comment with any status will be pulled. If its defined, only comments with the given status will
      * be pulled.
      *
@@ -266,6 +273,7 @@ class CommentRepository extends RepositoryBase
             ->restrictByType()
             ->restrictByContentId()
             ->restrictByUser()
+            ->restrictBlockedUsers()
             ->restrictByConversationStatus()
             ->restrictByVisibility()
             ->restrictByAssignedUserId();
@@ -496,6 +504,7 @@ class CommentRepository extends RepositoryBase
             ->selectColumns()
             ->whereIn('parent_id', $commentIds)
             ->restrictByVisibility()
+            ->restrictBlockedUsers()
             ->get()
             ->toArray();
     }

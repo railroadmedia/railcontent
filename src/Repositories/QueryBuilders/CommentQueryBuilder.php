@@ -104,6 +104,12 @@ class CommentQueryBuilder extends QueryBuilder
             $this->where(ConfigService::$tableComments . '.user_id', '<>', CommentRepository::$availableUserId);
         }
 
+
+        if(!empty(CommentRepository::$blockedUserIds)){
+            $this->whereNotIn(ConfigService::$tableComments . '.user_id', CommentRepository::$blockedUserIds);
+        }
+
+
         return $this;
     }
 
@@ -152,6 +158,23 @@ class CommentQueryBuilder extends QueryBuilder
     {
         if (CommentRepository::$availableUserId) {
             $this->where(ConfigService::$tableComments . '.user_id', CommentRepository::$availableUserId);
+        }
+
+        if(!empty(CommentRepository::$blockedUserIds)){
+            $this->whereNotIn(ConfigService::$tableComments . '.user_id', CommentRepository::$blockedUserIds);
+        }
+
+        return $this;
+    }
+
+    /** Restrict the comments by user id
+     *
+     * @return $this
+     */
+    public function restrictBlockedUsers()
+    {
+        if(!empty(CommentRepository::$blockedUserIds)){
+            $this->whereNotIn(ConfigService::$tableComments . '.user_id', CommentRepository::$blockedUserIds);
         }
 
         return $this;

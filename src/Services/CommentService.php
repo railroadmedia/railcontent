@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Services;
 
+use App\Providers\RailcontentProvider;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Railroad\Railcontent\Decorators\Decorator;
@@ -27,6 +28,8 @@ class CommentService
 
     protected ReportedCommentRepository $reportedCommentRepository;
 
+    protected RailcontentProvider $railcontentProvider;
+
     /** The value it's set in ContentPermissionMiddleware;
      * if the user it's an administrator the value it's true and the administrator can update/delete any comment;
      * otherwise the value it's false and the user can update/delete only his own comments
@@ -39,15 +42,18 @@ class CommentService
      * @param CommentRepository $commentRepository
      * @param ContentRepository $contentRepository
      * @param ReportedCommentRepository $reportedCommentRepository
+     * @param RailcontentProvider $railcontentProvider
      */
     public function __construct(
         CommentRepository $commentRepository,
         ContentRepository $contentRepository,
-        ReportedCommentRepository $reportedCommentRepository
+        ReportedCommentRepository $reportedCommentRepository,
+        RailcontentProvider $railcontentProvider
     ) {
         $this->commentRepository = $commentRepository;
         $this->contentRepository = $contentRepository;
         $this->reportedCommentRepository = $reportedCommentRepository;
+        $this->railcontentProvider = $railcontentProvider;
     }
 
     /** Call the getById method from repository and return the comment if exist and null otherwise
@@ -246,6 +252,8 @@ class CommentService
         if (is_array(CommentRepository::$availableContentType)) {
             $contentTypeString = serialize(CommentRepository::$availableContentType);
         }
+
+        CommentRepository::$blockedUserIds = $this->railcontentProvider->getBlockedUsers();
 
         $hash =
             'get_comments_' .
