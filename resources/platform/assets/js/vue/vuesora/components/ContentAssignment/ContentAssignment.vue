@@ -40,11 +40,20 @@
                         <i class="fas fa-play mr-1"></i> Practice
                     </button>
 
-                    <button class="tw-w-full md:tw-w-[250px]"
+                    <button class="tw-w-full md:tw-w-[250px] tw-mr-2"
                         :class="isComplete ? `tw-btn-primary ${brandBgColor}` : `tw-btn-secondary ${brandTextColor}`"
                         :disabled="isRequesting" @click.stop="markAsComplete">
                         <i class="fas fa-check mr-1"></i>
                         {{ isComplete ? 'Completed' : 'Complete' }}
+                    </button>
+
+                    <!-- New Add To Playlist Button -->
+                    <button v-if="soundsliceSlug"
+                            title="Add To Playlist" 
+                            class="tw-btn-secondary tw-btn-circle dark:tw-text-white tw-text-[#00101D]"
+                            @click.stop.prevent="addToPlaylist({ id: id, type: 'Assignments', name: ['Courses', 'Lesson'], description: title, thumbnail_url: lessonThumbnail })"
+                    >
+                        <musora-icon icon-name="plus" class="tw-h-7 tw-w-7" />
                     </button>
                 </div>
             </div>
@@ -133,6 +142,10 @@ export default {
         SoundSliceControls,
     },
     props: {
+        lessonThumbnail: {
+            type: String,
+            default: () => '',
+        },
         brand: {
             type: String,
             default: () => 'drumeo',
@@ -330,6 +343,10 @@ export default {
         window.removeEventListener('lesson-complete', this.syncCompleteState);
     },
     methods: {
+        addToPlaylist(data) {
+            window.openplaylistmodal({ modalType: 'addItem', content: data });
+        },
+
         scrollToPage(page) {
             this.currentPage = page;
         },

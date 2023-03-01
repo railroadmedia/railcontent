@@ -250,7 +250,10 @@
                             }
                         @endphp
                         <div class="tw-flex tw-flex-row tw-w-full">
-                            <assignments-container :assignments="{{ json_encode($formattedAssignments) }}">
+                            <assignments-container 
+                                :lesson-thumbnail="{{ $lessonContent['video_poster_image_url'] ?? '' }}"
+                                :assignments="{{ json_encode($formattedAssignments) }}"
+                            >
                                 <template slot="completion-bonus">
                                     @include('partials.bladesora.members.partials._completion-bonus', [
                                         'xpBonus' => $lessonContent->fetch('xp_bonus', 0),

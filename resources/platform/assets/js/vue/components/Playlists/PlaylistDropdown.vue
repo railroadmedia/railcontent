@@ -160,7 +160,6 @@
     };
 
     const addToPlaylist = () => {
-        console.log(props.data.id, props.data.type)
         window.openplaylistmodal({ modalType: 'addItem', contentId: props.data.id, type: props.data.type });
     }
 

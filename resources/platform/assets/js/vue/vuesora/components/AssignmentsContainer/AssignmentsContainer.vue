@@ -3,6 +3,7 @@
         <div v-for="(assignment, index) in assignments" :key="assignment.id" class="flex flex-row" dusk="assignments">
             <div class="flex flex-column grow tw-w-full">
                 <ContentAssignment
+                    :lesson-thumbnail="lessonThumbnail"
                     :theme-color="assignment.themeColor"
                     :brand="assignment.themeColor"
                     :timecode="assignment.timecode"
@@ -39,6 +40,10 @@ export default {
             type: Array,
             default: () => [],
         },
+        lessonThumbnail: {
+            type: String,
+            default: "",
+        }
     },
     data() {
         return {

@@ -4,7 +4,7 @@
         :class="[noWrap ? 'overflow' : 'flex-wrap', {'nmh-1': !displayInline}]"
     >
         <catalogue-card
-            v-for="(item, i) in content"
+            v-for="item in content"
             :key="'grid' + item.id"
             :item="item"
             :content-type="item.type"
