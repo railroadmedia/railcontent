@@ -232,7 +232,7 @@
                 </div>
                 <div class="w-full sm:w-1/3 px-2">
                     <h5 class="text-singeo border-singeo border-2 rounded-full inline-block py-2 px-3 mb-1">3</h5>
-                    <h6 class="leading-normal">Change your mind?<br> Get a refund. <a class="tooltip cursor-pointer" tip="If it’s not for you, simply cancel your membership within 90 days and contact us for a full refund. (If your membership includes any bonuses, your refund will deduct the value of hard goods that were shipped to you.)"><i class="fas fa-info-circle" aria-hidden="true"></i></a></h6>
+                    <h6 class="leading-normal">Change your mind?<br> Get a refund. <span class="tooltip cursor-pointer" tip="If it’s not for you, simply cancel your membership within 90 days and contact us for a full refund. (If your membership includes any bonuses, your refund will deduct the value of hard goods that were shipped to you.)"><i class="fas fa-info-circle" aria-hidden="true"></i></span></h6>
                 </div>
             </div>
         </div>
