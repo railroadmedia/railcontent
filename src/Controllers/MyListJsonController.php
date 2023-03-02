@@ -645,7 +645,7 @@ the pin icon on or off.',
             ->encode('jpg', 75)
             ->save();
 
-        $target = 'playlist_thumbnail/'.'playlists_thumbnails-'.time().'-'.auth()->id.'.jpg';
+        $target = 'playlist_thumbnail/'.'playlists_thumbnails-'.time().'-'.auth()->id().'.jpg';
 
         $success =
             Storage::disk('musora_web_platform_s3')
