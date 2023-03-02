@@ -397,4 +397,19 @@ class UserController extends Controller
                                     "message" => $user['display_name']." was unblocked",
                                 ], 200);
     }
+
+    /**
+     * @return JsonResponse
+     */
+    public function getBlockedUsers()
+    {
+        $currentUser = user();
+        $blocked = BlockedUser::where('blocker_id', '=',$currentUser['id'])->get();
+        $blockedUsersIds = $blocked->pluck('user_id')->toArray();
+
+        $users =  User::query()->whereIn('id',$blockedUsersIds)->get();
+        return response()->json([
+                                    "data" => $users,
+                                ], 200);
+    }
 }

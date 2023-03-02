@@ -158,6 +158,11 @@ Route::group(
             UserController::class . '@unblockUser'
         )
             ->name('user_management_system.user.unblock');
+
+        Route::get(
+            'blocked-users',
+            UserController::class . '@getBlockedUsers'
+        );
     }
 );
 
