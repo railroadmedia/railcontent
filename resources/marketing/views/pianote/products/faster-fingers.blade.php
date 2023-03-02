@@ -22,15 +22,15 @@
     ])
 
     @include('pianote._partials._promo-banner-no-tw', [
-                    "name" => "Faster Fingers",
-                    "fullPrice" => floatval($productPrices['faster-fingers']->price),
-                    "price" => floatval($productPrices['faster-fingers']->discounted_price),
-                    "noBreadcrumb" => true
-                ])
+        "name" => "Faster Fingers",
+        "fullPrice" => floatval($productPrices['faster-fingers']->price),
+        "price" => floatval($productPrices['faster-fingers']->discounted_price),
+        "noBreadcrumb" => true
+    ])
 
     <header class="header text-center">
         <div class="container" style="background-image:url(https://d2vyvo0tyx8ig5.cloudfront.net/faster-fingers/sales/header.jpg);">
-            <img class="logo" src="https://d2vyvo0tyx8ig5.cloudfront.net/faster-fingers/sales/logo.png">
+            <img class="logo" src="https://d2vyvo0tyx8ig5.cloudfront.net/faster-fingers/sales/logo.png" alt="Faster fingers logo">
             <br>
             <i class="fas fa-play play-vimeo autoplay-video" data-toggle="modal" data-target="#trailer"></i>
             <h2>Play <strong>faster</strong>, make <strong>fewer mistakes</strong>, <br
@@ -78,7 +78,7 @@
                 <h3 class="text-red"><em>ONLY ${{ floatval($productPrices['faster-fingers']->discounted_price) }}</em></h3>
             @endif
             <div class="wrapper">
-                <img src="https://d2vyvo0tyx8ig5.cloudfront.net/faster-fingers/sales/lisa.jpg">
+                <img src="https://d2vyvo0tyx8ig5.cloudfront.net/faster-fingers/sales/lisa.jpg" alt="Lisa">
                 <p>Playing fast on the piano is merely a dream for a lot of people. So many try -- and fail -- to play quicker. Faster Fingers is your roadmap to success for increasing your speed on the keys -- and it will only take 10 minutes a day (or less).
                     <br><br> Why learn to play faster?
                     <br><br>Well, building speed will improve ALL other aspects of your piano playing -- so you’ll learn songs quicker, playing them faster, and play them BETTER.
@@ -106,25 +106,25 @@
             <div class="col-xs-12 col-sm-3 play-vimeo2" data-toggle="modal" data-target="#bpm50">
                 <div class="modal-wrap">
                     <i class="fas fa-play"></i> <img
-                            src="https://d2vyvo0tyx8ig5.cloudfront.net/faster-fingers/sales/50-bpm.jpg">
+                            src="https://d2vyvo0tyx8ig5.cloudfront.net/faster-fingers/sales/50-bpm.jpg" alt="50 BPM Thumbnail">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-3 play-vimeo3" data-toggle="modal" data-target="#bpm80">
                 <div class="modal-wrap">
                     <i class="fas fa-play"></i> <img
-                            src="https://d2vyvo0tyx8ig5.cloudfront.net/faster-fingers/sales/80-bpm.jpg">
+                            src="https://d2vyvo0tyx8ig5.cloudfront.net/faster-fingers/sales/80-bpm.jpg" alt="80 BPM Thumbnail">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-3 play-vimeo4" data-toggle="modal" data-target="#bpm140">
                 <div class="modal-wrap">
                     <i class="fas fa-play"></i> <img
-                            src="https://d2vyvo0tyx8ig5.cloudfront.net/faster-fingers/sales/140-bpm.jpg">
+                            src="https://d2vyvo0tyx8ig5.cloudfront.net/faster-fingers/sales/140-bpm.jpg" alt="140 BPM Thumbnail">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-3 play-vimeo5" data-toggle="modal" data-target="#bpm200">
                 <div class="modal-wrap">
                     <i class="fas fa-play"></i> <img
-                            src="https://d2vyvo0tyx8ig5.cloudfront.net/faster-fingers/sales/200-bpm.jpg">
+                            src="https://d2vyvo0tyx8ig5.cloudfront.net/faster-fingers/sales/200-bpm.jpg" alt="200 BPM Thumbnail">
                 </div>
             </div>
             <a
@@ -133,8 +133,8 @@
                 data-product-json='{"faster-fingers": 1}'
             >Get Started &raquo;</a>
         </div>
-        <img class="bg-icon left-icon" src="https://d2vyvo0tyx8ig5.cloudfront.net/faster-fingers/sales/icon-speedo.svg">
-        <img class="bg-icon right-icon" src="https://d2vyvo0tyx8ig5.cloudfront.net/faster-fingers/sales/icon-metronome.svg">
+        <img class="bg-icon left-icon" src="https://d2vyvo0tyx8ig5.cloudfront.net/faster-fingers/sales/icon-speedo.svg" alt="Speed icon">
+        <img class="bg-icon right-icon" src="https://d2vyvo0tyx8ig5.cloudfront.net/faster-fingers/sales/icon-metronome.svg" alt="Metronome icon">
     </section>
     <div class="modal fade" id="bpm50" tabindex="-1" role="dialog" aria-labelledby="trailerLabel">
         <i class="close stop-play fas fa-times" data-dismiss="modal" aria-label="Close"></i>
@@ -180,7 +180,7 @@
     <section class="why-speed-matters">
         <div class="container">
             <div class="wrapper">
-                <img width="200px" src="https://d2vyvo0tyx8ig5.cloudfront.net/faster-fingers/sales/why-speed-matters.png">
+                <img width="200px" src="https://d2vyvo0tyx8ig5.cloudfront.net/faster-fingers/sales/why-speed-matters.png" alt="Why speed matters">
                 <p>In case you’re thinking, “So what? Why bother?”
                     <br><br>I totally get it. What good is it to play an exercise fast?
                     <br><br>Think about that time you heard someone play an incredible riff or run on the piano and thought… WOW! Maybe you thought, “I’ll never be able to play like that.”
@@ -195,11 +195,11 @@
 
     <section class="day-breakdown text-center">
         <div class="container">
-            <img class="stars" width="150px" src="https://d2vyvo0tyx8ig5.cloudfront.net/faster-fingers/sales/5-stars.png">
+            <img class="stars" width="150px" src="https://d2vyvo0tyx8ig5.cloudfront.net/faster-fingers/sales/5-stars.png" alt="5 Stars">
             <h1>YOUR STEPS<br class="hidden-sm hidden-md hidden-lg"> TO SUCCESS</h1>
             <div class="day-slice">
                 <div class="day-thumbnail">
-                    <img src="https://d2vyvo0tyx8ig5.cloudfront.net/faster-fingers/sales/thumb1.jpg">
+                    <img src="https://d2vyvo0tyx8ig5.cloudfront.net/faster-fingers/sales/thumb1.jpg" alt="Week 1 Thumbnail">
                     <div class="top-badge">WEEK 1</div>
                 </div>
                 <p>
@@ -209,7 +209,7 @@
             </div>
             <div class="day-slice">
                 <div class="day-thumbnail">
-                    <img src="https://d2vyvo0tyx8ig5.cloudfront.net/faster-fingers/sales/thumb2.jpg">
+                    <img src="https://d2vyvo0tyx8ig5.cloudfront.net/faster-fingers/sales/thumb2.jpg" alt="Week 2 Thumbnail">
                     <div class="top-badge">WEEK 2</div>
                 </div>
                 <p>
@@ -219,7 +219,7 @@
             </div>
             <div class="day-slice">
                 <div class="day-thumbnail">
-                    <img src="https://d2vyvo0tyx8ig5.cloudfront.net/faster-fingers/sales/thumb3.jpg">
+                    <img src="https://d2vyvo0tyx8ig5.cloudfront.net/faster-fingers/sales/thumb3.jpg" alt="Week 3 Thumbnail">
                     <div class="top-badge">WEEK 3</div>
                 </div>
                 <p>
@@ -229,7 +229,7 @@
             </div>
             <div class="day-slice">
                 <div class="day-thumbnail">
-                    <img src="https://d2vyvo0tyx8ig5.cloudfront.net/faster-fingers/sales/thumb4.jpg">
+                    <img src="https://d2vyvo0tyx8ig5.cloudfront.net/faster-fingers/sales/thumb4.jpg" alt="Week 4 Thumbnail">
                     <div class="top-badge">WEEK 4</div>
                 </div>
                 <p>
@@ -239,7 +239,7 @@
             </div>
             <div class="day-slice">
                 <div class="day-thumbnail">
-                    <img src="https://d2vyvo0tyx8ig5.cloudfront.net/faster-fingers/sales/thumb5.jpg">
+                    <img src="https://d2vyvo0tyx8ig5.cloudfront.net/faster-fingers/sales/thumb5.jpg" alt="Week 5 Thumbnail">
                     <div class="top-badge">WEEK 5</div>
                 </div>
                 <p>
@@ -339,19 +339,19 @@
     <div class="testimonials">
         <div class="container">
             <div class="testimonial col-sm-4 col-xs-12">
-                <img src="https://d2vyvo0tyx8ig5.cloudfront.net/500-songs/sales/bernhard.jpg">
+                <img src="https://d2vyvo0tyx8ig5.cloudfront.net/500-songs/sales/bernhard.jpg" alt="Bernhard Zaisinger">
                 <p>
                     <em>"Lisa is the perfect teacher. Her cheerful attitude is contagious, and she’s so encouraging, especially when I feel like I’m not making any progress. Her hands-on teaching approach is invaluable to my learning and helps me make progress more easily."</em><br>
                     <strong>BERNHARD ZAISINGER</strong> <em class="red">SWITZERLAND</em></p>
             </div>
             <div class="testimonial col-sm-4 col-xs-12">
-                <img src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/testimonials/daniel.jpg">
+                <img src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/testimonials/daniel.jpg" alt="Daniel Morgan">
                 <p>
                     <em>"I was stuck with a particular lesson on the Pianote Foundations course, so I tried Faster Fingers, and it worked! My playing went from 80bpm to 110bpm and continues to improve. If anyone’s got to the point where they’re even considering Faster Fingers, they’re going to want to try it out!"</em><br>
                     <strong>DANIEL MORGAN</strong> <em class="red">UNITED KINGDOM</em></p>
             </div>
             <div class="testimonial col-sm-4 col-xs-12">
-                <img src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/testimonials/dominic.jpg">
+                <img src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/testimonials/dominic.jpg" alt="Dominic Morgan">
                 <p>
                     <em>"I tried Faster Fingers because I wanted to improve my technique for playing faster pieces. I most liked the engaging lessons that help you to gradually build your finger speed. It's motivating, as Lisa's teaching method is infectious. To anyone thinking about the course, try it! Your fingers will thank you - so will your neighbours!"</em><br>
                     <strong>DOMINIC MORGAN</strong> <em class="red">UNITED KINGDOM</em></p>
@@ -374,7 +374,7 @@
     <section class="final text-center" style="background-image:url(https://d2vyvo0tyx8ig5.cloudfront.net/faster-fingers/sales/final.jpg);">
         <div class="container">
             {{--<img class="logo edge" src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/cyber-monday/logo-blue.png"><br>--}}
-            <img class="logo" src="https://d2vyvo0tyx8ig5.cloudfront.net/faster-fingers/sales/logo.png">
+            <img class="logo" src="https://d2vyvo0tyx8ig5.cloudfront.net/faster-fingers/sales/logo.png"  alt="Faster fingers logo">
             <h3>Play <strong>faster</strong>, make <strong>fewer mistakes</strong>, <br
                         class="hidden-sm hidden-md hidden-lg">and <strong>learn songs</strong> quickly!</h3>
             <a
