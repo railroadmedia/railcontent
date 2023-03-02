@@ -90,7 +90,7 @@ const handleSaveItem = (playlistId) => {
         addInstrumentless: addInstrumentlessToggle.value,
         token,
     }).then(() => {
-        window.shownotification({ icon: 'check', text: 'The items were added to your selected playlists.' });
+        window.shownotification({ icon: 'check', text: 'The items were added to your selected playlist.' });
     }).catch(() => {
         window.shownotification({ icon: 'error', text: 'An error ocurred while saving your changes, please try again later.' });
     }).finally(() => {
