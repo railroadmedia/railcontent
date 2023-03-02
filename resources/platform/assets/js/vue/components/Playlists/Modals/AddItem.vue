@@ -1,8 +1,6 @@
 <script setup>
     /*
-
     TODO: Open Create Playlist and on close open the addItem again with the right props
-
     */
     import { ref, onMounted, inject, computed, onUpdated } from 'vue';
     import PlaylistService from '../../../../services/playlists';
@@ -17,7 +15,7 @@
     //Pinia Stores
     const token = inject('csrf_token');
 
-    //-----------Props-----------//
+    //--------------Props--------------//
     const props = defineProps({
         brand: {
             type: String,
@@ -29,7 +27,7 @@
         },
     });
 
-    //--------Computed Properties--------//
+    //------------Computed------------//
     const instrumentless = computed(() => {
         return {
             drumeo: 'drumless',
@@ -38,12 +36,11 @@
             pianote: 'pianoless'
         }[props.brand];
     })
-
     const playlistsLength = computed(() => {
         return selectedPlaylists.value.length;
     });
 
-    //-------------Refs-------------//
+    //--------------Refs--------------//
     const importAll = ref(false);
     const formattedRows = ref([]);
     const additionalItems = ref(0);
@@ -54,19 +51,16 @@
     const addFullSongToggle = ref(false);
     const addInstrumentlessToggle = ref(false);
 
-    //-----------Methods-----------//
+    //-------------Methods-------------//
     const handleOnToggleAssignments = (val) => {
         importAll.value = val;
     };
-
     const handleOnToggleFullSong = (val) => {
         addFullSongToggle.value = val;
     };
-
     const handleOnToggleInstrumentlessSong = (val) => {
         addInstrumentlessToggle.value = val;
     };
-
     const handleActionClick = (payload) => {
         const index = selectedPlaylists.value.indexOf(String(payload));
         if (index !== -1) {
@@ -77,14 +71,11 @@
         } else {
             selectedPlaylists.value = [...selectedPlaylists.value, String(payload)];
         }
-
         handleSaveItem(payload);
     };
-
     const handleCancel = () => {
         emit('onCancel');
     };
-
     const handleSaveItem = (playlistId) => {
         isLoadingPlaylists.value = true;
         PlaylistService.addToPlaylist({
@@ -96,14 +87,13 @@
             addInstrumentless: addInstrumentlessToggle.value,
             token,
         }).then(() => {
-            window.shownotification({ icon: 'check', text: 'The items were added to your selected playlists.' });
+            window.shownotification({ icon: 'check', text: 'The items were added to your selected playlist.' });
         }).catch(() => {
             window.shownotification({ icon: 'error', text: 'An error ocurred while saving your changes, please try again later.' });
         }).finally(() => {
             isLoadingPlaylists.value = false;
         });
     };
-
     const handleCreate = () => {
         emit('onCancel');
         window.openplaylistmodal({
@@ -115,11 +105,10 @@
         });
     }
 
-    //-----------Lifecycle Methods-----------//
+    //----------Lifecycle Hooks----------//
     onMounted(() => {
         console.log('add to list content ', props.content)
         isLoadingPlaylists.value = true;
-
         if (props.content.type === 'song') {
             showSongToggle.value = true
         } else {
@@ -132,7 +121,6 @@
                 window.shownotification({ icon: 'error', text: 'An error ocurred while fetching your data, please try again later.' });
             });
         }
-        //Get Playlists
         PlaylistService.getCurrentUserPlaylists({ token }).then(r => {
             isLoadingPlaylists.value = false;
             const { data: { data } } = r;
@@ -142,7 +130,6 @@
                 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
                 const month = months[dateCreated.getMonth()];
                 const formattedDate = `${month} ${dateCreated.getDate()}, ${dateCreated.getFullYear()}`;
-
                 return ([
                     {
                         thumb: thumbnail_url,
@@ -160,7 +147,6 @@
                     }
                 ])
             });
-
             formattedRows.value = formattedTable;
         }).catch(() => {
             window.shownotification({ icon: 'error', text: 'An error ocurred while fetching your data, please try again later.' });

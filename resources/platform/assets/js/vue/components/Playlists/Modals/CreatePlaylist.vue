@@ -186,6 +186,7 @@
 
     onBeforeMount(()=> {
         //Load Data        
+        console.log(props.playlist)
         state.thumb = props.playlist.thumbnail_url;
         state.name = props.playlist.name;
         state.description = props.playlist.description;
