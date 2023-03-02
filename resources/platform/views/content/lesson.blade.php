@@ -111,6 +111,9 @@
                 <div class="tw-container tw-mx-auto lean">
                     <video-resources theme-color="{{ $brand }}" brand="{{ $brand }}"
                         title="{{ $lessonContent->fetch('fields.title') }}"
+                        lesson-type="{{ $lessonType }}"
+                        thumbnail-url="{{ $lessonContent->fetch('data.thumbnail_url') }}"
+                        description="{{ $lessonContent->fetch('data.description') }}"
                         :instructors="{{ json_encode($lessonContent['coaches'] ?? []) }}"
                         parent-title="{{ isset($parent) ? $parent->fetch('fields.title') : null }}"
                         :is-liked="{{ json_encode($lessonContent['is_liked_by_current_user'] ?? false) }}"
