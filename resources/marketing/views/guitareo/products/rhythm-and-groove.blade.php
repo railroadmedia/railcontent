@@ -26,15 +26,15 @@
         "cartVersion" => true
     ])
     @include('guitareo._partials.promo-banner', [
-                "name" => "Rhythm & Groove",
-                "fullPrice" => floatval($productPrices['rhythm-and-groove']->price),
-                "price" => floatval($productPrices['rhythm-and-groove']->discounted_price),
-                "noBreadcrumb" => true
-            ])
+        "name" => "Rhythm & Groove",
+        "fullPrice" => floatval($productPrices['rhythm-and-groove']->price),
+        "price" => floatval($productPrices['rhythm-and-groove']->discounted_price),
+        "noBreadcrumb" => true
+    ])
 
     <header class="px-5 sm:px-6 py-8 lg:py-10 text-white text-center bg-cover bg-center relative lazyload" style="background-color:#020b17;" data-bg="https://cdn.musora.com/image/fetch/w_2500,q_auto:best/https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/header.jpg">
         <div class="container mx-auto max-w-5xl relative z-10">
-            <img class="h-16 sm:h-20 lg:h-24" src="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/Logo.svg"><br>
+            <img class="h-16 sm:h-20 lg:h-24" src="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/Logo.svg" alt="Rhythm and groove logo"><br>
             <i class="fas fa-play play-button mt-56 sm:mt-80 mb-5 sm:mb-24 lg:mb-28 autoplay-video" data-open="trailer"></i>
             <h2><strong>Go beyond simple<br class="inline sm:hidden"> strumming</strong> on the guitar.</h2>
             <a class="join my-3 md:my-4 w-full max-w-xl" href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['rhythm-and-groove' => 1], 'redirect' => '/order']) }}">Start Your Course</a>
@@ -51,7 +51,7 @@
     <section class="px-5 sm:px-6 py-10 sm:py-14 lg:py-20 text-white" style="background-color:#020b17;">
         <div class="container mx-auto max-w-4xl">
             <div class="sm:flex justify-center items-center">
-                <img class="float-right h-24 sm:h-44 lg:h-60 mb-4 sm:mb-0 ml-3 sm:ml-0 sm:order-1 lazyload" data-src="https://cdn.musora.com/image/fetch/w_620,q_auto:best/https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/music_guitar.png">
+                <img class="float-right h-24 sm:h-44 lg:h-60 mb-4 sm:mb-0 ml-3 sm:ml-0 sm:order-1 lazyload" data-src="https://cdn.musora.com/image/fetch/w_620,q_auto:best/https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/music_guitar.png" alt="Guitar icon">
                 <p class="leading-normal sm:pr-5 flex-grow">Rhythm is an essential part of playing guitar. Without it, songs can sound flat and dull to yourself and listeners. Anyone can lose interest in basic strums without a sense of groove or feel.
                     <br><br>
                     It’s also one of the most challenging skills for guitarists to learn. That’s why we created an easy-to-follow course you can complete in under two hours – to get you excited and confident in playing rhythm on the guitar.</p>
@@ -68,25 +68,25 @@
             <div class="flex flex-wrap items-start">
                 <div class="w-full sm:w-1/2 px-3 lg:px-5 mb-7 sm:mb-8 lg:mb-10">
                     <div class="overflow-hidden rounded-xl mb-3 sm:mb-4 aspect-16:9 w-full relative">
-                        <iframe class="absolute w-full h-full" src="//player.vimeo.com/video/740449488" frameborder="0" allowfullscreen allow="autoplay"></iframe>
+                        <iframe class="absolute w-full h-full" src="//player.vimeo.com/video/740449488" frameborder="0" allowfullscreen allow="autoplay" title="Jim and Jack"></iframe>
                     </div>
                     <h5><strong>Jim and Jack</strong></h5>
                 </div>
                 <div class="w-full sm:w-1/2 px-3 lg:px-5 mb-7 sm:mb-8 lg:mb-10">
                     <div class="overflow-hidden rounded-xl mb-3 sm:mb-4 aspect-16:9 w-full relative">
-                        <iframe class="absolute w-full h-full" src="//player.vimeo.com/video/740449454" frameborder="0" allowfullscreen allow="autoplay"></iframe>
+                        <iframe class="absolute w-full h-full" src="//player.vimeo.com/video/740449454" frameborder="0" allowfullscreen allow="autoplay" title="Playing Triplets"></iframe>
                     </div>
                     <h5><strong>Playing Triplets</strong></h5>
                 </div>
                 <div class="w-full sm:w-1/2 px-3 lg:px-5 mb-7 sm:mb-8 lg:mb-10">
                     <div class="overflow-hidden rounded-xl mb-3 sm:mb-4 aspect-16:9 w-full relative">
-                        <iframe class="absolute w-full h-full" src="//player.vimeo.com/video/740449465" frameborder="0" allowfullscreen allow="autoplay"></iframe>
+                        <iframe class="absolute w-full h-full" src="//player.vimeo.com/video/740449465" frameborder="0" allowfullscreen allow="autoplay" title="Sultas of Swing"></iframe>
                     </div>
                     <h5><strong>Sultans of Swing</strong></h5>
                 </div>
                 <div class="w-full sm:w-1/2 px-3 lg:px-5 sm:mb-8 lg:mb-10">
                     <div class="overflow-hidden rounded-xl mb-3 sm:mb-4 aspect-16:9 w-full relative">
-                        <iframe class="absolute w-full h-full" src="//player.vimeo.com/video/740449434" frameborder="0" allowfullscreen allow="autoplay"></iframe>
+                        <iframe class="absolute w-full h-full" src="//player.vimeo.com/video/740449434" frameborder="0" allowfullscreen allow="autoplay" title="Creating Space"></iframe>
                     </div>
                     <h5><strong>Creating Space</strong></h5>
                 </div>
@@ -165,28 +165,28 @@
             <div class="flex justify-center z-30 relative">
                 <div class="rounded-xl md:max-w-3xl lg:max-w-5xl bg-white py-6 md:py-8 lg:py-10 px-6 md:px-8 lg:px-20 -mt-24 mb-20 lg:mb-28 relative shadow-2xl">
                     <div class="flex items-start mb-6 text-left">
-                        <img class="h-8 lg:h-10 lazyload" data-src="https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/beyond_icon.svg">
+                        <img class="h-8 lg:h-10 lazyload" data-src="https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/beyond_icon.svg" alt="Beyond icon">
                         <div class="flex-grow pl-4">
                             <h5 class="text-guitareo"><strong>BEYOND BEGINNER</strong></h5>
                             <p class="leading-tight mt-1">For best results, you should know your basic chords.</p>
                         </div>
                     </div>
                     <div class="flex items-start mb-6 text-left">
-                        <img class="h-8 lg:h-10 lazyload" data-src="https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/sized_icon.svg">
+                        <img class="h-8 lg:h-10 lazyload" data-src="https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/sized_icon.svg" alt="Sized icon">
                         <div class="flex-grow pl-4">
                             <h5 class="text-guitareo"><strong>8 BITE-SIZED LESSONS</strong></h5>
                             <p class="leading-tight mt-1">Spend more time playing, not watching. Each lesson is between 6 to 13 minutes long.</p>
                         </div>
                     </div>
                     <div class="flex items-start mb-6 text-left">
-                        <img class="h-8 lg:h-10 lazyload" data-src="https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/practice_icon.svg">
+                        <img class="h-8 lg:h-10 lazyload" data-src="https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/practice_icon.svg" alt="Practice icon">
                         <div class="flex-grow pl-4">
                             <h5 class="text-guitareo"><strong>23 PRACTICE ALONGS</strong></h5>
                             <p class="leading-tight mt-1">You'll have short assignments to improve your strumming patterns and techniques.</p>
                         </div>
                     </div>
                     <div class="flex items-start text-left">
-                        <img class="h-8 lg:h-10 lazyload" data-src="https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/forever_icon.svg">
+                        <img class="h-8 lg:h-10 lazyload" data-src="https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/forever_icon.svg" alt="Forever icon">
                         <div class="flex-grow pl-4">
                             <h5 class="text-guitareo"><strong>YOURS FOREVER</strong></h5>
                             <p class="leading-tight mt-1">You'll have instant + lifetime access – to enjoy the lessons on your schedule.</p>
@@ -196,7 +196,7 @@
             </div>
 
             <div class="flex flex-wrap sm:flex-nowrap items-start justify-center sm:mt-8 mb-20">
-                <img class="border-8 border-white rounded-3xl shadow-xl w-52 sm:w-72 lg:w-96 relative -mb-8 sm:mb-0 sm:-mt-8 sm:-mr-8 z-10 lazyload" data-src="https://cdn.musora.com/image/fetch/w_760,q_auto:best/https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/coach.jpg">
+                <img class="border-8 border-white rounded-3xl shadow-xl w-52 sm:w-72 lg:w-96 relative -mb-8 sm:mb-0 sm:-mt-8 sm:-mr-8 z-10 lazyload" data-src="https://cdn.musora.com/image/fetch/w_760,q_auto:best/https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/coach.jpg" alt="Coach profile">
 
                 <div class="text-left bg-white text-black rounded-xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-24 max-w-xl sm:mt-8 w-full sm:w-auto sm:flex-grow">
                     <h6 class="uppercase text-guitareo leading-normal text-center sm:text-left mb-2">Guitar Teacher,<br class="inline sm:hidden"> Producer, Songwriter</h6>
@@ -248,7 +248,7 @@
     <div id="customize-anchor" class="anchor"></div>
     <section class="text-center px-5 sm:px-6 py-14 sm:py-20 lg:py-28 text-center text-white bg-center bg-cover lazyload" style="background-color:#051626;" data-bg="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/footer.jpg">
         <div class="container mx-auto">
-            <img class="h-14 sm:h-20 lg:h-24" src="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/Logo.svg"><br>
+            <img class="h-14 sm:h-20 lg:h-24" src="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/Logo.svg" alt="Rhythm and groove logo"><br>
             <h3 class="leading-normal my-6 sm:my-8"><strong>Get grooving on guitar</strong><br class="hidden sm:inline"> with fun rhythms you can add to any song.</h3>
             {{--<p class="text-coaches tracking-widest">LIMITED TIME OFFER</p>--}}
             <a class="join my-2 md:my-3 w-full max-w-xl" href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['rhythm-and-groove' => 1], 'redirect' => '/order']) }}">Start Your Course</a>
