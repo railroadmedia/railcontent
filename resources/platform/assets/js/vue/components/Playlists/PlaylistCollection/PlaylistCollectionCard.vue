@@ -39,7 +39,7 @@
             dropdownOpen: false,
             dropdownTop: false,
             isPinned: false,
-            isPrivate: false,
+            isPrivate: true,
         });
 
     //static data
@@ -208,6 +208,7 @@
                     :brand="brand"
                     :dropdownTop="state.dropdownTop"
                     :is-private="state.isPrivate"
+                    :is-pinned="state.isPinned"
                     :dropdownOptions="dropdownOptions"
                     :data="list"
                     :is-open="state.dropdownOpen"

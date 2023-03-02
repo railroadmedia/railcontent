@@ -1,8 +1,16 @@
 <script setup>
-    import { onBeforeMount, inject, reactive } from 'vue';
+    import { onBeforeMount, inject, computed, reactive } from 'vue';
     import MusoraIcon from '../../../MusoraIcons/MusoraIcon.vue';
     import PlaylistService from '../../../../../services/playlists';
     import { usePlaylistsStore } from '../../../../../stores/playlists';
+
+    //Inject
+    const token = inject('csrf_token');
+    //Pinia Stores
+    const playlistsStore = usePlaylistsStore();
+
+    //Emits
+    const emit = defineEmits(['onUnpin']);
 
     //-----------Props-----------//
     const props = defineProps({
@@ -16,13 +24,10 @@
         }
     });
 
-    //Inject
-    const token = inject('csrf_token');
-    //Pinia Stores
-    const playlistsStore = usePlaylistsStore();
-
-    //Emits
-    const emit = defineEmits(['onUnpin']);
+    //-----------Computed Props-----------//
+    const duration_formated = computed(()=> {
+        return props.list.duration_formated.replace(/^0(?:0:0?)?/, '');;
+    })
 
     //-----------Reactive Data-----------//
     const state = reactive({ 
@@ -42,14 +47,20 @@
     >
         <!-- Playlist thumbnail -->
         <div class="tw-relative tw-overflow-hidden tw-bg-white dark:tw-bg-[#081825] tw-aspect-square tw-h-[48px] tw-w-[48px] tw-rounded tw-shrink-0">
-            <img
-                v-if="list.thumbnail_url"
-                :src="list.thumbnail_url"
-                alt="playlist thumbnail"
-                class="tw-transition-opacity tw-opacity-0 tw-duration-500 tw-object-cover tw-object-center tw-w-full tw-h-full"
-                loading="lazy"
-                onload="this.classList.remove('tw-opacity-0')"
-            />
+            <!-- Image Conatiner -->
+            <div class="tw-relative tw-w-full tw-h-full" v-if="list.thumbnail_url">
+                <img
+                    :src="`https://musora.com/cdn-cgi/image/width=48/${list.thumbnail_url}`"
+                    alt="playlist thumbnail"
+                    class="tw-transition-opacity tw-opacity-0 tw-duration-500 tw-object-cover tw-object-center tw-w-full tw-h-full tw-blur-sm"
+                    loading="lazy"
+                    onload="this.classList.remove('tw-opacity-0')"
+                />
+                <!-- Image Mask -->
+                <div class="tw-z-10 tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-black/70 tw-flex tw-justify-center">
+                    <img class="tw-h-full tw-object-contain" :src="`https://musora.com/cdn-cgi/image/width=48/${list.thumbnail_url}`" alt="playlist thumbnail">
+                </div>
+            </div>
             <!-- placeholder (no image or items) -->
             <div v-else class="tw-transition tw-flex tw-items-center tw-justify-center tw-w-full tw-h-full tw-bg-[#3F3F46] dark:tw-bg-[#445F74]">
                 <svg class="tw-w-1/2 tw-h-1/2" width="79" height="79" viewBox="0 0 79 79" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -80,7 +91,7 @@
                         </span>   
                     </div> 
                     <div class="md:tw-w-1/2 tw-text-center">
-                        {{ list.duration || "0:00" }}
+                        {{ duration_formated || "0:00" }}
                     </div>
                 </div>
             </div>

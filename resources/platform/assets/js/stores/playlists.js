@@ -65,8 +65,9 @@ export const usePlaylistsStore = defineStore({
       this.playlistsQuantity--;
     },
     pinPlaylist(list) {
+      console.log('playlist ', list)
       //Pin in Catalog      
-      let playlist = this.playlists.find(p => p === list)
+      let playlist = this.playlists.find(p => p === list);
       playlist.pinned = true;
       //Pin in Sidebar
       this.pinnedPlaylists.push(list)

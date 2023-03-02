@@ -241,10 +241,20 @@
             <div class="tw-inline-flex tw-items-center tw-font-bold tw-shrink-0 tw-w-[40px] tw-pl-4">{{ props.index + 1 }}</div>
 
             <!-- Playlist thumbnail -->
-            <div class="tw-relative tw-inline-flex tw-overflow-hidden tw-bg-white dark:tw-bg-[#081825] tw-h-[61px] tw-w-[110px] tw-rounded tw-shrink-0">
+            <div class="tw-relative tw-inline-flex tw-overflow-hidden tw-bg-white dark:tw-bg-[#081825] tw-aspect-video tw-w-[110px] tw-rounded tw-shrink-0">
                 <!-- Image Conatiner -->
                 <div class="tw-relative tw-w-full tw-h-full" v-if="lessonThumbnail">
-                    <img :src="`https://musora.com/cdn-cgi/image/width=330/${lessonThumbnail}`" alt="playlist thumbnail">
+                    <img
+                        :src="`https://musora.com/cdn-cgi/image/width=330/${lessonThumbnail}`"
+                        alt="playlist thumbnail"
+                        class="tw-transition-opacity tw-opacity-0 tw-duration-500 tw-object-cover tw-object-center tw-w-full tw-h-full tw-blur-sm"
+                        loading="lazy"
+                        onload="this.classList.remove('tw-opacity-0')"
+                    />
+                    <!-- Image Mask -->
+                    <div class="tw-z-10 tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-black/70 tw-flex tw-justify-center">
+                        <img class="tw-h-full tw-object-contain" :src="`https://musora.com/cdn-cgi/image/width=330/${lessonThumbnail}`" alt="playlist thumbnail">
+                    </div>
                 </div>
             </div>
 
