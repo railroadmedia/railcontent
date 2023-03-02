@@ -99,14 +99,17 @@ const handleSaveItem = (playlistId) => {
 };
 
 const handleCreate = () => {
+    console.log(props.content)
     emit('onCancel');
     window.openplaylistmodal({
         modalType: 'create',
-        data: props.content,
-        callback: (playlistId) => {
-            handleSaveItem(playlistId);
-        }
+        data: { ...props.content, hasAddItemCallback: true, additionalItems: additionalItems.value },
     });
+
+    window.addItemCallback = function (playlistId) {
+        handleSaveItem(playlistId);
+        window.addItemCallback = null;
+    }
 }
 
 onMounted(() => {
@@ -115,6 +118,8 @@ onMounted(() => {
 
     if (props.content.type === 'song') {
         showSongToggle.value = true
+    } else if (props.content.type === 'Assignments') {
+        addFullSongToggle.value = true;
     } else {
         isLoadingAssignments.value = true;
         PlaylistService.getAssignmentsForContent({ token, contentId: props.content.content_id, brand: props.brand }).then((r) => {
@@ -206,7 +211,7 @@ onMounted(() => {
                 <PlusCircleIcon v-if="!selectedPlaylists.includes(String(slotProps.actionPayload))"
                     class="tw-w-[30px] tw-h-[30px] tw-text-[#3F3F46] dark:tw-text-[#7E9AB1]" />
                 <CheckCircleIcon v-if="selectedPlaylists.includes(String(slotProps.actionPayload))"
-                    :class="`tw-w-[30px] tw-h-[30px] tw-text-${brand}`" />
+                    :class="`tw-w-[30px] tw-h-[30px] tw-text-[#4ADE80]`" />
             </template>
         </Table>
         <div class="tw-w-full tw-flex tw-justify-between tw-pt-[25px]">

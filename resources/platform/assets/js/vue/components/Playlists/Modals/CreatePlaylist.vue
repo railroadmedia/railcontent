@@ -78,15 +78,20 @@
                 token,
                 payload
             }).then(function(response) {
-                if (response.status === 201) {
+                if (response.status === 201) { 
                     playlistsStore.loadingPlaylists = true;
                     //show success message
                     window.shownotification({
                         icon: 'playlist',
                         text: `'${payload.name}' was added to your library.`
                     })
-                    //load Playlists
-                    playlistsStore.getPlaylists({ brand: brand, page: playlistsStore.resultsPage, limit: null }, token);       
+                    if (props.playlist.hasAddItemCallback) {
+                        console.log(response.data)
+                        window.addItemCallback(response.data.data[0].id)
+                    } else {
+                        //load Playlists
+                        playlistsStore.getPlaylists({ brand: brand, page: playlistsStore.resultsPage, limit: null }, token);
+                    }  
                 }
             })
         }
@@ -210,6 +215,14 @@
             <span v-if="mode === 'edit'">Edit Playlist</span>
             <span v-if="mode === 'duplicate'">Duplicate Playlist</span>
         </h2>
+        <div v-if="playlist.hasAddItemCallback" class="tw-pt-[24px]">
+            <p v-if="playlist.additionalItems > 0">
+                <strong>{{ playlist.name }}</strong> with <strong>{{ playlist.additionalItems }}</strong> assignment items will be added to your new playlist
+            </p>
+            <p v-if="playlist.additionalItems === 0">
+                <strong>{{ playlist.name }}</strong> will be added to your new playlist
+            </p>
+        </div>
         <div class="tw-flex tw-pt-[24px]">
             <ThumbnailUpload :token="token" type='playlist' :imgUrl="state.thumb"/>
             <div class="tw-flex tw-flex-col tw-w-full">

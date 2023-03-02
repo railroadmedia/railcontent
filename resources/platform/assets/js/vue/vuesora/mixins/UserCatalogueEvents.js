@@ -1,8 +1,16 @@
 import ContentService from '../assets/js/services/content';
 import Toasts from '../assets/js/classes/toasts';
 
-export default {
 
+const getValue = (obj, key) => {
+    return obj.filter((field) => {
+        if (field.key === key) {
+            return true;
+        }
+    })[0].value;
+}
+
+export default {
     methods: {
         // Used at the top level to emit the event with a payload
         addToList(e) {
@@ -32,16 +40,18 @@ export default {
                     },
                 });
             } else {
-                const formattedFields = {};
-                this.item.fields.forEach((field) => {
-                    formattedFields[field.key] = field.value;
-                });
+                console.log({...this.item})
+                const name = getValue(this.item.fields, 'title');
+                const thumbnail_url = getValue(this.item.data, 'thumbnail_url');
+                const description = getValue(this.item.data, 'description');
 
                 this.emitAddToList({
                     content_id: this.item.id,
                     type: e.currentTarget.getAttribute('data-content-type'),
                     is_added: this.item.is_added_to_primary_playlist || false,
-                    fields: formattedFields
+                    name,
+                    thumbnail_url,
+                    description
                 });
             }
         },
