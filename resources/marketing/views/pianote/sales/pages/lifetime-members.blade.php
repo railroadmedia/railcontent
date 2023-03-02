@@ -117,7 +117,12 @@
             <h6 class="leading-tight"><strong>PAY ONCE. ENJOY LESSONS FOREVER.</strong></h6>
             <div class="w-full mx-auto mt-10 mb-20 px-3" style="max-width:920px;">
                 <div class="aspect-16:9 w-full relative">
-                    <iframe class="absolute w-full h-full reset-on-close" src="//player.vimeo.com/video/774401520" frameborder="0" allowfullscreen allow="autoplay" title="promo video"></iframe>
+
+
+                    <iframe class="absolute w-full h-full reset-on-close" src="//player.vimeo.com/video/803662615" frameborder="0" allowfullscreen allow="autoplay" title="promo video"></iframe>
+
+
+                    {{-- TODO swap vimeo when headphones are sold out: 803663213--}}
                 </div>
             </div>
 
@@ -214,10 +219,10 @@
 
     <div id="customize-anchor" class="anchor anchor-slide"></div>
     <section class="content-section text-center customize" style="background: #000;">
-        <div class="container mx-auto max-w-4xl">
+        <div class="container mx-auto max-w-6xl">
             <h4 class="leading-tight mb-5 md:mb-7 lg:mb-10" style="line-height: 1.4em;"><strong>Become a Lifetime Member today and get:
                 </strong></h4>
-            <div class="horizontal-bonuses mx-auto max-w-xs sm:max-w-md md:max-w-4xl" style="font-size: 0;">
+            <div class="horizontal-bonuses mx-auto max-w-xs sm:max-w-md md:max-w-6xl" style="font-size: 0;">
                 <div class="w-full">
                     <div class="bonus-wrap relative inline-block align-top mx-auto px-1 md:px-3 w-full max-w-md mb-6">
                         <div class="flip-div inline-block relative w-full group" style="padding-bottom: 47%;perspective: 1000px;">
@@ -268,13 +273,6 @@
                             'feature' => "Free Shipping",
                         ],
                         [
-                            'image' => 'https://pianote.s3.amazonaws.com/sales/promos/november/bonuses/christmas-book.jpg',
-                            'title' => 'Christmas Book',
-                            'description' => '14 beautiful Christmas Carols hand-picked and arranged for solo piano.',
-                            'price' => 39,
-                            'feature' => "Free Shipping",
-                        ],
-                        [
                             'image' => 'https://pianote.s3.amazonaws.com/sales/promos/november/bonuses/christmas-songbook-card.jpg',
                             'title' => 'Christmas Book',
                             'description' => 'Learn these 10 beautiful Christmas Carols.',
@@ -300,7 +298,7 @@
                             'title' => 'Exclusive Masterclass',
                             'description' => 'Join Lisa in an exclusive LIVE Zoom masterclass to get your questions answered.',
                             'price' => -1,
-                            'feature' => "<b class='text-promo'>Exclusive <br>Masterclass</b>",
+                            'feature' => "<b class='text-promo'>Exclusive</b> <br>Masterclass",
                         ],
                         [
                             'image' => 'https://guitareo.s3.amazonaws.com/sales/lifetime/guitareo-lifetime.jpg',
@@ -333,7 +331,7 @@
                     ]
                 @endphp
                 @foreach($bonuses as $key => $bonus)
-                    <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3 w-1/2 md:w-1/4">
+                    <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3 w-1/2 md:w-1/4 lg:w-1/6">
                         <div class="flip-div inline-block relative w-full group" style="@if(empty($bonus['bigCard'])) padding-bottom: 133%; @else padding-bottom: 103%; @endif perspective: 1000px;">
                             <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
                                 <div class="front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700 border-2 border-promo" style="@if(!empty($bonus['special'])) overflow: visible;border-color: #cda880; @endif backface-visibility: hidden;">
@@ -373,7 +371,7 @@
 
 {{--            @if($products['PIANOTE-MEMBERSHIP-LIFETIME']->getStockAvailability() > 0)--}}
                 <a  href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[pianote-headphones]=1&products[piano-chords-and-scales-guide]=1&products[pianote-practice-planner]=1&products[christmas-song-book]=1&products[christmas-song-book-digital]=1&products[poster-chords]=1&products[poster-scales]=1&products[the-power-of-chords]=1&products[classical-piano]=1&products[jesus-molina-improvisation-and-musical-freedom-pack]=1&products[play-beautiful-piano]=1&products[piano-riffs-and-fills]=1&products[piano-technique-made-easy]=1&products[destupefy-your-left-hand]=1&products[worship-piano]=1&products[faster-fingers]=1&redirect=/order&locked=true"
-                                        class="join methodcta my-4" style="background:#FB0188;">Become A lifetime Member &raquo;</a>
+                                        class="join methodcta my-4">Become A lifetime Member &raquo;</a>
             {{--<p>(Or choose a payment plan on the next page.)</p>--}}
 {{--            @else--}}
 {{--                <span class="join sold-out methodcta my-4">Sold Out</span>--}}

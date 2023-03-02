@@ -138,7 +138,7 @@
     @include('._partials.components.sticky-bar',[
         'link' => '#order',
         'logo' => 'https://pianote.s3.amazonaws.com/sales/promos/anniversary/2023/logo.png',
-        'text' => 'SAVE 17% ON YOUR FIRST YEAR OF <br>LESSONS + GET $962 IN FREE BONUSES',
+        'text' => 'SAVE 18% ON YOUR FIRST YEAR OF <br>LESSONS + GET $962 IN FREE BONUSES',
     ])
 
     @php
@@ -225,7 +225,7 @@
                 Time flies when you’re changing the world. <br><br>
                 This month we’re celebrating 7 years since Pianote began its mission of spreading the joy of music across the globe.<br><br>
                 <b>And you get the presents!</b><br><br>
-                Join Pianote today and you’ll save 17% on your first year of lessons PLUS get 13 incredible bonuses. <br><br>
+                Join Pianote today and you’ll save 18% on your first year of lessons PLUS get 13 incredible bonuses. <br><br>
                 So come party with us! <br><br>
                 <a class="join pianote smaller w-full lg:w-96 mb-2" href="#order">Get Started &raquo;</a>
                 <p class="uppercase"><b>GEN IN QUICK!</b> Only @if($products['pianote-headphones']->getPublicStockCount() < 500)<s>500</s>@endif {{ $products['pianote-headphones']->getPublicStockCount() }} Headphones left!</p>
@@ -653,7 +653,7 @@
         <p class="max-w-lg">Step-by-step lessons, world-class instructors, and thousands of songs at your fingertips. The ultimate in online piano lessons.</p>',
         'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[pianote-headphones]=1&products[piano-chords-and-scales-guide]=1&products[poster-chords]=1&products[poster-scales]=1&products[the-power-of-chords]=1&products[classical-piano]=1&products[jesus-molina-improvisation-and-musical-freedom-pack]=1&products[play-beautiful-piano]=1&products[piano-riffs-and-fills]=1&products[piano-technique-made-easy]=1&products[destupefy-your-left-hand]=1&products[worship-piano]=1&products[faster-fingers]=1&redirect=/order&locked=true',
         'altButtonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-MONTH]=1&redirect=%2Forder',
-        'firstYearPrice' => 197,    
+        'firstYearPrice' => 197,
     ])
 
     @include('musora.sales.components.app-section', [
@@ -674,11 +674,14 @@
         'video' => '785314388',
         'vimeo' => true,
     ])
+
+{{--    TODO swap when headphones sell out:--}}
+{{--    TODO 803663343 --}}
     @include('_partials.components.video-modal',[
     'name' => 'promoTrailer',
-    'video' => 'TODO',
+    'video' => '803662678',
     'vimeo' => true,
-])
+    ])
     @include('_partials.components.video-modal',[
         'name' => 'unbox',
         'video' => '774408046',
