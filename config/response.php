@@ -2796,6 +2796,8 @@ return [
 
         'playlist-item' => [
             'id',
+            'fields.video.fields.vimeo_video_id',
+            'fields.video.fields.youtube_video_id',
             'data.thumbnail_url',
             'data.sheet_music_thumbnail_url',
             'difficulty_string',
@@ -2832,6 +2834,7 @@ return [
             'is_instrumentless_track',
             'route',
             'is_song_assignment',
+            'set_start_end_time',
             'parent'
         ],
     ],
