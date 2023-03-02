@@ -73,7 +73,7 @@ if (!function_exists('cf_img')) {
             return '';
         }
 
-        $urlString = 'https://musora.com/cdn-cgi/image/';
+        $urlString = 'https://www.musora.com/musora-cdn/image/';
         $optionsStringArray = [];
 
         foreach ($options as $optionKey => $optionValue) {
