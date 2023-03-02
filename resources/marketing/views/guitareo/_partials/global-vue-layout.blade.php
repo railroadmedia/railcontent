@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport"
-          content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1">
+          content="width=device-width, height=device-height, initial-scale=1, maximum-scale=5">
 
     @yield('meta')
 

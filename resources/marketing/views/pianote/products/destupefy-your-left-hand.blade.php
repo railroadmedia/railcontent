@@ -21,15 +21,15 @@
         "cartVersion" => true
     ])
     @include('pianote._partials._promo-banner-no-tw', [
-                    "name" => "De-Stupefy Your Left Hand",
-                    "fullPrice" => floatval($productPrices['destupefy-your-left-hand']->price),
-                    "price" => floatval($productPrices['destupefy-your-left-hand']->discounted_price),
-                    "noBreadcrumb" => true
-                ])
+        "name" => "De-Stupefy Your Left Hand",
+        "fullPrice" => floatval($productPrices['destupefy-your-left-hand']->price),
+        "price" => floatval($productPrices['destupefy-your-left-hand']->discounted_price),
+        "noBreadcrumb" => true
+    ])
     <header class="header text-center" style="background-image:url(https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/destupefy-your-left-hand/header.jpg);">
         <div class="container">
             <img class="logo"
-                    src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/destupefy-your-left-hand/de-stupefy-logo.png"><br>
+                    src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/destupefy-your-left-hand/de-stupefy-logo.png" alt="destupefy logo"><br>
             <i class="fas fa-play play-vimeo autoplay-video" data-toggle="modal" data-target="#trailer"></i>
             <h1><strong>It’s time to tame<br class="hidden-sm hidden-md hidden-lg"> your left hand.</strong></h1>
             <a class="join" href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['destupefy-your-left-hand' => 1], 'redirect' => '/order', 'locked' => 'false']) }}">Get Started &raquo;</a>
@@ -58,8 +58,8 @@
     </div>
     <section class="feel-stuck">
         <div class="container">
-            <img class="hidden-xs" src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/destupefy-your-left-hand/quotes.png">
-            <img class="hidden-sm hidden-md hidden-lg" src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/destupefy-your-left-hand/quotes-mobile-1.png">
+            <img class="hidden-xs" src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/destupefy-your-left-hand/quotes.png" alt="Quote diagram">
+            <img class="hidden-sm hidden-md hidden-lg" src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/destupefy-your-left-hand/quotes-mobile-1.png" alt="Quote diagram">
             <h2><strong>Your Left Hand Is Weaker...</strong></h2>
             <p>And you know it.
                 <br><br>
@@ -317,7 +317,7 @@
                 <br><br>
                 Because I know if I can do it… <strong>So can you.</strong>
                 <br><br>
-                <img src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-riffs-and-fills/lisa-witt-signature.png">
+                <img src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-riffs-and-fills/lisa-witt-signature.png" alt="Lisa signature">
             </p>
         </div>
     </section>
@@ -372,7 +372,7 @@
     </section>
     <section class="final text-center lazy" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/destupefy-your-left-hand/order-background.jpg">
         <div class="container">
-            <img class="logo lazy" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/destupefy-your-left-hand/de-stupefy-logo.png">
+            <img class="logo lazy" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/destupefy-your-left-hand/de-stupefy-logo.png" alt="destupefy logo">
             <h1><strong>It’s time to tame<br class="hidden-sm hidden-md hidden-lg"> your left hand.</strong></h1>
             <a href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['destupefy-your-left-hand' => 1], 'redirect' => '/order', 'locked' => 'false']) }}" class="join">Get Started &raquo;</a>
             <p class="breakdown">
