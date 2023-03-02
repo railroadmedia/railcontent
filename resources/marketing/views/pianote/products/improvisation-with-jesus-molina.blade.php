@@ -255,7 +255,7 @@
     {{--</section>--}}
 
     <div id="lessons" class="anchor"></div>
-    <section class="px-4 sm:px-8 py-10 md:py-12 md:py-14 text-white text-center overflow-hidden" style="background-color:#000c17;">
+    <section class="px-4 sm:px-8 py-10 md:py-12 md:py-14 text-white text-center overflow-hidden bg-musora-black">
         <div class="container mx-auto max-w-5xl">
             <h2><strong>Become a better musician</strong></h2>
             <h6 class="mt-1 mb-7"><em>All the tools at your fingertips.</em></h6>
