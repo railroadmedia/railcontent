@@ -267,6 +267,13 @@
                             'feature' => "Free Shipping",
                         ],
                         [
+                            'image' => 'https://pianote.s3.amazonaws.com/sales/promos/november/bonuses/classical-piano-book.jpg',
+                            'title' => 'Classical <br>Book',
+                            'description' => '92 pages full of beautiful pieces by famous classical composers that you can actually play!',
+                            'price' => 39,
+                            'feature' => "Free Shipping",
+                        ],
+                        [
                             'image' => 'https://pianote.s3.amazonaws.com/sales/promos/november/bonuses/christmas-songbook-card.jpg',
                             'title' => 'Christmas Book',
                             'description' => 'Learn these 10 beautiful Christmas Carols.',
