@@ -17,7 +17,7 @@
                 <p class="instructor hidden lg:inline"><em>{{ $instructor }} </em></p>
             @endif
             @if(!empty($logo))
-                <img class="hidden max-h-20 w-full mx-auto mb-4 object-contain lg:block @if(!empty($invert)) filter invert @endif" src="{{ $logo }}">
+                <img class="hidden max-h-20 w-full mx-auto mb-4 object-contain lg:block @if(!empty($invert)) filter invert @endif" src="{{ $logo }}" alt="Product logo">
             @endif
 
             @if(isset($fullPrice) && isset($price) && ($fullPrice - $price) > 0)

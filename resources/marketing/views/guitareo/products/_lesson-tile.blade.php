@@ -1,5 +1,5 @@
 <div class="columns lesson-tile">
-    <img src="{{ $imageURL }}">
+    <img src="{{ $imageURL }}" alt="{{ $tileTitle }} thumbnail">
     <h1>{{ $tileTitle }}</h1>
     <p>@if(!empty($tileDescription))
             {{ $tileDescription }}<br>

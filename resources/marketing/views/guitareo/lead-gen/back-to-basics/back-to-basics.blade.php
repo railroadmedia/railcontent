@@ -163,7 +163,7 @@
 @endsection
 
 @section('body')
-    <header class="header text-white text-center px-3 py-6 md:py-16 relative bg-no-repeat bg-top" style="background-color:#000C17;">
+    <header class="header text-white text-center px-3 py-6 md:py-16 relative bg-no-repeat bg-top bg-musora-black">
         <div class="mx-auto relative z-10 max-w-md md:max-w-5xl">
             <div class="flex flex-wrap items-center">
                 <div class="w-full md:w-7/12 lg:w-2/3 md:text-left">
@@ -198,7 +198,7 @@
         </div>
     </header>
 
-    <section class="text-white py-12 sm:py-20 px-4 sm:px-6" style="background:#000C17;">
+    <section class="text-white py-12 sm:py-20 px-4 sm:px-6 bg-musora-black">
         <div class="max-w-sm md:max-w-3xl lg:max-w-4xl mx-auto">
             <div class="md:grid md:grid-cols-2 sm:gap-6 md:gap-10 items-center justify-center flex flex-col mx-auto">
                 <img class="md:order-1 rounded-md mb-7 md:mb-0 md:w-auto mx-auto lazyload" data-src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/back-to-basics/collage.png" alt="intro image">
@@ -216,7 +216,7 @@
         </div>
     </section>
 
-    <section class="pt-10 pb-20" style="background:#000C17;">
+    <section class="pt-10 pb-20 bg-musora-black">
         <div class="max-w-sm sm:max-w-4xl mx-auto text-white px-2 sm:px-4 md:px-0">
             <h5 class="text-center font-extrabold leading-normal">
                 These 60-minute LIVE lessons have been designed to help you optimize <br class="hidden sm:inline-block">your guitar playing sessions – for today and beyond.
@@ -307,12 +307,12 @@
 
     {{-- diagonal line --}}
     <div class="relative h-5 sm:h-7 -mb-5 sm:-mb-7" style="background: linear-gradient(to top left, transparent calc(50% - 1px), transparent, #fafafa calc(50% + 1px));"></div>
-    <section class="px-4 py-14 sm:py-20 md:pb-32" style="background:#000C17;">
+    <section class="px-4 py-14 sm:py-20 md:pb-32 bg-musora-black">
         <div class="max-w-3xl lg:max-w-4xl mx-auto relative">
             <div class="w-3/4 sm:w-2/3 mx-auto relative md:static text-center mb-8">
                 <picture>
                     <source media="(min-width: 768px)" srcset="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/back-to-basics/coach_profile.png">
-                    <img class="md:w-80 lg:w-96 md:absolute -bottom-10 -right-0 lg:-right-2 md:border-8 rounded-3xl md:border-solid lazyload" data-src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/back-to-basics/coach_profile_m.png" alt="coach image" style="border-color: #000C17;">
+                    <img class="md:w-80 lg:w-96 md:absolute -bottom-10 -right-0 lg:-right-2 md:border-8 rounded-3xl md:border-solid border-musora-black lazyload" data-src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/back-to-basics/coach_profile_m.png" alt="coach image">
                 </picture>
             </div>
 

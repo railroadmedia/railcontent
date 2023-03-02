@@ -135,7 +135,7 @@ a.text-yellow:hover {
 }
 
 .header {
-  background: #000c17 center top/700px no-repeat;
+  background: $musoraBlack center top/700px no-repeat;
   position: relative;
   color: #FFF;
   padding: 25px 10px 0;
@@ -153,7 +153,7 @@ a.text-yellow:hover {
     position: absolute;
     bottom: 0;
     height: 80px;
-    background: linear-gradient(0deg, #000c17, transparent);
+    background: linear-gradient(0deg, $musoraBlack, transparent);
     z-index: 1;
     left: 0;
     right: 0;
@@ -180,7 +180,7 @@ a.text-yellow:hover {
     position: absolute;
     transform: translate(-50%, -50%) rotate(15deg);
     font: 400 14px/1em $bebas;
-    text-shadow: 0 0 20px #000c17;
+    text-shadow: 0 0 20px $musoraBlack;
     top: 150px;
     left: 68%;
     @include tablet {
@@ -402,7 +402,7 @@ a.text-yellow:hover {
 }
 
 .better-way {
-  background: #000c17 center top/cover no-repeat;
+  background: $musoraBlack center top/cover no-repeat;
   color: #fff;
   padding: 30px 15px;
   @include tablet {
@@ -487,7 +487,7 @@ a.text-yellow:hover {
     }
 
     &.image-badge {
-      background: #000c17;
+      background: $musoraBlack;
       border-color: #001e38;
       padding: 9px 0;
       @include tablet {
@@ -610,7 +610,7 @@ a.text-yellow:hover {
 
 .platform-wrap {
   overflow: hidden;
-  background: #000c17 center top/cover no-repeat;
+  background: $musoraBlack center top/cover no-repeat;
   color: #fff;
   padding: 30px 0;
   @include tablet {
@@ -825,7 +825,7 @@ a.text-yellow:hover {
 }
 
 .final {
-  background: #000c17 65% 50%/cover;
+  background: $musoraBlack 65% 50%/cover;
   color: #fff;
   text-align: center;
   padding: 50px 10px;

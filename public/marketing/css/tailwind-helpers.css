@@ -46,6 +46,10 @@
     background-color:#8300E9;
 }
 
+.bg-musora-black {
+    background-color:#000C17;
+}
+
 /*borders*/
 .border-drumeo {
     border-color:#0B76DB;
@@ -65,6 +69,9 @@
 
 .border-sky-900 {
     border-color:#0c4a6e;
+}
+.border-musora-black {
+    border-color:#000C17;
 }
 
 /*typography*/

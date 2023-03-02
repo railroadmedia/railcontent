@@ -20,7 +20,7 @@
 
 @section('global-body')
     @include("drumeo.sales.partials._nav")
-    <header class="relative text-white text-center bg-cover bg-top pb-8 md:pb-12 lg:pb-16 pt-40 md:pt-64 lg:pt-96 px-4" style="background-color:#000c18;background-image:url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/drumeo-header.jpg);">
+    <header class="relative text-white text-center bg-cover bg-top pb-8 md:pb-12 lg:pb-16 pt-40 md:pt-64 lg:pt-96 px-4 bg-musora-black" style="background-image:url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/drumeo-header.jpg);">
         <div class="container mx-auto relative z-10">
             <h1 class="lg:mt-10"><strong>Jared’s Top Gear Picks</strong></h1>
             <h5 class="mt-3 md:mt-5 mb-3 md:mb-4">WE RECOMMEND:</h5>
@@ -39,7 +39,7 @@
                 </div>
             </div>
         </div>
-        <div class="absolute bottom-0 right-0 top-24 md:top-1/2 left-0 z-0" style="background:linear-gradient(to bottom, transparent, #000c18);"></div>
+        <div class="absolute bottom-0 right-0 top-24 md:top-1/2 left-0 z-0" style="background:linear-gradient(to bottom, transparent, #000C17);"></div>
     </header>
     <section class="py-10 md:py-16 px-2 recommended">
         <div class="container mx-auto max-w-xs md:max-w-5xl">

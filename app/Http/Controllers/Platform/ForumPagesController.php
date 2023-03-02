@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Platform;
 
+use Modules\UserManagementSystem\Models\BlockedUser;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -84,6 +85,7 @@ class ForumPagesController extends Controller
 
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
         \Railroad\Railforums\Decorators\ModeDecoratorBase::$decorationMode = \Railroad\Railforums\Decorators\ModeDecoratorBase::DECORATION_MODE_MINIMUM;
+        PostRepository::$blockedUserIds =  BlockedUser::where('blocker_id','=',user()->id)->get()->pluck('user_id')->toArray();
 
         $threads = $this->threadRepository->getDecoratedThreads(
             $amount,
@@ -243,6 +245,8 @@ class ForumPagesController extends Controller
         $pinned = (boolean)$request->get('pinned');
         $followed = $request->has('followed') ? (boolean)$request->get('followed') : null;
 
+        PostRepository::$blockedUserIds =  BlockedUser::where('blocker_id','=',user()->id)->get()->pluck('user_id')->toArray();
+
         $sortBy = $request->get('sortby_val', '-last_post_published_on');
 
         $threads = $this->threadRepository->getDecoratedThreads(
@@ -378,6 +382,7 @@ class ForumPagesController extends Controller
         $amount = $request->get('amount', 20);
         $page = $request->get('page', 1);
         $sortBy = $request->get('sortby_val', '-last_post_published_on');
+        PostRepository::$blockedUserIds =  BlockedUser::where('blocker_id','=',user()->id)->get()->pluck('user_id')->toArray();
 
         $threads = $this->threadRepository->getDecoratedThreads($amount, $page, [], null, null, $sortBy);
 
@@ -455,6 +460,7 @@ class ForumPagesController extends Controller
         $sortBy = $request->get('sortby_val', '-published_on');
 
         \Railroad\Railforums\Decorators\ModeDecoratorBase::$decorationMode = \Railroad\Railforums\Decorators\ModeDecoratorBase::DECORATION_MODE_MAXIMUM;
+        PostRepository::$blockedUserIds =  BlockedUser::where('blocker_id','=',user()->id)->get()->pluck('user_id')->toArray();
 
         $thread =
             $this->threadRepository->getDecoratedThreadsByIds([$id])

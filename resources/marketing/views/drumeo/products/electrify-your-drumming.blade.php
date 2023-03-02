@@ -49,7 +49,7 @@
 
     <header class="header text-center" style="background-image:url(https://dpwjbsxqtam5n.cloudfront.net/drum-shop/electrify-your-drumming/header.jpg);">
         <div class="row">
-            <img class="logo" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/electrify-your-drumming/logo.png">
+            <img class="logo" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/electrify-your-drumming/logo.png" alt="Electrify your drumming logo">
             <br>
             <i data-open="previewModal" class="fas fa-play play-button autoplay-video"></i>
             <h1>The ultimate guide to playing<br>
@@ -83,7 +83,7 @@
         <div class="row">
             <h1 class="permanent"><span class="text-yellow">POWER</span><br>OUTAGE</h1>
             <div class="flex-container">
-                <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/electrify-your-drumming/power-outage-scenario.png">
+                <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/electrify-your-drumming/power-outage-scenario.png" alt="Diagram">
                 <p>The band wants to play a song that originally had a fully produced drum beat. Now it’s up to you to recreate it on a drum set. But every time you try, it sounds like the power is out.
                     <br><br>
                     This is the problem drummers face more & more. And who’s to blame? Electronic Dance Music.
@@ -100,8 +100,7 @@
     <section class="amplify-songs text-center" style="background-image:url(https://dpwjbsxqtam5n.cloudfront.net/drum-shop/electrify-your-drumming/amplify-every-song.jpg);">
         <div class="row">
             <h1 class="permanent"><span class="text-yellow">AMPLIFY</span><br>EVERY SONG</h1>
-<br>
-
+            <br>
             <div class="columns medium-4 emoji-point">
                 <i class="fal fa-drum text-yellow"></i>
                 <h3><strong>Energy-Building Fills</strong></h3>
@@ -414,9 +413,9 @@
 
     <section class="text-center guarantee">
         <div class="row">
-            <img class="guarantee-badge hide-for-medium" src="https://dpwjbsxqtam5n.cloudfront.net/sales/guarantee-badge.png">
+            <img class="guarantee-badge hide-for-medium" src="https://dpwjbsxqtam5n.cloudfront.net/sales/guarantee-badge.png" alt="Guarantee badge">
             <div class="flex-container">
-                <img class="guarantee-badge show-for-medium" src="https://dpwjbsxqtam5n.cloudfront.net/sales/guarantee-badge.png">
+                <img class="guarantee-badge show-for-medium" src="https://dpwjbsxqtam5n.cloudfront.net/sales/guarantee-badge.png" alt="Guarantee badge">
                 <div class="text-wrap medium-text-left">
                     <h2><strong>90-Day Money-Back Guarantee</strong></h2>
                     <p><strong>We love our students.</strong> And we always want you to have an amazing experience on the drums. So to make sure you LOVE your drum lessons, Electrify Your Drumming is backed by a 100% money-back guarantee. If you don’t love the lessons, just contact us within 90-days and contact support for a full refund.</p>
@@ -428,7 +427,7 @@
     <section class="final" style="background-image:url(https://dpwjbsxqtam5n.cloudfront.net/drum-shop/electrify-your-drumming/order-section.jpg);">
         <div id="customize-anchor" class="anchor"></div>
         <div class="row">
-            <div class="columns logo"><img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/electrify-your-drumming/logo.png"></div>
+            <div class="columns logo"><img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/electrify-your-drumming/logo.png" alt="Electrify your drumming logo"></div>
 
             <h2 class="columns">The ultimate guide to playing<br>
                 <strong>electronic dance music</strong> on the drums.</h2>

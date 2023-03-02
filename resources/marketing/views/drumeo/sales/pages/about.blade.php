@@ -101,7 +101,7 @@
             <a class="join smaller outline" href="{{ get_musora_brand_base_url() }}/contact">CONTACT US</a>
         </div>
     </section>
-    <section class="text-white relative z-10 overflow-hidden px-4 md:px-8 py-8 md:py-14 bg-cover bg-center" style="background:#000c17;">
+    <section class="text-white relative z-10 overflow-hidden px-4 md:px-8 py-8 md:py-14 bg-cover bg-center bg-musora-black">
         <div class="container mx-auto relative z-10 max-w-5xl">
             <div class="flex flex-wrap sm:flex-nowrap lg:items-center">
                 <div class="coaches w-full sm:w-5/12 lg:w-1/2 mb-5 sm:mb-0 sm:pl-5 mx-auto sm:order-1 text-center">
@@ -195,7 +195,7 @@
         </div>
     </section>
 
-    <section class="text-white text-center relative z-10 overflow-hidden px-2 py-8 md:py-14 bg-cover bg-center" style="background:#000c17;">
+    <section class="text-white text-center relative z-10 overflow-hidden px-2 py-8 md:py-14 bg-cover bg-center bg-musora-black">
         <div class="container mx-auto max-w-6xl">
             <h3 class="" data-aos="fade-up"><strong>More than just drum lessons.</strong></h3>
             <p class="text-light-navy mt-1.5 mb-6">Drumeo is one brand under <a href="https://www.musora.com/"><u>Musora</u></a>: a group of organizations that help musicians<br class="hidden sm:inline"> develop their skills and connect with others. Let’s make music together!</p>
@@ -395,7 +395,7 @@
             </div>
         </div>
     </section>
-    <section class="text-white text-center relative z-10 overflow-hidden px-4 md:px-8 py-8 md:py-14 bg-cover bg-center" style="background:#000c17;">
+    <section class="text-white text-center relative z-10 overflow-hidden px-4 md:px-8 py-8 md:py-14 bg-cover bg-center bg-musora-black">
         <div class="container mx-auto max-w-6xl">
             <h3 data-aos="fade-up"><strong>We’re everywhere.</strong></h3>
             <p class="text-light-navy mt-1.5 mb-5 lg:mb-7">Jaw-dropping video clips. Live drum lessons and interviews. Helpful tips and articles.

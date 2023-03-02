@@ -78,7 +78,7 @@
             </div>
         </div>
     </section>
-    <section class="content-section relative overflow-hidden text-white text-center py-10 md:py-16 lg:py-20" style="background-color:#000c17;">
+    <section class="content-section relative overflow-hidden text-white text-center py-10 md:py-16 lg:py-20 bg-musora-black">
         <div class="container mx-auto relative z-0 max-w-5xl">
             <h3><strong>Meet Musora</strong></h3>
             <p class="text-[#a1afc9] leading-normal mt-2 md:mt-5 mb-8 md:mb-12">
@@ -95,7 +95,7 @@
 
         </div>
     </section>
-    <section class="content-section relative overflow-hidden text-white text-center py-10 md:py-16 lg:py-20" style="background-color:#000c17;">
+    <section class="content-section relative overflow-hidden text-white text-center py-10 md:py-16 lg:py-20 bg-musora-black">
         <div class="container mx-auto relative z-0 max-w-6xl">
             <h3 class="mb-8 md:mb-14"><strong>Our Leadership Team</strong></h3>
             <div class="flex flex-wrap items-start justify-center mx-auto" style="max-width:1060px">

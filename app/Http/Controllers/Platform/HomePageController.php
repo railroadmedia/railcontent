@@ -12,6 +12,7 @@ use App\Services\LiveStreamEventService;
 use App\Services\PackService;
 use App\Services\UserMetricsService;
 use Illuminate\Support\Facades\Mail;
+use Modules\UserManagementSystem\Models\BlockedUser;
 use Railroad\Railcontent\Services\UserContentProgressService;
 use Carbon\Carbon;
 use Illuminate\Database\DatabaseManager;
@@ -28,6 +29,7 @@ use Railroad\Railcontent\Services\ContentFollowsService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\UserPlaylistsService;
 use Railroad\Railcontent\Support\Collection as RailcontentCollection;
+use Railroad\Railforums\Repositories\PostRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use App\Modules\Content\Services\CarouselService;
 
@@ -399,6 +401,8 @@ class HomePageController extends BaseController
      */
     private function getHotForumTopics()
     {
+        PostRepository::$blockedUserIds =  BlockedUser::where('blocker_id','=',user()->id)->get()->pluck('user_id')->toArray();
+
         // latest forum posts
         $forumPosts =
             $this->databaseManager->connection(config('railforums.database_connection_name'))
@@ -409,6 +413,7 @@ class HomePageController extends BaseController
                 ->whereNull('forum_posts.deleted_at')
                 ->whereNull('forum_threads.deleted_at')
                 ->where('forum_posts.state', 'published')
+                ->whereNotIn('forum_posts.author_id', PostRepository::$blockedUserIds)
                 ->orderBy('forum_threads.last_post_id', 'desc')
                 ->get();
 

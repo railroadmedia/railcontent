@@ -21,15 +21,14 @@
         "cartVersion" => true
     ])
     @include('pianote._partials._promo-banner-no-tw', [
-                    "name" => "Piano Technique Made Easy",
-                    "fullPrice" => floatval($productPrices['piano-technique-made-easy']->price),
-                    "price" => floatval($productPrices['piano-technique-made-easy']->discounted_price),
-                    "noBreadcrumb" => true
-                ])
+        "name" => "Piano Technique Made Easy",
+        "fullPrice" => floatval($productPrices['piano-technique-made-easy']->price),
+        "price" => floatval($productPrices['piano-technique-made-easy']->discounted_price),
+        "noBreadcrumb" => true
+    ])
     <header class="header text-center" style="background-image:url(https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/header.jpg);">
         <div class="container">
-            <img class="logo"
-                    src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/logo.png"><br>
+            <img class="logo" src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/logo.png" alt="Pianote technique made easy logo"><br>
             <i class="fas fa-play play-vimeo autoplay-video" data-toggle="modal" data-target="#trailer"></i>
             <h2>Master the fundamentals -- so you can <br> <strong>play anything you want on the piano.</strong></h2>
             {{--<a class="join" href="/piano-technique-made-easy/notify">Notify Me &raquo;</a>--}}
@@ -65,8 +64,8 @@
     </div>
     <section class="feel-stuck">
         <div class="container">
-            <img class="hidden-xs" src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/struggle-graphic.png">
-            <img class="hidden-sm hidden-md hidden-lg" src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/struggle-graphic-mobile.png">
+            <img class="hidden-xs" src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/struggle-graphic.png" alt="Struggle diagram">
+            <img class="hidden-sm hidden-md hidden-lg" src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/struggle-graphic-mobile.png" alt="Struggle diagram">
             <p>Feeling stuck on the keys? Like you’ve hit a wall you just can’t break through?
                 <br><br>
                 We all have that one song -- you know, the one you WANT to play but wonder if you’ll ever be good enough to make it happen.
@@ -99,7 +98,7 @@
     </section>
     <span class="sticky-trigger"></span>
     <section class="five-skills text-center">
-        <img class="sticky-pic" src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/skill-section-background.jpg">
+        <img class="sticky-pic" src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/skill-section-background.jpg" alt="Skill section background">
         <div class="container">
             <h2><strong>Jump To The Skill You’d <br class="hidden-sm hidden-md hidden-lg">Like To Improve The Most:</strong></h2>
             <div class="subnav-shim hidden-xs"></div>
@@ -257,68 +256,68 @@
             <div class="clearfix">
                 <div class="image-grid-item half-padding col-xs-6 col-sm-4 col-md-3">
                     <img class="lazy" src=""
-                            data-src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/level-1.jpg">
+                            data-src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/level-1.jpg" alt="Level 1 thumbnail">
                 </div>
 
                 <div class="image-grid-item half-padding col-xs-6 col-sm-4 col-md-3">
                     <img class="lazy" src=""
-                            data-src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/level-2.jpg">
-                </div>
-
-
-                <div class="image-grid-item half-padding col-xs-6 col-sm-4 col-md-3">
-                    <img class="lazy" src=""
-                            data-src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/level-3.jpg">
-                </div>
-
-                <div class="image-grid-item half-padding col-xs-6 col-sm-4 col-md-3">
-                    <img class="lazy" src=""
-                            data-src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/level-4.jpg">
+                            data-src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/level-2.jpg" alt="Level 2 thumbnail">
                 </div>
 
 
                 <div class="image-grid-item half-padding col-xs-6 col-sm-4 col-md-3">
                     <img class="lazy" src=""
-                            data-src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/level-5.jpg">
+                            data-src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/level-3.jpg" alt="Level 3 thumbnail">
                 </div>
 
                 <div class="image-grid-item half-padding col-xs-6 col-sm-4 col-md-3">
                     <img class="lazy" src=""
-                            data-src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/level-6.jpg">
-                </div>
-
-
-                <div class="image-grid-item half-padding col-xs-6 col-sm-4 col-md-3">
-                    <img class="lazy" src=""
-                            data-src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/level-7.jpg">
-                </div>
-
-                <div class="image-grid-item half-padding col-xs-6 col-sm-4 col-md-3">
-                    <img class="lazy" src=""
-                            data-src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/level-8.jpg">
+                            data-src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/level-4.jpg" alt="Level 4 thumbnail">
                 </div>
 
 
                 <div class="image-grid-item half-padding col-xs-6 col-sm-4 col-md-3">
                     <img class="lazy" src=""
-                            data-src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/level-9.jpg">
+                            data-src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/level-5.jpg" alt="Level 5 thumbnail">
+                </div>
+
+                <div class="image-grid-item half-padding col-xs-6 col-sm-4 col-md-3">
+                    <img class="lazy" src=""
+                            data-src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/level-6.jpg" alt="Level 6 thumbnail">
                 </div>
 
 
                 <div class="image-grid-item half-padding col-xs-6 col-sm-4 col-md-3">
                     <img class="lazy" src=""
-                            data-src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/level-10.jpg">
+                            data-src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/level-7.jpg" alt="Level 7 thumbnail">
                 </div>
 
                 <div class="image-grid-item half-padding col-xs-6 col-sm-4 col-md-3">
                     <img class="lazy" src=""
-                            data-src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/level-11.jpg">
+                            data-src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/level-8.jpg" alt="Level 8 thumbnail">
                 </div>
 
 
                 <div class="image-grid-item half-padding col-xs-6 col-sm-4 col-md-3">
                     <img class="lazy" src=""
-                            data-src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/level-12.jpg">
+                            data-src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/level-9.jpg" alt="Level 9 thumbnail">
+                </div>
+
+
+                <div class="image-grid-item half-padding col-xs-6 col-sm-4 col-md-3">
+                    <img class="lazy" src=""
+                            data-src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/level-10.jpg" alt="Level 10 thumbnail">
+                </div>
+
+                <div class="image-grid-item half-padding col-xs-6 col-sm-4 col-md-3">
+                    <img class="lazy" src=""
+                            data-src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/level-11.jpg" alt="Level 11 thumbnail">
+                </div>
+
+
+                <div class="image-grid-item half-padding col-xs-6 col-sm-4 col-md-3">
+                    <img class="lazy" src=""
+                            data-src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/level-12.jpg" alt="Level 12 thumbnail">
                 </div>
             </div>
             <p>There are 88 keys on a piano.
@@ -368,8 +367,8 @@
                     <br><br>
                     She’s passionate, and has the skills and ability to share that passion and excitement with you.
                     <br><br>
-                    <img class="avatar lazy" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/products/worship-piano/lisa-witt.jpg">
-                    <img class="lazy no-color" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-riffs-and-fills/lisa-witt-signature.png">
+                    <img class="avatar lazy" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/products/worship-piano/lisa-witt.jpg" alt="Lisa">
+                    <img class="lazy no-color" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-riffs-and-fills/lisa-witt-signature.png" alt="Lisa signature">
                 </p>
             </div>
             <div class="col-xs-12 col-sm-6 text-left blue-bg">
@@ -401,8 +400,8 @@
 
 
                     <br><br>
-                    <img class="avatar lazy" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/cassi-falk.jpg">
-                    <img class="lazy no-color" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/cassi-sig.png">
+                    <img class="avatar lazy" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/cassi-falk.jpg" alt="Cassi">
+                    <img class="lazy no-color" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/cassi-sig.png" alt="Cassi signature">
                 </p>
             </div>
         </div>
@@ -415,21 +414,21 @@
             <div class="device-spread">
                 <div class="text-arrow desktop">
                     <span>Better<br>practice<br>tools</span><br>
-                    <img class="lazy arrow" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/arrow-right-red.png">
+                    <img class="lazy arrow" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/arrow-right-red.png" alt="Right arrow">
                 </div>
                 <div class="text-arrow macbook">
                     <span>Play<br>music</span><br>
-                    <img class="lazy arrow" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/arrow-right-alt-red.png">
+                    <img class="lazy arrow" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/arrow-right-alt-red.png" alt="Right arrow">
                 </div>
                 <div class="text-arrow ipad">
                     <span>Live<br>lessons</span><br>
-                    <img class="lazy arrow vertical" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/arrow-left-down-red.png">
+                    <img class="lazy arrow vertical" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/arrow-left-down-red.png" alt="Left arrow">
                 </div>
                 <div class="text-arrow iphone">
                     <span>Student<br>Forums</span><br>
-                    <img class="lazy arrow" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/arrow-left-red.png">
+                    <img class="lazy arrow" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/arrow-left-red.png" alt="Left arrow">
                 </div>
-                <img class="lazy spread" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/prouduct-spread.png">
+                <img class="lazy spread" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/prouduct-spread.png" alt="Product spread">
             </div>
             <p>Start today and get INSTANT access to high-definition lessons that you can take anywhere, anytime, on any device you’re already using.
                 <br><br>
@@ -564,7 +563,7 @@
     <section class="final text-center lazy" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/order-background.jpg">
         <div class="container">
             <img class="logo lazy"
-                    data-src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/logo.png">
+                    data-src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/logo.png" alt="Pianote technique made easy logo">
             <h2>Master the fundamentals -- so you can <br> <strong>play anything you want on the piano.</strong></h2>
             {{--<a class="join" href="/piano-technique-made-easy/notify">Notify Me &raquo;</a>--}}
             <a

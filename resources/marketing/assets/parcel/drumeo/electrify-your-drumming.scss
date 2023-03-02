@@ -149,7 +149,7 @@ a.text-yellow:hover {
 }
 
 .header {
-  background: #000c17 55% center/950px no-repeat;
+  background: $musoraBlack 55% center/950px no-repeat;
   position: relative;
   color: #FFF;
   padding: 25px 10px 50px;
@@ -168,7 +168,7 @@ a.text-yellow:hover {
     position: absolute;
     bottom: 0;
     height: 53%;
-    background: linear-gradient(0deg, #000c17, rgba(9, 42, 78, 0.5) 60%, transparent);
+    background: linear-gradient(0deg, $musoraBlack, rgba(9, 42, 78, 0.5) 60%, transparent);
     z-index: 1;
     left: 0;
     right: 0;
@@ -264,7 +264,7 @@ a.text-yellow:hover {
 
 .power-outage {
   position: relative;
-  background: #000c17;
+  background: $musoraBlack;
   color: #fff;
   padding: 0 15px 30px;
   margin-bottom: -90px;
@@ -331,7 +331,7 @@ a.text-yellow:hover {
 }
 
 .amplify-songs {
-  background: #000c18 center top/900px no-repeat;
+  background: $musoraBlack center top/900px no-repeat;
   position: relative;
   color: #fff;
   padding: 150px 15px 100px;
@@ -400,7 +400,7 @@ a.text-yellow:hover {
 }
 
 .lesson-descriptions {
-  background: #000c17 center top/770px no-repeat;
+  background: $musoraBlack center top/770px no-repeat;
   color: #fff;
   position: relative;
   padding: 0 20px 60px;
@@ -447,12 +447,12 @@ a.text-yellow:hover {
 
   p {
     margin: 20px auto;
-    text-shadow: 0 0 15px #000c17;
+    text-shadow: 0 0 15px $musoraBlack;
   }
 
   .question-dropdown {
     border-radius: 10px;
-    background: #000c17;
+    background: $musoraBlack;
     border: 2px solid #001b34;
     margin: 5px auto 0;
     height: auto;
@@ -463,7 +463,7 @@ a.text-yellow:hover {
     transform: translateZ(0);
 
     &:hover {
-      background: lighten(#000c17, 10%);
+      background: lighten($musoraBlack, 10%);
     }
 
     &.active {
@@ -540,7 +540,7 @@ a.text-yellow:hover {
 }
 
 .meet-instructor {
-  background: #000c17 50% top/620px no-repeat;
+  background: $musoraBlack 50% top/620px no-repeat;
   color: #fff;
   position: relative;
   padding: 0 10px 20px;
@@ -574,7 +574,7 @@ a.text-yellow:hover {
     text-shadow: 0 0 50px #010d19;
     padding: 0 10px;
     @include tablet {
-      background-color: #000c17;
+      background-color: $musoraBlack;
     }
   }
 
@@ -603,7 +603,7 @@ a.text-yellow:hover {
 
 .icon-grid {
   position: relative;
-  background: #000c17;
+  background: $musoraBlack;
   color: #fff;
   padding: 40px 10px 70px;
   @include tablet {
@@ -769,7 +769,7 @@ a.text-yellow:hover {
 }
 
 .final {
-  background: #000c17 65% 50%/cover;
+  background: $musoraBlack 65% 50%/cover;
   color: #fff;
   text-align: center;
   padding: 50px 10px;
