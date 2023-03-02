@@ -1,168 +1,172 @@
 <script setup>
-/*
+    /*
 
-TODO: Open Create Playlist and on close open the addItem again with the right props
+    TODO: Open Create Playlist and on close open the addItem again with the right props
 
-*/
-import { ref, onMounted, inject, computed, onUpdated } from 'vue';
-import PlaylistService from '../../../../services/playlists';
-import Toggle from '../../Toggle/Toggle.vue'
-import Table from '../../Table/Table.vue'
-import { PlusCircleIcon, PlusIcon, CheckCircleIcon } from '@heroicons/vue/outline';
-import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner.vue';
+    */
+    import { ref, onMounted, inject, computed, onUpdated } from 'vue';
+    import PlaylistService from '../../../../services/playlists';
+    import Toggle from '../../Toggle/Toggle.vue'
+    import Table from '../../Table/Table.vue'
+    import { PlusCircleIcon, PlusIcon, CheckCircleIcon } from '@heroicons/vue/outline';
+    import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner.vue';
 
-const props = defineProps({
-    brand: {
-        type: String,
-        default: 'drumeo'
-    },
-    content: {
-        type: Object,
-        default: {}
-    },
-});
+    //Inject
+    const emit = defineEmits(['onCancel']);
 
-const emit = defineEmits(['onCancel']);
+    //Pinia Stores
+    const token = inject('csrf_token');
 
-const token = inject('csrf_token');
+    //-----------Props-----------//
+    const props = defineProps({
+        brand: {
+            type: String,
+            default: 'drumeo'
+        },
+        content: {
+            type: Object,
+            default: {}
+        },
+    });
 
-const importAll = ref(false);
-const formattedRows = ref([]);
-const additionalItems = ref(0);
-const isLoadingPlaylists = ref(false);
-const isLoadingAssignments = ref(false);
-const selectedPlaylists = ref([]);
-const showSongToggle = ref(false);
-const addFullSongToggle = ref(false);
-const addInstrumentlessToggle = ref(false);
+    //--------Computed Properties--------//
+    const instrumentless = computed(() => {
+        return {
+            drumeo: 'drumless',
+            guitareo: 'guitarless',
+            singeo: 'voiceless',
+            pianote: 'pianoless'
+        }[props.brand];
+    })
 
-const handleOnToggleAssignments = (val) => {
-    importAll.value = val;
-};
+    const playlistsLength = computed(() => {
+        return selectedPlaylists.value.length;
+    });
 
-const handleOnToggleFullSong = (val) => {
-    addFullSongToggle.value = val;
-};
+    //-------------Refs-------------//
+    const importAll = ref(false);
+    const formattedRows = ref([]);
+    const additionalItems = ref(0);
+    const isLoadingPlaylists = ref(false);
+    const isLoadingAssignments = ref(false);
+    const selectedPlaylists = ref([]);
+    const showSongToggle = ref(false);
+    const addFullSongToggle = ref(false);
+    const addInstrumentlessToggle = ref(false);
 
-const handleOnToggleInstrumentlessSong = (val) => {
-    addInstrumentlessToggle.value = val;
-};
+    //-----------Methods-----------//
+    const handleOnToggleAssignments = (val) => {
+        importAll.value = val;
+    };
 
-const instrumentless = computed(() => {
-    return {
-        drumeo: 'drumless',
-        guitareo: 'guitarless',
-        singeo: 'voiceless',
-        pianote: 'pianoless'
-    }[props.brand];
-})
+    const handleOnToggleFullSong = (val) => {
+        addFullSongToggle.value = val;
+    };
 
-const playlistsLength = computed(() => {
-    return selectedPlaylists.value.length;
-});
+    const handleOnToggleInstrumentlessSong = (val) => {
+        addInstrumentlessToggle.value = val;
+    };
 
-const handleActionClick = (payload) => {
-    const index = selectedPlaylists.value.indexOf(String(payload));
-    if (index !== -1) {
-        const selectionCopy = [...selectedPlaylists.value];
-        selectionCopy[index] = null;
-        const newSelection = selectionCopy.filter(n => n);
-        selectedPlaylists.value = newSelection;
-    } else {
-        selectedPlaylists.value = [...selectedPlaylists.value, String(payload)];
+    const handleActionClick = (payload) => {
+        const index = selectedPlaylists.value.indexOf(String(payload));
+        if (index !== -1) {
+            const selectionCopy = [...selectedPlaylists.value];
+            selectionCopy[index] = null;
+            const newSelection = selectionCopy.filter(n => n);
+            selectedPlaylists.value = newSelection;
+        } else {
+            selectedPlaylists.value = [...selectedPlaylists.value, String(payload)];
+        }
+
+        handleSaveItem(payload);
+    };
+
+    const handleCancel = () => {
+        emit('onCancel');
+    };
+
+    const handleSaveItem = (playlistId) => {
+        isLoadingPlaylists.value = true;
+        PlaylistService.addToPlaylist({
+            brand: props.brand,
+            contentId: props.content.content_id,
+            importAssignments: importAll.value,
+            playlistIds: [String(playlistId)],
+            addFull: addFullSongToggle.value,
+            addInstrumentless: addInstrumentlessToggle.value,
+            token,
+        }).then(() => {
+            window.shownotification({ icon: 'check', text: 'The items were added to your selected playlists.' });
+        }).catch(() => {
+            window.shownotification({ icon: 'error', text: 'An error ocurred while saving your changes, please try again later.' });
+        }).finally(() => {
+            isLoadingPlaylists.value = false;
+        });
+    };
+
+    const handleCreate = () => {
+        emit('onCancel');
+        window.openplaylistmodal({
+            modalType: 'create',
+            data: props.content,
+            callback: (playlistId) => {
+                handleSaveItem(playlistId);
+            }
+        });
     }
 
-    handleSaveItem(payload);
-};
+    //-----------Lifecycle Methods-----------//
+    onMounted(() => {
+        console.log('add to list content ', props.content)
+        isLoadingPlaylists.value = true;
 
-const handleCancel = () => {
-    emit('onCancel');
-};
-
-const handleSaveItem = (playlistId) => {
-    isLoadingPlaylists.value = true;
-    PlaylistService.addToPlaylist({
-        brand: props.brand,
-        contentId: props.content.content_id,
-        importAssignments: importAll.value,
-        playlistIds: [String(playlistId)],
-        addFull: addFullSongToggle.value,
-        addInstrumentless: addInstrumentlessToggle.value,
-        token,
-    }).then(() => {
-        window.shownotification({ icon: 'check', text: 'The items were added to your selected playlists.' });
-    }).catch(() => {
-        window.shownotification({ icon: 'error', text: 'An error ocurred while saving your changes, please try again later.' });
-    }).finally(() => {
-        isLoadingPlaylists.value = false;
-    });
-};
-
-const handleCreate = () => {
-    emit('onCancel');
-    window.openplaylistmodal({
-        modalType: 'create',
-        data: props.content,
-        callback: (playlistId) => {
-            handleSaveItem(playlistId);
+        if (props.content.type === 'song') {
+            showSongToggle.value = true
+        } else {
+            isLoadingAssignments.value = true;
+            PlaylistService.getAssignmentsForContent({ token, contentId: props.content.content_id, brand: props.brand }).then((r) => {
+                const { data: { soundslice_assignments_count } } = r;
+                additionalItems.value = soundslice_assignments_count;
+                isLoadingAssignments.value = false;
+            }).catch(() => {
+                window.shownotification({ icon: 'error', text: 'An error ocurred while fetching your data, please try again later.' });
+            });
         }
-    });
-}
+        //Get Playlists
+        PlaylistService.getCurrentUserPlaylists({ token }).then(r => {
+            isLoadingPlaylists.value = false;
+            const { data: { data } } = r;
+            const formattedTable = data.map((item) => {
+                const { name, thumbnail_url, duration_formated, id, created_at } = item;
+                const dateCreated = new Date(created_at);
+                const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                const month = months[dateCreated.getMonth()];
+                const formattedDate = `${month} ${dateCreated.getDate()}, ${dateCreated.getFullYear()}`;
 
-onMounted(() => {
-    console.log('add to list content ', props.content)
-    isLoadingPlaylists.value = true;
+                return ([
+                    {
+                        thumb: thumbnail_url,
+                        content: name
+                    },
+                    {
+                        content: formattedDate
+                    },
+                    {
+                        content: duration_formated
+                    },
+                    {
+                        showActionSlot: true,
+                        actionPayload: id
+                    }
+                ])
+            });
 
-    if (props.content.type === 'song') {
-        showSongToggle.value = true
-    } else {
-        isLoadingAssignments.value = true;
-        PlaylistService.getAssignmentsForContent({ token, contentId: props.content.content_id, brand: props.brand }).then((r) => {
-            const { data: { soundslice_assignments_count } } = r;
-            additionalItems.value = soundslice_assignments_count;
-            isLoadingAssignments.value = false;
+            formattedRows.value = formattedTable;
         }).catch(() => {
             window.shownotification({ icon: 'error', text: 'An error ocurred while fetching your data, please try again later.' });
         });
-    }
-
-
-
-    PlaylistService.getCurrentUserPlaylists({ token }).then(r => {
-        isLoadingPlaylists.value = false;
-        const { data: { data } } = r;
-        const formattedTable = data.map((item) => {
-            const { name, thumbnail_url, duration_formated, id, created_at } = item;
-            const dateCreated = new Date(created_at);
-            const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-            const month = months[dateCreated.getMonth()];
-            const formattedDate = `${month} ${dateCreated.getDate()}, ${dateCreated.getFullYear()}`;
-
-            return ([
-                {
-                    thumb: thumbnail_url,
-                    content: name
-                },
-                {
-                    content: formattedDate
-                },
-                {
-                    content: duration_formated
-                },
-                {
-                    showActionSlot: true,
-                    actionPayload: id
-                }
-            ])
-        });
-
-        formattedRows.value = formattedTable;
-    }).catch(() => {
-        window.shownotification({ icon: 'error', text: 'An error ocurred while fetching your data, please try again later.' });
     });
-});
 </script>
-
 <template>
     <div class="tw-flex tw-flex-col tw-justify-center tw-items-center tw-text-[#0D0D0D] dark:tw-text-white tw-text-center">
         <div v-if="isLoadingAssignments || isLoadingPlaylists"

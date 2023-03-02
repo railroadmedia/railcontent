@@ -5,6 +5,12 @@
     import PlaylistDropdown from '../PlaylistDropdown.vue';
     import { usePlaylistsStore } from '../../../../stores/playlists';
 
+    //Inject
+    const token = inject('csrf_token');
+
+    //Pinia Stores
+    const playlistsStore = usePlaylistsStore();
+
     //-----------Props-----------//
     const props = defineProps({
         brand: {
@@ -53,11 +59,6 @@
 
     //-----------Refs-----------//
     const dropdownTarget = ref(null)
-
-    //Inject
-    const token = inject('csrf_token');
-    //Pinia Stores
-    const playlistsStore = usePlaylistsStore();
 
     //-----------Reactive Data-----------//
     const state = reactive({
@@ -227,9 +228,6 @@
 
         // console.log('lesson', props.lesson)
     });
-
-
-
 </script>
 <template>
     <div class="tw-group tw-relative tw-h-[90px] tw-flex tw-w-full tw-items-center tw-transition-colors tw-py-1 hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-[#081825]/50 even:tw-bg-white dark:even:tw-bg-[#081825] tw-pr-4"

@@ -7,7 +7,13 @@
     import MusoraIcon from '../../MusoraIcons/MusoraIcon.vue';
     import Pagination from '../../../components/Pagination/Pagination.vue';
 
-    //Props
+    //Inject
+    const token = inject('csrf_token');
+
+    //Pinia Stores
+    const playlistsStore = usePlaylistsStore();
+
+    //-----------Props-----------//
     const props = defineProps({
         brand: {
             type: String,
@@ -27,24 +33,21 @@
         }
     })
     
-    //Computed Props
+   //---------Computed Props---------//
     const hasPlaylists = computed(() => {
         return props.playlistCount ? true : false;
     })
 
-    //Reactive Data
+    //---------Reactive Data---------//
     const state = reactive({ 
         isListView: false,
         showControls: true,
         searchTerm: '',
+        sortbyValue: '',
     })
 
-    //Inject
-    const token = inject('csrf_token');
-    //Pinia Stores
-    const playlistsStore = usePlaylistsStore();
+    //----------Methods----------//
 
-    //Methods
     const handlePageChange = (pageNumber) => {
         //load playlists
         playlistsStore.loadingPlaylists = true;
@@ -57,7 +60,8 @@
         window.history.pushState({}, '', url);
     }
 
-    //Lifecycle Hooks
+    //---------Lifecycle Methods---------//
+
     onMounted(()=> {
         //load Playlists
         if(props.playlistCount <= 10 && props.playlists.length <= 10) {
@@ -93,9 +97,10 @@
             get: (searchParams, prop) => searchParams.get(prop),
         });
         state.searchTerm = params.search || '';
+        state.sortbyValue = params.sortby_val || '-created_at';
     })
 
-    //Watchers
+    //-----------Watchers-----------//
 
     //Store ListView to Local Storage
     watch(state, async () => {

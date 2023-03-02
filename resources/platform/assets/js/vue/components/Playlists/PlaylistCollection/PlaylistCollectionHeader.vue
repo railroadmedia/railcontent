@@ -1,8 +1,10 @@
 <script setup>
-    import { onBeforeMount, onMounted } from 'vue';
+    import { onBeforeMount, reactive, onMounted } from 'vue';
     import platformHeader from "../../PlatformHeader/platform-header.vue";
     import { usePlaylistsStore } from '../../../../stores/playlists';
 
+    //Pinia Stores
+    const playlistsStore = usePlaylistsStore();
 
     //-----------Props-----------//
     const props = defineProps({
@@ -12,22 +14,30 @@
         },
     });
 
-    //Methods
+    //-----------Reactive Data-----------//
+    const state = reactive({ 
+        searchTerm: '',
+        sortbyValue: '',
+    })
+
+    //-----------Methods-----------//
     const handleCreatePlaylist = () => {
         window.openplaylistmodal({ modalType: 'create', data: { name: '', category: 'My List', thumbnail_url: null, description: ''} });
     };
-    
-    //Pinia Stores
-    const playlistsStore = usePlaylistsStore();
 
-    //lifecycle hooks
+    //-----------Lifecycle Hooks -----------//
     onBeforeMount(()=> {
         playlistsStore.playlistsQuantity = props.playlistCount;
     })
-    onMounted(()=> {
-        // console.log(props.playlistCount)
-    })
 
+    onUpdated(()=> {
+        //Get URL Params
+        const params = new Proxy(new URLSearchParams(window.location.search), {
+            get: (searchParams, prop) => searchParams.get(prop),
+        });
+        state.searchTerm = params.search || '';
+        state.sortbyValue = params.sortby_val || '-created_at';
+    })
 </script>
 <template>
     <platform-header
