@@ -167,7 +167,7 @@ button {
 }
 
 .header {
-    background: #000c17 center top/cover no-repeat;
+    background: $musoraBlack center top/cover no-repeat;
     color: #fff;
     position: relative;
     @include tablet {
@@ -317,7 +317,7 @@ button {
 }
 
 .feel-stuck {
-    background: #000c17;
+    background: $musoraBlack;
     color: #fff;
     padding: 30px 10px;
     @include tablet {
@@ -613,7 +613,7 @@ button {
 }
 
 .benefits {
-    background: #000c17;
+    background: $musoraBlack;
     color: #fff;
     padding: 30px 0;
     @include tablet {

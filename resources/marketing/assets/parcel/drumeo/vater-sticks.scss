@@ -80,7 +80,7 @@ a.text-yellow:hover {
     position: absolute;
     transform: translate(0, -50%) rotate(15deg);
     font: 400 14px/1em $bebas;
-    text-shadow: 0 0 20px #000c17;
+    text-shadow: 0 0 20px $musoraBlack;
     top: 240px;
     left: 63%;
     @include tablet {
@@ -228,7 +228,7 @@ a.text-yellow:hover {
 }
 
 .content-section {
-  background: #000c17 center top/contain no-repeat;
+  background: $musoraBlack center top/contain no-repeat;
   position: relative;
   color: #fff;
   padding: 30px 10px;
