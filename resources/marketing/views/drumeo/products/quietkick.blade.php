@@ -149,7 +149,7 @@
         </div>
     </section>
 
-    <section class="text-center text-white px-5 py-10 md:py-20 lg:py-24" style="background:#000c17;">
+    <section class="text-center text-white px-5 py-10 md:py-20 lg:py-24 bg-musora-black">
         <div class="container mx-auto relative z-10 max-w-5xl">
             <h2><strong>How it works</strong></h2>
             <div class="max-w-xl lg:max-w-3xl mx-auto my-6 sm:my-10">

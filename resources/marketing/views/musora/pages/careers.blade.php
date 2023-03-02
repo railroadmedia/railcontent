@@ -135,7 +135,7 @@
             </div>
         </div>
     </section>
-    <section class="pt-10 sm:pt-14 lg:pt-16 pb-96 px-5 relative text-white text-center" style="background-color:#000c17;">
+    <section class="pt-10 sm:pt-14 lg:pt-16 pb-96 px-5 relative text-white text-center bg-musora-black">
         <div class="container mx-auto relative z-0 max-w-5xl">
             <img
                 class="-mt-40 inline-block sm:hidden transition-opacity opacity-0"
@@ -188,7 +188,7 @@
                 right time, or there’s not an opening for what you do best -- just click the <br class="hidden md:inline">
                 link below to join our talent pool for future opportunities.
             </p>
-            <a class="join gradient-outline smaller rounded-full relative bg-[#000c17] py-2 px-5 md:py-3 md:px-7 hover:bg-musora border-musora" target="_blank" href="https://musoramediainc.bamboohr.com/jobs/view.php?id=58">JOIN TALENT POOL <i class="fal fa-smile-plus"></i></a>
+            <a class="join gradient-outline smaller rounded-full relative bg-musora-black py-2 px-5 md:py-3 md:px-7 hover:bg-musora border-musora" target="_blank" href="https://musoramediainc.bamboohr.com/jobs/view.php?id=58">JOIN TALENT POOL <i class="fal fa-smile-plus"></i></a>
         </div>
     </section>
     <section class="py-12 sm:py-16 lg:py-20 px-4 sm:px-5 relative">
@@ -271,7 +271,7 @@
     </section>
 
     <div id="perks" class="anchor block relative invisible"></div>
-    <section class="py-14 sm:py-20 lg:py-24 px-5 sm:px-5 relative text-white text-center" style="background-color:#000c17;">
+    <section class="py-14 sm:py-20 lg:py-24 px-5 sm:px-5 relative text-white text-center bg-musora-black">
         <div class="container mx-auto max-w-4xl">
             <p class="leading-tight uppercase text-gray-400 tracking-widest">Still not convinced<br class="inline sm:hidden"> you should join our team?</p>
             <h3 class="mt-1.5 mb-12"><strong>Working here has its perks</strong></h3>

@@ -83,7 +83,7 @@
         "code" => "682918726"
     ])
 
-    <section class="px-4 sm:px-6 py-12 md:py-14 lg:py-20 text-white text-center lazyload bg-top bg-no-repeat bg-contain" style="background-color:#000c17;" data-bg="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/stop-hating-your-voice/introduction-bg.jpg">
+    <section class="px-4 sm:px-6 py-12 md:py-14 lg:py-20 text-white text-center lazyload bg-top bg-no-repeat bg-contain bg-musora-black" data-bg="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/stop-hating-your-voice/introduction-bg.jpg">
         <div class="container mx-auto">
             <h4 class="leading-normal"><strong>Why you hate your voice</strong><br>
                 <em>(and how to fix it)</em></h4>
@@ -154,7 +154,7 @@
             </div>
         </div>
     </section>
-    <section class="lisa-bio text-white pt-44 pb-6 md:py-28 lg:py-32 px-4 sm:px-6 relative bg-no-repeat lazyload" style="background-color:#000c17;" data-bg="https://cdn.musora.com/image/fetch/w_1900,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/stop-hating-your-voice/coach-bg.jpg">
+    <section class="lisa-bio text-white pt-44 pb-6 md:py-28 lg:py-32 px-4 sm:px-6 relative bg-no-repeat lazyload bg-musora-black" data-bg="https://cdn.musora.com/image/fetch/w_1900,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/stop-hating-your-voice/coach-bg.jpg">
         <div class="container mx-auto max-w-3xl relative z-20">
             <div class="md:flex flex-wrap md:w-7/12 text-center sm:text-left">
                 <img class="h-16 sm:h-24 lg:h-32 mx-auto sm:mx-0 mb-4 sm:mb-6 lg:mb-8 lazyload" data-src="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/stop-hating-your-voice/meet-lisa.png">

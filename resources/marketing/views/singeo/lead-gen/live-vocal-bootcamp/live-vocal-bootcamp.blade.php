@@ -180,7 +180,7 @@
         </div>
     </header>
 
-    <section class="text-white py-12 sm:py-20 px-4 sm:px-6" style="background:#000C17;">
+    <section class="text-white py-12 sm:py-20 px-4 sm:px-6 bg-musora-black">
         <div class="max-w-3xl lg:max-w-4xl mx-auto">
             <div class="md:grid md:grid-cols-2 sm:gap-6 md:gap-12 items-center justify-center flex flex-col mx-auto">
                 <div class="mb-10 md:mb-0 inline-flex flex-col">
@@ -310,10 +310,10 @@
     </section>
 
     <div class="relative h-5 sm:h-7 -mb-5 sm:-mb-7" style="background: linear-gradient(to top left, transparent calc(50% - 1px), transparent, #fff calc(50% + 1px));"></div>
-    <section class="px-4 py-14 sm:py-20 md:pb-32" style="background:#000C17;">
+    <section class="px-4 py-14 sm:py-20 md:pb-32 bg-musora-black">
         <div class="max-w-3xl lg:max-w-4xl mx-auto text-white relative">
             <div class="w-3/4 sm:w-2/3 mx-auto relative md:static text-center mb-8">
-                <img class="md:w-80 lg:w-96 md:absolute -bottom-10 right-2 md:border-8 rounded-xl md:border-solid lazyload" data-src="https://cdn.musora.com/image/fetch/w_800,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/beginner-vocal-bootcamp/coach_image_d.jpg" alt="coach image" style="border-color: #000C17;">
+                <img class="md:w-80 lg:w-96 md:absolute -bottom-10 right-2 md:border-8 rounded-xl md:border-solid border-musora-black lazyload" data-src="https://cdn.musora.com/image/fetch/w_800,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/beginner-vocal-bootcamp/coach_image_d.jpg" alt="coach image">
                 <img class="w-20 absolute bottom-0 md:-bottom-12 -right-3 md:right-0" src="https://singeo.s3.amazonaws.com/lead-gen/beginner-vocal-bootcamp/corner_piece_d.svg" alt="corner image">
             </div>
 
