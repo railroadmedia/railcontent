@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1fed591abac3768cad7b3fa9637be33f",
+    "content-hash": "b50205e388c2e7a85ba04639ec6bffcf",
     "packages": [
         {
             "name": "ankitpokhrel/tus-php",
@@ -245,16 +245,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.261.1",
+            "version": "3.261.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "cb7f6d7ca313bfd3135ff23c49d734c1a7616d6a"
+                "reference": "4f9cd0d3fc439372cd9f57d4f1bea9744216d2f0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/cb7f6d7ca313bfd3135ff23c49d734c1a7616d6a",
-                "reference": "cb7f6d7ca313bfd3135ff23c49d734c1a7616d6a",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/4f9cd0d3fc439372cd9f57d4f1bea9744216d2f0",
+                "reference": "4f9cd0d3fc439372cd9f57d4f1bea9744216d2f0",
                 "shasum": ""
             },
             "require": {
@@ -333,9 +333,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.261.1"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.261.2"
             },
-            "time": "2023-02-28T19:22:11+00:00"
+            "time": "2023-03-01T19:22:23+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -8598,16 +8598,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "dev-feature-block-user",
+            "version": "v2.0.74",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "5489e21c9347c77716e0a882a3674bd0da7d7e51"
+                "reference": "122cd5a2ca1b8b8c707bcfdfab0b531c2c80c84d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/5489e21c9347c77716e0a882a3674bd0da7d7e51",
-                "reference": "5489e21c9347c77716e0a882a3674bd0da7d7e51",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/122cd5a2ca1b8b8c707bcfdfab0b531c2c80c84d",
+                "reference": "122cd5a2ca1b8b8c707bcfdfab0b531c2c80c84d",
                 "shasum": ""
             },
             "require": {
@@ -8661,22 +8661,22 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/feature-block-user"
+                "source": "https://github.com/railroadmedia/railcontent/tree/v2.0.74"
             },
-            "time": "2023-03-01T15:30:52+00:00"
+            "time": "2023-02-28T22:35:36+00:00"
         },
         {
             "name": "railroad/railforums",
-            "version": "dev-feature-block-user",
+            "version": "v2.0.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railforums.git",
-                "reference": "a73597938bbf5c682b92722b1f13bb998ca03f96"
+                "reference": "24e029f9ebf9ebe917dc42c65c0ad3b72d29749f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railforums/zipball/a73597938bbf5c682b92722b1f13bb998ca03f96",
-                "reference": "a73597938bbf5c682b92722b1f13bb998ca03f96",
+                "url": "https://api.github.com/repos/railroadmedia/railforums/zipball/24e029f9ebf9ebe917dc42c65c0ad3b72d29749f",
+                "reference": "24e029f9ebf9ebe917dc42c65c0ad3b72d29749f",
                 "shasum": ""
             },
             "require": {
@@ -8715,9 +8715,9 @@
             "description": "Laravel forum system using entities",
             "support": {
                 "issues": "https://github.com/railroadmedia/railforums/issues",
-                "source": "https://github.com/railroadmedia/railforums/tree/feature-block-user"
+                "source": "https://github.com/railroadmedia/railforums/tree/v2.0.17"
             },
-            "time": "2023-03-01T15:33:15+00:00"
+            "time": "2023-03-02T14:07:04+00:00"
         },
         {
             "name": "railroad/railnotifications",
@@ -16898,25 +16898,11 @@
             "version": "dev-v3.0-fixing-transaction-tracking",
             "alias": "v3.0.7",
             "alias_normalized": "3.0.7.0"
-        },
-        {
-            "package": "railroad/railcontent",
-            "version": "dev-feature-block-user",
-            "alias": "2.0.57",
-            "alias_normalized": "2.0.57.0"
-        },
-        {
-            "package": "railroad/railforums",
-            "version": "dev-feature-block-user",
-            "alias": "v2.0.16",
-            "alias_normalized": "2.0.16.0"
         }
     ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "railroad/railanalytics": 20,
-        "railroad/railcontent": 20,
-        "railroad/railforums": 20
+        "railroad/railanalytics": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
