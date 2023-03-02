@@ -4,6 +4,15 @@
     import PlaylistService from '../../../../services/playlists.js';
     import { usePlaylistsStore } from '../../../../stores/playlists';
 
+    //Inject
+    const token = inject('csrf_token');
+    
+    //Pinia Stores
+    const playlistsStore = usePlaylistsStore();
+
+    //Emits
+    const emit = defineEmits(['onUpdateListView']);
+
     //-----------Props-----------//
     const props = defineProps({
         brand: {
@@ -16,28 +25,20 @@
         }
     });
 
-    //Inject
-    const token = inject('csrf_token');
-    //Pinia Stores
-    const playlistsStore = usePlaylistsStore();
-
-    //Reactive Data
+    //---------Reactive Data---------//
     const state = reactive({ 
         searchTerm: '',
         sortValue: '-created_at' //Default
     })
 
-    //Static Data
+    //---------Static Data---------//
     const sortOptions =[
         { text: 'Newest First', value: '-created_at' },
         { text: 'Alphabetical', value: 'name' },
         { text: 'Recently Viewed', value: '-last_progress' }
     ]
 
-    //Emits
-    const emit = defineEmits(['onUpdateListView']);
-
-    //Methods
+    //----------Methods----------//
     const loadPlaylists = ()=> {
         const payload = {
             brand: brand, 
@@ -55,7 +56,7 @@
         window.history.pushState({}, '', url);
     };
 
-    //Lifecycle Hooks
+    //---------Lifecycle Methods---------//
     onBeforeMount(()=> {
         //get url params
         const params = new Proxy(new URLSearchParams(window.location.search), {

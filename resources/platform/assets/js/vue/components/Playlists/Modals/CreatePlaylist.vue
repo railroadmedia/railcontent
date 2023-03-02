@@ -2,13 +2,23 @@
     // TODO: Add Upload Modal for thumbnail add/change
     // TODO: Consider edit mode in the avatar upload process
     // TODO: Close modal after create is 200
-    import { reactive, ref, inject, onBeforeMount, onBeforeUnmount } from 'vue';
+    import { reactive, ref, inject, onMounted, onBeforeMount, onBeforeUnmount } from 'vue';
     import InputLabel from '../../InputLabel/InputLabel.vue';
     import Dropdown from '../../Dropdown/Dropdown.vue'
     import PlaylistService from '../../../../services/playlists.js';
     import { usePlaylistsStore } from '../../../../stores/playlists';
     import ThumbnailUpload from '../../ThumbnailUpload/ThumbnailUpload.vue';
 
+    //Emits
+    const emit = defineEmits(['onCloseModal']);
+
+    //Pinia Store
+    const playlistsStore = usePlaylistsStore();
+
+    //Inject
+    const token = inject('csrf_token');
+
+    //--------------Props--------------//
     const props = defineProps({
         modalProps: {
             type: Object,
@@ -31,11 +41,7 @@
         }
     });
 
-    const emit = defineEmits(['onCloseModal']);
-
-    //Pinia Store
-    const playlistsStore = usePlaylistsStore();
-
+    //------------Reactive Data------------//
     const state = reactive({
         name: '',
         category: 'My List',
@@ -43,8 +49,55 @@
         description: '',
     })
 
-    const token = inject('csrf_token');
+    //------------Static Data------------//
+    const sortedOptions = [
+        {
+            value: 'Rock',
+            label: 'Rock'
+        },
+        {
+            value: 'Pop',
+            label: 'Pop'
+        },
+        {
+            value: 'Jazz',
+            label: 'Jazz'
+        },
+        {
+            value: 'Blues',
+            label: 'Blues'
+        },
+        {
+            value: 'Country',
+            label: 'Country'
+        },
+        {
+            value: 'Metal',
+            label: 'Metal'
+        },
+        {
+            value: 'Funk',
+            label: 'Funk'
+        },
+        {
+            value: 'Soul',
+            label: 'Soul'
+        },
+        {
+            value: 'CCM/Worship',
+            label: 'CCM/Worship'
+        },
+        {
+            value: 'Hip-Hop/Rap',
+            label: 'Hip-Hop/Rap'
+        },
+        {
+            value: 'My List',
+            label: 'My-List'
+        },
+    ];
 
+    //-------------Methods-------------//
     const handleTitleChange = (val) => {
         state.name = val;
     };
@@ -98,7 +151,6 @@
         if(props.mode === "edit") {
             PlaylistService.updatePlaylist(props.playlist.id, payload, token)
                 .then(function(response) {
-                    
                     if (response.status === 201) {
                         playlistsStore.loadingPlaylists = true;
                         //show success message
@@ -137,77 +189,28 @@
                     }
                 })
         }
-
         //Close Modal
         emit('onCloseModal')
     };
 
-    const sortedOptions = [
-        {
-            value: 'Rock',
-            label: 'Rock'
-        },
-        {
-            value: 'Pop',
-            label: 'Pop'
-        },
-        {
-            value: 'Jazz',
-            label: 'Jazz'
-        },
-        {
-            value: 'Blues',
-            label: 'Blues'
-        },
-        {
-            value: 'Country',
-            label: 'Country'
-        },
-        {
-            value: 'Metal',
-            label: 'Metal'
-        },
-        {
-            value: 'Funk',
-            label: 'Funk'
-        },
-        {
-            value: 'Soul',
-            label: 'Soul'
-        },
-        {
-            value: 'CCM/Worship',
-            label: 'CCM/Worship'
-        },
-        {
-            value: 'Hip-Hop/Rap',
-            label: 'Hip-Hop/Rap'
-        },
-        {
-            value: 'My List',
-            label: 'My-List'
-        },
-    ];
-
+    //----------Lifecycle Hooks----------//
+    onMounted(()=> {
+        console.log(props.playlist)
+    })
     onBeforeMount(()=> {
         //Load Data        
-        console.log(props.playlist)
         state.thumb = props.playlist.thumbnail_url;
         state.name = props.playlist.name;
         state.description = props.playlist.description;
         state.category = props.playlist.category || 'My List';
     })
-    
     onBeforeUnmount(() => {
         //Reset Modal Data
-
-        
         if (props.modalProps.nextModal) {
             window.openplaylistmodal(props.modalProps.nextModal);
         }
     })
 </script>
-
 <template>
     <div class="tw-flex tw-flex-col tw-justify-center tw-text-[#0D0D0D] dark:tw-text-white">
         <h2 class="tw-font-bold tw-font-open-sans tw-text-[24px] tw-text-center">

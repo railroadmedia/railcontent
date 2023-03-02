@@ -7,7 +7,13 @@
     import MusoraIcon from '../../MusoraIcons/MusoraIcon.vue';
     import Pagination from '../../../components/Pagination/Pagination.vue';
 
-    //Props
+    //Inject
+    const token = inject('csrf_token');
+
+    //Pinia Stores
+    const playlistsStore = usePlaylistsStore();
+
+    //-----------Props-----------//
     const props = defineProps({
         brand: {
             type: String,
@@ -27,24 +33,21 @@
         }
     })
     
-    //Computed Props
+   //---------Computed Props---------//
     const hasPlaylists = computed(() => {
         return props.playlistCount ? true : false;
     })
 
-    //Reactive Data
+    //---------Reactive Data---------//
     const state = reactive({ 
         isListView: false,
         showControls: true,
         searchTerm: '',
+        sortbyValue: '',
     })
 
-    //Inject
-    const token = inject('csrf_token');
-    //Pinia Stores
-    const playlistsStore = usePlaylistsStore();
+    //----------Methods----------//
 
-    //Methods
     const handlePageChange = (pageNumber) => {
         //load playlists
         playlistsStore.loadingPlaylists = true;
@@ -57,7 +60,8 @@
         window.history.pushState({}, '', url);
     }
 
-    //Lifecycle Hooks
+    //---------Lifecycle Methods---------//
+
     onMounted(()=> {
         //load Playlists
         if(props.playlistCount <= 10 && props.playlists.length <= 10) {
@@ -93,9 +97,10 @@
             get: (searchParams, prop) => searchParams.get(prop),
         });
         state.searchTerm = params.search || '';
+        state.sortbyValue = params.sortby_val || '-created_at';
     })
 
-    //Watchers
+    //-----------Watchers-----------//
 
     //Store ListView to Local Storage
     watch(state, async () => {
@@ -155,20 +160,33 @@
             <section v-if="!playlistsStore.loadingPlaylists" class="tw-w-full tw-relative tw-mb-5"
                 :class="state.isListView ? 'tw-flex tw-flex-col' : 'tw-grid tw-grid-cols-2 sm:tw-grid-cols-3 lg:tw-grid-cols-4 xl:tw-grid-cols-5 3xl:tw-grid-cols-6 tw-gap-4' "
             >
-                <!-- Print Each Card -->
-                <playlist-collection-card 
-                    v-for="list in playlistsStore.playlists" 
-                    :key="list.id" 
-                    :list="list"
-                    :isListView="state.isListView"
-                    :token="token"
-                    :brand="brand"
-                />    
+                <!-- Mini Catalog -->
+                <template v-if="miniCatalog">
+                    <playlist-collection-card 
+                        v-for="list in playlistsStore.playlists.slice(0,5)" 
+                        :key="list.id" 
+                        :list="list"
+                        :isListView="state.isListView"
+                        :token="token"
+                        :brand="brand"
+                    />  
+                </template>
+                <!-- Full Catalog -->
+                <template v-else>
+                    <playlist-collection-card 
+                        v-for="list in playlistsStore.playlists" 
+                        :key="list.id" 
+                        :list="list"
+                        :isListView="state.isListView"
+                        :token="token"
+                        :brand="brand"
+                    />  
+                </template>
             </section>
 
             <!-- Pagination -->
             <Pagination 
-                v-if="!playlistsStore.loadingPlaylists && playlistsStore.playlistsQuantity > 10"
+                v-if="!miniCatalog && !playlistsStore.loadingPlaylists && playlistsStore.playlistsQuantity > 10"
                 :currentPage="playlistsStore.resultsPage"
                 :pageQuantity="playlistsStore.playlistsQuantity"
                 :limit="10"

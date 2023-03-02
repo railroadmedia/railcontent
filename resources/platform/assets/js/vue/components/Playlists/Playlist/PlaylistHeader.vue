@@ -6,7 +6,13 @@
     import { usePlaylistsStore } from '../../../../stores/playlists';
     import { onBeforeMount, ref, inject, reactive } from 'vue';
 
-    //Props
+    //Inject
+    const token = inject('csrf_token');
+
+    //Pinia Stores
+    const playlistsStore = usePlaylistsStore();
+
+    //-----------Props-----------//
     const props = defineProps({
         brand: {
             type: String,
@@ -22,13 +28,8 @@
         }
     })
 
-    //-----------Refs-----------//
+    //-------------Refs-------------//
     const dropdownTarget = ref(null)
-
-    //Inject
-    const token = inject('csrf_token');
-    //Pinia Stores
-    const playlistsStore = usePlaylistsStore();
 
     //-----------Reactive Data-----------//
     const state = reactive({ 
@@ -107,7 +108,8 @@
         state.dropdownOpen = !state.dropdownOpen;
     }
     
-    //Lifecycle Hooks
+    //---------Lifecycle Methods---------//
+    
     onBeforeMount(() => {
         // console.log('Playlist', props.playlist)
         state.isLiked = props.playlist.is_liked_by_current_user;

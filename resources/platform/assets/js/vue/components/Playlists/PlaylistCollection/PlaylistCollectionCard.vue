@@ -5,6 +5,12 @@
     import PlaylistDropdown from '../PlaylistDropdown.vue';
     import { usePlaylistsStore } from '../../../../stores/playlists';
 
+    //Inject
+    const token = inject('csrf_token');
+
+    //Pinia Stores
+    const playlistsStore = usePlaylistsStore();
+
     //-----------Props-----------//
     const props = defineProps({
         brand: {
@@ -26,23 +32,18 @@
         return props.list.duration_formated.replace(/^0(?:0:0?)?/, '');;
     })
 
-    //-----------Refs-----------//
+    //-------------Refs-------------//
     const dropdownTarget = ref(null)
-
-    //Inject
-    const token = inject('csrf_token');
-    //Pinia Stores
-    const playlistsStore = usePlaylistsStore();
 
     //-----------Reactive Data-----------//
     const state = reactive({ 
-            dropdownOpen: false,
-            dropdownTop: false,
-            isPinned: false,
-            isPrivate: true,
-        });
+        dropdownOpen: false,
+        dropdownTop: false,
+        isPinned: false,
+        isPrivate: true,
+    });
 
-    //static data
+    //-----------Static Data-----------//
     const dropdownOptions = [
         {
             name: "Share",
@@ -94,7 +95,7 @@
         state.dropdownOpen = !state.dropdownOpen;
     }
 
-    //-----------Lifecycle Methods-----------//
+    //---------Lifecycle Methods---------//
     
     onBeforeMount(() => {
         //check if it's pinned with request? Or prerender?

@@ -4,7 +4,16 @@
     import { usePlaylistsStore } from '../../../stores/playlists';
     import MusoraIcon from '../MusoraIcons/MusoraIcon.vue';
 
-    //Props
+    //Inject
+    const token = inject('csrf_token');
+
+    //Pinia Stores
+    const playlistsStore = usePlaylistsStore();
+
+    //Emits
+    const emit = defineEmits(['closeDropdown', 'pinItem', 'makePublic']);
+
+    //-----------Props-----------//
     const props = defineProps({
         brand: {
             type: String,
@@ -35,26 +44,18 @@
             type: Boolean
         }
     })
-    
-    //Emits
-    const emit = defineEmits(['closeDropdown', 'pinItem', 'makePublic']);
 
-    //Computed Props
+   //---------Computed Props---------//
     const hasPlaylists = computed(() => {
         return playlistsStore.playlists.length > 0 ? true : false;
     })
 
-    //Reactive Data
+    //-----------Reactive Data-----------//
     const state = reactive({
 
     })
 
-    //Inject
-    const token = inject('csrf_token');
-    //Pinia Stores
-    const playlistsStore = usePlaylistsStore();
-
-    //-----------Methods-----------//
+    //-------------Methods-------------//
     
     //Handle Share
     const sharePlaylist = () => {
@@ -198,7 +199,7 @@
         }
     }
 
-    //Lifecycle Hooks
+    //---------Lifecycle Methods---------//
     onBeforeMount(() => {      
         state.isPrivate = props.data.private ? 1 : 0; 
     });
@@ -206,8 +207,6 @@
     onMounted(()=> {
         //load Playlists
     })
-
-    //Watchers
 
 </script>
 <template>

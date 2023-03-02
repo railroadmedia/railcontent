@@ -6,7 +6,13 @@
     import MusoraIcon from '../../MusoraIcons/MusoraIcon.vue';
     import Pagination from '../../../components/Pagination/Pagination.vue';
 
-    //Props
+    //Inject
+    const token = inject('csrf_token');
+
+    //Pinia Stores
+    const playlistsStore = usePlaylistsStore();
+
+    //-----------Props-----------//
     const props = defineProps({
         brand: {
             type: String,
@@ -22,25 +28,20 @@
         },
     })
     
-    //Computed Props
+    //-----------Computed Props-----------//
     const hasPlaylists = computed(() => {
         return props.playlistCount && playlistsStore.playlists.length ? true : false;
     })
 
-    //Reactive Data
+    //-----------Reactive Data-----------//
     const state = reactive({ 
 
     })
 
-    //Inject
-    const token = inject('csrf_token');
-    //Pinia Stores
-    const playlistsStore = usePlaylistsStore();
-
-    //Methods
+    //-------------Methods-------------//
 
 
-    //Lifecycle Hooks
+    //---------Lifecycle Methods---------//
     onMounted(()=> {
 
     })
@@ -48,10 +49,6 @@
     onBeforeMount(() => {      
 
     });
-
-    //Watchers
-
-
 </script>
 <template>
     <main class="tw-w-full tw-pt-[33px]">
@@ -91,6 +88,5 @@
             </section>
 
         </div>      
-
     </main>
 </template>

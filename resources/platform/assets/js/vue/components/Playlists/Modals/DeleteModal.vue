@@ -3,6 +3,15 @@
     import PlaylistService from '../../../../services/playlists.js';
     import { usePlaylistsStore } from '../../../../stores/playlists';
 
+    //Emits
+    const emit = defineEmits(['onCloseModal']);
+
+    //Inject
+    const token = inject('csrf_token');
+    
+    //Pinia Stores
+    const playlistsStore = usePlaylistsStore();
+
     //-----------Props-----------//
     const props = defineProps({
         brand: {
@@ -14,13 +23,6 @@
             default: {}
         }
     });
-
-    //Emits
-    const emit = defineEmits(['onCloseModal']);
-    //Inject
-    const token = inject('csrf_token');
-    //Pinia Stores
-    const playlistsStore = usePlaylistsStore();
 
     //-----------Methods-----------//
     const handleDeletePlaylist = () => {
