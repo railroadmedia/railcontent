@@ -2,8 +2,6 @@
 
 namespace App\Decorators\Playlist;
 
-use Carbon\Carbon;
-use Carbon\CarbonInterval;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Repositories\PinnedPlaylistsRepository;
@@ -16,7 +14,8 @@ class PlaylistDecorator extends ModeDecoratorBase
     private UserPlaylistsService $userPlaylistsService;
 
     /**
-     * ContentLikesDecorator constructor.
+     * @param PinnedPlaylistsRepository $pinnedPlaylistsRepository
+     * @param UserPlaylistsService $userPlaylistsService
      */
     public function __construct(
         PinnedPlaylistsRepository $pinnedPlaylistsRepository,

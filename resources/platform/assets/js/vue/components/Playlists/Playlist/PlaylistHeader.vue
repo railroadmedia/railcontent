@@ -35,7 +35,7 @@
         dropdownOpen: false,
         dropdownTop: false,
         isPrivate: 1,
-        isPinned: false,
+        isPinned: true,
         isLiked: false,
     })
 
@@ -109,7 +109,7 @@
     
     //Lifecycle Hooks
     onBeforeMount(() => {
-        console.log('Playlist', props.playlist)
+        // console.log('Playlist', props.playlist)
         state.isLiked = props.playlist.is_liked_by_current_user;
         state.isPinned = props.playlist.pinned;
         state.isPrivate = props.playlist.private; 
@@ -123,7 +123,7 @@
         <template v-slot:content> 
             <div class="tw-flex tw-flex-col lg:tw-flex-row tw-items-center tw-w-full lg:tw-w-8/12">
                 <!-- Playlist thumbnail -->
-                <div class="tw-h-[198px] tw-w-[198px] tw-relative tw-rounded tw-shrink-0 tw-overflow-hidden tw-mb-[16px] lg:tw-mb-0">
+                <div class="tw-realtive tw-h-[198px] tw-w-[198px] tw-relative tw-rounded tw-shrink-0 tw-overflow-hidden tw-mb-[16px] lg:tw-mb-0">
                     <!-- Image Conatiner -->
                     <div v-if="playlist.thumbnail_url" class="tw-relative tw-w-full tw-h-full">
                         <img
@@ -150,7 +150,14 @@
                             </defs>
                         </svg>
                     </div>
+                    <!-- Pinned Icon -->
+                    <div class="tw-inline-flex tw-items-center tw-transition-colors tw-z-20 tw-absolute tw-top-3 tw-right-3" 
+                        :class="[`tw-text-${brand}`, { 'tw-opacity-0' : !state.isPinned } ]"
+                    >
+                        <musora-icon icon-name="tack" class="tw-w-[24px] tw-h-[24px] tw-mx-auto tw-hidden md:tw-flex" />
+                    </div>
                 </div>
+
                 <!-- Content -->
                 <div class="tw-flex-col tw-text-center lg:tw-text-left lg:tw-pl-[20px]">
                     <!-- Avatar -->
@@ -202,12 +209,13 @@
                             :brand="brand"
                             :dropdownTop="state.dropdownTop"
                             :is-private="state.isPrivate"
+                            :is-pinned="state.isPinned"
                             :dropdownOptions="dropdownOptions"
                             :data="playlist"
                             :is-open="state.dropdownOpen"
                             type="playlist"
                             @closeDropdown="state.dropdownOpen = false"
-                            @pinItem="(val) => state.isPinned = val"
+                            @pinItem="state.isPinned = $event"
                             @makePublic="(val) => state.isPrivate = val"
                         />  
                     </div>  

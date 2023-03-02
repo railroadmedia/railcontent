@@ -20,6 +20,10 @@
             type: Boolean,
             default: false
         },
+        isPinned: {
+            type: Boolean,
+            default: false,
+        },
         isPrivate: {
             type: Number
         },
@@ -41,7 +45,9 @@
     })
 
     //Reactive Data
-    const state = reactive({})
+    const state = reactive({
+
+    })
 
     //Inject
     const token = inject('csrf_token');
@@ -91,7 +97,7 @@
 
     //Handle Pin/Unpin Request
     const pinPlaylist = () => {
-        if(!props.data.pinned) { //PIN
+        if(!props.isPinned) { //PIN
             if(playlistsStore.pinnedPlaylists.length !== 5) {
                 emit('pinItem', true)
                 PlaylistService.pinPlaylist(props.data.id, props.brand, token)
@@ -124,6 +130,7 @@
             emit('pinItem', false)
             PlaylistService.unpinPlaylist(props.data.id, props.brand, token)
                 .then((response) => {
+                    console.log(response)
                     if(response.status === 200) { 
                         //emit event or update pinia
                         playlistsStore.unpinPlaylist(props.data.id)
@@ -226,6 +233,9 @@
                                  :class="state.isPrivate ? 'tw-left-[-1px]': 'tw-right-[-1px]' ">
                             </div>
                         </div>
+                    </template>
+                    <template v-else-if="item.name === 'Pin To Sidebar'">
+                        {{ isPinned ? 'Unpin from Sidebar' : 'Pin to Sidebar' }}
                     </template>
                     <template v-else>
                         {{ item.name }} 
