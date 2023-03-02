@@ -121,25 +121,25 @@
 @section('content')
 
     @include('drumeo.products.partials.promo-banner', [
-                "name" => "Drumeo QuietPad",
-                "fullPrice" => floatval($productPrices['quietpad']->price),
-                "price" => floatval($productPrices['quietpad']->discounted_price),
-                "noBreadcrumb" => true
-            ])
+        "name" => "Drumeo QuietPad",
+        "fullPrice" => floatval($productPrices['quietpad']->price),
+        "price" => floatval($productPrices['quietpad']->discounted_price),
+        "noBreadcrumb" => true
+    ])
 
     <header class="header text-center">
         <div class="background-fade" style="background-image: url(https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/header-snare-pad.jpg)"></div>
         <div class="background-fade" style="background-image: url(https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/header-quiet-pad.jpg);"></div>
         <div class="row">
-            <img class="logo show-for-medium" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/drumeo-quietpad.png">
+            <img class="logo show-for-medium" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/drumeo-quietpad.png" alt="Quietpad logo">
             <br class="show-for-medium">
             <div class="watch-badge">
                 <span>WATCH<br> THE DEMO</span>
-                <img src="https://dpwjbsxqtam5n.cloudfront.net/sales/arrow-left-white.png">
+                <img src="https://dpwjbsxqtam5n.cloudfront.net/sales/arrow-left-white.png" alt="Left arrow">
             </div>
-            <img data-open="previewModal" class="play-button autoplay-video" src="https://dpwjbsxqtam5n.cloudfront.net/sales/play-button.png">
+            <img data-open="previewModal" class="play-button autoplay-video" src="https://dpwjbsxqtam5n.cloudfront.net/sales/play-button.png" alt="Play button">
             <br class="hide-for-medium">
-            <img class="logo hide-for-medium" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/drumeo-quietpad.png">
+            <img class="logo hide-for-medium" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/drumeo-quietpad.png" alt="Quietpad logo">
             <h2><strong style="font-weight: 900;">Practice anywhere</strong> with two<br class="hide-for-medium"> full-size playing surfaces.</h2>
             <a href="/ecommerce/add-to-cart?products[quietpad]=1" class="join blue">Get Yours &raquo;</a>
             <p class="dense" style="opacity: 0;"><strong class="text-yellow">LAUNCH SPECIAL</strong><br>
@@ -159,18 +159,18 @@
             <h5>The portable, double-sided practice pad<br class="hide-for-medium"> with different <br class="show-for-medium-only">volumes so you can<br class="hide-for-medium"> practice late into the night.</h5>
             <div class="pad-toggle">
                 <div class="pad-details traditional active">
-                    <img class="pad-icon" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/icon-sticks.png">
-                    <img class="mobile-pad hide-for-medium" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/quiet-pad-regular.png">
+                    <img class="pad-icon" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/icon-sticks.png" alt="Stick icon">
+                    <img class="mobile-pad hide-for-medium" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/quiet-pad-regular.png" alt="Quiet pad">
                     <h5><strong>Traditional Surface</strong></h5>
                     <p>Durable. Realistic. Portable. The blue side offers a 12” playing surface, snare-like rebound, and everything you’d expect for every day practice. (You’ll love the hand-assembled quality.)</p>
-                    <img class="arrow active show-for-medium" style="transform: scaleX(-1);" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/left-arrow.png">
+                    <img class="arrow active show-for-medium" style="transform: scaleX(-1);" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/left-arrow.png" alt="Left arrow">
                 </div>
                 <div class="pad-details quiet">
-                    <img class="pad-icon" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/icon-moon.png">
-                    <img class="mobile-pad hide-for-medium" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/quiet-pad.png">
+                    <img class="pad-icon" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/icon-moon.png" alt="Moon icon">
+                    <img class="mobile-pad hide-for-medium" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/quiet-pad.png" alt="Quietpad">
                     <h5><strong>Quiet Surface</strong></h5>
                     <p>Shhhhhh. Avoid the tap-tappidy-tap complaints with our quiet side, up to 50% quieter than traditional pads and ideal for developing strength, endurance, and control. (You’ll love the way it feels.)</p>
-                    <img class="arrow active show-for-medium" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/left-arrow.png">
+                    <img class="arrow active show-for-medium" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/left-arrow.png" alt="Left arrow">
                 </div>
                 <div class="pad-flipper flipped show-for-medium">
                     <div style="background-image:url(https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/quiet-pad-regular.png);"><i class="fad fa-repeat hover-icon"></i></div>
@@ -183,10 +183,10 @@
     <section class="content-section together text-center">
         <div class="row">
             <h2><strong>Your two favorite<br class="hide-for-medium"> practice pads, together.</strong></h2>
-            <img class="pad" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/side-pad.png">
+            <img class="pad" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/side-pad.png" alt="Quietpad side">
             <div class="text-wrap">
-                <p class="text-blue"><img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/blue-top-left-arrow.png"> Designed to feel like<br class="hide-for-medium"> your snare drum.</p>
-                <p class="text-grey"><img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/blue-bottom-left-arrow.png"> For strength-building<br class="hide-for-medium"> or late-night practice.</p>
+                <p class="text-blue"><img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/blue-top-left-arrow.png" alt="Left arrow"> Designed to feel like<br class="hide-for-medium"> your snare drum.</p>
+                <p class="text-grey"><img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/blue-bottom-left-arrow.png" alt="Left arrow"> For strength-building<br class="hide-for-medium"> or late-night practice.</p>
             </div>
         </div>
         <div class="modal-wrapper clearfix">
@@ -201,10 +201,10 @@
             <div class="video-pop autoplay-video" data-open="blindModal">
                 <div class="watch-badge">
                     <span>WATCH<br> BLIND TEST</span>
-                    <img src="https://dpwjbsxqtam5n.cloudfront.net/sales/arrow-left-white.png">
+                    <img src="https://dpwjbsxqtam5n.cloudfront.net/sales/arrow-left-white.png" alt="Left arrow">
                 </div>
-                <img class="play-button" src="https://dpwjbsxqtam5n.cloudfront.net/sales/play-button.png">
-                <img class="bg" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/blindfold-test-thumb.jpg">
+                <img class="play-button" src="https://dpwjbsxqtam5n.cloudfront.net/sales/play-button.png" alt="Play button">
+                <img class="bg" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/blindfold-test-thumb.jpg" alt="Thumnail">
             </div>
         </div>
         <div class="reveal large text-center" id="blindModal" data-reveal data-reset-on-close="false">
@@ -264,7 +264,7 @@
                 <tbody>
                 <tr>
                     <td></td>
-                    <td><img class="logo" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/drumeo-quietpad-white.png"></td>
+                    <td><img class="logo" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/drumeo-quietpad-white.png" alt="Quietpad logo"></td>
                     <td>Evans RealFeel</td>
                     <td>Reflexx</td>
                     <td><a target="_blank" href="/drumshop/practice-pad-full" style="color:inherit;">Drumeo P4 <i class="fas fa-external-link"></i></a></td>
@@ -346,10 +346,10 @@
 
     <section class="content-section final text-center">
         <div class="row">
-            <img class="bubbles hide-for-medium" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/order-image-mobile.png">
-            <img class="bubbles show-for-medium" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/order-image.png">
+            <img class="bubbles hide-for-medium" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/order-image-mobile.png" alt="Quietpad order image">
+            <img class="bubbles show-for-medium" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/order-image.png" alt="Quietpad order image">
             <br>
-            <img class="logo" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/drumeo-quietpad.png">
+            <img class="logo" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/drumeo-quietpad.png" alt="Quietpad logo">
 
 
             <h3>

@@ -304,21 +304,21 @@
 
 @section('content')
     @include('drumeo.products.partials.promo-banner', [
-                "name" => "Tone Control Kit",
-                "fullPrice" => floatval($productPrices['tone-control-kit']->price),
-                "price" => floatval($productPrices['tone-control-kit']->discounted_price),
-                "noBreadcrumb" => true
-            ])
+        "name" => "Tone Control Kit",
+        "fullPrice" => floatval($productPrices['tone-control-kit']->price),
+        "price" => floatval($productPrices['tone-control-kit']->discounted_price),
+        "noBreadcrumb" => true
+    ])
 
     <header class="header text-center">
         <video poster="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/vater-sticks/header-thumbnail.jpg" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/tone-control-kit/header.mp4" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
         <div class="overlay"></div>
         <div class="row">
-            <img class="logo drumeo" src="https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png"><br>
-            <img class="logo" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/tone-control-kit/tone-control-kit-logo.png"><br>
+            <img class="logo drumeo" src="https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="Drumeo logo"><br>
+            <img class="logo" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/tone-control-kit/tone-control-kit-logo.png" alt="Tone control kit logo"><br>
             <div class="watch-badge">
                 WATCH<br> THE DEMO
-                <img src="https://dpwjbsxqtam5n.cloudfront.net/sales/arrow-left-white.png">
+                <img src="https://dpwjbsxqtam5n.cloudfront.net/sales/arrow-left-white.png" alt="Left arrow">
             </div>
             <i data-open="previewModal" class="fas fa-play play-button autoplay-video"></i>
             <br>
@@ -380,8 +380,8 @@
             <p>The Drumeo Tone Control Kit is the cleanest solution to drum dampening-- so your drum heads can be spared the oily residues and sticky messes from traditional dampening methods.</p>
         </div>
         <div class='comparer'>
-            <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/tone-control-kit/compare-clean.jpg">
-            <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/tone-control-kit/compare-dirty.jpg">
+            <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/tone-control-kit/compare-clean.jpg" alt="Clean drum">
+            <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/tone-control-kit/compare-dirty.jpg" alt="Dirty drum">
         </div>
     </section>
 
@@ -395,14 +395,14 @@
                 </div>
             </div>
             <div class="benefit">
-                <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/tone-control-kit/2-set-it-forget-it.jpg">
+                <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/tone-control-kit/2-set-it-forget-it.jpg" alt="Drum set">
                 <div class="text medium-text-left">
                     <h2><strong>Set it and forget it --<br> Drummer’s Edition.</strong></h2>
                     <p>Each Tone Control strip securely fastens to any metal hoop and can be left on during transport. No more worrying about that perfectly placed gel or tape falling off. </p>
                 </div>
             </div>
             <div class="benefit">
-                <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/tone-control-kit/3-maintenance.jpg">
+                <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/tone-control-kit/3-maintenance.jpg" alt="Tone control kit">
                 <div class="text medium-text-left">
                     <h2><strong>Zero maintenance.</strong></h2>
                     <p>The Tone Control Kit is made of durable leather & magnets that won’t wear out, get dirty, or get thrown out with your drum heads.</p>
@@ -417,15 +417,15 @@
                 <h2><strong>The all-in-one kit.</strong></h2>
                 <div class="pic-wrap">
                     <div class="pic-section">
-                        <img class="img-modal" data-slide="0" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/tone-control-kit/all-in-one-package.jpg">
-                        <img class="img-modal" data-slide="1" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/tone-control-kit/all-in-one-case.jpg">
+                        <img class="img-modal" data-slide="0" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/tone-control-kit/all-in-one-package.jpg" alt="tone control kit package">
+                        <img class="img-modal" data-slide="1" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/tone-control-kit/all-in-one-case.jpg" alt="All in one case">
                     </div>
                     <div class="pic-section bigger">
-                        <img class="img-modal" data-slide="2" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/tone-control-kit/all-in-one-family.jpg">
+                        <img class="img-modal" data-slide="2" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/tone-control-kit/all-in-one-family.jpg" alt="Family kit">
                     </div>
                     <div class="pic-section">
-                        <img class="img-modal" data-slide="3" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/tone-control-kit/all-in-one-toms.jpg">
-                        <img class="img-modal" data-slide="4" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/tone-control-kit/all-in-one-snare.jpg">
+                        <img class="img-modal" data-slide="3" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/tone-control-kit/all-in-one-toms.jpg" alt="Toms ki">
+                        <img class="img-modal" data-slide="4" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/tone-control-kit/all-in-one-snare.jpg" alt="Sharable kit">
                     </div>
                 </div>
                 <div class="table-wrap">
@@ -485,8 +485,8 @@
         <div id="customize-anchor" class="anchor"></div>
         <div class="row">
             <div class="columns">
-                <img class="logo drumeo" src="https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png"><br>
-                <img class="logo" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/tone-control-kit/tone-control-kit-logo.png">
+                <img class="logo drumeo" src="https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="Drume logo"><br>
+                <img class="logo" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/tone-control-kit/tone-control-kit-logo.png" alt="Tone control kit logo">
 
                 <h2 class="uppercase">
                     GET A 4-PACK FOR

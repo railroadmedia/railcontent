@@ -55,21 +55,21 @@
 
 @section('content')
     @include('drumeo.products.partials.promo-banner', [
-                    "name" => "Independence Made Easy",
-                    "fullPrice" => floatval($productPrices['independence-made-easy-pack']->price),
-                    "price" => floatval($productPrices['independence-made-easy-pack']->discounted_price),
-                "noBreadcrumb" => true
-                ])
+        "name" => "Independence Made Easy",
+        "fullPrice" => floatval($productPrices['independence-made-easy-pack']->price),
+        "price" => floatval($productPrices['independence-made-easy-pack']->discounted_price),
+        "noBreadcrumb" => true
+    ])
     <header class="hero-header">
         <div class="row xlarge">
-            <img class="logo" src="https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/logo.png">
+            <img class="logo" src="https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/logo.png" alt="Independence made easy logo">
 
             <br>
             <div class="watch-badge">
                 <span>WATCH<br> PREVIEW</span>
-                <img src="https://dpwjbsxqtam5n.cloudfront.net/sales/arrow-left-white.png">
+                <img src="https://dpwjbsxqtam5n.cloudfront.net/sales/arrow-left-white.png" alt="Arrow right">
             </div>
-            <img data-open="trailer" class="play-button autoplay-video" src="https://dpwjbsxqtam5n.cloudfront.net/sales/play-button.png">
+            <img data-open="trailer" class="play-button autoplay-video" src="https://dpwjbsxqtam5n.cloudfront.net/sales/play-button.png" alt="Play button">
 
             {{--<img data-open="previewModal" class="play-button autoplay-video" src="https://dpwjbsxqtam5n.cloudfront.net/sales/play-button.png" aria-controls="previewModal" aria-haspopup="true" tabindex="0">--}}
             {{--<div class="columns video-container">--}}
@@ -98,7 +98,7 @@
         </div>
         <div class="reveal large trailer" id="trailer" data-reveal data-reset-on-close="false">
             <div class="flex-video widescreen vimeo">
-                <iframe class="reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/401069316?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
+                <iframe class="reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/401069316?autoplay=1" frameborder="0" allowfullscreen allow="autoplay" title="Trailer"></iframe>
             </div>
             <br>
             <a href="/ecommerce/add-to-cart?products[independence-made-easy-pack]=1" class="join">Get Started &raquo;</a>
@@ -113,7 +113,7 @@
                 <div class="benefit">
                     <div class="image">
                         <p class="overlay">YOUR WEEKLY<br> LESSON PLAN</p>
-                        <img src="https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/jared1.jpg">
+                        <img src="https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/jared1.jpg" alt="Jared 1">
                     </div>
                     <div class="text text-left">
                         <p>Jared Falk will be your personal drum coach for 26 weeks - as you’ll follow his step-by-step lesson plan for developing all four limbs on the drums. You’ll get the right exercises in the right order so you’ll rapidly improve your skills (just like when you started playing).</p>
@@ -124,7 +124,7 @@
                 <div class="benefit">
                     <div class="image">
                         <p class="overlay">BETTER PRACTICE,<br> BETTER RESULTS</p>
-                        <img src="https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/jared2.jpg">
+                        <img src="https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/jared2.jpg" alt="Jared 2">
                     </div>
                     <div class="text text-left">
                         <p>This is the ONLY drumming course that will actually get easier to complete as you go along - making it easier to stay motivated, easier to enjoy your practice time again, and easier to actually COMPLETE the full course and reach your personal goals!</p>
@@ -135,7 +135,7 @@
                 <div class="benefit">
                     <div class="image">
                         <p class="overlay">PLAY ANYTHING <br> ON THE DRUMS</p>
-                        <img src="https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/jared3.jpg">
+                        <img src="https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/jared3.jpg" alt="Jared 3">
                     </div>
                     <div class="text text-left">
                         <p>Reaching your goals is all about having a clear vision and a simplified plan to get there! Independence Made Easy is your path to playing more musical grooves, your guide for better sounding fills, and your opportunity to play whatever you want, whenever you want!</p>
@@ -214,9 +214,9 @@
                 <strong>Guide To Better Drumming!</strong></h1>
             <div class="letter-wrap">
                 <div class="columns medium-4 float-right">
-                    <img class="hide-for-medium bruce-jared-small" src="https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/jared4.jpg">
+                    <img class="hide-for-medium bruce-jared-small" src="https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/jared4.jpg" alt="Jared 4">
                     <div class="arrow-outline show-for-medium">
-                        <img src="https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/jared4.jpg">
+                        <img src="https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/jared4.jpg" alt="Jared 4">
                     </div>
                 </div>
                 <div class="columns medium-8 letter">
@@ -231,7 +231,7 @@
                 <div class="columns number-paths">
                     <div class="columns path-point no-padding">
                         <div class="icon">
-                            <img src="https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/path-1.png">
+                            <img src="https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/path-1.png" alt="Path 1">
                         </div>
                         <div class="text">
                             <h3>ALWAYS KNOW EXACTLY WHAT TO PRACTICE</h3>
@@ -240,7 +240,7 @@
                     </div>
                     <div class="columns path-point no-padding">
                         <div class="icon">
-                            <img src="https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/path-2.png">
+                            <img src="https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/path-2.png" alt="Path 2">
                         </div>
                         <div class="text">
                             <h3>GET BETTER AT DRUMS EVERY DAY</h3>
@@ -249,7 +249,7 @@
                     </div>
                     <div class="columns path-point no-padding">
                         <div class="icon">
-                            <img src="https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/path-3.png">
+                            <img src="https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/path-3.png" alt="Path 3">
                         </div>
                         <div class="text">
                             <h3>UNLOCK YOUR CREATIVITY</h3>
@@ -263,19 +263,19 @@
                 </p>
                 <div class="columns no-padding">
                     <div class="columns signature">
-                        <img src="https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/signature.png">
+                        <img src="https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/signature.png" alt="Jared Signature">
                     </div>
                     <div class="columns">
                         <div class="sig-point">
-                            <span class="icon"><img src="https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/sig-icon-1.png"></span>
+                            <span class="icon"><img src="https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/sig-icon-1.png" alt="Icon D"></span>
                             <p>Co-Founder of Drumeo.com</p>
                         </div>
                         <div class="sig-point">
-                            <span class="icon"><img src="https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/sig-icon-2.png"></span>
+                            <span class="icon"><img src="https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/sig-icon-2.png" alt="Icon SD"></span>
                             <p>Author of Successful Drumming</p>
                         </div>
                         <div class="sig-point">
-                            <span class="icon"><img src="https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/sig-icon-3.png"></span>
+                            <span class="icon"><img src="https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/sig-icon-3.png" alt="Icon Trophy"></span>
                             <p>Best Drum Educator, Rhythm Magazine</p>
                         </div>
                     </div>
@@ -372,8 +372,8 @@
                 <tr>
                     <td></td>
                     <td>
-                        <img src="https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/laptop.png" class="macbook">
-                        <img src="https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/logo-b.png" class="blue-logo">
+                        <img src="https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/laptop.png" class="macbook" alt="Macbook">
+                        <img src="https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/logo-b.png" class="blue-logo" alt="Independence made easy logo">
                     </td>
                     <td><i class="fas fa-user gray-logo"></i><br>Private Lessons</td>
                 </tr>
@@ -454,9 +454,9 @@
 
     <section class="text-center guarantee">
         <div class="row">
-            <img class="guarantee-badge hide-for-medium" style="filter: hue-rotate(305deg) brightness(1.13);" src="https://dpwjbsxqtam5n.cloudfront.net/sales/guarantee-badge.png">
+            <img class="guarantee-badge hide-for-medium" style="filter: hue-rotate(305deg) brightness(1.13);" src="https://dpwjbsxqtam5n.cloudfront.net/sales/guarantee-badge.png" alt="Guarantee Badge">
             <div class="flex-container">
-                <img class="guarantee-badge show-for-medium" style="filter: hue-rotate(305deg) brightness(1.13);" src="https://dpwjbsxqtam5n.cloudfront.net/sales/guarantee-badge.png">
+                <img class="guarantee-badge show-for-medium" style="filter: hue-rotate(305deg) brightness(1.13);" src="https://dpwjbsxqtam5n.cloudfront.net/sales/guarantee-badge.png" alt="Guarantee Badge">
                 <div class="text-wrap text-left">
                     <h1>90-Day Money-Back Guarantee</h1>
                     <p><strong>OUR PROMISE TO YOU:</strong> More than anything, we want you to enjoy a super-positive experience on the drums. And that means we only want you to pay if you actually LOVE your Independence Made Easy experience. So click any of the big buttons on this page to get started risk-free. If it’s not for you, simply <a class="text-white" href="{{ get_musora_brand_base_url() }}/contact">contact us</a> within 90 days for a full refund.</p>
@@ -468,7 +468,7 @@
 
     <section class="final" style="background-image:url(https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/customize-bg.jpg);">
         <div class="row">
-            <div class="columns logo"><img src="https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/logo.png"></div>
+            <div class="columns logo"><img src="https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/logo.png" alt="Independence made easy logo"></div>
 
             <h1 class="columns">
                 Jared Falk’s 26-Week Online <br class="hide-for-large">
