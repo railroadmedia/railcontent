@@ -40,7 +40,6 @@ export default {
                     },
                 });
             } else {
-                console.log({...this.item})
                 const name = getValue(this.item.fields, 'title');
                 const thumbnail_url = getValue(this.item.data, 'thumbnail_url');
                 const description = getValue(this.item.data, 'description');

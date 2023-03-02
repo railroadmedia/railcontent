@@ -22267,9 +22267,6 @@ a:visited{
 .tw-max-h-full{
   max-height: 100% !important;
 }
-.tw-max-h-\[350px\]{
-  max-height: 350px !important;
-}
 .tw-min-h-\[150px\]{
   min-height: 150px !important;
 }
@@ -24482,6 +24479,10 @@ a:visited{
 .tw-text-gray-200{
   --tw-text-opacity: 1 !important;
   color: rgb(229 231 235 / var(--tw-text-opacity)) !important;
+}
+.tw-text-\[\#4ADE80\]{
+  --tw-text-opacity: 1 !important;
+  color: rgb(74 222 128 / var(--tw-text-opacity)) !important;
 }
 .tw-text-green-600{
   --tw-text-opacity: 1 !important;
