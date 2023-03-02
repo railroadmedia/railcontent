@@ -1,5 +1,5 @@
 <script setup>
-    import { onBeforeMount, reactive, onMounted } from 'vue';
+    import { onBeforeMount, reactive, onMounted, onUpdated } from 'vue';
     import platformHeader from "../../PlatformHeader/platform-header.vue";
     import { usePlaylistsStore } from '../../../../stores/playlists';
 

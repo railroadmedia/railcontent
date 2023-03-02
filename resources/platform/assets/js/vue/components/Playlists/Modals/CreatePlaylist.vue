@@ -9,6 +9,16 @@
     import { usePlaylistsStore } from '../../../../stores/playlists';
     import ThumbnailUpload from '../../ThumbnailUpload/ThumbnailUpload.vue';
 
+    //Emits
+    const emit = defineEmits(['onCloseModal']);
+
+    //Pinia Store
+    const playlistsStore = usePlaylistsStore();
+
+    //Inject
+    const token = inject('csrf_token');
+
+    //--------------Props--------------//
     const props = defineProps({
         modalProps: {
             type: Object,
@@ -31,11 +41,7 @@
         }
     });
 
-    const emit = defineEmits(['onCloseModal']);
-
-    //Pinia Store
-    const playlistsStore = usePlaylistsStore();
-
+    //------------Reactive Data------------//
     const state = reactive({
         name: '',
         category: 'My List',
@@ -43,8 +49,8 @@
         description: '',
     })
 
-    const token = inject('csrf_token');
 
+    //-------------Methods-------------//
     const handleTitleChange = (val) => {
         state.name = val;
     };
@@ -184,6 +190,7 @@
         },
     ];
 
+    //----------Lifecycle Hooks----------//
     onBeforeMount(()=> {
         //Load Data        
         console.log(props.playlist)
@@ -195,14 +202,11 @@
     
     onBeforeUnmount(() => {
         //Reset Modal Data
-
-        
         if (props.modalProps.nextModal) {
             window.openplaylistmodal(props.modalProps.nextModal);
         }
     })
 </script>
-
 <template>
     <div class="tw-flex tw-flex-col tw-justify-center tw-text-[#0D0D0D] dark:tw-text-white">
         <h2 class="tw-font-bold tw-font-open-sans tw-text-[24px] tw-text-center">

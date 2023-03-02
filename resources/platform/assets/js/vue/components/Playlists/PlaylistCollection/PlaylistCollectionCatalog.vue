@@ -160,20 +160,33 @@
             <section v-if="!playlistsStore.loadingPlaylists" class="tw-w-full tw-relative tw-mb-5"
                 :class="state.isListView ? 'tw-flex tw-flex-col' : 'tw-grid tw-grid-cols-2 sm:tw-grid-cols-3 lg:tw-grid-cols-4 xl:tw-grid-cols-5 3xl:tw-grid-cols-6 tw-gap-4' "
             >
-                <!-- Print Each Card -->
-                <playlist-collection-card 
-                    v-for="list in playlistsStore.playlists" 
-                    :key="list.id" 
-                    :list="list"
-                    :isListView="state.isListView"
-                    :token="token"
-                    :brand="brand"
-                />    
+                <!-- Mini Catalog -->
+                <template v-if="miniCatalog">
+                    <playlist-collection-card 
+                        v-for="list in playlistsStore.playlists.slice(0,5)" 
+                        :key="list.id" 
+                        :list="list"
+                        :isListView="state.isListView"
+                        :token="token"
+                        :brand="brand"
+                    />  
+                </template>
+                <!-- Full Catalog -->
+                <template v-else>
+                    <playlist-collection-card 
+                        v-for="list in playlistsStore.playlists" 
+                        :key="list.id" 
+                        :list="list"
+                        :isListView="state.isListView"
+                        :token="token"
+                        :brand="brand"
+                    />  
+                </template>
             </section>
 
             <!-- Pagination -->
             <Pagination 
-                v-if="!playlistsStore.loadingPlaylists && playlistsStore.playlistsQuantity > 10"
+                v-if="!miniCatalog && !playlistsStore.loadingPlaylists && playlistsStore.playlistsQuantity > 10"
                 :currentPage="playlistsStore.resultsPage"
                 :pageQuantity="playlistsStore.playlistsQuantity"
                 :limit="10"
