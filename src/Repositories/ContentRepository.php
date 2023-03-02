@@ -738,7 +738,7 @@ class ContentRepository extends RepositoryBase
                 ->restrictByUserAccess()
                 ->where(ConfigService::$tableContent . '.type', $type)
                 ->where(ConfigService::$tableContent . '.' . $columnName, '>=', $columnValue)
-                ->limit(50)
+                ->limit(70)
             ;
 
             $afterSubqueryTwo = $this->query()
@@ -748,6 +748,7 @@ class ContentRepository extends RepositoryBase
                 ->get()
                 ->value('rowNumber');
 
+            // if $afterSubqueryTwo is null, check if we should not set a higher limit for $afterSubqueryOne
             $afterContents =
                 $this->query()
                     ->select('*')
@@ -2356,9 +2357,9 @@ class ContentRepository extends RepositoryBase
                 ->toArray();
 
             foreach ($filterOptionsArray[$filterOptionName] as $filterOptionIndexToClean => $filterOptionValueToClean) {
-                $filterOptionsArray[$filterOptionName][$filterOptionIndexToClean] = ucwords(
+                $filterOptionsArray[$filterOptionName][$filterOptionIndexToClean] = trim(ucwords(
                     $filterOptionValueToClean
-                );
+                ));
             }
 
             $filterOptionsArray[$filterOptionName] = array_unique($filterOptionsArray[$filterOptionName]);

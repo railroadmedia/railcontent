@@ -127,6 +127,11 @@ Route::group(
                     \Railroad\Railcontent\Controllers\CommentJsonController::class . '@getLinkedComment'
                 )->name('comment.linked');
 
+                Route::put(
+                    '/comment/report/{id}',
+                    \Railroad\Railcontent\Controllers\CommentJsonController::class.'@report'
+                )->name('comment.report');
+
                 //comment-likes
                 Route::get(
                     '/comment-likes/{commentId}',
