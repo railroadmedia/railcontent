@@ -31,7 +31,7 @@
     <header class="header text-center">
         <div class="container" style="background-image:url(https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-riffs-and-fills/header.jpg);">
             <img class="logo"
-                    src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-riffs-and-fills/piano-riffs-fills-logo.png"><br>
+                    src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-riffs-and-fills/piano-riffs-fills-logo.png" alt="Riffs and fills logo"><br>
             <i class="fas fa-play play-vimeo autoplay-video" data-toggle="modal" data-target="#trailer"></i>
             <h2>The shortcuts to <br class="hidden-sm hidden-md hidden-lg"><strong>sounding great</strong> on the piano.</h2>
             <a
@@ -68,7 +68,7 @@
 
     <section class="more-songs">
         <div class="container">
-            <img src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-riffs-and-fills/piano-music-icons.png">
+            <img src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-riffs-and-fills/piano-music-icons.png" alt="Note and piano icon">
             <p>Anyone can play a chord -- but what happens in the spaces <strong>between</strong> the chords distinguishes the great players from the mediocre ones.
                 <br><br>
                 Fill those spaces with piano riffs that will make you sound professional, polished ... and close to perfect. Learn the secrets and tips to play fills that <strong>sound</strong> complicated and advanced, but are actually very <strong>simple</strong> to learn and start adding to your repertoire.
@@ -115,37 +115,37 @@
             <h1><strong>It’s time to sound<br class="hidden-sm hidden-md hidden-lg"> like a professional.</strong></h1>
             <p>Each lesson is designed to build on the previous one, so you’ll be reinforcing what you’ve already learned while developing new skills. It WILL take practice -- but it won’t take months. Most students can expect to complete these lessons in less than two weeks (including practice time).</p>
             <div class="image-grid-item col-xs-12 col-sm-4">
-                <img src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-riffs-and-fills/lesson-thumb-1.jpg">
+                <img src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-riffs-and-fills/lesson-thumb-1.jpg" alt="Lesson 1 thumbnail">
                 <p><span class="text-red"><strong>Chords and Inversions</strong></span><br>
 The building blocks of piano riffs. You’ll learn how to play chord inversions and start using them to make your songs sound better.</p>
             </div>
 
             <div class="image-grid-item col-xs-12 col-sm-4">
-                <img src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-riffs-and-fills/lesson-thumb-2.jpg">
+                <img src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-riffs-and-fills/lesson-thumb-2.jpg" alt="Lesson 2 thumbnail">
                 <p><span class="text-red"><strong>How to Use Inversions to Create Fills</strong></span><br>
 Start filling in the spaces with simple riffs that sound amazing. You’ll see how easy piano riffs can be.</p>
             </div>
 
             <div class="image-grid-item col-xs-12 col-sm-4">
-                <img src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-riffs-and-fills/lesson-thumb-3.jpg">
+                <img src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-riffs-and-fills/lesson-thumb-3.jpg" alt="Lesson 3 thumbnail">
                 <p><span class="text-red"><strong>The “Sus-Trill”</strong></span><br>
 Learn one of the most beautiful and versatile fills in piano music. Add sparkle to your playing with this fill -- which sounds much more complicated than it is.</p>
             </div>
 
             <div class="image-grid-item col-xs-12 col-sm-4">
-                <img src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-riffs-and-fills/lesson-thumb-4.jpg">
+                <img src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-riffs-and-fills/lesson-thumb-4.jpg" alt="Lesson 4 thumbnail">
                 <p><span class="text-red"><strong>Unlock The Secrets</strong></span><br>
 Discover the magic behind Lisa’s favorite piano fills and how to actually USE them to in songs.</p>
             </div>
 
             <div class="image-grid-item col-xs-12 col-sm-4">
-                <img src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-riffs-and-fills/lesson-thumb-5.jpg">
+                <img src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-riffs-and-fills/lesson-thumb-5.jpg" alt="Lesson 5 thumbnail">
                 <p><span class="text-red"><strong>Left-Hand Fills & Fancy Tricks</strong></span><br>
 Because it’s not just the right hand. Find out how simple tricks can elevate your left-hand playing and fill out those songs.</p>
             </div>
 
             <div class="image-grid-item col-xs-12 col-sm-4">
-                <img src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-riffs-and-fills/lesson-thumb-6.jpg">
+                <img src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-riffs-and-fills/lesson-thumb-6.jpg" alt="Lesson 6 thumbnail">
                 <p><span class="text-red"><strong>Advanced Riff & Fill Concepts</strong></span><br>
 Connect every riff, fill and tip you’ve learned and see how to apply it to pretty much ANY song you’ll ever play. Warning - some practice required!</p>
             </div>
@@ -217,19 +217,19 @@ Connect every riff, fill and tip you’ve learned and see how to apply it to pre
                 <br><br>
                 That’s what this course is all about, and I can’t wait to help you.
                 <br><br>
-                <img src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-riffs-and-fills/lisa-witt-signature.png">
+                <img src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-riffs-and-fills/lisa-witt-signature.png" alt="Lisa signature">
             </p>
         </div>
     </section>
 
     <section class="guarantee text-center">
         <div class="container">
-            <img class="guarantee-badge hidden-sm hidden-md hidden-lg" src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/guarantee-badge.png">
+            <img class="guarantee-badge hidden-sm hidden-md hidden-lg" src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/guarantee-badge.png" alt="Guarantee Badge">
             <h1>Piano Riffs & Fills <br class="hidden-sm hidden-md hidden-lg">
                 is  <strong>GUARANTEED</strong><br class="hidden-sm hidden-md hidden-lg">
                 to help you...</h1>
             <div class="flex-container">
-                <img class="guarantee-badge hidden-xs" src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/guarantee-badge.png">
+                <img class="guarantee-badge hidden-xs" src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/guarantee-badge.png" alt="Guarantee badge">
                 <div class="text-wrap text-left">
                     <h3><em>
                             <i class="text-red fal fa-check-circle"></i> Sound better and more professional<br>
@@ -245,7 +245,7 @@ Connect every riff, fill and tip you’ve learned and see how to apply it to pre
 
     <section class="final text-center" style="background-image:url(https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-riffs-and-fills/order-background.jpg);">
         <div class="container">
-            <img class="logo" src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-riffs-and-fills/piano-riffs-fills-logo.png">
+            <img class="logo" src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-riffs-and-fills/piano-riffs-fills-logo.png" alt="Riffs and fills logo">
             <h2>The shortcuts to <strong>sounding great</strong> on the piano.</h2>
             <a
                 href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['piano-riffs-and-fills' => 1], 'redirect' => '/order', 'locked' => 'false']) }}"

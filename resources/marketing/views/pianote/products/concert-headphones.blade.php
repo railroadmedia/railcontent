@@ -198,7 +198,7 @@
                         <b class="text-white">4-year warranty</b> so you don’t have to worry.
                     </p>
                 </div>
-                <a class="join w-full smaller" data-open="specsModal">CLICK HERE FOR THE FULL SPECS</a>
+                <span class="join w-full smaller cursor-pointer" data-open="specsModal">CLICK HERE FOR THE FULL SPECS</span>
             </div>
         </div>
     </section>
