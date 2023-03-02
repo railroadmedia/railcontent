@@ -2,13 +2,15 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Product;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Support\Facades\Mail;
+use Railroad\Ecommerce\Repositories\ProductRepository;
 use Symfony\Component\Console\Input\InputArgument;
 
-class GenerateActionCodes extends Command
+class GenerateAccessCodes extends Command
 {
 
     /**
@@ -21,14 +23,14 @@ class GenerateActionCodes extends Command
      *
      * @var string
      */
-    protected $name = 'generateActionCodes';
+    protected $name = 'generateAccessCodes';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Generate actions codes.';
+    protected $description = 'Generate access codes.';
 
     /**
      * Create a new command instance.
@@ -45,24 +47,18 @@ class GenerateActionCodes extends Command
     // mandatory arguments: PRODUCT_ID, AMOUNT
     // optional arguments: BRAND, SOURCE
 
-    // artisan generateActionCodes PRODUCT_ID AMOUNT [BRAND] [SOURCE]
-    // ex1: artisan generateActionCodes 124 10
-    // ex2: artisan generateActionCodes 20 30 guitareo
-    // ex3: artisan generateActionCodes 7 100 pianote sweetwater-2023-deal
+    // artisan generateAccessCodes PRODUCT_ID AMOUNT [SOURCE]
+    // ex1: artisan generateAccessCodes 124 10
+    // ex2: artisan generateAccessCodes 20 30 test-deal
+    // ex3: artisan generateAccessCodes 7 100 sweetwater-2023-deal
 
     /**
      * Execute the console command.
      *
      * @return mixed
      */
-    public function handle()
+    public function handle(ProductRepository $productRepository)
     {
-        $brand = 'drumeo';
-
-        if ($this->argument('brand')) {
-            $brand = $this->argument('brand');
-            $this->info('success');
-        }
 
         $source = $this->argument('source') ?? null;
 
@@ -78,6 +74,15 @@ class GenerateActionCodes extends Command
 
         $amountToCreate = $this->argument('amountToGenerate');
         $productId = $this->argument('productId');
+
+        $product = $productRepository->findProduct($productId);
+
+        if (!$product) {
+            $this->info('No product found for product id ' . $productId . ". Exiting now.");
+            die();
+        }
+
+        $brand = $product->getBrand();
 
         for ($i = 1; $i <= $amountToCreate; $i++) {
             $code = bin2hex(
@@ -101,12 +106,12 @@ class GenerateActionCodes extends Command
         $sourceInfo = ($source) ?  ' source "' . $source . '"' : ' no source attribute';
 
         $answer = $this->ask(
-            'Confirm to create ' . $amountToCreate . ' actions codes for product with id ' . $productId . ' for brand "' . $brand .
-            '" and with' . $sourceInfo . '. Enter "yes" if this is correct'
+            'Confirm to create ' . $amountToCreate . ' access codes for product' . $product->getName() .  ' with id ' .
+            $productId . ' for brand "' . $brand . '" and with' . $sourceInfo . '. Enter "yes" if this is correct'
         );
 
         if($answer !== 'yes'){
-            $this->info('Exiting now without creating action codes.');
+            $this->info('Exiting now without creating access codes.');
             die();
         }
 
@@ -115,13 +120,14 @@ class GenerateActionCodes extends Command
             ->insert($accessCodes);
 
         Mail::send(
-            'emails.generateActionCodes',
+            'emails.generateAccessCodes',
             [
-                'actionCodeData' => $accessCodes,
-                'codeType' => $this->argument('productId'),
+                'accessCodeData' => $accessCodes,
+                'product' => $product,
+                'source' => $source ?? 'no source'
             ],
             function (\Illuminate\Mail\Message $message) use ($emails, $now, $amountToCreate) {
-                $subject = $amountToCreate . ' Codes Generated on ' . $now;
+                $subject = 'Musora - ' . $amountToCreate . ' Access Codes Generated on ' . $now;
                 $message->from('support@drumeo.com', 'Drumeo');
                 $message->to($emails)
                     ->subject($subject);
@@ -133,7 +139,7 @@ class GenerateActionCodes extends Command
         );
 
         $this->info(
-            $this->argument('amountToGenerate').' action codes for \''.$this->argument('productId').'\' have been created.'
+            $this->argument('amountToGenerate').' access codes for \''.$this->argument('productId').'\' have been created.'
         );
     }
 
@@ -154,11 +160,6 @@ class GenerateActionCodes extends Command
                 'amountToGenerate',
                 InputArgument::REQUIRED,
                 'Amount of codes to generate.',
-            ],
-            [
-                'brand',
-                InputArgument::OPTIONAL,
-                'brand if other than drumeo',
             ],
             [
                 'source',
