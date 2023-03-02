@@ -14,11 +14,17 @@ class FixProgressOnUnpublishedContent extends Command
 
     public function handle()
     {
+        $ignoreSlugs = ['1044-benny-goodman-sing-sing-sing'];
         $query = DB::table('railcontent_user_content_progress as p')
             ->join('railcontent_content as c', 'c.id', '=', 'p.content_id')
             ->join('railcontent_content_hierarchy as h', 'h.child_id', '=', 'c.id')
             ->join('railcontent_content as pc', 'pc.id', '=', 'h.parent_id')
-            ->where('c.published_on', '>', Carbon::now());
+            ->where(function ($q){
+                $q->where('c.published_on', '>', Carbon::now())
+                    ->orWhere('pc.published_on', '>', Carbon::now());
+            })->whereNotIn('pc.slug', $ignoreSlugs);
+
+
         $count = $query->count();
         $this->info("$count records found.");
 
@@ -26,7 +32,7 @@ class FixProgressOnUnpublishedContent extends Command
             $contents = $query->select(['c.slug', 'pc.slug as parentslug'])->distinct()->get();
             $this->info("Records need to be deleted.  Verify the user progress data to be deleted.");
             $this->info("Data includes the following slugs:");
-            foreach($contents as $content){
+            foreach ($contents as $content) {
                 $this->info("$content->slug parent:$content->parentslug");
             }
             $this->info("\nRerun the command with --delete to process the delete.");
