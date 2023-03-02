@@ -35,7 +35,7 @@
                 ])
     <header class="header stacked">
         <div class="container mx-auto clearfix xlarge" style="background-image:url(https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/header-bg.jpg);">
-            <img class="px-4 w-auto max-h-20 mx-auto" src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/sd-logo.png">
+            <img class="px-4 w-auto max-h-20 mx-auto" src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/sd-logo.png" alt="Successful drumming logo">
 
             <div class="float-left w-full px-3 sm:px-4 video-container">
                 <i data-open="previewModal" class="fas fa-play play-button autoplay-video"></i>
@@ -156,12 +156,12 @@
                     Perfect for drummers of all levels with progressive step-by-step lessons on every topic.</p>
             </div>
             <div class="float-left w-full px-3 sm:px-4 sm:w-1/2 circle-point">
-                <div class="point-icon"><img src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/drum-icon.png"></div>
+                <div class="point-icon"><img src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/drum-icon.png" alt="Drum icon"></div>
                 <p><strong>THE EASY BEAT SYSTEM </strong><br>
                     A simple three-step formula for writing original drum beats and expressing your ideas.</p>
             </div>
             <div class="float-left w-full px-3 sm:px-4 sm:w-1/2 circle-point">
-                <div class="point-icon"><img src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/stick-icon.png"></div>
+                <div class="point-icon"><img src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/stick-icon.png" alt="Stick icon"></div>
                 <p><strong>THE DRUM FILL BUILDER</strong><br>
                     A simple three-step formula for unlocking your creativity while creating your own drum fills.</p>
             </div>
@@ -216,17 +216,17 @@
     <section class="student-reviews">
         <div class="container mx-auto clearfix">
             <div class="float-left w-full px-3 sm:px-4 sm:w-1/3 testimonial-wrap">
-                <img src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/fred-rose.jpg">
+                <img src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/fred-rose.jpg" alt="Fred Rose">
                 <p>"I’ve used several other packs online, I’ve taken private lessons, and nothing gives you this clear sense of accomplishment and goals and direction..."</p>
                 <h2>Fred Rose <span class="location">- California</span></h2>
             </div>
             <div class="float-left w-full px-3 sm:px-4 sm:w-1/3 testimonial-wrap">
-                <img src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/rich-behe.jpg">
+                <img src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/rich-behe.jpg" alt="Rich Behe">
                 <p>"One of the biggest frustrations for me has been trying to keep track of where I am within different video lessons. I would forget where I left off..."</p>
                 <h2>Rich Behe <span class="location">- Germany</span></h2>
             </div>
             <div class="float-left w-full px-3 sm:px-4 sm:w-1/3 testimonial-wrap">
-                <img src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/ken-voller.jpg">
+                <img src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/ken-voller.jpg" alt="Ken Voller">
                 <p>"The way that 'Successful Drumming', particularly the Foundation, sets out goals and achievements in small, bite size, chunks is so good!"</p>
                 <h2>Ken Voller <span class="location">- UK</span></h2>
             </div>
@@ -243,7 +243,7 @@
                     students can understand and simply get better..."
                 </p>
                 <div class="float-left w-full steve-details hidden sm:inline">
-                    <img src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/dave-mccoy.jpg">
+                    <img src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/dave-mccoy.jpg" alt="Dave Mccoy">
                     <div class="float-left w-full px-3 sm:px-4 end text">
                         <h2>Dave McCoy</h2>
                         <h3>California</h3>
@@ -256,7 +256,7 @@
     <section class="bruce-bio">
         <div class="container mx-auto clearfix">
             <p class="float-left w-full px-3 sm:px-4">
-                <span class="first-letter smaller"><img src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/bold-j.png"></span>ared Falk has been creating online drum lessons since before YouTube even existed!
+                <span class="first-letter smaller"><img src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/bold-j.png" alt="Bold J"></span>ared Falk has been creating online drum lessons since before YouTube even existed!
                 <br><br>
                 Back in 2003, Jared partnered with one of his private drum students to create simple websites with drum articles, video tutorials, and community discussion forums. As online drum lessons transitioned to becoming a full-time job, Jared launched several step-by-step DVD packs including the One-Handed Drum Roll, Bass Drum Secrets, and The Rock Drumming System.
                 <br><br>
@@ -274,17 +274,17 @@
     <section class="student-reviews">
         <div class="container mx-auto clearfix">
             <div class="float-left w-full px-3 sm:px-4 sm:w-1/3 testimonial-wrap">
-                <img src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/michael-peraza.jpg">
+                <img src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/michael-peraza.jpg" alt="Michael Peraza">
                 <p>"I hit a wall very quickly and got very frustrated. The band ended up splitting up. I felt at fault because my timing was horrible..."</p>
                 <h2>Michael Peraza <span class="location">- California</span></h2>
             </div>
             <div class="float-left w-full px-3 sm:px-4 sm:w-1/3 testimonial-wrap">
-                <img src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/robert-kidd.jpg">
+                <img src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/robert-kidd.jpg" alt="Robert Kidd">
                 <p>"I started playing drums in school when I was in 6th grade. I stopped playing for a number of years and just recently started back up..."</p>
                 <h2>Robert Kidd <span class="location">- Maryland</span></h2>
             </div>
             <div class="float-left w-full px-3 sm:px-4 sm:w-1/3 testimonial-wrap">
-                <img src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/jim-olson.jpg">
+                <img src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/jim-olson.jpg" alt="Jim Olson">
                 <p>"A few years ago, after more than 30 years away, I'm back playing with a band in my spare time..."</p>
                 <h2>Jim Olson <span class="location">- California</span></h2>
             </div>
@@ -309,7 +309,7 @@
     <section class="final">
         <div class="container mx-auto clearfix">
             <div class="float-left w-full px-3 sm:px-4 logo">
-                <img src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/sd-logo.png">
+                <img src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/sd-logo.png" alt="Successful drumming logo">
             </div>
             <h2 class="float-left w-full px-3 sm:px-4">Get Jared Falk’s trusted step-by-step curriculum <br class="inline sm:hidden">
                 for a one-time payment of just ${{ floatval($productPrices['SD-DIGI']->discounted_price) }}.</h2>

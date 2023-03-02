@@ -37,17 +37,17 @@
     @endif
 
     @include('drumeo.products.partials.promo-banner', [
-                    "name" => "The Drummer's Toolbox",
-                    "fullPrice" => floatval($productPrices['the-drummers-toolbox-book']->price),
-                    "price" => floatval($productPrices['the-drummers-toolbox-book']->discounted_price),
-                "noBreadcrumb" => true
-                ])
+        "name" => "The Drummer's Toolbox",
+        "fullPrice" => floatval($productPrices['the-drummers-toolbox-book']->price),
+        "price" => floatval($productPrices['the-drummers-toolbox-book']->discounted_price),
+        "noBreadcrumb" => true
+    ])
     <header class="book-header toolbox text-center">
         <div class="noise-wrap">
             <div class="row">
-                <img class="logo" src="https://dpwjbsxqtam5n.cloudfront.net/books/drummers-toolbox/sales/logo.png">
-                <p>The Ultimate Guide To Learning 100 <img class="plus-one" width="20px" src="https://dpwjbsxqtam5n.cloudfront.net/books/drummers-toolbox/sales/plus-one.svg"> Drumming Styles </p>
-                <img class="sticky-book" src="https://dpwjbsxqtam5n.cloudfront.net/books/drummers-toolbox/sales/book-angled.png">
+                <img class="logo" src="https://dpwjbsxqtam5n.cloudfront.net/books/drummers-toolbox/sales/logo.png" alt="Drummers toolbox logo">
+                <p>The Ultimate Guide To Learning 100 <img class="plus-one" width="20px" src="https://dpwjbsxqtam5n.cloudfront.net/books/drummers-toolbox/sales/plus-one.svg" alt="Plus one"> Drumming Styles </p>
+                <img class="sticky-book" src="https://dpwjbsxqtam5n.cloudfront.net/books/drummers-toolbox/sales/book-angled.png" alt="Toolbox book">
             </div>
         </div>
     </header>
@@ -241,7 +241,7 @@
     <section class="icons-grid text-center">
         <div class="row">
             <h3>Expand your musical vocabulary and <strong>become<br> more versatile</strong> behind the drum set.</h3>
-            <img class="book" src="https://dpwjbsxqtam5n.cloudfront.net/books/drummers-toolbox/sales/book-open.png">
+            <img class="book" src="https://dpwjbsxqtam5n.cloudfront.net/books/drummers-toolbox/sales/book-open.png" alt="Opened book">
 
             <div class="medium-up-3 small-up-2 text-center">
 
@@ -290,7 +290,7 @@
 
     <section class="tab-switcher author active">
         <div class="row">
-            <img src="https://dpwjbsxqtam5n.cloudfront.net/books/drummers-toolbox/sales/brandon.jpg">
+            <img src="https://dpwjbsxqtam5n.cloudfront.net/books/drummers-toolbox/sales/brandon.jpg" alt="Brandon Toews">
             <div class="text-wrap">
             <h1 class="blue-tab">Brandon Toews</h1>
             <p>Brandon Toews is an author, educator, and performer based out of Vancouver, Canada. In 2018, he co-authored the instructional book The Best Beginner Drum Book with Drumeo co-founder Jared Falk. In addition to creating educational resources for drummers, he has acquired his Bachelor of Music degree in Jazz and Contemporary Popular Music from MacEwan University in Edmonton, Canada with a major in Music Performance. Having played drums for the past 15 years, Brandon has studied with many notable educators and performers including Jared Falk (Drumeo), Colin Stranahan (Jonathan Kreisberg; Kurt Rosenwinkel), and Brian Thurgood (Edmonton Symphony Orchestra; MacEwan University). Brandon is also the Product Director at Musora Media, Inc., home to the award-winning online music education platforms Drumeo, Pianote, and Guitareo.</p>
@@ -301,7 +301,7 @@
     <section class="tab-switcher jare-letter">
         <div class="row">
             <div class="image-wrap">
-                <img src="https://dpwjbsxqtam5n.cloudfront.net/books/drummers-toolbox/sales/jared.jpg">
+                <img src="https://dpwjbsxqtam5n.cloudfront.net/books/drummers-toolbox/sales/jared.jpg" alt="Jared Falk">
                 <h1>JARED FALK</h1>
                 <p>PRESIDENT & CO-FOUDNER OF DRUMEO</p>
             </div>
@@ -338,7 +338,7 @@
                     But don’t thank me. Thank Buddy, and thank Brandon.
                     <br><br>
                     To your drumming success,<br>
-                    <img class="signature" width="60px" src="https://dpwjbsxqtam5n.cloudfront.net/books/drummers-toolbox/sales/signature.png">
+                    <img class="signature" width="60px" src="https://dpwjbsxqtam5n.cloudfront.net/books/drummers-toolbox/sales/signature.png" alt="Jared signature">
                 </p>
             </div>
         </div>
@@ -348,11 +348,11 @@
         <div class="row">
             <h1 class="blue-tab">SEE INSIDE</h1>
             <div class="text-center">
-                <div class="sample-wrap"><img class="modal-trigger" src="https://dpwjbsxqtam5n.cloudfront.net/books/drummers-toolbox/sales/sample-image-1.png"></div>
-                <div class="sample-wrap"><img class="modal-trigger" src="https://dpwjbsxqtam5n.cloudfront.net/books/drummers-toolbox/sales/sample-image-2.png"></div>
-                <div class="sample-wrap"><img class="modal-trigger" src="https://dpwjbsxqtam5n.cloudfront.net/books/drummers-toolbox/sales/sample-image-3.png"></div>
-                <div class="sample-wrap"><img class="modal-trigger" src="https://dpwjbsxqtam5n.cloudfront.net/books/drummers-toolbox/sales/sample-image-4.png"></div>
-                <div class="sample-wrap"><img class="modal-trigger" src="https://dpwjbsxqtam5n.cloudfront.net/books/drummers-toolbox/sales/sample-image-5.png"></div>
+                <div class="sample-wrap"><img class="modal-trigger" src="https://dpwjbsxqtam5n.cloudfront.net/books/drummers-toolbox/sales/sample-image-1.png" alt="Book inside sample 1"></div>
+                <div class="sample-wrap"><img class="modal-trigger" src="https://dpwjbsxqtam5n.cloudfront.net/books/drummers-toolbox/sales/sample-image-2.png" alt="Book inside sample 2"></div>
+                <div class="sample-wrap"><img class="modal-trigger" src="https://dpwjbsxqtam5n.cloudfront.net/books/drummers-toolbox/sales/sample-image-3.png" alt="Book inside sample 3"></div>
+                <div class="sample-wrap"><img class="modal-trigger" src="https://dpwjbsxqtam5n.cloudfront.net/books/drummers-toolbox/sales/sample-image-4.png" alt="Book inside sample 4"></div>
+                <div class="sample-wrap"><img class="modal-trigger" src="https://dpwjbsxqtam5n.cloudfront.net/books/drummers-toolbox/sales/sample-image-5.png" alt="Book inside sample 5"></div>
             </div>
         </div>
     </section>
@@ -444,22 +444,22 @@
             <h1 class="blue-tab center-tab">SEE WHAT DRUMMERS<br class="hide-for-medium"> ARE SAYING...</h1>
             <div class="medium-up-2">
                 <div class="columns">
-                    <img class="avatar" src="https://dpwjbsxqtam5n.cloudfront.net/sales/instructors/drummer-toddsucherman.jpg">
+                    <img class="avatar" src="https://dpwjbsxqtam5n.cloudfront.net/sales/instructors/drummer-toddsucherman.jpg" alt="Todd Sucherman">
                     <p>“A thoughtful and well-organized document of modern drumming with lineage going back decades.”</p>
                     <h5><strong>Todd Sucherman</strong><br> Drummer For Styx</h5>
                 </div>
                 <div class="columns">
-                    <img class="avatar" src="https://dpwjbsxqtam5n.cloudfront.net/sales/instructors/drummer-michaelschack.jpg">
+                    <img class="avatar" src="https://dpwjbsxqtam5n.cloudfront.net/sales/instructors/drummer-michaelschack.jpg" alt="Michael Schack">
                     <p>“There are hundreds of outdated books on specific drumming genres and styles, but there’s only one that’s totally modern and covers one hundred.”</p>
                     <h5><strong>Michael Schack</strong><br> Drummer For Netsky</h5>
                 </div>
                 <div class="columns">
-                    <img class="avatar" src="https://dpwjbsxqtam5n.cloudfront.net/sales/instructors/drummer-domfamularo.jpg">
+                    <img class="avatar" src="https://dpwjbsxqtam5n.cloudfront.net/sales/instructors/drummer-domfamularo.jpg" alt="Dom Famularo">
                     <p>“The Drummer’s Toolbox has given us an endless amount of options to build creative ideas in so many drumming styles. Brandon has given all of us new ways of learning and different ways to think about how we can approach the drum-set. For that, I thank him very much.”</p>
                     <h5><strong>Dom Famularo</strong><br> Drumming’s Global Ambassador</h5>
                 </div>
                 <div class="columns">
-                    <img class="avatar" src="https://dpwjbsxqtam5n.cloudfront.net/sales/instructors/drummer-stevelyman.jpg">
+                    <img class="avatar" src="https://dpwjbsxqtam5n.cloudfront.net/sales/instructors/drummer-stevelyman.jpg" alt="Steve Lyman">
                     <p>“I am floored. The Drummer’s Toolbox is one of the most unique and comprehensive texts out there on drumming styles. It’s not simply a book of basic styles. Brandon has instead gone ‘to the streets’ if you will and really dug deep to get to the heart of each of these grooves and styles. The depth is reflected in the work. Highly recommend.”</p>
                     <h5><strong>Steve Lyman</strong><br> Jazz drummer, composer, educator</h5>
                 </div>
@@ -471,9 +471,9 @@
         <div class="row">
             <h3><em>“Versatility is such a core component of becoming a more successful drummer -- and this book is the perfect reference for any drummer to learn about new styles, start playing new styles, and become well rounded musicians who’ll develop freedom across genres and develop their own voice on the drums.”</em></h3>
             <div class="pic-name">
-                <img class="avatar" src="https://dpwjbsxqtam5n.cloudfront.net/books/drummers-toolbox/sales/jared.jpg">
+                <img class="avatar" src="https://dpwjbsxqtam5n.cloudfront.net/books/drummers-toolbox/sales/jared.jpg" alt="Jared Falk">
                 <div class="name">
-                    <img class="signature" width="60px" src="https://dpwjbsxqtam5n.cloudfront.net/books/drummers-toolbox/sales/signature.png">
+                    <img class="signature" width="60px" src="https://dpwjbsxqtam5n.cloudfront.net/books/drummers-toolbox/sales/signature.png" alt="Jared signature">
                     <h1>Jared Falk</h1>
                     <p>PRESIDENT & CO-FOUNDER OF DRUMEO</p>
                 </div>
@@ -486,10 +486,10 @@
         <div class="noise-wrap">
             <div class="row">
                 <div class="columns medium-6 float-right">
-                    <img src="https://dpwjbsxqtam5n.cloudfront.net/books/drummers-toolbox/sales/book.png" class="book">
+                    <img src="https://dpwjbsxqtam5n.cloudfront.net/books/drummers-toolbox/sales/book.png" class="book" alt="Toolbox book">
                 </div>
                 <div class="columns medium-6 text-wrap">
-                    <img src="https://dpwjbsxqtam5n.cloudfront.net/books/drummers-toolbox/sales/logo-stacked.png">
+                    <img src="https://dpwjbsxqtam5n.cloudfront.net/books/drummers-toolbox/sales/logo-stacked.png" alt="Drummers toolbox logo">
                     @if( floatval($productPrices['the-drummers-toolbox-book']->price) > floatval($productPrices['the-drummers-toolbox-book']->discounted_price))
                         <p><s>WAS ${{ floatval($productPrices['the-drummers-toolbox-book']->price) }}</s> <strong> NOW ${{ floatval($productPrices['the-drummers-toolbox-book']->discounted_price) }}</strong>.
                         </p>

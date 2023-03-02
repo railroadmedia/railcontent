@@ -16,7 +16,7 @@
             <div class="slider-for overflow-hidden @if(!empty($interactiveBanner) || !empty($packBanner)) rounded-t @else rounded @endif">
                 @if (!empty($videoSrc))
                     <div class="overflow-hidden relative w-full" style="padding-bottom: 56.25%;">
-                        <iframe class="absolute w-full h-full inset-0" src="{{ $videoSrc }}" frameborder="0" allowfullscreen id="videoPlayer"></iframe>
+                        <iframe class="absolute w-full h-full inset-0" src="{{ $videoSrc }}" frameborder="0" allowfullscreen id="videoPlayer" title="Product video"></iframe>
                         <div class="hidden" id="videoSrc">{{$videoSrc}}</div>
                     </div>
                 @endif
