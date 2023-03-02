@@ -538,7 +538,7 @@
                     'title' => 'Chords & <br>Scales Book',
                     'description' => 'Your encyclopedia of piano chords & scales.',
                     'price' => floatval($productPrices['piano-chords-and-scales-guide']->price),
-                    'feature' => "Free Shipping",
+                    'shipping' => 'true'
                 ],
                 [
                 'image' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/piano-technique-made-easy.jpg',

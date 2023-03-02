@@ -519,6 +519,7 @@
                     'title' => 'The Guitarist’s Survival Kit',
                     'description' => 'Get the gear essentials to start sounding better on the guitar.',
                     'price' => floatval($productPrices['guitarists-survival-kit']->price),
+                    'shipping' => 'true'
                 ],
                 [
                     'image' => 'https://guitareo.s3.amazonaws.com/sales/promos/black-friday/bundles/ultimate/gq.jpg',

@@ -412,28 +412,28 @@
             </div>
 
             {{--            @if($products['DLM-Lifetime']->getStockAvailability() > 0)--}}
-{{--            <a--}}
-{{--                class="join blue bigger my-4 md:my-8 w-full max-w-xs md:max-w-lg lg:max-w-3xl"--}}
-{{--                style="padding: 20px 10px;"--}}
-{{--                :class="bonus !== 3 && 'sold-out'"--}}
-{{--                :href="bonus === 3 ? '/ecommerce/add-to-cart?products[DLM-Lifetime]=1'+query+'&locked=true' : '#customize-anchor'"--}}
-{{--                x-text="bonus === 3 ? 'BECOME A LIFETIME MEMBER &raquo;' : 'Choose 3 products above'"></a>--}}
-{{--            <p class="text-promo">--}}
-{{--                AVAILABLE UNTIL MARCH 31st AT MIDNIGHT <br>--}}
-{{--                <b>--}}
-{{--                    Only--}}
-{{--                    <span x-cloak x-data="timer()" x-init="countdown()">--}}
-{{--                         <span x-cloak x-show="timeLeft > 0 && day !== '00'"><span x-text="day"></span><span x-text="dayText"></span></span>--}}
-{{--                         <span x-cloak x-show="timeLeft > 0 && hour !== '00'"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
-{{--                         <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
-{{--                         <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
-{{--                         <span x-cloak x-show="timeLeft < 0">Limited Time</span>--}}
-{{--                     </span>--}}
-{{--                    Left!--}}
-{{--                </b>--}}
-{{--            </p>--}}
+            <a
+                class="join blue bigger my-4 md:my-8 w-full max-w-xs md:max-w-lg lg:max-w-3xl"
+                style="padding: 20px 10px;"
+                :class="bonus !== 3 && 'sold-out'"
+                :href="bonus === 3 ? '/ecommerce/add-to-cart?products[DLM-Lifetime]=1'+query+'&locked=true' : '#customize-anchor'"
+                x-text="bonus === 3 ? 'BECOME A LIFETIME MEMBER &raquo;' : 'Choose 3 products above'"></a>
+            <p class="text-promo">
+                AVAILABLE UNTIL MARCH 31st AT MIDNIGHT <br>
+                <b>
+                    Only
+                    <span x-cloak x-data="timer()" x-init="countdown()">
+                         <span x-cloak x-show="timeLeft > 0 && day !== '00'"><span x-text="day"></span><span x-text="dayText"></span></span>
+                         <span x-cloak x-show="timeLeft > 0 && hour !== '00'"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                         <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                         <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>
+                         <span x-cloak x-show="timeLeft < 0">Limited Time</span>
+                     </span>
+                    Left!
+                </b>
+            </p>
             {{--            @else--}}
-            <a class="join sold-out my-4">Sold Out</a>
+{{--            <a class="join sold-out my-4">Sold Out</a>--}}
             {{--            @endif--}}
         </div>
     </section>
@@ -468,7 +468,7 @@
 
     @include('_partials.components.video-modal',[
         'name' => 'trailer',
-        'video' => 'TODO',
+        'video' => '803596141',
         'vimeo' => true,
     ])
 
