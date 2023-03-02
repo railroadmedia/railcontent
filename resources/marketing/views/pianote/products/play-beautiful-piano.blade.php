@@ -193,11 +193,11 @@
         <div class="overlay absolute top-0 left-0 z-10 h-full w-full" style="background: linear-gradient(to bottom, rgba(50,86,102,0.7) 0%, rgba(42,20,40,0.85) 100%);"></div>
         <div class="container mx-auto">
             <div class="transform -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 w-full absolute z-30 animated fadeIn">
-                <img class="h-20 md:h-40 lg:h-52 mx-auto" src="https://cdn.musora.com/image/fetch/w_1600,q_auto:best/https://pianote.s3.amazonaws.com/products/play-beautiful-piano/logo-2.png">
+                <img class="h-20 md:h-40 lg:h-52 mx-auto" src="https://cdn.musora.com/image/fetch/w_1600,q_auto:best/https://pianote.s3.amazonaws.com/products/play-beautiful-piano/logo-2.png" alt="Playing beautiful piano logo">
                 <h4 class="leading-normal mb-5 md:mb-8">Start playing beautiful music from<br class="inline md:hidden"> your very 1st lesson - for just <strong>${{ floatval($productPrices['play-beautiful-piano']->discounted_price) }}</strong>.</h4>
                 <a class="join vue-add-to-cart" data-product-json='{"play-beautiful-piano": 1}' href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['play-beautiful-piano' => 1], 'redirect' => '/order']) }}">Play Beautifully &raquo;</a>
             </div>
-            <div class="bottom absolute bottom-0 left-0 right-0 z-30 pb-5 md:pb-8"><img class="h-14 md:h-16 lg:h-20 animated infinite pulse" src="https://cdn.musora.com/image/fetch/w_70,q_auto:best/https://pianote.s3.amazonaws.com/products/play-beautiful-piano/treble-clef.png"></div>
+            <div class="bottom absolute bottom-0 left-0 right-0 z-30 pb-5 md:pb-8"><img class="h-14 md:h-16 lg:h-20 animated infinite pulse" src="https://cdn.musora.com/image/fetch/w_70,q_auto:best/https://pianote.s3.amazonaws.com/products/play-beautiful-piano/treble-clef.png" alt="Treble clef"></div>
         </div>
     </header>
 
@@ -235,46 +235,46 @@
                 If your playing doesn’t sound like it does in your dreams, it’s likely because you’ve never been shown HOW to play that way. And if you’ve never been shown how -- then it only makes sense that you can’t.
                 <br><br>
                 Not yet, anyway...</p>
-            <img class="h-14 md:h-16 lg:h-20 animated infinite pulse lazyload" data-src="https://cdn.musora.com/image/fetch/w_70,q_auto:best/https://pianote.s3.amazonaws.com/products/play-beautiful-piano/treble-clef.png">
+            <img class="h-14 md:h-16 lg:h-20 animated infinite pulse lazyload" data-src="https://cdn.musora.com/image/fetch/w_70,q_auto:best/https://pianote.s3.amazonaws.com/products/play-beautiful-piano/treble-clef.png" alt="Treble clef">
         </div>
     </section>
     <section class="content-section overflow-hidden relative text-white text-center">
         <div class="container mx-auto">
             <h2><em>Your step-by-step journey to...</em></h2>
-            <img class="h-20 md:h-40 lg:h-52 mx-auto my-3 md:my-4 lg:my-5 lazyload" data-src="https://cdn.musora.com/image/fetch/w_1600,q_auto:best/https://pianote.s3.amazonaws.com/products/play-beautiful-piano/logo-2.png">
+            <img class="h-20 md:h-40 lg:h-52 mx-auto my-3 md:my-4 lg:my-5 lazyload" data-src="https://cdn.musora.com/image/fetch/w_1600,q_auto:best/https://pianote.s3.amazonaws.com/products/play-beautiful-piano/logo-2.png" alt="Playing beautiful piano logo">
             <p class="text-pianote mb-5 md:mb-10"><em><i class="fal fa-angle-down"></i> &nbsp; CLICK A LESSON TO PREVIEW &nbsp; <i class="fal fa-angle-down"></i></em></p>
         </div>
         <div class="flex flex-wrap mx-auto bg-white" style="max-width:2000px;">
-            <a data-open="lesson1" class="w-1/2 lg:w-1/3 bg-cover bg-center pt-32 md:pt-44 lg:pt-52 pb-5 md:pb-8 lg:pb-12 relative cursor-pointer hover:opacity-95 autoplay-video lazyload" data-bg="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://pianote.s3.amazonaws.com/products/play-beautiful-piano/thumb-video-1.jpg">
+            <div data-open="lesson1" class="w-1/2 lg:w-1/3 bg-cover bg-center pt-32 md:pt-44 lg:pt-52 pb-5 md:pb-8 lg:pb-12 relative cursor-pointer hover:opacity-95 autoplay-video lazyload" data-bg="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://pianote.s3.amazonaws.com/products/play-beautiful-piano/thumb-video-1.jpg">
                 <p class="py-0.5 md:py-2 px-2 md:px-3 leading-none inline-block mx-auto mb-2 md:mb-4 md:tracking-widest relative z-20" style="background-color:#d04b4c;">LESSON 1</p>
                 <h3 class="font-roboto uppercase leading-none tracking-tighter md:tracking-normal relative z-20"><strong>You didn’t know you<br> could sound this good</strong></h3>
                 <div class="overlay absolute top-0 left-0 z-10 h-full w-full transition-opacity duration-300 hover:opacity-0" style="background: linear-gradient(to bottom, transparent 33%, rgba(0,10,30,0.7) 100%);"></div>
-            </a>
-            <a data-open="lesson2" class="w-1/2 lg:w-1/3 bg-cover bg-center pt-32 md:pt-44 lg:pt-52 pb-5 md:pb-8 lg:pb-12 relative cursor-pointer hover:opacity-95 autoplay-video lazyload" data-bg="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://pianote.s3.amazonaws.com/products/play-beautiful-piano/thumb-video-2.jpg">
+            </div>
+            <div data-open="lesson2" class="w-1/2 lg:w-1/3 bg-cover bg-center pt-32 md:pt-44 lg:pt-52 pb-5 md:pb-8 lg:pb-12 relative cursor-pointer hover:opacity-95 autoplay-video lazyload" data-bg="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://pianote.s3.amazonaws.com/products/play-beautiful-piano/thumb-video-2.jpg">
                 <p class="py-0.5 md:py-2 px-2 md:px-3 leading-none inline-block mx-auto mb-2 md:mb-4 md:tracking-widest relative z-20" style="background-color:#22aa55;">LESSON 2</p>
                 <h3 class="font-roboto uppercase leading-none tracking-tighter md:tracking-normal relative z-20"><strong>Why you sounded<br>  amazing just then</strong></h3>
                 <div class="overlay absolute top-0 left-0 z-10 h-full w-full transition-opacity duration-300 hover:opacity-0" style="background: linear-gradient(to bottom, transparent 33%, rgba(0,10,30,0.7) 100%);"></div>
-            </a>
-            <a data-open="lesson3" class="w-1/2 lg:w-1/3 bg-cover bg-center pt-32 md:pt-44 lg:pt-52 pb-5 md:pb-8 lg:pb-12 relative cursor-pointer hover:opacity-95 autoplay-video lazyload" data-bg="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://pianote.s3.amazonaws.com/products/play-beautiful-piano/thumb-video-3.jpg">
+            </div>
+            <div data-open="lesson3" class="w-1/2 lg:w-1/3 bg-cover bg-center pt-32 md:pt-44 lg:pt-52 pb-5 md:pb-8 lg:pb-12 relative cursor-pointer hover:opacity-95 autoplay-video lazyload" data-bg="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://pianote.s3.amazonaws.com/products/play-beautiful-piano/thumb-video-3.jpg">
                 <p class="py-0.5 md:py-2 px-2 md:px-3 leading-none inline-block mx-auto mb-2 md:mb-4 md:tracking-widest relative z-20" style="background-color:#148cc9;">LESSON 3</p>
                 <h3 class="font-roboto uppercase leading-none tracking-tighter md:tracking-normal relative z-20"><strong>Make your own<br>  beautiful music</strong></h3>
                 <div class="overlay absolute top-0 left-0 z-10 h-full w-full transition-opacity duration-300 hover:opacity-0" style="background: linear-gradient(to bottom, transparent 33%, rgba(0,10,30,0.7) 100%);"></div>
-            </a>
-            <a data-open="lesson4" class="w-1/2 lg:w-1/3 bg-cover bg-center pt-32 md:pt-44 lg:pt-52 pb-5 md:pb-8 lg:pb-12 relative cursor-pointer hover:opacity-95 autoplay-video lazyload" data-bg="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://pianote.s3.amazonaws.com/products/play-beautiful-piano/thumb-video-4.jpg">
+            </div>
+            <div data-open="lesson4" class="w-1/2 lg:w-1/3 bg-cover bg-center pt-32 md:pt-44 lg:pt-52 pb-5 md:pb-8 lg:pb-12 relative cursor-pointer hover:opacity-95 autoplay-video lazyload" data-bg="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://pianote.s3.amazonaws.com/products/play-beautiful-piano/thumb-video-4.jpg">
                 <p class="py-0.5 md:py-2 px-2 md:px-3 leading-none inline-block mx-auto mb-2 md:mb-4 md:tracking-widest relative z-20" style="background-color:#ed8749;">LESSON 4</p>
                 <h3 class="font-roboto uppercase leading-none tracking-tighter md:tracking-normal relative z-20"><strong>The secret sauce to<br>  spice up your playing</strong></h3>
                 <div class="overlay absolute top-0 left-0 z-10 h-full w-full transition-opacity duration-300 hover:opacity-0" style="background: linear-gradient(to bottom, transparent 33%, rgba(0,10,30,0.7) 100%);"></div>
-            </a>
-            <a data-open="lesson5" class="w-1/2 lg:w-1/3 bg-cover bg-center pt-32 md:pt-44 lg:pt-52 pb-5 md:pb-8 lg:pb-12 relative cursor-pointer hover:opacity-95 autoplay-video lazyload" data-bg="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://pianote.s3.amazonaws.com/products/play-beautiful-piano/thumb-video-5.jpg">
+            </div>
+            <div data-open="lesson5" class="w-1/2 lg:w-1/3 bg-cover bg-center pt-32 md:pt-44 lg:pt-52 pb-5 md:pb-8 lg:pb-12 relative cursor-pointer hover:opacity-95 autoplay-video lazyload" data-bg="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://pianote.s3.amazonaws.com/products/play-beautiful-piano/thumb-video-5.jpg">
                 <p class="py-0.5 md:py-2 px-2 md:px-3 leading-none inline-block mx-auto mb-2 md:mb-4 md:tracking-widest relative z-20" style="background-color:#c942e4;">LESSON 5</p>
                 <h3 class="font-roboto uppercase leading-none tracking-tighter md:tracking-normal relative z-20"><strong>You don’t have to <br> hit the keys</strong></h3>
                 <div class="overlay absolute top-0 left-0 z-10 h-full w-full transition-opacity duration-300 hover:opacity-0" style="background: linear-gradient(to bottom, transparent 33%, rgba(0,10,30,0.7) 100%);"></div>
-            </a>
-            <a data-open="lesson6" class="w-1/2 lg:w-1/3 bg-cover bg-center pt-32 md:pt-44 lg:pt-52 pb-5 md:pb-8 lg:pb-12 relative cursor-pointer hover:opacity-95 autoplay-video lazyload" data-bg="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://pianote.s3.amazonaws.com/products/play-beautiful-piano/thumb-video-6.jpg">
+            </div>
+            <div data-open="lesson6" class="w-1/2 lg:w-1/3 bg-cover bg-center pt-32 md:pt-44 lg:pt-52 pb-5 md:pb-8 lg:pb-12 relative cursor-pointer hover:opacity-95 autoplay-video lazyload" data-bg="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://pianote.s3.amazonaws.com/products/play-beautiful-piano/thumb-video-6.jpg">
                 <p class="py-0.5 md:py-2 px-2 md:px-3 leading-none inline-block mx-auto mb-2 md:mb-4 md:tracking-widest relative z-20" style="background-color:#6700ff;">LESSON 6</p>
                 <h3 class="font-roboto uppercase leading-none tracking-tighter md:tracking-normal relative z-20"><strong>C ya later. Exploring<br>  other key signatures</strong></h3>
                 <div class="overlay absolute top-0 left-0 z-10 h-full w-full transition-opacity duration-300 hover:opacity-0" style="background: linear-gradient(to bottom, transparent 33%, rgba(0,10,30,0.7) 100%);"></div>
-            </a>
+            </div>
         </div>
     </section>
 
@@ -348,7 +348,7 @@
             Put me to the test, and get ready to change your belief about what you are able to do.
                 <br><br>
                 I’ll see you in lesson 1.<br>
-                <img class="h-12 md:h-16 mt-5 md:mt-7 lazyload" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-riffs-and-fills/lisa-witt-signature.png"></p>
+                <img class="h-12 md:h-16 mt-5 md:mt-7 lazyload" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-riffs-and-fills/lisa-witt-signature.png" alt="Lisa signature"></p>
         </div>
     </section>
     <section class="content-section overflow-hidden relative text-white text-center">
@@ -380,7 +380,7 @@
                 @endphp
                 @foreach($testimonials as $testimonial)
                     <div class="w-full md:w-1/2 lg:w-1/3 px-3 md:px-4 text-center flex-wrap justify-center transition-all duration-200 ease-in-out @if(!empty($testimonial['class'])) {{ $testimonial['class'] }} @endif">
-                        <img class="rounded-full border-4 bg-pianote border-pianote h-28 md:h-40 lg:h-44 lazyload" data-src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/sales/testimonials/{{ strtolower(str_replace(' ', '-', $testimonial['name'])) }}.jpg">
+                        <img class="rounded-full border-4 bg-pianote border-pianote h-28 md:h-40 lg:h-44 lazyload" data-src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/sales/testimonials/{{ strtolower(str_replace(' ', '-', $testimonial['name'])) }}.jpg" alt="{{ $testimonial['name'] }}">
                         <h5 class="leading-tight my-4 w-full"><strong>"{!! $testimonial['heading'] !!}"</strong></h5>
                         <p class="leading-normal w-full">{!! $testimonial['testimonial'] !!}<br><br>
                             <strong class="text-pianote font-black">{{ $testimonial['name'] }}</strong><br>
@@ -394,7 +394,7 @@
     <section class="content-section overflow-hidden relative text-white text-left" style="background:linear-gradient(to bottom, #000217, #02082c);">
         <div class="container mx-auto">
             <div class="flex items-start flex-wrap md:flex-nowrap justify-center max-w-5xl mx-auto px-5 md:px-6 lg:px-8">
-                <img class="w-36 md:w-60 lg:w-80 mb-5 md:mb-0 md:order-1 inline-block lazyload" data-src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/sales/guarantee-badge.png">
+                <img class="w-36 md:w-60 lg:w-80 mb-5 md:mb-0 md:order-1 inline-block lazyload" data-src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/sales/guarantee-badge.png" alt="Guarantee Badge">
                 <div class="md:pr-8 lg:pr-10">
                     <h2 class="mb-5 lg:mb-10 text-center md:text-left">The Best Results Guaranteed.<br>
                         <strong>With NO Risk.</strong></h2>
@@ -422,7 +422,7 @@
         <div class="overlay absolute top-0 left-0 z-10 h-full w-full" style="background: linear-gradient(to bottom, rgba(50,86,102,0.7) 0%, rgba(42,20,40,0.85) 100%);"></div>
         <div class="container mx-auto">
             <div class="transform -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 w-full absolute z-30">
-                <img class="h-20 md:h-40 lg:h-52 mx-auto lazyload" data-src="https://cdn.musora.com/image/fetch/w_1600,q_auto:best/https://pianote.s3.amazonaws.com/products/play-beautiful-piano/logo-2.png">
+                <img class="h-20 md:h-40 lg:h-52 mx-auto lazyload" data-src="https://cdn.musora.com/image/fetch/w_1600,q_auto:best/https://pianote.s3.amazonaws.com/products/play-beautiful-piano/logo-2.png" alt="Playing beautiful piano logo">
                 <h4 class="mt-1 md:mt-4 leading-normal">Start playing beautiful music from<br class="inline md:hidden"> your very 1st lesson - for just <strong>${{ floatval($productPrices['play-beautiful-piano']->discounted_price) }}</strong>.</h4>
                 <a class="join my-5 md:my-7 vue-add-to-cart" data-product-json='{"play-beautiful-piano": 1}' href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['play-beautiful-piano' => 1], 'redirect' => '/order']) }}">Play Beautifully For Just ${{ floatval($productPrices['play-beautiful-piano']->discounted_price) }} &raquo;</a>
                 <a class="text-pianote" href="/"><h6><u>OR FREE WITH A PIANOTE MEMBERSHIP</u></h6></a>

@@ -85,11 +85,11 @@
         "cartVersion" => true
     ])
     @include('guitareo._partials.promo-banner', [
-                "name" => "Acoustic Guitar Made Easy",
-                "fullPrice" => floatval($productPrices['AGME-JAN-2019-SEMESTER']->price),
-                "price" => floatval($productPrices['AGME-JAN-2019-SEMESTER']->discounted_price),
-                "noBreadcrumb" => true
-            ])
+        "name" => "Acoustic Guitar Made Easy",
+        "fullPrice" => floatval($productPrices['AGME-JAN-2019-SEMESTER']->price),
+        "price" => floatval($productPrices['AGME-JAN-2019-SEMESTER']->discounted_price),
+        "noBreadcrumb" => true
+    ])
 
     <header class="hero-header">
         <div class="row">
@@ -97,7 +97,7 @@
                 <div class="play-video"><i class="fas fa-play play-button" data-open="trailer"></i></div>
                 <div class="logo">
                     <p><em>Nate Savage's</em></p>
-                    <img src="https://s3.amazonaws.com/guitareo/acoustic-guitar-made-easy/sales/AGME-logo-white.png">
+                    <img src="https://s3.amazonaws.com/guitareo/acoustic-guitar-made-easy/sales/AGME-logo-white.png" alt="AGME logo">
                 </div>
             </div>
             {{--<p class="columns">Your 26-week system for getting started on the<br class="hide-for-large">--}}
@@ -129,7 +129,7 @@
             <h1>It all starts with a question:<br> <strong>Why do you want to play guitar?</strong></h1>
             <h3>We asked our students, and these <br class="hide-for-medium">
                 were their top answers:</h3>
-            <img src="https://s3.amazonaws.com/guitareo/acoustic-guitar-made-easy/sales/what-people-say.png">
+            <img src="https://s3.amazonaws.com/guitareo/acoustic-guitar-made-easy/sales/what-people-say.png" alt="What people say bubbles">
             <p class="columns"><strong><em>Any of these sound like you?</em></strong>
                 <br><br>
                 Acoustic Guitar Made Easy was created to give you a crystal-clear pathway to reaching these  <br class="show-for-medium">
@@ -141,7 +141,7 @@
             <div class="columns no-padding benefit-row practice">
                 <div class="columns medium-6 float-right">
                     <div class="arrow-outline">
-                        <img src="https://s3.amazonaws.com/guitareo/acoustic-guitar-made-easy/sales/best-year.jpg">
+                        <img src="https://s3.amazonaws.com/guitareo/acoustic-guitar-made-easy/sales/best-year.jpg" alt="Best year">
                     </div>
                 </div>
                 <div class="columns medium-6 text-wrap">
@@ -155,7 +155,7 @@
             <div class="columns no-padding benefit-row support">
                 <div class="columns medium-6">
                     <div class="arrow-outline right">
-                        <img src="https://s3.amazonaws.com/guitareo/acoustic-guitar-made-easy/sales/coach.jpg">
+                        <img src="https://s3.amazonaws.com/guitareo/acoustic-guitar-made-easy/sales/coach.jpg" alt="Coach">
                     </div>
                 </div>
                 <div class="columns medium-6 text-wrap">
@@ -169,7 +169,7 @@
             <div class="columns no-padding benefit-row play">
                 <div class="columns medium-6 float-right">
                     <div class="arrow-outline">
-                        <img src="https://s3.amazonaws.com/guitareo/acoustic-guitar-made-easy/sales/practice.jpg">
+                        <img src="https://s3.amazonaws.com/guitareo/acoustic-guitar-made-easy/sales/practice.jpg" alt="Practice">
                     </div>
                 </div>
                 <div class="columns medium-6 text-wrap">
@@ -191,23 +191,23 @@
                 rock-solid foundation so you can play the songs you love.</h3>
             <div class="pillar-wrap small-up-2 medium-up-3 large-up-5">
                 <div class="columns text-center pillar">
-                    <img src="https://s3.amazonaws.com/guitareo/acoustic-guitar-made-easy/5-pillars/pillar-1.svg">
+                    <img src="https://s3.amazonaws.com/guitareo/acoustic-guitar-made-easy/5-pillars/pillar-1.svg" alt="Pillar 1">
                     <h3>Pillar #1<br><strong>Strumming</strong></h3>
                 </div>
                 <div class="columns text-center pillar">
-                    <img src="https://s3.amazonaws.com/guitareo/acoustic-guitar-made-easy/5-pillars/pillar-2.svg">
+                    <img src="https://s3.amazonaws.com/guitareo/acoustic-guitar-made-easy/5-pillars/pillar-2.svg" alt="Pillar 2">
                     <h3>Pillar #2<br><strong>Clean Chords</strong></h3>
                 </div>
                 <div class="columns text-center pillar">
-                    <img src="https://s3.amazonaws.com/guitareo/acoustic-guitar-made-easy/5-pillars/pillar-3.svg">
+                    <img src="https://s3.amazonaws.com/guitareo/acoustic-guitar-made-easy/5-pillars/pillar-3.svg" alt="Pillar 3">
                     <h3>Pillar #3<br><strong>Changing Chords</strong></h3>
                 </div>
                 <div class="columns text-center pillar">
-                    <img src="https://s3.amazonaws.com/guitareo/acoustic-guitar-made-easy/5-pillars/pillar-4.svg">
+                    <img src="https://s3.amazonaws.com/guitareo/acoustic-guitar-made-easy/5-pillars/pillar-4.svg" alt="Pillar 4">
                     <h3>Pillar #4<br><strong>Music Theory</strong></h3>
                 </div>
                 <div class="columns text-center pillar">
-                    <img src="https://s3.amazonaws.com/guitareo/acoustic-guitar-made-easy/5-pillars/pillar-5.svg">
+                    <img src="https://s3.amazonaws.com/guitareo/acoustic-guitar-made-easy/5-pillars/pillar-5.svg" alt="Pillar 5">
                     <h3>Pillar #5<br><strong>Playing Songs</strong></h3>
                 </div>
             </div>
@@ -460,7 +460,7 @@
                 "weekDescription" => "Getting the fundamentals of playing the guitar down is epic and critical. But what do you do once you've already done that? That's exactly what we will discuss here. Setting musical goals with specific due dates is a big part of future success."
                 ])
             </div>
-            <a class="join made-easy outline toggle">Show All</a>
+            <span class="join made-easy outline toggle">Show All</span>
         </div>
     </section>
 
@@ -476,7 +476,7 @@
     <section class="instructor-bio">
         <div class="row">
             <p class="columns">
-                <span class="first-letter"><img style="border-radius: 5px;" src="https://guitareo.s3.amazonaws.com/gtme/bold-n.png"></span>ate Savage always knew he wanted to share his love for playing the guitar with others. After earning his Music Degree at San Jacinto College and playing hundreds of shows across Canada, the USA, and Europe -- he wanted to find a better way to help guitarists around the world. So in 2009, he connected with Musora Media to start GuitarLessons.com -- a massive library of free online guitar lessons that has since helped more than 20 million guitar players.
+                <span class="first-letter"><img style="border-radius: 5px;" src="https://guitareo.s3.amazonaws.com/gtme/bold-n.png" alt="Bold N"></span>ate Savage always knew he wanted to share his love for playing the guitar with others. After earning his Music Degree at San Jacinto College and playing hundreds of shows across Canada, the USA, and Europe -- he wanted to find a better way to help guitarists around the world. So in 2009, he connected with Musora Media to start GuitarLessons.com -- a massive library of free online guitar lessons that has since helped more than 20 million guitar players.
 
                 <br><br>
                 “I loved playing shows and touring,” Nate said in 2009. “But my heart has always been set on guitar education. I truly believe that playing the guitar can be a life-changing experience, so having the opportunity to create online lessons and help students around the world felt like such a perfect opportunity.”
@@ -496,7 +496,7 @@
             <div class="columns no-padding medium-4 benefit-row practice">
                 <div class="columns float-right">
                     <div class="arrow-outline">
-                        <img src="https://guitareo.s3.amazonaws.com/gtme/bubble-gl.png">
+                        <img src="https://guitareo.s3.amazonaws.com/gtme/bubble-gl.png" alt="G">
                     </div>
                 </div>
                 <div class="columns text-wrap">
@@ -507,7 +507,7 @@
             <div class="columns no-padding medium-4 benefit-row play">
                 <div class="column">
                     <div class="arrow-outline">
-                        <img src="https://guitareo.s3.amazonaws.com/gtme/bubble-subs.png">
+                        <img src="https://guitareo.s3.amazonaws.com/gtme/bubble-subs.png" alt="Youtube text">
                     </div>
                 </div>
                 <div class="columns text-wrap">
@@ -518,7 +518,7 @@
             <div class="columns no-padding medium-4 benefit-row support">
                 <div class="columns float-right">
                     <div class="arrow-outline">
-                        <img src="https://guitareo.s3.amazonaws.com/gtme/bubble-views.png">
+                        <img src="https://guitareo.s3.amazonaws.com/gtme/bubble-views.png" alt="Youtube icon">
                     </div>
                 </div>
                 <div class="columns text-wrap">
@@ -535,7 +535,7 @@
 
             <div class="columns no-padding small-up-1 medium-up-2 large-up-3 drummer-testimonial">
                 <div class="columns">
-                    <img class="drummer-pic" src="https://s3.amazonaws.com/guitareo/sales/testimonials/harv-schelter.jpg">
+                    <img class="drummer-pic" src="https://s3.amazonaws.com/guitareo/sales/testimonials/harv-schelter.jpg" alt="Harv Schelter">
                     <p>"When I first started playing the guitar, I had two 30 minute private lessons which got me nowhere for $60. Next, I went through two great books on my own which were good. I learned to read music, play some chords. But, I really didn't know what to do next.
                         <br><br>
                         After talking with Nate via email, I felt like I could complete Acoustic Guitar Made Easy. And learning to play rhythm to 5 songs would give me some needed direction to follow.
@@ -544,14 +544,14 @@
                     <h1>Harv Schelter <br> <span class="band">- Colorado</span></h1>
                 </div>
                 <div class="columns">
-                    <img class="drummer-pic" src="https://s3.amazonaws.com/guitareo/sales/testimonials/james-lee-mcdowell.jpg">
+                    <img class="drummer-pic" src="https://s3.amazonaws.com/guitareo/sales/testimonials/james-lee-mcdowell.jpg" alt="James McDowell">
                     <p>"When I first started playing guitar, it was frustrating because of the lack of a path to follow. I felt like stopping altogether. <strong>It was when Nate broke down the song Brown Eyed Girl inside Acoustic Guitar Made Easy when I got it.</strong> I was finally able to get through the entire thing... quite a milestone for me!
                         <br><br>
                         If you’re considering Acoustic Guitar Made Easy, I would say go ahead and go for it. It opened up a lot of things for me. Nate breaks down the songs perfectly for you and he makes it easy for you to just get it."</p>
                     <h1>James McDowell <br> <span class="band">- Washington</span></h1>
                 </div>
                 <div class="columns">
-                    <img class="drummer-pic" src="https://s3.amazonaws.com/guitareo/sales/testimonials/don-mulnix.jpg">
+                    <img class="drummer-pic" src="https://s3.amazonaws.com/guitareo/sales/testimonials/don-mulnix.jpg" alt="Don Mulnix">
                     <p>"I have never given up easily on anything. However, <strong>I was beginning to think that playing the guitar was out of my reach...</strong>
                         <br><br>
                         It was midway through the lessons in Acoustic Guitar Made Easy and the same sense of dedication and commitment Nate continued to communicate. I really believed he wouldn’t quit on me. And he ALWAYS responds to my comments.
@@ -560,7 +560,7 @@
                     <h1>Don Mulnix <br> <span class="band">- South Carolina</span></h1>
                 </div>
                 <div class="columns">
-                    <img class="drummer-pic" src="https://s3.amazonaws.com/guitareo/sales/testimonials/rob-mckay.jpg">
+                    <img class="drummer-pic" src="https://s3.amazonaws.com/guitareo/sales/testimonials/rob-mckay.jpg" alt="Rob Mckay">
                     <p>"Before Acoustic Guitar Made Easy, I didn’t have a set lesson plan or guide. I was all over the place trying many different videos with no concentrated focus or practice regime.
                         <br><br>
                         <strong>Then came Acoustic Guitar Made Easy, and I finally found structure!</strong> I loved the lesson layout and the excellent structure of each individual lesson.
@@ -571,7 +571,7 @@
                     <h1>Rob Mckay <br> <span class="band">- New Zealand</span></h1>
                 </div>
                 <div class="columns">
-                    <img class="drummer-pic" src="https://s3.amazonaws.com/guitareo/sales/testimonials/david-raynor.jpg">
+                    <img class="drummer-pic" src="https://s3.amazonaws.com/guitareo/sales/testimonials/david-raynor.jpg" alt="David Raynor">
                     <p>"As a beginner player, I was frustrated trying to make sense of all the "beginner" information that is out there and easily accessible. I was confused. And although I am generally a self-starter, working out where to begin is often the hardest part to getting started.
                         <br><br>
                         <strong>The big moment it all clicked for me was when I moved from basic technique to applying it to playing songs. I could actually play them with some confidence.</strong>
@@ -582,7 +582,7 @@
                     <h1>David Raynor <br> <span class="band">- New Zealand</span></h1>
                 </div>
                 <div class="columns">
-                    <img class="drummer-pic" src="https://s3.amazonaws.com/guitareo/sales/testimonials/norma-mcintosh.jpg">
+                    <img class="drummer-pic" src="https://s3.amazonaws.com/guitareo/sales/testimonials/norma-mcintosh.jpg" alt="Norma McIntosh">
                     <p>"Before Acoustic Guitar Made Easy, I felt like I couldn’t learn guitar. But the thing that truly made a difference was Nate. He made me feel like I can learn the guitar, and if I need help all I have to do is watch the videos from Acoustic Guitar Made Easy, and he will be there to help me again.
                         <br><br>
                         Now that I’m done AGME, life looks good. <strong>I have realized a life-long dream and now at the young age of eighty, I can play the guitar.</strong>
@@ -603,8 +603,8 @@
                 <tr>
                     <td></td>
                     <td>
-                        <img src="https://s3.amazonaws.com/guitareo/acoustic-guitar-made-easy/sales/macbook.png" class="macbook"><br>
-                        <img src="https://s3.amazonaws.com/guitareo/acoustic-guitar-made-easy/sales/AGME-logo-black.png" class="blue-logo">
+                        <img src="https://s3.amazonaws.com/guitareo/acoustic-guitar-made-easy/sales/macbook.png" class="macbook" alt="Macobook"><br>
+                        <img src="https://s3.amazonaws.com/guitareo/acoustic-guitar-made-easy/sales/AGME-logo-black.png" class="blue-logo" alt="AGME logo">
                     </td>
                     {{--<td class="show-for-medium"><i class="fad fa-sync gray-logo"></i><br>Subscription Sites</td>--}}
                     <td><i class="fad fa-chalkboard-teacher gray-logo"></i><br>Private Lessons</td>
@@ -690,7 +690,7 @@
     <section class="final">
         <div class="row">
             <div class="columns logo">{{--<img class="edge" src="https://guitareo.s3.amazonaws.com/sales/promos/cyber-monday/logo.png"><br>--}}
-                <img src="https://s3.amazonaws.com/guitareo/acoustic-guitar-made-easy/sales/AGME-logo-white.png"></div>
+                <img src="https://s3.amazonaws.com/guitareo/acoustic-guitar-made-easy/sales/AGME-logo-white.png" alt="AGME logo"></div>
 
             <h1 class="columns">26-Week Online Course <br class="hide-for-medium">
                 For Just ${{ number_format((floatval($productPrices['AGME-JAN-2019-SEMESTER']->discounted_price) / 26), 2, '.', ',') }} Per Week</h1>

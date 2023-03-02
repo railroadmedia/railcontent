@@ -28,11 +28,11 @@
 
     <header class="header text-center">
         <div class="container">
-            <img class="logo" src="https://d2vyvo0tyx8ig5.cloudfront.net/products/worship-piano/logo-text-white.png"><br>
+            <img class="logo" src="https://d2vyvo0tyx8ig5.cloudfront.net/products/worship-piano/logo-text-white.png" alt="Worship piano logo"><br>
             <div class="video-wrap autoplay-video" data-toggle="modal" data-target="#trailer">
                 <i class="fas fa-play"></i>
                 <div class="embed-responsive embed-responsive-16by9">
-                    <img src="https://d2vyvo0tyx8ig5.cloudfront.net/products/worship-piano/header-video.jpg">
+                    <img src="https://d2vyvo0tyx8ig5.cloudfront.net/products/worship-piano/header-video.jpg" alt="Header video thumbnail">
                 </div>
             </div>
             <h2>Start playing piano or <br class="hidden-sm hidden-md hidden-lg"> keyboard in your church.</h2>
@@ -71,7 +71,7 @@
     <section class="more-songs">
         <div class="container">
             <h2 class="text-center"><strong>Play modern worship songs and serve your church</strong></h2>
-            <img src="https://d2vyvo0tyx8ig5.cloudfront.net/products/worship-piano/lisa-amberly-1.png">
+            <img src="https://d2vyvo0tyx8ig5.cloudfront.net/products/worship-piano/lisa-amberly-1.png" alt="Lisa and Amberly">
             <p>The piano (and keyboard) is the glue that holds worship bands together. From song introductions and transitions to backing music during prayer and altar calls, the piano sets the tone and space inside church.
                 <br><br> The needs of a church pianist are unique - there isn’t really any other environment like it. That means the skills are unique. This training pack has been specially designed for worship piano inside a church setting.
                 <br><br> If you’ve been wanting to learn the piano to help serve your church but didn’t know how -- this training pack will equip you to start playing and serving in the shortest time possible.</p>
@@ -362,7 +362,7 @@
     <div id="songs" class="anchor"></div>
     <section class="chord-charts">
         <div class="container">
-            <img class="yellow-red-icons lazy" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/products/worship-piano/songs-icons.png">
+            <img class="yellow-red-icons lazy" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/products/worship-piano/songs-icons.png" alt="Note icon">
             <h2><strong>100 modern worship chord charts to get you started</strong></h2>
             <p>This training pack is all about playing worship songs, so you’ll get 100 of the most popular worship chord charts that you can practice at home.
                 <br><br>
@@ -381,7 +381,7 @@
                 @include('pianote.products._worship-songs')
             </div>
             <div class="text-center">
-                <a id="uncoverAll" class="join outline">Show All</a>
+                <span id="uncoverAll" class="join outline">Show All</span>
             </div>
         </div>
     </section>
@@ -472,8 +472,8 @@
                     <br><br>
                     I’m so excited to help you develop your passion and desire to serve your church.
                     <br><br>
-                    <img class="avatar lazy" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/products/worship-piano/amberly-martz.jpg">
-                    <img class="lazy" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/products/worship-piano/amberly-signature.png">
+                    <img class="avatar lazy" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/products/worship-piano/amberly-martz.jpg" alt="Amberly">
+                    <img class="lazy" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/products/worship-piano/amberly-signature.png" alt="Amberly signature">
                 </p>
             </div>
             <div class="col-xs-12 col-sm-6">
@@ -495,8 +495,8 @@
                     <br><br>
                     And I would be so excited and honored to be a part of that journey for you.
                     <br><br>
-                    <img class="avatar lazy" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/products/worship-piano/lisa-witt.jpg">
-                    <img class="lazy" src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-riffs-and-fills/lisa-witt-signature.png">
+                    <img class="avatar lazy" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/products/worship-piano/lisa-witt.jpg" alt="Lisa">
+                    <img class="lazy" src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-riffs-and-fills/lisa-witt-signature.png" alt="Lisa signature">
                 </p>
             </div>
         </div>
@@ -512,7 +512,7 @@
 
     <section class="final text-center lazy" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/products/worship-piano/order-section-background.jpg">
         <div class="container">
-            <img class="logo lazy" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/products/worship-piano/logo-text-white.png">
+            <img class="logo lazy" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/products/worship-piano/logo-text-white.png" alt="Worship piano logo">
             <h2>Start playing piano or<br class="hidden-sm hidden-md hidden-lg"> keyboard in your church.</h2>
             <a
                 href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['worship-piano' => 1], 'redirect' => '/order', 'locked' => 'false']) }}"
