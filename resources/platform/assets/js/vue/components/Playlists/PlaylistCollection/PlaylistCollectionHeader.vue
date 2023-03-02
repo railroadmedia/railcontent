@@ -22,12 +22,31 @@
 
     //-----------Methods-----------//
     const handleCreatePlaylist = () => {
-        window.openplaylistmodal({ modalType: 'create', data: { name: '', category: 'My List', thumbnail_url: null, description: ''} });
+        console.log(state.sortbyValue);
+        console.log(state.searchTerm);
+
+        window.openplaylistmodal({ 
+            modalType: 'create', 
+            data: { 
+                name: '', 
+                category: 'My List', 
+                thumbnail_url: null, 
+                description: '',
+                term: state.searchTerm,
+                sort: state.sortbyValue,
+            } 
+        });
     };
 
     //-----------Lifecycle Hooks -----------//
     onBeforeMount(()=> {
         playlistsStore.playlistsQuantity = props.playlistCount;
+        const params = new Proxy(new URLSearchParams(window.location.search), {
+            get: (searchParams, prop) => searchParams.get(prop),
+        });
+        //Update Params
+        state.searchTerm = params.search || '';
+        state.sortbyValue = params.sortby_val || '-created_at';
     })
 
     onUpdated(()=> {

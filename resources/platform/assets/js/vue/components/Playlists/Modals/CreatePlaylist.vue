@@ -2,7 +2,7 @@
     // TODO: Add Upload Modal for thumbnail add/change
     // TODO: Consider edit mode in the avatar upload process
     // TODO: Close modal after create is 200
-    import { reactive, ref, inject, onBeforeMount, onBeforeUnmount } from 'vue';
+    import { reactive, ref, inject, onMounted, onBeforeMount, onBeforeUnmount } from 'vue';
     import InputLabel from '../../InputLabel/InputLabel.vue';
     import Dropdown from '../../Dropdown/Dropdown.vue'
     import PlaylistService from '../../../../services/playlists.js';
@@ -49,100 +49,7 @@
         description: '',
     })
 
-
-    //-------------Methods-------------//
-    const handleTitleChange = (val) => {
-        state.name = val;
-    };
-
-    const handleCategoryChange = (val) => {
-        state.category = val;
-    };
-
-    const handleDescriptionChange = (e) => {
-        state.description = e.target.value;
-    };
-
-    const resetState = () => {
-        state.name = '';
-        state.category = 'My List'; //Default
-        state.thumb = null;
-        state.description = '';
-    }
-
-    const handleConfirm = () => {
-        const payload = {
-            brand: props.brand,
-            name: state.name || 'New Playlist',
-            description: state.description,
-            category: state.category,
-            private: props.playlist.private,
-            thumbnail_url: state.thumb,
-        };
-        if(props.mode === "create") {
-            PlaylistService.createUserPlaylist({
-                token,
-                payload
-            }).then(function(response) {
-                if (response.status === 201) {
-                    playlistsStore.loadingPlaylists = true;
-                    //show success message
-                    window.shownotification({
-                        icon: 'playlist',
-                        text: `'${payload.name}' was added to your library.`
-                    })
-                    //load Playlists
-                    playlistsStore.getPlaylists({ brand: brand, page: playlistsStore.resultsPage, limit: null }, token);       
-                }
-            })
-        }
-        if(props.mode === "edit") {
-            PlaylistService.updatePlaylist(props.playlist.id, payload, token)
-                .then(function(response) {
-                    
-                    if (response.status === 201) {
-                        playlistsStore.loadingPlaylists = true;
-                        //show success message
-                        window.shownotification({
-                            icon: 'fa-pen-to-square',
-                            text: `Your playlist was successfully edited`
-                        })
-                        //load Playlists
-                        playlistsStore.getPlaylists({ brand: brand, page: playlistsStore.resultsPage, limit: null }, token);       
-                    } else {
-                        console.log('edit response code', response)
-                    }
-                })
-        }
-        if(props.mode === "duplicate") {
-            const duplicateData = {
-                playlist_id: props.playlist.id,
-                name: state.name,
-                description: state.description,
-                thumbnail_url: state.thumb,
-                category: state.category,
-            }
-            PlaylistService.duplicatePlaylist(duplicateData, token)
-                .then(function(response) {
-                    if (response.status === 201) {
-                        playlistsStore.loadingPlaylists = true;
-                        //show success message
-                        window.shownotification({
-                            icon: 'fa-copy',
-                            text: `The playlist was successfully duplicated.`
-                        })
-                        //load Playlists
-                        playlistsStore.getPlaylists({ brand: brand, page: playlistsStore.resultsPage, limit: null }, token);       
-                    } else {
-                        console.log('duplicate response code', response)
-                    }
-                })
-        }
-
-        //Close Modal
-        emit('onCloseModal')
-    };
-
+    //------------Static Data------------//
     const sortedOptions = [
         {
             value: 'Rock',
@@ -190,16 +97,112 @@
         },
     ];
 
+    //-------------Methods-------------//
+    const handleTitleChange = (val) => {
+        state.name = val;
+    };
+
+    const handleCategoryChange = (val) => {
+        state.category = val;
+    };
+
+    const handleDescriptionChange = (e) => {
+        state.description = e.target.value;
+    };
+
+    const resetState = () => {
+        state.name = '';
+        state.category = 'My List'; //Default
+        state.thumb = null;
+        state.description = '';
+    }
+
+    const handleConfirm = () => {
+        const payload = {
+            brand: props.brand,
+            name: state.name || 'New Playlist',
+            description: state.description,
+            category: state.category,
+            private: props.playlist.private,
+            thumbnail_url: state.thumb,
+        };
+        if(props.mode === "create") {
+            PlaylistService.createUserPlaylist({
+                token,
+                payload
+            }).then(function(response) {
+                if (response.status === 201) {
+                    playlistsStore.loadingPlaylists = true;
+                    //show success message
+                    window.shownotification({
+                        icon: 'playlist',
+                        text: `'${payload.name}' was added to your library.`
+                    })
+                    //load Playlists
+                    playlistsStore.getPlaylists({ 
+                        brand: brand, 
+                        page: playlistsStore.resultsPage, 
+                        limit: null 
+                    }, token);       
+                }
+            })
+        }
+        if(props.mode === "edit") {
+            PlaylistService.updatePlaylist(props.playlist.id, payload, token)
+                .then(function(response) {
+                    if (response.status === 201) {
+                        playlistsStore.loadingPlaylists = true;
+                        //show success message
+                        window.shownotification({
+                            icon: 'fa-pen-to-square',
+                            text: `Your playlist was successfully edited`
+                        })
+                        //load Playlists
+                        playlistsStore.getPlaylists({ brand: brand, page: playlistsStore.resultsPage, limit: null }, token);       
+                    } else {
+                        console.log('edit response code', response)
+                    }
+                })
+        }
+        if(props.mode === "duplicate") {
+            const duplicateData = {
+                playlist_id: props.playlist.id,
+                name: state.name,
+                description: state.description,
+                thumbnail_url: state.thumb,
+                category: state.category,
+            }
+            PlaylistService.duplicatePlaylist(duplicateData, token)
+                .then(function(response) {
+                    if (response.status === 201) {
+                        playlistsStore.loadingPlaylists = true;
+                        //show success message
+                        window.shownotification({
+                            icon: 'fa-copy',
+                            text: `The playlist was successfully duplicated.`
+                        })
+                        //load Playlists
+                        playlistsStore.getPlaylists({ brand: brand, page: playlistsStore.resultsPage, limit: null }, token);       
+                    } else {
+                        console.log('duplicate response code', response)
+                    }
+                })
+        }
+        //Close Modal
+        emit('onCloseModal')
+    };
+
     //----------Lifecycle Hooks----------//
+    onMounted(()=> {
+        console.log(props.playlist)
+    })
     onBeforeMount(()=> {
         //Load Data        
-        console.log(props.playlist)
         state.thumb = props.playlist.thumbnail_url;
         state.name = props.playlist.name;
         state.description = props.playlist.description;
         state.category = props.playlist.category || 'My List';
     })
-    
     onBeforeUnmount(() => {
         //Reset Modal Data
         if (props.modalProps.nextModal) {
