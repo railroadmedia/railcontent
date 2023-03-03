@@ -132,12 +132,6 @@
             "trialVersion" => true,
             "joinUrl" => '/choose-plan',
         ])
-        <a href="/new-piano-players" class="flex items-center justify-center py-2 px-2 sm:px-0 w-full z-[100]" style="background: linear-gradient(180deg, #EBF0FF 0%, #DEE6FF 100%);">
-            <img class="h-8 sm:h-10 mr-4" src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/new-piano-players-start-here-logo-2+1.png" alt="30 day drummer logo" />
-            <p class="text-sm sm:text-lg font-bebas uppercase mx-0 leading-tight">
-                Enrollment is open | February 27 - March 28 <span class="hidden sm:inline">|</span> <br class="sm:hidden"><span class="text-pianote underline">Click here to join.</span>
-            </p>
-        </a>
     @endif
 
     @php
@@ -544,7 +538,7 @@
                     'title' => 'Chords & <br>Scales Book',
                     'description' => 'Your encyclopedia of piano chords & scales.',
                     'price' => floatval($productPrices['piano-chords-and-scales-guide']->price),
-                    'feature' => "Free Shipping",
+                    'shipping' => 'true'
                 ],
                 [
                 'image' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/piano-technique-made-easy.jpg',
@@ -568,8 +562,6 @@
         @endphp
         @include('musora.sales.components.order-section-bonuses', [
         'topImage' => 'https://pianote.s3.amazonaws.com/sales/2023/pianote-annual-2w-card.png',
-        'promoLogo' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs.svg',
-       'promoLogoM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs-m.png',
         'header' => 'Online piano lessons for all skill levels.',
         'subDescription' => 'Save 17% + get 4 bonuses<br class="inline sm:hidden"> worth $357',
         'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[piano-chords-and-scales-guide]=1&products[piano-technique-made-easy]=1&products[piano-riffs-and-fills]=1&products[faster-fingers]=1&redirect=/order&locked=true',

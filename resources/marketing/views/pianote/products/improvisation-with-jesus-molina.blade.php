@@ -102,7 +102,7 @@
     <header class="header text-white relative overflow-hidden z-10" style="background: rgba(38, 13, 15, 0.7);">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 sm:px-6 text-center">
             <div class="container mx-auto max-w-6xl">
-                <img class="h-20 sm:h-28 lg:h-32 mb-64 sm:mb-80" src="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://pianote.s3.amazonaws.com/sales/jesus-molina/Logo.png">
+                <img class="h-20 sm:h-28 lg:h-32 mb-64 sm:mb-80" src="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://pianote.s3.amazonaws.com/sales/jesus-molina/Logo.png" alt="Improvisation logo">
                 <h2 class="leading-tight max-w-xs sm:max-w-md lg:max-w-2xl mx-auto sm:text-3xl lg:text-4xl"><strong>Get inside the mind of one of the world’s best improvisers</strong></h2>
                 <p class="leading-normal mt-2 sm:mt-3 mb-4 sm:mb-5">Learn from the master himself in <br class="inline sm:hidden"> this exclusive course from Pianote</p>
                 <a href="{{ $annualLink }}" class="join blue w-1/2">Get Started</a>
@@ -133,7 +133,7 @@
             <div class="flex flex-wrap justify-center mx-auto">
                 <div class="w-full lg:w-7/12">
                     <div class="aspect-16:9 rounded-xl overflow-hidden w-full relative">
-                        <iframe class="absolute w-full h-full" src="//player.vimeo.com/video/703892831" frameborder="0" allowfullscreen allow="autoplay"></iframe>
+                        <iframe class="absolute w-full h-full" src="//player.vimeo.com/video/703892831" frameborder="0" allowfullscreen allow="autoplay" title="Jesus intro video"></iframe>
                     </div>
                 </div>
                 <p class="w-full lg:w-5/12 lg:pl-10 mt-7 lg:mt-0 text-left">For Jesús Molina, improvisation is bringing your soul into music. It’s expressing things that words cannot express.
@@ -255,13 +255,13 @@
     {{--</section>--}}
 
     <div id="lessons" class="anchor"></div>
-    <section class="px-4 sm:px-8 py-10 md:py-12 md:py-14 text-white text-center overflow-hidden" style="background-color:#000c17;">
+    <section class="px-4 sm:px-8 py-10 md:py-12 md:py-14 text-white text-center overflow-hidden bg-musora-black">
         <div class="container mx-auto max-w-5xl">
             <h2><strong>Become a better musician</strong></h2>
             <h6 class="mt-1 mb-7"><em>All the tools at your fingertips.</em></h6>
 
             <div class="flex flex-wrap sm:flex-nowrap items-center text-left mb-8 sm:mb-16">
-                <img class="h-44 sm:h-56 lg:h-72 mx-auto sm:mx-0 rounded-xl mb-3 sm:mb-0 lazyload" data-src="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/https://pianote.s3.amazonaws.com/sales/jesus-molina/Fully_transcribed_lessons.jpg">
+                <img class="h-44 sm:h-56 lg:h-72 mx-auto sm:mx-0 rounded-xl mb-3 sm:mb-0 lazyload" data-src="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/https://pianote.s3.amazonaws.com/sales/jesus-molina/Fully_transcribed_lessons.jpg" alt="Fully transcribed lesson image">
                 <div class="w-full sm:w-1/2 sm:pl-10">
                     <h4 class="mx-0 mb-3 text-center sm:text-left"><strong>Fully transcribed lessons.</strong></h4>
                     <p class="text-light-navy max-w-xs sm:max-w-full">Every lesson has been transcribed for you. You won’t just listen to Jesús talk, you’ll play with him, and get downloadable sheet music of everything he plays.</p>
@@ -286,7 +286,7 @@
     <section class="px-6 sm:px-8 py-8 md:py-10 md:py-12 text-white text-center overflow-hidden lazyload" style="background:linear-gradient(to right, #7d182c, #560314);">
         <div class="container mx-auto max-w-4xl">
             <div class="flex flex-wrap sm:flex-nowrap items-center">
-                <img class="h-48 sm:h-56 lg:h-72 mx-auto border-4 lg:border-8 rounded-full" src="https://cdn.musora.com/image/fetch/w_550,q_auto:best/https://pianote.s3.amazonaws.com/sales/jesus-molina/Jesus_Molina_profile.jpg">
+                <img class="h-48 sm:h-56 lg:h-72 mx-auto border-4 lg:border-8 rounded-full" src="https://cdn.musora.com/image/fetch/w_550,q_auto:best/https://pianote.s3.amazonaws.com/sales/jesus-molina/Jesus_Molina_profile.jpg" alt="Jesus Molina profile">
                 <div class="w-full sm:w-auto mt-7 sm:mt-0 sm:pl-7 lg:pl-14 sm:text-left">
                     <h4 class="leading-normal"><em>“You are not limited. If you think you don’t have musicality in you - that’s the biggest mistake you can make.”</em>
                         <br><br>
@@ -498,7 +498,7 @@
         <div class="container max-w-6xl mx-auto relative z-50">
             <div class="flex flex-wrap items-center">
                 <div class="text-center sm:text-left w-full sm:w-1/2 lg:w-5/12 sm:pl-5">
-                    <img class="h-16 md:h-20 lg:h-24 lazyload" data-src="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://pianote.s3.amazonaws.com/sales/jesus-molina/Logo.png">
+                    <img class="h-16 md:h-20 lg:h-24 lazyload" data-src="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://pianote.s3.amazonaws.com/sales/jesus-molina/Logo.png" alt="Improvisation logo">
                     <h4 class="leading-tight mt-2 md:mt-3"><strong>Learn from one of the world’s<br class="inline lg:hidden"> best for just <!--<s class="opacity-70">${{ floatval($productPrices['jesus-molina-improvisation-and-musical-freedom-pack']->price) }}</s>--> <span class="text-pianote">${{ floatval($productPrices['jesus-molina-improvisation-and-musical-freedom-pack']->discounted_price) }}</span></strong></h4>
                     <p class="leading-tight mx-auto inline-block my-4 md:my-5"><em>Get Jesús Molina’s entire course for less than the cost of a single in-person piano lesson.</em></p>
                     <div class="w-full mx-auto sm:mx-0">
@@ -514,7 +514,7 @@
                     </div>
                 </div>
                 <div class="flex w-full justify-center sm:justify-start sm:w-1/2 lg:w-7/12 sm:order-1 sm:pl-5 mt-7 sm:mt-0">
-                    <img class="max-w-lg sm:max-w-2xl lg:max-w-4xl lazyload" data-src="https://cdn.musora.com/image/fetch/w_1400,q_auto:best/https://pianote.s3.amazonaws.com/sales/jesus-molina/order_collage.png">
+                    <img class="max-w-lg sm:max-w-2xl lg:max-w-4xl lazyload" data-src="https://cdn.musora.com/image/fetch/w_1400,q_auto:best/https://pianote.s3.amazonaws.com/sales/jesus-molina/order_collage.png" alt="Order collage">
                 </div>
             </div>
         </div>

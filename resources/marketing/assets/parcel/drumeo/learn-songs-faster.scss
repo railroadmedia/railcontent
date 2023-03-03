@@ -38,7 +38,7 @@ a.text-yellow:hover {
   position: relative;
   color: #FFF;
   padding: 20px 10px;
-  background: #000c17 url("https://dpwjbsxqtam5n.cloudfront.net/drum-shop/learn-songs-faster/header-mobile.jpg") center top/640px no-repeat;
+  background: $musoraBlack url("https://dpwjbsxqtam5n.cloudfront.net/drum-shop/learn-songs-faster/header-mobile.jpg") center top/640px no-repeat;
   @include tablet {
     background-image: url("https://dpwjbsxqtam5n.cloudfront.net/drum-shop/learn-songs-faster/header.jpg");
     background-size: 1150px;
@@ -134,7 +134,7 @@ a.text-yellow:hover {
 }
 
 .content-section {
-  background: #000c17;
+  background: $musoraBlack;
   position: relative;
   color: #fff;
   padding: 30px 0;

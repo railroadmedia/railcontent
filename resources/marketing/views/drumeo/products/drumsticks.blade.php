@@ -39,24 +39,24 @@
 @section('content')
 
     @include('drumeo.products.partials.promo-banner', [
-                "name" => "Drumeo Drumsticks",
-                "fullPrice" => floatval($productPrices['Drumeo-VaterSticks']->price),
-                "price" => floatval($productPrices['Drumeo-VaterSticks']->discounted_price),
-                "noBreadcrumb" => true
-            ])
+        "name" => "Drumeo Drumsticks",
+        "fullPrice" => floatval($productPrices['Drumeo-VaterSticks']->price),
+        "price" => floatval($productPrices['Drumeo-VaterSticks']->discounted_price),
+        "noBreadcrumb" => true
+    ])
     <header class="header text-center">
         <video poster="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/vater-sticks/header-thumbnail.jpg" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/vater-sticks/header-video-2.mp4" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
         <div class="overlay"></div>
         <div class="row">
-            <img class="logo" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/vater-sticks/drumeo-drumsticks-logo.png">
+            <img class="logo" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/vater-sticks/drumeo-drumsticks-logo.png" alt="Drumstick logo">
             <br>
             <div class="watch-badge">
                 Watch The <br>
                 10,000 Rimshot  <br>
                 Challenge
-                <img src="https://dpwjbsxqtam5n.cloudfront.net/sales/arrow-left-white.png">
+                <img src="https://dpwjbsxqtam5n.cloudfront.net/sales/arrow-left-white.png" alt="Left arrow">
             </div>
-            <img data-open="previewModal" class="play-button autoplay-video" src="https://dpwjbsxqtam5n.cloudfront.net/sales/play-button.png">
+            <img data-open="previewModal" class="play-button autoplay-video" src="https://dpwjbsxqtam5n.cloudfront.net/sales/play-button.png" alt="Play button">
             <br>
             <a class="join blue" href="/ecommerce/add-to-cart?products[Drumeo-VaterSticks]=1">Grab A Pair &raquo;</a>
             {{--<a class="join sold-out">Sold Out</a>--}}
@@ -130,8 +130,8 @@
                 <br><br> Your drumsticks are an extension of your unique personality behind the kit. That's why I'm so excited to partner with Vater, a company that has been helping drummers achieve excellence for a long time. When you pick up a pair of Drumeo 5A Drumsticks by Vater, you're not just picking up another pair of hickory drumsticks. You're picking up a pair of history.
             </p>
 
-            <img class="signature" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/vater-sticks/signature.png"><br>
-            <img class="avatar" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/vater-sticks/jared-falk.jpg"><br>
+            <img class="signature" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/vater-sticks/signature.png" alt="Jared signature"><br>
+            <img class="avatar" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/vater-sticks/jared-falk.jpg" alt="Jared Falk"><br>
             <h5><strong>JARED FALK</strong></h5>
             <p class="text-blue">CEO & CO-FOUNDER OF DRUMEO</p>
 
@@ -265,8 +265,8 @@
     </section>
     <section class="content-section text-center final" style="background-image:url(https://dpwjbsxqtam5n.cloudfront.net/drum-shop/vater-sticks/order-background.jpg);">
         <div class="row">
-            <img class="bubbles" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/vater-sticks/bubbles-vater.png">
-            <img class="logo" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/vater-sticks/drumeo-drumsticks-logo.png">
+            <img class="bubbles" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/vater-sticks/bubbles-vater.png" alt="Drumstick bubbles">
+            <img class="logo" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/vater-sticks/drumeo-drumsticks-logo.png" alt="Drumstick logo">
             <br>
             <a class="join blue" href="/ecommerce/add-to-cart?products[Drumeo-VaterSticks]=1">Grab A Pair &raquo;</a>
             {{--<a class="join sold-out">Sold Out</a>--}}

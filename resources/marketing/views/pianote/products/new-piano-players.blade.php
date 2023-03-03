@@ -57,7 +57,7 @@
             font-family: 'Roboto Condensed', sans-serif;
             font-weight: 700;
             color: #fff;
-            background: #0b76db;
+            background: #F61A30;
             text-transform: uppercase;
             margin: 0 auto 15px;
             display: block;
@@ -68,7 +68,7 @@
             padding: 0;
         }
         form input[type="submit"]:hover, form button[type="submit"]:hover, form input button:hover, form button button:hover {
-            background: #258ff4;
+            background:#ff5454;
         }
         .disclaimer {
             display: none;
@@ -147,7 +147,7 @@
             font:700 30px/1em "Roboto Condensed", sans-serif;
             margin:15px auto;
             text-transform:uppercase;
-            color:#0b76db
+            color:#F61A30
         }
 
         @media (min-width:40em) {
@@ -220,7 +220,7 @@
         "name" => "New Piano Players Start Here",
         "fullPrice" => floatval($productPrices['new-piano-players-start-here']->price),
         "price" => floatval($productPrices['new-piano-players-start-here']->discounted_price),
-                    "noBreadcrumb" => true
+        "noBreadcrumb" => true
     ])
 
     @php
@@ -279,25 +279,26 @@
                         <p class="mb-3 lg:-mb-7 mt-3 text-pianote text-center"><strong>Congrats! You have registered for New Piano Players Start Here.<br class="hidden md:inline"> Check your email for the details.</strong></p>
                     @endif
 
-                    @if(!$hasProduct && is_current_user_a_member())
-                        <p class="mb-3 lg:-mb-7 mt-5 mb-2 text-pianote text-left"><strong>You are a Pianote member! <br>Enroll for free by clicking on the button below.</strong></p>
-                    @endif
+{{--                    @if(!$hasProduct && is_current_user_a_member())--}}
+{{--                        <p class="mb-3 lg:-mb-7 mt-5 mb-2 text-pianote text-left"><strong>You are a Pianote member! <br>Enroll for free by clicking on the button below.</strong></p>--}}
+{{--                    @endif--}}
 
                     <div class="flex flex-wrap sm:flex-nowrap items-center mt-6 sm:mt-5 lg:mt-10">
                         <div class="w-full sm:w-1/2 text-center sm:pr-2">
-                            @if($hasProduct)
-                                <a class="join sold-out medium w-full">YOU'RE ENROLLED</a>
-                            @else
-                                <a href="{{ $registerButtonUrl }}" class="join medium w-full @if(!is_current_user_a_member()) anchor-slide @endif">ENROLL NOW</a>
-                            @endif
-                            @if(!auth()->check())
-                                <p class="opacity-50 text-sm mt-2 mb-5 sm:mb-0 underline hover:text-pianote">
-                                    <a href="{{ get_musora_brand_base_url() }}/new-piano-players">Pianote Members register for free here.</a>
-                                </p>
-                            @endif
+                            <span class="join sold-out medium w-full" data-open="waitlistModal">JOIN WAITLIST</span>
+{{--                        @if($hasProduct)--}}
+{{--                                <a class="join sold-out medium w-full">YOU'RE ENROLLED</a>--}}
+{{--                            @else--}}
+{{--                                <a href="{{ $registerButtonUrl }}" class="join medium w-full @if(!is_current_user_a_member()) anchor-slide @endif">ENROLL NOW</a>--}}
+{{--                            @endif--}}
+{{--                            @if(!auth()->check())--}}
+{{--                                <p class="opacity-50 text-sm mt-2 mb-5 sm:mb-0 underline hover:text-pianote">--}}
+{{--                                    <a href="{{ get_musora_brand_base_url() }}/new-piano-players">Pianote Members register for free here.</a>--}}
+{{--                                </p>--}}
+{{--                            @endif--}}
                         </div>
                         <div class="w-full sm:w-1/2 lg:pb-5">
-                            <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/joined_profiles.png">
+                            <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/joined_profiles.png" alt="joined student profiles">
                             <p class="inline-block leading-tight text-sm align-middle">Join {{ number_format($nPackOwners ?? 0) }} piano players who<br> have already registered.</p>
                         </div>
                     </div>
@@ -315,7 +316,8 @@
                     <h4 class="px-3 lg:px-5"><strong>February 27th</strong></h4>
                     <hr class="border-gray-300 my-4 sm:my-2 lg:my-4">
                     <p class="text-sm px-3 lg:px-5">
-                        Enrollment closes in<br class="inline lg:hidden"> <span class="tzcd-nppsh text-pianote">a limited time</span>.
+{{--                        Enrollment closes in<br class="inline lg:hidden"> <span class="tzcd-nppsh text-pianote">a limited time</span>.--}}
+                        Enrollment closed
                     </p>
                 </div>
                 <div class="flex flex-wrap sm:flex-nowrap items-center justify-evenly w-full sm:w-auto sm:flex-grow py-4 sm:py-3 lg:py-4 text-left sm:text-center">
@@ -461,13 +463,14 @@
             @if(session()->has('success-message'))
                 <p class="-mb-2 sm:-mb-8 mt-5 text-pianote text-center"><strong>Congrats! You have registered for New Piano Players Start Here.<br class="hidden md:inline"> Check your email for the details.</strong></p>
             @endif
-            @if($hasProduct)
-                <a class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3">YOU'RE ENROLLED</a><br>
-            @else
-                <a
-                    href="{{ $registerButtonUrl }}"
-                    class="join medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 @if(!is_current_user_a_member()) anchor-slide @endif">ENROLL NOW</a><br>
-            @endif
+            <span class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3" data-open="waitlistModal">JOIN WAITLIST</span><br>
+{{--        @if($hasProduct)--}}
+{{--                <a class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3">YOU'RE ENROLLED</a><br>--}}
+{{--            @else--}}
+{{--                <a--}}
+{{--                    href="{{ $registerButtonUrl }}"--}}
+{{--                    class="join medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 @if(!is_current_user_a_member()) anchor-slide @endif">ENROLL NOW</a><br>--}}
+{{--            @endif--}}
             <img class="h-7 mr-1 mb-5 sm:mb-10 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/joined_profiles.png" alt="joined profiles">
             <p class="inline-block leading-tight text-sm align-middle mb-5 sm:mb-10">Join {{ number_format($nPackOwners ?? 0) }} piano players who<br> have already registered.</p>
 
@@ -507,25 +510,25 @@
     </section>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
         <div class="container max-w-6xl mx-auto">
-            <h2 class="mb-6 sm:mb-10 lg:mb-14"><img class="h-16 sm:h-24 -mb-2 sm:-mb-4 align-bottom  lazyload" data-src="https://cdn.musora.com/image/fetch/w_380,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/new-piano-players-start-here-logo-2+1.png"> <strong>...is perfect for:</strong></h2>
+            <h2 class="mb-6 sm:mb-10 lg:mb-14"><img class="h-16 sm:h-24 -mb-2 sm:-mb-4 align-bottom  lazyload" data-src="https://cdn.musora.com/image/fetch/w_380,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/new-piano-players-start-here-logo-2+1.png" alt="new piano players start here logo"> <strong>...is perfect for:</strong></h2>
             <div class="flex flex-wrap text-left">
                 <div class="w-full sm:w-1/3 px-2 mb-6 sm:mb-0">
                     <div class="pb-44 sm:pb-36 lg:pb-52 text-center text-white bg-cover bg-center relative overflow-hidden rounded-xl lazyload" data-bg="https://cdn.musora.com/image/fetch/w_530,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/new-piano-player.jpg">
-                        <h6 class="leading-tight lg:leading-relaxed absolute bottom-3 w-full z-10"><strong><img class="h-8 lazyload" data-src="https://cdn.musora.com/image/fetch/w_150,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/plus.svg"><br>New Piano<br class="hidden sm:inline lg:hidden"> Players</strong></h6>
+                        <h6 class="leading-tight lg:leading-relaxed absolute bottom-3 w-full z-10"><strong><img class="h-8 lazyload" data-src="https://cdn.musora.com/image/fetch/w_150,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/plus.svg" alt="check icon"><br>New Piano<br class="hidden sm:inline lg:hidden"> Players</strong></h6>
                         <div class="absolute inset-0 z-0" style="background:linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.8));"></div>
                     </div>
                     <p class="leading-normal mt-3">It’s right there in the name! If you’re just getting started, New Piano Players Start Here is perfect. From the very first lesson, you’ll be playing real music that sounds GOOD. </p>
                 </div>
                 <div class="w-full sm:w-1/3 px-2 mb-6 sm:mb-0">
                     <div class="pb-44 sm:pb-36 lg:pb-52 text-center text-white bg-cover bg-center relative overflow-hidden rounded-xl lazyload" data-bg="https://cdn.musora.com/image/fetch/w_530,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/returning-piano-player.jpg">
-                        <h6 class="leading-tight lg:leading-relaxed absolute bottom-3 w-full z-10"><strong><img class="h-8 lazyload" data-src="https://cdn.musora.com/image/fetch/w_150,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/plus.svg"><br>Returning<br class="hidden sm:inline lg:hidden"> Piano Players</strong></h6>
+                        <h6 class="leading-tight lg:leading-relaxed absolute bottom-3 w-full z-10"><strong><img class="h-8 lazyload" data-src="https://cdn.musora.com/image/fetch/w_150,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/plus.svg" alt="check icon"><br>Returning<br class="hidden sm:inline lg:hidden"> Piano Players</strong></h6>
                         <div class="absolute inset-0 z-0" style="background:linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.8));"></div>
                     </div>
                     <p class="leading-normal mt-3">Been away a while? Come back to the piano and have FUN. Brush up on the foundations and play with confidence.</p>
                 </div>
                 <div class="w-full sm:w-1/3 px-2">
                     <div class="pb-44 sm:pb-36 lg:pb-52 text-center text-white bg-cover bg-center relative overflow-hidden rounded-xl lazyload" data-bg="https://cdn.musora.com/image/fetch/w_530,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/classically-trained-player.jpg">
-                        <h6 class="leading-tight lg:leading-relaxed absolute bottom-3 w-full z-10"><strong><img class="h-8 lazyload" data-src="https://cdn.musora.com/image/fetch/w_150,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/plus.svg"><br> Classically-Trained<br class="hidden sm:inline lg:hidden"> Piano Players</strong></h6>
+                        <h6 class="leading-tight lg:leading-relaxed absolute bottom-3 w-full z-10"><strong><img class="h-8 lazyload" data-src="https://cdn.musora.com/image/fetch/w_150,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/plus.svg" alt="check icon"><br> Classically-Trained<br class="hidden sm:inline lg:hidden"> Piano Players</strong></h6>
                         <div class="absolute inset-0 z-0" style="background:linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.8));"></div>
                     </div>
                     <p class="leading-normal mt-3">Scared to break away from the safety of sheet music? New Piano Players Start Here will give you the confidence to trust your ear.</p>
@@ -542,7 +545,7 @@
                     <tbody>
                     <tr style="background-color:transparent!important;">
                         <td></td>
-                        <td class="rounded-t-xl"><img class="h-8 sm:h-14 lazyload" data-src="https://cdn.musora.com/image/fetch/w_220,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/new-piano-players-start-here-logo-white.png"></td>
+                        <td class="rounded-t-xl"><img class="h-8 sm:h-14 lazyload" data-src="https://cdn.musora.com/image/fetch/w_220,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/new-piano-players-start-here-logo-white.png" alt="new piano players start here logo"></td>
                         <td class="cursor-pointer sm:cursor-default rounded-tl-xl"><strong>Private<br> Lessons</strong></td>
                         <td class="cursor-pointer sm:cursor-default"><strong>Online<br> Courses</strong></td>
                         <td class="cursor-pointer sm:cursor-default rounded-tr-xl"><strong>Piano<br> Books</strong></td>
@@ -680,7 +683,7 @@
                         'location' => 'United Kingdom',
                         ],
                     ]
-                @endphp
+//                @endphp
                 @foreach ($testimonials as $key => $testimonial)
                     <div class="w-full lg:w-1/2 py-2 sm:px-2 lg:p-3">
                         <div class="flex items-start p-5 bg-white rounded-lg">
@@ -699,14 +702,15 @@
                 <p class="-mb-2 sm:-mb-8 mt-5 text-pianote text-center"><strong>Congrats! You have registered for New Piano Players Start Here.<br class="hidden md:inline"> Check your email for the details.</strong></p>
             @endif
 
-            @if($hasProduct)
-                <a class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3">YOU'RE ENROLLED</a><br>
-            @else
-                <a
-                    href="{{ $registerButtonUrl }}"
-                    class="join medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 @if(!is_current_user_a_member()) anchor-slide @endif">ENROLL NOW</a><br>
-            @endif
-            <img class="h-7 mr-1 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/joined_profiles.png">
+            <span class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3" data-open="waitlistModal">JOIN WAITLIST</span><br>
+{{--        @if($hasProduct)--}}
+{{--                <a class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3">YOU'RE ENROLLED</a><br>--}}
+{{--            @else--}}
+{{--                <a--}}
+{{--                    href="{{ $registerButtonUrl }}"--}}
+{{--                    class="join medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 @if(!is_current_user_a_member()) anchor-slide @endif">ENROLL NOW</a><br>--}}
+{{--            @endif--}}
+            <img class="h-7 mr-1 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/joined_profiles.png" alt="joined student profiles">
             <p class="inline-block leading-tight text-sm align-middle">Join {{ number_format($nPackOwners ?? 0) }} piano players who<br> have already registered.</p>
         </div>
     </section>
@@ -753,7 +757,7 @@
     <section class="text-center relative z-50 overflow-hidden px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#eff7ff;">
         <div class="container mx-auto relative z-50">
             <div class="flex flex-wrap items-center mt-7 sm:mt-10">
-                @if(is_current_user_a_member())
+{{--                @if(is_current_user_a_member())--}}
                     <div class="text-left w-full sm:w-1/2 xl:w-5/12 lg:pl-5">
                         <img class="h-20 md:h-20 lg:h-24 lazyload" data-src="https://cdn.musora.com/image/fetch/w_380,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/new-piano-players-start-here-logo-2+1.png" alt="new piano players start here logo">
                         <h2 class="leading-tight mt-2 mb-4 sm:my-4 lg:my-5"><strong>
@@ -766,53 +770,58 @@
                             <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Learn piano the easy & fun way.</p>
                             <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Join {{ number_format($nPackOwners ?? 0) }} piano players who have already registered.</p>
                             <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Click below to get started.</p>
-                            <p class="leading-tight mb-3 sm:mb-5"><i class="fas fa-check text-pianote mr-1"></i> Enrollment closes in<br class="inline lg:hidden"> <span class="tzcd-nppsh text-pianote">a limited time</span>.</p>
+{{--                            <p class="leading-tight mb-3 sm:mb-5"><i class="fas fa-check text-pianote mr-1"></i> Enrollment closes in<br class="inline lg:hidden"> <span class="tzcd-nppsh text-pianote">a limited time</span>.</p>--}}
 
                             @if(session()->has('success-message'))
                                 <p class="mb-3 text-pianote text-center"><strong>Congrats! You have registered for New Piano Players Start Here.<br class="hidden md:inline"> Check your email for the details.</strong></p>
                             @endif
 
-                            <h1 class="inline-block mr-4 align-middle text-4xl sm:text-5xl"><s class="opacity-60">${{ 97 }}</s> <strong>FREE</strong></h1>
+{{--                            <h1 class="inline-block mr-4 align-middle text-4xl sm:text-5xl"><s class="opacity-60">${{ 97 }}</s> <strong>FREE</strong></h1>--}}
 
-                            @if($hasProduct)
-                                <a class="join sold-out medium w-1/2 align-middle">YOU'RE ENROLLED</a>
-                            @else
-                                <a class="join medium w-1/2 align-middle" href="/cohort-packs/register/new-piano-players-start-here">ENROLL NOW</a>
-                            @endif
+                            <span class="join sold-out medium w-1/2 align-middle" data-open="waitlistModal">JOIN WAITLIST</span>
+{{--                            @if($hasProduct)--}}
+{{--                                <a class="join sold-out medium w-1/2 align-middle">YOU'RE ENROLLED</a>--}}
+{{--                            @else--}}
+{{--                                <a class="join medium w-1/2 align-middle" href="/cohort-packs/register/new-piano-players-start-here">ENROLL NOW</a>--}}
+{{--                            @endif--}}
 
-                            <p class="text-sm mt-2"><em>Free for Pianote members.</em></p>
+{{--                            <p class="text-sm mt-2"><em>Free for Pianote members.</em></p>--}}
                         </div>
                     </div>
-                @else
+{{--                @else--}}
 
-                    <div class="flex flex-wrap sm:flex-nowrap items-center text-left w-full max-w-3xl mx-auto md:w-7/12 lg:w-5/12">
-                        <a href="/ecommerce/add-to-cart?products[new-piano-players-start-here]=1&locked=true" class="px-5 sm:px-7 lg:px-9 py-7 sm:py-11 sm:-ml-5 z-10 relative rounded-xl bg-white shadow-lg w-full">
-                            <img class="h-20 md:h-20 lg:h-24 lazyload" data-src="https://cdn.musora.com/image/fetch/w_380,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/new-piano-players-start-here-logo-2+1.png" alt="new piano players start here logo">
-                            <br>
-                            <h2 class="inline-block"><strong class="text-4xl">$97</strong></h2> <p class="inline-block text-xs">One time payment.</p><br>
+{{--                    <div class="flex flex-wrap sm:flex-nowrap items-center text-left w-full max-w-3xl mx-auto md:w-7/12 lg:w-5/12">--}}
+{{--                        <a href="/ecommerce/add-to-cart?products[new-piano-players-start-here]=1&locked=true" class="px-5 sm:px-7 lg:px-9 py-7 sm:py-11 sm:-ml-5 z-10 relative rounded-xl bg-white shadow-lg w-full">--}}
+{{--                            <img class="h-20 md:h-20 lg:h-24 lazyload" data-src="https://cdn.musora.com/image/fetch/w_380,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/new-piano-players-start-here-logo-2+1.png" alt="new piano players start here logo">--}}
+{{--                            <br>--}}
+{{--                            <h2 class="inline-block"><strong class="text-4xl">$97</strong></h2> <p class="inline-block text-xs">One time payment.</p><br>--}}
 
-                            @if(session()->has('success-message'))
-                                <p class="mb-3 text-pianote text-center"><strong>Congrats! You have registered for New Piano Players Start Here.<br class="hidden md:inline"> Check your email for the details.</strong></p>
-                            @endif
-                            @if($hasProduct)
-                                <div class="join sold-out smaller my-4">YOU'RE ENROLLED</div>
-                            @else
-                                <div class="join smaller my-4">ENROLL NOW</div>
-                            @endif
-                            <p class="text-sm leading-relaxed text-pianote">Enrollment closes in <span class="tzcd-nppsh text-pianote">a limited time</span></p>
-                            <hr class="w-full my-5" style="border-color:#ebf2f8">
-                            <p class="leading-loose text-sm"><strong>Key Features</strong><br>
-                                <i class="fas fa-check text-pianote mr-1"></i> Runs February 27th to March 28th.<br>
-                                <i class="fas fa-check text-pianote mr-1"></i> 20 Guided Play-Along Lessons.<br>
-                                <i class="fas fa-check text-pianote mr-1"></i> 4 Live Q&A Sessions.<br>
-                                <i class="fas fa-check text-pianote mr-1"></i> Lifetime Course Access.<br>
-                                <i class="fas fa-check text-pianote mr-1"></i> 90-Day Money Back Guarantee.</p>
-                        </a>
-                    </div>
-                @endif
+{{--                            @if(session()->has('success-message'))--}}
+{{--                                <p class="mb-3 text-pianote text-center"><strong>Congrats! You have registered for New Piano Players Start Here.<br class="hidden md:inline"> Check your email for the details.</strong></p>--}}
+{{--                            @endif--}}
+{{--                            @if($hasProduct)--}}
+{{--                                <div class="join sold-out smaller my-4">YOU'RE ENROLLED</div>--}}
+{{--                            @else--}}
+{{--                                <div class="join smaller my-4">ENROLL NOW</div>--}}
+{{--                            @endif--}}
+{{--                            <p class="text-sm leading-relaxed text-pianote">Enrollment closes in <span class="tzcd-nppsh text-pianote">a limited time</span></p>--}}
+{{--                            <hr class="w-full my-5" style="border-color:#ebf2f8">--}}
+{{--                            <p class="leading-loose text-sm"><strong>Key Features</strong><br>--}}
+{{--                                <i class="fas fa-check text-pianote mr-1"></i> Runs February 27th to March 28th.<br>--}}
+{{--                                <i class="fas fa-check text-pianote mr-1"></i> 20 Guided Play-Along Lessons.<br>--}}
+{{--                                <i class="fas fa-check text-pianote mr-1"></i> 4 Live Q&A Sessions.<br>--}}
+{{--                                <i class="fas fa-check text-pianote mr-1"></i> Lifetime Course Access.<br>--}}
+{{--                                <i class="fas fa-check text-pianote mr-1"></i> 90-Day Money Back Guarantee.</p>--}}
+{{--                        </a>--}}
+{{--                    </div>--}}
+{{--                @endif--}}
 
 
-                <div class="flex w-full justify-center @if(is_current_user_a_member()) sm:justify-start sm:order-1 sm:w-1/2 xl:w-7/12 sm:pl-5 lg:pl-7  mt-10 sm:mt-0 @else  md:justify-start md:order-1 md:w-5/12 lg:w-7/12 md:pl-4  mt-10 md:mt-0 @endif">
+                <div class="flex w-full justify-center
+{{--                @if(is_current_user_a_member()) --}}
+                sm:justify-start sm:order-1 sm:w-1/2 xl:w-7/12 sm:pl-5 lg:pl-7  mt-10 sm:mt-0
+{{--                @else  md:justify-start md:order-1 md:w-5/12 lg:w-7/12 md:pl-4  mt-10 md:mt-0 @endif--}}
+                ">
                     <img class="max-w-lg sm:max-w-2xl lg:max-w-4xl lazyload" data-src="https://cdn.musora.com/image/fetch/w_1800,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/collage.png" alt="collage">
                 </div>
             </div>
@@ -866,35 +875,37 @@
         </div>
     </section>
 
-    @if(!is_current_user_a_member())
-        <div class="reveal coach-wrap relative rounded-xl text-center overflow-visible select-none max-w-xs md:max-w-md" id="loginModal" style="max-width: 530px;" data-reveal data-reset-on-close="false">
-            <div class="p-5 sm:p-7">
-                <img class="h-24 sm:h-32 lazyload" data-src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/new-piano-players-start-here-logo-2+1.png">
-                <h3 class="leading-tight mb-4"><strong>Wait a sec...</strong></h3>
-                <p class="leading-normal">
-                    You must be logged into your Pianote <br>
-                    account to register for free.
-                    <br><br> Click below to log in:</p>
-                <a href="/login" class="join medium w-full max-w-xs my-5">Login Here</a>
-            </div>
-        </div>
-    @endif
-
-{{--    <div class="reveal coach-wrap relative rounded-xl text-center overflow-visible select-none max-w-xs md:max-w-md" id="waitlistModal" style="max-width: 530px;" data-reveal data-reset-on-close="false">--}}
-{{--        <div class="p-5 sm:p-7">--}}
-{{--            <img class="h-24 sm:h-32 lazyload" data-src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/30_day_drummer_logo.png">--}}
-{{--            <h3 class="leading-tight mb-4"><strong>Join The Waitlist!</strong></h3>--}}
-{{--            <p class="mb-4">Enter your email below to get notified when the <br class="hidden sm:inline">--}}
-{{--                next edition of 30-Day Drummer is announced. </p>--}}
-{{--            @include("drumeo.lead-gen.partials.sign-up-form-tw", [--}}
-{{--                "formName" => '30 Day Drummer Waitlist',--}}
-{{--                "formId" => "Drumeo - Engagement - Trigger - 30 Day Drummer Waitlist - Web Form",--}}
-{{--                "buttonText" => "Let Me Know ",--}}
-{{--                "stacked" => true,--}}
-{{--                "noSocial" => true,--}}
-{{--            ])--}}
+{{--    @if(!is_current_user_a_member())--}}
+{{--        <div class="reveal coach-wrap relative rounded-xl text-center overflow-visible select-none max-w-xs md:max-w-md" id="loginModal" style="max-width: 530px;" data-reveal data-reset-on-close="false">--}}
+{{--            <div class="p-5 sm:p-7">--}}
+{{--                <img class="h-24 sm:h-32 lazyload" data-src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/new-piano-players-start-here-logo-2+1.png">--}}
+{{--                <h3 class="leading-tight mb-4"><strong>Wait a sec...</strong></h3>--}}
+{{--                <p class="leading-normal">--}}
+{{--                    You must be logged into your Pianote <br>--}}
+{{--                    account to register for free.--}}
+{{--                    <br><br> Click below to log in:</p>--}}
+{{--                <a href="/login" class="join medium w-full max-w-xs my-5">Login Here</a>--}}
+{{--            </div>--}}
 {{--        </div>--}}
-{{--    </div>--}}
+{{--    @endif--}}
+
+    <div class="reveal coach-wrap relative rounded-xl text-center overflow-visible select-none" id="waitlistModal" style="max-width: 560px;" data-reveal data-reset-on-close="false">
+        <div class="p-5 sm:p-7">
+            <img class="h-14 sm:h-20 lazyload" data-src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/new-piano-players-start-here-logo-2+1.png">
+            <h3 class="leading-tight my-4"><strong>Join The Waitlist!</strong></h3>
+            <p class="mb-4">
+                Enter your email below to get notified when the next <br class="hidden sm:inline">
+                edition of New Piano Players Start Here is announced. </p>
+
+            @include("pianote._partials._sign-up-form", [
+                "formName" => 'NPPSH Waitlist',
+                "formId" => "Pianote - Engagement - Trigger - NPPSH Waitlist - Web Form",
+                "buttonText" => "Let Me Know ",
+                "stacked" => true,
+                "noSocial" => true,
+            ])
+        </div>
+    </div>
 
     @include('drumeo.sales.partials._video-modal',[
         'modalId' => "trailer",
@@ -930,11 +941,11 @@
                 $(this).parents().find('table').addClass('private');
             });
 
-            var showModal = location.search.substr(1).includes('member-email');
-
-            if (showModal) {
-                $('#loginModal').foundation('open');
-            }
+            // var showModal = location.search.substr(1).includes('member-email');
+            //
+            // if (showModal) {
+            //     $('#loginModal').foundation('open');
+            // }
         })
     </script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>

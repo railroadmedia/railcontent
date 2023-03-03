@@ -179,7 +179,7 @@ a.text-yellow:hover {
     position: absolute;
     transform: translate(0, -50%) rotate(15deg);
     font: 400 14px/1em $bebas;
-    text-shadow: 0 0 20px #000c17;
+    text-shadow: 0 0 20px $musoraBlack;
     top: 190px;
     left: 63%;
     @include tablet {
@@ -363,7 +363,7 @@ a.text-yellow:hover {
 }
 
 .four-tones {
-  background: #000c17;
+  background: $musoraBlack;
   color: #fff;
   padding: 35px 0;
   @include tablet {
@@ -529,7 +529,7 @@ a.text-yellow:hover {
 }
 
 .all-in-one {
-  background: #000c17;
+  background: $musoraBlack;
   overflow: hidden;
   color: #fff;
 
@@ -818,7 +818,7 @@ a.text-yellow:hover {
 }
 
 .final {
-  background: #000c17 65% 50%/cover;
+  background: $musoraBlack 65% 50%/cover;
   box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
   color: #fff;
   text-align: center;
@@ -946,7 +946,7 @@ a.text-yellow:hover {
   }
 }
 .faqs {
-  background: #000c17;
+  background: $musoraBlack;
   overflow: hidden;
   color: #fff;
 

@@ -519,6 +519,7 @@
                     'title' => 'The Guitarist’s Survival Kit',
                     'description' => 'Get the gear essentials to start sounding better on the guitar.',
                     'price' => floatval($productPrices['guitarists-survival-kit']->price),
+                    'shipping' => 'true'
                 ],
                 [
                     'image' => 'https://guitareo.s3.amazonaws.com/sales/promos/black-friday/bundles/ultimate/gq.jpg',
@@ -536,8 +537,6 @@
         @endphp
         @include('musora.sales.components.order-section-bonuses', [
         'topImage' => 'https://guitareo.s3.amazonaws.com/sales/2023/guitareo-annual-2w-card.png',
-        'promoLogo' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs.svg',
-       'promoLogoM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs-m.png',
         'header' => 'Online guitar lessons for all skill levels.',
         'subDescription' => 'Save 17% + get 3 bonuses<br class="inline sm:hidden"> worth $333',
         'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',

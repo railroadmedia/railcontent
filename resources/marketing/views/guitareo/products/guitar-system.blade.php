@@ -50,16 +50,16 @@
         "cartVersion" => true
     ])
     @include('guitareo._partials.promo-banner', [
-                "name" => "Guitar System",
-                "fullPrice" => floatval($productPrices['GUITAR-SYSTEM']->price),
-                "price" => floatval($productPrices['GUITAR-SYSTEM']->discounted_price),
-                "noBreadcrumb" => true
-            ])
+        "name" => "Guitar System",
+        "fullPrice" => floatval($productPrices['GUITAR-SYSTEM']->price),
+        "price" => floatval($productPrices['GUITAR-SYSTEM']->discounted_price),
+        "noBreadcrumb" => true
+    ])
 
     <header class="header stacked">
         <div class="row header-row">
             <div class="columns drumeo-free">
-                <img src="https://guitareo.s3.amazonaws.com/tripwire/gs-logo.png">
+                <img src="https://guitareo.s3.amazonaws.com/tripwire/gs-logo.png" alt="GS logo">
             </div>
             <div class="columns video-container">
                 <i class="fas fa-play play-button autoplay" data-open="previewModal"></i>
@@ -347,17 +347,17 @@
     <section class="student-reviews">
         <div class="row">
             <div class="columns medium-4 testimonial-wrap">
-                <img src="https://s3.amazonaws.com/guitareo/sales/testimonials/erick-kahlenberg.jpg">
+                <img src="https://s3.amazonaws.com/guitareo/sales/testimonials/erick-kahlenberg.jpg" alt="Erick Kahlenberg">
                 <p>"I had lessons for 5 or 6 years. I learned more in the 1st year of taking lessons from Nate than I learned in those lessons or the last 20 years of learning on my own."</p>
                 <h2>Erick Kahlenberg <span class="location">- Wisconsin</span></h2>
             </div>
             <div class="columns medium-4 testimonial-wrap">
-                <img src="https://s3.amazonaws.com/guitareo/sales/testimonials/bill-bailey.jpg">
+                <img src="https://s3.amazonaws.com/guitareo/sales/testimonials/bill-bailey.jpg" alt="Bill J. Bailey">
                 <p>"I've not had this much fun with the guitar since that Christmas many years ago. I enjoy the lessons and I'm learning things quickly. That motivates me to continue..."</p>
                 <h2>Bill J. Bailey <span class="location">- Louisiana</span></h2>
             </div>
             <div class="columns medium-4 testimonial-wrap">
-                <img src="https://s3.amazonaws.com/guitareo/sales/testimonials/tom-perry.jpg">
+                <img src="https://s3.amazonaws.com/guitareo/sales/testimonials/tom-perry.jpg" alt="Tom Perry">
                 <p>"Nate is a natural born teacher. He’s patient, thorough, clearly explains new material, builds a solid foundation for any technique and progresses one step at a time."</p>
                 <h2>Tom Perry <span class="location">- Texas</span></h2>
             </div>
@@ -377,7 +377,7 @@
     <section class="nate-bio">
         <div class="row">
             <p class="columns paragraph-split">
-                <span class="first-letter"><img src="https://guitareo.s3.amazonaws.com/tripwire/bold-p.png"></span>laying the guitar is both fun and rewarding. So, why is it difficult to make steady and consistent progress? Why do some students seem to learn much faster than others? Do they just have a natural skill advantage or is there something more to it than that?
+                <span class="first-letter"><img src="https://guitareo.s3.amazonaws.com/tripwire/bold-p.png" alt="Bold p"></span>laying the guitar is both fun and rewarding. So, why is it difficult to make steady and consistent progress? Why do some students seem to learn much faster than others? Do they just have a natural skill advantage or is there something more to it than that?
                 <br><br>
                 I’ve spent the last 17 years teaching the guitar to students around the world. From what I’ve seen, the most successful students have one thing in common. That is, they have clarity on the exact steps they need to take in order to get better. They don’t spend their time wondering what to do next, while playing the same old riffs over and over again.
                 <br><br>
@@ -386,7 +386,7 @@
                 With this in mind, I created The Guitar System training pack. It provides you with a complete roadmap so you’ll know exactly what to do in order to learn rock, blues, reggae, metal, punk, jazz, fingerstyle, classical, country, bluegrass, and more. The step-by-step video lessons, fun play-along songs, and unique training tools make learning easier than ever.
             </p>
             <hr class="columns no-padding">
-            <div class="columns signature"><img src="https://www.guitarsystem.com/includes/images/nate-signature.png"></div>
+            <div class="columns signature"><img src="https://www.guitarsystem.com/includes/images/nate-signature.png" alt="Nate signature"></div>
             <p class="columns">
                 P.S. - The Guitar System is backed by my 90 day money-back guarantee. That means you have three full months to try it out with absolutely nothing to lose. If you are unhappy for any reason whatsoever, simply return it for a prompt and courteous refund.
             </p>
@@ -396,17 +396,17 @@
     <section class="student-reviews">
         <div class="row">
             <div class="columns medium-4 testimonial-wrap">
-                <img src="https://s3.amazonaws.com/guitareo/sales/testimonials/doug-j-d.jpg">
+                <img src="https://s3.amazonaws.com/guitareo/sales/testimonials/doug-j-d.jpg" alt="Kevin Gouty">
                 <p>"I was glad that I did sign up form the program. The program starts out teaching you how to hold the guitar and pick and the first thing you play is a practice lesson."</p>
                 <h2>Kevin Gouty <span class="location">- Indiana</span></h2>
             </div>
             <div class="columns medium-4 testimonial-wrap">
-                <img src="https://s3.amazonaws.com/guitareo/sales/testimonials/wayne-saverud.jpg">
+                <img src="https://s3.amazonaws.com/guitareo/sales/testimonials/wayne-saverud.jpg" alt="Wayne Saverud">
                 <p>"I'm amazed as to how quickly you respond to questions on your website. I know that the money I spent on your Guitar System was well worth it…"</p>
                 <h2>Wayne Saverud <span class="location">- Washington</span></h2>
             </div>
             <div class="columns medium-4 testimonial-wrap">
-                <img src="https://s3.amazonaws.com/guitareo/sales/testimonials/john-williams.jpg">
+                <img src="https://s3.amazonaws.com/guitareo/sales/testimonials/john-williams.jpg" alt="John Williams">
                 <p>"I was not sure if online lessons would work for me, so when I started the online lessons I also decided to take one on one lessons with an instructor…"</p>
                 <h2>John Williams <span class="location">- Michigan</span></h2>
             </div>
@@ -429,7 +429,7 @@
     <section class="final text-center">
         <div class="row">
             {{--<img class="logo edge" src="https://guitareo.s3.amazonaws.com/sales/promos/cyber-monday/logo.png"><br>--}}
-            <img class="logo mx-auto" src="https://guitareo.s3.amazonaws.com/tripwire/gs-logo.png">
+            <img class="logo mx-auto" src="https://guitareo.s3.amazonaws.com/tripwire/gs-logo.png" alt="GS logo">
             <h2>The Ultimate Encyclopedia <br>Of Guitar Lessons</h2>
             <a href="{{ url()->route('shopping-cart.add-to-cart',
                 ['products' => ['GUITAR-SYSTEM' => 1], 'redirect' => '/order']) }}" class="join" data-product-json='{"GUITAR-SYSTEM": 1}'>Get Started &raquo;</a>

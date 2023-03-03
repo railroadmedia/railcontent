@@ -511,9 +511,7 @@
 
         @include('musora.sales.components.order-section-bonuses', [
         'topImage' => 'https://singeo.s3.amazonaws.com/sales/2023/singeo-annual-2w-card.png',
-        'promoLogo' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs.svg',
-       'promoLogoM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs-m.png',
-        'header' => '<strong>3 free bonuses.</strong> <br class="inline sm:hidden"><em>only available until january 31st.</em>',
+        'header' => 'Online singing lessons for all skill levels.',
         'subDescription' => 'Save 17% + get 2 bonuses<br class="inline sm:hidden"> worth $46',
         'buttonLink' => '/ecommerce/add-to-cart?products[singeo-annual-recurring-membership]=1&products[singing-starter-kit]=1&products[the-essential-guide-to-beautiful-harmonies]=1&locked=true&redirect=/order',
         'altButtonLink' => '/ecommerce/add-to-cart?products[singeo-monthly-recurring-membership]=1&redirect=/order&locked=true',

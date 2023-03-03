@@ -35,7 +35,7 @@ a.text-yellow:hover {
 }
 
 .header {
-  background: #000c17 center top/cover no-repeat;
+  background: $musoraBlack center top/cover no-repeat;
   position: relative;
   color: #FFF;
   padding: 0 0 20px;
@@ -44,7 +44,7 @@ a.text-yellow:hover {
   }
 
   .background-fade {
-    background: #000c17 center center/cover no-repeat;
+    background: $musoraBlack center center/cover no-repeat;
     position: absolute;
     z-index: 0;
     top: 0;
@@ -73,7 +73,7 @@ a.text-yellow:hover {
       bottom: 0;
       right: 0;
       left: 0;
-      background: linear-gradient(0deg, #000c17 0%, transparent 30%, transparent 70%, rgba(0, 0, 0, 0.6) 100%);
+      background: linear-gradient(0deg, $musoraBlack 0%, transparent 30%, transparent 70%, rgba(0, 0, 0, 0.6) 100%);
     }
 
   }
@@ -99,7 +99,7 @@ a.text-yellow:hover {
     position: absolute;
     transform: translate(-50%, -50%);
     font: 400 14px/1em $bebas;
-    text-shadow: 0 0 20px #000c17;
+    text-shadow: 0 0 20px $musoraBlack;
     top: 200px;
     left: 72%;
     @include tablet {
@@ -258,7 +258,7 @@ a.text-yellow:hover {
 }
 
 .content-section {
-  background: #000c17;
+  background: $musoraBlack;
   position: relative;
   color: #fff;
   padding: 30px 0;
@@ -692,7 +692,7 @@ a.text-yellow:hover {
         left: 71%;
         transform: translate(-50%, -50%);
         font: 400 13px/1em $bebas;
-        text-shadow: 0 0 20px #000c17;
+        text-shadow: 0 0 20px $musoraBlack;
         @include tablet {
           left: 75%;
         }
@@ -913,7 +913,7 @@ a.text-yellow:hover {
           td:nth-child(3),
           td:nth-child(4),
           td:nth-child(5) {
-            background-color: lighten(#000c17, 2%);
+            background-color: lighten($musoraBlack, 2%);
           }
         }
 

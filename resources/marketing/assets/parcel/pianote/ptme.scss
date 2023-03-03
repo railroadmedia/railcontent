@@ -167,7 +167,7 @@ button {
 }
 
 .header {
-    background: #000c17 center top/cover no-repeat;
+    background: $musoraBlack center top/cover no-repeat;
     color: #fff;
     position: relative;
     @include tablet {
@@ -185,7 +185,7 @@ button {
         left: 0;
         right: 0;
         bottom: 0;
-        background: linear-gradient(180deg, transparent 50%, #000c17 100%);
+        background: linear-gradient(180deg, transparent 50%, $musoraBlack 100%);
         z-index: 0;
     }
 
@@ -327,7 +327,7 @@ button {
 }
 
 .feel-stuck {
-    background: #000c17;
+    background: $musoraBlack;
     color: #fff;
     padding: 30px 10px;
     @include tablet {
@@ -531,7 +531,7 @@ button {
 }
 
 .every-scale {
-    background: #000c17;
+    background: $musoraBlack;
     position: relative;
     z-index: 2;
     color: #fff;
@@ -569,7 +569,7 @@ button {
 }
 
 .meet-teacher {
-    background: #000c18 center top/750px no-repeat;
+    background: $musoraBlack center top/750px no-repeat;
     color: #FFF;
     position: relative;
     padding: 30px 0;
@@ -592,9 +592,9 @@ button {
         right: 0;
         bottom: 0;
         z-index: 0;
-        background: linear-gradient(0deg, transparent 95%, #000c17 100%);
+        background: linear-gradient(0deg, transparent 95%, $musoraBlack 100%);
         @include tablet {
-            background: linear-gradient(0deg, transparent 90%, #000c17 100%);
+            background: linear-gradient(0deg, transparent 90%, $musoraBlack 100%);
         }
     }
 
@@ -678,7 +678,7 @@ button {
 }
 
 .any-device {
-    background: #000c17;
+    background: $musoraBlack;
     color: #fff;
     padding: 40px 0;
     @include tablet {
@@ -887,7 +887,7 @@ button {
 }
 
 .benefits {
-    background: #000c17;
+    background: $musoraBlack;
     color: #fff;
     padding: 30px 0;
     @include tablet {
@@ -1055,7 +1055,7 @@ button {
 
 .guarantee {
     color: #fff;
-    background: #000c17;
+    background: $musoraBlack;
     padding: 30px 5px;
     text-align: center;
     @include tablet {
@@ -1094,7 +1094,7 @@ button {
 }
 
 .final {
-    background: #000c17 center center/cover;
+    background: $musoraBlack center center/cover;
     color: #fff;
     position: relative;
     overflow: hidden;
@@ -1115,7 +1115,7 @@ button {
         left: 0;
         right: 0;
         bottom: 0;
-        background: linear-gradient(0deg, transparent 50%, #000c17 100%);
+        background: linear-gradient(0deg, transparent 50%, $musoraBlack 100%);
         z-index: 0;
     }
 

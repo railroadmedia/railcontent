@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use DB;
+use Modules\UserManagementSystem\Models\BlockedUser;
 use Modules\UserManagementSystem\Models\ReportedUser;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Railcontent\Services\ContentService;
@@ -22,26 +23,27 @@ class RailforumsUserProvider implements UserProviderInterface
      * @param $userId
      * @return mixed|string
      */
-    public function getUserAccessLevel($userId): string
-    {
+    public function getUserAccessLevel($userId)
+    : string {
         return DB::connection(config('user_management_system.database_connection_name'))
                 ->table('usora_users')
                 ->where('id', $userId)
                 ->select(['access_level'])
-                ->first()
-                ->access_level ?? '';
+                ->first()->access_level ?? '';
     }
 
     /**
      * @param $userId
      * @return ?ForumUser
      */
-    public function getUser($userId): ?ForumUser
-    {
+    public function getUser($userId)
+    : ?ForumUser {
         if (!empty(user()) && $userId === user()->id) {
             $user = user();
         } else {
-            $user = User::query()->find($userId);
+            $user =
+                User::query()
+                    ->find($userId);
         }
 
         if (!empty($user)) {
@@ -55,16 +57,24 @@ class RailforumsUserProvider implements UserProviderInterface
      * @param array $userIds
      * @return array|ForumUser[]
      */
-    public function getUsersByIds(array $userIds): array
-    {
-        $users = User::query()->whereIn('id', $userIds)->get();
+    public function getUsersByIds(array $userIds)
+    : array {
+        $users =
+            User::query()
+                ->whereIn('id', $userIds)
+                ->get();
 
         $forumUsers = [];
-        $reported = ReportedUser::query()->whereIn('user_id', $userIds)
-            ->where('reporter_id','=', auth()->id())->get()->groupBy('user_id')->toArray();
+        $reported =
+            ReportedUser::query()
+                ->whereIn('user_id', $userIds)
+                ->where('reporter_id', '=', auth()->id())
+                ->get()
+                ->groupBy('user_id')
+                ->toArray();
 
         foreach ($users as $user) {
-                $forumUsers[$user->id] = $this->forumUserFromUserModel($user, $reported);
+            $forumUsers[$user->id] = $this->forumUserFromUserModel($user, $reported);
         }
 
         return $forumUsers;
@@ -74,19 +84,19 @@ class RailforumsUserProvider implements UserProviderInterface
      * @param array $userIds
      * @return array
      */
-    public function getUsersAccessLevel(array $userIds): array
-    {
-        $userRows = DB::connection(config('user_management_system.database_connection_name'))
-            ->table('usora_users')
-            ->whereIn('id', $userIds)
-            ->select(['id', 'access_level'])
-            ->get();
+    public function getUsersAccessLevel(array $userIds)
+    : array {
+        $userRows =
+            DB::connection(config('user_management_system.database_connection_name'))
+                ->table('usora_users')
+                ->whereIn('id', $userIds)
+                ->select(['id', 'access_level'])
+                ->get();
 
         $accessLevels = [];
 
         foreach ($userRows as $userRow) {
-            $accessLevels[$userRow->id] =
-                $userRow->access_level ?? 'pack';
+            $accessLevels[$userRow->id] = $userRow->access_level ?? 'pack';
         }
 
         return $accessLevels;
@@ -96,12 +106,15 @@ class RailforumsUserProvider implements UserProviderInterface
      * @param array $userIds
      * @return array
      */
-    public function getUsersXPAndRank(array $userIds): array
-    {
+    public function getUsersXPAndRank(array $userIds)
+    : array {
         /**
          * @var $users User[]
          */
-        $users = User::query()->whereIn('id', $userIds)->get();
+        $users =
+            User::query()
+                ->whereIn('id', $userIds)
+                ->get();
 
         $xp = [];
 
@@ -118,27 +131,25 @@ class RailforumsUserProvider implements UserProviderInterface
      * @param array $userIds
      * @return array
      */
-    public function getAssociatedCoaches(array $userIds): array
-    {
+    public function getAssociatedCoaches(array $userIds)
+    : array {
         $includedFields = [];
         $associatedUsers = [];
 
         foreach ($userIds ?? [] as $userId) {
-            $includedFields[] = 'associated_user_id,' . $userId;
+            $includedFields[] = 'associated_user_id,'.$userId;
         }
 
-        $instructors =
-            $this->contentService
-                ->getFiltered(
-                    1,
-                    'null',
-                    '-published_on',
-                    ['instructor'],
-                    [],
-                    [],
-                    [],
-                    $includedFields
-                );
+        $instructors = $this->contentService->getFiltered(
+                1,
+                'null',
+                '-published_on',
+                ['instructor'],
+                [],
+                [],
+                [],
+                $includedFields
+            );
 
         foreach ($instructors->results() as $instructor) {
             $associatedUsers[$instructor->fetch('fields.associated_user_id')] = [
@@ -153,11 +164,11 @@ class RailforumsUserProvider implements UserProviderInterface
 
     /**
      * @param User $userModel
+     * @param array $reportedUsers
      * @return ForumUser
      */
     private function forumUserFromUserModel(User $userModel, $reportedUsers = [])
     {
-
         return new ForumUser(
             $userModel->id,
             $userModel->display_name,
@@ -167,8 +178,20 @@ class RailforumsUserProvider implements UserProviderInterface
             $userModel->getBrandTotalXp(),
             $userModel->getXpRank(),
             $userModel->getMethodLevel(),
-           $userModel->getAttributes()['access_level'] ?? '',
+            $userModel->getAttributes()['access_level'] ?? '',
             array_key_exists($userModel->id, $reportedUsers)
         );
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getBlockedUsers()
+    : ?array
+    {
+        return BlockedUser::where('blocker_id', '=', user()->id)
+            ->get()
+            ->pluck('user_id')
+            ->toArray();
     }
 }

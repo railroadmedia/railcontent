@@ -20,11 +20,11 @@
 
 @section('content')
     @include('drumeo.products.partials.promo-banner', [
-                    "name" => "The Best Beginner Drum Book",
-                    "fullPrice" => floatval($productPrices['BeginnerBook']->price),
-                    "price" => floatval($productPrices['BeginnerBook']->discounted_price),
-                "noBreadcrumb" => true
-                ])
+        "name" => "The Best Beginner Drum Book",
+        "fullPrice" => floatval($productPrices['BeginnerBook']->price),
+        "price" => floatval($productPrices['BeginnerBook']->discounted_price),
+        "noBreadcrumb" => true
+    ])
 
     @if(strpos(url()->full(), 'thankyou'))
         <div class="thank-you-banner text-center">
@@ -44,10 +44,10 @@
     <header class="book-header">
         <div class="clearfix mx-auto max-w-6xl relative">
             <div class="w-full sm:w-1/2 float-right text-center p-4">
-                <img src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/see-inside.png" class="see-inside">
+                <img src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/see-inside.png" class="see-inside" alt="Click inside text">
                 <span style="position:relative;display: inline-block;">
-                    <img src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/book-kindle-alt.png" data-open="seeInside" class="book">
-                    <a target="_blank" href="https://www.amazon.com/dp/B07TB4SN3V"><img src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/kindle-badge.png" class="kindle-badge"></a>
+                    <img src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/book-kindle-alt.png" data-open="seeInside" class="book" alt="Beginner book">
+                    <a target="_blank" href="https://www.amazon.com/dp/B07TB4SN3V"><img src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/kindle-badge.png" class="kindle-badge" alt="Kindle badge"></a>
                 </span>
             </div>
 
@@ -63,7 +63,7 @@
                     @endif
                 </p>
                 <a href="/ecommerce/add-to-cart?products[BeginnerBook]=1" class="join">Click Here To Order</a>
-                <a target="_blank" href="https://www.amazon.com/dp/B07G8N348K" class="join orange">Get Your Copy On <img class="amazon inline-block" src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/amazon-logo.png"></a>
+                <a target="_blank" href="https://www.amazon.com/dp/B07G8N348K" class="join orange">Get Your Copy On <img class="amazon inline-block" src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/amazon-logo.png" alt="Amazon logo"></a>
             </div>
         </div>
     </header>
@@ -136,7 +136,7 @@
             </div>
             <div class="columns video-wrap">
                 <div class="flex-video widescreen vimeo">
-                    <iframe src="//player.vimeo.com/video/289151913" frameborder="0" allowfullscreen allow="autoplay"></iframe>
+                    <iframe src="//player.vimeo.com/video/289151913" frameborder="0" allowfullscreen allow="autoplay" title="Beginner book video"></iframe>
                 </div>
             </div>
             <div class="columns medium-up-2 bullet-points">
@@ -227,7 +227,7 @@
                     </div>
                 </div>
                 <div class="columns large-7 text-center">
-                    <img class="brandon-jared" src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/brandon-jared.jpg">
+                    <img class="brandon-jared" src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/brandon-jared.jpg" alt="Brandon and Jared">
                 </div>
             </div>
         </div>
@@ -304,7 +304,7 @@
     <section class="foreword tab-switcher">
         <div class="row">
             <div class="columns text-center">
-                <img src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/foreword.jpg">
+                <img src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/foreword.jpg" alt="Foreword">
             </div>
             <div class="columns">
                 <p>I first saw Jared playing the drums on a Sunday evening in 1997, in a packed church full of over two thousand people. The music was great, but as a beginner drummer myself what brought me back each week was the sheer energy, creativity, and power of Jared’s drumming. It drew me in. Soon I connected with him to take lessons, and a friendship was born. Eventually we became business partners in the world’s largest online drum education company—Drumeo.
@@ -326,7 +326,7 @@
     <section class="jareds-letter tab-switcher">
         <div class="row">
             <div class="columns text-center">
-                <img src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/jareds-letter.jpg">
+                <img src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/jareds-letter.jpg" alt="Jared's letter">
             </div>
             <div class="columns">
                 <p>Drums... I could never have guessed that I’d give and receive so much enjoyment from this primal instrument. But here I am: drums are my life.
@@ -433,7 +433,7 @@
     <section class="final-pitch">
         <div class="row">
             <div class="columns medium-6 float-right text-center">
-                <img src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/book-pass-alt.png" class="book">
+                <img src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/book-pass-alt.png" class="book" alt="Beginner book">
             </div>
             <div class="columns medium-6 text-wrap">
                 <h1>The Best Beginner<br class="show-for-medium"> Drum Book</h1>
@@ -445,7 +445,7 @@
                 @endif
                 </p>
                 <a href="/ecommerce/add-to-cart?products[BeginnerBook]=1" class="join">Click Here To Order</a>
-                <a target="_blank" href="https://www.amazon.com/dp/B07G8N348K" class="join orange">Get Your Copy On <img class="amazon inline-block" src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/amazon-logo.png"></a>
+                <a target="_blank" href="https://www.amazon.com/dp/B07G8N348K" class="join orange">Get Your Copy On <img class="amazon inline-block" src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/amazon-logo.png" alt="Amazon logo"></a>
             </div>
         </div>
     </section>

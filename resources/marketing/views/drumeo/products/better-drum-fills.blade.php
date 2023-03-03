@@ -48,13 +48,13 @@
 
     <header class="header text-center" style="background-image:url(https://dpwjbsxqtam5n.cloudfront.net/drum-shop/four-weeks-to-better-drum-fills/header.jpg);">
         <div class="row">
-            <img class="logo" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/four-weeks-to-better-drum-fills/four-weeks-to-better-drum-fills-logo.png">
+            <img class="logo" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/four-weeks-to-better-drum-fills/four-weeks-to-better-drum-fills-logo.png" alt="Better Drum Fills Logo">
             <br>
             <div class="watch-badge">
                 <span>WATCH<br> PREVIEW</span>
-                <img src="https://dpwjbsxqtam5n.cloudfront.net/sales/arrow-left-white.png">
+                <img src="https://dpwjbsxqtam5n.cloudfront.net/sales/arrow-left-white.png" alt="Arrow right">
             </div>
-            <img data-open="previewModal" class="play-button autoplay-video" src="https://dpwjbsxqtam5n.cloudfront.net/sales/play-button.png">
+            <img data-open="previewModal" class="play-button autoplay-video" src="https://dpwjbsxqtam5n.cloudfront.net/sales/play-button.png" alt="Play button">
             <h1>The ultimate crash course to playing <strong>more creative &<br class="show-for-medium"> more musical drum fills</strong> your audience will love!</h1>
             <a href="/ecommerce/add-to-cart?products[four-weeks-to-better-drum-fills]=1" class="join blue">Get Started &raquo;</a>
             <p>
@@ -86,7 +86,7 @@
             <h2>The <strong>one thing</strong> all legendary <br class="hide-for-medium">
                 drum fills have in common… </h2>
             <div class="flex-container">
-                <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/four-weeks-to-better-drum-fills/mobile-album-spread.jpg">
+                <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/four-weeks-to-better-drum-fills/mobile-album-spread.jpg" alt="Mobile album spread">
                 <p>I’m sure you’ve heard many of the most memorable drum fills before: air drumming before the words “I can feel it coming in the air tonight”, or getting pumped up during the opening of “Wipeout” by The Surfaris (the most popular surf song ever), or experiencing Jeff Porcaro’s perfectly designed hook in Toto’s “Africa”.
                     <br><br>
                     <strong>There’s one thing that ALL of these legendary drum fills have in common: the patterns and orchestrations perfectly compliment the song.</strong>
@@ -133,17 +133,17 @@
             <h2><strong>Better Drum Fills</strong></h2>
             <h4><em>So what does a better drum fill <br class="hide-for-medium">even mean? It’s that moment when...</em></h4>
             <div class="columns medium-4 emoji-point">
-                <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/four-weeks-to-better-drum-fills/emoji-love.png">
+                <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/four-weeks-to-better-drum-fills/emoji-love.png" alt="Emoji love">
                 <h3 class="text-grey"><strong>Impress Your Family</strong></h3>
                 <p><em>...you show your spouse a new fill and they ask: “how do you know what drum to hit and when?”</em></p>
             </div>
             <div class="columns medium-4 emoji-point">
-                <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/four-weeks-to-better-drum-fills/emoji-crowd.png">
+                <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/four-weeks-to-better-drum-fills/emoji-crowd.png" alt="Emoji crowd">
                 <h3 class="text-grey"><strong>Move The Crowd</strong></h3>
                 <p><em>...the band breaks for two bars before the chorus and you insert the most perfectly executed drum fill that’s met with resounding cheers from the crowd.</em></p>
             </div>
             <div class="columns medium-4 emoji-point">
-                <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/four-weeks-to-better-drum-fills/emoji-shock.png">
+                <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/four-weeks-to-better-drum-fills/emoji-shock.png" alt="Emoji shock">
                 <h3 class="text-grey"><strong>Shock Your Band</strong></h3>
                 <p><em>...the bass player looks at you with amazement, wondering what you did differently this time.</em></p>
             </div>
@@ -158,7 +158,7 @@
             <div class="memorize-create columns no-padding">
                 <div class="columns medium-6">
                     <div class="colored-box">
-                        <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/four-weeks-to-better-drum-fills/memorize.png">
+                        <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/four-weeks-to-better-drum-fills/memorize.png" alt="Memorize text">
                         <p>You can grab some sheet music of different drum fills and work your way through the patterns and orchestrations -- memorizing new drum fills as you continue to play. And that’s fine, most drummers do this for years and slowly add to their arsenal one pattern at a time.
                             <br><br>
                         <strong>This is NOT what’s covered in this training program.</strong></p>
@@ -166,7 +166,7 @@
                 </div>
                 <div class="columns medium-6">
                     <div class="colored-box blue">
-                        <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/four-weeks-to-better-drum-fills/create.png">
+                        <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/four-weeks-to-better-drum-fills/create.png" alt="Create text">
                         <p>You can study the foundations of a drum fill: the purpose, the lengths, the motions, the combinations, and the vocabulary -- so you can create effective drum fills on the fly. You’ll gain the ability to adapt to the music, the audience, and the setting for a more impactful musical experience.
                             <br><br>
                         <strong>This is what we’ll cover through four weeks of lessons.</strong></p>
@@ -212,12 +212,12 @@
     <section class="warning-section">
         <div class="row">
             <h1>FAIR WARNING:</h1>
-            <img class="sticks" src="https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/fair-warning-x.png"><br>
+            <img class="sticks" src="https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/fair-warning-x.png" alt="X Image"><br>
             <p>Four Weeks To Better Drum Fills is not a magical pill that’ll turn you into a world-class drummer in four weeks, but you will get four simple weekly lesson plans that will give you almost-immediate improvements in your creativity and drum fill applications.
                 <br><br>
                 You will start a new journey -- one that will last a lifetime -- for understanding the purpose of a drum fill, the ideas behind constructing and orchestrating something that sounds great, and learning how to apply effective drum fills within real music.</p>
-            <img class="bg-icon sign" src="https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/fair-warning-1.png">
-            <img class="bg-icon cal" src="https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/fair-warning-2.png">
+            <img class="bg-icon sign" src="https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/fair-warning-1.png" alt="Warning icon">
+            <img class="bg-icon cal" src="https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/fair-warning-2.png" alt="Calendar icon">
         </div>
     </section>
 
@@ -228,7 +228,7 @@
             <h6 class="show-for-medium" style="color: #7f878d;"><em>"The Drumeo standard is one of the highest quality and<br>
                     is THE place to go for the best in drum education!"</em></h6>
             <div class="columns no-padding steve-details show-for-medium">
-                <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/four-weeks-to-better-drum-fills/drummer-david-garibaldi.jpg">
+                <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/four-weeks-to-better-drum-fills/drummer-david-garibaldi.jpg" alt="David Garibaldi">
                 <div class="columns end text">
                     <h6><strong>David Garibaldi</strong></h6>
                     <p class="text-blue"><em>Tower Of Power</em></p>
@@ -236,7 +236,7 @@
             </div>
             <div class="bio columns no-padding">
                 <p class="columns">
-                    <span class="first-letter smaller"><img src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/bold-j.png"></span>ared Falk has been creating online drum lessons since before YouTube even existed!
+                    <span class="first-letter smaller"><img src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/bold-j.png" alt="Bold J"></span>ared Falk has been creating online drum lessons since before YouTube even existed!
                     <br><br>
                     Back in 2003, Jared partnered with one of his private drum students to create simple websites with drum articles, video tutorials, and community discussion forums. As online drum lessons transitioned to becoming a full-time job, Jared launched several step-by-step DVD packs including the One-Handed Drum Roll, Bass Drum Secrets, and The Rock Drumming System.
                     <br><br>
@@ -255,19 +255,19 @@
     <section class="student-reviews">
         <div class="row">
             <div class="columns medium-4 testimonial-wrap">
-                <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/four-weeks-to-better-drum-fills/drummer-anika-nilles.jpg">
+                <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/four-weeks-to-better-drum-fills/drummer-anika-nilles.jpg" alt="Anika Nilles">
                 <p class="text-grey"><em>"Jared Falk has a comprehensive expert knowledge in providing and structuring lesson plans. He has a great human sense and knows how to handle, host and guide a lesson."</em></p>
                 <h6><strong>Anika Nilles</strong></h6>
                 <p class="credit text-blue"><em>Drummer & Composer</em></p>
             </div>
             <div class="columns medium-4 testimonial-wrap">
-                <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/four-weeks-to-better-drum-fills/drummer-billy-cobham.jpg">
+                <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/four-weeks-to-better-drum-fills/drummer-billy-cobham.jpg" alt="Billy Cobham">
                 <p class="text-grey"><em>"Jared Falk and his team have my confidence and support in what is done to promote music through the art of drumming and percussion."</em></p>
                 <h6><strong>Billy Cobham</strong></h6>
                 <p class="credit text-blue"><em>Legendary Jazz Fusion Drummer</em></p>
             </div>
             <div class="columns medium-4 testimonial-wrap">
-                <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/four-weeks-to-better-drum-fills/drummer-casey-cooper.jpg">
+                <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/four-weeks-to-better-drum-fills/drummer-casey-cooper.jpg" alt="Casey Cooper">
                 <p class="text-grey"><em>"After years of watching Jared's lessons on YouTube and Drumeo, and getting to work side by side with him, I can confidently say that he gives every bit of his effort and skill into every product or lesson he teaches."</em></p>
                 <h6><strong>Casey Cooper</strong></h6>
                 <p class="credit text-blue"><em>2.4M Subscribers On YouTube</em></p>
@@ -277,9 +277,9 @@
 
     <section class="text-center guarantee">
         <div class="row">
-            <img class="guarantee-badge hide-for-medium" src="https://dpwjbsxqtam5n.cloudfront.net/sales/guarantee-badge.png">
+            <img class="guarantee-badge hide-for-medium" src="https://dpwjbsxqtam5n.cloudfront.net/sales/guarantee-badge.png" alt="Guarantee Badge">
             <div class="flex-container">
-                <img class="guarantee-badge show-for-medium" src="https://dpwjbsxqtam5n.cloudfront.net/sales/guarantee-badge.png">
+                <img class="guarantee-badge show-for-medium" src="https://dpwjbsxqtam5n.cloudfront.net/sales/guarantee-badge.png" alt="Guarantee Badge">
                 <div class="text-wrap text-left">
                     <h2><strong>90-Day Money-Back Guarantee</strong></h2>
                     <p><strong>OUR PROMISE TO YOU:</strong> More than anything, we want you to enjoy a super-positive experience on the drums. And that means we only want you to pay if you actually LOVE your Four Weeks To Better Drum Fills experience. So click any of the big buttons on this page to get started risk-free. If it’s not for you, simply <a class="text-white" href="{{ get_musora_brand_base_url() }}/contact">contact us</a> within 90 days for a full refund.</p>
@@ -291,7 +291,7 @@
     <section class="final" style="background-image:url(https://dpwjbsxqtam5n.cloudfront.net/drum-shop/four-weeks-to-better-drum-fills/order-section-background.jpg);">
         <div id="customize-anchor" class="anchor"></div>
         <div class="row">
-            <div class="columns logo"><img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/four-weeks-to-better-drum-fills/four-weeks-to-better-drum-fills-logo.png"></div>
+            <div class="columns logo"><img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/four-weeks-to-better-drum-fills/four-weeks-to-better-drum-fills-logo.png" alt="Better Drum Fills Logo"></div>
 
             <h2 class="columns">The ultimate crash course to playing <strong>more creative &<br class="show-for-medium"> more musical drum fills</strong> your audience will love!</h2>
 
